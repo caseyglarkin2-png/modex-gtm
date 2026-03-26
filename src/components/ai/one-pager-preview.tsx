@@ -27,64 +27,78 @@ interface OnePagerPreviewProps {
 
 function OnePagerDocument({ data, accountName }: { data: OnePagerData; accountName: string }) {
   return (
-    <div className="one-pager-doc bg-[#0a1628] text-white rounded-xl overflow-hidden text-sm">
+    <div className="one-pager-doc bg-[#0b1a2e] text-white rounded-xl overflow-hidden text-sm">
       {/* Header */}
-      <div className="px-6 pt-6 pb-4">
-        <p className="text-xs tracking-widest text-blue-300 uppercase">For {accountName}</p>
-        <h1 className="text-2xl font-bold mt-1 bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
-          YardFlow by FreightRoll
+      <div className="px-6 pt-6 pb-3">
+        <p className="text-xs tracking-[0.25em] text-cyan-300 uppercase font-semibold">For {accountName}</p>
+        <h1 className="text-3xl font-extrabold mt-1 tracking-tight">
+          <span className="text-cyan-400">Yard</span><span className="text-white">Flow</span>
+          <span className="text-slate-400 text-lg font-normal ml-2">by FreightRoll</span>
         </h1>
       </div>
 
-      {/* Headline */}
+      {/* Headline & Subheadline */}
       <div className="px-6 pb-4">
-        <h2 className="text-lg font-bold uppercase tracking-tight text-white">
+        <h2 className="text-base font-extrabold uppercase tracking-tight text-white leading-snug">
           {data.headline}
         </h2>
         <p className="mt-2 text-sm text-slate-300 leading-relaxed">{data.subheadline}</p>
       </div>
 
-      {/* Three-column: Pain → Solution → Outcomes */}
-      <div className="mx-6 rounded-lg border border-slate-600 overflow-hidden">
-        <div className="grid grid-cols-3">
-          {/* Column 1: Pain Points (red) */}
-          <div className="border-r border-slate-600">
-            <div className="bg-red-900/60 px-3 py-2 text-center">
-              <span className="text-xs font-bold uppercase tracking-wider text-red-300">Typical Reality</span>
+      {/* Three-column layout with pipe flow diagram */}
+      <div className="mx-4 rounded-lg border border-slate-600/60 overflow-hidden">
+        <div className="grid grid-cols-[1fr_1.3fr_1fr]">
+          {/* Column 1: Typical Reality (red) */}
+          <div className="border-r border-slate-600/60">
+            <div className="bg-red-900/50 px-3 py-2 text-center border-b border-slate-600/40">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-red-300">Typical Reality</span>
             </div>
-            <div className="px-3 py-3 space-y-2">
+            <div className="px-3 py-3 space-y-2.5">
               {data.painPoints.map((pain, i) => (
-                <div key={i} className="flex gap-2 text-xs text-slate-300">
-                  <span className="text-red-400 shrink-0">⚠</span>
+                <div key={i} className="flex gap-2 text-xs text-slate-300 leading-snug">
+                  <span className="text-red-400 shrink-0 text-sm">⚠</span>
                   <span>{pain}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Column 2: Solution Steps (blue) */}
-          <div className="border-r border-slate-600">
-            <div className="bg-blue-900/60 px-3 py-2 text-center">
-              <span className="text-xs font-bold uppercase tracking-wider text-blue-300">Standardized Protocol</span>
+          {/* Column 2: Standardized Operating Protocol (blue) — with pipe flow */}
+          <div className="border-r border-slate-600/60">
+            <div className="bg-blue-900/50 px-3 py-2 text-center border-b border-slate-600/40">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-300">Standardized Operating Protocol</span>
             </div>
-            <div className="px-3 py-3 space-y-2">
-              {data.solutionSteps.map((s) => (
-                <div key={s.step} className="text-xs">
-                  <span className="text-blue-400 font-bold">{s.step}. {s.title}</span>
-                  <p className="text-slate-400 mt-0.5">{s.description}</p>
-                </div>
-              ))}
+            <div className="px-3 py-3">
+              {/* Pipe flow visual */}
+              <div className="relative">
+                {data.solutionSteps.map((s, i) => (
+                  <div key={s.step} className="relative pl-6 pb-3 last:pb-0">
+                    {/* Vertical pipe line */}
+                    {i < data.solutionSteps.length - 1 && (
+                      <div className="absolute left-[9px] top-5 bottom-0 w-0.5 bg-gradient-to-b from-cyan-500/60 to-cyan-500/20" />
+                    )}
+                    {/* Pipe node */}
+                    <div className="absolute left-0 top-0.5 w-5 h-5 rounded-full border-2 border-cyan-500/70 bg-[#0b1a2e] flex items-center justify-center">
+                      <span className="text-[9px] font-bold text-cyan-400">{s.step}</span>
+                    </div>
+                    <div className="text-xs">
+                      <span className="text-cyan-300 font-bold">{s.title}</span>
+                      <p className="text-slate-400 mt-0.5 leading-snug text-[11px]">{s.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Column 3: Outcomes (green) */}
+          {/* Column 3: YardFlow Effect (green) */}
           <div>
-            <div className="bg-emerald-900/60 px-3 py-2 text-center">
-              <span className="text-xs font-bold uppercase tracking-wider text-emerald-300">YardFlow Effect</span>
+            <div className="bg-emerald-900/50 px-3 py-2 text-center border-b border-slate-600/40">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-300">YardFlow Effect</span>
             </div>
-            <div className="px-3 py-3 space-y-2">
+            <div className="px-3 py-3 space-y-2.5">
               {data.outcomes.map((outcome, i) => (
-                <div key={i} className="flex gap-2 text-xs text-slate-300">
+                <div key={i} className="flex gap-2 text-xs text-slate-300 leading-snug">
                   <span className="text-emerald-400 shrink-0">✓</span>
                   <span>{outcome}</span>
                 </div>
@@ -95,30 +109,34 @@ function OnePagerDocument({ data, accountName }: { data: OnePagerData; accountNa
       </div>
 
       {/* Proof Stats Bar */}
-      <div className="mx-6 mt-4">
-        <div className="text-center mb-2">
-          <span className="text-[10px] tracking-[0.3em] uppercase text-slate-400 font-bold border-t border-b border-slate-600 px-4 py-1 inline-block">
+      <div className="mx-4 mt-4">
+        <div className="text-center mb-3">
+          <span className="text-[10px] tracking-[0.3em] uppercase text-slate-400 font-bold border-t border-b border-slate-600 px-6 py-1.5 inline-block">
             Proof from Live Deployment
           </span>
         </div>
         <div className="grid grid-cols-5 gap-2">
-          {data.proofStats.map((stat, i) => (
-            <div key={i} className="text-center bg-slate-800/60 rounded-lg py-3 px-1">
-              <p className="text-lg font-bold text-white">{stat.value}</p>
-              <p className="text-[10px] text-slate-400">{stat.label}</p>
-            </div>
-          ))}
+          {data.proofStats.map((stat, i) => {
+            const icons = ['🏭', '🌐', '👤', '⏱', '💰'];
+            return (
+              <div key={i} className="text-center bg-slate-800/50 rounded-lg py-3 px-1 border border-slate-700/40">
+                <div className="text-sm mb-1">{icons[i] ?? '📊'}</div>
+                <p className="text-base font-bold text-white leading-none">{stat.value}</p>
+                <p className="text-[9px] text-slate-400 mt-1 leading-tight">{stat.label}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
 
-      {/* Quote */}
-      <div className="mx-6 mt-4 bg-slate-800/40 rounded-lg px-4 py-3 border-l-2 border-blue-400">
-        <p className="text-xs text-slate-300 italic">&ldquo;{data.customerQuote}&rdquo;</p>
+      {/* Customer Quote */}
+      <div className="mx-4 mt-4 bg-slate-800/30 rounded-lg px-4 py-3 border-l-2 border-cyan-400/60">
+        <p className="text-xs text-slate-300 italic leading-relaxed">&ldquo;{data.customerQuote}&rdquo;</p>
       </div>
 
       {/* Best Fit + Context */}
-      <div className="px-6 py-4 mt-2 border-t border-slate-700 space-y-1">
-        <p className="text-xs text-slate-300"><strong className="text-slate-200">Best fit:</strong> {data.bestFit}</p>
+      <div className="px-6 py-4 mt-2 border-t border-slate-700/50 space-y-1.5">
+        <p className="text-xs text-slate-300"><strong className="text-slate-100">Best fit:</strong> {data.bestFit}</p>
         <p className="text-xs text-slate-400"><strong className="text-slate-300">Public source context:</strong> {data.publicContext}</p>
       </div>
     </div>
@@ -126,48 +144,53 @@ function OnePagerDocument({ data, accountName }: { data: OnePagerData; accountNa
 }
 
 function onePagerToHtml(data: OnePagerData, accountName: string): string {
-  const painHtml = data.painPoints.map((p) => `<div style="display:flex;gap:8px;font-size:12px;color:#cbd5e1;margin-bottom:6px;"><span style="color:#f87171;flex-shrink:0;">⚠</span><span>${p}</span></div>`).join('');
-  const stepsHtml = data.solutionSteps.map((s) => `<div style="font-size:12px;margin-bottom:6px;"><span style="color:#60a5fa;font-weight:700;">${s.step}. ${s.title}</span><p style="color:#94a3b8;margin:2px 0 0;">${s.description}</p></div>`).join('');
-  const outcomesHtml = data.outcomes.map((o) => `<div style="display:flex;gap:8px;font-size:12px;color:#cbd5e1;margin-bottom:6px;"><span style="color:#34d399;flex-shrink:0;">✓</span><span>${o}</span></div>`).join('');
-  const statsHtml = data.proofStats.map((s) => `<td style="text-align:center;background:#1e293b;border-radius:8px;padding:12px 4px;"><div style="font-size:18px;font-weight:700;color:#fff;">${s.value}</div><div style="font-size:10px;color:#94a3b8;">${s.label}</div></td>`).join('');
+  const painHtml = data.painPoints.map((p) => `<div style="display:flex;gap:8px;font-size:12px;color:#cbd5e1;margin-bottom:8px;line-height:1.5;"><span style="color:#f87171;flex-shrink:0;">⚠</span><span>${p}</span></div>`).join('');
+  const stepsHtml = data.solutionSteps.map((s, i) => `<div style="position:relative;padding-left:28px;margin-bottom:${i < data.solutionSteps.length - 1 ? '12' : '0'}px;">
+    <div style="position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:50%;border:2px solid rgba(34,211,238,0.7);background:#0b1a2e;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#22d3ee;">${s.step}</div>
+    ${i < data.solutionSteps.length - 1 ? '<div style="position:absolute;left:9px;top:22px;bottom:-4px;width:2px;background:linear-gradient(to bottom,rgba(34,211,238,0.5),rgba(34,211,238,0.15));"></div>' : ''}
+    <div style="font-size:12px;"><span style="color:#67e8f9;font-weight:700;">${s.title}</span><p style="color:#94a3b8;margin:2px 0 0;font-size:11px;line-height:1.4;">${s.description}</p></div>
+  </div>`).join('');
+  const outcomesHtml = data.outcomes.map((o) => `<div style="display:flex;gap:8px;font-size:12px;color:#cbd5e1;margin-bottom:8px;line-height:1.5;"><span style="color:#34d399;flex-shrink:0;">✓</span><span>${o}</span></div>`).join('');
+  const statIcons = ['🏭', '🌐', '👤', '⏱', '💰'];
+  const statsHtml = data.proofStats.map((s, i) => `<td style="text-align:center;background:#1e293b;border-radius:8px;padding:12px 4px;border:1px solid rgba(71,85,105,0.4);"><div style="font-size:14px;margin-bottom:4px;">${statIcons[i] ?? '📊'}</div><div style="font-size:18px;font-weight:700;color:#fff;">${s.value}</div><div style="font-size:9px;color:#94a3b8;margin-top:4px;line-height:1.3;">${s.label}</div></td>`).join('');
 
   return `<!DOCTYPE html><html><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>YardFlow — ${accountName}</title></head>
 <body style="margin:0;padding:24px;background:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
-<div style="max-width:680px;margin:0 auto;background:#0a1628;border-radius:12px;overflow:hidden;color:#fff;">
-  <div style="padding:24px 24px 16px;">
-    <p style="font-size:11px;letter-spacing:3px;color:#93c5fd;text-transform:uppercase;margin:0;">For ${accountName}</p>
-    <h1 style="font-size:24px;margin:4px 0 0;color:#60a5fa;">YardFlow by FreightRoll</h1>
+<div style="max-width:720px;margin:0 auto;background:#0b1a2e;border-radius:12px;overflow:hidden;color:#fff;">
+  <div style="padding:24px 24px 12px;">
+    <p style="font-size:11px;letter-spacing:4px;color:#67e8f9;text-transform:uppercase;margin:0;font-weight:600;">For ${accountName}</p>
+    <h1 style="font-size:28px;margin:4px 0 0;font-weight:800;letter-spacing:-0.5px;"><span style="color:#22d3ee;">Yard</span><span style="color:#fff;">Flow</span><span style="color:#94a3b8;font-size:16px;font-weight:400;margin-left:8px;">by FreightRoll</span></h1>
   </div>
   <div style="padding:0 24px 16px;">
-    <h2 style="font-size:16px;text-transform:uppercase;letter-spacing:-0.5px;margin:0;color:#fff;">${data.headline}</h2>
+    <h2 style="font-size:16px;text-transform:uppercase;letter-spacing:-0.3px;margin:0;color:#fff;font-weight:800;line-height:1.3;">${data.headline}</h2>
     <p style="margin:8px 0 0;font-size:13px;color:#cbd5e1;line-height:1.6;">${data.subheadline}</p>
   </div>
-  <div style="margin:0 24px;border:1px solid #475569;border-radius:8px;overflow:hidden;">
+  <div style="margin:0 16px;border:1px solid rgba(71,85,105,0.5);border-radius:8px;overflow:hidden;">
     <table width="100%" cellpadding="0" cellspacing="0"><tr>
-      <td width="33%" style="vertical-align:top;border-right:1px solid #475569;">
-        <div style="background:rgba(127,29,29,0.4);padding:8px;text-align:center;"><span style="font-size:10px;font-weight:700;letter-spacing:2px;color:#fca5a5;text-transform:uppercase;">Typical Reality</span></div>
+      <td width="30%" style="vertical-align:top;border-right:1px solid rgba(71,85,105,0.5);">
+        <div style="background:rgba(127,29,29,0.35);padding:8px;text-align:center;border-bottom:1px solid rgba(71,85,105,0.3);"><span style="font-size:10px;font-weight:700;letter-spacing:2px;color:#fca5a5;text-transform:uppercase;">Typical Reality</span></div>
         <div style="padding:12px;">${painHtml}</div>
       </td>
-      <td width="34%" style="vertical-align:top;border-right:1px solid #475569;">
-        <div style="background:rgba(30,58,138,0.4);padding:8px;text-align:center;"><span style="font-size:10px;font-weight:700;letter-spacing:2px;color:#93c5fd;text-transform:uppercase;">Standardized Protocol</span></div>
+      <td width="40%" style="vertical-align:top;border-right:1px solid rgba(71,85,105,0.5);">
+        <div style="background:rgba(30,58,138,0.35);padding:8px;text-align:center;border-bottom:1px solid rgba(71,85,105,0.3);"><span style="font-size:10px;font-weight:700;letter-spacing:2px;color:#93c5fd;text-transform:uppercase;">Standardized Operating Protocol</span></div>
         <div style="padding:12px;">${stepsHtml}</div>
       </td>
-      <td width="33%" style="vertical-align:top;">
-        <div style="background:rgba(6,78,59,0.4);padding:8px;text-align:center;"><span style="font-size:10px;font-weight:700;letter-spacing:2px;color:#6ee7b7;text-transform:uppercase;">YardFlow Effect</span></div>
+      <td width="30%" style="vertical-align:top;">
+        <div style="background:rgba(6,78,59,0.35);padding:8px;text-align:center;border-bottom:1px solid rgba(71,85,105,0.3);"><span style="font-size:10px;font-weight:700;letter-spacing:2px;color:#6ee7b7;text-transform:uppercase;">YardFlow Effect</span></div>
         <div style="padding:12px;">${outcomesHtml}</div>
       </td>
     </tr></table>
   </div>
-  <div style="margin:16px 24px 0;text-align:center;">
-    <span style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#94a3b8;font-weight:700;border-top:1px solid #475569;border-bottom:1px solid #475569;padding:4px 16px;display:inline-block;">Proof from Live Deployment</span>
+  <div style="margin:16px 16px 0;text-align:center;">
+    <span style="font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#94a3b8;font-weight:700;border-top:1px solid #475569;border-bottom:1px solid #475569;padding:6px 20px;display:inline-block;">Proof from Live Deployment</span>
   </div>
-  <div style="margin:8px 24px 0;"><table width="100%" cellpadding="0" cellspacing="4"><tr>${statsHtml}</tr></table></div>
-  <div style="margin:16px 24px;background:rgba(30,41,59,0.4);border-radius:8px;padding:12px 16px;border-left:2px solid #60a5fa;">
-    <p style="font-size:12px;color:#cbd5e1;font-style:italic;margin:0;">"${data.customerQuote}"</p>
+  <div style="margin:12px 16px 0;"><table width="100%" cellpadding="0" cellspacing="6"><tr>${statsHtml}</tr></table></div>
+  <div style="margin:16px 16px;background:rgba(30,41,59,0.3);border-radius:8px;padding:12px 16px;border-left:3px solid rgba(34,211,238,0.5);">
+    <p style="font-size:12px;color:#cbd5e1;font-style:italic;margin:0;line-height:1.6;">"${data.customerQuote}"</p>
   </div>
-  <div style="padding:16px 24px;border-top:1px solid #334155;">
-    <p style="font-size:11px;color:#cbd5e1;margin:0 0 4px;"><strong style="color:#e2e8f0;">Best fit:</strong> ${data.bestFit}</p>
-    <p style="font-size:11px;color:#94a3b8;margin:0;"><strong style="color:#cbd5e1;">Public source context:</strong> ${data.publicContext}</p>
+  <div style="padding:16px 24px;border-top:1px solid rgba(51,65,85,0.5);">
+    <p style="font-size:11px;color:#cbd5e1;margin:0 0 6px;line-height:1.5;"><strong style="color:#f1f5f9;">Best fit:</strong> ${data.bestFit}</p>
+    <p style="font-size:11px;color:#94a3b8;margin:0;line-height:1.5;"><strong style="color:#cbd5e1;">Public source context:</strong> ${data.publicContext}</p>
   </div>
 </div>
 </body></html>`;
