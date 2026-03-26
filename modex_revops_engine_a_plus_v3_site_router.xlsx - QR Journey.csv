@@ -1,0 +1,8 @@
+Label,Value
+Journey concept,Scan or click -> YardFlow website audit page -> prospect submits basics -> FreightRoll follows up
+Master URL,https://www.yardflow.ai/contact/?intent=audit&utm_source=modex&utm_medium=qr&utm_campaign=modex2026&utm_content=master
+Master QR,
+Use this when,You want the fastest generic CTA at MODEX and do not need account-specific routing.
+Account-specific routes,Use Audit Routes or QR Assets for per-account links and proof framing.
+Website form fields,Website / Work email / What should we know?
+Fallback,"If booking is blocked, direct people to casey@freightroll.com."

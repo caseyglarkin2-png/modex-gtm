@@ -1,0 +1,294 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id               Int      @id @default(autoincrement())
+  rank             Int
+  name             String   @unique
+  parent_brand     String?
+  vertical         String
+  signal_type      String?
+  why_now          String?
+  primo_angle      String?
+  best_intro_path  String?
+  source           String?
+  source_url_1     String?
+  source_url_2     String?
+  icp_fit          Int      @default(0)
+  modex_signal     Int      @default(0)
+  primo_story_fit  Int      @default(0)
+  warm_intro       Int      @default(0)
+  strategic_value  Int      @default(0)
+  meeting_ease     Int      @default(0)
+  priority_score   Int      @default(0)
+  priority_band    String   @default("D")
+  tier             String   @default("Tier 3")
+  owner            String   @default("Casey")
+  research_status  String   @default("Not started")
+  outreach_status  String   @default("Not started")
+  meeting_status   String   @default("No meeting")
+  current_motion   String?
+  next_action      String?
+  due_date         DateTime?
+  notes            String?
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+
+  personas       Persona[]
+  outreach_waves OutreachWave[]
+  meeting_brief  MeetingBrief?
+  audit_route    AuditRoute?
+  qr_asset       QrAsset?
+  activities     Activity[]
+  meetings       Meeting[]
+  mobile_captures MobileCapture[]
+
+  @@map("accounts")
+}
+
+model Persona {
+  id                Int      @id @default(autoincrement())
+  persona_id        String   @unique
+  account_name      String
+  priority          String
+  name              String
+  title             String?
+  persona_lane      String?
+  role_in_deal      String?
+  intro_route       String?
+  function          String?
+  seniority         String?
+  why_this_persona  String?
+  linkedin_url      String?
+  attendance_signal String?
+  intro_path        String?
+  persona_status    String   @default("To find")
+  next_step         String?
+  notes             String?
+  account_score     Int      @default(0)
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+
+  account Account @relation(fields: [account_name], references: [name])
+
+  @@map("personas")
+}
+
+model OutreachWave {
+  id               Int      @id @default(autoincrement())
+  wave             String
+  wave_order       Int
+  account_name     String
+  rank             Int?
+  tier             String?
+  priority_score   Int?
+  channel_mix      String?
+  primary_objective String?
+  use_warm_intro   Boolean  @default(false)
+  use_primo_asset  Boolean  @default(false)
+  primary_persona_lane   String?
+  secondary_persona_lane String?
+  start_date       DateTime?
+  followup_1       DateTime?
+  followup_2       DateTime?
+  escalation_trigger String?
+  meeting_goal     String?
+  owner            String   @default("Jake")
+  status           String   @default("Not started")
+  notes            String?
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+
+  account Account @relation(fields: [account_name], references: [name])
+
+  @@map("outreach_waves")
+}
+
+model MeetingBrief {
+  id              Int      @id @default(autoincrement())
+  account_name    String   @unique
+  vertical        String?
+  modex_signal    String?
+  why_this_account String?
+  why_now         String?
+  likely_pain     String?
+  primo_relevance String?
+  best_outcome    String?
+  suggested_attendees String?
+  prep_assets     String?
+  open_questions  String?
+  source_url_1    String?
+  source_url_2    String?
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  account Account @relation(fields: [account_name], references: [name])
+
+  @@map("meeting_briefs")
+}
+
+model AuditRoute {
+  id              Int      @id @default(autoincrement())
+  rank            Int?
+  account_name    String   @unique
+  audit_url       String
+  suggested_ask   String?
+  fast_ask        String?
+  proof_asset     String?
+  warm_route      String?
+  graphic_file    String?
+  owner           String   @default("Jake / Casey")
+  status          String   @default("Open")
+  last_touch      String?
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  account Account @relation(fields: [account_name], references: [name])
+
+  @@map("audit_routes")
+}
+
+model QrAsset {
+  id              Int      @id @default(autoincrement())
+  account_name    String   @unique
+  audit_url       String
+  suggested_use   String?
+  proof_asset     String?
+  graphic_file    String?
+  notes           String?
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  account Account @relation(fields: [account_name], references: [name])
+
+  @@map("qr_assets")
+}
+
+model Activity {
+  id              Int      @id @default(autoincrement())
+  activity_date   DateTime?
+  account_name    String
+  persona         String?
+  activity_type   String
+  owner           String?
+  outcome         String?
+  next_step       String?
+  next_step_due   DateTime?
+  notes           String?
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  account Account @relation(fields: [account_name], references: [name])
+
+  @@map("activities")
+}
+
+model Meeting {
+  id              Int      @id @default(autoincrement())
+  meeting_id_str  String?
+  account_name    String
+  persona         String?
+  meeting_status  String   @default("No meeting")
+  meeting_date    DateTime?
+  meeting_time    String?
+  location        String?
+  primo_involved  Boolean  @default(false)
+  jake_confirmed  Boolean  @default(false)
+  objective       String?
+  owner           String?
+  post_next_step  String?
+  notes           String?
+  account_score   Int?
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  account Account @relation(fields: [account_name], references: [name])
+
+  @@map("meetings")
+}
+
+model MobileCapture {
+  id              Int      @id @default(autoincrement())
+  captured_at     DateTime @default(now())
+  account_name    String
+  persona_name    String?
+  title           String?
+  channel         String?
+  intent          String?
+  need_trigger    String?
+  requested_asset String?
+  need_primo      Boolean  @default(false)
+  owner           String?
+  due_date        DateTime?
+  next_step       String?
+  outcome         String?
+  notes           String?
+  interest        Int      @default(0)
+  urgency         Int      @default(0)
+  influence       Int      @default(0)
+  fit             Int      @default(0)
+  heat_score      Int      @default(0)
+  band            String?
+  followup_template String?
+  followup_status String?
+  audit_url       String?
+  source_proof    String?
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  account Account @relation(fields: [account_name], references: [name])
+
+  @@map("mobile_captures")
+}
+
+model SearchString {
+  id              Int      @id @default(autoincrement())
+  account         String
+  wave            String?
+  priority        String?
+  function        String?
+  target_title    String?
+  named_seed      String?
+  sales_nav_query String?
+  linkedin_query  String?
+  google_xray_query String?
+  keywords        String?
+  source_signal   String?
+  owner           String?
+  status          String   @default("Ready")
+  notes           String?
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  @@map("search_strings")
+}
+
+model ActionableIntel {
+  id              Int      @id @default(autoincrement())
+  account         String
+  intel_type      String
+  why_it_matters  String?
+  how_to_find     String?
+  owner           String?
+  status          String   @default("Open")
+  field_to_update String?
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  @@map("actionable_intel")
+}
+
+model ListsConfig {
+  id    Int    @id @default(autoincrement())
+  key   String
+  value String
+
+  @@unique([key, value])
+  @@map("lists_config")
+}

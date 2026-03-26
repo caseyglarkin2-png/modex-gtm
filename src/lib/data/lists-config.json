@@ -1,0 +1,36 @@
+{
+  "verticals": ["Food & Beverage", "Retail", "Manufacturing", "3PL / Logistics", "Industrial"],
+  "signal_types": ["Past attendee list", "Named speaker", "Keynote", "Past attendee + keynote", "Past attendee + speaker", "Ecosystem target"],
+  "tiers": ["Tier 1", "Tier 2", "Tier 3"],
+  "research_status": ["Not started", "In progress", "Ready", "Blocked"],
+  "outreach_status": ["Not started", "Queued", "In market", "Paused", "Responded"],
+  "meeting_status": ["No meeting", "Targeted", "Requested", "Booked", "Completed", "Declined"],
+  "persona_status": ["To find", "Researching", "Identified", "Intro path found", "In outreach", "Meeting set"],
+  "activity_types": ["Research", "Warm intro request", "Email", "LinkedIn", "Call", "Text", "Meeting", "Follow-up"],
+  "owners": ["Casey", "Jake", "SDR", "Advisor", "Unassigned"],
+  "yes_no": ["Yes", "No"],
+  "functions": ["Supply Chain", "Logistics", "Transportation", "Distribution", "Warehousing", "Operations", "Manufacturing", "Procurement"],
+  "seniority": ["C-Suite", "SVP/VP", "Director", "Senior Manager", "Manager", "Advisor / Referrer"],
+  "relationship_source": ["Mark Shaughnessy", "Jake network", "Investor / advisor", "LinkedIn", "Website", "Conference", "Other"],
+  "waves": ["Wave 0 - Warm intros", "Wave 1 - Must-book", "Wave 2 - High-value", "Wave 3 - Ecosystem / opportunistic"],
+  "hunt_status": ["Not started", "Building list", "Searching", "Named targets found", "Ready for outreach", "In outreach", "Meeting set"],
+  "channel_mix": ["Warm intro + email", "Warm intro + LinkedIn", "Email + LinkedIn", "Email + call", "LinkedIn only"],
+  "proof_assets": ["Primo infographic", "Danone one-pager", "MODEX booth/meeting note", "Customer reference call", "Throughput / ROI summary"],
+  "scoring": {
+    "fit_weight": 30,
+    "modex_signal_weight": 20,
+    "primo_story_weight": 20,
+    "warm_intro_weight": 15,
+    "strategic_value_weight": 10,
+    "meeting_ease_weight": 5,
+    "tier_1_cutoff": 85,
+    "tier_2_cutoff": 70
+  },
+  "qr_journey": {
+    "concept": "Scan or click -> YardFlow website audit page -> prospect submits basics -> FreightRoll follows up",
+    "master_url": "https://www.yardflow.ai/contact/?intent=audit&utm_source=modex&utm_medium=qr&utm_campaign=modex2026&utm_content=master",
+    "use_when": "You want the fastest generic CTA at MODEX and do not need account-specific routing.",
+    "website_form_fields": "Website / Work email / What should we know?",
+    "fallback": "If booking is blocked, direct people to casey@freightroll.com."
+  }
+}

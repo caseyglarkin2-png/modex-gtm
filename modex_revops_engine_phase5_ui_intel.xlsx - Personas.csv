@@ -1,0 +1,201 @@
+Persona ID,Account,Priority,Persona Name,Title,Persona Lane,Role in Deal,Intro Route,Source,Function,Seniority,Why this persona,LinkedIn / Source URL,Attendance Signal,Relationship Source,Intro Path,Persona Status,Last Touch,Next Step,Notes,Account Score
+P-001,Dannon,P1,Heiko Gerling,"Chief Operations Officer, North America",Exec sponsor,Decision-maker,Mark -> Heiko / CSCO office,link,Operations / Supply Chain,C-level / EVP,"Official Danone North America operations lead spanning manufacturing, logistics, customer service, procurement, and S&OP.",https://www.danonenorthamerica.com/about-us/our-leaders.html,Public Danone North America leadership page,Mark Shaughnessy,Mark -> Heiko / CSCO office,Research complete,,Ask Mark to route infographic and request intro to Heiko or staff,Best Danone named operator,5
+P-002,Dannon,P1,Whitney Klemm,Supply Chain Leader,Operator / influencer,Routing contact,Use intro to request proper routing if Heiko delegates,link,Supply Chain,C-level / SVP,Relevant Danone supply chain operator who can help triangulate the North America org.,https://www.linkedin.com/in/whitneyklemm,Public LinkedIn profile,Mark Shaughnessy,Use intro to request proper routing if Heiko delegates,Research complete,,Map reporting line and verify North America remit,Named replacement for supply-chain lane,5
+P-003,Dannon,P2,Jacqueline Beckman,Senior Procurement Manager,Operator / influencer,Influencer,LinkedIn / network outreach,link,Procurement / Logistics,VP,Procurement and supplier-side operator tied to the Danone network.,https://www.linkedin.com/in/jacqueline-vesey,Public LinkedIn profile,No warm intro yet,LinkedIn / network outreach,Research complete,,Use as secondary route into ops/procurement org,Named replacement for logistics-adjacent lane,5
+P-004,Dannon,P2,Annette Tolve,Demand Planner,Operator / influencer,Influencer,LinkedIn / network outreach,link,Planning / Customer Operations,VP,Planning contact useful for S&OP and service-level angle.,https://www.linkedin.com/in/annette-tolve-40687b98,Public LinkedIn profile,No warm intro yet,LinkedIn / network outreach,Research complete,,Use as planning-side validator,Named replacement for S&OP lane,5
+P-005,Dannon,P2,Jay Luikart,"Operations Executive, Away From Home",Operator / influencer,Routing contact,LinkedIn / network outreach,link,Plant / Site Operations,Director,"Public profile references Danone North America scope including manufacturing, logistics, warehousing, procurement, and S&OP.",https://www.linkedin.com/in/jayluikart,Public LinkedIn profile,No warm intro yet,LinkedIn / network outreach,Research complete,,Use as alternate senior operating path,Broad operations leader,5
+P-006,General Mills,P1,Jonathan Ness,Chief Supply Chain Officer,Exec sponsor,Routing contact,Direct outreach to CSCO office,link,Supply Chain,C-level / EVP,Named CSCO and clear enterprise owner for supply-chain transformation.,https://www.generalmills.com/about-us/leadership/executive-team-jonathan-ness,Official company leadership page,No warm intro yet,Direct outreach to CSCO office,Research complete,,Target as top operating buyer,Fresh appointment in March 2026,5
+P-007,General Mills,P1,Nisar Ahsanullah,General Mills supply chain leader,Operator / influencer,Operator buyer,LinkedIn / Sales Nav,link,Logistics,VP,Named General Mills operator to help route into logistics.,https://www.linkedin.com/in/nahsanullah,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Confirm exact remit before outreach,Named logistics-path contact,5
+P-008,General Mills,P2,Ryan Underwood,Manufacturing and logistics operations leader,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Manufacturing,VP,Operations leader with manufacturing and logistics background inside General Mills.,https://www.linkedin.com/in/ryanunderwoodusa,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use for plant / network operations angle,Named manufacturing-path contact,5
+P-009,General Mills,P2,Zoe Bracey,Logistics and Customer Operations Business Leader - North American Retail,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Customer Operations,VP,Direct match to customer operations lane.,https://www.linkedin.com/in/zoe-bracey-2692128,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use service-level and retail execution angle,Strong customer-ops match,5
+P-010,General Mills,P2,Lars Stolpestad,Customer Service Facility Manager,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Distribution,Director,Useful distribution / facility-level route into the network.,https://www.linkedin.com/in/lars-stolpestad-a746bb11b,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Map site and scope,Named site-ops contact,5
+P-011,Frito-Lay,P1,Brian Watson,Vice President of Supply Chain,Exec sponsor,Routing contact,PepsiCo / LinkedIn route,link,Supply Chain,SVP,Most senior publicly surfaced Frito-Lay/PepsiCo supply-chain name in this pass.,https://www.linkedin.com/in/brian-watson-906532142,Public LinkedIn profile,No warm intro yet,PepsiCo / LinkedIn route,Research complete,,Use as executive anchor for Frito-Lay lane,Named executive seed,5
+P-012,Frito-Lay,P1,Beth Mars,Transportation Director,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Manufacturing / Transportation,VP,Transportation-heavy operator relevant to high-volume plant flows.,https://www.linkedin.com/in/bethmars,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use for transportation + fleet angle,Named route into ops,5
+P-013,Frito-Lay,P2,Dr. Isaac Scott,National Senior Director Transportation at PepsiCo (Frito-Lay),Operator / influencer,Operator buyer,LinkedIn / Sales Nav,link,Logistics,VP,Direct transportation leader tied to the Frito-Lay network.,https://www.linkedin.com/in/dr-isaac-scott-69887131,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use as core logistics persona,Named transportation leader,5
+P-014,Frito-Lay,P2,David Chambers,Inbound Transportation Operations Leader,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Distribution,Director,Public profile states he manages Frito-Lay inbound transportation for agro and raw materials.,https://www.linkedin.com/in/david-chambers-809b1a137,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use inbound-transport angle,Strong ops fit,5
+P-015,Frito-Lay,P2,Bob Fanslow,Supply Chain Logistics Manager,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Transportation,Director,"Long Frito-Lay background across OTR fleet, shipping, and inbound potato logistics.",https://www.linkedin.com/in/bobfanslow,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use as practical operations buyer,Named fleet/logistics contact,5
+P-016,Diageo,P1,Marsha McIntosh-Hamilton,President of North America Supply,Exec sponsor,Routing contact,Direct outreach to NA supply org,link,Supply Chain,SVP,Official Diageo North America supply leader.,https://www.diageo.com/en/our-business/where-we-operate/north-america/diageo-north-america-executive-team/marsha-mcintosh-hamilton,Official Diageo executive page,No warm intro yet,Direct outreach to NA supply org,Research complete,,Target as executive owner,Best named Diageo supply leader,5
+P-017,Diageo,P1,Raymond Reddrick,SVP North America Supply - Manufacturing and Distillation,Exec / budget,Routing contact,LinkedIn / Sales Nav,link,Logistics / Supply,VP,Strong senior North America supply and manufacturing signal.,https://www.linkedin.com/in/raymond-reddrick-48b63619a,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use for NA supply/manufacturing lane,Senior named operator,5
+P-018,Diageo,P2,Joseph Wanshek,"Procurement Director, North America Packaging",Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Manufacturing / Procurement,VP,North America packaging procurement leader who can route into supply/manufacturing decision-makers.,https://www.linkedin.com/in/joseph-wanshek-9b30a613,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use procurement-to-ops route,Named procurement leader,5
+P-019,Diageo,P2,Jose Martins,"Category Director, Logistics North America",Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Distribution / Logistics,Director,Direct logistics-category signal for North America.,https://www.linkedin.com/in/jose-martins-00834231,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use as logistics carrier / warehousing route,Named logistics persona,5
+P-020,Diageo,P2,Joshua Sallee,Procurement Category Manager,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Transportation Procurement,Director,Public profile references managing North America supply-chain operations with broad vendor network.,https://www.linkedin.com/in/joshuasalleescm,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use as transportation procurement route,Named category manager,5
+P-021,Hormel Foods,P1,Will Bonifant,Group Vice President and Chief Supply Chain Officer,Exec sponsor,Routing contact,Direct outreach to CSCO office,link,Supply Chain,C-level / EVP,Official newly appointed CSCO.,https://www.hormelfoods.com/newsroom/press-releases/hormel-foods-names-will-bonifant-group-vice-president-and-chief-supply-chain-officer/,Official Hormel press release,No warm intro yet,Direct outreach to CSCO office,Research complete,,Target as top operating buyer,Fresh appointment in 2026,5
+P-022,Hormel Foods,P1,Nicholas Schwartz,Supply Chain Planning COE & Strategy Lead,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Logistics / Planning,VP,Named planning and strategy operator at Hormel.,https://www.linkedin.com/in/nicholas-schwartz-657a5a153,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use planning / innovation angle,Named strategy lead,5
+P-023,Hormel Foods,P2,Connor McKenney,Senior Production Leader,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Manufacturing,VP,Named production leader for plant-operations lane.,https://www.linkedin.com/in/connor-mckenney,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use plant-ops route,Named manufacturing contact,5
+P-024,Hormel Foods,P2,Anthony Nguyen,Buyer & Logistics,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Supply Chain Innovation,Director,Blend of logistics and sourcing useful for innovation / ops mapping.,https://www.linkedin.com/in/anthony-nguyen-20996529,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use as innovation-adjacent route,Named logistics/procurement contact,5
+P-025,Hormel Foods,P2,Tim Whitson,Logistics & Supply Chain Management Professional,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Distribution,Director,Distribution / logistics pathway into Hormel operations.,https://www.linkedin.com/in/tim-whitson-9149b81bb,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use network-ops route,Named distribution contact,5
+P-026,JM Smucker,P1,Rob Ferguson,"Chief Product Supply Officer | Executive Vice President, Coffee, Pet, and Away From Home",Exec sponsor,Routing contact,Direct outreach to product supply office,link,Supply Chain,C-level / EVP,"Official enterprise owner across operations, distribution, procurement, and transformation.",https://www.jmsmucker.com/about/leadership/chief-product-supply-officer-bio,Official leadership page,No warm intro yet,Direct outreach to product supply office,Research complete,,Target as executive owner,New role in 2026,5
+P-027,JM Smucker,P1,Anbu Kuppusamy,Transportation Function Leader,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Logistics / Transportation,VP,Public profile references responsibility for Smucker transportation with $400MM+ spend and transformation work.,https://www.linkedin.com/in/anbukupp,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use transportation lane,Strong logistics match,5
+P-028,JM Smucker,P2,Amadeo Wei,"Senior Director, Global Supply Chain & Procurement",Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Manufacturing Operations,VP,Named global supply-chain and procurement operator.,https://www.linkedin.com/in/amadeo-wei-aa936b354,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use manufacturing/procurement route,Named senior operator,5
+P-029,JM Smucker,P2,Jason Barr,"Vice President, Procurement",Exec sponsor,Routing contact,LinkedIn / Sales Nav,link,Procurement / Network Planning,VP,Named enterprise procurement leader.,https://www.linkedin.com/in/jason-barr-djt47,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use procurement angle,Named procurement exec,5
+P-030,JM Smucker,P2,Justin Middleton,"Director, Warehousing Operations",Operator / influencer,Operator buyer,LinkedIn / Sales Nav,link,Distribution / Fulfillment,Director,Direct warehousing-operations contact.,https://www.linkedin.com/in/justin-middleton-a76b3020,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use DC operations angle,Named distribution leader,5
+P-031,The Home Depot,P1,John Deaton,Executive Vice President – Supply Chain & Product Development,Exec sponsor,Routing contact,Executive outreach,link,Supply Chain,C-level / EVP,Official top supply-chain executive.,https://corporate.homedepot.com/page/home-depot-leadership-0,Official Home Depot leadership page,MODEX ecosystem,Executive outreach,Research complete,,Top Home Depot operations owner,High-value enterprise target,4
+P-032,The Home Depot,P1,John Drake,Senior Vice President – Supply Chain,Exec sponsor,Routing contact,Executive outreach,link,Transportation / Delivery,SVP,Official transportation and direct-to-customer delivery owner.,https://corporate.homedepot.com/bio/john-drake-senior-vice-president-supply-chain,Official Home Depot leadership page,MODEX ecosystem,Executive outreach,Research complete,,Strong delivery/logistics owner,Named SVP,4
+P-033,The Home Depot,P1,Amit Kalra,Senior Vice President – Supply Chain,Exec sponsor,Operator buyer,Executive outreach,link,Distribution / Fulfillment,SVP,Official distribution and fulfillment operations owner.,https://corporate.homedepot.com/bio/amit-kalra-senior-vice-president-supply-chain,Official Home Depot leadership page,MODEX ecosystem,Executive outreach,Research complete,,Strong distribution owner,Named SVP,4
+P-034,The Home Depot,P2,Richard McPhail,Executive Vice President & Chief Financial Officer,Exec sponsor,Routing contact,Conference outreach,link,Finance / Strategy,C-level / EVP,Official MODEX keynote speaker from Home Depot and strategic route into supply-chain priorities.,https://mx2026.mapyourshow.com/8_0/sessions/session-details.cfm?scheduleid=223,Official MODEX session page,MODEX keynote,Conference outreach,Research complete,,Useful air-cover persona,Attendance signal is strongest here,4
+P-035,The Home Depot,P2,Erin Donnelly,"Senior Director, Supply Chain Development",Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Supply Chain Strategy,VP,Named supply-chain development leader for transformation lane.,https://www.linkedin.com/in/erin-donnelly-ga,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use transformation and development angle,Named strategy persona,4
+P-036,Georgia Pacific,P1,Ryan Hutcherson,"Senior Vice President, Supply Chain",Exec sponsor,Routing contact,LinkedIn / Sales Nav,link,Supply Chain,SVP,Strong senior supply-chain signal at Georgia-Pacific.,https://www.linkedin.com/in/ryan-hutcherson-87302b64,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Executive anchor for GP,Named SVP,4
+P-037,Georgia Pacific,P1,Jeremy Finley,"Vice President, Supply Chain",Exec sponsor,Routing contact,LinkedIn / Sales Nav,link,Supply Chain,VP,Named VP-level supply-chain leader.,https://www.linkedin.com/in/jeremy-finley-975464b,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use as co-anchor with Hutcherson,Named VP,4
+P-038,Georgia Pacific,P2,Kathryn Sherman,Supply Chain Manager,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Distribution / Supply Chain,Director,Named Georgia-Pacific supply-chain operator.,https://www.linkedin.com/in/katiesherman,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use for manager-level route,Named ops contact,4
+P-039,Georgia Pacific,P2,Wes Bunkley,"Director, Wood Products Logistics",Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Transportation / Logistics,Director,Direct logistics lead within Georgia-Pacific.,https://www.linkedin.com/in/wes-bunkley-30935b1a,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use transportation lane,Named logistics leader,4
+P-040,Georgia Pacific,P2,John Pratt,Export Logistics Manager,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Transportation,VP,Named logistics manager with GP footprint.,https://www.linkedin.com/in/johnhpratt,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use logistics route,Named logistics manager,4
+P-041,H-E-B,P1,Troy Retzloff,Senior Director of Distribution,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Distribution,C-level / President,Best publicly surfaced distribution leader at H-E-B.,https://www.linkedin.com/in/troy-retzloff-a527a247,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use as H-E-B anchor,Named senior director,4
+P-042,H-E-B,P1,Craig Stucker,"Director, Parkway Transport at H-E-B",Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Transportation,Director / Senior Director,Strong transportation operator at H-E-B.,https://www.linkedin.com/in/craigstucker,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use carrier/transport angle,Named transport leader,4
+P-043,H-E-B,P1,Dakota Socha,Transportation & Reverse Logistics,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Transportation / Reverse Logistics,Director,Public profile references multi-site transportation and reverse logistics operations at H-E-B.,https://www.linkedin.com/in/dakota-socha-9635ba61,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use as practical ops buyer,Named multi-site leader,4
+P-044,H-E-B,P2,Jeffrey Matthews,Operations & Supply Chain Leader,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Operations,Director / VP,Named H-E-B operations and supply-chain leader.,https://www.linkedin.com/in/jeffreymatthews01,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use store/DC ops angle,Named operations leader,4
+P-045,H-E-B,P2,Troy Shaw,Supply Chain Strategy / Distribution Management / Transportation Planning,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Supply Chain / Strategy,VP,Named H-E-B strategy and distribution leader.,https://www.linkedin.com/in/troy-shaw-822125a,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use strategy / planning lane,Named strategy persona,4
+P-046,Hyundai Motor America,P1,Carey Gammon,"Director, Vehicle Operations (HMA)",Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Operations / Logistics,Director,"Direct Hyundai operations leader with demand planning, S&OP, logistics and supply-chain background.",https://www.linkedin.com/in/carey-gammon-07116933,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use as Hyundai anchor,Named vehicle-ops leader,3
+P-047,Hyundai Motor America,P1,Yongchul Chung,"Senior Manager, Global Logistics & Supply Chain",Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Logistics / Supply Chain,Senior Manager,Direct Hyundai logistics leader.,https://www.linkedin.com/in/yongchulchung,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use logistics lane,Named logistics manager,3
+P-048,Hyundai Motor America,P2,Kevin Kim,Hyundai Motor America logistics / supply chain professional,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Parts / Logistics,Manager,Named Hyundai Motor America logistics professional.,https://www.linkedin.com/in/kevin-kim-5211a1a0,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use parts/logistics route,Named operator,3
+P-049,Hyundai Motor America,P2,Ashley Eckel,Operations-focused logistics professional,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Operations / Logistics,VP,Named Hyundai Motor America operations/logistics contact.,https://www.linkedin.com/in/ashleynpeckel92932123,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use operations route,Named operations contact,3
+P-050,Hyundai Motor America,P2,Sarah Johnson,"Logistics professional, Hyundai Glovis America",Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Distribution / Logistics,Director,Useful Hyundai-adjacent logistics route through Glovis America.,https://www.linkedin.com/in/sarah-johnson-344a1aba,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use adjacent logistics partner route,Hyundai ecosystem contact,3
+P-051,Honda,P1,Jim Small,"Senior Vice President, Honda Logistics North America",Exec sponsor,Routing contact,LinkedIn / Sales Nav,link,Supply Chain / Logistics,SVP,Strongest Honda logistics executive found publicly.,https://www.linkedin.com/in/jim-small-b94760b0,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use as Honda anchor,Named SVP,3
+P-052,Honda,P1,Brian Beard,Honda Logistics North America,Operator / influencer,Operator buyer,LinkedIn / Sales Nav,link,Logistics,Manager,Senior logistics leader in Honda network.,https://www.linkedin.com/in/brian-beard-5b7429a0,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use logistics route,Named logistics executive,3
+P-053,Honda,P1,Derek Johansen,"Senior executive for inbound supply, warehousing, and outbound distribution of automotive parts",Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Operations / Distribution,Director / Executive,Strong automotive parts logistics signal relevant to Honda-style flows.,https://www.linkedin.com/in/derek-johansen-751b0223,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use parts/distribution lane,Named operations leader,3
+P-054,Honda,P2,David Van Brimmer,"Senior Operations Manager, Honda Logistics North America",Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Operations,VP,Named senior operations manager in Honda logistics network.,https://www.linkedin.com/in/david-van-brimmer-21a8189a,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use site-ops route,Named operations manager,3
+P-055,Honda,P2,Ed Allison,"Chief Financial Officer, Honda Logistics North America",Exec sponsor,Routing contact,LinkedIn / Sales Nav,link,Finance / Strategy,Director,Executive contact inside Honda Logistics North America with broad org visibility.,https://www.linkedin.com/in/edallisoncpa,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use executive visibility route,Adjacent but useful senior contact,3
+P-056,John Deere,P1,Cory Reed,"President, Lifecycle Solutions, Supply Management, and Customer Success",Exec sponsor,Routing contact,Executive outreach,link,Supply Management,President,"Official Deere executive with global aftermarket, customer support, supply chain, and transformation remit.",https://about.deere.com/en-us/explore-john-deere/leadership/cory-reed,Official Deere leadership page,No warm intro yet,Executive outreach,Research complete,,Use as Deere anchor,Named executive owner,3
+P-057,John Deere,P1,David Panjwani,"Director, Logistics and Global Trade",Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Logistics / Distribution,VP,Public profile states he is responsible for John Deere logistics on a global basis.,https://www.linkedin.com/in/david-panjwani-a5431a11,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use logistics lane,Strong logistics match,3
+P-058,John Deere,P2,Gia Duke,"Director, Global Supply Management",Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Manufacturing / Supply Management,VP,Named Deere supply management director.,https://www.linkedin.com/in/gia-duke-362b8a19,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use supply-management route,Named director,3
+P-059,John Deere,P2,Kevin Akers,International Logistics and Operations Strategy Leader,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Aftermarket / Operations,Director,Named Deere leader for international logistics and operations strategy.,https://www.linkedin.com/in/kevin-akers-1746391a,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use distribution / ops strategy lane,Named logistics strategist,3
+P-060,John Deere,P2,Catherine Pham,Supply Chain Management and Logistics Strategy Lead,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Transformation,Director,Named lead for global supply management and logistics strategy execution.,https://www.linkedin.com/in/catherine-pham-cscp-4428a43a,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use transformation lane,Named strategy lead,3
+P-061,Kenco Logistics Services,P1,Kristi Montgomery,Vice President of Strategic Transformation,Exec sponsor,Routing contact,Conference / ecosystem outreach,link,Innovation / Strategy,VP,Officially named Kenco transformation leader and MODEX speaker.,https://kencogroup.com/news/kristi-montgomery-vp-strategic-transformation/,Official Kenco press release,Public session presence,Conference / ecosystem outreach,Research complete,,Strong ecosystem intro node,Named Kenco anchor,2
+P-062,Kenco Logistics Services,P1,Shanon Weber,"Group Vice President, Operations",Exec sponsor,Routing contact,LinkedIn / ecosystem outreach,link,Operations,C-level,Named Kenco operations executive.,https://www.linkedin.com/in/shanon-weber-a7b9328,Public LinkedIn profile,No warm intro yet,LinkedIn / ecosystem outreach,Research complete,,Use operations lane,Named group VP,2
+P-063,Kenco Logistics Services,P2,Jason Minghini,"Engineering leader, Kenco Group",Operator / influencer,Routing contact,LinkedIn / ecosystem outreach,link,Engineering / Solutions,SVP,Public profile says he leads engineering facets across Kenco.,https://www.linkedin.com/in/jason-minghini-mba-806b4812,Public LinkedIn profile,No warm intro yet,LinkedIn / ecosystem outreach,Research complete,,Use solutions/engineering lane,Named engineering leader,2
+P-064,Kenco Logistics Services,P2,Emmanuel (Pete) Bradley,Operations executive,Operator / influencer,Routing contact,LinkedIn / ecosystem outreach,link,Operations,VP,Named large-scale distribution and operations leader at Kenco.,https://www.linkedin.com/in/emmanuel-pete-bradley-9b90b128,Public LinkedIn profile,No warm intro yet,LinkedIn / ecosystem outreach,Research complete,,Use customer-ops lane,Named operations exec,2
+P-065,Kenco Logistics Services,P2,Andre Pereira,"General Manager, Kenco Group",Operator / influencer,Routing contact,LinkedIn / ecosystem outreach,link,Customer Operations,Director,Named GM with operational excellence angle at Kenco.,https://www.linkedin.com/in/andr%C3%A9-luiz-pereira,Public LinkedIn profile,No warm intro yet,LinkedIn / ecosystem outreach,Research complete,,Use practical operating contact,Named GM,2
+P-066,Barnes & Noble,P1,Annette Danek-Akey,Chief Supply Chain Officer,Exec sponsor,Routing contact,Conference / executive outreach,link,Supply Chain,C-level,Official Barnes & Noble supply-chain chief and MODEX speaker.,https://www.barnesandnobleinc.com/management/annette-danek-akey/,Official B&N management page,Official MODEX speaker,Conference / executive outreach,Research complete,,Best B&N operator,Named anchor,2
+P-067,Barnes & Noble,P1,John Huggan,Senior Director Logistics,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Distribution Center Operations,VP,Named senior logistics leader at Barnes & Noble.,https://www.linkedin.com/in/john-huggan-ba6430179,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use logistics lane,Named senior director,2
+P-068,Barnes & Noble,P2,Joe Marmorato,"Senior Manager, Fulfillment Operations",Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Transportation / Fulfillment,VP,Named omnichannel fulfillment operator.,https://www.linkedin.com/in/joe-marmorato-73a4854,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use fulfillment lane,Named fulfillment manager,2
+P-069,Barnes & Noble,P2,Yobanny Lopez,Senior Warehouse Operations Manager,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Distribution Center,Director,Named warehouse operations leader in Barnes & Noble network.,https://www.linkedin.com/in/yobanny-lopez-58b3114a,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use DC-ops route,Named warehouse leader,2
+P-070,Barnes & Noble,P2,Patrick Chmielowiec,"IT-PMO Manager, Distribution Center",Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Systems / Transformation,Director,Named supply-chain systems / PMO contact in B&N distribution.,https://www.linkedin.com/in/patrickchmielowiec,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use systems/transformation angle,Named PMO contact,2
+P-071,FedEx,P1,Scott Temple,"President, FedEx Supply Chain",Exec sponsor,Decision-maker,LinkedIn / exec outreach,link,Operations / Supply Chain,C-level / COO,Best FedEx Supply Chain operating executive surfaced publicly.,https://www.linkedin.com/in/scotttemple2,Public LinkedIn profile,No warm intro yet,LinkedIn / exec outreach,Research complete,,Use as FedEx anchor,Named president,2
+P-072,FedEx,P1,Ray Hatton,"Vice President, FedEx Supply Chain",Exec sponsor,Routing contact,LinkedIn / exec outreach,link,Operations,C-level / COO,Named VP-level FedEx Supply Chain operator.,https://www.linkedin.com/in/ray-hatton-18411356,Public LinkedIn profile,No warm intro yet,LinkedIn / exec outreach,Research complete,,Use operations lane,Named VP,2
+P-073,FedEx,P2,Jose A. Touzon,"Vice President, Customer Operations",Exec sponsor,Routing contact,LinkedIn / exec outreach,link,Customer Operations,VP,Public profile says he leads FedEx supply-chain operations for technology and industrial clients in North America.,https://www.linkedin.com/in/jose-a-touzon-7763423,Public LinkedIn profile,No warm intro yet,LinkedIn / exec outreach,Research complete,,Use customer-operations route,Named VP,2
+P-074,FedEx,P2,Douglas Spamer,"Managing Director - Linehaul / Transportation, FedEx Ground",Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Linehaul / Transportation,VP,Direct linehaul and transportation signal inside FedEx Ground.,https://www.linkedin.com/in/douglas-spamer-65794a30,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use linehaul lane,Named transportation contact,2
+P-075,FedEx,P2,Jake Pyke,Senior Manager - Linehaul Operations,Operator / influencer,Routing contact,LinkedIn / Sales Nav,link,Terminal / Network Operations,Director,Named linehaul operations manager for network-ops lane.,https://www.linkedin.com/in/jake-pyke-5738a5185,Public LinkedIn profile,No warm intro yet,LinkedIn / Sales Nav,Research complete,,Use network-ops route,Named linehaul manager,2
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,
+,,,,,Operator / influencer,Routing contact,Direct,,,,,,,,,,,,,

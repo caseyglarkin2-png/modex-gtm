@@ -1,0 +1,2 @@
+Filter this tab to nonblank Account and non-Closed Status. It mirrors Mobile Capture row by row so you can sort by due date without relying on brittle sheet magic.,,,,,,,,,,
+Captured At,Account,Persona,Band,Next Step,Owner,Due Date,Requested Asset,Need Primo?,Status,Audit URL
