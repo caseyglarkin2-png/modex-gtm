@@ -338,9 +338,9 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                   )}
                 </div>
                 <Separator />
-                <a href="https://calendly.com/jake-freightroll/mnfst" target="_blank" rel="noopener noreferrer">
+                <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW" target="_blank" rel="noopener noreferrer">
                   <Button size="sm" className="gap-1">
-                    <Calendar className="h-3.5 w-3.5" /> Open Calendly
+                    <Calendar className="h-3.5 w-3.5" /> Schedule Meeting
                   </Button>
                 </a>
               </CardContent>

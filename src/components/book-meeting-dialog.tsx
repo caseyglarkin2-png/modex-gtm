@@ -77,7 +77,7 @@ export function BookMeetingDialog({ accountName, personas, calendlyLink }: Props
         {calendlyLink && (
           <Button variant="outline" size="sm" className="gap-1.5" asChild>
             <a href={calendlyLink} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="h-3.5 w-3.5" /> Calendly
+              <ExternalLink className="h-3.5 w-3.5" /> Schedule
             </a>
           </Button>
         )}
@@ -145,7 +145,7 @@ export function BookMeetingDialog({ accountName, personas, calendlyLink }: Props
               {calendlyLink && (
                 <Button type="button" variant="outline" asChild>
                   <a href={calendlyLink} target="_blank" rel="noopener noreferrer" className="gap-1.5">
-                    <ExternalLink className="h-3.5 w-3.5" /> Open Calendly
+                    <ExternalLink className="h-3.5 w-3.5" /> Open Scheduler
                   </a>
                 </Button>
               )}
