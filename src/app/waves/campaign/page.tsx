@@ -22,91 +22,91 @@ const WAVE1_INTEL: Record<string, {
   site_link: string;
 }> = {
   'General Mills': {
-    trigger: 'New CSCO (Jonathan Ness) appointed March 2026',
-    p1a_frame: '90-Day Quick Win — new leadership trigger',
-    p1a_subject: '90 days in — one yard network idea',
-    p1b_frame: 'Network logistics cost reduction',
-    p1b_subject: 'yard network data from 24 sites',
-    p2_subject: 'what we found walking 200+ yards',
-    why_now_hook: "Congrats on the CSCO role. The supply chain leaders who move fastest in their first 90 days lock in standardization before the org resists change.",
-    proof_line: '24 sites live, $1M+ per-site profit lift, headcount neutral. 48→24 min drop & hook.',
+    trigger: 'New CSCO (Jonathan Ness) March 2026. Oklahoma grad. Been there for years, new to the chair.',
+    p1a_frame: 'New CSCO, 90-day window. The yard is the fastest win he can point to.',
+    p1a_subject: 'the yard is the quick win',
+    p1b_frame: 'Network variance is compounding across every plant. Name it.',
+    p1b_subject: 'your yards are running blind',
+    p2_subject: 'the analog mile at general mills',
+    why_now_hook: "New CSCO. First 90 days. The yard is the fastest board-ready proof point on the table. Every week without a standard protocol is another week of variance compounding across the network.",
+    proof_line: '24 facilities. $1M+ profit lift per site. Headcount neutral. 48 to 24 min drop and hook. Not a YMS.',
     site_link: 'https://yardflow.ai/solutions',
   },
   'Frito-Lay': {
-    trigger: 'MODEX signal + high-velocity snack network',
-    p1a_frame: 'Variance Tax at PepsiCo scale',
-    p1a_subject: 'the variance tax across PepsiCo yards',
-    p1b_frame: 'Transportation fleet flow optimization',
-    p1b_subject: '48 to 24 minutes — what changed',
-    p2_subject: 'manual gate check-in is costing you',
-    why_now_hook: "At PepsiCo's throughput volumes, every manual gate process and radio dispatch compounds into millions in hidden variance.",
-    proof_line: 'Over 20 high-volume food sites cut drop & hook from 48 to 24 min without adding a single headcount.',
+    trigger: 'PepsiCo scale. High-velocity snack network. The variance tax is enormous.',
+    p1a_frame: 'At PepsiCo throughput volumes, yard variance is a P&L event.',
+    p1a_subject: 'the variance tax at pepsico scale',
+    p1b_frame: 'Every manual gate process compounds into millions hidden in the network.',
+    p1b_subject: 'the yard is the blind spot',
+    p2_subject: 'radio and clipboard at the gate',
+    why_now_hook: "At PepsiCo throughput volumes, every manual gate process and radio dispatch is a variance generator. It compounds across the network. The yard is where margin goes to die.",
+    proof_line: '24 high-volume food sites. Drop and hook from 48 to 24 min. Not a single headcount added.',
     site_link: 'https://yardflow.ai/solutions',
   },
   'Diageo': {
-    trigger: 'MODEX signal + beverage network complexity',
-    p1a_frame: 'Beverage throughput under volume pressure',
-    p1a_subject: 'yard throughput at Diageo distilleries',
-    p1b_frame: 'Manufacturing & distillation flow',
-    p1b_subject: 'one driver journey across every facility',
-    p2_subject: 'clipboard and radio at the gate — sound familiar?',
-    why_now_hook: "Beverage flow is time-sensitive and network-heavy. When every distillery and warehouse runs its own yard playbook, variance compounds fast.",
-    proof_line: 'Standardized operating protocol across 24 sites — same check-in, same dock assignment, same proof. Not a YMS.',
+    trigger: 'Beverage network complexity. Every distillery runs its own yard playbook.',
+    p1a_frame: 'Beverage flow is time-sensitive. The yard is where orchestration falls apart.',
+    p1a_subject: 'the yard problem at distillery scale',
+    p1b_frame: 'One driver journey across every facility. The protocol that does not exist yet.',
+    p1b_subject: 'the protocol gap across diageo',
+    p2_subject: 'visibility dies in the yard',
+    why_now_hook: "Beverage flow is time-sensitive and network-heavy. When every distillery and warehouse runs its own yard playbook, the digital supply chain is fiction. The yard is where it becomes real or stays imaginary.",
+    proof_line: 'Standardized operating protocol across 24 facilities. Same check-in, same routing, same proof. Not a YMS.',
     site_link: 'https://yardflow.ai/product',
   },
   'Hormel Foods': {
-    trigger: 'New CSCO (Will Bonifant) appointed 2026',
-    p1a_frame: '90-Day Quick Win — transformation mandate',
-    p1a_subject: '90 days in — yard standardization quick win',
-    p1b_frame: 'Planning COE & network variance',
-    p1b_subject: 'your yards are running different playbooks',
-    p2_subject: 'what we found walking 200+ yards',
-    why_now_hook: "Congrats on the CSCO appointment. New supply chain leadership + proven yard standardization = a win you can point to inside 90 days.",
-    proof_line: 'Each of 24 sites at least $1M+ more profitable. Zero added headcount. 30 min remote deploy per facility.',
+    trigger: 'New CSCO (Will Bonifant) 2026. Transformation mandate.',
+    p1a_frame: 'New CSCO reads: 90-day window before the org absorbs the ambition.',
+    p1a_subject: 'the yard is the 90-day win',
+    p1b_frame: 'Planning COE cannot plan what the yard does not report.',
+    p1b_subject: 'the network runs blind at the yard',
+    p2_subject: 'every plant, different playbook',
+    why_now_hook: "New CSCO. The yard is the fastest, lowest-risk proof point available. One protocol, one driver journey, board-ready ROI. Before the org resists standardization.",
+    proof_line: '24 sites. $1M+ each. Zero added headcount. 30 min remote deploy per facility.',
     site_link: 'https://yardflow.ai/solutions',
   },
   'JM Smucker': {
-    trigger: 'New Chief Product Supply Officer (Rob Ferguson) Feb 2026',
-    p1a_frame: '90-Day Quick Win — product supply transformation',
-    p1a_subject: 'new role quick win — yard standardization',
-    p1b_frame: 'Transportation spend optimization ($400M+)',
-    p1b_subject: '$400M in transport — how much leaks in the yard?',
-    p2_subject: 'the protocol gap between your warehouses',
-    why_now_hook: "As the new Chief Product Supply Officer, you\'re building your transformation agenda. Yard standardization is the fastest, lowest-risk win on the board.",
-    proof_line: 'A standardized operating protocol — not a YMS — that made each of 24+ sites at least $1M+ more profitable.',
+    trigger: 'New Chief Product Supply Officer (Rob Ferguson) Feb 2026.',
+    p1a_frame: 'New role, transformation agenda. Yard standardization is the fastest win on the board.',
+    p1a_subject: 'the fastest win on the board',
+    p1b_frame: '$400M+ transport spend. How much leaks in the yard where nobody is measuring?',
+    p1b_subject: '$400M in transport, how much leaks',
+    p2_subject: 'the gap between your warehouses',
+    why_now_hook: "New Chief Product Supply Officer building a transformation agenda. $400M+ in transportation spend. The yard is the one place where all of it touches down and nobody is standardizing the handoff.",
+    proof_line: 'A standardized operating protocol that made each of 24 sites $1M+ more profitable. Not a YMS.',
     site_link: 'https://yardflow.ai/solutions',
   },
   'The Home Depot': {
-    trigger: 'CFO Richard McPhail keynoting MODEX 2026',
-    p1a_frame: 'MODEX keynote proximity + retail DC volume',
-    p1a_subject: 'yard network data for MODEX conversation',
-    p1b_frame: 'Supply chain & distribution flow',
-    p1b_subject: 'standardizing yard ops across retail DCs',
-    p2_subject: 'dock congestion at high-volume DCs',
-    why_now_hook: "With your CFO keynoting MODEX, supply chain execution is on the executive radar. Yard standardization is the presentation-ready proof point.",
-    proof_line: 'Over 200 facilities contracted. Same driver journey at every site. Deploys in 30 minutes per facility.',
+    trigger: 'CFO Richard McPhail keynoting MODEX 2026. Supply chain is on the executive radar.',
+    p1a_frame: 'CFO on stage at MODEX. Supply chain execution already in the spotlight. The yard is the proof point.',
+    p1a_subject: 'the yard data for modex',
+    p1b_frame: 'Retail DC volume at Home Depot scale. Yard standardization across the network.',
+    p1b_subject: 'dock congestion at dc scale',
+    p2_subject: 'the constraint nobody named',
+    why_now_hook: "Your CFO is keynoting MODEX. Supply chain execution is already on the executive radar. The yard is the area where it either holds up or quietly falls apart. That is where the proof is.",
+    proof_line: '200+ facilities contracted. Same driver journey at every site. 30 min deploy. Headcount neutral.',
     site_link: 'https://yardflow.ai/roi',
   },
   'Georgia Pacific': {
-    trigger: 'Industrial plant complexity + MODEX signal',
-    p1a_frame: 'Industrial plant yard variance',
-    p1a_subject: 'yard variance across GP plants',
-    p1b_frame: 'Wood products logistics throughput',
-    p1b_subject: 'trailer scheduling at industrial scale',
-    p2_subject: 'every plant runs a different yard playbook',
-    why_now_hook: "Industrial sites with high trailer volumes and complex scheduling create the exact yard variance that compounds into hidden cost.",
-    proof_line: 'Standardized the driver journey across 24 industrial-grade sites. Gate time variance eliminated.',
+    trigger: 'Industrial plant complexity. High trailer volumes. Complex scheduling. Perfect variance generator.',
+    p1a_frame: 'Industrial yards with complex scheduling are the exact place variance compounds into hidden cost.',
+    p1a_subject: 'yard variance at plant scale',
+    p1b_frame: 'Every plant runs a different playbook. The network has no protocol layer.',
+    p1b_subject: 'the missing protocol layer',
+    p2_subject: 'tribal knowledge at the gate',
+    why_now_hook: "Industrial sites with high trailer volumes and complex scheduling create the exact yard variance that compounds into hidden cost. Every plant running its own playbook is local improvisation disguised as operations.",
+    proof_line: 'Standardized the driver journey across 24 industrial-grade sites. Variance eliminated at the gate.',
     site_link: 'https://yardflow.ai/product',
   },
   'H-E-B': {
-    trigger: 'Grocery DC velocity + MODEX signal',
-    p1a_frame: 'Grocery distribution dock velocity',
-    p1a_subject: 'dock velocity at grocery-scale DCs',
-    p1b_frame: 'Transport & reverse logistics flow',
-    p1b_subject: 'the variance tax on grocery distribution',
-    p2_subject: 'what standardized yard flow looks like',
-    why_now_hook: "Grocery distribution is brutally unforgiving — one congested dock window cascades into missed store replenishment. Standardized yard flow fixes the root cause.",
-    proof_line: 'Drop & hook from 48 to 24 min. FIFO enforced by system, not tribal knowledge. Headcount neutral.',
+    trigger: 'Grocery DC velocity. One congested dock window cascades into missed replenishment.',
+    p1a_frame: 'Grocery distribution is unforgiving. The yard is the root cause of dock congestion.',
+    p1a_subject: 'the root cause of dock congestion',
+    p1b_frame: 'FIFO enforced by system, not tribal knowledge.',
+    p1b_subject: 'the variance tax on grocery',
+    p2_subject: 'analog yards, digital ambitions',
+    why_now_hook: "Grocery distribution is unforgiving. One congested dock window cascades into missed store replenishment. The root cause is always the same: the yard has no protocol. Standardized yard flow fixes the actual constraint.",
+    proof_line: 'Drop and hook from 48 to 24 min. FIFO by system, not tribal knowledge. Headcount neutral.',
     site_link: 'https://yardflow.ai/solutions',
   },
 };
@@ -144,7 +144,7 @@ export default function CampaignPage() {
             <Rocket className="h-6 w-6 text-cyan-500" /> Campaign Command Center
           </h1>
           <p className="text-sm text-[var(--muted-foreground)]">
-            Wave 1 booking campaign. Pre-loaded intel, hand-crafted frames, one-click generation.
+            MODEX 2026. April 13-16. The yard is the constraint. Name it. Book the meeting.
           </p>
         </div>
         <div className="flex items-center gap-3 text-xs text-[var(--muted-foreground)]">
@@ -204,10 +204,10 @@ export default function CampaignPage() {
       {/* ── Wave 1 Campaign Cards ── */}
       <div className="space-y-2">
         <h2 className="text-lg font-semibold flex items-center gap-2">
-          <Zap className="h-4 w-4 text-blue-500" /> Wave 1: Cold Outreach — Score 4-5 Accounts
+          <Zap className="h-4 w-4 text-blue-500" /> Wave 1: Cold Outreach
         </h2>
         <p className="text-xs text-[var(--muted-foreground)]">
-          Each card has pre-loaded frames, subject lines, and trigger hooks. Generate → Edit → Send.
+          Generate. Read it. Fix what needs fixing. Send. The AI writes in your voice. You own the final word.
         </p>
       </div>
 
@@ -352,29 +352,29 @@ export default function CampaignPage() {
       {/* ── Campaign Cadence Reference ── */}
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-base">Cadence & Frame Rotation</CardTitle>
+          <CardTitle className="text-base">Cadence</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-4 gap-4 text-xs">
             <div className="space-y-1">
-              <Badge className="bg-blue-500/15 text-blue-700">Day 0 — Today</Badge>
-              <p className="font-medium">Initial Email</p>
-              <p className="text-[var(--muted-foreground)]">Pain-specific hook with trigger. Under 125 words.</p>
+              <Badge className="bg-blue-500/15 text-blue-700">Day 0</Badge>
+              <p className="font-medium">Name the constraint</p>
+              <p className="text-[var(--muted-foreground)]">Open on their reality. The yard is the black hole. Under 120 words.</p>
             </div>
             <div className="space-y-1">
-              <Badge className="bg-amber-500/15 text-amber-700">Day 3 — Monday</Badge>
-              <p className="font-medium">Proof Follow-up</p>
-              <p className="text-[var(--muted-foreground)]">New stat, customer quote, or case study. No &ldquo;circling back.&rdquo;</p>
+              <Badge className="bg-amber-500/15 text-amber-700">Day 3</Badge>
+              <p className="font-medium">New proof, different angle</p>
+              <p className="text-[var(--muted-foreground)]">One stat, one module, one quote. Tighter. Harder. Under 80 words.</p>
             </div>
             <div className="space-y-1">
-              <Badge className="bg-violet-500/15 text-violet-700">Day 6 — Thursday</Badge>
-              <p className="font-medium">Peer Pressure</p>
-              <p className="text-[var(--muted-foreground)]">&ldquo;Your peers went live in Q1.&rdquo; Entirely different angle.</p>
+              <Badge className="bg-violet-500/15 text-violet-700">Day 9</Badge>
+              <p className="font-medium">The variance tax</p>
+              <p className="text-[var(--muted-foreground)]">Make inaction feel expensive and compounding. The last analog mile. Under 80 words.</p>
             </div>
             <div className="space-y-1">
-              <Badge className="bg-neutral-500/15 text-neutral-700">Day 10 — Monday</Badge>
-              <p className="font-medium">Gracious Breakup</p>
-              <p className="text-[var(--muted-foreground)]">Short, zero pressure. &ldquo;Door&apos;s open when ready.&rdquo;</p>
+              <Badge className="bg-neutral-500/15 text-neutral-700">Day 16</Badge>
+              <p className="font-medium">Clean break</p>
+              <p className="text-[var(--muted-foreground)]">Plant the seed. The constraint exists. YNS exists. Door stays open. Under 50 words.</p>
             </div>
           </div>
         </CardContent>
@@ -389,27 +389,27 @@ export default function CampaignPage() {
           <div className="grid grid-cols-2 gap-3 text-xs">
             <div className="rounded-md border p-2">
               <p className="font-medium">&ldquo;Send more info&rdquo;</p>
-              <p className="text-[var(--muted-foreground)]">One-pager link + &ldquo;Happy to walk through it live — here&apos;s 30 min&rdquo; + calendar link.</p>
+              <p className="text-[var(--muted-foreground)]">Send the one-pager. &ldquo;Worth 30 minutes to walk through the deployment data. Tuesday April 14 work?&rdquo;</p>
             </div>
             <div className="rounded-md border p-2">
-              <p className="font-medium">&ldquo;Not the right person, talk to X&rdquo;</p>
-              <p className="text-[var(--muted-foreground)]">&ldquo;Thank you — reaching out to X now.&rdquo; Email X with warm intro reference.</p>
+              <p className="font-medium">&ldquo;Not the right person&rdquo;</p>
+              <p className="text-[var(--muted-foreground)]">&ldquo;Appreciate it. Who owns yard operations across the network?&rdquo; Then email the referral with the warm intro.</p>
             </div>
             <div className="rounded-md border p-2">
-              <p className="font-medium">&ldquo;What&apos;s the cost?&rdquo;</p>
-              <p className="text-[var(--muted-foreground)]">&ldquo;Depends on network size. Worth 30 min to scope?&rdquo; Never put pricing in email.</p>
+              <p className="font-medium">&ldquo;What does it cost?&rdquo;</p>
+              <p className="text-[var(--muted-foreground)]">&ldquo;Depends on network size. The audit maps that. 30 minutes gives us both a number.&rdquo; Never put pricing in email.</p>
             </div>
             <div className="rounded-md border p-2">
               <p className="font-medium">&ldquo;We have a YMS&rdquo;</p>
-              <p className="text-[var(--muted-foreground)]">&ldquo;We&apos;re not a YMS. We&apos;re the network layer that makes your YMS work across sites.&rdquo;</p>
+              <p className="text-[var(--muted-foreground)]">&ldquo;YNS is not a YMS. It is the network layer that makes your YMS work across sites. The protocol your YMS does not enforce.&rdquo;</p>
             </div>
             <div className="rounded-md border p-2">
-              <p className="font-medium">Calendar clicked, didn&apos;t book</p>
-              <p className="text-[var(--muted-foreground)]">&ldquo;Saw you checked — want me to suggest a specific time?&rdquo;</p>
+              <p className="font-medium">Calendar clicked, did not book</p>
+              <p className="text-[var(--muted-foreground)]">&ldquo;Saw some interest. Tuesday April 14 at 1pm work? We will have live users on-site you can talk to.&rdquo;</p>
             </div>
             <div className="rounded-md border p-2">
-              <p className="font-medium">OOO Auto-reply</p>
-              <p className="text-[var(--muted-foreground)]">Note return date. Send Step 2 on return date +1.</p>
+              <p className="font-medium">OOO auto-reply</p>
+              <p className="text-[var(--muted-foreground)]">Note return date. Send Step 2 on return date +1. If return is during MODEX, adjust to in-person ask.</p>
             </div>
           </div>
         </CardContent>

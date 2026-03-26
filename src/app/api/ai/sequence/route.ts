@@ -24,12 +24,18 @@ function parseEmailContent(raw: string): { subject: string; body: string } {
   const bodyStart = raw.indexOf('---');
   let body = bodyStart >= 0 ? raw.slice(bodyStart + 3).trim() : raw.trim();
 
+  // Strip AI-generated greetings (voice rules say: no greetings)
+  body = body
+    .replace(/^(Hi|Hey|Hello|Dear)\s+[A-Z][a-z]+,?\s*\n{1,2}/i, '')
+    .trim();
+
   // Strip AI-generated sign-offs (Casey signs via the email template)
   body = body
     .replace(/\n{1,3}(Best|Sincerely|Regards|Cheers|Warm regards|All the best|Looking forward),?\s*\n+\[Your Name\][\s\S]*$/i, '')
     .replace(/\n{1,3}(Best|Sincerely|Regards|Cheers|Warm regards|All the best|Looking forward),?\s*\n*$/i, '')
     .replace(/\n{1,3}\[Your Name\][\s\S]*$/i, '')
     .replace(/\n{1,3}Casey Larkin\s*$/i, '')
+    .replace(/\n{1,3}Casey\s*$/i, '')
     .trim();
 
   return { subject, body };

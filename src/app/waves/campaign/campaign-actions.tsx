@@ -66,7 +66,7 @@ export function CampaignActions({
       setEditSubject(step1.subject);
       setEditBody(step1.body);
       setEditing(true);
-      toast.success('Generated — review and edit below, then send');
+      toast.success('Generated. Review it. Fix what needs fixing.');
     } catch {
       toast.error('Generation failed');
     } finally {
@@ -78,7 +78,7 @@ export function CampaignActions({
     setGeneratedSubject(editSubject);
     setGeneratedBody(editBody);
     setEditing(false);
-    toast.success('Edits saved — ready to send');
+    toast.success('Saved. Ready to send.');
   }
 
   function cancelEdit() {
@@ -103,7 +103,7 @@ export function CampaignActions({
         }),
       });
       if (res.ok) {
-        toast.success(`Sent to ${personaEmail}`);
+        toast.success(`Sent to ${personaEmail}. Move to the next one.`);
         setSent(true);
         setEditing(false);
       } else {

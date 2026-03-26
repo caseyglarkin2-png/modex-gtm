@@ -1,4 +1,5 @@
 import { getYardFlowPromptContext } from './yardflow-context';
+import { getVoiceGuardrails } from './voice-guardrails';
 
 export interface PromptContext {
   accountName: string;
@@ -27,112 +28,103 @@ export interface OnePagerContext {
   band: string;
 }
 
-const TONE_DESCRIPTIONS = {
-  professional: 'formal, polished, executive-level language',
-  casual: 'conversational, warm, and approachable',
-  bold: 'direct, confident, and outcome-focused with a strong hook',
-};
-
-const LENGTH_RANGES = {
-  short: '50–80 words',
-  medium: '100–150 words',
-  long: '200–300 words',
-};
-
 export function buildEmailPrompt(ctx: PromptContext): string {
-  return `Write a cold outreach email for a B2B trade-show sales context.
+  return `Write a cold outreach email.
 
 ${getYardFlowPromptContext()}
 
-Sender: Casey Larkin, GTM Lead at YardFlow by FreightRoll
-- Target company: ${ctx.accountName}
-- Target contact: ${ctx.personaName ?? 'decision maker'}${ctx.personaTitle ? ` (${ctx.personaTitle})` : ''}
-- Account priority band: ${ctx.bandLabel ?? 'Tier 1'}
-- Tone: ${TONE_DESCRIPTIONS[ctx.tone]}
-- Length: ${LENGTH_RANGES[ctx.length]}
-${ctx.notes ? `- Additional context: ${ctx.notes}` : ''}
+${getVoiceGuardrails()}
 
-Goal: Book a 30-minute meeting at MODEX 2026 (Atlanta, April 13–16) to walk through their yard network and build a board-ready rollout plan.
-MODEX context: MODEX 2026 is coming up April 13–16 in Atlanta. YardFlow will be on-site with live users from the network — prospects can talk directly to operators running YardFlow across 24 facilities. Use this as the hook to meet in person.
-Meeting time suggestions: Suggest specific windows — e.g., "Tuesday April 14 at 10am, 1pm, or 3pm" or offer flexibility for other days during the show. Do NOT mention a calendar link. The goal is to get them to reply with a time.
+Target: ${ctx.personaName ?? 'decision maker'} at ${ctx.accountName}${ctx.personaTitle ? ` (${ctx.personaTitle})` : ''}
+Priority: ${ctx.bandLabel ?? 'Tier 1'}
+${ctx.notes ? `Context: ${ctx.notes}` : ''}
 
-Output: Only the email body (no subject line, no sign-off label). Start with a compelling first sentence.`;
+MODEX: April 13-16, Atlanta. YardFlow will be on-site with live users from the network. Prospects can sit with operators running YardFlow across 24 facilities and ask them anything. Suggest meeting windows: Tuesday April 14 at 10am, 1pm, or 3pm. Offer flexibility for other show days. No calendar link. Get them to reply with a time.
+
+Goal: Book a 30-minute meeting at MODEX to walk their yard network and build a board-ready rollout plan.
+
+Max 120 words. Open on a truth about their operation, not a greeting. End with a direct question. No sign-off.
+
+Output: Only the email body.`;
 }
 
 export function buildFollowUpEmailPrompt(ctx: PromptContext): string {
-  return `Write a follow-up email after a recent interaction (meeting, booth visit, or introduction) following MODEX 2026.
+  return `Write a follow-up email. The first outreach got no reply.
 
 ${getYardFlowPromptContext()}
 
-Sender: Casey Larkin, GTM Lead at YardFlow by FreightRoll
-- Target company: ${ctx.accountName}
-- Contact: ${ctx.personaName ?? 'decision maker'}${ctx.personaTitle ? ` (${ctx.personaTitle})` : ''}
-- Previous interaction: ${ctx.previousMeeting ?? 'initial outreach ahead of MODEX 2026 (April 13–16, Atlanta)'}
-- Tone: ${TONE_DESCRIPTIONS[ctx.tone]}
-- Length: ${LENGTH_RANGES[ctx.length]}
-${ctx.notes ? `- Key talking points from meeting: ${ctx.notes}` : ''}
+${getVoiceGuardrails()}
 
-Goal: Move the deal forward — lock in a meeting at MODEX 2026 (Atlanta, April 13–16). YardFlow will have live users on-site who can speak to real deployment results.
-Suggest specific meeting windows — prioritize Tuesday April 14 (10am, 1pm, or 3pm) but offer flexibility for other days during the show. Do NOT include a calendar link.
+Target: ${ctx.personaName ?? 'decision maker'} at ${ctx.accountName}${ctx.personaTitle ? ` (${ctx.personaTitle})` : ''}
+Previous: ${ctx.previousMeeting ?? 'cold email sent about yard network standardization ahead of MODEX'}
+${ctx.notes ? `Context: ${ctx.notes}` : ''}
 
-Output: Only the email body. Start with a reference to your last interaction.`;
+Do not reference the first email directly. Come in from a different angle. Add one new proof point (a stat, a module, the customer quote). Make the current state feel more expensive than before.
+
+MODEX: April 13-16, Atlanta. Live YardFlow users will be on-site. Suggest Tuesday April 14. No calendar link.
+
+Max 80 words. Tighter and harder than the first touch. End with a direct question. No sign-off.
+
+Output: Only the email body.`;
 }
 
 export function buildDMPrompt(ctx: PromptContext): string {
-  return `Write a LinkedIn direct message for B2B sales outreach.
+  return `Write a LinkedIn direct message.
 
 ${getYardFlowPromptContext()}
 
-Sender: Casey Larkin, GTM Lead at YardFlow by FreightRoll
-- Target: ${ctx.personaName ?? 'decision maker'} at ${ctx.accountName}${ctx.personaTitle ? `, ${ctx.personaTitle}` : ''}
-- Tone: ${TONE_DESCRIPTIONS[ctx.tone]}
-- Length: ${LENGTH_RANGES[ctx.length]} (LinkedIn DMs must be concise — prefer the short end)
-${ctx.notes ? `- Context: ${ctx.notes}` : ''}
+${getVoiceGuardrails()}
 
-Goal: Start a conversation. Reference MODEX 2026 (coming up April 13–16 in Atlanta) as shared context — YardFlow will have live users on-site. Lead with the meeting opportunity.
+Target: ${ctx.personaName ?? 'decision maker'} at ${ctx.accountName}${ctx.personaTitle ? `, ${ctx.personaTitle}` : ''}
+${ctx.notes ? `Context: ${ctx.notes}` : ''}
 
-Output: Only the message text, no salutation label, no signature.`;
+LinkedIn DMs must be 40-60 words max. One thought. One ask. No small talk.
+Reference MODEX (April 13-16, Atlanta) only if it sharpens the ask. Lead with the yard as the constraint. End with a question.
+
+Output: Only the message text. No greeting label, no signature.`;
 }
 
 export function buildCallScriptPrompt(ctx: PromptContext): string {
-  return `Write a cold call script for B2B outreach.
+  return `Write a cold call script.
 
 ${getYardFlowPromptContext()}
 
-Caller: Casey Larkin, GTM Lead at YardFlow by FreightRoll
-- Target: ${ctx.personaName ?? 'decision maker'} at ${ctx.accountName}${ctx.personaTitle ? `, ${ctx.personaTitle}` : ''}
-- Tone: ${TONE_DESCRIPTIONS[ctx.tone]}
-- Length: ${LENGTH_RANGES[ctx.length]}
-${ctx.notes ? `- Additional context: ${ctx.notes}` : ''}
+${getVoiceGuardrails()}
 
-Goal: Secure a 30-minute meeting at MODEX 2026 (April 13–16 in Atlanta). YardFlow will have live users on-site — offer the chance to hear directly from operators running YardFlow at 24 facilities. Suggest Tuesday April 14 as a meeting window.
+Target: ${ctx.personaName ?? 'decision maker'} at ${ctx.accountName}${ctx.personaTitle ? `, ${ctx.personaTitle}` : ''}
+${ctx.notes ? `Context: ${ctx.notes}` : ''}
+
+MODEX: April 13-16, Atlanta. Live YardFlow users on-site. Suggest Tuesday April 14.
 
 Structure:
-1. Quick opener (10 sec)
-2. Value hook — lead with their specific throughput/yard constraint, connect to YardFlow proof (20 sec)
-3. Qualifying question about their yard operations
-4. Network Audit ask — "30 minutes to map your facilities and build a board-ready ROI"
-5. Objection handling notes (2–3 common objections)
+1. Opener (10 sec): Name, company, one sentence about the yard constraint
+2. Hook (15 sec): Their specific throughput problem, what 24 facilities proved
+3. Qualifying question: How their yards run today
+4. Ask: 30 minutes at MODEX to map facilities and build board-ready ROI
+5. Objection handling (2-3 common objections with counters)
 
 Output: Formatted script with section labels.`;
 }
 
 export function buildMeetingPrepPrompt(ctx: PromptContext): string {
-  return `Create a meeting prep brief for a B2B sales meeting.
+  return `Create a meeting prep brief.
 
 ${getYardFlowPromptContext()}
 
-Account: ${ctx.accountName} (${ctx.bandLabel ?? 'Tier 1'} priority, score: ${ctx.score ?? 'N/A'})
-- Key contact: ${ctx.personaName ?? 'TBD'}${ctx.personaTitle ? ` — ${ctx.personaTitle}` : ''}
-- Meeting type: In-person meeting at MODEX 2026 (Atlanta, April 13–16) or Network Audit call
-${ctx.notes ? `- Context: ${ctx.notes}` : ''}
+${getVoiceGuardrails()}
 
-Create a structured brief with:
-1. Company snapshot (2–3 sentences about their yard/logistics/throughput challenges)
-2. YardFlow value props for this account (3 bullet points — connect their operations to YardFlow modules)
-3. Recommended opening questions (3 questions about their yard operations, variance, and throughput)
-4. Potential objections + counters (2–3)
-5. Ideal next step — Network Audit or pilot site identification
+Account: ${ctx.accountName} (${ctx.bandLabel ?? 'Tier 1'}, score: ${ctx.score ?? 'N/A'})
+Contact: ${ctx.personaName ?? 'TBD'}${ctx.personaTitle ? ` (${ctx.personaTitle})` : ''}
+Meeting: In-person at MODEX 2026 (Atlanta, April 13-16) or Network Audit call
+${ctx.notes ? `Context: ${ctx.notes}` : ''}
+
+Create a structured brief:
+1. Company snapshot (2-3 sentences about their yard/logistics/throughput reality)
+2. The yard constraint for this account (the specific version of the black hole they are living with)
+3. YardFlow value props (3 bullets connecting their operations to YNS modules)
+4. Opening questions (3 questions that surface the variance tax in their words)
+5. Objections + counters (2-3)
+6. Ideal next step
 
 Output: Structured markdown with headers.`;
 }
@@ -204,42 +196,62 @@ Generate ONLY valid JSON matching this schema — no markdown, no commentary:
 
 export function buildOutreachSequencePrompt(ctx: PromptContext, step: 'initial_email' | 'follow_up_1' | 'follow_up_2' | 'breakup'): string {
   const stepInstructions: Record<string, string> = {
-    initial_email: `Write the FIRST outreach email in a 4-touch sequence. This is cold — the prospect has never heard from us.
-Hook with their specific throughput/yard constraint, connect it to YardFlow's proof (24 sites, $1M+ per-site).
-MODEX 2026 is coming up April 13–16 in Atlanta. YardFlow will be on-site with live users from the network — prospects can sit down with operators actually running YardFlow across 24 facilities. Use this as the hook.
-Suggest specific meeting windows at MODEX — e.g., "Tuesday April 14 at 10am, 1pm, or 3pm" or offer flexibility for other days during the show. Do NOT include a calendar link or URL. The goal is to get them to reply with a time they work.
-Subject line + body. Subject must be < 60 chars, personalized, no spam words.`,
-    follow_up_1: `Write follow-up #1 (sent 3 days after initial email with no reply).
-Shorter than the first. Add ONE new proof point or insight they haven't seen — use a stat, module name, or customer quote.
-Reference the first email indirectly ("circling back" is banned — find a better hook).
-Reiterate the MODEX meeting opportunity (April 13–16, Atlanta) — mention that live YardFlow users will be on-site and available to answer questions directly. Suggest a couple time slots on Tuesday April 14.
-Subject line + body.`,
-    follow_up_2: `Write follow-up #2 (sent 5 days after follow-up #1 with no reply).
-Switch angle entirely — lead with the variance tax concept, a different proof point, or a micro-case-study (e.g., "48→24 min drop & hook" or "headcount neutral while adding volume").
-MODEX is getting close — create urgency around locking in a meeting window. Our schedule is filling up. Suggest a specific slot on Tuesday April 14.
-This is your last real shot before the breakup. Make it count.
-Subject line + body.`,
-    breakup: `Write a breakup email (sent 7 days after follow-up #2 with no reply).
-Short, gracious, zero pressure. Plant a seed for future conversation.
-Mention the Network Audit is always available when timing is right. If MODEX hasn't happened yet, leave the door open for a walk-up conversation on-site.
-Subject line + body.`,
+    initial_email: `STEP 1 of 4. First touch. Cold. They have never heard from you.
+
+Open on a truth about their operation that they will recognize but have never heard described this clearly. Name the yard as the constraint. Connect it to the cost of leaving it unfixed. Position YNS as the structural answer, not a feature pitch.
+
+MODEX 2026 is April 13-16 in Atlanta. YardFlow will have live users from the network on-site. Operators running YardFlow across 24 facilities will be there to answer questions. Suggest specific meeting windows: Tuesday April 14 at 10am, 1pm, or 3pm. Offer flexibility for other show days. No calendar link. Get them to reply with a time.
+
+Max 120 words. Subject line under 6 words, lowercase, no company name.`,
+
+    follow_up_1: `STEP 2 of 4. Sent 3 days after Step 1.
+
+Do NOT reference the first email. Come in from a completely different angle. Add one proof point they have not seen: a stat (48 to 24 min drop and hook), a module name (flowSPOTTER, flowTWIN), or the customer quote about headcount neutrality.
+
+Make the yard problem feel more concrete than before. Tighter. Harder. Fewer words.
+
+MODEX is close. Live YardFlow users on-site April 13-16. Suggest a slot on Tuesday April 14. No calendar link.
+
+Max 80 words. Subject line under 6 words, lowercase.`,
+
+    follow_up_2: `STEP 3 of 4. Sent 6 days after Step 2.
+
+Switch angle entirely. Lead with the variance tax: every facility running its own playbook, tribal knowledge at the gate, radio dispatching under pressure, the yard as the last analog mile in a digital supply chain. Make the cost of inaction feel compounding and irrecoverable.
+
+MODEX schedule is filling up. Create urgency through consequence, not fake scarcity. Suggest one specific slot on Tuesday April 14.
+
+Max 80 words. This is the last real shot. Every word must earn its keep. Subject line under 6 words, lowercase.`,
+
+    breakup: `STEP 4 of 4. Breakup.
+
+Short. Clean. No guilt, no pressure, no passive aggression. Plant one seed: the yard is the constraint, and YNS exists when the timing is right. If MODEX has not happened yet, leave the door open for a walk-up conversation on-site.
+
+Max 50 words. Subject line under 6 words, lowercase, no company or person name.`,
   };
 
-  return `You are writing outreach for YardFlow by FreightRoll.
+  return `You are writing outreach as Casey Larkin for YardFlow by FreightRoll.
 
 ${getYardFlowPromptContext()}
 
+${getVoiceGuardrails()}
+
 Target: ${ctx.personaName ?? 'decision maker'} at ${ctx.accountName}${ctx.personaTitle ? ` (${ctx.personaTitle})` : ''}
-Account priority: ${ctx.bandLabel ?? 'Tier 1'}
-Tone: ${TONE_DESCRIPTIONS[ctx.tone]}
+Priority: ${ctx.bandLabel ?? 'Tier 1'}
 ${ctx.notes ? `Account context: ${ctx.notes}` : ''}
 
 ${stepInstructions[step]}
 
-CRITICAL: Do NOT include any sign-off like "Best,", "Sincerely,", "Regards,", "[Your Name]", or "Casey Larkin" at the end. The email signature is added automatically. End with a question or call-to-action, then stop.
+CRITICAL OUTPUT RULES:
+- No sign-off (no Best, Sincerely, Regards, [Your Name], Casey, Casey Larkin)
+- No greeting (no Hi, Hey, Hello, Dear)
+- No em dashes
+- No exclamation marks
+- Do not open with "I"
+- Do not mention YardFlow in the first sentence
+- End with a question or a single declarative ask, then stop
 
 Output format:
-SUBJECT: <subject line — under 6 words, lowercase, no company name in subject>
+SUBJECT: <subject line>
 ---
-<email body — no sign-off, no name, just the text>`;
+<email body>`;
 }
