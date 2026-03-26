@@ -77,6 +77,7 @@ model Persona {
 
   account Account @relation(fields: [account_name], references: [name])
 
+  @@index([account_name])
   @@map("personas")
 }
 
@@ -107,6 +108,7 @@ model OutreachWave {
 
   account Account @relation(fields: [account_name], references: [name])
 
+  @@index([account_name])
   @@map("outreach_waves")
 }
 
@@ -186,6 +188,7 @@ model Activity {
 
   account Account @relation(fields: [account_name], references: [name])
 
+  @@index([account_name])
   @@map("activities")
 }
 
@@ -210,6 +213,7 @@ model Meeting {
 
   account Account @relation(fields: [account_name], references: [name])
 
+  @@index([account_name])
   @@map("meetings")
 }
 
@@ -244,6 +248,7 @@ model MobileCapture {
 
   account Account @relation(fields: [account_name], references: [name])
 
+  @@index([account_name])
   @@map("mobile_captures")
 }
 
@@ -291,4 +296,37 @@ model ListsConfig {
 
   @@unique([key, value])
   @@map("lists_config")
+}
+
+model GeneratedContent {
+  id           Int      @id @default(autoincrement())
+  account_name String
+  persona_name String?
+  content_type String   // email | dm | call_script | meeting_prep | infographic
+  tone         String?  // formal | conversational | provocative
+  length       String?  // short | medium | long
+  content      String
+  created_at   DateTime @default(now())
+
+  @@index([account_name, content_type])
+  @@map("generated_content")
+}
+
+model EmailLog {
+  id            Int      @id @default(autoincrement())
+  account_name  String
+  persona_name  String?
+  to_email      String
+  subject       String
+  body_html     String
+  status        String   @default("sent") // sent | delivered | opened | clicked | bounced
+  sendgrid_id   String?
+  opened_at     DateTime?
+  clicked_at    DateTime?
+  sent_at       DateTime @default(now())
+  created_at    DateTime @default(now())
+
+  @@index([account_name])
+  @@index([status])
+  @@map("email_logs")
 }

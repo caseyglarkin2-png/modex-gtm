@@ -1,0 +1,51 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { SendEmailSchema } from '@/lib/validations';
+import { sendEmail } from '@/lib/email/client';
+import { wrapHtml } from '@/lib/email/templates';
+
+export async function POST(req: NextRequest) {
+  let body: unknown;
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+  }
+
+  const parsed = SendEmailSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
+  }
+
+  const { to, cc, subject, bodyHtml, accountName } = parsed.data;
+
+  // Wrap plain text or already-composed HTML into branded template
+  const isPlainText = !bodyHtml.trim().startsWith('<');
+  const html = isPlainText ? wrapHtml(bodyHtml, accountName ?? 'the team') : bodyHtml;
+
+  try {
+    const response = await sendEmail({ to, cc, subject, html });
+
+    // Best-effort DB log — skip if no DB available
+    try {
+      const { prisma } = await import('@/lib/prisma');
+      await prisma.emailLog.create({
+        data: {
+          account_name: accountName ?? '',
+          persona_name: null,
+          to_email: to,
+          subject,
+          body_html: html,
+          status: 'sent',
+          sendgrid_id: (response.headers?.['x-message-id'] as string) ?? null,
+        },
+      });
+    } catch {
+      // DB offline — log skipped
+    }
+
+    return NextResponse.json({ success: true, message: `Email sent to ${to}` });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Email send failed';
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+}

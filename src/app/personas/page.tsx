@@ -6,6 +6,8 @@ import { DataTable, type Column } from '@/components/data-table';
 import { Badge } from '@/components/ui/badge';
 import { StatusBadge } from '@/components/status-badge';
 import { ExternalLink } from 'lucide-react';
+import { GeneratorDialog } from '@/components/ai/generator-dialog';
+import { EmailComposer } from '@/components/email/composer';
 
 type Persona = (typeof personasData)[number];
 
@@ -32,6 +34,17 @@ const columns: Column<Persona>[] = [
   { key: 'persona_lane', label: 'Lane', sortable: true, className: 'hidden md:table-cell' },
   { key: 'persona_status', label: 'Status', sortable: true, render: (p) => <StatusBadge status={p.persona_status} /> },
   { key: 'next_step', label: 'Next Step', className: 'max-w-48 truncate text-xs hidden xl:table-cell' },
+  {
+    key: 'persona_id' as keyof Persona,
+    label: 'Actions',
+    className: 'w-40',
+    render: (p) => (
+      <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
+        <GeneratorDialog accountName={p.account} personaName={p.name} defaultType="email" />
+        <EmailComposer accountName={p.account} personaName={p.name} />
+      </div>
+    ),
+  },
 ];
 
 export default function PersonasPage() {

@@ -20,6 +20,10 @@ import { StatusBadge } from '@/components/status-badge';
 import { CopyButton } from '@/components/copy-button';
 import { EmptyState } from '@/components/empty-state';
 import { ArrowLeft, ExternalLink, Users, Waves, FileText, Route, Activity, Calendar } from 'lucide-react';
+import { LogActivityDialog } from '@/components/log-activity-dialog';
+import { BookMeetingDialog } from '@/components/book-meeting-dialog';
+import { GeneratorDialog } from '@/components/ai/generator-dialog';
+import { EmailComposer } from '@/components/email/composer';
 
 export function generateStaticParams() {
   return getAccounts().map((a) => ({ slug: slugify(a.name) }));
@@ -66,10 +70,19 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                 {account.parent_brand} &middot; {account.vertical} &middot; {account.signal_type}
               </p>
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <Badge variant="outline" className="font-mono">{account.tier}</Badge>
               <Badge variant="outline" className="font-mono">Score: {account.priority_score}</Badge>
               <Badge variant="secondary">{account.owner}</Badge>
+              <BookMeetingDialog
+                accountName={account.name}
+                personas={personas.map((p) => ({ name: p.name, priority: p.priority }))}
+                calendlyLink={process.env.NEXT_PUBLIC_CALENDLY_LINK}
+              />
+              <LogActivityDialog
+                accountName={account.name}
+                personas={personas.map((p) => ({ name: p.name }))}
+              />
             </div>
           </div>
 
@@ -172,7 +185,11 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                       <p className="mt-0.5 text-xs text-[var(--muted-foreground)]">{p.title}</p>
                       <p className="mt-1 text-xs text-[var(--muted-foreground)]">Lane: {p.persona_lane} &middot; {p.role_in_deal} &middot; {p.seniority}</p>
                     </div>
-                    <span className="shrink-0 font-mono text-xs text-[var(--muted-foreground)]">{p.persona_id}</span>
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <GeneratorDialog accountName={account.name} personaName={p.name} defaultType="email" />
+                      <EmailComposer accountName={account.name} personaName={p.name} />
+                      <span className="font-mono text-xs text-[var(--muted-foreground)]">{p.persona_id}</span>
+                    </div>
                   </div>
                   {p.next_step && (
                     <p className="mt-2 text-xs text-[var(--muted-foreground)]">Next: {p.next_step}</p>
@@ -214,6 +231,10 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
             <EmptyState title="No brief available" description="Meeting brief not yet created for this account." />
           ) : (
             <div className="space-y-3">
+              <div className="flex gap-2">
+                <GeneratorDialog accountName={account.name} defaultType="meeting_prep" />
+                <GeneratorDialog accountName={account.name} defaultType="call_script" />
+              </div>
               {[
                 { label: 'Why This Account', value: brief.why_this_account },
                 { label: 'Why Now', value: brief.why_now },
@@ -303,23 +324,28 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
         </TabsContent>
 
         {/* Activity Tab */}
-        <TabsContent value="activity" className="space-y-3">
+        <TabsContent value="activity" className="space-y-4">
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-[var(--muted-foreground)]">{activities.length} logged activities</p>
+            <LogActivityDialog accountName={account.name} personas={personas.map((p) => ({ name: p.name }))} />
+          </div>
           {activities.length === 0 ? (
-            <EmptyState title="No activities yet" description="Activities for this account will appear here." />
+            <EmptyState title="No activities yet" description="Click Log Activity to record an email, call, or meeting." />
           ) : (
-            activities.map((a, i) => (
-              <Card key={i}>
-                <CardContent className="p-4">
+            <div className="relative border-l-2 border-[var(--border)] ml-3 space-y-0">
+              {activities.map((a, i) => (
+                <div key={i} className="relative pl-6 pb-5">
+                  <div className="absolute -left-[5px] top-1 h-2.5 w-2.5 rounded-full bg-[var(--primary)]" />
                   <div className="flex items-center justify-between">
                     <Badge variant="secondary" className="text-xs">{a.activity_type}</Badge>
                     <span className="text-xs text-[var(--muted-foreground)]">{a.activity_date}</span>
                   </div>
                   {a.notes && <p className="mt-1.5 text-sm">{a.notes}</p>}
-                  {a.outcome && <p className="mt-1 text-xs text-[var(--muted-foreground)]">Outcome: {a.outcome}</p>}
-                  {a.next_step && <p className="mt-0.5 text-xs text-[var(--muted-foreground)]">Next: {a.next_step}</p>}
-                </CardContent>
-              </Card>
-            ))
+                  {a.outcome && <p className="mt-1 text-xs">Outcome: {a.outcome}</p>}
+                  {a.next_step && <p className="mt-0.5 text-xs text-[var(--muted-foreground)]">Next: {a.next_step} {a.next_step_due ? `(by ${a.next_step_due})` : ''}</p>}
+                </div>
+              ))}
+            </div>
           )}
         </TabsContent>
       </Tabs>
