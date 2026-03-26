@@ -123,7 +123,7 @@ export function DataTable<T extends object>({
           />
         </div>
       )}
-      <div ref={tableRef} tabIndex={onRowClick ? 0 : undefined} className={cn("rounded-lg border border-[var(--border)] outline-none")} onFocus={() => { if (onRowClick && focusedIndex === null && sorted.length > 0) setFocusedIndex(0); }}>
+      <div ref={tableRef} tabIndex={onRowClick ? 0 : undefined} role="region" aria-label="Data table" className={cn("overflow-x-auto rounded-lg border border-[var(--border)] outline-none")} onFocus={() => { if (onRowClick && focusedIndex === null && sorted.length > 0) setFocusedIndex(0); }}>
         <Table>
           <TableHeader>
             <TableRow>
