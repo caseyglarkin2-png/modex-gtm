@@ -201,7 +201,18 @@ export function Sidebar() {
           </div>
           <span className="truncate">{pageLabel}</span>
         </Link>
-        <div className="ml-auto">
+        <div className="ml-auto flex items-center gap-1">
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="Search"
+            onClick={() => {
+              // Trigger the command palette (Ctrl+K)
+              document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true, bubbles: true }));
+            }}
+          >
+            <Search className="h-4 w-4" />
+          </Button>
           <ThemeToggle />
         </div>
       </div>

@@ -24,6 +24,7 @@ import { LogActivityDialog } from '@/components/log-activity-dialog';
 import { BookMeetingDialog } from '@/components/book-meeting-dialog';
 import { GeneratorDialog } from '@/components/ai/generator-dialog';
 import { EmailComposer } from '@/components/email/composer';
+import { Breadcrumb } from '@/components/breadcrumb';
 
 export function generateStaticParams() {
   return getAccounts().map((a) => ({ slug: slugify(a.name) }));
@@ -52,10 +53,7 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
 
   return (
     <div className="space-y-6">
-      {/* Breadcrumb */}
-      <Link href="/accounts" className="inline-flex items-center gap-1 text-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors">
-        <ArrowLeft className="h-3.5 w-3.5" /> Back to Accounts
-      </Link>
+      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Accounts', href: '/accounts' }, { label: account.name }]} />
 
       {/* Hero Card */}
       <Card>

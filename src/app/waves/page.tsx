@@ -4,6 +4,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { StatusBadge } from '@/components/status-badge';
 import { Waves } from 'lucide-react';
+import { Breadcrumb } from '@/components/breadcrumb';
+
+export const metadata = { title: 'Outreach Waves' };
 
 const WAVE_ACCENT: Record<number, string> = {
   0: 'border-l-red-500',
@@ -22,6 +25,7 @@ export default function WavesPage() {
 
   return (
     <div className="space-y-8">
+      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Outreach Waves' }]} />
       <div>
         <h1 className="text-2xl font-bold tracking-tight">Outreach Waves</h1>
         <p className="text-sm text-[var(--muted-foreground)]">

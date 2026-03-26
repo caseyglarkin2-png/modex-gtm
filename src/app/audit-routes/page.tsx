@@ -5,12 +5,16 @@ import { Badge } from '@/components/ui/badge';
 import { StatusBadge } from '@/components/status-badge';
 import { CopyButton } from '@/components/copy-button';
 import { ExternalLink } from 'lucide-react';
+import { Breadcrumb } from '@/components/breadcrumb';
+
+export const metadata = { title: 'Audit Routes' };
 
 export default function AuditRoutesPage() {
   const routes = getAuditRoutes();
 
   return (
     <div className="space-y-6">
+      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Audit Routes' }]} />
       <div>
         <h1 className="text-2xl font-bold tracking-tight">Audit Routes ({routes.length})</h1>
         <p className="text-sm text-[var(--muted-foreground)]">

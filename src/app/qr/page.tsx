@@ -2,12 +2,16 @@ import { getQrAssets } from '@/lib/data';
 import { Card, CardContent } from '@/components/ui/card';
 import { CopyButton } from '@/components/copy-button';
 import { QrCode, ExternalLink } from 'lucide-react';
+import { Breadcrumb } from '@/components/breadcrumb';
+
+export const metadata = { title: 'QR Assets' };
 
 export default function QrPage() {
   const assets = getQrAssets();
 
   return (
     <div className="space-y-6">
+      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'QR Assets' }]} />
       <div>
         <h1 className="text-2xl font-bold tracking-tight">QR Assets ({assets.length})</h1>
         <p className="text-sm text-[var(--muted-foreground)]">

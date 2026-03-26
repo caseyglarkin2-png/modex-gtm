@@ -10,6 +10,7 @@ import { StatusBadge } from '@/components/status-badge';
 import { EmptyState } from '@/components/empty-state';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Breadcrumb } from '@/components/breadcrumb';
 import { ClipboardList, Smartphone, CheckCheck, Clock, ExternalLink, CloudOff } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -109,6 +110,7 @@ export default function QueuePage() {
 
   return (
     <div className="space-y-6">
+      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Jake Queue' }]} />
       <div>
         <h1 className="text-2xl font-bold tracking-tight">Jake Queue</h1>
         <p className="text-sm text-[var(--muted-foreground)]">Follow-up queue. Local captures sync automatically when online.</p>

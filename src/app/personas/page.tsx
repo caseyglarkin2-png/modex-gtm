@@ -8,6 +8,7 @@ import { StatusBadge } from '@/components/status-badge';
 import { ExternalLink } from 'lucide-react';
 import { GeneratorDialog } from '@/components/ai/generator-dialog';
 import { EmailComposer } from '@/components/email/composer';
+import { Breadcrumb } from '@/components/breadcrumb';
 
 type Persona = (typeof personasData)[number];
 
@@ -53,6 +54,7 @@ export default function PersonasPage() {
 
   return (
     <div className="space-y-6">
+      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Personas' }]} />
       <div>
         <h1 className="text-2xl font-bold tracking-tight">Personas ({personas.length})</h1>
         <p className="text-sm text-[var(--muted-foreground)]">

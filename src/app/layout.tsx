@@ -10,7 +10,10 @@ import { KeyboardShortcuts } from "@/components/keyboard-shortcuts";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
-  title: "Modex RevOps OS",
+  title: {
+    default: "Modex RevOps OS",
+    template: "%s — Modex RevOps OS",
+  },
   description: "YardFlow / FreightRoll MODEX 2026 RevOps Operating System",
   openGraph: {
     title: "Modex RevOps OS",

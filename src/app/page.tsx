@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getAccounts, getPersonas, getOutreachWaves, getMeetingBriefs, getActivities, getMeetings, getMobileCaptures } from '@/lib/data';
+import { Breadcrumb } from '@/components/breadcrumb';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { BandBadge } from '@/components/band-badge';
@@ -76,6 +77,7 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-8">
+      <Breadcrumb items={[{ label: 'Dashboard' }]} />
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>

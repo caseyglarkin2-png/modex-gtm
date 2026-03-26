@@ -5,14 +5,17 @@ import { Badge } from '@/components/ui/badge';
 import { EmptyState } from '@/components/empty-state';
 import { Button } from '@/components/ui/button';
 import { Activity, ArrowRight } from 'lucide-react';
+import { Breadcrumb } from '@/components/breadcrumb';
+
+export const metadata = { title: 'Activities' };
 
 export default function ActivitiesPage() {
   const activities = getActivities();
 
   return (
     <div className="space-y-6">
+      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Activities' }]} />
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">Activities ({activities.length})</h1>
         <p className="text-sm text-[var(--muted-foreground)]">
           All outreach and engagement activities logged by owner.
         </p>

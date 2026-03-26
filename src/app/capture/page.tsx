@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Smartphone, Wifi, WifiOff, RefreshCw } from 'lucide-react';
 import { queuePush, queuePending, queueFlush } from '@/lib/offline-queue';
+import { Breadcrumb } from '@/components/breadcrumb';
 
 interface CaptureEntry {
   account: string;
@@ -83,6 +84,7 @@ export default function CapturePage() {
 
   return (
     <div className="space-y-6">
+      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Mobile Capture' }]} />
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Mobile Capture</h1>

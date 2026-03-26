@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { StatusBadge } from '@/components/status-badge';
 import { Button } from '@/components/ui/button';
 import { Lightbulb, CheckCircle2 } from 'lucide-react';
+import { Breadcrumb } from '@/components/breadcrumb';
 import { toast } from 'sonner';
 
 const allItems = getActionableIntel();
@@ -39,6 +40,7 @@ export default function IntelPage() {
 
   return (
     <div className="space-y-6">
+      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Actionable Intel' }]} />
       <div>
         <h1 className="text-2xl font-bold tracking-tight">Actionable Intel ({items.length})</h1>
         <p className="text-sm text-[var(--muted-foreground)]">

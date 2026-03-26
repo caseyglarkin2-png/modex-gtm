@@ -3,12 +3,16 @@ import { getMeetingBriefs, slugify } from '@/lib/data';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { FileText, ArrowRight } from 'lucide-react';
+import { Breadcrumb } from '@/components/breadcrumb';
+
+export const metadata = { title: 'Meeting Briefs' };
 
 export default function BriefsPage() {
   const briefs = getMeetingBriefs();
 
   return (
     <div className="space-y-6">
+      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Meeting Briefs' }]} />
       <div>
         <h1 className="text-2xl font-bold tracking-tight">Meeting Briefs ({briefs.length})</h1>
         <p className="text-sm text-[var(--muted-foreground)]">

@@ -10,6 +10,7 @@ import { EmptyState } from '@/components/empty-state';
 import { Button } from '@/components/ui/button';
 import { BookMeetingDialog } from '@/components/book-meeting-dialog';
 import { CalendarCheck, ArrowRight } from 'lucide-react';
+import { Breadcrumb } from '@/components/breadcrumb';
 
 interface MeetingRow {
   _idx: number;
@@ -51,6 +52,7 @@ export default function MeetingsPage() {
 
   return (
     <div className="space-y-6">
+      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Meetings' }]} />
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Meetings ({meetings.length})</h1>

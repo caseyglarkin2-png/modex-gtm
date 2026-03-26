@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { CopyButton } from '@/components/copy-button';
 import { Search } from 'lucide-react';
+import { Breadcrumb } from '@/components/breadcrumb';
 
 type SearchEntry = (typeof data)[number];
 
@@ -20,6 +21,7 @@ export default function SearchPage() {
 
   return (
     <div className="space-y-6">
+      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Search Strings' }]} />
       <div>
         <h1 className="text-2xl font-bold tracking-tight">Search Strings ({strings.length})</h1>
         <p className="text-sm text-[var(--muted-foreground)]">

@@ -6,6 +6,7 @@ import personasData from '@/lib/data/personas.json';
 import { DataTable, type Column } from '@/components/data-table';
 import { BandBadge } from '@/components/band-badge';
 import { StatusBadge } from '@/components/status-badge';
+import { Breadcrumb } from '@/components/breadcrumb';
 
 type Account = (typeof accountsData)[number] & { persona_count: number; slug: string };
 
@@ -37,8 +38,8 @@ export default function AccountsPage() {
 
   return (
     <div className="space-y-6">
+      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Accounts' }]} />
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">Accounts ({accounts.length})</h1>
         <p className="text-sm text-[var(--muted-foreground)]">
           All target accounts ranked by priority score. Click any row to view details.
         </p>
