@@ -13,7 +13,7 @@ export interface EmailPayload {
 
 function getClient() {
   if (!API_KEY) throw new Error('SENDGRID_API_KEY is not set. Add it to your Vercel environment variables.');
-  sgMail.setApiKey(API_KEY);
+  sgMail.setApiKey(API_KEY.trim());
   return sgMail;
 }
 
