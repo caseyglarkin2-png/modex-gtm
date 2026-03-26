@@ -34,15 +34,29 @@ async function sendViaSendGrid(payload: EmailPayload) {
 async function sendViaResend(payload: EmailPayload) {
   if (!RESEND_KEY) throw new Error('RESEND_API_KEY not set');
   const resend = new Resend(RESEND_KEY);
-  const { data, error } = await resend.emails.send({
-    from: `${FROM_NAME} <${FROM_EMAIL}>`,
-    to: payload.to,
-    cc: payload.cc || undefined,
-    subject: payload.subject,
-    html: payload.html,
-  });
-  if (error) throw new Error(error.message);
-  return { provider: 'resend' as const, id: data?.id ?? null };
+  // Try custom domain first; fall back to Resend's shared domain if not verified yet
+  const fromAddresses = [
+    `${FROM_NAME} <${FROM_EMAIL}>`,
+    `${FROM_NAME} <onboarding@resend.dev>`,
+  ];
+  let lastErr: Error | null = null;
+  for (const from of fromAddresses) {
+    const { data, error } = await resend.emails.send({
+      from,
+      to: payload.to,
+      cc: payload.cc || undefined,
+      subject: payload.subject,
+      html: payload.html,
+    });
+    if (!error && data?.id) {
+      return { provider: 'resend' as const, id: data.id };
+    }
+    lastErr = new Error(error?.message ?? 'Unknown Resend error');
+    // If domain not verified, try the fallback address
+    if (error?.message?.includes('not verified') || error?.message?.includes('not found')) continue;
+    throw lastErr;
+  }
+  throw lastErr ?? new Error('Resend send failed');
 }
 
 // ── Public API (try SendGrid → Resend) ──────────────────────────────
