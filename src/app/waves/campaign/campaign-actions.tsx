@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
-import { Zap, Copy, Send, RefreshCw, ExternalLink } from 'lucide-react';
+import { Zap, Copy, Send, RefreshCw, ExternalLink, CheckCircle } from 'lucide-react';
 
 interface CampaignActionsProps {
   accountName: string;
@@ -28,6 +28,7 @@ export function CampaignActions({
 }: CampaignActionsProps) {
   const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
   const [generatedBody, setGeneratedBody] = useState('');
   const [generatedSubject, setGeneratedSubject] = useState('');
 
@@ -60,21 +61,24 @@ export function CampaignActions({
     if (!personaEmail) { toast.error('No email address'); return; }
     setSending(true);
     try {
+      // Append calendar booking link to the email body
+      const bodyWithCTA = generatedBody + `\n\nBook 30 minutes here: ${calendarLink}`;
       const res = await fetch('/api/email/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           to: personaEmail,
           subject: generatedSubject || subjectLine,
-          bodyHtml: generatedBody,
+          bodyHtml: bodyWithCTA,
           accountName,
           personaName,
         }),
       });
       if (res.ok) {
         toast.success(`Sent to ${personaEmail}`);
+        setSent(true);
       } else {
-        toast.success('Logged — delivery pending');
+        toast.error('Send failed — check logs');
       }
     } catch {
       toast.error('Send failed');
@@ -91,11 +95,16 @@ export function CampaignActions({
 
   return (
     <div className="flex items-center gap-1.5 pt-1">
+      {sent && (
+        <span className="flex items-center gap-1 text-[11px] text-emerald-600 font-medium">
+          <CheckCircle className="h-3 w-3" /> Sent
+        </span>
+      )}
       <Button variant="outline" size="sm" className="h-7 text-[11px] gap-1" onClick={generate} disabled={loading}>
         {loading ? <RefreshCw className="h-3 w-3 animate-spin" /> : <Zap className="h-3 w-3" />}
         {generatedBody ? 'Regen' : 'Generate'}
       </Button>
-      {generatedBody && (
+      {generatedBody && !sent && (
         <>
           <Button variant="outline" size="sm" className="h-7 text-[11px] gap-1" onClick={copyEmail}>
             <Copy className="h-3 w-3" /> Copy

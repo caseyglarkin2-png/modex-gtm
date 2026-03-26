@@ -53,20 +53,20 @@ Sender: Casey Larkin, GTM Lead at YardFlow by FreightRoll
 ${ctx.notes ? `- Additional context: ${ctx.notes}` : ''}
 
 Goal: Book a 30-minute Network Audit call to map their facilities and build a board-ready rollout plan.
-Secondary hook: MODEX 2026 in Atlanta (March 16–19, 2026) as an in-person meeting opportunity.
+Secondary hook: Following MODEX 2026 in Atlanta (March 16–19) — reference it as a recent industry event where YardFlow presented yard network data from 24 live sites.
 
 Output: Only the email body (no subject line, no sign-off label). Start with a compelling first sentence.`;
 }
 
 export function buildFollowUpEmailPrompt(ctx: PromptContext): string {
-  return `Write a follow-up email after a meeting at MODEX 2026.
+  return `Write a follow-up email after a recent interaction (meeting, booth visit, or introduction) following MODEX 2026.
 
 ${getYardFlowPromptContext()}
 
 Sender: Casey Larkin, GTM Lead at YardFlow by FreightRoll
 - Target company: ${ctx.accountName}
 - Contact: ${ctx.personaName ?? 'decision maker'}${ctx.personaTitle ? ` (${ctx.personaTitle})` : ''}
-- Previous interaction: ${ctx.previousMeeting ?? 'brief booth conversation at MODEX 2026'}
+- Previous interaction: ${ctx.previousMeeting ?? 'brief connection around MODEX 2026 (March 16–19, Atlanta)'}
 - Tone: ${TONE_DESCRIPTIONS[ctx.tone]}
 - Length: ${LENGTH_RANGES[ctx.length]}
 ${ctx.notes ? `- Key talking points from meeting: ${ctx.notes}` : ''}
@@ -87,7 +87,7 @@ Sender: Casey Larkin, GTM Lead at YardFlow by FreightRoll
 - Length: ${LENGTH_RANGES[ctx.length]} (LinkedIn DMs must be concise — prefer the short end)
 ${ctx.notes ? `- Context: ${ctx.notes}` : ''}
 
-Goal: Start a conversation and mention MODEX 2026 or a Network Audit as a meeting opportunity.
+Goal: Start a conversation. Reference MODEX 2026 (just happened in Atlanta) as shared context if relevant, or lead with a Network Audit offer.
 
 Output: Only the message text, no salutation label, no signature.`;
 }
@@ -103,7 +103,7 @@ Caller: Casey Larkin, GTM Lead at YardFlow by FreightRoll
 - Length: ${LENGTH_RANGES[ctx.length]}
 ${ctx.notes ? `- Additional context: ${ctx.notes}` : ''}
 
-Goal: Secure a 30-minute Network Audit call. Use MODEX 2026 (Atlanta, March 16–19) as secondary hook.
+Goal: Secure a 30-minute Network Audit call. Reference MODEX 2026 (just wrapped in Atlanta) as shared industry context if relevant.
 
 Structure:
 1. Quick opener (10 sec)
@@ -122,7 +122,7 @@ ${getYardFlowPromptContext()}
 
 Account: ${ctx.accountName} (${ctx.bandLabel ?? 'Tier 1'} priority, score: ${ctx.score ?? 'N/A'})
 - Key contact: ${ctx.personaName ?? 'TBD'}${ctx.personaTitle ? ` — ${ctx.personaTitle}` : ''}
-- Meeting type: MODEX 2026 trade-show meeting or Network Audit call
+- Meeting type: Network Audit call or post-MODEX 2026 follow-up
 ${ctx.notes ? `- Context: ${ctx.notes}` : ''}
 
 Create a structured brief with:

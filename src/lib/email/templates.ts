@@ -31,7 +31,7 @@ export function wrapHtml(bodyText: string, accountName: string): string {
         <p style="margin:0; font-size:13px; color:#64748b;">
           Casey Larkin — <strong>YardFlow by FreightRoll</strong><br />
           The First Yard Network System — standardized operating protocol for deterministic throughput<br />
-          <a href="https://yardflow.ai" style="color:#22d3ee;">yardflow.ai</a> · <a href="https://yardflow.ai/roi" style="color:#22d3ee;">Run ROI</a> · <a href="https://yardflow.ai" style="color:#22d3ee;">Book a Network Audit</a>
+          <a href="https://yardflow.ai" style="color:#22d3ee;">yardflow.ai</a> · <a href="https://yardflow.ai/roi" style="color:#22d3ee;">Run ROI</a> · <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW" style="color:#22d3ee;">Book a Network Audit</a>
         </p>
       </td>
     </tr>
