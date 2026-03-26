@@ -19,18 +19,39 @@ const SequenceRequestSchema = z.object({
 });
 
 function parseEmailContent(raw: string): { subject: string; body: string } {
-  const subjectMatch = raw.match(/^SUBJECT:\s*(.+)/m);
+  // Case-insensitive subject parsing (model may write SUBJECT:, Subject:, subject:)
+  const subjectMatch = raw.match(/^subject:\s*(.+)/im);
   const subject = subjectMatch ? subjectMatch[1].trim() : '';
+
+  // Find body after --- separator, or after subject line
   const bodyStart = raw.indexOf('---');
-  let body = bodyStart >= 0 ? raw.slice(bodyStart + 3).trim() : raw.trim();
+  let body: string;
+  if (bodyStart >= 0) {
+    body = raw.slice(bodyStart + 3).trim();
+  } else if (subjectMatch) {
+    // No --- separator: strip the subject line and take the rest
+    body = raw.slice(raw.indexOf(subjectMatch[0]) + subjectMatch[0].length).trim();
+  } else {
+    body = raw.trim();
+  }
+
+  // Strip stray "subject:" if it leaked into the body
+  body = body.replace(/^subject:\s*.+\n{1,2}/im, '').trim();
 
   // Strip AI-generated greetings (voice rules say: no greetings)
+  // Catches "Hi Name,", "Hey Name,", "Hello Name,", "Dear Name,", and bare "Name,"
   body = body
     .replace(/^(Hi|Hey|Hello|Dear)\s+[A-Z][a-z]+,?\s*\n{1,2}/i, '')
+    .replace(/^[A-Z][a-z]+,\s*\n{1,2}/, '')
     .trim();
 
+  // Strip smart quotes: curly apostrophes → straight, curly double quotes → straight
+  body = body
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u201C\u201D]/g, '"');
+
   // Strip em dashes (voice rules say: no em dashes)
-  body = body.replace(/\u2014/g, ',').replace(/--/g, ',');
+  body = body.replace(/\u2014/g, ', ').replace(/--/g, ', ');
 
   // Strip AI-generated sign-offs (Casey signs via the email template)
   body = body
@@ -41,7 +62,12 @@ function parseEmailContent(raw: string): { subject: string; body: string } {
     .replace(/\n{1,3}Casey\s*$/i, '')
     .trim();
 
-  return { subject, body };
+  // Also normalize subject: strip smart quotes
+  const cleanSubject = subject
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u201C\u201D]/g, '"');
+
+  return { subject: cleanSubject, body };
 }
 
 export async function POST(req: NextRequest) {
