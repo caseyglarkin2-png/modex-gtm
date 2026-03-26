@@ -52,8 +52,9 @@ Sender: Casey Larkin, GTM Lead at YardFlow by FreightRoll
 - Length: ${LENGTH_RANGES[ctx.length]}
 ${ctx.notes ? `- Additional context: ${ctx.notes}` : ''}
 
-Goal: Book a 30-minute Network Audit call to map their facilities and build a board-ready rollout plan.
-Secondary hook: Following MODEX 2026 in Atlanta (March 16–19) — reference it as a recent industry event where YardFlow presented yard network data from 24 live sites.
+Goal: Book a 30-minute meeting at MODEX 2026 (Atlanta, April 13–16) to walk through their yard network and build a board-ready rollout plan.
+MODEX context: MODEX 2026 is coming up April 13–16 in Atlanta. YardFlow will be on-site with live users from the network — prospects can talk directly to operators running YardFlow across 24 facilities. Use this as the hook to meet in person.
+Meeting time suggestions: Suggest specific windows — e.g., "Tuesday April 14 at 10am, 1pm, or 3pm" or offer flexibility for other days during the show. Do NOT mention a calendar link. The goal is to get them to reply with a time.
 
 Output: Only the email body (no subject line, no sign-off label). Start with a compelling first sentence.`;
 }
@@ -66,12 +67,13 @@ ${getYardFlowPromptContext()}
 Sender: Casey Larkin, GTM Lead at YardFlow by FreightRoll
 - Target company: ${ctx.accountName}
 - Contact: ${ctx.personaName ?? 'decision maker'}${ctx.personaTitle ? ` (${ctx.personaTitle})` : ''}
-- Previous interaction: ${ctx.previousMeeting ?? 'brief connection around MODEX 2026 (March 16–19, Atlanta)'}
+- Previous interaction: ${ctx.previousMeeting ?? 'initial outreach ahead of MODEX 2026 (April 13–16, Atlanta)'}
 - Tone: ${TONE_DESCRIPTIONS[ctx.tone]}
 - Length: ${LENGTH_RANGES[ctx.length]}
 ${ctx.notes ? `- Key talking points from meeting: ${ctx.notes}` : ''}
 
-Goal: Move the deal forward — schedule a Network Audit call to map facilities and build rollout plan.
+Goal: Move the deal forward — lock in a meeting at MODEX 2026 (Atlanta, April 13–16). YardFlow will have live users on-site who can speak to real deployment results.
+Suggest specific meeting windows — prioritize Tuesday April 14 (10am, 1pm, or 3pm) but offer flexibility for other days during the show. Do NOT include a calendar link.
 
 Output: Only the email body. Start with a reference to your last interaction.`;
 }
@@ -87,7 +89,7 @@ Sender: Casey Larkin, GTM Lead at YardFlow by FreightRoll
 - Length: ${LENGTH_RANGES[ctx.length]} (LinkedIn DMs must be concise — prefer the short end)
 ${ctx.notes ? `- Context: ${ctx.notes}` : ''}
 
-Goal: Start a conversation. Reference MODEX 2026 (just happened in Atlanta) as shared context if relevant, or lead with a Network Audit offer.
+Goal: Start a conversation. Reference MODEX 2026 (coming up April 13–16 in Atlanta) as shared context — YardFlow will have live users on-site. Lead with the meeting opportunity.
 
 Output: Only the message text, no salutation label, no signature.`;
 }
@@ -103,7 +105,7 @@ Caller: Casey Larkin, GTM Lead at YardFlow by FreightRoll
 - Length: ${LENGTH_RANGES[ctx.length]}
 ${ctx.notes ? `- Additional context: ${ctx.notes}` : ''}
 
-Goal: Secure a 30-minute Network Audit call. Reference MODEX 2026 (just wrapped in Atlanta) as shared industry context if relevant.
+Goal: Secure a 30-minute meeting at MODEX 2026 (April 13–16 in Atlanta). YardFlow will have live users on-site — offer the chance to hear directly from operators running YardFlow at 24 facilities. Suggest Tuesday April 14 as a meeting window.
 
 Structure:
 1. Quick opener (10 sec)
@@ -122,7 +124,7 @@ ${getYardFlowPromptContext()}
 
 Account: ${ctx.accountName} (${ctx.bandLabel ?? 'Tier 1'} priority, score: ${ctx.score ?? 'N/A'})
 - Key contact: ${ctx.personaName ?? 'TBD'}${ctx.personaTitle ? ` — ${ctx.personaTitle}` : ''}
-- Meeting type: Network Audit call or post-MODEX 2026 follow-up
+- Meeting type: In-person meeting at MODEX 2026 (Atlanta, April 13–16) or Network Audit call
 ${ctx.notes ? `- Context: ${ctx.notes}` : ''}
 
 Create a structured brief with:
@@ -203,19 +205,23 @@ Generate ONLY valid JSON matching this schema — no markdown, no commentary:
 export function buildOutreachSequencePrompt(ctx: PromptContext, step: 'initial_email' | 'follow_up_1' | 'follow_up_2' | 'breakup'): string {
   const stepInstructions: Record<string, string> = {
     initial_email: `Write the FIRST outreach email in a 4-touch sequence. This is cold — the prospect has never heard from us.
-Hook with their specific throughput/yard constraint, connect it to YardFlow's proof (24 sites, $1M+ per-site), and ask for a 30-minute Network Audit.
+Hook with their specific throughput/yard constraint, connect it to YardFlow's proof (24 sites, $1M+ per-site).
+MODEX 2026 is coming up April 13–16 in Atlanta. YardFlow will be on-site with live users from the network — prospects can sit down with operators actually running YardFlow across 24 facilities. Use this as the hook.
+Suggest specific meeting windows at MODEX — e.g., "Tuesday April 14 at 10am, 1pm, or 3pm" or offer flexibility for other days during the show. Do NOT include a calendar link or URL. The goal is to get them to reply with a time they work.
 Subject line + body. Subject must be < 60 chars, personalized, no spam words.`,
     follow_up_1: `Write follow-up #1 (sent 3 days after initial email with no reply).
 Shorter than the first. Add ONE new proof point or insight they haven't seen — use a stat, module name, or customer quote.
 Reference the first email indirectly ("circling back" is banned — find a better hook).
+Reiterate the MODEX meeting opportunity (April 13–16, Atlanta) — mention that live YardFlow users will be on-site and available to answer questions directly. Suggest a couple time slots on Tuesday April 14.
 Subject line + body.`,
     follow_up_2: `Write follow-up #2 (sent 5 days after follow-up #1 with no reply).
 Switch angle entirely — lead with the variance tax concept, a different proof point, or a micro-case-study (e.g., "48→24 min drop & hook" or "headcount neutral while adding volume").
+MODEX is getting close — create urgency around locking in a meeting window. Our schedule is filling up. Suggest a specific slot on Tuesday April 14.
 This is your last real shot before the breakup. Make it count.
 Subject line + body.`,
     breakup: `Write a breakup email (sent 7 days after follow-up #2 with no reply).
 Short, gracious, zero pressure. Plant a seed for future conversation.
-Mention the Network Audit is always available when timing is right.
+Mention the Network Audit is always available when timing is right. If MODEX hasn't happened yet, leave the door open for a walk-up conversation on-site.
 Subject line + body.`,
   };
 
