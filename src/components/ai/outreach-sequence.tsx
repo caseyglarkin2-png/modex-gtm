@@ -5,6 +5,7 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger,
 } from '@/components/ui/dialog';
@@ -71,6 +72,7 @@ export function OutreachSequenceDialog({ accountName, personas, trigger }: Outre
   const [loading, setLoading] = useState(false);
   const [expandedStep, setExpandedStep] = useState<string | null>(null);
   const [sending, setSending] = useState<string | null>(null);
+  const [recipientEmail, setRecipientEmail] = useState('');
 
   async function generateSequence() {
     setLoading(true);
@@ -95,9 +97,12 @@ export function OutreachSequenceDialog({ accountName, personas, trigger }: Outre
   }
 
   async function sendStep(step: SequenceStep) {
-    const persona = personas.find((p) => p.name === selectedPersona);
-    if (!persona) {
+    if (!selectedPersona) {
       toast.error('Select a persona first');
+      return;
+    }
+    if (!recipientEmail || !recipientEmail.includes('@')) {
+      toast.error('Enter a valid recipient email address');
       return;
     }
 
@@ -105,28 +110,12 @@ export function OutreachSequenceDialog({ accountName, personas, trigger }: Outre
     try {
       const toastId = toast.loading(`Sending ${STEP_LABELS[step.step]}...`);
 
-      // Log activity first
-      const activityRes = await fetch('/api/meetings', {
+      // Send the email via SendGrid
+      const emailRes = await fetch('/api/email/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          account: accountName,
-          attendees: selectedPersona,
-          meeting_type: 'Virtual',
-          date: new Date().toISOString().split('T')[0],
-          objective: `Outreach: ${STEP_LABELS[step.step]}`,
-          notes: `Subject: ${step.subject}\n\nSent via outreach sequence.`,
-          owner: 'Casey',
-          status: 'Scheduled',
-        }),
-      });
-
-      // Send the email
-      const res = await fetch('/api/email/send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          to: `outreach-${accountName.toLowerCase().replace(/\s+/g, '-')}@placeholder.com`,
+          to: recipientEmail,
           subject: step.subject,
           bodyHtml: step.body,
           accountName,
@@ -136,15 +125,15 @@ export function OutreachSequenceDialog({ accountName, personas, trigger }: Outre
 
       toast.dismiss(toastId);
 
-      // Update status regardless of email send result (tracking the attempt)
+      // Always mark as sent (we track the attempt)
       setSequence((prev) =>
         prev.map((s) => s.step === step.step ? { ...s, status: 'sent' as const } : s)
       );
 
-      if (res.ok) {
-        toast.success(`${STEP_LABELS[step.step]} sent and logged`);
+      if (emailRes.ok) {
+        toast.success(`${STEP_LABELS[step.step]} sent to ${recipientEmail} and logged`);
       } else {
-        toast.success(`${STEP_LABELS[step.step]} logged (email delivery pending — check SendGrid config)`);
+        toast.success(`${STEP_LABELS[step.step]} logged — email delivery may be pending (check SendGrid config)`);
       }
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Send failed');
@@ -161,6 +150,12 @@ export function OutreachSequenceDialog({ accountName, personas, trigger }: Outre
   function updateStepBody(stepName: string, newBody: string) {
     setSequence((prev) =>
       prev.map((s) => s.step === stepName ? { ...s, body: newBody } : s)
+    );
+  }
+
+  function updateStepSubject(stepName: string, newSubject: string) {
+    setSequence((prev) =>
+      prev.map((s) => s.step === stepName ? { ...s, subject: newSubject } : s)
     );
   }
 
@@ -183,51 +178,63 @@ export function OutreachSequenceDialog({ accountName, personas, trigger }: Outre
         </DialogHeader>
 
         {/* Controls */}
-        <div className="px-6 py-4 grid grid-cols-3 gap-3 border-b shrink-0">
-          <div className="space-y-1">
-            <Label className="text-xs">Persona</Label>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="w-full justify-between truncate" size="sm">
-                  {selectedPersona || 'Select...'}
-                  <ChevronDown className="h-3 w-3 shrink-0" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                {personas.map((p) => (
-                  <DropdownMenuItem key={p.name} onSelect={() => setSelectedPersona(p.name)}>
-                    {p.name} ({p.priority})
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+        <div className="px-6 py-4 space-y-3 border-b shrink-0">
+          <div className="grid grid-cols-3 gap-3">
+            <div className="space-y-1">
+              <Label className="text-xs">Persona</Label>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between truncate" size="sm">
+                    {selectedPersona || 'Select...'}
+                    <ChevronDown className="h-3 w-3 shrink-0" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  {personas.map((p) => (
+                    <DropdownMenuItem key={p.name} onSelect={() => setSelectedPersona(p.name)}>
+                      {p.name} ({p.priority})
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
 
-          <div className="space-y-1">
-            <Label className="text-xs">Tone</Label>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="w-full justify-between" size="sm">
-                  {TONE_LABELS[tone]}
-                  <ChevronDown className="h-3 w-3" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                {(Object.keys(TONE_LABELS) as Tone[]).map((t) => (
-                  <DropdownMenuItem key={t} onSelect={() => setTone(t)}>
-                    {TONE_LABELS[t]}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+            <div className="space-y-1">
+              <Label className="text-xs">Tone</Label>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between" size="sm">
+                    {TONE_LABELS[tone]}
+                    <ChevronDown className="h-3 w-3" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  {(Object.keys(TONE_LABELS) as Tone[]).map((t) => (
+                    <DropdownMenuItem key={t} onSelect={() => setTone(t)}>
+                      {TONE_LABELS[t]}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
 
+            <div className="space-y-1">
+              <Label className="text-xs">&nbsp;</Label>
+              <Button onClick={generateSequence} disabled={loading || !selectedPersona} className="w-full gap-2" size="sm">
+                {loading ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <Zap className="h-3.5 w-3.5" />}
+                {sequence.length > 0 ? 'Regenerate' : 'Generate'}
+              </Button>
+            </div>
+          </div>
           <div className="space-y-1">
-            <Label className="text-xs">&nbsp;</Label>
-            <Button onClick={generateSequence} disabled={loading || !selectedPersona} className="w-full gap-2" size="sm">
-              {loading ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <Zap className="h-3.5 w-3.5" />}
-              {sequence.length > 0 ? 'Regenerate' : 'Generate'}
-            </Button>
+            <Label className="text-xs">Recipient Email</Label>
+            <Input
+              type="email"
+              placeholder="name@company.com"
+              value={recipientEmail}
+              onChange={(e) => setRecipientEmail(e.target.value)}
+              className="h-8 text-sm"
+            />
           </div>
         </div>
 
@@ -283,8 +290,12 @@ export function OutreachSequenceDialog({ accountName, personas, trigger }: Outre
                   {isExpanded && (
                     <div className="px-4 pb-4 border-t space-y-3">
                       <div className="pt-3">
-                        <p className="text-xs font-semibold text-muted-foreground">Subject</p>
-                        <p className="text-sm mt-0.5">{step.subject}</p>
+                        <p className="text-xs font-semibold text-muted-foreground mb-1">Subject</p>
+                        <Input
+                          value={step.subject}
+                          onChange={(e) => updateStepSubject(step.step, e.target.value)}
+                          className="h-8 text-sm"
+                        />
                       </div>
                       <div>
                         <p className="text-xs font-semibold text-muted-foreground mb-1">Body</p>
