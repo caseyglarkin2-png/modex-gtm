@@ -74,10 +74,24 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
               <Badge variant="outline" className="font-mono">{account.tier}</Badge>
               <Badge variant="outline" className="font-mono">Score: {account.priority_score}</Badge>
               <Badge variant="secondary">{account.owner}</Badge>
-              <OnePagerDialog accountName={account.name} />
+              <OnePagerDialog
+                accountName={account.name}
+                trigger={
+                  <Button size="sm" variant="outline" className="gap-1.5 border-blue-500/30 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950">
+                    <FileText className="h-3.5 w-3.5" />
+                    One-Pager
+                  </Button>
+                }
+              />
               <OutreachSequenceDialog
                 accountName={account.name}
                 personas={personas.map((p) => ({ name: p.name, title: p.title ?? undefined, priority: p.priority }))}
+                trigger={
+                  <Button size="sm" variant="outline" className="gap-1.5 border-amber-500/30 text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950">
+                    <Activity className="h-3.5 w-3.5" />
+                    Outreach
+                  </Button>
+                }
               />
               <BookMeetingDialog
                 accountName={account.name}
@@ -188,6 +202,11 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                         <StatusBadge status={p.persona_status} />
                       </div>
                       <p className="mt-0.5 text-xs text-[var(--muted-foreground)]">{p.title}</p>
+                      {p.email && (
+                        <p className="mt-0.5 text-xs">
+                          <CopyButton text={p.email} className="text-[var(--primary)] hover:underline" />
+                        </p>
+                      )}
                       <p className="mt-1 text-xs text-[var(--muted-foreground)]">Lane: {p.persona_lane} &middot; {p.role_in_deal} &middot; {p.seniority}</p>
                     </div>
                     <div className="flex items-center gap-1.5 shrink-0">

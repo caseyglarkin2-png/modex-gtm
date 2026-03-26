@@ -5,10 +5,12 @@ import personasData from '@/lib/data/personas.json';
 import { DataTable, type Column } from '@/components/data-table';
 import { Badge } from '@/components/ui/badge';
 import { StatusBadge } from '@/components/status-badge';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Mail, Copy } from 'lucide-react';
 import { GeneratorDialog } from '@/components/ai/generator-dialog';
 import { EmailComposer } from '@/components/email/composer';
 import { Breadcrumb } from '@/components/breadcrumb';
+import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
 type Persona = (typeof personasData)[number];
 
@@ -33,6 +35,18 @@ const columns: Column<Persona>[] = [
     render: (p) => <Badge variant={p.priority === 'P1' ? 'default' : 'secondary'} className="text-xs">{p.priority}</Badge>,
   },
   { key: 'persona_lane', label: 'Lane', sortable: true, className: 'hidden md:table-cell' },
+  {
+    key: 'email' as keyof Persona, label: 'Email', sortable: true, className: 'hidden lg:table-cell',
+    render: (p) => p.email ? (
+      <button
+        className="text-xs text-[var(--primary)] hover:underline truncate max-w-40 inline-block"
+        title={`Click to copy: ${p.email}`}
+        onClick={(e) => { e.stopPropagation(); navigator.clipboard.writeText(p.email!); toast.success(`Copied ${p.email}`); }}
+      >
+        {p.email}
+      </button>
+    ) : <span className="text-xs text-[var(--muted-foreground)]">—</span>,
+  },
   { key: 'persona_status', label: 'Status', sortable: true, render: (p) => <StatusBadge status={p.persona_status} /> },
   { key: 'next_step', label: 'Next Step', className: 'max-w-48 truncate text-xs hidden xl:table-cell' },
   {
