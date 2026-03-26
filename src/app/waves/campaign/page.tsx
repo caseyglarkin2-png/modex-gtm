@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { Rocket, Target, Mail, Linkedin, Calendar, FileText, ExternalLink, Zap, Clock, ArrowRight } from 'lucide-react';
 import { CampaignActions } from './campaign-actions';
+import { CampaignToolbar } from './campaign-toolbar';
 
 export const metadata = { title: 'Campaign Command Center' };
 
@@ -233,6 +234,10 @@ export default function CampaignPage() {
                     <Badge className="bg-amber-500/15 text-amber-700 text-[10px]">{intel.trigger}</Badge>
                   </CardTitle>
                   <div className="flex items-center gap-2">
+                    <CampaignToolbar
+                      accountName={account.name}
+                      personas={personas.map(p => ({ name: p.name, title: p.title ?? undefined, priority: p.priority ?? 'P2' }))}
+                    />
                     <Link href={`/accounts/${slugify(account.name)}`}>
                       <Button variant="ghost" size="sm" className="text-xs">View Account →</Button>
                     </Link>
@@ -326,7 +331,10 @@ export default function CampaignPage() {
                 </details>
 
                 {/* Resources row */}
-                <div className="flex items-center gap-3 pt-2 border-t text-xs">
+                <div className="flex items-center gap-3 pt-2 border-t text-xs flex-wrap">
+                  <Link href={`/briefs/${slugify(account.name)}`} className="flex items-center gap-1 text-cyan-600 hover:underline">
+                    <FileText className="h-3 w-3" /> Meeting Brief
+                  </Link>
                   {route?.audit_url && (
                     <a href={route.audit_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-cyan-600 hover:underline">
                       <FileText className="h-3 w-3" /> Audit URL

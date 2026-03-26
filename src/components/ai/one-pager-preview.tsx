@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/dialog';
 import { FileImage, RefreshCw, Copy, Download } from 'lucide-react';
 
-interface OnePagerData {
+export interface OnePagerData {
   headline: string;
   subheadline: string;
   painPoints: string[];
@@ -25,7 +25,7 @@ interface OnePagerPreviewProps {
   trigger?: React.ReactNode;
 }
 
-function OnePagerDocument({ data, accountName }: { data: OnePagerData; accountName: string }) {
+export function OnePagerPreview({ data, accountName }: { data: OnePagerData; accountName: string }) {
   return (
     <div className="one-pager-doc bg-[#0b1a2e] text-white rounded-xl overflow-hidden text-sm">
       {/* Header */}
@@ -143,7 +143,7 @@ function OnePagerDocument({ data, accountName }: { data: OnePagerData; accountNa
   );
 }
 
-function onePagerToHtml(data: OnePagerData, accountName: string): string {
+export function onePagerToHtml(data: OnePagerData, accountName: string): string {
   const painHtml = data.painPoints.map((p) => `<div style="display:flex;gap:8px;font-size:12px;color:#cbd5e1;margin-bottom:8px;line-height:1.5;"><span style="color:#f87171;flex-shrink:0;">⚠</span><span>${p}</span></div>`).join('');
   const stepsHtml = data.solutionSteps.map((s, i) => `<div style="position:relative;padding-left:28px;margin-bottom:${i < data.solutionSteps.length - 1 ? '12' : '0'}px;">
     <div style="position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:50%;border:2px solid rgba(34,211,238,0.7);background:#0b1a2e;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#22d3ee;">${s.step}</div>
@@ -266,7 +266,7 @@ export function OnePagerDialog({ accountName, trigger }: OnePagerPreviewProps) {
               Generating custom one-pager with Gemini...
             </div>
           )}
-          {!loading && data && <OnePagerDocument data={data} accountName={accountName} />}
+          {!loading && data && <OnePagerPreview data={data} accountName={accountName} />}
           {!loading && !data && (
             <div className="flex flex-col items-center justify-center text-sm text-muted-foreground border-2 border-dashed rounded-md py-20 gap-3">
               <FileImage className="h-8 w-8 text-muted-foreground/50" />

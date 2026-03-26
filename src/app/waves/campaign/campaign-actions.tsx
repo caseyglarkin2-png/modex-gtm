@@ -3,7 +3,31 @@
 import { useState, useRef, useEffect } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
-import { Zap, Copy, Send, RefreshCw, ExternalLink, CheckCircle, Pencil, X, Check } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Zap, Copy, Send, RefreshCw, ExternalLink, CheckCircle, Pencil, X, Check, ChevronDown, ChevronUp, MessageSquare, Phone, FileText, Sparkles } from 'lucide-react';
+import { GeneratorDialog } from '@/components/ai/generator-dialog';
+
+interface SequenceStep {
+  step: string;
+  subject: string;
+  body: string;
+  dayOffset: number;
+  sent?: boolean;
+}
+
+const STEP_LABELS: Record<string, string> = {
+  initial_email: 'Day 0 — Initial',
+  follow_up_1: 'Day 3 — Follow-up',
+  follow_up_2: 'Day 9 — Variance Tax',
+  breakup: 'Day 16 — Breakup',
+};
+
+const STEP_BADGE_STYLES: Record<string, string> = {
+  initial_email: 'bg-blue-500/15 text-blue-700',
+  follow_up_1: 'bg-amber-500/15 text-amber-700',
+  follow_up_2: 'bg-violet-500/15 text-violet-700',
+  breakup: 'bg-neutral-500/15 text-neutral-700',
+};
 
 interface CampaignActionsProps {
   accountName: string;
@@ -27,11 +51,10 @@ export function CampaignActions({
   proofLine,
 }: CampaignActionsProps) {
   const [loading, setLoading] = useState(false);
-  const [sending, setSending] = useState(false);
-  const [sent, setSent] = useState(false);
-  const [generatedBody, setGeneratedBody] = useState('');
-  const [generatedSubject, setGeneratedSubject] = useState('');
-  const [editing, setEditing] = useState(false);
+  const [sequence, setSequence] = useState<SequenceStep[]>([]);
+  const [expandedStep, setExpandedStep] = useState<string | null>(null);
+  const [sending, setSending] = useState<string | null>(null);
+  const [editingStep, setEditingStep] = useState<string | null>(null);
   const [editSubject, setEditSubject] = useState('');
   const [editBody, setEditBody] = useState('');
   const bodyRef = useRef<HTMLTextAreaElement>(null);
@@ -42,11 +65,12 @@ export function CampaignActions({
       bodyRef.current.style.height = 'auto';
       bodyRef.current.style.height = bodyRef.current.scrollHeight + 'px';
     }
-  }, [editBody, editing]);
+  }, [editBody, editingStep]);
 
-  async function generate() {
+  async function generateFullSequence() {
     setLoading(true);
-    setSent(false);
+    setSequence([]);
+    setExpandedStep(null);
     try {
       const res = await fetch('/api/ai/sequence', {
         method: 'POST',
@@ -54,19 +78,14 @@ export function CampaignActions({
         body: JSON.stringify({
           accountName,
           personaName,
-          tone: 'conversational',
+          tone: 'provocative',
         }),
       });
-      const json = await res.json() as { sequence?: Array<{ step: string; subject: string; body: string }> };
+      const json = await res.json() as { sequence?: Array<{ step: string; subject: string; body: string; dayOffset: number }> };
       if (!res.ok || !json.sequence?.length) throw new Error('Generation failed');
-      const step1 = json.sequence[0];
-      setGeneratedSubject(step1.subject);
-      setGeneratedBody(step1.body);
-      // Auto-open edit mode so user can review/tweak
-      setEditSubject(step1.subject);
-      setEditBody(step1.body);
-      setEditing(true);
-      toast.success('Generated. Review it. Fix what needs fixing.');
+      setSequence(json.sequence.map(s => ({ ...s, sent: false })));
+      setExpandedStep(json.sequence[0].step);
+      toast.success(`${json.sequence.length}-step sequence generated. Review each step.`);
     } catch {
       toast.error('Generation failed');
     } finally {
@@ -74,80 +93,104 @@ export function CampaignActions({
     }
   }
 
-  function confirmEdit() {
-    setGeneratedSubject(editSubject);
-    setGeneratedBody(editBody);
-    setEditing(false);
-    toast.success('Saved. Ready to send.');
+  function startEdit(step: SequenceStep) {
+    setEditingStep(step.step);
+    setEditSubject(step.subject);
+    setEditBody(step.body);
+  }
+
+  function saveEdit(stepName: string) {
+    setSequence(prev => prev.map(s =>
+      s.step === stepName ? { ...s, subject: editSubject, body: editBody } : s
+    ));
+    setEditingStep(null);
+    toast.success('Saved.');
   }
 
   function cancelEdit() {
-    setEditSubject(generatedSubject);
-    setEditBody(generatedBody);
-    setEditing(false);
+    setEditingStep(null);
   }
 
-  async function sendEmail() {
+  async function sendStep(step: SequenceStep) {
     if (!personaEmail) { toast.error('No email address'); return; }
-    setSending(true);
+    setSending(step.step);
     try {
       const res = await fetch('/api/email/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           to: personaEmail,
-          subject: generatedSubject || subjectLine,
-          bodyHtml: generatedBody,
+          subject: step.subject || subjectLine,
+          bodyHtml: step.body,
           accountName,
           personaName,
         }),
       });
       if (res.ok) {
-        toast.success(`Sent to ${personaEmail}. Move to the next one.`);
-        setSent(true);
-        setEditing(false);
+        setSequence(prev => prev.map(s =>
+          s.step === step.step ? { ...s, sent: true } : s
+        ));
+        toast.success(`Sent to ${personaEmail}.`);
       } else {
-        toast.error('Send failed — check logs');
+        toast.error('Send failed');
       }
     } catch {
       toast.error('Send failed');
     } finally {
-      setSending(false);
+      setSending(null);
     }
   }
 
-  function copyEmail() {
-    const text = `Subject: ${generatedSubject || subjectLine}\n\n${generatedBody || whyNowHook + '\n\n' + proofLine + (auditUrl ? '\n\n' + auditUrl : '')}`;
-    navigator.clipboard.writeText(text);
-    toast.success('Copied to clipboard');
+  function copyStep(step: SequenceStep) {
+    navigator.clipboard.writeText(`Subject: ${step.subject}\n\n${step.body}`);
+    toast.success('Copied');
   }
 
   return (
     <div className="space-y-2 pt-1">
-      <div className="flex items-center gap-1.5">
-        {sent && (
-          <span className="flex items-center gap-1 text-[11px] text-emerald-600 font-medium">
-            <CheckCircle className="h-3 w-3" /> Sent
-          </span>
-        )}
-        <Button variant="outline" size="sm" className="h-7 text-[11px] gap-1" onClick={generate} disabled={loading}>
+      {/* Action buttons row */}
+      <div className="flex items-center gap-1.5 flex-wrap">
+        <Button variant="outline" size="sm" className="h-7 text-[11px] gap-1" onClick={generateFullSequence} disabled={loading}>
           {loading ? <RefreshCw className="h-3 w-3 animate-spin" /> : <Zap className="h-3 w-3" />}
-          {generatedBody ? 'Regen' : 'Generate'}
+          {sequence.length ? 'Regen Sequence' : 'Generate Sequence'}
         </Button>
-        {generatedBody && !editing && !sent && (
-          <>
-            <Button variant="outline" size="sm" className="h-7 text-[11px] gap-1" onClick={() => { setEditSubject(generatedSubject); setEditBody(generatedBody); setEditing(true); }}>
-              <Pencil className="h-3 w-3" /> Edit
+
+        {/* LinkedIn DM */}
+        <GeneratorDialog
+          accountName={accountName}
+          personaName={personaName}
+          defaultType="dm"
+          trigger={
+            <Button variant="outline" size="sm" className="h-7 text-[11px] gap-1">
+              <MessageSquare className="h-3 w-3" /> DM
             </Button>
-            <Button variant="outline" size="sm" className="h-7 text-[11px] gap-1" onClick={copyEmail}>
-              <Copy className="h-3 w-3" /> Copy
+          }
+        />
+
+        {/* Call Script */}
+        <GeneratorDialog
+          accountName={accountName}
+          personaName={personaName}
+          defaultType="call_script"
+          trigger={
+            <Button variant="outline" size="sm" className="h-7 text-[11px] gap-1">
+              <Phone className="h-3 w-3" /> Call
             </Button>
-            <Button size="sm" className="h-7 text-[11px] gap-1" onClick={sendEmail} disabled={sending || !personaEmail}>
-              {sending ? <RefreshCw className="h-3 w-3 animate-spin" /> : <Send className="h-3 w-3" />}
-              Send
+          }
+        />
+
+        {/* Meeting Prep */}
+        <GeneratorDialog
+          accountName={accountName}
+          personaName={personaName}
+          defaultType="meeting_prep"
+          trigger={
+            <Button variant="outline" size="sm" className="h-7 text-[11px] gap-1">
+              <FileText className="h-3 w-3" /> Prep
             </Button>
-          </>
-        )}
+          }
+        />
+
         {auditUrl && (
           <a href={auditUrl} target="_blank" rel="noopener noreferrer">
             <Button variant="ghost" size="sm" className="h-7 text-[11px] gap-1 text-cyan-600">
@@ -157,51 +200,105 @@ export function CampaignActions({
         )}
       </div>
 
-      {/* Inline preview/edit panel */}
-      {editing && (
-        <div className="rounded-lg border bg-[var(--muted)]/30 p-3 space-y-2 text-xs">
-          <div>
-            <label className="font-medium text-[var(--muted-foreground)] text-[10px] uppercase tracking-wide">Subject</label>
-            <input
-              type="text"
-              value={editSubject}
-              onChange={(e) => setEditSubject(e.target.value)}
-              className="mt-0.5 w-full rounded border bg-[var(--background)] px-2 py-1 text-xs font-medium focus:outline-none focus:ring-1 focus:ring-cyan-500"
-            />
-          </div>
-          <div>
-            <label className="font-medium text-[var(--muted-foreground)] text-[10px] uppercase tracking-wide">Body</label>
-            <textarea
-              ref={bodyRef}
-              value={editBody}
-              onChange={(e) => setEditBody(e.target.value)}
-              rows={6}
-              className="mt-0.5 w-full rounded border bg-[var(--background)] px-2 py-1.5 text-xs leading-relaxed focus:outline-none focus:ring-1 focus:ring-cyan-500 resize-none"
-            />
-          </div>
-          <div className="flex items-center gap-1.5 pt-1">
-            <Button size="sm" className="h-7 text-[11px] gap-1" onClick={sendEmail} disabled={sending || !personaEmail}>
-              {sending ? <RefreshCw className="h-3 w-3 animate-spin" /> : <Send className="h-3 w-3" />}
-              Approve & Send
-            </Button>
-            <Button variant="outline" size="sm" className="h-7 text-[11px] gap-1" onClick={confirmEdit}>
-              <Check className="h-3 w-3" /> Save Edits
-            </Button>
-            <Button variant="ghost" size="sm" className="h-7 text-[11px] gap-1" onClick={cancelEdit}>
-              <X className="h-3 w-3" /> Cancel
-            </Button>
-            <Button variant="outline" size="sm" className="h-7 text-[11px] gap-1" onClick={copyEmail}>
-              <Copy className="h-3 w-3" /> Copy
-            </Button>
-          </div>
-        </div>
-      )}
+      {/* Full 4-step sequence display */}
+      {sequence.length > 0 && (
+        <div className="space-y-1.5">
+          {sequence.map((step) => {
+            const isExpanded = expandedStep === step.step;
+            const isEditing = editingStep === step.step;
 
-      {/* Read-only preview when not editing and content exists */}
-      {generatedBody && !editing && !sent && (
-        <div className="rounded-lg border p-2 text-xs text-[var(--muted-foreground)] max-h-24 overflow-y-auto cursor-pointer hover:bg-[var(--muted)]/30 transition-colors" onClick={() => { setEditSubject(generatedSubject); setEditBody(generatedBody); setEditing(true); }}>
-          <p className="font-medium text-[var(--foreground)] text-[10px]">Subject: {generatedSubject}</p>
-          <p className="mt-1 line-clamp-3 whitespace-pre-line">{generatedBody}</p>
+            return (
+              <div key={step.step} className="rounded-lg border text-xs">
+                {/* Step header — always visible */}
+                <button
+                  type="button"
+                  className="w-full flex items-center justify-between px-3 py-2 hover:bg-[var(--muted)]/30 transition-colors"
+                  onClick={() => setExpandedStep(isExpanded ? null : step.step)}
+                >
+                  <div className="flex items-center gap-2">
+                    <Badge className={`text-[10px] ${STEP_BADGE_STYLES[step.step] ?? ''}`}>
+                      {STEP_LABELS[step.step] ?? step.step}
+                    </Badge>
+                    <span className="text-[var(--muted-foreground)] truncate max-w-[200px]">
+                      {step.subject || 'No subject'}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    {step.sent && (
+                      <span className="flex items-center gap-0.5 text-[10px] text-emerald-600 font-medium">
+                        <CheckCircle className="h-3 w-3" /> Sent
+                      </span>
+                    )}
+                    {isExpanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+                  </div>
+                </button>
+
+                {/* Step body — expanded */}
+                {isExpanded && (
+                  <div className="px-3 pb-3 border-t">
+                    {isEditing ? (
+                      <div className="space-y-2 pt-2">
+                        <div>
+                          <label className="font-medium text-[var(--muted-foreground)] text-[10px] uppercase tracking-wide">Subject</label>
+                          <input
+                            type="text"
+                            value={editSubject}
+                            onChange={(e) => setEditSubject(e.target.value)}
+                            className="mt-0.5 w-full rounded border bg-[var(--background)] px-2 py-1 text-xs font-medium focus:outline-none focus:ring-1 focus:ring-cyan-500"
+                          />
+                        </div>
+                        <div>
+                          <label className="font-medium text-[var(--muted-foreground)] text-[10px] uppercase tracking-wide">Body</label>
+                          <textarea
+                            ref={bodyRef}
+                            value={editBody}
+                            onChange={(e) => setEditBody(e.target.value)}
+                            rows={5}
+                            className="mt-0.5 w-full rounded border bg-[var(--background)] px-2 py-1.5 text-xs leading-relaxed focus:outline-none focus:ring-1 focus:ring-cyan-500 resize-none"
+                          />
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <Button size="sm" className="h-6 text-[10px] gap-1" onClick={() => { saveEdit(step.step); sendStep({ ...step, subject: editSubject, body: editBody }); }} disabled={sending === step.step || !personaEmail}>
+                            {sending === step.step ? <RefreshCw className="h-3 w-3 animate-spin" /> : <Send className="h-3 w-3" />}
+                            Approve & Send
+                          </Button>
+                          <Button variant="outline" size="sm" className="h-6 text-[10px] gap-1" onClick={() => saveEdit(step.step)}>
+                            <Check className="h-3 w-3" /> Save
+                          </Button>
+                          <Button variant="ghost" size="sm" className="h-6 text-[10px] gap-1" onClick={cancelEdit}>
+                            <X className="h-3 w-3" /> Cancel
+                          </Button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="pt-2 space-y-2">
+                        <div>
+                          <p className="font-medium text-[var(--foreground)] text-[10px]">Subject: {step.subject}</p>
+                          <p className="mt-1 whitespace-pre-line text-[var(--muted-foreground)] leading-relaxed">{step.body}</p>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          {!step.sent && (
+                            <>
+                              <Button size="sm" className="h-6 text-[10px] gap-1" onClick={() => sendStep(step)} disabled={sending === step.step || !personaEmail}>
+                                {sending === step.step ? <RefreshCw className="h-3 w-3 animate-spin" /> : <Send className="h-3 w-3" />}
+                                Send
+                              </Button>
+                              <Button variant="outline" size="sm" className="h-6 text-[10px] gap-1" onClick={() => startEdit(step)}>
+                                <Pencil className="h-3 w-3" /> Edit
+                              </Button>
+                            </>
+                          )}
+                          <Button variant="outline" size="sm" className="h-6 text-[10px] gap-1" onClick={() => copyStep(step)}>
+                            <Copy className="h-3 w-3" /> Copy
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
