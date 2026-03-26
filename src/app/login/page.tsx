@@ -1,6 +1,7 @@
 'use client';
 
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,11 +9,35 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  async function handleCredentials(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    try {
+      const result = await signIn('credentials', {
+        email,
+        redirect: false,
+      });
+      if (result?.error) {
+        setError('Not authorized. Use an approved team email.');
+        setLoading(false);
+      } else {
+        router.push('/');
+        router.refresh();
+      }
+    } catch {
+      setError('Sign-in failed. Try again.');
+      setLoading(false);
+    }
+  }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[var(--background)] p-4">
+    <div className="fixed inset-0 z-50 flex min-h-screen items-center justify-center bg-[var(--background)] p-4">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--primary)] text-[var(--primary-foreground)] text-xl font-bold">
@@ -44,14 +69,7 @@ export default function LoginPage() {
             <div className="relative flex justify-center text-xs"><span className="bg-[var(--card)] px-2 text-[var(--muted-foreground)]">or</span></div>
           </div>
 
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              setLoading(true);
-              signIn('credentials', { email, callbackUrl: '/' });
-            }}
-            className="space-y-3"
-          >
+          <form onSubmit={handleCredentials} className="space-y-3">
             <div>
               <Label>Email</Label>
               <Input
@@ -63,6 +81,9 @@ export default function LoginPage() {
                 required
               />
             </div>
+            {error && (
+              <p className="text-sm text-red-500">{error}</p>
+            )}
             <Button type="submit" className="w-full" disabled={loading || !email}>
               {loading ? 'Signing in...' : 'Sign in with Email'}
             </Button>
