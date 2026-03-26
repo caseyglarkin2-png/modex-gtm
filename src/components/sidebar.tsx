@@ -20,6 +20,7 @@ import {
   Menu,
   ChevronLeft,
   ChevronRight,
+  Rocket,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -41,6 +42,7 @@ const NAV_SECTIONS = [
     label: 'Outreach',
     items: [
       { href: '/waves', label: 'Outreach Waves', icon: Waves },
+      { href: '/waves/campaign', label: 'Campaign HQ', icon: Rocket },
       { href: '/briefs', label: 'Meeting Briefs', icon: FileText },
       { href: '/search', label: 'Search Strings', icon: Search },
       { href: '/intel', label: 'Actionable Intel', icon: Lightbulb },
