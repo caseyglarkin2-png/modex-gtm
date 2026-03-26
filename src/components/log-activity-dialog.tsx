@@ -57,7 +57,7 @@ export function LogActivityDialog({ accountName, personas }: Props) {
         <Plus className="h-3.5 w-3.5" /> Log Activity
       </Button>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-md">
+        <DialogContent className="max-w-md max-h-[85vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Log Activity — {accountName}</DialogTitle>
           </DialogHeader>

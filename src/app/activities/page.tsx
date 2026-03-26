@@ -47,7 +47,7 @@ export default function ActivitiesPage() {
                   <span className="text-xs text-[var(--muted-foreground)]">{a.activity_date}</span>
                 </div>
                 {a.persona && <p className="mt-1.5 text-sm">Contact: {a.persona}</p>}
-                {a.notes && <p className="mt-1 text-sm text-[var(--muted-foreground)]">{a.notes}</p>}
+                {a.notes && <p className="mt-1 text-sm text-[var(--muted-foreground)] break-words line-clamp-3" title={a.notes}>{a.notes}</p>}
                 <div className="mt-2 flex items-center gap-4 text-xs text-[var(--muted-foreground)]">
                   <span>Owner: {a.owner}</span>
                   {a.outcome && <span>Outcome: {a.outcome}</span>}
