@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { useSidebar } from '@/components/sidebar-context';
 
 const SHORTCUTS = [
   { keys: ['⌘', 'K'], description: 'Open command search' },
+  { keys: ['⌘', 'B'], description: 'Toggle sidebar' },
   { keys: ['?'], description: 'Show keyboard shortcuts' },
   { keys: ['J', '↓'], description: 'Move to next row in tables' },
   { keys: ['K', '↑'], description: 'Move to previous row' },
@@ -14,11 +16,20 @@ const SHORTCUTS = [
 
 export function KeyboardShortcuts() {
   const [open, setOpen] = useState(false);
+  const { toggle } = useSidebar();
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       const active = document.activeElement;
       const isInput = active instanceof HTMLInputElement || active instanceof HTMLTextAreaElement || active instanceof HTMLSelectElement;
+
+      // Ctrl/Cmd+B toggle sidebar (works even in inputs)
+      if (e.key === 'b' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        toggle();
+        return;
+      }
+
       if (isInput) return;
       if (e.key === '?' && !e.metaKey && !e.ctrlKey) {
         e.preventDefault();
@@ -27,7 +38,7 @@ export function KeyboardShortcuts() {
     }
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, []);
+  }, [toggle]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

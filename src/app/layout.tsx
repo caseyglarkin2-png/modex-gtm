@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Sidebar } from "@/components/sidebar";
+import { SidebarProvider } from "@/components/sidebar-context";
+import { MainContent } from "@/components/main-content";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AuthProvider } from "@/components/auth-provider";
 import { CommandSearch } from "@/components/command-search";
@@ -33,15 +35,15 @@ export default function RootLayout({
       <body className="bg-[var(--background)] text-[var(--foreground)] antialiased">
         <AuthProvider>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <SidebarProvider>
           <Sidebar />
           <CommandSearch />
-          <main className="min-h-screen pt-14 md:ml-64 md:pt-0">
-            <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
-              {children}
-            </div>
-          </main>
+          <MainContent>
+            {children}
+          </MainContent>
           <Toaster position="bottom-right" />
           <KeyboardShortcuts />
+          </SidebarProvider>
         </ThemeProvider>
         </AuthProvider>
       </body>
