@@ -2,8 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import { BulkSendEmailSchema } from '@/lib/validations';
 import { sendBulk } from '@/lib/email/client';
 import { wrapHtml } from '@/lib/email/templates';
+import { rateLimit } from '@/lib/rate-limit';
 
 export async function POST(req: NextRequest) {
+  const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
+  const { ok } = rateLimit(`bulk-email:${ip}`);
+  if (!ok) {
+    return NextResponse.json({ error: 'Rate limit exceeded. Max 10 requests per minute.' }, { status: 429 });
+  }
   let body: unknown;
   try {
     body = await req.json();

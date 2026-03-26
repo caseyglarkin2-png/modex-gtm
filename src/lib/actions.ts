@@ -83,7 +83,24 @@ export async function createMeeting(data: MeetingInput) {
         meeting_status: parsed.data.status ?? 'Scheduled',
       },
     });
+    // Auto-create follow-up activity
+    try {
+      await prisma.activity.create({
+        data: {
+          account_name: parsed.data.account,
+          persona: parsed.data.attendees,
+          activity_type: 'Meeting',
+          outcome: `Meeting booked: ${parsed.data.meeting_type ?? 'In-Person'} on ${parsed.data.date}`,
+          next_step: 'Send pre-meeting prep',
+          next_step_due: parsed.data.date ? new Date(parsed.data.date) : null,
+          notes: parsed.data.objective ?? '',
+          owner: parsed.data.owner ?? 'Jake',
+          activity_date: new Date(),
+        },
+      });
+    } catch { /* activity logging is best-effort */ }
     revalidatePath('/meetings');
+    revalidatePath('/activities');
     revalidatePath(`/accounts`);
     return { success: true };
   } catch {
