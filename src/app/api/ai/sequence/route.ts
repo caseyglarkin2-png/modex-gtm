@@ -22,7 +22,16 @@ function parseEmailContent(raw: string): { subject: string; body: string } {
   const subjectMatch = raw.match(/^SUBJECT:\s*(.+)/m);
   const subject = subjectMatch ? subjectMatch[1].trim() : '';
   const bodyStart = raw.indexOf('---');
-  const body = bodyStart >= 0 ? raw.slice(bodyStart + 3).trim() : raw.trim();
+  let body = bodyStart >= 0 ? raw.slice(bodyStart + 3).trim() : raw.trim();
+
+  // Strip AI-generated sign-offs (Casey signs via the email template)
+  body = body
+    .replace(/\n{1,3}(Best|Sincerely|Regards|Cheers|Warm regards|All the best|Looking forward),?\s*\n+\[Your Name\][\s\S]*$/i, '')
+    .replace(/\n{1,3}(Best|Sincerely|Regards|Cheers|Warm regards|All the best|Looking forward),?\s*\n*$/i, '')
+    .replace(/\n{1,3}\[Your Name\][\s\S]*$/i, '')
+    .replace(/\n{1,3}Casey Larkin\s*$/i, '')
+    .trim();
+
   return { subject, body };
 }
 

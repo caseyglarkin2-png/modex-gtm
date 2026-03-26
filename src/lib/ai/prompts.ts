@@ -236,8 +236,10 @@ ${ctx.notes ? `Account context: ${ctx.notes}` : ''}
 
 ${stepInstructions[step]}
 
+CRITICAL: Do NOT include any sign-off like "Best,", "Sincerely,", "Regards,", "[Your Name]", or "Casey Larkin" at the end. The email signature is added automatically. End with a question or call-to-action, then stop.
+
 Output format:
-SUBJECT: <subject line>
+SUBJECT: <subject line — under 6 words, lowercase, no company name in subject>
 ---
-<email body — no sign-off label, just the text>`;
+<email body — no sign-off, no name, just the text>`;
 }
