@@ -10,6 +10,21 @@ export interface PromptContext {
   length: 'short' | 'medium' | 'long';
 }
 
+export interface OnePagerContext {
+  accountName: string;
+  parentBrand: string;
+  vertical: string;
+  whyNow: string;
+  primoAngle: string;
+  bestIntroPath: string;
+  likelyPainPoints: string;
+  primoRelevance: string;
+  suggestedAttendees: string;
+  score: number;
+  tier: string;
+  band: string;
+}
+
 const TONE_DESCRIPTIONS = {
   professional: 'formal, polished, executive-level language',
   casual: 'conversational, warm, and approachable',
@@ -112,4 +127,86 @@ Create a structured brief with:
 5. Ideal next step after the meeting
 
 Output: Structured markdown with headers.`;
+}
+
+export function buildOnePagerPrompt(ctx: OnePagerContext): string {
+  return `You are a B2B sales collateral writer for FreightRoll / YardFlow, a logistics SaaS company.
+
+Generate a structured one-pager / infographic brief for the target account below. This will be rendered as a branded HTML document — not an image. Output ONLY valid JSON matching the schema below, no markdown fences or commentary.
+
+Target Account:
+- Company: ${ctx.accountName} (parent: ${ctx.parentBrand})
+- Vertical: ${ctx.vertical}
+- Priority: ${ctx.tier} (Band ${ctx.band}, Score ${ctx.score}/100)
+- Why now: ${ctx.whyNow}
+- Primo angle: ${ctx.primoAngle}
+- Likely pain points: ${ctx.likelyPainPoints}
+- Primo relevance: ${ctx.primoRelevance}
+
+YardFlow Product Context:
+- YardFlow by FreightRoll standardizes the gate-to-dock operating protocol
+- 4-step flow: Gate Check-in → Yard Routing → Dock Assignment → BOL Proof
+- Typical Reality (before): manual gate check-in, radio dispatching, tribal knowledge, dock-office friction, local workarounds
+- Standardized Operating Protocol: verified driver ID, automated lane/move logic, timestamped dock handoff, touchless BOL capture
+- YardFlow Effect (after): standardized driver journey, system-driven tasking, defensible chain of custody, cleaner dock flow
+- Proof from live deployment: 24 facilities live, >200 contracted network, headcount neutral, 48→24 min avg drop & hook, $1M+ per-site profit lift
+
+JSON Schema (output EXACTLY this structure):
+{
+  "headline": "string — 8-12 word power headline about the constraint this account faces",
+  "subheadline": "string — 2-3 sentences connecting their business reality to YardFlow",
+  "painPoints": ["string", "string", "string"] — 3 specific pain points customized to this account's vertical/operations,
+  "solutionSteps": [
+    {"step": 1, "title": "Gate Check-in", "description": "string — 1 sentence tailored to this account"},
+    {"step": 2, "title": "Yard Routing", "description": "string"},
+    {"step": 3, "title": "Dock Assignment", "description": "string"},
+    {"step": 4, "title": "BOL Proof", "description": "string"}
+  ],
+  "outcomes": ["string", "string", "string"] — 3 YardFlow outcomes written for this account's context,
+  "proofStats": [
+    {"value": "24", "label": "Facilities Live"},
+    {"value": ">200", "label": "Contracted Network"},
+    {"value": "NEUTRAL", "label": "Headcount Impact"},
+    {"value": "48→24", "label": "Avg. Drop & Hook (min)"},
+    {"value": "$1M+", "label": "Per-site Profit Lift"}
+  ],
+  "customerQuote": "string — a plausible executive-voice testimonial quote relevant to this vertical (mark as illustrative)",
+  "bestFit": "string — 1-2 sentences about why this account is an ideal fit",
+  "publicContext": "string — reference any public sources or signals that support the outreach"
+}`;
+}
+
+export function buildOutreachSequencePrompt(ctx: PromptContext, step: 'initial_email' | 'follow_up_1' | 'follow_up_2' | 'breakup'): string {
+  const stepInstructions: Record<string, string> = {
+    initial_email: `Write the FIRST outreach email in a 4-touch sequence. This is cold — the prospect has never heard from us.
+Hook with their specific business challenge, connect it to YardFlow's proof point, and ask for 20 minutes at MODEX 2026.
+Subject line + body. Subject must be < 60 chars, personalized, no spam words.`,
+    follow_up_1: `Write follow-up #1 (sent 3 days after initial email with no reply).
+Shorter than the first. Add ONE new proof point or insight they haven't seen.
+Reference the first email indirectly ("circling back" is banned — find a better hook).
+Subject line + body.`,
+    follow_up_2: `Write follow-up #2 (sent 5 days after follow-up #1 with no reply).
+Switch angle entirely — lead with a question, a stat, or a micro-case-study.
+This is your last real shot before the breakup. Make it count.
+Subject line + body.`,
+    breakup: `Write a breakup email (sent 7 days after follow-up #2 with no reply).
+Short, gracious, zero pressure. Plant a seed for future conversation.
+Mention you'll be at MODEX if they change their mind.
+Subject line + body.`,
+  };
+
+  return `You are writing outreach for FreightRoll / YardFlow, a logistics SaaS company targeting ${ctx.accountName}.
+
+Context:
+- Target: ${ctx.personaName ?? 'decision maker'} at ${ctx.accountName}${ctx.personaTitle ? ` (${ctx.personaTitle})` : ''}
+- Account priority: ${ctx.bandLabel ?? 'Tier 1'}
+- Tone: ${TONE_DESCRIPTIONS[ctx.tone]}
+${ctx.notes ? `- Account context: ${ctx.notes}` : ''}
+
+${stepInstructions[step]}
+
+Output format:
+SUBJECT: <subject line>
+---
+<email body — no sign-off label, just the text>`;
 }

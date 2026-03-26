@@ -24,6 +24,8 @@ import { LogActivityDialog } from '@/components/log-activity-dialog';
 import { BookMeetingDialog } from '@/components/book-meeting-dialog';
 import { GeneratorDialog } from '@/components/ai/generator-dialog';
 import { EmailComposer } from '@/components/email/composer';
+import { OnePagerDialog } from '@/components/ai/one-pager-preview';
+import { OutreachSequenceDialog } from '@/components/ai/outreach-sequence';
 import { Breadcrumb } from '@/components/breadcrumb';
 
 export function generateStaticParams() {
@@ -72,6 +74,11 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
               <Badge variant="outline" className="font-mono">{account.tier}</Badge>
               <Badge variant="outline" className="font-mono">Score: {account.priority_score}</Badge>
               <Badge variant="secondary">{account.owner}</Badge>
+              <OnePagerDialog accountName={account.name} />
+              <OutreachSequenceDialog
+                accountName={account.name}
+                personas={personas.map((p) => ({ name: p.name, title: p.title ?? undefined, priority: p.priority }))}
+              />
               <BookMeetingDialog
                 accountName={account.name}
                 personas={personas.map((p) => ({ name: p.name, priority: p.priority }))}
@@ -229,9 +236,10 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
             <EmptyState title="No brief available" description="Meeting brief not yet created for this account." />
           ) : (
             <div className="space-y-3">
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 <GeneratorDialog accountName={account.name} defaultType="meeting_prep" />
                 <GeneratorDialog accountName={account.name} defaultType="call_script" />
+                <OnePagerDialog accountName={account.name} />
               </div>
               {[
                 { label: 'Why This Account', value: brief.why_this_account },

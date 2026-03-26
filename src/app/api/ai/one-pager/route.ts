@@ -1,0 +1,88 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
+import { generateText } from '@/lib/ai/client';
+import { buildOnePagerPrompt } from '@/lib/ai/prompts';
+import type { OnePagerContext } from '@/lib/ai/prompts';
+import { getAccountByName, getMeetingBriefByAccount } from '@/lib/data';
+
+const OnePagerRequestSchema = z.object({
+  accountName: z.string().min(1),
+});
+
+export async function POST(req: NextRequest) {
+  let body: unknown;
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+  }
+
+  const parsed = OnePagerRequestSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
+  }
+
+  const { accountName } = parsed.data;
+  const account = getAccountByName(accountName);
+  if (!account) {
+    return NextResponse.json({ error: 'Account not found' }, { status: 404 });
+  }
+
+  const brief = getMeetingBriefByAccount(accountName);
+
+  const ctx: OnePagerContext = {
+    accountName: account.name,
+    parentBrand: account.parent_brand ?? account.name,
+    vertical: account.vertical,
+    whyNow: account.why_now ?? 'MODEX 2026 attendance signal',
+    primoAngle: account.primo_angle ?? '',
+    bestIntroPath: account.best_intro_path ?? '',
+    likelyPainPoints: brief?.likely_pain_points ?? 'Trailer queue variability, gate/dock congestion, inconsistent driver journey',
+    primoRelevance: brief?.primo_relevance ?? account.primo_angle ?? '',
+    suggestedAttendees: brief?.suggested_attendees ?? '',
+    score: account.priority_score,
+    tier: account.tier,
+    band: account.priority_band,
+  };
+
+  const prompt = buildOnePagerPrompt(ctx);
+
+  try {
+    const raw = await generateText(prompt, 1200);
+
+    // Parse the JSON from Gemini response (may have markdown fences)
+    const jsonStr = raw.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
+    let content: unknown;
+    try {
+      content = JSON.parse(jsonStr);
+    } catch {
+      // If JSON parse fails, return the raw text so the UI can handle it
+      return NextResponse.json({
+        content: null,
+        raw: raw,
+        accountName,
+        error: 'Failed to parse structured content — raw text returned',
+      });
+    }
+
+    // Best-effort save to DB
+    try {
+      const { prisma } = await import('@/lib/prisma');
+      await prisma.generatedContent.create({
+        data: {
+          account_name: accountName,
+          content_type: 'one_pager',
+          tone: 'professional',
+          content: JSON.stringify(content),
+        },
+      });
+    } catch {
+      // DB offline — skip
+    }
+
+    return NextResponse.json({ content, accountName });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'AI generation failed';
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+}
