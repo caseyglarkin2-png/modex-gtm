@@ -1,6 +1,10 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getMeetingBriefs, slugify } from '@/lib/data';
+import { Card, CardContent } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft, ExternalLink } from 'lucide-react';
 
 export function generateStaticParams() {
   return getMeetingBriefs().map((b) => ({ account: slugify(b.account) }));
@@ -26,36 +30,48 @@ export default async function BriefDetailPage({ params }: { params: Promise<{ ac
   ];
 
   return (
-    <>
-      <Link href="/briefs" className="text-sm text-[var(--primary)] hover:underline">&larr; All Briefs</Link>
-      <h1 className="mt-4 text-2xl font-bold">{brief.account} — Meeting Brief</h1>
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <Link href="/briefs" className="inline-flex items-center gap-1 text-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors">
+          <ArrowLeft className="h-3.5 w-3.5" /> Back to Briefs
+        </Link>
+        <Link href={`/accounts/${slugify(brief.account)}`}>
+          <Button variant="outline" size="sm">View Account</Button>
+        </Link>
+      </div>
 
-      <div className="mt-6 space-y-5">
+      <h1 className="text-2xl font-bold tracking-tight">{brief.account} — Meeting Brief</h1>
+
+      <div className="space-y-3">
         {sections.map((s) => (
-          <div key={s.label} className="rounded-lg border border-[var(--border)] p-5">
-            <p className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">{s.label}</p>
-            <p className="mt-2 text-sm leading-relaxed">{s.value}</p>
-          </div>
+          <Card key={s.label}>
+            <CardContent className="p-4">
+              <p className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">{s.label}</p>
+              <p className="mt-1.5 text-sm leading-relaxed">{s.value}</p>
+            </CardContent>
+          </Card>
         ))}
       </div>
 
       {(brief.source_url_1 || brief.source_url_2) && (
-        <div className="mt-6 rounded-lg border border-[var(--border)] p-5">
-          <p className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Sources</p>
-          <div className="mt-2 space-y-1">
-            {brief.source_url_1 && (
-              <a href={brief.source_url_1} target="_blank" rel="noopener noreferrer" className="block text-sm text-[var(--primary)] hover:underline break-all">
-                {brief.source_url_1}
-              </a>
-            )}
-            {brief.source_url_2 && (
-              <a href={brief.source_url_2} target="_blank" rel="noopener noreferrer" className="block text-sm text-[var(--primary)] hover:underline break-all">
-                {brief.source_url_2}
-              </a>
-            )}
-          </div>
-        </div>
+        <Card>
+          <CardContent className="p-4">
+            <p className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Sources</p>
+            <div className="mt-1.5 space-y-1">
+              {brief.source_url_1 && (
+                <a href={brief.source_url_1} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-[var(--primary)] hover:underline break-all">
+                  {brief.source_url_1} <ExternalLink className="h-3 w-3 shrink-0" />
+                </a>
+              )}
+              {brief.source_url_2 && (
+                <a href={brief.source_url_2} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-[var(--primary)] hover:underline break-all">
+                  {brief.source_url_2} <ExternalLink className="h-3 w-3 shrink-0" />
+                </a>
+              )}
+            </div>
+          </CardContent>
+        </Card>
       )}
-    </>
+    </div>
   );
 }

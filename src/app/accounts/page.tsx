@@ -1,70 +1,55 @@
-import Link from 'next/link';
-import { getAccounts, slugify, getPersonasByAccount } from '@/lib/data';
+'use client';
 
-const BAND_COLORS: Record<string, string> = {
-  A: 'bg-green-100 text-green-800',
-  B: 'bg-yellow-100 text-yellow-800',
-  C: 'bg-orange-100 text-orange-800',
-  D: 'bg-gray-100 text-gray-600',
-};
+import { useRouter } from 'next/navigation';
+import accountsData from '@/lib/data/accounts.json';
+import personasData from '@/lib/data/personas.json';
+import { DataTable, type Column } from '@/components/data-table';
+import { BandBadge } from '@/components/band-badge';
+import { StatusBadge } from '@/components/status-badge';
+
+type Account = (typeof accountsData)[number] & { persona_count: number; slug: string };
+
+function slugify(name: string): string {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
+const columns: Column<Account>[] = [
+  { key: 'rank', label: '#', sortable: true, className: 'w-12 text-center' },
+  { key: 'name', label: 'Account', sortable: true, render: (a) => <span className="font-medium">{a.name}</span> },
+  { key: 'vertical', label: 'Vertical', sortable: true, className: 'hidden lg:table-cell' },
+  { key: 'priority_band', label: 'Band', sortable: true, render: (a) => <BandBadge band={a.priority_band} /> },
+  { key: 'tier', label: 'Tier', sortable: true, className: 'hidden md:table-cell' },
+  { key: 'priority_score', label: 'Score', sortable: true, render: (a) => <span className="font-mono font-semibold">{a.priority_score}</span> },
+  { key: 'persona_count', label: 'Personas', sortable: true, className: 'text-center hidden sm:table-cell' },
+  { key: 'owner', label: 'Owner', sortable: true, className: 'hidden lg:table-cell' },
+  { key: 'research_status', label: 'Research', sortable: true, className: 'hidden xl:table-cell', render: (a) => <StatusBadge status={a.research_status} /> },
+  { key: 'outreach_status', label: 'Outreach', sortable: true, className: 'hidden xl:table-cell', render: (a) => <StatusBadge status={a.outreach_status} /> },
+  { key: 'meeting_status', label: 'Meeting', sortable: true, render: (a) => <StatusBadge status={a.meeting_status} /> },
+];
 
 export default function AccountsPage() {
-  const accounts = getAccounts();
+  const router = useRouter();
+  const accounts: Account[] = accountsData.map((a) => ({
+    ...a,
+    persona_count: personasData.filter((p) => p.account === a.name).length,
+    slug: slugify(a.name),
+  }));
 
   return (
-    <>
-      <h1 className="text-2xl font-bold">Accounts ({accounts.length})</h1>
-      <p className="mt-1 text-sm text-[var(--muted-foreground)]">
-        All target accounts ranked by priority score. 20 accounts across Food &amp; Beverage, Retail, Manufacturing, 3PL / Logistics, and Industrial verticals.
-      </p>
-
-      <div className="mt-6 overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b border-[var(--border)] text-left text-xs uppercase text-[var(--muted-foreground)]">
-              <th className="pb-3 pr-3">Rank</th>
-              <th className="pb-3 pr-3">Account</th>
-              <th className="pb-3 pr-3">Vertical</th>
-              <th className="pb-3 pr-3">Band</th>
-              <th className="pb-3 pr-3">Tier</th>
-              <th className="pb-3 pr-3">Score</th>
-              <th className="pb-3 pr-3">Personas</th>
-              <th className="pb-3 pr-3">Owner</th>
-              <th className="pb-3 pr-3">Research</th>
-              <th className="pb-3 pr-3">Outreach</th>
-              <th className="pb-3">Meeting</th>
-            </tr>
-          </thead>
-          <tbody>
-            {accounts.map((acct) => {
-              const personaCount = getPersonasByAccount(acct.name).length;
-              return (
-                <tr key={acct.name} className="border-b border-[var(--border)] hover:bg-[var(--muted)]">
-                  <td className="py-3 pr-3 text-center">{acct.rank}</td>
-                  <td className="py-3 pr-3 font-medium">
-                    <Link href={`/accounts/${slugify(acct.name)}`} className="text-[var(--primary)] hover:underline">
-                      {acct.name}
-                    </Link>
-                  </td>
-                  <td className="py-3 pr-3">{acct.vertical}</td>
-                  <td className="py-3 pr-3">
-                    <span className={`inline-flex items-center rounded px-2 py-0.5 text-xs font-medium ${BAND_COLORS[acct.priority_band] || BAND_COLORS.D}`}>
-                      {acct.priority_band}
-                    </span>
-                  </td>
-                  <td className="py-3 pr-3">{acct.tier}</td>
-                  <td className="py-3 pr-3">{acct.priority_score}</td>
-                  <td className="py-3 pr-3 text-center">{personaCount}</td>
-                  <td className="py-3 pr-3">{acct.owner}</td>
-                  <td className="py-3 pr-3">{acct.research_status}</td>
-                  <td className="py-3 pr-3">{acct.outreach_status}</td>
-                  <td className="py-3">{acct.meeting_status}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold tracking-tight">Accounts ({accounts.length})</h1>
+        <p className="text-sm text-[var(--muted-foreground)]">
+          All target accounts ranked by priority score. Click any row to view details.
+        </p>
       </div>
-    </>
+      <DataTable
+        columns={columns}
+        data={accounts}
+        searchKey="name"
+        searchPlaceholder="Search accounts..."
+        onRowClick={(item) => router.push(`/accounts/${item.slug}`)}
+      />
+    </div>
   );
 }

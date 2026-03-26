@@ -7,19 +7,23 @@ import {
   getWavesByAccount,
   getMeetingBriefByAccount,
   slugify,
+  getAuditRoutes,
+  getActivities,
 } from '@/lib/data';
-import { getAuditRoutes } from '@/lib/data';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
+import { Button } from '@/components/ui/button';
+import { BandBadge } from '@/components/band-badge';
+import { StatusBadge } from '@/components/status-badge';
+import { CopyButton } from '@/components/copy-button';
+import { EmptyState } from '@/components/empty-state';
+import { ArrowLeft, ExternalLink, Users, Waves, FileText, Route, Activity, Calendar } from 'lucide-react';
 
 export function generateStaticParams() {
   return getAccounts().map((a) => ({ slug: slugify(a.name) }));
 }
-
-const BAND_COLORS: Record<string, string> = {
-  A: 'bg-green-100 text-green-800 border-green-300',
-  B: 'bg-yellow-100 text-yellow-800 border-yellow-300',
-  C: 'bg-orange-100 text-orange-800 border-orange-300',
-  D: 'bg-gray-100 text-gray-600 border-gray-300',
-};
 
 export default async function AccountDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -31,212 +35,294 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
   const brief = getMeetingBriefByAccount(account.name);
   const auditRoutes = getAuditRoutes();
   const auditRoute = auditRoutes.find((r) => r.account === account.name);
+  const activities = getActivities().filter((a) => a.account === account.name);
+
+  const scoreDims = [
+    { label: 'ICP Fit', value: account.icp_fit, weight: 30 },
+    { label: 'MODEX Signal', value: account.modex_signal, weight: 20 },
+    { label: 'Primo Story', value: account.primo_story_fit, weight: 20 },
+    { label: 'Warm Intro', value: account.warm_intro, weight: 15 },
+    { label: 'Strategic Value', value: account.strategic_value, weight: 10 },
+    { label: 'Meeting Ease', value: account.meeting_ease, weight: 5 },
+  ];
 
   return (
-    <>
-      <div className="flex items-center gap-3">
-        <Link href="/accounts" className="text-sm text-[var(--primary)] hover:underline">&larr; Accounts</Link>
-      </div>
+    <div className="space-y-6">
+      {/* Breadcrumb */}
+      <Link href="/accounts" className="inline-flex items-center gap-1 text-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors">
+        <ArrowLeft className="h-3.5 w-3.5" /> Back to Accounts
+      </Link>
 
-      <div className="mt-4 flex items-start justify-between">
-        <div>
-          <h1 className="text-2xl font-bold">{account.name}</h1>
-          <p className="text-sm text-[var(--muted-foreground)]">
-            {account.parent_brand} &middot; {account.vertical} &middot; {account.signal_type}
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className={`rounded border px-3 py-1 text-sm font-medium ${BAND_COLORS[account.priority_band] || BAND_COLORS.D}`}>
-            Band {account.priority_band}
-          </span>
-          <span className="rounded border border-[var(--border)] px-3 py-1 text-sm">{account.tier}</span>
-          <span className="rounded border border-[var(--border)] px-3 py-1 text-sm">Score: {account.priority_score}</span>
-        </div>
-      </div>
-
-      {/* Scoring Dimensions */}
-      <div className="mt-6 grid grid-cols-6 gap-3">
-        {[
-          { label: 'ICP Fit', value: account.icp_fit, weight: 30 },
-          { label: 'MODEX Signal', value: account.modex_signal, weight: 20 },
-          { label: 'Primo Story', value: account.primo_story_fit, weight: 20 },
-          { label: 'Warm Intro', value: account.warm_intro, weight: 15 },
-          { label: 'Strategic Value', value: account.strategic_value, weight: 10 },
-          { label: 'Meeting Ease', value: account.meeting_ease, weight: 5 },
-        ].map((dim) => (
-          <div key={dim.label} className="rounded-lg border border-[var(--border)] p-3 text-center">
-            <p className="text-xs text-[var(--muted-foreground)]">{dim.label} ({dim.weight}%)</p>
-            <p className="mt-1 text-xl font-semibold">{dim.value}/5</p>
+      {/* Hero Card */}
+      <Card>
+        <CardContent className="p-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <div className="flex items-center gap-3">
+                <h1 className="text-2xl font-bold tracking-tight">{account.name}</h1>
+                <BandBadge band={account.priority_band} />
+              </div>
+              <p className="mt-1 text-sm text-[var(--muted-foreground)]">
+                {account.parent_brand} &middot; {account.vertical} &middot; {account.signal_type}
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Badge variant="outline" className="font-mono">{account.tier}</Badge>
+              <Badge variant="outline" className="font-mono">Score: {account.priority_score}</Badge>
+              <Badge variant="secondary">{account.owner}</Badge>
+            </div>
           </div>
-        ))}
-      </div>
 
-      {/* Key Info */}
-      <div className="mt-6 grid grid-cols-2 gap-6">
-        <div className="rounded-lg border border-[var(--border)] p-5">
-          <h3 className="font-semibold">Why Now</h3>
-          <p className="mt-2 text-sm">{account.why_now}</p>
-        </div>
-        <div className="rounded-lg border border-[var(--border)] p-5">
-          <h3 className="font-semibold">Primo Angle</h3>
-          <p className="mt-2 text-sm">{account.primo_angle}</p>
-        </div>
-      </div>
+          <Separator className="my-4" />
 
-      <div className="mt-4 grid grid-cols-3 gap-4">
-        <div className="rounded-lg border border-[var(--border)] p-4">
-          <p className="text-xs text-[var(--muted-foreground)]">Best Intro Path</p>
-          <p className="mt-1 text-sm font-medium">{account.best_intro_path}</p>
-        </div>
-        <div className="rounded-lg border border-[var(--border)] p-4">
-          <p className="text-xs text-[var(--muted-foreground)]">Current Motion</p>
-          <p className="mt-1 text-sm font-medium">{account.current_motion}</p>
-        </div>
-        <div className="rounded-lg border border-[var(--border)] p-4">
-          <p className="text-xs text-[var(--muted-foreground)]">Next Action</p>
-          <p className="mt-1 text-sm font-medium">{account.next_action}</p>
-        </div>
-      </div>
+          {/* Status Row */}
+          <div className="flex flex-wrap gap-3">
+            <div className="flex items-center gap-2 text-sm">
+              <span className="text-[var(--muted-foreground)]">Research:</span>
+              <StatusBadge status={account.research_status} />
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <span className="text-[var(--muted-foreground)]">Outreach:</span>
+              <StatusBadge status={account.outreach_status} />
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <span className="text-[var(--muted-foreground)]">Meeting:</span>
+              <StatusBadge status={account.meeting_status} />
+            </div>
+          </div>
 
-      {/* Status Row */}
-      <div className="mt-4 flex gap-4 text-sm">
-        <span className="rounded bg-[var(--muted)] px-3 py-1">Research: {account.research_status}</span>
-        <span className="rounded bg-[var(--muted)] px-3 py-1">Outreach: {account.outreach_status}</span>
-        <span className="rounded bg-[var(--muted)] px-3 py-1">Meeting: {account.meeting_status}</span>
-        <span className="rounded bg-[var(--muted)] px-3 py-1">Owner: {account.owner}</span>
-      </div>
-
-      {/* Personas */}
-      <h2 className="mt-8 text-lg font-semibold">Personas ({personas.length})</h2>
-      {personas.length > 0 ? (
-        <div className="mt-3 overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-[var(--border)] text-left text-xs uppercase text-[var(--muted-foreground)]">
-                <th className="pb-2 pr-3">ID</th>
-                <th className="pb-2 pr-3">Name</th>
-                <th className="pb-2 pr-3">Title</th>
-                <th className="pb-2 pr-3">Priority</th>
-                <th className="pb-2 pr-3">Lane</th>
-                <th className="pb-2 pr-3">Status</th>
-                <th className="pb-2">Next Step</th>
-              </tr>
-            </thead>
-            <tbody>
-              {personas.map((p) => (
-                <tr key={p.persona_id} className="border-b border-[var(--border)]">
-                  <td className="py-2 pr-3 font-mono text-xs">{p.persona_id}</td>
-                  <td className="py-2 pr-3 font-medium">
-                    {p.linkedin_url ? (
-                      <a href={p.linkedin_url} target="_blank" rel="noopener noreferrer" className="text-[var(--primary)] hover:underline">{p.name}</a>
-                    ) : p.name}
-                  </td>
-                  <td className="py-2 pr-3 text-xs">{p.title}</td>
-                  <td className="py-2 pr-3">
-                    <span className={`rounded px-2 py-0.5 text-xs font-medium ${p.priority === 'P1' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-600'}`}>
-                      {p.priority}
-                    </span>
-                  </td>
-                  <td className="py-2 pr-3 text-xs">{p.persona_lane}</td>
-                  <td className="py-2 pr-3 text-xs">{p.persona_status}</td>
-                  <td className="py-2 text-xs">{p.next_step}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        <p className="mt-2 text-sm text-[var(--muted-foreground)]">No personas mapped yet.</p>
-      )}
-
-      {/* Outreach Waves */}
-      {waves.length > 0 && (
-        <>
-          <h2 className="mt-8 text-lg font-semibold">Outreach Waves</h2>
-          <div className="mt-3 space-y-3">
-            {waves.map((w, i) => (
-              <div key={i} className="rounded-lg border border-[var(--border)] p-4">
-                <div className="flex items-center justify-between">
-                  <span className="font-medium">{w.wave}</span>
-                  <span className="rounded bg-[var(--muted)] px-2 py-0.5 text-xs">{w.status}</span>
-                </div>
-                <div className="mt-2 grid grid-cols-3 gap-4 text-xs text-[var(--muted-foreground)]">
-                  <div><span className="font-medium">Channel:</span> {w.channel_mix}</div>
-                  <div><span className="font-medium">Start:</span> {w.start_date}</div>
-                  <div><span className="font-medium">Owner:</span> {w.owner}</div>
-                </div>
-                <p className="mt-2 text-sm">{w.primary_objective}</p>
+          {/* Score Dimensions */}
+          <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-6">
+            {scoreDims.map((dim) => (
+              <div key={dim.label} className="rounded-lg border border-[var(--border)] p-2.5 text-center">
+                <p className="text-[10px] text-[var(--muted-foreground)]">{dim.label} ({dim.weight}%)</p>
+                <p className="mt-0.5 text-lg font-bold">{dim.value}<span className="text-xs font-normal text-[var(--muted-foreground)]">/5</span></p>
               </div>
             ))}
           </div>
-        </>
-      )}
+        </CardContent>
+      </Card>
 
-      {/* Meeting Brief */}
-      {brief && (
-        <>
-          <h2 className="mt-8 text-lg font-semibold">Meeting Brief</h2>
-          <div className="mt-3 rounded-lg border border-[var(--border)] p-5 space-y-4">
-            <div>
-              <p className="text-xs font-medium text-[var(--muted-foreground)]">Why This Account</p>
-              <p className="mt-1 text-sm">{brief.why_this_account}</p>
-            </div>
-            <div>
-              <p className="text-xs font-medium text-[var(--muted-foreground)]">Why Now</p>
-              <p className="mt-1 text-sm">{brief.why_now}</p>
-            </div>
-            <div>
-              <p className="text-xs font-medium text-[var(--muted-foreground)]">Likely Pain Points</p>
-              <p className="mt-1 text-sm">{brief.likely_pain_points}</p>
-            </div>
-            <div>
-              <p className="text-xs font-medium text-[var(--muted-foreground)]">Primo Relevance</p>
-              <p className="mt-1 text-sm">{brief.primo_relevance}</p>
-            </div>
-            <div>
-              <p className="text-xs font-medium text-[var(--muted-foreground)]">Best First Meeting Outcome</p>
-              <p className="mt-1 text-sm">{brief.best_first_meeting_outcome}</p>
-            </div>
-            <div>
-              <p className="text-xs font-medium text-[var(--muted-foreground)]">Suggested Attendees</p>
-              <p className="mt-1 text-sm">{brief.suggested_attendees}</p>
-            </div>
-            <div>
-              <p className="text-xs font-medium text-[var(--muted-foreground)]">Prep Assets Needed</p>
-              <p className="mt-1 text-sm">{brief.prep_assets_needed}</p>
-            </div>
-            <div>
-              <p className="text-xs font-medium text-[var(--muted-foreground)]">Open Questions</p>
-              <p className="mt-1 text-sm">{brief.open_questions}</p>
-            </div>
+      {/* Tabs */}
+      <Tabs defaultValue="overview" className="space-y-4">
+        <TabsList className="w-full justify-start overflow-x-auto">
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="personas" className="gap-1"><Users className="h-3.5 w-3.5" /> Personas ({personas.length})</TabsTrigger>
+          <TabsTrigger value="waves" className="gap-1"><Waves className="h-3.5 w-3.5" /> Waves</TabsTrigger>
+          <TabsTrigger value="brief" className="gap-1"><FileText className="h-3.5 w-3.5" /> Brief</TabsTrigger>
+          <TabsTrigger value="routes" className="gap-1"><Route className="h-3.5 w-3.5" /> Routes</TabsTrigger>
+          <TabsTrigger value="activity" className="gap-1"><Activity className="h-3.5 w-3.5" /> Activity</TabsTrigger>
+        </TabsList>
+
+        {/* Overview Tab */}
+        <TabsContent value="overview" className="space-y-4">
+          <div className="grid gap-4 md:grid-cols-2">
+            <Card>
+              <CardHeader className="pb-2"><CardTitle className="text-sm">Why Now</CardTitle></CardHeader>
+              <CardContent><p className="text-sm">{account.why_now}</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="pb-2"><CardTitle className="text-sm">Primo Angle</CardTitle></CardHeader>
+              <CardContent><p className="text-sm">{account.primo_angle}</p></CardContent>
+            </Card>
           </div>
-        </>
-      )}
-
-      {/* Audit Route */}
-      {auditRoute && (
-        <>
-          <h2 className="mt-8 text-lg font-semibold">Audit Route</h2>
-          <div className="mt-3 rounded-lg border border-[var(--border)] p-5">
-            <a href={auditRoute.audit_url} target="_blank" rel="noopener noreferrer" className="text-[var(--primary)] hover:underline break-all">
-              {auditRoute.audit_url}
-            </a>
-            <div className="mt-3 space-y-2 text-sm">
-              <div><span className="font-medium">Suggested Message:</span> {auditRoute.suggested_message}</div>
-              <div><span className="font-medium">Fast Ask:</span> {auditRoute.fast_ask}</div>
-              <div><span className="font-medium">Proof Asset:</span> {auditRoute.proof_asset}</div>
-              {auditRoute.warm_route && <div><span className="font-medium">Warm Route:</span> {auditRoute.warm_route}</div>}
-            </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            <Card>
+              <CardHeader className="pb-2"><CardTitle className="text-xs text-[var(--muted-foreground)]">Best Intro Path</CardTitle></CardHeader>
+              <CardContent><p className="text-sm font-medium">{account.best_intro_path}</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="pb-2"><CardTitle className="text-xs text-[var(--muted-foreground)]">Current Motion</CardTitle></CardHeader>
+              <CardContent><p className="text-sm font-medium">{account.current_motion}</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="pb-2"><CardTitle className="text-xs text-[var(--muted-foreground)]">Next Action</CardTitle></CardHeader>
+              <CardContent><p className="text-sm font-medium">{account.next_action}</p></CardContent>
+            </Card>
           </div>
-        </>
-      )}
+          {account.notes && (
+            <Card>
+              <CardHeader className="pb-2"><CardTitle className="text-sm">Notes</CardTitle></CardHeader>
+              <CardContent><p className="text-sm">{account.notes}</p></CardContent>
+            </Card>
+          )}
+        </TabsContent>
 
-      {account.notes && (
-        <div className="mt-6 rounded-lg border border-[var(--border)] p-4">
-          <p className="text-xs font-medium text-[var(--muted-foreground)]">Notes</p>
-          <p className="mt-1 text-sm">{account.notes}</p>
-        </div>
-      )}
-    </>
+        {/* Personas Tab */}
+        <TabsContent value="personas" className="space-y-3">
+          {personas.length === 0 ? (
+            <EmptyState title="No personas mapped" description="Personas will appear here once added." />
+          ) : (
+            personas.map((p) => (
+              <Card key={p.persona_id}>
+                <CardContent className="p-4">
+                  <div className="flex items-start justify-between">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium text-sm">
+                          {p.linkedin_url ? (
+                            <a href={p.linkedin_url} target="_blank" rel="noopener noreferrer" className="text-[var(--primary)] hover:underline inline-flex items-center gap-1">
+                              {p.name} <ExternalLink className="h-3 w-3" />
+                            </a>
+                          ) : p.name}
+                        </span>
+                        <Badge variant={p.priority === 'P1' ? 'default' : 'secondary'} className="text-xs">{p.priority}</Badge>
+                        <StatusBadge status={p.persona_status} />
+                      </div>
+                      <p className="mt-0.5 text-xs text-[var(--muted-foreground)]">{p.title}</p>
+                      <p className="mt-1 text-xs text-[var(--muted-foreground)]">Lane: {p.persona_lane} &middot; {p.role_in_deal} &middot; {p.seniority}</p>
+                    </div>
+                    <span className="shrink-0 font-mono text-xs text-[var(--muted-foreground)]">{p.persona_id}</span>
+                  </div>
+                  {p.next_step && (
+                    <p className="mt-2 text-xs text-[var(--muted-foreground)]">Next: {p.next_step}</p>
+                  )}
+                </CardContent>
+              </Card>
+            ))
+          )}
+        </TabsContent>
+
+        {/* Waves Tab */}
+        <TabsContent value="waves" className="space-y-3">
+          {waves.length === 0 ? (
+            <EmptyState title="No wave assignments" description="This account hasn't been assigned to an outreach wave yet." />
+          ) : (
+            waves.map((w, i) => (
+              <Card key={i}>
+                <CardContent className="p-4 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium text-sm">{w.wave}</span>
+                    <StatusBadge status={w.status} />
+                  </div>
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-[var(--muted-foreground)]">
+                    <span>Channel: {w.channel_mix}</span>
+                    <span>Owner: {w.owner}</span>
+                    <span>Start: {w.start_date}</span>
+                    <span>Follow-up 1: {w.follow_up_1}</span>
+                  </div>
+                  <p className="text-sm">{w.primary_objective}</p>
+                </CardContent>
+              </Card>
+            ))
+          )}
+        </TabsContent>
+
+        {/* Brief Tab */}
+        <TabsContent value="brief">
+          {!brief ? (
+            <EmptyState title="No brief available" description="Meeting brief not yet created for this account." />
+          ) : (
+            <div className="space-y-3">
+              {[
+                { label: 'Why This Account', value: brief.why_this_account },
+                { label: 'Why Now', value: brief.why_now },
+                { label: 'Likely Pain Points', value: brief.likely_pain_points },
+                { label: 'Primo Relevance', value: brief.primo_relevance },
+                { label: 'Best First Meeting Outcome', value: brief.best_first_meeting_outcome },
+                { label: 'Suggested Attendees', value: brief.suggested_attendees },
+                { label: 'Prep Assets Needed', value: brief.prep_assets_needed },
+                { label: 'Open Questions', value: brief.open_questions },
+              ].map((s) => (
+                <Card key={s.label}>
+                  <CardContent className="p-4">
+                    <p className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">{s.label}</p>
+                    <p className="mt-1.5 text-sm leading-relaxed">{s.value}</p>
+                  </CardContent>
+                </Card>
+              ))}
+              {(brief.source_url_1 || brief.source_url_2) && (
+                <Card>
+                  <CardContent className="p-4">
+                    <p className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Sources</p>
+                    <div className="mt-1.5 space-y-1">
+                      {brief.source_url_1 && (
+                        <a href={brief.source_url_1} target="_blank" rel="noopener noreferrer" className="block text-sm text-[var(--primary)] hover:underline break-all">
+                          {brief.source_url_1}
+                        </a>
+                      )}
+                      {brief.source_url_2 && (
+                        <a href={brief.source_url_2} target="_blank" rel="noopener noreferrer" className="block text-sm text-[var(--primary)] hover:underline break-all">
+                          {brief.source_url_2}
+                        </a>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+          )}
+        </TabsContent>
+
+        {/* Routes Tab */}
+        <TabsContent value="routes">
+          {!auditRoute ? (
+            <EmptyState title="No audit route" description="No audit route has been created for this account." />
+          ) : (
+            <Card>
+              <CardContent className="p-4 space-y-3">
+                <div className="flex items-center gap-2">
+                  <a href={auditRoute.audit_url} target="_blank" rel="noopener noreferrer" className="text-sm text-[var(--primary)] hover:underline break-all flex-1">
+                    {auditRoute.audit_url}
+                  </a>
+                  <CopyButton text={auditRoute.audit_url} />
+                </div>
+                <Separator />
+                <div className="space-y-2">
+                  <div>
+                    <p className="text-xs font-medium text-[var(--muted-foreground)]">Suggested Message</p>
+                    <div className="flex items-start gap-2">
+                      <p className="mt-0.5 text-sm flex-1">{auditRoute.suggested_message}</p>
+                      <CopyButton text={auditRoute.suggested_message} />
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-xs font-medium text-[var(--muted-foreground)]">Fast Ask</p>
+                    <p className="mt-0.5 text-sm">{auditRoute.fast_ask}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-medium text-[var(--muted-foreground)]">Proof Asset</p>
+                    <p className="mt-0.5 text-sm">{auditRoute.proof_asset}</p>
+                  </div>
+                  {auditRoute.warm_route && (
+                    <div>
+                      <p className="text-xs font-medium text-[var(--muted-foreground)]">Warm Route</p>
+                      <p className="mt-0.5 text-sm">{auditRoute.warm_route}</p>
+                    </div>
+                  )}
+                </div>
+                <Separator />
+                <a href="https://calendly.com/jake-freightroll/mnfst" target="_blank" rel="noopener noreferrer">
+                  <Button size="sm" className="gap-1">
+                    <Calendar className="h-3.5 w-3.5" /> Open Calendly
+                  </Button>
+                </a>
+              </CardContent>
+            </Card>
+          )}
+        </TabsContent>
+
+        {/* Activity Tab */}
+        <TabsContent value="activity" className="space-y-3">
+          {activities.length === 0 ? (
+            <EmptyState title="No activities yet" description="Activities for this account will appear here." />
+          ) : (
+            activities.map((a, i) => (
+              <Card key={i}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <Badge variant="secondary" className="text-xs">{a.activity_type}</Badge>
+                    <span className="text-xs text-[var(--muted-foreground)]">{a.activity_date}</span>
+                  </div>
+                  {a.notes && <p className="mt-1.5 text-sm">{a.notes}</p>}
+                  {a.outcome && <p className="mt-1 text-xs text-[var(--muted-foreground)]">Outcome: {a.outcome}</p>}
+                  {a.next_step && <p className="mt-0.5 text-xs text-[var(--muted-foreground)]">Next: {a.next_step}</p>}
+                </CardContent>
+              </Card>
+            ))
+          )}
+        </TabsContent>
+      </Tabs>
+    </div>
   );
 }

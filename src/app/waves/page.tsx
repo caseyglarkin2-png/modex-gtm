@@ -1,10 +1,15 @@
-import { getOutreachWaves } from '@/lib/data';
+import Link from 'next/link';
+import { getOutreachWaves, slugify } from '@/lib/data';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { StatusBadge } from '@/components/status-badge';
+import { Waves } from 'lucide-react';
 
-const WAVE_COLORS: Record<number, string> = {
-  0: 'border-l-purple-500 bg-purple-50',
-  1: 'border-l-blue-500 bg-blue-50',
-  2: 'border-l-amber-500 bg-amber-50',
-  3: 'border-l-gray-500 bg-gray-50',
+const WAVE_ACCENT: Record<number, string> = {
+  0: 'border-l-red-500',
+  1: 'border-l-blue-500',
+  2: 'border-l-violet-500',
+  3: 'border-l-emerald-500',
 };
 
 export default function WavesPage() {
@@ -16,49 +21,61 @@ export default function WavesPage() {
   }));
 
   return (
-    <>
-      <h1 className="text-2xl font-bold">Outreach Waves</h1>
-      <p className="mt-1 text-sm text-[var(--muted-foreground)]">
-        4-wave outreach strategy: Warm intros → Must-book → High-value → Ecosystem / opportunistic.
-      </p>
+    <div className="space-y-8">
+      <div>
+        <h1 className="text-2xl font-bold tracking-tight">Outreach Waves</h1>
+        <p className="text-sm text-[var(--muted-foreground)]">
+          4-wave outreach strategy: Warm intros &rarr; Must-book &rarr; High-value &rarr; Ecosystem.
+        </p>
+      </div>
 
-      <div className="mt-6 space-y-8">
-        {grouped.map((group) => (
-          <div key={group.order}>
-            <h2 className="text-lg font-semibold">{group.label} ({group.items.length} accounts)</h2>
-            <div className="mt-3 space-y-3">
+      {grouped.map((group) => {
+        const progressed = group.items.filter((w) => w.status !== 'Not started' && w.status !== 'Planned').length;
+        const pct = group.items.length ? Math.round((progressed / group.items.length) * 100) : 0;
+        return (
+          <div key={group.order} className="space-y-3">
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-semibold flex items-center gap-2">
+                <Waves className="h-4 w-4" /> {group.label}
+                <Badge variant="secondary" className="text-xs">{group.items.length} accounts</Badge>
+              </h2>
+              <span className="text-xs text-[var(--muted-foreground)]">{progressed}/{group.items.length} progressed ({pct}%)</span>
+            </div>
+            <div className="h-2 overflow-hidden rounded-full bg-[var(--muted)]">
+              <div className={`h-full rounded-full ${WAVE_ACCENT[group.order]?.replace('border-l-', 'bg-')} transition-all`} style={{ width: `${pct}%` }} />
+            </div>
+            <div className="space-y-2">
               {group.items.map((w, i) => (
-                <div key={i} className={`rounded-lg border-l-4 border border-[var(--border)] p-4 ${WAVE_COLORS[group.order] || ''}`}>
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium text-sm">{w.account}</span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-[var(--muted-foreground)]">Rank {w.rank}</span>
-                      <span className="rounded bg-white/80 px-2 py-0.5 text-xs border border-[var(--border)]">{w.status}</span>
+                <Card key={i} className={`border-l-4 ${WAVE_ACCENT[group.order] || ''}`}>
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Link href={`/accounts/${slugify(w.account)}`} className="font-medium text-sm text-[var(--primary)] hover:underline">
+                          {w.account}
+                        </Link>
+                        <Badge variant="outline" className="text-xs">Rank {w.rank}</Badge>
+                      </div>
+                      <StatusBadge status={w.status} />
                     </div>
-                  </div>
-                  <div className="mt-2 grid grid-cols-2 gap-4 text-xs">
-                    <div><span className="text-[var(--muted-foreground)]">Channel:</span> {w.channel_mix}</div>
-                    <div><span className="text-[var(--muted-foreground)]">Owner:</span> {w.owner}</div>
-                    <div><span className="text-[var(--muted-foreground)]">Start:</span> {w.start_date}</div>
-                    <div><span className="text-[var(--muted-foreground)]">Follow-up 1:</span> {w.follow_up_1}</div>
-                    <div><span className="text-[var(--muted-foreground)]">Follow-up 2:</span> {w.follow_up_2}</div>
-                    <div><span className="text-[var(--muted-foreground)]">Warm Intro:</span> {w.use_warm_intro ? 'Yes' : 'No'}</div>
-                  </div>
-                  <div className="mt-2 text-sm">
-                    <span className="text-[var(--muted-foreground)] text-xs">Objective:</span> {w.primary_objective}
-                  </div>
-                  <div className="mt-1 text-xs text-[var(--muted-foreground)]">
-                    Primary: {w.primary_persona_lane} &middot; Secondary: {w.secondary_persona_lane}
-                  </div>
-                  <div className="mt-1 text-xs text-[var(--muted-foreground)]">
-                    Escalation: {w.escalation_trigger}
-                  </div>
-                </div>
+                    <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-[var(--muted-foreground)] sm:grid-cols-3">
+                      <span>Channel: {w.channel_mix}</span>
+                      <span>Owner: {w.owner}</span>
+                      <span>Start: {w.start_date}</span>
+                      <span>Follow-up 1: {w.follow_up_1}</span>
+                      <span>Follow-up 2: {w.follow_up_2}</span>
+                      <span>Warm Intro: {w.use_warm_intro ? 'Yes' : 'No'}</span>
+                    </div>
+                    <p className="mt-2 text-sm">{w.primary_objective}</p>
+                    <div className="mt-1 text-xs text-[var(--muted-foreground)]">
+                      Primary: {w.primary_persona_lane} &middot; Secondary: {w.secondary_persona_lane} &middot; Escalation: {w.escalation_trigger}
+                    </div>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           </div>
-        ))}
-      </div>
-    </>
+        );
+      })}
+    </div>
   );
 }
