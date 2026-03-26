@@ -9,6 +9,9 @@ export interface PromptContext {
   score?: number;
   previousMeeting?: string;
   notes?: string;
+  vertical?: string;
+  primoAngle?: string;
+  parentBrand?: string;
   tone: 'professional' | 'casual' | 'bold';
   length: 'short' | 'medium' | 'long';
 }
@@ -37,13 +40,15 @@ ${getVoiceGuardrails()}
 
 Target: ${ctx.personaName ?? 'decision maker'} at ${ctx.accountName}${ctx.personaTitle ? ` (${ctx.personaTitle})` : ''}
 Priority: ${ctx.bandLabel ?? 'Tier 1'}
+${ctx.vertical ? `Vertical: ${ctx.vertical}` : ''}
+${ctx.primoAngle ? `What makes this account specific: ${ctx.primoAngle}` : ''}
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 
 MODEX: April 13-16, Atlanta. YardFlow will be on-site with live users from the network. Prospects can sit with operators running YardFlow across 24 facilities and ask them anything. Suggest meeting windows: Tuesday April 14 at 10am, 1pm, or 3pm. Offer flexibility for other show days. No calendar link. Get them to reply with a time.
 
 Goal: Book a 30-minute meeting at MODEX to walk their yard network and build a board-ready rollout plan.
 
-Max 120 words. Open on a truth about their operation, not a greeting. End with a direct question. No sign-off.
+Max 100 words. Open on a truth about THEIR specific operation, not a generic supply chain statement. Do not start with "The yard is where." End with a direct question. No sign-off.
 
 Output: Only the email body.`;
 }
@@ -57,13 +62,15 @@ ${getVoiceGuardrails()}
 
 Target: ${ctx.personaName ?? 'decision maker'} at ${ctx.accountName}${ctx.personaTitle ? ` (${ctx.personaTitle})` : ''}
 Previous: ${ctx.previousMeeting ?? 'cold email sent about yard network standardization ahead of MODEX'}
+${ctx.vertical ? `Vertical: ${ctx.vertical}` : ''}
+${ctx.primoAngle ? `What makes this account specific: ${ctx.primoAngle}` : ''}
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 
 Do not reference the first email directly. Come in from a different angle. Add one new proof point (a stat, a module, the customer quote). Make the current state feel more expensive than before.
 
 MODEX: April 13-16, Atlanta. Live YardFlow users will be on-site. Suggest Tuesday April 14. No calendar link.
 
-Max 80 words. Tighter and harder than the first touch. End with a direct question. No sign-off.
+Max 70 words. Tighter and harder than the first touch. End with a direct question. No sign-off.
 
 Output: Only the email body.`;
 }
@@ -195,38 +202,60 @@ Generate ONLY valid JSON matching this schema — no markdown, no commentary:
 }
 
 export function buildOutreachSequencePrompt(ctx: PromptContext, step: 'initial_email' | 'follow_up_1' | 'follow_up_2' | 'breakup'): string {
+  // Rotate opening strategy based on account name hash to force variation across accounts
+  const hash = ctx.accountName.split('').reduce((h, c) => ((h << 5) - h + c.charCodeAt(0)) | 0, 0);
+  const strategies = ['OBSERVATION', 'UNCOMFORTABLE QUESTION', 'COST NOBODY COUNTED', 'PEER GAP', 'REFRAME', 'SPECIFICITY'];
+  const primaryStrategy = strategies[Math.abs(hash) % strategies.length];
+  const secondaryStrategy = strategies[(Math.abs(hash) + 3) % strategies.length];
+
+  const accountContext = [
+    ctx.vertical ? `Vertical: ${ctx.vertical}` : '',
+    ctx.parentBrand && ctx.parentBrand !== ctx.accountName ? `Parent brand: ${ctx.parentBrand}` : '',
+    ctx.primoAngle ? `What makes this account specific: ${ctx.primoAngle}` : '',
+  ].filter(Boolean).join('\n');
+
   const stepInstructions: Record<string, string> = {
     initial_email: `STEP 1 of 4. First touch. Cold. They have never heard from you.
 
-Open on a truth about their operation that they will recognize but have never heard described this clearly. Name the yard as the constraint. Connect it to the cost of leaving it unfixed. Position YNS as the structural answer, not a feature pitch.
+MANDATORY OPENING STRATEGY for this email: Use the "${primaryStrategy}" approach from the variation taxonomy. Do NOT use any other approach. Make the opening feel specific to ${ctx.accountName}'s operational reality using the account context below.
 
-MODEX 2026 is April 13-16 in Atlanta. YardFlow will have live users from the network on-site. Operators running YardFlow across 24 facilities will be there to answer questions. Suggest specific meeting windows: Tuesday April 14 at 10am, 1pm, or 3pm. Offer flexibility for other show days. No calendar link. Get them to reply with a time.
+Write about their specific operational world, not generic supply chain. If they are food manufacturing, write about plant throughput and production surges. If they are retail, write about DC velocity and replenishment windows. If they are industrial, write about trailer scheduling complexity. Make the reader think you have walked their yard.
 
-Max 120 words. Subject line under 6 words, lowercase, no company name.`,
+The yard thesis should emerge from THEIR reality, not from a canned framing. Do not start with "The yard is where." Find a different path into the same truth.
+
+Mention the product (YardFlow / Yard Network System) only once, briefly, in the second half. Do not explain what it is in pitch language. Let proof carry the weight.
+
+MODEX 2026 is April 13-16 in Atlanta. YardFlow will have live users from the network on-site. Suggest meeting windows: Tuesday April 14 at 10am, 1pm, or 3pm. Offer flexibility. No calendar link. Get them to reply.
+
+Max 100 words. Subject under 6 words, lowercase, no company name. End with a direct question.`,
 
     follow_up_1: `STEP 2 of 4. Sent 3 days after Step 1.
 
-Do NOT reference the first email. Come in from a completely different angle. Add one proof point they have not seen: a stat (48 to 24 min drop and hook), a module name (flowSPOTTER, flowTWIN), or the customer quote about headcount neutrality.
+MANDATORY OPENING STRATEGY for this email: Use the "${secondaryStrategy}" approach. Completely different angle from Step 1.
 
-Make the yard problem feel more concrete than before. Tighter. Harder. Fewer words.
+Do NOT reference the first email. Come in from a new direction. Add one proof point they have not seen: a specific stat (48 to 24 min drop and hook), a module name (flowSPOTTER, flowTWIN), or the customer quote about headcount neutrality. Pick whichever feels most relevant to ${ctx.accountName}'s vertical.
 
-MODEX is close. Live YardFlow users on-site April 13-16. Suggest a slot on Tuesday April 14. No calendar link.
+Make the yard problem feel more expensive than before. Tighter. Harder.
 
-Max 80 words. Subject line under 6 words, lowercase.`,
+MODEX is close. Live users on-site April 13-16. Suggest Tuesday April 14. No calendar link.
+
+Max 70 words. Subject under 6 words, lowercase.`,
 
     follow_up_2: `STEP 3 of 4. Sent 6 days after Step 2.
 
-Switch angle entirely. Lead with the variance tax: every facility running its own playbook, tribal knowledge at the gate, radio dispatching under pressure, the yard as the last analog mile in a digital supply chain. Make the cost of inaction feel compounding and irrecoverable.
+Switch angle entirely. Pick ONE specific symptom that would be vivid for ${ctx.accountName}'s operations and make it the centerpiece. Not a list of symptoms. One concrete image of what their yard costs them.
 
-MODEX schedule is filling up. Create urgency through consequence, not fake scarcity. Suggest one specific slot on Tuesday April 14.
+Create urgency through consequence, not fake scarcity. Make inaction feel compounding.
 
-Max 80 words. This is the last real shot. Every word must earn its keep. Subject line under 6 words, lowercase.`,
+MODEX schedule is filling. Suggest one slot on Tuesday April 14.
+
+Max 70 words. Subject under 6 words, lowercase.`,
 
     breakup: `STEP 4 of 4. Breakup.
 
-Short. Clean. No guilt, no pressure, no passive aggression. Plant one seed: the yard is the constraint, and YNS exists when the timing is right. If MODEX has not happened yet, leave the door open for a walk-up conversation on-site.
+Short. Clean. No guilt, no pressure. Plant one seed about the yard constraint. Leave the door open for a walk-up at MODEX if timing does not work now.
 
-Max 50 words. Subject line under 6 words, lowercase, no company or person name.`,
+Max 40 words. Subject under 6 words, lowercase.`,
   };
 
   return `You are writing outreach as Casey Larkin for YardFlow by FreightRoll.
@@ -237,6 +266,7 @@ ${getVoiceGuardrails()}
 
 Target: ${ctx.personaName ?? 'decision maker'} at ${ctx.accountName}${ctx.personaTitle ? ` (${ctx.personaTitle})` : ''}
 Priority: ${ctx.bandLabel ?? 'Tier 1'}
+${accountContext}
 ${ctx.notes ? `Account context: ${ctx.notes}` : ''}
 
 ${stepInstructions[step]}
@@ -244,9 +274,10 @@ ${stepInstructions[step]}
 CRITICAL OUTPUT RULES:
 - No sign-off (no Best, Sincerely, Regards, [Your Name], Casey, Casey Larkin)
 - No greeting (no Hi, Hey, Hello, Dear)
-- No em dashes
+- No em dashes (use periods or commas instead)
 - No exclamation marks
 - Do not open with "I"
+- Do not open with "The yard is where"
 - Do not mention YardFlow in the first sentence
 - End with a question or a single declarative ask, then stop
 

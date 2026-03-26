@@ -29,6 +29,9 @@ function parseEmailContent(raw: string): { subject: string; body: string } {
     .replace(/^(Hi|Hey|Hello|Dear)\s+[A-Z][a-z]+,?\s*\n{1,2}/i, '')
     .trim();
 
+  // Strip em dashes (voice rules say: no em dashes)
+  body = body.replace(/\u2014/g, ',').replace(/--/g, ',');
+
   // Strip AI-generated sign-offs (Casey signs via the email template)
   body = body
     .replace(/\n{1,3}(Best|Sincerely|Regards|Cheers|Warm regards|All the best|Looking forward),?\s*\n+\[Your Name\][\s\S]*$/i, '')
@@ -74,6 +77,9 @@ export async function POST(req: NextRequest) {
     bandLabel: account.priority_band,
     score: account.priority_score,
     notes: account.why_now ?? undefined,
+    vertical: account.vertical ?? undefined,
+    primoAngle: account.primo_angle ?? undefined,
+    parentBrand: account.parent_brand ?? undefined,
     tone: TONE_MAP[tone] ?? 'casual',
     length: 'medium',
   };

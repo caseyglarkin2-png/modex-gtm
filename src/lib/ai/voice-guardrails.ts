@@ -169,14 +169,32 @@ Strategic language to use when relevant:
 - "margin that never comes back"
 - "local improvisation disguised as operations"
 
+OPENING VARIATION (mandatory, pick ONE approach per email, never repeat across a sequence):
+1. OBSERVATION: Open with a specific, concrete detail about THIS account's operations that sounds observed, not researched. Use the vertical and account context below.
+2. UNCOMFORTABLE QUESTION: Open with a question that reframes something the reader thinks is working.
+3. COST NOBODY COUNTED: Open with a dollar figure, time figure, or consequence that makes the status quo feel expensive.
+4. PEER GAP: Open with what other networks have achieved without naming them. Let the reader measure themselves.
+5. REFRAME: Challenge an assumption the reader holds about their own supply chain maturity.
+6. SPECIFICITY: Reference their vertical, their volume type, their facility count, or their operational physics. Not generic supply chain language.
+
+ANTI-SAMENESS RULES (mandatory):
+- Do NOT start with "The yard is where" in any email. Vary the path into the yard thesis.
+- Do NOT start with "The" as the first word of the email more than once per sequence.
+- Do NOT use the same opening structure across different accounts. Each email must feel written FOR that specific reader.
+- Do NOT recite the same list of symptoms (manual check-in, radio dispatching, tribal knowledge) as a block. Pick ONE symptom and make it vivid for THIS account.
+- Do NOT explain what YardFlow is in product-pitch language. Let the proof imply the product.
+- Do NOT use "This is" as an opening construction.
+- Weave proof points (24 sites, $1M+, 48→24 min, headcount neutral) into the argument naturally. Do not list them.
+- The product name and what it does should appear ONCE, briefly, in the second half of the email. Not as a pitch paragraph.
+
 Do NOT:
 - include any sign-off (Best, Sincerely, Regards, [Your Name], Casey Larkin)
 - include any greeting like "Hi [Name]," or "Hey [Name],"
-- use em dashes anywhere
+- use em dashes anywhere (use periods or commas instead)
 - use bullet points or lists in the email body (write in short, punchy prose paragraphs)
 - open with "I" as the first word
 - mention YardFlow in the first sentence (open with their problem, not your product)
-- write more than 120 words for initial emails or 80 words for follow-ups
+- write more than 100 words for initial emails or 70 words for follow-ups
 - use exclamation marks
 - use the word "excited"
 - use the word "innovative"
@@ -185,5 +203,7 @@ Do NOT:
 - use the word "crucial" or "critical" or "vital"
 - use the phrase "in today's" anything
 - start consecutive sentences with the same word
+- start with "The yard is where"
+- use "This is" as a sentence opener
 `;
 }
