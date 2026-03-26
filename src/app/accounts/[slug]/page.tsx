@@ -77,9 +77,9 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
               <OnePagerDialog
                 accountName={account.name}
                 trigger={
-                  <Button size="sm" variant="outline" className="gap-1.5 border-blue-500/30 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950">
+                  <Button size="sm" className="gap-1.5 bg-blue-600 text-white hover:bg-blue-700">
                     <FileText className="h-3.5 w-3.5" />
-                    One-Pager
+                    Generate One-Pager
                   </Button>
                 }
               />
@@ -87,9 +87,9 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                 accountName={account.name}
                 personas={personas.map((p) => ({ name: p.name, title: p.title ?? undefined, priority: p.priority }))}
                 trigger={
-                  <Button size="sm" variant="outline" className="gap-1.5 border-amber-500/30 text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950">
+                  <Button size="sm" className="gap-1.5 bg-amber-600 text-white hover:bg-amber-700">
                     <Activity className="h-3.5 w-3.5" />
-                    Outreach
+                    Generate Outreach
                   </Button>
                 }
               />
