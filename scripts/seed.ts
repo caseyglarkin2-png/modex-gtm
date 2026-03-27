@@ -6,6 +6,8 @@ import meetingBriefsData from '../src/lib/data/meeting-briefs.json';
 import auditRoutesData from '../src/lib/data/audit-routes.json';
 import qrAssetsData from '../src/lib/data/qr-assets.json';
 import activitiesData from '../src/lib/data/activities.json';
+import meetingsData from '../src/lib/data/meetings.json';
+import mobileCapturesData from '../src/lib/data/mobile-captures.json';
 import actionableIntelData from '../src/lib/data/actionable-intel.json';
 import searchStringsData from '../src/lib/data/search-strings.json';
 
@@ -77,6 +79,8 @@ async function main() {
         next_step: p.next_step ?? null,
         notes: p.notes ?? null,
         account_score: p.account_score,
+        email: (p as Record<string, unknown>).email as string ?? null,
+        phone: (p as Record<string, unknown>).phone as string ?? null,
       },
     });
   }
@@ -98,9 +102,9 @@ async function main() {
         use_primo_asset: w.use_primo_asset,
         primary_persona_lane: w.primary_persona_lane,
         secondary_persona_lane: w.secondary_persona_lane,
-        start_date: w.start_date,
-        followup_1: w.follow_up_1,
-        followup_2: w.follow_up_2,
+        start_date: w.start_date ? new Date(w.start_date) : null,
+        followup_1: w.follow_up_1 ? new Date(w.follow_up_1) : null,
+        followup_2: w.follow_up_2 ? new Date(w.follow_up_2) : null,
         escalation_trigger: w.escalation_trigger,
         meeting_goal: w.meeting_goal,
         owner: w.owner,
@@ -136,95 +140,161 @@ async function main() {
   console.log(`  ✓ ${meetingBriefsData.length} meeting briefs`);
 
   // Audit Routes
+  let auditCount = 0;
   for (const r of auditRoutesData) {
-    await prisma.auditRoute.create({
-      data: {
-        rank: r.rank,
-        account_name: r.account,
-        audit_url: r.audit_url,
-        suggested_ask: r.suggested_message,
-        fast_ask: r.fast_ask,
-        proof_asset: r.proof_asset,
-        warm_route: r.warm_route ?? null,
-        graphic_file: r.graphic_file ?? null,
-        owner: r.owner,
-        status: r.status,
-        last_touch: r.last_touch ?? null,
-      },
-    });
+    try {
+      await prisma.auditRoute.upsert({
+        where: { account_name: r.account },
+        update: {},
+        create: {
+          rank: r.rank,
+          account_name: r.account,
+          audit_url: r.audit_url,
+          suggested_ask: r.suggested_message,
+          fast_ask: r.fast_ask,
+          proof_asset: r.proof_asset,
+          warm_route: r.warm_route ?? null,
+          graphic_file: r.graphic_file ?? null,
+          owner: r.owner,
+          status: r.status,
+          last_touch: r.last_touch ?? null,
+        },
+      });
+      auditCount++;
+    } catch { /* skip FK mismatch */ }
   }
-  console.log(`  ✓ ${auditRoutesData.length} audit routes`);
+  console.log(`  ✓ ${auditCount}/${auditRoutesData.length} audit routes`);
 
   // QR Assets
+  let qrCount = 0;
   for (const q of qrAssetsData) {
-    await prisma.qrAsset.create({
-      data: {
-        account_name: q.account,
-        audit_url: q.audit_url,
-        suggested_use: q.suggested_use,
-        proof_asset: q.proof_asset,
-        graphic_file: q.graphic_file ?? null,
-        notes: q.notes ?? null,
-      },
-    });
+    try {
+      await prisma.qrAsset.upsert({
+        where: { account_name: q.account },
+        update: {},
+        create: {
+          account_name: q.account,
+          audit_url: q.audit_url,
+          suggested_use: q.suggested_use,
+          proof_asset: q.proof_asset,
+          graphic_file: q.graphic_file ?? null,
+          notes: q.notes ?? null,
+        },
+      });
+      qrCount++;
+    } catch { /* skip FK mismatch */ }
   }
-  console.log(`  ✓ ${qrAssetsData.length} QR assets`);
+  console.log(`  ✓ ${qrCount}/${qrAssetsData.length} QR assets`);
 
   // Activities
+  let actCount = 0;
   for (const a of activitiesData) {
-    await prisma.activity.create({
-      data: {
-        activity_date: a.activity_date,
-        account_name: a.account,
-        persona: a.persona ?? null,
-        activity_type: a.activity_type,
-        owner: a.owner,
-        outcome: a.outcome ?? null,
-        next_step: a.next_step ?? null,
-        next_step_due: a.next_step_due ?? null,
-        notes: a.notes ?? null,
-      },
-    });
+    try {
+      await prisma.activity.create({
+        data: {
+          activity_date: a.activity_date ? new Date(a.activity_date) : null,
+          account_name: a.account,
+          persona: a.persona ?? null,
+          activity_type: a.activity_type,
+          owner: a.owner,
+          outcome: a.outcome ?? null,
+          next_step: a.next_step ?? null,
+          next_step_due: a.next_step_due ? new Date(a.next_step_due) : null,
+          notes: a.notes ?? null,
+        },
+      });
+      actCount++;
+    } catch { /* skip FK or date issues */ }
   }
-  console.log(`  ✓ ${activitiesData.length} activities`);
+  console.log(`  ✓ ${actCount}/${activitiesData.length} activities`);
 
   // Actionable Intel
+  let intelCount = 0;
   for (const item of actionableIntelData) {
-    await prisma.actionableIntel.create({
-      data: {
-        account: item.account,
-        intel_type: item.intel_type,
-        why_it_matters: item.why_it_matters,
-        how_to_find: item.how_to_find_it,
-        owner: item.owner,
-        status: item.status,
-        field_to_update: item.field_to_update,
-      },
-    });
+    try {
+      await prisma.actionableIntel.create({
+        data: {
+          account: item.account,
+          intel_type: item.intel_type,
+          why_it_matters: item.why_it_matters,
+          how_to_find: item.how_to_find_it,
+          owner: item.owner,
+          status: item.status,
+          field_to_update: item.field_to_update,
+        },
+      });
+      intelCount++;
+    } catch { /* skip */ }
   }
-  console.log(`  ✓ ${actionableIntelData.length} actionable intel items`);
+  console.log(`  ✓ ${intelCount}/${actionableIntelData.length} actionable intel items`);
 
   // Search Strings
+  let searchCount = 0;
   for (const s of searchStringsData) {
-    await prisma.searchString.create({
-      data: {
-        account: s.account,
-        wave: s.wave,
-        priority: s.priority,
-        function: s.function,
-        target_title: s.target_title,
-        named_seed: s.named_seed ?? null,
-        sales_nav_query: s.sales_nav_query,
-        linkedin_query: s.linkedin_query,
-        google_xray_query: s.google_xray_query,
-        keywords: s.keywords ?? null,
-        source_signal: s.source_signal ?? null,
-        owner: s.owner,
-        status: s.status,
-      },
-    });
+    try {
+      await prisma.searchString.create({
+        data: {
+          account: s.account,
+          wave: s.wave,
+          priority: s.priority,
+          function: s.function,
+          target_title: s.target_title,
+          named_seed: s.named_seed ?? null,
+          sales_nav_query: s.sales_nav_query,
+          linkedin_query: s.linkedin_query,
+          google_xray_query: s.google_xray_query,
+          keywords: s.keywords ?? null,
+          source_signal: s.source_signal ?? null,
+          owner: s.owner,
+          status: s.status,
+        },
+      });
+      searchCount++;
+    } catch { /* skip */ }
   }
-  console.log(`  ✓ ${searchStringsData.length} search strings`);
+  console.log(`  ✓ ${searchCount}/${searchStringsData.length} search strings`);
+
+  // Meetings
+  let meetingCount = 0;
+  for (const m of meetingsData as Array<Record<string, unknown>>) {
+    try {
+      await prisma.meeting.create({
+        data: {
+          account_name: m.account as string,
+          persona: (m.attendees as string) ?? null,
+          meeting_status: (m.status as string) ?? 'No meeting',
+          meeting_date: m.date ? new Date(m.date as string) : null,
+          notes: (m.notes as string) ?? null,
+          owner: 'Jake',
+        },
+      });
+      meetingCount++;
+    } catch { /* skip FK or date issues */ }
+  }
+  console.log(`  ✓ ${meetingCount}/${meetingsData.length} meetings`);
+
+  // Mobile Captures
+  let captureCount = 0;
+  for (const c of mobileCapturesData as Array<Record<string, unknown>>) {
+    try {
+      await prisma.mobileCapture.create({
+        data: {
+          account_name: c.account as string,
+          persona_name: (c.contact as string) ?? null,
+          notes: (c.notes as string) ?? null,
+          interest: (c.interest as number) ?? 0,
+          urgency: (c.urgency as number) ?? 0,
+          influence: (c.influence as number) ?? 0,
+          fit: (c.fit as number) ?? 0,
+          heat_score: (c.heat_score as number) ?? 0,
+          due_date: c.due_date ? new Date(c.due_date as string) : null,
+          followup_status: (c.status as string) ?? 'Open',
+        },
+      });
+      captureCount++;
+    } catch { /* skip FK or date issues */ }
+  }
+  console.log(`  ✓ ${captureCount}/${mobileCapturesData.length} mobile captures`);
 
   console.log('Done!');
 }

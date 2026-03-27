@@ -68,10 +68,37 @@ export const GenerateContentSchema = z.object({
   personaName: z.string().optional(),
   tone: z.enum(['formal', 'conversational', 'provocative']).default('conversational'),
   length: z.enum(['short', 'medium', 'long']).default('medium'),
-  // Extra context passed from account data
   context: z.record(z.string(), z.string()).optional(),
 });
 export type GenerateContentInput = z.infer<typeof GenerateContentSchema>;
+
+// ── Add Account ───────────────────────────────────────
+export const AddAccountSchema = z.object({
+  name: z.string().min(1, 'Account name is required'),
+  vertical: z.string().min(1, 'Vertical is required'),
+  parent_brand: z.string().optional(),
+  why_now: z.string().optional(),
+  primo_angle: z.string().optional(),
+  tier: z.enum(['Tier 1', 'Tier 2', 'Tier 3']).default('Tier 3'),
+  owner: z.string().optional().default('Casey'),
+  notes: z.string().optional(),
+});
+export type AddAccountInput = z.infer<typeof AddAccountSchema>;
+
+// ── Add Persona ───────────────────────────────────────
+export const AddPersonaSchema = z.object({
+  account_name: z.string().min(1, 'Account is required'),
+  name: z.string().min(1, 'Name is required'),
+  title: z.string().optional(),
+  email: z.string().email().optional().or(z.literal('')),
+  priority: z.enum(['P1', 'P2', 'P3']).default('P2'),
+  persona_lane: z.string().optional(),
+  role_in_deal: z.string().optional(),
+  linkedin_url: z.string().url().optional().or(z.literal('')),
+  why_this_persona: z.string().optional(),
+  notes: z.string().optional(),
+});
+export type AddPersonaInput = z.infer<typeof AddPersonaSchema>;
 
 // ── Email Send ────────────────────────────────────────
 export const SendEmailSchema = z.object({

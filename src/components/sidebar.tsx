@@ -21,6 +21,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Rocket,
+  BarChart3,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -62,6 +63,7 @@ const NAV_SECTIONS = [
     items: [
       { href: '/activities', label: 'Activities', icon: Activity },
       { href: '/meetings', label: 'Meetings', icon: CalendarCheck },
+      { href: '/analytics', label: 'Analytics', icon: BarChart3 },
     ],
   },
 ];

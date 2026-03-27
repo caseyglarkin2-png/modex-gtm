@@ -72,6 +72,8 @@ model Persona {
   next_step         String?
   notes             String?
   account_score     Int      @default(0)
+  email             String?
+  phone             String?
   created_at        DateTime @default(now())
   updated_at        DateTime @updatedAt
 
@@ -320,7 +322,7 @@ model EmailLog {
   subject       String
   body_html     String
   status        String   @default("sent") // sent | delivered | opened | clicked | bounced
-  sendgrid_id   String?
+  provider_message_id String?
   opened_at     DateTime?
   clicked_at    DateTime?
   sent_at       DateTime @default(now())

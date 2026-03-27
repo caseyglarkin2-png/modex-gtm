@@ -27,6 +27,8 @@ import { EmailComposer } from '@/components/email/composer';
 import { OnePagerDialog } from '@/components/ai/one-pager-preview';
 import { OutreachSequenceDialog } from '@/components/ai/outreach-sequence';
 import { Breadcrumb } from '@/components/breadcrumb';
+import { AddPersonaDialog } from '@/components/add-persona-dialog';
+import { EditableStatus } from '@/components/editable-status';
 
 export function generateStaticParams() {
   return getAccounts().map((a) => ({ slug: slugify(a.name) }));
@@ -111,15 +113,15 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
           <div className="flex flex-wrap gap-3">
             <div className="flex items-center gap-2 text-sm">
               <span className="text-[var(--muted-foreground)]">Research:</span>
-              <StatusBadge status={account.research_status} />
+              <EditableStatus accountName={account.name} field="research_status" currentValue={account.research_status} />
             </div>
             <div className="flex items-center gap-2 text-sm">
               <span className="text-[var(--muted-foreground)]">Outreach:</span>
-              <StatusBadge status={account.outreach_status} />
+              <EditableStatus accountName={account.name} field="outreach_status" currentValue={account.outreach_status} />
             </div>
             <div className="flex items-center gap-2 text-sm">
               <span className="text-[var(--muted-foreground)]">Meeting:</span>
-              <StatusBadge status={account.meeting_status} />
+              <EditableStatus accountName={account.name} field="meeting_status" currentValue={account.meeting_status} />
             </div>
           </div>
 
@@ -182,6 +184,9 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
 
         {/* Personas Tab */}
         <TabsContent value="personas" className="space-y-3">
+          <div className="flex justify-end">
+            <AddPersonaDialog accountName={account.name} />
+          </div>
           {personas.length === 0 ? (
             <EmptyState title="No personas mapped" description="Personas will appear here once added." />
           ) : (

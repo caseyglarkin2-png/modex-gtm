@@ -33,5 +33,28 @@ export async function POST(req: NextRequest) {
   const sent = results.filter((r) => r.status === 'fulfilled').length;
   const failed = results.filter((r) => r.status === 'rejected').length;
 
+  // Best-effort DB logging for each send
+  try {
+    const { prisma } = await import('@/lib/prisma');
+    for (let i = 0; i < results.length; i++) {
+      const r = results[i];
+      const recipient = recipients[i];
+      const providerMessageId = r.status === 'fulfilled' ? (r.value as { headers?: Record<string, string> })?.headers?.['x-message-id'] ?? null : null;
+      await prisma.emailLog.create({
+        data: {
+          account_name: accountName ?? '',
+          persona_name: recipient.personaName ?? null,
+          to_email: recipient.to,
+          subject,
+          body_html: html,
+          status: r.status === 'fulfilled' ? 'sent' : 'failed',
+          provider_message_id: providerMessageId,
+        },
+      }).catch(() => { /* individual log failure is non-blocking */ });
+    }
+  } catch {
+    // DB offline — skip logging
+  }
+
   return NextResponse.json({ success: true, sent, failed, total: recipients.length });
 }

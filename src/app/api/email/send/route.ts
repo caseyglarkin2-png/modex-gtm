@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
   }
 
-  const { to, cc, subject, bodyHtml, accountName } = parsed.data;
+  const { to, cc, subject, bodyHtml, accountName, personaName } = parsed.data;
 
   // Wrap plain text or already-composed HTML into branded template
   const isPlainText = !bodyHtml.trim().startsWith('<');
@@ -37,12 +37,12 @@ export async function POST(req: NextRequest) {
       await prisma.emailLog.create({
         data: {
           account_name: accountName ?? '',
-          persona_name: null,
+          persona_name: personaName ?? null,
           to_email: to,
           subject,
           body_html: html,
           status: 'sent',
-          sendgrid_id: (response.headers?.['x-message-id'] as string) ?? null,
+          provider_message_id: (response.headers?.['x-message-id'] as string) ?? null,
         },
       });
     } catch {

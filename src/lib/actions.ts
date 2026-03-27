@@ -1,7 +1,7 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { CaptureSchema, ActivitySchema, MeetingSchema, type CaptureInput, type ActivityInput, type MeetingInput } from './validations';
+import { CaptureSchema, ActivitySchema, MeetingSchema, AddAccountSchema, AddPersonaSchema, type CaptureInput, type ActivityInput, type MeetingInput, type AddAccountInput, type AddPersonaInput } from './validations';
 
 // ── Capture ───────────────────────────────────────────────────────────────────
 export async function createCapture(data: CaptureInput) {
@@ -146,6 +146,91 @@ export async function updateIntelStatus(id: number, status: string) {
       data: { status },
     });
     revalidatePath('/intel');
+    return { success: true };
+  } catch {
+    return { success: false, offline: true };
+  }
+}
+
+// ── Add Account ───────────────────────────────────────────────────────────────
+export async function createAccount(data: AddAccountInput) {
+  const parsed = AddAccountSchema.safeParse(data);
+  if (!parsed.success) {
+    return { success: false, error: parsed.error.flatten().fieldErrors };
+  }
+  try {
+    const { prisma } = await import('./prisma');
+    const { computePriorityScore, computeTier, computePriorityBand } = await import('./scoring');
+    const existing = await prisma.account.count();
+    const rank = existing + 1;
+    const score = computePriorityScore({ icp_fit: 3, modex_signal: 3, primo_story_fit: 2, warm_intro: 1, strategic_value: 3, meeting_ease: 2 });
+    const tier = parsed.data.tier ?? computeTier(score);
+    const band = computePriorityBand(score);
+
+    await prisma.account.create({
+      data: {
+        rank,
+        name: parsed.data.name,
+        vertical: parsed.data.vertical,
+        parent_brand: parsed.data.parent_brand ?? null,
+        why_now: parsed.data.why_now ?? null,
+        primo_angle: parsed.data.primo_angle ?? null,
+        tier,
+        priority_band: band,
+        priority_score: score,
+        owner: parsed.data.owner ?? 'Casey',
+        notes: parsed.data.notes ?? null,
+        icp_fit: 3,
+        modex_signal: 3,
+        primo_story_fit: 2,
+        warm_intro: 1,
+        strategic_value: 3,
+        meeting_ease: 2,
+      },
+    });
+    revalidatePath('/accounts');
+    revalidatePath('/analytics');
+    revalidatePath('/');
+    return { success: true };
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : 'Failed';
+    if (msg.includes('Unique constraint')) {
+      return { success: false, error: { name: ['Account already exists'] } };
+    }
+    return { success: false, offline: true };
+  }
+}
+
+// ── Add Persona ───────────────────────────────────────────────────────────────
+export async function createPersona(data: AddPersonaInput) {
+  const parsed = AddPersonaSchema.safeParse(data);
+  if (!parsed.success) {
+    return { success: false, error: parsed.error.flatten().fieldErrors };
+  }
+  try {
+    const { prisma } = await import('./prisma');
+    const count = await prisma.persona.count();
+    const personaId = `P-${String(count + 1).padStart(3, '0')}`;
+
+    await prisma.persona.create({
+      data: {
+        persona_id: personaId,
+        account_name: parsed.data.account_name,
+        name: parsed.data.name,
+        title: parsed.data.title ?? null,
+        email: parsed.data.email || null,
+        priority: parsed.data.priority,
+        persona_lane: parsed.data.persona_lane ?? null,
+        role_in_deal: parsed.data.role_in_deal ?? null,
+        linkedin_url: parsed.data.linkedin_url || null,
+        why_this_persona: parsed.data.why_this_persona ?? null,
+        notes: parsed.data.notes ?? null,
+        persona_status: 'To find',
+      },
+    });
+    revalidatePath('/personas');
+    revalidatePath('/accounts');
+    revalidatePath('/analytics');
     return { success: true };
   } catch {
     return { success: false, offline: true };

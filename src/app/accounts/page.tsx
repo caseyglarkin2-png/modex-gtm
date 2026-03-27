@@ -7,6 +7,7 @@ import { DataTable, type Column } from '@/components/data-table';
 import { BandBadge } from '@/components/band-badge';
 import { StatusBadge } from '@/components/status-badge';
 import { Breadcrumb } from '@/components/breadcrumb';
+import { AddAccountDialog } from '@/components/add-account-dialog';
 
 type Account = (typeof accountsData)[number] & { persona_count: number; slug: string };
 
@@ -39,10 +40,11 @@ export default function AccountsPage() {
   return (
     <div className="space-y-6">
       <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Accounts' }]} />
-      <div>
+      <div className="flex items-center justify-between">
         <p className="text-sm text-[var(--muted-foreground)]">
           All target accounts ranked by priority score. Click any row to view details.
         </p>
+        <AddAccountDialog />
       </div>
       <DataTable
         columns={columns}
