@@ -18,6 +18,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Sparkles, Copy, RefreshCw, ChevronDown, Download, FileImage } from 'lucide-react';
+import { VoicePreviewButton } from '@/components/voice-preview-button';
 import { OnePagerPreview, type OnePagerData, onePagerToHtml } from '@/components/ai/one-pager-preview';
 import type { GenerateContentInput } from '@/lib/validations';
 
@@ -257,8 +258,9 @@ export function GeneratorDialog({
           </Button>
           <div className="flex gap-2">
             {(content || onePagerData) && (
-              <>
-                <Button variant="outline" size="sm" onClick={copyToClipboard}>
+              <>                {content && ['email', 'dm', 'call_script'].includes(type) && (
+                  <VoicePreviewButton text={content} label="Listen" />
+                )}                <Button variant="outline" size="sm" onClick={copyToClipboard}>
                   <Copy className="h-4 w-4 mr-1" />
                   {isOnePager ? 'Copy HTML' : 'Copy'}
                 </Button>

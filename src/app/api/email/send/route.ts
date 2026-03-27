@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
   try {
     const response = await sendEmail({ to, cc, subject, html });
     const session = await auth();
-    const sessionLike = session as unknown as { user?: { email?: string }; googleAccessToken?: string };
+    const sessionLike = (session ?? {}) as { user?: { email?: string }; googleAccessToken?: string };
 
     // Best-effort Gmail Sent mirror (non-blocking)
     mirrorEmailToGmailSent({

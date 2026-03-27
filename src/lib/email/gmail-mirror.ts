@@ -87,8 +87,12 @@ export async function mirrorEmailToGmailSent(payload: MirrorPayload): Promise<{ 
   });
 
   if (!res.ok) {
-    const body = await res.text();
-    throw new Error(`Gmail mirror insert failed (${res.status}): ${body}`);
+    const errBody = await res.text();
+    // Scope not granted yet (user hasn't re-consented) — fail silently, don't break send
+    if (res.status === 403 || res.status === 401) {
+      return { mirrored: false, reason: `gmail-auth-${res.status}: ${errBody.slice(0, 120)}` };
+    }
+    throw new Error(`Gmail mirror insert failed (${res.status}): ${errBody}`);
   }
 
   return { mirrored: true };

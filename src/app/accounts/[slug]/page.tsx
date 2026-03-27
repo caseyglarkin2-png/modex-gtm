@@ -30,6 +30,7 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { AddPersonaDialog } from '@/components/add-persona-dialog';
 import { EditableStatus } from '@/components/editable-status';
 import { EditablePersonaStatus } from '@/components/editable-persona-status';
+import { VoiceScriptButton } from '@/components/voice-script-button';
 
 export function generateStaticParams() {
   return getAccounts().map((a) => ({ slug: slugify(a.name) }));
@@ -218,6 +219,7 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                     <div className="flex items-center gap-1.5 shrink-0">
                       <GeneratorDialog accountName={account.name} personaName={p.name} defaultType="email" />
                       <EmailComposer accountName={account.name} personaName={p.name} personaEmail={p.email ?? undefined} />
+                      <VoiceScriptButton accountName={account.name} personaName={p.name} />
                       <span className="font-mono text-xs text-[var(--muted-foreground)]">{p.persona_id}</span>
                     </div>
                   </div>

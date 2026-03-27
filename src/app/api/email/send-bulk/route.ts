@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
   const payloads = recipients.map((r) => ({ to: r.to, subject, html }));
   const results = await sendBulk(payloads);
   const session = await auth();
-  const sessionLike = session as unknown as { user?: { email?: string }; googleAccessToken?: string };
+  const sessionLike = (session ?? {}) as { user?: { email?: string }; googleAccessToken?: string };
 
   // Best-effort Gmail Sent mirror for successful sends (non-blocking)
   for (let i = 0; i < results.length; i++) {

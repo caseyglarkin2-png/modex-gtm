@@ -7,6 +7,7 @@ import { EditablePersonaStatus } from '@/components/editable-persona-status';
 import { ExternalLink } from 'lucide-react';
 import { GeneratorDialog } from '@/components/ai/generator-dialog';
 import { EmailComposer } from '@/components/email/composer';
+import { VoiceScriptButton } from '@/components/voice-script-button';
 import { toast } from 'sonner';
 
 export interface PersonaRow {
@@ -66,6 +67,7 @@ const columns: Column<PersonaRow>[] = [
       <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
         <GeneratorDialog accountName={p.account} personaName={p.name} defaultType="email" />
         <EmailComposer accountName={p.account} personaName={p.name} personaEmail={p.email ?? undefined} />
+        <VoiceScriptButton accountName={p.account} personaName={p.name} />
       </div>
     ),
   },
