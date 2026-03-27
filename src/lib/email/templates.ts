@@ -3,7 +3,7 @@ export function wrapHtml(bodyText: string, accountName: string): string {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    .replace(/\n\n/g, '</p><p>')
+    .replace(/\n\n/g, '</p><p style="margin:12px 0 0;">')
     .replace(/\n/g, '<br />');
 
   return `<!DOCTYPE html>

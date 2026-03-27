@@ -21,7 +21,7 @@ function buildEmailPreviewHtml(bodyText: string, accountName: string): string {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    .replace(/\n\n/g, '</p><p>')
+    .replace(/\n\n/g, '</p><p style="margin:12px 0;">')
     .replace(/\n/g, '<br />');
 
   return `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f9fafb;padding:16px 8px;">
@@ -34,7 +34,7 @@ function buildEmailPreviewHtml(bodyText: string, accountName: string): string {
     </tr>
     <tr>
       <td style="padding:20px;color:#1e293b;font-size:13px;line-height:1.7;">
-        <p style="margin:0;">${escaped}</p>
+        <p style="margin:0 0 12px;">${escaped}</p>
       </td>
     </tr>
     <tr>

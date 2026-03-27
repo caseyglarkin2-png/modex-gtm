@@ -254,9 +254,10 @@ export function GeneratorDialog({
                 </button>
               </div>
               {previewMode ? (
-                <div className="rounded-md border bg-background p-4 text-sm leading-relaxed whitespace-pre-wrap min-h-[200px]">
-                  {content}
-                </div>
+                <div
+                  className="rounded-md border bg-background p-4 text-sm leading-relaxed min-h-[200px] prose prose-sm max-w-none"
+                  dangerouslySetInnerHTML={{ __html: content.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n\n/g, '</p><p style="margin:12px 0;">').replace(/\n/g, '<br />') }}
+                />
               ) : (
                 <textarea
                   className="w-full h-full min-h-[200px] bg-muted/30 rounded-md p-3 text-sm font-mono resize-none border-0 focus:outline-none"
