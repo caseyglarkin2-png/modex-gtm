@@ -29,6 +29,7 @@ import { OutreachSequenceDialog } from '@/components/ai/outreach-sequence';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { AddPersonaDialog } from '@/components/add-persona-dialog';
 import { EditableStatus } from '@/components/editable-status';
+import { EditablePersonaStatus } from '@/components/editable-persona-status';
 
 export function generateStaticParams() {
   return getAccounts().map((a) => ({ slug: slugify(a.name) }));
@@ -204,7 +205,7 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                           ) : p.name}
                         </span>
                         <Badge variant={p.priority === 'P1' ? 'default' : 'secondary'} className="text-xs">{p.priority}</Badge>
-                        <StatusBadge status={p.persona_status} />
+                        <EditablePersonaStatus personaId={p.persona_id} currentValue={p.persona_status ?? 'Not started'} />
                       </div>
                       <p className="mt-0.5 text-xs text-[var(--muted-foreground)]">{p.title}</p>
                       {p.email && (

@@ -51,6 +51,11 @@ export async function dbGetGeneratedContent() {
   return prisma.generatedContent.findMany({ orderBy: { created_at: 'desc' } });
 }
 
+// ── Actionable Intel ──────────────────────────────────────────────────
+export async function dbGetActionableIntel() {
+  return prisma.actionableIntel.findMany({ orderBy: { id: 'asc' } });
+}
+
 // ── Mobile Captures ───────────────────────────────────────────────────
 export async function dbGetMobileCaptures() {
   return prisma.mobileCapture.findMany({ orderBy: { captured_at: 'desc' } });

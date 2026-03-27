@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { getActivities, slugify } from '@/lib/data';
+import { slugify } from '@/lib/data';
+import { dbGetActivities } from '@/lib/db';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { EmptyState } from '@/components/empty-state';
@@ -7,10 +8,22 @@ import { Button } from '@/components/ui/button';
 import { Activity, ArrowRight } from 'lucide-react';
 import { Breadcrumb } from '@/components/breadcrumb';
 
+export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Activities' };
 
-export default function ActivitiesPage() {
-  const activities = getActivities();
+export default async function ActivitiesPage() {
+  const rawActivities = await dbGetActivities();
+  const activities = rawActivities.map((a) => ({
+    account: a.account_name,
+    activity_type: a.activity_type,
+    activity_date: a.activity_date ? new Date(a.activity_date).toLocaleDateString() : '',
+    persona: a.persona ?? '',
+    owner: a.owner,
+    outcome: a.outcome,
+    notes: a.notes,
+    next_step: a.next_step,
+    next_step_due: a.next_step_due ? new Date(a.next_step_due).toLocaleDateString() : null,
+  }));
 
   return (
     <div className="space-y-6">

@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { getAccounts, getPersonas, getOutreachWaves, getMeetingBriefs, getActivities, getMeetings, getMobileCaptures } from '@/lib/data';
+import { getOutreachWaves, getMeetingBriefs } from '@/lib/data';
+import { dbGetAccounts, dbGetPersonas, dbGetActivities, dbGetMeetings, dbGetMobileCaptures } from '@/lib/db';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -8,6 +9,8 @@ import { StatusBadge } from '@/components/status-badge';
 import { EmptyState } from '@/components/empty-state';
 import { Building2, Users, Waves as WavesIcon, FileText, CalendarCheck, Smartphone, Activity, ArrowRight, TrendingUp, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+
+export const dynamic = 'force-dynamic';
 
 const WAVE_META: Record<number, { label: string; color: string; start: string }> = {
   0: { label: 'Wave 0 — Warm Intros', color: 'bg-red-500', start: '3/24' },
@@ -36,14 +39,44 @@ function isUpcoming(dateStr: string, days: number): boolean {
   return d >= now && d <= cutoff;
 }
 
-export default function DashboardPage() {
-  const accounts = getAccounts();
-  const personas = getPersonas();
+export default async function DashboardPage() {
+  const [dbAccounts, dbPersonas, dbActivities, dbMeetings, dbCaptures] = await Promise.all([
+    dbGetAccounts(), dbGetPersonas(), dbGetActivities(), dbGetMeetings(), dbGetMobileCaptures(),
+  ]);
   const waves = getOutreachWaves();
   const briefs = getMeetingBriefs();
-  const activities = getActivities();
-  const meetings = getMeetings();
-  const captures = getMobileCaptures();
+
+  // Map DB entities to the shapes used by the template
+  const accounts = dbAccounts.map((a) => ({
+    ...a,
+    priority_band: a.priority_band ?? '',
+    research_status: a.research_status ?? '',
+    outreach_status: a.outreach_status ?? '',
+    meeting_status: a.meeting_status ?? '',
+  }));
+  const personas = dbPersonas;
+  const activities = dbActivities.map((a) => ({
+    account: a.account_name,
+    activity_type: a.activity_type,
+    activity_date: a.activity_date ? new Date(a.activity_date).toLocaleDateString() : '',
+    persona: a.persona ?? '',
+    owner: a.owner,
+    outcome: a.outcome,
+    notes: a.notes,
+    next_step: a.next_step,
+    next_step_due: a.next_step_due ? new Date(a.next_step_due).toLocaleDateString() : null,
+  }));
+  const meetings = dbMeetings.map((m) => ({
+    date: m.meeting_date ? new Date(m.meeting_date).toISOString() : '',
+    account: m.account_name ?? '',
+    persona: m.persona ?? '',
+    meeting_status: m.meeting_status ?? '',
+    objective: m.objective ?? '',
+    notes: m.notes ?? '',
+  }));
+  const captures = dbCaptures.map((c) => ({
+    timestamp: c.captured_at ? new Date(c.captured_at).toISOString() : '',
+  }));
 
   const bandCounts = { A: 0, B: 0, C: 0, D: 0 };
   for (const a of accounts) bandCounts[a.priority_band as keyof typeof bandCounts]++;
@@ -261,9 +294,9 @@ export default function DashboardPage() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="font-medium text-sm truncate">{m.account}</p>
-                      <p className="text-xs text-[var(--muted-foreground)] truncate">{m.attendees}</p>
+                      <p className="text-xs text-[var(--muted-foreground)] truncate">{m.persona}</p>
                     </div>
-                    <StatusBadge status={m.status} />
+                    <StatusBadge status={m.meeting_status} />
                   </div>
                 ))}
               </div>
