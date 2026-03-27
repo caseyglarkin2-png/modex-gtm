@@ -4,6 +4,7 @@ import { Resend } from 'resend';
 const SENDGRID_KEY = process.env.SENDGRID_API_KEY?.trim();
 const RESEND_KEY = process.env.RESEND_API_KEY?.trim();
 const FROM_EMAIL = process.env.FROM_EMAIL ?? process.env.SENDGRID_FROM_EMAIL ?? 'casey@yardflow.ai';
+const SENDGRID_FROM = process.env.SENDGRID_FROM_EMAIL ?? FROM_EMAIL;
 const FROM_NAME = process.env.FROM_NAME ?? 'Casey Larkin — YardFlow';
 
 export interface EmailPayload {
@@ -27,7 +28,7 @@ async function sendViaSendGrid(payload: EmailPayload) {
     to: payload.to,
     cc: payload.cc || undefined,
     bcc: bcc || undefined,
-    from: { email: FROM_EMAIL, name: FROM_NAME },
+    from: { email: SENDGRID_FROM, name: FROM_NAME },
     subject: payload.subject,
     html: payload.html,
     trackingSettings: { clickTracking: { enable: true }, openTracking: { enable: true } },
@@ -55,13 +56,13 @@ async function sendViaResend(payload: EmailPayload) {
   return { provider: 'resend' as const, id: data.id };
 }
 
-// ── Public API (try Resend → SendGrid) ──────────────────────────────
-// Resend first: webhook tracking is wired to Resend, and domain is verified.
+// ── Public API (try SendGrid → Resend) ──────────────────────────────
+// SendGrid first: higher quota, established sender. Resend as fallback.
 
 export async function sendEmail(payload: EmailPayload) {
   const providers: Array<() => Promise<{ provider: string; id: string | null }>> = [];
-  if (RESEND_KEY) providers.push(() => sendViaResend(payload));
   if (SENDGRID_KEY) providers.push(() => sendViaSendGrid(payload));
+  if (RESEND_KEY) providers.push(() => sendViaResend(payload));
 
   if (providers.length === 0) {
     throw new Error('No email provider configured. Set SENDGRID_API_KEY or RESEND_API_KEY.');
