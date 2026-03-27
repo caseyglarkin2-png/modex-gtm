@@ -8,13 +8,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'ELEVENLABS_API_KEY not configured' }, { status: 503 });
   }
 
-  const { text } = await req.json();
+  const { text, voiceId } = await req.json() as { text?: string; voiceId?: string };
   if (!text || typeof text !== 'string' || text.length < 2) {
     return NextResponse.json({ error: 'text is required' }, { status: 400 });
   }
 
+  const activeVoice = voiceId?.trim() || VOICE_ID;
+
   const res = await fetch(
-    `https://api.elevenlabs.io/v1/text-to-speech/${VOICE_ID}/stream`,
+    `https://api.elevenlabs.io/v1/text-to-speech/${activeVoice}/stream`,
     {
       method: 'POST',
       headers: {

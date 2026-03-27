@@ -22,6 +22,7 @@ import {
   ChevronRight,
   Rocket,
   BarChart3,
+  AudioLines,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -64,6 +65,12 @@ const NAV_SECTIONS = [
       { href: '/activities', label: 'Activities', icon: Activity },
       { href: '/meetings', label: 'Meetings', icon: CalendarCheck },
       { href: '/analytics', label: 'Analytics', icon: BarChart3 },
+    ],
+  },
+  {
+    label: 'Creative',
+    items: [
+      { href: '/studio', label: 'Creative Studio', icon: AudioLines },
     ],
   },
 ];
