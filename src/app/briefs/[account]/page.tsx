@@ -6,6 +6,7 @@ import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { Breadcrumb } from '@/components/breadcrumb';
+import { BriefReadAloud } from './brief-read-aloud';
 
 export function generateStaticParams() {
   return getMeetingBriefs().map((b) => ({ account: slugify(b.account) }));
@@ -43,6 +44,8 @@ export default async function BriefDetailPage({ params }: { params: Promise<{ ac
       </div>
 
       <h1 className="text-2xl font-bold tracking-tight">{brief.account} — Meeting Brief</h1>
+
+      <BriefReadAloud accountName={brief.account} sections={sections} />
 
       <div className="space-y-3">
         {sections.map((s) => (

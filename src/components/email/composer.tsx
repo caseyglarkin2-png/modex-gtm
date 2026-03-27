@@ -14,6 +14,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Mail, Send, Sparkles } from 'lucide-react';
 import { GeneratorDialog } from '@/components/ai/generator-dialog';
+import { VoicePreviewButton } from '@/components/voice-preview-button';
 
 interface EmailComposerProps {
   accountName: string;
@@ -133,6 +134,7 @@ export function EmailComposer({ accountName, personaName, personaEmail, trigger 
         </div>
 
         <div className="flex justify-end gap-2 pt-2">
+          {body.trim() && <VoicePreviewButton text={body} label="Listen" />}
           <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
           <Button onClick={handleSend} disabled={sending} className="gap-1.5">
             <Send className="h-3.5 w-3.5" />

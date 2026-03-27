@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Zap, Copy, Send, RefreshCw, ExternalLink, CheckCircle, Pencil, X, Check, ChevronDown, ChevronUp, MessageSquare, Phone, FileText, Sparkles } from 'lucide-react';
 import { GeneratorDialog } from '@/components/ai/generator-dialog';
+import { VoiceScriptButton } from '@/components/voice-script-button';
+import { VoicePreviewButton } from '@/components/voice-preview-button';
 
 interface SequenceStep {
   step: string;
@@ -179,6 +181,9 @@ export function CampaignActions({
           }
         />
 
+        {/* Quick Voice Rehearsal */}
+        <VoiceScriptButton accountName={accountName} personaName={personaName} className="h-7 text-[11px]" />
+
         {/* Meeting Prep */}
         <GeneratorDialog
           accountName={accountName}
@@ -291,6 +296,7 @@ export function CampaignActions({
                           <Button variant="outline" size="sm" className="h-6 text-[10px] gap-1" onClick={() => copyStep(step)}>
                             <Copy className="h-3 w-3" /> Copy
                           </Button>
+                          <VoicePreviewButton text={step.body} label="Listen" className="h-6 text-[10px]" />
                         </div>
                       </div>
                     )}

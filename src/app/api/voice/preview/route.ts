@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY?.trim();
-const VOICE_ID = process.env.ELEVENLABS_VOICE_ID?.trim() ?? 'EXAVITQu4vr4xnSDxMaL'; // Default: Bella
+const VOICE_ID = process.env.ELEVENLABS_VOICE_ID?.trim() ?? 'JBFqnCBsd6RMkjVDRZzb'; // Default: George (same as main route)
 
 export async function POST(req: NextRequest) {
   if (!ELEVENLABS_API_KEY) {
