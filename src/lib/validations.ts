@@ -63,7 +63,7 @@ export const IntelStatusSchema = z.object({
 
 // ── AI Generation ─────────────────────────────────────
 export const GenerateContentSchema = z.object({
-  type: z.enum(['email', 'dm', 'call_script', 'meeting_prep', 'infographic']),
+  type: z.enum(['email', 'follow_up', 'dm', 'call_script', 'meeting_prep', 'infographic']),
   accountName: z.string().min(1),
   personaName: z.string().optional(),
   tone: z.enum(['formal', 'conversational', 'provocative']).default('conversational'),

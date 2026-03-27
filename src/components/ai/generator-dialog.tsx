@@ -36,6 +36,7 @@ interface GeneratorDialogProps {
 
 const TYPE_LABELS: Record<ContentType, string> = {
   email: 'Cold Email',
+  follow_up: 'Follow-Up Email',
   dm: 'LinkedIn DM',
   call_script: 'Call Script',
   meeting_prep: 'Meeting Prep',

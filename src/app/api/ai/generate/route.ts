@@ -41,13 +41,13 @@ export async function POST(req: NextRequest) {
   const ctx: PromptContext = {
     accountName,
     personaName: persona?.name ?? personaName,
-    personaTitle: (persona as Record<string, unknown>)?.title as string | undefined,
+    personaTitle: (context as Record<string, string> | undefined)?.personaTitle ?? (persona as Record<string, unknown>)?.title as string | undefined,
     bandLabel: (account as Record<string, unknown>)?.priority_band as string | undefined,
     score: (account as Record<string, unknown>)?.score as number | undefined,
     previousMeeting: (context as Record<string, string> | undefined)?.previousMeeting,
     notes: (context as Record<string, string> | undefined)?.notes,
-    vertical: (account as Record<string, unknown>)?.vertical as string | undefined,
-    primoAngle: (account as Record<string, unknown>)?.primo_angle as string | undefined,
+    vertical: (context as Record<string, string> | undefined)?.vertical ?? (account as Record<string, unknown>)?.vertical as string | undefined,
+    primoAngle: (context as Record<string, string> | undefined)?.primoAngle ?? (account as Record<string, unknown>)?.primo_angle as string | undefined,
     parentBrand: (account as Record<string, unknown>)?.parent_brand as string | undefined,
     tone: TONE_MAP[tone] ?? 'casual',
     length: length as PromptContext['length'],
@@ -60,6 +60,10 @@ export async function POST(req: NextRequest) {
     case 'email':
       prompt = buildEmailPrompt(ctx);
       maxTokens = 400;
+      break;
+    case 'follow_up':
+      prompt = buildFollowUpEmailPrompt(ctx);
+      maxTokens = 300;
       break;
     case 'dm':
       prompt = buildDMPrompt(ctx);
