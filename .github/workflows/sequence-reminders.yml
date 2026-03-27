@@ -1,0 +1,48 @@
+name: Outreach Sequence Reminders
+
+on:
+  schedule:
+    # Monday March 30 — Follow-up #1 (7 AM ET = 11:00 UTC)
+    - cron: '0 11 30 3 *'
+    # Thursday April 3 — Follow-up #2
+    - cron: '0 11 3 4 *'
+    # Monday April 6 — Breakup email
+    - cron: '0 11 6 4 *'
+    # Sunday April 12 — MODEX eve prep
+    - cron: '0 11 12 4 *'
+  workflow_dispatch:
+
+jobs:
+  reminder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determine reminder
+        id: msg
+        run: |
+          DAY=$(date +%m-%d)
+          case $DAY in
+            03-30) echo "title=FOLLOW-UP #1 — Send today" >> $GITHUB_OUTPUT
+                   echo "body=Run: python3 /tmp/follow_up_batch.py --send (50 contacts, Day 3 of sequence)" >> $GITHUB_OUTPUT ;;
+            04-03) echo "title=FOLLOW-UP #2 — Send today" >> $GITHUB_OUTPUT
+                   echo "body=Day 7 of sequence. Non-responders from Follow-up #1. New angle needed." >> $GITHUB_OUTPUT ;;
+            04-06) echo "title=BREAKUP EMAIL — Send today" >> $GITHUB_OUTPUT
+                   echo "body=Day 10 of sequence. Final touch, 40 words max. Last chance before MODEX." >> $GITHUB_OUTPUT ;;
+            04-12) echo "title=MODEX TOMORROW — Final prep" >> $GITHUB_OUTPUT
+                   echo "body=MODEX opens April 13. Review all meeting briefs. Print QR assets. Charge devices." >> $GITHUB_OUTPUT ;;
+            *)     echo "title=Sequence check-in" >> $GITHUB_OUTPUT
+                   echo "body=Manual trigger — check sequence status." >> $GITHUB_OUTPUT ;;
+          esac
+
+      - name: Create reminder issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🔔 ${process.env.TITLE}`,
+              body: process.env.BODY,
+            });
+        env:
+          TITLE: ${{ steps.msg.outputs.title }}
+          BODY: ${{ steps.msg.outputs.body }}
