@@ -1,11 +1,14 @@
 import Link from 'next/link';
-import { getOutreachWaves, slugify } from '@/lib/data';
+import { slugify } from '@/lib/data';
+import { dbGetOutreachWaves } from '@/lib/db';
+import { prisma } from '@/lib/prisma';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { StatusBadge } from '@/components/status-badge';
 import { Waves } from 'lucide-react';
 import { Breadcrumb } from '@/components/breadcrumb';
 
+export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Outreach Waves' };
 
 const WAVE_ACCENT: Record<number, string> = {
@@ -15,8 +18,14 @@ const WAVE_ACCENT: Record<number, string> = {
   3: 'border-l-emerald-500',
 };
 
-export default function WavesPage() {
-  const waves = getOutreachWaves();
+export default async function WavesPage() {
+  const waves = await dbGetOutreachWaves();
+  // Get account outreach_status to compute real progress
+  const accounts = await prisma.account.findMany({
+    select: { name: true, outreach_status: true },
+  });
+  const accountStatusMap = new Map(accounts.map((a) => [a.name, a.outreach_status]));
+
   const grouped = [0, 1, 2, 3].map((order) => ({
     order,
     label: waves.find((w) => w.wave_order === order)?.wave || `Wave ${order}`,
@@ -34,7 +43,10 @@ export default function WavesPage() {
       </div>
 
       {grouped.map((group) => {
-        const progressed = group.items.filter((w) => w.status !== 'Not started' && w.status !== 'Planned').length;
+        const progressed = group.items.filter((w) => {
+          const acctStatus = accountStatusMap.get(w.account_name) ?? 'Not started';
+          return acctStatus !== 'Not started';
+        }).length;
         const pct = group.items.length ? Math.round((progressed / group.items.length) * 100) : 0;
         return (
           <div key={group.order} className="space-y-3">
@@ -54,19 +66,19 @@ export default function WavesPage() {
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <Link href={`/accounts/${slugify(w.account)}`} className="font-medium text-sm text-[var(--primary)] hover:underline">
-                          {w.account}
+                        <Link href={`/accounts/${slugify(w.account_name)}`} className="font-medium text-sm text-[var(--primary)] hover:underline">
+                          {w.account_name}
                         </Link>
                         <Badge variant="outline" className="text-xs">Rank {w.rank}</Badge>
                       </div>
-                      <StatusBadge status={w.status} />
+                      <StatusBadge status={accountStatusMap.get(w.account_name) ?? w.status} />
                     </div>
                     <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-[var(--muted-foreground)] sm:grid-cols-3">
                       <span>Channel: {w.channel_mix}</span>
                       <span>Owner: {w.owner}</span>
-                      <span>Start: {w.start_date}</span>
-                      <span>Follow-up 1: {w.follow_up_1}</span>
-                      <span>Follow-up 2: {w.follow_up_2}</span>
+                      <span>Start: {w.start_date?.toLocaleDateString() ?? '—'}</span>
+                      <span>Follow-up 1: {w.followup_1?.toLocaleDateString() ?? '—'}</span>
+                      <span>Follow-up 2: {w.followup_2?.toLocaleDateString() ?? '—'}</span>
                       <span>Warm Intro: {w.use_warm_intro ? 'Yes' : 'No'}</span>
                     </div>
                     <p className="mt-2 text-sm">{w.primary_objective}</p>
