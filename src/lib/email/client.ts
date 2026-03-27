@@ -9,18 +9,24 @@ const FROM_NAME = process.env.FROM_NAME ?? 'Casey Larkin — YardFlow';
 export interface EmailPayload {
   to: string;
   cc?: string;
+  bcc?: string;
   subject: string;
   html: string;
 }
+
+// Auto-BCC the sender so every outbound email appears in their inbox
+const AUTO_BCC = FROM_EMAIL;
 
 // ── SendGrid ─────────────────────────────────────────────────────────
 
 async function sendViaSendGrid(payload: EmailPayload) {
   if (!SENDGRID_KEY) throw new Error('SENDGRID_API_KEY not set');
   sgMail.setApiKey(SENDGRID_KEY);
+  const bcc = payload.bcc || (payload.to !== AUTO_BCC ? AUTO_BCC : undefined);
   const [response] = await sgMail.send({
     to: payload.to,
     cc: payload.cc || undefined,
+    bcc: bcc || undefined,
     from: { email: FROM_EMAIL, name: FROM_NAME },
     subject: payload.subject,
     html: payload.html,
@@ -41,10 +47,13 @@ async function sendViaResend(payload: EmailPayload) {
   ];
   let lastErr: Error | null = null;
   for (const from of fromAddresses) {
+    const bcc = payload.bcc || (payload.to !== AUTO_BCC ? AUTO_BCC : undefined);
     const { data, error } = await resend.emails.send({
       from,
       to: payload.to,
       cc: payload.cc || undefined,
+      bcc: bcc || undefined,
+      replyTo: FROM_EMAIL,
       subject: payload.subject,
       html: payload.html,
     });
