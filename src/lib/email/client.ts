@@ -59,12 +59,13 @@ async function sendViaResend(payload: EmailPayload) {
   throw lastErr ?? new Error('Resend send failed');
 }
 
-// ── Public API (try SendGrid → Resend) ──────────────────────────────
+// ── Public API (try Resend → SendGrid) ──────────────────────────────
+// Resend first: webhook tracking is wired to Resend, and domain is verified.
 
 export async function sendEmail(payload: EmailPayload) {
   const providers: Array<() => Promise<{ provider: string; id: string | null }>> = [];
-  if (SENDGRID_KEY) providers.push(() => sendViaSendGrid(payload));
   if (RESEND_KEY) providers.push(() => sendViaResend(payload));
+  if (SENDGRID_KEY) providers.push(() => sendViaSendGrid(payload));
 
   if (providers.length === 0) {
     throw new Error('No email provider configured. Set SENDGRID_API_KEY or RESEND_API_KEY.');
