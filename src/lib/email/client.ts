@@ -69,11 +69,14 @@ export async function sendEmail(payload: EmailPayload) {
   }
 
   let lastError: Error | null = null;
+  const errors: string[] = [];
   for (const tryProvider of providers) {
     try {
       const result = await tryProvider();
-      return { headers: { 'x-message-id': result.id ?? '' }, statusCode: 202, provider: result.provider };
+      return { headers: { 'x-message-id': result.id ?? '' }, statusCode: 202, provider: result.provider, fallbackErrors: errors.length ? errors : undefined };
     } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      errors.push(msg);
       lastError = err instanceof Error ? err : new Error(String(err));
     }
   }

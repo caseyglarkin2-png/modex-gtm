@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
       // DB offline — log skipped
     }
 
-    return NextResponse.json({ success: true, message: `Email sent to ${to}`, provider: response.provider ?? 'unknown' });
+    return NextResponse.json({ success: true, message: `Email sent to ${to}`, provider: response.provider ?? 'unknown', fallbackErrors: response.fallbackErrors ?? null });
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Email send failed';
     return NextResponse.json({ error: message }, { status: 500 });
