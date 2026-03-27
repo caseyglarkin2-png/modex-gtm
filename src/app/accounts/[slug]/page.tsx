@@ -217,7 +217,7 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                     </div>
                     <div className="flex items-center gap-1.5 shrink-0">
                       <GeneratorDialog accountName={account.name} personaName={p.name} defaultType="email" />
-                      <EmailComposer accountName={account.name} personaName={p.name} />
+                      <EmailComposer accountName={account.name} personaName={p.name} personaEmail={p.email ?? undefined} />
                       <span className="font-mono text-xs text-[var(--muted-foreground)]">{p.persona_id}</span>
                     </div>
                   </div>

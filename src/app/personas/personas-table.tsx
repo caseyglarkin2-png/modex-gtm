@@ -65,7 +65,7 @@ const columns: Column<PersonaRow>[] = [
     render: (p) => (
       <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
         <GeneratorDialog accountName={p.account} personaName={p.name} defaultType="email" />
-        <EmailComposer accountName={p.account} personaName={p.name} />
+        <EmailComposer accountName={p.account} personaName={p.name} personaEmail={p.email ?? undefined} />
       </div>
     ),
   },
