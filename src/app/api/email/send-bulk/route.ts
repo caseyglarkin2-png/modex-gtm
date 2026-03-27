@@ -56,6 +56,8 @@ export async function POST(req: NextRequest) {
   // Best-effort DB logging for each send
   try {
     const { prisma } = await import('@/lib/prisma');
+    const accountsContacted = new Set<string>();
+
     for (let i = 0; i < results.length; i++) {
       const r = results[i];
       const recipient = recipients[i];
@@ -71,6 +73,31 @@ export async function POST(req: NextRequest) {
           provider_message_id: providerMessageId,
         },
       }).catch(() => { /* individual log failure is non-blocking */ });
+
+      // Auto-log activity for each successful send
+      if (r.status === 'fulfilled' && accountName) {
+        await prisma.activity.create({
+          data: {
+            account_name: accountName,
+            persona: recipient.personaName ?? null,
+            activity_type: 'Email',
+            outcome: `Bulk email sent: "${subject}" to ${recipient.to}`,
+            next_step: 'Monitor for open/reply — follow up in 3 days',
+            next_step_due: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+            owner: 'Casey',
+            activity_date: new Date(),
+          },
+        }).catch(() => {});
+        if (accountName) accountsContacted.add(accountName);
+      }
+    }
+
+    // Auto-update outreach_status for all accounts that were contacted
+    for (const acctName of accountsContacted) {
+      await prisma.account.updateMany({
+        where: { name: acctName, outreach_status: 'Not started' },
+        data: { outreach_status: 'Contacted' },
+      }).catch(() => {});
     }
   } catch {
     // DB offline — skip logging

@@ -61,6 +61,30 @@ export async function POST(req: NextRequest) {
           provider_message_id: (response.headers?.['x-message-id'] as string) ?? null,
         },
       });
+
+      // Auto-update outreach_status to "Contacted" if currently "Not started"
+      if (accountName) {
+        await prisma.account.updateMany({
+          where: { name: accountName, outreach_status: 'Not started' },
+          data: { outreach_status: 'Contacted' },
+        }).catch(() => {});
+      }
+
+      // Auto-log activity for the send
+      if (accountName) {
+        await prisma.activity.create({
+          data: {
+            account_name: accountName,
+            persona: personaName ?? null,
+            activity_type: 'Email',
+            outcome: `Email sent: "${subject}" to ${to}`,
+            next_step: 'Monitor for open/reply — follow up in 3 days if no response',
+            next_step_due: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+            owner: 'Casey',
+            activity_date: new Date(),
+          },
+        }).catch(() => {});
+      }
     } catch {
       // DB offline — log skipped
     }
