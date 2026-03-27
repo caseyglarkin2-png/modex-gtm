@@ -17,7 +17,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Sparkles, Copy, RefreshCw, ChevronDown, Download, FileImage } from 'lucide-react';
+import { Sparkles, Copy, RefreshCw, ChevronDown, Download, FileImage, Eye, Pencil } from 'lucide-react';
 import { VoicePreviewButton } from '@/components/voice-preview-button';
 import { OnePagerPreview, type OnePagerData, onePagerToHtml } from '@/components/ai/one-pager-preview';
 import type { GenerateContentInput } from '@/lib/validations';
@@ -68,6 +68,7 @@ export function GeneratorDialog({
   const [content, setContent] = useState('');
   const [onePagerData, setOnePagerData] = useState<OnePagerData | null>(null);
   const [loading, setLoading] = useState(false);
+  const [previewMode, setPreviewMode] = useState(true);
 
   const isOnePager = type === 'infographic';
 
@@ -235,11 +236,35 @@ export function GeneratorDialog({
             <OnePagerPreview data={onePagerData} accountName={accountName} />
           )}
           {!loading && content && !isOnePager && (
-            <textarea
-              className="w-full h-full min-h-[200px] bg-muted/30 rounded-md p-3 text-sm font-mono resize-none border-0 focus:outline-none"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            />
+            <div className="space-y-2">
+              <div className="flex items-center gap-1 justify-end">
+                <button
+                  type="button"
+                  onClick={() => setPreviewMode(true)}
+                  className={`flex items-center gap-1 px-2 py-1 rounded text-xs transition-colors ${previewMode ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted'}`}
+                >
+                  <Eye className="h-3 w-3" /> Preview
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPreviewMode(false)}
+                  className={`flex items-center gap-1 px-2 py-1 rounded text-xs transition-colors ${!previewMode ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted'}`}
+                >
+                  <Pencil className="h-3 w-3" /> Edit
+                </button>
+              </div>
+              {previewMode ? (
+                <div className="rounded-md border bg-background p-4 text-sm leading-relaxed whitespace-pre-wrap min-h-[200px]">
+                  {content}
+                </div>
+              ) : (
+                <textarea
+                  className="w-full h-full min-h-[200px] bg-muted/30 rounded-md p-3 text-sm font-mono resize-none border-0 focus:outline-none"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                />
+              )}
+            </div>
           )}
           {!loading && !content && !onePagerData && (
             <div className="h-full flex items-center justify-center text-sm text-muted-foreground border-2 border-dashed rounded-md min-h-[200px]">
