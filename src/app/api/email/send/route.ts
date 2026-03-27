@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { SendEmailSchema } from '@/lib/validations';
 import { sendEmail } from '@/lib/email/client';
+import { mirrorEmailToGmailSent } from '@/lib/email/gmail-mirror';
 import { wrapHtml } from '@/lib/email/templates';
 import { rateLimit } from '@/lib/rate-limit';
+import { auth } from '@/lib/auth';
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
@@ -30,6 +32,20 @@ export async function POST(req: NextRequest) {
 
   try {
     const response = await sendEmail({ to, cc, subject, html });
+    const session = await auth();
+    const sessionLike = session as unknown as { user?: { email?: string }; googleAccessToken?: string };
+
+    // Best-effort Gmail Sent mirror (non-blocking)
+    mirrorEmailToGmailSent({
+      to,
+      cc,
+      subject,
+      html,
+      accessToken: sessionLike.googleAccessToken,
+      gmailUserEmail: sessionLike.user?.email,
+    }).catch((err) => {
+      console.warn('Gmail sent mirror failed:', err);
+    });
 
     // Best-effort DB log — skip if no DB available
     try {

@@ -2,6 +2,47 @@ import NextAuth from 'next-auth';
 import Google from 'next-auth/providers/google';
 import Credentials from 'next-auth/providers/credentials';
 
+type TokenLike = {
+  accessToken?: string;
+  accessTokenExpires?: number;
+  refreshToken?: string;
+  error?: string;
+};
+
+async function refreshGoogleAccessToken(token: TokenLike): Promise<TokenLike> {
+  if (!token.refreshToken) return { ...token, error: 'MissingRefreshToken' };
+
+  const params = new URLSearchParams({
+    client_id: process.env.GOOGLE_CLIENT_ID ?? '',
+    client_secret: process.env.GOOGLE_CLIENT_SECRET ?? '',
+    grant_type: 'refresh_token',
+    refresh_token: token.refreshToken,
+  });
+
+  const res = await fetch('https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params,
+  });
+
+  const refreshed = (await res.json()) as {
+    access_token?: string;
+    expires_in?: number;
+    refresh_token?: string;
+  };
+
+  if (!res.ok || !refreshed.access_token || !refreshed.expires_in) {
+    return { ...token, error: 'RefreshAccessTokenError' };
+  }
+
+  return {
+    ...token,
+    accessToken: refreshed.access_token,
+    accessTokenExpires: Date.now() + refreshed.expires_in * 1000,
+    refreshToken: refreshed.refresh_token ?? token.refreshToken,
+  };
+}
+
 const ALLOWED_EMAILS = [
   'casey@freightroll.com',
   'casey@yardflow.ai',
@@ -21,6 +62,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      authorization: {
+        params: {
+          scope: 'openid email profile https://www.googleapis.com/auth/gmail.insert',
+          access_type: 'offline',
+          prompt: 'consent',
+        },
+      },
     }),
     // Dev-only credential login when Google OAuth is not configured
     Credentials({
@@ -36,13 +84,35 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
+    async jwt({ token, account }) {
+      const mutable = token as unknown as TokenLike;
+
+      if (account?.provider === 'google') {
+        mutable.accessToken = account.access_token ?? undefined;
+        mutable.accessTokenExpires = account.expires_at ? account.expires_at * 1000 : undefined;
+        mutable.refreshToken = account.refresh_token ?? mutable.refreshToken;
+      }
+
+      if (mutable.accessToken && mutable.accessTokenExpires && Date.now() < mutable.accessTokenExpires - 60_000) {
+        return token;
+      }
+
+      if (mutable.refreshToken) {
+        const refreshed = await refreshGoogleAccessToken(mutable);
+        Object.assign(token as Record<string, unknown>, refreshed);
+      }
+
+      return token;
+    },
     async signIn({ user }) {
       return !!user.email && ALLOWED_EMAILS.includes(user.email);
     },
-    async session({ session }) {
+    async session({ session, token }) {
       if (session.user?.email) {
         (session as unknown as Record<string, Record<string, unknown>>).user.role = ADMINS.includes(session.user.email) ? 'admin' : 'rep';
       }
+      (session as unknown as Record<string, unknown>).googleAccessToken = (token as unknown as TokenLike).accessToken;
+      (session as unknown as Record<string, unknown>).googleTokenError = (token as unknown as TokenLike).error;
       return session;
     },
   },
