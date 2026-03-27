@@ -50,7 +50,7 @@ Goal: Book a 30-minute meeting at MODEX to walk their yard network and build a b
 
 STRUCTURE (3 short paragraphs, max 90 words total):
 1. OPENER (1-2 sentences): A specific, concrete observation about THIS company's operations that the reader will recognize as true. Reference their vertical, their facility type, their logistics reality. Not "industrial plants" — name what they move, how they move it, where it breaks.
-2. BRIDGE (2-3 sentences): Connect that reality to the yard constraint. One proof point woven in naturally, not listed. Make the status quo feel expensive.
+2. BRIDGE (2-3 sentences): Connect that reality to the yard constraint. One proof point woven in naturally, not listed. Make the status quo feel expensive. NEVER say "ship 50% more" or any volume percentage. The 48→24 min stat is truck turn time. The real benefit: capture more demand spikes without adding headcount.
 3. ASK (1 sentence): Direct question about meeting at MODEX. Specific times. No hedging.
 
 CRITICAL RULES:
@@ -79,7 +79,7 @@ ${ctx.primoAngle ? `What makes this account specific: ${ctx.primoAngle}` : ''}
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 
 STRUCTURE (2 short paragraphs, max 60 words total):
-1. NEW ANGLE (2-3 sentences): Come in from a completely different direction than the first email. Lead with one specific proof point — a number, a result, the customer quote. Make the reader's current state feel more expensive than they realized.
+1. NEW ANGLE (2-3 sentences): Come in from a completely different direction than the first email. Lead with one specific proof point — $1M+ per site, 48→24 min truck turns (NOT volume increase), or the customer quote about capturing additional volume headcount neutral. Make the reader's current state feel more expensive than they realized.
 2. SHARPER ASK (1 sentence): Even more direct than before. One specific time at MODEX.
 
 Do NOT reference the first email. Do NOT say "following up" or "circling back". This should read like a separate, independent thought that happened to arrive. Tighter and more urgent than the first touch.
@@ -254,7 +254,7 @@ Subject: under 6 words, lowercase, no company name, no "re:" tricks. Make it sou
 
 MANDATORY OPENING STRATEGY for this email: Use the "${secondaryStrategy}" approach. Completely different angle from Step 1.
 
-Do NOT reference the first email. Come in from a new direction. Add one proof point they have not seen: a specific stat (48 to 24 min drop and hook), a module name (flowSPOTTER, flowTWIN), or the customer quote about headcount neutrality. Pick whichever feels most relevant to ${ctx.accountName}'s vertical.
+Do NOT reference the first email. Come in from a new direction. Add one proof point they have not seen: drop & hook time cut from 48 to 24 minutes (truck turn speed, NOT volume), a module name (flowSPOTTER, flowTWIN), or the customer quote about capturing additional volume headcount neutral. Pick whichever feels most relevant to ${ctx.accountName}'s vertical.
 
 Make the yard problem feel more expensive than before. Tighter. Harder.
 

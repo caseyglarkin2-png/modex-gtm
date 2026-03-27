@@ -184,7 +184,9 @@ ANTI-SAMENESS RULES (mandatory):
 - Do NOT recite the same list of symptoms (manual check-in, radio dispatching, tribal knowledge) as a block. Pick ONE symptom and make it vivid for THIS account.
 - Do NOT explain what YardFlow is in product-pitch language. Let the proof imply the product.
 - Do NOT use "This is" as an opening construction.
-- Weave proof points (24 sites, $1M+, 48→24 min, headcount neutral) into the argument naturally. Do not list them.
+- Weave proof points ($1M+ per site, 48→24 min drop & hook, headcount neutral) into the argument naturally. Do not list them.
+- The 48→24 min stat is TRUCK TURN TIME, not freight volume. Never say "50% more volume" or "ship twice as much." The benefit is: faster turns free dock capacity so facilities can capture more demand without adding headcount.
+- Do NOT invent volume percentages or throughput multipliers. Approved: "capture more freight without adding headcount", "absorb demand spikes", "recover dock capacity."
 - The product name and what it does should appear ONCE, briefly, in the second half of the email. Not as a pitch paragraph.
 
 Do NOT:

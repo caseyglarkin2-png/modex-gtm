@@ -112,9 +112,9 @@ export const YARDFLOW_PROOF = {
   ],
 
   keyOutcomes: [
-    'More volume, same headcount — additional volume shipped while remaining headcount neutral',
-    '$1M+ incremental profit per site from recovered capacity',
-    '50% faster drop & hook — average cut from 48 to 24 minutes',
+    'Headcount neutral — capture more freight during demand spikes without adding a single person',
+    '$1M+ incremental profit per site from recovered dock capacity',
+    'Drop & hook time cut from 48 to 24 minutes — trucks turn faster, freeing docks',
     'Path to paperless — $100K savings, 1K+ trees saved',
   ],
 } as const;
@@ -141,7 +141,7 @@ export const YARDFLOW_MESSAGING = {
       'One standardized driver journey across facilities',
       'System-driven tasking, lane & dock direction, and timestamped handoffs',
       'Defensible chain of custody from check-in to BOL',
-      'Cleaner dock flow and more volume shipped without adding headcount',
+      'Cleaner dock flow — capture more freight when demand spikes without adding headcount',
     ],
   },
 
@@ -174,12 +174,19 @@ The 4-Step Driver Journey (standardized operating protocol):
 Six Modules: flowDRIVER (verify), flowBOL (document), flowSPOTTER (execute), flowTWIN (map), flowAI (orchestrate), flowNETWORK (scale)
 
 Proof from Live Deployment:
-- 24 facilities live
-- >200 contracted network
-- Headcount neutral — additional volume shipped without adding headcount
-- Drop & hook cut from 48 to 24 minutes (50% faster)
-- $1M+ per-site profit lift
+- 24 facilities live, >200 contracted network
+- Headcount neutral — captured additional volume without adding a single person
+- Drop & hook time cut from 48 to 24 minutes — trucks turn faster, freeing dock capacity
+- $1M+ per-site incremental profit (CEO-verified from operational data)
 - 30-minute remote deployment per facility
+
+CRITICAL CLAIM ACCURACY RULES (never violate these):
+- The 50% improvement is DROP & HOOK TIME (truck turn speed), NOT freight volume. Never say "ship 50% more" or "50% more volume."
+- YardFlow lets facilities capture more of the demand spike when it happens, without adding headcount. Even 5% more freight captured is massive at scale.
+- Do NOT invent volume percentages. The volume benefit is: same headcount handles more freight when demand spikes.
+- Do NOT say "ship twice as much" or any volume multiplier. The math is: faster turns = more dock availability = ability to absorb demand surges.
+- Approved phrasing: "capture more freight without adding headcount", "absorb demand spikes", "recover dock capacity", "faster truck turns", "$1M+ per site"
+- NEVER make up statistics that are not listed here. If you do not have a number, describe the outcome qualitatively.
 
 Verified Customer Quote: "${YARDFLOW_PROOF.customerQuote.text}" — ${YARDFLOW_PROOF.customerQuote.attribution}, ${YARDFLOW_PROOF.customerQuote.company}
 
@@ -193,7 +200,7 @@ YardFlow Effect (outcomes to customize per account):
 - One standardized driver journey across facilities
 - System-driven tasking, lane & dock direction, and timestamped handoffs
 - Defensible chain of custody from check-in to BOL
-- Cleaner dock flow and more volume shipped without adding headcount
+- Cleaner dock flow — capture more freight when demand spikes without adding headcount
 
 Best fit: ${YARDFLOW_MESSAGING.bestFitProfile}
 CTA: ${YARDFLOW_BRAND.ctaMeeting}
