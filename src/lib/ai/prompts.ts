@@ -32,7 +32,7 @@ export interface OnePagerContext {
 }
 
 export function buildEmailPrompt(ctx: PromptContext): string {
-  return `Write a cold outreach email.
+  return `Write a cold outreach email that reads like a senior operator wrote it personally. Not a template. Not a pitch deck in email form.
 
 ${getYardFlowPromptContext()}
 
@@ -48,13 +48,25 @@ MODEX: April 13-16, Atlanta. YardFlow will be on-site with live users from the n
 
 Goal: Book a 30-minute meeting at MODEX to walk their yard network and build a board-ready rollout plan.
 
-Max 100 words. Open on a truth about THEIR specific operation, not a generic supply chain statement. Do not start with "The yard is where." End with a direct question. No sign-off.
+STRUCTURE (3 short paragraphs, max 90 words total):
+1. OPENER (1-2 sentences): A specific, concrete observation about THIS company's operations that the reader will recognize as true. Reference their vertical, their facility type, their logistics reality. Not "industrial plants" — name what they move, how they move it, where it breaks.
+2. BRIDGE (2-3 sentences): Connect that reality to the yard constraint. One proof point woven in naturally, not listed. Make the status quo feel expensive.
+3. ASK (1 sentence): Direct question about meeting at MODEX. Specific times. No hedging.
 
-Output: Only the email body.`;
+CRITICAL RULES:
+- Write in short, declarative sentences. No compound sentences with semicolons.
+- Every sentence must be under 20 words.
+- No abstract nouns ("visibility", "optimization", "solution"). Use concrete verbs and specific numbers.
+- Do NOT use the word "throughput" more than once.
+- Do NOT use "This is where" or "That is where" constructions.
+- Do NOT explain what YardFlow is. Let the proof imply the product.
+- The email should feel like someone who has walked their yard is writing to them.
+
+Output: Only the email body. No subject line. No greeting. No sign-off.`;
 }
 
 export function buildFollowUpEmailPrompt(ctx: PromptContext): string {
-  return `Write a follow-up email. The first outreach got no reply.
+  return `Write a follow-up email. The first outreach got no reply. This one has to land harder.
 
 ${getYardFlowPromptContext()}
 
@@ -66,13 +78,15 @@ ${ctx.vertical ? `Vertical: ${ctx.vertical}` : ''}
 ${ctx.primoAngle ? `What makes this account specific: ${ctx.primoAngle}` : ''}
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 
-Do not reference the first email directly. Come in from a different angle. Add one new proof point (a stat, a module, the customer quote). Make the current state feel more expensive than before.
+STRUCTURE (2 short paragraphs, max 60 words total):
+1. NEW ANGLE (2-3 sentences): Come in from a completely different direction than the first email. Lead with one specific proof point — a number, a result, the customer quote. Make the reader's current state feel more expensive than they realized.
+2. SHARPER ASK (1 sentence): Even more direct than before. One specific time at MODEX.
+
+Do NOT reference the first email. Do NOT say "following up" or "circling back". This should read like a separate, independent thought that happened to arrive. Tighter and more urgent than the first touch.
 
 MODEX: April 13-16, Atlanta. Live YardFlow users will be on-site. Suggest Tuesday April 14. No calendar link.
 
-Max 70 words. Tighter and harder than the first touch. End with a direct question. No sign-off.
-
-Output: Only the email body.`;
+Output: Only the email body. No greeting. No sign-off.`;
 }
 
 export function buildDMPrompt(ctx: PromptContext): string {
@@ -219,15 +233,22 @@ export function buildOutreachSequencePrompt(ctx: PromptContext, step: 'initial_e
 
 MANDATORY OPENING STRATEGY for this email: Use the "${primaryStrategy}" approach from the variation taxonomy. Do NOT use any other approach. Make the opening feel specific to ${ctx.accountName}'s operational reality using the account context below.
 
-Write about their specific operational world, not generic supply chain. If they are food manufacturing, write about plant throughput and production surges. If they are retail, write about DC velocity and replenishment windows. If they are industrial, write about trailer scheduling complexity. Make the reader think you have walked their yard.
+Write like someone who has personally stood in their yard and seen the problem. If they are food manufacturing, write about trailer staging during production surges and the detention that compounds. If they are retail, write about DC velocity and the gap between the WMS and the physical yard. If they are industrial, write about scheduling complexity at scale. Use their language, not supply chain consultant language.
 
-The yard thesis should emerge from THEIR reality, not from a canned framing. Do not start with "The yard is where." Find a different path into the same truth.
+The yard thesis should emerge from THEIR reality, not from a canned framing.
 
-Mention the product (YardFlow / Yard Network System) only once, briefly, in the second half. Do not explain what it is in pitch language. Let proof carry the weight.
+STRUCTURE (3 short paragraphs, max 90 words total):
+1. OPENER: 1-2 concrete sentences about THIS company's yard reality. Specific, observed, not researched-sounding.
+2. BRIDGE: 2-3 sentences connecting to the constraint + one proof point woven naturally.
+3. ASK: 1 sentence. Direct question. Specific MODEX times.
+
+Every sentence under 20 words. No abstract nouns. No compound sentences with semicolons.
+
+Mention YardFlow only once, in paragraph 2, briefly. Let proof carry the weight.
 
 MODEX 2026 is April 13-16 in Atlanta. YardFlow will have live users from the network on-site. Suggest meeting windows: Tuesday April 14 at 10am, 1pm, or 3pm. Offer flexibility. No calendar link. Get them to reply.
 
-Max 100 words. Subject under 6 words, lowercase, no company name. End with a direct question.`,
+Subject: under 6 words, lowercase, no company name, no "re:" tricks. Make it sound like an internal memo subject, not a sales email.`,
 
     follow_up_1: `STEP 2 of 4. Sent 3 days after Step 1.
 

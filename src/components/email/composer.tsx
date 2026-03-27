@@ -21,29 +21,34 @@ function buildEmailPreviewHtml(bodyText: string, accountName: string): string {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    .replace(/\n\n/g, '</p><p style="margin:12px 0;">')
+    .replace(/\n\n/g, '</p><p style="margin:0 0 12px;">')
     .replace(/\n/g, '<br />');
 
-  return `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f9fafb;padding:16px 8px;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;margin:0 auto;background:#ffffff;border-radius:8px;overflow:hidden;border:1px solid #e5e7eb;">
+  return `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:#ffffff;padding:16px 8px;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;margin:0 auto;">
     <tr>
-      <td style="background:#0f172a;padding:14px 20px;">
-        <span style="color:#22d3ee;font-size:16px;font-weight:800;letter-spacing:-0.5px;">Yard</span><span style="color:#ffffff;font-size:16px;font-weight:800;">Flow</span>
-        <span style="color:#64748b;font-size:11px;margin-left:6px;">by FreightRoll</span>
-      </td>
-    </tr>
-    <tr>
-      <td style="padding:20px;color:#1e293b;font-size:13px;line-height:1.7;">
+      <td style="padding:20px 16px 16px;color:#1a1a1a;font-size:13px;line-height:1.75;letter-spacing:-0.01em;">
         <p style="margin:0 0 12px;">${escaped}</p>
       </td>
     </tr>
     <tr>
-      <td style="padding:12px 20px 16px;border-top:1px solid #f1f5f9;">
-        <p style="margin:0;font-size:11px;color:#64748b;">
-          Casey Larkin — <strong>YardFlow by FreightRoll</strong><br/>
-          The First Yard Network System<br/>
-          <span style="color:#22d3ee;">yardflow.ai</span> · <span style="color:#22d3ee;">Book a Network Audit</span>
-        </p>
+      <td style="padding:0 16px 20px;">
+        <table cellpadding="0" cellspacing="0" style="border-top:1px solid #e0e0e0;width:100%;">
+          <tr>
+            <td style="padding-top:12px;">
+              <p style="margin:0 0 2px;font-size:12px;font-weight:600;color:#1a1a1a;">Casey Larkin</p>
+              <p style="margin:0 0 8px;font-size:11px;color:#6b7280;">GTM Lead · <span style="color:#0e7490;font-weight:600;">Yard</span><span style="font-weight:600;color:#1a1a1a;">Flow</span> by FreightRoll</p>
+              <p style="margin:0 0 8px;font-size:10px;color:#9ca3af;font-style:italic;">The First Yard Network System — deterministic throughput across every facility.</p>
+              <p style="margin:0;font-size:10px;">
+                <span style="color:#0e7490;font-weight:500;">yardflow.ai</span>
+                <span style="color:#d1d5db;margin:0 4px;">|</span>
+                <span style="color:#0e7490;font-weight:500;">Run ROI</span>
+                <span style="color:#d1d5db;margin:0 4px;">|</span>
+                <span style="color:#0e7490;font-weight:500;">Book a Network Audit</span>
+              </p>
+            </td>
+          </tr>
+        </table>
       </td>
     </tr>
   </table>
