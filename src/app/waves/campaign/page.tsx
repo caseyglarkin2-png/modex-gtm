@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getAccounts, getPersonasByAccount, getAuditRoutes, getMeetingBriefs, getOutreachWaves, slugify } from '@/lib/data';
+import { dbGetDashboardStats } from '@/lib/db';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -7,7 +8,9 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { Rocket, Target, Mail, Linkedin, Calendar, FileText, ExternalLink, Zap, Clock, ArrowRight } from 'lucide-react';
 import { CampaignActions } from './campaign-actions';
 import { CampaignToolbar } from './campaign-toolbar';
+import { BulkSendPanel } from './bulk-send-panel';
 
+export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Campaign Command Center' };
 
 /* ── hand-crafted intel per Wave 1 account ── */
@@ -119,11 +122,23 @@ const DANNON_INTEL = {
   action: 'Text Mark. Send him the one-pager. Let warm path breathe 48h before cold outreach.',
 };
 
-export default function CampaignPage() {
+export default async function CampaignPage() {
   const accounts = getAccounts();
   const auditRoutes = getAuditRoutes();
   const briefs = getMeetingBriefs();
   const waves = getOutreachWaves();
+
+  // Live pipeline stats from DB
+  let stats: Awaited<ReturnType<typeof dbGetDashboardStats>> | null = null;
+  try {
+    stats = await dbGetDashboardStats();
+  } catch {
+    // DB offline — degrade gracefully
+  }
+
+  const modexDate = new Date('2026-04-13');
+  const today = new Date();
+  const daysUntilModex = Math.max(0, Math.ceil((modexDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)));
 
   const wave1Accounts = accounts
     .filter((a) => (a.priority_score ?? 0) >= 4)
@@ -153,6 +168,34 @@ export default function CampaignPage() {
           <a href={calendarLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-cyan-600 hover:underline">
             <Calendar className="h-3.5 w-3.5" /> Booking Calendar <ExternalLink className="h-3 w-3" />
           </a>
+        </div>
+      </div>
+
+      {/* ── Live Pipeline Stats Bar ── */}
+      <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
+        <div className="rounded-lg border p-3 text-center">
+          <p className="text-2xl font-bold text-red-600">{daysUntilModex}</p>
+          <p className="text-[10px] text-[var(--muted-foreground)] uppercase tracking-wide">Days to MODEX</p>
+        </div>
+        <div className="rounded-lg border p-3 text-center">
+          <p className="text-2xl font-bold">{stats?.emailsSent ?? '—'}</p>
+          <p className="text-[10px] text-[var(--muted-foreground)] uppercase tracking-wide">Emails Sent</p>
+        </div>
+        <div className="rounded-lg border p-3 text-center">
+          <p className="text-2xl font-bold text-blue-600">{stats?.openRate ?? 0}%</p>
+          <p className="text-[10px] text-[var(--muted-foreground)] uppercase tracking-wide">Open Rate</p>
+        </div>
+        <div className="rounded-lg border p-3 text-center">
+          <p className="text-2xl font-bold text-cyan-600">{stats?.clickRate ?? 0}%</p>
+          <p className="text-[10px] text-[var(--muted-foreground)] uppercase tracking-wide">Click Rate</p>
+        </div>
+        <div className="rounded-lg border p-3 text-center">
+          <p className="text-2xl font-bold text-emerald-600">{stats?.meetingsBooked ?? 0}</p>
+          <p className="text-[10px] text-[var(--muted-foreground)] uppercase tracking-wide">Meetings Booked</p>
+        </div>
+        <div className="rounded-lg border p-3 text-center">
+          <p className="text-2xl font-bold text-amber-600">{stats?.contacted ?? 0}/20</p>
+          <p className="text-[10px] text-[var(--muted-foreground)] uppercase tracking-wide">Accounts Contacted</p>
         </div>
       </div>
 
@@ -201,6 +244,23 @@ export default function CampaignPage() {
           </CardContent>
         </Card>
       )}
+
+      {/* ── Bulk Send Panel ── */}
+      {(() => {
+        const bulkRecipients = wave1Accounts
+          .filter((a) => a.name !== 'Dannon')
+          .flatMap((account) => {
+            const personas = getPersonasByAccount(account.name);
+            return personas.map((p) => ({
+              accountName: account.name,
+              personaName: p.name,
+              email: p.email ?? '',
+              priority: p.priority ?? 'P2',
+              title: p.title ?? undefined,
+            }));
+          });
+        return <BulkSendPanel recipients={bulkRecipients} />;
+      })()}
 
       {/* ── Wave 1 Campaign Cards ── */}
       <div className="space-y-2">
