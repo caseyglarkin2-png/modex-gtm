@@ -5,7 +5,7 @@ description: "Email sending safety rules. Use when: modifying email send logic, 
 
 # Email Safety Rules
 
-- **ALWAYS** BCC casey@yardflow.ai on every outbound email
+- **ALWAYS** BCC casey@freightroll.com on every outbound email (primary inbox)
 - **ALWAYS** log sends to `email_logs` table with `provider_message_id`
 - **ALWAYS** validate inputs with Zod before sending
 - **NEVER** send email to any @dannon.com or @danone.com address via cold outreach

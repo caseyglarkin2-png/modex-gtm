@@ -6,6 +6,7 @@ const RESEND_KEY = process.env.RESEND_API_KEY?.trim();
 const FROM_EMAIL = process.env.FROM_EMAIL ?? process.env.SENDGRID_FROM_EMAIL ?? 'casey@yardflow.ai';
 const SENDGRID_FROM = process.env.SENDGRID_FROM_EMAIL ?? FROM_EMAIL;
 const FROM_NAME = process.env.FROM_NAME ?? 'Casey Larkin — YardFlow';
+const BCC_EMAIL = process.env.BCC_EMAIL ?? 'casey@freightroll.com';
 
 export interface EmailPayload {
   to: string;
@@ -15,8 +16,8 @@ export interface EmailPayload {
   html: string;
 }
 
-// Auto-BCC the sender so every outbound email appears in their inbox
-const AUTO_BCC = FROM_EMAIL;
+// Auto-BCC to primary inbox so every outbound email appears there
+const AUTO_BCC = BCC_EMAIL;
 
 // ── SendGrid ─────────────────────────────────────────────────────────
 
