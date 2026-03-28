@@ -74,6 +74,10 @@ async function main() {
   const items: SendItem[] = JSON.parse(fs.readFileSync(outboxPath, 'utf-8'));
   console.log(`\nLoaded ${items.length} emails from ${outboxPath}`);
 
+  const existingAccounts = new Set(
+    (await prisma.account.findMany({ select: { name: true } })).map(a => a.name)
+  );
+
   // Validate - check for banned domains and emdashes
   const validItems: SendItem[] = [];
   for (const item of items) {
@@ -130,18 +134,20 @@ async function main() {
       });
 
       // Create activity
-      await prisma.activity.create({
-        data: {
-          account_name: item.accountName,
-          persona: item.personaName ?? null,
-          activity_type: 'Email',
-          outcome: `Email sent: "${item.subject}" to ${item.to}`,
-          next_step: 'Monitor for open/reply - follow up in 3 days if no response',
-          next_step_due: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-          owner: 'Casey',
-          activity_date: new Date(),
-        },
-      }).catch(() => {}); // Activity logging is best-effort
+      if (existingAccounts.has(item.accountName)) {
+        await prisma.activity.create({
+          data: {
+            account_name: item.accountName,
+            persona: item.personaName ?? null,
+            activity_type: 'Email',
+            outcome: `Email sent: "${item.subject}" to ${item.to}`,
+            next_step: 'Monitor for open/reply - follow up in 3 days if no response',
+            next_step_due: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+            owner: 'Casey',
+            activity_date: new Date(),
+          },
+        }).catch(() => {}); // Activity logging is best-effort
+      }
 
       sent++;
       console.log(`  SENT: ${item.to} (${item.accountName}) - ${data.id}`);

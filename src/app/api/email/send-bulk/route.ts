@@ -56,6 +56,9 @@ export async function POST(req: NextRequest) {
   // Best-effort DB logging for each send
   try {
     const { prisma } = await import('@/lib/prisma');
+    const accountExists = accountName
+      ? await prisma.account.findUnique({ where: { name: accountName }, select: { name: true } })
+      : null;
     const accountsContacted = new Set<string>();
 
     for (let i = 0; i < results.length; i++) {
@@ -75,7 +78,7 @@ export async function POST(req: NextRequest) {
       }).catch(() => { /* individual log failure is non-blocking */ });
 
       // Auto-log activity for each successful send
-      if (r.status === 'fulfilled' && accountName) {
+      if (r.status === 'fulfilled' && accountName && accountExists) {
         await prisma.activity.create({
           data: {
             account_name: accountName,

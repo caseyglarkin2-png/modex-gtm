@@ -50,6 +50,10 @@ export async function POST(req: NextRequest) {
     // Best-effort DB log — skip if no DB available
     try {
       const { prisma } = await import('@/lib/prisma');
+      const accountExists = accountName
+        ? await prisma.account.findUnique({ where: { name: accountName }, select: { name: true } })
+        : null;
+
       await prisma.emailLog.create({
         data: {
           account_name: accountName ?? '',
@@ -63,7 +67,7 @@ export async function POST(req: NextRequest) {
       });
 
       // Auto-update outreach_status to "Contacted" if currently "Not started"
-      if (accountName) {
+      if (accountName && accountExists) {
         await prisma.account.updateMany({
           where: { name: accountName, outreach_status: 'Not started' },
           data: { outreach_status: 'Contacted' },
@@ -71,7 +75,7 @@ export async function POST(req: NextRequest) {
       }
 
       // Auto-log activity for the send
-      if (accountName) {
+      if (accountName && accountExists) {
         await prisma.activity.create({
           data: {
             account_name: accountName,
