@@ -5,9 +5,7 @@ const SENDGRID_KEY = process.env.SENDGRID_API_KEY?.trim();
 const RESEND_KEY = process.env.RESEND_API_KEY?.trim();
 const FROM_EMAIL = process.env.FROM_EMAIL ?? process.env.SENDGRID_FROM_EMAIL ?? 'casey@yardflow.ai';
 const SENDGRID_FROM = process.env.SENDGRID_FROM_EMAIL ?? FROM_EMAIL;
-const FROM_NAME = process.env.FROM_NAME ?? 'Casey Larkin — YardFlow';
-const BCC_EMAIL = process.env.BCC_EMAIL ?? 'casey@freightroll.com';
-
+const FROM_NAME = process.env.FROM_NAME ?? 'Casey Larkin - YardFlow';
 export interface EmailPayload {
   to: string;
   cc?: string;
@@ -16,19 +14,15 @@ export interface EmailPayload {
   html: string;
 }
 
-// Auto-BCC to primary inbox so every outbound email appears there
-const AUTO_BCC = BCC_EMAIL;
-
 // ── SendGrid ─────────────────────────────────────────────────────────
 
 async function sendViaSendGrid(payload: EmailPayload) {
   if (!SENDGRID_KEY) throw new Error('SENDGRID_API_KEY not set');
   sgMail.setApiKey(SENDGRID_KEY);
-  const bcc = payload.bcc || (payload.to !== AUTO_BCC ? AUTO_BCC : undefined);
   const [response] = await sgMail.send({
     to: payload.to,
     cc: payload.cc || undefined,
-    bcc: bcc || undefined,
+    bcc: payload.bcc || undefined,
     from: { email: SENDGRID_FROM, name: FROM_NAME },
     subject: payload.subject,
     html: payload.html,
@@ -42,12 +36,11 @@ async function sendViaSendGrid(payload: EmailPayload) {
 async function sendViaResend(payload: EmailPayload) {
   if (!RESEND_KEY) throw new Error('RESEND_API_KEY not set');
   const resend = new Resend(RESEND_KEY);
-  const bcc = payload.bcc || (payload.to !== AUTO_BCC ? AUTO_BCC : undefined);
   const { data, error } = await resend.emails.send({
     from: `${FROM_NAME} <${FROM_EMAIL}>`,
     to: payload.to,
     cc: payload.cc || undefined,
-    bcc: bcc || undefined,
+    bcc: payload.bcc || undefined,
     replyTo: FROM_EMAIL,
     subject: payload.subject,
     html: payload.html,

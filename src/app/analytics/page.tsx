@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { dbGetDashboardStats, dbGetAccounts } from '@/lib/db';
+import { AutoRefresh } from '@/components/auto-refresh';
 
 export const metadata = { title: 'Analytics — Board Report' };
 export const dynamic = 'force-dynamic';
@@ -24,7 +25,7 @@ export default async function AnalyticsPage() {
   const funnel = [
     { label: 'Target Accounts', count: stats.accountCount, pct: 100 },
     { label: 'Research Complete', count: stats.researched, pct: stats.accountCount ? Math.round((stats.researched / stats.accountCount) * 100) : 0 },
-    { label: 'Contacted', count: stats.contacted, pct: stats.accountCount ? Math.round((stats.contacted / stats.accountCount) * 100) : 0 },
+    { label: 'Contacted', count: stats.contacted, pct: stats.contacted ? Math.round((stats.contacted / Math.max(stats.emailsSent, 1)) * 100) : 0 },
     { label: 'Meetings Booked', count: stats.meetingsBooked, pct: stats.accountCount ? Math.round((stats.meetingsBooked / stats.accountCount) * 100) : 0 },
   ];
 
@@ -45,7 +46,10 @@ export default async function AnalyticsPage() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Badge variant="outline" className="text-xs">Live from Database</Badge>
+          <Badge variant="outline" className="flex items-center gap-1.5 text-xs">
+            <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
+            <AutoRefresh intervalMs={30_000} />
+          </Badge>
           <Link href="/api/export?type=pipeline" target="_blank">
             <Button variant="outline" size="sm" className="text-xs gap-1">Export Pipeline CSV</Button>
           </Link>
@@ -63,7 +67,7 @@ export default async function AnalyticsPage() {
               <div>
                 <p className="text-sm text-[var(--muted-foreground)]">Emails Sent</p>
                 <p className="mt-1 text-3xl font-bold">{stats.emailsSent}</p>
-                <p className="mt-1 text-xs text-[var(--muted-foreground)]">{stats.generatedCount} AI-generated</p>
+                <p className="mt-1 text-xs text-[var(--muted-foreground)]">{stats.emailsDelivered} delivered · {stats.emailsBounced} bounced</p>
               </div>
               <div className="rounded-lg bg-blue-500/10 p-2.5">
                 <Mail className="h-5 w-5 text-blue-500" />
@@ -78,7 +82,7 @@ export default async function AnalyticsPage() {
               <div>
                 <p className="text-sm text-[var(--muted-foreground)]">Open Rate</p>
                 <p className="mt-1 text-3xl font-bold">{stats.openRate}%</p>
-                <p className="mt-1 text-xs text-[var(--muted-foreground)]">{stats.emailsOpened} opened</p>
+                <p className="mt-1 text-xs text-[var(--muted-foreground)]">{stats.emailsOpened} opened of {stats.emailsDelivered} delivered</p>
               </div>
               <div className="rounded-lg bg-emerald-500/10 p-2.5">
                 <Eye className="h-5 w-5 text-emerald-500" />
@@ -91,12 +95,12 @@ export default async function AnalyticsPage() {
           <CardContent className="p-5">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-[var(--muted-foreground)]">Click Rate</p>
-                <p className="mt-1 text-3xl font-bold">{stats.clickRate}%</p>
-                <p className="mt-1 text-xs text-[var(--muted-foreground)]">{stats.emailsClicked} clicked</p>
+                <p className="text-sm text-[var(--muted-foreground)]">Bounce Rate</p>
+                <p className={`mt-1 text-3xl font-bold ${stats.bounceRate > 10 ? 'text-red-500' : stats.bounceRate > 5 ? 'text-amber-500' : ''}`}>{stats.bounceRate}%</p>
+                <p className="mt-1 text-xs text-[var(--muted-foreground)]">{stats.emailsBounced} bounced · {stats.deliveryRate}% delivery</p>
               </div>
-              <div className="rounded-lg bg-violet-500/10 p-2.5">
-                <MousePointerClick className="h-5 w-5 text-violet-500" />
+              <div className={`rounded-lg p-2.5 ${stats.bounceRate > 10 ? 'bg-red-500/10' : 'bg-amber-500/10'}`}>
+                <TrendingUp className={`h-5 w-5 ${stats.bounceRate > 10 ? 'text-red-500' : 'text-amber-500'}`} />
               </div>
             </div>
           </CardContent>
@@ -295,7 +299,7 @@ export default async function AnalyticsPage() {
                         <EmailStatusBadge status={email.status} opened={!!email.opened_at} clicked={!!email.clicked_at} />
                       </td>
                       <td className="py-2 text-right text-xs text-[var(--muted-foreground)]">
-                        {email.sent_at.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                        {(email.sent_at ?? email.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                       </td>
                     </tr>
                   ))}

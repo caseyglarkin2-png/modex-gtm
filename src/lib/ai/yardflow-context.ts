@@ -9,10 +9,10 @@ export const YARDFLOW_BRAND = {
   fullName: 'YardFlow by FreightRoll',
   tagline: 'The First Yard Network System',
   subtag: 'Industrial Fluidity.',
-  positioning: 'A standardized operating protocol — not a YMS — that made each of over 20 sites at least $1M+ more profitable. Now rolling out to over 200 more.',
+  positioning: 'A standardized operating protocol (not a YMS) that made each of over 20 sites at least $1M+ more profitable. Now rolling out to over 200 more.',
   url: 'https://yardflow.ai',
   ctaLabel: 'Book a Network Audit',
-  ctaMeeting: '30-minute Network Audit — facility mapping + board-ready ROI',
+  ctaMeeting: '30-minute Network Audit: facility mapping + board-ready ROI',
   sender: {
     name: 'Casey Larkin',
     title: 'GTM Lead',
@@ -22,7 +22,7 @@ export const YARDFLOW_BRAND = {
 } as const;
 
 export const YARDFLOW_PRODUCT = {
-  what: 'YardFlow is a Yard Network System (YNS) — not a YMS. It is a standardized operating protocol for deterministic throughput.',
+  what: 'YardFlow is a Yard Network System (YNS), not a YMS. It is a standardized operating protocol for deterministic throughput.',
   coreInsight: 'The yard is where throughput dies. Manual check-in. Radio dispatching. Tribal knowledge at the gate. The yard consumes margin that never comes back.',
   fix: 'YardFlow enforces one driver journey across every facility. Same steps. Same sequence. Same evidence. Variance dies. Throughput becomes calculable.',
   protocolIsProduct: 'The protocol is the product. Six modules, one driver journey, network-wide control.',
@@ -112,10 +112,10 @@ export const YARDFLOW_PROOF = {
   ],
 
   keyOutcomes: [
-    'Headcount neutral — capture more freight during demand spikes without adding a single person',
+    'Headcount neutral. Capture more freight during demand spikes without adding a single person',
     '$1M+ incremental profit per site from recovered dock capacity',
-    'Drop & hook time cut from 48 to 24 minutes — trucks turn faster, freeing docks',
-    'Path to paperless — $100K savings, 1K+ trees saved',
+    'Drop & hook time cut from 48 to 24 minutes. Trucks turn faster, freeing docks',
+    'Path to paperless. $100K savings, 1K+ trees saved',
   ],
 } as const;
 
@@ -125,7 +125,7 @@ export const YARDFLOW_MESSAGING = {
     defaultPains: [
       'Manual gate check-in & radio dispatching under peak pressure',
       'Dwell depends on tribal knowledge, not a standard operating sequence',
-      'Each facility runs its own yard playbook — variance compounds network-wide',
+      'Each facility runs its own yard playbook. Variance compounds network-wide',
       'Dock-office friction, detention, & local workarounds hide lost throughput',
     ],
   },
@@ -141,7 +141,7 @@ export const YARDFLOW_MESSAGING = {
       'One standardized driver journey across facilities',
       'System-driven tasking, lane & dock direction, and timestamped handoffs',
       'Defensible chain of custody from check-in to BOL',
-      'Cleaner dock flow — capture more freight when demand spikes without adding headcount',
+      'Cleaner dock flow. Capture more freight when demand spikes without adding headcount',
     ],
   },
 
@@ -160,23 +160,23 @@ export function getYardFlowPromptContext(): string {
 YARDFLOW BRAND CONTEXT (use this for all generated content):
 
 Company: ${YARDFLOW_BRAND.fullName}
-Positioning: ${YARDFLOW_BRAND.tagline} — ${YARDFLOW_BRAND.positioning}
+Positioning: ${YARDFLOW_BRAND.tagline}. ${YARDFLOW_BRAND.positioning}
 Core insight: ${YARDFLOW_PRODUCT.coreInsight}
 The fix: ${YARDFLOW_PRODUCT.fix}
 Protocol: ${YARDFLOW_PRODUCT.protocolIsProduct}
 
 The 4-Step Driver Journey (standardized operating protocol):
-1. Gate Check-in — Verified driver ID and a standard intake sequence every time
-2. Yard Routing — Automated lane and move logic replaces manual radio dispatching
-3. Dock Assignment — Seamless dock handoff with timestamped direction and clear accountability
-4. BOL Proof — Touchless BOL capture with a defensible chain of custody from arrival to release
+1. Gate Check-in: Verified driver ID and a standard intake sequence every time
+2. Yard Routing: Automated lane and move logic replaces manual radio dispatching
+3. Dock Assignment: Seamless dock handoff with timestamped direction and clear accountability
+4. BOL Proof: Touchless BOL capture with a defensible chain of custody from arrival to release
 
 Six Modules: flowDRIVER (verify), flowBOL (document), flowSPOTTER (execute), flowTWIN (map), flowAI (orchestrate), flowNETWORK (scale)
 
 Proof from Live Deployment:
 - 24 facilities live, >200 contracted network
-- Headcount neutral — captured additional volume without adding a single person
-- Drop & hook time cut from 48 to 24 minutes — trucks turn faster, freeing dock capacity
+- Headcount neutral. Captured additional volume without adding a single person
+- Drop & hook time cut from 48 to 24 minutes. Trucks turn faster, freeing dock capacity
 - $1M+ per-site incremental profit (CEO-verified from operational data)
 - 30-minute remote deployment per facility
 
@@ -188,26 +188,26 @@ CRITICAL CLAIM ACCURACY RULES (never violate these):
 - Approved phrasing: "capture more freight without adding headcount", "absorb demand spikes", "recover dock capacity", "faster truck turns", "$1M+ per site"
 - NEVER make up statistics that are not listed here. If you do not have a number, describe the outcome qualitatively.
 
-Verified Customer Quote: "${YARDFLOW_PROOF.customerQuote.text}" — ${YARDFLOW_PROOF.customerQuote.attribution}, ${YARDFLOW_PROOF.customerQuote.company}
+Verified Customer Quote: "${YARDFLOW_PROOF.customerQuote.text}" - ${YARDFLOW_PROOF.customerQuote.attribution}, ${YARDFLOW_PROOF.customerQuote.company}
 
 Typical Reality (pain points to customize per account):
 - Manual gate check-in & radio dispatching under peak pressure
 - Dwell depends on tribal knowledge, not a standard operating sequence
-- Each facility runs its own yard playbook — variance compounds network-wide
+- Each facility runs its own yard playbook. Variance compounds network-wide
 - Dock-office friction, detention, & local workarounds hide lost throughput
 
 YardFlow Effect (outcomes to customize per account):
 - One standardized driver journey across facilities
 - System-driven tasking, lane & dock direction, and timestamped handoffs
 - Defensible chain of custody from check-in to BOL
-- Cleaner dock flow — capture more freight when demand spikes without adding headcount
+- Cleaner dock flow. Capture more freight when demand spikes without adding headcount
 
 Best fit: ${YARDFLOW_MESSAGING.bestFitProfile}
 CTA: ${YARDFLOW_BRAND.ctaMeeting}
 
 IMPORTANT LANGUAGE RULES:
 - Always say "YardFlow by FreightRoll" on first mention, then "YardFlow" thereafter
-- YardFlow is a "Yard Network System (YNS)" — NEVER call it a "YMS" or "yard management system"
+- YardFlow is a "Yard Network System (YNS)". NEVER call it a "YMS" or "yard management system"
 - It is a "standardized operating protocol" — use this language, not "software" or "platform"
 - The protocol IS the product — emphasize standards, not features
 - "Deterministic throughput" and "variance" are core vocabulary

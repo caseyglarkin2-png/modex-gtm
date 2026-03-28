@@ -4,7 +4,7 @@ const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID?.trim();
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET?.trim();
 const GOOGLE_REFRESH_TOKEN = process.env.GOOGLE_REFRESH_TOKEN?.trim();
 const FROM_EMAIL = process.env.FROM_EMAIL ?? process.env.SENDGRID_FROM_EMAIL ?? 'casey@yardflow.ai';
-const FROM_NAME = process.env.FROM_NAME ?? 'Casey Larkin — YardFlow';
+const FROM_NAME = process.env.FROM_NAME ?? 'Casey Larkin - YardFlow';
 
 interface MirrorPayload {
   to: string;

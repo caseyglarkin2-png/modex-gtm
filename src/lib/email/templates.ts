@@ -16,7 +16,7 @@ export function wrapHtml(bodyText: string, accountName: string): string {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YardFlow — ${accountName}</title>
+  <title>YardFlow - ${accountName}</title>
 </head>
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background:#ffffff; margin:0; padding:0;">
   <!--[if mso]><table width="100%"><tr><td width="640" align="center"><![endif]-->
@@ -37,7 +37,7 @@ export function wrapHtml(bodyText: string, accountName: string): string {
               <p style="margin:0 0 2px; font-size:14px; font-weight:600; color:#1a1a1a;">Casey Larkin</p>
               <p style="margin:0 0 10px; font-size:13px; color:#6b7280;">GTM Lead · <span style="color:#0e7490; font-weight:600;">Yard</span><span style="font-weight:600; color:#1a1a1a;">Flow</span> by FreightRoll</p>
               <!-- Value prop — one line, understated -->
-              <p style="margin:0 0 10px; font-size:12px; color:#9ca3af; font-style:italic;">The First Yard Network System — deterministic throughput across every facility.</p>
+              <p style="margin:0 0 10px; font-size:12px; color:#9ca3af; font-style:italic;">The First Yard Network System. Deterministic throughput across every facility.</p>
               <!-- Links -->
               <p style="margin:0; font-size:12px;">
                 <a href="https://yardflow.ai" style="color:#0e7490; text-decoration:none; font-weight:500;">yardflow.ai</a>

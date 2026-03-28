@@ -32,8 +32,9 @@ npx tsx scripts/seed.ts  # Seed database
 - **Server components by default.** Only add `"use client"` when hooks/interactivity required.
 - **Server Actions** for all mutations — never raw API routes for form submissions.
 - **Zod validation** on all API route inputs (`src/lib/validations.ts`).
-- **Auto-BCC** casey@yardflow.ai on every outbound email.
+- **No auto-BCC** on Resend sends. Each BCC burns a credit. Casey gets copies via Resend dashboard.
 - **Rate limiting** on email endpoints (10/min per IP).
+- **No em dashes (—)** in any email copy or AI-generated content. Use periods, commas, hyphens, or line breaks. Em dashes are the #1 AI-detection giveaway.
 - **Offline-first** for `/capture` — localStorage queue with auto-sync.
 - Account slugs are kebab-case of account name (e.g., `general-mills`).
 

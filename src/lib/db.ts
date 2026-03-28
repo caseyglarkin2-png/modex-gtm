@@ -70,10 +70,13 @@ export async function dbGetDashboardStats() {
     emailsSent,
     emailsOpened,
     emailsClicked,
+    emailsBounced,
+    emailsDelivered,
     activitiesCount,
     meetingsCount,
     generatedCount,
     capturesCount,
+    uniqueCompaniesContacted,
   ] = await Promise.all([
     prisma.account.count(),
     prisma.persona.count(),
@@ -81,10 +84,17 @@ export async function dbGetDashboardStats() {
     prisma.emailLog.count(),
     prisma.emailLog.count({ where: { opened_at: { not: null } } }),
     prisma.emailLog.count({ where: { clicked_at: { not: null } } }),
+    prisma.emailLog.count({ where: { status: 'bounced' } }),
+    prisma.emailLog.count({ where: { status: 'delivered' } }),
     prisma.activity.count(),
     prisma.meeting.count(),
     prisma.generatedContent.count(),
     prisma.mobileCapture.count(),
+    // Unique companies we've sent at least one email to (true "contacted" count)
+    prisma.emailLog.findMany({
+      distinct: ['account_name'],
+      select: { account_name: true },
+    }).then(rows => rows.length),
   ]);
 
   const accounts = await prisma.account.findMany({
@@ -92,22 +102,20 @@ export async function dbGetDashboardStats() {
   });
 
   const bandCounts = { A: 0, B: 0, C: 0, D: 0 };
-  let contacted = 0;
   let meetingsBooked = 0;
   let researched = 0;
 
   for (const a of accounts) {
     const band = a.priority_band as keyof typeof bandCounts;
     if (band in bandCounts) bandCounts[band]++;
-    if (a.outreach_status === 'Contacted' || a.outreach_status === 'In Progress') contacted++;
     if (a.meeting_status === 'Meeting Booked' || a.meeting_status === 'Meeting Held') meetingsBooked++;
     if (a.research_status === 'Ready' || a.research_status === 'Complete') researched++;
   }
 
-  // Recent email logs for send history
+  // Recent email logs for send history - show last 200
   const recentEmails = await prisma.emailLog.findMany({
-    orderBy: { sent_at: 'desc' },
-    take: 50,
+    orderBy: { created_at: 'desc' },
+    take: 200,
     select: {
       id: true,
       account_name: true,
@@ -118,6 +126,7 @@ export async function dbGetDashboardStats() {
       opened_at: true,
       clicked_at: true,
       sent_at: true,
+      created_at: true,
     },
   });
 
@@ -128,14 +137,18 @@ export async function dbGetDashboardStats() {
     emailsSent,
     emailsOpened,
     emailsClicked,
-    openRate: emailsSent > 0 ? Math.round((emailsOpened / emailsSent) * 100) : 0,
-    clickRate: emailsSent > 0 ? Math.round((emailsClicked / emailsSent) * 100) : 0,
+    emailsBounced,
+    emailsDelivered,
+    openRate: emailsDelivered > 0 ? Math.round((emailsOpened / emailsDelivered) * 100) : 0,
+    clickRate: emailsDelivered > 0 ? Math.round((emailsClicked / emailsDelivered) * 100) : 0,
+    deliveryRate: emailsSent > 0 ? Math.round((emailsDelivered / emailsSent) * 100) : 0,
+    bounceRate: emailsSent > 0 ? Math.round((emailsBounced / emailsSent) * 100) : 0,
     activitiesCount,
     meetingsCount,
     generatedCount,
     capturesCount,
     bandCounts,
-    contacted,
+    contacted: uniqueCompaniesContacted, // derive from email_logs, not account status
     meetingsBooked,
     researched,
     recentEmails,
