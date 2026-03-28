@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { SendEmailSchema } from '@/lib/validations';
 import { sendEmail } from '@/lib/email/client';
 import { mirrorEmailToGmailSent } from '@/lib/email/gmail-mirror';
+import { evaluateRecipientEligibility } from '@/lib/email/recipient-guard';
 import { wrapHtml } from '@/lib/email/templates';
 import { rateLimit } from '@/lib/rate-limit';
 import { auth } from '@/lib/auth';
@@ -31,6 +32,12 @@ export async function POST(req: NextRequest) {
   const html = isPlainText ? wrapHtml(bodyHtml, accountName ?? 'the team') : bodyHtml;
 
   try {
+    const { prisma } = await import('@/lib/prisma');
+    const guard = await evaluateRecipientEligibility(prisma, to);
+    if (!guard.ok) {
+      return NextResponse.json({ error: guard.reason }, { status: 400 });
+    }
+
     const response = await sendEmail({ to, cc, subject, html });
     const session = await auth();
     const sessionLike = (session ?? {}) as { user?: { email?: string }; googleAccessToken?: string };
@@ -49,7 +56,6 @@ export async function POST(req: NextRequest) {
 
     // Best-effort DB log — skip if no DB available
     try {
-      const { prisma } = await import('@/lib/prisma');
       const accountExists = accountName
         ? await prisma.account.findUnique({ where: { name: accountName }, select: { name: true } })
         : null;

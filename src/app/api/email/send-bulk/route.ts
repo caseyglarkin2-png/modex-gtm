@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { BulkSendEmailSchema } from '@/lib/validations';
 import { sendBulk } from '@/lib/email/client';
 import { mirrorEmailToGmailSent } from '@/lib/email/gmail-mirror';
+import { evaluateRecipientEligibility } from '@/lib/email/recipient-guard';
 import { wrapHtml } from '@/lib/email/templates';
 import { rateLimit } from '@/lib/rate-limit';
 import { auth } from '@/lib/auth';
@@ -29,7 +30,24 @@ export async function POST(req: NextRequest) {
   const isPlainText = !bodyHtml.trim().startsWith('<');
   const html = isPlainText ? wrapHtml(bodyHtml, accountName ?? 'the team') : bodyHtml;
 
-  const payloads = recipients.map((r) => ({ to: r.to, subject, html }));
+  const { prisma } = await import('@/lib/prisma');
+  const eligibility = await Promise.all(
+    recipients.map(async (recipient) => ({
+      recipient,
+      guard: await evaluateRecipientEligibility(prisma, recipient.to),
+    }))
+  );
+
+  const eligibleRecipients = eligibility.filter(item => item.guard.ok).map(item => item.recipient);
+  const skipped = eligibility
+    .filter(item => !item.guard.ok)
+    .map(item => ({ to: item.recipient.to, reason: item.guard.reason ?? 'Ineligible recipient' }));
+
+  if (eligibleRecipients.length === 0) {
+    return NextResponse.json({ success: false, sent: 0, failed: recipients.length, skipped }, { status: 400 });
+  }
+
+  const payloads = eligibleRecipients.map((r) => ({ to: r.to, subject, html }));
   const results = await sendBulk(payloads);
   const session = await auth();
   const sessionLike = (session ?? {}) as { user?: { email?: string }; googleAccessToken?: string };
@@ -38,7 +56,7 @@ export async function POST(req: NextRequest) {
   for (let i = 0; i < results.length; i++) {
     const result = results[i];
     if (result.status !== 'fulfilled') continue;
-    const recipient = recipients[i];
+    const recipient = eligibleRecipients[i];
     mirrorEmailToGmailSent({
       to: recipient.to,
       subject,
@@ -55,7 +73,6 @@ export async function POST(req: NextRequest) {
 
   // Best-effort DB logging for each send
   try {
-    const { prisma } = await import('@/lib/prisma');
     const accountExists = accountName
       ? await prisma.account.findUnique({ where: { name: accountName }, select: { name: true } })
       : null;
@@ -63,7 +80,7 @@ export async function POST(req: NextRequest) {
 
     for (let i = 0; i < results.length; i++) {
       const r = results[i];
-      const recipient = recipients[i];
+      const recipient = eligibleRecipients[i];
       const providerMessageId = r.status === 'fulfilled' ? (r.value as { headers?: Record<string, string> })?.headers?.['x-message-id'] ?? null : null;
       await prisma.emailLog.create({
         data: {
@@ -106,5 +123,5 @@ export async function POST(req: NextRequest) {
     // DB offline — skip logging
   }
 
-  return NextResponse.json({ success: true, sent, failed, total: recipients.length });
+  return NextResponse.json({ success: true, sent, failed, total: recipients.length, skipped });
 }

@@ -529,6 +529,8 @@ interface Contact {
   domain: string;
   qualityScore: number;
   qualityBand: 'A' | 'B' | 'C' | 'D';
+  isContactReady: boolean;
+  doNotContact: boolean;
 }
 
 interface GeneratedEmail {
@@ -540,6 +542,10 @@ interface GeneratedEmail {
   vertical: Vertical;
   templateVariant: number;
   subjectVariant: number;
+  qualityScore: number;
+  qualityBand: 'A' | 'B' | 'C' | 'D';
+  isContactReady: boolean;
+  doNotContact: boolean;
 }
 
 function loadAlreadySent(): Set<string> {
@@ -608,7 +614,7 @@ function loadContacts(): Contact[] {
       accountName: company,
       email,
       companyDomain: domain,
-      sourceEvidenceCount: 1,
+      sourceEvidenceCount: 2,
     });
 
     if (quality.score < CONTACT_STANDARD.minQualityScoreForSend || quality.emailConfidence < CONTACT_STANDARD.minEmailConfidenceForSend) {
@@ -621,6 +627,8 @@ function loadContacts(): Contact[] {
       industry: industry || 'manufacturing', domain,
       qualityScore: quality.score,
       qualityBand: quality.band,
+      isContactReady: quality.isReady,
+      doNotContact: false,
     });
   }
 
@@ -687,6 +695,10 @@ function generateEmail(contact: Contact, index: number): GeneratedEmail {
     vertical,
     templateVariant,
     subjectVariant,
+    qualityScore: contact.qualityScore,
+    qualityBand: contact.qualityBand,
+    isContactReady: contact.isContactReady,
+    doNotContact: contact.doNotContact,
   };
 }
 
@@ -856,6 +868,10 @@ async function main() {
       body: e.body,
       accountName: e.accountName,
       personaName: e.personaName,
+      isContactReady: e.isContactReady,
+      doNotContact: e.doNotContact,
+      qualityBand: e.qualityBand,
+      qualityScore: e.qualityScore,
     }));
     
     fs.writeFileSync(outPath, JSON.stringify(sendItems, null, 2));

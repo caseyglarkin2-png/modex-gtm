@@ -12,6 +12,7 @@
     "enrich:contacts": "tsx scripts/enrich-contacts.ts",
     "campaign:generate": "tsx scripts/generate-campaign.ts",
     "campaign:monday-bump": "tsx scripts/monday-bump.ts",
+    "suppress:bounces": "tsx scripts/sync-bounce-domain-suppressions.ts",
     "db:push": "prisma db push",
     "db:studio": "prisma studio"
   },

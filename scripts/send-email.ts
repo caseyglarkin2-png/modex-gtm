@@ -13,6 +13,7 @@
 
 import { PrismaClient } from '@prisma/client';
 import { Resend } from 'resend';
+import { evaluateRecipientEligibility } from '../src/lib/email/recipient-guard';
 
 const prisma = new PrismaClient();
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -56,6 +57,8 @@ interface SendItem {
   body: string;
   accountName: string;
   personaName?: string;
+  isContactReady?: boolean;
+  doNotContact?: boolean;
 }
 
 function sleep(ms: number) {
@@ -81,9 +84,13 @@ async function main() {
   // Validate - check for banned domains and emdashes
   const validItems: SendItem[] = [];
   for (const item of items) {
-    const domain = item.to.split('@')[1]?.toLowerCase();
-    if (BANNED_DOMAINS.some(d => domain?.includes(d))) {
-      console.log(`  SKIP (banned domain): ${item.to}`);
+    const guard = await evaluateRecipientEligibility(prisma, item.to, {
+      allowPayloadReady: true,
+      payloadReady: item.isContactReady === true,
+      payloadDoNotContact: item.doNotContact === true,
+    });
+    if (!guard.ok) {
+      console.log(`  SKIP (${guard.reason}): ${item.to}`);
       continue;
     }
     if (item.body.includes('\u2014') || item.body.includes('\u2013')) {

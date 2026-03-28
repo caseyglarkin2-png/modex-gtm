@@ -27,6 +27,7 @@ A contact is send-ready only when all of these are true:
 - Public web search (DuckDuckGo query trail)
 - LinkedIn profile discovery via search results
 - Deterministic email pattern generation by known company domain
+- Curated outbound list rows with matching name, title, company, and corporate email can count as evidence for campaign eligibility
 
 Note: Do not attempt unauthorized scraping behind login walls. Use public pages and compliant providers only.
 
@@ -53,10 +54,13 @@ Only A and B are eligible for broad campaign sends.
 - Add persona action computes and stores quality metadata.
 - Campaign generation script rejects contacts below threshold.
 - Enrichment pipeline upgrades low-confidence records in batch.
+- Live bounced domains are synced into `lists_config` under `blocked_domain` and enforced at send time.
 
 ## Operational Commands
 - Enrich contacts:
   - npm run enrich:contacts -- --limit 200
+- Sync bounced domains into suppression table:
+  - npm run suppress:bounces
 - Generate campaign with quality gating:
   - npm run campaign:generate
 - Monday bump (manual):
