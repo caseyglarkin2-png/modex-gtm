@@ -16,6 +16,7 @@
 
 import { PrismaClient } from '@prisma/client';
 import { Resend } from 'resend';
+import { firstNameFromEmail } from '../src/lib/contact-standard';
 
 const prisma = new PrismaClient();
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -62,6 +63,20 @@ Bumping this up. Saturday sends have a way of getting lost by Monday.
 
 If any of this resonated, I'm around for a quick call. Or catch us at MODEX in Atlanta April 13-16.`,
 ];
+
+function resolveGreetingName(personaName: string | null, toEmail: string): string {
+  const candidate = (personaName || '').trim().split(/\s+/)[0] || '';
+  if (candidate && candidate.length >= 2 && !/^\d+$/.test(candidate)) {
+    return candidate;
+  }
+
+  const fallback = firstNameFromEmail(toEmail);
+  if (fallback && fallback.length >= 2) {
+    return fallback;
+  }
+
+  return 'there';
+}
 
 function wrapHtml(bodyText: string, accountName: string): string {
   const escaped = bodyText
@@ -159,7 +174,7 @@ async function main() {
 
   // Build bump items
   const bumps = eligible.map((email, index) => {
-    const firstName = (email.persona_name || '').split(' ')[0] || 'there';
+    const firstName = resolveGreetingName(email.persona_name, email.to_email);
     const bumpVariant = index % BUMP_BODIES.length;
     const body = BUMP_BODIES[bumpVariant](firstName);
     

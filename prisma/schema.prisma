@@ -58,7 +58,11 @@ model Persona {
   account_name      String
   priority          String
   name              String
+  first_name        String?
+  last_name         String?
+  normalized_name   String?
   title             String?
+  normalized_title  String?
   persona_lane      String?
   role_in_deal      String?
   intro_route       String?
@@ -73,13 +77,30 @@ model Persona {
   notes             String?
   account_score     Int      @default(0)
   email             String?
+  email_status      String   @default("unverified")
+  email_confidence  Int      @default(0)
+  company_domain    String?
   phone             String?
+  phone_status      String   @default("unknown")
+  linkedin_confidence Int    @default(0)
+  source_type       String?
+  source_url        String?
+  source_evidence   Json?
+  quality_score     Int      @default(0)
+  quality_band      String   @default("D")
+  is_contact_ready  Boolean  @default(false)
+  do_not_contact    Boolean  @default(false)
+  contact_standard_version String @default("2026-03-28")
+  last_enriched_at  DateTime?
   created_at        DateTime @default(now())
   updated_at        DateTime @updatedAt
 
   account Account @relation(fields: [account_name], references: [name])
 
   @@index([account_name])
+  @@index([email])
+  @@index([quality_score])
+  @@unique([account_name, email])
   @@map("personas")
 }
 

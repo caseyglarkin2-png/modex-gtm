@@ -88,13 +88,13 @@ export type AddAccountInput = z.infer<typeof AddAccountSchema>;
 // ── Add Persona ───────────────────────────────────────
 export const AddPersonaSchema = z.object({
   account_name: z.string().min(1, 'Account is required'),
-  name: z.string().min(1, 'Name is required'),
-  title: z.string().optional(),
+  name: z.string().trim().min(3, 'Name is required').regex(/^[A-Za-z][A-Za-z\s'.-]+$/, 'Use a valid full name'),
+  title: z.string().trim().min(2, 'Title is required').optional(),
   email: z.string().email().optional().or(z.literal('')),
   priority: z.enum(['P1', 'P2', 'P3']).default('P2'),
   persona_lane: z.string().optional(),
   role_in_deal: z.string().optional(),
-  linkedin_url: z.string().url().optional().or(z.literal('')),
+  linkedin_url: z.string().url().regex(/^https:\/\/(www\.)?linkedin\.com\//i, 'Use a valid LinkedIn URL').optional().or(z.literal('')),
   why_this_persona: z.string().optional(),
   notes: z.string().optional(),
 });

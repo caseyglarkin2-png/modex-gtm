@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { CaptureSchema, ActivitySchema, MeetingSchema, AddAccountSchema, AddPersonaSchema, type CaptureInput, type ActivityInput, type MeetingInput, type AddAccountInput, type AddPersonaInput } from './validations';
+import { CONTACT_STANDARD_VERSION, normalizeName, normalizeTitle, parseDomainFromEmail, scoreContactQuality, splitName } from './contact-standard';
 
 // ── Capture ───────────────────────────────────────────────────────────────────
 export async function createCapture(data: CaptureInput) {
@@ -211,20 +212,45 @@ export async function createPersona(data: AddPersonaInput) {
     const { prisma } = await import('./prisma');
     const count = await prisma.persona.count();
     const personaId = `P-${String(count + 1).padStart(3, '0')}`;
+    const split = splitName(parsed.data.name);
+    const companyDomain = parseDomainFromEmail(parsed.data.email || null);
+    const quality = scoreContactQuality({
+      name: parsed.data.name,
+      title: parsed.data.title,
+      accountName: parsed.data.account_name,
+      email: parsed.data.email || null,
+      companyDomain,
+      linkedinUrl: parsed.data.linkedin_url || null,
+      sourceEvidenceCount: 0,
+    });
 
     await prisma.persona.create({
       data: {
         persona_id: personaId,
         account_name: parsed.data.account_name,
         name: parsed.data.name,
+        first_name: split.firstName || null,
+        last_name: split.lastName || null,
+        normalized_name: normalizeName(parsed.data.name),
         title: parsed.data.title ?? null,
+        normalized_title: normalizeTitle(parsed.data.title),
         email: parsed.data.email || null,
+        email_status: parsed.data.email ? 'guessed' : 'unverified',
+        email_confidence: quality.emailConfidence,
+        company_domain: companyDomain,
         priority: parsed.data.priority,
         persona_lane: parsed.data.persona_lane ?? null,
         role_in_deal: parsed.data.role_in_deal ?? null,
         linkedin_url: parsed.data.linkedin_url || null,
+        linkedin_confidence: parsed.data.linkedin_url ? quality.linkedinConfidence : 0,
         why_this_persona: parsed.data.why_this_persona ?? null,
         notes: parsed.data.notes ?? null,
+        source_type: 'manual',
+        quality_score: quality.score,
+        quality_band: quality.band,
+        is_contact_ready: quality.isReady,
+        contact_standard_version: CONTACT_STANDARD_VERSION,
+        last_enriched_at: new Date(),
         persona_status: 'To find',
       },
     });

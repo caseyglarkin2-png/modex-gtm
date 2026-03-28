@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { generateText } from '@/lib/ai/client';
+import { CONTACT_STANDARD, CONTACT_STANDARD_VERSION, parseDomainFromEmail, scoreContactQuality } from '@/lib/contact-standard';
 
 const EnrichRequestSchema = z.object({
   personas: z.array(z.object({
@@ -92,15 +93,32 @@ Output format:
       const domain = KNOWN_DOMAINS[p.account];
       const emailGuesses = domain ? generateEmailGuesses(p.name, domain) : [];
 
+      const resolvedEmail = aiResult.email || emailGuesses[0] || null;
+      const resolvedDomain = parseDomainFromEmail(resolvedEmail) || domain || null;
+      const quality = scoreContactQuality({
+        name: p.name,
+        title: p.title,
+        accountName: p.account,
+        email: resolvedEmail,
+        companyDomain: resolvedDomain,
+        linkedinUrl: p.linkedin_url,
+        sourceEvidenceCount: 1,
+      });
+
       return {
         persona_id: p.persona_id,
         name: p.name,
         account: p.account,
-        email: aiResult.email || emailGuesses[0] || null,
+        email: resolvedEmail,
         email_confidence: aiResult.email_confidence || (domain ? 'medium' : 'low'),
         email_variants: [...new Set([...(aiResult.email_variants || []), ...emailGuesses])].slice(0, 5),
         phone: aiResult.phone === 'Not publicly available' ? null : (aiResult.phone || null),
         phone_source: aiResult.phone_source || 'not available',
+        quality_score: quality.score,
+        quality_band: quality.band,
+        is_contact_ready: quality.isReady,
+        contact_standard_version: CONTACT_STANDARD_VERSION,
+        quality_threshold: CONTACT_STANDARD.minQualityScoreForSend,
       };
     });
 
@@ -110,15 +128,32 @@ Output format:
     const results = personas.map(p => {
       const domain = KNOWN_DOMAINS[p.account];
       const emailGuesses = domain ? generateEmailGuesses(p.name, domain) : [];
+      const resolvedEmail = emailGuesses[0] || null;
+      const resolvedDomain = parseDomainFromEmail(resolvedEmail) || domain || null;
+      const quality = scoreContactQuality({
+        name: p.name,
+        title: p.title,
+        accountName: p.account,
+        email: resolvedEmail,
+        companyDomain: resolvedDomain,
+        linkedinUrl: p.linkedin_url,
+        sourceEvidenceCount: 1,
+      });
+
       return {
         persona_id: p.persona_id,
         name: p.name,
         account: p.account,
-        email: emailGuesses[0] || null,
+        email: resolvedEmail,
         email_confidence: domain ? 'medium' : 'low',
         email_variants: emailGuesses.slice(0, 5),
         phone: null,
         phone_source: 'not available',
+        quality_score: quality.score,
+        quality_band: quality.band,
+        is_contact_ready: quality.isReady,
+        contact_standard_version: CONTACT_STANDARD_VERSION,
+        quality_threshold: CONTACT_STANDARD.minQualityScoreForSend,
       };
     });
 

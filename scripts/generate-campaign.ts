@@ -13,6 +13,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { parse } from 'csv-parse/sync';
+import { CONTACT_STANDARD, scoreContactQuality } from '../src/lib/contact-standard';
 
 // ============================================================
 // CONFIGURATION
@@ -526,6 +527,8 @@ interface Contact {
   seniority: string;
   industry: string;
   domain: string;
+  qualityScore: number;
+  qualityBand: 'A' | 'B' | 'C' | 'D';
 }
 
 interface GeneratedEmail {
@@ -544,6 +547,7 @@ function loadAlreadySent(): Set<string> {
   const csv = fs.readFileSync('emails-sent-1774719075246.csv', 'utf-8');
   const records = parse(csv, { columns: true, skip_empty_lines: true }) as Record<string, string>[];
   for (const row of records) {
+    const email = (row['to'] || row['email'] || row['to_email'] || '').trim().toLowerCase();
     if (email && email.includes('@')) sent.add(email);
   }
   // Also load any emails sent during this campaign session
@@ -562,6 +566,7 @@ function loadContacts(): Contact[] {
   const records = parse(csvData, { columns: true, skip_empty_lines: true, relax_column_count: true }) as Record<string, string>[];
   
   const contacts: Contact[] = [];
+  const rejectedByQuality: Array<{ email: string; company: string; score: number }> = [];
   
   for (const row of records) {
     const email = (row['Email'] || '').trim().toLowerCase();
@@ -597,10 +602,32 @@ function loadContacts(): Contact[] {
     const isRelevant = SC_KEYWORDS.some(kw => titleLower.includes(kw));
     if (!isRelevant) continue;
     
+    const quality = scoreContactQuality({
+      name: `${firstName} ${lastName}`.trim(),
+      title,
+      accountName: company,
+      email,
+      companyDomain: domain,
+      sourceEvidenceCount: 1,
+    });
+
+    if (quality.score < CONTACT_STANDARD.minQualityScoreForSend || quality.emailConfidence < CONTACT_STANDARD.minEmailConfidenceForSend) {
+      rejectedByQuality.push({ email, company, score: quality.score });
+      continue;
+    }
+
     contacts.push({
       email, firstName, lastName, company, title, seniority,
       industry: industry || 'manufacturing', domain,
+      qualityScore: quality.score,
+      qualityBand: quality.band,
     });
+  }
+
+  if (rejectedByQuality.length > 0) {
+    fs.mkdirSync('/tmp/campaign', { recursive: true });
+    fs.writeFileSync('/tmp/campaign/rejected_quality.json', JSON.stringify(rejectedByQuality.slice(0, 2000), null, 2));
+    console.log(`  Rejected by quality standard: ${rejectedByQuality.length} (saved to /tmp/campaign/rejected_quality.json)`);
   }
   
   return contacts;
@@ -755,6 +782,7 @@ async function main() {
   const seniorityCounts: Record<string, number> = {};
   const uniqueCompanies = new Set<string>();
   const uniqueDomains = new Set<string>();
+  const qualityBands: Record<string, number> = { A: 0, B: 0, C: 0, D: 0 };
   
   for (const c of selected) {
     const v = getVertical(c.industry);
@@ -762,6 +790,7 @@ async function main() {
     seniorityCounts[c.seniority] = (seniorityCounts[c.seniority] || 0) + 1;
     uniqueCompanies.add(c.company);
     uniqueDomains.add(c.domain);
+    qualityBands[c.qualityBand] = (qualityBands[c.qualityBand] || 0) + 1;
   }
   
   console.log('\n  Verticals:');
@@ -774,6 +803,7 @@ async function main() {
   }
   console.log(`\n  Unique companies: ${uniqueCompanies.size}`);
   console.log(`  Unique domains: ${uniqueDomains.size}`);
+  console.log(`  Quality bands: A(${qualityBands.A}) B(${qualityBands.B}) C(${qualityBands.C}) D(${qualityBands.D})`);
   
   // Step 4: Generate emails
   console.log('\nGenerating emails...');
@@ -850,6 +880,11 @@ async function main() {
     verticalBreakdown: verticalCounts,
     seniorityBreakdown: seniorityCounts,
     subjectPatterns,
+    qualityBands,
+    contactStandard: {
+      minQualityScoreForSend: CONTACT_STANDARD.minQualityScoreForSend,
+      minEmailConfidenceForSend: CONTACT_STANDARD.minEmailConfidenceForSend,
+    },
   };
   fs.writeFileSync(path.join(OUTPUT_DIR, 'manifest.json'), JSON.stringify(manifest, null, 2));
   console.log(`\n  Manifest written to ${OUTPUT_DIR}/manifest.json`);
