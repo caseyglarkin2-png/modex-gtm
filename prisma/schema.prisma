@@ -347,10 +347,35 @@ model EmailLog {
   generated_content_id Int?
   opened_at     DateTime?
   clicked_at    DateTime?
+  delivered_at  DateTime?
+  open_count    Int      @default(0)
+  bounce_type   String?  // hard | soft
   sent_at       DateTime @default(now())
   created_at    DateTime @default(now())
 
   @@index([account_name])
   @@index([status])
+  @@index([provider_message_id])
   @@map("email_logs")
+}
+
+model UnsubscribedEmail {
+  id              String   @id @default(cuid())
+  email           String   @unique
+  unsubscribed_at DateTime @default(now())
+  reason          String?
+  email_log_id    Int?
+
+  @@index([email])
+  @@map("unsubscribed_emails")
+}
+
+model WebhookEvent {
+  id           String   @id
+  type         String
+  processed_at DateTime @default(now())
+
+  @@index([id])
+  @@index([processed_at])
+  @@map("webhook_events")
 }

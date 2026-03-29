@@ -6,6 +6,7 @@ import { evaluateRecipientEligibility } from '@/lib/email/recipient-guard';
 import { wrapHtml } from '@/lib/email/templates';
 import { rateLimit } from '@/lib/rate-limit';
 import { auth } from '@/lib/auth';
+import DOMPurify from 'isomorphic-dompurify';
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
@@ -31,16 +32,36 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'NO_EMAIL', message: 'Recipient has no email address. Add one to the persona first.' }, { status: 400 });
   }
 
-  // Wrap plain text or already-composed HTML into branded template
-  const isPlainText = !bodyHtml.trim().startsWith('<');
-  const html = isPlainText ? wrapHtml(bodyHtml, accountName ?? 'the team') : bodyHtml;
-
   try {
     const { prisma } = await import('@/lib/prisma');
+
+    // Check if recipient has unsubscribed
+    const unsubscribed = await prisma.unsubscribedEmail.findUnique({
+      where: { email: to },
+    });
+
+    if (unsubscribed) {
+      return NextResponse.json({
+        error: 'UNSUBSCRIBED',
+        message: `Cannot send to ${to} - recipient has unsubscribed.`,
+      }, { status: 400 });
+    }
+
     const guard = await evaluateRecipientEligibility(prisma, to);
     if (!guard.ok) {
       return NextResponse.json({ error: guard.reason }, { status: 400 });
     }
+
+    // Sanitize HTML body to prevent XSS
+    const sanitizedBody = DOMPurify.sanitize(bodyHtml, {
+      ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'a', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'span', 'div'],
+      ALLOWED_ATTR: ['href', 'target', 'rel', 'style'],
+      ALLOW_DATA_ATTR: false,
+    });
+
+    // Wrap plain text or already-composed HTML into branded template
+    const isPlainText = !sanitizedBody.trim().startsWith('<');
+    const html = isPlainText ? wrapHtml(sanitizedBody, accountName ?? 'the team', to) : sanitizedBody;
 
     const response = await sendEmail({ to, cc, subject, html });
     const session = await auth();

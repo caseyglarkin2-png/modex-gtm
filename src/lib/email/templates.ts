@@ -3,13 +3,19 @@
  * NOT a marketing blast. No heavy headers, no boxes, no template smell.
  * Clean typography, subtle brand, executive-level signature.
  */
-export function wrapHtml(bodyText: string, accountName: string): string {
+export function wrapHtml(bodyText: string, accountName: string, recipientEmail?: string, emailLogId?: number): string {
   const escaped = bodyText
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/\n\n/g, '</p><p style="margin:0 0 14px 0; padding:0;">')
     .replace(/\n/g, '<br />');
+
+  // Build unsubscribe link (CAN-SPAM compliance)
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://modex-gtm.vercel.app';
+  const unsubscribeUrl = recipientEmail
+    ? `${baseUrl}/unsubscribe?email=${encodeURIComponent(recipientEmail)}${emailLogId ? `&id=${emailLogId}` : ''}`
+    : `${baseUrl}/unsubscribe`;
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -49,6 +55,16 @@ export function wrapHtml(bodyText: string, accountName: string): string {
             </td>
           </tr>
         </table>
+      </td>
+    </tr>
+    <!-- Footer — compliance & unsubscribe -->
+    <tr>
+      <td style="padding:0 24px 24px; border-top:1px solid #f0f0f0;">
+        <p style="margin:8px 0 0; font-size:10px; color:#9ca3af; line-height:1.5;">
+          FreightRoll Inc. · 123 Logistics Way, Atlanta, GA 30303<br/>
+          You're receiving this because we believe YardFlow could help optimize ${accountName}'s yard operations.<br/>
+          <a href="${unsubscribeUrl}" style="color:#9ca3af; text-decoration:underline;">Unsubscribe</a>
+        </p>
       </td>
     </tr>
   </table>
