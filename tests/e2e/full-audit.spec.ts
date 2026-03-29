@@ -107,6 +107,18 @@ test.describe('Full Platform Audit', () => {
     await expect(page.locator('body')).toContainText('Emails Sent');
     await expect(page.locator('body')).toContainText('Open Rate');
     await expect(page.locator('body')).toContainText('Pipeline');
+
+    // Check email analytics link
+    await expect(page.getByRole('button', { name: /Email Analytics/i })).toBeVisible();
+  });
+
+  test('Email Analytics page loads', async ({ page }) => {
+    await page.goto('/analytics/emails');
+    await expect(page.locator('h1')).toContainText('Email Analytics');
+    await expect(page.locator('body')).toContainText('Total Sent');
+    await expect(page.locator('body')).toContainText('Delivery Rate');
+    await expect(page.locator('body')).toContainText('Open Rate');
+    await expect(page.locator('body')).toContainText('Bounce Rate');
   });
 
   test('Studio page: all tabs render', async ({ page }) => {
