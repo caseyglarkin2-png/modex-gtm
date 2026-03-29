@@ -8,6 +8,7 @@ import { ExternalLink } from 'lucide-react';
 import { GeneratorDialog } from '@/components/ai/generator-dialog';
 import { EmailComposer } from '@/components/email/composer';
 import { VoiceScriptButton } from '@/components/voice-script-button';
+import { BounceWarningBadge } from '@/components/personas/bounce-warning-badge';
 import { toast } from 'sonner';
 
 export interface PersonaRow {
@@ -18,6 +19,7 @@ export interface PersonaRow {
   priority: string | null;
   persona_lane: string | null;
   email: string | null;
+  email_valid?: boolean | null;
   linkedin_url: string | null;
   persona_status: string | null;
   next_step: string | null;
@@ -47,15 +49,22 @@ const columns: Column<PersonaRow>[] = [
   { key: 'persona_lane', label: 'Lane', sortable: true, className: 'hidden md:table-cell' },
   {
     key: 'email' as keyof PersonaRow, label: 'Email', sortable: true, className: 'hidden lg:table-cell',
-    render: (p) => p.email ? (
-      <button
-        className="text-xs text-[var(--primary)] hover:underline truncate max-w-40 inline-block"
-        title={`Click to copy: ${p.email}`}
-        onClick={(e) => { e.stopPropagation(); navigator.clipboard.writeText(p.email!); toast.success(`Copied ${p.email}`); }}
-      >
-        {p.email}
-      </button>
-    ) : <span className="text-xs text-[var(--muted-foreground)]">—</span>,
+    render: (p) => (
+      <div className="flex items-center gap-2">
+        {p.email ? (
+          <button
+            className="text-xs text-[var(--primary)] hover:underline truncate max-w-40 inline-block"
+            title={`Click to copy: ${p.email}`}
+            onClick={(e) => { e.stopPropagation(); navigator.clipboard.writeText(p.email!); toast.success(`Copied ${p.email}`); }}
+          >
+            {p.email}
+          </button>
+        ) : (
+          <span className="text-xs text-[var(--muted-foreground)]">—</span>
+        )}
+        {p.email_valid === false && <BounceWarningBadge emailValid={p.email_valid} email={p.email} />}
+      </div>
+    ),
   },
   { key: 'persona_status', label: 'Status', sortable: true, render: (p) => <span onClick={(e) => e.stopPropagation()}><EditablePersonaStatus personaId={p.persona_id} currentValue={p.persona_status ?? 'Not started'} /></span> },
   { key: 'next_step', label: 'Next Step', className: 'max-w-48 truncate text-xs hidden xl:table-cell' },

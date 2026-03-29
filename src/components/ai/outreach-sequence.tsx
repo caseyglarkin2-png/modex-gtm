@@ -17,6 +17,7 @@ import {
   Zap, RefreshCw, Send, Copy, ChevronDown, Mail, MessageSquare, Phone, HandMetal,
   Check, Clock, ArrowRight,
 } from 'lucide-react';
+import { EmailPreviewModal } from '@/components/email/email-preview-modal';
 
 interface SequenceStep {
   step: string;
@@ -85,6 +86,8 @@ export function OutreachSequenceDialog({
   const [expandedStep, setExpandedStep] = useState<string | null>(null);
   const [sending, setSending] = useState<string | null>(null);
   const [recipientEmail, setRecipientEmail] = useState('');
+  const [previewStep, setPreviewStep] = useState<SequenceStep | null>(null);
+  const [previewOpen, setPreviewOpen] = useState(false);
 
   async function generateSequence() {
     setLoading(true);
@@ -118,18 +121,26 @@ export function OutreachSequenceDialog({
       return;
     }
 
-    setSending(step.step);
-    try {
-      const toastId = toast.loading(`Sending ${STEP_LABELS[step.step]}...`);
+    // Show preview modal instead of sending immediately
+    setPreviewStep(step);
+    setPreviewOpen(true);
+  }
 
-      // Send the email via SendGrid
+  async function confirmAndSend() {
+    if (!previewStep) return;
+
+    setSending(previewStep.step);
+    try {
+      const toastId = toast.loading(`Sending ${STEP_LABELS[previewStep.step]}...`);
+
+      // Send the email via API
       const emailRes = await fetch('/api/email/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           to: recipientEmail,
-          subject: step.subject,
-          bodyHtml: step.body,
+          subject: previewStep.subject,
+          bodyHtml: previewStep.body,
           accountName,
           personaName: selectedPersona,
         }),
@@ -139,14 +150,17 @@ export function OutreachSequenceDialog({
 
       // Always mark as sent (we track the attempt)
       setSequence((prev) =>
-        prev.map((s) => s.step === step.step ? { ...s, status: 'sent' as const } : s)
+        prev.map((s) => s.step === previewStep.step ? { ...s, status: 'sent' as const } : s)
       );
 
       if (emailRes.ok) {
-        toast.success(`${STEP_LABELS[step.step]} sent to ${recipientEmail} and logged`);
+        toast.success(`${STEP_LABELS[previewStep.step]} sent to ${recipientEmail} and logged`);
       } else {
-        toast.success(`${STEP_LABELS[step.step]} logged — email delivery may be pending (check SendGrid config)`);
+        toast.success(`${STEP_LABELS[previewStep.step]} logged — email delivery may be pending (check SendGrid config)`);
       }
+
+      setPreviewOpen(false);
+      setPreviewStep(null);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Send failed');
     } finally {
@@ -336,32 +350,58 @@ export function OutreachSequenceDialog({
 
   if (variant === 'inline') {
     return (
-      <div className="flex flex-col h-full border rounded-lg overflow-hidden bg-card">
-        {content}
-      </div>
+      <>
+        <div className="flex flex-col h-full border rounded-lg overflow-hidden bg-card">
+          {content}
+        </div>
+        {previewStep && (
+          <EmailPreviewModal
+            open={previewOpen}
+            onOpenChange={setPreviewOpen}
+            subject={previewStep.subject}
+            body={previewStep.body}
+            recipientEmail={recipientEmail}
+            onConfirm={confirmAndSend}
+            isLoading={sending === previewStep.step}
+          />
+        )}
+      </>
     );
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        {trigger ?? (
-          <Button variant="outline" size="sm" className="gap-1.5">
-            <Zap className="h-3.5 w-3.5" />
-            Outreach Sequence
-          </Button>
-        )}
-      </DialogTrigger>
-      <DialogContent className="max-w-2xl max-h-[90vh] flex flex-col gap-0 p-0">
-        <DialogHeader className="px-6 pt-6 pb-4 border-b shrink-0">
-          <DialogTitle className="flex items-center gap-2">
-            <Zap className="h-5 w-5 text-amber-500" />
-            Outreach Sequence — {accountName}
-          </DialogTitle>
-        </DialogHeader>
+    <>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          {trigger ?? (
+            <Button variant="outline" size="sm" className="gap-1.5">
+              <Zap className="h-3.5 w-3.5" />
+              Outreach Sequence
+            </Button>
+          )}
+        </DialogTrigger>
+        <DialogContent className="max-w-2xl max-h-[90vh] flex flex-col gap-0 p-0">
+          <DialogHeader className="px-6 pt-6 pb-4 border-b shrink-0">
+            <DialogTitle className="flex items-center gap-2">
+              <Zap className="h-5 w-5 text-amber-500" />
+              Outreach Sequence — {accountName}
+            </DialogTitle>
+          </DialogHeader>
 
-        {content}
-      </DialogContent>
-    </Dialog>
+          {content}
+        </DialogContent>
+      </Dialog>
+      {previewStep && (
+        <EmailPreviewModal
+          open={previewOpen}
+          onOpenChange={setPreviewOpen}
+          subject={previewStep.subject}
+          body={previewStep.body}
+          recipientEmail={recipientEmail}
+          onConfirm={confirmAndSend}
+          isLoading={sending === previewStep.step}
+        />
+      )}
+    </>
   );
 }

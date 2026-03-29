@@ -1,165 +1,118 @@
 'use client';
 
-import { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { toast } from 'sonner';
-import { Loader2, Send, Check } from 'lucide-react';
+import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription,
+} from '@/components/ui/dialog';
+import { Badge } from '@/components/ui/badge';
+import { Send, Mail, AlertCircle } from 'lucide-react';
 
 interface EmailPreviewModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  to: string;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
   subject: string;
   body: string;
-  accountName: string;
-  personaName: string;
-  generatedContentId?: number;
+  recipientEmail: string;
+  onConfirm: () => void;
+  isLoading?: boolean;
 }
 
 export function EmailPreviewModal({
-  isOpen,
-  onClose,
-  to: initialTo,
-  subject: initialSubject,
-  body: initialBody,
-  accountName,
-  personaName,
-  generatedContentId,
+  open,
+  onOpenChange,
+  subject,
+  body,
+  recipientEmail,
+  onConfirm,
+  isLoading = false,
 }: EmailPreviewModalProps) {
-  const [to, setTo] = useState(initialTo);
-  const [subject, setSubject] = useState(initialSubject);
-  const [body, setBody] = useState(initialBody);
-  const [sending, setSending] = useState(false);
-  const [sent, setSent] = useState(false);
-
-  async function handleSend() {
-    setSending(true);
-    try {
-      const res = await fetch('/api/email/send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          to,
-          subject,
-          bodyHtml: body,
-          accountName,
-          personaName,
-          generatedContentId,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || 'Failed to send email');
-      }
-
-      setSent(true);
-      toast.success(`✅ Email sent to ${to}!`);
-
-      // Close after 2 seconds
-      setTimeout(() => {
-        onClose();
-        setSent(false);
-      }, 2000);
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Failed to send email');
-      setSending(false);
-    }
-  }
-
-  function handleCancel() {
-    setTo(initialTo);
-    setSubject(initialSubject);
-    setBody(initialBody);
-    setSent(false);
-    onClose();
-  }
+  const isValidEmail = recipientEmail.includes('@');
 
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => !open && handleCancel()}>
-      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-2xl max-h-[80vh] flex flex-col">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            {sent ? (
-              <>
-                <Check className="h-5 w-5 text-green-600" />
-                Email Sent!
-              </>
-            ) : (
-              <>
-                <Send className="h-5 w-5" />
-                Preview & Send Email
-              </>
-            )}
+            <Mail className="h-5 w-5" />
+            Preview Email
           </DialogTitle>
+          <DialogDescription>
+            Review before sending to {recipientEmail}
+          </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-4">
-          <div>
-            <Label htmlFor="to">To</Label>
-            <Input
-              id="to"
-              value={to}
-              onChange={(e) => setTo(e.target.value)}
-              disabled={sending || sent}
-              placeholder="recipient@example.com"
-            />
-            <p className="text-xs text-muted-foreground mt-1">
-              {personaName} · {accountName}
-            </p>
+        <div className="flex-1 overflow-auto space-y-4">
+          {/* Recipient */}
+          <div className="px-4 py-3 bg-muted/30 rounded-lg space-y-2">
+            <p className="text-xs font-semibold text-muted-foreground">TO</p>
+            <p className="text-sm break-all">{recipientEmail}</p>
           </div>
 
-          <div>
-            <Label htmlFor="subject">Subject</Label>
-            <Input
-              id="subject"
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-              disabled={sending || sent}
-              placeholder="Email subject..."
-            />
+          {/* Subject */}
+          <div className="space-y-2">
+            <p className="text-xs font-semibold text-muted-foreground">SUBJECT</p>
+            <div className="px-3 py-2 bg-muted/20 rounded-md border border-border">
+              <p className="text-sm break-words">{subject}</p>
+            </div>
           </div>
 
-          <div>
-            <Label htmlFor="body">Message</Label>
-            <textarea
-              id="body"
-              value={body}
-              onChange={(e) => setBody(e.target.value)}
-              disabled={sending || sent}
-              className="w-full min-h-[300px] rounded-md border border-input bg-background px-3 py-2 text-sm"
-              placeholder="Email body..."
-            />
+          {/* Body Preview */}
+          <div className="space-y-2">
+            <p className="text-xs font-semibold text-muted-foreground">BODY</p>
+            <div className="px-3 py-2 bg-white dark:bg-slate-950 rounded-md border border-border min-h-[200px] max-h-[400px] overflow-auto">
+              <div
+                className="text-sm prose prose-sm dark:prose-invert max-w-none"
+                dangerouslySetInnerHTML={{ __html: body }}
+              />
+            </div>
           </div>
+
+          {/* Warnings */}
+          {!isValidEmail && (
+            <div className="px-3 py-2 bg-amber-500/10 border border-amber-500/20 rounded-md flex items-start gap-2">
+              <AlertCircle className="h-4 w-4 text-amber-600 mt-0.5 shrink-0" />
+              <div className="text-xs text-amber-700 dark:text-amber-400">
+                <p className="font-semibold">Invalid email address</p>
+                <p>Enter a valid email before sending.</p>
+              </div>
+            </div>
+          )}
         </div>
 
-        <DialogFooter>
-          <Button variant="ghost" onClick={handleCancel} disabled={sending || sent}>
-            Cancel
-          </Button>
-          <Button onClick={handleSend} disabled={sending || sent || !to || !subject || !body}>
-            {sending ? (
-              <>
-                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                Sending...
-              </>
-            ) : sent ? (
-              <>
-                <Check className="h-4 w-4 mr-2" />
-                Sent!
-              </>
-            ) : (
-              <>
-                <Send className="h-4 w-4 mr-2" />
-                Send Email
-              </>
-            )}
-          </Button>
-        </DialogFooter>
+        {/* Footer */}
+        <div className="flex items-center justify-between pt-4 border-t">
+          <div className="text-xs text-muted-foreground">
+            <Badge variant="secondary" className="font-mono">
+              {body.length} chars
+            </Badge>
+          </div>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              onClick={() => onOpenChange(false)}
+              disabled={isLoading}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={onConfirm}
+              disabled={isLoading || !isValidEmail}
+              className="gap-2"
+            >
+              {isLoading ? (
+                <>
+                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-background border-t-foreground" />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  <Send className="h-4 w-4" />
+                  Send Email
+                </>
+              )}
+            </Button>
+          </div>
+        </div>
       </DialogContent>
     </Dialog>
   );

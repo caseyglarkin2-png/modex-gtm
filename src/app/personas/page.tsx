@@ -20,6 +20,7 @@ export default async function PersonasPage() {
     priority: p.priority,
     persona_lane: p.persona_lane,
     email: p.email,
+    email_valid: p.email_valid,
     linkedin_url: p.linkedin_url,
     persona_status: p.persona_status,
     next_step: p.next_step,
