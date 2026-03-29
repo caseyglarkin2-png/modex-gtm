@@ -2,6 +2,7 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { StudioClient } from './studio-client';
 import { dbGetAccounts, dbGetPersonas } from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Creative Studio — ElevenLabs' };
 
 export default async function StudioPage() {
