@@ -3,6 +3,10 @@ import OpenAI from 'openai';
 
 const GEMINI_KEY = process.env.GEMINI_API_KEY;
 const OPENAI_KEY = process.env.OPENAI_API_KEY;
+const CONTROL_PLANE_URL = process.env.CLAWD_CONTROL_PLANE_URL?.trim();
+const CONTROL_PLANE_TOKEN = process.env.CLAWD_CONTROL_PLANE_TOKEN?.trim();
+
+export type AIProvider = 'gemini' | 'openai' | 'control_plane';
 
 // Gemini models to try (newest/cheapest first)
 const GEMINI_MODELS = [
@@ -64,7 +68,56 @@ function tryOpenAI(prompt: string, maxTokens: number): Promise<string> {
   })();
 }
 
+async function tryControlPlane(prompt: string, maxTokens: number): Promise<string> {
+  if (!CONTROL_PLANE_URL) {
+    throw new Error('CLAWD_CONTROL_PLANE_URL not set');
+  }
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 15_000);
+
+  try {
+    const response = await fetch(CONTROL_PLANE_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(CONTROL_PLANE_TOKEN ? { Authorization: `Bearer ${CONTROL_PLANE_TOKEN}` } : {}),
+      },
+      body: JSON.stringify({
+        prompt,
+        maxTokens,
+      }),
+      signal: controller.signal,
+    });
+
+    if (!response.ok) {
+      const text = await response.text();
+      throw new Error(`Control-plane request failed (${response.status}): ${text.slice(0, 180)}`);
+    }
+
+    const payload = await response.json() as { content?: string; text?: string; output?: string };
+    const text = payload.content ?? payload.text ?? payload.output;
+    if (!text) throw new Error('Control-plane returned empty response');
+    return text;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 // ── Public API ───────────────────────────────────────────────────────
+
+export async function generateTextWithProvider(provider: AIProvider, prompt: string, maxTokens = 1024): Promise<string> {
+  switch (provider) {
+    case 'gemini':
+      return tryGemini(prompt, maxTokens);
+    case 'openai':
+      return tryOpenAI(prompt, maxTokens);
+    case 'control_plane':
+      return tryControlPlane(prompt, maxTokens);
+    default:
+      throw new Error(`Unsupported provider: ${String(provider)}`);
+  }
+}
 
 export async function generateText(prompt: string, maxTokens = 1024): Promise<string> {
   // Try Gemini first, fall back to OpenAI
@@ -84,6 +137,14 @@ export async function generateText(prompt: string, maxTokens = 1024): Promise<st
     'AI generation unavailable. Set GEMINI_API_KEY or OPENAI_API_KEY in your Vercel environment variables. ' +
     'If using Gemini, the free-tier quota may be exhausted — generate a new key at https://aistudio.google.com/apikey'
   );
+}
+
+export function getAvailableProviders(): AIProvider[] {
+  const providers: AIProvider[] = [];
+  if (GEMINI_KEY) providers.push('gemini');
+  if (OPENAI_KEY) providers.push('openai');
+  if (CONTROL_PLANE_URL) providers.push('control_plane');
+  return providers;
 }
 
 /** Quick health check — returns first provider/model that responds */

@@ -13,6 +13,8 @@
     "campaign:generate": "tsx scripts/generate-campaign.ts",
     "campaign:monday-bump": "tsx scripts/monday-bump.ts",
     "suppress:bounces": "tsx scripts/sync-bounce-domain-suppressions.ts",
+    "test:click": "playwright test",
+    "test:click:vercel": "playwright test tests/e2e/vercel-click-smoke.spec.ts",
     "db:push": "prisma db push",
     "db:studio": "prisma studio"
   },
@@ -46,6 +48,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
     "@tailwindcss/postcss": "^4.0.0",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
