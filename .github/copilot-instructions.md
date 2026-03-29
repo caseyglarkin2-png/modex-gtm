@@ -26,10 +26,19 @@ npm run dev          # Local dev server
 npm run build        # Production build (must pass before deploy)
 npx prisma db push   # Push schema to Railway
 npx tsx scripts/seed.ts  # Seed database
+npx tsx scripts/backfill-email-accounts.ts  # Sync email campaign contacts to DB
 ```
+
+## Railway / Database Rules (NEVER SKIP)
+- **`export const dynamic = 'force-dynamic'`** — REQUIRED on every `page.tsx` that calls `dbGet*()` or `prisma.*` directly. Without it, Next.js prerendering hits `postgres.railway.internal` at build time and the Railway build fails. No exceptions.
+- **Public URL in `.env`** (`trolley.proxy.rlwy.net:12531`) — used for local scripts and codespace. Internal URL (`postgres.railway.internal`) is auto-injected by Railway at runtime — never put it in `.env`.
+- **New account added outside the app?** Run `npx tsx scripts/backfill-email-accounts.ts` or add directly via `npx tsx scripts/seed.ts` — never let the DB fall behind the email sends.
+- **Email campaign sent to a new company?** That company needs an Account + Persona record within 24 hours of the send. Use `scripts/backfill-email-accounts.ts` as the template.
+- **DB count standard**: accounts table should always equal or exceed unique prospect domains contacted. Personas table should have at least one record per email address sent to.
 
 ## Conventions
 - **Server components by default.** Only add `"use client"` when hooks/interactivity required.
+- **`force-dynamic` check**: Before creating or editing any `page.tsx` that uses `dbGet*` or `prisma.*`, confirm `export const dynamic = 'force-dynamic'` is present at the top. This is a Railway build requirement, not optional.
 - **Server Actions** for all mutations — never raw API routes for form submissions.
 - **Zod validation** on all API route inputs (`src/lib/validations.ts`).
 - **No auto-BCC** on Resend sends. Each BCC burns a credit. Casey gets copies via Resend dashboard.
