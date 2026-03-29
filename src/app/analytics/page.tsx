@@ -50,6 +50,9 @@ export default async function AnalyticsPage() {
             <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
             <AutoRefresh intervalMs={30_000} />
           </Badge>
+          <Link href="/analytics/emails">
+            <Button variant="outline" size="sm" className="text-xs gap-1">Email Analytics</Button>
+          </Link>
           <Link href="/api/export?type=pipeline" target="_blank">
             <Button variant="outline" size="sm" className="text-xs gap-1">Export Pipeline CSV</Button>
           </Link>
