@@ -37,7 +37,7 @@ test('creative studio tabs are clickable and render panels', async ({ page }) =>
       ];
 
   for (const check of checks) {
-    await page.getByRole('button', { name: check.tab }).click();
+    await page.getByRole('button', { name: check.tab, exact: true }).click();
     await expect(page.getByText(check.panel, { exact: true }).first()).toBeVisible();
   }
 });
