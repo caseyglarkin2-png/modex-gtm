@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { DataTable, type Column } from '@/components/data-table';
 import { BandBadge } from '@/components/band-badge';
 import { StatusBadge } from '@/components/status-badge';
+import { AccountRowActions } from '@/components/accounts/account-row-actions';
 
 export interface AccountRow {
   rank: number;
@@ -32,6 +33,12 @@ const columns: Column<AccountRow>[] = [
   { key: 'research_status', label: 'Research', sortable: true, className: 'hidden xl:table-cell', render: (a) => <StatusBadge status={a.research_status ?? ''} /> },
   { key: 'outreach_status', label: 'Outreach', sortable: true, className: 'hidden xl:table-cell', render: (a) => <StatusBadge status={a.outreach_status ?? ''} /> },
   { key: 'meeting_status', label: 'Meeting', sortable: true, render: (a) => <StatusBadge status={a.meeting_status ?? ''} /> },
+  {
+    key: 'slug',
+    label: '',
+    render: (a) => <AccountRowActions account={{ name: a.name, slug: a.slug }} />,
+    className: 'w-12',
+  },
 ];
 
 export function AccountsTable({ accounts }: { accounts: AccountRow[] }) {

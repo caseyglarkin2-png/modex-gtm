@@ -158,6 +158,7 @@ export function DataTable<T extends object>({
                 <TableRow
                   key={i}
                   className={cn(
+                    "group", // Add group class for hover actions
                     onRowClick && "cursor-pointer",
                     focusedIndex === i && "bg-[var(--accent)] outline outline-2 outline-[var(--primary)]"
                   )}
