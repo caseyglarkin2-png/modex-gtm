@@ -3,7 +3,7 @@ import { Resend } from 'resend';
 
 const SENDGRID_KEY = process.env.SENDGRID_API_KEY?.trim();
 const RESEND_KEY = process.env.RESEND_API_KEY?.trim();
-const FROM_EMAIL = process.env.FROM_EMAIL ?? process.env.SENDGRID_FROM_EMAIL ?? 'casey@yardflow.ai';
+const FROM_EMAIL = process.env.FROM_EMAIL ?? 'casey@yardflow.ai';
 const SENDGRID_FROM = process.env.SENDGRID_FROM_EMAIL ?? FROM_EMAIL;
 const FROM_NAME = process.env.FROM_NAME ?? 'Casey Larkin - YardFlow';
 export interface EmailPayload {

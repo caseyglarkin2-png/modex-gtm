@@ -1,4 +1,8 @@
-import { sendEmail } from '../src/lib/email/client';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+const TEST_EMAIL = process.env.TEST_EMAIL || 'casey@freightroll.com';
+const FROM_EMAIL = 'Casey Larkin <casey@yardflow.ai>';
 
 interface TestEmail {
   to: string;
@@ -6,8 +10,6 @@ interface TestEmail {
   html: string;
   name: string;
 }
-
-const TEST_EMAIL = process.env.TEST_EMAIL || 'casey@freightroll.com';
 
 const testEmails: TestEmail[] = [
   {
@@ -115,7 +117,7 @@ const testEmails: TestEmail[] = [
 ];
 
 async function runTestEmails() {
-  console.log(`📧 Sending ${testEmails.length} test emails to ${TEST_EMAIL}...\n`);
+  console.log(`📧 Sending ${testEmails.length} test emails from yardflow.ai to ${TEST_EMAIL}...\n`);
 
   for (const email of testEmails) {
     try {
@@ -123,13 +125,18 @@ async function runTestEmails() {
       console.log(`   To: ${email.to}`);
       console.log(`   Subject: ${email.subject}`);
 
-      const result = await sendEmail({
+      const result = await resend.emails.send({
+        from: FROM_EMAIL,
         to: email.to,
         subject: email.subject,
         html: email.html,
       });
 
-      console.log(`   ✅ Sent via ${result.provider} (ID: ${result.headers['x-message-id']})\n`);
+      if (result.error) {
+        console.error(`   ❌ Error: ${result.error.message}\n`);
+      } else {
+        console.log(`   ✅ Sent via Resend (ID: ${result.data?.id})\n`);
+      }
     } catch (error) {
       console.error(`   ❌ Error: ${error instanceof Error ? error.message : error}\n`);
     }
