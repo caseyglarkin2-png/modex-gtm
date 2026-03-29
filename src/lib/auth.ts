@@ -115,6 +115,20 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       (session as unknown as Record<string, unknown>).googleTokenError = (token as unknown as TokenLike).error;
       return session;
     },
+    authorized({ auth: session, request: { nextUrl } }) {
+      const isLoggedIn = !!session?.user;
+      const isApiRoute = nextUrl.pathname.startsWith('/api/');
+
+      if (isLoggedIn) return true;
+
+      // Unauthenticated API calls get 401 instead of redirect
+      if (isApiRoute) {
+        return Response.json({ error: 'Authentication required' }, { status: 401 });
+      }
+
+      // Unauthenticated page visits redirect to login
+      return false;
+    },
   },
   pages: {
     signIn: '/login',

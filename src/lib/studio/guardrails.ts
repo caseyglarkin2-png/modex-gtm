@@ -21,7 +21,16 @@ export function sanitizeGeneratedCopy(content: string): string {
     .trim();
 }
 
-export function scoreOutputQuality(content: string): { score: number; flags: string[] } {
+const LENGTH_BANDS: Record<string, [number, number]> = {
+  dm: [15, 80],
+  follow_up: [30, 120],
+  email: [45, 170],
+  call_script: [80, 300],
+  meeting_prep: [120, 500],
+  default: [45, 170],
+};
+
+export function scoreOutputQuality(content: string, contentType?: string): { score: number; flags: string[] } {
   const words = content.trim().split(/\s+/).filter(Boolean);
   const sentences = content
     .split(/[.!?]+/)
@@ -33,11 +42,13 @@ export function scoreOutputQuality(content: string): { score: number; flags: str
   const hasEmDash = /\u2014/.test(content);
   const hasForbiddenClaim = /ship\s+50%\s+more|50%\s+more\s+freight/i.test(content);
 
+  const [minWords, maxWords] = LENGTH_BANDS[contentType ?? 'default'] ?? LENGTH_BANDS.default;
+
   let score = 60;
   const flags: string[] = [];
 
-  if (words.length >= 45 && words.length <= 170) score += 15;
-  else flags.push('Length outside ideal range (45-170 words).');
+  if (words.length >= minWords && words.length <= maxWords) score += 15;
+  else flags.push(`Length outside ideal range (${minWords}-${maxWords} words).`);
 
   if (avgSentenceLength <= 20) score += 10;
   else flags.push('Sentence length may be too long for natural voice.');

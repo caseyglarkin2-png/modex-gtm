@@ -60,9 +60,33 @@ export async function POST(req: NextRequest) {
   }
 
   const personas = await prisma.persona.findMany({ where: { account_name: accountName } });
-  const persona = personaName
-    ? personas.find((p) => p.name.toLowerCase() === personaName.toLowerCase()) ?? personas[0]
-    : personas[0];
+
+  let persona = personas[0] ?? null;
+  if (personaName) {
+    const target = personaName.toLowerCase().trim();
+    // 1. Exact match (case-insensitive)
+    const exact = personas.find((p) => p.name.toLowerCase() === target);
+    if (exact) {
+      persona = exact;
+    } else {
+      // 2. Fuzzy match: last name must match, first name starts-with (Matt→Matthew, Rob→Robert)
+      const targetParts = target.split(/\s+/);
+      const fuzzy = personas.find((p) => {
+        const parts = p.name.toLowerCase().split(/\s+/);
+        if (parts.length < 2 || targetParts.length < 2) return false;
+        return parts.at(-1) === targetParts.at(-1) &&
+          (parts[0].startsWith(targetParts[0]) || targetParts[0].startsWith(parts[0]));
+      });
+      if (fuzzy) {
+        persona = fuzzy;
+      } else {
+        return NextResponse.json(
+          { error: `Persona "${personaName}" not found for ${accountName}. Available: ${personas.map((p) => p.name).join(', ')}` },
+          { status: 404 }
+        );
+      }
+    }
+  }
 
   const ctx: PromptContext = {
     accountName,
@@ -89,7 +113,7 @@ export async function POST(req: NextRequest) {
   const entries = await Promise.all(Object.entries(promptMap).map(async ([type, prompt]) => {
     const raw = await generateText(prompt, type === 'meeting_prep' ? 800 : 500);
     const content = sanitizeGeneratedCopy(raw);
-    const quality = scoreOutputQuality(content);
+    const quality = scoreOutputQuality(content, type);
 
     await prisma.generatedContent.create({
       data: {
