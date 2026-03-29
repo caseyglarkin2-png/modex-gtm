@@ -35,22 +35,19 @@ test('creative studio tabs are clickable and render panels', async ({ page }) =>
   await login(page);
   await page.goto('/studio', { waitUntil: 'domcontentloaded' });
 
-  await expect(page.getByRole('button', { name: 'Text-to-Speech' })).toBeVisible();
+  // Wait for the studio to load and check if we have the expanded studio tabs
+  await expect(page.getByRole('button', { name: 'Asset Pack' })).toBeVisible();
 
-  const hasExpandedStudio = (await page.getByRole('button', { name: 'Asset Pack' }).count()) > 0;
-
-  const checks: Array<{ tab: string; panel: string }> = hasExpandedStudio
-    ? [
-        { tab: 'Asset Pack', panel: 'Asset Pack Generator' },
-        { tab: 'Full Sequence', panel: 'Generating 4-step sequence' },
-        { tab: 'One-Pager', panel: 'Generate a custom YardFlow one-pager' },
-        { tab: 'History', panel: 'Content History' },
-        { tab: 'Prompt Lab', panel: 'Multi-Model Prompt Lab' },
-        { tab: 'Rehearsal', panel: 'Voice Rehearsal Scoring' },
-        { tab: 'Prompt Versions', panel: 'Prompt Version Control' },
-        { tab: 'Mission Handoff', panel: 'Mission-Control Handoff' },
-      ]
-    : [];
+  const checks: Array<{ tab: string; panel: string }> = [
+    { tab: 'Asset Pack', panel: 'Asset Pack Generator' },
+    { tab: 'Full Sequence', panel: 'Generating 4-step sequence' },
+    { tab: 'One-Pager', panel: 'Generate a custom YardFlow one-pager' },
+    { tab: 'History', panel: 'Content History' },
+    { tab: 'Prompt Lab', panel: 'Multi-Model Prompt Lab' },
+    { tab: 'Rehearsal', panel: 'Voice Rehearsal Scoring' },
+    { tab: 'Prompt Versions', panel: 'Prompt Version Control' },
+    { tab: 'Mission Handoff', panel: 'Mission-Control Handoff' },
+  ];
 
   for (const check of checks) {
     await page.getByRole('button', { name: check.tab, exact: true }).click();
