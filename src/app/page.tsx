@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import { getOutreachWaves, getMeetingBriefs } from '@/lib/data';
-import { dbGetAccounts, dbGetPersonas, dbGetActivities, dbGetMeetings, dbGetMobileCaptures } from '@/lib/db';
+import { dbGetAccounts, dbGetActivities, dbGetMeetings, dbGetDashboardStats } from '@/lib/db';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { BandBadge } from '@/components/band-badge';
 import { StatusBadge } from '@/components/status-badge';
 import { EmptyState } from '@/components/empty-state';
+import { AutoRefresh } from '@/components/auto-refresh';
 import { Building2, Users, Waves as WavesIcon, FileText, CalendarCheck, Smartphone, Activity, ArrowRight, TrendingUp, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -40,8 +41,8 @@ function isUpcoming(dateStr: string, days: number): boolean {
 }
 
 export default async function DashboardPage() {
-  const [dbAccounts, dbPersonas, dbActivities, dbMeetings, dbCaptures] = await Promise.all([
-    dbGetAccounts(), dbGetPersonas(), dbGetActivities(), dbGetMeetings(), dbGetMobileCaptures(),
+  const [dbAccounts, dbActivities, dbMeetings, stats] = await Promise.all([
+    dbGetAccounts(), dbGetActivities(), dbGetMeetings(), dbGetDashboardStats(),
   ]);
   const waves = getOutreachWaves();
   const briefs = getMeetingBriefs();
@@ -54,7 +55,6 @@ export default async function DashboardPage() {
     outreach_status: a.outreach_status ?? '',
     meeting_status: a.meeting_status ?? '',
   }));
-  const personas = dbPersonas;
   const activities = dbActivities.map((a) => ({
     account: a.account_name,
     activity_type: a.activity_type,
@@ -74,20 +74,15 @@ export default async function DashboardPage() {
     objective: m.objective ?? '',
     notes: m.notes ?? '',
   }));
-  const captures = dbCaptures.map((c) => ({
-    timestamp: c.captured_at ? new Date(c.captured_at).toISOString() : '',
-  }));
-
-  const bandCounts = { A: 0, B: 0, C: 0, D: 0 };
-  for (const a of accounts) bandCounts[a.priority_band as keyof typeof bandCounts]++;
-  const p1 = personas.filter((p) => p.priority === 'P1').length;
-  const contacted = accounts.filter((a) => a.outreach_status === 'Contacted' || a.outreach_status === 'In Progress').length;
-  const meetingsBooked = accounts.filter((a) => a.meeting_status === 'Meeting Booked' || a.meeting_status === 'Meeting Held').length;
+  const bandCounts = stats.bandCounts;
+  const p1 = stats.p1Count;
+  const contacted = stats.contacted;
+  const meetingsBooked = stats.meetingsBooked;
 
   // Weekly counters
   const meetingsThisWeek = meetings.filter((m) => isThisWeek(m.date)).length;
   const activitiesThisWeek = activities.filter((a) => isThisWeek(a.activity_date)).length;
-  const capturesThisWeek = captures.filter((c) => isThisWeek(c.timestamp)).length;
+  const capturesThisWeek = stats.capturesCount;
 
   // Upcoming meetings (next 7 days)
   const upcomingMeetings = meetings.filter((m) => isUpcoming(m.date, 7)).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
@@ -103,9 +98,16 @@ export default async function DashboardPage() {
   // Pipeline funnel
   const funnel = [
     { label: 'Target', count: accounts.length, color: 'bg-neutral-500' },
-    { label: 'Researched', count: accounts.filter((a) => a.research_status === 'Ready' || a.research_status === 'Complete').length, color: 'bg-violet-500' },
+    { label: 'Researched', count: stats.researched, color: 'bg-violet-500' },
     { label: 'Contacted', count: contacted, color: 'bg-blue-500' },
     { label: 'Meetings', count: meetingsBooked, color: 'bg-emerald-500' },
+  ];
+
+  const funnelWidths = [
+    accounts.length ? 100 : 0,
+    accounts.length ? Math.round((stats.researched / accounts.length) * 100) : 0,
+    stats.emailsSent ? Math.round((contacted / stats.emailsSent) * 100) : 0,
+    accounts.length ? Math.round((meetingsBooked / accounts.length) * 100) : 0,
   ];
 
   return (
@@ -120,9 +122,13 @@ export default async function DashboardPage() {
           </p>
         </div>
         <div className="flex items-center gap-3 text-xs text-[var(--muted-foreground)]">
+          <Badge variant="outline" className="flex items-center gap-1.5 text-xs">
+            <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
+            <AutoRefresh intervalMs={30_000} />
+          </Badge>
           <div className="text-center"><span className="block text-lg font-bold text-[var(--foreground)]">{meetingsThisWeek}</span>meetings</div>
           <div className="h-8 w-px bg-[var(--border)]" />
-          <div className="text-center"><span className="block text-lg font-bold text-[var(--foreground)]">{activitiesThisWeek}</span>activities</div>
+          <div className="text-center"><span className="block text-lg font-bold text-[var(--foreground)]">{stats.activitiesCount}</span>activities</div>
           <div className="h-8 w-px bg-[var(--border)]" />
           <div className="text-center"><span className="block text-lg font-bold text-[var(--foreground)]">{capturesThisWeek}</span>captures</div>
         </div>
@@ -149,7 +155,7 @@ export default async function DashboardPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-[var(--muted-foreground)]">Personas</p>
-                <p className="mt-1 text-3xl font-bold">{personas.length}</p>
+                <p className="mt-1 text-3xl font-bold">{stats.personaCount}</p>
                 <p className="mt-1 text-xs text-[var(--muted-foreground)]">{p1} P1 priority</p>
               </div>
               <div className="rounded-lg bg-[var(--accent)] p-2.5">
@@ -163,7 +169,7 @@ export default async function DashboardPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-[var(--muted-foreground)]">Meetings</p>
-                <p className="mt-1 text-3xl font-bold">{meetings.length}</p>
+                <p className="mt-1 text-3xl font-bold">{stats.meetingsCount}</p>
                 <p className="mt-1 text-xs text-[var(--muted-foreground)]">{meetingsBooked} accounts booked</p>
               </div>
               <div className="rounded-lg bg-[var(--accent)] p-2.5">
@@ -177,7 +183,7 @@ export default async function DashboardPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-[var(--muted-foreground)]">Captures</p>
-                <p className="mt-1 text-3xl font-bold">{captures.length}</p>
+                <p className="mt-1 text-3xl font-bold">{stats.capturesCount}</p>
                 <p className="mt-1 text-xs text-[var(--muted-foreground)]">{briefs.length} briefs ready</p>
               </div>
               <div className="rounded-lg bg-[var(--accent)] p-2.5">
@@ -197,7 +203,7 @@ export default async function DashboardPage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            {funnel.map((stage) => (
+            {funnel.map((stage, index) => (
               <div key={stage.label}>
                 <div className="flex items-center justify-between text-sm">
                   <span>{stage.label}</span>
@@ -206,7 +212,7 @@ export default async function DashboardPage() {
                 <div className="mt-1 h-3 overflow-hidden rounded-full bg-[var(--muted)]">
                   <div
                     className={`h-full rounded-full ${stage.color} transition-all`}
-                    style={{ width: `${accounts.length ? (stage.count / accounts.length) * 100 : 0}%` }}
+                    style={{ width: `${funnelWidths[index]}%` }}
                   />
                 </div>
               </div>
