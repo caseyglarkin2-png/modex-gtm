@@ -344,6 +344,7 @@ model EmailLog {
   body_html     String
   status        String   @default("sent") // sent | delivered | opened | clicked | bounced
   provider_message_id String?
+  generated_content_id Int?
   opened_at     DateTime?
   clicked_at    DateTime?
   sent_at       DateTime @default(now())

@@ -42,19 +42,15 @@ test('creative studio tabs are clickable and render panels', async ({ page }) =>
   const checks: Array<{ tab: string; panel: string }> = hasExpandedStudio
     ? [
         { tab: 'Asset Pack', panel: 'Asset Pack Generator' },
+        { tab: 'Full Sequence', panel: 'Generating 4-step sequence' },
+        { tab: 'One-Pager', panel: 'Generate a custom YardFlow one-pager' },
+        { tab: 'History', panel: 'Content History' },
         { tab: 'Prompt Lab', panel: 'Multi-Model Prompt Lab' },
         { tab: 'Rehearsal', panel: 'Voice Rehearsal Scoring' },
         { tab: 'Prompt Versions', panel: 'Prompt Version Control' },
         { tab: 'Mission Handoff', panel: 'Mission-Control Handoff' },
-        { tab: 'Text-to-Speech', panel: 'Text-to-Speech' },
-        { tab: 'Sound Effects', panel: 'Sound Effects Generator' },
-        { tab: 'Voice Clone', panel: 'Instant Voice Clone' },
       ]
-    : [
-        { tab: 'Text-to-Speech', panel: 'Text-to-Speech' },
-        { tab: 'Sound Effects', panel: 'Sound Effects Generator' },
-        { tab: 'Voice Clone', panel: 'Instant Voice Clone' },
-      ];
+    : [];
 
   for (const check of checks) {
     await page.getByRole('button', { name: check.tab, exact: true }).click();

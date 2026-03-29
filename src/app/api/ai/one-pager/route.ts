@@ -3,7 +3,9 @@ import { z } from 'zod';
 import { generateText } from '@/lib/ai/client';
 import { buildOnePagerPrompt } from '@/lib/ai/prompts';
 import type { OnePagerContext } from '@/lib/ai/prompts';
-import { getAccountByName, getMeetingBriefByAccount } from '@/lib/data';
+import { getAccountContext } from '@/lib/db';
+
+export const dynamic = 'force-dynamic';
 
 const OnePagerRequestSchema = z.object({
   accountName: z.string().min(1),
@@ -23,12 +25,13 @@ export async function POST(req: NextRequest) {
   }
 
   const { accountName } = parsed.data;
-  const account = getAccountByName(accountName);
+  const { account, meetingBrief } = await getAccountContext(accountName);
   if (!account) {
-    return NextResponse.json({ error: 'Account not found' }, { status: 404 });
+    return NextResponse.json(
+      { error: 'ACCOUNT_NOT_FOUND', message: 'Account not found in database. Add it via /accounts/new.' },
+      { status: 404 }
+    );
   }
-
-  const brief = getMeetingBriefByAccount(accountName);
 
   const ctx: OnePagerContext = {
     accountName: account.name,
@@ -37,9 +40,13 @@ export async function POST(req: NextRequest) {
     whyNow: account.why_now ?? 'MODEX 2026 attendance signal',
     primoAngle: account.primo_angle ?? '',
     bestIntroPath: account.best_intro_path ?? '',
-    likelyPainPoints: brief?.likely_pain_points ?? 'Trailer queue variability, gate/dock congestion, inconsistent driver journey',
-    primoRelevance: brief?.primo_relevance ?? account.primo_angle ?? '',
-    suggestedAttendees: brief?.suggested_attendees ?? '',
+    likelyPainPoints:
+      meetingBrief?.likely_pain ??
+      account.why_now ??
+      account.primo_angle ??
+      'Trailer queue variability, gate/dock congestion, inconsistent driver journey',
+    primoRelevance: meetingBrief?.primo_relevance ?? account.primo_angle ?? '',
+    suggestedAttendees: meetingBrief?.suggested_attendees ?? '',
     score: account.priority_score,
     tier: account.tier,
     band: account.priority_band,

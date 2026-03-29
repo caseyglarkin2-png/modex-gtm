@@ -108,6 +108,7 @@ export const SendEmailSchema = z.object({
   bodyHtml: z.string().min(1, 'Body is required'),
   accountName: z.string().optional(),
   personaName: z.string().optional(),
+  generatedContentId: z.number().int().positive().optional(),
 });
 export type SendEmailInput = z.infer<typeof SendEmailSchema>;
 

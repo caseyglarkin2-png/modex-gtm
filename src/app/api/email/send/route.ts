@@ -25,7 +25,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
   }
 
-  const { to, cc, subject, bodyHtml, accountName, personaName } = parsed.data;
+  const { to, cc, subject, bodyHtml, accountName, personaName, generatedContentId } = parsed.data;
+
+  if (!to || to.trim() === '') {
+    return NextResponse.json({ error: 'NO_EMAIL', message: 'Recipient has no email address. Add one to the persona first.' }, { status: 400 });
+  }
 
   // Wrap plain text or already-composed HTML into branded template
   const isPlainText = !bodyHtml.trim().startsWith('<');
@@ -69,6 +73,7 @@ export async function POST(req: NextRequest) {
           body_html: html,
           status: 'sent',
           provider_message_id: (response.headers?.['x-message-id'] as string) ?? null,
+          ...(generatedContentId ? { generated_content_id: generatedContentId } : {}),
         },
       });
 

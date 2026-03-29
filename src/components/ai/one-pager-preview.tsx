@@ -23,6 +23,9 @@ export interface OnePagerData {
 interface OnePagerPreviewProps {
   accountName: string;
   trigger?: React.ReactNode;
+  variant?: 'dialog' | 'inline';
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export function OnePagerPreview({ data, accountName }: { data: OnePagerData; accountName: string }) {
@@ -196,8 +199,16 @@ export function onePagerToHtml(data: OnePagerData, accountName: string): string 
 </body></html>`;
 }
 
-export function OnePagerDialog({ accountName, trigger }: OnePagerPreviewProps) {
-  const [open, setOpen] = useState(false);
+export function OnePagerDialog({
+  accountName,
+  trigger,
+  variant = 'dialog',
+  open: controlledOpen,
+  onOpenChange: controlledOnOpenChange,
+}: OnePagerPreviewProps) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const open = variant === 'dialog' ? (controlledOpen ?? internalOpen) : true;
+  const setOpen = variant === 'dialog' ? (controlledOnOpenChange ?? setInternalOpen) : () => {};
   const [data, setData] = useState<OnePagerData | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -241,6 +252,56 @@ export function OnePagerDialog({ accountName, trigger }: OnePagerPreviewProps) {
     toast.success('Downloaded');
   }
 
+  // Shared content for both dialog and inline modes
+  const content = (
+    <>
+      <div className="flex-1 overflow-auto px-6 py-4">
+        {loading && (
+          <div className="flex items-center gap-2 text-sm text-muted-foreground animate-pulse py-20 justify-center">
+            <RefreshCw className="h-4 w-4 animate-spin" />
+            Generating custom one-pager with Gemini...
+          </div>
+        )}
+        {!loading && data && <OnePagerPreview data={data} accountName={accountName} />}
+        {!loading && !data && (
+          <div className="flex flex-col items-center justify-center text-sm text-muted-foreground border-2 border-dashed rounded-md py-20 gap-3">
+            <FileImage className="h-8 w-8 text-muted-foreground/50" />
+            <p>Generate a custom YardFlow one-pager tailored to {accountName}&apos;s business case</p>
+            <Button onClick={generate} className="gap-2 mt-2">
+              <FileImage className="h-4 w-4" />
+              Generate One-Pager
+            </Button>
+          </div>
+        )}
+      </div>
+
+      <div className="px-6 py-4 border-t flex items-center justify-between shrink-0">
+        <Button onClick={generate} disabled={loading} variant={data ? 'outline' : 'default'} className="gap-2">
+          <RefreshCw className="h-4 w-4" />
+          {data ? 'Regenerate' : 'Generate'}
+        </Button>
+        {data && (
+          <div className="flex gap-2">
+            <Button variant="outline" size="sm" onClick={copyHtml} className="gap-1.5">
+              <Copy className="h-3.5 w-3.5" /> Copy HTML
+            </Button>
+            <Button size="sm" onClick={downloadHtml} className="gap-1.5">
+              <Download className="h-3.5 w-3.5" /> Download
+            </Button>
+          </div>
+        )}
+      </div>
+    </>
+  );
+
+  if (variant === 'inline') {
+    return (
+      <div className="flex flex-col h-full border rounded-lg overflow-hidden bg-card">
+        {content}
+      </div>
+    );
+  }
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -259,42 +320,7 @@ export function OnePagerDialog({ accountName, trigger }: OnePagerPreviewProps) {
           </DialogTitle>
         </DialogHeader>
 
-        <div className="flex-1 overflow-auto px-6 py-4">
-          {loading && (
-            <div className="flex items-center gap-2 text-sm text-muted-foreground animate-pulse py-20 justify-center">
-              <RefreshCw className="h-4 w-4 animate-spin" />
-              Generating custom one-pager with Gemini...
-            </div>
-          )}
-          {!loading && data && <OnePagerPreview data={data} accountName={accountName} />}
-          {!loading && !data && (
-            <div className="flex flex-col items-center justify-center text-sm text-muted-foreground border-2 border-dashed rounded-md py-20 gap-3">
-              <FileImage className="h-8 w-8 text-muted-foreground/50" />
-              <p>Generate a custom YardFlow one-pager tailored to {accountName}&apos;s business case</p>
-              <Button onClick={generate} className="gap-2 mt-2">
-                <FileImage className="h-4 w-4" />
-                Generate One-Pager
-              </Button>
-            </div>
-          )}
-        </div>
-
-        <div className="px-6 py-4 border-t flex items-center justify-between shrink-0">
-          <Button onClick={generate} disabled={loading} variant={data ? 'outline' : 'default'} className="gap-2">
-            <RefreshCw className="h-4 w-4" />
-            {data ? 'Regenerate' : 'Generate'}
-          </Button>
-          {data && (
-            <div className="flex gap-2">
-              <Button variant="outline" size="sm" onClick={copyHtml} className="gap-1.5">
-                <Copy className="h-3.5 w-3.5" /> Copy HTML
-              </Button>
-              <Button size="sm" onClick={downloadHtml} className="gap-1.5">
-                <Download className="h-3.5 w-3.5" /> Download
-              </Button>
-            </div>
-          )}
-        </div>
+        {content}
       </DialogContent>
     </Dialog>
   );

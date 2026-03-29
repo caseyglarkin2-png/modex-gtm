@@ -51,6 +51,17 @@ export async function dbGetGeneratedContent() {
   return prisma.generatedContent.findMany({ orderBy: { created_at: 'desc' } });
 }
 
+// ── Account Context (AI APIs — parallel fetch) ─────────────────────────
+export async function getAccountContext(name: string) {
+  const [account, meetingBrief, emailLogs, personas] = await Promise.all([
+    prisma.account.findUnique({ where: { name } }),
+    prisma.meetingBrief.findFirst({ where: { account_name: name } }),
+    prisma.emailLog.findMany({ where: { account_name: name }, orderBy: { sent_at: 'desc' }, take: 3 }),
+    prisma.persona.findMany({ where: { account_name: name } }),
+  ]);
+  return { account, meetingBrief, emailLogs, personas };
+}
+
 // ── Actionable Intel ──────────────────────────────────────────────────
 export async function dbGetActionableIntel() {
   return prisma.actionableIntel.findMany({ orderBy: { id: 'asc' } });

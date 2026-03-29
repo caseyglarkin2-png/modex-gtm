@@ -3,7 +3,10 @@ import { z } from 'zod';
 import { generateText } from '@/lib/ai/client';
 import { buildOutreachSequencePrompt } from '@/lib/ai/prompts';
 import type { PromptContext } from '@/lib/ai/prompts';
-import { getAccountByName, getPersonasByAccount } from '@/lib/data';
+import { getAccountContext } from '@/lib/db';
+import { isWarmIntroOnlyAccount } from '@/lib/studio/guardrails';
+
+export const dynamic = 'force-dynamic';
 
 const TONE_MAP: Record<string, PromptContext['tone']> = {
   formal: 'professional',
@@ -86,12 +89,28 @@ export async function POST(req: NextRequest) {
   const { accountName, personaName, tone } = parsed.data;
   const steps = parsed.data.steps ?? ['initial_email', 'follow_up_1', 'follow_up_2', 'breakup'];
 
-  const account = getAccountByName(accountName);
-  if (!account) {
-    return NextResponse.json({ error: 'Account not found' }, { status: 404 });
+  if (isWarmIntroOnlyAccount(accountName)) {
+    return NextResponse.json(
+      { error: 'RESTRICTED_ACCOUNT', message: 'Dannon: warm intro only via Mark Shaughnessy. Cold outreach is blocked.' },
+      { status: 403 }
+    );
   }
 
-  const personas = getPersonasByAccount(accountName);
+  const { account, personas } = await getAccountContext(accountName);
+  if (!account) {
+    return NextResponse.json(
+      { error: 'ACCOUNT_NOT_FOUND', message: 'Account not found in database. Add it via /accounts/new.' },
+      { status: 404 }
+    );
+  }
+
+  if (personas.length === 0) {
+    return NextResponse.json(
+      { error: 'NO_PERSONAS', message: 'No personas found for this account. Add one or generate without persona context.' },
+      { status: 422 }
+    );
+  }
+
   const persona = personaName
     ? personas.find((p) => p.name?.toLowerCase() === personaName.toLowerCase()) ?? personas[0]
     : personas[0];
