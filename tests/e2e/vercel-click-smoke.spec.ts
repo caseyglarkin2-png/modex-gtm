@@ -1,6 +1,25 @@
 import { expect, test } from '@playwright/test';
 
+async function login(page: import('@playwright/test').Page) {
+  // Get CSRF token from NextAuth
+  const csrfRes = await page.request.get('/api/auth/csrf');
+  const { csrfToken } = (await csrfRes.json()) as { csrfToken: string };
+
+  // Authenticate via credentials provider directly
+  await page.request.post('/api/auth/callback/credentials', {
+    form: {
+      email: 'casey@freightroll.com',
+      csrfToken,
+      json: 'true',
+    },
+  });
+
+  // Session cookie is now set on the page context
+}
+
 test('core pages load on deployed app', async ({ page }) => {
+  await login(page);
+
   const paths = ['/', '/analytics', '/studio'];
 
   for (const path of paths) {
@@ -13,6 +32,7 @@ test('core pages load on deployed app', async ({ page }) => {
 });
 
 test('creative studio tabs are clickable and render panels', async ({ page }) => {
+  await login(page);
   await page.goto('/studio', { waitUntil: 'domcontentloaded' });
 
   await expect(page.getByRole('button', { name: 'Text-to-Speech' })).toBeVisible();
