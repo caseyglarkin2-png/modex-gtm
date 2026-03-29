@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    # Every Monday at 7am ET (12:00 UTC) — weekly health check before outreach day
+    - cron: '0 12 * * 1'
 
 jobs:
   e2e:
