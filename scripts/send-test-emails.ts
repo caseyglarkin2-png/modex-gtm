@@ -1,20 +1,20 @@
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+import { sendEmail } from '../src/lib/email/client';
 
 interface TestEmail {
   to: string;
   subject: string;
-  bodyHtml: string;
+  html: string;
   name: string;
 }
 
+const TEST_EMAIL = process.env.TEST_EMAIL || 'casey@freightroll.com';
+
 const testEmails: TestEmail[] = [
   {
-    to: process.env.TEST_EMAIL || 'test@example.com',
-    subject: 'YardFlow Network Audit - Initial Outreach',
+    to: TEST_EMAIL,
+    subject: 'YardFlow Network Audit - Initial Outreach (TEST)',
     name: 'Initial Email (Sequence Step 1)',
-    bodyHtml: `
+    html: `
       <p>Hi there,</p>
       <p>I wanted to reach out regarding YardFlow's yard management solution.</p>
       <p>We've helped companies like yours:</p>
@@ -39,15 +39,15 @@ const testEmails: TestEmail[] = [
       <p style="font-size:12px; color:#9ca3af;">
         FreightRoll Inc. · 123 Logistics Way, Atlanta, GA 30303<br/>
         You're receiving this because we believe YardFlow could help optimize your yard operations.<br/>
-        <a href="https://modex-gtm.vercel.app/unsubscribe?email=${process.env.TEST_EMAIL}" style="color:#9ca3af; text-decoration:underline;">Unsubscribe</a>
+        <a href="https://modex-gtm.vercel.app/unsubscribe?email=${TEST_EMAIL}" style="color:#9ca3af; text-decoration:underline;">Unsubscribe</a>
       </p>
     `,
   },
   {
-    to: process.env.TEST_EMAIL || 'test@example.com',
-    subject: 'Re: YardFlow Network Audit - Quick Question',
-    name: 'Follow-up Email (Sequence Step 2 - 2 days later)',
-    bodyHtml: `
+    to: TEST_EMAIL,
+    subject: 'Re: YardFlow Network Audit - Quick Question (TEST)',
+    name: 'Follow-up Email (Sequence Step 2)',
+    html: `
       <p>Hi again,</p>
       <p>Quick follow-up on my note from Tuesday. I realized I didn't mention something pretty compelling:</p>
       <p>Most facilities we work with are running 3-4 manual handoffs per trailer. YardFlow deterministically orchestrates these in realtime, which typically cuts dock time from 45 mins to 28 mins avg.</p>
@@ -65,15 +65,15 @@ const testEmails: TestEmail[] = [
       <hr style="border:none; border-top:1px solid #f0f0f0; margin:24px 0;"/>
       <p style="font-size:12px; color:#9ca3af;">
         FreightRoll Inc. · 123 Logistics Way, Atlanta, GA 30303<br/>
-        <a href="https://modex-gtm.vercel.app/unsubscribe?email=${process.env.TEST_EMAIL}" style="color:#9ca3af; text-decoration:underline;">Unsubscribe</a>
+        <a href="https://modex-gtm.vercel.app/unsubscribe?email=${TEST_EMAIL}" style="color:#9ca3af; text-decoration:underline;">Unsubscribe</a>
       </p>
     `,
   },
   {
-    to: process.env.TEST_EMAIL || 'test@example.com',
-    subject: 'Your YardFlow Network Audit Report',
-    name: 'One-Pager / PDF Summary',
-    bodyHtml: `
+    to: TEST_EMAIL,
+    subject: 'Your YardFlow Network Audit Report (TEST)',
+    name: 'One-Pager / Meeting Brief',
+    html: `
       <p>Hi there,</p>
       <p>As promised, here's the analysis we discussed on our call:</p>
       <p><strong>YardFlow Network Audit Report</strong></p>
@@ -87,7 +87,7 @@ const testEmails: TestEmail[] = [
       <ul>
         <li>Dwell Time Reduction: 42 min → 26 min (-38%)</li>
         <li>Monthly Capacity Gain: +280 billable hours</li>
-        <li>Annual Revenue Impact: +\$420K</li>
+        <li>Annual Revenue Impact: +$420K</li>
         <li>Implementation Time: 3 weeks</li>
       </ul>
       <p><strong>Next Steps:</strong></p>
@@ -108,14 +108,14 @@ const testEmails: TestEmail[] = [
       <hr style="border:none; border-top:1px solid #f0f0f0; margin:24px 0;"/>
       <p style="font-size:12px; color:#9ca3af;">
         FreightRoll Inc. · 123 Logistics Way, Atlanta, GA 30303<br/>
-        <a href="https://modex-gtm.vercel.app/unsubscribe?email=${process.env.TEST_EMAIL}" style="color:#9ca3af; text-decoration:underline;">Unsubscribe</a>
+        <a href="https://modex-gtm.vercel.app/unsubscribe?email=${TEST_EMAIL}" style="color:#9ca3af; text-decoration:underline;">Unsubscribe</a>
       </p>
     `,
   },
 ];
 
-async function sendTestEmails() {
-  console.log(`📧 Sending ${testEmails.length} test emails...\n`);
+async function runTestEmails() {
+  console.log(`📧 Sending ${testEmails.length} test emails to ${TEST_EMAIL}...\n`);
 
   for (const email of testEmails) {
     try {
@@ -123,24 +123,19 @@ async function sendTestEmails() {
       console.log(`   To: ${email.to}`);
       console.log(`   Subject: ${email.subject}`);
 
-      const result = await resend.emails.send({
-        from: 'casey@freightroll.com',
+      const result = await sendEmail({
         to: email.to,
         subject: email.subject,
-        html: email.bodyHtml,
+        html: email.html,
       });
 
-      if (result.error) {
-        console.error(`   ❌ Error: ${result.error.message}`);
-      } else {
-        console.log(`   ✅ Sent (ID: ${result.data?.id})\n`);
-      }
+      console.log(`   ✅ Sent via ${result.provider} (ID: ${result.headers['x-message-id']})\n`);
     } catch (error) {
-      console.error(`   ❌ Exception: ${error}\n`);
+      console.error(`   ❌ Error: ${error instanceof Error ? error.message : error}\n`);
     }
   }
 
-  console.log('✅ All test emails sent!');
+  console.log('✅ All test emails complete!');
 }
 
-sendTestEmails();
+runTestEmails();
