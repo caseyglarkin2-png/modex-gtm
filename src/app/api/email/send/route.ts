@@ -10,9 +10,9 @@ import DOMPurify from 'isomorphic-dompurify';
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
-  const { ok } = rateLimit(`email:${ip}`);
+  const { ok, remaining } = rateLimit(`email:${ip}`);
   if (!ok) {
-    return NextResponse.json({ error: 'Rate limit exceeded. Max 10 emails per minute.' }, { status: 429 });
+    return NextResponse.json({ error: 'Rate limit exceeded. Max 10 emails per minute.', remaining: 0 }, { status: 429 });
   }
   let body: unknown;
   try {
@@ -125,7 +125,7 @@ export async function POST(req: NextRequest) {
       // DB offline — log skipped
     }
 
-    return NextResponse.json({ success: true, message: `Email sent to ${to}`, provider: response.provider ?? 'unknown', fallbackErrors: response.fallbackErrors ?? null });
+    return NextResponse.json({ success: true, message: `Email sent to ${to}`, provider: response.provider ?? 'unknown', fallbackErrors: response.fallbackErrors ?? null, remaining });
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Email send failed';
     return NextResponse.json({ error: message }, { status: 500 });

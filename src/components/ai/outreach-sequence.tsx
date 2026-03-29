@@ -88,6 +88,7 @@ export function OutreachSequenceDialog({
   const [recipientEmail, setRecipientEmail] = useState('');
   const [previewStep, setPreviewStep] = useState<SequenceStep | null>(null);
   const [previewOpen, setPreviewOpen] = useState(false);
+  const [rateLimitRemaining, setRateLimitRemaining] = useState<number | undefined>(undefined);
 
   async function generateSequence() {
     setLoading(true);
@@ -146,6 +147,13 @@ export function OutreachSequenceDialog({
         }),
       });
 
+      const emailData = await emailRes.json() as { remaining?: number; error?: string };
+
+      // Update rate limit display
+      if (emailData.remaining !== undefined) {
+        setRateLimitRemaining(emailData.remaining);
+      }
+
       toast.dismiss(toastId);
 
       // Always mark as sent (we track the attempt)
@@ -156,7 +164,7 @@ export function OutreachSequenceDialog({
       if (emailRes.ok) {
         toast.success(`${STEP_LABELS[previewStep.step]} sent to ${recipientEmail} and logged`);
       } else {
-        toast.success(`${STEP_LABELS[previewStep.step]} logged — email delivery may be pending (check SendGrid config)`);
+        toast.error(emailData.error ?? 'Email send failed');
       }
 
       setPreviewOpen(false);
@@ -363,6 +371,7 @@ export function OutreachSequenceDialog({
             recipientEmail={recipientEmail}
             onConfirm={confirmAndSend}
             isLoading={sending === previewStep.step}
+            rateLimitRemaining={rateLimitRemaining}
           />
         )}
       </>
