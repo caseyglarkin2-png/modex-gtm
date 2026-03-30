@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YardFlow GTM Partnership | DWTB?! Studios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #050505;
+      --bg-secondary: #020202;
+      --accent: #00FFC2;
+      --accent-highlight: #8fffe2;
+      --accent-field-min: rgba(0,255,194,0.05);
+      --accent-field-low: rgba(0,255,194,0.06);
+      --accent-field-mid: rgba(0,255,194,0.12);
+      --accent-field-raised: rgba(0,255,194,0.16);
+      --accent-glow: rgba(0,255,194,0.25);
+      --text-primary: #ffffff;
+      --text-secondary: #a1a1aa;
+      --text-tertiary: #71717a;
+      --border-dark: #27272a;
+      --surface-overlay: rgba(10,10,10,0.72);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      overflow: hidden;
+    }
+
+    .deck {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      padding: 64px 96px;
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: var(--bg-primary);
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    /* Typography */
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+    }
+
+    h1 {
+      font-size: 72px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 32px;
+    }
+
+    h3 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+    }
+
+    p {
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: 800px;
+    }
+
+    .accent {
+      color: var(--accent);
+    }
+
+    .muted {
+      color: var(--text-tertiary);
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-dark);
+      padding: 32px;
+      margin-bottom: 16px;
+    }
+
+    .card-accent {
+      border-left: 3px solid var(--accent);
+    }
+
+    /* Grid layouts */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      flex: 1;
+      align-items: center;
+    }
+
+    .thirds {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 32px;
+    }
+
+    /* Comparison table */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .compare-col {
+      padding: 40px;
+      border: 1px solid var(--border-dark);
+    }
+
+    .compare-col.highlight {
+      border-color: var(--accent);
+      background: var(--accent-field-min);
+      box-shadow: 0 0 40px -10px rgba(0,255,194,0.3);
+    }
+
+    .compare-header {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .compare-price {
+      font-size: 56px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    .compare-list {
+      list-style: none;
+    }
+
+    .compare-list li {
+      font-size: 18px;
+      color: var(--text-secondary);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .compare-list li:last-child {
+      border-bottom: none;
+    }
+
+    /* Stats */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 32px 16px;
+      border: 1px solid var(--border-dark);
+    }
+
+    .stat-value {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      margin-top: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Timeline */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 24px;
+      padding: 24px;
+      border: 1px solid var(--border-dark);
+      align-items: start;
+    }
+
+    .timeline-item.highlight {
+      border-color: var(--accent);
+      background: var(--accent-field-min);
+    }
+
+    .timeline-period {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .timeline-content h4 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .timeline-content p {
+      font-size: 16px;
+      color: var(--text-secondary);
+    }
+
+    /* Guarantee box */
+    .guarantee {
+      background: var(--accent-field-mid);
+      border: 2px solid var(--accent);
+      padding: 48px;
+      text-align: center;
+      margin-top: 48px;
+    }
+
+    .guarantee h3 {
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .guarantee p {
+      font-size: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      display: flex;
+      gap: 8px;
+      z-index: 100;
+    }
+
+    .nav button {
+      width: 48px;
+      height: 48px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-dark);
+      color: var(--text-primary);
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nav button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .progress {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--border-dark);
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+
+    .slide-counter {
+      position: fixed;
+      bottom: 40px;
+      left: 32px;
+      font-size: 14px;
+      color: var(--text-tertiary);
+      font-family: 'SF Mono', monospace;
+    }
+
+    /* Logo */
+    .logo {
+      position: fixed;
+      top: 32px;
+      left: 32px;
+      font-size: 18px;
+      font-weight: 700;
+      z-index: 100;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    /* Sample email */
+    .email-preview {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-dark);
+      padding: 32px;
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 600px;
+    }
+
+    .email-preview .subject {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 24px;
+      font-size: 18px;
+    }
+
+    .email-preview ul {
+      margin: 16px 0 16px 24px;
+      color: var(--text-secondary);
+    }
+
+    .email-preview li {
+      margin-bottom: 8px;
+    }
+
+    /* Intro/title slide */
+    .title-slide {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .title-slide h1 {
+      font-size: 90px;
+      margin-bottom: 32px;
+    }
+
+    .title-slide p {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Proof items */
+    .proof-list {
+      list-style: none;
+      margin-top: 32px;
+    }
+
+    .proof-list li {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-dark);
+      font-size: 20px;
+    }
+
+    .proof-list li::before {
+      content: "✓";
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* CTA button */
+    .cta {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg-primary);
+      padding: 16px 48px;
+      font-size: 18px;
+      font-weight: 700;
+      text-decoration: none;
+      margin-top: 32px;
+      transition: all 0.2s;
+    }
+
+    .cta:hover {
+      box-shadow: 0 0 30px -5px var(--accent);
+    }
+
+    /* Deliverables grid */
+    .deliverables {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .deliverable {
+      padding: 24px;
+      border: 1px solid var(--border-dark);
+    }
+
+    .deliverable-value {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .deliverable-label {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* Two column honest */
+    .honest-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 32px;
+    }
+
+    .honest-col h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .honest-col.warning h4 {
+      color: #f59e0b;
+    }
+
+    .honest-col ul {
+      list-style: none;
+    }
+
+    .honest-col li {
+      padding: 12px 0;
+      font-size: 18px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    /* Funnel math */
+    .funnel {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 32px;
+    }
+
+    .funnel-step {
+      display: grid;
+      grid-template-columns: 200px 1fr 100px;
+      align-items: center;
+      padding: 16px 24px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-dark);
+    }
+
+    .funnel-step.result {
+      border-color: var(--accent);
+      background: var(--accent-field-mid);
+    }
+
+    .funnel-step .label {
+      color: var(--text-tertiary);
+      font-size: 14px;
+    }
+
+    .funnel-step .value {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .funnel-step.result .value {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">DWTB<span>?!</span> Studios</div>
+
+  <div class="deck">
+
+    <!-- Slide 1: Title -->
+    <div class="slide active title-slide">
+      <p class="eyebrow">GTM Partnership Proposal</p>
+      <h1>YardFlow<br><span class="accent">Pipeline Engine</span></h1>
+      <p>Scaling outreach without scaling headcount.<br>A proposal for FreightRoll.</p>
+      <p class="muted" style="margin-top: 48px; font-size: 16px;">March 2026</p>
+    </div>
+
+    <!-- Slide 2: The Problem -->
+    <div class="slide">
+      <p class="eyebrow">The Situation</p>
+      <h2>You've built a differentiated product.<br>You need a <span class="accent">pipeline machine</span>.</h2>
+      <div class="split">
+        <div>
+          <p>YardFlow is the first yard network system. The ROI story is proven. What's missing is consistent, high-quality outreach at scale.</p>
+          <p style="margin-top: 24px;">The question isn't whether to invest in sales.<br>The question is <strong>how</strong>.</p>
+        </div>
+        <div class="card card-accent">
+          <h3 style="font-size: 24px; margin-bottom: 16px;">The Traditional Path</h3>
+          <p style="font-size: 18px;">Hire 2 SDRs. Wait 6 months for ramp. Spend $285K/year. Watch them leave in 18 months.</p>
+          <p style="font-size: 18px; margin-top: 16px;">There's another way.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: The Choice -->
+    <div class="slide">
+      <p class="eyebrow">The Choice</p>
+      <h2>Two paths. One clear winner.</h2>
+      <div class="compare-grid">
+        <div class="compare-col">
+          <p class="compare-header muted">Option A: 2 Sales Reps</p>
+          <p class="compare-price">$285K<span class="muted" style="font-size: 24px;">/year</span></p>
+          <ul class="compare-list">
+            <li>6 months to ramp</li>
+            <li>Template-based outreach</li>
+            <li>~100 touches/day</li>
+            <li>Linear scaling (more $$ = more output)</li>
+            <li>18-month avg tenure</li>
+          </ul>
+        </div>
+        <div class="compare-col highlight">
+          <p class="compare-header accent">Option B: GTM Engine</p>
+          <p class="compare-price"><span class="accent">$120K</span><span class="muted" style="font-size: 24px;">/year</span></p>
+          <ul class="compare-list">
+            <li><strong class="accent">Live today</strong></li>
+            <li>Personalized network audits</li>
+            <li>5,000+ touches/month</li>
+            <li>Exponential scaling (AI compounds)</li>
+            <li>Infrastructure you own</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: What's Built -->
+    <div class="slide">
+      <p class="eyebrow">Proof of Infrastructure</p>
+      <h2>This isn't a pitch.<br>It's a <span class="accent">progress report</span>.</h2>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">75</div>
+          <div class="stat-label">Accounts Loaded</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">222</div>
+          <div class="stat-label">Personas Mapped</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">1,009</div>
+          <div class="stat-label">Emails Sent</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">77</div>
+          <div class="stat-label">AI Content Pieces</div>
+        </div>
+      </div>
+      <ul class="proof-list" style="margin-top: 48px;">
+        <li>Full RevOps operating system deployed (modex-gtm.vercel.app)</li>
+        <li>AI content studio: sequences, one-pagers, meeting briefs</li>
+        <li>Email analytics and tracking infrastructure</li>
+        <li>yardflow.ai with ROI calculator</li>
+      </ul>
+    </div>
+
+    <!-- Slide 5: Priority Accounts -->
+    <div class="slide">
+      <p class="eyebrow">Target Accounts</p>
+      <h2>Enterprise accounts.<br><span class="accent">Already loaded.</span></h2>
+      <div class="split">
+        <div>
+          <div class="card" style="margin-bottom: 24px;">
+            <p class="eyebrow" style="color: var(--accent);">A-Band</p>
+            <h3 style="font-size: 28px;">Dannon</h3>
+          </div>
+          <div class="card">
+            <p class="eyebrow" style="color: var(--text-tertiary);">B-Band</p>
+            <p style="font-size: 20px; line-height: 1.8;">Frito-Lay · Diageo · Hormel<br>JM Smucker · General Mills<br>AB InBev · Coca-Cola</p>
+          </div>
+        </div>
+        <div>
+          <div class="card card-accent">
+            <h3 style="font-size: 24px; margin-bottom: 16px;">Coverage</h3>
+            <p style="font-size: 48px; font-weight: 800; color: var(--accent);">75</p>
+            <p style="font-size: 14px; color: var(--text-tertiary);">accounts researched and scored</p>
+            <p style="font-size: 48px; font-weight: 800; color: var(--accent); margin-top: 24px;">222</p>
+            <p style="font-size: 14px; color: var(--text-tertiary);">decision-makers identified</p>
+            <p style="font-size: 48px; font-weight: 800; color: var(--accent); margin-top: 24px;">33</p>
+            <p style="font-size: 14px; color: var(--text-tertiary);">P1 priority contacts ready</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: Honest Assessment -->
+    <div class="slide">
+      <p class="eyebrow">Honest Assessment</p>
+      <h2>What worked. What needs tuning.</h2>
+      <div class="honest-grid">
+        <div class="honest-col">
+          <h4>✓ What Worked</h4>
+          <ul>
+            <li>Infrastructure deployed and running</li>
+            <li>700 emails delivered successfully</li>
+            <li>Professional email templates</li>
+            <li>Quality AI content generation</li>
+            <li>Full analytics tracking built</li>
+          </ul>
+        </div>
+        <div class="honest-col warning">
+          <h4>→ What Needs Optimization</h4>
+          <ul>
+            <li>28% bounce rate (target: &lt;5%)</li>
+            <li>Open tracking not yet configured</li>
+            <li>Need email verification pipeline</li>
+            <li>Need deliverability setup (SPF/DKIM)</li>
+            <li>Need consistent send velocity</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card card-accent" style="margin-top: 48px;">
+        <p style="font-size: 20px;"><strong>The insight:</strong> The machine is built. It needs clean fuel and tuning.<br>That's exactly what $10K/month enables.</p>
+      </div>
+    </div>
+
+    <!-- Slide 7: The Secret Weapon -->
+    <div class="slide">
+      <p class="eyebrow">The Secret Weapon</p>
+      <h2>Personalized <span class="accent">network audits</span>.<br>Not template blasts.</h2>
+      <div class="split">
+        <div>
+          <p>Every prospect receives a custom yard network analysis — not a generic cold email.</p>
+          <p style="margin-top: 24px;">Powered by YardFlow's ROI calculator. Backed by real data. Looks like it came from an executive, not a marketing tool.</p>
+          <p style="margin-top: 24px; color: var(--text-tertiary); font-size: 18px;">This is the DWTB brand audit approach — retrofitted for yard networks.</p>
+        </div>
+        <div class="email-preview">
+          <p class="subject">Subject: The 6-hour blind spot in [Company]'s cold chain</p>
+          <p>Hi [Name],</p>
+          <p style="margin-top: 16px;">I ran a network audit on [Company]'s yard operations. Here's what stood out:</p>
+          <ul>
+            <li>Estimated dwell time: 42 min (benchmark: 28)</li>
+            <li>Bottleneck: Cross-dock staging</li>
+            <li>Annual impact: ~$420K recoverable</li>
+          </ul>
+          <p>Worth a 15-minute call to see if this applies?</p>
+          <p style="margin-top: 16px; color: var(--accent);">[ROI Calculator] [Book a Call]</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 8: Deliverables -->
+    <div class="slide">
+      <p class="eyebrow">What You Get</p>
+      <h2>$10K/month.<br><span class="accent">Everything included.</span></h2>
+      <div class="deliverables">
+        <div class="deliverable">
+          <div class="deliverable-value">25</div>
+          <div class="deliverable-label">New accounts researched & loaded per month</div>
+        </div>
+        <div class="deliverable">
+          <div class="deliverable-value">75</div>
+          <div class="deliverable-label">New personas enriched per month</div>
+        </div>
+        <div class="deliverable">
+          <div class="deliverable-value">5,000</div>
+          <div class="deliverable-label">Verified email sends per month</div>
+        </div>
+        <div class="deliverable">
+          <div class="deliverable-value">50</div>
+          <div class="deliverable-label">Personalized network audits per month</div>
+        </div>
+        <div class="deliverable">
+          <div class="deliverable-value">4</div>
+          <div class="deliverable-label">Weekly analytics reports</div>
+        </div>
+        <div class="deliverable">
+          <div class="deliverable-value">2</div>
+          <div class="deliverable-label">Strategy calls per month (30 min)</div>
+        </div>
+      </div>
+      <p style="margin-top: 32px; font-size: 18px;">Plus: Full platform access · Ongoing development · Priority support</p>
+    </div>
+
+    <!-- Slide 9: Guarantees -->
+    <div class="slide">
+      <p class="eyebrow">Performance Guarantees</p>
+      <h2>Milestones you can <span class="accent">hold me to</span>.</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-period">Month 1</div>
+          <div class="timeline-content">
+            <h4>System Tuned & Verified</h4>
+            <p>Bounce rate &lt;5% · Email verification live · Tracking configured · 2,500 verified sends complete</p>
+          </div>
+        </div>
+        <div class="timeline-item highlight">
+          <div class="timeline-period">Month 3</div>
+          <div class="timeline-content">
+            <h4>3-5 Qualified Meetings Booked</h4>
+            <p>Decision-makers at target accounts · 30+ minute calls · Real pipeline opportunities</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-period">Month 6</div>
+          <div class="timeline-content">
+            <h4>10+ Meetings Per Month</h4>
+            <p>Predictable pipeline velocity · Optimized sequences · Compounding returns</p>
+          </div>
+        </div>
+      </div>
+      <div class="guarantee">
+        <h3>The Guarantee</h3>
+        <p>If we don't book at least <strong>3 qualified meetings</strong> by end of Month 3,<br><strong>Month 4 is at 50% ($5,000)</strong>.</p>
+      </div>
+    </div>
+
+    <!-- Slide 10: ROI Math -->
+    <div class="slide">
+      <p class="eyebrow">The Math</p>
+      <h2>Conservative pipeline projection.</h2>
+      <div class="split">
+        <div class="funnel">
+          <div class="funnel-step">
+            <span class="label">Monthly Sends</span>
+            <span class="value">5,000 emails</span>
+            <span></span>
+          </div>
+          <div class="funnel-step">
+            <span class="label">× 97% delivered</span>
+            <span class="value">4,850</span>
+            <span></span>
+          </div>
+          <div class="funnel-step">
+            <span class="label">× 30% opened</span>
+            <span class="value">1,455</span>
+            <span></span>
+          </div>
+          <div class="funnel-step">
+            <span class="label">× 4% replied</span>
+            <span class="value">58 replies</span>
+            <span></span>
+          </div>
+          <div class="funnel-step result">
+            <span class="label">× 20% meeting</span>
+            <span class="value">10-12 meetings</span>
+            <span></span>
+          </div>
+        </div>
+        <div>
+          <div class="card card-accent">
+            <p class="eyebrow">Pipeline Value</p>
+            <p style="font-size: 20px; margin-bottom: 24px;">At 10 meetings/month with $100K avg deal:</p>
+            <p style="font-size: 48px; font-weight: 800; color: var(--accent);">$1M</p>
+            <p style="font-size: 14px; color: var(--text-tertiary);">monthly pipeline generation</p>
+            <p style="font-size: 48px; font-weight: 800; color: var(--accent); margin-top: 24px;">12.5x</p>
+            <p style="font-size: 14px; color: var(--text-tertiary);">ROI on $120K annual investment</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 11: Why Now -->
+    <div class="slide">
+      <p class="eyebrow">Timing</p>
+      <h2>The window is <span class="accent">open now</span>.</h2>
+      <div class="thirds" style="margin-top: 48px;">
+        <div class="card">
+          <h3 style="font-size: 20px; color: var(--accent); margin-bottom: 16px;">Q2 Selling Season</h3>
+          <p style="font-size: 16px;">Logistics buyers making FY26 technology decisions now. Budget cycles close Q3/Q4.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size: 20px; color: var(--accent); margin-bottom: 16px;">Infrastructure Ready</h3>
+          <p style="font-size: 16px;">5-6 months of work already complete. Platform just needs velocity.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size: 20px; color: var(--accent); margin-bottom: 16px;">Compounding Returns</h3>
+          <p style="font-size: 16px;">Every account makes the system smarter. Month 1 is investment; Month 6 is dividend.</p>
+        </div>
+      </div>
+      <div class="card card-accent" style="margin-top: 48px; text-align: center;">
+        <p style="font-size: 24px; font-weight: 600;">Every month of delay = a quarter of pipeline lost.</p>
+      </div>
+    </div>
+
+    <!-- Slide 12: Alignment -->
+    <div class="slide">
+      <p class="eyebrow">Alignment</p>
+      <h2>Skin in the game.<br><span class="accent">We both win or neither does.</span></h2>
+      <div class="split">
+        <div>
+          <div class="card" style="margin-bottom: 24px;">
+            <p class="eyebrow" style="color: var(--text-tertiary);">Existing</p>
+            <h3 style="font-size: 24px;">Equity + Commission</h3>
+            <p style="font-size: 16px;">On closed deals. I only win big when deals close.</p>
+          </div>
+          <div class="card card-accent">
+            <p class="eyebrow" style="color: var(--accent);">New</p>
+            <h3 style="font-size: 24px;">$10K/month Retainer</h3>
+            <p style="font-size: 16px;">Covers operations: API costs, tools, time. Enables sustained velocity.</p>
+          </div>
+        </div>
+        <div class="card" style="background: var(--accent-field-mid); border-color: var(--accent);">
+          <h3 style="font-size: 24px; margin-bottom: 24px;">Combined Effect</h3>
+          <p style="font-size: 18px;">The retainer covers execution.</p>
+          <p style="font-size: 18px; margin-top: 16px;">The upside comes from outcomes.</p>
+          <p style="font-size: 18px; margin-top: 16px;"><strong>I'm not paid on activity. I'm paid on deals.</strong></p>
+          <p style="font-size: 24px; margin-top: 32px; color: var(--accent); font-weight: 700;">We're aligned.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 13: First Studio Partner -->
+    <div class="slide">
+      <p class="eyebrow">Partnership</p>
+      <h2>FreightRoll becomes<br><span class="accent">DWTB's first studio partner</span>.</h2>
+      <div class="split">
+        <div>
+          <p>This isn't just a vendor relationship. It's a proof point.</p>
+          <p style="margin-top: 24px;">FreightRoll/YardFlow becomes the first paying partner of DWTB?! Studios — demonstrating what an AI-powered GTM engine can do for freight tech companies.</p>
+          <p style="margin-top: 24px; color: var(--text-tertiary); font-size: 18px;">The same system, operators, and infrastructure that built the DWTB brand audit engine — now tuned for yard networks.</p>
+        </div>
+        <div class="card card-accent" style="text-align: center; padding: 48px;">
+          <p class="eyebrow">First Partner</p>
+          <h3 style="font-size: 32px; margin-bottom: 24px;">FreightRoll × DWTB?!</h3>
+          <p style="font-size: 16px;">Operator-led GTM infrastructure.<br>Proof-first outreach.<br>Built for freight.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 14: The Ask -->
+    <div class="slide">
+      <p class="eyebrow">The Ask</p>
+      <h2>Simple terms.<br><span class="accent">Real commitment.</span></h2>
+      <div class="compare-grid">
+        <div class="compare-col highlight">
+          <p class="compare-header accent">Investment</p>
+          <p class="compare-price"><span class="accent">$10K</span><span class="muted" style="font-size: 24px;">/month</span></p>
+          <ul class="compare-list">
+            <li>6-month initial commitment</li>
+            <li>Equity + commission unchanged</li>
+            <li>Net 15 payment terms</li>
+            <li>30-day notice after initial term</li>
+          </ul>
+        </div>
+        <div class="compare-col">
+          <p class="compare-header muted">Guarantee</p>
+          <p class="compare-price">3<span class="muted" style="font-size: 24px;"> meetings</span></p>
+          <ul class="compare-list">
+            <li>Qualified meetings by Month 3</li>
+            <li>Decision-makers at target accounts</li>
+            <li>Miss = Month 4 at 50% ($5K)</li>
+            <li>Full system ownership on exit</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 15: Next Steps -->
+    <div class="slide title-slide">
+      <p class="eyebrow">Next Steps</p>
+      <h1>Let's <span class="accent">go</span>.</h1>
+      <div style="max-width: 500px; text-align: left; margin: 48px auto 0;">
+        <div class="card" style="margin-bottom: 16px;">
+          <p><span class="accent" style="font-weight: 700;">1.</span> Review this proposal</p>
+        </div>
+        <div class="card" style="margin-bottom: 16px;">
+          <p><span class="accent" style="font-weight: 700;">2.</span> 15-minute alignment call</p>
+        </div>
+        <div class="card card-accent">
+          <p><span class="accent" style="font-weight: 700;">3.</span> Sign & scale</p>
+        </div>
+      </div>
+      <p style="margin-top: 48px; font-size: 18px; color: var(--text-tertiary);">The system is ready. The accounts are loaded. Let's fill your calendar.</p>
+      <p style="margin-top: 32px; color: var(--accent); font-weight: 600;">casey@yardflow.ai</p>
+    </div>
+
+  </div>
+
+  <div class="nav">
+    <button onclick="prevSlide()">←</button>
+    <button onclick="nextSlide()">→</button>
+  </div>
+
+  <div class="slide-counter">
+    <span id="current">1</span> / <span id="total">15</span>
+  </div>
+
+  <div class="progress">
+    <div class="progress-bar" id="progress"></div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    function showSlide(n) {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (n + slides.length) % slides.length;
+      slides[currentSlide].classList.add('active');
+      document.getElementById('current').textContent = currentSlide + 1;
+      document.getElementById('progress').style.width = ((currentSlide + 1) / slides.length * 100) + '%';
+    }
+
+    function nextSlide() {
+      showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      showSlide(currentSlide - 1);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      }
+    });
+
+    // Touch support
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+    });
+    document.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextSlide();
+        else prevSlide();
+      }
+    });
+
+    document.getElementById('total').textContent = slides.length;
+  </script>
+</body>
+</html>
