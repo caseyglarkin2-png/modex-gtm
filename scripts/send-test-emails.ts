@@ -39,7 +39,7 @@ const testEmails: TestEmail[] = [
       </p>
       <hr style="border:none; border-top:1px solid #f0f0f0; margin:24px 0;"/>
       <p style="font-size:12px; color:#9ca3af;">
-        FreightRoll Inc. · 123 Logistics Way, Atlanta, GA 30303<br/>
+        FreightRoll Inc. · 330 E. Liberty St, Ann Arbor, MI 48104<br/>
         You're receiving this because we believe YardFlow could help optimize your yard operations.<br/>
         <a href="https://modex-gtm.vercel.app/unsubscribe?email=${TEST_EMAIL}" style="color:#9ca3af; text-decoration:underline;">Unsubscribe</a>
       </p>
@@ -66,7 +66,7 @@ const testEmails: TestEmail[] = [
       </p>
       <hr style="border:none; border-top:1px solid #f0f0f0; margin:24px 0;"/>
       <p style="font-size:12px; color:#9ca3af;">
-        FreightRoll Inc. · 123 Logistics Way, Atlanta, GA 30303<br/>
+        FreightRoll Inc. · 330 E. Liberty St, Ann Arbor, MI 48104<br/>
         <a href="https://modex-gtm.vercel.app/unsubscribe?email=${TEST_EMAIL}" style="color:#9ca3af; text-decoration:underline;">Unsubscribe</a>
       </p>
     `,
@@ -109,7 +109,7 @@ const testEmails: TestEmail[] = [
       </p>
       <hr style="border:none; border-top:1px solid #f0f0f0; margin:24px 0;"/>
       <p style="font-size:12px; color:#9ca3af;">
-        FreightRoll Inc. · 123 Logistics Way, Atlanta, GA 30303<br/>
+        FreightRoll Inc. · 330 E. Liberty St, Ann Arbor, MI 48104<br/>
         <a href="https://modex-gtm.vercel.app/unsubscribe?email=${TEST_EMAIL}" style="color:#9ca3af; text-decoration:underline;">Unsubscribe</a>
       </p>
     `,

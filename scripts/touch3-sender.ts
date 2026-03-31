@@ -58,7 +58,7 @@ function wrapHtml(body: string, accountName: string, toEmail: string) {
 </td></tr>
 <tr><td style="padding:0 24px 24px;border-top:1px solid #f0f0f0;">
   <p style="margin:8px 0 0;font-size:10px;color:#9ca3af;line-height:1.5;">
-    FreightRoll Inc. · Austin, TX 78701<br/>
+    FreightRoll Inc. · 330 E. Liberty St, Ann Arbor, MI 48104<br/>
     <a href="${unsubUrl}" style="color:#9ca3af;text-decoration:underline;">Unsubscribe</a>
   </p>
 </td></tr>

@@ -40,7 +40,7 @@ yardflow.ai  |  Run ROI  |  Book a Network Audit
 
 **CAN-SPAM Footer:**
 ```
-FreightRoll Inc. · Austin, TX
+FreightRoll Inc. · 330 E. Liberty St, Ann Arbor, MI 48104
 [Unsubscribe link]
 ```
 
@@ -90,7 +90,7 @@ For scripts (`batch-follow-up.ts`, `follow-up-sender.ts`), use this exact templa
 </td></tr>
 <tr><td style="padding:0 24px 24px;border-top:1px solid #f0f0f0;">
   <p style="margin:8px 0 0;font-size:10px;color:#9ca3af;line-height:1.5;">
-    FreightRoll Inc. · Austin, TX<br/>
+    FreightRoll Inc. · 330 E. Liberty St, Ann Arbor, MI 48104<br/>
     <a href="{{UNSUBSCRIBE_URL}}" style="color:#9ca3af;text-decoration:underline;">Unsubscribe</a>
   </p>
 </td></tr>
@@ -511,7 +511,7 @@ Casey
 - [ ] Check for major company news/crisis
 
 ### Compliance:
-- [ ] Physical address in footer (FreightRoll Inc. · Austin, TX)
+- [ ] Physical address in footer (FreightRoll Inc. · 330 E. Liberty St, Ann Arbor, MI 48104)
 - [ ] Unsubscribe link functional
 
 ---
