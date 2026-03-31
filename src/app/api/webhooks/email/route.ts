@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { Webhook } from 'svix';
 import { prisma } from '@/lib/prisma';
 
 /**
@@ -31,34 +32,39 @@ interface ResendWebhookPayload {
   };
 }
 
-// Webhook signing secret — set in Resend dashboard → Webhooks
 const WEBHOOK_SECRET = process.env.RESEND_WEBHOOK_SECRET;
 
 export async function POST(req: NextRequest) {
-  let payload: ResendWebhookPayload;
+  // Read raw body first — required for HMAC signature verification
+  const rawBody = await req.text();
 
-  try {
-    payload = await req.json() as ResendWebhookPayload;
-  } catch {
-    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
-  }
-
-  // Optional: Verify webhook signature via svix if secret is configured
+  // Verify Resend webhook signature via svix
   if (WEBHOOK_SECRET) {
-    const svixId = req.headers.get('svix-id');
-    const svixTimestamp = req.headers.get('svix-timestamp');
-    const svixSignature = req.headers.get('svix-signature');
+    const svixId = req.headers.get('svix-id') ?? '';
+    const svixTimestamp = req.headers.get('svix-timestamp') ?? '';
+    const svixSignature = req.headers.get('svix-signature') ?? '';
 
     if (!svixId || !svixTimestamp || !svixSignature) {
       return NextResponse.json({ error: 'Missing svix headers' }, { status: 401 });
     }
 
-    // Timestamp replay protection (5 minute window)
-    const ts = parseInt(svixTimestamp, 10);
-    const now = Math.floor(Date.now() / 1000);
-    if (Math.abs(now - ts) > 300) {
-      return NextResponse.json({ error: 'Timestamp too old' }, { status: 401 });
+    try {
+      const wh = new Webhook(WEBHOOK_SECRET);
+      wh.verify(rawBody, {
+        'svix-id': svixId,
+        'svix-timestamp': svixTimestamp,
+        'svix-signature': svixSignature,
+      });
+    } catch {
+      return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
     }
+  }
+
+  let payload: ResendWebhookPayload;
+  try {
+    payload = JSON.parse(rawBody) as ResendWebhookPayload;
+  } catch {
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
   }
 
   const { type, data } = payload;
@@ -71,13 +77,11 @@ export async function POST(req: NextRequest) {
   const now = new Date();
 
   try {
-    // Find the email log by provider_message_id
     const log = await prisma.emailLog.findFirst({
       where: { provider_message_id: emailId },
     });
 
     if (!log) {
-      // Not tracked — could be a test or older send
       return NextResponse.json({ received: true, matched: false });
     }
 
@@ -105,28 +109,26 @@ export async function POST(req: NextRequest) {
           data: {
             status: 'clicked',
             clicked_at: log.clicked_at ?? now,
-            // Also mark opened if not already
             opened_at: log.opened_at ?? now,
           },
         });
         break;
 
       case 'email.bounced':
-        await prisma.emailLog.update({
-          where: { id: log.id },
-          data: { status: 'bounced' },
-        });
-        break;
-
       case 'email.complained':
         await prisma.emailLog.update({
           where: { id: log.id },
           data: { status: 'bounced' },
         });
+        // Auto-suppress bounced/complained addresses
+        await prisma.unsubscribedEmail.upsert({
+          where: { email: log.to_email },
+          create: { email: log.to_email },
+          update: {},
+        }).catch(() => {});
         break;
 
       default:
-        // Other events (sent, delivery_delayed, etc.) — acknowledge
         break;
     }
 

@@ -1,5 +1,5 @@
-// YardFlow Follow-Up Sender — A+ Standards v2
-// Usage: TIER=all BATCH_SIZE=50 npx ts-node scripts/follow-up-sender.ts
+// YardFlow Batch Follow-Up Sender — A+ Standards v2
+// Usage: BATCH_SIZE=50 OFFSET=0 npx ts-node scripts/batch-follow-up.ts
 
 const { PrismaClient } = require('@prisma/client');
 const { Resend } = require('resend');
@@ -11,11 +11,9 @@ const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://modex-gtm.vercel.ap
 const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
 const TIER1_ACCOUNTS = ['dannon', 'frito', 'diageo', 'coca-cola', 'ab inbev', 'general mills', 'hormel', 'campbell', 'constellation'];
+const BLOCKED_DOMAINS = ['bluetriton.com', 'homedepot.com', 'fedex.com', 'johndeere.com', 'niagarawater.com', 'kencogroup.com', 'heb.com'];
 
-function isTier1(account: string) {
-  return TIER1_ACCOUNTS.some(t => account?.toLowerCase().includes(t));
-}
-
+// Industry → vertical classification (mirrors generate-campaign.ts)
 function getVertical(accountName: string): string {
   const name = (accountName || '').toLowerCase();
   if (/food|bev|drink|dairy|snack|cereal|beverage|brewery|wine|spirit|beer/.test(name)) return 'food_bev';
@@ -27,7 +25,15 @@ function getVertical(accountName: string): string {
   return 'general_mfg';
 }
 
-// Canonical HTML wrapper — color #0e7490, correct booking link, env-based unsubscribe URL
+function isTier1(account: string) {
+  return TIER1_ACCOUNTS.some(t => account?.toLowerCase().includes(t));
+}
+
+function isBlocked(email: string) {
+  return BLOCKED_DOMAINS.some(d => email?.toLowerCase().includes(d));
+}
+
+// Canonical HTML wrapper — matches src/lib/email/templates.ts exactly
 function wrapHtml(body: string, accountName: string, toEmail: string) {
   const unsubUrl = `${BASE_URL}/unsubscribe?email=${encodeURIComponent(toEmail)}`;
   return `<!DOCTYPE html>
@@ -77,7 +83,7 @@ function listUnsubHeaders(email: string): Record<string, string> {
   return { 'List-Unsubscribe': `<${url}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' };
 }
 
-// Tier 1 company-specific insight database — no fake numbers
+// Tier 1 personalization database — company-specific insights only, no fake numbers
 const TIER1_INSIGHTS: Record<string, string> = {
   'general mills': "30+ US plants, the Blue Buffalo cold chain layer, and the pet food DC network running on different velocity profiles than your legacy cereal lines. That's where the yard becomes the hidden bottleneck between WMS and TMS.",
   'frito': "Running DSD at Frito-Lay's velocity means the yard isn't a parking lot — it's a live sequencing problem that resets dozens of times a day. That's where most of the recoverable throughput hides, and where most YMS tools fall apart.",
@@ -91,7 +97,7 @@ const TIER1_INSIGHTS: Record<string, string> = {
   'dannon': "Dairy cold chain with strict temperature windows and rapid spoilage risk. Every untracked minute of yard dwell is a freshness risk that doesn't show up until it's too late.",
 };
 
-// Tier 2: vertical-aware, no fake ROI stats, question-forward
+// Tier 2: Vertical-specific templates — no fake ROI numbers, question-forward, MODEX-anchored
 function tier2Body(firstName: string, company: string, vertical: string): string {
   const name = firstName ? `${firstName},` : 'Hi,';
 
@@ -99,37 +105,43 @@ function tier2Body(firstName: string, company: string, vertical: string): string
 
   switch (vertical) {
     case 'food_bev':
-      return `<p style="margin:0 0 14px 0;">${name}</p>${apology}
+      return `<p style="margin:0 0 14px 0;">${name}</p>
+${apology}
 <p style="margin:0 0 14px 0;">How does ${company} track reefer dwell time in the yard right now? Most food operations don't have a clean answer — the yard is the one place where cold chain visibility goes dark.</p>
 <p style="margin:0 0 14px 0;">That's the gap we close. Worth 15 minutes before MODEX?</p>
 <p style="margin:0 0 14px 0;">Casey</p>`;
 
     case 'cpg_retail':
-      return `<p style="margin:0 0 14px 0;">${name}</p>${apology}
+      return `<p style="margin:0 0 14px 0;">${name}</p>
+${apology}
 <p style="margin:0 0 14px 0;">When ${company} has trailers stacking up and retail appointment windows closing, how does the yard team prioritize?</p>
 <p style="margin:0 0 14px 0;">That decision — made manually, dozens of times a day — is what determines whether you make the window or pay detention. Worth 15 minutes to see how we automate it?</p>
 <p style="margin:0 0 14px 0;">Casey</p>`;
 
     case 'auto_heavy':
-      return `<p style="margin:0 0 14px 0;">${name}</p>${apology}
+      return `<p style="margin:0 0 14px 0;">${name}</p>
+${apology}
 <p style="margin:0 0 14px 0;">When an inbound parts trailer hits ${company}'s gate, how long before the dock team knows it's there?</p>
 <p style="margin:0 0 14px 0;">That gap is where JIT breaks down. We fix it with real-time gate-to-dock visibility — no hardware install, works on day one. Worth 15 minutes before MODEX?</p>
 <p style="margin:0 0 14px 0;">Casey</p>`;
 
     case 'pharma':
-      return `<p style="margin:0 0 14px 0;">${name}</p>${apology}
+      return `<p style="margin:0 0 14px 0;">${name}</p>
+${apology}
 <p style="margin:0 0 14px 0;">GDP compliance doesn't pause in the yard. When a temperature-sensitive trailer sits at the gate for four hours, that's audit exposure — and most teams don't have a timestamped record to show for it.</p>
 <p style="margin:0 0 14px 0;">We give you that record. Worth 15 minutes before MODEX?</p>
 <p style="margin:0 0 14px 0;">Casey</p>`;
 
     case 'distribution':
-      return `<p style="margin:0 0 14px 0;">${name}</p>${apology}
+      return `<p style="margin:0 0 14px 0;">${name}</p>
+${apology}
 <p style="margin:0 0 14px 0;">In a cross-dock operation, the bottleneck usually isn't the sort — it's the 30 minutes between a trailer hitting the gate and anyone knowing it's ready to unload.</p>
 <p style="margin:0 0 14px 0;">That dead window is where throughput leaks. It's also where we find the most room to recover. Worth 15 minutes?</p>
 <p style="margin:0 0 14px 0;">Casey</p>`;
 
     default: // industrial, general_mfg
-      return `<p style="margin:0 0 14px 0;">${name}</p>${apology}
+      return `<p style="margin:0 0 14px 0;">${name}</p>
+${apology}
 <p style="margin:0 0 14px 0;">If I asked ${company}'s dock team what's sitting in the yard right now, could they tell me in under 60 seconds?</p>
 <p style="margin:0 0 14px 0;">At most sites the answer is no. That gap — between gate and dock awareness — is where throughput leaks hide. Worth 15 minutes before MODEX?</p>
 <p style="margin:0 0 14px 0;">Casey</p>`;
@@ -141,7 +153,10 @@ function tier1Body(firstName: string, company: string): string {
   const companyLower = company.toLowerCase();
   const insight = Object.entries(TIER1_INSIGHTS).find(([key]) => companyLower.includes(key))?.[1];
 
-  if (!insight) return tier2Body(firstName, company, 'general_mfg');
+  if (!insight) {
+    // Fall back to general_mfg vertical
+    return tier2Body(firstName, company, 'general_mfg');
+  }
 
   return `<p style="margin:0 0 14px 0;">${name}</p>
 <p style="margin:0 0 14px 0;">My earlier note may not have reached you — we resolved a technical issue on our end last week.</p>
@@ -154,52 +169,40 @@ async function sleep(ms: number) { return new Promise(r => setTimeout(r, ms)); }
 
 async function main() {
   const batchSize = parseInt(process.env.BATCH_SIZE || '50');
-  const tierFilter = process.env.TIER || 'all';
-  const twoDaysAgo = new Date(Date.now() - 2 * 24 * 60 * 60 * 1000);
+  const offset = parseInt(process.env.OFFSET || '0');
 
-  let candidates: any[] = await prisma.$queryRaw`
-    WITH initial_emails AS (
+  const candidates: any[] = await prisma.$queryRaw`
+    WITH initials AS (
       SELECT DISTINCT ON (to_email)
-        id, to_email, persona_name, account_name, subject, provider_message_id, sent_at
+        to_email, persona_name, account_name, subject, provider_message_id
       FROM email_logs
-      WHERE status IN ('delivered', 'sent')
-        AND sent_at < ${twoDaysAgo}
+      WHERE status = 'delivered'
         AND subject NOT LIKE 'Re:%'
         AND subject NOT ILIKE '%apolog%'
         AND subject NOT ILIKE '%test%'
-        AND subject NOT ILIKE '%technical issue%'
-        AND subject != ''
         AND to_email NOT LIKE '%freightroll%'
+        AND to_email NOT LIKE '%yardflow%'
       ORDER BY to_email, sent_at DESC
     ),
-    already_followed AS (
-      SELECT DISTINCT to_email
-      FROM email_logs
-      WHERE subject LIKE 'Re:%'
-        OR subject ILIKE '%technical issue%'
+    followed AS (
+      SELECT DISTINCT to_email FROM email_logs WHERE subject LIKE 'Re:%'
     )
-    SELECT i.*
-    FROM initial_emails i
-    LEFT JOIN already_followed f ON i.to_email = f.to_email
+    SELECT i.* FROM initials i
+    LEFT JOIN followed f ON i.to_email = f.to_email
     WHERE f.to_email IS NULL
-    ORDER BY i.account_name, i.sent_at ASC
+    ORDER BY i.account_name
+    OFFSET ${offset}
+    LIMIT ${batchSize}
   `;
 
-  if (tierFilter === '1') {
-    candidates = candidates.filter(c => isTier1(c.account_name));
-  } else if (tierFilter === '2') {
-    candidates = candidates.filter(c => !isTier1(c.account_name));
-  }
+  const clean = candidates.filter(c => !isBlocked(c.to_email));
 
-  candidates = candidates.slice(0, batchSize);
-
-  console.log(`\nSending ${candidates.length} follow-ups (Tier: ${tierFilter})...\n`);
+  console.log(`\nBatch: offset=${offset}, size=${batchSize}`);
+  console.log(`Found ${candidates.length} candidates, ${clean.length} after filtering\n`);
 
   let sent = 0, failed = 0;
-  const tierCounts: Record<string, number> = { T1: 0 };
-
-  for (let i = 0; i < candidates.length; i++) {
-    const c = candidates[i];
+  for (let i = 0; i < clean.length; i++) {
+    const c = clean[i];
     const firstName = c.persona_name?.split(' ')[0] || '';
     const tier1 = isTier1(c.account_name);
     const vertical = getVertical(c.account_name);
@@ -217,15 +220,12 @@ async function main() {
         reply_to: 'casey@freightroll.com',
         headers: {
           ...listUnsubHeaders(c.to_email),
-          ...(c.provider_message_id ? {
-            'In-Reply-To': c.provider_message_id,
-            'References': c.provider_message_id
-          } : {})
+          ...(c.provider_message_id ? { 'In-Reply-To': c.provider_message_id, 'References': c.provider_message_id } : {})
         }
       });
 
       if (result.error) {
-        console.log(`❌ ${i+1}. ${(c.account_name || '').padEnd(22)} | ${c.to_email} | ERROR: ${(result.error as any).message}`);
+        console.log(`❌ ${offset+i+1}. ${(c.account_name || '').padEnd(20)} | ${c.to_email} | ${(result.error as any).message}`);
         failed++;
       } else {
         await prisma.emailLog.create({
@@ -240,24 +240,21 @@ async function main() {
             provider_message_id: result.data?.id
           }
         });
-        const tierLabel = tier1 ? 'T1' : `T2:${vertical}`;
-        console.log(`✅ ${String(i+1).padStart(2)}. [${tierLabel.padEnd(16)}] ${(c.account_name || '').padEnd(22)} | ${c.to_email}`);
+        const tierLabel = tier1 ? 'T1' : `T2:${vertical.padEnd(12)}`;
+        console.log(`✅ ${String(offset+i+1).padStart(3)}. [${tierLabel}] ${(c.account_name || '').padEnd(20)} | ${c.to_email}`);
         sent++;
-        tierCounts[tierLabel] = (tierCounts[tierLabel] || 0) + 1;
       }
     } catch (e: any) {
-      console.log(`❌ ${i+1}. ${c.account_name} | ERROR: ${e.message}`);
+      console.log(`❌ ${offset+i+1}. ${c.account_name} | ERROR: ${e.message}`);
       failed++;
     }
 
-    if (i < candidates.length - 1) await sleep(8000);
+    if (i < clean.length - 1) await sleep(8000);
   }
 
-  console.log('');
-  console.log('═'.repeat(60));
-  console.log('BATCH COMPLETE');
-  console.log(`Sent: ${sent} | Failed: ${failed}`);
-  console.log('Breakdown:', JSON.stringify(tierCounts, null, 2));
+  console.log(`\n${'═'.repeat(60)}`);
+  console.log(`BATCH COMPLETE: Sent=${sent} Failed=${failed}`);
+  console.log(`Next batch: OFFSET=${offset + batchSize} BATCH_SIZE=${batchSize}`);
   console.log('═'.repeat(60));
 }
 

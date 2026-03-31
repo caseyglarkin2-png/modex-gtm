@@ -3,6 +3,33 @@
  * NOT a marketing blast. No heavy headers, no boxes, no template smell.
  * Clean typography, subtle brand, executive-level signature.
  */
+
+const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
+
+/** Build RFC 8058 List-Unsubscribe headers for one-click unsubscribe (Gmail/Yahoo mandate) */
+export function listUnsubscribeHeaders(recipientEmail: string): Record<string, string> {
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://modex-gtm.vercel.app';
+  const url = `${baseUrl}/unsubscribe?email=${encodeURIComponent(recipientEmail)}`;
+  return {
+    'List-Unsubscribe': `<${url}>`,
+    'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+  };
+}
+
+/** Strip HTML to plain text for multipart/alternative */
+export function htmlToPlainText(html: string): string {
+  return html
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/p>\s*<p[^>]*>/gi, '\n\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
 export function wrapHtml(bodyText: string, accountName: string, recipientEmail?: string, emailLogId?: number): string {
   const escaped = bodyText
     .replace(/&/g, '&amp;')
@@ -22,7 +49,6 @@ export function wrapHtml(bodyText: string, accountName: string, recipientEmail?:
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YardFlow - ${accountName}</title>
 </head>
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background:#ffffff; margin:0; padding:0;">
   <!--[if mso]><table width="100%"><tr><td width="640" align="center"><![endif]-->
@@ -50,7 +76,7 @@ export function wrapHtml(bodyText: string, accountName: string, recipientEmail?:
                 <span style="color:#d1d5db; margin:0 6px;">|</span>
                 <a href="https://yardflow.ai/roi" style="color:#0e7490; text-decoration:none; font-weight:500;">Run ROI</a>
                 <span style="color:#d1d5db; margin:0 6px;">|</span>
-                <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW" style="color:#0e7490; text-decoration:none; font-weight:500;">Book a Network Audit</a>
+                <a href="${BOOKING_LINK}" style="color:#0e7490; text-decoration:none; font-weight:500;">Book a Network Audit</a>
               </p>
             </td>
           </tr>
@@ -61,8 +87,7 @@ export function wrapHtml(bodyText: string, accountName: string, recipientEmail?:
     <tr>
       <td style="padding:0 24px 24px; border-top:1px solid #f0f0f0;">
         <p style="margin:8px 0 0; font-size:10px; color:#9ca3af; line-height:1.5;">
-          FreightRoll Inc. · 123 Logistics Way, Atlanta, GA 30303<br/>
-          You're receiving this because we believe YardFlow could help optimize ${accountName}'s yard operations.<br/>
+          FreightRoll Inc. · Austin, TX 78701<br/>
           <a href="${unsubscribeUrl}" style="color:#9ca3af; text-decoration:underline;">Unsubscribe</a>
         </p>
       </td>

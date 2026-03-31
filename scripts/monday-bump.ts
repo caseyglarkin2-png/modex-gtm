@@ -25,43 +25,44 @@ const RATE_LIMIT_MS = 6000;
 const BATCH_SIZE = 25;
 
 const BANNED_DOMAINS = ['dannon.com', 'danone.com', 'bluetriton.com', 'yardflow.ai'];
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://modex-gtm.vercel.app';
 
-// Short bump variants - rotate to avoid identical content
+// Short bump variants — MODEX-anchored, no "bumping/buried" language
 const BUMP_BODIES = [
   (firstName: string) =>
-`Hey ${firstName},
+`${firstName},
 
-Bumping this to the top in case it got buried over the weekend. Inboxes take a beating on Mondays.
+One more note. We'll be at MODEX April 13-16 in Atlanta — if you're attending, I'd love to connect.
 
-Worth a quick look? We'll be at MODEX in Atlanta April 13-16 and I'd love to show you what we built.`,
+If yard throughput is on your list at all, happy to do a 15-minute walkthrough at the show.`,
 
   (firstName: string) =>
 `${firstName},
 
-Quick bump on this. Saturdays are quiet but Monday mornings are brutal.
+Floating this back in case timing is better now.
 
-If the yard is on your radar at all, happy to do a 15-minute walkthrough. We'll be at MODEX in a couple weeks.`,
-
-  (firstName: string) =>
-`${firstName},
-
-Floating this back up. Weekend emails tend to disappear.
-
-If this lands at a good time, I'd love to chat. We're at MODEX April 13-16 in Atlanta and the demo takes 5 minutes.`,
-
-  (firstName: string) =>
-`Hey ${firstName},
-
-Moving this to the top of the pile. Monday inboxes are no joke.
-
-Let me know if the yard is something you're thinking about. Happy to do a quick call or meet at MODEX in a couple weeks.`,
+We're at MODEX April 13-16 in Atlanta. If any of this landed, I'd love to do a quick demo on the floor.`,
 
   (firstName: string) =>
 `${firstName},
 
-Bumping this up. Saturday sends have a way of getting lost by Monday.
+Still thinking about your yard. MODEX is two weeks out — if you're planning to be there, worth grabbing 15 minutes.
 
-If any of this resonated, I'm around for a quick call. Or catch us at MODEX in Atlanta April 13-16.`,
+Happy to talk before the show too if that's easier.`,
+
+  (firstName: string) =>
+`${firstName},
+
+We'll be at MODEX April 13-16 in Atlanta. The 15-minute demo on the floor tends to make the value obvious faster than an email can.
+
+If yard operations is on your radar, let me know.`,
+
+  (firstName: string) =>
+`${firstName},
+
+Last note on this before the show. We'll be at MODEX April 13-16 in Atlanta.
+
+If yard throughput is something you're thinking about this year, happy to do a quick walkthrough. Five minutes is enough.`,
 ];
 
 function resolveGreetingName(personaName: string | null, toEmail: string): string {
@@ -78,14 +79,16 @@ function resolveGreetingName(personaName: string | null, toEmail: string): strin
   return 'there';
 }
 
-function wrapHtml(bodyText: string, accountName: string): string {
+function wrapHtml(bodyText: string, accountName: string, toEmail?: string): string {
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://modex-gtm.vercel.app';
+  const unsubUrl = toEmail ? `${baseUrl}/unsubscribe?email=${encodeURIComponent(toEmail)}` : `${baseUrl}/unsubscribe`;
   const escaped = bodyText
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/\n\n/g, '</p><p style="margin:0 0 14px 0; padding:0;">')
     .replace(/\n/g, '<br />');
 
   return `<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>YardFlow - ${accountName}</title></head>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title></title></head>
 <body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:#fff;margin:0;padding:0;">
 <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="max-width:640px;margin:0 auto;">
 <tr><td style="padding:32px 24px 24px;color:#1a1a1a;font-size:15px;line-height:1.75;letter-spacing:-0.01em;">
@@ -94,7 +97,7 @@ function wrapHtml(bodyText: string, accountName: string): string {
 <table cellpadding="0" cellspacing="0" role="presentation" style="border-top:1px solid #e0e0e0;padding-top:16px;width:100%;">
 <tr><td style="padding-top:16px;">
 <p style="margin:0 0 2px;font-size:14px;font-weight:600;color:#1a1a1a;">Casey Larkin</p>
-<p style="margin:0 0 10px;font-size:13px;color:#6b7280;">GTM Lead, <span style="color:#0e7490;font-weight:600;">Yard</span><span style="font-weight:600;color:#1a1a1a;">Flow</span> by FreightRoll</p>
+<p style="margin:0 0 10px;font-size:13px;color:#6b7280;">GTM Lead · <span style="color:#0e7490;font-weight:600;">Yard</span><span style="font-weight:600;color:#1a1a1a;">Flow</span> by FreightRoll</p>
 <p style="margin:0 0 10px;font-size:12px;color:#9ca3af;font-style:italic;">The First Yard Network System. Deterministic throughput across every facility.</p>
 <p style="margin:0;font-size:12px;">
 <a href="https://yardflow.ai" style="color:#0e7490;text-decoration:none;font-weight:500;">yardflow.ai</a>
@@ -102,7 +105,14 @@ function wrapHtml(bodyText: string, accountName: string): string {
 <a href="https://yardflow.ai/roi" style="color:#0e7490;text-decoration:none;font-weight:500;">Run ROI</a>
 <span style="color:#d1d5db;margin:0 6px;">|</span>
 <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW" style="color:#0e7490;text-decoration:none;font-weight:500;">Book a Network Audit</a></p>
-</td></tr></table></td></tr></table></body></html>`;
+</td></tr></table></td></tr>
+<tr><td style="padding:0 24px 24px;border-top:1px solid #f0f0f0;">
+<p style="margin:8px 0 0;font-size:10px;color:#9ca3af;line-height:1.5;">
+FreightRoll Inc. · Austin, TX 78701<br/>
+<a href="${unsubUrl}" style="color:#9ca3af;text-decoration:underline;">Unsubscribe</a>
+</p>
+</td></tr>
+</table></body></html>`;
 }
 
 function sleep(ms: number) {
@@ -219,7 +229,7 @@ async function main() {
     console.log(`\n--- Batch ${batchNum}/${totalBatches} (${batch.length} emails) ---`);
 
     for (const bump of batch) {
-      const html = wrapHtml(bump.body, bump.accountName);
+      const html = wrapHtml(bump.body, bump.accountName, bump.to);
 
       try {
         // Resend message ID format for In-Reply-To header
@@ -228,12 +238,15 @@ async function main() {
         const { data, error } = await resend.emails.send({
           from: FROM,
           to: bump.to,
+          reply_to: 'casey@freightroll.com',
           subject: bump.subject,
           html,
           text: bump.body,
           headers: {
             'In-Reply-To': messageId,
             'References': messageId,
+            'List-Unsubscribe': `<${BASE_URL}/unsubscribe?email=${encodeURIComponent(bump.to)}>`,
+            'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
           },
         });
 

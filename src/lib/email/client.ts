@@ -1,5 +1,6 @@
 import sgMail from '@sendgrid/mail';
 import { Resend } from 'resend';
+import { listUnsubscribeHeaders, htmlToPlainText } from './templates';
 
 const SENDGRID_KEY = process.env.SENDGRID_API_KEY?.trim();
 const RESEND_KEY = process.env.RESEND_API_KEY?.trim();
@@ -19,6 +20,7 @@ export interface EmailPayload {
 async function sendViaSendGrid(payload: EmailPayload) {
   if (!SENDGRID_KEY) throw new Error('SENDGRID_API_KEY not set');
   sgMail.setApiKey(SENDGRID_KEY);
+  const unsubHeaders = listUnsubscribeHeaders(payload.to);
   const [response] = await sgMail.send({
     to: payload.to,
     cc: payload.cc || undefined,
@@ -26,7 +28,9 @@ async function sendViaSendGrid(payload: EmailPayload) {
     from: { email: SENDGRID_FROM, name: FROM_NAME },
     subject: payload.subject,
     html: payload.html,
-    trackingSettings: { clickTracking: { enable: true }, openTracking: { enable: true } },
+    text: htmlToPlainText(payload.html),
+    headers: unsubHeaders,
+    trackingSettings: { clickTracking: { enable: false }, openTracking: { enable: false } },
   });
   return { provider: 'sendgrid' as const, id: response.headers?.['x-message-id'] ?? null };
 }
@@ -36,14 +40,17 @@ async function sendViaSendGrid(payload: EmailPayload) {
 async function sendViaResend(payload: EmailPayload) {
   if (!RESEND_KEY) throw new Error('RESEND_API_KEY not set');
   const resend = new Resend(RESEND_KEY);
+  const unsubHeaders = listUnsubscribeHeaders(payload.to);
   const { data, error } = await resend.emails.send({
     from: `${FROM_NAME} <${FROM_EMAIL}>`,
     to: payload.to,
     cc: payload.cc || undefined,
     bcc: payload.bcc || undefined,
-    replyTo: FROM_EMAIL,
+    replyTo: process.env.REPLY_TO_EMAIL ?? 'casey@freightroll.com',
     subject: payload.subject,
     html: payload.html,
+    text: htmlToPlainText(payload.html),
+    headers: unsubHeaders,
   });
   if (error) throw new Error(error.message ?? 'Resend send failed');
   if (!data?.id) throw new Error('Resend returned no message ID');
