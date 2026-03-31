@@ -186,10 +186,15 @@ async function main() {
     ),
     followed AS (
       SELECT DISTINCT to_email FROM email_logs WHERE subject LIKE 'Re:%'
+    ),
+    unsubs AS (
+      SELECT email FROM unsubscribed_emails
     )
     SELECT i.* FROM initials i
     LEFT JOIN followed f ON i.to_email = f.to_email
+    LEFT JOIN unsubs u ON i.to_email = u.email
     WHERE f.to_email IS NULL
+      AND u.email IS NULL
     ORDER BY i.account_name
     OFFSET ${offset}
     LIMIT ${batchSize}

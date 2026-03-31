@@ -153,11 +153,16 @@ async function main() {
         AND l1.subject LIKE 'Re:%'
         AND l2.subject LIKE 'Re:%'
         AND l1.id != l2.id
+    ),
+    unsubs AS (
+      SELECT email FROM unsubscribed_emails
     )
     SELECT t2.*
     FROM touch2 t2
     LEFT JOIN touch3_sent t3 ON t2.to_email = t3.to_email
+    LEFT JOIN unsubs u ON t2.to_email = u.email
     WHERE t3.to_email IS NULL
+      AND u.email IS NULL
     ORDER BY t2.account_name
     OFFSET ${offset}
     LIMIT ${batchSize}

@@ -169,17 +169,27 @@ async function main() {
     select: { to_email: true },
   });
   const bouncedSet = new Set(bouncedEmails.map(e => e.to_email));
-  
+
+  const unsubscribedEmails = await prisma.unsubscribedEmail.findMany({
+    where: { email: { in: campaignEmails.map(e => e.to_email) } },
+    select: { email: true },
+  });
+  const unsubscribedSet = new Set(unsubscribedEmails.map(e => e.email));
+
   const eligible = campaignEmails.filter(e => {
     const domain = e.to_email.split('@')[1]?.toLowerCase();
     if (BANNED_DOMAINS.some(d => domain?.includes(d))) return false;
     if (bouncedSet.has(e.to_email)) return false;
+    if (unsubscribedSet.has(e.to_email)) return false;
     return true;
   });
 
-  console.log(`Eligible after bounce/ban filter: ${eligible.length}`);
+  console.log(`Eligible after bounce/ban/unsub filter: ${eligible.length}`);
   if (bouncedSet.size > 0) {
     console.log(`Excluded ${bouncedSet.size} bounced/complained addresses`);
+  }
+  if (unsubscribedSet.size > 0) {
+    console.log(`Excluded ${unsubscribedSet.size} unsubscribed addresses`);
   }
 
   // Build bump items

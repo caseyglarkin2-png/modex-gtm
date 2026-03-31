@@ -177,11 +177,16 @@ async function main() {
       FROM email_logs
       WHERE subject LIKE 'Re:%'
         OR subject ILIKE '%technical issue%'
+    ),
+    unsubs AS (
+      SELECT email FROM unsubscribed_emails
     )
     SELECT i.*
     FROM initial_emails i
     LEFT JOIN already_followed f ON i.to_email = f.to_email
+    LEFT JOIN unsubs u ON i.to_email = u.email
     WHERE f.to_email IS NULL
+      AND u.email IS NULL
     ORDER BY i.account_name, i.sent_at ASC
   `;
 
