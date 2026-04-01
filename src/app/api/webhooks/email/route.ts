@@ -1,14 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Webhook } from 'svix';
+import crypto from 'crypto';
 import { prisma } from '@/lib/prisma';
 
 /**
- * Resend webhook handler — tracks email delivery, opens, clicks, bounces.
+ * Email webhook handler — tracks delivery, opens, clicks, bounces.
  * POST /api/webhooks/email
  *
- * Resend sends events with this shape:
- * { type: "email.delivered" | "email.opened" | "email.clicked" | "email.bounced" | ...,
- *   data: { email_id: string, ... } }
+ * Currently dormant (Gmail API has no outbound webhooks).
+ * Kept for future use if an external tracking provider is added.
  */
 
 type ResendEventType =
@@ -32,30 +31,28 @@ interface ResendWebhookPayload {
   };
 }
 
-const WEBHOOK_SECRET = process.env.RESEND_WEBHOOK_SECRET;
+const WEBHOOK_SECRET = process.env.EMAIL_WEBHOOK_SECRET;
 
 export async function POST(req: NextRequest) {
   // Read raw body first — required for HMAC signature verification
   const rawBody = await req.text();
 
-  // Verify Resend webhook signature via svix
+  // Verify webhook signature via HMAC-SHA256
   if (WEBHOOK_SECRET) {
-    const svixId = req.headers.get('svix-id') ?? '';
-    const svixTimestamp = req.headers.get('svix-timestamp') ?? '';
-    const svixSignature = req.headers.get('svix-signature') ?? '';
-
-    if (!svixId || !svixTimestamp || !svixSignature) {
-      return NextResponse.json({ error: 'Missing svix headers' }, { status: 401 });
+    const signature = req.headers.get('x-webhook-signature') ?? '';
+    if (!signature) {
+      return NextResponse.json({ error: 'Missing signature header' }, { status: 401 });
     }
 
-    try {
-      const wh = new Webhook(WEBHOOK_SECRET);
-      wh.verify(rawBody, {
-        'svix-id': svixId,
-        'svix-timestamp': svixTimestamp,
-        'svix-signature': svixSignature,
-      });
-    } catch {
+    const expected = crypto
+      .createHmac('sha256', WEBHOOK_SECRET)
+      .update(rawBody)
+      .digest('hex');
+
+    const valid = signature.length === expected.length &&
+      crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected));
+
+    if (!valid) {
       return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
     }
   }

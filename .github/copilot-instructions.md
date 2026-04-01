@@ -6,7 +6,7 @@ Generate qualified meetings and pipeline for **YardFlow by FreightRoll** targeti
 ## Stack
 - Next.js 16 (App Router) + React 19 + TailwindCSS 4 + shadcn/ui
 - Prisma 6.5 + PostgreSQL (Railway) — deployed on Vercel
-- Email: Resend (primary) → SendGrid (fallback), from: casey@yardflow.ai
+- Email: Gmail API (casey@freightroll.com), from: casey@freightroll.com
 - AI: Gemini 2.5-flash-lite (primary) → OpenAI gpt-4o-mini (fallback)
 - Auth: NextAuth v5 + Google OAuth
 
@@ -15,7 +15,7 @@ Generate qualified meetings and pipeline for **YardFlow by FreightRoll** targeti
 - `src/lib/db.ts` — Prisma async accessors (server components only)
 - `src/lib/actions.ts` — Server actions for all mutations
 - `src/lib/scoring.ts` — Priority scoring engine (ICP Fit 30%, MODEX Signal 20%, Primo Story 20%, Warm Intro 15%, Strategic Value 10%, Meeting Ease 5%)
-- `src/lib/email/` — send pipeline with auto-BCC, webhook tracking
+- `src/lib/email/` — Gmail API send pipeline, webhook tracking
 - `src/lib/ai/` — content generation with provider failover
 
 See `docs/roadmaps/` for architecture decisions, sprint history, and roadmap.
@@ -41,7 +41,7 @@ npx tsx scripts/backfill-email-accounts.ts  # Sync email campaign contacts to DB
 - **`force-dynamic` check**: Before creating or editing any `page.tsx` that uses `dbGet*` or `prisma.*`, confirm `export const dynamic = 'force-dynamic'` is present at the top. This is a Railway build requirement, not optional.
 - **Server Actions** for all mutations — never raw API routes for form submissions.
 - **Zod validation** on all API route inputs (`src/lib/validations.ts`).
-- **No auto-BCC** on Resend sends. Each BCC burns a credit. Casey gets copies via Resend dashboard.
+- **No auto-BCC** on email sends. Casey gets copies via Gmail Sent folder automatically.
 - **Rate limiting** on email endpoints (10/min per IP).
 - **No em dashes (—)** in any email copy or AI-generated content. Use periods, commas, hyphens, or line breaks. Em dashes are the #1 AI-detection giveaway.
 - **Offline-first** for `/capture` — localStorage queue with auto-sync.
@@ -59,4 +59,3 @@ accounts → personas (1:N), outreach_waves (1:N), meeting_briefs (1:1), audit_r
 
 ## Known Issues
 - Danone vs Dannon FK mismatch: 19/20 audit routes seed (cosmetic).
-- Resend webhook URL must be configured in Resend dashboard pointing to `/api/webhooks/email`.

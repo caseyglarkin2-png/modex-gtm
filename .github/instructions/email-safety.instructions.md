@@ -5,13 +5,13 @@ description: "Email sending safety rules. Use when: modifying email send logic, 
 
 # Email Safety Rules
 
-- **NEVER** auto-BCC on Resend sends. Each BCC burns a credit. Casey gets copies via Resend dashboard.
+- **NEVER** auto-BCC on email sends. Casey gets copies via Gmail Sent folder automatically.
 - **ALWAYS** log sends to `email_logs` table with `provider_message_id`
 - **ALWAYS** validate inputs with Zod before sending
 - **NEVER** send email to any @dannon.com or @danone.com address via cold outreach
 - **NEVER** send email to any @bluetriton.com address (existing FreightRoll relationship)
 - **NEVER** exceed rate limit (10 emails/min per IP)
-- **ALWAYS** use Resend first, SendGrid as fallback only
+- **ALWAYS** send via Gmail API (`sendEmail` from `src/lib/email/client.ts`). No other providers.
 - **ALWAYS** wrap body in branded HTML template before sending
 
 # Humanization Rules (anti-AI-detection)

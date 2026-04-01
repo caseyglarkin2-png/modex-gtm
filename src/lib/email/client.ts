@@ -1,13 +1,5 @@
-import sgMail from '@sendgrid/mail';
-import { Resend } from 'resend';
-import { listUnsubscribeHeaders, htmlToPlainText } from './templates';
 import { sendViaGmail, isGmailSenderConfigured } from './gmail-sender';
 
-const SENDGRID_KEY = process.env.SENDGRID_API_KEY?.trim();
-const RESEND_KEY = process.env.RESEND_API_KEY?.trim();
-const FROM_EMAIL = process.env.FROM_EMAIL ?? 'casey@freightroll.com';
-const SENDGRID_FROM = process.env.SENDGRID_FROM_EMAIL ?? FROM_EMAIL;
-const FROM_NAME = process.env.FROM_NAME ?? 'Casey Larkin - YardFlow';
 export interface EmailPayload {
   to: string;
   cc?: string;
@@ -16,75 +8,23 @@ export interface EmailPayload {
   html: string;
 }
 
-// ── SendGrid ─────────────────────────────────────────────────────────
-
-async function sendViaSendGrid(payload: EmailPayload) {
-  if (!SENDGRID_KEY) throw new Error('SENDGRID_API_KEY not set');
-  sgMail.setApiKey(SENDGRID_KEY);
-  const unsubHeaders = listUnsubscribeHeaders(payload.to);
-  const [response] = await sgMail.send({
-    to: payload.to,
-    cc: payload.cc || undefined,
-    bcc: payload.bcc || undefined,
-    from: { email: SENDGRID_FROM, name: FROM_NAME },
-    subject: payload.subject,
-    html: payload.html,
-    text: htmlToPlainText(payload.html),
-    headers: unsubHeaders,
-    trackingSettings: { clickTracking: { enable: false }, openTracking: { enable: false } },
-  });
-  return { provider: 'sendgrid' as const, id: response.headers?.['x-message-id'] ?? null };
-}
-
-// ── Resend ───────────────────────────────────────────────────────────
-
-async function sendViaResend(payload: EmailPayload) {
-  if (!RESEND_KEY) throw new Error('RESEND_API_KEY not set');
-  const resend = new Resend(RESEND_KEY);
-  const unsubHeaders = listUnsubscribeHeaders(payload.to);
-  const { data, error } = await resend.emails.send({
-    from: `${FROM_NAME} <${FROM_EMAIL}>`,
-    to: payload.to,
-    cc: payload.cc || undefined,
-    bcc: payload.bcc || undefined,
-    replyTo: process.env.REPLY_TO_EMAIL ?? 'casey@freightroll.com',
-    subject: payload.subject,
-    html: payload.html,
-    text: htmlToPlainText(payload.html),
-    headers: unsubHeaders,
-  });
-  if (error) throw new Error(error.message ?? 'Resend send failed');
-  if (!data?.id) throw new Error('Resend returned no message ID');
-  return { provider: 'resend' as const, id: data.id };
-}
-
-// ── Public API (try Gmail → SendGrid → Resend) ─────────────────────
-// Gmail first: sends from casey@freightroll.com and auto-mirrors to Sent.
-// SendGrid/Resend as fallbacks.
+// ── Public API (Gmail only) ─────────────────────────────────────────
+// Sends from casey@freightroll.com via Gmail API.
+// Gmail auto-mirrors to Sent folder — no separate mirror step needed.
 
 export async function sendEmail(payload: EmailPayload) {
-  const providers: Array<() => Promise<{ provider: string; id: string | null }>> = [];
-  if (isGmailSenderConfigured()) providers.push(() => sendViaGmail(payload));
-  if (SENDGRID_KEY) providers.push(() => sendViaSendGrid(payload));
-  if (RESEND_KEY) providers.push(() => sendViaResend(payload));
-
-  if (providers.length === 0) {
-    throw new Error('No email provider configured. Set SENDGRID_API_KEY or RESEND_API_KEY.');
+  if (!isGmailSenderConfigured()) {
+    throw new Error(
+      'Gmail API not configured. Set GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, and GOOGLE_REFRESH_TOKEN.'
+    );
   }
 
-  let lastError: Error | null = null;
-  const errors: string[] = [];
-  for (const tryProvider of providers) {
-    try {
-      const result = await tryProvider();
-      return { headers: { 'x-message-id': result.id ?? '' }, statusCode: 202, provider: result.provider, fallbackErrors: errors.length ? errors : undefined };
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
-      errors.push(msg);
-      lastError = err instanceof Error ? err : new Error(String(err));
-    }
-  }
-  throw lastError;
+  const result = await sendViaGmail(payload);
+  return {
+    headers: { 'x-message-id': result.id ?? '' },
+    statusCode: 202,
+    provider: result.provider,
+  };
 }
 
 export async function sendBulk(payloads: EmailPayload[]) {

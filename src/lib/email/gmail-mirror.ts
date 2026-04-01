@@ -1,9 +1,9 @@
 const GMAIL_MIRROR_ENABLED = (process.env.GMAIL_MIRROR_ENABLED ?? 'true').toLowerCase() !== 'false';
-const GMAIL_USER_EMAIL = process.env.GMAIL_USER_EMAIL?.trim() || process.env.SENDGRID_FROM_EMAIL?.trim() || process.env.FROM_EMAIL?.trim();
+const GMAIL_USER_EMAIL = process.env.GMAIL_USER_EMAIL?.trim() || process.env.FROM_EMAIL?.trim();
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID?.trim();
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET?.trim();
 const GOOGLE_REFRESH_TOKEN = process.env.GOOGLE_REFRESH_TOKEN?.trim();
-const FROM_EMAIL = process.env.FROM_EMAIL ?? process.env.SENDGRID_FROM_EMAIL ?? 'casey@freightroll.com';
+const FROM_EMAIL = process.env.FROM_EMAIL ?? 'casey@freightroll.com';
 const FROM_NAME = process.env.FROM_NAME ?? 'Casey Larkin - YardFlow';
 
 interface MirrorPayload {

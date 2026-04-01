@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { SendEmailSchema } from '@/lib/validations';
 import { sendEmail } from '@/lib/email/client';
-import { mirrorEmailToGmailSent } from '@/lib/email/gmail-mirror';
 import { evaluateRecipientEligibility } from '@/lib/email/recipient-guard';
 import { wrapHtml } from '@/lib/email/templates';
 import { rateLimit } from '@/lib/rate-limit';
-import { auth } from '@/lib/auth';
 import DOMPurify from 'isomorphic-dompurify';
 
 export async function POST(req: NextRequest) {
@@ -64,22 +62,6 @@ export async function POST(req: NextRequest) {
     const html = isPlainText ? wrapHtml(sanitizedBody, accountName ?? 'the team', to) : sanitizedBody;
 
     const response = await sendEmail({ to, cc, subject, html });
-    const session = await auth();
-    const sessionLike = (session ?? {}) as { user?: { email?: string }; googleAccessToken?: string };
-
-    // Gmail send auto-mirrors to Sent folder — only mirror for SendGrid/Resend fallback
-    if (response.provider !== 'gmail') {
-      mirrorEmailToGmailSent({
-        to,
-        cc,
-        subject,
-        html,
-        accessToken: sessionLike.googleAccessToken,
-        gmailUserEmail: sessionLike.user?.email,
-      }).catch((err) => {
-        console.warn('Gmail sent mirror failed:', err);
-      });
-    }
 
     // Best-effort DB log — skip if no DB available
     try {
@@ -127,7 +109,7 @@ export async function POST(req: NextRequest) {
       // DB offline — log skipped
     }
 
-    return NextResponse.json({ success: true, message: `Email sent to ${to}`, provider: response.provider ?? 'unknown', fallbackErrors: response.fallbackErrors ?? null, remaining });
+    return NextResponse.json({ success: true, message: `Email sent to ${to}`, provider: response.provider ?? 'unknown', remaining });
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Email send failed';
     return NextResponse.json({ error: message }, { status: 500 });

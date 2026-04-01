@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { BulkSendEmailSchema } from '@/lib/validations';
 import { sendBulk } from '@/lib/email/client';
-import { mirrorEmailToGmailSent } from '@/lib/email/gmail-mirror';
 import { evaluateRecipientEligibility } from '@/lib/email/recipient-guard';
 import { wrapHtml } from '@/lib/email/templates';
 import { rateLimit } from '@/lib/rate-limit';
-import { auth } from '@/lib/auth';
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
@@ -49,26 +47,6 @@ export async function POST(req: NextRequest) {
 
   const payloads = eligibleRecipients.map((r) => ({ to: r.to, subject, html }));
   const results = await sendBulk(payloads);
-  const session = await auth();
-  const sessionLike = (session ?? {}) as { user?: { email?: string }; googleAccessToken?: string };
-
-  // Gmail send auto-mirrors to Sent folder — only mirror for SendGrid/Resend fallback sends
-  for (let i = 0; i < results.length; i++) {
-    const result = results[i];
-    if (result.status !== 'fulfilled') continue;
-    const resultValue = result.value as { provider?: string };
-    if (resultValue.provider === 'gmail') continue; // already in Sent
-    const recipient = eligibleRecipients[i];
-    mirrorEmailToGmailSent({
-      to: recipient.to,
-      subject,
-      html,
-      accessToken: sessionLike.googleAccessToken,
-      gmailUserEmail: sessionLike.user?.email,
-    }).catch((err) => {
-      console.warn('Gmail sent mirror failed for bulk recipient:', recipient.to, err);
-    });
-  }
 
   const sent = results.filter((r) => r.status === 'fulfilled').length;
   const failed = results.filter((r) => r.status === 'rejected').length;

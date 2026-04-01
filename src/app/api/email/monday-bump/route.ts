@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { PrismaClient } from '@prisma/client';
-import { Resend } from 'resend';
+import { sendEmail } from '@/lib/email/client';
 import { rateLimit } from '@/lib/rate-limit';
 import { firstNameFromEmail } from '@/lib/contact-standard';
 
@@ -125,10 +125,6 @@ async function handle(req: NextRequest) {
   const sinceDate = parsed.data.since ? new Date(parsed.data.since) : new Date(Date.now() - 48 * 60 * 60 * 1000);
   const targetBatch = parsed.data.batch ?? null;
   const isDryRun = parsed.data.dryRun ?? false;
-
-  const resend = new Resend(process.env.RESEND_API_KEY);
-  const from = `${process.env.FROM_NAME ?? 'Casey Larkin - YardFlow'} <${process.env.FROM_EMAIL ?? 'casey@yardflow.ai'}>`;
-
   const campaignEmails = await prisma.emailLog.findMany({
     where: {
       created_at: { gte: sinceDate },
@@ -202,24 +198,13 @@ async function handle(req: NextRequest) {
       const html = wrapHtml(bump.body, bump.accountName);
 
       try {
-        const messageId = `<${bump.originalMessageId}@resend.dev>`;
-        const { data, error } = await resend.emails.send({
-          from,
+        const response = await sendEmail({
           to: bump.to,
           subject: bump.subject,
           html,
-          text: bump.body,
-          headers: {
-            'In-Reply-To': messageId,
-            References: messageId,
-          },
         });
 
-        if (error || !data?.id) {
-          failed++;
-          await sleep(RATE_LIMIT_MS);
-          continue;
-        }
+        const messageId = response.headers?.['x-message-id'] ?? null;
 
         await prisma.emailLog.create({
           data: {
@@ -229,7 +214,7 @@ async function handle(req: NextRequest) {
             subject: bump.subject,
             body_html: html,
             status: 'sent',
-            provider_message_id: data.id,
+            provider_message_id: messageId,
           },
         });
 
