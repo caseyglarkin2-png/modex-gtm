@@ -1,7 +1,5 @@
 import { test, expect } from '@playwright/test';
 
-const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
-
 async function login(page: import('@playwright/test').Page) {
   // Get CSRF token from NextAuth
   const csrfRes = await page.request.get('/api/auth/csrf');
