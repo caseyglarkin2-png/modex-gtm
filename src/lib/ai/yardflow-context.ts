@@ -17,7 +17,7 @@ export const YARDFLOW_BRAND = {
     name: 'Casey Larkin',
     title: 'GTM Lead',
     company: 'YardFlow by FreightRoll',
-    email: 'casey@yardflow.ai',
+    email: 'casey@freightroll.com',
   },
 } as const;
 

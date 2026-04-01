@@ -17,9 +17,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Sparkles, Copy, RefreshCw, ChevronDown, Download, FileImage, Eye, Pencil } from 'lucide-react';
+import { Sparkles, Copy, RefreshCw, ChevronDown, Download, FileImage, Eye, Pencil, Send, Mail } from 'lucide-react';
 import { VoicePreviewButton } from '@/components/voice-preview-button';
 import { OnePagerPreview, type OnePagerData, onePagerToHtml } from '@/components/ai/one-pager-preview';
+import { Input } from '@/components/ui/input';
 import type { GenerateContentInput } from '@/lib/validations';
 
 type ContentType = GenerateContentInput['type'];
@@ -70,8 +71,12 @@ export function GeneratorDialog({
   const [onePagerData, setOnePagerData] = useState<OnePagerData | null>(null);
   const [loading, setLoading] = useState(false);
   const [previewMode, setPreviewMode] = useState(true);
+  const [sendEmail, setSendEmail] = useState('');
+  const [sending, setSending] = useState(false);
+  const [showSendForm, setShowSendForm] = useState(false);
 
   const isOnePager = type === 'infographic';
+  const isSendable = type === 'email' || type === 'follow_up';
 
   async function generate() {
     setLoading(true);
@@ -139,6 +144,38 @@ export function GeneratorDialog({
       onUseContent(content, type);
       setOpen(false);
       toast.success('Content applied');
+    }
+  }
+
+  async function handleSend() {
+    if (!content.trim() || !sendEmail.trim()) return;
+    setSending(true);
+    try {
+      // Extract subject from content (first line often is subject-like)
+      const lines = content.trim().split('\n').filter(Boolean);
+      const subjectLine = lines[0]?.replace(/^Subject:\s*/i, '').trim() ?? `From Casey at YardFlow - for ${accountName}`;
+      const bodyText = lines[0]?.toLowerCase().startsWith('subject:') ? lines.slice(1).join('\n').trim() : content.trim();
+
+      const res = await fetch('/api/email/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to: sendEmail.trim(),
+          subject: subjectLine,
+          bodyHtml: bodyText,
+          accountName,
+          personaName,
+        }),
+      });
+      const json = await res.json() as { error?: string };
+      if (!res.ok) throw new Error(json.error ?? 'Send failed');
+      toast.success(`Email sent to ${sendEmail}`);
+      setShowSendForm(false);
+      setSendEmail('');
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Send failed');
+    } finally {
+      setSending(false);
     }
   }
 
@@ -302,10 +339,38 @@ export function GeneratorDialog({
                     Use as Draft
                   </Button>
                 )}
+                {isSendable && content && (
+                  <Button size="sm" onClick={() => setShowSendForm(!showSendForm)} className="gap-1.5">
+                    <Mail className="h-4 w-4" />
+                    Send
+                  </Button>
+                )}
               </>
             )}
           </div>
         </div>
+
+        {/* Send form */}
+        {showSendForm && isSendable && content && (
+          <div className="px-6 py-3 border-t bg-muted/30 flex items-center gap-2">
+            <Input
+              type="email"
+              placeholder="Recipient email..."
+              value={sendEmail}
+              onChange={(e) => setSendEmail(e.target.value)}
+              className="h-8 text-sm flex-1"
+            />
+            <Button
+              size="sm"
+              onClick={handleSend}
+              disabled={sending || !sendEmail.trim()}
+              className="gap-1.5 shrink-0"
+            >
+              {sending ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <Send className="h-3.5 w-3.5" />}
+              {sending ? 'Sending...' : 'Send'}
+            </Button>
+          </div>
+        )}
       </DialogContent>
     </Dialog>
   );

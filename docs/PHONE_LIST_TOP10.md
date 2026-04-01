@@ -113,6 +113,7 @@ These contacts have NOT been suppressed. Touch 4 emails will fire. Phone is a pa
 |---------|---------|-------|-------------|
 | Claudio Parrotta, EVP CSCO | Mondelez | (847) 943-4000 *(East Hanover NJ: (973) 503-2000)* | claudio.parrotta@mdlz.com — SENDING |
 | Cassandra Green, SVP Supply Chain | Campbell's | (856) 342-4800 (same HQ) | cassandra_green@campbells.com — SENDING *(unverified address)* |
+| Coca-Cola supply chain leadership | Coca-Cola | (404) 676-2121 *(Atlanta HQ main)* | No suppressed addresses — reach via phone |
 
 ---
 

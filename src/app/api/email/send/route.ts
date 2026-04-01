@@ -67,17 +67,19 @@ export async function POST(req: NextRequest) {
     const session = await auth();
     const sessionLike = (session ?? {}) as { user?: { email?: string }; googleAccessToken?: string };
 
-    // Best-effort Gmail Sent mirror (non-blocking)
-    mirrorEmailToGmailSent({
-      to,
-      cc,
-      subject,
-      html,
-      accessToken: sessionLike.googleAccessToken,
-      gmailUserEmail: sessionLike.user?.email,
-    }).catch((err) => {
-      console.warn('Gmail sent mirror failed:', err);
-    });
+    // Gmail send auto-mirrors to Sent folder — only mirror for SendGrid/Resend fallback
+    if (response.provider !== 'gmail') {
+      mirrorEmailToGmailSent({
+        to,
+        cc,
+        subject,
+        html,
+        accessToken: sessionLike.googleAccessToken,
+        gmailUserEmail: sessionLike.user?.email,
+      }).catch((err) => {
+        console.warn('Gmail sent mirror failed:', err);
+      });
+    }
 
     // Best-effort DB log — skip if no DB available
     try {

@@ -1,10 +1,11 @@
 import sgMail from '@sendgrid/mail';
 import { Resend } from 'resend';
 import { listUnsubscribeHeaders, htmlToPlainText } from './templates';
+import { sendViaGmail, isGmailSenderConfigured } from './gmail-sender';
 
 const SENDGRID_KEY = process.env.SENDGRID_API_KEY?.trim();
 const RESEND_KEY = process.env.RESEND_API_KEY?.trim();
-const FROM_EMAIL = process.env.FROM_EMAIL ?? 'casey@yardflow.ai';
+const FROM_EMAIL = process.env.FROM_EMAIL ?? 'casey@freightroll.com';
 const SENDGRID_FROM = process.env.SENDGRID_FROM_EMAIL ?? FROM_EMAIL;
 const FROM_NAME = process.env.FROM_NAME ?? 'Casey Larkin - YardFlow';
 export interface EmailPayload {
@@ -57,11 +58,13 @@ async function sendViaResend(payload: EmailPayload) {
   return { provider: 'resend' as const, id: data.id };
 }
 
-// ── Public API (try SendGrid → Resend) ──────────────────────────────
-// SendGrid first: higher quota, established sender. Resend as fallback.
+// ── Public API (try Gmail → SendGrid → Resend) ─────────────────────
+// Gmail first: sends from casey@freightroll.com and auto-mirrors to Sent.
+// SendGrid/Resend as fallbacks.
 
 export async function sendEmail(payload: EmailPayload) {
   const providers: Array<() => Promise<{ provider: string; id: string | null }>> = [];
+  if (isGmailSenderConfigured()) providers.push(() => sendViaGmail(payload));
   if (SENDGRID_KEY) providers.push(() => sendViaSendGrid(payload));
   if (RESEND_KEY) providers.push(() => sendViaResend(payload));
 

@@ -91,7 +91,7 @@ const TIER1_SENDS: Tier1Send[] = [
     to: 'claudio.parrotta@mdlz.com',
     firstName: 'Claudio',
     accountName: 'Mondelez',
-    subject: 'Mondelez Halloween surge — where the yard becomes the bottleneck',
+    subject: 'Mondelez: where Halloween throughput gets tested',
     bodyParagraphs: [
       'Claudio,',
       "Oreo and Ritz aren't difficult supply chains until October hits. Halloween triples inbound volume for a 6-week window. The plants can handle it. The yard often can't.",
@@ -117,7 +117,7 @@ const TIER1_SENDS: Tier1Send[] = [
     to: 'cassandra_green@campbells.com',
     firstName: 'Cassandra',
     accountName: "Campbell's",
-    subject: "Campbell's yard ops — Maxton capacity absorption",
+    subject: "Campbell's yard ops: Maxton capacity absorption",
     bodyParagraphs: [
       'Cassandra,',
       "Wanted to reach out directly given your focus on the Campbell's supply chain network.",
@@ -267,12 +267,12 @@ function broadT4Body(firstName: string, accountName: string, vertical: string): 
 
 function broadT4Subject(accountName: string, vertical: string): string {
   switch (vertical) {
-    case 'food_bev':      return 'Primo Brands at MODEX Tuesday — 15 minutes?';
-    case 'cpg_retail':    return 'MODEX April 13 — Primo Brands on yard ops';
+    case 'food_bev':      return 'Primo Brands at MODEX Tuesday: 15 minutes?';
+    case 'cpg_retail':    return 'MODEX April 13: Primo Brands on yard ops';
     case 'auto_heavy':    return 'MODEX: gate-to-dock sequencing for manufacturing';
     case 'pharma':        return 'MODEX: GDP-compliant yard audit trails';
-    case 'distribution':  return 'MODEX — yard visibility for distribution ops';
-    default:              return 'MODEX April 13-16 — worth 15 minutes?';
+    case 'distribution':  return 'MODEX: yard visibility for distribution ops';
+    default:              return 'MODEX April 13-16: worth 15 minutes?';
   }
 }
 

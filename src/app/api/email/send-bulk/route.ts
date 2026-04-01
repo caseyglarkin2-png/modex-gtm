@@ -52,10 +52,12 @@ export async function POST(req: NextRequest) {
   const session = await auth();
   const sessionLike = (session ?? {}) as { user?: { email?: string }; googleAccessToken?: string };
 
-  // Best-effort Gmail Sent mirror for successful sends (non-blocking)
+  // Gmail send auto-mirrors to Sent folder — only mirror for SendGrid/Resend fallback sends
   for (let i = 0; i < results.length; i++) {
     const result = results[i];
     if (result.status !== 'fulfilled') continue;
+    const resultValue = result.value as { provider?: string };
+    if (resultValue.provider === 'gmail') continue; // already in Sent
     const recipient = eligibleRecipients[i];
     mirrorEmailToGmailSent({
       to: recipient.to,
