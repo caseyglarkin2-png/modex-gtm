@@ -46,7 +46,7 @@ async function refreshGoogleAccessToken(token: TokenLike): Promise<TokenLike> {
 const ALLOWED_EMAILS = [
   'casey@freightroll.com',
   'casey@yardflow.ai',
-  'caseyglarkin@gmail.com',
+  'caseyglarkin2@gmail.com',
   'jake@freightroll.com',
   'jake@yardflow.ai',
 ];
@@ -54,7 +54,7 @@ const ALLOWED_EMAILS = [
 const ADMINS = [
   'casey@freightroll.com',
   'casey@yardflow.ai',
-  'caseyglarkin@gmail.com',
+  'caseyglarkin2@gmail.com',
 ];
 
 export const { handlers, signIn, signOut, auth } = NextAuth({

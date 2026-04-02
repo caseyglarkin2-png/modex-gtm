@@ -156,7 +156,7 @@ async function main() {
 
   const emails = [
     {
-      to: 'caseyglarkin@gmail.com',
+      to: 'caseyglarkin2@gmail.com',
       subject: 'YardFlow Email System - Live Test (from Gmail API)',
       html: `<p>Casey,</p>
 <p>This is an automated system test from the Modex RevOps OS.</p>
@@ -169,7 +169,7 @@ async function main() {
 <p>The platform can now send personalized cold outreach, follow-ups, and one-pagers to all 76 prospect accounts.</p>`,
     },
     {
-      to: 'caseyglarkin@gmail.com',
+      to: 'caseyglarkin2@gmail.com',
       subject: 'Sample Cold Email: How it looks to a prospect',
       html: `<p>Quick question on your distribution network.</p>
 <p>We mapped 24 facilities running a standardized yard protocol last year. Average truck turn dropped from 48 to 24 minutes. The operators stopped adding headcount for peak seasons.</p>
@@ -177,7 +177,7 @@ async function main() {
 <p>We will be at MODEX April 13-16 with live operators who run YardFlow daily across their yards. Would Tuesday April 14 at 10am, 1pm, or 3pm work for 30 minutes?</p>`,
     },
     {
-      to: 'caseyglarkin@gmail.com',
+      to: 'caseyglarkin2@gmail.com',
       subject: 'Sample with One-Pager Links: What prospects see',
       html: `<p>Check out these personalized landing pages - each prospect gets their own:</p>
 <ul>
@@ -212,7 +212,7 @@ async function main() {
   console.log('========================================');
   console.log('  ALL DONE');
   console.log('========================================');
-  console.log('\nCheck caseyglarkin@gmail.com for 3 test emails.');
+  console.log('\nCheck caseyglarkin2@gmail.com for 3 test emails.');
   console.log('GOOGLE_REFRESH_TOKEN is set in Vercel.');
   console.log('Email sending is now permanent - no more setup needed.\n');
 

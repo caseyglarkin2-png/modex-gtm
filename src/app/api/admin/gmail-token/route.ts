@@ -12,7 +12,7 @@ export const dynamic = 'force-dynamic';
 const ADMINS = [
   'casey@freightroll.com',
   'casey@yardflow.ai',
-  'caseyglarkin@gmail.com',
+  'caseyglarkin2@gmail.com',
 ];
 
 export async function GET() {
@@ -43,14 +43,14 @@ export async function GET() {
     try {
       const { sendViaGmail } = await import('@/lib/email/gmail-sender');
       await sendViaGmail({
-        to: 'caseyglarkin@gmail.com',
+        to: 'caseyglarkin2@gmail.com',
         subject: 'YardFlow Email System - Live Test',
         html: `<p>Casey,</p>
 <p>This is an automated test from the Modex RevOps OS. If you're reading this, the Gmail API send pipeline is fully operational.</p>
 <p>From: casey@freightroll.com<br/>Sent via: Gmail API (OAuth2)<br/>Timestamp: ${new Date().toISOString()}</p>
 <p>Next step: set GOOGLE_REFRESH_TOKEN in Vercel env vars to make this permanent.</p>`,
       });
-      emailResult = 'SUCCESS - check caseyglarkin@gmail.com';
+      emailResult = 'SUCCESS - check caseyglarkin2@gmail.com';
     } catch (err) {
       emailResult = `FAILED: ${err instanceof Error ? err.message : String(err)}`;
     }

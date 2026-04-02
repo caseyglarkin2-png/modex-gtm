@@ -5,7 +5,7 @@
 
 import { test, expect } from '@playwright/test';
 
-const PREVIEW_EMAIL = 'caseyglarkin@gmail.com';
+const PREVIEW_EMAIL = 'caseyglarkin2@gmail.com';
 
 async function login(page: import('@playwright/test').Page) {
   const csrfRes = await page.request.get('/api/auth/csrf');

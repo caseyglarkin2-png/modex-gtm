@@ -7,7 +7,7 @@
  * 3. Captures the authorization code
  * 4. Exchanges it for a refresh token
  * 5. Sets GOOGLE_REFRESH_TOKEN in Vercel
- * 6. Sends test emails to caseyglarkin@gmail.com
+ * 6. Sends test emails to caseyglarkin2@gmail.com
  * 
  * Usage: node --env-file=.env.local scripts/setup-gmail-send.mjs
  */
@@ -163,7 +163,7 @@ const server = http.createServer(async (req, res) => {
     <html><body style="font-family:system-ui;max-width:600px;margin:40px auto;text-align:center;">
     <h1 style="color:#22d3ee;">Gmail Connected</h1>
     <p>Authorization code received. Check your terminal for progress.</p>
-    <p>Test emails are being sent to caseyglarkin@gmail.com now.</p>
+    <p>Test emails are being sent to caseyglarkin2@gmail.com now.</p>
     <p style="color:#666;">You can close this tab.</p>
     </body></html>
   `);
@@ -209,7 +209,7 @@ const server = http.createServer(async (req, res) => {
 
     const testEmails = [
       {
-        to: 'caseyglarkin@gmail.com',
+        to: 'caseyglarkin2@gmail.com',
         subject: 'Test 1: YardFlow Email Pipeline - System Check',
         html: `<p>Casey,</p>
 <p>This is an automated system test from the Modex RevOps OS.</p>
@@ -220,7 +220,7 @@ Timestamp: ${new Date().toISOString()}</p>
 <p>The platform can now send personalized cold outreach, follow-ups, and one-pagers to all 76 prospect accounts.</p>`,
       },
       {
-        to: 'caseyglarkin@gmail.com',
+        to: 'caseyglarkin2@gmail.com',
         subject: 'Re: Yard network across your DC footprint',
         html: `<p>Quick question on your distribution network.</p>
 <p>We mapped 24 facilities running a standardized yard protocol last year. Average truck turn dropped from 48 to 24 minutes. The operators stopped adding headcount for peak seasons.</p>
@@ -228,7 +228,7 @@ Timestamp: ${new Date().toISOString()}</p>
 <p>We'll be at MODEX April 13-16, walking live networks with operators who run YardFlow daily. Would Tuesday April 14 at 10am, 1pm, or 3pm work for 30 minutes?</p>`,
       },
       {
-        to: 'caseyglarkin@gmail.com',
+        to: 'caseyglarkin2@gmail.com',
         subject: 'Test 3: One-Pager Link Demo',
         html: `<p>This is what prospects receive - a personalized landing page:</p>
 <p><a href="https://modex-gtm.vercel.app/proposal/general-mills">General Mills One-Pager</a></p>
@@ -250,7 +250,7 @@ Timestamp: ${new Date().toISOString()}</p>
     console.log('\n========================================');
     console.log('  DONE');
     console.log('========================================');
-    console.log('\nCheck caseyglarkin@gmail.com for 3 test emails.');
+    console.log('\nCheck caseyglarkin2@gmail.com for 3 test emails.');
     console.log('GOOGLE_REFRESH_TOKEN has been set in Vercel.');
     console.log('Run "vercel --prod" to redeploy with the new token.\n');
 

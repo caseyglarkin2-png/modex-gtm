@@ -2,7 +2,7 @@
  * Send preview emails to Casey for asset quality review.
  * Usage: npx tsx scripts/send-preview-emails.ts
  *
- * Sends one of each asset type to caseyglarkin@gmail.com for inbox review.
+ * Sends one of each asset type to caseyglarkin2@gmail.com for inbox review.
  */
 
 import { prisma } from '../src/lib/prisma';
@@ -12,7 +12,7 @@ import { generateText } from '../src/lib/ai/client';
 import { buildEmailPrompt, buildOnePagerPrompt } from '../src/lib/ai/prompts';
 import type { OnePagerContext, PromptContext } from '../src/lib/ai/prompts';
 
-const PREVIEW_EMAIL = 'caseyglarkin@gmail.com';
+const PREVIEW_EMAIL = 'caseyglarkin2@gmail.com';
 const TEST_ACCOUNT = 'General Mills';
 
 async function sleep(ms: number) {
@@ -160,7 +160,7 @@ async function main() {
     await sendFollowUpPreview();
 
     console.log('\n=== ALL PREVIEWS SENT ===');
-    console.log('Check caseyglarkin@gmail.com inbox for 3 preview emails.');
+    console.log('Check caseyglarkin2@gmail.com inbox for 3 preview emails.');
     console.log('Look for: [PREVIEW] prefix in subject lines.');
   } catch (err) {
     console.error('Preview send failed:', err);

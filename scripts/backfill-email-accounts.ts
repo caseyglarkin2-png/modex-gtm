@@ -152,7 +152,7 @@ async function main() {
   }>;
 
   const TEST_EMAILS = new Set([
-    'casey@freightroll.com', 'casey@yardflow.ai', 'caseyglarkin@gmail.com',
+    'casey@freightroll.com', 'casey@yardflow.ai', 'caseyglarkin2@gmail.com',
     'jake@freightroll.com', 'jake@yardflow.ai',
   ]);
 
