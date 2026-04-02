@@ -4,10 +4,15 @@
  * Reuses OAuth token refresh from gmail-mirror.ts infrastructure.
  */
 
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID?.trim();
-const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET?.trim();
-const GOOGLE_REFRESH_TOKEN = process.env.GOOGLE_REFRESH_TOKEN?.trim();
-const GMAIL_USER_EMAIL = process.env.GMAIL_USER_EMAIL?.trim() || 'casey@freightroll.com';
+// Read at call time, not module load time, so dynamically-set values work
+function getGmailConfig() {
+  return {
+    clientId: process.env.GOOGLE_CLIENT_ID?.trim(),
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET?.trim(),
+    refreshToken: process.env.GOOGLE_REFRESH_TOKEN?.trim(),
+    userEmail: process.env.GMAIL_USER_EMAIL?.trim() || 'casey@freightroll.com',
+  };
+}
 const FROM_EMAIL = process.env.FROM_EMAIL ?? 'casey@freightroll.com';
 const FROM_NAME = process.env.FROM_NAME ?? 'Casey Larkin - YardFlow';
 
@@ -71,7 +76,8 @@ function buildMimeMessage(payload: GmailSendPayload): string {
 }
 
 async function getAccessToken(): Promise<string> {
-  if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET || !GOOGLE_REFRESH_TOKEN) {
+  const { clientId, clientSecret, refreshToken } = getGmailConfig();
+  if (!clientId || !clientSecret || !refreshToken) {
     throw new Error('Gmail sender not configured: missing GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, or GOOGLE_REFRESH_TOKEN');
   }
 
@@ -79,9 +85,9 @@ async function getAccessToken(): Promise<string> {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({
-      client_id: GOOGLE_CLIENT_ID,
-      client_secret: GOOGLE_CLIENT_SECRET,
-      refresh_token: GOOGLE_REFRESH_TOKEN,
+      client_id: clientId,
+      client_secret: clientSecret,
+      refresh_token: refreshToken,
       grant_type: 'refresh_token',
     }),
   });
@@ -95,11 +101,12 @@ async function getAccessToken(): Promise<string> {
 }
 
 export async function sendViaGmail(payload: GmailSendPayload): Promise<{ provider: 'gmail'; id: string | null }> {
+  const { userEmail } = getGmailConfig();
   const accessToken = await getAccessToken();
   const raw = base64Url(buildMimeMessage(payload));
 
   const res = await fetch(
-    `https://gmail.googleapis.com/gmail/v1/users/${encodeURIComponent(GMAIL_USER_EMAIL)}/messages/send`,
+    `https://gmail.googleapis.com/gmail/v1/users/${encodeURIComponent(userEmail)}/messages/send`,
     {
       method: 'POST',
       headers: {
@@ -123,5 +130,6 @@ export async function sendViaGmail(payload: GmailSendPayload): Promise<{ provide
  * Check if Gmail sender is configured (env vars present).
  */
 export function isGmailSenderConfigured(): boolean {
-  return !!(GOOGLE_CLIENT_ID && GOOGLE_CLIENT_SECRET && GOOGLE_REFRESH_TOKEN);
+  const { clientId, clientSecret, refreshToken } = getGmailConfig();
+  return !!(clientId && clientSecret && refreshToken);
 }

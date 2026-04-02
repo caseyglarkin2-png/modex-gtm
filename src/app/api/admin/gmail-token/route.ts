@@ -33,12 +33,41 @@ export async function GET() {
 
   const refreshToken = record?.content ?? null;
 
+  // If we have the token, try to set it as an env var and send a test email
+  if (refreshToken) {
+    // Set it in process.env so the Gmail sender can use it immediately
+    process.env.GOOGLE_REFRESH_TOKEN = refreshToken;
+
+    // Try sending a test email
+    let emailResult = 'not attempted';
+    try {
+      const { sendViaGmail } = await import('@/lib/email/gmail-sender');
+      await sendViaGmail({
+        to: 'caseyglarkin@gmail.com',
+        subject: 'YardFlow Email System - Live Test',
+        html: `<p>Casey,</p>
+<p>This is an automated test from the Modex RevOps OS. If you're reading this, the Gmail API send pipeline is fully operational.</p>
+<p>From: casey@freightroll.com<br/>Sent via: Gmail API (OAuth2)<br/>Timestamp: ${new Date().toISOString()}</p>
+<p>Next step: set GOOGLE_REFRESH_TOKEN in Vercel env vars to make this permanent.</p>`,
+      });
+      emailResult = 'SUCCESS - check caseyglarkin@gmail.com';
+    } catch (err) {
+      emailResult = `FAILED: ${err instanceof Error ? err.message : String(err)}`;
+    }
+
+    return NextResponse.json({
+      email: session.user.email,
+      hasRefreshToken: true,
+      GOOGLE_REFRESH_TOKEN: refreshToken,
+      testEmailResult: emailResult,
+      note: 'Copy GOOGLE_REFRESH_TOKEN value and add to Vercel env vars to make email permanent.',
+    });
+  }
+
   return NextResponse.json({
     email: session.user.email,
-    hasRefreshToken: !!refreshToken,
-    GOOGLE_REFRESH_TOKEN: refreshToken,
-    note: refreshToken
-      ? 'Copy GOOGLE_REFRESH_TOKEN to Vercel env vars, then delete this endpoint.'
-      : 'No refresh token saved yet. Sign OUT, then sign back in with Google to capture it.',
+    hasRefreshToken: false,
+    GOOGLE_REFRESH_TOKEN: null,
+    note: 'No refresh token saved yet. Sign OUT, then sign back in with Google to capture it.',
   });
 }

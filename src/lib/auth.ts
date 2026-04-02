@@ -96,10 +96,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (account.refresh_token) {
           try {
             const { prisma } = await import('@/lib/prisma');
-            await prisma.generatedContent.upsert({
-              where: { id: -1 },
-              update: { content: account.refresh_token, tone: 'system' },
-              create: { id: -1, account_name: '__system__', content_type: 'google_refresh_token', content: account.refresh_token, tone: 'system' },
+            // Delete old then insert — simpler than upsert with autoincrement
+            await prisma.generatedContent.deleteMany({
+              where: { account_name: '__system__', content_type: 'google_refresh_token' },
+            });
+            await prisma.generatedContent.create({
+              data: { account_name: '__system__', content_type: 'google_refresh_token', content: account.refresh_token, tone: 'system' },
             });
           } catch { /* non-blocking */ }
         }
