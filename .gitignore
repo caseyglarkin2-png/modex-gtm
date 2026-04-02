@@ -5,3 +5,4 @@ node_modules/
 *.tsbuildinfo
 .vercel
 test-results/
+.env*.local

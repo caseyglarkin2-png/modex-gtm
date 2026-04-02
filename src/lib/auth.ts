@@ -91,6 +91,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         mutable.accessToken = account.access_token ?? undefined;
         mutable.accessTokenExpires = account.expires_at ? account.expires_at * 1000 : undefined;
         mutable.refreshToken = account.refresh_token ?? mutable.refreshToken;
+
+        // Persist refresh token to DB so we can bootstrap GOOGLE_REFRESH_TOKEN
+        if (account.refresh_token) {
+          try {
+            const { prisma } = await import('@/lib/prisma');
+            await prisma.generatedContent.upsert({
+              where: { id: -1 },
+              update: { content: account.refresh_token, tone: 'system' },
+              create: { id: -1, account_name: '__system__', content_type: 'google_refresh_token', content: account.refresh_token, tone: 'system' },
+            });
+          } catch { /* non-blocking */ }
+        }
       }
 
       if (mutable.accessToken && mutable.accessTokenExpires && Date.now() < mutable.accessTokenExpires - 60_000) {

@@ -1,12 +1,11 @@
 /**
- * Admin-only endpoint to retrieve the Google refresh token from the current session JWT.
- * Used to bootstrap GOOGLE_REFRESH_TOKEN in Vercel env vars.
- * Only accessible to ADMIN users (casey@freightroll.com, casey@yardflow.ai, caseyglarkin@gmail.com).
+ * Admin-only endpoint to retrieve the Google refresh token.
+ * Reads from DB (saved automatically during Google OAuth sign-in).
  * DELETE this endpoint after you've set GOOGLE_REFRESH_TOKEN in Vercel.
  */
 import { NextResponse } from 'next/server';
-import { getToken } from 'next-auth/jwt';
-import { type NextRequest } from 'next/server';
+import { auth } from '@/lib/auth';
+import { prisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,29 +15,30 @@ const ADMINS = [
   'caseyglarkin@gmail.com',
 ];
 
-export async function GET(req: NextRequest) {
-  const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+export async function GET() {
+  const session = await auth();
 
-  if (!token) {
-    return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
+  if (!session?.user?.email) {
+    return NextResponse.json({ error: 'Not authenticated. Sign in with Google first.' }, { status: 401 });
   }
 
-  const email = token.email as string | undefined;
-  if (!email || !ADMINS.includes(email)) {
+  if (!ADMINS.includes(session.user.email)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
 
-  const refreshToken = (token as Record<string, unknown>).refreshToken as string | undefined;
-  const accessToken = (token as Record<string, unknown>).accessToken as string | undefined;
+  // Read the refresh token saved to DB during Google sign-in
+  const record = await prisma.generatedContent.findFirst({
+    where: { account_name: '__system__', content_type: 'google_refresh_token' },
+  });
+
+  const refreshToken = record?.content ?? null;
 
   return NextResponse.json({
-    email,
+    email: session.user.email,
     hasRefreshToken: !!refreshToken,
-    hasAccessToken: !!accessToken,
-    // Only show tokens if they exist - copy GOOGLE_REFRESH_TOKEN to Vercel env vars
-    GOOGLE_REFRESH_TOKEN: refreshToken ?? null,
+    GOOGLE_REFRESH_TOKEN: refreshToken,
     note: refreshToken
-      ? 'Copy GOOGLE_REFRESH_TOKEN to Vercel env vars, then this endpoint can be deleted.'
-      : 'No refresh token found. You must sign in with Google OAuth (not Credentials) to get a refresh token. Log out and sign back in with your Google account (casey@freightroll.com preferred).',
+      ? 'Copy GOOGLE_REFRESH_TOKEN to Vercel env vars, then delete this endpoint.'
+      : 'No refresh token saved yet. Sign OUT, then sign back in with Google to capture it.',
   });
 }

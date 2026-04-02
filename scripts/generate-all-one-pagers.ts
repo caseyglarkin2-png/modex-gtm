@@ -3,10 +3,12 @@
  * Usage: npx tsx scripts/generate-all-one-pagers.ts
  */
 
-import { prisma } from '../src/lib/prisma';
+import { PrismaClient } from '@prisma/client';
 import { generateText } from '../src/lib/ai/client';
 import { buildOnePagerPrompt } from '../src/lib/ai/prompts';
 import type { OnePagerContext } from '../src/lib/ai/prompts';
+
+const prisma = new PrismaClient();
 
 const DELAY_MS = 3000; // Rate limit: 3s between generations
 
