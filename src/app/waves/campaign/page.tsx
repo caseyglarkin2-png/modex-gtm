@@ -164,7 +164,7 @@ export default async function CampaignPage() {
           </p>
         </div>
         <div className="flex items-center gap-3 text-xs text-[var(--muted-foreground)]">
-          <span className="flex items-center gap-1"><Mail className="h-3.5 w-3.5" /> casey@yardflow.ai</span>
+          <span className="flex items-center gap-1"><Mail className="h-3.5 w-3.5" /> casey@freightroll.com</span>
           <a href={calendarLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-cyan-600 hover:underline">
             <Calendar className="h-3.5 w-3.5" /> Booking Calendar <ExternalLink className="h-3 w-3" />
           </a>

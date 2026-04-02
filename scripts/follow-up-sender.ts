@@ -214,7 +214,7 @@ async function main() {
     try {
       const htmlContent = wrapHtml(body, c.account_name || 'the team', c.to_email);
       const result = await resend.emails.send({
-        from: 'Casey Larkin <casey@yardflow.ai>',
+        from: 'Casey Larkin <casey@freightroll.com>',
         to: c.to_email,
         subject,
         html: htmlContent,

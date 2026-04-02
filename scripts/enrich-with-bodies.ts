@@ -32,7 +32,7 @@ async function main() {
       provider_message_id
     FROM email_logs
     WHERE provider_message_id IS NOT NULL
-      AND to_email NOT IN ('casey@freightroll.com','casey@yardflow.ai')
+      AND to_email NOT IN ('casey@freightroll.com','caseyglarkin2@gmail.com')
     ORDER BY subject, sent_at ASC
   `) as { subject: string; provider_message_id: string }[];
 

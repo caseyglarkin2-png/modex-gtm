@@ -2,7 +2,7 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const TEST_EMAIL = process.env.TEST_EMAIL || 'casey@freightroll.com';
-const FROM_EMAIL = 'Casey Larkin <casey@yardflow.ai>';
+const FROM_EMAIL = 'Casey Larkin <casey@freightroll.com>';
 
 interface TestEmail {
   to: string;

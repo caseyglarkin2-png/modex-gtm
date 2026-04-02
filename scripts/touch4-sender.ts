@@ -295,7 +295,7 @@ async function sendEmail(
 
   const htmlContent = wrapHtml(paragraphs, to);
   const result = await resend.emails.send({
-    from: 'Casey Larkin <casey@yardflow.ai>',
+    from: 'Casey Larkin <casey@freightroll.com>',
     to,
     subject,
     html: htmlContent,

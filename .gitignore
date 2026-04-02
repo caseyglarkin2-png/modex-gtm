@@ -6,3 +6,7 @@ node_modules/
 .vercel
 test-results/
 .env*.local
+.env.vercel-pull
+screenshots/
+.env.vercel-prod
+docs/showcase-proof/*.png

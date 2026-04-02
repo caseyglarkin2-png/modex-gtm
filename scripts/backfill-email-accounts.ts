@@ -152,8 +152,8 @@ async function main() {
   }>;
 
   const TEST_EMAILS = new Set([
-    'casey@freightroll.com', 'casey@yardflow.ai', 'caseyglarkin2@gmail.com',
-    'jake@freightroll.com', 'jake@yardflow.ai',
+    'casey@freightroll.com', 'caseyglarkin2@gmail.com',
+    'jake@freightroll.com',
   ]);
 
   // Build deduplicated account → emails map

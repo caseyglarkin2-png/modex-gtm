@@ -11,7 +11,6 @@ export const dynamic = 'force-dynamic';
 
 const ADMINS = [
   'casey@freightroll.com',
-  'casey@yardflow.ai',
   'caseyglarkin2@gmail.com',
 ];
 

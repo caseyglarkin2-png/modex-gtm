@@ -17,7 +17,7 @@ import { evaluateRecipientEligibility } from '../src/lib/email/recipient-guard';
 
 const prisma = new PrismaClient();
 const resend = new Resend(process.env.RESEND_API_KEY);
-const FROM = `${process.env.FROM_NAME ?? 'Casey Larkin - YardFlow'} <${process.env.FROM_EMAIL ?? 'casey@yardflow.ai'}>`;
+const FROM = `${process.env.FROM_NAME ?? 'Casey Larkin - YardFlow'} <${process.env.FROM_EMAIL ?? 'casey@freightroll.com'}>`;
 const RATE_LIMIT_MS = 6000; // 6 seconds between sends
 
 // Banned domains - NEVER send

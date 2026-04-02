@@ -9,6 +9,7 @@ Generate qualified meetings and pipeline for **YardFlow by FreightRoll** targeti
 - Email: Gmail API (casey@freightroll.com), from: casey@freightroll.com
 - AI: Gemini 2.5-flash-lite (primary) → OpenAI gpt-4o-mini (fallback)
 - Auth: NextAuth v5 + Google OAuth
+- Microsites: `/for/[account]` — personalized account pages with person variants
 
 ## Architecture
 - `src/lib/data.ts` — JSON sync accessors (client/static pages)
@@ -16,9 +17,28 @@ Generate qualified meetings and pipeline for **YardFlow by FreightRoll** targeti
 - `src/lib/actions.ts` — Server actions for all mutations
 - `src/lib/scoring.ts` — Priority scoring engine (ICP Fit 30%, MODEX Signal 20%, Primo Story 20%, Warm Intro 15%, Strategic Value 10%, Meeting Ease 5%)
 - `src/lib/email/` — Gmail API send pipeline, webhook tracking
+- `src/lib/email/recipient-guard.ts` — Pre-send domain/persona blocklist (system-blocked + DB-suppressed)
+- `src/lib/microsites/` — Account microsite data model, rules engine, per-account TypeScript configs
+- `src/components/microsites/` — Section renderers (13 types) + theme system
 - `src/lib/ai/` — content generation with provider failover
+- `scripts/` — CLI batch senders (touch3, touch4, follow-up, monday-bump) + microsite generator
 
 See `docs/roadmaps/` for architecture decisions, sprint history, and roadmap.
+
+## Email Infrastructure (CRITICAL)
+- **ONLY send from `casey@freightroll.com`** via Gmail API. This is the sole authenticated sender.
+- **`casey@yardflow.ai` is BURNED** — never authenticated, never warmed, domain reputation destroyed. NEVER reference this email anywhere in code, templates, or outreach. It is permanently blocked in `recipient-guard.ts`.
+- **`jake@yardflow.ai` is also dead** — same domain, same problem. Remove on sight.
+- **Resend API** is used by CLI batch scripts only (not the app). Scripts must use `casey@freightroll.com` as the from address.
+- **Gmail API** is the app's email provider (`src/lib/email/gmail-sender.ts`). OAuth2 refresh token flow.
+- **Drip sequence**: T1 (initial) -> T2 (follow-up, Re: thread) -> T3 (last-before-MODEX) -> T4 (personalized close + Primo hook) -> Monday bump (re-thread Saturday sends)
+
+## Microsite Architecture
+- 25 account microsites at `/for/[account]` (e.g., `/for/general-mills`)
+- Person-specific variants at `/for/[account]/[person]`
+- Data in `src/lib/microsites/accounts/*.ts` — 4 hand-crafted (general-mills, frito-lay, ab-inbev, coca-cola), 21 generated
+- 13 section types: hero, problem, stakes, solution, proof, network-map, roi, testimonial, modules, timeline, comparison, case-study, cta
+- Page views auto-logged to activities table
 
 ## Build & Test
 ```bash
@@ -59,3 +79,14 @@ accounts → personas (1:N), outreach_waves (1:N), meeting_briefs (1:1), audit_r
 
 ## Known Issues
 - Danone vs Dannon FK mismatch: 19/20 audit routes seed (cosmetic).
+- **yardflow.ai domain is burned** — 213 bounces from unauthenticated sends on 3/27. All batch scripts updated to use `casey@freightroll.com`. Domain permanently blocked in recipient-guard.
+- **Resend batch scripts still reference Resend API** — these should migrate to Gmail API for consistency, but work with `casey@freightroll.com` as-is.
+
+## Campaign Status (as of 2026-04-02)
+- **409 total emails sent** (Resend CSV export)
+- **213 bounced** (all from `casey@yardflow.ai` on 3/27)
+- **181 delivered** to 52 unique prospect domains
+- **3 opened** (tracking limited — Resend pixel, not Gmail)
+- **Delivered domains include**: General Mills, PepsiCo/Frito-Lay, Diageo, Coca-Cola, Campbell's, AB InBev, Ford, Toyota, Caterpillar, Best Buy, Lowe's, Dollar Tree, Whirlpool, Ecolab, Constellation Brands, McCormick, and 36 others
+- **Drip touches completed**: T1 + T2 (follow-up) + T3 (last-before-MODEX) + T4 (personalized close) for Wave 1
+- **MODEX is 11 days away** (April 13-16) — final push window

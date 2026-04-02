@@ -99,8 +99,8 @@ export default function UnsubscribePage() {
           </div>
           <p className="text-xs text-muted-foreground">
             If you unsubscribed by mistake, please contact us at{' '}
-            <a href="mailto:casey@yardflow.ai" className="text-primary hover:underline">
-              casey@yardflow.ai
+            <a href="mailto:casey@freightroll.com" className="text-primary hover:underline">
+              casey@freightroll.com
             </a>
           </p>
         </CardContent>

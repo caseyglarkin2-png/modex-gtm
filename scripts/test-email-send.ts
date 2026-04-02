@@ -11,7 +11,7 @@ import { wrapHtml } from '../src/lib/email/templates';
 import fs from 'fs';
 import path from 'path';
 
-const testRecipient = 'casey@yardflow.ai';
+const testRecipient = 'casey@freightroll.com';
 const accountName = 'Demo Account Corp';
 
 const emailBody = `Hi there,
