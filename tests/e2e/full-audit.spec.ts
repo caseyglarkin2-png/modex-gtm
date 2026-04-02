@@ -74,7 +74,7 @@ test.describe('Full Platform Audit', () => {
 
   test('Meetings page: table and book meeting', async ({ page }) => {
     await page.goto('/meetings');
-    await expect(page.locator('h1')).toContainText('Meetings');
+    await expect(page.locator('h1').first()).toContainText('Meetings');
     await expect(page.getByRole('button', { name: /Book Meeting/i })).toBeVisible();
   });
 
