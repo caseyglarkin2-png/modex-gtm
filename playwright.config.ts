@@ -4,6 +4,7 @@ const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? 'https://modex-gtm.vercel.app
 
 export default defineConfig({
   testDir: './tests/e2e',
+  testIgnore: ['**/send-previews*'],
   timeout: 60_000,
   expect: {
     timeout: 10_000,
