@@ -10,7 +10,7 @@ export default defineConfig({
     timeout: 10_000,
   },
   fullyParallel: false,
-  retries: 0,
+  retries: process.env.CI ? 1 : 0,
   use: {
     baseURL,
     trace: 'retain-on-failure',
