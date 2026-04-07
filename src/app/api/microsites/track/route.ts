@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { rateLimit } from '@/lib/rate-limit';
-import { buildMicrositeEngagementUpdate } from '@/lib/microsites/engagement';
+import {
+  buildMicrositeCtaActivity,
+  buildMicrositeEngagementUpdate,
+  shouldLogMicrositeCtaActivity,
+} from '@/lib/microsites/engagement';
 import { micrositeTrackingSnapshotSchema } from '@/lib/microsites/tracking';
 
 async function parseRequestBody(req: NextRequest): Promise<unknown> {
@@ -47,6 +51,7 @@ export async function POST(req: NextRequest) {
     });
 
     const merged = buildMicrositeEngagementUpdate(existing, snapshot);
+    const shouldLogActivity = shouldLogMicrositeCtaActivity(existing, snapshot);
 
     const engagement = existing
       ? await prisma.micrositeEngagement.update({
@@ -87,6 +92,16 @@ export async function POST(req: NextRequest) {
             metadata: merged.metadata,
           },
         });
+
+    if (shouldLogActivity) {
+      try {
+        await prisma.activity.create({
+          data: buildMicrositeCtaActivity(snapshot),
+        });
+      } catch (activityError) {
+        console.error('Failed to log microsite CTA activity', activityError);
+      }
+    }
 
     return NextResponse.json({
       success: true,

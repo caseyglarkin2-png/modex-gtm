@@ -128,5 +128,7 @@ describe('buildMicrositeAnalyticsSummary', () => {
     expect(summary.accountSummary?.accountName).toBe('Frito-Lay');
     expect(summary.accountSummary?.ctaSessions).toBe(1);
     expect(summary.recentSessions[0]?.path).toBe('/for/frito-lay/brian-watson');
+    expect(summary.variants[0]?.label).toBe('Brian Watson');
+    expect(summary.variants[0]?.ctaSessions).toBe(1);
   });
 });

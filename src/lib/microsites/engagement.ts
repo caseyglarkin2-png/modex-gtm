@@ -59,3 +59,26 @@ export function buildMicrositeEngagementUpdate(
     metadata: mergeStringMaps(existing?.metadata, snapshot.metadata),
   };
 }
+
+export function shouldLogMicrositeCtaActivity(
+  existing: MicrositeEngagementRecordLike | null,
+  snapshot: MicrositeTrackingSnapshot,
+) {
+  if (!snapshot.lastCtaId) return false;
+  return !(existing?.cta_ids ?? []).includes(snapshot.lastCtaId);
+}
+
+export function buildMicrositeCtaActivity(snapshot: MicrositeTrackingSnapshot, now = new Date()) {
+  const viewerLabel = snapshot.personName ? `${snapshot.personName} microsite` : 'overview microsite';
+
+  return {
+    activity_date: now,
+    account_name: snapshot.accountName,
+    persona: snapshot.personName,
+    activity_type: 'Microsite CTA Click',
+    owner: 'system',
+    outcome: 'CTA clicked on microsite',
+    next_step: 'Follow up within 24 hours',
+    notes: `${viewerLabel} clicked ${snapshot.lastCtaId} on ${snapshot.path}. Scroll depth ${snapshot.scrollDepthPct}%. Time on page ${snapshot.durationSeconds}s.`,
+  };
+}

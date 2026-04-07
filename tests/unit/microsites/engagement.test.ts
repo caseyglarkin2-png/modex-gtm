@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { buildMicrositeEngagementUpdate, mergeStringMaps, mergeUniqueValues } from '@/lib/microsites/engagement';
+import {
+  buildMicrositeCtaActivity,
+  buildMicrositeEngagementUpdate,
+  mergeStringMaps,
+  mergeUniqueValues,
+  shouldLogMicrositeCtaActivity,
+} from '@/lib/microsites/engagement';
 import { micrositeTrackingSnapshotSchema } from '@/lib/microsites/tracking';
 
 describe('microsite engagement merge helpers', () => {
@@ -48,5 +54,49 @@ describe('microsite engagement merge helpers', () => {
     expect(merged.scroll_depth_pct).toBe(86);
     expect(merged.duration_seconds).toBe(90);
     expect(merged.last_cta_id).toBe('hero-cta');
+  });
+
+  it('logs CTA activity only when a CTA id is newly observed', () => {
+    const snapshot = micrositeTrackingSnapshotSchema.parse({
+      sessionId: 'session-123',
+      accountSlug: 'frito-lay',
+      accountName: 'Frito-Lay',
+      personSlug: 'brian-watson',
+      personName: 'Brian Watson',
+      path: '/for/frito-lay/brian-watson',
+      sectionsViewed: ['hero', 'proof'],
+      ctaIds: ['header-booking'],
+      variantHistory: ['brian-watson'],
+      scrollDepthPct: 84,
+      durationSeconds: 92,
+      lastCtaId: 'header-booking',
+    });
+
+    expect(shouldLogMicrositeCtaActivity(null, snapshot)).toBe(true);
+    expect(shouldLogMicrositeCtaActivity({ cta_ids: ['header-booking'] }, snapshot)).toBe(false);
+  });
+
+  it('builds an operator-friendly activity row from a CTA click', () => {
+    const snapshot = micrositeTrackingSnapshotSchema.parse({
+      sessionId: 'session-123',
+      accountSlug: 'frito-lay',
+      accountName: 'Frito-Lay',
+      personSlug: 'brian-watson',
+      personName: 'Brian Watson',
+      path: '/for/frito-lay/brian-watson',
+      sectionsViewed: ['hero', 'proof'],
+      ctaIds: ['header-booking'],
+      variantHistory: ['brian-watson'],
+      scrollDepthPct: 84,
+      durationSeconds: 92,
+      lastCtaId: 'header-booking',
+    });
+
+    const activity = buildMicrositeCtaActivity(snapshot, new Date('2026-04-07T12:00:00.000Z'));
+
+    expect(activity.activity_type).toBe('Microsite CTA Click');
+    expect(activity.persona).toBe('Brian Watson');
+    expect(activity.next_step).toContain('24 hours');
+    expect(activity.notes).toContain('header-booking');
   });
 });

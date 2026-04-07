@@ -64,6 +64,19 @@ export interface MicrositeAccountAnalytics {
   avgDurationSeconds: number;
   accountSummary: HotMicrositeAccount | null;
   recentSessions: RecentMicrositeSession[];
+  variants: MicrositeVariantPerformance[];
+}
+
+export interface MicrositeVariantPerformance {
+  label: string;
+  slug: string;
+  path: string;
+  sessionCount: number;
+  highIntentSessions: number;
+  ctaSessions: number;
+  avgScrollDepthPct: number;
+  avgDurationSeconds: number;
+  lastViewedAt: Date;
 }
 
 function pluralize(count: number, singular: string, plural = `${singular}s`) {
@@ -287,6 +300,57 @@ export function buildMicrositeAccountAnalytics(
   now = new Date(),
 ): MicrositeAccountAnalytics {
   const summary = buildMicrositeAnalyticsSummary(sessions, now);
+  const variantMap = new Map<string, Omit<MicrositeVariantPerformance, 'avgScrollDepthPct' | 'avgDurationSeconds'>>();
+
+  for (const session of sessions) {
+    const label = session.person_name ?? 'Overview';
+    const slug = session.person_slug ?? 'overview';
+    const key = session.path;
+    const highIntent = isHighIntentMicrositeSession(session);
+    const existing = variantMap.get(key);
+
+    if (existing) {
+      existing.sessionCount += 1;
+      existing.highIntentSessions += highIntent ? 1 : 0;
+      existing.ctaSessions += session.cta_ids.length > 0 ? 1 : 0;
+      existing.lastViewedAt = session.updated_at.getTime() > existing.lastViewedAt.getTime()
+        ? session.updated_at
+        : existing.lastViewedAt;
+      continue;
+    }
+
+    variantMap.set(key, {
+      label,
+      slug,
+      path: session.path,
+      sessionCount: 1,
+      highIntentSessions: highIntent ? 1 : 0,
+      ctaSessions: session.cta_ids.length > 0 ? 1 : 0,
+      lastViewedAt: session.updated_at,
+    });
+  }
+
+  const variants = Array.from(variantMap.values())
+    .map((variant) => {
+      const variantSessions = sessions.filter((session) => session.path === variant.path);
+
+      return {
+        ...variant,
+        avgScrollDepthPct: Math.round(
+          variantSessions.reduce((sum, session) => sum + session.scroll_depth_pct, 0) / Math.max(variantSessions.length, 1),
+        ),
+        avgDurationSeconds: Math.round(
+          variantSessions.reduce((sum, session) => sum + session.duration_seconds, 0) / Math.max(variantSessions.length, 1),
+        ),
+      };
+    })
+    .sort((left, right) => {
+      if (right.ctaSessions !== left.ctaSessions) return right.ctaSessions - left.ctaSessions;
+      if (right.highIntentSessions !== left.highIntentSessions) return right.highIntentSessions - left.highIntentSessions;
+      if (right.sessionCount !== left.sessionCount) return right.sessionCount - left.sessionCount;
+      return right.lastViewedAt.getTime() - left.lastViewedAt.getTime();
+    })
+    .slice(0, 6);
 
   return {
     totalSessions: summary.totalSessions,
@@ -296,5 +360,6 @@ export function buildMicrositeAccountAnalytics(
     avgDurationSeconds: summary.avgDurationSeconds,
     accountSummary: summary.hotAccounts[0] ?? null,
     recentSessions: summary.recentSessions,
+    variants,
   };
 }

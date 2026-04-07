@@ -10,9 +10,8 @@ import {
   getMeetingBriefByAccount,
   slugify,
   getAuditRoutes,
-  getActivities,
 } from '@/lib/data';
-import { dbGetMicrositeAccountAnalytics } from '@/lib/db';
+import { dbGetActivitiesByAccount, dbGetMicrositeAccountAnalytics } from '@/lib/db';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
@@ -50,8 +49,15 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
   const brief = getMeetingBriefByAccount(account.name);
   const auditRoutes = getAuditRoutes();
   const auditRoute = auditRoutes.find((r) => r.account === account.name);
-  const activities = getActivities().filter((a) => a.account === account.name);
-  const microsite = await dbGetMicrositeAccountAnalytics(account.name);
+  const [microsite, rawActivities] = await Promise.all([
+    dbGetMicrositeAccountAnalytics(account.name),
+    dbGetActivitiesByAccount(account.name),
+  ]);
+  const activities = rawActivities.map((activity) => ({
+    ...activity,
+    activityDateLabel: activity.activity_date ? formatActivityDate(activity.activity_date) : '',
+    nextStepDueLabel: activity.next_step_due ? formatActivityDate(activity.next_step_due) : '',
+  }));
   const micrositeOverviewPath = `/for/${slug}`;
 
   const scoreDims = [
@@ -245,6 +251,42 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                       <MicrositeSessionRow key={`${session.path}-${session.viewedAt.toISOString()}`} session={session} />
                     ))}
                   </div>
+
+                  {microsite.variants.length > 0 && (
+                    <div className="space-y-2">
+                      <p className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Variant Performance</p>
+                      <div className="space-y-2">
+                        {microsite.variants.map((variant) => (
+                          <div key={variant.path} className="rounded-lg border border-[var(--border)] p-3">
+                            <div className="flex flex-wrap items-start justify-between gap-3">
+                              <div>
+                                <div className="flex items-center gap-2">
+                                  <Link href={variant.path} className="text-sm font-medium text-[var(--primary)] hover:underline">
+                                    {variant.label}
+                                  </Link>
+                                  {variant.ctaSessions > 0 ? (
+                                    <Badge className="bg-emerald-600 text-white">CTA active</Badge>
+                                  ) : variant.highIntentSessions > 0 ? (
+                                    <Badge className="bg-amber-500 text-white">High intent</Badge>
+                                  ) : (
+                                    <Badge variant="outline">Watch</Badge>
+                                  )}
+                                </div>
+                                <p className="mt-1 text-xs text-[var(--muted-foreground)]">
+                                  {variant.sessionCount} sessions · {variant.highIntentSessions} high-intent · {variant.ctaSessions} CTA sessions
+                                </p>
+                              </div>
+                              <div className="text-right text-xs text-[var(--muted-foreground)]">
+                                <p>{variant.avgScrollDepthPct}% scroll</p>
+                                <p>{formatMicrositeDuration(variant.avgDurationSeconds)} average read</p>
+                                <p>{formatMicrositeTimestamp(variant.lastViewedAt)}</p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </>
               )}
             </CardContent>
@@ -454,15 +496,15 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
           ) : (
             <div className="relative border-l-2 border-[var(--border)] ml-3 space-y-0">
               {activities.map((a, i) => (
-                <div key={i} className="relative pl-6 pb-5">
+                <div key={a.id ?? i} className="relative pl-6 pb-5">
                   <div className="absolute -left-[5px] top-1 h-2.5 w-2.5 rounded-full bg-[var(--primary)]" />
                   <div className="flex items-center justify-between">
                     <Badge variant="secondary" className="text-xs">{a.activity_type}</Badge>
-                    <span className="text-xs text-[var(--muted-foreground)]">{a.activity_date}</span>
+                    <span className="text-xs text-[var(--muted-foreground)]">{a.activityDateLabel}</span>
                   </div>
                   {a.notes && <p className="mt-1.5 text-sm">{a.notes}</p>}
                   {a.outcome && <p className="mt-1 text-xs">Outcome: {a.outcome}</p>}
-                  {a.next_step && <p className="mt-0.5 text-xs text-[var(--muted-foreground)]">Next: {a.next_step} {a.next_step_due ? `(by ${a.next_step_due})` : ''}</p>}
+                  {a.next_step && <p className="mt-0.5 text-xs text-[var(--muted-foreground)]">Next: {a.next_step} {a.nextStepDueLabel ? `(by ${a.nextStepDueLabel})` : ''}</p>}
                 </div>
               ))}
             </div>
@@ -520,5 +562,13 @@ function formatMicrositeTimestamp(value: Date) {
     day: 'numeric',
     hour: 'numeric',
     minute: '2-digit',
+  });
+}
+
+function formatActivityDate(value: Date) {
+  return value.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
   });
 }
