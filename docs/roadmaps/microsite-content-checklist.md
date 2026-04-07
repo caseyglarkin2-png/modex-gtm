@@ -20,8 +20,17 @@ Use this checklist before promoting an account microsite to flagship status.
 
 1. At least three person variants exist for flagship accounts.
 2. Variants shift the framing, not just the greeting.
-3. KPI language matches the role.
-4. Warm-intro-only accounts do not use cold-booking CTA language.
+3. Variant framing cites actual named-person evidence when available: mandate, quote, prior role, public language, or known pain point.
+4. KPI language matches the individual and their documented operating lens, not just the title.
+5. Warm-intro-only accounts do not use cold-booking CTA language.
+6. Any role-based hypothesis is clearly a fallback and should be replaced by research before flagship promotion.
+
+## Research Grounding
+
+1. Every flagship variant can point to at least two documented person-specific anchors.
+2. Public quotes and known-for language are reflected in copy where useful.
+3. Prior-company context is used only when it sharpens the actual thesis for that person.
+4. Generic claims that could fit any VP at any CPG account are treated as quality failures.
 
 ## Experience Quality
 

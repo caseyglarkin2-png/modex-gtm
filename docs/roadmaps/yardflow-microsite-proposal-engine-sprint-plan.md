@@ -1,6 +1,6 @@
 # YardFlow Microsite Proposal Engine Sprint Plan
 
-Status: Approved for Sprint 0 and Sprint 1
+Status: In progress through Sprint 5
 Created: 2026-04-07
 Primary repo: modex-gtm
 Reference repo: clawd-control-plane
@@ -28,6 +28,51 @@ The build should borrow the best ideas from the proposal engine in clawd-control
 5. Keep Google Calendar booking intact for now, except for warm-intro-only accounts like Dannon.
 6. Preserve `export const dynamic = 'force-dynamic'` on pages that write to Prisma.
 7. Use the existing analytics infrastructure and keep one canonical analytics dashboard.
+8. Personalization must be grounded in named-person research already captured in the account config, not inferred from generic role templates.
+9. Variant copy should prefer documented mandates, quotes, prior-company context, public language, and known pain points before any role-based hypothesis.
+
+## Personalization Standard
+
+This project should move toward research-grounded microsites, not persona cosplay.
+
+1. Every flagship variant must anchor on the actual individual when that research exists.
+2. Role-based assumptions are fallback only, never the lead framing for named targets.
+3. If a variant cannot point to an actual mandate, quote, operating philosophy, or known pain point from research, it is not ready for flagship status.
+4. Generic executive, ops, or logistics language is acceptable only where account research is incomplete and should be treated as temporary debt.
+5. The fastest way to improve quality is to deepen the named-person record, not to invent more abstract persona templates.
+
+## Execution Snapshot
+
+As of 2026-04-07, the engine is materially ahead of the original Sprint 0/Sprint 1 approval point.
+
+### Completed implementation slices
+
+1. Sprint 0 harness and contracts are complete.
+2. Sprint 1 engagement tracking core is complete.
+3. Sprint 2 shell foundation is complete.
+4. Sprint 3 proof primitives are live for Frito-Lay, General Mills, and AB InBev.
+5. Sprint 5 operator surfaces now exist in the canonical analytics dashboard and the account detail page.
+
+### Delivered commits
+
+1. `86cd2054` `feat: build proposal-grade microsite foundation`
+2. `05a586ce` `feat: add canonical microsite analytics dashboard`
+3. `109b750f` `feat: surface account-level microsite signals`
+4. `cf3f2ea6` `feat: upgrade flagship microsite proof narratives`
+5. `a3d3bba2` `feat: expand microsite operator visibility`
+
+### Current operator-visible capabilities
+
+1. Public microsites track section reads, scroll depth, CTA clicks, and variant switching.
+2. The canonical analytics dashboard ranks hot accounts and recent microsite sessions.
+3. Account detail pages show account-level engagement summaries, variant performance, and recent microsite sessions.
+4. New microsite CTA clicks create DB-backed activity rows for follow-up visibility.
+
+### Current open work
+
+1. Export microsite engagement CSV.
+2. Expand flagship role variants with stronger named-person research grounding.
+3. Add variant-switching Playwright coverage.
 
 ## Best Ideas To Port
 
@@ -70,11 +115,11 @@ The build should borrow the best ideas from the proposal engine in clawd-control
 
 ### modex-gtm gaps
 
-1. Only page-view tracking exists today.
-2. No scroll depth, section view, or CTA click telemetry.
-3. No premium shell or progressive reveal system.
-4. No microsite analytics surface.
-5. No content completeness scoring or migration workflow.
+1. Flagship variant depth is still uneven outside Frito-Lay, General Mills, and AB InBev.
+2. CSV export for microsite engagement is not shipped yet.
+3. Variant-switching browser coverage is not shipped yet.
+4. Fast-follow migration tooling and completeness scoring are still ahead on the roadmap.
+5. Some account pages still lean more on role framing than named-person evidence and need cleanup.
 
 ### clawd-control-plane strengths worth learning from
 
@@ -180,10 +225,18 @@ Demoable artifact: person pages change by role in a visible, meaningful way.
 | S4-T1 | Extend `PersonVariant` with proof emphasis, CTA mode, and section order overrides | `src/lib/microsites/schema.ts` | Unit tests cover rule resolution |
 | S4-T2 | Update rule engine to respect proof ordering and hidden sections | `src/lib/microsites/rules.ts` | Rules tests for executive, ops, and transformation flows |
 | S4-T3 | Add variant-aware shell props for thesis and action framing | `src/components/microsites/microsite-shell.tsx` | Component tests for variant modes |
-| S4-T4 | Expand Frito-Lay variants to five complete role-specific views | `src/lib/microsites/accounts/frito-lay.ts` | Manual review checklist and build |
-| S4-T5 | Expand General Mills variants to five complete role-specific views | `src/lib/microsites/accounts/general-mills.ts` | Manual review checklist and build |
+| S4-T4 | Expand Frito-Lay variants to five complete named-person views using documented mandate, language, and proof emphasis | `src/lib/microsites/accounts/frito-lay.ts` | Manual review checklist and build |
+| S4-T5 | Expand General Mills variants to five complete named-person views using documented mandate, language, and proof emphasis | `src/lib/microsites/accounts/general-mills.ts` | Manual review checklist and build |
 | S4-T6 | Add Dannon warm-intro CTA mode with no direct cold-booking framing | `src/lib/microsites/accounts/dannon.ts`, renderer files | Manual review confirms intro-only route copy |
 | S4-T7 | Add Playwright variant-switching spec for flagship accounts | new `tests/e2e/microsite-variants.spec.ts` | Test confirms different copy and CTA states |
+
+### Sprint 4 execution note
+
+For flagship accounts, the standard is now named-person personalization first.
+
+1. Start with the real person record in the account config.
+2. Use role-based fallback only where the person record is missing evidence.
+3. Treat any generic variant framing as backlog to be replaced with documented research.
 
 ## Sprint 5 - Analytics And Operator Surfaces
 
@@ -260,3 +313,4 @@ These are explicitly out of the initial build sequence.
 1. Sprint 0 adds Vitest and Testing Library now.
 2. The flagship build order remains Frito-Lay, General Mills, AB InBev, Coca-Cola, Dannon.
 3. Microsite analytics will extend the existing canonical analytics dashboard in `src/app/analytics/page.tsx`.
+4. Named-person research beats generic role templates whenever account research exists.
