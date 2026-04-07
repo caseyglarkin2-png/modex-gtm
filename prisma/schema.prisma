@@ -48,6 +48,7 @@ model Account {
   activities     Activity[]
   meetings       Meeting[]
   mobile_captures MobileCapture[]
+  microsite_engagements MicrositeEngagement[]
 
   @@map("accounts")
 }
@@ -214,6 +215,34 @@ model Activity {
 
   @@index([account_name])
   @@map("activities")
+}
+
+model MicrositeEngagement {
+  id               String   @id @default(cuid())
+  session_id       String
+  account_slug     String
+  account_name     String
+  person_slug      String?
+  person_name      String?
+  variant_slug     String?
+  path             String
+  sections_viewed  String[] @default([])
+  cta_ids          String[] @default([])
+  variant_history  String[] @default([])
+  last_cta_id      String?
+  scroll_depth_pct Int      @default(0)
+  duration_seconds Int      @default(0)
+  metadata         Json?
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+
+  account Account @relation(fields: [account_name], references: [name])
+
+  @@unique([session_id, path])
+  @@index([account_name])
+  @@index([account_slug])
+  @@index([person_slug])
+  @@map("microsite_engagements")
 }
 
 model Meeting {

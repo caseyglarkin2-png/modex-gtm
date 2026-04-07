@@ -1,4 +1,5 @@
 import { z } from 'zod';
+export { micrositeTrackingSnapshotSchema as MicrositeTrackingSchema } from './microsites/tracking';
 
 // ── Capture ──────────────────────────────────────────
 export const CaptureSchema = z.object({

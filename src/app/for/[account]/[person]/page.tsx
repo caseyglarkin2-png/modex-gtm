@@ -2,14 +2,20 @@ export const dynamic = 'force-dynamic';
 
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import type { MicrositeSection } from '@/lib/microsites/schema';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
 import { resolveMicrositeBySlug, getVariantRoutes } from '@/lib/microsites/rules';
+import { MicrositeShell, getMicrositeSectionNavItems } from '@/components/microsites/microsite-shell';
+import { Reveal } from '@/components/microsites/reveal';
 import { MicrositeSectionRenderer } from '@/components/microsites/sections';
-import { getAccentClasses } from '@/components/microsites/theme';
+import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
 import { prisma } from '@/lib/prisma';
-import Link from 'next/link';
 
 const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
+
+function isProblemSection(section: MicrositeSection): section is Extract<MicrositeSection, { type: 'problem' }> {
+  return section.type === 'problem';
+}
 
 export async function generateMetadata({
   params,
@@ -42,7 +48,13 @@ export default async function PersonMicrositePage({
 
   const { sections, person: personProfile, variant } = resolved;
   const variants = getVariantRoutes(data);
-  const accent = getAccentClasses(data.theme?.accentColor);
+  const navItems = getMicrositeSectionNavItems(sections);
+  const problemSection = sections.find(isProblemSection);
+  const focusPoints =
+    personProfile.strategicPriorities?.slice(0, 4) ??
+    variant.kpiLanguage.slice(0, 4) ??
+    problemSection?.painPoints.slice(0, 4).map((point) => point.headline) ??
+    ['Dock throughput', 'Trailer visibility', 'Execution variance', 'Network impact'];
 
   // Log person-specific page view
   try {
@@ -61,86 +73,51 @@ export default async function PersonMicrositePage({
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
-      {/* Header */}
-      <header className="border-b border-slate-800 bg-slate-900/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div>
-            <h1 className="text-xl font-bold tracking-tight">
-              <span className="text-cyan-400">Yard</span><span>Flow</span>
-              <span className="text-slate-400 text-sm font-normal ml-2">by FreightRoll</span>
-            </h1>
-          </div>
-          <a
-            href={resolved.cta.calendarLink ?? BOOKING_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${accent.bg} ${accent.bgHover} text-slate-900 font-semibold text-sm px-4 py-2 rounded-lg transition-colors`}
-          >
-            {resolved.cta.buttonLabel}
-          </a>
-        </div>
-      </header>
-
-      {/* Person-specific variant navigation */}
-      {variants.length > 1 && (
-        <nav className="border-b border-slate-800 bg-slate-900/30">
-          <div className="max-w-4xl mx-auto px-6 py-3 flex items-center gap-3 overflow-x-auto">
-            <Link
-              href={`/for/${account}`}
-              className="shrink-0 text-xs text-slate-400 hover:text-slate-300 bg-slate-800/30 hover:bg-slate-800/50 border border-slate-700/30 rounded-full px-3 py-1 transition-colors"
-            >
-              Overview
-            </Link>
-            {variants.map((v) => (
-              <Link
-                key={v.slug}
-                href={`/for/${account}/${v.slug}`}
-                className={`shrink-0 text-xs rounded-full px-3 py-1 transition-colors border ${
-                  v.slug === person
-                    ? 'text-cyan-300 bg-cyan-950/50 border-cyan-800/50'
-                    : 'text-cyan-400 hover:text-cyan-300 bg-cyan-950/30 hover:bg-cyan-950/50 border-cyan-900/30'
-                }`}
-              >
-                {v.personName}
-              </Link>
-            ))}
-          </div>
-        </nav>
-      )}
-
-      {/* Person identifier */}
-      <div className="max-w-4xl mx-auto px-6 pt-6">
-        <p className="text-xs tracking-[0.25em] text-cyan-300 uppercase font-semibold">
-          For {personProfile.name} &middot; {data.accountName}
-        </p>
-        <p className="text-[10px] text-slate-500 mt-1">
-          {personProfile.title}
-        </p>
-      </div>
-
-      {/* Framing narrative */}
-      {variant.framingNarrative && (
-        <div className="max-w-4xl mx-auto px-6 pt-6">
-          <div className="bg-slate-900/50 rounded-lg px-5 py-4 border border-slate-800 border-l-2 border-l-cyan-400/60">
-            <p className="text-sm text-slate-300 leading-relaxed">{variant.framingNarrative}</p>
-          </div>
-        </div>
-      )}
-
-      {/* Sections */}
-      <main>
+    <>
+      <MicrositeTracker
+        accountName={data.accountName}
+        accountSlug={data.slug}
+        personName={personProfile.name}
+        personSlug={person}
+        path={`/for/${account}/${person}`}
+        variantSlug={variant.variantSlug}
+      />
+      <MicrositeShell
+        accountName={data.accountName}
+        accentColor={data.theme?.accentColor}
+        contextLabel={`For ${personProfile.name} · ${data.accountName}`}
+        contextDetail={[personProfile.title, personProfile.currentMandate].filter(Boolean).join(' · ')}
+        framingNarrative={variant.framingNarrative}
+        title={`${personProfile.firstName} ${personProfile.lastName} operating brief`}
+        summary={variant.openingHook}
+        thesis={variant.stakeStatement}
+        focusPoints={focusPoints}
+        navItems={navItems}
+        primaryCta={{
+          href: resolved.cta.calendarLink ?? BOOKING_LINK,
+          label: resolved.cta.buttonLabel,
+        }}
+        statusLabel={`${data.band}-Band · ${personProfile.function}`}
+        variantLinks={[
+          { href: `/for/${account}`, label: 'Overview', slug: 'overview' },
+          ...variants.map((entry) => ({
+            href: `/for/${account}/${entry.slug}`,
+            label: entry.personName,
+            slug: entry.slug,
+            active: entry.slug === person,
+          })),
+        ]}
+      >
         {sections.map((section, i) => (
-          <MicrositeSectionRenderer key={`${section.type}-${i}`} section={section} accentColor={data.theme?.accentColor} />
+          <Reveal key={`${section.type}-${i}`} delayMs={Math.min(i * 90, 360)}>
+            <MicrositeSectionRenderer
+              section={section}
+              sectionId={section.sectionId ?? `${section.type}-${i + 1}`}
+              accentColor={data.theme?.accentColor}
+            />
+          </Reveal>
         ))}
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t border-slate-800 mt-8">
-        <div className="max-w-4xl mx-auto px-6 py-6 text-center text-xs text-slate-500">
-          <p>YardFlow by FreightRoll &middot; casey@freightroll.com</p>
-        </div>
-      </footer>
-    </div>
+      </MicrositeShell>
+    </>
   );
 }

@@ -25,12 +25,13 @@ import type {
 import { getAccentClasses, type AccentClasses } from './theme';
 
 // ── CTA Button ────────────────────────────────────────────────────────
-function CTAButton({ cta, accent }: { cta: CTABlock; accent: AccentClasses }) {
+function CTAButton({ cta, accent, ctaId }: { cta: CTABlock; accent: AccentClasses; ctaId: string }) {
   return (
     <a
       href={cta.calendarLink ?? '#'}
       target="_blank"
       rel="noopener noreferrer"
+      data-ms-cta-id={ctaId}
       className={`inline-block ${accent.bg} ${accent.bgHover} text-slate-900 font-bold text-sm px-8 py-3 rounded-lg transition-colors`}
     >
       {cta.buttonLabel}
@@ -55,7 +56,7 @@ export function HeroSectionComponent({ section, accent }: { section: HeroSection
           {section.subheadline}
         </p>
         <div className="mt-8">
-          <CTAButton cta={section.cta} accent={accent} />
+          <CTAButton cta={section.cta} accent={accent} ctaId={section.sectionId ?? 'hero-cta'} />
         </div>
       </div>
     </section>
@@ -193,6 +194,85 @@ export function ProofSectionComponent({ section, accent }: { section: ProofSecti
         )}
         <h2 className="text-2xl font-bold text-white mb-6 text-center">{section.headline}</h2>
 
+        {section.proofVisual && (
+          <div className="mb-6 rounded-2xl border border-slate-700/50 bg-slate-950/40 p-5">
+            {section.proofVisual.headline && (
+              <h3 className="text-lg font-semibold text-white">{section.proofVisual.headline}</h3>
+            )}
+            {section.proofVisual.narrative && (
+              <p className="mt-2 text-sm leading-relaxed text-slate-300">{section.proofVisual.narrative}</p>
+            )}
+
+            {section.proofVisual.type === 'metric-grid' && section.proofVisual.stats && (
+              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                {section.proofVisual.stats.map((stat, index) => (
+                  <div key={index} className="rounded-xl border border-slate-700/50 bg-slate-900/60 p-4">
+                    <p className={`text-2xl font-bold ${accent.textLight}`}>{stat.value}</p>
+                    <p className="mt-2 text-xs uppercase tracking-[0.22em] text-slate-400">{stat.label}</p>
+                    {stat.context && <p className="mt-2 text-xs leading-relaxed text-slate-500">{stat.context}</p>}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {section.proofVisual.type === 'before-after' && section.proofVisual.beforeAfter && (
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                <div className="rounded-xl border border-slate-700/50 bg-slate-900/60 p-4">
+                  <p className="text-[10px] uppercase tracking-[0.22em] text-slate-500">{section.proofVisual.beforeAfter.before.label}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-300">{section.proofVisual.beforeAfter.before.description}</p>
+                </div>
+                <div className="rounded-xl border border-slate-700/50 bg-slate-900/60 p-4">
+                  <p className={`text-[10px] uppercase tracking-[0.22em] ${accent.textLight}`}>{section.proofVisual.beforeAfter.after.label}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-200">{section.proofVisual.beforeAfter.after.description}</p>
+                </div>
+              </div>
+            )}
+
+            {section.proofVisual.type === 'comparison' && section.proofVisual.comparisonData && (
+              <div className="mt-4 overflow-x-auto">
+                {section.proofVisual.comparisonLabel && (
+                  <p className="mb-3 text-sm font-semibold text-white">{section.proofVisual.comparisonLabel}</p>
+                )}
+                <table className="w-full text-xs">
+                  <thead>
+                    <tr className="border-b border-slate-700">
+                      <th className="py-2 text-left font-medium text-slate-400">Metric</th>
+                      <th className="py-2 text-left font-medium text-slate-400">Current</th>
+                      <th className={`py-2 text-left font-medium ${accent.text}`}>With YardFlow</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {section.proofVisual.comparisonData.map((row, index) => (
+                      <tr key={index} className="border-b border-slate-800">
+                        <td className="py-2 text-slate-300">{row.metric}</td>
+                        <td className="py-2 text-slate-400">{row.competitor}</td>
+                        <td className={`py-2 font-semibold ${accent.textLight}`}>{row.yardflow}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        )}
+
+        {section.liveDeployment && (
+          <div className={`mb-6 rounded-2xl border bg-slate-950/40 p-5 ${accent.border}`}>
+            <p className="text-xs uppercase tracking-[0.22em] text-slate-500">Live Deployment</p>
+            <h3 className="mt-3 text-lg font-semibold text-white">{section.liveDeployment.headline}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-300">{section.liveDeployment.summary}</p>
+            {section.liveDeployment.badges && section.liveDeployment.badges.length > 0 && (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {section.liveDeployment.badges.map((badge, index) => (
+                  <span key={index} className="rounded-full border border-slate-700/50 bg-slate-900/60 px-3 py-1 text-xs text-slate-200">
+                    {badge}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
         {section.blocks.map((block, i) => (
           <div key={i} className="mb-6">
             {block.type === 'metric' && block.stats && (
@@ -246,6 +326,13 @@ export function ProofSectionComponent({ section, accent }: { section: ProofSecti
             )}
           </div>
         ))}
+
+        {section.methodology && (
+          <div className="rounded-xl border border-slate-800 bg-slate-950/40 px-4 py-3">
+            <p className="text-[10px] uppercase tracking-[0.22em] text-slate-500">Methodology</p>
+            <p className="mt-2 text-xs leading-relaxed text-slate-400">{section.methodology}</p>
+          </div>
+        )}
       </div>
     </section>
   );
@@ -524,7 +611,7 @@ export function CTASectionComponent({ section, accent }: { section: CTASection; 
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-2xl font-bold text-white mb-3">{section.cta.headline}</h2>
         <p className="text-sm text-slate-400 mb-6 max-w-xl mx-auto">{section.cta.subtext}</p>
-        <CTAButton cta={section.cta} accent={accent} />
+        <CTAButton cta={section.cta} accent={accent} ctaId={section.sectionId ?? 'cta'} />
         {section.closingLine && (
           <p className="mt-6 text-xs text-slate-500">{section.closingLine}</p>
         )}
@@ -538,40 +625,56 @@ export function CTASectionComponent({ section, accent }: { section: CTASection; 
 export function MicrositeSectionRenderer({
   section,
   accentColor,
+  sectionId,
 }: {
   section: MicrositeSection;
   accentColor?: string;
+  sectionId?: string;
 }) {
   const accent = getAccentClasses(accentColor);
+  const resolvedSectionId = sectionId ?? section.sectionId ?? section.type;
+  const content = (() => {
+    switch (section.type) {
+      case 'hero':
+        return <HeroSectionComponent section={section} accent={accent} />;
+      case 'problem':
+        return <ProblemSectionComponent section={section} />;
+      case 'stakes':
+        return <StakesSectionComponent section={section} />;
+      case 'solution':
+        return <SolutionSectionComponent section={section} accent={accent} />;
+      case 'proof':
+        return <ProofSectionComponent section={section} accent={accent} />;
+      case 'network-map':
+        return <NetworkMapSectionComponent section={section} accent={accent} />;
+      case 'roi':
+        return <ROISectionComponent section={section} accent={accent} />;
+      case 'testimonial':
+        return <TestimonialSectionComponent section={section} accent={accent} />;
+      case 'modules':
+        return <ModulesSectionComponent section={section} accent={accent} />;
+      case 'timeline':
+        return <TimelineSectionComponent section={section} accent={accent} />;
+      case 'comparison':
+        return <ComparisonSectionComponent section={section} accent={accent} />;
+      case 'case-study':
+        return <CaseStudySectionComponent section={section} />;
+      case 'cta':
+        return <CTASectionComponent section={section} accent={accent} />;
+      default:
+        return null;
+    }
+  })();
 
-  switch (section.type) {
-    case 'hero':
-      return <HeroSectionComponent section={section} accent={accent} />;
-    case 'problem':
-      return <ProblemSectionComponent section={section} />;
-    case 'stakes':
-      return <StakesSectionComponent section={section} />;
-    case 'solution':
-      return <SolutionSectionComponent section={section} accent={accent} />;
-    case 'proof':
-      return <ProofSectionComponent section={section} accent={accent} />;
-    case 'network-map':
-      return <NetworkMapSectionComponent section={section} accent={accent} />;
-    case 'roi':
-      return <ROISectionComponent section={section} accent={accent} />;
-    case 'testimonial':
-      return <TestimonialSectionComponent section={section} accent={accent} />;
-    case 'modules':
-      return <ModulesSectionComponent section={section} accent={accent} />;
-    case 'timeline':
-      return <TimelineSectionComponent section={section} accent={accent} />;
-    case 'comparison':
-      return <ComparisonSectionComponent section={section} accent={accent} />;
-    case 'case-study':
-      return <CaseStudySectionComponent section={section} />;
-    case 'cta':
-      return <CTASectionComponent section={section} accent={accent} />;
-    default:
-      return null;
-  }
+  if (!content) return null;
+
+  return (
+    <div
+      id={resolvedSectionId}
+      data-ms-section-id={resolvedSectionId}
+      data-ms-narrative-role={section.narrativeRole ?? section.type}
+    >
+      {content}
+    </div>
+  );
 }

@@ -99,6 +99,27 @@ export const fritoLay: AccountMicrositeData = {
       type: 'proof',
       sectionLabel: 'Running in Production',
       headline: 'Measured results from live CPG deployment',
+      proofVisual: {
+        type: 'before-after',
+        headline: 'What changes when the yard runs on one protocol',
+        narrative: 'The difference is not cosmetic. The production-to-trailer handoff stops depending on local tribal knowledge and starts running on one operating standard across the network.',
+        beforeAfter: {
+          before: {
+            label: 'Today',
+            description: 'Clipboards, radio dispatch, and site-by-site variance slow the outbound handoff just as production volume peaks.',
+          },
+          after: {
+            label: 'With YardFlow',
+            description: 'Standardized gate flow, staged move queues, and live dock visibility compress truck turn time at snack-network speed.',
+          },
+        },
+      },
+      liveDeployment: {
+        headline: 'Already live in high-volume CPG operations',
+        summary: 'This is not a concept deck. The operating model is running today across 24 facilities, contracted for more than 200, and proven to absorb new volume without adding dock-office headcount.',
+        badges: ['24 facilities live', '>200 network contracted', '30 min remote deployment'],
+      },
+      methodology: 'Proof metrics reflect measured truck-turn improvement, documented dock-office leverage, and live deployment rollouts in comparable CPG environments.',
       blocks: [
         {
           type: 'metric',

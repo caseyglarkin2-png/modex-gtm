@@ -2,14 +2,24 @@ export const dynamic = 'force-dynamic';
 
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import type { MicrositeSection } from '@/lib/microsites/schema';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
 import { getVariantRoutes } from '@/lib/microsites/rules';
+import { MicrositeShell, getMicrositeSectionNavItems } from '@/components/microsites/microsite-shell';
+import { Reveal } from '@/components/microsites/reveal';
 import { MicrositeSectionRenderer } from '@/components/microsites/sections';
-import { getAccentClasses } from '@/components/microsites/theme';
+import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
 import { prisma } from '@/lib/prisma';
-import Link from 'next/link';
 
 const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
+
+function isHeroSection(section: MicrositeSection): section is Extract<MicrositeSection, { type: 'hero' }> {
+  return section.type === 'hero';
+}
+
+function isProblemSection(section: MicrositeSection): section is Extract<MicrositeSection, { type: 'problem' }> {
+  return section.type === 'problem';
+}
 
 export async function generateMetadata({
   params,
@@ -36,7 +46,12 @@ export default async function AccountMicrositePage({
   if (!data) notFound();
 
   const variants = getVariantRoutes(data);
-  const accent = getAccentClasses(data.theme?.accentColor);
+  const heroSection = data.sections.find(isHeroSection);
+  const problemSection = data.sections.find(isProblemSection);
+  const navItems = getMicrositeSectionNavItems(data.sections);
+  const focusPoints =
+    problemSection?.painPoints.slice(0, 4).map((point) => point.headline) ??
+    ['Dock bottlenecks', 'Trailer staging variance', 'Spotter prioritization', 'Network standardization'];
 
   // Log page view
   try {
@@ -55,67 +70,45 @@ export default async function AccountMicrositePage({
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
-      {/* Header */}
-      <header className="border-b border-slate-800 bg-slate-900/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div>
-            <h1 className="text-xl font-bold tracking-tight">
-              <span className="text-cyan-400">Yard</span><span>Flow</span>
-              <span className="text-slate-400 text-sm font-normal ml-2">by FreightRoll</span>
-            </h1>
-          </div>
-          <a
-            href={BOOKING_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${accent.bg} ${accent.bgHover} text-slate-900 font-semibold text-sm px-4 py-2 rounded-lg transition-colors`}
-          >
-            Book a Network Audit
-          </a>
-        </div>
-      </header>
-
-      {/* Person-specific variant navigation */}
-      {variants.length > 0 && (
-        <nav className="border-b border-slate-800 bg-slate-900/30">
-          <div className="max-w-4xl mx-auto px-6 py-3 flex items-center gap-3 overflow-x-auto">
-            <span className="text-[10px] tracking-[0.2em] uppercase text-slate-500 font-semibold shrink-0">
-              Custom views:
-            </span>
-            {variants.map((v) => (
-              <Link
-                key={v.slug}
-                href={`/for/${account}/${v.slug}`}
-                className="shrink-0 text-xs text-cyan-400 hover:text-cyan-300 bg-cyan-950/30 hover:bg-cyan-950/50 border border-cyan-900/30 rounded-full px-3 py-1 transition-colors"
-              >
-                {v.personName}
-              </Link>
-            ))}
-          </div>
-        </nav>
-      )}
-
-      {/* Account label */}
-      <div className="max-w-4xl mx-auto px-6 pt-6">
-        <p className="text-xs tracking-[0.25em] text-cyan-300 uppercase font-semibold">
-          For {data.accountName}
-        </p>
-      </div>
-
-      {/* Sections */}
-      <main>
+    <>
+      <MicrositeTracker
+        accountName={data.accountName}
+        accountSlug={data.slug}
+        path={`/for/${account}`}
+      />
+      <MicrositeShell
+        accountName={data.accountName}
+        accentColor={data.theme?.accentColor}
+        contextLabel={`For ${data.accountName}`}
+        contextDetail={[data.parentBrand, data.tier, `Priority ${data.band}${data.priorityScore ? ` ${data.priorityScore}` : ''}`]
+          .filter(Boolean)
+          .join(' · ')}
+        title={`${data.accountName} yard execution brief`}
+        summary={data.metaDescription}
+        thesis={heroSection?.headline ?? `The yard is the hidden constraint inside ${data.accountName}'s network.`}
+        focusPoints={focusPoints}
+        navItems={navItems}
+        primaryCta={{
+          href: heroSection?.cta.calendarLink ?? BOOKING_LINK,
+          label: heroSection?.cta.buttonLabel ?? 'Book a Network Audit',
+        }}
+        statusLabel={`${data.band}-Band · ${data.tier}`}
+        variantLinks={variants.map((variant) => ({
+          href: `/for/${account}/${variant.slug}`,
+          label: variant.personName,
+          slug: variant.slug,
+        }))}
+      >
         {data.sections.map((section, i) => (
-          <MicrositeSectionRenderer key={`${section.type}-${i}`} section={section} accentColor={data.theme?.accentColor} />
+          <Reveal key={`${section.type}-${i}`} delayMs={Math.min(i * 90, 360)}>
+            <MicrositeSectionRenderer
+              section={section}
+              sectionId={section.sectionId ?? `${section.type}-${i + 1}`}
+              accentColor={data.theme?.accentColor}
+            />
+          </Reveal>
         ))}
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t border-slate-800 mt-8">
-        <div className="max-w-4xl mx-auto px-6 py-6 text-center text-xs text-slate-500">
-          <p>YardFlow by FreightRoll &middot; casey@freightroll.com</p>
-        </div>
-      </footer>
-    </div>
+      </MicrositeShell>
+    </>
   );
 }

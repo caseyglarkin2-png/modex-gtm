@@ -66,6 +66,21 @@ export type LayoutPreset =
   | 'partnership'   // relationship CTA, intro routing, ecosystem framing
   | 'default';      // standard layout
 
+export type NarrativeRole =
+  | 'opener'
+  | 'context'
+  | 'problem'
+  | 'analysis'
+  | 'proof'
+  | 'plan'
+  | 'close'
+  | 'cta';
+
+interface BaseMicrositeSection {
+  sectionId?: string;
+  narrativeRole?: NarrativeRole;
+}
+
 // ── Real Person Profile ───────────────────────────────────────────────
 // This is the core differentiator. Not a "persona lane" but a real human
 // with a career, priorities, language preferences, and strategic context.
@@ -208,6 +223,25 @@ export interface ProofBlock {
   comparisonData?: { metric: string; competitor: string; yardflow: string }[];
 }
 
+export interface ProofVisual {
+  type: 'metric-grid' | 'before-after' | 'comparison';
+  headline?: string;
+  narrative?: string;
+  stats?: ProofStat[];
+  beforeAfter?: {
+    before: { label: string; description: string };
+    after: { label: string; description: string };
+  };
+  comparisonLabel?: string;
+  comparisonData?: { metric: string; competitor: string; yardflow: string }[];
+}
+
+export interface LiveDeploymentCallout {
+  headline: string;
+  summary: string;
+  badges?: string[];
+}
+
 // ── Pain Points & Stakes ──────────────────────────────────────────────
 export interface PainPoint {
   headline: string;
@@ -241,7 +275,7 @@ export interface CTABlock {
 }
 
 // ── Section Definitions ───────────────────────────────────────────────
-export interface HeroSection {
+export interface HeroSection extends BaseMicrositeSection {
   type: 'hero';
   headline: string;
   subheadline: string;
@@ -250,7 +284,7 @@ export interface HeroSection {
   cta: CTABlock;
 }
 
-export interface ProblemSection {
+export interface ProblemSection extends BaseMicrositeSection {
   type: 'problem';
   sectionLabel?: string;
   headline: string;
@@ -258,7 +292,7 @@ export interface ProblemSection {
   painPoints: PainPoint[];
 }
 
-export interface StakesSection {
+export interface StakesSection extends BaseMicrositeSection {
   type: 'stakes';
   sectionLabel?: string;
   headline: string;
@@ -268,7 +302,7 @@ export interface StakesSection {
   urgencyDriver?: string;
 }
 
-export interface SolutionSection {
+export interface SolutionSection extends BaseMicrositeSection {
   type: 'solution';
   sectionLabel?: string;
   headline: string;
@@ -277,14 +311,17 @@ export interface SolutionSection {
   accountFit?: string;
 }
 
-export interface ProofSection {
+export interface ProofSection extends BaseMicrositeSection {
   type: 'proof';
   sectionLabel?: string;
   headline: string;
   blocks: ProofBlock[];
+  proofVisual?: ProofVisual;
+  methodology?: string;
+  liveDeployment?: LiveDeploymentCallout;
 }
 
-export interface NetworkMapSection {
+export interface NetworkMapSection extends BaseMicrositeSection {
   type: 'network-map';
   sectionLabel?: string;
   headline: string;
@@ -296,7 +333,7 @@ export interface NetworkMapSection {
   peakMultiplier?: string;
 }
 
-export interface ROISection {
+export interface ROISection extends BaseMicrositeSection {
   type: 'roi';
   sectionLabel?: string;
   headline: string;
@@ -307,7 +344,7 @@ export interface ROISection {
   methodology?: string;
 }
 
-export interface TestimonialSection {
+export interface TestimonialSection extends BaseMicrositeSection {
   type: 'testimonial';
   sectionLabel?: string;
   quote: string;
@@ -317,7 +354,7 @@ export interface TestimonialSection {
   context?: string;
 }
 
-export interface ModulesSection {
+export interface ModulesSection extends BaseMicrositeSection {
   type: 'modules';
   sectionLabel?: string;
   headline: string;
@@ -325,21 +362,21 @@ export interface ModulesSection {
   modules: SolutionModule[];
 }
 
-export interface TimelineSection {
+export interface TimelineSection extends BaseMicrositeSection {
   type: 'timeline';
   sectionLabel?: string;
   headline: string;
   steps: { week: string; title: string; description: string }[];
 }
 
-export interface ComparisonSection {
+export interface ComparisonSection extends BaseMicrositeSection {
   type: 'comparison';
   sectionLabel?: string;
   headline: string;
   rows: { dimension: string; before: string; after: string }[];
 }
 
-export interface CaseStudySection {
+export interface CaseStudySection extends BaseMicrositeSection {
   type: 'case-study';
   sectionLabel?: string;
   headline: string;
@@ -347,7 +384,7 @@ export interface CaseStudySection {
   results: ProofStat[];
 }
 
-export interface CTASection {
+export interface CTASection extends BaseMicrositeSection {
   type: 'cta';
   sectionLabel?: string;
   cta: CTABlock;
