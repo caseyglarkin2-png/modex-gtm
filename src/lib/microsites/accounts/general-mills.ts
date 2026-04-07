@@ -99,6 +99,27 @@ export const generalMills: AccountMicrositeData = {
       type: 'proof',
       sectionLabel: 'Proof from Live Deployment',
       headline: 'Running today across 24 facilities',
+      proofVisual: {
+        type: 'before-after',
+        headline: 'What happens when consolidation volume hits a standardized yard',
+        narrative: 'The restructuring only creates a margin win if the receiving yards absorb the extra trailer pressure without creating a new dock bottleneck. That requires one operating standard, not 50 local workarounds.',
+        beforeAfter: {
+          before: {
+            label: 'Today',
+            description: 'Belvidere, Cedar Rapids, Covington, and the rest of the network each absorb consolidation volume with different gate flow, temperature-zone dispatch rules, and dock-office habits.',
+          },
+          after: {
+            label: 'With YardFlow',
+            description: 'One protocol gives every facility the same move logic, dock evidence trail, and temperature-zone guardrails so extra throughput does not become extra yard chaos.',
+          },
+        },
+      },
+      liveDeployment: {
+        headline: 'Already proven in high-throughput CPG networks',
+        summary: 'The operating model is live today in multi-site CPG environments where dock-office teams took on additional volume while remaining headcount neutral. That is the exact posture General Mills needs as remaining facilities absorb more trailers.',
+        badges: ['24 facilities live', '>200 network contracted', 'Headcount-neutral dock office'],
+      },
+      methodology: 'Proof metrics reflect measured truck-turn compression, dock-office leverage, and multi-site rollout performance in comparable CPG networks.',
       blocks: [
         {
           type: 'metric',
@@ -182,15 +203,6 @@ export const generalMills: AccountMicrositeData = {
       function: 'Supply Chain',
       reportsTo: 'CEO',
       directReports: '18,000 supply chain employees',
-
-      careerHistory: [
-        { period: '2021-present', role: 'Chief Supply Chain Officer', company: 'General Mills', relevance: 'Owns the entire supply chain org including all yard operations across 50+ facilities.' },
-        { period: '2019-2021', role: 'VP, North America Supply Chain', company: 'General Mills' },
-        { period: '2013-2019', role: 'President, North America Supply', company: 'Diageo', relevance: 'Ran beverage/spirits supply chains - high-complexity, regulated, multi-temp. Diageo is also a target account.' },
-      ],
-      yearsInRole: '5+',
-      previousCompanies: ['Diageo'],
-      knownForPhrase: 'People-first operator credited with record cost savings while maintaining service levels',
 
       currentMandate: 'Driving digital transformation and cost savings across 50+ facilities, $82M restructuring program',
       strategicPriorities: ['Digital transformation', 'Cost savings via HMM', 'Facility consolidation', 'Sustainability (Scope 3)'],

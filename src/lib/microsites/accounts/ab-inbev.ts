@@ -100,6 +100,23 @@ export const abInbev: AccountMicrositeData = {
       type: 'proof',
       sectionLabel: 'Running in Production',
       headline: 'Measured results from live deployment',
+      proofVisual: {
+        type: 'comparison',
+        headline: 'Where YardFlow closes the execution gap',
+        narrative: 'o9 plans the load. Sensolus knows where the trailer is. YardFlow governs what happens between arrival, staging, dock assignment, and release so the dock no longer depends on radio dispatch and tribal knowledge.',
+        comparisonLabel: 'Planning and tracking still leave one unowned layer',
+        comparisonData: [
+          { metric: 'Supply chain layer', competitor: 'o9: demand and load planning', yardflow: 'YardFlow: dock and yard execution' },
+          { metric: 'Trailer visibility', competitor: 'Sensolus: asset location', yardflow: 'YardFlow: move priority, dwell, dock readiness' },
+          { metric: 'Operational outcome', competitor: 'Tracked load, manual handoff', yardflow: '48-to-24 minute dock turn with one protocol' },
+        ],
+      },
+      liveDeployment: {
+        headline: 'Proven before the beer peak hits',
+        summary: 'This deployment pattern is already live in high-volume CPG and beverage-style operations where dock offices absorb additional throughput without adding coordination headcount. That is the exact gap between AB InBev planning and execution today.',
+        badges: ['24 facilities live', '48-to-24 min turn time', '30 min remote deployment'],
+      },
+      methodology: 'Benchmarks pair AB InBev\'s published Sensolus fleet gains with measured YardFlow dock-turn improvements in comparable live deployments.',
       blocks: [
         {
           type: 'metric',
@@ -109,15 +126,6 @@ export const abInbev: AccountMicrositeData = {
             { value: '48-to-24', label: 'Min Truck Turn Time' },
             { value: '$1M+', label: 'Per-Site Profit Impact' },
             { value: '30 min', label: 'Remote Deployment' },
-          ],
-        },
-        {
-          type: 'comparison',
-          comparisonLabel: 'YardFlow vs. Sensolus Results',
-          comparisonData: [
-            { metric: 'Trailer fleet optimization', competitor: '15% (Sensolus, 4 months)', yardflow: '50% dock turn reduction (immediate)' },
-            { metric: 'Scope', competitor: 'Asset tracking', yardflow: 'Operational workflow' },
-            { metric: 'Driver wait time impact', competitor: 'Not addressed', yardflow: '-50% measured' },
           ],
         },
         {
