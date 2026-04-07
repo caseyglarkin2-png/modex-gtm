@@ -97,6 +97,10 @@ export async function dbGetMicrositeAnalytics() {
   return buildMicrositeAnalyticsSummary(engagements);
 }
 
+export async function dbGetMicrositeEngagements() {
+  return prisma.micrositeEngagement.findMany({ orderBy: { updated_at: 'desc' } });
+}
+
 export async function dbGetMicrositeAccountAnalytics(accountName: string) {
   const engagements = await prisma.micrositeEngagement.findMany({
     where: { account_name: accountName },

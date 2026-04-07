@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { dbGetAccounts, dbGetMeetings, dbGetActivities, dbGetOutreachWaves } from '@/lib/db';
+import {
+  dbGetAccounts,
+  dbGetMeetings,
+  dbGetActivities,
+  dbGetMicrositeEngagements,
+  dbGetOutreachWaves,
+} from '@/lib/db';
 
 function toCsv(headers: string[], rows: string[][]): string {
   const escape = (val: string) => `"${val.replace(/"/g, '""')}"`;
@@ -54,8 +60,34 @@ export async function GET(req: NextRequest) {
       filename = 'modex-waves.csv';
       break;
     }
+    case 'microsites': {
+      const engagements = await dbGetMicrositeEngagements();
+      csv = toCsv(
+        ['Updated', 'Created', 'Account', 'Account Slug', 'Person', 'Person Slug', 'Variant Slug', 'Path', 'Session ID', 'Last CTA', 'CTA IDs', 'Sections Viewed', 'Variant History', 'Scroll Depth %', 'Duration Seconds', 'Metadata'],
+        engagements.map((engagement) => [
+          new Date(engagement.updated_at).toLocaleString(),
+          new Date(engagement.created_at).toLocaleString(),
+          engagement.account_name,
+          engagement.account_slug,
+          engagement.person_name ?? '',
+          engagement.person_slug ?? '',
+          engagement.variant_slug ?? '',
+          engagement.path,
+          engagement.session_id,
+          engagement.last_cta_id ?? '',
+          engagement.cta_ids.join(' | '),
+          engagement.sections_viewed.join(' | '),
+          engagement.variant_history.join(' | '),
+          String(engagement.scroll_depth_pct),
+          String(engagement.duration_seconds),
+          engagement.metadata ? JSON.stringify(engagement.metadata) : '',
+        ]),
+      );
+      filename = 'modex-microsite-engagement.csv';
+      break;
+    }
     default:
-      return NextResponse.json({ error: 'Invalid type. Use: meetings, pipeline, activities, waves' }, { status: 400 });
+      return NextResponse.json({ error: 'Invalid type. Use: meetings, pipeline, activities, waves, microsites' }, { status: 400 });
   }
 
   return new NextResponse(csv, {

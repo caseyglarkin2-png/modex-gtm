@@ -60,6 +60,9 @@ export default async function AnalyticsPage() {
           <Link href="/api/export?type=activities" target="_blank">
             <Button variant="outline" size="sm" className="text-xs gap-1">Export Activities CSV</Button>
           </Link>
+          <Link href="/api/export?type=microsites" target="_blank">
+            <Button variant="outline" size="sm" className="text-xs gap-1">Export Microsite CSV</Button>
+          </Link>
         </div>
       </div>
 

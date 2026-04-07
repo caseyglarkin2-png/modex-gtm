@@ -486,6 +486,112 @@ export const generalMills: AccountMicrositeData = {
       kpiLanguage: ['dock utilization', 'throughput per shift', 'temperature-zone compliance', 'shift handoff time', 'production schedule adherence'],
       proofEmphasis: 'The protocol as product story. He cares about process standardization, not dashboards.',
     },
+    {
+      person: {
+        personaId: 'gm-bracey',
+        name: 'Zoe Bracey',
+        firstName: 'Zoe',
+        lastName: 'Bracey',
+        title: 'Logistics and Customer Operations Business Leader - North American Retail',
+        company: 'General Mills',
+        roleInDeal: 'routing-contact',
+        seniority: 'VP',
+        function: 'Logistics / Customer Operations',
+      },
+      fallbackLane: 'logistics',
+      label: 'Zoe Bracey - Customer Operations',
+      variantSlug: 'zoe-bracey',
+
+      framingNarrative: 'Zoe, you live on the customer-facing side of the network, where service levels are felt externally and every late trailer becomes a retail problem. The yard matters to you because seasonal surges, carrier coordination, and dock sequence all decide whether the outbound promise holds when volume spikes.',
+      openingHook: 'Retail service levels start breaking in the yard before the customer ever sees the miss.',
+      stakeStatement: 'When baking-season and snack-season surges hit, General Mills does not just need more throughput. It needs predictable outbound execution so retail customers do not absorb the chaos created upstream at the dock.',
+
+      heroOverride: {
+        headline: 'Zoe, the customer promise breaks at the dock before it breaks on the shelf.',
+        subheadline: 'You own the part of the network where service levels become visible. Seasonal surges, carrier coordination, and outbound dock timing all compress into one moment in the yard. YardFlow makes that moment more predictable.',
+      },
+      sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'comparison', 'roi', 'cta'],
+      ctaOverride: {
+        type: 'audit',
+        headline: 'Zoe, let\'s map where yard variance becomes customer-service risk.',
+        subtext: '30 minutes on outbound execution, carrier coordination, and retail service-level protection during peak volume windows.',
+        buttonLabel: 'Start the Network Audit',
+        calendarLink: BOOKING_LINK,
+        personName: 'Zoe',
+        personContext: 'protecting North American retail service levels during seasonal demand surges',
+      },
+      addSections: [
+        {
+          type: 'comparison',
+          sectionLabel: 'Customer Impact',
+          headline: 'What the retail network feels today vs. with YardFlow',
+          rows: [
+            { dimension: 'Peak-season outbound readiness', before: 'Volume surge creates dock queue risk', after: 'Priority sequencing protects outbound flow' },
+            { dimension: 'Carrier coordination', before: 'Manual calls and reactive rescheduling', after: 'System-managed dock and yard sequence' },
+            { dimension: 'Retail service-level exposure', before: 'Late trailer becomes late customer delivery', after: 'Earlier exception detection and cleaner handoff' },
+            { dimension: 'Site-to-site consistency', before: 'Each facility handles surge differently', after: 'One protocol across the network' },
+          ],
+        },
+      ],
+
+      toneShift: 'Customer-operations oriented. Tie logistics execution to service levels, retail outcomes, and seasonal surge control instead of abstract network transformation.',
+      kpiLanguage: ['service levels', 'customer operations', 'seasonal surge', 'outbound readiness', 'carrier coordination'],
+      proofEmphasis: 'Use the headcount-neutral and measured turn-time proof to show that better yard discipline protects the outbound promise without adding operating overhead.',
+      avoidPhrases: ['warehouse-only optimization', 'internal ops win with no customer consequence'],
+    },
+    {
+      person: {
+        personaId: 'gm-stolpestad',
+        name: 'Lars Stolpestad',
+        firstName: 'Lars',
+        lastName: 'Stolpestad',
+        title: 'Customer Service Facility Manager',
+        company: 'General Mills',
+        roleInDeal: 'routing-contact',
+        seniority: 'Manager',
+        function: 'Facility Operations',
+      },
+      fallbackLane: 'ops',
+      label: 'Lars Stolpestad - Facility Operations',
+      variantSlug: 'lars-stolpestad',
+
+      framingNarrative: 'Lars, you are close enough to the floor to feel every bad gate process, every dock scheduling miss, and every peak-day yard backup in real time. This page is not about enterprise transformation. It is about giving the facility a repeatable operating rhythm when volume stacks up outside the door.',
+      openingHook: 'If the gate process is messy, the rest of the shift starts behind and stays behind.',
+      stakeStatement: 'Peak-day yard congestion is not a theory at the facility level. It is a shift-by-shift drag on dock flow, team coordination, and customer service. The value of YardFlow is that it turns those recurring exceptions into a standard process.',
+
+      heroOverride: {
+        headline: 'Lars, facility performance slips the moment the gate and dock fall out of rhythm.',
+        subheadline: 'Gate processes, dock scheduling, and yard visibility determine whether the facility starts the shift clean or spends the day chasing exceptions. YardFlow gives the site one reliable operating sequence.',
+      },
+      sectionOrder: ['hero', 'problem', 'solution', 'proof', 'timeline', 'cta'],
+      ctaOverride: {
+        type: 'audit',
+        headline: 'Lars, let\'s walk the gate-to-dock sequence at the facility level.',
+        subtext: '30 minutes on the gate process, dock scheduling, and yard congestion points that create the daily scramble.',
+        buttonLabel: 'Start the Network Audit',
+        calendarLink: BOOKING_LINK,
+        personName: 'Lars',
+        personContext: 'cleaning up gate, dock, and yard flow at the facility level',
+      },
+      addSections: [
+        {
+          type: 'timeline',
+          sectionLabel: 'Facility Rollout',
+          headline: 'What a practical site deployment looks like',
+          steps: [
+            { week: 'Week 1', title: 'Observe the current gate-to-dock flow', description: 'Map how drivers arrive, how the gate queues form, and where dock scheduling breaks during a normal shift.' },
+            { week: 'Week 2', title: 'Configure the site protocol', description: 'Set the gate sequence, dock priority rules, temperature-zone constraints, and exception handling for the facility.' },
+            { week: 'Week 3', title: 'Run live with the team', description: 'Go live with a workflow the team can actually follow during peak-day pressure, not just in a clean demo.' },
+            { week: 'Week 4+', title: 'Standardize the next site', description: 'Carry the same operating sequence into the next facility with less local reinvention.' },
+          ],
+        },
+      ],
+
+      toneShift: 'Practical facility-operations language. Focus on gate process, dock rhythm, shift cleanliness, and recurring daily exceptions.',
+      kpiLanguage: ['gate process', 'dock scheduling', 'yard congestion', 'shift flow', 'facility execution'],
+      proofEmphasis: 'Lead with the simple operational proof: less queueing, faster turn time, and a system the local team can run consistently during peak days.',
+      avoidPhrases: ['board-ready transformation narrative', 'generic executive value'],
+    },
   ],
 
   proofBlocks: [

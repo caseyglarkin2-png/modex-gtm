@@ -52,7 +52,9 @@ As of 2026-04-07, the engine is materially ahead of the original Sprint 0/Sprint
 3. Sprint 2 shell foundation is complete.
 4. Sprint 3 proof primitives are live for Frito-Lay, General Mills, and AB InBev.
 5. Sprint 5 operator surfaces now exist in the canonical analytics dashboard and the account detail page.
-6. Sprint 4 has started with Frito-Lay expanded to five named-person variants.
+6. Sprint 4 has started with Frito-Lay and General Mills expanded to five named-person variants each.
+7. Variant-switching browser coverage now validates named-person routing for Frito-Lay and General Mills.
+8. Microsite engagement CSV export is available through the existing export pipeline.
 
 ### Delivered commits
 
@@ -68,12 +70,13 @@ As of 2026-04-07, the engine is materially ahead of the original Sprint 0/Sprint
 2. The canonical analytics dashboard ranks hot accounts and recent microsite sessions.
 3. Account detail pages show account-level engagement summaries, variant performance, and recent microsite sessions.
 4. New microsite CTA clicks create DB-backed activity rows for follow-up visibility.
+5. Operators can export microsite engagement data as CSV from the analytics surface.
 
 ### Current open work
 
-1. Export microsite engagement CSV.
-2. Expand named-person variant depth beyond Frito-Lay, starting with General Mills.
-3. Add variant-switching Playwright coverage.
+1. Extend the same named-person depth to the next flagship accounts.
+2. Decide the next flagship personalization target after General Mills.
+3. Keep replacing thin role-based fallbacks with better named-person evidence as research improves.
 
 ## Best Ideas To Port
 
