@@ -9,16 +9,17 @@ import {
   CalendarCheck, Activity, ArrowRight, Sparkles, DollarSign,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { dbGetDashboardStats, dbGetAccounts } from '@/lib/db';
+import { dbGetDashboardStats, dbGetAccounts, dbGetMicrositeAnalytics } from '@/lib/db';
 import { AutoRefresh } from '@/components/auto-refresh';
 
 export const metadata = { title: 'Analytics — Board Report' };
 export const dynamic = 'force-dynamic';
 
 export default async function AnalyticsPage() {
-  const [stats, accounts] = await Promise.all([
+  const [stats, accounts, microsite] = await Promise.all([
     dbGetDashboardStats(),
     dbGetAccounts(),
+    dbGetMicrositeAnalytics(),
   ]);
 
   // Pipeline funnel from live DB
@@ -265,6 +266,183 @@ export default async function AnalyticsPage() {
         </Card>
       </div>
 
+      <div className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="flex items-center gap-2 text-base">
+              <MousePointerClick className="h-4 w-4" /> Microsite Engagement
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {microsite.totalSessions === 0 ? (
+              <p className="py-8 text-center text-sm text-[var(--muted-foreground)]">
+                No microsite engagement captured yet. Public account pages are instrumented and will populate this dashboard as visits land.
+              </p>
+            ) : (
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    {
+                      label: 'Sessions',
+                      value: microsite.totalSessions,
+                      detail: `${microsite.highIntentSessions} high-intent`,
+                      icon: Eye,
+                    },
+                    {
+                      label: 'Accounts Active',
+                      value: microsite.accountsEngaged,
+                      detail: 'Distinct account microsites viewed',
+                      icon: Building2,
+                    },
+                    {
+                      label: 'CTA Sessions',
+                      value: microsite.ctaSessions,
+                      detail: 'Sessions with at least one click',
+                      icon: MousePointerClick,
+                    },
+                    {
+                      label: 'Avg Scroll',
+                      value: `${microsite.avgScrollDepthPct}%`,
+                      detail: `${formatDurationCompact(microsite.avgDurationSeconds)} average read`,
+                      icon: TrendingUp,
+                    },
+                  ].map((item) => (
+                    <div key={item.label} className="rounded-lg border border-[var(--border)] p-3">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <p className="text-xs text-[var(--muted-foreground)]">{item.label}</p>
+                          <p className="mt-1 text-2xl font-bold">{item.value}</p>
+                          <p className="mt-1 text-xs text-[var(--muted-foreground)]">{item.detail}</p>
+                        </div>
+                        <div className="rounded-md bg-[var(--accent)] p-2">
+                          <item.icon className="h-4 w-4 text-[var(--muted-foreground)]" />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="rounded-lg border border-[var(--border)] p-4">
+                  <p className="text-sm font-medium">Operator takeaway</p>
+                  <p className="mt-2 text-sm text-[var(--muted-foreground)] leading-relaxed">
+                    Microsite engagement now reflects real buying behavior. Treat CTA sessions as active follow-up windows, deep reads as warm outreach priority, and variant comparisons as routing signals for stakeholder expansion.
+                  </p>
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="flex items-center gap-2 text-base">
+              <TrendingUp className="h-4 w-4" /> Hot Microsite Accounts
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {microsite.hotAccounts.length === 0 ? (
+              <p className="py-8 text-center text-sm text-[var(--muted-foreground)]">
+                No hot accounts yet. This list will rank accounts by CTA activity, deep reads, scroll depth, and recency.
+              </p>
+            ) : (
+              <div className="space-y-3">
+                {microsite.hotAccounts.map((account) => (
+                  <div key={account.accountName} className="rounded-lg border border-[var(--border)] p-4">
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <Link href={`/accounts/${slugifyAccountName(account.accountName)}`} className="text-sm font-semibold text-[var(--primary)] hover:underline">
+                            {account.accountName}
+                          </Link>
+                          <MicrositeHeatBadge score={account.engagementScore} />
+                        </div>
+                        <p className="mt-1 text-xs text-[var(--muted-foreground)]">
+                          {account.primarySignal} · {account.sessionCount} sessions · {account.avgScrollDepthPct}% average scroll
+                        </p>
+                      </div>
+                      <Link href={account.lastPath} className="inline-flex items-center gap-1 text-xs text-[var(--primary)] hover:underline">
+                        Open microsite <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
+                    </div>
+
+                    <p className="mt-3 text-sm text-[var(--muted-foreground)] leading-relaxed">
+                      {account.recommendedAction}
+                    </p>
+
+                    <div className="mt-3 flex flex-wrap gap-2 text-xs text-[var(--muted-foreground)]">
+                      <span>Last seen {formatTimestamp(account.lastViewedAt)}</span>
+                      {account.lastPersonName && <span>Latest viewer: {account.lastPersonName}</span>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+
+      <Card>
+        <CardHeader className="pb-3">
+          <div className="flex items-center justify-between">
+            <CardTitle className="flex items-center gap-2 text-base">
+              <Eye className="h-4 w-4" /> Recent Microsite Sessions
+            </CardTitle>
+            <Badge variant="outline" className="text-xs">{microsite.totalSessions} tracked</Badge>
+          </div>
+        </CardHeader>
+        <CardContent>
+          {microsite.recentSessions.length === 0 ? (
+            <p className="py-8 text-center text-sm text-[var(--muted-foreground)]">
+              No tracked microsite sessions yet.
+            </p>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-[var(--border)] text-xs text-[var(--muted-foreground)]">
+                    <th className="pb-2 text-left font-medium">Account</th>
+                    <th className="pb-2 text-left font-medium hidden md:table-cell">Viewer</th>
+                    <th className="pb-2 text-center font-medium">Intent</th>
+                    <th className="pb-2 text-center font-medium">Depth</th>
+                    <th className="pb-2 text-center font-medium hidden sm:table-cell">Signals</th>
+                    <th className="pb-2 text-right font-medium">Seen</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {microsite.recentSessions.map((session) => (
+                    <tr key={`${session.accountName}-${session.path}-${session.viewedAt.toISOString()}`} className="border-b border-[var(--border)] last:border-0">
+                      <td className="py-2">
+                        <div className="flex flex-col">
+                          <Link href={session.path} className="text-xs font-medium text-[var(--primary)] hover:underline">
+                            {session.accountName}
+                          </Link>
+                          <span className="text-[10px] text-[var(--muted-foreground)]">{session.path}</span>
+                        </div>
+                      </td>
+                      <td className="py-2 text-xs hidden md:table-cell text-[var(--muted-foreground)]">
+                        {session.personName ?? 'Overview'}
+                      </td>
+                      <td className="py-2 text-center">
+                        <MicrositeIntentBadge highIntent={session.isHighIntent} score={session.intentScore} />
+                      </td>
+                      <td className="py-2 text-center text-xs">
+                        {session.scrollDepthPct}% · {formatDurationCompact(session.durationSeconds)}
+                      </td>
+                      <td className="py-2 text-center text-xs hidden sm:table-cell text-[var(--muted-foreground)]">
+                        {session.sectionsViewedCount} sections · {session.ctaCount} CTAs · {Math.max(session.variantCount - 1, 0)} switches
+                      </td>
+                      <td className="py-2 text-right text-xs text-[var(--muted-foreground)]">
+                        {formatTimestamp(session.viewedAt)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
       {/* ── Recent Email Activity (Send Log) ─────────────── */}
       <Card>
         <CardHeader className="pb-3">
@@ -355,6 +533,36 @@ export default async function AnalyticsPage() {
       </Card>
     </div>
   );
+}
+
+function formatDurationCompact(seconds: number) {
+  if (seconds < 60) return `${seconds}s`;
+  if (seconds < 3600) return `${Math.round(seconds / 60)}m`;
+  return `${(seconds / 3600).toFixed(1)}h`;
+}
+
+function formatTimestamp(value: Date) {
+  return value.toLocaleString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+  });
+}
+
+function slugifyAccountName(name: string) {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+}
+
+function MicrositeHeatBadge({ score }: { score: number }) {
+  if (score >= 70) return <Badge className="bg-red-500 text-white text-xs">Hot {score}</Badge>;
+  if (score >= 45) return <Badge className="bg-amber-500 text-white text-xs">Warm {score}</Badge>;
+  return <Badge className="bg-blue-500 text-white text-xs">Watch {score}</Badge>;
+}
+
+function MicrositeIntentBadge({ highIntent, score }: { highIntent: boolean; score: number }) {
+  if (highIntent) return <Badge className="bg-emerald-500 text-white text-xs">High {score}</Badge>;
+  return <Badge variant="outline" className="text-xs">Light {score}</Badge>;
 }
 
 function EmailStatusBadge({ status, opened, clicked }: { status: string; opened: boolean; clicked: boolean }) {
