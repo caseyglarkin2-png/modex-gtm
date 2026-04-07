@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import {
@@ -10,6 +12,7 @@ import {
   getAuditRoutes,
   getActivities,
 } from '@/lib/data';
+import { dbGetMicrositeAccountAnalytics } from '@/lib/db';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
@@ -31,6 +34,7 @@ import { AddPersonaDialog } from '@/components/add-persona-dialog';
 import { EditableStatus } from '@/components/editable-status';
 import { EditablePersonaStatus } from '@/components/editable-persona-status';
 import { VoiceScriptButton } from '@/components/voice-script-button';
+import type { RecentMicrositeSession } from '@/lib/microsites/analytics';
 
 export function generateStaticParams() {
   return getAccounts().map((a) => ({ slug: slugify(a.name) }));
@@ -47,6 +51,8 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
   const auditRoutes = getAuditRoutes();
   const auditRoute = auditRoutes.find((r) => r.account === account.name);
   const activities = getActivities().filter((a) => a.account === account.name);
+  const microsite = await dbGetMicrositeAccountAnalytics(account.name);
+  const micrositeOverviewPath = `/for/${slug}`;
 
   const scoreDims = [
     { label: 'ICP Fit', value: account.icp_fit, weight: 30 },
@@ -162,6 +168,87 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
               <CardContent><p className="text-sm">{account.primo_angle}</p></CardContent>
             </Card>
           </div>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm">Microsite Engagement</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {microsite.totalSessions === 0 ? (
+                <div className="rounded-lg border border-dashed border-[var(--border)] p-4">
+                  <p className="text-sm text-[var(--muted-foreground)]">
+                    No tracked microsite sessions for {account.name} yet. The public overview page is instrumented and ready.
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <Link href={micrositeOverviewPath} className="inline-flex items-center gap-1 text-sm font-medium text-[var(--primary)] hover:underline">
+                      Open overview microsite <ExternalLink className="h-3.5 w-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                    <div className="rounded-lg border border-[var(--border)] p-3">
+                      <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Sessions</p>
+                      <p className="mt-1 text-xl font-bold">{microsite.totalSessions}</p>
+                      <p className="mt-1 text-xs text-[var(--muted-foreground)]">{microsite.highIntentSessions} high-intent</p>
+                    </div>
+                    <div className="rounded-lg border border-[var(--border)] p-3">
+                      <p className="text-[10px] uppercase text-[var(--muted-foreground)]">CTA Sessions</p>
+                      <p className="mt-1 text-xl font-bold">{microsite.ctaSessions}</p>
+                      <p className="mt-1 text-xs text-[var(--muted-foreground)]">Buyer action windows</p>
+                    </div>
+                    <div className="rounded-lg border border-[var(--border)] p-3">
+                      <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Average Scroll</p>
+                      <p className="mt-1 text-xl font-bold">{microsite.avgScrollDepthPct}%</p>
+                      <p className="mt-1 text-xs text-[var(--muted-foreground)]">Depth across tracked sessions</p>
+                    </div>
+                    <div className="rounded-lg border border-[var(--border)] p-3">
+                      <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Average Read</p>
+                      <p className="mt-1 text-xl font-bold">{formatMicrositeDuration(microsite.avgDurationSeconds)}</p>
+                      <p className="mt-1 text-xs text-[var(--muted-foreground)]">Time spent on page</p>
+                    </div>
+                  </div>
+
+                  {microsite.accountSummary && (
+                    <div className="rounded-lg border border-[var(--border)] p-4">
+                      <div className="flex flex-wrap items-start justify-between gap-3">
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <p className="text-sm font-medium">{microsite.accountSummary.primarySignal}</p>
+                            <MicrositeAccountHeatBadge score={microsite.accountSummary.engagementScore} />
+                          </div>
+                          <p className="mt-1 text-sm text-[var(--muted-foreground)] leading-relaxed">
+                            {microsite.accountSummary.recommendedAction}
+                          </p>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          <Link href={microsite.accountSummary.lastPath} className="inline-flex items-center gap-1 text-sm font-medium text-[var(--primary)] hover:underline">
+                            Open latest microsite <ExternalLink className="h-3.5 w-3.5" />
+                          </Link>
+                        </div>
+                      </div>
+                      <p className="mt-3 text-xs text-[var(--muted-foreground)]">
+                        Last seen {formatMicrositeTimestamp(microsite.accountSummary.lastViewedAt)}
+                        {microsite.accountSummary.lastPersonName ? ` · Latest viewer: ${microsite.accountSummary.lastPersonName}` : ''}
+                      </p>
+                    </div>
+                  )}
+
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <p className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Recent Sessions</p>
+                      <Link href={micrositeOverviewPath} className="text-xs font-medium text-[var(--primary)] hover:underline">
+                        Open overview microsite
+                      </Link>
+                    </div>
+                    {microsite.recentSessions.slice(0, 4).map((session) => (
+                      <MicrositeSessionRow key={`${session.path}-${session.viewedAt.toISOString()}`} session={session} />
+                    ))}
+                  </div>
+                </>
+              )}
+            </CardContent>
+          </Card>
           <div className="grid gap-4 md:grid-cols-3">
             <Card>
               <CardHeader className="pb-2"><CardTitle className="text-xs text-[var(--muted-foreground)]">Best Intro Path</CardTitle></CardHeader>
@@ -384,4 +471,54 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
       </Tabs>
     </div>
   );
+}
+
+function MicrositeAccountHeatBadge({ score }: { score: number }) {
+  if (score >= 70) return <Badge className="bg-red-500 text-white">Hot {score}</Badge>;
+  if (score >= 45) return <Badge className="bg-amber-500 text-white">Warm {score}</Badge>;
+  return <Badge variant="outline">Watch {score}</Badge>;
+}
+
+function MicrositeSessionRow({ session }: { session: RecentMicrositeSession }) {
+  return (
+    <div className="rounded-lg border border-[var(--border)] p-3">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <div className="flex items-center gap-2">
+            <Link href={session.path} className="text-sm font-medium text-[var(--primary)] hover:underline">
+              {session.personName ?? 'Overview microsite'}
+            </Link>
+            {session.isHighIntent ? (
+              <Badge className="bg-emerald-600 text-white">High intent</Badge>
+            ) : (
+              <Badge variant="outline">Light read</Badge>
+            )}
+          </div>
+          <p className="mt-1 text-xs text-[var(--muted-foreground)]">
+            {session.sectionsViewedCount} sections · {session.ctaCount} CTAs · {Math.max(session.variantCount - 1, 0)} switches
+          </p>
+        </div>
+        <div className="text-right text-xs text-[var(--muted-foreground)]">
+          <p>{session.scrollDepthPct}% scroll</p>
+          <p>{formatMicrositeDuration(session.durationSeconds)} read</p>
+          <p>{formatMicrositeTimestamp(session.viewedAt)}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function formatMicrositeDuration(seconds: number) {
+  if (seconds < 60) return `${seconds}s`;
+  if (seconds < 3600) return `${Math.round(seconds / 60)}m`;
+  return `${(seconds / 3600).toFixed(1)}h`;
+}
+
+function formatMicrositeTimestamp(value: Date) {
+  return value.toLocaleString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+  });
 }

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  buildMicrositeAccountAnalytics,
   buildMicrositeAnalyticsSummary,
   isHighIntentMicrositeSession,
   scoreHotMicrositeAccount,
@@ -104,5 +105,28 @@ describe('buildMicrositeAnalyticsSummary', () => {
 
     expect(summary.accountsEngaged).toBe(13);
     expect(summary.hotAccounts.some((account) => account.accountName === 'Account 1')).toBe(true);
+  });
+
+  it('builds a focused account summary for the account detail page', () => {
+    const summary = buildMicrositeAccountAnalytics([
+      buildSession({
+        cta_ids: ['header-booking'],
+        variant_history: ['brian-watson', 'beth-mars'],
+      }),
+      buildSession({
+        path: '/for/frito-lay',
+        person_name: null,
+        person_slug: null,
+        updated_at: new Date('2026-04-07T08:30:00.000Z'),
+        sections_viewed: ['hero', 'proof'],
+        scroll_depth_pct: 52,
+        duration_seconds: 41,
+      }),
+    ], new Date('2026-04-07T12:00:00.000Z'));
+
+    expect(summary.totalSessions).toBe(2);
+    expect(summary.accountSummary?.accountName).toBe('Frito-Lay');
+    expect(summary.accountSummary?.ctaSessions).toBe(1);
+    expect(summary.recentSessions[0]?.path).toBe('/for/frito-lay/brian-watson');
   });
 });

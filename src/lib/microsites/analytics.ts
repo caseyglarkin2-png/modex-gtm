@@ -56,6 +56,16 @@ export interface MicrositeAnalyticsSummary {
   recentSessions: RecentMicrositeSession[];
 }
 
+export interface MicrositeAccountAnalytics {
+  totalSessions: number;
+  highIntentSessions: number;
+  ctaSessions: number;
+  avgScrollDepthPct: number;
+  avgDurationSeconds: number;
+  accountSummary: HotMicrositeAccount | null;
+  recentSessions: RecentMicrositeSession[];
+}
+
 function pluralize(count: number, singular: string, plural = `${singular}s`) {
   return `${count} ${count === 1 ? singular : plural}`;
 }
@@ -269,5 +279,22 @@ export function buildMicrositeAnalyticsSummary(
     avgDurationSeconds: Math.round(totalDuration / orderedSessions.length),
     hotAccounts,
     recentSessions,
+  };
+}
+
+export function buildMicrositeAccountAnalytics(
+  sessions: MicrositeEngagementAnalyticsInput[],
+  now = new Date(),
+): MicrositeAccountAnalytics {
+  const summary = buildMicrositeAnalyticsSummary(sessions, now);
+
+  return {
+    totalSessions: summary.totalSessions,
+    highIntentSessions: summary.highIntentSessions,
+    ctaSessions: summary.ctaSessions,
+    avgScrollDepthPct: summary.avgScrollDepthPct,
+    avgDurationSeconds: summary.avgDurationSeconds,
+    accountSummary: summary.hotAccounts[0] ?? null,
+    recentSessions: summary.recentSessions,
   };
 }

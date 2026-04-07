@@ -1,5 +1,8 @@
 import { prisma } from './prisma';
-import { buildMicrositeAnalyticsSummary } from './microsites/analytics';
+import {
+  buildMicrositeAccountAnalytics,
+  buildMicrositeAnalyticsSummary,
+} from './microsites/analytics';
 
 // ── Accounts ──────────────────────────────────────────────────────────
 export async function dbGetAccounts() {
@@ -92,6 +95,28 @@ export async function dbGetMicrositeAnalytics() {
   });
 
   return buildMicrositeAnalyticsSummary(engagements);
+}
+
+export async function dbGetMicrositeAccountAnalytics(accountName: string) {
+  const engagements = await prisma.micrositeEngagement.findMany({
+    where: { account_name: accountName },
+    select: {
+      account_name: true,
+      account_slug: true,
+      person_name: true,
+      person_slug: true,
+      path: true,
+      sections_viewed: true,
+      cta_ids: true,
+      variant_history: true,
+      scroll_depth_pct: true,
+      duration_seconds: true,
+      updated_at: true,
+    },
+    orderBy: { updated_at: 'desc' },
+  });
+
+  return buildMicrositeAccountAnalytics(engagements);
 }
 
 // ── Aggregate Stats (for dashboard / analytics) ──────────────────────
