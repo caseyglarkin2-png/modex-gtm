@@ -51,19 +51,19 @@ export const dannon: AccountMicrositeData = {
           headline: 'Temperature-controlled yard dwell erodes shelf life',
           description: 'Danone moves fresh and chilled dairy products across 15+ plants. Reefer trailers sitting in yards without visibility into dock readiness means product shelf life burns before the case is even picked. At dairy margins, that dwell is measurable in shrink dollars.',
           kpiImpact: '$3M-$5M in annual shrink exposure from excess yard dwell across the fresh network',
-          relevantPeople: ['P-001', 'P-002'],
+          relevantPeople: ['P-001', 'P-002', 'P-004', 'P-005'],
         },
         {
           headline: 'Plant-level yard protocols fragment cross-facility visibility',
           description: 'Each Danone production facility runs its own gate, dock, and spotter coordination. When the White Plains supply chain team wants a network view of trailer utilization or dock throughput, they are stitching together spreadsheets from 15 different local teams.',
           kpiImpact: 'Zero real-time network visibility across the yard layer',
-          relevantPeople: ['P-001', 'P-003'],
+          relevantPeople: ['P-001', 'P-002', 'P-004', 'P-005'],
         },
         {
           headline: 'Carrier detention costs compound across the fresh network',
           description: 'Fresh dairy carriers operate on tight appointment windows. When dock contention pushes wait times past the threshold, detention charges hit every facility individually. No one is tracking the aggregate network-level carrier cost.',
           kpiImpact: '$2M+ in annual detention and accessorial charges across the network',
-          relevantPeople: ['P-002', 'P-004'],
+          relevantPeople: ['P-001', 'P-002', 'P-003', 'P-005'],
         },
       ],
     },
@@ -260,13 +260,13 @@ export const dannon: AccountMicrositeData = {
       label: 'Heiko Gerling - Chief Operations Officer',
       variantSlug: 'heiko-gerling',
 
-      framingNarrative: 'Heiko, When the cold chain breaks in the yard, Danone does not lose product. It loses shelf days.',
-      openingHook: 'Warm intro via Mark Shaughnessy and likely MODEX attendance - the yard is where execution meets reality for Dannon.',
-      stakeStatement: 'Every minute of excess dwell time at Dannon\'s facilities erodes the margin your team is working to protect.',
+      framingNarrative: 'Heiko, your remit spans manufacturing, logistics, customer service, procurement, and S&OP. That means you own the handoff where freshness risk becomes operating cost. When a reefer burns 45 extra minutes in the yard, the loss shows up in shelf life, service recovery, and carrier performance at the same time.',
+      openingHook: 'You own the North America operating system. The yard is still the least controlled handoff in it.',
+      stakeStatement: 'Fresh dairy does not give the team time to recover from yard mistakes. Every extra dwell minute burns product life, compresses service recovery, and forces the network to spend labor just to catch up.',
 
       heroOverride: {
         headline: 'Heiko, 15 facilities. Four temperature profiles. One yard protocol. That is the standard Danone North America needs.',
-        subheadline: 'When the cold chain breaks in the yard, Danone does not lose product. It loses shelf days.',
+        subheadline: 'Fresh dairy, plant-based, water, and medical nutrition all compete for the same dock surface. YardFlow gives North America one operating protocol across all four temperature realities.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
       ctaOverride: {
@@ -279,9 +279,9 @@ export const dannon: AccountMicrositeData = {
         personContext: 'Warm intro via Mark Shaughnessy',
       },
 
-      toneShift: 'Strategic, board-level. Reference Heiko\'s mandate and transformation context. Lead with outcomes and business impact, not features.',
+      toneShift: 'Executive operations language. He owns the full handoff from plant through service. Lead with freshness, operating discipline, and cross-functional impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
-      proofEmphasis: 'The headcount-neutral customer quote resonates with Heiko\'s operational reality.',
+      proofEmphasis: 'Lead with temperature-zone discipline and headcount-neutral throughput. Heiko should see this as the operating layer that standardizes manufacturing, logistics, and S&OP execution together.',
     },
     {
       person: {
@@ -300,13 +300,13 @@ export const dannon: AccountMicrositeData = {
       label: 'Whitney Klemm - Supply Chain Leader',
       variantSlug: 'whitney-klemm',
 
-      framingNarrative: 'Whitney, When the cold chain breaks in the yard, Danone does not lose product. It loses shelf days.',
-      openingHook: 'Warm intro via Mark Shaughnessy and likely MODEX attendance - the yard is where execution meets reality for Dannon.',
-      stakeStatement: 'Every minute of excess dwell time at Dannon\'s facilities erodes the margin your team is working to protect.',
+      framingNarrative: 'Whitney, the supply chain team sees the network as plan, inventory, and service commitments. The yard is where those commitments become real trailer moves, and today that conversion still depends on local workarounds. If Danone wants one North America supply picture, the yard cannot stay as 15 separate site habits.',
+      openingHook: 'The supply plan is only as good as the dock sequence that actually happens.',
+      stakeStatement: 'When the yard stays local and invisible, service variance enters the network looking like a planning issue instead of an execution issue. That is the layer this fixes.',
 
       heroOverride: {
         headline: 'Whitney, the supply chain team sees network metrics. The yard is the layer where those metrics break.',
-        subheadline: 'When the cold chain breaks in the yard, Danone does not lose product. It loses shelf days.',
+        subheadline: 'You can only standardize what the network can see. YardFlow turns 15 local yard routines into one visible, measurable supply layer for Danone North America.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
       ctaOverride: {
@@ -319,9 +319,9 @@ export const dannon: AccountMicrositeData = {
         personContext: 'Warm intro via Mark Shaughnessy',
       },
 
-      toneShift: 'Strategic, board-level. Reference Whitney\'s mandate and transformation context. Lead with outcomes and business impact, not features.',
+      toneShift: 'Network-oriented supply chain language. She is a routing and triangulation contact, so make it easy to see where the real operating owner should lean in.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
-      proofEmphasis: 'The headcount-neutral customer quote resonates with Whitney\'s operational reality.',
+      proofEmphasis: 'Emphasize one protocol across 15+ facilities and visibility into the yard layer, not just site savings.',
     },
     {
       person: {
@@ -340,13 +340,13 @@ export const dannon: AccountMicrositeData = {
       label: 'Jacqueline Beckman - Senior Procurement Manager',
       variantSlug: 'jacqueline-beckman',
 
-      framingNarrative: 'Jacqueline, When the cold chain breaks in the yard, Danone does not lose product. It loses shelf days.',
-      openingHook: 'Warm intro via Mark Shaughnessy and likely MODEX attendance - the yard is where execution meets reality for Dannon.',
-      stakeStatement: 'Every minute of excess dwell time at Dannon\'s facilities erodes the margin your team is working to protect.',
+      framingNarrative: 'Jacqueline, carrier accessorials and supplier-side friction rarely look like a yard problem in the spreadsheet, but that is where they start. When reefer appointments slip, procurement pays for service unreliability that operations experienced hours earlier.',
+      openingHook: 'Every detention invoice is a supplier-cost symptom of a yard process failure.',
+      stakeStatement: 'The fastest way to strengthen carrier leverage is to remove the dock and yard delays that make Danone expensive to serve.',
 
       heroOverride: {
         headline: 'Jacqueline, every carrier detention charge at a Danone plant is a procurement problem hiding in the yard.',
-        subheadline: 'When the cold chain breaks in the yard, Danone does not lose product. It loses shelf days.',
+        subheadline: 'If a carrier waits at the gate or the wrong reefer gets staged, procurement pays for an execution problem it did not create. YardFlow closes that gap.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
       ctaOverride: {
@@ -359,9 +359,9 @@ export const dannon: AccountMicrositeData = {
         personContext: 'Warm intro via Mark Shaughnessy',
       },
 
-      toneShift: 'Operator-to-operator. Jacqueline lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
+      toneShift: 'Procurement and carrier-management language. Focus on accessorials, appointment discipline, and supplier trust.',
       kpiLanguage: ['turn time', 'detention cost', 'dwell time', 'on-time pickup', 'carrier satisfaction'],
-      proofEmphasis: 'The headcount-neutral customer quote resonates with Jacqueline\'s operational reality.',
+      proofEmphasis: 'Use detention reduction and headcount-neutral volume absorption as procurement leverage, not just ops performance.',
     },
     {
       person: {
@@ -380,13 +380,13 @@ export const dannon: AccountMicrositeData = {
       label: 'Annette Tolve - Demand Planner',
       variantSlug: 'annette-tolve',
 
-      framingNarrative: 'Annette, When the cold chain breaks in the yard, Danone does not lose product. It loses shelf days.',
-      openingHook: 'Warm intro via Mark Shaughnessy and likely MODEX attendance - the yard is where execution meets reality for Dannon.',
-      stakeStatement: 'Every minute of excess dwell time at Dannon\'s facilities erodes the margin your team is working to protect.',
+      framingNarrative: 'Annette, S&OP can balance forecast, inventory, and service on paper. The yard is where those promises meet a live reefer, a real dock door, and a freshness clock that keeps moving. If the execution layer stays invisible to planning, the network keeps absorbing avoidable misses as if they were forecast error.',
+      openingHook: 'The plan does not fail in the spreadsheet. It fails when the right trailer is not at the right refrigerated door.',
+      stakeStatement: 'When the yard is invisible to planning, customer-service and freshness misses get misclassified as demand noise instead of execution delay.',
 
       heroOverride: {
         headline: 'Annette, the demand plan is only as good as the dock execution that fulfills it. The yard is the gap.',
-        subheadline: 'When the cold chain breaks in the yard, Danone does not lose product. It loses shelf days.',
+        subheadline: 'S&OP does not stop at the appointment calendar. The refrigerated door sequence has to match the plan or freshness and service both slip.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
       ctaOverride: {
@@ -399,9 +399,9 @@ export const dannon: AccountMicrositeData = {
         personContext: 'Warm intro via Mark Shaughnessy',
       },
 
-      toneShift: 'Operator-to-operator. Annette lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
+      toneShift: 'Planning and customer-service language. Tie yard performance directly to schedule adherence and freshness-protected service.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
-      proofEmphasis: 'The headcount-neutral customer quote resonates with Annette\'s operational reality.',
+      proofEmphasis: 'Lead with schedule adherence, dock readiness, and the way YardFlow reduces execution noise that planning teams currently absorb downstream.',
     },
     {
       person: {
@@ -416,17 +416,17 @@ export const dannon: AccountMicrositeData = {
         seniority: 'Director',
         function: 'Plant / Site Operations',
       },
-      fallbackLane: 'it',
+      fallbackLane: 'ops',
       label: 'Jay Luikart - Operations Executive',
       variantSlug: 'jay-luikart',
 
-      framingNarrative: 'Jay, When the cold chain breaks in the yard, Danone does not lose product. It loses shelf days.',
-      openingHook: 'Warm intro via Mark Shaughnessy and likely MODEX attendance - the yard is where execution meets reality for Dannon.',
-      stakeStatement: 'Every minute of excess dwell time at Dannon\'s facilities erodes the margin your team is working to protect.',
+      framingNarrative: 'Jay, the Away From Home business runs on tight appointments, mixed order profiles, and no tolerance for late docks. The yard is where that precision breaks first, especially when temperature-sensitive product shares space with the rest of the network.',
+      openingHook: 'Away From Home lives on appointment precision. The yard is still treating it like a general queue.',
+      stakeStatement: 'When the wrong trailer sits in the wrong lane for 20 extra minutes, the service failure is not abstract. It shows up as a missed delivery window and a frustrated customer account.',
 
       heroOverride: {
         headline: 'Jay, the Away From Home network runs on tight appointments. The yard is where appointment precision dies.',
-        subheadline: 'When the cold chain breaks in the yard, Danone does not lose product. It loses shelf days.',
+        subheadline: 'Away From Home orders punish yard variance faster than retail replenishment does. YardFlow gives site teams a deterministic sequence instead of radio-driven guesswork.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
       ctaOverride: {
@@ -439,9 +439,9 @@ export const dannon: AccountMicrositeData = {
         personContext: 'Warm intro via Mark Shaughnessy',
       },
 
-      toneShift: 'Operator-to-operator. Jay lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
+      toneShift: 'Field-operations language. He cares about appointment precision, warehouse flow, and what the site team has to do when the yard falls behind.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
-      proofEmphasis: 'The headcount-neutral customer quote resonates with Jay\'s operational reality.',
+      proofEmphasis: 'Lead with queue control, dock sequencing, and the ability to absorb more volume without adding dock-office headcount.',
     },
   ],
 

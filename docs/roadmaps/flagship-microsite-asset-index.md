@@ -82,6 +82,7 @@ This file is the fast lookup for the best current flagship microsite assets, the
   - [docs/MODEX_FLOOR_PLAN.md](../MODEX_FLOOR_PLAN.md)
   - [docs/roadmaps/outreach-sprint-plan.md](./outreach-sprint-plan.md)
 - Handling note: warm intro only via Mark Shaughnessy. No cold-booking path.
+- Browser coverage: [tests/e2e/microsite-variants.spec.ts](../../tests/e2e/microsite-variants.spec.ts) covers the Heiko Gerling warm-intro route
 
 ## Notes
 

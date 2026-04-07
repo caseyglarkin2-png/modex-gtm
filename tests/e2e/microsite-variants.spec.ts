@@ -51,3 +51,16 @@ test('coca-cola overview switches into a north america finance-and-supply varian
   await expect(page.getByRole('heading', { name: 'Mark, North America feels the yard problem in both the P&L and the supply plan.' })).toBeVisible();
   await expect(page.getByText('Detention and dwell are not just operating issues. They are one of the few leaks that hits cost, service, and working capital at the same time across the North America network.')).toBeVisible();
 });
+
+test('dannon overview keeps the warm-intro path on a named-person variant', async ({ page }) => {
+  const response = await page.goto('/for/dannon', { waitUntil: 'domcontentloaded' });
+
+  expect(response).not.toBeNull();
+  expect(response?.status()).toBeLessThan(400);
+
+  await page.getByRole('link', { name: 'Heiko Gerling' }).click();
+
+  await expect(page).toHaveURL(/\/for\/dannon\/heiko-gerling$/);
+  await expect(page.getByRole('heading', { name: 'Heiko, 15 facilities. Four temperature profiles. One yard protocol. That is the standard Danone North America needs.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Heiko, this conversation is routed through Mark Shaughnessy' })).toBeVisible();
+});
