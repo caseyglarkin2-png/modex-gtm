@@ -52,8 +52,8 @@ As of 2026-04-07, the engine is materially ahead of the original Sprint 0/Sprint
 3. Sprint 2 shell foundation is complete.
 4. Sprint 3 proof primitives are live for Frito-Lay, General Mills, and AB InBev.
 5. Sprint 5 operator surfaces now exist in the canonical analytics dashboard and the account detail page.
-6. Sprint 4 has started with Frito-Lay and General Mills expanded to five named-person variants each, and AB InBev now has a second research-grounded executive variant.
-7. Variant-switching browser coverage now validates named-person routing for Frito-Lay and General Mills.
+6. Sprint 4 has started with Frito-Lay and General Mills expanded to five named-person variants each, AB InBev now carrying two research-grounded executive variants, and Coca-Cola now carrying three research-grounded named-person routes.
+7. Variant-switching browser coverage now validates named-person routing for Frito-Lay, General Mills, AB InBev, and Coca-Cola.
 8. Microsite engagement CSV export is available through the existing export pipeline.
 9. Flagship route and source links are indexed in `docs/roadmaps/flagship-microsite-asset-index.md`.
 
@@ -80,10 +80,10 @@ As of 2026-04-07, the engine is materially ahead of the original Sprint 0/Sprint
 
 ### Current open work
 
-1. Extend the same named-person depth to the next flagship accounts.
-2. Deepen AB InBev beyond Elito and Ricardo with operator-level named-person evidence.
+1. Extend the same named-person depth to the remaining flagship account, Dannon, within its warm-intro constraint.
+2. Deepen AB InBev and Coca-Cola further where operator-level named-person evidence is available.
 3. Keep replacing thin role-based fallbacks with better named-person evidence as research improves.
-4. Move next to Coca-Cola once AB InBev has enough named-person depth.
+4. Finish the Dannon concierge branch and then return to fast-follow migration tooling.
 
 ## Best Ideas To Port
 
@@ -126,9 +126,10 @@ As of 2026-04-07, the engine is materially ahead of the original Sprint 0/Sprint
 
 ### modex-gtm gaps
 
-1. Flagship variant depth is still uneven outside Frito-Lay and General Mills, and AB InBev is still short of its target depth.
-2. Fast-follow migration tooling and completeness scoring are still ahead on the roadmap.
-3. Some account pages still lean more on role framing than named-person evidence and need cleanup.
+1. Dannon remains the last flagship account that still needs its warm-intro-specific named-person depth.
+2. AB InBev and Coca-Cola still have room for more operator-level named-person evidence even after the latest expansion.
+3. Fast-follow migration tooling and completeness scoring are still ahead on the roadmap.
+4. Some account pages still lean more on role framing than named-person evidence and need cleanup.
 
 ### clawd-control-plane strengths worth learning from
 

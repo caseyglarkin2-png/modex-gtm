@@ -38,3 +38,16 @@ test('ab inbev overview switches into a global supply variant with distinct copy
   await expect(page.getByRole('heading', { name: 'Ricardo, the supply network is standardized on paper. The yard still varies by site.' })).toBeVisible();
   await expect(page.getByText('You have led logistics, procurement, distribution, and post-acquisition integration across AB InBev.')).toBeVisible();
 });
+
+test('coca-cola overview switches into a north america finance-and-supply variant with distinct copy', async ({ page }) => {
+  const response = await page.goto('/for/coca-cola', { waitUntil: 'domcontentloaded' });
+
+  expect(response).not.toBeNull();
+  expect(response?.status()).toBeLessThan(400);
+
+  await page.getByRole('link', { name: 'Mark Eppert' }).click();
+
+  await expect(page).toHaveURL(/\/for\/coca-cola\/mark-eppert$/);
+  await expect(page.getByRole('heading', { name: 'Mark, North America feels the yard problem in both the P&L and the supply plan.' })).toBeVisible();
+  await expect(page.getByText('Detention and dwell are not just operating issues. They are one of the few leaks that hits cost, service, and working capital at the same time across the North America network.')).toBeVisible();
+});

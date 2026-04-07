@@ -53,6 +53,20 @@ This file is the fast lookup for the best current flagship microsite assets, the
   - [docs/PHONE_LIST_TOP10.md](../PHONE_LIST_TOP10.md)
 - Browser coverage: [tests/e2e/microsite-variants.spec.ts](../../tests/e2e/microsite-variants.spec.ts) covers the Ricardo Moreira route
 
+## Coca-Cola
+
+- Overview route: `/for/coca-cola`
+- Named-person routes:
+  - `/for/coca-cola/daniel-coe`
+  - `/for/coca-cola/dinesh-jadhav`
+  - `/for/coca-cola/mark-eppert`
+- Source of truth: [src/lib/microsites/accounts/coca-cola.ts](../../src/lib/microsites/accounts/coca-cola.ts)
+- Supporting account context:
+  - [docs/research-dossiers-top10.md](../research-dossiers-top10.md)
+  - [docs/MODEX_FLOOR_PLAN.md](../MODEX_FLOOR_PLAN.md)
+  - [docs/PHONE_LIST_TOP10.md](../PHONE_LIST_TOP10.md)
+- Browser coverage: [tests/e2e/microsite-variants.spec.ts](../../tests/e2e/microsite-variants.spec.ts) covers the Mark Eppert route
+
 ## Notes
 
 1. This index should only list routes backed by account config changes already committed or ready to commit.
