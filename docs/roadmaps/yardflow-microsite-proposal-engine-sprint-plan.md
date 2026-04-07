@@ -52,6 +52,7 @@ As of 2026-04-07, the engine is materially ahead of the original Sprint 0/Sprint
 3. Sprint 2 shell foundation is complete.
 4. Sprint 3 proof primitives are live for Frito-Lay, General Mills, and AB InBev.
 5. Sprint 5 operator surfaces now exist in the canonical analytics dashboard and the account detail page.
+6. Sprint 4 has started with Frito-Lay expanded to five named-person variants.
 
 ### Delivered commits
 
@@ -71,7 +72,7 @@ As of 2026-04-07, the engine is materially ahead of the original Sprint 0/Sprint
 ### Current open work
 
 1. Export microsite engagement CSV.
-2. Expand flagship role variants with stronger named-person research grounding.
+2. Expand named-person variant depth beyond Frito-Lay, starting with General Mills.
 3. Add variant-switching Playwright coverage.
 
 ## Best Ideas To Port
