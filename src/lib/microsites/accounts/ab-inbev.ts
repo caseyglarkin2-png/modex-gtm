@@ -40,31 +40,31 @@ export const abInbev: AccountMicrositeData = {
           description: 'Sensolus tells you where the trailer is. It does not move the trailer faster through the dock. You optimized trailer fleet usage by 15% in 4 months. Now imagine optimizing the dock turn itself by 50%.',
           kpiImpact: 'Sensolus: 15% fleet optimization. YardFlow: 50% dock turn reduction.',
           source: 'Sensolus partnership results, European deployment',
-          relevantPeople: ['abi-siqueira'],
+          relevantPeople: ['abi-siqueira', 'abi-moreira'],
         },
         {
           headline: 'Night loading for morning delivery',
           description: 'Route trucks loaded nightly for DSD morning delivery. The dock window is tight. There is no room for congestion. When a trailer misses its slot by 20 minutes, the morning delivery route slips.',
           kpiImpact: 'Missed loading windows cascade to 80+ delivery routes per facility',
-          relevantPeople: ['abi-siqueira'],
+          relevantPeople: ['abi-siqueira', 'abi-moreira'],
         },
         {
           headline: 'Summer peak + Super Bowl surge',
           description: 'Memorial Day through Labor Day drives 30-50% volume spikes. Super Bowl week is the single biggest delivery event. Yards designed for average throughput collapse during peak.',
           kpiImpact: '30-50% volume spike during summer peak',
-          relevantPeople: ['abi-siqueira'],
+          relevantPeople: ['abi-siqueira', 'abi-moreira'],
         },
         {
           headline: 'Mixed fleet chaos',
           description: '800+ owned trucks, third-party carriers, wholesaler trucks - three different fleets converging on the same dock doors. Add 200+ zero-emission vehicles with charging schedules and the yard becomes a scheduling nightmare.',
           kpiImpact: '3 fleet types competing for dock doors',
-          relevantPeople: ['abi-siqueira'],
+          relevantPeople: ['abi-siqueira', 'abi-moreira'],
         },
         {
           headline: 'M&A integration fragmentation',
           description: 'SABMiller (2016), Grupo Modelo, and years of acquisitions created fragmented yard processes. Different breweries run different protocols. Standardization is Elito\'s mandate - the yard is the last holdout.',
           source: 'SABMiller acquisition 2016',
-          relevantPeople: ['abi-siqueira'],
+          relevantPeople: ['abi-siqueira', 'abi-moreira'],
         },
       ],
     },
@@ -251,6 +251,60 @@ export const abInbev: AccountMicrositeData = {
       ],
       modexProximity: 'Cartersville, GA brewery is 90 min from MODEX venue. AB InBev is a major CPG/beverage co with likely MODEX attendance.',
     },
+    {
+      personaId: 'abi-moreira',
+      name: 'Ricardo Moreira',
+      firstName: 'Ricardo',
+      lastName: 'Moreira',
+      title: 'Chief Supply Officer',
+      company: 'Anheuser-Busch InBev',
+      email: 'ricardo.moreira@ab-inbev.com',
+      roleInDeal: 'decision-maker',
+      seniority: 'C-level',
+      function: 'Supply / Logistics / Procurement',
+      reportsTo: 'CEO Michel Doukeris',
+
+      careerHistory: [
+        { period: '1995-present', role: 'Multiple leadership roles across Ambev and AB InBev', company: 'AB InBev / Ambev', relevance: 'Nearly three decades inside the operating system he now needs to standardize globally.' },
+        { period: '2001-2012', role: 'Regional Sales Director; VP Logistics & Procurement, Latin America North', company: 'AB InBev / Ambev', relevance: 'Direct logistics and procurement background before the global supply seat.' },
+        { period: '2013-2018', role: 'Led Sales, Marketing, and Distribution in Mexico', company: 'AB InBev', relevance: 'Owned the Grupo Modelo commercial integration and knows the reality of post-M&A standardization.' },
+        { period: '2019-2023', role: 'CEO, Africa Zone', company: 'AB InBev', relevance: 'Ran a major operating zone before moving into the enterprise supply role.' },
+        { period: 'Current', role: 'Chief Supply Officer', company: 'AB InBev', relevance: 'Owns the global supply agenda spanning logistics, procurement, and execution discipline.' },
+      ],
+      yearsAtCompany: '29+',
+
+      currentMandate: 'Global supply standardization across procurement, logistics, and distribution execution',
+      strategicPriorities: [
+        'Cross-network supply standardization',
+        'Procurement and logistics coordination',
+        'Post-integration operating discipline',
+        'Reducing site-to-site execution variance',
+      ],
+      knownPainPoints: [
+        'Planning and tracking systems are standardized faster than dock execution protocols',
+        'M&A-driven process variance still shows up site by site in brewery yards',
+        'Distribution complexity between breweries, wholesalers, and mixed fleets',
+        'Need to translate global supply standards into repeatable site-level execution',
+      ],
+
+      publicQuotes: [
+        {
+          text: 'I am excited to collaborate with colleagues and partners from around the world.',
+          context: 'Public comments on taking the Chief Supply Officer role',
+          source: 'Procurement Magazine, March 2024',
+          relevanceToYardFlow: 'He is entering the role as a global standardizer and collaborator. YardFlow should be framed as execution discipline, not another point tool.',
+        },
+      ],
+
+      communicationStyle: 'Global supply executive with logistics and procurement depth. Lead with standardization, integration, and execution discipline rather than local site heroics.',
+      languagePreferences: ['standardization', 'collaboration', 'supply', 'logistics', 'procurement', 'execution discipline'],
+      kpiLanguage: ['dock turn time', 'network standardization', 'schedule adherence', 'fleet utilization', 'site-to-site variance'],
+      connectionHooks: [
+        'Reference his January 2024 move into the Chief Supply Officer role',
+        'Tie YardFlow to the same integration muscle he used after Grupo Modelo',
+        'Position the yard as the least standardized execution layer between breweries and wholesalers',
+      ],
+    },
   ],
 
   personVariants: [
@@ -293,6 +347,54 @@ export const abInbev: AccountMicrositeData = {
       toneShift: 'He is a transformation leader who sees himself as a change agent. He has public talks and case studies to reference. Mirror his own language (touchless, complexity reduction, transformation) and position YardFlow as the next chapter of the story he has been telling publicly for 5 years. Do not sell him - invite him to extend his own narrative.',
       kpiLanguage: ['touchless yard %', 'dock turn time', 'fleet utilization', 'schedule adherence', 'KPIs at all-time high', 'complexity reduction'],
       proofEmphasis: 'Lead with Sensolus comparison: they got 15% trailer fleet optimization, YardFlow delivers 50% dock turn reduction. He is already a buyer of yard tech. The deployment comparison is the hook. Also reference the o9 positioning: planning (o9) + tracking (Sensolus) + execution (YardFlow) = end-to-end.',
+    },
+    {
+      person: {
+        personaId: 'abi-moreira',
+        name: 'Ricardo Moreira',
+        firstName: 'Ricardo',
+        lastName: 'Moreira',
+        title: 'Chief Supply Officer',
+        company: 'Anheuser-Busch InBev',
+        email: 'ricardo.moreira@ab-inbev.com',
+        roleInDeal: 'decision-maker',
+        seniority: 'C-level',
+        function: 'Supply / Logistics / Procurement',
+      },
+      fallbackLane: 'executive',
+      label: 'Ricardo Moreira - Chief Supply Officer',
+      variantSlug: 'ricardo-moreira',
+
+      framingNarrative: 'Ricardo, you took the Chief Supply Officer role after leading Africa Zone and earlier integrating Grupo Modelo. You have already standardized procurement, logistics, and distribution across acquisitions and geographies. The yard is still the least standardized execution layer in the AB InBev system. It is where the same planned load, tracked trailer, and dock process still vary site by site.',
+      openingHook: 'You own global supply now. The yard is still a local workaround.',
+      stakeStatement: 'AB InBev standardized planning with o9 and asset visibility with Sensolus. But dock execution still changes brewery by brewery. That site-level variance is exactly the kind of supply friction a Chief Supply Officer is supposed to eliminate.',
+
+      heroOverride: {
+        headline: 'Ricardo, the supply network is standardized on paper. The yard still varies by site.',
+        subheadline: 'You have led logistics, procurement, distribution, and post-acquisition integration across AB InBev. YardFlow gives you one execution protocol between brewery, wholesaler, and fleet so the dock no longer depends on local workarounds.',
+      },
+      sectionOrder: ['hero', 'problem', 'proof', 'solution', 'network-map', 'roi', 'cta'],
+      ctaOverride: {
+        type: 'meeting',
+        headline: 'Ricardo, let\'s compare global standards to yard reality.',
+        subtext: '30 minutes on where dock execution is still creating site-to-site variance across breweries and ABOne distribution.',
+        buttonLabel: 'Book a Supply Review',
+        calendarLink: BOOKING_LINK,
+        personName: 'Ricardo',
+        personContext: 'global supply standardization across brewery and ABOne yards',
+      },
+      sectionOverrides: [
+        {
+          sectionType: 'solution',
+          override: {
+            accountFit: 'Ricardo already owns logistics, procurement, and cross-network operating discipline at the enterprise level. YardFlow gives the Chief Supply Officer one execution standard across breweries and ABOne distribution, not another disconnected visibility tool.',
+          },
+        },
+      ],
+
+      toneShift: 'He is a global supply executive with logistics and procurement depth. Do not make this a plant-manager conversation. Speak to standardization, integration, and operating discipline across zones.',
+      kpiLanguage: ['network standardization', 'dock turn time', 'site variance', 'schedule adherence', 'fleet utilization', 'execution discipline'],
+      proofEmphasis: 'Lead with cross-network repeatability. YardFlow is not another visibility layer. It is the operating protocol that makes o9 planning and Sensolus tracking behave the same way from brewery to brewery.',
     },
   ],
 

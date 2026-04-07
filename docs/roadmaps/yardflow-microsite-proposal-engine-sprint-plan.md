@@ -1,6 +1,6 @@
 # YardFlow Microsite Proposal Engine Sprint Plan
 
-Status: In progress through Sprint 5
+Status: In progress through Sprint 6
 Created: 2026-04-07
 Primary repo: modex-gtm
 Reference repo: clawd-control-plane
@@ -52,9 +52,10 @@ As of 2026-04-07, the engine is materially ahead of the original Sprint 0/Sprint
 3. Sprint 2 shell foundation is complete.
 4. Sprint 3 proof primitives are live for Frito-Lay, General Mills, and AB InBev.
 5. Sprint 5 operator surfaces now exist in the canonical analytics dashboard and the account detail page.
-6. Sprint 4 has started with Frito-Lay and General Mills expanded to five named-person variants each.
+6. Sprint 4 has started with Frito-Lay and General Mills expanded to five named-person variants each, and AB InBev now has a second research-grounded executive variant.
 7. Variant-switching browser coverage now validates named-person routing for Frito-Lay and General Mills.
 8. Microsite engagement CSV export is available through the existing export pipeline.
+9. Flagship route and source links are indexed in `docs/roadmaps/flagship-microsite-asset-index.md`.
 
 ### Delivered commits
 
@@ -72,11 +73,17 @@ As of 2026-04-07, the engine is materially ahead of the original Sprint 0/Sprint
 4. New microsite CTA clicks create DB-backed activity rows for follow-up visibility.
 5. Operators can export microsite engagement data as CSV from the analytics surface.
 
+### Documentation and review aids
+
+1. Flagship route and source links now live in `docs/roadmaps/flagship-microsite-asset-index.md`.
+2. The roadmap and checklist docs remain the accountability source for which flagship routes are actually research-grounded.
+
 ### Current open work
 
 1. Extend the same named-person depth to the next flagship accounts.
-2. Decide the next flagship personalization target after General Mills.
+2. Deepen AB InBev beyond Elito and Ricardo with operator-level named-person evidence.
 3. Keep replacing thin role-based fallbacks with better named-person evidence as research improves.
+4. Move next to Coca-Cola once AB InBev has enough named-person depth.
 
 ## Best Ideas To Port
 
@@ -119,11 +126,9 @@ As of 2026-04-07, the engine is materially ahead of the original Sprint 0/Sprint
 
 ### modex-gtm gaps
 
-1. Flagship variant depth is still uneven outside Frito-Lay, General Mills, and AB InBev.
-2. CSV export for microsite engagement is not shipped yet.
-3. Variant-switching browser coverage is not shipped yet.
-4. Fast-follow migration tooling and completeness scoring are still ahead on the roadmap.
-5. Some account pages still lean more on role framing than named-person evidence and need cleanup.
+1. Flagship variant depth is still uneven outside Frito-Lay and General Mills, and AB InBev is still short of its target depth.
+2. Fast-follow migration tooling and completeness scoring are still ahead on the roadmap.
+3. Some account pages still lean more on role framing than named-person evidence and need cleanup.
 
 ### clawd-control-plane strengths worth learning from
 

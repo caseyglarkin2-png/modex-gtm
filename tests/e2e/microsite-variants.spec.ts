@@ -25,3 +25,16 @@ test('general mills overview switches into a customer-operations variant with di
   await expect(page.getByRole('heading', { name: 'Zoe, the customer promise breaks at the dock before it breaks on the shelf.' })).toBeVisible();
   await expect(page.getByText('Retail service levels start breaking in the yard before the customer ever sees the miss.')).toBeVisible();
 });
+
+test('ab inbev overview switches into a global supply variant with distinct copy', async ({ page }) => {
+  const response = await page.goto('/for/ab-inbev', { waitUntil: 'domcontentloaded' });
+
+  expect(response).not.toBeNull();
+  expect(response?.status()).toBeLessThan(400);
+
+  await page.getByRole('link', { name: 'Ricardo Moreira' }).click();
+
+  await expect(page).toHaveURL(/\/for\/ab-inbev\/ricardo-moreira$/);
+  await expect(page.getByRole('heading', { name: 'Ricardo, the supply network is standardized on paper. The yard still varies by site.' })).toBeVisible();
+  await expect(page.getByText('You have led logistics, procurement, distribution, and post-acquisition integration across AB InBev.')).toBeVisible();
+});
