@@ -67,6 +67,22 @@ This file is the fast lookup for the best current flagship microsite assets, the
   - [docs/PHONE_LIST_TOP10.md](../PHONE_LIST_TOP10.md)
 - Browser coverage: [tests/e2e/microsite-variants.spec.ts](../../tests/e2e/microsite-variants.spec.ts) covers the Mark Eppert route
 
+## Dannon
+
+- Overview route: `/for/dannon`
+- Named-person routes:
+  - `/for/dannon/heiko-gerling`
+  - `/for/dannon/whitney-klemm`
+  - `/for/dannon/jacqueline-beckman`
+  - `/for/dannon/annette-tolve`
+  - `/for/dannon/jay-luikart`
+- Source of truth: [src/lib/microsites/accounts/dannon.ts](../../src/lib/microsites/accounts/dannon.ts)
+- Supporting account context:
+  - [docs/SHOWCASE_PROOF_SPRINT_REPORT.md](../SHOWCASE_PROOF_SPRINT_REPORT.md)
+  - [docs/MODEX_FLOOR_PLAN.md](../MODEX_FLOOR_PLAN.md)
+  - [docs/roadmaps/outreach-sprint-plan.md](./outreach-sprint-plan.md)
+- Handling note: warm intro only via Mark Shaughnessy. No cold-booking path.
+
 ## Notes
 
 1. This index should only list routes backed by account config changes already committed or ready to commit.
