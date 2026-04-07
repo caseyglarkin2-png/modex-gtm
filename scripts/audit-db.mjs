@@ -1,5 +1,11 @@
-// Quick DB audit — accounts + personas with quality scores
+// Quick DB audit - accounts + personas with quality scores
+import nextEnv from '@next/env';
 import { PrismaClient } from '@prisma/client';
+
+const { loadEnvConfig } = nextEnv;
+
+loadEnvConfig(process.cwd());
+
 const p = new PrismaClient();
 
 const accounts = await p.account.findMany({ orderBy: { priority_score: 'desc' } });
