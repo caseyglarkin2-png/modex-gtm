@@ -7,6 +7,7 @@
  *   2. personas.json          — named contacts with titles, roles, emails
  *   3. docs/research/         — standalone executive dossiers (deep)
  *   4. docs/research-dossiers-top10.md — consolidated research doc (medium)
+ *   5. facility-facts.json    — source-backed facility counts for ROI-safe network math
  *
  * Outputs TypeScript AccountMicrositeData files to src/lib/microsites/accounts/
  *
@@ -18,6 +19,12 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
+import {
+  buildFacilityFactMap,
+  normalizeAccountKey,
+  resolveFacilityCountLabel,
+  type FacilityFactRecord,
+} from '../src/lib/research/facility-counts';
 
 // ── Types ─────────────────────────────────────────────────────────────
 
@@ -125,6 +132,7 @@ const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/sche
 const ROOT = path.resolve(__dirname, '..');
 const ACCOUNTS_JSON = path.join(ROOT, 'src/lib/data/accounts.json');
 const PERSONAS_JSON = path.join(ROOT, 'src/lib/data/personas.json');
+const FACILITY_FACTS_JSON = path.join(ROOT, 'src/lib/data/facility-facts.json');
 const DOSSIERS_DIR = path.join(ROOT, 'docs/research');
 const TOP10_DOC = path.join(ROOT, 'docs/research-dossiers-top10.md');
 const OUTPUT_DIR = path.join(ROOT, 'src/lib/microsites/accounts');
@@ -185,6 +193,16 @@ function loadAccounts(): AccountJSON[] {
 function loadPersonas(): PersonaJSON[] {
   return JSON.parse(fs.readFileSync(PERSONAS_JSON, 'utf-8'));
 }
+
+function loadFacilityFacts(): FacilityFactRecord[] {
+  if (!fs.existsSync(FACILITY_FACTS_JSON)) {
+    return [];
+  }
+
+  return JSON.parse(fs.readFileSync(FACILITY_FACTS_JSON, 'utf-8'));
+}
+
+const facilityFactsByAccount = buildFacilityFactMap(loadFacilityFacts());
 
 function slugify(name: string): string {
   return name
@@ -923,7 +941,14 @@ function generateSections(
   });
 
   // ── network ──
-  const facilityCount = data?.facilityCount || account.facility_count || (account.icp_fit >= 4 ? '20+' : '10+');
+  const facilityFact = facilityFactsByAccount.get(normalizeAccountKey(account.name));
+  const facilityCount = resolveFacilityCountLabel({
+    accountName: account.name,
+    facilityFact,
+    dossierFacilityCount: data?.facilityCount,
+    accountFacilityCount: account.facility_count,
+    icpFit: account.icp_fit,
+  });
   const dailyMoves = data?.dailyTrailerMoves || account.daily_trailer_moves || '1,000+';
   const facilityTypes = account.facility_types
     ? account.facility_types.map(t => `'${escapeStr(t)}'`).join(', ')
@@ -1128,7 +1153,14 @@ function generateAccountFile(
   ],`;
 
   // Network
-  const facilityCount = dossier?.facilityCount || account.facility_count || (account.icp_fit >= 4 ? '20+' : '10+');
+  const facilityFact = facilityFactsByAccount.get(normalizeAccountKey(account.name));
+  const facilityCount = resolveFacilityCountLabel({
+    accountName: account.name,
+    facilityFact,
+    dossierFacilityCount: dossier?.facilityCount,
+    accountFacilityCount: account.facility_count,
+    icpFit: account.icp_fit,
+  });
   const dailyMoves = dossier?.dailyTrailerMoves || account.daily_trailer_moves || '1,000+';
   const fleet = dossier?.fleet || account.fleet_profile || 'Contract carriers and 3PL';
 

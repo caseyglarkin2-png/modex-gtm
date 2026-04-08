@@ -1,0 +1,87 @@
+[
+	{
+		"account": "AB InBev",
+		"facilityCount": "100",
+		"scope": "U.S. Anheuser-Busch facilities footprint referenced by the flagship AB InBev microsite.",
+		"status": "verified",
+		"confidence": "official",
+		"summary": "Anheuser-Busch states that it maintains 100 facilities across the country, which aligns with the flagship AB InBev network framing already used in the microsite.",
+		"updatedAt": "2026-04-07",
+		"sources": [
+			{
+				"label": "Anheuser-Busch facilities page",
+				"url": "https://www.anheuser-busch.com/facilities"
+			},
+			{
+				"label": "Elito Siqueira AB InBev dossier"
+			}
+		]
+	},
+	{
+		"account": "Coca-Cola",
+		"facilityCount": "70+",
+		"scope": "Coca-Cola Consolidated's disclosed 70-site footprint used as the conservative lower bound for the flagship Coca-Cola system scenario.",
+		"status": "verified",
+		"confidence": "public-filing",
+		"summary": "Coca-Cola Consolidated disclosed 60 distribution centers and 10 manufacturing plants in its 2025 10-K, giving the flagship Coca-Cola system model an official 70-site lower bound before any additional bottler sites are added.",
+		"updatedAt": "2026-04-07",
+		"sources": [
+			{
+				"label": "Coca-Cola Consolidated 2025 10-K",
+				"url": "https://www.sec.gov/Archives/edgar/data/317540/000162828026009057/coke-20251231.htm"
+			}
+		]
+	},
+	{
+		"account": "Dannon",
+		"facilityCount": "13",
+		"scope": "Danone North America production locations listed on the official company overview page.",
+		"status": "verified",
+		"confidence": "official",
+		"summary": "Danone North America states that it operates 13 production locations, replacing the earlier 15-plus placeholder in the Dannon flagship microsite.",
+		"updatedAt": "2026-04-07",
+		"sources": [
+			{
+				"label": "Danone North America about page",
+				"url": "https://www.danonenorthamerica.com/about-us/"
+			}
+		]
+	},
+	{
+		"account": "Frito-Lay",
+		"facilityCount": "230+",
+		"scope": "North America manufacturing plus distribution footprint disclosed in Frito-Lay's official company facts sheet.",
+		"status": "verified",
+		"confidence": "official",
+		"summary": "Frito-Lay states that it has 30-plus manufacturing facilities across the U.S. and Canada and 200-plus distribution centers, supporting a conservative 230-plus site lower bound for the flagship network scenario.",
+		"updatedAt": "2026-04-07",
+		"sources": [
+			{
+				"label": "Frito-Lay company facts PDF"
+			},
+			{
+				"label": "Frito-Lay supply chain manufacturing page",
+				"url": "https://www.fritolay.com/b-roll-video-manufacturing"
+			}
+		]
+	},
+	{
+		"account": "General Mills",
+		"facilityCount": "41",
+		"scope": "General Mills owned-plant footprint used as the conservative lower bound for the flagship General Mills scenario.",
+		"status": "verified",
+		"confidence": "official",
+		"summary": "General Mills' 2025 Global Responsibility Report says the company has 41 owned plants around the world, replacing the earlier third-party 50-plus placeholder with an official lower bound.",
+		"updatedAt": "2026-04-07",
+		"sources": [
+			{
+				"label": "General Mills 2025 Global Responsibility Report",
+				"url": "https://www.generalmills.com/-/media/project/gmi/corporate/corporate-master/files/about-us/commitments/general-mills-global-responsibility-report.pdf"
+			},
+			{
+				"label": "General Mills how we make it",
+				"url": "https://www.generalmills.com/how-we-make-it"
+			}
+		]
+	}
+]
