@@ -12,6 +12,8 @@ const SYSTEM_BLOCKED_DOMAINS = new Set([
   'freightroll.com',
 ]);
 
+const POSITIVE_EMAIL_STATUSES = ['sent', 'delivered', 'opened', 'clicked'] as const;
+
 export interface RecipientGuardDecision {
   ok: boolean;
   reason?: string;
@@ -20,6 +22,48 @@ export interface RecipientGuardDecision {
 
 export function getEmailDomain(email: string): string {
   return email.split('@')[1]?.toLowerCase() || '';
+}
+
+async function hasExactUnsubscribe(prisma: PrismaClient, email: string): Promise<boolean> {
+  const row = await prisma.unsubscribedEmail.findUnique({
+    where: { email },
+    select: { email: true },
+  });
+
+  return !!row;
+}
+
+async function hasRecoverySignalAfterBounce(
+  prisma: PrismaClient,
+  where: { email?: string; domain?: string }
+): Promise<boolean> {
+  const logs = await prisma.emailLog.findMany({
+    where: {
+      status: { in: ['bounced', ...POSITIVE_EMAIL_STATUSES] },
+      ...(where.email ? { to_email: where.email } : {}),
+      ...(where.domain ? { to_email: { endsWith: `@${where.domain}` } } : {}),
+    },
+    select: {
+      status: true,
+      sent_at: true,
+    },
+    orderBy: { sent_at: 'asc' },
+  });
+
+  let lastBounceAt: Date | null = null;
+
+  for (const log of logs) {
+    if (log.status === 'bounced') {
+      lastBounceAt = log.sent_at;
+      continue;
+    }
+
+    if (!lastBounceAt || log.sent_at > lastBounceAt) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 export async function getSuppressedDomains(prisma: PrismaClient): Promise<Set<string>> {
@@ -50,9 +94,16 @@ export async function evaluateRecipientEligibility(
     return { ok: false, reason: `Suppressed domain: ${domain}`, domain };
   }
 
+  if (await hasExactUnsubscribe(prisma, email)) {
+    return { ok: false, reason: 'Recipient explicitly unsubscribed', domain };
+  }
+
   const suppressedDomains = await getSuppressedDomains(prisma);
   if (suppressedDomains.has(domain)) {
-    return { ok: false, reason: `Bounce-suppressed domain: ${domain}`, domain };
+    const domainRecovered = await hasRecoverySignalAfterBounce(prisma, { domain });
+    if (!domainRecovered) {
+      return { ok: false, reason: `Bounce-suppressed domain: ${domain}`, domain };
+    }
   }
 
   const persona = await prisma.persona.findFirst({
@@ -67,10 +118,14 @@ export async function evaluateRecipientEligibility(
   });
 
   if (persona) {
-    if (persona.do_not_contact) {
+    const recipientRecovered = (persona.do_not_contact || !persona.is_contact_ready)
+      ? await hasRecoverySignalAfterBounce(prisma, { email })
+      : false;
+
+    if (persona.do_not_contact && !recipientRecovered) {
       return { ok: false, reason: 'Contact marked do_not_contact', domain };
     }
-    if (!persona.is_contact_ready) {
+    if (!persona.is_contact_ready && !recipientRecovered) {
       return { ok: false, reason: `Contact is not ready for send (${persona.quality_band})`, domain };
     }
     return { ok: true, domain };

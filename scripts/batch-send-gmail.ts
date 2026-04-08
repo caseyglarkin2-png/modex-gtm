@@ -4,14 +4,17 @@
  * Usage:
  *   DRY_RUN=1 npx tsx --env-file=.env.local scripts/batch-send-gmail.ts --contacts=sniper-10
  *   npx tsx --env-file=.env.local scripts/batch-send-gmail.ts --contacts=sniper-10
+ *   npx tsx --env-file=.env.local scripts/batch-send-gmail.ts --contacts=sniper-10 --only=person@example.com
+ *   RECOVERY_RESEND_OK=1 npx tsx --env-file=.env.local scripts/batch-send-gmail.ts --contacts=review-resend-ryan-hutcherson
  *
  * Features:
  *   - Loads contact list from scripts/contacts/<name>.ts
- *   - Checks unsubscribed_emails table before sending
+ *   - Runs the shared recipient guard before sending
  *   - Sends via Gmail API (casey@freightroll.com)
  *   - Logs each send to email_logs table via Prisma
  *   - Rate limited: 6 seconds between sends (10/min max)
  *   - DRY_RUN=1 for preview-only mode
+ *   - Review resend manifests require RECOVERY_RESEND_OK=1 for live sends
  */
 
 import { PrismaClient } from '@prisma/client';
@@ -22,7 +25,6 @@ const DRY_RUN = process.env.DRY_RUN === '1';
 const RATE_LIMIT_MS = 6000;
 const prisma = new PrismaClient();
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://modex-gtm.vercel.app';
 const FROM_EMAIL = 'casey@freightroll.com';
 const FROM_NAME = 'Casey Larkin';
@@ -35,8 +37,29 @@ export interface BatchContact {
   accountName: string;
   personaName?: string;
   accountSlug: string;
+  assetPath?: string;
+  assetLabel?: string;
+  previewEyebrow?: string;
+  previewTitle?: string;
+  previewText?: string;
+  previewTags?: string[];
   subject: string;
   body: string[];
+}
+
+function getAssetUrl(contact: BatchContact): string {
+  return contact.assetPath
+    ? `${BASE_URL}${contact.assetPath}`
+    : `${BASE_URL}/for/${contact.accountSlug}`;
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 // ── Gmail API (inline — avoids ESM issues in scripts) ───────────────────────
@@ -125,11 +148,45 @@ async function sendViaGmail(to: string, subject: string, html: string, plainText
 
 // ── HTML template ───────────────────────────────────────────────────────────
 
-function wrapHtml(paragraphs: string[], toEmail: string): string {
-  const unsubUrl = `${BASE_URL}/unsubscribe?email=${encodeURIComponent(toEmail)}`;
-  const bodyHtml = paragraphs
-    .map(p => `<p style="margin:0 0 14px 0;">${p}</p>`)
+function renderAssetCard(contact: BatchContact, assetUrl: string): string {
+  const eyebrow = escapeHtml(contact.previewEyebrow ?? `Private brief for ${contact.firstName}`);
+  const title = escapeHtml(contact.previewTitle ?? contact.assetLabel ?? `${contact.accountName} brief`);
+  const text = contact.previewText
+    ? `<p style="margin:10px 0 0;font-size:14px;line-height:1.65;color:#475569;">${escapeHtml(contact.previewText)}</p>`
+    : '';
+  const tags = contact.previewTags?.length
+    ? `<p style="margin:16px 0 18px;">${contact.previewTags
+        .map((tag) => `<span style="display:inline-block;margin:0 8px 8px 0;padding:7px 10px;border:1px solid #cbd5e1;border-radius:999px;background:#ffffff;color:#334155;font-size:11px;font-weight:600;letter-spacing:0.01em;">${escapeHtml(tag)}</span>`)
+        .join('')}</p>`
+    : '';
+
+  return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:22px 0 18px;border:1px solid #c7dde1;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#eef7f8 0%,#ffffff 100%);">
+  <tr>
+    <td style="padding:18px 18px 10px;background:linear-gradient(135deg,#12343b 0%,#0f766e 100%);">
+      <p style="margin:0;font-size:11px;line-height:1.4;letter-spacing:0.16em;text-transform:uppercase;color:#d5f2ef;font-weight:700;">${eyebrow}</p>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:20px 18px 18px;">
+      <p style="margin:0;font-size:24px;line-height:1.18;color:#0f172a;font-weight:700;letter-spacing:-0.03em;">${title}</p>
+      ${text}
+      ${tags}
+      <p style="margin:0;">
+        <a href="${assetUrl}" style="display:inline-block;padding:12px 16px;border-radius:999px;background:#0f766e;color:#ffffff;text-decoration:none;font-size:13px;font-weight:700;">Open the brief</a>
+      </p>
+    </td>
+  </tr>
+</table>`;
+}
+
+function wrapHtml(contact: BatchContact): string {
+  const unsubUrl = `${BASE_URL}/unsubscribe?email=${encodeURIComponent(contact.to)}`;
+  const assetUrl = getAssetUrl(contact);
+  const bodyHtml = contact.body
+    .filter((paragraph) => paragraph.trim() !== assetUrl)
+    .map((paragraph) => `<p style="margin:0 0 14px 0;">${escapeHtml(paragraph)}</p>`)
     .join('\n  ');
+  const assetCard = renderAssetCard(contact, assetUrl);
   return `<!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/></head>
@@ -137,6 +194,7 @@ function wrapHtml(paragraphs: string[], toEmail: string): string {
 <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="max-width:640px;margin:0 auto;">
 <tr><td style="padding:32px 24px 24px;color:#1a1a1a;font-size:15px;line-height:1.75;letter-spacing:-0.01em;">
   ${bodyHtml}
+  ${assetCard}
 </td></tr>
 <tr><td style="padding:0 24px 32px;">
   <table cellpadding="0" cellspacing="0" role="presentation" style="border-top:1px solid #e0e0e0;padding-top:16px;width:100%;">
@@ -147,7 +205,7 @@ function wrapHtml(paragraphs: string[], toEmail: string): string {
     <p style="margin:0;font-size:12px;">
       <a href="https://yardflow.ai" style="color:#0e7490;text-decoration:none;font-weight:500;">yardflow.ai</a>
       <span style="color:#d1d5db;margin:0 6px;">|</span>
-      <a href="${BOOKING_LINK}" style="color:#0e7490;text-decoration:none;font-weight:500;">Book a Meeting</a>
+      <a href="https://yardflow.ai/roi" style="color:#0e7490;text-decoration:none;font-weight:500;">Run ROI</a>
     </p>
   </td></tr></table>
 </td></tr>
@@ -166,11 +224,11 @@ function toPlainText(paragraphs: string[]): string {
   return paragraphs.join('\n\n') + '\n\n--\nCasey Larkin\nGTM Lead, YardFlow by FreightRoll\nhttps://yardflow.ai';
 }
 
-// ── Pre-flight checks ───────────────────────────────────────────────────────
+type RecipientGuardModule = typeof import('../src/lib/email/recipient-guard');
 
-async function checkUnsubscribed(email: string): Promise<boolean> {
-  const row = await prisma.unsubscribedEmail.findUnique({ where: { email } });
-  return !!row;
+async function loadRecipientGuard(): Promise<RecipientGuardModule> {
+  const mod = await import('../src/lib/email/recipient-guard.ts');
+  return ('default' in mod ? mod.default : mod) as RecipientGuardModule;
 }
 
 // ── Main ────────────────────────────────────────────────────────────────────
@@ -178,12 +236,14 @@ async function checkUnsubscribed(email: string): Promise<boolean> {
 async function main() {
   // Parse --contacts=<name> arg
   const contactsArg = process.argv.find(a => a.startsWith('--contacts='));
+  const onlyArg = process.argv.find(a => a.startsWith('--only='));
   if (!contactsArg) {
     console.error('Usage: npx tsx --env-file=.env.local scripts/batch-send-gmail.ts --contacts=<name>');
     console.error('Example: --contacts=sniper-10');
     process.exit(1);
   }
   const contactsName = contactsArg.split('=')[1];
+  const onlyEmail = onlyArg?.split('=')[1]?.toLowerCase();
 
   // Dynamic import of contact list
   let contacts: BatchContact[];
@@ -199,8 +259,32 @@ async function main() {
     process.exit(1);
   }
 
+  if (onlyEmail) {
+    contacts = contacts.filter((contact) => contact.to.toLowerCase() === onlyEmail);
+    if (contacts.length === 0) {
+      console.error(`No contact matched --only=${onlyEmail} in contacts/${contactsName}.ts`);
+      process.exit(1);
+    }
+  }
+
+  const isReviewResendManifest = contactsName.startsWith('review-resend-');
+  if (isReviewResendManifest && contacts.length !== 1) {
+    console.error(`Review resend manifests must contain exactly one contact. ${contactsName} has ${contacts.length}.`);
+    process.exit(1);
+  }
+
+  if (isReviewResendManifest && !DRY_RUN && process.env.RECOVERY_RESEND_OK !== '1') {
+    console.error('Live review resend requires RECOVERY_RESEND_OK=1. Dry run first, then send one contact and monitor before the next.');
+    process.exit(1);
+  }
+
+  const { evaluateRecipientEligibility } = await loadRecipientGuard();
+
   console.log(`\n=== Batch Send via Gmail API ===`);
   console.log(`Contact list: ${contactsName} (${contacts.length} contacts)`);
+  if (onlyEmail) {
+    console.log(`Filtered to: ${onlyEmail}`);
+  }
   console.log(`Mode: ${DRY_RUN ? 'DRY RUN (preview only)' : 'LIVE SEND'}`);
   console.log(`From: ${FROM_NAME} <${FROM_EMAIL}>`);
   console.log(`Rate limit: ${RATE_LIMIT_MS}ms between sends\n`);
@@ -226,25 +310,29 @@ async function main() {
     console.log(`[${idx}/${contacts.length}] ${contact.to} (${contact.accountName})`);
     console.log(`  Subject: ${contact.subject}`);
 
-    // Check unsubscribed
-    const unsub = await checkUnsubscribed(contact.to);
-    if (unsub) {
-      console.log('  -> SKIP: unsubscribed\n');
+    const guard = await evaluateRecipientEligibility(prisma, contact.to, {
+      allowPayloadReady: true,
+      payloadReady: true,
+      payloadDoNotContact: false,
+    });
+    if (!guard.ok) {
+      console.log(`  -> SKIP: ${guard.reason}\n`);
       skipped++;
       continue;
     }
 
     if (DRY_RUN) {
+      const assetUrl = getAssetUrl(contact);
       console.log(`  Name: ${contact.firstName} | Account: ${contact.accountName}`);
       console.log(`  Body preview: ${contact.body[1]?.slice(0, 100)}...`);
-      console.log(`  Microsite: ${BASE_URL}/for/${contact.accountSlug}`);
+      console.log(`  Asset: ${contact.assetLabel ?? 'Microsite'} -> ${assetUrl}`);
       console.log('  -> DRY RUN, skipping send\n');
       skipped++;
       continue;
     }
 
     try {
-      const html = wrapHtml(contact.body, contact.to);
+      const html = wrapHtml(contact);
       const plainText = toPlainText(contact.body);
       const msgId = await sendViaGmail(contact.to, contact.subject, html, plainText);
 

@@ -1,10 +1,19 @@
-# 🔔 Resend Webhook Setup Guide
+# Resend Webhook Setup Guide
+
+This document applies only to legacy Resend-based send flows.
+
+Current state:
+
+1. The app sender and Gmail batch scripts now use Gmail API.
+2. Gmail sends do not emit outbound delivery, open, click, or bounce webhooks into `/api/webhooks/email` or `/api/webhooks/resend` in this repo.
+3. `webhook_events` being empty does not explain missing Gmail status updates. It is expected under the current sender path.
+4. Configure this only if a Resend-backed route is reintroduced and you want Resend event tracking.
 
 ## Critical: Webhook Setup Required
 
-**Status:** Webhook endpoint exists in code (`/api/webhooks/email`) but NOT configured in Resend dashboard.
+**Status:** Webhook endpoint exists in code (`/api/webhooks/email`) for Resend-style payloads, but it does not affect Gmail sends.
 
-**Without this setup:** Email opens, bounces, and clicks won't be tracked.
+**Without this setup:** Legacy Resend opens, bounces, and clicks won't be tracked.
 
 ---
 
@@ -13,9 +22,11 @@
 1. Go to [Resend Dashboard](https://resend.com/webhooks)
 2. Click **"Create Webhook"** (or find existing one for `modex-gtm.vercel.app`)
 3. Set **Endpoint URL** to:
-   ```
+
+   ```text
    https://modex-gtm.vercel.app/api/webhooks/email
    ```
+
 4. Select **Events** to track:
    - ✅ `email.sent`
    - ✅ `email.delivered`
@@ -34,15 +45,18 @@
 1. Go to [Vercel Dashboard](https://vercel.com/modex-gtm/settings/environment-variables)
 2. Click **"Add New"**
 3. Create variable:
-   ```
+
+   ```text
    Key:   RESEND_WEBHOOK_SECRET
    Value: whsec_xxxxxxxxxxxxx  (paste from step 1)
    ```
+
 4. Select environments: **Production, Preview, Development**
 5. Click **"Save"**
 
 You also need:
-```
+
+```text
 Key:   NEXT_PUBLIC_APP_URL
 Value: https://modex-gtm.vercel.app
 ```
@@ -66,6 +80,7 @@ curl -X POST https://modex-gtm.vercel.app/api/email/send \
 ```
 
 Then open the email and:
+
 - ✅ Click a link in the email
 - ✅ Wait 5 minutes
 - ✅ Check `/analytics/emails` — should show "Clicked" status
@@ -86,7 +101,7 @@ Then open the email and:
 When Resend sends events, this is what happens:
 
 | Resend Event | Action |
-|---|---|
+| --- | --- |
 | `email.delivered` | Update `EmailLog.status = 'delivered'` |
 | `email.opened` | Update `EmailLog.status = 'opened'`, set `opened_at` |
 | `email.clicked` | Update `EmailLog.status = 'clicked'`, set `clicked_at` |
@@ -98,16 +113,19 @@ When Resend sends events, this is what happens:
 ## Debugging
 
 ### "Webhook not received"
+
 - Check Resend Dashboard → Webhooks → Test event
 - Verify endpoint URL is correct
 - Check Vercel logs for webhook handler errors
 
 ### "Webhook signature verification failed"
+
 - Make sure `RESEND_WEBHOOK_SECRET` is set in Vercel
 - It must match the secret shown in Resend dashboard
 - After updating, wait 5 min for Vercel to deploy
 
 ### "Email status not updating in analytics"
+
 - Verify `provider_message_id` is being saved when email is sent
 - Check Vercel logs: `console.error` in webhook handler
 - Open email preview in Resend dashboard to manually test
@@ -117,7 +135,7 @@ When Resend sends events, this is what happens:
 ## Current Status
 
 | Component | Status | Next Step |
-|-----------|--------|-----------|
+| --- | --- | --- |
 | Email send API | ✅ Working | Send test emails |
 | Email analytics dashboard | ✅ Working | View sent emails |
 | Webhook endpoint | ✅ Coded | Configure in Resend |
@@ -136,6 +154,7 @@ TEST_EMAIL=your-email@example.com npx ts-node scripts/send-test-emails.ts
 ```
 
 This sends 3 emails showing the complete sequence:
+
 1. Initial outreach
 2. Follow-up (2 days later)
 3. Meeting brief / offer
