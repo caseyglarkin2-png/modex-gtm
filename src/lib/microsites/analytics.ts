@@ -12,6 +12,18 @@ export interface MicrositeEngagementAnalyticsInput {
   updated_at: Date;
 }
 
+export interface MicrositeSessionSignalInput {
+  path: string;
+  sections_viewed: string[];
+  cta_ids: string[];
+}
+
+export interface MicrositeSessionSignals {
+  proposalViewed: boolean;
+  roiViewed: boolean;
+  exportClicked: boolean;
+}
+
 export interface RecentMicrositeSession {
   accountName: string;
   accountSlug: string;
@@ -26,6 +38,9 @@ export interface RecentMicrositeSession {
   viewedAt: Date;
   intentScore: number;
   isHighIntent: boolean;
+  proposalViewed: boolean;
+  roiViewed: boolean;
+  exportClicked: boolean;
 }
 
 export interface HotMicrositeAccount {
@@ -37,6 +52,9 @@ export interface HotMicrositeAccount {
   highIntentSessions: number;
   ctaSessions: number;
   variantCompareSessions: number;
+  proposalSessions: number;
+  roiSessions: number;
+  exportSessions: number;
   avgScrollDepthPct: number;
   avgDurationSeconds: number;
   engagementScore: number;
@@ -50,6 +68,9 @@ export interface MicrositeAnalyticsSummary {
   accountsEngaged: number;
   highIntentSessions: number;
   ctaSessions: number;
+  proposalSessions: number;
+  roiSessions: number;
+  exportSessions: number;
   avgScrollDepthPct: number;
   avgDurationSeconds: number;
   hotAccounts: HotMicrositeAccount[];
@@ -83,8 +104,27 @@ function pluralize(count: number, singular: string, plural = `${singular}s`) {
   return `${count} ${count === 1 ? singular : plural}`;
 }
 
+function hasSection(sections: string[], sectionId: string) {
+  return sections.some((section) => section === sectionId || section.startsWith(`${sectionId}-`));
+}
+
+export function buildMicrositeSessionSignals(session: MicrositeSessionSignalInput): MicrositeSessionSignals {
+  const proposalViewed = session.path.startsWith('/proposal/')
+    || session.cta_ids.some((ctaId) => ctaId.includes('proposal'));
+  const roiViewed = hasSection(session.sections_viewed, 'roi')
+    || hasSection(session.sections_viewed, 'proposal-roi-signal');
+  const exportClicked = session.cta_ids.some((ctaId) => ctaId.includes('export'));
+
+  return {
+    proposalViewed,
+    roiViewed,
+    exportClicked,
+  };
+}
+
 export function scoreMicrositeSession(session: MicrositeEngagementAnalyticsInput): number {
   let score = 0;
+  const signals = buildMicrositeSessionSignals(session);
 
   if (session.sections_viewed.length >= 3) score += 15;
   if (session.sections_viewed.length >= 5) score += 10;
@@ -94,11 +134,18 @@ export function scoreMicrositeSession(session: MicrositeEngagementAnalyticsInput
   if (session.duration_seconds >= 180) score += 10;
   if (session.cta_ids.length > 0) score += 30;
   if (session.variant_history.length > 1) score += 10;
+  if (signals.proposalViewed) score += 10;
+  if (signals.roiViewed) score += 10;
+  if (signals.exportClicked) score += 20;
 
   return Math.min(100, score);
 }
 
 export function isHighIntentMicrositeSession(session: MicrositeEngagementAnalyticsInput): boolean {
+  const signals = buildMicrositeSessionSignals(session);
+
+  if (signals.exportClicked) return true;
+  if (signals.proposalViewed && signals.roiViewed) return true;
   if (session.cta_ids.length > 0) return true;
   if (session.sections_viewed.length >= 4 && session.scroll_depth_pct >= 70) return true;
   if (session.sections_viewed.length >= 3 && session.duration_seconds >= 90) return true;
@@ -108,13 +155,17 @@ export function isHighIntentMicrositeSession(session: MicrositeEngagementAnalyti
 }
 
 export function scoreHotMicrositeAccount(
-  account: Pick<HotMicrositeAccount, 'ctaSessions' | 'highIntentSessions' | 'avgScrollDepthPct' | 'avgDurationSeconds' | 'variantCompareSessions' | 'lastViewedAt'>,
+  account: Pick<HotMicrositeAccount, 'ctaSessions' | 'highIntentSessions' | 'avgScrollDepthPct' | 'avgDurationSeconds' | 'variantCompareSessions' | 'lastViewedAt'>
+    & Partial<Pick<HotMicrositeAccount, 'proposalSessions' | 'roiSessions' | 'exportSessions'>>,
   now = new Date(),
 ): number {
   let score = 0;
 
   score += Math.min(35, account.ctaSessions * 35);
   score += Math.min(25, account.highIntentSessions * 12);
+  score += Math.min(20, (account.exportSessions ?? 0) * 12);
+  score += Math.min(15, (account.proposalSessions ?? 0) * 6);
+  score += Math.min(10, (account.roiSessions ?? 0) * 4);
   score += Math.min(15, Math.round(account.avgScrollDepthPct / 7));
   score += Math.min(10, Math.round(account.avgDurationSeconds / 30));
   score += Math.min(10, account.variantCompareSessions * 5);
@@ -126,14 +177,29 @@ export function scoreHotMicrositeAccount(
   return Math.min(100, score);
 }
 
-function getPrimarySignal(account: Pick<HotMicrositeAccount, 'ctaSessions' | 'variantCompareSessions' | 'highIntentSessions' | 'sessionCount'>) {
+function getPrimarySignal(
+  account: Pick<HotMicrositeAccount, 'ctaSessions' | 'variantCompareSessions' | 'highIntentSessions' | 'sessionCount' | 'proposalSessions' | 'roiSessions' | 'exportSessions'>,
+) {
+  if (account.exportSessions > 0) return pluralize(account.exportSessions, 'proposal export');
+  if (account.proposalSessions > 0) return pluralize(account.proposalSessions, 'proposal read');
+  if (account.roiSessions > 0) return pluralize(account.roiSessions, 'ROI deep read');
   if (account.ctaSessions > 0) return pluralize(account.ctaSessions, 'CTA session');
   if (account.variantCompareSessions > 0) return pluralize(account.variantCompareSessions, 'variant comparison');
   if (account.highIntentSessions > 0) return pluralize(account.highIntentSessions, 'deep read');
   return pluralize(account.sessionCount, 'microsite visit');
 }
 
-function getRecommendedAction(account: Pick<HotMicrositeAccount, 'ctaSessions' | 'highIntentSessions' | 'variantCompareSessions' | 'sessionCount' | 'lastPersonName'>) {
+function getRecommendedAction(
+  account: Pick<HotMicrositeAccount, 'ctaSessions' | 'highIntentSessions' | 'variantCompareSessions' | 'sessionCount' | 'lastPersonName' | 'proposalSessions' | 'roiSessions' | 'exportSessions'>,
+) {
+  if (account.exportSessions > 0) {
+    return 'Send the calendar hold now. They exported the board-ready proposal.';
+  }
+
+  if (account.proposalSessions > 0 && account.roiSessions > 0) {
+    return 'Follow up with the ROI math attached. They read the proposal and reached the value model.';
+  }
+
   if (account.ctaSessions > 0) {
     return account.lastPersonName
       ? `Follow up with ${account.lastPersonName} today. CTA clicked on microsite.`
@@ -167,6 +233,9 @@ export function buildMicrositeAnalyticsSummary(
       accountsEngaged: 0,
       highIntentSessions: 0,
       ctaSessions: 0,
+      proposalSessions: 0,
+      roiSessions: 0,
+      exportSessions: 0,
       avgScrollDepthPct: 0,
       avgDurationSeconds: 0,
       hotAccounts: [],
@@ -179,14 +248,21 @@ export function buildMicrositeAnalyticsSummary(
   let totalDuration = 0;
   let highIntentSessions = 0;
   let ctaSessions = 0;
+  let proposalSessions = 0;
+  let roiSessions = 0;
+  let exportSessions = 0;
 
   function upsertAccountRollup(session: MicrositeEngagementAnalyticsInput, isHighIntent: boolean) {
+    const signals = buildMicrositeSessionSignals(session);
     const existing = hotAccountMap.get(session.account_name);
     if (existing) {
       existing.sessionCount += 1;
       existing.highIntentSessions += isHighIntent ? 1 : 0;
       existing.ctaSessions += session.cta_ids.length > 0 ? 1 : 0;
       existing.variantCompareSessions += session.variant_history.length > 1 ? 1 : 0;
+      existing.proposalSessions += signals.proposalViewed ? 1 : 0;
+      existing.roiSessions += signals.roiViewed ? 1 : 0;
+      existing.exportSessions += signals.exportClicked ? 1 : 0;
       existing.avgScrollDepthPct += session.scroll_depth_pct;
       existing.avgDurationSeconds += session.duration_seconds;
 
@@ -208,6 +284,9 @@ export function buildMicrositeAnalyticsSummary(
       highIntentSessions: isHighIntent ? 1 : 0,
       ctaSessions: session.cta_ids.length > 0 ? 1 : 0,
       variantCompareSessions: session.variant_history.length > 1 ? 1 : 0,
+      proposalSessions: signals.proposalViewed ? 1 : 0,
+      roiSessions: signals.roiViewed ? 1 : 0,
+      exportSessions: signals.exportClicked ? 1 : 0,
       avgScrollDepthPct: session.scroll_depth_pct,
       avgDurationSeconds: session.duration_seconds,
       lastViewedAt: session.updated_at,
@@ -216,10 +295,14 @@ export function buildMicrositeAnalyticsSummary(
 
   const recentSessions = orderedSessions.slice(0, 12).map((session) => {
     const intentScore = scoreMicrositeSession(session);
-    const isHighIntent = intentScore >= 40;
+    const isHighIntent = isHighIntentMicrositeSession(session);
+    const signals = buildMicrositeSessionSignals(session);
 
     if (isHighIntent) highIntentSessions++;
     if (session.cta_ids.length > 0) ctaSessions++;
+    if (signals.proposalViewed) proposalSessions++;
+    if (signals.roiViewed) roiSessions++;
+    if (signals.exportClicked) exportSessions++;
     totalScrollDepth += session.scroll_depth_pct;
     totalDuration += session.duration_seconds;
 
@@ -239,13 +322,20 @@ export function buildMicrositeAnalyticsSummary(
       viewedAt: session.updated_at,
       intentScore,
       isHighIntent,
+      proposalViewed: signals.proposalViewed,
+      roiViewed: signals.roiViewed,
+      exportClicked: signals.exportClicked,
     };
   });
 
   for (const session of orderedSessions.slice(12)) {
     const isHighIntent = isHighIntentMicrositeSession(session);
+    const signals = buildMicrositeSessionSignals(session);
     if (isHighIntent) highIntentSessions++;
     if (session.cta_ids.length > 0) ctaSessions++;
+    if (signals.proposalViewed) proposalSessions++;
+    if (signals.roiViewed) roiSessions++;
+    if (signals.exportClicked) exportSessions++;
     totalScrollDepth += session.scroll_depth_pct;
     totalDuration += session.duration_seconds;
 
@@ -288,6 +378,9 @@ export function buildMicrositeAnalyticsSummary(
     accountsEngaged: hotAccountMap.size,
     highIntentSessions,
     ctaSessions,
+    proposalSessions,
+    roiSessions,
+    exportSessions,
     avgScrollDepthPct: Math.round(totalScrollDepth / orderedSessions.length),
     avgDurationSeconds: Math.round(totalDuration / orderedSessions.length),
     hotAccounts,

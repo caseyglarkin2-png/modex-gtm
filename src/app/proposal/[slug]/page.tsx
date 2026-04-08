@@ -1,8 +1,13 @@
 export const dynamic = 'force-dynamic';
 
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import { prisma } from '@/lib/prisma';
 import type { OnePagerData } from '@/components/ai/one-pager-preview';
+import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
+import { ProposalBrief } from '@/components/microsites/proposal-brief';
+import { buildPublicShareMetadata } from '@/lib/microsites/share';
+import { resolveMicrositeProposalBrief } from '@/lib/microsites/proposal';
 
 const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
@@ -28,8 +33,64 @@ async function getOnePagerData(accountName: string): Promise<OnePagerData | null
   }
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const proposal = resolveMicrositeProposalBrief(slug);
+
+  if (proposal) {
+    return buildPublicShareMetadata({
+      title: `${proposal.accountName} board-ready yard execution proposal`,
+      description: proposal.hero.headline,
+      pathname: proposal.proposalPath,
+      imagePath: `${proposal.proposalPath}/opengraph-image`,
+      imageAlt: `${proposal.accountName} board-ready proposal preview with network and ROI context`,
+    });
+  }
+
+  const accountName = slugToName(slug);
+
+  return buildPublicShareMetadata({
+    title: `${accountName} YardFlow proposal`,
+    description: `Board-ready YardFlow proposal for ${accountName}.`,
+    pathname: `/proposal/${slug}`,
+    imagePath: `/opengraph-image`,
+    imageAlt: `${accountName} YardFlow proposal preview`,
+  });
+}
+
 export default async function ProposalPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  const proposal = resolveMicrositeProposalBrief(slug);
+
+  if (proposal) {
+    try {
+      await prisma.activity.create({
+        data: {
+          account_name: proposal.accountName,
+          activity_type: 'Page View',
+          outcome: `Proposal page viewed: ${proposal.proposalPath}`,
+          next_step: 'Follow up within 24 hours if first view',
+          owner: 'System',
+          activity_date: new Date(),
+        },
+      });
+    } catch {
+      // non-blocking
+    }
+
+    return (
+      <>
+        <MicrositeTracker
+          accountName={proposal.accountName}
+          accountSlug={proposal.slug}
+          path={proposal.proposalPath}
+          variantSlug="proposal-brief"
+        />
+        <ProposalBrief proposal={proposal} />
+      </>
+    );
+  }
+
   const accountName = slugToName(slug);
 
   // Try exact match first, then case-insensitive

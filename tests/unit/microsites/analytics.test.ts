@@ -38,6 +38,9 @@ describe('microsite analytics scoring', () => {
       {
         ctaSessions: 1,
         highIntentSessions: 2,
+        proposalSessions: 1,
+        roiSessions: 1,
+        exportSessions: 0,
         avgScrollDepthPct: 81,
         avgDurationSeconds: 120,
         variantCompareSessions: 1,
@@ -54,8 +57,10 @@ describe('buildMicrositeAnalyticsSummary', () => {
   it('aggregates hot accounts and recent sessions', () => {
     const summary = buildMicrositeAnalyticsSummary([
       buildSession({
-        cta_ids: ['hero-cta'],
+        cta_ids: ['hero-cta', 'proposal-export-html'],
         variant_history: ['brian-watson', 'beth-mars'],
+        path: '/proposal/frito-lay',
+        sections_viewed: ['proposal-summary', 'proof', 'roi-1', 'cta'],
       }),
       buildSession({
         updated_at: new Date('2026-04-06T08:00:00.000Z'),
@@ -82,10 +87,15 @@ describe('buildMicrositeAnalyticsSummary', () => {
     expect(summary.totalSessions).toBe(3);
     expect(summary.accountsEngaged).toBe(2);
     expect(summary.ctaSessions).toBe(1);
+    expect(summary.proposalSessions).toBe(1);
+    expect(summary.roiSessions).toBe(1);
+    expect(summary.exportSessions).toBe(1);
     expect(summary.highIntentSessions).toBe(2);
     expect(summary.hotAccounts[0]?.accountName).toBe('Frito-Lay');
-    expect(summary.hotAccounts[0]?.recommendedAction).toContain('Follow up');
+    expect(summary.hotAccounts[0]?.recommendedAction).toContain('calendar hold');
     expect(summary.recentSessions[0]?.accountName).toBe('Frito-Lay');
+    expect(summary.recentSessions[0]?.proposalViewed).toBe(true);
+    expect(summary.recentSessions[0]?.exportClicked).toBe(true);
   });
 
   it('keeps accounts that only appear outside the recent-session slice', () => {
@@ -114,6 +124,14 @@ describe('buildMicrositeAnalyticsSummary', () => {
         variant_history: ['brian-watson', 'beth-mars'],
       }),
       buildSession({
+        path: '/proposal/frito-lay',
+        person_name: null,
+        person_slug: null,
+        cta_ids: ['proposal-export-html'],
+        sections_viewed: ['proposal-summary', 'proposal-roi-signal'],
+        updated_at: new Date('2026-04-07T08:45:00.000Z'),
+      }),
+      buildSession({
         path: '/for/frito-lay',
         person_name: null,
         person_slug: null,
@@ -124,9 +142,11 @@ describe('buildMicrositeAnalyticsSummary', () => {
       }),
     ], new Date('2026-04-07T12:00:00.000Z'));
 
-    expect(summary.totalSessions).toBe(2);
+    expect(summary.totalSessions).toBe(3);
     expect(summary.accountSummary?.accountName).toBe('Frito-Lay');
-    expect(summary.accountSummary?.ctaSessions).toBe(1);
+    expect(summary.accountSummary?.ctaSessions).toBe(2);
+    expect(summary.accountSummary?.proposalSessions).toBe(1);
+    expect(summary.accountSummary?.exportSessions).toBe(1);
     expect(summary.recentSessions[0]?.path).toBe('/for/frito-lay/brian-watson');
     expect(summary.variants[0]?.label).toBe('Brian Watson');
     expect(summary.variants[0]?.ctaSessions).toBe(1);

@@ -6,7 +6,7 @@ import { StatusBadge } from '@/components/status-badge';
 import { BandBadge } from '@/components/band-badge';
 import {
   BarChart3, Mail, MousePointerClick, Eye, TrendingUp, Users, Building2,
-  CalendarCheck, Activity, ArrowRight, Sparkles, DollarSign,
+  CalendarCheck, Activity, ArrowRight, Sparkles, DollarSign, FileText, Download, Calculator,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { dbGetDashboardStats, dbGetAccounts, dbGetMicrositeAnalytics } from '@/lib/db';
@@ -283,7 +283,7 @@ export default async function AnalyticsPage() {
               </p>
             ) : (
               <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
                   {[
                     {
                       label: 'Sessions',
@@ -294,14 +294,26 @@ export default async function AnalyticsPage() {
                     {
                       label: 'Accounts Active',
                       value: microsite.accountsEngaged,
-                      detail: 'Distinct account microsites viewed',
+                      detail: `${microsite.ctaSessions} CTA sessions`,
                       icon: Building2,
                     },
                     {
-                      label: 'CTA Sessions',
-                      value: microsite.ctaSessions,
-                      detail: 'Sessions with at least one click',
-                      icon: MousePointerClick,
+                      label: 'Proposal Reads',
+                      value: microsite.proposalSessions,
+                      detail: 'Sessions that opened the shareable brief',
+                      icon: FileText,
+                    },
+                    {
+                      label: 'ROI Reads',
+                      value: microsite.roiSessions,
+                      detail: 'Sessions that reached the value model',
+                      icon: Calculator,
+                    },
+                    {
+                      label: 'Export Clicks',
+                      value: microsite.exportSessions,
+                      detail: 'Board-ready export downloads requested',
+                      icon: Download,
                     },
                     {
                       label: 'Avg Scroll',
@@ -328,7 +340,7 @@ export default async function AnalyticsPage() {
                 <div className="rounded-lg border border-[var(--border)] p-4">
                   <p className="text-sm font-medium">Operator takeaway</p>
                   <p className="mt-2 text-sm text-[var(--muted-foreground)] leading-relaxed">
-                    Microsite engagement now reflects real buying behavior. Treat CTA sessions as active follow-up windows, deep reads as warm outreach priority, and variant comparisons as routing signals for stakeholder expansion.
+                    Proposal reads show who is carrying the brief internally. ROI reads show who made it to the value case. Export clicks are the highest-intent signal in the stack and should trigger same-day follow-up.
                   </p>
                 </div>
               </div>
@@ -373,6 +385,9 @@ export default async function AnalyticsPage() {
                     </p>
 
                     <div className="mt-3 flex flex-wrap gap-2 text-xs text-[var(--muted-foreground)]">
+                      <span>{account.proposalSessions} proposal reads</span>
+                      <span>{account.roiSessions} ROI reads</span>
+                      <span>{account.exportSessions} exports</span>
                       <span>Last seen {formatTimestamp(account.lastViewedAt)}</span>
                       {account.lastPersonName && <span>Latest viewer: {account.lastPersonName}</span>}
                     </div>
@@ -432,7 +447,14 @@ export default async function AnalyticsPage() {
                         {session.scrollDepthPct}% · {formatDurationCompact(session.durationSeconds)}
                       </td>
                       <td className="py-2 text-center text-xs hidden sm:table-cell text-[var(--muted-foreground)]">
-                        {session.sectionsViewedCount} sections · {session.ctaCount} CTAs · {Math.max(session.variantCount - 1, 0)} switches
+                        <div className="flex flex-wrap justify-center gap-1.5">
+                          <span>{session.sectionsViewedCount} sections</span>
+                          <span>{session.ctaCount} CTAs</span>
+                          <span>{Math.max(session.variantCount - 1, 0)} switches</span>
+                          {session.proposalViewed && <span>Proposal</span>}
+                          {session.roiViewed && <span>ROI</span>}
+                          {session.exportClicked && <span>Export</span>}
+                        </div>
                       </td>
                       <td className="py-2 text-right text-xs text-[var(--muted-foreground)]">
                         {formatTimestamp(session.viewedAt)}

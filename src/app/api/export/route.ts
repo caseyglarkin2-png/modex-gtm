@@ -6,6 +6,13 @@ import {
   dbGetMicrositeEngagements,
   dbGetOutreachWaves,
 } from '@/lib/db';
+import {
+  buildMicrositeSessionSignals,
+} from '@/lib/microsites/analytics';
+import {
+  renderMicrositeProposalHtml,
+  resolveMicrositeProposalBrief,
+} from '@/lib/microsites/proposal';
 
 function toCsv(headers: string[], rows: string[][]): string {
   const escape = (val: string) => `"${val.replace(/"/g, '""')}"`;
@@ -19,6 +26,35 @@ function toCsv(headers: string[], rows: string[][]): string {
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const type = searchParams.get('type') ?? 'meetings';
+
+  if (type === 'proposal') {
+    const slug = searchParams.get('slug');
+    const format = searchParams.get('format') ?? 'html';
+
+    if (!slug) {
+      return NextResponse.json({ error: 'Missing slug for proposal export' }, { status: 400 });
+    }
+
+    const proposal = resolveMicrositeProposalBrief(slug);
+    if (!proposal) {
+      return NextResponse.json({ error: 'Proposal export is only available for microsite-backed accounts' }, { status: 404 });
+    }
+
+    if (format === 'json') {
+      return NextResponse.json(proposal, {
+        headers: {
+          'Content-Disposition': `attachment; filename="${slug}-yardflow-proposal.json"`,
+        },
+      });
+    }
+
+    return new NextResponse(renderMicrositeProposalHtml(proposal), {
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'Content-Disposition': `attachment; filename="${slug}-yardflow-proposal.html"`,
+      },
+    });
+  }
 
   let csv: string;
   let filename: string;
@@ -63,31 +99,42 @@ export async function GET(req: NextRequest) {
     case 'microsites': {
       const engagements = await dbGetMicrositeEngagements();
       csv = toCsv(
-        ['Updated', 'Created', 'Account', 'Account Slug', 'Person', 'Person Slug', 'Variant Slug', 'Path', 'Session ID', 'Last CTA', 'CTA IDs', 'Sections Viewed', 'Variant History', 'Scroll Depth %', 'Duration Seconds', 'Metadata'],
-        engagements.map((engagement) => [
-          new Date(engagement.updated_at).toLocaleString(),
-          new Date(engagement.created_at).toLocaleString(),
-          engagement.account_name,
-          engagement.account_slug,
-          engagement.person_name ?? '',
-          engagement.person_slug ?? '',
-          engagement.variant_slug ?? '',
-          engagement.path,
-          engagement.session_id,
-          engagement.last_cta_id ?? '',
-          engagement.cta_ids.join(' | '),
-          engagement.sections_viewed.join(' | '),
-          engagement.variant_history.join(' | '),
-          String(engagement.scroll_depth_pct),
-          String(engagement.duration_seconds),
-          engagement.metadata ? JSON.stringify(engagement.metadata) : '',
-        ]),
+        ['Updated', 'Created', 'Account', 'Account Slug', 'Person', 'Person Slug', 'Variant Slug', 'Path', 'Session ID', 'Last CTA', 'CTA IDs', 'Sections Viewed', 'Variant History', 'Proposal Viewed', 'ROI Viewed', 'Proposal Exported', 'Scroll Depth %', 'Duration Seconds', 'Metadata'],
+        engagements.map((engagement) => {
+          const signals = buildMicrositeSessionSignals({
+            path: engagement.path,
+            sections_viewed: engagement.sections_viewed,
+            cta_ids: engagement.cta_ids,
+          });
+
+          return [
+            new Date(engagement.updated_at).toLocaleString(),
+            new Date(engagement.created_at).toLocaleString(),
+            engagement.account_name,
+            engagement.account_slug,
+            engagement.person_name ?? '',
+            engagement.person_slug ?? '',
+            engagement.variant_slug ?? '',
+            engagement.path,
+            engagement.session_id,
+            engagement.last_cta_id ?? '',
+            engagement.cta_ids.join(' | '),
+            engagement.sections_viewed.join(' | '),
+            engagement.variant_history.join(' | '),
+            signals.proposalViewed ? 'yes' : 'no',
+            signals.roiViewed ? 'yes' : 'no',
+            signals.exportClicked ? 'yes' : 'no',
+            String(engagement.scroll_depth_pct),
+            String(engagement.duration_seconds),
+            engagement.metadata ? JSON.stringify(engagement.metadata) : '',
+          ];
+        }),
       );
       filename = 'modex-microsite-engagement.csv';
       break;
     }
     default:
-      return NextResponse.json({ error: 'Invalid type. Use: meetings, pipeline, activities, waves, microsites' }, { status: 400 });
+      return NextResponse.json({ error: 'Invalid type. Use: meetings, pipeline, activities, waves, microsites, proposal' }, { status: 400 });
   }
 
   return new NextResponse(csv, {

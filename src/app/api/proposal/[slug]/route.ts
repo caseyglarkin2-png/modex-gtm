@@ -2,6 +2,7 @@ export const dynamic = 'force-dynamic';
 
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { resolveMicrositeProposalBrief } from '@/lib/microsites/proposal';
 
 function slugToName(slug: string): string {
   return slug
@@ -15,6 +16,29 @@ export async function GET(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params;
+  const proposal = resolveMicrositeProposalBrief(slug);
+
+  const headers = new Headers();
+  headers.set('Access-Control-Allow-Origin', '*');
+  headers.set('Access-Control-Allow-Methods', 'GET');
+  headers.set('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=600');
+
+  if (proposal) {
+    return NextResponse.json(
+      {
+        account: {
+          name: proposal.accountName,
+          vertical: proposal.vertical,
+          tier: proposal.tier,
+          priority_band: proposal.band,
+        },
+        mode: 'microsite-brief',
+        content: proposal,
+      },
+      { headers },
+    );
+  }
+
   const accountName = slugToName(slug);
 
   // Try exact, then case-insensitive
@@ -47,13 +71,8 @@ export async function GET(
     }
   }
 
-  const headers = new Headers();
-  headers.set('Access-Control-Allow-Origin', '*');
-  headers.set('Access-Control-Allow-Methods', 'GET');
-  headers.set('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=600');
-
   return NextResponse.json(
-    { account, content },
+    { account, mode: 'generated-one-pager', content },
     { headers }
   );
 }
