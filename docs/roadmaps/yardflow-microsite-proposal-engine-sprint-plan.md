@@ -1,6 +1,6 @@
 # YardFlow Microsite Proposal Engine Sprint Plan
 
-Status: In progress. Sprint 7 core is landed. Proposal release gating remains active, but visible wow work now takes priority over deeper analytics and operator surfaces.
+Status: In progress. Sprint 7 core and the first flagship release gate are landed on Frito-Lay. Sprint 7B visual polish remains active while visible wow work takes priority over deeper analytics and operator surfaces.
 Created: 2026-04-07
 Primary repo: modex-gtm
 Reference repo: clawd-control-plane
@@ -88,10 +88,9 @@ As of 2026-04-07, the engine is materially ahead of the original Sprint 0/Sprint
 1. Finish the flagship visual system so the public pages look undeniable on desktop, mobile, and shared links.
 2. Add narration and audio controls using the existing ElevenLabs stack so the pages feel like living demos instead of static briefs.
 3. Add one or two high-conviction interactive proof modules so the proposal becomes product theater, not just formatted copy.
-4. Close Sprint 7 with board-ready export, source locking, and final flagship QA.
-5. Upgrade the provisional General Mills, Frito-Lay, and Coca-Cola network counts to stronger source chains.
-6. Keep replacing thin role-based fallbacks with better named-person evidence as research improves.
-7. Return to migration tooling, completeness scoring, and deeper analytics only after the flagship wow layer is real.
+4. Keep replacing thin role-based fallbacks with better named-person evidence as research improves.
+5. Finish the visual QA and layout polish still open in Sprint 7B.
+6. Return to migration tooling, completeness scoring, and deeper analytics only after the flagship wow layer is real.
 
 ## Wow-First Execution Order
 
@@ -175,28 +174,35 @@ This section is the active operating board for the remaining work. The sprint ta
 
 ### Sprint 7 Closeout - Proposal Release Gate
 
-Status: Active next sprint.
+Status: Closed on the first canonical flagship route.
 
 This sprint ends when at least one flagship route is a shareable proposal-grade page with engine-backed ROI, a defensible yard-network estimate, and final QA.
 
-- [ ] S7-T10 Add ROI interaction tracking and board-ready export hooks so analytics and proposal export stay on the same model path.
-- [ ] Harden the General Mills facility fact from provisional lower bound to a tighter public or public-filing-backed scope note.
-- [ ] Harden the Frito-Lay facility fact from inferred lower bound to a tighter public or public-filing-backed scope note.
-- [ ] Harden the Coca-Cola facility fact from third-party lower bound to a tighter system-scope source chain.
-- [ ] Run final flagship regression: build, focused tests, count drift sweep, and route QA.
-- [ ] Declare the first shareable flagship proposal route and lock its source notes, scenario label, and visual review.
+- [x] S7-T10 Add ROI interaction tracking and board-ready export hooks so analytics and proposal export stay on the same model path.
+- [x] Harden the General Mills facility fact from provisional lower bound to a tighter public or public-filing-backed scope note.
+- [x] Harden the Frito-Lay facility fact from inferred lower bound to a tighter official linked-source scope note.
+- [x] Harden the Coca-Cola facility fact from third-party lower bound to a tighter system-scope source chain.
+- [x] Run final flagship regression: build, focused tests, count drift sweep, and route QA.
+- [x] Declare the first shareable flagship proposal route and lock its source notes, scenario label, and visual review.
+
+Canonical route locked in this pass:
+
+1. Public route: `/for/frito-lay`
+2. Named-person review route: `/for/frito-lay/bob-fanslow`
+3. Proposal route: `/proposal/frito-lay`
+4. Locked scenario label: `230+ site high-velocity snack network`
 
 ### Sprint 7B - Viewability And Shareability Pass
 
-Status: Active in parallel with the proposal release gate.
+Status: Active. Public metadata and shareability smoke coverage are landed. Visual polish and screenshot QA remain open.
 
 This sprint makes flagship public routes look stronger on desktop and hold up when dropped into Slack, LinkedIn, Gmail, or text threads.
 
-- [ ] Add canonical metadata, metadata base wiring, and route-level OG/Twitter image coverage for flagship microsites and proposal routes.
-- [ ] Generate account, person, and proposal social cards with accurate descriptions and descriptive alt text.
+- [x] Add canonical metadata, metadata base wiring, and route-level OG/Twitter image coverage for flagship microsites and proposal routes.
+- [x] Generate account, person, and proposal social cards with accurate descriptions and descriptive alt text.
 - [ ] Widen the public microsite and proposal shells so 1440px desktop screenshots feel deliberate rather than narrow.
 - [ ] Relax repeated section container caps so proof, ROI, and CTA modules breathe on wide screens without losing readability.
-- [ ] Verify public share previews and route rendering on production-grade URLs, not Vercel-auth-gated preview links.
+- [x] Verify public share previews and route rendering on production-grade URLs, not Vercel-auth-gated preview links.
 - [ ] Capture a final visual QA pass for account, person, and proposal routes before calling a flagship page share-ready.
 
 ### Sprint 8A - Target Account Network Research Expansion
@@ -241,7 +247,7 @@ The next new pretty proposal to share is considered done only when all of the fo
 ### Port directly
 
 | Source | Destination | Why |
-|---|---|---|
+| --- | --- | --- |
 | `clawd-control-plane/proposals-app/lib/use-tracker.ts` | new `src/components/microsites/use-microsite-tracker.ts` | Fine-grained client engagement tracking |
 | `clawd-control-plane/proposals-app/components/CustomProposal.tsx` `Reveal` pattern | new `src/components/microsites/reveal.tsx` | Staggered section reveal and stronger scroll pacing |
 | `clawd-control-plane/proposals-app/components/CustomProposal.tsx` shell patterns | new `src/components/microsites/microsite-shell.tsx` | Proposal-grade header, thesis panel, content rhythm |
@@ -251,7 +257,7 @@ The next new pretty proposal to share is considered done only when all of the fo
 ### Use as inspiration, not a direct port
 
 | Source | Adaptation |
-|---|---|
+| --- | --- |
 | `clawd-control-plane/dwtb-site/app/proposal/[token]/page.tsx` | Reuse section sequencing ideas for YardFlow proof and plan framing |
 | `clawd-control-plane/proposals-app/components/ParticleHero.tsx` | Borrow atmosphere and hero depth, but keep bundle impact under control |
 | `clawd-control-plane/proposals-app/components/ErrorBoundary.tsx` | Add a microsite-specific client error boundary only if the shell becomes more interactive |
@@ -259,7 +265,7 @@ The next new pretty proposal to share is considered done only when all of the fo
 ### Do not port
 
 | Source pattern | Reason |
-|---|---|
+| --- | --- |
 | Token-authenticated proposal routes | YardFlow microsites need stable account and person slugs |
 | Backend-generated proposal JSON as page source | YardFlow already has a better static authoring model |
 | Narration/TTS in wave one | More complexity than value for current sales motion |
@@ -327,7 +333,7 @@ The repo currently has Playwright but no unit/component test harness. Sprint 0 e
 Demoable artifact: the repo has a microsite-specific test harness, fixtures, and tracking contracts ready for implementation.
 
 | ID | Task | Files | Validation |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | S0-T1 | Add Vitest, jsdom, and React Testing Library configuration | `package.json`, new `vitest.config.ts`, new `tests/setup.ts` | `npx vitest run` passes with a smoke test |
 | S0-T2 | Add microsite fixture builders for account page, person page, and sections | new `tests/fixtures/microsites.ts` | Fixture tests compile and render sample sections |
 | S0-T3 | Add stable `sectionId` to microsite section types | `src/lib/microsites/schema.ts` | TypeScript compile passes and fixture tests confirm IDs |
@@ -340,7 +346,7 @@ Demoable artifact: the repo has a microsite-specific test harness, fixtures, and
 Demoable artifact: a visitor can scroll a microsite, switch variants, click a CTA, and persist engagement depth to the database.
 
 | ID | Task | Files | Validation |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | S1-T1 | Add `MicrositeEngagement` Prisma model for per-session aggregated telemetry | `prisma/schema.prisma` | `npx prisma generate` and schema validation pass |
 | S1-T2 | Add tracking route with Zod validation and deduped upsert semantics | new `src/app/api/microsites/track/route.ts`, new `src/lib/validations.ts` entries | Route tests for valid, invalid, and duplicate payloads |
 | S1-T3 | Add client hook modeled on `useTracker` from clawd | new `src/components/microsites/use-microsite-tracker.ts` | Hook unit tests for sections viewed, scroll depth, and unload behavior |
@@ -354,7 +360,7 @@ Demoable artifact: a visitor can scroll a microsite, switch variants, click a CT
 Demoable artifact: one flagship microsite renders in a premium shell with stronger pacing, a thesis panel, sticky navigation, and a persistent CTA.
 
 | ID | Task | Files | Validation |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | S2-T1 | Add reusable `Reveal` component inspired by clawd proposal shell | new `src/components/microsites/reveal.tsx` | Component tests for reveal-on-intersection behavior |
 | S2-T2 | Add `MicrositeShell` wrapper component | new `src/components/microsites/microsite-shell.tsx` | Component tests for layout states and props |
 | S2-T3 | Extend theme system with glow, atmospheric backgrounds, and shell tokens | `src/components/microsites/theme.tsx` | Visual manual review plus build |
@@ -368,7 +374,7 @@ Demoable artifact: one flagship microsite renders in a premium shell with strong
 Demoable artifact: proof becomes a first-class narrative system instead of a static metric strip.
 
 | ID | Task | Files | Validation |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | S3-T1 | Extend proof section schema with optional `proofVisual`, `methodology`, and `liveDeployment` fields | `src/lib/microsites/schema.ts` | Type tests and fixture rendering tests |
 | S3-T2 | Add proof visual component primitives for metrics, before/after, and deployment callouts | `src/components/microsites/sections.tsx` | Renderer tests for each proof variant |
 | S3-T3 | Add thesis side panel and plan-summary block to shell | `src/components/microsites/microsite-shell.tsx` | Component tests plus manual design review |
@@ -382,7 +388,7 @@ Demoable artifact: proof becomes a first-class narrative system instead of a sta
 Demoable artifact: person pages change by role in a visible, meaningful way.
 
 | ID | Task | Files | Validation |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | S4-T1 | Extend `PersonVariant` with proof emphasis, CTA mode, and section order overrides | `src/lib/microsites/schema.ts` | Unit tests cover rule resolution |
 | S4-T2 | Update rule engine to respect proof ordering and hidden sections | `src/lib/microsites/rules.ts` | Rules tests for executive, ops, and transformation flows |
 | S4-T3 | Add variant-aware shell props for thesis and action framing | `src/components/microsites/microsite-shell.tsx` | Component tests for variant modes |
@@ -404,7 +410,7 @@ For flagship accounts, the standard is now named-person personalization first.
 Demoable artifact: Casey can see which accounts are hot, what sections were read, and which CTA or variant created intent.
 
 | ID | Task | Files | Validation |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | S5-T1 | Add server-side queries for microsite engagement summaries | new `src/lib/microsites/analytics.ts` | Query tests against seeded data |
 | S5-T2 | Add hot-account scoring rules for microsite engagement | same analytics file | Unit tests for score bands |
 | S5-T3 | Add microsite analytics sections to the canonical analytics dashboard | `src/app/analytics/page.tsx` and supporting analytics utilities | Playwright smoke test for analytics UI |
@@ -418,7 +424,7 @@ Demoable artifact: Casey can see which accounts are hot, what sections were read
 Demoable artifact: five flagship microsites look and behave like the new system, not the legacy shell.
 
 | ID | Task | Files | Validation |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | S6-T1 | Rebuild Frito-Lay page as the reference flagship | `src/lib/microsites/accounts/frito-lay.ts` | Stakeholder review and route smoke |
 | S6-T2 | Rebuild General Mills page on the new shell | `src/lib/microsites/accounts/general-mills.ts` | Stakeholder review and route smoke |
 | S6-T3 | Rebuild AB InBev with deeper proof and more variants | `src/lib/microsites/accounts/ab-inbev.ts` | Stakeholder review and route smoke |
@@ -432,7 +438,7 @@ Demoable artifact: five flagship microsites look and behave like the new system,
 Demoable artifact: flagship microsites stop presenting hand-authored ROI approximations and start using one engine-backed, research-backed ROI model.
 
 | ID | Task | Files | Validation |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | S7-T1 | Capture the real ROI contract from the public calculator and record the confirmed inputs, output families, and unresolved formula constants | new `docs/roadmaps/microsite-roi-engine-contract.md` | Manual review confirms live-page fields and gaps are documented |
 | S7-T2 | Record the source-of-truth decision: shared pure TypeScript ROI domain layer in this repo, no iframe, no runtime scraping, no separate microsite math fork | roadmap docs plus future ROI engine files | Decision is explicit in repo docs and referenced by the roadmap |
 | S7-T3 | Extend the microsite schema for engine-backed ROI inputs and render-ready ROI outputs while preserving current static ROI compatibility | `src/lib/microsites/schema.ts` | TypeScript compile passes and existing account configs remain valid |
@@ -444,12 +450,12 @@ Demoable artifact: flagship microsites stop presenting hand-authored ROI approxi
 | S7-T9 | Migrate AB InBev, Coca-Cola, and Dannon to engine-backed ROI with company-specific evidence and methodology notes | flagship account config files | Build passes and routes render shared-engine ROI totals |
 | S7-T10 | Add ROI interaction tracking and board-ready export hooks so analytics and PDF/export behavior stay on the same model path | tracking files, route files, and ROI export integration points | Playwright and integration coverage confirm events and export trigger behavior |
 
-## Sprint 8 - Fast-Follow Migration Factory
+## Sprint 8 Design Spec - Fast-Follow Migration Factory
 
 Demoable artifact: the system can scale the new shell and proof model to the next tier without bespoke rebuilds every time.
 
 | ID | Task | Files | Validation |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | S8-T1 | Add microsite completeness scoring to account configs | `src/lib/microsites/schema.ts`, new audit script | Audit script returns expected scores |
 | S8-T2 | Add content lint rules for generic proof, missing stakes, and weak CTA copy | new `scripts/lint-microsite-content.ts` | Lint script fails known-bad fixtures |
 | S8-T3 | Create migration checklist template for fast-follow accounts | new `docs/roadmaps/microsite-fast-follow-checklist.md` | Manual review against Diageo |
@@ -479,7 +485,7 @@ These are explicitly out of the initial build sequence.
 ## Commands To Use During Execution
 
 | Purpose | Command |
-|---|---|
+| --- | --- |
 | Build | `npm run build` |
 | Existing Playwright suite | `npm run test:click` |
 | Single Playwright microsite spec | `npx playwright test tests/e2e/microsite-*.spec.ts` |

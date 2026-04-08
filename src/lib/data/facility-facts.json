@@ -20,15 +20,19 @@
 	{
 		"account": "Coca-Cola",
 		"facilityCount": "70+",
-		"scope": "Coca-Cola Consolidated's disclosed 70-site footprint used as the conservative lower bound for the flagship Coca-Cola system scenario.",
+		"scope": "Coca-Cola Consolidated's disclosed operating footprint used as the conservative 70-site lower bound for the flagship Coca-Cola system scenario.",
 		"status": "verified",
 		"confidence": "public-filing",
-		"summary": "Coca-Cola Consolidated disclosed 60 distribution centers and 10 manufacturing plants in its 2025 10-K, giving the flagship Coca-Cola system model an official 70-site lower bound before any additional bottler sites are added.",
-		"updatedAt": "2026-04-07",
+		"summary": "Coca-Cola Consolidated disclosed 60 distribution centers and 10 manufacturing plants in its 2025 10-K. The corporate About Us page confirms the operating geography and scale, giving the flagship Coca-Cola system model an official 70-site lower bound before any additional bottler sites are layered in.",
+		"updatedAt": "2026-04-08",
 		"sources": [
 			{
 				"label": "Coca-Cola Consolidated 2025 10-K",
 				"url": "https://www.sec.gov/Archives/edgar/data/317540/000162828026009057/coke-20251231.htm"
+			},
+			{
+				"label": "Coca-Cola Consolidated About Us",
+				"url": "https://www.cokeconsolidated.com/about-us/"
 			}
 		]
 	},
@@ -50,37 +54,38 @@
 	{
 		"account": "Frito-Lay",
 		"facilityCount": "230+",
-		"scope": "North America manufacturing plus distribution footprint disclosed in Frito-Lay's official company facts sheet.",
+		"scope": "Frito-Lay North America's manufacturing plus distribution footprint used as the conservative lower bound for the flagship network scenario.",
 		"status": "verified",
 		"confidence": "official",
-		"summary": "Frito-Lay states that it has 30-plus manufacturing facilities across the U.S. and Canada and 200-plus distribution centers, supporting a conservative 230-plus site lower bound for the flagship network scenario.",
-		"updatedAt": "2026-04-07",
+		"summary": "Frito-Lay's official supply chain manufacturing newsroom page exposes the company facts sheet used for the 30-plus manufacturing facilities and 200-plus distribution centers baseline. That supports a conservative 230-plus site lower bound for the flagship network model.",
+		"updatedAt": "2026-04-08",
 		"sources": [
 			{
-				"label": "Frito-Lay company facts PDF"
+				"label": "Frito-Lay supply chain manufacturing newsroom page",
+				"url": "https://www.fritolay.com/b-roll-video-manufacturing"
 			},
 			{
-				"label": "Frito-Lay supply chain manufacturing page",
-				"url": "https://www.fritolay.com/b-roll-video-manufacturing"
+				"label": "Frito-Lay About Us",
+				"url": "https://contact.pepsico.com/fritolay/about-us"
 			}
 		]
 	},
 	{
 		"account": "General Mills",
 		"facilityCount": "41",
-		"scope": "General Mills owned-plant footprint used as the conservative lower bound for the flagship General Mills scenario.",
+		"scope": "General Mills' owned-plant footprint used as the conservative lower bound for the flagship General Mills scenario.",
 		"status": "verified",
 		"confidence": "official",
-		"summary": "General Mills' 2025 Global Responsibility Report says the company has 41 owned plants around the world, replacing the earlier third-party 50-plus placeholder with an official lower bound.",
-		"updatedAt": "2026-04-07",
+		"summary": "General Mills routes its 2025 Global Responsibility Report from the official How We Make It page. That report sets the operating baseline at 41 owned plants around the world, replacing the earlier third-party 50-plus placeholder with an official lower bound.",
+		"updatedAt": "2026-04-08",
 		"sources": [
 			{
-				"label": "General Mills 2025 Global Responsibility Report",
-				"url": "https://www.generalmills.com/-/media/project/gmi/corporate/corporate-master/files/about-us/commitments/general-mills-global-responsibility-report.pdf"
+				"label": "General Mills How We Make It",
+				"url": "https://www.generalmills.com/how-we-make-it"
 			},
 			{
-				"label": "General Mills how we make it",
-				"url": "https://www.generalmills.com/how-we-make-it"
+				"label": "General Mills 2025 Global Responsibility Report",
+				"url": "https://globalresponsibility.generalmills.com/general-mills-global-responsibility-2025.pdf"
 			}
 		]
 	}

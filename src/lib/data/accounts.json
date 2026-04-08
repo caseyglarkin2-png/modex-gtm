@@ -61,9 +61,9 @@
     "showcase": true,
     "showcase_order": 1,
     "layout_preset": "partnership",
-    "custom_problem_headline": "Every Danone facility runs its own yard protocol. That is 15+ versions of the same bottleneck.",
+    "custom_problem_headline": "Every Danone facility runs its own yard protocol. That is 13+ versions of the same bottleneck.",
     "person_hero_overrides": {
-      "Heiko Gerling": "Heiko, 15 facilities. Four temperature profiles. One yard protocol. That is the standard Danone North America needs.",
+      "Heiko Gerling": "Heiko, 13 facilities. Four temperature profiles. One yard protocol. That is the standard Danone North America needs.",
       "Whitney Klemm": "Whitney, the supply chain team sees network metrics. The yard is the layer where those metrics break.",
       "Jacqueline Beckman": "Jacqueline, every carrier detention charge at a Danone plant is a procurement problem hiding in the yard.",
       "Annette Tolve": "Annette, the demand plan is only as good as the dock execution that fulfills it. The yard is the gap.",

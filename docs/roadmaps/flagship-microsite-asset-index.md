@@ -7,9 +7,19 @@ Updated: 2026-04-07
 
 This file is the fast lookup for the best current flagship microsite assets, their source-of-truth configs, and the named-person routes that are ready for review.
 
+## Canonical Flagship Route
+
+- Canonical public route: `/for/frito-lay`
+- Canonical named-person route: `/for/frito-lay/bob-fanslow`
+- Canonical proposal route: `/proposal/frito-lay`
+- Locked scenario label: `230+ site high-velocity snack network`
+- Release-gate coverage: [tests/e2e/public-shareability.spec.ts](../../tests/e2e/public-shareability.spec.ts)
+- Release-gate rule: overview, named-person, and proposal routes must all render publicly with zero `/api/auth/session` requests and a successful route-specific OG image response.
+
 ## Frito-Lay
 
 - Overview route: `/for/frito-lay`
+- Proposal route: `/proposal/frito-lay`
 - Named-person routes:
   - `/for/frito-lay/brian-watson`
   - `/for/frito-lay/beth-mars`
@@ -17,14 +27,17 @@ This file is the fast lookup for the best current flagship microsite assets, the
   - `/for/frito-lay/david-chambers`
   - `/for/frito-lay/bob-fanslow`
 - Source of truth: [src/lib/microsites/accounts/frito-lay.ts](../../src/lib/microsites/accounts/frito-lay.ts)
+- Facility evidence: [src/lib/data/facility-facts.json](../../src/lib/data/facility-facts.json)
 - Supporting account context:
   - [docs/MODEX_FLOOR_PLAN.md](../MODEX_FLOOR_PLAN.md)
   - [docs/PHONE_LIST_TOP10.md](../PHONE_LIST_TOP10.md)
 - Browser coverage: [tests/e2e/microsite-variants.spec.ts](../../tests/e2e/microsite-variants.spec.ts) covers the Bob Fanslow route
+- Shareability coverage: [tests/e2e/public-shareability.spec.ts](../../tests/e2e/public-shareability.spec.ts) covers overview, Bob Fanslow, proposal, and OG image routes
 
 ## General Mills
 
 - Overview route: `/for/general-mills`
+- Proposal route: `/proposal/general-mills`
 - Named-person routes:
   - `/for/general-mills/paul-gallagher`
   - `/for/general-mills/nisar-ahsanullah`
@@ -32,12 +45,14 @@ This file is the fast lookup for the best current flagship microsite assets, the
   - `/for/general-mills/zoe-bracey`
   - `/for/general-mills/lars-stolpestad`
 - Source of truth: [src/lib/microsites/accounts/general-mills.ts](../../src/lib/microsites/accounts/general-mills.ts)
+- Facility evidence: [src/lib/data/facility-facts.json](../../src/lib/data/facility-facts.json)
 - Supporting account context:
   - [docs/research/paul-gallagher-generalmills-dossier.md](../research/paul-gallagher-generalmills-dossier.md)
   - [docs/research-dossiers-top10.md](../research-dossiers-top10.md)
   - [docs/MODEX_FLOOR_PLAN.md](../MODEX_FLOOR_PLAN.md)
   - [docs/PHONE_LIST_TOP10.md](../PHONE_LIST_TOP10.md)
 - Browser coverage: [tests/e2e/microsite-variants.spec.ts](../../tests/e2e/microsite-variants.spec.ts) covers the Zoe Bracey route
+- Shareability coverage: [tests/e2e/public-shareability.spec.ts](../../tests/e2e/public-shareability.spec.ts) covers overview, Zoe Bracey, proposal, and OG image routes
 
 ## AB InBev
 

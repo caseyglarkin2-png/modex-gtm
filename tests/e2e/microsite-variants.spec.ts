@@ -61,6 +61,6 @@ test('dannon overview keeps the warm-intro path on a named-person variant', asyn
   await page.getByRole('link', { name: 'Heiko Gerling' }).click();
 
   await expect(page).toHaveURL(/\/for\/dannon\/heiko-gerling$/);
-  await expect(page.getByRole('heading', { name: 'Heiko, 15 facilities. Four temperature profiles. One yard protocol. That is the standard Danone North America needs.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Heiko, 13 facilities. Four temperature profiles. One yard protocol. That is the standard Danone North America needs.' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Heiko, this conversation is routed through Mark Shaughnessy' })).toBeVisible();
 });
