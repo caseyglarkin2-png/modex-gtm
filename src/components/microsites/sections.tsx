@@ -43,7 +43,7 @@ function CTAButton({ cta, accent, ctaId }: { cta: CTABlock; accent: AccentClasse
 export function HeroSectionComponent({ section, accent }: { section: HeroSection; accent: AccentClasses }) {
   return (
     <section className="py-16 px-6">
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
         {section.accountCallout && (
           <p className={`text-xs tracking-[0.25em] ${accent.textLight} uppercase font-semibold mb-4`}>
             {section.accountCallout}
@@ -52,7 +52,7 @@ export function HeroSectionComponent({ section, accent }: { section: HeroSection
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight text-white">
           {section.headline}
         </h1>
-        <p className="mt-4 text-lg text-slate-300 leading-relaxed max-w-3xl">
+        <p className="mt-4 max-w-4xl text-lg leading-relaxed text-slate-300">
           {section.subheadline}
         </p>
         <div className="mt-8">
@@ -67,14 +67,14 @@ export function HeroSectionComponent({ section, accent }: { section: HeroSection
 export function ProblemSectionComponent({ section }: { section: ProblemSection }) {
   return (
     <section className="py-14 px-6 border-t border-slate-800">
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
         {section.sectionLabel && (
           <p className="text-[10px] tracking-[0.3em] uppercase text-red-400 font-bold mb-2">
             {section.sectionLabel}
           </p>
         )}
         <h2 className="text-2xl font-bold text-white mb-4">{section.headline}</h2>
-        <p className="text-sm text-slate-300 leading-relaxed mb-8 max-w-3xl">{section.narrative}</p>
+        <p className="mb-8 max-w-4xl text-sm leading-relaxed text-slate-300">{section.narrative}</p>
         <div className="grid gap-4 md:grid-cols-2">
           {section.painPoints.map((pain, i) => (
             <div
@@ -103,14 +103,14 @@ export function ProblemSectionComponent({ section }: { section: ProblemSection }
 export function StakesSectionComponent({ section }: { section: StakesSection }) {
   return (
     <section className="py-14 px-6 border-t border-slate-800 bg-slate-900/50">
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
         {section.sectionLabel && (
           <p className="text-[10px] tracking-[0.3em] uppercase text-amber-400 font-bold mb-2">
             {section.sectionLabel}
           </p>
         )}
         <h2 className="text-2xl font-bold text-white mb-4">{section.headline}</h2>
-        <p className="text-sm text-slate-300 leading-relaxed mb-6 max-w-3xl">{section.narrative}</p>
+        <p className="mb-6 max-w-4xl text-sm leading-relaxed text-slate-300">{section.narrative}</p>
 
         {section.annualCost && (
           <div className="mb-6 text-center">
@@ -144,14 +144,14 @@ export function StakesSectionComponent({ section }: { section: StakesSection }) 
 export function SolutionSectionComponent({ section, accent }: { section: SolutionSection; accent: AccentClasses }) {
   return (
     <section className="py-14 px-6 border-t border-slate-800">
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
         {section.sectionLabel && (
           <p className={`text-[10px] tracking-[0.3em] uppercase ${accent.label} font-bold mb-2`}>
             {section.sectionLabel}
           </p>
         )}
         <h2 className="text-2xl font-bold text-white mb-4">{section.headline}</h2>
-        <p className="text-sm text-slate-300 leading-relaxed mb-8 max-w-3xl">{section.narrative}</p>
+        <p className="mb-8 max-w-4xl text-sm leading-relaxed text-slate-300">{section.narrative}</p>
 
         <div className="grid gap-4 md:grid-cols-2">
           {section.modules.map((mod) => (
@@ -184,7 +184,7 @@ export function SolutionSectionComponent({ section, accent }: { section: Solutio
 export function ProofSectionComponent({ section, accent }: { section: ProofSection; accent: AccentClasses }) {
   return (
     <section className="py-14 px-6 border-t border-slate-800 bg-slate-900/50">
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
         {section.sectionLabel && (
           <div className="text-center mb-4">
             <span className="text-[10px] tracking-[0.3em] uppercase text-slate-400 font-bold border-t border-b border-slate-600 px-6 py-1.5 inline-block">
@@ -342,14 +342,14 @@ export function ProofSectionComponent({ section, accent }: { section: ProofSecti
 export function NetworkMapSectionComponent({ section, accent }: { section: NetworkMapSection; accent: AccentClasses }) {
   return (
     <section className="py-14 px-6 border-t border-slate-800">
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
         {section.sectionLabel && (
           <p className={`text-[10px] tracking-[0.3em] uppercase ${accent.label} font-bold mb-2`}>
             {section.sectionLabel}
           </p>
         )}
         <h2 className="text-2xl font-bold text-white mb-4">{section.headline}</h2>
-        <p className="text-sm text-slate-300 leading-relaxed mb-6 max-w-3xl">{section.narrative}</p>
+        <p className="mb-6 max-w-4xl text-sm leading-relaxed text-slate-300">{section.narrative}</p>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <div className="text-center bg-slate-800/50 rounded-lg py-4 px-2 border border-slate-700/40">
@@ -396,16 +396,48 @@ export function NetworkMapSectionComponent({ section, accent }: { section: Netwo
 
 // ── ROI Section ───────────────────────────────────────────────────────
 export function ROISectionComponent({ section, accent }: { section: ROISection; accent: AccentClasses }) {
+  const totalLabel = section.modelingMode === 'engine' ? 'Modeled Annual Value' : 'Total Annual Savings';
+  const paybackLabel = section.modelingMode === 'engine' ? 'Payback (All Savings)' : 'Payback Period';
+
   return (
     <section className="py-14 px-6 border-t border-slate-800 bg-slate-900/50">
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
         {section.sectionLabel && (
           <p className="text-[10px] tracking-[0.3em] uppercase text-emerald-400 font-bold mb-2">
             {section.sectionLabel}
           </p>
         )}
         <h2 className="text-2xl font-bold text-white mb-4">{section.headline}</h2>
-        <p className="text-sm text-slate-300 leading-relaxed mb-6 max-w-3xl">{section.narrative}</p>
+        <p className="mb-6 max-w-4xl text-sm leading-relaxed text-slate-300">{section.narrative}</p>
+
+        {section.headlineStats && section.headlineStats.length > 0 && (
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 mb-6">
+            {section.headlineStats.map((stat) => (
+              <div key={stat.id} className="rounded-lg border border-slate-700/50 bg-slate-950/40 px-4 py-4">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-slate-500">{stat.label}</p>
+                <p className="mt-2 text-2xl font-extrabold text-emerald-400">{stat.value}</p>
+                {stat.footnote && <p className="mt-2 text-xs leading-relaxed text-slate-500">{stat.footnote}</p>}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {section.totalValueComparison && (
+          <div className="grid gap-4 sm:grid-cols-3 mb-6">
+            <div className="rounded-lg border border-slate-700/50 bg-slate-950/40 px-4 py-4 text-center">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-slate-500">Legacy YMS</p>
+              <p className="mt-2 text-xl font-bold text-slate-200">{section.totalValueComparison.legacyYmsAnnualValue ?? 'N/A'}</p>
+            </div>
+            <div className="rounded-lg border border-emerald-900/30 bg-emerald-950/10 px-4 py-4 text-center">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-emerald-300/80">YardFlow</p>
+              <p className="mt-2 text-xl font-bold text-emerald-400">{section.totalValueComparison.yardflowAnnualValue ?? 'N/A'}</p>
+            </div>
+            <div className="rounded-lg border border-slate-700/50 bg-slate-950/40 px-4 py-4 text-center">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-slate-500">Value Multiple</p>
+              <p className="mt-2 text-xl font-bold text-white">{section.totalValueComparison.valueMultiple ?? 'N/A'}</p>
+            </div>
+          </div>
+        )}
 
         <div className="overflow-x-auto mb-6">
           <table className="w-full">
@@ -430,20 +462,128 @@ export function ROISectionComponent({ section, accent }: { section: ROISection; 
           </table>
         </div>
 
+        {section.archetypeBreakdowns && section.archetypeBreakdowns.length > 0 && (
+          <div className="grid gap-4 xl:grid-cols-3 mb-6">
+            {section.archetypeBreakdowns.map((breakdown) => (
+              <div key={breakdown.archetype} className="rounded-xl border border-slate-700/50 bg-slate-950/40 p-5">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-sm font-semibold text-white">{breakdown.headline ?? breakdown.archetype}</p>
+                    <p className="mt-1 text-xs text-slate-400">{breakdown.facilityCount} sites</p>
+                  </div>
+                  {breakdown.returnMultiple && (
+                    <span className={`rounded-full ${accent.bgSubtle} px-3 py-1 text-xs font-semibold ${accent.textLight}`}>
+                      {breakdown.returnMultiple}
+                    </span>
+                  )}
+                </div>
+
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {breakdown.yardflowCostPerYear && (
+                    <div className="rounded-lg border border-slate-800 bg-slate-900/60 px-3 py-3">
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500">YF Cost / Year</p>
+                      <p className="mt-2 text-lg font-bold text-white">{breakdown.yardflowCostPerYear}</p>
+                    </div>
+                  )}
+                  {breakdown.yardflowSavingsPerYear && (
+                    <div className="rounded-lg border border-slate-800 bg-slate-900/60 px-3 py-3">
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500">YF Hard Savings</p>
+                      <p className="mt-2 text-lg font-bold text-emerald-400">{breakdown.yardflowSavingsPerYear}</p>
+                    </div>
+                  )}
+                  {breakdown.legacyYmsCostPerYear && (
+                    <div className="rounded-lg border border-slate-800 bg-slate-900/60 px-3 py-3">
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Legacy Cost / Year</p>
+                      <p className="mt-2 text-lg font-bold text-slate-300">{breakdown.legacyYmsCostPerYear}</p>
+                    </div>
+                  )}
+                  {breakdown.legacyYmsSavingsPerYear && (
+                    <div className="rounded-lg border border-slate-800 bg-slate-900/60 px-3 py-3">
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Legacy Hard Savings</p>
+                      <p className="mt-2 text-lg font-bold text-slate-300">{breakdown.legacyYmsSavingsPerYear}</p>
+                    </div>
+                  )}
+                </div>
+
+                {breakdown.hardSavingsLines && breakdown.hardSavingsLines.length > 0 && (
+                  <div className="mt-4">
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-slate-500 mb-2">Hard Savings</p>
+                    <div className="space-y-2">
+                      {breakdown.hardSavingsLines.map((line) => (
+                        <div key={`${breakdown.archetype}-${line.label}`} className="flex items-center justify-between gap-3 text-xs">
+                          <span className="text-slate-400">{line.label}</span>
+                          <span className="font-semibold text-white">{line.value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {breakdown.throughputLines && breakdown.throughputLines.length > 0 && (
+                  <div className="mt-4">
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-slate-500 mb-2">Throughput Value</p>
+                    <div className="space-y-2">
+                      {breakdown.throughputLines.map((line) => (
+                        <div key={`${breakdown.archetype}-${line.label}`} className="flex items-center justify-between gap-3 text-xs">
+                          <span className="text-slate-400">{line.label}</span>
+                          <span className={`font-semibold ${accent.textLight}`}>{line.value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
         <div className="grid gap-4 sm:grid-cols-2">
           {section.totalAnnualSavings && (
             <div className="text-center bg-emerald-950/20 rounded-lg py-4 px-4 border border-emerald-900/30">
               <p className="text-2xl font-extrabold text-emerald-400">{section.totalAnnualSavings}</p>
-              <p className="text-xs text-slate-400 mt-1">Total Annual Savings</p>
+              <p className="text-xs text-slate-400 mt-1">{totalLabel}</p>
             </div>
           )}
           {section.paybackPeriod && (
             <div className="text-center bg-emerald-950/20 rounded-lg py-4 px-4 border border-emerald-900/30">
               <p className="text-2xl font-extrabold text-emerald-400">{section.paybackPeriod}</p>
-              <p className="text-xs text-slate-400 mt-1">Payback Period</p>
+              <p className="text-xs text-slate-400 mt-1">{paybackLabel}</p>
             </div>
           )}
         </div>
+
+        {section.assumptionNotes && section.assumptionNotes.length > 0 && (
+          <div className="mt-6 rounded-lg border border-slate-700/50 bg-slate-950/40 px-4 py-4">
+            <p className="text-[10px] uppercase tracking-[0.22em] text-slate-500">Scenario Assumptions</p>
+            <div className="mt-3 space-y-3">
+              {section.assumptionNotes.map((note) => (
+                <div key={note.id} className="flex flex-col gap-1 text-xs">
+                  <span className="font-semibold text-slate-200">{note.label}</span>
+                  <span className="text-slate-400">{note.detail}</span>
+                  <span className="text-slate-500">Confidence: {note.confidence}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {section.sourceNotes && section.sourceNotes.length > 0 && (
+          <div className="mt-4 rounded-lg border border-slate-700/50 bg-slate-950/40 px-4 py-4">
+            <p className="text-[10px] uppercase tracking-[0.22em] text-slate-500">Source Notes</p>
+            <div className="mt-3 space-y-3">
+              {section.sourceNotes.map((note) => (
+                <div key={note.id} className="flex flex-col gap-1 text-xs">
+                  <span className="font-semibold text-slate-200">{note.label}</span>
+                  <span className="text-slate-400">{note.detail}</span>
+                  <span className="text-slate-500">
+                    Confidence: {note.confidence}
+                    {note.citation ? ` · ${note.citation}` : ''}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {section.methodology && (
           <p className="mt-4 text-[10px] text-slate-500 leading-relaxed">{section.methodology}</p>
@@ -457,7 +597,7 @@ export function ROISectionComponent({ section, accent }: { section: ROISection; 
 export function TestimonialSectionComponent({ section, accent }: { section: TestimonialSection; accent: AccentClasses }) {
   return (
     <section className="py-14 px-6 border-t border-slate-800">
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
         {section.sectionLabel && (
           <p className="text-[10px] tracking-[0.3em] uppercase text-slate-400 font-bold mb-4">
             {section.sectionLabel}
@@ -482,14 +622,14 @@ export function TestimonialSectionComponent({ section, accent }: { section: Test
 export function ModulesSectionComponent({ section, accent }: { section: ModulesSection; accent: AccentClasses }) {
   return (
     <section className="py-14 px-6 border-t border-slate-800">
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
         {section.sectionLabel && (
           <p className={`text-[10px] tracking-[0.3em] uppercase ${accent.label} font-bold mb-2`}>
             {section.sectionLabel}
           </p>
         )}
         <h2 className="text-2xl font-bold text-white mb-4">{section.headline}</h2>
-        <p className="text-sm text-slate-300 leading-relaxed mb-8 max-w-3xl">{section.narrative}</p>
+        <p className="mb-8 max-w-4xl text-sm leading-relaxed text-slate-300">{section.narrative}</p>
         <div className="grid gap-4 md:grid-cols-2">
           {section.modules.map((mod) => (
             <div key={mod.id} className={`rounded-lg border ${accent.border} ${accent.bgSubtle} p-4`}>
@@ -515,7 +655,7 @@ export function ModulesSectionComponent({ section, accent }: { section: ModulesS
 export function TimelineSectionComponent({ section, accent }: { section: TimelineSection; accent: AccentClasses }) {
   return (
     <section className="py-14 px-6 border-t border-slate-800 bg-slate-900/50">
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
         {section.sectionLabel && (
           <p className={`text-[10px] tracking-[0.3em] uppercase ${accent.label} font-bold mb-2`}>
             {section.sectionLabel}
@@ -547,7 +687,7 @@ export function TimelineSectionComponent({ section, accent }: { section: Timelin
 export function ComparisonSectionComponent({ section, accent }: { section: ComparisonSection; accent: AccentClasses }) {
   return (
     <section className="py-14 px-6 border-t border-slate-800">
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
         {section.sectionLabel && (
           <p className="text-[10px] tracking-[0.3em] uppercase text-slate-400 font-bold mb-2">
             {section.sectionLabel}
@@ -583,14 +723,14 @@ export function ComparisonSectionComponent({ section, accent }: { section: Compa
 export function CaseStudySectionComponent({ section }: { section: CaseStudySection }) {
   return (
     <section className="py-14 px-6 border-t border-slate-800 bg-slate-900/50">
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
         {section.sectionLabel && (
           <p className="text-[10px] tracking-[0.3em] uppercase text-emerald-400 font-bold mb-2">
             {section.sectionLabel}
           </p>
         )}
         <h2 className="text-2xl font-bold text-white mb-4">{section.headline}</h2>
-        <p className="text-sm text-slate-300 leading-relaxed mb-6 max-w-3xl">{section.narrative}</p>
+        <p className="mb-6 max-w-4xl text-sm leading-relaxed text-slate-300">{section.narrative}</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {section.results.map((stat, i) => (
             <div key={i} className="text-center bg-emerald-950/20 rounded-lg py-4 px-2 border border-emerald-900/30">
@@ -608,9 +748,9 @@ export function CaseStudySectionComponent({ section }: { section: CaseStudySecti
 export function CTASectionComponent({ section, accent }: { section: CTASection; accent: AccentClasses }) {
   return (
     <section className="py-16 px-6 border-t border-slate-800 bg-gradient-to-b from-slate-900/50 to-slate-950">
-      <div className="max-w-4xl mx-auto text-center">
+      <div className="mx-auto max-w-5xl text-center xl:max-w-[72rem]">
         <h2 className="text-2xl font-bold text-white mb-3">{section.cta.headline}</h2>
-        <p className="text-sm text-slate-400 mb-6 max-w-xl mx-auto">{section.cta.subtext}</p>
+        <p className="mx-auto mb-6 max-w-2xl text-sm text-slate-400">{section.cta.subtext}</p>
         <CTAButton cta={section.cta} accent={accent} ctaId={section.sectionId ?? 'cta'} />
         {section.closingLine && (
           <p className="mt-6 text-xs text-slate-500">{section.closingLine}</p>

@@ -204,6 +204,113 @@ export interface ROILine {
   unit?: string;
 }
 
+export type ROIFacilityArchetype =
+  | 'with-yms'
+  | 'drops-no-yms'
+  | 'without-drops';
+
+export type ROISourceConfidence =
+  | 'measured'
+  | 'public'
+  | 'estimated'
+  | 'inferred';
+
+export type ROIValueCategory =
+  | 'hard-savings'
+  | 'throughput'
+  | 'standardization'
+  | 'subscription-cost'
+  | 'legacy-yms'
+  | 'paper'
+  | 'spotter'
+  | 'detention'
+  | 'dc-labor'
+  | 'drop-trailer'
+  | 'driver-journey'
+  | 'systemwide-optimization'
+  | 'cost-of-inaction';
+
+export interface ROISourceNote {
+  id: string;
+  label: string;
+  detail: string;
+  confidence: ROISourceConfidence;
+  citation?: string;
+}
+
+export interface ROIHeadlineStat {
+  id:
+    | 'payback-hard-savings'
+    | 'payback-all-savings'
+    | 'net-year-1-gain'
+    | 'cost-of-inaction'
+    | 'year-one-roi'
+    | 'value-multiple';
+  label: string;
+  value: string;
+  footnote?: string;
+}
+
+export interface ROIArchetypeMix {
+  archetype: ROIFacilityArchetype;
+  facilityCount: number;
+}
+
+export interface ROIArchetypeAssumptions {
+  archetype: ROIFacilityArchetype;
+  dcFteCount?: number;
+  dcShifts?: number;
+  spotterFteCount?: number;
+  spotterShifts?: number;
+  shipmentsPerDay?: number;
+  avgCycleTimeMinutes?: number;
+  annualFteCost?: number;
+}
+
+export interface ROIAccountAssumption {
+  label: string;
+  value: number | string;
+  unit?: string;
+  sourceNoteId?: string;
+}
+
+export interface ROIValueBreakdownLine {
+  label: string;
+  value: string;
+  category: ROIValueCategory;
+  notes?: string;
+}
+
+export interface ROIArchetypeBreakdown {
+  archetype: ROIFacilityArchetype;
+  facilityCount: number;
+  headline?: string;
+  yardflowCostPerYear?: string;
+  yardflowSavingsPerYear?: string;
+  legacyYmsCostPerYear?: string;
+  legacyYmsSavingsPerYear?: string;
+  returnMultiple?: string;
+  hardSavingsLines?: ROIValueBreakdownLine[];
+  throughputLines?: ROIValueBreakdownLine[];
+}
+
+export interface ROITotalValueComparison {
+  yardflowAnnualValue?: string;
+  legacyYmsAnnualValue?: string;
+  valueMultiple?: string;
+}
+
+export interface AccountROIModel {
+  calculatorVersion?: string;
+  sourceOfTruth: 'public-calculator-contract' | 'shared-engine';
+  scenarioLabel?: string;
+  averageMarginPerShipment?: number;
+  facilityMix: ROIArchetypeMix[];
+  archetypeAssumptions?: ROIArchetypeAssumptions[];
+  accountAssumptions?: ROIAccountAssumption[];
+  sourceNotes?: ROISourceNote[];
+}
+
 export interface ProofBlock {
   type: 'metric' | 'quote' | 'comparison' | 'roi-calc' | 'timeline' | 'case-result';
   headline?: string;
@@ -339,6 +446,12 @@ export interface ROISection extends BaseMicrositeSection {
   headline: string;
   narrative: string;
   roiLines: ROILine[];
+  modelingMode?: 'static' | 'engine';
+  headlineStats?: ROIHeadlineStat[];
+  archetypeBreakdowns?: ROIArchetypeBreakdown[];
+  totalValueComparison?: ROITotalValueComparison;
+  assumptionNotes?: ROISourceNote[];
+  sourceNotes?: ROISourceNote[];
   totalAnnualSavings?: string;
   paybackPeriod?: string;
   methodology?: string;
@@ -435,6 +548,9 @@ export interface AccountMicrositeData {
 
   // Account-specific proof
   proofBlocks: ProofBlock[];
+
+  // Engine-backed ROI inputs. Optional until accounts migrate away from static ROI sections.
+  roiModel?: AccountROIModel;
 
   // Facility & network data
   network: {

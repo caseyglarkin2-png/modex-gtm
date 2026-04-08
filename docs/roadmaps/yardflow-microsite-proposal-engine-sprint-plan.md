@@ -1,6 +1,6 @@
 # YardFlow Microsite Proposal Engine Sprint Plan
 
-Status: In progress through Sprint 6
+Status: In progress. Sprint 7 core is landed. Proposal release gating remains active, but visible wow work now takes priority over deeper analytics and operator surfaces.
 Created: 2026-04-07
 Primary repo: modex-gtm
 Reference repo: clawd-control-plane
@@ -18,6 +18,7 @@ The build should borrow the best ideas from the proposal engine in clawd-control
 3. Person-specific variants change meaningfully by role and mandate.
 4. Casey can see which accounts are hot, why they are hot, and what to do next.
 5. The engine scales to additional accounts without rewriting the renderer.
+6. Flagship microsites use a real, research-backed ROI model instead of static savings copy.
 
 ## Guardrails
 
@@ -30,6 +31,8 @@ The build should borrow the best ideas from the proposal engine in clawd-control
 7. Use the existing analytics infrastructure and keep one canonical analytics dashboard.
 8. Personalization must be grounded in named-person research already captured in the account config, not inferred from generic role templates.
 9. Variant copy should prefer documented mandates, quotes, prior-company context, public language, and known pain points before any role-based hypothesis.
+10. One shared ROI engine must power both microsites and board-ready ROI outputs.
+11. Do not iframe or runtime-scrape `yardflow.ai/roi`; port or share the domain contract directly.
 
 ## Personalization Standard
 
@@ -77,13 +80,161 @@ As of 2026-04-07, the engine is materially ahead of the original Sprint 0/Sprint
 
 1. Flagship route and source links now live in `docs/roadmaps/flagship-microsite-asset-index.md`.
 2. The roadmap and checklist docs remain the accountability source for which flagship routes are actually research-grounded.
+3. The ROI integration contract and source-of-truth decision live in `docs/roadmaps/microsite-roi-engine-contract.md`.
+4. The facility count research workflow and fact-source contract live in `docs/roadmaps/facility-count-research-workflow.md`.
 
 ### Current open work
 
-1. Deepen AB InBev and Coca-Cola further where operator-level named-person evidence is available.
-2. Keep replacing thin role-based fallbacks with better named-person evidence as research improves.
-3. Return to fast-follow migration tooling and completeness scoring.
-4. Use Dannon as the reference pattern for warm-intro-only flagship handling.
+1. Finish the flagship visual system so the public pages look undeniable on desktop, mobile, and shared links.
+2. Add narration and audio controls using the existing ElevenLabs stack so the pages feel like living demos instead of static briefs.
+3. Add one or two high-conviction interactive proof modules so the proposal becomes product theater, not just formatted copy.
+4. Close Sprint 7 with board-ready export, source locking, and final flagship QA.
+5. Upgrade the provisional General Mills, Frito-Lay, and Coca-Cola network counts to stronger source chains.
+6. Keep replacing thin role-based fallbacks with better named-person evidence as research improves.
+7. Return to migration tooling, completeness scoring, and deeper analytics only after the flagship wow layer is real.
+
+## Wow-First Execution Order
+
+If the goal is to maximize visible impact first, the program should run in this order. This is intentionally not the same as the best long-term operations order.
+
+### Sprint W1 - Flagship Visual Overhaul
+
+Demoable artifact: one flagship route that feels premium, intentional, and visually distinct enough to use as the canonical public example.
+
+- [ ] W1-T1 Extract a flagship design token layer for type scale, spacing rhythm, motion presets, surface treatments, and accent behavior.
+- [ ] W1-T2 Refactor the microsite shell into reusable hero, thesis, rail, and section-shell primitives for more deliberate layout choreography.
+- [ ] W1-T3 Rework the flagship hero to feel like a product narrative opener rather than a polished landing page.
+- [ ] W1-T4 Add lightweight atmospheric motion and texture inspired by the strongest external references without introducing a heavy render stack.
+- [ ] W1-T5 Add route-level visual QA captures for desktop and mobile so the new flagship look can be reviewed consistently before rollout.
+- [ ] Validation: `npm run build`, public route smoke tests, and saved before/after screenshots for the flagship route.
+
+### Sprint W2 - Narrated Proposal Experience
+
+Demoable artifact: a flagship account route and proposal route with live narration controls powered by real TTS, not placeholder UI.
+
+- [ ] W2-T1 Extend the microsite/proposal data model with briefing metadata, transcript slots, and playback order.
+- [ ] W2-T2 Build a script-derivation path from approved live content so narration stays synchronized with the rendered proposal.
+- [ ] W2-T3 Add cached audio generation keyed by content hash plus voice selection, using the existing ElevenLabs APIs already wired in production.
+- [ ] W2-T4 Add a global player plus section-level play controls, transcript access, and graceful no-audio fallback states.
+- [ ] W2-T5 Add studio tooling to preview voices and regenerate narration from current approved content.
+- [ ] Validation: focused route smoke tests, manual audio playback QA, and a cache hit test proving duplicate requests do not regenerate audio.
+
+### Sprint W3 - Proposal-As-Demo Interaction Layer
+
+Demoable artifact: one flagship route with at least one interactive proof module that makes the page feel like a product demonstration.
+
+- [ ] W3-T1 Add schema support for interactive proof modules with deterministic inputs and outputs.
+- [ ] W3-T2 Build one disruption simulator tied to real YardFlow assumptions.
+- [ ] W3-T3 Build one before/after yard-state or dock-flow visualizer that supports the core bottleneck narrative.
+- [ ] W3-T4 Track module starts, completions, and CTA handoffs with the existing microsite tracking pipeline, but keep broader analytics work deferred.
+- [ ] W3-T5 Add no-JS and failed-hydration fallbacks so the module never becomes blank or confusing in the field.
+- [ ] Validation: component tests, Playwright interaction smoke, and manual no-JS review.
+
+### Sprint W4 - Share-Ready Board Pack
+
+Demoable artifact: a flagship route that can be shared externally and exported cleanly as an HTML/JSON-backed board-ready artifact.
+
+- [ ] W4-T1 Lock the flagship proposal export path to the same materialized proof and ROI model used by the public route.
+- [ ] W4-T2 Add a board-pack appendix for source notes, transcripts, and proof summaries so exports survive internal forwarding.
+- [ ] W4-T3 Add internal-forward and working-session request flows that preserve the narrative context rather than dumping users into generic booking.
+- [ ] W4-T4 Add route-specific QA checklists that must pass before a page is called share-ready.
+- [ ] W4-T5 Declare the first flagship route officially canonical and freeze its scenario label, proof notes, and visual review standard.
+- [ ] Validation: export smoke tests, share-link smoke tests, and final human QA on the live production route.
+
+### Sprint W5 - AI Content Studio
+
+Demoable artifact: an internal workflow where Casey can generate, review, and publish flagship copy and narration from one place.
+
+- [ ] W5-T1 Harden the AI provider layer with explicit fallback semantics and clearer operator-facing failure states.
+- [ ] W5-T2 Add research-grounded prompt templates for named-person variants, section rewrites, briefings, and narration.
+- [ ] W5-T3 Add a factuality/style lint pass to block unsupported claims, generic persona drift, and outreach safety violations.
+- [ ] W5-T4 Add diff-based approval for generated copy so the published route always reflects reviewed content.
+- [ ] W5-T5 Add one-click narration regeneration from the approved section state.
+- [ ] Validation: provider fallback tests, prompt snapshot tests, and manual studio approval flow QA.
+
+### Sprint W6 - Rollout Factory And Deferred Ops Layer
+
+Demoable artifact: multiple flagship routes upgraded to the new standard, with deeper analytics and completeness scoring landing only after the wow layer is stable.
+
+- [ ] W6-T1 Add completeness scoring and migration linting for fast-follow accounts.
+- [ ] W6-T2 Upgrade AB InBev to the new standard.
+- [ ] W6-T3 Upgrade Coca-Cola to the new standard.
+- [ ] W6-T4 Upgrade Dannon with warm-intro-only conversion rules.
+- [ ] W6-T5 Add the internal flagship gallery route.
+- [ ] W6-T6 Land the deferred analytics surfaces: hot-account ranking, experiment registry, weekly digest, and deeper attribution.
+- [ ] Validation: per-account route smoke, screenshot QA, and one green pre-deploy regression pack.
+
+## Execution Reset - Active Todo Board
+
+This section is the active operating board for the remaining work. The sprint tables below remain the design history and implementation spec. This board is the current execution order.
+
+### Completed baseline
+
+- [x] Sprint 0 through Sprint 6 are complete enough to support flagship review.
+- [x] Sprint 7 through S7-T9 is complete: shared ROI contract, engine, facility-fact workflow, flagship ROI rollout, and count wiring are landed.
+
+### Sprint 7 Closeout - Proposal Release Gate
+
+Status: Active next sprint.
+
+This sprint ends when at least one flagship route is a shareable proposal-grade page with engine-backed ROI, a defensible yard-network estimate, and final QA.
+
+- [ ] S7-T10 Add ROI interaction tracking and board-ready export hooks so analytics and proposal export stay on the same model path.
+- [ ] Harden the General Mills facility fact from provisional lower bound to a tighter public or public-filing-backed scope note.
+- [ ] Harden the Frito-Lay facility fact from inferred lower bound to a tighter public or public-filing-backed scope note.
+- [ ] Harden the Coca-Cola facility fact from third-party lower bound to a tighter system-scope source chain.
+- [ ] Run final flagship regression: build, focused tests, count drift sweep, and route QA.
+- [ ] Declare the first shareable flagship proposal route and lock its source notes, scenario label, and visual review.
+
+### Sprint 7B - Viewability And Shareability Pass
+
+Status: Active in parallel with the proposal release gate.
+
+This sprint makes flagship public routes look stronger on desktop and hold up when dropped into Slack, LinkedIn, Gmail, or text threads.
+
+- [ ] Add canonical metadata, metadata base wiring, and route-level OG/Twitter image coverage for flagship microsites and proposal routes.
+- [ ] Generate account, person, and proposal social cards with accurate descriptions and descriptive alt text.
+- [ ] Widen the public microsite and proposal shells so 1440px desktop screenshots feel deliberate rather than narrow.
+- [ ] Relax repeated section container caps so proof, ROI, and CTA modules breathe on wide screens without losing readability.
+- [ ] Verify public share previews and route rendering on production-grade URLs, not Vercel-auth-gated preview links.
+- [ ] Capture a final visual QA pass for account, person, and proposal routes before calling a flagship page share-ready.
+
+### Sprint 8A - Target Account Network Research Expansion
+
+Status: Queued behind Sprint 7 closeout.
+
+This sprint moves the remaining target accounts off guessed network counts and into the facility-fact system.
+
+- [ ] Backfill facility facts for the remaining core targets in the workbench: Diageo, Hormel Foods, JM Smucker, The Home Depot, Georgia Pacific, and H-E-B.
+- [ ] Import evidence rows through `research:facility-import` so the workflow stays operator-friendly and repeatable.
+- [ ] Re-run `research:facility-report` until top-target coverage reaches the expected gate for the next migration wave.
+- [ ] Re-run generated microsite data for accounts still inheriting guessed counts.
+- [ ] Update any account-specific ROI assumptions touched by new counts.
+- [ ] Keep ambiguous counts provisional rather than overstating certainty.
+
+### Sprint 8 - Fast-Follow Migration Factory
+
+Status: Queued after Sprint 8A.
+
+This sprint starts only after target-account network evidence is stable enough that new proposal pages are not built on weak count assumptions.
+
+- [ ] S8-T1 Add microsite completeness scoring to account configs.
+- [ ] S8-T2 Add content lint rules for generic proof, missing stakes, and weak CTA copy.
+- [ ] S8-T3 Create migration checklist template for fast-follow accounts.
+- [ ] S8-T4 Migrate Diageo and Hormel to the new shell.
+- [ ] S8-T5 Migrate JM Smucker and The Home Depot to the new shell.
+- [ ] S8-T6 Migrate Georgia Pacific as the industrial proof point.
+- [ ] S8-T7 Add the portfolio gallery route for internal review of best work.
+
+### Shareable Proposal Gate
+
+The next new pretty proposal to share is considered done only when all of the following are true:
+
+1. A flagship route clears Sprint 7 closeout.
+2. The route uses engine-backed ROI, not static ROI copy.
+3. The route cites a real yard-network estimate from the facility-fact system, not a heuristic guess.
+4. The route passes final build and flagship QA.
+5. The route is visually strong enough to send as the canonical account proposal without caveats.
 
 ## Best Ideas To Port
 
@@ -129,6 +280,7 @@ As of 2026-04-07, the engine is materially ahead of the original Sprint 0/Sprint
 1. AB InBev and Coca-Cola still have room for more operator-level named-person evidence even after the latest expansion.
 2. Fast-follow migration tooling and completeness scoring are still ahead on the roadmap.
 3. Some account pages still lean more on role framing than named-person evidence and need cleanup.
+4. ROI sections are still static copy and do not yet use the real YardFlow calculator model.
 
 ### clawd-control-plane strengths worth learning from
 
@@ -275,19 +427,36 @@ Demoable artifact: five flagship microsites look and behave like the new system,
 | S6-T6 | Add flagship route smoke coverage | Playwright microsite specs | All flagship routes pass |
 | S6-T7 | Add flagship completeness score audit | new `scripts/audit-microsites.ts` | Script output confirms all flagship pages meet thresholds |
 
-## Sprint 7 - Fast-Follow Migration Factory
+## Sprint 7 - Real ROI Engine Integration
+
+Demoable artifact: flagship microsites stop presenting hand-authored ROI approximations and start using one engine-backed, research-backed ROI model.
+
+| ID | Task | Files | Validation |
+|---|---|---|---|
+| S7-T1 | Capture the real ROI contract from the public calculator and record the confirmed inputs, output families, and unresolved formula constants | new `docs/roadmaps/microsite-roi-engine-contract.md` | Manual review confirms live-page fields and gaps are documented |
+| S7-T2 | Record the source-of-truth decision: shared pure TypeScript ROI domain layer in this repo, no iframe, no runtime scraping, no separate microsite math fork | roadmap docs plus future ROI engine files | Decision is explicit in repo docs and referenced by the roadmap |
+| S7-T3 | Extend the microsite schema for engine-backed ROI inputs and render-ready ROI outputs while preserving current static ROI compatibility | `src/lib/microsites/schema.ts` | TypeScript compile passes and existing account configs remain valid |
+| S7-T4 | Implement shared ROI domain types and fixture scenarios for the three public facility archetypes | new ROI domain files under `src/lib/microsites/` | Unit tests cover archetype parsing and scenario normalization |
+| S7-T5 | Port the real ROI formulas into the shared engine once constants are validated | new ROI engine files under `src/lib/microsites/` | Unit tests reproduce agreed benchmark scenarios within tolerance |
+| S7-T6 | Build a microsite ROI adapter that converts account assumptions plus engine output into a generated ROI section view model | `src/lib/microsites/rules.ts` and new ROI helpers | Same account renders identical totals on overview and person routes |
+| S7-T7 | Upgrade the ROI renderer to support headline stats, archetype breakdowns, total value comparison, and assumption notes | `src/components/microsites/sections.tsx` | Render tests cover legacy and engine-backed ROI paths |
+| S7-T8 | Migrate Frito-Lay and General Mills to engine-backed ROI using research-grounded facility mix and assumptions | flagship account config files | Build passes and stakeholder review confirms improved ROI credibility |
+| S7-T9 | Migrate AB InBev, Coca-Cola, and Dannon to engine-backed ROI with company-specific evidence and methodology notes | flagship account config files | Build passes and routes render shared-engine ROI totals |
+| S7-T10 | Add ROI interaction tracking and board-ready export hooks so analytics and PDF/export behavior stay on the same model path | tracking files, route files, and ROI export integration points | Playwright and integration coverage confirm events and export trigger behavior |
+
+## Sprint 8 - Fast-Follow Migration Factory
 
 Demoable artifact: the system can scale the new shell and proof model to the next tier without bespoke rebuilds every time.
 
 | ID | Task | Files | Validation |
 |---|---|---|---|
-| S7-T1 | Add microsite completeness scoring to account configs | `src/lib/microsites/schema.ts`, new audit script | Audit script returns expected scores |
-| S7-T2 | Add content lint rules for generic proof, missing stakes, and weak CTA copy | new `scripts/lint-microsite-content.ts` | Lint script fails known-bad fixtures |
-| S7-T3 | Create migration checklist template for fast-follow accounts | new `docs/roadmaps/microsite-fast-follow-checklist.md` | Manual review against Diageo |
-| S7-T4 | Migrate Diageo and Hormel to the new shell | account files | Manual review and build |
-| S7-T5 | Migrate JM Smucker and The Home Depot to the new shell | account files | Manual review and build |
-| S7-T6 | Migrate Georgia Pacific as industrial proof point | account file | Manual review and build |
-| S7-T7 | Add portfolio gallery route for internal review of best work | new `src/app/for/page.tsx` or review route | Route smoke and stakeholder review |
+| S8-T1 | Add microsite completeness scoring to account configs | `src/lib/microsites/schema.ts`, new audit script | Audit script returns expected scores |
+| S8-T2 | Add content lint rules for generic proof, missing stakes, and weak CTA copy | new `scripts/lint-microsite-content.ts` | Lint script fails known-bad fixtures |
+| S8-T3 | Create migration checklist template for fast-follow accounts | new `docs/roadmaps/microsite-fast-follow-checklist.md` | Manual review against Diageo |
+| S8-T4 | Migrate Diageo and Hormel to the new shell | account files | Manual review and build |
+| S8-T5 | Migrate JM Smucker and The Home Depot to the new shell | account files | Manual review and build |
+| S8-T6 | Migrate Georgia Pacific as industrial proof point | account file | Manual review and build |
+| S8-T7 | Add portfolio gallery route for internal review of best work | new `src/app/for/page.tsx` or review route | Route smoke and stakeholder review |
 
 ## Deferred Backlog
 
@@ -299,13 +468,13 @@ These are explicitly out of the initial build sequence.
 4. WebGL hero scenes.
 5. Live voice follow-up generation.
 
-## Recommended First Implementation Sequence After Approval
+## Recommended Next Implementation Sequence
 
-1. Sprint 0 in full.
-2. Sprint 1 in full.
-3. Sprint 2 through S2-T5 only, then review the first Frito-Lay shell.
-4. Sprint 3 for Frito-Lay and General Mills only.
-5. Resume Sprint 2-S2-T6 and all of Sprint 4.
+1. Complete Sprint 7 through S7-T3 first so the contract, decision, and schema are stable before formula porting begins.
+2. Land Sprint 7 through S7-T7 before migrating any flagship account to engine-backed ROI.
+3. Migrate Frito-Lay and General Mills first as the reference ROI implementations.
+4. Migrate AB InBev, Coca-Cola, and Dannon second, keeping one shared model path.
+5. Resume Sprint 8 only after flagship ROI is no longer static copy.
 
 ## Commands To Use During Execution
 
@@ -323,3 +492,5 @@ These are explicitly out of the initial build sequence.
 2. The flagship build order remains Frito-Lay, General Mills, AB InBev, Coca-Cola, Dannon.
 3. Microsite analytics will extend the existing canonical analytics dashboard in `src/app/analytics/page.tsx`.
 4. Named-person research beats generic role templates whenever account research exists.
+5. Real ROI integration will use a shared pure TypeScript domain layer in this repo, not an iframe or a runtime scrape of the public calculator.
+6. Account-specific assumptions can vary by company, but person-specific variants may only change ROI framing, not ROI math.

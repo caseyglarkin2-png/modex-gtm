@@ -28,6 +28,7 @@ import type {
   GenericPersonaVariant,
   HeroSection,
 } from './schema';
+import { materializeMicrositeSections } from './roi';
 
 const BOOKING_LINK =
   'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
@@ -158,6 +159,7 @@ export function resolveMicrositeForPerson(
 
   // Reorder
   sections = applySectionOrder(sections, order);
+  sections = materializeMicrositeSections(data, sections);
 
   return {
     variant,
@@ -217,6 +219,7 @@ export function resolveMicrositeForLane(
   }
 
   sections = applySectionOrder(sections, order);
+  sections = materializeMicrositeSections(data, sections);
 
   return {
     sections,
