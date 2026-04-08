@@ -10,7 +10,7 @@ test('account microsite renders the proposal shell frame', async ({ page }) => {
 
   await expect(page.getByText('Frito-Lay yard execution brief')).toBeVisible();
   await expect(page.getByText('Commercial Thesis')).toBeVisible();
-  await expect(page.locator('a[href="#hero-1"]')).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Open the brief' })).toBeVisible();
   await expect(page.locator('[data-ms-cta-id="header-booking"]')).toBeVisible();
 
   const heroFrame = await page.locator('[data-ms-shell-frame="hero"]').boundingBox();
