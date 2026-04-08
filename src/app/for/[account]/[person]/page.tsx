@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import type { MicrositeSection } from '@/lib/microsites/schema';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
 import { resolveMicrositeBySlug, getVariantRoutes } from '@/lib/microsites/rules';
+import { buildPublicShareMetadata } from '@/lib/microsites/share';
 import { MicrositeShell, getMicrositeSectionNavItems } from '@/components/microsites/microsite-shell';
 import { Reveal } from '@/components/microsites/reveal';
 import { MicrositeSectionRenderer } from '@/components/microsites/sections';
@@ -27,11 +28,16 @@ export async function generateMetadata({
   if (!data) return { title: 'YardFlow' };
   const resolved = resolveMicrositeBySlug(data, person);
   const personName = resolved?.person?.name;
-  return {
-    title: personName ? `${data.pageTitle} — ${personName}` : data.pageTitle,
-    description: data.metaDescription,
-    robots: { index: false, follow: false },
-  };
+  const title = personName ? `${data.pageTitle} — ${personName}` : data.pageTitle;
+  const description = resolved?.variant?.openingHook ?? data.metaDescription;
+
+  return buildPublicShareMetadata({
+    title,
+    description,
+    pathname: `/for/${account}/${person}`,
+    imagePath: `/for/${account}/${person}/opengraph-image`,
+    imageAlt: `${personName ?? data.accountName} operating brief preview for ${data.accountName}`,
+  });
 }
 
 export default async function PersonMicrositePage({

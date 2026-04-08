@@ -13,9 +13,10 @@ export const config = {
      * - /proposal (public proposal decks)
      * - /api/proposal (public proposal data API)
      * - /for (public account microsites)
+     * - /opengraph-image, /twitter-image (public social metadata images)
      * - /_next (Next.js internals)
      * - /manifest.json, /robots.txt, /favicon.ico (static assets)
      */
-    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/proposal|unsubscribe|proposal|for|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
+    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/proposal|unsubscribe|proposal|for|opengraph-image|twitter-image|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
   ],
 };

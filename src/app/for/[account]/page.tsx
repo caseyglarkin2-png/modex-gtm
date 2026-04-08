@@ -5,6 +5,8 @@ import type { Metadata } from 'next';
 import type { MicrositeSection } from '@/lib/microsites/schema';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
 import { getVariantRoutes } from '@/lib/microsites/rules';
+import { materializeMicrositeSections } from '@/lib/microsites/roi';
+import { buildPublicShareMetadata } from '@/lib/microsites/share';
 import { MicrositeShell, getMicrositeSectionNavItems } from '@/components/microsites/microsite-shell';
 import { Reveal } from '@/components/microsites/reveal';
 import { MicrositeSectionRenderer } from '@/components/microsites/sections';
@@ -29,11 +31,13 @@ export async function generateMetadata({
   const { account } = await params;
   const data = getAccountMicrositeData(account);
   if (!data) return { title: 'YardFlow' };
-  return {
+  return buildPublicShareMetadata({
     title: data.pageTitle,
     description: data.metaDescription,
-    robots: { index: false, follow: false },
-  };
+    pathname: `/for/${account}`,
+    imagePath: `/for/${account}/opengraph-image`,
+    imageAlt: `${data.accountName} private field brief with YardFlow network thesis and ROI preview`,
+  });
 }
 
 export default async function AccountMicrositePage({
@@ -45,10 +49,11 @@ export default async function AccountMicrositePage({
   const data = getAccountMicrositeData(account);
   if (!data) notFound();
 
+  const sections = materializeMicrositeSections(data, data.sections);
   const variants = getVariantRoutes(data);
-  const heroSection = data.sections.find(isHeroSection);
-  const problemSection = data.sections.find(isProblemSection);
-  const navItems = getMicrositeSectionNavItems(data.sections);
+  const heroSection = sections.find(isHeroSection);
+  const problemSection = sections.find(isProblemSection);
+  const navItems = getMicrositeSectionNavItems(sections);
   const focusPoints =
     problemSection?.painPoints.slice(0, 4).map((point) => point.headline) ??
     ['Dock bottlenecks', 'Trailer staging variance', 'Spotter prioritization', 'Network standardization'];
@@ -99,7 +104,7 @@ export default async function AccountMicrositePage({
           slug: variant.slug,
         }))}
       >
-        {data.sections.map((section, i) => (
+        {sections.map((section, i) => (
           <Reveal key={`${section.type}-${i}`} delayMs={Math.min(i * 90, 360)}>
             <MicrositeSectionRenderer
               section={section}

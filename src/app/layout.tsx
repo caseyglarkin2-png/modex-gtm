@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Sidebar } from "@/components/sidebar";
-import { SidebarProvider } from "@/components/sidebar-context";
-import { MainContent } from "@/components/main-content";
+import { AppShell } from "@/components/app-shell";
 import { ThemeProvider } from "@/components/theme-provider";
-import { AuthProvider } from "@/components/auth-provider";
-import { CommandSearch } from "@/components/command-search";
-import { KeyboardShortcuts } from "@/components/keyboard-shortcuts";
 import { Toaster } from "sonner";
+import { getSiteUrl } from "@/lib/site-url";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(getSiteUrl()),
   title: {
     default: "Modex RevOps OS",
     template: "%s — Modex RevOps OS",
@@ -19,6 +16,20 @@ export const metadata: Metadata = {
     title: "Modex RevOps OS",
     description: "MODEX 2026 RevOps Operating System — YardFlow / FreightRoll",
     type: "website",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "YardFlow proposal-grade microsites for MODEX 2026 outreach",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Modex RevOps OS",
+    description: "MODEX 2026 RevOps Operating System — YardFlow / FreightRoll",
+    images: ["/opengraph-image"],
   },
 };
 
@@ -36,19 +47,10 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
       <body className="bg-[var(--background)] text-[var(--foreground)] antialiased">
-        <AuthProvider>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <SidebarProvider>
-          <Sidebar />
-          <CommandSearch />
-          <MainContent>
-            {children}
-          </MainContent>
+          <AppShell>{children}</AppShell>
           <Toaster position="bottom-right" />
-          <KeyboardShortcuts />
-          </SidebarProvider>
         </ThemeProvider>
-        </AuthProvider>
       </body>
     </html>
   );
