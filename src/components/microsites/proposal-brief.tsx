@@ -1,7 +1,7 @@
 import type { MicrositeSection } from '@/lib/microsites/schema';
 import type { MicrositeProposalBrief } from '@/lib/microsites/proposal';
 import { MicrositeSectionRenderer } from './sections';
-import { getAccentClasses } from './theme';
+import { FLAGSHIP_FRAME_CLASS, getAccentClasses } from './theme';
 
 function isHeroSection(section: MicrositeSection): section is Extract<MicrositeSection, { type: 'hero' }> {
   return section.type === 'hero';
@@ -51,7 +51,7 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
       />
 
       <header className="sticky top-0 z-50 border-b border-white/10 bg-stone-950/88 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-[88rem] flex-wrap items-center justify-between gap-3 px-6 py-4 xl:px-8">
+        <div className={`${FLAGSHIP_FRAME_CLASS} flex flex-wrap items-center justify-between gap-3 py-4`}>
           <div>
             <div className="text-[10px] uppercase tracking-[0.28em] text-slate-500">YardFlow by FreightRoll</div>
             <div className="mt-1 text-sm font-medium text-white/85">{proposal.accountName} board-ready proposal</div>
@@ -70,11 +70,11 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
         </div>
       </header>
 
-      <main className="relative z-10 mx-auto max-w-[88rem] space-y-10 px-6 py-12 xl:px-8">
+      <main data-ms-proposal-frame="main" className={`relative z-10 ${FLAGSHIP_FRAME_CLASS} space-y-10 py-12`}>
         <section
           id="proposal-summary"
           data-ms-section-id="proposal-summary"
-          className="rounded-[36px] border border-white/10 bg-slate-950/70 px-8 py-10 shadow-[0_24px_90px_-48px_rgba(15,23,42,0.95)] backdrop-blur-sm xl:px-10 xl:py-12"
+          className="rounded-[36px] border border-white/10 bg-slate-950/70 px-6 py-8 shadow-[0_24px_90px_-48px_rgba(15,23,42,0.95)] backdrop-blur-sm sm:px-8 xl:px-10 xl:py-12"
         >
           <div className={`text-[11px] font-semibold uppercase tracking-[0.3em] ${accent.textLight}`}>
             Shareable operator brief
@@ -105,7 +105,7 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
             ))}
           </div>
 
-          <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1.2fr)_minmax(360px,0.8fr)] xl:gap-8">
+          <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1.18fr)_minmax(380px,0.82fr)] xl:gap-10">
             <div>
               <div className="text-[10px] uppercase tracking-[0.24em] text-slate-500">Commercial thesis</div>
               <p className="mt-4 max-w-4xl text-2xl font-semibold leading-tight text-white xl:text-3xl">{proposal.hero.headline}</p>
@@ -154,7 +154,7 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
           </section>
         )}
 
-        <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-10">
+        <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_380px] xl:gap-12">
           <div className="space-y-6">
             {renderedSections.map((section, index) => (
               <MicrositeSectionRenderer
@@ -226,7 +226,7 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
       </main>
 
       <footer className="relative z-10 border-t border-white/10 pb-10">
-        <div className="mx-auto flex max-w-[88rem] flex-wrap items-center justify-between gap-4 px-6 py-6 text-xs text-slate-500 xl:px-8">
+        <div className={`${FLAGSHIP_FRAME_CLASS} flex flex-wrap items-center justify-between gap-4 py-6 text-xs text-slate-500`}>
           <p>YardFlow by FreightRoll | casey@freightroll.com</p>
           <div className="flex flex-wrap gap-2">
             <ActionLink href={proposal.exportHtmlPath} label="Download HTML" ctaId="proposal-footer-export-html" download />

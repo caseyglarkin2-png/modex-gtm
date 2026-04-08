@@ -22,7 +22,16 @@ import type {
   MicrositeSection,
   CTABlock,
 } from '@/lib/microsites/schema';
-import { getAccentClasses, type AccentClasses } from './theme';
+import {
+  FLAGSHIP_SECTION_FRAME_CLASS,
+  FLAGSHIP_SECTION_GUTTER_CLASS,
+  getAccentClasses,
+  type AccentClasses,
+} from './theme';
+
+const STANDARD_SECTION_CLASS = `py-12 ${FLAGSHIP_SECTION_GUTTER_CLASS} xl:py-14`;
+const HERO_SECTION_CLASS = `py-14 ${FLAGSHIP_SECTION_GUTTER_CLASS} md:py-16`;
+const CTA_SECTION_CLASS = `py-14 ${FLAGSHIP_SECTION_GUTTER_CLASS} xl:py-16`;
 
 // ── CTA Button ────────────────────────────────────────────────────────
 function CTAButton({ cta, accent, ctaId }: { cta: CTABlock; accent: AccentClasses; ctaId: string }) {
@@ -42,8 +51,8 @@ function CTAButton({ cta, accent, ctaId }: { cta: CTABlock; accent: AccentClasse
 // ── Hero Section ──────────────────────────────────────────────────────
 export function HeroSectionComponent({ section, accent }: { section: HeroSection; accent: AccentClasses }) {
   return (
-    <section className="py-16 px-6">
-      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
+    <section className={HERO_SECTION_CLASS}>
+      <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.accountCallout && (
           <p className={`text-xs tracking-[0.25em] ${accent.textLight} uppercase font-semibold mb-4`}>
             {section.accountCallout}
@@ -66,8 +75,8 @@ export function HeroSectionComponent({ section, accent }: { section: HeroSection
 // ── Problem Section ───────────────────────────────────────────────────
 export function ProblemSectionComponent({ section }: { section: ProblemSection }) {
   return (
-    <section className="py-14 px-6 border-t border-slate-800">
-      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
+    <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800`}>
+      <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
           <p className="text-[10px] tracking-[0.3em] uppercase text-red-400 font-bold mb-2">
             {section.sectionLabel}
@@ -102,8 +111,8 @@ export function ProblemSectionComponent({ section }: { section: ProblemSection }
 // ── Stakes Section ────────────────────────────────────────────────────
 export function StakesSectionComponent({ section }: { section: StakesSection }) {
   return (
-    <section className="py-14 px-6 border-t border-slate-800 bg-slate-900/50">
-      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
+    <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800 bg-slate-900/50`}>
+      <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
           <p className="text-[10px] tracking-[0.3em] uppercase text-amber-400 font-bold mb-2">
             {section.sectionLabel}
@@ -143,8 +152,8 @@ export function StakesSectionComponent({ section }: { section: StakesSection }) 
 // ── Solution Section ──────────────────────────────────────────────────
 export function SolutionSectionComponent({ section, accent }: { section: SolutionSection; accent: AccentClasses }) {
   return (
-    <section className="py-14 px-6 border-t border-slate-800">
-      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
+    <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800`}>
+      <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
           <p className={`text-[10px] tracking-[0.3em] uppercase ${accent.label} font-bold mb-2`}>
             {section.sectionLabel}
@@ -183,8 +192,8 @@ export function SolutionSectionComponent({ section, accent }: { section: Solutio
 // ── Proof Section ─────────────────────────────────────────────────────
 export function ProofSectionComponent({ section, accent }: { section: ProofSection; accent: AccentClasses }) {
   return (
-    <section className="py-14 px-6 border-t border-slate-800 bg-slate-900/50">
-      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
+    <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800 bg-slate-900/50`}>
+      <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
           <div className="text-center mb-4">
             <span className="text-[10px] tracking-[0.3em] uppercase text-slate-400 font-bold border-t border-b border-slate-600 px-6 py-1.5 inline-block">
@@ -341,8 +350,8 @@ export function ProofSectionComponent({ section, accent }: { section: ProofSecti
 // ── Network Map Section ───────────────────────────────────────────────
 export function NetworkMapSectionComponent({ section, accent }: { section: NetworkMapSection; accent: AccentClasses }) {
   return (
-    <section className="py-14 px-6 border-t border-slate-800">
-      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
+    <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800`}>
+      <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
           <p className={`text-[10px] tracking-[0.3em] uppercase ${accent.label} font-bold mb-2`}>
             {section.sectionLabel}
@@ -400,8 +409,8 @@ export function ROISectionComponent({ section, accent }: { section: ROISection; 
   const paybackLabel = section.modelingMode === 'engine' ? 'Payback (All Savings)' : 'Payback Period';
 
   return (
-    <section className="py-14 px-6 border-t border-slate-800 bg-slate-900/50">
-      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
+    <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800 bg-slate-900/50`}>
+      <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
           <p className="text-[10px] tracking-[0.3em] uppercase text-emerald-400 font-bold mb-2">
             {section.sectionLabel}
@@ -596,8 +605,8 @@ export function ROISectionComponent({ section, accent }: { section: ROISection; 
 // ── Testimonial Section ───────────────────────────────────────────────
 export function TestimonialSectionComponent({ section, accent }: { section: TestimonialSection; accent: AccentClasses }) {
   return (
-    <section className="py-14 px-6 border-t border-slate-800">
-      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
+    <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800`}>
+      <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
           <p className="text-[10px] tracking-[0.3em] uppercase text-slate-400 font-bold mb-4">
             {section.sectionLabel}
@@ -621,8 +630,8 @@ export function TestimonialSectionComponent({ section, accent }: { section: Test
 // ── Modules Section ───────────────────────────────────────────────────
 export function ModulesSectionComponent({ section, accent }: { section: ModulesSection; accent: AccentClasses }) {
   return (
-    <section className="py-14 px-6 border-t border-slate-800">
-      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
+    <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800`}>
+      <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
           <p className={`text-[10px] tracking-[0.3em] uppercase ${accent.label} font-bold mb-2`}>
             {section.sectionLabel}
@@ -654,8 +663,8 @@ export function ModulesSectionComponent({ section, accent }: { section: ModulesS
 // ── Timeline Section ──────────────────────────────────────────────────
 export function TimelineSectionComponent({ section, accent }: { section: TimelineSection; accent: AccentClasses }) {
   return (
-    <section className="py-14 px-6 border-t border-slate-800 bg-slate-900/50">
-      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
+    <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800 bg-slate-900/50`}>
+      <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
           <p className={`text-[10px] tracking-[0.3em] uppercase ${accent.label} font-bold mb-2`}>
             {section.sectionLabel}
@@ -686,8 +695,8 @@ export function TimelineSectionComponent({ section, accent }: { section: Timelin
 // ── Comparison Section ────────────────────────────────────────────────
 export function ComparisonSectionComponent({ section, accent }: { section: ComparisonSection; accent: AccentClasses }) {
   return (
-    <section className="py-14 px-6 border-t border-slate-800">
-      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
+    <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800`}>
+      <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
           <p className="text-[10px] tracking-[0.3em] uppercase text-slate-400 font-bold mb-2">
             {section.sectionLabel}
@@ -722,8 +731,8 @@ export function ComparisonSectionComponent({ section, accent }: { section: Compa
 // ── Case Study Section ────────────────────────────────────────────────
 export function CaseStudySectionComponent({ section }: { section: CaseStudySection }) {
   return (
-    <section className="py-14 px-6 border-t border-slate-800 bg-slate-900/50">
-      <div className="mx-auto max-w-5xl xl:max-w-[72rem]">
+    <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800 bg-slate-900/50`}>
+      <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
           <p className="text-[10px] tracking-[0.3em] uppercase text-emerald-400 font-bold mb-2">
             {section.sectionLabel}
@@ -747,8 +756,8 @@ export function CaseStudySectionComponent({ section }: { section: CaseStudySecti
 // ── CTA Section ───────────────────────────────────────────────────────
 export function CTASectionComponent({ section, accent }: { section: CTASection; accent: AccentClasses }) {
   return (
-    <section className="py-16 px-6 border-t border-slate-800 bg-gradient-to-b from-slate-900/50 to-slate-950">
-      <div className="mx-auto max-w-5xl text-center xl:max-w-[72rem]">
+    <section className={`${CTA_SECTION_CLASS} border-t border-slate-800 bg-gradient-to-b from-slate-900/50 to-slate-950`}>
+      <div className={`${FLAGSHIP_SECTION_FRAME_CLASS} text-center`}>
         <h2 className="text-2xl font-bold text-white mb-3">{section.cta.headline}</h2>
         <p className="mx-auto mb-6 max-w-2xl text-sm text-slate-400">{section.cta.subtext}</p>
         <CTAButton cta={section.cta} accent={accent} ctaId={section.sectionId ?? 'cta'} />

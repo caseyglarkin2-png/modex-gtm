@@ -1,6 +1,10 @@
 import Link from 'next/link';
 import type { MicrositeSection } from '@/lib/microsites/schema';
-import { getAccentClasses } from './theme';
+import {
+  FLAGSHIP_COPY_CLASS,
+  FLAGSHIP_FRAME_CLASS,
+  getAccentClasses,
+} from './theme';
 
 interface MicrositeShellNavItem {
   id: string;
@@ -98,7 +102,7 @@ export function MicrositeShell({
   const glow = accentColor ? `${accentColor}24` : 'rgba(6, 182, 212, 0.18)';
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-slate-950 pb-24 text-white lg:pb-0">
+    <div data-shell="flagship" className="relative min-h-screen overflow-hidden bg-slate-950 pb-24 text-white lg:pb-0">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_40%)]" />
       <div
         className="pointer-events-none absolute inset-0"
@@ -108,7 +112,7 @@ export function MicrositeShell({
       />
 
       <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/82 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-[88rem] items-center justify-between gap-4 px-6 py-4 xl:px-8">
+        <div className={`${FLAGSHIP_FRAME_CLASS} flex items-center justify-between gap-4 py-4`}>
           <div>
             <div className="text-[10px] uppercase tracking-[0.28em] text-slate-500">YardFlow by FreightRoll</div>
             <div className="mt-1 text-sm font-medium text-white/82">{accountName} private field brief</div>
@@ -130,16 +134,19 @@ export function MicrositeShell({
       </header>
 
       <section className="relative z-10 border-b border-white/10">
-        <div className="mx-auto grid max-w-[88rem] gap-10 px-6 py-12 lg:py-16 xl:grid-cols-[minmax(0,1.12fr)_minmax(360px,0.88fr)] xl:px-8">
+        <div
+          data-ms-shell-frame="hero"
+          className={`${FLAGSHIP_FRAME_CLASS} grid gap-8 py-12 lg:py-16 xl:grid-cols-[minmax(0,1.18fr)_minmax(370px,0.82fr)] xl:gap-12`}
+        >
           <div>
             <div className={`text-[11px] font-semibold uppercase tracking-[0.28em] ${accent.textLight}`}>{contextLabel}</div>
-            <h1 className="mt-5 max-w-5xl text-4xl font-black tracking-[-0.04em] text-white md:text-6xl xl:text-7xl">
+            <h1 className="mt-5 max-w-[60rem] text-4xl font-black tracking-[-0.04em] text-white md:text-6xl xl:text-7xl">
               {title}
             </h1>
-            <p className="mt-5 max-w-4xl text-base leading-relaxed text-slate-300 md:text-lg xl:text-xl">{summary}</p>
+            <p className={`mt-5 ${FLAGSHIP_COPY_CLASS} text-base leading-relaxed text-slate-300 md:text-lg xl:text-xl`}>{summary}</p>
             {contextDetail && <p className="mt-4 text-sm text-slate-400">{contextDetail}</p>}
             {framingNarrative && (
-              <div className={`mt-6 max-w-4xl rounded-3xl border bg-slate-900/45 px-6 py-5 text-[15px] leading-relaxed text-slate-300 ${accent.border}`}>
+              <div className={`mt-6 max-w-[58rem] rounded-3xl border bg-slate-900/45 px-6 py-5 text-[15px] leading-relaxed text-slate-300 ${accent.border}`}>
                 {framingNarrative}
               </div>
             )}
@@ -182,11 +189,14 @@ export function MicrositeShell({
         </div>
       </section>
 
-      <div className="relative z-10 mx-auto max-w-[88rem] px-6 py-8 lg:grid lg:gap-10 lg:py-12 xl:grid-cols-[minmax(0,1fr)_320px] xl:gap-12 xl:px-8">
+      <div
+        data-ms-shell-frame="main"
+        className={`relative z-10 ${FLAGSHIP_FRAME_CLASS} py-8 lg:grid lg:gap-10 lg:py-12 xl:grid-cols-[minmax(0,1fr)_340px] xl:gap-14`}
+      >
         <main className="min-w-0">{children}</main>
 
         <aside className="mt-8 hidden lg:block lg:mt-0">
-          <div className="sticky top-28 space-y-4">
+          <div className="sticky top-24 space-y-4">
             <div className="rounded-[24px] border border-white/10 bg-slate-900/55 p-6 backdrop-blur-sm">
               <div className="text-[10px] uppercase tracking-[0.26em] text-slate-500">Section Flow</div>
               <nav className="mt-4 space-y-2">
@@ -218,8 +228,11 @@ export function MicrositeShell({
         </aside>
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-slate-950/94 px-4 py-3 backdrop-blur-xl lg:hidden">
-        <div className="mx-auto flex max-w-5xl items-center justify-between gap-4">
+      <div className="fixed inset-x-0 bottom-0 z-50 px-3 pb-[max(env(safe-area-inset-bottom),0.75rem)] pt-3 backdrop-blur-xl lg:hidden">
+        <div
+          data-ms-mobile-cta="true"
+          className="mx-auto flex max-w-[96rem] items-center justify-between gap-4 rounded-[24px] border border-white/10 bg-slate-950/94 px-4 py-3 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.95)]"
+        >
           <div>
             <div className="text-[10px] uppercase tracking-[0.22em] text-slate-500">Next Step</div>
             <div className="text-sm font-medium text-white">Book the working session</div>
@@ -234,7 +247,7 @@ export function MicrositeShell({
       </div>
 
       <footer className="relative z-10 border-t border-white/10 pb-24 lg:pb-8">
-        <div className="mx-auto max-w-[88rem] px-6 py-6 text-center text-xs text-slate-500 xl:px-8">
+        <div className={`${FLAGSHIP_FRAME_CLASS} py-6 text-center text-xs text-slate-500`}>
           <p>YardFlow by FreightRoll · casey@freightroll.com</p>
         </div>
       </footer>

@@ -81,6 +81,12 @@ const PALETTE: Record<string, AccentClasses> = {
 // Default accent (cyan)
 const DEFAULT_ACCENT: AccentClasses = PALETTE['#06B6D4'];
 
+// Shared flagship layout tokens for Sprint 7B and beyond.
+export const FLAGSHIP_FRAME_CLASS = 'mx-auto max-w-[96rem] px-4 sm:px-6 xl:px-10 2xl:px-12';
+export const FLAGSHIP_SECTION_FRAME_CLASS = 'mx-auto max-w-5xl xl:max-w-[78rem] 2xl:max-w-[82rem]';
+export const FLAGSHIP_SECTION_GUTTER_CLASS = 'px-4 sm:px-6 xl:px-8';
+export const FLAGSHIP_COPY_CLASS = 'max-w-4xl xl:max-w-[60rem]';
+
 export function getAccentClasses(accentColor?: string): AccentClasses {
   if (!accentColor) return DEFAULT_ACCENT;
   return PALETTE[accentColor] || DEFAULT_ACCENT;
