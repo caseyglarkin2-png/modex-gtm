@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-const screenshotDir = 'screenshots/shareability-audit/s7b-t4';
+const screenshotDir = process.env.FLAGSHIP_SCREENSHOT_DIR ?? 'screenshots/shareability-audit/s7b-t4';
 
 const routeCases = [
   {

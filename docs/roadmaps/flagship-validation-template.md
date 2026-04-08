@@ -34,6 +34,14 @@ Use this record for every flagship design, UX, narration, proof, or export ticke
 
 Add or remove rows only when a check is clearly not relevant.
 
+## Token Usage Note
+
+Use this section when the ticket introduces or reshapes shared flagship design tokens.
+
+- Namespaced tokens added or changed:
+- Primary consuming surfaces:
+- Legacy globals preserved or intentionally untouched:
+
 ## Failure Triage
 
 - If `npm run build` fails: record the first failing file or route, the exact error, and whether rollback is required before more work lands.

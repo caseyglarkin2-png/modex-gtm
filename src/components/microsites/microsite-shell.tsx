@@ -1,9 +1,17 @@
 import Link from 'next/link';
 import type { MicrositeSection } from '@/lib/microsites/schema';
 import {
+  FLAGSHIP_ACTION_CLASS,
   FLAGSHIP_COPY_CLASS,
+  FLAGSHIP_DISPLAY_CLASS,
+  FLAGSHIP_EYEBROW_CLASS,
   FLAGSHIP_FRAME_CLASS,
+  FLAGSHIP_LABEL_CLASS,
+  FLAGSHIP_PANEL_CLASS,
+  FLAGSHIP_PANEL_MUTED_CLASS,
+  FLAGSHIP_THEME_CLASS,
   getAccentClasses,
+  getFlagshipThemeStyle,
 } from './theme';
 
 interface MicrositeShellNavItem {
@@ -75,7 +83,7 @@ function ShellCta({
       target="_blank"
       rel="noopener noreferrer"
       data-ms-cta-id={ctaId}
-      className={className}
+      className={`${className} ${FLAGSHIP_ACTION_CLASS}`}
     >
       {label}
     </a>
@@ -99,22 +107,25 @@ export function MicrositeShell({
   children,
 }: MicrositeShellProps) {
   const accent = getAccentClasses(accentColor);
-  const glow = accentColor ? `${accentColor}24` : 'rgba(6, 182, 212, 0.18)';
 
   return (
-    <div data-shell="flagship" className="relative min-h-screen overflow-hidden bg-slate-950 pb-24 text-white lg:pb-0">
+    <div
+      data-shell="flagship"
+      style={getFlagshipThemeStyle(accentColor)}
+      className={`${FLAGSHIP_THEME_CLASS} relative min-h-screen overflow-hidden bg-slate-950 pb-24 text-white lg:pb-0`}
+    >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_40%)]" />
       <div
         className="pointer-events-none absolute inset-0"
         style={{
-          backgroundImage: `radial-gradient(circle at 14% 18%, ${glow}, transparent 34%), radial-gradient(circle at 86% 0%, rgba(255,255,255,0.08), transparent 24%)`,
+          backgroundImage: 'radial-gradient(circle at 14% 18%, var(--fw-accent-glow), transparent 34%), radial-gradient(circle at 86% 0%, rgba(255,255,255,0.08), transparent 24%)',
         }}
       />
 
       <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/82 backdrop-blur-xl">
         <div className={`${FLAGSHIP_FRAME_CLASS} flex items-center justify-between gap-4 py-4`}>
           <div>
-            <div className="text-[10px] uppercase tracking-[0.28em] text-slate-500">YardFlow by FreightRoll</div>
+            <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>YardFlow by FreightRoll</div>
             <div className="mt-1 text-sm font-medium text-white/82">{accountName} private field brief</div>
           </div>
           <div className="flex items-center gap-3">
@@ -127,7 +138,7 @@ export function MicrositeShell({
               href={primaryCta.href}
               label={primaryCta.label}
               ctaId="header-booking"
-              className={`${accent.bg} ${accent.bgHover} rounded-full px-4 py-2 text-sm font-semibold text-slate-950 transition-colors`}
+              className={`${accent.bg} ${accent.bgHover} rounded-full px-4 py-2 text-sm font-semibold text-slate-950`}
             />
           </div>
         </div>
@@ -139,14 +150,14 @@ export function MicrositeShell({
           className={`${FLAGSHIP_FRAME_CLASS} grid gap-8 py-12 lg:py-16 xl:grid-cols-[minmax(0,1.18fr)_minmax(370px,0.82fr)] xl:gap-12`}
         >
           <div>
-            <div className={`text-[11px] font-semibold uppercase tracking-[0.28em] ${accent.textLight}`}>{contextLabel}</div>
-            <h1 className="mt-5 max-w-[60rem] text-4xl font-black tracking-[-0.04em] text-white md:text-6xl xl:text-7xl">
+            <div className={`${FLAGSHIP_EYEBROW_CLASS} ${accent.textLight}`}>{contextLabel}</div>
+            <h1 className={`mt-5 max-w-[60rem] text-4xl font-black text-white md:text-6xl xl:text-7xl ${FLAGSHIP_DISPLAY_CLASS}`}>
               {title}
             </h1>
             <p className={`mt-5 ${FLAGSHIP_COPY_CLASS} text-base leading-relaxed text-slate-300 md:text-lg xl:text-xl`}>{summary}</p>
             {contextDetail && <p className="mt-4 text-sm text-slate-400">{contextDetail}</p>}
             {framingNarrative && (
-              <div className={`mt-6 max-w-[58rem] rounded-3xl border bg-slate-900/45 px-6 py-5 text-[15px] leading-relaxed text-slate-300 ${accent.border}`}>
+              <div className={`mt-6 max-w-[58rem] rounded-[var(--fw-panel-radius)] px-6 py-5 text-[15px] leading-relaxed text-slate-300 ${FLAGSHIP_PANEL_MUTED_CLASS}`}>
                 {framingNarrative}
               </div>
             )}
@@ -158,7 +169,7 @@ export function MicrositeShell({
                     href={link.href}
                     data-ms-variant-link="true"
                     data-ms-variant-slug={link.slug}
-                    className={`rounded-full border px-3 py-1 text-xs transition-colors ${
+                    className={`rounded-full border px-3 py-1 text-xs ${FLAGSHIP_ACTION_CLASS} ${
                       link.active
                         ? `${accent.border} ${accent.bgBadge} ${accent.textLight}`
                         : 'border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white'
@@ -172,11 +183,11 @@ export function MicrositeShell({
           </div>
 
           <div
-            className="rounded-[32px] border border-white/10 bg-slate-900/70 p-8 shadow-[0_24px_90px_-48px_rgba(15,23,42,0.95)] backdrop-blur-sm xl:p-9"
-            style={{ boxShadow: `0 24px 90px -48px ${glow}` }}
+            className={`rounded-[var(--fw-panel-radius-large)] p-8 backdrop-blur-sm xl:p-9 ${FLAGSHIP_PANEL_CLASS}`}
+            style={{ boxShadow: 'var(--fw-panel-shadow-strong), 0 0 0 1px var(--fw-accent-glow)' }}
           >
-            <div className="text-[10px] uppercase tracking-[0.26em] text-slate-500">Commercial Thesis</div>
-            <p className="mt-5 text-2xl font-semibold leading-tight text-white xl:text-3xl">{thesis}</p>
+            <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>Commercial Thesis</div>
+            <p className={`mt-5 text-2xl font-semibold leading-tight text-white xl:text-3xl ${FLAGSHIP_DISPLAY_CLASS}`}>{thesis}</p>
             <div className="mt-6 space-y-3">
               {focusPoints.slice(0, 4).map((point) => (
                 <div key={point} className="flex items-start gap-3 text-sm leading-relaxed text-slate-300">
@@ -197,14 +208,14 @@ export function MicrositeShell({
 
         <aside className="mt-8 hidden lg:block lg:mt-0">
           <div className="sticky top-24 space-y-4">
-            <div className="rounded-[24px] border border-white/10 bg-slate-900/55 p-6 backdrop-blur-sm">
-              <div className="text-[10px] uppercase tracking-[0.26em] text-slate-500">Section Flow</div>
+            <div className={`rounded-[var(--fw-panel-radius)] p-6 backdrop-blur-sm ${FLAGSHIP_PANEL_MUTED_CLASS}`}>
+              <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>Section Flow</div>
               <nav className="mt-4 space-y-2">
                 {navItems.map((item) => (
                   <a
                     key={item.id}
                     href={`#${item.id}`}
-                    className="block rounded-2xl border border-transparent px-3 py-2 text-sm leading-tight text-slate-300 transition-colors hover:border-white/10 hover:bg-white/5 hover:text-white"
+                    className={`block rounded-2xl border border-transparent px-3 py-2 text-sm leading-tight text-slate-300 hover:border-white/10 hover:bg-white/5 hover:text-white ${FLAGSHIP_ACTION_CLASS}`}
                   >
                     {item.label}
                   </a>
@@ -212,8 +223,8 @@ export function MicrositeShell({
               </nav>
             </div>
 
-            <div className="rounded-[24px] border border-white/10 bg-slate-900/70 p-6 backdrop-blur-sm">
-              <div className="text-[10px] uppercase tracking-[0.26em] text-slate-500">Next Step</div>
+            <div className={`rounded-[var(--fw-panel-radius)] p-6 backdrop-blur-sm ${FLAGSHIP_PANEL_CLASS}`}>
+              <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>Next Step</div>
               <p className="mt-4 text-sm leading-relaxed text-slate-300">
                 If the thesis is directionally right, book the working session. We will map the current yard flow, isolate the dock bottleneck, and quantify site-level ROI.
               </p>
@@ -221,7 +232,7 @@ export function MicrositeShell({
                 href={primaryCta.href}
                 label={primaryCta.label}
                 ctaId="sidebar-booking"
-                className={`${accent.bg} ${accent.bgHover} mt-5 inline-flex rounded-full px-4 py-2 text-sm font-semibold text-slate-950 transition-colors`}
+                className={`${accent.bg} ${accent.bgHover} mt-5 inline-flex rounded-full px-4 py-2 text-sm font-semibold text-slate-950`}
               />
             </div>
           </div>
@@ -231,17 +242,17 @@ export function MicrositeShell({
       <div className="fixed inset-x-0 bottom-0 z-50 px-3 pb-[max(env(safe-area-inset-bottom),0.75rem)] pt-3 backdrop-blur-xl lg:hidden">
         <div
           data-ms-mobile-cta="true"
-          className="mx-auto flex max-w-[96rem] items-center justify-between gap-4 rounded-[24px] border border-white/10 bg-slate-950/94 px-4 py-3 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.95)]"
+          className={`mx-auto flex max-w-[96rem] items-center justify-between gap-4 rounded-[var(--fw-panel-radius)] px-4 py-3 ${FLAGSHIP_PANEL_CLASS}`}
         >
           <div>
-            <div className="text-[10px] uppercase tracking-[0.22em] text-slate-500">Next Step</div>
+            <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>Next Step</div>
             <div className="text-sm font-medium text-white">Book the working session</div>
           </div>
           <ShellCta
             href={primaryCta.href}
             label={primaryCta.label}
             ctaId="mobile-booking"
-            className={`${accent.bg} ${accent.bgHover} shrink-0 rounded-full px-4 py-2 text-sm font-semibold text-slate-950 transition-colors`}
+            className={`${accent.bg} ${accent.bgHover} shrink-0 rounded-full px-4 py-2 text-sm font-semibold text-slate-950`}
           />
         </div>
       </div>

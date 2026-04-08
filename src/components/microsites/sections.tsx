@@ -23,15 +23,25 @@ import type {
   CTABlock,
 } from '@/lib/microsites/schema';
 import {
+  FLAGSHIP_ACTION_CLASS,
+  FLAGSHIP_DISPLAY_CLASS,
+  FLAGSHIP_LABEL_CLASS,
+  FLAGSHIP_PANEL_MUTED_CLASS,
   FLAGSHIP_SECTION_FRAME_CLASS,
   FLAGSHIP_SECTION_GUTTER_CLASS,
+  FLAGSHIP_SECTION_SPACE_CLASS,
+  FLAGSHIP_SECTION_TITLE_CLASS,
   getAccentClasses,
   type AccentClasses,
 } from './theme';
 
-const STANDARD_SECTION_CLASS = `py-12 ${FLAGSHIP_SECTION_GUTTER_CLASS} xl:py-14`;
-const HERO_SECTION_CLASS = `py-14 ${FLAGSHIP_SECTION_GUTTER_CLASS} md:py-16`;
-const CTA_SECTION_CLASS = `py-14 ${FLAGSHIP_SECTION_GUTTER_CLASS} xl:py-16`;
+const STANDARD_SECTION_CLASS = `${FLAGSHIP_SECTION_SPACE_CLASS} ${FLAGSHIP_SECTION_GUTTER_CLASS}`;
+const HERO_SECTION_CLASS = `py-[calc(var(--fw-space-section-compact)+0.5rem)] ${FLAGSHIP_SECTION_GUTTER_CLASS} md:py-[calc(var(--fw-space-section)+0.25rem)]`;
+const CTA_SECTION_CLASS = `${FLAGSHIP_SECTION_SPACE_CLASS} ${FLAGSHIP_SECTION_GUTTER_CLASS}`;
+const SECTION_LABEL_CLASS = `mb-2 ${FLAGSHIP_LABEL_CLASS}`;
+const SECTION_TITLE_CLASS = `mb-4 ${FLAGSHIP_SECTION_TITLE_CLASS}`;
+const SECTION_COPY_CLASS = 'max-w-4xl text-sm leading-relaxed text-slate-300 md:text-[0.98rem]';
+const FLAGSHIP_CALLOUT_PANEL_CLASS = `rounded-[var(--fw-panel-radius)] ${FLAGSHIP_PANEL_MUTED_CLASS}`;
 
 // ── CTA Button ────────────────────────────────────────────────────────
 function CTAButton({ cta, accent, ctaId }: { cta: CTABlock; accent: AccentClasses; ctaId: string }) {
@@ -41,7 +51,7 @@ function CTAButton({ cta, accent, ctaId }: { cta: CTABlock; accent: AccentClasse
       target="_blank"
       rel="noopener noreferrer"
       data-ms-cta-id={ctaId}
-      className={`inline-block ${accent.bg} ${accent.bgHover} text-slate-900 font-bold text-sm px-8 py-3 rounded-lg transition-colors`}
+      className={`inline-block ${accent.bg} ${accent.bgHover} ${FLAGSHIP_ACTION_CLASS} rounded-lg px-8 py-3 text-sm font-bold text-slate-900`}
     >
       {cta.buttonLabel}
     </a>
@@ -54,14 +64,14 @@ export function HeroSectionComponent({ section, accent }: { section: HeroSection
     <section className={HERO_SECTION_CLASS}>
       <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.accountCallout && (
-          <p className={`text-xs tracking-[0.25em] ${accent.textLight} uppercase font-semibold mb-4`}>
+          <p className={`mb-4 text-xs ${FLAGSHIP_LABEL_CLASS} ${accent.textLight}`}>
             {section.accountCallout}
           </p>
         )}
-        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight text-white">
+        <h1 className={`text-3xl font-extrabold leading-tight text-white md:text-4xl ${FLAGSHIP_DISPLAY_CLASS}`}>
           {section.headline}
         </h1>
-        <p className="mt-4 max-w-4xl text-lg leading-relaxed text-slate-300">
+        <p className="mt-4 max-w-4xl text-lg leading-relaxed text-slate-300 md:text-[1.12rem]">
           {section.subheadline}
         </p>
         <div className="mt-8">
@@ -78,12 +88,12 @@ export function ProblemSectionComponent({ section }: { section: ProblemSection }
     <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800`}>
       <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
-          <p className="text-[10px] tracking-[0.3em] uppercase text-red-400 font-bold mb-2">
+          <p className={`${SECTION_LABEL_CLASS} text-red-400`}>
             {section.sectionLabel}
           </p>
         )}
-        <h2 className="text-2xl font-bold text-white mb-4">{section.headline}</h2>
-        <p className="mb-8 max-w-4xl text-sm leading-relaxed text-slate-300">{section.narrative}</p>
+        <h2 className={SECTION_TITLE_CLASS}>{section.headline}</h2>
+        <p className={`mb-8 ${SECTION_COPY_CLASS}`}>{section.narrative}</p>
         <div className="grid gap-4 md:grid-cols-2">
           {section.painPoints.map((pain, i) => (
             <div
@@ -114,12 +124,12 @@ export function StakesSectionComponent({ section }: { section: StakesSection }) 
     <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800 bg-slate-900/50`}>
       <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
-          <p className="text-[10px] tracking-[0.3em] uppercase text-amber-400 font-bold mb-2">
+          <p className={`${SECTION_LABEL_CLASS} text-amber-400`}>
             {section.sectionLabel}
           </p>
         )}
-        <h2 className="text-2xl font-bold text-white mb-4">{section.headline}</h2>
-        <p className="mb-6 max-w-4xl text-sm leading-relaxed text-slate-300">{section.narrative}</p>
+        <h2 className={SECTION_TITLE_CLASS}>{section.headline}</h2>
+        <p className={`mb-6 ${SECTION_COPY_CLASS}`}>{section.narrative}</p>
 
         {section.annualCost && (
           <div className="mb-6 text-center">
@@ -155,12 +165,12 @@ export function SolutionSectionComponent({ section, accent }: { section: Solutio
     <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800`}>
       <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
-          <p className={`text-[10px] tracking-[0.3em] uppercase ${accent.label} font-bold mb-2`}>
+          <p className={`${SECTION_LABEL_CLASS} ${accent.label}`}>
             {section.sectionLabel}
           </p>
         )}
-        <h2 className="text-2xl font-bold text-white mb-4">{section.headline}</h2>
-        <p className="mb-8 max-w-4xl text-sm leading-relaxed text-slate-300">{section.narrative}</p>
+        <h2 className={SECTION_TITLE_CLASS}>{section.headline}</h2>
+        <p className={`mb-8 ${SECTION_COPY_CLASS}`}>{section.narrative}</p>
 
         <div className="grid gap-4 md:grid-cols-2">
           {section.modules.map((mod) => (
@@ -196,12 +206,12 @@ export function ProofSectionComponent({ section, accent }: { section: ProofSecti
       <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
           <div className="text-center mb-4">
-            <span className="text-[10px] tracking-[0.3em] uppercase text-slate-400 font-bold border-t border-b border-slate-600 px-6 py-1.5 inline-block">
+            <span className={`${FLAGSHIP_LABEL_CLASS} inline-block border-y border-slate-600 px-6 py-1.5 text-slate-400`}>
               {section.sectionLabel}
             </span>
           </div>
         )}
-        <h2 className="text-2xl font-bold text-white mb-6 text-center">{section.headline}</h2>
+        <h2 className={`mb-6 text-center ${FLAGSHIP_SECTION_TITLE_CLASS}`}>{section.headline}</h2>
 
         {section.proofVisual && (
           <div className="mb-6 rounded-2xl border border-slate-700/50 bg-slate-950/40 p-5">
@@ -353,12 +363,12 @@ export function NetworkMapSectionComponent({ section, accent }: { section: Netwo
     <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800`}>
       <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
-          <p className={`text-[10px] tracking-[0.3em] uppercase ${accent.label} font-bold mb-2`}>
+          <p className={`${SECTION_LABEL_CLASS} ${accent.label}`}>
             {section.sectionLabel}
           </p>
         )}
-        <h2 className="text-2xl font-bold text-white mb-4">{section.headline}</h2>
-        <p className="mb-6 max-w-4xl text-sm leading-relaxed text-slate-300">{section.narrative}</p>
+        <h2 className={SECTION_TITLE_CLASS}>{section.headline}</h2>
+        <p className={`mb-6 ${SECTION_COPY_CLASS}`}>{section.narrative}</p>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <div className="text-center bg-slate-800/50 rounded-lg py-4 px-2 border border-slate-700/40">
@@ -412,12 +422,12 @@ export function ROISectionComponent({ section, accent }: { section: ROISection; 
     <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800 bg-slate-900/50`}>
       <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
-          <p className="text-[10px] tracking-[0.3em] uppercase text-emerald-400 font-bold mb-2">
+          <p className={`${SECTION_LABEL_CLASS} text-emerald-400`}>
             {section.sectionLabel}
           </p>
         )}
-        <h2 className="text-2xl font-bold text-white mb-4">{section.headline}</h2>
-        <p className="mb-6 max-w-4xl text-sm leading-relaxed text-slate-300">{section.narrative}</p>
+        <h2 className={SECTION_TITLE_CLASS}>{section.headline}</h2>
+        <p className={`mb-6 ${SECTION_COPY_CLASS}`}>{section.narrative}</p>
 
         {section.headlineStats && section.headlineStats.length > 0 && (
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 mb-6">
@@ -608,11 +618,11 @@ export function TestimonialSectionComponent({ section, accent }: { section: Test
     <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800`}>
       <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
-          <p className="text-[10px] tracking-[0.3em] uppercase text-slate-400 font-bold mb-4">
+          <p className={`mb-4 ${FLAGSHIP_LABEL_CLASS} text-slate-400`}>
             {section.sectionLabel}
           </p>
         )}
-        <div className={`bg-slate-800/30 rounded-lg px-6 py-5 border-l-2 ${accent.borderAccent}`}>
+        <div className={`${FLAGSHIP_CALLOUT_PANEL_CLASS} border-l-2 px-6 py-5 ${accent.borderAccent}`}>
           <p className="text-base text-slate-300 italic leading-relaxed">
             &ldquo;{section.quote}&rdquo;
           </p>
@@ -633,12 +643,12 @@ export function ModulesSectionComponent({ section, accent }: { section: ModulesS
     <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800`}>
       <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
-          <p className={`text-[10px] tracking-[0.3em] uppercase ${accent.label} font-bold mb-2`}>
+          <p className={`${SECTION_LABEL_CLASS} ${accent.label}`}>
             {section.sectionLabel}
           </p>
         )}
-        <h2 className="text-2xl font-bold text-white mb-4">{section.headline}</h2>
-        <p className="mb-8 max-w-4xl text-sm leading-relaxed text-slate-300">{section.narrative}</p>
+        <h2 className={SECTION_TITLE_CLASS}>{section.headline}</h2>
+        <p className={`mb-8 ${SECTION_COPY_CLASS}`}>{section.narrative}</p>
         <div className="grid gap-4 md:grid-cols-2">
           {section.modules.map((mod) => (
             <div key={mod.id} className={`rounded-lg border ${accent.border} ${accent.bgSubtle} p-4`}>
@@ -666,11 +676,11 @@ export function TimelineSectionComponent({ section, accent }: { section: Timelin
     <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800 bg-slate-900/50`}>
       <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
-          <p className={`text-[10px] tracking-[0.3em] uppercase ${accent.label} font-bold mb-2`}>
+          <p className={`${SECTION_LABEL_CLASS} ${accent.label}`}>
             {section.sectionLabel}
           </p>
         )}
-        <h2 className="text-2xl font-bold text-white mb-8">{section.headline}</h2>
+        <h2 className={`mb-8 ${FLAGSHIP_SECTION_TITLE_CLASS}`}>{section.headline}</h2>
         <div className="relative">
           {section.steps.map((step, i) => (
             <div key={i} className="relative pl-8 pb-8 last:pb-0">
@@ -698,11 +708,11 @@ export function ComparisonSectionComponent({ section, accent }: { section: Compa
     <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800`}>
       <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
-          <p className="text-[10px] tracking-[0.3em] uppercase text-slate-400 font-bold mb-2">
+          <p className={`${SECTION_LABEL_CLASS} text-slate-400`}>
             {section.sectionLabel}
           </p>
         )}
-        <h2 className="text-2xl font-bold text-white mb-6">{section.headline}</h2>
+        <h2 className={`mb-6 ${FLAGSHIP_SECTION_TITLE_CLASS}`}>{section.headline}</h2>
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
@@ -734,12 +744,12 @@ export function CaseStudySectionComponent({ section }: { section: CaseStudySecti
     <section className={`${STANDARD_SECTION_CLASS} border-t border-slate-800 bg-slate-900/50`}>
       <div className={FLAGSHIP_SECTION_FRAME_CLASS}>
         {section.sectionLabel && (
-          <p className="text-[10px] tracking-[0.3em] uppercase text-emerald-400 font-bold mb-2">
+          <p className={`${SECTION_LABEL_CLASS} text-emerald-400`}>
             {section.sectionLabel}
           </p>
         )}
-        <h2 className="text-2xl font-bold text-white mb-4">{section.headline}</h2>
-        <p className="mb-6 max-w-4xl text-sm leading-relaxed text-slate-300">{section.narrative}</p>
+        <h2 className={SECTION_TITLE_CLASS}>{section.headline}</h2>
+        <p className={`mb-6 ${SECTION_COPY_CLASS}`}>{section.narrative}</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {section.results.map((stat, i) => (
             <div key={i} className="text-center bg-emerald-950/20 rounded-lg py-4 px-2 border border-emerald-900/30">
@@ -758,7 +768,7 @@ export function CTASectionComponent({ section, accent }: { section: CTASection; 
   return (
     <section className={`${CTA_SECTION_CLASS} border-t border-slate-800 bg-gradient-to-b from-slate-900/50 to-slate-950`}>
       <div className={`${FLAGSHIP_SECTION_FRAME_CLASS} text-center`}>
-        <h2 className="text-2xl font-bold text-white mb-3">{section.cta.headline}</h2>
+        <h2 className={`mb-3 ${FLAGSHIP_SECTION_TITLE_CLASS}`}>{section.cta.headline}</h2>
         <p className="mx-auto mb-6 max-w-2xl text-sm text-slate-400">{section.cta.subtext}</p>
         <CTAButton cta={section.cta} accent={accent} ctaId={section.sectionId ?? 'cta'} />
         {section.closingLine && (

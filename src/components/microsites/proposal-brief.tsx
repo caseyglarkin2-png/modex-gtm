@@ -1,7 +1,18 @@
 import type { MicrositeSection } from '@/lib/microsites/schema';
 import type { MicrositeProposalBrief } from '@/lib/microsites/proposal';
 import { MicrositeSectionRenderer } from './sections';
-import { FLAGSHIP_FRAME_CLASS, getAccentClasses } from './theme';
+import {
+  FLAGSHIP_ACTION_CLASS,
+  FLAGSHIP_DISPLAY_CLASS,
+  FLAGSHIP_FRAME_CLASS,
+  FLAGSHIP_LABEL_CLASS,
+  FLAGSHIP_PANEL_CLASS,
+  FLAGSHIP_PANEL_MUTED_CLASS,
+  FLAGSHIP_SECTION_TITLE_CLASS,
+  FLAGSHIP_THEME_CLASS,
+  getAccentClasses,
+  getFlagshipThemeStyle,
+} from './theme';
 
 function isHeroSection(section: MicrositeSection): section is Extract<MicrositeSection, { type: 'hero' }> {
   return section.type === 'hero';
@@ -28,8 +39,8 @@ function ActionLink({
       data-ms-cta-id={ctaId}
       download={download}
       className={primary
-        ? 'inline-flex items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 transition-colors hover:bg-slate-100'
-        : 'inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/10'}
+        ? `inline-flex items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-slate-100 ${FLAGSHIP_ACTION_CLASS}`
+        : `inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10 ${FLAGSHIP_ACTION_CLASS}`}
     >
       {label}
     </a>
@@ -41,19 +52,22 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
   const renderedSections = proposal.sections.filter((section) => !isHeroSection(section));
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-stone-950 text-white">
+    <div
+      style={getFlagshipThemeStyle(proposal.accentColor)}
+      className={`${FLAGSHIP_THEME_CLASS} relative min-h-screen overflow-hidden bg-stone-950 text-white`}
+    >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_34%)]" />
       <div
         className="pointer-events-none absolute inset-0"
         style={{
-          backgroundImage: `radial-gradient(circle at 18% 18%, ${proposal.accentColor ?? '#06B6D4'}22, transparent 32%), radial-gradient(circle at 82% 0%, rgba(255,255,255,0.08), transparent 24%)`,
+          backgroundImage: 'radial-gradient(circle at 18% 18%, var(--fw-accent-glow), transparent 32%), radial-gradient(circle at 82% 0%, rgba(255,255,255,0.08), transparent 24%)',
         }}
       />
 
       <header className="sticky top-0 z-50 border-b border-white/10 bg-stone-950/88 backdrop-blur-xl">
         <div className={`${FLAGSHIP_FRAME_CLASS} flex flex-wrap items-center justify-between gap-3 py-4`}>
           <div>
-            <div className="text-[10px] uppercase tracking-[0.28em] text-slate-500">YardFlow by FreightRoll</div>
+            <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>YardFlow by FreightRoll</div>
             <div className="mt-1 text-sm font-medium text-white/85">{proposal.accountName} board-ready proposal</div>
           </div>
 
@@ -74,12 +88,13 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
         <section
           id="proposal-summary"
           data-ms-section-id="proposal-summary"
-          className="rounded-[36px] border border-white/10 bg-slate-950/70 px-6 py-8 shadow-[0_24px_90px_-48px_rgba(15,23,42,0.95)] backdrop-blur-sm sm:px-8 xl:px-10 xl:py-12"
+          className={`rounded-[var(--fw-panel-radius-large)] px-6 py-8 backdrop-blur-sm sm:px-8 xl:px-10 xl:py-12 ${FLAGSHIP_PANEL_CLASS}`}
+          style={{ boxShadow: 'var(--fw-panel-shadow-strong), 0 0 0 1px var(--fw-accent-glow)' }}
         >
-          <div className={`text-[11px] font-semibold uppercase tracking-[0.3em] ${accent.textLight}`}>
+          <div className={`${FLAGSHIP_LABEL_CLASS} ${accent.textLight}`}>
             Shareable operator brief
           </div>
-          <h1 className="mt-5 max-w-6xl text-4xl font-black tracking-[-0.04em] text-white md:text-6xl xl:text-7xl">
+          <h1 className={`mt-5 max-w-6xl text-4xl font-black text-white md:text-6xl xl:text-7xl ${FLAGSHIP_DISPLAY_CLASS}`}>
             {proposal.accountName} yard execution proposal
           </h1>
           <p className="mt-5 max-w-5xl text-base leading-relaxed text-slate-300 md:text-lg xl:text-xl">
@@ -97,8 +112,8 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
 
           <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {proposal.summaryStats.map((stat) => (
-              <div key={stat.label} className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
-                <p className="text-[10px] uppercase tracking-[0.24em] text-slate-500">{stat.label}</p>
+              <div key={stat.label} className={`rounded-[var(--fw-panel-radius)] p-5 ${FLAGSHIP_PANEL_MUTED_CLASS}`}>
+                <p className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>{stat.label}</p>
                 <p className="mt-3 text-3xl font-bold text-white">{stat.value}</p>
                 {stat.detail && <p className="mt-2 text-xs leading-relaxed text-slate-400">{stat.detail}</p>}
               </div>
@@ -107,15 +122,15 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
 
           <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1.18fr)_minmax(380px,0.82fr)] xl:gap-10">
             <div>
-              <div className="text-[10px] uppercase tracking-[0.24em] text-slate-500">Commercial thesis</div>
-              <p className="mt-4 max-w-4xl text-2xl font-semibold leading-tight text-white xl:text-3xl">{proposal.hero.headline}</p>
+              <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>Commercial thesis</div>
+              <p className={`mt-4 max-w-4xl text-2xl leading-tight text-white xl:text-3xl ${FLAGSHIP_SECTION_TITLE_CLASS}`}>{proposal.hero.headline}</p>
               {proposal.problem && (
                 <p className="mt-4 max-w-4xl text-sm leading-relaxed text-slate-300">{proposal.problem.narrative}</p>
               )}
             </div>
 
-            <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-              <div className="text-[10px] uppercase tracking-[0.24em] text-slate-500">Board conversation prompts</div>
+            <div className={`rounded-[var(--fw-panel-radius)] p-6 ${FLAGSHIP_PANEL_MUTED_CLASS}`}>
+              <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>Board conversation prompts</div>
               <div className="mt-4 space-y-3">
                 {proposal.focusPoints.map((point) => (
                   <div key={point} className="flex items-start gap-3 text-sm leading-relaxed text-slate-300">
@@ -132,21 +147,21 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
           <section
             id="proposal-proof-points"
             data-ms-section-id="proposal-proof-points"
-            className="rounded-[28px] border border-white/10 bg-slate-950/65 px-7 py-7 backdrop-blur-sm"
+            className={`rounded-[var(--fw-panel-radius)] px-7 py-7 backdrop-blur-sm ${FLAGSHIP_PANEL_MUTED_CLASS}`}
           >
             <div className="flex items-center justify-between gap-3">
               <div>
-                <div className="text-[10px] uppercase tracking-[0.24em] text-slate-500">Proof from live deployment</div>
-                <h2 className="mt-3 text-2xl font-semibold text-white">Evidence to carry into the room</h2>
+                <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>Proof from live deployment</div>
+                <h2 className={`mt-3 ${FLAGSHIP_SECTION_TITLE_CLASS}`}>Evidence to carry into the room</h2>
               </div>
               <div className="text-xs text-slate-500">Shared live model, not static slideware</div>
             </div>
 
             <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               {proposal.proofStats.map((stat) => (
-                <div key={`${stat.label}-${stat.value}`} className="rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+                <div key={`${stat.label}-${stat.value}`} className={`rounded-[var(--fw-panel-radius)] p-5 ${FLAGSHIP_PANEL_MUTED_CLASS}`}>
                   <p className={`text-3xl font-bold ${accent.textLight}`}>{stat.value}</p>
-                  <p className="mt-2 text-xs uppercase tracking-[0.22em] text-slate-400">{stat.label}</p>
+                  <p className={`mt-2 ${FLAGSHIP_LABEL_CLASS} text-slate-400`}>{stat.label}</p>
                   {stat.context && <p className="mt-3 text-xs leading-relaxed text-slate-500">{stat.context}</p>}
                 </div>
               ))}
@@ -170,9 +185,9 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
             <section
               id="proposal-network"
               data-ms-section-id="proposal-network"
-              className="rounded-[28px] border border-white/10 bg-slate-900/60 p-5 backdrop-blur-sm"
+              className={`rounded-[var(--fw-panel-radius)] p-5 backdrop-blur-sm ${FLAGSHIP_PANEL_MUTED_CLASS}`}
             >
-              <div className="text-[10px] uppercase tracking-[0.24em] text-slate-500">Network reality</div>
+              <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>Network reality</div>
               <p className="mt-4 text-lg font-semibold text-white">
                 {proposal.network?.facilityCount ?? 'Configured network'} across {proposal.network?.geographicSpread ?? 'the active account footprint'}
               </p>
@@ -189,9 +204,9 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
               <section
                 id="proposal-roi-signal"
                 data-ms-section-id="proposal-roi-signal"
-                className="rounded-[28px] border border-white/10 bg-slate-900/60 p-5 backdrop-blur-sm"
+                className={`rounded-[var(--fw-panel-radius)] p-5 backdrop-blur-sm ${FLAGSHIP_PANEL_MUTED_CLASS}`}
               >
-                <div className="text-[10px] uppercase tracking-[0.24em] text-slate-500">ROI signal</div>
+                <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>ROI signal</div>
                 <p className="mt-4 text-lg font-semibold text-white">{proposal.roi.totalAnnualSavings ?? proposal.roi.headlineStats?.[0]?.value ?? 'Modeled value available'}</p>
                 <p className="mt-2 text-sm leading-relaxed text-slate-300">{proposal.roi.narrative}</p>
                 {proposal.roi.paybackPeriod && (
@@ -204,13 +219,13 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
               <section
                 id="proposal-sources"
                 data-ms-section-id="proposal-sources"
-                className="rounded-[28px] border border-white/10 bg-slate-900/60 p-5 backdrop-blur-sm"
+                className={`rounded-[var(--fw-panel-radius)] p-5 backdrop-blur-sm ${FLAGSHIP_PANEL_MUTED_CLASS}`}
               >
-                <div className="text-[10px] uppercase tracking-[0.24em] text-slate-500">Evidence trail</div>
+                <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>Evidence trail</div>
                 <div className="mt-4 space-y-4">
                   {proposal.sourceNotes.slice(0, 6).map((note) => (
-                    <div key={note.id} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">{note.label}</p>
+                    <div key={note.id} className={`rounded-[var(--fw-panel-radius)] p-4 ${FLAGSHIP_PANEL_MUTED_CLASS}`}>
+                      <p className={`${FLAGSHIP_LABEL_CLASS} text-slate-400`}>{note.label}</p>
                       <p className="mt-2 text-sm leading-relaxed text-slate-300">{note.detail}</p>
                       <p className="mt-2 text-[11px] uppercase tracking-[0.16em] text-slate-500">
                         {note.confidence}
