@@ -1,6 +1,9 @@
 import type { AccountMicrositeData } from '../schema';
+import { getFacilityCountLabel, getFacilityCountLowerBound } from '../../research/facility-fact-registry';
 
 const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
+const COCA_COLA_FACILITY_COUNT_LABEL = getFacilityCountLabel('Coca-Cola', '70+');
+const COCA_COLA_FACILITY_COUNT = getFacilityCountLowerBound('Coca-Cola', 70) ?? 70;
 
 export const cocaCola: AccountMicrositeData = {
   slug: 'coca-cola',
@@ -12,14 +15,14 @@ export const cocaCola: AccountMicrositeData = {
   priorityScore: 84,
 
   pageTitle: 'YardFlow for Coca-Cola - Yard Network Standardization',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across Coca-Cola\'s 70+ bottler distribution centers.',
+  metaDescription: `How YardFlow eliminates the yard bottleneck across Coca-Cola's ${COCA_COLA_FACILITY_COUNT_LABEL} disclosed bottler yard sites.`,
 
   sections: [
     {
       type: 'hero',
-      headline: 'Your bottler network runs 70+ facilities with 200-400 trailer moves per day in peak. The yards were never designed for this volume.',
+      headline: `Your bottler network runs ${COCA_COLA_FACILITY_COUNT_LABEL} facilities with 200-400 trailer moves per day in peak. The yards were never designed for this volume.`,
       subheadline: 'Coca-Cola Consolidated alone reported $14M in detention costs. A 15-minute improvement in turn time across the bottler network saves the system $20M+ annually. That is the invisible 48-hour dock bottleneck hiding in your yard.',
-      accountCallout: '70+ distribution centers, 200-400 trailer moves/day per facility during peak, $14M detention costs at CCBCC alone',
+      accountCallout: `${COCA_COLA_FACILITY_COUNT_LABEL} disclosed bottler sites, including 60 distribution centers and 10 plants at CCBCC alone, 200-400 trailer moves/day per facility during peak`,
       backgroundTheme: 'dark',
       cta: {
         type: 'meeting',
@@ -65,7 +68,7 @@ export const cocaCola: AccountMicrositeData = {
       type: 'stakes',
       sectionLabel: 'What This Costs Your System',
       headline: 'The math nobody tracks across the bottler network',
-      narrative: 'Detention costs, dwell time, driver wait hours, seasonal surge inefficiency. Each bottler tracks their own slice. Nobody has the system-wide view. Coca-Cola Consolidated\'s $14M is public. The rest is hidden across 70+ facilities.',
+      narrative: `Detention costs, dwell time, driver wait hours, seasonal surge inefficiency. Each bottler tracks their own slice. Nobody has the system-wide view. Coca-Cola Consolidated's $14M is public. The rest is hidden across ${COCA_COLA_FACILITY_COUNT_LABEL} facilities.`,
       annualCost: '$40M+ estimated system-wide in yard-driven inefficiency',
       costBreakdown: [
         { label: 'Detention / demurrage (CCBCC alone)', value: '$14M' },
@@ -81,7 +84,7 @@ export const cocaCola: AccountMicrositeData = {
       headline: 'One protocol across the bottler network',
       narrative: 'YardFlow gives the Coca-Cola system one operating standard for every yard. Not a mandate - a protocol that makes every bottler\'s operation faster and cheaper. The same driver journey at every facility. The same dock assignment logic. The same evidence trail.',
       modules: [
-        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID.', relevanceToAccount: 'Standardizes gate process across 70+ bottler facilities.' },
+        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID.', relevanceToAccount: `Standardizes gate process across ${COCA_COLA_FACILITY_COUNT_LABEL} bottler facilities.` },
         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter task queues. Temperature-zone aware.', relevanceToAccount: 'Critical for Fairlife cold chain and multi-temp staging.' },
         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location and dwell.', relevanceToAccount: 'Real-time visibility across every bottler yard in the system.' },
         { id: 'flowNETWORK', name: 'flowNETWORK', verb: 'Scale', shortDescription: 'Network-wide command view.', relevanceToAccount: 'System-wide visibility Coca-Cola HQ has never had across bottler yards.' },
@@ -118,9 +121,9 @@ export const cocaCola: AccountMicrositeData = {
       sectionLabel: 'Your Network',
       headline: 'The Coca-Cola system\'s yard footprint',
       narrative: 'Every bottler runs its own yard differently. The HQ concentrate plants have different processes from Consolidated\'s DCs, which are different from Reyes Beverage\'s operations, which are different from Liberty Coca-Cola\'s NYC metro yards. YardFlow gives the system one standard.',
-      facilityCount: '70+',
+      facilityCount: COCA_COLA_FACILITY_COUNT_LABEL,
       facilityTypes: ['Concentrate Plants (HQ-owned)', 'Bottling Facilities', 'Distribution Centers', 'Cold Storage'],
-      geographicSpread: 'National - Atlanta HQ, 14 CCBCC production facilities, Reyes, Liberty, Swire networks',
+      geographicSpread: 'National - Atlanta HQ, Coca-Cola Consolidated (14 states plus DC, 60 distribution centers and 10 manufacturing plants), Reyes, Liberty, Swire networks',
       dailyTrailerMoves: '15,000+ across the system during peak',
       peakMultiplier: '1.4x during summer (May-September)',
     },
@@ -137,7 +140,7 @@ export const cocaCola: AccountMicrositeData = {
       ],
       totalAnnualSavings: '$20M+ across the bottler system',
       paybackPeriod: '< 4 months at CCBCC alone',
-      methodology: 'CCBCC detention data from 10-K filing. System-wide estimate based on 70+ facilities and measured turn time improvements.',
+      methodology: `CCBCC detention data from 10-K filing. System-wide estimate based on ${COCA_COLA_FACILITY_COUNT_LABEL} facilities and measured turn time improvements.`,
     },
     {
       type: 'testimonial',
@@ -184,7 +187,7 @@ export const cocaCola: AccountMicrositeData = {
       currentMandate: 'System-wide supply chain transformation, digital capabilities investment',
       strategicPriorities: ['Supply chain transformation', 'Digital capabilities', 'Bottler network coordination'],
       knownPainPoints: [
-        'Multi-bottler coordination across 70+ facilities',
+        `Multi-bottler coordination across ${COCA_COLA_FACILITY_COUNT_LABEL} facilities`,
         'Detention costs ($14M+ at CCBCC alone)',
         'Summer peak volume spikes (40%)',
         'Fairlife cold chain integration',
@@ -283,11 +286,11 @@ export const cocaCola: AccountMicrositeData = {
 
       framingNarrative: 'Daniel, you ran the Bottling Investments Group. You have been inside the bottler yards. You know what happens when a trailer sits for an extra 30 minutes during summer peak. Now you own the system-wide supply chain mandate. The yard is the one surface your digital transformation has not reached yet.',
       openingHook: 'You came from the bottling side. You know what those yards look like in July.',
-      stakeStatement: 'Consolidated reported $14M in detention. That is one bottler. Your system has 70+ facilities. The number nobody has added up is the one that would get the most attention in your next board meeting.',
+      stakeStatement: `Consolidated reported $14M in detention. That is one bottler. Your system has ${COCA_COLA_FACILITY_COUNT_LABEL} facilities. The number nobody has added up is the one that would get the most attention in your next board meeting.`,
 
       heroOverride: {
         headline: 'Daniel, you came from the bottling side. You know what those yards look like in July.',
-        subheadline: 'Coca-Cola Consolidated\'s $14M in detention costs is public record. That is one bottler. Your system runs 70+ facilities. YardFlow gives you the system-wide yard protocol your bottler network has never had.',
+        subheadline: `Coca-Cola Consolidated's $14M in detention costs is public record. That is one bottler. Your system runs ${COCA_COLA_FACILITY_COUNT_LABEL} facilities. YardFlow gives you the system-wide yard protocol your bottler network has never had.`,
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'cta'],
       ctaOverride: {
@@ -407,16 +410,87 @@ export const cocaCola: AccountMicrositeData = {
     },
   ],
 
+  roiModel: {
+    sourceOfTruth: 'shared-engine',
+    calculatorVersion: 'ROI Calculator V2 public contract',
+    scenarioLabel: `Conservative ${COCA_COLA_FACILITY_COUNT}-facility Coca-Cola bottler network model using the lower-bound system footprint already documented in research`,
+    averageMarginPerShipment: 125,
+    facilityMix: [
+      { archetype: 'with-yms', facilityCount: 10 },
+      { archetype: 'drops-no-yms', facilityCount: 36 },
+      { archetype: 'without-drops', facilityCount: 24 },
+    ],
+    archetypeAssumptions: [
+      { archetype: 'with-yms', shipmentsPerDay: 155 },
+      { archetype: 'drops-no-yms', shipmentsPerDay: 120 },
+      { archetype: 'without-drops', shipmentsPerDay: 40 },
+    ],
+    accountAssumptions: [
+      {
+        label: 'Modeled facility count',
+        value: COCA_COLA_FACILITY_COUNT,
+        unit: 'facilities',
+        sourceNoteId: 'coke-network-footprint',
+      },
+      {
+        label: 'Public detention anchor',
+        value: 14_000_000,
+        unit: 'USD/year',
+        sourceNoteId: 'coke-detention-anchor',
+      },
+      {
+        label: 'Average margin per shipment',
+        value: 125,
+        unit: 'USD/shipment',
+        sourceNoteId: 'coke-margin-estimate',
+      },
+      {
+        label: 'Archetype mix',
+        value: '10 with YMS, 36 drops no YMS, 24 without drops',
+        sourceNoteId: 'coke-facility-mix',
+      },
+    ],
+    sourceNotes: [
+      {
+        id: 'coke-network-footprint',
+        label: 'Lower-bound Coca-Cola system footprint',
+        detail: `The flagship microsite uses Coca-Cola Consolidated's disclosed 60 distribution centers and 10 manufacturing plants as the official ${COCA_COLA_FACILITY_COUNT_LABEL} site lower bound for the modeled bottler footprint.`,
+        confidence: 'public',
+        citation: 'src/lib/data/facility-facts.json',
+      },
+      {
+        id: 'coke-detention-anchor',
+        label: 'CCBCC detention and demurrage anchor',
+        detail: 'Coca-Cola Consolidated publicly disclosed a $14M detention and demurrage figure, which remains the external cost anchor for the Coca-Cola flagship ROI story.',
+        confidence: 'public',
+        citation: 'docs/research-dossiers-top10.md',
+      },
+      {
+        id: 'coke-margin-estimate',
+        label: 'Conservative per-shipment margin',
+        detail: 'Average margin per shipment is kept materially below the public calculator default to stay conservative relative to bottler economics and mixed beverage routes.',
+        confidence: 'estimated',
+      },
+      {
+        id: 'coke-facility-mix',
+        label: 'Facility archetype mix',
+        detail: 'Facility mix is inferred from a system made up of large bottler sites, company-owned concentrate operations, and smaller facilities still running local dock practices.',
+        confidence: 'inferred',
+        citation: 'src/lib/data/facility-facts.json',
+      },
+    ],
+  },
+
   network: {
-    facilityCount: '70+',
+    facilityCount: COCA_COLA_FACILITY_COUNT_LABEL,
     facilityTypes: ['Concentrate Plants', 'Bottling Facilities', 'Distribution Centers', 'Cold Storage'],
-    geographicSpread: 'National - Atlanta HQ, Consolidated (14 facilities), Reyes, Liberty (NYC), Swire (Western US)',
+    geographicSpread: 'National - Atlanta HQ, Consolidated (14 states plus DC, 70 disclosed sites), Reyes, Liberty (NYC), Swire (Western US)',
     dailyTrailerMoves: '15,000+ system-wide during peak',
     peakMultiplier: '1.4x during summer',
     fleet: 'Estimated 15,000+ trucks through bottling system',
     keyFacilities: [
       { name: 'Coca-Cola HQ', location: 'Atlanta, GA', type: 'Headquarters', significance: 'Literally in Atlanta, same city as MODEX', yardRelevance: 'Proximity = easiest meeting scheduling possible' },
-      { name: 'CCBCC Production Facilities', location: '14 locations', type: 'Bottling/Production', significance: 'Largest US bottler, ~350,000 sq ft avg', yardRelevance: '$14M detention costs documented in 10-K' },
+      { name: 'CCBCC Bottler Footprint', location: '14 states plus DC', type: '10 Manufacturing Plants + 60 Distribution Centers', significance: 'Largest U.S. Coca-Cola bottler disclosed 70 sites in its 2025 10-K', yardRelevance: '$14M detention costs documented in 10-K' },
     ],
   },
 

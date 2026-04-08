@@ -1,6 +1,9 @@
 import type { AccountMicrositeData } from '../schema';
+import { getFacilityCountLabel, getFacilityCountLowerBound } from '../../research/facility-fact-registry';
 
 const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
+const FRITO_LAY_FACILITY_COUNT_LABEL = getFacilityCountLabel('Frito-Lay', '230+');
+const FRITO_LAY_FACILITY_COUNT = getFacilityCountLowerBound('Frito-Lay', 230) ?? 230;
 
 export const fritoLay: AccountMicrositeData = {
   slug: 'frito-lay',
@@ -12,14 +15,14 @@ export const fritoLay: AccountMicrositeData = {
   priorityScore: 93,
 
   pageTitle: 'YardFlow for Frito-Lay - Yard Execution at Snack-Network Speed',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across Frito-Lay\'s high-velocity snack distribution network.',
+  metaDescription: `How YardFlow eliminates the yard bottleneck across Frito-Lay's ${FRITO_LAY_FACILITY_COUNT_LABEL} site high-velocity snack network.`,
 
   sections: [
     {
       type: 'hero',
       headline: 'Your snack network runs at a velocity most supply chains never see. Your yards were not built for this speed.',
       subheadline: 'Frito-Lay moves product from plant to shelf faster than almost any CPG network in the world. But between the production line and the outbound trailer, there is a yard that still runs on clipboards and radio calls. That gap costs you more than you are tracking.',
-      accountCallout: '30+ manufacturing plants, 200+ distribution facilities, highest-velocity CPG network in North America',
+      accountCallout: '30+ manufacturing plants, 200+ distribution centers, highest-velocity CPG network in North America',
       backgroundTheme: 'dark',
       cta: {
         type: 'meeting',
@@ -55,8 +58,8 @@ export const fritoLay: AccountMicrositeData = {
         },
         {
           headline: 'Multi-site standardization gap',
-          description: 'Thirty-plus manufacturing plants and 200+ distribution points. Every site runs its yard differently. What works at the Plano headquarters campus does not transfer to the Topeka plant or the Perry, GA facility.',
-          kpiImpact: 'No standard yard protocol across 200+ sites',
+          description: 'Thirty-plus manufacturing plants and 200-plus distribution centers. Every site runs its yard differently. What works at the Plano headquarters campus does not transfer to the Topeka plant or the Perry, GA facility.',
+          kpiImpact: `No standard yard protocol across ${FRITO_LAY_FACILITY_COUNT_LABEL} sites`,
           relevantPeople: ['fl-watson', 'fl-scott'],
         },
         {
@@ -71,7 +74,7 @@ export const fritoLay: AccountMicrositeData = {
       type: 'stakes',
       sectionLabel: 'What the Yard Costs You',
       headline: 'The variance tax on the fastest CPG network in America',
-      narrative: 'At Frito-Lay\'s volume, small execution gains matter enormously. A 15-minute improvement in truck turn time across 200+ facilities is not a rounding error. It is tens of millions in recovered capacity. But nobody is measuring it because the yard has never had a system.',
+      narrative: `At Frito-Lay's volume, small execution gains matter enormously. A 15-minute improvement in truck turn time across ${FRITO_LAY_FACILITY_COUNT_LABEL} facilities is not a rounding error. It is tens of millions in recovered capacity. But nobody is measuring it because the yard has never had a system.`,
       annualCost: '$30M+ estimated in yard-driven inefficiency across the network',
       costBreakdown: [
         { label: 'Dock dwell and turn time excess', value: '$12M+' },
@@ -145,18 +148,18 @@ export const fritoLay: AccountMicrositeData = {
       type: 'network-map',
       sectionLabel: 'Your Network',
       headline: 'Frito-Lay\'s yard footprint across North America',
-      narrative: 'Thirty-plus manufacturing plants feeding 200+ distribution points. Agricultural inbound from potato and corn country. DSD routes loading overnight at every facility. The yard protocol at each site is different. YardFlow makes it one.',
-      facilityCount: '200+',
+      narrative: 'Thirty-plus manufacturing plants and 200-plus distribution centers. Agricultural inbound from potato and corn country. DSD routes loading overnight at every facility. The yard protocol at each site is different. YardFlow makes it one.',
+      facilityCount: FRITO_LAY_FACILITY_COUNT_LABEL,
       facilityTypes: ['Manufacturing Plants (30+)', 'Distribution Centers', 'Regional Mixing Centers', 'Agricultural Receiving'],
       geographicSpread: 'National - Plano TX (HQ), plants across 20+ states, DSD network covering 95% of US retail',
-      dailyTrailerMoves: '10,000+ across the network',
+      dailyTrailerMoves: '14,000+ across the network',
       peakMultiplier: '1.3x during summer and holiday seasons (Super Bowl, back-to-school)',
     },
     {
       type: 'roi',
       sectionLabel: 'The Business Case',
       headline: 'ROI for the Frito-Lay network',
-      narrative: 'At Frito-Lay\'s volume, small gains compound fast. Measured YardFlow improvements applied conservatively across 200+ facilities.',
+      narrative: `At Frito-Lay's volume, small gains compound fast. Measured YardFlow improvements applied conservatively across ${FRITO_LAY_FACILITY_COUNT_LABEL} facilities.`,
       roiLines: [
         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
         { label: 'DSD route loading accuracy', before: '~85%', after: '97%+', delta: '+12 pts', unit: 'on-time %' },
@@ -166,7 +169,7 @@ export const fritoLay: AccountMicrositeData = {
       ],
       totalAnnualSavings: '$20M+ across the Frito-Lay network',
       paybackPeriod: '< 3 months per facility',
-      methodology: 'Based on measured 50% truck turn time reduction at comparable CPG operations. Conservative estimate for 200+ facilities at Frito-Lay volume.',
+      methodology: `Based on measured 50% truck turn time reduction at comparable CPG operations. Conservative estimate for ${FRITO_LAY_FACILITY_COUNT_LABEL} facilities at Frito-Lay volume.`,
     },
     {
       type: 'testimonial',
@@ -315,13 +318,13 @@ export const fritoLay: AccountMicrositeData = {
       label: 'Brian Watson - VP Supply Chain',
       variantSlug: 'brian-watson',
 
-      framingNarrative: 'Brian, Frito-Lay runs the highest-velocity CPG network in North America. Your production lines are world-class. But when product hits the yard for outbound staging, the pace drops to whatever speed a radio-dispatched spotter can manage. Across 200+ facilities, that gap is costing the network more than anyone is measuring.',
+      framingNarrative: `Brian, Frito-Lay runs the highest-velocity CPG network in North America. Your production lines are world-class. But when product hits the yard for outbound staging, the pace drops to whatever speed a radio-dispatched spotter can manage. Across ${FRITO_LAY_FACILITY_COUNT_LABEL} facilities, that gap is costing the network more than anyone is measuring.`,
       openingHook: 'Your production lines run at 2026 speed. Your yards run at 1996 speed.',
-      stakeStatement: 'At Frito-Lay\'s volume, a 15-minute improvement in truck turn time across 200+ facilities is not a rounding error. It is $20M+ in recovered capacity that nobody is tracking.',
+      stakeStatement: `At Frito-Lay's volume, a 15-minute improvement in truck turn time across ${FRITO_LAY_FACILITY_COUNT_LABEL} facilities is not a rounding error. It is $20M+ in recovered capacity that nobody is tracking.`,
 
       heroOverride: {
         headline: 'Brian, the fastest production lines in CPG are feeding the slowest yards.',
-        subheadline: 'Frito-Lay\'s network speed is unmatched. But the yard - the surface between production and the road - still runs on clipboards and radio calls. One protocol across 200+ facilities changes the math.',
+        subheadline: `Frito-Lay's network speed is unmatched. But the yard - the surface between production and the road - still runs on clipboards and radio calls. One protocol across ${FRITO_LAY_FACILITY_COUNT_LABEL} facilities changes the math.`,
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'cta'],
       ctaOverride: {
@@ -331,12 +334,12 @@ export const fritoLay: AccountMicrositeData = {
         buttonLabel: 'Meet at MODEX',
         calendarLink: BOOKING_LINK,
         personName: 'Brian',
-        personContext: 'network-wide yard standardization for 200+ Frito-Lay facilities',
+        personContext: `network-wide yard standardization for ${FRITO_LAY_FACILITY_COUNT_LABEL} Frito-Lay facilities`,
       },
 
       toneShift: 'He is the senior supply chain leader. Speak to network-level impact, not individual sites. He cares about standardization across the system, not fixing one dock.',
       kpiLanguage: ['network throughput', 'standardization', 'turn time', 'capacity recovery', 'multi-site ROI'],
-      proofEmphasis: 'Lead with the 200+ contracted network stat - it mirrors his world. The $1M+ per-site impact multiplied across his 200+ facilities is the number that gets his attention.',
+      proofEmphasis: `Lead with the ${FRITO_LAY_FACILITY_COUNT_LABEL} site network stat - it mirrors his world. The $1M+ per-site impact multiplied across his ${FRITO_LAY_FACILITY_COUNT_LABEL} facilities is the number that gets his attention.`,
     },
     {
       person: {
@@ -516,11 +519,82 @@ export const fritoLay: AccountMicrositeData = {
     },
   ],
 
+  roiModel: {
+    sourceOfTruth: 'shared-engine',
+    calculatorVersion: 'ROI Calculator V2 public contract',
+    scenarioLabel: `Lower-bound ${FRITO_LAY_FACILITY_COUNT}-facility Frito-Lay network model using the current flagship research baseline`,
+    averageMarginPerShipment: 90,
+    facilityMix: [
+      { archetype: 'with-yms', facilityCount: 30 },
+      { archetype: 'drops-no-yms', facilityCount: 120 },
+      { archetype: 'without-drops', facilityCount: 80 },
+    ],
+    archetypeAssumptions: [
+      { archetype: 'with-yms', shipmentsPerDay: 110 },
+      { archetype: 'drops-no-yms', shipmentsPerDay: 75 },
+      { archetype: 'without-drops', shipmentsPerDay: 20 },
+    ],
+    accountAssumptions: [
+      {
+        label: 'Modeled facility count',
+        value: FRITO_LAY_FACILITY_COUNT,
+        unit: 'facilities',
+        sourceNoteId: 'frito-network-footprint',
+      },
+      {
+        label: 'Modeled daily trailer moves',
+        value: 13_900,
+        unit: 'moves/day',
+        sourceNoteId: 'frito-throughput-profile',
+      },
+      {
+        label: 'Average margin per shipment',
+        value: 90,
+        unit: 'USD/shipment',
+        sourceNoteId: 'frito-margin-estimate',
+      },
+      {
+        label: 'Archetype mix',
+        value: '30 with YMS, 120 drops no YMS, 80 without drops',
+        sourceNoteId: 'frito-facility-mix',
+      },
+    ],
+    sourceNotes: [
+      {
+        id: 'frito-network-footprint',
+        label: 'Lower-bound Frito-Lay network footprint',
+        detail: `The flagship microsite now uses the official Frito-Lay company facts split of 30-plus manufacturing facilities and 200-plus distribution centers, yielding a conservative ${FRITO_LAY_FACILITY_COUNT_LABEL} site lower bound for the modeled network.`,
+        confidence: 'public',
+        citation: 'src/lib/data/facility-facts.json',
+      },
+      {
+        id: 'frito-throughput-profile',
+        label: 'Snack-network throughput profile',
+        detail: 'Shipment-per-day assumptions are tuned to a high-velocity snack network with heavy overnight route loading and broad drop-trailer usage, while staying conservative relative to the main page daily-move narrative.',
+        confidence: 'estimated',
+        citation: 'src/lib/microsites/accounts/frito-lay.ts',
+      },
+      {
+        id: 'frito-margin-estimate',
+        label: 'Conservative per-shipment margin',
+        detail: 'Average margin per shipment is kept well below the public calculator default so the Frito-Lay model does not overstate value on lighter-margin snack shipments.',
+        confidence: 'estimated',
+      },
+      {
+        id: 'frito-facility-mix',
+        label: 'Facility archetype mix',
+        detail: 'Facility mix is weighted toward distribution points and regional hubs, with the 30-plus manufacturing footprint carrying the highest share of structured dock controls in the modeled network.',
+        confidence: 'inferred',
+        citation: 'src/lib/data/facility-facts.json',
+      },
+    ],
+  },
+
   network: {
-    facilityCount: '200+',
+    facilityCount: FRITO_LAY_FACILITY_COUNT_LABEL,
     facilityTypes: ['Manufacturing Plants (30+)', 'Distribution Centers', 'Regional Mixing Centers', 'Agricultural Receiving'],
     geographicSpread: 'National - Plano TX (HQ), plants across 20+ states',
-    dailyTrailerMoves: '10,000+ across the network',
+    dailyTrailerMoves: '14,000+ across the network',
     peakMultiplier: '1.3x during summer and holiday seasons',
     fleet: 'Large owned fleet + contract carriers + agricultural haulers',
     keyFacilities: [
@@ -532,7 +606,7 @@ export const fritoLay: AccountMicrositeData = {
 
   freight: {
     primaryModes: ['DSD', 'Truckload', 'Agricultural Inbound'],
-    avgLoadsPerDay: '10,000+',
+    avgLoadsPerDay: '14,000+',
     peakSeason: 'Summer + holiday seasons (Super Bowl, back-to-school, Thanksgiving/Christmas)',
     keyRoutes: ['Agricultural inbound (potato/corn country)', 'Plant to DC', 'DC to retail (DSD)'],
     detentionCost: 'Not publicly disclosed but estimated $20M+ based on network scale and velocity',

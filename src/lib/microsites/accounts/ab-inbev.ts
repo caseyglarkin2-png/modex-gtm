@@ -1,6 +1,9 @@
 import type { AccountMicrositeData } from '../schema';
+import { getFacilityCountLabel, getFacilityCountLowerBound } from '../../research/facility-fact-registry';
 
 const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
+const AB_INBEV_FACILITY_COUNT_LABEL = getFacilityCountLabel('AB InBev', '100');
+const AB_INBEV_FACILITY_COUNT = getFacilityCountLowerBound('AB InBev', 100) ?? 100;
 
 export const abInbev: AccountMicrositeData = {
   slug: 'ab-inbev',
@@ -18,8 +21,8 @@ export const abInbev: AccountMicrositeData = {
     {
       type: 'hero',
       headline: 'You achieved 85% touchless planning. But when that perfectly planned load arrives at the dock, what happens?',
-      subheadline: 'Drivers wait. Trailers sit. The yard is the last analog frontier in AB InBev\'s supply chain. 12 breweries, 100+ facilities, 800+ trucks - and the dock still runs on radio calls.',
-      accountCallout: '12 US breweries, 100+ facilities, 800+ truck fleet, 85% touchless demand planning',
+      subheadline: `Drivers wait. Trailers sit. The yard is the last analog frontier in AB InBev's supply chain. 12 breweries, ${AB_INBEV_FACILITY_COUNT_LABEL} facilities, 800+ trucks - and the dock still runs on radio calls.`,
+      accountCallout: `12 US breweries, ${AB_INBEV_FACILITY_COUNT_LABEL} facilities, 800+ truck fleet, 85% touchless demand planning`,
       backgroundTheme: 'dark',
       cta: {
         type: 'meeting',
@@ -72,7 +75,7 @@ export const abInbev: AccountMicrositeData = {
       type: 'stakes',
       sectionLabel: 'What the Yard Costs You',
       headline: 'The math your o9 dashboard does not show',
-      narrative: 'o9 tracks supply chain KPIs at the planning level. Sensolus tracks fleet utilization. Nobody tracks the 48 minutes a trailer sits at the dock between arrival and unload. Across 12 breweries and 100+ facilities, that time adds up to millions.',
+      narrative: `o9 tracks supply chain KPIs at the planning level. Sensolus tracks fleet utilization. Nobody tracks the 48 minutes a trailer sits at the dock between arrival and unload. Across 12 breweries and ${AB_INBEV_FACILITY_COUNT_LABEL} facilities, that time adds up to millions.`,
       annualCost: '$25M+ estimated in yard-driven inefficiency across the North America network',
       costBreakdown: [
         { label: 'Dock dwell and turn time excess', value: '$10M+' },
@@ -89,7 +92,7 @@ export const abInbev: AccountMicrositeData = {
       headline: 'The layer between o9 planning and Sensolus tracking',
       narrative: 'YardFlow sits between your planning platform and your asset tracking. o9 says what should move. Sensolus says where it is. YardFlow makes it move faster through the dock. One protocol across 12 breweries. Same driver journey, same dock assignment logic, same evidence trail.',
       modules: [
-        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID.', relevanceToAccount: 'Standardizes gate process across 12 breweries and 100+ distribution points.' },
+        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID.', relevanceToAccount: `Standardizes gate process across 12 breweries and ${AB_INBEV_FACILITY_COUNT_LABEL} distribution points.` },
         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter task queues with priority logic.', relevanceToAccount: 'Replaces radio dispatch. Critical for night loading sequence and EV priority.' },
         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location and dwell.', relevanceToAccount: 'Complements Sensolus asset tracking with operational intelligence - not just where, but how fast.' },
         { id: 'flowNETWORK', name: 'flowNETWORK', verb: 'Scale', shortDescription: 'Network-wide command view.', relevanceToAccount: 'Gives Elito the yard-level visibility he has for planning (via o9) but has never had for execution.' },
@@ -143,7 +146,7 @@ export const abInbev: AccountMicrositeData = {
       sectionLabel: 'Your Brewery Network',
       headline: 'AB InBev North America yard footprint',
       narrative: 'Twelve breweries. Seventeen company-owned distributorships. One hundred-plus total facilities. The yard protocol at each one is different - a legacy of M&A integration. YardFlow gives the network one standard.',
-      facilityCount: '100+',
+      facilityCount: AB_INBEV_FACILITY_COUNT_LABEL,
       facilityTypes: ['Breweries (12)', 'ABOne Distributors (17)', 'Agricultural/Packaging (23)', 'Distribution Centers'],
       geographicSpread: 'CA, NY, GA, TX, NJ, VA, MO, AZ, PA, CO, FL, OH',
       dailyTrailerMoves: '5,000+ across the brewery network',
@@ -204,7 +207,7 @@ export const abInbev: AccountMicrositeData = {
         { period: '~1998-present', role: 'Multiple roles spanning 28 years', company: 'AB InBev', relevance: 'Entire career at AB InBev. Understands every layer of the operation.' },
         { period: 'Early career', role: 'Logistics Director, Asia Pacific', company: 'AB InBev', relevance: 'Deep logistics foundation - started in the physical operations.' },
         { period: 'Mid career', role: 'Global SVP Supply Chain Planning', company: 'AB InBev', relevance: 'Led the o9 planning transformation that achieved 85% touchless.' },
-        { period: 'Current', role: 'Chief Supply Chain & Distribution Co. Officer, North America', company: 'AB InBev', relevance: 'Top supply chain role for US. Owns 12 breweries, 100+ facilities, 800+ trucks. Can make the decision.' },
+        { period: 'Current', role: 'Chief Supply Chain & Distribution Co. Officer, North America', company: 'AB InBev', relevance: `Top supply chain role for US. Owns 12 breweries, ${AB_INBEV_FACILITY_COUNT_LABEL} facilities, 800+ trucks. Can make the decision.` },
       ],
       yearsAtCompany: '28+',
       knownForPhrase: 'Touchless planning champion - automation-first approach to supply chain',
@@ -412,8 +415,79 @@ export const abInbev: AccountMicrositeData = {
     },
   ],
 
+  roiModel: {
+    sourceOfTruth: 'shared-engine',
+    calculatorVersion: 'ROI Calculator V2 public contract',
+    scenarioLabel: `Official ${AB_INBEV_FACILITY_COUNT_LABEL}-facility U.S. Anheuser-Busch network model anchored to the corporate facilities page`,
+    averageMarginPerShipment: 140,
+    facilityMix: [
+      { archetype: 'with-yms', facilityCount: 18 },
+      { archetype: 'drops-no-yms', facilityCount: 52 },
+      { archetype: 'without-drops', facilityCount: 30 },
+    ],
+    archetypeAssumptions: [
+      { archetype: 'with-yms', shipmentsPerDay: 135 },
+      { archetype: 'drops-no-yms', shipmentsPerDay: 95 },
+      { archetype: 'without-drops', shipmentsPerDay: 32 },
+    ],
+    accountAssumptions: [
+      {
+        label: 'Modeled facility count',
+        value: AB_INBEV_FACILITY_COUNT,
+        unit: 'facilities',
+        sourceNoteId: 'abi-network-footprint',
+      },
+      {
+        label: 'Average margin per shipment',
+        value: 140,
+        unit: 'USD/shipment',
+        sourceNoteId: 'abi-margin-estimate',
+      },
+      {
+        label: 'Modeled daily trailer moves',
+        value: 5380,
+        unit: 'moves/day',
+        sourceNoteId: 'abi-throughput-profile',
+      },
+      {
+        label: 'Archetype mix',
+        value: '18 with YMS, 52 drops no YMS, 30 without drops',
+        sourceNoteId: 'abi-facility-mix',
+      },
+    ],
+    sourceNotes: [
+      {
+        id: 'abi-network-footprint',
+        label: 'Anheuser-Busch U.S. facilities footprint',
+        detail: `Anheuser-Busch states that it maintains ${AB_INBEV_FACILITY_COUNT_LABEL} facilities across the country. The flagship AB InBev microsite uses that official U.S. facilities figure as the network baseline.`,
+        confidence: 'public',
+        citation: 'https://www.anheuser-busch.com/facilities',
+      },
+      {
+        id: 'abi-margin-estimate',
+        label: 'Conservative per-shipment margin',
+        detail: 'Average margin per shipment is set materially below the public calculator default so the modeled AB InBev value stays conservative against beer, packaging, and owned-distribution economics.',
+        confidence: 'estimated',
+      },
+      {
+        id: 'abi-throughput-profile',
+        label: 'North America brewery throughput profile',
+        detail: 'Shipment-per-day assumptions reflect high-volume brewery and wholesaler operations while staying below the public calculator benchmark on a per-facility basis.',
+        confidence: 'estimated',
+        citation: 'docs/research/elito-siqueira-abinbev-dossier.md',
+      },
+      {
+        id: 'abi-facility-mix',
+        label: 'Facility archetype mix',
+        detail: 'Facility mix is inferred from the published brewery footprint, ABOne distribution coverage, and the broader 100-facility national footprint described in the flagship research.',
+        confidence: 'inferred',
+        citation: 'src/lib/data/facility-facts.json',
+      },
+    ],
+  },
+
   network: {
-    facilityCount: '100+',
+    facilityCount: AB_INBEV_FACILITY_COUNT_LABEL,
     facilityTypes: ['Breweries (12)', 'ABOne Distributors (17)', 'Agricultural/Packaging (23)', 'Distribution Centers'],
     geographicSpread: 'CA, NY, GA, TX, NJ, VA, MO, AZ, PA, CO, FL, OH',
     dailyTrailerMoves: '5,000+ across the brewery network',

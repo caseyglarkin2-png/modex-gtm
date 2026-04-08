@@ -1,6 +1,9 @@
 import type { AccountMicrositeData } from '../schema';
+import { getFacilityCountLabel, getFacilityCountLowerBound } from '../../research/facility-fact-registry';
 
 const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
+const GENERAL_MILLS_FACILITY_COUNT_LABEL = getFacilityCountLabel('General Mills', '41');
+const GENERAL_MILLS_FACILITY_COUNT = getFacilityCountLowerBound('General Mills', 41) ?? 41;
 
 export const generalMills: AccountMicrositeData = {
   slug: 'general-mills',
@@ -12,14 +15,14 @@ export const generalMills: AccountMicrositeData = {
   priorityScore: 88,
 
   pageTitle: 'YardFlow for General Mills - Yard Network Standardization',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across General Mills\' 50+ manufacturing and distribution facilities.',
+  metaDescription: `How YardFlow eliminates the yard bottleneck across General Mills' ${GENERAL_MILLS_FACILITY_COUNT_LABEL}-plant manufacturing network.`,
 
   sections: [
     {
       type: 'hero',
       headline: 'You closed 3 plants. The remaining facilities just absorbed all that volume. Your yards were not designed for this.',
       subheadline: 'General Mills is consolidating production into fewer, higher-throughput facilities. The $82M restructuring makes the plants more competitive. YardFlow makes the yards keep pace.',
-      accountCallout: '50+ manufacturing facilities, 18,000 supply chain employees, 4 temperature zones',
+      accountCallout: `${GENERAL_MILLS_FACILITY_COUNT_LABEL} owned plants, 18,000 supply chain employees, 4 temperature zones`,
       backgroundTheme: 'dark',
       cta: {
         type: 'meeting',
@@ -73,7 +76,7 @@ export const generalMills: AccountMicrositeData = {
       sectionLabel: 'What This Costs You',
       headline: 'The math General Mills is not tracking in one place',
       narrative: 'Paul Gallagher\'s HMM program drove gross margin up 230 basis points. That margin expansion is partially eaten by yard inefficiency that sits across 12+ GL codes. Detention, dwell, gate labor, dock contention, temperature-zone misrouting. It adds up to a number that would get board attention if it were visible.',
-      annualCost: '$10M-$15M in estimated yard-driven inefficiency across the network',
+      annualCost: '$8M-$12M in estimated yard-driven inefficiency across the network',
       costBreakdown: [
         { label: 'Carrier detention / demurrage', value: '$4M+' },
         { label: 'Dock contention (temp-zone conflicts)', value: '$3M+' },
@@ -88,10 +91,10 @@ export const generalMills: AccountMicrositeData = {
       headline: 'One protocol across every General Mills yard',
       narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. The same driver journey at Belvidere that runs at Cedar Rapids. The same dock assignment logic at Covington that runs at Hannibal. Variance dies. Throughput becomes calculable.',
       modules: [
-        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes the gate process across 50+ facilities that today all do it differently.' },
+        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: `Standardizes the gate process across ${GENERAL_MILLS_FACILITY_COUNT_LABEL} facilities that today all do it differently.` },
         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Eliminates temperature-zone dock assignment errors. Frozen goes to frozen. Every time.' },
         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Complements General Mills\' Palantir digital twin - extends supply chain visibility to the yard surface.' },
-        { id: 'flowNETWORK', name: 'flowNETWORK', verb: 'Scale', shortDescription: 'Network-wide command view with alerting and cross-site performance intelligence.', relevanceToAccount: 'Gives the supply chain team visibility across all 50+ yard operations. One screen.' },
+        { id: 'flowNETWORK', name: 'flowNETWORK', verb: 'Scale', shortDescription: 'Network-wide command view with alerting and cross-site performance intelligence.', relevanceToAccount: `Gives the supply chain team visibility across all ${GENERAL_MILLS_FACILITY_COUNT_LABEL} yard operations. One screen.` },
       ],
       accountFit: 'General Mills already built a Palantir digital twin for supply chain visibility. YardFlow fills the gap at the physical execution layer - the yard - where the digital twin has no eyes.',
     },
@@ -102,7 +105,7 @@ export const generalMills: AccountMicrositeData = {
       proofVisual: {
         type: 'before-after',
         headline: 'What happens when consolidation volume hits a standardized yard',
-        narrative: 'The restructuring only creates a margin win if the receiving yards absorb the extra trailer pressure without creating a new dock bottleneck. That requires one operating standard, not 50 local workarounds.',
+        narrative: 'The restructuring only creates a margin win if the receiving yards absorb the extra trailer pressure without creating a new dock bottleneck. That requires one operating standard, not 41 local workarounds.',
         beforeAfter: {
           before: {
             label: 'Today',
@@ -145,25 +148,25 @@ export const generalMills: AccountMicrositeData = {
       type: 'network-map',
       sectionLabel: 'Your Network',
       headline: 'General Mills\' yard network at scale',
-      narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. The Belvidere DC opened with a clean slate. The Cedar Rapids plant has had the same gate process for 20 years. YardFlow gives you one standard across all of them.',
-      facilityCount: '50+',
+      narrative: 'General Mills\' 41 owned plants form the operating core of a broader yard network. Different gate processes, different spotter dispatch methods, different tribal knowledge. The Belvidere DC opened with a clean slate. The Cedar Rapids plant has had the same gate process for 20 years. YardFlow gives you one standard across the operating core.',
+      facilityCount: GENERAL_MILLS_FACILITY_COUNT_LABEL,
       facilityTypes: ['Manufacturing Plants', 'Distribution Centers', 'Co-packing Facilities'],
       geographicSpread: 'US, Canada, and select international - Cedar Rapids IA, Buffalo NY, Wellston OH, Murfreesboro TN, Covington GA, Hannibal MO, Joplin MO, Belvidere IL',
-      dailyTrailerMoves: '5,000+ across the network',
+      dailyTrailerMoves: '4,400+ across the network',
       peakMultiplier: '1.3-1.5x during baking season (Oct-Dec)',
     },
     {
       type: 'roi',
       sectionLabel: 'The Business Case',
       headline: 'Conservative ROI model for General Mills',
-      narrative: 'Based on 50 facilities, current industry-average turn times, and measured YardFlow improvements at comparable CPG sites.',
+      narrative: `Based on ${GENERAL_MILLS_FACILITY_COUNT} facilities, current industry-average turn times, and measured YardFlow improvements at comparable CPG sites.`,
       roiLines: [
         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
         { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
         { label: 'Temp-zone dock errors', before: '3-5/week', after: '<1/week', delta: '-80%', unit: 'per facility' },
         { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
       ],
-      totalAnnualSavings: '$10M-$15M across the network',
+      totalAnnualSavings: '$8M-$12M across the network',
       paybackPeriod: '< 6 months',
       methodology: 'Based on measured results at 24 live CPG facilities extrapolated to General Mills facility count and operational profile.',
     },
@@ -204,7 +207,7 @@ export const generalMills: AccountMicrositeData = {
       reportsTo: 'CEO',
       directReports: '18,000 supply chain employees',
 
-      currentMandate: 'Driving digital transformation and cost savings across 50+ facilities, $82M restructuring program',
+      currentMandate: `Driving digital transformation and cost savings across ${GENERAL_MILLS_FACILITY_COUNT_LABEL} facilities, $82M restructuring program`,
       strategicPriorities: ['Digital transformation', 'Cost savings via HMM', 'Facility consolidation', 'Sustainability (Scope 3)'],
       operationalPhilosophy: 'Run, Improve, and Transform',
       knownPainPoints: [
@@ -334,7 +337,7 @@ export const generalMills: AccountMicrositeData = {
 
       heroOverride: {
         headline: 'Paul, your Palantir digital twin sees everything except the yard',
-        subheadline: 'You built end-to-end supply chain visibility. But the 50+ facility yards where trailers stage, wait, and compound costs are still running on local tribal knowledge. YardFlow closes that gap.',
+        subheadline: `You built end-to-end supply chain visibility. But the ${GENERAL_MILLS_FACILITY_COUNT_LABEL} facility yards where trailers stage, wait, and compound costs are still running on local tribal knowledge. YardFlow closes that gap.`,
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
       ctaOverride: {
@@ -351,7 +354,7 @@ export const generalMills: AccountMicrositeData = {
           sectionType: 'stakes',
           override: {
             headline: 'The cost your HMM program cannot reach',
-            narrative: 'Your Holistic Margin Management program drove gross margin up 230 basis points. That is real discipline. But yard-driven costs sit across 12+ GL codes and never surface as a single line item. Detention, dwell, gate labor, dock contention, temperature-zone conflicts. At 50+ facilities, it aggregates to a number your board would notice if they could see it.',
+            narrative: `Your Holistic Margin Management program drove gross margin up 230 basis points. That is real discipline. But yard-driven costs sit across 12+ GL codes and never surface as a single line item. Detention, dwell, gate labor, dock contention, temperature-zone conflicts. At ${GENERAL_MILLS_FACILITY_COUNT_LABEL} facilities, it aggregates to a number your board would notice if they could see it.`,
           },
         },
         {
@@ -477,7 +480,7 @@ export const generalMills: AccountMicrositeData = {
             { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter task queues. Temperature-zone aware. No radio.' },
             { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Real-time digital twin. Every trailer, every lane, every dock.' },
             { id: 'flowAI', name: 'flowAI', verb: 'Orchestrate', shortDescription: 'AI agent routing moves, flagging exceptions, enforcing temp-zone rules.' },
-            { id: 'flowNETWORK', name: 'flowNETWORK', verb: 'Scale', shortDescription: 'Network command. All 50+ sites on one screen.' },
+            { id: 'flowNETWORK', name: 'flowNETWORK', verb: 'Scale', shortDescription: `Network command. All ${GENERAL_MILLS_FACILITY_COUNT_LABEL} sites on one screen.` },
           ],
         },
       ],
@@ -614,11 +617,88 @@ export const generalMills: AccountMicrositeData = {
     },
   ],
 
+  roiModel: {
+    sourceOfTruth: 'shared-engine',
+    calculatorVersion: 'ROI Calculator V2 public contract',
+    scenarioLabel: `Conservative ${GENERAL_MILLS_FACILITY_COUNT}-facility General Mills network model using the researched facility lower bound and published daily-move estimates`,
+    averageMarginPerShipment: 400,
+    facilityMix: [
+      { archetype: 'with-yms', facilityCount: 11 },
+      { archetype: 'drops-no-yms', facilityCount: 20 },
+      { archetype: 'without-drops', facilityCount: 10 },
+    ],
+    archetypeAssumptions: [
+      { archetype: 'with-yms', shipmentsPerDay: 160 },
+      { archetype: 'drops-no-yms', shipmentsPerDay: 115 },
+      { archetype: 'without-drops', shipmentsPerDay: 35 },
+    ],
+    accountAssumptions: [
+      {
+        label: 'Modeled facility count',
+        value: GENERAL_MILLS_FACILITY_COUNT,
+        unit: 'facilities',
+        sourceNoteId: 'gm-network-footprint',
+      },
+      {
+        label: 'Modeled daily trailer moves',
+        value: 4_410,
+        unit: 'moves/day',
+        sourceNoteId: 'gm-daily-moves',
+      },
+      {
+        label: 'Average margin per shipment',
+        value: 400,
+        unit: 'USD/shipment',
+        sourceNoteId: 'gm-margin-estimate',
+      },
+      {
+        label: 'Archetype mix',
+        value: '11 with YMS, 20 drops no YMS, 10 without drops',
+        sourceNoteId: 'gm-facility-mix',
+      },
+    ],
+    sourceNotes: [
+      {
+        id: 'gm-network-footprint',
+        label: 'General Mills public network footprint',
+        detail: `General Mills is modeled using the official lower bound from the 2025 Global Responsibility Report, which states that the company operates ${GENERAL_MILLS_FACILITY_COUNT_LABEL} owned plants around the world.`,
+        confidence: 'public',
+        citation: 'src/lib/data/facility-facts.json',
+      },
+      {
+        id: 'gm-daily-moves',
+        label: 'Daily trailer-move baseline',
+        detail: 'Daily moves are weighted to roughly 4,400 trailer moves per day so the modeled archetypes stay aligned with a smaller, higher-throughput 41-plant General Mills footprint.',
+        confidence: 'estimated',
+        citation: 'src/lib/microsites/accounts/general-mills.ts',
+      },
+      {
+        id: 'gm-margin-estimate',
+        label: 'Conservative per-shipment margin',
+        detail: 'Average margin per shipment is set below the public calculator default to keep the General Mills pilot scenario conservative until a live audit validates product-mix economics.',
+        confidence: 'estimated',
+      },
+      {
+        id: 'gm-facility-mix',
+        label: 'Facility archetype mix',
+        detail: 'Archetype counts are inferred from a more concentrated General Mills network: a smaller number of larger sites with existing systems, plus a wider group of drop-trailer yards and local-process facilities.',
+        confidence: 'inferred',
+      },
+      {
+        id: 'gm-yms-penetration',
+        label: 'Existing system penetration',
+        detail: 'Warehouse automation and the Palantir digital twin are public, but no dedicated yard-system footprint is publicly disclosed. The pilot therefore assumes partial existing system penetration rather than full network standardization.',
+        confidence: 'inferred',
+        citation: 'docs/research/paul-gallagher-generalmills-dossier.md',
+      },
+    ],
+  },
+
   network: {
-    facilityCount: '50+',
+    facilityCount: GENERAL_MILLS_FACILITY_COUNT_LABEL,
     facilityTypes: ['Manufacturing Plants', 'Distribution Centers', 'Co-packing Facilities'],
     geographicSpread: 'US, Canada - Cedar Rapids IA, Buffalo NY, Wellston OH, Murfreesboro TN, Covington GA, Hannibal MO, Joplin MO, Belvidere IL',
-    dailyTrailerMoves: '5,000+ across network',
+    dailyTrailerMoves: '4,400+ across network',
     peakMultiplier: '1.3-1.5x during baking season',
     fleet: 'Contract carriers and 3PL (no private fleet)',
     keyFacilities: [
@@ -630,7 +710,7 @@ export const generalMills: AccountMicrositeData = {
 
   freight: {
     primaryModes: ['Truckload', 'Intermodal/Rail', 'LTL'],
-    avgLoadsPerDay: '5,000+ across network',
+    avgLoadsPerDay: '4,400+ across network',
     peakSeason: 'Baking season (Oct-Dec), snack season (summer)',
     keyRoutes: ['Midwest plants to national DCs', 'Belvidere IL hub to East/West', 'Blue Buffalo separate network'],
     specialRequirements: ['Multi-temperature (ambient, frozen, refrigerated, ultra-cold)', 'Heavy palletized loads (cereal, flour)'],
