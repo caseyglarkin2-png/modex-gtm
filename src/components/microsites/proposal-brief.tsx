@@ -1,13 +1,17 @@
 import type { MicrositeSection } from '@/lib/microsites/schema';
 import type { MicrositeProposalBrief } from '@/lib/microsites/proposal';
+import {
+  FlagshipMetaPills,
+  FlagshipSignalRail,
+  FlagshipSurface,
+} from './flagship-primitives';
 import { MicrositeSectionRenderer } from './sections';
 import {
   FLAGSHIP_ACTION_CLASS,
+  FLAGSHIP_BADGE_CLASS,
   FLAGSHIP_DISPLAY_CLASS,
   FLAGSHIP_FRAME_CLASS,
   FLAGSHIP_LABEL_CLASS,
-  FLAGSHIP_PANEL_CLASS,
-  FLAGSHIP_PANEL_MUTED_CLASS,
   FLAGSHIP_SECTION_TITLE_CLASS,
   FLAGSHIP_THEME_CLASS,
   getAccentClasses,
@@ -50,25 +54,47 @@ function ActionLink({
 export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }) {
   const accent = getAccentClasses(proposal.accentColor);
   const renderedSections = proposal.sections.filter((section) => !isHeroSection(section));
+  const metaPills = [
+    `Priority ${proposal.band} ${proposal.priorityScore}`,
+    proposal.vertical,
+    'Live ROI model',
+    proposal.network?.facilityCount ? `${proposal.network.facilityCount} disclosed sites` : null,
+  ].filter((item): item is string => Boolean(item));
 
   return (
     <div
       style={getFlagshipThemeStyle(proposal.accentColor)}
-      className={`${FLAGSHIP_THEME_CLASS} relative min-h-screen overflow-hidden bg-stone-950 text-white`}
+      className={`${FLAGSHIP_THEME_CLASS} relative isolate min-h-screen overflow-hidden bg-stone-950 text-white`}
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_34%)]" />
+      <div className="pointer-events-none absolute inset-0 [background:var(--fw-shell-bg)]" />
       <div
         className="pointer-events-none absolute inset-0"
         style={{
-          backgroundImage: 'radial-gradient(circle at 18% 18%, var(--fw-accent-glow), transparent 32%), radial-gradient(circle at 82% 0%, rgba(255,255,255,0.08), transparent 24%)',
+          backgroundImage:
+            'linear-gradient(to right, var(--fw-shell-grid) 1px, transparent 1px), linear-gradient(to bottom, var(--fw-shell-grid) 1px, transparent 1px)',
+          backgroundSize: '120px 120px',
         }}
       />
+      <div
+        className="pointer-events-none absolute left-[-8rem] top-10 h-[30rem] w-[34rem] rounded-full blur-3xl"
+        style={{ background: 'radial-gradient(circle, var(--fw-shell-spotlight-strong), transparent 68%)' }}
+      />
+      <div
+        className="pointer-events-none absolute right-[-10rem] top-[-4rem] h-[26rem] w-[26rem] rounded-full blur-3xl"
+        style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.12), transparent 62%)' }}
+      />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[34rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.05),transparent_72%)]" />
 
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-stone-950/88 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 border-b [border-color:var(--fw-hairline)] bg-stone-950/82 backdrop-blur-2xl">
         <div className={`${FLAGSHIP_FRAME_CLASS} flex flex-wrap items-center justify-between gap-3 py-4`}>
-          <div>
-            <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>YardFlow by FreightRoll</div>
-            <div className="mt-1 text-sm font-medium text-white/85">{proposal.accountName} board-ready proposal</div>
+          <div className="flex items-center gap-3">
+            <div className={`flex h-10 w-10 items-center justify-center rounded-full border ${accent.border} ${accent.bgBadge} text-xs font-semibold ${accent.textLight}`}>
+              YF
+            </div>
+            <div>
+              <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>YardFlow by FreightRoll</div>
+              <div className="mt-1 text-sm font-medium text-white/85">{proposal.accountName} board-ready proposal</div>
+            </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
@@ -84,70 +110,78 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
         </div>
       </header>
 
-      <main data-ms-proposal-frame="main" className={`relative z-10 ${FLAGSHIP_FRAME_CLASS} space-y-10 py-12`}>
-        <section
+      <main data-ms-proposal-frame="main" className={`relative z-10 ${FLAGSHIP_FRAME_CLASS} space-y-8 py-10 lg:py-14`}>
+        <FlagshipSurface
           id="proposal-summary"
           data-ms-section-id="proposal-summary"
-          className={`rounded-[var(--fw-panel-radius-large)] px-6 py-8 backdrop-blur-sm sm:px-8 xl:px-10 xl:py-12 ${FLAGSHIP_PANEL_CLASS}`}
-          style={{ boxShadow: 'var(--fw-panel-shadow-strong), 0 0 0 1px var(--fw-accent-glow)' }}
+          tone="hero"
+          className="rounded-[var(--fw-panel-radius-large)] px-6 py-8 sm:px-8 xl:px-10 xl:py-12"
         >
-          <div className={`${FLAGSHIP_LABEL_CLASS} ${accent.textLight}`}>
-            Shareable operator brief
-          </div>
-          <h1 className={`mt-5 max-w-6xl text-4xl font-black text-white md:text-6xl xl:text-7xl ${FLAGSHIP_DISPLAY_CLASS}`}>
-            {proposal.accountName} yard execution proposal
-          </h1>
-          <p className="mt-5 max-w-5xl text-base leading-relaxed text-slate-300 md:text-lg xl:text-xl">
-            {proposal.hero.subheadline}
-          </p>
+          <div className="grid gap-8 xl:grid-cols-[minmax(0,1.14fr)_minmax(360px,0.86fr)] xl:gap-10 2xl:gap-12">
+            <div className="space-y-6">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className={`${FLAGSHIP_BADGE_CLASS} ${accent.border} ${accent.textLight}`}>
+                  <span className={`h-2 w-2 rounded-full ${accent.bg}`} />
+                  <span>Shareable operator brief</span>
+                </span>
+                <span className={FLAGSHIP_BADGE_CLASS}>{proposal.band}-Band | {proposal.tier}</span>
+              </div>
 
-          <div className="mt-5 flex flex-wrap gap-2 text-xs text-slate-400">
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">Priority {proposal.band} {proposal.priorityScore}</span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">{proposal.vertical}</span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">Live ROI model</span>
-            {proposal.network?.facilityCount && (
-              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">{proposal.network.facilityCount} disclosed sites</span>
-            )}
+              <h1 className={`max-w-6xl text-4xl font-black text-white md:text-6xl xl:text-7xl ${FLAGSHIP_DISPLAY_CLASS}`}>
+                {proposal.accountName} yard execution proposal
+              </h1>
+              <p className="max-w-5xl text-base leading-relaxed text-slate-300 md:text-lg xl:text-[1.35rem] xl:leading-relaxed">
+                {proposal.hero.subheadline}
+              </p>
+
+              <FlagshipMetaPills items={metaPills} accent={accent} />
+
+              <div className="flex flex-wrap gap-3">
+                {proposal.bookingLink && (
+                  <ActionLink href={proposal.bookingLink} label={proposal.cta.buttonLabel} ctaId="proposal-booking-hero" primary />
+                )}
+                <ActionLink href={proposal.exportHtmlPath} label="Export HTML" ctaId="proposal-export-html-hero" download />
+                <ActionLink href={proposal.exportJsonPath} label="Export JSON" ctaId="proposal-export-json-hero" download />
+              </div>
+            </div>
+
+            <div className="space-y-4 xl:pl-4">
+              <FlagshipSurface tone="hero" className="rounded-[var(--fw-panel-radius-large)] p-7 sm:p-8 xl:p-9">
+                <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>Commercial thesis</div>
+                <p className={`mt-5 text-2xl leading-tight text-white xl:text-3xl ${FLAGSHIP_SECTION_TITLE_CLASS}`}>
+                  {proposal.hero.headline}
+                </p>
+                {proposal.problem && (
+                  <p className="mt-4 text-sm leading-relaxed text-slate-300">{proposal.problem.narrative}</p>
+                )}
+              </FlagshipSurface>
+
+              <FlagshipSignalRail
+                label="Board conversation prompts"
+                title="How to frame the room in the first five minutes."
+                items={proposal.focusPoints.slice(0, 5)}
+                accent={accent}
+              />
+            </div>
           </div>
 
           <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {proposal.summaryStats.map((stat) => (
-              <div key={stat.label} className={`rounded-[var(--fw-panel-radius)] p-5 ${FLAGSHIP_PANEL_MUTED_CLASS}`}>
+              <FlagshipSurface key={stat.label} tone="muted" className="rounded-[var(--fw-panel-radius)] p-5">
                 <p className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>{stat.label}</p>
                 <p className="mt-3 text-3xl font-bold text-white">{stat.value}</p>
                 {stat.detail && <p className="mt-2 text-xs leading-relaxed text-slate-400">{stat.detail}</p>}
-              </div>
+              </FlagshipSurface>
             ))}
           </div>
-
-          <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1.18fr)_minmax(380px,0.82fr)] xl:gap-10">
-            <div>
-              <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>Commercial thesis</div>
-              <p className={`mt-4 max-w-4xl text-2xl leading-tight text-white xl:text-3xl ${FLAGSHIP_SECTION_TITLE_CLASS}`}>{proposal.hero.headline}</p>
-              {proposal.problem && (
-                <p className="mt-4 max-w-4xl text-sm leading-relaxed text-slate-300">{proposal.problem.narrative}</p>
-              )}
-            </div>
-
-            <div className={`rounded-[var(--fw-panel-radius)] p-6 ${FLAGSHIP_PANEL_MUTED_CLASS}`}>
-              <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>Board conversation prompts</div>
-              <div className="mt-4 space-y-3">
-                {proposal.focusPoints.map((point) => (
-                  <div key={point} className="flex items-start gap-3 text-sm leading-relaxed text-slate-300">
-                    <span className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${accent.bg}`} />
-                    <span>{point}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        </FlagshipSurface>
 
         {proposal.proofStats.length > 0 && (
-          <section
+          <FlagshipSurface
             id="proposal-proof-points"
             data-ms-section-id="proposal-proof-points"
-            className={`rounded-[var(--fw-panel-radius)] px-7 py-7 backdrop-blur-sm ${FLAGSHIP_PANEL_MUTED_CLASS}`}
+            tone="muted"
+            className="rounded-[var(--fw-panel-radius)] px-7 py-7"
           >
             <div className="flex items-center justify-between gap-3">
               <div>
@@ -159,17 +193,17 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
 
             <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               {proposal.proofStats.map((stat) => (
-                <div key={`${stat.label}-${stat.value}`} className={`rounded-[var(--fw-panel-radius)] p-5 ${FLAGSHIP_PANEL_MUTED_CLASS}`}>
+                <FlagshipSurface key={`${stat.label}-${stat.value}`} tone="muted" className="rounded-[var(--fw-panel-radius)] p-5">
                   <p className={`text-3xl font-bold ${accent.textLight}`}>{stat.value}</p>
                   <p className={`mt-2 ${FLAGSHIP_LABEL_CLASS} text-slate-400`}>{stat.label}</p>
                   {stat.context && <p className="mt-3 text-xs leading-relaxed text-slate-500">{stat.context}</p>}
-                </div>
+                </FlagshipSurface>
               ))}
             </div>
-          </section>
+          </FlagshipSurface>
         )}
 
-        <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_380px] xl:gap-12">
+        <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_400px] xl:gap-14 2xl:grid-cols-[minmax(0,1fr)_420px]">
           <div className="space-y-6">
             {renderedSections.map((section, index) => (
               <MicrositeSectionRenderer
@@ -182,10 +216,11 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
           </div>
 
           <aside className="space-y-4 xl:sticky xl:top-28 xl:self-start">
-            <section
+            <FlagshipSurface
               id="proposal-network"
               data-ms-section-id="proposal-network"
-              className={`rounded-[var(--fw-panel-radius)] p-5 backdrop-blur-sm ${FLAGSHIP_PANEL_MUTED_CLASS}`}
+              tone="muted"
+              className="rounded-[var(--fw-panel-radius)] p-5"
             >
               <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>Network reality</div>
               <p className="mt-4 text-lg font-semibold text-white">
@@ -198,13 +233,14 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
                 {proposal.network?.dailyTrailerMoves && <div>Daily trailer moves: {proposal.network.dailyTrailerMoves}</div>}
                 {proposal.network?.peakMultiplier && <div>Peak multiplier: {proposal.network.peakMultiplier}</div>}
               </div>
-            </section>
+            </FlagshipSurface>
 
             {proposal.roi && (
-              <section
+              <FlagshipSurface
                 id="proposal-roi-signal"
                 data-ms-section-id="proposal-roi-signal"
-                className={`rounded-[var(--fw-panel-radius)] p-5 backdrop-blur-sm ${FLAGSHIP_PANEL_MUTED_CLASS}`}
+                tone="muted"
+                className="rounded-[var(--fw-panel-radius)] p-5"
               >
                 <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>ROI signal</div>
                 <p className="mt-4 text-lg font-semibold text-white">{proposal.roi.totalAnnualSavings ?? proposal.roi.headlineStats?.[0]?.value ?? 'Modeled value available'}</p>
@@ -212,35 +248,36 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
                 {proposal.roi.paybackPeriod && (
                   <p className={`mt-4 text-sm font-semibold ${accent.textLight}`}>Payback: {proposal.roi.paybackPeriod}</p>
                 )}
-              </section>
+              </FlagshipSurface>
             )}
 
             {proposal.sourceNotes.length > 0 && (
-              <section
+              <FlagshipSurface
                 id="proposal-sources"
                 data-ms-section-id="proposal-sources"
-                className={`rounded-[var(--fw-panel-radius)] p-5 backdrop-blur-sm ${FLAGSHIP_PANEL_MUTED_CLASS}`}
+                tone="muted"
+                className="rounded-[var(--fw-panel-radius)] p-5"
               >
                 <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>Evidence trail</div>
                 <div className="mt-4 space-y-4">
                   {proposal.sourceNotes.slice(0, 6).map((note) => (
-                    <div key={note.id} className={`rounded-[var(--fw-panel-radius)] p-4 ${FLAGSHIP_PANEL_MUTED_CLASS}`}>
+                    <FlagshipSurface key={note.id} tone="muted" className="rounded-[var(--fw-panel-radius)] p-4">
                       <p className={`${FLAGSHIP_LABEL_CLASS} text-slate-400`}>{note.label}</p>
                       <p className="mt-2 text-sm leading-relaxed text-slate-300">{note.detail}</p>
                       <p className="mt-2 text-[11px] uppercase tracking-[0.16em] text-slate-500">
                         {note.confidence}
                         {note.citation ? ` | ${note.citation}` : ''}
                       </p>
-                    </div>
+                    </FlagshipSurface>
                   ))}
                 </div>
-              </section>
+              </FlagshipSurface>
             )}
           </aside>
         </div>
       </main>
 
-      <footer className="relative z-10 border-t border-white/10 pb-10">
+      <footer className="relative z-10 border-t [border-color:var(--fw-hairline)] pb-10">
         <div className={`${FLAGSHIP_FRAME_CLASS} flex flex-wrap items-center justify-between gap-4 py-6 text-xs text-slate-500`}>
           <p>YardFlow by FreightRoll | casey@freightroll.com</p>
           <div className="flex flex-wrap gap-2">

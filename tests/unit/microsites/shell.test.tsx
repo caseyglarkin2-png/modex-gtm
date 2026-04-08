@@ -33,7 +33,7 @@ describe('MicrositeShell', () => {
     expect(screen.getByText('Brian Watson operating brief')).toBeInTheDocument();
     expect(screen.getByText('Commercial Thesis')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Opportunity' })).toHaveAttribute('href', '#hero-1');
-    expect(screen.getAllByRole('link', { name: 'Book a Meeting at MODEX' })).toHaveLength(3);
+    expect(screen.getAllByRole('link', { name: 'Book a Meeting at MODEX' })).toHaveLength(4);
     expect(screen.getByRole('link', { name: 'Brian Watson' })).toHaveAttribute('data-ms-variant-slug', 'brian-watson');
     expect(screen.getByText('Section body')).toBeInTheDocument();
   });

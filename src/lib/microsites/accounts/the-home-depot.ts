@@ -297,8 +297,8 @@ export const theHomeDepot: AccountMicrositeData = {
       label: 'John Deaton - Executive Vice President – Supply Chain & Product Development',
       variantSlug: 'john-deaton',
 
-      framingNarrative: 'John, Strongest public MODEX signal. Massive retail network makes execution variance expensive.',
-      openingHook: 'Official keynote tie gives unusually strong event signal. - the yard is where execution meets reality for The Home Depot.',
+      framingNarrative: 'John, the question is whether a network this large can keep tolerating site-by-site yard variance.',
+      openingHook: 'MODEX makes the timing relevant, so this page is framed as a short private brief rather than a pitch.',
       stakeStatement: 'Every minute of excess dwell time at The Home Depot\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -337,8 +337,8 @@ export const theHomeDepot: AccountMicrositeData = {
       label: 'John Drake - Senior Vice President – Supply Chain',
       variantSlug: 'john-drake',
 
-      framingNarrative: 'John, Strongest public MODEX signal. Massive retail network makes execution variance expensive.',
-      openingHook: 'Official keynote tie gives unusually strong event signal. - the yard is where execution meets reality for The Home Depot.',
+      framingNarrative: 'John, the question is whether transportation throughput is still losing time in the yard before anyone sees it in the network metrics.',
+      openingHook: 'MODEX makes the timing relevant, so this page is framed as a short private brief rather than a pitch.',
       stakeStatement: 'Every minute of excess dwell time at The Home Depot\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -377,8 +377,8 @@ export const theHomeDepot: AccountMicrositeData = {
       label: 'Amit Kalra - Senior Vice President – Supply Chain',
       variantSlug: 'amit-kalra',
 
-      framingNarrative: 'Amit, Strongest public MODEX signal. Massive retail network makes execution variance expensive.',
-      openingHook: 'Official keynote tie gives unusually strong event signal. - the yard is where execution meets reality for The Home Depot.',
+      framingNarrative: 'Amit, the question is whether four facility types are still running four different yard playbooks inside one network.',
+      openingHook: 'MODEX makes the timing relevant, so this page is framed as a short private brief rather than a pitch.',
       stakeStatement: 'Every minute of excess dwell time at The Home Depot\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -417,8 +417,8 @@ export const theHomeDepot: AccountMicrositeData = {
       label: 'Richard McPhail - Executive Vice President & Chief Financial Officer',
       variantSlug: 'richard-mcphail',
 
-      framingNarrative: 'Richard, Strongest public MODEX signal. Massive retail network makes execution variance expensive.',
-      openingHook: 'Official keynote tie gives unusually strong event signal. - the yard is where execution meets reality for The Home Depot.',
+      framingNarrative: 'Richard, the question is whether the lowest-cost supply chain improvement left is still hiding in the yard layer.',
+      openingHook: 'MODEX makes the timing relevant, so this page is framed as a short private brief rather than a pitch.',
       stakeStatement: 'Every minute of excess dwell time at The Home Depot\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -457,8 +457,8 @@ export const theHomeDepot: AccountMicrositeData = {
       label: 'Erin Donnelly - Senior Director',
       variantSlug: 'erin-donnelly',
 
-      framingNarrative: 'Erin, Strongest public MODEX signal. Massive retail network makes execution variance expensive.',
-      openingHook: 'Official keynote tie gives unusually strong event signal. - the yard is where execution meets reality for The Home Depot.',
+      framingNarrative: 'Erin, the question is whether the last unstandardized layer in the network is still the yard.',
+      openingHook: 'MODEX makes the timing relevant, so this page is framed as a short private brief rather than a pitch.',
       stakeStatement: 'Every minute of excess dwell time at The Home Depot\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {

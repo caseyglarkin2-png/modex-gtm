@@ -94,6 +94,7 @@ type FlagshipVarName =
   | '--fw-motion-fast'
   | '--fw-motion-slow'
   | '--fw-panel-bg'
+  | '--fw-panel-bg-strong'
   | '--fw-panel-border'
   | '--fw-panel-border-strong'
   | '--fw-panel-muted-bg'
@@ -101,6 +102,12 @@ type FlagshipVarName =
   | '--fw-panel-radius-large'
   | '--fw-panel-shadow'
   | '--fw-panel-shadow-strong'
+  | '--fw-radius-pill'
+  | '--fw-shell-bg'
+  | '--fw-shell-grid'
+  | '--fw-shell-spotlight'
+  | '--fw-shell-spotlight-strong'
+  | '--fw-space-hero'
   | '--fw-space-section'
   | '--fw-space-section-compact'
   | '--fw-space-stack';
@@ -108,10 +115,10 @@ type FlagshipVarName =
 type FlagshipThemeStyle = CSSProperties & Record<FlagshipVarName, string>;
 
 // Shared flagship layout tokens for Sprint 7B and beyond.
-export const FLAGSHIP_FRAME_CLASS = 'mx-auto max-w-[96rem] px-4 sm:px-6 xl:px-10 2xl:px-12';
-export const FLAGSHIP_SECTION_FRAME_CLASS = 'mx-auto max-w-5xl xl:max-w-[78rem] 2xl:max-w-[82rem]';
-export const FLAGSHIP_SECTION_GUTTER_CLASS = 'px-4 sm:px-6 xl:px-8';
-export const FLAGSHIP_COPY_CLASS = 'max-w-4xl xl:max-w-[60rem]';
+export const FLAGSHIP_FRAME_CLASS = 'mx-auto max-w-[104rem] px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-14';
+export const FLAGSHIP_SECTION_FRAME_CLASS = 'mx-auto max-w-5xl xl:max-w-[84rem] 2xl:max-w-[90rem]';
+export const FLAGSHIP_SECTION_GUTTER_CLASS = 'px-4 sm:px-6 lg:px-8 xl:px-10';
+export const FLAGSHIP_COPY_CLASS = 'max-w-5xl xl:max-w-[66rem]';
 
 // Dedicated flagship design tokens. These stay namespaced under --fw-* so
 // the old shell globals remain untouched while Sprint W1 builds a premium layer.
@@ -120,36 +127,46 @@ export const FLAGSHIP_LABEL_CLASS = 'text-[10px] uppercase tracking-[0.3em] [fon
 export const FLAGSHIP_EYEBROW_CLASS = 'text-[11px] font-semibold uppercase tracking-[0.28em] [font-family:var(--fw-font-label)]';
 export const FLAGSHIP_DISPLAY_CLASS = '[font-family:var(--fw-font-display)] tracking-[-0.045em]';
 export const FLAGSHIP_SECTION_TITLE_CLASS = 'text-2xl font-semibold text-white md:text-[2rem] [font-family:var(--fw-font-display)] tracking-[-0.035em]';
-export const FLAGSHIP_PANEL_CLASS = 'border [border-color:var(--fw-panel-border)] [background:var(--fw-panel-bg)] [box-shadow:var(--fw-panel-shadow)]';
-export const FLAGSHIP_PANEL_MUTED_CLASS = 'border [border-color:var(--fw-panel-border)] [background:var(--fw-panel-muted-bg)] [box-shadow:var(--fw-panel-shadow)]';
+export const FLAGSHIP_PANEL_CLASS = 'border [border-color:var(--fw-panel-border)] [background:var(--fw-panel-bg)] [box-shadow:var(--fw-panel-shadow)] backdrop-blur-xl';
+export const FLAGSHIP_PANEL_MUTED_CLASS = 'border [border-color:var(--fw-panel-border)] [background:var(--fw-panel-muted-bg)] [box-shadow:var(--fw-panel-shadow)] backdrop-blur-xl';
+export const FLAGSHIP_HERO_PANEL_CLASS = 'border [border-color:var(--fw-panel-border-strong)] [background:var(--fw-panel-bg-strong)] [box-shadow:var(--fw-panel-shadow-strong)] backdrop-blur-xl';
+export const FLAGSHIP_BADGE_CLASS = 'inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-slate-300';
 export const FLAGSHIP_ACTION_CLASS = 'transition-[transform,background-color,border-color,box-shadow,color] [transition-duration:var(--fw-motion-base)] [transition-timing-function:var(--fw-motion-ease)] hover:-translate-y-0.5';
 export const FLAGSHIP_SECTION_SPACE_CLASS = 'py-[var(--fw-space-section-compact)] xl:py-[var(--fw-space-section)]';
 
 export function getFlagshipThemeStyle(accentColor?: string): CSSProperties {
-  const borderTint = accentColor ? `${accentColor}30` : 'rgba(148, 163, 184, 0.22)';
-  const accentGlow = accentColor ? `${accentColor}20` : 'rgba(34, 211, 238, 0.14)';
+  const borderTint = accentColor ? `${accentColor}42` : 'rgba(148, 163, 184, 0.24)';
+  const accentGlow = accentColor ? `${accentColor}26` : 'rgba(34, 211, 238, 0.16)';
+  const accentGlowStrong = accentColor ? `${accentColor}40` : 'rgba(34, 211, 238, 0.24)';
 
   return {
     '--fw-accent-glow': accentGlow,
     '--fw-font-body': '"Avenir Next", "Segoe UI Variable", "Segoe UI", sans-serif',
     '--fw-font-display': '"Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif',
     '--fw-font-label': '"Avenir Next Condensed", "Arial Narrow", "Segoe UI", sans-serif',
-    '--fw-hairline': 'rgba(255,255,255,0.09)',
-    '--fw-motion-base': '280ms',
+    '--fw-hairline': 'rgba(255,255,255,0.1)',
+    '--fw-motion-base': '320ms',
     '--fw-motion-ease': 'cubic-bezier(0.22, 1, 0.36, 1)',
     '--fw-motion-fast': '180ms',
-    '--fw-motion-slow': '420ms',
-    '--fw-panel-bg': 'linear-gradient(155deg, rgba(9, 14, 27, 0.88), rgba(15, 23, 42, 0.64))',
+    '--fw-motion-slow': '460ms',
+    '--fw-panel-bg': 'linear-gradient(160deg, rgba(10, 15, 29, 0.82), rgba(9, 13, 25, 0.62))',
+    '--fw-panel-bg-strong': 'radial-gradient(circle at top left, rgba(255,255,255,0.1), transparent 38%), linear-gradient(155deg, rgba(7, 11, 23, 0.96), rgba(14, 21, 38, 0.9))',
     '--fw-panel-border': borderTint,
-    '--fw-panel-border-strong': 'rgba(255,255,255,0.18)',
-    '--fw-panel-muted-bg': 'linear-gradient(160deg, rgba(15, 23, 42, 0.72), rgba(15, 23, 42, 0.46))',
+    '--fw-panel-border-strong': 'rgba(255,255,255,0.2)',
+    '--fw-panel-muted-bg': 'linear-gradient(160deg, rgba(11, 16, 31, 0.72), rgba(8, 13, 24, 0.58))',
     '--fw-panel-radius': '1.75rem',
-    '--fw-panel-radius-large': '2.25rem',
-    '--fw-panel-shadow': '0 32px 90px -52px rgba(2, 6, 23, 0.96)',
-    '--fw-panel-shadow-strong': '0 40px 120px -64px rgba(2, 6, 23, 0.98)',
-    '--fw-space-section': 'clamp(3.75rem, 5vw, 5rem)',
-    '--fw-space-section-compact': 'clamp(3rem, 4vw, 4rem)',
-    '--fw-space-stack': '1.5rem',
+    '--fw-panel-radius-large': '2.5rem',
+    '--fw-panel-shadow': '0 24px 80px -50px rgba(2, 6, 23, 0.92)',
+    '--fw-panel-shadow-strong': '0 45px 140px -72px rgba(2, 6, 23, 0.98)',
+    '--fw-radius-pill': '999px',
+    '--fw-shell-bg': 'linear-gradient(180deg, rgba(6, 10, 23, 0.98) 0%, rgba(5, 9, 20, 0.97) 24%, rgba(2, 6, 18, 1) 100%)',
+    '--fw-shell-grid': 'rgba(148, 163, 184, 0.08)',
+    '--fw-shell-spotlight': accentGlow,
+    '--fw-shell-spotlight-strong': accentGlowStrong,
+    '--fw-space-hero': 'clamp(4.5rem, 8vw, 7rem)',
+    '--fw-space-section': 'clamp(4rem, 5vw, 5.5rem)',
+    '--fw-space-section-compact': 'clamp(3.25rem, 4vw, 4.4rem)',
+    '--fw-space-stack': 'clamp(1.25rem, 2vw, 1.75rem)',
   } as FlagshipThemeStyle;
 }
 
