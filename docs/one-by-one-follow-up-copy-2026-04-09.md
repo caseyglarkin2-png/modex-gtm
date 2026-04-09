@@ -16,7 +16,7 @@ Keep thread:
 
 Route:
 
-https://modex-gtm.vercel.app/for/coca-cola/daniel-coe
+<https://modex-gtm.vercel.app/for/coca-cola/daniel-coe>
 
 Reply copy:
 
@@ -38,7 +38,7 @@ Keep thread:
 
 Route:
 
-https://modex-gtm.vercel.app/for/diageo
+<https://modex-gtm.vercel.app/for/diageo>
 
 Reply copy:
 
@@ -60,17 +60,17 @@ If KDP still shows no new microsite session by morning, use LinkedIn first inste
 
 Shared route:
 
-https://modex-gtm.vercel.app/for/keurig-dr-pepper
+<https://modex-gtm.vercel.app/for/keurig-dr-pepper>
 
 ### Kelly Killingsworth
 
 Preferred route:
 
-https://modex-gtm.vercel.app/for/keurig-dr-pepper/kelly-killingsworth
+<https://modex-gtm.vercel.app/for/keurig-dr-pepper/kelly-killingsworth>
 
 LinkedIn DM:
 
-Kelly - I keep coming back to one KDP question. Does the cost leak happen less in transport itself and more in the nightly yard decisions that decide whether DSD departures leave clean? I put the short version here if useful. https://modex-gtm.vercel.app/for/keurig-dr-pepper/kelly-killingsworth
+Kelly - I keep coming back to one KDP question. Does the cost leak happen less in transport itself and more in the nightly yard decisions that decide whether DSD departures leave clean? I put the short version here if useful. <https://modex-gtm.vercel.app/for/keurig-dr-pepper/kelly-killingsworth>
 
 If email is still the call, keep thread:
 
@@ -92,7 +92,7 @@ Casey
 
 LinkedIn DM:
 
-Jay - My hunch is the first route out gets won or lost before loading starts, when trailers are staged in the right order and the yard handoff stays clean. If that is off, I would value the correction. Short page here. https://modex-gtm.vercel.app/for/keurig-dr-pepper
+Jay - My hunch is the first route out gets won or lost before loading starts, when trailers are staged in the right order and the yard handoff stays clean. If that is off, I would value the correction. Short page here. <https://modex-gtm.vercel.app/for/keurig-dr-pepper>
 
 If email is still the call, keep thread:
 
@@ -114,7 +114,7 @@ Casey
 
 LinkedIn DM:
 
-Deborah - Most network programs standardize planning first. The yard still stays local. Different rules. Different handoffs. My hunch is that is where KDP variance still hides. Short page here if useful. https://modex-gtm.vercel.app/for/keurig-dr-pepper
+Deborah - Most network programs standardize planning first. The yard still stays local. Different rules. Different handoffs. My hunch is that is where KDP variance still hides. Short page here if useful. <https://modex-gtm.vercel.app/for/keurig-dr-pepper>
 
 If email is still the call, keep thread:
 
