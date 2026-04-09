@@ -83,10 +83,10 @@ accounts → personas (1:N), outreach_waves (1:N), meeting_briefs (1:1), audit_r
 - **Resend batch scripts still reference Resend API** — these should migrate to Gmail API for consistency, but work with `casey@freightroll.com` as-is.
 
 ## Campaign Status (as of 2026-04-02)
-- **409 total emails sent** (Resend CSV export)
-- **213 bounced** (all from `casey@yardflow.ai` on 3/27)
-- **181 delivered** to 52 unique prospect domains
-- **3 opened** (tracking limited — Resend pixel, not Gmail)
-- **Delivered domains include**: General Mills, PepsiCo/Frito-Lay, Diageo, Coca-Cola, Campbell's, AB InBev, Ford, Toyota, Caterpillar, Best Buy, Lowe's, Dollar Tree, Whirlpool, Ecolab, Constellation Brands, McCormick, and 36 others
-- **Drip touches completed**: T1 + T2 (follow-up) + T3 (last-before-MODEX) + T4 (personalized close) for Wave 1
-- **MODEX is 11 days away** (April 13-16) — final push window
+ **409 total emails sent** (Resend CSV export)
+ **213 bounced** (all from `casey@yardflow.ai` on 3/27)
+ **181 delivered** to 52 unique prospect domains
+ **3 opened** (tracking limited — Resend pixel, not Gmail)
+ **Delivered domains include**: General Mills, PepsiCo/Frito-Lay, Diageo, Coca-Cola, Campbell's, AB InBev, Ford, Toyota, Caterpillar, Best Buy, Lowe's, Dollar Tree, Whirlpool, Ecolab, Constellation Brands, McCormick, and 36 others
+ **Drip touches completed**: T1 + T2 (follow-up) + T3 (last-before-MODEX) + T4 (personalized close) for Wave 1
+ **MODEX is 11 days away** (April 13-16) — final push window

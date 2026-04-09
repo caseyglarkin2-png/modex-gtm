@@ -1,6 +1,6 @@
 # YardFlow Microsite Proposal Engine Sprint Plan
 
-Status: In progress. Sprint 7 core and the first flagship release gate are landed on Frito-Lay. Sprint 7B visual polish remains active while visible wow work takes priority over deeper analytics and operator surfaces.
+Status: In progress. Sprint 7 core and the first flagship release gate are landed on Frito-Lay. Sprint 7B visual polish remains active while visible wow work takes priority over deeper analytics and operator surfaces. Sprint W1 is now underway with the shared flagship token layer and shell primitives landed for public microsites and proposal pages.
 Created: 2026-04-07
 Primary repo: modex-gtm
 Reference repo: clawd-control-plane
@@ -100,9 +100,9 @@ If the goal is to maximize visible impact first, the program should run in this 
 
 Demoable artifact: one flagship route that feels premium, intentional, and visually distinct enough to use as the canonical public example.
 
-- [ ] W1-T1 Extract a flagship design token layer for type scale, spacing rhythm, motion presets, surface treatments, and accent behavior.
-- [ ] W1-T2 Refactor the microsite shell into reusable hero, thesis, rail, and section-shell primitives for more deliberate layout choreography.
-- [ ] W1-T3 Rework the flagship hero to feel like a product narrative opener rather than a polished landing page.
+- [x] W1-T1 Extract a flagship design token layer for type scale, spacing rhythm, motion presets, surface treatments, and accent behavior.
+- [x] W1-T2 Refactor the microsite shell into reusable hero, thesis, rail, and section-shell primitives for more deliberate layout choreography.
+- [ ] W1-T3 Rework the flagship hero to feel like a product narrative opener rather than a polished landing page, including route-specific opening beats beyond the shared shell stage.
 - [ ] W1-T4 Add lightweight atmospheric motion and texture inspired by the strongest external references without introducing a heavy render stack.
 - [ ] W1-T5 Add route-level visual QA captures for desktop and mobile so the new flagship look can be reviewed consistently before rollout.
 - [ ] Validation: `npm run build`, public route smoke tests, and saved before/after screenshots for the flagship route.
