@@ -32,6 +32,8 @@ test.describe('Full Platform Audit', () => {
   test('Accounts page: table, search, add account', async ({ page }) => {
     await page.goto('/accounts');
     await expect(page.locator('body')).toContainText('All target accounts');
+    await expect(page.locator('body')).toContainText('Priority Triage Board');
+    await expect(page.locator('body')).toContainText('Needs outreach');
 
     // Check table loaded
     await expect(page.locator('table')).toBeVisible();
@@ -66,6 +68,8 @@ test.describe('Full Platform Audit', () => {
   test('Queue page: captures and actions', async ({ page }) => {
     await page.goto('/queue');
     await expect(page.locator('body')).toContainText('Queue');
+    await expect(page.locator('body')).toContainText('Follow-Up Sprint Board');
+    await expect(page.locator('body')).toContainText('Ready to work');
   });
 
   test('Activities page: activity log', async ({ page }) => {
