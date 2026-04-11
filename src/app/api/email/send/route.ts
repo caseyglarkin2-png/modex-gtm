@@ -5,6 +5,8 @@ import { evaluateRecipientEligibility } from '@/lib/email/recipient-guard';
 import { wrapHtml } from '@/lib/email/templates';
 import { sanitizeEmailHtml } from '@/lib/email/sanitize';
 import { rateLimit } from '@/lib/rate-limit';
+import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
+import { advancePipelineStage, derivePipelineStage } from '@/lib/pipeline';
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
@@ -62,7 +64,10 @@ export async function POST(req: NextRequest) {
     // Best-effort DB log — skip if no DB available
     try {
       const accountExists = accountName
-        ? await prisma.account.findUnique({ where: { name: accountName }, select: { name: true } })
+        ? await prisma.account.findUnique({
+            where: { name: accountName },
+            select: { name: true, pipeline_stage: true, outreach_status: true, meeting_status: true },
+          })
         : null;
 
       await prisma.emailLog.create({
@@ -80,10 +85,21 @@ export async function POST(req: NextRequest) {
 
       // Auto-update outreach_status to "Contacted" if currently "Not started"
       if (accountName && accountExists) {
+        const nextStage = advancePipelineStage(
+          derivePipelineStage(accountExists),
+          'contacted',
+        );
+
         await prisma.account.updateMany({
-          where: { name: accountName, outreach_status: 'Not started' },
-          data: { outreach_status: 'Contacted' },
+          where: { name: accountName },
+          data: {
+            outreach_status: 'Contacted',
+            pipeline_stage: nextStage,
+            current_motion: `Pipeline stage: ${nextStage}`,
+          },
         }).catch(() => {});
+
+        await ensureLocalMeetingDealLink(accountName, nextStage).catch(() => {});
       }
 
       // Auto-log activity for the send

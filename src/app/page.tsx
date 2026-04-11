@@ -132,6 +132,11 @@ export default async function DashboardPage() {
           </p>
         </div>
         <div className="flex items-center gap-3 text-xs text-[var(--muted-foreground)]">
+          <Link href="/pipeline">
+            <Button variant="outline" size="sm" className="gap-1.5 text-xs">
+              Pipeline Board <ArrowRight className="h-3.5 w-3.5" />
+            </Button>
+          </Link>
           <Badge variant="outline" className="flex items-center gap-1.5 text-xs">
             <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
             <AutoRefresh intervalMs={30_000} />

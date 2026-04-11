@@ -4,6 +4,8 @@ import { sendBulk } from '@/lib/email/client';
 import { evaluateRecipientEligibility } from '@/lib/email/recipient-guard';
 import { wrapHtml } from '@/lib/email/templates';
 import { rateLimit } from '@/lib/rate-limit';
+import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
+import { advancePipelineStage, derivePipelineStage } from '@/lib/pipeline';
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
@@ -54,7 +56,10 @@ export async function POST(req: NextRequest) {
   // Best-effort DB logging for each send
   try {
     const defaultAccountExists = accountName
-      ? await prisma.account.findUnique({ where: { name: accountName }, select: { name: true } })
+      ? await prisma.account.findUnique({
+          where: { name: accountName },
+          select: { name: true, pipeline_stage: true, outreach_status: true, meeting_status: true },
+        })
       : null;
     const accountsContacted = new Set<string>();
 
@@ -67,7 +72,10 @@ export async function POST(req: NextRequest) {
         ? null
         : resolvedAccountName === accountName
           ? defaultAccountExists
-          : await prisma.account.findUnique({ where: { name: resolvedAccountName }, select: { name: true } }).catch(() => null);
+          : await prisma.account.findUnique({
+              where: { name: resolvedAccountName },
+              select: { name: true, pipeline_stage: true, outreach_status: true, meeting_status: true },
+            }).catch(() => null);
 
       await prisma.emailLog.create({
         data: {
@@ -101,10 +109,25 @@ export async function POST(req: NextRequest) {
 
     // Auto-update outreach_status for all accounts that were contacted
     for (const acctName of accountsContacted) {
+      const existing = await prisma.account.findUnique({
+        where: { name: acctName },
+        select: { pipeline_stage: true, outreach_status: true, meeting_status: true },
+      }).catch(() => null);
+      const nextStage = advancePipelineStage(
+        derivePipelineStage(existing ?? {}),
+        'contacted',
+      );
+
       await prisma.account.updateMany({
-        where: { name: acctName, outreach_status: 'Not started' },
-        data: { outreach_status: 'Contacted' },
+        where: { name: acctName },
+        data: {
+          outreach_status: 'Contacted',
+          pipeline_stage: nextStage,
+          current_motion: `Pipeline stage: ${nextStage}`,
+        },
       }).catch(() => {});
+
+      await ensureLocalMeetingDealLink(acctName, nextStage).catch(() => {});
     }
   } catch {
     // DB offline — skip logging

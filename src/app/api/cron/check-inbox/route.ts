@@ -5,6 +5,8 @@ import { getRecentReplies, markAsProcessed } from '@/lib/email/gmail-inbox';
 import { logReplyToHubSpot } from '@/lib/hubspot/emails';
 import { INBOX_POLLING_ENABLED } from '@/lib/feature-flags';
 import { markCronFailure, markCronSkipped, markCronStarted, markCronSuccess } from '@/lib/cron-monitor';
+import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
+import { advancePipelineStage, derivePipelineStage } from '@/lib/pipeline';
 import * as Sentry from '@sentry/nextjs';
 
 export const dynamic = 'force-dynamic';
@@ -114,6 +116,26 @@ export async function GET(request: Request) {
           where: { id: persona.id },
           data: { email_status: 'replied' },
         });
+
+        const nextStage = advancePipelineStage(
+          derivePipelineStage({
+            pipeline_stage: persona.account.pipeline_stage,
+            outreach_status: persona.account.outreach_status,
+            meeting_status: persona.account.meeting_status,
+          }),
+          'engaged',
+        );
+
+        await prisma.account.updateMany({
+          where: { name: persona.account_name },
+          data: {
+            outreach_status: 'Replied',
+            pipeline_stage: nextStage,
+            current_motion: `Pipeline stage: ${nextStage}`,
+          },
+        }).catch(() => undefined);
+
+        await ensureLocalMeetingDealLink(persona.account_name, nextStage).catch(() => undefined);
 
         // Increment reply_count on matching EmailLog by thread
         if (reply.subject) {

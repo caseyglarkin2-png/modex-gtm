@@ -33,6 +33,7 @@ model Account {
   research_status  String   @default("Not started")
   outreach_status  String   @default("Not started")
   meeting_status   String   @default("No meeting")
+  pipeline_stage   String   @default("targeted")
   current_motion   String?
   next_action      String?
   due_date         DateTime?
@@ -290,6 +291,7 @@ model Meeting {
   jake_confirmed  Boolean  @default(false)
   objective       String?
   owner           String?
+  hubspot_deal_id String?
   post_next_step  String?
   notes           String?
   account_score   Int?
@@ -299,6 +301,7 @@ model Meeting {
   account Account @relation(fields: [account_name], references: [name])
 
   @@index([account_name])
+  @@index([hubspot_deal_id])
   @@map("meetings")
 }
 

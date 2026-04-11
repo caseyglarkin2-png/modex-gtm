@@ -3,6 +3,8 @@
 import { revalidatePath } from 'next/cache';
 import { CaptureSchema, ActivitySchema, MeetingSchema, AddAccountSchema, AddPersonaSchema, type CaptureInput, type ActivityInput, type MeetingInput, type AddAccountInput, type AddPersonaInput } from './validations';
 import { CONTACT_STANDARD_VERSION, normalizeName, normalizeTitle, parseDomainFromEmail, scoreContactQuality, splitName } from './contact-standard';
+import { advancePipelineStage, derivePipelineStage } from './pipeline';
+import { ensureLocalMeetingDealLink } from './hubspot/deals';
 
 // ── Capture ───────────────────────────────────────────────────────────────────
 export async function createCapture(data: CaptureInput) {
@@ -84,6 +86,28 @@ export async function createMeeting(data: MeetingInput) {
         meeting_status: parsed.data.status ?? 'Scheduled',
       },
     });
+
+    const existingAccount = await prisma.account.findUnique({ where: { name: parsed.data.account } });
+    const nextStage = advancePipelineStage(
+      derivePipelineStage({
+        pipeline_stage: existingAccount?.pipeline_stage,
+        outreach_status: existingAccount?.outreach_status,
+        meeting_status: existingAccount?.meeting_status,
+      }),
+      'meeting',
+    );
+
+    await prisma.account.updateMany({
+      where: { name: parsed.data.account },
+      data: {
+        meeting_status: parsed.data.status ?? 'Scheduled',
+        outreach_status: 'Replied',
+        pipeline_stage: nextStage,
+        current_motion: `Pipeline stage: ${nextStage}`,
+      },
+    }).catch(() => undefined);
+
+    await ensureLocalMeetingDealLink(parsed.data.account, 'meeting').catch(() => undefined);
     // Auto-create follow-up activity
     try {
       await prisma.activity.create({
@@ -102,6 +126,9 @@ export async function createMeeting(data: MeetingInput) {
     } catch { /* activity logging is best-effort */ }
     revalidatePath('/meetings');
     revalidatePath('/activities');
+    revalidatePath('/pipeline');
+    revalidatePath('/analytics');
+    revalidatePath('/');
     revalidatePath(`/accounts`);
     return { success: true };
   } catch {
@@ -113,11 +140,24 @@ export async function createMeeting(data: MeetingInput) {
 export async function updateAccountStatus(account: string, field: 'research_status' | 'outreach_status' | 'meeting_status', value: string) {
   try {
     const { prisma } = await import('./prisma');
+    const existing = await prisma.account.findUnique({ where: { name: account } });
+    const nextOutreach = field === 'outreach_status' ? value : existing?.outreach_status;
+    const nextMeeting = field === 'meeting_status' ? value : existing?.meeting_status;
+    const pipelineStage = derivePipelineStage({
+      pipeline_stage: existing?.pipeline_stage,
+      outreach_status: nextOutreach,
+      meeting_status: nextMeeting,
+    });
+
     await prisma.account.update({
       where: { name: account },
-      data: { [field]: value },
+      data: { [field]: value, pipeline_stage: pipelineStage, current_motion: `Pipeline stage: ${pipelineStage}` },
     });
+    await ensureLocalMeetingDealLink(account, pipelineStage).catch(() => undefined);
     revalidatePath('/accounts');
+    revalidatePath('/pipeline');
+    revalidatePath('/analytics');
+    revalidatePath('/');
     revalidatePath(`/accounts/${account.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`);
     return { success: true };
   } catch {
@@ -180,6 +220,7 @@ export async function createAccount(data: AddAccountInput) {
         priority_band: band,
         priority_score: score,
         owner: parsed.data.owner ?? 'Casey',
+        pipeline_stage: 'targeted',
         notes: parsed.data.notes ?? null,
         icp_fit: 3,
         modex_signal: 3,

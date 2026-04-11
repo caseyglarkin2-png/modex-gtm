@@ -17,6 +17,7 @@ import {
   Activity,
   CalendarCheck,
   LayoutDashboard,
+  GitBranch,
   Menu,
   ChevronLeft,
   ChevronRight,
@@ -64,6 +65,7 @@ const NAV_SECTIONS = [
   {
     label: 'Pipeline',
     items: [
+      { href: '/pipeline', label: 'Pipeline Board', icon: GitBranch },
       { href: '/activities', label: 'Activities', icon: Activity },
       { href: '/meetings', label: 'Meetings', icon: CalendarCheck },
       { href: '/analytics', label: 'Analytics', icon: BarChart3 },
