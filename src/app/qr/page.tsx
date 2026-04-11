@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { getAuditRoutes, getQrAssets, slugify } from '@/lib/data';
+import QRCode from 'qrcode';
+import { getAuditRoutes, getListsConfig, getQrAssets, slugify } from '@/lib/data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -7,14 +8,23 @@ import { CopyButton } from '@/components/copy-button';
 import { QrCode, ExternalLink, ArrowRight, ScanSearch } from 'lucide-react';
 import { Breadcrumb } from '@/components/breadcrumb';
 
-function buildQrImageUrl(value: string, size = 220) {
-  return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(value)}`;
+async function buildQrDataUrl(value: string, width: number) {
+  return QRCode.toDataURL(value, {
+    errorCorrectionLevel: 'H',
+    margin: 2,
+    width,
+    color: {
+      dark: '#111827',
+      light: '#FFFFFF',
+    },
+  });
 }
 
 export const metadata = { title: 'QR Assets' };
 
-export default function QrPage() {
+export default async function QrPage() {
   const assets = getQrAssets();
+  const listsConfig = getListsConfig();
   const routesByAccount = new Map(getAuditRoutes().map((route) => [route.account, route]));
   const readyToScanCount = assets.length;
   const waveOneCount = assets.filter((asset) => (routesByAccount.get(asset.account)?.rank ?? Number.MAX_SAFE_INTEGER) <= 11).length;
@@ -32,6 +42,24 @@ export default function QrPage() {
     .slice(0, 6);
 
   const topPrintFiles = sprintAssets.slice(0, 4);
+  const fallbackQrUrl = listsConfig.qr_journey.master_url;
+
+  const fallbackQrPreview = await buildQrDataUrl(fallbackQrUrl, 220);
+  const fallbackQrPrint = await buildQrDataUrl(fallbackQrUrl, 1200);
+
+  const qrPreviews = new Map<string, string>();
+  const qrPrints = new Map<string, string>();
+
+  await Promise.all(
+    assets.map(async (qr) => {
+      const [preview, print] = await Promise.all([
+        buildQrDataUrl(qr.audit_url, 220),
+        buildQrDataUrl(qr.audit_url, 1200),
+      ]);
+      qrPreviews.set(qr.account, preview);
+      qrPrints.set(qr.account, print);
+    }),
+  );
 
   return (
     <div className="space-y-6">
@@ -81,7 +109,7 @@ export default function QrPage() {
                     </div>
                     <div className="flex shrink-0 items-center gap-2">
                       <img
-                        src={buildQrImageUrl(qr.audit_url)}
+                        src={qrPreviews.get(qr.account)}
                         alt={`QR code for ${qr.account}`}
                         className="h-20 w-20 rounded-md border border-[var(--border)] bg-white p-1"
                         loading="lazy"
@@ -117,7 +145,7 @@ export default function QrPage() {
                   <span className="text-[var(--foreground)]">{qr.account}</span>
                   <div className="flex items-center gap-2">
                     <Badge variant="outline">{qr.graphic_file}</Badge>
-                    <a href={buildQrImageUrl(qr.audit_url, 1200)} target="_blank" rel="noopener noreferrer" download={`${slugify(qr.account)}-qr.png`}>
+                    <a href={qrPrints.get(qr.account)} target="_blank" rel="noopener noreferrer" download={`${slugify(qr.account)}-qr.png`}>
                       <Button variant="ghost" size="sm" className="h-7 px-2 text-xs">Download PNG</Button>
                     </a>
                   </div>
@@ -128,9 +156,55 @@ export default function QrPage() {
             <div className="rounded-lg border border-[var(--border)] p-3 text-xs text-[var(--muted-foreground)]">
               Print target: minimum 2.5 in square, high contrast, and test scan at 3-6 ft before show open.
             </div>
+
+            <div className="rounded-lg border border-[var(--border)] p-3 text-xs">
+              <p className="font-medium text-[var(--foreground)]">Fallback master QR</p>
+              <p className="mt-1 text-[var(--muted-foreground)]">Use this when account-specific printouts are unavailable at the booth.</p>
+              <div className="mt-2 flex items-center justify-between gap-2">
+                <a href={fallbackQrPrint} target="_blank" rel="noopener noreferrer" download="modex-master-qr.png">
+                  <Button variant="outline" size="sm" className="text-xs">Download fallback PNG</Button>
+                </a>
+                <CopyButton text={fallbackQrUrl} />
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>
+
+      <Card>
+        <CardHeader className="pb-3">
+          <CardTitle className="text-base">Master QR Fallback</CardTitle>
+        </CardHeader>
+        <CardContent className="grid gap-4 md:grid-cols-[220px_1fr]">
+          <div className="flex justify-center rounded-lg border border-[var(--border)] bg-white p-3">
+            <img
+              src={fallbackQrPreview}
+              alt="Master fallback QR code"
+              className="h-44 w-44"
+            />
+          </div>
+          <div className="space-y-2">
+            <p className="text-sm text-[var(--muted-foreground)]">Fallback path for fast booth traffic if account-specific assets are not available in hand.</p>
+            <div className="rounded-lg bg-[var(--muted)] p-3">
+              <p className="text-xs text-[var(--muted-foreground)]">Fallback URL</p>
+              <div className="mt-1 flex items-center gap-2">
+                <a href={fallbackQrUrl} target="_blank" rel="noopener noreferrer" className="inline-flex flex-1 items-center gap-1 break-all text-sm text-[var(--primary)] hover:underline">
+                  {fallbackQrUrl} <ExternalLink className="h-3 w-3 shrink-0" />
+                </a>
+                <CopyButton text={fallbackQrUrl} />
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <a href={fallbackQrPrint} target="_blank" rel="noopener noreferrer" download="modex-master-qr.png">
+                <Button variant="outline" size="sm">Download print PNG</Button>
+              </a>
+              <a href={fallbackQrUrl} target="_blank" rel="noopener noreferrer">
+                <Button size="sm">Open fallback destination</Button>
+              </a>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       <div>
         <div className="mb-3 flex items-center justify-between gap-3">
@@ -154,7 +228,7 @@ export default function QrPage() {
 
                 <div className="flex justify-center rounded-lg border border-[var(--border)] bg-white p-3">
                   <img
-                    src={buildQrImageUrl(qr.audit_url)}
+                    src={qrPreviews.get(qr.account)}
                     alt={`QR code for ${qr.account}`}
                     className="h-40 w-40"
                     loading="lazy"
@@ -176,7 +250,7 @@ export default function QrPage() {
                   <p><span className="text-[var(--muted-foreground)]">Graphic:</span> {qr.graphic_file}</p>
                 </div>
                 <div className="flex items-center justify-between gap-2">
-                  <a href={buildQrImageUrl(qr.audit_url, 1200)} target="_blank" rel="noopener noreferrer" download={`${slugify(qr.account)}-qr.png`}>
+                  <a href={qrPrints.get(qr.account)} target="_blank" rel="noopener noreferrer" download={`${slugify(qr.account)}-qr.png`}>
                     <Button variant="outline" size="sm" className="text-xs">Download print PNG</Button>
                   </a>
                   <a href={qr.audit_url} target="_blank" rel="noopener noreferrer">

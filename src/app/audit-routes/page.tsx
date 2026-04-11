@@ -67,6 +67,7 @@ export default function AuditRoutesPage() {
                       <Button size="sm">Open route</Button>
                     </a>
                     <CopyButton text={r.audit_url} />
+                    <CopyButton text={`${r.fast_ask}\n${r.audit_url}`} />
                   </div>
                 </div>
               ))}
@@ -147,6 +148,10 @@ export default function AuditRoutesPage() {
 
                 <div className="rounded-lg bg-[var(--muted)] p-3 text-xs">
                   <span className="font-medium">Fast Ask:</span> {r.fast_ask}
+                </div>
+
+                <div className="flex items-center justify-end">
+                  <CopyButton text={`${r.suggested_message}\n\n${r.fast_ask}\n${r.audit_url}`} />
                 </div>
 
                 <div className="text-xs text-[var(--muted-foreground)]">
