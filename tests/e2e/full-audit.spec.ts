@@ -97,6 +97,8 @@ test.describe('Full Platform Audit', () => {
   test('Briefs page: meeting briefs grid', async ({ page }) => {
     await page.goto('/briefs');
     await expect(page.locator('h1')).toContainText('Meeting Briefs');
+    await expect(page.locator('body')).toContainText('Prep Priority Board');
+    await expect(page.locator('body')).toContainText('Coverage Gap');
   });
 
   test('Waves page: campaign waves', async ({ page }) => {
