@@ -13,6 +13,10 @@ export interface PromptContext {
   primoAngle?: string;
   parentBrand?: string;
   micrositeUrl?: string;
+  campaignName?: string;
+  campaignType?: string;
+  campaignAngle?: string;
+  campaignKeyDates?: string;
   tone: 'professional' | 'casual' | 'bold';
   length: 'short' | 'medium' | 'long';
 }
@@ -32,6 +36,30 @@ export interface OnePagerContext {
   band: string;
 }
 
+function buildCampaignContextBlock(ctx: PromptContext): string {
+  const lines = [
+    ctx.campaignName ? `Active campaign: ${ctx.campaignName}` : '',
+    ctx.campaignType ? `Campaign type: ${ctx.campaignType.replace(/_/g, ' ')}` : '',
+    ctx.campaignAngle ? `Campaign angle: ${ctx.campaignAngle}` : '',
+    ctx.campaignKeyDates ? `Campaign timing/context: ${ctx.campaignKeyDates}` : '',
+  ].filter(Boolean);
+
+  if (ctx.campaignType === 'trade_show') {
+    lines.push('This is a trade show follow-up. Event context can be used lightly if it helps, but it should not dominate the note.');
+  } else if (ctx.campaignType) {
+    lines.push('Do not mention MODEX or trade shows unless the campaign context above explicitly calls for it.');
+  }
+
+  return lines.join('\n');
+}
+
+function buildCampaignAskGuidance(ctx: PromptContext): string {
+  if (ctx.campaignType === 'trade_show') {
+    return 'MODEX 2026 is April 13-16 in Atlanta. If you mention the event, keep it secondary and natural.';
+  }
+  return 'This is not a trade show motion. Ask for a reaction or a short call, not a booth meet-up.';
+}
+
 export function buildEmailPrompt(ctx: PromptContext): string {
   return `Write a first-touch cold outreach email that reads like a typed Gmail note from a thoughtful operator. Careful. Specific. Humble. No consultant voice.
 
@@ -44,6 +72,7 @@ Priority: ${ctx.bandLabel ?? 'Tier 1'}
 ${ctx.vertical ? `Vertical: ${ctx.vertical}` : ''}
 ${ctx.primoAngle ? `What makes this account specific: ${ctx.primoAngle}` : ''}
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
+${buildCampaignContextBlock(ctx)}
 ${ctx.micrositeUrl ? `Microsite link available: ${ctx.micrositeUrl}` : 'No microsite link available. Do not invent one.'}
 
 Primary goal: get a reply or a light reaction. Not a meeting ask on touch one.
@@ -54,7 +83,7 @@ STRUCTURE (3 short paragraphs, 70-110 words total):
 2. BRIDGE (2-4 sentences): Tie that observation to the yard and dock handoff. Use one proof point only. If a microsite link exists, include one standalone line introducing it plainly: "I put together a short page for [account] here:" then the URL on the next line.
 3. CTA (1 sentence): Ask for a reaction, not a meeting. Examples: "Worth sending the 90-second version?" "Curious if this is even directionally relevant." "If this sits with someone else, who would you point me to?"
 
-Only mention MODEX if it sharpens the note naturally, and never as the main ask.
+${buildCampaignAskGuidance(ctx)}
 
 CRITICAL RULES:
 - Short declarative sentences. No semicolons.
@@ -84,6 +113,7 @@ Previous: ${ctx.previousMeeting ?? 'cold email sent about yard network standardi
 ${ctx.vertical ? `Vertical: ${ctx.vertical}` : ''}
 ${ctx.primoAngle ? `What makes this account specific: ${ctx.primoAngle}` : ''}
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
+${buildCampaignContextBlock(ctx)}
 ${ctx.micrositeUrl ? `Microsite link available: ${ctx.micrositeUrl}` : 'No microsite link available. Do not invent one.'}
 
 STRUCTURE (2-3 short paragraphs, 50-90 words total):
@@ -93,7 +123,7 @@ STRUCTURE (2-3 short paragraphs, 50-90 words total):
 
 Do NOT say "following up" or "circling back". This should feel like a separate note.
 
-MODEX can be mentioned as a light secondary context only. Not the main ask.
+${buildCampaignAskGuidance(ctx)}
 
 If the recipient previously engaged, it is acceptable to ask whether they want the short scorecard version or a quick reaction to the microsite. Do not jump straight to calendar times.
 
@@ -111,9 +141,10 @@ ${getVoiceGuardrails()}
 
 Target: ${ctx.personaName ?? 'decision maker'} at ${ctx.accountName}${ctx.personaTitle ? `, ${ctx.personaTitle}` : ''}
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
+${buildCampaignContextBlock(ctx)}
 
 LinkedIn DMs must be 40-60 words max. One thought. One ask. No small talk.
-Reference MODEX (April 13-16, Atlanta) only if it sharpens the ask. Lead with the yard as the constraint. End with a question.
+${buildCampaignAskGuidance(ctx)} Lead with the yard as the constraint. End with a question.
 
 Output: Only the message text. No greeting label, no signature.`;
 }
@@ -127,8 +158,9 @@ ${getVoiceGuardrails()}
 
 Target: ${ctx.personaName ?? 'decision maker'} at ${ctx.accountName}${ctx.personaTitle ? `, ${ctx.personaTitle}` : ''}
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
+${buildCampaignContextBlock(ctx)}
 
-MODEX: April 13-16, Atlanta. Live YardFlow users on-site. Suggest Tuesday April 14.
+${ctx.campaignType === 'trade_show' ? 'Trade show context: live users will be on-site. Suggest a specific event window only if that helps.' : 'This is not a trade show call. Keep the ask focused on a short working session.'}
 
 Structure:
 1. Opener (10 sec): Name, company, one sentence about the yard constraint
@@ -149,8 +181,9 @@ ${getVoiceGuardrails()}
 
 Account: ${ctx.accountName} (${ctx.bandLabel ?? 'Tier 1'}, score: ${ctx.score ?? 'N/A'})
 Contact: ${ctx.personaName ?? 'TBD'}${ctx.personaTitle ? ` (${ctx.personaTitle})` : ''}
-Meeting: In-person at MODEX 2026 (Atlanta, April 13-16) or Network Audit call
+Meeting: ${ctx.campaignType === 'trade_show' ? 'In-person at MODEX 2026 (Atlanta, April 13-16) or a short follow-up call' : 'Short discovery call or network audit review'}
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
+${buildCampaignContextBlock(ctx)}
 
 Create a structured brief:
 1. Company snapshot (2-3 sentences about their yard/logistics/throughput reality)
@@ -239,7 +272,16 @@ export function buildOutreachSequencePrompt(ctx: PromptContext, step: 'initial_e
     ctx.vertical ? `Vertical: ${ctx.vertical}` : '',
     ctx.parentBrand && ctx.parentBrand !== ctx.accountName ? `Parent brand: ${ctx.parentBrand}` : '',
     ctx.primoAngle ? `What makes this account specific: ${ctx.primoAngle}` : '',
+    buildCampaignContextBlock(ctx),
   ].filter(Boolean).join('\n');
+
+  const eventAsk = ctx.campaignType === 'trade_show'
+    ? 'MODEX 2026 is April 13-16 in Atlanta. YardFlow will have live users from the network on-site. Suggest meeting windows like Tuesday April 14 at 10am, 1pm, or 3pm.'
+    : 'This is not a trade show sequence. Ask for a quick reaction or a short call. Do not mention booth times or event meet-ups.';
+
+  const followUpAsk = ctx.campaignType === 'trade_show'
+    ? 'The event is close. If useful, suggest one specific window.'
+    : 'Keep the CTA soft. Ask if they want the short scorecard version or a quick reaction.';
 
   const stepInstructions: Record<string, string> = {
     initial_email: `STEP 1 of 4. First touch. Cold. They have never heard from you.
@@ -259,7 +301,7 @@ Every sentence under 20 words. No abstract nouns. No compound sentences with sem
 
 Mention YardFlow only once, in paragraph 2, briefly. Let proof carry the weight.
 
-MODEX 2026 is April 13-16 in Atlanta. YardFlow will have live users from the network on-site. Suggest meeting windows: Tuesday April 14 at 10am, 1pm, or 3pm. Offer flexibility. No calendar link. Get them to reply.
+${eventAsk} Offer flexibility. No calendar link. Get them to reply.
 
 Subject: under 6 words, lowercase, no company name, no "re:" tricks. Make it sound like an internal memo subject, not a sales email.`,
 
@@ -271,7 +313,7 @@ Do NOT reference the first email. Come in from a new direction. Add one proof po
 
 Make the yard problem feel more expensive than before. Tighter. Harder.
 
-MODEX is close. Live users on-site April 13-16. Suggest Tuesday April 14. No calendar link.
+${followUpAsk} No calendar link.
 
 Max 70 words. Subject under 6 words, lowercase.`,
 
@@ -281,13 +323,13 @@ Switch angle entirely. Pick ONE specific symptom that would be vivid for ${ctx.a
 
 Create urgency through consequence, not fake scarcity. Make inaction feel compounding.
 
-MODEX schedule is filling. Suggest one slot on Tuesday April 14.
+${followUpAsk}
 
 Max 70 words. Subject under 6 words, lowercase.`,
 
     breakup: `STEP 4 of 4. Breakup.
 
-Short. Clean. No guilt, no pressure. Plant one seed about the yard constraint. Leave the door open for a walk-up at MODEX if timing does not work now.
+Short. Clean. No guilt, no pressure. Plant one seed about the yard constraint. ${ctx.campaignType === 'trade_show' ? 'Leave the door open for an event walk-up if timing does not work now.' : 'Leave the door open for a later reply if timing is off right now.'}
 
 Max 40 words. Subject under 6 words, lowercase.`,
   };

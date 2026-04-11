@@ -29,4 +29,5 @@ test('cron health page renders telemetry cards', async ({ page }) => {
   await expect(page.locator('h1')).toContainText('Cron Health');
   await expect(page.locator('body')).toContainText('Inbox Polling');
   await expect(page.locator('body')).toContainText('HubSpot Sync');
+  await expect(page.locator('body')).toContainText('Campaign Drip');
 });

@@ -17,3 +17,6 @@ export const HUBSPOT_SYNC_ENABLED = envBool('HUBSPOT_SYNC_ENABLED', true);
 
 /** Gates inbox polling cron. Default: true. */
 export const INBOX_POLLING_ENABLED = envBool('INBOX_POLLING_ENABLED', true);
+
+/** Gates campaign drip automation cron. Default: true. */
+export const DRIP_SEQUENCE_ENABLED = envBool('DRIP_SEQUENCE_ENABLED', true);

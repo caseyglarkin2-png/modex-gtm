@@ -89,6 +89,7 @@ export function CampaignActions({
         body: JSON.stringify({
           accountName,
           personaName,
+          campaignSlug: 'modex-2026-follow-up',
           tone: 'provocative',
         }),
       });
@@ -191,6 +192,7 @@ export function CampaignActions({
         <GeneratorDialog
           accountName={accountName}
           personaName={personaName}
+          campaignSlug="modex-2026-follow-up"
           defaultType="dm"
           trigger={
             <Button variant="outline" size="sm" className="h-7 text-[11px] gap-1">
@@ -203,6 +205,7 @@ export function CampaignActions({
         <GeneratorDialog
           accountName={accountName}
           personaName={personaName}
+          campaignSlug="modex-2026-follow-up"
           defaultType="call_script"
           trigger={
             <Button variant="outline" size="sm" className="h-7 text-[11px] gap-1">
@@ -218,6 +221,7 @@ export function CampaignActions({
         <GeneratorDialog
           accountName={accountName}
           personaName={personaName}
+          campaignSlug="modex-2026-follow-up"
           defaultType="meeting_prep"
           trigger={
             <Button variant="outline" size="sm" className="h-7 text-[11px] gap-1">

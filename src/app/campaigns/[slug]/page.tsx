@@ -38,6 +38,13 @@ export default async function CampaignDetailPage({ params }: { params: Promise<{
 
   if (!campaign) notFound();
 
+  const campaignSettings = campaign.key_dates && typeof campaign.key_dates === 'object' && !Array.isArray(campaign.key_dates)
+    ? (campaign.key_dates as Record<string, unknown>)
+    : {};
+  const cadence = Array.isArray(campaignSettings.suggestedIntervals)
+    ? (campaignSettings.suggestedIntervals as Array<number | string>).join(', ')
+    : 'Not configured';
+
   return (
     <div className="space-y-6">
       <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Campaigns', href: '/campaigns' }, { label: campaign.name }]} />
@@ -64,12 +71,24 @@ export default async function CampaignDetailPage({ params }: { params: Promise<{
         <StatCard label="Activity" value={campaign._count.activities} />
       </div>
 
-      <Card>
-        <CardHeader className="pb-2"><CardTitle className="text-sm">Messaging Angle</CardTitle></CardHeader>
-        <CardContent>
-          <p className="text-sm">{campaign.messaging_angle || 'No messaging angle set yet.'}</p>
-        </CardContent>
-      </Card>
+      <div className="grid gap-4 lg:grid-cols-2">
+        <Card>
+          <CardHeader className="pb-2"><CardTitle className="text-sm">Messaging Angle</CardTitle></CardHeader>
+          <CardContent>
+            <p className="text-sm">{campaign.messaging_angle || 'No messaging angle set yet.'}</p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="pb-2"><CardTitle className="text-sm">Cadence & Automation</CardTitle></CardHeader>
+          <CardContent className="space-y-2 text-sm text-muted-foreground">
+            <p>Template: {String(campaignSettings.templateKey ?? 'manual')}</p>
+            <p>Touches: {String(campaignSettings.touchCount ?? 'Not set')}</p>
+            <p>Suggested intervals: {cadence} days</p>
+            <p>AI angle: {String(campaignSettings.aiPromptAngle ?? 'No AI angle configured')}</p>
+          </CardContent>
+        </Card>
+      </div>
 
       <div className="grid gap-4 lg:grid-cols-2">
         <Card>

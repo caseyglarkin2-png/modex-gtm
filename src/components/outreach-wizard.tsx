@@ -22,17 +22,26 @@ interface WizardPersona {
   priority?: string;
 }
 
+interface WizardCampaign {
+  slug: string;
+  name: string;
+  messagingAngle?: string | null;
+  campaignType?: string | null;
+}
+
 interface OutreachWizardProps {
   accountName: string;
   micrositeUrl: string;
   personas: WizardPersona[];
+  campaigns?: WizardCampaign[];
   trigger?: React.ReactNode;
 }
 
-export function OutreachWizard({ accountName, micrositeUrl, personas, trigger }: OutreachWizardProps) {
+export function OutreachWizard({ accountName, micrositeUrl, personas, campaigns = [], trigger }: OutreachWizardProps) {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState(1);
   const [selected, setSelected] = useState<string[]>([]);
+  const [selectedCampaignSlug, setSelectedCampaignSlug] = useState(campaigns[0]?.slug ?? '');
   const [subject, setSubject] = useState(`Quick idea for ${accountName}`);
   const [body, setBody] = useState(
     `I put together a short private brief for ${accountName}.\n\nPrivate brief: ${micrositeUrl}\n\nWorth a quick look?\n\nCasey`,
@@ -48,6 +57,11 @@ export function OutreachWizard({ accountName, micrositeUrl, personas, trigger }:
   const selectedPersonas = useMemo(
     () => eligiblePersonas.filter((persona) => selected.includes(persona.email ?? '')),
     [eligiblePersonas, selected],
+  );
+
+  const selectedCampaign = useMemo(
+    () => campaigns.find((campaign) => campaign.slug === selectedCampaignSlug),
+    [campaigns, selectedCampaignSlug],
   );
 
   function toggleEmail(email: string) {
@@ -72,6 +86,7 @@ export function OutreachWizard({ accountName, micrositeUrl, personas, trigger }:
           type: 'email',
           accountName,
           personaName: lead.name,
+          campaignSlug: selectedCampaignSlug || undefined,
           tone: 'conversational',
           length: 'short',
         }),
@@ -111,6 +126,7 @@ export function OutreachWizard({ accountName, micrositeUrl, personas, trigger }:
           recipients: selectedPersonas.map((persona) => ({
             to: persona.email,
             personaName: persona.name,
+            accountName,
           })),
           subject,
           bodyHtml: body,
@@ -193,6 +209,26 @@ export function OutreachWizard({ accountName, micrositeUrl, personas, trigger }:
 
           {step === 2 && (
             <div className="space-y-3">
+              {campaigns.length > 0 ? (
+                <div className="rounded-lg border p-4 space-y-2">
+                  <p className="text-sm font-medium">Campaign context</p>
+                  <select
+                    value={selectedCampaignSlug}
+                    onChange={(event) => setSelectedCampaignSlug(event.target.value)}
+                    className="flex h-9 w-full rounded-md border border-[var(--border)] bg-transparent px-3 py-1 text-sm"
+                  >
+                    {campaigns.map((campaign) => (
+                      <option key={campaign.slug} value={campaign.slug}>
+                        {campaign.name}
+                      </option>
+                    ))}
+                  </select>
+                  {selectedCampaign?.messagingAngle ? (
+                    <p className="text-sm text-muted-foreground">{selectedCampaign.messagingAngle}</p>
+                  ) : null}
+                </div>
+              ) : null}
+
               <div className="rounded-lg border p-4">
                 <p className="text-sm font-medium">Private microsite brief</p>
                 <a href={micrositeUrl} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-sm text-cyan-600 hover:underline">

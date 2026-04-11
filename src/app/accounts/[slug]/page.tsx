@@ -33,6 +33,7 @@ import { EditablePersonaStatus } from '@/components/editable-persona-status';
 import { VoiceScriptButton } from '@/components/voice-script-button';
 import type { RecentMicrositeSession } from '@/lib/microsites/analytics';
 import { ensureMicrositeForAccount } from '@/lib/microsites/ensure-microsite';
+import { prisma } from '@/lib/prisma';
 
 export async function generateStaticParams() {
   const accounts = await dbGetAccounts();
@@ -51,9 +52,15 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
   const brief = getMeetingBriefByAccount(account.name);
   const auditRoutes = getAuditRoutes();
   const auditRoute = auditRoutes.find((r) => r.account === account.name);
-  const [microsite, rawActivities] = await Promise.all([
+  const [microsite, rawActivities, activeCampaigns] = await Promise.all([
     dbGetMicrositeAccountAnalytics(account.name),
     dbGetActivitiesByAccount(account.name),
+    prisma.campaign.findMany({
+      where: { status: 'active' },
+      orderBy: [{ start_date: 'desc' }, { created_at: 'desc' }],
+      take: 6,
+      select: { slug: true, name: true, messaging_angle: true, campaign_type: true },
+    }),
   ]);
   const activities = rawActivities.map((activity) => ({
     ...activity,
@@ -111,6 +118,12 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                   priority: p.priority,
                   email: p.email ?? undefined,
                 }))}
+                campaigns={activeCampaigns.map((campaign) => ({
+                  slug: campaign.slug,
+                  name: campaign.name,
+                  messagingAngle: campaign.messaging_angle,
+                  campaignType: campaign.campaign_type,
+                }))}
                 trigger={
                   <Button size="sm" className="gap-1.5 bg-cyan-600 text-white hover:bg-cyan-700">
                     <Activity className="h-3.5 w-3.5" />
@@ -121,6 +134,7 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
               <OutreachSequenceDialog
                 accountName={account.name}
                 personas={personas.map((p) => ({ name: p.name, title: p.title ?? undefined, priority: p.priority }))}
+                campaignSlug={activeCampaigns[0]?.slug}
                 trigger={
                   <Button size="sm" className="gap-1.5 bg-amber-600 text-white hover:bg-amber-700">
                     <Activity className="h-3.5 w-3.5" />

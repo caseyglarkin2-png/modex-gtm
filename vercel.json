@@ -18,6 +18,10 @@
     {
       "path": "/api/cron/sync-hubspot",
       "schedule": "0 */6 * * *"
+    },
+    {
+      "path": "/api/cron/drip-sequence",
+      "schedule": "0 13 * * *"
     }
   ]
 }

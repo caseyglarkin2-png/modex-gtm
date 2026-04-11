@@ -21,6 +21,7 @@ export const KNOWN_CRONS: Array<{ name: string; label: string; path: string; sch
   { name: 'check-inbox', label: 'Inbox Polling', path: '/api/cron/check-inbox', schedule: '*/5 * * * *' },
   { name: 'daily-digest', label: 'Daily Digest', path: '/api/cron/daily-digest', schedule: '0 12 * * *' },
   { name: 'sync-hubspot', label: 'HubSpot Sync', path: '/api/cron/sync-hubspot', schedule: '0 */6 * * *' },
+  { name: 'drip-sequence', label: 'Campaign Drip', path: '/api/cron/drip-sequence', schedule: '0 13 * * *' },
   { name: 'monday-bump', label: 'Monday Bump', path: '/api/email/monday-bump', schedule: '5 11 * * 1' },
 ];
 

@@ -67,6 +67,7 @@ export const GenerateContentSchema = z.object({
   type: z.enum(['email', 'follow_up', 'dm', 'call_script', 'meeting_prep', 'infographic']),
   accountName: z.string().min(1),
   personaName: z.string().optional(),
+  campaignSlug: z.string().optional(),
   tone: z.enum(['formal', 'conversational', 'provocative']).default('conversational'),
   length: z.enum(['short', 'medium', 'long']).default('medium'),
   context: z.record(z.string(), z.string()).optional(),

@@ -3,7 +3,7 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { prisma } from '@/lib/prisma';
-import { HUBSPOT_LOGGING_ENABLED, HUBSPOT_SYNC_ENABLED, INBOX_POLLING_ENABLED } from '@/lib/feature-flags';
+import { DRIP_SEQUENCE_ENABLED, HUBSPOT_LOGGING_ENABLED, HUBSPOT_SYNC_ENABLED, INBOX_POLLING_ENABLED } from '@/lib/feature-flags';
 import { KNOWN_CRONS, type CronStateValue } from '@/lib/cron-monitor';
 
 export const dynamic = 'force-dynamic';
@@ -74,6 +74,7 @@ export default async function CronHealthPage() {
             <div className="flex items-center justify-between"><span>HubSpot logging</span><FlagBadge enabled={HUBSPOT_LOGGING_ENABLED} /></div>
             <div className="flex items-center justify-between"><span>HubSpot sync</span><FlagBadge enabled={HUBSPOT_SYNC_ENABLED} /></div>
             <div className="flex items-center justify-between"><span>Inbox polling</span><FlagBadge enabled={INBOX_POLLING_ENABLED} /></div>
+            <div className="flex items-center justify-between"><span>Campaign drip</span><FlagBadge enabled={DRIP_SEQUENCE_ENABLED} /></div>
           </CardContent>
         </Card>
         <Card>

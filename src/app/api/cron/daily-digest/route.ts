@@ -31,7 +31,7 @@ export async function GET(request: Request) {
     const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000);
 
     // Gather stats
-    const [totalSent, sentYesterday, openedYesterday, repliesYesterday, bouncedYesterday] = await Promise.all([
+    const [totalSent, sentYesterday, openedYesterday, repliesYesterday, bouncedYesterday, campaignFollowUpsReady] = await Promise.all([
       prisma.emailLog.count(),
       prisma.emailLog.count({
         where: { sent_at: { gte: yesterday } },
@@ -44,6 +44,13 @@ export async function GET(request: Request) {
       }),
       prisma.emailLog.count({
         where: { status: 'bounced', sent_at: { gte: yesterday } },
+      }),
+      prisma.activity.count({
+        where: {
+          activity_type: 'Follow-up',
+          notes: { contains: 'Campaign drip automation' },
+          next_step_due: { lte: now },
+        },
       }),
     ]);
 
@@ -103,7 +110,7 @@ export async function GET(request: Request) {
         <p>${topAccountsList}</p>
 
         <h3 style="margin-bottom: 4px;">Pending Follow-ups</h3>
-        <p>${pendingFollowups} contacts awaiting response.</p>
+        <p>${pendingFollowups} contacts awaiting response. ${campaignFollowUpsReady} campaign drip tasks are queued.</p>
 
         <hr style="border: none; border-top: 1px solid #eee; margin: 24px 0;" />
         <p style="color: #999; font-size: 12px;">
@@ -123,8 +130,8 @@ export async function GET(request: Request) {
       path: CRON_PATH,
       schedule: CRON_SCHEDULE,
       durationMs: Date.now() - startedAt,
-      message: `Digest sent with ${sentYesterday} sends and ${repliesYesterday} replies.`,
-      stats: { sentYesterday, openedYesterday, repliesYesterday, bouncedYesterday, pendingFollowups },
+      message: `Digest sent with ${sentYesterday} sends, ${repliesYesterday} replies, and ${campaignFollowUpsReady} queued drip tasks.`,
+      stats: { sentYesterday, openedYesterday, repliesYesterday, bouncedYesterday, pendingFollowups, campaignFollowUpsReady },
     }).catch(() => undefined);
 
     return NextResponse.json({ success: true, sentYesterday, openedYesterday, repliesYesterday });

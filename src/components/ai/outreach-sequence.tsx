@@ -32,6 +32,7 @@ interface SequenceStep {
 interface OutreachSequenceProps {
   accountName: string;
   personas: Array<{ name: string; title?: string; priority: string }>;
+  campaignSlug?: string;
   trigger?: React.ReactNode;
   variant?: 'dialog' | 'inline';
   open?: boolean;
@@ -79,6 +80,7 @@ function slugifyAccountName(value: string): string {
 export function OutreachSequenceDialog({
   accountName,
   personas,
+  campaignSlug,
   trigger,
   variant = 'dialog',
   open: controlledOpen,
@@ -107,7 +109,7 @@ export function OutreachSequenceDialog({
       const res = await fetch('/api/ai/sequence', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accountName, personaName: selectedPersona, tone }),
+        body: JSON.stringify({ accountName, personaName: selectedPersona, campaignSlug, tone }),
       });
       const json = await readApiResponse<{ sequence?: SequenceStep[]; error?: string }>(res);
       if (!res.ok) throw new Error(json.error ?? 'Generation failed');

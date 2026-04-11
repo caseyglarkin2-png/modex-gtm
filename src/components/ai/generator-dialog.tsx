@@ -32,6 +32,7 @@ interface GeneratorDialogProps {
   accountName: string;
   personaName?: string;
   personaEmail?: string;
+  campaignSlug?: string;
   defaultType?: ContentType;
   onUseContent?: (content: string, type: ContentType) => void;
   trigger?: React.ReactNode;
@@ -62,6 +63,7 @@ export function GeneratorDialog({
   accountName,
   personaName,
   personaEmail,
+  campaignSlug,
   defaultType = 'email',
   onUseContent,
   trigger,
@@ -107,7 +109,7 @@ export function GeneratorDialog({
         const res = await fetch('/api/ai/generate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ type, accountName, personaName, tone, length }),
+          body: JSON.stringify({ type, accountName, personaName, campaignSlug, tone, length }),
         });
         const data = await readApiResponse<{ content?: string; error?: string }>(res);
         if (!res.ok) {

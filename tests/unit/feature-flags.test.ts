@@ -7,6 +7,7 @@ describe('feature-flags', () => {
     delete process.env.HUBSPOT_LOGGING_ENABLED;
     delete process.env.HUBSPOT_SYNC_ENABLED;
     delete process.env.INBOX_POLLING_ENABLED;
+    delete process.env.DRIP_SEQUENCE_ENABLED;
   });
 
   it('returns defaults when env vars are not set', async () => {
@@ -14,6 +15,7 @@ describe('feature-flags', () => {
     expect(flags.HUBSPOT_LOGGING_ENABLED).toBe(true);
     expect(flags.HUBSPOT_SYNC_ENABLED).toBe(true);
     expect(flags.INBOX_POLLING_ENABLED).toBe(true);
+    expect(flags.DRIP_SEQUENCE_ENABLED).toBe(true);
   });
 
   it('returns true when env var is "true"', async () => {

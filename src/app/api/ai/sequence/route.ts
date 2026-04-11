@@ -17,6 +17,7 @@ const TONE_MAP: Record<string, PromptContext['tone']> = {
 const SequenceRequestSchema = z.object({
   accountName: z.string().min(1),
   personaName: z.string().optional(),
+  campaignSlug: z.string().optional(),
   tone: z.enum(['formal', 'conversational', 'provocative']).default('conversational'),
   steps: z.array(z.enum(['initial_email', 'follow_up_1', 'follow_up_2', 'breakup'])).optional(),
 });
@@ -86,7 +87,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
   }
 
-  const { accountName, personaName, tone } = parsed.data;
+  const { accountName, personaName, tone, campaignSlug } = parsed.data;
   const steps = parsed.data.steps ?? ['initial_email', 'follow_up_1', 'follow_up_2', 'breakup'];
 
   if (isWarmIntroOnlyAccount(accountName)) {
@@ -115,6 +116,14 @@ export async function POST(req: NextRequest) {
     ? personas.find((p) => p.name?.toLowerCase() === personaName.toLowerCase()) ?? personas[0]
     : personas[0];
 
+  const { prisma } = await import('@/lib/prisma');
+  const campaign = campaignSlug
+    ? await prisma.campaign.findUnique({
+        where: { slug: campaignSlug },
+        select: { name: true, campaign_type: true, messaging_angle: true, key_dates: true },
+      }).catch(() => null)
+    : null;
+
   const ctx: PromptContext = {
     accountName,
     personaName: persona?.name ?? personaName,
@@ -125,6 +134,10 @@ export async function POST(req: NextRequest) {
     vertical: account.vertical ?? undefined,
     primoAngle: account.primo_angle ?? undefined,
     parentBrand: account.parent_brand ?? undefined,
+    campaignName: campaign?.name ?? undefined,
+    campaignType: campaign?.campaign_type ?? undefined,
+    campaignAngle: campaign?.messaging_angle ?? undefined,
+    campaignKeyDates: campaign?.key_dates ? JSON.stringify(campaign.key_dates) : undefined,
     tone: TONE_MAP[tone] ?? 'casual',
     length: 'medium',
   };

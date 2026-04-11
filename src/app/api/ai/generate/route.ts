@@ -11,6 +11,7 @@ import {
 } from '@/lib/ai/prompts';
 import { getAccountContext } from '@/lib/db';
 import { getAllAccountMicrositeData } from '@/lib/microsites/accounts';
+import { prisma } from '@/lib/prisma';
 import { buildAbsoluteUrl } from '@/lib/site-url';
 
 const TONE_MAP: Record<string, PromptContext['tone']> = {
@@ -32,9 +33,17 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
   }
 
-  const { type, accountName, personaName, tone, length, context } = parsed.data;
+  const { type, accountName, personaName, campaignSlug, tone, length, context } = parsed.data;
 
   const { account, personas } = await getAccountContext(accountName);
+  const requestedCampaignSlug = campaignSlug ?? (context as Record<string, string> | undefined)?.campaignSlug;
+  const campaign = requestedCampaignSlug
+    ? await prisma.campaign.findUnique({
+        where: { slug: requestedCampaignSlug },
+        select: { slug: true, name: true, campaign_type: true, messaging_angle: true, key_dates: true },
+      }).catch(() => null)
+    : null;
+  const campaignKeyDates = campaign?.key_dates ? JSON.stringify(campaign.key_dates) : (context as Record<string, string> | undefined)?.campaignKeyDates;
   const persona = personaName
     ? personas.find((p) => p.name?.toLowerCase() === personaName.toLowerCase()) ?? personas[0]
     : personas[0];
@@ -54,6 +63,10 @@ export async function POST(req: NextRequest) {
     primoAngle: (context as Record<string, string> | undefined)?.primoAngle ?? account?.primo_angle ?? undefined,
     parentBrand: account?.parent_brand ?? undefined,
     micrositeUrl,
+    campaignName: campaign?.name ?? (context as Record<string, string> | undefined)?.campaignName,
+    campaignType: campaign?.campaign_type ?? (context as Record<string, string> | undefined)?.campaignType,
+    campaignAngle: campaign?.messaging_angle ?? (context as Record<string, string> | undefined)?.campaignAngle,
+    campaignKeyDates,
     tone: TONE_MAP[tone] ?? 'casual',
     length: length as PromptContext['length'],
   };
