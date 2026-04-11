@@ -350,7 +350,7 @@ export default async function DashboardPage() {
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between gap-2">
               <CardTitle className="text-base">Today's Focus</CardTitle>
-              <Link href="/activities">
+              <Link href={overdueFocusCount > 0 ? '/activities?filter=overdue' : '/activities?filter=week'}>
                 <Button variant="ghost" size="sm" className="gap-1 text-xs">
                   Open queue <ArrowRight className="h-3 w-3" />
                 </Button>

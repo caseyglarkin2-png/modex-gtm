@@ -72,6 +72,8 @@ test.describe('Full Platform Audit', () => {
     await page.goto('/activities');
     await expect(page.locator('body')).toContainText('Activities');
     await expect(page.locator('body')).toContainText('outreach and engagement');
+    await expect(page.locator('body')).toContainText('Execution Queue');
+    await expect(page.locator('body')).toContainText('Due this week');
   });
 
   test('Meetings page: table and book meeting', async ({ page }) => {
