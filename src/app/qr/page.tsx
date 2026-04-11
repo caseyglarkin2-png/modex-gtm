@@ -1,13 +1,37 @@
-import { getQrAssets } from '@/lib/data';
-import { Card, CardContent } from '@/components/ui/card';
+import Link from 'next/link';
+import { getAuditRoutes, getQrAssets, slugify } from '@/lib/data';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { CopyButton } from '@/components/copy-button';
-import { QrCode, ExternalLink } from 'lucide-react';
+import { QrCode, ExternalLink, ArrowRight, ScanSearch } from 'lucide-react';
 import { Breadcrumb } from '@/components/breadcrumb';
+
+function buildQrImageUrl(value: string) {
+  return `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(value)}`;
+}
 
 export const metadata = { title: 'QR Assets' };
 
 export default function QrPage() {
   const assets = getQrAssets();
+  const routesByAccount = new Map(getAuditRoutes().map((route) => [route.account, route]));
+  const readyToScanCount = assets.length;
+  const waveOneCount = assets.filter((asset) => (routesByAccount.get(asset.account)?.rank ?? Number.MAX_SAFE_INTEGER) <= 11).length;
+  const warmRouteCount = assets.filter((asset) => {
+    const warmRoute = routesByAccount.get(asset.account)?.warm_route ?? '';
+    return warmRoute && !/no warm intro/i.test(warmRoute);
+  }).length;
+
+  const sprintAssets = [...assets]
+    .sort(
+      (left, right) =>
+        (routesByAccount.get(left.account)?.rank ?? Number.MAX_SAFE_INTEGER) -
+        (routesByAccount.get(right.account)?.rank ?? Number.MAX_SAFE_INTEGER),
+    )
+    .slice(0, 6);
+
+  const topPrintFiles = sprintAssets.slice(0, 4);
 
   return (
     <div className="space-y-6">
@@ -19,35 +43,146 @@ export default function QrPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {assets.map((qr) => (
-          <Card key={qr.account}>
-            <CardContent className="p-5 space-y-3">
-              <div className="flex items-start justify-between">
-                <h3 className="font-semibold">{qr.account}</h3>
-                <div className="rounded-md bg-[var(--accent)] p-2">
-                  <QrCode className="h-4 w-4 text-[var(--muted-foreground)]" />
+      <div className="grid gap-4 md:grid-cols-4">
+        <QrMetricCard label="Ready to scan" value={readyToScanCount} tone="text-emerald-600" />
+        <QrMetricCard label="Wave 1 priority" value={waveOneCount} tone={waveOneCount > 0 ? 'text-blue-600' : 'text-[var(--foreground)]'} />
+        <QrMetricCard label="Warm routes" value={warmRouteCount} tone={warmRouteCount > 0 ? 'text-amber-600' : 'text-[var(--foreground)]'} />
+        <QrMetricCard label="Print assets" value={assets.length} tone="text-[var(--foreground)]" />
+      </div>
+
+      <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
+        <Card>
+          <CardHeader className="pb-3">
+            <div className="flex items-center justify-between gap-3">
+              <CardTitle className="text-base">QR Ready Board</CardTitle>
+              <Link href="/audit-routes">
+                <Button variant="ghost" size="sm" className="gap-1 text-xs">
+                  Open routes <ArrowRight className="h-3 w-3" />
+                </Button>
+              </Link>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              {sprintAssets.map((qr) => {
+                const route = routesByAccount.get(qr.account);
+                return (
+                  <div key={qr.account} className="flex items-start justify-between gap-3 rounded-lg border border-[var(--border)] p-3">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Link href={`/accounts/${slugify(qr.account)}`} className="truncate text-sm font-medium text-[var(--primary)] hover:underline">
+                          {qr.account}
+                        </Link>
+                        {route?.rank ? <Badge variant="outline" className="text-xs">#{route.rank}</Badge> : null}
+                        <Badge variant="secondary" className="text-xs">Booth-ready</Badge>
+                      </div>
+                      <p className="mt-1 text-sm text-[var(--muted-foreground)]">{qr.suggested_use}</p>
+                      <p className="mt-1 text-xs text-[var(--muted-foreground)]">Warm route: {route?.warm_route || 'No route noted'} · Graphic: {qr.graphic_file}</p>
+                    </div>
+                    <div className="flex shrink-0 items-center gap-2">
+                      <img
+                        src={buildQrImageUrl(qr.audit_url)}
+                        alt={`QR code for ${qr.account}`}
+                        className="h-20 w-20 rounded-md border border-[var(--border)] bg-white p-1"
+                        loading="lazy"
+                      />
+                      <div className="flex flex-col gap-2">
+                        <a href={qr.audit_url} target="_blank" rel="noopener noreferrer">
+                          <Button size="sm">Open</Button>
+                        </a>
+                        <CopyButton text={qr.audit_url} />
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base">MODEX Print Notes</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <div className="rounded-lg border border-[var(--border)] bg-[var(--accent)]/40 p-3 text-sm text-[var(--muted-foreground)]">
+              <span className="inline-flex items-center gap-2 text-[var(--foreground)]">
+                <ScanSearch className="h-4 w-4" /> Keep the QR large, high-contrast, and paired with the 30-minute audit CTA.
+              </span>
+            </div>
+
+            <div className="space-y-2">
+              {topPrintFiles.map((qr) => (
+                <div key={qr.account} className="flex items-center justify-between rounded-lg border border-[var(--border)] px-3 py-2 text-sm">
+                  <span className="text-[var(--foreground)]">{qr.account}</span>
+                  <Badge variant="outline">{qr.graphic_file}</Badge>
                 </div>
-              </div>
-              <div className="rounded-lg bg-[var(--muted)] p-3">
-                <p className="text-xs text-[var(--muted-foreground)]">Audit URL</p>
-                <div className="mt-0.5 flex items-center gap-2">
-                  <a href={qr.audit_url} target="_blank" rel="noopener noreferrer" className="text-sm text-[var(--primary)] hover:underline break-all flex-1 inline-flex items-center gap-1">
-                    {qr.audit_url} <ExternalLink className="h-3 w-3 shrink-0" />
-                  </a>
-                  <CopyButton text={qr.audit_url} />
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div>
+        <div className="mb-3 flex items-center justify-between gap-3">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">QR Asset Library</h2>
+          <p className="text-xs text-[var(--muted-foreground)]">Every account-specific QR below is scannable directly from this page.</p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {assets.map((qr) => (
+            <Card key={qr.account}>
+              <CardContent className="space-y-3 p-5">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <h3 className="font-semibold">{qr.account}</h3>
+                    <p className="text-xs text-[var(--muted-foreground)]">{routesByAccount.get(qr.account)?.warm_route || 'No warm route noted'}</p>
+                  </div>
+                  <div className="rounded-md bg-[var(--accent)] p-2">
+                    <QrCode className="h-4 w-4 text-[var(--muted-foreground)]" />
+                  </div>
                 </div>
-              </div>
-              <div className="text-xs space-y-1">
-                <p><span className="text-[var(--muted-foreground)]">Suggested Use:</span> {qr.suggested_use}</p>
-                <p><span className="text-[var(--muted-foreground)]">Proof Asset:</span> {qr.proof_asset}</p>
-                <p><span className="text-[var(--muted-foreground)]">Graphic:</span> {qr.graphic_file}</p>
-              </div>
-              {qr.notes && <p className="text-xs text-[var(--muted-foreground)]">{qr.notes}</p>}
-            </CardContent>
-          </Card>
-        ))}
+
+                <div className="flex justify-center rounded-lg border border-[var(--border)] bg-white p-3">
+                  <img
+                    src={buildQrImageUrl(qr.audit_url)}
+                    alt={`QR code for ${qr.account}`}
+                    className="h-40 w-40"
+                    loading="lazy"
+                  />
+                </div>
+
+                <div className="rounded-lg bg-[var(--muted)] p-3">
+                  <p className="text-xs text-[var(--muted-foreground)]">Audit URL</p>
+                  <div className="mt-0.5 flex items-center gap-2">
+                    <a href={qr.audit_url} target="_blank" rel="noopener noreferrer" className="inline-flex flex-1 items-center gap-1 break-all text-sm text-[var(--primary)] hover:underline">
+                      {qr.audit_url} <ExternalLink className="h-3 w-3 shrink-0" />
+                    </a>
+                    <CopyButton text={qr.audit_url} />
+                  </div>
+                </div>
+                <div className="space-y-1 text-xs">
+                  <p><span className="text-[var(--muted-foreground)]">Suggested Use:</span> {qr.suggested_use}</p>
+                  <p><span className="text-[var(--muted-foreground)]">Proof Asset:</span> {qr.proof_asset}</p>
+                  <p><span className="text-[var(--muted-foreground)]">Graphic:</span> {qr.graphic_file}</p>
+                </div>
+                {qr.notes && <p className="text-xs text-[var(--muted-foreground)]">{qr.notes}</p>}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
     </div>
+  );
+}
+
+function QrMetricCard({ label, value, tone }: { label: string; value: number; tone: string }) {
+  return (
+    <Card>
+      <CardContent className="p-4 text-center">
+        <p className="text-[11px] uppercase tracking-wide text-[var(--muted-foreground)]">{label}</p>
+        <p className={`mt-2 text-2xl font-bold ${tone}`}>{value}</p>
+      </CardContent>
+    </Card>
   );
 }

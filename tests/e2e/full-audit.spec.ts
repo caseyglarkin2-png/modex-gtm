@@ -172,11 +172,15 @@ test.describe('Full Platform Audit', () => {
   test('QR page loads', async ({ page }) => {
     await page.goto('/qr');
     await expect(page.locator('body')).toContainText('QR');
+    await expect(page.locator('body')).toContainText('QR Ready Board');
+    await expect(page.locator('body')).toContainText('Ready to scan');
   });
 
   test('Audit Routes page loads', async ({ page }) => {
     await page.goto('/audit-routes');
     await expect(page.locator('body')).toContainText('Routes');
+    await expect(page.locator('body')).toContainText('Route Sprint Board');
+    await expect(page.locator('body')).toContainText('Open routes');
   });
 
   test('Navigation: all nav links work', async ({ page }) => {
