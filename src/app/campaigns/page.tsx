@@ -1,10 +1,11 @@
 import Link from 'next/link';
-import { ArrowRight, CalendarRange, Mail, Target } from 'lucide-react';
+import { ArrowRight, CalendarRange, Mail, Sparkles, Target } from 'lucide-react';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { getCampaignSummaries } from '@/lib/campaigns';
+import { CAMPAIGN_TEMPLATES } from '@/lib/campaigns/templates';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Campaigns' };
@@ -31,7 +32,14 @@ export default async function CampaignsPage() {
             Track active outreach motions as first-class campaigns instead of one-off waves.
           </p>
         </div>
-        <Badge className="bg-cyan-600 text-white">Year-round GTM mode</Badge>
+        <div className="flex items-center gap-2">
+          <Badge className="bg-cyan-600 text-white">Year-round GTM mode</Badge>
+          <Link href="/campaigns/new">
+            <Button size="sm" className="gap-1.5">
+              New Campaign <ArrowRight className="h-3.5 w-3.5" />
+            </Button>
+          </Link>
+        </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
@@ -48,6 +56,29 @@ export default async function CampaignsPage() {
           <CardContent><p className="text-3xl font-bold">{campaigns.reduce((sum, campaign) => sum + campaign.target_account_count, 0)}</p></CardContent>
         </Card>
       </div>
+
+      <Card>
+        <CardHeader className="pb-2">
+          <CardTitle className="text-sm flex items-center gap-2">
+            <Sparkles className="h-4 w-4" /> Template Presets
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            {CAMPAIGN_TEMPLATES.map((template) => (
+              <div key={template.key} className="rounded-lg border p-3 text-sm">
+                <p className="font-medium">{template.label}</p>
+                <p className="mt-1 text-xs text-muted-foreground">{template.defaultTouchCount} touches · intervals {template.suggestedIntervals.join(', ')} days</p>
+                <Link href={`/campaigns/new?template=${template.key}`}>
+                  <Button variant="outline" size="sm" className="mt-3 gap-1.5">
+                    Use Template <ArrowRight className="h-3.5 w-3.5" />
+                  </Button>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
       <div className="grid gap-4 xl:grid-cols-2">
         {campaigns.map((campaign) => (

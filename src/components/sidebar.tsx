@@ -69,6 +69,7 @@ const NAV_SECTIONS = [
       { href: '/activities', label: 'Activities', icon: Activity },
       { href: '/meetings', label: 'Meetings', icon: CalendarCheck },
       { href: '/analytics', label: 'Analytics', icon: BarChart3 },
+      { href: '/analytics/quarterly', label: 'Quarterly Review', icon: BarChart3 },
       { href: '/admin/crons', label: 'Cron Health', icon: Activity },
     ],
   },

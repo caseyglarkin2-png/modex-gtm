@@ -10,16 +10,18 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { dbGetDashboardStats, dbGetAccounts, dbGetMicrositeAnalytics } from '@/lib/db';
+import { getCampaignSummaries } from '@/lib/campaigns';
 import { AutoRefresh } from '@/components/auto-refresh';
 
 export const metadata = { title: 'Analytics — Board Report' };
 export const dynamic = 'force-dynamic';
 
 export default async function AnalyticsPage() {
-  const [stats, accounts, microsite] = await Promise.all([
+  const [stats, accounts, microsite, campaigns] = await Promise.all([
     dbGetDashboardStats(),
     dbGetAccounts(),
     dbGetMicrositeAnalytics(),
+    getCampaignSummaries(),
   ]);
 
   // Pipeline funnel from live DB
@@ -53,6 +55,9 @@ export default async function AnalyticsPage() {
           </Badge>
           <Link href="/pipeline">
             <Button variant="outline" size="sm" className="text-xs gap-1">Pipeline Board</Button>
+          </Link>
+          <Link href="/analytics/quarterly">
+            <Button variant="outline" size="sm" className="text-xs gap-1">Quarterly Review</Button>
           </Link>
           <Link href="/analytics/emails">
             <Button variant="outline" size="sm" className="text-xs gap-1">Email Analytics</Button>
@@ -131,6 +136,44 @@ export default async function AnalyticsPage() {
           </CardContent>
         </Card>
       </div>
+
+      <Card>
+        <CardHeader className="pb-3">
+          <CardTitle className="text-base">Campaign Comparison</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+            {campaigns.map((campaign) => (
+              <div key={campaign.id} className="rounded-lg border p-3 text-sm">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <p className="font-medium">{campaign.name}</p>
+                    <p className="text-xs text-[var(--muted-foreground)]">{campaign.campaign_type.replace(/_/g, ' ')}</p>
+                  </div>
+                  <Badge variant={campaign.status === 'active' ? 'default' : 'outline'}>{campaign.status}</Badge>
+                </div>
+                <div className="mt-3 grid grid-cols-3 gap-2 text-center">
+                  <div className="rounded border p-2">
+                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Emails</p>
+                    <p className="text-lg font-bold">{campaign._count.email_logs}</p>
+                  </div>
+                  <div className="rounded border p-2">
+                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Waves</p>
+                    <p className="text-lg font-bold">{campaign._count.outreach_waves}</p>
+                  </div>
+                  <div className="rounded border p-2">
+                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Activity</p>
+                    <p className="text-lg font-bold">{campaign._count.activities}</p>
+                  </div>
+                </div>
+                <Link href={`/campaigns/${campaign.slug}/analytics`}>
+                  <Button variant="outline" size="sm" className="mt-3 gap-1 text-xs">Open Campaign Analytics</Button>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
       {/* ── Pipeline Funnel + ROI ─────────────────────── */}
       <div className="grid gap-6 lg:grid-cols-2">

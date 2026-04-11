@@ -1,6 +1,9 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { ArrowRight } from 'lucide-react';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { prisma } from '@/lib/prisma';
 import { ensureDefaultCampaign } from '@/lib/campaigns';
@@ -44,7 +47,14 @@ export default async function CampaignDetailPage({ params }: { params: Promise<{
           <h1 className="text-2xl font-bold tracking-tight">{campaign.name}</h1>
           <p className="text-sm text-muted-foreground">{campaign.campaign_type.replace(/_/g, ' ')} · owner {campaign.owner}</p>
         </div>
-        <Badge variant={campaign.status === 'active' ? 'default' : 'outline'}>{campaign.status}</Badge>
+        <div className="flex items-center gap-2">
+          <Badge variant={campaign.status === 'active' ? 'default' : 'outline'}>{campaign.status}</Badge>
+          <Link href={`/campaigns/${campaign.slug}/analytics`}>
+            <Button variant="outline" size="sm" className="gap-1.5">
+              Analytics <ArrowRight className="h-3.5 w-3.5" />
+            </Button>
+          </Link>
+        </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-4">

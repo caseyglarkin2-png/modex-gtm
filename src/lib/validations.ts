@@ -101,6 +101,21 @@ export const AddPersonaSchema = z.object({
 });
 export type AddPersonaInput = z.infer<typeof AddPersonaSchema>;
 
+// ── Campaigns ─────────────────────────────────────────
+export const CreateCampaignSchema = z.object({
+  name: z.string().trim().min(3, 'Campaign name is required'),
+  template_key: z.string().trim().min(1).default('trade_show_follow_up'),
+  campaign_type: z.string().trim().min(1).default('trade_show'),
+  status: z.string().trim().min(1).default('draft'),
+  owner: z.string().trim().default('Casey'),
+  target_account_count: z.coerce.number().int().min(0).default(0),
+  start_date: z.string().optional().nullable(),
+  end_date: z.string().optional().nullable(),
+  messaging_angle: z.string().trim().optional().nullable(),
+  key_dates: z.string().trim().optional().nullable(),
+});
+export type CreateCampaignInput = z.infer<typeof CreateCampaignSchema>;
+
 // ── Email Send ────────────────────────────────────────
 export const SendEmailSchema = z.object({
   to: z.string().email('Valid email required'),
