@@ -3,15 +3,12 @@ export const dynamic = 'force-dynamic';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import {
-  getAccounts,
-  getAccountBySlug,
-  getPersonasByAccount,
   getWavesByAccount,
   getMeetingBriefByAccount,
   slugify,
   getAuditRoutes,
 } from '@/lib/data';
-import { dbGetActivitiesByAccount, dbGetMicrositeAccountAnalytics } from '@/lib/db';
+import { dbGetAccountByName, dbGetAccounts, dbGetActivitiesByAccount, dbGetMicrositeAccountAnalytics, dbGetPersonasByAccount } from '@/lib/db';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
@@ -35,16 +32,19 @@ import { EditablePersonaStatus } from '@/components/editable-persona-status';
 import { VoiceScriptButton } from '@/components/voice-script-button';
 import type { RecentMicrositeSession } from '@/lib/microsites/analytics';
 
-export function generateStaticParams() {
-  return getAccounts().map((a) => ({ slug: slugify(a.name) }));
+export async function generateStaticParams() {
+  const accounts = await dbGetAccounts();
+  return accounts.map((a) => ({ slug: slugify(a.name) }));
 }
 
 export default async function AccountDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const account = getAccountBySlug(slug);
+  const accounts = await dbGetAccounts();
+  const matchedAccount = accounts.find((candidate) => slugify(candidate.name) === slug);
+  const account = matchedAccount ? await dbGetAccountByName(matchedAccount.name) : null;
   if (!account) notFound();
 
-  const personas = getPersonasByAccount(account.name);
+  const personas = await dbGetPersonasByAccount(account.name);
   const waves = getWavesByAccount(account.name);
   const brief = getMeetingBriefByAccount(account.name);
   const auditRoutes = getAuditRoutes();
@@ -346,7 +346,7 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                       <p className="mt-1 text-xs text-[var(--muted-foreground)]">Lane: {p.persona_lane} &middot; {p.role_in_deal} &middot; {p.seniority}</p>
                     </div>
                     <div className="flex items-center gap-1.5 shrink-0">
-                      <GeneratorDialog accountName={account.name} personaName={p.name} defaultType="email" />
+                      <GeneratorDialog accountName={account.name} personaName={p.name} personaEmail={p.email ?? undefined} defaultType="email" />
                       <EmailComposer accountName={account.name} personaName={p.name} personaEmail={p.email ?? undefined} />
                       <VoiceScriptButton accountName={account.name} personaName={p.name} />
                       <span className="font-mono text-xs text-[var(--muted-foreground)]">{p.persona_id}</span>

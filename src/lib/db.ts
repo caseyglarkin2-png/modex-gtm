@@ -2,6 +2,7 @@ import { prisma } from './prisma';
 import {
   buildMicrositeAccountAnalytics,
   buildMicrositeAnalyticsSummary,
+  type MicrositeAccountAnalytics,
 } from './microsites/analytics';
 
 // ── Accounts ──────────────────────────────────────────────────────────
@@ -29,6 +30,53 @@ export async function dbGetActivities() {
 
 export async function dbGetActivitiesByAccount(accountName: string) {
   return prisma.activity.findMany({ where: { account_name: accountName }, orderBy: { created_at: 'desc' } });
+}
+
+export async function dbGetMicrositeAccountAnalytics(accountName: string): Promise<MicrositeAccountAnalytics> {
+  const sessions = await prisma.micrositeEngagement.findMany({
+    where: { account_name: accountName },
+    orderBy: { updated_at: 'desc' },
+  });
+
+  return buildMicrositeAccountAnalytics(
+    sessions.map((session) => ({
+      account_name: session.account_name,
+      account_slug: session.account_slug,
+      person_name: session.person_name,
+      person_slug: session.person_slug,
+      path: session.path,
+      sections_viewed: session.sections_viewed,
+      cta_ids: session.cta_ids,
+      variant_history: session.variant_history,
+      scroll_depth_pct: session.scroll_depth_pct,
+      duration_seconds: session.duration_seconds,
+      updated_at: session.updated_at,
+    })),
+  );
+}
+
+export async function dbGetMicrositeEngagements() {
+  return prisma.micrositeEngagement.findMany({ orderBy: { updated_at: 'desc' } });
+}
+
+export async function dbGetMicrositeAnalytics() {
+  const sessions = await dbGetMicrositeEngagements();
+
+  return buildMicrositeAnalyticsSummary(
+    sessions.map((session) => ({
+      account_name: session.account_name,
+      account_slug: session.account_slug,
+      person_name: session.person_name,
+      person_slug: session.person_slug,
+      path: session.path,
+      sections_viewed: session.sections_viewed,
+      cta_ids: session.cta_ids,
+      variant_history: session.variant_history,
+      scroll_depth_pct: session.scroll_depth_pct,
+      duration_seconds: session.duration_seconds,
+      updated_at: session.updated_at,
+    })),
+  );
 }
 
 // ── Meetings ──────────────────────────────────────────────────────────
@@ -74,53 +122,6 @@ export async function dbGetActionableIntel() {
 // ── Mobile Captures ───────────────────────────────────────────────────
 export async function dbGetMobileCaptures() {
   return prisma.mobileCapture.findMany({ orderBy: { captured_at: 'desc' } });
-}
-
-export async function dbGetMicrositeAnalytics() {
-  const engagements = await prisma.micrositeEngagement.findMany({
-    select: {
-      account_name: true,
-      account_slug: true,
-      person_name: true,
-      person_slug: true,
-      path: true,
-      sections_viewed: true,
-      cta_ids: true,
-      variant_history: true,
-      scroll_depth_pct: true,
-      duration_seconds: true,
-      updated_at: true,
-    },
-    orderBy: { updated_at: 'desc' },
-  });
-
-  return buildMicrositeAnalyticsSummary(engagements);
-}
-
-export async function dbGetMicrositeEngagements() {
-  return prisma.micrositeEngagement.findMany({ orderBy: { updated_at: 'desc' } });
-}
-
-export async function dbGetMicrositeAccountAnalytics(accountName: string) {
-  const engagements = await prisma.micrositeEngagement.findMany({
-    where: { account_name: accountName },
-    select: {
-      account_name: true,
-      account_slug: true,
-      person_name: true,
-      person_slug: true,
-      path: true,
-      sections_viewed: true,
-      cta_ids: true,
-      variant_history: true,
-      scroll_depth_pct: true,
-      duration_seconds: true,
-      updated_at: true,
-    },
-    orderBy: { updated_at: 'desc' },
-  });
-
-  return buildMicrositeAccountAnalytics(engagements);
 }
 
 // ── Aggregate Stats (for dashboard / analytics) ──────────────────────

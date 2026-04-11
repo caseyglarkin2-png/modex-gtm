@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import {
   Dialog,
@@ -22,6 +22,7 @@ import { VoicePreviewButton } from '@/components/voice-preview-button';
 import { OnePagerPreview, type OnePagerData, onePagerToHtml } from '@/components/ai/one-pager-preview';
 import { Input } from '@/components/ui/input';
 import type { GenerateContentInput } from '@/lib/validations';
+import { readApiResponse } from '@/lib/api-response';
 
 type ContentType = GenerateContentInput['type'];
 type Tone = GenerateContentInput['tone'];
@@ -30,6 +31,7 @@ type Length = GenerateContentInput['length'];
 interface GeneratorDialogProps {
   accountName: string;
   personaName?: string;
+  personaEmail?: string;
   defaultType?: ContentType;
   onUseContent?: (content: string, type: ContentType) => void;
   trigger?: React.ReactNode;
@@ -59,6 +61,7 @@ const LENGTH_LABELS: Record<Length, string> = {
 export function GeneratorDialog({
   accountName,
   personaName,
+  personaEmail,
   defaultType = 'email',
   onUseContent,
   trigger,
@@ -71,12 +74,18 @@ export function GeneratorDialog({
   const [onePagerData, setOnePagerData] = useState<OnePagerData | null>(null);
   const [loading, setLoading] = useState(false);
   const [previewMode, setPreviewMode] = useState(true);
-  const [sendEmail, setSendEmail] = useState('');
+  const [sendEmail, setSendEmail] = useState(personaEmail ?? '');
   const [sending, setSending] = useState(false);
   const [showSendForm, setShowSendForm] = useState(false);
 
   const isOnePager = type === 'infographic';
   const isSendable = type === 'email' || type === 'follow_up';
+
+  useEffect(() => {
+    if (open) {
+      setSendEmail(personaEmail ?? '');
+    }
+  }, [open, personaEmail]);
 
   async function generate() {
     setLoading(true);
@@ -90,7 +99,7 @@ export function GeneratorDialog({
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ accountName }),
         });
-        const json = await res.json() as { content?: OnePagerData; error?: string };
+        const json = await readApiResponse<{ content?: OnePagerData; error?: string }>(res);
         if (!res.ok) throw new Error(json.error ?? 'Generation failed');
         if (!json.content) throw new Error('Could not parse one-pager content');
         setOnePagerData(json.content);
@@ -100,10 +109,9 @@ export function GeneratorDialog({
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ type, accountName, personaName, tone, length }),
         });
-        const data: unknown = await res.json();
+        const data = await readApiResponse<{ content?: string; error?: string }>(res);
         if (!res.ok) {
-          const err = data as { error?: string };
-          throw new Error(err.error ?? 'Generation failed');
+          throw new Error(data.error ?? 'Generation failed');
         }
         const result = data as { content: string };
         setContent(result.content);
@@ -153,7 +161,7 @@ export function GeneratorDialog({
     try {
       // Extract subject from content (first line often is subject-like)
       const lines = content.trim().split('\n').filter(Boolean);
-      const subjectLine = lines[0]?.replace(/^Subject:\s*/i, '').trim() ?? `From Casey at YardFlow - for ${accountName}`;
+      const subjectLine = lines[0]?.replace(/^Subject:\s*/i, '').trim() ?? `built this with ${accountName} in mind`;
       const bodyText = lines[0]?.toLowerCase().startsWith('subject:') ? lines.slice(1).join('\n').trim() : content.trim();
 
       const res = await fetch('/api/email/send', {
@@ -167,7 +175,7 @@ export function GeneratorDialog({
           personaName,
         }),
       });
-      const json = await res.json() as { error?: string };
+      const json = await readApiResponse<{ error?: string }>(res);
       if (!res.ok) throw new Error(json.error ?? 'Send failed');
       toast.success(`Email sent to ${sendEmail}`);
       setShowSendForm(false);

@@ -15,6 +15,7 @@ import { Label } from '@/components/ui/label';
 import { Mail, Send, Sparkles, Eye, Pencil } from 'lucide-react';
 import { GeneratorDialog } from '@/components/ai/generator-dialog';
 import { VoicePreviewButton } from '@/components/voice-preview-button';
+import { readApiResponse } from '@/lib/api-response';
 
 function buildEmailPreviewHtml(bodyText: string, accountName: string): string {
   const escaped = bodyText
@@ -74,7 +75,7 @@ export function EmailComposer({ accountName, personaName, personaEmail, trigger 
   function handleAIDraft(content: string) {
     setBody(content);
     if (!subject) {
-      setSubject(`FreightRoll x ${accountName} — MODEX 2026`);
+      setSubject(`built this with ${accountName} in mind`);
     }
   }
 
@@ -97,10 +98,9 @@ export function EmailComposer({ accountName, personaName, personaEmail, trigger 
           personaName,
         }),
       });
-      const data: unknown = await res.json();
+      const data = await readApiResponse<{ error?: string }>(res);
       if (!res.ok) {
-        const err = data as { error?: string };
-        throw new Error(err.error ?? 'Send failed');
+        throw new Error(data.error ?? 'Send failed');
       }
       toast.success(`Email sent to ${to}`);
       setOpen(false);

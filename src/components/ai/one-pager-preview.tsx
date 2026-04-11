@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { readApiResponse } from '@/lib/api-response';
 import { Button } from '@/components/ui/button';
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger,
@@ -271,7 +272,7 @@ export function OnePagerDialog({
           accountName,
         }),
       });
-      const json = await res.json() as { error?: string };
+      const json = await readApiResponse<{ error?: string }>(res);
       if (!res.ok) throw new Error(json.error ?? 'Send failed');
       toast.success(`One-pager sent to ${sendEmail}`);
       setShowSendForm(false);

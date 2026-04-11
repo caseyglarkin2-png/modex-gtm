@@ -12,6 +12,7 @@ export interface PromptContext {
   vertical?: string;
   primoAngle?: string;
   parentBrand?: string;
+  micrositeUrl?: string;
   tone: 'professional' | 'casual' | 'bold';
   length: 'short' | 'medium' | 'long';
 }
@@ -32,7 +33,7 @@ export interface OnePagerContext {
 }
 
 export function buildEmailPrompt(ctx: PromptContext): string {
-  return `Write a cold outreach email that reads like a senior operator wrote it personally. Not a template. Not a pitch deck in email form.
+  return `Write a first-touch cold outreach email that reads like a typed Gmail note from a thoughtful operator. Careful. Specific. Humble. No consultant voice.
 
 ${getYardFlowPromptContext()}
 
@@ -43,50 +44,62 @@ Priority: ${ctx.bandLabel ?? 'Tier 1'}
 ${ctx.vertical ? `Vertical: ${ctx.vertical}` : ''}
 ${ctx.primoAngle ? `What makes this account specific: ${ctx.primoAngle}` : ''}
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
+${ctx.micrositeUrl ? `Microsite link available: ${ctx.micrositeUrl}` : 'No microsite link available. Do not invent one.'}
 
-MODEX: April 13-16, Atlanta. YardFlow will be on-site with live users from the network. Prospects can sit with operators running YardFlow across 24 facilities and ask them anything. Suggest meeting windows: Tuesday April 14 at 10am, 1pm, or 3pm. Offer flexibility for other show days. No calendar link. Get them to reply with a time.
+Primary goal: get a reply or a light reaction. Not a meeting ask on touch one.
+Secondary goal: if it fits naturally, make the microsite feel like a useful artifact, not a pitch deck.
 
-Goal: Book a 30-minute meeting at MODEX to walk their yard network and build a board-ready rollout plan.
+STRUCTURE (3 short paragraphs, 70-110 words total):
+1. OPENER (1-2 sentences): Start with a careful observation or hypothesis about THIS account. Use language like "I may be off" or "from the outside" when useful. Sound curious, not certain.
+2. BRIDGE (2-4 sentences): Tie that observation to the yard and dock handoff. Use one proof point only. If a microsite link exists, include one standalone line introducing it plainly: "I put together a short page for [account] here:" then the URL on the next line.
+3. CTA (1 sentence): Ask for a reaction, not a meeting. Examples: "Worth sending the 90-second version?" "Curious if this is even directionally relevant." "If this sits with someone else, who would you point me to?"
 
-STRUCTURE (3 short paragraphs, max 90 words total):
-1. OPENER (1-2 sentences): A specific, concrete observation about THIS company's operations that the reader will recognize as true. Reference their vertical, their facility type, their logistics reality. Not "industrial plants" — name what they move, how they move it, where it breaks.
-2. BRIDGE (2-3 sentences): Connect that reality to the yard constraint. One proof point woven in naturally, not listed. Make the status quo feel expensive. NEVER say "ship 50% more" or any volume percentage. The 48→24 min stat is truck turn time. The real benefit: capture more demand spikes without adding headcount.
-3. ASK (1 sentence): Direct question about meeting at MODEX. Specific times. No hedging.
+Only mention MODEX if it sharpens the note naturally, and never as the main ask.
 
 CRITICAL RULES:
-- Write in short, declarative sentences. No compound sentences with semicolons.
-- Every sentence must be under 20 words.
-- No abstract nouns ("visibility", "optimization", "solution"). Use concrete verbs and specific numbers.
-- Do NOT use the word "throughput" more than once.
-- Do NOT use "This is where" or "That is where" constructions.
-- Do NOT explain what YardFlow is. Let the proof imply the product.
-- The email should feel like someone who has walked their yard is writing to them.
+- Short declarative sentences. No semicolons.
+- No hard calendar ask in the first touch.
+- No "synergies", "unlock", "transform", or similar startup language.
+- No theatrical metaphors like "black hole", "visibility goes to die", or "commercially dangerous" in first-touch email.
+- Do not sound like you have diagnosed their operation from a distance.
+- One proof point max. Never stack stats.
+- NEVER say "ship 50% more" or any volume multiplier. The 48→24 stat is truck turn time.
+- If you include the microsite, do it once and keep the surrounding language understated.
+- Favor language like "I may be off," "from the outside," and "curious if this is relevant" over certainty.
+- If you mention Primo, keep it to one clause and tie it to headcount-neutral throughput, not hype.
+- Avoid sounding urgent for urgency's sake. The note should feel useful and observational.
 
-Output: Only the email body. No subject line. No greeting. No sign-off.`;
+Output: Only the email body. No subject line. No sign-off.`;
 }
 
 export function buildFollowUpEmailPrompt(ctx: PromptContext): string {
-  return `Write a follow-up email. The first outreach got no reply. This one has to land harder.
+  return `Write a follow-up email for a first touch that got no reply. New angle. Same humility. No pressure.
 
 ${getYardFlowPromptContext()}
 
 ${getVoiceGuardrails()}
 
 Target: ${ctx.personaName ?? 'decision maker'} at ${ctx.accountName}${ctx.personaTitle ? ` (${ctx.personaTitle})` : ''}
-Previous: ${ctx.previousMeeting ?? 'cold email sent about yard network standardization ahead of MODEX'}
+Previous: ${ctx.previousMeeting ?? 'cold email sent about yard network standardization'}
 ${ctx.vertical ? `Vertical: ${ctx.vertical}` : ''}
 ${ctx.primoAngle ? `What makes this account specific: ${ctx.primoAngle}` : ''}
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
+${ctx.micrositeUrl ? `Microsite link available: ${ctx.micrositeUrl}` : 'No microsite link available. Do not invent one.'}
 
-STRUCTURE (2 short paragraphs, max 60 words total):
-1. NEW ANGLE (2-3 sentences): Come in from a completely different direction than the first email. Lead with one specific proof point — $1M+ per site, 48→24 min truck turns (NOT volume increase), or the customer quote about capturing additional volume headcount neutral. Make the reader's current state feel more expensive than they realized.
-2. SHARPER ASK (1 sentence): Even more direct than before. One specific time at MODEX.
+STRUCTURE (2-3 short paragraphs, 50-90 words total):
+1. NEW ANGLE (2-3 sentences): Come in from a different operational angle than the first note. Use one fresh symptom or one proof point. Keep the tone helpful, not aggressive.
+2. OPTIONAL ARTIFACT (1-2 sentences): If a microsite link exists and helps, introduce it simply as something you put together for them.
+3. ASK (1 sentence): Soft reaction CTA. No meeting ask unless they have already engaged.
 
-Do NOT reference the first email. Do NOT say "following up" or "circling back". This should read like a separate, independent thought that happened to arrive. Tighter and more urgent than the first touch.
+Do NOT say "following up" or "circling back". This should feel like a separate note.
 
-MODEX: April 13-16, Atlanta. Live YardFlow users will be on-site. Suggest Tuesday April 14. No calendar link.
+MODEX can be mentioned as a light secondary context only. Not the main ask.
 
-Output: Only the email body. No greeting. No sign-off.`;
+If the recipient previously engaged, it is acceptable to ask whether they want the short scorecard version or a quick reaction to the microsite. Do not jump straight to calendar times.
+
+Avoid loaded metaphors or dramatic language. This should sound like a considerate operator making one more relevant point, not pressing for attention.
+
+Output: Only the email body. No subject line. No sign-off.`;
 }
 
 export function buildDMPrompt(ctx: PromptContext): string {

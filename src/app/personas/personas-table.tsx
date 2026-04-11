@@ -74,7 +74,7 @@ const columns: Column<PersonaRow>[] = [
     className: 'w-40',
     render: (p) => (
       <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
-        <GeneratorDialog accountName={p.account} personaName={p.name} defaultType="email" />
+        <GeneratorDialog accountName={p.account} personaName={p.name} personaEmail={p.email ?? undefined} defaultType="email" />
         <EmailComposer accountName={p.account} personaName={p.name} personaEmail={p.email ?? undefined} />
         <VoiceScriptButton accountName={p.account} personaName={p.name} />
       </div>

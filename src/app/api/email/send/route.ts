@@ -3,8 +3,8 @@ import { SendEmailSchema } from '@/lib/validations';
 import { sendEmail } from '@/lib/email/client';
 import { evaluateRecipientEligibility } from '@/lib/email/recipient-guard';
 import { wrapHtml } from '@/lib/email/templates';
+import { sanitizeEmailHtml } from '@/lib/email/sanitize';
 import { rateLimit } from '@/lib/rate-limit';
-import DOMPurify from 'isomorphic-dompurify';
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
@@ -50,12 +50,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: guard.reason }, { status: 400 });
     }
 
-    // Sanitize HTML body to prevent XSS
-    const sanitizedBody = DOMPurify.sanitize(bodyHtml, {
-      ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'a', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'span', 'div'],
-      ALLOWED_ATTR: ['href', 'target', 'rel', 'style'],
-      ALLOW_DATA_ATTR: false,
-    });
+    // Lightweight sanitization to keep email-safe HTML without pulling jsdom into the runtime.
+    const sanitizedBody = sanitizeEmailHtml(bodyHtml);
 
     // Wrap plain text or already-composed HTML into branded template
     const isPlainText = !sanitizedBody.trim().startsWith('<');

@@ -126,27 +126,28 @@ Emotional target (every email must hit at least two):
 - consequential: this matters more than it looks
 - vivid: the reader can see the problem in their own operation
 - credible: backed by deployment proof, not theory
-- provocative: reframes something they thought was fine
-- commercially dangerous: ignoring this has a cost
-- impossible to ignore: the reader cannot unsee the argument
+- thoughtful: sounds like someone trying to understand before prescribing
+- useful: worth replying to even if the timing is wrong
 
 Tone rules:
 - evocative, not theatrical
 - sharp, not snarky
 - intriguing, not vague
-- scary in a grounded way
+- serious in a grounded way
 - no hype
 - no fake friendliness
 - no em dashes (use periods, commas, or line breaks instead)
-- no soft or apologetic CTA language
+- soft CTA is preferred for first-touch email. Ask for a reaction, not a meeting.
+- do not sound apologetic or submissive
 - no template smell
+- for first-touch email, prefer typed-note humility over dramatic framing
 
 Structural rules:
-- lead with tension, not introduction
+- lead with a concrete observation, not introduction
 - open on a truth, risk, or reframe
 - make the current state feel unstable, expensive, or incomplete
 - position YardFlow as the answer without overexplaining
-- make MODEX feel like the fastest path to pressure-test the thesis in person
+- use MODEX only when it sharpens the note naturally. Never make it the default ask in first-touch email.
 - end with a clean, direct question or a single declarative ask
 - every sentence must earn its keep
 - shorter is better. cut anything that does not add tension, proof, or a reason to reply
@@ -156,7 +157,7 @@ ${BANNED_PHRASES.slice(0, 20).map(p => `- "${p}"`).join('\n')}
 ... and any variation of polite filler, SDR template language, or startup enthusiasm.
 
 Strategic language to use when relevant:
-- "the yard is where visibility goes to die"
+- "the yard is the constraint that gets missed"
 - "the network only moves as cleanly as the yard hands it off"
 - "you do not have a digital supply chain if the yard still runs analog"
 - "the variance tax"
@@ -166,8 +167,8 @@ Strategic language to use when relevant:
 - "not a YMS"
 - "deterministic throughput"
 - "tribal knowledge at the gate"
-- "margin that never comes back"
-- "local improvisation disguised as operations"
+- "margin that is hard to see from the outside"
+- "local improvisation in the handoff"
 
 OPENING VARIATION (mandatory, pick ONE approach per email, never repeat across a sequence):
 1. OBSERVATION: Open with a specific, concrete detail about THIS account's operations that sounds observed, not researched. Use the vertical and account context below.
@@ -188,6 +189,9 @@ ANTI-SAMENESS RULES (mandatory):
 - The 48→24 min stat is TRUCK TURN TIME, not freight volume. Never say "50% more volume" or "ship twice as much." The benefit is: faster turns free dock capacity so facilities can capture more demand without adding headcount.
 - Do NOT invent volume percentages or throughput multipliers. Approved: "capture more freight without adding headcount", "absorb demand spikes", "recover dock capacity."
 - The product name and what it does should appear ONCE, briefly, in the second half of the email. Not as a pitch paragraph.
+- Initial email CTA examples that are acceptable: "Worth sending the 90-second version?" "Curious if this is even directionally relevant." "If this sits with someone else, who would you point me to?"
+- Meeting asks are acceptable only after engagement or when the prompt explicitly asks for a meeting-oriented asset.
+- In first-touch email, do not use dramatic metaphors like "black hole", "visibility goes to die", or "impossible to ignore".
 
 Do NOT:
 - include any sign-off (Best, Sincerely, Regards, [Your Name], Casey Larkin)

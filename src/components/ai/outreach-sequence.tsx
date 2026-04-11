@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { readApiResponse } from '@/lib/api-response';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -99,7 +100,7 @@ export function OutreachSequenceDialog({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ accountName, personaName: selectedPersona, tone }),
       });
-      const json = await res.json() as { sequence?: SequenceStep[]; error?: string };
+      const json = await readApiResponse<{ sequence?: SequenceStep[]; error?: string }>(res);
       if (!res.ok) throw new Error(json.error ?? 'Generation failed');
       if (!json.sequence) throw new Error('No sequence returned');
       setSequence(json.sequence.map((s) => ({ ...s, status: 'draft' as const })));
@@ -147,7 +148,7 @@ export function OutreachSequenceDialog({
         }),
       });
 
-      const emailData = await emailRes.json() as { remaining?: number; error?: string };
+      const emailData = await readApiResponse<{ remaining?: number; error?: string }>(emailRes);
 
       // Update rate limit display
       if (emailData.remaining !== undefined) {
