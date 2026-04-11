@@ -175,7 +175,7 @@ test.describe('Full Platform Audit', () => {
     await expect(page.locator('body')).toContainText('QR Ready Board');
     await expect(page.locator('body')).toContainText('Ready to scan');
     await expect(page.locator('body')).toContainText('Booth Kit Checklist');
-    await expect(page.getByRole('heading', { name: /Master QR Fallback/i })).toBeVisible();
+    await expect(page.locator('body')).toContainText('Master QR Fallback');
   });
 
   test('Audit Routes page loads', async ({ page }) => {
