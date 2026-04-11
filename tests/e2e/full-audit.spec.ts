@@ -80,6 +80,8 @@ test.describe('Full Platform Audit', () => {
     await page.goto('/meetings');
     await expect(page.locator('h1').first()).toContainText('Meetings');
     await expect(page.getByRole('button', { name: /Book Meeting/i })).toBeVisible();
+    await expect(page.locator('body')).toContainText('Meeting Prep Queue');
+    await expect(page.locator('body')).toContainText('Upcoming This Week');
   });
 
   test('Personas page: list view', async ({ page }) => {
