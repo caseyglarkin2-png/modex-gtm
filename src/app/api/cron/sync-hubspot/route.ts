@@ -4,9 +4,14 @@ import { prisma } from '@/lib/prisma';
 import { listRecentContacts, upsertContact, type HubSpotContact } from '@/lib/hubspot/contacts';
 import { isHubSpotConfigured } from '@/lib/hubspot/client';
 import { HUBSPOT_SYNC_ENABLED } from '@/lib/feature-flags';
+import { markCronFailure, markCronSkipped, markCronStarted, markCronSuccess } from '@/lib/cron-monitor';
 import * as Sentry from '@sentry/nextjs';
 
 export const dynamic = 'force-dynamic';
+
+const CRON_NAME = 'sync-hubspot';
+const CRON_PATH = '/api/cron/sync-hubspot';
+const CRON_SCHEDULE = '0 */6 * * *';
 
 const HeaderSchema = z.object({
   authorization: z.string().refine(
@@ -27,7 +32,15 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
+  const startedAt = Date.now();
+  await markCronStarted(CRON_NAME, { path: CRON_PATH, schedule: CRON_SCHEDULE }).catch(() => undefined);
+
   if (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED) {
+    await markCronSkipped(CRON_NAME, {
+      path: CRON_PATH,
+      schedule: CRON_SCHEDULE,
+      reason: 'HubSpot sync disabled',
+    }).catch(() => undefined);
     return NextResponse.json({ status: 'skipped', reason: 'HubSpot sync disabled' });
   }
 
@@ -131,9 +144,25 @@ export async function GET(req: NextRequest) {
       });
     }
 
+    await markCronSuccess(CRON_NAME, {
+      path: CRON_PATH,
+      schedule: CRON_SCHEDULE,
+      durationMs: Date.now() - startedAt,
+      message: `Pulled ${stats.pulled}, pushed ${stats.pushed}, errors ${stats.errors}.`,
+      stats,
+    }).catch(() => undefined);
+
     return NextResponse.json({ status: 'ok', stats });
   } catch (error) {
     Sentry.captureException(error);
+    await markCronFailure(CRON_NAME, {
+      path: CRON_PATH,
+      schedule: CRON_SCHEDULE,
+      durationMs: Date.now() - startedAt,
+      error,
+      stats,
+    }).catch(() => undefined);
+
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Sync failed' },
       { status: 500 },

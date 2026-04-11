@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
 
   // Best-effort DB logging for each send
   try {
-    const accountExists = accountName
+    const defaultAccountExists = accountName
       ? await prisma.account.findUnique({ where: { name: accountName }, select: { name: true } })
       : null;
     const accountsContacted = new Set<string>();
@@ -62,9 +62,16 @@ export async function POST(req: NextRequest) {
       const r = results[i];
       const recipient = eligibleRecipients[i];
       const providerMessageId = r.status === 'fulfilled' ? (r.value as { headers?: Record<string, string> })?.headers?.['x-message-id'] ?? null : null;
+      const resolvedAccountName = recipient.accountName ?? accountName ?? '';
+      const resolvedAccountExists = !resolvedAccountName
+        ? null
+        : resolvedAccountName === accountName
+          ? defaultAccountExists
+          : await prisma.account.findUnique({ where: { name: resolvedAccountName }, select: { name: true } }).catch(() => null);
+
       await prisma.emailLog.create({
         data: {
-          account_name: accountName ?? '',
+          account_name: resolvedAccountName,
           persona_name: recipient.personaName ?? null,
           to_email: recipient.to,
           subject,
@@ -75,10 +82,10 @@ export async function POST(req: NextRequest) {
       }).catch(() => { /* individual log failure is non-blocking */ });
 
       // Auto-log activity for each successful send
-      if (r.status === 'fulfilled' && accountName && accountExists) {
+      if (r.status === 'fulfilled' && resolvedAccountName && resolvedAccountExists) {
         await prisma.activity.create({
           data: {
-            account_name: accountName,
+            account_name: resolvedAccountName,
             persona: recipient.personaName ?? null,
             activity_type: 'Email',
             outcome: `Bulk email sent: "${subject}" to ${recipient.to}`,
@@ -88,7 +95,7 @@ export async function POST(req: NextRequest) {
             activity_date: new Date(),
           },
         }).catch(() => {});
-        if (accountName) accountsContacted.add(accountName);
+        accountsContacted.add(resolvedAccountName);
       }
     }
 

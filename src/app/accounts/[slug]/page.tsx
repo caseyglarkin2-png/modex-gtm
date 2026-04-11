@@ -25,12 +25,14 @@ import { GeneratorDialog } from '@/components/ai/generator-dialog';
 import { EmailComposer } from '@/components/email/composer';
 import { OnePagerDialog } from '@/components/ai/one-pager-preview';
 import { OutreachSequenceDialog } from '@/components/ai/outreach-sequence';
+import { OutreachWizard } from '@/components/outreach-wizard';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { AddPersonaDialog } from '@/components/add-persona-dialog';
 import { EditableStatus } from '@/components/editable-status';
 import { EditablePersonaStatus } from '@/components/editable-persona-status';
 import { VoiceScriptButton } from '@/components/voice-script-button';
 import type { RecentMicrositeSession } from '@/lib/microsites/analytics';
+import { ensureMicrositeForAccount } from '@/lib/microsites/ensure-microsite';
 
 export async function generateStaticParams() {
   const accounts = await dbGetAccounts();
@@ -59,6 +61,7 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
     nextStepDueLabel: activity.next_step_due ? formatActivityDate(activity.next_step_due) : '',
   }));
   const micrositeOverviewPath = `/for/${slug}`;
+  const micrositeInfo = ensureMicrositeForAccount(account.name);
 
   const scoreDims = [
     { label: 'ICP Fit', value: account.icp_fit, weight: 30 },
@@ -96,6 +99,22 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                   <Button size="sm" className="gap-1.5 bg-blue-600 text-white hover:bg-blue-700">
                     <FileText className="h-3.5 w-3.5" />
                     Generate One-Pager
+                  </Button>
+                }
+              />
+              <OutreachWizard
+                accountName={account.name}
+                micrositeUrl={micrositeInfo.url}
+                personas={personas.map((p) => ({
+                  name: p.name,
+                  title: p.title ?? undefined,
+                  priority: p.priority,
+                  email: p.email ?? undefined,
+                }))}
+                trigger={
+                  <Button size="sm" className="gap-1.5 bg-cyan-600 text-white hover:bg-cyan-700">
+                    <Activity className="h-3.5 w-3.5" />
+                    Launch Outreach
                   </Button>
                 }
               />

@@ -9,11 +9,11 @@ function envBool(key: string, defaultVal: boolean): boolean {
   return val.toLowerCase() !== 'false' && val !== '0';
 }
 
-/** Gates HubSpot logging in sendEmail()/sendBulk(). Default: false (enable after Sprint 1). */
-export const HUBSPOT_LOGGING_ENABLED = envBool('HUBSPOT_LOGGING_ENABLED', false);
+/** Gates HubSpot logging in sendEmail()/sendBulk(). Default: true. */
+export const HUBSPOT_LOGGING_ENABLED = envBool('HUBSPOT_LOGGING_ENABLED', true);
 
-/** Gates HubSpot sync cron routes. Default: false (enable after Sprint 1). */
-export const HUBSPOT_SYNC_ENABLED = envBool('HUBSPOT_SYNC_ENABLED', false);
+/** Gates HubSpot sync cron routes. Default: true. */
+export const HUBSPOT_SYNC_ENABLED = envBool('HUBSPOT_SYNC_ENABLED', true);
 
-/** Gates inbox polling cron. Default: false (enable after Sprint 2). */
-export const INBOX_POLLING_ENABLED = envBool('INBOX_POLLING_ENABLED', false);
+/** Gates inbox polling cron. Default: true. */
+export const INBOX_POLLING_ENABLED = envBool('INBOX_POLLING_ENABLED', true);

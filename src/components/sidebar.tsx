@@ -45,6 +45,7 @@ const NAV_SECTIONS = [
     label: 'Outreach',
     items: [
       { href: '/waves', label: 'Outreach Waves', icon: Waves },
+      { href: '/campaigns', label: 'Campaigns', icon: Rocket },
       { href: '/waves/campaign', label: 'Campaign HQ', icon: Rocket },
       { href: '/briefs', label: 'Meeting Briefs', icon: FileText },
       { href: '/search', label: 'Search Strings', icon: Search },
@@ -66,6 +67,7 @@ const NAV_SECTIONS = [
       { href: '/activities', label: 'Activities', icon: Activity },
       { href: '/meetings', label: 'Meetings', icon: CalendarCheck },
       { href: '/analytics', label: 'Analytics', icon: BarChart3 },
+      { href: '/admin/crons', label: 'Cron Health', icon: Activity },
     ],
   },
   {

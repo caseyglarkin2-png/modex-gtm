@@ -5,7 +5,8 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Send, Loader2, CheckCircle, XCircle, Zap, Users } from 'lucide-react';
+import { Send, Loader2, CheckCircle, XCircle, Zap, Users, Link2 } from 'lucide-react';
+import { getMicrositeUrl } from '@/lib/site-url';
 
 interface Recipient {
   accountName: string;
@@ -17,6 +18,14 @@ interface Recipient {
 
 interface BulkSendPanelProps {
   recipients: Recipient[];
+}
+
+function slugifyAccountName(value: string): string {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 }
 
 export function BulkSendPanel({ recipients }: BulkSendPanelProps) {
@@ -46,6 +55,19 @@ export function BulkSendPanel({ recipients }: BulkSendPanelProps) {
   }, [validRecipients]);
 
   const clearAll = useCallback(() => setSelected(new Set()), []);
+
+  function insertMicrositeLink() {
+    const anchorAccount = validRecipients.find((recipient) => selected.has(recipient.email))?.accountName ?? validRecipients[0]?.accountName;
+    if (!anchorAccount) {
+      toast.error('Select a recipient first');
+      return;
+    }
+
+    const url = getMicrositeUrl(slugifyAccountName(anchorAccount));
+    const snippet = `Private brief: ${url}`;
+    setBodyHtml((current) => (current.includes(url) ? current : `${current.trim()}\n\n${snippet}`.trim()));
+    toast.success('Microsite link inserted');
+  }
 
   async function generateForSelected() {
     if (selected.size === 0) { toast.error('Select at least one recipient'); return; }
@@ -87,7 +109,7 @@ export function BulkSendPanel({ recipients }: BulkSendPanelProps) {
     try {
       const selectedRecipients = validRecipients
         .filter((r) => selected.has(r.email))
-        .map((r) => ({ to: r.email, personaName: r.personaName }));
+        .map((r) => ({ to: r.email, personaName: r.personaName, accountName: r.accountName }));
 
       const res = await fetch('/api/email/send-bulk', {
         method: 'POST',
@@ -187,6 +209,9 @@ export function BulkSendPanel({ recipients }: BulkSendPanelProps) {
             >
               {generating ? <Loader2 className="h-3 w-3 animate-spin" /> : <Zap className="h-3 w-3" />}
               AI Draft
+            </Button>
+            <Button variant="outline" size="sm" className="h-8 text-xs gap-1" onClick={insertMicrositeLink}>
+              <Link2 className="h-3 w-3" /> Insert Link
             </Button>
           </div>
           <textarea

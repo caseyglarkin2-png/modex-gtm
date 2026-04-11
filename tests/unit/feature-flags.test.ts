@@ -11,9 +11,9 @@ describe('feature-flags', () => {
 
   it('returns defaults when env vars are not set', async () => {
     const flags = await import('@/lib/feature-flags');
-    expect(flags.HUBSPOT_LOGGING_ENABLED).toBe(false);
-    expect(flags.HUBSPOT_SYNC_ENABLED).toBe(false);
-    expect(flags.INBOX_POLLING_ENABLED).toBe(false);
+    expect(flags.HUBSPOT_LOGGING_ENABLED).toBe(true);
+    expect(flags.HUBSPOT_SYNC_ENABLED).toBe(true);
+    expect(flags.INBOX_POLLING_ENABLED).toBe(true);
   });
 
   it('returns true when env var is "true"', async () => {
@@ -37,7 +37,7 @@ describe('feature-flags', () => {
   it('treats empty string as default', async () => {
     process.env.HUBSPOT_LOGGING_ENABLED = '';
     const flags = await import('@/lib/feature-flags');
-    expect(flags.HUBSPOT_LOGGING_ENABLED).toBe(false);
+    expect(flags.HUBSPOT_LOGGING_ENABLED).toBe(true);
   });
 
   it('treats any truthy string as true', async () => {

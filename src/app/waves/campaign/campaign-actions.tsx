@@ -4,10 +4,11 @@ import { useState, useRef, useEffect } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Zap, Copy, Send, RefreshCw, ExternalLink, CheckCircle, Pencil, X, Check, ChevronDown, ChevronUp, MessageSquare, Phone, FileText, Sparkles } from 'lucide-react';
+import { Zap, Copy, Send, RefreshCw, ExternalLink, CheckCircle, Pencil, X, Check, ChevronDown, ChevronUp, MessageSquare, Phone, FileText, Sparkles, Link2 } from 'lucide-react';
 import { GeneratorDialog } from '@/components/ai/generator-dialog';
 import { VoiceScriptButton } from '@/components/voice-script-button';
 import { VoicePreviewButton } from '@/components/voice-preview-button';
+import { getMicrositeUrl } from '@/lib/site-url';
 
 interface SequenceStep {
   step: string;
@@ -30,6 +31,14 @@ const STEP_BADGE_STYLES: Record<string, string> = {
   follow_up_2: 'bg-violet-500/15 text-violet-700',
   breakup: 'bg-neutral-500/15 text-neutral-700',
 };
+
+function slugifyAccountName(value: string): string {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
 
 interface CampaignActionsProps {
   accountName: string;
@@ -111,6 +120,27 @@ export function CampaignActions({
 
   function cancelEdit() {
     setEditingStep(null);
+  }
+
+  function buildMicrositeSnippet() {
+    const url = auditUrl || getMicrositeUrl(slugifyAccountName(accountName));
+    return `Private brief: ${url}`;
+  }
+
+  function insertMicrositeLink(stepName: string) {
+    const snippet = buildMicrositeSnippet();
+    setSequence((prev) => prev.map((step) => (
+      step.step === stepName && !step.body.includes(snippet)
+        ? { ...step, body: `${step.body.trim()}\n\n${snippet}` }
+        : step
+    )));
+    toast.success('Microsite link inserted');
+  }
+
+  function insertMicrositeLinkIntoEditor() {
+    const snippet = buildMicrositeSnippet();
+    setEditBody((current) => (current.includes(snippet) ? current : `${current.trim()}\n\n${snippet}`));
+    toast.success('Microsite link inserted');
   }
 
   async function sendStep(step: SequenceStep) {
@@ -262,7 +292,10 @@ export function CampaignActions({
                             className="mt-0.5 w-full rounded border bg-[var(--background)] px-2 py-1.5 text-xs leading-relaxed focus:outline-none focus:ring-1 focus:ring-cyan-500 resize-none"
                           />
                         </div>
-                        <div className="flex items-center gap-1.5">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <Button variant="outline" size="sm" className="h-6 text-[10px] gap-1" onClick={insertMicrositeLinkIntoEditor}>
+                            <Link2 className="h-3 w-3" /> Insert Link
+                          </Button>
                           <Button size="sm" className="h-6 text-[10px] gap-1" onClick={() => { saveEdit(step.step); sendStep({ ...step, subject: editSubject, body: editBody }); }} disabled={sending === step.step || !personaEmail}>
                             {sending === step.step ? <RefreshCw className="h-3 w-3 animate-spin" /> : <Send className="h-3 w-3" />}
                             Approve & Send
@@ -290,6 +323,9 @@ export function CampaignActions({
                               </Button>
                               <Button variant="outline" size="sm" className="h-6 text-[10px] gap-1" onClick={() => startEdit(step)}>
                                 <Pencil className="h-3 w-3" /> Edit
+                              </Button>
+                              <Button variant="outline" size="sm" className="h-6 text-[10px] gap-1" onClick={() => insertMicrositeLink(step.step)}>
+                                <Link2 className="h-3 w-3" /> Insert Link
                               </Button>
                             </>
                           )}

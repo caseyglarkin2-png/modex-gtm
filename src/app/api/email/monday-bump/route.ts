@@ -4,6 +4,7 @@ import { PrismaClient } from '@prisma/client';
 import { sendEmail } from '@/lib/email/client';
 import { rateLimit } from '@/lib/rate-limit';
 import { firstNameFromEmail } from '@/lib/contact-standard';
+import { markCronFailure, markCronSkipped, markCronStarted, markCronSuccess } from '@/lib/cron-monitor';
 
 export const dynamic = 'force-dynamic';
 
@@ -21,6 +22,9 @@ const QuerySchema = z.object({
 const BANNED_DOMAINS = ['dannon.com', 'danone.com', 'bluetriton.com', 'yardflow.ai'];
 const BATCH_SIZE = 25;
 const RATE_LIMIT_MS = 6000;
+const CRON_NAME = 'monday-bump';
+const CRON_PATH = '/api/email/monday-bump';
+const CRON_SCHEDULE = '5 11 * * 1';
 
 const BUMP_BODIES = [
   (firstName: string) =>
@@ -122,121 +126,162 @@ async function handle(req: NextRequest) {
     return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
   }
 
-  const sinceDate = parsed.data.since ? new Date(parsed.data.since) : new Date(Date.now() - 48 * 60 * 60 * 1000);
-  const targetBatch = parsed.data.batch ?? null;
-  const isDryRun = parsed.data.dryRun ?? false;
-  const campaignEmails = await prisma.emailLog.findMany({
-    where: {
-      created_at: { gte: sinceDate },
-      provider_message_id: { not: null },
-      status: { in: ['sent', 'delivered', 'opened'] },
-    },
-    select: {
-      id: true,
-      to_email: true,
-      subject: true,
-      account_name: true,
-      persona_name: true,
-      provider_message_id: true,
-    },
-    orderBy: { created_at: 'asc' },
-  });
+  const startedAt = Date.now();
+  await markCronStarted(CRON_NAME, { path: CRON_PATH, schedule: CRON_SCHEDULE }).catch(() => undefined);
 
-  const bouncedEmails = await prisma.emailLog.findMany({
-    where: {
-      to_email: { in: campaignEmails.map(e => e.to_email) },
-      status: { in: ['bounced', 'complained'] },
-    },
-    select: { to_email: true },
-  });
-  const bouncedSet = new Set(bouncedEmails.map(e => e.to_email));
+  try {
+    const sinceDate = parsed.data.since ? new Date(parsed.data.since) : new Date(Date.now() - 48 * 60 * 60 * 1000);
+    const targetBatch = parsed.data.batch ?? null;
+    const isDryRun = parsed.data.dryRun ?? false;
+    const campaignEmails = await prisma.emailLog.findMany({
+      where: {
+        created_at: { gte: sinceDate },
+        provider_message_id: { not: null },
+        status: { in: ['sent', 'delivered', 'opened'] },
+      },
+      select: {
+        id: true,
+        to_email: true,
+        subject: true,
+        account_name: true,
+        persona_name: true,
+        provider_message_id: true,
+      },
+      orderBy: { created_at: 'asc' },
+    });
 
-  const eligible = campaignEmails.filter(e => {
-    const domain = e.to_email.split('@')[1]?.toLowerCase();
-    if (BANNED_DOMAINS.some(d => domain?.includes(d))) return false;
-    if (bouncedSet.has(e.to_email)) return false;
-    return true;
-  });
+    const bouncedEmails = await prisma.emailLog.findMany({
+      where: {
+        to_email: { in: campaignEmails.map(e => e.to_email) },
+        status: { in: ['bounced', 'complained'] },
+      },
+      select: { to_email: true },
+    });
+    const bouncedSet = new Set(bouncedEmails.map(e => e.to_email));
 
-  const bumps = eligible.map((email, index) => {
-    const firstName = resolveGreetingName(email.persona_name, email.to_email);
-    const bumpVariant = index % BUMP_BODIES.length;
-    const body = BUMP_BODIES[bumpVariant](firstName);
+    const eligible = campaignEmails.filter(e => {
+      const domain = e.to_email.split('@')[1]?.toLowerCase();
+      if (BANNED_DOMAINS.some(d => domain?.includes(d))) return false;
+      if (bouncedSet.has(e.to_email)) return false;
+      return true;
+    });
 
-    return {
-      to: email.to_email,
-      subject: `Re: ${email.subject}`,
-      body,
-      accountName: email.account_name || '',
-      personaName: email.persona_name || '',
-      originalMessageId: email.provider_message_id!,
-    };
-  });
+    const bumps = eligible.map((email, index) => {
+      const firstName = resolveGreetingName(email.persona_name, email.to_email);
+      const bumpVariant = index % BUMP_BODIES.length;
+      const body = BUMP_BODIES[bumpVariant](firstName);
 
-  if (isDryRun) {
+      return {
+        to: email.to_email,
+        subject: `Re: ${email.subject}`,
+        body,
+        accountName: email.account_name || '',
+        personaName: email.persona_name || '',
+        originalMessageId: email.provider_message_id!,
+      };
+    });
+
+    if (isDryRun) {
+      const stats = {
+        found: campaignEmails.length,
+        eligible: bumps.length,
+        excludedBounced: bouncedSet.size,
+        batches: Math.ceil(bumps.length / BATCH_SIZE),
+      };
+      await markCronSkipped(CRON_NAME, {
+        path: CRON_PATH,
+        schedule: CRON_SCHEDULE,
+        reason: 'Dry run only',
+        stats,
+      }).catch(() => undefined);
+      return NextResponse.json({
+        mode: 'dry-run',
+        since: sinceDate.toISOString(),
+        ...stats,
+        sample: bumps[0] ?? null,
+      });
+    }
+
+    let sent = 0;
+    let failed = 0;
+    const totalBatches = Math.ceil(bumps.length / BATCH_SIZE);
+
+    for (let b = 0; b < totalBatches; b++) {
+      const batchNum = b + 1;
+      if (targetBatch && batchNum !== targetBatch) continue;
+      const batch = bumps.slice(b * BATCH_SIZE, (b + 1) * BATCH_SIZE);
+
+      for (const bump of batch) {
+        const html = wrapHtml(bump.body, bump.accountName);
+
+        try {
+          const response = await sendEmail({
+            to: bump.to,
+            subject: bump.subject,
+            html,
+          });
+
+          const messageId = response.headers?.['x-message-id'] ?? null;
+
+          await prisma.emailLog.create({
+            data: {
+              account_name: bump.accountName,
+              persona_name: bump.personaName || null,
+              to_email: bump.to,
+              subject: bump.subject,
+              body_html: html,
+              status: 'sent',
+              provider_message_id: messageId,
+            },
+          });
+
+          sent++;
+        } catch {
+          failed++;
+        }
+
+        await sleep(RATE_LIMIT_MS);
+      }
+    }
+
+    await markCronSuccess(CRON_NAME, {
+      path: CRON_PATH,
+      schedule: CRON_SCHEDULE,
+      durationMs: Date.now() - startedAt,
+      message: `Sent ${sent} Monday bumps. ${failed} failed.`,
+      stats: {
+        found: campaignEmails.length,
+        eligible: bumps.length,
+        excludedBounced: bouncedSet.size,
+        batches: totalBatches,
+        sent,
+        failed,
+      },
+    }).catch(() => undefined);
+
     return NextResponse.json({
-      mode: 'dry-run',
+      mode: 'live',
       since: sinceDate.toISOString(),
       found: campaignEmails.length,
       eligible: bumps.length,
       excludedBounced: bouncedSet.size,
-      batches: Math.ceil(bumps.length / BATCH_SIZE),
-      sample: bumps[0] ?? null,
+      batches: totalBatches,
+      sent,
+      failed,
     });
+  } catch (error) {
+    await markCronFailure(CRON_NAME, {
+      path: CRON_PATH,
+      schedule: CRON_SCHEDULE,
+      durationMs: Date.now() - startedAt,
+      error,
+    }).catch(() => undefined);
+
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : 'Monday bump failed' },
+      { status: 500 },
+    );
   }
-
-  let sent = 0;
-  let failed = 0;
-  const totalBatches = Math.ceil(bumps.length / BATCH_SIZE);
-
-  for (let b = 0; b < totalBatches; b++) {
-    const batchNum = b + 1;
-    if (targetBatch && batchNum !== targetBatch) continue;
-    const batch = bumps.slice(b * BATCH_SIZE, (b + 1) * BATCH_SIZE);
-
-    for (const bump of batch) {
-      const html = wrapHtml(bump.body, bump.accountName);
-
-      try {
-        const response = await sendEmail({
-          to: bump.to,
-          subject: bump.subject,
-          html,
-        });
-
-        const messageId = response.headers?.['x-message-id'] ?? null;
-
-        await prisma.emailLog.create({
-          data: {
-            account_name: bump.accountName,
-            persona_name: bump.personaName || null,
-            to_email: bump.to,
-            subject: bump.subject,
-            body_html: html,
-            status: 'sent',
-            provider_message_id: messageId,
-          },
-        });
-
-        sent++;
-      } catch {
-        failed++;
-      }
-
-      await sleep(RATE_LIMIT_MS);
-    }
-  }
-
-  return NextResponse.json({
-    mode: 'live',
-    since: sinceDate.toISOString(),
-    found: campaignEmails.length,
-    eligible: bumps.length,
-    excludedBounced: bouncedSet.size,
-    batches: totalBatches,
-    sent,
-    failed,
-  });
 }
 
 export async function GET(req: NextRequest) {

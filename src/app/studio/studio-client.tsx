@@ -33,8 +33,10 @@ import {
   HandMetal,
   Check,
   Clock,
+  Link2,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { getMicrositeUrl } from '@/lib/site-url';
 import { OnePagerPreview } from '@/components/ai/one-pager-preview';
 import type { OnePagerData } from '@/components/ai/one-pager-preview';
 import { Input } from '@/components/ui/input';
@@ -74,6 +76,14 @@ interface AssetPackResult {
 interface StudioClientProps {
   accounts: StudioAccount[];
   personasByAccount: Record<string, StudioPersona[]>;
+}
+
+function slugifyAccountName(value: string): string {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 }
 
 export function StudioClient({ accounts, personasByAccount }: StudioClientProps) {
@@ -946,7 +956,7 @@ function OutreachSequenceInline({
         body: JSON.stringify({
           to: recipientEmail,
           subject: step.subject,
-          body: step.body,
+          bodyHtml: step.body,
           accountName,
           personaName: selectedPersona,
         }),
@@ -979,6 +989,19 @@ function OutreachSequenceInline({
     setSequence((prev) =>
       prev.map((s) => s.step === stepName ? { ...s, subject: newSubject } : s)
     );
+  }
+
+  function insertMicrositeLink(stepName: string) {
+    const url = getMicrositeUrl(slugifyAccountName(accountName));
+    const snippet = `Private brief: ${url}`;
+    setSequence((prev) =>
+      prev.map((step) =>
+        step.step === stepName && !step.body.includes(url)
+          ? { ...step, body: `${step.body.trim()}\n\n${snippet}` }
+          : step,
+      ),
+    );
+    toast.success('Microsite link inserted');
   }
 
   return (
@@ -1119,6 +1142,9 @@ function OutreachSequenceInline({
                       </Button>
                       <Button variant="outline" size="sm" onClick={() => copyStep(step)} className="gap-1.5">
                         <Copy className="h-3.5 w-3.5" /> Copy
+                      </Button>
+                      <Button variant="outline" size="sm" onClick={() => insertMicrositeLink(step.step)} className="gap-1.5">
+                        <Link2 className="h-3.5 w-3.5" /> Insert Link
                       </Button>
                     </div>
                   </div>
