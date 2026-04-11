@@ -29,6 +29,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { NotificationBell } from '@/components/notification-bell';
 import { useSidebar } from '@/components/sidebar-context';
 
 const NAV_SECTIONS = [
@@ -98,7 +99,10 @@ function NavContent({ pathname, onNavigate }: { pathname: string; onNavigate?: (
           </div>
           <span>Modex RevOps</span>
         </Link>
-        <ThemeToggle />
+        <div className="flex items-center gap-1">
+          <NotificationBell />
+          <ThemeToggle />
+        </div>
       </div>
       <nav className="flex-1 overflow-y-auto px-3 py-4">
         {NAV_SECTIONS.map((section) => (
@@ -213,6 +217,7 @@ export function Sidebar() {
           <span className="truncate">{pageLabel}</span>
         </Link>
         <div className="ml-auto flex items-center gap-1">
+          <NotificationBell />
           <Button
             variant="ghost"
             size="icon"

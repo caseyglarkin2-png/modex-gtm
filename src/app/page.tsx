@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getOutreachWaves, getMeetingBriefs } from '@/lib/data';
 import { dbGetAccounts, dbGetActivities, dbGetMeetings, dbGetDashboardStats } from '@/lib/db';
+import { prisma } from '@/lib/prisma';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -8,7 +9,7 @@ import { BandBadge } from '@/components/band-badge';
 import { StatusBadge } from '@/components/status-badge';
 import { EmptyState } from '@/components/empty-state';
 import { AutoRefresh } from '@/components/auto-refresh';
-import { Building2, Users, Waves as WavesIcon, FileText, CalendarCheck, Smartphone, Activity, ArrowRight, TrendingUp, BarChart3 } from 'lucide-react';
+import { Building2, Users, Waves as WavesIcon, FileText, CalendarCheck, Smartphone, Activity, ArrowRight, TrendingUp, BarChart3, Mail, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export const dynamic = 'force-dynamic';
@@ -41,8 +42,17 @@ function isUpcoming(dateStr: string, days: number): boolean {
 }
 
 export default async function DashboardPage() {
-  const [dbAccounts, dbActivities, dbMeetings, stats] = await Promise.all([
+  const [dbAccounts, dbActivities, dbMeetings, stats, recentReplies, emailStats] = await Promise.all([
     dbGetAccounts(), dbGetActivities(), dbGetMeetings(), dbGetDashboardStats(),
+    prisma.notification.findMany({
+      where: { type: 'reply' },
+      orderBy: { created_at: 'desc' },
+      take: 5,
+    }),
+    prisma.emailLog.aggregate({
+      _count: { id: true },
+      _sum: { open_count: true, reply_count: true },
+    }),
   ]);
   const waves = getOutreachWaves();
   const briefs = getMeetingBriefs();
@@ -190,6 +200,63 @@ export default async function DashboardPage() {
                 <Smartphone className="h-5 w-5 text-[var(--muted-foreground)]" />
               </div>
             </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Email Stats + Recent Replies */}
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="flex items-center gap-2 text-base">
+              <Mail className="h-4 w-4" /> Email Performance
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-3 gap-4 text-center">
+              <div>
+                <p className="text-2xl font-bold">{emailStats._count.id}</p>
+                <p className="text-xs text-[var(--muted-foreground)]">Sent</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold">{emailStats._sum.open_count ?? 0}</p>
+                <p className="text-xs text-[var(--muted-foreground)]">Opens</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold">{emailStats._sum.reply_count ?? 0}</p>
+                <p className="text-xs text-[var(--muted-foreground)]">Replies</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="flex items-center gap-2 text-base">
+              <MessageSquare className="h-4 w-4" /> Recent Replies
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {recentReplies.length === 0 ? (
+              <p className="py-4 text-center text-sm text-[var(--muted-foreground)]">
+                No replies yet. Keep sending.
+              </p>
+            ) : (
+              <ul className="space-y-2">
+                {recentReplies.map((r) => (
+                  <li key={r.id} className="flex items-start gap-2 rounded-md border p-2 text-sm">
+                    <span className="mt-0.5 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-green-500" />
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate font-medium">{r.persona_email || 'Unknown'}</p>
+                      {r.subject && <p className="truncate text-xs text-[var(--muted-foreground)]">{r.subject}</p>}
+                      {r.preview && <p className="mt-0.5 line-clamp-1 text-xs text-[var(--muted-foreground)]">{r.preview}</p>}
+                    </div>
+                    <span className="flex-shrink-0 text-[10px] text-[var(--muted-foreground)]">
+                      {new Date(r.created_at).toLocaleDateString()}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </CardContent>
         </Card>
       </div>

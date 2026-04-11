@@ -1,4 +1,55 @@
-export { auth as middleware } from '@/lib/auth';
+import { NextRequest, NextResponse } from 'next/server';
+import { auth } from '@/lib/auth';
+
+const PUBLIC_DOMAIN = 'yardflow.ai';
+
+// Paths allowed on the public yardflow.ai domain
+const PUBLIC_DOMAIN_ALLOWLIST = ['/for', '/unsubscribe', '/api/webhooks', '/api/unsubscribe', '/api/microsites'];
+
+function isPublicDomainPath(pathname: string): boolean {
+  return PUBLIC_DOMAIN_ALLOWLIST.some(
+    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
+  );
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function middleware(request: NextRequest) {
+  const host = request.headers.get('host') || '';
+  const { pathname } = request.nextUrl;
+
+  // yardflow.ai domain: public microsites only, no auth
+  if (host.includes(PUBLIC_DOMAIN)) {
+    // Allow static assets
+    if (pathname.startsWith('/_next') || pathname === '/favicon.ico' || pathname === '/robots.txt') {
+      return NextResponse.next();
+    }
+
+    // Allow paths on the allowlist
+    if (isPublicDomainPath(pathname)) {
+      return NextResponse.next();
+    }
+
+    // Everything else on yardflow.ai → 404
+    return new NextResponse('Not Found', { status: 404 });
+  }
+
+  // Internal app domain: redirect unauthenticated microsite access to yardflow.ai
+  if (pathname.startsWith('/for/')) {
+    const micrositeBaseUrl = process.env.NEXT_PUBLIC_MICROSITE_BASE_URL;
+    if (micrositeBaseUrl) {
+      // Check if authenticated - if not, redirect to public domain
+      const session = await auth();
+      if (!session) {
+        return NextResponse.redirect(`${micrositeBaseUrl}${pathname}`);
+      }
+    }
+    // Authenticated users can preview microsites on internal domain
+    return NextResponse.next();
+  }
+
+  // Internal domain: delegate to NextAuth auth middleware
+  return (auth as unknown as (req: NextRequest) => Promise<NextResponse>)(request);
+}
 
 export const config = {
   matcher: [
@@ -6,9 +57,10 @@ export const config = {
      * Match all request paths except:
      * - /login (auth page)
      * - /api/auth (NextAuth routes)
-     * - /api/webhooks (inbound webhooks from Resend etc.)
+     * - /api/webhooks (inbound webhooks from HubSpot, etc.)
      * - /api/unsubscribe (public unsubscribe endpoint)
      * - /api/microsites/track (public microsite engagement endpoint)
+     * - /api/cron (Vercel cron endpoints with their own auth)
      * - /unsubscribe (public unsubscribe page)
      * - /proposal (public proposal decks)
      * - /api/proposal (public proposal data API)
@@ -17,6 +69,6 @@ export const config = {
      * - /_next (Next.js internals)
      * - /manifest.json, /robots.txt, /favicon.ico (static assets)
      */
-    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/proposal|unsubscribe|proposal|for|opengraph-image|twitter-image|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
+    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/cron|api/proposal|unsubscribe|proposal|for|opengraph-image|twitter-image|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
   ],
 };

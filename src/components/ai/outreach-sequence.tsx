@@ -16,9 +16,10 @@ import {
 import { Label } from '@/components/ui/label';
 import {
   Zap, RefreshCw, Send, Copy, ChevronDown, Mail, MessageSquare, Phone, HandMetal,
-  Check, Clock, ArrowRight,
+  Check, Clock, ArrowRight, Link2,
 } from 'lucide-react';
 import { EmailPreviewModal } from '@/components/email/email-preview-modal';
+import { getMicrositeUrl } from '@/lib/site-url';
 
 interface SequenceStep {
   step: string;
@@ -66,6 +67,14 @@ const TONE_LABELS: Record<Tone, string> = {
   conversational: 'Casual',
   provocative: 'Bold',
 };
+
+function slugifyAccountName(value: string): string {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
 
 export function OutreachSequenceDialog({
   accountName,
@@ -192,6 +201,25 @@ export function OutreachSequenceDialog({
     setSequence((prev) =>
       prev.map((s) => s.step === stepName ? { ...s, subject: newSubject } : s)
     );
+  }
+
+  function insertMicrositeLink(stepName: string) {
+    if (!accountName.trim()) {
+      toast.error('Account context is required to insert a microsite link');
+      return;
+    }
+
+    const url = getMicrositeUrl(slugifyAccountName(accountName));
+    const snippet = `Private brief: ${url}`;
+
+    setSequence((prev) =>
+      prev.map((s) =>
+        s.step === stepName
+          ? { ...s, body: s.body.includes(url) ? s.body : `${s.body.trim()}\n\n${snippet}` }
+          : s,
+      ),
+    );
+    toast.success('Microsite link inserted');
   }
 
   // Shared content for both dialog and inline modes
@@ -325,7 +353,7 @@ export function OutreachSequenceDialog({
                         onChange={(e) => updateStepBody(step.step, e.target.value)}
                       />
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-wrap">
                       <Button
                         size="sm"
                         onClick={() => sendStep(step)}
@@ -337,6 +365,9 @@ export function OutreachSequenceDialog({
                       </Button>
                       <Button variant="outline" size="sm" onClick={() => copyStep(step)} className="gap-1.5">
                         <Copy className="h-3.5 w-3.5" /> Copy
+                      </Button>
+                      <Button variant="outline" size="sm" onClick={() => insertMicrositeLink(step.step)} className="gap-1.5">
+                        <Link2 className="h-3.5 w-3.5" /> Insert Link
                       </Button>
                     </div>
                   </div>

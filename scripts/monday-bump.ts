@@ -15,11 +15,10 @@
  */
 
 import { PrismaClient } from '@prisma/client';
-import { Resend } from 'resend';
 import { firstNameFromEmail } from '../src/lib/contact-standard';
+import { sendEmail } from '../src/lib/email/client';
 
 const prisma = new PrismaClient();
-const resend = new Resend(process.env.RESEND_API_KEY);
 const FROM = `${process.env.FROM_NAME ?? 'Casey Larkin - YardFlow'} <${process.env.FROM_EMAIL ?? 'casey@freightroll.com'}>`;
 const RATE_LIMIT_MS = 6000;
 const BATCH_SIZE = 25;
@@ -245,10 +244,9 @@ async function main() {
         // Resend message ID format for In-Reply-To header
         const messageId = `<${bump.originalMessageId}@resend.dev>`;
 
-        const { data, error } = await resend.emails.send({
-          from: FROM,
+        const result = await sendEmail({
           to: bump.to,
-          reply_to: 'casey@freightroll.com',
+          replyTo: 'casey@freightroll.com',
           subject: bump.subject,
           html,
           text: bump.body,
@@ -260,13 +258,6 @@ async function main() {
           },
         });
 
-        if (error || !data?.id) {
-          console.log(`  FAIL: ${bump.to} - ${error?.message ?? 'no ID returned'}`);
-          failed++;
-          await sleep(RATE_LIMIT_MS);
-          continue;
-        }
-
         // Log to DB
         await prisma.emailLog.create({
           data: {
@@ -276,12 +267,12 @@ async function main() {
             subject: bump.subject,
             body_html: html,
             status: 'sent',
-            provider_message_id: data.id,
+            provider_message_id: result.headers['x-message-id'] || null,
           },
         });
 
         sent++;
-        console.log(`  BUMP: ${bump.to} (${bump.accountName}) - ${data.id}`);
+        console.log(`  BUMP: ${bump.to} (${bump.accountName}) - ${result.headers['x-message-id'] || 'gmail'}`);
 
       } catch (err) {
         const msg = err instanceof Error ? err.message : String(err);

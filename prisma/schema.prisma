@@ -37,6 +37,7 @@ model Account {
   next_action      String?
   due_date         DateTime?
   notes            String?
+  hubspot_company_id String?  @unique
   created_at       DateTime @default(now())
   updated_at       DateTime @updatedAt
 
@@ -93,6 +94,7 @@ model Persona {
   is_contact_ready  Boolean  @default(false)
   do_not_contact    Boolean  @default(false)
   contact_standard_version String @default("2026-03-28")
+  hubspot_contact_id String?  @unique
   last_enriched_at  DateTime?
   created_at        DateTime @default(now())
   updated_at        DateTime @updatedAt
@@ -232,6 +234,7 @@ model MicrositeEngagement {
   last_cta_id      String?
   scroll_depth_pct Int      @default(0)
   duration_seconds Int      @default(0)
+  source_domain    String?
   metadata         Json?
   created_at       DateTime @default(now())
   updated_at       DateTime @updatedAt
@@ -294,6 +297,7 @@ model MobileCapture {
   band            String?
   followup_template String?
   followup_status String?
+  synced_at       DateTime?
   audit_url       String?
   source_proof    String?
   created_at      DateTime @default(now())
@@ -302,6 +306,7 @@ model MobileCapture {
   account Account @relation(fields: [account_name], references: [name])
 
   @@index([account_name])
+  @@index([synced_at])
   @@map("mobile_captures")
 }
 
@@ -375,6 +380,9 @@ model EmailLog {
   status        String   @default("sent") // sent | delivered | opened | clicked | bounced
   provider_message_id String?
   generated_content_id Int?
+  hubspot_engagement_id String?
+  thread_id     String?
+  reply_count   Int      @default(0)
   opened_at     DateTime?
   clicked_at    DateTime?
   delivered_at  DateTime?
@@ -386,6 +394,7 @@ model EmailLog {
   @@index([account_name])
   @@index([status])
   @@index([provider_message_id])
+  @@index([thread_id])
   @@map("email_logs")
 }
 
@@ -408,4 +417,29 @@ model WebhookEvent {
   @@index([id])
   @@index([processed_at])
   @@map("webhook_events")
+}
+
+model Notification {
+  id           Int      @id @default(autoincrement())
+  type         String   // reply | open | click | bounce | meeting_booked | hot_engagement
+  account_name String?
+  persona_email String?
+  subject      String?
+  preview      String?
+  source_id    String?  // e.g. email_log id, webhook event id
+  read         Boolean  @default(false)
+  created_at   DateTime @default(now())
+
+  @@index([read])
+  @@index([type])
+  @@index([created_at])
+  @@map("notifications")
+}
+
+model SystemConfig {
+  key        String   @id
+  value      String
+  updated_at DateTime @updatedAt
+
+  @@map("system_config")
 }

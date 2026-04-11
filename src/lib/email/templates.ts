@@ -4,12 +4,15 @@
  * Clean typography, subtle brand, executive-level signature.
  */
 
+import { generateToken } from './unsubscribe-token';
+
 const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
 /** Build RFC 8058 List-Unsubscribe headers for one-click unsubscribe (Gmail/Yahoo mandate) */
 export function listUnsubscribeHeaders(recipientEmail: string): Record<string, string> {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://modex-gtm.vercel.app';
-  const url = `${baseUrl}/unsubscribe?email=${encodeURIComponent(recipientEmail)}`;
+  const token = generateToken(recipientEmail);
+  const url = `${baseUrl}/unsubscribe?email=${encodeURIComponent(recipientEmail)}&token=${token}`;
   return {
     'List-Unsubscribe': `<${url}>`,
     'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
@@ -38,10 +41,10 @@ export function wrapHtml(bodyText: string, accountName: string, recipientEmail?:
     .replace(/\n\n/g, '</p><p style="margin:0 0 14px 0; padding:0;">')
     .replace(/\n/g, '<br />');
 
-  // Build unsubscribe link (CAN-SPAM compliance)
+  // Build unsubscribe link (CAN-SPAM compliance, HMAC-signed)
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://modex-gtm.vercel.app';
   const unsubscribeUrl = recipientEmail
-    ? `${baseUrl}/unsubscribe?email=${encodeURIComponent(recipientEmail)}${emailLogId ? `&id=${emailLogId}` : ''}`
+    ? `${baseUrl}/unsubscribe?email=${encodeURIComponent(recipientEmail)}&token=${generateToken(recipientEmail)}${emailLogId ? `&id=${emailLogId}` : ''}`
     : `${baseUrl}/unsubscribe`;
 
   return `<!DOCTYPE html>

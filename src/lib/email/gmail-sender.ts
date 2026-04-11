@@ -22,6 +22,9 @@ interface GmailSendPayload {
   bcc?: string;
   subject: string;
   html: string;
+  text?: string;
+  replyTo?: string;
+  headers?: Record<string, string>;
 }
 
 interface OAuthTokenResponse {
@@ -40,7 +43,7 @@ function base64Url(input: string): string {
 
 function buildMimeMessage(payload: GmailSendPayload): string {
   const boundary = `boundary_${Date.now()}_${Math.random().toString(36).slice(2)}`;
-  const plainText = payload.html
+  const plainText = (payload.text ?? payload.html)
     .replace(/<br\s*\/?>/gi, '\n')
     .replace(/<\/p>/gi, '\n\n')
     .replace(/<[^>]+>/g, '')
@@ -50,12 +53,20 @@ function buildMimeMessage(payload: GmailSendPayload): string {
     .replace(/&gt;/g, '>')
     .trim();
 
+  const customHeaders = Object.entries(payload.headers ?? {}).map(([key, value]) => {
+    const safeKey = key.replace(/[\r\n:]+/g, '').trim();
+    const safeValue = String(value).replace(/[\r\n]+/g, ' ').trim();
+    return `${safeKey}: ${safeValue}`;
+  });
+
   const headers = [
     `From: ${FROM_NAME} <${FROM_EMAIL}>`,
     `To: ${payload.to}`,
     payload.cc ? `Cc: ${payload.cc}` : null,
     payload.bcc ? `Bcc: ${payload.bcc}` : null,
+    payload.replyTo ? `Reply-To: ${payload.replyTo}` : null,
     `Subject: ${payload.subject}`,
+    ...customHeaders,
     'MIME-Version: 1.0',
     `Content-Type: multipart/alternative; boundary="${boundary}"`,
   ].filter(Boolean);

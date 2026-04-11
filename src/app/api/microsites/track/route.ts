@@ -21,6 +21,7 @@ async function parseRequestBody(req: NextRequest): Promise<unknown> {
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
+  const sourceDomain = req.headers.get('host') ?? undefined;
   const { ok, remaining } = rateLimit(`microsite-track:${ip}`);
   if (!ok) {
     return NextResponse.json({ error: 'Rate limit exceeded', remaining: 0 }, { status: 429 });
@@ -72,6 +73,7 @@ export async function POST(req: NextRequest) {
             scroll_depth_pct: merged.scroll_depth_pct,
             duration_seconds: merged.duration_seconds,
             metadata: merged.metadata,
+            source_domain: sourceDomain,
           },
         })
       : await prisma.micrositeEngagement.create({
@@ -90,6 +92,7 @@ export async function POST(req: NextRequest) {
             scroll_depth_pct: merged.scroll_depth_pct,
             duration_seconds: merged.duration_seconds,
             metadata: merged.metadata,
+            source_domain: sourceDomain,
           },
         });
 

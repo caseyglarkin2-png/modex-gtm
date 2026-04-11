@@ -1,7 +1,7 @@
-# Modex RevOps OS — Project Guidelines
+# YardFlow RevOps OS — Project Guidelines
 
 ## Mission
-Generate qualified meetings and pipeline for **YardFlow by FreightRoll** targeting MODEX 2026 (April 13-16, Atlanta). Every feature, every line of code, every outreach action serves one goal: **book meetings with decision-makers at the 20 target accounts**.
+Year-round revenue operations platform for **YardFlow by FreightRoll**. Casey operates out of this platform all day — every campaign, every outreach motion, every pipeline review runs through here. MODEX 2026 follow-up is the first campaign, not the only one. Every feature serves one goal: **generate qualified meetings and pipeline proactively, not reactively**.
 
 ## Stack
 - Next.js 16 (App Router) + React 19 + TailwindCSS 4 + shadcn/ui
@@ -10,6 +10,15 @@ Generate qualified meetings and pipeline for **YardFlow by FreightRoll** targeti
 - AI: Gemini 2.5-flash-lite (primary) → OpenAI gpt-4o-mini (fallback)
 - Auth: NextAuth v5 + Google OAuth
 - Microsites: `/for/[account]` — personalized account pages with person variants
+- HubSpot: `@hubspot/api-client` (planned) — system of record for contacts/companies. Emails Object API (`/crm/v3/objects/emails`) for send logging. NOT Timeline Events API. NOT deprecated Engagements API.
+
+## HubSpot Integration (In Progress — see `docs/roadmaps/hubspot-integration-sprint-plan.md`)
+- **Status**: Sprint plan approved 2026-04-11. No HubSpot code deployed yet.
+- **Architecture**: `src/lib/hubspot/` — client, contacts, companies, emails modules. All calls wrapped in try/catch with graceful degradation (app works without HubSpot).
+- **DB fields (planned)**: `hubspot_contact_id` on Persona, `hubspot_company_id` on Account.
+- **Send tracking**: `sendEmail()` and `sendBulk()` in `src/lib/email/client.ts` will auto-log to HubSpot Emails Object API. This is transparent to all 12 send surfaces.
+- **Shoot from anywhere**: 12 send surfaces (6 existing + 6 new). Never consolidate into a single wizard. EmailComposer is the standard compose dialog reused everywhere.
+- **yardflow.ai**: Will host microsites (CNAME to Vercel). Domain is burned for email sending only.
 
 ## Architecture
 - `src/lib/data.ts` — JSON sync accessors (client/static pages)

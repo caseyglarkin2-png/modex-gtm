@@ -11,6 +11,7 @@ export default function UnsubscribePage() {
   const searchParams = useSearchParams();
   const email = searchParams.get('email') || '';
   const emailLogId = searchParams.get('id') || '';
+  const token = searchParams.get('token') || '';
 
   const [unsubscribed, setUnsubscribed] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -28,6 +29,7 @@ export default function UnsubscribePage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email,
+          token: token || undefined,
           emailLogId: emailLogId ? parseInt(emailLogId) : undefined,
         }),
       });

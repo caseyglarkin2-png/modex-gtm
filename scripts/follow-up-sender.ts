@@ -2,10 +2,9 @@
 // Usage: TIER=all BATCH_SIZE=50 npx ts-node scripts/follow-up-sender.ts
 
 const { PrismaClient } = require('@prisma/client');
-const { Resend } = require('resend');
+const { sendEmail } = require('../src/lib/email/client');
 
 const prisma = new PrismaClient();
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://modex-gtm.vercel.app';
 const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
@@ -213,43 +212,37 @@ async function main() {
 
     try {
       const htmlContent = wrapHtml(body, c.account_name || 'the team', c.to_email);
-      const result = await resend.emails.send({
-        from: 'Casey Larkin <casey@freightroll.com>',
+      const result = await sendEmail({
         to: c.to_email,
         subject,
         html: htmlContent,
         text: stripHtml(body),
-        reply_to: 'casey@freightroll.com',
+        replyTo: 'casey@freightroll.com',
         headers: {
           ...listUnsubHeaders(c.to_email),
           ...(c.provider_message_id ? {
             'In-Reply-To': c.provider_message_id,
-            'References': c.provider_message_id
-          } : {})
-        }
+            'References': c.provider_message_id,
+          } : {}),
+        },
       });
 
-      if (result.error) {
-        console.log(`❌ ${i+1}. ${(c.account_name || '').padEnd(22)} | ${c.to_email} | ERROR: ${(result.error as any).message}`);
-        failed++;
-      } else {
-        await prisma.emailLog.create({
-          data: {
-            account_name: c.account_name || 'Unknown',
-            persona_name: c.persona_name || 'Unknown',
-            to_email: c.to_email,
-            subject,
-            body_html: body,
-            status: 'sent',
-            sent_at: new Date(),
-            provider_message_id: result.data?.id
-          }
-        });
-        const tierLabel = tier1 ? 'T1' : `T2:${vertical}`;
-        console.log(`✅ ${String(i+1).padStart(2)}. [${tierLabel.padEnd(16)}] ${(c.account_name || '').padEnd(22)} | ${c.to_email}`);
-        sent++;
-        tierCounts[tierLabel] = (tierCounts[tierLabel] || 0) + 1;
-      }
+      await prisma.emailLog.create({
+        data: {
+          account_name: c.account_name || 'Unknown',
+          persona_name: c.persona_name || 'Unknown',
+          to_email: c.to_email,
+          subject,
+          body_html: body,
+          status: 'sent',
+          sent_at: new Date(),
+          provider_message_id: result.headers['x-message-id'] || null,
+        }
+      });
+      const tierLabel = tier1 ? 'T1' : `T2:${vertical}`;
+      console.log(`✅ ${String(i+1).padStart(2)}. [${tierLabel.padEnd(16)}] ${(c.account_name || '').padEnd(22)} | ${c.to_email}`);
+      sent++;
+      tierCounts[tierLabel] = (tierCounts[tierLabel] || 0) + 1;
     } catch (e: any) {
       console.log(`❌ ${i+1}. ${c.account_name} | ERROR: ${e.message}`);
       failed++;

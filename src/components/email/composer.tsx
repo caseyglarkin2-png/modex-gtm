@@ -12,10 +12,11 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Mail, Send, Sparkles, Eye, Pencil } from 'lucide-react';
+import { Link2, Mail, Send, Sparkles, Eye, Pencil } from 'lucide-react';
 import { GeneratorDialog } from '@/components/ai/generator-dialog';
 import { VoicePreviewButton } from '@/components/voice-preview-button';
 import { readApiResponse } from '@/lib/api-response';
+import { getMicrositeUrl } from '@/lib/site-url';
 
 function buildEmailPreviewHtml(bodyText: string, accountName: string): string {
   const escaped = bodyText
@@ -61,10 +62,23 @@ interface EmailComposerProps {
   personaName?: string;
   personaEmail?: string;
   trigger?: React.ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
-export function EmailComposer({ accountName, personaName, personaEmail, trigger }: EmailComposerProps) {
-  const [open, setOpen] = useState(false);
+function slugifyAccountName(value: string): string {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+export function EmailComposer({ accountName, personaName, personaEmail, trigger, open: controlledOpen, onOpenChange }: EmailComposerProps) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const open = controlledOpen ?? internalOpen;
+  const setOpen = onOpenChange ?? setInternalOpen;
+  const showTrigger = trigger !== undefined || controlledOpen === undefined;
   const [to, setTo] = useState(personaEmail ?? '');
   const [cc, setCc] = useState('');
   const [subject, setSubject] = useState('');
@@ -77,6 +91,22 @@ export function EmailComposer({ accountName, personaName, personaEmail, trigger 
     if (!subject) {
       setSubject(`built this with ${accountName} in mind`);
     }
+  }
+
+  function insertMicrositeLink() {
+    if (!accountName.trim()) {
+      toast.error('Open compose from an account page to insert a microsite link');
+      return;
+    }
+
+    const url = getMicrositeUrl(slugifyAccountName(accountName));
+    const snippet = `Private brief: ${url}`;
+
+    setBody((current) => {
+      if (current.includes(url)) return current;
+      return current.trim() ? `${current.trim()}\n\n${snippet}` : snippet;
+    });
+    toast.success('Microsite link inserted');
   }
 
   async function handleSend() {
@@ -117,14 +147,16 @@ export function EmailComposer({ accountName, personaName, personaEmail, trigger 
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        {trigger ?? (
-          <Button variant="outline" size="sm" className="gap-1.5">
-            <Mail className="h-3.5 w-3.5" />
-            Email
-          </Button>
-        )}
-      </DialogTrigger>
+      {showTrigger ? (
+        <DialogTrigger asChild>
+          {trigger ?? (
+            <Button variant="outline" size="sm" className="gap-1.5">
+              <Mail className="h-3.5 w-3.5" />
+              Email
+            </Button>
+          )}
+        </DialogTrigger>
+      ) : null}
       <DialogContent className="max-w-lg max-h-[85vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
@@ -164,6 +196,16 @@ export function EmailComposer({ accountName, personaName, personaEmail, trigger 
                     </Button>
                   }
                 />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  className="h-6 gap-1 text-xs text-cyan-600 hover:text-cyan-700"
+                  onClick={insertMicrositeLink}
+                  disabled={!accountName.trim()}
+                >
+                  <Link2 className="h-3 w-3" /> Insert Link
+                </Button>
                 {body.trim() && (
                   <>
                     <button
@@ -203,7 +245,7 @@ export function EmailComposer({ accountName, personaName, personaEmail, trigger 
         <div className="flex justify-end gap-2 pt-2">
           {body.trim() && <VoicePreviewButton text={body} label="Listen" />}
           <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
-          <Button onClick={handleSend} disabled={sending} className="gap-1.5">
+          <Button onClick={handleSend} disabled={sending || !to.trim()} className="gap-1.5">
             <Send className="h-3.5 w-3.5" />
             {sending ? 'Sending...' : 'Send'}
           </Button>

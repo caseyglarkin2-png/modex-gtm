@@ -11,10 +11,9 @@
 require('dotenv').config({ path: '.env.local' });
 
 const { PrismaClient } = require('@prisma/client');
-const { Resend } = require('resend');
+const { sendEmail } = require('../src/lib/email/client');
 
 const prisma = new PrismaClient();
-const resend = new Resend(process.env.RESEND_API_KEY);
 const DRY_RUN = process.env.DRY_RUN === '1';
 
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://modex-gtm.vercel.app';
@@ -294,20 +293,14 @@ async function sendEmail(
   }
 
   const htmlContent = wrapHtml(paragraphs, to);
-  const result = await resend.emails.send({
-    from: 'Casey Larkin <casey@freightroll.com>',
+  const result = await sendEmail({
     to,
     subject,
     html: htmlContent,
     text: toPlainText(paragraphs),
-    reply_to: 'casey@freightroll.com',
+    replyTo: 'casey@freightroll.com',
     headers: listUnsubHeaders(to),
   });
-
-  if (result.error) {
-    console.log(`❌ ${label} | ${to} | ${(result.error as any).message}`);
-    return false;
-  }
 
   await prisma.emailLog.create({
     data: {
@@ -318,7 +311,7 @@ async function sendEmail(
       body_html: htmlContent,
       status: 'sent',
       sent_at: new Date(),
-      provider_message_id: result.data?.id,
+      provider_message_id: result.headers['x-message-id'] || null,
     },
   });
   return true;

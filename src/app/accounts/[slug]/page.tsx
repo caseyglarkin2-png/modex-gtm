@@ -137,6 +137,17 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
               <span className="text-[var(--muted-foreground)]">Meeting:</span>
               <EditableStatus accountName={account.name} field="meeting_status" currentValue={account.meeting_status} />
             </div>
+            {account.hubspot_company_id && (
+              <a
+                href={`https://app.hubspot.com/contacts/${process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID || ''}/company/${account.hubspot_company_id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-sm text-[var(--primary)] hover:underline"
+              >
+                <ExternalLink className="h-3.5 w-3.5" />
+                View in HubSpot
+              </a>
+            )}
           </div>
 
           {/* Score Dimensions */}

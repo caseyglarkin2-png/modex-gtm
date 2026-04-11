@@ -1,28 +1,47 @@
 import { Breadcrumb } from '@/components/breadcrumb';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Mail, Eye, AlertTriangle, CheckCircle } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Mail, Eye, AlertTriangle, CheckCircle, MessageSquare } from 'lucide-react';
 import { prisma } from '@/lib/prisma';
+import { EmailAnalyticsClient } from './email-analytics-client';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Email Analytics' };
 
 export default async function EmailAnalyticsPage() {
-  const emails = await prisma.emailLog.findMany({
-    orderBy: { sent_at: 'desc' },
-    take: 100,
-  });
+  const [emails, totalCount, replyCount] = await Promise.all([
+    prisma.emailLog.findMany({
+      orderBy: { sent_at: 'desc' },
+      take: 500,
+    }),
+    prisma.emailLog.count(),
+    prisma.notification.count({ where: { type: 'reply' } }),
+  ]);
 
   const kpis = {
-    totalSent: emails.length,
+    totalSent: totalCount,
     delivered: emails.filter((e) => e.status === 'delivered' || e.status === 'sent').length,
     bounced: emails.filter((e) => e.status === 'bounced').length,
     opened: emails.filter((e) => e.status === 'opened').length,
+    replies: replyCount,
   };
 
   const deliveryRate = kpis.totalSent > 0 ? ((kpis.delivered / kpis.totalSent) * 100).toFixed(1) : '0.0';
   const bounceRate = kpis.totalSent > 0 ? ((kpis.bounced / kpis.totalSent) * 100).toFixed(1) : '0.0';
   const openRate = kpis.delivered > 0 ? ((kpis.opened / kpis.delivered) * 100).toFixed(1) : '0.0';
+
+  const serializedEmails = emails.map((e) => ({
+    id: e.id,
+    to_email: e.to_email,
+    subject: e.subject,
+    status: e.status,
+    account_name: e.account_name,
+    persona_name: e.persona_name,
+    sent_at: e.sent_at.toISOString(),
+    opened_at: e.opened_at?.toISOString() ?? null,
+    thread_id: e.thread_id,
+    reply_count: e.reply_count,
+    hubspot_engagement_id: e.hubspot_engagement_id,
+  }));
 
   return (
     <div className="space-y-6">
@@ -32,13 +51,13 @@ export default async function EmailAnalyticsPage() {
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Email Analytics</h1>
           <p className="text-sm text-muted-foreground">
-            Track all emails sent from the platform
+            Track all emails sent from the platform. {totalCount} total.
           </p>
         </div>
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
         <Card>
           <CardContent className="p-5">
             <div className="flex items-center justify-between">
@@ -87,6 +106,20 @@ export default async function EmailAnalyticsPage() {
           <CardContent className="p-5">
             <div className="flex items-center justify-between">
               <div>
+                <p className="text-sm text-muted-foreground">Replies</p>
+                <p className="mt-1 text-3xl font-bold">{kpis.replies}</p>
+              </div>
+              <div className="rounded-lg bg-cyan-500/10 p-2.5">
+                <MessageSquare className="h-5 w-5 text-cyan-500" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-5">
+            <div className="flex items-center justify-between">
+              <div>
                 <p className="text-sm text-muted-foreground">Bounce Rate</p>
                 <p className={`mt-1 text-3xl font-bold ${parseFloat(bounceRate) > 5 ? 'text-red-500' : ''}`}>
                   {bounceRate}%
@@ -101,50 +134,8 @@ export default async function EmailAnalyticsPage() {
         </Card>
       </div>
 
-      {/* Recent Emails Table */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Recent Emails</CardTitle>
-        </CardHeader>
-        <CardContent>
-          {emails.length === 0 ? (
-            <p className="text-sm text-muted-foreground py-8 text-center">
-              No emails sent yet. Generate a sequence in Studio and send your first email!
-            </p>
-          ) : (
-            <div className="space-y-3">
-              {emails.map((email) => (
-                <div
-                  key={email.id}
-                  className="rounded-lg border border-input p-4 hover:bg-accent/50 transition-colors"
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="space-y-1 flex-1">
-                      <div className="flex items-center gap-2">
-                        <p className="font-medium text-sm">{email.subject}</p>
-                        <Badge variant={
-                          email.status === 'bounced' ? 'destructive' :
-                          email.status === 'opened' ? 'default' :
-                          'secondary'
-                        } className="text-xs">
-                          {email.status}
-                        </Badge>
-                      </div>
-                      <p className="text-xs text-muted-foreground">
-                        To: {email.to_email} · {email.account_name}
-                        {email.persona_name && ` · ${email.persona_name}`}
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        {new Date(email.sent_at).toLocaleString()}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </CardContent>
-      </Card>
+      {/* Email Table with Filters + Row Actions */}
+      <EmailAnalyticsClient emails={serializedEmails} />
     </div>
   );
 }
