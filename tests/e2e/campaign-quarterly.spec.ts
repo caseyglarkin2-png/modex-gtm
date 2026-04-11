@@ -37,4 +37,7 @@ test('quarterly review and campaign analytics pages load', async ({ page }) => {
   await expect(page.locator('body')).toContainText('Cadence & Automation');
   await expect(page.locator('body')).toContainText('Pause Drip');
   await expect(page.locator('body')).toContainText('Reset Queue');
+  await expect(page.locator('body')).toContainText('Campaign Settings');
+  await expect(page.locator('body')).toContainText('Save Settings');
+  await expect(page.locator('body')).toContainText('Danger Zone');
 });

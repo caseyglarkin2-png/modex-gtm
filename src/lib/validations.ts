@@ -117,6 +117,17 @@ export const CreateCampaignSchema = z.object({
 });
 export type CreateCampaignInput = z.infer<typeof CreateCampaignSchema>;
 
+export const UpdateCampaignSettingsSchema = z.object({
+  name: z.string().trim().min(3, 'Campaign name is required'),
+  owner: z.string().trim().min(1).default('Casey'),
+  status: z.enum(['draft', 'active', 'paused', 'completed']).default('draft'),
+  target_account_count: z.coerce.number().int().min(0).default(0),
+  messaging_angle: z.string().trim().optional().nullable(),
+  touch_count: z.coerce.number().int().min(1).max(12).default(4),
+  suggested_intervals: z.string().trim().min(1, 'Intervals are required'),
+});
+export type UpdateCampaignSettingsInput = z.infer<typeof UpdateCampaignSettingsSchema>;
+
 // ── Email Send ────────────────────────────────────────
 export const SendEmailSchema = z.object({
   to: z.string().email('Valid email required'),

@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { prisma } from '@/lib/prisma';
 import { ensureDefaultCampaign } from '@/lib/campaigns';
 import { CampaignControls } from './campaign-controls';
+import { CampaignSettingsForm } from './campaign-settings-form';
 
 export const dynamic = 'force-dynamic';
 
@@ -93,6 +94,25 @@ export default async function CampaignDetailPage({ params }: { params: Promise<{
           </CardContent>
         </Card>
       </div>
+
+      <Card>
+        <CardHeader className="pb-2"><CardTitle className="text-sm">Campaign Settings</CardTitle></CardHeader>
+        <CardContent>
+          <CampaignSettingsForm
+            slug={campaign.slug}
+            name={campaign.name}
+            owner={campaign.owner}
+            status={campaign.status as 'draft' | 'active' | 'paused' | 'completed'}
+            targetAccountCount={campaign.target_account_count}
+            messagingAngle={campaign.messaging_angle ?? ''}
+            touchCount={Number(campaignSettings.touchCount ?? 4)}
+            suggestedIntervals={Array.isArray(campaignSettings.suggestedIntervals)
+              ? (campaignSettings.suggestedIntervals as Array<number | string>).join(', ')
+              : '0, 3, 7, 14'}
+            isSystemDefault={campaign.slug === 'modex-2026-follow-up'}
+          />
+        </CardContent>
+      </Card>
 
       <div className="grid gap-4 lg:grid-cols-2">
         <Card>

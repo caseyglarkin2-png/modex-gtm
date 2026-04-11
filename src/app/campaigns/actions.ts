@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
-import { CreateCampaignSchema } from '@/lib/validations';
+import { CreateCampaignSchema, UpdateCampaignSettingsSchema, type UpdateCampaignSettingsInput } from '@/lib/validations';
 import { getCampaignTemplate } from '@/lib/campaigns/templates';
 
 function extractCampaignSettings(keyDates: unknown) {
@@ -35,6 +35,14 @@ function parseOptionalDate(value?: string | null) {
   if (!value) return null;
   const date = new Date(`${value}T00:00:00Z`);
   return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function parseSuggestedIntervals(input: string) {
+  const values = input
+    .split(',')
+    .map((value) => Number(value.trim()))
+    .filter((value) => Number.isFinite(value) && value >= 0);
+  return values.length > 0 ? values : [0, 3, 7, 14];
 }
 
 export async function createCampaignAction(formData: FormData) {
@@ -154,4 +162,62 @@ export async function resetCampaignDripQueueAction(slug: string) {
   revalidatePath(`/campaigns/${slug}`);
   revalidatePath('/admin/crons');
   return { success: true, cleared: deleted.count };
+}
+
+export async function updateCampaignSettingsAction(slug: string, input: UpdateCampaignSettingsInput) {
+  const parsed = UpdateCampaignSettingsSchema.safeParse(input);
+  if (!parsed.success) {
+    return { success: false, error: parsed.error.issues[0]?.message ?? 'Invalid campaign settings' };
+  }
+
+  const campaign = await prisma.campaign.findUnique({ where: { slug }, select: { key_dates: true } });
+  if (!campaign) return { success: false, error: 'Campaign not found' };
+
+  const settings = extractCampaignSettings(campaign.key_dates);
+  const intervals = parseSuggestedIntervals(parsed.data.suggested_intervals);
+
+  await prisma.campaign.update({
+    where: { slug },
+    data: {
+      name: parsed.data.name,
+      owner: parsed.data.owner,
+      status: parsed.data.status,
+      target_account_count: parsed.data.target_account_count,
+      messaging_angle: parsed.data.messaging_angle || null,
+      key_dates: {
+        ...settings,
+        touchCount: parsed.data.touch_count,
+        suggestedIntervals: intervals,
+      },
+    },
+  });
+
+  revalidatePath('/campaigns');
+  revalidatePath(`/campaigns/${slug}`);
+  revalidatePath(`/campaigns/${slug}/analytics`);
+  revalidatePath('/analytics');
+
+  return { success: true };
+}
+
+export async function deleteCampaignAction(slug: string, confirmationName: string) {
+  const campaign = await prisma.campaign.findUnique({ where: { slug }, select: { id: true, name: true } });
+  if (!campaign) return { success: false, error: 'Campaign not found' };
+  if (slug === 'modex-2026-follow-up') {
+    return { success: false, error: 'The default MODEX campaign cannot be deleted from this screen' };
+  }
+  if (confirmationName.trim() !== campaign.name) {
+    return { success: false, error: 'Type the exact campaign name to confirm deletion' };
+  }
+
+  await prisma.outreachWave.updateMany({ where: { campaign_id: campaign.id }, data: { campaign_id: null } });
+  await prisma.emailLog.updateMany({ where: { campaign_id: campaign.id }, data: { campaign_id: null } });
+  await prisma.activity.updateMany({ where: { campaign_id: campaign.id }, data: { campaign_id: null } });
+  await prisma.generatedContent.updateMany({ where: { campaign_id: campaign.id }, data: { campaign_id: null } });
+  await prisma.campaign.delete({ where: { id: campaign.id } });
+
+  revalidatePath('/campaigns');
+  revalidatePath('/analytics');
+  revalidatePath('/analytics/quarterly');
+  return { success: true };
 }
