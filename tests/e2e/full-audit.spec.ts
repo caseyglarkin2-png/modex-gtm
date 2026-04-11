@@ -25,6 +25,8 @@ test.describe('Full Platform Audit', () => {
     await expect(page.locator('h1')).toContainText('Dashboard');
     await expect(page.locator('body')).toContainText('Target');
     await expect(page.locator('body')).toContainText('Pipeline');
+    await expect(page.locator('body')).toContainText('Execution Pulse');
+    await expect(page.locator('body')).toContainText("Today's Focus");
   });
 
   test('Accounts page: table, search, add account', async ({ page }) => {

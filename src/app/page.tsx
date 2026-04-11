@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getOutreachWaves, getMeetingBriefs } from '@/lib/data';
+import { getOutreachWaves, getMeetingBriefs, slugify } from '@/lib/data';
 import { dbGetAccounts, dbGetActivities, dbGetMeetings, dbGetDashboardStats } from '@/lib/db';
 import { prisma } from '@/lib/prisma';
 import { Breadcrumb } from '@/components/breadcrumb';
@@ -39,6 +39,24 @@ function isUpcoming(dateStr: string, days: number): boolean {
   const cutoff = new Date(now);
   cutoff.setDate(now.getDate() + days);
   return d >= now && d <= cutoff;
+}
+
+function startOfDay(value: Date) {
+  const next = new Date(value);
+  next.setHours(0, 0, 0, 0);
+  return next;
+}
+
+function isSameCalendarDay(left: Date, right: Date) {
+  return startOfDay(left).getTime() === startOfDay(right).getTime();
+}
+
+function formatDueLabel(due: Date, today: Date) {
+  const diffDays = Math.round((startOfDay(due).getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+  if (diffDays < 0) return `${Math.abs(diffDays)}d overdue`;
+  if (diffDays === 0) return 'Due today';
+  if (diffDays === 1) return 'Due tomorrow';
+  return `Due in ${diffDays}d`;
 }
 
 export default async function DashboardPage() {
@@ -88,6 +106,45 @@ export default async function DashboardPage() {
   const p1 = stats.p1Count;
   const contacted = stats.contacted;
   const meetingsBooked = stats.meetingsBooked;
+
+  const today = startOfDay(new Date());
+  const sevenDaysOut = new Date(today);
+  sevenDaysOut.setDate(today.getDate() + 7);
+
+  const queuedCampaignFollowUps = dbActivities.filter((activity) =>
+    activity.activity_type === 'Follow-up' && (activity.notes?.includes('Campaign drip automation') || activity.outcome?.includes('MODEX 2026 Follow-Up')),
+  ).length;
+
+  const allFocusItems = [
+    ...dbAccounts
+      .filter((account) => account.next_action && account.due_date)
+      .map((account) => ({
+        type: 'Account' as const,
+        account: account.name,
+        owner: account.owner,
+        summary: account.next_action ?? 'Next action ready',
+        due: new Date(account.due_date as Date | string),
+      })),
+    ...dbActivities
+      .filter((activity) => activity.account_name && activity.next_step && activity.next_step_due)
+      .map((activity) => ({
+        type: 'Activity' as const,
+        account: activity.account_name ?? 'Unknown account',
+        owner: activity.owner,
+        summary: activity.next_step ?? 'Follow up',
+        due: new Date(activity.next_step_due as Date | string),
+      })),
+  ]
+    .filter((item) => !Number.isNaN(item.due.getTime()))
+    .sort((left, right) => left.due.getTime() - right.due.getTime())
+    .filter((item, index, items) => index === items.findIndex((candidate) => (
+      candidate.account === item.account && candidate.summary === item.summary && candidate.due.getTime() === item.due.getTime()
+    )));
+
+  const overdueFocusCount = allFocusItems.filter((item) => item.due.getTime() < today.getTime()).length;
+  const dueTodayCount = allFocusItems.filter((item) => isSameCalendarDay(item.due, today)).length;
+  const dueThisWeekCount = allFocusItems.filter((item) => item.due.getTime() >= today.getTime() && item.due.getTime() <= sevenDaysOut.getTime()).length;
+  const focusItems = allFocusItems.slice(0, 6);
 
   // Weekly counters
   const meetingsThisWeek = meetings.filter((m) => isThisWeek(m.date)).length;
@@ -261,6 +318,75 @@ export default async function DashboardPage() {
                   </li>
                 ))}
               </ul>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Execution Pulse */}
+      <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr]">
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base">Execution Pulse</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {[
+                { label: 'Overdue', value: overdueFocusCount, tone: overdueFocusCount > 0 ? 'text-red-600' : 'text-emerald-600' },
+                { label: 'Due Today', value: dueTodayCount, tone: dueTodayCount > 0 ? 'text-amber-600' : 'text-[var(--foreground)]' },
+                { label: 'Next 7 Days', value: dueThisWeekCount, tone: 'text-[var(--foreground)]' },
+                { label: 'Queued Drip', value: queuedCampaignFollowUps, tone: queuedCampaignFollowUps > 0 ? 'text-blue-600' : 'text-[var(--foreground)]' },
+              ].map((item) => (
+                <div key={item.label} className="rounded-lg border border-[var(--border)] p-3 text-center">
+                  <p className="text-[11px] uppercase tracking-wide text-[var(--muted-foreground)]">{item.label}</p>
+                  <p className={`mt-2 text-2xl font-bold ${item.tone}`}>{item.value}</p>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="pb-3">
+            <div className="flex items-center justify-between gap-2">
+              <CardTitle className="text-base">Today's Focus</CardTitle>
+              <Link href="/activities">
+                <Button variant="ghost" size="sm" className="gap-1 text-xs">
+                  Open queue <ArrowRight className="h-3 w-3" />
+                </Button>
+              </Link>
+            </div>
+          </CardHeader>
+          <CardContent>
+            {focusItems.length === 0 ? (
+              <p className="py-4 text-sm text-[var(--muted-foreground)]">No urgent follow-ups are queued right now.</p>
+            ) : (
+              <div className="space-y-2">
+                {focusItems.map((item) => {
+                  const dueLabel = formatDueLabel(item.due, today);
+                  const dueTone = item.due.getTime() < today.getTime()
+                    ? 'destructive'
+                    : isSameCalendarDay(item.due, today)
+                      ? 'secondary'
+                      : 'outline';
+
+                  return (
+                    <Link key={`${item.account}-${item.summary}-${item.due.toISOString()}`} href={`/accounts/${slugify(item.account)}`}>
+                      <div className="flex items-start justify-between gap-3 rounded-lg border border-[var(--border)] p-3 transition-colors hover:bg-[var(--accent)]/40">
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2">
+                            <p className="truncate text-sm font-medium">{item.account}</p>
+                            <Badge variant="outline" className="text-[10px]">{item.type}</Badge>
+                          </div>
+                          <p className="mt-1 line-clamp-2 text-xs text-[var(--muted-foreground)]">{item.summary}</p>
+                          <p className="mt-1 text-[10px] text-[var(--muted-foreground)]">Owner: {item.owner}</p>
+                        </div>
+                        <Badge variant={dueTone}>{dueLabel}</Badge>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
             )}
           </CardContent>
         </Card>
