@@ -6,6 +6,7 @@ interface CampaignDripConfig {
   touchCount: number;
   intervals: number[];
   aiPromptAngle: string;
+  automationPaused: boolean;
 }
 
 export interface CampaignDripSummary {
@@ -43,6 +44,10 @@ function parseDripConfig(keyDates: unknown): CampaignDripConfig {
       keyDates && typeof keyDates === 'object' && !Array.isArray(keyDates) && typeof (keyDates as Record<string, unknown>).aiPromptAngle === 'string'
         ? ((keyDates as Record<string, unknown>).aiPromptAngle as string)
         : template.aiPromptAngle,
+    automationPaused:
+      keyDates && typeof keyDates === 'object' && !Array.isArray(keyDates)
+        ? Boolean((keyDates as Record<string, unknown>).automationPaused)
+        : false,
   };
 }
 
@@ -82,6 +87,11 @@ export async function runCampaignDripCheck(now = new Date()): Promise<CampaignDr
 
   for (const campaign of campaigns) {
     const config = parseDripConfig(campaign.key_dates);
+    if (config.automationPaused || campaign.status === 'paused') {
+      summary.skipped += Math.max(1, campaign.outreach_waves.length || 1);
+      continue;
+    }
+
     const accountNames = [...new Set([
       ...campaign.outreach_waves.map((wave) => wave.account_name),
       ...campaign.email_logs.map((email) => email.account_name).filter(Boolean),

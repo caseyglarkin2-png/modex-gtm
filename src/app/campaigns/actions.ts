@@ -6,6 +6,11 @@ import { prisma } from '@/lib/prisma';
 import { CreateCampaignSchema } from '@/lib/validations';
 import { getCampaignTemplate } from '@/lib/campaigns/templates';
 
+function extractCampaignSettings(keyDates: unknown) {
+  if (!keyDates || typeof keyDates !== 'object' || Array.isArray(keyDates)) return {} as Record<string, unknown>;
+  return keyDates as Record<string, unknown>;
+}
+
 function slugifyCampaignName(name: string) {
   return name
     .toLowerCase()
@@ -85,4 +90,68 @@ export async function createCampaignAction(formData: FormData) {
   revalidatePath('/analytics/quarterly');
 
   redirect(`/campaigns/${campaign.slug}`);
+}
+
+export async function pauseCampaignAutomationAction(slug: string) {
+  const campaign = await prisma.campaign.findUnique({ where: { slug }, select: { id: true, key_dates: true } });
+  if (!campaign) return { success: false, error: 'Campaign not found' };
+
+  const settings = extractCampaignSettings(campaign.key_dates);
+
+  await prisma.campaign.update({
+    where: { slug },
+    data: {
+      status: 'paused',
+      key_dates: {
+        ...settings,
+        automationPaused: true,
+      },
+    },
+  });
+
+  revalidatePath('/campaigns');
+  revalidatePath(`/campaigns/${slug}`);
+  revalidatePath(`/campaigns/${slug}/analytics`);
+  return { success: true };
+}
+
+export async function resumeCampaignAutomationAction(slug: string) {
+  const campaign = await prisma.campaign.findUnique({ where: { slug }, select: { id: true, key_dates: true } });
+  if (!campaign) return { success: false, error: 'Campaign not found' };
+
+  const settings = extractCampaignSettings(campaign.key_dates);
+
+  await prisma.campaign.update({
+    where: { slug },
+    data: {
+      status: 'active',
+      key_dates: {
+        ...settings,
+        automationPaused: false,
+      },
+    },
+  });
+
+  revalidatePath('/campaigns');
+  revalidatePath(`/campaigns/${slug}`);
+  revalidatePath(`/campaigns/${slug}/analytics`);
+  return { success: true };
+}
+
+export async function resetCampaignDripQueueAction(slug: string) {
+  const campaign = await prisma.campaign.findUnique({ where: { slug }, select: { id: true } });
+  if (!campaign) return { success: false, error: 'Campaign not found' };
+
+  const deleted = await prisma.activity.deleteMany({
+    where: {
+      campaign_id: campaign.id,
+      activity_type: 'Follow-up',
+      notes: { contains: `Campaign drip automation - touch` },
+    },
+  });
+
+  revalidatePath('/activities');
+  revalidatePath(`/campaigns/${slug}`);
+  revalidatePath('/admin/crons');
+  return { success: true, cleared: deleted.count };
 }

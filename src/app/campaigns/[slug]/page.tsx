@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { prisma } from '@/lib/prisma';
 import { ensureDefaultCampaign } from '@/lib/campaigns';
+import { CampaignControls } from './campaign-controls';
 
 export const dynamic = 'force-dynamic';
 
@@ -44,6 +45,7 @@ export default async function CampaignDetailPage({ params }: { params: Promise<{
   const cadence = Array.isArray(campaignSettings.suggestedIntervals)
     ? (campaignSettings.suggestedIntervals as Array<number | string>).join(', ')
     : 'Not configured';
+  const automationPaused = Boolean(campaignSettings.automationPaused) || campaign.status === 'paused';
 
   return (
     <div className="space-y-6">
@@ -81,11 +83,13 @@ export default async function CampaignDetailPage({ params }: { params: Promise<{
 
         <Card>
           <CardHeader className="pb-2"><CardTitle className="text-sm">Cadence & Automation</CardTitle></CardHeader>
-          <CardContent className="space-y-2 text-sm text-muted-foreground">
+          <CardContent className="space-y-3 text-sm text-muted-foreground">
             <p>Template: {String(campaignSettings.templateKey ?? 'manual')}</p>
             <p>Touches: {String(campaignSettings.touchCount ?? 'Not set')}</p>
             <p>Suggested intervals: {cadence} days</p>
             <p>AI angle: {String(campaignSettings.aiPromptAngle ?? 'No AI angle configured')}</p>
+            <p>Automation status: {automationPaused ? 'Paused' : 'Running'}</p>
+            <CampaignControls slug={campaign.slug} status={campaign.status} paused={automationPaused} />
           </CardContent>
         </Card>
       </div>

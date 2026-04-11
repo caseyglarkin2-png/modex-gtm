@@ -32,4 +32,9 @@ test('quarterly review and campaign analytics pages load', async ({ page }) => {
   await page.goto('/campaigns/modex-2026-follow-up/analytics', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('h1')).toContainText('Campaign Analytics');
   await expect(page.locator('body')).toContainText('Estimated Pipeline');
+
+  await page.goto('/campaigns/modex-2026-follow-up', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('body')).toContainText('Cadence & Automation');
+  await expect(page.locator('body')).toContainText('Pause Drip');
+  await expect(page.locator('body')).toContainText('Reset Queue');
 });
