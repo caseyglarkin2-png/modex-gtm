@@ -76,13 +76,23 @@ export default function AuditRoutesPage() {
 
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-base">Coverage Snapshot</CardTitle>
+            <CardTitle className="text-base">Booth Talk Track</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="rounded-lg border border-[var(--border)] bg-[var(--accent)]/40 p-3 text-sm text-[var(--muted-foreground)]">
               <span className="inline-flex items-center gap-2 text-[var(--foreground)]">
                 <Route className="h-4 w-4" /> {warmRouteCount} accounts have a documented warm path into the audit ask.
               </span>
+            </div>
+
+            <div className="rounded-lg border border-[var(--border)] p-3">
+              <div className="flex items-start justify-between gap-2">
+                <p className="text-xs text-[var(--muted-foreground)]">Floor opener</p>
+                <CopyButton text="If useful, we can run a 30-minute network audit next week and leave you with a prioritized rollout map." />
+              </div>
+              <p className="mt-1 text-sm text-[var(--foreground)]">
+                If useful, we can run a 30-minute network audit next week and leave you with a prioritized rollout map.
+              </p>
             </div>
 
             <div className="space-y-2">

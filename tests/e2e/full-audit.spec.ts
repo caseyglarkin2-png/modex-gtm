@@ -174,6 +174,7 @@ test.describe('Full Platform Audit', () => {
     await expect(page.locator('body')).toContainText('QR');
     await expect(page.locator('body')).toContainText('QR Ready Board');
     await expect(page.locator('body')).toContainText('Ready to scan');
+    await expect(page.locator('body')).toContainText('Booth Kit Checklist');
   });
 
   test('Audit Routes page loads', async ({ page }) => {
@@ -181,6 +182,7 @@ test.describe('Full Platform Audit', () => {
     await expect(page.locator('body')).toContainText('Routes');
     await expect(page.locator('body')).toContainText('Route Sprint Board');
     await expect(page.locator('body')).toContainText('Open routes');
+    await expect(page.locator('body')).toContainText('Booth Talk Track');
   });
 
   test('Navigation: all nav links work', async ({ page }) => {

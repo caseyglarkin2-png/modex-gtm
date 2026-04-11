@@ -7,8 +7,8 @@ import { CopyButton } from '@/components/copy-button';
 import { QrCode, ExternalLink, ArrowRight, ScanSearch } from 'lucide-react';
 import { Breadcrumb } from '@/components/breadcrumb';
 
-function buildQrImageUrl(value: string) {
-  return `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(value)}`;
+function buildQrImageUrl(value: string, size = 220) {
+  return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(value)}`;
 }
 
 export const metadata = { title: 'QR Assets' };
@@ -102,7 +102,7 @@ export default function QrPage() {
 
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-base">MODEX Print Notes</CardTitle>
+            <CardTitle className="text-base">Booth Kit Checklist</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="rounded-lg border border-[var(--border)] bg-[var(--accent)]/40 p-3 text-sm text-[var(--muted-foreground)]">
@@ -115,9 +115,18 @@ export default function QrPage() {
               {topPrintFiles.map((qr) => (
                 <div key={qr.account} className="flex items-center justify-between rounded-lg border border-[var(--border)] px-3 py-2 text-sm">
                   <span className="text-[var(--foreground)]">{qr.account}</span>
-                  <Badge variant="outline">{qr.graphic_file}</Badge>
+                  <div className="flex items-center gap-2">
+                    <Badge variant="outline">{qr.graphic_file}</Badge>
+                    <a href={buildQrImageUrl(qr.audit_url, 1200)} target="_blank" rel="noopener noreferrer" download={`${slugify(qr.account)}-qr.png`}>
+                      <Button variant="ghost" size="sm" className="h-7 px-2 text-xs">Download PNG</Button>
+                    </a>
+                  </div>
                 </div>
               ))}
+            </div>
+
+            <div className="rounded-lg border border-[var(--border)] p-3 text-xs text-[var(--muted-foreground)]">
+              Print target: minimum 2.5 in square, high contrast, and test scan at 3-6 ft before show open.
             </div>
           </CardContent>
         </Card>
@@ -165,6 +174,14 @@ export default function QrPage() {
                   <p><span className="text-[var(--muted-foreground)]">Suggested Use:</span> {qr.suggested_use}</p>
                   <p><span className="text-[var(--muted-foreground)]">Proof Asset:</span> {qr.proof_asset}</p>
                   <p><span className="text-[var(--muted-foreground)]">Graphic:</span> {qr.graphic_file}</p>
+                </div>
+                <div className="flex items-center justify-between gap-2">
+                  <a href={buildQrImageUrl(qr.audit_url, 1200)} target="_blank" rel="noopener noreferrer" download={`${slugify(qr.account)}-qr.png`}>
+                    <Button variant="outline" size="sm" className="text-xs">Download print PNG</Button>
+                  </a>
+                  <a href={qr.audit_url} target="_blank" rel="noopener noreferrer">
+                    <Button size="sm" className="text-xs">Scan destination</Button>
+                  </a>
                 </div>
                 {qr.notes && <p className="text-xs text-[var(--muted-foreground)]">{qr.notes}</p>}
               </CardContent>
