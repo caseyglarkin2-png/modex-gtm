@@ -91,11 +91,15 @@ test.describe('Full Platform Audit', () => {
   test('Personas page: list view', async ({ page }) => {
     await page.goto('/personas');
     await expect(page.locator('body')).toContainText('Personas');
+    await expect(page.locator('body')).toContainText('Persona Priority Board');
+    await expect(page.locator('body')).toContainText('Ready to contact');
   });
 
   test('Intel page: actionable intel list', async ({ page }) => {
     await page.goto('/intel');
     await expect(page.locator('body')).toContainText('Actionable Intel');
+    await expect(page.locator('body')).toContainText('Intel Action Board');
+    await expect(page.locator('body')).toContainText('Open now');
   });
 
   test('Briefs page: meeting briefs grid', async ({ page }) => {

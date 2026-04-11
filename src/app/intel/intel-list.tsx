@@ -22,7 +22,7 @@ export interface IntelItem {
   field_to_update: string;
 }
 
-export function IntelList({ items }: { items: IntelItem[] }) {
+export function IntelList({ items, hideHeader = false }: { items: IntelItem[]; hideHeader?: boolean }) {
   const [isPending, startTransition] = useTransition();
   const openCount = items.filter((i) => i.status !== 'Closed').length;
 
@@ -40,12 +40,14 @@ export function IntelList({ items }: { items: IntelItem[] }) {
 
   return (
     <>
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">Actionable Intel ({items.length})</h1>
-        <p className="text-sm text-[var(--muted-foreground)]">
-          Research tasks and intelligence items. {openCount} open item{openCount !== 1 ? 's' : ''} require action.
-        </p>
-      </div>
+      {!hideHeader && (
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight">Actionable Intel ({items.length})</h1>
+          <p className="text-sm text-[var(--muted-foreground)]">
+            Research tasks and intelligence items. {openCount} open item{openCount !== 1 ? 's' : ''} require action.
+          </p>
+        </div>
+      )}
 
       <div className="space-y-3">
         {items.map((item) => {
