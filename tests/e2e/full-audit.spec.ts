@@ -184,6 +184,10 @@ test.describe('Full Platform Audit', () => {
     await expect(page.locator('body')).toContainText('Route Sprint Board');
     await expect(page.locator('body')).toContainText('Open routes');
     await expect(page.locator('body')).toContainText('Booth Talk Track');
+    await expect(page.locator('body')).toContainText('Exploring a 30-minute network audit for');
+    await expect(page.locator('body')).toContainText('If it is useful, the fastest way to pressure-test rollout order and ROI for');
+    await expect(page.locator('body')).toContainText('utm_campaign=modex2026');
+    await expect(page.locator('body')).toContainText('intent=audit');
   });
 
   test('Navigation: all nav links work', async ({ page }) => {
