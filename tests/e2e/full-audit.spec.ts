@@ -158,11 +158,15 @@ test.describe('Full Platform Audit', () => {
   test('Search page loads', async ({ page }) => {
     await page.goto('/search');
     await expect(page.locator('body')).toContainText('Search');
+    await expect(page.locator('body')).toContainText('Search Sprint Board');
+    await expect(page.locator('body')).toContainText('Ready queries');
   });
 
   test('Capture page loads', async ({ page }) => {
     await page.goto('/capture');
     await expect(page.locator('body')).toContainText('Capture');
+    await expect(page.locator('body')).toContainText('Capture Quick Start');
+    await expect(page.locator('body')).toContainText('Pending sync');
   });
 
   test('QR page loads', async ({ page }) => {
