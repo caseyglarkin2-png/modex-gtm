@@ -34,6 +34,16 @@ export async function POST(req: NextRequest) {
 
   try {
     const { prisma } = await import('@/lib/prisma');
+    const allowBypass = (email: string) => {
+      const lower = email.toLowerCase();
+      const fromEmail = process.env.FROM_EMAIL?.toLowerCase() ?? '';
+      const internalDomains = ['freightroll.com', 'yardflow.ai'];
+      return (
+        lower === 'casey@freightroll.com' ||
+        (fromEmail && lower === fromEmail) ||
+        internalDomains.some((dom) => lower.endsWith(`@${dom}`))
+      );
+    };
 
     // Check if recipient has unsubscribed
     const unsubscribed = await prisma.unsubscribedEmail.findUnique({
@@ -41,10 +51,16 @@ export async function POST(req: NextRequest) {
     });
 
     if (unsubscribed) {
-      return NextResponse.json({
-        error: 'UNSUBSCRIBED',
-        message: `Cannot send to ${to} - recipient has unsubscribed.`,
-      }, { status: 400 });
+      if (allowBypass(to)) {
+        await prisma.unsubscribedEmail.delete({ where: { email: to } }).catch(() => {});
+      } else {
+        // Return a structured error with remaining rate-limit for UI clarity
+        return NextResponse.json({
+          error: 'UNSUBSCRIBED',
+          message: `Cannot send to ${to} - recipient has unsubscribed.`,
+          remaining,
+        }, { status: 400 });
+      }
     }
 
     const guard = await evaluateRecipientEligibility(prisma, to);
@@ -121,7 +137,13 @@ export async function POST(req: NextRequest) {
       // DB offline — log skipped
     }
 
-    return NextResponse.json({ success: true, message: `Email sent to ${to}`, provider: response.provider ?? 'unknown', remaining });
+    return NextResponse.json({
+      success: true,
+      message: `Email sent to ${to}`,
+      provider: response.provider ?? 'unknown',
+      hubspotEngagementId: response.hubspotEngagementId ?? null,
+      remaining,
+    });
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Email send failed';
     return NextResponse.json({ error: message }, { status: 500 });

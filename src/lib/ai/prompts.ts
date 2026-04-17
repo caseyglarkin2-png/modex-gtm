@@ -17,6 +17,9 @@ export interface PromptContext {
   campaignType?: string;
   campaignAngle?: string;
   campaignKeyDates?: string;
+  facilityCountLabel?: string;
+  facilityScope?: string;
+  researchTags?: string[];
   tone: 'professional' | 'casual' | 'bold';
   length: 'short' | 'medium' | 'long';
 }
@@ -71,6 +74,8 @@ Target: ${ctx.personaName ?? 'decision maker'} at ${ctx.accountName}${ctx.person
 Priority: ${ctx.bandLabel ?? 'Tier 1'}
 ${ctx.vertical ? `Vertical: ${ctx.vertical}` : ''}
 ${ctx.primoAngle ? `What makes this account specific: ${ctx.primoAngle}` : ''}
+${ctx.facilityCountLabel ? `Facility footprint: ${ctx.facilityCountLabel}${ctx.facilityScope ? ` (${ctx.facilityScope})` : ''}` : ''}
+${ctx.researchTags && ctx.researchTags.length ? `Research tags: ${ctx.researchTags.join(' • ')}` : ''}
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 ${buildCampaignContextBlock(ctx)}
 ${ctx.micrositeUrl ? `Microsite link available: ${ctx.micrositeUrl}` : 'No microsite link available. Do not invent one.'}
@@ -112,6 +117,8 @@ Target: ${ctx.personaName ?? 'decision maker'} at ${ctx.accountName}${ctx.person
 Previous: ${ctx.previousMeeting ?? 'cold email sent about yard network standardization'}
 ${ctx.vertical ? `Vertical: ${ctx.vertical}` : ''}
 ${ctx.primoAngle ? `What makes this account specific: ${ctx.primoAngle}` : ''}
+${ctx.facilityCountLabel ? `Facility footprint: ${ctx.facilityCountLabel}${ctx.facilityScope ? ` (${ctx.facilityScope})` : ''}` : ''}
+${ctx.researchTags && ctx.researchTags.length ? `Research tags: ${ctx.researchTags.join(' • ')}` : ''}
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 ${buildCampaignContextBlock(ctx)}
 ${ctx.micrositeUrl ? `Microsite link available: ${ctx.micrositeUrl}` : 'No microsite link available. Do not invent one.'}

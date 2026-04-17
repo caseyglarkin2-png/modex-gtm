@@ -84,6 +84,7 @@ export function EmailComposer({ accountName, personaName, personaEmail, trigger,
   const [subject, setSubject] = useState('');
   const [body, setBody] = useState('');
   const [sending, setSending] = useState(false);
+  const [lastStatus, setLastStatus] = useState<{ provider?: string; hubspotId?: string | null } | null>(null);
   const [previewMode, setPreviewMode] = useState(false);
 
   function handleAIDraft(content: string) {
@@ -128,11 +129,12 @@ export function EmailComposer({ accountName, personaName, personaEmail, trigger,
           personaName,
         }),
       });
-      const data = await readApiResponse<{ error?: string }>(res);
+      const data = await readApiResponse<{ error?: string; provider?: string; hubspotEngagementId?: string | null }>(res);
       if (!res.ok) {
         throw new Error(data.error ?? 'Send failed');
       }
       toast.success(`Email sent to ${to}`);
+      setLastStatus({ provider: data.provider, hubspotId: data.hubspotEngagementId ?? null });
       setOpen(false);
       setTo(personaEmail ?? '');
       setCc('');
@@ -244,6 +246,18 @@ export function EmailComposer({ accountName, personaName, personaEmail, trigger,
 
         <div className="flex justify-end gap-2 pt-2">
           {body.trim() && <VoicePreviewButton text={body} label="Listen" />}
+          <div className="flex flex-1 items-center text-[11px] text-muted-foreground">
+            {lastStatus ? (
+              <span className="flex items-center gap-2">
+                <span className="rounded bg-muted px-2 py-0.5 font-mono text-[10px]">Provider: {lastStatus.provider ?? 'gmail'}</span>
+                {lastStatus.hubspotId ? (
+                  <span className="rounded bg-muted px-2 py-0.5 font-mono text-[10px]">HubSpot ID: {lastStatus.hubspotId}</span>
+                ) : (
+                  <span className="rounded bg-muted px-2 py-0.5 font-mono text-[10px]">HubSpot log pending</span>
+                )}
+              </span>
+            ) : null}
+          </div>
           <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
           <Button onClick={handleSend} disabled={sending || !to.trim()} className="gap-1.5">
             <Send className="h-3.5 w-3.5" />

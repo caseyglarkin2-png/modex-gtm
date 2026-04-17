@@ -30,4 +30,18 @@ describe('campaign-aware prompt guidance', () => {
     expect(prompt).toContain('This is a trade show follow-up');
     expect(prompt).toContain('MODEX 2026');
   });
+
+  it('injects facility facts and research tags when present', () => {
+    const prompt = buildEmailPrompt({
+      accountName: 'AB InBev',
+      tone: 'casual',
+      length: 'short',
+      facilityCountLabel: '100',
+      facilityScope: 'U.S. facilities footprint',
+      researchTags: ['Vertical: Food & Beverage', 'Signal: Past attendee list'],
+    });
+
+    expect(prompt).toContain('Facility footprint: 100 (U.S. facilities footprint)');
+    expect(prompt).toContain('Research tags: Vertical: Food & Beverage • Signal: Past attendee list');
+  });
 });

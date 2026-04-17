@@ -13,6 +13,8 @@ import { getAccountContext } from '@/lib/db';
 import { getAllAccountMicrositeData } from '@/lib/microsites/accounts';
 import { prisma } from '@/lib/prisma';
 import { buildAbsoluteUrl } from '@/lib/site-url';
+import { getFacilityFact } from '@/lib/research/facility-fact-registry';
+import { buildAccountTags } from '@/lib/research/account-tags';
 
 const TONE_MAP: Record<string, PromptContext['tone']> = {
   formal: 'professional',
@@ -50,6 +52,8 @@ export async function POST(req: NextRequest) {
 
   const microsite = getAllAccountMicrositeData().find((entry) => entry.accountName === accountName);
   const micrositeUrl = microsite ? buildAbsoluteUrl(`/for/${microsite.slug}`) : undefined;
+  const facilityFact = account ? getFacilityFact(account.name) : undefined;
+  const accountTags = account ? buildAccountTags(account) : [];
 
   const ctx: PromptContext = {
     accountName,
@@ -67,6 +71,9 @@ export async function POST(req: NextRequest) {
     campaignType: campaign?.campaign_type ?? (context as Record<string, string> | undefined)?.campaignType,
     campaignAngle: campaign?.messaging_angle ?? (context as Record<string, string> | undefined)?.campaignAngle,
     campaignKeyDates,
+    facilityCountLabel: facilityFact?.facilityCount,
+    facilityScope: facilityFact?.scope,
+    researchTags: accountTags.map((t) => `${t.label}: ${t.value}`),
     tone: TONE_MAP[tone] ?? 'casual',
     length: length as PromptContext['length'],
   };

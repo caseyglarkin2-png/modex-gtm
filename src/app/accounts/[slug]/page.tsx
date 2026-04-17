@@ -34,6 +34,7 @@ import { VoiceScriptButton } from '@/components/voice-script-button';
 import type { RecentMicrositeSession } from '@/lib/microsites/analytics';
 import { ensureMicrositeForAccount } from '@/lib/microsites/ensure-microsite';
 import { prisma } from '@/lib/prisma';
+import { buildAccountTags } from '@/lib/research/account-tags';
 
 export async function generateStaticParams() {
   const accounts = await dbGetAccounts();
@@ -78,6 +79,8 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
     { label: 'Strategic Value', value: account.strategic_value, weight: 10 },
     { label: 'Meeting Ease', value: account.meeting_ease, weight: 5 },
   ];
+
+  const accountTags = buildAccountTags(account);
 
   return (
     <div className="space-y-6">
@@ -190,6 +193,17 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                 <p className="text-[10px] text-[var(--muted-foreground)]">{dim.label} ({dim.weight}%)</p>
                 <p className="mt-0.5 text-lg font-bold">{dim.value}<span className="text-xs font-normal text-[var(--muted-foreground)]">/5</span></p>
               </div>
+            ))}
+          </div>
+
+          {/* Research-backed tags (facility fact, vertical, signal, etc.) */}
+          <div className="mt-4 flex flex-wrap gap-2">
+            {accountTags.map((tag) => (
+              <Badge key={`${tag.label}-${tag.value}`} variant="outline" className="flex items-center gap-1">
+                <span className="text-[10px] uppercase tracking-wide text-[var(--muted-foreground)]">{tag.label}</span>
+                <span className="font-medium">{tag.value}</span>
+                {tag.hint ? <span className="text-[10px] text-[var(--muted-foreground)]">({tag.hint})</span> : null}
+              </Badge>
             ))}
           </div>
         </CardContent>
