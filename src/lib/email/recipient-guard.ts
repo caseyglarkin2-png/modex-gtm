@@ -4,12 +4,10 @@ const SYSTEM_BLOCKED_DOMAINS = new Set([
   'dannon.com',
   'danone.com',
   'bluetriton.com',
-  'yardflow.ai',
   'niagarawater.com',
   'lpcorp.com',
   'xpo.com',
   'kraftheinz.com',
-  'freightroll.com',
 ]);
 
 const POSITIVE_EMAIL_STATUSES = ['sent', 'delivered', 'opened', 'clicked'] as const;
@@ -22,6 +20,10 @@ export interface RecipientGuardDecision {
 
 export function getEmailDomain(email: string): string {
   return email.split('@')[1]?.toLowerCase() || '';
+}
+
+function isInternalDomain(domain: string): boolean {
+  return domain === 'freightroll.com' || domain === 'yardflow.ai';
 }
 
 async function hasExactUnsubscribe(prisma: PrismaClient, email: string): Promise<boolean> {
@@ -88,6 +90,10 @@ export async function evaluateRecipientEligibility(
   const domain = getEmailDomain(email);
   if (!domain) {
     return { ok: false, reason: 'Invalid email domain', domain };
+  }
+
+  if (isInternalDomain(domain)) {
+    return { ok: true, domain };
   }
 
   if (SYSTEM_BLOCKED_DOMAINS.has(domain)) {

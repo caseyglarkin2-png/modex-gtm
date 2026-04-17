@@ -19,6 +19,12 @@ NEXT_PUBLIC_APP_URL=https://modex-gtm.vercel.app
 - **Why:** Used in public links, metadata generation, unsubscribe links, and webhook-related absolute URLs
 - **Status:** ✅ Set in Production
 
+```
+UNSUBSCRIBE_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+- **Why:** HMAC for unsubscribe links and list-unsubscribe headers; required for all outbound emails
+- **Status:** ❗ Add to Production, Preview, Development
+
 ## AI And Voice (Required for wow-first proposal work)
 
 ```

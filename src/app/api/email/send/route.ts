@@ -26,6 +26,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
   }
 
+  if (!process.env.UNSUBSCRIBE_SECRET) {
+    return NextResponse.json({
+      error: 'UNSUBSCRIBE_SECRET is not set',
+      message: 'Set UNSUBSCRIBE_SECRET in Vercel env (Prod/Preview/Dev) before sending.',
+    }, { status: 500 });
+  }
+
   const { to, cc, subject, bodyHtml, accountName, personaName, generatedContentId } = parsed.data;
 
   if (!to || to.trim() === '') {

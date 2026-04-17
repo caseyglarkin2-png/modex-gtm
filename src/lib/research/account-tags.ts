@@ -14,8 +14,8 @@ export function buildAccountTags(
 
   const tags: AccountTag[] = [
     { label: 'Vertical', value: account.vertical },
-    { label: 'Signal', value: account.signal_type },
-    { label: 'Primo Angle', value: account.primo_angle || 'N/A' },
+    { label: 'Signal', value: account.signal_type ?? 'N/A' },
+    { label: 'Primo Angle', value: account.primo_angle ?? 'N/A' },
     { label: 'Tier', value: account.tier },
     { label: 'Band', value: account.priority_band },
   ];
