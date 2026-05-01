@@ -3,7 +3,7 @@
  * Uses POST /crm/v3/objects/emails (NOT Timeline Events API, NOT deprecated Engagements API).
  */
 import { getHubSpotClient, isHubSpotConfigured, withHubSpotRetry } from './client';
-import { searchContactByEmail } from './contacts';
+import { searchContactByEmail, upsertContact } from './contacts';
 import { HUBSPOT_LOGGING_ENABLED } from '@/lib/feature-flags';
 import * as Sentry from '@sentry/nextjs';
 import { AssociationSpecAssociationCategoryEnum } from '@hubspot/api-client/lib/codegen/crm/contacts/models/AssociationSpec';
@@ -57,9 +57,16 @@ export async function logEmailToHubSpot(
 
     const emailId = emailObj.id;
 
-    // Associate email to contact if we can find them
+    // Create or associate contact if possible.
+    let contactId: string | null = null;
     const contact = await searchContactByEmail(contactEmail);
     if (contact) {
+      contactId = contact.id;
+    } else {
+      contactId = await upsertContact({ email: contactEmail }).catch(() => null);
+    }
+
+    if (contactId) {
       try {
         await withHubSpotRetry(
           () =>
@@ -67,7 +74,7 @@ export async function logEmailToHubSpot(
               'emails',
               emailId,
               'contacts',
-              contact.id,
+              contactId,
               [{ associationCategory: AssociationSpecAssociationCategoryEnum.HubspotDefined, associationTypeId: 198 }], // email_to_contact
             ),
           'logEmailToHubSpot:associate',
@@ -75,7 +82,7 @@ export async function logEmailToHubSpot(
       } catch (assocErr) {
         // Association failure is non-fatal
         Sentry.captureException(assocErr, {
-          extra: { emailId, contactId: contact.id },
+          extra: { emailId, contactId },
         });
       }
     }

@@ -101,6 +101,7 @@ export async function POST(req: NextRequest) {
           body_html: html,
           status: r.status === 'fulfilled' ? 'sent' : 'failed',
           provider_message_id: providerMessageId,
+          hubspot_engagement_id: r.status === 'fulfilled' ? (r.value as { hubspotEngagementId?: string | null })?.hubspotEngagementId ?? null : null,
         },
       }).catch(() => { /* individual log failure is non-blocking */ });
 

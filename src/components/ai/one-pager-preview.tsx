@@ -83,8 +83,8 @@ export function OnePagerPreview({ data, accountName }: { data: OnePagerData; acc
                       <div className="absolute left-[9px] top-5 bottom-0 w-0.5 bg-gradient-to-b from-cyan-500/60 to-cyan-500/20" />
                     )}
                     {/* Pipe node */}
-                    <div className="absolute left-0 top-0.5 w-5 h-5 rounded-full border-2 border-cyan-500/70 bg-[#0b1a2e] flex items-center justify-center">
-                      <span className="text-[9px] font-bold text-cyan-400">{s.step}</span>
+                    <div className="absolute left-0 top-0 w-6 h-6 rounded-full border-2 border-cyan-500/70 bg-[#0b1a2e] flex items-center justify-center">
+                      <span className="text-xs leading-none font-bold text-cyan-400 flex items-center justify-center h-full w-full">{s.step}</span>
                     </div>
                     <div className="text-xs">
                       <span className="text-cyan-300 font-bold">{s.title}</span>
@@ -150,9 +150,9 @@ export function OnePagerPreview({ data, accountName }: { data: OnePagerData; acc
 
 export function onePagerToHtml(data: OnePagerData, accountName: string): string {
   const painHtml = data.painPoints.map((p) => `<div style="display:flex;gap:8px;font-size:12px;color:#cbd5e1;margin-bottom:8px;line-height:1.5;"><span style="color:#f87171;flex-shrink:0;">⚠</span><span>${p}</span></div>`).join('');
-  const stepsHtml = data.solutionSteps.map((s, i) => `<div style="position:relative;padding-left:28px;margin-bottom:${i < data.solutionSteps.length - 1 ? '12' : '0'}px;">
-    <div style="position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:50%;border:2px solid rgba(34,211,238,0.7);background:#0b1a2e;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#22d3ee;">${s.step}</div>
-    ${i < data.solutionSteps.length - 1 ? '<div style="position:absolute;left:9px;top:22px;bottom:-4px;width:2px;background:linear-gradient(to bottom,rgba(34,211,238,0.5),rgba(34,211,238,0.15));"></div>' : ''}
+  const stepsHtml = data.solutionSteps.map((s, i) => `<div style="position:relative;padding-left:32px;margin-bottom:${i < data.solutionSteps.length - 1 ? '12' : '0'}px;">
+    <div style="position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;border:2px solid rgba(34,211,238,0.7);background:#0b1a2e;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;line-height:1;color:#22d3ee;">${s.step}</div>
+    ${i < data.solutionSteps.length - 1 ? '<div style="position:absolute;left:11px;top:26px;bottom:-4px;width:2px;background:linear-gradient(to bottom,rgba(34,211,238,0.5),rgba(34,211,238,0.15));"></div>' : ''}
     <div style="font-size:12px;"><span style="color:#67e8f9;font-weight:700;">${s.title}</span><p style="color:#94a3b8;margin:2px 0 0;font-size:11px;line-height:1.4;">${s.description}</p></div>
   </div>`).join('');
   const outcomesHtml = data.outcomes.map((o) => `<div style="display:flex;gap:8px;font-size:12px;color:#cbd5e1;margin-bottom:8px;line-height:1.5;"><span style="color:#34d399;flex-shrink:0;">✓</span><span>${o}</span></div>`).join('');

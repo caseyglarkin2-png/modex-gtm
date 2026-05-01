@@ -102,6 +102,7 @@ export async function POST(req: NextRequest) {
           body_html: html,
           status: 'sent',
           provider_message_id: (response.headers?.['x-message-id'] as string) ?? null,
+          hubspot_engagement_id: response.hubspotEngagementId ?? null,
           ...(generatedContentId ? { generated_content_id: generatedContentId } : {}),
         },
       });
