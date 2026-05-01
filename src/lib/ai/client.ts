@@ -7,6 +7,20 @@ const CONTROL_PLANE_URL = process.env.CLAWD_CONTROL_PLANE_URL?.trim();
 const CONTROL_PLANE_TOKEN = process.env.CLAWD_CONTROL_PLANE_TOKEN?.trim();
 
 export type AIProvider = 'gemini' | 'openai' | 'control_plane';
+export type AIErrorCategory = 'quota' | 'model_missing' | 'timeout' | 'service' | 'authentication' | 'unknown';
+
+export interface AIErrorInfo {
+  provider: AIProvider;
+  category: AIErrorCategory;
+  retryable: boolean;
+  message: string;
+}
+
+export interface GenerateTextResult {
+  text: string;
+  provider: AIProvider;
+  errors: AIErrorInfo[];
+}
 
 // Gemini models to try (newest/cheapest first)
 const GEMINI_MODELS = [
@@ -15,6 +29,42 @@ const GEMINI_MODELS = [
   'gemini-2.0-flash-lite',
   'gemini-2.0-flash',
 ];
+
+function classifyAIError(provider: AIProvider, err: unknown): AIErrorInfo {
+  const message = err instanceof Error ? err.message : String(err);
+  const normalized = message.toLowerCase();
+  const isQuota = /429|quota|resource_exhausted|rate_limit/.test(normalized);
+  const isTimeout = /timeout|timed out|aborted|network|fetch/.test(normalized);
+  const isModelMissing = /404|not found|model.*not.*found|resource.*not.*found/.test(normalized);
+  const isAuth = /unauthorized|api key|invalid key|permission/.test(normalized);
+
+  let category: AIErrorCategory = 'unknown';
+  if (isQuota) category = 'quota';
+  else if (isTimeout) category = 'timeout';
+  else if (isModelMissing) category = 'model_missing';
+  else if (isAuth) category = 'authentication';
+
+  const retryable = category === 'quota' || category === 'timeout' || category === 'model_missing';
+
+  return { provider, category, retryable, message };
+}
+
+class AIProviderError extends Error {
+  provider: AIProvider;
+  retryable: boolean;
+  category: AIErrorCategory;
+
+  constructor(info: AIErrorInfo) {
+    super(info.message);
+    this.provider = info.provider;
+    this.retryable = info.retryable;
+    this.category = info.category;
+  }
+}
+
+function wait(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 // ── Gemini path ──────────────────────────────────────────────────────
 
@@ -28,7 +78,7 @@ function tryGemini(prompt: string, maxTokens: number): Promise<string> {
   const generationConfig = { maxOutputTokens: maxTokens, temperature: 0.7 };
 
   return (async () => {
-    const errors: string[] = [];
+    const errors: AIErrorInfo[] = [];
     for (const modelName of GEMINI_MODELS) {
       try {
         const model = client.getGenerativeModel({ model: modelName, safetySettings, generationConfig });
@@ -37,15 +87,18 @@ function tryGemini(prompt: string, maxTokens: number): Promise<string> {
         if (!text) throw new Error('Empty response');
         return text;
       } catch (err) {
-        const msg = err instanceof Error ? err.message : String(err);
-        errors.push(`${modelName}: ${msg.slice(0, 150)}`);
-        if (msg.includes('429') || msg.includes('404') || msg.includes('quota') || msg.includes('not found') || msg.includes('RESOURCE_EXHAUSTED')) {
+        const info = classifyAIError('gemini', err);
+        errors.push(info);
+        if (info.category === 'model_missing' || info.category === 'quota') {
           continue;
         }
-        throw new Error(`Gemini error (${modelName}): ${msg}`);
+        throw new AIProviderError({ ...info, message: `Gemini error (${modelName}): ${info.message}` });
       }
     }
-    throw new Error(`All Gemini models failed.\n${errors.join('\n')}`);
+
+    const retryable = errors.some((error) => error.retryable);
+    const message = `All Gemini models failed. ${errors.map((error) => `${error.provider}:${error.category}:${error.message.slice(0, 120)}`).join(' | ')}`;
+    throw new AIProviderError({ provider: 'gemini', category: retryable ? 'quota' : 'service', retryable, message });
   })();
 }
 
@@ -56,15 +109,20 @@ function tryOpenAI(prompt: string, maxTokens: number): Promise<string> {
   const client = new OpenAI({ apiKey: OPENAI_KEY });
 
   return (async () => {
-    const res = await client.chat.completions.create({
-      model: 'gpt-4o-mini',
-      max_tokens: maxTokens,
-      temperature: 0.7,
-      messages: [{ role: 'user', content: prompt }],
-    });
-    const text = res.choices[0]?.message?.content;
-    if (!text) throw new Error('Empty response from OpenAI');
-    return text;
+    try {
+      const res = await client.chat.completions.create({
+        model: 'gpt-4o-mini',
+        max_tokens: maxTokens,
+        temperature: 0.7,
+        messages: [{ role: 'user', content: prompt }],
+      });
+      const text = res.choices[0]?.message?.content;
+      if (!text) throw new Error('Empty response from OpenAI');
+      return text;
+    } catch (err) {
+      const info = classifyAIError('openai', err);
+      throw new AIProviderError({ ...info, message: `OpenAI error: ${info.message}` });
+    }
   })();
 }
 
@@ -119,24 +177,70 @@ export async function generateTextWithProvider(provider: AIProvider, prompt: str
   }
 }
 
-export async function generateText(prompt: string, maxTokens = 1024): Promise<string> {
-  // Try Gemini first, fall back to OpenAI
+export async function generateTextWithMetadata(prompt: string, maxTokens = 1024): Promise<GenerateTextResult> {
+  const errors: AIErrorInfo[] = [];
+
   if (GEMINI_KEY) {
     try {
-      return await tryGemini(prompt, maxTokens);
-    } catch {
-      // fall through to OpenAI
+      const text = await tryGemini(prompt, maxTokens);
+      return { text, provider: 'gemini', errors };
+    } catch (err) {
+      if (err instanceof AIProviderError) {
+        errors.push({ provider: err.provider, category: err.category, retryable: err.retryable, message: err.message });
+        if (err.retryable) {
+          await wait(2000);
+          try {
+            const text = await tryGemini(prompt, maxTokens);
+            return { text, provider: 'gemini', errors };
+          } catch (retryErr) {
+            if (retryErr instanceof AIProviderError) {
+              errors.push({ provider: retryErr.provider, category: retryErr.category, retryable: retryErr.retryable, message: retryErr.message });
+            } else {
+              errors.push(classifyAIError('gemini', retryErr));
+            }
+          }
+        }
+      } else {
+        errors.push(classifyAIError('gemini', err));
+      }
     }
   }
 
   if (OPENAI_KEY) {
-    return tryOpenAI(prompt, maxTokens);
+    try {
+      const text = await tryOpenAI(prompt, maxTokens);
+      return { text, provider: 'openai', errors };
+    } catch (err) {
+      if (err instanceof AIProviderError) {
+        errors.push({ provider: err.provider, category: err.category, retryable: err.retryable, message: err.message });
+      } else {
+        errors.push(classifyAIError('openai', err));
+      }
+    }
   }
 
-  throw new Error(
-    'AI generation unavailable. Set GEMINI_API_KEY or OPENAI_API_KEY in your Vercel environment variables. ' +
-    'If using Gemini, the free-tier quota may be exhausted — generate a new key at https://aistudio.google.com/apikey'
-  );
+  if (CONTROL_PLANE_URL) {
+    try {
+      const text = await tryControlPlane(prompt, maxTokens);
+      return { text, provider: 'control_plane', errors };
+    } catch (err) {
+      if (err instanceof AIProviderError) {
+        errors.push({ provider: err.provider, category: err.category, retryable: err.retryable, message: err.message });
+      } else {
+        errors.push(classifyAIError('control_plane', err));
+      }
+    }
+  }
+
+  const errorMessage = errors.length
+    ? `AI generation failed: ${errors.map((error) => `${error.provider}:${error.category}:${error.message}`).join(' | ')}`
+    : 'AI generation unavailable. Set GEMINI_API_KEY or OPENAI_API_KEY in your Vercel environment variables.';
+  throw new Error(errorMessage);
+}
+
+export async function generateText(prompt: string, maxTokens = 1024): Promise<string> {
+  const result = await generateTextWithMetadata(prompt, maxTokens);
+  return result.text;
 }
 
 export function getAvailableProviders(): AIProvider[] {

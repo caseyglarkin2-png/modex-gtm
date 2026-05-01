@@ -51,6 +51,7 @@ model Account {
   meetings       Meeting[]
   mobile_captures MobileCapture[]
   microsite_engagements MicrositeEngagement[]
+  generationJobs GenerationJob[]
 
   @@map("accounts")
 }
@@ -128,6 +129,7 @@ model Campaign {
   activities        Activity[]
   generated_content GeneratedContent[]
   email_logs        EmailLog[]
+  generationJobs    GenerationJob[]
 
   @@map("campaigns")
 }
@@ -396,6 +398,8 @@ model GeneratedContent {
   content_type String   // email | dm | call_script | meeting_prep | infographic
   tone         String?  // formal | conversational | provocative
   length       String?  // short | medium | long
+  provider_used String?
+  ai_error     String?
   content      String
   created_at   DateTime @default(now())
 
@@ -404,6 +408,31 @@ model GeneratedContent {
   @@index([account_name, content_type])
   @@index([campaign_id])
   @@map("generated_content")
+}
+
+model GenerationJob {
+  id            Int      @id @default(autoincrement())
+  account_name  String
+  campaign_id   Int?
+  persona_name  String?
+  content_type  String   // one_pager | email | dm | call_script | meeting_prep
+  status        String   @default("pending")
+  provider_used String?
+  error_message String?
+  retry_count   Int      @default(0)
+  batch_id      String?
+  scheduled_at  DateTime?
+  started_at    DateTime?
+  completed_at  DateTime?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  account Account @relation(fields: [account_name], references: [name])
+  campaign Campaign? @relation(fields: [campaign_id], references: [id])
+
+  @@index([status, updated_at])
+  @@index([account_name, campaign_id])
+  @@map("generation_jobs")
 }
 
 model EmailLog {

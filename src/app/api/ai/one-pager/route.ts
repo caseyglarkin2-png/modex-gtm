@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { generateText } from '@/lib/ai/client';
+import { generateTextWithMetadata } from '@/lib/ai/client';
 import { buildOnePagerPrompt } from '@/lib/ai/prompts';
 import type { OnePagerContext } from '@/lib/ai/prompts';
 import { getAccountContext } from '@/lib/db';
@@ -55,7 +55,8 @@ export async function POST(req: NextRequest) {
   const prompt = buildOnePagerPrompt(ctx);
 
   try {
-    const raw = await generateText(prompt, 1200);
+    const result = await generateTextWithMetadata(prompt, 1200);
+    const raw = result.text;
 
     // Parse the JSON from Gemini response (may have markdown fences)
     const jsonStr = raw.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
@@ -66,7 +67,8 @@ export async function POST(req: NextRequest) {
       // If JSON parse fails, return the raw text so the UI can handle it
       return NextResponse.json({
         content: null,
-        raw: raw,
+        raw,
+        provider: result.provider,
         accountName,
         error: 'Failed to parse structured content — raw text returned',
       });
@@ -80,6 +82,7 @@ export async function POST(req: NextRequest) {
           account_name: accountName,
           content_type: 'one_pager',
           tone: 'professional',
+          provider_used: result.provider,
           content: JSON.stringify(content),
         },
       });
@@ -87,9 +90,25 @@ export async function POST(req: NextRequest) {
       // DB offline — skip
     }
 
-    return NextResponse.json({ content, accountName });
+    return NextResponse.json({ content, accountName, provider: result.provider });
   } catch (err) {
     const message = err instanceof Error ? err.message : 'AI generation failed';
+
+    try {
+      const { prisma } = await import('@/lib/prisma');
+      await prisma.generatedContent.create({
+        data: {
+          account_name: accountName,
+          content_type: 'one_pager',
+          tone: 'professional',
+          ai_error: message,
+          content: JSON.stringify({ error: message }),
+        },
+      });
+    } catch {
+      // DB offline — skip
+    }
+
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
