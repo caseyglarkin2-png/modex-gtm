@@ -19,7 +19,6 @@ const QuerySchema = z.object({
     .transform(v => v === '1' || v === 'true'),
 });
 
-const BANNED_DOMAINS = ['dannon.com', 'danone.com', 'bluetriton.com', 'yardflow.ai'];
 const BATCH_SIZE = 25;
 const RATE_LIMIT_MS = 6000;
 const CRON_NAME = 'monday-bump';
@@ -160,8 +159,6 @@ async function handle(req: NextRequest) {
     const bouncedSet = new Set(bouncedEmails.map(e => e.to_email));
 
     const eligible = campaignEmails.filter(e => {
-      const domain = e.to_email.split('@')[1]?.toLowerCase();
-      if (BANNED_DOMAINS.some(d => domain?.includes(d))) return false;
       if (bouncedSet.has(e.to_email)) return false;
       return true;
     });

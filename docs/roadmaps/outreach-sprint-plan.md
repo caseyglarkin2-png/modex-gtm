@@ -143,7 +143,7 @@ One contact per account. Highest seniority decision-maker with proven email (NTE
 #### Task 1.1: Unblock target domains in recipient-guard.ts
 - **What:** Remove 10 target domains from `SYSTEM_BLOCKED_DOMAINS` in `src/lib/email/recipient-guard.ts`. Keep `dannon.com`, `danone.com`, `bluetriton.com`, `yardflow.ai`, `niagarawater.com`, `freightroll.com`, `lpcorp.com`, `xpo.com`, `kraftheinz.com` blocked.
 - **Files:** `src/lib/email/recipient-guard.ts`
-- **Validation:** Unit test — `evaluateRecipientEligibility(prisma, 'rob.ferguson@jmsmucker.com')` returns `{ ok: true }`. Same for all 10 sniper emails. `evaluateRecipientEligibility(prisma, 'heiko.gerling@danone.com')` still returns `{ ok: false }`. Also test that `evaluateRecipientEligibility(prisma, 'casey@yardflow.ai')` returns `{ ok: false }`.
+- **Validation:** Unit test — `evaluateRecipientEligibility(prisma, 'rob.ferguson@jmsmucker.com')` returns `{ ok: true }`. Same for all 10 sniper emails. `evaluateRecipientEligibility(prisma, 'heiko.gerling@danone.com')` still returns `{ ok: false }` when the recipient has explicitly unsubscribed via the unsubscribe table. Also test that `evaluateRecipientEligibility(prisma, 'casey@yardflow.ai')` returns `{ ok: true }` as internal bounce blocklist checks have been removed from send eligibility.
 - **Commit message:** `fix(email): unblock 10 target domains from stale yardflow.ai bounce guard`
 
 #### Task 1.2a: Batch sender CLI skeleton + recipient-guard pre-flight

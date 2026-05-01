@@ -353,7 +353,7 @@ The system is ready.
 The accounts are loaded.
 Let's fill your calendar.
 
-casey@yardflow.ai
+casey@freightroll.com
 ```
 
 ---

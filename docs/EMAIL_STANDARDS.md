@@ -110,8 +110,8 @@ From Resend's deliverability inspector on email 6932c248:
 
 | Issue | Status | Action |
 |-------|--------|--------|
-| "Ensure link URLs match sending domain" | Known, low priority | Unsubscribe link goes to `modex-gtm.vercel.app` but email is from `yardflow.ai`. Fix by adding custom domain `app.yardflow.ai` → Vercel, or accept as is |
-| "Include valid DMARC record" | **Action required** | Ask Chris to add: `Type: TXT | Name: _dmarc | Value: v=DMARC1; p=none; rua=mailto:casey@yardflow.ai` |
+| "Ensure link URLs match sending domain" | Known, low priority | Unsubscribe link goes to `modex-gtm.vercel.app` while email is from `casey@freightroll.com`. Keep the app URL and avoid hardcoding the link. |
+| "Include valid DMARC record" | **Action required** | Ask Chris to add: `Type: TXT | Name: _dmarc | Value: v=DMARC1; p=none; rua=mailto:casey@freightroll.com` |
 | Disable click tracking | ✅ Doing great | Keep disabled |
 | Disable open tracking | ✅ Doing great | Keep disabled |
 | Include plain text version | ✅ Doing great | Keep as is |
@@ -549,7 +549,7 @@ Casey
 | Resend webhook | `https://modex-gtm.vercel.app/api/webhooks/email` ✅ Configured |
 | Booking link | Google Calendar (see signature section above) |
 | DNS (Cloudflare) | Managed by Chris @ FreightRoll — **yardflow.ai nameservers confirmed on Cloudflare, NOT Vercel** |
-| DMARC record needed | Ask Chris: `TXT _dmarc.yardflow.ai: v=DMARC1; p=none; rua=mailto:casey@yardflow.ai` |
+| DMARC record needed | Ask Chris: `TXT _dmarc.freightroll.com: v=DMARC1; p=none; rua=mailto:casey@freightroll.com` |
 
 ---
 
