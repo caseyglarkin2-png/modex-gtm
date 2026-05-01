@@ -22,3 +22,4 @@ export async function evaluateRecipientEligibility(
 
   return { ok: true, domain };
 }
+// Production deployment verification - Fri May  1 13:41:26 UTC 2026
