@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -49,12 +49,12 @@ export function SendJobTracker({ jobId, pollMs = 3000 }: SendJobTrackerProps) {
     [job?.status],
   );
 
-  async function fetchStatus() {
+  const fetchStatus = useCallback(async () => {
     const response = await fetch(`/api/email/send-jobs/${jobId}`);
     if (!response.ok) throw new Error('Failed to fetch send job status');
     const payload = await response.json() as SendJobResponse;
     setJob(payload.job);
-  }
+  }, [jobId]);
 
   async function refreshNow() {
     setRefreshing(true);
@@ -103,7 +103,7 @@ export function SendJobTracker({ jobId, pollMs = 3000 }: SendJobTrackerProps) {
       cancelled = true;
       if (intervalId) clearInterval(intervalId);
     };
-  }, [jobId, pollMs, terminal]);
+  }, [fetchStatus, pollMs, terminal]);
 
   if (loading) {
     return (

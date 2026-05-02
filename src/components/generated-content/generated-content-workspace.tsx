@@ -177,13 +177,13 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
       <div className="flex items-center justify-between text-xs text-muted-foreground">
         <p>{filteredCards.length} account card(s) visible</p>
         <div className="flex items-center gap-2">
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={() => setSelectedAccounts((prev) => {
-              if (allSelected) return {};
-              const next: Record<string, boolean> = {};
-              selectableItems
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => setSelectedAccounts(() => {
+                if (allSelected) return {};
+                const next: Record<string, boolean> = {};
+                selectableItems
                 .filter((item) => !item.disabled)
                 .forEach((item) => {
                   next[item.accountName] = true;
