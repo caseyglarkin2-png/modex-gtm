@@ -47,6 +47,8 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
   const requiresAcknowledgement = itemStates.filter(({ guard }) => guard.requiresGuard).map(({ item }) => item.generatedContentId);
   const allAcknowledged = requiresAcknowledgement.every((id) => acknowledged[id]);
   const hasRecipients = itemStates.some(({ item }) => item.recipients.length > 0);
+  const totalRecipients = itemStates.reduce((sum, { item }) => sum + item.recipients.length, 0);
+  const skippedAccounts = itemStates.filter(({ item }) => item.recipients.length === 0).length;
 
   async function enqueueSendJob() {
     setSubmitting(true);
@@ -100,6 +102,25 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
           <DialogDescription>Review selected generated content before queueing async send.</DialogDescription>
         </DialogHeader>
 
+        <div className="grid gap-2 rounded-md border bg-muted/20 p-3 text-xs md:grid-cols-4">
+          <div>
+            <p className="text-muted-foreground">Accounts In Scope</p>
+            <p className="text-sm font-semibold text-foreground">{itemStates.length}</p>
+          </div>
+          <div>
+            <p className="text-muted-foreground">Recipients In Scope</p>
+            <p className="text-sm font-semibold text-foreground">{totalRecipients}</p>
+          </div>
+          <div>
+            <p className="text-muted-foreground">Warnings To Acknowledge</p>
+            <p className="text-sm font-semibold text-amber-700">{requiresAcknowledgement.length}</p>
+          </div>
+          <div>
+            <p className="text-muted-foreground">Auto-Skipped Accounts</p>
+            <p className="text-sm font-semibold text-red-700">{skippedAccounts}</p>
+          </div>
+        </div>
+
         <div className="space-y-4">
           {itemStates.map(({ item, rendering, guard }) => (
             <div key={item.generatedContentId} className="rounded-lg border p-3">
@@ -110,7 +131,11 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
                     Provider: {item.providerUsed ?? 'unknown'} • Recipients: {item.recipients.length}
                   </p>
                 </div>
-                <Badge variant="outline">{rendering.source}</Badge>
+                <div className="flex items-center gap-1">
+                  {guard.requiresGuard && <Badge className="bg-amber-100 text-amber-900">Needs Review</Badge>}
+                  {item.recipients.length === 0 && <Badge className="bg-red-100 text-red-900">No Recipients</Badge>}
+                  <Badge variant="outline">{rendering.source}</Badge>
+                </div>
               </div>
 
               {guard.requiresGuard && (

@@ -103,6 +103,10 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
 
   const allSelected = selectableItems.length > 0
     && selectableItems.filter((item) => !item.disabled).every((item) => selectedAccounts[item.accountName]);
+  const selectableCount = selectableItems.filter((item) => !item.disabled).length;
+  const selectedCount = selectedPreviewItems.length;
+  const selectedRecipientCount = selectedPreviewItems.reduce((sum, item) => sum + item.recipients.length, 0);
+  const selectedGuardCount = selectedPreviewItems.filter((item) => item.pendingJobs > 0 || item.processingJobs > 0 || item.version < item.latestVersion).length;
 
   return (
     <div className="space-y-4">
@@ -190,7 +194,7 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
                 });
               return next;
             })}
-            disabled={selectableItems.filter((item) => !item.disabled).length === 0}
+            disabled={selectableCount === 0}
           >
             {allSelected ? 'Clear Selection' : 'Select All Visible'}
           </Button>
@@ -208,6 +212,25 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
           >
             Clear Filters
           </Button>
+        </div>
+      </div>
+
+      <div className="grid gap-2 rounded-md border p-3 text-xs md:grid-cols-4">
+        <div>
+          <p className="text-muted-foreground">Selectable Accounts</p>
+          <p className="text-sm font-semibold text-foreground">{selectableCount}</p>
+        </div>
+        <div>
+          <p className="text-muted-foreground">Selected Accounts</p>
+          <p className="text-sm font-semibold text-foreground">{selectedCount}</p>
+        </div>
+        <div>
+          <p className="text-muted-foreground">Selected Recipients</p>
+          <p className="text-sm font-semibold text-foreground">{selectedRecipientCount}</p>
+        </div>
+        <div>
+          <p className="text-muted-foreground">Items Requiring Review</p>
+          <p className="text-sm font-semibold text-amber-700">{selectedGuardCount}</p>
         </div>
       </div>
 
