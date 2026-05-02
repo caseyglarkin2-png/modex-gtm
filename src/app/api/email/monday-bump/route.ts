@@ -1,14 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { PrismaClient } from '@prisma/client';
 import { sendEmail } from '@/lib/email/client';
 import { rateLimit } from '@/lib/rate-limit';
 import { firstNameFromEmail } from '@/lib/contact-standard';
 import { markCronFailure, markCronSkipped, markCronStarted, markCronSuccess } from '@/lib/cron-monitor';
+import { prisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
-
-const prisma = new PrismaClient();
 
 const QuerySchema = z.object({
   since: z.string().datetime().optional(),
