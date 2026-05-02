@@ -36,11 +36,6 @@ import { ensureMicrositeForAccount } from '@/lib/microsites/ensure-microsite';
 import { prisma } from '@/lib/prisma';
 import { buildAccountTags } from '@/lib/research/account-tags';
 
-export async function generateStaticParams() {
-  const accounts = await dbGetAccounts();
-  return accounts.map((a) => ({ slug: slugify(a.name) }));
-}
-
 export default async function AccountDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const accounts = await dbGetAccounts();
