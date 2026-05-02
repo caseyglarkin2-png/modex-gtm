@@ -320,7 +320,7 @@ export async function checkModelHealth(): Promise<{ ok: boolean; provider?: stri
       });
       const res = await client.chat.completions.create({
         model: AI_GATEWAY_MODEL,
-        max_tokens: 10,
+        max_tokens: 16,
         messages: [{ role: 'user', content: 'Say "ok"' }],
       });
       if (res.choices[0]?.message?.content) {
