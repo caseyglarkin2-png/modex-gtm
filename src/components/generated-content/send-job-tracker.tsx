@@ -42,6 +42,7 @@ export function SendJobTracker({ jobId, pollMs = 3000 }: SendJobTrackerProps) {
   const [loading, setLoading] = useState(true);
   const [job, setJob] = useState<SendJobResponse['job'] | null>(null);
   const [retrying, setRetrying] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   const terminal = useMemo(
     () => job?.status === 'completed' || job?.status === 'partial' || job?.status === 'failed' || job?.status === 'cancelled',
@@ -53,6 +54,17 @@ export function SendJobTracker({ jobId, pollMs = 3000 }: SendJobTrackerProps) {
     if (!response.ok) throw new Error('Failed to fetch send job status');
     const payload = await response.json() as SendJobResponse;
     setJob(payload.job);
+  }
+
+  async function refreshNow() {
+    setRefreshing(true);
+    try {
+      await fetchStatus();
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Failed to refresh send job');
+    } finally {
+      setRefreshing(false);
+    }
   }
 
   async function retryFailed() {
@@ -110,13 +122,22 @@ export function SendJobTracker({ jobId, pollMs = 3000 }: SendJobTrackerProps) {
   }
 
   const retryableCount = job.recipients.filter((recipient) => recipient.status === 'failed' || recipient.status === 'skipped').length;
+  const recipients = [...job.recipients].sort((left, right) => {
+    const rank = (status: string) => (status === 'failed' ? 0 : status === 'sending' ? 1 : status === 'pending' ? 2 : status === 'sent' ? 3 : 4);
+    return rank(left.status) - rank(right.status);
+  });
 
   return (
     <Card>
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between gap-3">
           <CardTitle className="text-base">Send Job #{job.id}</CardTitle>
-          <Badge variant="outline" className="capitalize">{job.status}</Badge>
+          <div className="flex items-center gap-2">
+            <Button size="sm" variant="outline" onClick={refreshNow} disabled={refreshing}>
+              {refreshing ? 'Refreshing…' : 'Refresh'}
+            </Button>
+            <Badge variant="outline" className="capitalize">{job.status}</Badge>
+          </div>
         </div>
       </CardHeader>
       <CardContent className="space-y-3">
@@ -134,7 +155,7 @@ export function SendJobTracker({ jobId, pollMs = 3000 }: SendJobTrackerProps) {
         )}
 
         <div className="space-y-2">
-          {job.recipients.map((recipient) => (
+          {recipients.map((recipient) => (
             <div key={recipient.id} className="rounded-md border p-2 text-xs">
               <p className="font-medium">{recipient.account_name} • {recipient.to_email}</p>
               <p className="text-muted-foreground">

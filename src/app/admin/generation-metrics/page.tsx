@@ -5,27 +5,55 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { prisma } from '@/lib/prisma';
 import { computeGenerationMetrics } from '@/lib/admin/generation-metrics';
+import { computeSendJobMetrics } from '@/lib/admin/send-job-metrics';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Generation Metrics' };
 
 export default async function GenerationMetricsPage() {
-  const jobs = await prisma.generationJob.findMany({
-    orderBy: { created_at: 'desc' },
-    take: 500,
-    select: {
-      status: true,
-      provider_used: true,
-      started_at: true,
-      completed_at: true,
-      created_at: true,
-      error_message: true,
-      account_name: true,
-      updated_at: true,
-    },
-  });
+  const [jobs, sendJobs, sendJobRecipients] = await Promise.all([
+    prisma.generationJob.findMany({
+      orderBy: { created_at: 'desc' },
+      take: 500,
+      select: {
+        status: true,
+        provider_used: true,
+        started_at: true,
+        completed_at: true,
+        created_at: true,
+        error_message: true,
+        account_name: true,
+        updated_at: true,
+      },
+    }),
+    prisma.sendJob.findMany({
+      orderBy: { created_at: 'desc' },
+      take: 250,
+      select: {
+        status: true,
+        created_at: true,
+        started_at: true,
+        completed_at: true,
+        sent_count: true,
+        failed_count: true,
+        skipped_count: true,
+      },
+    }),
+    prisma.sendJobRecipient.findMany({
+      orderBy: { created_at: 'desc' },
+      take: 500,
+      select: {
+        account_name: true,
+        to_email: true,
+        status: true,
+        error_message: true,
+        created_at: true,
+      },
+    }),
+  ]);
 
   const metrics = computeGenerationMetrics(jobs);
+  const sendMetrics = computeSendJobMetrics(sendJobs, sendJobRecipients);
 
   const recentFailures = jobs
     .filter((job) => job.status === 'failed')
@@ -73,6 +101,13 @@ export default async function GenerationMetricsPage() {
         <MetricCard label="P95 Duration" value={metrics.p95DurationSeconds > 0 ? `${metrics.p95DurationSeconds}s` : '—'} tone="text-foreground" />
       </div>
 
+      <div className="grid gap-3 md:grid-cols-4">
+        <MetricCard label="Send Jobs" value={sendMetrics.totalJobs.toString()} tone="text-foreground" />
+        <MetricCard label="Recipients Sent" value={sendMetrics.sentRecipients.toString()} tone="text-emerald-600" />
+        <MetricCard label="Recipients Failed" value={sendMetrics.failedRecipients.toString()} tone={sendMetrics.failedRecipients > 0 ? 'text-red-600' : 'text-foreground'} />
+        <MetricCard label="Avg Send Duration" value={sendMetrics.avgCompletionSeconds > 0 ? `${sendMetrics.avgCompletionSeconds}s` : '—'} tone="text-foreground" />
+      </div>
+
       <div className="grid gap-4 xl:grid-cols-2">
         <Card>
           <CardHeader className="pb-2">
@@ -100,6 +135,20 @@ export default async function GenerationMetricsPage() {
             <StateCard label="Pending" value={metrics.pending} />
             <StateCard label="Processing" value={metrics.processing} />
             <StateCard label="Failed" value={metrics.failed} tone="text-red-600" />
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base">Send Job State</CardTitle>
+          </CardHeader>
+          <CardContent className="grid gap-2 sm:grid-cols-3">
+            <StateCard label="Pending" value={sendMetrics.pendingJobs} />
+            <StateCard label="Processing" value={sendMetrics.processingJobs} />
+            <StateCard label="Completed" value={sendMetrics.completedJobs} tone="text-emerald-600" />
+            <StateCard label="Partial" value={sendMetrics.partialJobs} tone="text-amber-600" />
+            <StateCard label="Failed" value={sendMetrics.failedJobs} tone="text-red-600" />
+            <StateCard label="Skipped" value={sendMetrics.skippedRecipients} />
           </CardContent>
         </Card>
       </div>
@@ -138,6 +187,24 @@ export default async function GenerationMetricsPage() {
                     <p className="text-xs text-amber-700">Updated {new Date(job.updated_at).toLocaleString()}</p>
                   </div>
                   <AlertTriangle className="h-4 w-4 text-amber-700" />
+                </div>
+              ))
+            )}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base">Recent Send Failures</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            {sendMetrics.recentFailedRecipients.length === 0 ? (
+              <p className="text-sm text-muted-foreground">No recent failed send recipients.</p>
+            ) : (
+              sendMetrics.recentFailedRecipients.map((recipient, index) => (
+                <div key={`${recipient.accountName}-${recipient.toEmail}-${index}`} className="rounded-lg border border-red-200 bg-red-50 p-3">
+                  <p className="text-sm font-medium text-red-900">{recipient.accountName} • {recipient.toEmail}</p>
+                  <p className="mt-1 text-xs text-red-700">{recipient.error.slice(0, 220)}</p>
                 </div>
               ))
             )}
