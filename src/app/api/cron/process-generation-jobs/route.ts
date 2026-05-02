@@ -98,6 +98,15 @@ export async function GET(request: NextRequest) {
 
         const jsonStr = raw.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
         const content = JSON.parse(jsonStr);
+        const latestVersion = await prisma.generatedContent.findFirst({
+          where: {
+            account_name: account.name,
+            content_type: 'one_pager',
+            campaign_id: job.campaign_id ?? null,
+          },
+          orderBy: { version: 'desc' },
+          select: { version: true },
+        });
 
         await prisma.generatedContent.create({
           data: {
@@ -107,6 +116,7 @@ export async function GET(request: NextRequest) {
             content_type: 'one_pager',
             tone: 'professional',
             provider_used: result.provider,
+            version: (latestVersion?.version ?? 0) + 1,
             content: JSON.stringify(content),
           },
         });

@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { Send, Eye, Mail, AlertCircle } from 'lucide-react';
-import Link from 'next/link';
+import { onePagerToHtml, type OnePagerData } from '@/components/ai/one-pager-preview';
 
 export interface Recipient {
   id: number;
@@ -27,17 +27,39 @@ export interface OnePageSendDialogProps {
     version?: number;
     provider_used?: string;
   };
+  queueState?: {
+    latestVersion: number;
+    pendingJobs: number;
+    processingJobs: number;
+  };
   recipients: Recipient[];
-  onSuccess?: () => void;
+  onSuccess?: (result: { sent: number; failed: number; total: number; skipped?: Array<{ to: string; reason: string }> }) => void;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   trigger?: React.ReactNode;
+}
+
+function tryParseOnePagerHtml(rawContent: string, accountName: string): string {
+  const trimmed = rawContent.trim();
+  if (trimmed.startsWith('<')) return rawContent;
+
+  try {
+    const parsed = JSON.parse(rawContent) as Partial<OnePagerData>;
+    if (parsed && typeof parsed === 'object' && typeof parsed.headline === 'string' && typeof parsed.subheadline === 'string') {
+      return onePagerToHtml(parsed as OnePagerData, accountName);
+    }
+  } catch {
+    // Fall through to plain text wrapper.
+  }
+
+  return `<div style="white-space:pre-wrap;font-family:Arial,sans-serif;line-height:1.5;">${trimmed}</div>`;
 }
 
 export function OnePageSendDialog({
   accountName,
   generatedContentId,
   generatedContent,
+  queueState,
   recipients: allRecipients,
   onSuccess,
   open: controlledOpen,
@@ -49,9 +71,23 @@ export function OnePageSendDialog({
   const [subject, setSubject] = useState(`MODEX 2026 – Yard Protocol Opportunities at ${accountName}`);
   const [previewMode, setPreviewMode] = useState(false);
   const [isSending, setIsSending] = useState(false);
+  const [acknowledgedGuard, setAcknowledgedGuard] = useState(false);
+  const [lastSendResult, setLastSendResult] = useState<{
+    sent: number;
+    failed: number;
+    total: number;
+    skipped?: Array<{ to: string; reason: string }>;
+  } | null>(null);
 
   const isOpen = controlledOpen !== undefined ? controlledOpen : internalOpen;
   const setOpen = onControlledOpenChange || setInternalOpen;
+  const bodyHtml = tryParseOnePagerHtml(generatedContent.content, accountName);
+  const hasQueueInFlight = (queueState?.pendingJobs ?? 0) > 0 || (queueState?.processingJobs ?? 0) > 0;
+  const selectedVersion = generatedContent.version ?? 1;
+  const latestVersion = queueState?.latestVersion ?? selectedVersion;
+  const isOutdatedVersion = selectedVersion < latestVersion;
+  const requiresGuard = hasQueueInFlight || isOutdatedVersion;
+  const guardBlocksSend = requiresGuard && (!previewMode || !acknowledgedGuard);
 
   const handleSelectRecipient = (recipientId: number, checked: boolean) => {
     if (checked) {
@@ -82,9 +118,15 @@ export function OnePageSendDialog({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           accountName,
-          recipients: allRecipients.filter((r) => selectedRecipients.includes(r.id)),
+          recipients: allRecipients
+            .filter((r) => selectedRecipients.includes(r.id))
+            .map((r) => ({
+              to: r.email,
+              personaName: r.name,
+              accountName,
+            })),
           subject,
-          bodyHtml: generatedContent.content,
+          bodyHtml,
           generatedContentId,
         }),
       });
@@ -94,9 +136,9 @@ export function OnePageSendDialog({
       }
 
       const result = await response.json();
+      setLastSendResult(result);
       toast.success(`Sent to ${result.sent} recipient(s)`);
-      setOpen(false);
-      onSuccess?.();
+      onSuccess?.(result);
     } catch (err) {
       toast.error(`Send error: ${err instanceof Error ? err.message : 'Unknown error'}`);
     } finally {
@@ -135,12 +177,32 @@ export function OnePageSendDialog({
                 <div className="rounded-lg border bg-slate-50 p-4">
                   <div
                     className="prose prose-sm max-w-none dark:prose-invert"
-                    dangerouslySetInnerHTML={{ __html: generatedContent.content }}
+                    dangerouslySetInnerHTML={{ __html: bodyHtml }}
                   />
                 </div>
               </CardContent>
             )}
           </Card>
+
+          {requiresGuard && (
+            <div className="rounded-lg border border-amber-200 bg-amber-50 p-3">
+              <p className="text-sm text-amber-800">
+                {isOutdatedVersion
+                  ? `Version ${selectedVersion} is older than latest version ${latestVersion}.`
+                  : 'New generation jobs are still in queue for this account.'}
+                {' '}Preview and confirm before sending.
+              </p>
+              <label className="mt-2 flex items-center gap-2 text-xs text-amber-800">
+                <input
+                  type="checkbox"
+                  checked={acknowledgedGuard}
+                  onChange={(event) => setAcknowledgedGuard(event.target.checked)}
+                  className="h-4 w-4 rounded border-amber-300 text-primary focus:ring-primary"
+                />
+                I reviewed this version and want to send it anyway.
+              </label>
+            </div>
+          )}
 
           {/* Subject Line */}
           <div className="space-y-2">
@@ -209,7 +271,7 @@ export function OnePageSendDialog({
             </Button>
             <Button
               onClick={handleSend}
-              disabled={selectedCount === 0 || isSending}
+              disabled={selectedCount === 0 || isSending || guardBlocksSend}
               className="flex-1"
             >
               {isSending ? (
@@ -225,6 +287,19 @@ export function OnePageSendDialog({
               )}
             </Button>
           </div>
+
+          {lastSendResult && (
+            <div className="rounded-lg border bg-muted/30 p-3 text-sm">
+              <p className="font-medium">
+                Send result: {lastSendResult.sent} sent, {lastSendResult.failed} failed, {lastSendResult.total} total.
+              </p>
+              {(lastSendResult.skipped?.length ?? 0) > 0 && (
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Skipped: {lastSendResult.skipped?.map((item) => `${item.to} (${item.reason})`).join(', ')}
+                </p>
+              )}
+            </div>
+          )}
         </div>
       </DialogContent>
     </Dialog>

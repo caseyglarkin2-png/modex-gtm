@@ -1,6 +1,6 @@
 'use client';
 
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -26,11 +26,10 @@ export interface GenerationJobRow {
 
 interface GenerationJobListProps {
   jobs: GenerationJobRow[];
-  refreshInterval?: number;
   onRetry?: (jobId: number) => Promise<void>;
 }
 
-export function GenerationJobList({ jobs, refreshInterval = 5000, onRetry }: GenerationJobListProps) {
+export function GenerationJobList({ jobs, onRetry }: GenerationJobListProps) {
   const [displayJobs, setDisplayJobs] = useState<GenerationJobRow[]>(jobs);
   const [retryingId, setRetryingId] = useState<number | null>(null);
 
@@ -38,11 +37,29 @@ export function GenerationJobList({ jobs, refreshInterval = 5000, onRetry }: Gen
     setDisplayJobs(jobs);
   }, [jobs]);
 
+  const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+  const retryViaApi = async (jobId: number) => {
+    const response = await fetch(`/api/ai/generation-jobs/${jobId}/retry`, { method: 'POST' });
+    const payload = await response.json().catch(() => ({} as { error?: string }));
+    if (!response.ok) {
+      throw new Error(payload.error ?? 'Retry failed');
+    }
+  };
+
   const handleRetry = async (jobId: number) => {
-    if (!onRetry) return;
     setRetryingId(jobId);
     try {
-      await onRetry(jobId);
+      if (onRetry) {
+        await onRetry(jobId);
+      } else {
+        await retryViaApi(jobId);
+      }
+      setDisplayJobs((prev) => prev.map((job) => (
+        job.id === jobId
+          ? { ...job, status: 'pending', error_message: undefined }
+          : job
+      )));
       toast.success('Retry queued');
     } catch (err) {
       toast.error(`Retry failed: ${err instanceof Error ? err.message : 'Unknown error'}`);
@@ -102,7 +119,7 @@ export function GenerationJobList({ jobs, refreshInterval = 5000, onRetry }: Gen
             <div className="flex items-start justify-between">
               <div className="flex-1">
                 <CardTitle className="text-base">
-                  <Link href={`/accounts/${job.account_name.toLowerCase().replace(/\s+/g, '-')}`} className="hover:underline">
+                  <Link href={`/accounts/${slugify(job.account_name)}`} className="hover:underline">
                     {job.account_name}
                   </Link>
                 </CardTitle>
@@ -143,8 +160,10 @@ export function GenerationJobList({ jobs, refreshInterval = 5000, onRetry }: Gen
             )}
 
             {job.status === 'completed' && (
-              <Button variant="outline" size="sm" className="w-full">
-                View & Send
+              <Button variant="outline" size="sm" className="w-full" asChild>
+                <Link href={`/accounts/${slugify(job.account_name)}`}>
+                  View & Send
+                </Link>
               </Button>
             )}
 
