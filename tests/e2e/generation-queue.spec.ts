@@ -3,10 +3,10 @@ import { loginAsCasey, openRoutablePage } from './helpers/session';
 
 test('generation queue renders jobs and retry controls', async ({ page }) => {
   const loggedIn = await loginAsCasey(page);
-  test.skip(!loggedIn, 'Auth endpoints are not available for this base URL/environment.');
+  expect(loggedIn).toBe(true);
 
   const routable = await openRoutablePage(page, '/queue/generations', 'Generation Queue');
-  test.skip(!routable, 'Route not deployed on this base URL yet.');
+  expect(routable).toBe(true);
 
   await expect(page.locator('body')).toContainText('Job List');
   const workspaceLinks = page.getByRole('link', { name: /Generated Content Workspace|Open Workspace/i });
@@ -16,7 +16,10 @@ test('generation queue renders jobs and retry controls', async ({ page }) => {
 
   const retryButtons = page.getByRole('button', { name: /Retry Generation/i });
   const retryCount = await retryButtons.count();
-  test.skip(retryCount === 0, 'No failed retryable jobs are currently visible.');
+  if (retryCount === 0) {
+    await expect(page.locator('body')).toContainText(/Status:/i);
+    return;
+  }
 
   const allowMutation = process.env.PLAYWRIGHT_ALLOW_MUTATION === '1';
   if (!allowMutation) {

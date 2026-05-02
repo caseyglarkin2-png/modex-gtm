@@ -3,10 +3,10 @@ import { loginAsCasey, openRoutablePage } from './helpers/session';
 
 test('generated content bulk preview shows selected items and guard flow', async ({ page }) => {
   const loggedIn = await loginAsCasey(page);
-  test.skip(!loggedIn, 'Auth endpoints are not available for this base URL/environment.');
+  expect(loggedIn).toBe(true);
 
   const routable = await openRoutablePage(page, '/generated-content', 'Generated Content');
-  test.skip(!routable, 'Route not deployed on this base URL yet.');
+  expect(routable).toBe(true);
 
   const selectAllButton = page.getByRole('button', { name: /Select All Visible|Clear Selection/i });
   await expect(selectAllButton).toBeVisible();
@@ -19,7 +19,10 @@ test('generated content bulk preview shows selected items and guard flow', async
   await page.getByRole('button', { name: /Select All Visible/i }).click();
 
   const bulkButton = page.getByRole('button', { name: /Bulk Preview & Queue Send/i });
-  test.skip((await bulkButton.count()) === 0, 'No selectable generated content rows are available.');
+  if ((await bulkButton.count()) === 0) {
+    await expect(page.locator('body')).toContainText(/no recipients|No generated one-pagers yet/i);
+    return;
+  }
   await bulkButton.click();
 
   await expect(page.getByRole('heading', { name: 'Bulk Preview' })).toBeVisible();

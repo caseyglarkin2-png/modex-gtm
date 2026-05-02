@@ -43,8 +43,11 @@ export async function loginAsCasey(page: Page): Promise<boolean> {
   await page.goto('/login', { waitUntil: 'domcontentloaded' });
   const emailField = page.getByPlaceholder('casey@freightroll.com');
   if ((await emailField.count()) === 0) return false;
+  await emailField.click();
   await emailField.fill(AUTH_EMAIL);
-  await page.getByRole('button', { name: /Sign in with Email/i }).click();
+  const signInButton = page.getByRole('button', { name: /Sign in with Email/i });
+  await expect(signInButton).toBeEnabled({ timeout: 10_000 });
+  await signInButton.click();
   await page.waitForLoadState('networkidle');
 
   return hasAuthenticatedSession(page);

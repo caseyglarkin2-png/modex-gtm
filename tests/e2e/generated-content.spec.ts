@@ -3,11 +3,11 @@ import { loginAsCasey } from './helpers/session';
 
 test('generated content page renders filters and workspace', async ({ page }) => {
   const loggedIn = await loginAsCasey(page);
-  test.skip(!loggedIn, 'Auth endpoints are not available for this base URL/environment.');
+  expect(loggedIn).toBe(true);
 
   await page.goto('/generated-content', { waitUntil: 'domcontentloaded' });
   const heading = page.locator('h1');
-  test.skip(await heading.innerText() === 'Page Not Found', 'Route not deployed on this base URL yet.');
+  await expect(heading).not.toHaveText('Page Not Found');
 
   await expect(heading).toContainText('Generated Content');
   await expect(page.getByPlaceholder('Search accounts/campaigns')).toBeVisible();

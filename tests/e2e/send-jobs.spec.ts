@@ -3,10 +3,10 @@ import { loginAsCasey, openRoutablePage } from './helpers/session';
 
 test('async send job queue action opens tracker flow', async ({ page }) => {
   const loggedIn = await loginAsCasey(page);
-  test.skip(!loggedIn, 'Auth endpoints are not available for this base URL/environment.');
+  expect(loggedIn).toBe(true);
 
   const routable = await openRoutablePage(page, '/generated-content', 'Generated Content');
-  test.skip(!routable, 'Route not deployed on this base URL yet.');
+  expect(routable).toBe(true);
 
   if (await page.getByText(/No generated one-pagers yet/i).count()) {
     await expect(page.getByText(/No generated one-pagers yet/i)).toBeVisible();
@@ -15,7 +15,10 @@ test('async send job queue action opens tracker flow', async ({ page }) => {
 
   await page.getByRole('button', { name: /Select All Visible/i }).click();
   const bulkButton = page.getByRole('button', { name: /Bulk Preview & Queue Send/i });
-  test.skip((await bulkButton.count()) === 0, 'No bulk-send eligible rows are currently available.');
+  if ((await bulkButton.count()) === 0) {
+    await expect(page.locator('body')).toContainText(/no recipients|No generated one-pagers yet/i);
+    return;
+  }
   await bulkButton.click();
 
   const queueButton = page.getByRole('button', { name: 'Queue Async Send Job' });
