@@ -18,6 +18,8 @@ export interface CronStateValue {
 }
 
 export const KNOWN_CRONS: Array<{ name: string; label: string; path: string; schedule: string }> = [
+  { name: 'process-generation-jobs', label: 'Generation Job Worker', path: '/api/cron/process-generation-jobs', schedule: '*/5 * * * *' },
+  { name: 'process-send-jobs', label: 'Send Job Worker', path: '/api/cron/process-send-jobs', schedule: '*/2 * * * *' },
   { name: 'check-inbox', label: 'Inbox Polling', path: '/api/cron/check-inbox', schedule: '*/5 * * * *' },
   { name: 'daily-digest', label: 'Daily Digest', path: '/api/cron/daily-digest', schedule: '0 12 * * *' },
   { name: 'sync-hubspot', label: 'HubSpot Sync', path: '/api/cron/sync-hubspot', schedule: '0 */6 * * *' },

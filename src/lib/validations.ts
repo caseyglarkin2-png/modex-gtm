@@ -151,3 +151,20 @@ export const BulkSendEmailSchema = z.object({
   accountName: z.string().optional(),
   generatedContentId: z.number().int().positive().optional(),
 });
+
+export const BulkSendAsyncSchema = z.object({
+  guardWarningsAcknowledged: z.boolean().default(false),
+  requestedBy: z.string().optional(),
+  items: z.array(z.object({
+    generatedContentId: z.number().int().positive(),
+    accountName: z.string().min(1),
+    subject: z.string().min(1),
+    bodyHtml: z.string().min(1),
+    recipients: z.array(z.object({
+      to: z.string().email(),
+      personaName: z.string().optional(),
+      accountName: z.string().optional(),
+    })).min(1),
+  })).min(1),
+});
+export type BulkSendAsyncInput = z.infer<typeof BulkSendAsyncSchema>;

@@ -130,6 +130,7 @@ model Campaign {
   generated_content GeneratedContent[]
   email_logs        EmailLog[]
   generationJobs    GenerationJob[]
+  send_job_recipients SendJobRecipient[]
 
   @@map("campaigns")
 }
@@ -409,6 +410,7 @@ model GeneratedContent {
   created_at   DateTime @default(now())
 
   campaign Campaign? @relation(fields: [campaign_id], references: [id])
+  send_job_recipients SendJobRecipient[]
 
   @@index([account_name, content_type])
   @@index([campaign_id])
@@ -464,6 +466,7 @@ model EmailLog {
   created_at    DateTime @default(now())
 
   campaign Campaign? @relation(fields: [campaign_id], references: [id])
+  send_job_recipients SendJobRecipient[]
 
   @@index([account_name])
   @@index([campaign_id])
@@ -471,6 +474,60 @@ model EmailLog {
   @@index([provider_message_id])
   @@index([thread_id])
   @@map("email_logs")
+}
+
+model SendJob {
+  id               Int      @id @default(autoincrement())
+  status           String   @default("pending") // pending | processing | completed | failed | partial | cancelled
+  requested_by     String?
+  total_recipients Int      @default(0)
+  sent_count       Int      @default(0)
+  failed_count     Int      @default(0)
+  skipped_count    Int      @default(0)
+  error_message    String?
+  started_at       DateTime?
+  completed_at     DateTime?
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+
+  recipients SendJobRecipient[]
+
+  @@index([status, created_at])
+  @@map("send_jobs")
+}
+
+model SendJobRecipient {
+  id                   Int      @id @default(autoincrement())
+  send_job_id          Int
+  generated_content_id Int
+  campaign_id          Int?
+  account_name         String
+  persona_name         String?
+  to_email             String
+  subject              String
+  body_html            String
+  status               String   @default("pending") // pending | sending | sent | failed | skipped
+  error_message        String?
+  provider_message_id  String?
+  hubspot_engagement_id String?
+  email_log_id         Int?
+  idempotency_key      String   @unique
+  attempted_at         DateTime?
+  sent_at              DateTime?
+  created_at           DateTime @default(now())
+  updated_at           DateTime @updatedAt
+
+  send_job          SendJob          @relation(fields: [send_job_id], references: [id], onDelete: Cascade)
+  generated_content GeneratedContent @relation(fields: [generated_content_id], references: [id])
+  campaign          Campaign?        @relation(fields: [campaign_id], references: [id])
+  email_log         EmailLog?        @relation(fields: [email_log_id], references: [id])
+
+  @@unique([send_job_id, generated_content_id, to_email])
+  @@index([send_job_id, status])
+  @@index([status, created_at])
+  @@index([generated_content_id])
+  @@index([campaign_id])
+  @@map("send_job_recipients")
 }
 
 model UnsubscribedEmail {
