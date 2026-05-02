@@ -2,13 +2,55 @@
 
 import { revalidatePath } from 'next/cache';
 import { prisma } from '@/lib/prisma';
-import { hsSearchContacts, type HubSpotContact } from '@/lib/hubspot/contacts';
+import { getContactById, hsSearchContacts, listRecentContacts, type HubSpotContact } from '@/lib/hubspot/contacts';
 import { normalizeName, normalizeTitle, parseDomainFromEmail, scoreContactQuality, splitName } from '@/lib/contact-standard';
+import { buildHubSpotIntakeCandidates, type HubSpotIntakeCandidate } from '@/lib/contacts/hubspot-intake';
+
+const BLOCKED_DOMAINS = new Set([
+  'dannon.com', 'danone.com', 'bluetriton.com', 'yardflow.ai',
+  'niagarawater.com', 'lpcorp.com', 'xpo.com', 'kraftheinz.com', 'freightroll.com',
+]);
 
 export interface SearchResult {
-  contacts: HubSpotContact[];
+  contacts: HubSpotIntakeCandidate[];
   total: number;
   nextAfter?: string;
+}
+
+async function annotateContacts(contacts: HubSpotContact[]): Promise<HubSpotIntakeCandidate[]> {
+  if (contacts.length === 0) return [];
+
+  const contactIds = contacts.map((c) => c.id);
+  const emails = contacts.map((c) => c.email.toLowerCase());
+
+  const personas = await prisma.persona.findMany({
+    where: {
+      OR: [
+        { hubspot_contact_id: { in: contactIds } },
+        { email: { in: emails } },
+      ],
+    },
+    select: {
+      id: true,
+      hubspot_contact_id: true,
+      email: true,
+    },
+  });
+
+  const personaIds = personas.map((p) => p.id);
+  const enrichments = personaIds.length
+    ? await prisma.contactEnrichment.findMany({
+      where: { persona_id: { in: personaIds } },
+      select: {
+        persona_id: true,
+        apollo_person_id: true,
+        enrichment_confidence: true,
+        last_enriched_at: true,
+      },
+    })
+    : [];
+
+  return buildHubSpotIntakeCandidates(contacts, personas, enrichments);
 }
 
 export async function searchHubSpotContacts(query: string, after?: string): Promise<SearchResult> {
@@ -16,8 +58,9 @@ export async function searchHubSpotContacts(query: string, after?: string): Prom
 
   try {
     const result = await hsSearchContacts(query, after, 50);
+    const annotated = await annotateContacts(result.contacts);
     return {
-      contacts: result.contacts,
+      contacts: annotated,
       total: result.total,
       nextAfter: result.nextAfter,
     };
@@ -26,8 +69,33 @@ export async function searchHubSpotContacts(query: string, after?: string): Prom
   }
 }
 
-export async function importHubSpotContact(contact: HubSpotContact): Promise<{ success: boolean; error?: string }> {
+export async function listRecentHubSpotContacts(after?: string): Promise<SearchResult> {
   try {
+    const result = await listRecentContacts(after, 50);
+    const annotated = await annotateContacts(result.contacts);
+    return {
+      contacts: annotated,
+      total: annotated.length,
+      nextAfter: result.nextAfter,
+    };
+  } catch {
+    return { contacts: [], total: 0 };
+  }
+}
+
+export async function importHubSpotContact(contact: HubSpotContact): Promise<{ success: boolean; error?: string }> {
+  const result = await importHubSpotContactInternal(contact);
+  if (result.success) revalidatePath('/contacts');
+  return result;
+}
+
+async function importHubSpotContactInternal(contact: HubSpotContact): Promise<{ success: boolean; error?: string; blocked?: boolean; linked?: boolean; skipped?: boolean }> {
+  try {
+    const blockedDomain = parseDomainFromEmail(contact.email);
+    if (blockedDomain && BLOCKED_DOMAINS.has(blockedDomain)) {
+      return { success: false, error: 'Blocked domain', blocked: true };
+    }
+
     // Check dedup
     const existing = await prisma.persona.findFirst({
       where: {
@@ -45,10 +113,9 @@ export async function importHubSpotContact(contact: HubSpotContact): Promise<{ s
           where: { id: existing.id },
           data: { hubspot_contact_id: contact.id },
         });
-        revalidatePath('/contacts');
-        return { success: true };
+        return { success: true, linked: true };
       }
-      return { success: false, error: 'Contact already exists in database' };
+      return { success: false, error: 'Contact already exists in database', skipped: true };
     }
 
     const domain = parseDomainFromEmail(contact.email);
@@ -106,12 +173,44 @@ export async function importHubSpotContact(contact: HubSpotContact): Promise<{ s
       },
     });
 
-    revalidatePath('/contacts');
     return { success: true };
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Import failed';
     return { success: false, error: message };
   }
+}
+
+export async function importHubSpotContactsBulk(hubspotContactIds: string[]): Promise<{
+  imported: number;
+  linked: number;
+  skipped: number;
+  blocked: number;
+  errors: number;
+}> {
+  if (hubspotContactIds.length === 0) {
+    return { imported: 0, linked: 0, skipped: 0, blocked: 0, errors: 0 };
+  }
+
+  const summary = { imported: 0, linked: 0, skipped: 0, blocked: 0, errors: 0 };
+  for (const hsId of hubspotContactIds.slice(0, 100)) {
+    try {
+      const contact = await getContactById(hsId);
+      if (!contact) {
+        summary.errors++;
+        continue;
+      }
+      const imported = await importHubSpotContactInternal(contact);
+      if (imported.success && imported.linked) summary.linked++;
+      else if (imported.success) summary.imported++;
+      else if (imported.blocked) summary.blocked++;
+      else if (imported.skipped) summary.skipped++;
+      else summary.errors++;
+    } catch {
+      summary.errors++;
+    }
+  }
+  revalidatePath('/contacts');
+  return summary;
 }
 
 export async function addToWave(
