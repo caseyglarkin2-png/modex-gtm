@@ -6,10 +6,21 @@ const mockedPrisma = {
     findUnique: vi.fn(),
   },
 };
+const mockedStorePreview = vi.fn();
 
 vi.mock('@/lib/prisma', () => ({
   prisma: mockedPrisma,
 }));
+
+vi.mock('@/lib/enrichment/writeback-approval', async () => {
+  const actual = await vi.importActual<typeof import('@/lib/enrichment/writeback-approval')>(
+    '@/lib/enrichment/writeback-approval',
+  );
+  return {
+    ...actual,
+    storeWritebackPreview: mockedStorePreview,
+  };
+});
 
 describe('enrichment writeback preview route', () => {
   beforeEach(() => {
@@ -54,5 +65,7 @@ describe('enrichment writeback preview route', () => {
       field: 'job_title',
       decision: 'accept_candidate',
     });
+    expect(json.previewChecksum).toMatch(/^[a-f0-9]{64}$/);
+    expect(mockedStorePreview).toHaveBeenCalled();
   });
 });

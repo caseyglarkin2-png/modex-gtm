@@ -4,6 +4,7 @@ import { prisma } from '@/lib/prisma';
 import { getEnrichmentThresholds } from '@/lib/enrichment/config';
 import { buildWritebackPreview } from '@/lib/enrichment/writeback-preview';
 import type { MergeSource } from '@/lib/enrichment/merge-policy';
+import { computePreviewChecksum, storeWritebackPreview } from '@/lib/enrichment/writeback-approval';
 
 export const dynamic = 'force-dynamic';
 
@@ -71,10 +72,13 @@ export async function POST(req: NextRequest) {
     candidate: candidateMap,
     minConfidenceForOverwrite: thresholds.minConfidenceForOverwrite,
   });
+  const previewChecksum = computePreviewChecksum(preview);
+  await storeWritebackPreview(personaId, previewChecksum, preview);
 
   return NextResponse.json({
     personaId,
     threshold: thresholds.minConfidenceForOverwrite,
+    previewChecksum,
     preview,
   });
 }
