@@ -29,5 +29,7 @@ test('generation metrics page renders core admin telemetry', async ({ page }) =>
   await expect(heading).toContainText('Generation Metrics');
   await expect(page.locator('body')).toContainText('Provider Breakdown');
   await expect(page.locator('body')).toContainText('Queue State');
+  await expect(page.locator('body')).toContainText('Send Job State');
+  await expect(page.locator('body')).toContainText('Potentially Stuck Jobs');
   await expect(page.locator('body')).toContainText('Recent Failures');
 });
