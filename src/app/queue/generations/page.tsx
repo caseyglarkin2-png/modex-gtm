@@ -1,11 +1,10 @@
 import { Breadcrumb } from '@/components/breadcrumb';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { prisma } from '@/lib/prisma';
-import { Activity, Zap } from 'lucide-react';
+import { Activity, ArrowRight, Zap } from 'lucide-react';
 import Link from 'next/link';
 import { GenerationJobList, type GenerationJobRow } from '@/components/queue/generation-job-list';
-import { GeneratedContentGrid } from '@/components/queue/generated-content-grid';
-import { buildGeneratedContentWorkspaceData, computeGenerationQueueStats } from '@/lib/generated-content/queries';
+import { computeGenerationQueueStats } from '@/lib/generated-content/queries';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Generation Queue' };
@@ -18,52 +17,17 @@ function normalizeJobStatus(status: string): GenerationJobRow['status'] {
 }
 
 export default async function GenerationQueuePage() {
-  const [jobs, generatedRows, recipients] = await Promise.all([
-    prisma.generationJob.findMany({
-      orderBy: { created_at: 'desc' },
-      take: 120,
-      include: {
-        campaign: {
-          select: { name: true },
-        },
+  const jobs = await prisma.generationJob.findMany({
+    orderBy: { created_at: 'desc' },
+    take: 120,
+    include: {
+      campaign: {
+        select: { name: true },
       },
-    }),
-    prisma.generatedContent.findMany({
-      where: { content_type: 'one_pager' },
-      orderBy: [{ account_name: 'asc' }, { version: 'desc' }],
-      take: 300,
-      select: {
-        id: true,
-        account_name: true,
-        version: true,
-        provider_used: true,
-        external_send_count: true,
-        is_published: true,
-        created_at: true,
-        content: true,
-        campaign_id: true,
-        campaign: {
-          select: { name: true },
-        },
-      },
-    }),
-    prisma.persona.findMany({
-      where: { email: { not: null }, do_not_contact: false },
-      select: {
-        id: true,
-        account_name: true,
-        name: true,
-        email: true,
-        title: true,
-      },
-      orderBy: [{ account_name: 'asc' }, { name: 'asc' }],
-    }),
-  ]);
+    },
+  });
 
   const stats = computeGenerationQueueStats(jobs);
-  const accountsWithGenerated = new Set(generatedRows.map((row) => row.account_name));
-  const recipientsForGeneratedAccounts = recipients.filter((recipient) => accountsWithGenerated.has(recipient.account_name));
-  const { cards: generatedCards, recipientsByAccount } = buildGeneratedContentWorkspaceData(generatedRows, jobs, recipientsForGeneratedAccounts);
   const jobsWithCampaignNames: GenerationJobRow[] = jobs.map((job) => ({
     id: job.id,
     account_name: job.account_name,
@@ -86,7 +50,7 @@ export default async function GenerationQueuePage() {
       <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Generation Queue</h1>
-          <p className="text-sm text-muted-foreground">Track one-pager generation jobs and their status.</p>
+          <p className="text-sm text-muted-foreground">Track one-pager generation jobs and run retries from one place.</p>
         </div>
         <div className="flex items-center gap-2">
           <Link
@@ -94,7 +58,7 @@ export default async function GenerationQueuePage() {
             className="inline-flex items-center gap-1 rounded-lg border px-3 py-2 text-xs text-muted-foreground hover:bg-muted"
           >
             <Zap className="h-3.5 w-3.5" />
-            Generated Content
+            Generated Content Workspace
           </Link>
           <div className="flex items-center gap-2 rounded-lg border px-3 py-2 text-xs text-muted-foreground">
             <Activity className="h-3.5 w-3.5" />
@@ -138,14 +102,25 @@ export default async function GenerationQueuePage() {
         </Card>
       </div>
 
+      <Card>
+        <CardHeader className="pb-2">
+          <CardTitle className="text-sm">Content Operations</CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-wrap items-center justify-between gap-3 text-sm text-muted-foreground">
+          <p>Preview, publish, single-send, and async bulk-send workflows now live in one canonical workspace.</p>
+          <Link
+            href="/generated-content"
+            className="inline-flex items-center gap-1 rounded-md border px-3 py-2 text-xs hover:bg-muted"
+          >
+            Open Workspace
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </CardContent>
+      </Card>
+
       <div>
         <h2 className="mb-4 text-lg font-semibold">Job List</h2>
         <GenerationJobList jobs={jobsWithCampaignNames} />
-      </div>
-
-      <div>
-        <h2 className="mb-4 text-lg font-semibold">Generated Content</h2>
-        <GeneratedContentGrid cards={generatedCards} recipientsByAccount={recipientsByAccount} />
       </div>
     </div>
   );
