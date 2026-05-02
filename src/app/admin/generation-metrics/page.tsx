@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { prisma } from '@/lib/prisma';
 import { computeGenerationMetrics } from '@/lib/admin/generation-metrics';
 import { computeSendJobMetrics } from '@/lib/admin/send-job-metrics';
+import { computeStuckJobs } from '@/lib/admin/stuck-jobs';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Generation Metrics' };
@@ -14,11 +15,12 @@ export default async function GenerationMetricsPage() {
   const [jobs, sendJobs, sendJobRecipients] = await Promise.all([
     prisma.generationJob.findMany({
       orderBy: { created_at: 'desc' },
-      take: 500,
-      select: {
-        status: true,
-        provider_used: true,
-        started_at: true,
+        take: 500,
+        select: {
+          id: true,
+          status: true,
+          provider_used: true,
+          started_at: true,
         completed_at: true,
         created_at: true,
         error_message: true,
@@ -28,17 +30,20 @@ export default async function GenerationMetricsPage() {
     }),
     prisma.sendJob.findMany({
       orderBy: { created_at: 'desc' },
-      take: 250,
-      select: {
-        status: true,
-        created_at: true,
-        started_at: true,
-        completed_at: true,
-        sent_count: true,
-        failed_count: true,
-        skipped_count: true,
-      },
-    }),
+        take: 250,
+        select: {
+          id: true,
+          status: true,
+          created_at: true,
+          started_at: true,
+          completed_at: true,
+          total_recipients: true,
+          sent_count: true,
+          failed_count: true,
+          skipped_count: true,
+          updated_at: true,
+        },
+      }),
     prisma.sendJobRecipient.findMany({
       orderBy: { created_at: 'desc' },
       take: 500,
@@ -59,15 +64,10 @@ export default async function GenerationMetricsPage() {
     .filter((job) => job.status === 'failed')
     .slice(0, 8);
 
-  const stuckThresholdMs = 15 * 60 * 1000;
-  const now = Date.now();
-  const stuckJobs = jobs
-    .filter((job) => job.status === 'processing')
-    .filter((job) => {
-      const startedAt = job.started_at?.getTime() ?? job.updated_at.getTime();
-      return now - startedAt > stuckThresholdMs;
-    })
-    .slice(0, 8);
+  const stuckJobs = computeStuckJobs({
+    generationJobs: jobs,
+    sendJobs,
+  }).slice(0, 8);
 
   return (
     <div className="space-y-6">
@@ -180,13 +180,18 @@ export default async function GenerationMetricsPage() {
             {stuckJobs.length === 0 ? (
               <p className="text-sm text-muted-foreground">No processing jobs older than 15 minutes.</p>
             ) : (
-              stuckJobs.map((job, idx) => (
-                <div key={`${job.account_name}-${idx}`} className="flex items-center justify-between rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm">
+              stuckJobs.map((job) => (
+                <div key={`${job.kind}-${job.id}`} className="space-y-1 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm">
                   <div>
-                    <p className="font-medium text-amber-900">{job.account_name}</p>
-                    <p className="text-xs text-amber-700">Updated {new Date(job.updated_at).toLocaleString()}</p>
+                    <p className="font-medium text-amber-900">{job.label}</p>
+                    <p className="text-xs text-amber-700">
+                      {job.kind} job • {job.ageMinutes}m old • Updated {job.updatedAt.toLocaleString()}
+                    </p>
                   </div>
-                  <AlertTriangle className="h-4 w-4 text-amber-700" />
+                  <div className="flex items-start gap-2 text-xs text-amber-800">
+                    <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                    <p>{job.recommendedAction}</p>
+                  </div>
                 </div>
               ))
             )}
