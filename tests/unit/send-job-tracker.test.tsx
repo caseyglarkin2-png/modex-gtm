@@ -114,4 +114,32 @@ describe('SendJobTracker', () => {
       expect(toastError).toHaveBeenCalledWith('Failed to fetch send job status');
     });
   });
+
+  it('renders completed state without retry actions', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => ({
+      ok: true,
+      json: async () => makeGetPayload('completed'),
+    })));
+
+    render(<SendJobTracker jobId={77} pollMs={60_000} />);
+
+    await screen.findByText('Send Job #77');
+    expect(screen.getByText('completed')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /Retry Failed Recipients/i })).not.toBeInTheDocument();
+    expect(screen.getByText(/HubSpot 101/i)).toBeInTheDocument();
+  });
+
+  it('renders failed state with recipient error details', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => ({
+      ok: true,
+      json: async () => makeGetPayload('failed'),
+    })));
+
+    render(<SendJobTracker jobId={77} pollMs={60_000} />);
+
+    await screen.findByText('Send Job #77');
+    expect(screen.getAllByText('failed').length).toBeGreaterThan(0);
+    expect(screen.getByText('Mailbox unavailable')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Retry Failed Recipients/i })).toBeInTheDocument();
+  });
 });

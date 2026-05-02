@@ -1,25 +1,8 @@
 import { expect, test } from '@playwright/test';
-
-async function login(page: import('@playwright/test').Page) {
-  const csrfRes = await page.request.get('/api/auth/csrf');
-  if (!csrfRes.ok()) return false;
-  const contentType = csrfRes.headers()['content-type'] ?? '';
-  if (!contentType.includes('application/json')) return false;
-  const { csrfToken } = (await csrfRes.json()) as { csrfToken: string };
-  if (!csrfToken) return false;
-
-  const authRes = await page.request.post('/api/auth/callback/credentials', {
-    form: {
-      email: 'casey@freightroll.com',
-      csrfToken,
-      json: 'true',
-    },
-  });
-  return authRes.ok();
-}
+import { loginAsCasey } from './helpers/session';
 
 test('generated content page renders filters and workspace', async ({ page }) => {
-  const loggedIn = await login(page);
+  const loggedIn = await loginAsCasey(page);
   test.skip(!loggedIn, 'Auth endpoints are not available for this base URL/environment.');
 
   await page.goto('/generated-content', { waitUntil: 'domcontentloaded' });
@@ -35,6 +18,9 @@ test('generated content page renders filters and workspace', async ({ page }) =>
   if ((await accountCards.count()) > 0) {
     const previewButton = page.getByRole('button', { name: /Preview/i }).first();
     await expect(previewButton).toBeVisible();
+    await previewButton.click();
+    await expect(page.locator('body')).toContainText(/Preview the selected generated one-pager version/i);
+    await page.keyboard.press('Escape');
 
     await page.getByPlaceholder('Search accounts/campaigns').fill('acme');
     await expect(page.getByText(/account card\(s\) visible/i)).toBeVisible();
