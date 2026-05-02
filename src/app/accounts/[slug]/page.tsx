@@ -448,7 +448,11 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
               <div className="flex flex-wrap gap-2">
                 <GeneratorDialog accountName={account.name} defaultType="meeting_prep" />
                 <GeneratorDialog accountName={account.name} defaultType="call_script" />
-                <OnePagerDialog accountName={account.name} />
+                <Button variant="outline" size="sm" asChild>
+                  <Link href={`/generated-content?account=${encodeURIComponent(account.name)}`}>
+                    Open One-Pager Workspace
+                  </Link>
+                </Button>
               </div>
               {[
                 { label: 'Why This Account', value: brief.why_this_account },

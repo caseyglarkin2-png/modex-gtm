@@ -1,7 +1,7 @@
 'use client';
 
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { OnePagerDialog } from '@/components/ai/one-pager-preview';
 import { OutreachSequenceDialog } from '@/components/ai/outreach-sequence';
 import { FileImage, Zap } from 'lucide-react';
 
@@ -13,14 +13,11 @@ interface CampaignToolbarProps {
 export function CampaignToolbar({ accountName, personas }: CampaignToolbarProps) {
   return (
     <div className="flex items-center gap-1.5">
-      <OnePagerDialog
-        accountName={accountName}
-        trigger={
-          <Button variant="outline" size="sm" className="h-7 text-[11px] gap-1">
-            <FileImage className="h-3 w-3" /> One-Pager
-          </Button>
-        }
-      />
+      <Button variant="outline" size="sm" className="h-7 text-[11px] gap-1" asChild>
+        <Link href={`/generated-content?account=${encodeURIComponent(accountName)}`}>
+          <FileImage className="h-3 w-3" /> One-Pager
+        </Link>
+      </Button>
       <OutreachSequenceDialog
         accountName={accountName}
         personas={personas}

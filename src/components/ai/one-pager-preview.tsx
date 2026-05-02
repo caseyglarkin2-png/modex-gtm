@@ -1,14 +1,13 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { readApiResponse } from '@/lib/api-response';
 import { Button } from '@/components/ui/button';
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger,
 } from '@/components/ui/dialog';
-import { FileImage, RefreshCw, Copy, Download, Send, Mail } from 'lucide-react';
-import { Input } from '@/components/ui/input';
+import { FileImage, RefreshCw, Copy, Download } from 'lucide-react';
 
 export interface OnePagerData {
   headline: string;
@@ -271,9 +270,6 @@ export function OnePagerDialog({
   const setOpen = variant === 'dialog' ? (controlledOnOpenChange ?? setInternalOpen) : () => {};
   const [data, setData] = useState<OnePagerData | null>(null);
   const [loading, setLoading] = useState(false);
-  const [sendEmail, setSendEmail] = useState('');
-  const [sending, setSending] = useState(false);
-  const [showSendForm, setShowSendForm] = useState(false);
 
   async function generate() {
     setLoading(true);
@@ -315,33 +311,6 @@ export function OnePagerDialog({
     toast.success('Downloaded');
   }
 
-  async function handleSend() {
-    if (!data || !sendEmail.trim()) return;
-    setSending(true);
-    try {
-      const html = onePagerToHtml(data, accountName);
-      const res = await fetch('/api/email/send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          to: sendEmail.trim(),
-          subject: `YardFlow - Built for ${accountName}`,
-          bodyHtml: html,
-          accountName,
-        }),
-      });
-      const json = await readApiResponse<{ error?: string }>(res);
-      if (!res.ok) throw new Error(json.error ?? 'Send failed');
-      toast.success(`One-pager sent to ${sendEmail}`);
-      setShowSendForm(false);
-      setSendEmail('');
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : 'Send failed');
-    } finally {
-      setSending(false);
-    }
-  }
-
   // Shared content for both dialog and inline modes
   const content = (
     <>
@@ -378,34 +347,14 @@ export function OnePagerDialog({
             <Button variant="outline" size="sm" onClick={downloadHtml} className="gap-1.5">
               <Download className="h-3.5 w-3.5" /> Download
             </Button>
-            <Button size="sm" onClick={() => setShowSendForm(!showSendForm)} className="gap-1.5">
-              <Mail className="h-3.5 w-3.5" /> Send as Email
+            <Button size="sm" className="gap-1.5" asChild>
+              <Link href={`/generated-content?account=${encodeURIComponent(accountName)}`}>
+                Open Workspace
+              </Link>
             </Button>
           </div>
         )}
       </div>
-
-      {/* Send form */}
-      {showSendForm && data && (
-        <div className="px-6 py-3 border-t bg-muted/30 flex items-center gap-2">
-          <Input
-            type="email"
-            placeholder="Recipient email..."
-            value={sendEmail}
-            onChange={(e) => setSendEmail(e.target.value)}
-            className="h-8 text-sm flex-1"
-          />
-          <Button
-            size="sm"
-            onClick={handleSend}
-            disabled={sending || !sendEmail.trim()}
-            className="gap-1.5 shrink-0"
-          >
-            {sending ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <Send className="h-3.5 w-3.5" />}
-            {sending ? 'Sending...' : 'Send'}
-          </Button>
-        </div>
-      )}
     </>
   );
 

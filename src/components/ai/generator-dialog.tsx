@@ -17,14 +17,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Sparkles, Copy, RefreshCw, ChevronDown, Download, FileImage, Eye, Pencil, Send, Mail } from 'lucide-react';
+import { Sparkles, Copy, RefreshCw, ChevronDown, Eye, Pencil, Send, Mail } from 'lucide-react';
 import { VoicePreviewButton } from '@/components/voice-preview-button';
-import { OnePagerPreview, type OnePagerData, onePagerToHtml } from '@/components/ai/one-pager-preview';
 import { Input } from '@/components/ui/input';
 import type { GenerateContentInput } from '@/lib/validations';
 import { readApiResponse } from '@/lib/api-response';
 
-type ContentType = GenerateContentInput['type'];
+type ContentType = Exclude<GenerateContentInput['type'], 'infographic'>;
 type Tone = GenerateContentInput['tone'];
 type Length = GenerateContentInput['length'];
 
@@ -44,7 +43,6 @@ const TYPE_LABELS: Record<ContentType, string> = {
   dm: 'LinkedIn DM',
   call_script: 'Call Script',
   meeting_prep: 'Meeting Prep',
-  infographic: 'One-Pager',
 };
 
 const TONE_LABELS: Record<Tone, string> = {
@@ -73,14 +71,12 @@ export function GeneratorDialog({
   const [tone, setTone] = useState<Tone>('conversational');
   const [length, setLength] = useState<Length>('medium');
   const [content, setContent] = useState('');
-  const [onePagerData, setOnePagerData] = useState<OnePagerData | null>(null);
   const [loading, setLoading] = useState(false);
   const [previewMode, setPreviewMode] = useState(true);
   const [sendEmail, setSendEmail] = useState(personaEmail ?? '');
   const [sending, setSending] = useState(false);
   const [showSendForm, setShowSendForm] = useState(false);
 
-  const isOnePager = type === 'infographic';
   const isSendable = type === 'email' || type === 'follow_up';
 
   useEffect(() => {
@@ -92,32 +88,18 @@ export function GeneratorDialog({
   async function generate() {
     setLoading(true);
     setContent('');
-    setOnePagerData(null);
     try {
-      if (isOnePager) {
-        // Use the one-pager API for infographic type
-        const res = await fetch('/api/ai/one-pager', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ accountName }),
-        });
-        const json = await readApiResponse<{ content?: OnePagerData; error?: string }>(res);
-        if (!res.ok) throw new Error(json.error ?? 'Generation failed');
-        if (!json.content) throw new Error('Could not parse one-pager content');
-        setOnePagerData(json.content);
-      } else {
-        const res = await fetch('/api/ai/generate', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ type, accountName, personaName, campaignSlug, tone, length }),
-        });
-        const data = await readApiResponse<{ content?: string; error?: string }>(res);
-        if (!res.ok) {
-          throw new Error(data.error ?? 'Generation failed');
-        }
-        const result = data as { content: string };
-        setContent(result.content);
+      const res = await fetch('/api/ai/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type, accountName, personaName, campaignSlug, tone, length }),
+      });
+      const data = await readApiResponse<{ content?: string; error?: string }>(res);
+      if (!res.ok) {
+        throw new Error(data.error ?? 'Generation failed');
       }
+      const result = data as { content: string };
+      setContent(result.content);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'AI generation failed');
     } finally {
@@ -126,27 +108,8 @@ export function GeneratorDialog({
   }
 
   function copyToClipboard() {
-    if (onePagerData) {
-      const html = onePagerToHtml(onePagerData, accountName);
-      navigator.clipboard.writeText(html);
-      toast.success('One-pager HTML copied');
-    } else {
-      navigator.clipboard.writeText(content);
-      toast.success('Copied to clipboard');
-    }
-  }
-
-  function downloadOnePager() {
-    if (!onePagerData) return;
-    const html = onePagerToHtml(onePagerData, accountName);
-    const blob = new Blob([html], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${accountName.toLowerCase().replace(/\s+/g, '-')}-yardflow-one-pager.html`;
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Downloaded');
+    navigator.clipboard.writeText(content);
+    toast.success('Copied to clipboard');
   }
 
   function handleUse() {
@@ -199,11 +162,11 @@ export function GeneratorDialog({
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className={`${isOnePager ? 'max-w-3xl' : 'max-w-2xl'} max-h-[90vh] flex flex-col gap-0 p-0`}>
+      <DialogContent className="max-w-2xl max-h-[90vh] flex flex-col gap-0 p-0">
         <DialogHeader className="px-6 pt-6 pb-4 border-b">
           <DialogTitle className="flex items-center gap-2">
-            {isOnePager ? <FileImage className="h-5 w-5 text-blue-500" /> : <Sparkles className="h-5 w-5 text-violet-500" />}
-            {isOnePager ? 'One-Pager Generator' : 'AI Content Generator'}
+            <Sparkles className="h-5 w-5 text-violet-500" />
+            AI Content Generator
             {personaName && (
               <span className="text-sm font-normal text-muted-foreground ml-1">
                 · {personaName} @ {accountName}
@@ -277,13 +240,10 @@ export function GeneratorDialog({
           {loading && (
             <div className="flex items-center gap-2 text-sm text-muted-foreground animate-pulse py-12 justify-center">
               <RefreshCw className="h-4 w-4 animate-spin" />
-              {isOnePager ? 'Generating custom one-pager...' : 'Generating with Gemini...'}
+              Generating with Gemini...
             </div>
           )}
-          {!loading && onePagerData && isOnePager && (
-            <OnePagerPreview data={onePagerData} accountName={accountName} />
-          )}
-          {!loading && content && !isOnePager && (
+          {!loading && content && (
             <div className="space-y-2">
               <div className="flex items-center gap-1 justify-end">
                 <button
@@ -315,11 +275,9 @@ export function GeneratorDialog({
               )}
             </div>
           )}
-          {!loading && !content && !onePagerData && (
+          {!loading && !content && (
             <div className="h-full flex items-center justify-center text-sm text-muted-foreground border-2 border-dashed rounded-md min-h-[200px]">
-              {isOnePager
-                ? `Generate a branded one-pager for ${accountName}`
-                : 'Configure options above and click Generate'}
+              Configure options above and click Generate
             </div>
           )}
         </div>
@@ -327,29 +285,25 @@ export function GeneratorDialog({
         {/* Actions */}
         <div className="px-6 py-4 border-t flex items-center justify-between">
           <Button onClick={generate} disabled={loading} className="gap-2">
-            {isOnePager ? <FileImage className="h-4 w-4" /> : <Sparkles className="h-4 w-4" />}
-            {(content || onePagerData) ? 'Regenerate' : 'Generate'}
+            <Sparkles className="h-4 w-4" />
+            {content ? 'Regenerate' : 'Generate'}
           </Button>
           <div className="flex gap-2">
-            {(content || onePagerData) && (
-              <>                {content && ['email', 'dm', 'call_script'].includes(type) && (
+            {content && (
+              <>
+                {['email', 'dm', 'call_script'].includes(type) && (
                   <VoicePreviewButton text={content} label="Listen" />
-                )}                <Button variant="outline" size="sm" onClick={copyToClipboard}>
-                  <Copy className="h-4 w-4 mr-1" />
-                  {isOnePager ? 'Copy HTML' : 'Copy'}
-                </Button>
-                {isOnePager && onePagerData && (
-                  <Button variant="outline" size="sm" onClick={downloadOnePager}>
-                    <Download className="h-4 w-4 mr-1" />
-                    Download
-                  </Button>
                 )}
-                {onUseContent && content && !isOnePager && (
+                <Button variant="outline" size="sm" onClick={copyToClipboard}>
+                  <Copy className="h-4 w-4 mr-1" />
+                  Copy
+                </Button>
+                {onUseContent && (
                   <Button size="sm" onClick={handleUse}>
                     Use as Draft
                   </Button>
                 )}
-                {isSendable && content && (
+                {isSendable && (
                   <Button size="sm" onClick={() => setShowSendForm(!showSendForm)} className="gap-1.5">
                     <Mail className="h-4 w-4" />
                     Send

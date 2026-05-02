@@ -48,8 +48,8 @@ export function AccountRowActions({
     if (onGenerateOnePager) {
       onGenerateOnePager(account.name);
     } else {
-      // Fallback: navigate to studio with query param
-      router.push(`/studio?tab=one-pager&account=${encodeURIComponent(account.name)}`);
+      // Fallback: navigate to account detail where one-pager generation is canonical.
+      router.push(`/accounts/${account.slug}`);
     }
     setOpen(false);
   }
