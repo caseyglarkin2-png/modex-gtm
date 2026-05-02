@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { OnePageSendDialog, type Recipient } from '@/components/email/one-pager-send-dialog';
+import { GeneratedContentPreviewDialog } from '@/components/generated-content/generated-content-preview-dialog';
 import { toast } from 'sonner';
 import { Send, Upload } from 'lucide-react';
 
@@ -132,6 +133,13 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
               </div>
 
               <div className="flex gap-2">
+                <GeneratedContentPreviewDialog
+                  accountName={card.account_name}
+                  version={selected.version}
+                  content={selected.content}
+                  providerUsed={selected.provider_used}
+                />
+
                 {!selected.is_published && (
                   <Button
                     variant="outline"

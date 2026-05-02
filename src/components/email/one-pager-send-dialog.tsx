@@ -9,7 +9,8 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { Send, Eye, Mail, AlertCircle } from 'lucide-react';
-import { onePagerToHtml, type OnePagerData } from '@/components/ai/one-pager-preview';
+import { resolveGeneratedContentRendering } from '@/lib/generated-content/content-rendering';
+import { buildSendGuardState } from '@/lib/generated-content/send-guard';
 
 export interface Recipient {
   id: number;
@@ -39,22 +40,6 @@ export interface OnePageSendDialogProps {
   trigger?: React.ReactNode;
 }
 
-function tryParseOnePagerHtml(rawContent: string, accountName: string): string {
-  const trimmed = rawContent.trim();
-  if (trimmed.startsWith('<')) return rawContent;
-
-  try {
-    const parsed = JSON.parse(rawContent) as Partial<OnePagerData>;
-    if (parsed && typeof parsed === 'object' && typeof parsed.headline === 'string' && typeof parsed.subheadline === 'string') {
-      return onePagerToHtml(parsed as OnePagerData, accountName);
-    }
-  } catch {
-    // Fall through to plain text wrapper.
-  }
-
-  return `<div style="white-space:pre-wrap;font-family:Arial,sans-serif;line-height:1.5;">${trimmed}</div>`;
-}
-
 export function OnePageSendDialog({
   accountName,
   generatedContentId,
@@ -81,13 +66,17 @@ export function OnePageSendDialog({
 
   const isOpen = controlledOpen !== undefined ? controlledOpen : internalOpen;
   const setOpen = onControlledOpenChange || setInternalOpen;
-  const bodyHtml = tryParseOnePagerHtml(generatedContent.content, accountName);
-  const hasQueueInFlight = (queueState?.pendingJobs ?? 0) > 0 || (queueState?.processingJobs ?? 0) > 0;
+  const bodyHtml = resolveGeneratedContentRendering(generatedContent.content, accountName).html;
   const selectedVersion = generatedContent.version ?? 1;
   const latestVersion = queueState?.latestVersion ?? selectedVersion;
-  const isOutdatedVersion = selectedVersion < latestVersion;
-  const requiresGuard = hasQueueInFlight || isOutdatedVersion;
-  const guardBlocksSend = requiresGuard && (!previewMode || !acknowledgedGuard);
+  const sendGuardState = buildSendGuardState({
+    selectedVersion,
+    latestVersion,
+    pendingJobs: queueState?.pendingJobs ?? 0,
+    processingJobs: queueState?.processingJobs ?? 0,
+    previewMode,
+    acknowledgedGuard,
+  });
 
   const handleSelectRecipient = (recipientId: number, checked: boolean) => {
     if (checked) {
@@ -184,12 +173,10 @@ export function OnePageSendDialog({
             )}
           </Card>
 
-          {requiresGuard && (
+          {sendGuardState.requiresGuard && (
             <div className="rounded-lg border border-amber-200 bg-amber-50 p-3">
               <p className="text-sm text-amber-800">
-                {isOutdatedVersion
-                  ? `Version ${selectedVersion} is older than latest version ${latestVersion}.`
-                  : 'New generation jobs are still in queue for this account.'}
+                {sendGuardState.warningMessage}
                 {' '}Preview and confirm before sending.
               </p>
               <label className="mt-2 flex items-center gap-2 text-xs text-amber-800">
@@ -271,7 +258,7 @@ export function OnePageSendDialog({
             </Button>
             <Button
               onClick={handleSend}
-              disabled={selectedCount === 0 || isSending || guardBlocksSend}
+              disabled={selectedCount === 0 || isSending || sendGuardState.guardBlocksSend}
               className="flex-1"
             >
               {isSending ? (

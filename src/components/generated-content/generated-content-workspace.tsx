@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { GeneratedContentGrid, type QueueGeneratedAccountCard } from '@/components/queue/generated-content-grid';
 import type { WorkspaceRecipient } from '@/lib/generated-content/queries';
+import { filterGeneratedContentCards } from '@/lib/generated-content/workspace-filters';
 
 type GeneratedContentWorkspaceProps = {
   cards: QueueGeneratedAccountCard[];
@@ -49,28 +50,17 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
     router.replace(next.toString() ? `${pathname}?${next.toString()}` : pathname);
   };
 
-  const filteredCards = useMemo(() => {
-    const loweredQuery = query.trim().toLowerCase();
-    return cards.filter((card) => {
-      const latest = card.versions[0];
-      if (!latest) return false;
-
-      const accountMatch = accountFilter === 'all' || card.account_name === accountFilter;
-      const campaignMatch = campaignFilter === 'all' || card.campaign_names.includes(campaignFilter);
-      const providerMatch = providerFilter === 'all' || (latest.provider_used ?? 'unknown') === providerFilter;
-      const statusMatch = statusFilter === 'all'
-        || (statusFilter === 'published' && latest.is_published)
-        || (statusFilter === 'draft' && !latest.is_published);
-      const sentMatch = sentFilter === 'all'
-        || (sentFilter === 'sent' && latest.external_send_count > 0)
-        || (sentFilter === 'unsent' && latest.external_send_count === 0);
-      const textMatch = !loweredQuery
-        || card.account_name.toLowerCase().includes(loweredQuery)
-        || card.campaign_names.some((name) => name.toLowerCase().includes(loweredQuery));
-
-      return accountMatch && campaignMatch && providerMatch && statusMatch && sentMatch && textMatch;
-    });
-  }, [accountFilter, campaignFilter, cards, providerFilter, query, sentFilter, statusFilter]);
+  const filteredCards = useMemo(
+    () => filterGeneratedContentCards(cards, {
+      account: accountFilter,
+      campaign: campaignFilter,
+      provider: providerFilter,
+      status: statusFilter,
+      sent: sentFilter,
+      query,
+    }),
+    [accountFilter, campaignFilter, cards, providerFilter, query, sentFilter, statusFilter],
+  );
 
   return (
     <div className="space-y-4">
