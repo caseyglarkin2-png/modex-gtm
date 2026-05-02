@@ -11,6 +11,7 @@ import {
   writeHubSpotIngestionAudit,
 } from '@/lib/enrichment/hubspot-ingestion';
 import { acquireEnrichmentLock, releaseEnrichmentLock } from '@/lib/enrichment/lock';
+import { redactText, redactUnknown } from '@/lib/enrichment/redaction';
 import * as Sentry from '@sentry/nextjs';
 
 export const dynamic = 'force-dynamic';
@@ -79,7 +80,7 @@ export async function GET(req: NextRequest) {
           await syncContactToLocal(hsContact);
           stats.pulled++;
         } catch (error) {
-          console.error(`Pull sync error for ${hsContact.email}:`, error);
+          console.error(`Pull sync error for ${redactText(hsContact.email)}:`, redactUnknown(error));
           stats.errors++;
         }
       }
@@ -132,7 +133,7 @@ export async function GET(req: NextRequest) {
         });
         stats.pushed++;
       } catch (error) {
-        console.error(`Push sync error for ${persona.email}:`, error);
+        console.error(`Push sync error for ${redactText(persona.email)}:`, redactUnknown(error));
         stats.errors++;
       }
     }
