@@ -63,6 +63,10 @@ For deterministic proof-mode execution (local/CI):
 npm run test:e2e:one-pager:proof
 ```
 
+Proof mode now also includes visual regression checks for:
+- generated-content workspace framing,
+- bulk preview decision framing.
+
 ## Production Smoke Reminder
 
 When smoke-testing in production, record:

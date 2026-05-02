@@ -69,4 +69,5 @@ This document captures the recommended execution path for the one-pager generati
   - `npm run test:e2e:one-pager:smoke` for deployed safe-smoke checks (skip-guarded),
   - `npm run test:e2e:one-pager:proof` for deterministic local seeded proof (skip disallowed).
 - Proof-mode closeout evidence (May 2, 2026):
-  - `npm run test:e2e:one-pager:proof` => `expected=4, passed=4, skipped=0`.
+  - `npm run test:e2e:one-pager:proof` => `expected=6, passed=6, skipped=0`.
+- Added deterministic proof-mode visual snapshots for generated-content workspace and bulk preview framing.

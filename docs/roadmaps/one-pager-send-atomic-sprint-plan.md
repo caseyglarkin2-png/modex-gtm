@@ -52,7 +52,8 @@ Every sprint closes with:
   - bulk guard acknowledgement test passed,
   - async enqueue + tracker test passed,
   - generation metrics seeded-state test passed,
-  - summary: `expected=4, passed=4, skipped=0`.
+  - visual regression checks for generated-content and bulk preview framing passed,
+  - summary: `expected=6, passed=6, skipped=0`.
 
 ## Sprint 0: Quality Gate And Fixture Foundation
 
