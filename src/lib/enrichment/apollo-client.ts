@@ -3,12 +3,16 @@ import { ApolloSearchResponseFixtureSchema, ApolloPersonFixtureSchema } from '@/
 
 export type ApolloPerson = z.infer<typeof ApolloPersonFixtureSchema>;
 
+function getApolloApiKey(): string | null {
+  return process.env.APOLLO_API_KEY || process.env.CODEX_APOLLO_API_KEY_MASTER || null;
+}
+
 export function isApolloConfigured(): boolean {
-  return Boolean(process.env.APOLLO_API_KEY);
+  return Boolean(getApolloApiKey());
 }
 
 export async function searchApolloPeople(query: string): Promise<ApolloPerson[]> {
-  const apiKey = process.env.APOLLO_API_KEY;
+  const apiKey = getApolloApiKey();
   if (!apiKey) return [];
 
   const response = await fetch('https://api.apollo.io/v1/mixed_people/search', {

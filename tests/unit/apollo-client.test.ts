@@ -30,4 +30,18 @@ describe('apollo client', () => {
     expect(people[0]?.email).toBe('casey@freightroll.com');
     expect(fetchMock).toHaveBeenCalledOnce();
   });
+
+  it('accepts CODEX_APOLLO_API_KEY_MASTER fallback', async () => {
+    process.env = { ...process.env, CODEX_APOLLO_API_KEY_MASTER: 'fallback-key' };
+    delete process.env.APOLLO_API_KEY;
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue({
+      ok: true,
+      json: async () => mockApolloSearchResponse,
+    } as Response);
+    const { searchApolloPeople } = await import('@/lib/enrichment/apollo-client');
+
+    const people = await searchApolloPeople('yardflow');
+    expect(people).toHaveLength(1);
+    expect(fetchMock).toHaveBeenCalledOnce();
+  });
 });
