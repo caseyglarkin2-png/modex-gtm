@@ -58,4 +58,10 @@ This document captures the recommended execution path for the one-pager generati
 ## Status Tracking
 - Sprint 0 documentation created.
 - Sprints 1-5 implemented and covered by typecheck/unit tests.
-- Sprint 6 implementation complete. Remaining follow-up is ongoing UI polish and metrics iteration from live usage.
+- Sprint 6 implementation complete with async send tracker, bulk guarded preview, and admin send/generation metrics.
+- Added unit regression coverage for:
+  - `tests/unit/generation-job-list.test.tsx` (retry API + completed CTA path)
+  - `tests/unit/send-job-tracker.test.tsx` (status polling refresh + failed-recipient retry)
+  - `tests/unit/generated-content-bulk-preview-dialog.test.tsx` (guard acknowledgement + async enqueue handoff)
+  - `tests/unit/stuck-jobs.test.ts` (stuck generation/send job threshold diagnostics)
+- Remaining global follow-up: repository-wide lint debt is still open outside one-pager scope (`npm run lint` currently fails on pre-existing script/app violations).

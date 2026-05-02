@@ -34,6 +34,14 @@ npx tsc --noEmit
 npm run test:unit -- tests/unit/generated-content-fixtures.test.ts tests/unit/send-job-fixtures.test.ts
 ```
 
+Route- and workflow-focused regression commands:
+
+```bash
+npm run test:unit -- tests/unit/generation-job-list.test.tsx tests/unit/send-job-tracker.test.tsx tests/unit/generated-content-bulk-preview-dialog.test.tsx
+npm run test:unit -- tests/unit/email-send-bulk-async-route.test.ts tests/unit/email-send-job-status-route.test.ts tests/unit/send-job-retry-failed-route.test.ts tests/unit/process-send-jobs-route.test.ts
+npm run test:unit -- tests/unit/generation-metrics.test.ts tests/unit/send-job-metrics.test.ts tests/unit/stuck-jobs.test.ts
+```
+
 For admin metrics smoke:
 
 ```bash
@@ -48,3 +56,7 @@ When smoke-testing in production, record:
 - email log ID,
 - HubSpot engagement ID (if available),
 - screenshot of UI confirmation state.
+
+## Known Gate Notes
+
+- As of May 2, 2026, `npm run lint` still fails on pre-existing repo-wide violations not limited to one-pager workflows; treat lint cleanup as a separate tracked stream and do not mask failures.
