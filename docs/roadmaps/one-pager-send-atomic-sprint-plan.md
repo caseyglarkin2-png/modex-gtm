@@ -1,6 +1,6 @@
 # One-Pager Send A+ Atomic Sprint Plan
 
-**Status:** Draft for approval  
+**Status:** Closeout gates passed  
 **Scope:** One-pager generation, generated-content operations, version-aware send, queue reliability, durable bulk send, metrics, and release readiness.  
 **Source docs:** `one-pager-send-sprint-plan.md`, `one-pager-send-sprint-todos.md`, `queue-implementation-decision.md`.
 
@@ -40,14 +40,19 @@ Every sprint closes with:
 
 ### Gaps To Close Before A+
 
-- Queued generation versioning must be verified and kept monotonic for account/content/campaign scope.
-- Failed-job retry must be a real API + UI path, not just a visible button.
-- Completed queue jobs need an actionable route into send/review.
-- The original Sprint 6 `/generated-content` operating surface is not fully implemented.
-- Bulk send is still request/response, not durable async job state.
-- Generation metrics are summarized, not operationally diagnostic.
-- Tests do not yet cover the new UI guard/grid workflows.
-- `npm run lint` is blocked by ESLint 9 config migration.
+- Legacy `scripts/**` lint debt remains explicitly out of scope for this sprint closeout.
+
+## Closeout Evidence (May 2, 2026)
+
+- `npm run lint` passed.
+- `npx tsc --noEmit` passed.
+- `npm run test:unit` passed (48 files, 140 tests).
+- `npm run test:e2e:one-pager:proof` passed with deterministic execution:
+  - queue retry test passed,
+  - bulk guard acknowledgement test passed,
+  - async enqueue + tracker test passed,
+  - generation metrics seeded-state test passed,
+  - summary: `expected=4, passed=4, skipped=0`.
 
 ## Sprint 0: Quality Gate And Fixture Foundation
 

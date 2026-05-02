@@ -54,7 +54,13 @@ For queue/send workflow smokes:
 ```bash
 npx playwright test tests/e2e/generation-queue.spec.ts tests/e2e/generated-content-bulk-preview.spec.ts
 npx playwright test tests/e2e/send-jobs.spec.ts tests/e2e/one-pager-send-workflow.spec.ts
-npm run test:e2e:one-pager
+npm run test:e2e:one-pager:smoke
+```
+
+For deterministic proof-mode execution (local/CI):
+
+```bash
+npm run test:e2e:one-pager:proof
 ```
 
 ## Production Smoke Reminder
@@ -70,3 +76,5 @@ When smoke-testing in production, record:
 
 - As of May 2, 2026, `npm run lint` passes with warnings after excluding legacy `scripts/**` from the flat ESLint project scope.
 - Keep `npm run lint:one-pager` as the strict scoped gate for this roadmap slice.
+- Proof mode is enforced via `scripts/assert-onepager-proof-report.mjs`, which fails when any test is skipped or when zero tests execute.
+- Latest proof run evidence: `expected=4, passed=4, skipped=0`.

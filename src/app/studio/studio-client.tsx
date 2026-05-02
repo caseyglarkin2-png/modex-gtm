@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -245,7 +245,7 @@ function AssetPackPanel({
 
   useEffect(() => {
     setPersonaName(personas[0]?.name ?? '');
-  }, [accountName, personas]);
+  }, [accountName, personas, setPersonaName]);
 
   async function generatePack() {
     if (!accountName) {
@@ -620,7 +620,7 @@ function PromptVersionsPanel() {
     createdAt: string;
   }>>([]);
 
-  async function loadVersions() {
+  const loadVersions = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch(`/api/studio/prompts?template=${encodeURIComponent(template)}`);
@@ -631,11 +631,11 @@ function PromptVersionsPanel() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [template]);
 
   useEffect(() => {
-    loadVersions();
-  }, [template]);
+    void loadVersions();
+  }, [loadVersions]);
 
   async function saveVersion() {
     setSaving(true);

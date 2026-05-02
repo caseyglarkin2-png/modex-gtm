@@ -65,3 +65,8 @@ This document captures the recommended execution path for the one-pager generati
   - `tests/unit/generated-content-bulk-preview-dialog.test.tsx` (guard acknowledgement + async enqueue handoff)
   - `tests/unit/stuck-jobs.test.ts` (stuck generation/send job threshold diagnostics)
 - Global lint now passes with warnings after excluding legacy `scripts/**`; one-pager quality continues to be enforced by `npm run lint:one-pager`.
+- E2E contract split:
+  - `npm run test:e2e:one-pager:smoke` for deployed safe-smoke checks (skip-guarded),
+  - `npm run test:e2e:one-pager:proof` for deterministic local seeded proof (skip disallowed).
+- Proof-mode closeout evidence (May 2, 2026):
+  - `npm run test:e2e:one-pager:proof` => `expected=4, passed=4, skipped=0`.

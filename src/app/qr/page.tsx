@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import QRCode from 'qrcode';
 import { getAuditRoutes, getListsConfig, getQrAssets, slugify } from '@/lib/data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -108,11 +109,13 @@ export default async function QrPage() {
                       <p className="mt-1 text-xs text-[var(--muted-foreground)]">Warm route: {route?.warm_route || 'No route noted'} · Graphic: {qr.graphic_file}</p>
                     </div>
                     <div className="flex shrink-0 items-center gap-2">
-                      <img
-                        src={qrPreviews.get(qr.account)}
+                      <Image
+                        src={qrPreviews.get(qr.account) ?? ''}
                         alt={`QR code for ${qr.account}`}
+                        width={80}
+                        height={80}
+                        unoptimized
                         className="h-20 w-20 rounded-md border border-[var(--border)] bg-white p-1"
-                        loading="lazy"
                       />
                       <div className="flex flex-col gap-2">
                         <a href={qr.audit_url} target="_blank" rel="noopener noreferrer">
@@ -177,9 +180,12 @@ export default async function QrPage() {
         </CardHeader>
         <CardContent className="grid gap-4 md:grid-cols-[220px_1fr]">
           <div className="flex justify-center rounded-lg border border-[var(--border)] bg-white p-3">
-            <img
+            <Image
               src={fallbackQrPreview}
               alt="Master fallback QR code"
+              width={176}
+              height={176}
+              unoptimized
               className="h-44 w-44"
             />
           </div>
@@ -227,11 +233,13 @@ export default async function QrPage() {
                 </div>
 
                 <div className="flex justify-center rounded-lg border border-[var(--border)] bg-white p-3">
-                  <img
-                    src={qrPreviews.get(qr.account)}
+                  <Image
+                    src={qrPreviews.get(qr.account) ?? ''}
                     alt={`QR code for ${qr.account}`}
+                    width={160}
+                    height={160}
+                    unoptimized
                     className="h-40 w-40"
-                    loading="lazy"
                   />
                 </div>
 
