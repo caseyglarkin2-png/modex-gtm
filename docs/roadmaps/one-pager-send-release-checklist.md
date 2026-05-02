@@ -48,6 +48,13 @@ For admin metrics smoke:
 npx playwright test tests/e2e/generation-metrics.spec.ts
 ```
 
+For queue/send workflow smokes:
+
+```bash
+npx playwright test tests/e2e/generation-queue.spec.ts tests/e2e/generated-content-bulk-preview.spec.ts
+npx playwright test tests/e2e/send-jobs.spec.ts tests/e2e/one-pager-send-workflow.spec.ts
+```
+
 ## Production Smoke Reminder
 
 When smoke-testing in production, record:
