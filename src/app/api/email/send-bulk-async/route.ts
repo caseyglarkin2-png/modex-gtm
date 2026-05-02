@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { randomUUID } from 'node:crypto';
 import { BulkSendAsyncSchema } from '@/lib/validations';
 import { rateLimit } from '@/lib/rate-limit';
 
@@ -88,7 +89,7 @@ export async function POST(req: NextRequest) {
             subject: row.subject,
             body_html: row.body_html,
             status: 'pending',
-            idempotency_key: `${Date.now()}:${row.idempotency_seed}`,
+            idempotency_key: `${randomUUID()}:${row.idempotency_seed}`,
           })),
         },
       },
