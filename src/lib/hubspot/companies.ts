@@ -5,6 +5,7 @@
 import { getHubSpotClient, withHubSpotRetry, isHubSpotConfigured } from './client';
 import { HUBSPOT_SYNC_ENABLED } from '@/lib/feature-flags';
 import { FilterOperatorEnum } from '@hubspot/api-client/lib/codegen/crm/companies/models/Filter';
+import { assertExternalWriteAllowed } from '@/lib/enrichment/external-write-guard';
 
 const COMPANY_PROPERTIES = [
   'name',
@@ -126,6 +127,7 @@ export async function upsertCompany(properties: {
   state?: string;
 }): Promise<string | null> {
   if (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED) return null;
+  assertExternalWriteAllowed('hubspot', 'upsertCompany');
 
   const client = getHubSpotClient();
 

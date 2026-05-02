@@ -22,6 +22,7 @@ describe('hubspot/companies', () => {
       ...originalEnv,
       HUBSPOT_ACCESS_TOKEN: 'test-token',
       HUBSPOT_SYNC_ENABLED: 'true',
+      ALLOW_EXTERNAL_WRITES_IN_TEST: 'true',
     };
     vi.clearAllMocks();
   });

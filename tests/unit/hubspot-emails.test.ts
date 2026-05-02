@@ -42,6 +42,7 @@ describe('hubspot email logging', () => {
     vi.clearAllMocks();
     process.env.HUBSPOT_LOGGING_ENABLED = 'true';
     process.env.FROM_EMAIL = 'casey@freightroll.com';
+    process.env.ALLOW_EXTERNAL_WRITES_IN_TEST = 'true';
     createEmail.mockResolvedValue({ id: 'email-123' });
     searchContactByEmail.mockResolvedValue({ id: 'contact-456' });
     upsertContact.mockResolvedValue('contact-456');

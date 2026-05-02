@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { HUBSPOT_SYNC_ENABLED } from '@/lib/feature-flags';
 import { getHubSpotClient, isHubSpotConfigured, withHubSpotRetry } from './client';
 import { pipelineStageToHubSpotDealStage, stageToStatus, type PipelineStage } from '@/lib/pipeline';
+import { assertExternalWriteAllowed } from '@/lib/enrichment/external-write-guard';
 
 const DEAL_PROPERTIES = ['dealname', 'dealstage', 'amount', 'pipeline', 'closedate'] as const;
 
@@ -18,6 +19,7 @@ function buildDealName(accountName: string) {
 
 export async function upsertDealForAccount(input: EnsureDealInput): Promise<string | null> {
   if (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED) return null;
+  assertExternalWriteAllowed('hubspot', 'upsertDealForAccount');
 
   const client = getHubSpotClient();
   const dealName = buildDealName(input.accountName);

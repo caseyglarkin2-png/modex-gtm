@@ -6,6 +6,7 @@
 import { getHubSpotClient, withHubSpotRetry, isHubSpotConfigured } from './client';
 import { HUBSPOT_SYNC_ENABLED } from '@/lib/feature-flags';
 import { FilterOperatorEnum } from '@hubspot/api-client/lib/codegen/crm/contacts/models/Filter';
+import { assertExternalWriteAllowed } from '@/lib/enrichment/external-write-guard';
 
 /** HubSpot contact properties we read/write */
 const CONTACT_PROPERTIES = [
@@ -105,6 +106,7 @@ export async function upsertContact(properties: {
   hs_email_optout?: string;
 }): Promise<string | null> {
   if (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED) return null;
+  assertExternalWriteAllowed('hubspot', 'upsertContact');
 
   const client = getHubSpotClient();
 

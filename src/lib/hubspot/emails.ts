@@ -7,6 +7,7 @@ import { searchContactByEmail, upsertContact } from './contacts';
 import { HUBSPOT_LOGGING_ENABLED } from '@/lib/feature-flags';
 import * as Sentry from '@sentry/nextjs';
 import { AssociationSpecAssociationCategoryEnum } from '@hubspot/api-client/lib/codegen/crm/contacts/models/AssociationSpec';
+import { assertExternalWriteAllowed } from '@/lib/enrichment/external-write-guard';
 
 export interface EmailObjectPayload {
   /** INCOMING_EMAIL for replies, FORWARDED_EMAIL for sends */
@@ -51,6 +52,7 @@ export async function logEmailToHubSpot(
     });
     return null;
   }
+  assertExternalWriteAllowed('hubspot', 'logEmailToHubSpot');
 
   try {
     const client = getHubSpotClient();
