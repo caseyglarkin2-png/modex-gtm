@@ -8,160 +8,208 @@ datasource db {
 }
 
 model Account {
-  id               Int      @id @default(autoincrement())
-  rank             Int
-  name             String   @unique
-  parent_brand     String?
-  vertical         String
-  signal_type      String?
-  why_now          String?
-  primo_angle      String?
-  best_intro_path  String?
-  source           String?
-  source_url_1     String?
-  source_url_2     String?
-  icp_fit          Int      @default(0)
-  modex_signal     Int      @default(0)
-  primo_story_fit  Int      @default(0)
-  warm_intro       Int      @default(0)
-  strategic_value  Int      @default(0)
-  meeting_ease     Int      @default(0)
-  priority_score   Int      @default(0)
-  priority_band    String   @default("D")
-  tier             String   @default("Tier 3")
-  owner            String   @default("Casey")
-  research_status  String   @default("Not started")
-  outreach_status  String   @default("Not started")
-  meeting_status   String   @default("No meeting")
-  pipeline_stage   String   @default("targeted")
-  current_motion   String?
-  next_action      String?
-  due_date         DateTime?
-  notes            String?
-  hubspot_company_id String?  @unique
-  created_at       DateTime @default(now())
-  updated_at       DateTime @updatedAt
+  id                 Int       @id @default(autoincrement())
+  rank               Int
+  name               String    @unique
+  parent_brand       String?
+  vertical           String
+  signal_type        String?
+  why_now            String?
+  primo_angle        String?
+  best_intro_path    String?
+  source             String?
+  source_url_1       String?
+  source_url_2       String?
+  icp_fit            Int       @default(0)
+  modex_signal       Int       @default(0)
+  primo_story_fit    Int       @default(0)
+  warm_intro         Int       @default(0)
+  strategic_value    Int       @default(0)
+  meeting_ease       Int       @default(0)
+  priority_score     Int       @default(0)
+  priority_band      String    @default("D")
+  tier               String    @default("Tier 3")
+  owner              String    @default("Casey")
+  research_status    String    @default("Not started")
+  outreach_status    String    @default("Not started")
+  meeting_status     String    @default("No meeting")
+  pipeline_stage     String    @default("targeted")
+  current_motion     String?
+  next_action        String?
+  due_date           DateTime?
+  notes              String?
+  hubspot_company_id String?   @unique
+  created_at         DateTime  @default(now())
+  updated_at         DateTime  @updatedAt
 
-  personas       Persona[]
-  outreach_waves OutreachWave[]
-  meeting_brief  MeetingBrief?
-  audit_route    AuditRoute?
-  qr_asset       QrAsset?
-  activities     Activity[]
-  meetings       Meeting[]
-  mobile_captures MobileCapture[]
+  personas              Persona[]
+  outreach_waves        OutreachWave[]
+  meeting_brief         MeetingBrief?
+  audit_route           AuditRoute?
+  qr_asset              QrAsset?
+  activities            Activity[]
+  meetings              Meeting[]
+  mobile_captures       MobileCapture[]
   microsite_engagements MicrositeEngagement[]
-  generationJobs GenerationJob[]
+  generationJobs        GenerationJob[]
 
   @@map("accounts")
 }
 
 model Persona {
-  id                Int      @id @default(autoincrement())
-  persona_id        String   @unique
-  account_name      String
-  priority          String
-  name              String
-  first_name        String?
-  last_name         String?
-  normalized_name   String?
-  title             String?
-  normalized_title  String?
-  persona_lane      String?
-  role_in_deal      String?
-  intro_route       String?
-  function          String?
-  seniority         String?
-  why_this_persona  String?
-  linkedin_url      String?
-  attendance_signal String?
-  intro_path        String?
-  persona_status    String   @default("To find")
-  next_step         String?
-  notes             String?
-  account_score     Int      @default(0)
-  email             String?
-  email_valid       Boolean  @default(true)
-  email_status      String   @default("unverified")
-  email_confidence  Int      @default(0)
-  company_domain    String?
-  phone             String?
-  phone_status      String   @default("unknown")
-  linkedin_confidence Int    @default(0)
-  source_type       String?
-  source_url        String?
-  source_evidence   Json?
-  quality_score     Int      @default(0)
-  quality_band      String   @default("D")
-  is_contact_ready  Boolean  @default(false)
-  do_not_contact    Boolean  @default(false)
-  contact_standard_version String @default("2026-03-28")
-  hubspot_contact_id String?  @unique
-  last_enriched_at  DateTime?
-  created_at        DateTime @default(now())
-  updated_at        DateTime @updatedAt
+  id                       Int       @id @default(autoincrement())
+  persona_id               String    @unique
+  account_name             String
+  priority                 String
+  name                     String
+  first_name               String?
+  last_name                String?
+  normalized_name          String?
+  title                    String?
+  normalized_title         String?
+  persona_lane             String?
+  role_in_deal             String?
+  intro_route              String?
+  function                 String?
+  seniority                String?
+  why_this_persona         String?
+  linkedin_url             String?
+  attendance_signal        String?
+  intro_path               String?
+  persona_status           String    @default("To find")
+  next_step                String?
+  notes                    String?
+  account_score            Int       @default(0)
+  email                    String?
+  email_valid              Boolean   @default(true)
+  email_status             String    @default("unverified")
+  email_confidence         Int       @default(0)
+  company_domain           String?
+  phone                    String?
+  phone_status             String    @default("unknown")
+  linkedin_confidence      Int       @default(0)
+  source_type              String?
+  source_url               String?
+  source_evidence          Json?
+  quality_score            Int       @default(0)
+  quality_band             String    @default("D")
+  is_contact_ready         Boolean   @default(false)
+  do_not_contact           Boolean   @default(false)
+  contact_standard_version String    @default("2026-03-28")
+  hubspot_contact_id       String?   @unique
+  last_enriched_at         DateTime?
+  created_at               DateTime  @default(now())
+  updated_at               DateTime  @updatedAt
 
-  account Account @relation(fields: [account_name], references: [name])
+  account    Account            @relation(fields: [account_name], references: [name])
+  enrichment ContactEnrichment?
 
+  @@unique([account_name, email])
   @@index([account_name])
   @@index([email])
   @@index([quality_score])
-  @@unique([account_name, email])
   @@map("personas")
 }
 
-model Campaign {
-  id                 Int      @id @default(autoincrement())
-  name               String
-  slug               String   @unique
-  status             String   @default("active")
-  campaign_type      String   @default("trade_show")
-  start_date         DateTime?
-  end_date           DateTime?
-  target_account_count Int    @default(0)
-  messaging_angle    String?
-  key_dates          Json?
-  owner              String   @default("Casey")
-  created_at         DateTime @default(now())
-  updated_at         DateTime @updatedAt
+enum EnrichmentSource {
+  hubspot
+  apollo
+  derived
+  manual
+}
 
-  outreach_waves    OutreachWave[]
-  activities        Activity[]
-  generated_content GeneratedContent[]
-  email_logs        EmailLog[]
-  generationJobs    GenerationJob[]
+model ContactEnrichment {
+  id                    Int       @id @default(autoincrement())
+  persona_id            Int       @unique
+  hubspot_contact_id    String?
+  apollo_person_id      String?
+  enrichment_confidence Float?
+  last_enriched_at      DateTime?
+  merge_version         String    @default("v1")
+  created_at            DateTime  @default(now())
+  updated_at            DateTime  @updatedAt
+
+  persona Persona                  @relation(fields: [persona_id], references: [id], onDelete: Cascade)
+  fields  ContactEnrichmentField[]
+
+  @@index([hubspot_contact_id])
+  @@index([apollo_person_id])
+  @@index([last_enriched_at])
+  @@map("contact_enrichments")
+}
+
+model ContactEnrichmentField {
+  id                    Int              @id @default(autoincrement())
+  contact_enrichment_id Int
+  field_name            String
+  field_value           String?
+  source                EnrichmentSource
+  source_timestamp      DateTime?
+  confidence            Float?
+  last_writer           String?
+  created_at            DateTime         @default(now())
+  updated_at            DateTime         @updatedAt
+
+  contact_enrichment ContactEnrichment @relation(fields: [contact_enrichment_id], references: [id], onDelete: Cascade)
+
+  @@unique([contact_enrichment_id, field_name])
+  @@index([field_name])
+  @@index([source, source_timestamp])
+  @@map("contact_enrichment_fields")
+}
+
+model Campaign {
+  id                   Int       @id @default(autoincrement())
+  name                 String
+  slug                 String    @unique
+  status               String    @default("active")
+  campaign_type        String    @default("trade_show")
+  start_date           DateTime?
+  end_date             DateTime?
+  target_account_count Int       @default(0)
+  messaging_angle      String?
+  key_dates            Json?
+  owner                String    @default("Casey")
+  created_at           DateTime  @default(now())
+  updated_at           DateTime  @updatedAt
+
+  outreach_waves      OutreachWave[]
+  activities          Activity[]
+  generated_content   GeneratedContent[]
+  email_logs          EmailLog[]
+  generationJobs      GenerationJob[]
   send_job_recipients SendJobRecipient[]
 
   @@map("campaigns")
 }
 
 model OutreachWave {
-  id               Int      @id @default(autoincrement())
-  wave             String
-  wave_order       Int
-  account_name     String
-  campaign_id      Int?
-  rank             Int?
-  tier             String?
-  priority_score   Int?
-  channel_mix      String?
-  primary_objective String?
-  use_warm_intro   Boolean  @default(false)
-  use_primo_asset  Boolean  @default(false)
+  id                     Int       @id @default(autoincrement())
+  wave                   String
+  wave_order             Int
+  account_name           String
+  campaign_id            Int?
+  rank                   Int?
+  tier                   String?
+  priority_score         Int?
+  channel_mix            String?
+  primary_objective      String?
+  use_warm_intro         Boolean   @default(false)
+  use_primo_asset        Boolean   @default(false)
   primary_persona_lane   String?
   secondary_persona_lane String?
-  start_date       DateTime?
-  followup_1       DateTime?
-  followup_2       DateTime?
-  escalation_trigger String?
-  meeting_goal     String?
-  owner            String   @default("Jake")
-  status           String   @default("Not started")
-  notes            String?
-  created_at       DateTime @default(now())
-  updated_at       DateTime @updatedAt
+  start_date             DateTime?
+  followup_1             DateTime?
+  followup_2             DateTime?
+  escalation_trigger     String?
+  meeting_goal           String?
+  owner                  String    @default("Jake")
+  status                 String    @default("Not started")
+  notes                  String?
+  created_at             DateTime  @default(now())
+  updated_at             DateTime  @updatedAt
 
-  account  Account  @relation(fields: [account_name], references: [name])
+  account  Account   @relation(fields: [account_name], references: [name])
   campaign Campaign? @relation(fields: [campaign_id], references: [id])
 
   @@index([account_name])
@@ -170,22 +218,22 @@ model OutreachWave {
 }
 
 model MeetingBrief {
-  id              Int      @id @default(autoincrement())
-  account_name    String   @unique
-  vertical        String?
-  modex_signal    String?
-  why_this_account String?
-  why_now         String?
-  likely_pain     String?
-  primo_relevance String?
-  best_outcome    String?
+  id                  Int      @id @default(autoincrement())
+  account_name        String   @unique
+  vertical            String?
+  modex_signal        String?
+  why_this_account    String?
+  why_now             String?
+  likely_pain         String?
+  primo_relevance     String?
+  best_outcome        String?
   suggested_attendees String?
-  prep_assets     String?
-  open_questions  String?
-  source_url_1    String?
-  source_url_2    String?
-  created_at      DateTime @default(now())
-  updated_at      DateTime @updatedAt
+  prep_assets         String?
+  open_questions      String?
+  source_url_1        String?
+  source_url_2        String?
+  created_at          DateTime @default(now())
+  updated_at          DateTime @updatedAt
 
   account Account @relation(fields: [account_name], references: [name])
 
@@ -193,20 +241,20 @@ model MeetingBrief {
 }
 
 model AuditRoute {
-  id              Int      @id @default(autoincrement())
-  rank            Int?
-  account_name    String   @unique
-  audit_url       String
-  suggested_ask   String?
-  fast_ask        String?
-  proof_asset     String?
-  warm_route      String?
-  graphic_file    String?
-  owner           String   @default("Jake / Casey")
-  status          String   @default("Open")
-  last_touch      String?
-  created_at      DateTime @default(now())
-  updated_at      DateTime @updatedAt
+  id            Int      @id @default(autoincrement())
+  rank          Int?
+  account_name  String   @unique
+  audit_url     String
+  suggested_ask String?
+  fast_ask      String?
+  proof_asset   String?
+  warm_route    String?
+  graphic_file  String?
+  owner         String   @default("Jake / Casey")
+  status        String   @default("Open")
+  last_touch    String?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 
   account Account @relation(fields: [account_name], references: [name])
 
@@ -214,15 +262,15 @@ model AuditRoute {
 }
 
 model QrAsset {
-  id              Int      @id @default(autoincrement())
-  account_name    String   @unique
-  audit_url       String
-  suggested_use   String?
-  proof_asset     String?
-  graphic_file    String?
-  notes           String?
-  created_at      DateTime @default(now())
-  updated_at      DateTime @updatedAt
+  id            Int      @id @default(autoincrement())
+  account_name  String   @unique
+  audit_url     String
+  suggested_use String?
+  proof_asset   String?
+  graphic_file  String?
+  notes         String?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 
   account Account @relation(fields: [account_name], references: [name])
 
@@ -230,19 +278,19 @@ model QrAsset {
 }
 
 model Activity {
-  id              Int      @id @default(autoincrement())
-  activity_date   DateTime?
-  account_name    String
-  campaign_id     Int?
-  persona         String?
-  activity_type   String
-  owner           String?
-  outcome         String?
-  next_step       String?
-  next_step_due   DateTime?
-  notes           String?
-  created_at      DateTime @default(now())
-  updated_at      DateTime @updatedAt
+  id            Int       @id @default(autoincrement())
+  activity_date DateTime?
+  account_name  String
+  campaign_id   Int?
+  persona       String?
+  activity_type String
+  owner         String?
+  outcome       String?
+  next_step     String?
+  next_step_due DateTime?
+  notes         String?
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
 
   account  Account   @relation(fields: [account_name], references: [name])
   campaign Campaign? @relation(fields: [campaign_id], references: [id])
@@ -282,24 +330,24 @@ model MicrositeEngagement {
 }
 
 model Meeting {
-  id              Int      @id @default(autoincrement())
+  id              Int       @id @default(autoincrement())
   meeting_id_str  String?
   account_name    String
   persona         String?
-  meeting_status  String   @default("No meeting")
+  meeting_status  String    @default("No meeting")
   meeting_date    DateTime?
   meeting_time    String?
   location        String?
-  primo_involved  Boolean  @default(false)
-  jake_confirmed  Boolean  @default(false)
+  primo_involved  Boolean   @default(false)
+  jake_confirmed  Boolean   @default(false)
   objective       String?
   owner           String?
   hubspot_deal_id String?
   post_next_step  String?
   notes           String?
   account_score   Int?
-  created_at      DateTime @default(now())
-  updated_at      DateTime @updatedAt
+  created_at      DateTime  @default(now())
+  updated_at      DateTime  @updatedAt
 
   account Account @relation(fields: [account_name], references: [name])
 
@@ -309,34 +357,34 @@ model Meeting {
 }
 
 model MobileCapture {
-  id              Int      @id @default(autoincrement())
-  captured_at     DateTime @default(now())
-  account_name    String
-  persona_name    String?
-  title           String?
-  channel         String?
-  intent          String?
-  need_trigger    String?
-  requested_asset String?
-  need_primo      Boolean  @default(false)
-  owner           String?
-  due_date        DateTime?
-  next_step       String?
-  outcome         String?
-  notes           String?
-  interest        Int      @default(0)
-  urgency         Int      @default(0)
-  influence       Int      @default(0)
-  fit             Int      @default(0)
-  heat_score      Int      @default(0)
-  band            String?
+  id                Int       @id @default(autoincrement())
+  captured_at       DateTime  @default(now())
+  account_name      String
+  persona_name      String?
+  title             String?
+  channel           String?
+  intent            String?
+  need_trigger      String?
+  requested_asset   String?
+  need_primo        Boolean   @default(false)
+  owner             String?
+  due_date          DateTime?
+  next_step         String?
+  outcome           String?
+  notes             String?
+  interest          Int       @default(0)
+  urgency           Int       @default(0)
+  influence         Int       @default(0)
+  fit               Int       @default(0)
+  heat_score        Int       @default(0)
+  band              String?
   followup_template String?
-  followup_status String?
-  synced_at       DateTime?
-  audit_url       String?
-  source_proof    String?
-  created_at      DateTime @default(now())
-  updated_at      DateTime @updatedAt
+  followup_status   String?
+  synced_at         DateTime?
+  audit_url         String?
+  source_proof      String?
+  created_at        DateTime  @default(now())
+  updated_at        DateTime  @updatedAt
 
   account Account @relation(fields: [account_name], references: [name])
 
@@ -346,23 +394,23 @@ model MobileCapture {
 }
 
 model SearchString {
-  id              Int      @id @default(autoincrement())
-  account         String
-  wave            String?
-  priority        String?
-  function        String?
-  target_title    String?
-  named_seed      String?
-  sales_nav_query String?
-  linkedin_query  String?
+  id                Int      @id @default(autoincrement())
+  account           String
+  wave              String?
+  priority          String?
+  function          String?
+  target_title      String?
+  named_seed        String?
+  sales_nav_query   String?
+  linkedin_query    String?
   google_xray_query String?
-  keywords        String?
-  source_signal   String?
-  owner           String?
-  status          String   @default("Ready")
-  notes           String?
-  created_at      DateTime @default(now())
-  updated_at      DateTime @updatedAt
+  keywords          String?
+  source_signal     String?
+  owner             String?
+  status            String   @default("Ready")
+  notes             String?
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
 
   @@map("search_strings")
 }
@@ -392,24 +440,24 @@ model ListsConfig {
 }
 
 model GeneratedContent {
-  id           Int      @id @default(autoincrement())
-  account_name String
-  campaign_id  Int?
-  persona_name String?
-  content_type String   // email | dm | call_script | meeting_prep | infographic
-  tone         String?  // formal | conversational | provocative
-  length       String?  // short | medium | long
-  provider_used String?
-  ai_error     String?
-  version      Int      @default(1)
-  is_published Boolean  @default(false)
-  published_at DateTime?
-  external_send_count Int @default(0)
-  version_metadata Json?
-  content      String
-  created_at   DateTime @default(now())
+  id                  Int       @id @default(autoincrement())
+  account_name        String
+  campaign_id         Int?
+  persona_name        String?
+  content_type        String // email | dm | call_script | meeting_prep | infographic
+  tone                String? // formal | conversational | provocative
+  length              String? // short | medium | long
+  provider_used       String?
+  ai_error            String?
+  version             Int       @default(1)
+  is_published        Boolean   @default(false)
+  published_at        DateTime?
+  external_send_count Int       @default(0)
+  version_metadata    Json?
+  content             String
+  created_at          DateTime  @default(now())
 
-  campaign Campaign? @relation(fields: [campaign_id], references: [id])
+  campaign            Campaign?          @relation(fields: [campaign_id], references: [id])
   send_job_recipients SendJobRecipient[]
 
   @@index([account_name, content_type])
@@ -419,23 +467,23 @@ model GeneratedContent {
 }
 
 model GenerationJob {
-  id            Int      @id @default(autoincrement())
+  id            Int       @id @default(autoincrement())
   account_name  String
   campaign_id   Int?
   persona_name  String?
-  content_type  String   // one_pager | email | dm | call_script | meeting_prep
-  status        String   @default("pending")
+  content_type  String // one_pager | email | dm | call_script | meeting_prep
+  status        String    @default("pending")
   provider_used String?
   error_message String?
-  retry_count   Int      @default(0)
+  retry_count   Int       @default(0)
   batch_id      String?
   scheduled_at  DateTime?
   started_at    DateTime?
   completed_at  DateTime?
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
 
-  account Account @relation(fields: [account_name], references: [name])
+  account  Account   @relation(fields: [account_name], references: [name])
   campaign Campaign? @relation(fields: [campaign_id], references: [id])
 
   @@index([status, updated_at])
@@ -444,28 +492,28 @@ model GenerationJob {
 }
 
 model EmailLog {
-  id            Int      @id @default(autoincrement())
-  account_name  String
-  campaign_id   Int?
-  persona_name  String?
-  to_email      String
-  subject       String
-  body_html     String
-  status        String   @default("sent") // sent | delivered | opened | clicked | bounced
-  provider_message_id String?
-  generated_content_id Int?
+  id                    Int       @id @default(autoincrement())
+  account_name          String
+  campaign_id           Int?
+  persona_name          String?
+  to_email              String
+  subject               String
+  body_html             String
+  status                String    @default("sent") // sent | delivered | opened | clicked | bounced
+  provider_message_id   String?
+  generated_content_id  Int?
   hubspot_engagement_id String?
-  thread_id     String?
-  reply_count   Int      @default(0)
-  opened_at     DateTime?
-  clicked_at    DateTime?
-  delivered_at  DateTime?
-  open_count    Int      @default(0)
-  bounce_type   String?  // hard | soft
-  sent_at       DateTime @default(now())
-  created_at    DateTime @default(now())
+  thread_id             String?
+  reply_count           Int       @default(0)
+  opened_at             DateTime?
+  clicked_at            DateTime?
+  delivered_at          DateTime?
+  open_count            Int       @default(0)
+  bounce_type           String? // hard | soft
+  sent_at               DateTime  @default(now())
+  created_at            DateTime  @default(now())
 
-  campaign Campaign? @relation(fields: [campaign_id], references: [id])
+  campaign            Campaign?          @relation(fields: [campaign_id], references: [id])
   send_job_recipients SendJobRecipient[]
 
   @@index([account_name])
@@ -477,18 +525,18 @@ model EmailLog {
 }
 
 model SendJob {
-  id               Int      @id @default(autoincrement())
-  status           String   @default("pending") // pending | processing | completed | failed | partial | cancelled
+  id               Int       @id @default(autoincrement())
+  status           String    @default("pending") // pending | processing | completed | failed | partial | cancelled
   requested_by     String?
-  total_recipients Int      @default(0)
-  sent_count       Int      @default(0)
-  failed_count     Int      @default(0)
-  skipped_count    Int      @default(0)
+  total_recipients Int       @default(0)
+  sent_count       Int       @default(0)
+  failed_count     Int       @default(0)
+  skipped_count    Int       @default(0)
   error_message    String?
   started_at       DateTime?
   completed_at     DateTime?
-  created_at       DateTime @default(now())
-  updated_at       DateTime @updatedAt
+  created_at       DateTime  @default(now())
+  updated_at       DateTime  @updatedAt
 
   recipients SendJobRecipient[]
 
@@ -497,25 +545,25 @@ model SendJob {
 }
 
 model SendJobRecipient {
-  id                   Int      @id @default(autoincrement())
-  send_job_id          Int
-  generated_content_id Int
-  campaign_id          Int?
-  account_name         String
-  persona_name         String?
-  to_email             String
-  subject              String
-  body_html            String
-  status               String   @default("pending") // pending | sending | sent | failed | skipped
-  error_message        String?
-  provider_message_id  String?
+  id                    Int       @id @default(autoincrement())
+  send_job_id           Int
+  generated_content_id  Int
+  campaign_id           Int?
+  account_name          String
+  persona_name          String?
+  to_email              String
+  subject               String
+  body_html             String
+  status                String    @default("pending") // pending | sending | sent | failed | skipped
+  error_message         String?
+  provider_message_id   String?
   hubspot_engagement_id String?
-  email_log_id         Int?
-  idempotency_key      String   @unique
-  attempted_at         DateTime?
-  sent_at              DateTime?
-  created_at           DateTime @default(now())
-  updated_at           DateTime @updatedAt
+  email_log_id          Int?
+  idempotency_key       String    @unique
+  attempted_at          DateTime?
+  sent_at               DateTime?
+  created_at            DateTime  @default(now())
+  updated_at            DateTime  @updatedAt
 
   send_job          SendJob          @relation(fields: [send_job_id], references: [id], onDelete: Cascade)
   generated_content GeneratedContent @relation(fields: [generated_content_id], references: [id])
@@ -552,15 +600,15 @@ model WebhookEvent {
 }
 
 model Notification {
-  id           Int      @id @default(autoincrement())
-  type         String   // reply | open | click | bounce | meeting_booked | hot_engagement
-  account_name String?
+  id            Int      @id @default(autoincrement())
+  type          String // reply | open | click | bounce | meeting_booked | hot_engagement
+  account_name  String?
   persona_email String?
-  subject      String?
-  preview      String?
-  source_id    String?  // e.g. email_log id, webhook event id
-  read         Boolean  @default(false)
-  created_at   DateTime @default(now())
+  subject       String?
+  preview       String?
+  source_id     String? // e.g. email_log id, webhook event id
+  read          Boolean  @default(false)
+  created_at    DateTime @default(now())
 
   @@index([read])
   @@index([type])
