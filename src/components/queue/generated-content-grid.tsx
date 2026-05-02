@@ -18,6 +18,8 @@ export interface QueueGeneratedVersion {
   is_published: boolean;
   content: string;
   created_at: string;
+  campaign_id?: number;
+  campaign_name?: string;
 }
 
 export interface QueueGeneratedAccountCard {
@@ -26,6 +28,7 @@ export interface QueueGeneratedAccountCard {
   latest_version: number;
   pending_jobs: number;
   processing_jobs: number;
+  campaign_names: string[];
   versions: QueueGeneratedVersion[];
 }
 
@@ -123,6 +126,9 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
                 <div className="rounded-md border p-2">Recipients: {recipients.length}</div>
                 <div className="rounded-md border p-2">Created: {new Date(selected.created_at).toLocaleDateString()}</div>
                 <div className="rounded-md border p-2">External sends: {selected.external_send_count}</div>
+                <div className="col-span-2 rounded-md border p-2">
+                  Campaigns: {card.campaign_names.length > 0 ? card.campaign_names.join(', ') : 'None'}
+                </div>
               </div>
 
               <div className="flex gap-2">
