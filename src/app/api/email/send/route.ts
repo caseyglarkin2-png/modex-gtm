@@ -157,6 +157,7 @@ export async function POST(req: NextRequest) {
       message: `Email sent to ${to}`,
       provider: response.provider ?? 'unknown',
       hubspotEngagementId: response.hubspotEngagementId ?? null,
+      hubspotError: response.hubspotError ?? null,
       remaining,
     });
   } catch (err) {

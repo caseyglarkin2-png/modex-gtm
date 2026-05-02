@@ -82,6 +82,9 @@ export async function POST(req: NextRequest) {
       const r = results[i];
       const recipient = eligibleRecipients[i];
       const providerMessageId = r.status === 'fulfilled' ? (r.value as { headers?: Record<string, string> })?.headers?.['x-message-id'] ?? null : null;
+      const hubspotResult = r.status === 'fulfilled'
+        ? (r.value as { hubspotEngagementId?: string | null; hubspotError?: string | null })
+        : null;
       const resolvedAccountName = recipient.accountName ?? accountName ?? '';
       const resolvedAccountExists = !resolvedAccountName
         ? null
@@ -101,7 +104,7 @@ export async function POST(req: NextRequest) {
           body_html: html,
           status: r.status === 'fulfilled' ? 'sent' : 'failed',
           provider_message_id: providerMessageId,
-          hubspot_engagement_id: r.status === 'fulfilled' ? (r.value as { hubspotEngagementId?: string | null })?.hubspotEngagementId ?? null : null,
+          hubspot_engagement_id: hubspotResult?.hubspotEngagementId ?? null,
           ...(generatedContentId ? { generated_content_id: generatedContentId } : {}),
         },
       }).catch(() => { /* individual log failure is non-blocking */ });

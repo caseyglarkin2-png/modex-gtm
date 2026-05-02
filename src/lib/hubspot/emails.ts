@@ -44,6 +44,11 @@ export async function logEmailToHubSpot(
   contactEmail: string,
 ): Promise<string | null> {
   if (!isHubSpotConfigured() || !HUBSPOT_LOGGING_ENABLED) {
+    console.warn('HubSpot email logging skipped', {
+      configured: isHubSpotConfigured(),
+      enabled: HUBSPOT_LOGGING_ENABLED,
+      contactEmail,
+    });
     return null;
   }
 
@@ -102,10 +107,15 @@ export async function logEmailToHubSpot(
 
     return emailId;
   } catch (error) {
+    console.error('HubSpot email object creation failed', {
+      subject: payload.subject,
+      to: payload.toEmail,
+      error: error instanceof Error ? error.message : String(error),
+    });
     Sentry.captureException(error, {
       extra: { subject: payload.subject, to: payload.toEmail },
     });
-    return null;
+    throw error;
   }
 }
 

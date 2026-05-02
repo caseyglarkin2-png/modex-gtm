@@ -12,12 +12,20 @@ export interface EmailPayload {
   headers?: Record<string, string>;
 }
 
+export interface EmailSendResult {
+  headers: { 'x-message-id': string };
+  statusCode: number;
+  provider: string;
+  hubspotEngagementId: string | null;
+  hubspotError?: string;
+}
+
 // ── Public API (Gmail only) ─────────────────────────────────────────
 // Sends from casey@freightroll.com via Gmail API.
 // Gmail auto-mirrors to Sent folder — no separate mirror step needed.
 // After send, automatically logs to HubSpot (if HUBSPOT_LOGGING_ENABLED).
 
-export async function sendEmail(payload: EmailPayload) {
+export async function sendEmail(payload: EmailPayload): Promise<EmailSendResult> {
   if (!isGmailSenderConfigured()) {
     throw new Error(
       'Gmail API not configured. Set GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, and GOOGLE_REFRESH_TOKEN.'
@@ -28,9 +36,12 @@ export async function sendEmail(payload: EmailPayload) {
 
   // Log to HubSpot (non-blocking, non-fatal)
   let hubspotEngagementId: string | null = null;
+  let hubspotError: string | undefined;
   try {
     hubspotEngagementId = await logSendToHubSpot(payload.subject, payload.html, payload.to);
-  } catch {
+  } catch (error) {
+    hubspotError = error instanceof Error ? error.message : String(error);
+    console.error('HubSpot email logging failed', { to: payload.to, subject: payload.subject, error: hubspotError });
     // HubSpot failure must never block email sends
   }
 
@@ -39,6 +50,7 @@ export async function sendEmail(payload: EmailPayload) {
     statusCode: 202,
     provider: result.provider,
     hubspotEngagementId,
+    hubspotError,
   };
 }
 
