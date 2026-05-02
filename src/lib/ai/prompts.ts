@@ -227,16 +227,24 @@ The output is a JSON that populates a branded infographic one-pager. The visual 
 6. A customer quote (use the verified quote, marked illustrative only if modified)
 7. Best fit + Public source context
 
+The one-pager must sell to both operations and executive stakeholders:
+- Operations buyer: emphasize queue variance reduction, gate/dock consistency, and labor neutrality.
+- Executive buyer: emphasize margin protection, SLA confidence, and board-ready proof.
+- Language should be direct, concrete, and financially legible.
+
 CRITICAL: Pain points and outcomes MUST be customized to this specific account's vertical and operations.
 - Pain points should reference their industry (e.g., "yogurt production surges" for Dannon, "seasonal volume spikes" for retail)
 - Outcomes should connect YardFlow to their specific throughput needs
 - Solution steps should be tailored descriptions of how each step helps THIS account
+- Headline must feel board-room strong, not generic (constraint + consequence + urgency).
+- Subheadline must include one explicit business consequence (margin, service reliability, or growth capacity).
+- Outcomes must avoid fluff. Each should imply a measurable operational or commercial effect.
 
 Generate ONLY valid JSON matching this schema — no markdown, no commentary:
 
 {
-  "headline": "string — 6-10 word power headline about the throughput constraint (e.g., 'WHEN DEMAND SPIKES, THROUGHPUT BECOMES THE CONSTRAINT')",
-  "subheadline": "string — 2-3 sentences connecting their specific business reality to YardFlow's standardized protocol",
+  "headline": "string — 6-10 word board-level headline about the throughput constraint and business consequence (e.g., 'WHEN DEMAND SPIKES, MARGIN LEAKS IN THE YARD')",
+  "subheadline": "string — 2-3 sentences connecting their specific business reality to YardFlow's standardized protocol and one explicit business consequence",
   "painPoints": [
     "string — pain customized to this account's operations (include industry-specific language)",
     "string — second pain point",
@@ -250,10 +258,10 @@ Generate ONLY valid JSON matching this schema — no markdown, no commentary:
     {"step": 4, "title": "BOL Proof", "description": "string — tailored (e.g., 'Touchless BOL capture with a defensible chain of custody from arrival to release')"}
   ],
   "outcomes": [
-    "string — YardFlow effect customized to this account",
-    "string — second outcome",
-    "string — third outcome",
-    "string — fourth outcome"
+    "string — YardFlow effect customized to this account with commercial impact",
+    "string — second outcome with measurable operational implication",
+    "string — third outcome with executive reporting implication",
+    "string — fourth outcome with service or growth implication"
   ],
   "proofStats": [
     {"value": "24", "label": "Facilities Live"},
@@ -263,7 +271,7 @@ Generate ONLY valid JSON matching this schema — no markdown, no commentary:
     {"value": "$1M+", "label": "Per-site Profit Lift"}
   ],
   "customerQuote": "string — use the verified quote: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office.' OR create an illustrative variation relevant to this vertical (prefix with '(Illustrative)')",
-  "bestFit": "string — 1-2 sentences about why this account is an ideal fit referencing their specific operations",
+  "bestFit": "string — 1-2 sentences about why this account is an ideal fit referencing specific operations and commercial stakes",
   "publicContext": "string — reference any public sources, signals, or intel that support the outreach (investor transcripts, MODEX attendance, facility expansions, etc.)"
 }`;
 }

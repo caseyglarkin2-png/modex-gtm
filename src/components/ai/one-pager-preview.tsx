@@ -22,6 +22,15 @@ export interface OnePagerData {
   publicContext: string;
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 interface OnePagerPreviewProps {
   accountName: string;
   trigger?: React.ReactNode;
@@ -48,6 +57,21 @@ export function OnePagerPreview({ data, accountName }: { data: OnePagerData; acc
           {data.headline}
         </h2>
         <p className="mt-2 text-sm text-slate-300 leading-relaxed">{data.subheadline}</p>
+      </div>
+
+      <div className="mx-4 mb-4 grid gap-2 md:grid-cols-3">
+        <div className="rounded-lg border border-cyan-600/40 bg-cyan-950/30 p-2">
+          <p className="text-[10px] uppercase tracking-[0.2em] text-cyan-300">Commercial Impact</p>
+          <p className="mt-1 text-xs text-slate-200">Grow throughput without adding dock-office headcount.</p>
+        </div>
+        <div className="rounded-lg border border-blue-600/40 bg-blue-950/30 p-2">
+          <p className="text-[10px] uppercase tracking-[0.2em] text-blue-300">Operational Control</p>
+          <p className="mt-1 text-xs text-slate-200">Standardize gate-to-dock execution across sites.</p>
+        </div>
+        <div className="rounded-lg border border-emerald-600/40 bg-emerald-950/30 p-2">
+          <p className="text-[10px] uppercase tracking-[0.2em] text-emerald-300">Executive Visibility</p>
+          <p className="mt-1 text-xs text-slate-200">Create board-ready proof of dwell and margin lift.</p>
+        </div>
       </div>
 
       {/* Three-column layout with pipe flow diagram */}
@@ -144,31 +168,61 @@ export function OnePagerPreview({ data, accountName }: { data: OnePagerData; acc
         <p className="text-xs text-slate-300"><strong className="text-slate-100">Best fit:</strong> {data.bestFit}</p>
         <p className="text-xs text-slate-400"><strong className="text-slate-300">Public source context:</strong> {data.publicContext}</p>
       </div>
+
+      <div className="mx-4 mb-5 rounded-lg border border-cyan-500/40 bg-cyan-950/20 p-3">
+        <p className="text-[10px] uppercase tracking-[0.2em] text-cyan-300">Suggested Next Step</p>
+        <p className="mt-1 text-xs text-slate-100">
+          Run a 20-minute YardFlow Throughput Benchmark for {accountName} to map current dwell loss and quantify fast-win value.
+        </p>
+      </div>
     </div>
   );
 }
 
 export function onePagerToHtml(data: OnePagerData, accountName: string): string {
-  const painHtml = data.painPoints.map((p) => `<div style="display:flex;gap:8px;font-size:12px;color:#cbd5e1;margin-bottom:8px;line-height:1.5;"><span style="color:#f87171;flex-shrink:0;">⚠</span><span>${p}</span></div>`).join('');
+  const safeAccountName = escapeHtml(accountName);
+  const safeHeadline = escapeHtml(data.headline);
+  const safeSubheadline = escapeHtml(data.subheadline);
+  const safeQuote = escapeHtml(data.customerQuote);
+  const safeBestFit = escapeHtml(data.bestFit);
+  const safePublicContext = escapeHtml(data.publicContext);
+
+  const painHtml = data.painPoints.map((p) => `<div style="display:flex;gap:8px;font-size:12px;color:#cbd5e1;margin-bottom:8px;line-height:1.5;"><span style="color:#f87171;flex-shrink:0;">⚠</span><span>${escapeHtml(p)}</span></div>`).join('');
   const stepsHtml = data.solutionSteps.map((s, i) => `<div style="position:relative;padding-left:32px;margin-bottom:${i < data.solutionSteps.length - 1 ? '12' : '0'}px;">
     <div style="position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;border:2px solid rgba(34,211,238,0.7);background:#0b1a2e;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;line-height:1;color:#22d3ee;">${s.step}</div>
     ${i < data.solutionSteps.length - 1 ? '<div style="position:absolute;left:11px;top:26px;bottom:-4px;width:2px;background:linear-gradient(to bottom,rgba(34,211,238,0.5),rgba(34,211,238,0.15));"></div>' : ''}
-    <div style="font-size:12px;"><span style="color:#67e8f9;font-weight:700;">${s.title}</span><p style="color:#94a3b8;margin:2px 0 0;font-size:11px;line-height:1.4;">${s.description}</p></div>
+    <div style="font-size:12px;"><span style="color:#67e8f9;font-weight:700;">${escapeHtml(s.title)}</span><p style="color:#94a3b8;margin:2px 0 0;font-size:11px;line-height:1.4;">${escapeHtml(s.description)}</p></div>
   </div>`).join('');
-  const outcomesHtml = data.outcomes.map((o) => `<div style="display:flex;gap:8px;font-size:12px;color:#cbd5e1;margin-bottom:8px;line-height:1.5;"><span style="color:#34d399;flex-shrink:0;">✓</span><span>${o}</span></div>`).join('');
+  const outcomesHtml = data.outcomes.map((o) => `<div style="display:flex;gap:8px;font-size:12px;color:#cbd5e1;margin-bottom:8px;line-height:1.5;"><span style="color:#34d399;flex-shrink:0;">✓</span><span>${escapeHtml(o)}</span></div>`).join('');
   const statIcons = ['🏭', '🌐', '👤', '⏱', '💰'];
-  const statsHtml = data.proofStats.map((s, i) => `<td style="text-align:center;background:#1e293b;border-radius:8px;padding:12px 4px;border:1px solid rgba(71,85,105,0.4);"><div style="font-size:14px;margin-bottom:4px;">${statIcons[i] ?? '📊'}</div><div style="font-size:18px;font-weight:700;color:#fff;">${s.value}</div><div style="font-size:9px;color:#94a3b8;margin-top:4px;line-height:1.3;">${s.label}</div></td>`).join('');
+  const statsHtml = data.proofStats.map((s, i) => `<td style="text-align:center;background:#1e293b;border-radius:8px;padding:12px 4px;border:1px solid rgba(71,85,105,0.4);"><div style="font-size:14px;margin-bottom:4px;">${statIcons[i] ?? '📊'}</div><div style="font-size:18px;font-weight:700;color:#fff;">${escapeHtml(s.value)}</div><div style="font-size:9px;color:#94a3b8;margin-top:4px;line-height:1.3;">${escapeHtml(s.label)}</div></td>`).join('');
 
-  return `<!DOCTYPE html><html><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>YardFlow — ${accountName}</title></head>
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>YardFlow — ${safeAccountName}</title></head>
 <body style="margin:0;padding:24px;background:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
 <div style="max-width:720px;margin:0 auto;background:#0b1a2e;border-radius:12px;overflow:hidden;color:#fff;">
   <div style="padding:24px 24px 12px;">
-    <p style="font-size:11px;letter-spacing:4px;color:#67e8f9;text-transform:uppercase;margin:0;font-weight:600;">For ${accountName}</p>
+    <p style="font-size:11px;letter-spacing:4px;color:#67e8f9;text-transform:uppercase;margin:0;font-weight:600;">For ${safeAccountName}</p>
     <h1 style="font-size:28px;margin:4px 0 0;font-weight:800;letter-spacing:-0.5px;"><span style="color:#22d3ee;">Yard</span><span style="color:#fff;">Flow</span><span style="color:#94a3b8;font-size:16px;font-weight:400;margin-left:8px;">by FreightRoll</span></h1>
   </div>
   <div style="padding:0 24px 16px;">
-    <h2 style="font-size:16px;text-transform:uppercase;letter-spacing:-0.3px;margin:0;color:#fff;font-weight:800;line-height:1.3;">${data.headline}</h2>
-    <p style="margin:8px 0 0;font-size:13px;color:#cbd5e1;line-height:1.6;">${data.subheadline}</p>
+    <h2 style="font-size:16px;text-transform:uppercase;letter-spacing:-0.3px;margin:0;color:#fff;font-weight:800;line-height:1.3;">${safeHeadline}</h2>
+    <p style="margin:8px 0 0;font-size:13px;color:#cbd5e1;line-height:1.6;">${safeSubheadline}</p>
+  </div>
+  <div style="margin:0 16px 16px;">
+    <table width="100%" cellpadding="0" cellspacing="6"><tr>
+      <td style="background:rgba(8,145,178,0.2);border:1px solid rgba(34,211,238,0.35);border-radius:8px;padding:10px;vertical-align:top;">
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#67e8f9;font-weight:700;">Commercial Impact</div>
+        <div style="font-size:11px;color:#e2e8f0;margin-top:6px;line-height:1.4;">Grow throughput without adding dock-office headcount.</div>
+      </td>
+      <td style="background:rgba(30,58,138,0.2);border:1px solid rgba(96,165,250,0.35);border-radius:8px;padding:10px;vertical-align:top;">
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#93c5fd;font-weight:700;">Operational Control</div>
+        <div style="font-size:11px;color:#e2e8f0;margin-top:6px;line-height:1.4;">Standardize gate-to-dock execution across sites.</div>
+      </td>
+      <td style="background:rgba(6,95,70,0.2);border:1px solid rgba(52,211,153,0.35);border-radius:8px;padding:10px;vertical-align:top;">
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#6ee7b7;font-weight:700;">Executive Visibility</div>
+        <div style="font-size:11px;color:#e2e8f0;margin-top:6px;line-height:1.4;">Create board-ready proof of dwell and margin lift.</div>
+      </td>
+    </tr></table>
   </div>
   <div style="margin:0 16px;border:1px solid rgba(71,85,105,0.5);border-radius:8px;overflow:hidden;">
     <table width="100%" cellpadding="0" cellspacing="0"><tr>
@@ -191,11 +245,15 @@ export function onePagerToHtml(data: OnePagerData, accountName: string): string 
   </div>
   <div style="margin:12px 16px 0;"><table width="100%" cellpadding="0" cellspacing="6"><tr>${statsHtml}</tr></table></div>
   <div style="margin:16px 16px;background:rgba(30,41,59,0.3);border-radius:8px;padding:12px 16px;border-left:3px solid rgba(34,211,238,0.5);">
-    <p style="font-size:12px;color:#cbd5e1;font-style:italic;margin:0;line-height:1.6;">"${data.customerQuote}"</p>
+    <p style="font-size:12px;color:#cbd5e1;font-style:italic;margin:0;line-height:1.6;">"${safeQuote}"</p>
   </div>
   <div style="padding:16px 24px;border-top:1px solid rgba(51,65,85,0.5);">
-    <p style="font-size:11px;color:#cbd5e1;margin:0 0 6px;line-height:1.5;"><strong style="color:#f1f5f9;">Best fit:</strong> ${data.bestFit}</p>
-    <p style="font-size:11px;color:#94a3b8;margin:0;line-height:1.5;"><strong style="color:#cbd5e1;">Public source context:</strong> ${data.publicContext}</p>
+    <p style="font-size:11px;color:#cbd5e1;margin:0 0 6px;line-height:1.5;"><strong style="color:#f1f5f9;">Best fit:</strong> ${safeBestFit}</p>
+    <p style="font-size:11px;color:#94a3b8;margin:0;line-height:1.5;"><strong style="color:#cbd5e1;">Public source context:</strong> ${safePublicContext}</p>
+  </div>
+  <div style="margin:0 16px 16px;background:rgba(8,145,178,0.15);border:1px solid rgba(34,211,238,0.35);border-radius:8px;padding:12px;">
+    <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#67e8f9;font-weight:700;">Suggested Next Step</div>
+    <p style="font-size:11px;color:#e2e8f0;margin:6px 0 0;line-height:1.5;">Run a 20-minute YardFlow Throughput Benchmark for ${safeAccountName} to map current dwell loss and quantify fast-win value.</p>
   </div>
 </div>
 </body></html>`;
