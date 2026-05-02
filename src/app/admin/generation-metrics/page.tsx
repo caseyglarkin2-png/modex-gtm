@@ -59,6 +59,10 @@ export default async function GenerationMetricsPage() {
             <ExternalLink className="h-3.5 w-3.5" />
             Generation Queue
           </Link>
+          <Link href="/generated-content" className="inline-flex items-center gap-1 rounded-lg border px-3 py-2 text-xs text-muted-foreground hover:bg-muted">
+            <ExternalLink className="h-3.5 w-3.5" />
+            Generated Content
+          </Link>
         </div>
       </div>
 

@@ -30,6 +30,8 @@ const pages = [
   { name: 'Accounts', href: '/accounts', icon: Building2 },
   { name: 'Personas', href: '/personas', icon: User },
   { name: 'Outreach Waves', href: '/waves', icon: Radio },
+  { name: 'Generation Queue', href: '/queue/generations', icon: Activity },
+  { name: 'Generated Content', href: '/generated-content', icon: FileText },
   { name: 'Meeting Briefs', href: '/briefs', icon: FileText },
   { name: 'Audit Routes', href: '/audit-routes', icon: ClipboardList },
   { name: 'QR Assets', href: '/qr', icon: QrCode },

@@ -48,6 +48,8 @@ const NAV_SECTIONS = [
       { href: '/waves', label: 'Outreach Waves', icon: Waves },
       { href: '/campaigns', label: 'Campaigns', icon: Rocket },
       { href: '/waves/campaign', label: 'Campaign HQ', icon: Rocket },
+      { href: '/queue/generations', label: 'Generation Queue', icon: Activity },
+      { href: '/generated-content', label: 'Generated Content', icon: FileText },
       { href: '/briefs', label: 'Meeting Briefs', icon: FileText },
       { href: '/search', label: 'Search Strings', icon: Search },
       { href: '/intel', label: 'Actionable Intel', icon: Lightbulb },

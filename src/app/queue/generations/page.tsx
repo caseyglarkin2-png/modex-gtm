@@ -2,6 +2,7 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { prisma } from '@/lib/prisma';
 import { Activity, Zap } from 'lucide-react';
+import Link from 'next/link';
 import { GenerationJobList, type GenerationJobRow } from '@/components/queue/generation-job-list';
 import { GeneratedContentGrid } from '@/components/queue/generated-content-grid';
 import { buildGeneratedContentWorkspaceData, computeGenerationQueueStats } from '@/lib/generated-content/queries';
@@ -87,9 +88,18 @@ export default async function GenerationQueuePage() {
           <h1 className="text-2xl font-bold tracking-tight">Generation Queue</h1>
           <p className="text-sm text-muted-foreground">Track one-pager generation jobs and their status.</p>
         </div>
-        <div className="flex items-center gap-2 rounded-lg border px-3 py-2 text-xs text-muted-foreground">
-          <Activity className="h-3.5 w-3.5" />
-          {jobs.length} jobs
+        <div className="flex items-center gap-2">
+          <Link
+            href="/generated-content"
+            className="inline-flex items-center gap-1 rounded-lg border px-3 py-2 text-xs text-muted-foreground hover:bg-muted"
+          >
+            <Zap className="h-3.5 w-3.5" />
+            Generated Content
+          </Link>
+          <div className="flex items-center gap-2 rounded-lg border px-3 py-2 text-xs text-muted-foreground">
+            <Activity className="h-3.5 w-3.5" />
+            {jobs.length} jobs
+          </div>
         </div>
       </div>
 
