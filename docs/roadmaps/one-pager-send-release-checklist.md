@@ -76,6 +76,9 @@ When smoke-testing in production, record:
 - HubSpot engagement ID (if available),
 - screenshot of UI confirmation state.
 
+Operator click-path checklist:
+- `docs/roadmaps/one-pager-operator-acceptance-checklist.md`
+
 ## Known Gate Notes
 
 - As of May 2, 2026, `npm run lint` passes with warnings after excluding legacy `scripts/**` from the flat ESLint project scope.
