@@ -400,6 +400,11 @@ model GeneratedContent {
   length       String?  // short | medium | long
   provider_used String?
   ai_error     String?
+  version      Int      @default(1)
+  is_published Boolean  @default(false)
+  published_at DateTime?
+  external_send_count Int @default(0)
+  version_metadata Json?
   content      String
   created_at   DateTime @default(now())
 
@@ -407,6 +412,7 @@ model GeneratedContent {
 
   @@index([account_name, content_type])
   @@index([campaign_id])
+  @@index([account_name, content_type, version])
   @@map("generated_content")
 }
 

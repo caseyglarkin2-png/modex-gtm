@@ -77,12 +77,25 @@ export async function POST(req: NextRequest) {
     // Best-effort save to DB
     try {
       const { prisma } = await import('@/lib/prisma');
+      const latestVersion = await prisma.generatedContent.findFirst({
+        where: {
+          account_name: accountName,
+          content_type: 'one_pager',
+        },
+        orderBy: { version: 'desc' },
+        select: { version: true },
+      });
       await prisma.generatedContent.create({
         data: {
           account_name: accountName,
           content_type: 'one_pager',
           tone: 'professional',
           provider_used: result.provider,
+          version: (latestVersion?.version ?? 0) + 1,
+          version_metadata: {
+            source: 'one_pager_generator',
+            model_provider: result.provider,
+          },
           content: JSON.stringify(content),
         },
       });
@@ -96,12 +109,25 @@ export async function POST(req: NextRequest) {
 
     try {
       const { prisma } = await import('@/lib/prisma');
+      const latestVersion = await prisma.generatedContent.findFirst({
+        where: {
+          account_name: accountName,
+          content_type: 'one_pager',
+        },
+        orderBy: { version: 'desc' },
+        select: { version: true },
+      });
       await prisma.generatedContent.create({
         data: {
           account_name: accountName,
           content_type: 'one_pager',
           tone: 'professional',
           ai_error: message,
+          version: (latestVersion?.version ?? 0) + 1,
+          version_metadata: {
+            source: 'one_pager_generator',
+            failed: true,
+          },
           content: JSON.stringify({ error: message }),
         },
       });

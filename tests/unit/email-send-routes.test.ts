@@ -16,6 +16,9 @@ const mockedPrisma = {
     emailLog: {
       create: vi.fn(),
     },
+    generatedContent: {
+      update: vi.fn(() => ({ catch: vi.fn() })),
+    },
     account: {
       findUnique: vi.fn(),
     },
@@ -83,6 +86,36 @@ describe('Email send API', () => {
     expect(payload.success).toBe(true);
     expect(mockedSendEmail).toHaveBeenCalledTimes(1);
     expect(mockedPrisma.prisma.emailLog.create).toHaveBeenCalled();
+    expect(mockedPrisma.prisma.generatedContent.update).not.toHaveBeenCalled();
+  });
+
+  it('increments generated content send count for single one-pager sends', async () => {
+    mockedPrisma.prisma.unsubscribedEmail.findUnique.mockResolvedValue(null);
+    mockedSendEmail.mockResolvedValue({ headers: { 'x-message-id': 'abc123' }, provider: 'gmail' });
+    mockedPrisma.prisma.account.findUnique.mockResolvedValue(null);
+    mockedPrisma.prisma.emailLog.create.mockResolvedValue({});
+
+    const req = new NextRequest('http://localhost/api/email/send', {
+      method: 'POST',
+      body: JSON.stringify({
+        to: 'alice@example.com',
+        subject: 'Test send',
+        bodyHtml: 'Hello there',
+        generatedContentId: 42,
+      }),
+      headers: { 'content-type': 'application/json', 'x-forwarded-for': '127.0.0.1' },
+    });
+
+    const res = await sendPOST(req);
+
+    expect(res.status).toBe(200);
+    expect(mockedPrisma.prisma.emailLog.create).toHaveBeenCalledWith(expect.objectContaining({
+      data: expect.objectContaining({ generated_content_id: 42 }),
+    }));
+    expect(mockedPrisma.prisma.generatedContent.update).toHaveBeenCalledWith({
+      where: { id: 42 },
+      data: { external_send_count: { increment: 1 } },
+    });
   });
 });
 
@@ -99,6 +132,7 @@ describe('Bulk email send API', () => {
       ],
       subject: 'Bulk subject',
       bodyHtml: 'Bulk send body',
+      generatedContentId: 99,
     });
     const req = new NextRequest('http://localhost/api/email/send-bulk', {
       method: 'POST',
@@ -118,5 +152,12 @@ describe('Bulk email send API', () => {
       { to: 'skip@example.com', reason: 'Recipient explicitly unsubscribed' },
     ]);
     expect(mockedSendBulk).toHaveBeenCalledTimes(1);
+    expect(mockedPrisma.prisma.emailLog.create).toHaveBeenCalledWith(expect.objectContaining({
+      data: expect.objectContaining({ generated_content_id: 99 }),
+    }));
+    expect(mockedPrisma.prisma.generatedContent.update).toHaveBeenCalledWith({
+      where: { id: 99 },
+      data: { external_send_count: { increment: 1 } },
+    });
   });
 });

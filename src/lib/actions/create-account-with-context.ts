@@ -61,6 +61,7 @@ export async function createAccountWithContext(
     // Create account
     const account = await prisma.account.create({
       data: {
+        rank: 999,
         name: input.name,
         parent_brand: input.parent_brand || input.name,
         vertical: input.vertical,

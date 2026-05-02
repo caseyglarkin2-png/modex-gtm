@@ -5,8 +5,6 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
@@ -87,7 +85,7 @@ export function OnePageSendDialog({
           recipients: allRecipients.filter((r) => selectedRecipients.includes(r.id)),
           subject,
           bodyHtml: generatedContent.content,
-          generated_content_id: generatedContentId,
+          generatedContentId,
         }),
       });
 
@@ -168,10 +166,12 @@ export function OnePageSendDialog({
                 <>
                   {/* Select All */}
                   <div className="flex items-center space-x-2 border-b pb-3">
-                    <Checkbox
+                    <input
+                      type="checkbox"
                       id="select-all"
                       checked={allSelected}
-                      onCheckedChange={(checked) => handleSelectAll(checked as boolean)}
+                      onChange={(event) => handleSelectAll(event.target.checked)}
+                      className="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary"
                     />
                     <Label htmlFor="select-all" className="cursor-pointer font-medium">
                       Select all {allRecipients.length} recipients
@@ -182,10 +182,12 @@ export function OnePageSendDialog({
                   <div className="space-y-2 max-h-64 overflow-y-auto">
                     {allRecipients.map((recipient) => (
                       <div key={recipient.id} className="flex items-center space-x-2">
-                        <Checkbox
+                        <input
+                          type="checkbox"
                           id={`recipient-${recipient.id}`}
                           checked={selectedRecipients.includes(recipient.id)}
-                          onCheckedChange={(checked) => handleSelectRecipient(recipient.id, checked as boolean)}
+                          onChange={(event) => handleSelectRecipient(recipient.id, event.target.checked)}
+                          className="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary"
                         />
                         <Label htmlFor={`recipient-${recipient.id}`} className="cursor-pointer flex-1">
                           <span className="font-medium">{recipient.name}</span>

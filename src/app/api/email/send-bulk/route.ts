@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
   }
 
-  const { recipients, subject, bodyHtml, accountName } = parsed.data;
+  const { recipients, subject, bodyHtml, accountName, generatedContentId } = parsed.data;
 
   const isPlainText = !bodyHtml.trim().startsWith('<');
   const html = isPlainText ? wrapHtml(bodyHtml, accountName ?? 'the team') : bodyHtml;
@@ -102,6 +102,7 @@ export async function POST(req: NextRequest) {
           status: r.status === 'fulfilled' ? 'sent' : 'failed',
           provider_message_id: providerMessageId,
           hubspot_engagement_id: r.status === 'fulfilled' ? (r.value as { hubspotEngagementId?: string | null })?.hubspotEngagementId ?? null : null,
+          ...(generatedContentId ? { generated_content_id: generatedContentId } : {}),
         },
       }).catch(() => { /* individual log failure is non-blocking */ });
 
@@ -144,6 +145,13 @@ export async function POST(req: NextRequest) {
       }).catch(() => {});
 
       await ensureLocalMeetingDealLink(acctName, nextStage).catch(() => {});
+    }
+
+    if (generatedContentId && sent > 0) {
+      await prisma.generatedContent.update({
+        where: { id: generatedContentId },
+        data: { external_send_count: { increment: sent } },
+      }).catch(() => {});
     }
   } catch {
     // DB offline — skip logging

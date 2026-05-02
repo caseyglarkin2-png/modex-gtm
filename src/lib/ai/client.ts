@@ -3,10 +3,13 @@ import OpenAI from 'openai';
 
 const GEMINI_KEY = process.env.GEMINI_API_KEY;
 const OPENAI_KEY = process.env.OPENAI_API_KEY;
+const AI_GATEWAY_KEY = process.env.AI_GATEWAY_API_KEY;
+const AI_GATEWAY_MODEL = process.env.AI_GATEWAY_MODEL || 'openai/gpt-5.4';
+const AI_GATEWAY_BASE_URL = process.env.AI_GATEWAY_BASE_URL || 'https://ai-gateway.vercel.sh/v1';
 const CONTROL_PLANE_URL = process.env.CLAWD_CONTROL_PLANE_URL?.trim();
 const CONTROL_PLANE_TOKEN = process.env.CLAWD_CONTROL_PLANE_TOKEN?.trim();
 
-export type AIProvider = 'gemini' | 'openai' | 'control_plane';
+export type AIProvider = 'ai_gateway' | 'gemini' | 'openai' | 'control_plane';
 export type AIErrorCategory = 'quota' | 'model_missing' | 'timeout' | 'service' | 'authentication' | 'unknown';
 
 export interface AIErrorInfo {
@@ -104,6 +107,31 @@ function tryGemini(prompt: string, maxTokens: number): Promise<string> {
 
 // ── OpenAI path ──────────────────────────────────────────────────────
 
+function tryAIGateway(prompt: string, maxTokens: number): Promise<string> {
+  if (!AI_GATEWAY_KEY) return Promise.reject(new Error('AI_GATEWAY_API_KEY not set'));
+  const client = new OpenAI({
+    apiKey: AI_GATEWAY_KEY,
+    baseURL: AI_GATEWAY_BASE_URL,
+  });
+
+  return (async () => {
+    try {
+      const res = await client.chat.completions.create({
+        model: AI_GATEWAY_MODEL,
+        max_tokens: maxTokens,
+        temperature: 0.7,
+        messages: [{ role: 'user', content: prompt }],
+      });
+      const text = res.choices[0]?.message?.content;
+      if (!text) throw new Error('Empty response from AI Gateway');
+      return text;
+    } catch (err) {
+      const info = classifyAIError('ai_gateway', err);
+      throw new AIProviderError({ ...info, message: `AI Gateway error: ${info.message}` });
+    }
+  })();
+}
+
 function tryOpenAI(prompt: string, maxTokens: number): Promise<string> {
   if (!OPENAI_KEY) return Promise.reject(new Error('OPENAI_API_KEY not set'));
   const client = new OpenAI({ apiKey: OPENAI_KEY });
@@ -166,6 +194,8 @@ async function tryControlPlane(prompt: string, maxTokens: number): Promise<strin
 
 export async function generateTextWithProvider(provider: AIProvider, prompt: string, maxTokens = 1024): Promise<string> {
   switch (provider) {
+    case 'ai_gateway':
+      return tryAIGateway(prompt, maxTokens);
     case 'gemini':
       return tryGemini(prompt, maxTokens);
     case 'openai':
@@ -179,6 +209,32 @@ export async function generateTextWithProvider(provider: AIProvider, prompt: str
 
 export async function generateTextWithMetadata(prompt: string, maxTokens = 1024): Promise<GenerateTextResult> {
   const errors: AIErrorInfo[] = [];
+
+  if (AI_GATEWAY_KEY) {
+    try {
+      const text = await tryAIGateway(prompt, maxTokens);
+      return { text, provider: 'ai_gateway', errors };
+    } catch (err) {
+      if (err instanceof AIProviderError) {
+        errors.push({ provider: err.provider, category: err.category, retryable: err.retryable, message: err.message });
+        if (err.retryable) {
+          await wait(2000);
+          try {
+            const text = await tryAIGateway(prompt, maxTokens);
+            return { text, provider: 'ai_gateway', errors };
+          } catch (retryErr) {
+            if (retryErr instanceof AIProviderError) {
+              errors.push({ provider: retryErr.provider, category: retryErr.category, retryable: retryErr.retryable, message: retryErr.message });
+            } else {
+              errors.push(classifyAIError('ai_gateway', retryErr));
+            }
+          }
+        }
+      } else {
+        errors.push(classifyAIError('ai_gateway', err));
+      }
+    }
+  }
 
   if (GEMINI_KEY) {
     try {
@@ -234,7 +290,7 @@ export async function generateTextWithMetadata(prompt: string, maxTokens = 1024)
 
   const errorMessage = errors.length
     ? `AI generation failed: ${errors.map((error) => `${error.provider}:${error.category}:${error.message}`).join(' | ')}`
-    : 'AI generation unavailable. Set GEMINI_API_KEY or OPENAI_API_KEY in your Vercel environment variables.';
+    : 'AI generation unavailable. Set AI_GATEWAY_API_KEY, GEMINI_API_KEY, or OPENAI_API_KEY in your Vercel environment variables.';
   throw new Error(errorMessage);
 }
 
@@ -245,6 +301,7 @@ export async function generateText(prompt: string, maxTokens = 1024): Promise<st
 
 export function getAvailableProviders(): AIProvider[] {
   const providers: AIProvider[] = [];
+  if (AI_GATEWAY_KEY) providers.push('ai_gateway');
   if (GEMINI_KEY) providers.push('gemini');
   if (OPENAI_KEY) providers.push('openai');
   if (CONTROL_PLANE_URL) providers.push('control_plane');
@@ -254,6 +311,27 @@ export function getAvailableProviders(): AIProvider[] {
 /** Quick health check — returns first provider/model that responds */
 export async function checkModelHealth(): Promise<{ ok: boolean; provider?: string; model?: string; errors: string[] }> {
   const errors: string[] = [];
+
+  if (AI_GATEWAY_KEY) {
+    try {
+      const client = new OpenAI({
+        apiKey: AI_GATEWAY_KEY,
+        baseURL: AI_GATEWAY_BASE_URL,
+      });
+      const res = await client.chat.completions.create({
+        model: AI_GATEWAY_MODEL,
+        max_tokens: 10,
+        messages: [{ role: 'user', content: 'Say "ok"' }],
+      });
+      if (res.choices[0]?.message?.content) {
+        return { ok: true, provider: 'ai_gateway', model: AI_GATEWAY_MODEL, errors };
+      }
+    } catch (err) {
+      errors.push(`ai_gateway/${AI_GATEWAY_MODEL}: ${err instanceof Error ? err.message.slice(0, 150) : String(err)}`);
+    }
+  } else {
+    errors.push('AI_GATEWAY_API_KEY not set');
+  }
 
   if (GEMINI_KEY) {
     const client = new GoogleGenerativeAI(GEMINI_KEY);

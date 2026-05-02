@@ -107,6 +107,13 @@ export async function POST(req: NextRequest) {
         },
       });
 
+      if (generatedContentId) {
+        await prisma.generatedContent.update({
+          where: { id: generatedContentId },
+          data: { external_send_count: { increment: 1 } },
+        }).catch(() => {});
+      }
+
       // Auto-update outreach_status to "Contacted" if currently "Not started"
       if (accountName && accountExists) {
         const nextStage = advancePipelineStage(

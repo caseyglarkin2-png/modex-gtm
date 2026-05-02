@@ -149,4 +149,5 @@ export const BulkSendEmailSchema = z.object({
   subject: z.string().min(1),
   bodyHtml: z.string().min(1),
   accountName: z.string().optional(),
+  generatedContentId: z.number().int().positive().optional(),
 });

@@ -23,7 +23,8 @@ export default async function GenerationQueuePage() {
   const jobsWithCampaignNames = jobs.map((job) => ({
     ...job,
     campaign_name: undefined,
-  }));
+    campaign_id: job.campaign_id ?? undefined,
+  } as any));
 
   return (
     <div className="space-y-6">
