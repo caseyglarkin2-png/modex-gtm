@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
-import { listRecentContacts, upsertContact, type HubSpotContact } from '@/lib/hubspot/contacts';
+import { upsertContact, type HubSpotContact } from '@/lib/hubspot/contacts';
 import { isHubSpotConfigured } from '@/lib/hubspot/client';
 import { HUBSPOT_SYNC_ENABLED } from '@/lib/feature-flags';
 import { markCronFailure, markCronSkipped, markCronStarted, markCronSuccess } from '@/lib/cron-monitor';
+import {
+  getHubSpotContactsCheckpoint,
+  ingestHubSpotContactsPage,
+  writeHubSpotIngestionAudit,
+} from '@/lib/enrichment/hubspot-ingestion';
 import * as Sentry from '@sentry/nextjs';
 
 export const dynamic = 'force-dynamic';
@@ -48,18 +53,15 @@ export async function GET(req: NextRequest) {
 
   try {
     // ── PULL: HubSpot → Local ─────────────────────────────
-    const cursor = await prisma.systemConfig.findUnique({
-      where: { key: 'hubspot_sync_cursor' },
-    });
-
-    let after = cursor?.value ?? undefined;
+    const cursorBefore = await getHubSpotContactsCheckpoint();
     let hasMore = true;
     let pageCount = 0;
     const maxPages = 10; // Safety limit
+    let cursorAfter: string | null = cursorBefore;
 
     while (hasMore && pageCount < maxPages) {
       pageCount++;
-      const { contacts, nextAfter } = await listRecentContacts(after, 100);
+      const { contacts, nextAfter } = await ingestHubSpotContactsPage(100);
 
       for (const hsContact of contacts) {
         try {
@@ -72,17 +74,20 @@ export async function GET(req: NextRequest) {
       }
 
       if (nextAfter) {
-        after = nextAfter;
-        // Save cursor after each page
-        await prisma.systemConfig.upsert({
-          where: { key: 'hubspot_sync_cursor' },
-          create: { key: 'hubspot_sync_cursor', value: nextAfter },
-          update: { value: nextAfter },
-        });
+        cursorAfter = nextAfter;
       } else {
         hasMore = false;
       }
     }
+
+    await writeHubSpotIngestionAudit({
+      at: new Date().toISOString(),
+      pages: pageCount,
+      pulled: stats.pulled,
+      errors: stats.errors,
+      cursorBefore,
+      cursorAfter,
+    });
 
     // ── PUSH: Local → HubSpot ─────────────────────────────
     const localUpdated = await prisma.persona.findMany({

@@ -57,4 +57,43 @@ describe('hubspot ingestion checkpointing', () => {
     expect(result.usedAfter).toBeNull();
     expect(result.nextAfter).toBeNull();
   });
+
+  it('writes ingestion audit payload to system config', async () => {
+    mockedPrisma.systemConfig.upsert.mockResolvedValue({});
+    const { writeHubSpotIngestionAudit } = await import('@/lib/enrichment/hubspot-ingestion');
+
+    await writeHubSpotIngestionAudit({
+      at: '2026-05-02T20:00:00.000Z',
+      pages: 3,
+      pulled: 120,
+      errors: 2,
+      cursorBefore: '100',
+      cursorAfter: '220',
+    });
+
+    expect(mockedPrisma.systemConfig.upsert).toHaveBeenCalledWith({
+      where: { key: 'enrichment_hubspot_ingestion_audit' },
+      update: {
+        value: JSON.stringify({
+          at: '2026-05-02T20:00:00.000Z',
+          pages: 3,
+          pulled: 120,
+          errors: 2,
+          cursorBefore: '100',
+          cursorAfter: '220',
+        }),
+      },
+      create: {
+        key: 'enrichment_hubspot_ingestion_audit',
+        value: JSON.stringify({
+          at: '2026-05-02T20:00:00.000Z',
+          pages: 3,
+          pulled: 120,
+          errors: 2,
+          cursorBefore: '100',
+          cursorAfter: '220',
+        }),
+      },
+    });
+  });
 });

@@ -19,6 +19,15 @@ function parseCronValue(value?: string): Partial<CronStateValue> {
   }
 }
 
+function parseJsonValue<T>(value?: string): T | null {
+  if (!value) return null;
+  try {
+    return JSON.parse(value) as T;
+  } catch {
+    return null;
+  }
+}
+
 function statusBadge(status?: string) {
   switch (status) {
     case 'ok':
@@ -57,6 +66,14 @@ export default async function CronHealthPage() {
   ]);
 
   const configMap = new Map(configs.map((entry) => [entry.key, entry.value]));
+  const hubspotIngestionAudit = parseJsonValue<{
+    at: string;
+    pages: number;
+    pulled: number;
+    errors: number;
+    cursorBefore: string | null;
+    cursorAfter: string | null;
+  }>(configMap.get('enrichment_hubspot_ingestion_audit'));
 
   const rows = KNOWN_CRONS.map((cron) => ({
     ...cron,
@@ -158,6 +175,30 @@ export default async function CronHealthPage() {
           </CardContent>
         </Card>
       </div>
+
+      {hubspotIngestionAudit && (
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm">HubSpot Ingestion Audit</CardTitle>
+          </CardHeader>
+          <CardContent className="grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-3">
+            <div className="rounded-lg border p-3">
+              <p className="text-[10px] uppercase text-muted-foreground">Last run</p>
+              <p className="mt-1 font-medium">{new Date(hubspotIngestionAudit.at).toLocaleString()}</p>
+            </div>
+            <div className="rounded-lg border p-3">
+              <p className="text-[10px] uppercase text-muted-foreground">Pages / Pulled / Errors</p>
+              <p className="mt-1 font-medium">
+                {hubspotIngestionAudit.pages} / {hubspotIngestionAudit.pulled} / {hubspotIngestionAudit.errors}
+              </p>
+            </div>
+            <div className="rounded-lg border p-3">
+              <p className="text-[10px] uppercase text-muted-foreground">Cursor</p>
+              <p className="mt-1 font-medium">{hubspotIngestionAudit.cursorBefore ?? 'start'} → {hubspotIngestionAudit.cursorAfter ?? 'end'}</p>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       <div className="grid gap-4 xl:grid-cols-2">
         {rows.map((row) => (
