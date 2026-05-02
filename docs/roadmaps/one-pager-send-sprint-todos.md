@@ -3,6 +3,11 @@
 ## Overview
 This document captures the recommended execution path for the one-pager generation + send workflow. It is intentionally atomic, exhaustive, and aligned to the sprint plan in `one-pager-send-sprint-plan.md`.
 
+## Linked Docs
+- Strategic plan: `docs/roadmaps/one-pager-send-sprint-plan.md`
+- Atomic execution + gap closure: `docs/roadmaps/one-pager-send-atomic-sprint-plan.md`
+- Queue decision record: `docs/roadmaps/queue-implementation-decision.md`
+
 ## Sprint 0: Queue Technology Choice
 - [x] Decide the queue model before implementing batch generation.
 - [x] Evaluate Vercel Cron + Prisma polling.
@@ -36,7 +41,7 @@ This document captures the recommended execution path for the one-pager generati
 - [x] Ensure send dialog uses versioned content correctly.
 - [x] Track send analytics by content version.
 - [x] Add publish endpoint for selecting the active content version.
-- [ ] Add queue-aware version send preview guard.
+- [x] Add queue-aware version send preview guard.
 
 ## Sprint 5: Account Template Extensions
 - [x] Create account template reference data for verticals.
@@ -45,12 +50,12 @@ This document captures the recommended execution path for the one-pager generati
 - [x] Queue sample one-pager during account onboarding.
 
 ## Sprint 6: DX Polish & Performance
-- [ ] Add generated-content grid and bulk preview/send flow.
-- [ ] Preload personas and recipients in queue pages.
-- [ ] Build admin metrics for generation performance.
-- [ ] Add direct send job feedback and user-facing job state.
+- [x] Add generated-content grid and bulk preview/send flow.
+- [x] Preload personas and recipients in queue pages.
+- [x] Build admin metrics for generation performance.
+- [x] Add direct send job feedback and user-facing job state.
 
 ## Status Tracking
 - Sprint 0 documentation created.
 - Sprints 1-5 implemented and covered by typecheck/unit tests.
-- Remaining Sprint 6 work is UI polish and performance instrumentation.
+- Sprint 6 implementation complete. Remaining follow-up is ongoing UI polish and metrics iteration from live usage.

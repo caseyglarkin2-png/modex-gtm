@@ -6,6 +6,11 @@
 **Baseline:** Current one-pager + email send workflowv(synchronous, manual, no chaining)  
 **Goal:** Enable batch generation, queue management, one-click send, and extensible account onboarding  
 
+## Related Docs
+- Execution tracker: `docs/roadmaps/one-pager-send-sprint-todos.md`
+- Atomic closeout plan: `docs/roadmaps/one-pager-send-atomic-sprint-plan.md`
+- Queue architecture decision: `docs/roadmaps/queue-implementation-decision.md`
+
 ---
 
 ## EXECUTIVE SUMMARY

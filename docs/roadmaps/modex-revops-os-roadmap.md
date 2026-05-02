@@ -3,6 +3,11 @@
 > Last updated: 2026-03-26
 > Status: Active — Sprint 1 in progress
 
+## Related Execution Docs
+- `docs/roadmaps/one-pager-send-sprint-plan.md`
+- `docs/roadmaps/one-pager-send-sprint-todos.md`
+- `docs/roadmaps/one-pager-send-atomic-sprint-plan.md`
+
 ---
 
 ## 1. Executive Diagnosis
