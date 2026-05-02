@@ -10,6 +10,7 @@ import {
   ingestHubSpotContactsPage,
   writeHubSpotIngestionAudit,
 } from '@/lib/enrichment/hubspot-ingestion';
+import { acquireEnrichmentLock, releaseEnrichmentLock } from '@/lib/enrichment/lock';
 import * as Sentry from '@sentry/nextjs';
 
 export const dynamic = 'force-dynamic';
@@ -39,6 +40,15 @@ export async function GET(req: NextRequest) {
 
   const startedAt = Date.now();
   await markCronStarted(CRON_NAME, { path: CRON_PATH, schedule: CRON_SCHEDULE }).catch(() => undefined);
+  const lock = await acquireEnrichmentLock('sync-hubspot', 10 * 60 * 1000);
+  if (!lock.acquired || !lock.token) {
+    await markCronSkipped(CRON_NAME, {
+      path: CRON_PATH,
+      schedule: CRON_SCHEDULE,
+      reason: 'Another sync-hubspot run is already in-flight',
+    }).catch(() => undefined);
+    return NextResponse.json({ status: 'skipped', reason: 'in-flight lock held' });
+  }
 
   if (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED) {
     await markCronSkipped(CRON_NAME, {
@@ -46,6 +56,7 @@ export async function GET(req: NextRequest) {
       schedule: CRON_SCHEDULE,
       reason: 'HubSpot sync disabled',
     }).catch(() => undefined);
+    await releaseEnrichmentLock('sync-hubspot', lock.token);
     return NextResponse.json({ status: 'skipped', reason: 'HubSpot sync disabled' });
   }
 
@@ -172,6 +183,8 @@ export async function GET(req: NextRequest) {
       { error: error instanceof Error ? error.message : 'Sync failed' },
       { status: 500 },
     );
+  } finally {
+    await releaseEnrichmentLock('sync-hubspot', lock.token);
   }
 }
 
