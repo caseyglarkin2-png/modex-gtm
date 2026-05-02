@@ -1,0 +1,104 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`enrichment field catalog > matches snapshot to prevent contract drift 1`] = `
+[
+  {
+    "field": "email",
+    "nullable": false,
+    "overwritePolicy": "never",
+    "sourceOfTruth": "hubspot",
+    "type": "string",
+  },
+  {
+    "field": "first_name",
+    "nullable": true,
+    "overwritePolicy": "if_empty",
+    "sourceOfTruth": "hubspot",
+    "type": "string",
+  },
+  {
+    "field": "last_name",
+    "nullable": true,
+    "overwritePolicy": "if_empty",
+    "sourceOfTruth": "hubspot",
+    "type": "string",
+  },
+  {
+    "field": "job_title",
+    "nullable": true,
+    "overwritePolicy": "if_higher_confidence",
+    "sourceOfTruth": "apollo",
+    "type": "string",
+  },
+  {
+    "field": "seniority",
+    "nullable": true,
+    "overwritePolicy": "if_higher_confidence",
+    "sourceOfTruth": "apollo",
+    "type": "enum",
+  },
+  {
+    "field": "department",
+    "nullable": true,
+    "overwritePolicy": "if_higher_confidence",
+    "sourceOfTruth": "apollo",
+    "type": "string",
+  },
+  {
+    "field": "company_name",
+    "nullable": true,
+    "overwritePolicy": "if_empty",
+    "sourceOfTruth": "hubspot",
+    "type": "string",
+  },
+  {
+    "field": "company_domain",
+    "nullable": true,
+    "overwritePolicy": "if_empty",
+    "sourceOfTruth": "hubspot",
+    "type": "string",
+  },
+  {
+    "field": "company_industry",
+    "nullable": true,
+    "overwritePolicy": "if_higher_confidence",
+    "sourceOfTruth": "apollo",
+    "type": "string",
+  },
+  {
+    "field": "employee_count",
+    "nullable": true,
+    "overwritePolicy": "if_higher_confidence",
+    "sourceOfTruth": "apollo",
+    "type": "number",
+  },
+  {
+    "field": "phone",
+    "nullable": true,
+    "overwritePolicy": "if_empty",
+    "sourceOfTruth": "hubspot",
+    "type": "string",
+  },
+  {
+    "field": "linkedin_url",
+    "nullable": true,
+    "overwritePolicy": "if_higher_confidence",
+    "sourceOfTruth": "apollo",
+    "type": "string",
+  },
+  {
+    "field": "last_enriched_at",
+    "nullable": true,
+    "overwritePolicy": "always",
+    "sourceOfTruth": "derived",
+    "type": "datetime",
+  },
+  {
+    "field": "enrichment_confidence",
+    "nullable": true,
+    "overwritePolicy": "always",
+    "sourceOfTruth": "derived",
+    "type": "number",
+  },
+]
+`;
