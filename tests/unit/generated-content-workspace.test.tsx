@@ -1,0 +1,96 @@
+import { fireEvent, render, screen } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { GeneratedContentWorkspace } from '@/components/generated-content/generated-content-workspace';
+import type { QueueGeneratedAccountCard } from '@/components/queue/generated-content-grid';
+
+const mockedReplace = vi.fn();
+let mockedPathname = '/generated-content';
+let mockedParams = new URLSearchParams();
+
+vi.mock('next/navigation', () => ({
+  usePathname: () => mockedPathname,
+  useRouter: () => ({ replace: mockedReplace }),
+  useSearchParams: () => ({
+    get: (key: string) => mockedParams.get(key),
+    toString: () => mockedParams.toString(),
+  }),
+}));
+
+vi.mock('@/components/queue/generated-content-grid', () => ({
+  GeneratedContentGrid: ({ cards }: { cards: Array<{ account_name: string }> }) => (
+    <div>
+      <p data-testid="card-count">{cards.length}</p>
+      {cards.map((card) => (
+        <p key={card.account_name}>{card.account_name}</p>
+      ))}
+    </div>
+  ),
+}));
+
+const cards: QueueGeneratedAccountCard[] = [
+  {
+    account_name: 'Acme Foods',
+    account_slug: 'acme-foods',
+    latest_version: 2,
+    pending_jobs: 0,
+    processing_jobs: 0,
+    campaign_names: ['Q2 Launch'],
+    versions: [
+      {
+        id: 11,
+        version: 2,
+        provider_used: 'ai_gateway',
+        external_send_count: 1,
+        is_published: true,
+        content: 'x',
+        created_at: '2026-05-01T00:00:00.000Z',
+      },
+    ],
+  },
+  {
+    account_name: 'Blue Rail',
+    account_slug: 'blue-rail',
+    latest_version: 1,
+    pending_jobs: 0,
+    processing_jobs: 0,
+    campaign_names: ['RevOps'],
+    versions: [
+      {
+        id: 22,
+        version: 1,
+        provider_used: 'openai',
+        external_send_count: 0,
+        is_published: false,
+        content: 'y',
+        created_at: '2026-05-01T00:00:00.000Z',
+      },
+    ],
+  },
+];
+
+describe('GeneratedContentWorkspace', () => {
+  beforeEach(() => {
+    mockedReplace.mockReset();
+    mockedPathname = '/generated-content';
+    mockedParams = new URLSearchParams();
+  });
+
+  it('applies query-string filters to visible cards', () => {
+    mockedParams = new URLSearchParams('q=revops');
+    render(<GeneratedContentWorkspace cards={cards} recipientsByAccount={{}} />);
+
+    expect(screen.getByTestId('card-count')).toHaveTextContent('1');
+    expect(screen.getByText('Blue Rail')).toBeInTheDocument();
+    expect(screen.queryByText('Acme Foods')).not.toBeInTheDocument();
+  });
+
+  it('updates URL params when search text changes', () => {
+    render(<GeneratedContentWorkspace cards={cards} recipientsByAccount={{}} />);
+
+    fireEvent.change(screen.getByPlaceholderText('Search accounts/campaigns'), {
+      target: { value: 'acme' },
+    });
+
+    expect(mockedReplace).toHaveBeenCalledWith('/generated-content?q=acme');
+  });
+});
