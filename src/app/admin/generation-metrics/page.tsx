@@ -1,0 +1,165 @@
+import Link from 'next/link';
+import { Activity, AlertTriangle, ExternalLink } from 'lucide-react';
+import { Breadcrumb } from '@/components/breadcrumb';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { prisma } from '@/lib/prisma';
+import { computeGenerationMetrics } from '@/lib/admin/generation-metrics';
+
+export const dynamic = 'force-dynamic';
+export const metadata = { title: 'Generation Metrics' };
+
+export default async function GenerationMetricsPage() {
+  const jobs = await prisma.generationJob.findMany({
+    orderBy: { created_at: 'desc' },
+    take: 500,
+    select: {
+      status: true,
+      provider_used: true,
+      started_at: true,
+      completed_at: true,
+      created_at: true,
+      error_message: true,
+      account_name: true,
+      updated_at: true,
+    },
+  });
+
+  const metrics = computeGenerationMetrics(jobs);
+
+  const recentFailures = jobs
+    .filter((job) => job.status === 'failed')
+    .slice(0, 8);
+
+  const stuckThresholdMs = 15 * 60 * 1000;
+  const now = Date.now();
+  const stuckJobs = jobs
+    .filter((job) => job.status === 'processing')
+    .filter((job) => {
+      const startedAt = job.started_at?.getTime() ?? job.updated_at.getTime();
+      return now - startedAt > stuckThresholdMs;
+    })
+    .slice(0, 8);
+
+  return (
+    <div className="space-y-6">
+      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Admin', href: '/admin/crons' }, { label: 'Generation Metrics' }]} />
+
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight">Generation Metrics</h1>
+          <p className="text-sm text-muted-foreground">Operational visibility for queued generation performance and failures.</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <Link href="/admin/crons" className="inline-flex items-center gap-1 rounded-lg border px-3 py-2 text-xs text-muted-foreground hover:bg-muted">
+            <Activity className="h-3.5 w-3.5" />
+            Cron Health
+          </Link>
+          <Link href="/queue/generations" className="inline-flex items-center gap-1 rounded-lg border px-3 py-2 text-xs text-muted-foreground hover:bg-muted">
+            <ExternalLink className="h-3.5 w-3.5" />
+            Generation Queue
+          </Link>
+        </div>
+      </div>
+
+      <div className="grid gap-3 md:grid-cols-4">
+        <MetricCard label="Total Jobs" value={metrics.total.toString()} tone="text-foreground" />
+        <MetricCard label="Success Rate" value={`${metrics.successRatePct}%`} tone={metrics.successRatePct >= 90 ? 'text-emerald-600' : 'text-amber-600'} />
+        <MetricCard label="Avg Duration" value={metrics.avgDurationSeconds > 0 ? `${metrics.avgDurationSeconds}s` : '—'} tone="text-foreground" />
+        <MetricCard label="P95 Duration" value={metrics.p95DurationSeconds > 0 ? `${metrics.p95DurationSeconds}s` : '—'} tone="text-foreground" />
+      </div>
+
+      <div className="grid gap-4 xl:grid-cols-2">
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base">Provider Breakdown</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            {metrics.providerBreakdown.length === 0 ? (
+              <p className="text-sm text-muted-foreground">No provider data yet.</p>
+            ) : (
+              metrics.providerBreakdown.map((row) => (
+                <div key={row.provider} className="flex items-center justify-between rounded-lg border px-3 py-2 text-sm">
+                  <span className="capitalize">{row.provider}</span>
+                  <Badge variant="outline">{row.count}</Badge>
+                </div>
+              ))
+            )}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base">Queue State</CardTitle>
+          </CardHeader>
+          <CardContent className="grid gap-2 sm:grid-cols-3">
+            <StateCard label="Pending" value={metrics.pending} />
+            <StateCard label="Processing" value={metrics.processing} />
+            <StateCard label="Failed" value={metrics.failed} tone="text-red-600" />
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="grid gap-4 xl:grid-cols-2">
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base">Recent Failures</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            {recentFailures.length === 0 ? (
+              <p className="text-sm text-muted-foreground">No recent failed jobs.</p>
+            ) : (
+              recentFailures.map((job, idx) => (
+                <div key={`${job.account_name}-${idx}`} className="rounded-lg border border-red-200 bg-red-50 p-3">
+                  <p className="text-sm font-medium text-red-900">{job.account_name}</p>
+                  <p className="mt-1 text-xs text-red-700">{(job.error_message ?? 'Unknown error').slice(0, 200)}</p>
+                </div>
+              ))
+            )}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base">Potentially Stuck Jobs</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            {stuckJobs.length === 0 ? (
+              <p className="text-sm text-muted-foreground">No processing jobs older than 15 minutes.</p>
+            ) : (
+              stuckJobs.map((job, idx) => (
+                <div key={`${job.account_name}-${idx}`} className="flex items-center justify-between rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm">
+                  <div>
+                    <p className="font-medium text-amber-900">{job.account_name}</p>
+                    <p className="text-xs text-amber-700">Updated {new Date(job.updated_at).toLocaleString()}</p>
+                  </div>
+                  <AlertTriangle className="h-4 w-4 text-amber-700" />
+                </div>
+              ))
+            )}
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}
+
+function MetricCard({ label, value, tone }: { label: string; value: string; tone: string }) {
+  return (
+    <Card>
+      <CardContent className="p-4 text-center">
+        <p className="text-[11px] uppercase tracking-wide text-muted-foreground">{label}</p>
+        <p className={`mt-2 text-2xl font-bold ${tone}`}>{value}</p>
+      </CardContent>
+    </Card>
+  );
+}
+
+function StateCard({ label, value, tone = 'text-foreground' }: { label: string; value: number; tone?: string }) {
+  return (
+    <div className="rounded-lg border p-3 text-center">
+      <p className="text-[11px] uppercase tracking-wide text-muted-foreground">{label}</p>
+      <p className={`mt-1 text-xl font-semibold ${tone}`}>{value}</p>
+    </div>
+  );
+}

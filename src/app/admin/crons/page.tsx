@@ -1,4 +1,5 @@
 import { Activity, AlertTriangle, CheckCircle2, Clock3 } from 'lucide-react';
+import Link from 'next/link';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -39,9 +40,21 @@ function formatTime(value?: string) {
 }
 
 export default async function CronHealthPage() {
-  const configs = await prisma.systemConfig.findMany({
-    where: { key: { startsWith: 'cron:' } },
-  });
+  const [configs, generationJobs] = await Promise.all([
+    prisma.systemConfig.findMany({
+      where: { key: { startsWith: 'cron:' } },
+    }),
+    prisma.generationJob.findMany({
+      orderBy: { created_at: 'desc' },
+      take: 250,
+      select: {
+        status: true,
+        started_at: true,
+        completed_at: true,
+        created_at: true,
+      },
+    }),
+  ]);
 
   const configMap = new Map(configs.map((entry) => [entry.key, entry.value]));
 
@@ -49,6 +62,19 @@ export default async function CronHealthPage() {
     ...cron,
     state: parseCronValue(configMap.get(`cron:${cron.name}`)),
   }));
+
+  const totalGenJobs = generationJobs.length;
+  const completedGenJobs = generationJobs.filter((job) => job.status === 'completed').length;
+  const failedGenJobs = generationJobs.filter((job) => job.status === 'failed').length;
+  const inFlightGenJobs = generationJobs.filter((job) => job.status === 'pending' || job.status === 'processing').length;
+  const recentCompletedDurations = generationJobs
+    .filter((job) => job.status === 'completed' && job.started_at && job.completed_at)
+    .map((job) => job.completed_at!.getTime() - job.started_at!.getTime())
+    .filter((duration) => duration >= 0);
+  const avgCompletionMs = recentCompletedDurations.length > 0
+    ? Math.round(recentCompletedDurations.reduce((sum, duration) => sum + duration, 0) / recentCompletedDurations.length)
+    : 0;
+  const successRate = totalGenJobs > 0 ? Math.round((completedGenJobs / totalGenJobs) * 100) : 0;
 
   return (
     <div className="space-y-6">
@@ -61,9 +87,18 @@ export default async function CronHealthPage() {
             Monitor the Vercel cron jobs that keep inbox polling, HubSpot sync, and digest delivery alive.
           </p>
         </div>
-        <div className="flex items-center gap-2 rounded-lg border px-3 py-2 text-xs text-muted-foreground">
-          <Activity className="h-3.5 w-3.5" />
-          Live status from `system_config`
+        <div className="flex items-center gap-2">
+          <Link
+            href="/admin/generation-metrics"
+            className="inline-flex items-center gap-1 rounded-lg border px-3 py-2 text-xs text-muted-foreground hover:bg-muted"
+          >
+            <Activity className="h-3.5 w-3.5" />
+            Generation Metrics
+          </Link>
+          <div className="flex items-center gap-2 rounded-lg border px-3 py-2 text-xs text-muted-foreground">
+            <Activity className="h-3.5 w-3.5" />
+            Live status from `system_config`
+          </div>
         </div>
       </div>
 
@@ -89,6 +124,37 @@ export default async function CronHealthPage() {
           <CardContent>
             <p className="text-3xl font-bold text-amber-600">{rows.filter((row) => row.state.status === 'error' || row.state.status === 'skipped').length}</p>
             <p className="text-xs text-muted-foreground">failing or skipped jobs</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="grid gap-3 md:grid-cols-4">
+        <Card>
+          <CardHeader className="pb-2"><CardTitle className="text-sm">Generation Success</CardTitle></CardHeader>
+          <CardContent>
+            <p className="text-3xl font-bold">{successRate}%</p>
+            <p className="text-xs text-muted-foreground">{completedGenJobs} completed of {totalGenJobs} sampled jobs</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-2"><CardTitle className="text-sm">Average Completion</CardTitle></CardHeader>
+          <CardContent>
+            <p className="text-3xl font-bold">{avgCompletionMs > 0 ? `${Math.round(avgCompletionMs / 1000)}s` : '—'}</p>
+            <p className="text-xs text-muted-foreground">from jobs with start and completion timestamps</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-2"><CardTitle className="text-sm">Generation Failures</CardTitle></CardHeader>
+          <CardContent>
+            <p className="text-3xl font-bold text-red-600">{failedGenJobs}</p>
+            <p className="text-xs text-muted-foreground">failed one-pager generation jobs</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-2"><CardTitle className="text-sm">In Flight</CardTitle></CardHeader>
+          <CardContent>
+            <p className="text-3xl font-bold text-blue-600">{inFlightGenJobs}</p>
+            <p className="text-xs text-muted-foreground">pending or processing generation jobs</p>
           </CardContent>
         </Card>
       </div>
