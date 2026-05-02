@@ -55,7 +55,7 @@ export async function loginAsCasey(page: Page): Promise<boolean> {
 
 export async function openRoutablePage(page: Page, path: string, expectedHeading: string): Promise<boolean> {
   await page.goto(path, { waitUntil: 'domcontentloaded' });
-  const heading = page.locator('h1');
+  const heading = page.locator('h1').first();
   const headingText = await heading.innerText().catch(() => '');
   if (headingText === 'Page Not Found') return false;
   await expect(heading).toContainText(expectedHeading);

@@ -6,9 +6,7 @@ test('generation metrics page renders core admin telemetry', async ({ page }) =>
   expect(loggedIn).toBe(true);
 
   await page.goto('/admin/generation-metrics', { waitUntil: 'domcontentloaded' });
-  const heading = page.locator('h1');
-  await expect(heading).not.toHaveText('Page Not Found');
-
+  const heading = page.getByRole('heading', { name: 'Generation Metrics' }).first();
   await expect(heading).toContainText('Generation Metrics');
   await expect(page.locator('body')).toContainText('Provider Breakdown');
   await expect(page.locator('body')).toContainText('Queue State');

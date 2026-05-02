@@ -60,7 +60,7 @@ export const config = {
      * - /api/unsubscribe (public unsubscribe endpoint)
      * - /api/microsites/track (public microsite engagement endpoint)
      * - /api/cron (Vercel cron endpoints with their own auth)
-     * - /api/e2e (local deterministic e2e seed helpers)
+     * - /api/proof (local deterministic e2e seed helpers)
      * - /unsubscribe (public unsubscribe page)
      * - /proposal (public proposal decks)
      * - /api/proposal (public proposal data API)
@@ -69,6 +69,6 @@ export const config = {
      * - /_next (Next.js internals)
      * - /manifest.json, /robots.txt, /favicon.ico (static assets)
      */
-    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/cron|api/proposal|api/e2e|unsubscribe|proposal|for|opengraph-image|twitter-image|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
+    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/cron|api/proposal|api/proof|unsubscribe|proposal|for|opengraph-image|twitter-image|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
   ],
 };

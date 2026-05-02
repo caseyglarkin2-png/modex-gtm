@@ -32,7 +32,10 @@ test('generated content bulk preview shows selected items and guard flow', async
   if ((await acknowledge.count()) > 0) {
     const queueButton = page.getByRole('button', { name: 'Queue Async Send Job' });
     await expect(queueButton).toBeDisabled();
-    await acknowledge.first().check();
+    const warningCount = await acknowledge.count();
+    for (let index = 0; index < warningCount; index += 1) {
+      await acknowledge.nth(index).check();
+    }
     await expect(queueButton).toBeEnabled();
   }
 });

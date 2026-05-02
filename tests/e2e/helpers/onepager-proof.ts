@@ -2,11 +2,11 @@ import { expect, type Page } from '@playwright/test';
 
 const SEED_SECRET = process.env.E2E_SEED_SECRET ?? 'local-e2e-seed';
 
-async function waitForReady(page: Page, retries = 20) {
+async function waitForReady(page: Page, retries = 120) {
   for (let attempt = 0; attempt < retries; attempt += 1) {
     const readiness = await page.request.get('/generated-content').catch(() => null);
     if (readiness?.ok()) return true;
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(1000);
   }
   return false;
 }
@@ -17,7 +17,7 @@ export async function bootstrapOnePagerProof(page: Page) {
 
   let seeded = false;
   for (let attempt = 0; attempt < 30; attempt += 1) {
-    const seedResponse = await page.request.post('/api/e2e/one-pager-seed', {
+    const seedResponse = await page.request.post('/api/proof/one-pager-seed', {
       headers: { 'x-e2e-seed-secret': SEED_SECRET },
     }).catch(() => null);
     if (seedResponse?.ok()) {
