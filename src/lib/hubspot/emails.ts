@@ -22,6 +22,19 @@ export interface EmailObjectPayload {
   status?: string;
 }
 
+function buildEmailHeaders(payload: EmailObjectPayload): string {
+  const from = { email: payload.fromEmail };
+  const to = [{ email: payload.toEmail }];
+
+  return JSON.stringify({
+    from,
+    sender: from,
+    to,
+    cc: [],
+    bcc: [],
+  });
+}
+
 /**
  * Create an Email Object in HubSpot and associate it with a contact.
  * Returns the created email object ID, or null if skipped/failed.
@@ -45,9 +58,9 @@ export async function logEmailToHubSpot(
             hs_email_direction: payload.direction,
             hs_email_subject: payload.subject,
             hs_email_text: payload.bodyText.slice(0, 65535), // HubSpot max
+            hs_email_html: payload.bodyText.slice(0, 65535),
             hs_email_status: payload.status || 'SENT',
-            hs_email_sender_email: payload.fromEmail,
-            hs_email_to_email: payload.toEmail,
+            hs_email_headers: buildEmailHeaders(payload),
             hs_timestamp: new Date().toISOString(),
           },
           associations: [],
