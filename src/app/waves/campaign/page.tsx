@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getAccounts, getPersonasByAccount, getAuditRoutes, getMeetingBriefs, getOutreachWaves, slugify } from '@/lib/data';
+import { getAccounts, getPersonasByAccount, getAuditRoutes, getOutreachWaves, slugify } from '@/lib/data';
 import { dbGetDashboardStats } from '@/lib/db';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -125,7 +125,6 @@ const DANNON_INTEL = {
 export default async function CampaignPage() {
   const accounts = getAccounts();
   const auditRoutes = getAuditRoutes();
-  const briefs = getMeetingBriefs();
   const waves = getOutreachWaves();
 
   // Live pipeline stats from DB
@@ -281,7 +280,6 @@ export default async function CampaignPage() {
           const p1s = personas.filter((p) => p.priority === 'P1');
           const p2s = personas.filter((p) => p.priority === 'P2');
           const route = auditRoutes.find((r) => r.account === account.name);
-          const brief = briefs.find((b) => b.account === account.name);
           const wave = waves.find((w) => w.account === account.name);
 
           return (
@@ -349,9 +347,6 @@ export default async function CampaignPage() {
                             personaEmail={p.email ?? ''}
                             subjectLine={subject}
                             auditUrl={route?.audit_url}
-                            calendarLink={calendarLink}
-                            whyNowHook={intel.why_now_hook}
-                            proofLine={intel.proof_line}
                           />
                         </div>
                       );
@@ -381,9 +376,6 @@ export default async function CampaignPage() {
                           personaEmail={p.email ?? ''}
                           subjectLine={intel.p2_subject}
                           auditUrl={route?.audit_url}
-                          calendarLink={calendarLink}
-                          whyNowHook={intel.why_now_hook}
-                          proofLine={intel.proof_line}
                         />
                       </div>
                     ))}

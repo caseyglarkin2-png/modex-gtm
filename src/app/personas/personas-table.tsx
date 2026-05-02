@@ -26,10 +26,6 @@ export interface PersonaRow {
   slug: string;
 }
 
-function slugify(name: string): string {
-  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-}
-
 const columns: Column<PersonaRow>[] = [
   { key: 'persona_id', label: 'ID', sortable: true, className: 'font-mono text-xs w-16 hidden sm:table-cell' },
   { key: 'account', label: 'Account', sortable: true, render: (p) => <span className="font-medium">{p.account}</span> },

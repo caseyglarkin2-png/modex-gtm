@@ -25,8 +25,6 @@ import type {
   MicrositeSection,
   PersonVariant,
   PersonProfile,
-  GenericPersonaVariant,
-  HeroSection,
 } from './schema';
 import { materializeMicrositeSections } from './roi';
 

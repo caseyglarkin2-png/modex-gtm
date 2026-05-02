@@ -1,7 +1,8 @@
 import { describe, it, expect } from 'vitest';
+import type { PrismaClient } from '@prisma/client';
 import { evaluateRecipientEligibility } from '@/lib/email/recipient-guard';
 
-const dummyPrisma = {} as any;
+const dummyPrisma = {} as PrismaClient;
 
 describe('recipient guard', () => {
   it('allows valid email domains', async () => {

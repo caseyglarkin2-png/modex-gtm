@@ -13,8 +13,10 @@ export function getEmailDomain(email: string): string {
 export async function evaluateRecipientEligibility(
   prisma: PrismaClient,
   email: string,
-  options?: { allowPayloadReady?: boolean; payloadReady?: boolean; payloadDoNotContact?: boolean }
+  _options?: { allowPayloadReady?: boolean; payloadReady?: boolean; payloadDoNotContact?: boolean }
 ): Promise<RecipientGuardDecision> {
+  void prisma;
+  void _options;
   const domain = getEmailDomain(email);
   if (!domain) {
     return { ok: false, reason: 'Invalid email domain', domain };

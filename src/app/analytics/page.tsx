@@ -33,7 +33,6 @@ export default async function AnalyticsPage() {
   ];
 
   // ROI comparison data
-  const advisorCost = 0; // Equity-only compensation
   const twoSalesReps = 180000; // ~$90k base × 2
 
   return (

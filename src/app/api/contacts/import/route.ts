@@ -3,7 +3,6 @@ import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { getContactById } from '@/lib/hubspot/contacts';
 import { normalizeName, normalizeTitle, parseDomainFromEmail, scoreContactQuality, splitName } from '@/lib/contact-standard';
-import { getEmailDomain } from '@/lib/email/recipient-guard';
 
 const BLOCKED_DOMAINS = new Set([
   'dannon.com', 'danone.com', 'bluetriton.com', 'yardflow.ai',

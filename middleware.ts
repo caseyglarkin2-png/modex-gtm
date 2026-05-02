@@ -12,7 +12,6 @@ function isPublicDomainPath(pathname: string): boolean {
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function middleware(request: NextRequest) {
   const host = request.headers.get('host') || '';
   const { pathname } = request.nextUrl;

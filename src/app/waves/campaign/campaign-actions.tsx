@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Zap, Copy, Send, RefreshCw, ExternalLink, CheckCircle, Pencil, X, Check, ChevronDown, ChevronUp, MessageSquare, Phone, FileText, Sparkles, Link2 } from 'lucide-react';
+import { Zap, Copy, Send, RefreshCw, ExternalLink, CheckCircle, Pencil, X, Check, ChevronDown, ChevronUp, MessageSquare, Phone, FileText, Link2 } from 'lucide-react';
 import { GeneratorDialog } from '@/components/ai/generator-dialog';
 import { VoiceScriptButton } from '@/components/voice-script-button';
 import { VoicePreviewButton } from '@/components/voice-preview-button';
@@ -46,9 +46,6 @@ interface CampaignActionsProps {
   personaEmail: string;
   subjectLine: string;
   auditUrl?: string;
-  calendarLink: string;
-  whyNowHook: string;
-  proofLine: string;
 }
 
 export function CampaignActions({
@@ -57,9 +54,6 @@ export function CampaignActions({
   personaEmail,
   subjectLine,
   auditUrl,
-  calendarLink,
-  whyNowHook,
-  proofLine,
 }: CampaignActionsProps) {
   const [loading, setLoading] = useState(false);
   const [sequence, setSequence] = useState<SequenceStep[]>([]);

@@ -13,7 +13,7 @@ import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
 import { AlertCircle, CheckCircle2, Sparkles } from 'lucide-react';
 import { createAccountWithContext } from '@/lib/actions/create-account-with-context';
-import { getVerticalsList } from '@/lib/templates/account-templates';
+import { getVerticalsList, getVerticalTemplate, type VerticalTemplate } from '@/lib/templates/account-templates';
 
 export default function NewAccountPage() {
   const router = useRouter();
@@ -31,17 +31,14 @@ export default function NewAccountPage() {
     primo_angle: false,
   });
 
-  const [selectedTemplate, setSelectedTemplate] = useState<any>(null);
+  const [selectedTemplate, setSelectedTemplate] = useState<VerticalTemplate | null>(null);
 
   const verticals = getVerticalsList();
 
   const handleVerticalChange = (vertical: string) => {
     setFormData({ ...formData, vertical });
 
-    // Import template to get context
-    const { VERTICAL_TEMPLATES } = require('@/lib/templates/account-templates');
-    const key = vertical.toLowerCase().replace(/\s+/g, '-');
-    const template = VERTICAL_TEMPLATES[key];
+    const template = getVerticalTemplate(vertical) ?? null;
     setSelectedTemplate(template);
 
     // Auto-fill unless user has customized

@@ -18,7 +18,7 @@ import { VoicePreviewButton } from '@/components/voice-preview-button';
 import { readApiResponse } from '@/lib/api-response';
 import { getMicrositeUrl } from '@/lib/site-url';
 
-function buildEmailPreviewHtml(bodyText: string, accountName: string): string {
+function buildEmailPreviewHtml(bodyText: string): string {
   const escaped = bodyText
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -231,7 +231,7 @@ export function EmailComposer({ accountName, personaName, personaEmail, trigger,
             {previewMode && body.trim() ? (
               <div
                 className="w-full min-h-[200px] rounded-md border border-input overflow-hidden"
-                dangerouslySetInnerHTML={{ __html: buildEmailPreviewHtml(body, accountName) }}
+                  dangerouslySetInnerHTML={{ __html: buildEmailPreviewHtml(body) }}
               />
             ) : (
               <textarea

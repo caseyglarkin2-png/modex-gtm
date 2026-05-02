@@ -1866,3 +1866,7 @@ function ClonePanel() {
     </div>
   );
 }
+
+// Keep legacy panels referenced while they are retained in this module for iterative rollout.
+const LEGACY_STUDIO_PANELS = [TTSPanel, SFXPanel, ClonePanel];
+void LEGACY_STUDIO_PANELS;

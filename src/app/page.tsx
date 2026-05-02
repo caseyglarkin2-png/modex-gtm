@@ -9,7 +9,7 @@ import { BandBadge } from '@/components/band-badge';
 import { StatusBadge } from '@/components/status-badge';
 import { EmptyState } from '@/components/empty-state';
 import { AutoRefresh } from '@/components/auto-refresh';
-import { Building2, Users, Waves as WavesIcon, FileText, CalendarCheck, Smartphone, Activity, ArrowRight, TrendingUp, BarChart3, Mail, MessageSquare } from 'lucide-react';
+import { Building2, Users, Waves as WavesIcon, CalendarCheck, Smartphone, Activity, ArrowRight, TrendingUp, BarChart3, Mail, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export const dynamic = 'force-dynamic';
@@ -148,7 +148,6 @@ export default async function DashboardPage() {
 
   // Weekly counters
   const meetingsThisWeek = meetings.filter((m) => isThisWeek(m.date)).length;
-  const activitiesThisWeek = activities.filter((a) => isThisWeek(a.activity_date)).length;
   const capturesThisWeek = stats.capturesCount;
 
   // Upcoming meetings (next 7 days)
@@ -349,7 +348,7 @@ export default async function DashboardPage() {
         <Card>
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between gap-2">
-              <CardTitle className="text-base">Today's Focus</CardTitle>
+              <CardTitle className="text-base">Today&apos;s Focus</CardTitle>
               <Link href={overdueFocusCount > 0 ? '/activities?filter=overdue' : '/activities?filter=week'}>
                 <Button variant="ghost" size="sm" className="gap-1 text-xs">
                   Open queue <ArrowRight className="h-3 w-3" />

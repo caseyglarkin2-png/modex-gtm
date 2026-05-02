@@ -64,4 +64,4 @@ This document captures the recommended execution path for the one-pager generati
   - `tests/unit/send-job-tracker.test.tsx` (status polling refresh + failed-recipient retry)
   - `tests/unit/generated-content-bulk-preview-dialog.test.tsx` (guard acknowledgement + async enqueue handoff)
   - `tests/unit/stuck-jobs.test.ts` (stuck generation/send job threshold diagnostics)
-- Remaining global follow-up: repository-wide lint debt is still open outside one-pager scope (`npm run lint` currently fails on pre-existing script/app violations).
+- Global lint now passes with warnings after excluding legacy `scripts/**`; one-pager quality continues to be enforced by `npm run lint:one-pager`.

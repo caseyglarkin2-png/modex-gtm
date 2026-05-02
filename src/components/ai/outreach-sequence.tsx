@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Label } from '@/components/ui/label';
 import {
-  Zap, RefreshCw, Send, Copy, ChevronDown, Mail, MessageSquare, Phone, HandMetal,
+  Zap, RefreshCw, Send, Copy, ChevronDown, Mail, MessageSquare, HandMetal,
   Check, Clock, ArrowRight, Link2,
 } from 'lucide-react';
 import { EmailPreviewModal } from '@/components/email/email-preview-modal';
@@ -305,7 +305,7 @@ export function OutreachSequenceDialog({
           </div>
         )}
 
-        {!loading && sequence.map((step, i) => {
+        {!loading && sequence.map((step) => {
           const Icon = STEP_ICONS[step.step] ?? Mail;
           const isExpanded = expandedStep === step.step;
           const isSending = sending === step.step;

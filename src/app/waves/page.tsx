@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { slugify } from '@/lib/data';
 import { dbGetOutreachWaves } from '@/lib/db';
 import { prisma } from '@/lib/prisma';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { StatusBadge } from '@/components/status-badge';
 import { Waves } from 'lucide-react';

@@ -83,7 +83,7 @@ export default function UnsubscribePage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-sm text-muted-foreground">
-            We're sorry to see you go. If you unsubscribe, you will no longer receive emails from YardFlow by FreightRoll.
+            We&apos;re sorry to see you go. If you unsubscribe, you will no longer receive emails from YardFlow by FreightRoll.
           </p>
           {email && (
             <p className="text-sm font-medium">

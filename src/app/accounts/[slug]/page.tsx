@@ -18,7 +18,7 @@ import { BandBadge } from '@/components/band-badge';
 import { StatusBadge } from '@/components/status-badge';
 import { CopyButton } from '@/components/copy-button';
 import { EmptyState } from '@/components/empty-state';
-import { ArrowLeft, ExternalLink, Users, Waves, FileText, Route, Activity, Calendar } from 'lucide-react';
+import { ExternalLink, Users, Waves, FileText, Route, Activity, Calendar } from 'lucide-react';
 import { LogActivityDialog } from '@/components/log-activity-dialog';
 import { BookMeetingDialog } from '@/components/book-meeting-dialog';
 import { GeneratorDialog } from '@/components/ai/generator-dialog';
