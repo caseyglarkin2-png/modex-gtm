@@ -92,7 +92,7 @@ function getPageLabel(pathname: string): string {
       }
     }
   }
-  return 'Modex RevOps';
+  return 'RevOps OS';
 }
 
 /* ---------- Drawer nav (mobile + expanded sidebar) ---------- */
@@ -102,9 +102,9 @@ function NavContent({ pathname, onNavigate }: { pathname: string; onNavigate?: (
       <div className="flex h-14 items-center justify-between border-b border-[var(--border)] px-4">
         <Link href="/" className="flex items-center gap-2 font-semibold text-lg" onClick={onNavigate}>
           <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[var(--primary)] text-white text-sm font-bold">
-            M
+            Y
           </div>
-          <span>Modex RevOps</span>
+          <span>YardFlow by FreightRoll</span>
         </Link>
         <div className="flex items-center gap-1">
           <NotificationBell />
@@ -145,7 +145,7 @@ function NavContent({ pathname, onNavigate }: { pathname: string; onNavigate?: (
         ))}
       </nav>
       <div className="border-t border-[var(--border)] px-4 py-3 text-xs text-[var(--muted-foreground)]">
-        YardFlow / FreightRoll &middot; MODEX 2026
+        YardFlow by FreightRoll &middot; RevOps OS
       </div>
     </>
   );
@@ -158,7 +158,7 @@ function CollapsedNav({ pathname }: { pathname: string }) {
       <div className="flex h-14 items-center justify-center border-b border-[var(--border)]">
         <Link href="/">
           <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[var(--primary)] text-white text-sm font-bold">
-            M
+            Y
           </div>
         </Link>
       </div>

@@ -41,11 +41,11 @@ export default function LoginPage() {
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--primary)] text-[var(--primary-foreground)] text-xl font-bold">
-            M
+            Y
           </div>
-          <CardTitle className="text-xl">Modex RevOps OS</CardTitle>
+          <CardTitle className="text-xl">YardFlow by FreightRoll</CardTitle>
           <p className="text-sm text-[var(--muted-foreground)]">
-            MODEX 2026 — YardFlow / FreightRoll
+            RevOps OS
           </p>
         </CardHeader>
         <CardContent className="space-y-4">

@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
     accountName: account.name,
     parentBrand: account.parent_brand ?? account.name,
     vertical: account.vertical,
-    whyNow: account.why_now ?? 'MODEX 2026 attendance signal',
+    whyNow: account.why_now ?? 'Rising throughput and service pressure requires standardized yard execution.',
     primoAngle: account.primo_angle ?? '',
     bestIntroPath: account.best_intro_path ?? '',
     likelyPainPoints:

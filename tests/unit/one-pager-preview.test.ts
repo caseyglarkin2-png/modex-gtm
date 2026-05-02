@@ -62,4 +62,17 @@ describe('one-pager output quality', () => {
     expect(prompt).toContain('Executive buyer');
     expect(prompt).toContain('business consequence');
   });
+
+  it('suppresses speculative MODEX public context in exported html', () => {
+    const html = onePagerToHtml(
+      {
+        ...sampleData,
+        publicContext: 'MODEX 2026 attendance signal indicates active buying cycle.',
+      },
+      'Acme Foods',
+    );
+
+    expect(html).not.toContain('Public source context:');
+    expect(html).not.toContain('MODEX');
+  });
 });

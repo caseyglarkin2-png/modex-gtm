@@ -446,6 +446,39 @@ Every sprint closes with:
   - `npm run test:unit -- <affected tests>`
   - `npx playwright test <workflow specs>`
 
+## Sprint 7: UI Congruence Review (Single RevOps OS)
+
+**Goal:** ensure the app remains one cohesive YardFlow by FreightRoll RevOps OS with no conflicting UX patterns.
+**Demo:** full operator walkthrough across core routes with consistent branding, interaction patterns, and workflow framing.
+
+### Task 7.1: Brand consistency sweep
+
+- **Change:** normalize titles, headers, shell branding, metadata, and system messaging.
+- **Files:** `src/app/layout.tsx`, `src/components/sidebar.tsx`, `src/app/login/page.tsx`, high-traffic page headers.
+- **Acceptance:** no stale/legacy product naming in active UI surfaces.
+- **Tests/Validation:** targeted unit snapshots + manual pass on login/dashboard/generated-content.
+
+### Task 7.2: Duplicate UX pattern removal
+
+- **Change:** remove redundant controls and conflicting summary modules across generated-content, queue, and campaign workflows.
+- **Files:** `src/components/generated-content/**`, `src/components/queue/**`, relevant pages.
+- **Acceptance:** each workflow has one canonical control pattern.
+- **Tests:** component tests updated to assert canonical behavior.
+
+### Task 7.3: Visual language alignment
+
+- **Change:** align typography scale, spacing, badge semantics, status colors, and button hierarchy.
+- **Files:** shared UI components + core app pages.
+- **Acceptance:** consistent look/behavior on desktop and mobile for top operator flows.
+- **Tests/Validation:** Playwright screenshots for `/`, `/generated-content`, `/queue/generations`, `/analytics`.
+
+### Task 7.4: End-to-end workflow congruence check
+
+- **Change:** run scripted operator journey from login to send-tracking to metrics and verify no dead ends or context switches.
+- **Files:** e2e suite + operator acceptance checklist docs.
+- **Acceptance:** journey executes without route confusion or duplicate UI decision points.
+- **Tests:** `npm run test:e2e:one-pager:proof` + checklist evidence pack.
+
 ## Final Approval Gate
 
 Implementation should not continue beyond planning until this plan is approved. After approval, each sprint should be implemented in order, and each sprint closeout should include:

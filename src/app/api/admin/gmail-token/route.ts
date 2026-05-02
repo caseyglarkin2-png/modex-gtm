@@ -45,7 +45,7 @@ export async function GET() {
         to: 'caseyglarkin2@gmail.com',
         subject: 'YardFlow Email System - Live Test',
         html: `<p>Casey,</p>
-<p>This is an automated test from the Modex RevOps OS. If you're reading this, the Gmail API send pipeline is fully operational.</p>
+<p>This is an automated test from the YardFlow by FreightRoll RevOps OS. If you're reading this, the Gmail API send pipeline is fully operational.</p>
 <p>From: casey@freightroll.com<br/>Sent via: Gmail API (OAuth2)<br/>Timestamp: ${new Date().toISOString()}</p>
 <p>Next step: set GOOGLE_REFRESH_TOKEN in Vercel env vars to make this permanent.</p>`,
       });

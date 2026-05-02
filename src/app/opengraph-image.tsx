@@ -13,7 +13,7 @@ export default function OpenGraphImage() {
     (
       <MicrositeSocialImage
         accentColor="#06B6D4"
-        eyebrow="MODEX 2026 RevOps OS"
+        eyebrow="YardFlow by FreightRoll RevOps OS"
         title="YardFlow proposal-grade microsites"
         summary="Board-ready account pages, person-specific variants, and ROI-backed proposals built to book operator meetings."
         stats={[

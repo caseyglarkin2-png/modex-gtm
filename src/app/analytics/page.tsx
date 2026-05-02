@@ -44,7 +44,7 @@ export default async function AnalyticsPage() {
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Analytics &amp; Board Report</h1>
           <p className="text-sm text-[var(--muted-foreground)]">
-            Live metrics from the MODEX 2026 RevOps Operating System
+            Live metrics from the YardFlow by FreightRoll RevOps OS
           </p>
         </div>
         <div className="flex items-center gap-2">

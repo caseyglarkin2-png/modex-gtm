@@ -6,6 +6,7 @@ This document captures the recommended execution path for the one-pager generati
 ## Linked Docs
 - Strategic plan: `docs/roadmaps/one-pager-send-sprint-plan.md`
 - Atomic execution + gap closure: `docs/roadmaps/one-pager-send-atomic-sprint-plan.md`
+- Next-phase contact enrichment plan: `docs/roadmaps/one-pager-contact-enrichment-atomic-sprint-plan.md`
 - Queue decision record: `docs/roadmaps/queue-implementation-decision.md`
 
 ## Sprint 0: Queue Technology Choice

@@ -8,6 +8,7 @@ import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger,
 } from '@/components/ui/dialog';
 import { FileImage, RefreshCw, Copy, Download } from 'lucide-react';
+import { sanitizeOnePagerData } from '@/lib/one-pager/content-safety';
 
 export interface OnePagerData {
   headline: string;
@@ -39,6 +40,8 @@ interface OnePagerPreviewProps {
 }
 
 export function OnePagerPreview({ data, accountName }: { data: OnePagerData; accountName: string }) {
+  const sanitized = sanitizeOnePagerData(data);
+
   return (
     <div className="one-pager-doc bg-[#0b1a2e] text-white rounded-xl overflow-hidden text-sm">
       {/* Header */}
@@ -82,7 +85,7 @@ export function OnePagerPreview({ data, accountName }: { data: OnePagerData; acc
               <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-red-300">Typical Reality</span>
             </div>
             <div className="px-3 py-3 space-y-2.5">
-              {data.painPoints.map((pain, i) => (
+          {sanitized.painPoints.map((pain, i) => (
                 <div key={i} className="flex gap-2 text-xs text-slate-300 leading-snug">
                   <span className="text-red-400 shrink-0 text-sm">⚠</span>
                   <span>{pain}</span>
@@ -99,7 +102,7 @@ export function OnePagerPreview({ data, accountName }: { data: OnePagerData; acc
             <div className="px-3 py-3">
               {/* Pipe flow visual */}
               <div className="relative">
-                {data.solutionSteps.map((s, i) => (
+                {sanitized.solutionSteps.map((s, i) => (
                   <div key={s.step} className="relative pl-6 pb-3 last:pb-0">
                     {/* Vertical pipe line */}
                     {i < data.solutionSteps.length - 1 && (
@@ -125,7 +128,7 @@ export function OnePagerPreview({ data, accountName }: { data: OnePagerData; acc
               <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-300">YardFlow Effect</span>
             </div>
             <div className="px-3 py-3 space-y-2.5">
-              {data.outcomes.map((outcome, i) => (
+              {sanitized.outcomes.map((outcome, i) => (
                 <div key={i} className="flex gap-2 text-xs text-slate-300 leading-snug">
                   <span className="text-emerald-400 shrink-0">✓</span>
                   <span>{outcome}</span>
@@ -144,7 +147,7 @@ export function OnePagerPreview({ data, accountName }: { data: OnePagerData; acc
           </span>
         </div>
         <div className="grid grid-cols-5 gap-2">
-          {data.proofStats.map((stat, i) => {
+          {sanitized.proofStats.map((stat, i) => {
             const icons = ['🏭', '🌐', '👤', '⏱', '💰'];
             return (
               <div key={i} className="text-center bg-slate-800/50 rounded-lg py-3 px-1 border border-slate-700/40">
@@ -159,13 +162,15 @@ export function OnePagerPreview({ data, accountName }: { data: OnePagerData; acc
 
       {/* Customer Quote */}
       <div className="mx-4 mt-4 bg-slate-800/30 rounded-lg px-4 py-3 border-l-2 border-cyan-400/60">
-        <p className="text-xs text-slate-300 italic leading-relaxed">&ldquo;{data.customerQuote}&rdquo;</p>
+        <p className="text-xs text-slate-300 italic leading-relaxed">&ldquo;{sanitized.customerQuote}&rdquo;</p>
       </div>
 
       {/* Best Fit + Context */}
       <div className="px-6 py-4 mt-2 border-t border-slate-700/50 space-y-1.5">
-        <p className="text-xs text-slate-300"><strong className="text-slate-100">Best fit:</strong> {data.bestFit}</p>
-        <p className="text-xs text-slate-400"><strong className="text-slate-300">Public source context:</strong> {data.publicContext}</p>
+        <p className="text-xs text-slate-300"><strong className="text-slate-100">Best fit:</strong> {sanitized.bestFit}</p>
+        {sanitized.publicContext && (
+          <p className="text-xs text-slate-400"><strong className="text-slate-300">Public source context:</strong> {sanitized.publicContext}</p>
+        )}
       </div>
 
       <div className="mx-4 mb-5 rounded-lg border border-cyan-500/40 bg-cyan-950/20 p-3">
@@ -179,22 +184,26 @@ export function OnePagerPreview({ data, accountName }: { data: OnePagerData; acc
 }
 
 export function onePagerToHtml(data: OnePagerData, accountName: string): string {
+  const sanitized = sanitizeOnePagerData(data);
   const safeAccountName = escapeHtml(accountName);
-  const safeHeadline = escapeHtml(data.headline);
-  const safeSubheadline = escapeHtml(data.subheadline);
-  const safeQuote = escapeHtml(data.customerQuote);
-  const safeBestFit = escapeHtml(data.bestFit);
-  const safePublicContext = escapeHtml(data.publicContext);
+  const safeHeadline = escapeHtml(sanitized.headline);
+  const safeSubheadline = escapeHtml(sanitized.subheadline);
+  const safeQuote = escapeHtml(sanitized.customerQuote);
+  const safeBestFit = escapeHtml(sanitized.bestFit);
+  const safePublicContext = escapeHtml(sanitized.publicContext);
 
-  const painHtml = data.painPoints.map((p) => `<div style="display:flex;gap:8px;font-size:12px;color:#cbd5e1;margin-bottom:8px;line-height:1.5;"><span style="color:#f87171;flex-shrink:0;">⚠</span><span>${escapeHtml(p)}</span></div>`).join('');
-  const stepsHtml = data.solutionSteps.map((s, i) => `<div style="position:relative;padding-left:32px;margin-bottom:${i < data.solutionSteps.length - 1 ? '12' : '0'}px;">
+  const painHtml = sanitized.painPoints.map((p) => `<div style="display:flex;gap:8px;font-size:12px;color:#cbd5e1;margin-bottom:8px;line-height:1.5;"><span style="color:#f87171;flex-shrink:0;">⚠</span><span>${escapeHtml(p)}</span></div>`).join('');
+  const stepsHtml = sanitized.solutionSteps.map((s, i) => `<div style="position:relative;padding-left:32px;margin-bottom:${i < sanitized.solutionSteps.length - 1 ? '12' : '0'}px;">
     <div style="position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;border:2px solid rgba(34,211,238,0.7);background:#0b1a2e;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;line-height:1;color:#22d3ee;">${s.step}</div>
-    ${i < data.solutionSteps.length - 1 ? '<div style="position:absolute;left:11px;top:26px;bottom:-4px;width:2px;background:linear-gradient(to bottom,rgba(34,211,238,0.5),rgba(34,211,238,0.15));"></div>' : ''}
+    ${i < sanitized.solutionSteps.length - 1 ? '<div style="position:absolute;left:11px;top:26px;bottom:-4px;width:2px;background:linear-gradient(to bottom,rgba(34,211,238,0.5),rgba(34,211,238,0.15));"></div>' : ''}
     <div style="font-size:12px;"><span style="color:#67e8f9;font-weight:700;">${escapeHtml(s.title)}</span><p style="color:#94a3b8;margin:2px 0 0;font-size:11px;line-height:1.4;">${escapeHtml(s.description)}</p></div>
   </div>`).join('');
-  const outcomesHtml = data.outcomes.map((o) => `<div style="display:flex;gap:8px;font-size:12px;color:#cbd5e1;margin-bottom:8px;line-height:1.5;"><span style="color:#34d399;flex-shrink:0;">✓</span><span>${escapeHtml(o)}</span></div>`).join('');
+  const outcomesHtml = sanitized.outcomes.map((o) => `<div style="display:flex;gap:8px;font-size:12px;color:#cbd5e1;margin-bottom:8px;line-height:1.5;"><span style="color:#34d399;flex-shrink:0;">✓</span><span>${escapeHtml(o)}</span></div>`).join('');
   const statIcons = ['🏭', '🌐', '👤', '⏱', '💰'];
-  const statsHtml = data.proofStats.map((s, i) => `<td style="text-align:center;background:#1e293b;border-radius:8px;padding:12px 4px;border:1px solid rgba(71,85,105,0.4);"><div style="font-size:14px;margin-bottom:4px;">${statIcons[i] ?? '📊'}</div><div style="font-size:18px;font-weight:700;color:#fff;">${escapeHtml(s.value)}</div><div style="font-size:9px;color:#94a3b8;margin-top:4px;line-height:1.3;">${escapeHtml(s.label)}</div></td>`).join('');
+  const statsHtml = sanitized.proofStats.map((s, i) => `<td style="text-align:center;background:#1e293b;border-radius:8px;padding:12px 4px;border:1px solid rgba(71,85,105,0.4);"><div style="font-size:14px;margin-bottom:4px;">${statIcons[i] ?? '📊'}</div><div style="font-size:18px;font-weight:700;color:#fff;">${escapeHtml(s.value)}</div><div style="font-size:9px;color:#94a3b8;margin-top:4px;line-height:1.3;">${escapeHtml(s.label)}</div></td>`).join('');
+  const publicContextHtml = sanitized.publicContext
+    ? `<p style="font-size:11px;color:#94a3b8;margin:0;line-height:1.5;"><strong style="color:#cbd5e1;">Public source context:</strong> ${safePublicContext}</p>`
+    : '';
 
   return `<!DOCTYPE html><html><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>YardFlow — ${safeAccountName}</title></head>
 <body style="margin:0;padding:24px;background:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
@@ -248,7 +257,7 @@ export function onePagerToHtml(data: OnePagerData, accountName: string): string 
   </div>
   <div style="padding:16px 24px;border-top:1px solid rgba(51,65,85,0.5);">
     <p style="font-size:11px;color:#cbd5e1;margin:0 0 6px;line-height:1.5;"><strong style="color:#f1f5f9;">Best fit:</strong> ${safeBestFit}</p>
-    <p style="font-size:11px;color:#94a3b8;margin:0;line-height:1.5;"><strong style="color:#cbd5e1;">Public source context:</strong> ${safePublicContext}</p>
+    ${publicContextHtml}
   </div>
   <div style="margin:0 16px 16px;background:rgba(8,145,178,0.15);border:1px solid rgba(34,211,238,0.35);border-radius:8px;padding:12px;">
     <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#67e8f9;font-weight:700;">Suggested Next Step</div>

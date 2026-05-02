@@ -8,27 +8,27 @@ import { getSiteUrl } from "@/lib/site-url";
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
-    default: "Modex RevOps OS",
-    template: "%s — Modex RevOps OS",
+    default: "YardFlow by FreightRoll — RevOps OS",
+    template: "%s — YardFlow by FreightRoll RevOps OS",
   },
-  description: "YardFlow / FreightRoll MODEX 2026 RevOps Operating System",
+  description: "YardFlow by FreightRoll RevOps OS",
   openGraph: {
-    title: "Modex RevOps OS",
-    description: "MODEX 2026 RevOps Operating System — YardFlow / FreightRoll",
+    title: "YardFlow by FreightRoll — RevOps OS",
+    description: "YardFlow by FreightRoll RevOps OS",
     type: "website",
     images: [
       {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "YardFlow proposal-grade microsites for MODEX 2026 outreach",
+        alt: "YardFlow proposal-grade microsites for operator outreach",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Modex RevOps OS",
-    description: "MODEX 2026 RevOps Operating System — YardFlow / FreightRoll",
+    title: "YardFlow by FreightRoll — RevOps OS",
+    description: "YardFlow by FreightRoll RevOps OS",
     images: ["/opengraph-image"],
   },
 };

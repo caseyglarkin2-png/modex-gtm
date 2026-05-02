@@ -272,7 +272,7 @@ Generate ONLY valid JSON matching this schema — no markdown, no commentary:
   ],
   "customerQuote": "string — use the verified quote: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office.' OR create an illustrative variation relevant to this vertical (prefix with '(Illustrative)')",
   "bestFit": "string — 1-2 sentences about why this account is an ideal fit referencing specific operations and commercial stakes",
-  "publicContext": "string — reference any public sources, signals, or intel that support the outreach (investor transcripts, MODEX attendance, facility expansions, etc.)"
+  "publicContext": "string — optional; include only verifiable public sources/signals (earnings call comments, press releases, facility changes, hiring trends). Never use speculative event-attendance assumptions."
 }`;
 }
 

@@ -184,7 +184,7 @@ export default async function DashboardPage() {
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
           <p className="text-sm text-[var(--muted-foreground)]">
-            MODEX 2026 RevOps Operating System — YardFlow / FreightRoll
+            YardFlow by FreightRoll RevOps OS
           </p>
         </div>
         <div className="flex items-center gap-3 text-xs text-[var(--muted-foreground)]">
