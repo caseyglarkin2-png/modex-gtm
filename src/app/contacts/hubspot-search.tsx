@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Search, Download, Mail, Loader2, Database, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
-import { importHubSpotContact, importHubSpotContactsBulk, listRecentHubSpotContacts, searchHubSpotContacts, type SearchResult } from './actions';
+import { enrichHubSpotContactsBulk, importHubSpotContact, importHubSpotContactsBulk, listRecentHubSpotContacts, searchHubSpotContacts, type SearchResult } from './actions';
 import { EmailComposer } from '@/components/email/composer';
 import type { HubSpotIntakeCandidate } from '@/lib/contacts/hubspot-intake';
 
@@ -17,6 +17,7 @@ export function HubSpotSearch() {
   const [searching, startSearch] = useTransition();
   const [loadingRecent, startRecentLoad] = useTransition();
   const [bulkImporting, startBulkImport] = useTransition();
+  const [bulkEnriching, startBulkEnrich] = useTransition();
   const [importingIds, setImportingIds] = useState<Set<string>>(new Set());
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
 
@@ -81,6 +82,19 @@ export function HubSpotSearch() {
     });
   }
 
+  function handleBulkEnrich() {
+    const ids = Array.from(selectedIds);
+    if (ids.length === 0) return;
+    startBulkEnrich(async () => {
+      const result = await enrichHubSpotContactsBulk(ids);
+      toast.success(
+        `Enriched ${result.matched} matched, ${result.noMatch} no-match, ${result.noLocalPersona} no-local, ${result.errors} errors`,
+      );
+      const refreshed = await listRecentHubSpotContacts();
+      setResults(refreshed);
+    });
+  }
+
   return (
     <Card>
       <CardHeader>
@@ -109,6 +123,16 @@ export function HubSpotSearch() {
           >
             {bulkImporting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
             Import Selected ({selectedIds.size})
+          </Button>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={handleBulkEnrich}
+            disabled={bulkEnriching || selectedIds.size === 0}
+            className="gap-2"
+          >
+            {bulkEnriching ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
+            Enrich Selected (Apollo)
           </Button>
         </div>
         <form
@@ -151,7 +175,7 @@ export function HubSpotSearch() {
                         className="mr-3 h-4 w-4"
                         checked={selectedIds.has(c.id)}
                         onChange={() => toggleSelection(c.id)}
-                        disabled={!c.recommendedImport || importingIds.has(c.id)}
+                        disabled={(!c.recommendedImport && !c.hasHubSpotLink) || importingIds.has(c.id)}
                         aria-label={`Select ${c.firstname} ${c.lastname}`}
                       />
                     </div>
@@ -190,7 +214,23 @@ export function HubSpotSearch() {
                             Recommended
                           </Badge>
                         )}
+                        {c.enrichmentOutcome === 'matched' && (
+                          <Badge variant="outline" className="text-[10px] border-emerald-500 text-emerald-700">
+                            Matched
+                          </Badge>
+                        )}
+                        {c.enrichmentOutcome === 'no_match' && (
+                          <Badge variant="outline" className="text-[10px] border-amber-500 text-amber-700">
+                            No Match
+                          </Badge>
+                        )}
                       </div>
+                      {(c.enrichmentConfidence !== null || c.lastEnrichedAt) && (
+                        <p className="mt-1 text-[10px] text-muted-foreground">
+                          {c.enrichmentConfidence !== null ? `Confidence ${(c.enrichmentConfidence * 100).toFixed(0)}%` : 'Confidence n/a'}
+                          {c.lastEnrichedAt ? ` · Last enriched ${new Date(c.lastEnrichedAt).toLocaleDateString()}` : ''}
+                        </p>
+                      )}
                     </div>
                     <div className="flex items-center gap-1 shrink-0">
                       <Button

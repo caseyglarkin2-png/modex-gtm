@@ -5,6 +5,12 @@ import { prisma } from '@/lib/prisma';
 import { getContactById, hsSearchContacts, listRecentContacts, type HubSpotContact } from '@/lib/hubspot/contacts';
 import { normalizeName, normalizeTitle, parseDomainFromEmail, scoreContactQuality, splitName } from '@/lib/contact-standard';
 import { buildHubSpotIntakeCandidates, type HubSpotIntakeCandidate } from '@/lib/contacts/hubspot-intake';
+import { enrichPersonaFromHubSpotContact } from '@/lib/enrichment/apollo-enrichment';
+import {
+  isNewAccountSendEligible,
+  likelySameCompanyName,
+  normalizeCompanyDomain,
+} from '@/lib/accounts/import-guardrails';
 
 const BLOCKED_DOMAINS = new Set([
   'dannon.com', 'danone.com', 'bluetriton.com', 'yardflow.ai',
@@ -123,18 +129,35 @@ async function importHubSpotContactInternal(contact: HubSpotContact): Promise<{ 
     const fullName = normalizeName(`${firstName} ${lastName}`);
     const title = normalizeTitle(contact.jobtitle || '');
     const accountName = contact.company || domain || 'Unknown';
+    const normalizedDomain = normalizeCompanyDomain(domain);
 
     // Ensure account exists
     const account = await prisma.account.findFirst({
       where: { name: { equals: accountName, mode: 'insensitive' } },
     });
+    let resolvedAccount = account;
+    if (!resolvedAccount && normalizedDomain) {
+      resolvedAccount = await prisma.account.findFirst({
+        where: { source_url_1: `https://${normalizedDomain}` },
+      });
+    }
+    if (!resolvedAccount) {
+      const near = await prisma.account.findMany({
+        where: { name: { contains: accountName.split(' ')[0] || accountName, mode: 'insensitive' } },
+        take: 20,
+      });
+      resolvedAccount = near.find((candidate) => likelySameCompanyName(candidate.name, accountName)) ?? null;
+    }
 
-    if (!account) {
-      await prisma.account.create({
+    const isNewAccount = !resolvedAccount;
+    if (!resolvedAccount) {
+      resolvedAccount = await prisma.account.create({
         data: {
           name: accountName,
           rank: 999,
           vertical: 'Unknown',
+          owner: 'Unassigned',
+          research_status: 'Needs Review',
           priority_band: 'D',
           priority_score: 50,
           icp_fit: 50,
@@ -143,6 +166,9 @@ async function importHubSpotContactInternal(contact: HubSpotContact): Promise<{ 
           warm_intro: 0,
           strategic_value: 50,
           meeting_ease: 50,
+          source: 'hubspot_import',
+          source_url_1: normalizedDomain ? `https://${normalizedDomain}` : null,
+          notes: 'Auto-triaged from HubSpot import. Requires vertical/domain/owner review.',
         },
       });
     }
@@ -150,7 +176,7 @@ async function importHubSpotContactInternal(contact: HubSpotContact): Promise<{ 
     const qualityResult = scoreContactQuality({
       name: fullName || contact.email,
       title: title || undefined,
-      accountName: account?.name ?? accountName,
+      accountName: resolvedAccount?.name ?? accountName,
       email: contact.email,
     });
 
@@ -161,15 +187,17 @@ async function importHubSpotContactInternal(contact: HubSpotContact): Promise<{ 
         title: title || null,
         email: contact.email.toLowerCase(),
         phone: contact.phone || null,
-        account_name: account?.name ?? accountName,
+        account_name: resolvedAccount?.name ?? accountName,
         priority: 'P2',
         seniority: '',
         persona_lane: '',
         role_in_deal: '',
-        persona_status: 'Not started',
         hubspot_contact_id: contact.id,
         email_valid: true,
         quality_band: qualityResult.band,
+        quality_score: qualityResult.score,
+        do_not_contact: isNewAccount ? !isNewAccountSendEligible(qualityResult.score) : false,
+        persona_status: isNewAccount ? 'Needs Review' : 'Not started',
       },
     });
 
@@ -205,6 +233,32 @@ export async function importHubSpotContactsBulk(hubspotContactIds: string[]): Pr
       else if (imported.blocked) summary.blocked++;
       else if (imported.skipped) summary.skipped++;
       else summary.errors++;
+    } catch {
+      summary.errors++;
+    }
+  }
+  revalidatePath('/contacts');
+  return summary;
+}
+
+export async function enrichHubSpotContactsBulk(hubspotContactIds: string[]): Promise<{
+  matched: number;
+  noMatch: number;
+  noLocalPersona: number;
+  errors: number;
+}> {
+  const summary = { matched: 0, noMatch: 0, noLocalPersona: 0, errors: 0 };
+  for (const hsId of hubspotContactIds.slice(0, 100)) {
+    try {
+      const contact = await getContactById(hsId);
+      if (!contact) {
+        summary.errors++;
+        continue;
+      }
+      const result = await enrichPersonaFromHubSpotContact(contact);
+      if (result.status === 'matched') summary.matched++;
+      else if (result.status === 'no_match') summary.noMatch++;
+      else summary.noLocalPersona++;
     } catch {
       summary.errors++;
     }

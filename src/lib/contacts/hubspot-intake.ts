@@ -24,6 +24,7 @@ export interface HubSpotIntakeCandidate extends HubSpotContact {
   helpfulBand: 'A' | 'B' | 'C' | 'D';
   helpfulScore: number;
   recommendedImport: boolean;
+  enrichmentOutcome: 'matched' | 'no_match' | 'not_enriched';
 }
 
 export function buildHubSpotIntakeCandidates(
@@ -66,6 +67,11 @@ export function buildHubSpotIntakeCandidates(
       helpfulBand: helpful.band,
       helpfulScore: helpful.total,
       recommendedImport,
+      enrichmentOutcome: enrichment
+        ? enrichment.apollo_person_id
+          ? 'matched'
+          : 'no_match'
+        : 'not_enriched',
     };
   });
 }

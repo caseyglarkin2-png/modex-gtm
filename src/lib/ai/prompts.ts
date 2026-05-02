@@ -204,6 +204,7 @@ Output: Structured markdown with headers.`;
 }
 
 export function buildOnePagerPrompt(ctx: OnePagerContext): string {
+  const verticalUnknown = !ctx.vertical || ctx.vertical.toLowerCase() === 'unknown';
   return `You are generating content for a YardFlow by FreightRoll sales infographic one-pager.
 
 ${getYardFlowPromptContext()}
@@ -239,6 +240,7 @@ CRITICAL: Pain points and outcomes MUST be customized to this specific account's
 - Headline must feel board-room strong, not generic (constraint + consequence + urgency).
 - Subheadline must include one explicit business consequence (margin, service reliability, or growth capacity).
 - Outcomes must avoid fluff. Each should imply a measurable operational or commercial effect.
+${verticalUnknown ? "- Vertical is currently unknown. Use neutral, non-speculative operational language and avoid niche industry assumptions. Include a gentle note in bestFit that operator validation of vertical-specific assumptions is required." : ''}
 
 Generate ONLY valid JSON matching this schema — no markdown, no commentary:
 

@@ -3,6 +3,11 @@ import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { getContactById } from '@/lib/hubspot/contacts';
 import { normalizeName, normalizeTitle, parseDomainFromEmail, scoreContactQuality, splitName } from '@/lib/contact-standard';
+import {
+  isNewAccountSendEligible,
+  likelySameCompanyName,
+  normalizeCompanyDomain,
+} from '@/lib/accounts/import-guardrails';
 
 const BLOCKED_DOMAINS = new Set([
   'dannon.com', 'danone.com', 'bluetriton.com', 'yardflow.ai',
@@ -83,17 +88,33 @@ export async function POST(req: NextRequest) {
       const fullName = normalizeName(`${firstName} ${lastName}`);
       const title = normalizeTitle(contact.jobtitle || '');
       const accountName = contact.company || domain || 'Unknown';
+      const normalizedDomain = normalizeCompanyDomain(domain);
 
       // Ensure account exists
       let account = await prisma.account.findFirst({
         where: { name: { equals: accountName, mode: 'insensitive' } },
       });
+      if (!account && normalizedDomain) {
+        account = await prisma.account.findFirst({
+          where: { source_url_1: `https://${normalizedDomain}` },
+        });
+      }
+      if (!account) {
+        const near = await prisma.account.findMany({
+          where: { name: { contains: accountName.split(' ')[0] || accountName, mode: 'insensitive' } },
+          take: 20,
+        });
+        account = near.find((candidate) => likelySameCompanyName(candidate.name, accountName)) ?? null;
+      }
+      const isNewAccount = !account;
       if (!account) {
         account = await prisma.account.create({
           data: {
             name: accountName,
             rank: 999,
             vertical: 'Unknown',
+            owner: 'Unassigned',
+            research_status: 'Needs Review',
             priority_band: 'D',
             priority_score: 50,
             icp_fit: 50,
@@ -102,6 +123,9 @@ export async function POST(req: NextRequest) {
             warm_intro: 0,
             strategic_value: 50,
             meeting_ease: 50,
+            source: 'hubspot_import',
+            source_url_1: normalizedDomain ? `https://${normalizedDomain}` : null,
+            notes: 'Auto-triaged from HubSpot import. Requires vertical/domain/owner review.',
           },
         });
       }
@@ -125,10 +149,12 @@ export async function POST(req: NextRequest) {
           seniority: '',
           persona_lane: '',
           role_in_deal: '',
-          persona_status: 'Not started',
           hubspot_contact_id: contact.id,
           email_valid: true,
           quality_band: qualityResult.band,
+          quality_score: qualityResult.score,
+          do_not_contact: isNewAccount ? !isNewAccountSendEligible(qualityResult.score) : false,
+          persona_status: isNewAccount ? 'Needs Review' : 'Not started',
         },
       });
 
