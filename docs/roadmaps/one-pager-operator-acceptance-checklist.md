@@ -4,7 +4,7 @@ Use this checklist to validate the latest one-pager workflow in production.
 
 - App URL: `https://modex-gtm.vercel.app`
 - Required account: `casey@freightroll.com`
-- Scope: generated content workspace, bulk preview decision flow, queue, and metrics.
+- Scope: generated content workspace, bulk preview decision flow, queue, metrics, and contacts enrichment.
 
 ## 1) Login
 
@@ -81,6 +81,39 @@ Pass criteria:
 Fail if:
 - Missing key panels or route fails.
 
+## 6) Contacts Intake + Apollo Enrichment
+
+Path: `/contacts`
+
+Pass criteria:
+- `Load Recent HubSpot Contacts` loads intake candidates.
+- `Enrich Selected (Apollo)` is visible.
+- Row-level enrichment outcome is visible (`Matched` or `No Match`) where enrichment exists.
+- Confidence + last enriched metadata appear when available.
+- Filters are visible and functional:
+  - recommendation state,
+  - enrichment outcome,
+  - freshness.
+
+Fail if:
+- intake load fails silently.
+- enrich action is missing or cannot run for selectable contacts.
+- enrichment outcome metadata never appears.
+
+## 7) Cron Health (Re-enrichment)
+
+Path: `/admin/crons`
+
+Pass criteria:
+- `Contact Re-enrichment` card is visible.
+- `Run Now` control is visible on that card.
+- Clicking `Run Now` updates run telemetry (`runs`, `last run`, and message/stats).
+
+Fail if:
+- card missing.
+- no way to trigger manual run.
+- run telemetry does not update.
+
 ## Evidence To Capture
 
 Capture these artifacts for each run:
@@ -91,7 +124,23 @@ Capture these artifacts for each run:
 4. Screenshot of bulk preview dialog showing decision summary + badges.
 5. Screenshot of `/queue/generations`.
 6. Screenshot of `/admin/generation-metrics`.
-7. Pass/fail result with any blockers.
+7. Screenshot of `/contacts` showing enrichment outcome badges and confidence/last-enriched line.
+8. Screenshot of `/admin/crons` showing `Contact Re-enrichment` and `Run Now`.
+9. Pass/fail result with any blockers.
+
+## Engineering Evidence (Command Output)
+
+Capture and paste command output in the run log:
+
+1. `npm run lint`
+2. `npx tsc --noEmit`
+3. `npm run test:unit -- tests/unit/apollo-match.test.ts tests/unit/apollo-enrichment.test.ts tests/unit/import-guardrails.test.ts tests/unit/reenrich-contacts-runner.test.ts tests/unit/reenrich-contacts-route.test.ts`
+4. `npm run test:e2e:one-pager:proof`
+
+Expected proof suite evidence:
+- contacts intake proof test executes and passes.
+- `executed > 0`
+- `skipped = 0`
 
 ## Quick Result Template
 
@@ -105,5 +154,7 @@ Operator Acceptance Result
 - Bulk Preview Decision Flow: PASS/FAIL
 - Generation Queue: PASS/FAIL
 - Generation Metrics: PASS/FAIL
+- Contacts Intake + Apollo Enrichment: PASS/FAIL
+- Cron Health Re-enrichment: PASS/FAIL
 - Notes / blockers:
 ```

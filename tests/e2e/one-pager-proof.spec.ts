@@ -46,7 +46,7 @@ test('bulk enqueue creates send job and opens tracker', async ({ page }) => {
   await expect(page.getByRole('button', { name: 'Queue Async Send Job' })).toBeEnabled();
   await page.getByRole('button', { name: 'Queue Async Send Job' }).click();
 
-  await expect(page.locator('body')).toContainText(/Send Job #\d+/);
+  await expect(page.locator('body')).toContainText(/send job #\d+/i);
 });
 
 test('admin metrics reflects seeded queue, send, and failure surfaces', async ({ page }) => {

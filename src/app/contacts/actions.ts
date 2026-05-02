@@ -23,6 +23,35 @@ export interface SearchResult {
   nextAfter?: string;
 }
 
+type IntakeFixtureStore = {
+  contacts: HubSpotContact[];
+};
+
+function isProofModeEnabled(): boolean {
+  return process.env.ONE_PAGER_PROOF_MODE === '1';
+}
+
+async function getProofContactsFixture(): Promise<HubSpotContact[] | null> {
+  if (!isProofModeEnabled()) return null;
+  const fixture = await prisma.systemConfig.findUnique({
+    where: { key: 'e2e:contacts_intake_fixture' },
+    select: { value: true },
+  });
+  if (!fixture?.value) return null;
+  try {
+    const parsed = JSON.parse(fixture.value) as IntakeFixtureStore;
+    return Array.isArray(parsed.contacts) ? parsed.contacts : null;
+  } catch {
+    return null;
+  }
+}
+
+async function getHubSpotContactByIdForIntake(hsId: string): Promise<HubSpotContact | null> {
+  const fixtures = await getProofContactsFixture();
+  if (fixtures) return fixtures.find((c) => c.id === hsId) ?? null;
+  return getContactById(hsId);
+}
+
 async function annotateContacts(contacts: HubSpotContact[]): Promise<HubSpotIntakeCandidate[]> {
   if (contacts.length === 0) return [];
 
@@ -63,6 +92,17 @@ export async function searchHubSpotContacts(query: string, after?: string): Prom
   if (!query.trim()) return { contacts: [], total: 0 };
 
   try {
+    const fixtures = await getProofContactsFixture();
+    if (fixtures) {
+      const needle = query.toLowerCase().trim();
+      const filtered = fixtures.filter((contact) => {
+        const haystack = `${contact.firstname} ${contact.lastname} ${contact.email} ${contact.company}`.toLowerCase();
+        return haystack.includes(needle);
+      });
+      const annotated = await annotateContacts(filtered);
+      return { contacts: annotated, total: annotated.length };
+    }
+
     const result = await hsSearchContacts(query, after, 50);
     const annotated = await annotateContacts(result.contacts);
     return {
@@ -77,6 +117,12 @@ export async function searchHubSpotContacts(query: string, after?: string): Prom
 
 export async function listRecentHubSpotContacts(after?: string): Promise<SearchResult> {
   try {
+    const fixtures = await getProofContactsFixture();
+    if (fixtures) {
+      const annotated = await annotateContacts(fixtures.slice(0, 50));
+      return { contacts: annotated, total: annotated.length };
+    }
+
     const result = await listRecentContacts(after, 50);
     const annotated = await annotateContacts(result.contacts);
     return {
@@ -222,7 +268,7 @@ export async function importHubSpotContactsBulk(hubspotContactIds: string[]): Pr
   const summary = { imported: 0, linked: 0, skipped: 0, blocked: 0, errors: 0 };
   for (const hsId of hubspotContactIds.slice(0, 100)) {
     try {
-      const contact = await getContactById(hsId);
+      const contact = await getHubSpotContactByIdForIntake(hsId);
       if (!contact) {
         summary.errors++;
         continue;
@@ -250,7 +296,7 @@ export async function enrichHubSpotContactsBulk(hubspotContactIds: string[]): Pr
   const summary = { matched: 0, noMatch: 0, noLocalPersona: 0, errors: 0 };
   for (const hsId of hubspotContactIds.slice(0, 100)) {
     try {
-      const contact = await getContactById(hsId);
+      const contact = await getHubSpotContactByIdForIntake(hsId);
       if (!contact) {
         summary.errors++;
         continue;

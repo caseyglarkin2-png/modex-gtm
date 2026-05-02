@@ -20,6 +20,26 @@ export function HubSpotSearch() {
   const [bulkEnriching, startBulkEnrich] = useTransition();
   const [importingIds, setImportingIds] = useState<Set<string>>(new Set());
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [recommendedFilter, setRecommendedFilter] = useState<'all' | 'recommended' | 'not_recommended'>('all');
+  const [enrichmentFilter, setEnrichmentFilter] = useState<'all' | 'matched' | 'no_match' | 'not_enriched'>('all');
+  const [freshnessFilter, setFreshnessFilter] = useState<'all' | 'stale' | 'fresh'>('all');
+
+  const staleCutoffMs = 30 * 24 * 60 * 60 * 1000;
+  const contacts = results?.contacts ?? [];
+  const filteredContacts = contacts.filter((c) => {
+    if (recommendedFilter === 'recommended' && !c.recommendedImport) return false;
+    if (recommendedFilter === 'not_recommended' && c.recommendedImport) return false;
+    if (enrichmentFilter !== 'all' && c.enrichmentOutcome !== enrichmentFilter) return false;
+
+    if (freshnessFilter !== 'all') {
+      const ageMs = c.lastEnrichedAt ? Date.now() - new Date(c.lastEnrichedAt).getTime() : Number.POSITIVE_INFINITY;
+      const stale = ageMs >= staleCutoffMs;
+      if (freshnessFilter === 'stale' && !stale) return false;
+      if (freshnessFilter === 'fresh' && stale) return false;
+    }
+
+    return true;
+  });
 
   function handleSearch() {
     if (!query.trim()) return;
@@ -135,6 +155,41 @@ export function HubSpotSearch() {
             Enrich Selected (Apollo)
           </Button>
         </div>
+        {results && (
+          <div className="mb-3 grid gap-2 md:grid-cols-3">
+            <select
+              className="h-9 rounded-md border bg-background px-3 text-sm"
+              value={recommendedFilter}
+              onChange={(e) => setRecommendedFilter(e.target.value as 'all' | 'recommended' | 'not_recommended')}
+              aria-label="Filter by recommendation"
+            >
+              <option value="all">All Recommendation States</option>
+              <option value="recommended">Recommended</option>
+              <option value="not_recommended">Not Recommended</option>
+            </select>
+            <select
+              className="h-9 rounded-md border bg-background px-3 text-sm"
+              value={enrichmentFilter}
+              onChange={(e) => setEnrichmentFilter(e.target.value as 'all' | 'matched' | 'no_match' | 'not_enriched')}
+              aria-label="Filter by enrichment outcome"
+            >
+              <option value="all">All Enrichment Outcomes</option>
+              <option value="matched">Matched</option>
+              <option value="no_match">No Match</option>
+              <option value="not_enriched">Not Enriched</option>
+            </select>
+            <select
+              className="h-9 rounded-md border bg-background px-3 text-sm"
+              value={freshnessFilter}
+              onChange={(e) => setFreshnessFilter(e.target.value as 'all' | 'stale' | 'fresh')}
+              aria-label="Filter by enrichment freshness"
+            >
+              <option value="all">All Freshness</option>
+              <option value="stale">Stale / Never Enriched</option>
+              <option value="fresh">Fresh (&lt; 30 days)</option>
+            </select>
+          </div>
+        )}
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -156,15 +211,15 @@ export function HubSpotSearch() {
         {results && (
           <div>
             <p className="text-xs text-muted-foreground mb-3">
-              {results.total} results found
+              Showing {filteredContacts.length} of {results.total} results
             </p>
-            {results.contacts.length === 0 ? (
+            {filteredContacts.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-4">
                 No contacts found. Try a different search.
               </p>
             ) : (
               <div className="space-y-2">
-                {results.contacts.map((c) => (
+                {filteredContacts.map((c) => (
                   <div
                     key={c.id}
                     className="flex items-center justify-between gap-3 rounded-lg border p-3"

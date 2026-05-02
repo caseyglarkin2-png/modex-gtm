@@ -2,10 +2,12 @@ import { Activity, AlertTriangle, CheckCircle2, Clock3 } from 'lucide-react';
 import Link from 'next/link';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { prisma } from '@/lib/prisma';
 import { DRIP_SEQUENCE_ENABLED, HUBSPOT_LOGGING_ENABLED, HUBSPOT_SYNC_ENABLED, INBOX_POLLING_ENABLED } from '@/lib/feature-flags';
 import { KNOWN_CRONS, type CronStateValue } from '@/lib/cron-monitor';
+import { runReenrichContactsNowAction } from './actions';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Cron Health' };
@@ -243,6 +245,12 @@ export default async function CronHealthPage() {
 
               {row.state.lastStats ? (
                 <pre className="overflow-auto rounded-lg bg-muted/40 p-3 text-xs">{JSON.stringify(row.state.lastStats, null, 2)}</pre>
+              ) : null}
+
+              {row.name === 'reenrich-contacts' ? (
+                <form action={runReenrichContactsNowAction} className="flex justify-end">
+                  <Button size="sm" variant="outline" type="submit">Run Now</Button>
+                </form>
               ) : null}
             </CardContent>
           </Card>
