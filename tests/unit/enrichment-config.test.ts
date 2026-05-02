@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { getEnrichmentThresholds } from '@/lib/enrichment/config';
+import { getEnrichmentThresholds, isWritebackApplyEnabled } from '@/lib/enrichment/config';
 
 const originalEnv = { ...process.env };
 
@@ -33,5 +33,12 @@ describe('enrichment thresholds config', () => {
       staleDaysPerson: 14,
       staleDaysCompany: 60,
     });
+  });
+
+  it('keeps writeback apply disabled by default and parses true explicitly', () => {
+    delete process.env.ENRICH_WRITEBACK_APPLY_ENABLED;
+    expect(isWritebackApplyEnabled()).toBe(false);
+    process.env.ENRICH_WRITEBACK_APPLY_ENABLED = 'true';
+    expect(isWritebackApplyEnabled()).toBe(true);
   });
 });

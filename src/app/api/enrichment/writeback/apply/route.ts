@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
+import { isWritebackApplyEnabled } from '@/lib/enrichment/config';
 import {
   consumeWritebackApprovalToken,
   loadWritebackPreview,
@@ -28,6 +29,13 @@ export async function POST(req: NextRequest) {
   }
 
   const { personaId, previewChecksum, approvalToken } = parsed.data;
+  if (!isWritebackApplyEnabled()) {
+    return NextResponse.json(
+      { error: 'WRITEBACK_DISABLED', message: 'Writeback apply is disabled in this environment.' },
+      { status: 409 },
+    );
+  }
+
   const preview = await loadWritebackPreview(personaId, previewChecksum);
   if (!preview) {
     return NextResponse.json(

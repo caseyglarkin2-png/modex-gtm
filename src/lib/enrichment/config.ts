@@ -19,3 +19,9 @@ export function getEnrichmentThresholds(): EnrichmentThresholds {
     staleDaysCompany: envNumber('ENRICH_STALE_DAYS_COMPANY', 45),
   };
 }
+
+export function isWritebackApplyEnabled(): boolean {
+  const raw = process.env.ENRICH_WRITEBACK_APPLY_ENABLED;
+  if (!raw) return false;
+  return raw === '1' || raw.toLowerCase() === 'true';
+}

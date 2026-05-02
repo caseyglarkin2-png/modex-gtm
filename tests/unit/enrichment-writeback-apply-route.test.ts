@@ -24,6 +24,7 @@ vi.mock('@/lib/prisma', () => ({
 describe('enrichment writeback apply route', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    process.env.ENRICH_WRITEBACK_APPLY_ENABLED = 'true';
   });
 
   it('applies accepted fields when approval token is valid', async () => {
@@ -61,5 +62,23 @@ describe('enrichment writeback apply route', () => {
     expect(res.status).toBe(200);
     expect(json.appliedFieldCount).toBe(1);
     expect(mockedPrisma.contactEnrichmentField.upsert).toHaveBeenCalled();
+  });
+
+  it('returns 409 when writeback apply is disabled', async () => {
+    process.env.ENRICH_WRITEBACK_APPLY_ENABLED = 'false';
+    const { POST } = await import('@/app/api/enrichment/writeback/apply/route');
+    const req = new NextRequest('http://localhost/api/enrichment/writeback/apply', {
+      method: 'POST',
+      body: JSON.stringify({
+        personaId: 42,
+        previewChecksum: 'a'.repeat(64),
+        approvalToken: 'tok_1',
+      }),
+    });
+
+    const res = await POST(req);
+    const json = await res.json();
+    expect(res.status).toBe(409);
+    expect(json.error).toBe('WRITEBACK_DISABLED');
   });
 });
