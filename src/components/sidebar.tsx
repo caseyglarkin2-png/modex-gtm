@@ -4,96 +4,20 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
-  Building2,
-  Users,
-  Waves,
-  FileText,
-  Smartphone,
-  ListTodo,
-  Route,
-  QrCode,
   Search,
-  Lightbulb,
-  Activity,
-  CalendarCheck,
-  LayoutDashboard,
-  GitBranch,
   Menu,
   ChevronLeft,
   ChevronRight,
-  Rocket,
-  BarChart3,
-  AudioLines,
+  Smartphone,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { canonicalNavModules, getPageLabelForPath, isActiveNavModule } from '@/lib/navigation';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { NotificationBell } from '@/components/notification-bell';
 import { useSidebar } from '@/components/sidebar-context';
-
-const NAV_SECTIONS = [
-  {
-    label: 'Core',
-    items: [
-      { href: '/', label: 'Dashboard', icon: LayoutDashboard },
-      { href: '/accounts', label: 'Accounts', icon: Building2 },
-      { href: '/personas', label: 'Personas', icon: Users },
-    ],
-  },
-  {
-    label: 'Outreach',
-    items: [
-      { href: '/waves', label: 'Outreach Waves', icon: Waves },
-      { href: '/campaigns', label: 'Campaigns', icon: Rocket },
-      { href: '/waves/campaign', label: 'Campaign HQ', icon: Rocket },
-      { href: '/queue/generations', label: 'Generation Queue', icon: Activity },
-      { href: '/generated-content', label: 'Generated Content', icon: FileText },
-      { href: '/briefs', label: 'Meeting Briefs', icon: FileText },
-      { href: '/search', label: 'Search Strings', icon: Search },
-      { href: '/intel', label: 'Actionable Intel', icon: Lightbulb },
-    ],
-  },
-  {
-    label: 'Field',
-    items: [
-      { href: '/capture', label: 'Mobile Capture', icon: Smartphone },
-      { href: '/queue', label: 'Jake Queue', icon: ListTodo },
-      { href: '/audit-routes', label: 'Audit Routes', icon: Route },
-      { href: '/qr', label: 'QR Assets', icon: QrCode },
-    ],
-  },
-  {
-    label: 'Pipeline',
-    items: [
-      { href: '/pipeline', label: 'Pipeline Board', icon: GitBranch },
-      { href: '/activities', label: 'Activities', icon: Activity },
-      { href: '/meetings', label: 'Meetings', icon: CalendarCheck },
-      { href: '/analytics', label: 'Analytics', icon: BarChart3 },
-      { href: '/analytics/quarterly', label: 'Quarterly Review', icon: BarChart3 },
-      { href: '/admin/crons', label: 'Cron Health', icon: Activity },
-    ],
-  },
-  {
-    label: 'Creative',
-    items: [
-      { href: '/studio', label: 'Creative Studio', icon: AudioLines },
-    ],
-  },
-];
-
-/** Lookup current page label from pathname */
-function getPageLabel(pathname: string): string {
-  for (const section of NAV_SECTIONS) {
-    for (const item of section.items) {
-      if (pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))) {
-        return item.label;
-      }
-    }
-  }
-  return 'RevOps OS';
-}
 
 /* ---------- Drawer nav (mobile + expanded sidebar) ---------- */
 function NavContent({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) {
@@ -112,37 +36,43 @@ function NavContent({ pathname, onNavigate }: { pathname: string; onNavigate?: (
         </div>
       </div>
       <nav className="flex-1 overflow-y-auto px-3 py-4">
-        {NAV_SECTIONS.map((section) => (
-          <div key={section.label} className="mb-4">
-            <p className="mb-1 px-3 text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">
-              {section.label}
-            </p>
-            <ul className="space-y-0.5">
-              {section.items.map((item) => {
-                const isActive =
-                  pathname === item.href ||
-                  (item.href !== '/' && pathname.startsWith(item.href));
-                return (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      onClick={onNavigate}
-                      className={cn(
-                        'flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors',
-                        isActive
-                          ? 'bg-[var(--accent)] text-[var(--primary)] font-medium'
-                          : 'text-[var(--muted-foreground)] hover:bg-[var(--muted)] hover:text-[var(--foreground)]'
-                      )}
-                    >
-                      <item.icon className="h-4 w-4 flex-shrink-0" />
-                      {item.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        ))}
+        <div className="mb-3 px-2">
+          <Link
+            href="/capture"
+            onClick={onNavigate}
+            className="inline-flex w-full items-center justify-center gap-2 rounded-md border bg-[var(--accent)] px-3 py-2 text-xs font-medium text-[var(--foreground)] transition-colors hover:bg-[var(--muted)]"
+          >
+            <Smartphone className="h-3.5 w-3.5" />
+            Quick Capture
+          </Link>
+        </div>
+        <div className="mb-4">
+          <p className="mb-1 px-3 text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">
+            RevOps OS
+          </p>
+          <ul className="space-y-0.5">
+            {canonicalNavModules.map((item) => {
+              const isActive = isActiveNavModule(pathname, item);
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={onNavigate}
+                    className={cn(
+                      'flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors',
+                      isActive
+                        ? 'bg-[var(--accent)] text-[var(--primary)] font-medium'
+                        : 'text-[var(--muted-foreground)] hover:bg-[var(--muted)] hover:text-[var(--foreground)]'
+                    )}
+                  >
+                    <item.icon className="h-4 w-4 flex-shrink-0" />
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </nav>
       <div className="border-t border-[var(--border)] px-4 py-3 text-xs text-[var(--muted-foreground)]">
         YardFlow by FreightRoll &middot; RevOps OS
@@ -164,40 +94,48 @@ function CollapsedNav({ pathname }: { pathname: string }) {
       </div>
       <nav className="flex-1 overflow-y-auto px-2 py-4">
         <TooltipProvider delayDuration={0}>
-          {NAV_SECTIONS.map((section) => (
-            <div key={section.label} className="mb-4">
-              <div className="mb-1 h-4" /> {/* spacer matching section header */}
-              <ul className="space-y-0.5">
-                {section.items.map((item) => {
-                  const isActive =
-                    pathname === item.href ||
-                    (item.href !== '/' && pathname.startsWith(item.href));
-                  return (
-                    <li key={item.href}>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Link
-                            href={item.href}
-                            className={cn(
-                              'flex items-center justify-center rounded-md p-2 transition-colors',
-                              isActive
-                                ? 'bg-[var(--accent)] text-[var(--primary)]'
-                                : 'text-[var(--muted-foreground)] hover:bg-[var(--muted)] hover:text-[var(--foreground)]'
-                            )}
-                          >
-                            <item.icon className="h-4 w-4 flex-shrink-0" />
-                          </Link>
-                        </TooltipTrigger>
-                        <TooltipContent side="right">
-                          {item.label}
-                        </TooltipContent>
-                      </Tooltip>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          ))}
+          <div className="mb-3">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href="/capture"
+                  className="flex items-center justify-center rounded-md border bg-[var(--accent)] p-2 text-[var(--foreground)] transition-colors hover:bg-[var(--muted)]"
+                >
+                  <Smartphone className="h-4 w-4" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">
+                Quick Capture
+              </TooltipContent>
+            </Tooltip>
+          </div>
+          <ul className="space-y-0.5">
+            {canonicalNavModules.map((item) => {
+              const isActive = isActiveNavModule(pathname, item);
+              return (
+                <li key={item.href}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Link
+                        href={item.href}
+                        className={cn(
+                          'flex items-center justify-center rounded-md p-2 transition-colors',
+                          isActive
+                            ? 'bg-[var(--accent)] text-[var(--primary)]'
+                            : 'text-[var(--muted-foreground)] hover:bg-[var(--muted)] hover:text-[var(--foreground)]'
+                        )}
+                      >
+                        <item.icon className="h-4 w-4 flex-shrink-0" />
+                      </Link>
+                    </TooltipTrigger>
+                    <TooltipContent side="right">
+                      {item.label}
+                    </TooltipContent>
+                  </Tooltip>
+                </li>
+              );
+            })}
+          </ul>
         </TooltipProvider>
       </nav>
     </>
@@ -208,7 +146,7 @@ export function Sidebar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const { collapsed, toggle } = useSidebar();
-  const pageLabel = getPageLabel(pathname);
+  const pageLabel = getPageLabelForPath(pathname);
 
   return (
     <>

@@ -45,7 +45,7 @@ export default async function GenerationQueuePage() {
 
   return (
     <div className="space-y-6">
-      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Generation Queue' }]} />
+      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Work Queue', href: '/queue?tab=system-jobs' }, { label: 'Generation Queue' }]} />
 
       <div className="flex items-start justify-between gap-4">
         <div>
@@ -53,6 +53,20 @@ export default async function GenerationQueuePage() {
           <p className="text-sm text-muted-foreground">Track one-pager generation jobs and run retries from one place.</p>
         </div>
         <div className="flex items-center gap-2">
+          <Link
+            href="/studio?tab=queue"
+            className="inline-flex items-center gap-1 rounded-lg border px-3 py-2 text-xs text-muted-foreground hover:bg-muted"
+          >
+            <Zap className="h-3.5 w-3.5" />
+            Content Studio Queue
+          </Link>
+          <Link
+            href="/queue?tab=system-jobs"
+            className="inline-flex items-center gap-1 rounded-lg border px-3 py-2 text-xs text-muted-foreground hover:bg-muted"
+          >
+            <Activity className="h-3.5 w-3.5" />
+            Work Queue System Jobs
+          </Link>
           <Link
             href="/generated-content"
             className="inline-flex items-center gap-1 rounded-lg border px-3 py-2 text-xs text-muted-foreground hover:bg-muted"

@@ -9,6 +9,11 @@ export async function moveAccountToStage(accountName: string, stage: PipelineSta
   const account = await prisma.account.findUnique({ where: { name: accountName } });
   if (!account) return { success: false, error: 'Account not found' };
 
+  const currentStage = derivePipelineStage({
+    pipeline_stage: account.pipeline_stage,
+    outreach_status: account.outreach_status,
+    meeting_status: account.meeting_status,
+  });
   const mapped = stageToStatus(stage);
 
   await prisma.account.update({
@@ -40,8 +45,9 @@ export async function moveAccountToStage(accountName: string, stage: PipelineSta
       account_name: accountName,
       activity_type: 'Pipeline',
       owner: 'System',
-      outcome: `Moved to ${stage}`,
+      outcome: `Moved stage from ${currentStage} to ${stage}`,
       next_step: stage === 'closed' ? 'Celebrate and expand' : `Advance to ${nextPipelineStage(stage)}`,
+      notes: `pipeline_stage_change:${currentStage}->${stage}`,
       activity_date: new Date(),
     },
   }).catch(() => undefined);
@@ -49,6 +55,8 @@ export async function moveAccountToStage(accountName: string, stage: PipelineSta
   const hubspotDealId = await ensureLocalMeetingDealLink(accountName, stage).catch(() => null);
 
   revalidatePath('/pipeline');
+  revalidatePath('/meetings');
+  revalidatePath('/activities');
   revalidatePath('/');
   revalidatePath('/analytics');
   revalidatePath(`/accounts/${accountName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`);

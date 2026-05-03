@@ -7,41 +7,15 @@ import {
   Building2,
   User,
   FileText,
-  Radio,
-  Search,
-  Lightbulb,
-  ClipboardList,
-  Smartphone,
-  QrCode,
-  CalendarCheck,
-  Activity,
-  BarChart3,
 } from 'lucide-react';
 import accountsData from '@/lib/data/accounts.json';
 import personasData from '@/lib/data/personas.json';
 import meetingBriefsData from '@/lib/data/meeting-briefs.json';
+import { commandRoutes } from '@/lib/navigation';
 
 function slugify(name: string) {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 }
-
-const pages = [
-  { name: 'Dashboard', href: '/', icon: BarChart3 },
-  { name: 'Accounts', href: '/accounts', icon: Building2 },
-  { name: 'Personas', href: '/personas', icon: User },
-  { name: 'Outreach Waves', href: '/waves', icon: Radio },
-  { name: 'Generation Queue', href: '/queue/generations', icon: Activity },
-  { name: 'Generated Content', href: '/generated-content', icon: FileText },
-  { name: 'Meeting Briefs', href: '/briefs', icon: FileText },
-  { name: 'Audit Routes', href: '/audit-routes', icon: ClipboardList },
-  { name: 'QR Assets', href: '/qr', icon: QrCode },
-  { name: 'Search Strings', href: '/search', icon: Search },
-  { name: 'Actionable Intel', href: '/intel', icon: Lightbulb },
-  { name: 'Activities', href: '/activities', icon: Activity },
-  { name: 'Meetings', href: '/meetings', icon: CalendarCheck },
-  { name: 'Mobile Capture', href: '/capture', icon: Smartphone },
-  { name: 'Jake Queue', href: '/queue', icon: ClipboardList },
-];
 
 export function CommandSearch() {
   const [open, setOpen] = useState(false);
@@ -84,15 +58,18 @@ export function CommandSearch() {
           </Command.Empty>
 
           <Command.Group heading="Pages" className="px-2 py-1.5 text-xs font-medium text-[var(--muted-foreground)]">
-            {pages.map((p) => (
+            {commandRoutes.map((p) => (
               <Command.Item
                 key={p.href}
-                value={p.name}
+                value={`${p.label} ${p.keywords.join(' ')} ${p.canonicalOwner}`}
                 onSelect={() => go(p.href)}
                 className="flex cursor-pointer items-center gap-3 rounded-md px-3 py-2 text-sm aria-selected:bg-[var(--accent)]"
               >
                 <p.icon className="h-4 w-4 text-[var(--muted-foreground)]" />
-                {p.name}
+                <span>{p.label}</span>
+                {p.canonicalOwner !== p.label && (
+                  <span className="ml-auto text-xs text-[var(--muted-foreground)]">{p.canonicalOwner}</span>
+                )}
               </Command.Item>
             ))}
           </Command.Group>

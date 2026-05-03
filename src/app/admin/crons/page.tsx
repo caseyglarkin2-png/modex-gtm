@@ -108,6 +108,13 @@ export default async function CronHealthPage() {
         </div>
         <div className="flex items-center gap-2">
           <Link
+            href="/ops?tab=cron-health"
+            className="inline-flex items-center gap-1 rounded-lg border px-3 py-2 text-xs text-muted-foreground hover:bg-muted"
+          >
+            <Activity className="h-3.5 w-3.5" />
+            Ops Cron Health
+          </Link>
+          <Link
             href="/admin/generation-metrics"
             className="inline-flex items-center gap-1 rounded-lg border px-3 py-2 text-xs text-muted-foreground hover:bg-muted"
           >

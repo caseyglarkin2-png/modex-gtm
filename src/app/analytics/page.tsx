@@ -1,645 +1,343 @@
 import Link from 'next/link';
-import { Breadcrumb } from '@/components/breadcrumb';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { StatusBadge } from '@/components/status-badge';
-import { BandBadge } from '@/components/band-badge';
 import {
-  BarChart3, Mail, MousePointerClick, Eye, TrendingUp, Users, Building2,
-  CalendarCheck, Activity, ArrowRight, Sparkles, DollarSign, FileText, Download, Calculator,
+  Activity,
+  BarChart3,
+  CalendarRange,
+  CheckCircle2,
+  Mail,
 } from 'lucide-react';
+import { Breadcrumb } from '@/components/breadcrumb';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { dbGetDashboardStats, dbGetAccounts, dbGetMicrositeAnalytics } from '@/lib/db';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
+import { analyticsWorkspaceTabs, parseAnalyticsTab } from '@/lib/analytics-workspace';
+import { dbGetDashboardStats } from '@/lib/db';
 import { getCampaignSummaries } from '@/lib/campaigns';
-import { AutoRefresh } from '@/components/auto-refresh';
+import { prisma } from '@/lib/prisma';
 
-export const metadata = { title: 'Analytics — Board Report' };
+export const metadata = { title: 'Analytics' };
 export const dynamic = 'force-dynamic';
 
-export default async function AnalyticsPage() {
-  const [stats, accounts, microsite, campaigns] = await Promise.all([
+type SearchParams = {
+  tab?: string;
+};
+
+function tabHref(tabId: string) {
+  return tabId === 'overview' ? '/analytics' : `/analytics?tab=${tabId}`;
+}
+
+function MetricCard({
+  label,
+  value,
+  detail,
+  tone = 'text-foreground',
+}: {
+  label: string;
+  value: string;
+  detail: string;
+  tone?: string;
+}) {
+  return (
+    <Card>
+      <CardContent className="p-4">
+        <p className="text-[11px] uppercase tracking-wide text-muted-foreground">{label}</p>
+        <p className={cn('mt-2 text-2xl font-bold', tone)}>{value}</p>
+        <p className="mt-1 text-xs text-muted-foreground">{detail}</p>
+      </CardContent>
+    </Card>
+  );
+}
+
+export default async function AnalyticsPage({
+  searchParams,
+}: {
+  searchParams?: Promise<SearchParams>;
+}) {
+  const params = (await searchParams) ?? {};
+  const selectedTab = parseAnalyticsTab(params.tab);
+
+  const now = new Date();
+  const year = now.getUTCFullYear();
+  const yearStart = new Date(Date.UTC(year, 0, 1));
+  const yearEnd = new Date(Date.UTC(year + 1, 0, 1));
+
+  const [stats, campaigns, quarterRows, meetingsThisYear] = await Promise.all([
     dbGetDashboardStats(),
-    dbGetAccounts(),
-    dbGetMicrositeAnalytics(),
     getCampaignSummaries(),
+    prisma.emailLog.groupBy({
+      by: ['sent_at'],
+      where: { sent_at: { gte: yearStart, lt: yearEnd } },
+      orderBy: { sent_at: 'asc' },
+    }),
+    prisma.meeting.count({
+      where: { created_at: { gte: yearStart, lt: yearEnd } },
+    }),
   ]);
 
-  // Pipeline funnel from live DB
+  const activeCampaigns = campaigns.filter((campaign) => campaign.status === 'active');
+  const topCampaigns = campaigns.slice(0, 9);
+  const currentQuarterIndex = Math.floor(now.getUTCMonth() / 3);
+  const quarterLabel = `Q${currentQuarterIndex + 1}`;
+  const quarterSendCount = quarterRows.filter((row) => {
+    const month = row.sent_at.getUTCMonth();
+    return Math.floor(month / 3) === currentQuarterIndex;
+  }).length;
+
   const funnel = [
     { label: 'Target Accounts', count: stats.accountCount, pct: 100 },
-    { label: 'Research Complete', count: stats.researched, pct: stats.accountCount ? Math.round((stats.researched / stats.accountCount) * 100) : 0 },
-    { label: 'Contacted', count: stats.contacted, pct: stats.contacted ? Math.round((stats.contacted / Math.max(stats.emailsSent, 1)) * 100) : 0 },
-    { label: 'Meetings Booked', count: stats.meetingsBooked, pct: stats.accountCount ? Math.round((stats.meetingsBooked / stats.accountCount) * 100) : 0 },
+    {
+      label: 'Research Complete',
+      count: stats.researched,
+      pct: stats.accountCount ? Math.round((stats.researched / stats.accountCount) * 100) : 0,
+    },
+    {
+      label: 'Contacted',
+      count: stats.contacted,
+      pct: stats.accountCount ? Math.round((stats.contacted / stats.accountCount) * 100) : 0,
+    },
+    {
+      label: 'Meetings Booked',
+      count: stats.meetingsBooked,
+      pct: stats.accountCount ? Math.round((stats.meetingsBooked / stats.accountCount) * 100) : 0,
+    },
   ];
 
-  // ROI comparison data
-  const twoSalesReps = 180000; // ~$90k base × 2
-
   return (
-    <div className="space-y-8">
-      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Analytics' }]} />
+    <div className="space-y-6">
+      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Analytics' }]} />
 
-      {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Analytics &amp; Board Report</h1>
-          <p className="text-sm text-[var(--muted-foreground)]">
-            Live metrics from the YardFlow by FreightRoll RevOps OS
+          <h1 className="text-2xl font-bold tracking-tight">Analytics</h1>
+          <p className="text-sm text-muted-foreground">
+            Business performance workspace across campaigns, engagement, pipeline, and quarterly review.
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          <Badge variant="outline" className="flex items-center gap-1.5 text-xs">
-            <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
-            <AutoRefresh intervalMs={30_000} />
-          </Badge>
-          <Link href="/pipeline">
-            <Button variant="outline" size="sm" className="text-xs gap-1">Pipeline Board</Button>
+        <div className="flex flex-wrap gap-2">
+          <Link href="/ops?tab=proof-ledger">
+            <Button variant="outline" size="sm">Open Ops Proof Ledger</Button>
           </Link>
           <Link href="/analytics/quarterly">
-            <Button variant="outline" size="sm" className="text-xs gap-1">Quarterly Review</Button>
-          </Link>
-          <Link href="/analytics/emails">
-            <Button variant="outline" size="sm" className="text-xs gap-1">Email Analytics</Button>
-          </Link>
-          <Link href="/api/export?type=pipeline" target="_blank">
-            <Button variant="outline" size="sm" className="text-xs gap-1">Export Pipeline CSV</Button>
-          </Link>
-          <Link href="/api/export?type=activities" target="_blank">
-            <Button variant="outline" size="sm" className="text-xs gap-1">Export Activities CSV</Button>
-          </Link>
-          <Link href="/api/export?type=microsites" target="_blank">
-            <Button variant="outline" size="sm" className="text-xs gap-1">Export Microsite CSV</Button>
+            <Button variant="outline" size="sm">Quarterly Detail</Button>
           </Link>
         </div>
-      </div>
-
-      {/* ── KPI Cards ────────────────────────────────────── */}
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <Card>
-          <CardContent className="p-5">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-[var(--muted-foreground)]">Emails Sent</p>
-                <p className="mt-1 text-3xl font-bold">{stats.emailsSent}</p>
-                <p className="mt-1 text-xs text-[var(--muted-foreground)]">{stats.emailsDelivered} delivered · {stats.emailsBounced} bounced</p>
-              </div>
-              <div className="rounded-lg bg-blue-500/10 p-2.5">
-                <Mail className="h-5 w-5 text-blue-500" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-5">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-[var(--muted-foreground)]">Open Rate</p>
-                <p className="mt-1 text-3xl font-bold">{stats.openRate}%</p>
-                <p className="mt-1 text-xs text-[var(--muted-foreground)]">{stats.emailsOpened} opened of {stats.emailsDelivered} delivered</p>
-              </div>
-              <div className="rounded-lg bg-emerald-500/10 p-2.5">
-                <Eye className="h-5 w-5 text-emerald-500" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-5">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-[var(--muted-foreground)]">Bounce Rate</p>
-                <p className={`mt-1 text-3xl font-bold ${stats.bounceRate > 10 ? 'text-red-500' : stats.bounceRate > 5 ? 'text-amber-500' : ''}`}>{stats.bounceRate}%</p>
-                <p className="mt-1 text-xs text-[var(--muted-foreground)]">{stats.emailsBounced} bounced · {stats.deliveryRate}% delivery</p>
-              </div>
-              <div className={`rounded-lg p-2.5 ${stats.bounceRate > 10 ? 'bg-red-500/10' : 'bg-amber-500/10'}`}>
-                <TrendingUp className={`h-5 w-5 ${stats.bounceRate > 10 ? 'text-red-500' : 'text-amber-500'}`} />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-5">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-[var(--muted-foreground)]">Meetings</p>
-                <p className="mt-1 text-3xl font-bold">{stats.meetingsCount}</p>
-                <p className="mt-1 text-xs text-[var(--muted-foreground)]">{stats.meetingsBooked} accounts booked</p>
-              </div>
-              <div className="rounded-lg bg-amber-500/10 p-2.5">
-                <CalendarCheck className="h-5 w-5 text-amber-500" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
       </div>
 
       <Card>
-        <CardHeader className="pb-3">
-          <CardTitle className="text-base">Campaign Comparison</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-            {campaigns.map((campaign) => (
-              <div key={campaign.id} className="rounded-lg border p-3 text-sm">
-                <div className="flex items-start justify-between gap-2">
-                  <div>
-                    <p className="font-medium">{campaign.name}</p>
-                    <p className="text-xs text-[var(--muted-foreground)]">{campaign.campaign_type.replace(/_/g, ' ')}</p>
-                  </div>
-                  <Badge variant={campaign.status === 'active' ? 'default' : 'outline'}>{campaign.status}</Badge>
-                </div>
-                <div className="mt-3 grid grid-cols-3 gap-2 text-center">
-                  <div className="rounded border p-2">
-                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Emails</p>
-                    <p className="text-lg font-bold">{campaign._count.email_logs}</p>
-                  </div>
-                  <div className="rounded border p-2">
-                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Waves</p>
-                    <p className="text-lg font-bold">{campaign._count.outreach_waves}</p>
-                  </div>
-                  <div className="rounded border p-2">
-                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Activity</p>
-                    <p className="text-lg font-bold">{campaign._count.activities}</p>
-                  </div>
-                </div>
-                <Link href={`/campaigns/${campaign.slug}/analytics`}>
-                  <Button variant="outline" size="sm" className="mt-3 gap-1 text-xs">Open Campaign Analytics</Button>
-                </Link>
-              </div>
+        <CardContent className="p-3">
+          <div className="flex flex-wrap gap-2">
+            {analyticsWorkspaceTabs.map((tab) => (
+              <Link
+                key={tab.id}
+                href={tabHref(tab.id)}
+                className={cn(
+                  'inline-flex items-center rounded-md border px-3 py-1.5 text-sm transition-colors',
+                  selectedTab === tab.id
+                    ? 'border-primary bg-primary/10 text-foreground'
+                    : 'text-muted-foreground hover:bg-muted',
+                )}
+              >
+                {tab.label}
+              </Link>
             ))}
           </div>
         </CardContent>
       </Card>
 
-      {/* ── Pipeline Funnel + ROI ─────────────────────── */}
-      <div className="grid gap-6 lg:grid-cols-2">
+      {selectedTab === 'overview' ? (
+        <div className="space-y-4">
+          <div className="grid gap-3 md:grid-cols-4">
+            <MetricCard
+              label="Active Campaigns"
+              value={String(activeCampaigns.length)}
+              detail={`${campaigns.length} total campaigns`}
+            />
+            <MetricCard
+              label="Emails Sent"
+              value={String(stats.emailsSent)}
+              detail={`${stats.emailsDelivered} delivered · ${stats.emailsBounced} bounced`}
+            />
+            <MetricCard
+              label="Meetings"
+              value={String(stats.meetingsCount)}
+              detail={`${stats.meetingsBooked} accounts booked`}
+            />
+            <MetricCard
+              label="Delivery Rate"
+              value={`${stats.deliveryRate}%`}
+              detail={`Open rate ${stats.openRate}%`}
+              tone={stats.deliveryRate >= 90 ? 'text-emerald-600' : 'text-amber-600'}
+            />
+          </div>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base">Performance Pulse</CardTitle>
+            </CardHeader>
+            <CardContent className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              <PulseItem icon={BarChart3} label="Pipeline Accounts" value={stats.accountCount} />
+              <PulseItem icon={Mail} label="Clicks" value={stats.emailsClicked} />
+              <PulseItem icon={Activity} label="Activities Logged" value={stats.activitiesCount} />
+              <PulseItem icon={CalendarRange} label="Meetings YTD" value={meetingsThisYear} />
+            </CardContent>
+          </Card>
+        </div>
+      ) : null}
+
+      {selectedTab === 'campaigns' ? (
         <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="flex items-center gap-2 text-base">
-              <TrendingUp className="h-4 w-4" /> Pipeline Funnel (Live)
-            </CardTitle>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base">Campaign Comparison</CardTitle>
+          </CardHeader>
+          <CardContent className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+            {topCampaigns.map((campaign) => (
+              <div key={campaign.id} className="rounded-lg border p-3 text-sm">
+                <div className="flex items-center justify-between gap-2">
+                  <p className="font-medium">{campaign.name}</p>
+                  <Badge variant={campaign.status === 'active' ? 'default' : 'outline'}>{campaign.status}</Badge>
+                </div>
+                <div className="mt-3 grid grid-cols-3 gap-2 text-center">
+                  <CountCell label="Emails" value={campaign._count.email_logs} />
+                  <CountCell label="Waves" value={campaign._count.outreach_waves} />
+                  <CountCell label="Activity" value={campaign._count.activities} />
+                </div>
+                <Link href={`/campaigns/${campaign.slug}/analytics`}>
+                  <Button variant="outline" size="sm" className="mt-3 w-full">Open Campaign</Button>
+                </Link>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      ) : null}
+
+      {selectedTab === 'email-engagement' ? (
+        <div className="space-y-4">
+          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
+            <MetricCard label="Sent" value={String(stats.emailsSent)} detail="Total outbound attempts" />
+            <MetricCard label="Delivered" value={String(stats.emailsDelivered)} detail="Delivery confirmation events" />
+            <MetricCard label="Open Rate" value={`${stats.openRate}%`} detail={`${stats.emailsOpened} opened`} />
+            <MetricCard label="Clicks" value={String(stats.emailsClicked)} detail="Known engagement clicks" />
+            <MetricCard
+              label="Bounce Rate"
+              value={`${stats.bounceRate}%`}
+              detail={`${stats.emailsBounced} bounced`}
+              tone={stats.bounceRate > 5 ? 'text-red-600' : 'text-foreground'}
+            />
+          </div>
+          <Card>
+            <CardContent className="flex flex-wrap items-center justify-between gap-3 p-4">
+              <div>
+                <p className="text-sm font-medium">Detailed Email Analytics</p>
+                <p className="text-xs text-muted-foreground">
+                  Drill into recipient-level delivery, open, and response behavior.
+                </p>
+              </div>
+              <Link href="/analytics/emails">
+                <Button size="sm">Open Email Analytics</Button>
+              </Link>
+            </CardContent>
+          </Card>
+        </div>
+      ) : null}
+
+      {selectedTab === 'pipeline' ? (
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base">Pipeline Funnel</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             {funnel.map((stage) => (
               <div key={stage.label}>
                 <div className="flex items-center justify-between text-sm">
                   <span>{stage.label}</span>
-                  <span className="font-semibold">{stage.count} <span className="text-xs font-normal text-[var(--muted-foreground)]">({stage.pct}%)</span></span>
+                  <span className="font-semibold">
+                    {stage.count}
+                    <span className="ml-1 text-xs font-normal text-muted-foreground">({stage.pct}%)</span>
+                  </span>
                 </div>
-                <div className="mt-1 h-3 overflow-hidden rounded-full bg-[var(--muted)]">
-                  <div
-                    className="h-full rounded-full bg-[var(--primary)] transition-all"
-                    style={{ width: `${stage.pct}%` }}
-                  />
+                <div className="mt-1 h-2.5 overflow-hidden rounded-full bg-muted">
+                  <div className="h-full rounded-full bg-primary" style={{ width: `${stage.pct}%` }} />
                 </div>
               </div>
             ))}
-          </CardContent>
-        </Card>
-
-        <Card className="border-emerald-500/30">
-          <CardHeader className="pb-3">
-            <CardTitle className="flex items-center gap-2 text-base">
-              <DollarSign className="h-4 w-4 text-emerald-500" /> ROI: GTM Advisor vs. 2 Sales Reps
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/5 p-4">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-emerald-600">GTM Advisor (Casey)</p>
-                  <p className="mt-2 text-2xl font-bold text-emerald-600">$0</p>
-                  <p className="text-xs text-[var(--muted-foreground)]">Equity + commission only</p>
-                </div>
-                <div className="rounded-lg border border-red-500/30 bg-red-500/5 p-4">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-red-500">2 Sales Reps</p>
-                  <p className="mt-2 text-2xl font-bold text-red-500">${twoSalesReps.toLocaleString()}</p>
-                  <p className="text-xs text-[var(--muted-foreground)]">~$90k base × 2 + benefits</p>
-                </div>
-              </div>
-
-              <div className="rounded-lg border border-[var(--border)] p-4 space-y-2">
-                <p className="text-sm font-medium">What the advisor delivers:</p>
-                <div className="grid grid-cols-2 gap-2 text-sm">
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="h-3.5 w-3.5 text-[var(--primary)]" />
-                    <span>{stats.accountCount} accounts targeted</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Users className="h-3.5 w-3.5 text-[var(--primary)]" />
-                    <span>{stats.personaCount} personas mapped</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Mail className="h-3.5 w-3.5 text-[var(--primary)]" />
-                    <span>{stats.emailsSent} emails sent</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Activity className="h-3.5 w-3.5 text-[var(--primary)]" />
-                    <span>{stats.activitiesCount} activities logged</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <BarChart3 className="h-3.5 w-3.5 text-[var(--primary)]" />
-                    <span>{stats.generatedCount} AI content pieces</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Building2 className="h-3.5 w-3.5 text-[var(--primary)]" />
-                    <span>Full RevOps OS built</span>
-                  </div>
-                </div>
-              </div>
-
-              <p className="text-xs text-[var(--muted-foreground)] italic">
-                The RevOps OS is a force multiplier — it compounds with every account added.
-                Two sales reps ramp 3-6 months. This system is live now.
-              </p>
+            <div className="pt-2">
+              <Link href="/pipeline">
+                <Button variant="outline" size="sm">Open Pipeline Workspace</Button>
+              </Link>
             </div>
           </CardContent>
         </Card>
-      </div>
+      ) : null}
 
-      {/* ── Activity Summary + Coverage ────────────────── */}
-      <div className="grid gap-6 lg:grid-cols-2">
+      {selectedTab === 'quarterly' ? (
         <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="flex items-center gap-2 text-base">
-              <Activity className="h-4 w-4" /> Activity Summary
-            </CardTitle>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base">Quarterly Review</CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { label: 'Activities', value: stats.activitiesCount, icon: Activity },
-                { label: 'Meetings', value: stats.meetingsCount, icon: CalendarCheck },
-                { label: 'Captures', value: stats.capturesCount, icon: Users },
-                { label: 'AI Tasks', value: stats.generatedCount, icon: Sparkles },
-              ].map((item) => (
-                <div key={item.label} className="flex items-center gap-3 rounded-lg border border-[var(--border)] p-3">
-                  <div className="rounded-md bg-[var(--accent)] p-2">
-                    <item.icon className="h-4 w-4 text-[var(--muted-foreground)]" />
-                  </div>
-                  <div>
-                    <p className="text-xl font-bold">{item.value}</p>
-                    <p className="text-xs text-[var(--muted-foreground)]">{item.label}</p>
-                  </div>
-                </div>
-              ))}
+          <CardContent className="space-y-3 text-sm">
+            <div className="grid gap-3 md:grid-cols-3">
+              <QuarterCell icon={CalendarRange} label="Current Quarter" value={`${quarterLabel} ${year}`} />
+              <QuarterCell icon={Mail} label="Sends This Quarter" value={String(quarterSendCount)} />
+              <QuarterCell icon={CheckCircle2} label="Meetings Booked" value={String(stats.meetingsBooked)} />
             </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="flex items-center gap-2 text-base">
-              <Building2 className="h-4 w-4" /> Account Coverage
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              <div className="grid grid-cols-4 gap-3 mb-4">
-                {(['A', 'B', 'C', 'D'] as const).map((band) => (
-                  <div key={band} className="rounded-lg border border-[var(--border)] p-3 text-center">
-                    <BandBadge band={band} />
-                    <p className="mt-2 text-2xl font-bold">{stats.bandCounts[band]}</p>
-                  </div>
-                ))}
-              </div>
-              <p className="text-xs text-[var(--muted-foreground)]">
-                {stats.personaCount} personas across {stats.accountCount} accounts • {stats.p1Count} P1 priority contacts
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="flex items-center gap-2 text-base">
-              <MousePointerClick className="h-4 w-4" /> Microsite Engagement
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            {microsite.totalSessions === 0 ? (
-              <p className="py-8 text-center text-sm text-[var(--muted-foreground)]">
-                No microsite engagement captured yet. Public account pages are instrumented and will populate this dashboard as visits land.
-              </p>
-            ) : (
-              <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
-                  {[
-                    {
-                      label: 'Sessions',
-                      value: microsite.totalSessions,
-                      detail: `${microsite.highIntentSessions} high-intent`,
-                      icon: Eye,
-                    },
-                    {
-                      label: 'Accounts Active',
-                      value: microsite.accountsEngaged,
-                      detail: `${microsite.ctaSessions} CTA sessions`,
-                      icon: Building2,
-                    },
-                    {
-                      label: 'Proposal Reads',
-                      value: microsite.proposalSessions,
-                      detail: 'Sessions that opened the shareable brief',
-                      icon: FileText,
-                    },
-                    {
-                      label: 'ROI Reads',
-                      value: microsite.roiSessions,
-                      detail: 'Sessions that reached the value model',
-                      icon: Calculator,
-                    },
-                    {
-                      label: 'Export Clicks',
-                      value: microsite.exportSessions,
-                      detail: 'Board-ready export downloads requested',
-                      icon: Download,
-                    },
-                    {
-                      label: 'Avg Scroll',
-                      value: `${microsite.avgScrollDepthPct}%`,
-                      detail: `${formatDurationCompact(microsite.avgDurationSeconds)} average read`,
-                      icon: TrendingUp,
-                    },
-                  ].map((item) => (
-                    <div key={item.label} className="rounded-lg border border-[var(--border)] p-3">
-                      <div className="flex items-start justify-between gap-3">
-                        <div>
-                          <p className="text-xs text-[var(--muted-foreground)]">{item.label}</p>
-                          <p className="mt-1 text-2xl font-bold">{item.value}</p>
-                          <p className="mt-1 text-xs text-[var(--muted-foreground)]">{item.detail}</p>
-                        </div>
-                        <div className="rounded-md bg-[var(--accent)] p-2">
-                          <item.icon className="h-4 w-4 text-[var(--muted-foreground)]" />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="rounded-lg border border-[var(--border)] p-4">
-                  <p className="text-sm font-medium">Operator takeaway</p>
-                  <p className="mt-2 text-sm text-[var(--muted-foreground)] leading-relaxed">
-                    Proposal reads show who is carrying the brief internally. ROI reads show who made it to the value case. Export clicks are the highest-intent signal in the stack and should trigger same-day follow-up.
-                  </p>
-                </div>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="flex items-center gap-2 text-base">
-              <TrendingUp className="h-4 w-4" /> Hot Microsite Accounts
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            {microsite.hotAccounts.length === 0 ? (
-              <p className="py-8 text-center text-sm text-[var(--muted-foreground)]">
-                No hot accounts yet. This list will rank accounts by CTA activity, deep reads, scroll depth, and recency.
-              </p>
-            ) : (
-              <div className="space-y-3">
-                {microsite.hotAccounts.map((account) => (
-                  <div key={account.accountName} className="rounded-lg border border-[var(--border)] p-4">
-                    <div className="flex flex-wrap items-start justify-between gap-3">
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <Link href={`/accounts/${slugifyAccountName(account.accountName)}`} className="text-sm font-semibold text-[var(--primary)] hover:underline">
-                            {account.accountName}
-                          </Link>
-                          <MicrositeHeatBadge score={account.engagementScore} />
-                        </div>
-                        <p className="mt-1 text-xs text-[var(--muted-foreground)]">
-                          {account.primarySignal} · {account.sessionCount} sessions · {account.avgScrollDepthPct}% average scroll
-                        </p>
-                      </div>
-                      <Link href={account.lastPath} className="inline-flex items-center gap-1 text-xs text-[var(--primary)] hover:underline">
-                        Open microsite <ArrowRight className="h-3.5 w-3.5" />
-                      </Link>
-                    </div>
-
-                    <p className="mt-3 text-sm text-[var(--muted-foreground)] leading-relaxed">
-                      {account.recommendedAction}
-                    </p>
-
-                    <div className="mt-3 flex flex-wrap gap-2 text-xs text-[var(--muted-foreground)]">
-                      <span>{account.proposalSessions} proposal reads</span>
-                      <span>{account.roiSessions} ROI reads</span>
-                      <span>{account.exportSessions} exports</span>
-                      <span>Last seen {formatTimestamp(account.lastViewedAt)}</span>
-                      {account.lastPersonName && <span>Latest viewer: {account.lastPersonName}</span>}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      </div>
-
-      <Card>
-        <CardHeader className="pb-3">
-          <div className="flex items-center justify-between">
-            <CardTitle className="flex items-center gap-2 text-base">
-              <Eye className="h-4 w-4" /> Recent Microsite Sessions
-            </CardTitle>
-            <Badge variant="outline" className="text-xs">{microsite.totalSessions} tracked</Badge>
-          </div>
-        </CardHeader>
-        <CardContent>
-          {microsite.recentSessions.length === 0 ? (
-            <p className="py-8 text-center text-sm text-[var(--muted-foreground)]">
-              No tracked microsite sessions yet.
+            <p className="text-muted-foreground">
+              Legacy route compatibility is preserved at <code>/analytics/quarterly</code>, and campaign-level quarterly rollups remain available from campaign analytics.
             </p>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-[var(--border)] text-xs text-[var(--muted-foreground)]">
-                    <th className="pb-2 text-left font-medium">Account</th>
-                    <th className="pb-2 text-left font-medium hidden md:table-cell">Viewer</th>
-                    <th className="pb-2 text-center font-medium">Intent</th>
-                    <th className="pb-2 text-center font-medium">Depth</th>
-                    <th className="pb-2 text-center font-medium hidden sm:table-cell">Signals</th>
-                    <th className="pb-2 text-right font-medium">Seen</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {microsite.recentSessions.map((session) => (
-                    <tr key={`${session.accountName}-${session.path}-${session.viewedAt.toISOString()}`} className="border-b border-[var(--border)] last:border-0">
-                      <td className="py-2">
-                        <div className="flex flex-col">
-                          <Link href={session.path} className="text-xs font-medium text-[var(--primary)] hover:underline">
-                            {session.accountName}
-                          </Link>
-                          <span className="text-[10px] text-[var(--muted-foreground)]">{session.path}</span>
-                        </div>
-                      </td>
-                      <td className="py-2 text-xs hidden md:table-cell text-[var(--muted-foreground)]">
-                        {session.personName ?? 'Overview'}
-                      </td>
-                      <td className="py-2 text-center">
-                        <MicrositeIntentBadge highIntent={session.isHighIntent} score={session.intentScore} />
-                      </td>
-                      <td className="py-2 text-center text-xs">
-                        {session.scrollDepthPct}% · {formatDurationCompact(session.durationSeconds)}
-                      </td>
-                      <td className="py-2 text-center text-xs hidden sm:table-cell text-[var(--muted-foreground)]">
-                        <div className="flex flex-wrap justify-center gap-1.5">
-                          <span>{session.sectionsViewedCount} sections</span>
-                          <span>{session.ctaCount} CTAs</span>
-                          <span>{Math.max(session.variantCount - 1, 0)} switches</span>
-                          {session.proposalViewed && <span>Proposal</span>}
-                          {session.roiViewed && <span>ROI</span>}
-                          {session.exportClicked && <span>Export</span>}
-                        </div>
-                      </td>
-                      <td className="py-2 text-right text-xs text-[var(--muted-foreground)]">
-                        {formatTimestamp(session.viewedAt)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </CardContent>
-      </Card>
-
-      {/* ── Recent Email Activity (Send Log) ─────────────── */}
-      <Card>
-        <CardHeader className="pb-3">
-          <div className="flex items-center justify-between">
-            <CardTitle className="flex items-center gap-2 text-base">
-              <Mail className="h-4 w-4" /> Email Send Log
-            </CardTitle>
-            <Badge variant="outline" className="text-xs">{stats.emailsSent} total</Badge>
-          </div>
-        </CardHeader>
-        <CardContent>
-          {stats.recentEmails.length === 0 ? (
-            <p className="py-8 text-center text-sm text-[var(--muted-foreground)]">
-              No emails sent yet. Send your first outreach from Campaign HQ.
-            </p>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-[var(--border)] text-xs text-[var(--muted-foreground)]">
-                    <th className="pb-2 text-left font-medium">Account</th>
-                    <th className="pb-2 text-left font-medium hidden sm:table-cell">To</th>
-                    <th className="pb-2 text-left font-medium">Subject</th>
-                    <th className="pb-2 text-center font-medium">Status</th>
-                    <th className="pb-2 text-right font-medium">Sent</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {stats.recentEmails.map((email) => (
-                    <tr key={email.id} className="border-b border-[var(--border)] last:border-0">
-                      <td className="py-2 text-xs font-medium">{email.account_name || '—'}</td>
-                      <td className="py-2 text-xs hidden sm:table-cell text-[var(--muted-foreground)]">{email.to_email}</td>
-                      <td className="py-2 text-xs max-w-48 truncate">{email.subject}</td>
-                      <td className="py-2 text-center">
-                        <EmailStatusBadge status={email.status} opened={!!email.opened_at} clicked={!!email.clicked_at} />
-                      </td>
-                      <td className="py-2 text-right text-xs text-[var(--muted-foreground)]">
-                        {(email.sent_at ?? email.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </CardContent>
-      </Card>
-
-      {/* ── Account Pipeline Table ────────────────────── */}
-      <Card>
-        <CardHeader className="pb-3">
-          <CardTitle className="flex items-center gap-2 text-base">
-            <Building2 className="h-4 w-4" /> Account Pipeline Status
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-[var(--border)] text-xs text-[var(--muted-foreground)]">
-                  <th className="pb-2 text-left font-medium">#</th>
-                  <th className="pb-2 text-left font-medium">Account</th>
-                  <th className="pb-2 text-center font-medium">Band</th>
-                  <th className="pb-2 text-left font-medium">Research</th>
-                  <th className="pb-2 text-left font-medium">Outreach</th>
-                  <th className="pb-2 text-left font-medium">Meeting</th>
-                </tr>
-              </thead>
-              <tbody>
-                {accounts.map((a) => (
-                  <tr key={a.id} className="border-b border-[var(--border)] last:border-0">
-                    <td className="py-2 text-xs text-[var(--muted-foreground)]">{a.rank}</td>
-                    <td className="py-2">
-                      <Link href={`/accounts/${a.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} className="font-medium text-xs text-[var(--primary)] hover:underline">
-                        {a.name}
-                      </Link>
-                    </td>
-                    <td className="py-2 text-center"><BandBadge band={a.priority_band} /></td>
-                    <td className="py-2"><StatusBadge status={a.research_status} /></td>
-                    <td className="py-2"><StatusBadge status={a.outreach_status} /></td>
-                    <td className="py-2"><StatusBadge status={a.meeting_status} /></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </CardContent>
-      </Card>
+            <Link href="/analytics/quarterly">
+              <Button size="sm">Open Quarterly Detail</Button>
+            </Link>
+          </CardContent>
+        </Card>
+      ) : null}
     </div>
   );
 }
 
-function formatDurationCompact(seconds: number) {
-  if (seconds < 60) return `${seconds}s`;
-  if (seconds < 3600) return `${Math.round(seconds / 60)}m`;
-  return `${(seconds / 3600).toFixed(1)}h`;
+function CountCell({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="rounded border p-2">
+      <p className="text-[10px] uppercase text-muted-foreground">{label}</p>
+      <p className="mt-1 text-lg font-bold">{value}</p>
+    </div>
+  );
 }
 
-function formatTimestamp(value: Date) {
-  return value.toLocaleString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit',
-  });
+function PulseItem({
+  icon: Icon,
+  label,
+  value,
+}: {
+  icon: typeof BarChart3;
+  label: string;
+  value: number;
+}) {
+  return (
+    <div className="rounded-lg border p-3 text-sm">
+      <div className="flex items-center gap-2 text-muted-foreground">
+        <Icon className="h-3.5 w-3.5" />
+        <span>{label}</span>
+      </div>
+      <p className="mt-2 text-xl font-semibold">{value}</p>
+    </div>
+  );
 }
 
-function slugifyAccountName(name: string) {
-  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-}
-
-function MicrositeHeatBadge({ score }: { score: number }) {
-  if (score >= 70) return <Badge className="bg-red-500 text-white text-xs">Hot {score}</Badge>;
-  if (score >= 45) return <Badge className="bg-amber-500 text-white text-xs">Warm {score}</Badge>;
-  return <Badge className="bg-blue-500 text-white text-xs">Watch {score}</Badge>;
-}
-
-function MicrositeIntentBadge({ highIntent, score }: { highIntent: boolean; score: number }) {
-  if (highIntent) return <Badge className="bg-emerald-500 text-white text-xs">High {score}</Badge>;
-  return <Badge variant="outline" className="text-xs">Light {score}</Badge>;
-}
-
-function EmailStatusBadge({ status, opened, clicked }: { status: string; opened: boolean; clicked: boolean }) {
-  if (clicked) return <Badge className="bg-violet-500 text-white text-xs">Clicked</Badge>;
-  if (opened) return <Badge className="bg-emerald-500 text-white text-xs">Opened</Badge>;
-  if (status === 'delivered') return <Badge className="bg-blue-500 text-white text-xs">Delivered</Badge>;
-  if (status === 'bounced') return <Badge variant="destructive" className="text-xs">Bounced</Badge>;
-  if (status === 'failed') return <Badge variant="destructive" className="text-xs">Failed</Badge>;
-  return <Badge variant="secondary" className="text-xs">Sent</Badge>;
+function QuarterCell({
+  icon: Icon,
+  label,
+  value,
+}: {
+  icon: typeof Mail;
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="rounded-lg border p-3">
+      <div className="flex items-center gap-2 text-xs uppercase text-muted-foreground">
+        <Icon className="h-3.5 w-3.5" />
+        <span>{label}</span>
+      </div>
+      <p className="mt-2 text-xl font-semibold">{value}</p>
+    </div>
+  );
 }

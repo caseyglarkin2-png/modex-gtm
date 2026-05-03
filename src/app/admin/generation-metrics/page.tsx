@@ -79,6 +79,10 @@ export default async function GenerationMetricsPage() {
           <p className="text-sm text-muted-foreground">Operational visibility for queued generation performance and failures.</p>
         </div>
         <div className="flex items-center gap-2">
+          <Link href="/ops?tab=generation-metrics" className="inline-flex items-center gap-1 rounded-lg border px-3 py-2 text-xs text-muted-foreground hover:bg-muted">
+            <Activity className="h-3.5 w-3.5" />
+            Ops Generation Metrics
+          </Link>
           <Link href="/admin/crons" className="inline-flex items-center gap-1 rounded-lg border px-3 py-2 text-xs text-muted-foreground hover:bg-muted">
             <Activity className="h-3.5 w-3.5" />
             Cron Health

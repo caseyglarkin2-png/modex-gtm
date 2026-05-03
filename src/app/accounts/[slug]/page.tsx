@@ -7,8 +7,15 @@ import {
   getMeetingBriefByAccount,
   slugify,
   getAuditRoutes,
+  getQrAssets,
 } from '@/lib/data';
 import { dbGetAccountByName, dbGetAccounts, dbGetActivitiesByAccount, dbGetMicrositeAccountAnalytics, dbGetPersonasByAccount } from '@/lib/db';
+import {
+  accountCommandTabs,
+  buildAccountNextBestAction,
+  buildAccountTimeline,
+  type AccountCommandTabId,
+} from '@/lib/account-command-center';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
@@ -18,7 +25,7 @@ import { BandBadge } from '@/components/band-badge';
 import { StatusBadge } from '@/components/status-badge';
 import { CopyButton } from '@/components/copy-button';
 import { EmptyState } from '@/components/empty-state';
-import { ExternalLink, Users, Waves, FileText, Route, Activity, Calendar } from 'lucide-react';
+import { ExternalLink, Users, FileText, Activity, Calendar, Inbox, ListTodo, GitBranch, BriefcaseBusiness } from 'lucide-react';
 import { LogActivityDialog } from '@/components/log-activity-dialog';
 import { BookMeetingDialog } from '@/components/book-meeting-dialog';
 import { GeneratorDialog } from '@/components/ai/generator-dialog';
@@ -48,7 +55,8 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
   const brief = getMeetingBriefByAccount(account.name);
   const auditRoutes = getAuditRoutes();
   const auditRoute = auditRoutes.find((r) => r.account === account.name);
-  const [microsite, rawActivities, activeCampaigns] = await Promise.all([
+  const qrAsset = getQrAssets().find((asset) => asset.account === account.name);
+  const [microsite, rawActivities, activeCampaigns, generatedAssets, emailLogs, meetings, captures] = await Promise.all([
     dbGetMicrositeAccountAnalytics(account.name),
     dbGetActivitiesByAccount(account.name),
     prisma.campaign.findMany({
@@ -56,6 +64,39 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
       orderBy: [{ start_date: 'desc' }, { created_at: 'desc' }],
       take: 6,
       select: { slug: true, name: true, messaging_angle: true, campaign_type: true },
+    }),
+    prisma.generatedContent.findMany({
+      where: { account_name: account.name },
+      orderBy: { created_at: 'desc' },
+      take: 8,
+      select: {
+        id: true,
+        content_type: true,
+        persona_name: true,
+        provider_used: true,
+        is_published: true,
+        external_send_count: true,
+        version: true,
+        created_at: true,
+      },
+    }),
+    prisma.emailLog.findMany({
+      where: { account_name: account.name },
+      orderBy: { sent_at: 'desc' },
+      take: 12,
+      select: { id: true, subject: true, status: true, to_email: true, reply_count: true, sent_at: true },
+    }),
+    prisma.meeting.findMany({
+      where: { account_name: account.name },
+      orderBy: [{ meeting_date: 'desc' }, { created_at: 'desc' }],
+      take: 8,
+      select: { id: true, meeting_status: true, persona: true, meeting_date: true, meeting_time: true, location: true, objective: true, post_next_step: true, notes: true, created_at: true },
+    }),
+    prisma.mobileCapture.findMany({
+      where: { account_name: account.name },
+      orderBy: { captured_at: 'desc' },
+      take: 8,
+      select: { id: true, title: true, intent: true, next_step: true, captured_at: true, owner: true, heat_score: true },
     }),
   ]);
   const activities = rawActivities.map((activity) => ({
@@ -65,6 +106,20 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
   }));
   const micrositeOverviewPath = `/for/${slug}`;
   const micrositeInfo = ensureMicrositeForAccount(account.name);
+  const openTaskCount = Number(Boolean(account.next_action)) + activities.filter((activity) => Boolean(activity.next_step)).length + captures.filter((capture) => Boolean(capture.next_step)).length;
+  const assetCount = Number(Boolean(brief)) + Number(Boolean(auditRoute)) + Number(Boolean(qrAsset)) + generatedAssets.length + 1;
+  const nextBestAction = buildAccountNextBestAction(account, {
+    contactCount: personas.length,
+    assetCount,
+    openTaskCount,
+  });
+  const timeline = buildAccountTimeline({
+    activities: rawActivities,
+    emails: emailLogs,
+    meetings,
+    micrositeSessions: microsite.recentSessions,
+    captures,
+  });
 
   const scoreDims = [
     { label: 'ICP Fit', value: account.icp_fit, weight: 30 },
@@ -79,7 +134,7 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
 
   return (
     <div className="space-y-6">
-      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Accounts', href: '/accounts' }, { label: account.name }]} />
+      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Accounts', href: '/accounts' }, { label: account.name }]} />
 
       {/* Hero Card */}
       <Card>
@@ -93,6 +148,7 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
               <p className="mt-1 text-sm text-[var(--muted-foreground)]">
                 {account.parent_brand} &middot; {account.vertical} &middot; {account.signal_type}
               </p>
+              <p className="mt-2 text-sm font-medium text-[var(--foreground)]">Account Command Center</p>
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <Badge variant="outline" className="font-mono">{account.tier}</Badge>
@@ -207,16 +263,54 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
       {/* Tabs */}
       <Tabs defaultValue="overview" className="space-y-4">
         <TabsList className="w-full justify-start overflow-x-auto">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="personas" className="gap-1"><Users className="h-3.5 w-3.5" /> Personas ({personas.length})</TabsTrigger>
-          <TabsTrigger value="waves" className="gap-1"><Waves className="h-3.5 w-3.5" /> Waves</TabsTrigger>
-          <TabsTrigger value="brief" className="gap-1"><FileText className="h-3.5 w-3.5" /> Brief</TabsTrigger>
-          <TabsTrigger value="routes" className="gap-1"><Route className="h-3.5 w-3.5" /> Routes</TabsTrigger>
-          <TabsTrigger value="activity" className="gap-1"><Activity className="h-3.5 w-3.5" /> Activity</TabsTrigger>
+          {accountCommandTabs.map((tab) => {
+            const Icon = accountTabIcon(tab.id);
+            const count = tab.id === 'contacts'
+              ? personas.length
+              : tab.id === 'assets'
+                ? assetCount
+                : tab.id === 'engagement'
+                  ? timeline.length
+                  : tab.id === 'tasks'
+                    ? openTaskCount
+                    : tab.id === 'meetings'
+                      ? meetings.length
+                      : tab.id === 'pipeline'
+                        ? waves.length
+                        : null;
+
+            return (
+              <TabsTrigger key={tab.id} value={tab.id} className="gap-1">
+                <Icon className="h-3.5 w-3.5" />
+                {tab.label}{count !== null ? ` (${count})` : ''}
+              </TabsTrigger>
+            );
+          })}
         </TabsList>
 
         {/* Overview Tab */}
         <TabsContent value="overview" className="space-y-4">
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm">Next Best Action</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <Badge variant={nextBestAction.tone === 'ready' ? 'success' : nextBestAction.tone === 'blocked' ? 'destructive' : 'warning'}>
+                      {nextBestAction.tone}
+                    </Badge>
+                    <p className="font-medium">{nextBestAction.label}</p>
+                  </div>
+                  <p className="mt-1 text-sm text-[var(--muted-foreground)]">{nextBestAction.detail}</p>
+                </div>
+                <Link href={nextBestAction.route}>
+                  <Button size="sm" variant="outline">Open work</Button>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
           <div className="grid gap-4 md:grid-cols-2">
             <Card>
               <CardHeader className="pb-2"><CardTitle className="text-sm">Why Now</CardTitle></CardHeader>
@@ -366,13 +460,13 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
           )}
         </TabsContent>
 
-        {/* Personas Tab */}
-        <TabsContent value="personas" className="space-y-3">
+        {/* Contacts Tab */}
+        <TabsContent value="contacts" className="space-y-3">
           <div className="flex justify-end">
             <AddPersonaDialog accountName={account.name} />
           </div>
           {personas.length === 0 ? (
-            <EmptyState title="No personas mapped" description="Personas will appear here once added." />
+            <EmptyState title="No contacts mapped" description="Contacts will appear here once added." />
           ) : (
             personas.map((p) => (
               <Card key={p.persona_id}>
@@ -414,155 +508,240 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
           )}
         </TabsContent>
 
-        {/* Waves Tab */}
-        <TabsContent value="waves" className="space-y-3">
-          {waves.length === 0 ? (
-            <EmptyState title="No wave assignments" description="This account hasn't been assigned to an outreach wave yet." />
-          ) : (
-            waves.map((w, i) => (
-              <Card key={i}>
-                <CardContent className="p-4 space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium text-sm">{w.wave}</span>
-                    <StatusBadge status={w.status} />
+        {/* Assets Tab */}
+        <TabsContent value="assets" className="space-y-4">
+          <div className="flex flex-wrap gap-2">
+            <GeneratorDialog accountName={account.name} defaultType="meeting_prep" />
+            <GeneratorDialog accountName={account.name} defaultType="call_script" />
+            <Button variant="outline" size="sm" asChild>
+              <Link href={`/generated-content?account=${encodeURIComponent(account.name)}`}>
+                Open Content Studio
+              </Link>
+            </Button>
+          </div>
+
+          <div className="grid gap-4 xl:grid-cols-2">
+            <Card>
+              <CardHeader className="pb-2"><CardTitle className="text-sm">Meeting Brief</CardTitle></CardHeader>
+              <CardContent className="space-y-3">
+                {!brief ? (
+                  <EmptyState title="No brief available" description="Meeting brief not yet created for this account." />
+                ) : (
+                  <>
+                    {[
+                      { label: 'Why This Account', value: brief.why_this_account },
+                      { label: 'Likely Pain Points', value: brief.likely_pain_points },
+                      { label: 'Prep Assets Needed', value: brief.prep_assets_needed },
+                    ].map((section) => (
+                      <div key={section.label}>
+                        <p className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">{section.label}</p>
+                        <p className="mt-1 text-sm leading-relaxed">{section.value}</p>
+                      </div>
+                    ))}
+                    <Link href={`/briefs/${slug}`} className="inline-flex items-center gap-1 text-sm font-medium text-[var(--primary)] hover:underline">
+                      Open legacy brief <ExternalLink className="h-3.5 w-3.5" />
+                    </Link>
+                  </>
+                )}
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-2"><CardTitle className="text-sm">Audit Route</CardTitle></CardHeader>
+              <CardContent className="space-y-3">
+                {!auditRoute ? (
+                  <EmptyState title="No audit route" description="No audit route has been created for this account." />
+                ) : (
+                  <>
+                    <div className="flex items-center gap-2">
+                      <a href={auditRoute.audit_url} target="_blank" rel="noopener noreferrer" className="flex-1 break-all text-sm text-[var(--primary)] hover:underline">
+                        {auditRoute.audit_url}
+                      </a>
+                      <CopyButton text={auditRoute.audit_url} />
+                    </div>
+                    <div>
+                      <p className="text-xs font-medium text-[var(--muted-foreground)]">Fast Ask</p>
+                      <p className="mt-0.5 text-sm">{auditRoute.fast_ask}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs font-medium text-[var(--muted-foreground)]">Proof Asset</p>
+                      <p className="mt-0.5 text-sm">{auditRoute.proof_asset}</p>
+                    </div>
+                  </>
+                )}
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-2"><CardTitle className="text-sm">QR Asset</CardTitle></CardHeader>
+              <CardContent className="space-y-3">
+                {!qrAsset ? (
+                  <EmptyState title="No QR asset" description="No QR asset is mapped for this account yet." />
+                ) : (
+                  <>
+                    <div className="flex items-center gap-2">
+                      <a href={qrAsset.audit_url} target="_blank" rel="noopener noreferrer" className="flex-1 break-all text-sm text-[var(--primary)] hover:underline">
+                        {qrAsset.audit_url}
+                      </a>
+                      <CopyButton text={qrAsset.audit_url} />
+                    </div>
+                    <p className="text-sm">{qrAsset.suggested_use}</p>
+                    {qrAsset.proof_asset && <p className="text-xs text-[var(--muted-foreground)]">Proof: {qrAsset.proof_asset}</p>}
+                  </>
+                )}
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-2"><CardTitle className="text-sm">Generated Content</CardTitle></CardHeader>
+              <CardContent>
+                {generatedAssets.length === 0 ? (
+                  <EmptyState title="No generated assets" description="Generated one-pagers, emails, and call scripts will appear here." />
+                ) : (
+                  <div className="space-y-2">
+                    {generatedAssets.map((asset) => (
+                      <div key={asset.id} className="flex items-start justify-between gap-3 rounded-lg border border-[var(--border)] p-3">
+                        <div>
+                          <p className="text-sm font-medium">{asset.content_type} v{asset.version}</p>
+                          <p className="text-xs text-[var(--muted-foreground)]">
+                            {asset.persona_name ?? 'Account level'} · {formatActivityDate(asset.created_at)}
+                          </p>
+                        </div>
+                        <Badge variant={asset.is_published ? 'success' : 'outline'}>
+                          {asset.is_published ? 'published' : 'draft'}
+                        </Badge>
+                      </div>
+                    ))}
                   </div>
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-[var(--muted-foreground)]">
-                    <span>Channel: {w.channel_mix}</span>
-                    <span>Owner: {w.owner}</span>
-                    <span>Start: {w.start_date}</span>
-                    <span>Follow-up 1: {w.follow_up_1}</span>
-                  </div>
-                  <p className="text-sm">{w.primary_objective}</p>
-                </CardContent>
-              </Card>
-            ))
-          )}
+                )}
+              </CardContent>
+            </Card>
+          </div>
         </TabsContent>
 
-        {/* Brief Tab */}
-        <TabsContent value="brief">
-          {!brief ? (
-            <EmptyState title="No brief available" description="Meeting brief not yet created for this account." />
+        {/* Engagement Tab */}
+        <TabsContent value="engagement" className="space-y-4">
+          {timeline.length === 0 ? (
+            <EmptyState title="No engagement yet" description="Emails, sessions, captures, meetings, and activities will appear here." />
           ) : (
-            <div className="space-y-3">
-              <div className="flex flex-wrap gap-2">
-                <GeneratorDialog accountName={account.name} defaultType="meeting_prep" />
-                <GeneratorDialog accountName={account.name} defaultType="call_script" />
-                <Button variant="outline" size="sm" asChild>
-                  <Link href={`/generated-content?account=${encodeURIComponent(account.name)}`}>
-                    Open One-Pager Workspace
-                  </Link>
-                </Button>
-              </div>
-              {[
-                { label: 'Why This Account', value: brief.why_this_account },
-                { label: 'Why Now', value: brief.why_now },
-                { label: 'Likely Pain Points', value: brief.likely_pain_points },
-                { label: 'Primo Relevance', value: brief.primo_relevance },
-                { label: 'Best First Meeting Outcome', value: brief.best_first_meeting_outcome },
-                { label: 'Suggested Attendees', value: brief.suggested_attendees },
-                { label: 'Prep Assets Needed', value: brief.prep_assets_needed },
-                { label: 'Open Questions', value: brief.open_questions },
-              ].map((s) => (
-                <Card key={s.label}>
-                  <CardContent className="p-4">
-                    <p className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">{s.label}</p>
-                    <p className="mt-1.5 text-sm leading-relaxed">{s.value}</p>
-                  </CardContent>
-                </Card>
+            <div className="relative ml-3 space-y-0 border-l-2 border-[var(--border)]">
+              {timeline.map((item) => (
+                <div key={item.id} className="relative pb-5 pl-6">
+                  <div className="absolute -left-[5px] top-1 h-2.5 w-2.5 rounded-full bg-[var(--primary)]" />
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <Badge variant="secondary" className="text-xs">{item.kind}</Badge>
+                    <span className="text-xs text-[var(--muted-foreground)]">{formatActivityDate(item.occurredAt)}</span>
+                  </div>
+                  <p className="mt-1.5 text-sm font-medium">{item.title}</p>
+                  <p className="mt-0.5 text-xs text-[var(--muted-foreground)]">{item.detail}</p>
+                  {item.href && (
+                    <Link href={item.href} className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-[var(--primary)] hover:underline">
+                      Open signal <ExternalLink className="h-3 w-3" />
+                    </Link>
+                  )}
+                </div>
               ))}
-              {(brief.source_url_1 || brief.source_url_2) && (
-                <Card>
-                  <CardContent className="p-4">
-                    <p className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Sources</p>
-                    <div className="mt-1.5 space-y-1">
-                      {brief.source_url_1 && (
-                        <a href={brief.source_url_1} target="_blank" rel="noopener noreferrer" className="block text-sm text-[var(--primary)] hover:underline break-all">
-                          {brief.source_url_1}
-                        </a>
-                      )}
-                      {brief.source_url_2 && (
-                        <a href={brief.source_url_2} target="_blank" rel="noopener noreferrer" className="block text-sm text-[var(--primary)] hover:underline break-all">
-                          {brief.source_url_2}
-                        </a>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
             </div>
           )}
         </TabsContent>
 
-        {/* Routes Tab */}
-        <TabsContent value="routes">
-          {!auditRoute ? (
-            <EmptyState title="No audit route" description="No audit route has been created for this account." />
-          ) : (
-            <Card>
-              <CardContent className="p-4 space-y-3">
-                <div className="flex items-center gap-2">
-                  <a href={auditRoute.audit_url} target="_blank" rel="noopener noreferrer" className="text-sm text-[var(--primary)] hover:underline break-all flex-1">
-                    {auditRoute.audit_url}
-                  </a>
-                  <CopyButton text={auditRoute.audit_url} />
+        {/* Tasks Tab */}
+        <TabsContent value="tasks" className="space-y-4">
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-[var(--muted-foreground)]">{openTaskCount} account task{openTaskCount === 1 ? '' : 's'}</p>
+            <LogActivityDialog accountName={account.name} personas={personas.map((p) => ({ name: p.name }))} />
+          </div>
+          <Card>
+            <CardContent className="p-4">
+              <p className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Recommended</p>
+              <p className="mt-1 text-sm font-medium">{nextBestAction.label}</p>
+              <p className="mt-1 text-xs text-[var(--muted-foreground)]">{nextBestAction.detail}</p>
+            </CardContent>
+          </Card>
+          {activities.filter((activity) => activity.next_step).map((activity) => (
+            <Card key={activity.id}>
+              <CardContent className="p-4">
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-medium">{activity.next_step}</p>
+                    <p className="mt-1 text-xs text-[var(--muted-foreground)]">{activity.activity_type} · {activity.owner ?? 'Unassigned'}</p>
+                  </div>
+                  {activity.nextStepDueLabel && <Badge variant="warning">{activity.nextStepDueLabel}</Badge>}
                 </div>
-                <Separator />
-                <div className="space-y-2">
-                  <div>
-                    <p className="text-xs font-medium text-[var(--muted-foreground)]">Suggested Message</p>
-                    <div className="flex items-start gap-2">
-                      <p className="mt-0.5 text-sm flex-1">{auditRoute.suggested_message}</p>
-                      <CopyButton text={auditRoute.suggested_message} />
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-xs font-medium text-[var(--muted-foreground)]">Fast Ask</p>
-                    <p className="mt-0.5 text-sm">{auditRoute.fast_ask}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-medium text-[var(--muted-foreground)]">Proof Asset</p>
-                    <p className="mt-0.5 text-sm">{auditRoute.proof_asset}</p>
-                  </div>
-                  {auditRoute.warm_route && (
-                    <div>
-                      <p className="text-xs font-medium text-[var(--muted-foreground)]">Warm Route</p>
-                      <p className="mt-0.5 text-sm">{auditRoute.warm_route}</p>
-                    </div>
-                  )}
-                </div>
-                <Separator />
-                <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW" target="_blank" rel="noopener noreferrer">
-                  <Button size="sm" className="gap-1">
-                    <Calendar className="h-3.5 w-3.5" /> Schedule Meeting
-                  </Button>
-                </a>
               </CardContent>
             </Card>
+          ))}
+        </TabsContent>
+
+        {/* Meetings Tab */}
+        <TabsContent value="meetings" className="space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <p className="text-sm text-[var(--muted-foreground)]">{meetings.length} meeting record{meetings.length === 1 ? '' : 's'}</p>
+            <BookMeetingDialog accountName={account.name} personas={personas.map((p) => ({ name: p.name, priority: p.priority }))} calendlyLink={process.env.NEXT_PUBLIC_CALENDLY_LINK} />
+          </div>
+          {meetings.length === 0 ? (
+            <EmptyState title="No meetings booked" description="Book a meeting or log activity when this account moves." />
+          ) : (
+            <div className="space-y-3">
+              {meetings.map((meeting) => (
+                <Card key={meeting.id}>
+                  <CardContent className="p-4">
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <StatusBadge status={meeting.meeting_status} />
+                          <p className="text-sm font-medium">{meeting.persona ?? 'Account meeting'}</p>
+                        </div>
+                        {meeting.objective && <p className="mt-1 text-sm text-[var(--muted-foreground)]">{meeting.objective}</p>}
+                        {meeting.post_next_step && <p className="mt-1 text-xs text-[var(--muted-foreground)]">Next: {meeting.post_next_step}</p>}
+                      </div>
+                      <span className="text-xs text-[var(--muted-foreground)]">
+                        {meeting.meeting_date ? formatActivityDate(meeting.meeting_date) : 'No date'}
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           )}
         </TabsContent>
 
-        {/* Activity Tab */}
-        <TabsContent value="activity" className="space-y-4">
-          <div className="flex items-center justify-between">
-            <p className="text-sm text-[var(--muted-foreground)]">{activities.length} logged activities</p>
-            <LogActivityDialog accountName={account.name} personas={personas.map((p) => ({ name: p.name }))} />
+        {/* Pipeline Tab */}
+        <TabsContent value="pipeline" className="space-y-4">
+          <div className="grid gap-4 md:grid-cols-3">
+            <Card>
+              <CardHeader className="pb-2"><CardTitle className="text-xs text-[var(--muted-foreground)]">Pipeline Stage</CardTitle></CardHeader>
+              <CardContent><p className="text-sm font-medium">{account.pipeline_stage}</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="pb-2"><CardTitle className="text-xs text-[var(--muted-foreground)]">Outreach Status</CardTitle></CardHeader>
+              <CardContent><StatusBadge status={account.outreach_status} /></CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="pb-2"><CardTitle className="text-xs text-[var(--muted-foreground)]">Meeting Status</CardTitle></CardHeader>
+              <CardContent><StatusBadge status={account.meeting_status} /></CardContent>
+            </Card>
           </div>
-          {activities.length === 0 ? (
-            <EmptyState title="No activities yet" description="Click Log Activity to record an email, call, or meeting." />
+          {waves.length === 0 ? (
+            <EmptyState title="No campaign phases" description="This account has not been assigned to a campaign wave yet." />
           ) : (
-            <div className="relative border-l-2 border-[var(--border)] ml-3 space-y-0">
-              {activities.map((a, i) => (
-                <div key={a.id ?? i} className="relative pl-6 pb-5">
-                  <div className="absolute -left-[5px] top-1 h-2.5 w-2.5 rounded-full bg-[var(--primary)]" />
-                  <div className="flex items-center justify-between">
-                    <Badge variant="secondary" className="text-xs">{a.activity_type}</Badge>
-                    <span className="text-xs text-[var(--muted-foreground)]">{a.activityDateLabel}</span>
-                  </div>
-                  {a.notes && <p className="mt-1.5 text-sm">{a.notes}</p>}
-                  {a.outcome && <p className="mt-1 text-xs">Outcome: {a.outcome}</p>}
-                  {a.next_step && <p className="mt-0.5 text-xs text-[var(--muted-foreground)]">Next: {a.next_step} {a.nextStepDueLabel ? `(by ${a.nextStepDueLabel})` : ''}</p>}
-                </div>
+            <div className="space-y-3">
+              {waves.map((wave, index) => (
+                <Card key={`${wave.wave}-${index}`}>
+                  <CardContent className="space-y-2 p-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium">{wave.wave}</span>
+                      <StatusBadge status={wave.status} />
+                    </div>
+                    <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-[var(--muted-foreground)]">
+                      <span>Channel: {wave.channel_mix}</span>
+                      <span>Owner: {wave.owner}</span>
+                      <span>Start: {wave.start_date}</span>
+                      <span>Follow-up 1: {wave.follow_up_1}</span>
+                    </div>
+                    <p className="text-sm">{wave.primary_objective}</p>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           )}
@@ -576,6 +755,26 @@ function MicrositeAccountHeatBadge({ score }: { score: number }) {
   if (score >= 70) return <Badge className="bg-red-500 text-white">Hot {score}</Badge>;
   if (score >= 45) return <Badge className="bg-amber-500 text-white">Warm {score}</Badge>;
   return <Badge variant="outline">Watch {score}</Badge>;
+}
+
+function accountTabIcon(tabId: AccountCommandTabId) {
+  switch (tabId) {
+    case 'contacts':
+      return Users;
+    case 'assets':
+      return BriefcaseBusiness;
+    case 'engagement':
+      return Inbox;
+    case 'tasks':
+      return ListTodo;
+    case 'meetings':
+      return Calendar;
+    case 'pipeline':
+      return GitBranch;
+    case 'overview':
+    default:
+      return FileText;
+  }
 }
 
 function MicrositeSessionRow({ session }: { session: RecentMicrositeSession }) {

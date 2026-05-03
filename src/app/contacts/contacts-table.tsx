@@ -1,6 +1,7 @@
 'use client';
 
-import { useTransition } from 'react';
+import Link from 'next/link';
+import { useMemo, useState, useTransition } from 'react';
 import { toast } from 'sonner';
 import { DataTable, type Column } from '@/components/data-table';
 import { Badge } from '@/components/ui/badge';
@@ -11,23 +12,42 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { ExternalLink, CheckCircle, XCircle, AlertTriangle, Plus } from 'lucide-react';
+import { ExternalLink, CheckCircle, XCircle, AlertTriangle, Plus, UserRound } from 'lucide-react';
 import { EmailComposer } from '@/components/email/composer';
 import { addToWave } from './actions';
+import { contactMatchesSavedView, type ContactReadinessKey, type ContactSavedView } from '@/lib/contacts-workspace';
 
 export interface ContactRow {
   id: number;
   personaId: string;
+  priority: string | null;
   name: string;
   email: string;
   title: string;
   accountName: string;
+  accountSlug: string;
+  accountOwner: string;
+  accountVertical: string;
+  personaLane: string | null;
+  roleInDeal: string | null;
+  seniority: string | null;
+  personaStatus: string | null;
+  nextStep: string | null;
   hubspotContactId: string | null;
   hubspotCompanyId: string | null;
   qualityBand: string;
+  qualityScore: number;
   priorityBand: string;
   doNotContact: boolean;
   emailValid: boolean;
+  lastEnrichedAt: string | null;
+  updatedAt: string;
+  readinessKey: ContactReadinessKey;
+  readinessLabel: string;
+  readinessTone: 'success' | 'warning' | 'destructive' | 'secondary';
+  readinessReasons: string[];
+  campaignName: string | null;
+  campaignSlug: string | null;
 }
 
 const PORTAL_ID = process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID || '';
@@ -87,7 +107,9 @@ const columns: Column<ContactRow>[] = [
         <Badge variant={c.priorityBand === 'A' ? 'default' : 'secondary'} className="text-[10px] px-1">
           {c.priorityBand}
         </Badge>
-        <span className="font-medium">{c.accountName}</span>
+        <Link href={`/accounts/${c.accountSlug}`} className="font-medium text-[var(--primary)] hover:underline" onClick={(e) => e.stopPropagation()}>
+          {c.accountName}
+        </Link>
       </div>
     ),
   },
@@ -95,12 +117,12 @@ const columns: Column<ContactRow>[] = [
   { key: 'title', label: 'Title', sortable: true, className: 'max-w-40 truncate hidden lg:table-cell' },
   { key: 'email', label: 'Email', sortable: true, className: 'text-xs hidden md:table-cell max-w-48 truncate' },
   {
-    key: 'qualityBand',
-    label: 'Quality',
+    key: 'readinessLabel',
+    label: 'Readiness',
     sortable: true,
     render: (c) => (
-      <Badge variant={c.qualityBand === 'A' ? 'default' : c.qualityBand === 'B' ? 'secondary' : 'outline'} className="text-xs">
-        {c.qualityBand}
+      <Badge variant={c.readinessTone} className="text-xs" title={c.readinessReasons.join(' ')}>
+        {c.readinessLabel}
       </Badge>
     ),
   },
@@ -132,12 +154,16 @@ const columns: Column<ContactRow>[] = [
     },
   },
   {
-    key: 'hubspotCompanyId' as keyof ContactRow,
-    label: 'Company',
+    key: 'campaignName' as keyof ContactRow,
+    label: 'Campaign',
     sortable: true,
     className: 'hidden xl:table-cell',
-    render: (c) => c.hubspotCompanyId
-      ? <span className="flex items-center gap-1 text-xs text-green-600"><CheckCircle className="h-3 w-3" /> Linked</span>
+    render: (c) => c.campaignSlug
+      ? (
+        <Link href={`/campaigns/${c.campaignSlug}`} className="text-xs text-[var(--primary)] hover:underline" onClick={(e) => e.stopPropagation()}>
+          {c.campaignName}
+        </Link>
+      )
       : <span className="text-xs text-[var(--muted-foreground)]">—</span>,
   },
   {
@@ -148,13 +174,134 @@ const columns: Column<ContactRow>[] = [
   },
 ];
 
-export function ContactsTable({ contacts }: { contacts: ContactRow[] }) {
+export function ContactsTable({ contacts, savedViews }: { contacts: ContactRow[]; savedViews: ContactSavedView[] }) {
+  const [activeView, setActiveView] = useState<ContactSavedView['id']>('all');
+  const [selectedContact, setSelectedContact] = useState<ContactRow | null>(contacts[0] ?? null);
+
+  const filteredContacts = useMemo(
+    () => contacts.filter((contact) => contactMatchesSavedView(activeView, toSavedViewInput(contact))),
+    [activeView, contacts],
+  );
+
   return (
-    <DataTable
-      data={contacts}
-      columns={columns}
-      searchKey="name"
-      searchPlaceholder="Search contacts..."
-    />
+    <div className="space-y-4">
+      <div className="flex flex-wrap gap-2" aria-label="Contact saved views">
+        {savedViews.map((view) => {
+          const count = contacts.filter((contact) => contactMatchesSavedView(view.id, toSavedViewInput(contact))).length;
+
+          return (
+            <Button
+              key={view.id}
+              type="button"
+              variant={activeView === view.id ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => {
+                setActiveView(view.id);
+                setSelectedContact(null);
+              }}
+              title={view.description}
+            >
+              {view.label} ({count})
+            </Button>
+          );
+        })}
+      </div>
+
+      <div className="grid gap-4 xl:grid-cols-[1fr_360px]">
+        <DataTable
+          data={filteredContacts}
+          columns={columns}
+          searchKey="name"
+          searchPlaceholder="Search contacts..."
+          onRowClick={setSelectedContact}
+        />
+        <ContactDetailPanel contact={selectedContact} />
+      </div>
+    </div>
+  );
+}
+
+function toSavedViewInput(contact: ContactRow) {
+  return {
+    email: contact.email || null,
+    email_valid: contact.emailValid,
+    do_not_contact: contact.doNotContact,
+    quality_score: contact.qualityScore,
+    quality_band: contact.qualityBand,
+    hubspot_contact_id: contact.hubspotContactId,
+    last_enriched_at: contact.lastEnrichedAt ? new Date(contact.lastEnrichedAt) : null,
+    updated_at: new Date(contact.updatedAt),
+    readinessKey: contact.readinessKey,
+  };
+}
+
+function ContactDetailPanel({ contact }: { contact: ContactRow | null }) {
+  if (!contact) {
+    return (
+      <aside className="rounded-lg border border-dashed border-[var(--border)] p-4">
+        <p className="text-sm font-medium">Contact Detail</p>
+        <p className="mt-1 text-sm text-[var(--muted-foreground)]">Select a contact row to inspect context and next action.</p>
+      </aside>
+    );
+  }
+
+  return (
+    <aside className="rounded-lg border border-[var(--border)] p-4" aria-label="Contact Detail">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-sm font-semibold">Contact Detail</p>
+          <h2 className="mt-1 text-lg font-bold">{contact.name}</h2>
+          <p className="text-sm text-[var(--muted-foreground)]">{contact.title || 'Title TBD'}</p>
+        </div>
+        <UserRound className="h-5 w-5 text-[var(--muted-foreground)]" />
+      </div>
+
+      <div className="mt-4 space-y-3 text-sm">
+        <div>
+          <p className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Readiness</p>
+          <Badge variant={contact.readinessTone} className="mt-1">{contact.readinessLabel}</Badge>
+          <ul className="mt-2 list-disc space-y-1 pl-4 text-xs text-[var(--muted-foreground)]">
+            {contact.readinessReasons.map((reason) => <li key={reason}>{reason}</li>)}
+          </ul>
+        </div>
+
+        <div className="grid grid-cols-2 gap-2">
+          <Info label="Priority" value={contact.priority ?? 'Unscored'} />
+          <Info label="Quality" value={`${contact.qualityBand} / ${contact.qualityScore}`} />
+          <Info label="Lane" value={contact.personaLane ?? 'Unassigned'} />
+          <Info label="Seniority" value={contact.seniority ?? 'Unknown'} />
+        </div>
+
+        <div>
+          <p className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Relationship Context</p>
+          <p className="mt-1">{contact.roleInDeal ?? 'Role in deal not set.'}</p>
+          <p className="mt-1 text-xs text-[var(--muted-foreground)]">Status: {contact.personaStatus ?? 'Not started'}</p>
+          <p className="mt-1 text-xs text-[var(--muted-foreground)]">Next: {contact.nextStep ?? 'No next step set.'}</p>
+        </div>
+
+        <div className="flex flex-wrap gap-2 pt-2">
+          <Button size="sm" asChild>
+            <Link href={`/accounts/${contact.accountSlug}`}>Open Account</Link>
+          </Button>
+          {contact.campaignSlug && (
+            <Button size="sm" variant="outline" asChild>
+              <Link href={`/campaigns/${contact.campaignSlug}`}>Open Campaign</Link>
+            </Button>
+          )}
+          {contact.email && !contact.doNotContact && (
+            <EmailComposer accountName={contact.accountName} personaName={contact.name} personaEmail={contact.email} />
+          )}
+        </div>
+      </div>
+    </aside>
+  );
+}
+
+function Info({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-lg border border-[var(--border)] p-2">
+      <p className="text-[10px] uppercase text-[var(--muted-foreground)]">{label}</p>
+      <p className="mt-1 font-medium">{value}</p>
+    </div>
   );
 }

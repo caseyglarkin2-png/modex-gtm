@@ -1,9 +1,12 @@
 # Modex RevOps OS — Product Roadmap
 
-> Last updated: 2026-03-26
-> Status: Active — Sprint 1 in progress
+> Last updated: 2026-05-03
+> Status: Archived reference; active execution moved to consolidation roadmap + proof ledger.
 
 ## Related Execution Docs
+- `docs/roadmaps/revops-os-product-consolidation-sprint-plan.md`
+- `docs/roadmaps/revops-os-proof-ledger.md`
+- `docs/roadmaps/revops-os-current-ia-inventory.md`
 - `docs/roadmaps/one-pager-send-sprint-plan.md`
 - `docs/roadmaps/one-pager-send-sprint-todos.md`
 - `docs/roadmaps/one-pager-send-atomic-sprint-plan.md`

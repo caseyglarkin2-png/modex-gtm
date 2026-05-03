@@ -1,97 +1,47 @@
 import Link from 'next/link';
-import { slugify } from '@/lib/data';
-import { dbGetOutreachWaves } from '@/lib/db';
-import { prisma } from '@/lib/prisma';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { StatusBadge } from '@/components/status-badge';
-import { Waves } from 'lucide-react';
 import { Breadcrumb } from '@/components/breadcrumb';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { getCampaignSummaries } from '@/lib/campaigns';
 
 export const dynamic = 'force-dynamic';
-export const metadata = { title: 'Outreach Waves' };
+export const metadata = { title: 'Outreach Waves (Legacy Alias)' };
 
-const WAVE_ACCENT: Record<number, string> = {
-  0: 'border-l-red-500',
-  1: 'border-l-blue-500',
-  2: 'border-l-violet-500',
-  3: 'border-l-emerald-500',
-};
-
-export default async function WavesPage() {
-  const waves = await dbGetOutreachWaves();
-  // Get account outreach_status to compute real progress
-  const accounts = await prisma.account.findMany({
-    select: { name: true, outreach_status: true },
-  });
-  const accountStatusMap = new Map(accounts.map((a) => [a.name, a.outreach_status]));
-
-  const grouped = [0, 1, 2, 3].map((order) => ({
-    order,
-    label: waves.find((w) => w.wave_order === order)?.wave || `Wave ${order}`,
-    items: waves.filter((w) => w.wave_order === order),
-  }));
+export default async function WavesAliasPage() {
+  const campaigns = await getCampaignSummaries();
 
   return (
-    <div className="space-y-8">
-      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Outreach Waves' }]} />
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">Outreach Waves</h1>
-        <p className="text-sm text-[var(--muted-foreground)]">
-          4-wave outreach strategy: Warm intros &rarr; Must-book &rarr; High-value &rarr; Ecosystem.
-        </p>
+    <div className="space-y-6">
+      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Campaigns', href: '/campaigns' }, { label: 'Outreach Waves (Legacy)' }]} />
+
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight">Outreach Waves (Legacy Alias)</h1>
+          <p className="text-sm text-muted-foreground">
+            Waves now live inside Campaigns. This legacy route remains reachable for compatibility.
+          </p>
+        </div>
+        <Link href="/campaigns?legacy=waves">
+          <Button size="sm">Open Canonical Campaigns</Button>
+        </Link>
       </div>
 
-      {grouped.map((group) => {
-        const progressed = group.items.filter((w) => {
-          const acctStatus = accountStatusMap.get(w.account_name) ?? 'Not started';
-          return acctStatus !== 'Not started';
-        }).length;
-        const pct = group.items.length ? Math.round((progressed / group.items.length) * 100) : 0;
-        return (
-          <div key={group.order} className="space-y-3">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold flex items-center gap-2">
-                <Waves className="h-4 w-4" /> {group.label}
-                <Badge variant="secondary" className="text-xs">{group.items.length} accounts</Badge>
-              </h2>
-              <span className="text-xs text-[var(--muted-foreground)]">{progressed}/{group.items.length} progressed ({pct}%)</span>
-            </div>
-            <div className="h-2 overflow-hidden rounded-full bg-[var(--muted)]">
-              <div className={`h-full rounded-full ${WAVE_ACCENT[group.order]?.replace('border-l-', 'bg-')} transition-all`} style={{ width: `${pct}%` }} />
-            </div>
-            <div className="space-y-2">
-              {group.items.map((w, i) => (
-                <Card key={i} className={`border-l-4 ${WAVE_ACCENT[group.order] || ''}`}>
-                  <CardContent className="p-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <Link href={`/accounts/${slugify(w.account_name)}`} className="font-medium text-sm text-[var(--primary)] hover:underline">
-                          {w.account_name}
-                        </Link>
-                        <Badge variant="outline" className="text-xs">Rank {w.rank}</Badge>
-                      </div>
-                      <StatusBadge status={accountStatusMap.get(w.account_name) ?? w.status} />
-                    </div>
-                    <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-[var(--muted-foreground)] sm:grid-cols-3">
-                      <span>Channel: {w.channel_mix}</span>
-                      <span>Owner: {w.owner}</span>
-                      <span>Start: {w.start_date?.toLocaleDateString() ?? '—'}</span>
-                      <span>Follow-up 1: {w.followup_1?.toLocaleDateString() ?? '—'}</span>
-                      <span>Follow-up 2: {w.followup_2?.toLocaleDateString() ?? '—'}</span>
-                      <span>Warm Intro: {w.use_warm_intro ? 'Yes' : 'No'}</span>
-                    </div>
-                    <p className="mt-2 text-sm">{w.primary_objective}</p>
-                    <div className="mt-1 text-xs text-[var(--muted-foreground)]">
-                      Primary: {w.primary_persona_lane} &middot; Secondary: {w.secondary_persona_lane} &middot; Escalation: {w.escalation_trigger}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        );
-      })}
+      <Card>
+        <CardHeader className="pb-2">
+          <CardTitle className="text-base">Active Campaigns</CardTitle>
+        </CardHeader>
+        <CardContent className="grid gap-2 md:grid-cols-2">
+          {campaigns.slice(0, 8).map((campaign) => (
+            <Link
+              key={campaign.id}
+              href={`/campaigns/${campaign.slug}?legacy=waves`}
+              className="rounded-lg border px-3 py-2 text-sm transition-colors hover:bg-muted"
+            >
+              {campaign.name}
+            </Link>
+          ))}
+        </CardContent>
+      </Card>
     </div>
   );
 }

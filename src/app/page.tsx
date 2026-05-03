@@ -2,6 +2,9 @@ import Link from 'next/link';
 import { getOutreachWaves, getMeetingBriefs, slugify } from '@/lib/data';
 import { dbGetAccounts, dbGetActivities, dbGetMeetings, dbGetDashboardStats } from '@/lib/db';
 import { prisma } from '@/lib/prisma';
+import { getCampaignSummaries } from '@/lib/campaigns';
+import { computeStuckJobs } from '@/lib/admin/stuck-jobs';
+import { buildHomeCockpitSnapshot, formatDueLabel, isSameCalendarDay, startOfDay } from '@/lib/home-cockpit';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -9,7 +12,7 @@ import { BandBadge } from '@/components/band-badge';
 import { StatusBadge } from '@/components/status-badge';
 import { EmptyState } from '@/components/empty-state';
 import { AutoRefresh } from '@/components/auto-refresh';
-import { Building2, Users, Waves as WavesIcon, CalendarCheck, Smartphone, Activity, ArrowRight, TrendingUp, BarChart3, Mail, MessageSquare } from 'lucide-react';
+import { Building2, Users, Waves as WavesIcon, CalendarCheck, Smartphone, Activity, ArrowRight, TrendingUp, BarChart3, Mail, MessageSquare, AlertTriangle, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export const dynamic = 'force-dynamic';
@@ -41,26 +44,21 @@ function isUpcoming(dateStr: string, days: number): boolean {
   return d >= now && d <= cutoff;
 }
 
-function startOfDay(value: Date) {
-  const next = new Date(value);
-  next.setHours(0, 0, 0, 0);
-  return next;
-}
-
-function isSameCalendarDay(left: Date, right: Date) {
-  return startOfDay(left).getTime() === startOfDay(right).getTime();
-}
-
-function formatDueLabel(due: Date, today: Date) {
-  const diffDays = Math.round((startOfDay(due).getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
-  if (diffDays < 0) return `${Math.abs(diffDays)}d overdue`;
-  if (diffDays === 0) return 'Due today';
-  if (diffDays === 1) return 'Due tomorrow';
-  return `Due in ${diffDays}d`;
-}
-
 export default async function DashboardPage() {
-  const [dbAccounts, dbActivities, dbMeetings, stats, recentReplies, emailStats] = await Promise.all([
+  const [
+    dbAccounts,
+    dbActivities,
+    dbMeetings,
+    stats,
+    recentReplies,
+    emailStats,
+    campaigns,
+    generationFailures,
+    sendFailures,
+    failedRecipientCount,
+    processingGenerationJobs,
+    processingSendJobs,
+  ] = await Promise.all([
     dbGetAccounts(), dbGetActivities(), dbGetMeetings(), dbGetDashboardStats(),
     prisma.notification.findMany({
       where: { type: 'reply' },
@@ -71,9 +69,43 @@ export default async function DashboardPage() {
       _count: { id: true },
       _sum: { open_count: true, reply_count: true },
     }),
+    getCampaignSummaries(),
+    prisma.generationJob.count({ where: { status: 'failed' } }),
+    prisma.sendJob.count({ where: { status: { in: ['failed', 'partial'] } } }),
+    prisma.sendJobRecipient.count({ where: { status: 'failed' } }),
+    prisma.generationJob.findMany({
+      where: { status: 'processing' },
+      select: { id: true, account_name: true, status: true, started_at: true, updated_at: true },
+      take: 50,
+    }),
+    prisma.sendJob.findMany({
+      where: { status: 'processing' },
+      select: { id: true, status: true, started_at: true, updated_at: true, total_recipients: true, sent_count: true, failed_count: true },
+      take: 50,
+    }),
   ]);
   const waves = getOutreachWaves();
   const briefs = getMeetingBriefs();
+  const stuckJobs = computeStuckJobs({
+    generationJobs: processingGenerationJobs,
+    sendJobs: processingSendJobs,
+  });
+  const cockpit = buildHomeCockpitSnapshot({
+    accounts: dbAccounts,
+    activities: dbActivities,
+    campaigns,
+    generationFailures,
+    sendFailures: sendFailures + failedRecipientCount,
+    stuckJobs: stuckJobs.length,
+    engagementAlerts: recentReplies.length,
+    proofStatus: {
+      sprint: 'Sprint 1',
+      status: 'Production browser-proven',
+      result: 'pass',
+      route: '/ops',
+      evidence: 'Canonical navigation click proof passed on Vercel production with skipped 0.',
+    },
+  });
 
   // Map DB entities to the shapes used by the template
   const accounts = dbAccounts.map((a) => ({
@@ -108,43 +140,15 @@ export default async function DashboardPage() {
   const meetingsBooked = stats.meetingsBooked;
 
   const today = startOfDay(new Date());
-  const sevenDaysOut = new Date(today);
-  sevenDaysOut.setDate(today.getDate() + 7);
 
   const queuedCampaignFollowUps = dbActivities.filter((activity) =>
     activity.activity_type === 'Follow-up' && (activity.notes?.includes('Campaign drip automation') || activity.outcome?.includes('MODEX 2026 Follow-Up')),
   ).length;
 
-  const allFocusItems = [
-    ...dbAccounts
-      .filter((account) => account.next_action && account.due_date)
-      .map((account) => ({
-        type: 'Account' as const,
-        account: account.name,
-        owner: account.owner,
-        summary: account.next_action ?? 'Next action ready',
-        due: new Date(account.due_date as Date | string),
-      })),
-    ...dbActivities
-      .filter((activity) => activity.account_name && activity.next_step && activity.next_step_due)
-      .map((activity) => ({
-        type: 'Activity' as const,
-        account: activity.account_name ?? 'Unknown account',
-        owner: activity.owner,
-        summary: activity.next_step ?? 'Follow up',
-        due: new Date(activity.next_step_due as Date | string),
-      })),
-  ]
-    .filter((item) => !Number.isNaN(item.due.getTime()))
-    .sort((left, right) => left.due.getTime() - right.due.getTime())
-    .filter((item, index, items) => index === items.findIndex((candidate) => (
-      candidate.account === item.account && candidate.summary === item.summary && candidate.due.getTime() === item.due.getTime()
-    )));
-
-  const overdueFocusCount = allFocusItems.filter((item) => item.due.getTime() < today.getTime()).length;
-  const dueTodayCount = allFocusItems.filter((item) => isSameCalendarDay(item.due, today)).length;
-  const dueThisWeekCount = allFocusItems.filter((item) => item.due.getTime() >= today.getTime() && item.due.getTime() <= sevenDaysOut.getTime()).length;
-  const focusItems = allFocusItems.slice(0, 6);
+  const overdueFocusCount = cockpit.today.overdue;
+  const dueTodayCount = cockpit.today.dueToday;
+  const dueThisWeekCount = cockpit.today.dueThisWeek;
+  const focusItems = cockpit.today.focusItems;
 
   // Weekly counters
   const meetingsThisWeek = meetings.filter((m) => isThisWeek(m.date)).length;
@@ -178,13 +182,13 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-8">
-      <Breadcrumb items={[{ label: 'Dashboard' }]} />
+      <Breadcrumb items={[{ label: 'Home' }]} />
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
+          <h1 className="text-2xl font-bold tracking-tight">Home</h1>
           <p className="text-sm text-[var(--muted-foreground)]">
-            YardFlow by FreightRoll RevOps OS
+            Daily cockpit for Casey&apos;s RevOps operating loop.
           </p>
         </div>
         <div className="flex items-center gap-3 text-xs text-[var(--muted-foreground)]">
@@ -204,6 +208,149 @@ export default async function DashboardPage() {
           <div className="text-center"><span className="block text-lg font-bold text-[var(--foreground)]">{capturesThisWeek}</span>captures</div>
         </div>
       </div>
+
+      {/* Daily Cockpit */}
+      <section aria-labelledby="daily-cockpit-heading" className="space-y-4">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 id="daily-cockpit-heading" className="text-lg font-semibold">Daily Cockpit</h2>
+            <p className="text-sm text-[var(--muted-foreground)]">Priority work, campaign motion, system health, and proof status.</p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Link href="/queue">
+              <Button size="sm" className="gap-1.5">
+                <Zap className="h-3.5 w-3.5" /> Open Work Queue
+              </Button>
+            </Link>
+            <Link href="/capture">
+              <Button variant="outline" size="sm">Quick Capture</Button>
+            </Link>
+          </div>
+        </div>
+
+        <div className="grid gap-4 xl:grid-cols-[1.1fr_1.4fr_0.9fr]">
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="flex items-center justify-between gap-2 text-base">
+                <span>Today</span>
+                <Badge variant={overdueFocusCount > 0 ? 'destructive' : 'success'}>
+                  {overdueFocusCount > 0 ? `${overdueFocusCount} overdue` : 'On track'}
+                </Badge>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { label: 'Due Today', value: dueTodayCount },
+                  { label: 'Next 7 Days', value: dueThisWeekCount },
+                  { label: 'Reply Alerts', value: cockpit.today.engagementAlerts },
+                  { label: 'Blocked Jobs', value: cockpit.health.stuckJobs },
+                ].map((item) => (
+                  <div key={item.label} className="rounded-lg border border-[var(--border)] p-3">
+                    <p className="text-[11px] uppercase tracking-wide text-[var(--muted-foreground)]">{item.label}</p>
+                    <p className="mt-1 text-2xl font-bold">{item.value}</p>
+                  </div>
+                ))}
+              </div>
+              <Link href="/engagement" className="block rounded-lg border border-[var(--border)] p-3 transition-colors hover:bg-[var(--accent)]/40">
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-medium">Engagement alerts</p>
+                    <p className="text-xs text-[var(--muted-foreground)]">Replies and buyer signals that need triage.</p>
+                  </div>
+                  <ArrowRight className="h-4 w-4 text-[var(--muted-foreground)]" />
+                </div>
+              </Link>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between gap-2">
+                <CardTitle className="text-base">Active Campaigns</CardTitle>
+                <Link href="/campaigns">
+                  <Button variant="ghost" size="sm" className="gap-1 text-xs">
+                    Campaigns <ArrowRight className="h-3 w-3" />
+                  </Button>
+                </Link>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {cockpit.activeCampaigns.length === 0 ? (
+                <p className="py-6 text-sm text-[var(--muted-foreground)]">No active campaigns are configured yet.</p>
+              ) : (
+                cockpit.activeCampaigns.map((campaign) => (
+                  <Link key={campaign.slug} href={campaign.href} className="block rounded-lg border border-[var(--border)] p-3 transition-colors hover:bg-[var(--accent)]/40">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <p className="font-medium">{campaign.name}</p>
+                          <Badge variant="secondary">{campaign.status}</Badge>
+                        </div>
+                        <p className="mt-1 line-clamp-2 text-xs text-[var(--muted-foreground)]">{campaign.label}</p>
+                      </div>
+                      <span className="shrink-0 text-sm font-semibold">{campaign.readinessScore}% ready</span>
+                    </div>
+                    <div className="mt-3 grid grid-cols-4 gap-2 text-center text-xs">
+                      <span><strong className="block text-sm">{campaign.targetAccountCount}</strong>targets</span>
+                      <span><strong className="block text-sm">{campaign.generatedCount}</strong>assets</span>
+                      <span><strong className="block text-sm">{campaign.sentCount}</strong>sent</span>
+                      <span><strong className="block text-sm">{campaign.activityCount}</strong>acts</span>
+                    </div>
+                  </Link>
+                ))
+              )}
+            </CardContent>
+          </Card>
+
+          <div className="grid gap-4">
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center gap-2 text-base">
+                  {cockpit.health.tone === 'healthy' ? <CheckCircle2 className="h-4 w-4 text-emerald-600" /> : <AlertTriangle className="h-4 w-4 text-amber-600" />}
+                  System Health
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Badge variant={cockpit.health.tone === 'healthy' ? 'success' : cockpit.health.tone === 'blocked' ? 'destructive' : 'warning'}>
+                  {cockpit.health.label}
+                </Badge>
+                <div className="mt-4 grid grid-cols-3 gap-2 text-center text-xs">
+                  <span><strong className="block text-lg">{cockpit.health.generationFailures}</strong>gen fail</span>
+                  <span><strong className="block text-lg">{cockpit.health.sendFailures}</strong>send fail</span>
+                  <span><strong className="block text-lg">{cockpit.health.stuckJobs}</strong>stuck</span>
+                </div>
+                <Link href="/ops" className="mt-4 block text-xs font-medium text-[var(--primary)]">
+                  Open Ops health <ArrowRight className="inline h-3 w-3" />
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center gap-2 text-base">
+                  <ShieldCheck className="h-4 w-4" /> Proof Status
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <p className="font-medium">{cockpit.proofStatus.sprint}</p>
+                    <p className="text-xs text-[var(--muted-foreground)]">{cockpit.proofStatus.status}</p>
+                  </div>
+                  <Badge variant={cockpit.proofStatus.result === 'pass' ? 'success' : cockpit.proofStatus.result === 'fail' ? 'destructive' : 'warning'}>
+                    {cockpit.proofStatus.result}
+                  </Badge>
+                </div>
+                <p className="mt-3 text-xs text-[var(--muted-foreground)]">{cockpit.proofStatus.evidence}</p>
+                <Link href={cockpit.proofStatus.route} className="mt-4 block text-xs font-medium text-[var(--primary)]">
+                  Open proof workspace <ArrowRight className="inline h-3 w-3" />
+                </Link>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
 
       {/* Stat Cards */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
@@ -349,7 +496,7 @@ export default async function DashboardPage() {
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between gap-2">
               <CardTitle className="text-base">Today&apos;s Focus</CardTitle>
-              <Link href={overdueFocusCount > 0 ? '/activities?filter=overdue' : '/activities?filter=week'}>
+              <Link href={overdueFocusCount > 0 ? '/queue?filter=overdue' : '/queue?filter=week'}>
                 <Button variant="ghost" size="sm" className="gap-1 text-xs">
                   Open queue <ArrowRight className="h-3 w-3" />
                 </Button>
@@ -441,7 +588,7 @@ export default async function DashboardPage() {
             <CardTitle className="flex items-center gap-2 text-base">
               <WavesIcon className="h-4 w-4" /> Wave Pipeline
             </CardTitle>
-            <Link href="/waves">
+            <Link href="/campaigns">
               <Button variant="ghost" size="sm" className="gap-1 text-xs">
                 View all <ArrowRight className="h-3 w-3" />
               </Button>
@@ -477,7 +624,7 @@ export default async function DashboardPage() {
               <CardTitle className="flex items-center gap-2 text-base">
                 <CalendarCheck className="h-4 w-4" /> Upcoming Meetings
               </CardTitle>
-              <Link href="/meetings">
+              <Link href="/pipeline">
                 <Button variant="ghost" size="sm" className="gap-1 text-xs">
                   View all <ArrowRight className="h-3 w-3" />
                 </Button>
@@ -552,7 +699,7 @@ export default async function DashboardPage() {
             <CardTitle className="flex items-center gap-2 text-base">
               <Activity className="h-4 w-4" /> Recent Activities
             </CardTitle>
-            <Link href="/activities">
+            <Link href="/pipeline">
               <Button variant="ghost" size="sm" className="gap-1 text-xs">
                 View all <ArrowRight className="h-3 w-3" />
               </Button>
