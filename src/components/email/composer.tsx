@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import {
   Dialog,
@@ -63,6 +63,8 @@ interface EmailComposerProps {
   accountName: string;
   personaName?: string;
   personaEmail?: string;
+  initialSubject?: string;
+  initialBody?: string;
   trigger?: React.ReactNode;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
@@ -76,19 +78,43 @@ function slugifyAccountName(value: string): string {
     .replace(/^-+|-+$/g, '');
 }
 
-export function EmailComposer({ accountName, personaName, personaEmail, trigger, open: controlledOpen, onOpenChange }: EmailComposerProps) {
+export function EmailComposer({
+  accountName,
+  personaName,
+  personaEmail,
+  initialSubject,
+  initialBody,
+  trigger,
+  open: controlledOpen,
+  onOpenChange,
+}: EmailComposerProps) {
   const [internalOpen, setInternalOpen] = useState(false);
   const open = controlledOpen ?? internalOpen;
   const setOpen = onOpenChange ?? setInternalOpen;
   const showTrigger = trigger !== undefined || controlledOpen === undefined;
   const [to, setTo] = useState(personaEmail ?? '');
   const [cc, setCc] = useState('');
-  const [subject, setSubject] = useState('');
-  const [body, setBody] = useState('');
+  const [subject, setSubject] = useState(initialSubject ?? '');
+  const [body, setBody] = useState(initialBody ?? '');
   const [sending, setSending] = useState(false);
   const [draftingFromIntel, setDraftingFromIntel] = useState(false);
   const [lastStatus, setLastStatus] = useState<{ provider?: string; hubspotId?: string | null } | null>(null);
   const [previewMode, setPreviewMode] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    setTo(personaEmail ?? '');
+  }, [open, personaEmail]);
+
+  useEffect(() => {
+    if (!open) return;
+    setSubject(initialSubject ?? '');
+  }, [initialSubject, open]);
+
+  useEffect(() => {
+    if (!open) return;
+    setBody(initialBody ?? '');
+  }, [initialBody, open]);
 
   function handleAIDraft(content: string) {
     setBody(content);

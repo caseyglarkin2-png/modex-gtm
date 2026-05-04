@@ -234,26 +234,6 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                 }
               />
               <AgentActionDialog
-                request={{ action: 'account_research', target: { accountName: account.name, company: account.name } }}
-                title={`Research ${account.name}`}
-                trigger={
-                  <Button size="sm" variant="outline" className="gap-1.5">
-                    <BriefcaseBusiness className="h-3.5 w-3.5" />
-                    Refresh Intel
-                  </Button>
-                }
-              />
-              <AgentActionDialog
-                request={{ action: 'committee_refresh', target: { accountName: account.name, company: account.name } }}
-                title={`Build Committee for ${account.name}`}
-                trigger={
-                  <Button size="sm" variant="outline" className="gap-1.5">
-                    <Users className="h-3.5 w-3.5" />
-                    Build Committee
-                  </Button>
-                }
-              />
-              <AgentActionDialog
                 request={{ action: 'company_contacts', target: { accountName: account.name, company: account.name } }}
                 title={`Find More Contacts for ${account.name}`}
                 trigger={
