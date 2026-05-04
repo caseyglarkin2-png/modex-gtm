@@ -7,9 +7,6 @@ import { sanitizeEmailHtml } from '@/lib/email/sanitize';
 import { rateLimit } from '@/lib/rate-limit';
 import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
 import { advancePipelineStage, derivePipelineStage } from '@/lib/pipeline';
-import { resolveContentQaChecklist } from '@/lib/revops/content-qa-checklist';
-import { enforceSendApprovalGate } from '@/lib/revops/send-approvals';
-import { resolveCanonicalSendTargets } from '@/lib/revops/canonical-sync';
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
@@ -51,32 +48,17 @@ export async function POST(req: NextRequest) {
     };
 
     if (personaId) {
-      const [persona, canonicalTargets] = await Promise.all([
-        prisma.persona.findUnique({
-          where: { id: personaId },
-          select: {
-            id: true,
-            name: true,
-            email: true,
-            email_valid: true,
-            do_not_contact: true,
-            account_name: true,
-          },
-        }),
-        resolveCanonicalSendTargets([personaId]),
-      ]);
+      const persona = await prisma.persona.findUnique({
+        where: { id: personaId },
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          account_name: true,
+        },
+      });
       if (!persona || !persona.email) {
         return NextResponse.json({ error: 'Recipient record not found.' }, { status: 404 });
-      }
-      const canonical = canonicalTargets.get(personaId);
-      if (!canonical || canonical.sendBlocked) {
-        return NextResponse.json(
-          { error: canonical?.sendBlockReason ?? 'Recipient is missing canonical identity resolution.' },
-          { status: 409 },
-        );
-      }
-      if (persona.email.toLowerCase() !== to.toLowerCase()) {
-        return NextResponse.json({ error: 'Recipient email does not match canonical contact record.' }, { status: 409 });
       }
       resolvedRecipient = {
         to: persona.email,
@@ -139,56 +121,6 @@ export async function POST(req: NextRequest) {
       if (!generated) {
         return NextResponse.json({ error: 'Generated content not found.' }, { status: 404 });
       }
-      const checklist = resolveContentQaChecklist({
-        campaignType: generated.campaign?.campaign_type,
-        completedItemIds: generated.checklist_state?.completed_item_ids ?? [],
-        content: generated.content,
-        accountName: generated.account_name,
-      });
-      if (!checklist.complete) {
-        return NextResponse.json(
-          { error: `Content QA checklist incomplete for generated content ${generatedContentId}.` },
-          { status: 409 },
-        );
-      }
-    }
-    const domain = resolvedRecipient.to.split('@')[1] ?? 'unknown';
-    const [knownDomainRows, recentOutcomes] = await Promise.all([
-      prisma.emailLog.findMany({
-        where: { to_email: { contains: '@' } },
-        orderBy: { created_at: 'desc' },
-        take: 250,
-        select: { to_email: true },
-      }),
-      prisma.sendJobRecipient.findMany({
-        orderBy: { created_at: 'desc' },
-        take: 300,
-        select: { status: true },
-      }),
-    ]);
-    const knownDomains = Array.from(new Set(
-      knownDomainRows
-        .map((row) => row.to_email.split('@')[1]?.toLowerCase())
-        .filter((value): value is string => Boolean(value)),
-    ));
-    const bounceRate = recentOutcomes.length > 0
-      ? recentOutcomes.filter((row) => row.status === 'failed').length / recentOutcomes.length
-      : 0;
-    const approvalGate = await enforceSendApprovalGate(prisma, {
-      channel: 'single',
-      accountName: accountName ?? null,
-      recipientCount: 1,
-      domains: [domain],
-      knownDomains,
-      recentBounceRate: bounceRate,
-      requestedBy: 'Casey',
-    });
-    if (!approvalGate.allowed) {
-      return NextResponse.json({
-        error: 'Approval required before send can proceed.',
-        approval: approvalGate.approval,
-        policy: approvalGate.policy,
-      }, { status: 409 });
     }
 
     // Lightweight sanitization to keep email-safe HTML without pulling jsdom into the runtime.

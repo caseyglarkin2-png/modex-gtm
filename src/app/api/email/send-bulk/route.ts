@@ -6,10 +6,6 @@ import { wrapHtml } from '@/lib/email/templates';
 import { rateLimit } from '@/lib/rate-limit';
 import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
 import { advancePipelineStage, derivePipelineStage } from '@/lib/pipeline';
-import { getRecipientReadinessFloor } from '@/lib/revops/recipient-readiness';
-import { resolveContentQaChecklist } from '@/lib/revops/content-qa-checklist';
-import { enforceSendApprovalGate } from '@/lib/revops/send-approvals';
-import { resolveCanonicalSendTargets } from '@/lib/revops/canonical-sync';
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
@@ -36,9 +32,6 @@ export async function POST(req: NextRequest) {
 
   const { prisma } = await import('@/lib/prisma');
   const personaIds = Array.from(new Set(recipients.map((recipient) => recipient.personaId).filter((value): value is number => Boolean(value))));
-  const canonicalTargets = personaIds.length > 0
-    ? await resolveCanonicalSendTargets(personaIds)
-    : new Map();
   const personaRows = personaIds.length > 0
     ? await prisma.persona.findMany({
         where: { id: { in: personaIds } },
@@ -49,15 +42,8 @@ export async function POST(req: NextRequest) {
   const resolvedRecipients = recipients.map((recipient) => {
     if (!recipient.personaId) return recipient;
     const persona = personaById.get(recipient.personaId);
-    const canonical = canonicalTargets.get(recipient.personaId);
     if (!persona || !persona.email) {
-      return { ...recipient, canonicalError: 'Recipient record not found' };
-    }
-    if (!canonical || canonical.sendBlocked) {
-      return { ...recipient, canonicalError: canonical?.sendBlockReason ?? 'Recipient missing canonical identity resolution' };
-    }
-    if (persona.email.toLowerCase() !== recipient.to.toLowerCase()) {
-      return { ...recipient, canonicalError: 'Recipient email does not match canonical contact record' };
+      return { ...recipient, recipientError: 'Recipient record not found' };
     }
     return {
       ...recipient,
@@ -66,11 +52,6 @@ export async function POST(req: NextRequest) {
       accountName: persona.account_name,
     };
   });
-  const recipientDomains = Array.from(new Set(
-    resolvedRecipients
-      .map((recipient) => recipient.to.toLowerCase().split('@')[1])
-      .filter((value): value is string => Boolean(value)),
-  ));
   if (generatedContentId) {
     const generated = await prisma.generatedContent.findUnique({
       where: { id: generatedContentId },
@@ -93,26 +74,6 @@ export async function POST(req: NextRequest) {
     if (!generated) {
       return NextResponse.json({ error: 'Generated content not found.' }, { status: 404 });
     }
-    const floor = getRecipientReadinessFloor(generated.campaign?.campaign_type);
-    const belowFloor = recipients.filter((recipient) => (recipient.readinessScore ?? 0) < floor);
-    if (belowFloor.length > 0) {
-      return NextResponse.json(
-        { error: `Recipient readiness floor ${floor} not met for ${belowFloor.length} recipient(s).` },
-        { status: 409 },
-      );
-    }
-    const checklist = resolveContentQaChecklist({
-      campaignType: generated.campaign?.campaign_type,
-      completedItemIds: generated.checklist_state?.completed_item_ids ?? [],
-      content: generated.content,
-      accountName: generated.account_name,
-    });
-    if (!checklist.complete) {
-      return NextResponse.json(
-        { error: `Content QA checklist incomplete for generated content ${generatedContentId}.` },
-        { status: 409 },
-      );
-    }
   }
   const unsubscribedRows = await prisma.unsubscribedEmail.findMany({
     where: { email: { in: resolvedRecipients.map((recipient) => recipient.to) } },
@@ -122,10 +83,10 @@ export async function POST(req: NextRequest) {
 
   const eligibility = await Promise.all(
     resolvedRecipients.map(async (recipient) => {
-      if ('canonicalError' in recipient && recipient.canonicalError) {
+      if ('recipientError' in recipient && recipient.recipientError) {
         return {
           recipient,
-          guard: { ok: false, reason: recipient.canonicalError, domain: getEmailDomain(recipient.to) },
+          guard: { ok: false, reason: recipient.recipientError, domain: getEmailDomain(recipient.to) },
         };
       }
       if (unsubscribedSet.has(recipient.to)) {
@@ -149,42 +110,6 @@ export async function POST(req: NextRequest) {
 
   if (eligibleRecipients.length === 0) {
     return NextResponse.json({ success: false, sent: 0, failed: resolvedRecipients.length, skipped }, { status: 400 });
-  }
-  const [knownDomainRows, recentOutcomes] = await Promise.all([
-    prisma.emailLog.findMany({
-      orderBy: { created_at: 'desc' },
-      take: 350,
-      select: { to_email: true },
-    }),
-    prisma.sendJobRecipient.findMany({
-      orderBy: { created_at: 'desc' },
-      take: 500,
-      select: { status: true },
-    }),
-  ]);
-  const knownDomains = Array.from(new Set(
-    knownDomainRows
-      .map((row) => row.to_email.split('@')[1]?.toLowerCase())
-      .filter((value): value is string => Boolean(value)),
-  ));
-  const bounceRate = recentOutcomes.length > 0
-    ? recentOutcomes.filter((row) => row.status === 'failed').length / recentOutcomes.length
-    : 0;
-  const approvalGate = await enforceSendApprovalGate(prisma, {
-    channel: 'bulk',
-    accountName: accountName ?? null,
-    recipientCount: eligibleRecipients.length,
-    domains: recipientDomains,
-    knownDomains,
-    recentBounceRate: bounceRate,
-    requestedBy: 'Casey',
-  });
-  if (!approvalGate.allowed) {
-    return NextResponse.json({
-      error: 'Approval required before bulk send can proceed.',
-      approval: approvalGate.approval,
-      policy: approvalGate.policy,
-    }, { status: 409 });
   }
 
   const payloads = eligibleRecipients.map((r) => ({ to: r.to, subject, html }));

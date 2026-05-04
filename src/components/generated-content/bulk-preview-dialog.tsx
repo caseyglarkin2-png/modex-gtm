@@ -56,7 +56,7 @@ const DEFAULT_SUBJECT = 'MODEX 2026 - Yard Protocol Opportunities';
 
 export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProps) {
   const [open, setOpen] = useState(false);
-  const [acknowledged, setAcknowledged] = useState<Record<number, boolean>>({});
+  const [acknowledged] = useState<Record<number, boolean>>({});
   const [submitting, setSubmitting] = useState(false);
   const [experimentEnabled, setExperimentEnabled] = useState(false);
   const [experimentName, setExperimentName] = useState('Cold Start Subject/Opening Test');
@@ -98,16 +98,11 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
           if (hideStale && recipient.readiness?.stale) return false;
           return true;
         });
-        const readinessFloor = getRecipientReadinessFloor(item.campaignType);
-        const sendableRecipients = filteredRecipients.filter((recipient) => {
-          if (recipient.canonicalStatus && recipient.canonicalStatus !== 'resolved') return false;
-          return (recipient.readiness?.score ?? 0) >= readinessFloor;
-        });
         return {
           item,
           filteredRecipients,
-          sendableRecipients,
-          skippedByPolicyCount: filteredRecipients.length - sendableRecipients.length,
+          sendableRecipients: filteredRecipients,
+          skippedByPolicyCount: 0,
           rendering: resolveGeneratedContentRendering(item.content, item.accountName),
           guard: buildSendGuardState({
             selectedVersion: item.version,
@@ -122,7 +117,6 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
   }, [acknowledged, deferredAccounts, hideStale, items, showHighOnly]);
 
   const requiresAcknowledgement = itemStates.filter(({ guard }) => guard.requiresGuard).map(({ item }) => item.generatedContentId);
-  const allAcknowledged = requiresAcknowledgement.every((id) => acknowledged[id]);
   const hasRecipients = itemStates.some(({ sendableRecipients }) => sendableRecipients.length > 0);
   const totalRecipients = itemStates.reduce((sum, { sendableRecipients }) => sum + sendableRecipients.length, 0);
   const skippedAccounts = itemStates.filter(({ sendableRecipients }) => sendableRecipients.length === 0).length;
@@ -143,7 +137,7 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
     [totalRecipients, variants],
   );
   const experimentValid = !experimentEnabled || (splitTotal === 100 && hasControl && variants.length >= 2);
-  const queueDisabled = submitting || !hasRecipients || !allAcknowledged || !experimentValid;
+  const queueDisabled = submitting || !hasRecipients || !experimentValid;
   const checklistBlockingItems = itemStates.filter(({ item }) => item.checklist && !item.checklist.complete);
 
   function updateVariant(index: number, patch: Partial<VariantDraft>) {
@@ -245,11 +239,11 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
             <p className="text-sm font-semibold text-amber-700">{requiresAcknowledgement.length}</p>
           </div>
           <div>
-            <p className="text-muted-foreground">Auto-Skipped Accounts</p>
+            <p className="text-muted-foreground">Accounts With No Recipients</p>
             <p className="text-sm font-semibold text-red-700">{skippedAccounts}</p>
           </div>
           <div>
-            <p className="text-muted-foreground">Auto-Skipped Recipients</p>
+            <p className="text-muted-foreground">Recipients Filtered Out</p>
             <p className="text-sm font-semibold text-amber-700">{autoSkippedRecipients}</p>
           </div>
           <div>
@@ -262,7 +256,7 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
               <p className="text-sm font-semibold">Recipient Readiness + Send Strategy</p>
-              <p className="text-xs text-muted-foreground">Filter low-confidence recipients and control pacing/caps before queueing.</p>
+              <p className="text-xs text-muted-foreground">Readiness is advisory only. Filters are optional and controlled by you.</p>
             </div>
             <select
               className="rounded border bg-background px-2 py-1 text-xs"
@@ -472,13 +466,13 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
         </div>
 
         <div className="space-y-4">
-          {itemStates.map(({ item, rendering, guard, filteredRecipients, sendableRecipients, skippedByPolicyCount }) => (
+          {itemStates.map(({ item, rendering, guard, filteredRecipients, sendableRecipients }) => (
             <div key={item.generatedContentId} className="rounded-lg border p-3">
               <div className="mb-2 flex items-start justify-between gap-2">
                 <div>
                   <p className="text-sm font-semibold">{item.accountName} • v{item.version}</p>
                   <p className="text-xs text-muted-foreground">
-                    Provider: {item.providerUsed ?? 'unknown'} • Sendable recipients: {sendableRecipients.length}/{item.recipients.length}
+                    Provider: {item.providerUsed ?? 'unknown'} • Recipients in send set: {sendableRecipients.length}/{item.recipients.length}
                   </p>
                   <p className="text-xs text-muted-foreground">
                     Type: {item.infographicType ?? 'cold_hook'} • Stage: {item.stageIntent ?? 'cold'}
@@ -490,12 +484,12 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
                   <p className="text-xs text-muted-foreground">
                     High confidence: {filteredRecipients.filter((recipient) => recipient.readiness?.tier === 'high').length}
                     {' '}• Stale: {filteredRecipients.filter((recipient) => recipient.readiness?.stale).length}
-                    {' '}• Auto-skipped by readiness: {skippedByPolicyCount}
+                    {' '}• Filtered out by your toggles: {item.recipients.length - filteredRecipients.length}
                   </p>
                 </div>
                 <div className="flex items-center gap-1">
                   {guard.requiresGuard && <Badge className="bg-amber-100 text-amber-900">Needs Review</Badge>}
-                  {sendableRecipients.length === 0 && <Badge className="bg-red-100 text-red-900">No Sendable Recipients</Badge>}
+                  {sendableRecipients.length === 0 && <Badge className="bg-red-100 text-red-900">No Recipients After Filters</Badge>}
                   {item.checklist && !item.checklist.complete && <Badge className="bg-amber-100 text-amber-900">Checklist Incomplete</Badge>}
                   <Badge variant="outline">{rendering.source}</Badge>
                 </div>
@@ -503,23 +497,12 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
 
               {guard.requiresGuard && (
                 <div className="mb-2 rounded-md border border-amber-200 bg-amber-50 p-2 text-xs text-amber-900">
-                  <p>{guard.warningMessage} Preview reviewed for this item.</p>
-                  <label className="mt-1 flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      checked={acknowledged[item.generatedContentId] ?? false}
-                      onChange={(event) => setAcknowledged((prev) => ({
-                        ...prev,
-                        [item.generatedContentId]: event.target.checked,
-                      }))}
-                    />
-                    I acknowledge this warning.
-                  </label>
+                  <p>{guard.warningMessage} This is advisory only and will not block queueing.</p>
                 </div>
               )}
 
               {sendableRecipients.length === 0 && (
-                <p className="mb-2 text-xs text-red-600">No sendable recipients remain for this account after filters and readiness policy. It will be skipped.</p>
+                <p className="mb-2 text-xs text-red-600">No recipients remain for this account after your current filters. It will be skipped.</p>
               )}
               <div className="mb-2 flex flex-wrap items-center gap-1">
                 <Button

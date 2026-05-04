@@ -323,10 +323,7 @@ async function buildPersistedWorkspace(accounts: CanonicalAccountInput[], person
       canonicalCompanyId: link?.canonical_company.id ?? null,
       canonicalCompanySource: ((link?.canonical_company.source as 'hubspot_company_id' | 'company_domain' | 'account_name' | 'missing' | null) ?? 'missing'),
       linkedContacts: bucket.length,
-      sendableContacts: bucket.filter((persona) => {
-        if (!persona.email || persona.do_not_contact) return false;
-        return !contactsByPersonaId.get(persona.id)?.sendBlocked;
-      }).length,
+      sendableContacts: bucket.filter((persona) => Boolean(persona.email)).length,
       unresolvedConflicts,
       duplicateCompanyAccounts,
     });

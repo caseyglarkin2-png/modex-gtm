@@ -169,8 +169,11 @@ describe('Email send API', () => {
     });
   });
 
-  it('blocks single send when canonical recipient identity collides across accounts', async () => {
+  it('uses persona email when personaId is provided even if canonical identity is noisy', async () => {
     mockedPrisma.prisma.unsubscribedEmail.findUnique.mockResolvedValue(null);
+    mockedSendEmail.mockResolvedValue({ headers: { 'x-message-id': 'abc123' }, provider: 'gmail' });
+    mockedPrisma.prisma.account.findUnique.mockResolvedValue(null);
+    mockedPrisma.prisma.emailLog.create.mockResolvedValue({});
     mockedPrisma.prisma.persona.findUnique.mockResolvedValue({
       id: 7,
       name: 'Alex Ops',
@@ -213,7 +216,7 @@ describe('Email send API', () => {
     const req = new NextRequest('http://localhost/api/email/send', {
       method: 'POST',
       body: JSON.stringify({
-        to: 'alex@example.com',
+        to: 'wrong@example.com',
         personaId: 7,
         subject: 'Test send',
         bodyHtml: 'Hello there',
@@ -224,9 +227,9 @@ describe('Email send API', () => {
     const res = await sendPOST(req);
     const payload = await res.json();
 
-    expect(res.status).toBe(409);
-    expect(String(payload.error)).toMatch(/collides across multiple accounts|missing canonical identity resolution|conflicts with company domain/i);
-    expect(mockedSendEmail).not.toHaveBeenCalled();
+    expect(res.status).toBe(200);
+    expect(payload.success).toBe(true);
+    expect(mockedSendEmail).toHaveBeenCalledWith(expect.objectContaining({ to: 'alex@example.com' }));
   });
 });
 

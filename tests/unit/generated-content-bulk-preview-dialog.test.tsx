@@ -63,18 +63,12 @@ describe('BulkPreviewDialog', () => {
     }));
   });
 
-  it('requires guard acknowledgement before enabling async queue action', async () => {
+  it('keeps async queue action enabled without requiring acknowledgement', async () => {
     render(<BulkPreviewDialog items={guardedItems} />);
 
     fireEvent.click(screen.getByRole('button', { name: /Bulk Preview & Queue Send/i }));
     const queueButton = await screen.findByRole('button', { name: 'Queue Async Send Job' });
-    expect(queueButton).toBeDisabled();
-
-    fireEvent.click(screen.getByRole('checkbox', { name: /I acknowledge this warning/i }));
-
-    await waitFor(() => {
-      expect(queueButton).toBeEnabled();
-    });
+    expect(queueButton).toBeEnabled();
   });
 
   it('enqueues send job and forwards created job id', async () => {
@@ -82,7 +76,6 @@ describe('BulkPreviewDialog', () => {
     render(<BulkPreviewDialog items={guardedItems} onJobCreated={onJobCreated} />);
 
     fireEvent.click(screen.getByRole('button', { name: /Bulk Preview & Queue Send/i }));
-    fireEvent.click(await screen.findByRole('checkbox', { name: /I acknowledge this warning/i }));
     fireEvent.click(screen.getByRole('button', { name: 'Queue Async Send Job' }));
 
     await waitFor(() => {
@@ -97,7 +90,6 @@ describe('BulkPreviewDialog', () => {
     render(<BulkPreviewDialog items={guardedItems} />);
 
     fireEvent.click(screen.getByRole('button', { name: /Bulk Preview & Queue Send/i }));
-    fireEvent.click(await screen.findByRole('checkbox', { name: /I acknowledge this warning/i }));
     fireEvent.click(screen.getByRole('checkbox', { name: /Enable experiment/i }));
 
     const queueButton = screen.getByRole('button', { name: 'Queue Async Send Job' });
@@ -114,7 +106,7 @@ describe('BulkPreviewDialog', () => {
     expect(body.experiment.primaryMetric).toBe('reply_rate');
   });
 
-  it('queues only sendable recipients after readiness filtering', async () => {
+  it('queues all visible recipients without readiness gating', async () => {
     render(<BulkPreviewDialog items={[{
       ...guardedItems[0],
       recipients: [
@@ -135,7 +127,6 @@ describe('BulkPreviewDialog', () => {
     }]} />);
 
     fireEvent.click(screen.getByRole('button', { name: /Bulk Preview & Queue Send/i }));
-    fireEvent.click(await screen.findByRole('checkbox', { name: /I acknowledge this warning/i }));
     fireEvent.click(screen.getByRole('button', { name: 'Queue Async Send Job' }));
 
     await waitFor(() => {
@@ -145,6 +136,7 @@ describe('BulkPreviewDialog', () => {
     const body = JSON.parse(String(call?.[1] && (call[1] as { body?: string }).body));
     expect(body.items[0].recipients).toEqual([
       expect.objectContaining({ to: 'ops@acme.com' }),
+      expect.objectContaining({ to: 'lowfit@acme.com' }),
     ]);
   });
 });

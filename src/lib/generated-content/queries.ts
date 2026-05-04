@@ -255,7 +255,6 @@ export async function fetchGeneratedContentWorkspaceData(): Promise<GeneratedCon
         where: {
           account_name: { in: accountsWithGenerated },
           email: { not: null },
-          do_not_contact: false,
         },
         select: {
           id: true,

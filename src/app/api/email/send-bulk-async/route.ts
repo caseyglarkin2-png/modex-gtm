@@ -3,13 +3,8 @@ import { randomUUID } from 'node:crypto';
 import { BulkSendAsyncSchema } from '@/lib/validations';
 import { rateLimit } from '@/lib/rate-limit';
 import { allocateRecipientsDeterministic } from '@/lib/experiments/split';
-import { getRecipientReadinessFloor } from '@/lib/revops/recipient-readiness';
-import { resolveContentQaChecklist } from '@/lib/revops/content-qa-checklist';
-import { getStrategyPreset, isWithinTimezoneWindow, validateSendStrategy } from '@/lib/revops/send-strategy';
-import { enforceSendApprovalGate } from '@/lib/revops/send-approvals';
-import { evaluateContentQuality } from '@/lib/content-quality';
+import { getStrategyPreset, validateSendStrategy } from '@/lib/revops/send-strategy';
 import { buildInfographicEvent, parseInfographicMetadata } from '@/lib/revops/infographic-journey';
-import { resolveCanonicalSendTargets } from '@/lib/revops/canonical-sync';
 
 function escapeHtml(input: string): string {
   return input
@@ -56,23 +51,11 @@ export async function POST(req: NextRequest) {
   if (!strategyValidation.ok) {
     return NextResponse.json({ error: strategyValidation.errors.join(' ') }, { status: 400 });
   }
-  if (payload.strategy && !isWithinTimezoneWindow(strategy.timezone_window)) {
-    return NextResponse.json({ error: 'Current time is outside configured timezone send window.' }, { status: 409 });
-  }
-  if (!payload.guardWarningsAcknowledged) {
-    return NextResponse.json(
-      { error: 'Guard warnings must be acknowledged before async bulk send can start.' },
-      { status: 409 },
-    );
-  }
 
   const { prisma } = await import('@/lib/prisma');
   const personaIds = Array.from(new Set(
     payload.items.flatMap((item) => item.recipients.map((recipient) => recipient.personaId).filter((value): value is number => Boolean(value))),
   ));
-  const canonicalTargets = personaIds.length > 0
-    ? await resolveCanonicalSendTargets(personaIds)
-    : new Map();
   const personaRows = personaIds.length > 0
     ? await prisma.persona.findMany({
         where: { id: { in: personaIds } },
@@ -116,16 +99,6 @@ export async function POST(req: NextRequest) {
     const generated = generatedById.get(item.generatedContentId);
     return item.recipients.map((recipient) => {
       const persona = recipient.personaId ? personaById.get(recipient.personaId) : null;
-      const canonical = recipient.personaId ? canonicalTargets.get(recipient.personaId) : null;
-      const canonicalError = recipient.personaId
-        ? !persona || !persona.email
-          ? 'Recipient record not found.'
-          : !canonical || canonical.sendBlocked
-            ? canonical?.sendBlockReason ?? 'Recipient missing canonical identity resolution.'
-            : persona.email.toLowerCase() !== recipient.to.toLowerCase()
-              ? 'Recipient email does not match canonical contact record.'
-              : null
-        : null;
       const toEmail = (persona?.email ?? recipient.to).toLowerCase();
       const accountName = persona?.account_name ?? recipient.accountName ?? item.accountName ?? generated?.account_name ?? '';
       return {
@@ -141,50 +114,11 @@ export async function POST(req: NextRequest) {
         readiness_score: recipient.readinessScore ?? null,
         readiness_tier: recipient.readinessTier ?? null,
         stale: recipient.stale ?? null,
-        canonical_error: canonicalError,
+        canonical_error: null,
         idempotency_seed: `${item.generatedContentId}:${toEmail}:${item.subject}`,
       };
     });
   });
-
-  const readinessViolations: string[] = [];
-  const checklistViolations: string[] = [];
-  const canonicalViolations = recipientRows.filter((row) => row.canonical_error).map((row) => `${row.account_name}:${row.to_email}`);
-  for (const row of recipientRows) {
-    const generated = generatedById.get(row.generated_content_id);
-    if (!generated) continue;
-    const floor = getRecipientReadinessFloor(generated.campaign?.campaign_type);
-    if ((row.readiness_score ?? 0) < floor) {
-      readinessViolations.push(`${row.account_name}:${row.to_email}`);
-    }
-  }
-  for (const generated of generatedContentRows) {
-    const checklist = resolveContentQaChecklist({
-      campaignType: generated.campaign?.campaign_type,
-      completedItemIds: generated.checklist_state?.completed_item_ids ?? [],
-      content: generated.content,
-      accountName: generated.account_name,
-    });
-    if (!checklist.complete) checklistViolations.push(String(generated.id));
-  }
-  if (readinessViolations.length > 0) {
-    return NextResponse.json(
-      { error: `Readiness floor policy violated for ${readinessViolations.length} recipient(s).` },
-      { status: 409 },
-    );
-  }
-  if (canonicalViolations.length > 0) {
-    return NextResponse.json(
-      { error: `Canonical identity policy violated for ${canonicalViolations.length} recipient(s).` },
-      { status: 409 },
-    );
-  }
-  if (checklistViolations.length > 0) {
-    return NextResponse.json(
-      { error: `Checklist policy incomplete for generated content: ${checklistViolations.join(', ')}` },
-      { status: 409 },
-    );
-  }
 
   const uniqueRecipientRows = Array.from(new Map(
     recipientRows.map((row) => [`${row.generated_content_id}:${row.to_email}`, row]),
@@ -198,65 +132,6 @@ export async function POST(req: NextRequest) {
 
   if (uniqueRecipientRows.length === 0) {
     return NextResponse.json({ error: 'No recipients to enqueue' }, { status: 400 });
-  }
-  if (uniqueRecipientRows.length > strategy.daily_cap) {
-    return NextResponse.json(
-      { error: `Daily cap exceeded (${uniqueRecipientRows.length}/${strategy.daily_cap}).` },
-      { status: 409 },
-    );
-  }
-  const domainCounts = uniqueRecipientRows.reduce<Record<string, number>>((acc, row) => {
-    const domain = row.to_email.split('@')[1] ?? 'unknown';
-    acc[domain] = (acc[domain] ?? 0) + 1;
-    return acc;
-  }, {});
-  const domainViolations = Object.entries(domainCounts).filter(([, count]) => count > strategy.domain_cap);
-  if (domainViolations.length > 0) {
-    return NextResponse.json(
-      { error: `Domain cap exceeded for ${domainViolations.map(([domain]) => domain).join(', ')}.` },
-      { status: 409 },
-    );
-  }
-  const [knownDomainRows, recentOutcomes] = await Promise.all([
-    prisma.emailLog.findMany({
-      orderBy: { created_at: 'desc' },
-      take: 600,
-      select: { to_email: true },
-    }),
-    prisma.sendJobRecipient.findMany({
-      orderBy: { created_at: 'desc' },
-      take: 900,
-      select: { status: true },
-    }),
-  ]);
-  const knownDomains = Array.from(new Set(
-    knownDomainRows
-      .map((row) => row.to_email.split('@')[1]?.toLowerCase())
-      .filter((value): value is string => Boolean(value)),
-  ));
-  const qualityScores = payload.items.map((item) => evaluateContentQuality(item.bodyHtml, item.accountName).score);
-  const avgQualityScore = qualityScores.length > 0
-    ? Math.round(qualityScores.reduce((sum, score) => sum + score, 0) / qualityScores.length)
-    : null;
-  const bounceRate = recentOutcomes.length > 0
-    ? recentOutcomes.filter((row) => row.status === 'failed').length / recentOutcomes.length
-    : 0;
-  const approvalGate = await enforceSendApprovalGate(prisma, {
-    channel: 'bulk-async',
-    accountName: payload.items[0]?.accountName ?? null,
-    recipientCount: uniqueRecipientRows.length,
-    qualityScore: avgQualityScore,
-    domains: Object.keys(domainCounts),
-    knownDomains,
-    recentBounceRate: bounceRate,
-    requestedBy: payload.requestedBy ?? 'Casey',
-  });
-  if (!approvalGate.allowed) {
-    return NextResponse.json({
-      error: 'Approval required before async send can proceed.',
-      approval: approvalGate.approval,
-      policy: approvalGate.policy,
-    }, { status: 409 });
   }
 
   let experimentRow: {

@@ -1,10 +1,10 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { OnePageSendDialog } from '@/components/email/one-pager-send-dialog';
 import { Button } from '@/components/ui/button';
 
 describe('OnePageSendDialog quality guard', () => {
-  it('blocks send below threshold until override acknowledgement', async () => {
+  it('shows low-quality warning but still allows user-controlled send', async () => {
     render(
       <OnePageSendDialog
         accountName="Acme Foods"
@@ -60,15 +60,11 @@ describe('OnePageSendDialog quality guard', () => {
     );
 
     const send = await screen.findByRole('button', { name: /Send to 1 Recipient/i });
-    expect(send).toBeDisabled();
-
-    fireEvent.click(screen.getByRole('checkbox', { name: /I acknowledge quality risk and approve this send/i }));
-    await waitFor(() => {
-      expect(send).toBeEnabled();
-    });
+    expect(send).toBeEnabled();
+    expect(screen.getByText(/below the advisory threshold/i)).toBeVisible();
   });
 
-  it('preselects recommended send-ready recipients on open', async () => {
+  it('preselects all recipients on open', async () => {
     render(
       <OnePageSendDialog
         accountName="Acme Foods"
@@ -126,10 +122,10 @@ describe('OnePageSendDialog quality guard', () => {
     await waitFor(() => {
       expect(screen.getByRole('button', { name: /Send to 1 Recipient/i })).toBeEnabled();
     });
-    expect(screen.getByText(/Recommended recipients are preselected/i)).toBeVisible();
+    expect(screen.getByText(/All recipients with email are preselected/i)).toBeVisible();
   });
 
-  it('disables the trigger when there are no canonical send-ready recipients', async () => {
+  it('does not disable the trigger for canonical warnings', async () => {
     render(
       <OnePageSendDialog
         accountName="Acme Foods"
@@ -185,7 +181,6 @@ describe('OnePageSendDialog quality guard', () => {
     );
 
     const trigger = screen.getByRole('button', { name: /Preview & Send/i });
-    expect(trigger).toBeDisabled();
-    expect(trigger).toHaveAttribute('title', expect.stringMatching(/No canonical send-ready recipients/i));
+    expect(trigger).toBeEnabled();
   });
 });

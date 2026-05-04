@@ -266,7 +266,7 @@ export function buildCanonicalWorkspace(
       canonicalCompanyId: companyInfo.canonicalCompanyId,
       canonicalCompanySource: companyInfo.canonicalCompanySource,
       linkedContacts: bucket.length,
-      sendableContacts: bucket.filter((persona) => Boolean(persona.email) && !persona.do_not_contact).length,
+      sendableContacts: bucket.filter((persona) => Boolean(persona.email)).length,
       unresolvedConflicts: resolutions.filter((resolution) => resolution.status !== 'resolved').length,
       duplicateCompanyAccounts,
     });

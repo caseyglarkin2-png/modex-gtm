@@ -53,7 +53,24 @@ beforeEach(() => {
 });
 
 describe('email send-bulk-async route', () => {
-  it('rejects when guard warnings are not acknowledged', async () => {
+  it('does not require guard acknowledgement to queue async send', async () => {
+    mockedPrisma.generatedContent.findMany.mockResolvedValue([
+      {
+        id: 10,
+        campaign_id: 7,
+        account_name: 'Acme Foods',
+        version_metadata: {},
+        campaign: { campaign_type: 'trade_show' },
+        checklist_state: { completed_item_ids: [] },
+      },
+    ]);
+    mockedPrisma.sendJob.create.mockResolvedValue({
+      id: 400,
+      status: 'pending',
+      total_recipients: 1,
+      created_at: new Date('2026-05-02T00:00:00.000Z'),
+    });
+
     const req = new NextRequest('http://localhost/api/email/send-bulk-async', {
       method: 'POST',
       body: JSON.stringify({
@@ -69,7 +86,7 @@ describe('email send-bulk-async route', () => {
     });
 
     const res = await POST(req);
-    expect(res.status).toBe(409);
+    expect(res.status).toBe(200);
   });
 
   it('rejects missing generated content ids', async () => {
@@ -239,7 +256,7 @@ describe('email send-bulk-async route', () => {
     }));
   });
 
-  it('rejects recipients below readiness floor', async () => {
+  it('queues recipients below advisory readiness floor', async () => {
     mockedPrisma.generatedContent.findMany.mockResolvedValue([
       {
         id: 10,
@@ -250,6 +267,12 @@ describe('email send-bulk-async route', () => {
         checklist_state: { completed_item_ids: ['clear_value_prop', 'account_specific_proof', 'cta_specific', 'compliance_checked', 'deliverability_checked'] },
       },
     ]);
+    mockedPrisma.sendJob.create.mockResolvedValue({
+      id: 403,
+      status: 'pending',
+      total_recipients: 1,
+      created_at: new Date('2026-05-04T00:00:00.000Z'),
+    });
 
     const req = new NextRequest('http://localhost/api/email/send-bulk-async', {
       method: 'POST',
@@ -266,10 +289,10 @@ describe('email send-bulk-async route', () => {
     });
 
     const res = await POST(req);
-    expect(res.status).toBe(409);
+    expect(res.status).toBe(200);
   });
 
-  it('blocks when approval policy requires reviewer action', async () => {
+  it('does not block when approval policy would have required reviewer action', async () => {
     mockedPrisma.generatedContent.findMany.mockResolvedValue([
       {
         id: 10,
@@ -284,6 +307,12 @@ describe('email send-bulk-async route', () => {
       allowed: false,
       policy: { required: true },
       approval: { id: 'sar_1' },
+    });
+    mockedPrisma.sendJob.create.mockResolvedValue({
+      id: 404,
+      status: 'pending',
+      total_recipients: 1,
+      created_at: new Date('2026-05-04T00:00:00.000Z'),
     });
 
     const req = new NextRequest('http://localhost/api/email/send-bulk-async', {
@@ -300,6 +329,6 @@ describe('email send-bulk-async route', () => {
       }),
     });
     const res = await POST(req);
-    expect(res.status).toBe(409);
+    expect(res.status).toBe(200);
   });
 });

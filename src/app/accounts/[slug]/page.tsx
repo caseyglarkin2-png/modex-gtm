@@ -145,7 +145,7 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
   });
   const canonicalAccountSummary = canonicalWorkspace.accountSummaries.get(account.name) ?? null;
   const accountRecipients = personas
-    .filter((persona) => Boolean(persona.email) && !persona.do_not_contact)
+    .filter((persona) => Boolean(persona.email))
     .map((persona) => {
       const canonical = canonicalWorkspace.contactsByPersonaId.get(persona.id);
       return {
@@ -402,7 +402,7 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                     <p className="mt-1 font-medium">{canonicalAccountSummary.linkedContacts}</p>
                   </div>
                   <div className="rounded-lg border border-[var(--border)] p-3">
-                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Sendable Contacts</p>
+                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Contacts With Email</p>
                     <p className="mt-1 font-medium">{canonicalAccountSummary.sendableContacts}</p>
                   </div>
                   <div className="rounded-lg border border-[var(--border)] p-3">
