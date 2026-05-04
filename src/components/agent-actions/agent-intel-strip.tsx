@@ -1,11 +1,10 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { BriefcaseBusiness, ExternalLink, RefreshCw, Sparkles, Users } from 'lucide-react';
+import { BriefcaseBusiness, RefreshCw, Sparkles, Users } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AgentActionDialog } from '@/components/agent-actions/agent-action-dialog';
-import { OnePagerDialog } from '@/components/ai/one-pager-preview';
 import type { AgentActionCard, AgentActionResult } from '@/lib/agent-actions/types';
 import { readApiResponse } from '@/lib/api-response';
 
@@ -170,15 +169,6 @@ export function AgentIntelStrip({ accountName, initialResult }: AgentIntelStripP
         </div>
 
         <div className="flex flex-wrap gap-2 xl:justify-end">
-          <OnePagerDialog
-            accountName={accountName}
-            trigger={
-              <Button size="sm" className="gap-1.5 bg-blue-600 text-white hover:bg-blue-700">
-                <Sparkles className="h-3.5 w-3.5" />
-                Generate With Intel
-              </Button>
-            }
-          />
           <AgentActionDialog
             request={{ action: 'account_research', target: { accountName, company: accountName } }}
             title={`Research ${accountName}`}
@@ -186,26 +176,6 @@ export function AgentIntelStrip({ accountName, initialResult }: AgentIntelStripP
               <Button size="sm" variant="outline" className="gap-1.5">
                 <BriefcaseBusiness className="h-3.5 w-3.5" />
                 Research Brief
-              </Button>
-            }
-          />
-          <AgentActionDialog
-            request={{ action: 'company_contacts', target: { accountName, company: accountName } }}
-            title={`Find More Contacts for ${accountName}`}
-            trigger={
-              <Button size="sm" variant="outline" className="gap-1.5">
-                <Users className="h-3.5 w-3.5" />
-                Find More Contacts
-              </Button>
-            }
-          />
-          <AgentActionDialog
-            request={{ action: 'draft_outreach', target: { accountName, company: accountName } }}
-            title={`Draft Outreach for ${accountName}`}
-            trigger={
-              <Button size="sm" variant="outline" className="gap-1.5">
-                <ExternalLink className="h-3.5 w-3.5" />
-                Draft Outreach
               </Button>
             }
           />
