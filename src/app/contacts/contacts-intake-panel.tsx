@@ -9,8 +9,10 @@ import { Input } from '@/components/ui/input';
 import {
   createManualContactRecord,
   importContactsCsv,
+  importApolloSavedAccountsPage,
   importApolloSavedContactsPage,
   importNextHubSpotContactsPage,
+  listApolloSavedLists,
 } from './actions';
 
 type ContactsIntakePanelProps = {
@@ -31,12 +33,17 @@ export function ContactsIntakePanel({
   apolloLinkedCount,
 }: ContactsIntakePanelProps) {
   const [apolloLabelIds, setApolloLabelIds] = useState('');
+  const [apolloAccountLabelIds, setApolloAccountLabelIds] = useState('');
+  const [apolloLists, setApolloLists] = useState<Array<{ id: string; name: string; modality?: string; cachedCount?: number }>>([]);
   const [apolloPage, setApolloPage] = useState(1);
+  const [apolloAccountPage, setApolloAccountPage] = useState(1);
   const [csvFileName, setCsvFileName] = useState('');
   const [csvText, setCsvText] = useState('');
   const [manual, setManual] = useState({ name: '', email: '', title: '', accountName: '', companyDomain: '' });
   const [hubspotPending, startHubSpotImport] = useTransition();
+  const [apolloListsPending, startApolloListsLoad] = useTransition();
   const [apolloPending, startApolloImport] = useTransition();
+  const [apolloAccountsPending, startApolloAccountsImport] = useTransition();
   const [csvPending, startCsvImport] = useTransition();
   const [manualPending, startManualCreate] = useTransition();
 
@@ -63,6 +70,28 @@ export function ContactsIntakePanel({
         `Apollo page ${result.page}: imported ${result.imported}, updated ${result.updated}, skipped ${result.skipped}, blocked ${result.blocked}, errors ${result.errors}`,
       );
       setApolloPage((page) => page + 1);
+    });
+  }
+
+  function loadApolloLists() {
+    startApolloListsLoad(async () => {
+      const result = await listApolloSavedLists();
+      setApolloLists(result);
+      toast.success(`Loaded ${result.length} Apollo lists`);
+    });
+  }
+
+  function runApolloAccountImport() {
+    const labelIds = apolloAccountLabelIds.split(',').map((value) => value.trim()).filter(Boolean);
+    startApolloAccountsImport(async () => {
+      const result = await importApolloSavedAccountsPage({
+        accountLabelIds: labelIds,
+        page: apolloAccountPage,
+      });
+      toast.success(
+        `Apollo accounts page ${result.page}: imported ${result.imported}, updated ${result.updated}, skipped ${result.skipped}, errors ${result.errors}`,
+      );
+      setApolloAccountPage((page) => page + 1);
     });
   }
 
@@ -122,11 +151,35 @@ export function ContactsIntakePanel({
           <div className="rounded-md border p-3">
             <div className="grid gap-2">
               <div>
-                <p className="text-sm font-medium">Import Apollo Saved List</p>
+                <div className="flex items-center justify-between gap-2">
+                  <p className="text-sm font-medium">Import Apollo Saved Lists</p>
+                  <Button type="button" variant="outline" size="sm" onClick={loadApolloLists} disabled={apolloListsPending} className="gap-2">
+                    {apolloListsPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Database className="h-4 w-4" />}
+                    Show Lists
+                  </Button>
+                </div>
                 <p className="text-xs text-muted-foreground">
                   Paste Apollo saved-list/contact-label IDs, comma-separated. Unenriched rows import as review-safe prospects until email/detail enrichment catches up.
                 </p>
               </div>
+              {apolloLists.length > 0 ? (
+                <div className="max-h-24 overflow-auto rounded-md bg-muted p-2 text-xs text-muted-foreground">
+                  {apolloLists.map((list) => (
+                    <button
+                      key={list.id}
+                      type="button"
+                      className="block w-full truncate text-left hover:text-foreground"
+                      onClick={() => {
+                        if (list.modality === 'accounts') setApolloAccountLabelIds(list.id);
+                        else setApolloLabelIds(list.id);
+                      }}
+                      title={`${list.name} ${list.cachedCount ?? 0} ${list.id}`}
+                    >
+                      {list.modality ?? 'list'} · {list.cachedCount ?? 0} · {list.name}
+                    </button>
+                  ))}
+                </div>
+              ) : null}
               <div className="flex gap-2">
                 <Input
                   value={apolloLabelIds}
@@ -145,6 +198,26 @@ export function ContactsIntakePanel({
                 <Button type="button" onClick={runApolloImport} disabled={apolloPending} className="gap-2">
                   {apolloPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
                   Import
+                </Button>
+              </div>
+              <div className="flex gap-2">
+                <Input
+                  value={apolloAccountLabelIds}
+                  onChange={(event) => setApolloAccountLabelIds(event.target.value)}
+                  placeholder="Apollo account list IDs"
+                  aria-label="Apollo account label IDs"
+                />
+                <Input
+                  className="w-24"
+                  type="number"
+                  min={1}
+                  value={apolloAccountPage}
+                  onChange={(event) => setApolloAccountPage(Number(event.target.value) || 1)}
+                  aria-label="Apollo account page"
+                />
+                <Button type="button" onClick={runApolloAccountImport} disabled={apolloAccountsPending} className="gap-2">
+                  {apolloAccountsPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
+                  Accounts
                 </Button>
               </div>
             </div>

@@ -6,7 +6,7 @@ import { getContactById, hsSearchContacts, listRecentContacts, type HubSpotConta
 import { normalizeName, normalizeTitle, parseDomainFromEmail, scoreContactQuality, splitName } from '@/lib/contact-standard';
 import { buildHubSpotIntakeCandidates, type HubSpotIntakeCandidate } from '@/lib/contacts/hubspot-intake';
 import { enrichPersonaFromHubSpotContact } from '@/lib/enrichment/apollo-enrichment';
-import { searchApolloSavedContacts } from '@/lib/enrichment/apollo-client';
+import { listApolloLabels, searchApolloSavedAccounts, searchApolloSavedContacts } from '@/lib/enrichment/apollo-client';
 import { importExternalContact, summarizeImportResults } from '@/lib/contacts/external-contact-import';
 import { parseContactsCsv } from '@/lib/contacts/csv-intake';
 import {
@@ -437,6 +437,99 @@ export async function importApolloSavedContactsPage(input: {
 
   revalidatePath('/contacts');
   return { ...summarizeImportResults(outcomes), errors, page: saved.page, totalEntries: saved.totalEntries };
+}
+
+export async function listApolloSavedLists(): Promise<Array<{ id: string; name: string; modality?: string; cachedCount?: number }>> {
+  try {
+    const labels = await listApolloLabels();
+    return labels.map((label) => ({
+      id: label.id,
+      name: label.name,
+      modality: label.modality,
+      cachedCount: label.cached_count,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+export async function importApolloSavedAccountsPage(input: {
+  accountLabelIds?: string[];
+  page?: number;
+}): Promise<{
+  imported: number;
+  updated: number;
+  skipped: number;
+  errors: number;
+  page: number;
+  totalEntries: number;
+}> {
+  const saved = await searchApolloSavedAccounts({
+    accountLabelIds: input.accountLabelIds?.filter(Boolean),
+    page: input.page ?? 1,
+    perPage: 100,
+  });
+  const summary = { imported: 0, updated: 0, skipped: 0, errors: 0 };
+
+  for (const account of saved.accounts) {
+    try {
+      const existing = await prisma.account.findFirst({
+        where: {
+          OR: [
+            { name: { equals: account.name, mode: 'insensitive' } },
+            ...(account.website_url ? [{ source_url_1: account.website_url }] : []),
+          ],
+        },
+      });
+
+      if (existing) {
+        await prisma.account.update({
+          where: { id: existing.id },
+          data: {
+            source: existing.source ?? 'apollo_account_list',
+            source_url_1: existing.source_url_1 ?? account.website_url ?? account.domain ?? null,
+            source_url_2: existing.source_url_2 ?? account.linkedin_url ?? null,
+            vertical: existing.vertical === 'Unknown' && account.industry ? account.industry : existing.vertical,
+          },
+        });
+        summary.updated++;
+      } else {
+        await prisma.account.create({
+          data: {
+            name: account.name,
+            rank: 999,
+            vertical: account.industry || 'Unknown',
+            owner: 'Unassigned',
+            research_status: 'Needs Review',
+            priority_band: 'D',
+            priority_score: 50,
+            icp_fit: 50,
+            modex_signal: 0,
+            primo_story_fit: 0,
+            warm_intro: 0,
+            strategic_value: 50,
+            meeting_ease: 50,
+            source: 'apollo_account_list',
+            source_url_1: account.website_url ?? account.domain ?? null,
+            source_url_2: account.linkedin_url ?? null,
+            notes: `Auto-triaged from Apollo saved account list. Apollo account ID: ${account.id}. Requires ICP/owner review.`,
+          },
+        });
+        summary.imported++;
+      }
+    } catch {
+      summary.errors++;
+    }
+  }
+
+  await prisma.systemConfig.upsert({
+    where: { key: 'contacts_intake_apollo_accounts_last_run' },
+    update: { value: JSON.stringify({ at: new Date().toISOString(), page: saved.page, pulled: saved.accounts.length, totalEntries: saved.totalEntries, accountLabelIds: input.accountLabelIds ?? [] }) },
+    create: { key: 'contacts_intake_apollo_accounts_last_run', value: JSON.stringify({ at: new Date().toISOString(), page: saved.page, pulled: saved.accounts.length, totalEntries: saved.totalEntries, accountLabelIds: input.accountLabelIds ?? [] }) },
+  });
+
+  revalidatePath('/contacts');
+  return { ...summary, page: saved.page, totalEntries: saved.totalEntries };
 }
 
 export async function createManualContactRecord(input: {

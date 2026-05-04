@@ -34,6 +34,8 @@ test('Contacts renders saved views, readiness explanations, detail context, and 
   await expect(page.getByText('TAM / ICP Intake')).toBeVisible();
   await expect(page.getByRole('button', { name: /Import Page/i })).toBeVisible();
   await expect(page.getByLabel('Apollo contact label IDs')).toBeVisible();
+  await expect(page.getByLabel('Apollo account label IDs')).toBeVisible();
+  await expect(page.getByRole('button', { name: /Show Lists/i })).toBeVisible();
   await expect(page.getByLabel('Contacts CSV file')).toBeVisible();
   await expect(page.getByRole('button', { name: /Import CSV/i })).toBeVisible();
   await expect(page.getByLabel('Add contact')).toBeVisible();

@@ -44,23 +44,31 @@ RevOps OS Contacts Intake Closeout
   - Added shared external contact importer with dedupe by source ID/email, review-safe account creation, quality scoring, source provenance, and send-readiness guardrails.
   - Added CSV parser for common contact/account headers.
   - Added Apollo saved-contact search support for saved-list/contact-label IDs.
+  - Added Apollo list discovery and Apollo saved-account import for TAM account lists.
   - Ran first production HubSpot intake batch.
 - Production data movement:
   - Before: 81 accounts, 226 contacts, 55 HubSpot-linked contacts, 1 Apollo-linked enrichment.
   - After first HubSpot batch: 180 accounts, 726 contacts, 555 HubSpot-linked contacts, 1 Apollo-linked enrichment.
+  - After Apollo account + saved-contact import: 1,705 accounts, 1,909 contacts, 555 HubSpot-linked contacts, 1,418 Apollo-linked contacts/enrichments, 1,085 Apollo TAM accounts.
   - Batch command: npx tsx scripts/intake-crm-contacts.ts --source hubspot --env .env.production.local --limit 500: PASS
+  - Batch command: npx tsx scripts/intake-crm-contacts.ts --source apollo --kind accounts --label-id 69f4a4f7ff90a2000db3f9b5 --env .env.production.local --limit 1500: PASS
+  - Batch command: npx tsx scripts/intake-crm-contacts.ts --source apollo --kind contacts --env .env.production.local --limit 5000: PASS
 - Commands:
   - pnpm -s tsc --noEmit: PASS
   - pnpm -s vitest run tests/unit/contacts-csv-intake.test.ts tests/unit/apollo-client.test.ts tests/unit/hubspot-intake.test.ts tests/unit/contacts-workspace.test.ts: PASS
   - pnpm -s lint -- src/app/contacts src/lib/contacts src/lib/enrichment/apollo-client.ts tests/unit/contacts-csv-intake.test.ts tests/e2e/contacts-workspace.spec.ts: PASS
 - Routes touched:
   - /contacts
-- Known operator input needed:
-  - Apollo saved-list/contact-label ID for the exact saved Apollo list.
-  - CSV files can now be imported directly in the UI when Apollo enrichment/list export is incomplete.
+- Apollo lists discovered:
+  - accounts: 1,133 - Enterprise Freight & Logistics TAM 2026 - 69f4a4f7ff90a2000db3f9b5.
+  - contacts: 290 - Freight & Logistics Buying Committee - Priority 200 - 69f4c2e517ebbb0021e0ee89.
+  - contacts: 75 - Freight & Logistics Priority Outreach - HubSpot Ready - 69f529addf7ec0000d356ac7.
+- Known carryover:
+  - CSV import remains the path for the rest of the 13,000-contact TAM/ICP list that is not yet saved/enriched in Apollo.
 - Result:
   - Contacts are now wired as an operating database, not just a static list.
   - HubSpot records can be bulk-loaded safely.
+  - Apollo saved accounts and visible saved contacts are loaded into production.
   - Apollo saved-list rows can be imported even when not fully enriched; incomplete rows stay review-safe and out of send-ready workflows.
   - CSV import is first-class for the 13,000-contact TAM/ICP file path.
 ```

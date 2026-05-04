@@ -77,4 +77,52 @@ describe('apollo client', () => {
       }),
     );
   });
+
+  it('lists Apollo saved lists and tags', async () => {
+    process.env.APOLLO_API_KEY = 'test-apollo-key';
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue({
+      ok: true,
+      json: async () => ([
+        { id: 'label-accounts', name: 'Enterprise TAM', modality: 'accounts', cached_count: 1133 },
+        { id: 'label-contacts', name: 'Buying Committee', modality: 'contacts', cached_count: 290 },
+      ]),
+    } as Response);
+    const { listApolloLabels } = await import('@/lib/enrichment/apollo-client');
+
+    const labels = await listApolloLabels();
+
+    expect(labels[0]).toMatchObject({ id: 'label-accounts', cached_count: 1133 });
+    expect(labels[1]).toMatchObject({ id: 'label-contacts', modality: 'contacts' });
+  });
+
+  it('searches saved Apollo account lists', async () => {
+    process.env.APOLLO_API_KEY = 'test-apollo-key';
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        accounts: [
+          {
+            id: 'apollo-account-1',
+            name: 'Example Co',
+            website_url: 'https://example.com',
+            industry: 'Food and Beverage',
+          },
+        ],
+        pagination: { page: 1, per_page: 100, total_entries: 1133 },
+      }),
+    } as Response);
+    const { searchApolloSavedAccounts } = await import('@/lib/enrichment/apollo-client');
+
+    const result = await searchApolloSavedAccounts({ accountLabelIds: ['label-accounts'] });
+
+    expect(result.totalEntries).toBe(1133);
+    expect(result.accounts[0]).toMatchObject({ name: 'Example Co' });
+    expect(fetchMock).toHaveBeenCalledWith(
+      'https://api.apollo.io/api/v1/accounts/search',
+      expect.objectContaining({
+        method: 'POST',
+        body: expect.stringContaining('"account_label_ids":["label-accounts"]'),
+      }),
+    );
+  });
 });
