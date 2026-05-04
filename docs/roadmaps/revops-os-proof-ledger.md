@@ -1,5 +1,7 @@
 # RevOps OS Proof Ledger
 
+<!-- markdownlint-disable MD013 MD024 MD060 -->
+
 **Purpose:** Ground-source truth for RevOps OS delivery. A roadmap task is not done because it is planned or implemented; it is done when this ledger records command proof, UI click proof, and artifacts.
 
 ## Closeout Rules
