@@ -48,6 +48,13 @@ export interface ContactRow {
   readinessReasons: string[];
   campaignName: string | null;
   campaignSlug: string | null;
+  canonicalStatus: string;
+  canonicalTone: 'success' | 'warning' | 'destructive';
+  canonicalCompanySource: string;
+  canonicalContactId: string | null;
+  canonicalCompanyId: string | null;
+  canonicalConflicts: string[];
+  canonicalBlockedReason: string | null;
 }
 
 const PORTAL_ID = process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID || '';
@@ -123,6 +130,16 @@ const columns: Column<ContactRow>[] = [
     render: (c) => (
       <Badge variant={c.readinessTone} className="text-xs" title={c.readinessReasons.join(' ')}>
         {c.readinessLabel}
+      </Badge>
+    ),
+  },
+  {
+    key: 'canonicalStatus' as keyof ContactRow,
+    label: 'Canonical',
+    sortable: true,
+    render: (c) => (
+      <Badge variant={c.canonicalTone} className="text-xs" title={c.canonicalConflicts.join(' ')}>
+        {c.canonicalStatus}
       </Badge>
     ),
   },
@@ -263,6 +280,20 @@ function ContactDetailPanel({ contact }: { contact: ContactRow | null }) {
           <ul className="mt-2 list-disc space-y-1 pl-4 text-xs text-[var(--muted-foreground)]">
             {contact.readinessReasons.map((reason) => <li key={reason}>{reason}</li>)}
           </ul>
+        </div>
+
+        <div>
+          <p className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Canonical</p>
+          <Badge variant={contact.canonicalTone} className="mt-1">{contact.canonicalStatus}</Badge>
+          <p className="mt-2 text-xs text-[var(--muted-foreground)]">Company source: {contact.canonicalCompanySource.replaceAll('_', ' ')}</p>
+          <p className="mt-1 text-xs text-[var(--muted-foreground)]">Contact id: {contact.canonicalContactId ?? 'not resolved'}</p>
+          <p className="mt-1 text-xs text-[var(--muted-foreground)]">Company id: {contact.canonicalCompanyId ?? 'not resolved'}</p>
+          {contact.canonicalConflicts.length > 0 ? (
+            <p className="mt-1 text-xs text-amber-700">Issues: {contact.canonicalConflicts.join(', ')}</p>
+          ) : null}
+          {contact.canonicalBlockedReason ? (
+            <p className="mt-1 text-xs text-red-700">{contact.canonicalBlockedReason}</p>
+          ) : null}
         </div>
 
         <div className="grid grid-cols-2 gap-2">

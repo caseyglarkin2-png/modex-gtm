@@ -113,4 +113,38 @@ describe('BulkPreviewDialog', () => {
     expect(body.experiment.variants).toHaveLength(2);
     expect(body.experiment.primaryMetric).toBe('reply_rate');
   });
+
+  it('queues only sendable recipients after readiness filtering', async () => {
+    render(<BulkPreviewDialog items={[{
+      ...guardedItems[0],
+      recipients: [
+        guardedItems[0].recipients[0],
+        {
+          id: 2,
+          name: 'Low Fit',
+          email: 'lowfit@acme.com',
+          readiness: {
+            score: 40,
+            tier: 'low',
+            stale: true,
+            freshness_days: 90,
+            reasons: ['Low contact confidence'],
+          },
+        },
+      ],
+    }]} />);
+
+    fireEvent.click(screen.getByRole('button', { name: /Bulk Preview & Queue Send/i }));
+    fireEvent.click(await screen.findByRole('checkbox', { name: /I acknowledge this warning/i }));
+    fireEvent.click(screen.getByRole('button', { name: 'Queue Async Send Job' }));
+
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalled();
+    });
+    const call = vi.mocked(fetch).mock.calls.at(-1);
+    const body = JSON.parse(String(call?.[1] && (call[1] as { body?: string }).body));
+    expect(body.items[0].recipients).toEqual([
+      expect.objectContaining({ to: 'ops@acme.com' }),
+    ]);
+  });
 });

@@ -2,9 +2,10 @@ import { prisma } from '@/lib/prisma';
 import { slugify } from '@/lib/data';
 import type { QueueGeneratedAccountCard } from '@/components/queue/generated-content-grid';
 import { evaluateContentQuality } from '@/lib/content-quality';
-import { computeChecklistCompleteness, getChecklistTemplate, type ChecklistItemId } from '@/lib/revops/content-qa-checklist';
+import { resolveContentQaChecklist } from '@/lib/revops/content-qa-checklist';
 import { computeRecipientReadiness } from '@/lib/revops/recipient-readiness';
 import { parseInfographicMetadata } from '@/lib/revops/infographic-journey';
+import { ensureCanonicalRecords } from '@/lib/revops/canonical-sync';
 
 export type GenerationJobRecord = {
   account_name: string;
@@ -39,12 +40,17 @@ export type PersonaRecord = {
   id: number;
   account_name: string;
   name: string;
+  normalized_name?: string | null;
   email: string | null;
   title: string | null;
   role_in_deal: string | null;
   email_confidence: number;
   quality_score: number;
   last_enriched_at: Date | null;
+  email_valid?: boolean;
+  company_domain?: string | null;
+  hubspot_contact_id?: string | null;
+  do_not_contact?: boolean;
 };
 
 export type WorkspaceRecipient = {
@@ -54,6 +60,9 @@ export type WorkspaceRecipient = {
   title?: string;
   readiness: ReturnType<typeof computeRecipientReadiness>;
   role_in_deal?: string;
+  canonicalStatus?: 'resolved' | 'conflict' | 'unresolved';
+  canonicalConflicts?: string[];
+  canonicalBlockedReason?: string | null;
 };
 
 export type GeneratedContentWorkspaceData = {
@@ -131,10 +140,12 @@ export function buildGeneratedContentWorkspaceData(
   generatedRows: GeneratedContentRecord[],
   jobs: GenerationJobRecord[],
   recipients: PersonaRecord[],
+  canonicalStatuses?: Map<number, { status: 'resolved' | 'conflict' | 'unresolved'; conflictCodes: string[]; sendBlockReason: string | null }>,
 ): GeneratedContentWorkspaceData {
   const recipientsByAccount = recipients.reduce<Record<string, WorkspaceRecipient[]>>((acc, persona) => {
     if (!persona.email) return acc;
     if (!acc[persona.account_name]) acc[persona.account_name] = [];
+    const canonical = canonicalStatuses?.get(persona.id);
     acc[persona.account_name].push({
       id: persona.id,
       name: persona.name,
@@ -148,6 +159,9 @@ export function buildGeneratedContentWorkspaceData(
         role_in_deal: persona.role_in_deal,
         last_enriched_at: persona.last_enriched_at,
       }),
+      canonicalStatus: canonical?.status,
+      canonicalConflicts: canonical?.conflictCodes,
+      canonicalBlockedReason: canonical?.sendBlockReason,
     });
     return acc;
   }, {});
@@ -175,6 +189,12 @@ export function buildGeneratedContentWorkspaceData(
 
     const card = acc[row.account_name];
     const infographic = parseInfographicMetadata(row.version_metadata);
+    const checklist = resolveContentQaChecklist({
+      campaignType: row.campaign?.campaign_type,
+      completedItemIds: row.checklist_state?.completed_item_ids ?? [],
+      content: row.content,
+      accountName: row.account_name,
+    });
     const version = {
       id: row.id,
       version: row.version,
@@ -193,11 +213,8 @@ export function buildGeneratedContentWorkspaceData(
         }
         : undefined,
       quality: evaluateContentQuality(row.content, row.account_name),
-      checklist: computeChecklistCompleteness(
-        getChecklistTemplate(row.campaign?.campaign_type),
-        ((row.checklist_state?.completed_item_ids ?? []) as ChecklistItemId[]),
-      ),
-      checklist_completed_item_ids: row.checklist_state?.completed_item_ids ?? [],
+      checklist,
+      checklist_completed_item_ids: checklist.completedItemIds,
       infographic_type: infographic.infographicType,
       stage_intent: infographic.stageIntent,
       bundle_id: infographic.bundleId,
@@ -244,21 +261,31 @@ export async function fetchGeneratedContentWorkspaceData(): Promise<GeneratedCon
           id: true,
           account_name: true,
           name: true,
+          normalized_name: true,
           email: true,
           title: true,
           role_in_deal: true,
           email_confidence: true,
           quality_score: true,
           last_enriched_at: true,
+          email_valid: true,
+          company_domain: true,
+          hubspot_contact_id: true,
+          do_not_contact: true,
         },
         orderBy: [{ account_name: 'asc' }, { name: 'asc' }],
       })
     : [];
 
+  const canonicalWorkspace = accountsWithGenerated.length > 0
+    ? await ensureCanonicalRecords({ accountNames: accountsWithGenerated })
+    : null;
+
   return buildGeneratedContentWorkspaceData(
     generatedRows,
     jobs as GenerationJobRecord[],
     recipients as PersonaRecord[],
+    canonicalWorkspace?.contactsByPersonaId as Map<number, { status: 'resolved' | 'conflict' | 'unresolved'; conflictCodes: string[]; sendBlockReason: string | null }> | undefined,
   );
 }
 

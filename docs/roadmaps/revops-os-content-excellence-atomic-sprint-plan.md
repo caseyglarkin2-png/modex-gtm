@@ -46,6 +46,25 @@ RevOps OS consolidation is complete through Sprint 11. The next phase is not mor
 3. Better learning loops after response.
 4. Better visual storytelling across the funnel (multiple custom infographics, not just one).
 
+## Operator Feedback Reset (Added 2026-05-04)
+
+This roadmap is now explicitly reoriented around reducing operator friction, not adding more review surfaces.
+
+### Non-Negotiable Product Direction
+
+1. **Account route is the operating surface for outreach.**
+   - For account-specific outreach, `/accounts/[slug]` is the canonical launch point for generate -> preview -> send.
+   - `/generated-content` remains useful for batch review, analytics, and queue management, but it must not be a required detour for common account-level sends.
+2. **QA checklist becomes automated policy evaluation.**
+   - Manual checkbox persistence is not the target operating model.
+   - Required QA checks must be evaluated automatically from content + metadata + recipient state, with explicit exception handling only when policy requires it.
+3. **Canonical account/contact/company records are mandatory.**
+   - The system must stop scattering contact and company truth across disconnected tables, imports, and generated-content side state.
+   - Account, company, and contact identity resolution must have explicit source precedence, conflict handling, and operator-visible canonical ownership.
+4. **Less clicks is a hard requirement.**
+   - Default path should minimize route changes, copy/paste steps, and modal nesting between account selection and outreach execution.
+   - Any new workflow step must justify itself by automation, not by asking the operator to do more review labor.
+
 ## TAM/ICP Coverage Objective (Added)
 
 Primary operating objective before advanced optimization:
@@ -123,6 +142,14 @@ All KPI contracts require unit tests that assert denominator consistency and joi
 - Ops: `/ops`
 
 All new functionality must live in these workspaces or their existing detail routes.
+
+### Surface Ownership Rules (Added)
+
+- `/accounts/[slug]` is the canonical route for account-level outreach execution, account-scoped content review, recipient selection, and direct send.
+- `/generated-content` is the canonical route for batch operations across many accounts: bulk review, bulk publish, bulk queue/send, and cross-account filtering.
+- `/contacts` is the canonical route for contact intake, conflict resolution, and canonical contact record maintenance.
+- `/ops` is the canonical route for connector health, reconciliation, and data-quality command center actions.
+- No feature may require the operator to visit `/generated-content` first in order to send a one-pager or other account-specific generated asset from an account detail route.
 
 ## Ground-Source Truth Rules (Required)
 
@@ -238,6 +265,42 @@ Sprint closeout gate (every sprint):
 | S11.3.4 | Surface company confidence and relationship warnings in `/contacts` and `/accounts/[slug]`. | Playwright UI tests | Integrity warning screenshot |
 | S11.3.5 | Add linkage completeness metric (`linked_contacts / total_contacts`, `verified_companies / TAM_companies`). | Analytics unit tests | KPI output |
 | S11.3.6 | Add Apollo/HubSpot/internal reconciliation dashboard (`field drift rate`, `record conflict rate`, `unresolved conflict SLA breach`) in `/ops?tab=coverage`. | Playwright + unit tests | Reconciliation screenshot |
+
+---
+
+## Sprint 11.3A: Canonical Record Model + Identity Resolution
+
+**Goal:** Make account, company, and contact truth unambiguous before more send automation is layered on top.  
+**Demo:** Every sendable contact and company shown in the UI resolves to a canonical record with visible provenance and conflict state.
+
+### Atomic Tasks
+
+| Task ID | Atomic ticket | Validation | Required artifact |
+| :--- | :--- | :--- | :--- |
+| S11.3A.1 | Define canonical identity contract for `account`, `company`, and `contact` records including external ids, normalized keys, provenance, and `canonical_record_id`. | Unit contract tests | Identity contract output |
+| S11.3A.2 | Add source precedence policy for canonical merge (`hubspot company/contact id -> verified email/domain -> normalized name + company`) with deterministic tie-break rules. | Unit merge-policy tests | Merge precedence snapshot |
+| S11.3A.3 | Persist provenance and field-level ownership for canonical records so operators can see which system currently owns each field. | Unit persistence tests | Provenance output |
+| S11.3A.4 | Add conflict states (`duplicate_contact`, `duplicate_company`, `multi-account_collision`, `orphan_contact`, `domain_conflict`) with first-class remediation queue in `/contacts`. | Playwright + unit queue tests | Conflict queue screenshot |
+| S11.3A.5 | Add canonical-record summary card on `/accounts/[slug]` showing company source, linked contacts, unresolved conflicts, and sendable contact count. | Playwright account proof | Account canonical-summary screenshot |
+| S11.3A.6 | Enforce canonical record lookup in send APIs so outbound uses resolved canonical contacts/companies instead of ad hoc route payload assumptions. | API contract tests | Canonical send-lookup proof |
+
+---
+
+## Sprint 11.3B: Account-Native Outreach Launchpad
+
+**Goal:** Remove the generated-content detour for account-specific outreach.  
+**Demo:** Operator can generate, review, select recipients, and send one-pagers or custom generated assets directly from `/accounts/[slug]`.
+
+### Atomic Tasks
+
+| Task ID | Atomic ticket | Validation | Required artifact |
+| :--- | :--- | :--- | :--- |
+| S11.3B.1 | Add account-scoped generated asset panel on `/accounts/[slug]` with latest versions, send status, quality summary, and primary CTA actions. | Playwright account proof | Account asset-panel screenshot |
+| S11.3B.2 | Add direct `Preview & Send` flow on `/accounts/[slug]` that hydrates latest account content and canonical recipients without opening `/generated-content`. | Playwright end-to-end account-send test | Account send trace |
+| S11.3B.3 | Support account-level sending for one-pagers and other generated content types through one send launcher contract (`content_version_id`, `asset_type`, `recipient_ids`, `account_id`). | API route tests | Send launcher payload proof |
+| S11.3B.4 | Add account-level quick actions (`send latest`, `regenerate`, `swap contact`, `queue follow-up`) with defaults chosen from canonical account context. | Playwright action tests | Quick actions screenshot |
+| S11.3B.5 | Keep `/generated-content` as batch workspace only and remove any UX requirement that account sends originate there first. | Route + interaction regression tests | UX contract proof |
+| S11.3B.6 | Add account-send telemetry (`launch_from_account`, `recipient_autoselected_count`, `clicks_to_send`, `send_block_reason`) to prove click reduction. | Unit + analytics tests | Click-reduction telemetry output |
 
 ---
 
@@ -360,20 +423,21 @@ All percentages must be computed per-segment and blended:
 
 ---
 
-## Sprint 16: Content QA Checklist
+## Sprint 16: Automated Content QA Policy Engine
 
-**Goal:** Standardize quality before approval/send.  
-**Demo:** Operator completes structured checklist; checklist status gates send for selected policies.
+**Goal:** Standardize quality before approval/send without making the operator manually complete checklists.  
+**Demo:** System evaluates required QA policies automatically, shows evidence/reasons, and only asks for intervention when a true exception exists.
 
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
 | :--- | :--- | :--- | :--- |
-| S16.1 | Define checklist template model and policy mapping by campaign type. | Unit tests | Template output |
-| S16.2 | Render checklist in generated content preview/send panels. | Playwright proof | Checklist screenshot |
-| S16.3 | Add required checklist completion state and persistence per content version. | API + unit tests | Persisted state output |
-| S16.4 | Add checklist completeness filters in generated content workspace. | Component tests | Filter screenshot |
-| S16.5 | Add checklist analytics in `/analytics?tab=campaigns`. | Playwright analytics proof | Analytics screenshot |
+| S16.1 | Define automated QA policy contract for required checks (`clear_value_prop`, `account_specific_proof`, `cta_specific`, `compliance_checked`, `deliverability_checked`) with policy mapping by campaign type. | Unit tests | Policy contract output |
+| S16.2 | Build evaluator pipeline that scores/passes/fails required policies from generated content, account context, and recipient metadata at generation time. | Unit evaluator tests | Evaluator fixture output |
+| S16.3 | Re-run QA evaluation before send and persist structured machine verdicts + evidence on each content version. | API + unit tests | Persisted verdict output |
+| S16.4 | Replace manual checklist-save UX with read-only pass/fail evidence panel plus exception override only when policy permits. | Playwright proof | QA evidence screenshot |
+| S16.5 | Add QA policy filters in account and generated-content workspaces (`passed`, `exception-required`, `failed-hard`). | Component + Playwright tests | Filter screenshot |
+| S16.6 | Add QA failure analytics in `/analytics?tab=campaigns` and `/ops` by policy, campaign type, provider, and account segment. | Playwright analytics proof | Analytics screenshot |
 
 ---
 
@@ -589,7 +653,7 @@ All percentages must be computed per-segment and blended:
 - Zero critical regressions in send flows.
 
 ### Gate B (S16-S19): Learning Loop and Reliability
-- Checklist + attribution + failure intelligence operational.
+- Automated QA policy engine + attribution + failure intelligence operational.
 - Engagement-to-content loop proven in UI click tests.
 - Weekly trend cards available in analytics.
 
@@ -656,11 +720,14 @@ Recommended impact-first implementation order:
 3. **Sprint 11.1 (TAM/ICP Backfill Ingestion)**
 4. **Sprint 11.2 (Enrichment Throughput + Queueing)**
 5. **Sprint 11.3 (Company Enrichment + Relationship Integrity)**
-6. **Sprint 11.4 (Coverage Command Center + Go/No-Go Gate)**
-7. **Sprint 11.5 remainder (S11.5.4-S11.5.5)**
-8. **Sprint 12 (Pre-Send Quality Scorecard)**
-9. **Sprint 13 (Variant Experiment Builder)**
-10. **Sprint 17 (Content Performance Attribution)**
-11. **Sprint 23 (Operator Outcome Logging)**
-12. **Sprint 18 (Engagement-to-Content Learning Loop)**
-13. **Sprints 14-16, 19-22, 24-27 in numerical order unless blocked dependencies require local reorder**
+6. **Sprint 11.3A (Canonical Record Model + Identity Resolution)**
+7. **Sprint 11.3B (Account-Native Outreach Launchpad)**
+8. **Sprint 11.4 (Coverage Command Center + Go/No-Go Gate)**
+9. **Sprint 11.5 remainder (S11.5.4-S11.5.5)**
+10. **Sprint 12 (Pre-Send Quality Scorecard)**
+11. **Sprint 14 (Recipient Readiness Panel)**
+12. **Sprint 16 (Automated Content QA Policy Engine)**
+13. **Sprint 17 (Content Performance Attribution)**
+14. **Sprint 23 (Operator Outcome Logging)**
+15. **Sprint 18 (Engagement-to-Content Learning Loop)**
+16. **Sprints 13, 15, 19-22, 24-27 in numerical order unless blocked dependencies require local reorder**

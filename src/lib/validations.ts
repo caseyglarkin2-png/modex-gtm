@@ -136,6 +136,7 @@ export const SendEmailSchema = z.object({
   bodyHtml: z.string().min(1, 'Body is required'),
   accountName: z.string().optional(),
   personaName: z.string().optional(),
+  personaId: z.number().int().positive().optional(),
   generatedContentId: z.number().int().positive().optional(),
 });
 export type SendEmailInput = z.infer<typeof SendEmailSchema>;
@@ -143,6 +144,7 @@ export type SendEmailInput = z.infer<typeof SendEmailSchema>;
 export const BulkSendEmailSchema = z.object({
   recipients: z.array(z.object({
     to: z.string().email(),
+    personaId: z.number().int().positive().optional(),
     personaName: z.string().optional(),
     accountName: z.string().optional(),
     readinessScore: z.number().int().min(0).max(100).optional(),
@@ -192,6 +194,7 @@ export const BulkSendAsyncSchema = z.object({
     bodyHtml: z.string().min(1),
     recipients: z.array(z.object({
       to: z.string().email(),
+      personaId: z.number().int().positive().optional(),
       personaName: z.string().optional(),
       accountName: z.string().optional(),
       readinessScore: z.number().int().min(0).max(100).optional(),

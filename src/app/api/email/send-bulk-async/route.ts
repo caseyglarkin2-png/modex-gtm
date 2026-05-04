@@ -4,11 +4,12 @@ import { BulkSendAsyncSchema } from '@/lib/validations';
 import { rateLimit } from '@/lib/rate-limit';
 import { allocateRecipientsDeterministic } from '@/lib/experiments/split';
 import { getRecipientReadinessFloor } from '@/lib/revops/recipient-readiness';
-import { computeChecklistCompleteness, getChecklistTemplate, type ChecklistItemId } from '@/lib/revops/content-qa-checklist';
+import { resolveContentQaChecklist } from '@/lib/revops/content-qa-checklist';
 import { getStrategyPreset, isWithinTimezoneWindow, validateSendStrategy } from '@/lib/revops/send-strategy';
 import { enforceSendApprovalGate } from '@/lib/revops/send-approvals';
 import { evaluateContentQuality } from '@/lib/content-quality';
 import { buildInfographicEvent, parseInfographicMetadata } from '@/lib/revops/infographic-journey';
+import { resolveCanonicalSendTargets } from '@/lib/revops/canonical-sync';
 
 function escapeHtml(input: string): string {
   return input
@@ -66,6 +67,19 @@ export async function POST(req: NextRequest) {
   }
 
   const { prisma } = await import('@/lib/prisma');
+  const personaIds = Array.from(new Set(
+    payload.items.flatMap((item) => item.recipients.map((recipient) => recipient.personaId).filter((value): value is number => Boolean(value))),
+  ));
+  const canonicalTargets = personaIds.length > 0
+    ? await resolveCanonicalSendTargets(personaIds)
+    : new Map();
+  const personaRows = personaIds.length > 0
+    ? await prisma.persona.findMany({
+        where: { id: { in: personaIds } },
+        select: { id: true, name: true, email: true, account_name: true },
+      })
+    : [];
+  const personaById = new Map(personaRows.map((persona) => [persona.id, persona]));
 
   const generatedContentIds = Array.from(new Set(payload.items.map((item) => item.generatedContentId)));
   const generatedContentRows = await prisma.generatedContent.findMany({
@@ -74,6 +88,7 @@ export async function POST(req: NextRequest) {
       id: true,
       campaign_id: true,
       account_name: true,
+      content: true,
       version_metadata: true,
       campaign: {
         select: {
@@ -100,21 +115,33 @@ export async function POST(req: NextRequest) {
   const recipientRows = payload.items.flatMap((item) => {
     const generated = generatedById.get(item.generatedContentId);
     return item.recipients.map((recipient) => {
-      const toEmail = recipient.to.toLowerCase();
-      const accountName = recipient.accountName ?? item.accountName ?? generated?.account_name ?? '';
+      const persona = recipient.personaId ? personaById.get(recipient.personaId) : null;
+      const canonical = recipient.personaId ? canonicalTargets.get(recipient.personaId) : null;
+      const canonicalError = recipient.personaId
+        ? !persona || !persona.email
+          ? 'Recipient record not found.'
+          : !canonical || canonical.sendBlocked
+            ? canonical?.sendBlockReason ?? 'Recipient missing canonical identity resolution.'
+            : persona.email.toLowerCase() !== recipient.to.toLowerCase()
+              ? 'Recipient email does not match canonical contact record.'
+              : null
+        : null;
+      const toEmail = (persona?.email ?? recipient.to).toLowerCase();
+      const accountName = persona?.account_name ?? recipient.accountName ?? item.accountName ?? generated?.account_name ?? '';
       return {
         generated_content_id: item.generatedContentId,
         campaign_id: generated?.campaign_id ?? null,
         account_name: accountName,
         bundle_id: item.bundleId ?? null,
         sequence_position: item.sequencePosition ?? null,
-        persona_name: recipient.personaName ?? null,
+        persona_name: persona?.name ?? recipient.personaName ?? null,
         to_email: toEmail,
         subject: item.subject,
         body_html: item.bodyHtml,
         readiness_score: recipient.readinessScore ?? null,
         readiness_tier: recipient.readinessTier ?? null,
         stale: recipient.stale ?? null,
+        canonical_error: canonicalError,
         idempotency_seed: `${item.generatedContentId}:${toEmail}:${item.subject}`,
       };
     });
@@ -122,6 +149,7 @@ export async function POST(req: NextRequest) {
 
   const readinessViolations: string[] = [];
   const checklistViolations: string[] = [];
+  const canonicalViolations = recipientRows.filter((row) => row.canonical_error).map((row) => `${row.account_name}:${row.to_email}`);
   for (const row of recipientRows) {
     const generated = generatedById.get(row.generated_content_id);
     if (!generated) continue;
@@ -131,15 +159,23 @@ export async function POST(req: NextRequest) {
     }
   }
   for (const generated of generatedContentRows) {
-    const checklist = computeChecklistCompleteness(
-      getChecklistTemplate(generated.campaign?.campaign_type),
-      (generated.checklist_state?.completed_item_ids ?? []) as ChecklistItemId[],
-    );
+    const checklist = resolveContentQaChecklist({
+      campaignType: generated.campaign?.campaign_type,
+      completedItemIds: generated.checklist_state?.completed_item_ids ?? [],
+      content: generated.content,
+      accountName: generated.account_name,
+    });
     if (!checklist.complete) checklistViolations.push(String(generated.id));
   }
   if (readinessViolations.length > 0) {
     return NextResponse.json(
       { error: `Readiness floor policy violated for ${readinessViolations.length} recipient(s).` },
+      { status: 409 },
+    );
+  }
+  if (canonicalViolations.length > 0) {
+    return NextResponse.json(
+      { error: `Canonical identity policy violated for ${canonicalViolations.length} recipient(s).` },
       { status: 409 },
     );
   }

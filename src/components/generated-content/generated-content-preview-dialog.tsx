@@ -107,6 +107,8 @@ export function GeneratedContentPreviewDialog({
           <ContentQaChecklistPanel
             generatedContentId={generatedContentId}
             campaignType={campaignType}
+            accountName={accountName}
+            content={content}
             initialCompleted={checklistCompletedItemIds}
           />
         ) : null}

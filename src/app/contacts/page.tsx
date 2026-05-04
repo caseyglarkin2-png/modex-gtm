@@ -1,6 +1,8 @@
 import { prisma } from '@/lib/prisma';
 import { slugify } from '@/lib/data';
 import { contactSavedViews, resolveContactReadiness } from '@/lib/contacts-workspace';
+import { formatCanonicalConflictLabel, formatCanonicalStatusLabel } from '@/lib/revops/canonical-records';
+import { ensureCanonicalRecords } from '@/lib/revops/canonical-sync';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { ContactsTable } from './contacts-table';
 import { HubSpotSearch } from './hubspot-search';
@@ -13,14 +15,16 @@ const TARGET_ACCOUNT_COUNT = 1000;
 const TARGET_CONTACT_COUNT = 13000;
 
 export default async function ContactsPage() {
-  const [personas, accounts, enrichmentCount, apolloLinkedCount, sendReadyCount, activeCampaign] = await Promise.all([
+  const [personas, accounts, enrichmentCount, apolloLinkedCount, sendReadyCount, activeCampaign, canonicalWorkspace] = await Promise.all([
     prisma.persona.findMany({
       select: {
         id: true,
         persona_id: true,
         priority: true,
         name: true,
+        normalized_name: true,
         email: true,
+        email_valid: true,
         title: true,
         account_name: true,
         persona_lane: true,
@@ -29,10 +33,10 @@ export default async function ContactsPage() {
         persona_status: true,
         next_step: true,
         hubspot_contact_id: true,
+        company_domain: true,
         quality_band: true,
         quality_score: true,
         do_not_contact: true,
-        email_valid: true,
         last_enriched_at: true,
         updated_at: true,
       },
@@ -64,6 +68,7 @@ export default async function ContactsPage() {
       orderBy: [{ start_date: 'desc' }, { created_at: 'desc' }],
       select: { name: true, slug: true },
     }),
+    ensureCanonicalRecords(),
   ]);
 
   const accountMap = new Map(accounts.map(a => [a.name, a]));
@@ -71,6 +76,12 @@ export default async function ContactsPage() {
   const contacts = personas.map((p) => {
     const readiness = resolveContactReadiness(p);
     const account = accountMap.get(p.account_name);
+    const canonical = canonicalWorkspace.contactsByPersonaId.get(p.id);
+    const canonicalTone: 'success' | 'warning' | 'destructive' = canonical?.status === 'resolved'
+      ? 'success'
+      : canonical?.status === 'conflict'
+        ? 'warning'
+        : 'destructive';
 
     return {
       id: p.id,
@@ -103,6 +114,13 @@ export default async function ContactsPage() {
       readinessReasons: readiness.reasons,
       campaignName: activeCampaign?.name ?? null,
       campaignSlug: activeCampaign?.slug ?? null,
+      canonicalStatus: canonical ? formatCanonicalStatusLabel(canonical.status) : 'Unresolved',
+      canonicalTone,
+      canonicalCompanySource: canonical?.canonicalCompanySource ?? 'missing',
+      canonicalContactId: canonical?.canonicalContactId ?? null,
+      canonicalCompanyId: canonical?.canonicalCompanyId ?? null,
+      canonicalConflicts: canonical?.conflictCodes.map(formatCanonicalConflictLabel) ?? [],
+      canonicalBlockedReason: canonical?.sendBlockReason ?? null,
     };
   });
 
@@ -131,7 +149,7 @@ export default async function ContactsPage() {
         <ContactMetric label="Send Ready" value={contacts.filter((contact) => contact.readinessKey === 'send-ready').length} />
         <ContactMetric label="Needs Enrichment" value={contacts.filter((contact) => contact.readinessKey === 'needs-enrichment').length} />
         <ContactMetric label="Blocked / Hold" value={contacts.filter((contact) => contact.readinessKey === 'blocked-hold').length} />
-        <ContactMetric label="HubSpot Linked" value={synced} />
+        <ContactMetric label="Canonical Conflicts" value={contacts.filter((contact) => contact.canonicalStatus !== 'Resolved').length} />
       </div>
       <p className="text-xs text-[var(--muted-foreground)]">
         Coverage: owner {ownerCoverage}% · vertical {verticalCoverage}% · enriched {enrichmentCoverage}%

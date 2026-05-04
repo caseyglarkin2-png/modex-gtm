@@ -24,6 +24,35 @@ const mockedPrisma = {
     },
     account: {
       findUnique: vi.fn(),
+      findMany: vi.fn(),
+    },
+    persona: {
+      findUnique: vi.fn(),
+      findMany: vi.fn(),
+    },
+    canonicalContact: {
+      findMany: vi.fn(),
+      upsert: vi.fn(),
+      createMany: vi.fn(),
+      deleteMany: vi.fn(),
+    },
+    canonicalAccountLink: {
+      findMany: vi.fn(),
+      upsert: vi.fn(),
+      createMany: vi.fn(),
+      deleteMany: vi.fn(),
+    },
+    canonicalConflict: {
+      findMany: vi.fn(),
+      deleteMany: vi.fn(),
+      create: vi.fn(),
+      createMany: vi.fn(),
+    },
+    canonicalCompany: {
+      upsert: vi.fn(),
+    },
+    systemConfig: {
+      upsert: vi.fn(),
     },
     sendJobRecipient: {
       findMany: vi.fn(),
@@ -31,8 +60,10 @@ const mockedPrisma = {
     activity: {
       create: vi.fn(),
     },
+    $transaction: vi.fn(),
   },
 };
+mockedPrisma.prisma.$transaction.mockImplementation(async (callback: (tx: typeof mockedPrisma.prisma) => Promise<unknown>) => callback(mockedPrisma.prisma));
 
 vi.mock('@/lib/rate-limit', () => ({ rateLimit: mockedRateLimit }));
 vi.mock('@/lib/email/client', () => ({ sendEmail: mockedSendEmail, sendBulk: mockedSendBulk }));
@@ -47,6 +78,11 @@ beforeEach(() => {
   mockedEnforceApprovalGate.mockResolvedValue({ allowed: true, policy: { required: false } });
   mockedPrisma.prisma.sendJobRecipient.findMany.mockResolvedValue([]);
   mockedPrisma.prisma.emailLog.findMany.mockResolvedValue([]);
+  mockedPrisma.prisma.persona.findMany.mockResolvedValue([]);
+  mockedPrisma.prisma.account.findMany.mockResolvedValue([]);
+  mockedPrisma.prisma.canonicalContact.findMany.mockResolvedValue([]);
+  mockedPrisma.prisma.canonicalAccountLink.findMany.mockResolvedValue([]);
+  mockedPrisma.prisma.canonicalConflict.findMany.mockResolvedValue([]);
   mockedPrisma.prisma.generatedContent.findUnique.mockResolvedValue({
     id: 99,
     campaign: { campaign_type: 'trade_show' },
@@ -131,6 +167,66 @@ describe('Email send API', () => {
       where: { id: 42 },
       data: { external_send_count: { increment: 1 } },
     });
+  });
+
+  it('blocks single send when canonical recipient identity collides across accounts', async () => {
+    mockedPrisma.prisma.unsubscribedEmail.findUnique.mockResolvedValue(null);
+    mockedPrisma.prisma.persona.findUnique.mockResolvedValue({
+      id: 7,
+      name: 'Alex Ops',
+      email: 'alex@example.com',
+      email_valid: true,
+      do_not_contact: false,
+      account_name: 'Acme Foods',
+    });
+    mockedPrisma.prisma.persona.findMany.mockResolvedValue([
+      {
+        id: 7,
+        account_name: 'Acme Foods',
+        name: 'Alex Ops',
+        normalized_name: 'alex ops',
+        email: 'alex@example.com',
+        email_valid: true,
+        company_domain: 'acme.com',
+        hubspot_contact_id: null,
+        do_not_contact: false,
+        quality_score: 90,
+      },
+      {
+        id: 8,
+        account_name: 'Beta Foods',
+        name: 'Alex Ops',
+        normalized_name: 'alex ops',
+        email: 'alex@example.com',
+        email_valid: true,
+        company_domain: 'beta.com',
+        hubspot_contact_id: null,
+        do_not_contact: false,
+        quality_score: 88,
+      },
+    ]);
+    mockedPrisma.prisma.account.findMany.mockResolvedValue([
+      { name: 'Acme Foods', hubspot_company_id: null },
+      { name: 'Beta Foods', hubspot_company_id: null },
+    ]);
+
+    const req = new NextRequest('http://localhost/api/email/send', {
+      method: 'POST',
+      body: JSON.stringify({
+        to: 'alex@example.com',
+        personaId: 7,
+        subject: 'Test send',
+        bodyHtml: 'Hello there',
+      }),
+      headers: { 'content-type': 'application/json', 'x-forwarded-for': '127.0.0.1' },
+    });
+
+    const res = await sendPOST(req);
+    const payload = await res.json();
+
+    expect(res.status).toBe(409);
+    expect(String(payload.error)).toMatch(/collides across multiple accounts|missing canonical identity resolution|conflicts with company domain/i);
+    expect(mockedSendEmail).not.toHaveBeenCalled();
   });
 });
 

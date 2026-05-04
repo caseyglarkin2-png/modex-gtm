@@ -2,6 +2,12 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { NextRequest } from 'next/server';
 
 const mockedPrisma = {
+  persona: {
+    findMany: vi.fn(),
+  },
+  account: {
+    findMany: vi.fn(),
+  },
   generatedContent: {
     findMany: vi.fn(),
   },
@@ -39,6 +45,8 @@ beforeEach(() => {
   vi.clearAllMocks();
   mockedRateLimit.mockReturnValue({ ok: true });
   mockedEnforceApprovalGate.mockResolvedValue({ allowed: true, policy: { required: false } });
+  mockedPrisma.persona.findMany.mockResolvedValue([]);
+  mockedPrisma.account.findMany.mockResolvedValue([]);
   mockedPrisma.emailLog.findMany.mockResolvedValue([]);
   mockedPrisma.sendJobRecipient.findMany.mockResolvedValue([]);
   mockedPrisma.activity.create.mockResolvedValue({ id: 1 });

@@ -5,6 +5,7 @@ import {
   likelySameCompanyName,
   normalizeCompanyDomain,
 } from '@/lib/accounts/import-guardrails';
+import { syncCanonicalRecords } from '@/lib/revops/canonical-sync';
 import type { EnrichmentSource } from '@prisma/client';
 
 const BLOCKED_DOMAINS = new Set([
@@ -222,6 +223,7 @@ export async function importExternalContact(input: ExternalContactInput): Promis
       },
     });
     await upsertEnrichmentFields(updated.id, input, updated.account_name);
+    await syncCanonicalRecords({ accountNames: [updated.account_name], personaIds: [updated.id] }).catch(() => undefined);
     return {
       status: existing.hubspot_contact_id || input.source !== 'hubspot' ? 'updated' : 'linked',
       personaId: updated.id,
@@ -284,6 +286,7 @@ export async function importExternalContact(input: ExternalContactInput): Promis
   });
 
   await upsertEnrichmentFields(persona.id, input, account.name);
+  await syncCanonicalRecords({ accountNames: [account.name], personaIds: [persona.id] }).catch(() => undefined);
   return { status: 'imported', personaId: persona.id, accountName: account.name };
 }
 

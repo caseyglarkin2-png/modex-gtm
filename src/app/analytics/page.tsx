@@ -31,7 +31,7 @@ import {
   buildOutcomeTrend,
   derivePromptRecommendations,
 } from '@/lib/revops/operator-outcomes';
-import { computeChecklistCompleteness, getChecklistTemplate, type ChecklistItemId } from '@/lib/revops/content-qa-checklist';
+import { resolveContentQaChecklist } from '@/lib/revops/content-qa-checklist';
 import { buildWeeklyFailureTrend } from '@/lib/revops/failure-intelligence';
 import {
   detectInfographicDrift,
@@ -156,13 +156,24 @@ export default async function AnalyticsPage({
     }),
   ]);
   const checklistRows = selectedTab === 'campaigns'
-    ? await prisma.contentChecklistState.findMany({
-      orderBy: { updated_at: 'desc' },
+    ? await prisma.generatedContent.findMany({
+      where: { content_type: 'one_pager' },
+      orderBy: { created_at: 'desc' },
       take: 500,
       select: {
-        generated_content_id: true,
-        campaign_type: true,
-        completed_item_ids: true,
+        id: true,
+        account_name: true,
+        content: true,
+        campaign: {
+          select: {
+            campaign_type: true,
+          },
+        },
+        checklist_state: {
+          select: {
+            completed_item_ids: true,
+          },
+        },
       },
     })
     : [];
@@ -198,10 +209,12 @@ export default async function AnalyticsPage({
       },
     })
     : [];
-  const checklistCoverage = checklistRows.map((row) => computeChecklistCompleteness(
-    getChecklistTemplate(row.campaign_type),
-    (row.completed_item_ids ?? []) as ChecklistItemId[],
-  ));
+  const checklistCoverage = checklistRows.map((row) => resolveContentQaChecklist({
+    campaignType: row.campaign?.campaign_type,
+    completedItemIds: row.checklist_state?.completed_item_ids ?? [],
+    content: row.content,
+    accountName: row.account_name,
+  }));
 
   const activeCampaigns = campaigns.filter((campaign) => campaign.status === 'active');
   const topCampaigns = campaigns.slice(0, 9);

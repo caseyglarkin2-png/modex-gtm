@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { cloneElement, isValidElement, useEffect, useMemo, useState } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -21,6 +21,9 @@ export interface Recipient {
   email: string;
   title?: string;
   role_in_deal?: string;
+  canonicalStatus?: 'resolved' | 'conflict' | 'unresolved';
+  canonicalConflicts?: string[];
+  canonicalBlockedReason?: string | null;
   readiness?: {
     score: number;
     tier: 'high' | 'medium' | 'low';
@@ -73,14 +76,14 @@ export function OnePageSendDialog({
 }: OnePageSendDialogProps) {
   const [internalOpen, setInternalOpen] = useState(false);
   const [selectedRecipients, setSelectedRecipients] = useState<number[]>([]);
-  const [subject, setSubject] = useState(`MODEX 2026 – Yard Protocol Opportunities at ${accountName}`);
+  const defaultSubject = `MODEX 2026 – Yard Protocol Opportunities at ${accountName}`;
+  const [subject, setSubject] = useState(defaultSubject);
   const [previewMode, setPreviewMode] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [acknowledgedGuard, setAcknowledgedGuard] = useState(false);
   const [acknowledgedLowQuality, setAcknowledgedLowQuality] = useState(false);
   const [showHighOnly, setShowHighOnly] = useState(false);
   const [hideStale, setHideStale] = useState(false);
-  const [checklistComplete, setChecklistComplete] = useState(Boolean(generatedContent.checklist?.complete));
   const [lastSendResult, setLastSendResult] = useState<{
     sent: number;
     failed: number;
@@ -105,7 +108,36 @@ export function OnePageSendDialog({
   const isLowQuality = (quality?.score ?? 100) < CONTENT_QUALITY_SEND_BLOCK_THRESHOLD;
   const qualityBlocksSend = isLowQuality && !acknowledgedLowQuality;
   const readinessFloor = getRecipientReadinessFloor(generatedContent.campaign_type);
-  const checklistBlocksSend = !checklistComplete;
+  const checklistBlocksSend = !Boolean(generatedContent.checklist?.complete);
+  const recommendedRecipientIds = useMemo(() => {
+    const nonStale = allRecipients
+      .filter((recipient) => !recipient.canonicalStatus || recipient.canonicalStatus === 'resolved')
+      .filter((recipient) => (recipient.readiness?.score ?? 0) >= readinessFloor && !recipient.readiness?.stale)
+      .sort((left, right) => (right.readiness?.score ?? 0) - (left.readiness?.score ?? 0));
+    if (nonStale.length > 0) return nonStale.map((recipient) => recipient.id);
+
+    const fallback = allRecipients
+      .filter((recipient) => !recipient.canonicalStatus || recipient.canonicalStatus === 'resolved')
+      .filter((recipient) => (recipient.readiness?.score ?? 0) >= readinessFloor)
+      .sort((left, right) => (right.readiness?.score ?? 0) - (left.readiness?.score ?? 0));
+    return fallback.map((recipient) => recipient.id);
+  }, [allRecipients, readinessFloor]);
+  const triggerDisabledReason = allRecipients.length === 0
+    ? 'No recipients available for this account yet.'
+    : recommendedRecipientIds.length === 0
+      ? 'No canonical send-ready recipients are available. Review Contacts first.'
+      : null;
+  const resolvedTrigger = trigger && isValidElement<{ title?: string; disabled?: boolean; 'aria-disabled'?: boolean }>(trigger)
+    ? cloneElement(trigger, {
+        ...(triggerDisabledReason
+          ? {
+              disabled: true,
+              'aria-disabled': true,
+              title: trigger.props.title ?? triggerDisabledReason,
+            }
+          : {}),
+      })
+    : trigger;
 
   const visibleRecipients = allRecipients.filter((recipient) => {
     const readiness = recipient.readiness;
@@ -114,6 +146,16 @@ export function OnePageSendDialog({
     if (hideStale && readiness.stale) return false;
     return true;
   });
+
+  useEffect(() => {
+    if (!isOpen) return;
+    setSelectedRecipients(recommendedRecipientIds);
+    setSubject(defaultSubject);
+    setPreviewMode(false);
+    setAcknowledgedGuard(false);
+    setAcknowledgedLowQuality(false);
+    setLastSendResult(null);
+  }, [defaultSubject, isOpen, recommendedRecipientIds]);
 
   const handleSelectRecipient = (recipientId: number, checked: boolean) => {
     if (checked) {
@@ -130,8 +172,13 @@ export function OnePageSendDialog({
     }
     const selected = allRecipients.filter((recipient) => selectedRecipients.includes(recipient.id));
     const belowFloor = selected.filter((recipient) => (recipient.readiness?.score ?? 0) < readinessFloor);
+    const canonicalBlocked = selected.filter((recipient) => recipient.canonicalStatus && recipient.canonicalStatus !== 'resolved');
     if (belowFloor.length > 0) {
       toast.error(`Readiness floor ${readinessFloor} not met for ${belowFloor.length} recipient(s).`);
+      return;
+    }
+    if (canonicalBlocked.length > 0) {
+      toast.error(`Canonical identity conflict on ${canonicalBlocked.length} recipient(s). Resolve in Contacts before send.`);
       return;
     }
 
@@ -146,6 +193,7 @@ export function OnePageSendDialog({
             .filter((r) => selectedRecipients.includes(r.id))
             .map((r) => ({
               to: r.email,
+              personaId: r.id,
               personaName: r.name,
               accountName,
               readinessScore: r.readiness?.score,
@@ -159,7 +207,8 @@ export function OnePageSendDialog({
       });
 
       if (!response.ok) {
-        throw new Error(`Send failed: ${response.statusText}`);
+        const payload = await response.json().catch(() => ({} as { error?: string }));
+        throw new Error(payload.error ?? `Send failed: ${response.statusText}`);
       }
 
       const result = await response.json();
@@ -176,7 +225,9 @@ export function OnePageSendDialog({
   const selectedCount = selectedRecipients.length;
   const selectedRecipientRows = allRecipients.filter((recipient) => selectedRecipients.includes(recipient.id));
   const selectedBelowFloorCount = selectedRecipientRows.filter((recipient) => (recipient.readiness?.score ?? 0) < readinessFloor).length;
+  const selectedCanonicalBlockedCount = selectedRecipientRows.filter((recipient) => recipient.canonicalStatus && recipient.canonicalStatus !== 'resolved').length;
   const selectedStaleCount = selectedRecipientRows.filter((recipient) => Boolean(recipient.readiness?.stale)).length;
+  const recommendedSelectedCount = selectedRecipientRows.filter((recipient) => recommendedRecipientIds.includes(recipient.id)).length;
   const allSelected = selectedRecipients.length > 0 && selectedRecipients.length === visibleRecipients.length;
   const sendDisabledReason = selectedCount === 0
     ? 'Select at least one recipient.'
@@ -188,15 +239,17 @@ export function OnePageSendDialog({
           ? 'Complete required QA checklist items before send.'
           : selectedBelowFloorCount > 0
             ? `Remove ${selectedBelowFloorCount} recipient(s) below readiness floor ${readinessFloor}.`
+            : selectedCanonicalBlockedCount > 0
+              ? `Resolve canonical identity conflicts for ${selectedCanonicalBlockedCount} recipient(s).`
             : null;
 
   return (
     <Dialog open={isOpen} onOpenChange={setOpen}>
-      {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
+      {resolvedTrigger && <DialogTrigger asChild>{resolvedTrigger}</DialogTrigger>}
 
       <DialogContent className="max-h-screen max-w-2xl overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Send One-Pager</DialogTitle>
+          <DialogTitle>Send Generated Content</DialogTitle>
           <DialogDescription>Preview and send this content to selected recipients at {accountName}</DialogDescription>
         </DialogHeader>
 
@@ -205,7 +258,7 @@ export function OnePageSendDialog({
           <Card>
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base">One-Pager Preview</CardTitle>
+                <CardTitle className="text-base">Content Preview</CardTitle>
                 <Button variant="outline" size="sm" onClick={() => setPreviewMode(!previewMode)}>
                   <Eye className="mr-2 h-4 w-4" />
                   {previewMode ? 'Hide' : 'Show'} Preview
@@ -223,8 +276,9 @@ export function OnePageSendDialog({
               <ContentQaChecklistPanel
                 generatedContentId={generatedContentId}
                 campaignType={generatedContent.campaign_type}
+                accountName={accountName}
+                content={generatedContent.content}
                 initialCompleted={generatedContent.checklist_completed_item_ids}
-                onSaved={() => setChecklistComplete(true)}
               />
             </CardContent>
             {previewMode && (
@@ -316,6 +370,30 @@ export function OnePageSendDialog({
                     </Label>
                   </div>
 
+                  <div className="flex flex-wrap items-center gap-2 border-b pb-3 text-xs">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="h-7 px-2"
+                      onClick={() => setSelectedRecipients(recommendedRecipientIds)}
+                    >
+                      Select Recommended ({recommendedRecipientIds.length})
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="h-7 px-2"
+                      onClick={() => setSelectedRecipients([])}
+                    >
+                      Clear Selection
+                    </Button>
+                    <span className="text-muted-foreground">
+                      Recommended recipients are preselected from send-ready contacts.
+                    </span>
+                  </div>
+
                   <div className="flex flex-wrap items-center gap-4 border-b pb-3 text-xs">
                     <label className="flex items-center gap-2">
                       <input type="checkbox" checked={showHighOnly} onChange={(event) => setShowHighOnly(event.target.checked)} />
@@ -349,6 +427,14 @@ export function OnePageSendDialog({
                               </span>
                               {recipient.readiness.stale ? <span className="text-amber-700">stale</span> : null}
                             </span>
+                          ) : null}
+                          {recipient.canonicalStatus && recipient.canonicalStatus !== 'resolved' ? (
+                            <span className="ml-2 inline-flex items-center gap-1 text-xs text-red-700">
+                              Canonical {recipient.canonicalStatus}
+                            </span>
+                          ) : null}
+                          {recipient.canonicalBlockedReason ? (
+                            <span className="ml-2 text-xs text-red-700">{recipient.canonicalBlockedReason}</span>
                           ) : null}
                         </Label>
                         <div className="flex items-center gap-1">
@@ -395,7 +481,7 @@ export function OnePageSendDialog({
           <div className="rounded-lg border bg-muted/30 p-3 text-xs">
             <p className="font-medium text-foreground">Pre-send validation</p>
             <p className="mt-1 text-muted-foreground">
-              Recipients selected: {selectedCount} · Below readiness floor: {selectedBelowFloorCount} · Stale readiness: {selectedStaleCount}
+              Recipients selected: {selectedCount} · Recommended selected: {recommendedSelectedCount} · Below readiness floor: {selectedBelowFloorCount} · Canonical blocked: {selectedCanonicalBlockedCount} · Stale readiness: {selectedStaleCount}
             </p>
             {sendDisabledReason ? (
               <p className="mt-1 text-amber-700">{sendDisabledReason}</p>
@@ -409,7 +495,7 @@ export function OnePageSendDialog({
             </Button>
             <Button
               onClick={handleSend}
-              disabled={selectedCount === 0 || isSending || sendGuardState.guardBlocksSend || qualityBlocksSend || checklistBlocksSend || selectedBelowFloorCount > 0}
+              disabled={selectedCount === 0 || isSending || sendGuardState.guardBlocksSend || qualityBlocksSend || checklistBlocksSend || selectedBelowFloorCount > 0 || selectedCanonicalBlockedCount > 0}
               className="flex-1"
             >
               {isSending ? (

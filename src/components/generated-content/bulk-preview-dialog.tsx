@@ -88,31 +88,47 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
     },
   ]);
 
-  const itemStates = useMemo(() => items
-    .filter((item) => !deferredAccounts[item.accountName])
-    .sort((left, right) => (left.sequencePosition ?? 999) - (right.sequencePosition ?? 999))
-    .map((item) => ({
-      item,
-      rendering: resolveGeneratedContentRendering(item.content, item.accountName),
-      guard: buildSendGuardState({
-        selectedVersion: item.version,
-        latestVersion: item.latestVersion,
-        pendingJobs: item.pendingJobs,
-        processingJobs: item.processingJobs,
-        previewMode: true,
-        acknowledgedGuard: acknowledged[item.generatedContentId] ?? false,
-      }),
-    })), [acknowledged, deferredAccounts, items]);
+  const itemStates = useMemo(() => {
+    return items
+      .filter((item) => !deferredAccounts[item.accountName])
+      .sort((left, right) => (left.sequencePosition ?? 999) - (right.sequencePosition ?? 999))
+      .map((item) => {
+        const filteredRecipients = item.recipients.filter((recipient) => {
+          if (showHighOnly && recipient.readiness?.tier !== 'high') return false;
+          if (hideStale && recipient.readiness?.stale) return false;
+          return true;
+        });
+        const readinessFloor = getRecipientReadinessFloor(item.campaignType);
+        const sendableRecipients = filteredRecipients.filter((recipient) => {
+          if (recipient.canonicalStatus && recipient.canonicalStatus !== 'resolved') return false;
+          return (recipient.readiness?.score ?? 0) >= readinessFloor;
+        });
+        return {
+          item,
+          filteredRecipients,
+          sendableRecipients,
+          skippedByPolicyCount: filteredRecipients.length - sendableRecipients.length,
+          rendering: resolveGeneratedContentRendering(item.content, item.accountName),
+          guard: buildSendGuardState({
+            selectedVersion: item.version,
+            latestVersion: item.latestVersion,
+            pendingJobs: item.pendingJobs,
+            processingJobs: item.processingJobs,
+            previewMode: true,
+            acknowledgedGuard: acknowledged[item.generatedContentId] ?? false,
+          }),
+        };
+      });
+  }, [acknowledged, deferredAccounts, hideStale, items, showHighOnly]);
 
   const requiresAcknowledgement = itemStates.filter(({ guard }) => guard.requiresGuard).map(({ item }) => item.generatedContentId);
   const allAcknowledged = requiresAcknowledgement.every((id) => acknowledged[id]);
-  const hasRecipients = itemStates.some(({ item }) => item.recipients.length > 0);
-  const totalRecipients = itemStates.reduce((sum, { item }) => sum + item.recipients.filter((recipient) => {
-    if (showHighOnly && recipient.readiness?.tier !== 'high') return false;
-    if (hideStale && recipient.readiness?.stale) return false;
-    return true;
-  }).length, 0);
-  const skippedAccounts = itemStates.filter(({ item }) => item.recipients.length === 0).length;
+  const hasRecipients = itemStates.some(({ sendableRecipients }) => sendableRecipients.length > 0);
+  const totalRecipients = itemStates.reduce((sum, { sendableRecipients }) => sum + sendableRecipients.length, 0);
+  const skippedAccounts = itemStates.filter(({ sendableRecipients }) => sendableRecipients.length === 0).length;
+  const autoSkippedRecipients = itemStates.reduce((sum, { item, filteredRecipients, skippedByPolicyCount }) => (
+    sum + (item.recipients.length - filteredRecipients.length) + skippedByPolicyCount
+  ), 0);
   const splitTotal = variants.reduce((sum, variant) => sum + variant.split, 0);
   const hasControl = variants.some((variant) => variant.isControl);
   const allocationPreview = useMemo(
@@ -142,23 +158,6 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
 
     setSubmitting(true);
     try {
-      const policyViolations = itemStates.flatMap(({ item }) => {
-        const floor = getRecipientReadinessFloor(item.campaignType);
-        return item.recipients
-          .filter((recipient) => {
-            if (showHighOnly && recipient.readiness?.tier !== 'high') return false;
-            if (hideStale && recipient.readiness?.stale) return false;
-            return true;
-          })
-          .filter((recipient) => (recipient.readiness?.score ?? 0) < floor)
-          .map((recipient) => `${item.accountName}:${recipient.email}`);
-      });
-      if (policyViolations.length > 0) {
-        toast.error(`Readiness floor violated for ${policyViolations.length} recipient(s).`);
-        setSubmitting(false);
-        return;
-      }
-
       const payload = {
         guardWarningsAcknowledged: true,
         requestedBy: 'Casey',
@@ -179,8 +178,8 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
           }
           : undefined,
         items: itemStates
-          .filter(({ item }) => item.recipients.length > 0)
-          .map(({ item, rendering }) => ({
+          .filter(({ sendableRecipients }) => sendableRecipients.length > 0)
+          .map(({ item, rendering, sendableRecipients }) => ({
             generatedContentId: item.generatedContentId,
             accountName: item.accountName,
             bundleId: item.bundleId ?? null,
@@ -189,8 +188,9 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
               ?? null,
             subject: `${DEFAULT_SUBJECT} at ${item.accountName}`,
             bodyHtml: rendering.html,
-            recipients: item.recipients.map((recipient) => ({
+            recipients: sendableRecipients.map((recipient) => ({
               to: recipient.email,
+              personaId: recipient.id,
               personaName: recipient.name,
               accountName: item.accountName,
               readinessScore: recipient.readiness?.score,
@@ -231,7 +231,7 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
           <DialogDescription>Review selected generated content before queueing async send.</DialogDescription>
         </DialogHeader>
 
-        <div className="grid gap-2 rounded-md border bg-muted/20 p-3 text-xs md:grid-cols-5">
+        <div className="grid gap-2 rounded-md border bg-muted/20 p-3 text-xs md:grid-cols-6">
           <div>
             <p className="text-muted-foreground">Accounts In Scope</p>
             <p className="text-sm font-semibold text-foreground">{itemStates.length}</p>
@@ -247,6 +247,10 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
           <div>
             <p className="text-muted-foreground">Auto-Skipped Accounts</p>
             <p className="text-sm font-semibold text-red-700">{skippedAccounts}</p>
+          </div>
+          <div>
+            <p className="text-muted-foreground">Auto-Skipped Recipients</p>
+            <p className="text-sm font-semibold text-amber-700">{autoSkippedRecipients}</p>
           </div>
           <div>
             <p className="text-muted-foreground">Checklist Blocks</p>
@@ -468,13 +472,13 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
         </div>
 
         <div className="space-y-4">
-          {itemStates.map(({ item, rendering, guard }) => (
+          {itemStates.map(({ item, rendering, guard, filteredRecipients, sendableRecipients, skippedByPolicyCount }) => (
             <div key={item.generatedContentId} className="rounded-lg border p-3">
               <div className="mb-2 flex items-start justify-between gap-2">
                 <div>
                   <p className="text-sm font-semibold">{item.accountName} • v{item.version}</p>
                   <p className="text-xs text-muted-foreground">
-                    Provider: {item.providerUsed ?? 'unknown'} • Recipients: {item.recipients.length}
+                    Provider: {item.providerUsed ?? 'unknown'} • Sendable recipients: {sendableRecipients.length}/{item.recipients.length}
                   </p>
                   <p className="text-xs text-muted-foreground">
                     Type: {item.infographicType ?? 'cold_hook'} • Stage: {item.stageIntent ?? 'cold'}
@@ -484,13 +488,14 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
                     Readiness floor: {getRecipientReadinessFloor(item.campaignType)} • Checklist {item.checklist?.requiredComplete ?? 0}/{item.checklist?.requiredTotal ?? 0}
                   </p>
                   <p className="text-xs text-muted-foreground">
-                    High confidence: {item.recipients.filter((recipient) => recipient.readiness?.tier === 'high').length}
-                    {' '}• Stale: {item.recipients.filter((recipient) => recipient.readiness?.stale).length}
+                    High confidence: {filteredRecipients.filter((recipient) => recipient.readiness?.tier === 'high').length}
+                    {' '}• Stale: {filteredRecipients.filter((recipient) => recipient.readiness?.stale).length}
+                    {' '}• Auto-skipped by readiness: {skippedByPolicyCount}
                   </p>
                 </div>
                 <div className="flex items-center gap-1">
                   {guard.requiresGuard && <Badge className="bg-amber-100 text-amber-900">Needs Review</Badge>}
-                  {item.recipients.length === 0 && <Badge className="bg-red-100 text-red-900">No Recipients</Badge>}
+                  {sendableRecipients.length === 0 && <Badge className="bg-red-100 text-red-900">No Sendable Recipients</Badge>}
                   {item.checklist && !item.checklist.complete && <Badge className="bg-amber-100 text-amber-900">Checklist Incomplete</Badge>}
                   <Badge variant="outline">{rendering.source}</Badge>
                 </div>
@@ -513,8 +518,8 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
                 </div>
               )}
 
-              {item.recipients.length === 0 && (
-                <p className="mb-2 text-xs text-red-600">No eligible recipients for this account. It will be skipped.</p>
+              {sendableRecipients.length === 0 && (
+                <p className="mb-2 text-xs text-red-600">No sendable recipients remain for this account after filters and readiness policy. It will be skipped.</p>
               )}
               <div className="mb-2 flex flex-wrap items-center gap-1">
                 <Button
@@ -570,6 +575,8 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
               <ContentQaChecklistPanel
                 generatedContentId={item.generatedContentId}
                 campaignType={item.campaignType}
+                accountName={item.accountName}
+                content={item.content}
                 initialCompleted={item.checklistCompletedItemIds}
                 onSaved={() => undefined}
               />

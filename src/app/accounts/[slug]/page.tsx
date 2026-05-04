@@ -42,8 +42,14 @@ import type { RecentMicrositeSession } from '@/lib/microsites/analytics';
 import { ensureMicrositeForAccount } from '@/lib/microsites/ensure-microsite';
 import { prisma } from '@/lib/prisma';
 import { buildAccountTags } from '@/lib/research/account-tags';
+import { evaluateContentQuality } from '@/lib/content-quality';
+import { resolveContentQaChecklist } from '@/lib/revops/content-qa-checklist';
+import { computeRecipientReadiness } from '@/lib/revops/recipient-readiness';
 import { parseInfographicMetadata, type JourneyStageIntent } from '@/lib/revops/infographic-journey';
+import { formatCanonicalConflictLabel } from '@/lib/revops/canonical-records';
+import { ensureCanonicalRecords } from '@/lib/revops/canonical-sync';
 import { InfographicJourneyControls } from '@/components/revops/infographic-journey-controls';
+import { AccountGeneratedAssetActions } from '@/components/accounts/account-generated-asset-actions';
 
 export default async function AccountDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -58,7 +64,7 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
   const auditRoutes = getAuditRoutes();
   const auditRoute = auditRoutes.find((r) => r.account === account.name);
   const qrAsset = getQrAssets().find((asset) => asset.account === account.name);
-  const [microsite, rawActivities, activeCampaigns, generatedAssets, emailLogs, meetings, captures] = await Promise.all([
+  const [microsite, rawActivities, activeCampaigns, generatedAssetRows, emailLogs, meetings, captures, canonicalWorkspace] = await Promise.all([
     dbGetMicrositeAccountAnalytics(account.name),
     dbGetActivitiesByAccount(account.name),
     prisma.campaign.findMany({
@@ -80,7 +86,18 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
         external_send_count: true,
         version: true,
         campaign_id: true,
+        campaign: {
+          select: {
+            campaign_type: true,
+          },
+        },
+        checklist_state: {
+          select: {
+            completed_item_ids: true,
+          },
+        },
         version_metadata: true,
+        content: true,
         created_at: true,
       },
     }),
@@ -102,6 +119,7 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
       take: 8,
       select: { id: true, title: true, intent: true, next_step: true, captured_at: true, owner: true, heat_score: true },
     }),
+    ensureCanonicalRecords({ accountNames: [account.name] }),
   ]);
   const activities = rawActivities.map((activity) => ({
     ...activity,
@@ -110,6 +128,45 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
   }));
   const micrositeOverviewPath = `/for/${slug}`;
   const micrositeInfo = ensureMicrositeForAccount(account.name);
+  const generatedAssets = generatedAssetRows.map((asset) => {
+    const checklist = resolveContentQaChecklist({
+      campaignType: asset.campaign?.campaign_type,
+      completedItemIds: asset.checklist_state?.completed_item_ids ?? [],
+      content: asset.content,
+      accountName: account.name,
+    });
+    return {
+      ...asset,
+      campaign_type: asset.campaign?.campaign_type,
+      quality: evaluateContentQuality(asset.content, account.name),
+      checklist,
+      checklist_completed_item_ids: checklist.completedItemIds,
+    };
+  });
+  const canonicalAccountSummary = canonicalWorkspace.accountSummaries.get(account.name) ?? null;
+  const accountRecipients = personas
+    .filter((persona) => Boolean(persona.email) && !persona.do_not_contact)
+    .map((persona) => {
+      const canonical = canonicalWorkspace.contactsByPersonaId.get(persona.id);
+      return {
+        id: persona.id,
+        name: persona.name,
+        email: persona.email!,
+        title: persona.title ?? undefined,
+        role_in_deal: persona.role_in_deal ?? undefined,
+        readiness: computeRecipientReadiness({
+          email_confidence: persona.email_confidence,
+          quality_score: persona.quality_score,
+          title: persona.title,
+          role_in_deal: persona.role_in_deal,
+          last_enriched_at: persona.last_enriched_at,
+        }),
+        canonicalStatus: canonical?.status,
+        canonicalConflicts: canonical?.conflictCodes.map(formatCanonicalConflictLabel) ?? [],
+        canonicalBlockedReason: canonical?.sendBlockReason,
+      };
+    });
+  const latestSendableAsset = generatedAssets.find((asset) => isSendableAccountAsset(asset.content_type)) ?? null;
   const openTaskCount = Number(Boolean(account.next_action)) + activities.filter((activity) => Boolean(activity.next_step)).length + captures.filter((capture) => Boolean(capture.next_step)).length;
   const assetCount = Number(Boolean(brief)) + Number(Boolean(auditRoute)) + Number(Boolean(qrAsset)) + generatedAssets.length + 1;
   const nextBestAction = buildAccountNextBestAction(account, {
@@ -172,6 +229,15 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                   </Button>
                 }
               />
+              {latestSendableAsset ? (
+                <AccountGeneratedAssetActions
+                  accountName={account.name}
+                  asset={latestSendableAsset}
+                  recipients={accountRecipients}
+                  showPreview={false}
+                  sendLabel="Send Latest Asset"
+                />
+              ) : null}
               <OutreachWizard
                 accountName={account.name}
                 micrositeUrl={micrositeInfo.url}
@@ -320,6 +386,44 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
               </div>
             </CardContent>
           </Card>
+          {canonicalAccountSummary ? (
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm">Canonical Record Summary</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="grid gap-3 md:grid-cols-4">
+                  <div className="rounded-lg border border-[var(--border)] p-3">
+                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Company Source</p>
+                    <p className="mt-1 font-medium">{canonicalAccountSummary.canonicalCompanySource.replaceAll('_', ' ')}</p>
+                  </div>
+                  <div className="rounded-lg border border-[var(--border)] p-3">
+                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Linked Contacts</p>
+                    <p className="mt-1 font-medium">{canonicalAccountSummary.linkedContacts}</p>
+                  </div>
+                  <div className="rounded-lg border border-[var(--border)] p-3">
+                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Sendable Contacts</p>
+                    <p className="mt-1 font-medium">{canonicalAccountSummary.sendableContacts}</p>
+                  </div>
+                  <div className="rounded-lg border border-[var(--border)] p-3">
+                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Unresolved Conflicts</p>
+                    <p className={`mt-1 font-medium ${canonicalAccountSummary.unresolvedConflicts > 0 ? 'text-amber-700' : ''}`}>
+                      {canonicalAccountSummary.unresolvedConflicts}
+                    </p>
+                  </div>
+                </div>
+                {canonicalAccountSummary.duplicateCompanyAccounts.length > 0 ? (
+                  <p className="text-xs text-amber-700">
+                    Canonical company collision with: {canonicalAccountSummary.duplicateCompanyAccounts.join(', ')}.
+                  </p>
+                ) : (
+                  <p className="text-xs text-[var(--muted-foreground)]">
+                    Canonical company id: {canonicalAccountSummary.canonicalCompanyId ?? 'not resolved'}.
+                  </p>
+                )}
+              </CardContent>
+            </Card>
+          ) : null}
           <div className="grid gap-4 md:grid-cols-2">
             <Card>
               <CardHeader className="pb-2"><CardTitle className="text-sm">Why Now</CardTitle></CardHeader>
@@ -615,10 +719,20 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                           <p className="text-xs text-[var(--muted-foreground)]">
                             {asset.persona_name ?? 'Account level'} · {formatActivityDate(asset.created_at)}
                           </p>
+                          <p className="mt-1 text-xs text-[var(--muted-foreground)]">
+                            Provider: {asset.provider_used ?? 'unknown'} · Quality {asset.quality.score} · QA {asset.checklist.requiredComplete}/{asset.checklist.requiredTotal}
+                          </p>
                         </div>
-                        <Badge variant={asset.is_published ? 'success' : 'outline'}>
-                          {asset.is_published ? 'published' : 'draft'}
-                        </Badge>
+                        <div className="flex flex-col items-end gap-2">
+                          <Badge variant={asset.is_published ? 'success' : 'outline'}>
+                            {asset.is_published ? 'published' : 'draft'}
+                          </Badge>
+                          <AccountGeneratedAssetActions
+                            accountName={account.name}
+                            asset={asset}
+                            recipients={accountRecipients}
+                          />
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -856,4 +970,8 @@ function formatActivityDate(value: Date) {
     day: 'numeric',
     year: 'numeric',
   });
+}
+
+function isSendableAccountAsset(contentType: string) {
+  return !['call_script', 'meeting_prep'].includes(contentType);
 }

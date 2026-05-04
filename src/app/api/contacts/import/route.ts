@@ -8,6 +8,7 @@ import {
   likelySameCompanyName,
   normalizeCompanyDomain,
 } from '@/lib/accounts/import-guardrails';
+import { syncCanonicalRecords } from '@/lib/revops/canonical-sync';
 
 const BLOCKED_DOMAINS = new Set([
   'dannon.com', 'danone.com', 'bluetriton.com', 'yardflow.ai',
@@ -96,6 +97,7 @@ export async function POST(req: NextRequest) {
             where: { id: existingByEmail.id },
             data: { hubspot_contact_id: hsId },
           });
+          await syncCanonicalRecords({ accountNames: [existingByEmail.account_name], personaIds: [existingByEmail.id] }).catch(() => undefined);
           results.linked++;
         } else {
           results.skipped++;
@@ -156,7 +158,7 @@ export async function POST(req: NextRequest) {
         email: contact.email,
       });
 
-      await prisma.persona.create({
+      const createdPersona = await prisma.persona.create({
         data: {
           persona_id: `hs-${contact.id}`,
           name: fullName || contact.email,
@@ -176,6 +178,7 @@ export async function POST(req: NextRequest) {
           persona_status: isNewAccount ? 'Needs Review' : 'Not started',
         },
       });
+      await syncCanonicalRecords({ accountNames: [account.name], personaIds: [createdPersona.id] }).catch(() => undefined);
 
       results.imported++;
     } catch {

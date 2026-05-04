@@ -9,6 +9,7 @@ import { enrichPersonaFromHubSpotContact } from '@/lib/enrichment/apollo-enrichm
 import { listApolloLabels, searchApolloSavedAccounts, searchApolloSavedContacts } from '@/lib/enrichment/apollo-client';
 import { importExternalContact, summarizeImportResults } from '@/lib/contacts/external-contact-import';
 import { parseContactsCsv } from '@/lib/contacts/csv-intake';
+import { syncCanonicalRecords } from '@/lib/revops/canonical-sync';
 import {
   isNewAccountSendEligible,
   likelySameCompanyName,
@@ -168,6 +169,7 @@ async function importHubSpotContactInternal(contact: HubSpotContact): Promise<{ 
           where: { id: existing.id },
           data: { hubspot_contact_id: contact.id },
         });
+        await syncCanonicalRecords({ accountNames: [existing.account_name], personaIds: [existing.id] }).catch(() => undefined);
         return { success: true, linked: true };
       }
       return { success: false, error: 'Contact already exists in database', skipped: true };
@@ -249,6 +251,13 @@ async function importHubSpotContactInternal(contact: HubSpotContact): Promise<{ 
         persona_status: isNewAccount ? 'Needs Review' : 'Not started',
       },
     });
+    const created = await prisma.persona.findFirst({
+      where: { hubspot_contact_id: contact.id },
+      select: { id: true, account_name: true },
+    });
+    if (created) {
+      await syncCanonicalRecords({ accountNames: [created.account_name], personaIds: [created.id] }).catch(() => undefined);
+    }
 
     return { success: true };
   } catch (error) {

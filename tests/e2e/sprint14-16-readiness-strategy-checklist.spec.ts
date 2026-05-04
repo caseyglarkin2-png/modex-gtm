@@ -27,7 +27,7 @@ test('send dialogs expose recipient readiness and checklist controls', async ({ 
 
   await enabledSendButtons.first().click();
   await expect(page.locator('body')).toContainText(/Readiness floor/i);
-  await expect(page.locator('body')).toContainText(/Content QA Checklist/i);
+  await expect(page.locator('body')).toContainText(/Automated QA Policy|Content QA Checklist/i);
   await page.screenshot({ path: 'test-results/sprint14-16/readiness-checklist-dialog.png', fullPage: true });
 });
 

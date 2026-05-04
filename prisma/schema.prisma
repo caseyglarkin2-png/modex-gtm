@@ -55,6 +55,8 @@ model Account {
   operator_outcomes     OperatorOutcome[]
   signal_content_links  SignalContentLink[]
   message_evolutions    MessageEvolutionRegistry[]
+  canonical_company_links CanonicalAccountLink[]
+  canonical_conflicts   CanonicalConflict[]
 
   @@map("accounts")
 }
@@ -106,6 +108,8 @@ model Persona {
 
   account    Account            @relation(fields: [account_name], references: [name])
   enrichment ContactEnrichment?
+  canonical_contact CanonicalContact?
+  canonical_conflicts CanonicalConflict[]
 
   @@unique([account_name, email])
   @@index([account_name])
@@ -843,6 +847,91 @@ model Notification {
   @@index([type])
   @@index([created_at])
   @@map("notifications")
+}
+
+model CanonicalCompany {
+  id                 String   @id
+  company_key        String   @unique
+  source             String
+  hubspot_company_id String?
+  domain             String?
+  primary_account_name String?
+  status             String   @default("resolved")
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
+
+  account_links CanonicalAccountLink[]
+  contacts      CanonicalContact[]
+  conflicts     CanonicalConflict[]
+
+  @@index([hubspot_company_id])
+  @@index([domain])
+  @@map("canonical_companies")
+}
+
+model CanonicalAccountLink {
+  id                   Int      @id @default(autoincrement())
+  account_name         String   @unique
+  canonical_company_id String
+  status               String   @default("resolved")
+  created_at           DateTime @default(now())
+  updated_at           DateTime @updatedAt
+
+  account Account @relation(fields: [account_name], references: [name], onDelete: Cascade)
+  canonical_company CanonicalCompany @relation(fields: [canonical_company_id], references: [id], onDelete: Cascade)
+
+  @@index([canonical_company_id])
+  @@map("canonical_account_links")
+}
+
+model CanonicalContact {
+  id                   String   @id
+  canonical_key        String?
+  persona_id           Int      @unique
+  canonical_company_id String?
+  email                String?
+  hubspot_contact_id   String?
+  status               String   @default("resolved")
+  source               String?
+  block_reason         String?
+  conflict_codes       Json?
+  created_at           DateTime @default(now())
+  updated_at           DateTime @updatedAt
+
+  persona Persona @relation(fields: [persona_id], references: [id], onDelete: Cascade)
+  canonical_company CanonicalCompany? @relation(fields: [canonical_company_id], references: [id], onDelete: SetNull)
+  conflicts CanonicalConflict[]
+
+  @@index([canonical_company_id])
+  @@index([canonical_key])
+  @@index([email])
+  @@index([hubspot_contact_id])
+  @@map("canonical_contacts")
+}
+
+model CanonicalConflict {
+  id                   Int      @id @default(autoincrement())
+  code                 String
+  status               String   @default("open")
+  reason               String?
+  persona_id           Int?
+  account_name         String?
+  canonical_contact_id String?
+  canonical_company_id String?
+  created_at           DateTime @default(now())
+  updated_at           DateTime @updatedAt
+
+  persona Persona? @relation(fields: [persona_id], references: [id], onDelete: SetNull)
+  account Account? @relation(fields: [account_name], references: [name], onDelete: SetNull)
+  canonical_contact CanonicalContact? @relation(fields: [canonical_contact_id], references: [id], onDelete: SetNull)
+  canonical_company CanonicalCompany? @relation(fields: [canonical_company_id], references: [id], onDelete: SetNull)
+
+  @@index([code])
+  @@index([persona_id])
+  @@index([account_name])
+  @@index([canonical_company_id])
+  @@index([canonical_contact_id])
+  @@map("canonical_conflicts")
 }
 
 model SystemConfig {

@@ -1,93 +1,65 @@
 'use client';
 
-import { useMemo, useState } from 'react';
-import { toast } from 'sonner';
-import { Button } from '@/components/ui/button';
-import {
-  computeChecklistCompleteness,
-  getChecklistTemplate,
-  type ChecklistItemId,
-} from '@/lib/revops/content-qa-checklist';
+import { useEffect, useMemo } from 'react';
+import { resolveContentQaChecklist, type ChecklistItemId } from '@/lib/revops/content-qa-checklist';
 
 type ContentQaChecklistPanelProps = {
-  generatedContentId: number;
+  generatedContentId?: number;
   campaignType?: string;
+  accountName?: string;
+  content?: string;
   initialCompleted?: string[];
-  readOnly?: boolean;
   onSaved?: (completedIds: ChecklistItemId[]) => void;
 };
 
 export function ContentQaChecklistPanel({
-  generatedContentId,
   campaignType,
+  accountName,
+  content,
   initialCompleted,
-  readOnly = false,
   onSaved,
 }: ContentQaChecklistPanelProps) {
-  const template = useMemo(() => getChecklistTemplate(campaignType), [campaignType]);
-  const [completed, setCompleted] = useState<ChecklistItemId[]>(
-    (initialCompleted ?? []).filter((id): id is ChecklistItemId => template.items.some((item) => item.id === id)),
-  );
-  const [saving, setSaving] = useState(false);
-  const completeness = computeChecklistCompleteness(template, completed);
+  const resolved = useMemo(() => resolveContentQaChecklist({
+    campaignType,
+    completedItemIds: initialCompleted as ChecklistItemId[] | undefined,
+    content,
+    accountName,
+  }), [accountName, campaignType, content, initialCompleted]);
 
-  async function persistChecklist() {
-    setSaving(true);
-    try {
-      const response = await fetch('/api/revops/content-checklist', {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          generatedContentId,
-          completedItemIds: completed,
-        }),
-      });
-      const payload = await response.json().catch(() => ({} as { error?: string }));
-      if (!response.ok) throw new Error(payload.error ?? 'Checklist save failed');
-      toast.success('Checklist saved');
-      onSaved?.(completed);
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Checklist save failed');
-    } finally {
-      setSaving(false);
-    }
-  }
+  useEffect(() => {
+    onSaved?.(resolved.completedItemIds);
+  }, [onSaved, resolved.completedItemIds]);
 
   return (
     <div className="space-y-2 rounded-md border p-3">
       <div className="flex items-center justify-between gap-2">
-        <p className="text-sm font-semibold">Content QA Checklist</p>
-        <p className={`text-xs ${completeness.complete ? 'text-emerald-700' : 'text-amber-700'}`}>
-          {completeness.requiredComplete}/{completeness.requiredTotal} required complete
+        <p className="text-sm font-semibold">Automated QA Policy</p>
+        <p className={`text-xs ${resolved.complete ? 'text-emerald-700' : 'text-amber-700'}`}>
+          {resolved.requiredComplete}/{resolved.requiredTotal} required complete
         </p>
       </div>
       <div className="space-y-1">
-        {template.items.map((item) => {
-          const checked = completed.includes(item.id);
+        {resolved.items.map((item) => {
           return (
-            <label key={`${generatedContentId}-${item.id}`} className="flex items-center gap-2 text-xs">
+            <label key={item.id} className="flex items-center gap-2 text-xs">
               <input
                 type="checkbox"
-                checked={checked}
-                disabled={readOnly}
-                onChange={(event) => {
-                  const next = event.target.checked
-                    ? [...new Set([...completed, item.id])]
-                    : completed.filter((id) => id !== item.id);
-                  setCompleted(next);
-                }}
+                checked={item.completed}
+                disabled
+                readOnly
               />
               <span>{item.label}</span>
               {item.required ? <span className="text-amber-700">required</span> : null}
+              {item.source === 'automatic' ? <span className="text-emerald-700">auto</span> : null}
+              {item.source === 'manual' ? <span className="text-sky-700">manual</span> : null}
+              {item.source === 'manual+automatic' ? <span className="text-sky-700">manual + auto</span> : null}
             </label>
           );
         })}
       </div>
-      {!readOnly ? (
-        <Button size="sm" variant="outline" onClick={persistChecklist} disabled={saving}>
-          {saving ? 'Saving...' : 'Save Checklist'}
-        </Button>
-      ) : null}
+      <p className="text-[11px] text-muted-foreground">
+        Send eligibility is evaluated automatically from content quality, account specificity, CTA strength, and risk checks.
+      </p>
     </div>
   );
 }

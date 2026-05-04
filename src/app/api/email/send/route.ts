@@ -7,7 +7,9 @@ import { sanitizeEmailHtml } from '@/lib/email/sanitize';
 import { rateLimit } from '@/lib/rate-limit';
 import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
 import { advancePipelineStage, derivePipelineStage } from '@/lib/pipeline';
+import { resolveContentQaChecklist } from '@/lib/revops/content-qa-checklist';
 import { enforceSendApprovalGate } from '@/lib/revops/send-approvals';
+import { resolveCanonicalSendTargets } from '@/lib/revops/canonical-sync';
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
@@ -34,7 +36,7 @@ export async function POST(req: NextRequest) {
     }, { status: 500 });
   }
 
-  const { to, cc, subject, bodyHtml, accountName, personaName, generatedContentId } = parsed.data;
+  const { to, cc, subject, bodyHtml, accountName, personaName, personaId, generatedContentId } = parsed.data;
 
   if (!to || to.trim() === '') {
     return NextResponse.json({ error: 'NO_EMAIL', message: 'Recipient has no email address. Add one to the persona first.' }, { status: 400 });
@@ -42,6 +44,46 @@ export async function POST(req: NextRequest) {
 
   try {
     const { prisma } = await import('@/lib/prisma');
+    let resolvedRecipient = {
+      to,
+      accountName: accountName ?? null,
+      personaName: personaName ?? null,
+    };
+
+    if (personaId) {
+      const [persona, canonicalTargets] = await Promise.all([
+        prisma.persona.findUnique({
+          where: { id: personaId },
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            email_valid: true,
+            do_not_contact: true,
+            account_name: true,
+          },
+        }),
+        resolveCanonicalSendTargets([personaId]),
+      ]);
+      if (!persona || !persona.email) {
+        return NextResponse.json({ error: 'Recipient record not found.' }, { status: 404 });
+      }
+      const canonical = canonicalTargets.get(personaId);
+      if (!canonical || canonical.sendBlocked) {
+        return NextResponse.json(
+          { error: canonical?.sendBlockReason ?? 'Recipient is missing canonical identity resolution.' },
+          { status: 409 },
+        );
+      }
+      if (persona.email.toLowerCase() !== to.toLowerCase()) {
+        return NextResponse.json({ error: 'Recipient email does not match canonical contact record.' }, { status: 409 });
+      }
+      resolvedRecipient = {
+        to: persona.email,
+        accountName: persona.account_name,
+        personaName: persona.name,
+      };
+    }
     const allowBypass = (email: string) => {
       const lower = email.toLowerCase();
       const fromEmail = process.env.FROM_EMAIL?.toLowerCase() ?? '';
@@ -55,27 +97,62 @@ export async function POST(req: NextRequest) {
 
     // Check if recipient has unsubscribed
     const unsubscribed = await prisma.unsubscribedEmail.findUnique({
-      where: { email: to },
+      where: { email: resolvedRecipient.to },
     });
 
     if (unsubscribed) {
-      if (allowBypass(to)) {
-        await prisma.unsubscribedEmail.delete({ where: { email: to } }).catch(() => {});
+      if (allowBypass(resolvedRecipient.to)) {
+        await prisma.unsubscribedEmail.delete({ where: { email: resolvedRecipient.to } }).catch(() => {});
       } else {
         // Return a structured error with remaining rate-limit for UI clarity
         return NextResponse.json({
           error: 'UNSUBSCRIBED',
-          message: `Cannot send to ${to} - recipient has unsubscribed.`,
+          message: `Cannot send to ${resolvedRecipient.to} - recipient has unsubscribed.`,
           remaining,
         }, { status: 400 });
       }
     }
 
-    const guard = await evaluateRecipientEligibility(prisma, to);
+    const guard = await evaluateRecipientEligibility(prisma, resolvedRecipient.to);
     if (!guard.ok) {
       return NextResponse.json({ error: guard.reason }, { status: 400 });
     }
-    const domain = to.split('@')[1] ?? 'unknown';
+    if (generatedContentId) {
+      const generated = await prisma.generatedContent.findUnique({
+        where: { id: generatedContentId },
+        select: {
+          id: true,
+          content: true,
+          account_name: true,
+          campaign: {
+            select: {
+              campaign_type: true,
+            },
+          },
+          checklist_state: {
+            select: {
+              completed_item_ids: true,
+            },
+          },
+        },
+      });
+      if (!generated) {
+        return NextResponse.json({ error: 'Generated content not found.' }, { status: 404 });
+      }
+      const checklist = resolveContentQaChecklist({
+        campaignType: generated.campaign?.campaign_type,
+        completedItemIds: generated.checklist_state?.completed_item_ids ?? [],
+        content: generated.content,
+        accountName: generated.account_name,
+      });
+      if (!checklist.complete) {
+        return NextResponse.json(
+          { error: `Content QA checklist incomplete for generated content ${generatedContentId}.` },
+          { status: 409 },
+        );
+      }
+    }
+    const domain = resolvedRecipient.to.split('@')[1] ?? 'unknown';
     const [knownDomainRows, recentOutcomes] = await Promise.all([
       prisma.emailLog.findMany({
         where: { to_email: { contains: '@' } },
@@ -119,24 +196,24 @@ export async function POST(req: NextRequest) {
 
     // Wrap plain text or already-composed HTML into branded template
     const isPlainText = !sanitizedBody.trim().startsWith('<');
-    const html = isPlainText ? wrapHtml(sanitizedBody, accountName ?? 'the team', to) : sanitizedBody;
+    const html = isPlainText ? wrapHtml(sanitizedBody, resolvedRecipient.accountName ?? accountName ?? 'the team', resolvedRecipient.to) : sanitizedBody;
 
-    const response = await sendEmail({ to, cc, subject, html });
+    const response = await sendEmail({ to: resolvedRecipient.to, cc, subject, html });
 
     // Best-effort DB log — skip if no DB available
     try {
-      const accountExists = accountName
+      const accountExists = resolvedRecipient.accountName
         ? await prisma.account.findUnique({
-            where: { name: accountName },
+            where: { name: resolvedRecipient.accountName },
             select: { name: true, pipeline_stage: true, outreach_status: true, meeting_status: true },
           })
         : null;
 
       await prisma.emailLog.create({
         data: {
-          account_name: accountName ?? '',
-          persona_name: personaName ?? null,
-          to_email: to,
+          account_name: resolvedRecipient.accountName ?? '',
+          persona_name: resolvedRecipient.personaName ?? null,
+          to_email: resolvedRecipient.to,
           subject,
           body_html: html,
           status: 'sent',
@@ -154,14 +231,14 @@ export async function POST(req: NextRequest) {
       }
 
       // Auto-update outreach_status to "Contacted" if currently "Not started"
-      if (accountName && accountExists) {
+      if (resolvedRecipient.accountName && accountExists) {
         const nextStage = advancePipelineStage(
           derivePipelineStage(accountExists),
           'contacted',
         );
 
         await prisma.account.updateMany({
-          where: { name: accountName },
+          where: { name: resolvedRecipient.accountName },
           data: {
             outreach_status: 'Contacted',
             pipeline_stage: nextStage,
@@ -169,17 +246,17 @@ export async function POST(req: NextRequest) {
           },
         }).catch(() => {});
 
-        await ensureLocalMeetingDealLink(accountName, nextStage).catch(() => {});
+        await ensureLocalMeetingDealLink(resolvedRecipient.accountName, nextStage).catch(() => {});
       }
 
       // Auto-log activity for the send
-      if (accountName && accountExists) {
+      if (resolvedRecipient.accountName && accountExists) {
         await prisma.activity.create({
           data: {
-            account_name: accountName,
-            persona: personaName ?? null,
+            account_name: resolvedRecipient.accountName,
+            persona: resolvedRecipient.personaName ?? null,
             activity_type: 'Email',
-            outcome: `Email sent: "${subject}" to ${to}`,
+            outcome: `Email sent: "${subject}" to ${resolvedRecipient.to}`,
             next_step: 'Monitor for open/reply — follow up in 3 days if no response',
             next_step_due: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
             owner: 'Casey',
@@ -193,7 +270,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: `Email sent to ${to}`,
+      message: `Email sent to ${resolvedRecipient.to}`,
       provider: response.provider ?? 'unknown',
       hubspotEngagementId: response.hubspotEngagementId ?? null,
       hubspotError: response.hubspotError ?? null,
