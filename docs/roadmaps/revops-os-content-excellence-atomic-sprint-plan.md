@@ -1,5 +1,7 @@
 # RevOps OS Content Excellence + Multi-Infographic Conversion Roadmap
 
+<!-- markdownlint-disable MD013 MD022 MD024 MD032 MD060 -->
+
 **Status:** Draft for approval  
 **Target quality bar:** A+ atomic sprint plan (proof-first, demoable each sprint)  
 **Scope:** Optimize generated and sent content outcomes from cold outreach to customer conversion.
@@ -171,7 +173,7 @@ Sprint closeout gate (every sprint):
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S11.0.1 | Add connector health panel in `/ops` with Apollo configured state, HubSpot configured state, sync flag state, and last successful run timestamps. | Playwright `/ops` test | Connector health screenshot |
 | S11.0.2 | Add `sync-hubspot` dry-run mode (no writes) with pull/push counters and sampled error classes. | API route unit test | Dry-run response fixture |
 | S11.0.3 | Add cron runbook action buttons in `/admin/crons` for `sync-hubspot` and `reenrich-contacts` with signed audit entries. | Playwright admin-crons test | Cron action trace |
@@ -192,7 +194,7 @@ Sprint closeout gate (every sprint):
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S11.1.1 | Add `tam_import_batch` model (`batch_id`, source, row_count, accepted, rejected, linked, blocked, started_at, finished_at). | Migration + unit model tests | Migration output |
 | S11.1.2 | Extend `/api/contacts/import` for chunked batch ingestion (100 ids/chunk) with resumable cursor tokens. | Route tests | Chunk import test output |
 | S11.1.3 | Add deterministic dedupe precedence policy (hubspot id > verified email > normalized name+company) and conflict queue output. | Unit dedupe tests | Dedupe decision snapshot |
@@ -210,7 +212,7 @@ Sprint closeout gate (every sprint):
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S11.2.1 | Add `enrichment_job_batch` model for queued enrichment cohorts with status and retry counters. | Migration + unit tests | Model test output |
 | S11.2.2 | Add enrichment batching policy (`batch_size`, `max_parallel`, `retry_backoff`, `daily_budget`) in config + Ops controls. | Unit config tests | Policy config output |
 | S11.2.3 | Extend `runReenrichContactsCron` to process deterministic queue slices instead of only recent-updated scan. | Unit cron-runner tests | Queue-run stats output |
@@ -229,7 +231,7 @@ Sprint closeout gate (every sprint):
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S11.3.1 | Add company enrichment fields contract (industry, employee band, HQ region, domain confidence, last_verified_at). | Unit contract tests | Field contract output |
 | S11.3.2 | Add account enrichment upsert path sourced from HubSpot + Apollo with merge policy precedence. | Unit merge tests | Merge output snapshot |
 | S11.3.3 | Add company-contact integrity checks (`orphan contact`, `domain mismatch`, `multi-account collision`) with remediation queue. | Unit integrity tests | Integrity report |
@@ -247,7 +249,7 @@ Sprint closeout gate (every sprint):
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S11.4.1 | Build `/ops?tab=coverage` command center with progress bars for companies, contacts, enrichment confidence tiers, and send-ready rate. | Playwright Ops test | Coverage dashboard screenshot |
 | S11.4.2 | Add daily delta reporting (`newly_ingested`, `newly_enriched`, `degraded`, `stale`) with downloadable table. | API + unit tests | Delta report output |
 | S11.4.3 | Add go/no-go gate rules for optimization sprints (coverage, enrichment confidence, data freshness, attribution key completeness). | Unit gate-rule tests | Gate evaluation output |
@@ -278,7 +280,7 @@ All percentages must be computed per-segment and blended:
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S11.5.1 | Define canonical event taxonomy + IDs (`send_id`, `send_job_id`, `content_version_id`, `variant_id`, `account_id`, `campaign_id`, `operator_action_id`, `deal_id`). | Unit schema tests | Event schema output |
 | S11.5.2 | Add attribution contract for deal quantity/value/velocity across stages with explicit windows and de-dup rules. | Unit attribution-contract tests | Contract test output |
 | S11.5.3 | Add activity event QA dashboard in Ops (`event volume`, `null key rate`, `schema drift`, `late event rate`). | Playwright Ops proof | Ops QA screenshot |
@@ -296,7 +298,7 @@ All percentages must be computed per-segment and blended:
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S12.1 | Define quality scoring contract (`clarity`, `personalization`, `cta_strength`, `compliance_risk`, `deliverability_risk`) in `src/lib/content-quality.ts`. | `npm run test:unit -- tests/unit/content-quality.test.ts` | Contract unit test output |
 | S12.2 | Compute score for each generated content version in `/generated-content` query layer. | Unit test for query mapper | Updated mapper snapshot |
 | S12.3 | Add quality badge + expandable score breakdown to generated content grid cards. | Playwright workspace UI proof | Screenshot: quality badges visible |
@@ -314,7 +316,7 @@ All percentages must be computed per-segment and blended:
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S13.1 | Define experiment schema (`experiment_id`, `variant_id`, `split`, `primary_metric`) and DB migration. | Migration + unit model tests | Migration output |
 | S13.2 | Add variant builder UI in bulk preview dialog (subject/opening/CTA). | Playwright dialog test | Variant builder screenshot |
 | S13.3 | Add recipient split allocator with deterministic preview counts. | Unit split algorithm tests | Allocation test output |
@@ -332,7 +334,7 @@ All percentages must be computed per-segment and blended:
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S14.1 | Define readiness score composition (`contact_confidence`, `role_fit`, `account_context`, `freshness`). | Unit scoring tests | Scoring output |
 | S14.2 | Add readiness columns to recipient selectors in single + bulk send dialogs. | Playwright send dialog proof | Recipient readiness screenshot |
 | S14.3 | Add auto-filter toggles (`show high confidence only`, `hide stale`). | Component test | Filter behavior output |
@@ -349,7 +351,7 @@ All percentages must be computed per-segment and blended:
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S15.1 | Add send strategy model (`timezone_window`, `daily_cap`, `domain_cap`, `pacing_mode`). | Unit model test | Model test output |
 | S15.2 | Add strategy controls in bulk preview/send dialogs. | Playwright dialog proof | Controls screenshot |
 | S15.3 | Enforce caps and pacing in `/api/email/send-bulk-async`. | API route tests | Route pass output |
@@ -366,7 +368,7 @@ All percentages must be computed per-segment and blended:
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S16.1 | Define checklist template model and policy mapping by campaign type. | Unit tests | Template output |
 | S16.2 | Render checklist in generated content preview/send panels. | Playwright proof | Checklist screenshot |
 | S16.3 | Add required checklist completion state and persistence per content version. | API + unit tests | Persisted state output |
@@ -383,7 +385,7 @@ All percentages must be computed per-segment and blended:
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S17.1 | Create attribution pipeline joining sends, engagement events, meetings, and pipeline movements to content version IDs, with explicit attribution windows and de-dup rules. | Unit data + attribution-contract tests | Attribution output |
 | S17.2 | Add analytics tab subviews for `By Variant`, `By Provider`, `By Prompt Template`. | Playwright analytics proof | Attribution dashboard screenshot |
 | S17.3 | Add confidence badges for low sample sizes. | Unit tests | Badge rules output |
@@ -400,7 +402,7 @@ All percentages must be computed per-segment and blended:
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S18.1 | Add signal-to-content mapping model (which send/version triggered signal). | Unit mapper tests | Mapping output |
 | S18.2 | Add `Regenerate from Signal` action on Engagement cards. | Playwright engagement proof | Engagement screenshot |
 | S18.3 | Pre-fill regeneration prompt with outcome context (`reply objection`, `bounce reason`, etc.). | Unit prompt tests | Prompt fixture output |
@@ -419,7 +421,7 @@ All percentages must be computed per-segment and blended:
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S19.1 | Add failure classifier (`invalid-email`, `domain-reject`, `provider-throttle`, `policy-block`, `unknown`). | Unit classifier tests | Classifier output |
 | S19.2 | Build failure cluster UI in `/ops?tab=generation-metrics` and `/engagement?tab=bounces-failures`. | Playwright proof | Cluster screenshot |
 | S19.3 | Add bulk remediation actions (`retry later`, `switch persona`, `mark bad address`). | API + UI tests | Action trace |
@@ -436,7 +438,7 @@ All percentages must be computed per-segment and blended:
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S20.1 | Create playbook block model and tagging system (industry, persona, stage, motion). | Unit model tests | Model output |
 | S20.2 | Add `Save as Playbook Block` action in studio and generated-content previews. | Playwright proof | Save action screenshot |
 | S20.3 | Add block recommendation chipset in generator dialogs/prompts API. | Unit + component tests | Recommendation screenshot |
@@ -453,7 +455,7 @@ All percentages must be computed per-segment and blended:
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S21.1 | Define approval policy engine (volume threshold, low score, new domain, high bounce risk). | Unit policy tests | Policy output |
 | S21.2 | Add approval queue tab enhancements in Work Queue (`approvals`) with risk cards. | Playwright queue proof | Approval queue screenshot |
 | S21.3 | Add approve/reject/comment actions and audit trail persistence. | API + unit tests | Audit output |
@@ -470,7 +472,7 @@ All percentages must be computed per-segment and blended:
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S22.1 | Create generation contract schema (`objective`, `persona hypothesis`, `offer`, `proof`, `cta`, `metric`). | Unit contract tests | Contract output |
 | S22.2 | Add required brief form in campaign workspace before generation actions. | Playwright campaign proof | Brief screenshot |
 | S22.3 | Wire prompt APIs to include contract payload and reject missing contract for policy-enabled campaigns. | API unit tests | API contract proof |
@@ -487,7 +489,7 @@ All percentages must be computed per-segment and blended:
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S23.1 | Define outcome taxonomy (`positive`, `neutral`, `negative`, `wrong-person`, `bad-timing`, `closed-won`, `closed-lost`). | Unit taxonomy tests | Taxonomy output |
 | S23.2 | Add quick outcome actions to engagement and queue cards. | Playwright proof | Outcome action screenshot |
 | S23.3 | Persist outcomes with links to account/campaign/content version. | API + unit tests | Persistence output |
@@ -505,7 +507,7 @@ All percentages must be computed per-segment and blended:
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S24.0 | Add instrumentation contract for infographic events (`infographic_type`, `stage_intent`, `bundle_id`, `sequence_position`). | Unit contract tests | Instrumentation output |
 | S24.1 | Define infographic taxonomy by stage: `Cold Hook`, `Diagnostic Gap`, `Value Path`, `Implementation Plan`, `Proof Snapshot`, `Executive ROI`. | Unit taxonomy tests | Taxonomy fixtures |
 | S24.2 | Add stage-to-infographic recommendation logic in studio generator. | Unit recommendation tests | Recommendation output |
@@ -523,7 +525,7 @@ All percentages must be computed per-segment and blended:
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S25.0 | Add bundle activity tracking (`bundle_created`, `bundle_published`, `bundle_sent`, `bundle_engaged`) linked to deal and campaign entities. | Unit + integration tests | Bundle tracking proof |
 | S25.1 | Add `bundle generation` API accepting stage sequence and persona context. | API route tests | Route proof |
 | S25.2 | Build bundle composer in Studio with preset journey paths (`cold->meeting`, `meeting->proposal`, `proposal->close`). | Playwright studio proof | Bundle composer screenshot |
@@ -541,7 +543,7 @@ All percentages must be computed per-segment and blended:
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S26.0 | Add journey transition telemetry (from-stage/to-stage reason codes + triggering signal IDs). | Unit telemetry tests | Transition telemetry output |
 | S26.1 | Define journey state machine (`cold`, `engaged`, `discovery`, `evaluation`, `proposal`, `customer`). | Unit state-machine tests | State diagram output |
 | S26.2 | Add rules mapping engagement outcomes to next infographic asset. | Unit rule tests | Rule output |
@@ -559,7 +561,7 @@ All percentages must be computed per-segment and blended:
 ### Atomic Tasks
 
 | Task ID | Atomic ticket | Validation | Required artifact |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | S27.0 | Add infographic analytics confidence and holdout checks before promotion candidacy. | Unit + analytics tests | Confidence check output |
 | S27.1 | Add infographic performance attribution dimensions (`type`, `stage`, `sequence_position`). | Unit attribution tests | Attribution output |
 | S27.2 | Add infographic leaderboard dashboard in analytics. | Playwright analytics proof | Leaderboard screenshot |
