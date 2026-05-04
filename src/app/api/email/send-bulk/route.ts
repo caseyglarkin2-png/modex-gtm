@@ -6,6 +6,7 @@ import { wrapHtml } from '@/lib/email/templates';
 import { rateLimit } from '@/lib/rate-limit';
 import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
 import { advancePipelineStage, derivePipelineStage } from '@/lib/pipeline';
+import { markAgentActionCacheStale } from '@/lib/agent-actions/cache';
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
@@ -198,6 +199,7 @@ export async function POST(req: NextRequest) {
       }).catch(() => {});
 
       await ensureLocalMeetingDealLink(acctName, nextStage).catch(() => {});
+      await markAgentActionCacheStale(acctName).catch(() => undefined);
     }
 
     if (generatedContentId && sent > 0) {

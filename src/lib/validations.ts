@@ -71,6 +71,8 @@ export const GenerateContentSchema = z.object({
   tone: z.enum(['formal', 'conversational', 'provocative']).default('conversational'),
   length: z.enum(['short', 'medium', 'long']).default('medium'),
   context: z.record(z.string(), z.string()).optional(),
+  useLiveIntel: z.boolean().optional().default(false),
+  refreshContext: z.boolean().optional().default(false),
 });
 export type GenerateContentInput = z.infer<typeof GenerateContentSchema>;
 

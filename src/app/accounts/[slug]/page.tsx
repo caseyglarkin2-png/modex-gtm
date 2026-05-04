@@ -50,6 +50,9 @@ import { formatCanonicalConflictLabel } from '@/lib/revops/canonical-records';
 import { ensureCanonicalRecords } from '@/lib/revops/canonical-sync';
 import { InfographicJourneyControls } from '@/components/revops/infographic-journey-controls';
 import { AccountGeneratedAssetActions } from '@/components/accounts/account-generated-asset-actions';
+import { AgentActionDialog } from '@/components/agent-actions/agent-action-dialog';
+import { AgentIntelStrip } from '@/components/agent-actions/agent-intel-strip';
+import { getAgentContentContext } from '@/lib/agent-actions/content-context';
 
 export default async function AccountDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -64,7 +67,7 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
   const auditRoutes = getAuditRoutes();
   const auditRoute = auditRoutes.find((r) => r.account === account.name);
   const qrAsset = getQrAssets().find((asset) => asset.account === account.name);
-  const [microsite, rawActivities, activeCampaigns, generatedAssetRows, emailLogs, meetings, captures, canonicalWorkspace] = await Promise.all([
+  const [microsite, rawActivities, activeCampaigns, generatedAssetRows, emailLogs, meetings, captures, canonicalWorkspace, agentContentContext] = await Promise.all([
     dbGetMicrositeAccountAnalytics(account.name),
     dbGetActivitiesByAccount(account.name),
     prisma.campaign.findMany({
@@ -120,6 +123,7 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
       select: { id: true, title: true, intent: true, next_step: true, captured_at: true, owner: true, heat_score: true },
     }),
     ensureCanonicalRecords({ accountNames: [account.name] }),
+    getAgentContentContext({ accountName: account.name }),
   ]);
   const activities = rawActivities.map((activity) => ({
     ...activity,
@@ -229,6 +233,46 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                   </Button>
                 }
               />
+              <AgentActionDialog
+                request={{ action: 'account_research', target: { accountName: account.name, company: account.name } }}
+                title={`Research ${account.name}`}
+                trigger={
+                  <Button size="sm" variant="outline" className="gap-1.5">
+                    <BriefcaseBusiness className="h-3.5 w-3.5" />
+                    Refresh Intel
+                  </Button>
+                }
+              />
+              <AgentActionDialog
+                request={{ action: 'committee_refresh', target: { accountName: account.name, company: account.name } }}
+                title={`Build Committee for ${account.name}`}
+                trigger={
+                  <Button size="sm" variant="outline" className="gap-1.5">
+                    <Users className="h-3.5 w-3.5" />
+                    Build Committee
+                  </Button>
+                }
+              />
+              <AgentActionDialog
+                request={{ action: 'company_contacts', target: { accountName: account.name, company: account.name } }}
+                title={`Find More Contacts for ${account.name}`}
+                trigger={
+                  <Button size="sm" variant="outline" className="gap-1.5">
+                    <Inbox className="h-3.5 w-3.5" />
+                    Find More Contacts
+                  </Button>
+                }
+              />
+              <AgentActionDialog
+                request={{ action: 'draft_outreach', target: { accountName: account.name, company: account.name } }}
+                title={`Draft Outreach for ${account.name}`}
+                trigger={
+                  <Button size="sm" variant="outline" className="gap-1.5">
+                    <ExternalLink className="h-3.5 w-3.5" />
+                    Draft Outreach
+                  </Button>
+                }
+              />
               {latestSendableAsset ? (
                 <AccountGeneratedAssetActions
                   accountName={account.name}
@@ -331,6 +375,9 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                 {tag.hint ? <span className="text-[10px] text-[var(--muted-foreground)]">({tag.hint})</span> : null}
               </Badge>
             ))}
+          </div>
+          <div className="mt-4">
+            <AgentIntelStrip accountName={account.name} initialResult={agentContentContext} />
           </div>
         </CardContent>
       </Card>

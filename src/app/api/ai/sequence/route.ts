@@ -5,6 +5,7 @@ import { buildOutreachSequencePrompt } from '@/lib/ai/prompts';
 import type { PromptContext } from '@/lib/ai/prompts';
 import { getAccountContext } from '@/lib/db';
 import { isWarmIntroOnlyAccount } from '@/lib/studio/guardrails';
+import { getAgentContentContext, toAgentMetadata } from '@/lib/agent-actions/content-context';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,6 +21,8 @@ const SequenceRequestSchema = z.object({
   campaignSlug: z.string().optional(),
   tone: z.enum(['formal', 'conversational', 'provocative']).default('conversational'),
   steps: z.array(z.enum(['initial_email', 'follow_up_1', 'follow_up_2', 'breakup'])).optional(),
+  useLiveIntel: z.boolean().optional().default(false),
+  refreshContext: z.boolean().optional().default(false),
 });
 
 function parseEmailContent(raw: string): { subject: string; body: string } {
@@ -87,7 +90,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
   }
 
-  const { accountName, personaName, tone, campaignSlug } = parsed.data;
+  const { accountName, personaName, tone, campaignSlug, useLiveIntel, refreshContext } = parsed.data;
   const steps = parsed.data.steps ?? ['initial_email', 'follow_up_1', 'follow_up_2', 'breakup'];
 
   if (isWarmIntroOnlyAccount(accountName)) {
@@ -123,6 +126,9 @@ export async function POST(req: NextRequest) {
         select: { name: true, campaign_type: true, messaging_angle: true, key_dates: true },
       }).catch(() => null)
     : null;
+  const agentContext = useLiveIntel
+    ? await getAgentContentContext({ accountName, personaName, refresh: refreshContext })
+    : null;
 
   const ctx: PromptContext = {
     accountName,
@@ -138,6 +144,8 @@ export async function POST(req: NextRequest) {
     campaignType: campaign?.campaign_type ?? undefined,
     campaignAngle: campaign?.messaging_angle ?? undefined,
     campaignKeyDates: campaign?.key_dates ? JSON.stringify(campaign.key_dates) : undefined,
+    agentContextSummary: agentContext?.summary,
+    agentNextActions: agentContext?.nextActions,
     tone: TONE_MAP[tone] ?? 'casual',
     length: 'medium',
   };
@@ -186,6 +194,9 @@ export async function POST(req: NextRequest) {
         persona_name: persona?.name ?? personaName ?? null,
         content_type: 'outreach_sequence',
         tone,
+        version_metadata: {
+          agentContext: toAgentMetadata(agentContext),
+        },
         content: JSON.stringify(results),
       },
     });
@@ -198,5 +209,6 @@ export async function POST(req: NextRequest) {
     personaName: persona?.name ?? personaName,
     tone,
     sequence: results,
+    agentContext: toAgentMetadata(agentContext),
   });
 }

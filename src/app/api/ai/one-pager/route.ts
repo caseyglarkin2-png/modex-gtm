@@ -21,6 +21,7 @@ import {
   recommendInfographicType,
   type JourneyStageIntent,
 } from '@/lib/revops/infographic-journey';
+import { getAgentContentContext, toAgentMetadata } from '@/lib/agent-actions/content-context';
 
 export const dynamic = 'force-dynamic';
 
@@ -32,6 +33,8 @@ const OnePagerRequestSchema = z.object({
   bundleId: z.string().max(128).optional().nullable(),
   sequencePosition: z.number().int().min(1).max(50).optional().nullable(),
   regeneration: SignalRegenerationSchema.optional(),
+  useLiveIntel: z.boolean().optional().default(false),
+  refreshContext: z.boolean().optional().default(false),
 });
 
 export async function POST(req: NextRequest) {
@@ -55,6 +58,8 @@ export async function POST(req: NextRequest) {
     bundleId,
     sequencePosition,
     regeneration,
+    useLiveIntel,
+    refreshContext,
   } = parsed.data;
   const { account, meetingBrief } = await getAccountContext(accountName);
   if (!account) {
@@ -82,6 +87,11 @@ export async function POST(req: NextRequest) {
     tier: account.tier,
     band: account.priority_band,
   };
+  const agentContext = useLiveIntel
+    ? await getAgentContentContext({ accountName, refresh: refreshContext })
+    : null;
+  ctx.agentContextSummary = agentContext?.summary;
+  ctx.agentNextActions = agentContext?.nextActions;
 
   const selectedStage = (stageIntent ?? 'cold') as JourneyStageIntent;
   const recommendation = recommendInfographicType({ stageIntent: selectedStage });
@@ -159,6 +169,7 @@ export async function POST(req: NextRequest) {
         raw,
         provider: result.provider,
         accountName,
+        agentContext: toAgentMetadata(agentContext),
         error: 'Failed to parse structured content — raw text returned',
       });
     }
@@ -185,6 +196,7 @@ export async function POST(req: NextRequest) {
           version_metadata: {
             source: 'one_pager_generator',
             model_provider: result.provider,
+            agentContext: toAgentMetadata(agentContext),
             infographic: {
               infographic_type: infographicMetadata.infographicType,
               stage_intent: infographicMetadata.stageIntent,
@@ -297,6 +309,7 @@ export async function POST(req: NextRequest) {
       content,
       accountName,
       provider: result.provider,
+      agentContext: toAgentMetadata(agentContext),
       infographic: {
         type: infographicMetadata.infographicType,
         stage: infographicMetadata.stageIntent,
@@ -328,6 +341,7 @@ export async function POST(req: NextRequest) {
           version_metadata: {
             source: 'one_pager_generator',
             failed: true,
+            agentContext: toAgentMetadata(agentContext),
             infographic: {
               infographic_type: infographicMetadata.infographicType,
               stage_intent: infographicMetadata.stageIntent,
@@ -342,6 +356,6 @@ export async function POST(req: NextRequest) {
       // DB offline — skip
     }
 
-    return NextResponse.json({ error: message }, { status: 500 });
+    return NextResponse.json({ error: message, agentContext: toAgentMetadata(agentContext) }, { status: 500 });
   }
 }

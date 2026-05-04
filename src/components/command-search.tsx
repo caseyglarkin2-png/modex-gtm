@@ -1,17 +1,19 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Command } from 'cmdk';
 import {
   Building2,
   User,
   FileText,
+  Sparkles,
 } from 'lucide-react';
 import accountsData from '@/lib/data/accounts.json';
 import personasData from '@/lib/data/personas.json';
 import meetingBriefsData from '@/lib/data/meeting-briefs.json';
 import { commandRoutes } from '@/lib/navigation';
+import { toast } from 'sonner';
 
 function slugify(name: string) {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
@@ -20,6 +22,11 @@ function slugify(name: string) {
 export function CommandSearch() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
+  const accountSlug = pathname.match(/^\/accounts\/([^/]+)/)?.[1];
+  const currentAccount = accountSlug
+    ? accountsData.find((account) => slugify(account.name) === accountSlug)?.name
+    : undefined;
 
   const toggle = useCallback(() => setOpen((o) => !o), []);
 
@@ -37,6 +44,28 @@ export function CommandSearch() {
   function go(href: string) {
     setOpen(false);
     router.push(href);
+  }
+
+  async function runAgentAction(action: string) {
+    if (!currentAccount) return;
+    setOpen(false);
+    const response = await fetch('/api/agent-actions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action,
+        target: {
+          accountName: currentAccount,
+          company: currentAccount,
+        },
+      }),
+    });
+    const payload = await response.json().catch(() => ({} as { summary?: string; error?: string }));
+    if (!response.ok && !payload.summary) {
+      toast.error(payload.error ?? 'Agent action failed');
+      return;
+    }
+    toast.success(payload.summary ?? `${action} completed for ${currentAccount}`);
   }
 
   if (!open) return null;
@@ -127,6 +156,27 @@ export function CommandSearch() {
               </Command.Item>
             ))}
           </Command.Group>
+
+          {currentAccount ? (
+            <Command.Group heading="Agent Actions" className="px-2 py-1.5 text-xs font-medium text-[var(--muted-foreground)]">
+              {[
+                { label: `Research ${currentAccount}`, action: 'account_research' },
+                { label: `Build Committee for ${currentAccount}`, action: 'committee_refresh' },
+                { label: `Find More Contacts for ${currentAccount}`, action: 'company_contacts' },
+                { label: `Draft Outreach for ${currentAccount}`, action: 'draft_outreach' },
+              ].map((item) => (
+                <Command.Item
+                  key={item.action}
+                  value={`${item.label} ${item.action} ${currentAccount}`}
+                  onSelect={() => void runAgentAction(item.action)}
+                  className="flex cursor-pointer items-center gap-3 rounded-md px-3 py-2 text-sm aria-selected:bg-[var(--accent)]"
+                >
+                  <Sparkles className="h-4 w-4 text-[var(--muted-foreground)]" />
+                  <span>{item.label}</span>
+                </Command.Item>
+              ))}
+            </Command.Group>
+          ) : null}
         </Command.List>
 
         <div className="border-t border-[var(--border)] px-4 py-2 text-xs text-[var(--muted-foreground)]">

@@ -1,0 +1,684 @@
+import { prisma } from '@/lib/prisma';
+import { getAccountContext } from '@/lib/db';
+import { generateText } from '@/lib/ai/client';
+import { buildEmailPrompt, buildOutreachSequencePrompt, type PromptContext } from '@/lib/ai/prompts';
+import { buildAgentActionCacheKey, readCachedAgentAction, writeCachedAgentAction, getAgentActionTtlMs, applyFreshness } from '@/lib/agent-actions/cache';
+import { getConfiguredAgentClients } from '@/lib/agent-actions/clients';
+import type { AgentActionCapability, AgentActionCard, AgentActionRequest, AgentActionResult, AgentActionTarget, AgentActionType } from '@/lib/agent-actions/types';
+
+type ResolvedTarget = AgentActionTarget & {
+  accountName?: string;
+  company?: string;
+  email?: string;
+  personaName?: string;
+  personaTitle?: string;
+};
+
+function safeString(value: unknown) {
+  return typeof value === 'string' ? value : '';
+}
+
+function summarizeList(values: string[], max = 4) {
+  return values.filter(Boolean).slice(0, max).join(' • ');
+}
+
+function nowIso() {
+  return new Date().toISOString();
+}
+
+function baseResult(action: AgentActionType, provider: AgentActionResult['provider']): AgentActionResult {
+  return {
+    action,
+    provider,
+    status: 'ok',
+    summary: '',
+    cards: [],
+    data: {},
+    freshness: {
+      fetchedAt: nowIso(),
+      stale: false,
+      source: 'live',
+    },
+    nextActions: [],
+  };
+}
+
+function previewJson(value: unknown, maxLength = 500) {
+  const text = JSON.stringify(value, null, 2);
+  if (!text) return '';
+  return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
+}
+
+function card(title: string, body: string, tone?: AgentActionCard['tone']): AgentActionCard {
+  return { title, body, tone };
+}
+
+async function resolveTarget(target: AgentActionTarget): Promise<ResolvedTarget> {
+  const resolved: ResolvedTarget = { ...target };
+  if (resolved.personaId) {
+    const persona = await prisma.persona.findUnique({
+      where: { id: resolved.personaId },
+      select: {
+        id: true,
+        name: true,
+        title: true,
+        email: true,
+        account_name: true,
+      },
+    });
+    if (persona) {
+      resolved.accountName = resolved.accountName ?? persona.account_name;
+      resolved.company = resolved.company ?? persona.account_name;
+      resolved.email = resolved.email ?? persona.email ?? undefined;
+      resolved.personaName = persona.name;
+      resolved.personaTitle = persona.title ?? undefined;
+    }
+  }
+
+  if (!resolved.accountName && resolved.email) {
+    const persona = await prisma.persona.findFirst({
+      where: { email: resolved.email },
+      select: {
+        name: true,
+        title: true,
+        account_name: true,
+      },
+    });
+    if (persona) {
+      resolved.accountName = persona.account_name;
+      resolved.company = resolved.company ?? persona.account_name;
+      resolved.personaName = persona.name;
+      resolved.personaTitle = persona.title ?? undefined;
+    }
+  }
+
+  if (!resolved.company && resolved.accountName) {
+    resolved.company = resolved.accountName;
+  }
+
+  return resolved;
+}
+
+async function recordAgentActivity(accountName: string | undefined, action: AgentActionType, summary: string) {
+  if (!accountName) return;
+  await prisma.activity.create({
+    data: {
+      account_name: accountName,
+      activity_type: 'Agent Action',
+      owner: 'Codex',
+      outcome: `${action.replace(/_/g, ' ')}: ${summary}`.slice(0, 240),
+      notes: JSON.stringify({
+        source: 'agent_actions',
+        action,
+        summary,
+      }),
+      activity_date: new Date(),
+    },
+  }).catch(() => undefined);
+}
+
+async function buildModexPromptContext(target: ResolvedTarget): Promise<PromptContext | null> {
+  if (!target.accountName) return null;
+  const { account, personas } = await getAccountContext(target.accountName);
+  if (!account) return null;
+  const persona = target.personaName
+    ? personas.find((candidate) => candidate.name?.toLowerCase() === target.personaName?.toLowerCase())
+    : personas[0];
+
+  return {
+    accountName: target.accountName,
+    personaName: persona?.name ?? target.personaName,
+    personaTitle: persona?.title ?? target.personaTitle,
+    bandLabel: account.priority_band,
+    score: account.priority_score,
+    notes: account.why_now ?? undefined,
+    vertical: account.vertical ?? undefined,
+    primoAngle: account.primo_angle ?? undefined,
+    parentBrand: account.parent_brand ?? undefined,
+    tone: 'casual',
+    length: 'medium',
+  };
+}
+
+function parseSequenceBody(value: string) {
+  const lines = value.trim().split('\n').filter(Boolean);
+  const subject = lines[0]?.replace(/^subject:\s*/i, '').trim() || 'A tighter way to approach the yard';
+  const body = lines[0]?.toLowerCase().startsWith('subject:')
+    ? lines.slice(1).join('\n').trim()
+    : value.trim();
+  return { subject, body };
+}
+
+async function buildModexDraftFallback(target: ResolvedTarget, contentContextSummary?: string) {
+  const ctx = await buildModexPromptContext(target);
+  if (!ctx) throw new Error('Account context not found for Modex draft fallback.');
+  const raw = await generateText(buildEmailPrompt({
+    ...ctx,
+    agentContextSummary: contentContextSummary,
+  }), 400);
+  const { subject, body } = parseSequenceBody(raw);
+  return { subject, body };
+}
+
+async function buildModexSequenceFallback(target: ResolvedTarget, contentContextSummary?: string) {
+  const ctx = await buildModexPromptContext(target);
+  if (!ctx) throw new Error('Account context not found for Modex sequence fallback.');
+  const step = 'initial_email' as const;
+  const raw = await generateText(buildOutreachSequencePrompt({
+    ...ctx,
+    agentContextSummary: contentContextSummary,
+  }, step), 400);
+  return parseSequenceBody(raw);
+}
+
+function isFresh(savedAt: string, ttlMs: number) {
+  return Date.now() - new Date(savedAt).getTime() <= ttlMs;
+}
+
+async function runContentContext(target: ResolvedTarget, refresh: boolean, depth: AgentActionRequest['depth'], limit = 10): Promise<AgentActionResult> {
+  const result = baseResult('content_context', 'modex');
+  const { clawd, salesAgent } = getConfiguredAgentClients();
+
+  if (!target.accountName) {
+    result.status = 'error';
+    result.summary = 'Account context is required to assemble live content context.';
+    return result;
+  }
+
+  const [accountBundle, latestEmail, latestAsset] = await Promise.all([
+    getAccountContext(target.accountName),
+    prisma.emailLog.findFirst({
+      where: { account_name: target.accountName },
+      orderBy: { sent_at: 'desc' },
+      select: { subject: true, sent_at: true, to_email: true, reply_count: true },
+    }).catch(() => null),
+    prisma.generatedContent.findFirst({
+      where: { account_name: target.accountName },
+      orderBy: { created_at: 'desc' },
+      select: { content_type: true, created_at: true, version_metadata: true },
+    }).catch(() => null),
+  ]);
+
+  const company = target.company ?? target.accountName;
+  const [accountResearch, companyContacts, committee, pipelineSnapshot, salesSequence, salesAnalysis, salesDecisionMakers] = await Promise.allSettled([
+    clawd?.getAccountResearch(company, refresh),
+    clawd?.getCompanyContacts(company),
+    clawd?.getCommittee(company).catch(() => null),
+    clawd?.getPipelineSnapshot(limit),
+    salesAgent?.getSequenceRecommendation({ ...target, company, limit }).catch(() => null),
+    salesAgent?.analyzeCompany(company, target.personaTitle).catch(() => null),
+    salesAgent?.findDecisionMakers(company).catch(() => null),
+  ]);
+
+  const personas = accountBundle.personas ?? [];
+  const contactNames = personas.map((persona) => persona.name);
+  const committeePayload = committee.status === 'fulfilled' ? committee.value : null;
+  const workbenchPayload = accountResearch.status === 'fulfilled' ? accountResearch.value?.workbench : null;
+  const researchPayload = accountResearch.status === 'fulfilled' ? accountResearch.value?.intel : null;
+  const companyContactsPayload = companyContacts.status === 'fulfilled' ? companyContacts.value : null;
+  const pipelinePayload = pipelineSnapshot.status === 'fulfilled' ? pipelineSnapshot.value : null;
+  const salesSequencePayload = salesSequence.status === 'fulfilled' ? salesSequence.value : null;
+  const salesAnalysisPayload = salesAnalysis.status === 'fulfilled' ? salesAnalysis.value : null;
+  const salesDecisionMakersPayload = salesDecisionMakers.status === 'fulfilled' ? salesDecisionMakers.value : null;
+  const decisionMakers = Array.isArray((salesDecisionMakersPayload as Record<string, unknown> | null)?.decision_makers)
+    ? (((salesDecisionMakersPayload as Record<string, unknown>).decision_makers as Array<unknown>).filter(Boolean) as Array<Record<string, unknown>>)
+    : [];
+
+  const summaryParts = [
+    safeString(researchPayload?.summary) || safeString(workbenchPayload?.summary),
+    accountBundle.account?.why_now ? `Modex why now: ${accountBundle.account.why_now}` : '',
+    committeePayload && typeof committeePayload === 'object'
+      ? `Committee coverage: ${String((committeePayload as Record<string, unknown>).member_count ?? 0)} members`
+      : '',
+    decisionMakers.length ? `Decision makers: ${decisionMakers.length}` : '',
+    latestEmail?.subject ? `Latest send: ${latestEmail.subject}` : '',
+  ].filter(Boolean);
+
+  result.summary = summaryParts.join(' ');
+  result.cards = [
+    card(
+      'Research Summary',
+      summarizeList([
+        safeString(researchPayload?.summary),
+        safeString(workbenchPayload?.summary),
+        accountBundle.account?.primo_angle ?? '',
+      ], 3) || 'No external research summary is cached yet.',
+      'default',
+    ),
+    card(
+      'Contact Coverage',
+      `${personas.length} Modex personas${contactNames.length ? ` • ${summarizeList(contactNames)}` : ''}${companyContactsPayload ? ` • Live company contacts available` : ''}`,
+      'success',
+    ),
+    card(
+      'Committee Coverage',
+      committeePayload && typeof committeePayload === 'object'
+        ? summarizeList([
+            safeString((committeePayload as Record<string, unknown>).decision_maker),
+            `Members: ${String((committeePayload as Record<string, unknown>).member_count ?? 0)}`,
+          ])
+        : 'Committee has not been built yet or is unavailable.',
+      committeePayload ? 'success' : 'warning',
+    ),
+    card(
+      'Buyer Map',
+      decisionMakers.length
+        ? summarizeList(decisionMakers.slice(0, 4).map((contact) => safeString(contact.name) || safeString(contact.email)))
+        : 'No sales-agent decision-maker suggestions yet.',
+      decisionMakers.length ? 'success' : 'warning',
+    ),
+    card(
+      'Pipeline',
+      pipelinePayload?.pipeline
+        ? `Pipeline snapshot available${pipelinePayload?.funnel ? ' with funnel totals.' : '.'}`
+        : 'No live pipeline snapshot available.',
+      pipelinePayload?.pipeline ? 'success' : 'warning',
+    ),
+    card(
+      'Drafting Signals',
+      salesSequencePayload
+        ? 'Sales-agent sequence recommendation is available for this account.'
+        : (latestAsset ? `Latest generated asset: ${latestAsset.content_type}` : 'No live sequence recommendation available.'),
+      salesSequencePayload ? 'success' : 'default',
+    ),
+    card(
+      'Account Analysis',
+      salesAnalysisPayload
+        ? summarizeList([
+            safeString((salesAnalysisPayload as Record<string, unknown>).status),
+            safeString(((salesAnalysisPayload as Record<string, unknown>).analysis as Record<string, unknown> | undefined)?.size),
+          ]) || 'sales-agent account analysis is available.'
+        : 'No live sales-agent account analysis available.',
+      salesAnalysisPayload ? 'success' : 'default',
+    ),
+  ];
+  result.nextActions = [
+    committeePayload ? 'Draft outreach with committee-aware language' : 'Build committee before broad outreach',
+    companyContactsPayload ? 'Open same-company contacts and pick the strongest operator lane' : 'Find more same-company contacts',
+    latestEmail?.reply_count ? 'Lean into the active thread context' : 'Generate a new one-pager with live intel',
+  ];
+  result.data = {
+    account: {
+      name: accountBundle.account?.name ?? target.accountName,
+      vertical: accountBundle.account?.vertical ?? null,
+      whyNow: accountBundle.account?.why_now ?? null,
+      primoAngle: accountBundle.account?.primo_angle ?? null,
+    },
+    research: researchPayload,
+    workbench: workbenchPayload,
+    committee: committeePayload,
+    companyContacts: companyContactsPayload,
+    pipeline: pipelinePayload,
+    salesAgent: {
+      sequenceRecommendation: salesSequencePayload,
+      accountAnalysis: salesAnalysisPayload,
+      decisionMakers: salesDecisionMakersPayload,
+    },
+    latestEmail,
+    latestAsset,
+    depth,
+  };
+
+  if (!result.summary) {
+    result.status = 'partial';
+    result.summary = `Assembled Modex context for ${target.accountName}, but live sidecar research is limited right now.`;
+  }
+
+  return result;
+}
+
+async function runActionUncached(request: AgentActionRequest, target: ResolvedTarget): Promise<AgentActionResult> {
+  const { clawd, salesAgent } = getConfiguredAgentClients();
+  const company = target.company ?? target.accountName;
+  const email = target.email;
+
+  switch (request.action) {
+    case 'account_research': {
+      if (!company) {
+        return { ...baseResult(request.action, 'clawd'), status: 'error', summary: 'Company is required for account research.' };
+      }
+      if (!clawd && !salesAgent) {
+        return { ...baseResult(request.action, 'modex'), status: 'partial', summary: 'Clawd is not configured. Modex-only context is available.' };
+      }
+      const [clawdPayload, salesPayload] = await Promise.allSettled([
+        clawd?.getAccountResearch(company, request.refresh),
+        salesAgent?.analyzeCompany(company, target.personaTitle),
+      ]);
+      const payload = clawdPayload.status === 'fulfilled' ? clawdPayload.value : null;
+      const sales = salesPayload.status === 'fulfilled' ? salesPayload.value : null;
+      const result = baseResult(request.action, payload ? 'clawd' : sales ? 'sales_agent' : 'modex');
+      result.status = payload?.intel || payload?.workbench || sales ? 'ok' : 'partial';
+      result.summary =
+        safeString(payload?.intel?.summary) ||
+        safeString(payload?.workbench?.summary) ||
+        safeString(((sales as Record<string, unknown> | null)?.analysis as Record<string, unknown> | undefined)?.summary) ||
+        `Research fetched for ${company}.`;
+      result.cards = [
+        card('Research', previewJson(payload?.intel) || 'No TAM enrichment payload returned.', payload?.intel ? 'success' : 'warning'),
+        card('Workbench', previewJson(payload?.workbench) || 'No account workbench payload returned.', payload?.workbench ? 'success' : 'warning'),
+        card('Sales-Agent Analysis', previewJson(sales) || 'No sales-agent analysis returned.', sales ? 'success' : 'warning'),
+      ];
+      result.data = {
+        clawd: payload,
+        salesAgent: sales,
+      };
+      result.nextActions = ['Generate with live intel', 'Find more contacts', 'Build committee'];
+      return result;
+    }
+    case 'contact_dossier': {
+      if (!email || !clawd) {
+        return { ...baseResult(request.action, clawd ? 'clawd' : 'modex'), status: 'error', summary: 'Contact email and Clawd configuration are required for dossier lookup.' };
+      }
+      const payload = await clawd.getContactDossier(email);
+      const contactPayload = ((payload as Record<string, unknown>).contact ?? {}) as Record<string, unknown>;
+      const dossierPayload = ((payload as Record<string, unknown>).dossier ?? {}) as Record<string, unknown>;
+      const historyPayload = Array.isArray((payload as Record<string, unknown>).history)
+        ? (((payload as Record<string, unknown>).history as Array<unknown>)[0] ?? {}) as Record<string, unknown>
+        : {};
+      const result = baseResult(request.action, 'clawd');
+      result.summary = `Loaded live dossier for ${email}.`;
+      result.cards = [
+        card('Contact', summarizeList([safeString(contactPayload.name), safeString(contactPayload.title), safeString(contactPayload.company)]) || email, 'success'),
+        card('History', summarizeList([safeString(dossierPayload.summary), safeString(historyPayload.summary)]) || 'History is available in the raw dossier payload.', 'default'),
+      ];
+      result.data = payload;
+      result.nextActions = ['Draft outreach from dossier', 'Enrich this contact', 'Find same-company contacts'];
+      return result;
+    }
+    case 'company_contacts': {
+      if (!company || !clawd) {
+        return { ...baseResult(request.action, clawd ? 'clawd' : 'modex'), status: 'error', summary: 'Company and Clawd configuration are required for company contact lookup.' };
+      }
+      const payload = await clawd.getCompanyContacts(company);
+      const contacts = Array.isArray(payload.contacts) ? payload.contacts as Array<Record<string, unknown>> : [];
+      const result = baseResult(request.action, 'clawd');
+      result.summary = `Found ${contacts.length} live contacts for ${company}.`;
+      result.cards = [
+        card(
+          'Top Contacts',
+          contacts.length
+            ? summarizeList(contacts.slice(0, 4).map((contact) => safeString(contact.name) || safeString(contact.full_name) || safeString(contact.email)))
+            : 'No live company contacts returned.',
+          contacts.length ? 'success' : 'warning',
+        ),
+      ];
+      result.data = payload;
+      result.nextActions = ['Pick strongest operator and draft outreach', 'Build committee'];
+      return result;
+    }
+    case 'committee_refresh': {
+      if (!company || !clawd) {
+        return { ...baseResult(request.action, clawd ? 'clawd' : 'modex'), status: 'error', summary: 'Company and Clawd configuration are required for committee build.' };
+      }
+      const payload = await clawd.buildCommittee(company);
+      const result = baseResult(request.action, 'clawd');
+      result.summary = `Committee refreshed for ${company}.`;
+      result.cards = [
+        card('Decision Maker', safeString((payload as Record<string, unknown>).decision_maker) || 'No decision maker identified yet.', (payload as Record<string, unknown>).decision_maker ? 'success' : 'warning'),
+        card('Coverage', `Members: ${String((payload as Record<string, unknown>).member_count ?? 0)}`, 'default'),
+      ];
+      result.data = payload;
+      result.nextActions = ['Draft outreach', 'Find more contacts', 'Generate one-pager with live intel'];
+      return result;
+    }
+    case 'prospect_discover': {
+      const limit = request.limit ?? 10;
+      const result = baseResult(request.action, clawd ? 'clawd' : salesAgent ? 'sales_agent' : 'modex');
+      if (clawd) {
+        const payload = await clawd.discoverProspects(limit);
+        const prospects = Array.isArray(payload.prospects) ? payload.prospects as Array<Record<string, unknown>> : [];
+        result.summary = `Discovered ${prospects.length} prospect-ready accounts.`;
+        result.cards = [
+          card('Top Prospects', summarizeList(prospects.slice(0, 4).map((prospect) => safeString(prospect.company) || safeString(prospect.name))) || 'No prospects returned.', prospects.length ? 'success' : 'warning'),
+        ];
+        result.data = payload;
+        result.nextActions = ['Open top account', 'Build committee', 'Generate one-pager'];
+        return result;
+      }
+      if (salesAgent && company) {
+        const payload = await salesAgent.findDecisionMakers(company);
+        const prospects = Array.isArray((payload as Record<string, unknown>).decision_makers)
+          ? ((payload as Record<string, unknown>).decision_makers as Array<Record<string, unknown>>)
+          : [];
+        result.provider = 'sales_agent';
+        result.summary = `Found ${prospects.length} likely decision makers at ${company}.`;
+        result.cards = [
+          card('Decision Makers', summarizeList(prospects.slice(0, 4).map((prospect) => safeString(prospect.name) || safeString(prospect.email))) || 'No decision makers returned.', prospects.length ? 'success' : 'warning'),
+        ];
+        result.data = payload;
+        result.nextActions = ['Draft outreach', 'Generate one-pager', 'Enrich the strongest contact'];
+        return result;
+      }
+      result.status = 'partial';
+      result.summary = 'Prospect discovery is unavailable because no sidecar service is configured.';
+      return result;
+    }
+    case 'contact_enrich': {
+      if (!email) {
+        return { ...baseResult(request.action, 'modex'), status: 'error', summary: 'Contact email is required for enrichment.' };
+      }
+      const result = baseResult(request.action, salesAgent ? 'sales_agent' : clawd ? 'clawd' : 'modex');
+      const errors: string[] = [];
+      if (salesAgent) {
+        try {
+          const payload = await salesAgent.enrichContact(target);
+          result.summary = `sales-agent enrichment loaded for ${email}.`;
+          result.cards = [card('Enrichment', previewJson(payload), 'success')];
+          result.data = payload;
+          result.nextActions = ['Apply enrichment', 'Draft outreach'];
+          return result;
+        } catch (error) {
+          errors.push(error instanceof Error ? error.message : String(error));
+        }
+      }
+      if (clawd) {
+        try {
+          const payload = await clawd.enrichContact(email);
+          result.provider = 'clawd';
+          result.summary = `Clawd enrichment loaded for ${email}.`;
+          result.cards = [card('Enrichment', previewJson(payload), 'success')];
+          result.data = payload;
+          result.nextActions = ['Apply enrichment', 'Draft outreach'];
+          return result;
+        } catch (error) {
+          errors.push(error instanceof Error ? error.message : String(error));
+        }
+      }
+      result.status = 'partial';
+      result.summary = errors.length ? errors.join(' ') : `No live enrichment service is configured for ${email}.`;
+      return result;
+    }
+    case 'pipeline_snapshot': {
+      if (!clawd) {
+        return { ...baseResult(request.action, 'modex'), status: 'partial', summary: 'Clawd is not configured for pipeline snapshots.' };
+      }
+      const payload = await clawd.getPipelineSnapshot(request.limit ?? 50);
+      const result = baseResult(request.action, 'clawd');
+      result.status = payload.pipeline || payload.funnel ? 'ok' : 'partial';
+      result.summary = payload.pipeline ? 'Loaded live pipeline snapshot.' : 'Pipeline snapshot is partially unavailable.';
+      result.cards = [
+        card('Pipeline', previewJson(payload.pipeline), payload.pipeline ? 'success' : 'warning'),
+        card('Funnel', previewJson(payload.funnel), payload.funnel ? 'success' : 'warning'),
+      ];
+      result.data = payload;
+      result.nextActions = ['Refresh account intel', 'Generate one-pager with live intel'];
+      return result;
+    }
+    case 'draft_outreach': {
+      const contentContext = target.accountName
+        ? await runContentContext(target, request.refresh, request.depth, request.limit ?? 10)
+        : null;
+      const summary = contentContext?.summary;
+      const result = baseResult(request.action, salesAgent ? 'sales_agent' : clawd ? 'clawd' : 'modex');
+      const errors: string[] = [];
+      if (salesAgent) {
+        try {
+          const payload = await salesAgent.draftOutreach(target);
+          result.summary = `sales-agent draft is ready${target.accountName ? ` for ${target.accountName}` : ''}.`;
+          result.cards = [card('Draft', previewJson(payload), 'success')];
+          result.data = { draft: payload, contentContext };
+          result.nextActions = ['Open compose and send', 'Regenerate with live intel'];
+          return result;
+        } catch (error) {
+          errors.push(error instanceof Error ? error.message : String(error));
+        }
+      }
+      if (clawd) {
+        try {
+          const payload = await clawd.draftOutreach(target);
+          result.provider = 'clawd';
+          result.summary = `Clawd draft is ready${target.accountName ? ` for ${target.accountName}` : ''}.`;
+          result.cards = [card('Draft', previewJson(payload), 'success')];
+          result.data = { draft: payload, contentContext };
+          result.nextActions = ['Open compose and send', 'Regenerate with live intel'];
+          return result;
+        } catch (error) {
+          errors.push(error instanceof Error ? error.message : String(error));
+        }
+      }
+      try {
+        const fallback = await buildModexDraftFallback(target, summary);
+        result.provider = 'modex';
+        result.summary = `Generated a Modex fallback draft${target.accountName ? ` for ${target.accountName}` : ''}.`;
+        result.cards = [
+          card('Subject', fallback.subject, 'success'),
+          card('Body', fallback.body, 'default'),
+        ];
+        result.data = { draft: fallback, contentContext, errors };
+        result.nextActions = ['Open compose and send', 'Generate one-pager with live intel'];
+        return result;
+      } catch (error) {
+        errors.push(error instanceof Error ? error.message : String(error));
+      }
+      result.status = 'error';
+      result.summary = errors.join(' ') || 'Draft generation failed.';
+      result.data = { contentContext };
+      return result;
+    }
+    case 'sequence_recommendation': {
+      const contentContext = target.accountName
+        ? await runContentContext(target, request.refresh, request.depth, request.limit ?? 10)
+        : null;
+      const result = baseResult(request.action, salesAgent ? 'sales_agent' : 'modex');
+      const errors: string[] = [];
+      if (salesAgent) {
+        try {
+          const payload = await salesAgent.getSequenceRecommendation({ ...target, limit: request.limit });
+          result.summary = `sales-agent sequence recommendation is ready${target.accountName ? ` for ${target.accountName}` : ''}.`;
+          result.cards = [card('Recommendation', previewJson(payload), 'success')];
+          result.data = { recommendation: payload, contentContext };
+          result.nextActions = ['Generate sequence', 'Draft first touch'];
+          return result;
+        } catch (error) {
+          errors.push(error instanceof Error ? error.message : String(error));
+        }
+      }
+      try {
+        const fallback = await buildModexSequenceFallback(target, contentContext?.summary);
+        result.provider = 'modex';
+        result.summary = `Generated a Modex sequence recommendation${target.accountName ? ` for ${target.accountName}` : ''}.`;
+        result.cards = [
+          card('Suggested Subject', fallback.subject, 'success'),
+          card('Suggested Opening', fallback.body, 'default'),
+        ];
+        result.data = { recommendation: fallback, contentContext, errors };
+        result.nextActions = ['Generate sequence', 'Open compose'];
+        return result;
+      } catch (error) {
+        errors.push(error instanceof Error ? error.message : String(error));
+      }
+      result.status = 'error';
+      result.summary = errors.join(' ') || 'Sequence recommendation failed.';
+      result.data = { contentContext };
+      return result;
+    }
+    case 'content_context':
+      return runContentContext(target, request.refresh, request.depth, request.limit ?? 10);
+    default:
+      return { ...baseResult(request.action, 'modex'), status: 'error', summary: 'Unsupported action.' };
+  }
+}
+
+export async function runAgentAction(request: AgentActionRequest): Promise<AgentActionResult> {
+  const resolvedTarget = await resolveTarget(request.target);
+  const enrichedRequest: AgentActionRequest = {
+    ...request,
+    target: {
+      accountName: resolvedTarget.accountName,
+      company: resolvedTarget.company,
+      email: resolvedTarget.email,
+      personaId: resolvedTarget.personaId,
+    },
+  };
+  const cacheKey = buildAgentActionCacheKey(enrichedRequest);
+  const ttlMs = getAgentActionTtlMs(request.action);
+  const cached = await readCachedAgentAction(cacheKey);
+
+  if (!request.refresh && cached && isFresh(cached.savedAt, ttlMs)) {
+    return applyFreshness(cached.result, 'cache', false);
+  }
+
+  try {
+    const liveResult = await runActionUncached(request, resolvedTarget);
+    await writeCachedAgentAction(cacheKey, liveResult);
+    await recordAgentActivity(resolvedTarget.accountName, request.action, liveResult.summary);
+    return liveResult;
+  } catch (error) {
+    if (cached) {
+      return applyFreshness(cached.result, 'cache', true);
+    }
+    const result = baseResult(request.action, 'modex');
+    result.status = 'error';
+    result.summary = error instanceof Error ? error.message : 'Agent action failed.';
+    return result;
+  }
+}
+
+export function listAgentActionCapabilities(): AgentActionCapability[] {
+  const { clawd, salesAgent } = getConfiguredAgentClients();
+  const clawdConfigured = Boolean(clawd);
+  const salesConfigured = Boolean(salesAgent);
+
+  const preferredProvider = (action: AgentActionType): AgentActionCapability => {
+    switch (action) {
+      case 'contact_enrich':
+      case 'draft_outreach':
+      case 'sequence_recommendation':
+        return {
+          action,
+          preferredProvider: salesConfigured ? 'sales_agent' : clawdConfigured ? 'clawd' : 'modex',
+          fallbackProvider: salesConfigured ? (clawdConfigured ? 'clawd' : 'modex') : clawdConfigured ? 'modex' : null,
+          configured: salesConfigured || clawdConfigured,
+        };
+      case 'content_context':
+        return {
+          action,
+          preferredProvider: 'modex',
+          fallbackProvider: clawdConfigured || salesConfigured ? 'clawd' : null,
+          configured: true,
+        };
+      default:
+        return {
+          action,
+          preferredProvider: clawdConfigured ? 'clawd' : 'modex',
+          fallbackProvider: clawdConfigured ? 'modex' : null,
+          configured: clawdConfigured,
+        };
+    }
+  };
+
+  const actions: AgentActionType[] = [
+    'account_research',
+    'contact_dossier',
+    'company_contacts',
+    'committee_refresh',
+    'prospect_discover',
+    'contact_enrich',
+    'content_context',
+    'pipeline_snapshot',
+    'draft_outreach',
+    'sequence_recommendation',
+  ];
+
+  return actions.map((action) => preferredProvider(action));
+}

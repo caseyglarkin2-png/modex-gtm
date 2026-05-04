@@ -17,6 +17,8 @@ import { GeneratorDialog } from '@/components/ai/generator-dialog';
 import { VoicePreviewButton } from '@/components/voice-preview-button';
 import { readApiResponse } from '@/lib/api-response';
 import { getMicrositeUrl } from '@/lib/site-url';
+import { AgentActionDialog } from '@/components/agent-actions/agent-action-dialog';
+import { OnePagerDialog } from '@/components/ai/one-pager-preview';
 
 function buildEmailPreviewHtml(bodyText: string): string {
   const escaped = bodyText
@@ -84,6 +86,7 @@ export function EmailComposer({ accountName, personaName, personaEmail, trigger,
   const [subject, setSubject] = useState('');
   const [body, setBody] = useState('');
   const [sending, setSending] = useState(false);
+  const [draftingFromIntel, setDraftingFromIntel] = useState(false);
   const [lastStatus, setLastStatus] = useState<{ provider?: string; hubspotId?: string | null } | null>(null);
   const [previewMode, setPreviewMode] = useState(false);
 
@@ -108,6 +111,54 @@ export function EmailComposer({ accountName, personaName, personaEmail, trigger,
       return current.trim() ? `${current.trim()}\n\n${snippet}` : snippet;
     });
     toast.success('Microsite link inserted');
+  }
+
+  async function handleDraftFromDossier() {
+    if (!accountName.trim()) {
+      toast.error('Account context is required for live-intel drafting');
+      return;
+    }
+    setDraftingFromIntel(true);
+    try {
+      const res = await fetch('/api/agent-actions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'draft_outreach',
+          refresh: true,
+          target: {
+            accountName,
+            company: accountName,
+            email: to || undefined,
+          },
+        }),
+      });
+      const payload = await readApiResponse<{
+        summary?: string;
+        data?: {
+          draft?: {
+            subject?: string;
+            body?: string;
+            draft?: { subject?: string; body?: string };
+          };
+        };
+        error?: string;
+      }>(res);
+      if (!res.ok && !payload.data?.draft) {
+        throw new Error(payload.error ?? payload.summary ?? 'Live draft failed');
+      }
+      const draft = payload.data?.draft?.draft ?? payload.data?.draft;
+      if (draft?.subject) setSubject(draft.subject);
+      if (draft?.body) setBody(draft.body);
+      if (!draft?.subject && !draft?.body) {
+        throw new Error('No draft content came back from live intel.');
+      }
+      toast.success(payload.summary ?? 'Drafted from live dossier');
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Live draft failed');
+    } finally {
+      setDraftingFromIntel(false);
+    }
   }
 
   async function handleSend() {
@@ -171,6 +222,28 @@ export function EmailComposer({ accountName, personaName, personaEmail, trigger,
         </DialogHeader>
 
         <div className="space-y-3 pt-2">
+          {accountName.trim() ? (
+            <div className="flex flex-wrap gap-2 rounded-lg border border-[var(--border)] bg-[var(--accent)]/20 p-3">
+              <Button type="button" variant="outline" size="sm" className="gap-1.5" onClick={() => void handleDraftFromDossier()} disabled={draftingFromIntel}>
+                <Sparkles className={`h-3.5 w-3.5 ${draftingFromIntel ? 'animate-pulse' : ''}`} />
+                {draftingFromIntel ? 'Drafting...' : 'Draft From Dossier'}
+              </Button>
+              <AgentActionDialog
+                request={{ action: 'company_contacts', target: { accountName, company: accountName } }}
+                title={`Find Contacts at ${accountName}`}
+                trigger={<Button type="button" variant="outline" size="sm">Find Contacts</Button>}
+              />
+              <AgentActionDialog
+                request={{ action: 'committee_refresh', target: { accountName, company: accountName } }}
+                title={`Build Committee for ${accountName}`}
+                trigger={<Button type="button" variant="outline" size="sm">Build Committee</Button>}
+              />
+              <OnePagerDialog
+                accountName={accountName}
+                trigger={<Button type="button" variant="outline" size="sm">Generate One-Pager</Button>}
+              />
+            </div>
+          ) : null}
           <div className="space-y-1">
             <Label className="text-xs">To</Label>
             <Input placeholder="email@company.com" value={to} onChange={(e) => setTo(e.target.value)} />

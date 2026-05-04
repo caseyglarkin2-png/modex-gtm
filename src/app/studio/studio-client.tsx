@@ -1210,7 +1210,7 @@ function OnePagerInline({ accountName }: { accountName: string }) {
       const res = await fetch('/api/ai/one-pager', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accountName, stageIntent, infographicType }),
+        body: JSON.stringify({ accountName, stageIntent, infographicType, useLiveIntel: true }),
       });
       const json = await res.json() as { content?: OnePagerData; error?: string; infographic?: { recommendation?: string } };
       if (!res.ok) throw new Error(json.error ?? 'Generation failed');

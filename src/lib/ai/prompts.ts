@@ -21,6 +21,8 @@ export interface PromptContext {
   facilityScope?: string;
   researchTags?: string[];
   playbookHints?: string;
+  agentContextSummary?: string;
+  agentNextActions?: string[];
   tone: 'professional' | 'casual' | 'bold';
   length: 'short' | 'medium' | 'long';
 }
@@ -38,6 +40,8 @@ export interface OnePagerContext {
   score: number;
   tier: string;
   band: string;
+  agentContextSummary?: string;
+  agentNextActions?: string[];
 }
 
 function buildCampaignContextBlock(ctx: PromptContext): string {
@@ -70,6 +74,16 @@ function buildPlaybookHintsBlock(ctx: PromptContext): string {
 ${ctx.playbookHints}`;
 }
 
+function buildAgentContextBlock(ctx: Pick<PromptContext, 'agentContextSummary' | 'agentNextActions'>): string {
+  if (!ctx.agentContextSummary?.trim() && (!ctx.agentNextActions || ctx.agentNextActions.length === 0)) return '';
+  const lines = [
+    ctx.agentContextSummary?.trim() ? `Live operator intelligence: ${ctx.agentContextSummary.trim()}` : '',
+    ctx.agentNextActions?.length ? `Recommended next actions: ${ctx.agentNextActions.join(' | ')}` : '',
+  ].filter(Boolean);
+
+  return lines.join('\n');
+}
+
 export function buildEmailPrompt(ctx: PromptContext): string {
   return `Write a first-touch cold outreach email that reads like a typed Gmail note from a thoughtful operator. Careful. Specific. Humble. No consultant voice.
 
@@ -86,6 +100,7 @@ ${ctx.researchTags && ctx.researchTags.length ? `Research tags: ${ctx.researchTa
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 ${buildCampaignContextBlock(ctx)}
 ${buildPlaybookHintsBlock(ctx)}
+${buildAgentContextBlock(ctx)}
 ${ctx.micrositeUrl ? `Microsite link available: ${ctx.micrositeUrl}` : 'No microsite link available. Do not invent one.'}
 
 Primary goal: get a reply or a light reaction. Not a meeting ask on touch one.
@@ -130,6 +145,7 @@ ${ctx.researchTags && ctx.researchTags.length ? `Research tags: ${ctx.researchTa
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 ${buildCampaignContextBlock(ctx)}
 ${buildPlaybookHintsBlock(ctx)}
+${buildAgentContextBlock(ctx)}
 ${ctx.micrositeUrl ? `Microsite link available: ${ctx.micrositeUrl}` : 'No microsite link available. Do not invent one.'}
 
 STRUCTURE (2-3 short paragraphs, 50-90 words total):
@@ -159,6 +175,7 @@ Target: ${ctx.personaName ?? 'decision maker'} at ${ctx.accountName}${ctx.person
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 ${buildCampaignContextBlock(ctx)}
 ${buildPlaybookHintsBlock(ctx)}
+${buildAgentContextBlock(ctx)}
 
 LinkedIn DMs must be 40-60 words max. One thought. One ask. No small talk.
 ${buildCampaignAskGuidance(ctx)} Lead with the yard as the constraint. End with a question.
@@ -177,6 +194,7 @@ Target: ${ctx.personaName ?? 'decision maker'} at ${ctx.accountName}${ctx.person
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 ${buildCampaignContextBlock(ctx)}
 ${buildPlaybookHintsBlock(ctx)}
+${buildAgentContextBlock(ctx)}
 
 ${ctx.campaignType === 'trade_show' ? 'Trade show context: live users will be on-site. Suggest a specific event window only if that helps.' : 'This is not a trade show call. Keep the ask focused on a short working session.'}
 
@@ -203,6 +221,7 @@ Meeting: ${ctx.campaignType === 'trade_show' ? 'In-person at MODEX 2026 (Atlanta
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 ${buildCampaignContextBlock(ctx)}
 ${buildPlaybookHintsBlock(ctx)}
+${buildAgentContextBlock(ctx)}
 
 Create a structured brief:
 1. Company snapshot (2-3 sentences about their yard/logistics/throughput reality)
@@ -229,6 +248,8 @@ Target Account:
 - Primo angle: ${ctx.primoAngle}
 - Likely pain points: ${ctx.likelyPainPoints}
 - Primo relevance: ${ctx.primoRelevance}
+${ctx.agentContextSummary ? `- Live operator intelligence: ${ctx.agentContextSummary}` : ''}
+${ctx.agentNextActions?.length ? `- Recommended next actions: ${ctx.agentNextActions.join(' | ')}` : ''}
 
 INSTRUCTIONS:
 The output is a JSON that populates a branded infographic one-pager. The visual layout has:
@@ -302,6 +323,7 @@ export function buildOutreachSequencePrompt(ctx: PromptContext, step: 'initial_e
     ctx.parentBrand && ctx.parentBrand !== ctx.accountName ? `Parent brand: ${ctx.parentBrand}` : '',
     ctx.primoAngle ? `What makes this account specific: ${ctx.primoAngle}` : '',
     buildCampaignContextBlock(ctx),
+    buildAgentContextBlock(ctx),
   ].filter(Boolean).join('\n');
 
   const eventAsk = ctx.campaignType === 'trade_show'

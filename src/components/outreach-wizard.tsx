@@ -89,6 +89,7 @@ export function OutreachWizard({ accountName, micrositeUrl, personas, campaigns 
           campaignSlug: selectedCampaignSlug || undefined,
           tone: 'conversational',
           length: 'short',
+          useLiveIntel: true,
         }),
       });
       const json = (await res.json()) as { content?: string; error?: string };

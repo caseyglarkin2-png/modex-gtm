@@ -22,6 +22,7 @@ import { VoicePreviewButton } from '@/components/voice-preview-button';
 import { Input } from '@/components/ui/input';
 import type { GenerateContentInput } from '@/lib/validations';
 import { readApiResponse } from '@/lib/api-response';
+import type { AgentActionResult } from '@/lib/agent-actions/types';
 
 type ContentType = Exclude<GenerateContentInput['type'], 'infographic'>;
 type Tone = GenerateContentInput['tone'];
@@ -78,6 +79,8 @@ export function GeneratorDialog({
   const [showSendForm, setShowSendForm] = useState(false);
   const [playbookBlocks, setPlaybookBlocks] = useState<Array<{ id: string; title: string; body: string; tags: string[] }>>([]);
   const [selectedPlaybookIds, setSelectedPlaybookIds] = useState<Record<string, boolean>>({});
+  const [useLiveIntel, setUseLiveIntel] = useState(true);
+  const [agentContext, setAgentContext] = useState<Pick<AgentActionResult, 'provider' | 'summary' | 'nextActions' | 'freshness'> | null>(null);
 
   const isSendable = type === 'email' || type === 'follow_up';
 
@@ -111,17 +114,19 @@ export function GeneratorDialog({
           campaignSlug,
           tone,
           length,
+          useLiveIntel,
           context: playbookHints
             ? { playbookHints }
             : undefined,
         }),
       });
-      const data = await readApiResponse<{ content?: string; error?: string }>(res);
+      const data = await readApiResponse<{ content?: string; error?: string; agentContext?: Pick<AgentActionResult, 'provider' | 'summary' | 'nextActions' | 'freshness'> }>(res);
       if (!res.ok) {
         throw new Error(data.error ?? 'Generation failed');
       }
       const result = data as { content: string };
       setContent(result.content);
+      setAgentContext(data.agentContext ?? null);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'AI generation failed');
     } finally {
@@ -277,9 +282,25 @@ export function GeneratorDialog({
             </div>
           </div>
         ) : null}
+        <div className="px-6 py-3 border-b flex items-center gap-2 text-xs">
+          <label className="flex items-center gap-2">
+            <input type="checkbox" checked={useLiveIntel} onChange={(event) => setUseLiveIntel(event.target.checked)} />
+            Use latest live intel
+          </label>
+        </div>
 
         {/* Output */}
         <div className="flex-1 overflow-auto px-6 py-4 min-h-[200px]">
+          {agentContext ? (
+            <div className="mb-4 rounded-lg border bg-muted/30 p-3 text-sm">
+              <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                <span>Context used</span>
+                <span className="rounded bg-background px-2 py-0.5 font-mono">{agentContext.provider}</span>
+                <span className="rounded bg-background px-2 py-0.5 font-mono">{agentContext.freshness.source}</span>
+              </div>
+              <p className="mt-2">{agentContext.summary}</p>
+            </div>
+          ) : null}
           {loading && (
             <div className="flex items-center gap-2 text-sm text-muted-foreground animate-pulse py-12 justify-center">
               <RefreshCw className="h-4 w-4 animate-spin" />

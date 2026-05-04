@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { EmailPreviewModal } from '@/components/email/email-preview-modal';
 import { getMicrositeUrl } from '@/lib/site-url';
+import type { AgentActionResult } from '@/lib/agent-actions/types';
 
 interface SequenceStep {
   step: string;
@@ -101,6 +102,8 @@ export function OutreachSequenceDialog({
   const [previewStep, setPreviewStep] = useState<SequenceStep | null>(null);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [rateLimitRemaining, setRateLimitRemaining] = useState<number | undefined>(undefined);
+  const [useLiveIntel, setUseLiveIntel] = useState(true);
+  const [agentContext, setAgentContext] = useState<Pick<AgentActionResult, 'provider' | 'summary' | 'nextActions' | 'freshness'> | null>(null);
 
   async function generateSequence() {
     setLoading(true);
@@ -109,13 +112,14 @@ export function OutreachSequenceDialog({
       const res = await fetch('/api/ai/sequence', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accountName, personaName: selectedPersona, campaignSlug, tone }),
+        body: JSON.stringify({ accountName, personaName: selectedPersona, campaignSlug, tone, useLiveIntel }),
       });
-      const json = await readApiResponse<{ sequence?: SequenceStep[]; error?: string }>(res);
+      const json = await readApiResponse<{ sequence?: SequenceStep[]; error?: string; agentContext?: Pick<AgentActionResult, 'provider' | 'summary' | 'nextActions' | 'freshness'> }>(res);
       if (!res.ok) throw new Error(json.error ?? 'Generation failed');
       if (!json.sequence) throw new Error('No sequence returned');
       setSequence(json.sequence.map((s) => ({ ...s, status: 'draft' as const })));
       setExpandedStep(json.sequence[0]?.step ?? null);
+      setAgentContext(json.agentContext ?? null);
       toast.success(`${json.sequence.length}-step sequence generated`);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Sequence generation failed');
@@ -286,6 +290,20 @@ export function OutreachSequenceDialog({
             className="h-8 text-sm"
           />
         </div>
+        <label className="flex items-center gap-2 text-xs text-muted-foreground">
+          <input type="checkbox" checked={useLiveIntel} onChange={(event) => setUseLiveIntel(event.target.checked)} />
+          Use latest live intel
+        </label>
+        {agentContext ? (
+          <div className="rounded-lg border bg-background p-3 text-sm">
+            <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+              <span>Context used</span>
+              <span className="rounded bg-muted px-2 py-0.5 font-mono">{agentContext.provider}</span>
+              <span className="rounded bg-muted px-2 py-0.5 font-mono">{agentContext.freshness.source}</span>
+            </div>
+            <p className="mt-2">{agentContext.summary}</p>
+          </div>
+        ) : null}
       </div>
 
       {/* Sequence Timeline */}

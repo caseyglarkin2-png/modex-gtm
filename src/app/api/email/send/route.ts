@@ -7,6 +7,7 @@ import { sanitizeEmailHtml } from '@/lib/email/sanitize';
 import { rateLimit } from '@/lib/rate-limit';
 import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
 import { advancePipelineStage, derivePipelineStage } from '@/lib/pipeline';
+import { markAgentActionCacheStale } from '@/lib/agent-actions/cache';
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
@@ -195,6 +196,7 @@ export async function POST(req: NextRequest) {
             activity_date: new Date(),
           },
         }).catch(() => {});
+        await markAgentActionCacheStale(resolvedRecipient.accountName).catch(() => undefined);
       }
     } catch {
       // DB offline — log skipped

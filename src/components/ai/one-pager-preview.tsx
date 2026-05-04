@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/dialog';
 import { FileImage, RefreshCw, Copy, Download, Library } from 'lucide-react';
 import { sanitizeOnePagerData } from '@/lib/one-pager/content-safety';
+import type { AgentActionResult } from '@/lib/agent-actions/types';
 
 export interface OnePagerData {
   headline: string;
@@ -280,6 +281,8 @@ export function OnePagerDialog({
   const [data, setData] = useState<OnePagerData | null>(null);
   const [loading, setLoading] = useState(false);
   const [savingPlaybook, setSavingPlaybook] = useState(false);
+  const [useLiveIntel, setUseLiveIntel] = useState(true);
+  const [agentContext, setAgentContext] = useState<Pick<AgentActionResult, 'provider' | 'summary' | 'nextActions' | 'freshness'> | null>(null);
 
   async function generate() {
     setLoading(true);
@@ -288,12 +291,13 @@ export function OnePagerDialog({
       const res = await fetch('/api/ai/one-pager', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accountName }),
+        body: JSON.stringify({ accountName, useLiveIntel }),
       });
-      const json = await res.json() as { content?: OnePagerData; error?: string };
+      const json = await res.json() as { content?: OnePagerData; error?: string; agentContext?: Pick<AgentActionResult, 'provider' | 'summary' | 'nextActions' | 'freshness'> };
       if (!res.ok) throw new Error(json.error ?? 'Generation failed');
       if (!json.content) throw new Error('Could not parse structured one-pager content');
       setData(json.content);
+      setAgentContext(json.agentContext ?? null);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'One-pager generation failed');
     } finally {
@@ -351,6 +355,22 @@ export function OnePagerDialog({
   const content = (
     <>
       <div className="flex-1 overflow-auto px-6 py-4">
+        <div className="mb-4 flex items-center gap-2 text-xs">
+          <label className="flex items-center gap-2">
+            <input type="checkbox" checked={useLiveIntel} onChange={(event) => setUseLiveIntel(event.target.checked)} />
+            Use latest live intel
+          </label>
+        </div>
+        {agentContext ? (
+          <div className="mb-4 rounded-lg border bg-muted/30 p-3 text-sm">
+            <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+              <span>Context used</span>
+              <span className="rounded bg-background px-2 py-0.5 font-mono">{agentContext.provider}</span>
+              <span className="rounded bg-background px-2 py-0.5 font-mono">{agentContext.freshness.source}</span>
+            </div>
+            <p className="mt-2">{agentContext.summary}</p>
+          </div>
+        ) : null}
         {loading && (
           <div className="flex items-center gap-2 text-sm text-muted-foreground animate-pulse py-20 justify-center">
             <RefreshCw className="h-4 w-4 animate-spin" />

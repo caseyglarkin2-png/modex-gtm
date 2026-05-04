@@ -16,6 +16,7 @@ import { buildAbsoluteUrl } from '@/lib/site-url';
 import { getFacilityFact } from '@/lib/research/facility-fact-registry';
 import { buildAccountTags } from '@/lib/research/account-tags';
 import { isGenerationContractPolicyEnabled } from '@/lib/revops/campaign-generation-contract';
+import { getAgentContentContext, toAgentMetadata } from '@/lib/agent-actions/content-context';
 
 const TONE_MAP: Record<string, PromptContext['tone']> = {
   formal: 'professional',
@@ -36,7 +37,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
   }
 
-  const { type, accountName, personaName, campaignSlug, tone, length, context } = parsed.data;
+  const { type, accountName, personaName, campaignSlug, tone, length, context, useLiveIntel, refreshContext } = parsed.data;
 
   const { account, personas } = await getAccountContext(accountName);
   const requestedCampaignSlug = campaignSlug ?? (context as Record<string, string> | undefined)?.campaignSlug;
@@ -85,6 +86,9 @@ export async function POST(req: NextRequest) {
   const micrositeUrl = microsite ? buildAbsoluteUrl(`/for/${microsite.slug}`) : undefined;
   const facilityFact = account ? getFacilityFact(account.name) : undefined;
   const accountTags = account ? buildAccountTags(account) : [];
+  const agentContext = useLiveIntel
+    ? await getAgentContentContext({ accountName, personaName, refresh: refreshContext })
+    : null;
 
   const ctx: PromptContext = {
     accountName,
@@ -109,6 +113,8 @@ export async function POST(req: NextRequest) {
     facilityScope: facilityFact?.scope,
     researchTags: accountTags.map((t) => `${t.label}: ${t.value}`),
     playbookHints: (context as Record<string, string> | undefined)?.playbookHints,
+    agentContextSummary: agentContext?.summary,
+    agentNextActions: agentContext?.nextActions,
     tone: TONE_MAP[tone] ?? 'casual',
     length: length as PromptContext['length'],
   };
@@ -147,7 +153,15 @@ export async function POST(req: NextRequest) {
 
   try {
     const content = await generateText(prompt, maxTokens);
-    return NextResponse.json({ content, type, accountName, personaName: ctx.personaName, tone, length });
+    return NextResponse.json({
+      content,
+      type,
+      accountName,
+      personaName: ctx.personaName,
+      tone,
+      length,
+      agentContext: toAgentMetadata(agentContext),
+    });
   } catch (err) {
     const message = err instanceof Error ? err.message : 'AI generation failed';
     return NextResponse.json({ error: message }, { status: 500 });

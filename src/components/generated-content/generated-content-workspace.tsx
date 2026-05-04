@@ -241,6 +241,7 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           accountName: regenAccount,
+          useLiveIntel: true,
           regeneration: {
             sourceKind: regenSourceKind,
             sourceId: regenSourceId,
