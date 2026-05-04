@@ -55,7 +55,7 @@ test('Contacts renders saved views, readiness explanations, detail context, and 
   await expect(page.getByRole('link', { name: 'Open Account' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Open Campaign' })).toBeVisible();
 
-  await page.screenshot({ path: 'test-results/contacts-workspace/contacts-core-workspace.png', fullPage: true });
+  await page.screenshot({ path: 'test-results/contacts-workspace/contacts-core-workspace.png', fullPage: false });
 });
 
 test('Personas legacy route lands in Contacts', async ({ page }) => {
