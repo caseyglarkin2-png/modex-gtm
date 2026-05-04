@@ -63,7 +63,8 @@ describe('GeneratedContentGrid', () => {
   it('publishes selected version through publish endpoint', async () => {
     render(<GeneratedContentGrid cards={cards} recipientsByAccount={{}} />);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Publish' }));
+    fireEvent.pointerDown(screen.getByRole('button', { name: 'Open review actions' }));
+    fireEvent.click(await screen.findByRole('menuitem', { name: /Publish Version/i }));
 
     await waitFor(() => {
       expect(fetch).toHaveBeenCalledWith('/api/ai/generated-content/42/publish', { method: 'PATCH' });

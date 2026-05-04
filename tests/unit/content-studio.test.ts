@@ -14,6 +14,7 @@ describe('content studio contract', () => {
       'Library',
       'Queue',
       'Send Readiness',
+      'Playbook',
       'Asset Types',
     ]);
   });

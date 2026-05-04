@@ -4,6 +4,10 @@ const mockedPrisma = {
   persona: {
     findMany: vi.fn(),
   },
+  systemConfig: {
+    findUnique: vi.fn(),
+    upsert: vi.fn(),
+  },
 };
 
 const mockedMarkCronStarted = vi.fn();
@@ -12,6 +16,7 @@ const mockedMarkCronSuccess = vi.fn();
 const mockedMarkCronFailure = vi.fn();
 const mockedIsApolloConfigured = vi.fn();
 const mockedGetEnrichmentThresholds = vi.fn();
+const mockedGetEnrichmentBatchPolicy = vi.fn();
 const mockedGetContactById = vi.fn();
 const mockedEnrichPersonaFromHubSpotContact = vi.fn();
 
@@ -23,7 +28,10 @@ vi.mock('@/lib/cron-monitor', () => ({
   markCronFailure: mockedMarkCronFailure,
 }));
 vi.mock('@/lib/enrichment/apollo-client', () => ({ isApolloConfigured: mockedIsApolloConfigured }));
-vi.mock('@/lib/enrichment/config', () => ({ getEnrichmentThresholds: mockedGetEnrichmentThresholds }));
+vi.mock('@/lib/enrichment/config', () => ({
+  getEnrichmentThresholds: mockedGetEnrichmentThresholds,
+  getEnrichmentBatchPolicy: mockedGetEnrichmentBatchPolicy,
+}));
 vi.mock('@/lib/hubspot/contacts', () => ({ getContactById: mockedGetContactById }));
 vi.mock('@/lib/enrichment/apollo-enrichment', () => ({ enrichPersonaFromHubSpotContact: mockedEnrichPersonaFromHubSpotContact }));
 
@@ -35,6 +43,9 @@ describe('reenrich contacts runner', () => {
     mockedMarkCronSuccess.mockResolvedValue(undefined);
     mockedMarkCronFailure.mockResolvedValue(undefined);
     mockedGetEnrichmentThresholds.mockReturnValue({ staleDaysPerson: 30, staleDaysCompany: 45, minConfidenceForOverwrite: 0.8 });
+    mockedGetEnrichmentBatchPolicy.mockReturnValue({ batchSize: 100, maxParallel: 1, retryBackoffMinutes: 5, dailyBudget: 500 });
+    mockedPrisma.systemConfig.findUnique.mockResolvedValue(null);
+    mockedPrisma.systemConfig.upsert.mockResolvedValue({});
   });
 
   it('returns skipped when Apollo is not configured', async () => {

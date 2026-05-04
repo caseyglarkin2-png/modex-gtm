@@ -4,8 +4,14 @@ import { NextRequest } from 'next/server';
 const mockedPrisma = {
   generatedContent: {
     findUnique: vi.fn(),
+    findFirst: vi.fn(),
     updateMany: vi.fn(),
     update: vi.fn(),
+  },
+  messageEvolutionRegistry: {
+    findFirst: vi.fn(),
+    update: vi.fn(),
+    create: vi.fn(),
   },
   $transaction: vi.fn(),
 };
@@ -28,6 +34,9 @@ describe('generated content publish API', () => {
     });
     mockedPrisma.generatedContent.updateMany.mockReturnValue({ kind: 'updateMany' });
     mockedPrisma.generatedContent.update.mockReturnValue({ kind: 'update' });
+    mockedPrisma.generatedContent.findFirst.mockResolvedValue(null);
+    mockedPrisma.messageEvolutionRegistry.findFirst.mockResolvedValue(null);
+    mockedPrisma.messageEvolutionRegistry.create.mockResolvedValue({});
     mockedPrisma.$transaction.mockResolvedValue([]);
 
     const res = await PATCH(
