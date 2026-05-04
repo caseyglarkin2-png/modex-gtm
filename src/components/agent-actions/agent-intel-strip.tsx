@@ -180,6 +180,16 @@ export function AgentIntelStrip({ accountName, initialResult }: AgentIntelStripP
             }
           />
           <AgentActionDialog
+            request={{ action: 'company_contacts', target: { accountName, company: accountName } }}
+            title={`Find More Contacts for ${accountName}`}
+            trigger={
+              <Button size="sm" variant="outline" className="gap-1.5">
+                <Users className="h-3.5 w-3.5" />
+                Find More Contacts
+              </Button>
+            }
+          />
+          <AgentActionDialog
             request={{ action: 'committee_refresh', target: { accountName, company: accountName } }}
             title={`Build Committee for ${accountName}`}
             trigger={
