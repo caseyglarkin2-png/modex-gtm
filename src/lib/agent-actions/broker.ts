@@ -53,6 +53,57 @@ function card(title: string, body: string, tone?: AgentActionCard['tone']): Agen
   return { title, body, tone };
 }
 
+function normalizeDomain(value: string | null | undefined) {
+  return typeof value === 'string'
+    ? value.trim().replace(/^https?:\/\//i, '').replace(/^www\./i, '').replace(/\/.*$/, '').toLowerCase()
+    : '';
+}
+
+function extractArrayRecords(value: unknown): Array<Record<string, unknown>> {
+  return Array.isArray(value) ? value.filter(Boolean) as Array<Record<string, unknown>> : [];
+}
+
+function dedupeContacts(contacts: Array<Record<string, unknown>>) {
+  const seen = new Set<string>();
+  return contacts.filter((contact) => {
+    const key = safeString(contact.email).toLowerCase() || safeString(contact.name).toLowerCase();
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+async function getSalesAgentCompanyContacts(
+  salesAgent: ReturnType<typeof getConfiguredAgentClients>['salesAgent'],
+  company: string,
+  companyPayload?: Record<string, unknown> | null,
+  limit = 10,
+) {
+  if (!salesAgent) return [];
+
+  const queries = [
+    normalizeDomain(companyPayload?.domain as string | undefined),
+    normalizeDomain(companyPayload?.website as string | undefined),
+    company,
+  ].filter(Boolean);
+
+  const results: Array<Record<string, unknown>> = [];
+  for (const query of queries) {
+    try {
+      const payload = await salesAgent.searchContacts(query, limit);
+      const contacts = extractArrayRecords((payload as Record<string, unknown>).contacts);
+      if (contacts.length > 0) {
+        results.push(...contacts);
+        if (results.length >= limit) break;
+      }
+    } catch {
+      // Ignore individual search failures and let other sources try.
+    }
+  }
+
+  return dedupeContacts(results).slice(0, limit);
+}
+
 async function resolveTarget(target: AgentActionTarget): Promise<ResolvedTarget> {
   const resolved: ResolvedTarget = { ...target };
   if (resolved.personaId) {
@@ -223,6 +274,16 @@ async function runContentContext(target: ResolvedTarget, refresh: boolean, depth
   const decisionMakers = Array.isArray((salesDecisionMakersPayload as Record<string, unknown> | null)?.decision_makers)
     ? (((salesDecisionMakersPayload as Record<string, unknown>).decision_makers as Array<unknown>).filter(Boolean) as Array<Record<string, unknown>>)
     : [];
+  const salesContacts = await getSalesAgentCompanyContacts(
+    salesAgent,
+    company,
+    companyContactsPayload as Record<string, unknown> | null,
+    limit,
+  );
+  const liveContactCount = salesContacts.length > 0 ? salesContacts.length : decisionMakers.length;
+  const liveContactPreview = salesContacts.length > 0
+    ? salesContacts.map((contact) => safeString(contact.name) || safeString(contact.email))
+    : decisionMakers.map((contact) => safeString(contact.name) || safeString(contact.email));
 
   const summaryParts = [
     safeString(researchPayload?.summary) || safeString(workbenchPayload?.summary),
@@ -247,8 +308,8 @@ async function runContentContext(target: ResolvedTarget, refresh: boolean, depth
     ),
     card(
       'Contact Coverage',
-      `${personas.length} Modex personas${contactNames.length ? ` • ${summarizeList(contactNames)}` : ''}${companyContactsPayload ? ` • Live company contacts available` : ''}`,
-      'success',
+      `${personas.length} Modex personas${contactNames.length ? ` • ${summarizeList(contactNames)}` : ''}${liveContactCount > 0 ? ` • ${liveContactCount} live external contacts • ${summarizeList(liveContactPreview)}` : ''}`,
+      liveContactCount > 0 ? 'success' : 'warning',
     ),
     card(
       'Committee Coverage',
@@ -308,6 +369,7 @@ async function runContentContext(target: ResolvedTarget, refresh: boolean, depth
     workbench: workbenchPayload,
     committee: committeePayload,
     companyContacts: companyContactsPayload,
+    salesContacts,
     pipeline: pipelinePayload,
     salesAgent: {
       sequenceRecommendation: salesSequencePayload,
@@ -386,13 +448,25 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
       return result;
     }
     case 'company_contacts': {
-      if (!company || !clawd) {
-        return { ...baseResult(request.action, clawd ? 'clawd' : 'modex'), status: 'error', summary: 'Company and Clawd configuration are required for company contact lookup.' };
+      if (!company || (!clawd && !salesAgent)) {
+        return { ...baseResult(request.action, clawd ? 'clawd' : salesAgent ? 'sales_agent' : 'modex'), status: 'error', summary: 'Company and a live sidecar configuration are required for company contact lookup.' };
       }
-      const payload = await clawd.getCompanyContacts(company);
-      const contacts = Array.isArray(payload.contacts) ? payload.contacts as Array<Record<string, unknown>> : [];
-      const result = baseResult(request.action, 'clawd');
-      result.summary = `Found ${contacts.length} live contacts for ${company}.`;
+      const [clawdPayload, salesPayload] = await Promise.allSettled([
+        clawd?.getCompanyContacts(company),
+        salesAgent?.findDecisionMakers(company),
+      ]);
+      const companyPayload = clawdPayload.status === 'fulfilled' ? (clawdPayload.value as Record<string, unknown>) : null;
+      const decisionMakers = salesPayload.status === 'fulfilled'
+        ? extractArrayRecords((salesPayload.value as Record<string, unknown>).decision_makers)
+        : [];
+      const salesContacts = await getSalesAgentCompanyContacts(salesAgent, company, companyPayload, request.limit ?? 10);
+      const contacts = dedupeContacts([...salesContacts, ...decisionMakers]);
+      const result = baseResult(request.action, contacts.length > 0 ? 'sales_agent' : companyPayload ? 'clawd' : 'modex');
+      result.summary = contacts.length > 0
+        ? `Found ${contacts.length} live contacts for ${company}.`
+        : companyPayload
+          ? `Loaded live company context for ${company}, but no external contacts were returned.`
+          : `No live contacts found for ${company}.`;
       result.cards = [
         card(
           'Top Contacts',
@@ -401,8 +475,17 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
             : 'No live company contacts returned.',
           contacts.length ? 'success' : 'warning',
         ),
+        card(
+          'Company Context',
+          companyPayload ? summarizeList([safeString(companyPayload.name), safeString(companyPayload.domain), safeString(companyPayload.industry)], 3) || previewJson(companyPayload) : 'No live company profile returned.',
+          companyPayload ? 'default' : 'warning',
+        ),
       ];
-      result.data = payload;
+      result.data = {
+        company: companyPayload,
+        contacts,
+        decisionMakers,
+      };
       result.nextActions = ['Pick strongest operator and draft outreach', 'Build committee'];
       return result;
     }
@@ -424,16 +507,21 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
     case 'prospect_discover': {
       const limit = request.limit ?? 10;
       const result = baseResult(request.action, clawd ? 'clawd' : salesAgent ? 'sales_agent' : 'modex');
+      const errors: string[] = [];
       if (clawd) {
-        const payload = await clawd.discoverProspects(limit);
-        const prospects = Array.isArray(payload.prospects) ? payload.prospects as Array<Record<string, unknown>> : [];
-        result.summary = `Discovered ${prospects.length} prospect-ready accounts.`;
-        result.cards = [
-          card('Top Prospects', summarizeList(prospects.slice(0, 4).map((prospect) => safeString(prospect.company) || safeString(prospect.name))) || 'No prospects returned.', prospects.length ? 'success' : 'warning'),
-        ];
-        result.data = payload;
-        result.nextActions = ['Open top account', 'Build committee', 'Generate one-pager'];
-        return result;
+        try {
+          const payload = await clawd.discoverProspects(limit);
+          const prospects = Array.isArray(payload.prospects) ? payload.prospects as Array<Record<string, unknown>> : [];
+          result.summary = `Discovered ${prospects.length} prospect-ready accounts.`;
+          result.cards = [
+            card('Top Prospects', summarizeList(prospects.slice(0, 4).map((prospect) => safeString(prospect.company) || safeString(prospect.name))) || 'No prospects returned.', prospects.length ? 'success' : 'warning'),
+          ];
+          result.data = payload;
+          result.nextActions = ['Open top account', 'Build committee', 'Generate one-pager'];
+          return result;
+        } catch (error) {
+          errors.push(error instanceof Error ? error.message : String(error));
+        }
       }
       if (salesAgent && company) {
         const payload = await salesAgent.findDecisionMakers(company);
@@ -445,12 +533,15 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
         result.cards = [
           card('Decision Makers', summarizeList(prospects.slice(0, 4).map((prospect) => safeString(prospect.name) || safeString(prospect.email))) || 'No decision makers returned.', prospects.length ? 'success' : 'warning'),
         ];
-        result.data = payload;
+        result.data = {
+          ...payload,
+          upstreamErrors: errors,
+        };
         result.nextActions = ['Draft outreach', 'Generate one-pager', 'Enrich the strongest contact'];
         return result;
       }
       result.status = 'partial';
-      result.summary = 'Prospect discovery is unavailable because no sidecar service is configured.';
+      result.summary = errors.length > 0 ? errors.join(' ') : 'Prospect discovery is unavailable because no sidecar service is configured.';
       return result;
     }
     case 'contact_enrich': {

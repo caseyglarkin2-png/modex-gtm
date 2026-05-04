@@ -229,7 +229,7 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                 trigger={
                   <Button size="sm" className="gap-1.5 bg-blue-600 text-white hover:bg-blue-700">
                     <FileText className="h-3.5 w-3.5" />
-                    Generate One-Pager
+                    Generate With Intel
                   </Button>
                 }
               />

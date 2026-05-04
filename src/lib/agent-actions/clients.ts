@@ -299,6 +299,14 @@ export class SalesAgentClient {
       }),
     });
   }
+
+  async searchContacts(query: string, limit = 10) {
+    const params = new URLSearchParams({
+      q: query,
+      limit: String(limit),
+    });
+    return this.request(`/api/contacts?${params.toString()}`);
+  }
 }
 
 export function getConfiguredAgentClients() {

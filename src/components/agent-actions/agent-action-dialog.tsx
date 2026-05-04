@@ -30,10 +30,11 @@ type AgentActionDialogProps = {
 
 function extractDraft(result: AgentActionResult): { subject?: string; body?: string } | null {
   const draft = result.data.draft as
-    | { subject?: string; body?: string; draft?: { subject?: string; body?: string } }
+    | { subject?: string; body?: string; draft?: string | { subject?: string; body?: string } }
     | undefined;
   if (!draft) return null;
   if (draft.subject || draft.body) return { subject: draft.subject, body: draft.body };
+  if (typeof draft.draft === 'string') return { body: draft.draft };
   if (draft.draft?.subject || draft.draft?.body) return { subject: draft.draft.subject, body: draft.draft.body };
   return null;
 }
