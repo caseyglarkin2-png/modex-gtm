@@ -61,6 +61,72 @@ export type GeneratedContentWorkspaceData = {
   recipientsByAccount: Record<string, WorkspaceRecipient[]>;
 };
 
+const generatedContentBaseSelect = {
+  id: true,
+  account_name: true,
+  version: true,
+  provider_used: true,
+  external_send_count: true,
+  is_published: true,
+  content: true,
+  created_at: true,
+  version_metadata: true,
+  campaign_id: true,
+  campaign: {
+    select: {
+      name: true,
+      campaign_type: true,
+    },
+  },
+  checklist_state: {
+    select: {
+      completed_item_ids: true,
+    },
+  },
+} as const;
+
+const generatedContentWithContractSelect = {
+  ...generatedContentBaseSelect,
+  campaign: {
+    select: {
+      ...generatedContentBaseSelect.campaign.select,
+      generation_contract: {
+        select: {
+          is_complete: true,
+          quality_score: true,
+        },
+      },
+    },
+  },
+} as const;
+
+function isMissingCampaignContractTableError(error: unknown): boolean {
+  if (!error || typeof error !== 'object') return false;
+  const candidate = error as { code?: string; meta?: unknown };
+  return candidate.code === 'P2021' && JSON.stringify(candidate.meta ?? '').includes('campaign_generation_contracts');
+}
+
+async function fetchGeneratedRows(): Promise<GeneratedContentRecord[]> {
+  const query = {
+    where: { content_type: 'one_pager' },
+    orderBy: [{ account_name: 'asc' as const }, { version: 'desc' as const }],
+    take: 500,
+  };
+
+  try {
+    return (await prisma.generatedContent.findMany({
+      ...query,
+      select: generatedContentWithContractSelect,
+    })) as GeneratedContentRecord[];
+  } catch (error) {
+    if (!isMissingCampaignContractTableError(error)) throw error;
+    return (await prisma.generatedContent.findMany({
+      ...query,
+      select: generatedContentBaseSelect,
+    })) as GeneratedContentRecord[];
+  }
+}
+
 export function buildGeneratedContentWorkspaceData(
   generatedRows: GeneratedContentRecord[],
   jobs: GenerationJobRecord[],
@@ -163,40 +229,7 @@ export async function fetchGeneratedContentWorkspaceData(): Promise<GeneratedCon
       take: 150,
       select: { account_name: true, status: true },
     }),
-    prisma.generatedContent.findMany({
-      where: { content_type: 'one_pager' },
-      orderBy: [{ account_name: 'asc' }, { version: 'desc' }],
-      take: 500,
-      select: {
-        id: true,
-        account_name: true,
-        version: true,
-        provider_used: true,
-        external_send_count: true,
-        is_published: true,
-        content: true,
-        created_at: true,
-        version_metadata: true,
-        campaign_id: true,
-        campaign: {
-          select: {
-            name: true,
-            campaign_type: true,
-            generation_contract: {
-              select: {
-                is_complete: true,
-                quality_score: true,
-              },
-            },
-          },
-        },
-        checklist_state: {
-          select: {
-            completed_item_ids: true,
-          },
-        },
-      },
-    }),
+    fetchGeneratedRows(),
   ]);
 
   const accountsWithGenerated = Array.from(new Set(generatedRows.map((row) => row.account_name)));
@@ -223,7 +256,7 @@ export async function fetchGeneratedContentWorkspaceData(): Promise<GeneratedCon
     : [];
 
   return buildGeneratedContentWorkspaceData(
-    generatedRows as GeneratedContentRecord[],
+    generatedRows,
     jobs as GenerationJobRecord[],
     recipients as PersonaRecord[],
   );

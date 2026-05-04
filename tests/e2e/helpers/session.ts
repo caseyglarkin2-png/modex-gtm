@@ -34,8 +34,27 @@ async function hasAuthenticatedSession(page: Page, retries = 8): Promise<boolean
   return false;
 }
 
+async function loginWithCredentialsCallback(page: Page): Promise<boolean> {
+  const csrfRes = await page.request.get('/api/auth/csrf').catch(() => null);
+  if (!csrfRes?.ok()) return false;
+
+  const { csrfToken } = (await csrfRes.json()) as { csrfToken?: string };
+  if (!csrfToken) return false;
+
+  await page.request.post('/api/auth/callback/credentials', {
+    form: {
+      email: AUTH_EMAIL,
+      csrfToken,
+      json: 'true',
+    },
+  }).catch(() => null);
+
+  return hasAuthenticatedSession(page);
+}
+
 export async function loginAsCasey(page: Page): Promise<boolean> {
   if (await hasAuthenticatedSession(page)) return true;
+  if (await loginWithCredentialsCallback(page)) return true;
 
   const authReady = await waitForLoginPage(page);
   if (!authReady) return false;

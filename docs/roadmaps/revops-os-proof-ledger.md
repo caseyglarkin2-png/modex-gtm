@@ -33,6 +33,37 @@ Required artifact:
 Commit boundary:
 ```
 
+## Production Caveat Closeout - Generated Content Auth + Schema Readiness
+
+```text
+RevOps OS Production Caveat Closeout
+- Date UTC: 2026-05-04
+- Tester: Codex
+- Scope:
+  - Removed the authenticated prod click-test caveat for Generated Content.
+  - Synced the production Railway database schema to the Prisma schema.
+  - Added deterministic CSRF credentials login to the shared Playwright session helper.
+  - Added a defensive Generated Content query fallback for environments missing the optional campaign_generation_contracts table.
+- Root cause:
+  - Production auth was working.
+  - /generated-content failed because the Railway production database did not yet have public.campaign_generation_contracts.
+- Commands:
+  - npx vercel env pull .env.production.local --environment=production: PASS
+  - set -a; source .env.production.local; set +a; npx prisma db push --skip-generate: PASS
+  - pnpm -s tsc --noEmit: PASS
+  - pnpm -s lint -- tests/e2e/helpers/session.ts tests/e2e/generated-content.spec.ts src/lib/generated-content/queries.ts: PASS
+  - pnpm -s vitest run tests/unit/generated-content-queries.test.ts tests/unit/generated-content-workspace.test.tsx tests/unit/generated-content-grid.test.tsx: PASS
+  - PLAYWRIGHT_BASE_URL=https://modex-gtm.vercel.app npx playwright test tests/e2e/generated-content.spec.ts --workers=1: PASS
+  - PLAYWRIGHT_BASE_URL=https://modex-gtm.vercel.app npx playwright test tests/e2e/content-studio-workspace.spec.ts tests/e2e/sprint24-27-infographic-system.spec.ts --workers=1: PASS
+- Routes tested:
+  - /generated-content
+  - /studio
+  - /analytics
+- Result:
+  - Live production Generated Content now authenticates, loads, opens review actions, and launches preview by click test.
+  - Content Studio consolidation and infographic performance surfaces remain green in production smoke coverage.
+```
+
 ## Sprint 19 Entry: Failure Intelligence Center
 
 **Status:** Completed (code + unit gates pass; Playwright auth/runtime instability noted)  

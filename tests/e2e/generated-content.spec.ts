@@ -17,9 +17,8 @@ test('generated content page renders filters and workspace', async ({ page }) =>
   const accountCards = page.locator('a[href^="/accounts/"]');
   if ((await accountCards.count()) > 0) {
     await expect(page.locator('body')).toContainText(/Quality \d+/);
-    const previewButton = page.getByRole('button', { name: /Preview/i }).first();
-    await expect(previewButton).toBeVisible();
-    await previewButton.click();
+    await page.getByRole('button', { name: 'Open review actions' }).first().click();
+    await page.getByRole('menuitem', { name: 'Review Preview' }).click();
     await expect(page.locator('body')).toContainText(/Preview the selected generated one-pager version/i);
     await page.keyboard.press('Escape');
 
