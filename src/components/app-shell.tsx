@@ -31,6 +31,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <AuthProvider>
       <SidebarProvider>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[70] focus:rounded-md focus:bg-background focus:px-3 focus:py-2 focus:text-sm focus:ring-2 focus:ring-primary"
+        >
+          Skip to main content
+        </a>
         <Sidebar />
         <CommandSearch />
         <MainContent>{children}</MainContent>

@@ -7,6 +7,8 @@ export function MainContent({ children }: { children: React.ReactNode }) {
 
   return (
     <main
+      id="main-content"
+      tabIndex={-1}
       className="min-h-screen pt-14 md:pt-0 transition-[margin-left] duration-200 ease-in-out"
       style={{ marginLeft: undefined }}
     >

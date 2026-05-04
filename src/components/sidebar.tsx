@@ -53,7 +53,7 @@ function NavContent({ pathname, onNavigate }: { pathname: string; onNavigate?: (
           <Link
             href="/capture"
             onClick={onNavigate}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-md border bg-[var(--accent)] px-3 py-2 text-xs font-medium text-[var(--foreground)] transition-colors hover:bg-[var(--muted)]"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-md border bg-[var(--accent)] px-3 py-2 text-xs font-medium text-[var(--foreground)] transition-colors hover:bg-[var(--muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <Smartphone className="h-3.5 w-3.5" />
             Quick Capture
@@ -73,7 +73,7 @@ function NavContent({ pathname, onNavigate }: { pathname: string; onNavigate?: (
                       href={item.href}
                       onClick={onNavigate}
                       className={cn(
-                        'flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors',
+                        'flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
                         isActive
                           ? 'bg-[var(--accent)] text-[var(--primary)] font-medium'
                           : 'text-[var(--muted-foreground)] hover:bg-[var(--muted)] hover:text-[var(--foreground)]'
@@ -114,7 +114,7 @@ function CollapsedNav({ pathname }: { pathname: string }) {
               <TooltipTrigger asChild>
                 <Link
                   href="/capture"
-                  className="flex items-center justify-center rounded-md border bg-[var(--accent)] p-2 text-[var(--foreground)] transition-colors hover:bg-[var(--muted)]"
+                  className="flex items-center justify-center rounded-md border bg-[var(--accent)] p-2 text-[var(--foreground)] transition-colors hover:bg-[var(--muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   <Smartphone className="h-4 w-4" />
                 </Link>
@@ -134,7 +134,7 @@ function CollapsedNav({ pathname }: { pathname: string }) {
                       <Link
                         href={item.href}
                         className={cn(
-                          'flex items-center justify-center rounded-md p-2 transition-colors',
+                          'flex items-center justify-center rounded-md p-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
                           isActive
                             ? 'bg-[var(--accent)] text-[var(--primary)]'
                             : 'text-[var(--muted-foreground)] hover:bg-[var(--muted)] hover:text-[var(--foreground)]'
