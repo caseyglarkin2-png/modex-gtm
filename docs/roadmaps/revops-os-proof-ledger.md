@@ -55,6 +55,12 @@ RevOps OS Production Caveat Closeout
   - pnpm -s vitest run tests/unit/generated-content-queries.test.ts tests/unit/generated-content-workspace.test.tsx tests/unit/generated-content-grid.test.tsx: PASS
   - PLAYWRIGHT_BASE_URL=https://modex-gtm.vercel.app npx playwright test tests/e2e/generated-content.spec.ts --workers=1: PASS
   - PLAYWRIGHT_BASE_URL=https://modex-gtm.vercel.app npx playwright test tests/e2e/content-studio-workspace.spec.ts tests/e2e/sprint24-27-infographic-system.spec.ts --workers=1: PASS
+  - npx vercel deploy --prod --yes: PASS (dpl_GSQ1gRDso9ciUDk5PieCj427EwCH)
+  - PLAYWRIGHT_BASE_URL=https://modex-gtm.vercel.app npx playwright test tests/e2e/generated-content.spec.ts tests/e2e/content-studio-workspace.spec.ts tests/e2e/sprint24-27-infographic-system.spec.ts --workers=1: PASS (6/6)
+  - curl protected route sanity: PASS (/generated-content, /studio, /analytics returned 307 unauthenticated; protected API returned 401)
+- Deployment:
+  - Production alias: https://modex-gtm.vercel.app
+  - Production deployment id: dpl_GSQ1gRDso9ciUDk5PieCj427EwCH
 - Routes tested:
   - /generated-content
   - /studio
