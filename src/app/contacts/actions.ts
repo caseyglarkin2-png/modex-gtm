@@ -6,6 +6,9 @@ import { getContactById, hsSearchContacts, listRecentContacts, type HubSpotConta
 import { normalizeName, normalizeTitle, parseDomainFromEmail, scoreContactQuality, splitName } from '@/lib/contact-standard';
 import { buildHubSpotIntakeCandidates, type HubSpotIntakeCandidate } from '@/lib/contacts/hubspot-intake';
 import { enrichPersonaFromHubSpotContact } from '@/lib/enrichment/apollo-enrichment';
+import { searchApolloSavedContacts } from '@/lib/enrichment/apollo-client';
+import { importExternalContact, summarizeImportResults } from '@/lib/contacts/external-contact-import';
+import { parseContactsCsv } from '@/lib/contacts/csv-intake';
 import {
   isNewAccountSendEligible,
   likelySameCompanyName,
@@ -311,6 +314,190 @@ export async function enrichHubSpotContactsBulk(hubspotContactIds: string[]): Pr
   }
   revalidatePath('/contacts');
   return summary;
+}
+
+export async function importNextHubSpotContactsPage(): Promise<{
+  imported: number;
+  linked: number;
+  updated: number;
+  skipped: number;
+  blocked: number;
+  errors: number;
+  nextAfter: string | null;
+}> {
+  const checkpointKey = 'contacts_intake_hubspot_after';
+  const checkpoint = await prisma.systemConfig.findUnique({ where: { key: checkpointKey } });
+  const result = await listRecentContacts(checkpoint?.value || undefined, 100);
+  const outcomes = [];
+  let errors = 0;
+
+  for (const contact of result.contacts) {
+    try {
+      outcomes.push(await importExternalContact({
+        source: 'hubspot',
+        sourceContactId: contact.id,
+        email: contact.email,
+        firstName: contact.firstname,
+        lastName: contact.lastname,
+        title: contact.jobtitle,
+        phone: contact.phone,
+        companyName: contact.company,
+        optedOut: contact.hs_email_optout,
+      }));
+    } catch {
+      errors++;
+    }
+  }
+
+  if (result.nextAfter) {
+    await prisma.systemConfig.upsert({
+      where: { key: checkpointKey },
+      update: { value: result.nextAfter },
+      create: { key: checkpointKey, value: result.nextAfter },
+    });
+  }
+
+  await prisma.systemConfig.upsert({
+    where: { key: 'contacts_intake_hubspot_last_run' },
+    update: { value: JSON.stringify({ at: new Date().toISOString(), pulled: result.contacts.length, nextAfter: result.nextAfter ?? null }) },
+    create: { key: 'contacts_intake_hubspot_last_run', value: JSON.stringify({ at: new Date().toISOString(), pulled: result.contacts.length, nextAfter: result.nextAfter ?? null }) },
+  });
+
+  revalidatePath('/contacts');
+  return { ...summarizeImportResults(outcomes), errors, nextAfter: result.nextAfter ?? null };
+}
+
+export async function importApolloSavedContactsPage(input: {
+  contactLabelIds?: string[];
+  qKeywords?: string;
+  page?: number;
+}): Promise<{
+  imported: number;
+  linked: number;
+  updated: number;
+  skipped: number;
+  blocked: number;
+  errors: number;
+  page: number;
+  totalEntries: number;
+}> {
+  const saved = await searchApolloSavedContacts({
+    contactLabelIds: input.contactLabelIds?.filter(Boolean),
+    qKeywords: input.qKeywords,
+    page: input.page ?? 1,
+    perPage: 100,
+  });
+  const outcomes = [];
+  let errors = 0;
+
+  for (const contact of saved.contacts) {
+    try {
+      const phone = contact.phone_numbers?.[0]?.sanitized_number ?? contact.phone_numbers?.[0]?.raw_number ?? null;
+      outcomes.push(await importExternalContact({
+        source: 'apollo',
+        sourceContactId: contact.contact_id ?? contact.id,
+        email: contact.email,
+        firstName: contact.first_name,
+        lastName: contact.last_name,
+        title: contact.title,
+        phone,
+        companyName: contact.organization?.name ?? contact.organization_name ?? contact.company,
+        companyDomain: contact.organization?.website_url,
+        companyIndustry: contact.organization?.industry,
+        linkedinUrl: contact.linkedin_url,
+        confidence: contact.confidence ?? null,
+      }));
+    } catch {
+      errors++;
+    }
+  }
+
+  await prisma.systemConfig.upsert({
+    where: { key: 'contacts_intake_apollo_last_run' },
+    update: {
+      value: JSON.stringify({
+        at: new Date().toISOString(),
+        page: saved.page,
+        pulled: saved.contacts.length,
+        totalEntries: saved.totalEntries,
+        contactLabelIds: input.contactLabelIds ?? [],
+      }),
+    },
+    create: {
+      key: 'contacts_intake_apollo_last_run',
+      value: JSON.stringify({
+        at: new Date().toISOString(),
+        page: saved.page,
+        pulled: saved.contacts.length,
+        totalEntries: saved.totalEntries,
+        contactLabelIds: input.contactLabelIds ?? [],
+      }),
+    },
+  });
+
+  revalidatePath('/contacts');
+  return { ...summarizeImportResults(outcomes), errors, page: saved.page, totalEntries: saved.totalEntries };
+}
+
+export async function createManualContactRecord(input: {
+  name: string;
+  email?: string;
+  title?: string;
+  accountName: string;
+  companyDomain?: string;
+  phone?: string;
+}): Promise<{ success: boolean; error?: string }> {
+  if (!input.name.trim() || !input.accountName.trim()) {
+    return { success: false, error: 'Name and account are required' };
+  }
+
+  try {
+    await importExternalContact({
+      source: 'manual',
+      name: input.name,
+      email: input.email,
+      title: input.title,
+      phone: input.phone,
+      companyName: input.accountName,
+      companyDomain: input.companyDomain,
+    });
+    revalidatePath('/contacts');
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error instanceof Error ? error.message : 'Failed to create contact' };
+  }
+}
+
+export async function importContactsCsv(rawCsv: string): Promise<{
+  parsed: number;
+  imported: number;
+  linked: number;
+  updated: number;
+  skipped: number;
+  blocked: number;
+  errors: number;
+}> {
+  if (!rawCsv.trim()) {
+    return { parsed: 0, imported: 0, linked: 0, updated: 0, skipped: 0, blocked: 0, errors: 0 };
+  }
+
+  const batchId = Date.now().toString(36);
+  const contacts = parseContactsCsv(rawCsv).slice(0, 5000).map((contact, index) => ({
+    ...contact,
+    sourceContactId: `csv-${batchId}-${index + 1}`,
+  }));
+  const outcomes = [];
+  let errors = 0;
+  for (const contact of contacts) {
+    try {
+      outcomes.push(await importExternalContact(contact));
+    } catch {
+      errors++;
+    }
+  }
+
+  revalidatePath('/contacts');
+  return { parsed: contacts.length, ...summarizeImportResults(outcomes), errors };
 }
 
 export async function addToWave(

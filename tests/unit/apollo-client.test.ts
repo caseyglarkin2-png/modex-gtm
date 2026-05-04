@@ -44,4 +44,37 @@ describe('apollo client', () => {
     expect(people).toHaveLength(1);
     expect(fetchMock).toHaveBeenCalledOnce();
   });
+
+  it('searches saved contacts by Apollo contact label IDs', async () => {
+    process.env.APOLLO_API_KEY = 'test-apollo-key';
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        contacts: [
+          {
+            id: 'apollo-contact-1',
+            first_name: 'Alex',
+            last_name: 'Rivera',
+            email: 'alex@example.com',
+            title: 'VP Operations',
+            organization: { name: 'Example Co', website_url: 'https://example.com' },
+          },
+        ],
+        pagination: { page: 2, per_page: 100, total_entries: 13000 },
+      }),
+    } as Response);
+    const { searchApolloSavedContacts } = await import('@/lib/enrichment/apollo-client');
+
+    const result = await searchApolloSavedContacts({ contactLabelIds: ['label-1'], page: 2, perPage: 100 });
+
+    expect(result.totalEntries).toBe(13000);
+    expect(result.contacts[0]?.email).toBe('alex@example.com');
+    expect(fetchMock).toHaveBeenCalledWith(
+      'https://api.apollo.io/api/v1/contacts/search',
+      expect.objectContaining({
+        method: 'POST',
+        body: expect.stringContaining('"contact_label_ids":["label-1"]'),
+      }),
+    );
+  });
 });

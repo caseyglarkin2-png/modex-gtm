@@ -4,12 +4,16 @@ import { contactSavedViews, resolveContactReadiness } from '@/lib/contacts-works
 import { Breadcrumb } from '@/components/breadcrumb';
 import { ContactsTable } from './contacts-table';
 import { HubSpotSearch } from './hubspot-search';
+import { ContactsIntakePanel } from './contacts-intake-panel';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Contacts' };
 
+const TARGET_ACCOUNT_COUNT = 1000;
+const TARGET_CONTACT_COUNT = 13000;
+
 export default async function ContactsPage() {
-  const [personas, accounts, enrichmentCount, sendReadyCount, activeCampaign] = await Promise.all([
+  const [personas, accounts, enrichmentCount, apolloLinkedCount, sendReadyCount, activeCampaign] = await Promise.all([
     prisma.persona.findMany({
       select: {
         id: true,
@@ -43,6 +47,7 @@ export default async function ContactsPage() {
         vertical: true,
       },
     }),
+    prisma.contactEnrichment.count(),
     prisma.contactEnrichment.count({
       where: { apollo_person_id: { not: null } },
     }),
@@ -131,6 +136,14 @@ export default async function ContactsPage() {
       <p className="text-xs text-[var(--muted-foreground)]">
         Coverage: owner {ownerCoverage}% · vertical {verticalCoverage}% · enriched {enrichmentCoverage}%
       </p>
+      <ContactsIntakePanel
+        accountCount={accounts.length}
+        contactCount={contacts.length}
+        targetAccountCount={TARGET_ACCOUNT_COUNT}
+        targetContactCount={TARGET_CONTACT_COUNT}
+        hubspotLinkedCount={synced}
+        apolloLinkedCount={apolloLinkedCount}
+      />
       <ContactsTable contacts={contacts} savedViews={contactSavedViews} />
       <HubSpotSearch />
     </div>

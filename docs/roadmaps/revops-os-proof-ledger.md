@@ -33,6 +33,38 @@ Required artifact:
 Commit boundary:
 ```
 
+## Contacts TAM / ICP Intake Closeout
+
+```text
+RevOps OS Contacts Intake Closeout
+- Date UTC: 2026-05-04
+- Tester: Codex
+- Scope:
+  - Added Contacts UI intake panel for HubSpot page import, Apollo saved-list import, CSV import, and manual contact creation.
+  - Added shared external contact importer with dedupe by source ID/email, review-safe account creation, quality scoring, source provenance, and send-readiness guardrails.
+  - Added CSV parser for common contact/account headers.
+  - Added Apollo saved-contact search support for saved-list/contact-label IDs.
+  - Ran first production HubSpot intake batch.
+- Production data movement:
+  - Before: 81 accounts, 226 contacts, 55 HubSpot-linked contacts, 1 Apollo-linked enrichment.
+  - After first HubSpot batch: 180 accounts, 726 contacts, 555 HubSpot-linked contacts, 1 Apollo-linked enrichment.
+  - Batch command: npx tsx scripts/intake-crm-contacts.ts --source hubspot --env .env.production.local --limit 500: PASS
+- Commands:
+  - pnpm -s tsc --noEmit: PASS
+  - pnpm -s vitest run tests/unit/contacts-csv-intake.test.ts tests/unit/apollo-client.test.ts tests/unit/hubspot-intake.test.ts tests/unit/contacts-workspace.test.ts: PASS
+  - pnpm -s lint -- src/app/contacts src/lib/contacts src/lib/enrichment/apollo-client.ts tests/unit/contacts-csv-intake.test.ts tests/e2e/contacts-workspace.spec.ts: PASS
+- Routes touched:
+  - /contacts
+- Known operator input needed:
+  - Apollo saved-list/contact-label ID for the exact saved Apollo list.
+  - CSV files can now be imported directly in the UI when Apollo enrichment/list export is incomplete.
+- Result:
+  - Contacts are now wired as an operating database, not just a static list.
+  - HubSpot records can be bulk-loaded safely.
+  - Apollo saved-list rows can be imported even when not fully enriched; incomplete rows stay review-safe and out of send-ready workflows.
+  - CSV import is first-class for the 13,000-contact TAM/ICP file path.
+```
+
 ## Production Caveat Closeout - Generated Content Auth + Schema Readiness
 
 ```text
