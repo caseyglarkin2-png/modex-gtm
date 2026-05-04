@@ -5,6 +5,7 @@
 - Product consolidation roadmap: `docs/roadmaps/revops-os-product-consolidation-sprint-plan.md`
 - Delivery proof ledger: `docs/roadmaps/revops-os-proof-ledger.md`
 - Baseline IA audit: `docs/roadmaps/revops-os-current-ia-inventory.md`
+- Content excellence roadmap: `docs/roadmaps/revops-os-content-excellence-atomic-sprint-plan.md`
 
 ## Current One-Pager Execution Inputs
 

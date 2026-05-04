@@ -16,6 +16,7 @@ import { getAllAccountMicrositeData } from '@/lib/microsites/accounts';
 import { prisma } from '@/lib/prisma';
 import { ArrowRight, Copy, FileText, Library, ListChecks, Send, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import { rankPlaybookBlocks } from '@/lib/revops/playbook-library';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Content Studio' };
@@ -33,7 +34,7 @@ export default async function StudioPage({
 }) {
   const params = (await searchParams) ?? {};
   const defaultTab = getDefaultTab(params.tab);
-  const [accounts, personas, generatedRows, jobs] = await Promise.all([
+  const [accounts, personas, generatedRows, jobs, rankedPlaybookBlocks] = await Promise.all([
     dbGetAccounts(),
     dbGetPersonas(),
     prisma.generatedContent.findMany({
@@ -47,6 +48,7 @@ export default async function StudioPage({
       take: 150,
       select: { account_name: true, status: true, retry_count: true, error_message: true },
     }),
+    rankPlaybookBlocks(prisma, 40),
   ]);
 
   const personasByAccount = personas.reduce<Record<string, Array<{ name: string; title: string | null }>>>((acc, persona) => {
@@ -259,6 +261,39 @@ export default async function StudioPage({
                   </Button>
                 </Link>
               </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="playbook" className="space-y-4">
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="flex items-center gap-2 text-base"><Library className="h-4 w-4" /> Playbook Block Rankings</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {rankedPlaybookBlocks.length === 0 ? (
+                <p className="text-sm text-muted-foreground">No playbook blocks have been saved yet.</p>
+              ) : rankedPlaybookBlocks.map((block) => (
+                <div key={block.id} className="rounded-lg border p-4">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                      <p className="font-medium">{block.title}</p>
+                      <p className="mt-1 text-sm text-muted-foreground">{block.block_type} · {(block.tags ?? []).join(' · ') || 'untagged'}</p>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <Badge variant="outline">score {block.performance.score.toFixed(2)}</Badge>
+                      <Badge variant="outline">confidence {(block.performance.confidence * 100).toFixed(0)}%</Badge>
+                    </div>
+                  </div>
+                  <div className="mt-3 grid gap-2 text-xs text-muted-foreground md:grid-cols-4">
+                    <p>Sends: {block.performance.sends}</p>
+                    <p>Replies: {block.performance.replies}</p>
+                    <p>Meetings: {block.performance.meetings}</p>
+                    <p>Weight: {block.performance.outcomeWeight.toFixed(2)}x</p>
+                  </div>
+                  <p className="mt-2 line-clamp-3 text-xs text-muted-foreground">{block.body}</p>
+                </div>
+              ))}
             </CardContent>
           </Card>
         </TabsContent>

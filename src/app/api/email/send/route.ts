@@ -7,6 +7,7 @@ import { sanitizeEmailHtml } from '@/lib/email/sanitize';
 import { rateLimit } from '@/lib/rate-limit';
 import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
 import { advancePipelineStage, derivePipelineStage } from '@/lib/pipeline';
+import { enforceSendApprovalGate } from '@/lib/revops/send-approvals';
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
@@ -73,6 +74,44 @@ export async function POST(req: NextRequest) {
     const guard = await evaluateRecipientEligibility(prisma, to);
     if (!guard.ok) {
       return NextResponse.json({ error: guard.reason }, { status: 400 });
+    }
+    const domain = to.split('@')[1] ?? 'unknown';
+    const [knownDomainRows, recentOutcomes] = await Promise.all([
+      prisma.emailLog.findMany({
+        where: { to_email: { contains: '@' } },
+        orderBy: { created_at: 'desc' },
+        take: 250,
+        select: { to_email: true },
+      }),
+      prisma.sendJobRecipient.findMany({
+        orderBy: { created_at: 'desc' },
+        take: 300,
+        select: { status: true },
+      }),
+    ]);
+    const knownDomains = Array.from(new Set(
+      knownDomainRows
+        .map((row) => row.to_email.split('@')[1]?.toLowerCase())
+        .filter((value): value is string => Boolean(value)),
+    ));
+    const bounceRate = recentOutcomes.length > 0
+      ? recentOutcomes.filter((row) => row.status === 'failed').length / recentOutcomes.length
+      : 0;
+    const approvalGate = await enforceSendApprovalGate(prisma, {
+      channel: 'single',
+      accountName: accountName ?? null,
+      recipientCount: 1,
+      domains: [domain],
+      knownDomains,
+      recentBounceRate: bounceRate,
+      requestedBy: 'Casey',
+    });
+    if (!approvalGate.allowed) {
+      return NextResponse.json({
+        error: 'Approval required before send can proceed.',
+        approval: approvalGate.approval,
+        policy: approvalGate.policy,
+      }, { status: 409 });
     }
 
     // Lightweight sanitization to keep email-safe HTML without pulling jsdom into the runtime.

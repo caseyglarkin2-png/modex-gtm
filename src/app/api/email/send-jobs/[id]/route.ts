@@ -23,11 +23,31 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
       completed_at: true,
       created_at: true,
       updated_at: true,
+      experiment: {
+        select: {
+          id: true,
+          name: true,
+          primary_metric: true,
+          status: true,
+          variants: {
+            select: {
+              id: true,
+              variant_key: true,
+              subject: true,
+              split_percent: true,
+              is_control: true,
+            },
+          },
+        },
+      },
       recipients: {
         orderBy: { created_at: 'asc' },
         select: {
           id: true,
           generated_content_id: true,
+          experiment_id: true,
+          variant_id: true,
+          variant_key: true,
           account_name: true,
           persona_name: true,
           to_email: true,
@@ -53,11 +73,17 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
     return acc;
   }, {});
   const generatedContentIds = Array.from(new Set(sendJob.recipients.map((recipient) => recipient.generated_content_id)));
+  const variantCounts = sendJob.recipients.reduce<Record<string, number>>((acc, recipient) => {
+    const key = recipient.variant_key ?? 'none';
+    acc[key] = (acc[key] ?? 0) + 1;
+    return acc;
+  }, {});
 
   return NextResponse.json({
     success: true,
     job: sendJob,
     recipientCounts,
     generatedContentIds,
+    variantCounts,
   });
 }

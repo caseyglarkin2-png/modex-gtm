@@ -16,6 +16,7 @@ test('generated content page renders filters and workspace', async ({ page }) =>
 
   const accountCards = page.locator('a[href^="/accounts/"]');
   if ((await accountCards.count()) > 0) {
+    await expect(page.locator('body')).toContainText(/Quality \d+/);
     const previewButton = page.getByRole('button', { name: /Preview/i }).first();
     await expect(previewButton).toBeVisible();
     await previewButton.click();

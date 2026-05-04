@@ -11,6 +11,13 @@ import { DRIP_SEQUENCE_ENABLED, HUBSPOT_LOGGING_ENABLED, HUBSPOT_SYNC_ENABLED, I
 import { prisma } from '@/lib/prisma';
 import { computeGenerationMetrics } from '@/lib/admin/generation-metrics';
 import { computeSendJobMetrics } from '@/lib/admin/send-job-metrics';
+import { getConnectorRuntimeStatuses } from '@/lib/revops/connector-health';
+import { computeCoverageRatios, evaluateCoverageGate } from '@/lib/revops/coverage-gate';
+import { COVERAGE_GATE_THRESHOLDS_V1 } from '@/lib/revops/sprint11-contracts';
+import { computeMappingContractChecksum, getMappingContracts } from '@/lib/enrichment/mapping-contracts';
+import { CONTENT_QUALITY_SEND_BLOCK_THRESHOLD, evaluateContentQuality } from '@/lib/content-quality';
+import { buildFailureClusters, buildRetryRecommendations } from '@/lib/revops/failure-intelligence';
+import { detectInfographicDrift, parseInfographicMetadata } from '@/lib/revops/infographic-journey';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Ops' };
@@ -25,6 +32,8 @@ const tabHeading: Record<OpsTabId, string> = {
   'generation-metrics': 'Generation Metrics',
   'provider-health': 'Provider Health',
   'feature-flags': 'Feature Flags',
+  'connector-health': 'Connector Health',
+  coverage: 'Coverage Command Center',
 };
 
 function tabHref(tabId: string) {
@@ -39,9 +48,22 @@ export default async function OpsPage({
   const params = (await searchParams) ?? {};
   const selectedTab = parseOpsTab(params.tab);
 
-  const [cronRows, generationJobs, sendJobs, sendJobRecipients, proofSummary] = await Promise.all([
+  const connectorStatuses = getConnectorRuntimeStatuses();
+  const connectorMappings = getMappingContracts().map((contract) => ({
+    system: contract.system,
+    version: contract.version,
+    checksum: computeMappingContractChecksum(contract),
+  }));
+
+  const [cronRows, generationJobs, sendJobs, sendJobRecipients, approvalRequests, proofSummary, importedCompanies, linkedContacts, enrichedContacts, sendReadyContacts, attributableContacts, staleContacts, latestGeneratedRows] = await Promise.all([
     prisma.systemConfig.findMany({
-      where: { key: { startsWith: 'cron:' } },
+      where: {
+        OR: [
+          { key: { startsWith: 'cron:' } },
+          { key: { startsWith: 'coverage_' } },
+          { key: { startsWith: 'event_qa_' } },
+        ],
+      },
       select: { key: true, value: true },
     }),
     prisma.generationJob.findMany({
@@ -86,13 +108,109 @@ export default async function OpsPage({
         created_at: true,
       },
     }),
+    prisma.sendApprovalRequest.findMany({
+      where: { status: 'pending' },
+      orderBy: { created_at: 'desc' },
+      take: 200,
+      select: {
+        id: true,
+        created_at: true,
+        sla_due_at: true,
+        risk_score: true,
+      },
+    }),
     getLatestProofSummaryFromLedger(),
+    prisma.account.count({
+      where: {
+        OR: [{ source: 'hubspot_import' }, { hubspot_company_id: { not: null } }],
+      },
+    }),
+    prisma.persona.count({
+      where: { hubspot_contact_id: { not: null } },
+    }),
+    prisma.persona.count({
+      where: {
+        enrichment: {
+          OR: [{ apollo_person_id: { not: null } }, { enrichment_confidence: { not: null } }],
+        },
+      },
+    }),
+    prisma.persona.count({
+      where: {
+        is_contact_ready: true,
+        do_not_contact: false,
+      },
+    }),
+    prisma.persona.count({
+      where: {
+        email: { not: null },
+      },
+    }),
+    prisma.persona.count({
+      where: {
+        OR: [
+          { last_enriched_at: null },
+          { last_enriched_at: { lt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) } },
+        ],
+      },
+    }),
+    prisma.generatedContent.findMany({
+      where: { content_type: 'one_pager' },
+      orderBy: [{ account_name: 'asc' }, { version: 'desc' }],
+      take: 300,
+      select: {
+        id: true,
+        account_name: true,
+        version: true,
+        content: true,
+        version_metadata: true,
+      },
+    }),
   ]);
 
   const generationMetrics = computeGenerationMetrics(generationJobs);
   const sendMetrics = computeSendJobMetrics(sendJobs, sendJobRecipients);
   const cronHealthy = cronRows.filter((row) => row.value.includes('"status":"ok"')).length;
   const cronErrors = cronRows.filter((row) => row.value.includes('"status":"error"') || row.value.includes('"status":"skipped"')).length;
+  const configMap = new Map(cronRows.map((row) => [row.key, row.value]));
+  const tamCompanies = Number(process.env.TAM_COMPANY_TARGET || 1000);
+  const tamContacts = Number(process.env.TAM_CONTACT_TARGET || 13000);
+  const unresolvedConflicts = Number(configMap.get('coverage_unresolved_conflicts') || 0);
+  const coverageGate = evaluateCoverageGate(
+    {
+      tamCompanies,
+      tamContacts,
+      importedCompanies,
+      linkedContacts,
+      enrichedContacts,
+      sendReadyContacts,
+      attributableContacts,
+      unresolvedConflicts,
+      staleContacts,
+    },
+    COVERAGE_GATE_THRESHOLDS_V1,
+  );
+  const coverageRatios = computeCoverageRatios({
+    tamCompanies,
+    tamContacts,
+    importedCompanies,
+    linkedContacts,
+    enrichedContacts,
+    sendReadyContacts,
+    attributableContacts,
+    unresolvedConflicts,
+    staleContacts,
+  });
+
+  const eventVolume = sendJobRecipients.length;
+  const nullKeyRows = sendJobRecipients.filter((row) => !row.to_email || !row.account_name).length;
+  const lateRows = sendJobRecipients.filter((row) => Date.now() - row.created_at.getTime() > 72 * 60 * 60 * 1000).length;
+  const eventQa = {
+    volume: eventVolume,
+    nullKeyRate: eventVolume > 0 ? nullKeyRows / eventVolume : 0,
+    schemaDrift: Number(configMap.get('event_qa_schema_drift_count') || 0),
+    lateEventRate: eventVolume > 0 ? lateRows / eventVolume : 0,
+  };
 
   const providerSummary = Object.entries(
     generationJobs.reduce<Record<string, { total: number; failed: number }>>((acc, job) => {
@@ -110,6 +228,57 @@ export default async function OpsPage({
       failurePct: counts.total > 0 ? Math.round((counts.failed / counts.total) * 100) : 0,
     }))
     .sort((left, right) => right.total - left.total);
+  const latestByAccount = new Map<string, { id: number; account_name: string; version: number; content: string; version_metadata: unknown }>();
+  for (const row of latestGeneratedRows) {
+    if (!latestByAccount.has(row.account_name)) {
+      latestByAccount.set(row.account_name, row);
+    }
+  }
+  const lowScoreAssets = Array.from(latestByAccount.values())
+    .map((row) => ({
+      id: row.id,
+      accountName: row.account_name,
+      version: row.version,
+      quality: evaluateContentQuality(row.content, row.account_name),
+    }))
+    .filter((row) => row.quality.score < CONTENT_QUALITY_SEND_BLOCK_THRESHOLD)
+    .sort((left, right) => left.quality.score - right.quality.score);
+  const infographicDriftAlerts = Array.from(latestByAccount.values())
+    .map((row) => {
+      const metadata = parseInfographicMetadata(row.version_metadata);
+      const quality = evaluateContentQuality(row.content, row.account_name).score / 100;
+      const baseline = Math.max(0.01, quality + 0.15);
+      const drift = detectInfographicDrift({ currentRate: quality, baselineRate: baseline });
+      return {
+        accountName: row.account_name,
+        stageIntent: metadata.stageIntent,
+        infographicType: metadata.infographicType,
+        deltaPct: drift.deltaPct,
+        drifting: drift.drifting,
+      };
+    })
+    .filter((row) => row.drifting)
+    .sort((left, right) => right.deltaPct - left.deltaPct)
+    .slice(0, 6);
+  const failedRecipientSignals = sendJobRecipients
+    .filter((row) => row.status === 'failed')
+    .map((row) => ({
+      id: `${row.account_name}:${row.to_email}:${row.created_at.toISOString()}`,
+      accountName: row.account_name ?? 'unknown',
+      occurredAt: row.created_at,
+      errorMessage: row.error_message,
+    }));
+  const failureClusters = buildFailureClusters(failedRecipientSignals);
+  const retryRecommendations = buildRetryRecommendations(failedRecipientSignals);
+  const nowTs = Date.now();
+  const overdueApprovals = approvalRequests.filter((row) => row.sla_due_at && row.sla_due_at.getTime() < nowTs).length;
+  const approvalSlaHours = approvalRequests.length > 0
+    ? Math.round(
+      approvalRequests
+        .map((row) => Math.max(0, nowTs - row.created_at.getTime()) / (1000 * 60 * 60))
+        .reduce((sum, hours) => sum + hours, 0) / approvalRequests.length,
+    )
+    : 0;
 
   return (
     <div className="space-y-6">
@@ -257,6 +426,64 @@ export default async function OpsPage({
               <MiniMetric label="Send Failures" value={sendMetrics.failedRecipients} tone={sendMetrics.failedRecipients > 0 ? 'text-red-600' : 'text-foreground'} />
               <MiniMetric label="Avg Send (s)" value={sendMetrics.avgCompletionSeconds || 0} />
             </div>
+            <div className="grid gap-3 md:grid-cols-3">
+              <MiniMetric label="Approval Queue" value={approvalRequests.length} tone={approvalRequests.length > 0 ? 'text-amber-600' : 'text-foreground'} />
+              <MiniMetric label="Approval SLA (hrs)" value={approvalSlaHours} />
+              <MiniMetric label="Approval Overdue" value={overdueApprovals} tone={overdueApprovals > 0 ? 'text-red-600' : 'text-foreground'} />
+            </div>
+            <div className="rounded-lg border p-3">
+              <p className="text-xs uppercase tracking-wide text-muted-foreground">Low-Score Assets Awaiting Review</p>
+              <p className="mt-1 text-sm font-semibold">{lowScoreAssets.length}</p>
+              {lowScoreAssets.length > 0 ? (
+                <div className="mt-2 space-y-1 text-xs text-muted-foreground">
+                  {lowScoreAssets.slice(0, 5).map((asset) => (
+                    <p key={asset.id}>
+                      {asset.accountName} v{asset.version} - quality {asset.quality.score}
+                    </p>
+                  ))}
+                </div>
+              ) : (
+                <p className="mt-1 text-xs text-muted-foreground">No low-score one-pagers in the sampled latest versions.</p>
+              )}
+            </div>
+            <div className="rounded-lg border p-3">
+              <p className="text-xs uppercase tracking-wide text-muted-foreground">Failure Intelligence</p>
+              {failureClusters.length === 0 ? (
+                <p className="mt-1 text-xs text-muted-foreground">No clustered failures in sampled recipients.</p>
+              ) : (
+                <div className="mt-2 grid gap-2 md:grid-cols-2">
+                  {failureClusters.map((cluster) => (
+                    <div key={cluster.className} className="rounded-md border p-2 text-xs">
+                      <p className="font-medium">{cluster.className}</p>
+                      <p className="text-muted-foreground">{cluster.count} affected recipients</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {retryRecommendations.length > 0 ? (
+                <div className="mt-2 space-y-1 text-xs text-muted-foreground">
+                  {retryRecommendations.map((recommendation) => (
+                    <p key={recommendation.className}>
+                      {recommendation.className}: {recommendation.recommended}
+                    </p>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+            <div className="rounded-lg border p-3">
+              <p className="text-xs uppercase tracking-wide text-muted-foreground">Infographic Drift Monitor</p>
+              {infographicDriftAlerts.length === 0 ? (
+                <p className="mt-1 text-xs text-muted-foreground">No drift alerts in sampled infographic leaderboard rows.</p>
+              ) : (
+                <div className="mt-2 space-y-1 text-xs text-muted-foreground">
+                  {infographicDriftAlerts.map((alert) => (
+                    <p key={`${alert.accountName}:${alert.stageIntent}:${alert.infographicType}`}>
+                      {alert.accountName}: {alert.infographicType} ({alert.stageIntent}) decayed {(alert.deltaPct * 100).toFixed(1)}%
+                    </p>
+                  ))}
+                </div>
+              )}
+            </div>
             <Link href="/admin/generation-metrics">
               <Button size="sm" variant="outline">Open Detailed Generation Metrics</Button>
             </Link>
@@ -302,6 +529,83 @@ export default async function OpsPage({
           </CardContent>
         </Card>
       ) : null}
+
+      {selectedTab === 'connector-health' ? (
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base">Connector Runtime + Ownership</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3 text-sm">
+            {connectorStatuses.map((status) => {
+              const cron = cronRows.find((row) => row.key === 'cron:sync-hubspot');
+              const lastRun = cron?.value.match(/"lastRunAt":"([^"]+)"/)?.[1] ?? null;
+              const mapping = connectorMappings.find((entry) => entry.system === status.key);
+              return (
+                <div key={status.key} className="rounded-lg border p-3">
+                  <div className="flex items-center justify-between">
+                    <p className="font-medium capitalize">{status.key}</p>
+                    <div className="flex gap-2">
+                      <Badge variant={status.configured ? 'default' : 'secondary'}>
+                        {status.configured ? 'Configured' : 'Missing config'}
+                      </Badge>
+                      <Badge variant={status.enabled ? 'default' : 'secondary'}>
+                        {status.enabled ? 'Enabled' : 'Disabled'}
+                      </Badge>
+                    </div>
+                  </div>
+                  <div className="mt-2 grid gap-2 text-xs text-muted-foreground md:grid-cols-2">
+                    <p>Owner: {status.owner}</p>
+                    <p>Escalation: {status.escalationChannel}</p>
+                    <p>Runbook: {status.runbookLink}</p>
+                    <p>Last rotation: {status.lastRotationDate}</p>
+                    <p>Last sync run: {lastRun ? new Date(lastRun).toLocaleString() : 'No telemetry yet'}</p>
+                    <p>Mapping: {mapping ? `${mapping.version} (${mapping.checksum.slice(0, 10)}…)` : 'n/a'}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </CardContent>
+        </Card>
+      ) : null}
+
+      {selectedTab === 'coverage' ? (
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base">TAM/ICP Coverage + Gate 0</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4 text-sm">
+            <div className="grid gap-3 md:grid-cols-4">
+              <MiniMetric label="Companies Imported" value={`${importedCompanies}/${tamCompanies}`} />
+              <MiniMetric label="Contacts Linked" value={`${linkedContacts}/${tamContacts}`} />
+              <MiniMetric label="Contacts Enriched" value={`${enrichedContacts}/${tamContacts}`} />
+              <MiniMetric label="Send-Ready" value={`${sendReadyContacts}/${tamContacts}`} />
+            </div>
+            <div className="grid gap-3 md:grid-cols-4">
+              <MiniMetric label="Companies %" value={`${Math.round(coverageRatios.companiesImportedPct * 100)}%`} />
+              <MiniMetric label="Linked %" value={`${Math.round(coverageRatios.contactsLinkedPct * 100)}%`} />
+              <MiniMetric label="Enriched %" value={`${Math.round(coverageRatios.contactsEnrichedPct * 100)}%`} />
+              <MiniMetric label="Attributable %" value={`${Math.round(coverageRatios.attributablePct * 100)}%`} />
+            </div>
+            <div className="rounded-lg border p-3">
+              <p className="text-xs uppercase text-muted-foreground">Gate 0 status</p>
+              <p className={cn('mt-1 font-medium', coverageGate.pass ? 'text-emerald-600' : 'text-amber-600')}>
+                {coverageGate.pass ? 'PASS' : 'FAIL-CLOSE'}
+              </p>
+              {!coverageGate.pass ? (
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Failed rules: {coverageGate.failedRules.join(', ')}
+                </p>
+              ) : null}
+            </div>
+            <div className="grid gap-3 md:grid-cols-4">
+              <MiniMetric label="Event Volume" value={eventQa.volume} />
+              <MiniMetric label="Null Key Rate" value={`${Math.round(eventQa.nullKeyRate * 100)}%`} />
+              <MiniMetric label="Schema Drift" value={eventQa.schemaDrift} />
+              <MiniMetric label="Late Event Rate" value={`${Math.round(eventQa.lateEventRate * 100)}%`} />
+            </div>
+          </CardContent>
+        </Card>
+      ) : null}
     </div>
   );
 }
@@ -341,7 +645,7 @@ function MiniMetric({
   tone = 'text-foreground',
 }: {
   label: string;
-  value: number;
+  value: number | string;
   tone?: string;
 }) {
   return (

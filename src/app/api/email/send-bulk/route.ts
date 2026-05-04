@@ -6,6 +6,9 @@ import { wrapHtml } from '@/lib/email/templates';
 import { rateLimit } from '@/lib/rate-limit';
 import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
 import { advancePipelineStage, derivePipelineStage } from '@/lib/pipeline';
+import { getRecipientReadinessFloor } from '@/lib/revops/recipient-readiness';
+import { computeChecklistCompleteness, getChecklistTemplate, type ChecklistItemId } from '@/lib/revops/content-qa-checklist';
+import { enforceSendApprovalGate } from '@/lib/revops/send-approvals';
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
@@ -31,6 +34,50 @@ export async function POST(req: NextRequest) {
   const html = isPlainText ? wrapHtml(bodyHtml, accountName ?? 'the team') : bodyHtml;
 
   const { prisma } = await import('@/lib/prisma');
+  const recipientDomains = Array.from(new Set(
+    recipients
+      .map((recipient) => recipient.to.toLowerCase().split('@')[1])
+      .filter((value): value is string => Boolean(value)),
+  ));
+  if (generatedContentId) {
+    const generated = await prisma.generatedContent.findUnique({
+      where: { id: generatedContentId },
+      select: {
+        id: true,
+        campaign: {
+          select: {
+            campaign_type: true,
+          },
+        },
+        checklist_state: {
+          select: {
+            completed_item_ids: true,
+          },
+        },
+      },
+    });
+    if (!generated) {
+      return NextResponse.json({ error: 'Generated content not found.' }, { status: 404 });
+    }
+    const floor = getRecipientReadinessFloor(generated.campaign?.campaign_type);
+    const belowFloor = recipients.filter((recipient) => (recipient.readinessScore ?? 0) < floor);
+    if (belowFloor.length > 0) {
+      return NextResponse.json(
+        { error: `Recipient readiness floor ${floor} not met for ${belowFloor.length} recipient(s).` },
+        { status: 409 },
+      );
+    }
+    const checklist = computeChecklistCompleteness(
+      getChecklistTemplate(generated.campaign?.campaign_type),
+      (generated.checklist_state?.completed_item_ids ?? []) as ChecklistItemId[],
+    );
+    if (!checklist.complete) {
+      return NextResponse.json(
+        { error: `Content QA checklist incomplete for generated content ${generatedContentId}.` },
+        { status: 409 },
+      );
+    }
+  }
   const unsubscribedRows = await prisma.unsubscribedEmail.findMany({
     where: { email: { in: recipients.map((recipient) => recipient.to) } },
     select: { email: true },
@@ -60,6 +107,42 @@ export async function POST(req: NextRequest) {
 
   if (eligibleRecipients.length === 0) {
     return NextResponse.json({ success: false, sent: 0, failed: recipients.length, skipped }, { status: 400 });
+  }
+  const [knownDomainRows, recentOutcomes] = await Promise.all([
+    prisma.emailLog.findMany({
+      orderBy: { created_at: 'desc' },
+      take: 350,
+      select: { to_email: true },
+    }),
+    prisma.sendJobRecipient.findMany({
+      orderBy: { created_at: 'desc' },
+      take: 500,
+      select: { status: true },
+    }),
+  ]);
+  const knownDomains = Array.from(new Set(
+    knownDomainRows
+      .map((row) => row.to_email.split('@')[1]?.toLowerCase())
+      .filter((value): value is string => Boolean(value)),
+  ));
+  const bounceRate = recentOutcomes.length > 0
+    ? recentOutcomes.filter((row) => row.status === 'failed').length / recentOutcomes.length
+    : 0;
+  const approvalGate = await enforceSendApprovalGate(prisma, {
+    channel: 'bulk',
+    accountName: accountName ?? null,
+    recipientCount: eligibleRecipients.length,
+    domains: recipientDomains,
+    knownDomains,
+    recentBounceRate: bounceRate,
+    requestedBy: 'Casey',
+  });
+  if (!approvalGate.allowed) {
+    return NextResponse.json({
+      error: 'Approval required before bulk send can proceed.',
+      approval: approvalGate.approval,
+      policy: approvalGate.policy,
+    }, { status: 409 });
   }
 
   const payloads = eligibleRecipients.map((r) => ({ to: r.to, subject, html }));

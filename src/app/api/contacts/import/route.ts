@@ -17,7 +17,10 @@ const BLOCKED_DOMAINS = new Set([
 export const dynamic = 'force-dynamic';
 
 const ImportSchema = z.object({
-  hubspotContactIds: z.array(z.string().min(1)).min(1).max(100),
+  hubspotContactIds: z.array(z.string().min(1)).min(1).max(5000),
+  cursor: z.number().int().min(0).optional(),
+  batchId: z.string().min(1).max(80).optional(),
+  chunkSize: z.number().int().min(1).max(100).optional(),
 });
 
 export async function POST(req: NextRequest) {
@@ -33,16 +36,28 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
   }
 
-  const { hubspotContactIds } = parsed.data;
+  const { hubspotContactIds, cursor = 0, batchId = `tam-${Date.now()}`, chunkSize = 100 } = parsed.data;
+  const boundedChunkSize = Math.min(Math.max(chunkSize, 1), 100);
+  const start = Math.min(cursor, hubspotContactIds.length);
+  const end = Math.min(start + boundedChunkSize, hubspotContactIds.length);
+  const scopedIds = hubspotContactIds.slice(start, end);
   const results = {
+    batch_id: batchId,
+    cursor_start: start,
+    cursor_end: end,
+    has_more: end < hubspotContactIds.length,
+    next_cursor: end < hubspotContactIds.length ? end : null,
     imported: 0,
     skipped: 0,
     blocked: 0,
     linked: 0,
     errors: 0,
+    rejected: 0,
+    conflicts: 0,
   };
+  const conflicts: Array<{ hubspotContactId: string; reason: string }> = [];
 
-  for (const hsId of hubspotContactIds) {
+  for (const hsId of scopedIds) {
     try {
       // Dedup: check if already exists
       const existingByHsId = await prisma.persona.findFirst({
@@ -72,6 +87,10 @@ export async function POST(req: NextRequest) {
         where: { email: contact.email.toLowerCase() },
       });
       if (existingByEmail) {
+        if (existingByEmail.hubspot_contact_id && existingByEmail.hubspot_contact_id !== hsId) {
+          conflicts.push({ hubspotContactId: hsId, reason: 'email-linked-to-different-hubspot-id' });
+          results.conflicts++;
+        }
         if (!existingByEmail.hubspot_contact_id) {
           await prisma.persona.update({
             where: { id: existingByEmail.id },
@@ -164,5 +183,22 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  return NextResponse.json(results);
+  await prisma.systemConfig.upsert({
+    where: { key: `tam_import_batch:${batchId}` },
+    update: { value: JSON.stringify({ ...results, total: hubspotContactIds.length, conflicts }) },
+    create: {
+      key: `tam_import_batch:${batchId}`,
+      value: JSON.stringify({ ...results, total: hubspotContactIds.length, conflicts }),
+    },
+  });
+
+  if (conflicts.length > 0) {
+    await prisma.systemConfig.upsert({
+      where: { key: 'coverage_unresolved_conflicts' },
+      update: { value: String(conflicts.length) },
+      create: { key: 'coverage_unresolved_conflicts', value: String(conflicts.length) },
+    });
+  }
+
+  return NextResponse.json({ ...results, conflicts });
 }

@@ -7,6 +7,7 @@ process.env.NEXT_PUBLIC_APP_URL = 'http://localhost';
 const mockedSendEmail = vi.fn();
 const mockedSendBulk = vi.fn();
 const mockedRateLimit = vi.fn(() => ({ ok: true, remaining: 10 }));
+const mockedEnforceApprovalGate = vi.fn(async () => ({ allowed: true, policy: { required: false } }));
 const mockedPrisma = {
   prisma: {
     unsubscribedEmail: {
@@ -15,12 +16,17 @@ const mockedPrisma = {
     },
     emailLog: {
       create: vi.fn(),
+      findMany: vi.fn(),
     },
     generatedContent: {
+      findUnique: vi.fn(),
       update: vi.fn(() => ({ catch: vi.fn() })),
     },
     account: {
       findUnique: vi.fn(),
+    },
+    sendJobRecipient: {
+      findMany: vi.fn(),
     },
     activity: {
       create: vi.fn(),
@@ -31,12 +37,21 @@ const mockedPrisma = {
 vi.mock('@/lib/rate-limit', () => ({ rateLimit: mockedRateLimit }));
 vi.mock('@/lib/email/client', () => ({ sendEmail: mockedSendEmail, sendBulk: mockedSendBulk }));
 vi.mock('@/lib/prisma', () => mockedPrisma);
+vi.mock('@/lib/revops/send-approvals', () => ({ enforceSendApprovalGate: mockedEnforceApprovalGate }));
 
 const { POST: sendPOST } = await import('@/app/api/email/send/route');
 const { POST: sendBulkPOST } = await import('@/app/api/email/send-bulk/route');
 
 beforeEach(() => {
   vi.clearAllMocks();
+  mockedEnforceApprovalGate.mockResolvedValue({ allowed: true, policy: { required: false } });
+  mockedPrisma.prisma.sendJobRecipient.findMany.mockResolvedValue([]);
+  mockedPrisma.prisma.emailLog.findMany.mockResolvedValue([]);
+  mockedPrisma.prisma.generatedContent.findUnique.mockResolvedValue({
+    id: 99,
+    campaign: { campaign_type: 'trade_show' },
+    checklist_state: { completed_item_ids: ['clear_value_prop', 'account_specific_proof', 'cta_specific', 'compliance_checked', 'deliverability_checked'] },
+  });
 });
 
 describe('Email send API', () => {
@@ -127,8 +142,8 @@ describe('Bulk email send API', () => {
 
     const body = JSON.stringify({
       recipients: [
-        { to: 'skip@example.com' },
-        { to: 'send@example.com' },
+        { to: 'skip@example.com', readinessScore: 90, readinessTier: 'high', stale: false },
+        { to: 'send@example.com', readinessScore: 90, readinessTier: 'high', stale: false },
       ],
       subject: 'Bulk subject',
       bodyHtml: 'Bulk send body',

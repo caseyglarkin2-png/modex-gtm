@@ -52,6 +52,9 @@ model Account {
   mobile_captures       MobileCapture[]
   microsite_engagements MicrositeEngagement[]
   generationJobs        GenerationJob[]
+  operator_outcomes     OperatorOutcome[]
+  signal_content_links  SignalContentLink[]
+  message_evolutions    MessageEvolutionRegistry[]
 
   @@map("accounts")
 }
@@ -179,6 +182,11 @@ model Campaign {
   email_logs          EmailLog[]
   generationJobs      GenerationJob[]
   send_job_recipients SendJobRecipient[]
+  operator_outcomes   OperatorOutcome[]
+  signal_content_links SignalContentLink[]
+  message_evolutions   MessageEvolutionRegistry[]
+  generation_contract  CampaignGenerationContract?
+  playbook_blocks      PlaybookBlock[]
 
   @@map("campaigns")
 }
@@ -459,6 +467,12 @@ model GeneratedContent {
 
   campaign            Campaign?          @relation(fields: [campaign_id], references: [id])
   send_job_recipients SendJobRecipient[]
+  operator_outcomes   OperatorOutcome[]
+  signal_content_links SignalContentLink[]
+  message_evolution_current MessageEvolutionRegistry[] @relation("MessageEvolutionCurrentVersion")
+  message_evolution_previous MessageEvolutionRegistry[] @relation("MessageEvolutionPreviousVersion")
+  checklist_state     ContentChecklistState?
+  playbook_blocks     PlaybookBlock[]
 
   @@index([account_name, content_type])
   @@index([campaign_id])
@@ -489,6 +503,86 @@ model GenerationJob {
   @@index([status, updated_at])
   @@index([account_name, campaign_id])
   @@map("generation_jobs")
+}
+
+model OperatorOutcome {
+  id                   String    @id @default(cuid())
+  account_name         String
+  campaign_id          Int?
+  generated_content_id Int?
+  outcome_label        String
+  source_kind          String
+  source_id            String
+  notes                String?
+  created_by           String?
+  created_at           DateTime  @default(now())
+
+  account           Account           @relation(fields: [account_name], references: [name], onDelete: Cascade)
+  campaign          Campaign?         @relation(fields: [campaign_id], references: [id])
+  generated_content GeneratedContent? @relation(fields: [generated_content_id], references: [id])
+
+  @@unique([source_kind, source_id, outcome_label])
+  @@index([account_name, created_at])
+  @@index([campaign_id, created_at])
+  @@index([generated_content_id, created_at])
+  @@index([outcome_label, created_at])
+  @@map("operator_outcomes")
+}
+
+model SignalContentLink {
+  id                   String    @id @default(cuid())
+  account_name         String
+  campaign_id          Int?
+  generated_content_id Int?
+  source_kind          String
+  source_id            String
+  signal_kind          String
+  signal_context       String?
+  outcome_label        String?
+  email_log_id         Int?
+  send_job_recipient_id Int?
+  created_at           DateTime  @default(now())
+
+  account           Account           @relation(fields: [account_name], references: [name], onDelete: Cascade)
+  campaign          Campaign?         @relation(fields: [campaign_id], references: [id])
+  generated_content GeneratedContent? @relation(fields: [generated_content_id], references: [id])
+  message_evolutions MessageEvolutionRegistry[]
+
+  @@unique([source_kind, source_id])
+  @@index([account_name, created_at])
+  @@index([generated_content_id, created_at])
+  @@map("signal_content_links")
+}
+
+model MessageEvolutionRegistry {
+  id                           String    @id @default(cuid())
+  account_name                 String
+  campaign_id                  Int?
+  signal_content_link_id       String?
+  previous_generated_content_id Int?
+  generated_content_id         Int
+  status                       String    @default("proposed")
+  owner                        String    @default("Casey")
+  sla_due_at                   DateTime?
+  rationale                    String
+  evidence_snapshot            Json?
+  rollback_link                String?
+  reviewed_by                  String?
+  reviewed_at                  DateTime?
+  deployed_at                  DateTime?
+  created_at                   DateTime  @default(now())
+  updated_at                   DateTime  @updatedAt
+
+  account               Account            @relation(fields: [account_name], references: [name], onDelete: Cascade)
+  campaign              Campaign?          @relation(fields: [campaign_id], references: [id])
+  signal_content_link   SignalContentLink? @relation(fields: [signal_content_link_id], references: [id])
+  generated_content     GeneratedContent   @relation("MessageEvolutionCurrentVersion", fields: [generated_content_id], references: [id])
+  previous_generated_content GeneratedContent? @relation("MessageEvolutionPreviousVersion", fields: [previous_generated_content_id], references: [id])
+
+  @@index([status, sla_due_at])
+  @@index([account_name, created_at])
+  @@index([generated_content_id, created_at])
+  @@map("message_evolution_registry")
 }
 
 model EmailLog {
@@ -528,6 +622,9 @@ model SendJob {
   id               Int       @id @default(autoincrement())
   status           String    @default("pending") // pending | processing | completed | failed | partial | cancelled
   requested_by     String?
+  experiment_id    String?
+  primary_metric   String?
+  send_strategy    Json?
   total_recipients Int       @default(0)
   sent_count       Int       @default(0)
   failed_count     Int       @default(0)
@@ -539,9 +636,26 @@ model SendJob {
   updated_at       DateTime  @updatedAt
 
   recipients SendJobRecipient[]
+  experiment Experiment?       @relation(fields: [experiment_id], references: [id])
+  approval_requests SendApprovalRequest[]
 
   @@index([status, created_at])
+  @@index([experiment_id])
   @@map("send_jobs")
+}
+
+model ContentChecklistState {
+  id                   String   @id @default(cuid())
+  generated_content_id Int      @unique
+  campaign_type        String?
+  completed_item_ids   String[] @default([])
+  created_at           DateTime @default(now())
+  updated_at           DateTime @updatedAt
+
+  generated_content GeneratedContent @relation(fields: [generated_content_id], references: [id], onDelete: Cascade)
+
+  @@index([campaign_type, updated_at])
+  @@map("content_checklist_states")
 }
 
 model SendJobRecipient {
@@ -549,6 +663,9 @@ model SendJobRecipient {
   send_job_id           Int
   generated_content_id  Int
   campaign_id           Int?
+  experiment_id         String?
+  variant_id            String?
+  variant_key           String?
   account_name          String
   persona_name          String?
   to_email              String
@@ -569,13 +686,125 @@ model SendJobRecipient {
   generated_content GeneratedContent @relation(fields: [generated_content_id], references: [id])
   campaign          Campaign?        @relation(fields: [campaign_id], references: [id])
   email_log         EmailLog?        @relation(fields: [email_log_id], references: [id])
+  experiment        Experiment?      @relation(fields: [experiment_id], references: [id])
+  variant           ExperimentVariant? @relation(fields: [variant_id], references: [id])
 
   @@unique([send_job_id, generated_content_id, to_email])
   @@index([send_job_id, status])
   @@index([status, created_at])
   @@index([generated_content_id])
   @@index([campaign_id])
+  @@index([experiment_id, variant_key, status])
   @@map("send_job_recipients")
+}
+
+model PlaybookBlock {
+  id                   String   @id @default(cuid())
+  title                String
+  body                 String
+  block_type           String
+  account_name         String?
+  campaign_id          Int?
+  generated_content_id Int?
+  tags                 String[] @default([])
+  industry             String?
+  persona              String?
+  stage                String?
+  motion               String?
+  usage_count          Int      @default(0)
+  success_rate         Float    @default(0)
+  confidence_score     Float    @default(0)
+  created_by           String?
+  created_at           DateTime @default(now())
+  updated_at           DateTime @updatedAt
+
+  campaign          Campaign?         @relation(fields: [campaign_id], references: [id])
+  generated_content GeneratedContent? @relation(fields: [generated_content_id], references: [id])
+
+  @@index([block_type, created_at])
+  @@index([industry, persona, stage, motion])
+  @@map("playbook_blocks")
+}
+
+model SendApprovalRequest {
+  id            String   @id @default(cuid())
+  send_job_id   Int?
+  channel       String
+  account_name  String?
+  risk_score    Int
+  risk_reasons  String[] @default([])
+  status        String   @default("pending")
+  requested_by  String?
+  approved_by   String?
+  comment       String?
+  sla_due_at    DateTime?
+  resolved_at   DateTime?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  send_job SendJob? @relation(fields: [send_job_id], references: [id], onDelete: SetNull)
+
+  @@index([status, sla_due_at])
+  @@index([account_name, created_at])
+  @@map("send_approval_requests")
+}
+
+model CampaignGenerationContract {
+  id                    String   @id @default(cuid())
+  campaign_id           Int      @unique
+  objective             String
+  persona_hypothesis    String
+  offer                 String
+  proof                 String
+  cta                   String
+  metric                String
+  quality_score         Int      @default(0)
+  is_complete           Boolean  @default(false)
+  created_by            String?
+  created_at            DateTime @default(now())
+  updated_at            DateTime @updatedAt
+
+  campaign Campaign @relation(fields: [campaign_id], references: [id], onDelete: Cascade)
+
+  @@index([is_complete, quality_score])
+  @@map("campaign_generation_contracts")
+}
+
+model Experiment {
+  id             String   @id @default(cuid())
+  name           String
+  primary_metric String
+  split          Json
+  status         String   @default("active")
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+
+  variants      ExperimentVariant[]
+  send_jobs     SendJob[]
+  recipients    SendJobRecipient[]
+
+  @@index([created_at])
+  @@map("experiments")
+}
+
+model ExperimentVariant {
+  id             String   @id @default(cuid())
+  experiment_id  String
+  variant_key    String
+  subject        String
+  opening        String?
+  cta            String?
+  split_percent  Int
+  is_control     Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+
+  experiment     Experiment        @relation(fields: [experiment_id], references: [id], onDelete: Cascade)
+  recipients     SendJobRecipient[]
+
+  @@unique([experiment_id, variant_key])
+  @@index([experiment_id])
+  @@map("experiment_variants")
 }
 
 model UnsubscribedEmail {

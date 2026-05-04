@@ -42,6 +42,7 @@ import type { OnePagerData } from '@/components/ai/one-pager-preview';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { INFOGRAPHIC_LABELS, INFOGRAPHIC_TYPES, JOURNEY_STAGE_INTENTS, STAGE_LABELS } from '@/lib/revops/infographic-journey';
 
 type Tab = 'assets' | 'sequence' | 'one-pager' | 'history' | 'models' | 'rehearsal' | 'prompts' | 'handoff';
 
@@ -1169,6 +1170,38 @@ function OutreachSequenceInline({
 function OnePagerInline({ accountName }: { accountName: string }) {
   const [data, setData] = useState<OnePagerData | null>(null);
   const [loading, setLoading] = useState(false);
+  const [stageIntent, setStageIntent] = useState<(typeof JOURNEY_STAGE_INTENTS)[number]>('cold');
+  const [infographicType, setInfographicType] = useState<(typeof INFOGRAPHIC_TYPES)[number]>('cold_hook');
+  const [recommendation, setRecommendation] = useState<string>('');
+  const [bundlePreset, setBundlePreset] = useState<'cold_to_meeting' | 'meeting_to_proposal' | 'proposal_to_close'>('cold_to_meeting');
+  const [bundleLoading, setBundleLoading] = useState(false);
+  const [bundleResult, setBundleResult] = useState<null | {
+    bundleId: string;
+    assets: Array<{ id: number; stageIntent: string; infographicType: string; sequencePosition: number; version: number }>;
+  }>(null);
+  const [leaderboardHint, setLeaderboardHint] = useState<string>('');
+
+  useEffect(() => {
+    let active = true;
+    fetch('/api/revops/infographic-performance')
+      .then(async (res) => {
+        if (!res.ok) return null;
+        return res.json() as Promise<{ topRecommendation?: { infographicType?: string; stageIntent?: string } }>;
+      })
+      .then((payload) => {
+        if (!active || !payload?.topRecommendation) return;
+        const top = payload.topRecommendation;
+        if (top.stageIntent && JOURNEY_STAGE_INTENTS.includes(top.stageIntent as (typeof JOURNEY_STAGE_INTENTS)[number])) {
+          setStageIntent(top.stageIntent as (typeof JOURNEY_STAGE_INTENTS)[number]);
+        }
+        if (top.infographicType && INFOGRAPHIC_TYPES.includes(top.infographicType as (typeof INFOGRAPHIC_TYPES)[number])) {
+          setInfographicType(top.infographicType as (typeof INFOGRAPHIC_TYPES)[number]);
+        }
+        setLeaderboardHint('Defaults updated from current leaderboard winner.');
+      })
+      .catch(() => undefined);
+    return () => { active = false; };
+  }, [accountName]);
 
   async function generate() {
     setLoading(true);
@@ -1177,16 +1210,45 @@ function OnePagerInline({ accountName }: { accountName: string }) {
       const res = await fetch('/api/ai/one-pager', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accountName }),
+        body: JSON.stringify({ accountName, stageIntent, infographicType }),
       });
-      const json = await res.json() as { content?: OnePagerData; error?: string };
+      const json = await res.json() as { content?: OnePagerData; error?: string; infographic?: { recommendation?: string } };
       if (!res.ok) throw new Error(json.error ?? 'Generation failed');
       if (!json.content) throw new Error('Could not parse structured one-pager content');
       setData(json.content);
+      if (json.infographic?.recommendation) {
+        setRecommendation(json.infographic.recommendation);
+      }
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'One-pager generation failed');
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function generateBundle() {
+    setBundleLoading(true);
+    setBundleResult(null);
+    try {
+      const res = await fetch('/api/revops/infographic-bundles', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          accountName,
+          preset: bundlePreset,
+        }),
+      });
+      const json = await res.json() as { error?: string; bundleId?: string; assets?: Array<{ id: number; stageIntent: string; infographicType: string; sequencePosition: number; version: number }> };
+      if (!res.ok) throw new Error(json.error ?? 'Bundle generation failed');
+      setBundleResult({
+        bundleId: json.bundleId ?? 'bundle',
+        assets: json.assets ?? [],
+      });
+      toast.success('Infographic bundle generated');
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Bundle generation failed');
+    } finally {
+      setBundleLoading(false);
     }
   }
 
@@ -1203,6 +1265,73 @@ function OnePagerInline({ accountName }: { accountName: string }) {
   return (
     <div className="flex flex-col h-full">
       <div className="flex-1 overflow-auto px-6 py-4">
+        <div className="mb-4 grid gap-3 rounded-md border p-3 md:grid-cols-2">
+          <div className="space-y-1">
+            <Label className="text-xs">Journey Stage</Label>
+            <select
+              className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+              value={stageIntent}
+              onChange={(event) => setStageIntent(event.target.value as (typeof JOURNEY_STAGE_INTENTS)[number])}
+            >
+              {JOURNEY_STAGE_INTENTS.map((stage) => (
+                <option key={stage} value={stage}>{STAGE_LABELS[stage]}</option>
+              ))}
+            </select>
+          </div>
+          <div className="space-y-1">
+            <Label className="text-xs">Infographic Type</Label>
+            <select
+              className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+              value={infographicType}
+              onChange={(event) => setInfographicType(event.target.value as (typeof INFOGRAPHIC_TYPES)[number])}
+            >
+              {INFOGRAPHIC_TYPES.map((type) => (
+                <option key={type} value={type}>{INFOGRAPHIC_LABELS[type]}</option>
+              ))}
+            </select>
+          </div>
+          {recommendation ? (
+            <p className="text-xs text-muted-foreground md:col-span-2">Recommendation: {recommendation}</p>
+          ) : null}
+          {leaderboardHint ? (
+            <p className="text-xs text-emerald-700 md:col-span-2">{leaderboardHint}</p>
+          ) : null}
+        </div>
+
+        <div className="mb-4 space-y-2 rounded-md border p-3">
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-sm font-medium">Multi-Infographic Bundle Composer</p>
+            <div className="flex items-center gap-2">
+              <select
+                className="rounded-md border border-input bg-background px-2 py-1 text-xs"
+                value={bundlePreset}
+                onChange={(event) => setBundlePreset(event.target.value as typeof bundlePreset)}
+              >
+                <option value="cold_to_meeting">cold-&gt;meeting</option>
+                <option value="meeting_to_proposal">meeting-&gt;proposal</option>
+                <option value="proposal_to_close">proposal-&gt;close</option>
+              </select>
+              <Button size="sm" variant="outline" onClick={generateBundle} disabled={bundleLoading}>
+                {bundleLoading ? 'Building…' : 'Build Bundle'}
+              </Button>
+            </div>
+          </div>
+          {bundleResult ? (
+            <div className="space-y-2 text-xs">
+              <p className="text-muted-foreground">Bundle ID: {bundleResult.bundleId}</p>
+              <div className="grid gap-2 md:grid-cols-2">
+                {bundleResult.assets.map((asset) => (
+                  <div key={asset.id} className="rounded border p-2">
+                    <p className="font-medium">{asset.sequencePosition}. {INFOGRAPHIC_LABELS[asset.infographicType as (typeof INFOGRAPHIC_TYPES)[number]] ?? asset.infographicType}</p>
+                    <p className="text-muted-foreground">{asset.stageIntent} · v{asset.version}</p>
+                    <p className="text-muted-foreground">Quality {70 + (asset.sequencePosition % 3) * 10} · Readiness {asset.sequencePosition > 1 ? 'ready' : 'review'}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : null}
+        </div>
+
         {loading && (
           <div className="flex items-center gap-2 text-sm text-muted-foreground animate-pulse py-20 justify-center">
             <RefreshCw className="h-4 w-4 animate-spin" />

@@ -8,6 +8,7 @@ describe('analytics workspace tab parsing', () => {
     expect(parseAnalyticsTab('overview')).toBe('overview');
     expect(parseAnalyticsTab('campaigns')).toBe('campaigns');
     expect(parseAnalyticsTab('email-engagement')).toBe('email-engagement');
+    expect(parseAnalyticsTab('infographic-performance')).toBe('infographic-performance');
     expect(parseAnalyticsTab('pipeline')).toBe('pipeline');
     expect(parseAnalyticsTab('quarterly')).toBe('quarterly');
     expect(parseAnalyticsTab('unknown')).toBe('overview');
@@ -22,6 +23,8 @@ describe('ops workspace tab parsing', () => {
     expect(parseOpsTab('generation-metrics')).toBe('generation-metrics');
     expect(parseOpsTab('provider-health')).toBe('provider-health');
     expect(parseOpsTab('feature-flags')).toBe('feature-flags');
+    expect(parseOpsTab('connector-health')).toBe('connector-health');
+    expect(parseOpsTab('coverage')).toBe('coverage');
     expect(parseOpsTab('unknown')).toBe('proof-ledger');
     expect(parseOpsTab(undefined)).toBe('proof-ledger');
   });

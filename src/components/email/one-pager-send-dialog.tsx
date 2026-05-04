@@ -11,12 +11,23 @@ import { toast } from 'sonner';
 import { Send, Eye, Mail, AlertCircle } from 'lucide-react';
 import { resolveGeneratedContentRendering } from '@/lib/generated-content/content-rendering';
 import { buildSendGuardState } from '@/lib/generated-content/send-guard';
+import { CONTENT_QUALITY_SEND_BLOCK_THRESHOLD, type ContentQualityResult } from '@/lib/content-quality';
+import { ContentQaChecklistPanel } from '@/components/generated-content/content-qa-checklist-panel';
+import { getRecipientReadinessFloor } from '@/lib/revops/recipient-readiness';
 
 export interface Recipient {
   id: number;
   name: string;
   email: string;
   title?: string;
+  role_in_deal?: string;
+  readiness?: {
+    score: number;
+    tier: 'high' | 'medium' | 'low';
+    stale: boolean;
+    freshness_days: number | null;
+    reasons: string[];
+  };
 }
 
 export interface OnePageSendDialogProps {
@@ -27,6 +38,15 @@ export interface OnePageSendDialogProps {
     content: string;
     version?: number;
     provider_used?: string;
+    quality?: ContentQualityResult;
+    campaign_type?: string;
+    checklist?: {
+      complete: boolean;
+      requiredComplete: number;
+      requiredTotal: number;
+      missingRequired: string[];
+    };
+    checklist_completed_item_ids?: string[];
   };
   queueState?: {
     latestVersion: number;
@@ -57,6 +77,10 @@ export function OnePageSendDialog({
   const [previewMode, setPreviewMode] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [acknowledgedGuard, setAcknowledgedGuard] = useState(false);
+  const [acknowledgedLowQuality, setAcknowledgedLowQuality] = useState(false);
+  const [showHighOnly, setShowHighOnly] = useState(false);
+  const [hideStale, setHideStale] = useState(false);
+  const [checklistComplete, setChecklistComplete] = useState(Boolean(generatedContent.checklist?.complete));
   const [lastSendResult, setLastSendResult] = useState<{
     sent: number;
     failed: number;
@@ -77,6 +101,19 @@ export function OnePageSendDialog({
     previewMode,
     acknowledgedGuard,
   });
+  const quality = generatedContent.quality;
+  const isLowQuality = (quality?.score ?? 100) < CONTENT_QUALITY_SEND_BLOCK_THRESHOLD;
+  const qualityBlocksSend = isLowQuality && !acknowledgedLowQuality;
+  const readinessFloor = getRecipientReadinessFloor(generatedContent.campaign_type);
+  const checklistBlocksSend = !checklistComplete;
+
+  const visibleRecipients = allRecipients.filter((recipient) => {
+    const readiness = recipient.readiness;
+    if (!readiness) return true;
+    if (showHighOnly && readiness.tier !== 'high') return false;
+    if (hideStale && readiness.stale) return false;
+    return true;
+  });
 
   const handleSelectRecipient = (recipientId: number, checked: boolean) => {
     if (checked) {
@@ -86,17 +123,15 @@ export function OnePageSendDialog({
     }
   };
 
-  const handleSelectAll = (checked: boolean) => {
-    if (checked) {
-      setSelectedRecipients(allRecipients.map((r) => r.id));
-    } else {
-      setSelectedRecipients([]);
-    }
-  };
-
   const handleSend = async () => {
     if (selectedRecipients.length === 0) {
       toast.error('Select at least one recipient');
+      return;
+    }
+    const selected = allRecipients.filter((recipient) => selectedRecipients.includes(recipient.id));
+    const belowFloor = selected.filter((recipient) => (recipient.readiness?.score ?? 0) < readinessFloor);
+    if (belowFloor.length > 0) {
+      toast.error(`Readiness floor ${readinessFloor} not met for ${belowFloor.length} recipient(s).`);
       return;
     }
 
@@ -113,6 +148,9 @@ export function OnePageSendDialog({
               to: r.email,
               personaName: r.name,
               accountName,
+              readinessScore: r.readiness?.score,
+              readinessTier: r.readiness?.tier,
+              stale: r.readiness?.stale,
             })),
           subject,
           bodyHtml,
@@ -136,7 +174,7 @@ export function OnePageSendDialog({
   };
 
   const selectedCount = selectedRecipients.length;
-  const allSelected = selectedRecipients.length === allRecipients.length;
+  const allSelected = selectedRecipients.length > 0 && selectedRecipients.length === visibleRecipients.length;
 
   return (
     <Dialog open={isOpen} onOpenChange={setOpen}>
@@ -161,6 +199,20 @@ export function OnePageSendDialog({
               </div>
               <CardDescription>Version {generatedContent.version || 1} • Provider: {generatedContent.provider_used || 'unknown'}</CardDescription>
             </CardHeader>
+            <CardContent>
+              <div className="mb-3 grid grid-cols-2 gap-2 text-xs text-muted-foreground">
+                <div className="rounded-md border p-2">Quality Score: {quality?.score ?? 'n/a'}</div>
+                <div className="rounded-md border p-2">Threshold: {CONTENT_QUALITY_SEND_BLOCK_THRESHOLD}</div>
+                <div className="rounded-md border p-2">Readiness floor: {readinessFloor}</div>
+                <div className="rounded-md border p-2">Checklist: {generatedContent.checklist?.requiredComplete ?? 0}/{generatedContent.checklist?.requiredTotal ?? 0}</div>
+              </div>
+              <ContentQaChecklistPanel
+                generatedContentId={generatedContentId}
+                campaignType={generatedContent.campaign_type}
+                initialCompleted={generatedContent.checklist_completed_item_ids}
+                onSaved={() => setChecklistComplete(true)}
+              />
+            </CardContent>
             {previewMode && (
               <CardContent>
                 <div className="rounded-lg border bg-slate-50 p-4">
@@ -187,6 +239,23 @@ export function OnePageSendDialog({
                   className="h-4 w-4 rounded border-amber-300 text-primary focus:ring-primary"
                 />
                 I reviewed this version and want to send it anyway.
+              </label>
+            </div>
+          )}
+
+          {isLowQuality && (
+            <div className="rounded-lg border border-red-200 bg-red-50 p-3">
+              <p className="text-sm text-red-800">
+                Quality score is below send threshold ({quality?.score ?? 'n/a'} / {CONTENT_QUALITY_SEND_BLOCK_THRESHOLD}).
+              </p>
+              <label className="mt-2 flex items-center gap-2 text-xs text-red-800">
+                <input
+                  type="checkbox"
+                  checked={acknowledgedLowQuality}
+                  onChange={(event) => setAcknowledgedLowQuality(event.target.checked)}
+                  className="h-4 w-4 rounded border-red-300 text-primary focus:ring-primary"
+                />
+                I acknowledge quality risk and approve this send.
               </label>
             </div>
           )}
@@ -219,17 +288,34 @@ export function OnePageSendDialog({
                       type="checkbox"
                       id="select-all"
                       checked={allSelected}
-                      onChange={(event) => handleSelectAll(event.target.checked)}
+                      onChange={(event) => {
+                        if (!event.target.checked) {
+                          setSelectedRecipients([]);
+                          return;
+                        }
+                        setSelectedRecipients(visibleRecipients.map((recipient) => recipient.id));
+                      }}
                       className="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary"
                     />
                     <Label htmlFor="select-all" className="cursor-pointer font-medium">
-                      Select all {allRecipients.length} recipients
+                      Select all {visibleRecipients.length} recipients
                     </Label>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-4 border-b pb-3 text-xs">
+                    <label className="flex items-center gap-2">
+                      <input type="checkbox" checked={showHighOnly} onChange={(event) => setShowHighOnly(event.target.checked)} />
+                      Show high confidence only
+                    </label>
+                    <label className="flex items-center gap-2">
+                      <input type="checkbox" checked={hideStale} onChange={(event) => setHideStale(event.target.checked)} />
+                      Hide stale
+                    </label>
                   </div>
 
                   {/* Individual Recipients */}
                   <div className="space-y-2 max-h-64 overflow-y-auto">
-                    {allRecipients.map((recipient) => (
+                    {visibleRecipients.map((recipient) => (
                       <div key={recipient.id} className="flex items-center space-x-2">
                         <input
                           type="checkbox"
@@ -242,7 +328,47 @@ export function OnePageSendDialog({
                           <span className="font-medium">{recipient.name}</span>
                           <span className="text-xs text-muted-foreground ml-2">{recipient.email}</span>
                           {recipient.title && <span className="text-xs text-muted-foreground ml-2">({recipient.title})</span>}
+                          {recipient.readiness ? (
+                            <span className="ml-2 inline-flex items-center gap-1 text-xs">
+                              <span className={recipient.readiness.score >= readinessFloor ? 'text-emerald-700' : 'text-red-700'}>
+                                Readiness {recipient.readiness.score} ({recipient.readiness.tier})
+                              </span>
+                              {recipient.readiness.stale ? <span className="text-amber-700">stale</span> : null}
+                            </span>
+                          ) : null}
                         </Label>
+                        <div className="flex items-center gap-1">
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            className="h-6 px-2 text-[10px]"
+                            onClick={() => {
+                              setSelectedRecipients((prev) => prev.filter((id) => id !== recipient.id));
+                              toast('Recipient deferred');
+                            }}
+                          >
+                            Defer
+                          </Button>
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            className="h-6 px-2 text-[10px]"
+                            onClick={() => toast('Use Contacts workspace to replace this contact.')}
+                          >
+                            Replace Contact
+                          </Button>
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            className="h-6 px-2 text-[10px]"
+                            onClick={() => window.open(`/contacts?account=${encodeURIComponent(accountName)}`, '_blank')}
+                          >
+                            Open Contacts
+                          </Button>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -258,7 +384,7 @@ export function OnePageSendDialog({
             </Button>
             <Button
               onClick={handleSend}
-              disabled={selectedCount === 0 || isSending || sendGuardState.guardBlocksSend}
+              disabled={selectedCount === 0 || isSending || sendGuardState.guardBlocksSend || qualityBlocksSend || checklistBlocksSend}
               className="flex-1"
             >
               {isSending ? (

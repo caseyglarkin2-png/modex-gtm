@@ -76,23 +76,45 @@ export function GeneratorDialog({
   const [sendEmail, setSendEmail] = useState(personaEmail ?? '');
   const [sending, setSending] = useState(false);
   const [showSendForm, setShowSendForm] = useState(false);
+  const [playbookBlocks, setPlaybookBlocks] = useState<Array<{ id: string; title: string; body: string; tags: string[] }>>([]);
+  const [selectedPlaybookIds, setSelectedPlaybookIds] = useState<Record<string, boolean>>({});
 
   const isSendable = type === 'email' || type === 'follow_up';
 
   useEffect(() => {
     if (open) {
       setSendEmail(personaEmail ?? '');
+      fetch(`/api/revops/playbook-blocks?accountName=${encodeURIComponent(accountName)}${personaName ? `&persona=${encodeURIComponent(personaName)}` : ''}`)
+        .then(async (res) => {
+          if (!res.ok) return [] as Array<{ id: string; title: string; body: string; tags: string[] }>;
+          const payload = await res.json() as { blocks?: Array<{ id: string; title: string; body: string; tags: string[] }> };
+          return payload.blocks ?? [];
+        })
+        .then((blocks) => setPlaybookBlocks(blocks.slice(0, 6)))
+        .catch(() => setPlaybookBlocks([]));
     }
-  }, [open, personaEmail]);
+  }, [accountName, open, personaEmail, personaName]);
 
   async function generate() {
     setLoading(true);
     setContent('');
     try {
+      const selectedBlocks = playbookBlocks.filter((block) => selectedPlaybookIds[block.id]);
+      const playbookHints = selectedBlocks.map((block) => `${block.title}: ${block.body.slice(0, 400)}`).join('\n\n');
       const res = await fetch('/api/ai/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type, accountName, personaName, campaignSlug, tone, length }),
+        body: JSON.stringify({
+          type,
+          accountName,
+          personaName,
+          campaignSlug,
+          tone,
+          length,
+          context: playbookHints
+            ? { playbookHints }
+            : undefined,
+        }),
       });
       const data = await readApiResponse<{ content?: string; error?: string }>(res);
       if (!res.ok) {
@@ -234,6 +256,27 @@ export function GeneratorDialog({
             </DropdownMenu>
           </div>
         </div>
+        {playbookBlocks.length > 0 ? (
+          <div className="px-6 py-3 border-b space-y-2">
+            <p className="text-xs text-muted-foreground">Playbook Recommendations</p>
+            <div className="flex flex-wrap gap-1.5">
+              {playbookBlocks.map((block) => {
+                const selected = selectedPlaybookIds[block.id] ?? false;
+                return (
+                  <button
+                    key={block.id}
+                    type="button"
+                    className={`rounded border px-2 py-1 text-[11px] ${selected ? 'bg-primary text-primary-foreground' : 'bg-background hover:bg-muted'}`}
+                    onClick={() => setSelectedPlaybookIds((prev) => ({ ...prev, [block.id]: !selected }))}
+                    title={block.body.slice(0, 180)}
+                  >
+                    {block.title}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ) : null}
 
         {/* Output */}
         <div className="flex-1 overflow-auto px-6 py-4 min-h-[200px]">

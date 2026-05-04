@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
-import { upsertContact, type HubSpotContact } from '@/lib/hubspot/contacts';
+import { listRecentContacts, upsertContact, type HubSpotContact } from '@/lib/hubspot/contacts';
 import { isHubSpotConfigured } from '@/lib/hubspot/client';
 import { HUBSPOT_SYNC_ENABLED } from '@/lib/feature-flags';
 import { markCronFailure, markCronSkipped, markCronStarted, markCronSuccess } from '@/lib/cron-monitor';
@@ -33,6 +33,7 @@ const HeaderSchema = z.object({
  * Push: Find local Personas with hubspot_contact_id + updated data → push to HubSpot.
  */
 export async function GET(req: NextRequest) {
+  const dryRun = ['1', 'true', 'yes'].includes((req.nextUrl.searchParams.get('dry_run') || '').toLowerCase());
   const authHeader = req.headers.get('authorization') ?? '';
   const headerParse = HeaderSchema.safeParse({ authorization: authHeader });
   if (!headerParse.success) {
@@ -62,6 +63,7 @@ export async function GET(req: NextRequest) {
   }
 
   const stats = { pulled: 0, pushed: 0, errors: 0 };
+  const sampledErrorClasses: Record<string, number> = {};
 
   try {
     // ── PULL: HubSpot → Local ─────────────────────────────
@@ -70,36 +72,46 @@ export async function GET(req: NextRequest) {
     let pageCount = 0;
     const maxPages = 10; // Safety limit
     let cursorAfter: string | null = cursorBefore;
+    let pullCursor: string | undefined = cursorBefore ?? undefined;
 
     while (hasMore && pageCount < maxPages) {
       pageCount++;
-      const { contacts, nextAfter } = await ingestHubSpotContactsPage(100);
+      const { contacts, nextAfter } = dryRun
+        ? await listRecentContacts(pullCursor, 100)
+        : await ingestHubSpotContactsPage(100);
 
       for (const hsContact of contacts) {
         try {
-          await syncContactToLocal(hsContact);
+          if (!dryRun) {
+            await syncContactToLocal(hsContact);
+          }
           stats.pulled++;
         } catch (error) {
           console.error(`Pull sync error for ${redactText(hsContact.email)}:`, redactUnknown(error));
+          const code = error instanceof Error ? error.name || 'Error' : 'UnknownError';
+          sampledErrorClasses[code] = (sampledErrorClasses[code] || 0) + 1;
           stats.errors++;
         }
       }
 
       if (nextAfter) {
         cursorAfter = nextAfter;
+        pullCursor = nextAfter;
       } else {
         hasMore = false;
       }
     }
 
-    await writeHubSpotIngestionAudit({
-      at: new Date().toISOString(),
-      pages: pageCount,
-      pulled: stats.pulled,
-      errors: stats.errors,
-      cursorBefore,
-      cursorAfter,
-    });
+    if (!dryRun) {
+      await writeHubSpotIngestionAudit({
+        at: new Date().toISOString(),
+        pages: pageCount,
+        pulled: stats.pulled,
+        errors: stats.errors,
+        cursorBefore,
+        cursorAfter,
+      });
+    }
 
     // ── PUSH: Local → HubSpot ─────────────────────────────
     const localUpdated = await prisma.persona.findMany({
@@ -122,24 +134,28 @@ export async function GET(req: NextRequest) {
     for (const persona of localUpdated) {
       if (!persona.email || !persona.hubspot_contact_id) continue;
       try {
-        const [first, ...lastParts] = persona.name.split(' ');
-        await upsertContact({
-          email: persona.email,
-          firstname: first ?? '',
-          lastname: lastParts.join(' '),
-          jobtitle: persona.title ?? undefined,
-          phone: persona.phone ?? undefined,
-          ...(persona.do_not_contact ? { hs_email_optout: 'true' } : {}),
-        });
+        if (!dryRun) {
+          const [first, ...lastParts] = persona.name.split(' ');
+          await upsertContact({
+            email: persona.email,
+            firstname: first ?? '',
+            lastname: lastParts.join(' '),
+            jobtitle: persona.title ?? undefined,
+            phone: persona.phone ?? undefined,
+            ...(persona.do_not_contact ? { hs_email_optout: 'true' } : {}),
+          });
+        }
         stats.pushed++;
       } catch (error) {
         console.error(`Push sync error for ${redactText(persona.email)}:`, redactUnknown(error));
+        const code = error instanceof Error ? error.name || 'Error' : 'UnknownError';
+        sampledErrorClasses[code] = (sampledErrorClasses[code] || 0) + 1;
         stats.errors++;
       }
     }
 
     // Track consecutive failures
-    if (stats.errors > 0 && stats.pulled === 0 && stats.pushed === 0) {
+    if (!dryRun && stats.errors > 0 && stats.pulled === 0 && stats.pushed === 0) {
       const failKey = 'hubspot_sync_consecutive_failures';
       const failConfig = await prisma.systemConfig.findUnique({ where: { key: failKey } });
       const failures = parseInt(failConfig?.value ?? '0', 10) + 1;
@@ -152,7 +168,7 @@ export async function GET(req: NextRequest) {
       if (failures >= 3) {
         Sentry.captureMessage(`HubSpot sync failed ${failures} consecutive times`, 'error');
       }
-    } else {
+    } else if (!dryRun) {
       // Reset failure counter on any success
       await prisma.systemConfig.upsert({
         where: { key: 'hubspot_sync_consecutive_failures' },
@@ -165,11 +181,18 @@ export async function GET(req: NextRequest) {
       path: CRON_PATH,
       schedule: CRON_SCHEDULE,
       durationMs: Date.now() - startedAt,
-      message: `Pulled ${stats.pulled}, pushed ${stats.pushed}, errors ${stats.errors}.`,
-      stats,
+      message: dryRun
+        ? `DRY RUN pulled ${stats.pulled}, push candidates ${stats.pushed}, errors ${stats.errors}.`
+        : `Pulled ${stats.pulled}, pushed ${stats.pushed}, errors ${stats.errors}.`,
+      stats: { ...stats, dryRun, sampledErrorClasses },
     }).catch(() => undefined);
 
-    return NextResponse.json({ status: 'ok', stats });
+    return NextResponse.json({
+      status: 'ok',
+      dryRun,
+      stats,
+      sampledErrorClasses,
+    });
   } catch (error) {
     Sentry.captureException(error);
     await markCronFailure(CRON_NAME, {

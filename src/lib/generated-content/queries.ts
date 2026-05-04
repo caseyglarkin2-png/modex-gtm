@@ -1,6 +1,10 @@
 import { prisma } from '@/lib/prisma';
 import { slugify } from '@/lib/data';
 import type { QueueGeneratedAccountCard } from '@/components/queue/generated-content-grid';
+import { evaluateContentQuality } from '@/lib/content-quality';
+import { computeChecklistCompleteness, getChecklistTemplate, type ChecklistItemId } from '@/lib/revops/content-qa-checklist';
+import { computeRecipientReadiness } from '@/lib/revops/recipient-readiness';
+import { parseInfographicMetadata } from '@/lib/revops/infographic-journey';
 
 export type GenerationJobRecord = {
   account_name: string;
@@ -15,9 +19,20 @@ export type GeneratedContentRecord = {
   external_send_count: number;
   is_published: boolean;
   content: string;
+  version_metadata?: unknown;
   created_at: Date;
   campaign_id: number | null;
-  campaign: { name: string } | null;
+  campaign: {
+    name: string;
+    campaign_type: string;
+    generation_contract?: {
+      is_complete: boolean;
+      quality_score: number;
+    } | null;
+  } | null;
+  checklist_state?: {
+    completed_item_ids: string[];
+  } | null;
 };
 
 export type PersonaRecord = {
@@ -26,6 +41,10 @@ export type PersonaRecord = {
   name: string;
   email: string | null;
   title: string | null;
+  role_in_deal: string | null;
+  email_confidence: number;
+  quality_score: number;
+  last_enriched_at: Date | null;
 };
 
 export type WorkspaceRecipient = {
@@ -33,6 +52,8 @@ export type WorkspaceRecipient = {
   name: string;
   email: string;
   title?: string;
+  readiness: ReturnType<typeof computeRecipientReadiness>;
+  role_in_deal?: string;
 };
 
 export type GeneratedContentWorkspaceData = {
@@ -53,6 +74,14 @@ export function buildGeneratedContentWorkspaceData(
       name: persona.name,
       email: persona.email,
       title: persona.title ?? undefined,
+      role_in_deal: persona.role_in_deal ?? undefined,
+      readiness: computeRecipientReadiness({
+        email_confidence: persona.email_confidence,
+        quality_score: persona.quality_score,
+        title: persona.title,
+        role_in_deal: persona.role_in_deal,
+        last_enriched_at: persona.last_enriched_at,
+      }),
     });
     return acc;
   }, {});
@@ -79,6 +108,7 @@ export function buildGeneratedContentWorkspaceData(
     }
 
     const card = acc[row.account_name];
+    const infographic = parseInfographicMetadata(row.version_metadata);
     const version = {
       id: row.id,
       version: row.version,
@@ -89,6 +119,23 @@ export function buildGeneratedContentWorkspaceData(
       created_at: row.created_at.toISOString(),
       campaign_id: row.campaign_id ?? undefined,
       campaign_name: row.campaign?.name ?? undefined,
+      campaign_type: row.campaign?.campaign_type ?? undefined,
+      contract: row.campaign?.generation_contract
+        ? {
+          complete: row.campaign.generation_contract.is_complete,
+          qualityScore: row.campaign.generation_contract.quality_score,
+        }
+        : undefined,
+      quality: evaluateContentQuality(row.content, row.account_name),
+      checklist: computeChecklistCompleteness(
+        getChecklistTemplate(row.campaign?.campaign_type),
+        ((row.checklist_state?.completed_item_ids ?? []) as ChecklistItemId[]),
+      ),
+      checklist_completed_item_ids: row.checklist_state?.completed_item_ids ?? [],
+      infographic_type: infographic.infographicType,
+      stage_intent: infographic.stageIntent,
+      bundle_id: infographic.bundleId,
+      sequence_position: infographic.sequencePosition,
     };
     card.versions.push(version);
 
@@ -129,9 +176,24 @@ export async function fetchGeneratedContentWorkspaceData(): Promise<GeneratedCon
         is_published: true,
         content: true,
         created_at: true,
+        version_metadata: true,
         campaign_id: true,
         campaign: {
-          select: { name: true },
+          select: {
+            name: true,
+            campaign_type: true,
+            generation_contract: {
+              select: {
+                is_complete: true,
+                quality_score: true,
+              },
+            },
+          },
+        },
+        checklist_state: {
+          select: {
+            completed_item_ids: true,
+          },
         },
       },
     }),
@@ -151,6 +213,10 @@ export async function fetchGeneratedContentWorkspaceData(): Promise<GeneratedCon
           name: true,
           email: true,
           title: true,
+          role_in_deal: true,
+          email_confidence: true,
+          quality_score: true,
+          last_enriched_at: true,
         },
         orderBy: [{ account_name: 'asc' }, { name: 'asc' }],
       })

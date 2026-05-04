@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { getAccountContext } from '@/lib/db';
+import { isGenerationContractPolicyEnabled } from '@/lib/revops/campaign-generation-contract';
 
 export const dynamic = 'force-dynamic';
 
@@ -27,8 +28,26 @@ export async function POST(req: NextRequest) {
   const { accountNames, campaignSlug, personaName } = parsed.data;
   const batchId = crypto.randomUUID();
   const campaign = campaignSlug
-    ? await prisma.campaign.findUnique({ where: { slug: campaignSlug }, select: { id: true } }).catch(() => null)
+    ? await prisma.campaign.findUnique({
+      where: { slug: campaignSlug },
+      select: {
+        id: true,
+        key_dates: true,
+        generation_contract: {
+          select: {
+            is_complete: true,
+            quality_score: true,
+          },
+        },
+      },
+    }).catch(() => null)
     : null;
+  if (campaign && isGenerationContractPolicyEnabled(campaign.key_dates) && !campaign.generation_contract?.is_complete) {
+    return NextResponse.json({
+      error: 'Campaign brief contract is required and incomplete for this campaign.',
+      contractQualityScore: campaign.generation_contract?.quality_score ?? 0,
+    }, { status: 409 });
+  }
 
   const createdJobs: Array<{ id: number; accountName: string }> = [];
   const skipped: string[] = [];

@@ -15,6 +15,7 @@ import { prisma } from '@/lib/prisma';
 import { buildAbsoluteUrl } from '@/lib/site-url';
 import { getFacilityFact } from '@/lib/research/facility-fact-registry';
 import { buildAccountTags } from '@/lib/research/account-tags';
+import { isGenerationContractPolicyEnabled } from '@/lib/revops/campaign-generation-contract';
 
 const TONE_MAP: Record<string, PromptContext['tone']> = {
   formal: 'professional',
@@ -42,8 +43,38 @@ export async function POST(req: NextRequest) {
   const campaign = requestedCampaignSlug
     ? await prisma.campaign.findUnique({
         where: { slug: requestedCampaignSlug },
-        select: { slug: true, name: true, campaign_type: true, messaging_angle: true, key_dates: true },
+        select: {
+          slug: true,
+          name: true,
+          campaign_type: true,
+          messaging_angle: true,
+          key_dates: true,
+          generation_contract: {
+            select: {
+              objective: true,
+              persona_hypothesis: true,
+              offer: true,
+              proof: true,
+              cta: true,
+              metric: true,
+              is_complete: true,
+            },
+          },
+        },
       }).catch(() => null)
+    : null;
+  if (campaign && isGenerationContractPolicyEnabled(campaign.key_dates) && !campaign.generation_contract?.is_complete) {
+    return NextResponse.json({ error: 'Campaign brief contract is required before generation for this campaign.' }, { status: 409 });
+  }
+  const contractPayload = campaign?.generation_contract
+    ? [
+      `Objective: ${campaign.generation_contract.objective}`,
+      `Persona hypothesis: ${campaign.generation_contract.persona_hypothesis}`,
+      `Offer: ${campaign.generation_contract.offer}`,
+      `Proof: ${campaign.generation_contract.proof}`,
+      `CTA: ${campaign.generation_contract.cta}`,
+      `Metric: ${campaign.generation_contract.metric}`,
+    ].join('\n')
     : null;
   const campaignKeyDates = campaign?.key_dates ? JSON.stringify(campaign.key_dates) : (context as Record<string, string> | undefined)?.campaignKeyDates;
   const persona = personaName
@@ -62,7 +93,10 @@ export async function POST(req: NextRequest) {
     bandLabel: account?.priority_band ?? undefined,
     score: account?.priority_score ?? undefined,
     previousMeeting: (context as Record<string, string> | undefined)?.previousMeeting,
-    notes: (context as Record<string, string> | undefined)?.notes ?? account?.why_now ?? undefined,
+    notes: [
+      (context as Record<string, string> | undefined)?.notes ?? account?.why_now ?? '',
+      contractPayload ? `Campaign brief contract:\n${contractPayload}` : '',
+    ].filter(Boolean).join('\n\n') || undefined,
     vertical: (context as Record<string, string> | undefined)?.vertical ?? account?.vertical ?? undefined,
     primoAngle: (context as Record<string, string> | undefined)?.primoAngle ?? account?.primo_angle ?? undefined,
     parentBrand: account?.parent_brand ?? undefined,
@@ -74,6 +108,7 @@ export async function POST(req: NextRequest) {
     facilityCountLabel: facilityFact?.facilityCount,
     facilityScope: facilityFact?.scope,
     researchTags: accountTags.map((t) => `${t.label}: ${t.value}`),
+    playbookHints: (context as Record<string, string> | undefined)?.playbookHints,
     tone: TONE_MAP[tone] ?? 'casual',
     length: length as PromptContext['length'],
   };

@@ -12,11 +12,27 @@ export type EnrichmentThresholds = {
   staleDaysCompany: number;
 };
 
+export type EnrichmentBatchPolicy = {
+  batchSize: number;
+  maxParallel: number;
+  retryBackoffMs: number;
+  dailyBudget: number;
+};
+
 export function getEnrichmentThresholds(): EnrichmentThresholds {
   return {
     minConfidenceForOverwrite: envNumber('ENRICH_MIN_CONFIDENCE_OVERWRITE', 0.8),
     staleDaysPerson: envNumber('ENRICH_STALE_DAYS_PERSON', 30),
     staleDaysCompany: envNumber('ENRICH_STALE_DAYS_COMPANY', 45),
+  };
+}
+
+export function getEnrichmentBatchPolicy(): EnrichmentBatchPolicy {
+  return {
+    batchSize: envNumber('ENRICH_BATCH_SIZE', 40),
+    maxParallel: envNumber('ENRICH_MAX_PARALLEL', 2),
+    retryBackoffMs: envNumber('ENRICH_RETRY_BACKOFF_MS', 60_000),
+    dailyBudget: envNumber('ENRICH_DAILY_BUDGET', 5000),
   };
 }
 

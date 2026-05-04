@@ -1,11 +1,14 @@
 import { slugify } from '@/lib/data';
+import { OPERATOR_OUTCOME_TAXONOMY, type OperatorOutcomeLabel } from '@/lib/revops/operator-outcomes';
+import { classifyFailure, recommendRetryForClass, type FailureClass } from '@/lib/revops/failure-intelligence';
 
 export type EngagementTabId =
   | 'inbox'
   | 'hot-accounts'
   | 'microsite-sessions'
   | 'bounces-failures'
-  | 'recent-touches';
+  | 'recent-touches'
+  | 'learning-review';
 
 export type EngagementTab = {
   id: EngagementTabId;
@@ -50,12 +53,16 @@ export type EngagementItem = {
   statusLabel: string;
   unread: boolean;
   severity: EngagementSeverity;
+  failureClass?: FailureClass;
+  retryRecommendation?: ReturnType<typeof recommendRetryForClass>['recommended'];
   actions: {
     markReadHref?: string;
     followUpHref?: string;
     accountHref?: string;
     campaignHref?: string;
     assetHref?: string;
+    regenerateFromSignalHref?: string;
+    outcomeHrefs?: Partial<Record<OperatorOutcomeLabel, string>>;
   };
 };
 
@@ -90,6 +97,7 @@ export type EmailLogSource = {
   campaign_id: number | null;
   campaign?: { name: string; slug: string } | null;
   status: string;
+  generated_content_id: number | null;
   opened_at: Date | null;
   clicked_at: Date | null;
   sent_at: Date;
@@ -102,6 +110,7 @@ export type SendJobFailureSource = {
   to_email: string;
   error_message: string | null;
   campaign_id: number | null;
+  generated_content_id?: number | null;
   campaign?: { name: string; slug: string } | null;
   updated_at: Date;
 };
@@ -172,6 +181,11 @@ export const engagementCenterTabs: EngagementTab[] = [
     label: 'Recent Touches',
     purpose: 'Latest activity and meeting context across the funnel.',
   },
+  {
+    id: 'learning-review',
+    label: 'Learning Review',
+    purpose: 'Weekly signal-to-content proposals with review, approval, and deploy/rollback tracking.',
+  },
 ];
 
 function formatNotificationType(type: string): EngagementKind {
@@ -198,6 +212,62 @@ function createFollowUpHref(tab: EngagementTabId, accountName: string, source: s
 function createMarkReadHref(tab: EngagementTabId, notificationId: number): string {
   const params = new URLSearchParams({ tab, markRead: String(notificationId) });
   return `/engagement?${params.toString()}`;
+}
+
+function createOutcomeHref(
+  tab: EngagementTabId,
+  accountName: string,
+  source: string,
+  outcomeLabel: OperatorOutcomeLabel,
+  campaignId?: number | null,
+  generatedContentId?: number | null,
+): string {
+  const params = new URLSearchParams({
+    tab,
+    outcomeAccount: accountName,
+    outcomeSource: source,
+    outcomeLabel,
+  });
+  if (campaignId) params.set('outcomeCampaignId', String(campaignId));
+  if (generatedContentId) params.set('outcomeContentVersionId', String(generatedContentId));
+  return `/engagement?${params.toString()}`;
+}
+
+function createRegenerateFromSignalHref(
+  accountName: string,
+  sourceKind: string,
+  sourceId: string,
+  signalKind: string,
+  signalContext: string,
+  campaignId?: number | null,
+  generatedContentId?: number | null,
+): string {
+  const params = new URLSearchParams({
+    account: accountName,
+    regenAccount: accountName,
+    regenSourceKind: sourceKind,
+    regenSourceId: sourceId,
+    regenSignalKind: signalKind,
+    regenContext: signalContext,
+  });
+  if (campaignId) params.set('regenCampaignId', String(campaignId));
+  if (generatedContentId) params.set('regenGeneratedContentId', String(generatedContentId));
+  return `/generated-content?${params.toString()}`;
+}
+
+function createOutcomeHrefMap(
+  tab: EngagementTabId,
+  accountName: string,
+  source: string,
+  campaignId?: number | null,
+  generatedContentId?: number | null,
+): Partial<Record<OperatorOutcomeLabel, string>> {
+  return Object.fromEntries(
+    OPERATOR_OUTCOME_TAXONOMY.map((label) => [
+      label,
+      createOutcomeHref(tab, accountName, source, label, campaignId, generatedContentId),
+    ]),
+  ) as Partial<Record<OperatorOutcomeLabel, string>>;
 }
 
 function toCampaignHref(campaignId: number | null | undefined, campaignSlug: string | null | undefined): string | undefined {
@@ -231,6 +301,18 @@ function toNotificationItems(notifications: NotificationSource[]): EngagementIte
           ? createFollowUpHref(kind === 'bounce' ? 'bounces-failures' : 'inbox', notification.account_name, `notification:${notification.id}`)
           : undefined,
         accountHref: accountSlug ? `/accounts/${accountSlug}` : undefined,
+        outcomeHrefs: notification.account_name
+          ? createOutcomeHrefMap(kind === 'bounce' ? 'bounces-failures' : 'inbox', notification.account_name, `notification:${notification.id}`)
+          : undefined,
+        regenerateFromSignalHref: notification.account_name
+          ? createRegenerateFromSignalHref(
+              notification.account_name,
+              'notification',
+              String(notification.id),
+              kind === 'bounce' ? 'bounce' : 'reply-objection',
+              notification.preview ?? notification.subject ?? `${notification.type} signal`,
+            )
+          : undefined,
       },
     };
   });
@@ -266,6 +348,16 @@ function toEmailSignalItems(emailLogs: EmailLogSource[]): EngagementItem[] {
         followUpHref: createFollowUpHref('inbox', row.account_name, `email-log:${row.id}`),
         accountHref: `/accounts/${accountSlug}`,
         campaignHref,
+        outcomeHrefs: createOutcomeHrefMap('inbox', row.account_name, `email-log:${row.id}`, row.campaign_id, row.generated_content_id),
+        regenerateFromSignalHref: createRegenerateFromSignalHref(
+          row.account_name,
+          'email-log',
+          String(row.id),
+          clicked ? 'reply-objection' : 'positive-signal',
+          clicked ? `Buyer clicked email link for ${row.subject}` : `Buyer opened email: ${row.subject}`,
+          row.campaign_id,
+          row.generated_content_id,
+        ),
       },
     };
   });
@@ -275,6 +367,8 @@ function toFailureItems(failures: SendJobFailureSource[]): EngagementItem[] {
   return failures.map((failure) => {
     const accountSlug = slugify(failure.account_name);
     const campaignHref = toCampaignHref(failure.campaign_id, failure.campaign?.slug ?? null);
+    const failureClass = classifyFailure(failure.error_message);
+    const recommendation = recommendRetryForClass(failureClass);
     return {
       id: `send-failure-${failure.id}`,
       source: 'send-job-recipient',
@@ -292,10 +386,22 @@ function toFailureItems(failures: SendJobFailureSource[]): EngagementItem[] {
       statusLabel: 'Failed',
       unread: true,
       severity: 'high',
+      failureClass,
+      retryRecommendation: recommendation.recommended,
       actions: {
         followUpHref: createFollowUpHref('bounces-failures', failure.account_name, `send-failure:${failure.id}`),
         accountHref: `/accounts/${accountSlug}`,
         campaignHref,
+        outcomeHrefs: createOutcomeHrefMap('bounces-failures', failure.account_name, `send-failure:${failure.id}`, failure.campaign_id),
+        regenerateFromSignalHref: createRegenerateFromSignalHref(
+          failure.account_name,
+          'send-failure',
+          String(failure.id),
+          'bounce',
+          failure.error_message ?? `Delivery failed for ${failure.to_email}`,
+          failure.campaign_id,
+          failure.generated_content_id,
+        ),
       },
     };
   });
@@ -323,6 +429,14 @@ function toMicrositeItems(sessions: MicrositeSource[]): EngagementItem[] {
         followUpHref: createFollowUpHref('microsite-sessions', session.account_name, `microsite:${session.id}`),
         accountHref: `/accounts/${accountSlug}`,
         assetHref: session.path,
+        outcomeHrefs: createOutcomeHrefMap('microsite-sessions', session.account_name, `microsite:${session.id}`),
+        regenerateFromSignalHref: createRegenerateFromSignalHref(
+          session.account_name,
+          'microsite',
+          session.id,
+          highIntent ? 'positive-signal' : 'unknown',
+          `${session.scroll_depth_pct}% depth, ${session.duration_seconds}s dwell, ${session.cta_ids.length} CTA clicks`,
+        ),
       },
     };
   });
@@ -347,6 +461,14 @@ function toRecentTouchItems(meetings: MeetingSource[], activities: ActivitySourc
       severity: kindSeverity('meeting', false),
       actions: {
         accountHref: `/accounts/${accountSlug}`,
+        outcomeHrefs: createOutcomeHrefMap('recent-touches', meeting.account_name, `meeting:${meeting.id}`),
+        regenerateFromSignalHref: createRegenerateFromSignalHref(
+          meeting.account_name,
+          'meeting',
+          String(meeting.id),
+          'reply-objection',
+          meeting.objective ?? `Meeting status ${meeting.meeting_status}`,
+        ),
       },
     };
   });
@@ -369,6 +491,14 @@ function toRecentTouchItems(meetings: MeetingSource[], activities: ActivitySourc
       severity: kindSeverity('activity', false),
       actions: {
         accountHref: `/accounts/${accountSlug}`,
+        outcomeHrefs: createOutcomeHrefMap('recent-touches', activity.account_name, `activity:${activity.id}`),
+        regenerateFromSignalHref: createRegenerateFromSignalHref(
+          activity.account_name,
+          'activity',
+          String(activity.id),
+          'reply-objection',
+          activity.outcome ?? activity.next_step ?? activity.activity_type,
+        ),
       },
     };
   });

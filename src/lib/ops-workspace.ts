@@ -3,7 +3,9 @@ export type OpsTabId =
   | 'cron-health'
   | 'generation-metrics'
   | 'provider-health'
-  | 'feature-flags';
+  | 'feature-flags'
+  | 'connector-health'
+  | 'coverage';
 
 export type OpsTab = {
   id: OpsTabId;
@@ -17,6 +19,8 @@ export const opsWorkspaceTabs: OpsTab[] = [
   { id: 'generation-metrics', label: 'Generation Metrics', purpose: 'Generation/send throughput, failures, and stuck work.' },
   { id: 'provider-health', label: 'Provider Health', purpose: 'Model/provider distribution and failure concentration.' },
   { id: 'feature-flags', label: 'Feature Flags', purpose: 'Operational feature toggles affecting delivery behavior.' },
+  { id: 'connector-health', label: 'Connector Health', purpose: 'Apollo + HubSpot config/flag health plus runbook ownership metadata.' },
+  { id: 'coverage', label: 'Coverage', purpose: 'TAM/ICP progress, reconciliation indicators, and Gate 0 readiness.' },
 ];
 
 export function parseOpsTab(tab: string | undefined): OpsTabId {

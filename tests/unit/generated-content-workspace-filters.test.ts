@@ -19,6 +19,22 @@ const cards: QueueGeneratedAccountCard[] = [
         is_published: true,
         content: 'x',
         created_at: '2026-05-01T00:00:00.000Z',
+        quality: {
+          score: 82,
+          scores: { clarity: 82, personalization: 78, cta_strength: 80, compliance_risk: 15, deliverability_risk: 18 },
+          flags: [],
+          fixes: [],
+          blockedByThreshold: false,
+        },
+        checklist: {
+          complete: true,
+          requiredComplete: 5,
+          requiredTotal: 5,
+          missingRequired: [],
+        },
+        checklist_completed_item_ids: ['clear_value_prop'],
+        infographic_type: 'cold_hook',
+        stage_intent: 'cold',
       },
     ],
   },
@@ -38,6 +54,22 @@ const cards: QueueGeneratedAccountCard[] = [
         is_published: false,
         content: 'x',
         created_at: '2026-05-01T00:00:00.000Z',
+        quality: {
+          score: 51,
+          scores: { clarity: 50, personalization: 50, cta_strength: 52, compliance_risk: 42, deliverability_risk: 30 },
+          flags: ['low_clarity'],
+          fixes: ['Tighten structure with a short summary and explicit next steps.'],
+          blockedByThreshold: true,
+        },
+        checklist: {
+          complete: false,
+          requiredComplete: 2,
+          requiredTotal: 5,
+          missingRequired: ['cta_specific'],
+        },
+        checklist_completed_item_ids: ['clear_value_prop'],
+        infographic_type: 'executive_roi',
+        stage_intent: 'proposal',
       },
     ],
   },
@@ -49,8 +81,11 @@ describe('filterGeneratedContentCards', () => {
       account: 'all',
       campaign: 'all',
       provider: 'ai_gateway',
+      infographicType: 'all',
+      stageIntent: 'all',
       status: 'all',
       sent: 'sent',
+      checklist: 'all',
       query: '',
     });
 
@@ -63,9 +98,45 @@ describe('filterGeneratedContentCards', () => {
       account: 'all',
       campaign: 'all',
       provider: 'all',
+      infographicType: 'all',
+      stageIntent: 'all',
       status: 'draft',
       sent: 'all',
+      checklist: 'all',
       query: 'revops',
+    });
+
+    expect(result).toHaveLength(1);
+    expect(result[0].account_name).toBe('Blue Rail');
+  });
+
+  it('filters by checklist completeness', () => {
+    const result = filterGeneratedContentCards(cards, {
+      account: 'all',
+      campaign: 'all',
+      provider: 'all',
+      infographicType: 'all',
+      stageIntent: 'all',
+      status: 'all',
+      sent: 'all',
+      checklist: 'complete',
+      query: '',
+    });
+    expect(result).toHaveLength(1);
+    expect(result[0].account_name).toBe('Acme Foods');
+  });
+
+  it('filters by infographic type and stage intent', () => {
+    const result = filterGeneratedContentCards(cards, {
+      account: 'all',
+      campaign: 'all',
+      provider: 'all',
+      infographicType: 'executive_roi',
+      stageIntent: 'proposal',
+      status: 'all',
+      sent: 'all',
+      checklist: 'all',
+      query: '',
     });
 
     expect(result).toHaveLength(1);

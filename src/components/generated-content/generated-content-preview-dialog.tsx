@@ -1,16 +1,22 @@
 'use client';
 
+import { useState } from 'react';
 import { Eye } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { resolveGeneratedContentRendering } from '@/lib/generated-content/content-rendering';
+import { ContentQaChecklistPanel } from '@/components/generated-content/content-qa-checklist-panel';
+import { toast } from 'sonner';
 
 type GeneratedContentPreviewDialogProps = {
   accountName: string;
   version: number;
   content: string;
   providerUsed?: string | null;
+  generatedContentId?: number;
+  campaignType?: string;
+  checklistCompletedItemIds?: string[];
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   trigger?: React.ReactNode;
@@ -29,10 +35,14 @@ export function GeneratedContentPreviewDialog({
   version,
   content,
   providerUsed,
+  generatedContentId,
+  campaignType,
+  checklistCompletedItemIds,
   open,
   onOpenChange,
   trigger,
 }: GeneratedContentPreviewDialogProps) {
+  const [savingPlaybook, setSavingPlaybook] = useState(false);
   const rendering = resolveGeneratedContentRendering(content, accountName);
   const dialogTrigger = trigger ?? (
     <Button variant="outline" size="sm">
@@ -40,6 +50,33 @@ export function GeneratedContentPreviewDialog({
       Preview
     </Button>
   );
+
+  async function saveAsPlaybookBlock() {
+    if (savingPlaybook) return;
+    setSavingPlaybook(true);
+    try {
+      const response = await fetch('/api/revops/playbook-blocks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: `${accountName} v${version} winning block`,
+          body: content,
+          blockType: 'story',
+          accountName,
+          generatedContentId: generatedContentId ?? null,
+          stage: campaignType ?? null,
+          createdBy: 'Casey',
+        }),
+      });
+      const payload = await response.json().catch(() => ({} as { error?: string }));
+      if (!response.ok) throw new Error(payload.error ?? 'Failed to save playbook block');
+      toast.success('Saved as playbook block');
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Failed to save playbook block');
+    } finally {
+      setSavingPlaybook(false);
+    }
+  }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -59,6 +96,18 @@ export function GeneratedContentPreviewDialog({
             dangerouslySetInnerHTML={{ __html: rendering.html }}
           />
         </div>
+        <div className="flex justify-end">
+          <Button variant="outline" size="sm" onClick={saveAsPlaybookBlock} disabled={savingPlaybook}>
+            {savingPlaybook ? 'Saving...' : 'Save as Playbook Block'}
+          </Button>
+        </div>
+        {generatedContentId ? (
+          <ContentQaChecklistPanel
+            generatedContentId={generatedContentId}
+            campaignType={campaignType}
+            initialCompleted={checklistCompletedItemIds}
+          />
+        ) : null}
       </DialogContent>
     </Dialog>
   );

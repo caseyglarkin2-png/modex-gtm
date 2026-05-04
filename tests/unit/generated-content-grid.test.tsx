@@ -31,6 +31,19 @@ const cards: QueueGeneratedAccountCard[] = [
         is_published: false,
         content: 'test',
         created_at: '2026-05-01T00:00:00.000Z',
+        quality: {
+          score: 78,
+          scores: {
+            clarity: 80,
+            personalization: 70,
+            cta_strength: 75,
+            compliance_risk: 20,
+            deliverability_risk: 20,
+          },
+          flags: [],
+          fixes: [],
+          blockedByThreshold: false,
+        },
       },
     ],
   },
@@ -61,5 +74,8 @@ describe('GeneratedContentGrid', () => {
   it('disables preview and send when no recipients exist', () => {
     render(<GeneratedContentGrid cards={cards} recipientsByAccount={{}} />);
     expect(screen.getByRole('button', { name: /Preview & Send/i })).toBeDisabled();
+    expect(screen.getByText(/Quality 78/i)).toBeInTheDocument();
+    expect(screen.getByText('Quality Breakdown')).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: /Quality trend sparkline/i })).toBeInTheDocument();
   });
 });

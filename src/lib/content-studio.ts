@@ -1,4 +1,4 @@
-export type ContentStudioTabId = 'generate' | 'library' | 'queue' | 'send-readiness' | 'asset-types';
+export type ContentStudioTabId = 'generate' | 'library' | 'queue' | 'send-readiness' | 'playbook' | 'asset-types';
 
 export type ContentStudioTab = {
   id: ContentStudioTabId;
@@ -51,6 +51,7 @@ export const contentStudioTabs: ContentStudioTab[] = [
   { id: 'library', label: 'Library', purpose: 'Find account, campaign, and field assets across legacy asset routes.' },
   { id: 'queue', label: 'Queue', purpose: 'Track generation jobs, failures, and retry paths.' },
   { id: 'send-readiness', label: 'Send Readiness', purpose: 'Review publish/send prerequisites before outbound execution.' },
+  { id: 'playbook', label: 'Playbook', purpose: 'Rank, manage, and reuse winning message blocks across segments.' },
   { id: 'asset-types', label: 'Asset Types', purpose: 'Show the owner, status, and route behavior for every content asset type.' },
 ];
 

@@ -38,6 +38,7 @@ test('Analytics workspace tabs are clickable', async ({ page }) => {
   await main.locator('a[href="/analytics?tab=email-engagement"]').first().click();
   await expect(page).toHaveURL(/\/analytics\?tab=email-engagement$/);
   await expect(page.locator('body')).toContainText('Detailed Email Analytics');
+  await expect(page.locator('body')).toContainText('Experiment Tracker');
 
   await main.locator('a[href="/analytics?tab=pipeline"]').first().click();
   await expect(page).toHaveURL(/\/analytics\?tab=pipeline$/);
@@ -64,6 +65,7 @@ test('Quarterly legacy route and Ops tabs remain reachable', async ({ page }) =>
   await page.getByRole('link', { name: 'Generation Metrics' }).first().click();
   await expect(page).toHaveURL(/\/ops\?tab=generation-metrics$/);
   await expect(page.getByRole('heading', { level: 1, name: 'Generation Metrics' })).toBeVisible();
+  await expect(page.locator('body')).toContainText('Open Detailed Generation Metrics');
 
   await page.getByRole('link', { name: 'Provider Health' }).first().click();
   await expect(page).toHaveURL(/\/ops\?tab=provider-health$/);
@@ -72,6 +74,14 @@ test('Quarterly legacy route and Ops tabs remain reachable', async ({ page }) =>
   await page.getByRole('link', { name: 'Feature Flags' }).first().click();
   await expect(page).toHaveURL(/\/ops\?tab=feature-flags$/);
   await expect(page.locator('body')).toContainText('HubSpot sync');
+
+  await page.getByRole('link', { name: 'Connector Health' }).first().click();
+  await expect(page).toHaveURL(/\/ops\?tab=connector-health$/);
+  await expect(page.locator('body')).toContainText('Connector Runtime + Ownership');
+
+  await page.getByRole('link', { name: 'Coverage' }).first().click();
+  await expect(page).toHaveURL(/\/ops\?tab=coverage$/);
+  await expect(page.locator('body')).toContainText('TAM/ICP Coverage + Gate 0');
 
   await page.screenshot({ path: 'test-results/analytics-ops-workspace/analytics-ops-workspace.png', fullPage: true });
 });

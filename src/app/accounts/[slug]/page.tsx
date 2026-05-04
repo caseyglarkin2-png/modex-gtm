@@ -42,6 +42,8 @@ import type { RecentMicrositeSession } from '@/lib/microsites/analytics';
 import { ensureMicrositeForAccount } from '@/lib/microsites/ensure-microsite';
 import { prisma } from '@/lib/prisma';
 import { buildAccountTags } from '@/lib/research/account-tags';
+import { parseInfographicMetadata, type JourneyStageIntent } from '@/lib/revops/infographic-journey';
+import { InfographicJourneyControls } from '@/components/revops/infographic-journey-controls';
 
 export default async function AccountDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -77,6 +79,8 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
         is_published: true,
         external_send_count: true,
         version: true,
+        campaign_id: true,
+        version_metadata: true,
         created_at: true,
       },
     }),
@@ -120,6 +124,11 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
     micrositeSessions: microsite.recentSessions,
     captures,
   });
+  const journeyActivities = rawActivities
+    .filter((activity) => activity.activity_type === 'Infographic Journey')
+    .slice(0, 6);
+  const latestInfographic = generatedAssets[0] ? parseInfographicMetadata(generatedAssets[0].version_metadata) : null;
+  const initialJourneyStage = (latestInfographic?.stageIntent ?? 'cold') as JourneyStageIntent;
 
   const scoreDims = [
     { label: 'ICP Fit', value: account.icp_fit, weight: 30 },
@@ -621,6 +630,26 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
 
         {/* Engagement Tab */}
         <TabsContent value="engagement" className="space-y-4">
+          <InfographicJourneyControls
+            accountName={account.name}
+            campaignId={generatedAssets[0]?.campaign_id ?? null}
+            initialStage={initialJourneyStage}
+          />
+          {journeyActivities.length > 0 ? (
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm">Journey Timeline</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                {journeyActivities.map((activity) => (
+                  <div key={activity.id} className="rounded-md border p-2 text-xs">
+                    <p className="font-medium">{activity.outcome ?? 'Journey transition'}</p>
+                    <p className="text-muted-foreground">{activity.notes}</p>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          ) : null}
           {timeline.length === 0 ? (
             <EmptyState title="No engagement yet" description="Emails, sessions, captures, meetings, and activities will appear here." />
           ) : (

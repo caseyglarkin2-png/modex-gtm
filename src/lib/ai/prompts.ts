@@ -20,6 +20,7 @@ export interface PromptContext {
   facilityCountLabel?: string;
   facilityScope?: string;
   researchTags?: string[];
+  playbookHints?: string;
   tone: 'professional' | 'casual' | 'bold';
   length: 'short' | 'medium' | 'long';
 }
@@ -63,6 +64,12 @@ function buildCampaignAskGuidance(ctx: PromptContext): string {
   return 'This is not a trade show motion. Ask for a reaction or a short call, not a booth meet-up.';
 }
 
+function buildPlaybookHintsBlock(ctx: PromptContext): string {
+  if (!ctx.playbookHints?.trim()) return '';
+  return `Winning playbook blocks (use when relevant, avoid copy-paste):
+${ctx.playbookHints}`;
+}
+
 export function buildEmailPrompt(ctx: PromptContext): string {
   return `Write a first-touch cold outreach email that reads like a typed Gmail note from a thoughtful operator. Careful. Specific. Humble. No consultant voice.
 
@@ -78,6 +85,7 @@ ${ctx.facilityCountLabel ? `Facility footprint: ${ctx.facilityCountLabel}${ctx.f
 ${ctx.researchTags && ctx.researchTags.length ? `Research tags: ${ctx.researchTags.join(' • ')}` : ''}
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 ${buildCampaignContextBlock(ctx)}
+${buildPlaybookHintsBlock(ctx)}
 ${ctx.micrositeUrl ? `Microsite link available: ${ctx.micrositeUrl}` : 'No microsite link available. Do not invent one.'}
 
 Primary goal: get a reply or a light reaction. Not a meeting ask on touch one.
@@ -121,6 +129,7 @@ ${ctx.facilityCountLabel ? `Facility footprint: ${ctx.facilityCountLabel}${ctx.f
 ${ctx.researchTags && ctx.researchTags.length ? `Research tags: ${ctx.researchTags.join(' • ')}` : ''}
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 ${buildCampaignContextBlock(ctx)}
+${buildPlaybookHintsBlock(ctx)}
 ${ctx.micrositeUrl ? `Microsite link available: ${ctx.micrositeUrl}` : 'No microsite link available. Do not invent one.'}
 
 STRUCTURE (2-3 short paragraphs, 50-90 words total):
@@ -149,6 +158,7 @@ ${getVoiceGuardrails()}
 Target: ${ctx.personaName ?? 'decision maker'} at ${ctx.accountName}${ctx.personaTitle ? `, ${ctx.personaTitle}` : ''}
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 ${buildCampaignContextBlock(ctx)}
+${buildPlaybookHintsBlock(ctx)}
 
 LinkedIn DMs must be 40-60 words max. One thought. One ask. No small talk.
 ${buildCampaignAskGuidance(ctx)} Lead with the yard as the constraint. End with a question.
@@ -166,6 +176,7 @@ ${getVoiceGuardrails()}
 Target: ${ctx.personaName ?? 'decision maker'} at ${ctx.accountName}${ctx.personaTitle ? `, ${ctx.personaTitle}` : ''}
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 ${buildCampaignContextBlock(ctx)}
+${buildPlaybookHintsBlock(ctx)}
 
 ${ctx.campaignType === 'trade_show' ? 'Trade show context: live users will be on-site. Suggest a specific event window only if that helps.' : 'This is not a trade show call. Keep the ask focused on a short working session.'}
 
@@ -191,6 +202,7 @@ Contact: ${ctx.personaName ?? 'TBD'}${ctx.personaTitle ? ` (${ctx.personaTitle})
 Meeting: ${ctx.campaignType === 'trade_show' ? 'In-person at MODEX 2026 (Atlanta, April 13-16) or a short follow-up call' : 'Short discovery call or network audit review'}
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 ${buildCampaignContextBlock(ctx)}
+${buildPlaybookHintsBlock(ctx)}
 
 Create a structured brief:
 1. Company snapshot (2-3 sentences about their yard/logistics/throughput reality)

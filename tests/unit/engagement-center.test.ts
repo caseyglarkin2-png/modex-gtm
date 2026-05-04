@@ -42,6 +42,7 @@ function buildFixtureBundle(): EngagementSourceBundle {
         campaign_id: 7,
         campaign: { name: 'MODEX Follow-Up', slug: 'modex-2026-follow-up' },
         status: 'clicked',
+        generated_content_id: 101,
         opened_at: new Date('2026-05-03T08:00:00Z'),
         clicked_at: new Date('2026-05-03T08:10:00Z'),
         sent_at: new Date('2026-05-03T07:00:00Z'),
@@ -55,6 +56,7 @@ function buildFixtureBundle(): EngagementSourceBundle {
         to_email: 'alex@dollartree.com',
         error_message: '550 mailbox unavailable',
         campaign_id: 7,
+        generated_content_id: 98,
         campaign: { name: 'MODEX Follow-Up', slug: 'modex-2026-follow-up' },
         updated_at: new Date('2026-05-03T08:30:00Z'),
       },
@@ -104,6 +106,7 @@ describe('engagement center contract', () => {
       'Microsite Sessions',
       'Bounces/Failures',
       'Recent Touches',
+      'Learning Review',
     ]);
   });
 
@@ -118,18 +121,24 @@ describe('engagement center contract', () => {
     expect(reply?.actions.markReadHref).toContain('markRead=10');
     expect(reply?.actions.followUpHref).toContain('followUpAccount=General+Mills');
     expect(reply?.actions.accountHref).toBe('/accounts/general-mills');
+    expect(reply?.actions.outcomeHrefs?.positive).toContain('outcomeLabel=positive');
+    expect(reply?.actions.regenerateFromSignalHref).toContain('/generated-content?');
 
     expect(microsite?.tab).toBe('microsite-sessions');
     expect(microsite?.actions.assetHref).toBe('/for/general-mills/taylor-lane');
     expect(microsite?.severity).toBe('high');
+    expect(microsite?.actions.outcomeHrefs?.['bad-timing']).toContain('outcomeLabel=bad-timing');
+    expect(microsite?.actions.regenerateFromSignalHref).toContain('regenSignalKind=positive-signal');
 
     expect(failure?.tab).toBe('bounces-failures');
     expect(failure?.actions.campaignHref).toBe('/campaigns/modex-2026-follow-up');
     expect(failure?.actions.followUpHref).toContain('send-failure%3A41');
+    expect(failure?.actions.regenerateFromSignalHref).toContain('regenGeneratedContentId=98');
 
     expect(click?.tab).toBe('inbox');
     expect(click?.statusLabel).toBe('Clicked');
     expect(click?.actions.campaignHref).toBe('/campaigns/modex-2026-follow-up');
+    expect(click?.actions.outcomeHrefs?.['closed-won']).toContain('outcomeContentVersionId=101');
   });
 
   it('ranks hot accounts by weighted signal urgency', () => {

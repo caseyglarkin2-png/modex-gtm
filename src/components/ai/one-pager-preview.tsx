@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger,
 } from '@/components/ui/dialog';
-import { FileImage, RefreshCw, Copy, Download } from 'lucide-react';
+import { FileImage, RefreshCw, Copy, Download, Library } from 'lucide-react';
 import { sanitizeOnePagerData } from '@/lib/one-pager/content-safety';
 
 export interface OnePagerData {
@@ -279,6 +279,7 @@ export function OnePagerDialog({
   const setOpen = variant === 'dialog' ? (controlledOnOpenChange ?? setInternalOpen) : () => {};
   const [data, setData] = useState<OnePagerData | null>(null);
   const [loading, setLoading] = useState(false);
+  const [savingPlaybook, setSavingPlaybook] = useState(false);
 
   async function generate() {
     setLoading(true);
@@ -320,6 +321,32 @@ export function OnePagerDialog({
     toast.success('Downloaded');
   }
 
+  async function saveAsPlaybookBlock() {
+    if (!data || savingPlaybook) return;
+    setSavingPlaybook(true);
+    try {
+      const response = await fetch('/api/revops/playbook-blocks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: `${accountName} one-pager block`,
+          body: JSON.stringify(data),
+          blockType: 'one-pager',
+          accountName,
+          stage: 'one_pager',
+          createdBy: 'Casey',
+        }),
+      });
+      const payload = await response.json().catch(() => ({} as { error?: string }));
+      if (!response.ok) throw new Error(payload.error ?? 'Failed to save playbook block');
+      toast.success('Saved as playbook block');
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Failed to save playbook block');
+    } finally {
+      setSavingPlaybook(false);
+    }
+  }
+
   // Shared content for both dialog and inline modes
   const content = (
     <>
@@ -355,6 +382,9 @@ export function OnePagerDialog({
             </Button>
             <Button variant="outline" size="sm" onClick={downloadHtml} className="gap-1.5">
               <Download className="h-3.5 w-3.5" /> Download
+            </Button>
+            <Button variant="outline" size="sm" onClick={saveAsPlaybookBlock} className="gap-1.5" disabled={savingPlaybook}>
+              <Library className="h-3.5 w-3.5" /> {savingPlaybook ? 'Saving...' : 'Save as Playbook Block'}
             </Button>
             <Button size="sm" className="gap-1.5" asChild>
               <Link href={`/generated-content?account=${encodeURIComponent(accountName)}`}>

@@ -21,6 +21,16 @@ function makeGetPayload(status: 'pending' | 'processing' | 'completed' | 'failed
     job: {
       id: 77,
       status,
+      experiment: {
+        id: 'exp_1',
+        name: 'Subject Test',
+        primary_metric: 'reply_rate',
+        status: 'active',
+        variants: [
+          { id: 'var_control', variant_key: 'control', subject: 'Control', split_percent: 50, is_control: true },
+          { id: 'var_challenger', variant_key: 'challenger', subject: 'Challenger', split_percent: 50, is_control: false },
+        ],
+      },
       total_recipients: 2,
       sent_count: status === 'completed' ? 2 : 0,
       failed_count: status === 'partial' ? 1 : 0,
@@ -29,6 +39,9 @@ function makeGetPayload(status: 'pending' | 'processing' | 'completed' | 'failed
         {
           id: 1,
           generated_content_id: 20,
+          experiment_id: 'exp_1',
+          variant_id: 'var_control',
+          variant_key: 'control',
           account_name: 'Acme Logistics',
           persona_name: 'Ops Lead',
           to_email: 'ops@acme.com',
@@ -39,6 +52,9 @@ function makeGetPayload(status: 'pending' | 'processing' | 'completed' | 'failed
         {
           id: 2,
           generated_content_id: 22,
+          experiment_id: 'exp_1',
+          variant_id: 'var_challenger',
+          variant_key: 'challenger',
           account_name: 'Blue Yard',
           persona_name: null,
           to_email: 'yard@blue.com',

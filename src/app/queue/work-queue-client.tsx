@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { queueAll, queueRemove, type QueuedCapture } from '@/lib/offline-queue';
 import { getMyWorkItems, type WorkQueueItem, type WorkQueueTabId, workQueueTabs } from '@/lib/work-queue';
+import { OPERATOR_OUTCOME_TAXONOMY, type OperatorOutcomeLabel } from '@/lib/revops/operator-outcomes';
 import { AlertTriangle, ArrowRight, CheckCheck, Clock, ExternalLink, RefreshCw, Smartphone } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -73,6 +74,8 @@ export function WorkQueueClient({ defaultTab, initialItems }: WorkQueueClientPro
     approvals: items.filter((item) => item.sourceTab === 'approvals'),
     'system-jobs': items.filter((item) => item.sourceTab === 'system-jobs'),
     'stuck-failed': items.filter((item) => item.sourceTab === 'stuck-failed' || (item.sourceTab === 'system-jobs' && item.severity === 'high')),
+    'outcome-audit': items.filter((item) => item.sourceTab === 'outcome-audit'),
+    'learning-review': items.filter((item) => item.sourceTab === 'learning-review'),
   } satisfies Record<WorkQueueTabId, WorkQueueItem[]>;
 
   const metrics = {
@@ -82,6 +85,8 @@ export function WorkQueueClient({ defaultTab, initialItems }: WorkQueueClientPro
     captures: tabItems.captures.length,
     system: tabItems['system-jobs'].length,
     stuckFailed: tabItems['stuck-failed'].length,
+    outcomeAudit: tabItems['outcome-audit'].length,
+    learningReview: tabItems['learning-review'].length,
   };
 
   function markComplete(item: WorkQueueItem) {
@@ -129,6 +134,74 @@ export function WorkQueueClient({ defaultTab, initialItems }: WorkQueueClientPro
     }
   }
 
+  async function logOutcome(item: WorkQueueItem, label: OperatorOutcomeLabel) {
+    if (!item.accountName) return;
+    try {
+      const response = await fetch('/api/operator-outcomes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          accountName: item.accountName,
+          outcomeLabel: label,
+          sourceKind: 'queue-item',
+          sourceId: item.id,
+          campaignId: item.campaignId ?? null,
+          generatedContentId: item.generatedContentId ?? null,
+          createdBy: 'Casey',
+        }),
+      });
+      const payload = await response.json().catch(() => ({} as { error?: string }));
+      if (!response.ok) throw new Error(payload.error ?? 'Outcome logging failed');
+      toast.success(`Outcome logged: ${label}`);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Outcome logging failed');
+    }
+  }
+
+  async function updateLearningReview(item: WorkQueueItem, action: 'review' | 'approve' | 'reject' | 'deploy' | 'rollback') {
+    if (!item.quickActions.reviewId) return;
+    try {
+      const response = await fetch('/api/revops/message-evolution', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: item.quickActions.reviewId,
+          action,
+          actor: 'Casey',
+        }),
+      });
+      const payload = await response.json().catch(() => ({} as { error?: string }));
+      if (!response.ok) throw new Error(payload.error ?? 'Learning-review update failed');
+      toast.success(`Learning review updated: ${action}`);
+      window.location.reload();
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Learning-review update failed');
+    }
+  }
+
+  async function updateApproval(item: WorkQueueItem, action: 'approve' | 'reject') {
+    const approvalId = item.quickActions.reviewId;
+    if (!approvalId) return;
+    try {
+      const response = await fetch('/api/revops/send-approvals', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: approvalId,
+          action,
+          actor: 'Casey',
+          comment: `${action} from Work Queue`,
+        }),
+      });
+      const payload = await response.json().catch(() => ({} as { error?: string }));
+      if (!response.ok) throw new Error(payload.error ?? 'Approval update failed');
+      toast.success(`Approval ${action}d`);
+      setCompleted((prev) => new Set(prev).add(item.id));
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Approval update failed');
+    }
+  }
+
   return (
     <div className="space-y-6">
       <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Work Queue' }]} />
@@ -155,13 +228,15 @@ export function WorkQueueClient({ defaultTab, initialItems }: WorkQueueClientPro
         </div>
       </div>
 
-      <div className="grid gap-3 md:grid-cols-3 xl:grid-cols-6">
+      <div className="grid gap-3 md:grid-cols-3 xl:grid-cols-8">
         <QueueMetricCard label="Total" value={metrics.total} />
         <QueueMetricCard label="My Work" value={metrics.myWork} />
         <QueueMetricCard label="Follow-ups" value={metrics.followUps} tone={metrics.followUps > 0 ? 'text-amber-600' : 'text-foreground'} />
         <QueueMetricCard label="Captures" value={metrics.captures} />
         <QueueMetricCard label="System Jobs" value={metrics.system} />
         <QueueMetricCard label="Stuck/Failed" value={metrics.stuckFailed} tone={metrics.stuckFailed > 0 ? 'text-red-600' : 'text-foreground'} />
+        <QueueMetricCard label="Outcome Audit" value={metrics.outcomeAudit} tone={metrics.outcomeAudit > 0 ? 'text-amber-600' : 'text-foreground'} />
+        <QueueMetricCard label="Learning Review" value={metrics.learningReview} tone={metrics.learningReview > 0 ? 'text-amber-600' : 'text-foreground'} />
       </div>
 
       <Tabs defaultValue={defaultTab} className="space-y-4">
@@ -194,6 +269,7 @@ export function WorkQueueClient({ defaultTab, initialItems }: WorkQueueClientPro
                           {[
                             item.accountName,
                             item.campaignName,
+                            item.owner ? `Owner ${item.owner}` : undefined,
                             item.dueAt ? `Due ${item.dueAt.toLocaleDateString()}` : undefined,
                             item.createdAt.toLocaleString(),
                           ]
@@ -244,6 +320,44 @@ export function WorkQueueClient({ defaultTab, initialItems }: WorkQueueClientPro
                         </Link>
                       ) : null}
                     </div>
+                    {item.itemType === 'learning-review' ? (
+                      <div className="flex flex-wrap items-center gap-1.5 border-t pt-2">
+                        <Button variant="outline" size="sm" className="h-7 px-2 text-[11px]" onClick={() => updateLearningReview(item, 'review')}>
+                          Review
+                        </Button>
+                        <Button variant="outline" size="sm" className="h-7 px-2 text-[11px]" onClick={() => updateLearningReview(item, 'approve')}>
+                          Approve
+                        </Button>
+                        <Button variant="outline" size="sm" className="h-7 px-2 text-[11px]" onClick={() => updateLearningReview(item, 'reject')}>
+                          Reject
+                        </Button>
+                        <Button variant="outline" size="sm" className="h-7 px-2 text-[11px]" onClick={() => updateLearningReview(item, 'deploy')}>
+                          Deploy
+                        </Button>
+                        <Button variant="outline" size="sm" className="h-7 px-2 text-[11px]" onClick={() => updateLearningReview(item, 'rollback')}>
+                          Rollback
+                        </Button>
+                      </div>
+                    ) : null}
+                    {item.itemType === 'approval' && item.quickActions.reviewId ? (
+                      <div className="flex flex-wrap items-center gap-1.5 border-t pt-2">
+                        <Button variant="outline" size="sm" className="h-7 px-2 text-[11px]" onClick={() => updateApproval(item, 'approve')}>
+                          Approve
+                        </Button>
+                        <Button variant="outline" size="sm" className="h-7 px-2 text-[11px]" onClick={() => updateApproval(item, 'reject')}>
+                          Reject
+                        </Button>
+                      </div>
+                    ) : null}
+                    {item.accountName ? (
+                      <div className="flex flex-wrap items-center gap-1.5 border-t pt-2">
+                        {OPERATOR_OUTCOME_TAXONOMY.map((label) => (
+                          <Button key={`${item.id}-${label}`} variant="outline" size="sm" className="h-7 px-2 text-[11px]" onClick={() => logOutcome(item, label)}>
+                            {label}
+                          </Button>
+                        ))}
+                      </div>
+                    ) : null}
                   </CardContent>
                 </Card>
               ))

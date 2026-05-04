@@ -2,6 +2,7 @@ export type AnalyticsTabId =
   | 'overview'
   | 'campaigns'
   | 'email-engagement'
+  | 'infographic-performance'
   | 'pipeline'
   | 'quarterly';
 
@@ -15,6 +16,7 @@ export const analyticsWorkspaceTabs: AnalyticsTab[] = [
   { id: 'overview', label: 'Overview', purpose: 'Top-level business performance summary for the operating week.' },
   { id: 'campaigns', label: 'Campaigns', purpose: 'Campaign-level throughput and delivery/completion comparisons.' },
   { id: 'email-engagement', label: 'Email/Engagement', purpose: 'Delivery, opens, replies, and buyer-response visibility.' },
+  { id: 'infographic-performance', label: 'Infographic Performance', purpose: 'Type/stage/sequence leaderboard with promotion and drift signals.' },
   { id: 'pipeline', label: 'Pipeline', purpose: 'Stage progression and conversion indicators tied to revenue motion.' },
   { id: 'quarterly', label: 'Quarterly', purpose: 'Quarterly review route and high-level period performance snapshot.' },
 ];

@@ -145,6 +145,9 @@ export const BulkSendEmailSchema = z.object({
     to: z.string().email(),
     personaName: z.string().optional(),
     accountName: z.string().optional(),
+    readinessScore: z.number().int().min(0).max(100).optional(),
+    readinessTier: z.enum(['high', 'medium', 'low']).optional(),
+    stale: z.boolean().optional(),
   })).min(1),
   subject: z.string().min(1),
   bodyHtml: z.string().min(1),
@@ -152,19 +155,99 @@ export const BulkSendEmailSchema = z.object({
   generatedContentId: z.number().int().positive().optional(),
 });
 
+const SendStrategySchema = z.object({
+  timezone_window: z.object({
+    timezone: z.string().min(1),
+    start_hour: z.number().int().min(0).max(23),
+    end_hour: z.number().int().min(1).max(24),
+  }),
+  daily_cap: z.number().int().min(1).max(10000),
+  domain_cap: z.number().int().min(1).max(10000),
+  pacing_mode: z.enum(['safe', 'balanced', 'aggressive']),
+});
+
 export const BulkSendAsyncSchema = z.object({
   guardWarningsAcknowledged: z.boolean().default(false),
   requestedBy: z.string().optional(),
+  strategy: SendStrategySchema.optional(),
+  experiment: z.object({
+    name: z.string().min(3),
+    primaryMetric: z.enum(['reply_rate', 'meeting_rate', 'positive_reply_rate']).default('reply_rate'),
+    split: z.record(z.string(), z.number().int().min(1).max(100)),
+    variants: z.array(z.object({
+      variantKey: z.string().min(1),
+      subject: z.string().min(1),
+      opening: z.string().optional(),
+      cta: z.string().optional(),
+      split: z.number().int().min(1).max(100),
+      isControl: z.boolean().default(false),
+    })).min(2),
+  }).optional(),
   items: z.array(z.object({
     generatedContentId: z.number().int().positive(),
     accountName: z.string().min(1),
+    bundleId: z.string().max(128).optional().nullable(),
+    sequencePosition: z.number().int().min(1).max(50).optional().nullable(),
     subject: z.string().min(1),
     bodyHtml: z.string().min(1),
     recipients: z.array(z.object({
       to: z.string().email(),
       personaName: z.string().optional(),
       accountName: z.string().optional(),
+      readinessScore: z.number().int().min(0).max(100).optional(),
+      readinessTier: z.enum(['high', 'medium', 'low']).optional(),
+      stale: z.boolean().optional(),
     })).min(1),
   })).min(1),
 });
 export type BulkSendAsyncInput = z.infer<typeof BulkSendAsyncSchema>;
+
+export const OperatorOutcomeSchema = z.object({
+  accountName: z.string().min(1),
+  outcomeLabel: z.enum(['positive', 'neutral', 'negative', 'wrong-person', 'bad-timing', 'closed-won', 'closed-lost']),
+  sourceKind: z.string().min(1),
+  sourceId: z.string().min(1),
+  campaignId: z.number().int().positive().optional().nullable(),
+  generatedContentId: z.number().int().positive().optional().nullable(),
+  notes: z.string().optional().nullable(),
+  createdBy: z.string().optional().nullable(),
+});
+export type OperatorOutcomeInput = z.infer<typeof OperatorOutcomeSchema>;
+
+export const SignalRegenerationSchema = z.object({
+  sourceKind: z.string().min(1),
+  sourceId: z.string().min(1),
+  signalKind: z.string().min(1),
+  context: z.string().min(1),
+  campaignId: z.number().int().positive().optional().nullable(),
+  generatedContentId: z.number().int().positive().optional().nullable(),
+});
+export type SignalRegenerationInput = z.infer<typeof SignalRegenerationSchema>;
+
+export const MessageEvolutionStatusSchema = z.enum([
+  'proposed',
+  'in-review',
+  'approved',
+  'rejected',
+  'deployed',
+  'rolled-back',
+]);
+
+export const MessageEvolutionUpdateSchema = z.object({
+  id: z.string().min(1),
+  action: z.enum(['review', 'approve', 'reject', 'deploy', 'rollback']),
+  actor: z.string().optional().nullable(),
+});
+export type MessageEvolutionUpdateInput = z.infer<typeof MessageEvolutionUpdateSchema>;
+
+export const CampaignGenerationContractSchema = z.object({
+  campaignId: z.number().int().positive(),
+  objective: z.string().min(4),
+  personaHypothesis: z.string().min(4),
+  offer: z.string().min(4),
+  proof: z.string().min(4),
+  cta: z.string().min(4),
+  metric: z.string().min(4),
+  createdBy: z.string().optional().nullable(),
+});
+export type CampaignGenerationContractInput = z.infer<typeof CampaignGenerationContractSchema>;

@@ -1,5 +1,6 @@
 import { slugify } from '@/lib/data';
 import { computeStuckJobs, type StuckGenerationJobRow, type StuckSendJobRow } from '@/lib/admin/stuck-jobs';
+import type { OutcomeQualityIssue } from '@/lib/revops/operator-outcomes';
 
 export type WorkQueueTabId =
   | 'my-work'
@@ -7,7 +8,9 @@ export type WorkQueueTabId =
   | 'captures'
   | 'approvals'
   | 'system-jobs'
-  | 'stuck-failed';
+  | 'stuck-failed'
+  | 'outcome-audit'
+  | 'learning-review';
 
 export type WorkQueueTab = {
   id: WorkQueueTabId;
@@ -18,11 +21,14 @@ export type WorkQueueTab = {
 export type WorkQueueItemTypeId =
   | 'operator-action'
   | 'follow-up'
+  | 'content-revision-required'
   | 'capture'
   | 'approval'
   | 'generation-job'
   | 'send-job'
-  | 'stuck-job';
+  | 'stuck-job'
+  | 'outcome-audit'
+  | 'learning-review';
 
 export type WorkQueueItemType = {
   id: WorkQueueItemTypeId;
@@ -40,8 +46,10 @@ export type WorkQueueItem = {
   sourceId: string;
   accountName?: string;
   accountSlug?: string;
+  campaignId?: number;
   campaignName?: string;
   campaignSlug?: string;
+  generatedContentId?: number;
   title: string;
   detail: string;
   dueAt?: Date;
@@ -49,12 +57,14 @@ export type WorkQueueItem = {
   statusLabel: string;
   severity: QueueSeverity;
   sourceTab: WorkQueueTabId;
+  owner?: string;
   quickActions: {
     completeKey: string;
     snoozeKey: string;
     retry?: { kind: 'generation' | 'send'; id: number };
     accountHref?: string;
     campaignHref?: string;
+    reviewId?: string;
   };
 };
 
@@ -81,13 +91,19 @@ export type QueueCaptureSource = {
 };
 
 export type QueueApprovalSource = {
-  id: number;
+  id: string;
   type: string;
   account_name: string | null;
   subject: string | null;
   preview: string | null;
   read: boolean;
   created_at: Date;
+  channel?: string | null;
+  risk_score?: number | null;
+  risk_reasons?: string[];
+  status?: string | null;
+  sla_due_at?: Date | null;
+  comment?: string | null;
 };
 
 export type QueueGenerationSource = {
@@ -96,7 +112,7 @@ export type QueueGenerationSource = {
   status: string;
   retry_count: number;
   error_message: string | null;
-  campaign: { slug: string; name: string } | null;
+  campaign: { id: number; slug: string; name: string } | null;
   created_at: Date;
   updated_at: Date;
   started_at: Date | null;
@@ -107,6 +123,17 @@ export type QueueSendSource = {
   status: string;
   failed_count: number;
   error_message: string | null;
+  send_strategy?: unknown;
+  send_strategy_summary?: {
+    pacing_mode?: string;
+    daily_cap?: number;
+    domain_cap?: number;
+    timezone_window?: {
+      timezone?: string;
+      start_hour?: number;
+      end_hour?: number;
+    };
+  } | null;
   created_at: Date;
   updated_at: Date;
   started_at: Date | null;
@@ -114,7 +141,7 @@ export type QueueSendSource = {
     account_name: string;
     status: string;
     error_message: string | null;
-    campaign: { slug: string; name: string } | null;
+    campaign: { id: number; slug: string; name: string } | null;
   }>;
 };
 
@@ -124,6 +151,18 @@ export type WorkQueueSources = {
   approvals: QueueApprovalSource[];
   generationJobs: QueueGenerationSource[];
   sendJobs: QueueSendSource[];
+  outcomeAudits: OutcomeQualityIssue[];
+  messageEvolutions: Array<{
+    id: string;
+    account_name: string;
+    campaign_id: number | null;
+    generated_content_id: number;
+    status: string;
+    owner: string;
+    sla_due_at: Date | null;
+    rationale: string;
+    created_at: Date;
+  }>;
 };
 
 export const workQueueTabs: WorkQueueTab[] = [
@@ -133,6 +172,8 @@ export const workQueueTabs: WorkQueueTab[] = [
   { id: 'approvals', label: 'Approvals', purpose: 'Approval-gated items that need operator confirmation.' },
   { id: 'system-jobs', label: 'System Jobs', purpose: 'Generation and send system work, including retry workflows.' },
   { id: 'stuck-failed', label: 'Stuck/Failed', purpose: 'Escalation list for failed or stuck background jobs.' },
+  { id: 'outcome-audit', label: 'Outcome Audit', purpose: 'Missing, ambiguous, or conflicting operator outcomes requiring remediation.' },
+  { id: 'learning-review', label: 'Learning Review', purpose: 'Weekly messaging updates moving from proposal through deploy/rollback.' },
 ];
 
 export const workQueueItemTypes: WorkQueueItemType[] = [
@@ -148,6 +189,13 @@ export const workQueueItemTypes: WorkQueueItemType[] = [
     label: 'Follow-up',
     source: 'Activity (including engagement follow-up tasks)',
     displayBehavior: 'Highlights follow-up tasks and allows in-place completion/snooze.',
+    canonicalTab: 'follow-ups',
+  },
+  {
+    id: 'content-revision-required',
+    label: 'Content Revision Required',
+    source: 'Engagement signal follow-up',
+    displayBehavior: 'Routes negative/wrong-person/timing outcomes into a regeneration workflow.',
     canonicalTab: 'follow-ups',
   },
   {
@@ -185,6 +233,20 @@ export const workQueueItemTypes: WorkQueueItemType[] = [
     displayBehavior: 'Escalates stale jobs with recommended remediation path.',
     canonicalTab: 'stuck-failed',
   },
+  {
+    id: 'outcome-audit',
+    label: 'Outcome Audit',
+    source: 'OperatorOutcome quality audit',
+    displayBehavior: 'Queues missing/ambiguous/conflicting outcome records for cleanup.',
+    canonicalTab: 'outcome-audit',
+  },
+  {
+    id: 'learning-review',
+    label: 'Learning Review',
+    source: 'Message evolution registry',
+    displayBehavior: 'Tracks proposal/review/approval/deploy/rollback with owner and SLA.',
+    canonicalTab: 'learning-review',
+  },
 ];
 
 function toCampaignHref(campaignSlug: string | undefined): string | undefined {
@@ -201,23 +263,25 @@ export function buildWorkQueueItems(input: WorkQueueSources): WorkQueueItem[] {
   const activityItems: WorkQueueItem[] = input.activities.map((activity) => {
     const accountSlug = slugify(activity.account_name);
     const isFollowUp = activity.activity_type.toLowerCase().includes('follow-up');
+    const requiresContentRevision = Boolean(activity.notes?.includes('content-revision-required:'));
     return {
       id: `activity-${activity.id}`,
-      itemType: isFollowUp ? 'follow-up' : 'operator-action',
+      itemType: requiresContentRevision ? 'content-revision-required' : (isFollowUp ? 'follow-up' : 'operator-action'),
       sourceId: String(activity.id),
       accountName: activity.account_name,
       accountSlug,
-      title: isFollowUp ? 'Follow-up task' : activity.activity_type,
+      title: requiresContentRevision ? 'Content revision required' : (isFollowUp ? 'Follow-up task' : activity.activity_type),
       detail: activity.next_step ?? activity.outcome ?? 'No additional detail.',
       dueAt: activity.next_step_due ?? undefined,
       createdAt: activity.created_at,
       statusLabel: activity.next_step_due ? 'Scheduled' : 'Open',
-      severity: activitySeverity(activity),
-      sourceTab: isFollowUp ? 'follow-ups' : 'my-work',
+      severity: requiresContentRevision ? 'high' : activitySeverity(activity),
+      sourceTab: requiresContentRevision || isFollowUp ? 'follow-ups' : 'my-work',
       quickActions: {
         completeKey: `activity-${activity.id}-complete`,
         snoozeKey: `activity-${activity.id}-snooze`,
         accountHref: `/accounts/${accountSlug}`,
+        campaignHref: requiresContentRevision ? '/generated-content' : undefined,
       },
     };
   });
@@ -256,15 +320,24 @@ export function buildWorkQueueItems(input: WorkQueueSources): WorkQueueItem[] {
       accountName: approval.account_name ?? undefined,
       accountSlug,
       title: approval.subject ?? 'Approval required',
-      detail: approval.preview ?? 'Approval request requires operator review.',
+      detail: [
+        approval.preview ?? 'Approval request requires operator review.',
+        approval.channel ? `channel ${approval.channel}` : null,
+        typeof approval.risk_score === 'number' ? `risk ${approval.risk_score}` : null,
+        approval.risk_reasons && approval.risk_reasons.length > 0 ? approval.risk_reasons[0] : null,
+      ].filter(Boolean).join(' • '),
+      dueAt: approval.sla_due_at ?? undefined,
       createdAt: approval.created_at,
-      statusLabel: approval.read ? 'Viewed' : 'Needs review',
-      severity: approval.read ? 'low' : 'medium',
+      statusLabel: approval.status ?? (approval.read ? 'Viewed' : 'Needs review'),
+      severity: typeof approval.risk_score === 'number'
+        ? (approval.risk_score >= 70 ? 'high' : approval.risk_score >= 40 ? 'medium' : 'low')
+        : (approval.read ? 'low' : 'medium'),
       sourceTab: 'approvals',
       quickActions: {
         completeKey: `approval-${approval.id}-complete`,
         snoozeKey: `approval-${approval.id}-snooze`,
         accountHref: accountSlug ? `/accounts/${accountSlug}` : undefined,
+        reviewId: approval.type === 'send_approval_request' ? approval.id : undefined,
       },
     };
   });
@@ -281,6 +354,7 @@ export function buildWorkQueueItems(input: WorkQueueSources): WorkQueueItem[] {
       accountName: job.account_name,
       accountSlug,
       campaignName: job.campaign?.name,
+      campaignId: job.campaign?.id,
       campaignSlug,
       title: `Generation job #${job.id}`,
       detail: job.error_message ?? `Retry count ${job.retry_count}`,
@@ -303,6 +377,9 @@ export function buildWorkQueueItems(input: WorkQueueSources): WorkQueueItem[] {
     const accountName = failedRecipient?.account_name;
     const accountSlug = accountName ? slugify(accountName) : undefined;
     const campaignSlug = failedRecipient?.campaign?.slug;
+    const strategy = (job.send_strategy && typeof job.send_strategy === 'object')
+      ? (job.send_strategy as QueueSendSource['send_strategy_summary'])
+      : null;
     return {
       id: `send-${job.id}`,
       itemType: 'send-job',
@@ -310,6 +387,7 @@ export function buildWorkQueueItems(input: WorkQueueSources): WorkQueueItem[] {
       accountName,
       accountSlug,
       campaignName: failedRecipient?.campaign?.name,
+      campaignId: failedRecipient?.campaign?.id,
       campaignSlug,
       title: `Send job #${job.id}`,
       detail: job.error_message ?? `${job.failed_count} failed recipients`,
@@ -324,6 +402,11 @@ export function buildWorkQueueItems(input: WorkQueueSources): WorkQueueItem[] {
         accountHref: accountSlug ? `/accounts/${accountSlug}` : undefined,
         campaignHref: toCampaignHref(campaignSlug),
       },
+      ...(strategy
+        ? {
+          detail: `${job.error_message ?? `${job.failed_count} failed recipients`} • ${strategy.pacing_mode ?? 'balanced'} • cap ${strategy.daily_cap ?? '-'} / domain ${strategy.domain_cap ?? '-'}`,
+        }
+        : {}),
     };
   });
 
@@ -366,7 +449,61 @@ export function buildWorkQueueItems(input: WorkQueueSources): WorkQueueItem[] {
     },
   }));
 
-  return [...activityItems, ...captureItems, ...approvalItems, ...generationItems, ...sendItems, ...stuckItems]
+  const outcomeAuditItems: WorkQueueItem[] = input.outcomeAudits.map((issue) => ({
+    id: `outcome-audit-${issue.issueId}`,
+    itemType: 'outcome-audit',
+    sourceId: issue.issueId,
+    accountName: issue.accountName,
+    accountSlug: slugify(issue.accountName),
+    title: `Outcome audit: ${issue.issueType}`,
+    detail: issue.detail,
+    createdAt: issue.createdAt,
+    statusLabel: issue.issueType,
+    severity: issue.issueType === 'conflicting' ? 'high' : issue.issueType === 'missing' ? 'medium' : 'low',
+    sourceTab: 'outcome-audit',
+    quickActions: {
+      completeKey: `outcome-audit-${issue.issueId}-complete`,
+      snoozeKey: `outcome-audit-${issue.issueId}-snooze`,
+      accountHref: `/accounts/${slugify(issue.accountName)}`,
+      campaignHref: issue.campaignId ? '/campaigns' : undefined,
+    },
+  }));
+
+  const learningReviewItems: WorkQueueItem[] = input.messageEvolutions.map((entry) => {
+    const statusLabel = entry.status;
+    const severity: QueueSeverity =
+      statusLabel === 'proposed' || statusLabel === 'in-review'
+        ? 'high'
+        : statusLabel === 'approved'
+          ? 'medium'
+          : 'low';
+    return {
+      id: `learning-review-${entry.id}`,
+      itemType: 'learning-review',
+      sourceId: entry.id,
+      accountName: entry.account_name,
+      accountSlug: slugify(entry.account_name),
+      campaignId: entry.campaign_id ?? undefined,
+      generatedContentId: entry.generated_content_id,
+      title: `Message evolution ${statusLabel}`,
+      detail: entry.rationale,
+      dueAt: entry.sla_due_at ?? undefined,
+      createdAt: entry.created_at,
+      statusLabel,
+      severity,
+      sourceTab: 'learning-review',
+      owner: entry.owner,
+      quickActions: {
+        completeKey: `learning-review-${entry.id}-complete`,
+        snoozeKey: `learning-review-${entry.id}-snooze`,
+        accountHref: `/accounts/${slugify(entry.account_name)}`,
+        campaignHref: '/generated-content',
+        reviewId: entry.id,
+      },
+    };
+  });
+
+  return [...activityItems, ...captureItems, ...approvalItems, ...generationItems, ...sendItems, ...stuckItems, ...outcomeAuditItems, ...learningReviewItems]
     .sort((left, right) => right.createdAt.getTime() - left.createdAt.getTime());
 }
 
@@ -376,6 +513,8 @@ export function getMyWorkItems(items: WorkQueueItem[]): WorkQueueItem[] {
       item.sourceTab === 'follow-ups' ||
       item.sourceTab === 'captures' ||
       item.sourceTab === 'approvals' ||
+      item.sourceTab === 'outcome-audit' ||
+      item.sourceTab === 'learning-review' ||
       (item.sourceTab === 'system-jobs' && item.severity !== 'low')
     ))
     .sort((left, right) => severityRank(right.severity) - severityRank(left.severity) || right.createdAt.getTime() - left.createdAt.getTime());

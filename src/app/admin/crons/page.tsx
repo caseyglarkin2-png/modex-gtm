@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { prisma } from '@/lib/prisma';
 import { DRIP_SEQUENCE_ENABLED, HUBSPOT_LOGGING_ENABLED, HUBSPOT_SYNC_ENABLED, INBOX_POLLING_ENABLED } from '@/lib/feature-flags';
 import { KNOWN_CRONS, type CronStateValue } from '@/lib/cron-monitor';
-import { runReenrichContactsNowAction } from './actions';
+import { runReenrichContactsNowAction, runSyncHubspotDryRunNowAction } from './actions';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Cron Health' };
@@ -81,6 +81,12 @@ export default async function CronHealthPage() {
     ...cron,
     state: parseCronValue(configMap.get(`cron:${cron.name}`)),
   }));
+  const runbookSyncAudit = parseJsonValue<{ at: string; signature: string; mode: string }>(
+    configMap.get('runbook:sync-hubspot:last'),
+  );
+  const runbookReenrichAudit = parseJsonValue<{ at: string; signature: string; mode: string }>(
+    configMap.get('runbook:reenrich-contacts:last'),
+  );
 
   const totalGenJobs = generationJobs.length;
   const completedGenJobs = generationJobs.filter((job) => job.status === 'completed').length;
@@ -209,6 +215,32 @@ export default async function CronHealthPage() {
         </Card>
       )}
 
+      <Card>
+        <CardHeader className="pb-2">
+          <CardTitle className="text-sm">Runbook Actions</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-3 text-sm">
+          <div className="flex flex-wrap items-center gap-2">
+            <form action={runSyncHubspotDryRunNowAction}>
+              <Button size="sm" variant="outline" type="submit">Run HubSpot Dry Run</Button>
+            </form>
+            <form action={runReenrichContactsNowAction}>
+              <Button size="sm" variant="outline" type="submit">Run Re-Enrich Now</Button>
+            </form>
+          </div>
+          <div className="grid gap-2 md:grid-cols-2 text-xs text-muted-foreground">
+            <p>
+              HubSpot runbook: {runbookSyncAudit?.at ? new Date(runbookSyncAudit.at).toLocaleString() : 'Never'}
+              {runbookSyncAudit?.mode ? ` (${runbookSyncAudit.mode})` : ''}
+            </p>
+            <p>
+              Re-enrich runbook: {runbookReenrichAudit?.at ? new Date(runbookReenrichAudit.at).toLocaleString() : 'Never'}
+              {runbookReenrichAudit?.mode ? ` (${runbookReenrichAudit.mode})` : ''}
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+
       <div className="grid gap-4 xl:grid-cols-2">
         {rows.map((row) => (
           <Card key={row.name}>
@@ -254,11 +286,13 @@ export default async function CronHealthPage() {
                 <pre className="overflow-auto rounded-lg bg-muted/40 p-3 text-xs">{JSON.stringify(row.state.lastStats, null, 2)}</pre>
               ) : null}
 
-              {row.name === 'reenrich-contacts' ? (
-                <form action={runReenrichContactsNowAction} className="flex justify-end">
-                  <Button size="sm" variant="outline" type="submit">Run Now</Button>
-                </form>
-              ) : null}
+              <div className="flex justify-end">
+                {row.name === 'reenrich-contacts' ? (
+                  <form action={runReenrichContactsNowAction} className="flex justify-end">
+                    <Button size="sm" variant="outline" type="submit">Run Now</Button>
+                  </form>
+                ) : null}
+              </div>
             </CardContent>
           </Card>
         ))}

@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import { markCronFailure, markCronSkipped, markCronStarted, markCronSuccess } from '@/lib/cron-monitor';
 import { isApolloConfigured } from '@/lib/enrichment/apollo-client';
-import { getEnrichmentThresholds } from '@/lib/enrichment/config';
+import { getEnrichmentBatchPolicy, getEnrichmentThresholds } from '@/lib/enrichment/config';
 import { getContactById } from '@/lib/hubspot/contacts';
 import { enrichPersonaFromHubSpotContact } from '@/lib/enrichment/apollo-enrichment';
 
@@ -46,6 +46,10 @@ export async function runReenrichContactsCron(): Promise<ReenrichRunResult> {
 
   try {
     const thresholds = getEnrichmentThresholds();
+    const policy = getEnrichmentBatchPolicy();
+    const cursorKey = 'reenrich_contacts_cursor';
+    const cursorState = await prisma.systemConfig.findUnique({ where: { key: cursorKey } });
+    const cursor = Number(cursorState?.value || 0);
     const personas = await prisma.persona.findMany({
       where: {
         email: { not: null },
@@ -55,8 +59,9 @@ export async function runReenrichContactsCron(): Promise<ReenrichRunResult> {
         enrichment: true,
         account: true,
       },
-      take: 100,
-      orderBy: { updated_at: 'desc' },
+      take: policy.batchSize,
+      skip: Number.isFinite(cursor) && cursor >= 0 ? cursor : 0,
+      orderBy: { id: 'asc' },
     });
 
     const stale = personas.filter((persona) => {
@@ -75,7 +80,9 @@ export async function runReenrichContactsCron(): Promise<ReenrichRunResult> {
       errors: 0,
     };
 
-    for (const persona of stale.slice(0, 40)) {
+    const toProcess = stale.slice(0, policy.batchSize);
+    const started = Date.now();
+    for (const persona of toProcess) {
       try {
         const contact = await getContactById(persona.hubspot_contact_id || '');
         if (!contact) {
@@ -91,12 +98,54 @@ export async function runReenrichContactsCron(): Promise<ReenrichRunResult> {
       }
     }
 
+    const durationMs = Date.now() - started;
+    const processed = toProcess.length;
+    const throughputPerHour = durationMs > 0 ? Math.round((processed * 3_600_000) / durationMs) : 0;
+    const noMatchRate = processed > 0 ? stats.noMatch / processed : 0;
+    const matchRate = processed > 0 ? stats.matched / processed : 0;
+
+    await prisma.systemConfig.upsert({
+      where: { key: cursorKey },
+      update: { value: String((Number.isFinite(cursor) ? cursor : 0) + personas.length) },
+      create: { key: cursorKey, value: String(personas.length) },
+    });
+
+    await prisma.systemConfig.upsert({
+      where: { key: 'coverage_recent_enrichment_delta' },
+      update: { value: JSON.stringify({ at: new Date().toISOString(), processed, matched: stats.matched, noMatch: stats.noMatch, errors: stats.errors, throughputPerHour, matchRate, noMatchRate }) },
+      create: { key: 'coverage_recent_enrichment_delta', value: JSON.stringify({ at: new Date().toISOString(), processed, matched: stats.matched, noMatch: stats.noMatch, errors: stats.errors, throughputPerHour, matchRate, noMatchRate }) },
+    });
+
+    // Cost/quota telemetry placeholders (actual billing APIs can replace these in production).
+    await prisma.systemConfig.upsert({
+      where: { key: 'coverage_connector_cost_quota' },
+      update: {
+        value: JSON.stringify({
+          at: new Date().toISOString(),
+          apollo_credits_used: processed,
+          hubspot_calls_used: processed,
+          cost_per_enriched_contact: processed > 0 ? 1 : 0,
+          p95_sync_duration: durationMs,
+        }),
+      },
+      create: {
+        key: 'coverage_connector_cost_quota',
+        value: JSON.stringify({
+          at: new Date().toISOString(),
+          apollo_credits_used: processed,
+          hubspot_calls_used: processed,
+          cost_per_enriched_contact: processed > 0 ? 1 : 0,
+          p95_sync_duration: durationMs,
+        }),
+      },
+    });
+
     await markCronSuccess(REENRICH_CRON_NAME, {
       path: REENRICH_CRON_PATH,
       schedule: REENRICH_CRON_SCHEDULE,
       durationMs: Date.now() - startedAt,
       message: `Re-enriched ${stats.matched} matched and ${stats.noMatch} no-match contacts`,
-      stats,
+      stats: { ...stats, batchSize: policy.batchSize, throughputPerHour, matchRate, noMatchRate },
     }).catch(() => undefined);
 
     return { status: 'ok', stats };

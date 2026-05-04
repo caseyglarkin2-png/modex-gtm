@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { getEnrichmentThresholds, isWritebackApplyEnabled } from '@/lib/enrichment/config';
+import { getEnrichmentBatchPolicy, getEnrichmentThresholds, isWritebackApplyEnabled } from '@/lib/enrichment/config';
 
 const originalEnv = { ...process.env };
 
@@ -40,5 +40,29 @@ describe('enrichment thresholds config', () => {
     expect(isWritebackApplyEnabled()).toBe(false);
     process.env.ENRICH_WRITEBACK_APPLY_ENABLED = 'true';
     expect(isWritebackApplyEnabled()).toBe(true);
+  });
+
+  it('returns enrichment batch policy defaults and env overrides', () => {
+    delete process.env.ENRICH_BATCH_SIZE;
+    delete process.env.ENRICH_MAX_PARALLEL;
+    delete process.env.ENRICH_RETRY_BACKOFF_MS;
+    delete process.env.ENRICH_DAILY_BUDGET;
+    expect(getEnrichmentBatchPolicy()).toEqual({
+      batchSize: 40,
+      maxParallel: 2,
+      retryBackoffMs: 60_000,
+      dailyBudget: 5000,
+    });
+
+    process.env.ENRICH_BATCH_SIZE = '25';
+    process.env.ENRICH_MAX_PARALLEL = '4';
+    process.env.ENRICH_RETRY_BACKOFF_MS = '120000';
+    process.env.ENRICH_DAILY_BUDGET = '8000';
+    expect(getEnrichmentBatchPolicy()).toEqual({
+      batchSize: 25,
+      maxParallel: 4,
+      retryBackoffMs: 120000,
+      dailyBudget: 8000,
+    });
   });
 });

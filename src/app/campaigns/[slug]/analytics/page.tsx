@@ -9,6 +9,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ensureDefaultCampaign } from '@/lib/campaigns';
 import { derivePipelineStage, PIPELINE_STAGE_LABELS, type PipelineStage } from '@/lib/pipeline';
 import { prisma } from '@/lib/prisma';
+import {
+  getContentAttributionRows,
+  summarizeContentAttribution,
+  toConfidenceBadgeTone,
+} from '@/lib/analytics/content-attribution';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Campaign Analytics' };
@@ -89,6 +94,8 @@ export default async function CampaignAnalyticsPage({ params }: { params: Promis
     proposal: 0,
     closed: 0,
   });
+  const campaignAttributionRows = await getContentAttributionRows(prisma, campaign.id);
+  const campaignAttributionSummary = summarizeContentAttribution(campaignAttributionRows, 'variant').slice(0, 4);
 
   return (
     <div className="space-y-6">
@@ -160,6 +167,35 @@ export default async function CampaignAnalyticsPage({ params }: { params: Promis
           </CardContent>
         </Card>
       </div>
+
+      <Card>
+        <CardHeader className="pb-2">
+          <CardTitle className="text-sm">Campaign Content Attribution</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-2">
+          {campaignAttributionSummary.length === 0 ? (
+            <p className="text-sm text-muted-foreground">No attributed content sends have been captured for this campaign.</p>
+          ) : (
+            campaignAttributionSummary.map((summary) => (
+              <div key={summary.bucket} className="rounded-lg border p-3 text-sm">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <p className="font-medium">Variant {summary.bucket}</p>
+                  <Badge variant={toConfidenceBadgeTone(summary.confidence)}>
+                    {summary.confidence === 'low' ? 'Low sample' : summary.confidence === 'medium' ? 'Medium sample' : 'High confidence'}
+                  </Badge>
+                </div>
+                <div className="mt-2 grid gap-2 text-xs text-muted-foreground sm:grid-cols-2 xl:grid-cols-5">
+                  <p>Sends: <span className="font-semibold text-foreground">{summary.sends}</span></p>
+                  <p>Replies: <span className="font-semibold text-foreground">{summary.replies}</span></p>
+                  <p>Meetings: <span className="font-semibold text-foreground">{summary.meetings}</span></p>
+                  <p>Reply Rate: <span className="font-semibold text-foreground">{summary.replyRatePct.toFixed(1)}%</span></p>
+                  <p>Deal Value: <span className="font-semibold text-foreground">{formatCurrency(summary.estimatedDealValue)}</span></p>
+                </div>
+              </div>
+            ))
+          )}
+        </CardContent>
+      </Card>
 
       <Card>
         <CardHeader className="pb-2">

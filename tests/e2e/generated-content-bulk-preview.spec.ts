@@ -27,6 +27,11 @@ test('generated content bulk preview shows selected items and guard flow', async
 
   await expect(page.getByRole('heading', { name: 'Bulk Preview' })).toBeVisible();
   await expect(page.locator('body')).toContainText(/Review selected generated content/i);
+  await expect(page.locator('body')).toContainText('Variant Experiment Builder');
+
+  const enableExperiment = page.getByRole('checkbox', { name: /Enable experiment/i });
+  await enableExperiment.check();
+  await expect(page.locator('body')).toContainText('Deterministic Allocation Preview');
 
   const acknowledge = page.getByRole('checkbox', { name: /I acknowledge this warning/i });
   if ((await acknowledge.count()) > 0) {
@@ -36,6 +41,10 @@ test('generated content bulk preview shows selected items and guard flow', async
     for (let index = 0; index < warningCount; index += 1) {
       await acknowledge.nth(index).check();
     }
-    await expect(queueButton).toBeEnabled();
+    if (await page.getByText(/Checklist Incomplete|Checklist Blocks/i).count()) {
+      await expect(queueButton).toBeDisabled();
+    } else {
+      await expect(queueButton).toBeEnabled();
+    }
   }
 });

@@ -17,6 +17,10 @@ import {
 } from '@/lib/campaign-workspace';
 import { CampaignControls } from './campaign-controls';
 import { CampaignSettingsForm } from './campaign-settings-form';
+import { CampaignGenerationContractForm } from './campaign-generation-contract-form';
+import { isGenerationContractPolicyEnabled } from '@/lib/revops/campaign-generation-contract';
+import { parseInfographicMetadata, type JourneyStageIntent } from '@/lib/revops/infographic-journey';
+import { InfographicJourneyControls } from '@/components/revops/infographic-journey-controls';
 
 export const dynamic = 'force-dynamic';
 
@@ -50,6 +54,7 @@ export default async function CampaignDetailPage({ params }: { params: Promise<{
           generated_content: true,
         },
       },
+      generation_contract: true,
     },
   });
 
@@ -119,10 +124,14 @@ export default async function CampaignDetailPage({ params }: { params: Promise<{
   const campaignSettings = campaign.key_dates && typeof campaign.key_dates === 'object' && !Array.isArray(campaign.key_dates)
     ? (campaign.key_dates as Record<string, unknown>)
     : {};
+  const contractPolicyEnabled = isGenerationContractPolicyEnabled(campaign.key_dates);
   const cadence = Array.isArray(campaignSettings.suggestedIntervals)
     ? (campaignSettings.suggestedIntervals as Array<number | string>).join(', ')
     : 'Not configured';
   const automationPaused = Boolean(campaignSettings.automationPaused) || campaign.status === 'paused';
+  const journeyActivities = campaign.activities.filter((activity) => activity.activity_type === 'Infographic Journey').slice(0, 10);
+  const latestGenerated = campaign.generated_content[0] ? parseInfographicMetadata(campaign.generated_content[0].version_metadata) : null;
+  const initialJourneyStage = (latestGenerated?.stageIntent ?? 'cold') as JourneyStageIntent;
 
   return (
     <div className="space-y-6">
@@ -270,6 +279,20 @@ export default async function CampaignDetailPage({ params }: { params: Promise<{
         </TabsContent>
 
         <TabsContent value="content" className="space-y-4">
+          <CampaignGenerationContractForm
+            campaignId={campaign.id}
+            campaignSlug={campaign.slug}
+            accountNames={targetAccountNames}
+            policyEnabled={contractPolicyEnabled}
+            initial={{
+              objective: campaign.generation_contract?.objective ?? '',
+              personaHypothesis: campaign.generation_contract?.persona_hypothesis ?? '',
+              offer: campaign.generation_contract?.offer ?? '',
+              proof: campaign.generation_contract?.proof ?? '',
+              cta: campaign.generation_contract?.cta ?? '',
+              metric: campaign.generation_contract?.metric ?? '',
+            }}
+          />
           <div className="flex justify-end">
             <Link href={`/generated-content?campaign=${encodeURIComponent(campaign.slug)}`}>
               <Button size="sm" className="gap-1.5">Open Filtered Content Studio <ArrowRight className="h-3.5 w-3.5" /></Button>
@@ -297,6 +320,24 @@ export default async function CampaignDetailPage({ params }: { params: Promise<{
         </TabsContent>
 
         <TabsContent value="engagement" className="space-y-4">
+          <InfographicJourneyControls
+            accountName={targetAccountNames[0] ?? campaign.name}
+            campaignId={campaign.id}
+            initialStage={initialJourneyStage}
+          />
+          {journeyActivities.length > 0 ? (
+            <Card>
+              <CardHeader className="pb-2"><CardTitle className="text-sm">Journey Timeline</CardTitle></CardHeader>
+              <CardContent className="space-y-2">
+                {journeyActivities.map((activity) => (
+                  <div key={activity.id} className="rounded-md border p-2 text-xs">
+                    <p className="font-medium">{activity.account_name}: {activity.outcome ?? 'Journey transition'}</p>
+                    <p className="text-muted-foreground">{activity.notes ?? 'No note'}</p>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          ) : null}
           {engagementItems.length === 0 ? (
             <Card><CardContent className="p-4 text-sm text-muted-foreground">No campaign engagement yet.</CardContent></Card>
           ) : (

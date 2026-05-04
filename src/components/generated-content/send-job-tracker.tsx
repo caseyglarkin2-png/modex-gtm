@@ -11,6 +11,9 @@ type SendJobStatus = 'pending' | 'processing' | 'completed' | 'failed' | 'partia
 type SendJobRecipient = {
   id: number;
   generated_content_id: number;
+  experiment_id: string | null;
+  variant_id: string | null;
+  variant_key: string | null;
   account_name: string;
   persona_name: string | null;
   to_email: string;
@@ -24,6 +27,19 @@ type SendJobResponse = {
   job: {
     id: number;
     status: SendJobStatus;
+    experiment: {
+      id: string;
+      name: string;
+      primary_metric: string;
+      status: string;
+      variants: Array<{
+        id: string;
+        variant_key: string;
+        subject: string;
+        split_percent: number;
+        is_control: boolean;
+      }>;
+    } | null;
     total_recipients: number;
     sent_count: number;
     failed_count: number;
@@ -148,6 +164,17 @@ export function SendJobTracker({ jobId, pollMs = 3000 }: SendJobTrackerProps) {
           <div className="rounded-md border p-2">Skipped: {job.skipped_count}</div>
         </div>
 
+        {job.experiment && (
+          <div className="rounded-md border bg-muted/20 p-2 text-xs">
+            <p className="font-medium">
+              Experiment: {job.experiment.name} ({job.experiment.primary_metric})
+            </p>
+            <p className="text-muted-foreground">
+              Variants: {job.experiment.variants.map((variant) => `${variant.variant_key}${variant.is_control ? ' [control]' : ''}`).join(', ')}
+            </p>
+          </div>
+        )}
+
         {retryableCount > 0 && (
           <Button variant="outline" size="sm" onClick={retryFailed} disabled={retrying}>
             {retrying ? 'Retrying…' : `Retry Failed Recipients (${retryableCount})`}
@@ -160,6 +187,7 @@ export function SendJobTracker({ jobId, pollMs = 3000 }: SendJobTrackerProps) {
               <p className="font-medium">{recipient.account_name} • {recipient.to_email}</p>
               <p className="text-muted-foreground">
                 Status: <span className="capitalize">{recipient.status}</span>
+                {recipient.variant_key ? ` • Variant ${recipient.variant_key}` : ''}
                 {recipient.hubspot_engagement_id ? ` • HubSpot ${recipient.hubspot_engagement_id}` : ''}
               </p>
               {recipient.error_message && <p className="text-red-600">{recipient.error_message}</p>}

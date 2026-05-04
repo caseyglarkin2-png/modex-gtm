@@ -41,6 +41,13 @@ export function CommandSearch() {
 
   if (!open) return null;
 
+  const pageRouteGroups = commandRoutes.reduce<Record<string, typeof commandRoutes>>((groups, route) => {
+    const key = route.canonicalOwner;
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(route);
+    return groups;
+  }, {});
+
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-[20vh]">
       <div className="fixed inset-0 bg-black/50" onClick={() => setOpen(false)} />
@@ -57,22 +64,25 @@ export function CommandSearch() {
             No results found.
           </Command.Empty>
 
-          <Command.Group heading="Pages" className="px-2 py-1.5 text-xs font-medium text-[var(--muted-foreground)]">
-            {commandRoutes.map((p) => (
-              <Command.Item
-                key={p.href}
-                value={`${p.label} ${p.keywords.join(' ')} ${p.canonicalOwner}`}
-                onSelect={() => go(p.href)}
-                className="flex cursor-pointer items-center gap-3 rounded-md px-3 py-2 text-sm aria-selected:bg-[var(--accent)]"
-              >
-                <p.icon className="h-4 w-4 text-[var(--muted-foreground)]" />
-                <span>{p.label}</span>
-                {p.canonicalOwner !== p.label && (
-                  <span className="ml-auto text-xs text-[var(--muted-foreground)]">{p.canonicalOwner}</span>
-                )}
-              </Command.Item>
-            ))}
-          </Command.Group>
+          {Object.entries(pageRouteGroups).map(([owner, routes]) => (
+            <Command.Group
+              key={owner}
+              heading={owner}
+              className="px-2 py-1.5 text-xs font-medium text-[var(--muted-foreground)]"
+            >
+              {routes.map((p) => (
+                <Command.Item
+                  key={p.href}
+                  value={`${p.label} ${p.keywords.join(' ')} ${p.canonicalOwner}`}
+                  onSelect={() => go(p.href)}
+                  className="flex cursor-pointer items-center gap-3 rounded-md px-3 py-2 text-sm aria-selected:bg-[var(--accent)]"
+                >
+                  <p.icon className="h-4 w-4 text-[var(--muted-foreground)]" />
+                  <span>{p.label}</span>
+                </Command.Item>
+              ))}
+            </Command.Group>
+          ))}
 
           <Command.Group heading="Accounts" className="px-2 py-1.5 text-xs font-medium text-[var(--muted-foreground)]">
             {accountsData.map((a) => (

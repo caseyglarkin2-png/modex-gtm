@@ -20,11 +20,36 @@ const guardedItems: BulkPreviewItem[] = [
     generatedContentId: 42,
     version: 1,
     providerUsed: 'ai_gateway',
+    campaignType: 'trade_show',
     latestVersion: 2,
     pendingJobs: 1,
     processingJobs: 0,
     content: '<p>Generated body</p>',
-    recipients: [{ id: 1, name: 'Ops Lead', email: 'ops@acme.com' }],
+    checklist: {
+      complete: true,
+      requiredComplete: 5,
+      requiredTotal: 5,
+      missingRequired: [],
+    },
+    checklistCompletedItemIds: [
+      'clear_value_prop',
+      'account_specific_proof',
+      'cta_specific',
+      'compliance_checked',
+      'deliverability_checked',
+    ],
+    recipients: [{
+      id: 1,
+      name: 'Ops Lead',
+      email: 'ops@acme.com',
+      readiness: {
+        score: 90,
+        tier: 'high',
+        stale: false,
+        freshness_days: 6,
+        reasons: [],
+      },
+    }],
   },
 ];
 
@@ -66,5 +91,26 @@ describe('BulkPreviewDialog', () => {
 
     expect(toastSuccess).toHaveBeenCalledWith('Send job #91 queued');
     expect(onJobCreated).toHaveBeenCalledWith(91);
+  });
+
+  it('sends experiment payload when experiment builder is enabled', async () => {
+    render(<BulkPreviewDialog items={guardedItems} />);
+
+    fireEvent.click(screen.getByRole('button', { name: /Bulk Preview & Queue Send/i }));
+    fireEvent.click(await screen.findByRole('checkbox', { name: /I acknowledge this warning/i }));
+    fireEvent.click(screen.getByRole('checkbox', { name: /Enable experiment/i }));
+
+    const queueButton = screen.getByRole('button', { name: 'Queue Async Send Job' });
+    expect(queueButton).toBeEnabled();
+    fireEvent.click(queueButton);
+
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalled();
+    });
+    const call = vi.mocked(fetch).mock.calls.at(-1);
+    const body = JSON.parse(String(call?.[1] && (call[1] as { body?: string }).body));
+    expect(body.experiment).toBeDefined();
+    expect(body.experiment.variants).toHaveLength(2);
+    expect(body.experiment.primaryMetric).toBe('reply_rate');
   });
 });

@@ -8,8 +8,10 @@ import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { OnePageSendDialog, type Recipient } from '@/components/email/one-pager-send-dialog';
 import { GeneratedContentPreviewDialog } from '@/components/generated-content/generated-content-preview-dialog';
+import { ContentDiffDialog } from '@/components/generated-content/content-diff-dialog';
 import { toast } from 'sonner';
 import { Send, Upload } from 'lucide-react';
+import type { ContentQualityResult } from '@/lib/content-quality';
 
 export interface QueueGeneratedVersion {
   id: number;
@@ -21,6 +23,23 @@ export interface QueueGeneratedVersion {
   created_at: string;
   campaign_id?: number;
   campaign_name?: string;
+  campaign_type?: string;
+  quality: ContentQualityResult;
+  checklist?: {
+    complete: boolean;
+    requiredComplete: number;
+    requiredTotal: number;
+    missingRequired: string[];
+  };
+  checklist_completed_item_ids?: string[];
+  infographic_type?: string;
+  stage_intent?: string;
+  bundle_id?: string | null;
+  sequence_position?: number | null;
+  contract?: {
+    complete: boolean;
+    qualityScore: number;
+  };
 }
 
 export interface QueueGeneratedAccountCard {
@@ -36,6 +55,26 @@ export interface QueueGeneratedAccountCard {
 interface GeneratedContentGridProps {
   cards: QueueGeneratedAccountCard[];
   recipientsByAccount: Record<string, Recipient[]>;
+}
+
+function qualityBadgeTone(score: number) {
+  if (score >= 80) return 'bg-emerald-100 text-emerald-800';
+  if (score >= 60) return 'bg-amber-100 text-amber-800';
+  return 'bg-red-100 text-red-800';
+}
+
+function buildTrendPoints(values: number[]): string {
+  if (values.length === 0) return '';
+  const width = 96;
+  const height = 28;
+  const step = values.length === 1 ? 0 : width / (values.length - 1);
+  return values
+    .map((value, index) => {
+      const x = index * step;
+      const y = height - (Math.max(0, Math.min(100, value)) / 100) * height;
+      return `${x},${y}`;
+    })
+    .join(' ');
 }
 
 export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedContentGridProps) {
@@ -68,6 +107,20 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
     }
   }
 
+  async function publishBundle(bundleId: string) {
+    setPublishingId(-1);
+    try {
+      const response = await fetch(`/api/revops/infographic-bundles/${encodeURIComponent(bundleId)}/publish`, { method: 'PATCH' });
+      if (!response.ok) throw new Error('Bundle publish failed');
+      toast.success('Published infographic bundle');
+      window.location.reload();
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Bundle publish failed');
+    } finally {
+      setPublishingId(null);
+    }
+  }
+
   if (cards.length === 0) {
     return (
       <Card>
@@ -86,6 +139,8 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
 
         const key = `${card.account_name}:${selected.id}`;
         const recipients = recipientsByAccount[card.account_name] ?? [];
+        const previousVersion = card.versions.find((version) => version.version === selected.version - 1)
+          ?? card.versions.find((version) => version.id !== selected.id);
 
         return (
           <Card key={card.account_name}>
@@ -99,6 +154,14 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
                 <div className="flex flex-wrap gap-1">
                   {card.processing_jobs > 0 && <Badge className="bg-blue-100 text-blue-800">Processing {card.processing_jobs}</Badge>}
                   {card.pending_jobs > 0 && <Badge variant="secondary">Pending {card.pending_jobs}</Badge>}
+                  <Badge className={qualityBadgeTone(selected.quality.score)}>
+                    Quality {selected.quality.score}
+                  </Badge>
+                  {selected.contract ? (
+                    <Badge variant={selected.contract.complete ? 'default' : 'outline'}>
+                      Contract {selected.contract.complete ? `Ready ${selected.contract.qualityScore}` : `Incomplete ${selected.contract.qualityScore}`}
+                    </Badge>
+                  ) : null}
                 </div>
               </div>
             </CardHeader>
@@ -122,13 +185,60 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
                 </Select>
               </div>
 
-              <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
+                <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
                 <div className="rounded-md border p-2">Provider: {selected.provider_used ?? 'unknown'}</div>
                 <div className="rounded-md border p-2">Recipients: {recipients.length}</div>
                 <div className="rounded-md border p-2">Created: {new Date(selected.created_at).toLocaleDateString()}</div>
                 <div className="rounded-md border p-2">External sends: {selected.external_send_count}</div>
-                <div className="col-span-2 rounded-md border p-2">
-                  Campaigns: {card.campaign_names.length > 0 ? card.campaign_names.join(', ') : 'None'}
+                <div className="rounded-md border p-2">Type: {selected.infographic_type?.replaceAll('_', ' ') ?? 'cold_hook'}</div>
+                <div className="rounded-md border p-2">Stage: {selected.stage_intent ?? 'cold'}</div>
+                {selected.bundle_id ? (
+                  <div className="rounded-md border p-2">Bundle: {selected.bundle_id}#{selected.sequence_position ?? '-'}</div>
+                ) : null}
+                  <div className="col-span-2 rounded-md border p-2">
+                    Campaigns: {card.campaign_names.length > 0 ? card.campaign_names.join(', ') : 'None'}
+                  </div>
+                  <div className="col-span-2 rounded-md border p-2">
+                    Checklist: {selected.checklist?.requiredComplete ?? 0}/{selected.checklist?.requiredTotal ?? 0} required
+                    {selected.checklist?.complete ? ' complete' : ' incomplete'}
+                  </div>
+                </div>
+
+              <details className="rounded-md border p-2 text-xs">
+                <summary className="cursor-pointer font-medium text-foreground">
+                  Quality Breakdown
+                </summary>
+                <div className="mt-2 grid grid-cols-2 gap-2 text-muted-foreground">
+                  <div className="rounded-md border p-2">Clarity: {selected.quality.scores.clarity}</div>
+                  <div className="rounded-md border p-2">Personalization: {selected.quality.scores.personalization}</div>
+                  <div className="rounded-md border p-2">CTA Strength: {selected.quality.scores.cta_strength}</div>
+                  <div className="rounded-md border p-2">Compliance Risk: {selected.quality.scores.compliance_risk}</div>
+                  <div className="rounded-md border p-2">Deliverability Risk: {selected.quality.scores.deliverability_risk}</div>
+                  <div className="rounded-md border p-2">Flags: {selected.quality.flags.length > 0 ? selected.quality.flags.join(', ') : 'none'}</div>
+                </div>
+                {selected.quality.fixes.length > 0 ? (
+                  <ul className="mt-2 list-disc space-y-1 pl-4 text-muted-foreground">
+                    {selected.quality.fixes.map((fix) => (
+                      <li key={fix}>{fix}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </details>
+
+              <div className="rounded-md border p-2 text-xs">
+                <p className="font-medium text-foreground">Quality Trend (v1..v{card.latest_version})</p>
+                <div className="mt-1 flex items-center justify-between gap-2">
+                  <svg viewBox="0 0 96 28" className="h-7 w-full max-w-[220px]" role="img" aria-label="Quality trend sparkline">
+                    <polyline
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      points={buildTrendPoints([...card.versions].sort((a, b) => a.version - b.version).map((v) => v.quality.score))}
+                    />
+                  </svg>
+                  <span className="text-muted-foreground">
+                    Latest {selected.quality.score}
+                  </span>
                 </div>
               </div>
 
@@ -138,7 +248,19 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
                   version={selected.version}
                   content={selected.content}
                   providerUsed={selected.provider_used}
+                  generatedContentId={selected.id}
+                  campaignType={selected.campaign_type}
+                  checklistCompletedItemIds={selected.checklist_completed_item_ids}
                 />
+                {previousVersion ? (
+                  <ContentDiffDialog
+                    accountName={card.account_name}
+                    oldVersion={previousVersion.version}
+                    oldContent={previousVersion.content}
+                    newVersion={selected.version}
+                    newContent={selected.content}
+                  />
+                ) : null}
 
                 {!selected.is_published && (
                   <Button
@@ -151,16 +273,31 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
                     {publishingId === selected.id ? 'Publishing...' : 'Publish'}
                   </Button>
                 )}
+                {selected.bundle_id ? (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => publishBundle(selected.bundle_id!)}
+                    disabled={publishingId === -1}
+                  >
+                    <Upload className="mr-1.5 h-3.5 w-3.5" />
+                    {publishingId === -1 ? 'Publishing Bundle...' : 'Publish Bundle'}
+                  </Button>
+                ) : null}
 
                 <OnePageSendDialog
                   accountName={card.account_name}
                   generatedContentId={selected.id}
-                  generatedContent={{
-                    account_name: card.account_name,
-                    content: selected.content,
-                    version: selected.version,
-                    provider_used: selected.provider_used ?? undefined,
-                  }}
+                    generatedContent={{
+                      account_name: card.account_name,
+                      content: selected.content,
+                      version: selected.version,
+                      provider_used: selected.provider_used ?? undefined,
+                      quality: selected.quality,
+                      campaign_type: selected.campaign_type,
+                      checklist: selected.checklist,
+                      checklist_completed_item_ids: selected.checklist_completed_item_ids,
+                    }}
                   queueState={{
                     latestVersion: card.latest_version,
                     pendingJobs: card.pending_jobs,

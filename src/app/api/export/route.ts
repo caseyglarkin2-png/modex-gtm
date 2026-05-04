@@ -13,6 +13,8 @@ import {
   renderMicrositeProposalHtml,
   resolveMicrositeProposalBrief,
 } from '@/lib/microsites/proposal';
+import { deriveAttributionView, getContentAttributionRows, summarizeContentAttribution } from '@/lib/analytics/content-attribution';
+import { prisma } from '@/lib/prisma';
 
 function toCsv(headers: string[], rows: string[][]): string {
   const escape = (val: string) => `"${val.replace(/"/g, '""')}"`;
@@ -133,8 +135,30 @@ export async function GET(req: NextRequest) {
       filename = 'modex-microsite-engagement.csv';
       break;
     }
+    case 'content-attribution': {
+      const view = deriveAttributionView(searchParams.get('view'));
+      const rows = await getContentAttributionRows(prisma);
+      const summaries = summarizeContentAttribution(rows, view);
+      csv = toCsv(
+        ['View', 'Bucket', 'Sends', 'Replies', 'Meetings', 'Pipeline Movements', 'Reply Rate %', 'Meeting Rate %', 'Estimated Deal Value', 'Confidence'],
+        summaries.map((summary) => [
+          summary.view,
+          summary.bucket,
+          String(summary.sends),
+          String(summary.replies),
+          String(summary.meetings),
+          String(summary.pipelineMovements),
+          summary.replyRatePct.toFixed(2),
+          summary.meetingRatePct.toFixed(2),
+          String(Math.round(summary.estimatedDealValue)),
+          summary.confidence,
+        ]),
+      );
+      filename = `modex-content-attribution-${view}.csv`;
+      break;
+    }
     default:
-      return NextResponse.json({ error: 'Invalid type. Use: meetings, pipeline, activities, waves, microsites, proposal' }, { status: 400 });
+      return NextResponse.json({ error: 'Invalid type. Use: meetings, pipeline, activities, waves, microsites, proposal, content-attribution' }, { status: 400 });
   }
 
   return new NextResponse(csv, {
