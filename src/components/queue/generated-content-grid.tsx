@@ -6,11 +6,17 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { OnePageSendDialog, type Recipient } from '@/components/email/one-pager-send-dialog';
 import { GeneratedContentPreviewDialog } from '@/components/generated-content/generated-content-preview-dialog';
 import { ContentDiffDialog } from '@/components/generated-content/content-diff-dialog';
 import { toast } from 'sonner';
-import { Send, Upload } from 'lucide-react';
+import { MoreHorizontal, Send, Upload } from 'lucide-react';
 import type { ContentQualityResult } from '@/lib/content-quality';
 
 export interface QueueGeneratedVersion {
@@ -83,6 +89,8 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
   );
   const [publishingId, setPublishingId] = useState<number | null>(null);
   const [sendStatusByKey, setSendStatusByKey] = useState<Record<string, string>>({});
+  const [previewOpenForId, setPreviewOpenForId] = useState<number | null>(null);
+  const [diffOpenForId, setDiffOpenForId] = useState<number | null>(null);
 
   const selectedVersionMap = useMemo(() => {
     const entries = cards.map((card) => {
@@ -147,7 +155,11 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
             <CardHeader className="space-y-2 pb-3">
               <div className="flex items-start justify-between gap-2">
                 <CardTitle className="text-base">
-                  <Link href={`/accounts/${card.account_slug}`} className="hover:underline">
+                  <Link
+                    href={`/accounts/${card.account_slug}`}
+                    className="inline-block max-w-[240px] truncate hover:underline"
+                    title={card.account_name}
+                  >
                     {card.account_name}
                   </Link>
                 </CardTitle>
@@ -195,7 +207,7 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
                 {selected.bundle_id ? (
                   <div className="rounded-md border p-2">Bundle: {selected.bundle_id}#{selected.sequence_position ?? '-'}</div>
                 ) : null}
-                  <div className="col-span-2 rounded-md border p-2">
+                  <div className="col-span-2 rounded-md border p-2" title={card.campaign_names.join(', ')}>
                     Campaigns: {card.campaign_names.length > 0 ? card.campaign_names.join(', ') : 'None'}
                   </div>
                   <div className="col-span-2 rounded-md border p-2">
@@ -242,7 +254,7 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
                 </div>
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex items-center gap-2">
                 <GeneratedContentPreviewDialog
                   accountName={card.account_name}
                   version={selected.version}
@@ -251,6 +263,9 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
                   generatedContentId={selected.id}
                   campaignType={selected.campaign_type}
                   checklistCompletedItemIds={selected.checklist_completed_item_ids}
+                  open={previewOpenForId === selected.id}
+                  onOpenChange={(open) => setPreviewOpenForId(open ? selected.id : null)}
+                  trigger={null}
                 />
                 {previousVersion ? (
                   <ContentDiffDialog
@@ -259,30 +274,10 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
                     oldContent={previousVersion.content}
                     newVersion={selected.version}
                     newContent={selected.content}
+                    open={diffOpenForId === selected.id}
+                    onOpenChange={(open) => setDiffOpenForId(open ? selected.id : null)}
+                    trigger={null}
                   />
-                ) : null}
-
-                {!selected.is_published && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => publishVersion(selected.id)}
-                    disabled={publishingId === selected.id}
-                  >
-                    <Upload className="mr-1.5 h-3.5 w-3.5" />
-                    {publishingId === selected.id ? 'Publishing...' : 'Publish'}
-                  </Button>
-                )}
-                {selected.bundle_id ? (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => publishBundle(selected.bundle_id!)}
-                    disabled={publishingId === -1}
-                  >
-                    <Upload className="mr-1.5 h-3.5 w-3.5" />
-                    {publishingId === -1 ? 'Publishing Bundle...' : 'Publish Bundle'}
-                  </Button>
                 ) : null}
 
                 <OnePageSendDialog
@@ -317,6 +312,41 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
                     </Button>
                   )}
                 />
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" size="icon" className="h-8 w-8" aria-label="Open review actions">
+                      <MoreHorizontal className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem onSelect={() => setPreviewOpenForId(selected.id)}>
+                      Review Preview
+                    </DropdownMenuItem>
+                    {previousVersion ? (
+                      <DropdownMenuItem onSelect={() => setDiffOpenForId(selected.id)}>
+                        Review Diff
+                      </DropdownMenuItem>
+                    ) : null}
+                    {!selected.is_published ? (
+                      <DropdownMenuItem
+                        onSelect={() => publishVersion(selected.id)}
+                        disabled={publishingId === selected.id}
+                      >
+                        <Upload className="mr-1.5 h-3.5 w-3.5" />
+                        {publishingId === selected.id ? 'Publishing...' : 'Publish Version'}
+                      </DropdownMenuItem>
+                    ) : null}
+                    {selected.bundle_id ? (
+                      <DropdownMenuItem
+                        onSelect={() => publishBundle(selected.bundle_id!)}
+                        disabled={publishingId === -1}
+                      >
+                        <Upload className="mr-1.5 h-3.5 w-3.5" />
+                        {publishingId === -1 ? 'Publishing Bundle...' : 'Publish Bundle'}
+                      </DropdownMenuItem>
+                    ) : null}
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
 
               {sendStatusByKey[key] && (

@@ -19,10 +19,9 @@ import { ThemeToggle } from '@/components/theme-toggle';
 import { NotificationBell } from '@/components/notification-bell';
 import { useSidebar } from '@/components/sidebar-context';
 
-const navSections: Array<NavModule['section']> = ['Foundation', 'Execution', 'Insights'];
+const navSections: Array<NavModule['section']> = ['Operator Flow', 'Platform'];
 
 function sectionLabel(section: NavModule['section']) {
-  if (section === 'Insights') return 'Measure & Ops';
   return section;
 }
 
@@ -47,6 +46,9 @@ function NavContent({ pathname, onNavigate }: { pathname: string; onNavigate?: (
         </div>
       </div>
       <nav className="flex-1 overflow-y-auto px-3 py-4">
+        <p className="mb-3 px-3 text-[11px] font-medium uppercase tracking-wide text-[var(--muted-foreground)]">
+          Accounts to Performance Loop
+        </p>
         <div className="mb-3 px-2">
           <Link
             href="/capture"

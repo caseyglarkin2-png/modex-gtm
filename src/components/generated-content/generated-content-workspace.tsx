@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -35,6 +35,7 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
   const sentFilter = searchParams.get('sent') ?? 'all';
   const checklistFilter = searchParams.get('checklist') ?? 'all';
   const query = searchParams.get('q') ?? '';
+  const [searchInput, setSearchInput] = useState(query);
   const regenAccount = searchParams.get('regenAccount') ?? '';
   const regenSourceKind = searchParams.get('regenSourceKind') ?? '';
   const regenSourceId = searchParams.get('regenSourceId') ?? '';
@@ -44,6 +45,7 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
   const regenGeneratedContentId = Number.parseInt(searchParams.get('regenGeneratedContentId') ?? '', 10);
   const [regenerationContext, setRegenerationContext] = useState(regenContextRaw);
   const [regenerating, setRegenerating] = useState(false);
+  const [selectionScrollTop, setSelectionScrollTop] = useState(0);
 
   const accountOptions = useMemo(
     () => cards.map((card) => card.account_name).sort((left, right) => left.localeCompare(right)),
@@ -78,6 +80,22 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
     }
     router.replace(next.toString() ? `${pathname}?${next.toString()}` : pathname);
   };
+
+  useEffect(() => {
+    setSearchInput(query);
+  }, [query]);
+
+  useEffect(() => {
+    const normalized = searchInput.trim();
+    if (normalized === query) return;
+    const timer = window.setTimeout(() => {
+      const next = new URLSearchParams(searchParams.toString());
+      if (!normalized) next.delete('q');
+      else next.set('q', normalized);
+      router.replace(next.toString() ? `${pathname}?${next.toString()}` : pathname);
+    }, 250);
+    return () => window.clearTimeout(timer);
+  }, [pathname, query, router, searchInput, searchParams]);
 
   const clearParam = (key: string) => {
     const next = new URLSearchParams(searchParams.toString());
@@ -175,6 +193,20 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
   const selectedCount = selectedPreviewItems.length;
   const selectedRecipientCount = selectedPreviewItems.reduce((sum, item) => sum + item.recipients.length, 0);
   const selectedGuardCount = selectedPreviewItems.filter((item) => item.pendingJobs > 0 || item.processingJobs > 0 || item.version < item.latestVersion).length;
+  const selectionRowHeight = 28;
+  const selectionViewportHeight = 176;
+  const virtualWindow = useMemo(() => {
+    const overscan = 8;
+    const startIndex = Math.max(0, Math.floor(selectionScrollTop / selectionRowHeight) - overscan);
+    const visibleCount = Math.ceil(selectionViewportHeight / selectionRowHeight) + overscan * 2;
+    const endIndex = Math.min(selectableItems.length, startIndex + visibleCount);
+    return {
+      startIndex,
+      totalHeight: selectableItems.length * selectionRowHeight,
+      offsetTop: startIndex * selectionRowHeight,
+      items: selectableItems.slice(startIndex, endIndex),
+    };
+  }, [selectableItems, selectionScrollTop]);
 
   const activeFilters = useMemo(() => {
     const filters: Array<{ key: string; label: string }> = [];
@@ -364,8 +396,8 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
 
         <Input
           placeholder="Search accounts/campaigns"
-          value={query}
-          onChange={(event) => setParam('q', event.target.value)}
+          value={searchInput}
+          onChange={(event) => setSearchInput(event.target.value)}
         />
       </div>
 
@@ -376,7 +408,10 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
             <button
               type="button"
               key={filter.key}
-              onClick={() => clearParam(filter.key)}
+              onClick={() => {
+                if (filter.key === 'q') setSearchInput('');
+                clearParam(filter.key);
+              }}
               className="inline-flex items-center gap-1 rounded-md border bg-background px-2 py-1 text-xs text-foreground hover:bg-muted"
               aria-label={`Clear ${filter.label}`}
             >
@@ -387,9 +422,10 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
         </div>
       ) : null}
 
-      <div className="flex items-center justify-between text-xs text-muted-foreground">
-        <p>{filteredCards.length} account card(s) visible</p>
-        <div className="flex items-center gap-2">
+      <div className="sticky top-14 z-20 rounded-md border bg-background/90 p-2 backdrop-blur md:top-2">
+        <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
+          <p>{filteredCards.length} account card(s) visible</p>
+          <div className="flex flex-wrap items-center gap-2">
             <Button
               size="sm"
               variant="outline"
@@ -416,11 +452,15 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
           <Button
             size="sm"
             variant="outline"
-            onClick={() => router.replace(pathname)}
+            onClick={() => {
+              setSearchInput('');
+              router.replace(pathname);
+            }}
             disabled={searchParams.toString().length === 0}
           >
             Clear Filters
           </Button>
+          </div>
         </div>
       </div>
 
@@ -446,24 +486,37 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
       {filteredCards.length > 0 ? (
         <div className="space-y-2 rounded-md border p-3">
           <p className="text-xs font-medium text-muted-foreground">Bulk selection</p>
-          <div className="max-h-44 space-y-2 overflow-y-auto pr-1 text-xs md:columns-2 lg:columns-3">
-            {selectableItems.map((item) => (
-              <label key={item.accountName} className={`flex items-center gap-2 break-inside-avoid ${item.disabled ? 'text-muted-foreground' : ''}`}>
-                <input
-                  type="checkbox"
-                  checked={item.selected}
-                  disabled={item.disabled}
-                  onChange={(event) => setSelectedAccounts((prev) => ({
-                    ...prev,
-                    [item.accountName]: event.target.checked,
-                  }))}
-                />
-                <span>
-                  {item.accountName} ({item.recipients.length} recipients)
-                  {item.disabled ? ' • no recipients' : ''}
-                </span>
-              </label>
-            ))}
+          <div
+            className="max-h-44 overflow-y-auto rounded border bg-background text-xs"
+            style={{ height: selectionViewportHeight }}
+            onScroll={(event) => setSelectionScrollTop(event.currentTarget.scrollTop)}
+          >
+            <div style={{ height: virtualWindow.totalHeight, position: 'relative' }}>
+              <div style={{ position: 'absolute', top: virtualWindow.offsetTop, left: 0, right: 0 }}>
+                {virtualWindow.items.map((item) => (
+                  <label
+                    key={item.accountName}
+                    className={`flex h-7 items-center gap-2 border-b px-2 last:border-b-0 ${item.disabled ? 'text-muted-foreground' : ''}`}
+                    title={item.accountName}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={item.selected}
+                      disabled={item.disabled}
+                      className="h-4 w-4 rounded border-slate-300 text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                      onChange={(event) => setSelectedAccounts((prev) => ({
+                        ...prev,
+                        [item.accountName]: event.target.checked,
+                      }))}
+                    />
+                    <span className="truncate">
+                      {item.accountName} ({item.recipients.length} recipients)
+                      {item.disabled ? ' • no recipients' : ''}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       ) : (
@@ -474,7 +527,10 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
             className="mt-3"
             size="sm"
             variant="outline"
-            onClick={() => router.replace(pathname)}
+            onClick={() => {
+              setSearchInput('');
+              router.replace(pathname);
+            }}
             disabled={searchParams.toString().length === 0}
           >
             Clear Filters

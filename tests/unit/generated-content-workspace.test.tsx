@@ -99,12 +99,15 @@ describe('GeneratedContentWorkspace', () => {
   });
 
   it('updates URL params when search text changes', () => {
+    vi.useFakeTimers();
     render(<GeneratedContentWorkspace cards={cards} recipientsByAccount={{}} />);
 
     fireEvent.change(screen.getByPlaceholderText('Search accounts/campaigns'), {
       target: { value: 'acme' },
     });
+    vi.advanceTimersByTime(300);
 
     expect(mockedReplace).toHaveBeenCalledWith('/generated-content?q=acme');
+    vi.useRealTimers();
   });
 });

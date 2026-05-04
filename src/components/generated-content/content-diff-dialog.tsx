@@ -12,6 +12,9 @@ type ContentDiffDialogProps = {
   oldContent: string;
   newVersion: number;
   newContent: string;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  trigger?: React.ReactNode;
 };
 
 export function ContentDiffDialog({
@@ -20,17 +23,27 @@ export function ContentDiffDialog({
   oldContent,
   newVersion,
   newContent,
+  open,
+  onOpenChange,
+  trigger,
 }: ContentDiffDialogProps) {
   const rows = useMemo(() => buildSideBySideDiff(oldContent, newContent), [newContent, oldContent]);
+  const dialogTrigger = trigger === undefined
+    ? (
+      <Button variant="outline" size="sm">
+        <Columns2 className="mr-1.5 h-3.5 w-3.5" />
+        Diff v{oldVersion} to v{newVersion}
+      </Button>
+    )
+    : trigger;
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline" size="sm">
-          <Columns2 className="mr-1.5 h-3.5 w-3.5" />
-          Diff v{oldVersion} to v{newVersion}
-        </Button>
-      </DialogTrigger>
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      {dialogTrigger ? (
+        <DialogTrigger asChild>
+          {dialogTrigger}
+        </DialogTrigger>
+      ) : null}
       <DialogContent className="max-h-screen max-w-5xl overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{accountName} content diff</DialogTitle>

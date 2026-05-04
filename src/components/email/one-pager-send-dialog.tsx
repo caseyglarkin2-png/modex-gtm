@@ -174,7 +174,21 @@ export function OnePageSendDialog({
   };
 
   const selectedCount = selectedRecipients.length;
+  const selectedRecipientRows = allRecipients.filter((recipient) => selectedRecipients.includes(recipient.id));
+  const selectedBelowFloorCount = selectedRecipientRows.filter((recipient) => (recipient.readiness?.score ?? 0) < readinessFloor).length;
+  const selectedStaleCount = selectedRecipientRows.filter((recipient) => Boolean(recipient.readiness?.stale)).length;
   const allSelected = selectedRecipients.length > 0 && selectedRecipients.length === visibleRecipients.length;
+  const sendDisabledReason = selectedCount === 0
+    ? 'Select at least one recipient.'
+    : sendGuardState.guardBlocksSend
+      ? 'Review and acknowledge guardrails first.'
+      : qualityBlocksSend
+        ? 'Quality risk must be acknowledged before send.'
+        : checklistBlocksSend
+          ? 'Complete required QA checklist items before send.'
+          : selectedBelowFloorCount > 0
+            ? `Remove ${selectedBelowFloorCount} recipient(s) below readiness floor ${readinessFloor}.`
+            : null;
 
   return (
     <Dialog open={isOpen} onOpenChange={setOpen}>
@@ -378,13 +392,24 @@ export function OnePageSendDialog({
           </Card>
 
           {/* Action Buttons */}
+          <div className="rounded-lg border bg-muted/30 p-3 text-xs">
+            <p className="font-medium text-foreground">Pre-send validation</p>
+            <p className="mt-1 text-muted-foreground">
+              Recipients selected: {selectedCount} · Below readiness floor: {selectedBelowFloorCount} · Stale readiness: {selectedStaleCount}
+            </p>
+            {sendDisabledReason ? (
+              <p className="mt-1 text-amber-700">{sendDisabledReason}</p>
+            ) : (
+              <p className="mt-1 text-emerald-700">Ready to send.</p>
+            )}
+          </div>
           <div className="flex gap-2">
             <Button variant="outline" onClick={() => setOpen(false)} disabled={isSending}>
               Cancel
             </Button>
             <Button
               onClick={handleSend}
-              disabled={selectedCount === 0 || isSending || sendGuardState.guardBlocksSend || qualityBlocksSend || checklistBlocksSend}
+              disabled={selectedCount === 0 || isSending || sendGuardState.guardBlocksSend || qualityBlocksSend || checklistBlocksSend || selectedBelowFloorCount > 0}
               className="flex-1"
             >
               {isSending ? (

@@ -44,12 +44,14 @@ export function GeneratedContentPreviewDialog({
 }: GeneratedContentPreviewDialogProps) {
   const [savingPlaybook, setSavingPlaybook] = useState(false);
   const rendering = resolveGeneratedContentRendering(content, accountName);
-  const dialogTrigger = trigger ?? (
-    <Button variant="outline" size="sm">
-      <Eye className="mr-1.5 h-3.5 w-3.5" />
-      Preview
-    </Button>
-  );
+  const dialogTrigger = trigger === undefined
+    ? (
+      <Button variant="outline" size="sm">
+        <Eye className="mr-1.5 h-3.5 w-3.5" />
+        Preview
+      </Button>
+    )
+    : trigger;
 
   async function saveAsPlaybookBlock() {
     if (savingPlaybook) return;
@@ -80,7 +82,7 @@ export function GeneratedContentPreviewDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogTrigger asChild>{dialogTrigger}</DialogTrigger>
+      {dialogTrigger ? <DialogTrigger asChild>{dialogTrigger}</DialogTrigger> : null}
       <DialogContent className="max-h-screen max-w-3xl overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{accountName} • v{version}</DialogTitle>

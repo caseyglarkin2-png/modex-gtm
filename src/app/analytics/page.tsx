@@ -57,13 +57,15 @@ function MetricCard({
   value,
   detail,
   tone = 'text-foreground',
+  href,
 }: {
   label: string;
   value: string;
   detail: string;
   tone?: string;
+  href?: string;
 }) {
-  return (
+  const content = (
     <Card>
       <CardContent className="p-4">
         <p className="text-[11px] uppercase tracking-wide text-muted-foreground">{label}</p>
@@ -71,6 +73,12 @@ function MetricCard({
         <p className="mt-1 text-xs text-muted-foreground">{detail}</p>
       </CardContent>
     </Card>
+  );
+  if (!href) return content;
+  return (
+    <Link href={href} className="block rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+      {content}
+    </Link>
   );
 }
 
@@ -88,7 +96,7 @@ export default async function AnalyticsPage({
   const yearStart = new Date(Date.UTC(year, 0, 1));
   const yearEnd = new Date(Date.UTC(year + 1, 0, 1));
 
-  const [stats, campaigns, quarterRows, meetingsThisYear, recentFailures, infographicGenerated, infographicRecipients, infographicLogs, infographicOutcomes] = await Promise.all([
+  const [stats, campaigns, quarterRows, meetingsThisYear, recentFailures, infographicGenerated, infographicRecipients, infographicLogs, infographicOutcomes, pipelineSnapshots] = await Promise.all([
     dbGetDashboardStats(),
     getCampaignSummaries(),
     prisma.emailLog.groupBy({
@@ -139,6 +147,13 @@ export default async function AnalyticsPage({
         select: { generated_content_id: true, outcome_label: true },
       })
       : Promise.resolve([]),
+    prisma.account.findMany({
+      select: {
+        pipeline_stage: true,
+        updated_at: true,
+      },
+      take: 5000,
+    }),
   ]);
   const checklistRows = selectedTab === 'campaigns'
     ? await prisma.contentChecklistState.findMany({
@@ -196,6 +211,15 @@ export default async function AnalyticsPage({
     const month = row.sent_at.getUTCMonth();
     return Math.floor(month / 3) === currentQuarterIndex;
   }).length;
+  const stageCount = pipelineSnapshots.reduce<Record<string, number>>((acc, row) => {
+    const stage = (row.pipeline_stage ?? 'targeted').toLowerCase();
+    acc[stage] = (acc[stage] ?? 0) + 1;
+    return acc;
+  }, {});
+  const modeledDealValue = ((stageCount.closed ?? 0) * 75000) + ((stageCount.proposal ?? 0) * 40000) + ((stageCount.meeting ?? 0) * 15000);
+  const dealQuantity = (stageCount.meeting ?? 0) + (stageCount.proposal ?? 0) + (stageCount.closed ?? 0);
+  const movedLast30 = pipelineSnapshots.filter((row) => row.updated_at >= new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).length;
+  const dealVelocity = dealQuantity > 0 ? movedLast30 / dealQuantity : 0;
 
   const funnel = [
     { label: 'Target Accounts', count: stats.accountCount, pct: 100 },
@@ -406,6 +430,26 @@ export default async function AnalyticsPage({
               value={`${stats.deliveryRate}%`}
               detail={`Open rate ${stats.openRate}%`}
               tone={stats.deliveryRate >= 90 ? 'text-emerald-600' : 'text-amber-600'}
+            />
+          </div>
+          <div className="grid gap-3 md:grid-cols-3">
+            <MetricCard
+              label="Deal Value (Modeled)"
+              value={`$${Math.round(modeledDealValue).toLocaleString()}`}
+              detail="Stage-weighted estimate from meeting/proposal/closed counts"
+              href="/analytics?tab=pipeline"
+            />
+            <MetricCard
+              label="Deal Velocity (30d)"
+              value={`${dealVelocity.toFixed(2)}x`}
+              detail={`${movedLast30} stage updates over the last 30 days`}
+              href="/pipeline?tab=stage-history"
+            />
+            <MetricCard
+              label="Deal Quantity"
+              value={String(dealQuantity)}
+              detail="Accounts in meeting, proposal, or closed stages"
+              href="/analytics?tab=pipeline"
             />
           </div>
           <Card>
