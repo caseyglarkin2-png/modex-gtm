@@ -127,6 +127,9 @@ export async function POST(req: NextRequest) {
     await tx.generatedContent.deleteMany({
       where: { account_name: { in: [...ACCOUNT_PAGE_SEND_ACCOUNTS] } },
     });
+    await tx.generationJob.deleteMany({
+      where: { account_name: { in: [...ACCOUNT_PAGE_SEND_ACCOUNTS] } },
+    });
     await tx.persona.deleteMany({
       where: { account_name: { in: [...ACCOUNT_PAGE_SEND_ACCOUNTS] } },
     });
