@@ -25,6 +25,7 @@ const mockedGetAccountContext = vi.fn();
 const mockedGenerateText = vi.fn();
 const mockedGenerateTextWithMetadata = vi.fn();
 const mockedGetAgentContentContext = vi.fn();
+const mockedResolveCanonicalAccountScope = vi.fn();
 
 vi.mock('@/lib/prisma', () => ({ prisma: mockedPrisma }));
 vi.mock('@/lib/db', () => ({ getAccountContext: mockedGetAccountContext }));
@@ -39,6 +40,9 @@ vi.mock('@/lib/agent-actions/content-context', async () => {
     getAgentContentContext: mockedGetAgentContentContext,
   };
 });
+vi.mock('@/lib/revops/account-identity', () => ({
+  resolveCanonicalAccountScope: mockedResolveCanonicalAccountScope,
+}));
 
 const { POST: generatePOST } = await import('@/app/api/ai/generate/route');
 const { POST: onePagerPOST } = await import('@/app/api/ai/one-pager/route');
@@ -63,6 +67,13 @@ const mockAgentContext: AgentActionResult = {
     fetchedAt: '2026-05-04T00:00:00.000Z',
     stale: false,
     source: 'live',
+    status: 'fresh',
+    dimensions: {
+      summary: { key: 'summary', label: 'Research summary', status: 'fresh', stale: false, source: 'live', fetchedAt: '2026-05-04T00:00:00.000Z', updatedAt: '2026-05-04T00:00:00.000Z', ageHours: 0, note: '' },
+      signals: { key: 'signals', label: 'Signals', status: 'fresh', stale: false, source: 'local', fetchedAt: '2026-05-04T00:00:00.000Z', updatedAt: '2026-05-04T00:00:00.000Z', ageHours: 0, note: '' },
+      contacts: { key: 'contacts', label: 'Contacts', status: 'aging', stale: false, source: 'local', fetchedAt: '2026-05-04T00:00:00.000Z', updatedAt: '2026-05-03T00:00:00.000Z', ageHours: 24, note: '' },
+      generated_content: { key: 'generated_content', label: 'Generated content', status: 'fresh', stale: false, source: 'local', fetchedAt: '2026-05-04T00:00:00.000Z', updatedAt: '2026-05-04T00:00:00.000Z', ageHours: 0, note: '' },
+    },
   },
   nextActions: ['Generate a new one-pager with live intel'],
 };
@@ -76,6 +87,12 @@ beforeEach(() => {
   mockedPrisma.signalContentLink.upsert.mockResolvedValue({ id: 301 });
   mockedPrisma.messageEvolutionRegistry.create.mockResolvedValue({ id: 401 });
   mockedGetAgentContentContext.mockResolvedValue(mockAgentContext);
+  mockedResolveCanonicalAccountScope.mockResolvedValue({
+    requestedName: 'Americold',
+    normalizedKeys: ['americold'],
+    canonicalCompanyIds: ['domain:americold.com'],
+    accountNames: ['Americold Logistics', 'Americold'],
+  });
 });
 
 describe('AI generation route metadata', () => {
@@ -170,11 +187,22 @@ describe('AI generation route metadata', () => {
     expect(res.status).toBe(200);
     expect(mockedPrisma.generatedContent.create).toHaveBeenCalledWith(expect.objectContaining({
       data: expect.objectContaining({
+        account_name: 'Americold Logistics',
         version_metadata: expect.objectContaining({
           cta_mode: 'scorecard_reply',
           generation_input_contract: expect.objectContaining({
             account_brief: expect.stringContaining('Americold'),
             proof_context: expect.any(Array),
+          }),
+          provenance: expect.objectContaining({
+            requested_account_name: 'Americold',
+            persisted_account_name: 'Americold Logistics',
+            scoped_account_names: ['Americold Logistics', 'Americold'],
+            used_live_intel: true,
+            signal_count: expect.any(Number),
+            recommended_contact_count: expect.any(Number),
+            committee_gap_count: expect.any(Number),
+            freshness_status: 'fresh',
           }),
         }),
       }),

@@ -52,13 +52,15 @@ type SendJobResponse = {
 type SendJobTrackerProps = {
   jobId: number;
   pollMs?: number;
+  title?: string;
 };
 
-export function SendJobTracker({ jobId, pollMs = 3000 }: SendJobTrackerProps) {
+export function SendJobTracker({ jobId, pollMs = 3000, title }: SendJobTrackerProps) {
   const [loading, setLoading] = useState(true);
   const [job, setJob] = useState<SendJobResponse['job'] | null>(null);
   const [retrying, setRetrying] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [recipientActionId, setRecipientActionId] = useState<number | null>(null);
 
   const terminal = useMemo(
     () => job?.status === 'completed' || job?.status === 'partial' || job?.status === 'failed' || job?.status === 'cancelled',
@@ -95,6 +97,36 @@ export function SendJobTracker({ jobId, pollMs = 3000 }: SendJobTrackerProps) {
       toast.error(error instanceof Error ? error.message : 'Retry failed');
     } finally {
       setRetrying(false);
+    }
+  }
+
+  async function remediateRecipient(recipientId: number, action: 'retry-later' | 'switch-persona' | 'mark-bad-address' | 'suppress-recipient') {
+    setRecipientActionId(recipientId);
+    try {
+      const response = await fetch('/api/revops/failure-remediation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action,
+          recipientIds: [recipientId],
+        }),
+      });
+      const payload = await response.json().catch(() => ({} as { error?: string; affected?: number }));
+      if (!response.ok) throw new Error(payload.error ?? 'Remediation failed');
+      toast.success(
+        action === 'retry-later'
+          ? 'Recipient queued for retry'
+          : action === 'mark-bad-address'
+            ? 'Marked bad address'
+            : action === 'suppress-recipient'
+              ? 'Recipient suppressed'
+              : 'Switch persona task created',
+      );
+      await fetchStatus();
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Remediation failed');
+    } finally {
+      setRecipientActionId(null);
     }
   }
 
@@ -138,6 +170,8 @@ export function SendJobTracker({ jobId, pollMs = 3000 }: SendJobTrackerProps) {
   }
 
   const retryableCount = job.recipients.filter((recipient) => recipient.status === 'failed' || recipient.status === 'skipped').length;
+  const pendingCount = job.recipients.filter((recipient) => recipient.status === 'pending').length;
+  const processingCount = job.recipients.filter((recipient) => recipient.status === 'sending').length;
   const recipients = [...job.recipients].sort((left, right) => {
     const rank = (status: string) => (status === 'failed' ? 0 : status === 'sending' ? 1 : status === 'pending' ? 2 : status === 'sent' ? 3 : 4);
     return rank(left.status) - rank(right.status);
@@ -147,7 +181,7 @@ export function SendJobTracker({ jobId, pollMs = 3000 }: SendJobTrackerProps) {
     <Card>
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between gap-3">
-          <CardTitle className="text-base">Send Job #{job.id}</CardTitle>
+          <CardTitle className="text-base">{title ?? `Send Job #${job.id}`}</CardTitle>
           <div className="flex items-center gap-2">
             <Button size="sm" variant="outline" onClick={refreshNow} disabled={refreshing}>
               {refreshing ? 'Refreshing…' : 'Refresh'}
@@ -159,6 +193,8 @@ export function SendJobTracker({ jobId, pollMs = 3000 }: SendJobTrackerProps) {
       <CardContent className="space-y-3">
         <div className="grid gap-2 text-xs text-muted-foreground sm:grid-cols-4">
           <div className="rounded-md border p-2">Total: {job.total_recipients}</div>
+          <div className="rounded-md border p-2">Queued: {pendingCount}</div>
+          <div className="rounded-md border p-2">Processing: {processingCount}</div>
           <div className="rounded-md border p-2">Sent: {job.sent_count}</div>
           <div className="rounded-md border p-2">Failed: {job.failed_count}</div>
           <div className="rounded-md border p-2">Skipped: {job.skipped_count}</div>
@@ -191,6 +227,46 @@ export function SendJobTracker({ jobId, pollMs = 3000 }: SendJobTrackerProps) {
                 {recipient.hubspot_engagement_id ? ` • HubSpot ${recipient.hubspot_engagement_id}` : ''}
               </p>
               {recipient.error_message && <p className="text-red-600">{recipient.error_message}</p>}
+              {recipient.status === 'failed' || recipient.status === 'skipped' ? (
+                <div className="mt-2 flex flex-wrap gap-2">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="h-7 px-2 text-[10px]"
+                    disabled={recipientActionId === recipient.id}
+                    onClick={() => void remediateRecipient(recipient.id, 'retry-later')}
+                  >
+                    Retry Later
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="h-7 px-2 text-[10px]"
+                    disabled={recipientActionId === recipient.id}
+                    onClick={() => void remediateRecipient(recipient.id, 'mark-bad-address')}
+                  >
+                    Mark Bad Address
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="h-7 px-2 text-[10px]"
+                    disabled={recipientActionId === recipient.id}
+                    onClick={() => void remediateRecipient(recipient.id, 'suppress-recipient')}
+                  >
+                    Suppress Recipient
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="h-7 px-2 text-[10px]"
+                    disabled={recipientActionId === recipient.id}
+                    onClick={() => void remediateRecipient(recipient.id, 'switch-persona')}
+                  >
+                    Replace Persona
+                  </Button>
+                </div>
+              ) : null}
             </div>
           ))}
         </div>

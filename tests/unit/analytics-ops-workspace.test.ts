@@ -25,6 +25,7 @@ describe('ops workspace tab parsing', () => {
     expect(parseOpsTab('feature-flags')).toBe('feature-flags');
     expect(parseOpsTab('connector-health')).toBe('connector-health');
     expect(parseOpsTab('coverage')).toBe('coverage');
+    expect(parseOpsTab('account-identity')).toBe('account-identity');
     expect(parseOpsTab('unknown')).toBe('proof-ledger');
     expect(parseOpsTab(undefined)).toBe('proof-ledger');
   });

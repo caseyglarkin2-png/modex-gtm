@@ -3,6 +3,7 @@ import {
   buildCommitteeCoverageBrief,
   buildCoverageGaps,
   buildRecommendedAngle,
+  buildSignalRegistry,
   buildSuggestedRecipients,
   buildSuggestedRecipientSets,
   buildTopSignals,
@@ -23,11 +24,72 @@ const baseResult: AgentActionResult = {
   ],
   data: {
     salesContacts: [{ name: 'Cindy Thomas' }],
+    latestEmail: {
+      subject: 'Boston Beer intro',
+      sent_at: '2026-05-04T10:00:00.000Z',
+      reply_count: 0,
+    },
+    latestAsset: {
+      content_type: 'one_pager',
+      created_at: '2026-05-04T09:00:00.000Z',
+    },
+    contactFreshness: {
+      latestEnrichedAt: '2026-05-03T00:00:00.000Z',
+      mappedContactCount: 2,
+      liveContactCount: 3,
+    },
   },
   freshness: {
     fetchedAt: new Date().toISOString(),
     stale: false,
     source: 'live',
+    status: 'fresh',
+    dimensions: {
+      summary: {
+        key: 'summary',
+        label: 'Research summary',
+        status: 'fresh',
+        stale: false,
+        source: 'live',
+        fetchedAt: '2026-05-04T12:00:00.000Z',
+        updatedAt: '2026-05-04T12:00:00.000Z',
+        ageHours: 1,
+        note: 'Research summary is current enough to use as-is.',
+      },
+      signals: {
+        key: 'signals',
+        label: 'Signals',
+        status: 'fresh',
+        stale: false,
+        source: 'local',
+        fetchedAt: '2026-05-04T12:00:00.000Z',
+        updatedAt: '2026-05-04T10:00:00.000Z',
+        ageHours: 3,
+        note: 'Signals are current enough to use as-is.',
+      },
+      contacts: {
+        key: 'contacts',
+        label: 'Contacts',
+        status: 'aging',
+        stale: false,
+        source: 'local',
+        fetchedAt: '2026-05-04T12:00:00.000Z',
+        updatedAt: '2026-05-03T00:00:00.000Z',
+        ageHours: 36,
+        note: 'Contacts are aging. Refresh soon before broadening the motion.',
+      },
+      generated_content: {
+        key: 'generated_content',
+        label: 'Generated content',
+        status: 'fresh',
+        stale: false,
+        source: 'local',
+        fetchedAt: '2026-05-04T12:00:00.000Z',
+        updatedAt: '2026-05-04T09:00:00.000Z',
+        ageHours: 4,
+        note: 'Generated content is current enough to use as-is.',
+      },
+    },
   },
   nextActions: ['Generate a new one-pager with live intel'],
 };
@@ -118,5 +180,32 @@ describe('account command center helpers', () => {
   it('pulls top signals and recommended angle from the account result', () => {
     expect(buildTopSignals(baseResult)).toHaveLength(3);
     expect(buildRecommendedAngle(baseResult, 'fallback')).toMatch(/cold-chain network/i);
+  });
+
+  it('builds a recency-ranked signal registry with structured metadata', () => {
+    const signals = buildSignalRegistry(baseResult);
+
+    expect(signals.length).toBeGreaterThanOrEqual(7);
+    expect(signals.some((signal) => signal.title === 'Research Summary' && signal.source === 'modex')).toBe(true);
+    expect(signals.some((signal) => signal.title === 'Latest Send')).toBe(true);
+    expect(signals.some((signal) => signal.title === 'Latest Asset')).toBe(true);
+  });
+
+  it('tolerates legacy freshness payloads with missing dimension keys', () => {
+    const legacySignals = buildSignalRegistry({
+      ...baseResult,
+      freshness: {
+        fetchedAt: '2026-05-04T12:00:00.000Z',
+        stale: false,
+        source: 'cache',
+        status: 'fresh',
+        dimensions: {
+          summary: baseResult.freshness.dimensions.summary,
+        },
+      } as AgentActionResult['freshness'],
+    });
+
+    expect(legacySignals.some((signal) => signal.title === 'Research Summary')).toBe(true);
+    expect(legacySignals.some((signal) => signal.title === 'Latest Asset')).toBe(true);
   });
 });

@@ -5,7 +5,8 @@ export type OpsTabId =
   | 'provider-health'
   | 'feature-flags'
   | 'connector-health'
-  | 'coverage';
+  | 'coverage'
+  | 'account-identity';
 
 export type OpsTab = {
   id: OpsTabId;
@@ -21,6 +22,7 @@ export const opsWorkspaceTabs: OpsTab[] = [
   { id: 'feature-flags', label: 'Feature Flags', purpose: 'Operational feature toggles affecting delivery behavior.' },
   { id: 'connector-health', label: 'Connector Health', purpose: 'Apollo + HubSpot config/flag health plus runbook ownership metadata.' },
   { id: 'coverage', label: 'Coverage', purpose: 'TAM/ICP progress, reconciliation indicators, and Gate 0 readiness.' },
+  { id: 'account-identity', label: 'Account Identity', purpose: 'Duplicate-account remediation, canonical-account backfill, and alias collision diagnostics.' },
 ];
 
 export function parseOpsTab(tab: string | undefined): OpsTabId {

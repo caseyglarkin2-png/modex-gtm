@@ -56,6 +56,12 @@ export async function POST(req: NextRequest) {
 
   const payload = parsed.data;
   const strategy = payload.strategy ?? getStrategyPreset('balanced');
+  const persistedStrategy = payload.workflowMetadata
+    ? JSON.parse(JSON.stringify({
+        ...strategy,
+        workflow: payload.workflowMetadata,
+      }))
+    : strategy;
   const strategyValidation = validateSendStrategy(strategy);
   if (!strategyValidation.ok) {
     const block = invalidPayloadSendBlocker(strategyValidation.errors);
@@ -74,7 +80,44 @@ export async function POST(req: NextRequest) {
     : [];
   const personaById = new Map(personaRows.map((persona) => [persona.id, persona]));
 
-  const generatedContentIds = Array.from(new Set(payload.items.map((item) => item.generatedContentId)));
+  const materializedItems = await Promise.all(payload.items.map(async (item) => {
+    if (item.generatedContentId) return item;
+
+    const latestVersion = await prisma.generatedContent.findFirst({
+      where: {
+        account_name: item.accountName,
+        content_type: 'email',
+      },
+      orderBy: { version: 'desc' },
+      select: { version: true },
+    }).catch(() => null);
+
+    const generated = await prisma.generatedContent.create({
+      data: {
+        account_name: item.accountName,
+        content_type: 'email',
+        tone: 'professional',
+        provider_used: 'account_outreach_shell',
+        version: (latestVersion?.version ?? 0) + 1,
+        version_metadata: JSON.parse(JSON.stringify({
+          source: 'account_outreach_shell_async_draft',
+          workflow: payload.workflowMetadata ?? null,
+        })),
+        content: JSON.stringify({
+          subject: item.subject,
+          bodyHtml: item.bodyHtml,
+        }),
+      },
+      select: { id: true },
+    });
+
+    return {
+      ...item,
+      generatedContentId: generated.id,
+    };
+  }));
+
+  const generatedContentIds = Array.from(new Set(materializedItems.flatMap((item) => item.generatedContentId ? [item.generatedContentId] : [])));
   const generatedContentRows = await prisma.generatedContent.findMany({
     where: { id: { in: generatedContentIds } },
     select: {
@@ -103,14 +146,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(serializeSendBlocker(block), { status: block.status });
   }
 
-  const recipientRows = payload.items.flatMap((item) => {
-    const generated = generatedById.get(item.generatedContentId);
+  const recipientRows = materializedItems.flatMap((item) => {
+    const generated = generatedById.get(item.generatedContentId!);
     return item.recipients.map((recipient) => {
       const persona = recipient.personaId ? personaById.get(recipient.personaId) : null;
       const toEmail = (persona?.email ?? recipient.to).toLowerCase();
       const accountName = persona?.account_name ?? recipient.accountName ?? item.accountName ?? generated?.account_name ?? '';
       return {
-        generated_content_id: item.generatedContentId,
+        generated_content_id: item.generatedContentId!,
         campaign_id: generated?.campaign_id ?? null,
         account_name: accountName,
         bundle_id: item.bundleId ?? null,
@@ -215,7 +258,7 @@ export async function POST(req: NextRequest) {
       requested_by: payload.requestedBy ?? null,
       experiment_id: experimentRow?.id ?? null,
       primary_metric: experimentRow?.primary_metric ?? null,
-      send_strategy: strategy,
+      send_strategy: persistedStrategy,
       total_recipients: uniqueRecipientRows.length,
       recipients: {
         createMany: {

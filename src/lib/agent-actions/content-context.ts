@@ -6,19 +6,22 @@ import { DEFAULT_CTA_MODE } from '@/lib/revops/cold-outbound-policy';
 
 type GetAgentContentContextArgs = {
   accountName: string;
+  accountNames?: string[];
   personaName?: string;
   refresh?: boolean;
 };
 
 export async function getAgentContentContext({
   accountName,
+  accountNames,
   personaName,
   refresh = false,
 }: GetAgentContentContextArgs): Promise<AgentActionResult | null> {
+  const scopedAccountNames = Array.from(new Set(accountNames?.length ? accountNames : [accountName]));
   const persona = personaName
     ? await prisma.persona.findFirst({
         where: {
-          account_name: accountName,
+          account_name: { in: scopedAccountNames },
           name: {
             equals: personaName,
             mode: 'insensitive',
@@ -37,6 +40,7 @@ export async function getAgentContentContext({
     depth: 'quick',
     target: {
       accountName,
+      accountNames: scopedAccountNames,
       company: accountName,
       personaId: persona?.id,
       email: persona?.email ?? undefined,

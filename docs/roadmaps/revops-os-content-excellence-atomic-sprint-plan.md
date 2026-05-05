@@ -6,6 +6,307 @@
 **Target quality bar:** A+ atomic sprint plan (proof-first, demoable each sprint)  
 **Scope:** Optimize generated and sent content outcomes from cold outreach to customer conversion.
 
+## Account-Page Outreach Execution Reset (Added 2026-05-05)
+
+### Immediate Diagnosis
+
+The Boston Beer Company send failure is not just a one-off send bug. It exposed four product gaps that have to be fixed together if `/accounts/[slug]` is supposed to be the canonical operating surface:
+
+1. `INVALID_PAYLOAD` can still happen too early in the send path.
+   - Bulk send validation was strict enough to reject the full request before sendability checks if even one selected recipient had malformed email shape.
+   - Operator impact: one bad contact can block the whole send instead of being surfaced and skipped.
+2. Send blockers are not explained well enough in the UI.
+   - The operator sees a generic failure, not a useful diagnosis with field-level detail or recipient-level skip reasons.
+3. Account identity is not fully canonical.
+   - Example found locally: generated one-pager on `Boston Beer Company`, live contacts on `The Boston Beer Company`.
+   - Operator impact: research, contacts, assets, and send history can be split across duplicate local account records.
+4. The account page is not yet a full single-surface workflow.
+   - Research refresh, signal scan, contact finding, contact promotion/replacement, generation, preview, send, status tracking, and learning are partially implemented but not fully composed into one deterministic operating loop.
+
+### Product Outcome
+
+From one account page, the operator should be able to:
+
+1. open an account
+2. see the latest research and signals
+3. refresh research if stale
+4. see recommended and missing committee coverage
+5. find or replace contacts inline
+6. generate or choose the best outreach asset
+7. preview and edit send content
+8. send immediately or queue safely
+9. see per-recipient results, replies, and next best actions
+
+### Engineering Outcome
+
+Every account-level workflow must run through one canonical contract:
+
+- canonical account identity
+- canonical recipient set
+- canonical research/signal context
+- canonical generated-content linkage
+- canonical send job + telemetry path
+- canonical post-send learning loop
+
+## Atomic Sprint Plan: Account Page As The Outreach Operating Surface
+
+### Sprint A0: Send-Path Hardening And Failure Transparency
+
+**Goal:** eliminate generic `INVALID_PAYLOAD` failures as an operator dead end and make Boston Beer-style failures diagnosable from the account page.  
+**Demo:** on a seeded account page with one malformed contact and one valid contact, the operator can still send to the valid recipient; the invalid contact is skipped with an explicit reason visible in UI/API.
+
+1. Ticket `A0.1`: normalize bulk recipient payload contract.
+   - Change: accept non-empty recipient strings at request-parse time and perform email validation per recipient during sendability evaluation.
+   - Files: `src/lib/validations.ts`, `src/app/api/email/send-bulk/route.ts`.
+   - Acceptance: one malformed recipient no longer hard-fails the full request.
+   - Tests: route test covering valid + malformed mixed bulk send.
+2. Ticket `A0.2`: surface actionable send blocker detail in account-page send dialog.
+   - Change: parse blocker `code`, `message`, field errors, and skipped-recipient reasons into human-readable toast/error state.
+   - Files: `src/components/email/one-pager-send-dialog.tsx`.
+   - Acceptance: operator sees what is wrong without opening devtools.
+   - Tests: component test with mocked `INVALID_PAYLOAD` and `NO_SENDABLE_RECIPIENTS` responses.
+3. Ticket `A0.3`: add seeded reproduction fixture for account-page send failures.
+   - Change: add fixture/seed path for duplicate account identity, malformed recipient, unsubscribed recipient, and one valid recipient.
+   - Files: `tests/fixtures/account-command-center.ts`, seed route or fixture helper.
+   - Acceptance: Boston Beer-style failure is reproducible locally and in CI.
+   - Tests: fixture contract test.
+4. Ticket `A0.4`: add account-page send proof spec.
+   - Change: Playwright proof that opens account page, launches asset send, sends to valid recipient, and asserts malformed recipient is skipped.
+   - Files: `tests/e2e/account-command-center.spec.ts` or new `tests/e2e/account-page-send-proof.spec.ts`.
+   - Acceptance: proof runs with `skipped=0`.
+   - Validation: focused Playwright run plus screenshot artifact.
+
+### Sprint A1: Canonical Account Identity Resolution
+
+**Goal:** make assets, contacts, email logs, research, and signals resolve through one canonical account identity so duplicate local records cannot fragment the account page.  
+**Demo:** opening `/accounts/boston-beer-company` shows the same contacts, assets, send history, and canonical summary regardless of whether local source rows were originally created under `Boston Beer Company` or `The Boston Beer Company`.
+
+1. Ticket `A1.1`: define account alias resolution contract.
+   - Change: add pure resolver for `local account -> canonical company -> alias set`.
+   - Files: `src/lib/revops/account-identity.ts`.
+   - Acceptance: one function returns canonical account scope for any account name.
+   - Tests: unit tests for exact name, alias, duplicate-company, and missing-canonical scenarios.
+2. Ticket `A1.2`: add account-scoped aggregate query helpers.
+   - Change: create shared query layer for `personas`, `generatedContent`, `emailLogs`, `activities`, `meetings`, and `captures` across canonical account alias set.
+   - Files: `src/lib/account-command-center.ts` or `src/lib/db.ts`.
+   - Acceptance: account page no longer reads exact-name-only rows for operator-critical data.
+   - Tests: query unit tests with duplicate local account fixtures.
+3. Ticket `A1.3`: migrate account detail page to canonical scope queries.
+   - Change: swap direct exact-name fetches for canonical aggregate helpers.
+   - Files: `src/app/accounts/[slug]/page.tsx`.
+   - Acceptance: contacts and assets no longer disappear because of local name mismatch.
+   - Tests: server-page test or account-query unit tests asserting merged data visibility.
+4. Ticket `A1.4`: add duplicate-account remediation tooling.
+   - Change: add ops/report surface showing duplicate local account records sharing one canonical company.
+   - Files: `/ops` route or supporting query + UI component.
+   - Acceptance: duplicates are visible and exportable for cleanup.
+   - Tests: query test plus component render test.
+5. Ticket `A1.5`: backfill canonical links for existing account duplicates.
+   - Change: script or route to re-run canonical sync and persist alias set coverage metrics.
+   - Files: `scripts/*` and/or `src/app/api/revops/canonical-sync/route.ts`.
+   - Acceptance: canonical sync proves Boston Beer-style duplicates are linked.
+   - Validation: runbook artifact or script output committed to closeout note.
+
+### Sprint A2: Research And Signal Intelligence On The Account Page
+
+**Goal:** make account research freshness and signal scanning first-class on the account page so generation and send use current evidence.  
+**Demo:** operator opens an account, sees freshness status, top signals, why-now summary, and can refresh stale research inline without leaving the page.
+
+1. Ticket `A2.1`: define account research freshness contract.
+   - Change: add typed freshness metadata for summary, signals, contacts, and generated content context.
+   - Files: `src/lib/agent-actions/types.ts`, `src/lib/agent-actions/content-context.ts`.
+   - Acceptance: freshness is machine-readable and rendered on page.
+   - Tests: unit tests for freshness derivation.
+2. Ticket `A2.2`: add account-page research refresh action.
+   - Change: inline action to refresh account context/signals from the canonical account scope.
+   - Files: `src/components/agent-actions/agent-intel-strip.tsx`, route/action handler.
+   - Acceptance: refresh updates summary + timestamps without full workflow detour.
+   - Tests: component test with mocked route response.
+3. Ticket `A2.3`: add signal registry and recency ranking.
+   - Change: unify signal sources into one ordered list with source, date, confidence, and linked artifacts.
+   - Files: `src/lib/agent-actions/account-command-center.ts`.
+   - Acceptance: top signals are deterministic and auditable.
+   - Tests: unit tests for ranking and dedupe.
+4. Ticket `A2.4`: add stale-research visual state and CTA.
+   - Change: show `fresh`, `aging`, `stale`, `never refreshed` states with recommended next action.
+   - Files: `src/app/accounts/[slug]/page.tsx`.
+   - Acceptance: stale context is obvious before generation/send.
+   - Tests: component/server render assertions for each state.
+
+### Sprint A3: Contact Discovery, Promotion, And Replacement Inline
+
+**Goal:** make the account page the place where contacts are found, evaluated, promoted, replaced, and selected for send.  
+**Demo:** operator can run contact-finder from the account page, review candidates, promote one into send-ready recipients, defer weak matches, and replace a bad contact without going to a separate workspace.
+
+1. Ticket `A3.1`: create staged contact candidate model.
+   - Change: persist account-scoped contact finder results separately from committed personas.
+   - Files: Prisma schema + route/action + candidate query helper.
+   - Acceptance: candidate contacts are durable and reviewable.
+   - Tests: schema + route tests for create/list/promote/defer.
+2. Ticket `A3.2`: add inline candidate panel on account page.
+   - Change: render live candidates with source, confidence, title, email, and recommendation status.
+   - Files: new account-page client component.
+   - Acceptance: operator can review candidates without route change.
+   - Tests: component tests for candidate states and empty/loading/error states.
+3. Ticket `A3.3`: add promote/replace/defer recipient actions.
+   - Change: one-click actions to create/update persona rows from staged candidates.
+   - Files: account-page action handlers + contact mutation utilities.
+   - Acceptance: promoted contacts immediately become selectable send recipients.
+   - Tests: action tests for promote, replace, and defer paths.
+4. Ticket `A3.4`: add contact quality explainer.
+   - Change: render why a contact is high/medium/low readiness with freshness + provenance detail.
+   - Files: `src/lib/revops/recipient-readiness.ts`, UI badges/panel.
+   - Acceptance: operator can see why a contact is recommended or risky.
+   - Tests: unit tests for score reasoning plus component rendering.
+5. Ticket `A3.5`: add malformed-email and suppression badges at contact level.
+   - Change: show hard send blockers inline before opening send dialog.
+   - Files: account-page recipient list and shared recipient components.
+   - Acceptance: operator can identify broken contacts before send attempt.
+   - Tests: component tests for malformed, unsubscribed, canonical-conflict, and stale states.
+
+### Sprint A4: Asset Selection And Generation From The Account Page
+
+**Goal:** make the account page the canonical surface for selecting the right asset, generating a new one if needed, and understanding why that asset is recommended.  
+**Demo:** operator opens account page, sees recommended asset, can regenerate with live intel, compare latest versions, and choose the asset to send without leaving the page.
+
+1. Ticket `A4.1`: define recommended-asset resolver.
+   - Change: extract deterministic resolver for latest sendable asset, recommended asset, and fallback asset.
+   - Files: `src/lib/generated-content/asset-selection.ts`.
+   - Acceptance: asset recommendation rules are shared and tested.
+   - Tests: unit tests for legacy CTA, stale asset, unsendable asset, and no-asset cases.
+2. Ticket `A4.2`: persist one-pager generation to canonical account scope.
+   - Change: generated one-pager must write to canonical account identity and include provenance/freshness metadata.
+   - Files: `/api/ai/one-pager`, content persistence utilities.
+   - Acceptance: generated content is discoverable from the same account page that launched it.
+   - Tests: route test for persisted row shape.
+3. Ticket `A4.3`: add inline asset version switcher on account page.
+   - Change: support previewing latest, recommended, and prior versions in-place.
+   - Files: account page + version selector component.
+   - Acceptance: user can switch versions without opening disconnected surfaces.
+   - Tests: component tests for version switching and selected-state persistence.
+4. Ticket `A4.4`: render generation provenance and context-used metadata.
+   - Change: show what research/signals/contacts informed the asset.
+   - Files: preview components + metadata helpers.
+   - Acceptance: operator knows whether asset used live intel and what changed since last version.
+   - Tests: component tests for provenance badges and change summaries.
+
+### Sprint A5: Unified Compose And Send From The Account Page
+
+**Goal:** allow the operator to pick contacts, preview/edit content, and send outreach directly from the account page through one consistent compose shell.  
+**Demo:** choose account, choose contacts, choose asset, edit subject/body, preview, send, and see recipient-level result summary without route change.
+
+1. Ticket `A5.1`: create account-page outreach drawer/shell.
+   - Change: unify asset preview, recipient selection, subject editing, and send CTA into one account-page orchestration shell.
+   - Files: new account-page compose component using shared send primitives.
+   - Acceptance: no modal stack maze required to send from account page.
+   - Tests: component tests for open/close/state persistence.
+2. Ticket `A5.2`: unify compose payload builder.
+   - Change: shared helper that builds account-aware subject/body/recipients for one-pager, email draft, and sequence step.
+   - Files: `src/lib/email/compose-contract.ts`.
+   - Acceptance: all account-page outbound actions produce one canonical send payload.
+   - Tests: unit tests for one-pager and email-draft variants.
+3. Ticket `A5.3`: add inline editable send preview.
+   - Change: allow pre-send subject edit, opening paragraph edit, CTA edit, and recipient set edit.
+   - Files: compose shell UI components.
+   - Acceptance: operator can make last-mile changes without breaking provenance or send linkage.
+   - Tests: component tests for edit state and reset state.
+4. Ticket `A5.4`: attach generated content and account telemetry to send.
+   - Change: enforce that every account-page send carries `accountName`, `generatedContentId` when present, recipient ids, and workflow telemetry metadata.
+   - Files: send client helpers and route tests.
+   - Acceptance: send analytics can be attributed back to account page actions.
+   - Tests: unit tests for telemetry payloads and route assertions.
+
+### Sprint A6: Durable Send Jobs, Status, And Recovery
+
+**Goal:** move account-page sending from fire-and-pray to durable job orchestration with recipient-level status, retries, and recovery guidance.  
+**Demo:** operator sends from account page, sees a send job created, watches per-recipient progress, retries failed recipients, and sees successful sends logged back to the timeline.
+
+1. Ticket `A6.1`: make account-page send use async send jobs for multi-recipient sends.
+   - Change: route multi-recipient account-page sends through `/api/email/send-bulk-async` when recipient count or policy requires it.
+   - Files: send dialog / compose shell / async send route integration.
+   - Acceptance: multi-recipient sends are durable and observable.
+   - Tests: route + component tests for enqueue flow.
+2. Ticket `A6.2`: add account-page send-job tracker panel.
+   - Change: show queued, processing, sent, failed, skipped counts and retry affordances inline on account page.
+   - Files: tracker component plus account page section.
+   - Acceptance: operator can recover from failure without leaving the account.
+   - Tests: component tests for all job states.
+3. Ticket `A6.3`: add recipient-level remediation actions.
+   - Change: retry later, mark bad address, replace persona, or suppress recipient from account page.
+   - Files: remediation route + account-page actions.
+   - Acceptance: failed recipients produce an actionable recovery path.
+   - Tests: route tests and component tests for each action.
+4. Ticket `A6.4`: append send outcomes to account timeline.
+   - Change: successful/failed/skipped sends must show on account page activity stream with generated-content linkage.
+   - Files: timeline query + timeline renderer.
+   - Acceptance: account page reflects send state changes immediately.
+   - Tests: query/unit tests for timeline composition.
+
+### Sprint A7: Post-Send Learning Loop On The Account Page
+
+**Goal:** make reply/outcome feedback change the next action, not just land in logs somewhere else.  
+**Demo:** account page shows reply/outcome events, updates next-best action, recommends the next asset or follow-up, and records why.
+
+1. Ticket `A7.1`: add operator outcome logging from account page.
+   - Change: inline action to mark reply or send outcome (`positive`, `neutral`, `wrong-person`, `bad-timing`, etc.).
+   - Files: outcome dialog + operator outcomes route integration.
+   - Acceptance: outcomes are logged without leaving account page.
+   - Tests: route tests and component tests.
+2. Ticket `A7.2`: connect outcomes to next-best-action recalculation.
+   - Change: rebuild account next action using send outcomes, replies, and committee coverage gaps.
+   - Files: `src/lib/account-command-center.ts`.
+   - Acceptance: account page recommendation changes based on real response data.
+   - Tests: unit tests for outcome-driven next-action changes.
+3. Ticket `A7.3`: queue next-asset recommendation after outcome.
+   - Change: when outcome indicates wrong stage/message, suggest next infographic/email block or regenerate one-pager.
+   - Files: outcome-to-asset recommendation helper.
+   - Acceptance: operator gets a concrete next step, not just a status badge.
+   - Tests: unit tests for recommendation mapping.
+4. Ticket `A7.4`: add account-page engagement summary card.
+   - Change: summarize sent, delivered, opened, replied, positive replied, and meetings influenced for the account.
+   - Files: account analytics query + UI card.
+   - Acceptance: operator can understand account momentum from the same page.
+   - Tests: query tests and component tests.
+
+### Sprint A8: Proof Suite, Performance, And Release Readiness
+
+**Goal:** prove the account page can run the full research -> contacts -> generate -> send -> learn loop reliably.  
+**Demo:** one deterministic proof account can execute the full workflow in CI and locally with no skipped tests and no manual data patching.
+
+1. Ticket `A8.1`: add deterministic end-to-end account-page proof seed.
+   - Change: one seed path creates account, alias account, research context, contact candidates, promoted recipients, generated asset, and send job states.
+   - Files: seed route/helper.
+   - Acceptance: proof environment bootstraps from one command.
+   - Tests: seed contract test.
+2. Ticket `A8.2`: add full account-page proof spec.
+   - Change: Playwright flow from account open to research refresh to contact promotion to generation to send to outcome logging.
+   - Files: proof e2e spec.
+   - Acceptance: `skipped=0`; every critical state transition is asserted.
+   - Validation: proof run artifact + screenshots.
+3. Ticket `A8.3`: add performance guardrails for account page.
+   - Change: define query and interaction budgets for initial page load, refresh, preview open, and send-job tracker refresh.
+   - Files: perf harness or lightweight instrumentation tests.
+   - Acceptance: account page remains operator-fast as workflows consolidate.
+   - Tests: budget assertions or scripted performance checks.
+4. Ticket `A8.4`: add release runbook and rollback protocol.
+   - Change: document envs, flags, smoke tests, known rollback points, and data remediation steps.
+   - Files: new or updated release checklist/runbook docs.
+   - Acceptance: release can be executed without tribal knowledge.
+   - Validation: checklist review and operator signoff.
+
+### Definition Of Done For This Workstream
+
+The account-page outreach execution reset is only complete when all of the following are true:
+
+1. A malformed or suppressed contact cannot silently derail the operator with a generic send error.
+2. Assets, contacts, research, and sends resolve through one canonical account identity.
+3. Contact discovery and replacement can happen inline on the account page.
+4. Asset generation or selection can happen inline on the account page.
+5. Compose, preview, and send can happen inline on the account page.
+6. Multi-recipient sends have durable job tracking and recovery.
+7. Outcomes and replies change the next recommended action on the account page.
+8. The full workflow has deterministic proof coverage.
+
 ## Integration Status Snapshot (As-Is, 2026-05-04)
 
 ### Apollo Integration

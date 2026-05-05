@@ -157,5 +157,40 @@ describe('SendJobTracker', () => {
     expect(screen.getAllByText('failed').length).toBeGreaterThan(0);
     expect(screen.getByText('Mailbox unavailable')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Retry Failed Recipients/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Retry Later/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Mark Bad Address/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Suppress Recipient/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Replace Persona/i })).toBeInTheDocument();
+  });
+
+  it('runs recipient remediation actions and refreshes the tracker', async () => {
+    let getCalls = 0;
+    vi.stubGlobal('fetch', vi.fn(async (input: string | URL | Request, init?: RequestInit) => {
+      const url = input.toString();
+      if (url === '/api/revops/failure-remediation' && init?.method === 'POST') {
+        return {
+          ok: true,
+          json: async () => ({ success: true, affected: 1 }),
+        };
+      }
+
+      getCalls += 1;
+      return {
+        ok: true,
+        json: async () => (getCalls === 1 ? makeGetPayload('failed') : makeGetPayload('pending')),
+      };
+    }));
+
+    render(<SendJobTracker jobId={77} pollMs={60_000} />);
+    await screen.findByText('Send Job #77');
+
+    fireEvent.click(screen.getByRole('button', { name: 'Retry Later' }));
+
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalledWith('/api/revops/failure-remediation', expect.objectContaining({
+        method: 'POST',
+      }));
+    });
+    expect(toastSuccess).toHaveBeenCalledWith('Recipient queued for retry');
   });
 });

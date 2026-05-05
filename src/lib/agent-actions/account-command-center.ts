@@ -1,3 +1,4 @@
+import { normalizeAgentActionFreshness, type FreshnessState } from '@/lib/agent-actions/freshness';
 import type { AgentActionResult } from '@/lib/agent-actions/types';
 
 type RecipientCandidate = {
@@ -36,12 +37,64 @@ export type CommitteeCoverageBrief = {
   recommendedNextPeople: string[];
 };
 
+export type AccountSignal = {
+  key: string;
+  title: string;
+  summary: string;
+  source: string;
+  confidence: 'high' | 'medium' | 'low';
+  observedAt: string | null;
+  freshness: FreshnessState;
+  artifactLabel?: string;
+  artifactHref?: string;
+};
+
 function safeString(value: unknown) {
   return typeof value === 'string' ? value : '';
 }
 
 function normalizeName(value: string) {
   return value.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+function toIso(value: unknown) {
+  if (typeof value === 'string' || value instanceof Date) {
+    const normalized = new Date(value);
+    if (!Number.isNaN(normalized.getTime())) {
+      return normalized.toISOString();
+    }
+  }
+  return null;
+}
+
+function safeNumber(value: unknown) {
+  return typeof value === 'number' && Number.isFinite(value) ? value : null;
+}
+
+function freshnessRank(state: FreshnessState) {
+  switch (state) {
+    case 'fresh':
+      return 4;
+    case 'aging':
+      return 3;
+    case 'stale':
+      return 2;
+    case 'never_refreshed':
+    default:
+      return 1;
+  }
+}
+
+function confidenceRank(confidence: AccountSignal['confidence']) {
+  switch (confidence) {
+    case 'high':
+      return 3;
+    case 'medium':
+      return 2;
+    case 'low':
+    default:
+      return 1;
+  }
 }
 
 function extractRecordNames(result: AgentActionResult | null) {
@@ -171,13 +224,151 @@ export function buildCoverageGaps(result: AgentActionResult | null) {
   return gaps;
 }
 
+export function buildSignalRegistry(result: AgentActionResult | null): AccountSignal[] {
+  if (!result) return [];
+  const freshness = normalizeAgentActionFreshness(result.freshness);
+
+  const signals: AccountSignal[] = [];
+  const researchCard = result.cards.find((card) => card.title === 'Research Summary');
+  const pipelineCard = result.cards.find((card) => card.title === 'Pipeline');
+  const draftingCard = result.cards.find((card) => card.title === 'Drafting Signals');
+  const committeeCard = result.cards.find((card) => card.title === 'Committee Coverage');
+  const buyerMapCard = result.cards.find((card) => card.title === 'Buyer Map');
+  const latestEmail = (result.data.latestEmail as Record<string, unknown> | undefined) ?? undefined;
+  const latestAsset = (result.data.latestAsset as Record<string, unknown> | undefined) ?? undefined;
+  const contactFreshness = (result.data.contactFreshness as Record<string, unknown> | undefined) ?? undefined;
+  const decisionMakersPayload = (result.data.salesAgent as Record<string, unknown> | undefined)?.decisionMakers as Record<string, unknown> | undefined;
+  const decisionMakerCount = Array.isArray(decisionMakersPayload?.decision_makers)
+    ? decisionMakersPayload.decision_makers.length
+    : 0;
+  const pipelinePayload = (result.data.pipeline as Record<string, unknown> | undefined)?.pipeline as Record<string, unknown> | undefined;
+  const funnel = (result.data.pipeline as Record<string, unknown> | undefined)?.funnel as Record<string, unknown> | undefined;
+
+  if (researchCard?.body) {
+    signals.push({
+      key: 'research-summary',
+      title: 'Research Summary',
+      summary: researchCard.body,
+      source: result.provider,
+      confidence: result.status === 'ok' ? 'high' : 'medium',
+      observedAt: freshness.dimensions.summary.updatedAt ?? freshness.fetchedAt,
+      freshness: freshness.dimensions.summary.status,
+    });
+  }
+
+  if (committeeCard?.body) {
+    signals.push({
+      key: 'committee-coverage',
+      title: 'Committee Coverage',
+      summary: committeeCard.body,
+      source: 'committee',
+      confidence: /not been built|unavailable/i.test(committeeCard.body) ? 'low' : 'medium',
+      observedAt: freshness.fetchedAt,
+      freshness: freshness.dimensions.signals.status,
+    });
+  }
+
+  if (buyerMapCard?.body) {
+    signals.push({
+      key: 'buyer-map',
+      title: 'Buyer Map',
+      summary: buyerMapCard.body,
+      source: 'sales_agent',
+      confidence: decisionMakerCount > 0 ? 'high' : 'low',
+      observedAt: freshness.fetchedAt,
+      freshness: freshness.dimensions.signals.status,
+    });
+  }
+
+  if (pipelineCard?.body) {
+    const stageSummary = funnel && typeof funnel === 'object'
+      ? Object.entries(funnel)
+        .slice(0, 2)
+        .map(([key, value]) => `${key}: ${String(value)}`)
+        .join(' • ')
+      : '';
+    signals.push({
+      key: 'pipeline',
+      title: 'Pipeline',
+      summary: stageSummary ? `${pipelineCard.body} ${stageSummary}` : pipelineCard.body,
+      source: 'pipeline',
+      confidence: pipelinePayload ? 'medium' : 'low',
+      observedAt: freshness.fetchedAt,
+      freshness: freshness.dimensions.signals.status,
+    });
+  }
+
+  if (latestEmail?.subject) {
+    signals.push({
+      key: 'latest-email',
+      title: 'Latest Send',
+      summary: `Latest outbound: ${safeString(latestEmail.subject)}${safeNumber(latestEmail.reply_count) ? ` • replies ${String(latestEmail.reply_count)}` : ''}`,
+      source: 'email_log',
+      confidence: 'high',
+      observedAt: toIso(latestEmail.sent_at),
+      freshness: freshness.dimensions.signals.status,
+    });
+  }
+
+  if (latestAsset?.content_type) {
+    signals.push({
+      key: 'latest-asset',
+      title: 'Latest Asset',
+      summary: `Latest generated asset: ${safeString(latestAsset.content_type).replaceAll('_', ' ')}`,
+      source: 'generated_content',
+      confidence: 'medium',
+      observedAt: toIso(latestAsset.created_at),
+      freshness: freshness.dimensions.generated_content.status,
+    });
+  }
+
+  if (contactFreshness?.mappedContactCount || draftingCard?.body) {
+    signals.push({
+      key: 'contact-coverage',
+      title: 'Contact Coverage',
+      summary: `${String(contactFreshness?.mappedContactCount ?? 0)} mapped contacts${safeNumber(contactFreshness?.liveContactCount) ? ` • ${String(contactFreshness?.liveContactCount)} live external contacts` : ''}`,
+      source: 'contacts',
+      confidence: safeNumber(contactFreshness?.mappedContactCount) ? 'medium' : 'low',
+      observedAt: toIso(contactFreshness?.latestEnrichedAt),
+      freshness: freshness.dimensions.contacts.status,
+    });
+  }
+
+  if (draftingCard?.body) {
+    signals.push({
+      key: 'drafting-signals',
+      title: 'Drafting Signals',
+      summary: draftingCard.body,
+      source: 'drafting',
+      confidence: /available/i.test(draftingCard.body) ? 'medium' : 'low',
+      observedAt: toIso(latestAsset?.created_at) ?? freshness.fetchedAt,
+      freshness: freshness.dimensions.generated_content.status,
+    });
+  }
+
+  return signals
+    .filter((signal) => Boolean(signal.summary))
+    .sort((left, right) => {
+      const leftFreshness = freshnessRank(left.freshness);
+      const rightFreshness = freshnessRank(right.freshness);
+      if (rightFreshness !== leftFreshness) return rightFreshness - leftFreshness;
+
+      const leftObserved = left.observedAt ? new Date(left.observedAt).getTime() : 0;
+      const rightObserved = right.observedAt ? new Date(right.observedAt).getTime() : 0;
+      if (rightObserved !== leftObserved) return rightObserved - leftObserved;
+
+      const leftConfidence = confidenceRank(left.confidence);
+      const rightConfidence = confidenceRank(right.confidence);
+      if (rightConfidence !== leftConfidence) return rightConfidence - leftConfidence;
+
+      return left.title.localeCompare(right.title);
+    });
+}
+
 export function buildTopSignals(result: AgentActionResult | null) {
-  if (!result) return [] as string[];
-  return result.cards
-    .filter((card) => ['Research Summary', 'Pipeline', 'Drafting Signals'].includes(card.title))
-    .map((card) => card.body)
-    .filter(Boolean)
-    .slice(0, 3);
+  return buildSignalRegistry(result)
+    .slice(0, 3)
+    .map((signal) => signal.summary);
 }
 
 export function buildRecommendedAngle(result: AgentActionResult | null, fallback: string) {

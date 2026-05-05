@@ -1,3 +1,5 @@
+import { buildOutcomeFollowUpRecommendation, parseOperatorOutcomeLabel } from '@/lib/revops/operator-outcomes';
+
 export type AccountCommandTabId = 'overview' | 'contacts' | 'assets' | 'engagement' | 'tasks' | 'meetings' | 'pipeline';
 
 export type AccountCommandTab = {
@@ -36,9 +38,29 @@ export type AccountNextBestAction = {
   tone: 'ready' | 'attention' | 'blocked';
 };
 
+export type AccountEngagementSummary = {
+  sent: number;
+  delivered: number;
+  opened: number;
+  replied: number;
+  positiveReplies: number;
+  meetingsInfluenced: number;
+  latestOutcomeLabel: string | null;
+  latestOutcomeNote: string | null;
+};
+
 export function buildAccountNextBestAction(
   account: AccountNextActionSource,
-  input: { contactCount: number; assetCount: number; openTaskCount: number },
+  input: {
+    contactCount: number;
+    assetCount: number;
+    openTaskCount: number;
+    replyCount?: number;
+    coverageGapCount?: number;
+    latestOutcomeLabel?: string | null;
+    latestOutcomeNotes?: string | null;
+    hasMeetingSignal?: boolean;
+  },
 ): AccountNextBestAction {
   if (account.next_action) {
     return {
@@ -47,6 +69,16 @@ export function buildAccountNextBestAction(
       route: '#tasks',
       tone: 'attention',
     };
+  }
+
+  const outcomeRecommendation = buildOutcomeFollowUpRecommendation({
+    outcomeLabel: input.latestOutcomeLabel,
+    coverageGapCount: input.coverageGapCount,
+    hasMeetingSignal: input.hasMeetingSignal,
+    notes: input.latestOutcomeNotes,
+  });
+  if (outcomeRecommendation) {
+    return outcomeRecommendation.nextAction;
   }
 
   if (input.contactCount === 0) {
@@ -64,6 +96,17 @@ export function buildAccountNextBestAction(
       detail: 'No account-owned assets are ready yet.',
       route: '#assets',
       tone: 'attention',
+    };
+  }
+
+  if ((input.replyCount ?? 0) > 0) {
+    return {
+      label: input.coverageGapCount && input.coverageGapCount > 0 ? 'Expand committee coverage while the thread is warm' : 'Respond while the thread is active',
+      detail: input.coverageGapCount && input.coverageGapCount > 0
+        ? 'A reply exists, but the account still has uncovered buyer lanes before the next send.'
+        : 'Reply activity exists on this account. Keep the motion moving before it cools.',
+      route: input.coverageGapCount && input.coverageGapCount > 0 ? '#contacts' : '#engagement',
+      tone: 'ready',
     };
   }
 
@@ -95,7 +138,7 @@ export function buildAccountNextBestAction(
 
 export type AccountTimelineItem = {
   id: string;
-  kind: 'activity' | 'email' | 'meeting' | 'microsite' | 'capture';
+  kind: 'activity' | 'email' | 'meeting' | 'microsite' | 'capture' | 'send_job' | 'outcome';
   title: string;
   detail: string;
   occurredAt: Date;
@@ -146,12 +189,49 @@ type CaptureSource = {
   captured_at: Date;
 };
 
+type SendJobRecipientSource = {
+  id: number;
+  send_job_id: number;
+  generated_content_id: number;
+  account_name: string;
+  to_email: string;
+  status: string;
+  error_message: string | null;
+  sent_at: Date | null;
+  created_at: Date;
+  updated_at: Date;
+};
+
+type OperatorOutcomeSource = {
+  id: string;
+  generated_content_id: number | null;
+  outcome_label: string | null;
+  source_kind: string;
+  source_id: string;
+  notes: string | null;
+  created_at: Date;
+};
+
+type EngagementEmailSource = {
+  status: string;
+  reply_count: number;
+  open_count?: number | null;
+  opened_at?: Date | null;
+  delivered_at?: Date | null;
+};
+
+type EngagementMeetingSource = {
+  meeting_status: string;
+};
+
 export function buildAccountTimeline(input: {
   activities: ActivitySource[];
   emails: EmailSource[];
   meetings: MeetingSource[];
   micrositeSessions: MicrositeSource[];
   captures: CaptureSource[];
+  sendRecipients?: SendJobRecipientSource[];
+  operatorOutcomes?: OperatorOutcomeSource[];
   limit?: number;
 }): AccountTimelineItem[] {
   const items: AccountTimelineItem[] = [
@@ -191,12 +271,70 @@ export function buildAccountTimeline(input: {
       detail: capture.intent ?? capture.next_step ?? 'Captured buyer context',
       occurredAt: capture.captured_at,
     })),
+    ...(input.sendRecipients ?? []).map((recipient) => ({
+      id: `send-job-${recipient.id}`,
+      kind: 'send_job' as const,
+      title: recipient.status === 'sent'
+        ? 'Send delivered to recipient'
+        : recipient.status === 'failed'
+          ? 'Send failed'
+          : 'Send skipped',
+      detail: recipient.status === 'failed'
+        ? `${recipient.to_email} · ${recipient.error_message ?? 'Send failed'} · asset ${recipient.generated_content_id}`
+        : recipient.status === 'skipped'
+          ? `${recipient.to_email} · ${recipient.error_message ?? 'Send skipped'} · asset ${recipient.generated_content_id}`
+          : `${recipient.to_email} · asset ${recipient.generated_content_id}`,
+      occurredAt: recipient.sent_at ?? recipient.updated_at ?? recipient.created_at,
+      href: `/generated-content?account=${encodeURIComponent(recipient.account_name)}`,
+    })),
+    ...(input.operatorOutcomes ?? []).map((outcome) => ({
+      id: `outcome-${outcome.id}`,
+      kind: 'outcome' as const,
+      title: `Outcome: ${parseOperatorOutcomeLabel(outcome.outcome_label)?.replaceAll('-', ' ') ?? 'logged'}`,
+      detail: outcome.notes?.trim()
+        ? outcome.notes.trim()
+        : `${outcome.source_kind} · ${outcome.source_id}`,
+      occurredAt: outcome.created_at,
+      href: outcome.generated_content_id ? `/generated-content?contentId=${outcome.generated_content_id}` : undefined,
+    })),
   ];
 
   return items
     .filter((item) => !Number.isNaN(item.occurredAt.getTime()))
     .sort((left, right) => right.occurredAt.getTime() - left.occurredAt.getTime())
     .slice(0, input.limit ?? 12);
+}
+
+export function buildAccountEngagementSummary(input: {
+  emails: EngagementEmailSource[];
+  meetings: EngagementMeetingSource[];
+  operatorOutcomes: Array<Pick<OperatorOutcomeSource, 'outcome_label' | 'notes' | 'created_at'>>;
+}): AccountEngagementSummary {
+  const sortedOutcomes = [...input.operatorOutcomes].sort((left, right) => right.created_at.getTime() - left.created_at.getTime());
+  const latestOutcome = sortedOutcomes[0] ?? null;
+  const positiveReplies = sortedOutcomes.filter((outcome) => {
+    const label = parseOperatorOutcomeLabel(outcome.outcome_label);
+    return label === 'positive' || label === 'closed-won';
+  }).length;
+
+  return {
+    sent: input.emails.length,
+    delivered: input.emails.filter((email) => (
+      Boolean(email.delivered_at)
+      || ['delivered', 'opened', 'clicked'].includes((email.status ?? '').toLowerCase())
+      || (email.reply_count ?? 0) > 0
+    )).length,
+    opened: input.emails.filter((email) => (
+      Boolean(email.opened_at)
+      || (email.open_count ?? 0) > 0
+      || ['opened', 'clicked'].includes((email.status ?? '').toLowerCase())
+    )).length,
+    replied: input.emails.filter((email) => (email.reply_count ?? 0) > 0).length,
+    positiveReplies,
+    meetingsInfluenced: input.meetings.filter((meeting) => /booked|held|completed|scheduled/i.test(meeting.meeting_status ?? '')).length,
+    latestOutcomeLabel: latestOutcome?.outcome_label ?? null,
+    latestOutcomeNote: latestOutcome?.notes ?? null,
+  };
 }
 
 function formatAccountDate(value: Date | string) {

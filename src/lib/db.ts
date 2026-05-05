@@ -23,6 +23,13 @@ export async function dbGetPersonasByAccount(accountName: string) {
   return prisma.persona.findMany({ where: { account_name: accountName } });
 }
 
+export async function dbGetPersonasByAccounts(accountNames: string[]) {
+  return prisma.persona.findMany({
+    where: { account_name: { in: accountNames } },
+    orderBy: [{ account_name: 'asc' }, { quality_score: 'desc' }, { id: 'asc' }],
+  });
+}
+
 // ── Activities ────────────────────────────────────────────────────────
 export async function dbGetActivities() {
   return prisma.activity.findMany({ orderBy: { created_at: 'desc' } });
@@ -32,9 +39,193 @@ export async function dbGetActivitiesByAccount(accountName: string) {
   return prisma.activity.findMany({ where: { account_name: accountName }, orderBy: { created_at: 'desc' } });
 }
 
+export async function dbGetActivitiesByAccounts(accountNames: string[]) {
+  return prisma.activity.findMany({
+    where: { account_name: { in: accountNames } },
+    orderBy: { created_at: 'desc' },
+  });
+}
+
+export async function dbGetGeneratedContentByAccounts(accountNames: string[], take = 8) {
+  return prisma.generatedContent.findMany({
+    where: { account_name: { in: accountNames } },
+    orderBy: { created_at: 'desc' },
+    take,
+    select: {
+      id: true,
+      content_type: true,
+      persona_name: true,
+      provider_used: true,
+      is_published: true,
+      external_send_count: true,
+      version: true,
+      campaign_id: true,
+      campaign: {
+        select: {
+          campaign_type: true,
+        },
+      },
+      checklist_state: {
+        select: {
+          completed_item_ids: true,
+        },
+      },
+      version_metadata: true,
+      content: true,
+      created_at: true,
+    },
+  });
+}
+
+export async function dbGetEmailLogsByAccounts(accountNames: string[], take = 12) {
+  return prisma.emailLog.findMany({
+    where: { account_name: { in: accountNames } },
+    orderBy: { sent_at: 'desc' },
+    take,
+    select: {
+      id: true,
+      subject: true,
+      status: true,
+      to_email: true,
+      reply_count: true,
+      open_count: true,
+      opened_at: true,
+      delivered_at: true,
+      generated_content_id: true,
+      sent_at: true,
+    },
+  });
+}
+
+export async function dbGetSendJobsByAccounts(accountNames: string[], take = 4) {
+  return prisma.sendJob.findMany({
+    where: {
+      recipients: {
+        some: {
+          account_name: { in: accountNames },
+        },
+      },
+    },
+    orderBy: { updated_at: 'desc' },
+    take,
+    select: {
+      id: true,
+      status: true,
+      total_recipients: true,
+      sent_count: true,
+      failed_count: true,
+      skipped_count: true,
+      created_at: true,
+      updated_at: true,
+    },
+  });
+}
+
+export async function dbGetSendJobRecipientEventsByAccounts(accountNames: string[], take = 12) {
+  return prisma.sendJobRecipient.findMany({
+    where: {
+      account_name: { in: accountNames },
+      status: { in: ['sent', 'failed', 'skipped'] },
+    },
+    orderBy: { updated_at: 'desc' },
+    take,
+    select: {
+      id: true,
+      send_job_id: true,
+      generated_content_id: true,
+      account_name: true,
+      to_email: true,
+      status: true,
+      error_message: true,
+      sent_at: true,
+      created_at: true,
+      updated_at: true,
+    },
+  });
+}
+
+export async function dbGetOperatorOutcomesByAccounts(accountNames: string[], take = 12) {
+  return prisma.operatorOutcome.findMany({
+    where: { account_name: { in: accountNames } },
+    orderBy: { created_at: 'desc' },
+    take,
+    select: {
+      id: true,
+      account_name: true,
+      campaign_id: true,
+      generated_content_id: true,
+      outcome_label: true,
+      source_kind: true,
+      source_id: true,
+      notes: true,
+      created_at: true,
+    },
+  });
+}
+
+export async function dbGetMeetingsByAccounts(accountNames: string[], take = 8) {
+  return prisma.meeting.findMany({
+    where: { account_name: { in: accountNames } },
+    orderBy: [{ meeting_date: 'desc' }, { created_at: 'desc' }],
+    take,
+    select: {
+      id: true,
+      meeting_status: true,
+      persona: true,
+      meeting_date: true,
+      meeting_time: true,
+      location: true,
+      objective: true,
+      post_next_step: true,
+      notes: true,
+      created_at: true,
+    },
+  });
+}
+
+export async function dbGetMobileCapturesByAccounts(accountNames: string[], take = 8) {
+  return prisma.mobileCapture.findMany({
+    where: { account_name: { in: accountNames } },
+    orderBy: { captured_at: 'desc' },
+    take,
+    select: {
+      id: true,
+      title: true,
+      intent: true,
+      next_step: true,
+      captured_at: true,
+      owner: true,
+      heat_score: true,
+    },
+  });
+}
+
 export async function dbGetMicrositeAccountAnalytics(accountName: string): Promise<MicrositeAccountAnalytics> {
   const sessions = await prisma.micrositeEngagement.findMany({
     where: { account_name: accountName },
+    orderBy: { updated_at: 'desc' },
+  });
+
+  return buildMicrositeAccountAnalytics(
+    sessions.map((session) => ({
+      account_name: session.account_name,
+      account_slug: session.account_slug,
+      person_name: session.person_name,
+      person_slug: session.person_slug,
+      path: session.path,
+      sections_viewed: session.sections_viewed,
+      cta_ids: session.cta_ids,
+      variant_history: session.variant_history,
+      scroll_depth_pct: session.scroll_depth_pct,
+      duration_seconds: session.duration_seconds,
+      updated_at: session.updated_at,
+    })),
+  );
+}
+
+export async function dbGetMicrositeAccountAnalyticsByAccounts(accountNames: string[]): Promise<MicrositeAccountAnalytics> {
+  const sessions = await prisma.micrositeEngagement.findMany({
+    where: { account_name: { in: accountNames } },
     orderBy: { updated_at: 'desc' },
   });
 
@@ -104,12 +295,23 @@ export async function dbGetGeneratedContent() {
 }
 
 // ── Account Context (AI APIs — parallel fetch) ─────────────────────────
-export async function getAccountContext(name: string) {
+export async function getAccountContext(name: string, accountNames?: string[]) {
+  const scopedAccountNames = Array.from(new Set(accountNames?.length ? accountNames : [name]));
   const [account, meetingBrief, emailLogs, personas] = await Promise.all([
     prisma.account.findUnique({ where: { name } }),
-    prisma.meetingBrief.findFirst({ where: { account_name: name } }),
-    prisma.emailLog.findMany({ where: { account_name: name }, orderBy: { sent_at: 'desc' }, take: 3 }),
-    prisma.persona.findMany({ where: { account_name: name } }),
+    prisma.meetingBrief.findFirst({
+      where: { account_name: { in: scopedAccountNames } },
+      orderBy: { updated_at: 'desc' },
+    }),
+    prisma.emailLog.findMany({
+      where: { account_name: { in: scopedAccountNames } },
+      orderBy: { sent_at: 'desc' },
+      take: 3,
+    }),
+    prisma.persona.findMany({
+      where: { account_name: { in: scopedAccountNames } },
+      orderBy: [{ quality_score: 'desc' }, { id: 'asc' }],
+    }),
   ]);
   return { account, meetingBrief, emailLogs, personas };
 }

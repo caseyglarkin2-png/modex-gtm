@@ -10,6 +10,7 @@ const mockedPrisma = {
   },
   sendJobRecipient: {
     update: vi.fn(),
+    findMany: vi.fn(),
   },
   emailLog: {
     create: vi.fn(),
@@ -48,6 +49,12 @@ describe('process send jobs cron', () => {
       {
         id: 91,
         status: 'pending',
+        send_strategy: {
+          workflow: {
+            surface: 'account_page',
+            shell: 'account_outreach',
+          },
+        },
         recipients: [
           {
             id: 201,
@@ -84,6 +91,10 @@ describe('process send jobs cron', () => {
 
     mockedPrisma.emailLog.create.mockResolvedValue({ id: 501 });
     mockedPrisma.sendJobRecipient.update.mockResolvedValue({});
+    mockedPrisma.sendJobRecipient.findMany.mockResolvedValue([
+      { status: 'sent' },
+      { status: 'failed' },
+    ]);
     mockedPrisma.generatedContent.update.mockResolvedValue({});
     mockedPrisma.sendJob.update.mockResolvedValue({});
 
@@ -108,6 +119,19 @@ describe('process send jobs cron', () => {
         skipped_count: 0,
       }),
     });
+    expect(mockedPrisma.emailLog.create).toHaveBeenCalledWith(expect.objectContaining({
+      data: expect.objectContaining({
+        metadata: {
+          workflow: expect.objectContaining({
+            surface: 'account_page',
+            shell: 'account_outreach',
+          }),
+          recipient: {
+            sendJobRecipientId: 201,
+          },
+        },
+      }),
+    }));
     expect(mockedMarkCronSuccess).toHaveBeenCalled();
   });
 });

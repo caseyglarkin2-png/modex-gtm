@@ -83,6 +83,12 @@ test('Quarterly legacy route and Ops tabs remain reachable', async ({ page }) =>
   await expect(page).toHaveURL(/\/ops\?tab=coverage$/);
   await expect(page.locator('body')).toContainText('TAM/ICP Coverage + Gate 0');
 
+  await page.getByRole('link', { name: 'Account Identity' }).first().click();
+  await expect(page).toHaveURL(/\/ops\?tab=account-identity$/);
+  await expect(page.locator('body')).toContainText('Duplicate Account Remediation');
+  await expect(page.getByRole('link', { name: 'Export JSON' })).toHaveAttribute('href', '/api/revops/account-identity-report?format=json');
+  await expect(page.getByRole('link', { name: 'Export CSV' })).toHaveAttribute('href', '/api/revops/account-identity-report?format=csv');
+
   await page.screenshot({ path: 'test-results/analytics-ops-workspace/analytics-ops-workspace.png', fullPage: true });
 });
 

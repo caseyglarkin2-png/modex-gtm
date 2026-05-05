@@ -301,4 +301,100 @@ describe('Bulk email send API', () => {
       { to: 'skip@example.com', reason: 'Recipient explicitly unsubscribed' },
     ]);
   });
+
+  it('skips malformed recipient emails instead of failing the entire bulk payload', async () => {
+    mockedPrisma.prisma.unsubscribedEmail.findMany.mockResolvedValue([]);
+    mockedSendBulk.mockResolvedValue([{ status: 'fulfilled', value: { headers: { 'x-message-id': 'bulk-2' } } }]);
+    mockedPrisma.prisma.emailLog.create.mockResolvedValue({});
+
+    const req = new NextRequest('http://localhost/api/email/send-bulk', {
+      method: 'POST',
+      body: JSON.stringify({
+        recipients: [
+          { to: 'not-an-email', readinessScore: 20, readinessTier: 'low', stale: false },
+          { to: 'send@example.com', readinessScore: 90, readinessTier: 'high', stale: false },
+        ],
+        subject: 'Bulk subject',
+        bodyHtml: 'Bulk send body',
+        generatedContentId: 99,
+      }),
+      headers: { 'content-type': 'application/json', 'x-forwarded-for': '127.0.0.1' },
+    });
+
+    const res = await sendBulkPOST(req);
+    const payload = await res.json();
+
+    expect(res.status).toBe(200);
+    expect(payload.success).toBe(true);
+    expect(payload.sent).toBe(1);
+    expect(payload.failed).toBe(0);
+    expect(payload.total).toBe(2);
+    expect(payload.skipped).toEqual([
+      { to: 'not-an-email', reason: 'Invalid recipient email address' },
+    ]);
+  });
+
+  it('persists account-page workflow metadata on bulk sends for attribution', async () => {
+    mockedPrisma.prisma.unsubscribedEmail.findMany.mockResolvedValue([]);
+    mockedSendBulk.mockResolvedValue([{ status: 'fulfilled', value: { headers: { 'x-message-id': 'bulk-3' } } }]);
+    mockedPrisma.prisma.emailLog.create.mockResolvedValue({});
+    mockedPrisma.prisma.persona.findMany.mockResolvedValue([
+      {
+        id: 7,
+        name: 'Alex Ops',
+        email: 'send@example.com',
+        account_name: 'Acme Foods',
+      },
+    ]);
+
+    const req = new NextRequest('http://localhost/api/email/send-bulk', {
+      method: 'POST',
+      body: JSON.stringify({
+        recipients: [
+          { to: 'send@example.com', personaId: 7, personaName: 'Alex Ops', readinessScore: 90, readinessTier: 'high', stale: false },
+        ],
+        subject: 'Bulk subject',
+        bodyHtml: 'Bulk send body',
+        accountName: 'Acme Foods',
+        generatedContentId: 99,
+        workflowMetadata: {
+          surface: 'account_page',
+          shell: 'account_outreach',
+          variant: 'one_pager_asset',
+          recipientSetKey: 'operators',
+          selectedRecipientIds: [7],
+          assetId: 99,
+          assetVersion: 3,
+        },
+      }),
+      headers: { 'content-type': 'application/json', 'x-forwarded-for': '127.0.0.1' },
+    });
+
+    const res = await sendBulkPOST(req);
+
+    expect(res.status).toBe(200);
+    expect(mockedPrisma.prisma.emailLog.create).toHaveBeenCalledWith(expect.objectContaining({
+      data: expect.objectContaining({
+        generated_content_id: 99,
+        metadata: {
+          workflow: expect.objectContaining({
+            surface: 'account_page',
+            shell: 'account_outreach',
+            variant: 'one_pager_asset',
+            recipientSetKey: 'operators',
+            selectedRecipientIds: [7],
+            assetId: 99,
+            assetVersion: 3,
+          }),
+          recipient: expect.objectContaining({
+            personaId: 7,
+            personaName: 'Alex Ops',
+            readinessScore: 90,
+            readinessTier: 'high',
+            stale: false,
+          }),
+        },
+      }),
+    }));
+  });
 });

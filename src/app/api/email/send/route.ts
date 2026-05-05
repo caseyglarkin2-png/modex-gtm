@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(serializeSendBlocker(block), { status: block.status });
   }
 
-  const { to, cc, subject, bodyHtml, accountName, personaName, personaId, generatedContentId } = parsed.data;
+  const { to, cc, subject, bodyHtml, accountName, personaName, personaId, generatedContentId, workflowMetadata } = parsed.data;
 
   if (!to || to.trim() === '') {
     const block = noEmailSendBlocker();
@@ -154,6 +154,16 @@ export async function POST(req: NextRequest) {
           })
         : null;
 
+      const logMetadata = workflowMetadata
+        ? JSON.parse(JSON.stringify({
+            workflow: workflowMetadata,
+            recipient: {
+              personaId: personaId ?? null,
+              personaName: resolvedRecipient.personaName ?? null,
+            },
+          }))
+        : undefined;
+
       await prisma.emailLog.create({
         data: {
           account_name: resolvedRecipient.accountName ?? '',
@@ -164,6 +174,7 @@ export async function POST(req: NextRequest) {
           status: 'sent',
           provider_message_id: (response.headers?.['x-message-id'] as string) ?? null,
           hubspot_engagement_id: response.hubspotEngagementId ?? null,
+          metadata: logMetadata,
           ...(generatedContentId ? { generated_content_id: generatedContentId } : {}),
         },
       });

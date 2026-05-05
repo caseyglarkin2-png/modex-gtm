@@ -12,6 +12,7 @@ import { AssetSendDialog, type AssetSendRecipient } from '@/components/email/ass
 import { COLD_OUTBOUND_PROMPT_POLICY_VERSION, DEFAULT_CTA_MODE } from '@/lib/revops/cold-outbound-policy';
 import { canDirectSendAsset } from '@/lib/generated-content/asset-send-contract';
 import { recordWorkflowMetric } from '@/lib/agent-actions/telemetry';
+import { parseAssetProvenanceSummary } from '@/lib/generated-content/asset-selection';
 
 type GeneratedContentPreviewDialogProps = {
   accountName: string;
@@ -23,6 +24,7 @@ type GeneratedContentPreviewDialogProps = {
   campaignType?: string;
   checklistCompletedItemIds?: string[];
   recipients?: AssetSendRecipient[];
+  versionMetadata?: unknown;
   promptPolicyVersion?: string;
   ctaMode?: string;
   legacyPolicy?: boolean;
@@ -49,6 +51,7 @@ export function GeneratedContentPreviewDialog({
   campaignType,
   checklistCompletedItemIds,
   recipients = [],
+  versionMetadata,
   promptPolicyVersion = COLD_OUTBOUND_PROMPT_POLICY_VERSION,
   ctaMode = DEFAULT_CTA_MODE,
   legacyPolicy = false,
@@ -62,6 +65,7 @@ export function GeneratedContentPreviewDialog({
   const rendering = resolveGeneratedContentRendering(content, accountName);
   const rawByDefault = rendering.source === 'json_unknown' || rendering.source === 'json_invalid';
   const sendEnabled = canDirectSendAsset(contentType) && recipients.length > 0;
+  const provenance = parseAssetProvenanceSummary(versionMetadata);
   const dialogTrigger = trigger === undefined
     ? (
       <Button variant="outline" size="sm">
@@ -112,7 +116,19 @@ export function GeneratedContentPreviewDialog({
             <Badge variant={legacyPolicy ? 'secondary' : 'default'}>
               {legacyPolicy ? 'Legacy CTA policy' : `CTA ${ctaMode.replaceAll('_', ' ')}`}
             </Badge>
+            <Badge variant="outline">{provenance.freshnessLabel}</Badge>
           </div>
+          <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+            <span>{provenance.usedLiveIntel ? 'Live intel' : 'Static context'}</span>
+            <span>{provenance.signalCount} signals</span>
+            <span>{provenance.recommendedContactCount} contacts</span>
+            <span>{provenance.committeeGapCount} committee gaps</span>
+          </div>
+          {provenance.scopedAccountNames.length > 0 ? (
+            <p className="mt-2 text-xs text-muted-foreground">
+              Scope: {provenance.scopedAccountNames.join(', ')}
+            </p>
+          ) : null}
         </DialogHeader>
         <div className="flex-1 overflow-y-auto px-6 py-4">
           {rawByDefault ? (

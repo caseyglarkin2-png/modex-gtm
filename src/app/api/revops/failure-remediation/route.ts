@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 
 const FailureRemediationSchema = z.object({
-  action: z.enum(['retry-later', 'switch-persona', 'mark-bad-address']),
+  action: z.enum(['retry-later', 'switch-persona', 'mark-bad-address', 'suppress-recipient']),
   recipientIds: z.array(z.number().int().positive()).min(1),
   actor: z.string().optional().default('Casey'),
 });
@@ -26,6 +26,7 @@ export async function POST(req: NextRequest) {
     where: { id: { in: payload.recipientIds } },
     select: {
       id: true,
+      send_job_id: true,
       to_email: true,
       account_name: true,
       campaign_id: true,
@@ -41,9 +42,18 @@ export async function POST(req: NextRequest) {
       where: { id: { in: recipients.map((row) => row.id) } },
       data: {
         status: 'pending',
-        error_message: 'Retry scheduled by failure remediation action',
+        error_message: null,
+        attempted_at: null,
       },
     });
+    await prisma.sendJob.updateMany({
+      where: { id: { in: Array.from(new Set(recipients.map((row) => row.send_job_id))) } },
+      data: {
+        status: 'pending',
+        completed_at: null,
+        error_message: null,
+      },
+    }).catch(() => undefined);
   }
 
   if (payload.action === 'mark-bad-address') {
@@ -56,6 +66,21 @@ export async function POST(req: NextRequest) {
         email_status: 'invalid',
       },
     });
+    await Promise.all(emails.map((email) => prisma.unsubscribedEmail.upsert({
+      where: { email },
+      update: { reason: 'Marked bad address from failure remediation' },
+      create: {
+        email,
+        reason: 'Marked bad address from failure remediation',
+      },
+    }).catch(() => undefined)));
+    await prisma.sendJobRecipient.updateMany({
+      where: { id: { in: recipients.map((row) => row.id) } },
+      data: {
+        status: 'skipped',
+        error_message: 'Marked bad address from failure remediation',
+      },
+    }).catch(() => undefined);
   }
 
   if (payload.action === 'switch-persona') {
@@ -70,6 +95,31 @@ export async function POST(req: NextRequest) {
         notes: `failure-remediation:switch-persona:${row.id}`,
       },
     }).catch(() => undefined)));
+  }
+
+  if (payload.action === 'suppress-recipient') {
+    const emails = recipients.map((row) => row.to_email.toLowerCase());
+    await Promise.all(emails.map((email) => prisma.unsubscribedEmail.upsert({
+      where: { email },
+      update: { reason: 'Suppressed from failure remediation' },
+      create: {
+        email,
+        reason: 'Suppressed from failure remediation',
+      },
+    }).catch(() => undefined)));
+    await prisma.persona.updateMany({
+      where: { email: { in: emails } },
+      data: {
+        do_not_contact: true,
+      },
+    }).catch(() => undefined);
+    await prisma.sendJobRecipient.updateMany({
+      where: { id: { in: recipients.map((row) => row.id) } },
+      data: {
+        status: 'skipped',
+        error_message: 'Suppressed from failure remediation',
+      },
+    }).catch(() => undefined);
   }
 
   return NextResponse.json({

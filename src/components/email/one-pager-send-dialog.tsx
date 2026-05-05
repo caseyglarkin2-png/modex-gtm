@@ -208,8 +208,27 @@ export function OnePageSendDialog({
       });
 
       if (!response.ok) {
-        const payload = await response.json().catch(() => ({} as { error?: string }));
-        throw new Error(payload.error ?? `Send failed: ${response.statusText}`);
+        const payload = await response.json().catch(() => ({} as {
+          error?: string;
+          message?: string;
+          code?: string;
+          details?: {
+            fieldErrors?: Record<string, string[] | undefined>;
+            formErrors?: string[];
+          };
+          skipped?: Array<{ to: string; reason: string }>;
+        }));
+        const detail = payload.code === 'INVALID_PAYLOAD'
+          ? [
+              ...(payload.details?.formErrors ?? []),
+              ...Object.entries(payload.details?.fieldErrors ?? {}).flatMap(([field, errors]) => (
+                Array.isArray(errors) ? errors.map((issue: string) => `${field}: ${issue}`) : []
+              )),
+            ][0]
+          : payload.skipped?.[0]
+            ? `${payload.skipped[0].to}: ${payload.skipped[0].reason}`
+            : payload.message;
+        throw new Error(detail ?? payload.error ?? `Send failed: ${response.statusText}`);
       }
 
       const result = await response.json();

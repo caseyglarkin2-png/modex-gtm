@@ -9,9 +9,16 @@ import {
   getAuditRoutes,
   getQrAssets,
 } from '@/lib/data';
-import { dbGetAccountByName, dbGetAccounts, dbGetActivitiesByAccount, dbGetMicrositeAccountAnalytics, dbGetPersonasByAccount } from '@/lib/db';
+import {
+  dbGetAccountByName,
+  dbGetAccounts,
+  dbGetActivitiesByAccounts,
+  dbGetMicrositeAccountAnalyticsByAccounts,
+  dbGetPersonasByAccounts,
+} from '@/lib/db';
 import {
   accountCommandTabs,
+  buildAccountEngagementSummary,
   buildAccountNextBestAction,
   buildAccountTimeline,
   type AccountCommandTabId,
@@ -32,14 +39,12 @@ import { GeneratorDialog } from '@/components/ai/generator-dialog';
 import { EmailComposer } from '@/components/email/composer';
 import { OnePagerDialog } from '@/components/ai/one-pager-preview';
 import { OutreachSequenceDialog } from '@/components/ai/outreach-sequence';
-import { OutreachWizard } from '@/components/outreach-wizard';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { AddPersonaDialog } from '@/components/add-persona-dialog';
 import { EditableStatus } from '@/components/editable-status';
 import { EditablePersonaStatus } from '@/components/editable-persona-status';
 import { VoiceScriptButton } from '@/components/voice-script-button';
 import type { RecentMicrositeSession } from '@/lib/microsites/analytics';
-import { ensureMicrositeForAccount } from '@/lib/microsites/ensure-microsite';
 import { prisma } from '@/lib/prisma';
 import { buildAccountTags } from '@/lib/research/account-tags';
 import { evaluateContentQuality } from '@/lib/content-quality';
@@ -50,18 +55,27 @@ import { formatCanonicalConflictLabel } from '@/lib/revops/canonical-records';
 import { ensureCanonicalRecords } from '@/lib/revops/canonical-sync';
 import { InfographicJourneyControls } from '@/components/revops/infographic-journey-controls';
 import { AccountGeneratedAssetActions } from '@/components/accounts/account-generated-asset-actions';
+import { AccountContactCandidatesPanel } from '@/components/accounts/account-contact-candidates-panel';
+import { AccountAssetVersionPanel } from '@/components/accounts/account-asset-version-panel';
+import { AccountEngagementSummaryCard } from '@/components/accounts/account-engagement-summary-card';
+import { AccountOutcomeLogger } from '@/components/accounts/account-outcome-logger';
+import { AccountOutreachShell } from '@/components/accounts/account-outreach-shell';
 import { AgentActionDialog } from '@/components/agent-actions/agent-action-dialog';
 import { AgentIntelStrip } from '@/components/agent-actions/agent-intel-strip';
+import { SendJobTracker } from '@/components/generated-content/send-job-tracker';
 import { getAgentContentContext } from '@/lib/agent-actions/content-context';
 import {
   buildCommitteeCoverageBrief,
   buildCoverageGaps,
   buildRecommendedAngle,
+  buildSignalRegistry,
   buildSuggestedRecipients,
   buildSuggestedRecipientSets,
-  buildTopSignals,
 } from '@/lib/agent-actions/account-command-center';
-import { isLegacyColdAsset } from '@/lib/revops/cold-outbound-policy';
+import { loadAccountCommandCenterData } from '@/lib/account-command-center-data';
+import { summarizeFreshness } from '@/lib/agent-actions/freshness';
+import { parseAssetProvenanceSummary, resolveAccountAssetSelection } from '@/lib/generated-content/asset-selection';
+import { buildOutcomeFollowUpRecommendation } from '@/lib/revops/operator-outcomes';
 
 export default async function AccountDetailPage({
   params,
@@ -77,69 +91,34 @@ export default async function AccountDetailPage({
   const account = matchedAccount ? await dbGetAccountByName(matchedAccount.name) : null;
   if (!account) notFound();
 
-  const personas = await dbGetPersonasByAccount(account.name);
+  const {
+    accountScope,
+    personas,
+    microsite,
+    rawActivities,
+    generatedAssetRows,
+    emailLogs,
+    meetings,
+    captures,
+    canonicalWorkspace,
+    agentContentContext,
+    contactCandidates,
+    sendJobs,
+    sendJobRecipientEvents,
+    operatorOutcomes,
+  } = await loadAccountCommandCenterData(account.name);
   const waves = getWavesByAccount(account.name);
   const brief = getMeetingBriefByAccount(account.name);
   const auditRoutes = getAuditRoutes();
   const auditRoute = auditRoutes.find((r) => r.account === account.name);
   const qrAsset = getQrAssets().find((asset) => asset.account === account.name);
-  const [microsite, rawActivities, activeCampaigns, generatedAssetRows, emailLogs, meetings, captures, canonicalWorkspace, agentContentContext] = await Promise.all([
-    dbGetMicrositeAccountAnalytics(account.name),
-    dbGetActivitiesByAccount(account.name),
+  const [activeCampaigns] = await Promise.all([
     prisma.campaign.findMany({
       where: { status: 'active' },
       orderBy: [{ start_date: 'desc' }, { created_at: 'desc' }],
       take: 6,
       select: { slug: true, name: true, messaging_angle: true, campaign_type: true },
     }),
-    prisma.generatedContent.findMany({
-      where: { account_name: account.name },
-      orderBy: { created_at: 'desc' },
-      take: 8,
-      select: {
-        id: true,
-        content_type: true,
-        persona_name: true,
-        provider_used: true,
-        is_published: true,
-        external_send_count: true,
-        version: true,
-        campaign_id: true,
-        campaign: {
-          select: {
-            campaign_type: true,
-          },
-        },
-        checklist_state: {
-          select: {
-            completed_item_ids: true,
-          },
-        },
-        version_metadata: true,
-        content: true,
-        created_at: true,
-      },
-    }),
-    prisma.emailLog.findMany({
-      where: { account_name: account.name },
-      orderBy: { sent_at: 'desc' },
-      take: 12,
-      select: { id: true, subject: true, status: true, to_email: true, reply_count: true, sent_at: true },
-    }),
-    prisma.meeting.findMany({
-      where: { account_name: account.name },
-      orderBy: [{ meeting_date: 'desc' }, { created_at: 'desc' }],
-      take: 8,
-      select: { id: true, meeting_status: true, persona: true, meeting_date: true, meeting_time: true, location: true, objective: true, post_next_step: true, notes: true, created_at: true },
-    }),
-    prisma.mobileCapture.findMany({
-      where: { account_name: account.name },
-      orderBy: { captured_at: 'desc' },
-      take: 8,
-      select: { id: true, title: true, intent: true, next_step: true, captured_at: true, owner: true, heat_score: true },
-    }),
-    ensureCanonicalRecords({ accountNames: [account.name] }),
-    getAgentContentContext({ accountName: account.name }),
   ]);
   const activities = rawActivities.map((activity) => ({
     ...activity,
@@ -147,7 +126,6 @@ export default async function AccountDetailPage({
     nextStepDueLabel: activity.next_step_due ? formatActivityDate(activity.next_step_due) : '',
   }));
   const micrositeOverviewPath = `/for/${slug}`;
-  const micrositeInfo = ensureMicrositeForAccount(account.name);
   const generatedAssets = generatedAssetRows.map((asset) => {
     const checklist = resolveContentQaChecklist({
       campaignType: asset.campaign?.campaign_type,
@@ -197,20 +175,58 @@ export default async function AccountDetailPage({
   const suggestedRecipientIds = activeRecipientSet?.recipientIds.length
     ? activeRecipientSet.recipientIds
     : suggestedRecipients.slice(0, 3).map((recipient) => recipient.id);
-  const topSignals = buildTopSignals(agentContentContext);
+  const signalRegistry = buildSignalRegistry(agentContentContext);
   const coverageGaps = buildCoverageGaps(agentContentContext);
   const recommendedAngle = buildRecommendedAngle(agentContentContext, account.primo_angle ?? account.why_now ?? '');
   const committeeCoverageBrief = buildCommitteeCoverageBrief(agentContentContext, suggestedRecipients);
-  const recommendedAsset = generatedAssets.find((asset) => (
-    isSendableAccountAsset(asset.content_type) && !isLegacyColdAsset(asset.version_metadata, asset.content_type)
-  )) ?? null;
-  const latestSendableAsset = recommendedAsset ?? generatedAssets.find((asset) => isSendableAccountAsset(asset.content_type)) ?? null;
+  const freshnessSummary = summarizeFreshness(agentContentContext?.freshness ?? null);
+  const assetSelection = resolveAccountAssetSelection(generatedAssets);
+  const recommendedAsset = assetSelection.recommendedAsset;
+  const latestSendableAsset = assetSelection.latestSendableAsset;
+  const recommendedAssetProvenance = recommendedAsset ? parseAssetProvenanceSummary(recommendedAsset.version_metadata) : null;
+  const latestInfographic = generatedAssets[0] ? parseInfographicMetadata(generatedAssets[0].version_metadata) : null;
+  const hasMeetingSignal = meetings.some((meeting) => /booked|held|completed|scheduled/i.test(meeting.meeting_status ?? ''));
+  const engagementSummary = buildAccountEngagementSummary({
+    emails: emailLogs,
+    meetings,
+    operatorOutcomes,
+  });
+  const latestOutcomeRecommendation = buildOutcomeFollowUpRecommendation({
+    outcomeLabel: operatorOutcomes[0]?.outcome_label ?? null,
+    stageIntent: latestInfographic?.stageIntent ?? 'cold',
+    coverageGapCount: coverageGaps.length,
+    hasMeetingSignal,
+    notes: operatorOutcomes[0]?.notes ?? null,
+  });
+  const accountOutcomeSources = [
+    ...emailLogs.map((email) => ({
+      key: `email-${email.id}`,
+      label: email.reply_count > 0 ? `Reply signal · ${email.subject}` : `Email send · ${email.subject}`,
+      detail: `${email.to_email} · ${formatActivityDate(email.sent_at)}`,
+      sourceKind: 'email-log',
+      sourceId: String(email.id),
+      generatedContentId: email.generated_content_id ?? null,
+    })),
+    ...sendJobRecipientEvents.map((recipient) => ({
+      key: `send-recipient-${recipient.id}`,
+      label: `Send ${recipient.status} · ${recipient.to_email}`,
+      detail: `${recipient.error_message ?? `asset ${recipient.generated_content_id}`} · ${formatActivityDate(recipient.sent_at ?? recipient.updated_at ?? recipient.created_at)}`,
+      sourceKind: 'send-job-recipient',
+      sourceId: String(recipient.id),
+      generatedContentId: recipient.generated_content_id ?? null,
+    })),
+  ].slice(0, 10);
   const openTaskCount = Number(Boolean(account.next_action)) + activities.filter((activity) => Boolean(activity.next_step)).length + captures.filter((capture) => Boolean(capture.next_step)).length;
   const assetCount = Number(Boolean(brief)) + Number(Boolean(auditRoute)) + Number(Boolean(qrAsset)) + generatedAssets.length + 1;
   const nextBestAction = buildAccountNextBestAction(account, {
     contactCount: personas.length,
     assetCount,
     openTaskCount,
+    replyCount: engagementSummary.replied,
+    coverageGapCount: coverageGaps.length,
+    latestOutcomeLabel: engagementSummary.latestOutcomeLabel,
+    latestOutcomeNotes: engagementSummary.latestOutcomeNote,
+    hasMeetingSignal,
   });
   const timeline = buildAccountTimeline({
     activities: rawActivities,
@@ -218,11 +234,12 @@ export default async function AccountDetailPage({
     meetings,
     micrositeSessions: microsite.recentSessions,
     captures,
+    sendRecipients: sendJobRecipientEvents,
+    operatorOutcomes,
   });
   const journeyActivities = rawActivities
     .filter((activity) => activity.activity_type === 'Infographic Journey')
     .slice(0, 6);
-  const latestInfographic = generatedAssets[0] ? parseInfographicMetadata(generatedAssets[0].version_metadata) : null;
   const initialJourneyStage = (latestInfographic?.stageIntent ?? 'cold') as JourneyStageIntent;
 
   const scoreDims = [
@@ -235,6 +252,25 @@ export default async function AccountDetailPage({
   ];
 
   const accountTags = buildAccountTags(account);
+  const replaceablePersonas = personas
+    .map((persona) => {
+      const canonical = canonicalWorkspace.contactsByPersonaId.get(persona.id);
+      const blockerBadges = buildPersonaBlockerBadges({
+        email: persona.email,
+        email_valid: persona.email_valid,
+        do_not_contact: persona.do_not_contact,
+        canonicalBlockedReason: canonical?.sendBlockReason ?? null,
+        canonicalConflicts: canonical?.conflictCodes.map(formatCanonicalConflictLabel) ?? [],
+      });
+      return {
+        id: persona.id,
+        name: persona.name,
+        title: persona.title ?? undefined,
+        email: persona.email,
+        blockerBadges,
+      };
+    })
+    .filter((persona) => persona.blockerBadges.length > 0);
 
   return (
     <div className="space-y-6">
@@ -307,25 +343,19 @@ export default async function AccountDetailPage({
                     </Button>
                   }
                 />
-                <OutreachWizard
+                <AccountOutreachShell
                   accountName={account.name}
-                  micrositeUrl={micrositeInfo.url}
-                  personas={personas.map((p) => ({
-                    name: p.name,
-                    title: p.title ?? undefined,
-                    priority: p.priority,
-                    email: p.email ?? undefined,
-                  }))}
-                  campaigns={activeCampaigns.map((campaign) => ({
-                    slug: campaign.slug,
-                    name: campaign.name,
-                    messagingAngle: campaign.messaging_angle,
-                    campaignType: campaign.campaign_type,
-                  }))}
+                  assets={generatedAssets}
+                  recipients={accountRecipients}
+                  recipientSets={suggestedRecipientSets}
+                  initialSelectedRecipientIds={suggestedRecipientIds}
+                  defaultRecipientSetKey={activeRecipientSet?.key ?? null}
+                  recommendedAngle={recommendedAngle}
+                  whyNow={account.why_now ?? undefined}
                   trigger={
                     <Button size="sm" className="gap-1.5 bg-cyan-600 text-white hover:bg-cyan-700">
                       <Activity className="h-3.5 w-3.5" />
-                      Launch Outreach
+                      Compose Outreach
                     </Button>
                   }
                 />
@@ -348,6 +378,16 @@ export default async function AccountDetailPage({
                 <LogActivityDialog
                   accountName={account.name}
                   personas={personas.map((p) => ({ name: p.name }))}
+                />
+                <AccountOutcomeLogger
+                  accountName={account.name}
+                  sources={accountOutcomeSources}
+                  trigger={
+                    <Button size="sm" variant="outline" className="gap-1.5">
+                      <Activity className="h-3.5 w-3.5" />
+                      Log Outcome
+                    </Button>
+                  }
                 />
               </div>
             </div>
@@ -403,7 +443,12 @@ export default async function AccountDetailPage({
             ))}
           </div>
           <div className="mt-4">
-            <AgentIntelStrip accountName={account.name} initialResult={agentContentContext} recipients={accountRecipients} />
+            <AgentIntelStrip
+              accountName={account.name}
+              accountNames={accountScope.accountNames}
+              initialResult={agentContentContext}
+              recipients={accountRecipients}
+            />
           </div>
           <div className="mt-4 grid gap-4 xl:grid-cols-[1.3fr_1fr]">
             <Card>
@@ -435,7 +480,7 @@ export default async function AccountDetailPage({
                     </p>
                     <p className="mt-1 text-xs text-[var(--muted-foreground)]">
                       {recommendedAsset
-                        ? 'This is the default asset for the primary path on this account.'
+                        ? `This is the default asset for the primary path on this account.${recommendedAssetProvenance?.usedLiveIntel ? ' Generated with live intel.' : ''}`
                         : 'No recommended asset yet.'}
                     </p>
                   </div>
@@ -443,14 +488,21 @@ export default async function AccountDetailPage({
                     <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Intel Freshness</p>
                     <p className="mt-1 text-sm font-medium">
                       {agentContentContext
-                        ? `${agentContentContext.freshness.source} · ${agentContentContext.freshness.stale ? 'stale' : 'fresh'}`
-                        : 'No live intel cached yet'}
+                        ? `${freshnessSummary.label} · ${agentContentContext.freshness.source}`
+                        : freshnessSummary.label}
                     </p>
                     <p className="mt-1 text-xs text-[var(--muted-foreground)]">
-                      {agentContentContext?.freshness.stale
-                        ? 'Agent Intel refreshes in the background when stale.'
-                        : 'Latest delta appears in the Agent Intel rail after refresh.'}
+                      {freshnessSummary.guidance}
                     </p>
+                    {agentContentContext ? (
+                      <div className="mt-2 flex flex-wrap gap-1.5">
+                        {Object.values(agentContentContext.freshness.dimensions).map((dimension) => (
+                          <Badge key={dimension.key} variant={dimension.stale ? 'secondary' : 'outline'}>
+                            {dimension.label}: {dimension.status.replaceAll('_', ' ')}
+                          </Badge>
+                        ))}
+                      </div>
+                    ) : null}
                   </div>
                   <div className="rounded-lg border border-[var(--border)] p-3">
                     <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Active Recipient Set</p>
@@ -468,8 +520,11 @@ export default async function AccountDetailPage({
                   <div className="rounded-lg border border-[var(--border)] p-3">
                     <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Top signals</p>
                     <ul className="mt-2 space-y-2 text-sm">
-                      {topSignals.length > 0 ? topSignals.map((signal) => (
-                        <li key={signal}>{signal}</li>
+                      {signalRegistry.length > 0 ? signalRegistry.slice(0, 4).map((signal) => (
+                        <li key={signal.key}>
+                          <span className="font-medium">{signal.title}:</span> {signal.summary}
+                          <span className="text-[var(--muted-foreground)]"> · {signal.source} · {signal.freshness.replaceAll('_', ' ')}</span>
+                        </li>
                       )) : <li>No strong live signals yet. Refresh intel and keep discovering coverage.</li>}
                     </ul>
                   </div>
@@ -638,6 +693,34 @@ export default async function AccountDetailPage({
               </div>
             </CardContent>
           </Card>
+          {latestOutcomeRecommendation ? (
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm">Learning Loop Recommendation</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex flex-wrap items-center gap-2">
+                  <Badge variant="outline" className="capitalize">
+                    {latestOutcomeRecommendation.latestOutcomeLabel.replaceAll('-', ' ')}
+                  </Badge>
+                  <p className="text-sm text-[var(--muted-foreground)]">{latestOutcomeRecommendation.summary}</p>
+                </div>
+                <div className="grid gap-3 md:grid-cols-2">
+                  <div className="rounded-lg border border-[var(--border)] p-3">
+                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Next action</p>
+                    <p className="mt-1 font-medium">{latestOutcomeRecommendation.nextAction.label}</p>
+                    <p className="mt-1 text-xs text-[var(--muted-foreground)]">{latestOutcomeRecommendation.nextAction.detail}</p>
+                  </div>
+                  <div className="rounded-lg border border-[var(--border)] p-3">
+                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Next asset</p>
+                    <p className="mt-1 font-medium">{latestOutcomeRecommendation.nextAsset.label}</p>
+                    <p className="mt-1 text-xs text-[var(--muted-foreground)]">{latestOutcomeRecommendation.nextAsset.detail}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ) : null}
+          <AccountEngagementSummaryCard summary={engagementSummary} />
           {canonicalAccountSummary ? (
             <Card>
               <CardHeader className="pb-2">
@@ -830,10 +913,39 @@ export default async function AccountDetailPage({
           <div className="flex justify-end">
             <AddPersonaDialog accountName={account.name} />
           </div>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm">Contact Discovery Queue</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <AccountContactCandidatesPanel
+                slug={slug}
+                accountName={account.name}
+                initialCandidates={contactCandidates}
+                replaceablePersonas={replaceablePersonas}
+              />
+            </CardContent>
+          </Card>
           {personas.length === 0 ? (
             <EmptyState title="No contacts mapped" description="Contacts will appear here once added." />
           ) : (
-            personas.map((p) => (
+            personas.map((p) => {
+              const personaReadiness = computeRecipientReadiness({
+                email_confidence: p.email_confidence,
+                quality_score: p.quality_score,
+                title: p.title,
+                role_in_deal: p.role_in_deal,
+                last_enriched_at: p.last_enriched_at,
+              });
+              const blockerBadges = buildPersonaBlockerBadges({
+                email: p.email,
+                email_valid: p.email_valid,
+                do_not_contact: p.do_not_contact,
+                canonicalBlockedReason: canonicalWorkspace.contactsByPersonaId.get(p.id)?.sendBlockReason ?? null,
+                canonicalConflicts: canonicalWorkspace.contactsByPersonaId.get(p.id)?.conflictCodes.map(formatCanonicalConflictLabel) ?? [],
+              });
+
+              return (
               <Card key={p.persona_id}>
                 <CardContent className="p-4">
                   <div className="flex items-start justify-between">
@@ -842,12 +954,15 @@ export default async function AccountDetailPage({
                         <span className="font-medium text-sm">
                           {p.linkedin_url ? (
                             <a href={p.linkedin_url} target="_blank" rel="noopener noreferrer" className="text-[var(--primary)] hover:underline inline-flex items-center gap-1">
-                              {p.name} <ExternalLink className="h-3 w-3" />
+                          {p.name} <ExternalLink className="h-3 w-3" />
                             </a>
                           ) : p.name}
                         </span>
                         <Badge variant={p.priority === 'P1' ? 'default' : 'secondary'} className="text-xs">{p.priority}</Badge>
                         <EditablePersonaStatus personaId={p.persona_id} currentValue={p.persona_status ?? 'Not started'} />
+                        {blockerBadges.map((badge) => (
+                          <Badge key={`${p.persona_id}-${badge}`} variant="outline" className="text-xs">{badge}</Badge>
+                        ))}
                       </div>
                       <p className="mt-0.5 text-xs text-[var(--muted-foreground)]">{p.title}</p>
                       {p.email && (
@@ -856,6 +971,14 @@ export default async function AccountDetailPage({
                         </p>
                       )}
                       <p className="mt-1 text-xs text-[var(--muted-foreground)]">Lane: {p.persona_lane} &middot; {p.role_in_deal} &middot; {p.seniority}</p>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        <Badge variant={p.email_valid === false || p.do_not_contact ? 'secondary' : 'outline'} className="text-xs">
+                          Readiness {personaReadiness.score}
+                        </Badge>
+                        {personaReadiness.reasons.map((reason) => (
+                          <Badge key={`${p.persona_id}-${reason}`} variant="outline" className="text-xs">{reason}</Badge>
+                        ))}
+                      </div>
                     </div>
                     <div className="flex items-center gap-1.5 shrink-0">
                       <GeneratorDialog accountName={account.name} personaName={p.name} personaEmail={p.email ?? undefined} defaultType="email" />
@@ -869,7 +992,8 @@ export default async function AccountDetailPage({
                   )}
                 </CardContent>
               </Card>
-            ))
+              );
+            })
           )}
         </TabsContent>
 
@@ -963,7 +1087,14 @@ export default async function AccountDetailPage({
                 {generatedAssets.length === 0 ? (
                   <EmptyState title="No generated assets" description="Generated one-pagers, emails, and call scripts will appear here." />
                 ) : (
-                  <div className="space-y-2">
+                  <div className="space-y-4">
+                    <AccountAssetVersionPanel
+                      accountName={account.name}
+                      assets={generatedAssets}
+                      recipients={accountRecipients}
+                      initialSelectedRecipientIds={suggestedRecipientIds}
+                    />
+                    <div className="space-y-2">
                     {generatedAssets.map((asset) => (
                       <div key={asset.id} className="flex items-start justify-between gap-3 rounded-lg border border-[var(--border)] p-3">
                         <div>
@@ -973,6 +1104,9 @@ export default async function AccountDetailPage({
                           </p>
                           <p className="mt-1 text-xs text-[var(--muted-foreground)]">
                             Provider: {asset.provider_used ?? 'unknown'} · Quality {asset.quality.score} · QA {asset.checklist.requiredComplete}/{asset.checklist.requiredTotal}
+                          </p>
+                          <p className="mt-1 text-xs text-[var(--muted-foreground)]">
+                            {buildAssetProvenanceLine(asset.version_metadata)}
                           </p>
                         </div>
                         <div className="flex flex-col items-end gap-2">
@@ -987,6 +1121,7 @@ export default async function AccountDetailPage({
                         </div>
                       </div>
                     ))}
+                    </div>
                   </div>
                 )}
               </CardContent>
@@ -1001,6 +1136,39 @@ export default async function AccountDetailPage({
             campaignId={generatedAssets[0]?.campaign_id ?? null}
             initialStage={initialJourneyStage}
           />
+          <AccountEngagementSummaryCard summary={engagementSummary} />
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm">Outcome Logging</CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p className="text-sm font-medium">Mark what happened without leaving the account page.</p>
+                <p className="mt-1 text-xs text-[var(--muted-foreground)]">
+                  Replies, wrong-person feedback, timing issues, and positive outcomes all feed the next recommendation.
+                </p>
+              </div>
+              <AccountOutcomeLogger accountName={account.name} sources={accountOutcomeSources} />
+            </CardContent>
+          </Card>
+          {sendJobs.length > 0 ? (
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm">Recent Send Jobs</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {sendJobs.map((job) => (
+                  <div key={job.id} className="space-y-2">
+                    <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-[var(--muted-foreground)]">
+                      <span>Job #{job.id}</span>
+                      <span>{job.status} · {job.sent_count} sent · {job.failed_count} failed · {job.skipped_count} skipped</span>
+                    </div>
+                    <SendJobTracker jobId={job.id} pollMs={5000} />
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          ) : null}
           {journeyActivities.length > 0 ? (
             <Card>
               <CardHeader className="pb-2">
@@ -1146,6 +1314,33 @@ export default async function AccountDetailPage({
   );
 }
 
+function buildPersonaBlockerBadges(input: {
+  email?: string | null;
+  email_valid?: boolean | null;
+  do_not_contact?: boolean;
+  canonicalBlockedReason?: string | null;
+  canonicalConflicts?: string[];
+}) {
+  const badges: string[] = [];
+  if (input.email && input.email_valid === false) badges.push('Malformed email');
+  if (!input.email) badges.push('Missing email');
+  if (input.do_not_contact) badges.push('Suppressed');
+  if (input.canonicalBlockedReason) badges.push('Canonical block');
+  if ((input.canonicalConflicts ?? []).length > 0) badges.push('Canonical conflict');
+  return badges;
+}
+
+function buildAssetProvenanceLine(versionMetadata: unknown) {
+  const provenance = parseAssetProvenanceSummary(versionMetadata);
+  const parts = [
+    provenance.usedLiveIntel ? 'live intel' : 'static context',
+    `${provenance.signalCount} signals`,
+    `${provenance.recommendedContactCount} contacts`,
+    provenance.freshnessLabel,
+  ];
+  return parts.join(' · ');
+}
+
 function MicrositeAccountHeatBadge({ score }: { score: number }) {
   if (score >= 70) return <Badge className="bg-red-500 text-white">Hot {score}</Badge>;
   if (score >= 45) return <Badge className="bg-amber-500 text-white">Warm {score}</Badge>;
@@ -1222,8 +1417,4 @@ function formatActivityDate(value: Date) {
     day: 'numeric',
     year: 'numeric',
   });
-}
-
-function isSendableAccountAsset(contentType: string) {
-  return !['call_script', 'meeting_prep'].includes(contentType);
 }

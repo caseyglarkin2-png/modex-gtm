@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma';
+import { normalizeAgentActionFreshness } from '@/lib/agent-actions/freshness';
 import type { AgentActionRequest, AgentActionResult } from '@/lib/agent-actions/types';
 
 type CachedAgentActionRecord = {
@@ -30,6 +31,7 @@ export async function readCachedAgentAction(cacheKey: string) {
   try {
     const parsed = JSON.parse(row.value) as CachedAgentActionRecord;
     if (!parsed?.result || !parsed.savedAt) return null;
+    parsed.result.freshness = normalizeAgentActionFreshness(parsed.result.freshness);
     return parsed;
   } catch {
     return null;
@@ -92,13 +94,18 @@ export function getAgentActionTtlMs(action: AgentActionRequest['action']) {
 }
 
 export function applyFreshness(result: AgentActionResult, source: 'live' | 'cache', stale: boolean): AgentActionResult {
+  const freshness = normalizeAgentActionFreshness(result.freshness);
   return {
     ...result,
     freshness: {
-      ...result.freshness,
+      ...freshness,
       source,
-      stale,
+      stale: stale || freshness.stale,
+      status: stale && freshness.status === 'fresh'
+        ? 'stale'
+        : stale && freshness.status === 'aging'
+          ? 'stale'
+          : freshness.status,
     },
   };
 }
-

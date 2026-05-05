@@ -1,3 +1,5 @@
+import { INFOGRAPHIC_LABELS, mapOutcomeToNextInfographic, type JourneyStageIntent } from '@/lib/revops/infographic-journey';
+
 export const OPERATOR_OUTCOME_TAXONOMY = [
   'positive',
   'neutral',
@@ -44,6 +46,29 @@ export type PromptRecommendation = {
   key: string;
   label: string;
   rationale: string;
+};
+
+export type OutcomeActionRecommendation = {
+  label: string;
+  detail: string;
+  route: string;
+  tone: 'ready' | 'attention' | 'blocked';
+};
+
+export type OutcomeAssetRecommendation = {
+  label: string;
+  detail: string;
+  route: string;
+  infographicType: string;
+  stageIntent: JourneyStageIntent;
+  reasonCode: string;
+};
+
+export type OutcomeFollowUpRecommendation = {
+  latestOutcomeLabel: OperatorOutcomeLabel;
+  nextAction: OutcomeActionRecommendation;
+  nextAsset: OutcomeAssetRecommendation;
+  summary: string;
 };
 
 const POSITIVE_SET = new Set<OperatorOutcomeLabel>(['positive', 'closed-won']);
@@ -148,6 +173,119 @@ export function applyOutcomeWeightToPlaybookScore(
     else if (label === 'closed-lost') weighted -= 0.2;
   });
   return Number(weighted.toFixed(4));
+}
+
+export function buildOutcomeFollowUpRecommendation(input: {
+  outcomeLabel: string | null | undefined;
+  stageIntent?: JourneyStageIntent;
+  coverageGapCount?: number;
+  hasMeetingSignal?: boolean;
+  notes?: string | null;
+}): OutcomeFollowUpRecommendation | null {
+  const latestOutcomeLabel = parseOperatorOutcomeLabel(input.outcomeLabel);
+  if (!latestOutcomeLabel) return null;
+
+  const transition = mapOutcomeToNextInfographic({
+    stageIntent: input.stageIntent ?? 'cold',
+    outcomeLabel: latestOutcomeLabel,
+  });
+  const nextAssetLabel = INFOGRAPHIC_LABELS[transition.nextType];
+  const nextAssetBase = {
+    label: `${nextAssetLabel} next`,
+    route: '#assets',
+    infographicType: transition.nextType,
+    stageIntent: transition.nextStage,
+    reasonCode: transition.reasonCode,
+  };
+
+  if (latestOutcomeLabel === 'wrong-person') {
+    return {
+      latestOutcomeLabel,
+      nextAction: {
+        label: 'Replace the contact before the next send',
+        detail: 'The last touch landed with the wrong buyer. Promote a better-fit contact and resend into the correct lane.',
+        route: '#contacts',
+        tone: 'blocked',
+      },
+      nextAsset: {
+        ...nextAssetBase,
+        detail: 'Rebuild the asset for the right lane with a lighter diagnostic hook before sending again.',
+      },
+      summary: 'Wrong-person feedback means the account map needs a better buyer before more outreach.',
+    };
+  }
+
+  if (latestOutcomeLabel === 'bad-timing') {
+    return {
+      latestOutcomeLabel,
+      nextAction: {
+        label: 'Reset the follow-up window',
+        detail: 'Keep the contact warm, but tighten the why-now trigger and sequence timing before the next touch.',
+        route: '#engagement',
+        tone: 'attention',
+      },
+      nextAsset: {
+        ...nextAssetBase,
+        detail: 'Queue a lighter follow-up asset with sharper timing and urgency framing.',
+      },
+      summary: 'Bad-timing feedback points to sequencing and urgency, not necessarily persona fit.',
+    };
+  }
+
+  if (latestOutcomeLabel === 'negative' || latestOutcomeLabel === 'closed-lost') {
+    return {
+      latestOutcomeLabel,
+      nextAction: {
+        label: latestOutcomeLabel === 'closed-lost' ? 'Capture the loss reason and reset the angle' : 'Regenerate around the objection',
+        detail: input.notes?.trim()
+          ? `Last feedback: ${input.notes.trim()}`
+          : 'Use the latest objection signal to rebuild proof, reduce risk, and tighten the message.',
+        route: '#assets',
+        tone: 'attention',
+      },
+      nextAsset: {
+        ...nextAssetBase,
+        detail: 'Generate the next asset from the objection context so the follow-up changes the message, not just the timing.',
+      },
+      summary: 'Negative feedback should immediately feed the next asset, not just create a status change.',
+    };
+  }
+
+  if (latestOutcomeLabel === 'positive' || latestOutcomeLabel === 'closed-won') {
+    return {
+      latestOutcomeLabel,
+      nextAction: {
+        label: input.hasMeetingSignal ? 'Advance the post-meeting motion' : 'Convert the warm response into a meeting',
+        detail: input.hasMeetingSignal
+          ? 'Momentum exists. Move the account into the next commercial milestone while the thread is warm.'
+          : 'Positive engagement exists. Book the next live conversation before the thread cools.',
+        route: input.hasMeetingSignal ? '#pipeline' : '#meetings',
+        tone: 'ready',
+      },
+      nextAsset: {
+        ...nextAssetBase,
+        detail: 'Queue the next stage asset to support ROI, implementation, or proposal follow-up while momentum is positive.',
+      },
+      summary: 'Positive engagement should advance the deal and the supporting asset sequence together.',
+    };
+  }
+
+  return {
+    latestOutcomeLabel,
+    nextAction: {
+      label: input.coverageGapCount && input.coverageGapCount > 0 ? 'Expand committee coverage before the next touch' : 'Follow up with stronger proof',
+      detail: input.coverageGapCount && input.coverageGapCount > 0
+        ? `There ${input.coverageGapCount === 1 ? 'is' : 'are'} ${input.coverageGapCount} buyer-lane gap${input.coverageGapCount === 1 ? '' : 's'} still uncovered on this account.`
+        : 'Neutral feedback means the account is still alive, but the next touch needs clearer proof or sharper framing.',
+      route: input.coverageGapCount && input.coverageGapCount > 0 ? '#contacts' : '#assets',
+      tone: 'attention',
+    },
+    nextAsset: {
+      ...nextAssetBase,
+      detail: 'Generate the next asset with more proof and clearer buyer relevance before the follow-up.',
+    },
+    summary: 'Neutral engagement is a cue to deepen proof or widen committee coverage before the next send.',
+  };
 }
 
 function hasConflictingLabels(labels: Set<OperatorOutcomeLabel>): boolean {

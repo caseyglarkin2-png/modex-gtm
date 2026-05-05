@@ -18,6 +18,8 @@ import { computeMappingContractChecksum, getMappingContracts } from '@/lib/enric
 import { CONTENT_QUALITY_SEND_BLOCK_THRESHOLD, evaluateContentQuality } from '@/lib/content-quality';
 import { buildFailureClusters, buildRetryRecommendations } from '@/lib/revops/failure-intelligence';
 import { detectInfographicDrift, parseInfographicMetadata } from '@/lib/revops/infographic-journey';
+import { fetchAccountIdentityReport } from '@/lib/revops/account-identity-report';
+import { runCanonicalBackfillAction } from '@/app/ops/actions';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Ops' };
@@ -34,6 +36,7 @@ const tabHeading: Record<OpsTabId, string> = {
   'feature-flags': 'Feature Flags',
   'connector-health': 'Connector Health',
   coverage: 'Coverage Command Center',
+  'account-identity': 'Account Identity Command Center',
 };
 
 function tabHref(tabId: string) {
@@ -55,7 +58,7 @@ export default async function OpsPage({
     checksum: computeMappingContractChecksum(contract),
   }));
 
-  const [cronRows, generationJobs, sendJobs, sendJobRecipients, approvalRequests, proofSummary, importedCompanies, linkedContacts, enrichedContacts, sendReadyContacts, attributableContacts, staleContacts, latestGeneratedRows] = await Promise.all([
+  const [cronRows, generationJobs, sendJobs, sendJobRecipients, approvalRequests, proofSummary, importedCompanies, linkedContacts, enrichedContacts, sendReadyContacts, attributableContacts, staleContacts, latestGeneratedRows, accountIdentityReport, canonicalBackfillAudit] = await Promise.all([
     prisma.systemConfig.findMany({
       where: {
         OR: [
@@ -165,6 +168,11 @@ export default async function OpsPage({
         content: true,
         version_metadata: true,
       },
+    }),
+    fetchAccountIdentityReport(),
+    prisma.systemConfig.findUnique({
+      where: { key: 'runbook:canonical-backfill:last' },
+      select: { value: true },
     }),
   ]);
 
@@ -279,6 +287,16 @@ export default async function OpsPage({
         .reduce((sum, hours) => sum + hours, 0) / approvalRequests.length,
     )
     : 0;
+  const lastCanonicalBackfill = canonicalBackfillAudit?.value
+    ? JSON.parse(canonicalBackfillAudit.value) as {
+      at?: string;
+      accountCount?: number;
+      clusterCount?: number;
+      impactedAccountCount?: number;
+      mismatchedCanonicalClusterCount?: number;
+      missingCanonicalLinkCount?: number;
+    }
+    : null;
 
   return (
     <div className="space-y-6">
@@ -603,6 +621,115 @@ export default async function OpsPage({
               <MiniMetric label="Schema Drift" value={eventQa.schemaDrift} />
               <MiniMetric label="Late Event Rate" value={`${Math.round(eventQa.lateEventRate * 100)}%`} />
             </div>
+          </CardContent>
+        </Card>
+      ) : null}
+
+      {selectedTab === 'account-identity' ? (
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base">Duplicate Account Remediation</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4 text-sm">
+            <div className="grid gap-3 md:grid-cols-4">
+              <MiniMetric label="Duplicate Clusters" value={accountIdentityReport.summary.clusterCount} />
+              <MiniMetric label="Impacted Accounts" value={accountIdentityReport.summary.impactedAccountCount} />
+              <MiniMetric
+                label="Mismatched Canonical IDs"
+                value={accountIdentityReport.summary.mismatchedCanonicalClusterCount}
+                tone={accountIdentityReport.summary.mismatchedCanonicalClusterCount > 0 ? 'text-amber-600' : 'text-foreground'}
+              />
+              <MiniMetric
+                label="Missing Canonical Links"
+                value={accountIdentityReport.summary.missingCanonicalLinkCount}
+                tone={accountIdentityReport.summary.missingCanonicalLinkCount > 0 ? 'text-amber-600' : 'text-foreground'}
+              />
+            </div>
+            <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border p-3">
+              <div>
+                <p className="text-xs uppercase tracking-wide text-muted-foreground">Canonical backfill</p>
+                <p className="mt-1 font-medium">
+                  {lastCanonicalBackfill?.at
+                    ? `Last run ${new Date(lastCanonicalBackfill.at).toLocaleString()}`
+                    : 'No canonical backfill recorded yet.'}
+                </p>
+                {lastCanonicalBackfill ? (
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    {lastCanonicalBackfill.accountCount ?? 0} accounts across {lastCanonicalBackfill.clusterCount ?? 0} duplicate clusters.
+                    {' '}Impacted accounts: {lastCanonicalBackfill.impactedAccountCount ?? 0}.
+                    {' '}Mismatched clusters: {lastCanonicalBackfill.mismatchedCanonicalClusterCount ?? 0}.
+                    {' '}Missing links: {lastCanonicalBackfill.missingCanonicalLinkCount ?? 0}.
+                  </p>
+                ) : (
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    Runs canonical sync across currently detected duplicate-account clusters and refreshes Ops diagnostics.
+                  </p>
+                )}
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <Link href="/api/revops/account-identity-report?format=json" target="_blank">
+                  <Button size="sm" variant="outline">Export JSON</Button>
+                </Link>
+                <Link href="/api/revops/account-identity-report?format=csv" target="_blank">
+                  <Button size="sm" variant="outline">Export CSV</Button>
+                </Link>
+                <form action={runCanonicalBackfillAction}>
+                  <Button size="sm">Run Canonical Backfill</Button>
+                </form>
+              </div>
+            </div>
+            {accountIdentityReport.clusters.length === 0 ? (
+              <div className="rounded-lg border p-3 text-muted-foreground">
+                No duplicate-account clusters are currently detected.
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {accountIdentityReport.clusters.map((cluster) => (
+                  <div key={cluster.key} className="rounded-lg border p-3">
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <div>
+                        <p className="font-medium">{cluster.suggestedPrimaryAccount}</p>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          Reasons: {cluster.reasons.map((reason) => reason.replaceAll('_', ' ')).join(', ')}
+                        </p>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          Canonical ids: {cluster.canonicalCompanyIds.length > 0 ? cluster.canonicalCompanyIds.join(', ') : 'none'}
+                        </p>
+                        {cluster.normalizedKeys.length > 0 ? (
+                          <p className="mt-1 text-xs text-muted-foreground">
+                            Alias keys: {cluster.normalizedKeys.join(', ')}
+                          </p>
+                        ) : null}
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {cluster.mismatchedCanonicalIds ? <Badge variant="secondary">Canonical mismatch</Badge> : null}
+                        {cluster.missingCanonicalLinks.length > 0 ? <Badge variant="outline">Missing links</Badge> : null}
+                        {cluster.hubspotBackedAccounts.length > 0 ? <Badge variant="outline">HubSpot-backed</Badge> : null}
+                      </div>
+                    </div>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {cluster.accountNames.map((accountName) => (
+                        <Link key={accountName} href={`/accounts/${accountName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}>
+                          <Badge variant="outline">{accountName}</Badge>
+                        </Link>
+                      ))}
+                    </div>
+                    <div className="mt-3 grid gap-3 md:grid-cols-5">
+                      <MiniMetric label="Contacts" value={cluster.contactCount} />
+                      <MiniMetric label="Sendable" value={cluster.sendableContactCount} />
+                      <MiniMetric label="Assets" value={cluster.generatedContentCount} />
+                      <MiniMetric label="Email Logs" value={cluster.emailLogCount} />
+                      <MiniMetric label="Open Conflicts" value={cluster.unresolvedConflicts} tone={cluster.unresolvedConflicts > 0 ? 'text-amber-600' : 'text-foreground'} />
+                    </div>
+                    {cluster.missingCanonicalLinks.length > 0 ? (
+                      <p className="mt-3 text-xs text-muted-foreground">
+                        Missing canonical links: {cluster.missingCanonicalLinks.join(', ')}
+                      </p>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            )}
           </CardContent>
         </Card>
       ) : null}

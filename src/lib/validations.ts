@@ -140,12 +140,22 @@ export const SendEmailSchema = z.object({
   personaName: z.string().optional(),
   personaId: z.number().int().positive().optional(),
   generatedContentId: z.number().int().positive().optional(),
+  workflowMetadata: z.object({
+    surface: z.string().min(1),
+    shell: z.string().optional(),
+    variant: z.string().optional(),
+    recipientSetKey: z.string().optional().nullable(),
+    selectedRecipientIds: z.array(z.number().int().positive()).optional(),
+    assetId: z.number().int().positive().optional().nullable(),
+    assetVersion: z.number().int().positive().optional().nullable(),
+    details: z.record(z.string(), z.unknown()).optional(),
+  }).optional(),
 });
 export type SendEmailInput = z.infer<typeof SendEmailSchema>;
 
 export const BulkSendEmailSchema = z.object({
   recipients: z.array(z.object({
-    to: z.string().email(),
+    to: z.string().trim().min(1),
     personaId: z.number().int().positive().optional(),
     personaName: z.string().optional(),
     accountName: z.string().optional(),
@@ -157,6 +167,16 @@ export const BulkSendEmailSchema = z.object({
   bodyHtml: z.string().min(1),
   accountName: z.string().optional(),
   generatedContentId: z.number().int().positive().optional(),
+  workflowMetadata: z.object({
+    surface: z.string().min(1),
+    shell: z.string().optional(),
+    variant: z.string().optional(),
+    recipientSetKey: z.string().optional().nullable(),
+    selectedRecipientIds: z.array(z.number().int().positive()).optional(),
+    assetId: z.number().int().positive().optional().nullable(),
+    assetVersion: z.number().int().positive().optional().nullable(),
+    details: z.record(z.string(), z.unknown()).optional(),
+  }).optional(),
 });
 
 const SendStrategySchema = z.object({
@@ -173,6 +193,16 @@ const SendStrategySchema = z.object({
 export const BulkSendAsyncSchema = z.object({
   guardWarningsAcknowledged: z.boolean().default(false),
   requestedBy: z.string().optional(),
+  workflowMetadata: z.object({
+    surface: z.string().min(1),
+    shell: z.string().optional(),
+    variant: z.string().optional(),
+    recipientSetKey: z.string().optional().nullable(),
+    selectedRecipientIds: z.array(z.number().int().positive()).optional(),
+    assetId: z.number().int().positive().optional().nullable(),
+    assetVersion: z.number().int().positive().optional().nullable(),
+    details: z.record(z.string(), z.unknown()).optional(),
+  }).optional(),
   strategy: SendStrategySchema.optional(),
   experiment: z.object({
     name: z.string().min(3),
@@ -188,14 +218,14 @@ export const BulkSendAsyncSchema = z.object({
     })).min(2),
   }).optional(),
   items: z.array(z.object({
-    generatedContentId: z.number().int().positive(),
+    generatedContentId: z.number().int().positive().optional(),
     accountName: z.string().min(1),
     bundleId: z.string().max(128).optional().nullable(),
     sequencePosition: z.number().int().min(1).max(50).optional().nullable(),
     subject: z.string().min(1),
     bodyHtml: z.string().min(1),
     recipients: z.array(z.object({
-      to: z.string().email(),
+      to: z.string().trim().min(1),
       personaId: z.number().int().positive().optional(),
       personaName: z.string().optional(),
       accountName: z.string().optional(),

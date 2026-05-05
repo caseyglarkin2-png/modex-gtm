@@ -67,6 +67,8 @@ describe('send-job retry-failed route', () => {
         status: 'pending',
         started_at: null,
         completed_at: null,
+        failed_count: 0,
+        skipped_count: 0,
         error_message: null,
       },
     });

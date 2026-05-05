@@ -3,6 +3,7 @@ import {
   OPERATOR_OUTCOME_TAXONOMY,
   applyOutcomeWeightToPlaybookScore,
   auditOperatorOutcomeQuality,
+  buildOutcomeFollowUpRecommendation,
   buildOutcomeTrend,
   derivePromptRecommendations,
   parseOperatorOutcomeLabel,
@@ -98,5 +99,41 @@ describe('operator outcomes contracts', () => {
       { outcome_label: 'negative' },
     ]);
     expect(weighted).toBe(1.2);
+  });
+
+  it('maps outcomes into a concrete follow-up action and asset recommendation', () => {
+    const wrongPerson = buildOutcomeFollowUpRecommendation({
+      outcomeLabel: 'wrong-person',
+      stageIntent: 'engaged',
+      coverageGapCount: 2,
+      hasMeetingSignal: false,
+      notes: 'Need the transportation director instead',
+    });
+    expect(wrongPerson).toMatchObject({
+      latestOutcomeLabel: 'wrong-person',
+      nextAction: {
+        label: 'Replace the contact before the next send',
+        route: '#contacts',
+        tone: 'blocked',
+      },
+      nextAsset: {
+        route: '#assets',
+      },
+    });
+
+    const positive = buildOutcomeFollowUpRecommendation({
+      outcomeLabel: 'positive',
+      stageIntent: 'discovery',
+      coverageGapCount: 0,
+      hasMeetingSignal: false,
+    });
+    expect(positive).toMatchObject({
+      latestOutcomeLabel: 'positive',
+      nextAction: {
+        label: 'Convert the warm response into a meeting',
+        route: '#meetings',
+        tone: 'ready',
+      },
+    });
   });
 });

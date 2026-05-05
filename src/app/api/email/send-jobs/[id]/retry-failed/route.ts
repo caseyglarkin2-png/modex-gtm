@@ -34,6 +34,8 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
       status: 'pending',
       started_at: null,
       completed_at: null,
+      failed_count: 0,
+      skipped_count: 0,
       error_message: null,
     },
   });

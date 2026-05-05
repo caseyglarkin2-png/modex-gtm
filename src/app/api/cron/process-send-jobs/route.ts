@@ -30,7 +30,9 @@ export async function GET(request: NextRequest) {
       where: { status: 'pending' },
       orderBy: { created_at: 'asc' },
       take: 2,
-      include: {
+      select: {
+        id: true,
+        send_strategy: true,
         recipients: {
           where: { status: 'pending' },
           orderBy: { created_at: 'asc' },
@@ -84,6 +86,19 @@ export async function GET(request: NextRequest) {
               provider_message_id: result.headers['x-message-id'] ?? null,
               generated_content_id: recipient.generated_content_id,
               hubspot_engagement_id: result.hubspotEngagementId ?? null,
+              metadata: (() => {
+                const strategy = job.send_strategy && typeof job.send_strategy === 'object'
+                  ? job.send_strategy as Record<string, unknown>
+                  : null;
+                const workflow = strategy?.workflow;
+                if (!workflow || typeof workflow !== 'object') return undefined;
+                return JSON.parse(JSON.stringify({
+                  workflow,
+                  recipient: {
+                    sendJobRecipientId: recipient.id,
+                  },
+                }));
+              })(),
             },
             select: { id: true },
           });
@@ -118,20 +133,38 @@ export async function GET(request: NextRequest) {
         }
       }
 
-      const completedStatus = failed === 0 && sent > 0 ? 'completed' : sent > 0 ? 'partial' : 'failed';
+      const aggregateStatuses = await prisma.sendJobRecipient.findMany({
+        where: { send_job_id: job.id },
+        select: { status: true },
+      });
+      const aggregateCounts = aggregateStatuses.reduce<Record<string, number>>((acc, row) => {
+        acc[row.status] = (acc[row.status] ?? 0) + 1;
+        return acc;
+      }, {});
+      const totalSent = aggregateCounts.sent ?? 0;
+      const totalFailed = aggregateCounts.failed ?? 0;
+      const totalSkipped = aggregateCounts.skipped ?? 0;
+      const totalPending = (aggregateCounts.pending ?? 0) + (aggregateCounts.sending ?? 0);
+      const completedStatus = totalPending > 0
+        ? 'processing'
+        : totalFailed === 0 && totalSkipped === 0 && totalSent > 0
+          ? 'completed'
+          : totalSent > 0
+            ? 'partial'
+            : 'failed';
       await prisma.sendJob.update({
         where: { id: job.id },
         data: {
           status: completedStatus,
-          completed_at: new Date(),
-          sent_count: sent,
-          failed_count: failed,
-          skipped_count: skipped,
+          completed_at: totalPending > 0 ? null : new Date(),
+          sent_count: totalSent,
+          failed_count: totalFailed,
+          skipped_count: totalSkipped,
           error_message: completedStatus === 'failed' ? 'All recipients failed' : null,
         },
       });
 
-      processed.push({ jobId: job.id, status: completedStatus, sent, failed, skipped });
+      processed.push({ jobId: job.id, status: completedStatus, sent: totalSent, failed: totalFailed, skipped: totalSkipped });
     }
 
     await markCronSuccess(CRON_NAME, {

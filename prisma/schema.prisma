@@ -57,6 +57,7 @@ model Account {
   message_evolutions    MessageEvolutionRegistry[]
   canonical_company_links CanonicalAccountLink[]
   canonical_conflicts   CanonicalConflict[]
+  contact_candidates    AccountContactCandidate[]
 
   @@map("accounts")
 }
@@ -163,6 +164,47 @@ model ContactEnrichmentField {
   @@index([field_name])
   @@index([source, source_timestamp])
   @@map("contact_enrichment_fields")
+}
+
+model AccountContactCandidate {
+  id                    Int      @id @default(autoincrement())
+  account_name          String
+  candidate_key         String
+  full_name             String
+  normalized_name       String?
+  title                 String?
+  email                 String?
+  email_valid           Boolean  @default(false)
+  email_confidence      Int      @default(0)
+  company_domain        String?
+  linkedin_url          String?
+  source                String?
+  source_action         String   @default("company_contacts")
+  source_provider       String?
+  source_contact_id     String?
+  source_payload        Json?
+  confidence_score      Int      @default(0)
+  quality_score         Int      @default(0)
+  readiness_score       Int      @default(0)
+  readiness_tier        String   @default("low")
+  readiness_details     Json?
+  recommended           Boolean  @default(false)
+  recommendation_reason String?
+  state                 String   @default("staged")
+  promoted_persona_id   Int?
+  replaced_persona_id   Int?
+  deferred_reason       String?
+  last_seen_at          DateTime @default(now())
+  created_at            DateTime @default(now())
+  updated_at            DateTime @updatedAt
+
+  account Account @relation(fields: [account_name], references: [name], onDelete: Cascade)
+
+  @@unique([account_name, candidate_key])
+  @@index([account_name, state])
+  @@index([readiness_score])
+  @@index([recommended])
+  @@map("account_contact_candidates")
 }
 
 model Campaign {
@@ -608,6 +650,7 @@ model EmailLog {
   delivered_at          DateTime?
   open_count            Int       @default(0)
   bounce_type           String? // hard | soft
+  metadata              Json?
   sent_at               DateTime  @default(now())
   created_at            DateTime  @default(now())
 

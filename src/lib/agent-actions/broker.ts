@@ -4,10 +4,12 @@ import { generateText } from '@/lib/ai/client';
 import { buildEmailPrompt, buildOutreachSequencePrompt, type PromptContext } from '@/lib/ai/prompts';
 import { buildAgentActionCacheKey, readCachedAgentAction, writeCachedAgentAction, getAgentActionTtlMs, applyFreshness } from '@/lib/agent-actions/cache';
 import { getConfiguredAgentClients } from '@/lib/agent-actions/clients';
+import { buildAgentActionFreshness, buildFreshnessDimension, createDefaultAgentActionFreshness } from '@/lib/agent-actions/freshness';
 import type { AgentActionCapability, AgentActionCard, AgentActionRequest, AgentActionResult, AgentActionTarget, AgentActionType } from '@/lib/agent-actions/types';
 
 type ResolvedTarget = AgentActionTarget & {
   accountName?: string;
+  accountNames?: string[];
   company?: string;
   email?: string;
   personaName?: string;
@@ -35,9 +37,7 @@ function baseResult(action: AgentActionType, provider: AgentActionResult['provid
     cards: [],
     data: {},
     freshness: {
-      fetchedAt: nowIso(),
-      stale: false,
-      source: 'live',
+      ...createDefaultAgentActionFreshness(nowIso()),
     },
     nextActions: [],
   };
@@ -119,6 +119,7 @@ async function resolveTarget(target: AgentActionTarget): Promise<ResolvedTarget>
     });
     if (persona) {
       resolved.accountName = resolved.accountName ?? persona.account_name;
+      resolved.accountNames = resolved.accountNames?.length ? resolved.accountNames : [persona.account_name];
       resolved.company = resolved.company ?? persona.account_name;
       resolved.email = resolved.email ?? persona.email ?? undefined;
       resolved.personaName = persona.name;
@@ -137,6 +138,7 @@ async function resolveTarget(target: AgentActionTarget): Promise<ResolvedTarget>
     });
     if (persona) {
       resolved.accountName = persona.account_name;
+      resolved.accountNames = resolved.accountNames?.length ? resolved.accountNames : [persona.account_name];
       resolved.company = resolved.company ?? persona.account_name;
       resolved.personaName = persona.name;
       resolved.personaTitle = persona.title ?? undefined;
@@ -145,6 +147,9 @@ async function resolveTarget(target: AgentActionTarget): Promise<ResolvedTarget>
 
   if (!resolved.company && resolved.accountName) {
     resolved.company = resolved.accountName;
+  }
+  if (!resolved.accountNames?.length && resolved.accountName) {
+    resolved.accountNames = [resolved.accountName];
   }
 
   return resolved;
@@ -170,7 +175,7 @@ async function recordAgentActivity(accountName: string | undefined, action: Agen
 
 async function buildModexPromptContext(target: ResolvedTarget): Promise<PromptContext | null> {
   if (!target.accountName) return null;
-  const { account, personas } = await getAccountContext(target.accountName);
+  const { account, personas } = await getAccountContext(target.accountName, target.accountNames);
   if (!account) return null;
   const persona = target.personaName
     ? personas.find((candidate) => candidate.name?.toLowerCase() === target.personaName?.toLowerCase())
@@ -237,14 +242,14 @@ async function runContentContext(target: ResolvedTarget, refresh: boolean, depth
   }
 
   const [accountBundle, latestEmail, latestAsset] = await Promise.all([
-    getAccountContext(target.accountName),
+    getAccountContext(target.accountName, target.accountNames),
     prisma.emailLog.findFirst({
-      where: { account_name: target.accountName },
+      where: { account_name: { in: target.accountNames?.length ? target.accountNames : [target.accountName] } },
       orderBy: { sent_at: 'desc' },
       select: { subject: true, sent_at: true, to_email: true, reply_count: true },
     }).catch(() => null),
     prisma.generatedContent.findFirst({
-      where: { account_name: target.accountName },
+      where: { account_name: { in: target.accountNames?.length ? target.accountNames : [target.accountName] } },
       orderBy: { created_at: 'desc' },
       select: { content_type: true, created_at: true, version_metadata: true },
     }).catch(() => null),
@@ -262,6 +267,10 @@ async function runContentContext(target: ResolvedTarget, refresh: boolean, depth
   ]);
 
   const personas = accountBundle.personas ?? [];
+  const latestContactEnrichedAt = personas
+    .map((persona) => persona.last_enriched_at)
+    .filter((value): value is Date => value instanceof Date)
+    .sort((left, right) => right.getTime() - left.getTime())[0] ?? null;
   const contactNames = personas.map((persona) => persona.name);
   const committeePayload = committee.status === 'fulfilled' ? committee.value : null;
   const workbenchPayload = accountResearch.status === 'fulfilled' ? accountResearch.value?.workbench : null;
@@ -358,6 +367,40 @@ async function runContentContext(target: ResolvedTarget, refresh: boolean, depth
     companyContactsPayload ? 'Open same-company contacts and pick the strongest operator lane' : 'Find more same-company contacts',
     latestEmail?.reply_count ? 'Lean into the active thread context' : 'Generate a new one-pager with live intel',
   ];
+  result.freshness = buildAgentActionFreshness({
+    fetchedAt: result.freshness.fetchedAt,
+    source: 'live',
+    dimensions: {
+      summary: buildFreshnessDimension({
+        key: 'summary',
+        label: 'Research summary',
+        updatedAt: researchPayload || workbenchPayload ? result.freshness.fetchedAt : null,
+        fetchedAt: result.freshness.fetchedAt,
+        source: 'live',
+      }),
+      signals: buildFreshnessDimension({
+        key: 'signals',
+        label: 'Signals',
+        updatedAt: latestEmail?.sent_at ?? latestAsset?.created_at ?? result.freshness.fetchedAt,
+        fetchedAt: result.freshness.fetchedAt,
+        source: latestEmail?.sent_at || latestAsset?.created_at ? 'local' : 'live',
+      }),
+      contacts: buildFreshnessDimension({
+        key: 'contacts',
+        label: 'Contacts',
+        updatedAt: latestContactEnrichedAt,
+        fetchedAt: result.freshness.fetchedAt,
+        source: 'local',
+      }),
+      generated_content: buildFreshnessDimension({
+        key: 'generated_content',
+        label: 'Generated content',
+        updatedAt: latestAsset?.created_at ?? null,
+        fetchedAt: result.freshness.fetchedAt,
+        source: 'local',
+      }),
+    },
+  });
   result.data = {
     account: {
       name: accountBundle.account?.name ?? target.accountName,
@@ -378,6 +421,11 @@ async function runContentContext(target: ResolvedTarget, refresh: boolean, depth
     },
     latestEmail,
     latestAsset,
+    contactFreshness: {
+      latestEnrichedAt: latestContactEnrichedAt?.toISOString() ?? null,
+      mappedContactCount: personas.length,
+      liveContactCount,
+    },
     depth,
   };
 
@@ -696,6 +744,7 @@ export async function runAgentAction(request: AgentActionRequest): Promise<Agent
     ...request,
     target: {
       accountName: resolvedTarget.accountName,
+      accountNames: resolvedTarget.accountNames,
       company: resolvedTarget.company,
       email: resolvedTarget.email,
       personaId: resolvedTarget.personaId,

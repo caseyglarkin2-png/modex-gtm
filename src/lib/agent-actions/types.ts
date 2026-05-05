@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import type { AgentActionFreshness } from '@/lib/agent-actions/freshness';
 
 export const AGENT_ACTION_TYPES = [
   'account_research',
@@ -17,6 +18,7 @@ export type AgentActionType = (typeof AGENT_ACTION_TYPES)[number];
 
 export const AgentActionTargetSchema = z.object({
   accountName: z.string().min(1).optional(),
+  accountNames: z.array(z.string().min(1)).optional(),
   personaId: z.number().int().positive().optional(),
   email: z.string().email().optional(),
   company: z.string().min(1).optional(),
@@ -49,11 +51,7 @@ export interface AgentActionResult {
   summary: string;
   cards: AgentActionCard[];
   data: Record<string, unknown>;
-  freshness: {
-    fetchedAt: string;
-    stale: boolean;
-    source: 'live' | 'cache';
-  };
+  freshness: AgentActionFreshness;
   nextActions: string[];
 }
 
@@ -63,4 +61,3 @@ export interface AgentActionCapability {
   fallbackProvider: 'clawd' | 'sales_agent' | 'modex' | null;
   configured: boolean;
 }
-

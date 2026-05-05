@@ -55,4 +55,40 @@ describe('GeneratedContentPreviewDialog', () => {
     fireEvent.click(screen.getByRole('button', { name: /View raw payload/i }));
     expect(screen.getByText(/\{"raw":true,"payload":"hello"\}/i)).toBeInTheDocument();
   });
+
+  it('renders provenance and context-used metadata when version metadata is present', () => {
+    render(
+      <GeneratedContentPreviewDialog
+        accountName="Boston Beer Company"
+        version={4}
+        providerUsed="ai_gateway"
+        content="Hello preview"
+        promptPolicyVersion="cold-outbound-v2"
+        versionMetadata={{
+          prompt_policy_version: 'cold-outbound-v2',
+          cta_mode: 'scorecard_reply',
+          generation_input_contract: {
+            signals: [{ title: 'Dock pressure' }, { title: 'Queue volatility' }],
+            recommended_contacts: [{ name: 'Taylor Lane' }],
+            committee_gaps: ['Finance'],
+            freshness: { status: 'aging', stale: false },
+          },
+          provenance: {
+            scoped_account_names: ['Boston Beer Company', 'The Boston Beer Company'],
+          },
+          agentContext: { status: 'ok' },
+        }}
+        open
+      />,
+    );
+
+    expect(screen.getByText('Policy cold-outbound-v2')).toBeInTheDocument();
+    expect(screen.getByText('CTA scorecard reply')).toBeInTheDocument();
+    expect(screen.getByText('aging')).toBeInTheDocument();
+    expect(screen.getByText('Live intel')).toBeInTheDocument();
+    expect(screen.getByText('2 signals')).toBeInTheDocument();
+    expect(screen.getByText('1 contacts')).toBeInTheDocument();
+    expect(screen.getByText('1 committee gaps')).toBeInTheDocument();
+    expect(screen.getByText('Scope: Boston Beer Company, The Boston Beer Company')).toBeInTheDocument();
+  });
 });

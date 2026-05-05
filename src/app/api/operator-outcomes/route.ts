@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { OperatorOutcomeSchema } from '@/lib/validations';
-import { parseOperatorOutcomeLabel } from '@/lib/revops/operator-outcomes';
+import { buildOutcomeFollowUpRecommendation, parseOperatorOutcomeLabel } from '@/lib/revops/operator-outcomes';
 import { buildSignalToContentMapping, computeLearningReviewSlaDueAt } from '@/lib/revops/engagement-learning';
 import { buildInfographicEvent, mapOutcomeToNextInfographic, parseInfographicMetadata } from '@/lib/revops/infographic-journey';
 
@@ -43,7 +43,20 @@ export async function POST(req: NextRequest) {
     select: { id: true },
   });
   if (existing) {
-    return NextResponse.json({ success: true, deduped: true, outcomeId: existing.id });
+    const dedupedRecommendation = buildOutcomeFollowUpRecommendation({
+      outcomeLabel,
+      coverageGapCount: 0,
+      hasMeetingSignal: false,
+      notes: payload.notes ?? null,
+    });
+    return NextResponse.json({
+      success: true,
+      deduped: true,
+      outcomeId: existing.id,
+      nextAction: dedupedRecommendation?.nextAction ?? null,
+      nextAsset: dedupedRecommendation?.nextAsset ?? null,
+      summary: dedupedRecommendation?.summary ?? null,
+    });
   }
 
   const created = await prisma.operatorOutcome.create({
@@ -197,7 +210,7 @@ export async function POST(req: NextRequest) {
       activity_date: new Date(),
     },
   }).catch(() => undefined);
-  await prisma.generationJob.create({
+  const queuedGenerationJob = await prisma.generationJob.create({
     data: {
       account_name: payload.accountName,
       campaign_id: payload.campaignId ?? null,
@@ -206,5 +219,21 @@ export async function POST(req: NextRequest) {
     },
   }).catch(() => undefined);
 
-  return NextResponse.json({ success: true, deduped: false, outcomeId: created.id });
+  const followUpRecommendation = buildOutcomeFollowUpRecommendation({
+    outcomeLabel,
+    stageIntent: inferredStage as 'cold' | 'engaged' | 'discovery' | 'evaluation' | 'proposal' | 'customer',
+    coverageGapCount: 0,
+    hasMeetingSignal: false,
+    notes: payload.notes ?? null,
+  });
+
+  return NextResponse.json({
+    success: true,
+    deduped: false,
+    outcomeId: created.id,
+    queuedGenerationJobId: queuedGenerationJob?.id ?? null,
+    nextAction: followUpRecommendation?.nextAction ?? null,
+    nextAsset: followUpRecommendation?.nextAsset ?? null,
+    summary: followUpRecommendation?.summary ?? null,
+  });
 }

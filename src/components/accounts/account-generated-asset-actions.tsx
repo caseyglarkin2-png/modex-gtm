@@ -72,6 +72,7 @@ export function AccountGeneratedAssetActions({
           promptPolicyVersion={promptPolicyVersion}
           ctaMode={ctaMode}
           legacyPolicy={legacyPolicy}
+          versionMetadata={asset.version_metadata}
           trigger={<Button variant="outline" size="sm">{previewLabel}</Button>}
         />
       ) : null}

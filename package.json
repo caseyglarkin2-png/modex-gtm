@@ -12,6 +12,7 @@
     "test:unit": "vitest run",
     "test:e2e:one-pager:smoke": "playwright test tests/e2e/generated-content.spec.ts tests/e2e/generation-metrics.spec.ts tests/e2e/generation-queue.spec.ts tests/e2e/generated-content-bulk-preview.spec.ts tests/e2e/send-jobs.spec.ts tests/e2e/one-pager-send-workflow.spec.ts",
     "test:e2e:one-pager:proof": "npm run db:push && tsx scripts/seed-onepager-proof.ts && E2E_PROOF_PRESEEDED=1 playwright test -c playwright.onepager-proof.config.ts && node scripts/assert-onepager-proof-report.mjs",
+    "test:e2e:account-command-center:proof": "E2E_SEED_SECRET=local-e2e-seed ALLOW_PROOF_SEED_IN_PRODUCTION=1 playwright test -c playwright.account-command-center-proof.config.ts",
     "test:e2e:one-pager": "npm run test:e2e:one-pager:smoke",
     "seed": "tsx scripts/seed.ts",
     "enrich:contacts": "tsx scripts/enrich-contacts.ts",

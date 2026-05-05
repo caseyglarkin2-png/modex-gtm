@@ -1,0 +1,614 @@
+'use client';
+
+import { useEffect, useMemo, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import { toast } from 'sonner';
+import { FileText, Mail, RefreshCw, Send, Sparkles } from 'lucide-react';
+import { canDirectSendAsset } from '@/lib/generated-content/asset-send-contract';
+import { parseAssetProvenanceSummary, resolveAccountAssetSelection } from '@/lib/generated-content/asset-selection';
+import type { ContentQualityResult } from '@/lib/content-quality';
+import type { AssetSendRecipient } from '@/components/email/asset-send-dialog';
+import { buildAccountComposePayload } from '@/lib/email/compose-contract';
+import { readApiResponse } from '@/lib/api-response';
+import { recordWorkflowMetric } from '@/lib/agent-actions/telemetry';
+import { SendJobTracker } from '@/components/generated-content/send-job-tracker';
+
+type AccountOutreachShellAsset = {
+  id: number;
+  content: string;
+  content_type: string;
+  version: number;
+  created_at: Date | string;
+  provider_used?: string | null;
+  version_metadata?: unknown;
+  quality?: ContentQualityResult | null;
+};
+
+type AccountOutreachRecipientSet = {
+  key: string;
+  label: string;
+  description: string;
+  count: number;
+  recipientIds: number[];
+  recommended?: boolean;
+};
+
+type AccountOutreachShellProps = {
+  accountName: string;
+  assets: AccountOutreachShellAsset[];
+  recipients: AssetSendRecipient[];
+  recipientSets?: AccountOutreachRecipientSet[];
+  initialSelectedRecipientIds?: number[];
+  defaultRecipientSetKey?: string | null;
+  recommendedAngle?: string;
+  whyNow?: string;
+  trigger?: React.ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+};
+
+type ComposeVariant = 'one_pager_asset' | 'email_draft';
+
+function buildDefaultDraft(accountName: string, recommendedAngle?: string, whyNow?: string) {
+  return {
+    subject: `built this with ${accountName} in mind`,
+    openingLine: `Wanted to share a quick note because ${accountName} looks like a strong fit for a tighter gate-to-dock operating motion.`,
+    body: recommendedAngle || whyNow || `The working hypothesis is that throughput pressure is showing up as manual coordination, avoidable yard variance, and inconsistent dock flow.`,
+    ctaLine: `If useful, I can send the short operator version.`,
+  };
+}
+
+function arraysEqual(left: number[], right: number[]) {
+  if (left.length !== right.length) return false;
+  return left.every((value, index) => value === right[index]);
+}
+
+export function AccountOutreachShell({
+  accountName,
+  assets,
+  recipients,
+  recipientSets = [],
+  initialSelectedRecipientIds,
+  defaultRecipientSetKey,
+  recommendedAngle,
+  whyNow,
+  trigger,
+  open: controlledOpen,
+  onOpenChange,
+}: AccountOutreachShellProps) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const open = controlledOpen ?? internalOpen;
+  const setOpen = onOpenChange ?? setInternalOpen;
+  const showTrigger = trigger !== undefined || controlledOpen === undefined;
+  const assetSelection = useMemo(() => resolveAccountAssetSelection<AccountOutreachShellAsset>(assets), [assets]);
+  const sendableAssets = useMemo(
+    () => assets
+      .filter((asset) => canDirectSendAsset(asset.content_type))
+      .sort((left, right) => right.version - left.version),
+    [assets],
+  );
+  const defaultDraft = useMemo(
+    () => buildDefaultDraft(accountName, recommendedAngle, whyNow),
+    [accountName, recommendedAngle, whyNow],
+  );
+  const preferredRecipientSet = useMemo(
+    () => recipientSets.find((set) => set.key === defaultRecipientSetKey)
+      ?? recipientSets.find((set) => set.recommended)
+      ?? null,
+    [defaultRecipientSetKey, recipientSets],
+  );
+  const defaultSelectedRecipientIds = useMemo(
+    () => initialSelectedRecipientIds?.length
+      ? initialSelectedRecipientIds
+      : preferredRecipientSet?.recipientIds.length
+        ? preferredRecipientSet.recipientIds
+        : recipients.map((recipient) => recipient.id),
+    [initialSelectedRecipientIds, preferredRecipientSet, recipients],
+  );
+  const defaultVariant: ComposeVariant = sendableAssets.length > 0 ? 'one_pager_asset' : 'email_draft';
+
+  const [variant, setVariant] = useState<ComposeVariant>(defaultVariant);
+  const [selectedAssetId, setSelectedAssetId] = useState<number | null>(assetSelection.fallbackAsset?.id ?? null);
+  const [selectedRecipientIds, setSelectedRecipientIds] = useState<number[]>(defaultSelectedRecipientIds);
+  const [selectedRecipientSetKey, setSelectedRecipientSetKey] = useState<string | null>(preferredRecipientSet?.key ?? null);
+  const [subject, setSubject] = useState('');
+  const [openingLine, setOpeningLine] = useState('');
+  const [draftBody, setDraftBody] = useState('');
+  const [ctaLine, setCtaLine] = useState('');
+  const [isSending, setIsSending] = useState(false);
+  const [isDrafting, setIsDrafting] = useState(false);
+  const [activeSendJobId, setActiveSendJobId] = useState<number | null>(null);
+  const [lastSendResult, setLastSendResult] = useState<{
+    sent: number;
+    failed: number;
+    total: number;
+    skipped?: Array<{ to: string; reason: string }>;
+  } | null>(null);
+
+  const selectedAsset = sendableAssets.find((asset) => asset.id === selectedAssetId)
+    ?? assetSelection.fallbackAsset
+    ?? null;
+  const selectedAssetProvenance = selectedAsset
+    ? parseAssetProvenanceSummary(selectedAsset.version_metadata)
+    : null;
+
+  const resetState = () => {
+    const assetDefault = assetSelection.recommendedAsset ?? assetSelection.latestSendableAsset ?? assetSelection.latestAsset ?? null;
+    setVariant(defaultVariant);
+    setSelectedAssetId(assetDefault?.id ?? null);
+    setSelectedRecipientIds(defaultSelectedRecipientIds);
+    setSelectedRecipientSetKey(preferredRecipientSet?.key ?? null);
+    setSubject(
+      defaultVariant === 'one_pager_asset'
+        ? `yard network scorecard for ${accountName}`
+        : defaultDraft.subject,
+    );
+    setOpeningLine(
+      defaultVariant === 'one_pager_asset'
+        ? `Wanted to share the short operator version I’d use with ${accountName}.`
+        : defaultDraft.openingLine,
+    );
+    setDraftBody(defaultDraft.body);
+    setCtaLine(defaultVariant === 'one_pager_asset' ? defaultDraft.ctaLine : defaultDraft.ctaLine);
+    setLastSendResult(null);
+    setActiveSendJobId(null);
+  };
+
+  useEffect(() => {
+    if (!open) return;
+    resetState();
+    void recordWorkflowMetric('send_from_account_rate', {
+      accountName,
+      action: 'account_outreach_shell_open',
+      status: defaultVariant,
+      value: 1,
+    });
+  }, [accountName, defaultVariant, open, preferredRecipientSet?.key]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (variant === 'one_pager_asset') {
+      setSubject((current) => current || `yard network scorecard for ${accountName}`);
+      setOpeningLine((current) => current || `Wanted to share the short operator version I’d use with ${accountName}.`);
+      setCtaLine((current) => current || defaultDraft.ctaLine);
+      return;
+    }
+
+    setSubject((current) => current || defaultDraft.subject);
+    setOpeningLine((current) => current || defaultDraft.openingLine);
+    setDraftBody((current) => current || defaultDraft.body);
+    setCtaLine((current) => current || defaultDraft.ctaLine);
+  }, [accountName, defaultDraft, variant]);
+
+  const payload = useMemo(() => {
+    if (variant === 'one_pager_asset') {
+      if (!selectedAsset) return null;
+      return buildAccountComposePayload({
+        variant: 'one_pager_asset',
+        accountName,
+        subject,
+        openingLine,
+        ctaLine,
+        asset: {
+          id: selectedAsset.id,
+          generatedContentId: selectedAsset.id,
+          version: selectedAsset.version,
+          content: selectedAsset.content,
+          contentType: selectedAsset.content_type,
+          providerUsed: selectedAsset.provider_used,
+        },
+        recipients,
+        selectedRecipientIds,
+        recipientSetKey: selectedRecipientSetKey,
+      });
+    }
+
+    return buildAccountComposePayload({
+      variant: 'email_draft',
+      accountName,
+      subject,
+      openingLine,
+      body: draftBody,
+      ctaLine,
+      recipients,
+      selectedRecipientIds,
+      recipientSetKey: selectedRecipientSetKey,
+    });
+  }, [accountName, ctaLine, draftBody, openingLine, recipients, selectedAsset, selectedRecipientIds, selectedRecipientSetKey, subject, variant]);
+
+  const selectedRecipients = recipients.filter((recipient) => selectedRecipientIds.includes(recipient.id));
+
+  function applyRecipientSet(recipientSet: AccountOutreachRecipientSet | null) {
+    if (!recipientSet) {
+      setSelectedRecipientIds(recipients.map((recipient) => recipient.id));
+      setSelectedRecipientSetKey(null);
+      return;
+    }
+    setSelectedRecipientIds(recipientSet.recipientIds);
+    setSelectedRecipientSetKey(recipientSet.key);
+  }
+
+  function updateRecipientSelection(nextIds: number[]) {
+    setSelectedRecipientIds(nextIds);
+    const matchingSet = recipientSets.find((set) => arraysEqual(set.recipientIds, nextIds));
+    setSelectedRecipientSetKey(matchingSet?.key ?? 'manual');
+  }
+
+  async function handleDraftFromIntel() {
+    setIsDrafting(true);
+    try {
+      const response = await fetch('/api/agent-actions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'draft_outreach',
+          refresh: true,
+          target: {
+            accountName,
+            company: accountName,
+          },
+        }),
+      });
+      const payload = await readApiResponse<{
+        summary?: string;
+        error?: string;
+        data?: {
+          draft?: {
+            subject?: string;
+            body?: string;
+            draft?: { subject?: string; body?: string };
+          };
+        };
+      }>(response);
+      if (!response.ok && !payload.data?.draft) {
+        throw new Error(payload.error ?? payload.summary ?? 'Live draft failed');
+      }
+      const draft = payload.data?.draft?.draft ?? payload.data?.draft;
+      if (draft?.subject) setSubject(draft.subject);
+      if (draft?.body) setDraftBody(draft.body);
+      if (!draft?.subject && !draft?.body) {
+        throw new Error('No draft content came back from live intel.');
+      }
+      toast.success(payload.summary ?? 'Draft refreshed from live intel');
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Live draft failed');
+    } finally {
+      setIsDrafting(false);
+    }
+  }
+
+  async function handleSend() {
+    if (!payload) {
+      toast.error('Select an asset or draft before sending');
+      return;
+    }
+    if (payload.recipients.length === 0) {
+      toast.error('Select at least one recipient');
+      return;
+    }
+
+    setIsSending(true);
+    try {
+      const shouldQueueAsync = payload.recipients.length > 1;
+
+      if (shouldQueueAsync) {
+        const response = await fetch('/api/email/send-bulk-async', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            requestedBy: 'Casey',
+            workflowMetadata: payload.workflowMetadata,
+            items: [{
+              generatedContentId: payload.generatedContentId,
+              accountName: payload.accountName,
+              subject: payload.subject,
+              bodyHtml: payload.bodyHtml,
+              recipients: payload.recipients,
+            }],
+          }),
+        });
+        const result = await readApiResponse<{
+          success?: boolean;
+          error?: string;
+          job?: { id: number; status: string; total_recipients: number };
+        }>(response);
+        if (!response.ok || !result.job) {
+          throw new Error(result.error ?? 'Failed to queue send job');
+        }
+        setActiveSendJobId(result.job.id);
+        setLastSendResult(null);
+        void recordWorkflowMetric('account_send_job_enqueue_rate', {
+          accountName,
+          action: 'account_outreach_shell',
+          status: variant,
+          value: payload.recipients.length,
+          count: payload.recipients.length,
+        });
+        toast.success(`Queued send job #${result.job.id} for ${payload.recipients.length} recipients`);
+      } else {
+        const response = await fetch('/api/email/send-bulk', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            accountName: payload.accountName,
+            recipients: payload.recipients,
+            subject: payload.subject,
+            bodyHtml: payload.bodyHtml,
+            generatedContentId: payload.generatedContentId,
+            workflowMetadata: payload.workflowMetadata,
+          }),
+        });
+        const result = await readApiResponse<{
+          success?: boolean;
+          sent: number;
+          failed: number;
+          total: number;
+          skipped?: Array<{ to: string; reason: string }>;
+          error?: string;
+          message?: string;
+        }>(response);
+        if (!response.ok) {
+          throw new Error(result.message ?? result.error ?? 'Send failed');
+        }
+        setLastSendResult(result);
+        void recordWorkflowMetric('preview_to_send_rate', {
+          accountName,
+          action: 'account_outreach_shell',
+          status: variant,
+          value: result.sent,
+          count: result.total,
+        });
+        toast.success(`Sent to ${result.sent} recipient(s)`);
+      }
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Send failed');
+    } finally {
+      setIsSending(false);
+    }
+  }
+
+  return (
+    <Sheet open={open} onOpenChange={setOpen}>
+      {showTrigger ? (
+        <SheetTrigger asChild>
+          {trigger ?? (
+            <Button size="sm" className="gap-1.5 bg-emerald-600 text-white hover:bg-emerald-700">
+              <Send className="h-3.5 w-3.5" />
+              Compose Outreach
+            </Button>
+          )}
+        </SheetTrigger>
+      ) : null}
+      <SheetContent side="right" className="w-full max-w-4xl overflow-y-auto p-0 sm:max-w-4xl">
+        <div className="flex h-full flex-col">
+          <SheetHeader className="border-b px-6 py-5">
+            <SheetTitle>{accountName} · Outreach Shell</SheetTitle>
+            <SheetDescription>
+              Pick the asset or draft, tune recipients, edit the message, preview the exact send payload, and send without leaving the account page.
+            </SheetDescription>
+          </SheetHeader>
+
+          <div className="flex-1 space-y-6 overflow-y-auto px-6 py-5">
+            <div className="flex flex-wrap gap-2">
+              <Button
+                type="button"
+                size="sm"
+                variant={variant === 'one_pager_asset' ? 'default' : 'outline'}
+                onClick={() => setVariant('one_pager_asset')}
+                disabled={sendableAssets.length === 0}
+              >
+                <FileText className="mr-1.5 h-3.5 w-3.5" />
+                One-Pager Asset
+              </Button>
+              <Button
+                type="button"
+                size="sm"
+                variant={variant === 'email_draft' ? 'default' : 'outline'}
+                onClick={() => setVariant('email_draft')}
+              >
+                <Mail className="mr-1.5 h-3.5 w-3.5" />
+                Email Draft
+              </Button>
+              {variant === 'email_draft' ? (
+                <Button type="button" size="sm" variant="outline" onClick={() => void handleDraftFromIntel()} disabled={isDrafting}>
+                  <Sparkles className={`mr-1.5 h-3.5 w-3.5 ${isDrafting ? 'animate-pulse' : ''}`} />
+                  {isDrafting ? 'Refreshing Draft...' : 'Draft From Intel'}
+                </Button>
+              ) : null}
+              <Button type="button" size="sm" variant="ghost" onClick={resetState}>
+                Reset
+              </Button>
+            </div>
+
+            <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
+              <div className="space-y-4">
+                {variant === 'one_pager_asset' ? (
+                  <div className="space-y-3 rounded-lg border border-[var(--border)] p-4">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <Label htmlFor="asset-version" className="text-sm font-medium">Asset</Label>
+                      {assetSelection.recommendedAsset ? <Badge>Recommended</Badge> : null}
+                      {selectedAssetProvenance?.usedLiveIntel ? <Badge variant="outline">Live intel</Badge> : null}
+                      {selectedAssetProvenance?.freshnessLabel ? <Badge variant="secondary">{selectedAssetProvenance.freshnessLabel}</Badge> : null}
+                    </div>
+                    <select
+                      id="asset-version"
+                      value={selectedAsset?.id ?? ''}
+                      onChange={(event) => setSelectedAssetId(Number(event.target.value))}
+                      className="h-10 w-full rounded-md border border-[var(--border)] bg-background px-3 text-sm"
+                    >
+                      {sendableAssets.map((asset) => (
+                        <option key={asset.id} value={asset.id}>
+                          v{asset.version} · {asset.content_type.replaceAll('_', ' ')}
+                        </option>
+                      ))}
+                    </select>
+                    {selectedAssetProvenance ? (
+                      <p className="text-xs text-[var(--muted-foreground)]">
+                        Signals used: {selectedAssetProvenance.signalCount} · Contacts used: {selectedAssetProvenance.recommendedContactCount} · Scope: {selectedAssetProvenance.scopedAccountNames.join(', ') || accountName}
+                      </p>
+                    ) : null}
+                  </div>
+                ) : (
+                  <div className="rounded-lg border border-[var(--border)] p-4">
+                    <p className="text-sm font-medium">Draft Mode</p>
+                    <p className="mt-1 text-xs text-[var(--muted-foreground)]">
+                      Use the shell for a lighter account email while keeping the same recipient and telemetry contract.
+                    </p>
+                  </div>
+                )}
+
+                <div className="space-y-2">
+                  <Label htmlFor="compose-subject">Subject</Label>
+                  <Input id="compose-subject" value={subject} onChange={(event) => setSubject(event.target.value)} />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="compose-opening">Opening Paragraph</Label>
+                  <Textarea id="compose-opening" value={openingLine} onChange={(event) => setOpeningLine(event.target.value)} rows={4} />
+                </div>
+                {variant === 'email_draft' ? (
+                  <div className="space-y-2">
+                    <Label htmlFor="compose-body">Main Body</Label>
+                    <Textarea id="compose-body" value={draftBody} onChange={(event) => setDraftBody(event.target.value)} rows={8} />
+                  </div>
+                ) : null}
+                <div className="space-y-2">
+                  <Label htmlFor="compose-cta">CTA / Closing</Label>
+                  <Textarea id="compose-cta" value={ctaLine} onChange={(event) => setCtaLine(event.target.value)} rows={3} />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div className="rounded-lg border border-[var(--border)] p-4">
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="text-sm font-medium">Recipients</p>
+                    <Badge variant="outline">{selectedRecipientIds.length} selected</Badge>
+                  </div>
+                  {recipientSets.length > 0 ? (
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {recipientSets.map((recipientSet) => (
+                        <Button
+                          key={recipientSet.key}
+                          type="button"
+                          size="sm"
+                          variant={selectedRecipientSetKey === recipientSet.key ? 'default' : 'outline'}
+                          onClick={() => applyRecipientSet(recipientSet)}
+                        >
+                          {recipientSet.label}
+                        </Button>
+                      ))}
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant={selectedRecipientSetKey === 'manual' ? 'default' : 'outline'}
+                        onClick={() => {
+                          updateRecipientSelection([]);
+                        }}
+                      >
+                        Manual
+                      </Button>
+                    </div>
+                  ) : null}
+                  <div className="mt-3 space-y-2">
+                    {recipients.map((recipient) => (
+                      <label key={recipient.id} className="flex items-start gap-2 rounded-md border border-[var(--border)] p-2 text-sm">
+                        <input
+                          type="checkbox"
+                          checked={selectedRecipientIds.includes(recipient.id)}
+                          onChange={(event) => {
+                            const nextIds = event.target.checked
+                              ? [...selectedRecipientIds, recipient.id]
+                              : selectedRecipientIds.filter((id) => id !== recipient.id);
+                            updateRecipientSelection(nextIds);
+                          }}
+                          className="mt-0.5"
+                        />
+                        <span>
+                          <span className="font-medium">{recipient.name}</span>
+                          <span className="ml-2 text-[var(--muted-foreground)]">{recipient.email}</span>
+                          {recipient.title ? <span className="ml-2 text-[var(--muted-foreground)]">({recipient.title})</span> : null}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="rounded-lg border border-[var(--border)] p-4">
+                  <p className="text-sm font-medium">Preview</p>
+                  <div className="mt-3 max-h-[420px] overflow-y-auto rounded-md border bg-slate-50 p-4">
+                    {payload ? (
+                      <div
+                        className="prose prose-sm max-w-none dark:prose-invert"
+                        dangerouslySetInnerHTML={{ __html: payload.previewHtml }}
+                      />
+                    ) : (
+                      <p className="text-sm text-[var(--muted-foreground)]">Select an asset or draft to build a preview.</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-lg border border-[var(--border)] bg-[var(--accent)]/20 p-4 text-sm">
+              <p className="font-medium">Pre-send summary</p>
+              <p className="mt-1 text-[var(--muted-foreground)]">
+                Variant: {variant === 'one_pager_asset' ? 'One-pager asset' : 'Email draft'} · Recipients: {selectedRecipients.length} · Recipient set: {selectedRecipientSetKey ?? 'manual'}
+              </p>
+              {payload?.generatedContentId ? (
+                <p className="mt-1 text-[var(--muted-foreground)]">
+                  Generated content linkage: #{payload.generatedContentId}
+                </p>
+              ) : null}
+            </div>
+
+            {lastSendResult ? (
+              <div className="rounded-lg border border-[var(--border)] bg-[var(--accent)]/20 p-4 text-sm">
+                <p className="font-medium">
+                  Send result: {lastSendResult.sent} sent, {lastSendResult.failed} failed, {lastSendResult.total} total.
+                </p>
+                {(lastSendResult.skipped?.length ?? 0) > 0 ? (
+                  <p className="mt-1 text-[var(--muted-foreground)]">
+                    Skipped: {lastSendResult.skipped?.map((item) => `${item.to} (${item.reason})`).join(', ')}
+                  </p>
+                ) : null}
+              </div>
+            ) : null}
+
+            {activeSendJobId ? (
+              <SendJobTracker jobId={activeSendJobId} pollMs={5000} title={`Account Page Send Job #${activeSendJobId}`} />
+            ) : null}
+          </div>
+
+          <div className="flex items-center justify-between border-t px-6 py-4">
+            <Button type="button" variant="outline" onClick={() => setOpen(false)}>
+              Close
+            </Button>
+            <Button type="button" onClick={() => void handleSend()} disabled={isSending || !payload || payload.recipients.length === 0}>
+              {isSending ? (
+                <>
+                  <RefreshCw className="mr-2 h-4 w-4 animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  <Send className="mr-2 h-4 w-4" />
+                  Send to {payload?.recipients.length ?? 0} Recipient{(payload?.recipients.length ?? 0) === 1 ? '' : 's'}
+                </>
+              )}
+            </Button>
+          </div>
+        </div>
+      </SheetContent>
+    </Sheet>
+  );
+}

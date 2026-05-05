@@ -10,6 +10,8 @@ const mockedPrisma = {
   },
   generatedContent: {
     findMany: vi.fn(),
+    findFirst: vi.fn(),
+    create: vi.fn(),
   },
   emailLog: {
     findMany: vi.fn(),
@@ -50,6 +52,8 @@ beforeEach(() => {
   mockedPrisma.emailLog.findMany.mockResolvedValue([]);
   mockedPrisma.sendJobRecipient.findMany.mockResolvedValue([]);
   mockedPrisma.activity.create.mockResolvedValue({ id: 1 });
+  mockedPrisma.generatedContent.findFirst.mockResolvedValue({ version: 2 });
+  mockedPrisma.generatedContent.create.mockResolvedValue({ id: 501 });
 });
 
 describe('email send-bulk-async route', () => {
@@ -109,8 +113,8 @@ describe('email send-bulk-async route', () => {
     const res = await POST(req);
     const payload = await res.json();
 
-    expect(res.status).toBe(400);
-    expect(payload.error).toContain('Missing generated content rows: 99');
+    expect(res.status).toBe(404);
+    expect(payload.error).toContain('Generated content not found');
   });
 
   it('creates send job and deduplicates recipient rows', async () => {
@@ -136,6 +140,11 @@ describe('email send-bulk-async route', () => {
       body: JSON.stringify({
         guardWarningsAcknowledged: true,
         requestedBy: 'Casey',
+        workflowMetadata: {
+          surface: 'account_page',
+          shell: 'account_outreach',
+          variant: 'one_pager_asset',
+        },
         items: [{
           generatedContentId: 10,
           accountName: 'Acme Foods',
@@ -157,7 +166,13 @@ describe('email send-bulk-async route', () => {
     expect(mockedPrisma.sendJob.create).toHaveBeenCalledWith({
       data: expect.objectContaining({
         total_recipients: 1,
-        send_strategy: expect.any(Object),
+        send_strategy: expect.objectContaining({
+          workflow: expect.objectContaining({
+            surface: 'account_page',
+            shell: 'account_outreach',
+            variant: 'one_pager_asset',
+          }),
+        }),
         recipients: {
           createMany: {
             data: [
@@ -330,5 +345,72 @@ describe('email send-bulk-async route', () => {
     });
     const res = await POST(req);
     expect(res.status).toBe(200);
+  });
+
+  it('materializes generated content for async account-page email drafts without an existing asset id', async () => {
+    mockedPrisma.generatedContent.findMany.mockResolvedValue([
+      {
+        id: 501,
+        campaign_id: null,
+        account_name: 'Acme Foods',
+        version_metadata: {},
+        campaign: null,
+        checklist_state: null,
+      },
+    ]);
+    mockedPrisma.sendJob.create.mockResolvedValue({
+      id: 403,
+      status: 'pending',
+      total_recipients: 2,
+      created_at: new Date('2026-05-05T00:00:00.000Z'),
+    });
+
+    const req = new NextRequest('http://localhost/api/email/send-bulk-async', {
+      method: 'POST',
+      body: JSON.stringify({
+        guardWarningsAcknowledged: true,
+        requestedBy: 'Casey',
+        workflowMetadata: {
+          surface: 'account_page',
+          shell: 'account_outreach',
+          variant: 'email_draft',
+        },
+        items: [{
+          accountName: 'Acme Foods',
+          subject: 'Subject',
+          bodyHtml: '<p>Body</p>',
+          recipients: [
+            { to: 'ops@acme.com', readinessScore: 90, readinessTier: 'high', stale: false },
+            { to: 'vp@acme.com', readinessScore: 88, readinessTier: 'high', stale: false },
+          ],
+        }],
+      }),
+    });
+
+    const res = await POST(req);
+    const payload = await res.json();
+
+    expect(res.status).toBe(200);
+    expect(payload.success).toBe(true);
+    expect(mockedPrisma.generatedContent.create).toHaveBeenCalledWith(expect.objectContaining({
+      data: expect.objectContaining({
+        account_name: 'Acme Foods',
+        content_type: 'email',
+        provider_used: 'account_outreach_shell',
+      }),
+    }));
+    expect(mockedPrisma.sendJob.create).toHaveBeenCalledWith(expect.objectContaining({
+      data: expect.objectContaining({
+        recipients: {
+          createMany: {
+            data: expect.arrayContaining([
+              expect.objectContaining({
+                generated_content_id: 501,
+              }),
+            ]),
+          },
+        },
+      }),
+    }));
   });
 });

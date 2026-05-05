@@ -28,6 +28,7 @@ import {
   getOnePagerSuggestedNextStep,
 } from '@/lib/revops/cold-outbound-policy';
 import { buildGenerationInputContract } from '@/lib/agent-actions/generation-input';
+import { resolveCanonicalAccountScope } from '@/lib/revops/account-identity';
 
 export const dynamic = 'force-dynamic';
 
@@ -57,7 +58,7 @@ export async function POST(req: NextRequest) {
   }
 
   const {
-    accountName,
+    accountName: requestedAccountName,
     campaignSlug,
     stageIntent,
     infographicType,
@@ -67,7 +68,9 @@ export async function POST(req: NextRequest) {
     useLiveIntel,
     refreshContext,
   } = parsed.data;
-  const { account, meetingBrief } = await getAccountContext(accountName);
+  const canonicalScope = await resolveCanonicalAccountScope(requestedAccountName);
+  const persistedAccountName = canonicalScope.accountNames[0] ?? requestedAccountName;
+  const { account, meetingBrief } = await getAccountContext(persistedAccountName, canonicalScope.accountNames);
   if (!account) {
     return NextResponse.json(
       { error: 'ACCOUNT_NOT_FOUND', message: 'Account not found in database. Add it via /accounts/new.' },
@@ -94,7 +97,7 @@ export async function POST(req: NextRequest) {
     band: account.priority_band,
   };
   const agentContext = useLiveIntel
-    ? await getAgentContentContext({ accountName, refresh: refreshContext })
+    ? await getAgentContentContext({ accountName: persistedAccountName, accountNames: canonicalScope.accountNames, refresh: refreshContext })
     : null;
   const ctaPolicy = getCtaPolicy('one_pager', 'one_pager');
   const generationInput = buildGenerationInputContract(agentContext, ctaPolicy.ctaMode);
@@ -153,7 +156,7 @@ export async function POST(req: NextRequest) {
     ? buildSignalToContentMapping({
         sourceKind: regeneration.sourceKind,
         sourceId: regeneration.sourceId,
-        accountName,
+        accountName: persistedAccountName,
         campaignId: regeneration.campaignId,
         generatedContentId: regeneration.generatedContentId,
         signalContext: regeneration.context,
@@ -177,7 +180,9 @@ export async function POST(req: NextRequest) {
         content: null,
         raw,
         provider: result.provider,
-        accountName,
+        accountName: persistedAccountName,
+        requestedAccountName,
+        accountScope: canonicalScope.accountNames,
         agentContext: toAgentMetadata(agentContext, ctaPolicy.ctaMode),
         generationInput,
         error: 'Failed to parse structured content — raw text returned',
@@ -186,7 +191,7 @@ export async function POST(req: NextRequest) {
     if (content && typeof content === 'object' && !Array.isArray(content)) {
       const record = content as Record<string, unknown>;
       if (!record.suggestedNextStep || typeof record.suggestedNextStep !== 'string') {
-        record.suggestedNextStep = getOnePagerSuggestedNextStep(accountName);
+        record.suggestedNextStep = getOnePagerSuggestedNextStep(persistedAccountName);
       }
     }
 
@@ -195,7 +200,7 @@ export async function POST(req: NextRequest) {
       const { prisma } = await import('@/lib/prisma');
       const latestVersion = await prisma.generatedContent.findFirst({
         where: {
-          account_name: accountName,
+          account_name: persistedAccountName,
           content_type: 'one_pager',
         },
         orderBy: { version: 'desc' },
@@ -204,7 +209,7 @@ export async function POST(req: NextRequest) {
       const templateQuality = evaluateInfographicTemplateQuality(selectedType, JSON.stringify(content));
       await prisma.generatedContent.create({
         data: {
-          account_name: accountName,
+          account_name: persistedAccountName,
           content_type: 'one_pager',
           tone: 'professional',
           provider_used: result.provider,
@@ -218,6 +223,17 @@ export async function POST(req: NextRequest) {
             generation_input_contract: generationInput,
             model_provider: result.provider,
             agentContext: toAgentMetadata(agentContext, ctaPolicy.ctaMode),
+            provenance: {
+              requested_account_name: requestedAccountName,
+              persisted_account_name: persistedAccountName,
+              scoped_account_names: canonicalScope.accountNames,
+              used_live_intel: useLiveIntel,
+              generated_at: new Date().toISOString(),
+              signal_count: generationInput?.signals.length ?? 0,
+              recommended_contact_count: generationInput?.recommended_contacts.length ?? 0,
+              committee_gap_count: generationInput?.committee_gaps.length ?? 0,
+              freshness_status: generationInput?.freshness.status ?? null,
+            },
             infographic: {
               infographic_type: infographicMetadata.infographicType,
               stage_intent: infographicMetadata.stageIntent,
@@ -242,13 +258,13 @@ export async function POST(req: NextRequest) {
       });
       await prisma.activity.create({
         data: {
-          account_name: accountName,
+          account_name: persistedAccountName,
           campaign_id: campaign?.id ?? null,
           activity_type: 'Infographic',
           owner: 'Casey',
           outcome: `Generated ${selectedType} (${selectedStage})`,
           notes: JSON.stringify(buildInfographicEvent('bundle_created', {
-            accountName,
+            accountName: persistedAccountName,
             infographic_type: infographicMetadata.infographicType,
             stage_intent: infographicMetadata.stageIntent,
             bundle_id: infographicMetadata.bundleId,
@@ -260,7 +276,7 @@ export async function POST(req: NextRequest) {
       if (signalMapping) {
         const latestCreated = await prisma.generatedContent.findFirst({
           where: {
-            account_name: accountName,
+            account_name: persistedAccountName,
             content_type: 'one_pager',
           },
           orderBy: { id: 'desc' },
@@ -317,7 +333,7 @@ export async function POST(req: NextRequest) {
                 context: signalMapping.evidenceSnapshot.signalContext,
                 outcome_label: signalMapping.evidenceSnapshot.outcomeLabel,
               },
-              rollback_link: previousVersionId ? `/generated-content?account=${encodeURIComponent(accountName)}&version=${previousVersionId}` : null,
+              rollback_link: previousVersionId ? `/generated-content?account=${encodeURIComponent(persistedAccountName)}&version=${previousVersionId}` : null,
             },
           }).catch(() => undefined);
         }
@@ -328,7 +344,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       content,
-      accountName,
+      accountName: persistedAccountName,
+      requestedAccountName,
+      accountScope: canonicalScope.accountNames,
       provider: result.provider,
       agentContext: toAgentMetadata(agentContext, ctaPolicy.ctaMode),
       generationInput,
@@ -347,7 +365,7 @@ export async function POST(req: NextRequest) {
       const { prisma } = await import('@/lib/prisma');
       const latestVersion = await prisma.generatedContent.findFirst({
         where: {
-          account_name: accountName,
+          account_name: persistedAccountName,
           content_type: 'one_pager',
         },
         orderBy: { version: 'desc' },
@@ -355,7 +373,7 @@ export async function POST(req: NextRequest) {
       });
       await prisma.generatedContent.create({
         data: {
-          account_name: accountName,
+          account_name: persistedAccountName,
           content_type: 'one_pager',
           tone: 'professional',
           ai_error: message,
@@ -369,6 +387,17 @@ export async function POST(req: NextRequest) {
             agent_context_freshness: generationInput?.freshness ?? null,
             generation_input_contract: generationInput,
             agentContext: toAgentMetadata(agentContext, ctaPolicy.ctaMode),
+            provenance: {
+              requested_account_name: requestedAccountName,
+              persisted_account_name: persistedAccountName,
+              scoped_account_names: canonicalScope.accountNames,
+              used_live_intel: useLiveIntel,
+              generated_at: new Date().toISOString(),
+              signal_count: generationInput?.signals.length ?? 0,
+              recommended_contact_count: generationInput?.recommended_contacts.length ?? 0,
+              committee_gap_count: generationInput?.committee_gaps.length ?? 0,
+              freshness_status: generationInput?.freshness.status ?? null,
+            },
             infographic: {
               infographic_type: infographicMetadata.infographicType,
               stage_intent: infographicMetadata.stageIntent,

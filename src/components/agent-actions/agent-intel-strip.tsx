@@ -5,12 +5,14 @@ import { BriefcaseBusiness, RefreshCw, Sparkles, Users } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AgentActionDialog } from '@/components/agent-actions/agent-action-dialog';
+import { summarizeFreshness } from '@/lib/agent-actions/freshness';
 import type { AgentActionCard, AgentActionResult } from '@/lib/agent-actions/types';
 import { readApiResponse } from '@/lib/api-response';
 import type { AssetSendRecipient } from '@/components/email/asset-send-dialog';
 
 type AgentIntelStripProps = {
   accountName: string;
+  accountNames?: string[];
   initialResult: AgentActionResult | null;
   recipients?: AssetSendRecipient[];
 };
@@ -105,13 +107,15 @@ function IntelCard({
   );
 }
 
-export function AgentIntelStrip({ accountName, initialResult, recipients = [] }: AgentIntelStripProps) {
+export function AgentIntelStrip({ accountName, accountNames, initialResult, recipients = [] }: AgentIntelStripProps) {
   const [result, setResult] = useState<AgentActionResult | null>(initialResult);
   const [previousResult, setPreviousResult] = useState<AgentActionResult | null>(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [refreshError, setRefreshError] = useState('');
 
   const refresh = useCallback(async (force = false) => {
     setRefreshing(true);
+    setRefreshError('');
     try {
       const response = await fetch('/api/agent-actions', {
         method: 'POST',
@@ -119,18 +123,22 @@ export function AgentIntelStrip({ accountName, initialResult, recipients = [] }:
         body: JSON.stringify({
           action: 'content_context',
           refresh: force,
-          target: { accountName, company: accountName },
+          target: { accountName, accountNames, company: accountName },
         }),
       });
       const payload = await readApiResponse<AgentActionResult>(response);
       if (response.ok) {
         setPreviousResult(result);
         setResult(payload);
+      } else {
+        setRefreshError((payload as { summary?: string; error?: string }).summary ?? (payload as { error?: string }).error ?? 'Refresh failed.');
       }
+    } catch (error) {
+      setRefreshError(error instanceof Error ? error.message : 'Refresh failed.');
     } finally {
       setRefreshing(false);
     }
-  }, [accountName, result]);
+  }, [accountName, accountNames, result]);
 
   useEffect(() => {
     if (initialResult?.freshness.stale) {
@@ -142,6 +150,7 @@ export function AgentIntelStrip({ accountName, initialResult, recipients = [] }:
   const changeSummary = useMemo(() => (result ? summarizeIntelChange(previousResult, result) : ''), [previousResult, result]);
   const confidence = useMemo(() => getConfidence(result), [result]);
   const sourceCount = useMemo(() => getSourceCount(result), [result]);
+  const freshnessSummary = useMemo(() => summarizeFreshness(result?.freshness ?? null), [result]);
   const researchCard = getCard(result, 'Research Summary');
   const coverageCard = getCard(result, 'Contact Coverage');
   const committeeCard = getCard(result, 'Committee Coverage');
@@ -177,8 +186,9 @@ export function AgentIntelStrip({ accountName, initialResult, recipients = [] }:
             <p className="text-sm font-medium">Agent Intel</p>
             <Badge variant="outline">{result.provider}</Badge>
             <Badge variant={result.freshness.stale ? 'secondary' : 'default'}>
-              {result.freshness.stale ? 'stale' : result.freshness.source}
+              {freshnessSummary.label.toLowerCase()}
             </Badge>
+            <Badge variant="outline">{result.freshness.source}</Badge>
             <Badge variant={confidence === 'high' ? 'default' : 'secondary'}>{confidence} confidence</Badge>
             <Badge variant="outline">{sourceCount} sources</Badge>
           </div>
@@ -186,10 +196,23 @@ export function AgentIntelStrip({ accountName, initialResult, recipients = [] }:
             <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted-foreground)]">Next Best Move</p>
             <p className="mt-1 text-base font-semibold text-[var(--foreground)]">{recommendation}</p>
             <p className="mt-2 max-w-4xl text-sm text-[var(--muted-foreground)]">{result.summary}</p>
+            <p className="mt-2 text-xs text-[var(--muted-foreground)]">{freshnessSummary.guidance}</p>
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {Object.values(result.freshness.dimensions).map((dimension) => (
+                <Badge key={dimension.key} variant={dimension.stale ? 'secondary' : 'outline'}>
+                  {dimension.label}: {dimension.status.replaceAll('_', ' ')}
+                </Badge>
+              ))}
+            </div>
           </div>
           {changeSummary ? (
             <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
               {changeSummary}
+            </div>
+          ) : null}
+          {refreshError ? (
+            <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">
+              {refreshError}
             </div>
           ) : null}
           {degraded ? (

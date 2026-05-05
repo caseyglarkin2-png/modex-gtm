@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
 import { BulkSendEmailSchema } from '@/lib/validations';
 import { sendBulk } from '@/lib/email/client';
 import { evaluateRecipientEligibility, getEmailDomain } from '@/lib/email/recipient-guard';
@@ -14,6 +15,8 @@ import {
   noSendableRecipientsSendBlocker,
   serializeSendBlocker,
 } from '@/lib/email/send-blockers';
+
+const recipientEmailSchema = z.string().trim().email();
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
@@ -35,7 +38,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(serializeSendBlocker(block), { status: block.status });
   }
 
-  const { recipients, subject, bodyHtml, accountName, generatedContentId } = parsed.data;
+  const { recipients, subject, bodyHtml, accountName, generatedContentId, workflowMetadata } = parsed.data;
 
   const isPlainText = !bodyHtml.trim().startsWith('<');
   const html = isPlainText ? wrapHtml(bodyHtml, accountName ?? 'the team') : bodyHtml;
@@ -94,22 +97,29 @@ export async function POST(req: NextRequest) {
 
   const eligibility = await Promise.all(
     resolvedRecipients.map(async (recipient) => {
+      const normalizedTo = recipient.to.trim().toLowerCase();
       if ('recipientError' in recipient && recipient.recipientError) {
         return {
-          recipient,
-          guard: { ok: false, reason: recipient.recipientError, domain: getEmailDomain(recipient.to) },
+          recipient: { ...recipient, to: normalizedTo },
+          guard: { ok: false, reason: recipient.recipientError, domain: getEmailDomain(normalizedTo) },
         };
       }
-      if (unsubscribedSet.has(recipient.to)) {
+      if (!recipientEmailSchema.safeParse(normalizedTo).success) {
         return {
-          recipient,
-          guard: { ok: false, reason: 'Recipient explicitly unsubscribed', domain: getEmailDomain(recipient.to) },
+          recipient: { ...recipient, to: normalizedTo },
+          guard: { ok: false, reason: 'Invalid recipient email address', domain: getEmailDomain(normalizedTo) },
+        };
+      }
+      if (unsubscribedSet.has(normalizedTo)) {
+        return {
+          recipient: { ...recipient, to: normalizedTo },
+          guard: { ok: false, reason: 'Recipient explicitly unsubscribed', domain: getEmailDomain(normalizedTo) },
         };
       }
 
       return {
-        recipient,
-        guard: await evaluateRecipientEligibility(prisma, recipient.to),
+        recipient: { ...recipient, to: normalizedTo },
+        guard: await evaluateRecipientEligibility(prisma, normalizedTo),
       };
     })
   );
@@ -157,6 +167,19 @@ export async function POST(req: NextRequest) {
               select: { name: true, pipeline_stage: true, outreach_status: true, meeting_status: true },
             }).catch(() => null);
 
+      const logMetadata = workflowMetadata
+        ? JSON.parse(JSON.stringify({
+            workflow: workflowMetadata,
+            recipient: {
+              personaId: recipient.personaId ?? null,
+              personaName: recipient.personaName ?? null,
+              readinessScore: recipient.readinessScore ?? null,
+              readinessTier: recipient.readinessTier ?? null,
+              stale: recipient.stale ?? null,
+            },
+          }))
+        : undefined;
+
       await prisma.emailLog.create({
         data: {
           account_name: resolvedAccountName,
@@ -167,6 +190,7 @@ export async function POST(req: NextRequest) {
           status: r.status === 'fulfilled' ? 'sent' : 'failed',
           provider_message_id: providerMessageId,
           hubspot_engagement_id: hubspotResult?.hubspotEngagementId ?? null,
+          metadata: logMetadata,
           ...(generatedContentId ? { generated_content_id: generatedContentId } : {}),
         },
       }).catch(() => { /* individual log failure is non-blocking */ });

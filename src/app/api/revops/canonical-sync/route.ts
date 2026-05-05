@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { syncCanonicalRecords } from '@/lib/revops/canonical-sync';
+import { runCanonicalBackfill } from '@/lib/revops/account-identity-backfill';
 
 export const dynamic = 'force-dynamic';
 
@@ -31,6 +31,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
   }
 
-  const result = await syncCanonicalRecords(parsed.data);
+  const result = await runCanonicalBackfill(parsed.data);
   return NextResponse.json({ success: true, ...result });
 }

@@ -21,6 +21,13 @@ function buildResult(overrides?: Partial<AgentActionResult>): AgentActionResult 
       fetchedAt: new Date().toISOString(),
       stale: false,
       source: 'live',
+      status: 'fresh',
+      dimensions: {
+        summary: { key: 'summary', label: 'Research summary', status: 'fresh', stale: false, source: 'live', fetchedAt: '2026-05-05T00:00:00.000Z', updatedAt: '2026-05-05T00:00:00.000Z', ageHours: 0, note: '' },
+        signals: { key: 'signals', label: 'Signals', status: 'fresh', stale: false, source: 'local', fetchedAt: '2026-05-05T00:00:00.000Z', updatedAt: '2026-05-05T00:00:00.000Z', ageHours: 0, note: '' },
+        contacts: { key: 'contacts', label: 'Contacts', status: 'aging', stale: false, source: 'local', fetchedAt: '2026-05-05T00:00:00.000Z', updatedAt: '2026-05-04T00:00:00.000Z', ageHours: 24, note: '' },
+        generated_content: { key: 'generated_content', label: 'Generated content', status: 'fresh', stale: false, source: 'local', fetchedAt: '2026-05-05T00:00:00.000Z', updatedAt: '2026-05-05T00:00:00.000Z', ageHours: 0, note: '' },
+      },
     },
     nextActions: ['Generate the first one-pager.'],
     ...overrides,

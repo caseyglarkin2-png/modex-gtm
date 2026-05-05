@@ -60,6 +60,14 @@ describe('operator outcomes route', () => {
     expect(res.status).toBe(200);
     expect(payload.success).toBe(true);
     expect(payload.deduped).toBe(false);
+    expect(payload.nextAction).toMatchObject({
+      label: 'Convert the warm response into a meeting',
+      route: '#meetings',
+    });
+    expect(payload.nextAsset).toMatchObject({
+      route: '#assets',
+    });
+    expect(payload.queuedGenerationJobId).toBe(55);
     expect(mockedPrisma.operatorOutcome.create).toHaveBeenCalledWith({
       data: {
         account_name: 'General Mills',
@@ -97,6 +105,7 @@ describe('operator outcomes route', () => {
     const payload = await res.json();
     expect(res.status).toBe(200);
     expect(payload.deduped).toBe(true);
+    expect(payload.nextAction).toBeTruthy();
     expect(mockedPrisma.operatorOutcome.create).not.toHaveBeenCalled();
   });
 });
