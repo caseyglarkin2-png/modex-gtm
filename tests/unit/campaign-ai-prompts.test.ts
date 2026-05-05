@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildEmailPrompt, buildOutreachSequencePrompt } from '@/lib/ai/prompts';
+import { buildCallScriptPrompt, buildEmailPrompt, buildMeetingPrepPrompt, buildOutreachSequencePrompt } from '@/lib/ai/prompts';
 
 describe('campaign-aware prompt guidance', () => {
   it('injects the campaign angle and suppresses MODEX for cold outbound prompts', () => {
@@ -43,5 +43,36 @@ describe('campaign-aware prompt guidance', () => {
 
     expect(prompt).toContain('Facility footprint: 100 (U.S. facilities footprint)');
     expect(prompt).toContain('Research tags: Vertical: Food & Beverage • Signal: Past attendee list');
+  });
+
+  it('keeps cold sequence and call-script prompts away from meeting asks', () => {
+    const sequencePrompt = buildOutreachSequencePrompt({
+      accountName: 'Americold',
+      personaName: 'Kaushik Sarda',
+      tone: 'casual',
+      length: 'medium',
+    }, 'initial_email');
+    const callScriptPrompt = buildCallScriptPrompt({
+      accountName: 'Americold',
+      personaName: 'Kaushik Sarda',
+      tone: 'casual',
+      length: 'medium',
+    });
+
+    expect(sequencePrompt).toContain('No calendar or time ask');
+    expect(callScriptPrompt).toContain('Do not ask for a meeting or calendar time on a cold call script');
+    expect(callScriptPrompt).not.toContain('30 minutes at MODEX');
+  });
+
+  it('preserves meeting asks only for explicit meeting-prep assets', () => {
+    const prompt = buildMeetingPrepPrompt({
+      accountName: 'Americold',
+      personaName: 'Kaushik Sarda',
+      tone: 'casual',
+      length: 'medium',
+    });
+
+    expect(prompt).toContain('Meeting:');
+    expect(prompt).toContain('Ideal next step');
   });
 });

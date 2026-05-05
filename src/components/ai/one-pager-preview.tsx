@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
@@ -10,6 +9,9 @@ import {
 import { FileImage, RefreshCw, Copy, Download, Library } from 'lucide-react';
 import { sanitizeOnePagerData } from '@/lib/one-pager/content-safety';
 import type { AgentActionResult } from '@/lib/agent-actions/types';
+import { AssetSendDialog, type AssetSendRecipient } from '@/components/email/asset-send-dialog';
+import { COLD_OUTBOUND_PROMPT_POLICY_VERSION, DEFAULT_CTA_MODE, getOnePagerSuggestedNextStep } from '@/lib/revops/cold-outbound-policy';
+import { recordWorkflowMetric } from '@/lib/agent-actions/telemetry';
 
 export interface OnePagerData {
   headline: string;
@@ -21,6 +23,7 @@ export interface OnePagerData {
   customerQuote: string;
   bestFit: string;
   publicContext: string;
+  suggestedNextStep?: string;
 }
 
 function escapeHtml(value: string): string {
@@ -38,6 +41,8 @@ interface OnePagerPreviewProps {
   variant?: 'dialog' | 'inline';
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  recipients?: AssetSendRecipient[];
+  initialSelectedRecipientIds?: number[];
 }
 
 export function OnePagerPreview({ data, accountName }: { data: OnePagerData; accountName: string }) {
@@ -177,7 +182,7 @@ export function OnePagerPreview({ data, accountName }: { data: OnePagerData; acc
       <div className="mx-4 mb-5 rounded-lg border border-cyan-500/40 bg-cyan-950/20 p-3">
         <p className="text-[10px] uppercase tracking-[0.2em] text-cyan-300">Suggested Next Step</p>
         <p className="mt-1 text-xs text-slate-100">
-          Run a 20-minute YardFlow Throughput Benchmark for {accountName} to map current dwell loss and quantify fast-win value.
+          {sanitized.suggestedNextStep || getOnePagerSuggestedNextStep(accountName)}
         </p>
       </div>
     </div>
@@ -192,6 +197,7 @@ export function onePagerToHtml(data: OnePagerData, accountName: string): string 
   const safeQuote = escapeHtml(sanitized.customerQuote);
   const safeBestFit = escapeHtml(sanitized.bestFit);
   const safePublicContext = escapeHtml(sanitized.publicContext);
+  const safeSuggestedNextStep = escapeHtml(sanitized.suggestedNextStep || getOnePagerSuggestedNextStep(accountName));
 
   const painHtml = sanitized.painPoints.map((p) => `<div style="display:flex;gap:8px;font-size:12px;color:#cbd5e1;margin-bottom:8px;line-height:1.5;"><span style="color:#f87171;flex-shrink:0;">⚠</span><span>${escapeHtml(p)}</span></div>`).join('');
   const stepsHtml = sanitized.solutionSteps.map((s, i) => `<div style="position:relative;padding-left:32px;margin-bottom:${i < sanitized.solutionSteps.length - 1 ? '12' : '0'}px;">
@@ -262,7 +268,7 @@ export function onePagerToHtml(data: OnePagerData, accountName: string): string 
   </div>
   <div style="margin:0 16px 16px;background:rgba(8,145,178,0.15);border:1px solid rgba(34,211,238,0.35);border-radius:8px;padding:12px;">
     <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#67e8f9;font-weight:700;">Suggested Next Step</div>
-    <p style="font-size:11px;color:#e2e8f0;margin:6px 0 0;line-height:1.5;">Run a 20-minute YardFlow Throughput Benchmark for ${safeAccountName} to map current dwell loss and quantify fast-win value.</p>
+    <p style="font-size:11px;color:#e2e8f0;margin:6px 0 0;line-height:1.5;">${safeSuggestedNextStep}</p>
   </div>
 </div>
 </body></html>`;
@@ -274,6 +280,8 @@ export function OnePagerDialog({
   variant = 'dialog',
   open: controlledOpen,
   onOpenChange: controlledOnOpenChange,
+  recipients = [],
+  initialSelectedRecipientIds,
 }: OnePagerPreviewProps) {
   const [internalOpen, setInternalOpen] = useState(false);
   const open = variant === 'dialog' ? (controlledOpen ?? internalOpen) : true;
@@ -285,6 +293,7 @@ export function OnePagerDialog({
   const [agentContext, setAgentContext] = useState<Pick<AgentActionResult, 'provider' | 'summary' | 'nextActions' | 'freshness'> | null>(null);
 
   async function generate() {
+    const regeneration = Boolean(data);
     setLoading(true);
     setData(null);
     try {
@@ -298,6 +307,14 @@ export function OnePagerDialog({
       if (!json.content) throw new Error('Could not parse structured one-pager content');
       setData(json.content);
       setAgentContext(json.agentContext ?? null);
+      if (regeneration) {
+        void recordWorkflowMetric('regen_after_preview_rate', {
+          accountName,
+          action: 'one_pager',
+          status: 'success',
+          value: 1,
+        });
+      }
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'One-pager generation failed');
     } finally {
@@ -397,6 +414,26 @@ export function OnePagerDialog({
         </Button>
         {data && (
           <div className="flex gap-2">
+            {recipients.length > 0 ? (
+              <AssetSendDialog
+                accountName={accountName}
+                generatedContent={{
+                  account_name: accountName,
+                  content: onePagerToHtml(data, accountName),
+                  provider_used: agentContext?.provider,
+                  prompt_policy_version: COLD_OUTBOUND_PROMPT_POLICY_VERSION,
+                  cta_mode: DEFAULT_CTA_MODE,
+                  legacy_policy: false,
+                }}
+                recipients={recipients}
+                initialSelectedRecipientIds={initialSelectedRecipientIds}
+                trigger={
+                  <Button size="sm" className="gap-1.5">
+                    Send
+                  </Button>
+                }
+              />
+            ) : null}
             <Button variant="outline" size="sm" onClick={copyHtml} className="gap-1.5">
               <Copy className="h-3.5 w-3.5" /> Copy HTML
             </Button>
@@ -405,11 +442,6 @@ export function OnePagerDialog({
             </Button>
             <Button variant="outline" size="sm" onClick={saveAsPlaybookBlock} className="gap-1.5" disabled={savingPlaybook}>
               <Library className="h-3.5 w-3.5" /> {savingPlaybook ? 'Saving...' : 'Save as Playbook Block'}
-            </Button>
-            <Button size="sm" className="gap-1.5" asChild>
-              <Link href={`/generated-content?account=${encodeURIComponent(accountName)}`}>
-                Open Workspace
-              </Link>
             </Button>
           </div>
         )}
@@ -435,15 +467,17 @@ export function OnePagerDialog({
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="max-w-3xl max-h-[90vh] flex flex-col gap-0 p-0">
-        <DialogHeader className="px-6 pt-6 pb-4 border-b shrink-0">
-          <DialogTitle className="flex items-center gap-2">
-            <FileImage className="h-5 w-5 text-blue-500" />
-            YardFlow One-Pager — {accountName}
-          </DialogTitle>
-        </DialogHeader>
+      <DialogContent className="max-h-[90vh] max-w-3xl overflow-hidden p-0">
+        <div className="flex h-full max-h-[90vh] flex-col">
+          <DialogHeader className="shrink-0 border-b px-6 py-4">
+            <DialogTitle className="flex items-center gap-2">
+              <FileImage className="h-5 w-5 text-blue-500" />
+              YardFlow One-Pager — {accountName}
+            </DialogTitle>
+          </DialogHeader>
 
-        {content}
+          {content}
+        </div>
       </DialogContent>
     </Dialog>
   );

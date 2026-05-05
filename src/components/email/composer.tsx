@@ -48,7 +48,7 @@ function buildEmailPreviewHtml(bodyText: string): string {
                 <span style="color:#d1d5db;margin:0 4px;">|</span>
                 <span style="color:#0e7490;font-weight:500;">Run ROI</span>
                 <span style="color:#d1d5db;margin:0 4px;">|</span>
-                <span style="color:#0e7490;font-weight:500;">Book a Network Audit</span>
+                <span style="color:#0e7490;font-weight:500;">Short Overview</span>
               </p>
             </td>
           </tr>
@@ -266,6 +266,11 @@ export function EmailComposer({
               />
               <OnePagerDialog
                 accountName={accountName}
+                recipients={personaEmail ? [{
+                  id: 0,
+                  name: personaName ?? personaEmail,
+                  email: personaEmail,
+                }] : []}
                 trigger={<Button type="button" variant="outline" size="sm">Generate One-Pager</Button>}
               />
             </div>

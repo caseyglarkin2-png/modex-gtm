@@ -7,10 +7,12 @@ import { Button } from '@/components/ui/button';
 import { AgentActionDialog } from '@/components/agent-actions/agent-action-dialog';
 import type { AgentActionCard, AgentActionResult } from '@/lib/agent-actions/types';
 import { readApiResponse } from '@/lib/api-response';
+import type { AssetSendRecipient } from '@/components/email/asset-send-dialog';
 
 type AgentIntelStripProps = {
   accountName: string;
   initialResult: AgentActionResult | null;
+  recipients?: AssetSendRecipient[];
 };
 
 function safeString(value: unknown) {
@@ -40,13 +42,44 @@ function getConfidence(result: AgentActionResult | null) {
   return 'low';
 }
 
-function summarizeChange(previous: AgentActionResult | null, next: AgentActionResult) {
+function extractChangeSignals(previous: AgentActionResult | null, next: AgentActionResult) {
+  if (!previous) return [] as string[];
+
+  const changes: string[] = [];
+
+  if (previous.summary !== next.summary) {
+    changes.push('research summary updated');
+  }
+
+  const cardTitles = ['Contact Coverage', 'Committee Coverage', 'Buyer Map', 'Proof / Signals'];
+  for (const title of cardTitles) {
+    const previousBody = safeString(getCard(previous, title)?.body);
+    const nextBody = safeString(getCard(next, title)?.body);
+    if (previousBody && nextBody && previousBody !== nextBody) {
+      changes.push(`${title.toLowerCase()} changed`);
+    }
+  }
+
+  const previousContacts = Array.isArray(previous.data.salesContacts) ? previous.data.salesContacts.length : 0;
+  const nextContacts = Array.isArray(next.data.salesContacts) ? next.data.salesContacts.length : 0;
+  if (previousContacts !== nextContacts) {
+    changes.push(`contact coverage ${nextContacts > previousContacts ? 'expanded' : 'shifted'}`);
+  }
+
+  const previousNextAction = previous.nextActions[0] ?? '';
+  const nextNextAction = next.nextActions[0] ?? '';
+  if (previousNextAction && nextNextAction && previousNextAction !== nextNextAction) {
+    changes.push('recommended next move changed');
+  }
+
+  return Array.from(new Set(changes)).slice(0, 3);
+}
+
+export function summarizeIntelChange(previous: AgentActionResult | null, next: AgentActionResult) {
   if (!previous) return '';
-  if (previous.summary !== next.summary) return 'Live intel changed since the last refresh.';
-  const previousContacts = safeString(getCard(previous, 'Contact Coverage')?.body);
-  const nextContacts = safeString(getCard(next, 'Contact Coverage')?.body);
-  if (previousContacts !== nextContacts) return 'Contact coverage changed since the last refresh.';
-  return '';
+  const changes = extractChangeSignals(previous, next);
+  if (changes.length === 0) return '';
+  return `Changed since last refresh: ${changes.join(' · ')}.`;
 }
 
 function IntelCard({
@@ -72,7 +105,7 @@ function IntelCard({
   );
 }
 
-export function AgentIntelStrip({ accountName, initialResult }: AgentIntelStripProps) {
+export function AgentIntelStrip({ accountName, initialResult, recipients = [] }: AgentIntelStripProps) {
   const [result, setResult] = useState<AgentActionResult | null>(initialResult);
   const [previousResult, setPreviousResult] = useState<AgentActionResult | null>(null);
   const [refreshing, setRefreshing] = useState(false);
@@ -106,7 +139,7 @@ export function AgentIntelStrip({ accountName, initialResult }: AgentIntelStripP
   }, [initialResult?.freshness.stale, refresh]);
 
   const recommendation = useMemo(() => result?.nextActions[0] ?? 'Refresh intel to get the next best move.', [result]);
-  const changeSummary = useMemo(() => (result ? summarizeChange(previousResult, result) : ''), [previousResult, result]);
+  const changeSummary = useMemo(() => (result ? summarizeIntelChange(previousResult, result) : ''), [previousResult, result]);
   const confidence = useMemo(() => getConfidence(result), [result]);
   const sourceCount = useMemo(() => getSourceCount(result), [result]);
   const researchCard = getCard(result, 'Research Summary');
@@ -172,6 +205,7 @@ export function AgentIntelStrip({ accountName, initialResult }: AgentIntelStripP
           <AgentActionDialog
             request={{ action: 'account_research', target: { accountName, company: accountName } }}
             title={`Research ${accountName}`}
+            recipients={recipients}
             trigger={
               <Button size="sm" variant="outline" className="gap-1.5">
                 <BriefcaseBusiness className="h-3.5 w-3.5" />

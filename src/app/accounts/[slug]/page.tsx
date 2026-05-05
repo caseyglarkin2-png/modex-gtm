@@ -53,9 +53,25 @@ import { AccountGeneratedAssetActions } from '@/components/accounts/account-gene
 import { AgentActionDialog } from '@/components/agent-actions/agent-action-dialog';
 import { AgentIntelStrip } from '@/components/agent-actions/agent-intel-strip';
 import { getAgentContentContext } from '@/lib/agent-actions/content-context';
+import {
+  buildCommitteeCoverageBrief,
+  buildCoverageGaps,
+  buildRecommendedAngle,
+  buildSuggestedRecipients,
+  buildSuggestedRecipientSets,
+  buildTopSignals,
+} from '@/lib/agent-actions/account-command-center';
+import { isLegacyColdAsset } from '@/lib/revops/cold-outbound-policy';
 
-export default async function AccountDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function AccountDetailPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ recipientSet?: string }>;
+}) {
   const { slug } = await params;
+  const resolvedSearchParams = await searchParams;
   const accounts = await dbGetAccounts();
   const matchedAccount = accounts.find((candidate) => slugify(candidate.name) === slug);
   const account = matchedAccount ? await dbGetAccountByName(matchedAccount.name) : null;
@@ -170,7 +186,25 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
         canonicalBlockedReason: canonical?.sendBlockReason,
       };
     });
-  const latestSendableAsset = generatedAssets.find((asset) => isSendableAccountAsset(asset.content_type)) ?? null;
+  const suggestedRecipients = buildSuggestedRecipients(accountRecipients, agentContentContext);
+  const suggestedRecipientSets = buildSuggestedRecipientSets(suggestedRecipients);
+  const selectedRecipientSetKey = resolvedSearchParams.recipientSet;
+  const activeRecipientSet = selectedRecipientSetKey === 'manual'
+    ? null
+    : suggestedRecipientSets.find((set) => set.key === selectedRecipientSetKey)
+      ?? suggestedRecipientSets.find((set) => set.recommended)
+      ?? null;
+  const suggestedRecipientIds = activeRecipientSet?.recipientIds.length
+    ? activeRecipientSet.recipientIds
+    : suggestedRecipients.slice(0, 3).map((recipient) => recipient.id);
+  const topSignals = buildTopSignals(agentContentContext);
+  const coverageGaps = buildCoverageGaps(agentContentContext);
+  const recommendedAngle = buildRecommendedAngle(agentContentContext, account.primo_angle ?? account.why_now ?? '');
+  const committeeCoverageBrief = buildCommitteeCoverageBrief(agentContentContext, suggestedRecipients);
+  const recommendedAsset = generatedAssets.find((asset) => (
+    isSendableAccountAsset(asset.content_type) && !isLegacyColdAsset(asset.version_metadata, asset.content_type)
+  )) ?? null;
+  const latestSendableAsset = recommendedAsset ?? generatedAssets.find((asset) => isSendableAccountAsset(asset.content_type)) ?? null;
   const openTaskCount = Number(Boolean(account.next_action)) + activities.filter((activity) => Boolean(activity.next_step)).length + captures.filter((capture) => Boolean(capture.next_step)).length;
   const assetCount = Number(Boolean(brief)) + Number(Boolean(auditRoute)) + Number(Boolean(qrAsset)) + generatedAssets.length + 1;
   const nextBestAction = buildAccountNextBestAction(account, {
@@ -220,90 +254,102 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
               </p>
               <p className="mt-2 text-sm font-medium text-[var(--foreground)]">Account Command Center</p>
             </div>
-            <div className="flex flex-wrap items-center gap-2">
-              <Badge variant="outline" className="font-mono">{account.tier}</Badge>
-              <Badge variant="outline" className="font-mono">Score: {account.priority_score}</Badge>
-              <Badge variant="secondary">{account.owner}</Badge>
+            <div className="flex flex-col items-start gap-3 sm:items-end">
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge variant="outline" className="font-mono">{account.tier}</Badge>
+                <Badge variant="outline" className="font-mono">Score: {account.priority_score}</Badge>
+                <Badge variant="secondary">{account.owner}</Badge>
+              </div>
+              <div className="flex flex-wrap items-center gap-2 sm:justify-end">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--muted-foreground)]">Primary Path</span>
+                {latestSendableAsset ? (
+                  <AccountGeneratedAssetActions
+                    accountName={account.name}
+                    asset={latestSendableAsset}
+                    recipients={accountRecipients}
+                    initialSelectedRecipientIds={suggestedRecipientIds}
+                    previewLabel={recommendedAsset?.id === latestSendableAsset.id ? 'Use Recommended Asset' : 'Preview'}
+                    showPreview={false}
+                    sendLabel={recommendedAsset?.id === latestSendableAsset.id ? 'Use Recommended Asset' : 'Send Latest Asset'}
+                  />
+                ) : null}
               <OnePagerDialog
                 accountName={account.name}
+                recipients={accountRecipients}
+                initialSelectedRecipientIds={suggestedRecipientIds}
                 trigger={
                   <Button size="sm" className="gap-1.5 bg-blue-600 text-white hover:bg-blue-700">
                     <FileText className="h-3.5 w-3.5" />
-                    Generate With Intel
-                  </Button>
-                }
-              />
-              <AgentActionDialog
-                request={{ action: 'company_contacts', target: { accountName: account.name, company: account.name } }}
-                title={`Find More Contacts for ${account.name}`}
-                trigger={
-                  <Button size="sm" variant="outline" className="gap-1.5">
-                    <Inbox className="h-3.5 w-3.5" />
-                    Find More Contacts
-                  </Button>
-                }
-              />
-              <AgentActionDialog
-                request={{ action: 'draft_outreach', target: { accountName: account.name, company: account.name } }}
-                title={`Draft Outreach for ${account.name}`}
-                trigger={
-                  <Button size="sm" variant="outline" className="gap-1.5">
-                    <ExternalLink className="h-3.5 w-3.5" />
-                    Draft Outreach
-                  </Button>
-                }
-              />
-              {latestSendableAsset ? (
-                <AccountGeneratedAssetActions
-                  accountName={account.name}
-                  asset={latestSendableAsset}
-                  recipients={accountRecipients}
-                  showPreview={false}
-                  sendLabel="Send Latest Asset"
+                      Generate With Intel
+                    </Button>
+                  }
                 />
-              ) : null}
-              <OutreachWizard
-                accountName={account.name}
-                micrositeUrl={micrositeInfo.url}
-                personas={personas.map((p) => ({
-                  name: p.name,
-                  title: p.title ?? undefined,
-                  priority: p.priority,
-                  email: p.email ?? undefined,
-                }))}
-                campaigns={activeCampaigns.map((campaign) => ({
-                  slug: campaign.slug,
-                  name: campaign.name,
-                  messagingAngle: campaign.messaging_angle,
-                  campaignType: campaign.campaign_type,
-                }))}
-                trigger={
-                  <Button size="sm" className="gap-1.5 bg-cyan-600 text-white hover:bg-cyan-700">
-                    <Activity className="h-3.5 w-3.5" />
-                    Launch Outreach
-                  </Button>
-                }
-              />
-              <OutreachSequenceDialog
-                accountName={account.name}
-                personas={personas.map((p) => ({ name: p.name, title: p.title ?? undefined, priority: p.priority }))}
-                campaignSlug={activeCampaigns[0]?.slug}
-                trigger={
-                  <Button size="sm" className="gap-1.5 bg-amber-600 text-white hover:bg-amber-700">
-                    <Activity className="h-3.5 w-3.5" />
-                    Generate Outreach
-                  </Button>
-                }
-              />
-              <BookMeetingDialog
-                accountName={account.name}
-                personas={personas.map((p) => ({ name: p.name, priority: p.priority }))}
-                calendlyLink={process.env.NEXT_PUBLIC_CALENDLY_LINK}
-              />
-              <LogActivityDialog
-                accountName={account.name}
-                personas={personas.map((p) => ({ name: p.name }))}
-              />
+              </div>
+              <div className="flex flex-wrap items-center gap-2 sm:justify-end">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--muted-foreground)]">Secondary Actions</span>
+                <AgentActionDialog
+                  request={{ action: 'company_contacts', target: { accountName: account.name, company: account.name } }}
+                  title={`Find More Contacts for ${account.name}`}
+                  trigger={
+                    <Button size="sm" variant="outline" className="gap-1.5">
+                      <Inbox className="h-3.5 w-3.5" />
+                      Find More Contacts
+                    </Button>
+                  }
+                />
+                <AgentActionDialog
+                  request={{ action: 'draft_outreach', target: { accountName: account.name, company: account.name } }}
+                  title={`Draft Outreach for ${account.name}`}
+                  trigger={
+                    <Button size="sm" variant="outline" className="gap-1.5">
+                      <ExternalLink className="h-3.5 w-3.5" />
+                      Draft Outreach
+                    </Button>
+                  }
+                />
+                <OutreachWizard
+                  accountName={account.name}
+                  micrositeUrl={micrositeInfo.url}
+                  personas={personas.map((p) => ({
+                    name: p.name,
+                    title: p.title ?? undefined,
+                    priority: p.priority,
+                    email: p.email ?? undefined,
+                  }))}
+                  campaigns={activeCampaigns.map((campaign) => ({
+                    slug: campaign.slug,
+                    name: campaign.name,
+                    messagingAngle: campaign.messaging_angle,
+                    campaignType: campaign.campaign_type,
+                  }))}
+                  trigger={
+                    <Button size="sm" className="gap-1.5 bg-cyan-600 text-white hover:bg-cyan-700">
+                      <Activity className="h-3.5 w-3.5" />
+                      Launch Outreach
+                    </Button>
+                  }
+                />
+                <OutreachSequenceDialog
+                  accountName={account.name}
+                  personas={personas.map((p) => ({ name: p.name, title: p.title ?? undefined, priority: p.priority }))}
+                  campaignSlug={activeCampaigns[0]?.slug}
+                  trigger={
+                    <Button size="sm" className="gap-1.5 bg-amber-600 text-white hover:bg-amber-700">
+                      <Activity className="h-3.5 w-3.5" />
+                      Generate Outreach
+                    </Button>
+                  }
+                />
+                <BookMeetingDialog
+                  accountName={account.name}
+                  personas={personas.map((p) => ({ name: p.name, priority: p.priority }))}
+                  calendlyLink={process.env.NEXT_PUBLIC_CALENDLY_LINK}
+                />
+                <LogActivityDialog
+                  accountName={account.name}
+                  personas={personas.map((p) => ({ name: p.name }))}
+                />
+              </div>
             </div>
           </div>
 
@@ -357,7 +403,186 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
             ))}
           </div>
           <div className="mt-4">
-            <AgentIntelStrip accountName={account.name} initialResult={agentContentContext} />
+            <AgentIntelStrip accountName={account.name} initialResult={agentContentContext} recipients={accountRecipients} />
+          </div>
+          <div className="mt-4 grid gap-4 xl:grid-cols-[1.3fr_1fr]">
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm">Outbound Command Center</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid gap-3 md:grid-cols-3">
+                  <div className="rounded-lg border border-[var(--border)] p-3">
+                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Recommendation</p>
+                    <p className="mt-1 font-medium">{agentContentContext?.nextActions[0] ?? 'Refresh intel and pick the strongest first touch.'}</p>
+                  </div>
+                  <div className="rounded-lg border border-[var(--border)] p-3">
+                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Why now</p>
+                    <p className="mt-1 text-sm">{account.why_now || 'Use current live intel to sharpen the hypothesis.'}</p>
+                  </div>
+                  <div className="rounded-lg border border-[var(--border)] p-3">
+                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Best angle</p>
+                    <p className="mt-1 text-sm">{recommendedAngle || 'Lead with gate-to-dock variance and throughput pressure.'}</p>
+                  </div>
+                </div>
+                <div className="grid gap-3 md:grid-cols-3">
+                  <div className="rounded-lg border border-[var(--border)] p-3">
+                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Recommended Asset</p>
+                    <p className="mt-1 text-sm font-medium">
+                      {recommendedAsset
+                        ? `${recommendedAsset.content_type.replaceAll('_', ' ')} · v${recommendedAsset.version}`
+                        : 'Generate with live intel to create the first asset.'}
+                    </p>
+                    <p className="mt-1 text-xs text-[var(--muted-foreground)]">
+                      {recommendedAsset
+                        ? 'This is the default asset for the primary path on this account.'
+                        : 'No recommended asset yet.'}
+                    </p>
+                  </div>
+                  <div className="rounded-lg border border-[var(--border)] p-3">
+                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Intel Freshness</p>
+                    <p className="mt-1 text-sm font-medium">
+                      {agentContentContext
+                        ? `${agentContentContext.freshness.source} · ${agentContentContext.freshness.stale ? 'stale' : 'fresh'}`
+                        : 'No live intel cached yet'}
+                    </p>
+                    <p className="mt-1 text-xs text-[var(--muted-foreground)]">
+                      {agentContentContext?.freshness.stale
+                        ? 'Agent Intel refreshes in the background when stale.'
+                        : 'Latest delta appears in the Agent Intel rail after refresh.'}
+                    </p>
+                  </div>
+                  <div className="rounded-lg border border-[var(--border)] p-3">
+                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Active Recipient Set</p>
+                    <p className="mt-1 text-sm font-medium">
+                      {activeRecipientSet ? `${activeRecipientSet.label} · ${activeRecipientSet.count} contacts` : 'Manual selection'}
+                    </p>
+                    <p className="mt-1 text-xs text-[var(--muted-foreground)]">
+                      {activeRecipientSet
+                        ? 'This set pre-fills send flows. You can still edit recipients in the send dialog.'
+                        : 'Agent set ignored. The send dialog will fall back to its normal recommended recipients.'}
+                    </p>
+                  </div>
+                </div>
+                <div className="grid gap-3 md:grid-cols-2">
+                  <div className="rounded-lg border border-[var(--border)] p-3">
+                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Top signals</p>
+                    <ul className="mt-2 space-y-2 text-sm">
+                      {topSignals.length > 0 ? topSignals.map((signal) => (
+                        <li key={signal}>{signal}</li>
+                      )) : <li>No strong live signals yet. Refresh intel and keep discovering coverage.</li>}
+                    </ul>
+                  </div>
+                  <div className="rounded-lg border border-[var(--border)] p-3">
+                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Coverage gaps</p>
+                    <ul className="mt-2 space-y-2 text-sm">
+                      {coverageGaps.map((gap) => (
+                        <li key={gap}>{gap}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                <div className="rounded-lg border border-[var(--border)] p-3">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Committee Brief</p>
+                    <div className="flex flex-wrap gap-2">
+                      {committeeCoverageBrief.coveredLanes.map((lane) => (
+                        <Badge key={`covered-${lane}`} variant="outline">{lane}</Badge>
+                      ))}
+                    </div>
+                  </div>
+                  <p className="mt-2 text-sm">{committeeCoverageBrief.summary}</p>
+                  <div className="mt-3 grid gap-3 md:grid-cols-2">
+                    <div>
+                      <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Missing lanes</p>
+                      <ul className="mt-2 space-y-1 text-sm">
+                        {committeeCoverageBrief.missingLanes.length > 0 ? committeeCoverageBrief.missingLanes.map((lane) => (
+                          <li key={`missing-${lane}`}>{lane}</li>
+                        )) : <li>Committee coverage is usable across core lanes.</li>}
+                      </ul>
+                    </div>
+                    <div>
+                      <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Recommended next people</p>
+                      <ul className="mt-2 space-y-1 text-sm">
+                        {committeeCoverageBrief.recommendedNextPeople.length > 0 ? committeeCoverageBrief.recommendedNextPeople.map((person) => (
+                          <li key={person}>{person}</li>
+                        )) : <li>Build committee or find more contacts to expand the buyer map.</li>}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm">Suggested Recipients</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Suggested Recipient Sets</p>
+                  <div className="grid gap-2">
+                    {suggestedRecipientSets.map((set) => {
+                      const isActive = activeRecipientSet?.key === set.key;
+                      return (
+                        <Link
+                          key={set.key}
+                          href={`/accounts/${slug}?recipientSet=${set.key}`}
+                          className={`rounded-lg border p-3 transition-colors hover:border-[var(--primary)] ${
+                            isActive ? 'border-[var(--primary)] bg-[var(--accent)]/30' : 'border-[var(--border)]'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between gap-2">
+                            <div>
+                              <p className="font-medium">{set.label}</p>
+                              <p className="mt-1 text-xs text-[var(--muted-foreground)]">{set.description}</p>
+                            </div>
+                            <div className="flex flex-wrap gap-2">
+                              {set.recommended ? <Badge>Recommended</Badge> : null}
+                              {isActive ? <Badge variant="outline">Active</Badge> : null}
+                              <Badge variant="secondary">{set.count}</Badge>
+                            </div>
+                          </div>
+                          {set.topNames.length > 0 ? (
+                            <p className="mt-2 text-xs text-[var(--muted-foreground)]">{set.topNames.join(' • ')}</p>
+                          ) : (
+                            <p className="mt-2 text-xs text-[var(--muted-foreground)]">No strong contacts in this lane yet.</p>
+                          )}
+                        </Link>
+                      );
+                    })}
+                    <Link
+                      href={`/accounts/${slug}?recipientSet=manual`}
+                      className={`rounded-lg border p-3 transition-colors hover:border-[var(--primary)] ${
+                        !activeRecipientSet ? 'border-[var(--primary)] bg-[var(--accent)]/30' : 'border-[var(--border)]'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <div>
+                          <p className="font-medium">Manual Selection</p>
+                          <p className="mt-1 text-xs text-[var(--muted-foreground)]">Ignore the agent set and edit recipients yourself in the send dialog.</p>
+                        </div>
+                        {!activeRecipientSet ? <Badge variant="outline">Active</Badge> : null}
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+                {suggestedRecipients.slice(0, 4).map((recipient) => (
+                  <div key={recipient.id} className="rounded-lg border border-[var(--border)] p-3">
+                    <div className="flex items-center justify-between gap-2">
+                      <div>
+                        <p className="font-medium">{recipient.name}</p>
+                        <p className="text-xs text-[var(--muted-foreground)]">{recipient.title ?? recipient.email}</p>
+                      </div>
+                      <Badge variant="outline">{recipient.lane}</Badge>
+                    </div>
+                    <p className="mt-2 text-xs text-[var(--muted-foreground)]">{recipient.reason}</p>
+                  </div>
+                ))}
+                {suggestedRecipients.length === 0 ? (
+                  <p className="text-sm text-[var(--muted-foreground)]">No sendable recipients yet. Find more contacts or enrich the mapped personas.</p>
+                ) : null}
+              </CardContent>
+            </Card>
           </div>
         </CardContent>
       </Card>

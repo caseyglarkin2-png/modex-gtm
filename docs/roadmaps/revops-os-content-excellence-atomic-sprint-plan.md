@@ -65,6 +65,106 @@ This roadmap is now explicitly reoriented around reducing operator friction, not
    - Default path should minimize route changes, copy/paste steps, and modal nesting between account selection and outreach execution.
    - Any new workflow step must justify itself by automation, not by asking the operator to do more review labor.
 
+### Known Shared-Template Caveat (Added 2026-05-04)
+
+- The primary account-to-send workflow has been moved to advisory-only, cold-safe CTA handling, but shared public-share surfaces can still leak older meeting/calendar language if they are driven by legacy microsite or proposal CTA content.
+- Until the template migration is fully complete, public microsites, proposal pages, and studio starter prompts must normalize cold CTA behavior at render time to short-overview/reply language instead of booking/calendar asks.
+- Legacy content-library cleanup remains a follow-on sweep, but it must not be allowed to override the cold-first-touch operator path.
+
+## Agent-Native Account Command Center Execution Track (Added 2026-05-04)
+
+This workstream is not a parallel roadmap. It is the execution layer for the operator-feedback reset above, and it is tied directly into the existing sprint structure.
+
+### Governing Product Contract
+
+- `/accounts/[slug]` is the default outbound operating surface.
+- The primary operator path is:
+  - understand account
+  - pick recipient
+  - generate or use asset
+  - preview and send
+- Agents are decisive but not blocking:
+  - pre-build the account brief
+  - rank recipients and explain why
+  - surface committee gaps and alternates
+  - recommend the best next asset/angle
+  - prefill the send flow
+  - refresh in the background and show what changed
+- Any sendable asset preview must support direct send from that surface.
+- Advisory warnings never require acknowledgment.
+- Legacy cold assets with old CTA policy must never become the default recommended asset.
+
+### Roadmap Crosswalk
+
+The atomic A-series account-command-center work maps into the canonical roadmap like this:
+
+| Account command-center track | Canonical roadmap sprint(s) | What it means in this roadmap |
+| :--- | :--- | :--- |
+| A1: Primary account-page outbound flow | `S11.3B`, `S20`, `S24` | `/accounts/[slug]` becomes the default operator cockpit with latest assets, direct actions, and human-first briefing |
+| A2: Agent-decise account workflow | `S11.3B`, `S22`, `S23` | account brief, recipient ranking, committee gaps, and asset recommendation are driven by shared brokered intelligence |
+| A3: Canonical send-from-anywhere | `S11.3B`, `S15`, `S16` | one send shell, no workspace detour, and one shared send logging/telemetry path |
+| A4: Agent-informed cold-safe generation | `S16`, `S20`, `S22`, `S24` | prompt policy, CTA policy, context-used metadata, and format-specific generation rules |
+| A5: Remove gating friction + legacy handling | `S16`, `S21` | advisory-only QA/readiness on operator paths, centralized hard blockers, visible legacy-policy handling |
+| A6: Human-first polish + telemetry | `S11.5`, `S20`, `S23` | fewer-clicks instrumentation, preview/send UX consistency, and full command-center acceptance coverage |
+
+### Shared Contracts Required Across Those Sprints
+
+#### Operator Journey Contract
+
+1. Read the account brief and top signals.
+2. Accept or edit the agent-suggested recipient set.
+3. Use the recommended asset or generate with live intel.
+4. Preview and send inline.
+
+Anything outside that path is secondary.
+
+#### Shared Intelligence Contract
+
+All outbound-capable surfaces must consume the same brokered context:
+
+- `account_brief`
+- `fresh_signals`
+- `recommended_angle`
+- `recommended_recipients`
+- `committee_coverage`
+- `coverage_gaps`
+- `proof_context`
+- `cta_mode`
+- `provenance`
+- `freshness`
+- `changed_since_last_refresh`
+
+This context is the source of truth for account brief, recipient ranking, and generation inputs.
+
+#### Shared Send Contract
+
+All sendable asset previews must use one canonical flow:
+
+- one `AssetSendDialog`
+- one recipient model
+- one advisory-warning model
+- one post-send logging/telemetry path
+- one set of hard blockers:
+  - missing recipient
+  - missing/invalid email
+  - unsubscribed/suppressed
+  - provider/auth/runtime failure
+  - missing generated content
+  - legal/compliance hard stop if explicitly modeled
+
+### Implementation Status Snapshot
+
+Current implementation against this execution track now includes:
+
+- account-page command-center sections for recommendation, why now, best angle, signals, suggested recipients, and recommended assets
+- agent-ranked recipient suggestions and coverage-gap surfacing
+- canonical direct-send shell reuse across account and preview surfaces
+- cold-safe CTA policy and legacy-policy metadata
+- direct-send from one-pager/generated-content previews without required workspace detours
+- shared public-share CTA normalization for microsites/proposals/starter prompts so old booking language does not override cold-first-touch behavior
+
+Remaining work should continue against this crosswalk rather than creating a separate roadmap branch.
+
 ## TAM/ICP Coverage Objective (Added)
 
 Primary operating objective before advanced optimization:

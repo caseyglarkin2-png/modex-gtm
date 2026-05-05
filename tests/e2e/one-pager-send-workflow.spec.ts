@@ -9,12 +9,7 @@ test('one-pager workflow pages are reachable in order', async ({ page }) => {
   expect(queueRoutable).toBe(true);
   await expect(page.locator('body')).toContainText('Job List');
 
-  const workspaceLinks = page.getByRole('link', { name: /Generated Content Workspace|Open Workspace/i });
-  if ((await workspaceLinks.count()) > 0) {
-    await workspaceLinks.first().click();
-  } else {
-    await page.goto('/generated-content', { waitUntil: 'domcontentloaded' });
-  }
+  await page.goto('/generated-content', { waitUntil: 'domcontentloaded' });
 
   const generatedContentHeading = await page.locator('h1').innerText().catch(() => '');
   expect(generatedContentHeading).not.toBe('Page Not Found');

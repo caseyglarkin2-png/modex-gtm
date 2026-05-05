@@ -22,6 +22,12 @@ import {
   type JourneyStageIntent,
 } from '@/lib/revops/infographic-journey';
 import { getAgentContentContext, toAgentMetadata } from '@/lib/agent-actions/content-context';
+import {
+  COLD_OUTBOUND_PROMPT_POLICY_VERSION,
+  getCtaPolicy,
+  getOnePagerSuggestedNextStep,
+} from '@/lib/revops/cold-outbound-policy';
+import { buildGenerationInputContract } from '@/lib/agent-actions/generation-input';
 
 export const dynamic = 'force-dynamic';
 
@@ -90,8 +96,11 @@ export async function POST(req: NextRequest) {
   const agentContext = useLiveIntel
     ? await getAgentContentContext({ accountName, refresh: refreshContext })
     : null;
+  const ctaPolicy = getCtaPolicy('one_pager', 'one_pager');
+  const generationInput = buildGenerationInputContract(agentContext, ctaPolicy.ctaMode);
   ctx.agentContextSummary = agentContext?.summary;
   ctx.agentNextActions = agentContext?.nextActions;
+  ctx.generationInput = generationInput;
 
   const selectedStage = (stageIntent ?? 'cold') as JourneyStageIntent;
   const recommendation = recommendInfographicType({ stageIntent: selectedStage });
@@ -169,9 +178,16 @@ export async function POST(req: NextRequest) {
         raw,
         provider: result.provider,
         accountName,
-        agentContext: toAgentMetadata(agentContext),
+        agentContext: toAgentMetadata(agentContext, ctaPolicy.ctaMode),
+        generationInput,
         error: 'Failed to parse structured content — raw text returned',
       });
+    }
+    if (content && typeof content === 'object' && !Array.isArray(content)) {
+      const record = content as Record<string, unknown>;
+      if (!record.suggestedNextStep || typeof record.suggestedNextStep !== 'string') {
+        record.suggestedNextStep = getOnePagerSuggestedNextStep(accountName);
+      }
     }
 
     // Best-effort save to DB
@@ -195,8 +211,13 @@ export async function POST(req: NextRequest) {
           version: (latestVersion?.version ?? 0) + 1,
           version_metadata: {
             source: 'one_pager_generator',
+            prompt_policy_version: COLD_OUTBOUND_PROMPT_POLICY_VERSION,
+            cta_mode: ctaPolicy.ctaMode,
+            agent_context_summary: generationInput?.account_brief ?? agentContext?.summary ?? null,
+            agent_context_freshness: generationInput?.freshness ?? null,
+            generation_input_contract: generationInput,
             model_provider: result.provider,
-            agentContext: toAgentMetadata(agentContext),
+            agentContext: toAgentMetadata(agentContext, ctaPolicy.ctaMode),
             infographic: {
               infographic_type: infographicMetadata.infographicType,
               stage_intent: infographicMetadata.stageIntent,
@@ -309,7 +330,8 @@ export async function POST(req: NextRequest) {
       content,
       accountName,
       provider: result.provider,
-      agentContext: toAgentMetadata(agentContext),
+      agentContext: toAgentMetadata(agentContext, ctaPolicy.ctaMode),
+      generationInput,
       infographic: {
         type: infographicMetadata.infographicType,
         stage: infographicMetadata.stageIntent,
@@ -341,7 +363,12 @@ export async function POST(req: NextRequest) {
           version_metadata: {
             source: 'one_pager_generator',
             failed: true,
-            agentContext: toAgentMetadata(agentContext),
+            prompt_policy_version: COLD_OUTBOUND_PROMPT_POLICY_VERSION,
+            cta_mode: ctaPolicy.ctaMode,
+            agent_context_summary: generationInput?.account_brief ?? agentContext?.summary ?? null,
+            agent_context_freshness: generationInput?.freshness ?? null,
+            generation_input_contract: generationInput,
+            agentContext: toAgentMetadata(agentContext, ctaPolicy.ctaMode),
             infographic: {
               infographic_type: infographicMetadata.infographicType,
               stage_intent: infographicMetadata.stageIntent,
@@ -356,6 +383,6 @@ export async function POST(req: NextRequest) {
       // DB offline — skip
     }
 
-    return NextResponse.json({ error: message, agentContext: toAgentMetadata(agentContext) }, { status: 500 });
+    return NextResponse.json({ error: message, agentContext: toAgentMetadata(agentContext, ctaPolicy.ctaMode), generationInput }, { status: 500 });
   }
 }

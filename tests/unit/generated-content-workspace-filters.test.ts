@@ -85,7 +85,7 @@ describe('filterGeneratedContentCards', () => {
       stageIntent: 'all',
       status: 'all',
       sent: 'sent',
-      checklist: 'all',
+      advisory: 'all',
       query: '',
     });
 
@@ -102,7 +102,7 @@ describe('filterGeneratedContentCards', () => {
       stageIntent: 'all',
       status: 'draft',
       sent: 'all',
-      checklist: 'all',
+      advisory: 'all',
       query: 'revops',
     });
 
@@ -110,7 +110,7 @@ describe('filterGeneratedContentCards', () => {
     expect(result[0].account_name).toBe('Blue Rail');
   });
 
-  it('filters by checklist completeness', () => {
+  it('filters by advisory state', () => {
     const result = filterGeneratedContentCards(cards, {
       account: 'all',
       campaign: 'all',
@@ -119,7 +119,7 @@ describe('filterGeneratedContentCards', () => {
       stageIntent: 'all',
       status: 'all',
       sent: 'all',
-      checklist: 'complete',
+      advisory: 'clear',
       query: '',
     });
     expect(result).toHaveLength(1);
@@ -135,7 +135,7 @@ describe('filterGeneratedContentCards', () => {
       stageIntent: 'proposal',
       status: 'all',
       sent: 'all',
-      checklist: 'all',
+      advisory: 'all',
       query: '',
     });
 

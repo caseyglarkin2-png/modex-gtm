@@ -26,10 +26,8 @@ import type {
   PersonVariant,
   PersonProfile,
 } from './schema';
+import { buildShortOverviewCta } from './cta';
 import { materializeMicrositeSections } from './roi';
-
-const BOOKING_LINK =
-  'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
 // ── Default Section Ordering by Function ──────────────────────────────
 // Used ONLY when a PersonVariant doesn't specify its own order.
@@ -230,27 +228,17 @@ export function resolveMicrositeForLane(
 // ── Build Person-Specific CTA ─────────────────────────────────────────
 function buildPersonCTA(person: PersonProfile, accountName: string): CTABlock {
   const firstName = person.firstName || person.name.split(' ')[0];
-
-  // If they have a known mandate, reference it
-  if (person.currentMandate) {
-    return {
-      type: 'meeting',
-      headline: `${firstName}, let's walk your yard network`,
-      subtext: `30-minute conversation about ${person.currentMandate} and where YardFlow fits.`,
-      buttonLabel: 'Book a Network Audit',
-      calendarLink: BOOKING_LINK,
-      personName: firstName,
-      personContext: person.currentMandate,
-    };
-  }
-
+  const cta = buildShortOverviewCta(accountName);
   return {
-    type: 'meeting',
-    headline: `See what a standardized yard network means for ${accountName}`,
-    subtext: '30-minute walk-through of your facility network with board-ready ROI.',
-    buttonLabel: 'Book a Network Audit',
-    calendarLink: BOOKING_LINK,
+    ...cta,
+    headline: person.currentMandate
+      ? `${firstName}, want the short overview for ${accountName}?`
+      : cta.headline,
+    subtext: person.currentMandate
+      ? `We can send the one-page version focused on ${person.currentMandate} and where YardFlow fits.`
+      : cta.subtext,
     personName: firstName,
+    personContext: person.currentMandate,
   };
 }
 
@@ -320,11 +308,6 @@ const DEFAULT_KPI_LANGUAGE: Record<PersonaLane, string[]> = {
 };
 
 function getDefaultCTAForLane(lane: PersonaLane, accountName: string): CTABlock {
-  return {
-    type: 'meeting',
-    headline: `See what a standardized yard network looks like for ${accountName}`,
-    subtext: '30-minute walk-through of your facility network with board-ready ROI.',
-    buttonLabel: 'Book a Network Audit',
-    calendarLink: BOOKING_LINK,
-  };
+  void lane;
+  return buildShortOverviewCta(accountName);
 }

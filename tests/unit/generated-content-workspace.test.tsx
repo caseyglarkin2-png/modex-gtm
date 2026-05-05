@@ -110,4 +110,11 @@ describe('GeneratedContentWorkspace', () => {
     expect(mockedReplace).toHaveBeenCalledWith('/generated-content?q=acme');
     vi.useRealTimers();
   });
+
+  it('renders advisory-state filter copy instead of checklist-first language', () => {
+    render(<GeneratedContentWorkspace cards={cards} recipientsByAccount={{}} />);
+
+    expect(screen.getByText('Any Advisory State')).toBeInTheDocument();
+    expect(screen.queryByText('Checklist Complete')).not.toBeInTheDocument();
+  });
 });

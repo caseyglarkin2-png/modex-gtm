@@ -6,6 +6,8 @@ import type { PromptContext } from '@/lib/ai/prompts';
 import { getAccountContext } from '@/lib/db';
 import { isWarmIntroOnlyAccount } from '@/lib/studio/guardrails';
 import { getAgentContentContext, toAgentMetadata } from '@/lib/agent-actions/content-context';
+import { COLD_OUTBOUND_PROMPT_POLICY_VERSION, getCtaPolicy } from '@/lib/revops/cold-outbound-policy';
+import { buildGenerationInputContract } from '@/lib/agent-actions/generation-input';
 
 export const dynamic = 'force-dynamic';
 
@@ -129,6 +131,8 @@ export async function POST(req: NextRequest) {
   const agentContext = useLiveIntel
     ? await getAgentContentContext({ accountName, personaName, refresh: refreshContext })
     : null;
+  const initialStepPolicy = getCtaPolicy('outreach_sequence', 'sequence_step_1');
+  const generationInput = buildGenerationInputContract(agentContext, initialStepPolicy.ctaMode);
 
   const ctx: PromptContext = {
     accountName,
@@ -146,6 +150,7 @@ export async function POST(req: NextRequest) {
     campaignKeyDates: campaign?.key_dates ? JSON.stringify(campaign.key_dates) : undefined,
     agentContextSummary: agentContext?.summary,
     agentNextActions: agentContext?.nextActions,
+    generationInput,
     tone: TONE_MAP[tone] ?? 'casual',
     length: 'medium',
   };
@@ -195,7 +200,12 @@ export async function POST(req: NextRequest) {
         content_type: 'outreach_sequence',
         tone,
         version_metadata: {
-          agentContext: toAgentMetadata(agentContext),
+          prompt_policy_version: COLD_OUTBOUND_PROMPT_POLICY_VERSION,
+          cta_mode: initialStepPolicy.ctaMode,
+          agent_context_summary: generationInput?.account_brief ?? agentContext?.summary ?? null,
+          agent_context_freshness: generationInput?.freshness ?? null,
+          generation_input_contract: generationInput,
+          agentContext: toAgentMetadata(agentContext, initialStepPolicy.ctaMode),
         },
         content: JSON.stringify(results),
       },
@@ -209,6 +219,7 @@ export async function POST(req: NextRequest) {
     personaName: persona?.name ?? personaName,
     tone,
     sequence: results,
-    agentContext: toAgentMetadata(agentContext),
+    agentContext: toAgentMetadata(agentContext, initialStepPolicy.ctaMode),
+    generationInput,
   });
 }

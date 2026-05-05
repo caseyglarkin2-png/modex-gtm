@@ -26,6 +26,8 @@ import { readApiResponse } from '@/lib/api-response';
 import type { AgentActionRequest, AgentActionResult, AgentActionTarget, AgentActionType } from '@/lib/agent-actions/types';
 import { EmailComposer } from '@/components/email/composer';
 import { OnePagerDialog } from '@/components/ai/one-pager-preview';
+import type { AssetSendRecipient } from '@/components/email/asset-send-dialog';
+import { recordWorkflowEvent } from '@/lib/agent-actions/telemetry';
 
 type AgentActionDialogRequest = Omit<AgentActionRequest, 'refresh' | 'depth'> & {
   refresh?: boolean;
@@ -38,6 +40,7 @@ type AgentActionDialogProps = {
   trigger: React.ReactNode;
   autoLoad?: boolean;
   onResult?: (result: AgentActionResult) => void;
+  recipients?: AssetSendRecipient[];
 };
 
 type SuggestedContact = {
@@ -239,18 +242,6 @@ function buildLoadingCopy(action: AgentActionType) {
   }
 }
 
-async function recordWorkflowEvent(event: string, payload: Record<string, unknown>) {
-  try {
-    await fetch('/api/agent-actions/telemetry', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ event, ...payload }),
-    });
-  } catch {
-    // Non-blocking telemetry.
-  }
-}
-
 function MetricPill({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-full border border-[var(--border)] bg-[var(--background)] px-3 py-1 text-xs">
@@ -431,6 +422,7 @@ export function AgentActionDialog({
   trigger,
   autoLoad = true,
   onResult,
+  recipients = [],
 }: AgentActionDialogProps) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -473,7 +465,8 @@ export function AgentActionDialog({
       onResult?.(payload as AgentActionResult);
       const firstContact = extractSuggestedContacts(payload as AgentActionResult)[0];
       setSelectedContactKey(firstContact ? (firstContact.email ?? firstContact.name).toLowerCase() : null);
-      void recordWorkflowEvent('agent_result_loaded', {
+      void recordWorkflowEvent({
+        event: 'agent_result_loaded',
         action: effectiveRequest.action,
         accountName: effectiveRequest.target.accountName,
         provider: (payload as AgentActionResult).provider,
@@ -483,7 +476,8 @@ export function AgentActionDialog({
       const message = error instanceof Error ? error.message : 'Agent action failed';
       setErrorMessage(message);
       toast.error(message);
-      void recordWorkflowEvent('agent_result_failed', {
+      void recordWorkflowEvent({
+        event: 'agent_result_failed',
         action: effectiveRequest.action,
         accountName: effectiveRequest.target.accountName,
         message,
@@ -495,7 +489,8 @@ export function AgentActionDialog({
 
   useEffect(() => {
     if (open) {
-      void recordWorkflowEvent('agent_dialog_opened', {
+      void recordWorkflowEvent({
+        event: 'agent_dialog_opened',
         action: activeRequest.action,
         accountName: activeRequest.target.accountName,
       });
@@ -533,7 +528,8 @@ export function AgentActionDialog({
 
   const openComposer = useCallback((contact?: SuggestedContact | null) => {
     setComposeOpen(true);
-    void recordWorkflowEvent('agent_handoff_composer', {
+    void recordWorkflowEvent({
+      event: 'agent_handoff_composer',
       action: activeRequest.action,
       accountName,
       email: contact?.email,
@@ -542,7 +538,8 @@ export function AgentActionDialog({
 
   const openOnePager = useCallback(() => {
     setOnePagerOpen(true);
-    void recordWorkflowEvent('agent_handoff_one_pager', {
+    void recordWorkflowEvent({
+      event: 'agent_handoff_one_pager',
       action: activeRequest.action,
       accountName,
     });
@@ -650,6 +647,7 @@ export function AgentActionDialog({
                 {(activeRequest.action === 'account_research' || activeRequest.action === 'content_context') ? (
                   <OnePagerDialog
                     accountName={accountName}
+                    recipients={recipients}
                     open={onePagerOpen}
                     onOpenChange={setOnePagerOpen}
                   />
@@ -660,7 +658,8 @@ export function AgentActionDialog({
                   onToggle={(event) => {
                     const nextOpen = (event.currentTarget as HTMLDetailsElement).open;
                     if (nextOpen) {
-                      void recordWorkflowEvent('agent_raw_view_opened', {
+                      void recordWorkflowEvent({
+                        event: 'agent_raw_view_opened',
                         action: activeRequest.action,
                         accountName,
                       });

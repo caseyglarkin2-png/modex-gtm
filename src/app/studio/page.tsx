@@ -17,6 +17,7 @@ import { prisma } from '@/lib/prisma';
 import { ArrowRight, Copy, FileText, Library, ListChecks, Send, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { rankPlaybookBlocks } from '@/lib/revops/playbook-library';
+import type { AssetSendRecipient } from '@/components/email/asset-send-dialog';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Content Studio' };
@@ -54,6 +55,18 @@ export default async function StudioPage({
   const personasByAccount = personas.reduce<Record<string, Array<{ name: string; title: string | null }>>>((acc, persona) => {
     if (!acc[persona.account_name]) acc[persona.account_name] = [];
     acc[persona.account_name].push({ name: persona.name, title: persona.title ?? null });
+    return acc;
+  }, {});
+  const recipientsByAccount = personas.reduce<Record<string, AssetSendRecipient[]>>((acc, persona) => {
+    if (!persona.email) return acc;
+    if (!acc[persona.account_name]) acc[persona.account_name] = [];
+    acc[persona.account_name].push({
+      id: persona.id,
+      name: persona.name,
+      email: persona.email,
+      title: persona.title ?? undefined,
+      role_in_deal: persona.role_in_deal ?? undefined,
+    });
     return acc;
   }, {});
 
@@ -179,6 +192,7 @@ export default async function StudioPage({
               priority_band: account.priority_band,
             }))}
             personasByAccount={personasByAccount}
+            recipientsByAccount={recipientsByAccount}
           />
         </TabsContent>
 

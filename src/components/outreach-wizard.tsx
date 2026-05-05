@@ -42,9 +42,9 @@ export function OutreachWizard({ accountName, micrositeUrl, personas, campaigns 
   const [step, setStep] = useState(1);
   const [selected, setSelected] = useState<string[]>([]);
   const [selectedCampaignSlug, setSelectedCampaignSlug] = useState(campaigns[0]?.slug ?? '');
-  const [subject, setSubject] = useState(`Quick idea for ${accountName}`);
+  const [subject, setSubject] = useState(`yard network scorecard for ${accountName}`);
   const [body, setBody] = useState(
-    `I put together a short private brief for ${accountName}.\n\nPrivate brief: ${micrositeUrl}\n\nWorth a quick look?\n\nCasey`,
+    `We put together a short private brief for ${accountName}.\n\nPrivate brief: ${micrositeUrl}\n\nShould we send the short overview?\n\nCasey`,
   );
   const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);

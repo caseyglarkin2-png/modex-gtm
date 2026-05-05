@@ -7,6 +7,13 @@ import { rateLimit } from '@/lib/rate-limit';
 import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
 import { advancePipelineStage, derivePipelineStage } from '@/lib/pipeline';
 import { markAgentActionCacheStale } from '@/lib/agent-actions/cache';
+import {
+  generatedContentMissingSendBlocker,
+  invalidJsonSendBlocker,
+  invalidPayloadSendBlocker,
+  noSendableRecipientsSendBlocker,
+  serializeSendBlocker,
+} from '@/lib/email/send-blockers';
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
@@ -18,12 +25,14 @@ export async function POST(req: NextRequest) {
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+    const block = invalidJsonSendBlocker();
+    return NextResponse.json(serializeSendBlocker(block), { status: block.status });
   }
 
   const parsed = BulkSendEmailSchema.safeParse(body);
   if (!parsed.success) {
-    return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
+    const block = invalidPayloadSendBlocker(parsed.error.flatten());
+    return NextResponse.json(serializeSendBlocker(block), { status: block.status });
   }
 
   const { recipients, subject, bodyHtml, accountName, generatedContentId } = parsed.data;
@@ -73,7 +82,8 @@ export async function POST(req: NextRequest) {
       },
     });
     if (!generated) {
-      return NextResponse.json({ error: 'Generated content not found.' }, { status: 404 });
+      const block = generatedContentMissingSendBlocker(generatedContentId);
+      return NextResponse.json(serializeSendBlocker(block), { status: block.status });
     }
   }
   const unsubscribedRows = await prisma.unsubscribedEmail.findMany({
@@ -110,7 +120,8 @@ export async function POST(req: NextRequest) {
     .map((item) => ({ to: item.recipient.to, reason: item.guard.reason ?? 'Ineligible recipient' }));
 
   if (eligibleRecipients.length === 0) {
-    return NextResponse.json({ success: false, sent: 0, failed: resolvedRecipients.length, skipped }, { status: 400 });
+    const block = noSendableRecipientsSendBlocker({ skipped });
+    return NextResponse.json(serializeSendBlocker(block, { success: false, sent: 0, failed: resolvedRecipients.length, skipped }), { status: block.status });
   }
 
   const payloads = eligibleRecipients.map((r) => ({ to: r.to, subject, html }));

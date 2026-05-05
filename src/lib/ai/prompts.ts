@@ -1,5 +1,12 @@
 import { getYardFlowPromptContext } from './yardflow-context';
 import { getVoiceGuardrails } from './voice-guardrails';
+import type { GenerationInputContract } from '@/lib/agent-actions/generation-input';
+import {
+  COLD_OUTBOUND_PROMPT_POLICY_VERSION,
+  buildColdOutboundPolicyNotes,
+  getCtaPolicy,
+  getOnePagerSuggestedNextStep,
+} from '@/lib/revops/cold-outbound-policy';
 
 export interface PromptContext {
   accountName: string;
@@ -23,6 +30,7 @@ export interface PromptContext {
   playbookHints?: string;
   agentContextSummary?: string;
   agentNextActions?: string[];
+  generationInput?: GenerationInputContract | null;
   tone: 'professional' | 'casual' | 'bold';
   length: 'short' | 'medium' | 'long';
 }
@@ -42,6 +50,7 @@ export interface OnePagerContext {
   band: string;
   agentContextSummary?: string;
   agentNextActions?: string[];
+  generationInput?: GenerationInputContract | null;
 }
 
 function buildCampaignContextBlock(ctx: PromptContext): string {
@@ -63,9 +72,9 @@ function buildCampaignContextBlock(ctx: PromptContext): string {
 
 function buildCampaignAskGuidance(ctx: PromptContext): string {
   if (ctx.campaignType === 'trade_show') {
-    return 'MODEX 2026 is April 13-16 in Atlanta. If you mention the event, keep it secondary and natural.';
+    return 'MODEX 2026 is April 13-16 in Atlanta. If you mention the event, keep it secondary and natural. Do not ask for a specific time slot in a cold first touch.';
   }
-  return 'This is not a trade show motion. Ask for a reaction or a short call, not a booth meet-up.';
+  return 'This is not a trade show motion. Ask for a reaction or offer the short scorecard, not a call or booth meet-up.';
 }
 
 function buildPlaybookHintsBlock(ctx: PromptContext): string {
@@ -79,6 +88,22 @@ function buildAgentContextBlock(ctx: Pick<PromptContext, 'agentContextSummary' |
   const lines = [
     ctx.agentContextSummary?.trim() ? `Live operator intelligence: ${ctx.agentContextSummary.trim()}` : '',
     ctx.agentNextActions?.length ? `Recommended next actions: ${ctx.agentNextActions.join(' | ')}` : '',
+  ].filter(Boolean);
+
+  return lines.join('\n');
+}
+
+function buildGenerationInputBlock(contract?: GenerationInputContract | null): string {
+  if (!contract) return '';
+  const lines = [
+    `Account brief: ${contract.account_brief}`,
+    contract.signals.length ? `Fresh signals: ${contract.signals.join(' | ')}` : '',
+    contract.angle ? `Recommended angle: ${contract.angle}` : '',
+    contract.recommended_contacts.length ? `Recommended contacts: ${contract.recommended_contacts.join(' | ')}` : '',
+    contract.committee_gaps.length ? `Committee gaps: ${contract.committee_gaps.join(' | ')}` : '',
+    contract.proof_context.length ? `Proof context: ${contract.proof_context.join(' | ')}` : '',
+    `CTA mode: ${contract.cta_mode}`,
+    `Freshness: ${contract.freshness.source}${contract.freshness.stale ? ' / stale' : ''}`,
   ].filter(Boolean);
 
   return lines.join('\n');
@@ -101,7 +126,10 @@ ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 ${buildCampaignContextBlock(ctx)}
 ${buildPlaybookHintsBlock(ctx)}
 ${buildAgentContextBlock(ctx)}
+${buildGenerationInputBlock(ctx.generationInput)}
 ${ctx.micrositeUrl ? `Microsite link available: ${ctx.micrositeUrl}` : 'No microsite link available. Do not invent one.'}
+CTA policy version: ${COLD_OUTBOUND_PROMPT_POLICY_VERSION}
+CTA mode: ${getCtaPolicy('email', 'cold_email').ctaMode}
 
 Primary goal: get a reply or a light reaction. Not a meeting ask on touch one.
 Secondary goal: if it fits naturally, make the microsite feel like a useful artifact, not a pitch deck.
@@ -109,15 +137,20 @@ Secondary goal: if it fits naturally, make the microsite feel like a useful arti
 STRUCTURE (3 short paragraphs, 70-110 words total):
 1. OPENER (1-2 sentences): Start with a careful observation or hypothesis about THIS account. Use language like "I may be off" or "from the outside" when useful. Sound curious, not certain.
 2. BRIDGE (2-4 sentences): Tie that observation to the yard and dock handoff. Use one proof point only. If a microsite link exists, include one standalone line introducing it plainly: "I put together a short page for [account] here:" then the URL on the next line.
-3. CTA (1 sentence): Ask for a reaction, not a meeting. Examples: "Worth sending the 90-second version?" "Curious if this is even directionally relevant." "If this sits with someone else, who would you point me to?"
+3. CTA (1 sentence): Ask for a reaction or offer the scorecard, not a meeting. Examples: "Is this something your team is working on?" "Should we send a short overview?" "Is there someone else who owns this?"
 
 ${buildCampaignAskGuidance(ctx)}
+${buildColdOutboundPolicyNotes('cold_email', 'email')}
 
 CRITICAL RULES:
 - Short declarative sentences. No semicolons.
+- Default to "we," not "I," unless the sentence sounds unnatural otherwise.
 - No hard calendar ask in the first touch.
 - No "synergies", "unlock", "transform", or similar startup language.
 - No theatrical metaphors like "black hole", "visibility goes to die", or "commercially dangerous" in first-touch email.
+- Lead with signal, not a generic opener.
+- Focus on outcomes like better yard visibility, faster gate throughput, lower dwell and detention, smoother dock flow, standardized workflows, less manual coordination, and better driver experience.
+- Do not use "quick ask" or "quick question."
 - Do not sound like you have diagnosed their operation from a distance.
 - One proof point max. Never stack stats.
 - NEVER say "ship 50% more" or any volume multiplier. The 48→24 stat is truck turn time.
@@ -146,6 +179,7 @@ ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 ${buildCampaignContextBlock(ctx)}
 ${buildPlaybookHintsBlock(ctx)}
 ${buildAgentContextBlock(ctx)}
+${buildGenerationInputBlock(ctx.generationInput)}
 ${ctx.micrositeUrl ? `Microsite link available: ${ctx.micrositeUrl}` : 'No microsite link available. Do not invent one.'}
 
 STRUCTURE (2-3 short paragraphs, 50-90 words total):
@@ -156,10 +190,12 @@ STRUCTURE (2-3 short paragraphs, 50-90 words total):
 Do NOT say "following up" or "circling back". This should feel like a separate note.
 
 ${buildCampaignAskGuidance(ctx)}
+${buildColdOutboundPolicyNotes('follow_up', 'follow_up')}
 
-If the recipient previously engaged, it is acceptable to ask whether they want the short scorecard version or a quick reaction to the microsite. Do not jump straight to calendar times.
+If the recipient previously engaged, it is acceptable to ask whether they want the short scorecard version or a quick reaction to the microsite. Do not jump straight to calendar times unless they explicitly ask.
 
 Avoid loaded metaphors or dramatic language. This should sound like a considerate operator making one more relevant point, not pressing for attention.
+Default to "we," not "I." Keep the CTA low-friction and reply-friendly.
 
 Output: Only the email body. No subject line. No sign-off.`;
 }
@@ -176,9 +212,12 @@ ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 ${buildCampaignContextBlock(ctx)}
 ${buildPlaybookHintsBlock(ctx)}
 ${buildAgentContextBlock(ctx)}
+${buildGenerationInputBlock(ctx.generationInput)}
 
 LinkedIn DMs must be 40-60 words max. One thought. One ask. No small talk.
 ${buildCampaignAskGuidance(ctx)} Lead with the yard as the constraint. End with a question.
+${buildColdOutboundPolicyNotes('cold_email', 'dm')}
+Default to "we," not "I." Keep the CTA to a light reaction or short-overview offer.
 
 Output: Only the message text. No greeting label, no signature.`;
 }
@@ -195,14 +234,16 @@ ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 ${buildCampaignContextBlock(ctx)}
 ${buildPlaybookHintsBlock(ctx)}
 ${buildAgentContextBlock(ctx)}
+${buildGenerationInputBlock(ctx.generationInput)}
 
-${ctx.campaignType === 'trade_show' ? 'Trade show context: live users will be on-site. Suggest a specific event window only if that helps.' : 'This is not a trade show call. Keep the ask focused on a short working session.'}
+${ctx.campaignType === 'trade_show' ? 'Trade show context: live users will be on-site. If event context helps, keep the ask to sending the short overview or routing us to the right owner.' : 'This is not a trade show call. Keep the ask to a short overview, scorecard, or identifying the right owner. Do not ask for a meeting or calendar time on a cold call script.'}
+${buildColdOutboundPolicyNotes('cold_email', 'call_script')}
 
 Structure:
 1. Opener (10 sec): Name, company, one sentence about the yard constraint
 2. Hook (15 sec): Their specific throughput problem, what 24 facilities proved
 3. Qualifying question: How their yards run today
-4. Ask: 30 minutes at MODEX to map facilities and build board-ready ROI
+4. Ask: Offer the short scorecard, 1-page overview, or ask who owns this lane. Do not ask for calendar time.
 5. Objection handling (2-3 common objections with counters)
 
 Output: Formatted script with section labels.`;
@@ -222,6 +263,7 @@ ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 ${buildCampaignContextBlock(ctx)}
 ${buildPlaybookHintsBlock(ctx)}
 ${buildAgentContextBlock(ctx)}
+${buildGenerationInputBlock(ctx.generationInput)}
 
 Create a structured brief:
 1. Company snapshot (2-3 sentences about their yard/logistics/throughput reality)
@@ -250,6 +292,9 @@ Target Account:
 - Primo relevance: ${ctx.primoRelevance}
 ${ctx.agentContextSummary ? `- Live operator intelligence: ${ctx.agentContextSummary}` : ''}
 ${ctx.agentNextActions?.length ? `- Recommended next actions: ${ctx.agentNextActions.join(' | ')}` : ''}
+- Generation input contract: ${ctx.generationInput ? JSON.stringify(ctx.generationInput) : 'none'}
+- CTA policy version: ${COLD_OUTBOUND_PROMPT_POLICY_VERSION}
+- CTA mode: ${getCtaPolicy('one_pager', 'one_pager').ctaMode}
 
 INSTRUCTIONS:
 The output is a JSON that populates a branded infographic one-pager. The visual layout has:
@@ -260,6 +305,7 @@ The output is a JSON that populates a branded infographic one-pager. The visual 
 5. A "Proof from Live Deployment" stats bar
 6. A customer quote (use the verified quote, marked illustrative only if modified)
 7. Best fit + Public source context
+8. Suggested next step with a low-friction scorecard or short-version CTA only
 
 The one-pager must sell to both operations and executive stakeholders:
 - Operations buyer: emphasize queue variance reduction, gate/dock consistency, and labor neutrality.
@@ -274,6 +320,7 @@ CRITICAL: Pain points and outcomes MUST be customized to this specific account's
 - Subheadline must include one explicit business consequence (margin, service reliability, or growth capacity).
 - Outcomes must avoid fluff. Each should imply a measurable operational or commercial effect.
 ${verticalUnknown ? "- Vertical is currently unknown. Use neutral, non-speculative operational language and avoid niche industry assumptions. Include a gentle note in bestFit that operator validation of vertical-specific assumptions is required." : ''}
+${buildColdOutboundPolicyNotes('one_pager', 'one_pager')}
 
 Generate ONLY valid JSON matching this schema — no markdown, no commentary:
 
@@ -307,7 +354,8 @@ Generate ONLY valid JSON matching this schema — no markdown, no commentary:
   ],
   "customerQuote": "string — use the verified quote: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office.' OR create an illustrative variation relevant to this vertical (prefix with '(Illustrative)')",
   "bestFit": "string — 1-2 sentences about why this account is an ideal fit referencing specific operations and commercial stakes",
-  "publicContext": "string — optional; include only verifiable public sources/signals (earnings call comments, press releases, facility changes, hiring trends). Never use speculative event-attendance assumptions."
+  "publicContext": "string — optional; include only verifiable public sources/signals (earnings call comments, press releases, facility changes, hiring trends). Never use speculative event-attendance assumptions.",
+  "suggestedNextStep": "string — low-friction CTA like '${getOnePagerSuggestedNextStep('the account')}'. Never ask for a meeting, call, date, benchmark session, or calendar slot."
 }`;
 }
 
@@ -324,14 +372,15 @@ export function buildOutreachSequencePrompt(ctx: PromptContext, step: 'initial_e
     ctx.primoAngle ? `What makes this account specific: ${ctx.primoAngle}` : '',
     buildCampaignContextBlock(ctx),
     buildAgentContextBlock(ctx),
+    buildGenerationInputBlock(ctx.generationInput),
   ].filter(Boolean).join('\n');
 
   const eventAsk = ctx.campaignType === 'trade_show'
-    ? 'MODEX 2026 is April 13-16 in Atlanta. YardFlow will have live users from the network on-site. Suggest meeting windows like Tuesday April 14 at 10am, 1pm, or 3pm.'
-    : 'This is not a trade show sequence. Ask for a quick reaction or a short call. Do not mention booth times or event meet-ups.';
+    ? 'MODEX 2026 is April 13-16 in Atlanta. If event context helps, mention it lightly, but do not ask for specific time windows in a cold sequence.'
+    : 'This is not a trade show sequence. Ask for a quick reaction or offer the short scorecard. Do not mention calls, booth times, or event meet-ups.';
 
   const followUpAsk = ctx.campaignType === 'trade_show'
-    ? 'The event is close. If useful, suggest one specific window.'
+    ? 'The event is close. Keep the CTA soft and useful. Offer the short version or ask if the scorecard is worth sending over.'
     : 'Keep the CTA soft. Ask if they want the short scorecard version or a quick reaction.';
 
   const stepInstructions: Record<string, string> = {
@@ -346,13 +395,15 @@ The yard thesis should emerge from THEIR reality, not from a canned framing.
 STRUCTURE (3 short paragraphs, max 90 words total):
 1. OPENER: 1-2 concrete sentences about THIS company's yard reality. Specific, observed, not researched-sounding.
 2. BRIDGE: 2-3 sentences connecting to the constraint + one proof point woven naturally.
-3. ASK: 1 sentence. Direct question. Specific MODEX times.
+3. ASK: 1 sentence. Direct question. Offer the scorecard or short version. No calendar or time ask.
 
 Every sentence under 20 words. No abstract nouns. No compound sentences with semicolons.
+Default to "we," not "I."
 
 Mention YardFlow only once, in paragraph 2, briefly. Let proof carry the weight.
 
-${eventAsk} Offer flexibility. No calendar link. Get them to reply.
+${eventAsk} Offer something useful. No calendar link. Get them to reply.
+${buildColdOutboundPolicyNotes('sequence_step_1', 'outreach_sequence')}
 
 Subject: under 6 words, lowercase, no company name, no "re:" tricks. Make it sound like an internal memo subject, not a sales email.`,
 
@@ -363,8 +414,10 @@ MANDATORY OPENING STRATEGY for this email: Use the "${secondaryStrategy}" approa
 Do NOT reference the first email. Come in from a new direction. Add one proof point they have not seen: drop & hook time cut from 48 to 24 minutes (truck turn speed, NOT volume), a module name (flowSPOTTER, flowTWIN), or the customer quote about capturing additional volume headcount neutral. Pick whichever feels most relevant to ${ctx.accountName}'s vertical.
 
 Make the yard problem feel more expensive than before. Tighter. Harder.
+Default to "we," not "I."
 
 ${followUpAsk} No calendar link.
+${buildColdOutboundPolicyNotes('sequence_step_2_plus', 'outreach_sequence')}
 
 Max 70 words. Subject under 6 words, lowercase.`,
 
@@ -373,8 +426,10 @@ Max 70 words. Subject under 6 words, lowercase.`,
 Switch angle entirely. Pick ONE specific symptom that would be vivid for ${ctx.accountName}'s operations and make it the centerpiece. Not a list of symptoms. One concrete image of what their yard costs them.
 
 Create urgency through consequence, not fake scarcity. Make inaction feel compounding.
+Default to "we," not "I."
 
 ${followUpAsk}
+${buildColdOutboundPolicyNotes('sequence_step_2_plus', 'outreach_sequence')}
 
 Max 70 words. Subject under 6 words, lowercase.`,
 

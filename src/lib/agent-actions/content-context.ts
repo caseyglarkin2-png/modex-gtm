@@ -1,6 +1,8 @@
 import { prisma } from '@/lib/prisma';
 import { runAgentAction } from '@/lib/agent-actions/broker';
 import type { AgentActionResult } from '@/lib/agent-actions/types';
+import { buildGenerationInputContract } from '@/lib/agent-actions/generation-input';
+import { DEFAULT_CTA_MODE } from '@/lib/revops/cold-outbound-policy';
 
 type GetAgentContentContextArgs = {
   accountName: string;
@@ -42,7 +44,7 @@ export async function getAgentContentContext({
   }).catch(() => null);
 }
 
-export function toAgentMetadata(result: AgentActionResult | null) {
+export function toAgentMetadata(result: AgentActionResult | null, ctaMode = DEFAULT_CTA_MODE) {
   if (!result) return null;
   return {
     provider: result.provider,
@@ -50,5 +52,6 @@ export function toAgentMetadata(result: AgentActionResult | null) {
     summary: result.summary,
     nextActions: result.nextActions,
     freshness: result.freshness,
+    generationInput: buildGenerationInputContract(result, ctaMode),
   };
 }

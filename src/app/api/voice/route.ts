@@ -40,7 +40,7 @@ The script should:
 - Sound natural when read aloud (no bullet points, no markdown)
 - Open with context-setting without being scripted-sounding
 - Reference a real pain point (e.g. freight cost visibility, DC throughput, supplier reliability)
-- Include a clear ask: a 15-minute Zoom call
+- Include a low-friction ask, not a meeting request. Good examples: "Should we send the short overview?" or "Is this something your team is working on?"
 - End with a professional close
 
 Return only the spoken words — no stage directions, no labels.`;

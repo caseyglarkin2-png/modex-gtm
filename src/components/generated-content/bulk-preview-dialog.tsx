@@ -52,7 +52,7 @@ type VariantDraft = {
   isControl: boolean;
 };
 
-const DEFAULT_SUBJECT = 'MODEX 2026 - Yard Protocol Opportunities';
+const DEFAULT_SUBJECT = 'yard network scorecard';
 
 export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProps) {
   const [open, setOpen] = useState(false);
@@ -72,8 +72,8 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
       variantKey: 'control',
       label: 'Control',
       subject: `${DEFAULT_SUBJECT} (Control)`,
-      opening: 'Reaching out because this account matches our highest-priority lane for yard protocol adoption.',
-      cta: 'Would you be open to a quick workflow review next week?',
+      opening: 'Reaching out because the operating signals suggest yard variance may be creating avoidable drag.',
+      cta: 'Should we send the short overview?',
       split: 50,
       isControl: true,
     },
@@ -82,7 +82,7 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
       label: 'Challenger',
       subject: `${DEFAULT_SUBJECT} (Challenger)`,
       opening: 'Built this with your operation in mind based on current network and facility profile signals.',
-      cta: 'Open to a 15-minute walkthrough to compare this approach with your current process?',
+      cta: 'Is this something your team is working on?',
       split: 50,
       isControl: false,
     },
@@ -116,7 +116,7 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
       });
   }, [acknowledged, deferredAccounts, hideStale, items, showHighOnly]);
 
-  const requiresAcknowledgement = itemStates.filter(({ guard }) => guard.requiresGuard).map(({ item }) => item.generatedContentId);
+  const versionAdvisories = itemStates.filter(({ guard }) => guard.requiresGuard).map(({ item }) => item.generatedContentId);
   const hasRecipients = itemStates.some(({ sendableRecipients }) => sendableRecipients.length > 0);
   const totalRecipients = itemStates.reduce((sum, { sendableRecipients }) => sum + sendableRecipients.length, 0);
   const skippedAccounts = itemStates.filter(({ sendableRecipients }) => sendableRecipients.length === 0).length;
@@ -138,7 +138,7 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
   );
   const experimentValid = !experimentEnabled || (splitTotal === 100 && hasControl && variants.length >= 2);
   const queueDisabled = submitting || !hasRecipients || !experimentValid;
-  const checklistBlockingItems = itemStates.filter(({ item }) => item.checklist && !item.checklist.complete);
+  const checklistAdvisoryItems = itemStates.filter(({ item }) => item.checklist && !item.checklist.complete);
 
   function updateVariant(index: number, patch: Partial<VariantDraft>) {
     setVariants((current) => current.map((variant, idx) => (idx === index ? { ...variant, ...patch } : variant)));
@@ -235,8 +235,8 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
             <p className="text-sm font-semibold text-foreground">{totalRecipients}</p>
           </div>
           <div>
-            <p className="text-muted-foreground">Warnings To Acknowledge</p>
-            <p className="text-sm font-semibold text-amber-700">{requiresAcknowledgement.length}</p>
+            <p className="text-muted-foreground">Version Advisories</p>
+            <p className="text-sm font-semibold text-amber-700">{versionAdvisories.length}</p>
           </div>
           <div>
             <p className="text-muted-foreground">Accounts With No Recipients</p>
@@ -247,8 +247,8 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
             <p className="text-sm font-semibold text-amber-700">{autoSkippedRecipients}</p>
           </div>
           <div>
-            <p className="text-muted-foreground">Checklist Blocks</p>
-            <p className="text-sm font-semibold text-amber-700">{checklistBlockingItems.length}</p>
+            <p className="text-muted-foreground">Checklist Advisories</p>
+            <p className="text-sm font-semibold text-amber-700">{checklistAdvisoryItems.length}</p>
           </div>
         </div>
 
@@ -490,7 +490,7 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
                 <div className="flex items-center gap-1">
                   {guard.requiresGuard && <Badge className="bg-amber-100 text-amber-900">Needs Review</Badge>}
                   {sendableRecipients.length === 0 && <Badge className="bg-red-100 text-red-900">No Recipients After Filters</Badge>}
-                  {item.checklist && !item.checklist.complete && <Badge className="bg-amber-100 text-amber-900">Checklist Incomplete</Badge>}
+                  {item.checklist && !item.checklist.complete && <Badge className="bg-amber-100 text-amber-900">Checklist Advisory</Badge>}
                   <Badge variant="outline">{rendering.source}</Badge>
                 </div>
               </div>
@@ -577,7 +577,7 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
         <div className="flex items-center gap-2">
           <Button
             onClick={enqueueSendJob}
-            disabled={queueDisabled || checklistBlockingItems.length > 0}
+            disabled={queueDisabled}
             className="flex-1"
           >
             {submitting ? 'Queueing…' : 'Queue Async Send Job'}

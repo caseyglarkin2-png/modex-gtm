@@ -8,6 +8,18 @@ import { rateLimit } from '@/lib/rate-limit';
 import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
 import { advancePipelineStage, derivePipelineStage } from '@/lib/pipeline';
 import { markAgentActionCacheStale } from '@/lib/agent-actions/cache';
+import {
+  generatedContentMissingSendBlocker,
+  ineligibleRecipientSendBlocker,
+  invalidJsonSendBlocker,
+  invalidPayloadSendBlocker,
+  noEmailSendBlocker,
+  providerConfigSendBlocker,
+  recipientNotFoundSendBlocker,
+  runtimeSendBlocker,
+  serializeSendBlocker,
+  unsubscribedSendBlocker,
+} from '@/lib/email/send-blockers';
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
@@ -19,25 +31,26 @@ export async function POST(req: NextRequest) {
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+    const block = invalidJsonSendBlocker();
+    return NextResponse.json(serializeSendBlocker(block), { status: block.status });
   }
 
   const parsed = SendEmailSchema.safeParse(body);
   if (!parsed.success) {
-    return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
+    const block = invalidPayloadSendBlocker(parsed.error.flatten());
+    return NextResponse.json(serializeSendBlocker(block), { status: block.status });
   }
 
   if (!process.env.UNSUBSCRIBE_SECRET) {
-    return NextResponse.json({
-      error: 'UNSUBSCRIBE_SECRET is not set',
-      message: 'Set UNSUBSCRIBE_SECRET in Vercel env (Prod/Preview/Dev) before sending.',
-    }, { status: 500 });
+    const block = providerConfigSendBlocker('Set UNSUBSCRIBE_SECRET in Vercel env (Prod/Preview/Dev) before sending.');
+    return NextResponse.json(serializeSendBlocker(block), { status: block.status });
   }
 
   const { to, cc, subject, bodyHtml, accountName, personaName, personaId, generatedContentId } = parsed.data;
 
   if (!to || to.trim() === '') {
-    return NextResponse.json({ error: 'NO_EMAIL', message: 'Recipient has no email address. Add one to the persona first.' }, { status: 400 });
+    const block = noEmailSendBlocker();
+    return NextResponse.json(serializeSendBlocker(block), { status: block.status });
   }
 
   try {
@@ -59,7 +72,8 @@ export async function POST(req: NextRequest) {
         },
       });
       if (!persona || !persona.email) {
-        return NextResponse.json({ error: 'Recipient record not found.' }, { status: 404 });
+        const block = recipientNotFoundSendBlocker();
+        return NextResponse.json(serializeSendBlocker(block), { status: block.status });
       }
       resolvedRecipient = {
         to: persona.email,
@@ -87,18 +101,15 @@ export async function POST(req: NextRequest) {
       if (allowBypass(resolvedRecipient.to)) {
         await prisma.unsubscribedEmail.delete({ where: { email: resolvedRecipient.to } }).catch(() => {});
       } else {
-        // Return a structured error with remaining rate-limit for UI clarity
-        return NextResponse.json({
-          error: 'UNSUBSCRIBED',
-          message: `Cannot send to ${resolvedRecipient.to} - recipient has unsubscribed.`,
-          remaining,
-        }, { status: 400 });
+        const block = unsubscribedSendBlocker(resolvedRecipient.to);
+        return NextResponse.json(serializeSendBlocker(block, { remaining }), { status: block.status });
       }
     }
 
     const guard = await evaluateRecipientEligibility(prisma, resolvedRecipient.to);
     if (!guard.ok) {
-      return NextResponse.json({ error: guard.reason }, { status: 400 });
+      const block = ineligibleRecipientSendBlocker(guard.reason ?? 'Recipient is not sendable.');
+      return NextResponse.json(serializeSendBlocker(block), { status: block.status });
     }
     if (generatedContentId) {
       const generated = await prisma.generatedContent.findUnique({
@@ -120,7 +131,8 @@ export async function POST(req: NextRequest) {
         },
       });
       if (!generated) {
-        return NextResponse.json({ error: 'Generated content not found.' }, { status: 404 });
+        const block = generatedContentMissingSendBlocker(generatedContentId);
+        return NextResponse.json(serializeSendBlocker(block), { status: block.status });
       }
     }
 
@@ -212,6 +224,7 @@ export async function POST(req: NextRequest) {
     });
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Email send failed';
-    return NextResponse.json({ error: message }, { status: 500 });
+    const block = runtimeSendBlocker(message);
+    return NextResponse.json(serializeSendBlocker(block), { status: block.status });
   }
 }

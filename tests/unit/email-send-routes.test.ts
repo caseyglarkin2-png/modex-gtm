@@ -110,6 +110,7 @@ describe('Email send API', () => {
 
     expect(res.status).toBe(400);
     expect(payload.error).toBe('UNSUBSCRIBED');
+    expect(payload.code).toBe('UNSUBSCRIBED');
     expect(mockedSendEmail).not.toHaveBeenCalled();
   });
 
@@ -273,5 +274,31 @@ describe('Bulk email send API', () => {
       where: { id: 99 },
       data: { external_send_count: { increment: 1 } },
     });
+  });
+
+  it('returns a hard-block response when no bulk recipients remain sendable', async () => {
+    mockedPrisma.prisma.unsubscribedEmail.findMany.mockResolvedValue([{ email: 'skip@example.com' }]);
+
+    const req = new NextRequest('http://localhost/api/email/send-bulk', {
+      method: 'POST',
+      body: JSON.stringify({
+        recipients: [
+          { to: 'skip@example.com', readinessScore: 90, readinessTier: 'high', stale: false },
+        ],
+        subject: 'Bulk subject',
+        bodyHtml: 'Bulk send body',
+        generatedContentId: 99,
+      }),
+      headers: { 'content-type': 'application/json', 'x-forwarded-for': '127.0.0.1' },
+    });
+
+    const res = await sendBulkPOST(req);
+    const payload = await res.json();
+
+    expect(res.status).toBe(400);
+    expect(payload.code).toBe('NO_SENDABLE_RECIPIENTS');
+    expect(payload.skipped).toEqual([
+      { to: 'skip@example.com', reason: 'Recipient explicitly unsubscribed' },
+    ]);
   });
 });

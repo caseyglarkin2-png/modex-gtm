@@ -38,11 +38,14 @@ import {
 import { cn } from '@/lib/utils';
 import { getMicrositeUrl } from '@/lib/site-url';
 import { OnePagerPreview } from '@/components/ai/one-pager-preview';
+import { onePagerToHtml } from '@/components/ai/one-pager-preview';
 import type { OnePagerData } from '@/components/ai/one-pager-preview';
+import { AssetSendDialog, type AssetSendRecipient } from '@/components/email/asset-send-dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { INFOGRAPHIC_LABELS, INFOGRAPHIC_TYPES, JOURNEY_STAGE_INTENTS, STAGE_LABELS } from '@/lib/revops/infographic-journey';
+import { COLD_OUTBOUND_PROMPT_POLICY_VERSION, DEFAULT_CTA_MODE } from '@/lib/revops/cold-outbound-policy';
 
 type Tab = 'assets' | 'sequence' | 'one-pager' | 'history' | 'models' | 'rehearsal' | 'prompts' | 'handoff';
 
@@ -77,6 +80,7 @@ interface AssetPackResult {
 interface StudioClientProps {
   accounts: StudioAccount[];
   personasByAccount: Record<string, StudioPersona[]>;
+  recipientsByAccount: Record<string, AssetSendRecipient[]>;
 }
 
 function slugifyAccountName(value: string): string {
@@ -87,7 +91,7 @@ function slugifyAccountName(value: string): string {
     .replace(/^-+|-+$/g, '');
 }
 
-export function StudioClient({ accounts, personasByAccount }: StudioClientProps) {
+export function StudioClient({ accounts, personasByAccount, recipientsByAccount }: StudioClientProps) {
   const [tab, setTab] = useState<Tab>('assets');
   const [selectedAccount, setSelectedAccount] = useState(accounts[0]?.name ?? '');
   const [selectedPersona, setSelectedPersona] = useState('');
@@ -170,7 +174,7 @@ export function StudioClient({ accounts, personasByAccount }: StudioClientProps)
         />
       )}
       {tab === 'one-pager' && (
-        <OnePagerPanel accountName={selectedAccount} />
+        <OnePagerPanel accountName={selectedAccount} recipients={recipientsByAccount[selectedAccount] ?? []} />
       )}
       {tab === 'history' && (
         <HistoryPanel accountName={selectedAccount} />
@@ -329,7 +333,7 @@ function AssetPackPanel({
 
           <textarea
             className="w-full min-h-[90px] rounded-md border border-input bg-background px-3 py-2 text-sm"
-            placeholder="Optional context, new intel, or meeting objective"
+            placeholder="Optional context, new intel, or reply objective"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             maxLength={1000}
@@ -385,7 +389,7 @@ function AssetPackPanel({
 }
 
 function ModelComparePanel() {
-  const [prompt, setPrompt] = useState('Write a 90-word email body to book a MODEX meeting with a VP of Distribution at Home Depot.');
+  const [prompt, setPrompt] = useState('Write a 90-word cold outbound email for a VP of Distribution at Home Depot. Lead with a network-complexity signal, default to "we," and use a low-friction CTA like "Should we send a short overview?"');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<Array<{
     provider: string;
@@ -477,7 +481,7 @@ function ModelComparePanel() {
 }
 
 function RehearsalPanel() {
-  const [script, setScript] = useState('Most teams think the bottleneck is labor. At MODEX we can show why the real bottleneck is the yard handoff logic between gate and dock. Could we walk your yard profile for 30 minutes Tuesday at 1pm?');
+  const [script, setScript] = useState('Most teams think the bottleneck is labor. We usually see the bigger drag in the handoff logic between gate and dock. That is where yard variance starts to compound. If this is something your team is working on, should we send the short overview?');
   const [loading, setLoading] = useState(false);
   const [analysis, setAnalysis] = useState<{
     metrics: {
@@ -608,7 +612,7 @@ function RehearsalPanel() {
 
 function PromptVersionsPanel() {
   const [template, setTemplate] = useState('outbound_email');
-  const [prompt, setPrompt] = useState('Write a concise, no-em-dash outreach email to book MODEX meeting slots.');
+  const [prompt, setPrompt] = useState('Write a concise, no-em-dash cold outbound email that leads with signal, defaults to "we," and ends with a low-friction CTA like "Should we send a short overview?"');
   const [notes, setNotes] = useState('MVP baseline prompt');
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -765,7 +769,7 @@ function SequencePanel({
   );
 }
 
-function OnePagerPanel({ accountName }: { accountName: string }) {
+function OnePagerPanel({ accountName, recipients }: { accountName: string; recipients: AssetSendRecipient[] }) {
   if (!accountName) {
     return (
       <Card>
@@ -779,8 +783,8 @@ function OnePagerPanel({ accountName }: { accountName: string }) {
 
   return (
     <Card className="h-[calc(100vh-280px)]">
-      <CardContent className="p-0 h-full">
-        <OnePagerInline accountName={accountName} />
+        <CardContent className="p-0 h-full">
+        <OnePagerInline accountName={accountName} recipients={recipients} />
       </CardContent>
     </Card>
   );
@@ -1167,7 +1171,13 @@ function OutreachSequenceInline({
   );
 }
 
-function OnePagerInline({ accountName }: { accountName: string }) {
+function OnePagerInline({
+  accountName,
+  recipients,
+}: {
+  accountName: string;
+  recipients: AssetSendRecipient[];
+}) {
   const [data, setData] = useState<OnePagerData | null>(null);
   const [loading, setLoading] = useState(false);
   const [stageIntent, setStageIntent] = useState<(typeof JOURNEY_STAGE_INTENTS)[number]>('cold');
@@ -1358,6 +1368,24 @@ function OnePagerInline({ accountName }: { accountName: string }) {
         </Button>
         {data && (
           <div className="flex gap-2">
+            {recipients.length > 0 ? (
+              <AssetSendDialog
+                accountName={accountName}
+                generatedContent={{
+                  account_name: accountName,
+                  content: onePagerToHtml(data, accountName),
+                  prompt_policy_version: COLD_OUTBOUND_PROMPT_POLICY_VERSION,
+                  cta_mode: DEFAULT_CTA_MODE,
+                  legacy_policy: false,
+                }}
+                recipients={recipients}
+                trigger={(
+                  <Button size="sm" className="gap-1.5">
+                    <Send className="h-3.5 w-3.5" /> Send
+                  </Button>
+                )}
+              />
+            ) : null}
             <Button variant="outline" size="sm" onClick={copyHtml} className="gap-1.5">
               <Copy className="h-3.5 w-3.5" /> Copy HTML
             </Button>

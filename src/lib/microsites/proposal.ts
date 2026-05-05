@@ -12,6 +12,7 @@ import type {
   ROISection,
   ROISourceNote,
 } from './schema';
+import { normalizeMicrositeCta } from './cta';
 
 type SectionOf<T extends MicrositeSection['type']> = Extract<MicrositeSection, { type: T }>;
 
@@ -172,6 +173,7 @@ export function resolveMicrositeProposalBrief(slug: string): MicrositeProposalBr
   const network = findSection(sections, 'network-map');
   const roi = findSection(sections, 'roi');
   const proofStats = buildProofStats(proof);
+  const normalizedCta = normalizeMicrositeCta(hero.cta, data.accountName);
 
   return {
     slug: data.slug,
@@ -186,9 +188,12 @@ export function resolveMicrositeProposalBrief(slug: string): MicrositeProposalBr
     proposalPath: `/proposal/${data.slug}`,
     exportHtmlPath: `/api/export?type=proposal&slug=${data.slug}&format=html`,
     exportJsonPath: `/api/export?type=proposal&slug=${data.slug}&format=json`,
-    bookingLink: hero.cta.calendarLink,
-    hero,
-    cta: hero.cta,
+    bookingLink: normalizedCta.calendarLink,
+    hero: {
+      ...hero,
+      cta: normalizedCta,
+    },
+    cta: normalizedCta,
     sections,
     problem,
     proof,

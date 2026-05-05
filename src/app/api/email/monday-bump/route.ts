@@ -29,35 +29,35 @@ const BUMP_BODIES = [
 
 Bumping this to the top in case it got buried over the weekend. Inboxes take a beating on Mondays.
 
-Worth a quick look? We'll be at MODEX in Atlanta April 13-16 and I'd love to show you what we built.`,
+Should we send the short overview?`,
 
   (firstName: string) =>
 `${firstName},
 
 Quick bump on this. Saturdays are quiet but Monday mornings are brutal.
 
-If the yard is on your radar at all, happy to do a 15-minute walkthrough. We'll be at MODEX in a couple weeks.`,
+If yard variance is on your radar at all, should we send the short overview?`,
 
   (firstName: string) =>
 `${firstName},
 
 Floating this back up. Weekend emails tend to disappear.
 
-If this lands at a good time, I'd love to chat. We're at MODEX April 13-16 in Atlanta and the demo takes 5 minutes.`,
+If this lands at a good time, is this something your team is working on?`,
 
   (firstName: string) =>
 `Hey ${firstName},
 
 Moving this to the top of the pile. Monday inboxes are no joke.
 
-Let me know if the yard is something you're thinking about. Happy to do a quick call or meet at MODEX in a couple weeks.`,
+Let us know if the yard is something you're thinking about. Should we send the short overview?`,
 
   (firstName: string) =>
 `${firstName},
 
 Bumping this up. Saturday sends have a way of getting lost by Monday.
 
-If any of this resonated, I'm around for a quick call. Or catch us at MODEX in Atlanta April 13-16.`,
+If any of this resonated, should we send the short overview?`,
 ];
 
 function sleep(ms: number) {
@@ -87,7 +87,7 @@ function wrapHtml(bodyText: string, accountName: string): string {
 <span style="color:#d1d5db;margin:0 6px;">|</span>
 <a href="https://yardflow.ai/roi" style="color:#0e7490;text-decoration:none;font-weight:500;">Run ROI</a>
 <span style="color:#d1d5db;margin:0 6px;">|</span>
-<a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW" style="color:#0e7490;text-decoration:none;font-weight:500;">Book a Network Audit</a></p>
+<a href="https://yardflow.ai/overview" style="color:#0e7490;text-decoration:none;font-weight:500;">Short Overview</a></p>
 </td></tr></table></td></tr></table></body></html>`;
 }
 

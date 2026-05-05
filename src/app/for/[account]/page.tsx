@@ -6,14 +6,13 @@ import type { MicrositeSection } from '@/lib/microsites/schema';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
 import { getVariantRoutes } from '@/lib/microsites/rules';
 import { materializeMicrositeSections } from '@/lib/microsites/roi';
+import { buildShortOverviewCta, normalizeMicrositeCta } from '@/lib/microsites/cta';
 import { buildPublicShareMetadata } from '@/lib/microsites/share';
 import { MicrositeShell, getMicrositeSectionNavItems } from '@/components/microsites/microsite-shell';
 import { Reveal } from '@/components/microsites/reveal';
 import { MicrositeSectionRenderer } from '@/components/microsites/sections';
 import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
 import { prisma } from '@/lib/prisma';
-
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
 function isHeroSection(section: MicrositeSection): section is Extract<MicrositeSection, { type: 'hero' }> {
   return section.type === 'hero';
@@ -52,6 +51,7 @@ export default async function AccountMicrositePage({
   const sections = materializeMicrositeSections(data, data.sections);
   const variants = getVariantRoutes(data);
   const heroSection = sections.find(isHeroSection);
+  const primaryCta = heroSection ? normalizeMicrositeCta(heroSection.cta, data.accountName) : buildShortOverviewCta(data.accountName);
   const problemSection = sections.find(isProblemSection);
   const navItems = getMicrositeSectionNavItems(sections);
   const focusPoints =
@@ -94,8 +94,8 @@ export default async function AccountMicrositePage({
         focusPoints={focusPoints}
         navItems={navItems}
         primaryCta={{
-          href: heroSection?.cta.calendarLink ?? BOOKING_LINK,
-          label: heroSection?.cta.buttonLabel ?? 'Book a Network Audit',
+          href: primaryCta.calendarLink ?? '#',
+          label: primaryCta.buttonLabel,
         }}
         statusLabel={`${data.band}-Band · ${data.tier}`}
         variantLinks={variants.map((variant) => ({

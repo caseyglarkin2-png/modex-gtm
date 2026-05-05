@@ -9,10 +9,7 @@ test('generation queue renders jobs and retry controls', async ({ page }) => {
   expect(routable).toBe(true);
 
   await expect(page.locator('body')).toContainText('Job List');
-  const workspaceLinks = page.getByRole('link', { name: /Generated Content Workspace|Open Workspace/i });
-  if ((await workspaceLinks.count()) > 0) {
-    await expect(workspaceLinks.first()).toBeVisible();
-  }
+  await expect(page.getByRole('heading', { name: /Generation Queue/i })).toBeVisible();
 
   const retryButtons = page.getByRole('button', { name: /Retry Generation/i });
   const retryCount = await retryButtons.count();

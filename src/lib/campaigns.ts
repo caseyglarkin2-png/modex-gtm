@@ -12,7 +12,7 @@ export async function ensureDefaultCampaign() {
       status: 'active',
       campaign_type: 'trade_show',
       target_account_count: targetAccountCount,
-      messaging_angle: 'The yard is the constraint. Use MODEX follow-up to book qualified meetings.',
+      messaging_angle: 'The yard is the constraint. Use MODEX follow-up to earn replies and send the short scorecard.',
       key_dates: {
         event: 'MODEX 2026',
         venue: 'Atlanta',
@@ -30,7 +30,7 @@ export async function ensureDefaultCampaign() {
       start_date: MODEX_START,
       end_date: MODEX_END,
       target_account_count: targetAccountCount,
-      messaging_angle: 'The yard is the constraint. Use MODEX follow-up to book qualified meetings.',
+      messaging_angle: 'The yard is the constraint. Use MODEX follow-up to earn replies and send the short scorecard.',
       key_dates: {
         event: 'MODEX 2026',
         venue: 'Atlanta',

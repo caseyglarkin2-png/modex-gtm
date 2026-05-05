@@ -22,6 +22,7 @@ import type {
   MicrositeSection,
   CTABlock,
 } from '@/lib/microsites/schema';
+import { normalizeMicrositeCta } from '@/lib/microsites/cta';
 import {
   FLAGSHIP_ACTION_CLASS,
   FLAGSHIP_DISPLAY_CLASS,
@@ -45,15 +46,16 @@ const FLAGSHIP_CALLOUT_PANEL_CLASS = `rounded-[var(--fw-panel-radius)] ${FLAGSHI
 
 // ── CTA Button ────────────────────────────────────────────────────────
 function CTAButton({ cta, accent, ctaId }: { cta: CTABlock; accent: AccentClasses; ctaId: string }) {
+  const normalizedCta = normalizeMicrositeCta(cta);
   return (
     <a
-      href={cta.calendarLink ?? '#'}
+      href={normalizedCta.calendarLink ?? '#'}
       target="_blank"
       rel="noopener noreferrer"
       data-ms-cta-id={ctaId}
       className={`inline-block ${accent.bg} ${accent.bgHover} ${FLAGSHIP_ACTION_CLASS} rounded-lg px-8 py-3 text-sm font-bold text-slate-900`}
     >
-      {cta.buttonLabel}
+      {normalizedCta.buttonLabel}
     </a>
   );
 }
@@ -765,12 +767,13 @@ export function CaseStudySectionComponent({ section }: { section: CaseStudySecti
 
 // ── CTA Section ───────────────────────────────────────────────────────
 export function CTASectionComponent({ section, accent }: { section: CTASection; accent: AccentClasses }) {
+  const normalizedCta = normalizeMicrositeCta(section.cta);
   return (
     <section className={`${CTA_SECTION_CLASS} border-t border-slate-800 bg-gradient-to-b from-slate-900/50 to-slate-950`}>
       <div className={`${FLAGSHIP_SECTION_FRAME_CLASS} text-center`}>
-        <h2 className={`mb-3 ${FLAGSHIP_SECTION_TITLE_CLASS}`}>{section.cta.headline}</h2>
-        <p className="mx-auto mb-6 max-w-2xl text-sm text-slate-400">{section.cta.subtext}</p>
-        <CTAButton cta={section.cta} accent={accent} ctaId={section.sectionId ?? 'cta'} />
+        <h2 className={`mb-3 ${FLAGSHIP_SECTION_TITLE_CLASS}`}>{normalizedCta.headline}</h2>
+        <p className="mx-auto mb-6 max-w-2xl text-sm text-slate-400">{normalizedCta.subtext}</p>
+        <CTAButton cta={normalizedCta} accent={accent} ctaId={section.sectionId ?? 'cta'} />
         {section.closingLine && (
           <p className="mt-6 text-xs text-slate-500">{section.closingLine}</p>
         )}

@@ -33,7 +33,7 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
   const stageIntentFilter = searchParams.get('stageIntent') ?? 'all';
   const statusFilter = searchParams.get('status') ?? 'all';
   const sentFilter = searchParams.get('sent') ?? 'all';
-  const checklistFilter = searchParams.get('checklist') ?? 'all';
+  const advisoryFilter = searchParams.get('advisory') ?? searchParams.get('checklist') ?? 'all';
   const query = searchParams.get('q') ?? '';
   const [searchInput, setSearchInput] = useState(query);
   const regenAccount = searchParams.get('regenAccount') ?? '';
@@ -78,6 +78,7 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
     } else {
       next.set(key, value);
     }
+    if (key === 'advisory') next.delete('checklist');
     router.replace(next.toString() ? `${pathname}?${next.toString()}` : pathname);
   };
 
@@ -119,10 +120,10 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
         stageIntent: stageIntentFilter,
         status: statusFilter,
       sent: sentFilter,
-      checklist: checklistFilter,
+      advisory: advisoryFilter,
       query,
     }),
-    [accountFilter, campaignFilter, cards, checklistFilter, infographicTypeFilter, providerFilter, query, sentFilter, stageIntentFilter, statusFilter],
+    [accountFilter, advisoryFilter, campaignFilter, cards, infographicTypeFilter, providerFilter, query, sentFilter, stageIntentFilter, statusFilter],
   );
 
   const regenerationPrompt = useMemo(() => {
@@ -217,13 +218,13 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
     if (stageIntentFilter !== 'all') filters.push({ key: 'stageIntent', label: `Stage: ${stageIntentFilter}` });
     if (statusFilter !== 'all') filters.push({ key: 'status', label: `Status: ${statusFilter}` });
     if (sentFilter !== 'all') filters.push({ key: 'sent', label: `Send: ${sentFilter}` });
-    if (checklistFilter !== 'all') filters.push({ key: 'checklist', label: `Checklist: ${checklistFilter}` });
+    if (advisoryFilter !== 'all') filters.push({ key: 'advisory', label: `Advisory: ${advisoryFilter}` });
     if (query.trim().length > 0) filters.push({ key: 'q', label: `Search: ${query}` });
     return filters;
   }, [
     accountFilter,
     campaignFilter,
-    checklistFilter,
+    advisoryFilter,
     infographicTypeFilter,
     providerFilter,
     query,
@@ -384,14 +385,14 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
           </SelectContent>
         </Select>
 
-        <Select value={checklistFilter} onValueChange={(value) => setParam('checklist', value)}>
+        <Select value={advisoryFilter} onValueChange={(value) => setParam('advisory', value)}>
           <SelectTrigger>
-            <SelectValue placeholder="Checklist" />
+            <SelectValue placeholder="Advisory State" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">Any Checklist</SelectItem>
-            <SelectItem value="complete">Checklist Complete</SelectItem>
-            <SelectItem value="incomplete">Checklist Incomplete</SelectItem>
+            <SelectItem value="all">Any Advisory State</SelectItem>
+            <SelectItem value="clear">Advisory Clear</SelectItem>
+            <SelectItem value="present">Advisory Present</SelectItem>
           </SelectContent>
         </Select>
 

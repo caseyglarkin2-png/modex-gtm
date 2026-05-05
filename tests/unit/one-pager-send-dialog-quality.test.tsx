@@ -62,6 +62,7 @@ describe('OnePageSendDialog quality guard', () => {
     const send = await screen.findByRole('button', { name: /Send to 1 Recipient/i });
     expect(send).toBeEnabled();
     expect(screen.getByText(/below the advisory threshold/i)).toBeVisible();
+    expect(screen.queryByText(/I acknowledge the warning/i)).not.toBeInTheDocument();
   });
 
   it('preselects all recipients on open', async () => {

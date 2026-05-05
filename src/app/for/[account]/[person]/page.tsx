@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import type { MicrositeSection } from '@/lib/microsites/schema';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
+import { buildShortOverviewCta, normalizeMicrositeCta } from '@/lib/microsites/cta';
 import { resolveMicrositeBySlug, getVariantRoutes } from '@/lib/microsites/rules';
 import { buildPublicShareMetadata } from '@/lib/microsites/share';
 import { MicrositeShell, getMicrositeSectionNavItems } from '@/components/microsites/microsite-shell';
@@ -11,8 +12,6 @@ import { Reveal } from '@/components/microsites/reveal';
 import { MicrositeSectionRenderer } from '@/components/microsites/sections';
 import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
 import { prisma } from '@/lib/prisma';
-
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
 function isProblemSection(section: MicrositeSection): section is Extract<MicrositeSection, { type: 'problem' }> {
   return section.type === 'problem';
@@ -53,6 +52,7 @@ export default async function PersonMicrositePage({
   if (!resolved) notFound();
 
   const { sections, person: personProfile, variant } = resolved;
+  const primaryCta = normalizeMicrositeCta(resolved.cta ?? buildShortOverviewCta(data.accountName), data.accountName);
   const variants = getVariantRoutes(data);
   const navItems = getMicrositeSectionNavItems(sections);
   const problemSection = sections.find(isProblemSection);
@@ -100,8 +100,8 @@ export default async function PersonMicrositePage({
         focusPoints={focusPoints}
         navItems={navItems}
         primaryCta={{
-          href: resolved.cta.calendarLink ?? BOOKING_LINK,
-          label: resolved.cta.buttonLabel,
+          href: primaryCta.calendarLink ?? '#',
+          label: primaryCta.buttonLabel,
         }}
         statusLabel={`${data.band}-Band · ${personProfile.function}`}
         variantLinks={[

@@ -17,6 +17,8 @@ import { getFacilityFact } from '@/lib/research/facility-fact-registry';
 import { buildAccountTags } from '@/lib/research/account-tags';
 import { isGenerationContractPolicyEnabled } from '@/lib/revops/campaign-generation-contract';
 import { getAgentContentContext, toAgentMetadata } from '@/lib/agent-actions/content-context';
+import { COLD_OUTBOUND_PROMPT_POLICY_VERSION, getCtaPolicy } from '@/lib/revops/cold-outbound-policy';
+import { buildGenerationInputContract } from '@/lib/agent-actions/generation-input';
 
 const TONE_MAP: Record<string, PromptContext['tone']> = {
   formal: 'professional',
@@ -89,6 +91,19 @@ export async function POST(req: NextRequest) {
   const agentContext = useLiveIntel
     ? await getAgentContentContext({ accountName, personaName, refresh: refreshContext })
     : null;
+  const ctaPolicy = getCtaPolicy(
+    type === 'follow_up'
+      ? 'follow_up'
+      : type === 'meeting_prep'
+        ? 'meeting_prep'
+        : type === 'call_script'
+          ? 'call_script'
+          : type === 'dm'
+            ? 'dm'
+            : 'email',
+    type === 'follow_up' ? 'follow_up' : type === 'meeting_prep' ? 'meeting_prep' : 'cold_email',
+  );
+  const generationInput = buildGenerationInputContract(agentContext, ctaPolicy.ctaMode);
 
   const ctx: PromptContext = {
     accountName,
@@ -115,6 +130,7 @@ export async function POST(req: NextRequest) {
     playbookHints: (context as Record<string, string> | undefined)?.playbookHints,
     agentContextSummary: agentContext?.summary,
     agentNextActions: agentContext?.nextActions,
+    generationInput,
     tone: TONE_MAP[tone] ?? 'casual',
     length: length as PromptContext['length'],
   };
@@ -153,6 +169,28 @@ export async function POST(req: NextRequest) {
 
   try {
     const content = await generateText(prompt, maxTokens);
+    try {
+      await prisma.generatedContent.create({
+        data: {
+          account_name: accountName,
+          persona_name: ctx.personaName ?? null,
+          content_type: type,
+          tone,
+          provider_used: 'ai_gateway',
+          version_metadata: {
+            prompt_policy_version: COLD_OUTBOUND_PROMPT_POLICY_VERSION,
+            cta_mode: ctaPolicy.ctaMode,
+            agent_context_summary: generationInput?.account_brief ?? agentContext?.summary ?? null,
+            agent_context_freshness: generationInput?.freshness ?? null,
+            generation_input_contract: generationInput,
+            agentContext: toAgentMetadata(agentContext, ctaPolicy.ctaMode),
+          },
+          content,
+        },
+      });
+    } catch {
+      // best-effort persistence only
+    }
     return NextResponse.json({
       content,
       type,
@@ -160,7 +198,8 @@ export async function POST(req: NextRequest) {
       personaName: ctx.personaName,
       tone,
       length,
-      agentContext: toAgentMetadata(agentContext),
+      agentContext: toAgentMetadata(agentContext, ctaPolicy.ctaMode),
+      generationInput,
     });
   } catch (err) {
     const message = err instanceof Error ? err.message : 'AI generation failed';

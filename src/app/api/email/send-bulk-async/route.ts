@@ -5,6 +5,13 @@ import { rateLimit } from '@/lib/rate-limit';
 import { allocateRecipientsDeterministic } from '@/lib/experiments/split';
 import { getStrategyPreset, validateSendStrategy } from '@/lib/revops/send-strategy';
 import { buildInfographicEvent, parseInfographicMetadata } from '@/lib/revops/infographic-journey';
+import {
+  generatedContentMissingSendBlocker,
+  invalidJsonSendBlocker,
+  invalidPayloadSendBlocker,
+  noSendableRecipientsSendBlocker,
+  serializeSendBlocker,
+} from '@/lib/email/send-blockers';
 
 function escapeHtml(input: string): string {
   return input
@@ -37,19 +44,22 @@ export async function POST(req: NextRequest) {
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+    const block = invalidJsonSendBlocker();
+    return NextResponse.json(serializeSendBlocker(block), { status: block.status });
   }
 
   const parsed = BulkSendAsyncSchema.safeParse(body);
   if (!parsed.success) {
-    return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
+    const block = invalidPayloadSendBlocker(parsed.error.flatten());
+    return NextResponse.json(serializeSendBlocker(block), { status: block.status });
   }
 
   const payload = parsed.data;
   const strategy = payload.strategy ?? getStrategyPreset('balanced');
   const strategyValidation = validateSendStrategy(strategy);
   if (!strategyValidation.ok) {
-    return NextResponse.json({ error: strategyValidation.errors.join(' ') }, { status: 400 });
+    const block = invalidPayloadSendBlocker(strategyValidation.errors);
+    return NextResponse.json(serializeSendBlocker(block), { status: block.status });
   }
 
   const { prisma } = await import('@/lib/prisma');
@@ -89,10 +99,8 @@ export async function POST(req: NextRequest) {
   const missingGeneratedIds = generatedContentIds.filter((id) => !generatedById.has(id));
 
   if (missingGeneratedIds.length > 0) {
-    return NextResponse.json(
-      { error: `Missing generated content rows: ${missingGeneratedIds.join(', ')}` },
-      { status: 400 },
-    );
+    const block = generatedContentMissingSendBlocker(missingGeneratedIds);
+    return NextResponse.json(serializeSendBlocker(block), { status: block.status });
   }
 
   const recipientRows = payload.items.flatMap((item) => {
@@ -131,7 +139,8 @@ export async function POST(req: NextRequest) {
     });
 
   if (uniqueRecipientRows.length === 0) {
-    return NextResponse.json({ error: 'No recipients to enqueue' }, { status: 400 });
+    const block = noSendableRecipientsSendBlocker();
+    return NextResponse.json(serializeSendBlocker(block), { status: block.status });
   }
 
   let experimentRow: {

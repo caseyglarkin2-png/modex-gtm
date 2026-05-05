@@ -14,6 +14,8 @@ import { buildSendGuardState } from '@/lib/generated-content/send-guard';
 import { CONTENT_QUALITY_SEND_BLOCK_THRESHOLD, type ContentQualityResult } from '@/lib/content-quality';
 import { ContentQaChecklistPanel } from '@/components/generated-content/content-qa-checklist-panel';
 import { getRecipientReadinessFloor } from '@/lib/revops/recipient-readiness';
+import { COLD_OUTBOUND_PROMPT_POLICY_VERSION, DEFAULT_CTA_MODE } from '@/lib/revops/cold-outbound-policy';
+import { recordWorkflowEvent, recordWorkflowMetric } from '@/lib/agent-actions/telemetry';
 
 export interface Recipient {
   id: number;
@@ -35,12 +37,15 @@ export interface Recipient {
 
 export interface OnePageSendDialogProps {
   accountName: string;
-  generatedContentId: number;
+  generatedContentId?: number;
   generatedContent: {
     account_name: string;
     content: string;
     version?: number;
     provider_used?: string;
+    prompt_policy_version?: string;
+    cta_mode?: string;
+    legacy_policy?: boolean;
     quality?: ContentQualityResult;
     campaign_type?: string;
     checklist?: {
@@ -57,6 +62,7 @@ export interface OnePageSendDialogProps {
     processingJobs: number;
   };
   recipients: Recipient[];
+  initialSelectedRecipientIds?: number[];
   onSuccess?: (result: { sent: number; failed: number; total: number; skipped?: Array<{ to: string; reason: string }> }) => void;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
@@ -69,6 +75,7 @@ export function OnePageSendDialog({
   generatedContent,
   queueState,
   recipients: allRecipients,
+  initialSelectedRecipientIds,
   onSuccess,
   open: controlledOpen,
   onOpenChange: onControlledOpenChange,
@@ -76,14 +83,14 @@ export function OnePageSendDialog({
 }: OnePageSendDialogProps) {
   const [internalOpen, setInternalOpen] = useState(false);
   const [selectedRecipients, setSelectedRecipients] = useState<number[]>([]);
-  const defaultSubject = `MODEX 2026 – Yard Protocol Opportunities at ${accountName}`;
+  const defaultSubject = `yard network scorecard for ${accountName}`;
   const [subject, setSubject] = useState(defaultSubject);
   const [previewMode, setPreviewMode] = useState(false);
   const [isSending, setIsSending] = useState(false);
-  const [acknowledgedGuard, setAcknowledgedGuard] = useState(false);
-  const [acknowledgedLowQuality, setAcknowledgedLowQuality] = useState(false);
   const [showHighOnly, setShowHighOnly] = useState(false);
   const [hideStale, setHideStale] = useState(false);
+  const [showAdvisoryDetails, setShowAdvisoryDetails] = useState(false);
+  const [interactionCount, setInteractionCount] = useState(0);
   const [lastSendResult, setLastSendResult] = useState<{
     sent: number;
     failed: number;
@@ -102,11 +109,14 @@ export function OnePageSendDialog({
     pendingJobs: queueState?.pendingJobs ?? 0,
     processingJobs: queueState?.processingJobs ?? 0,
     previewMode,
-    acknowledgedGuard,
+    acknowledgedGuard: true,
   });
   const quality = generatedContent.quality;
   const isLowQuality = (quality?.score ?? 100) < CONTENT_QUALITY_SEND_BLOCK_THRESHOLD;
   const readinessFloor = getRecipientReadinessFloor(generatedContent.campaign_type);
+  const promptPolicyVersion = generatedContent.prompt_policy_version ?? COLD_OUTBOUND_PROMPT_POLICY_VERSION;
+  const ctaMode = generatedContent.cta_mode ?? DEFAULT_CTA_MODE;
+  const legacyPolicy = generatedContent.legacy_policy ?? promptPolicyVersion !== COLD_OUTBOUND_PROMPT_POLICY_VERSION;
   const recommendedRecipientIds = useMemo(() => {
     return [...allRecipients]
       .sort((left, right) => (right.readiness?.score ?? 0) - (left.readiness?.score ?? 0))
@@ -123,15 +133,44 @@ export function OnePageSendDialog({
 
   useEffect(() => {
     if (!isOpen) return;
-    setSelectedRecipients(recommendedRecipientIds);
+    setSelectedRecipients(initialSelectedRecipientIds?.length ? initialSelectedRecipientIds : recommendedRecipientIds);
     setSubject(defaultSubject);
     setPreviewMode(false);
-    setAcknowledgedGuard(false);
-    setAcknowledgedLowQuality(false);
+    setShowAdvisoryDetails(false);
+    setInteractionCount(0);
     setLastSendResult(null);
-  }, [defaultSubject, isOpen, recommendedRecipientIds]);
+    void recordWorkflowEvent({
+      event: 'asset_send_dialog_opened',
+      accountName,
+      status: generatedContent.legacy_policy ? 'legacy' : 'current',
+      message: generatedContent.cta_mode ?? DEFAULT_CTA_MODE,
+    });
+    void recordWorkflowMetric('send_from_account_rate', {
+      accountName,
+      action: 'asset_send',
+      status: generatedContent.legacy_policy ? 'legacy' : 'current',
+      value: 1,
+    });
+    if ((initialSelectedRecipientIds?.length ?? 0) > 0) {
+      void recordWorkflowMetric('agent_recipient_accept_rate', {
+        accountName,
+        action: 'asset_send',
+        value: initialSelectedRecipientIds?.length ?? 0,
+        count: initialSelectedRecipientIds?.length ?? 0,
+      });
+    }
+  }, [
+    accountName,
+    defaultSubject,
+    generatedContent.cta_mode,
+    generatedContent.legacy_policy,
+    initialSelectedRecipientIds,
+    isOpen,
+    recommendedRecipientIds,
+  ]);
 
   const handleSelectRecipient = (recipientId: number, checked: boolean) => {
+    setInteractionCount((current) => current + 1);
     if (checked) {
       setSelectedRecipients([...selectedRecipients, recipientId]);
     } else {
@@ -175,9 +214,42 @@ export function OnePageSendDialog({
 
       const result = await response.json();
       setLastSendResult(result);
+      void recordWorkflowEvent({
+        event: 'asset_send_completed',
+        accountName,
+        status: 'success',
+        message: `${result.sent} sent`,
+      });
+      void recordWorkflowMetric('preview_to_send_rate', {
+        accountName,
+        action: 'asset_send',
+        status: 'success',
+        value: result.sent,
+        count: result.total,
+      });
+      void recordWorkflowMetric('clicks_to_send', {
+        accountName,
+        action: 'asset_send',
+        status: 'success',
+        value: interactionCount,
+      });
+      if (legacyPolicy) {
+        void recordWorkflowMetric('legacy_asset_send_rate', {
+          accountName,
+          action: 'asset_send',
+          status: 'legacy',
+          value: result.sent,
+        });
+      }
       toast.success(`Sent to ${result.sent} recipient(s)`);
       onSuccess?.(result);
     } catch (err) {
+      void recordWorkflowEvent({
+        event: 'asset_send_completed',
+        accountName,
+        status: 'error',
+        message: err instanceof Error ? err.message : 'unknown error',
+      });
       toast.error(`Send error: ${err instanceof Error ? err.message : 'Unknown error'}`);
     } finally {
       setIsSending(false);
@@ -198,12 +270,14 @@ export function OnePageSendDialog({
     <Dialog open={isOpen} onOpenChange={setOpen}>
       {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
 
-      <DialogContent className="max-h-screen max-w-2xl overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle>Send Generated Content</DialogTitle>
+      <DialogContent className="max-h-[90vh] max-w-2xl overflow-hidden p-0">
+        <div className="flex h-full max-h-[90vh] flex-col">
+        <DialogHeader className="shrink-0 border-b px-6 py-4">
+          <DialogTitle>Send Asset</DialogTitle>
           <DialogDescription>Preview and send this content to selected recipients at {accountName}</DialogDescription>
         </DialogHeader>
 
+        <div className="flex-1 overflow-y-auto px-6 py-5">
         <div className="space-y-6">
           {/* Preview Section */}
           <Card>
@@ -222,15 +296,17 @@ export function OnePageSendDialog({
                 <div className="rounded-md border p-2">Quality Score: {quality?.score ?? 'n/a'}</div>
                 <div className="rounded-md border p-2">Threshold: {CONTENT_QUALITY_SEND_BLOCK_THRESHOLD}</div>
                 <div className="rounded-md border p-2">Readiness floor: {readinessFloor}</div>
-                <div className="rounded-md border p-2">Checklist: {generatedContent.checklist?.requiredComplete ?? 0}/{generatedContent.checklist?.requiredTotal ?? 0}</div>
+                <div className="rounded-md border p-2">CTA mode: {ctaMode.replaceAll('_', ' ')}</div>
               </div>
-              <ContentQaChecklistPanel
-                generatedContentId={generatedContentId}
-                campaignType={generatedContent.campaign_type}
-                accountName={accountName}
-                content={generatedContent.content}
-                initialCompleted={generatedContent.checklist_completed_item_ids}
-              />
+              <div className="flex flex-wrap items-center gap-2 text-xs">
+                <Badge variant="outline">Policy {promptPolicyVersion}</Badge>
+                {legacyPolicy ? <Badge variant="secondary">Legacy CTA policy</Badge> : <Badge variant="default">Cold-safe CTA policy</Badge>}
+                {generatedContent.checklist ? (
+                  <Badge variant="outline">
+                    Advisory checklist {generatedContent.checklist.requiredComplete}/{generatedContent.checklist.requiredTotal}
+                  </Badge>
+                ) : null}
+              </div>
             </CardContent>
             {previewMode && (
               <CardContent>
@@ -250,15 +326,6 @@ export function OnePageSendDialog({
                 {sendGuardState.warningMessage}
                 {' '}This is a warning only.
               </p>
-              <label className="mt-2 flex items-center gap-2 text-xs text-amber-800">
-                <input
-                  type="checkbox"
-                  checked={acknowledgedGuard}
-                  onChange={(event) => setAcknowledgedGuard(event.target.checked)}
-                  className="h-4 w-4 rounded border-amber-300 text-primary focus:ring-primary"
-                />
-                I reviewed this version and want to send it anyway.
-              </label>
             </div>
           )}
 
@@ -267,15 +334,6 @@ export function OnePageSendDialog({
               <p className="text-sm text-red-800">
                 Quality score is below the advisory threshold ({quality?.score ?? 'n/a'} / {CONTENT_QUALITY_SEND_BLOCK_THRESHOLD}).
               </p>
-              <label className="mt-2 flex items-center gap-2 text-xs text-red-800">
-                <input
-                  type="checkbox"
-                  checked={acknowledgedLowQuality}
-                  onChange={(event) => setAcknowledgedLowQuality(event.target.checked)}
-                  className="h-4 w-4 rounded border-red-300 text-primary focus:ring-primary"
-                />
-                I acknowledge the warning.
-              </label>
             </div>
           )}
 
@@ -308,6 +366,7 @@ export function OnePageSendDialog({
                       id="select-all"
                       checked={allSelected}
                       onChange={(event) => {
+                        setInteractionCount((current) => current + 1);
                         if (!event.target.checked) {
                           setSelectedRecipients([]);
                           return;
@@ -327,7 +386,10 @@ export function OnePageSendDialog({
                       variant="outline"
                       size="sm"
                       className="h-7 px-2"
-                      onClick={() => setSelectedRecipients(recommendedRecipientIds)}
+                      onClick={() => {
+                        setInteractionCount((current) => current + 1);
+                        setSelectedRecipients(recommendedRecipientIds);
+                      }}
                     >
                       Select All ({recommendedRecipientIds.length})
                     </Button>
@@ -336,7 +398,10 @@ export function OnePageSendDialog({
                       variant="outline"
                       size="sm"
                       className="h-7 px-2"
-                      onClick={() => setSelectedRecipients([])}
+                      onClick={() => {
+                        setInteractionCount((current) => current + 1);
+                        setSelectedRecipients([]);
+                      }}
                     >
                       Clear Selection
                     </Button>
@@ -347,11 +412,17 @@ export function OnePageSendDialog({
 
                   <div className="flex flex-wrap items-center gap-4 border-b pb-3 text-xs">
                     <label className="flex items-center gap-2">
-                      <input type="checkbox" checked={showHighOnly} onChange={(event) => setShowHighOnly(event.target.checked)} />
+                      <input type="checkbox" checked={showHighOnly} onChange={(event) => {
+                        setInteractionCount((current) => current + 1);
+                        setShowHighOnly(event.target.checked);
+                      }} />
                       Show high confidence only
                     </label>
                     <label className="flex items-center gap-2">
-                      <input type="checkbox" checked={hideStale} onChange={(event) => setHideStale(event.target.checked)} />
+                      <input type="checkbox" checked={hideStale} onChange={(event) => {
+                        setInteractionCount((current) => current + 1);
+                        setHideStale(event.target.checked);
+                      }} />
                       Hide stale
                     </label>
                   </div>
@@ -395,6 +466,7 @@ export function OnePageSendDialog({
                             size="sm"
                             className="h-6 px-2 text-[10px]"
                             onClick={() => {
+                              setInteractionCount((current) => current + 1);
                               setSelectedRecipients((prev) => prev.filter((id) => id !== recipient.id));
                               toast('Recipient deferred');
                             }}
@@ -434,11 +506,31 @@ export function OnePageSendDialog({
             <p className="mt-1 text-muted-foreground">
               Recipients selected: {selectedCount} · Selected below advisory readiness floor: {selectedBelowFloorCount} · Selected with canonical warnings: {selectedCanonicalBlockedCount} · Selected stale: {selectedStaleCount}
             </p>
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="mt-2 h-7 px-2 text-xs"
+              onClick={() => setShowAdvisoryDetails((current) => !current)}
+            >
+              {showAdvisoryDetails ? 'Hide advisory detail' : 'View advisory detail'}
+            </Button>
             {sendDisabledReason ? (
               <p className="mt-1 text-amber-700">{sendDisabledReason}</p>
             ) : (
               <p className="mt-1 text-emerald-700">Warnings are advisory only. Send is user-controlled.</p>
             )}
+            {showAdvisoryDetails && generatedContentId ? (
+              <div className="mt-3">
+                <ContentQaChecklistPanel
+                  generatedContentId={generatedContentId}
+                  campaignType={generatedContent.campaign_type}
+                  accountName={accountName}
+                  content={generatedContent.content}
+                  initialCompleted={generatedContent.checklist_completed_item_ids}
+                />
+              </div>
+            ) : null}
           </div>
           <div className="flex gap-2">
             <Button variant="outline" onClick={() => setOpen(false)} disabled={isSending}>
@@ -475,6 +567,8 @@ export function OnePageSendDialog({
               )}
             </div>
           )}
+        </div>
+        </div>
         </div>
       </DialogContent>
     </Dialog>

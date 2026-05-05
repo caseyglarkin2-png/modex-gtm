@@ -12,12 +12,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { OnePageSendDialog, type Recipient } from '@/components/email/one-pager-send-dialog';
+import { AssetSendDialog, type AssetSendRecipient } from '@/components/email/asset-send-dialog';
 import { GeneratedContentPreviewDialog } from '@/components/generated-content/generated-content-preview-dialog';
 import { ContentDiffDialog } from '@/components/generated-content/content-diff-dialog';
 import { toast } from 'sonner';
 import { MoreHorizontal, Send, Upload } from 'lucide-react';
 import type { ContentQualityResult } from '@/lib/content-quality';
+import { COLD_OUTBOUND_PROMPT_POLICY_VERSION, DEFAULT_CTA_MODE } from '@/lib/revops/cold-outbound-policy';
 
 export interface QueueGeneratedVersion {
   id: number;
@@ -60,7 +61,7 @@ export interface QueueGeneratedAccountCard {
 
 interface GeneratedContentGridProps {
   cards: QueueGeneratedAccountCard[];
-  recipientsByAccount: Record<string, Recipient[]>;
+  recipientsByAccount: Record<string, AssetSendRecipient[]>;
 }
 
 function qualityBadgeTone(score: number) {
@@ -211,8 +212,8 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
                     Campaigns: {card.campaign_names.length > 0 ? card.campaign_names.join(', ') : 'None'}
                   </div>
                   <div className="col-span-2 rounded-md border p-2">
-                    Checklist: {selected.checklist?.requiredComplete ?? 0}/{selected.checklist?.requiredTotal ?? 0} required
-                    {selected.checklist?.complete ? ' complete' : ' incomplete'}
+                    QA Advisory: {selected.checklist?.requiredComplete ?? 0}/{selected.checklist?.requiredTotal ?? 0} required
+                    {selected.checklist?.complete ? ' clear' : ' present'}
                   </div>
                 </div>
 
@@ -261,8 +262,12 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
                   content={selected.content}
                   providerUsed={selected.provider_used}
                   generatedContentId={selected.id}
+                  contentType="one_pager"
                   campaignType={selected.campaign_type}
                   checklistCompletedItemIds={selected.checklist_completed_item_ids}
+                  recipients={recipients}
+                  promptPolicyVersion={COLD_OUTBOUND_PROMPT_POLICY_VERSION}
+                  ctaMode={DEFAULT_CTA_MODE}
                   open={previewOpenForId === selected.id}
                   onOpenChange={(open) => setPreviewOpenForId(open ? selected.id : null)}
                   trigger={null}
@@ -280,7 +285,7 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
                   />
                 ) : null}
 
-                <OnePageSendDialog
+                <AssetSendDialog
                   accountName={card.account_name}
                   generatedContentId={selected.id}
                     generatedContent={{
@@ -292,6 +297,8 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
                       campaign_type: selected.campaign_type,
                       checklist: selected.checklist,
                       checklist_completed_item_ids: selected.checklist_completed_item_ids,
+                      prompt_policy_version: COLD_OUTBOUND_PROMPT_POLICY_VERSION,
+                      cta_mode: DEFAULT_CTA_MODE,
                     }}
                   queueState={{
                     latestVersion: card.latest_version,

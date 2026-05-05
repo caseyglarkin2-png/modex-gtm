@@ -314,7 +314,7 @@ export function MicrositeShell({
         >
           <div>
             <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>Next Step</div>
-            <div className="text-sm font-medium text-white">Book the working session</div>
+            <div className="text-sm font-medium text-white">{primaryCta.label}</div>
           </div>
           <ShellCta
             href={primaryCta.href}

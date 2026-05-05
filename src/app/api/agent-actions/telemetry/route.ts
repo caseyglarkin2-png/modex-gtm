@@ -10,6 +10,10 @@ const TelemetrySchema = z.object({
   status: z.string().min(1).optional(),
   email: z.string().email().optional(),
   message: z.string().min(1).optional(),
+  metric: z.string().min(1).optional(),
+  value: z.number().finite().optional(),
+  count: z.number().int().optional(),
+  details: z.record(z.string(), z.unknown()).optional(),
 });
 
 export async function POST(request: NextRequest) {
@@ -27,7 +31,7 @@ export async function POST(request: NextRequest) {
         account_name: payload.accountName,
         activity_type: 'Agent Workflow',
         owner: 'Codex',
-        outcome: `${payload.action ?? 'agent'}:${payload.event}`.slice(0, 240),
+        outcome: `${payload.metric ?? payload.action ?? 'agent'}:${payload.event}`.slice(0, 240),
         notes: JSON.stringify(payload),
         activity_date: new Date(),
       },

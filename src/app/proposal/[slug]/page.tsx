@@ -9,8 +9,7 @@ import { ProposalBrief } from '@/components/microsites/proposal-brief';
 import { buildPublicShareMetadata } from '@/lib/microsites/share';
 import { resolveMicrositeProposalBrief } from '@/lib/microsites/proposal';
 import { sanitizeOnePagerData } from '@/lib/one-pager/content-safety';
-
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
+import { buildShortOverviewCta } from '@/lib/microsites/cta';
 
 function slugToName(slug: string): string {
   return slug
@@ -106,6 +105,7 @@ export default async function ProposalPage({ params }: { params: Promise<{ slug:
 
   const data = await getOnePagerData(account.name);
   const sanitizedData = data ? sanitizeOnePagerData(data) : null;
+  const shortOverviewCta = buildShortOverviewCta(account.name);
 
   // Log the page visit as an Activity
   try {
@@ -135,12 +135,12 @@ export default async function ProposalPage({ params }: { params: Promise<{ slug:
             </h1>
           </div>
           <a
-            href={BOOKING_LINK}
+            href={shortOverviewCta.calendarLink}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-semibold text-sm px-4 py-2 rounded-lg transition-colors"
           >
-            Book a Network Audit
+            {shortOverviewCta.buttonLabel}
           </a>
         </div>
       </header>
@@ -264,15 +264,15 @@ export default async function ProposalPage({ params }: { params: Promise<{ slug:
 
             {/* CTA */}
             <div className="mt-10 text-center space-y-4">
-              <h3 className="text-xl font-bold">Ready to see what YardFlow can do for {account.name}?</h3>
-              <p className="text-slate-400 text-sm">Book a 30-minute Network Audit. We map your facilities and deliver a board-ready ROI deck.</p>
+              <h3 className="text-xl font-bold">Want the short overview for {account.name}?</h3>
+              <p className="text-slate-400 text-sm">Reply and we will send the one-page version focused on yard flow, throughput, and execution variance.</p>
               <a
-                href={BOOKING_LINK}
+                href={shortOverviewCta.calendarLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-bold text-sm px-8 py-3 rounded-lg transition-colors"
               >
-                Book a Network Audit
+                {shortOverviewCta.buttonLabel}
               </a>
             </div>
           </>
@@ -281,12 +281,12 @@ export default async function ProposalPage({ params }: { params: Promise<{ slug:
             <h2 className="text-xl font-bold text-slate-300">Proposal for {account.name}</h2>
             <p className="text-slate-400 mt-3">This proposal is being prepared. Check back soon.</p>
             <a
-              href={BOOKING_LINK}
+              href={shortOverviewCta.calendarLink}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block mt-6 bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-bold text-sm px-8 py-3 rounded-lg transition-colors"
             >
-              Book a Network Audit Now
+              {shortOverviewCta.buttonLabel}
             </a>
           </div>
         )}

@@ -252,9 +252,9 @@ export class SalesAgentClient {
         recipient_name: target.personaName ?? target.email ?? 'Operator',
         recipient_company: target.company ?? target.accountName ?? 'Unknown Account',
         recipient_role: target.personaTitle ?? null,
-        purpose: process.env.SALES_AGENT_DEFAULT_PURPOSE ?? 'Book a meeting with a crisp, operator-grade outreach note.',
+        purpose: process.env.SALES_AGENT_DEFAULT_PURPOSE ?? 'Earn a reply with a crisp, operator-grade outreach note and offer the short scorecard if useful.',
         thread_context: process.env.SALES_AGENT_DEFAULT_THREAD_CONTEXT ?? null,
-        voice_style: process.env.SALES_AGENT_DEFAULT_VOICE_STYLE ?? 'concise, confident, practical',
+        voice_style: process.env.SALES_AGENT_DEFAULT_VOICE_STYLE ?? 'concise, confident, practical, operator-led, use we not I, no meeting ask on first touch',
       }),
     });
   }
@@ -275,8 +275,8 @@ export class SalesAgentClient {
           email: target.email ?? '',
         },
         custom_instructions: process.env.SALES_AGENT_DEFAULT_CAMPAIGN
-          ? `Campaign context: ${process.env.SALES_AGENT_DEFAULT_CAMPAIGN}`
-          : undefined,
+          ? `Campaign context: ${process.env.SALES_AGENT_DEFAULT_CAMPAIGN}. Default to low-friction scorecard/reply CTAs. Do not ask for meetings or dates on first touch.`
+          : 'Default to low-friction scorecard/reply CTAs. Do not ask for meetings or dates on first touch.',
       }),
     });
   }

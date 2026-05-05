@@ -8,7 +8,7 @@ export type GeneratedContentWorkspaceFilters = {
   stageIntent: string;
   status: string;
   sent: string;
-  checklist: string;
+  advisory: string;
   query: string;
 };
 
@@ -33,9 +33,9 @@ export function filterGeneratedContentCards(
     const sentMatch = filters.sent === 'all'
       || (filters.sent === 'sent' && latest.external_send_count > 0)
       || (filters.sent === 'unsent' && latest.external_send_count === 0);
-    const checklistMatch = filters.checklist === 'all'
-      || (filters.checklist === 'complete' && Boolean(latest.checklist?.complete))
-      || (filters.checklist === 'incomplete' && !latest.checklist?.complete);
+    const advisoryMatch = filters.advisory === 'all'
+      || (filters.advisory === 'clear' && Boolean(latest.checklist?.complete))
+      || (filters.advisory === 'present' && !latest.checklist?.complete);
     const textMatch = !loweredQuery
       || card.account_name.toLowerCase().includes(loweredQuery)
       || card.campaign_names.some((name) => name.toLowerCase().includes(loweredQuery));
@@ -47,7 +47,7 @@ export function filterGeneratedContentCards(
       && stageIntentMatch
       && statusMatch
       && sentMatch
-      && checklistMatch
+      && advisoryMatch
       && textMatch;
   });
 }
