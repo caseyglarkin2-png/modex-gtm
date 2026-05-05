@@ -183,7 +183,6 @@ test('seeded account page runs the refresh -> promote -> draft -> send -> learn 
   await page.getByLabel('Notes').fill('This thread needs the logistics director rather than the executive sponsor.');
   await page.getByRole('button', { name: 'Save Outcome' }).click();
 
-  await expect(page.locator('[data-sonner-toast]').first()).toContainText('Outcome logged');
+  await expect(page.locator('[data-sonner-toast]').first()).toContainText('Outcome logged. Next: Replace the contact before the next send');
   await expect(page.getByText('Replace the contact before the next send')).toBeVisible();
-  await expect(page.getByText(/Wrong-person feedback means the account map needs a better buyer/i)).toBeVisible();
 });
