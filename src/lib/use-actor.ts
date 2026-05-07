@@ -1,8 +1,9 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
+import { useContext } from 'react';
+import { SessionContext } from 'next-auth/react';
 
 export function useActor(): string {
-  const { data } = useSession();
-  return data?.user?.name ?? 'Unknown';
+  const ctx = useContext(SessionContext);
+  return ctx?.data?.user?.name ?? 'Unknown';
 }
