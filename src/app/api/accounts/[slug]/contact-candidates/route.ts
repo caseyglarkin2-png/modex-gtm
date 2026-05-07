@@ -10,6 +10,8 @@ export const dynamic = 'force-dynamic';
 
 const DiscoverSchema = z.object({
   refresh: z.boolean().optional().default(true),
+  /** Optional buyer-committee lane filter (e.g. "Financial", "operator"). When set, the discovery prompt is scoped to find candidates filling this gap. */
+  lane: z.string().trim().min(1).max(64).optional(),
 });
 
 async function resolveAccountNameFromSlug(slug: string) {
@@ -62,6 +64,7 @@ export async function POST(
       accountName,
       accountNames: scope.accountNames,
       company: accountName,
+      ...(parsed.data.lane ? { lane: parsed.data.lane } : {}),
     },
   });
 
