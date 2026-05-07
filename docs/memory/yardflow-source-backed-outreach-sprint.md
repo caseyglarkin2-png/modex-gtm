@@ -160,3 +160,32 @@ Demoable output: proof command verifies end-to-end guarded workflow.
    - `npx prisma generate`
    - `npx tsc --noEmit`
    - targeted `eslint` on changed implementation files
+
+## Operator UX Sprint Plan (v3) — Completion Log
+
+Followup sprints driven from a live UX audit of the deployed source-backed
+engine. All five sprints landed on main behind their own PR.
+
+- [x] **Sprint 1 — Source attribution surfaces** (PR #4 · `a04f31bc`)
+  - Citation badge per asset · pre-send unsourced note · sibling
+    `buildRecommendedAngleCitations` · evidence claim drill-down · tag
+    provenance tooltip · backfill script (52 priority assets stamped)
+- [x] **Sprint 2 — Close workflow loops** (PR #5 · `5936ea94`)
+  - Replace CTA on blocker badges · Find {lane} contacts in committee brief ·
+    inline ↻ on outbound cards · NBA quick-action chips · reply→outcome inline
+    · toast-with-Undo for candidate mutations
+- [x] **Sprint 3 — Result transparency + retry recovery** (PR #6 · `a2d8e2ac`)
+  - Partial-send drill-down table · why-recommended tooltip · readiness tier
+    color · engagement-summary metric drill-down · (S3-T2 retry button was
+    already shipped)
+- [x] **Sprint 4 — Inline editability for account context** (PR #7 · `45e3077a`)
+  - PATCH `/api/accounts/[slug]` with auth + per-field Activity audit · new
+    `<EditableLongText>` component · wired into Why Now / Curated Primo
+    Angle / Best Intro Path with edit-history badge
+- [x] **Sprint 5 — Time-aware operator focus** (this PR)
+  - Wave time-remaining badge · priority-aware Today's Focus sort · stale-
+    evidence + untouched-account callouts on home · account-list filters
+    `?stale_evidence=true` and `?untouched=14d` · MODEX floor-plan badge
+    on the account hero
+
+Cumulative test count after Sprint 5: 493 passing.

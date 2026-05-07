@@ -15,15 +15,20 @@ import { AutoRefresh } from '@/components/auto-refresh';
 import { Building2, Users, Waves as WavesIcon, CalendarCheck, Smartphone, Activity, ArrowRight, TrendingUp, BarChart3, Mail, MessageSquare, AlertTriangle, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { AccountOutcomeLogger } from '@/components/accounts/account-outcome-logger';
+import { loadEvidenceSummaryByAccountScope } from '@/lib/source-backed/evidence';
+import { buildWaveTimeRemaining } from '@/lib/wave-time-remaining';
 
 export const dynamic = 'force-dynamic';
 
-const WAVE_META: Record<number, { label: string; color: string; start: string }> = {
-  0: { label: 'Wave 0 — Warm Intros', color: 'bg-red-500', start: '3/24' },
-  1: { label: 'Wave 1 — Must-Book', color: 'bg-blue-500', start: '3/27' },
-  2: { label: 'Wave 2 — High-Value', color: 'bg-violet-500', start: '3/30' },
-  3: { label: 'Wave 3 — Ecosystem', color: 'bg-emerald-500', start: '4/2' },
+// Wave windows are anchored to MODEX (April 13–16). End dates fall just before the
+// next wave starts so the time-remaining badge can render an honest urgency signal.
+const WAVE_META: Record<number, { label: string; color: string; start: string; end: string }> = {
+  0: { label: 'Wave 0 — Warm Intros', color: 'bg-red-500', start: '3/24', end: '3/30' },
+  1: { label: 'Wave 1 — Must-Book', color: 'bg-blue-500', start: '3/27', end: '4/2' },
+  2: { label: 'Wave 2 — High-Value', color: 'bg-violet-500', start: '3/30', end: '4/9' },
+  3: { label: 'Wave 3 — Ecosystem', color: 'bg-emerald-500', start: '4/2', end: '4/16' },
 };
+
 
 function isThisWeek(dateStr: string): boolean {
   const now = new Date();
@@ -95,6 +100,43 @@ export default async function DashboardPage() {
       take: 50,
     }),
   ]);
+
+  // S5-T3 + S5-T4: time-aware callouts for the home page. Both rely on
+  // priority A/B accounts as the relevance scope; both run as a single batched
+  // query so the home page doesn't get N+1 pressure as the account list grows.
+  const priorityAccountNames = dbAccounts
+    .filter((a) => a.priority_band === 'A' || a.priority_band === 'B')
+    .map((a) => a.name);
+  const fourteenDaysAgo = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000);
+  const [priorityEvidence, recentOutboundForPriority] = await Promise.all([
+    priorityAccountNames.length > 0
+      ? loadEvidenceSummaryByAccountScope(priorityAccountNames)
+      : Promise.resolve(null),
+    priorityAccountNames.length > 0
+      ? prisma.emailLog.findMany({
+          where: {
+            account_name: { in: priorityAccountNames },
+            sent_at: { gte: fourteenDaysAgo },
+          },
+          distinct: ['account_name'],
+          select: { account_name: true },
+        })
+      : Promise.resolve([] as Array<{ account_name: string | null }>),
+  ]);
+  const accountsWithRecentOutbound = new Set(
+    recentOutboundForPriority.map((row) => row.account_name).filter(Boolean) as string[],
+  );
+  // Priority accounts with no fresh evidence: either no evidence summary at all,
+  // or all freshness counts are zero/stale. The summary is account-scope-wide,
+  // so we approximate by checking the freshness counters; if no fresh records
+  // exist across the entire scope, we know every priority account is at risk.
+  const stalePriorityCount = priorityEvidence == null || priorityEvidence.freshness.fresh === 0
+    ? priorityAccountNames.length
+    : 0;
+  const untouchedPriorityCount = priorityAccountNames.filter(
+    (name) => !accountsWithRecentOutbound.has(name),
+  ).length;
+
   const waves = getOutreachWaves();
   const briefs = getMeetingBriefs();
   const stuckJobs = computeStuckJobs({
@@ -159,7 +201,18 @@ export default async function DashboardPage() {
   const overdueFocusCount = cockpit.today.overdue;
   const dueTodayCount = cockpit.today.dueToday;
   const dueThisWeekCount = cockpit.today.dueThisWeek;
-  const focusItems = cockpit.today.focusItems;
+  // S5-T2: priority-aware sort. Composite key (urgency, priority_band, due asc).
+  const bandByAccount = new Map(accounts.map((a) => [a.name, a.priority_band || 'D'] as const));
+  const urgencyOrder = { overdue: 0, today: 1, upcoming: 2 } as const;
+  const bandOrder: Record<string, number> = { A: 0, B: 1, C: 2, D: 3 };
+  const focusItems = [...cockpit.today.focusItems].sort((left, right) => {
+    const urgencyDelta = urgencyOrder[left.urgency] - urgencyOrder[right.urgency];
+    if (urgencyDelta !== 0) return urgencyDelta;
+    const leftBand = bandOrder[bandByAccount.get(left.account) ?? 'D'] ?? 3;
+    const rightBand = bandOrder[bandByAccount.get(right.account) ?? 'D'] ?? 3;
+    if (leftBand !== rightBand) return leftBand - rightBand;
+    return left.due.getTime() - right.due.getTime();
+  });
 
   // Weekly counters
   const meetingsThisWeek = meetings.filter((m) => isThisWeek(m.date)).length;
@@ -546,6 +599,38 @@ export default async function DashboardPage() {
             </div>
           </CardHeader>
           <CardContent>
+            {/* S5-T3 + S5-T4: time-aware callouts surface priority accounts that need
+                attention right now — stale source-backed evidence and untouched accounts. */}
+            {(stalePriorityCount > 0 || untouchedPriorityCount > 0) ? (
+              <div className="mb-3 grid gap-2 sm:grid-cols-2">
+                {stalePriorityCount > 0 ? (
+                  <Link
+                    href="/accounts?stale_evidence=true"
+                    className="rounded-md border border-amber-200 bg-amber-50 p-3 transition-colors hover:bg-amber-100"
+                    data-testid="stale-evidence-callout"
+                  >
+                    <p className="text-[10px] uppercase tracking-wide text-amber-900">Stale intel</p>
+                    <p className="mt-1 text-sm font-medium text-amber-900">
+                      {stalePriorityCount} priority account{stalePriorityCount === 1 ? '' : 's'} need fresh intel
+                    </p>
+                    <p className="mt-1 text-[10px] text-amber-800">Click to filter →</p>
+                  </Link>
+                ) : null}
+                {untouchedPriorityCount > 0 ? (
+                  <Link
+                    href="/accounts?untouched=14d"
+                    className="rounded-md border border-red-200 bg-red-50 p-3 transition-colors hover:bg-red-100"
+                    data-testid="untouched-accounts-callout"
+                  >
+                    <p className="text-[10px] uppercase tracking-wide text-red-900">No outbound 14d</p>
+                    <p className="mt-1 text-sm font-medium text-red-900">
+                      {untouchedPriorityCount} priority account{untouchedPriorityCount === 1 ? '' : 's'} you haven&apos;t touched
+                    </p>
+                    <p className="mt-1 text-[10px] text-red-800">Click to filter →</p>
+                  </Link>
+                ) : null}
+              </div>
+            ) : null}
             {focusItems.length === 0 ? (
               <p className="py-4 text-sm text-[var(--muted-foreground)]">No urgent follow-ups are queued right now.</p>
             ) : (
@@ -642,11 +727,26 @@ export default async function DashboardPage() {
             {waveGroups.map((wg) => {
               const meta = WAVE_META[wg.order];
               const pct = wg.total ? Math.round((wg.contactedCount / wg.total) * 100) : 0;
+              const remaining = buildWaveTimeRemaining(meta.end);
               return (
                 <div key={wg.order} className="rounded-lg border border-[var(--border)] p-4">
-                  <p className="text-sm font-medium">{meta.label}</p>
+                  <div className="flex items-start justify-between gap-2">
+                    <p className="text-sm font-medium">{meta.label}</p>
+                    <Badge
+                      className={
+                        remaining.tone === 'green'
+                          ? 'bg-emerald-100 text-emerald-900 hover:bg-emerald-100'
+                          : remaining.tone === 'amber'
+                            ? 'bg-amber-100 text-amber-900 hover:bg-amber-100'
+                            : 'bg-red-100 text-red-900 hover:bg-red-100'
+                      }
+                      data-testid={`wave-time-remaining-${wg.order}`}
+                    >
+                      {remaining.label}
+                    </Badge>
+                  </div>
                   <p className="mt-1 text-2xl font-bold">{wg.total}</p>
-                  <p className="text-xs text-[var(--muted-foreground)]">Start: {meta.start}</p>
+                  <p className="text-xs text-[var(--muted-foreground)]">{meta.start} → {meta.end}</p>
                   <div className="mt-2 h-2 overflow-hidden rounded-full bg-[var(--muted)]">
                     <div className={`h-full rounded-full ${meta.color} transition-all`} style={{ width: `${pct}%` }} />
                   </div>

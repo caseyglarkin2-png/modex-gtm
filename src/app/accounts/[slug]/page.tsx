@@ -59,6 +59,7 @@ import { AccountOutreachShell } from '@/components/accounts/account-outreach-she
 import { OutboundCardRefreshButton } from '@/components/accounts/outbound-card-refresh-button';
 import { EditableLongText } from '@/components/editable-long-text';
 import { SOURCE_APPROVAL_GATE_ENABLED } from '@/lib/feature-flags';
+import { getModexFloorEntry } from '@/lib/data/modex-floor-plan';
 import { AgentActionDialog } from '@/components/agent-actions/agent-action-dialog';
 import { AgentIntelStrip } from '@/components/agent-actions/agent-intel-strip';
 import { SendJobTracker } from '@/components/generated-content/send-job-tracker';
@@ -357,6 +358,19 @@ export default async function AccountDetailPage({
               <div className="flex items-center gap-3">
                 <h1 className="text-2xl font-bold tracking-tight">{account.name}</h1>
                 <BandBadge band={account.priority_band} />
+                {(() => {
+                  const floor = getModexFloorEntry(account.name);
+                  if (!floor) return null;
+                  return (
+                    <Badge
+                      variant={floor.tier === 'tier_1' ? 'default' : 'secondary'}
+                      title={floor.context ?? 'On the MODEX floor plan'}
+                      data-testid="modex-floor-badge"
+                    >
+                      MODEX {floor.tier === 'tier_1' ? 'Tier 1' : 'Tier 2'}
+                    </Badge>
+                  );
+                })()}
               </div>
               <p className="mt-1 text-sm text-[var(--muted-foreground)]">
                 {account.parent_brand} &middot; {account.vertical} &middot; {account.signal_type}
