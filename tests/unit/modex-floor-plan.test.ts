@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getModexFloorEntry, MODEX_FLOOR_PLAN } from '@/lib/data/modex-floor-plan';
+import { getModexFloorEntry, isModexPast, MODEX_FLOOR_PLAN } from '@/lib/data/modex-floor-plan';
 
 describe('MODEX floor plan lookup (S5-T6)', () => {
   it('returns a Tier 1 entry for a Tier 1 account, case-insensitively', () => {
@@ -30,5 +30,24 @@ describe('MODEX floor plan lookup (S5-T6)', () => {
     for (const entry of MODEX_FLOOR_PLAN) {
       expect(entry.context).toBeTruthy();
     }
+  });
+});
+
+describe('isModexPast (post-event detection)', () => {
+  it('returns false during the show', () => {
+    expect(isModexPast(new Date('2026-04-14T12:00:00Z'))).toBe(false);
+  });
+
+  it('returns false on the final day until midnight UTC closes', () => {
+    expect(isModexPast(new Date('2026-04-16T20:00:00Z'))).toBe(false);
+  });
+
+  it('returns true once the show has clearly ended', () => {
+    expect(isModexPast(new Date('2026-04-17T12:00:00Z'))).toBe(true);
+    expect(isModexPast(new Date('2026-05-07T12:00:00Z'))).toBe(true);
+  });
+
+  it('returns false in the months leading up to the show', () => {
+    expect(isModexPast(new Date('2026-03-15T12:00:00Z'))).toBe(false);
   });
 });

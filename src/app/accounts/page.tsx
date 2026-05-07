@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, Target, X } from 'lucide-react';
 import { AccountsTable, type AccountRow } from './accounts-table';
-import { loadEvidenceSummaryByAccountScope } from '@/lib/source-backed/evidence';
+import { getAccountsWithoutFreshEvidence } from '@/lib/source-backed/evidence';
 
 function slugify(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
@@ -36,15 +36,10 @@ export default async function AccountsPage({
   // single batched query — no N+1 — so adding more filters later stays cheap.
   let allowedAccountNames: Set<string> | null = null;
   if (filterStaleEvidence) {
-    const priorityAccounts = rawAccounts.filter((a) => a.priority_band === 'A' || a.priority_band === 'B');
-    const summary = priorityAccounts.length > 0
-      ? await loadEvidenceSummaryByAccountScope(priorityAccounts.map((a) => a.name))
-      : null;
-    if (!summary || summary.freshness.fresh === 0) {
-      allowedAccountNames = new Set(priorityAccounts.map((a) => a.name));
-    } else {
-      allowedAccountNames = new Set();
-    }
+    const priorityAccountNames = rawAccounts
+      .filter((a) => a.priority_band === 'A' || a.priority_band === 'B')
+      .map((a) => a.name);
+    allowedAccountNames = await getAccountsWithoutFreshEvidence(priorityAccountNames);
   }
   if (filterUntouchedDays != null) {
     const cutoff = new Date(Date.now() - filterUntouchedDays * 24 * 60 * 60 * 1000);
