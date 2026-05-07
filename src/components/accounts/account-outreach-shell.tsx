@@ -18,6 +18,7 @@ import { toast } from 'sonner';
 import { FileText, Mail, RefreshCw, Send, Sparkles } from 'lucide-react';
 import { canDirectSendAsset } from '@/lib/generated-content/asset-send-contract';
 import { parseAssetProvenanceSummary, resolveAccountAssetSelection } from '@/lib/generated-content/asset-selection';
+import { readSourceBackedContractFromMetadata } from '@/lib/source-backed/attribution';
 import type { ContentQualityResult } from '@/lib/content-quality';
 import type { AssetSendRecipient } from '@/components/email/asset-send-dialog';
 import { buildAccountComposePayload } from '@/lib/email/compose-contract';
@@ -501,6 +502,29 @@ export function AccountOutreachShell({
                       {assetSelection.recommendedAsset ? <Badge>Recommended</Badge> : null}
                       {selectedAssetProvenance?.usedLiveIntel ? <Badge variant="outline">Live intel</Badge> : null}
                       {selectedAssetProvenance?.freshnessLabel ? <Badge variant="secondary">{selectedAssetProvenance.freshnessLabel}</Badge> : null}
+                      {(() => {
+                        const parsed = readSourceBackedContractFromMetadata(selectedAsset?.version_metadata);
+                        if (!parsed.contract) {
+                          return (
+                            <Badge
+                              variant="outline"
+                              title="No source-backed citation contract on this asset. Drafts ship with attached evidence when generated through the source-backed pipeline."
+                            >
+                              unsourced
+                            </Badge>
+                          );
+                        }
+                        const { citation_count, citation_threshold } = parsed.contract;
+                        const met = citation_count >= citation_threshold;
+                        return (
+                          <Badge
+                            variant={met ? 'secondary' : 'outline'}
+                            title={`Cites ${citation_count} of ${citation_threshold} required source(s).`}
+                          >
+                            {met ? '✓ ' : ''}{citation_count}/{citation_threshold} sources cited
+                          </Badge>
+                        );
+                      })()}
                     </div>
                     <select
                       id="asset-version"
@@ -508,11 +532,17 @@ export function AccountOutreachShell({
                       onChange={(event) => setSelectedAssetId(Number(event.target.value))}
                       className="h-10 w-full rounded-md border border-[var(--border)] bg-background px-3 text-sm"
                     >
-                      {sendableAssets.map((asset) => (
-                        <option key={asset.id} value={asset.id}>
-                          v{asset.version} · {asset.content_type.replaceAll('_', ' ')}
-                        </option>
-                      ))}
+                      {sendableAssets.map((asset) => {
+                        const parsed = readSourceBackedContractFromMetadata(asset.version_metadata);
+                        const citationLabel = parsed.contract
+                          ? ` · ${parsed.contract.citation_count}/${parsed.contract.citation_threshold} cited`
+                          : ' · unsourced';
+                        return (
+                          <option key={asset.id} value={asset.id}>
+                            v{asset.version} · {asset.content_type.replaceAll('_', ' ')}{citationLabel}
+                          </option>
+                        );
+                      })}
                     </select>
                     {selectedAssetProvenance ? (
                       <p className="text-xs text-[var(--muted-foreground)]">
@@ -689,6 +719,14 @@ export function AccountOutreachShell({
               {payload?.generatedContentId ? (
                 <p className="mt-1 text-[var(--muted-foreground)]">
                   Generated content linkage: #{payload.generatedContentId}
+                </p>
+              ) : null}
+              {variant === 'one_pager_asset' && selectedAsset && !readSourceBackedContractFromMetadata(selectedAsset.version_metadata).contract ? (
+                <p
+                  className="mt-2 rounded-md border border-amber-200 bg-amber-50 px-2 py-1.5 text-xs text-amber-900"
+                  data-testid="unsourced-send-note"
+                >
+                  No source citations on this asset — this draft will ship as-is.
                 </p>
               ) : null}
             </div>
