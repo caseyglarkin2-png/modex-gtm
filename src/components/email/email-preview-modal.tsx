@@ -6,6 +6,7 @@ import {
 } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Send, Mail, AlertCircle, Info } from 'lucide-react';
+import { sanitizeHtml } from '@/lib/sanitize-html';
 
 interface EmailPreviewModalProps {
   open: boolean;
@@ -76,7 +77,7 @@ export function EmailPreviewModal({
             <div className="px-3 py-2 bg-white dark:bg-slate-950 rounded-md border border-border min-h-[200px] max-h-[400px] overflow-auto">
               <div
                 className="text-sm prose prose-sm dark:prose-invert max-w-none"
-                dangerouslySetInnerHTML={{ __html: body }}
+                dangerouslySetInnerHTML={{ __html: sanitizeHtml(body) }}
               />
             </div>
           </div>

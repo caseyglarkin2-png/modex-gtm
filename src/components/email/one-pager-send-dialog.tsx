@@ -16,6 +16,7 @@ import { ContentQaChecklistPanel } from '@/components/generated-content/content-
 import { getRecipientReadinessFloor } from '@/lib/revops/recipient-readiness';
 import { COLD_OUTBOUND_PROMPT_POLICY_VERSION, DEFAULT_CTA_MODE } from '@/lib/revops/cold-outbound-policy';
 import { recordWorkflowEvent, recordWorkflowMetric } from '@/lib/agent-actions/telemetry';
+import { sanitizeHtml } from '@/lib/sanitize-html';
 
 export interface Recipient {
   id: number;
@@ -332,7 +333,7 @@ export function OnePageSendDialog({
                 <div className="rounded-lg border bg-slate-50 p-4">
                   <div
                     className="prose prose-sm max-w-none dark:prose-invert"
-                    dangerouslySetInnerHTML={{ __html: bodyHtml }}
+                    dangerouslySetInnerHTML={{ __html: sanitizeHtml(bodyHtml) }}
                   />
                 </div>
               </CardContent>

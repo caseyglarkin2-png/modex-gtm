@@ -20,6 +20,7 @@ import { buildFailureClusters, buildRetryRecommendations } from '@/lib/revops/fa
 import { detectInfographicDrift, parseInfographicMetadata } from '@/lib/revops/infographic-journey';
 import { fetchAccountIdentityReport } from '@/lib/revops/account-identity-report';
 import { runCanonicalBackfillAction } from '@/app/ops/actions';
+import { requireAdminPage } from '@/lib/require-admin';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Ops' };
@@ -48,6 +49,7 @@ export default async function OpsPage({
 }: {
   searchParams?: Promise<SearchParams>;
 }) {
+  await requireAdminPage();
   const params = (await searchParams) ?? {};
   const selectedTab = parseOpsTab(params.tab);
 

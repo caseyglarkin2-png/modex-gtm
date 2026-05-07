@@ -7,11 +7,13 @@ import { prisma } from '@/lib/prisma';
 import { computeGenerationMetrics } from '@/lib/admin/generation-metrics';
 import { computeSendJobMetrics } from '@/lib/admin/send-job-metrics';
 import { computeStuckJobs } from '@/lib/admin/stuck-jobs';
+import { requireAdminPage } from '@/lib/require-admin';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Generation Metrics' };
 
 export default async function GenerationMetricsPage() {
+  await requireAdminPage();
   const [jobs, sendJobs, sendJobRecipients] = await Promise.all([
     prisma.generationJob.findMany({
       orderBy: { created_at: 'desc' },

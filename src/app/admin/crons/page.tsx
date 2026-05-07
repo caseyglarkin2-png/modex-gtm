@@ -8,6 +8,7 @@ import { prisma } from '@/lib/prisma';
 import { DRIP_SEQUENCE_ENABLED, HUBSPOT_LOGGING_ENABLED, HUBSPOT_SYNC_ENABLED, INBOX_POLLING_ENABLED } from '@/lib/feature-flags';
 import { KNOWN_CRONS, type CronStateValue } from '@/lib/cron-monitor';
 import { runReenrichContactsNowAction, runSyncHubspotDryRunNowAction } from './actions';
+import { requireAdminPage } from '@/lib/require-admin';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Cron Health' };
@@ -51,6 +52,7 @@ function formatTime(value?: string) {
 }
 
 export default async function CronHealthPage() {
+  await requireAdminPage();
   const [configs, generationJobs] = await Promise.all([
     prisma.systemConfig.findMany({
       where: { key: { startsWith: 'cron:' } },

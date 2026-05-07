@@ -5,6 +5,7 @@ import { NextRequest } from 'next/server';
 import { runReenrichContactsCron } from '@/lib/cron/reenrich-contacts';
 import { prisma } from '@/lib/prisma';
 import { GET as runSyncHubspotRoute } from '@/app/api/cron/sync-hubspot/route';
+import { requireAdminAction } from '@/lib/require-admin';
 import crypto from 'node:crypto';
 
 async function writeRunbookAudit(action: 'reenrich-contacts' | 'sync-hubspot', mode: 'run' | 'dry_run' = 'run') {
@@ -28,12 +29,14 @@ async function writeRunbookAudit(action: 'reenrich-contacts' | 'sync-hubspot', m
 }
 
 export async function runReenrichContactsNowAction() {
+  await requireAdminAction();
   await writeRunbookAudit('reenrich-contacts', 'run');
   await runReenrichContactsCron();
   revalidatePath('/admin/crons');
 }
 
 export async function runSyncHubspotDryRunNowAction() {
+  await requireAdminAction();
   const secret = process.env.CRON_SECRET;
   if (!secret) {
     throw new Error('CRON_SECRET is required to run sync-hubspot action.');
