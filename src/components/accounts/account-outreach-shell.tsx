@@ -58,6 +58,7 @@ type AccountOutreachShellProps = {
   trigger?: React.ReactNode;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  approvalGateEnabled?: boolean;
 };
 
 type ComposeVariant = 'one_pager_asset' | 'email_draft';
@@ -105,6 +106,7 @@ export function AccountOutreachShell({
   trigger,
   open: controlledOpen,
   onOpenChange,
+  approvalGateEnabled = false,
 }: AccountOutreachShellProps) {
   const [internalOpen, setInternalOpen] = useState(false);
   const open = controlledOpen ?? internalOpen;
@@ -427,7 +429,8 @@ export function AccountOutreachShell({
           value: result.sent,
           count: result.total,
         });
-        toast.success(`Sent to ${result.sent} recipient(s)`);
+        const ccDescriptor = ccList.length > 0 ? `, ${ccList.length} CC'd` : '';
+        toast.success(`Sent to ${result.sent} recipient(s)${ccDescriptor}. Source-backed lineage saved with this account's evidence.`);
       }
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Send failed');
@@ -607,7 +610,7 @@ export function AccountOutreachShell({
                   <div className="mt-4 rounded-md border border-[var(--border)] bg-[var(--accent)]/20 p-3">
                     <p className="text-xs font-medium uppercase tracking-[0.12em] text-[var(--muted-foreground)]">Qualified CC</p>
                     <p className="mt-1 text-xs text-[var(--muted-foreground)]">
-                      Optional recipients from the same account with usable readiness. You can also type custom CC addresses.
+                      Same-account contacts with a verified email and recent activity. Click one to add it as CC, or type any address below.
                     </p>
                     {qualifiedCcCandidates.length > 0 ? (
                       <div className="mt-2 flex flex-wrap gap-2">
@@ -669,7 +672,17 @@ export function AccountOutreachShell({
             </div>
 
             <div className="rounded-lg border border-[var(--border)] bg-[var(--accent)]/20 p-4 text-sm">
-              <p className="font-medium">Pre-send summary</p>
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="font-medium">Pre-send summary</p>
+                <Badge
+                  variant={approvalGateEnabled ? 'outline' : 'secondary'}
+                  title={approvalGateEnabled
+                    ? 'Generated drafts must be approved in the queue before they can ship.'
+                    : 'Sends publish immediately; no approval review required.'}
+                >
+                  {approvalGateEnabled ? 'Approval required' : 'Sends publish immediately'}
+                </Badge>
+              </div>
               <p className="mt-1 text-[var(--muted-foreground)]">
                 Variant: {variant === 'one_pager_asset' ? 'One-pager asset' : 'Email draft'} · Recipients: {selectedRecipients.length} · CC: {ccList.length} · Recipient set: {selectedRecipientSetKey ?? 'manual'}
               </p>

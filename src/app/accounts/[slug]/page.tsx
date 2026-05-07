@@ -56,6 +56,7 @@ import { AccountAssetVersionPanel } from '@/components/accounts/account-asset-ve
 import { AccountEngagementSummaryCard } from '@/components/accounts/account-engagement-summary-card';
 import { AccountOutcomeLogger } from '@/components/accounts/account-outcome-logger';
 import { AccountOutreachShell } from '@/components/accounts/account-outreach-shell';
+import { SOURCE_APPROVAL_GATE_ENABLED } from '@/lib/feature-flags';
 import { AgentActionDialog } from '@/components/agent-actions/agent-action-dialog';
 import { AgentIntelStrip } from '@/components/agent-actions/agent-intel-strip';
 import { SendJobTracker } from '@/components/generated-content/send-job-tracker';
@@ -408,6 +409,7 @@ export default async function AccountDetailPage({
                   defaultRecipientSetKey={activeRecipientSet?.key ?? null}
                   recommendedAngle={recommendedAngle}
                   whyNow={account.why_now ?? undefined}
+                  approvalGateEnabled={SOURCE_APPROVAL_GATE_ENABLED}
                   trigger={
                     <Button size="sm" className="gap-1.5 bg-cyan-600 text-white hover:bg-cyan-700">
                       <Activity className="h-3.5 w-3.5" />
@@ -576,12 +578,12 @@ export default async function AccountDetailPage({
                     <p className="mt-1 text-sm font-medium">
                       {evidenceSummary
                         ? `${evidenceSummary.freshness.fresh} fresh · ${evidenceSummary.freshness.aging} aging · ${evidenceSummary.freshness.stale} stale`
-                        : 'No source-backed evidence runs yet'}
+                        : 'No sources captured yet for this account.'}
                     </p>
                     <p className="mt-1 text-xs text-[var(--muted-foreground)]">
                       {evidenceSummary
-                        ? `Latest run: ${evidenceSummary.run.latestStatus ?? 'unknown'}${evidenceSummary.run.latestAt ? ` (${new Date(evidenceSummary.run.latestAt).toLocaleString()})` : ''}`
-                        : 'Run refresh intel to persist claim-level evidence and provider diagnostics.'}
+                        ? `Latest research run: ${evidenceSummary.run.latestStatus ?? 'unknown'}${evidenceSummary.run.latestAt ? ` (${new Date(evidenceSummary.run.latestAt).toLocaleString()})` : ''}. Sources here back every claim in source-backed drafts.`
+                        : 'Click Refresh Intel to capture claims + sources. Anything fresh here gets cited automatically when you generate outreach.'}
                     </p>
                   </div>
                 </div>

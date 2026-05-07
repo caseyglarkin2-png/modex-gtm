@@ -26,22 +26,26 @@ export function SourceAttributionPanel({
         <p className="text-sm font-medium">{title}</p>
         <p className="mt-1 text-xs text-[var(--muted-foreground)]">
           {parsed.legacyFallback
-            ? 'Legacy content does not have source attribution metadata yet.'
-            : 'No source attribution available for this draft.'}
+            ? 'No sources attached. This draft was generated before source-backed attribution shipped — safe to send, just no evidence trail.'
+            : 'Generate this with intel to attach the wedge, angle, and source citations behind every claim.'}
         </p>
       </div>
     );
   }
 
   const evidenceById = new Map(parsed.contract.evidence_refs.map((entry) => [entry.id, entry]));
+  const citationsMet = parsed.contract.citation_count >= parsed.contract.citation_threshold;
 
   return (
     <div className={`rounded-lg border border-[var(--border)] bg-[var(--background)] p-3 ${className ?? ''}`}>
       <div className="flex flex-wrap items-center gap-2">
         <p className="text-sm font-medium">{title}</p>
         <Badge variant="outline">{parsed.contract.contract}</Badge>
-        <Badge variant="secondary">
-          citations {parsed.contract.citation_count}/{parsed.contract.citation_threshold}
+        <Badge
+          variant={citationsMet ? 'secondary' : 'outline'}
+          title={`Drafts must cite at least ${parsed.contract.citation_threshold} sources to be source-backed. This one cites ${parsed.contract.citation_count}.`}
+        >
+          {parsed.contract.citation_count}/{parsed.contract.citation_threshold} sources cited
         </Badge>
       </div>
 
