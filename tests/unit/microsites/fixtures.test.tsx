@@ -25,7 +25,7 @@ describe('microsite fixtures', () => {
     expect(
       screen.getByRole('heading', { name: /your yards were not built for this volume/i }),
     ).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /book a network audit/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /should we send the short overview/i })).toBeInTheDocument();
   });
 
   it('renders a problem section fixture', () => {

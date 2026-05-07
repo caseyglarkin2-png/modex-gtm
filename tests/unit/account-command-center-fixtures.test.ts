@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   ACCOUNT_PAGE_SEND_ACCOUNTS,
   buildAccountPageSendFixture,
@@ -18,14 +18,27 @@ describe('account command center fixtures', () => {
     expect(fixture.stagedCandidate.email).toContain('@');
   });
 
-  it('builds deterministic cached account intel for proof mode', () => {
-    const result = buildSeededAccountContentContext(new Date('2026-05-05T12:00:00.000Z'));
+  describe('seeded content context', () => {
+    const fixedNow = new Date('2026-05-05T12:00:00.000Z');
 
-    expect(result.action).toBe('content_context');
-    expect(result.provider).toBe('modex');
-    expect(result.status).toBe('ok');
-    expect(result.cards.map((card) => card.title)).toContain('Research Summary');
-    expect(result.nextActions[0]).toContain('Promote the staged logistics contact');
-    expect(result.freshness.status).toBe('fresh');
+    beforeEach(() => {
+      vi.useFakeTimers();
+      vi.setSystemTime(fixedNow);
+    });
+
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    it('builds deterministic cached account intel for proof mode', () => {
+      const result = buildSeededAccountContentContext(fixedNow);
+
+      expect(result.action).toBe('content_context');
+      expect(result.provider).toBe('modex');
+      expect(result.status).toBe('ok');
+      expect(result.cards.map((card) => card.title)).toContain('Research Summary');
+      expect(result.nextActions[0]).toContain('Promote the staged logistics contact');
+      expect(result.freshness.status).toBe('fresh');
+    });
   });
 });
