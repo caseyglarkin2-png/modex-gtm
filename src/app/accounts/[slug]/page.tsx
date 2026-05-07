@@ -57,6 +57,7 @@ import { AccountEngagementSummaryCard } from '@/components/accounts/account-enga
 import { AccountOutcomeLogger } from '@/components/accounts/account-outcome-logger';
 import { AccountOutreachShell } from '@/components/accounts/account-outreach-shell';
 import { OutboundCardRefreshButton } from '@/components/accounts/outbound-card-refresh-button';
+import { EditableLongText } from '@/components/editable-long-text';
 import { SOURCE_APPROVAL_GATE_ENABLED } from '@/lib/feature-flags';
 import { AgentActionDialog } from '@/components/agent-actions/agent-action-dialog';
 import { AgentIntelStrip } from '@/components/agent-actions/agent-intel-strip';
@@ -135,14 +136,31 @@ export default async function AccountDetailPage({
   const auditRoutes = getAuditRoutes();
   const auditRoute = auditRoutes.find((r) => r.account === account.name);
   const qrAsset = getQrAssets().find((asset) => asset.account === account.name);
-  const [activeCampaigns] = await Promise.all([
+  const [activeCampaigns, accountFieldEdits] = await Promise.all([
     prisma.campaign.findMany({
       where: { status: 'active' },
       orderBy: [{ start_date: 'desc' }, { created_at: 'desc' }],
       take: 6,
       select: { slug: true, name: true, messaging_angle: true, campaign_type: true },
     }),
+    // S4-T3: Pull the latest field-edit Activity per editable account field so
+    // each editable card can render a "Edited 2h ago by Casey" badge. Single
+    // query — we group client-side by field below.
+    prisma.activity.findMany({
+      where: { account_name: account.name, activity_type: 'account_field_edit' },
+      orderBy: { created_at: 'desc' },
+      take: 30,
+      select: { id: true, owner: true, outcome: true, created_at: true },
+    }),
   ]);
+  const latestFieldEditByField = new Map<string, { actor: string; at: Date }>();
+  for (const edit of accountFieldEdits) {
+    if (!edit.outcome || latestFieldEditByField.has(edit.outcome)) continue;
+    latestFieldEditByField.set(edit.outcome, {
+      actor: edit.owner ?? 'unknown',
+      at: edit.created_at,
+    });
+  }
   const activities = rawActivities.map((activity) => ({
     ...activity,
     activityDateLabel: activity.activity_date ? formatActivityDate(activity.activity_date) : '',
@@ -535,7 +553,20 @@ export default async function AccountDetailPage({
                   </div>
                   <div className="rounded-lg border border-[var(--border)] p-3">
                     <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Why now</p>
-                    <p className="mt-1 text-sm">{account.why_now || 'Use current live intel to sharpen the hypothesis.'}</p>
+                    <div className="mt-1">
+                      <EditableLongText
+                        accountSlug={slug}
+                        field="why_now"
+                        currentValue={account.why_now}
+                        emptyFallback="Use current live intel to sharpen the hypothesis."
+                        placeholder="Why is this account a priority right now?"
+                      />
+                    </div>
+                    {latestFieldEditByField.get('why_now') ? (
+                      <p className="mt-2 text-[10px] text-[var(--muted-foreground)]">
+                        Edited {formatActivityDate(latestFieldEditByField.get('why_now')!.at)} by {latestFieldEditByField.get('why_now')!.actor}
+                      </p>
+                    ) : null}
                   </div>
                   <div className="rounded-lg border border-[var(--border)] p-3">
                     <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Best angle</p>
@@ -558,6 +589,23 @@ export default async function AccountDetailPage({
                         ))}
                       </div>
                     ) : null}
+                    <div className="mt-3 border-t border-[var(--border)] pt-2">
+                      <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Curated Primo angle (fallback)</p>
+                      <div className="mt-1">
+                        <EditableLongText
+                          accountSlug={slug}
+                          field="primo_angle"
+                          currentValue={account.primo_angle}
+                          emptyFallback="No hand-curated angle yet — agent recommendation is shown above."
+                          placeholder="Your hand-curated framing for this account."
+                        />
+                      </div>
+                      {latestFieldEditByField.get('primo_angle') ? (
+                        <p className="mt-2 text-[10px] text-[var(--muted-foreground)]">
+                          Edited {formatActivityDate(latestFieldEditByField.get('primo_angle')!.at)} by {latestFieldEditByField.get('primo_angle')!.actor}
+                        </p>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
                 <div className="grid gap-3 md:grid-cols-3">
@@ -1068,7 +1116,20 @@ export default async function AccountDetailPage({
           <div className="grid gap-4 md:grid-cols-3">
             <Card>
               <CardHeader className="pb-2"><CardTitle className="text-xs text-[var(--muted-foreground)]">Best Intro Path</CardTitle></CardHeader>
-              <CardContent><p className="text-sm font-medium">{account.best_intro_path}</p></CardContent>
+              <CardContent>
+                <EditableLongText
+                  accountSlug={slug}
+                  field="best_intro_path"
+                  currentValue={account.best_intro_path}
+                  emptyFallback="No intro path captured yet."
+                  placeholder="How should we get into this account?"
+                />
+                {latestFieldEditByField.get('best_intro_path') ? (
+                  <p className="mt-2 text-[10px] text-[var(--muted-foreground)]">
+                    Edited {formatActivityDate(latestFieldEditByField.get('best_intro_path')!.at)} by {latestFieldEditByField.get('best_intro_path')!.actor}
+                  </p>
+                ) : null}
+              </CardContent>
             </Card>
             <Card>
               <CardHeader className="pb-2"><CardTitle className="text-xs text-[var(--muted-foreground)]">Current Motion</CardTitle></CardHeader>
