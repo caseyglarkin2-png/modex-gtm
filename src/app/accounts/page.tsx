@@ -1,13 +1,15 @@
 import Link from 'next/link';
 import { dbGetAccounts, dbGetPersonas } from '@/lib/db';
+import { prisma } from '@/lib/prisma';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { AddAccountDialog } from '@/components/add-account-dialog';
 import { BandBadge } from '@/components/band-badge';
 import { StatusBadge } from '@/components/status-badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Target } from 'lucide-react';
+import { ArrowRight, Target, X } from 'lucide-react';
 import { AccountsTable, type AccountRow } from './accounts-table';
+import { loadEvidenceSummaryByAccountScope } from '@/lib/source-backed/evidence';
 
 function slugify(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
@@ -16,10 +18,56 @@ function slugify(name: string): string {
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Accounts' };
 
-export default async function AccountsPage() {
+export default async function AccountsPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ stale_evidence?: string; untouched?: string }>;
+}) {
+  const resolvedSearchParams = (await searchParams) ?? {};
+  const filterStaleEvidence = resolvedSearchParams.stale_evidence === 'true';
+  // Untouched filter accepts "14d", "7d", etc. — falls back to 14 if malformed.
+  const untouchedDaysRaw = resolvedSearchParams.untouched ?? '';
+  const untouchedDaysMatch = /^(\d{1,3})d$/.exec(untouchedDaysRaw);
+  const filterUntouchedDays = untouchedDaysMatch ? Math.min(180, Number.parseInt(untouchedDaysMatch[1], 10)) : null;
+
   const [rawAccounts, rawPersonas] = await Promise.all([dbGetAccounts(), dbGetPersonas()]);
 
-  const accounts: AccountRow[] = rawAccounts.map((a) => ({
+  // S5-T5: optional filters scoped to priority A/B accounts. Each runs as a
+  // single batched query — no N+1 — so adding more filters later stays cheap.
+  let allowedAccountNames: Set<string> | null = null;
+  if (filterStaleEvidence) {
+    const priorityAccounts = rawAccounts.filter((a) => a.priority_band === 'A' || a.priority_band === 'B');
+    const summary = priorityAccounts.length > 0
+      ? await loadEvidenceSummaryByAccountScope(priorityAccounts.map((a) => a.name))
+      : null;
+    if (!summary || summary.freshness.fresh === 0) {
+      allowedAccountNames = new Set(priorityAccounts.map((a) => a.name));
+    } else {
+      allowedAccountNames = new Set();
+    }
+  }
+  if (filterUntouchedDays != null) {
+    const cutoff = new Date(Date.now() - filterUntouchedDays * 24 * 60 * 60 * 1000);
+    const recentlyTouched = await prisma.emailLog.findMany({
+      where: { sent_at: { gte: cutoff } },
+      distinct: ['account_name'],
+      select: { account_name: true },
+    });
+    const touchedNames = new Set(recentlyTouched.map((row) => row.account_name).filter(Boolean) as string[]);
+    const priorityAccountNames = rawAccounts
+      .filter((a) => a.priority_band === 'A' || a.priority_band === 'B')
+      .map((a) => a.name);
+    const untouched = new Set(priorityAccountNames.filter((name) => !touchedNames.has(name)));
+    allowedAccountNames = allowedAccountNames
+      ? new Set([...allowedAccountNames].filter((name) => untouched.has(name)))
+      : untouched;
+  }
+
+  const filteredRawAccounts = allowedAccountNames
+    ? rawAccounts.filter((a) => allowedAccountNames!.has(a.name))
+    : rawAccounts;
+
+  const accounts: AccountRow[] = filteredRawAccounts.map((a) => ({
     rank: a.rank,
     name: a.name,
     vertical: a.vertical,
@@ -33,6 +81,10 @@ export default async function AccountsPage() {
     meeting_status: a.meeting_status,
     slug: slugify(a.name),
   }));
+
+  const activeFilterChips: Array<{ key: string; label: string }> = [];
+  if (filterStaleEvidence) activeFilterChips.push({ key: 'stale_evidence', label: 'Stale intel' });
+  if (filterUntouchedDays != null) activeFilterChips.push({ key: 'untouched', label: `Untouched ${filterUntouchedDays}d` });
 
   const bandCounts = accounts.reduce((acc, account) => {
     const band = account.priority_band ?? 'Unscored';
@@ -63,6 +115,23 @@ export default async function AccountsPage() {
         </p>
         <AddAccountDialog />
       </div>
+
+      {activeFilterChips.length > 0 ? (
+        <div className="flex flex-wrap items-center gap-2" data-testid="account-list-active-filters">
+          <span className="text-xs text-[var(--muted-foreground)]">Active filters:</span>
+          {activeFilterChips.map((chip) => (
+            <Link
+              key={chip.key}
+              href="/accounts"
+              className="inline-flex items-center gap-1 rounded-full border border-[var(--border)] bg-[var(--accent)]/40 px-2 py-0.5 text-xs hover:bg-[var(--accent)]"
+              data-testid={`filter-chip-${chip.key}`}
+            >
+              {chip.label}
+              <X className="h-3 w-3" />
+            </Link>
+          ))}
+        </div>
+      ) : null}
 
       <div className="grid gap-4 md:grid-cols-4">
         <AccountMetricCard label="Priority A/B" value={readyBandsCount} tone={readyBandsCount > 0 ? 'text-blue-600' : 'text-[var(--foreground)]'} />
