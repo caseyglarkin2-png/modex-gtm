@@ -11,3 +11,4 @@ screenshots/
 .env.vercel-prod
 docs/showcase-proof/*.png
 my-contacts.csv
+.claude/
