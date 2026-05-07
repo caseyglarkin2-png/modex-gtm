@@ -899,7 +899,7 @@ export default async function AccountDetailPage({
               </CardContent>
             </Card>
           ) : null}
-          <AccountEngagementSummaryCard summary={engagementSummary} />
+          <AccountEngagementSummaryCard summary={engagementSummary} accountSlug={slug} />
           {canonicalAccountSummary ? (
             <Card>
               <CardHeader className="pb-2">
@@ -1326,7 +1326,7 @@ export default async function AccountDetailPage({
             campaignId={generatedAssets[0]?.campaign_id ?? null}
             initialStage={initialJourneyStage}
           />
-          <AccountEngagementSummaryCard summary={engagementSummary} />
+          <AccountEngagementSummaryCard summary={engagementSummary} accountSlug={slug} />
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm">Outcome Logging</CardTitle>

@@ -181,7 +181,19 @@ export function AccountContactCandidatesPanel({
                     </p>
                     <p className="mt-2 text-sm">{candidate.recommendationReason || 'Candidate surfaced from live account discovery.'}</p>
                     <div className="mt-2 flex flex-wrap gap-2 text-xs text-[var(--muted-foreground)]">
-                      <span>Readiness {candidate.readiness.score}</span>
+                      <span
+                        className={`rounded-md px-2 py-0.5 font-medium ${
+                          candidate.readiness.tier === 'high'
+                            ? 'bg-emerald-100 text-emerald-900'
+                            : candidate.readiness.tier === 'medium'
+                              ? 'bg-amber-100 text-amber-900'
+                              : 'bg-red-100 text-red-900'
+                        }`}
+                        data-testid={`readiness-pill-${candidate.id}`}
+                        title={`Readiness tier: ${candidate.readiness.tier}`}
+                      >
+                        Readiness {candidate.readiness.score}
+                      </span>
                       <span>Quality {candidate.qualityScore}</span>
                       <span>Confidence {candidate.confidenceScore}</span>
                       {candidate.companyDomain ? <span>{candidate.companyDomain}</span> : null}
