@@ -63,21 +63,6 @@ export default async function ProposalPage({ params }: { params: Promise<{ slug:
   const proposal = resolveMicrositeProposalBrief(slug);
 
   if (proposal) {
-    try {
-      await prisma.activity.create({
-        data: {
-          account_name: proposal.accountName,
-          activity_type: 'Page View',
-          outcome: `Proposal page viewed: ${proposal.proposalPath}`,
-          next_step: 'Follow up within 24 hours if first view',
-          owner: 'System',
-          activity_date: new Date(),
-        },
-      });
-    } catch {
-      // non-blocking
-    }
-
     return (
       <>
         <MicrositeTracker
@@ -107,24 +92,14 @@ export default async function ProposalPage({ params }: { params: Promise<{ slug:
   const sanitizedData = data ? sanitizeOnePagerData(data) : null;
   const shortOverviewCta = buildShortOverviewCta(account.name);
 
-  // Log the page visit as an Activity
-  try {
-    await prisma.activity.create({
-      data: {
-        account_name: account.name,
-        activity_type: 'Page View',
-        outcome: `Proposal page viewed: /proposal/${slug}`,
-        next_step: 'Follow up within 24 hours if first view',
-        owner: 'System',
-        activity_date: new Date(),
-      },
-    });
-  } catch {
-    // non-blocking
-  }
-
   return (
     <div className="min-h-screen bg-slate-950 text-white">
+      <MicrositeTracker
+        accountName={account.name}
+        accountSlug={slug}
+        path={`/proposal/${slug}`}
+        variantSlug="proposal-fallback"
+      />
       {/* Header */}
       <header className="border-b border-slate-800 bg-slate-900/50 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">

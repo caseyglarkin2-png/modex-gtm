@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { OPERATOR_OUTCOME_TAXONOMY, type OutcomeFollowUpRecommendation } from '@/lib/revops/operator-outcomes';
 import { beginRefreshDiagnostic, endRefreshDiagnostic } from '@/lib/refresh-diagnostics';
+import { useActor } from '@/lib/use-actor';
 
 export type AccountOutcomeSourceOption = {
   key: string;
@@ -28,6 +29,8 @@ type AccountOutcomeLoggerProps = {
   trigger?: ReactNode;
 };
 
+
+
 type OutcomeResponse = {
   success: boolean;
   deduped: boolean;
@@ -40,10 +43,12 @@ type OutcomeResponse = {
 
 export function AccountOutcomeLogger({
   accountName,
-  createdBy = 'Casey',
+  createdBy,
   sources,
   trigger,
 }: AccountOutcomeLoggerProps) {
+  const actor = useActor();
+  const effectiveCreatedBy = createdBy ?? actor;
   const router = useRouter();
   const refreshTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [open, setOpen] = useState(false);
@@ -103,7 +108,7 @@ export function AccountOutcomeLogger({
           generatedContentId: selectedSource.generatedContentId ?? null,
           sourceMetadata: selectedSource.sourceMetadata ?? null,
           notes: notes.trim() || null,
-          createdBy,
+          createdBy: effectiveCreatedBy,
         }),
       });
       const payload = await response.json().catch(() => ({} as OutcomeResponse));

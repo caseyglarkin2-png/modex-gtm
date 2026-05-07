@@ -13,6 +13,7 @@ import { getRecipientReadinessFloor } from '@/lib/revops/recipient-readiness';
 import { getStrategyPreset, getStrategyWarning, type PacingMode } from '@/lib/revops/send-strategy';
 import { ContentQaChecklistPanel } from '@/components/generated-content/content-qa-checklist-panel';
 import { sanitizeHtml } from '@/lib/sanitize-html';
+import { useActor } from '@/lib/use-actor';
 
 export type BulkPreviewItem = {
   accountName: string;
@@ -56,6 +57,7 @@ type VariantDraft = {
 const DEFAULT_SUBJECT = 'yard network scorecard';
 
 export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProps) {
+  const actor = useActor();
   const [open, setOpen] = useState(false);
   const [acknowledged] = useState<Record<number, boolean>>({});
   const [submitting, setSubmitting] = useState(false);
@@ -155,7 +157,7 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
     try {
       const payload = {
         guardWarningsAcknowledged: true,
-        requestedBy: 'Casey',
+        requestedBy: actor,
         strategy,
         experiment: experimentEnabled
           ? {

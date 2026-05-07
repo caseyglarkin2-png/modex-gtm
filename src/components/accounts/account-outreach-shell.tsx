@@ -28,6 +28,7 @@ import { recordWorkflowMetric } from '@/lib/agent-actions/telemetry';
 import { SendJobTracker } from '@/components/generated-content/send-job-tracker';
 import { SourceAttributionPanel } from '@/components/source-backed/source-attribution-panel';
 import { sanitizeHtml } from '@/lib/sanitize-html';
+import { useActor } from '@/lib/use-actor';
 
 type AccountOutreachShellAsset = {
   id: number;
@@ -111,6 +112,7 @@ export function AccountOutreachShell({
   onOpenChange,
   approvalGateEnabled = false,
 }: AccountOutreachShellProps) {
+  const actor = useActor();
   const [internalOpen, setInternalOpen] = useState(false);
   const open = controlledOpen ?? internalOpen;
   const setOpen = onOpenChange ?? setInternalOpen;
@@ -368,7 +370,7 @@ export function AccountOutreachShell({
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            requestedBy: 'Casey',
+            requestedBy: actor,
             workflowMetadata: payload.workflowMetadata,
             items: [{
               generatedContentId: payload.generatedContentId,

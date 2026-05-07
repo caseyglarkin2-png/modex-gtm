@@ -12,6 +12,7 @@ import type { AgentActionResult } from '@/lib/agent-actions/types';
 import { AssetSendDialog, type AssetSendRecipient } from '@/components/email/asset-send-dialog';
 import { COLD_OUTBOUND_PROMPT_POLICY_VERSION, DEFAULT_CTA_MODE, getOnePagerSuggestedNextStep } from '@/lib/revops/cold-outbound-policy';
 import { recordWorkflowMetric } from '@/lib/agent-actions/telemetry';
+import { useActor } from '@/lib/use-actor';
 
 export interface OnePagerData {
   headline: string;
@@ -283,6 +284,7 @@ export function OnePagerDialog({
   recipients = [],
   initialSelectedRecipientIds,
 }: OnePagerPreviewProps) {
+  const actor = useActor();
   const [internalOpen, setInternalOpen] = useState(false);
   const open = variant === 'dialog' ? (controlledOpen ?? internalOpen) : true;
   const setOpen = variant === 'dialog' ? (controlledOnOpenChange ?? setInternalOpen) : () => {};
@@ -355,7 +357,7 @@ export function OnePagerDialog({
           blockType: 'one-pager',
           accountName,
           stage: 'one_pager',
-          createdBy: 'Casey',
+          createdBy: actor,
         }),
       });
       const payload = await response.json().catch(() => ({} as { error?: string }));
