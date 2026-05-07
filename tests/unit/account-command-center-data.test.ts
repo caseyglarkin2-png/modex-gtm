@@ -30,6 +30,9 @@ vi.mock('@/lib/account-contact-candidates', () => ({
 vi.mock('@/lib/agent-actions/content-context', () => ({
   getAgentContentContext: mockedGetAgentContentContext,
 }));
+vi.mock('@/lib/source-backed/evidence', () => ({
+  loadEvidenceSummaryByAccountScope: vi.fn().mockResolvedValue(null),
+}));
 
 const { loadAccountCommandCenterData, summarizeAccountScope } = await import('@/lib/account-command-center-data');
 
