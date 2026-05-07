@@ -11,7 +11,6 @@ import { MicrositeShell, getMicrositeSectionNavItems } from '@/components/micros
 import { Reveal } from '@/components/microsites/reveal';
 import { MicrositeSectionRenderer } from '@/components/microsites/sections';
 import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
-import { prisma } from '@/lib/prisma';
 
 function isProblemSection(section: MicrositeSection): section is Extract<MicrositeSection, { type: 'problem' }> {
   return section.type === 'problem';
@@ -61,22 +60,6 @@ export default async function PersonMicrositePage({
     variant.kpiLanguage.slice(0, 4) ??
     problemSection?.painPoints.slice(0, 4).map((point) => point.headline) ??
     ['Dock throughput', 'Trailer visibility', 'Execution variance', 'Network impact'];
-
-  // Log person-specific page view
-  try {
-    await prisma.activity.create({
-      data: {
-        account_name: data.accountName,
-        activity_type: 'Page View',
-        outcome: `Microsite viewed: /for/${account}/${person} (${personProfile.name})`,
-        next_step: 'Follow up within 24 hours if first view',
-        owner: 'System',
-        activity_date: new Date(),
-      },
-    });
-  } catch {
-    // non-blocking
-  }
 
   return (
     <>

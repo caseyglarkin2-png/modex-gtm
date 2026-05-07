@@ -12,7 +12,6 @@ import { MicrositeShell, getMicrositeSectionNavItems } from '@/components/micros
 import { Reveal } from '@/components/microsites/reveal';
 import { MicrositeSectionRenderer } from '@/components/microsites/sections';
 import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
-import { prisma } from '@/lib/prisma';
 
 function isHeroSection(section: MicrositeSection): section is Extract<MicrositeSection, { type: 'hero' }> {
   return section.type === 'hero';
@@ -57,22 +56,6 @@ export default async function AccountMicrositePage({
   const focusPoints =
     problemSection?.painPoints.slice(0, 4).map((point) => point.headline) ??
     ['Dock bottlenecks', 'Trailer staging variance', 'Spotter prioritization', 'Network standardization'];
-
-  // Log page view
-  try {
-    await prisma.activity.create({
-      data: {
-        account_name: data.accountName,
-        activity_type: 'Page View',
-        outcome: `Microsite viewed: /for/${account}`,
-        next_step: 'Follow up within 24 hours if first view',
-        owner: 'System',
-        activity_date: new Date(),
-      },
-    });
-  } catch {
-    // non-blocking
-  }
 
   return (
     <>

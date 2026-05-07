@@ -1264,12 +1264,22 @@ function OnePagerInline({
 
   function copyHtml() {
     if (!data) return;
-    toast.error('Copy HTML not yet implemented for inline mode');
+    const html = onePagerToHtml(data, accountName);
+    navigator.clipboard.writeText(html);
+    toast.success('HTML copied to clipboard — paste into email or save as .html');
   }
 
   function downloadHtml() {
     if (!data) return;
-    toast.error('Download HTML not yet implemented for inline mode');
+    const html = onePagerToHtml(data, accountName);
+    const blob = new Blob([html], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${accountName.toLowerCase().replace(/\s+/g, '-')}-yardflow-one-pager.html`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success('Downloaded');
   }
 
   return (

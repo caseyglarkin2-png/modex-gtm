@@ -9,11 +9,13 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Plus } from 'lucide-react';
+import { useActor } from '@/lib/use-actor';
 
 export function AddAccountDialog() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const actor = useActor();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -28,7 +30,7 @@ export function AddAccountDialog() {
       why_now: fd.get('why_now') as string || undefined,
       primo_angle: fd.get('primo_angle') as string || undefined,
       tier: (fd.get('tier') as 'Tier 1' | 'Tier 2' | 'Tier 3') || 'Tier 3',
-      owner: fd.get('owner') as string || 'Casey',
+      owner: fd.get('owner') as string || actor,
       notes: fd.get('notes') as string || undefined,
     });
 
@@ -98,7 +100,7 @@ export function AddAccountDialog() {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1.5">
               <Label htmlFor="owner">Owner</Label>
-              <Input id="owner" name="owner" defaultValue="Casey" />
+              <Input id="owner" name="owner" defaultValue={actor} />
             </div>
           </div>
 
