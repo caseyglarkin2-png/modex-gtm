@@ -131,7 +131,7 @@ export function BookMeetingDialog({ accountName, personas, calendlyLink }: Props
             </div>
             <div>
               <Label>Location / Link</Label>
-              <Input className="mt-1" value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} placeholder="e.g. MODEX Booth #1234 or Zoom link" />
+              <Input className="mt-1" value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} placeholder="e.g. Zoom link, on-site, or conference booth" />
             </div>
             <div>
               <Label>Objective</Label>

@@ -114,7 +114,7 @@ export default function AuditRoutesPage() {
       <div>
         <div className="mb-3 flex items-center justify-between gap-3">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Route Library</h2>
-          <p className="text-xs text-[var(--muted-foreground)]">Copy the audit URL and message together when working the MODEX floor or follow-up threads.</p>
+          <p className="text-xs text-[var(--muted-foreground)]">Copy the audit URL and message together when working post-MODEX follow-up threads.</p>
         </div>
 
         <div className="space-y-3">
