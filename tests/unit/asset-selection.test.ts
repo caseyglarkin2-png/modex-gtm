@@ -131,6 +131,7 @@ describe('asset selection', () => {
         latest: null,
         latestSendable: null,
       },
+      recommendationReason: null,
     });
   });
 });

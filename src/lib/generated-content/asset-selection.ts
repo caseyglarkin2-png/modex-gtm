@@ -40,6 +40,14 @@ export type ResolvedAccountAssetSelection<TAsset extends AccountAssetRecord> = {
     latest: number | null;
     latestSendable: number | null;
   };
+  /**
+   * Operator-facing explanation of why `recommendedAsset` is recommended.
+   * Composed from the same heuristics that drive the recommendation
+   * (freshness, quality, version, live-intel signal). Null when there is
+   * no recommended asset. Rendered as a tooltip on the "Recommended" badge
+   * in the outreach shell so the operator can verify the pick at a glance.
+   */
+  recommendationReason: string | null;
 };
 
 function asRecord(value: unknown) {
@@ -123,6 +131,29 @@ function compareAssetPriority(left: AccountAssetRecord, right: AccountAssetRecor
   return new Date(right.created_at).getTime() - new Date(left.created_at).getTime();
 }
 
+function buildRecommendationReason(
+  asset: AccountAssetRecord | null,
+  totalSendableCount: number,
+): string | null {
+  if (!asset) return null;
+  const provenance = parseAssetProvenanceSummary(asset.version_metadata);
+  const reasons: string[] = [];
+  if (provenance.freshnessStatus === 'fresh') {
+    reasons.push('Fresh intel');
+  } else if (provenance.freshnessStatus === 'aging') {
+    reasons.push('Aging but usable intel');
+  }
+  if (provenance.usedLiveIntel) {
+    reasons.push('generated with live intel');
+  }
+  if (typeof asset.quality?.score === 'number' && asset.quality.score > 0) {
+    const score = Math.round(asset.quality.score * 10) / 10;
+    reasons.push(`quality ${score}/5`);
+  }
+  reasons.push(`v${asset.version}${totalSendableCount > 1 ? ` of ${totalSendableCount} sendable drafts` : ''}`);
+  return reasons.join(' · ');
+}
+
 export function resolveAccountAssetSelection<TAsset extends AccountAssetRecord>(
   assets: TAsset[],
 ): ResolvedAccountAssetSelection<TAsset> {
@@ -131,7 +162,8 @@ export function resolveAccountAssetSelection<TAsset extends AccountAssetRecord>(
     return new Date(right.created_at).getTime() - new Date(left.created_at).getTime();
   });
   const latestAsset = ordered[0] ?? null;
-  const latestSendableAsset = ordered.find((asset) => canDirectSendAsset(asset.content_type) && !isFailedAsset(asset)) ?? null;
+  const sendableAssets = ordered.filter((asset) => canDirectSendAsset(asset.content_type) && !isFailedAsset(asset));
+  const latestSendableAsset = sendableAssets[0] ?? null;
   const recommendedAsset = [...ordered].filter(isRecommendedSendableAsset).sort(compareAssetPriority)[0] ?? null;
   const fallbackAsset = recommendedAsset ?? latestSendableAsset ?? latestAsset;
 
@@ -145,5 +177,6 @@ export function resolveAccountAssetSelection<TAsset extends AccountAssetRecord>(
       latest: latestAsset?.id ?? null,
       latestSendable: latestSendableAsset?.id ?? null,
     },
+    recommendationReason: buildRecommendationReason(recommendedAsset, sendableAssets.length),
   };
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -499,7 +500,11 @@ export function AccountOutreachShell({
                   <div className="space-y-3 rounded-lg border border-[var(--border)] p-4">
                     <div className="flex flex-wrap items-center gap-2">
                       <Label htmlFor="asset-version" className="text-sm font-medium">Asset</Label>
-                      {assetSelection.recommendedAsset ? <Badge>Recommended</Badge> : null}
+                      {assetSelection.recommendedAsset ? (
+                        <Badge title={assetSelection.recommendationReason ?? undefined}>
+                          Recommended
+                        </Badge>
+                      ) : null}
                       {selectedAssetProvenance?.usedLiveIntel ? <Badge variant="outline">Live intel</Badge> : null}
                       {selectedAssetProvenance?.freshnessLabel ? <Badge variant="secondary">{selectedAssetProvenance.freshnessLabel}</Badge> : null}
                       {(() => {
@@ -737,9 +742,56 @@ export function AccountOutreachShell({
                   Send result: {lastSendResult.sent} sent, {lastSendResult.failed} failed, {lastSendResult.total} total.
                 </p>
                 {(lastSendResult.skipped?.length ?? 0) > 0 ? (
-                  <p className="mt-1 text-[var(--muted-foreground)]">
-                    Skipped: {lastSendResult.skipped?.map((item) => `${item.to} (${item.reason})`).join(', ')}
-                  </p>
+                  <div className="mt-2" data-testid="partial-send-drill-down">
+                    <p className="mb-1 text-xs font-medium uppercase tracking-wide text-[var(--muted-foreground)]">
+                      Skipped recipients ({lastSendResult.skipped?.length})
+                    </p>
+                    <table className="w-full text-xs">
+                      <thead>
+                        <tr className="border-b border-[var(--border)] text-left text-[var(--muted-foreground)]">
+                          <th className="py-1 pr-2 font-medium">Recipient</th>
+                          <th className="py-1 pr-2 font-medium">Reason</th>
+                          <th className="py-1 font-medium">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {lastSendResult.skipped?.map((item) => {
+                          const reasonKey = item.reason.toLowerCase();
+                          const isUnsubscribed = reasonKey.includes('unsubscribed');
+                          const isInvalidEmail = reasonKey.includes('invalid_email') || reasonKey.includes('malformed');
+                          const isMixedAccount = reasonKey.includes('mixed_account');
+                          let actionNode: React.ReactNode = (
+                            <span className="text-[var(--muted-foreground)]">No action</span>
+                          );
+                          if (isInvalidEmail) {
+                            actionNode = (
+                              <Link
+                                href={`/accounts/${encodeURIComponent(accountName.toLowerCase().replace(/\s+/g, '-'))}?tab=contacts#contact-discovery`}
+                                className="text-[var(--primary)] hover:underline"
+                              >
+                                Replace contact
+                              </Link>
+                            );
+                          } else if (isMixedAccount) {
+                            actionNode = (
+                              <span className="text-[var(--muted-foreground)]">Out of account scope</span>
+                            );
+                          } else if (isUnsubscribed) {
+                            actionNode = (
+                              <span className="text-[var(--muted-foreground)]">Suppressed</span>
+                            );
+                          }
+                          return (
+                            <tr key={item.to} className="border-b border-[var(--border)] last:border-0">
+                              <td className="py-1.5 pr-2 align-top text-[var(--foreground)]">{item.to}</td>
+                              <td className="py-1.5 pr-2 align-top text-[var(--muted-foreground)]">{item.reason.replaceAll('_', ' ')}</td>
+                              <td className="py-1.5 align-top">{actionNode}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
                 ) : null}
               </div>
             ) : null}

@@ -274,6 +274,33 @@ describe('AccountOutreachShell', () => {
     expect(sendBtn).not.toBeDisabled();
   });
 
+  it('renders a partial-send drill-down table with per-reason actions after a partial send (S3-T1)', async () => {
+    fetchMock.mockResolvedValueOnce(
+      new Response(JSON.stringify({
+        success: true,
+        sent: 1,
+        failed: 0,
+        total: 3,
+        skipped: [
+          { to: 'invalid@example.com', reason: 'invalid_email' },
+          { to: 'gone@example.com', reason: 'unsubscribed' },
+        ],
+      }), { status: 200, headers: { 'Content-Type': 'application/json' } }),
+    );
+
+    renderShell();
+    fireEvent.click(screen.getByRole('button', { name: /Send to 1 Recipient/i }));
+
+    const drillDown = await screen.findByTestId('partial-send-drill-down');
+    expect(drillDown).toHaveTextContent(/Skipped recipients \(2\)/);
+    expect(drillDown).toHaveTextContent('invalid@example.com');
+    expect(drillDown).toHaveTextContent('gone@example.com');
+    // invalid_email row gets a Replace contact link
+    expect(drillDown.querySelector('a[href*="tab=contacts"]')).not.toBeNull();
+    // unsubscribed row says Suppressed
+    expect(drillDown).toHaveTextContent(/Suppressed/);
+  });
+
   it('renders a "{N}/{T} sources cited" badge when the asset has a source-backed contract (S1-T1)', () => {
     render(
       <AccountOutreachShell

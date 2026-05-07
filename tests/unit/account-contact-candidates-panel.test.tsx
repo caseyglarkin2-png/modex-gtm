@@ -188,6 +188,70 @@ describe('AccountContactCandidatesPanel', () => {
     });
   });
 
+  it('colors the readiness pill by tier (S3-T4)', () => {
+    vi.stubGlobal('fetch', vi.fn());
+    render(
+      <AccountContactCandidatesPanel
+        slug="boston-beer-company"
+        accountName="Boston Beer Company"
+        initialCandidates={[
+          {
+            id: 100,
+            accountName: 'Boston Beer Company',
+            candidateKey: 'high@example.com',
+            fullName: 'High Tier',
+            title: 't',
+            email: 'high@example.com',
+            emailValid: true,
+            companyDomain: 'bostonbeer.com',
+            linkedinUrl: null,
+            source: 's',
+            sourceProvider: 'sales_agent',
+            confidenceScore: 90,
+            qualityScore: 90,
+            recommended: true,
+            recommendationReason: '',
+            state: 'staged',
+            promotedPersonaId: null,
+            replacedPersonaId: null,
+            deferredReason: null,
+            lastSeenAt: '2026-05-05T00:00:00.000Z',
+            readiness: { score: 92, tier: 'high', stale: false, freshness_days: null, reasons: [] },
+          },
+          {
+            id: 200,
+            accountName: 'Boston Beer Company',
+            candidateKey: 'low@example.com',
+            fullName: 'Low Tier',
+            title: 't',
+            email: 'low@example.com',
+            emailValid: false,
+            companyDomain: 'bostonbeer.com',
+            linkedinUrl: null,
+            source: 's',
+            sourceProvider: 'sales_agent',
+            confidenceScore: 30,
+            qualityScore: 40,
+            recommended: false,
+            recommendationReason: '',
+            state: 'staged',
+            promotedPersonaId: null,
+            replacedPersonaId: null,
+            deferredReason: null,
+            lastSeenAt: '2026-05-05T00:00:00.000Z',
+            readiness: { score: 35, tier: 'low', stale: true, freshness_days: null, reasons: [] },
+          },
+        ]}
+        replaceablePersonas={[]}
+      />,
+    );
+
+    const highPill = screen.getByTestId('readiness-pill-100');
+    expect(highPill.className).toMatch(/emerald/);
+    const lowPill = screen.getByTestId('readiness-pill-200');
+    expect(lowPill.className).toMatch(/red/);
+  });
+
   it('renders a "Replacing {persona}" banner when arriving via replace_persona deep link (S2-T1)', () => {
     vi.stubGlobal('fetch', vi.fn());
     render(
