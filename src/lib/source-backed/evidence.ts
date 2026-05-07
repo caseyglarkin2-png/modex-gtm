@@ -203,3 +203,30 @@ export async function loadEvidenceSummaryByAccountScope(
     })),
   };
 }
+
+/**
+ * Returns the subset of `accountNames` that have NO fresh evidence record
+ * attached. Used by the home cockpit and account list to surface accounts
+ * that genuinely need a research refresh, instead of collapsing the check
+ * across the whole priority pool (the prior binary scope check would hide
+ * stale accounts the moment any other priority account had fresh evidence).
+ */
+export async function getAccountsWithoutFreshEvidence(
+  accountNames: string[],
+  db: PrismaClient = prisma,
+): Promise<Set<string>> {
+  if (accountNames.length === 0) return new Set();
+  const fresh = await db.evidenceRecord.findMany({
+    where: {
+      account_name: { in: accountNames },
+      is_superseded: false,
+      freshness_status: 'fresh',
+    },
+    distinct: ['account_name'],
+    select: { account_name: true },
+  });
+  const freshSet = new Set(
+    fresh.map((row) => row.account_name).filter((name): name is string => Boolean(name)),
+  );
+  return new Set(accountNames.filter((name) => !freshSet.has(name)));
+}

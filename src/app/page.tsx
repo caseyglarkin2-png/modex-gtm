@@ -15,7 +15,7 @@ import { AutoRefresh } from '@/components/auto-refresh';
 import { Building2, Users, Waves as WavesIcon, CalendarCheck, Smartphone, Activity, ArrowRight, TrendingUp, BarChart3, Mail, MessageSquare, AlertTriangle, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { AccountOutcomeLogger } from '@/components/accounts/account-outcome-logger';
-import { loadEvidenceSummaryByAccountScope } from '@/lib/source-backed/evidence';
+import { getAccountsWithoutFreshEvidence } from '@/lib/source-backed/evidence';
 import { buildWaveTimeRemaining } from '@/lib/wave-time-remaining';
 
 export const dynamic = 'force-dynamic';
@@ -108,10 +108,8 @@ export default async function DashboardPage() {
     .filter((a) => a.priority_band === 'A' || a.priority_band === 'B')
     .map((a) => a.name);
   const fourteenDaysAgo = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000);
-  const [priorityEvidence, recentOutboundForPriority] = await Promise.all([
-    priorityAccountNames.length > 0
-      ? loadEvidenceSummaryByAccountScope(priorityAccountNames)
-      : Promise.resolve(null),
+  const [stalePriorityNames, recentOutboundForPriority] = await Promise.all([
+    getAccountsWithoutFreshEvidence(priorityAccountNames),
     priorityAccountNames.length > 0
       ? prisma.emailLog.findMany({
           where: {
@@ -126,13 +124,7 @@ export default async function DashboardPage() {
   const accountsWithRecentOutbound = new Set(
     recentOutboundForPriority.map((row) => row.account_name).filter(Boolean) as string[],
   );
-  // Priority accounts with no fresh evidence: either no evidence summary at all,
-  // or all freshness counts are zero/stale. The summary is account-scope-wide,
-  // so we approximate by checking the freshness counters; if no fresh records
-  // exist across the entire scope, we know every priority account is at risk.
-  const stalePriorityCount = priorityEvidence == null || priorityEvidence.freshness.fresh === 0
-    ? priorityAccountNames.length
-    : 0;
+  const stalePriorityCount = stalePriorityNames.size;
   const untouchedPriorityCount = priorityAccountNames.filter(
     (name) => !accountsWithRecentOutbound.has(name),
   ).length;
@@ -152,11 +144,11 @@ export default async function DashboardPage() {
     stuckJobs: stuckJobs.length,
     engagementAlerts: recentReplies.length,
     proofStatus: {
-      sprint: 'Sprint 1',
-      status: 'Production browser-proven',
+      sprint: 'Operator UX v3',
+      status: 'Source-backed surfaces live',
       result: 'pass',
       route: '/ops',
-      evidence: 'Canonical navigation click proof passed on Vercel production with skipped 0.',
+      evidence: 'Citations, inline edits, time-aware callouts and quick-action toolbar shipped to production.',
     },
   });
 
@@ -237,10 +229,15 @@ export default async function DashboardPage() {
     { label: 'Meetings', count: meetingsBooked, color: 'bg-emerald-500' },
   ];
 
+  // Pipeline funnel widths are normalized against the same denominator
+  // (total target accounts) so the bars are honestly comparable. Earlier
+  // versions divided "contacted" by emailsSent, which mixed dimensions —
+  // 144 accounts contacted out of 2,081 emails read as 7%, while siblings
+  // computed account-share, so the bar lied about funnel shape.
   const funnelWidths = [
     accounts.length ? 100 : 0,
     accounts.length ? Math.round((stats.researched / accounts.length) * 100) : 0,
-    stats.emailsSent ? Math.round((contacted / stats.emailsSent) * 100) : 0,
+    accounts.length ? Math.round((contacted / accounts.length) * 100) : 0,
     accounts.length ? Math.round((meetingsBooked / accounts.length) * 100) : 0,
   ];
 
@@ -738,7 +735,9 @@ export default async function DashboardPage() {
                           ? 'bg-emerald-100 text-emerald-900 hover:bg-emerald-100'
                           : remaining.tone === 'amber'
                             ? 'bg-amber-100 text-amber-900 hover:bg-amber-100'
-                            : 'bg-red-100 text-red-900 hover:bg-red-100'
+                            : remaining.tone === 'neutral'
+                              ? 'bg-neutral-100 text-neutral-700 hover:bg-neutral-100'
+                              : 'bg-red-100 text-red-900 hover:bg-red-100'
                       }
                       data-testid={`wave-time-remaining-${wg.order}`}
                     >

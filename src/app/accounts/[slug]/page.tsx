@@ -59,7 +59,7 @@ import { AccountOutreachShell } from '@/components/accounts/account-outreach-she
 import { OutboundCardRefreshButton } from '@/components/accounts/outbound-card-refresh-button';
 import { EditableLongText } from '@/components/editable-long-text';
 import { SOURCE_APPROVAL_GATE_ENABLED } from '@/lib/feature-flags';
-import { getModexFloorEntry } from '@/lib/data/modex-floor-plan';
+import { getModexFloorEntry, isModexPast } from '@/lib/data/modex-floor-plan';
 import { AgentActionDialog } from '@/components/agent-actions/agent-action-dialog';
 import { AgentIntelStrip } from '@/components/agent-actions/agent-intel-strip';
 import { SendJobTracker } from '@/components/generated-content/send-job-tracker';
@@ -361,13 +361,20 @@ export default async function AccountDetailPage({
                 {(() => {
                   const floor = getModexFloorEntry(account.name);
                   if (!floor) return null;
+                  const past = isModexPast();
+                  const label = past
+                    ? `Was on MODEX floor · ${floor.tier === 'tier_1' ? 'Tier 1' : 'Tier 2'}`
+                    : `MODEX ${floor.tier === 'tier_1' ? 'Tier 1' : 'Tier 2'}`;
+                  const tooltip = past
+                    ? `${floor.context ?? 'On the MODEX 2026 floor plan'} — event concluded; use for follow-up context.`
+                    : floor.context ?? 'On the MODEX floor plan';
                   return (
                     <Badge
-                      variant={floor.tier === 'tier_1' ? 'default' : 'secondary'}
-                      title={floor.context ?? 'On the MODEX floor plan'}
+                      variant={past ? 'outline' : floor.tier === 'tier_1' ? 'default' : 'secondary'}
+                      title={tooltip}
                       data-testid="modex-floor-badge"
                     >
-                      MODEX {floor.tier === 'tier_1' ? 'Tier 1' : 'Tier 2'}
+                      {label}
                     </Badge>
                   );
                 })()}

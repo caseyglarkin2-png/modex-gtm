@@ -50,3 +50,15 @@ export function getModexFloorEntry(accountName: string): ModexFloorEntry | null 
 }
 
 export { MODEX_FLOOR_PLAN };
+
+/** MODEX 2026 ran Mon Apr 13 – Thu Apr 16. Inclusive of the final day. */
+const MODEX_END_2026 = new Date('2026-04-16T23:59:59Z');
+
+/**
+ * True once MODEX 2026 is fully concluded. The floor-plan badge flips
+ * from a forward-looking "must-connect" prompt to a historical marker
+ * so the operator isn't nudged toward an event that already happened.
+ */
+export function isModexPast(now: Date = new Date()): boolean {
+  return now.getTime() > MODEX_END_2026.getTime();
+}

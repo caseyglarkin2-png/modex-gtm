@@ -25,9 +25,15 @@ describe('buildWaveTimeRemaining (S5-T1)', () => {
     expect(buildWaveTimeRemaining('4/1')).toEqual({ label: 'Last day', tone: 'red' });
   });
 
-  it('returns red "Overdue Xd" when the wave end has passed', () => {
+  it('returns red "Overdue Xd" within 7 days of the wave end', () => {
     vi.setSystemTime(new Date('2026-04-05T08:00:00.000Z'));
     expect(buildWaveTimeRemaining('4/1')).toEqual({ label: 'Overdue 4d', tone: 'red' });
+  });
+
+  it('returns neutral "Wrapped Xd ago" once the wave end is more than 7 days past', () => {
+    vi.setSystemTime(new Date('2026-05-07T08:00:00.000Z'));
+    // 4/16 is 21 days past — the wave clearly concluded, so don't shout red overdue.
+    expect(buildWaveTimeRemaining('4/16')).toEqual({ label: 'Wrapped 21d ago', tone: 'neutral' });
   });
 
   it('rolls dates that are >6 months in the past forward to next year', () => {

@@ -8,14 +8,15 @@
  * to repeating next year.
  *
  * Tone thresholds:
- *   > 7 days  → green ("Xd left")
- *   1-7 days  → amber ("Xd left")
- *   = 0       → red ("Last day")
- *   < 0       → red ("Overdue Xd")
+ *   > 7 days     → green   ("Xd left")
+ *   1-7 days     → amber   ("Xd left")
+ *   = 0          → red     ("Last day")
+ *   -1 to -7     → red     ("Overdue Xd")
+ *   < -7         → neutral ("Wrapped Xd ago")  // wave clearly concluded; alarm is misleading
  */
 export type WaveTimeRemaining = {
   label: string;
-  tone: 'green' | 'amber' | 'red';
+  tone: 'green' | 'amber' | 'red' | 'neutral';
 };
 
 const SIX_MONTHS_MS = 1000 * 60 * 60 * 24 * 180;
@@ -28,6 +29,7 @@ export function buildWaveTimeRemaining(endDateStr: string, now = new Date()): Wa
     end = new Date(now.getFullYear() + 1, m - 1, d);
   }
   const days = Math.round((end.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+  if (days < -7) return { label: `Wrapped ${Math.abs(days)}d ago`, tone: 'neutral' };
   if (days < 0) return { label: `Overdue ${Math.abs(days)}d`, tone: 'red' };
   if (days === 0) return { label: 'Last day', tone: 'red' };
   if (days <= 7) return { label: `${days}d left`, tone: 'amber' };
