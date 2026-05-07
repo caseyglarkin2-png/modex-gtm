@@ -95,6 +95,11 @@ function buildAgentContextBlock(ctx: Pick<PromptContext, 'agentContextSummary' |
 
 function buildGenerationInputBlock(contract?: GenerationInputContract | null): string {
   if (!contract) return '';
+  const evidenceMap = [
+    ...contract.signals.map((signal, index) => `signal_${index + 1} => ${signal}`),
+    ...contract.proof_context.map((proof, index) => `proof_${index + 1} => ${proof}`),
+    ...contract.recommended_contacts.map((contact, index) => `contact_${index + 1} => Recommended contact: ${contact}`),
+  ];
   const lines = [
     `Account brief: ${contract.account_brief}`,
     contract.signals.length ? `Fresh signals: ${contract.signals.join(' | ')}` : '',
@@ -102,6 +107,7 @@ function buildGenerationInputBlock(contract?: GenerationInputContract | null): s
     contract.recommended_contacts.length ? `Recommended contacts: ${contract.recommended_contacts.join(' | ')}` : '',
     contract.committee_gaps.length ? `Committee gaps: ${contract.committee_gaps.join(' | ')}` : '',
     contract.proof_context.length ? `Proof context: ${contract.proof_context.join(' | ')}` : '',
+    evidenceMap.length ? `Evidence map:\n${evidenceMap.map((entry) => `- ${entry}`).join('\n')}` : '',
     `CTA mode: ${contract.cta_mode}`,
     `Freshness: ${contract.freshness.source}${contract.freshness.stale ? ' / stale' : ''}`,
   ].filter(Boolean);
@@ -158,6 +164,8 @@ CRITICAL RULES:
 - Favor language like "I may be off," "from the outside," and "curious if this is relevant" over certainty.
 - If you mention Primo, keep it to one clause and tie it to headcount-neutral throughput, not hype.
 - Avoid sounding urgent for urgency's sake. The note should feel useful and observational.
+- Include a final citations line with explicit evidence IDs from the evidence map when present, for example:
+CITATIONS: [[SRC:signal_1]] [[SRC:proof_1]]
 
 Output: Only the email body. No subject line. No sign-off.`;
 }
@@ -196,6 +204,8 @@ If the recipient previously engaged, it is acceptable to ask whether they want t
 
 Avoid loaded metaphors or dramatic language. This should sound like a considerate operator making one more relevant point, not pressing for attention.
 Default to "we," not "I." Keep the CTA low-friction and reply-friendly.
+- Include a final citations line with explicit evidence IDs from the evidence map when present, for example:
+CITATIONS: [[SRC:signal_1]] [[SRC:proof_1]]
 
 Output: Only the email body. No subject line. No sign-off.`;
 }
@@ -218,6 +228,8 @@ LinkedIn DMs must be 40-60 words max. One thought. One ask. No small talk.
 ${buildCampaignAskGuidance(ctx)} Lead with the yard as the constraint. End with a question.
 ${buildColdOutboundPolicyNotes('cold_email', 'dm')}
 Default to "we," not "I." Keep the CTA to a light reaction or short-overview offer.
+- Include a final citations line with explicit evidence IDs from the evidence map when present, for example:
+CITATIONS: [[SRC:signal_1]]
 
 Output: Only the message text. No greeting label, no signature.`;
 }
@@ -245,6 +257,8 @@ Structure:
 3. Qualifying question: How their yards run today
 4. Ask: Offer the short scorecard, 1-page overview, or ask who owns this lane. Do not ask for calendar time.
 5. Objection handling (2-3 common objections with counters)
+- Include a final citations line with explicit evidence IDs from the evidence map when present, for example:
+CITATIONS: [[SRC:signal_1]] [[SRC:proof_1]]
 
 Output: Formatted script with section labels.`;
 }
@@ -272,6 +286,8 @@ Create a structured brief:
 4. Opening questions (3 questions that surface the variance tax in their words)
 5. Objections + counters (2-3)
 6. Ideal next step
+- Include a final citations line with explicit evidence IDs from the evidence map when present, for example:
+CITATIONS: [[SRC:signal_1]] [[SRC:proof_1]]
 
 Output: Structured markdown with headers.`;
 }
@@ -355,7 +371,15 @@ Generate ONLY valid JSON matching this schema — no markdown, no commentary:
   "customerQuote": "string — use the verified quote: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office.' OR create an illustrative variation relevant to this vertical (prefix with '(Illustrative)')",
   "bestFit": "string — 1-2 sentences about why this account is an ideal fit referencing specific operations and commercial stakes",
   "publicContext": "string — optional; include only verifiable public sources/signals (earnings call comments, press releases, facility changes, hiring trends). Never use speculative event-attendance assumptions.",
-  "suggestedNextStep": "string — low-friction CTA like '${getOnePagerSuggestedNextStep('the account')}'. Never ask for a meeting, call, date, benchmark session, or calendar slot."
+  "suggestedNextStep": "string — low-friction CTA like '${getOnePagerSuggestedNextStep('the account')}'. Never ask for a meeting, call, date, benchmark session, or calendar slot.",
+  "sourceBacked": {
+    "accountWedge": "string",
+    "personWedge": "string",
+    "angles": [
+      { "label": "string", "rationale": "string", "evidenceRefIds": ["signal_1", "proof_1"] }
+    ],
+    "citations": ["signal_1", "proof_1"]
+  }
 }`;
 }
 
@@ -466,5 +490,6 @@ CRITICAL OUTPUT RULES:
 Output format:
 SUBJECT: <subject line>
 ---
-<email body>`;
+<email body>
+CITATIONS: [[SRC:signal_1]] [[SRC:proof_1]]`;
 }

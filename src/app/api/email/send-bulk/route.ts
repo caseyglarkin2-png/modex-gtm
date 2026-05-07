@@ -8,10 +8,17 @@ import { rateLimit } from '@/lib/rate-limit';
 import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
 import { advancePipelineStage, derivePipelineStage } from '@/lib/pipeline';
 import { markAgentActionCacheStale } from '@/lib/agent-actions/cache';
+import { SOURCE_APPROVAL_GATE_ENABLED } from '@/lib/feature-flags';
+import { requiresApprovalForSend } from '@/lib/revops/generated-content-approval';
+import { enforceOneAccountInvariant } from '@/lib/revops/one-account-invariant';
+import { buildCandidateTraceLookup, resolveCandidateTrace } from '@/lib/revops/candidate-trace';
+import { recordSourceBackedMetric } from '@/lib/source-backed/metrics';
 import {
+  approvalRequiredSendBlocker,
   generatedContentMissingSendBlocker,
   invalidJsonSendBlocker,
   invalidPayloadSendBlocker,
+  mixedAccountPayloadSendBlocker,
   noSendableRecipientsSendBlocker,
   serializeSendBlocker,
 } from '@/lib/email/send-blockers';
@@ -38,7 +45,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(serializeSendBlocker(block), { status: block.status });
   }
 
-  const { recipients, subject, bodyHtml, accountName, generatedContentId, workflowMetadata } = parsed.data;
+  const { recipients, subject, bodyHtml, cc, accountName, generatedContentId, workflowMetadata } = parsed.data;
 
   const isPlainText = !bodyHtml.trim().startsWith('<');
   const html = isPlainText ? wrapHtml(bodyHtml, accountName ?? 'the team') : bodyHtml;
@@ -65,6 +72,7 @@ export async function POST(req: NextRequest) {
       accountName: persona.account_name,
     };
   });
+  let generatedAccountName: string | null = null;
   if (generatedContentId) {
     const generated = await prisma.generatedContent.findUnique({
       where: { id: generatedContentId },
@@ -88,12 +96,70 @@ export async function POST(req: NextRequest) {
       const block = generatedContentMissingSendBlocker(generatedContentId);
       return NextResponse.json(serializeSendBlocker(block), { status: block.status });
     }
+    generatedAccountName = generated.account_name ?? null;
+    if (SOURCE_APPROVAL_GATE_ENABLED) {
+      const approvalDecision = await requiresApprovalForSend(prisma, generatedContentId);
+      if (!approvalDecision.approved) {
+        await recordSourceBackedMetric({
+          metric: 'approval_blocks',
+          endpoint: '/api/email/send-bulk',
+          accountName: generatedAccountName ?? accountName ?? null,
+          details: {
+            generatedContentId,
+            status: approvalDecision.status,
+          },
+        });
+        const block = approvalRequiredSendBlocker({
+          generatedContentId,
+          status: approvalDecision.status,
+          reviewId: approvalDecision.reviewId,
+        });
+        return NextResponse.json(serializeSendBlocker(block), { status: block.status });
+      }
+    }
   }
+  const accountInvariant = await enforceOneAccountInvariant(prisma, {
+    accountName: accountName ?? generatedAccountName ?? null,
+    recipients: resolvedRecipients.map((recipient) => ({
+      to: recipient.to,
+      accountName: recipient.accountName ?? accountName ?? generatedAccountName ?? null,
+    })),
+    cc,
+  });
+  if (!accountInvariant.ok) {
+    await recordSourceBackedMetric({
+      metric: 'one_account_invariant_violations',
+      endpoint: '/api/email/send-bulk',
+      accountName: accountName ?? generatedAccountName ?? null,
+      details: accountInvariant.details,
+    });
+    const block = mixedAccountPayloadSendBlocker(accountInvariant.details);
+    return NextResponse.json(serializeSendBlocker(block), { status: block.status });
+  }
+  const traceLookup = await buildCandidateTraceLookup(prisma, {
+    accountNames: accountInvariant.scopedAccountNames,
+    emails: [...resolvedRecipients.map((recipient) => recipient.to), ...accountInvariant.normalizedCc],
+  });
   const unsubscribedRows = await prisma.unsubscribedEmail.findMany({
-    where: { email: { in: resolvedRecipients.map((recipient) => recipient.to) } },
+    where: { email: { in: [...resolvedRecipients.map((recipient) => recipient.to), ...accountInvariant.normalizedCc] } },
     select: { email: true },
   });
   const unsubscribedSet = new Set(unsubscribedRows.map((row) => row.email));
+  const ccEligibility = await Promise.all(
+    accountInvariant.normalizedCc.map(async (email) => ({
+      email,
+      guard: await evaluateRecipientEligibility(prisma, email),
+    })),
+  );
+  const blockedCc = ccEligibility.find((entry) => !entry.guard.ok || unsubscribedSet.has(entry.email));
+  if (blockedCc) {
+    return NextResponse.json(
+      serializeSendBlocker(noSendableRecipientsSendBlocker({
+        skipped: [{ to: blockedCc.email, reason: blockedCc.guard.reason ?? 'CC recipient is not sendable.' }],
+      })),
+      { status: 400 },
+    );
+  }
 
   const eligibility = await Promise.all(
     resolvedRecipients.map(async (recipient) => {
@@ -134,8 +200,25 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(serializeSendBlocker(block, { success: false, sent: 0, failed: resolvedRecipients.length, skipped }), { status: block.status });
   }
 
-  const payloads = eligibleRecipients.map((r) => ({ to: r.to, subject, html }));
+  const payloads = eligibleRecipients.map((r) => ({
+    to: r.to,
+    cc: accountInvariant.normalizedCc.filter((email) => email !== r.to),
+    subject,
+    html,
+  }));
   const results = await sendBulk(payloads);
+  const ccSanitizationDrops = eligibleRecipients.reduce((sum, recipient) => (
+    sum + (accountInvariant.normalizedCc.length - accountInvariant.normalizedCc.filter((email) => email !== recipient.to).length)
+  ), 0);
+  if (ccSanitizationDrops > 0) {
+    await recordSourceBackedMetric({
+      metric: 'cc_sanitization_drops',
+      endpoint: '/api/email/send-bulk',
+      accountName: accountName ?? generatedAccountName ?? accountInvariant.canonicalAccountName ?? null,
+      value: ccSanitizationDrops,
+      details: { recipientCount: eligibleRecipients.length },
+    });
+  }
 
   const sent = results.filter((r) => r.status === 'fulfilled').length;
   const failed = results.filter((r) => r.status === 'rejected').length;
@@ -167,15 +250,45 @@ export async function POST(req: NextRequest) {
               select: { name: true, pipeline_stage: true, outreach_status: true, meeting_status: true },
             }).catch(() => null);
 
+      const recipientCandidateTrace = resolveCandidateTrace(traceLookup, {
+        email: recipient.to,
+        accountName: resolvedAccountName || accountInvariant.canonicalAccountName,
+      });
+      const ccCandidateTraces = accountInvariant.normalizedCc
+        .map((email) => ({
+          email,
+          trace: resolveCandidateTrace(traceLookup, {
+            email,
+            accountName: resolvedAccountName || accountInvariant.canonicalAccountName,
+          }),
+        }))
+        .filter((entry) => entry.trace)
+        .map((entry) => ({
+          email: entry.email,
+          trace: entry.trace,
+        }));
+
       const logMetadata = workflowMetadata
         ? JSON.parse(JSON.stringify({
-            workflow: workflowMetadata,
+            workflow: {
+              ...workflowMetadata,
+              details: {
+                ...(workflowMetadata.details ?? {}),
+                candidateTrace: {
+                  recipient: recipientCandidateTrace,
+                  cc: ccCandidateTraces,
+                },
+              },
+            },
             recipient: {
               personaId: recipient.personaId ?? null,
               personaName: recipient.personaName ?? null,
               readinessScore: recipient.readinessScore ?? null,
               readinessTier: recipient.readinessTier ?? null,
               stale: recipient.stale ?? null,
+              cc: accountInvariant.normalizedCc.filter((email) => email !== recipient.to),
+              candidateTrace: recipientCandidateTrace,
+              ccCandidateTraces,
             },
           }))
         : undefined;

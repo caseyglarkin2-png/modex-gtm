@@ -93,6 +93,15 @@ export async function POST(req: NextRequest) {
     await tx.operatorOutcome.deleteMany({
       where: { account_name: { in: [...ACCOUNT_PAGE_SEND_ACCOUNTS] } },
     });
+    await tx.messageEvolutionRegistry.deleteMany({
+      where: { account_name: { in: [...ACCOUNT_PAGE_SEND_ACCOUNTS] } },
+    });
+    await tx.evidenceRecord.deleteMany({
+      where: { account_name: { in: [...ACCOUNT_PAGE_SEND_ACCOUNTS] } },
+    });
+    await tx.researchRun.deleteMany({
+      where: { account_name: { in: [...ACCOUNT_PAGE_SEND_ACCOUNTS] } },
+    });
     await tx.signalContentLink.deleteMany({
       where: { account_name: { in: [...ACCOUNT_PAGE_SEND_ACCOUNTS] } },
     });
@@ -257,6 +266,22 @@ export async function POST(req: NextRequest) {
         },
       },
     });
+    await tx.messageEvolutionRegistry.create({
+      data: {
+        account_name: fixture.primaryAccountName,
+        generated_content_id: generatedAsset.id,
+        status: 'approved',
+        owner: 'Casey',
+        reviewed_by: 'Casey',
+        reviewed_at: now,
+        rationale: 'Deterministic proof seed marks generated asset as approved for send.',
+        evidence_snapshot: {
+          source: 'proof_seed',
+          generated_content_id: generatedAsset.id,
+          status: 'approved',
+        },
+      },
+    });
 
     const seededEmail = await tx.emailLog.create({
       data: {
@@ -273,6 +298,79 @@ export async function POST(req: NextRequest) {
         opened_at: now,
         sent_at: now,
       },
+    });
+
+    const successfulRun = await tx.researchRun.create({
+      data: {
+        account_name: fixture.primaryAccountName,
+        status: 'succeeded',
+        run_key: `${fixture.cacheKey}:success`,
+        provider_status: {
+          clawd: 'healthy',
+          sales_agent: 'healthy',
+        },
+        started_at: new Date(now.getTime() - 2 * 60 * 1000),
+        completed_at: new Date(now.getTime() - 30 * 1000),
+      },
+      select: { id: true },
+    });
+
+    await tx.researchRun.create({
+      data: {
+        account_name: fixture.primaryAccountName,
+        status: 'failed',
+        run_key: `${fixture.cacheKey}:failed`,
+        provider_status: {
+          clawd: 'healthy',
+          sales_agent: 'unavailable',
+        },
+        error_map: {
+          sales_agent: 'timeout contacting provider',
+        },
+        started_at: new Date(now.getTime() - 18 * 60 * 1000),
+        completed_at: new Date(now.getTime() - 17 * 60 * 1000),
+      },
+    });
+
+    await tx.evidenceRecord.createMany({
+      data: [
+        {
+          research_run_id: successfulRun.id,
+          account_name: fixture.primaryAccountName,
+          claim: 'Primary account and alias are now linked in canonical scope.',
+          claim_hash: 'proof-claim-canonical-link',
+          source_url: 'https://yardflow.local/proof/canonical-link',
+          source_title: 'Canonical scope proof',
+          source_type: 'local',
+          provider: 'proof_seed',
+          observed_at: new Date(now.getTime() - 20 * 60 * 1000),
+          freshness_status: 'fresh',
+          fresh_until: new Date(now.getTime() + 24 * 60 * 60 * 1000),
+          deterministic_key: `${fixture.cacheKey}:canonical-link`,
+          version: 1,
+          metadata: {
+            ticket: 'S0-T5',
+          },
+        },
+        {
+          research_run_id: successfulRun.id,
+          account_name: fixture.primaryAccountName,
+          claim: 'Malformed recipient remains blocked while valid recipient stays sendable.',
+          claim_hash: 'proof-claim-recipient-gating',
+          source_url: 'https://yardflow.local/proof/recipient-gating',
+          source_title: 'Recipient guard proof',
+          source_type: 'local',
+          provider: 'proof_seed',
+          observed_at: new Date(now.getTime() - 90 * 60 * 1000),
+          freshness_status: 'aging',
+          fresh_until: new Date(now.getTime() - 30 * 60 * 1000),
+          deterministic_key: `${fixture.cacheKey}:recipient-gating`,
+          version: 1,
+          metadata: {
+            ticket: 'S0-T5',
+          },
+        },
+      ],
     });
 
     await tx.accountContactCandidate.create({
@@ -440,6 +538,9 @@ export async function POST(req: NextRequest) {
         reason: 'Deterministic proof unsubscribed recipient',
       },
     });
+  }, {
+    maxWait: 10_000,
+    timeout: 30_000,
   });
 
   return NextResponse.json({

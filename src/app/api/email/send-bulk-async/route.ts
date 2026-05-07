@@ -5,10 +5,16 @@ import { rateLimit } from '@/lib/rate-limit';
 import { allocateRecipientsDeterministic } from '@/lib/experiments/split';
 import { getStrategyPreset, validateSendStrategy } from '@/lib/revops/send-strategy';
 import { buildInfographicEvent, parseInfographicMetadata } from '@/lib/revops/infographic-journey';
+import { SOURCE_APPROVAL_GATE_ENABLED } from '@/lib/feature-flags';
+import { requiresApprovalForSend } from '@/lib/revops/generated-content-approval';
+import { enforceOneAccountInvariant } from '@/lib/revops/one-account-invariant';
+import { recordSourceBackedMetric } from '@/lib/source-backed/metrics';
 import {
+  approvalRequiredSendBlocker,
   generatedContentMissingSendBlocker,
   invalidJsonSendBlocker,
   invalidPayloadSendBlocker,
+  mixedAccountPayloadSendBlocker,
   noSendableRecipientsSendBlocker,
   serializeSendBlocker,
 } from '@/lib/email/send-blockers';
@@ -146,7 +152,66 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(serializeSendBlocker(block), { status: block.status });
   }
 
-  const recipientRows = materializedItems.flatMap((item) => {
+  const preparedItems = await Promise.all(materializedItems.map(async (item) => {
+    const generated = generatedById.get(item.generatedContentId!);
+    if (SOURCE_APPROVAL_GATE_ENABLED && item.generatedContentId) {
+      const approvalDecision = await requiresApprovalForSend(prisma, item.generatedContentId);
+      if (!approvalDecision.approved) {
+        return {
+          item,
+          invariant: null,
+          approvalBlocked: {
+            generatedContentId: item.generatedContentId,
+            status: approvalDecision.status,
+            reviewId: approvalDecision.reviewId,
+          },
+        } as const;
+      }
+    }
+    const invariant = await enforceOneAccountInvariant(prisma, {
+      accountName: item.accountName ?? generated?.account_name ?? null,
+      recipients: item.recipients.map((recipient) => {
+        const persona = recipient.personaId ? personaById.get(recipient.personaId) : null;
+        return {
+          to: persona?.email ?? recipient.to,
+          accountName: persona?.account_name ?? recipient.accountName ?? item.accountName ?? generated?.account_name ?? null,
+        };
+      }),
+      cc: item.cc,
+    });
+    return {
+      item,
+      invariant,
+      approvalBlocked: null,
+    } as const;
+  }));
+
+  const approvalBlocked = preparedItems.find((entry) => entry.approvalBlocked);
+  if (approvalBlocked?.approvalBlocked) {
+    await recordSourceBackedMetric({
+      metric: 'approval_blocks',
+      endpoint: '/api/email/send-bulk-async',
+      accountName: approvalBlocked.item.accountName,
+      details: approvalBlocked.approvalBlocked,
+    });
+    const block = approvalRequiredSendBlocker(approvalBlocked.approvalBlocked);
+    return NextResponse.json(serializeSendBlocker(block), { status: block.status });
+  }
+
+  const invariantViolation = preparedItems.find((entry) => entry.invariant && !entry.invariant.ok);
+  if (invariantViolation?.invariant && !invariantViolation.invariant.ok) {
+    await recordSourceBackedMetric({
+      metric: 'one_account_invariant_violations',
+      endpoint: '/api/email/send-bulk-async',
+      accountName: invariantViolation.item.accountName,
+      details: invariantViolation.invariant.details,
+    });
+    const block = mixedAccountPayloadSendBlocker(invariantViolation.invariant.details);
+    return NextResponse.json(serializeSendBlocker(block), { status: block.status });
+  }
+
+  const recipientRows = preparedItems.flatMap(({ item, invariant }) => {
+    const normalizedCc = invariant?.ok ? invariant.normalizedCc : [];
     const generated = generatedById.get(item.generatedContentId!);
     return item.recipients.map((recipient) => {
       const persona = recipient.personaId ? personaById.get(recipient.personaId) : null;
@@ -160,13 +225,15 @@ export async function POST(req: NextRequest) {
         sequence_position: item.sequencePosition ?? null,
         persona_name: persona?.name ?? recipient.personaName ?? null,
         to_email: toEmail,
+        cc_input_count: normalizedCc.length,
+        cc_emails: normalizedCc.filter((email) => email !== toEmail),
         subject: item.subject,
         body_html: item.bodyHtml,
         readiness_score: recipient.readinessScore ?? null,
         readiness_tier: recipient.readinessTier ?? null,
         stale: recipient.stale ?? null,
         canonical_error: null,
-        idempotency_seed: `${item.generatedContentId}:${toEmail}:${item.subject}`,
+        idempotency_seed: `${item.generatedContentId}:${toEmail}:${item.subject}:${normalizedCc.join('|')}`,
       };
     });
   });
@@ -180,6 +247,18 @@ export async function POST(req: NextRequest) {
       if (leftSeq !== rightSeq) return leftSeq - rightSeq;
       return left.account_name.localeCompare(right.account_name);
     });
+  const ccSanitizationDrops = recipientRows.reduce((sum, row) => (
+    sum + (row.cc_input_count - row.cc_emails.length)
+  ), 0);
+  if (ccSanitizationDrops > 0) {
+    await recordSourceBackedMetric({
+      metric: 'cc_sanitization_drops',
+      endpoint: '/api/email/send-bulk-async',
+      accountName: uniqueRecipientRows[0]?.account_name ?? null,
+      value: ccSanitizationDrops,
+      details: { recipientCount: uniqueRecipientRows.length },
+    });
+  }
 
   if (uniqueRecipientRows.length === 0) {
     const block = noSendableRecipientsSendBlocker();
@@ -281,6 +360,7 @@ export async function POST(req: NextRequest) {
             account_name: row.account_name,
             persona_name: row.persona_name,
             to_email: row.to_email,
+            cc_emails: row.cc_emails,
             status: 'pending',
             idempotency_key: `${randomUUID()}:${row.idempotency_seed}`,
           })),

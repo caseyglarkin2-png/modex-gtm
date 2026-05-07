@@ -8,6 +8,13 @@ import { isWarmIntroOnlyAccount } from '@/lib/studio/guardrails';
 import { getAgentContentContext, toAgentMetadata } from '@/lib/agent-actions/content-context';
 import { COLD_OUTBOUND_PROMPT_POLICY_VERSION, getCtaPolicy } from '@/lib/revops/cold-outbound-policy';
 import { buildGenerationInputContract } from '@/lib/agent-actions/generation-input';
+import {
+  assertMinimumCitationThreshold,
+  buildSourceBackedContractFromGeneratedText,
+  stripSourceMarkers,
+} from '@/lib/source-backed/attribution';
+import { persistSourceAttributionLinks } from '@/lib/source-backed/persistence';
+import { recordSourceBackedMetric } from '@/lib/source-backed/metrics';
 
 export const dynamic = 'force-dynamic';
 
@@ -71,6 +78,11 @@ function parseEmailContent(raw: string): { subject: string; body: string } {
     .replace(/\n{1,3}Casey\s*$/i, '')
     .trim();
 
+  body = body
+    .replace(/^CITATIONS:\s*.+$/gim, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+
   // Also normalize subject: strip smart quotes
   const cleanSubject = subject
     .replace(/[\u2018\u2019]/g, "'")
@@ -131,6 +143,17 @@ export async function POST(req: NextRequest) {
   const agentContext = useLiveIntel
     ? await getAgentContentContext({ accountName, personaName, refresh: refreshContext })
     : null;
+  if (useLiveIntel && (!agentContext || agentContext.status !== 'ok')) {
+    await recordSourceBackedMetric({
+      metric: 'sidecar_unavailable',
+      endpoint: '/api/ai/sequence',
+      accountName,
+      details: {
+        useLiveIntel,
+        status: agentContext?.status ?? 'missing',
+      },
+    });
+  }
   const initialStepPolicy = getCtaPolicy('outreach_sequence', 'sequence_step_1');
   const generationInput = buildGenerationInputContract(agentContext, initialStepPolicy.ctaMode);
 
@@ -161,6 +184,7 @@ export async function POST(req: NextRequest) {
     body: string;
     dayOffset: number;
   }> = [];
+  const rawOutputs: string[] = [];
 
   const dayOffsets: Record<string, number> = {
     initial_email: 0,
@@ -173,11 +197,12 @@ export async function POST(req: NextRequest) {
     try {
       const prompt = buildOutreachSequencePrompt(ctx, step);
       const raw = await generateText(prompt, 400);
+      rawOutputs.push(raw);
       const { subject, body } = parseEmailContent(raw);
       results.push({
         step,
-        subject,
-        body,
+        subject: stripSourceMarkers(subject),
+        body: stripSourceMarkers(body),
         dayOffset: dayOffsets[step] ?? 0,
       });
     } catch (err) {
@@ -190,10 +215,35 @@ export async function POST(req: NextRequest) {
     }
   }
 
+  const sourceAttribution = buildSourceBackedContractFromGeneratedText({
+    content: rawOutputs.join('\n\n'),
+    accountName,
+    personaName: persona?.name ?? personaName,
+    generationInput,
+    citationThreshold: 1,
+  });
+  const citationGate = assertMinimumCitationThreshold({
+    attribution: sourceAttribution,
+    requireAttribution: useLiveIntel && Boolean((generationInput?.signals.length ?? 0) + (generationInput?.proof_context.length ?? 0) > 0),
+    citationThreshold: 1,
+  });
+  if (!citationGate.ok) {
+    await recordSourceBackedMetric({
+      metric: 'citation_rejections',
+      endpoint: '/api/ai/sequence',
+      accountName,
+      details: citationGate.details,
+    });
+    return NextResponse.json({
+      error: citationGate.reason,
+      details: citationGate.details,
+    }, { status: 422 });
+  }
+
   // Best-effort save to DB
   try {
     const { prisma } = await import('@/lib/prisma');
-    await prisma.generatedContent.create({
+    const created = await prisma.generatedContent.create({
       data: {
         account_name: accountName,
         persona_name: persona?.name ?? personaName ?? null,
@@ -205,10 +255,18 @@ export async function POST(req: NextRequest) {
           agent_context_summary: generationInput?.account_brief ?? agentContext?.summary ?? null,
           agent_context_freshness: generationInput?.freshness ?? null,
           generation_input_contract: generationInput,
+          source_backed_contract_v1: sourceAttribution,
           agentContext: toAgentMetadata(agentContext, initialStepPolicy.ctaMode),
         },
         content: JSON.stringify(results),
       },
+      select: { id: true, campaign_id: true },
+    });
+    await persistSourceAttributionLinks(prisma, {
+      accountName,
+      campaignId: created.campaign_id ?? null,
+      generatedContentId: created.id,
+      attribution: sourceAttribution,
     });
   } catch {
     // DB offline — skip
@@ -221,5 +279,6 @@ export async function POST(req: NextRequest) {
     sequence: results,
     agentContext: toAgentMetadata(agentContext, initialStepPolicy.ctaMode),
     generationInput,
+    sourceAttribution,
   });
 }

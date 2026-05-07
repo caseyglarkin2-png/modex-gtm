@@ -92,6 +92,7 @@ export async function dbGetEmailLogsByAccounts(accountNames: string[], take = 12
       opened_at: true,
       delivered_at: true,
       generated_content_id: true,
+      metadata: true,
       sent_at: true,
     },
   });

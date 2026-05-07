@@ -130,10 +130,32 @@ export const UpdateCampaignSettingsSchema = z.object({
 });
 export type UpdateCampaignSettingsInput = z.infer<typeof UpdateCampaignSettingsSchema>;
 
+function normalizeCcInput(value: unknown): string[] {
+  if (value === undefined || value === null || value === '') return [];
+  const rawValues = Array.isArray(value)
+    ? value
+    : typeof value === 'string'
+      ? value.split(/[,\n;]+/)
+      : [String(value)];
+
+  return Array.from(
+    new Set(
+      rawValues
+        .map((entry) => String(entry).trim().toLowerCase())
+        .filter(Boolean),
+    ),
+  );
+}
+
+const NormalizedCcSchema = z.preprocess(
+  normalizeCcInput,
+  z.array(z.string().email('Valid CC email required')).max(20),
+);
+
 // ── Email Send ────────────────────────────────────────
 export const SendEmailSchema = z.object({
   to: z.string().email('Valid email required'),
-  cc: z.string().optional(),
+  cc: NormalizedCcSchema.optional().default([]),
   subject: z.string().min(1, 'Subject is required'),
   bodyHtml: z.string().min(1, 'Body is required'),
   accountName: z.string().optional(),
@@ -165,6 +187,7 @@ export const BulkSendEmailSchema = z.object({
   })).min(1),
   subject: z.string().min(1),
   bodyHtml: z.string().min(1),
+  cc: NormalizedCcSchema.optional().default([]),
   accountName: z.string().optional(),
   generatedContentId: z.number().int().positive().optional(),
   workflowMetadata: z.object({
@@ -224,6 +247,7 @@ export const BulkSendAsyncSchema = z.object({
     sequencePosition: z.number().int().min(1).max(50).optional().nullable(),
     subject: z.string().min(1),
     bodyHtml: z.string().min(1),
+    cc: NormalizedCcSchema.optional().default([]),
     recipients: z.array(z.object({
       to: z.string().trim().min(1),
       personaId: z.number().int().positive().optional(),
@@ -244,6 +268,7 @@ export const OperatorOutcomeSchema = z.object({
   sourceId: z.string().min(1),
   campaignId: z.number().int().positive().optional().nullable(),
   generatedContentId: z.number().int().positive().optional().nullable(),
+  sourceMetadata: z.record(z.string(), z.unknown()).optional().nullable(),
   notes: z.string().optional().nullable(),
   createdBy: z.string().optional().nullable(),
 });

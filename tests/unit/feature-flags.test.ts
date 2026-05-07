@@ -8,6 +8,9 @@ describe('feature-flags', () => {
     delete process.env.HUBSPOT_SYNC_ENABLED;
     delete process.env.INBOX_POLLING_ENABLED;
     delete process.env.DRIP_SEQUENCE_ENABLED;
+    delete process.env.SOURCE_EVIDENCE_INGEST_ENABLED;
+    delete process.env.SOURCE_APPROVAL_GATE_ENABLED;
+    delete process.env.SOURCE_CC_BULK_ENABLED;
   });
 
   it('returns defaults when env vars are not set', async () => {
@@ -16,6 +19,9 @@ describe('feature-flags', () => {
     expect(flags.HUBSPOT_SYNC_ENABLED).toBe(true);
     expect(flags.INBOX_POLLING_ENABLED).toBe(true);
     expect(flags.DRIP_SEQUENCE_ENABLED).toBe(true);
+    expect(flags.SOURCE_EVIDENCE_INGEST_ENABLED).toBe(false);
+    expect(flags.SOURCE_APPROVAL_GATE_ENABLED).toBe(false);
+    expect(flags.SOURCE_CC_BULK_ENABLED).toBe(false);
   });
 
   it('returns true when env var is "true"', async () => {
@@ -46,5 +52,15 @@ describe('feature-flags', () => {
     process.env.HUBSPOT_SYNC_ENABLED = '1';
     const flags = await import('@/lib/feature-flags');
     expect(flags.HUBSPOT_SYNC_ENABLED).toBe(true);
+  });
+
+  it('supports source-backed flags as independent kill switches', async () => {
+    process.env.SOURCE_EVIDENCE_INGEST_ENABLED = 'true';
+    process.env.SOURCE_APPROVAL_GATE_ENABLED = '1';
+    process.env.SOURCE_CC_BULK_ENABLED = 'false';
+    const flags = await import('@/lib/feature-flags');
+    expect(flags.SOURCE_EVIDENCE_INGEST_ENABLED).toBe(true);
+    expect(flags.SOURCE_APPROVAL_GATE_ENABLED).toBe(true);
+    expect(flags.SOURCE_CC_BULK_ENABLED).toBe(false);
   });
 });

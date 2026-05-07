@@ -89,7 +89,7 @@ export function buildAccountIdentityReport(input: {
     });
   }
 
-  for (const [canonicalCompanyId, accountNames] of canonicalGroups.entries()) {
+  for (const [, accountNames] of canonicalGroups.entries()) {
     if (accountNames.length <= 1) continue;
     const key = [...new Set(accountNames)].sort().join('|');
     const existing = clusterMap.get(key);

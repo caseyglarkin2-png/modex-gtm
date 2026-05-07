@@ -38,6 +38,18 @@ test('account command center exposes live intel actions and returns contact disc
   await expect(page.getByText('Draft Preview').first()).toBeVisible({ timeout: 60_000 });
 });
 
+test('account action placement avoids duplicate primary commands and keeps refresh intent clear', async ({ page }) => {
+  await page.goto('/accounts/john-deere', { waitUntil: 'domcontentloaded' });
+
+  await expect(page.getByRole('button', { name: 'Find More Contacts' }).first()).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Build Committee' })).toHaveCount(1);
+  await expect(page.getByRole('button', { name: 'Refresh Intel' })).toHaveCount(1);
+
+  await page.getByRole('button', { name: 'Build Committee' }).click();
+  await expect(page.getByRole('dialog')).toContainText(/Build Committee for John Deere/i);
+  await expect(page.getByRole('dialog').getByRole('button', { name: /Refresh/ })).toBeVisible();
+});
+
 test('one-pager generation keeps live intel on by default from the account surface', async ({ page }) => {
   await page.goto('/accounts/john-deere', { waitUntil: 'domcontentloaded' });
 

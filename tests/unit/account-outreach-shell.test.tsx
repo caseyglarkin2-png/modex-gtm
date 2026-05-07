@@ -106,6 +106,9 @@ describe('AccountOutreachShell', () => {
     );
 
     renderShell();
+    fireEvent.change(screen.getByLabelText('CC emails (optional)'), {
+      target: { value: 'ops@example.com, sponsor@example.com' },
+    });
     fireEvent.click(screen.getByRole('button', { name: /Send to 1 Recipient/i }));
 
     await waitFor(() => {
@@ -117,6 +120,7 @@ describe('AccountOutreachShell', () => {
     const [, request] = fetchMock.mock.calls[0] as [string, { body: string }];
     const payload = JSON.parse(request.body);
     expect(payload.generatedContentId).toBe(42);
+    expect(payload.cc).toEqual(['ops@example.com', 'sponsor@example.com']);
     expect(payload.workflowMetadata).toMatchObject({
       surface: 'account_page',
       shell: 'account_outreach',
@@ -230,6 +234,9 @@ describe('AccountOutreachShell', () => {
       />,
     );
 
+    fireEvent.change(screen.getByLabelText('CC emails (optional)'), {
+      target: { value: 'ops@example.com' },
+    });
     fireEvent.click(screen.getByRole('button', { name: /Send to 2 Recipients/i }));
 
     await waitFor(() => {
@@ -246,6 +253,7 @@ describe('AccountOutreachShell', () => {
       variant: 'one_pager_asset',
       recipientSetKey: 'operators',
     });
+    expect(payload.items[0].cc).toEqual(['ops@example.com']);
     expect(payload.items[0].generatedContentId).toBe(42);
     expect(await screen.findByText(/Account Page Send Job #901/i)).toBeInTheDocument();
   });

@@ -4,6 +4,10 @@ import * as Sentry from '@sentry/nextjs';
 import { prisma } from '@/lib/prisma';
 import { sendEmail } from '@/lib/email/client';
 import { markCronFailure, markCronStarted, markCronSuccess } from '@/lib/cron-monitor';
+import { SOURCE_APPROVAL_GATE_ENABLED } from '@/lib/feature-flags';
+import { requiresApprovalForSend } from '@/lib/revops/generated-content-approval';
+import { buildCandidateTraceLookup, resolveCandidateTrace } from '@/lib/revops/candidate-trace';
+import { recordSourceBackedMetric } from '@/lib/source-backed/metrics';
 
 export const dynamic = 'force-dynamic';
 
@@ -44,6 +48,11 @@ export async function GET(request: NextRequest) {
     const processed: Array<{ jobId: number; status: string; sent: number; failed: number; skipped: number }> = [];
 
     for (const job of pendingJobs) {
+      const candidateTraceLookup = await buildCandidateTraceLookup(prisma, {
+        accountNames: Array.from(new Set(job.recipients.map((recipient) => recipient.account_name))),
+        emails: Array.from(new Set(job.recipients.flatMap((recipient) => [recipient.to_email, ...(recipient.cc_emails ?? [])]))),
+      });
+
       await prisma.sendJob.update({
         where: { id: job.id },
         data: {
@@ -52,13 +61,8 @@ export async function GET(request: NextRequest) {
         },
       });
 
-      let sent = 0;
-      let failed = 0;
-      let skipped = 0;
-
       for (const recipient of job.recipients) {
         if (recipient.status !== 'pending') {
-          skipped += 1;
           continue;
         }
 
@@ -68,8 +72,32 @@ export async function GET(request: NextRequest) {
         });
 
         try {
+          if (SOURCE_APPROVAL_GATE_ENABLED) {
+            const approvalDecision = await requiresApprovalForSend(prisma, recipient.generated_content_id);
+            if (!approvalDecision.approved) {
+              await recordSourceBackedMetric({
+                metric: 'approval_blocks',
+                endpoint: '/api/cron/process-send-jobs',
+                accountName: recipient.account_name,
+                details: {
+                  generatedContentId: recipient.generated_content_id,
+                  status: approvalDecision.status,
+                },
+              });
+              await prisma.sendJobRecipient.update({
+                where: { id: recipient.id },
+                data: {
+                  status: 'skipped',
+                  error_message: `APPROVAL_REQUIRED:${approvalDecision.status}`,
+                },
+              });
+              continue;
+            }
+          }
+
           const result = await sendEmail({
             to: recipient.to_email,
+            cc: recipient.cc_emails ?? [],
             subject: recipient.subject,
             html: recipient.body_html,
           });
@@ -92,10 +120,41 @@ export async function GET(request: NextRequest) {
                   : null;
                 const workflow = strategy?.workflow;
                 if (!workflow || typeof workflow !== 'object') return undefined;
+                const recipientCandidateTrace = resolveCandidateTrace(candidateTraceLookup, {
+                  email: recipient.to_email,
+                  accountName: recipient.account_name,
+                });
+                const ccCandidateTraces = (recipient.cc_emails ?? [])
+                  .map((email) => ({
+                    email,
+                    trace: resolveCandidateTrace(candidateTraceLookup, {
+                      email,
+                      accountName: recipient.account_name,
+                    }),
+                  }))
+                  .filter((entry) => entry.trace)
+                  .map((entry) => ({
+                    email: entry.email,
+                    trace: entry.trace,
+                  }));
                 return JSON.parse(JSON.stringify({
-                  workflow,
+                  workflow: {
+                    ...workflow,
+                    details: {
+                      ...((workflow as Record<string, unknown>).details && typeof (workflow as Record<string, unknown>).details === 'object'
+                        ? ((workflow as Record<string, unknown>).details as Record<string, unknown>)
+                        : {}),
+                      candidateTrace: {
+                        recipient: recipientCandidateTrace,
+                        cc: ccCandidateTraces,
+                      },
+                    },
+                  },
                   recipient: {
                     sendJobRecipientId: recipient.id,
+                    cc: recipient.cc_emails ?? [],
+                    candidateTrace: recipientCandidateTrace,
+                    ccCandidateTraces,
                   },
                 }));
               })(),
@@ -119,7 +178,6 @@ export async function GET(request: NextRequest) {
             data: { external_send_count: { increment: 1 } },
           }).catch(() => undefined);
 
-          sent += 1;
         } catch (error) {
           const message = error instanceof Error ? error.message : String(error);
           await prisma.sendJobRecipient.update({
@@ -129,7 +187,6 @@ export async function GET(request: NextRequest) {
               error_message: message.slice(0, 1000),
             },
           });
-          failed += 1;
         }
       }
 

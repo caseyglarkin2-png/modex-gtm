@@ -4,6 +4,38 @@ import { buildOutcomeFollowUpRecommendation, parseOperatorOutcomeLabel } from '@
 import { buildSignalToContentMapping, computeLearningReviewSlaDueAt } from '@/lib/revops/engagement-learning';
 import { buildInfographicEvent, mapOutcomeToNextInfographic, parseInfographicMetadata } from '@/lib/revops/infographic-journey';
 
+function stringifySourceMetadata(sourceMetadata: Record<string, unknown> | null | undefined) {
+  if (!sourceMetadata || Object.keys(sourceMetadata).length === 0) return null;
+  try {
+    return JSON.stringify(sourceMetadata);
+  } catch {
+    return null;
+  }
+}
+
+function buildSignalContextFromOutcomePayload(
+  notes: string | null | undefined,
+  sourceMetadata: Record<string, unknown> | null | undefined,
+) {
+  const trimmedNotes = notes?.trim() ?? '';
+  const metadataText = stringifySourceMetadata(sourceMetadata);
+  if (trimmedNotes && metadataText) return `${trimmedNotes}\nsource_metadata=${metadataText}`;
+  if (trimmedNotes) return trimmedNotes;
+  if (metadataText) return `source_metadata=${metadataText}`;
+  return null;
+}
+
+function buildOutcomeActivityNote(args: {
+  sourceKind: string;
+  sourceId: string;
+  outcomeLabel: string;
+  sourceMetadata?: Record<string, unknown> | null;
+}) {
+  const metadataText = stringifySourceMetadata(args.sourceMetadata);
+  if (!metadataText) return `operator-outcome:${args.sourceKind}:${args.sourceId}:${args.outcomeLabel}`;
+  return `operator-outcome:${args.sourceKind}:${args.sourceId}:${args.outcomeLabel};source_metadata=${metadataText}`;
+}
+
 export async function POST(req: NextRequest) {
   let body: unknown;
   try {
@@ -84,11 +116,17 @@ export async function POST(req: NextRequest) {
         : outcomeLabel === 'wrong-person'
           ? 'Replace contact with correct buyer'
           : 'Refine messaging and follow up',
-      notes: `operator-outcome:${payload.sourceKind}:${payload.sourceId}:${outcomeLabel}`,
+      notes: buildOutcomeActivityNote({
+        sourceKind: payload.sourceKind,
+        sourceId: payload.sourceId,
+        outcomeLabel,
+        sourceMetadata: payload.sourceMetadata ?? null,
+      }),
       activity_date: new Date(),
     },
   }).catch(() => undefined);
 
+  const signalContext = buildSignalContextFromOutcomePayload(payload.notes ?? null, payload.sourceMetadata ?? null);
   const mapping = buildSignalToContentMapping({
     sourceKind: payload.sourceKind,
     sourceId: payload.sourceId,
@@ -96,7 +134,7 @@ export async function POST(req: NextRequest) {
     campaignId: payload.campaignId,
     generatedContentId: payload.generatedContentId,
     outcomeLabel,
-    signalContext: payload.notes ?? null,
+    signalContext,
   });
 
   await prisma.signalContentLink.upsert({

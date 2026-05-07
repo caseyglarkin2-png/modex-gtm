@@ -1,7 +1,7 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { BriefcaseBusiness, RefreshCw, Sparkles, Users } from 'lucide-react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { BriefcaseBusiness, RefreshCw, Sparkles } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AgentActionDialog } from '@/components/agent-actions/agent-action-dialog';
@@ -9,6 +9,7 @@ import { summarizeFreshness } from '@/lib/agent-actions/freshness';
 import type { AgentActionCard, AgentActionResult } from '@/lib/agent-actions/types';
 import { readApiResponse } from '@/lib/api-response';
 import type { AssetSendRecipient } from '@/components/email/asset-send-dialog';
+import { beginRefreshDiagnostic, endRefreshDiagnostic } from '@/lib/refresh-diagnostics';
 
 type AgentIntelStripProps = {
   accountName: string;
@@ -112,10 +113,36 @@ export function AgentIntelStrip({ accountName, accountNames, initialResult, reci
   const [previousResult, setPreviousResult] = useState<AgentActionResult | null>(null);
   const [refreshing, setRefreshing] = useState(false);
   const [refreshError, setRefreshError] = useState('');
+  const [lastRefreshAt, setLastRefreshAt] = useState<string | null>(null);
+  const refreshInFlightRef = useRef(false);
+  const lastRefreshStartMsRef = useRef(0);
+  const refreshCooldownMs = 1200;
 
-  const refresh = useCallback(async (force = false) => {
+  useEffect(() => {
+    setResult(initialResult);
+    setPreviousResult(null);
+    setRefreshError('');
+  }, [initialResult]);
+
+  const refresh = useCallback(async (force = false, trigger = 'manual') => {
+    const now = Date.now();
+    if (refreshInFlightRef.current) {
+      return;
+    }
+    if (now - lastRefreshStartMsRef.current < refreshCooldownMs) {
+      return;
+    }
+
+    refreshInFlightRef.current = true;
+    lastRefreshStartMsRef.current = now;
     setRefreshing(true);
     setRefreshError('');
+    const session = beginRefreshDiagnostic({
+      surface: 'account-intel-strip',
+      trigger,
+      metadata: { accountName, force },
+    });
+
     try {
       const response = await fetch('/api/agent-actions', {
         method: 'POST',
@@ -128,23 +155,37 @@ export function AgentIntelStrip({ accountName, accountNames, initialResult, reci
       });
       const payload = await readApiResponse<AgentActionResult>(response);
       if (response.ok) {
-        setPreviousResult(result);
-        setResult(payload);
+        setResult((previous) => {
+          setPreviousResult(previous);
+          return payload;
+        });
+        setLastRefreshAt(new Date().toISOString());
+        endRefreshDiagnostic(session, {
+          status: 'success',
+          metadata: { accountName, force, source: payload.freshness.source },
+        });
       } else {
-        setRefreshError((payload as { summary?: string; error?: string }).summary ?? (payload as { error?: string }).error ?? 'Refresh failed.');
+        const message = (payload as { summary?: string; error?: string }).summary ?? (payload as { error?: string }).error ?? 'Refresh failed.';
+        setRefreshError(message);
+        endRefreshDiagnostic(session, {
+          status: 'error',
+          reason: message,
+          metadata: { accountName, force },
+        });
       }
     } catch (error) {
-      setRefreshError(error instanceof Error ? error.message : 'Refresh failed.');
+      const message = error instanceof Error ? error.message : 'Refresh failed.';
+      setRefreshError(message);
+      endRefreshDiagnostic(session, {
+        status: 'error',
+        reason: message,
+        metadata: { accountName, force },
+      });
     } finally {
+      refreshInFlightRef.current = false;
       setRefreshing(false);
     }
-  }, [accountName, accountNames, result]);
-
-  useEffect(() => {
-    if (initialResult?.freshness.stale) {
-      void refresh(true);
-    }
-  }, [initialResult?.freshness.stale, refresh]);
+  }, [accountName, accountNames]);
 
   const recommendation = useMemo(() => result?.nextActions[0] ?? 'Refresh intel to get the next best move.', [result]);
   const changeSummary = useMemo(() => (result ? summarizeIntelChange(previousResult, result) : ''), [previousResult, result]);
@@ -166,7 +207,7 @@ export function AgentIntelStrip({ accountName, accountNames, initialResult, reci
               No live account intel is cached yet. Pull research, contacts, and decision support into one view.
             </p>
           </div>
-          <Button variant="outline" size="sm" className="gap-1.5" onClick={() => void refresh(true)} disabled={refreshing}>
+          <Button variant="outline" size="sm" className="gap-1.5" onClick={() => void refresh(true, 'manual')} disabled={refreshing}>
             <RefreshCw className={`h-3.5 w-3.5 ${refreshing ? 'animate-spin' : ''}`} />
             Refresh Intel
           </Button>
@@ -197,6 +238,16 @@ export function AgentIntelStrip({ accountName, accountNames, initialResult, reci
             <p className="mt-1 text-base font-semibold text-[var(--foreground)]">{recommendation}</p>
             <p className="mt-2 max-w-4xl text-sm text-[var(--muted-foreground)]">{result.summary}</p>
             <p className="mt-2 text-xs text-[var(--muted-foreground)]">{freshnessSummary.guidance}</p>
+            {result.freshness.stale ? (
+              <p className="mt-1 text-xs text-amber-700">
+                Intel is stale. Refresh manually before broadening outreach.
+              </p>
+            ) : null}
+            {lastRefreshAt ? (
+              <p className="mt-1 text-xs text-[var(--muted-foreground)]">
+                Last refreshed {new Date(lastRefreshAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', second: '2-digit' })}
+              </p>
+            ) : null}
             <div className="mt-2 flex flex-wrap gap-1.5">
               {Object.values(result.freshness.dimensions).map((dimension) => (
                 <Badge key={dimension.key} variant={dimension.stale ? 'secondary' : 'outline'}>
@@ -236,27 +287,7 @@ export function AgentIntelStrip({ accountName, accountNames, initialResult, reci
               </Button>
             }
           />
-          <AgentActionDialog
-            request={{ action: 'company_contacts', target: { accountName, company: accountName } }}
-            title={`Find More Contacts for ${accountName}`}
-            trigger={
-              <Button size="sm" variant="outline" className="gap-1.5">
-                <Users className="h-3.5 w-3.5" />
-                Find More Contacts
-              </Button>
-            }
-          />
-          <AgentActionDialog
-            request={{ action: 'committee_refresh', target: { accountName, company: accountName } }}
-            title={`Build Committee for ${accountName}`}
-            trigger={
-              <Button size="sm" variant="outline" className="gap-1.5">
-                <Users className="h-3.5 w-3.5" />
-                Build Committee
-              </Button>
-            }
-          />
-          <Button variant="outline" size="sm" className="gap-1.5" onClick={() => void refresh(true)} disabled={refreshing}>
+          <Button variant="outline" size="sm" className="gap-1.5" onClick={() => void refresh(true, 'manual')} disabled={refreshing}>
             <RefreshCw className={`h-3.5 w-3.5 ${refreshing ? 'animate-spin' : ''}`} />
             Refresh Intel
           </Button>

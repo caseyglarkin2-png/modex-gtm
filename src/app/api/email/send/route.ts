@@ -8,11 +8,18 @@ import { rateLimit } from '@/lib/rate-limit';
 import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
 import { advancePipelineStage, derivePipelineStage } from '@/lib/pipeline';
 import { markAgentActionCacheStale } from '@/lib/agent-actions/cache';
+import { SOURCE_APPROVAL_GATE_ENABLED } from '@/lib/feature-flags';
+import { requiresApprovalForSend } from '@/lib/revops/generated-content-approval';
+import { enforceOneAccountInvariant } from '@/lib/revops/one-account-invariant';
+import { buildCandidateTraceLookup, resolveCandidateTrace } from '@/lib/revops/candidate-trace';
+import { recordSourceBackedMetric } from '@/lib/source-backed/metrics';
 import {
+  approvalRequiredSendBlocker,
   generatedContentMissingSendBlocker,
   ineligibleRecipientSendBlocker,
   invalidJsonSendBlocker,
   invalidPayloadSendBlocker,
+  mixedAccountPayloadSendBlocker,
   noEmailSendBlocker,
   providerConfigSendBlocker,
   recipientNotFoundSendBlocker,
@@ -91,26 +98,7 @@ export async function POST(req: NextRequest) {
         internalDomains.some((dom) => lower.endsWith(`@${dom}`))
       );
     };
-
-    // Check if recipient has unsubscribed
-    const unsubscribed = await prisma.unsubscribedEmail.findUnique({
-      where: { email: resolvedRecipient.to },
-    });
-
-    if (unsubscribed) {
-      if (allowBypass(resolvedRecipient.to)) {
-        await prisma.unsubscribedEmail.delete({ where: { email: resolvedRecipient.to } }).catch(() => {});
-      } else {
-        const block = unsubscribedSendBlocker(resolvedRecipient.to);
-        return NextResponse.json(serializeSendBlocker(block, { remaining }), { status: block.status });
-      }
-    }
-
-    const guard = await evaluateRecipientEligibility(prisma, resolvedRecipient.to);
-    if (!guard.ok) {
-      const block = ineligibleRecipientSendBlocker(guard.reason ?? 'Recipient is not sendable.');
-      return NextResponse.json(serializeSendBlocker(block), { status: block.status });
-    }
+    let generatedAccountName: string | null = null;
     if (generatedContentId) {
       const generated = await prisma.generatedContent.findUnique({
         where: { id: generatedContentId },
@@ -134,6 +122,103 @@ export async function POST(req: NextRequest) {
         const block = generatedContentMissingSendBlocker(generatedContentId);
         return NextResponse.json(serializeSendBlocker(block), { status: block.status });
       }
+      generatedAccountName = generated.account_name ?? null;
+      if (SOURCE_APPROVAL_GATE_ENABLED) {
+        const approvalDecision = await requiresApprovalForSend(prisma, generatedContentId);
+        if (!approvalDecision.approved) {
+          await recordSourceBackedMetric({
+            metric: 'approval_blocks',
+            endpoint: '/api/email/send',
+            accountName: resolvedRecipient.accountName ?? generatedAccountName ?? accountName ?? null,
+            details: {
+              generatedContentId,
+              status: approvalDecision.status,
+            },
+          });
+          const block = approvalRequiredSendBlocker({
+            generatedContentId,
+            status: approvalDecision.status,
+            reviewId: approvalDecision.reviewId,
+          });
+          return NextResponse.json(serializeSendBlocker(block), { status: block.status });
+        }
+      }
+    }
+
+    const accountInvariant = await enforceOneAccountInvariant(prisma, {
+      accountName: resolvedRecipient.accountName ?? generatedAccountName ?? accountName ?? null,
+      recipients: [{
+        to: resolvedRecipient.to,
+        accountName: resolvedRecipient.accountName ?? generatedAccountName ?? accountName ?? null,
+      }],
+      cc,
+    });
+    if (!accountInvariant.ok) {
+      await recordSourceBackedMetric({
+        metric: 'one_account_invariant_violations',
+        endpoint: '/api/email/send',
+        accountName: resolvedRecipient.accountName ?? generatedAccountName ?? accountName ?? null,
+        details: accountInvariant.details,
+      });
+      const block = mixedAccountPayloadSendBlocker(accountInvariant.details);
+      return NextResponse.json(serializeSendBlocker(block), { status: block.status });
+    }
+
+    const traceLookup = await buildCandidateTraceLookup(prisma, {
+      accountNames: accountInvariant.scopedAccountNames,
+      emails: [resolvedRecipient.to, ...accountInvariant.normalizedCc],
+    });
+    const recipientCandidateTrace = resolveCandidateTrace(traceLookup, {
+      email: resolvedRecipient.to,
+      accountName: resolvedRecipient.accountName ?? accountInvariant.canonicalAccountName,
+    });
+    const ccCandidateTraces = accountInvariant.normalizedCc
+      .map((email) => ({
+        email,
+        trace: resolveCandidateTrace(traceLookup, {
+          email,
+          accountName: resolvedRecipient.accountName ?? accountInvariant.canonicalAccountName,
+        }),
+      }))
+      .filter((entry) => entry.trace)
+      .map((entry) => ({
+        email: entry.email,
+        trace: entry.trace,
+      }));
+    const sanitizedCc = accountInvariant.normalizedCc.filter((email) => email !== resolvedRecipient.to);
+    const ccSanitizationDrops = accountInvariant.normalizedCc.length - sanitizedCc.length;
+    if (ccSanitizationDrops > 0) {
+      await recordSourceBackedMetric({
+        metric: 'cc_sanitization_drops',
+        endpoint: '/api/email/send',
+        accountName: resolvedRecipient.accountName ?? accountInvariant.canonicalAccountName ?? accountName ?? null,
+        value: ccSanitizationDrops,
+        details: { to: resolvedRecipient.to },
+      });
+    }
+
+    const outboundRecipients = [resolvedRecipient.to, ...accountInvariant.normalizedCc];
+    const unsubscribedRows = await prisma.unsubscribedEmail.findMany({
+      where: { email: { in: outboundRecipients } },
+      select: { email: true },
+    });
+    const unsubscribedSet = new Set(unsubscribedRows.map((row) => row.email.toLowerCase()));
+    for (const email of outboundRecipients) {
+      if (!unsubscribedSet.has(email.toLowerCase())) continue;
+      if (allowBypass(email)) {
+        await prisma.unsubscribedEmail.delete({ where: { email } }).catch(() => {});
+        continue;
+      }
+      const block = unsubscribedSendBlocker(email);
+      return NextResponse.json(serializeSendBlocker(block, { remaining }), { status: block.status });
+    }
+
+    for (const email of outboundRecipients) {
+      const guard = await evaluateRecipientEligibility(prisma, email);
+      if (!guard.ok) {
+        const block = ineligibleRecipientSendBlocker(guard.reason ?? 'Recipient is not sendable.');
+        return NextResponse.json(serializeSendBlocker(block), { status: block.status });
+      }
     }
 
     // Lightweight sanitization to keep email-safe HTML without pulling jsdom into the runtime.
@@ -143,7 +228,7 @@ export async function POST(req: NextRequest) {
     const isPlainText = !sanitizedBody.trim().startsWith('<');
     const html = isPlainText ? wrapHtml(sanitizedBody, resolvedRecipient.accountName ?? accountName ?? 'the team', resolvedRecipient.to) : sanitizedBody;
 
-    const response = await sendEmail({ to: resolvedRecipient.to, cc, subject, html });
+    const response = await sendEmail({ to: resolvedRecipient.to, cc: sanitizedCc, subject, html });
 
     // Best-effort DB log — skip if no DB available
     try {
@@ -156,10 +241,22 @@ export async function POST(req: NextRequest) {
 
       const logMetadata = workflowMetadata
         ? JSON.parse(JSON.stringify({
-            workflow: workflowMetadata,
+            workflow: {
+              ...workflowMetadata,
+              details: {
+                ...(workflowMetadata.details ?? {}),
+                candidateTrace: {
+                  recipient: recipientCandidateTrace,
+                  cc: ccCandidateTraces,
+                },
+              },
+            },
             recipient: {
               personaId: personaId ?? null,
               personaName: resolvedRecipient.personaName ?? null,
+              cc: sanitizedCc,
+              candidateTrace: recipientCandidateTrace,
+              ccCandidateTraces,
             },
           }))
         : undefined;

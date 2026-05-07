@@ -20,6 +20,8 @@ export type SendBlockerCode =
   | 'INELIGIBLE_RECIPIENT'
   | 'NO_SENDABLE_RECIPIENTS'
   | 'GENERATED_CONTENT_MISSING'
+  | 'APPROVAL_REQUIRED'
+  | 'MIXED_ACCOUNT_PAYLOAD'
   | 'RUNTIME_FAILURE';
 
 export type SendBlocker = {
@@ -87,6 +89,14 @@ export function generatedContentMissingSendBlocker(ids?: number | number[]) {
   return blocker('GENERATED_CONTENT_MISSING', 404, `Generated content not found.${suffix}`);
 }
 
+export function approvalRequiredSendBlocker(details?: unknown) {
+  return blocker('APPROVAL_REQUIRED', 409, 'Generated content approval required before send.', undefined, details);
+}
+
+export function mixedAccountPayloadSendBlocker(details?: unknown) {
+  return blocker('MIXED_ACCOUNT_PAYLOAD', 400, 'Recipients must belong to exactly one canonical account.', undefined, details);
+}
+
 export function runtimeSendBlocker(message = 'Email send failed') {
   return blocker('RUNTIME_FAILURE', 500, message);
 }
@@ -100,4 +110,3 @@ export function serializeSendBlocker(block: SendBlocker, extras?: Record<string,
     ...(extras ?? {}),
   };
 }
-

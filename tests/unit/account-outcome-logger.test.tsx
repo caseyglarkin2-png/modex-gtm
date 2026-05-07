@@ -50,6 +50,12 @@ describe('AccountOutcomeLogger', () => {
             sourceKind: 'email-log',
             sourceId: '1',
             generatedContentId: 42,
+            sourceMetadata: {
+              candidateTrace: {
+                candidateId: 9,
+                state: 'promoted',
+              },
+            },
           },
         ]}
       />,
@@ -76,10 +82,18 @@ describe('AccountOutcomeLogger', () => {
       sourceKind: 'email-log',
       sourceId: '1',
       generatedContentId: 42,
+      sourceMetadata: {
+        candidateTrace: {
+          candidateId: 9,
+          state: 'promoted',
+        },
+      },
       notes: 'Need the transportation lead instead',
     });
     expect(toastSuccess).toHaveBeenCalledWith('Outcome logged. Next: Replace the contact before the next send');
-    expect(mockedRefresh).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(mockedRefresh).toHaveBeenCalled();
+    });
     expect(toastError).not.toHaveBeenCalled();
   });
 });

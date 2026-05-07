@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { buildAgentActionCacheKey, getAgentActionTtlMs } from '@/lib/agent-actions/cache';
-import { listAgentActionCapabilities } from '@/lib/agent-actions/broker';
+import { listAgentActionCapabilities, sanitizeOutreachDraftText } from '@/lib/agent-actions/broker';
 
 describe('agent action broker helpers', () => {
   const originalClawd = process.env.CLAWD_CONTROL_PLANE_URL;
@@ -54,5 +54,24 @@ describe('agent action broker helpers', () => {
 
     expect(accountResearch?.preferredProvider).toBe('modex');
     expect(accountResearch?.configured).toBe(false);
+  });
+
+  it('sanitizes legacy clawd draft copy to YardFlow voice', () => {
+    const dirty = [
+      'Thought this might be relevant — especially for network consistency.',
+      '',
+      'If helpful, I can send a benchmark at dwtb.dev/partners.',
+      '',
+      '---',
+      'DWTB?! Studios | Jacksonville, FL',
+      "If you'd prefer not to hear from me, just reply 'unsubscribe'.",
+    ].join('\n');
+
+    const cleaned = sanitizeOutreachDraftText(dirty);
+    expect(cleaned).not.toContain('—');
+    expect(cleaned).not.toContain('dwtb.dev');
+    expect(cleaned).not.toContain('DWTB?! Studios');
+    expect(cleaned).not.toContain("If you'd prefer not to hear from me");
+    expect(cleaned).toContain('yardflow.ai/partners');
   });
 });

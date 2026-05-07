@@ -58,6 +58,8 @@ model Account {
   canonical_company_links CanonicalAccountLink[]
   canonical_conflicts   CanonicalConflict[]
   contact_candidates    AccountContactCandidate[]
+  research_runs         ResearchRun[]
+  evidence_records      EvidenceRecord[]
 
   @@map("accounts")
 }
@@ -111,6 +113,8 @@ model Persona {
   enrichment ContactEnrichment?
   canonical_contact CanonicalContact?
   canonical_conflicts CanonicalConflict[]
+  research_runs       ResearchRun[]
+  evidence_records    EvidenceRecord[]
 
   @@unique([account_name, email])
   @@index([account_name])
@@ -716,6 +720,7 @@ model SendJobRecipient {
   account_name          String
   persona_name          String?
   to_email              String
+  cc_emails             String[]  @default([])
   subject               String
   body_html             String
   status                String    @default("pending") // pending | sending | sent | failed | skipped
@@ -743,6 +748,66 @@ model SendJobRecipient {
   @@index([campaign_id])
   @@index([experiment_id, variant_key, status])
   @@map("send_job_recipients")
+}
+
+model ResearchRun {
+  id              String   @id @default(cuid())
+  account_name    String
+  persona_id      Int?
+  status          String   @default("queued") // queued | running | succeeded | failed | partial
+  run_key         String?
+  provider_status Json?
+  error_map       Json?
+  fresh_until     DateTime?
+  started_at      DateTime?
+  completed_at    DateTime?
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  account          Account          @relation(fields: [account_name], references: [name], onDelete: Cascade)
+  persona          Persona?         @relation(fields: [persona_id], references: [id], onDelete: SetNull)
+  evidence_records EvidenceRecord[]
+
+  @@index([account_name, status, created_at])
+  @@index([persona_id, created_at])
+  @@unique([run_key])
+  @@map("research_runs")
+}
+
+model EvidenceRecord {
+  id               String   @id @default(cuid())
+  research_run_id  String
+  account_name     String
+  persona_id       Int?
+  claim            String
+  claim_hash       String
+  source_url       String
+  source_title     String?
+  source_type      String
+  provider         String
+  observed_at      DateTime
+  freshness_status String   @default("fresh") // fresh | aging | stale
+  fresh_until      DateTime?
+  is_superseded    Boolean  @default(false)
+  superseded_by_id String?
+  deterministic_key String
+  version          Int      @default(1)
+  metadata         Json?
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+
+  research_run      ResearchRun     @relation(fields: [research_run_id], references: [id], onDelete: Cascade)
+  account           Account         @relation(fields: [account_name], references: [name], onDelete: Cascade)
+  persona           Persona?        @relation(fields: [persona_id], references: [id], onDelete: SetNull)
+  superseded_by     EvidenceRecord? @relation("EvidenceSupersession", fields: [superseded_by_id], references: [id], onDelete: SetNull)
+  superseded_records EvidenceRecord[] @relation("EvidenceSupersession")
+
+  @@unique([account_name, claim_hash, source_url, observed_at])
+  @@index([research_run_id])
+  @@index([account_name, freshness_status, created_at])
+  @@index([persona_id, created_at])
+  @@index([deterministic_key])
+  @@map("evidence_records")
 }
 
 model PlaybookBlock {

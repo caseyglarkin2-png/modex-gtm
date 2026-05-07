@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import {
   AlertTriangle,
@@ -28,6 +28,9 @@ import { EmailComposer } from '@/components/email/composer';
 import { OnePagerDialog } from '@/components/ai/one-pager-preview';
 import type { AssetSendRecipient } from '@/components/email/asset-send-dialog';
 import { recordWorkflowEvent } from '@/lib/agent-actions/telemetry';
+import { beginRefreshDiagnostic, endRefreshDiagnostic } from '@/lib/refresh-diagnostics';
+import { SourceAttributionPanel } from '@/components/source-backed/source-attribution-panel';
+import type { SourceBackedContractV1 } from '@/lib/source-backed/attribution';
 
 type AgentActionDialogRequest = Omit<AgentActionRequest, 'refresh' | 'depth'> & {
   refresh?: boolean;
@@ -129,6 +132,15 @@ function extractDraft(result: AgentActionResult): DraftShape | null {
   if (typeof draft.draft === 'string') return { body: draft.draft };
   if (draft.draft?.subject || draft.draft?.body) return { subject: draft.draft.subject, body: draft.draft.body };
   return null;
+}
+
+function extractSourceAttribution(result: AgentActionResult): SourceBackedContractV1 | null {
+  const data = result.data as Record<string, unknown>;
+  const candidate = data.sourceAttribution ?? data.attribution ?? null;
+  if (!candidate || typeof candidate !== 'object') return null;
+  const contract = candidate as Record<string, unknown>;
+  if (contract.contract !== 'source_backed_contract_v1') return null;
+  return contract as unknown as SourceBackedContractV1;
 }
 
 function extractSuggestedContacts(result: AgentActionResult): SuggestedContact[] {
@@ -239,6 +251,18 @@ function buildLoadingCopy(action: AgentActionType) {
       return 'Checking committee coverage and buyer-map gaps...';
     default:
       return 'Running live agent action...';
+  }
+}
+
+function buildRefreshLabel(action: AgentActionType) {
+  switch (action) {
+    case 'account_research':
+    case 'content_context':
+      return 'Refresh Intel';
+    case 'draft_outreach':
+      return 'Regenerate Draft';
+    default:
+      return 'Refresh Result';
   }
 }
 
@@ -434,16 +458,36 @@ export function AgentActionDialog({
   const [composeOpen, setComposeOpen] = useState(false);
   const [onePagerOpen, setOnePagerOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [runStatus, setRunStatus] = useState<string>('');
+  const runInFlightRef = useRef(false);
+  const lastRunStartMsRef = useRef(0);
+  const runCooldownMs = 1000;
 
   useEffect(() => {
     setActiveRequest(request);
     setLoaded(false);
   }, [request]);
 
-  const run = useCallback(async (nextRequest?: AgentActionDialogRequest, refresh = false) => {
+  const run = useCallback(async (nextRequest?: AgentActionDialogRequest, refresh = false, trigger = 'manual') => {
     const effectiveRequest = nextRequest ?? activeRequest;
+    const now = Date.now();
+    if (runInFlightRef.current) return;
+    if (now - lastRunStartMsRef.current < runCooldownMs) return;
+
+    runInFlightRef.current = true;
+    lastRunStartMsRef.current = now;
     setLoading(true);
     setErrorMessage(null);
+    setRunStatus(`Running ${buildActionLabel(effectiveRequest.action).toLowerCase()}...`);
+    const session = beginRefreshDiagnostic({
+      surface: 'agent-action-dialog',
+      trigger,
+      metadata: {
+        action: effectiveRequest.action,
+        accountName: effectiveRequest.target.accountName,
+        refresh,
+      },
+    });
     try {
       const response = await fetch('/api/agent-actions', {
         method: 'POST',
@@ -458,10 +502,24 @@ export function AgentActionDialog({
       if (!response.ok && !payload.summary) {
         throw new Error(payload.error ?? 'Agent action failed');
       }
-      setPreviousResult(result);
-      setResult(payload as AgentActionResult);
+      setResult((previous) => {
+        setPreviousResult(previous);
+        return payload as AgentActionResult;
+      });
       setActiveRequest(effectiveRequest);
       setLoaded(true);
+      setRunStatus(
+        `Updated ${buildActionLabel(effectiveRequest.action).toLowerCase()} · ${new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', second: '2-digit' })}`,
+      );
+      endRefreshDiagnostic(session, {
+        status: 'success',
+        metadata: {
+          action: effectiveRequest.action,
+          accountName: effectiveRequest.target.accountName,
+          refresh,
+          provider: (payload as AgentActionResult).provider,
+        },
+      });
       onResult?.(payload as AgentActionResult);
       const firstContact = extractSuggestedContacts(payload as AgentActionResult)[0];
       setSelectedContactKey(firstContact ? (firstContact.email ?? firstContact.name).toLowerCase() : null);
@@ -475,7 +533,17 @@ export function AgentActionDialog({
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Agent action failed';
       setErrorMessage(message);
+      setRunStatus(`Last run failed: ${message}`);
       toast.error(message);
+      endRefreshDiagnostic(session, {
+        status: 'error',
+        reason: message,
+        metadata: {
+          action: effectiveRequest.action,
+          accountName: effectiveRequest.target.accountName,
+          refresh,
+        },
+      });
       void recordWorkflowEvent({
         event: 'agent_result_failed',
         action: effectiveRequest.action,
@@ -483,9 +551,10 @@ export function AgentActionDialog({
         message,
       });
     } finally {
+      runInFlightRef.current = false;
       setLoading(false);
     }
-  }, [activeRequest, onResult, result]);
+  }, [activeRequest, onResult]);
 
   useEffect(() => {
     if (open) {
@@ -499,7 +568,7 @@ export function AgentActionDialog({
 
   useEffect(() => {
     if (open && autoLoad && !loaded && !loading) {
-      void run();
+      void run(undefined, false, 'autoload');
     }
   }, [autoLoad, loaded, loading, open, run]);
 
@@ -507,10 +576,12 @@ export function AgentActionDialog({
   const contacts = result ? extractSuggestedContacts(result) : [];
   const selectedContact = contacts.find((contact) => (contact.email ?? contact.name).toLowerCase() === selectedContactKey) ?? contacts[0] ?? null;
   const draft = result ? extractDraft(result) : null;
+  const sourceAttribution = result ? extractSourceAttribution(result) : null;
   const changeSummary = result ? summarizeChange(previousResult, result) : '';
   const sourceCount = getSourceCount(result);
   const confidence = getConfidenceLabel(result);
   const degraded = result ? result.status !== 'ok' || sourceCount === 0 : Boolean(errorMessage);
+  const refreshLabel = useMemo(() => buildRefreshLabel(activeRequest.action), [activeRequest.action]);
 
   const runReplacementAction = useCallback((action: AgentActionType, target?: Partial<AgentActionTarget>) => {
     const nextRequest: AgentActionDialogRequest = {
@@ -523,7 +594,7 @@ export function AgentActionDialog({
       },
       refresh: true,
     };
-    void run(nextRequest, true);
+    void run(nextRequest, true, 'replacement-action');
   }, [accountName, activeRequest.target, run]);
 
   const openComposer = useCallback((contact?: SuggestedContact | null) => {
@@ -590,6 +661,9 @@ export function AgentActionDialog({
                   {changeSummary}
                 </div>
               ) : null}
+              {runStatus ? (
+                <p className="mt-2 text-xs text-[var(--muted-foreground)]">{runStatus}</p>
+              ) : null}
             </div>
           </DialogHeader>
 
@@ -631,6 +705,9 @@ export function AgentActionDialog({
                 ) : null}
 
                 {renderView()}
+                {(activeRequest.action === 'draft_outreach' || activeRequest.action === 'content_context') ? (
+                  <SourceAttributionPanel attribution={sourceAttribution} versionMetadata={result?.data.version_metadata} />
+                ) : null}
 
                 {activeRequest.action === 'draft_outreach' && draft?.body ? (
                   <EmailComposer
@@ -751,7 +828,7 @@ export function AgentActionDialog({
                       <ExternalLink className="h-3.5 w-3.5" />
                       Open in Composer
                     </Button>
-                    <Button size="sm" variant="outline" className="gap-1.5" onClick={() => void run(undefined, true)}>
+                    <Button size="sm" variant="outline" className="gap-1.5" onClick={() => void run(undefined, true, 'draft-regenerate')}>
                       <RefreshCw className="h-3.5 w-3.5" />
                       Regenerate
                     </Button>
@@ -773,9 +850,9 @@ export function AgentActionDialog({
               </div>
 
               <div className="flex gap-2">
-                <Button variant="outline" size="sm" className="gap-1.5" onClick={() => void run(undefined, true)} disabled={loading}>
+                <Button variant="outline" size="sm" className="gap-1.5" onClick={() => void run(undefined, true, 'footer-refresh')} disabled={loading}>
                   <RefreshCw className={`h-3.5 w-3.5 ${loading ? 'animate-spin' : ''}`} />
-                  Refresh
+                  {refreshLabel}
                 </Button>
                 <Button variant="outline" size="sm" className="gap-1.5" onClick={() => setOpen(false)}>
                   Close

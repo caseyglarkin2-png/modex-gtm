@@ -3,7 +3,7 @@ import { logSendToHubSpot } from '@/lib/hubspot/emails';
 
 export interface EmailPayload {
   to: string;
-  cc?: string;
+  cc?: string[];
   bcc?: string;
   subject: string;
   html: string;

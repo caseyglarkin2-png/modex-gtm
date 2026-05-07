@@ -184,6 +184,11 @@ export class ClawdServiceClient {
   }
 
   async draftOutreach(target: AgentActionTarget) {
+    const configuredCampaign = process.env.CLAWD_DEFAULT_CAMPAIGN?.trim();
+    const campaign = configuredCampaign && /yardflow/i.test(configuredCampaign)
+      ? configuredCampaign
+      : 'yardflow';
+
     return requestJson(this.baseUrl, '/api/outreach/draft', {
       method: 'POST',
       headers: withBearer({ 'Content-Type': 'application/json' }, this.token),
@@ -191,7 +196,9 @@ export class ClawdServiceClient {
         email: target.email,
         company: target.company ?? target.accountName,
         contact: undefined,
-        campaign: process.env.CLAWD_DEFAULT_CAMPAIGN ?? 'yardflow',
+        campaign,
+        brand: 'yardflow',
+        brand_name: 'YardFlow by FreightRoll',
         use_ai: true,
       }),
       cache: 'no-store',

@@ -26,6 +26,7 @@ const mockedGenerateText = vi.fn();
 const mockedGenerateTextWithMetadata = vi.fn();
 const mockedGetAgentContentContext = vi.fn();
 const mockedResolveCanonicalAccountScope = vi.fn();
+const mockedRecordSourceBackedMetric = vi.fn(async () => undefined);
 
 vi.mock('@/lib/prisma', () => ({ prisma: mockedPrisma }));
 vi.mock('@/lib/db', () => ({ getAccountContext: mockedGetAccountContext }));
@@ -42,6 +43,9 @@ vi.mock('@/lib/agent-actions/content-context', async () => {
 });
 vi.mock('@/lib/revops/account-identity', () => ({
   resolveCanonicalAccountScope: mockedResolveCanonicalAccountScope,
+}));
+vi.mock('@/lib/source-backed/metrics', () => ({
+  recordSourceBackedMetric: mockedRecordSourceBackedMetric,
 }));
 
 const { POST: generatePOST } = await import('@/app/api/ai/generate/route');
@@ -109,7 +113,7 @@ describe('AI generation route metadata', () => {
       },
       personas: [{ name: 'Kaushik Sarda', title: 'VP Supply Chain' }],
     });
-    mockedGenerateText.mockResolvedValue('Should we send a short overview?');
+    mockedGenerateText.mockResolvedValue('Should we send a short overview?\n\nCITATIONS: [[SRC:signal_1]] [[SRC:proof_1]]');
 
     const res = await generatePOST(new NextRequest('http://localhost/api/ai/generate', {
       method: 'POST',
@@ -126,6 +130,7 @@ describe('AI generation route metadata', () => {
     expect(res.status).toBe(200);
     expect(mockedPrisma.generatedContent.create).toHaveBeenCalledWith(expect.objectContaining({
       data: expect.objectContaining({
+        content: expect.not.stringContaining('[[SRC:'),
         version_metadata: expect.objectContaining({
           prompt_policy_version: expect.any(String),
           cta_mode: 'scorecard_reply',
@@ -133,6 +138,10 @@ describe('AI generation route metadata', () => {
           generation_input_contract: expect.objectContaining({
             account_brief: expect.stringContaining('Americold'),
             cta_mode: 'scorecard_reply',
+          }),
+          source_backed_contract_v1: expect.objectContaining({
+            contract: 'source_backed_contract_v1',
+            citation_threshold: 1,
           }),
         }),
       }),
@@ -173,6 +182,18 @@ describe('AI generation route metadata', () => {
         bestFit: 'Best fit text.',
         publicContext: '',
         suggestedNextStep: 'If useful, we can send the 1-page Yard Network scorecard.',
+        sourceBacked: {
+          accountWedge: 'Cold-chain throughput pressure is compounding.',
+          personWedge: 'Ops owner needs lane-level standardization.',
+          angles: [
+            {
+              label: 'Primary angle',
+              rationale: 'Standardize gate-to-dock motion before peak swings.',
+              evidenceRefIds: ['signal_1', 'proof_1'],
+            },
+          ],
+          citations: ['signal_1', 'proof_1'],
+        },
       }),
     });
 
@@ -193,6 +214,9 @@ describe('AI generation route metadata', () => {
           generation_input_contract: expect.objectContaining({
             account_brief: expect.stringContaining('Americold'),
             proof_context: expect.any(Array),
+          }),
+          source_backed_contract_v1: expect.objectContaining({
+            contract: 'source_backed_contract_v1',
           }),
           provenance: expect.objectContaining({
             requested_account_name: 'Americold',
@@ -222,7 +246,7 @@ describe('AI generation route metadata', () => {
       },
       personas: [{ name: 'Kaushik Sarda', title: 'VP Supply Chain' }],
     });
-    mockedGenerateText.mockResolvedValue('SUBJECT: yard variance\n---\nShould we send a short overview?');
+    mockedGenerateText.mockResolvedValue('SUBJECT: yard variance\n---\nShould we send a short overview?\nCITATIONS: [[SRC:signal_1]]');
 
     const res = await sequencePOST(new NextRequest('http://localhost/api/ai/sequence', {
       method: 'POST',
@@ -243,8 +267,86 @@ describe('AI generation route metadata', () => {
           generation_input_contract: expect.objectContaining({
             recommended_contacts: expect.any(Array),
           }),
+          source_backed_contract_v1: expect.objectContaining({
+            contract: 'source_backed_contract_v1',
+          }),
         }),
       }),
+    }));
+  });
+
+  it('emits citation rejection metric when live-intel output lacks required citations', async () => {
+    mockedGetAccountContext.mockResolvedValue({
+      account: {
+        name: 'Americold',
+        priority_band: 'A',
+        priority_score: 91,
+        why_now: 'Cold-chain throughput pressure',
+        vertical: 'Cold storage',
+        primo_angle: 'Dock and yard congestion',
+        parent_brand: 'Americold',
+      },
+      personas: [{ name: 'Kaushik Sarda', title: 'VP Supply Chain' }],
+    });
+    mockedGenerateText.mockResolvedValue('No inline citation markers here.');
+
+    const res = await generatePOST(new NextRequest('http://localhost/api/ai/generate', {
+      method: 'POST',
+      body: JSON.stringify({
+        type: 'email',
+        accountName: 'Americold',
+        personaName: 'Kaushik Sarda',
+        tone: 'conversational',
+        length: 'short',
+        useLiveIntel: true,
+      }),
+    }));
+
+    expect(res.status).toBe(422);
+    expect(mockedRecordSourceBackedMetric).toHaveBeenCalledWith(expect.objectContaining({
+      metric: 'citation_rejections',
+      endpoint: '/api/ai/generate',
+      accountName: 'Americold',
+    }));
+  });
+
+  it('emits sidecar-unavailable metric when live intel is degraded', async () => {
+    mockedGetAgentContentContext.mockResolvedValue({
+      ...mockAgentContext,
+      status: 'partial',
+      summary: 'Sidecar provider unavailable for committee coverage.',
+    });
+    mockedGetAccountContext.mockResolvedValue({
+      account: {
+        name: 'Americold',
+        priority_band: 'A',
+        priority_score: 91,
+        why_now: 'Cold-chain throughput pressure',
+        vertical: 'Cold storage',
+        primo_angle: 'Dock and yard congestion',
+        parent_brand: 'Americold',
+      },
+      personas: [{ name: 'Kaushik Sarda', title: 'VP Supply Chain' }],
+    });
+    mockedGenerateText.mockResolvedValue('A cited claim [[SRC:signal_1]] with proof [[SRC:proof_1]].');
+
+    const res = await generatePOST(new NextRequest('http://localhost/api/ai/generate', {
+      method: 'POST',
+      body: JSON.stringify({
+        type: 'email',
+        accountName: 'Americold',
+        personaName: 'Kaushik Sarda',
+        tone: 'conversational',
+        length: 'short',
+        useLiveIntel: true,
+      }),
+    }));
+
+    expect(res.status).toBe(200);
+    expect(mockedRecordSourceBackedMetric).toHaveBeenCalledWith(expect.objectContaining({
+      metric: 'sidecar_unavailable',
+      endpoint: '/api/ai/generate',
+      accountName: 'Americold',
     }));
   });
 });

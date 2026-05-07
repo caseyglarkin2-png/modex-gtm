@@ -51,6 +51,12 @@ describe('operator outcomes route', () => {
         sourceId: 'activity-1',
         campaignId: 7,
         generatedContentId: 101,
+        sourceMetadata: {
+          candidateTrace: {
+            candidateId: 44,
+            state: 'promoted',
+          },
+        },
         createdBy: 'Casey',
       }),
     });
@@ -82,6 +88,14 @@ describe('operator outcomes route', () => {
       select: { id: true },
     });
     expect(mockedPrisma.signalContentLink.upsert).toHaveBeenCalled();
+    expect(mockedPrisma.signalContentLink.upsert).toHaveBeenCalledWith(expect.objectContaining({
+      create: expect.objectContaining({
+        signal_context: expect.stringContaining('source_metadata='),
+      }),
+      update: expect.objectContaining({
+        signal_context: expect.stringContaining('"candidateId":44'),
+      }),
+    }));
     expect(mockedPrisma.activity.create).toHaveBeenCalledWith(expect.objectContaining({
       data: expect.objectContaining({
         activity_type: 'Infographic Bundle',

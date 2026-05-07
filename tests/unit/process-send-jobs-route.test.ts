@@ -18,6 +18,9 @@ const mockedPrisma = {
   generatedContent: {
     update: vi.fn(),
   },
+  accountContactCandidate: {
+    findMany: vi.fn(),
+  },
 };
 
 const mockedSendEmail = vi.fn();
@@ -96,6 +99,20 @@ describe('process send jobs cron', () => {
       { status: 'failed' },
     ]);
     mockedPrisma.generatedContent.update.mockResolvedValue({});
+    mockedPrisma.accountContactCandidate.findMany.mockResolvedValue([
+      {
+        id: 88,
+        account_name: 'Acme Foods',
+        candidate_key: 'ops@acme.com::vp-ops',
+        full_name: 'Casey',
+        email: 'ops@acme.com',
+        state: 'promoted',
+        source: 'company_contacts',
+        promoted_persona_id: 17,
+        replaced_persona_id: null,
+        deferred_reason: null,
+      },
+    ]);
     mockedPrisma.sendJob.update.mockResolvedValue({});
 
     const res = await GET(new NextRequest('http://localhost/api/cron/process-send-jobs?secret=test-cron-secret'));
@@ -125,12 +142,29 @@ describe('process send jobs cron', () => {
           workflow: expect.objectContaining({
             surface: 'account_page',
             shell: 'account_outreach',
+            details: expect.objectContaining({
+              candidateTrace: expect.objectContaining({
+                recipient: expect.objectContaining({
+                  candidateId: 88,
+                }),
+              }),
+            }),
           }),
           recipient: {
             sendJobRecipientId: 201,
+            cc: [],
+            candidateTrace: expect.objectContaining({
+              candidateId: 88,
+              state: 'promoted',
+            }),
+            ccCandidateTraces: [],
           },
         },
       }),
+    }));
+    expect(mockedSendEmail).toHaveBeenCalledWith(expect.objectContaining({
+      to: 'ops@acme.com',
+      cc: [],
     }));
     expect(mockedMarkCronSuccess).toHaveBeenCalled();
   });

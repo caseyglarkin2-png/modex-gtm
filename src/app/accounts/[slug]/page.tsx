@@ -12,9 +12,6 @@ import {
 import {
   dbGetAccountByName,
   dbGetAccounts,
-  dbGetActivitiesByAccounts,
-  dbGetMicrositeAccountAnalyticsByAccounts,
-  dbGetPersonasByAccounts,
 } from '@/lib/db';
 import {
   accountCommandTabs,
@@ -52,7 +49,6 @@ import { resolveContentQaChecklist } from '@/lib/revops/content-qa-checklist';
 import { computeRecipientReadiness } from '@/lib/revops/recipient-readiness';
 import { parseInfographicMetadata, type JourneyStageIntent } from '@/lib/revops/infographic-journey';
 import { formatCanonicalConflictLabel } from '@/lib/revops/canonical-records';
-import { ensureCanonicalRecords } from '@/lib/revops/canonical-sync';
 import { InfographicJourneyControls } from '@/components/revops/infographic-journey-controls';
 import { AccountGeneratedAssetActions } from '@/components/accounts/account-generated-asset-actions';
 import { AccountContactCandidatesPanel } from '@/components/accounts/account-contact-candidates-panel';
@@ -63,7 +59,6 @@ import { AccountOutreachShell } from '@/components/accounts/account-outreach-she
 import { AgentActionDialog } from '@/components/agent-actions/agent-action-dialog';
 import { AgentIntelStrip } from '@/components/agent-actions/agent-intel-strip';
 import { SendJobTracker } from '@/components/generated-content/send-job-tracker';
-import { getAgentContentContext } from '@/lib/agent-actions/content-context';
 import {
   buildCommitteeCoverageBrief,
   buildCoverageGaps,
@@ -76,6 +71,25 @@ import { loadAccountCommandCenterData } from '@/lib/account-command-center-data'
 import { summarizeFreshness } from '@/lib/agent-actions/freshness';
 import { parseAssetProvenanceSummary, resolveAccountAssetSelection } from '@/lib/generated-content/asset-selection';
 import { buildOutcomeFollowUpRecommendation } from '@/lib/revops/operator-outcomes';
+
+function asRecord(value: unknown) {
+  return value && typeof value === 'object' ? value as Record<string, unknown> : null;
+}
+
+function normalizeEmail(value: string | null | undefined) {
+  return typeof value === 'string' ? value.trim().toLowerCase() : '';
+}
+
+function pickCandidateTraceFromEmailMetadata(metadata: unknown) {
+  const root = asRecord(metadata);
+  const recipient = asRecord(root?.recipient);
+  const direct = asRecord(recipient?.candidateTrace);
+  if (direct) return direct;
+  const workflow = asRecord(root?.workflow);
+  const details = asRecord(workflow?.details);
+  const workflowTrace = asRecord(details?.candidateTrace);
+  return asRecord(workflowTrace?.recipient);
+}
 
 export default async function AccountDetailPage({
   params,
@@ -106,6 +120,7 @@ export default async function AccountDetailPage({
     sendJobs,
     sendJobRecipientEvents,
     operatorOutcomes,
+    evidenceSummary,
   } = await loadAccountCommandCenterData(account.name);
   const waves = getWavesByAccount(account.name);
   const brief = getMeetingBriefByAccount(account.name);
@@ -198,6 +213,25 @@ export default async function AccountDetailPage({
     hasMeetingSignal,
     notes: operatorOutcomes[0]?.notes ?? null,
   });
+  const candidateTraceByEmail = new Map(
+    contactCandidates
+      .filter((candidate) => candidate.email)
+      .map((candidate) => [
+        normalizeEmail(candidate.email),
+        {
+          candidateId: candidate.id,
+          accountName: candidate.accountName,
+          candidateKey: candidate.candidateKey,
+          fullName: candidate.fullName,
+          email: candidate.email,
+          state: candidate.state,
+          source: candidate.source,
+          promotedPersonaId: candidate.promotedPersonaId,
+          replacedPersonaId: candidate.replacedPersonaId,
+          deferredReason: candidate.deferredReason,
+        },
+      ]),
+  );
   const accountOutcomeSources = [
     ...emailLogs.map((email) => ({
       key: `email-${email.id}`,
@@ -206,6 +240,13 @@ export default async function AccountDetailPage({
       sourceKind: 'email-log',
       sourceId: String(email.id),
       generatedContentId: email.generated_content_id ?? null,
+      sourceMetadata: (() => {
+        const candidateTrace = pickCandidateTraceFromEmailMetadata(email.metadata)
+          ?? candidateTraceByEmail.get(normalizeEmail(email.to_email))
+          ?? null;
+        if (!candidateTrace) return null;
+        return { candidateTrace };
+      })(),
     })),
     ...sendJobRecipientEvents.map((recipient) => ({
       key: `send-recipient-${recipient.id}`,
@@ -214,6 +255,11 @@ export default async function AccountDetailPage({
       sourceKind: 'send-job-recipient',
       sourceId: String(recipient.id),
       generatedContentId: recipient.generated_content_id ?? null,
+      sourceMetadata: (() => {
+        const candidateTrace = candidateTraceByEmail.get(normalizeEmail(recipient.to_email)) ?? null;
+        if (!candidateTrace) return null;
+        return { candidateTrace };
+      })(),
     })),
   ].slice(0, 10);
   const openTaskCount = Number(Boolean(account.next_action)) + activities.filter((activity) => Boolean(activity.next_step)).length + captures.filter((capture) => Boolean(capture.next_step)).length;
@@ -330,6 +376,16 @@ export default async function AccountDetailPage({
                     <Button size="sm" variant="outline" className="gap-1.5">
                       <Inbox className="h-3.5 w-3.5" />
                       Find More Contacts
+                    </Button>
+                  }
+                />
+                <AgentActionDialog
+                  request={{ action: 'committee_refresh', target: { accountName: account.name, company: account.name } }}
+                  title={`Build Committee for ${account.name}`}
+                  trigger={
+                    <Button size="sm" variant="outline" className="gap-1.5">
+                      <Users className="h-3.5 w-3.5" />
+                      Build Committee
                     </Button>
                   }
                 />
@@ -456,7 +512,7 @@ export default async function AccountDetailPage({
                 <CardTitle className="text-sm">Outbound Command Center</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="grid gap-3 md:grid-cols-3">
+                <div className="grid gap-3 md:grid-cols-4">
                   <div className="rounded-lg border border-[var(--border)] p-3">
                     <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Recommendation</p>
                     <p className="mt-1 font-medium">{agentContentContext?.nextActions[0] ?? 'Refresh intel and pick the strongest first touch.'}</p>
@@ -513,6 +569,19 @@ export default async function AccountDetailPage({
                       {activeRecipientSet
                         ? 'This set pre-fills send flows. You can still edit recipients in the send dialog.'
                         : 'Agent set ignored. The send dialog will fall back to its normal recommended recipients.'}
+                    </p>
+                  </div>
+                  <div className="rounded-lg border border-[var(--border)] p-3">
+                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Source Evidence</p>
+                    <p className="mt-1 text-sm font-medium">
+                      {evidenceSummary
+                        ? `${evidenceSummary.freshness.fresh} fresh · ${evidenceSummary.freshness.aging} aging · ${evidenceSummary.freshness.stale} stale`
+                        : 'No source-backed evidence runs yet'}
+                    </p>
+                    <p className="mt-1 text-xs text-[var(--muted-foreground)]">
+                      {evidenceSummary
+                        ? `Latest run: ${evidenceSummary.run.latestStatus ?? 'unknown'}${evidenceSummary.run.latestAt ? ` (${new Date(evidenceSummary.run.latestAt).toLocaleString()})` : ''}`
+                        : 'Run refresh intel to persist claim-level evidence and provider diagnostics.'}
                     </p>
                   </div>
                 </div>

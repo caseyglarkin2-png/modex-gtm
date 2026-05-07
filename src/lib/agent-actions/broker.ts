@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma';
+import { createHash } from 'node:crypto';
 import { getAccountContext } from '@/lib/db';
 import { generateText } from '@/lib/ai/client';
 import { buildEmailPrompt, buildOutreachSequencePrompt, type PromptContext } from '@/lib/ai/prompts';
@@ -6,6 +7,10 @@ import { buildAgentActionCacheKey, readCachedAgentAction, writeCachedAgentAction
 import { getConfiguredAgentClients } from '@/lib/agent-actions/clients';
 import { buildAgentActionFreshness, buildFreshnessDimension, createDefaultAgentActionFreshness } from '@/lib/agent-actions/freshness';
 import type { AgentActionCapability, AgentActionCard, AgentActionRequest, AgentActionResult, AgentActionTarget, AgentActionType } from '@/lib/agent-actions/types';
+import { SOURCE_EVIDENCE_INGEST_ENABLED } from '@/lib/feature-flags';
+import { createResearchRun, upsertEvidenceRecords } from '@/lib/source-backed/evidence';
+import { buildGenerationInputContract } from '@/lib/agent-actions/generation-input';
+import { buildSourceBackedContractFromGeneratedText } from '@/lib/source-backed/attribution';
 
 type ResolvedTarget = AgentActionTarget & {
   accountName?: string;
@@ -61,6 +66,71 @@ function normalizeDomain(value: string | null | undefined) {
 
 function extractArrayRecords(value: unknown): Array<Record<string, unknown>> {
   return Array.isArray(value) ? value.filter(Boolean) as Array<Record<string, unknown>> : [];
+}
+
+function hashEvidenceClaim(claim: string) {
+  return createHash('sha256').update(claim).digest('hex');
+}
+
+export function sanitizeOutreachDraftText(value: string): string {
+  const normalized = value
+    .replace(/\r\n/g, '\n')
+    .replace(/—/g, ', ')
+    .replace(/\bdwtb\.dev\b/gi, 'yardflow.ai')
+    .replace(/\bDWTB\?!\s*Studios\b.*$/gim, 'YardFlow by FreightRoll')
+    .replace(/\n{3,}/g, '\n\n');
+
+  const withoutLegacySignature = normalized
+    .replace(/\n-{3,}\nYardFlow by FreightRoll[\s\S]*$/i, '')
+    .replace(/\n-{3,}\nDWTB\?!\s*Studios[\s\S]*$/i, '')
+    .replace(/\nIf you'd prefer not to hear from me[\s\S]*$/i, '');
+
+  return withoutLegacySignature.trim();
+}
+
+function sanitizeOutreachDraftPayload(value: unknown): unknown {
+  if (typeof value === 'string') return sanitizeOutreachDraftText(value);
+  if (Array.isArray(value)) return value.map((item) => sanitizeOutreachDraftPayload(item));
+  if (!value || typeof value !== 'object') return value;
+
+  const entries = Object.entries(value as Record<string, unknown>).map(([key, entryValue]) => {
+    if (typeof entryValue === 'string') {
+      if (key === 'subject' || key === 'body' || key === 'draft' || key === 'content' || key === 'message') {
+        return [key, sanitizeOutreachDraftText(entryValue)];
+      }
+      return [key, entryValue.replace(/—/g, ', ').replace(/\bdwtb\.dev\b/gi, 'yardflow.ai')];
+    }
+    return [key, sanitizeOutreachDraftPayload(entryValue)];
+  });
+
+  return Object.fromEntries(entries);
+}
+
+function sanitizeDraftOutreachResult(result: AgentActionResult): AgentActionResult {
+  const data = (result.data ?? {}) as Record<string, unknown>;
+  if (!data.draft) return result;
+
+  const sanitizedDraft = sanitizeOutreachDraftPayload(data.draft);
+  const sanitizedCards = result.cards.map((entry) => (
+    entry.title.toLowerCase().includes('draft')
+      ? { ...entry, body: sanitizeOutreachDraftText(entry.body) }
+      : entry
+  ));
+
+  return {
+    ...result,
+    summary: sanitizeOutreachDraftText(result.summary),
+    cards: sanitizedCards,
+    data: {
+      ...data,
+      draft: sanitizedDraft,
+    },
+  };
+}
+
+function maybeSanitizeResult(action: AgentActionType, result: AgentActionResult): AgentActionResult {
+  if (action !== 'draft_outreach') return result;
+  return sanitizeDraftOutreachResult(result);
 }
 
 function dedupeContacts(contacts: Array<Record<string, unknown>>) {
@@ -240,22 +310,23 @@ async function runContentContext(target: ResolvedTarget, refresh: boolean, depth
     result.summary = 'Account context is required to assemble live content context.';
     return result;
   }
+  const scopedAccountName = target.accountName;
 
   const [accountBundle, latestEmail, latestAsset] = await Promise.all([
-    getAccountContext(target.accountName, target.accountNames),
+    getAccountContext(scopedAccountName, target.accountNames),
     prisma.emailLog.findFirst({
-      where: { account_name: { in: target.accountNames?.length ? target.accountNames : [target.accountName] } },
+      where: { account_name: { in: target.accountNames?.length ? target.accountNames : [scopedAccountName] } },
       orderBy: { sent_at: 'desc' },
       select: { subject: true, sent_at: true, to_email: true, reply_count: true },
     }).catch(() => null),
     prisma.generatedContent.findFirst({
-      where: { account_name: { in: target.accountNames?.length ? target.accountNames : [target.accountName] } },
+      where: { account_name: { in: target.accountNames?.length ? target.accountNames : [scopedAccountName] } },
       orderBy: { created_at: 'desc' },
       select: { content_type: true, created_at: true, version_metadata: true },
     }).catch(() => null),
   ]);
 
-  const company = target.company ?? target.accountName;
+  const company = target.company ?? scopedAccountName;
   const [accountResearch, companyContacts, committee, pipelineSnapshot, salesSequence, salesAnalysis, salesDecisionMakers] = await Promise.allSettled([
     clawd?.getAccountResearch(company, refresh),
     clawd?.getCompanyContacts(company),
@@ -429,9 +500,73 @@ async function runContentContext(target: ResolvedTarget, refresh: boolean, depth
     depth,
   };
 
+  if (SOURCE_EVIDENCE_INGEST_ENABLED) {
+    try {
+      const providerStatus = {
+        clawd: accountResearch.status === 'fulfilled' ? 'healthy' : 'unavailable',
+        sales_agent: companyContacts.status === 'fulfilled' || salesDecisionMakers.status === 'fulfilled' ? 'healthy' : 'unavailable',
+      };
+      const providerErrors = {
+        ...(accountResearch.status === 'rejected' ? { clawd: String(accountResearch.reason) } : {}),
+        ...(companyContacts.status === 'rejected' ? { company_contacts: String(companyContacts.reason) } : {}),
+        ...(salesDecisionMakers.status === 'rejected' ? { sales_agent: String(salesDecisionMakers.reason) } : {}),
+      };
+      const runStatus = Object.keys(providerErrors).length === 0
+        ? 'succeeded'
+        : Object.keys(providerErrors).length >= 2
+          ? 'failed'
+          : 'partial';
+
+      const run = await createResearchRun(prisma, {
+        accountName: target.accountName,
+        status: runStatus,
+        runKey: `content_context:${scopedAccountName}:${Date.now()}`,
+        providerStatus,
+        errorMap: providerErrors,
+        startedAt: new Date(Date.now() - 2_000),
+        completedAt: new Date(),
+      });
+
+      const evidenceClaims = result.cards
+        .filter((entry) => entry.body && !/no .*available/i.test(entry.body))
+        .slice(0, 8)
+        .map((entry) => ({
+          accountName: scopedAccountName,
+          claim: `${entry.title}: ${entry.body}`.slice(0, 1200),
+          claimHash: hashEvidenceClaim(`${entry.title}:${entry.body}`),
+          sourceUrl: `https://yardflow.local/agent-actions/content-context/${encodeURIComponent(scopedAccountName)}`,
+          sourceTitle: `Content context ${entry.title}`,
+          sourceType: 'local',
+          provider: 'agent_actions',
+          observedAt: new Date(),
+          deterministicKey: `content_context:${scopedAccountName}:${hashEvidenceClaim(entry.title).slice(0, 12)}`,
+          metadata: {
+            tone: entry.tone ?? 'default',
+            status: result.status,
+          },
+        }));
+
+      if (evidenceClaims.length > 0) {
+        await upsertEvidenceRecords(prisma, run.id, evidenceClaims);
+      }
+
+      result.data = {
+        ...(result.data as Record<string, unknown>),
+        evidence: {
+          runId: run.id,
+          status: runStatus,
+          providerStatus,
+          claimCount: evidenceClaims.length,
+        },
+      };
+    } catch {
+      // Evidence ingest is best-effort and must not break intel refresh.
+    }
+  }
+
   if (!result.summary) {
     result.status = 'partial';
-    result.summary = `Assembled Modex context for ${target.accountName}, but live sidecar research is limited right now.`;
+    result.summary = `Assembled Modex context for ${scopedAccountName}, but live sidecar research is limited right now.`;
   }
 
   return result;
@@ -648,14 +783,24 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
         ? await runContentContext(target, request.refresh, request.depth, request.limit ?? 10)
         : null;
       const summary = contentContext?.summary;
+      const generationInput = buildGenerationInputContract(contentContext, 'scorecard_reply');
       const result = baseResult(request.action, salesAgent ? 'sales_agent' : clawd ? 'clawd' : 'modex');
       const errors: string[] = [];
       if (salesAgent) {
         try {
           const payload = await salesAgent.draftOutreach(target);
+          const draftPayload = payload as Record<string, unknown>;
+          const draftBody = safeString(draftPayload.body) || safeString((draftPayload.draft as Record<string, unknown> | undefined)?.body);
+          const sourceAttribution = buildSourceBackedContractFromGeneratedText({
+            content: draftBody,
+            accountName: target.accountName ?? '',
+            personaName: target.personaName,
+            generationInput,
+            citationThreshold: 1,
+          });
           result.summary = `sales-agent draft is ready${target.accountName ? ` for ${target.accountName}` : ''}.`;
           result.cards = [card('Draft', previewJson(payload), 'success')];
-          result.data = { draft: payload, contentContext };
+          result.data = { draft: payload, contentContext, sourceAttribution };
           result.nextActions = ['Open compose and send', 'Regenerate with live intel'];
           return result;
         } catch (error) {
@@ -665,10 +810,19 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
       if (clawd) {
         try {
           const payload = await clawd.draftOutreach(target);
+          const draftPayload = payload as Record<string, unknown>;
+          const draftBody = safeString(draftPayload.body) || safeString((draftPayload.draft as Record<string, unknown> | undefined)?.body);
+          const sourceAttribution = buildSourceBackedContractFromGeneratedText({
+            content: draftBody,
+            accountName: target.accountName ?? '',
+            personaName: target.personaName,
+            generationInput,
+            citationThreshold: 1,
+          });
           result.provider = 'clawd';
           result.summary = `Clawd draft is ready${target.accountName ? ` for ${target.accountName}` : ''}.`;
           result.cards = [card('Draft', previewJson(payload), 'success')];
-          result.data = { draft: payload, contentContext };
+          result.data = { draft: payload, contentContext, sourceAttribution };
           result.nextActions = ['Open compose and send', 'Regenerate with live intel'];
           return result;
         } catch (error) {
@@ -677,13 +831,20 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
       }
       try {
         const fallback = await buildModexDraftFallback(target, summary);
+        const sourceAttribution = buildSourceBackedContractFromGeneratedText({
+          content: fallback.body,
+          accountName: target.accountName ?? '',
+          personaName: target.personaName,
+          generationInput,
+          citationThreshold: 1,
+        });
         result.provider = 'modex';
         result.summary = `Generated a Modex fallback draft${target.accountName ? ` for ${target.accountName}` : ''}.`;
         result.cards = [
           card('Subject', fallback.subject, 'success'),
           card('Body', fallback.body, 'default'),
         ];
-        result.data = { draft: fallback, contentContext, errors };
+        result.data = { draft: fallback, contentContext, errors, sourceAttribution };
         result.nextActions = ['Open compose and send', 'Generate one-pager with live intel'];
         return result;
       } catch (error) {
@@ -755,17 +916,18 @@ export async function runAgentAction(request: AgentActionRequest): Promise<Agent
   const cached = await readCachedAgentAction(cacheKey);
 
   if (!request.refresh && cached && isFresh(cached.savedAt, ttlMs)) {
-    return applyFreshness(cached.result, 'cache', false);
+    return maybeSanitizeResult(request.action, applyFreshness(cached.result, 'cache', false));
   }
 
   try {
     const liveResult = await runActionUncached(request, resolvedTarget);
-    await writeCachedAgentAction(cacheKey, liveResult);
-    await recordAgentActivity(resolvedTarget.accountName, request.action, liveResult.summary);
-    return liveResult;
+    const sanitizedResult = maybeSanitizeResult(request.action, liveResult);
+    await writeCachedAgentAction(cacheKey, sanitizedResult);
+    await recordAgentActivity(resolvedTarget.accountName, request.action, sanitizedResult.summary);
+    return sanitizedResult;
   } catch (error) {
     if (cached) {
-      return applyFreshness(cached.result, 'cache', true);
+      return maybeSanitizeResult(request.action, applyFreshness(cached.result, 'cache', true));
     }
     const result = baseResult(request.action, 'modex');
     result.status = 'error';

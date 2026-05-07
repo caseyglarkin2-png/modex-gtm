@@ -31,22 +31,31 @@ const mockedPrisma = {
 };
 
 const mockedRateLimit = vi.fn();
-const mockedEnforceApprovalGate = vi.fn<(
-  ...args: unknown[]
-) => Promise<{ allowed: boolean; policy: { required: boolean }; approval?: { id: string } }>>(
-  async () => ({ allowed: true, policy: { required: false } }),
-);
+const mockedRequiresApprovalForSend = vi.fn(async () => ({ approved: true, status: 'approved', reviewId: 'mer_1' }));
+const mockedEnforceOneAccountInvariant = vi.fn(async ({ cc }: { cc?: string[] }) => ({
+  ok: true,
+  canonicalAccountName: 'Acme Foods',
+  scopedAccountNames: ['Acme Foods'],
+  normalizedCc: cc ?? [],
+}));
 
 vi.mock('@/lib/prisma', () => ({ prisma: mockedPrisma }));
 vi.mock('@/lib/rate-limit', () => ({ rateLimit: mockedRateLimit }));
-vi.mock('@/lib/revops/send-approvals', () => ({ enforceSendApprovalGate: mockedEnforceApprovalGate }));
+vi.mock('@/lib/revops/generated-content-approval', () => ({ requiresApprovalForSend: mockedRequiresApprovalForSend }));
+vi.mock('@/lib/revops/one-account-invariant', () => ({ enforceOneAccountInvariant: mockedEnforceOneAccountInvariant }));
 
 const { POST } = await import('@/app/api/email/send-bulk-async/route');
 
 beforeEach(() => {
   vi.clearAllMocks();
   mockedRateLimit.mockReturnValue({ ok: true });
-  mockedEnforceApprovalGate.mockResolvedValue({ allowed: true, policy: { required: false } });
+  mockedRequiresApprovalForSend.mockResolvedValue({ approved: true, status: 'approved', reviewId: 'mer_1' });
+  mockedEnforceOneAccountInvariant.mockResolvedValue({
+    ok: true,
+    canonicalAccountName: 'Acme Foods',
+    scopedAccountNames: ['Acme Foods'],
+    normalizedCc: [],
+  });
   mockedPrisma.persona.findMany.mockResolvedValue([]);
   mockedPrisma.account.findMany.mockResolvedValue([]);
   mockedPrisma.emailLog.findMany.mockResolvedValue([]);
@@ -307,7 +316,7 @@ describe('email send-bulk-async route', () => {
     expect(res.status).toBe(200);
   });
 
-  it('does not block when approval policy would have required reviewer action', async () => {
+  it('queues when the approval gate feature flag is disabled', async () => {
     mockedPrisma.generatedContent.findMany.mockResolvedValue([
       {
         id: 10,
@@ -318,11 +327,6 @@ describe('email send-bulk-async route', () => {
         checklist_state: { completed_item_ids: ['clear_value_prop', 'account_specific_proof', 'cta_specific', 'compliance_checked', 'deliverability_checked'] },
       },
     ]);
-    mockedEnforceApprovalGate.mockResolvedValue({
-      allowed: false,
-      policy: { required: true },
-      approval: { id: 'sar_1' },
-    });
     mockedPrisma.sendJob.create.mockResolvedValue({
       id: 404,
       status: 'pending',

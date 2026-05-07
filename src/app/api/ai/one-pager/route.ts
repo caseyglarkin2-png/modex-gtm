@@ -29,6 +29,12 @@ import {
 } from '@/lib/revops/cold-outbound-policy';
 import { buildGenerationInputContract } from '@/lib/agent-actions/generation-input';
 import { resolveCanonicalAccountScope } from '@/lib/revops/account-identity';
+import {
+  assertMinimumCitationThreshold,
+  buildSourceBackedContractFromGeneratedText,
+} from '@/lib/source-backed/attribution';
+import { persistSourceAttributionLinks } from '@/lib/source-backed/persistence';
+import { recordSourceBackedMetric } from '@/lib/source-backed/metrics';
 
 export const dynamic = 'force-dynamic';
 
@@ -43,6 +49,14 @@ const OnePagerRequestSchema = z.object({
   useLiveIntel: z.boolean().optional().default(false),
   refreshContext: z.boolean().optional().default(false),
 });
+
+function asRecord(value: unknown) {
+  return value && typeof value === 'object' ? value as Record<string, unknown> : null;
+}
+
+function asStringArray(value: unknown) {
+  return Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string' && item.trim().length > 0) : [];
+}
 
 export async function POST(req: NextRequest) {
   let body: unknown;
@@ -99,6 +113,17 @@ export async function POST(req: NextRequest) {
   const agentContext = useLiveIntel
     ? await getAgentContentContext({ accountName: persistedAccountName, accountNames: canonicalScope.accountNames, refresh: refreshContext })
     : null;
+  if (useLiveIntel && (!agentContext || agentContext.status !== 'ok')) {
+    await recordSourceBackedMetric({
+      metric: 'sidecar_unavailable',
+      endpoint: '/api/ai/one-pager',
+      accountName: persistedAccountName,
+      details: {
+        useLiveIntel,
+        status: agentContext?.status ?? 'missing',
+      },
+    });
+  }
   const ctaPolicy = getCtaPolicy('one_pager', 'one_pager');
   const generationInput = buildGenerationInputContract(agentContext, ctaPolicy.ctaMode);
   ctx.agentContextSummary = agentContext?.summary;
@@ -194,6 +219,44 @@ export async function POST(req: NextRequest) {
         record.suggestedNextStep = getOnePagerSuggestedNextStep(persistedAccountName);
       }
     }
+    const sourceBackedFromPayload = asRecord(asRecord(content)?.sourceBacked);
+    const sourceBackedAngles = Array.isArray(sourceBackedFromPayload?.angles)
+      ? (sourceBackedFromPayload?.angles as Array<Record<string, unknown>>)
+      : [];
+    const syntheticAttributionText = sourceBackedAngles
+      .map((angle) => {
+        const rationale = typeof angle.rationale === 'string' ? angle.rationale : '';
+        const ids = asStringArray(angle.evidenceRefIds).map((id) => `[[SRC:${id}]]`).join(' ');
+        return `${rationale} ${ids}`.trim();
+      })
+      .filter(Boolean)
+      .join('\n\n');
+    const sourceAttribution = buildSourceBackedContractFromGeneratedText({
+      content: syntheticAttributionText || raw,
+      accountName: persistedAccountName,
+      generationInput,
+      citationThreshold: 1,
+    });
+    const citationGate = assertMinimumCitationThreshold({
+      attribution: sourceAttribution,
+      requireAttribution: useLiveIntel && Boolean((generationInput?.signals.length ?? 0) + (generationInput?.proof_context.length ?? 0) > 0),
+      citationThreshold: 1,
+    });
+    if (!citationGate.ok) {
+      await recordSourceBackedMetric({
+        metric: 'citation_rejections',
+        endpoint: '/api/ai/one-pager',
+        accountName: persistedAccountName,
+        details: citationGate.details,
+      });
+      return NextResponse.json({
+        error: citationGate.reason,
+        details: citationGate.details,
+      }, { status: 422 });
+    }
+    if (content && typeof content === 'object' && !Array.isArray(content)) {
+      delete (content as Record<string, unknown>).sourceBacked;
+    }
 
     // Best-effort save to DB
     try {
@@ -207,7 +270,7 @@ export async function POST(req: NextRequest) {
         select: { version: true },
       });
       const templateQuality = evaluateInfographicTemplateQuality(selectedType, JSON.stringify(content));
-      await prisma.generatedContent.create({
+      const created = await prisma.generatedContent.create({
         data: {
           account_name: persistedAccountName,
           content_type: 'one_pager',
@@ -221,6 +284,7 @@ export async function POST(req: NextRequest) {
             agent_context_summary: generationInput?.account_brief ?? agentContext?.summary ?? null,
             agent_context_freshness: generationInput?.freshness ?? null,
             generation_input_contract: generationInput,
+            source_backed_contract_v1: sourceAttribution,
             model_provider: result.provider,
             agentContext: toAgentMetadata(agentContext, ctaPolicy.ctaMode),
             provenance: {
@@ -255,6 +319,13 @@ export async function POST(req: NextRequest) {
           },
           content: JSON.stringify(content),
         },
+        select: { id: true, campaign_id: true },
+      });
+      await persistSourceAttributionLinks(prisma, {
+        accountName: persistedAccountName,
+        campaignId: created.campaign_id ?? null,
+        generatedContentId: created.id,
+        attribution: sourceAttribution,
       });
       await prisma.activity.create({
         data: {
@@ -350,6 +421,7 @@ export async function POST(req: NextRequest) {
       provider: result.provider,
       agentContext: toAgentMetadata(agentContext, ctaPolicy.ctaMode),
       generationInput,
+      sourceAttribution,
       infographic: {
         type: infographicMetadata.infographicType,
         stage: infographicMetadata.stageIntent,

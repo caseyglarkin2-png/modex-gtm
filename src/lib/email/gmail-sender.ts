@@ -18,7 +18,7 @@ const FROM_NAME = process.env.FROM_NAME ?? 'Casey Larkin - YardFlow';
 
 interface GmailSendPayload {
   to: string;
-  cc?: string;
+  cc?: string[];
   bcc?: string;
   subject: string;
   html: string;
@@ -59,10 +59,11 @@ function buildMimeMessage(payload: GmailSendPayload): string {
     return `${safeKey}: ${safeValue}`;
   });
 
+  const ccHeader = payload.cc?.length ? payload.cc.join(', ') : null;
   const headers = [
     `From: ${FROM_NAME} <${FROM_EMAIL}>`,
     `To: ${payload.to}`,
-    payload.cc ? `Cc: ${payload.cc}` : null,
+    ccHeader ? `Cc: ${ccHeader}` : null,
     payload.bcc ? `Bcc: ${payload.bcc}` : null,
     payload.replyTo ? `Reply-To: ${payload.replyTo}` : null,
     `Subject: ${payload.subject}`,

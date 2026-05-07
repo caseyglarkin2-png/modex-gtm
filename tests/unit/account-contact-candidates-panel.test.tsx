@@ -2,16 +2,9 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { AccountContactCandidatesPanel } from '@/components/accounts/account-contact-candidates-panel';
 
-const { mockedRefresh, toastSuccess, toastError } = vi.hoisted(() => ({
-  mockedRefresh: vi.fn(),
+const { toastSuccess, toastError } = vi.hoisted(() => ({
   toastSuccess: vi.fn(),
   toastError: vi.fn(),
-}));
-
-vi.mock('next/navigation', () => ({
-  useRouter: () => ({
-    refresh: mockedRefresh,
-  }),
 }));
 
 vi.mock('sonner', () => ({
@@ -127,6 +120,6 @@ describe('AccountContactCandidatesPanel', () => {
     await waitFor(() => {
       expect(toastSuccess).toHaveBeenCalledWith('Pat Brewer promoted into contacts');
     });
-    expect(mockedRefresh).toHaveBeenCalled();
+    expect(screen.getByText(/Account-wide cards update the next time intel is refreshed/)).toBeInTheDocument();
   });
 });

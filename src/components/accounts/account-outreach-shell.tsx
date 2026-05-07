@@ -24,6 +24,7 @@ import { buildAccountComposePayload } from '@/lib/email/compose-contract';
 import { readApiResponse } from '@/lib/api-response';
 import { recordWorkflowMetric } from '@/lib/agent-actions/telemetry';
 import { SendJobTracker } from '@/components/generated-content/send-job-tracker';
+import { SourceAttributionPanel } from '@/components/source-backed/source-attribution-panel';
 
 type AccountOutreachShellAsset = {
   id: number;
@@ -73,6 +74,23 @@ function buildDefaultDraft(accountName: string, recommendedAngle?: string, whyNo
 function arraysEqual(left: number[], right: number[]) {
   if (left.length !== right.length) return false;
   return left.every((value, index) => value === right[index]);
+}
+
+function parseCcInput(value: string) {
+  return Array.from(new Set(
+    value
+      .split(/[\n,;]+/)
+      .map((entry) => entry.trim().toLowerCase())
+      .filter(Boolean),
+  ));
+}
+
+function serializeCc(values: string[]) {
+  return values.join(', ');
+}
+
+function isValidEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
 export function AccountOutreachShell({
@@ -129,6 +147,7 @@ export function AccountOutreachShell({
   const [ctaLine, setCtaLine] = useState('');
   const [isSending, setIsSending] = useState(false);
   const [isDrafting, setIsDrafting] = useState(false);
+  const [ccInput, setCcInput] = useState('');
   const [activeSendJobId, setActiveSendJobId] = useState<number | null>(null);
   const [lastSendResult, setLastSendResult] = useState<{
     sent: number;
@@ -162,6 +181,7 @@ export function AccountOutreachShell({
     );
     setDraftBody(defaultDraft.body);
     setCtaLine(defaultVariant === 'one_pager_asset' ? defaultDraft.ctaLine : defaultDraft.ctaLine);
+    setCcInput('');
     setLastSendResult(null);
     setActiveSendJobId(null);
   };
@@ -228,6 +248,27 @@ export function AccountOutreachShell({
   }, [accountName, ctaLine, draftBody, openingLine, recipients, selectedAsset, selectedRecipientIds, selectedRecipientSetKey, subject, variant]);
 
   const selectedRecipients = recipients.filter((recipient) => selectedRecipientIds.includes(recipient.id));
+  const ccList = useMemo(() => parseCcInput(ccInput), [ccInput]);
+  const selectedRecipientEmails = useMemo(
+    () => new Set(selectedRecipients.map((recipient) => recipient.email.toLowerCase())),
+    [selectedRecipients],
+  );
+  const qualifiedCcCandidates = useMemo(
+    () => recipients
+      .filter((recipient) => !selectedRecipientIds.includes(recipient.id))
+      .filter((recipient) => Boolean(recipient.email))
+      .filter((recipient) => {
+        if (!recipient.readiness) return false;
+        if (recipient.readiness.stale) return false;
+        return recipient.readiness.tier !== 'low';
+      })
+      .map((recipient) => ({
+        email: recipient.email,
+        name: recipient.name,
+      }))
+      .filter((candidate) => !ccList.includes(candidate.email.toLowerCase())),
+    [ccList, recipients, selectedRecipientIds],
+  );
 
   function applyRecipientSet(recipientSet: AccountOutreachRecipientSet | null) {
     if (!recipientSet) {
@@ -243,6 +284,16 @@ export function AccountOutreachShell({
     setSelectedRecipientIds(nextIds);
     const matchingSet = recipientSets.find((set) => arraysEqual(set.recipientIds, nextIds));
     setSelectedRecipientSetKey(matchingSet?.key ?? 'manual');
+  }
+
+  function addCcEmail(email: string) {
+    const next = Array.from(new Set([...ccList, email.toLowerCase()]));
+    setCcInput(serializeCc(next));
+  }
+
+  function removeCcEmail(email: string) {
+    const normalized = email.toLowerCase();
+    setCcInput(serializeCc(ccList.filter((entry) => entry !== normalized)));
   }
 
   async function handleDraftFromIntel() {
@@ -297,6 +348,11 @@ export function AccountOutreachShell({
       toast.error('Select at least one recipient');
       return;
     }
+    const invalidCc = ccList.find((email) => !isValidEmail(email));
+    if (invalidCc) {
+      toast.error(`Invalid CC email: ${invalidCc}`);
+      return;
+    }
 
     setIsSending(true);
     try {
@@ -312,6 +368,7 @@ export function AccountOutreachShell({
             items: [{
               generatedContentId: payload.generatedContentId,
               accountName: payload.accountName,
+              cc: ccList,
               subject: payload.subject,
               bodyHtml: payload.bodyHtml,
               recipients: payload.recipients,
@@ -343,6 +400,7 @@ export function AccountOutreachShell({
           body: JSON.stringify({
             accountName: payload.accountName,
             recipients: payload.recipients,
+            cc: ccList,
             subject: payload.subject,
             bodyHtml: payload.bodyHtml,
             generatedContentId: payload.generatedContentId,
@@ -458,6 +516,11 @@ export function AccountOutreachShell({
                         Signals used: {selectedAssetProvenance.signalCount} · Contacts used: {selectedAssetProvenance.recommendedContactCount} · Scope: {selectedAssetProvenance.scopedAccountNames.join(', ') || accountName}
                       </p>
                     ) : null}
+                    <SourceAttributionPanel
+                      title="Asset source attribution"
+                      versionMetadata={selectedAsset?.version_metadata}
+                      className="mt-2"
+                    />
                   </div>
                 ) : (
                   <div className="rounded-lg border border-[var(--border)] p-4">
@@ -541,6 +604,52 @@ export function AccountOutreachShell({
                       </label>
                     ))}
                   </div>
+                  <div className="mt-4 rounded-md border border-[var(--border)] bg-[var(--accent)]/20 p-3">
+                    <p className="text-xs font-medium uppercase tracking-[0.12em] text-[var(--muted-foreground)]">Qualified CC</p>
+                    <p className="mt-1 text-xs text-[var(--muted-foreground)]">
+                      Optional recipients from the same account with usable readiness. You can also type custom CC addresses.
+                    </p>
+                    {qualifiedCcCandidates.length > 0 ? (
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {qualifiedCcCandidates.slice(0, 6).map((candidate) => (
+                          <Button
+                            key={`cc-${candidate.email}`}
+                            type="button"
+                            size="sm"
+                            variant="outline"
+                            onClick={() => addCcEmail(candidate.email)}
+                          >
+                            Add {candidate.name}
+                          </Button>
+                        ))}
+                      </div>
+                    ) : null}
+                    <div className="mt-3 space-y-2">
+                      <Label htmlFor="compose-cc" className="text-xs">CC emails (optional)</Label>
+                      <Input
+                        id="compose-cc"
+                        value={ccInput}
+                        onChange={(event) => setCcInput(event.target.value)}
+                        placeholder="ops@account.com, leader@account.com"
+                      />
+                    </div>
+                    {ccList.length > 0 ? (
+                      <div className="mt-2 flex flex-wrap gap-1.5">
+                        {ccList.map((email) => (
+                          <Badge key={`cc-pill-${email}`} variant={selectedRecipientEmails.has(email) ? 'secondary' : 'outline'}>
+                            {email}
+                            <button
+                              type="button"
+                              className="ml-1 text-[10px] font-semibold"
+                              onClick={() => removeCcEmail(email)}
+                            >
+                              x
+                            </button>
+                          </Badge>
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
                 </div>
 
                 <div className="rounded-lg border border-[var(--border)] p-4">
@@ -562,7 +671,7 @@ export function AccountOutreachShell({
             <div className="rounded-lg border border-[var(--border)] bg-[var(--accent)]/20 p-4 text-sm">
               <p className="font-medium">Pre-send summary</p>
               <p className="mt-1 text-[var(--muted-foreground)]">
-                Variant: {variant === 'one_pager_asset' ? 'One-pager asset' : 'Email draft'} · Recipients: {selectedRecipients.length} · Recipient set: {selectedRecipientSetKey ?? 'manual'}
+                Variant: {variant === 'one_pager_asset' ? 'One-pager asset' : 'Email draft'} · Recipients: {selectedRecipients.length} · CC: {ccList.length} · Recipient set: {selectedRecipientSetKey ?? 'manual'}
               </p>
               {payload?.generatedContentId ? (
                 <p className="mt-1 text-[var(--muted-foreground)]">

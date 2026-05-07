@@ -21,6 +21,8 @@ import {
 import { EmailPreviewModal } from '@/components/email/email-preview-modal';
 import { getMicrositeUrl } from '@/lib/site-url';
 import type { AgentActionResult } from '@/lib/agent-actions/types';
+import type { SourceBackedContractV1 } from '@/lib/source-backed/attribution';
+import { SourceAttributionPanel } from '@/components/source-backed/source-attribution-panel';
 
 interface SequenceStep {
   step: string;
@@ -104,6 +106,7 @@ export function OutreachSequenceDialog({
   const [rateLimitRemaining, setRateLimitRemaining] = useState<number | undefined>(undefined);
   const [useLiveIntel, setUseLiveIntel] = useState(true);
   const [agentContext, setAgentContext] = useState<Pick<AgentActionResult, 'provider' | 'summary' | 'nextActions' | 'freshness'> | null>(null);
+  const [sourceAttribution, setSourceAttribution] = useState<SourceBackedContractV1 | null>(null);
 
   async function generateSequence() {
     setLoading(true);
@@ -114,12 +117,18 @@ export function OutreachSequenceDialog({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ accountName, personaName: selectedPersona, campaignSlug, tone, useLiveIntel }),
       });
-      const json = await readApiResponse<{ sequence?: SequenceStep[]; error?: string; agentContext?: Pick<AgentActionResult, 'provider' | 'summary' | 'nextActions' | 'freshness'> }>(res);
+      const json = await readApiResponse<{
+        sequence?: SequenceStep[];
+        error?: string;
+        agentContext?: Pick<AgentActionResult, 'provider' | 'summary' | 'nextActions' | 'freshness'>;
+        sourceAttribution?: SourceBackedContractV1 | null;
+      }>(res);
       if (!res.ok) throw new Error(json.error ?? 'Generation failed');
       if (!json.sequence) throw new Error('No sequence returned');
       setSequence(json.sequence.map((s) => ({ ...s, status: 'draft' as const })));
       setExpandedStep(json.sequence[0]?.step ?? null);
       setAgentContext(json.agentContext ?? null);
+      setSourceAttribution(json.sourceAttribution ?? null);
       toast.success(`${json.sequence.length}-step sequence generated`);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Sequence generation failed');
@@ -304,6 +313,7 @@ export function OutreachSequenceDialog({
             <p className="mt-2">{agentContext.summary}</p>
           </div>
         ) : null}
+        <SourceAttributionPanel attribution={sourceAttribution} />
       </div>
 
       {/* Sequence Timeline */}

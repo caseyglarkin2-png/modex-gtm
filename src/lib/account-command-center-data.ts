@@ -14,10 +14,11 @@ import { getAgentContentContext } from '@/lib/agent-actions/content-context';
 import { listAccountContactCandidates } from '@/lib/account-contact-candidates';
 import { ensureCanonicalRecords } from '@/lib/revops/canonical-sync';
 import { resolveCanonicalAccountScope, type CanonicalAccountScope } from '@/lib/revops/account-identity';
+import { loadEvidenceSummaryByAccountScope } from '@/lib/source-backed/evidence';
 
 export async function loadAccountCommandCenterData(accountName: string) {
   const accountScope = await resolveCanonicalAccountScope(accountName);
-  const [personas, microsite, rawActivities, generatedAssetRows, emailLogs, meetings, captures, canonicalWorkspace, agentContentContext, contactCandidates, sendJobs, sendJobRecipientEvents, operatorOutcomes] = await Promise.all([
+  const [personas, microsite, rawActivities, generatedAssetRows, emailLogs, meetings, captures, canonicalWorkspace, agentContentContext, contactCandidates, sendJobs, sendJobRecipientEvents, operatorOutcomes, evidenceSummary] = await Promise.all([
     dbGetPersonasByAccounts(accountScope.accountNames),
     dbGetMicrositeAccountAnalyticsByAccounts(accountScope.accountNames),
     dbGetActivitiesByAccounts(accountScope.accountNames),
@@ -31,6 +32,7 @@ export async function loadAccountCommandCenterData(accountName: string) {
     dbGetSendJobsByAccounts(accountScope.accountNames),
     dbGetSendJobRecipientEventsByAccounts(accountScope.accountNames),
     dbGetOperatorOutcomesByAccounts(accountScope.accountNames),
+    loadEvidenceSummaryByAccountScope(accountScope.accountNames),
   ]);
 
   return {
@@ -48,6 +50,7 @@ export async function loadAccountCommandCenterData(accountName: string) {
     sendJobs,
     sendJobRecipientEvents,
     operatorOutcomes,
+    evidenceSummary,
   };
 }
 

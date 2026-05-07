@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { OPERATOR_OUTCOME_TAXONOMY, type OutcomeFollowUpRecommendation } from '@/lib/revops/operator-outcomes';
+import { beginRefreshDiagnostic, endRefreshDiagnostic } from '@/lib/refresh-diagnostics';
 
 export type AccountOutcomeSourceOption = {
   key: string;
@@ -17,6 +18,7 @@ export type AccountOutcomeSourceOption = {
   sourceId: string;
   campaignId?: number | null;
   generatedContentId?: number | null;
+  sourceMetadata?: Record<string, unknown> | null;
 };
 
 type AccountOutcomeLoggerProps = {
@@ -43,6 +45,7 @@ export function AccountOutcomeLogger({
   trigger,
 }: AccountOutcomeLoggerProps) {
   const router = useRouter();
+  const refreshTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [selectedSourceKey, setSelectedSourceKey] = useState<string>(sources[0]?.key ?? '');
@@ -59,6 +62,25 @@ export function AccountOutcomeLogger({
     () => sources.find((source) => source.key === selectedSourceKey) ?? sources[0] ?? null,
     [selectedSourceKey, sources],
   );
+
+  function scheduleRefresh(trigger: string) {
+    if (refreshTimerRef.current) {
+      clearTimeout(refreshTimerRef.current);
+    }
+    refreshTimerRef.current = setTimeout(() => {
+      const session = beginRefreshDiagnostic({
+        surface: 'account-outcome-logger',
+        trigger,
+        metadata: { accountName },
+      });
+      router.refresh();
+      endRefreshDiagnostic(session, {
+        status: 'success',
+        metadata: { accountName },
+      });
+      refreshTimerRef.current = null;
+    }, 350);
+  }
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -79,6 +101,7 @@ export function AccountOutcomeLogger({
           sourceId: selectedSource.sourceId,
           campaignId: selectedSource.campaignId ?? null,
           generatedContentId: selectedSource.generatedContentId ?? null,
+          sourceMetadata: selectedSource.sourceMetadata ?? null,
           notes: notes.trim() || null,
           createdBy,
         }),
@@ -95,13 +118,20 @@ export function AccountOutcomeLogger({
       setOpen(false);
       setNotes('');
       setOutcomeLabel('positive');
-      router.refresh();
+      scheduleRefresh('outcome-logged');
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Outcome logging failed');
     } finally {
       setLoading(false);
     }
   }
+
+  useEffect(() => () => {
+    if (refreshTimerRef.current) {
+      clearTimeout(refreshTimerRef.current);
+      refreshTimerRef.current = null;
+    }
+  }, []);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

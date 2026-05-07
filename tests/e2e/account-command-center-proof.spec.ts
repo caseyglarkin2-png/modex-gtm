@@ -1,37 +1,12 @@
 import { expect, test, type Page, type Route } from '@playwright/test';
 import { bootstrapAccountCommandCenterProof } from './helpers/onepager-proof';
+import { loginAsCasey } from './helpers/session';
 import { buildSeededAccountContentContext } from '@/lib/proof/account-command-center-fixture';
 
 test.describe.configure({ timeout: 180_000 });
 
 async function login(page: Page) {
-  let authenticated = false;
-  for (let attempt = 0; attempt < 90; attempt += 1) {
-    const csrfRes = await page.request.get('/api/auth/csrf').catch(() => null);
-    const contentType = csrfRes?.headers()['content-type'] ?? '';
-    if (!csrfRes?.ok() || !contentType.includes('application/json')) {
-      await page.waitForTimeout(1000);
-      continue;
-    }
-
-    const { csrfToken } = (await csrfRes.json()) as { csrfToken?: string };
-    if (!csrfToken) {
-      await page.waitForTimeout(1000);
-      continue;
-    }
-
-    await page.request.post('/api/auth/callback/credentials', {
-      form: {
-        email: 'casey@freightroll.com',
-        csrfToken,
-        json: 'true',
-      },
-      maxRedirects: 0,
-    }).catch(() => null);
-    authenticated = true;
-    break;
-  }
-
+  const authenticated = await loginAsCasey(page);
   expect(authenticated).toBe(true);
 }
 
@@ -110,10 +85,13 @@ test('seeded account page runs the refresh -> promote -> draft -> send -> learn 
   await bootstrapAccountCommandCenterProof(page);
 
   await page.route('**/api/agent-actions', fulfillAgentActions);
+  let sendBulkAttempts = 0;
   await page.route('**/api/email/send-bulk', async (route) => {
+    sendBulkAttempts += 1;
     const payload = route.request().postDataJSON() as {
       accountName: string;
       recipients: Array<{ to: string }>;
+      cc?: string[];
       subject: string;
       generatedContentId?: number | null;
       workflowMetadata?: Record<string, unknown>;
@@ -126,11 +104,24 @@ test('seeded account page runs the refresh -> promote -> draft -> send -> learn 
         to: 'pat.brewer@e2ebostonbeer.com',
       }),
     ]);
+    expect(payload.cc).toEqual(['jamie.yardley@e2ebostonbeer.com']);
     expect(payload.workflowMetadata).toMatchObject({
       surface: 'account_page',
       shell: 'account_outreach',
       variant: 'email_draft',
     });
+
+    if (sendBulkAttempts === 1) {
+      await route.fulfill({
+        status: 409,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          error: 'Generated content approval required before send.',
+          code: 'APPROVAL_REQUIRED',
+        }),
+      });
+      return;
+    }
 
     await route.fulfill({
       status: 200,
@@ -148,6 +139,8 @@ test('seeded account page runs the refresh -> promote -> draft -> send -> learn 
   await expect(page.getByRole('heading', { level: 1, name: 'E2E Boston Beer Company' })).toBeVisible();
   await expect(page.getByText('Promote the staged logistics contact, send the proof asset, and turn the warm reply into a meeting.').first()).toBeVisible();
   await expect(page.getByText('Engagement Summary')).toBeVisible();
+  await expect(page.getByText('Source Evidence')).toBeVisible();
+  await expect(page.getByText(/fresh · .*aging · .*stale/i)).toBeVisible();
 
   const refreshResponse = page.waitForResponse((response) => (
     response.url().includes('/api/agent-actions') && response.request().method() === 'POST'
@@ -172,7 +165,10 @@ test('seeded account page runs the refresh -> promote -> draft -> send -> learn 
   const recipientToggles = page.locator('input[type="checkbox"]');
   await recipientToggles.nth(0).check();
   await expect(page.getByText('1 selected').first()).toBeVisible();
+  await page.getByLabel('CC emails (optional)').fill('jamie.yardley@e2ebostonbeer.com');
 
+  await page.getByRole('button', { name: /Send to 1 Recipient/i }).click();
+  await expect(page.locator('[data-sonner-toast]').first()).toContainText(/approval required/i);
   await page.getByRole('button', { name: /Send to 1 Recipient/i }).click();
   await expect(page.locator('[data-sonner-toast]').first()).toContainText('Sent to 1 recipient');
   await expect(page.getByText('Send result: 1 sent, 0 failed, 1 total.')).toBeVisible();

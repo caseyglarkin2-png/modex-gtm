@@ -1,8 +1,7 @@
 'use client';
 
-import { startTransition, useMemo, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Loader2, RefreshCw, UserCheck, UserRoundX, Users } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { Loader2, UserCheck, UserRoundX, Users } from 'lucide-react';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -40,11 +39,11 @@ export function AccountContactCandidatesPanel({
   initialCandidates,
   replaceablePersonas,
 }: AccountContactCandidatesPanelProps) {
-  const router = useRouter();
   const [candidates, setCandidates] = useState(initialCandidates);
   const [discovering, setDiscovering] = useState(false);
   const [pendingId, setPendingId] = useState<number | null>(null);
   const [replaceSelections, setReplaceSelections] = useState<Record<number, string>>({});
+  const [pendingGlobalSync, setPendingGlobalSync] = useState(false);
 
   const replaceOptions = useMemo(
     () => replaceablePersonas.filter((persona) => persona.blockerBadges.length > 0),
@@ -64,8 +63,8 @@ export function AccountContactCandidatesPanel({
         throw new Error((payload as { error?: string }).error || 'Unable to discover candidates.');
       }
       setCandidates(payload.candidates);
+      setPendingGlobalSync(true);
       toast.success(`Found ${payload.candidates.length} staged contacts for ${accountName}`);
-      startTransition(() => router.refresh());
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Unable to discover candidates.');
     } finally {
@@ -86,8 +85,8 @@ export function AccountContactCandidatesPanel({
         throw new Error((payload as { error?: string }).error || 'Unable to update candidate.');
       }
       setCandidates(payload.candidates);
+      setPendingGlobalSync(true);
       toast.success(successMessage);
-      startTransition(() => router.refresh());
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Unable to update candidate.');
     } finally {
@@ -207,6 +206,7 @@ export function AccountContactCandidatesPanel({
 
       <div className="rounded-lg border border-[var(--border)] bg-[var(--accent)]/20 p-3 text-xs text-[var(--muted-foreground)]">
         Promote creates or updates the persona record. Replace also marks the selected weak contact for follow-up review so the send flow can move to the stronger candidate.
+        {pendingGlobalSync ? ' Account-wide cards update the next time intel is refreshed.' : ''}
       </div>
     </div>
   );
