@@ -277,6 +277,25 @@ export async function deferAccountContactCandidate(candidateId: number, reason?:
   return toAccountContactCandidateView(row);
 }
 
+/**
+ * Reverses a prior promote/defer/replace by resetting the candidate row back
+ * to a staged state. Used by the toast-with-undo affordance on the candidates
+ * panel — does NOT delete the imported persona created by `promote`/`replace`,
+ * just unlinks the candidate row so the operator can re-decide.
+ */
+export async function restageAccountContactCandidate(candidateId: number) {
+  const row = await prisma.accountContactCandidate.update({
+    where: { id: candidateId },
+    data: {
+      state: 'staged',
+      promoted_persona_id: null,
+      replaced_persona_id: null,
+      deferred_reason: null,
+    },
+  });
+  return toAccountContactCandidateView(row);
+}
+
 export async function promoteAccountContactCandidate(candidateId: number, replacementPersonaId?: number | null) {
   const candidate = await prisma.accountContactCandidate.findUnique({
     where: { id: candidateId },

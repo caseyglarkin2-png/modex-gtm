@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { deferAccountContactCandidate, listAccountContactCandidates, promoteAccountContactCandidate } from '@/lib/account-contact-candidates';
+import { deferAccountContactCandidate, listAccountContactCandidates, promoteAccountContactCandidate, restageAccountContactCandidate } from '@/lib/account-contact-candidates';
 import { dbGetAccounts } from '@/lib/db';
 import { slugify } from '@/lib/data';
 import { resolveCanonicalAccountScope } from '@/lib/revops/account-identity';
@@ -18,6 +18,9 @@ const MutationSchema = z.discriminatedUnion('action', [
   z.object({
     action: z.literal('replace'),
     replacedPersonaId: z.number().int().positive(),
+  }),
+  z.object({
+    action: z.literal('restage'),
   }),
 ]);
 
@@ -51,6 +54,8 @@ export async function PATCH(
     let mutationResult: unknown;
     if (parsed.data.action === 'defer') {
       mutationResult = await deferAccountContactCandidate(parsedCandidateId, parsed.data.reason);
+    } else if (parsed.data.action === 'restage') {
+      mutationResult = await restageAccountContactCandidate(parsedCandidateId);
     } else {
       mutationResult = await promoteAccountContactCandidate(
         parsedCandidateId,

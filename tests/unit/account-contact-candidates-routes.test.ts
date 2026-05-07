@@ -8,6 +8,7 @@ const mockedListAccountContactCandidates = vi.fn();
 const mockedUpsertAccountContactCandidates = vi.fn();
 const mockedPromoteAccountContactCandidate = vi.fn();
 const mockedDeferAccountContactCandidate = vi.fn();
+const mockedRestageAccountContactCandidate = vi.fn();
 
 vi.mock('@/lib/db', () => ({
   dbGetAccounts: mockedDbGetAccounts,
@@ -23,6 +24,7 @@ vi.mock('@/lib/account-contact-candidates', () => ({
   upsertAccountContactCandidates: mockedUpsertAccountContactCandidates,
   promoteAccountContactCandidate: mockedPromoteAccountContactCandidate,
   deferAccountContactCandidate: mockedDeferAccountContactCandidate,
+  restageAccountContactCandidate: mockedRestageAccountContactCandidate,
 }));
 
 const { GET, POST } = await import('@/app/api/accounts/[slug]/contact-candidates/route');
@@ -103,5 +105,36 @@ describe('account contact candidate routes', () => {
 
     expect(res.status).toBe(200);
     expect(mockedDeferAccountContactCandidate).toHaveBeenCalledWith(3, 'Weak match for this lane');
+  });
+
+  it('passes the lane filter through to the broker prospect-discover payload (S2-T2)', async () => {
+    mockedRunAgentAction.mockResolvedValue({ action: 'company_contacts', provider: 'sales_agent' });
+    mockedUpsertAccountContactCandidates.mockResolvedValue([]);
+
+    const res = await POST(new NextRequest('http://localhost/api/accounts/boston-beer-company/contact-candidates', {
+      method: 'POST',
+      body: JSON.stringify({ refresh: true, lane: 'Financial' }),
+    }), {
+      params: Promise.resolve({ slug: 'boston-beer-company' }),
+    });
+
+    expect(res.status).toBe(200);
+    expect(mockedRunAgentAction).toHaveBeenCalledWith(expect.objectContaining({
+      target: expect.objectContaining({ lane: 'Financial' }),
+    }));
+  });
+
+  it('restages a previously promoted/deferred candidate (S2-T6 undo)', async () => {
+    mockedRestageAccountContactCandidate.mockResolvedValue({ id: 3, fullName: 'Pat Brewer', state: 'staged' });
+
+    const res = await PATCH(new NextRequest('http://localhost/api/accounts/boston-beer-company/contact-candidates/3', {
+      method: 'PATCH',
+      body: JSON.stringify({ action: 'restage' }),
+    }), {
+      params: Promise.resolve({ slug: 'boston-beer-company', candidateId: '3' }),
+    });
+
+    expect(res.status).toBe(200);
+    expect(mockedRestageAccountContactCandidate).toHaveBeenCalledWith(3);
   });
 });

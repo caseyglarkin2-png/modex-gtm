@@ -14,6 +14,7 @@ import { EmptyState } from '@/components/empty-state';
 import { AutoRefresh } from '@/components/auto-refresh';
 import { Building2, Users, Waves as WavesIcon, CalendarCheck, Smartphone, Activity, ArrowRight, TrendingUp, BarChart3, Mail, MessageSquare, AlertTriangle, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { AccountOutcomeLogger } from '@/components/accounts/account-outcome-logger';
 
 export const dynamic = 'force-dynamic';
 
@@ -64,6 +65,16 @@ export default async function DashboardPage() {
       where: { type: 'reply' },
       orderBy: { created_at: 'desc' },
       take: 5,
+      select: {
+        id: true,
+        type: true,
+        account_name: true,
+        persona_email: true,
+        subject: true,
+        preview: true,
+        source_id: true,
+        created_at: true,
+      },
     }),
     prisma.emailLog.aggregate({
       _count: { id: true },
@@ -457,10 +468,41 @@ export default async function DashboardPage() {
                       <p className="truncate font-medium">{r.persona_email || 'Unknown'}</p>
                       {r.subject && <p className="truncate text-xs text-[var(--muted-foreground)]">{r.subject}</p>}
                       {r.preview && <p className="mt-0.5 line-clamp-1 text-xs text-[var(--muted-foreground)]">{r.preview}</p>}
+                      {r.account_name ? (
+                        <Link
+                          href={`/accounts/${slugify(r.account_name)}`}
+                          className="mt-0.5 inline-block text-[10px] text-[var(--primary)] hover:underline"
+                        >
+                          {r.account_name} ↗
+                        </Link>
+                      ) : null}
                     </div>
-                    <span className="flex-shrink-0 text-[10px] text-[var(--muted-foreground)]">
-                      {new Date(r.created_at).toLocaleDateString()}
-                    </span>
+                    <div className="flex flex-shrink-0 items-center gap-2">
+                      {r.account_name ? (
+                        <AccountOutcomeLogger
+                          accountName={r.account_name}
+                          sources={[{
+                            key: `reply-${r.id}`,
+                            label: 'Reply received',
+                            detail: r.subject ?? r.persona_email ?? 'Reply triage from home',
+                            sourceKind: 'reply',
+                            sourceId: r.source_id ?? `notification-${r.id}`,
+                          }]}
+                          trigger={
+                            <button
+                              type="button"
+                              className="text-[10px] font-medium text-[var(--primary)] hover:underline"
+                              data-testid={`reply-outcome-${r.id}`}
+                            >
+                              Log outcome
+                            </button>
+                          }
+                        />
+                      ) : null}
+                      <span className="text-[10px] text-[var(--muted-foreground)]">
+                        {new Date(r.created_at).toLocaleDateString()}
+                      </span>
+                    </div>
                   </li>
                 ))}
               </ul>

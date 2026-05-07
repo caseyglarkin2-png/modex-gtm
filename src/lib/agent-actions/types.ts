@@ -22,6 +22,8 @@ export const AgentActionTargetSchema = z.object({
   personaId: z.number().int().positive().optional(),
   email: z.string().email().optional(),
   company: z.string().min(1).optional(),
+  /** Buyer-committee lane scoping for discovery actions (e.g. "Financial", "operator"). */
+  lane: z.string().min(1).max(64).optional(),
 });
 
 export type AgentActionTarget = z.infer<typeof AgentActionTargetSchema>;

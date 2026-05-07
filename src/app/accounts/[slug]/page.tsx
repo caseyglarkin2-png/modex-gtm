@@ -56,6 +56,7 @@ import { AccountAssetVersionPanel } from '@/components/accounts/account-asset-ve
 import { AccountEngagementSummaryCard } from '@/components/accounts/account-engagement-summary-card';
 import { AccountOutcomeLogger } from '@/components/accounts/account-outcome-logger';
 import { AccountOutreachShell } from '@/components/accounts/account-outreach-shell';
+import { OutboundCardRefreshButton } from '@/components/accounts/outbound-card-refresh-button';
 import { SOURCE_APPROVAL_GATE_ENABLED } from '@/lib/feature-flags';
 import { AgentActionDialog } from '@/components/agent-actions/agent-action-dialog';
 import { AgentIntelStrip } from '@/components/agent-actions/agent-intel-strip';
@@ -98,10 +99,15 @@ export default async function AccountDetailPage({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ recipientSet?: string }>;
+  searchParams: Promise<{ recipientSet?: string; tab?: string; replace_persona?: string; find_lane?: string }>;
 }) {
   const { slug } = await params;
   const resolvedSearchParams = await searchParams;
+  const initialTab = resolvedSearchParams.tab ?? 'overview';
+  const replacePersonaId = resolvedSearchParams.replace_persona
+    ? Number.parseInt(resolvedSearchParams.replace_persona, 10) || null
+    : null;
+  const findLane = resolvedSearchParams.find_lane?.trim() || null;
   const accounts = await dbGetAccounts();
   const matchedAccount = accounts.find((candidate) => slugify(candidate.name) === slug);
   const account = matchedAccount ? await dbGetAccountByName(matchedAccount.name) : null;
@@ -556,7 +562,10 @@ export default async function AccountDetailPage({
                 </div>
                 <div className="grid gap-3 md:grid-cols-3">
                   <div className="rounded-lg border border-[var(--border)] p-3">
-                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Recommended Asset</p>
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Recommended Asset</p>
+                      <OutboundCardRefreshButton accountName={account.name} accountNames={accountScope.accountNames} surfaceLabel="Recommended asset" />
+                    </div>
                     <p className="mt-1 text-sm font-medium">
                       {recommendedAsset
                         ? `${recommendedAsset.content_type.replaceAll('_', ' ')} · v${recommendedAsset.version}`
@@ -569,7 +578,10 @@ export default async function AccountDetailPage({
                     </p>
                   </div>
                   <div className="rounded-lg border border-[var(--border)] p-3">
-                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Intel Freshness</p>
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Intel Freshness</p>
+                      <OutboundCardRefreshButton accountName={account.name} accountNames={accountScope.accountNames} surfaceLabel="Intel freshness" />
+                    </div>
                     <p className="mt-1 text-sm font-medium">
                       {agentContentContext
                         ? `${freshnessSummary.label} · ${agentContentContext.freshness.source}`
@@ -589,7 +601,10 @@ export default async function AccountDetailPage({
                     ) : null}
                   </div>
                   <div className="rounded-lg border border-[var(--border)] p-3">
-                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Active Recipient Set</p>
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Active Recipient Set</p>
+                      <OutboundCardRefreshButton accountName={account.name} accountNames={accountScope.accountNames} surfaceLabel="Recipient set" />
+                    </div>
                     <p className="mt-1 text-sm font-medium">
                       {activeRecipientSet ? `${activeRecipientSet.label} · ${activeRecipientSet.count} contacts` : 'Manual selection'}
                     </p>
@@ -600,7 +615,10 @@ export default async function AccountDetailPage({
                     </p>
                   </div>
                   <div className="rounded-lg border border-[var(--border)] p-3">
-                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Source Evidence</p>
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Source Evidence</p>
+                      <OutboundCardRefreshButton accountName={account.name} accountNames={accountScope.accountNames} surfaceLabel="Source evidence" />
+                    </div>
                     <p className="mt-1 text-sm font-medium">
                       {evidenceSummary
                         ? `${evidenceSummary.freshness.fresh} fresh · ${evidenceSummary.freshness.aging} aging · ${evidenceSummary.freshness.stale} stale`
@@ -671,7 +689,16 @@ export default async function AccountDetailPage({
                       <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Missing lanes</p>
                       <ul className="mt-2 space-y-1 text-sm">
                         {committeeCoverageBrief.missingLanes.length > 0 ? committeeCoverageBrief.missingLanes.map((lane) => (
-                          <li key={`missing-${lane}`}>{lane}</li>
+                          <li key={`missing-${lane}`} className="flex items-center gap-2">
+                            <span>{lane}</span>
+                            <Link
+                              href={`/accounts/${slug}?tab=contacts&find_lane=${encodeURIComponent(lane)}#contact-discovery`}
+                              className="text-xs font-medium text-[var(--primary)] hover:underline"
+                              data-testid={`find-lane-cta-${lane}`}
+                            >
+                              Find {lane} contacts
+                            </Link>
+                          </li>
                         )) : <li>Committee coverage is usable across core lanes.</li>}
                       </ul>
                     </div>
@@ -762,7 +789,7 @@ export default async function AccountDetailPage({
       </Card>
 
       {/* Tabs */}
-      <Tabs defaultValue="overview" className="space-y-4">
+      <Tabs defaultValue={initialTab} className="space-y-4">
         <TabsList className="w-full justify-start overflow-x-auto">
           {accountCommandTabs.map((tab) => {
             const Icon = accountTabIcon(tab.id);
@@ -809,6 +836,39 @@ export default async function AccountDetailPage({
                 <Link href={nextBestAction.route}>
                   <Button size="sm" variant="outline">Open work</Button>
                 </Link>
+              </div>
+              <div className="mt-3 flex flex-wrap gap-1.5" data-testid="nba-quick-actions">
+                {/* Quick-action chips derived from the NBA route. Mirrors the
+                    affordances on the account hero so the operator can act
+                    without scrolling back up. */}
+                {(nextBestAction.route === '#contacts' || /contact|committee|coverage/i.test(nextBestAction.label)) ? (
+                  <Link
+                    href={`/accounts/${slug}?tab=contacts#contact-discovery`}
+                    className="inline-flex items-center rounded-md border border-[var(--border)] bg-[var(--background)] px-2 py-1 text-xs hover:bg-[var(--accent)]"
+                    data-testid="nba-chip-find-contacts"
+                  >
+                    Find contacts
+                  </Link>
+                ) : null}
+                {(nextBestAction.route === '#engagement' || /outreach|reply|outbound/i.test(nextBestAction.label)) ? (
+                  <Link
+                    href={`/accounts/${slug}?tab=engagement`}
+                    className="inline-flex items-center rounded-md border border-[var(--border)] bg-[var(--background)] px-2 py-1 text-xs hover:bg-[var(--accent)]"
+                    data-testid="nba-chip-engagement"
+                  >
+                    Open engagement
+                  </Link>
+                ) : null}
+                {(nextBestAction.route === '#assets' || /asset|generate/i.test(nextBestAction.label)) ? (
+                  <Link
+                    href={`/generated-content?account=${encodeURIComponent(account.name)}`}
+                    className="inline-flex items-center rounded-md border border-[var(--border)] bg-[var(--background)] px-2 py-1 text-xs hover:bg-[var(--accent)]"
+                    data-testid="nba-chip-generate"
+                  >
+                    Generate asset
+                  </Link>
+                ) : null}
+                <OutboundCardRefreshButton accountName={account.name} accountNames={accountScope.accountNames} surfaceLabel="Intel" />
               </div>
             </CardContent>
           </Card>
@@ -1042,6 +1102,8 @@ export default async function AccountDetailPage({
                 accountName={account.name}
                 initialCandidates={contactCandidates}
                 replaceablePersonas={replaceablePersonas}
+                replacePersonaId={replacePersonaId}
+                findLane={findLane}
               />
             </CardContent>
           </Card>
@@ -1082,6 +1144,15 @@ export default async function AccountDetailPage({
                         {blockerBadges.map((badge) => (
                           <Badge key={`${p.persona_id}-${badge}`} variant="outline" className="text-xs">{badge}</Badge>
                         ))}
+                        {blockerBadges.length > 0 ? (
+                          <Link
+                            href={`/accounts/${slug}?tab=contacts&replace_persona=${p.persona_id}#contact-discovery`}
+                            className="inline-flex items-center text-xs font-medium text-[var(--primary)] hover:underline"
+                            data-testid={`replace-cta-${p.persona_id}`}
+                          >
+                            Replace
+                          </Link>
+                        ) : null}
                       </div>
                       <p className="mt-0.5 text-xs text-[var(--muted-foreground)]">{p.title}</p>
                       {p.email && (
