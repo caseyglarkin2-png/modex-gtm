@@ -64,6 +64,7 @@ import {
   buildCommitteeCoverageBrief,
   buildCoverageGaps,
   buildRecommendedAngle,
+  buildRecommendedAngleCitations,
   buildSignalRegistry,
   buildSuggestedRecipients,
   buildSuggestedRecipientSets,
@@ -194,6 +195,7 @@ export default async function AccountDetailPage({
   const signalRegistry = buildSignalRegistry(agentContentContext);
   const coverageGaps = buildCoverageGaps(agentContentContext);
   const recommendedAngle = buildRecommendedAngle(agentContentContext, account.primo_angle ?? account.why_now ?? '');
+  const recommendedAngleCitations = buildRecommendedAngleCitations(evidenceSummary);
   const committeeCoverageBrief = buildCommitteeCoverageBrief(agentContentContext, suggestedRecipients);
   const freshnessSummary = summarizeFreshness(agentContentContext?.freshness ?? null);
   const assetSelection = resolveAccountAssetSelection(generatedAssets);
@@ -493,7 +495,13 @@ export default async function AccountDetailPage({
           {/* Research-backed tags (facility fact, vertical, signal, etc.) */}
           <div className="mt-4 flex flex-wrap gap-2">
             {accountTags.map((tag) => (
-              <Badge key={`${tag.label}-${tag.value}`} variant="outline" className="flex items-center gap-1">
+              <Badge
+                key={`${tag.label}-${tag.value}`}
+                variant="outline"
+                className="flex items-center gap-1"
+                title={`Source: ${tag.source}`}
+                aria-label={`${tag.label} ${tag.value} — Source: ${tag.source}`}
+              >
                 <span className="text-[10px] uppercase tracking-wide text-[var(--muted-foreground)]">{tag.label}</span>
                 <span className="font-medium">{tag.value}</span>
                 {tag.hint ? <span className="text-[10px] text-[var(--muted-foreground)]">({tag.hint})</span> : null}
@@ -526,6 +534,24 @@ export default async function AccountDetailPage({
                   <div className="rounded-lg border border-[var(--border)] p-3">
                     <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Best angle</p>
                     <p className="mt-1 text-sm">{recommendedAngle || 'Lead with gate-to-dock variance and throughput pressure.'}</p>
+                    {recommendedAngleCitations.length > 0 ? (
+                      <div className="mt-2 flex flex-wrap gap-1.5">
+                        {recommendedAngleCitations.map((citation) => (
+                          <a
+                            key={citation.url}
+                            href={citation.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center"
+                            title={citation.label}
+                          >
+                            <Badge variant="outline" className="text-[10px] font-normal hover:bg-[var(--accent)]">
+                              {citation.label} ↗
+                            </Badge>
+                          </a>
+                        ))}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
                 <div className="grid gap-3 md:grid-cols-3">
@@ -585,6 +611,28 @@ export default async function AccountDetailPage({
                         ? `Latest research run: ${evidenceSummary.run.latestStatus ?? 'unknown'}${evidenceSummary.run.latestAt ? ` (${new Date(evidenceSummary.run.latestAt).toLocaleString()})` : ''}. Sources here back every claim in source-backed drafts.`
                         : 'Click Refresh Intel to capture claims + sources. Anything fresh here gets cited automatically when you generate outreach.'}
                     </p>
+                    {evidenceSummary && evidenceSummary.latestClaims.length > 0 ? (
+                      <details className="mt-2 group" data-testid="evidence-claims-disclosure">
+                        <summary className="cursor-pointer text-xs font-medium text-[var(--primary)] hover:underline">
+                          View latest {Math.min(3, evidenceSummary.latestClaims.length)} claim{evidenceSummary.latestClaims.length === 1 ? '' : 's'}
+                        </summary>
+                        <ul className="mt-2 space-y-1.5">
+                          {evidenceSummary.latestClaims.slice(0, 3).map((claim) => (
+                            <li key={claim.id} className="text-xs">
+                              <a
+                                href={claim.sourceUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[var(--primary)] hover:underline"
+                              >
+                                ↗
+                              </a>
+                              <span className="ml-1.5 text-[var(--muted-foreground)]">{claim.claim}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </details>
+                    ) : null}
                   </div>
                 </div>
                 <div className="grid gap-3 md:grid-cols-2">

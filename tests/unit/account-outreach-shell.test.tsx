@@ -257,4 +257,81 @@ describe('AccountOutreachShell', () => {
     expect(payload.items[0].generatedContentId).toBe(42);
     expect(await screen.findByText(/Account Page Send Job #901/i)).toBeInTheDocument();
   });
+
+  it('renders an "unsourced" citation badge + visible note when the asset has no source-backed contract (S1-T1, S1-T2)', () => {
+    renderShell();
+
+    // S1-T1: badge in the asset metadata row says unsourced
+    expect(screen.getByText('unsourced')).toBeInTheDocument();
+    // S1-T1: dropdown <option> label includes the unsourced indicator
+    const option = screen.getByRole('option', { name: /v3 .* one pager .* unsourced/i });
+    expect(option).toBeInTheDocument();
+    // S1-T2: visible note above pre-send summary
+    expect(screen.getByTestId('unsourced-send-note')).toBeInTheDocument();
+    expect(screen.getByText(/will ship as-is/i)).toBeInTheDocument();
+    // S1-T2: Send is NOT gated — button stays enabled
+    const sendBtn = screen.getByRole('button', { name: /Send to 1 Recipient/i });
+    expect(sendBtn).not.toBeDisabled();
+  });
+
+  it('renders a "{N}/{T} sources cited" badge when the asset has a source-backed contract (S1-T1)', () => {
+    render(
+      <AccountOutreachShell
+        accountName="Boston Beer Company"
+        open
+        onOpenChange={() => {}}
+        recipients={[{
+          id: 7,
+          name: 'Taylor Lane',
+          email: 'taylor@example.com',
+          readiness: { score: 91, tier: 'high', stale: false, freshness_days: 2, reasons: [] },
+        }]}
+        recipientSets={[{
+          key: 'operators',
+          label: 'Operator Set',
+          description: 'Recommended operator contacts',
+          count: 1,
+          recipientIds: [7],
+          recommended: true,
+        }]}
+        initialSelectedRecipientIds={[7]}
+        defaultRecipientSetKey="operators"
+        assets={[{
+          id: 42,
+          content: '{"headline":"x","subheadline":"y","painPoints":["a"],"solutionSteps":[{"step":1,"title":"g","description":"d"}],"outcomes":["o"],"proofStats":[{"value":"1","label":"L"},{"value":"2","label":"L2"},{"value":"3","label":"L3"},{"value":"4","label":"L4"},{"value":"5","label":"L5"}],"customerQuote":"q","bestFit":"f","publicContext":"","suggestedNextStep":"n"}',
+          content_type: 'one_pager',
+          version: 3,
+          created_at: new Date('2026-05-05T00:00:00.000Z'),
+          version_metadata: {
+            source_backed_contract_v1: {
+              contract: 'source_backed_contract_v1',
+              account_wedge: 'Lead with gate-to-dock variance.',
+              angles: [{
+                id: 'angle_1',
+                label: 'Throughput',
+                rationale: 'Volume up 18% YoY.',
+                evidence_ref_ids: ['signal_1', 'signal_2'],
+              }],
+              evidence_refs: [
+                { id: 'signal_1', label: 'Signal 1', claim: 'Volume up 18%.', source_type: 'signal', provider: 'generation_input' },
+                { id: 'signal_2', label: 'Signal 2', claim: 'Dock dwell rising.', source_type: 'signal', provider: 'generation_input' },
+              ],
+              citation_count: 2,
+              citation_threshold: 1,
+            },
+          },
+        }]}
+      />,
+    );
+
+    // Citation badge in metadata row (also rendered by the shared
+    // SourceAttributionPanel below the asset selector — assertion just
+    // requires the citation text to be visible somewhere on the page).
+    expect(screen.getAllByText(/2\/1 sources cited/i).length).toBeGreaterThanOrEqual(1);
+    // Dropdown option text reflects citation count
+    const option = screen.getByRole('option', { name: /v3 .* one pager .* 2\/1 cited/i });
+    expect(option).toBeInTheDocument();
+    // No "unsourced" note when contract is present
+    expect(screen.queryByTestId('unsourced-send-note')).not.toBeInTheDocument();
+  });
 });

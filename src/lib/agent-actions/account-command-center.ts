@@ -376,6 +376,34 @@ export function buildRecommendedAngle(result: AgentActionResult | null, fallback
   return analysis || fallback || 'Lead with yard variance, throughput pressure, and standardized gate-to-dock execution.';
 }
 
+/**
+ * Source citations to render alongside the recommended angle on the account
+ * command center. Picks the freshest claims for the account scope, capped at
+ * `maxCitations` (default 2). Returns an empty array when no evidence has been
+ * captured for the account yet — caller should render no citation chips.
+ *
+ * Additive sibling to `buildRecommendedAngle` — does not change that function's
+ * existing string contract.
+ */
+export function buildRecommendedAngleCitations(
+  evidenceSummary: { latestClaims: Array<{ id: string; claim: string; sourceUrl: string; freshness: 'fresh' | 'aging' | 'stale'; observedAt: string }> } | null,
+  options: { maxCitations?: number } = {},
+): Array<{ url: string; label: string }> {
+  if (!evidenceSummary) return [];
+  const max = options.maxCitations ?? 2;
+  const ranked = [...evidenceSummary.latestClaims].sort((a, b) => {
+    const freshnessOrder = { fresh: 0, aging: 1, stale: 2 } as const;
+    const aFresh = freshnessOrder[a.freshness] ?? 3;
+    const bFresh = freshnessOrder[b.freshness] ?? 3;
+    if (aFresh !== bFresh) return aFresh - bFresh;
+    return new Date(b.observedAt).getTime() - new Date(a.observedAt).getTime();
+  });
+  return ranked.slice(0, max).map((claim) => ({
+    url: claim.sourceUrl,
+    label: claim.claim.length > 64 ? `${claim.claim.slice(0, 61)}...` : claim.claim,
+  }));
+}
+
 export function buildCommitteeCoverageBrief(
   result: AgentActionResult | null,
   recipients: SuggestedRecipient[],
