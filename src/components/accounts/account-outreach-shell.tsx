@@ -27,6 +27,7 @@ import { readApiResponse } from '@/lib/api-response';
 import { recordWorkflowMetric } from '@/lib/agent-actions/telemetry';
 import { SendJobTracker } from '@/components/generated-content/send-job-tracker';
 import { SourceAttributionPanel } from '@/components/source-backed/source-attribution-panel';
+import { sanitizeHtml } from '@/lib/sanitize-html';
 
 type AccountOutreachShellAsset = {
   id: number;
@@ -696,7 +697,7 @@ export function AccountOutreachShell({
                     {payload ? (
                       <div
                         className="prose prose-sm max-w-none dark:prose-invert"
-                        dangerouslySetInnerHTML={{ __html: payload.previewHtml }}
+                        dangerouslySetInnerHTML={{ __html: sanitizeHtml(payload.previewHtml) }}
                       />
                     ) : (
                       <p className="text-sm text-[var(--muted-foreground)]">Select an asset or draft to build a preview.</p>

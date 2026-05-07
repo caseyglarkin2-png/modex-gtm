@@ -19,6 +19,7 @@ import { readApiResponse } from '@/lib/api-response';
 import { getMicrositeUrl } from '@/lib/site-url';
 import { AgentActionDialog } from '@/components/agent-actions/agent-action-dialog';
 import { OnePagerDialog } from '@/components/ai/one-pager-preview';
+import { sanitizeHtml } from '@/lib/sanitize-html';
 
 function buildEmailPreviewHtml(bodyText: string): string {
   const escaped = bodyText
@@ -335,7 +336,7 @@ export function EmailComposer({
             {previewMode && body.trim() ? (
               <div
                 className="w-full min-h-[200px] rounded-md border border-input overflow-hidden"
-                  dangerouslySetInnerHTML={{ __html: buildEmailPreviewHtml(body) }}
+                  dangerouslySetInnerHTML={{ __html: sanitizeHtml(buildEmailPreviewHtml(body)) }}
               />
             ) : (
               <textarea

@@ -23,6 +23,7 @@ import { Input } from '@/components/ui/input';
 import type { GenerateContentInput } from '@/lib/validations';
 import { readApiResponse } from '@/lib/api-response';
 import type { AgentActionResult } from '@/lib/agent-actions/types';
+import { sanitizeHtml } from '@/lib/sanitize-html';
 
 type ContentType = Exclude<GenerateContentInput['type'], 'infographic'>;
 type Tone = GenerateContentInput['tone'];
@@ -328,7 +329,7 @@ export function GeneratorDialog({
               {previewMode ? (
                 <div
                   className="rounded-md border bg-background p-4 text-sm leading-relaxed min-h-[200px] prose prose-sm max-w-none"
-                  dangerouslySetInnerHTML={{ __html: content.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n\n/g, '</p><p style="margin:12px 0;">').replace(/\n/g, '<br />') }}
+                  dangerouslySetInnerHTML={{ __html: sanitizeHtml(content.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n\n/g, '</p><p style="margin:12px 0;">').replace(/\n/g, '<br />')) }}
                 />
               ) : (
                 <textarea

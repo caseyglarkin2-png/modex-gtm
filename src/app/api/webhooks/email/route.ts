@@ -37,8 +37,17 @@ export async function POST(req: NextRequest) {
   // Read raw body first — required for HMAC signature verification
   const rawBody = await req.text();
 
-  // Verify webhook signature via HMAC-SHA256
-  if (WEBHOOK_SECRET) {
+  // In production, the secret is required — fail closed if it's not configured
+  // so we never accept unsigned webhooks. Outside production we allow unsigned
+  // calls to keep local/dev iteration easy.
+  if (!WEBHOOK_SECRET) {
+    if (process.env.NODE_ENV === 'production') {
+      return NextResponse.json(
+        { error: 'Webhook secret is not configured on the server' },
+        { status: 503 },
+      );
+    }
+  } else {
     const signature = req.headers.get('x-webhook-signature') ?? '';
     if (!signature) {
       return NextResponse.json({ error: 'Missing signature header' }, { status: 401 });

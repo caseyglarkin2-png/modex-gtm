@@ -13,6 +13,7 @@ import { COLD_OUTBOUND_PROMPT_POLICY_VERSION, DEFAULT_CTA_MODE } from '@/lib/rev
 import { canDirectSendAsset } from '@/lib/generated-content/asset-send-contract';
 import { recordWorkflowMetric } from '@/lib/agent-actions/telemetry';
 import { parseAssetProvenanceSummary } from '@/lib/generated-content/asset-selection';
+import { sanitizeHtml } from '@/lib/sanitize-html';
 
 type GeneratedContentPreviewDialogProps = {
   accountName: string;
@@ -157,7 +158,7 @@ export function GeneratedContentPreviewDialog({
                 <div className="rounded-md border bg-slate-50 p-4">
                   <div
                     className="prose prose-sm max-w-none dark:prose-invert"
-                    dangerouslySetInnerHTML={{ __html: rendering.html }}
+                    dangerouslySetInnerHTML={{ __html: sanitizeHtml(rendering.html) }}
                   />
                 </div>
               ) : null}
@@ -166,7 +167,7 @@ export function GeneratedContentPreviewDialog({
             <div className="rounded-md border bg-slate-50 p-4">
               <div
                 className="prose prose-sm max-w-none dark:prose-invert"
-                dangerouslySetInnerHTML={{ __html: rendering.html }}
+                dangerouslySetInnerHTML={{ __html: sanitizeHtml(rendering.html) }}
               />
             </div>
           )}

@@ -12,6 +12,7 @@ import type { WorkspaceRecipient } from '@/lib/generated-content/queries';
 import { getRecipientReadinessFloor } from '@/lib/revops/recipient-readiness';
 import { getStrategyPreset, getStrategyWarning, type PacingMode } from '@/lib/revops/send-strategy';
 import { ContentQaChecklistPanel } from '@/components/generated-content/content-qa-checklist-panel';
+import { sanitizeHtml } from '@/lib/sanitize-html';
 
 export type BulkPreviewItem = {
   accountName: string;
@@ -567,7 +568,7 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
               <div className="max-h-64 overflow-y-auto rounded-md border bg-slate-50 p-2">
                 <div
                   className="prose prose-sm max-w-none dark:prose-invert"
-                  dangerouslySetInnerHTML={{ __html: rendering.html }}
+                  dangerouslySetInnerHTML={{ __html: sanitizeHtml(rendering.html) }}
                 />
               </div>
             </div>
