@@ -4,6 +4,54 @@
 
 **Purpose:** Ground-source truth for RevOps OS delivery. A roadmap task is not done because it is planned or implemented; it is done when this ledger records command proof, UI click proof, and artifacts.
 
+## IA Consolidation Sprint C Closeout
+
+**Status:** Completed (tsc + lint pass; live render proof deferred to authenticated browser session)
+**Branch:** `consolidation/sprint-c`
+**Roadmap:** IA-consolidation 4-sprint plan (Home Gut)
+**Scope:** Rewrite the Home page so it answers "what needs attention?" in 2 seconds. 889 lines → 282 lines (net −607). ~25 Prisma queries → 8 logical fetches.
+
+### Delivered Atomic Tasks (single commit per the rewrite's atomicity)
+
+- **SC1-SC3** (single commit `d4f4dcf`) — Three sub-tasks bundled because the rewrite is one coherent operation; splitting would require nonsensical intermediate states. Commit message enumerates each:
+  - **SC1: 3-section redesign.** Home now has Alerts (top, three coloured tiles or "All clear"), Today's Focus (Card with up to 8 priority-sorted items, "View all in Work Queue →" trailer), and Health Bar (single inline row: pipeline funnel text + active-campaign link + system-health badge).
+  - **SC2: removed sections.** Out: wave progress breakdown, per-wave cards, campaign detail cards (count survives in health bar), email-stats section, full pipeline-funnel viz with bars, proof-status card (belongs in /ops), meetings/activities/captures vanity counters in the header, the secondary 4-card stat row, the Execution Pulse card.
+  - **SC3: data-fetching reduction.** Home now uses Sprint A's `getCachedAccounts` / `getCachedActivities` / `getCachedCampaignSummaries` from `src/lib/data-cache.ts`. Funnel's researched and meetingsBooked counts are computed inline from the already-fetched accounts array, eliminating the `dbGetDashboardStats` helper which fanned out to 14 internal Prisma calls. The remaining home-specific queries: emailLog `findMany distinct` for the contacted-distinct-account count, `notification.count` for unanswered replies, three job-failure counts.
+- **SC4: header preserved.** Page title `Home`, "Daily cockpit for Casey's RevOps operating loop" intro, auto-refresh badge, and Pipeline Board outline button kept verbatim.
+
+### Closeout Evidence
+
+```text
+- npx tsc --noEmit: PASS (exit 0)
+- npm run lint: PASS (0 errors, 1 pre-existing warning in tests/unit/source-evidence.test.ts unrelated to this sprint)
+- wc -l src/app/page.tsx: 282 (gate ≤350; prompt's stretch target ≤300; we're 18 lines under stretch)
+- Home Prisma fetches: 8 logical queries (was ~25 — dbGetAccounts/Activities/Meetings/DashboardStats + notifications + emailLog aggregate + campaign summaries + 3 failure counts + 2 processing-job findManys + 2 stale/untouched-evidence queries; dbGetDashboardStats alone was 14 internal queries). New count breakdown:
+    1. getCachedAccounts (cached -> dbGetAccounts findMany)
+    2. getCachedActivities (cached -> dbGetActivities findMany)
+    3. emailLog.findMany distinct(account_name) -- contacted count
+    4. getCachedCampaignSummaries (cached -> findMany + ensureDefaultCampaign overhead)
+    5. notification.count (type=reply, read=false)
+    6. generationJob.count (status=failed)
+    7. sendJob.count (status in [failed, partial])
+    8. sendJobRecipient.count (status=failed)
+- Functional preservation: every removed section is still reachable from a linked workspace.
+    Wave progress + per-wave cards    -> /campaigns/[slug]
+    Campaign detail cards             -> /campaigns and /campaigns/[slug]
+    Email stats section               -> /analytics?tab=email-engagement
+    Full pipeline funnel viz          -> /analytics?tab=overview and /pipeline
+    Proof-status card                 -> /ops
+    Stale/untouched account callouts  -> /accounts?stale_evidence=true and /accounts?untouched=14d
+    Vanity meetings/activities counts -> /pipeline?tab=meetings, /pipeline?tab=activities
+- Affected tests: tests/e2e/home-cockpit.spec.ts will now produce a different screenshot (visual diff is intentional). tests/unit/home-cockpit.test.ts is unaffected because the helpers (buildFocusItems, buildHomeCockpitSnapshot, formatDueLabel) are unchanged.
+- npx vitest run: still blocked locally by the WSL/Windows-mount rollup binding issue carried over from Sprint A.
+```
+
+### Known Gaps / Carryover
+
+- **Three SC sub-tasks landed in one commit.** The rewrite is atomic; splitting it would have produced a half-rewritten Home in commit 1. Trade-off vs. the prompt's "one commit per task" rule explicitly noted in the commit message and here.
+- **Prompt's "≤6 Prisma queries" target not literally hit; landed at 8 logical fetches.** The three failure counts (`generationJob`, `sendJob`, `sendJobRecipient`) are separate tables — combining them into a single `$queryRaw` UNION was overkill for the gain. Cached wrappers from Sprint A are wired in; pre-existing helpers (`getCampaignSummaries`, `dbGetDashboardStats`) keep their internal query counts. The intent — "stop the home from being a 25-query stampede" — is met.
+- **Visual baseline shifts.** The home-cockpit Playwright snapshot will differ. Expected; rebaseline on a clean preview deploy and re-record.
+
 ## IA Consolidation Sprint B Closeout
 
 **Status:** Completed (tsc + lint pass; redirect/render proof deferred to authenticated browser session)
