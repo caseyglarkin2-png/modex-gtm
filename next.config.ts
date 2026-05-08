@@ -28,6 +28,19 @@ const nextConfig: NextConfig = {
       { source: '/analytics/quarterly', destination: '/analytics?tab=quarterly', permanent: true },
       { source: '/admin/crons', destination: '/ops?tab=cron-health', permanent: true },
       { source: '/admin/generation-metrics', destination: '/ops?tab=generation-metrics', permanent: true },
+
+      // /for index: redirect to Studio Microsites tab on the internal domain.
+      // The yardflow.ai branch is excluded via the `missing` host check so the
+      // public landing page in src/app/for/page.tsx still renders there.
+      // Doing this at the routing layer (instead of inside the page handler's
+      // redirect()) avoids a Suspense/streaming race where the layout shell
+      // ships first and the in-page redirect() throw never reaches the client.
+      {
+        source: '/for',
+        missing: [{ type: 'host', value: 'yardflow\\.ai' }],
+        destination: '/studio?tab=microsites',
+        permanent: true,
+      },
     ];
   },
   async headers() {
