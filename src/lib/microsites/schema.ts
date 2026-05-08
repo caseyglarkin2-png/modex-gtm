@@ -701,6 +701,17 @@ export interface AccountMicrositeData {
   showcase?: boolean;               // flagged for DWTB marketplace demo
   showcaseOrder?: number;           // display order in showcase gallery (1 = first)
   layoutPreset?: LayoutPreset;      // controls section rhythm, spacing, emphasis
+
+  // YNS Microsite Redesign migration flag (Sprint M3).
+  //
+  // - false  → memo sections in `sections[]` are hand-authored. No "needs
+  //            hand-tuning" banner on the rendered page.
+  // - true   → sections are auto-mapped from legacy data via the compat
+  //            adapter (M3.8) or by the bulk migration script (M3.7).
+  //            Renders a top-of-page banner so prospects know we know.
+  // - omitted → treat as `true` while the migration is in flight; flip to
+  //            `false` per account as M3.2-M3.6 hand-authors them.
+  needsHandTuning?: boolean;
 }
 
 // Named facility for network map sections
