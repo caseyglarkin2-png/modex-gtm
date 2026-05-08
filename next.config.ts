@@ -15,6 +15,13 @@ const nextConfig: NextConfig = {
       { source: '/audit-routes', destination: '/studio?tab=audit-routes', permanent: true },
       { source: '/qr', destination: '/studio?tab=qr-assets', permanent: true },
       { source: '/generated-content', destination: '/studio?tab=generated-content', permanent: true },
+
+      // IA consolidation Sprint D: legacy redirect stubs folded into the routing layer.
+      { source: '/activities', destination: '/pipeline?tab=activities', permanent: true },
+      { source: '/meetings', destination: '/pipeline?tab=meetings', permanent: true },
+      { source: '/personas', destination: '/contacts', permanent: true },
+      { source: '/waves', destination: '/campaigns', permanent: true },
+      { source: '/waves/campaign', destination: '/campaigns', permanent: true },
     ];
   },
   async headers() {
