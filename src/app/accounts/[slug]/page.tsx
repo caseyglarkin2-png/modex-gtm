@@ -30,7 +30,7 @@ import { BandBadge } from '@/components/band-badge';
 import { StatusBadge } from '@/components/status-badge';
 import { CopyButton } from '@/components/copy-button';
 import { EmptyState } from '@/components/empty-state';
-import { ExternalLink, Users, FileText, GitBranch, BriefcaseBusiness } from 'lucide-react';
+import { ExternalLink, Users, FileText, GitBranch, BriefcaseBusiness, ChevronDown } from 'lucide-react';
 import { LogActivityDialog } from '@/components/log-activity-dialog';
 import { BookMeetingDialog } from '@/components/book-meeting-dialog';
 import { GeneratorDialog } from '@/components/ai/generator-dialog';
@@ -464,8 +464,18 @@ export default async function AccountDetailPage({
             )}
           </div>
 
+          {/* Account details — collapsed by default. Score breakdown, research-backed
+              tags, agent intel, and the Outbound Command Center / Suggested Recipients
+              cards live here so the hero stays "name + status + one CTA" at a glance.
+              The composite priority score is already shown as a badge in the top-right. */}
+          <details className="mt-4 group">
+            <summary className="flex cursor-pointer list-none items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--muted-foreground)] hover:text-[var(--foreground)]">
+              <ChevronDown className="h-3 w-3 transition-transform group-open:rotate-180" />
+              Account details
+            </summary>
+            <div className="mt-4 space-y-4">
           {/* Score Dimensions */}
-          <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-6">
+          <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
             {scoreDims.map((dim) => (
               <div key={dim.label} className="rounded-lg border border-[var(--border)] p-2.5 text-center">
                 <p className="text-[10px] text-[var(--muted-foreground)]">{dim.label} ({dim.weight}%)</p>
@@ -475,7 +485,7 @@ export default async function AccountDetailPage({
           </div>
 
           {/* Research-backed tags (facility fact, vertical, signal, etc.) */}
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2">
             {accountTags.map((tag) => (
               <Badge
                 key={`${tag.label}-${tag.value}`}
@@ -490,7 +500,7 @@ export default async function AccountDetailPage({
               </Badge>
             ))}
           </div>
-          <div className="mt-4">
+          <div>
             <AgentIntelStrip
               accountName={account.name}
               accountNames={accountScope.accountNames}
@@ -498,7 +508,7 @@ export default async function AccountDetailPage({
               recipients={accountRecipients}
             />
           </div>
-          <div className="mt-4 grid gap-4 xl:grid-cols-[1.3fr_1fr]">
+          <div className="grid gap-4 xl:grid-cols-[1.3fr_1fr]">
             <Card>
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm">Outbound Command Center</CardTitle>
@@ -791,6 +801,8 @@ export default async function AccountDetailPage({
               </CardContent>
             </Card>
           </div>
+            </div>
+          </details>
         </CardContent>
       </Card>
 
