@@ -10,7 +10,11 @@ export const size = {
 
 export const contentType = 'image/png';
 
-const PREPARED_DATE = new Date().toISOString().slice(0, 10);
+const PREPARED_DATE = new Date().toLocaleDateString('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+});
 
 export default async function OpenGraphImage({
   params,

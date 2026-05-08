@@ -12,7 +12,7 @@ import { MemoSectionList } from '@/components/microsites/memo-section';
 import { MemoSoftAction } from '@/components/microsites/memo-soft-action';
 import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
 
-const PREPARED_DATE = new Date().toISOString().slice(0, 10);
+const PREPARED_DATE = new Date().toISOString().slice(0, 10); // ISO; MemoShell formats display
 
 export async function generateMetadata({
   params,
