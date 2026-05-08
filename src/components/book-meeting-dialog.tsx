@@ -10,6 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { createMeeting } from '@/lib/actions';
 import { CalendarCheck, ExternalLink } from 'lucide-react';
+import { useControllableOpen } from '@/lib/use-controllable-open';
 
 const MEETING_TYPES = ['In-Person', 'Virtual', 'Phone', 'Booth'] as const;
 
@@ -19,7 +20,6 @@ interface Props {
   calendlyLink?: string;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
-  hideTrigger?: boolean;
 }
 
 export function BookMeetingDialog({
@@ -28,15 +28,8 @@ export function BookMeetingDialog({
   calendlyLink,
   open: controlledOpen,
   onOpenChange: controlledOnOpenChange,
-  hideTrigger = false,
 }: Props) {
-  const [internalOpen, setInternalOpen] = useState(false);
-  const isControlled = controlledOpen !== undefined;
-  const open = isControlled ? controlledOpen : internalOpen;
-  const setOpen = (next: boolean) => {
-    if (!isControlled) setInternalOpen(next);
-    controlledOnOpenChange?.(next);
-  };
+  const { open, setOpen, isControlled } = useControllableOpen(controlledOpen, controlledOnOpenChange);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     meeting_type: 'In-Person' as typeof MEETING_TYPES[number],
@@ -86,7 +79,7 @@ export function BookMeetingDialog({
 
   return (
     <>
-      {hideTrigger ? null : (
+      {isControlled ? null : (
         <div className="flex items-center gap-2">
           <Button size="sm" className="gap-1.5" onClick={() => setOpen(true)}>
             <CalendarCheck className="h-3.5 w-3.5" /> Book Meeting
