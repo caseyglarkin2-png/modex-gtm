@@ -1,8 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { notFound } from 'next/navigation';
-import { MicrositeSocialImage } from '@/components/microsites/social-image';
+import { MicrositeMemoSocialImage } from '@/components/microsites/memo-social-image';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
-import { materializeMicrositeSections } from '@/lib/microsites/roi';
 
 export const size = {
   width: 1200,
@@ -10,6 +9,8 @@ export const size = {
 };
 
 export const contentType = 'image/png';
+
+const PREPARED_DATE = new Date().toISOString().slice(0, 10);
 
 export default async function OpenGraphImage({
   params,
@@ -20,25 +21,25 @@ export default async function OpenGraphImage({
   const data = getAccountMicrositeData(account);
   if (!data) notFound();
 
-  const sections = materializeMicrositeSections(data, data.sections);
-  const hero = sections.find((section) => section.type === 'hero');
-  const roi = sections.find((section) => section.type === 'roi');
+  const facilityCount = data.network?.facilityCount;
+  const contextLine = facilityCount
+    ? `${facilityCount}-facility footprint · ${data.vertical}`
+    : data.vertical;
 
   return new ImageResponse(
     (
-      <MicrositeSocialImage
+      <MicrositeMemoSocialImage
         accentColor={data.theme?.accentColor}
-        eyebrow="Private Field Brief"
-        secondaryTitle={data.accountName}
-        title="Yard execution brief"
-        summary={hero?.headline ?? data.metaDescription}
+        eyebrow={`Private analysis · ${PREPARED_DATE}`}
+        title={`Yard execution as a network constraint for ${data.accountName}`}
+        byline="YardFlow private brief · prepared by Casey Larkin"
+        contextLine={contextLine}
         stats={[
-          { label: 'Priority', value: `${data.band} ${data.priorityScore}` },
-          { label: 'Network', value: data.network.facilityCount },
-          ...(roi?.totalAnnualSavings ? [{ label: 'ROI signal', value: roi.totalAnnualSavings }] : []),
-          ...(roi?.paybackPeriod ? [{ label: 'Payback', value: roi.paybackPeriod }] : []),
+          ...(facilityCount ? [{ label: 'Network', value: String(facilityCount) }] : []),
+          { label: 'Tier', value: data.tier },
+          { label: 'Vertical', value: data.vertical }
+            ,
         ]}
-        footer={data.vertical}
       />
     ),
     size,

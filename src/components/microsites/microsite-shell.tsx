@@ -60,6 +60,17 @@ function getSectionLabel(section: MicrositeSection) {
       return section.sectionLabel ?? 'Operator Proof';
     case 'cta':
       return section.sectionLabel ?? section.cta.headline;
+    // Memo-era types (Sprint M2+). The dark MicrositeShell is deprecated and
+    // will be deleted in Sprint M7; until then it just needs to render a
+    // sensible nav label for these new types.
+    case 'yns-thesis':
+      return section.headlineOverride ?? 'Yard Network Standardization';
+    case 'observation':
+    case 'comparable':
+    case 'methodology':
+      return section.headline;
+    case 'about':
+      return section.headline ?? 'About this analysis';
     default:
       return section.sectionLabel ?? section.headline;
   }
