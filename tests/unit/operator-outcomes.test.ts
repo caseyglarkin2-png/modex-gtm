@@ -113,11 +113,11 @@ describe('operator outcomes contracts', () => {
       latestOutcomeLabel: 'wrong-person',
       nextAction: {
         label: 'Replace the contact before the next send',
-        route: '#contacts',
+        route: '#committee',
         tone: 'blocked',
       },
       nextAsset: {
-        route: '#assets',
+        route: '#outreach',
       },
     });
 
@@ -131,7 +131,7 @@ describe('operator outcomes contracts', () => {
       latestOutcomeLabel: 'positive',
       nextAction: {
         label: 'Convert the warm response into a meeting',
-        route: '#meetings',
+        route: '#history',
         tone: 'ready',
       },
     });

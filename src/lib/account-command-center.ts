@@ -1,6 +1,6 @@
 import { buildOutcomeFollowUpRecommendation, parseOperatorOutcomeLabel } from '@/lib/revops/operator-outcomes';
 
-export type AccountCommandTabId = 'overview' | 'contacts' | 'assets' | 'engagement' | 'tasks' | 'meetings' | 'pipeline';
+export type AccountCommandTabId = 'brief' | 'committee' | 'outreach' | 'history';
 
 export type AccountCommandTab = {
   id: AccountCommandTabId;
@@ -10,17 +10,20 @@ export type AccountCommandTab = {
 };
 
 export const accountCommandTabs: AccountCommandTab[] = [
-  { id: 'overview', label: 'Overview', legacyIds: ['overview'], purpose: 'Account thesis, status, score, and next-best action.' },
-  { id: 'contacts', label: 'Contacts', legacyIds: ['personas'], purpose: 'People, priorities, readiness, and contact actions.' },
-  { id: 'assets', label: 'Assets', legacyIds: ['brief', 'routes'], purpose: 'Briefs, audit routes, QR assets, microsites, and generated content.' },
-  { id: 'engagement', label: 'Engagement', legacyIds: ['activity'], purpose: 'Unified history across emails, activities, captures, meetings, and microsites.' },
-  { id: 'tasks', label: 'Tasks', legacyIds: ['activity'], purpose: 'Open next steps and operator work for this account.' },
-  { id: 'meetings', label: 'Meetings', legacyIds: ['activity'], purpose: 'Meeting status, prep, booked meetings, and follow-up.' },
-  { id: 'pipeline', label: 'Pipeline', legacyIds: ['waves'], purpose: 'Stage, wave motion, campaign phase, and pipeline movement.' },
+  { id: 'brief', label: 'Brief', legacyIds: ['overview'], purpose: 'Account thesis, status, score, next-best action, microsite engagement, and intro path.' },
+  { id: 'committee', label: 'Committee', legacyIds: ['contacts', 'personas'], purpose: 'People, priorities, readiness, and contact actions.' },
+  { id: 'outreach', label: 'Outreach', legacyIds: ['assets', 'engagement', 'routes', 'activity'], purpose: 'Briefs, audit routes, QR assets, microsites, generated content, and the unified engagement history.' },
+  { id: 'history', label: 'History', legacyIds: ['tasks', 'meetings', 'pipeline', 'waves'], purpose: 'Open next steps, meeting records, and pipeline / wave motion.' },
 ];
 
 export function getCanonicalAccountTabForLegacy(legacyId: string): AccountCommandTab | undefined {
   return accountCommandTabs.find((tab) => tab.id === legacyId || tab.legacyIds.includes(legacyId));
+}
+
+export function parseAccountTab(value: string | undefined | null): AccountCommandTabId {
+  if (!value) return 'brief';
+  const matched = getCanonicalAccountTabForLegacy(value);
+  return matched?.id ?? 'brief';
 }
 
 export type AccountNextActionSource = {
@@ -66,7 +69,7 @@ export function buildAccountNextBestAction(
     return {
       label: account.next_action,
       detail: account.due_date ? `Due ${formatAccountDate(account.due_date)}` : 'No due date set',
-      route: '#tasks',
+      route: '#history',
       tone: 'attention',
     };
   }
@@ -85,7 +88,7 @@ export function buildAccountNextBestAction(
     return {
       label: 'Map first contact',
       detail: 'No contacts are attached to this account yet.',
-      route: '#contacts',
+      route: '#committee',
       tone: 'blocked',
     };
   }
@@ -94,7 +97,7 @@ export function buildAccountNextBestAction(
     return {
       label: 'Create account asset',
       detail: 'No account-owned assets are ready yet.',
-      route: '#assets',
+      route: '#outreach',
       tone: 'attention',
     };
   }
@@ -105,7 +108,7 @@ export function buildAccountNextBestAction(
       detail: input.coverageGapCount && input.coverageGapCount > 0
         ? 'A reply exists, but the account still has uncovered buyer lanes before the next send.'
         : 'Reply activity exists on this account. Keep the motion moving before it cools.',
-      route: input.coverageGapCount && input.coverageGapCount > 0 ? '#contacts' : '#engagement',
+      route: input.coverageGapCount && input.coverageGapCount > 0 ? '#committee' : '#outreach',
       tone: 'ready',
     };
   }
@@ -114,7 +117,7 @@ export function buildAccountNextBestAction(
     return {
       label: 'Launch first outbound touch',
       detail: 'Contacts and assets are ready; outreach has not started.',
-      route: '#engagement',
+      route: '#outreach',
       tone: 'ready',
     };
   }
@@ -123,7 +126,7 @@ export function buildAccountNextBestAction(
     return {
       label: 'Advance post-meeting follow-up',
       detail: 'Meeting signal exists; move the opportunity forward.',
-      route: '#pipeline',
+      route: '#history',
       tone: 'ready',
     };
   }
@@ -131,7 +134,7 @@ export function buildAccountNextBestAction(
   return {
     label: 'Review account context',
     detail: 'No urgent next action is set.',
-    route: '#overview',
+    route: '#brief',
     tone: 'ready',
   };
 }

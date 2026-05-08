@@ -769,7 +769,7 @@ export function AccountOutreachShell({
                           if (isInvalidEmail) {
                             actionNode = (
                               <Link
-                                href={`/accounts/${encodeURIComponent(accountName.toLowerCase().replace(/\s+/g, '-'))}?tab=contacts#contact-discovery`}
+                                href={`/accounts/${encodeURIComponent(accountName.toLowerCase().replace(/\s+/g, '-'))}?tab=committee#contact-discovery`}
                                 className="text-[var(--primary)] hover:underline"
                               >
                                 Replace contact

@@ -8,22 +8,27 @@ import {
 } from '@/lib/account-command-center';
 
 describe('account command center contract', () => {
-  it('declares the seven canonical account tabs and maps legacy tabs', () => {
+  it('declares the four canonical account tabs and maps legacy tab ids', () => {
     expect(accountCommandTabs.map((tab) => tab.label)).toEqual([
-      'Overview',
-      'Contacts',
-      'Assets',
-      'Engagement',
-      'Tasks',
-      'Meetings',
-      'Pipeline',
+      'Brief',
+      'Committee',
+      'Outreach',
+      'History',
     ]);
 
-    expect(getCanonicalAccountTabForLegacy('personas')?.label).toBe('Contacts');
-    expect(getCanonicalAccountTabForLegacy('brief')?.label).toBe('Assets');
-    expect(getCanonicalAccountTabForLegacy('routes')?.label).toBe('Assets');
-    expect(getCanonicalAccountTabForLegacy('activity')?.label).toBe('Engagement');
-    expect(getCanonicalAccountTabForLegacy('waves')?.label).toBe('Pipeline');
+    // Legacy ids from the prior 7-tab layout still resolve to the canonical
+    // 4-tab home so existing inbound URLs keep working.
+    expect(getCanonicalAccountTabForLegacy('overview')?.label).toBe('Brief');
+    expect(getCanonicalAccountTabForLegacy('contacts')?.label).toBe('Committee');
+    expect(getCanonicalAccountTabForLegacy('personas')?.label).toBe('Committee');
+    expect(getCanonicalAccountTabForLegacy('assets')?.label).toBe('Outreach');
+    expect(getCanonicalAccountTabForLegacy('engagement')?.label).toBe('Outreach');
+    expect(getCanonicalAccountTabForLegacy('routes')?.label).toBe('Outreach');
+    expect(getCanonicalAccountTabForLegacy('activity')?.label).toBe('Outreach');
+    expect(getCanonicalAccountTabForLegacy('tasks')?.label).toBe('History');
+    expect(getCanonicalAccountTabForLegacy('meetings')?.label).toBe('History');
+    expect(getCanonicalAccountTabForLegacy('pipeline')?.label).toBe('History');
+    expect(getCanonicalAccountTabForLegacy('waves')?.label).toBe('History');
   });
 
   it('prioritizes explicit next action before inferred actions', () => {
@@ -40,7 +45,7 @@ describe('account command center contract', () => {
 
     expect(action).toMatchObject({
       label: 'Send VP logistics one-pager',
-      route: '#tasks',
+      route: '#history',
       tone: 'attention',
     });
     expect(action.detail).toContain('May 3');
@@ -69,7 +74,7 @@ describe('account command center contract', () => {
 
     expect(wrongPersonAction).toMatchObject({
       label: 'Replace the contact before the next send',
-      route: '#contacts',
+      route: '#committee',
       tone: 'blocked',
     });
 
@@ -95,7 +100,7 @@ describe('account command center contract', () => {
 
     expect(positiveAction).toMatchObject({
       label: 'Convert the warm response into a meeting',
-      route: '#meetings',
+      route: '#history',
       tone: 'ready',
     });
   });

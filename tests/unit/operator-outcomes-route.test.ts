@@ -68,10 +68,10 @@ describe('operator outcomes route', () => {
     expect(payload.deduped).toBe(false);
     expect(payload.nextAction).toMatchObject({
       label: 'Convert the warm response into a meeting',
-      route: '#meetings',
+      route: '#history',
     });
     expect(payload.nextAsset).toMatchObject({
-      route: '#assets',
+      route: '#outreach',
     });
     expect(payload.queuedGenerationJobId).toBe(55);
     expect(mockedPrisma.operatorOutcome.create).toHaveBeenCalledWith({

@@ -15,19 +15,19 @@ const summary: AccountEngagementSummary = {
 };
 
 describe('AccountEngagementSummaryCard drill-down links (S3-T5)', () => {
-  it('wraps every metric tile in a link to ?tab=engagement&metric={key} when accountSlug is provided', () => {
+  it('wraps every metric tile in a link to ?tab=outreach&metric={key} when accountSlug is provided', () => {
     render(<AccountEngagementSummaryCard summary={summary} accountSlug="boston-beer-company" />);
     const sentLink = screen.getByTestId('engagement-metric-sent');
     expect(sentLink.tagName).toBe('A');
-    expect(sentLink).toHaveAttribute('href', '/accounts/boston-beer-company?tab=engagement&metric=sent');
+    expect(sentLink).toHaveAttribute('href', '/accounts/boston-beer-company?tab=outreach&metric=sent');
 
     expect(screen.getByTestId('engagement-metric-replied')).toHaveAttribute(
       'href',
-      '/accounts/boston-beer-company?tab=engagement&metric=replied',
+      '/accounts/boston-beer-company?tab=outreach&metric=replied',
     );
     expect(screen.getByTestId('engagement-metric-positiveReplies')).toHaveAttribute(
       'href',
-      '/accounts/boston-beer-company?tab=engagement&metric=positiveReplies',
+      '/accounts/boston-beer-company?tab=outreach&metric=positiveReplies',
     );
   });
 
