@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import data from '@/lib/data/search-strings.json';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MetricCard } from '@/components/metric-card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -64,10 +65,10 @@ export default function SearchPage() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-4">
-        <SearchMetricCard label="Ready queries" value={readyCount} tone={readyCount > 0 ? 'text-emerald-600' : 'text-[var(--foreground)]'} />
-        <SearchMetricCard label="P1 targets" value={p1Count} tone={p1Count > 0 ? 'text-blue-600' : 'text-[var(--foreground)]'} />
-        <SearchMetricCard label="Accounts covered" value={accountCount} tone="text-[var(--foreground)]" />
-        <SearchMetricCard label="Owners active" value={ownerCount} tone="text-[var(--foreground)]" />
+        <MetricCard label="Ready queries" value={readyCount} tone={readyCount > 0 ? 'text-emerald-600' : 'text-[var(--foreground)]'} />
+        <MetricCard label="P1 targets" value={p1Count} tone={p1Count > 0 ? 'text-blue-600' : 'text-[var(--foreground)]'} />
+        <MetricCard label="Accounts covered" value={accountCount} tone="text-[var(--foreground)]" />
+        <MetricCard label="Owners active" value={ownerCount} tone="text-[var(--foreground)]" />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
@@ -193,13 +194,3 @@ export default function SearchPage() {
   );
 }
 
-function SearchMetricCard({ label, value, tone }: { label: string; value: number; tone: string }) {
-  return (
-    <Card>
-      <CardContent className="p-4 text-center">
-        <p className="text-[11px] uppercase tracking-wide text-[var(--muted-foreground)]">{label}</p>
-        <p className={`mt-2 text-2xl font-bold ${tone}`}>{value}</p>
-      </CardContent>
-    </Card>
-  );
-}

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import QRCode from 'qrcode';
 import { getAuditRoutes, getListsConfig, getQrAssets, slugify } from '@/lib/data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MetricCard } from '@/components/metric-card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { CopyButton } from '@/components/copy-button';
@@ -73,10 +74,10 @@ export default async function QrPage() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-4">
-        <QrMetricCard label="Ready to scan" value={readyToScanCount} tone="text-emerald-600" />
-        <QrMetricCard label="Wave 1 priority" value={waveOneCount} tone={waveOneCount > 0 ? 'text-blue-600' : 'text-[var(--foreground)]'} />
-        <QrMetricCard label="Warm routes" value={warmRouteCount} tone={warmRouteCount > 0 ? 'text-amber-600' : 'text-[var(--foreground)]'} />
-        <QrMetricCard label="Print assets" value={assets.length} tone="text-[var(--foreground)]" />
+        <MetricCard label="Ready to scan" value={readyToScanCount} tone="text-emerald-600" />
+        <MetricCard label="Wave 1 priority" value={waveOneCount} tone={waveOneCount > 0 ? 'text-blue-600' : 'text-[var(--foreground)]'} />
+        <MetricCard label="Warm routes" value={warmRouteCount} tone={warmRouteCount > 0 ? 'text-amber-600' : 'text-[var(--foreground)]'} />
+        <MetricCard label="Print assets" value={assets.length} tone="text-[var(--foreground)]" />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
@@ -275,13 +276,3 @@ export default async function QrPage() {
   );
 }
 
-function QrMetricCard({ label, value, tone }: { label: string; value: number; tone: string }) {
-  return (
-    <Card>
-      <CardContent className="p-4 text-center">
-        <p className="text-[11px] uppercase tracking-wide text-[var(--muted-foreground)]">{label}</p>
-        <p className={`mt-2 text-2xl font-bold ${tone}`}>{value}</p>
-      </CardContent>
-    </Card>
-  );
-}

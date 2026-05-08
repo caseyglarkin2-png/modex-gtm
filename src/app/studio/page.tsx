@@ -2,6 +2,7 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MetricCard } from '@/components/metric-card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   buildContentStudioSummary,
@@ -159,10 +160,10 @@ export default async function StudioPage({
       </div>
 
       <div className="grid gap-4 md:grid-cols-4">
-        <ContentMetricCard label="Total assets" value={summary.totalAssets} />
-        <ContentMetricCard label="Generated" value={summary.generated} />
-        <ContentMetricCard label="Send-ready" value={summary.sendReadyGenerated} tone="text-emerald-600" />
-        <ContentMetricCard label="Failed jobs" value={summary.failedJobs} tone={summary.failedJobs > 0 ? 'text-red-600' : 'text-emerald-600'} />
+        <MetricCard label="Total assets" value={summary.totalAssets} />
+        <MetricCard label="Generated" value={summary.generated} />
+        <MetricCard label="Send-ready" value={summary.sendReadyGenerated} tone="text-emerald-600" />
+        <MetricCard label="Failed jobs" value={summary.failedJobs} tone={summary.failedJobs > 0 ? 'text-red-600' : 'text-emerald-600'} />
       </div>
 
       <Tabs defaultValue={defaultTab} className="space-y-4">
@@ -263,9 +264,9 @@ export default async function StudioPage({
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid gap-3 md:grid-cols-3">
-                <ContentReadinessCard label="Published, unsent" value={summary.sendReadyGenerated} tone="text-emerald-600" />
-                <ContentReadinessCard label="Needs review" value={summary.reviewRequiredGenerated} tone="text-amber-600" />
-                <ContentReadinessCard label="Already sent" value={generatedRows.filter((row) => row.external_send_count > 0).length} />
+                <MetricCard variant="plain" size="md"label="Published, unsent" value={summary.sendReadyGenerated} tone="text-emerald-600" />
+                <MetricCard variant="plain" size="md"label="Needs review" value={summary.reviewRequiredGenerated} tone="text-amber-600" />
+                <MetricCard variant="plain" size="md"label="Already sent" value={generatedRows.filter((row) => row.external_send_count > 0).length} />
               </div>
               <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border p-4 text-sm text-muted-foreground">
                 <p>Generated one-pagers keep their existing filters, recipient selection, publish, preview, and send controls.</p>
@@ -344,26 +345,6 @@ export default async function StudioPage({
           </Card>
         </TabsContent>
       </Tabs>
-    </div>
-  );
-}
-
-function ContentMetricCard({ label, value, tone = 'text-[var(--foreground)]' }: { label: string; value: number; tone?: string }) {
-  return (
-    <Card>
-      <CardContent className="p-4 text-center">
-        <p className="text-[11px] uppercase tracking-wide text-muted-foreground">{label}</p>
-        <p className={`mt-2 text-2xl font-bold ${tone}`}>{value}</p>
-      </CardContent>
-    </Card>
-  );
-}
-
-function ContentReadinessCard({ label, value, tone = 'text-[var(--foreground)]' }: { label: string; value: number; tone?: string }) {
-  return (
-    <div className="rounded-lg border p-4 text-center">
-      <p className="text-xs uppercase tracking-wide text-muted-foreground">{label}</p>
-      <p className={`mt-2 text-3xl font-bold ${tone}`}>{value}</p>
     </div>
   );
 }

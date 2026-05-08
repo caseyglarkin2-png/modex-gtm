@@ -4,6 +4,7 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MetricCard } from '@/components/metric-card';
 import { StatusBadge } from '@/components/status-badge';
 import { ArrowRight, Lightbulb } from 'lucide-react';
 import { IntelList, type IntelItem } from './intel-list';
@@ -47,10 +48,10 @@ export default async function IntelPage() {
       <IntelListHeader items={items} openCount={openItems.length} />
 
       <div className="grid gap-4 md:grid-cols-4">
-        <IntelMetricCard label="Open now" value={openItems.length} tone={openItems.length > 0 ? 'text-amber-600' : 'text-emerald-600'} />
-        <IntelMetricCard label="Accounts covered" value={accountsCoveredCount} tone="text-[var(--foreground)]" />
-        <IntelMetricCard label="Owners active" value={ownerCounts.length} tone="text-[var(--foreground)]" />
-        <IntelMetricCard label="Closed" value={items.length - openItems.length} tone="text-emerald-600" />
+        <MetricCard label="Open now" value={openItems.length} tone={openItems.length > 0 ? 'text-amber-600' : 'text-emerald-600'} />
+        <MetricCard label="Accounts covered" value={accountsCoveredCount} tone="text-[var(--foreground)]" />
+        <MetricCard label="Owners active" value={ownerCounts.length} tone="text-[var(--foreground)]" />
+        <MetricCard label="Closed" value={items.length - openItems.length} tone="text-emerald-600" />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
@@ -131,14 +132,4 @@ function IntelListHeader({ items, openCount }: { items: IntelItem[]; openCount: 
   );
 }
 
-function IntelMetricCard({ label, value, tone }: { label: string; value: number; tone: string }) {
-  return (
-    <Card>
-      <CardContent className="p-4 text-center">
-        <p className="text-[11px] uppercase tracking-wide text-[var(--muted-foreground)]">{label}</p>
-        <p className={`mt-2 text-2xl font-bold ${tone}`}>{value}</p>
-      </CardContent>
-    </Card>
-  );
-}
 

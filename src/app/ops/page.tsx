@@ -4,6 +4,7 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MetricCard } from '@/components/metric-card';
 import { cn } from '@/lib/utils';
 import { opsWorkspaceTabs, parseOpsTab, type OpsTabId } from '@/lib/ops-workspace';
 import { getLatestProofSummaryFromLedger } from '@/lib/proof-ledger';
@@ -739,34 +740,6 @@ export default async function OpsPage({
   );
 }
 
-function MetricCard({
-  label,
-  value,
-  detail,
-  icon: Icon,
-  tone = 'text-foreground',
-}: {
-  label: string;
-  value: string;
-  detail: string;
-  icon: typeof Activity;
-  tone?: string;
-}) {
-  return (
-    <Card>
-      <CardContent className="flex items-center justify-between p-4">
-        <div>
-          <p className="text-[11px] uppercase tracking-wide text-muted-foreground">{label}</p>
-          <p className={cn('mt-2 text-2xl font-bold', tone)}>{value}</p>
-          <p className="mt-1 text-xs text-muted-foreground">{detail}</p>
-        </div>
-        <div className="rounded-lg bg-muted p-2.5">
-          <Icon className="h-4 w-4 text-muted-foreground" />
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
 
 function MiniMetric({
   label,

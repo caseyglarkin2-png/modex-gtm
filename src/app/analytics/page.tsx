@@ -10,6 +10,7 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MetricCard } from '@/components/metric-card';
 import { cn } from '@/lib/utils';
 import { analyticsWorkspaceTabs, parseAnalyticsTab } from '@/lib/analytics-workspace';
 import { dbGetDashboardStats } from '@/lib/db';
@@ -50,36 +51,6 @@ type SearchParams = {
 
 function tabHref(tabId: string) {
   return tabId === 'overview' ? '/analytics' : `/analytics?tab=${tabId}`;
-}
-
-function MetricCard({
-  label,
-  value,
-  detail,
-  tone = 'text-foreground',
-  href,
-}: {
-  label: string;
-  value: string;
-  detail: string;
-  tone?: string;
-  href?: string;
-}) {
-  const content = (
-    <Card>
-      <CardContent className="p-4">
-        <p className="text-[11px] uppercase tracking-wide text-muted-foreground">{label}</p>
-        <p className={cn('mt-2 text-2xl font-bold', tone)}>{value}</p>
-        <p className="mt-1 text-xs text-muted-foreground">{detail}</p>
-      </CardContent>
-    </Card>
-  );
-  if (!href) return content;
-  return (
-    <Link href={href} className="block rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
-      {content}
-    </Link>
-  );
 }
 
 export default async function AnalyticsPage({

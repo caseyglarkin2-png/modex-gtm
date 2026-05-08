@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getAuditRoutes, slugify } from '@/lib/data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MetricCard } from '@/components/metric-card';
 import { Badge } from '@/components/ui/badge';
 import { StatusBadge } from '@/components/status-badge';
 import { Button } from '@/components/ui/button';
@@ -29,10 +30,10 @@ export default function AuditRoutesPage() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-4">
-        <RouteMetricCard label="Open routes" value={openRoutes.length} tone={openRoutes.length > 0 ? 'text-emerald-600' : 'text-[var(--foreground)]'} />
-        <RouteMetricCard label="Warm route paths" value={warmRouteCount} tone={warmRouteCount > 0 ? 'text-amber-600' : 'text-[var(--foreground)]'} />
-        <RouteMetricCard label="Top priority" value={topPriorityCount} tone={topPriorityCount > 0 ? 'text-blue-600' : 'text-[var(--foreground)]'} />
-        <RouteMetricCard label="Untouched" value={untouchedCount} tone={untouchedCount > 0 ? 'text-[var(--foreground)]' : 'text-emerald-600'} />
+        <MetricCard label="Open routes" value={openRoutes.length} tone={openRoutes.length > 0 ? 'text-emerald-600' : 'text-[var(--foreground)]'} />
+        <MetricCard label="Warm route paths" value={warmRouteCount} tone={warmRouteCount > 0 ? 'text-amber-600' : 'text-[var(--foreground)]'} />
+        <MetricCard label="Top priority" value={topPriorityCount} tone={topPriorityCount > 0 ? 'text-blue-600' : 'text-[var(--foreground)]'} />
+        <MetricCard label="Untouched" value={untouchedCount} tone={untouchedCount > 0 ? 'text-[var(--foreground)]' : 'text-emerald-600'} />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
@@ -166,13 +167,3 @@ export default function AuditRoutesPage() {
   );
 }
 
-function RouteMetricCard({ label, value, tone }: { label: string; value: number; tone: string }) {
-  return (
-    <Card>
-      <CardContent className="p-4 text-center">
-        <p className="text-[11px] uppercase tracking-wide text-[var(--muted-foreground)]">{label}</p>
-        <p className={`mt-2 text-2xl font-bold ${tone}`}>{value}</p>
-      </CardContent>
-    </Card>
-  );
-}
