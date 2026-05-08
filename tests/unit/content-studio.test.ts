@@ -12,10 +12,16 @@ describe('content studio contract', () => {
     expect(contentStudioTabs.map((tab) => tab.label)).toEqual([
       'Generate',
       'Library',
+      'Generated Content',
+      'Briefs',
+      'Search Strings',
+      'Intel',
+      'Audit Routes',
+      'QR Assets',
+      'Microsites',
       'Queue',
       'Send Readiness',
       'Playbook',
-      'Asset Types',
     ]);
   });
 
@@ -41,15 +47,15 @@ describe('content studio contract', () => {
   });
 
   it('maps legacy content routes into canonical Studio views', () => {
-    expect(getContentStudioTabForLegacyRoute('/generated-content')?.label).toBe('Library');
+    expect(getContentStudioTabForLegacyRoute('/generated-content')?.label).toBe('Generated Content');
     expect(getContentStudioTabForLegacyRoute('/queue/generations')?.label).toBe('Queue');
-    expect(getContentStudioTabForLegacyRoute('/briefs/general-mills')?.label).toBe('Library');
-    expect(getContentStudioTabForLegacyRoute('/search')?.label).toBe('Library');
-    expect(getContentStudioTabForLegacyRoute('/intel')?.label).toBe('Library');
-    expect(getContentStudioTabForLegacyRoute('/audit-routes')?.label).toBe('Library');
-    expect(getContentStudioTabForLegacyRoute('/qr')?.label).toBe('Library');
-    expect(getContentStudioTabForLegacyRoute('/for/general-mills')?.label).toBe('Library');
-    expect(getContentStudioTabForLegacyRoute('/proposal/general-mills')?.label).toBe('Library');
+    expect(getContentStudioTabForLegacyRoute('/briefs/general-mills')?.label).toBe('Briefs');
+    expect(getContentStudioTabForLegacyRoute('/search')?.label).toBe('Search Strings');
+    expect(getContentStudioTabForLegacyRoute('/intel')?.label).toBe('Intel');
+    expect(getContentStudioTabForLegacyRoute('/audit-routes')?.label).toBe('Audit Routes');
+    expect(getContentStudioTabForLegacyRoute('/qr')?.label).toBe('QR Assets');
+    expect(getContentStudioTabForLegacyRoute('/for/general-mills')?.label).toBe('Microsites');
+    expect(getContentStudioTabForLegacyRoute('/proposal/general-mills')?.label).toBe('Microsites');
 
     expect(getContentAssetTypeForLegacyRoute('/proposal/general-mills')?.label).toBe('Proposals');
   });

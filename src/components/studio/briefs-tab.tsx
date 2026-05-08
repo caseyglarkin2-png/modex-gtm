@@ -1,11 +1,16 @@
 import Link from 'next/link';
-import { dbGetMeetings } from '@/lib/db';
-import { getMeetingBriefs, slugify } from '@/lib/data';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { AlertTriangle, ArrowRight, CalendarCheck, FileText } from 'lucide-react';
+import type { Meeting } from '@prisma/client';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { CalendarCheck, FileText, ArrowRight, AlertTriangle } from 'lucide-react';
-import { Breadcrumb } from '@/components/breadcrumb';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MetricCard } from '@/components/metric-card';
+import { slugify, type MeetingBrief } from '@/lib/data';
+
+type BriefsTabProps = {
+  briefs: MeetingBrief[];
+  rawMeetings: Meeting[];
+};
 
 function startOfDay(value: Date) {
   const next = new Date(value);
@@ -19,12 +24,7 @@ function endOfDay(value: Date) {
   return next;
 }
 
-export const dynamic = 'force-dynamic';
-export const metadata = { title: 'Meeting Briefs' };
-
-export default async function BriefsPage() {
-  const briefs = getMeetingBriefs();
-  const rawMeetings = await dbGetMeetings();
+export function BriefsTab({ briefs, rawMeetings }: BriefsTabProps) {
   const briefsBySlug = new Map(briefs.map((brief) => [slugify(brief.account), brief]));
   const today = startOfDay(new Date());
   const endOfWeek = endOfDay(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7));
@@ -50,7 +50,10 @@ export default async function BriefsPage() {
         brief: briefsBySlug.get(slug),
         hasBrief: briefsBySlug.has(slug),
         isUpcomingThisWeek: Boolean(
-          hasValidDate && !isCompleted && dateRaw.getTime() >= today.getTime() && dateRaw.getTime() <= endOfWeek.getTime(),
+          hasValidDate
+            && !isCompleted
+            && dateRaw.getTime() >= today.getTime()
+            && dateRaw.getTime() <= endOfWeek.getTime(),
         ),
       };
     })
@@ -67,19 +70,18 @@ export default async function BriefsPage() {
 
   return (
     <div className="space-y-6">
-      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Meeting Briefs' }]} />
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">Meeting Briefs ({briefs.length})</h1>
+        <h2 className="text-lg font-semibold">Meeting Briefs ({briefs.length})</h2>
         <p className="text-sm text-[var(--muted-foreground)]">
           Pre-meeting preparation documents for each target account.
         </p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-4">
-        <PrepMetricCard label="Brief Library" value={briefs.length} tone="text-[var(--foreground)]" />
-        <PrepMetricCard label="Upcoming This Week" value={upcomingMeetings.length} tone={upcomingMeetings.length > 0 ? 'text-blue-600' : 'text-[var(--foreground)]'} />
-        <PrepMetricCard label="Coverage Gap" value={coverageGapCount} tone={coverageGapCount > 0 ? 'text-amber-600' : 'text-emerald-600'} />
-        <PrepMetricCard label="Verticals Covered" value={verticalCounts.length} tone="text-[var(--foreground)]" />
+        <MetricCard label="Brief Library" value={briefs.length} tone="text-[var(--foreground)]" />
+        <MetricCard label="Upcoming This Week" value={upcomingMeetings.length} tone={upcomingMeetings.length > 0 ? 'text-blue-600' : 'text-[var(--foreground)]'} />
+        <MetricCard label="Coverage Gap" value={coverageGapCount} tone={coverageGapCount > 0 ? 'text-amber-600' : 'text-emerald-600'} />
+        <MetricCard label="Verticals Covered" value={verticalCounts.length} tone="text-[var(--foreground)]" />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
@@ -87,7 +89,7 @@ export default async function BriefsPage() {
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between gap-3">
               <CardTitle className="text-base">Prep Priority Board</CardTitle>
-              <Link href="/meetings">
+              <Link href="/pipeline?tab=meetings">
                 <Button variant="ghost" size="sm" className="gap-1 text-xs">
                   Open meetings <ArrowRight className="h-3 w-3" />
                 </Button>
@@ -168,7 +170,7 @@ export default async function BriefsPage() {
 
       <div>
         <div className="mb-3 flex items-center justify-between gap-3">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Brief Library</h2>
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Brief Library</h3>
           <p className="text-xs text-[var(--muted-foreground)]">Open any account brief for talking points, pain hypotheses, and next-step prep.</p>
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -194,16 +196,5 @@ export default async function BriefsPage() {
         </div>
       </div>
     </div>
-  );
-}
-
-function PrepMetricCard({ label, value, tone }: { label: string; value: number; tone: string }) {
-  return (
-    <Card>
-      <CardContent className="p-4 text-center">
-        <p className="text-[11px] uppercase tracking-wide text-[var(--muted-foreground)]">{label}</p>
-        <p className={`mt-2 text-2xl font-bold ${tone}`}>{value}</p>
-      </CardContent>
-    </Card>
   );
 }

@@ -4,15 +4,15 @@ import { canonicalNavModules, commandRoutes, getPageLabelForPath, isActiveNavMod
 describe('canonical navigation', () => {
   it('declares ten unique top-level modules', () => {
     expect(canonicalNavModules.map((module) => module.label)).toEqual([
+      'Home',
       'Accounts',
       'Content Studio',
-      'Work Queue',
-      'Engagement',
-      'Analytics',
-      'Home',
+      'Pipeline',
       'Campaigns',
       'Contacts',
-      'Pipeline',
+      'Engagement',
+      'Work Queue',
+      'Analytics',
       'Ops',
     ]);
 

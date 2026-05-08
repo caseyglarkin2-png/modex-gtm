@@ -4,6 +4,7 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MetricCard } from '@/components/metric-card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   buildEngagementItems,
@@ -392,10 +393,10 @@ export default async function EngagementPage({
       </div>
 
       <div className="grid gap-3 md:grid-cols-4">
-        <MetricCard icon={Inbox} label="Replies" value={replyCount} />
-        <MetricCard icon={Activity} label="Notifications" value={notificationCount} />
-        <MetricCard icon={MousePointerClick} label="Microsite Sessions" value={micrositeCount} />
-        <MetricCard icon={AlertTriangle} label="Send Failures" value={failedRecipients} tone="text-amber-600" />
+        <MetricCard size="md" icon={Inbox} label="Replies" value={replyCount} />
+        <MetricCard size="md" icon={Activity} label="Notifications" value={notificationCount} />
+        <MetricCard size="md" icon={MousePointerClick} label="Microsite Sessions" value={micrositeCount} />
+        <MetricCard size="md" icon={AlertTriangle} label="Send Failures" value={failedRecipients} tone="text-amber-600" />
       </div>
 
       {followUpCreatedFor ? (
@@ -606,32 +607,6 @@ export default async function EngagementPage({
         </TabsContent>
       </Tabs>
     </div>
-  );
-}
-
-function MetricCard({
-  icon: Icon,
-  label,
-  value,
-  tone = 'text-foreground',
-}: {
-  icon: typeof Inbox;
-  label: string;
-  value: number;
-  tone?: string;
-}) {
-  return (
-    <Card>
-      <CardContent className="flex items-center justify-between p-5">
-        <div>
-          <p className="text-sm text-muted-foreground">{label}</p>
-          <p className={`mt-1 text-3xl font-bold ${tone}`}>{value}</p>
-        </div>
-        <div className="rounded-lg bg-muted p-2.5">
-          <Icon className="h-5 w-5 text-muted-foreground" />
-        </div>
-      </CardContent>
-    </Card>
   );
 }
 

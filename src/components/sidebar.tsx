@@ -11,23 +11,13 @@ import {
   Smartphone,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { canonicalNavModules, getPageLabelForPath, isActiveNavModule, type NavModule } from '@/lib/navigation';
+import { canonicalNavModules, getPageLabelForPath, isActiveNavModule } from '@/lib/navigation';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { NotificationBell } from '@/components/notification-bell';
 import { useSidebar } from '@/components/sidebar-context';
-
-const navSections: Array<NavModule['section']> = ['Operator Flow', 'Platform'];
-
-function sectionLabel(section: NavModule['section']) {
-  return section;
-}
-
-function sectionModules(section: NavModule['section']) {
-  return canonicalNavModules.filter((module) => module.section === section);
-}
 
 /* ---------- Drawer nav (mobile + expanded sidebar) ---------- */
 function NavContent({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) {
@@ -46,9 +36,6 @@ function NavContent({ pathname, onNavigate }: { pathname: string; onNavigate?: (
         </div>
       </div>
       <nav className="flex-1 overflow-y-auto px-3 py-4">
-        <p className="mb-3 px-3 text-[11px] font-medium uppercase tracking-wide text-[var(--muted-foreground)]">
-          Accounts to Performance Loop
-        </p>
         <div className="mb-3 px-2">
           <Link
             href="/capture"
@@ -59,35 +46,28 @@ function NavContent({ pathname, onNavigate }: { pathname: string; onNavigate?: (
             Quick Capture
           </Link>
         </div>
-        {navSections.map((section) => (
-          <div key={section} className="mb-4">
-            <p className="mb-1 px-3 text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">
-              {sectionLabel(section)}
-            </p>
-            <ul className="space-y-0.5">
-              {sectionModules(section).map((item) => {
-                const isActive = isActiveNavModule(pathname, item);
-                return (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      onClick={onNavigate}
-                      className={cn(
-                        'flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
-                        isActive
-                          ? 'bg-[var(--accent)] text-[var(--primary)] font-medium'
-                          : 'text-[var(--muted-foreground)] hover:bg-[var(--muted)] hover:text-[var(--foreground)]'
-                      )}
-                    >
-                      <item.icon className="h-4 w-4 flex-shrink-0" />
-                      {item.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        ))}
+        <ul className="space-y-0.5">
+          {canonicalNavModules.map((item) => {
+            const isActive = isActiveNavModule(pathname, item);
+            return (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  onClick={onNavigate}
+                  className={cn(
+                    'flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
+                    isActive
+                      ? 'bg-[var(--accent)] text-[var(--primary)] font-medium'
+                      : 'text-[var(--muted-foreground)] hover:bg-[var(--muted)] hover:text-[var(--foreground)]',
+                  )}
+                >
+                  <item.icon className="h-4 w-4 flex-shrink-0" />
+                  {item.label}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       </nav>
       <div className="border-t border-[var(--border)] px-4 py-3 text-xs text-[var(--muted-foreground)]">
         YardFlow by FreightRoll &middot; RevOps OS

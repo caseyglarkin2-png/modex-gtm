@@ -1,32 +1,32 @@
-import Link from 'next/link';
 import Image from 'next/image';
-import QRCode from 'qrcode';
-import { getAuditRoutes, getListsConfig, getQrAssets, slugify } from '@/lib/data';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Link from 'next/link';
+import { ArrowRight, ExternalLink, QrCode, ScanSearch } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CopyButton } from '@/components/copy-button';
-import { QrCode, ExternalLink, ArrowRight, ScanSearch } from 'lucide-react';
-import { Breadcrumb } from '@/components/breadcrumb';
+import { MetricCard } from '@/components/metric-card';
+import { slugify, type AuditRoute, type ListsConfig, type QrAsset } from '@/lib/data';
 
-async function buildQrDataUrl(value: string, width: number) {
-  return QRCode.toDataURL(value, {
-    errorCorrectionLevel: 'H',
-    margin: 2,
-    width,
-    color: {
-      dark: '#111827',
-      light: '#FFFFFF',
-    },
-  });
-}
+type QrTabProps = {
+  assets: QrAsset[];
+  routesByAccount: Map<string, AuditRoute>;
+  listsConfig: ListsConfig;
+  qrPreviews: Map<string, string>;
+  qrPrints: Map<string, string>;
+  fallbackQrPreview: string;
+  fallbackQrPrint: string;
+};
 
-export const metadata = { title: 'QR Assets' };
-
-export default async function QrPage() {
-  const assets = getQrAssets();
-  const listsConfig = getListsConfig();
-  const routesByAccount = new Map(getAuditRoutes().map((route) => [route.account, route]));
+export function QrTab({
+  assets,
+  routesByAccount,
+  listsConfig,
+  qrPreviews,
+  qrPrints,
+  fallbackQrPreview,
+  fallbackQrPrint,
+}: QrTabProps) {
   const readyToScanCount = assets.length;
   const waveOneCount = assets.filter((asset) => (routesByAccount.get(asset.account)?.rank ?? Number.MAX_SAFE_INTEGER) <= 11).length;
   const warmRouteCount = assets.filter((asset) => {
@@ -45,38 +45,20 @@ export default async function QrPage() {
   const topPrintFiles = sprintAssets.slice(0, 4);
   const fallbackQrUrl = listsConfig.qr_journey.master_url;
 
-  const fallbackQrPreview = await buildQrDataUrl(fallbackQrUrl, 220);
-  const fallbackQrPrint = await buildQrDataUrl(fallbackQrUrl, 1200);
-
-  const qrPreviews = new Map<string, string>();
-  const qrPrints = new Map<string, string>();
-
-  await Promise.all(
-    assets.map(async (qr) => {
-      const [preview, print] = await Promise.all([
-        buildQrDataUrl(qr.audit_url, 220),
-        buildQrDataUrl(qr.audit_url, 1200),
-      ]);
-      qrPreviews.set(qr.account, preview);
-      qrPrints.set(qr.account, print);
-    }),
-  );
-
   return (
     <div className="space-y-6">
-      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'QR Assets' }]} />
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">QR Assets ({assets.length})</h1>
+        <h2 className="text-lg font-semibold">QR Assets ({assets.length})</h2>
         <p className="text-sm text-[var(--muted-foreground)]">
           QR codes for trade shows, leave-behinds, and booth materials. Copy URLs with one click.
         </p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-4">
-        <QrMetricCard label="Ready to scan" value={readyToScanCount} tone="text-emerald-600" />
-        <QrMetricCard label="Wave 1 priority" value={waveOneCount} tone={waveOneCount > 0 ? 'text-blue-600' : 'text-[var(--foreground)]'} />
-        <QrMetricCard label="Warm routes" value={warmRouteCount} tone={warmRouteCount > 0 ? 'text-amber-600' : 'text-[var(--foreground)]'} />
-        <QrMetricCard label="Print assets" value={assets.length} tone="text-[var(--foreground)]" />
+        <MetricCard label="Ready to scan" value={readyToScanCount} tone="text-emerald-600" />
+        <MetricCard label="Wave 1 priority" value={waveOneCount} tone={waveOneCount > 0 ? 'text-blue-600' : 'text-[var(--foreground)]'} />
+        <MetricCard label="Warm routes" value={warmRouteCount} tone={warmRouteCount > 0 ? 'text-amber-600' : 'text-[var(--foreground)]'} />
+        <MetricCard label="Print assets" value={assets.length} tone="text-[var(--foreground)]" />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
@@ -84,7 +66,7 @@ export default async function QrPage() {
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between gap-3">
               <CardTitle className="text-base">QR Ready Board</CardTitle>
-              <Link href="/audit-routes">
+              <Link href="/studio?tab=audit-routes">
                 <Button variant="ghost" size="sm" className="gap-1 text-xs">
                   Open routes <ArrowRight className="h-3 w-3" />
                 </Button>
@@ -214,7 +196,7 @@ export default async function QrPage() {
 
       <div>
         <div className="mb-3 flex items-center justify-between gap-3">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">QR Asset Library</h2>
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">QR Asset Library</h3>
           <p className="text-xs text-[var(--muted-foreground)]">Every account-specific QR below is scannable directly from this page.</p>
         </div>
 
@@ -272,16 +254,5 @@ export default async function QrPage() {
         </div>
       </div>
     </div>
-  );
-}
-
-function QrMetricCard({ label, value, tone }: { label: string; value: number; tone: string }) {
-  return (
-    <Card>
-      <CardContent className="p-4 text-center">
-        <p className="text-[11px] uppercase tracking-wide text-[var(--muted-foreground)]">{label}</p>
-        <p className={`mt-2 text-2xl font-bold ${tone}`}>{value}</p>
-      </CardContent>
-    </Card>
   );
 }

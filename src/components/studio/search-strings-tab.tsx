@@ -2,16 +2,18 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import data from '@/lib/data/search-strings.json';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
+import { ArrowRight, Search, Target } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { CopyButton } from '@/components/copy-button';
-import { ArrowRight, Search, Target } from 'lucide-react';
-import { Breadcrumb } from '@/components/breadcrumb';
+import { MetricCard } from '@/components/metric-card';
+import type { SearchString } from '@/lib/data';
 
-type SearchEntry = (typeof data)[number];
+type SearchStringsTabProps = {
+  strings: SearchString[];
+};
 
 function slugify(name: string) {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
@@ -24,8 +26,7 @@ function priorityRank(priority: string) {
   return 4;
 }
 
-export default function SearchPage() {
-  const strings: SearchEntry[] = data;
+export function SearchStringsTab({ strings }: SearchStringsTabProps) {
   const [filter, setFilter] = useState('');
 
   const filtered = filter
@@ -55,19 +56,18 @@ export default function SearchPage() {
 
   return (
     <div className="space-y-6">
-      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Search Strings' }]} />
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">Search Strings ({strings.length})</h1>
+        <h2 className="text-lg font-semibold">Search Strings ({strings.length})</h2>
         <p className="text-sm text-[var(--muted-foreground)]">
           Pre-built Sales Navigator, LinkedIn, and Google X-Ray queries. Click copy to grab instantly.
         </p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-4">
-        <SearchMetricCard label="Ready queries" value={readyCount} tone={readyCount > 0 ? 'text-emerald-600' : 'text-[var(--foreground)]'} />
-        <SearchMetricCard label="P1 targets" value={p1Count} tone={p1Count > 0 ? 'text-blue-600' : 'text-[var(--foreground)]'} />
-        <SearchMetricCard label="Accounts covered" value={accountCount} tone="text-[var(--foreground)]" />
-        <SearchMetricCard label="Owners active" value={ownerCount} tone="text-[var(--foreground)]" />
+        <MetricCard label="Ready queries" value={readyCount} tone={readyCount > 0 ? 'text-emerald-600' : 'text-[var(--foreground)]'} />
+        <MetricCard label="P1 targets" value={p1Count} tone={p1Count > 0 ? 'text-blue-600' : 'text-[var(--foreground)]'} />
+        <MetricCard label="Accounts covered" value={accountCount} tone="text-[var(--foreground)]" />
+        <MetricCard label="Owners active" value={ownerCount} tone="text-[var(--foreground)]" />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
@@ -75,9 +75,9 @@ export default function SearchPage() {
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between gap-3">
               <CardTitle className="text-base">Search Sprint Board</CardTitle>
-              <Link href="/personas">
+              <Link href="/contacts">
                 <Button variant="ghost" size="sm" className="gap-1 text-xs">
-                  Open personas <ArrowRight className="h-3 w-3" />
+                  Open contacts <ArrowRight className="h-3 w-3" />
                 </Button>
               </Link>
             </div>
@@ -144,7 +144,7 @@ export default function SearchPage() {
 
       <div>
         <div className="mb-3 flex items-center justify-between gap-3">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Query Library</h2>
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Query Library</h3>
           <p className="text-xs text-[var(--muted-foreground)]">Use the sprint board above for the highest-value searches, then filter the full library below.</p>
         </div>
 
@@ -190,16 +190,5 @@ export default function SearchPage() {
 
       <p className="text-xs text-[var(--muted-foreground)]">{filtered.length} of {strings.length} results</p>
     </div>
-  );
-}
-
-function SearchMetricCard({ label, value, tone }: { label: string; value: number; tone: string }) {
-  return (
-    <Card>
-      <CardContent className="p-4 text-center">
-        <p className="text-[11px] uppercase tracking-wide text-[var(--muted-foreground)]">{label}</p>
-        <p className={`mt-2 text-2xl font-bold ${tone}`}>{value}</p>
-      </CardContent>
-    </Card>
   );
 }

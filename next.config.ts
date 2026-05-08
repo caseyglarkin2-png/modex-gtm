@@ -3,6 +3,33 @@ import { withSentryConfig } from "@sentry/nextjs";
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ['127.0.0.1', 'localhost'],
+  async redirects() {
+    return [
+      // IA consolidation Sprint B: satellite pages absorbed into Content Studio tabs.
+      // /for/ index intentionally NOT redirected here — middleware allowlists /for on
+      // yardflow.ai, where /for/page.tsx serves the public landing. The internal
+      // domain redirect for /for is handled inside /for/page.tsx.
+      { source: '/briefs', destination: '/studio?tab=briefs', permanent: true },
+      { source: '/search', destination: '/studio?tab=search-strings', permanent: true },
+      { source: '/intel', destination: '/studio?tab=intel', permanent: true },
+      { source: '/audit-routes', destination: '/studio?tab=audit-routes', permanent: true },
+      { source: '/qr', destination: '/studio?tab=qr-assets', permanent: true },
+      { source: '/generated-content', destination: '/studio?tab=generated-content', permanent: true },
+
+      // IA consolidation Sprint D: legacy redirect stubs folded into the routing layer.
+      { source: '/activities', destination: '/pipeline?tab=activities', permanent: true },
+      { source: '/meetings', destination: '/pipeline?tab=meetings', permanent: true },
+      { source: '/personas', destination: '/contacts', permanent: true },
+      { source: '/waves', destination: '/campaigns', permanent: true },
+      { source: '/waves/campaign', destination: '/campaigns', permanent: true },
+
+      // IA consolidation Sprint D: standalone sub-routes that duplicate canonical tabs.
+      { source: '/analytics/emails', destination: '/analytics?tab=email-engagement', permanent: true },
+      { source: '/analytics/quarterly', destination: '/analytics?tab=quarterly', permanent: true },
+      { source: '/admin/crons', destination: '/ops?tab=cron-health', permanent: true },
+      { source: '/admin/generation-metrics', destination: '/ops?tab=generation-metrics', permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

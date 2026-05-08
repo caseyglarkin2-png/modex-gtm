@@ -7,6 +7,7 @@ import { BandBadge } from '@/components/band-badge';
 import { StatusBadge } from '@/components/status-badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MetricCard } from '@/components/metric-card';
 import { ArrowRight, Target, X } from 'lucide-react';
 import { AccountsTable, type AccountRow } from './accounts-table';
 import { getAccountsWithoutFreshEvidence } from '@/lib/source-backed/evidence';
@@ -129,10 +130,10 @@ export default async function AccountsPage({
       ) : null}
 
       <div className="grid gap-4 md:grid-cols-4">
-        <AccountMetricCard label="Priority A/B" value={readyBandsCount} tone={readyBandsCount > 0 ? 'text-blue-600' : 'text-[var(--foreground)]'} />
-        <AccountMetricCard label="Needs outreach" value={needsOutreachCount} tone={needsOutreachCount > 0 ? 'text-amber-600' : 'text-emerald-600'} />
-        <AccountMetricCard label="Research gap" value={researchGapCount} tone={researchGapCount > 0 ? 'text-[var(--foreground)]' : 'text-emerald-600'} />
-        <AccountMetricCard label="Meetings booked" value={meetingBookedCount} tone={meetingBookedCount > 0 ? 'text-emerald-600' : 'text-[var(--foreground)]'} />
+        <MetricCard label="Priority A/B" value={readyBandsCount} tone={readyBandsCount > 0 ? 'text-blue-600' : 'text-[var(--foreground)]'} />
+        <MetricCard label="Needs outreach" value={needsOutreachCount} tone={needsOutreachCount > 0 ? 'text-amber-600' : 'text-emerald-600'} />
+        <MetricCard label="Research gap" value={researchGapCount} tone={researchGapCount > 0 ? 'text-[var(--foreground)]' : 'text-emerald-600'} />
+        <MetricCard label="Meetings booked" value={meetingBookedCount} tone={meetingBookedCount > 0 ? 'text-emerald-600' : 'text-[var(--foreground)]'} />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
@@ -216,13 +217,3 @@ export default async function AccountsPage({
   );
 }
 
-function AccountMetricCard({ label, value, tone }: { label: string; value: number; tone: string }) {
-  return (
-    <Card>
-      <CardContent className="p-4 text-center">
-        <p className="text-[11px] uppercase tracking-wide text-[var(--muted-foreground)]">{label}</p>
-        <p className={`mt-2 text-2xl font-bold ${tone}`}>{value}</p>
-      </CardContent>
-    </Card>
-  );
-}

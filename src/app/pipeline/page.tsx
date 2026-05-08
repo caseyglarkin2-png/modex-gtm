@@ -1,10 +1,10 @@
-import type { ComponentType } from 'react';
 import { Activity, ArrowRight, CalendarCheck, Filter, Target, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MetricCard } from '@/components/metric-card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { prisma } from '@/lib/prisma';
 import { derivePipelineStage, PIPELINE_STAGES, PIPELINE_STAGE_LABELS, type PipelineStage } from '@/lib/pipeline';
@@ -282,10 +282,10 @@ export default async function PipelinePage({
       </Card>
 
       <div className="grid gap-4 md:grid-cols-4">
-        <MetricCard label="Accounts in Play" value={total} icon={Target} />
-        <MetricCard label="Active Conversations" value={stageCounts.engaged + stageCounts.meeting + stageCounts.proposal} icon={TrendingUp} />
-        <MetricCard label="Meetings" value={filteredMeetings.length} icon={CalendarCheck} />
-        <MetricCard label="Activities" value={filteredActivities.length} icon={Activity} />
+        <MetricCard size="md" label="Accounts in Play" value={total} icon={Target} />
+        <MetricCard size="md" label="Active Conversations" value={stageCounts.engaged + stageCounts.meeting + stageCounts.proposal} icon={TrendingUp} />
+        <MetricCard size="md" label="Meetings" value={filteredMeetings.length} icon={CalendarCheck} />
+        <MetricCard size="md" label="Activities" value={filteredActivities.length} icon={Activity} />
       </div>
 
       <Tabs defaultValue={selectedTab} className="space-y-4">
@@ -408,28 +408,3 @@ export default async function PipelinePage({
   );
 }
 
-function MetricCard({
-  label,
-  value,
-  icon: Icon,
-}: {
-  label: string;
-  value: number;
-  icon: ComponentType<{ className?: string }>;
-}) {
-  return (
-    <Card>
-      <CardContent className="p-5">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-sm text-muted-foreground">{label}</p>
-            <p className="mt-1 text-3xl font-bold">{value}</p>
-          </div>
-          <div className="rounded-lg bg-[var(--accent)] p-2.5">
-            <Icon className="h-5 w-5 text-[var(--muted-foreground)]" />
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-}

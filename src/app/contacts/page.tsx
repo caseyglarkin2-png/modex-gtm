@@ -4,6 +4,7 @@ import { contactSavedViews, resolveContactReadiness } from '@/lib/contacts-works
 import { formatCanonicalConflictLabel, formatCanonicalStatusLabel } from '@/lib/revops/canonical-records';
 import { ensureCanonicalRecords } from '@/lib/revops/canonical-sync';
 import { Breadcrumb } from '@/components/breadcrumb';
+import { MetricCard } from '@/components/metric-card';
 import { ContactsTable } from './contacts-table';
 import { HubSpotSearch } from './hubspot-search';
 import { ContactsIntakePanel } from './contacts-intake-panel';
@@ -146,10 +147,10 @@ export default async function ContactsPage() {
         </p>
       </div>
       <div className="grid gap-4 md:grid-cols-4">
-        <ContactMetric label="Send Ready" value={contacts.filter((contact) => contact.readinessKey === 'send-ready').length} />
-        <ContactMetric label="Needs Enrichment" value={contacts.filter((contact) => contact.readinessKey === 'needs-enrichment').length} />
-        <ContactMetric label="Blocked / Hold" value={contacts.filter((contact) => contact.readinessKey === 'blocked-hold').length} />
-        <ContactMetric label="Canonical Conflicts" value={contacts.filter((contact) => contact.canonicalStatus !== 'Resolved').length} />
+        <MetricCard variant="plain" label="Send Ready" value={contacts.filter((contact) => contact.readinessKey === 'send-ready').length} />
+        <MetricCard variant="plain" label="Needs Enrichment" value={contacts.filter((contact) => contact.readinessKey === 'needs-enrichment').length} />
+        <MetricCard variant="plain" label="Blocked / Hold" value={contacts.filter((contact) => contact.readinessKey === 'blocked-hold').length} />
+        <MetricCard variant="plain" label="Canonical Conflicts" value={contacts.filter((contact) => contact.canonicalStatus !== 'Resolved').length} />
       </div>
       <p className="text-xs text-[var(--muted-foreground)]">
         Coverage: owner {ownerCoverage}% · vertical {verticalCoverage}% · enriched {enrichmentCoverage}%
@@ -168,11 +169,3 @@ export default async function ContactsPage() {
   );
 }
 
-function ContactMetric({ label, value }: { label: string; value: number }) {
-  return (
-    <div className="rounded-lg border border-[var(--border)] p-4 text-center">
-      <p className="text-[11px] uppercase tracking-wide text-[var(--muted-foreground)]">{label}</p>
-      <p className="mt-2 text-2xl font-bold">{value}</p>
-    </div>
-  );
-}

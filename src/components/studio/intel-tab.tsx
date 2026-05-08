@@ -1,34 +1,17 @@
 import Link from 'next/link';
-import { dbGetActionableIntel } from '@/lib/db';
-import { Breadcrumb } from '@/components/breadcrumb';
+import { ArrowRight, Lightbulb } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MetricCard } from '@/components/metric-card';
 import { StatusBadge } from '@/components/status-badge';
-import { ArrowRight, Lightbulb } from 'lucide-react';
 import { IntelList, type IntelItem } from './intel-list';
 
-export const dynamic = 'force-dynamic';
+type IntelTabProps = {
+  items: IntelItem[];
+};
 
-function slugify(name: string): string {
-  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-}
-
-export default async function IntelPage() {
-  const raw = await dbGetActionableIntel();
-
-  const items: IntelItem[] = raw.map((r) => ({
-    id: r.id,
-    account: r.account,
-    slug: slugify(r.account),
-    intel_type: r.intel_type,
-    why_it_matters: r.why_it_matters ?? '',
-    how_to_find_it: r.how_to_find ?? '',
-    owner: r.owner ?? '',
-    status: r.status,
-    field_to_update: r.field_to_update ?? '',
-  }));
-
+export function IntelTab({ items }: IntelTabProps) {
   const openItems = items.filter((item) => item.status !== 'Closed');
   const accountsCoveredCount = new Set(items.map((item) => item.account)).size;
   const ownerCounts = Array.from(
@@ -43,14 +26,18 @@ export default async function IntelPage() {
 
   return (
     <div className="space-y-6">
-      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Actionable Intel' }]} />
-      <IntelListHeader items={items} openCount={openItems.length} />
+      <div>
+        <h2 className="text-lg font-semibold">Actionable Intel ({items.length})</h2>
+        <p className="text-sm text-[var(--muted-foreground)]">
+          Research tasks and intelligence items. {openItems.length} open item{openItems.length !== 1 ? 's' : ''} require action.
+        </p>
+      </div>
 
       <div className="grid gap-4 md:grid-cols-4">
-        <IntelMetricCard label="Open now" value={openItems.length} tone={openItems.length > 0 ? 'text-amber-600' : 'text-emerald-600'} />
-        <IntelMetricCard label="Accounts covered" value={accountsCoveredCount} tone="text-[var(--foreground)]" />
-        <IntelMetricCard label="Owners active" value={ownerCounts.length} tone="text-[var(--foreground)]" />
-        <IntelMetricCard label="Closed" value={items.length - openItems.length} tone="text-emerald-600" />
+        <MetricCard label="Open now" value={openItems.length} tone={openItems.length > 0 ? 'text-amber-600' : 'text-emerald-600'} />
+        <MetricCard label="Accounts covered" value={accountsCoveredCount} tone="text-[var(--foreground)]" />
+        <MetricCard label="Owners active" value={ownerCounts.length} tone="text-[var(--foreground)]" />
+        <MetricCard label="Closed" value={items.length - openItems.length} tone="text-emerald-600" />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
@@ -119,26 +106,3 @@ export default async function IntelPage() {
     </div>
   );
 }
-
-function IntelListHeader({ items, openCount }: { items: IntelItem[]; openCount: number }) {
-  return (
-    <div>
-      <h1 className="text-2xl font-bold tracking-tight">Actionable Intel ({items.length})</h1>
-      <p className="text-sm text-[var(--muted-foreground)]">
-        Research tasks and intelligence items. {openCount} open item{openCount !== 1 ? 's' : ''} require action.
-      </p>
-    </div>
-  );
-}
-
-function IntelMetricCard({ label, value, tone }: { label: string; value: number; tone: string }) {
-  return (
-    <Card>
-      <CardContent className="p-4 text-center">
-        <p className="text-[11px] uppercase tracking-wide text-[var(--muted-foreground)]">{label}</p>
-        <p className={`mt-2 text-2xl font-bold ${tone}`}>{value}</p>
-      </CardContent>
-    </Card>
-  );
-}
-

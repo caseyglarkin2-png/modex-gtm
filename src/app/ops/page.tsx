@@ -4,6 +4,7 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MetricCard } from '@/components/metric-card';
 import { cn } from '@/lib/utils';
 import { opsWorkspaceTabs, parseOpsTab, type OpsTabId } from '@/lib/ops-workspace';
 import { getLatestProofSummaryFromLedger } from '@/lib/proof-ledger';
@@ -311,14 +312,6 @@ export default async function OpsPage({
             System reliability, evidence, provider operations, and admin-control workspace.
           </p>
         </div>
-        <div className="flex flex-wrap gap-2">
-          <Link href="/admin/crons">
-            <Button variant="outline" size="sm">Legacy /admin/crons</Button>
-          </Link>
-          <Link href="/admin/generation-metrics">
-            <Button variant="outline" size="sm">Legacy /admin/generation-metrics</Button>
-          </Link>
-        </div>
       </div>
 
       <Card>
@@ -427,9 +420,6 @@ export default async function OpsPage({
               <MiniMetric label="Attention Needed" value={cronErrors} tone={cronErrors > 0 ? 'text-amber-600' : 'text-foreground'} />
               <MiniMetric label="Total Tracked" value={cronRows.length} />
             </div>
-            <Link href="/admin/crons">
-              <Button size="sm" variant="outline">Open Detailed Cron Health</Button>
-            </Link>
           </CardContent>
         </Card>
       ) : null}
@@ -504,9 +494,6 @@ export default async function OpsPage({
                 </div>
               )}
             </div>
-            <Link href="/admin/generation-metrics">
-              <Button size="sm" variant="outline">Open Detailed Generation Metrics</Button>
-            </Link>
           </CardContent>
         </Card>
       ) : null}
@@ -739,34 +726,6 @@ export default async function OpsPage({
   );
 }
 
-function MetricCard({
-  label,
-  value,
-  detail,
-  icon: Icon,
-  tone = 'text-foreground',
-}: {
-  label: string;
-  value: string;
-  detail: string;
-  icon: typeof Activity;
-  tone?: string;
-}) {
-  return (
-    <Card>
-      <CardContent className="flex items-center justify-between p-4">
-        <div>
-          <p className="text-[11px] uppercase tracking-wide text-muted-foreground">{label}</p>
-          <p className={cn('mt-2 text-2xl font-bold', tone)}>{value}</p>
-          <p className="mt-1 text-xs text-muted-foreground">{detail}</p>
-        </div>
-        <div className="rounded-lg bg-muted p-2.5">
-          <Icon className="h-4 w-4 text-muted-foreground" />
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
 
 function MiniMetric({
   label,

@@ -1,17 +1,18 @@
 import Link from 'next/link';
-import { getAuditRoutes, slugify } from '@/lib/data';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { StatusBadge } from '@/components/status-badge';
-import { Button } from '@/components/ui/button';
-import { CopyButton } from '@/components/copy-button';
 import { ArrowRight, ExternalLink, Route } from 'lucide-react';
-import { Breadcrumb } from '@/components/breadcrumb';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { CopyButton } from '@/components/copy-button';
+import { MetricCard } from '@/components/metric-card';
+import { StatusBadge } from '@/components/status-badge';
+import { slugify, type AuditRoute } from '@/lib/data';
 
-export const metadata = { title: 'Audit Routes' };
+type AuditRoutesTabProps = {
+  routes: AuditRoute[];
+};
 
-export default function AuditRoutesPage() {
-  const routes = getAuditRoutes();
+export function AuditRoutesTab({ routes }: AuditRoutesTabProps) {
   const openRoutes = routes.filter((route) => route.status !== 'Closed');
   const warmRouteCount = routes.filter((route) => route.warm_route && !/no warm intro/i.test(route.warm_route)).length;
   const topPriorityCount = routes.filter((route) => route.rank <= 11).length;
@@ -20,19 +21,18 @@ export default function AuditRoutesPage() {
 
   return (
     <div className="space-y-6">
-      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Audit Routes' }]} />
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">Audit Routes ({routes.length})</h1>
+        <h2 className="text-lg font-semibold">Audit Routes ({routes.length})</h2>
         <p className="text-sm text-[var(--muted-foreground)]">
           UTM-tracked landing page URLs for yardflow.ai/audit. Copy URLs and messages with one click.
         </p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-4">
-        <RouteMetricCard label="Open routes" value={openRoutes.length} tone={openRoutes.length > 0 ? 'text-emerald-600' : 'text-[var(--foreground)]'} />
-        <RouteMetricCard label="Warm route paths" value={warmRouteCount} tone={warmRouteCount > 0 ? 'text-amber-600' : 'text-[var(--foreground)]'} />
-        <RouteMetricCard label="Top priority" value={topPriorityCount} tone={topPriorityCount > 0 ? 'text-blue-600' : 'text-[var(--foreground)]'} />
-        <RouteMetricCard label="Untouched" value={untouchedCount} tone={untouchedCount > 0 ? 'text-[var(--foreground)]' : 'text-emerald-600'} />
+        <MetricCard label="Open routes" value={openRoutes.length} tone={openRoutes.length > 0 ? 'text-emerald-600' : 'text-[var(--foreground)]'} />
+        <MetricCard label="Warm route paths" value={warmRouteCount} tone={warmRouteCount > 0 ? 'text-amber-600' : 'text-[var(--foreground)]'} />
+        <MetricCard label="Top priority" value={topPriorityCount} tone={topPriorityCount > 0 ? 'text-blue-600' : 'text-[var(--foreground)]'} />
+        <MetricCard label="Untouched" value={untouchedCount} tone={untouchedCount > 0 ? 'text-[var(--foreground)]' : 'text-emerald-600'} />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
@@ -40,7 +40,7 @@ export default function AuditRoutesPage() {
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between gap-3">
               <CardTitle className="text-base">Route Sprint Board</CardTitle>
-              <Link href="/qr">
+              <Link href="/studio?tab=qr-assets">
                 <Button variant="ghost" size="sm" className="gap-1 text-xs">
                   Open QR assets <ArrowRight className="h-3 w-3" />
                 </Button>
@@ -113,7 +113,7 @@ export default function AuditRoutesPage() {
 
       <div>
         <div className="mb-3 flex items-center justify-between gap-3">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Route Library</h2>
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Route Library</h3>
           <p className="text-xs text-[var(--muted-foreground)]">Copy the audit URL and message together when working post-MODEX follow-up threads.</p>
         </div>
 
@@ -163,16 +163,5 @@ export default function AuditRoutesPage() {
         </div>
       </div>
     </div>
-  );
-}
-
-function RouteMetricCard({ label, value, tone }: { label: string; value: number; tone: string }) {
-  return (
-    <Card>
-      <CardContent className="p-4 text-center">
-        <p className="text-[11px] uppercase tracking-wide text-[var(--muted-foreground)]">{label}</p>
-        <p className={`mt-2 text-2xl font-bold ${tone}`}>{value}</p>
-      </CardContent>
-    </Card>
   );
 }

@@ -1,4 +1,16 @@
-export type ContentStudioTabId = 'generate' | 'library' | 'queue' | 'send-readiness' | 'playbook' | 'asset-types';
+export type ContentStudioTabId =
+  | 'generate'
+  | 'library'
+  | 'queue'
+  | 'send-readiness'
+  | 'playbook'
+  | 'briefs'
+  | 'search-strings'
+  | 'intel'
+  | 'audit-routes'
+  | 'qr-assets'
+  | 'microsites'
+  | 'generated-content';
 
 export type ContentStudioTab = {
   id: ContentStudioTabId;
@@ -49,10 +61,16 @@ export type ContentStudioSummary = ContentAssetSourceCounts & {
 export const contentStudioTabs: ContentStudioTab[] = [
   { id: 'generate', label: 'Generate', purpose: 'Create new AI-assisted assets and campaign-specific drafts.' },
   { id: 'library', label: 'Library', purpose: 'Find account, campaign, and field assets across legacy asset routes.' },
+  { id: 'generated-content', label: 'Generated Content', purpose: 'Review generated one-pagers, filter, publish drafts, and send.' },
+  { id: 'briefs', label: 'Briefs', purpose: 'Pre-meeting preparation documents and prep priority board.' },
+  { id: 'search-strings', label: 'Search Strings', purpose: 'Sales Navigator, LinkedIn, and Google X-Ray queries.' },
+  { id: 'intel', label: 'Intel', purpose: 'Open research items, owner status, and field-to-update tracking.' },
+  { id: 'audit-routes', label: 'Audit Routes', purpose: 'UTM-tracked landing-page URLs with copyable asks.' },
+  { id: 'qr-assets', label: 'QR Assets', purpose: 'Booth-ready QR codes and account-specific scan destinations.' },
+  { id: 'microsites', label: 'Microsites', purpose: 'Internal gallery of public-facing account microsites.' },
   { id: 'queue', label: 'Queue', purpose: 'Track generation jobs, failures, and retry paths.' },
   { id: 'send-readiness', label: 'Send Readiness', purpose: 'Review publish/send prerequisites before outbound execution.' },
   { id: 'playbook', label: 'Playbook', purpose: 'Rank, manage, and reuse winning message blocks across segments.' },
-  { id: 'asset-types', label: 'Asset Types', purpose: 'Show the owner, status, and route behavior for every content asset type.' },
 ];
 
 export const contentAssetTypes: ContentAssetType[] = [
@@ -60,9 +78,9 @@ export const contentAssetTypes: ContentAssetType[] = [
     id: 'generated-content',
     label: 'Generated Content',
     owner: 'Content Studio',
-    canonicalTab: 'library',
+    canonicalTab: 'generated-content',
     legacyRoutes: ['/generated-content'],
-    routeBehavior: 'Legacy route remains a filtered library and send-readiness workspace.',
+    routeBehavior: 'Legacy /generated-content redirects to Studio Generated Content tab.',
     statusBehavior: 'Uses published, draft, recipient, and send-state status.',
   },
   {
@@ -78,63 +96,63 @@ export const contentAssetTypes: ContentAssetType[] = [
     id: 'brief',
     label: 'Meeting Briefs',
     owner: 'Content Studio',
-    canonicalTab: 'library',
+    canonicalTab: 'briefs',
     legacyRoutes: ['/briefs', '/briefs/[account]'],
-    routeBehavior: 'Brief library remains reachable while account-specific briefs also surface under Account Assets.',
+    routeBehavior: 'Legacy /briefs index redirects to Studio Briefs tab; /briefs/[account] detail route is preserved.',
     statusBehavior: 'Ready when seeded; coverage gaps are shown from meeting context.',
   },
   {
     id: 'search-string',
     label: 'Search Strings',
     owner: 'Content Studio',
-    canonicalTab: 'library',
+    canonicalTab: 'search-strings',
     legacyRoutes: ['/search'],
-    routeBehavior: 'Search-string library remains copyable from the legacy route and discoverable in Studio Library.',
+    routeBehavior: 'Legacy /search redirects to Studio Search Strings tab.',
     statusBehavior: 'Uses ready, priority, owner, and wave status from the search fixture.',
   },
   {
     id: 'intel',
     label: 'Actionable Intel',
     owner: 'Content Studio',
-    canonicalTab: 'library',
+    canonicalTab: 'intel',
     legacyRoutes: ['/intel'],
-    routeBehavior: 'Intel remains a legacy research route and is discoverable as a Studio asset type.',
+    routeBehavior: 'Legacy /intel redirects to Studio Intel tab.',
     statusBehavior: 'Uses open/closed owner status with field-to-update context.',
   },
   {
     id: 'audit-route',
     label: 'Audit Routes',
     owner: 'Content Studio',
-    canonicalTab: 'library',
+    canonicalTab: 'audit-routes',
     legacyRoutes: ['/audit-routes'],
-    routeBehavior: 'Audit URLs remain openable/copyable from the route library and Studio Library.',
+    routeBehavior: 'Legacy /audit-routes redirects to Studio Audit Routes tab.',
     statusBehavior: 'Uses open/closed, owner, warm-route, and last-touch status.',
   },
   {
     id: 'qr',
     label: 'QR Assets',
     owner: 'Content Studio',
-    canonicalTab: 'library',
+    canonicalTab: 'qr-assets',
     legacyRoutes: ['/qr'],
-    routeBehavior: 'QR assets remain scannable/downloadable from the legacy route and linked from Studio Library.',
+    routeBehavior: 'Legacy /qr redirects to Studio QR Assets tab.',
     statusBehavior: 'Ready when QR fixture exists for an audit URL.',
   },
   {
     id: 'microsite',
     label: 'Microsites',
     owner: 'Content Studio',
-    canonicalTab: 'library',
+    canonicalTab: 'microsites',
     legacyRoutes: ['/for', '/for/[account]', '/for/[account]/[person]'],
-    routeBehavior: 'Public microsites remain public routes; internal gallery is linked from Studio Library.',
+    routeBehavior: 'Public /for/[account] microsites remain on yardflow.ai; internal /for index redirects to Studio Microsites tab.',
     statusBehavior: 'Uses account microsite registry, showcase flag, and route variants.',
   },
   {
     id: 'proposal',
     label: 'Proposals',
     owner: 'Content Studio',
-    canonicalTab: 'library',
+    canonicalTab: 'microsites',
     legacyRoutes: ['/proposal/[slug]'],
-    routeBehavior: 'Proposal routes remain public account-specific assets and are indexed as Studio assets.',
+    routeBehavior: 'Proposal routes remain public account-specific assets and are indexed under the Microsites tab.',
     statusBehavior: 'Ready when a microsite proposal brief can be resolved for an account slug.',
   },
 ];
