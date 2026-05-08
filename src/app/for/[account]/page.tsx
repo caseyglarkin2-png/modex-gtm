@@ -5,8 +5,10 @@ import type { Metadata } from 'next';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
 import { isAccountHandTuned, resolveMemoSections } from '@/lib/microsites/memo-compat';
 import { buildPublicShareMetadata } from '@/lib/microsites/share';
+import { buildROIDeepLink } from '@/lib/microsites/roi-deep-link';
 import { MemoShell } from '@/components/microsites/memo-shell';
 import { MemoSectionList } from '@/components/microsites/memo-section';
+import { MemoSoftAction } from '@/components/microsites/memo-soft-action';
 import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
 
 const PREPARED_DATE = new Date().toISOString().slice(0, 10);
@@ -60,6 +62,10 @@ export default async function AccountMicrositePage({
         needsHandTuning={!handTuned}
       >
         <MemoSectionList sections={memoSections} accentColor={data.theme?.accentColor} />
+        <MemoSoftAction
+          accountName={data.accountName}
+          href={buildROIDeepLink(data)}
+        />
       </MemoShell>
     </>
   );
