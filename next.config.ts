@@ -22,6 +22,12 @@ const nextConfig: NextConfig = {
       { source: '/personas', destination: '/contacts', permanent: true },
       { source: '/waves', destination: '/campaigns', permanent: true },
       { source: '/waves/campaign', destination: '/campaigns', permanent: true },
+
+      // IA consolidation Sprint D: standalone sub-routes that duplicate canonical tabs.
+      { source: '/analytics/emails', destination: '/analytics?tab=email-engagement', permanent: true },
+      { source: '/analytics/quarterly', destination: '/analytics?tab=quarterly', permanent: true },
+      { source: '/admin/crons', destination: '/ops?tab=cron-health', permanent: true },
+      { source: '/admin/generation-metrics', destination: '/ops?tab=generation-metrics', permanent: true },
     ];
   },
   async headers() {
