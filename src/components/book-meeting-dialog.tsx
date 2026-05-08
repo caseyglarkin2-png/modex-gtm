@@ -17,10 +17,26 @@ interface Props {
   accountName: string;
   personas: Array<{ name: string; priority: string }>;
   calendlyLink?: string;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  hideTrigger?: boolean;
 }
 
-export function BookMeetingDialog({ accountName, personas, calendlyLink }: Props) {
-  const [open, setOpen] = useState(false);
+export function BookMeetingDialog({
+  accountName,
+  personas,
+  calendlyLink,
+  open: controlledOpen,
+  onOpenChange: controlledOnOpenChange,
+  hideTrigger = false,
+}: Props) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isControlled = controlledOpen !== undefined;
+  const open = isControlled ? controlledOpen : internalOpen;
+  const setOpen = (next: boolean) => {
+    if (!isControlled) setInternalOpen(next);
+    controlledOnOpenChange?.(next);
+  };
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     meeting_type: 'In-Person' as typeof MEETING_TYPES[number],
@@ -70,18 +86,20 @@ export function BookMeetingDialog({ accountName, personas, calendlyLink }: Props
 
   return (
     <>
-      <div className="flex items-center gap-2">
-        <Button size="sm" className="gap-1.5" onClick={() => setOpen(true)}>
-          <CalendarCheck className="h-3.5 w-3.5" /> Book Meeting
-        </Button>
-        {calendlyLink && (
-          <Button variant="outline" size="sm" className="gap-1.5" asChild>
-            <a href={calendlyLink} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="h-3.5 w-3.5" /> Schedule
-            </a>
+      {hideTrigger ? null : (
+        <div className="flex items-center gap-2">
+          <Button size="sm" className="gap-1.5" onClick={() => setOpen(true)}>
+            <CalendarCheck className="h-3.5 w-3.5" /> Book Meeting
           </Button>
-        )}
-      </div>
+          {calendlyLink && (
+            <Button variant="outline" size="sm" className="gap-1.5" asChild>
+              <a href={calendlyLink} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="h-3.5 w-3.5" /> Schedule
+              </a>
+            </Button>
+          )}
+        </div>
+      )}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-w-md max-h-[85vh] overflow-y-auto">
           <DialogHeader>

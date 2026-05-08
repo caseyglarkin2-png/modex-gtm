@@ -29,13 +29,12 @@ import { BandBadge } from '@/components/band-badge';
 import { StatusBadge } from '@/components/status-badge';
 import { CopyButton } from '@/components/copy-button';
 import { EmptyState } from '@/components/empty-state';
-import { ExternalLink, Users, FileText, Activity, Calendar, Inbox, ListTodo, GitBranch, BriefcaseBusiness } from 'lucide-react';
+import { ExternalLink, Users, FileText, Calendar, Inbox, ListTodo, GitBranch, BriefcaseBusiness } from 'lucide-react';
 import { LogActivityDialog } from '@/components/log-activity-dialog';
 import { BookMeetingDialog } from '@/components/book-meeting-dialog';
 import { GeneratorDialog } from '@/components/ai/generator-dialog';
 import { EmailComposer } from '@/components/email/composer';
 import { OnePagerDialog } from '@/components/ai/one-pager-preview';
-import { OutreachSequenceDialog } from '@/components/ai/outreach-sequence';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { AddPersonaDialog } from '@/components/add-persona-dialog';
 import { EditableStatus } from '@/components/editable-status';
@@ -54,13 +53,12 @@ import { AccountGeneratedAssetActions } from '@/components/accounts/account-gene
 import { AccountContactCandidatesPanel } from '@/components/accounts/account-contact-candidates-panel';
 import { AccountAssetVersionPanel } from '@/components/accounts/account-asset-version-panel';
 import { AccountEngagementSummaryCard } from '@/components/accounts/account-engagement-summary-card';
+import { AccountSecondaryActionsMenu } from '@/components/accounts/account-secondary-actions-menu';
 import { AccountOutcomeLogger } from '@/components/accounts/account-outcome-logger';
-import { AccountOutreachShell } from '@/components/accounts/account-outreach-shell';
 import { OutboundCardRefreshButton } from '@/components/accounts/outbound-card-refresh-button';
 import { EditableLongText } from '@/components/editable-long-text';
 import { SOURCE_APPROVAL_GATE_ENABLED } from '@/lib/feature-flags';
 import { getModexFloorEntry, isModexPast } from '@/lib/data/modex-floor-plan';
-import { AgentActionDialog } from '@/components/agent-actions/agent-action-dialog';
 import { AgentIntelStrip } from '@/components/agent-actions/agent-intel-strip';
 import { SendJobTracker } from '@/components/generated-content/send-job-tracker';
 import {
@@ -417,82 +415,20 @@ export default async function AccountDetailPage({
               </div>
               <div className="flex flex-wrap items-center gap-2 sm:justify-end">
                 <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--muted-foreground)]">Secondary Actions</span>
-                <AgentActionDialog
-                  request={{ action: 'company_contacts', target: { accountName: account.name, company: account.name } }}
-                  title={`Find More Contacts for ${account.name}`}
-                  trigger={
-                    <Button size="sm" variant="outline" className="gap-1.5">
-                      <Inbox className="h-3.5 w-3.5" />
-                      Find More Contacts
-                    </Button>
-                  }
-                />
-                <AgentActionDialog
-                  request={{ action: 'committee_refresh', target: { accountName: account.name, company: account.name } }}
-                  title={`Build Committee for ${account.name}`}
-                  trigger={
-                    <Button size="sm" variant="outline" className="gap-1.5">
-                      <Users className="h-3.5 w-3.5" />
-                      Build Committee
-                    </Button>
-                  }
-                />
-                <AgentActionDialog
-                  request={{ action: 'draft_outreach', target: { accountName: account.name, company: account.name } }}
-                  title={`Draft Outreach for ${account.name}`}
-                  trigger={
-                    <Button size="sm" variant="outline" className="gap-1.5">
-                      <ExternalLink className="h-3.5 w-3.5" />
-                      Draft Outreach
-                    </Button>
-                  }
-                />
-                <AccountOutreachShell
+                <AccountSecondaryActionsMenu
                   accountName={account.name}
-                  assets={generatedAssets}
+                  personas={personas.map((p) => ({ name: p.name, title: p.title ?? undefined, priority: p.priority }))}
                   recipients={accountRecipients}
+                  generatedAssets={generatedAssets}
                   recipientSets={suggestedRecipientSets}
                   initialSelectedRecipientIds={suggestedRecipientIds}
                   defaultRecipientSetKey={activeRecipientSet?.key ?? null}
                   recommendedAngle={recommendedAngle}
                   whyNow={account.why_now ?? undefined}
                   approvalGateEnabled={SOURCE_APPROVAL_GATE_ENABLED}
-                  trigger={
-                    <Button size="sm" className="gap-1.5 bg-cyan-600 text-white hover:bg-cyan-700">
-                      <Activity className="h-3.5 w-3.5" />
-                      Compose Outreach
-                    </Button>
-                  }
-                />
-                <OutreachSequenceDialog
-                  accountName={account.name}
-                  personas={personas.map((p) => ({ name: p.name, title: p.title ?? undefined, priority: p.priority }))}
                   campaignSlug={activeCampaigns[0]?.slug}
-                  trigger={
-                    <Button size="sm" className="gap-1.5 bg-amber-600 text-white hover:bg-amber-700">
-                      <Activity className="h-3.5 w-3.5" />
-                      Generate Outreach
-                    </Button>
-                  }
-                />
-                <BookMeetingDialog
-                  accountName={account.name}
-                  personas={personas.map((p) => ({ name: p.name, priority: p.priority }))}
+                  outcomeSources={accountOutcomeSources}
                   calendlyLink={process.env.NEXT_PUBLIC_CALENDLY_LINK}
-                />
-                <LogActivityDialog
-                  accountName={account.name}
-                  personas={personas.map((p) => ({ name: p.name }))}
-                />
-                <AccountOutcomeLogger
-                  accountName={account.name}
-                  sources={accountOutcomeSources}
-                  trigger={
-                    <Button size="sm" variant="outline" className="gap-1.5">
-                      <Activity className="h-3.5 w-3.5" />
-                      Log Outcome
-                    </Button>
-                  }
                 />
               </div>
             </div>

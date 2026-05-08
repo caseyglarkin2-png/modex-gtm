@@ -27,6 +27,8 @@ type AccountOutcomeLoggerProps = {
   createdBy?: string;
   sources: AccountOutcomeSourceOption[];
   trigger?: ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 };
 
 
@@ -46,12 +48,20 @@ export function AccountOutcomeLogger({
   createdBy,
   sources,
   trigger,
+  open: controlledOpen,
+  onOpenChange: controlledOnOpenChange,
 }: AccountOutcomeLoggerProps) {
   const actor = useActor();
   const effectiveCreatedBy = createdBy ?? actor;
   const router = useRouter();
   const refreshTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const [open, setOpen] = useState(false);
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isControlled = controlledOpen !== undefined;
+  const open = isControlled ? controlledOpen : internalOpen;
+  const setOpen = (next: boolean) => {
+    if (!isControlled) setInternalOpen(next);
+    controlledOnOpenChange?.(next);
+  };
   const [loading, setLoading] = useState(false);
   const [selectedSourceKey, setSelectedSourceKey] = useState<string>(sources[0]?.key ?? '');
   const [outcomeLabel, setOutcomeLabel] = useState<(typeof OPERATOR_OUTCOME_TAXONOMY)[number]>('positive');
@@ -140,9 +150,11 @@ export function AccountOutcomeLogger({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        {trigger ?? <Button size="sm">Log Outcome</Button>}
-      </DialogTrigger>
+      {isControlled ? null : (
+        <DialogTrigger asChild>
+          {trigger ?? <Button size="sm">Log Outcome</Button>}
+        </DialogTrigger>
+      )}
       <DialogContent className="max-w-xl">
         <DialogHeader>
           <DialogTitle>Log Outcome for {accountName}</DialogTitle>
