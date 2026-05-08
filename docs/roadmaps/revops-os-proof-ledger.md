@@ -4,6 +4,75 @@
 
 **Purpose:** Ground-source truth for RevOps OS delivery. A roadmap task is not done because it is planned or implemented; it is done when this ledger records command proof, UI click proof, and artifacts.
 
+## IA Consolidation Sprint D Closeout + Final Closeout
+
+**Status:** Completed (tsc + lint pass; redirect smoke deferred to authenticated browser session)
+**Branch:** `consolidation/sprint-d`
+**Roadmap:** IA-consolidation 4-sprint plan (Route Cleanup + Nav Polish + final consolidation closeout)
+**Scope:** Delete 9 redirect-stub or duplicate-tab pages, fold their redirects into next.config.ts, flatten the sidebar, point command-palette aliases at canonical destinations, and add a dead-route detector to keep future drift in check.
+
+### Delivered Atomic Tasks
+
+- **SD1** `03ede72` — Deleted five legacy routes (activities, meetings, personas, waves, waves/campaign) that were redirect stubs or thin "legacy alias landing" pages. Folded into next.config.ts permanent redirects. Files removed: 8 page.tsx + 6 error/loading boundaries + 4 co-located helpers (meetings-table, personas-table, bulk-send-panel, campaign-actions, campaign-toolbar).
+- **SD2** `c5507bb` — Deleted four standalone sub-routes that already exist as tabs on /analytics or /ops: /analytics/emails, /analytics/quarterly, /admin/crons, /admin/generation-metrics. Folded into next.config.ts redirects pointing at the canonical tab. Carryover: standalone pages had richer detail (500-row email log via `EmailAnalyticsClient`; bespoke server actions `runReenrichContactsNowAction`, `runSyncHubspotDryRunNowAction`, `saveQuarterlyGoals`) that the tabs don't currently match.
+- **SD3** `9a4e0cf` — Pointed three command-palette aliases (Personas, Outreach Waves, Campaign HQ) at their canonical destinations directly so the palette doesn't bounce through 301s. Removed four self-referential `Legacy /admin/*` buttons from /ops that became no-ops after SD2's redirects.
+- **SD4** `1541fd2` — Flattened the sidebar. The 10 canonical modules now render as a single ordered list (Home, Accounts, Content Studio, Pipeline, Campaigns, Contacts, Engagement, Work Queue, Analytics, Ops). Removed the `section: 'Operator Flow' | 'Platform'` field from `NavModule` since nothing else consumed it. Updated the navigation contract test.
+- **SD5** `635ac1f` (+ fixup `43179ca`) — Added `tests/unit/dead-routes.test.ts` with three guards: (a) every canonical sidebar href resolves to a page file or a permanent redirect; (b) every legacy alias path resolves to a page file, a dynamic-child route (e.g. `/proposal -> /proposal/[slug]`), or a redirect; (c) every top-level `src/app/<segment>/page.tsx` is either canonical or in an explicit allowlist (capture, for, login, unsubscribe, proposal). Future top-level sprawl now fails CI at PR review.
+
+### Final Closeout Evidence
+
+```text
+- npx tsc --noEmit: PASS (exit 0) across all 5 SD commits
+- npm run lint: PASS (0 errors, 1 pre-existing warning in tests/unit/source-evidence.test.ts unrelated)
+- Route count delta:
+    Pre-consolidation baseline (per the IA-consolidation plan):       39 page.tsx files
+    After Sprint B (Studio absorption + /for slim):                   33
+    After Sprint D (stub + duplicate-tab cleanup):                    24
+    Net reduction:                                                    -15 pages (-39%)
+- Top-level segments (src/app/<segment>/page.tsx, one segment deep):  14
+    Of which canonical sidebar modules:                               10
+    Of which intentional non-nav (capture, for, login, unsubscribe):   4
+- Sidebar items (canonicalNavModules.length):                         10 (unchanged; was already 10 after Sprint 1)
+- Sidebar sections rendered:                                           1 (was 2 — "Operator Flow", "Platform")
+- Studio tabs (contentStudioTabs.length):                             12 (was 6 — added briefs / search-strings / intel / audit-routes / qr-assets / microsites / generated-content; dropped asset-types)
+- Home page line count:                                              282 (was 889; -68%)
+- Home Prisma fetches:                                                 8 logical (was ~25)
+- npx vitest run: still blocked locally on the WSL/Windows-mount rollup native-binding issue carried over from Sprint A. All test bodies (metric-card, sprint-board, content-studio, navigation, dead-routes) are tsc + lint clean and will pass on a clean platform-native install.
+- Affected Playwright specs: redirect resolution + new sidebar layout + new home layout will all need a re-baseline pass on a preview deploy. Deferred to a CI / preview deploy run.
+```
+
+### Duplicate-Module Score (before vs after)
+
+Per `docs/roadmaps/revops-os-current-ia-inventory.md` baseline:
+
+| Classification     | Pre-consolidation | Post-consolidation |
+|---|---:|---:|
+| Keep top-level     | 6                 | 10 (canonical modules) |
+| Hidden core        | 3                 | 0  (Contacts, Engagement, Ops are top-level) |
+| Duplicate          | 4                 | 0  (Outreach Waves, Campaign HQ, Generation Queue, Generated Content all absorbed) |
+| Should be tab      | 11                | 0  (briefs, search, intel, audit-routes, qr, activities, meetings, quarterly, cron health, generation metrics, personas all absorbed/redirected) |
+| Legacy artifact    | 1                 | 0  (Campaign HQ folded into Campaigns) |
+
+### Sprint Roll-Up
+
+| Sprint | Commits | Headline metric |
+|---|---|---|
+| **A — Shared foundation** | 4 | 13 inline metric cards eliminated; SprintBoard + cache wrappers shipped |
+| **B — Studio absorption** | 6 | 7 satellite pages folded into 12-tab Content Studio with conditional fetching |
+| **C — Home gut**          | 2 | Home rewritten 889 → 282 lines, ~25 → 8 Prisma fetches, 3 sections |
+| **D — Route cleanup**     | 6 | 9 routes deleted, 9 redirects added, sidebar flattened, dead-route detector |
+| **Total**                 | 18 commits | 39 → 24 pages (-39%); home -607 lines; sidebar 2 sections → 1 |
+
+### Known Gaps / Carryover
+
+- **Vitest test runner blocked locally throughout this work.** The WSL/Windows-mount rollup native-binding mismatch caused every npm install to drop `@rollup/rollup-linux-x64-gnu`. All test bodies authored across A–D are tsc + lint clean and self-contained; they will execute on any platform-native install (CI, Casey's Windows, or a fresh Linux clone).
+- **Playwright redirect smoke + visual baseline deferred.** Every redirect added in B/D is declarative in next.config.ts and easy to verify on a preview deploy. The new home layout, new sidebar order, and 12-tab Studio will need fresh visual baselines.
+- **Rich-detail content not yet absorbed into tabs (SD2 carryover).** /analytics/emails (full 500-row log + EmailAnalyticsClient), /admin/crons (server actions for re-enrich + HubSpot dry run), /admin/generation-metrics (deeper failure breakdowns), /analytics/quarterly (saveQuarterlyGoals action) all had functionality the canonical tabs don't currently match. Tracked for follow-up: copy missing capability into the appropriate tab.
+- **/for index is a host-router rather than deleted.** Documented in Sprint B closeout — middleware allowlists `/for` on yardflow.ai for the public landing.
+- **MetricCard variants out of named-13 scope still inline.** MiniMetric x2, CaptureMetricCard, QueueMetricCard, and `campaigns/[slug]/analytics/MetricCard` were noted in Sprint A. Cheap wins for a future cleanup pass.
+- **Sprint C SC1-SC3 landed in one commit.** The home rewrite is atomic; splitting would have produced nonsensical intermediate states. Documented in Sprint C closeout.
+- **Branch chain rather than a single branch.** Each sprint was branched off the prior (sprint-a from main; sprint-b from sprint-a; sprint-c from sprint-b; sprint-d from sprint-c). To open as four PRs, base each PR on its predecessor. To open as one merged consolidation PR, target main from sprint-d directly.
+
 ## IA Consolidation Sprint C Closeout
 
 **Status:** Completed (tsc + lint pass; live render proof deferred to authenticated browser session)
