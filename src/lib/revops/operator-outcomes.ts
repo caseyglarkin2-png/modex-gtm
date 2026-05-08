@@ -192,7 +192,7 @@ export function buildOutcomeFollowUpRecommendation(input: {
   const nextAssetLabel = INFOGRAPHIC_LABELS[transition.nextType];
   const nextAssetBase = {
     label: `${nextAssetLabel} next`,
-    route: '#assets',
+    route: '#outreach',
     infographicType: transition.nextType,
     stageIntent: transition.nextStage,
     reasonCode: transition.reasonCode,
@@ -204,7 +204,7 @@ export function buildOutcomeFollowUpRecommendation(input: {
       nextAction: {
         label: 'Replace the contact before the next send',
         detail: 'The last touch landed with the wrong buyer. Promote a better-fit contact and resend into the correct lane.',
-        route: '#contacts',
+        route: '#committee',
         tone: 'blocked',
       },
       nextAsset: {
@@ -221,7 +221,7 @@ export function buildOutcomeFollowUpRecommendation(input: {
       nextAction: {
         label: 'Reset the follow-up window',
         detail: 'Keep the contact warm, but tighten the why-now trigger and sequence timing before the next touch.',
-        route: '#engagement',
+        route: '#outreach',
         tone: 'attention',
       },
       nextAsset: {
@@ -240,7 +240,7 @@ export function buildOutcomeFollowUpRecommendation(input: {
         detail: input.notes?.trim()
           ? `Last feedback: ${input.notes.trim()}`
           : 'Use the latest objection signal to rebuild proof, reduce risk, and tighten the message.',
-        route: '#assets',
+        route: '#outreach',
         tone: 'attention',
       },
       nextAsset: {
@@ -259,7 +259,7 @@ export function buildOutcomeFollowUpRecommendation(input: {
         detail: input.hasMeetingSignal
           ? 'Momentum exists. Move the account into the next commercial milestone while the thread is warm.'
           : 'Positive engagement exists. Book the next live conversation before the thread cools.',
-        route: input.hasMeetingSignal ? '#pipeline' : '#meetings',
+        route: '#history',
         tone: 'ready',
       },
       nextAsset: {
@@ -277,7 +277,7 @@ export function buildOutcomeFollowUpRecommendation(input: {
       detail: input.coverageGapCount && input.coverageGapCount > 0
         ? `There ${input.coverageGapCount === 1 ? 'is' : 'are'} ${input.coverageGapCount} buyer-lane gap${input.coverageGapCount === 1 ? '' : 's'} still uncovered on this account.`
         : 'Neutral feedback means the account is still alive, but the next touch needs clearer proof or sharper framing.',
-      route: input.coverageGapCount && input.coverageGapCount > 0 ? '#contacts' : '#assets',
+      route: input.coverageGapCount && input.coverageGapCount > 0 ? '#committee' : '#outreach',
       tone: 'attention',
     },
     nextAsset: {

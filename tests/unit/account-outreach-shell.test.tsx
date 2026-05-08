@@ -296,7 +296,7 @@ describe('AccountOutreachShell', () => {
     expect(drillDown).toHaveTextContent('invalid@example.com');
     expect(drillDown).toHaveTextContent('gone@example.com');
     // invalid_email row gets a Replace contact link
-    expect(drillDown.querySelector('a[href*="tab=contacts"]')).not.toBeNull();
+    expect(drillDown.querySelector('a[href*="tab=committee"]')).not.toBeNull();
     // unsubscribed row says Suppressed
     expect(drillDown).toHaveTextContent(/Suppressed/);
   });

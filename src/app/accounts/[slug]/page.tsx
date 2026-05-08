@@ -18,6 +18,7 @@ import {
   buildAccountEngagementSummary,
   buildAccountNextBestAction,
   buildAccountTimeline,
+  parseAccountTab,
   type AccountCommandTabId,
 } from '@/lib/account-command-center';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -29,7 +30,7 @@ import { BandBadge } from '@/components/band-badge';
 import { StatusBadge } from '@/components/status-badge';
 import { CopyButton } from '@/components/copy-button';
 import { EmptyState } from '@/components/empty-state';
-import { ExternalLink, Users, FileText, Calendar, Inbox, ListTodo, GitBranch, BriefcaseBusiness } from 'lucide-react';
+import { ExternalLink, Users, FileText, GitBranch, BriefcaseBusiness } from 'lucide-react';
 import { LogActivityDialog } from '@/components/log-activity-dialog';
 import { BookMeetingDialog } from '@/components/book-meeting-dialog';
 import { GeneratorDialog } from '@/components/ai/generator-dialog';
@@ -103,7 +104,7 @@ export default async function AccountDetailPage({
 }) {
   const { slug } = await params;
   const resolvedSearchParams = await searchParams;
-  const initialTab = resolvedSearchParams.tab ?? 'overview';
+  const initialTab = parseAccountTab(resolvedSearchParams.tab);
   const replacePersonaId = resolvedSearchParams.replace_persona
     ? Number.parseInt(resolvedSearchParams.replace_persona, 10) || null
     : null;
@@ -697,7 +698,7 @@ export default async function AccountDetailPage({
                           <li key={`missing-${lane}`} className="flex items-center gap-2">
                             <span>{lane}</span>
                             <Link
-                              href={`/accounts/${slug}?tab=contacts&find_lane=${encodeURIComponent(lane)}#contact-discovery`}
+                              href={`/accounts/${slug}?tab=committee&find_lane=${encodeURIComponent(lane)}#contact-discovery`}
                               className="text-xs font-medium text-[var(--primary)] hover:underline"
                               data-testid={`find-lane-cta-${lane}`}
                             >
@@ -798,19 +799,13 @@ export default async function AccountDetailPage({
         <TabsList className="w-full justify-start overflow-x-auto">
           {accountCommandTabs.map((tab) => {
             const Icon = accountTabIcon(tab.id);
-            const count = tab.id === 'contacts'
+            const count = tab.id === 'committee'
               ? personas.length
-              : tab.id === 'assets'
+              : tab.id === 'outreach'
                 ? assetCount
-                : tab.id === 'engagement'
-                  ? timeline.length
-                  : tab.id === 'tasks'
-                    ? openTaskCount
-                    : tab.id === 'meetings'
-                      ? meetings.length
-                      : tab.id === 'pipeline'
-                        ? waves.length
-                        : null;
+                : tab.id === 'history'
+                  ? openTaskCount
+                  : null;
 
             return (
               <TabsTrigger key={tab.id} value={tab.id} className="gap-1">
@@ -822,7 +817,7 @@ export default async function AccountDetailPage({
         </TabsList>
 
         {/* Overview Tab */}
-        <TabsContent value="overview" className="space-y-4">
+        <TabsContent value="brief" className="space-y-4">
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm">Next Best Action</CardTitle>
@@ -846,25 +841,25 @@ export default async function AccountDetailPage({
                 {/* Quick-action chips derived from the NBA route. Mirrors the
                     affordances on the account hero so the operator can act
                     without scrolling back up. */}
-                {(nextBestAction.route === '#contacts' || /contact|committee|coverage/i.test(nextBestAction.label)) ? (
+                {(nextBestAction.route === '#committee' || /contact|committee|coverage/i.test(nextBestAction.label)) ? (
                   <Link
-                    href={`/accounts/${slug}?tab=contacts#contact-discovery`}
+                    href={`/accounts/${slug}?tab=committee#contact-discovery`}
                     className="inline-flex items-center rounded-md border border-[var(--border)] bg-[var(--background)] px-2 py-1 text-xs hover:bg-[var(--accent)]"
                     data-testid="nba-chip-find-contacts"
                   >
                     Find contacts
                   </Link>
                 ) : null}
-                {(nextBestAction.route === '#engagement' || /outreach|reply|outbound/i.test(nextBestAction.label)) ? (
+                {(nextBestAction.route === '#outreach' || /outreach|reply|outbound|asset|generate/i.test(nextBestAction.label)) ? (
                   <Link
-                    href={`/accounts/${slug}?tab=engagement`}
+                    href={`/accounts/${slug}?tab=outreach`}
                     className="inline-flex items-center rounded-md border border-[var(--border)] bg-[var(--background)] px-2 py-1 text-xs hover:bg-[var(--accent)]"
-                    data-testid="nba-chip-engagement"
+                    data-testid="nba-chip-outreach"
                   >
-                    Open engagement
+                    Open outreach
                   </Link>
                 ) : null}
-                {(nextBestAction.route === '#assets' || /asset|generate/i.test(nextBestAction.label)) ? (
+                {(/asset|generate/i.test(nextBestAction.label)) ? (
                   <Link
                     href={`/generated-content?account=${encodeURIComponent(account.name)}`}
                     className="inline-flex items-center rounded-md border border-[var(--border)] bg-[var(--background)] px-2 py-1 text-xs hover:bg-[var(--accent)]"
@@ -1096,7 +1091,7 @@ export default async function AccountDetailPage({
         </TabsContent>
 
         {/* Contacts Tab */}
-        <TabsContent value="contacts" className="space-y-3">
+        <TabsContent value="committee" className="space-y-3">
           <div className="flex justify-end">
             <AddPersonaDialog accountName={account.name} />
           </div>
@@ -1154,7 +1149,7 @@ export default async function AccountDetailPage({
                         ))}
                         {blockerBadges.length > 0 ? (
                           <Link
-                            href={`/accounts/${slug}?tab=contacts&replace_persona=${p.persona_id}#contact-discovery`}
+                            href={`/accounts/${slug}?tab=committee&replace_persona=${p.persona_id}#contact-discovery`}
                             className="inline-flex items-center text-xs font-medium text-[var(--primary)] hover:underline"
                             data-testid={`replace-cta-${p.persona_id}`}
                           >
@@ -1196,7 +1191,7 @@ export default async function AccountDetailPage({
         </TabsContent>
 
         {/* Assets Tab */}
-        <TabsContent value="assets" className="space-y-4">
+        <TabsContent value="outreach" className="space-y-4">
           <div className="flex flex-wrap gap-2">
             <GeneratorDialog accountName={account.name} defaultType="meeting_prep" />
             <GeneratorDialog accountName={account.name} defaultType="call_script" />
@@ -1325,10 +1320,6 @@ export default async function AccountDetailPage({
               </CardContent>
             </Card>
           </div>
-        </TabsContent>
-
-        {/* Engagement Tab */}
-        <TabsContent value="engagement" className="space-y-4">
           <InfographicJourneyControls
             accountName={account.name}
             campaignId={generatedAssets[0]?.campaign_id ?? null}
@@ -1406,8 +1397,8 @@ export default async function AccountDetailPage({
           )}
         </TabsContent>
 
-        {/* Tasks Tab */}
-        <TabsContent value="tasks" className="space-y-4">
+        {/* History Tab — open tasks, meetings, and pipeline / wave motion */}
+        <TabsContent value="history" className="space-y-4">
           <div className="flex items-center justify-between">
             <p className="text-sm text-[var(--muted-foreground)]">{openTaskCount} account task{openTaskCount === 1 ? '' : 's'}</p>
             <LogActivityDialog accountName={account.name} personas={personas.map((p) => ({ name: p.name }))} />
@@ -1432,10 +1423,6 @@ export default async function AccountDetailPage({
               </CardContent>
             </Card>
           ))}
-        </TabsContent>
-
-        {/* Meetings Tab */}
-        <TabsContent value="meetings" className="space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <p className="text-sm text-[var(--muted-foreground)]">{meetings.length} meeting record{meetings.length === 1 ? '' : 's'}</p>
             <BookMeetingDialog accountName={account.name} personas={personas.map((p) => ({ name: p.name, priority: p.priority }))} calendlyLink={process.env.NEXT_PUBLIC_CALENDLY_LINK} />
@@ -1465,10 +1452,6 @@ export default async function AccountDetailPage({
               ))}
             </div>
           )}
-        </TabsContent>
-
-        {/* Pipeline Tab */}
-        <TabsContent value="pipeline" className="space-y-4">
           <div className="grid gap-4 md:grid-cols-3">
             <Card>
               <CardHeader className="pb-2"><CardTitle className="text-xs text-[var(--muted-foreground)]">Pipeline Stage</CardTitle></CardHeader>
@@ -1547,19 +1530,13 @@ function MicrositeAccountHeatBadge({ score }: { score: number }) {
 
 function accountTabIcon(tabId: AccountCommandTabId) {
   switch (tabId) {
-    case 'contacts':
+    case 'committee':
       return Users;
-    case 'assets':
+    case 'outreach':
       return BriefcaseBusiness;
-    case 'engagement':
-      return Inbox;
-    case 'tasks':
-      return ListTodo;
-    case 'meetings':
-      return Calendar;
-    case 'pipeline':
+    case 'history':
       return GitBranch;
-    case 'overview':
+    case 'brief':
     default:
       return FileText;
   }

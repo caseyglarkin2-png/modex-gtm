@@ -48,7 +48,7 @@ export function AccountEngagementSummaryCard({ summary, accountSlug }: AccountEn
               return (
                 <Link
                   key={metric.key}
-                  href={`/accounts/${accountSlug}?tab=engagement&metric=${metric.key}`}
+                  href={`/accounts/${accountSlug}?tab=outreach&metric=${metric.key}`}
                   className="block transition-colors hover:bg-[var(--accent)]"
                   data-testid={`engagement-metric-${metric.key}`}
                 >

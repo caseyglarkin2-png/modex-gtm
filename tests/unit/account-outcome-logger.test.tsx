@@ -34,7 +34,7 @@ describe('AccountOutcomeLogger', () => {
         deduped: false,
         nextAction: {
           label: 'Replace the contact before the next send',
-          route: '#contacts',
+          route: '#committee',
         },
       }),
     })));
