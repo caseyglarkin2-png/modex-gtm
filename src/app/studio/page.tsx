@@ -254,12 +254,12 @@ export default async function StudioPage({
       </div>
 
       <UrlTabs activeTab={activeTab} className="space-y-4">
-        <TabsList className="flex h-auto flex-wrap justify-start gap-1 p-1">
+        <TabsList className="flex h-auto flex-wrap justify-start gap-1.5 bg-transparent p-0">
           {contentStudioTabs.map((tab) => (
             <TabsTrigger
               key={tab.id}
               value={tab.id}
-              className="border border-transparent data-[state=inactive]:border-[var(--border)] data-[state=inactive]:bg-[var(--background)] data-[state=inactive]:text-[var(--muted-foreground)] data-[state=inactive]:hover:bg-[var(--muted)]/60"
+              className="rounded-full border border-[var(--border)] bg-[var(--background)] px-3 py-1 text-xs text-[var(--muted-foreground)] transition-colors hover:border-[var(--primary)]/40 hover:bg-[var(--muted)]/60 data-[state=active]:border-[var(--primary)] data-[state=active]:bg-[var(--primary)] data-[state=active]:text-[var(--primary-foreground)] data-[state=active]:shadow-none"
             >
               {tab.label}
             </TabsTrigger>

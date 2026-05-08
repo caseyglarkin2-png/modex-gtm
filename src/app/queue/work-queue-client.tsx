@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MetricCard } from '@/components/metric-card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { queueAll, queueRemove, type QueuedCapture } from '@/lib/offline-queue';
 import { getMyWorkItems, type WorkQueueItem, type WorkQueueTabId, workQueueTabs } from '@/lib/work-queue';
@@ -229,14 +230,14 @@ export function WorkQueueClient({ defaultTab, initialItems }: WorkQueueClientPro
       </div>
 
       <div className="grid gap-3 md:grid-cols-3 xl:grid-cols-8">
-        <QueueMetricCard label="Total" value={metrics.total} />
-        <QueueMetricCard label="My Work" value={metrics.myWork} />
-        <QueueMetricCard label="Follow-ups" value={metrics.followUps} tone={metrics.followUps > 0 ? 'text-amber-600' : 'text-foreground'} />
-        <QueueMetricCard label="Captures" value={metrics.captures} />
-        <QueueMetricCard label="System Jobs" value={metrics.system} />
-        <QueueMetricCard label="Stuck/Failed" value={metrics.stuckFailed} tone={metrics.stuckFailed > 0 ? 'text-red-600' : 'text-foreground'} />
-        <QueueMetricCard label="Outcome Audit" value={metrics.outcomeAudit} tone={metrics.outcomeAudit > 0 ? 'text-amber-600' : 'text-foreground'} />
-        <QueueMetricCard label="Learning Review" value={metrics.learningReview} tone={metrics.learningReview > 0 ? 'text-amber-600' : 'text-foreground'} />
+        <MetricCard label="Total" value={metrics.total} />
+        <MetricCard label="My Work" value={metrics.myWork} />
+        <MetricCard label="Follow-ups" value={metrics.followUps} tone={metrics.followUps > 0 ? 'text-amber-600' : 'text-foreground'} />
+        <MetricCard label="Captures" value={metrics.captures} />
+        <MetricCard label="System Jobs" value={metrics.system} />
+        <MetricCard label="Stuck/Failed" value={metrics.stuckFailed} tone={metrics.stuckFailed > 0 ? 'text-red-600' : 'text-foreground'} />
+        <MetricCard label="Outcome Audit" value={metrics.outcomeAudit} tone={metrics.outcomeAudit > 0 ? 'text-amber-600' : 'text-foreground'} />
+        <MetricCard label="Learning Review" value={metrics.learningReview} tone={metrics.learningReview > 0 ? 'text-amber-600' : 'text-foreground'} />
       </div>
 
       <Tabs defaultValue={defaultTab} className="space-y-4">
@@ -376,13 +377,3 @@ export function WorkQueueClient({ defaultTab, initialItems }: WorkQueueClientPro
   );
 }
 
-function QueueMetricCard({ label, value, tone = 'text-foreground' }: { label: string; value: number; tone?: string }) {
-  return (
-    <Card>
-      <CardContent className="p-4 text-center">
-        <p className="text-[11px] uppercase tracking-wide text-muted-foreground">{label}</p>
-        <p className={`mt-2 text-2xl font-bold ${tone}`}>{value}</p>
-      </CardContent>
-    </Card>
-  );
-}
