@@ -1,10 +1,11 @@
-import { readdir } from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { canonicalNavModules, commandRoutes } from '@/lib/navigation';
 
 export type AppRouteIndex = {
   pageRoutes: string[];
   apiRoutes: string[];
+  redirectSources: string[];
 };
 
 export type NavIntegrityReport = {
@@ -105,9 +106,25 @@ async function collectAppFiles(dir: string): Promise<string[]> {
   return files;
 }
 
+async function readRedirectSources(rootDir: string): Promise<string[]> {
+  try {
+    const content = await readFile(path.join(rootDir, 'next.config.ts'), 'utf8');
+    const sources: string[] = [];
+    for (const match of content.matchAll(/source:\s*'([^']+)'/g)) {
+      sources.push(match[1]);
+    }
+    return sources;
+  } catch {
+    return [];
+  }
+}
+
 export async function buildAppRouteIndex(rootDir = process.cwd()): Promise<AppRouteIndex> {
   const appDir = path.join(rootDir, 'src', 'app');
-  const files = await collectAppFiles(appDir);
+  const [files, redirectSources] = await Promise.all([
+    collectAppFiles(appDir),
+    readRedirectSources(rootDir),
+  ]);
   const routes = files
     .map((file) => toRouteFromAppFile(file))
     .filter((route): route is string => Boolean(route));
@@ -116,12 +133,16 @@ export async function buildAppRouteIndex(rootDir = process.cwd()): Promise<AppRo
   const apiRoutes = uniqueRoutes.filter((route) => route.startsWith('/api/'));
   const pageRoutes = uniqueRoutes.filter((route) => !route.startsWith('/api/'));
 
-  return { pageRoutes, apiRoutes };
+  return { pageRoutes, apiRoutes, redirectSources };
 }
 
 export function detectNavIntegrity(routeIndex: AppRouteIndex): NavIntegrityReport {
-  const knownRoutes = [...routeIndex.pageRoutes, ...routeIndex.apiRoutes];
-  const commandOwners = new Set(canonicalNavModules.map((module) => module.label));
+  const knownRoutes = [
+    ...routeIndex.pageRoutes,
+    ...routeIndex.apiRoutes,
+    ...routeIndex.redirectSources,
+  ];
+  const commandOwners = new Set(canonicalNavModules.map((navModule) => navModule.label));
   const navHrefs = new Set<string>();
 
   for (const navModule of canonicalNavModules) {
@@ -139,7 +160,7 @@ export function detectNavIntegrity(routeIndex: AppRouteIndex): NavIntegrityRepor
     .map((route) => `${route.label} -> ${route.canonicalOwner}`)
     .sort();
 
-  const canonicalLabels = new Set(canonicalNavModules.map((module) => module.label));
+  const canonicalLabels = new Set(canonicalNavModules.map((navModule) => navModule.label));
   const obsoleteTopLevelModules = OBSOLETE_TOP_LEVEL_LABELS.filter((label) => canonicalLabels.has(label)).sort();
 
   return {
