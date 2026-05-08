@@ -30,6 +30,7 @@ import type { AssetSendRecipient } from '@/components/email/asset-send-dialog';
 import { recordWorkflowEvent } from '@/lib/agent-actions/telemetry';
 import { beginRefreshDiagnostic, endRefreshDiagnostic } from '@/lib/refresh-diagnostics';
 import { SourceAttributionPanel } from '@/components/source-backed/source-attribution-panel';
+import { useControllableOpen } from '@/lib/use-controllable-open';
 import type { SourceBackedContractV1 } from '@/lib/source-backed/attribution';
 
 type AgentActionDialogRequest = Omit<AgentActionRequest, 'refresh' | 'depth'> & {
@@ -452,13 +453,7 @@ export function AgentActionDialog({
   open: controlledOpen,
   onOpenChange: controlledOnOpenChange,
 }: AgentActionDialogProps) {
-  const [internalOpen, setInternalOpen] = useState(false);
-  const isControlled = controlledOpen !== undefined;
-  const open = isControlled ? controlledOpen : internalOpen;
-  const setOpen = (next: boolean) => {
-    if (!isControlled) setInternalOpen(next);
-    controlledOnOpenChange?.(next);
-  };
+  const { open, setOpen } = useControllableOpen(controlledOpen, controlledOnOpenChange);
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [result, setResult] = useState<AgentActionResult | null>(null);

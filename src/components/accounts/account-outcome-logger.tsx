@@ -10,6 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { OPERATOR_OUTCOME_TAXONOMY, type OutcomeFollowUpRecommendation } from '@/lib/revops/operator-outcomes';
 import { beginRefreshDiagnostic, endRefreshDiagnostic } from '@/lib/refresh-diagnostics';
 import { useActor } from '@/lib/use-actor';
+import { useControllableOpen } from '@/lib/use-controllable-open';
 
 export type AccountOutcomeSourceOption = {
   key: string;
@@ -55,13 +56,7 @@ export function AccountOutcomeLogger({
   const effectiveCreatedBy = createdBy ?? actor;
   const router = useRouter();
   const refreshTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const [internalOpen, setInternalOpen] = useState(false);
-  const isControlled = controlledOpen !== undefined;
-  const open = isControlled ? controlledOpen : internalOpen;
-  const setOpen = (next: boolean) => {
-    if (!isControlled) setInternalOpen(next);
-    controlledOnOpenChange?.(next);
-  };
+  const { open, setOpen, isControlled } = useControllableOpen(controlledOpen, controlledOnOpenChange);
   const [loading, setLoading] = useState(false);
   const [selectedSourceKey, setSelectedSourceKey] = useState<string>(sources[0]?.key ?? '');
   const [outcomeLabel, setOutcomeLabel] = useState<(typeof OPERATOR_OUTCOME_TAXONOMY)[number]>('positive');

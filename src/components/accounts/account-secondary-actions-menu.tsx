@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -68,7 +68,22 @@ export function AccountSecondaryActionsMenu({
   calendlyLink,
 }: AccountSecondaryActionsMenuProps) {
   const [active, setActive] = useState<ActionId | null>(null);
-  const close = () => setActive(null);
+  const handleOpenChange = (open: boolean) => { if (!open) setActive(null); };
+
+  // The three dialogs that need persona views project different fields; building
+  // them once avoids re-mapping on every render of the active dialog.
+  const sequencePersonas = useMemo(
+    () => personas.map((p) => ({ name: p.name, title: p.title, priority: p.priority })),
+    [personas],
+  );
+  const meetingPersonas = useMemo(
+    () => personas.map((p) => ({ name: p.name, priority: p.priority })),
+    [personas],
+  );
+  const activityPersonas = useMemo(
+    () => personas.map((p) => ({ name: p.name })),
+    [personas],
+  );
 
   return (
     <>
@@ -115,72 +130,86 @@ export function AccountSecondaryActionsMenu({
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <AccountOutreachShell
-        accountName={accountName}
-        assets={generatedAssets}
-        recipients={recipients}
-        recipientSets={recipientSets}
-        initialSelectedRecipientIds={initialSelectedRecipientIds}
-        defaultRecipientSetKey={defaultRecipientSetKey}
-        recommendedAngle={recommendedAngle}
-        whyNow={whyNow}
-        approvalGateEnabled={approvalGateEnabled}
-        open={active === 'compose-outreach'}
-        onOpenChange={(open) => { if (!open) close(); }}
-      />
+      {active === 'compose-outreach' && (
+        <AccountOutreachShell
+          accountName={accountName}
+          assets={generatedAssets}
+          recipients={recipients}
+          recipientSets={recipientSets}
+          initialSelectedRecipientIds={initialSelectedRecipientIds}
+          defaultRecipientSetKey={defaultRecipientSetKey}
+          recommendedAngle={recommendedAngle}
+          whyNow={whyNow}
+          approvalGateEnabled={approvalGateEnabled}
+          open
+          onOpenChange={handleOpenChange}
+        />
+      )}
 
-      <OutreachSequenceDialog
-        accountName={accountName}
-        personas={personas.map((p) => ({ name: p.name, title: p.title, priority: p.priority }))}
-        campaignSlug={campaignSlug}
-        open={active === 'generate-sequence'}
-        onOpenChange={(open) => { if (!open) close(); }}
-      />
+      {active === 'generate-sequence' && (
+        <OutreachSequenceDialog
+          accountName={accountName}
+          personas={sequencePersonas}
+          campaignSlug={campaignSlug}
+          open
+          onOpenChange={handleOpenChange}
+        />
+      )}
 
-      <AgentActionDialog
-        request={{ action: 'company_contacts', target: { accountName, company: accountName } }}
-        title={`Find More Contacts for ${accountName}`}
-        open={active === 'find-contacts'}
-        onOpenChange={(open) => { if (!open) close(); }}
-      />
+      {active === 'find-contacts' && (
+        <AgentActionDialog
+          request={{ action: 'company_contacts', target: { accountName, company: accountName } }}
+          title={`Find More Contacts for ${accountName}`}
+          open
+          onOpenChange={handleOpenChange}
+        />
+      )}
 
-      <AgentActionDialog
-        request={{ action: 'committee_refresh', target: { accountName, company: accountName } }}
-        title={`Build Committee for ${accountName}`}
-        open={active === 'build-committee'}
-        onOpenChange={(open) => { if (!open) close(); }}
-      />
+      {active === 'build-committee' && (
+        <AgentActionDialog
+          request={{ action: 'committee_refresh', target: { accountName, company: accountName } }}
+          title={`Build Committee for ${accountName}`}
+          open
+          onOpenChange={handleOpenChange}
+        />
+      )}
 
-      <AgentActionDialog
-        request={{ action: 'draft_outreach', target: { accountName, company: accountName } }}
-        title={`Draft Outreach for ${accountName}`}
-        open={active === 'draft-outreach'}
-        onOpenChange={(open) => { if (!open) close(); }}
-      />
+      {active === 'draft-outreach' && (
+        <AgentActionDialog
+          request={{ action: 'draft_outreach', target: { accountName, company: accountName } }}
+          title={`Draft Outreach for ${accountName}`}
+          open
+          onOpenChange={handleOpenChange}
+        />
+      )}
 
-      <BookMeetingDialog
-        accountName={accountName}
-        personas={personas.map((p) => ({ name: p.name, priority: p.priority }))}
-        calendlyLink={calendlyLink}
-        hideTrigger
-        open={active === 'book-meeting'}
-        onOpenChange={(open) => { if (!open) close(); }}
-      />
+      {active === 'book-meeting' && (
+        <BookMeetingDialog
+          accountName={accountName}
+          personas={meetingPersonas}
+          calendlyLink={calendlyLink}
+          open
+          onOpenChange={handleOpenChange}
+        />
+      )}
 
-      <LogActivityDialog
-        accountName={accountName}
-        personas={personas.map((p) => ({ name: p.name }))}
-        hideTrigger
-        open={active === 'log-activity'}
-        onOpenChange={(open) => { if (!open) close(); }}
-      />
+      {active === 'log-activity' && (
+        <LogActivityDialog
+          accountName={accountName}
+          personas={activityPersonas}
+          open
+          onOpenChange={handleOpenChange}
+        />
+      )}
 
-      <AccountOutcomeLogger
-        accountName={accountName}
-        sources={outcomeSources}
-        open={active === 'log-outcome'}
-        onOpenChange={(open) => { if (!open) close(); }}
-      />
+      {active === 'log-outcome' && (
+        <AccountOutcomeLogger
+          accountName={accountName}
+          sources={outcomeSources}
+          open
+          onOpenChange={handleOpenChange}
+        />
+      )}
     </>
   );
 }

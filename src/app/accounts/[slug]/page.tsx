@@ -798,14 +798,14 @@ export default async function AccountDetailPage({
       <Tabs defaultValue={initialTab} className="space-y-4">
         <TabsList className="w-full justify-start overflow-x-auto">
           {accountCommandTabs.map((tab) => {
-            const Icon = accountTabIcon(tab.id);
-            const count = tab.id === 'committee'
-              ? personas.length
-              : tab.id === 'outreach'
-                ? assetCount
-                : tab.id === 'history'
-                  ? openTaskCount
-                  : null;
+            const Icon = ACCOUNT_TAB_ICON[tab.id];
+            const counts: Record<AccountCommandTabId, number | null> = {
+              brief: null,
+              committee: personas.length,
+              outreach: assetCount,
+              history: openTaskCount,
+            };
+            const count = counts[tab.id];
 
             return (
               <TabsTrigger key={tab.id} value={tab.id} className="gap-1">
@@ -816,7 +816,7 @@ export default async function AccountDetailPage({
           })}
         </TabsList>
 
-        {/* Overview Tab */}
+        {/* Brief Tab — account thesis, NBA, microsite engagement, intro path */}
         <TabsContent value="brief" className="space-y-4">
           <Card>
             <CardHeader className="pb-2">
@@ -850,13 +850,22 @@ export default async function AccountDetailPage({
                     Find contacts
                   </Link>
                 ) : null}
-                {(nextBestAction.route === '#outreach' || /outreach|reply|outbound|asset|generate/i.test(nextBestAction.label)) ? (
+                {(nextBestAction.route === '#outreach' || /outreach|reply|outbound/i.test(nextBestAction.label)) ? (
                   <Link
                     href={`/accounts/${slug}?tab=outreach`}
                     className="inline-flex items-center rounded-md border border-[var(--border)] bg-[var(--background)] px-2 py-1 text-xs hover:bg-[var(--accent)]"
                     data-testid="nba-chip-outreach"
                   >
                     Open outreach
+                  </Link>
+                ) : null}
+                {(nextBestAction.route === '#history' || /meeting|task|pipeline|advance/i.test(nextBestAction.label)) ? (
+                  <Link
+                    href={`/accounts/${slug}?tab=history`}
+                    className="inline-flex items-center rounded-md border border-[var(--border)] bg-[var(--background)] px-2 py-1 text-xs hover:bg-[var(--accent)]"
+                    data-testid="nba-chip-history"
+                  >
+                    Open history
                   </Link>
                 ) : null}
                 {(/asset|generate/i.test(nextBestAction.label)) ? (
@@ -1090,7 +1099,7 @@ export default async function AccountDetailPage({
           )}
         </TabsContent>
 
-        {/* Contacts Tab */}
+        {/* Committee Tab — people, priorities, readiness, contact discovery */}
         <TabsContent value="committee" className="space-y-3">
           <div className="flex justify-end">
             <AddPersonaDialog accountName={account.name} />
@@ -1190,7 +1199,7 @@ export default async function AccountDetailPage({
           )}
         </TabsContent>
 
-        {/* Assets Tab */}
+        {/* Outreach Tab — briefs, audit routes, QR, generated content, engagement timeline */}
         <TabsContent value="outreach" className="space-y-4">
           <div className="flex flex-wrap gap-2">
             <GeneratorDialog accountName={account.name} defaultType="meeting_prep" />
@@ -1320,6 +1329,9 @@ export default async function AccountDetailPage({
               </CardContent>
             </Card>
           </div>
+          <div className="pt-2">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--muted-foreground)]">Engagement</h3>
+          </div>
           <InfographicJourneyControls
             accountName={account.name}
             campaignId={generatedAssets[0]?.campaign_id ?? null}
@@ -1399,6 +1411,9 @@ export default async function AccountDetailPage({
 
         {/* History Tab — open tasks, meetings, and pipeline / wave motion */}
         <TabsContent value="history" className="space-y-4">
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--muted-foreground)]">Tasks</h3>
+          </div>
           <div className="flex items-center justify-between">
             <p className="text-sm text-[var(--muted-foreground)]">{openTaskCount} account task{openTaskCount === 1 ? '' : 's'}</p>
             <LogActivityDialog accountName={account.name} personas={personas.map((p) => ({ name: p.name }))} />
@@ -1423,6 +1438,9 @@ export default async function AccountDetailPage({
               </CardContent>
             </Card>
           ))}
+          <div className="pt-2">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--muted-foreground)]">Meetings</h3>
+          </div>
           <div className="flex flex-wrap items-center justify-between gap-3">
             <p className="text-sm text-[var(--muted-foreground)]">{meetings.length} meeting record{meetings.length === 1 ? '' : 's'}</p>
             <BookMeetingDialog accountName={account.name} personas={personas.map((p) => ({ name: p.name, priority: p.priority }))} calendlyLink={process.env.NEXT_PUBLIC_CALENDLY_LINK} />
@@ -1452,6 +1470,9 @@ export default async function AccountDetailPage({
               ))}
             </div>
           )}
+          <div className="pt-2">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--muted-foreground)]">Pipeline</h3>
+          </div>
           <div className="grid gap-4 md:grid-cols-3">
             <Card>
               <CardHeader className="pb-2"><CardTitle className="text-xs text-[var(--muted-foreground)]">Pipeline Stage</CardTitle></CardHeader>
@@ -1528,19 +1549,12 @@ function MicrositeAccountHeatBadge({ score }: { score: number }) {
   return <Badge variant="outline">Watch {score}</Badge>;
 }
 
-function accountTabIcon(tabId: AccountCommandTabId) {
-  switch (tabId) {
-    case 'committee':
-      return Users;
-    case 'outreach':
-      return BriefcaseBusiness;
-    case 'history':
-      return GitBranch;
-    case 'brief':
-    default:
-      return FileText;
-  }
-}
+const ACCOUNT_TAB_ICON: Record<AccountCommandTabId, typeof FileText> = {
+  brief: FileText,
+  committee: Users,
+  outreach: BriefcaseBusiness,
+  history: GitBranch,
+};
 
 function MicrositeSessionRow({ session }: { session: RecentMicrositeSession }) {
   return (

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { useControllableOpen } from '@/lib/use-controllable-open';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -18,7 +19,6 @@ interface Props {
   personas: Array<{ name: string }>;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
-  hideTrigger?: boolean;
 }
 
 export function LogActivityDialog({
@@ -26,15 +26,8 @@ export function LogActivityDialog({
   personas,
   open: controlledOpen,
   onOpenChange: controlledOnOpenChange,
-  hideTrigger = false,
 }: Props) {
-  const [internalOpen, setInternalOpen] = useState(false);
-  const isControlled = controlledOpen !== undefined;
-  const open = isControlled ? controlledOpen : internalOpen;
-  const setOpen = (next: boolean) => {
-    if (!isControlled) setInternalOpen(next);
-    controlledOnOpenChange?.(next);
-  };
+  const { open, setOpen, isControlled } = useControllableOpen(controlledOpen, controlledOnOpenChange);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     activity_type: 'Email' as typeof ACTIVITY_TYPES[number],
@@ -68,7 +61,7 @@ export function LogActivityDialog({
 
   return (
     <>
-      {hideTrigger ? null : (
+      {isControlled ? null : (
         <Button variant="outline" size="sm" className="gap-1.5" onClick={() => setOpen(true)}>
           <Plus className="h-3.5 w-3.5" /> Log Activity
         </Button>
