@@ -32,20 +32,6 @@ export default async function middleware(request: NextRequest) {
     return new NextResponse('Not Found', { status: 404 });
   }
 
-  // Internal app domain: redirect unauthenticated microsite access to yardflow.ai
-  if (pathname.startsWith('/for/')) {
-    const micrositeBaseUrl = process.env.NEXT_PUBLIC_MICROSITE_BASE_URL;
-    if (micrositeBaseUrl) {
-      // Check if authenticated - if not, redirect to public domain
-      const session = await auth();
-      if (!session) {
-        return NextResponse.redirect(`${micrositeBaseUrl}${pathname}`);
-      }
-    }
-    // Authenticated users can preview microsites on internal domain
-    return NextResponse.next();
-  }
-
   // Internal domain: delegate to NextAuth auth middleware
   return (auth as unknown as (req: NextRequest) => Promise<NextResponse>)(request);
 }
