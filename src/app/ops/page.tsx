@@ -312,14 +312,6 @@ export default async function OpsPage({
             System reliability, evidence, provider operations, and admin-control workspace.
           </p>
         </div>
-        <div className="flex flex-wrap gap-2">
-          <Link href="/admin/crons">
-            <Button variant="outline" size="sm">Legacy /admin/crons</Button>
-          </Link>
-          <Link href="/admin/generation-metrics">
-            <Button variant="outline" size="sm">Legacy /admin/generation-metrics</Button>
-          </Link>
-        </div>
       </div>
 
       <Card>
@@ -428,9 +420,6 @@ export default async function OpsPage({
               <MiniMetric label="Attention Needed" value={cronErrors} tone={cronErrors > 0 ? 'text-amber-600' : 'text-foreground'} />
               <MiniMetric label="Total Tracked" value={cronRows.length} />
             </div>
-            <Link href="/admin/crons">
-              <Button size="sm" variant="outline">Open Detailed Cron Health</Button>
-            </Link>
           </CardContent>
         </Card>
       ) : null}
@@ -505,9 +494,6 @@ export default async function OpsPage({
                 </div>
               )}
             </div>
-            <Link href="/admin/generation-metrics">
-              <Button size="sm" variant="outline">Open Detailed Generation Metrics</Button>
-            </Link>
           </CardContent>
         </Card>
       ) : null}
