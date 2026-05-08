@@ -10,7 +10,6 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
 // LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
 /*
@@ -272,15 +271,6 @@ export const kencoLogisticsServices: AccountMicrositeData = {
         subheadline: 'Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Kristi, let\'s walk your yard network',
-        subtext: '30-minute conversation about Kenco Logistics Services\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Kristi',
-        personContext: 'Named session speaker indicates event involvement.',
-      },
 
       toneShift: 'Operator-to-operator. Kristi lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'detention cost', 'throughput', 'operational efficiency'],
@@ -312,15 +302,6 @@ export const kencoLogisticsServices: AccountMicrositeData = {
         subheadline: 'Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Shanon, let\'s walk your yard network',
-        subtext: '30-minute conversation about Kenco Logistics Services\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Shanon',
-        personContext: 'Named session speaker indicates event involvement.',
-      },
 
       toneShift: 'Operator-to-operator. Shanon lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -352,15 +333,6 @@ export const kencoLogisticsServices: AccountMicrositeData = {
         subheadline: 'Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Jason, let\'s walk your yard network',
-        subtext: '30-minute conversation about Kenco Logistics Services\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Jason',
-        personContext: 'Named session speaker indicates event involvement.',
-      },
 
       toneShift: 'Operator-to-operator. Jason lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'detention cost', 'throughput', 'operational efficiency'],
@@ -392,15 +364,6 @@ export const kencoLogisticsServices: AccountMicrositeData = {
         subheadline: 'Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Emmanuel, let\'s walk your yard network',
-        subtext: '30-minute conversation about Kenco Logistics Services\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Emmanuel',
-        personContext: 'Named session speaker indicates event involvement.',
-      },
 
       toneShift: 'Operator-to-operator. Emmanuel lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -432,15 +395,6 @@ export const kencoLogisticsServices: AccountMicrositeData = {
         subheadline: 'Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Andre, let\'s walk your yard network',
-        subtext: '30-minute conversation about Kenco Logistics Services\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Andre',
-        personContext: 'Named session speaker indicates event involvement.',
-      },
 
       toneShift: 'Operator-to-operator. Andre lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],

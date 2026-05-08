@@ -10,7 +10,6 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
 // LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
 /*
@@ -272,15 +271,6 @@ export const fedex: AccountMicrositeData = {
         subheadline: 'Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Scott, let\'s walk your yard network',
-        subtext: '30-minute conversation about FedEx\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Scott',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Strategic, board-level. Reference Scott\'s mandate and transformation context. Lead with outcomes and business impact, not features.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -312,15 +302,6 @@ export const fedex: AccountMicrositeData = {
         subheadline: 'Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Ray, let\'s walk your yard network',
-        subtext: '30-minute conversation about FedEx\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Ray',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Strategic, board-level. Reference Ray\'s mandate and transformation context. Lead with outcomes and business impact, not features.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -352,15 +333,6 @@ export const fedex: AccountMicrositeData = {
         subheadline: 'Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Jose, let\'s walk your yard network',
-        subtext: '30-minute conversation about FedEx\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Jose',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Jose lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -392,15 +364,6 @@ export const fedex: AccountMicrositeData = {
         subheadline: 'Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Douglas, let\'s walk your yard network',
-        subtext: '30-minute conversation about FedEx\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Douglas',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Douglas lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['turn time', 'detention cost', 'dwell time', 'on-time pickup', 'carrier satisfaction'],
@@ -432,15 +395,6 @@ export const fedex: AccountMicrositeData = {
         subheadline: 'Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Jake, let\'s walk your yard network',
-        subtext: '30-minute conversation about FedEx\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Jake',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Jake lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],

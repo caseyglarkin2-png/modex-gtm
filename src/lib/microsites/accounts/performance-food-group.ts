@@ -11,7 +11,6 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
 // LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
 /*
@@ -219,15 +218,6 @@ export const performanceFoodGroup: AccountMicrositeData = {
         subheadline: 'Dylan — with the Cheney Brothers integration adding to your 150+ DC network and every reefer trailer in the yard burning fuel while it waits, the yard is where PFG\'s 2-3% margin either grows or leaks. Night-loading 7,000 trucks for AM restaurant delivery across 300,000 stops — a 15-minute yard improvement at each facility is the difference between restaurants opening with product or scrambling.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'meeting',
-        headline: 'Dylan, let\'s walk your yard network',
-        subtext: '30-minute conversation about Performance Food Group\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-        personName: 'Dylan',
-        personContext: '2024: PFG acquired Cheney Brothers (one of the largest independent foodservice distributors) for $2.',
-      },
 
       toneShift: 'Operator-to-operator. Dylan lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],

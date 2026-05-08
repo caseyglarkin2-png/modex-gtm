@@ -10,7 +10,6 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
 // LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
 /*
@@ -311,15 +310,6 @@ export const jmSmucker: AccountMicrositeData = {
         subheadline: 'Smucker runs coffee, snacks, and pet food through 25+ facilities. After the Hostess acquisition, three supply chains share one carrier base but zero unified yard protocol.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Rob, let\'s walk your yard network',
-        subtext: '30-minute conversation about JM Smucker\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Rob',
-        personContext: 'New Chief Product Supply Officer role in February 2026.',
-      },
 
       toneShift: 'Strategic, board-level. Reference Rob\'s mandate and transformation context. Lead with outcomes and business impact, not features.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -351,15 +341,6 @@ export const jmSmucker: AccountMicrositeData = {
         subheadline: 'Smucker runs coffee, snacks, and pet food through 25+ facilities. After the Hostess acquisition, three supply chains share one carrier base but zero unified yard protocol.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Anbu, let\'s walk your yard network',
-        subtext: '30-minute conversation about JM Smucker\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Anbu',
-        personContext: 'New Chief Product Supply Officer role in February 2026.',
-      },
 
       toneShift: 'Operator-to-operator. Anbu lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['turn time', 'detention cost', 'dwell time', 'on-time pickup', 'carrier satisfaction'],
@@ -391,15 +372,6 @@ export const jmSmucker: AccountMicrositeData = {
         subheadline: 'Smucker runs coffee, snacks, and pet food through 25+ facilities. After the Hostess acquisition, three supply chains share one carrier base but zero unified yard protocol.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Amadeo, let\'s walk your yard network',
-        subtext: '30-minute conversation about JM Smucker\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Amadeo',
-        personContext: 'New Chief Product Supply Officer role in February 2026.',
-      },
 
       toneShift: 'Operator-to-operator. Amadeo lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -431,15 +403,6 @@ export const jmSmucker: AccountMicrositeData = {
         subheadline: 'Smucker runs coffee, snacks, and pet food through 25+ facilities. After the Hostess acquisition, three supply chains share one carrier base but zero unified yard protocol.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Jason, let\'s walk your yard network',
-        subtext: '30-minute conversation about JM Smucker\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Jason',
-        personContext: 'New Chief Product Supply Officer role in February 2026.',
-      },
 
       toneShift: 'Operator-to-operator. Jason lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['cost per load', 'detention spend', 'labor cost per trailer', 'total cost of ownership'],
@@ -471,15 +434,6 @@ export const jmSmucker: AccountMicrositeData = {
         subheadline: 'Smucker runs coffee, snacks, and pet food through 25+ facilities. After the Hostess acquisition, three supply chains share one carrier base but zero unified yard protocol.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Justin, let\'s walk your yard network',
-        subtext: '30-minute conversation about JM Smucker\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Justin',
-        personContext: 'New Chief Product Supply Officer role in February 2026.',
-      },
 
       toneShift: 'Operator-to-operator. Justin lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'detention cost', 'throughput', 'operational efficiency'],

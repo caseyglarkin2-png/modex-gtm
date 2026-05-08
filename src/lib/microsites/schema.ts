@@ -201,7 +201,6 @@ export interface PersonVariant {
   sectionOrder?: SectionType[];
   hideSections?: SectionType[];
   addSections?: MicrositeSection[];
-  ctaOverride?: CTABlock;
 
   // Voice & language tuning for this person
   toneShift: string;              // "Operator-to-operator. Reference his plant management background."
@@ -737,7 +736,6 @@ export interface GenericPersonaVariant {
   sectionOrder?: SectionType[];
   hideSections?: SectionType[];
   addSections?: MicrositeSection[];
-  ctaOverride?: CTABlock;
   toneShift?: string;
   kpiLanguage?: string[];
 }

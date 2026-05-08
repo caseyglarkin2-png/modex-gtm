@@ -10,7 +10,6 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
 // LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
 /*
@@ -298,15 +297,6 @@ export const johnDeere: AccountMicrositeData = {
         subheadline: 'Complex industrial campuses and dealer/service expectations make standardization relevant.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Cory, let\'s walk your yard network',
-        subtext: '30-minute conversation about John Deere\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Cory',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Cory lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'detention cost', 'throughput', 'operational efficiency'],
@@ -338,15 +328,6 @@ export const johnDeere: AccountMicrositeData = {
         subheadline: 'Complex industrial campuses and dealer/service expectations make standardization relevant.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'David, let\'s walk your yard network',
-        subtext: '30-minute conversation about John Deere\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'David',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. David lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['turn time', 'detention cost', 'dwell time', 'on-time pickup', 'carrier satisfaction'],
@@ -378,15 +359,6 @@ export const johnDeere: AccountMicrositeData = {
         subheadline: 'Complex industrial campuses and dealer/service expectations make standardization relevant.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Gia, let\'s walk your yard network',
-        subtext: '30-minute conversation about John Deere\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Gia',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Gia lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['dock utilization', 'throughput per shift', 'production schedule adherence', 'temperature-zone compliance'],
@@ -418,15 +390,6 @@ export const johnDeere: AccountMicrositeData = {
         subheadline: 'Complex industrial campuses and dealer/service expectations make standardization relevant.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Kevin, let\'s walk your yard network',
-        subtext: '30-minute conversation about John Deere\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Kevin',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Kevin lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -458,15 +421,6 @@ export const johnDeere: AccountMicrositeData = {
         subheadline: 'Complex industrial campuses and dealer/service expectations make standardization relevant.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Catherine, let\'s walk your yard network',
-        subtext: '30-minute conversation about John Deere\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Catherine',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Catherine lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'detention cost', 'throughput', 'operational efficiency'],

@@ -1,112 +1,24 @@
+/**
+ * Sprint M3.10 / partial M5 — the per-person route now redirects to the
+ * account microsite with `?p=<person-slug>`. The reader-aware rendering
+ * (KPI vocabulary swap, comparable hooks, etc.) lands in full M5; for now
+ * the redirect is a permanent ("301" semantics) move so existing email
+ * links keep working while the route hierarchy collapses to a single
+ * memo per account.
+ *
+ * M7 deletes this file entirely once the redirect has been in place
+ * long enough to expire any cached external links.
+ */
+
+import { redirect } from 'next/navigation';
+
 export const dynamic = 'force-dynamic';
 
-import { notFound } from 'next/navigation';
-import type { Metadata } from 'next';
-import type { MicrositeSection } from '@/lib/microsites/schema';
-import { getAccountMicrositeData } from '@/lib/microsites/accounts';
-import { buildShortOverviewCta, normalizeMicrositeCta } from '@/lib/microsites/cta';
-import { resolveMicrositeBySlug, getVariantRoutes } from '@/lib/microsites/rules';
-import { buildPublicShareMetadata } from '@/lib/microsites/share';
-import { MicrositeShell, getMicrositeSectionNavItems } from '@/components/microsites/microsite-shell';
-import { Reveal } from '@/components/microsites/reveal';
-import { MicrositeSectionRenderer } from '@/components/microsites/sections';
-import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
-
-function isProblemSection(section: MicrositeSection): section is Extract<MicrositeSection, { type: 'problem' }> {
-  return section.type === 'problem';
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ account: string; person: string }>;
-}): Promise<Metadata> {
-  const { account, person } = await params;
-  const data = getAccountMicrositeData(account);
-  if (!data) return { title: 'YardFlow' };
-  const resolved = resolveMicrositeBySlug(data, person);
-  const personName = resolved?.person?.name;
-  const title = personName ? `${data.pageTitle} — ${personName}` : data.pageTitle;
-  const description = resolved?.variant?.openingHook ?? data.metaDescription;
-
-  return buildPublicShareMetadata({
-    title,
-    description,
-    pathname: `/for/${account}/${person}`,
-    imagePath: `/for/${account}/${person}/opengraph-image`,
-    imageAlt: `${personName ?? data.accountName} operating brief preview for ${data.accountName}`,
-  });
-}
-
-export default async function PersonMicrositePage({
+export default async function PersonMicrositeRedirect({
   params,
 }: {
   params: Promise<{ account: string; person: string }>;
 }) {
   const { account, person } = await params;
-  const data = getAccountMicrositeData(account);
-  if (!data) notFound();
-
-  const resolved = resolveMicrositeBySlug(data, person);
-  if (!resolved) notFound();
-
-  const { sections, person: personProfile, variant } = resolved;
-  const primaryCta = normalizeMicrositeCta(resolved.cta ?? buildShortOverviewCta(data.accountName), data.accountName);
-  const variants = getVariantRoutes(data);
-  const navItems = getMicrositeSectionNavItems(sections);
-  const problemSection = sections.find(isProblemSection);
-  const focusPoints =
-    personProfile.strategicPriorities?.slice(0, 4) ??
-    variant.kpiLanguage.slice(0, 4) ??
-    problemSection?.painPoints.slice(0, 4).map((point) => point.headline) ??
-    ['Dock throughput', 'Trailer visibility', 'Execution variance', 'Network impact'];
-
-  return (
-    <>
-      <MicrositeTracker
-        accountName={data.accountName}
-        accountSlug={data.slug}
-        personName={personProfile.name}
-        personSlug={person}
-        path={`/for/${account}/${person}`}
-        variantSlug={variant.variantSlug}
-      />
-      <MicrositeShell
-        accountName={data.accountName}
-        accentColor={data.theme?.accentColor}
-        contextLabel={`For ${personProfile.name} · ${data.accountName}`}
-        contextDetail={[personProfile.title, personProfile.currentMandate].filter(Boolean).join(' · ')}
-        framingNarrative={variant.framingNarrative}
-        title={`${personProfile.firstName} ${personProfile.lastName} operating brief`}
-        summary={variant.openingHook}
-        thesis={variant.stakeStatement}
-        focusPoints={focusPoints}
-        navItems={navItems}
-        primaryCta={{
-          href: primaryCta.calendarLink ?? '#',
-          label: primaryCta.buttonLabel,
-        }}
-        statusLabel={`${data.band}-Band · ${personProfile.function}`}
-        variantLinks={[
-          { href: `/for/${account}`, label: 'Overview', slug: 'overview' },
-          ...variants.map((entry) => ({
-            href: `/for/${account}/${entry.slug}`,
-            label: entry.personName,
-            slug: entry.slug,
-            active: entry.slug === person,
-          })),
-        ]}
-      >
-        {sections.map((section, i) => (
-          <Reveal key={`${section.type}-${i}`} delayMs={Math.min(i * 90, 360)}>
-            <MicrositeSectionRenderer
-              section={section}
-              sectionId={section.sectionId ?? `${section.type}-${i + 1}`}
-              accentColor={data.theme?.accentColor}
-            />
-          </Reveal>
-        ))}
-      </MicrositeShell>
-    </>
-  );
+  redirect(`/for/${account}?p=${encodeURIComponent(person)}`);
 }

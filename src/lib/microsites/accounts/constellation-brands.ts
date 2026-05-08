@@ -12,7 +12,6 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
 // LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
 /*
@@ -220,15 +219,6 @@ export const constellationBrands: AccountMicrositeData = {
         subheadline: '1. **The Veracruz Ramp-Up Problem (2025-2027)**    - As the Veracruz brewery comes online, US receiving infrastructure must absorb 30-50% more inbound volume    - Kester needs to prove that existing US yard/DC infrastructure can handle the growth WITHOUT proportional CapEx increases    - YardFlow\'s value prop: **absorb brewery expansion volume through software, not concrete**',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'John, let\'s walk your yard network',
-        subtext: '30-minute conversation about Constellation Brands\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'John',
-        personContext: 'Constellation Brands is investing in supply chain transformation.',
-      },
 
       toneShift: 'Strategic, board-level. Reference John\'s mandate and transformation context. Lead with outcomes and business impact, not features.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],

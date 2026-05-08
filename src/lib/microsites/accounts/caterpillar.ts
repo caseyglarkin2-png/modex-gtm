@@ -11,7 +11,6 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
 // LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
 /*
@@ -219,15 +218,6 @@ export const caterpillar: AccountMicrositeData = {
         subheadline: 'Margaret — your Griffin GA operation is 120 miles from us at MODEX. When a D11 dozer takes up 4 regular parking spots in the yard and you\'ve got 360,000 part numbers flowing through Morton at 24/7 speed, the invisible constraint isn\'t the assembly line — it\'s the yard staging between build and dealer delivery.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'meeting',
-        headline: 'Margaret, let\'s walk your yard network',
-        subtext: '30-minute conversation about Caterpillar\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-        personName: 'Margaret',
-        personContext: 'Caterpillar is investing in supply chain transformation.',
-      },
 
       toneShift: 'Operator-to-operator. Margaret lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],

@@ -10,7 +10,6 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
 // LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
 /*
@@ -272,15 +271,6 @@ export const barnesNoble: AccountMicrositeData = {
         subheadline: 'Named speaker gives strong attendance signal; retail replenishment pain can map well to yard flow.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Annette, let\'s walk your yard network',
-        subtext: '30-minute conversation about Barnes & Noble\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Annette',
-        personContext: 'Named session speaker indicates event involvement.',
-      },
 
       toneShift: 'Operator-to-operator. Annette lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -312,15 +302,6 @@ export const barnesNoble: AccountMicrositeData = {
         subheadline: 'Named speaker gives strong attendance signal; retail replenishment pain can map well to yard flow.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'John, let\'s walk your yard network',
-        subtext: '30-minute conversation about Barnes & Noble\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'John',
-        personContext: 'Named session speaker indicates event involvement.',
-      },
 
       toneShift: 'Operator-to-operator. John lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -352,15 +333,6 @@ export const barnesNoble: AccountMicrositeData = {
         subheadline: 'Named speaker gives strong attendance signal; retail replenishment pain can map well to yard flow.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Joe, let\'s walk your yard network',
-        subtext: '30-minute conversation about Barnes & Noble\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Joe',
-        personContext: 'Named session speaker indicates event involvement.',
-      },
 
       toneShift: 'Operator-to-operator. Joe lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['turn time', 'detention cost', 'dwell time', 'on-time pickup', 'carrier satisfaction'],
@@ -392,15 +364,6 @@ export const barnesNoble: AccountMicrositeData = {
         subheadline: 'Named speaker gives strong attendance signal; retail replenishment pain can map well to yard flow.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Yobanny, let\'s walk your yard network',
-        subtext: '30-minute conversation about Barnes & Noble\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Yobanny',
-        personContext: 'Named session speaker indicates event involvement.',
-      },
 
       toneShift: 'Operator-to-operator. Yobanny lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'detention cost', 'throughput', 'operational efficiency'],
@@ -432,15 +395,6 @@ export const barnesNoble: AccountMicrositeData = {
         subheadline: 'Named speaker gives strong attendance signal; retail replenishment pain can map well to yard flow.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Patrick, let\'s walk your yard network',
-        subtext: '30-minute conversation about Barnes & Noble\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Patrick',
-        personContext: 'Named session speaker indicates event involvement.',
-      },
 
       toneShift: 'Operator-to-operator. Patrick lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'detention cost', 'throughput', 'operational efficiency'],

@@ -10,7 +10,6 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
 // LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
 /*
@@ -272,15 +271,6 @@ export const hEB: AccountMicrositeData = {
         subheadline: 'Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Troy, let\'s walk your yard network',
-        subtext: '30-minute conversation about H-E-B\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Troy',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Troy lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'detention cost', 'throughput', 'operational efficiency'],
@@ -312,15 +302,6 @@ export const hEB: AccountMicrositeData = {
         subheadline: 'Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Craig, let\'s walk your yard network',
-        subtext: '30-minute conversation about H-E-B\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Craig',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Craig lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['turn time', 'detention cost', 'dwell time', 'on-time pickup', 'carrier satisfaction'],
@@ -352,15 +333,6 @@ export const hEB: AccountMicrositeData = {
         subheadline: 'Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Dakota, let\'s walk your yard network',
-        subtext: '30-minute conversation about H-E-B\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Dakota',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Dakota lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['turn time', 'detention cost', 'dwell time', 'on-time pickup', 'carrier satisfaction'],
@@ -392,15 +364,6 @@ export const hEB: AccountMicrositeData = {
         subheadline: 'Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Jeffrey, let\'s walk your yard network',
-        subtext: '30-minute conversation about H-E-B\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Jeffrey',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Jeffrey lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -432,15 +395,6 @@ export const hEB: AccountMicrositeData = {
         subheadline: 'Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Troy, let\'s walk your yard network',
-        subtext: '30-minute conversation about H-E-B\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Troy',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Troy lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],

@@ -10,7 +10,6 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
 // LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
 /*
@@ -272,15 +271,6 @@ export const georgiaPacific: AccountMicrositeData = {
         subheadline: 'Industrial plant flow and trailer variability create real throughput drag across sites.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Ryan, let\'s walk your yard network',
-        subtext: '30-minute conversation about Georgia Pacific\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Ryan',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Ryan lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -312,15 +302,6 @@ export const georgiaPacific: AccountMicrositeData = {
         subheadline: 'Industrial plant flow and trailer variability create real throughput drag across sites.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Jeremy, let\'s walk your yard network',
-        subtext: '30-minute conversation about Georgia Pacific\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Jeremy',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Jeremy lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -352,15 +333,6 @@ export const georgiaPacific: AccountMicrositeData = {
         subheadline: 'Industrial plant flow and trailer variability create real throughput drag across sites.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Kathryn, let\'s walk your yard network',
-        subtext: '30-minute conversation about Georgia Pacific\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Kathryn',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Kathryn lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -392,15 +364,6 @@ export const georgiaPacific: AccountMicrositeData = {
         subheadline: 'Industrial plant flow and trailer variability create real throughput drag across sites.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Wes, let\'s walk your yard network',
-        subtext: '30-minute conversation about Georgia Pacific\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Wes',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Wes lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['turn time', 'detention cost', 'dwell time', 'on-time pickup', 'carrier satisfaction'],
@@ -432,15 +395,6 @@ export const georgiaPacific: AccountMicrositeData = {
         subheadline: 'Industrial plant flow and trailer variability create real throughput drag across sites.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'John, let\'s walk your yard network',
-        subtext: '30-minute conversation about Georgia Pacific\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'John',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. John lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['turn time', 'detention cost', 'dwell time', 'on-time pickup', 'carrier satisfaction'],

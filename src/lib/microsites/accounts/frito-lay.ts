@@ -1,7 +1,6 @@
 import type { AccountMicrositeData } from '../schema';
 import { getFacilityCountLabel, getFacilityCountLowerBound } from '../../research/facility-fact-registry';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 const FRITO_LAY_FACILITY_COUNT_LABEL = getFacilityCountLabel('Frito-Lay', '230+');
 const FRITO_LAY_FACILITY_COUNT = getFacilityCountLowerBound('Frito-Lay', 230) ?? 230;
 
@@ -332,15 +331,6 @@ export const fritoLay: AccountMicrositeData = {
         subheadline: `Frito-Lay's network speed is unmatched. But the yard - the surface between production and the road - still runs on clipboards and radio calls. One protocol across ${FRITO_LAY_FACILITY_COUNT_LABEL} facilities changes the math.`,
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Brian, Frito-Lay is a past MODEX attendee. Let\'s meet this year.',
-        subtext: '30 minutes on what network-wide yard standardization looks like at Frito-Lay\'s speed.',
-        buttonLabel: 'Meet at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Brian',
-        personContext: `network-wide yard standardization for ${FRITO_LAY_FACILITY_COUNT_LABEL} Frito-Lay facilities`,
-      },
 
       toneShift: 'He is the senior supply chain leader. Speak to network-level impact, not individual sites. He cares about standardization across the system, not fixing one dock.',
       kpiLanguage: ['network throughput', 'standardization', 'turn time', 'capacity recovery', 'multi-site ROI'],
@@ -372,15 +362,6 @@ export const fritoLay: AccountMicrositeData = {
         subheadline: 'DSD route loading runs overnight. The staging sequence has to be right. When the yard runs on radio calls, the wrong trailer ends up at the wrong door, and the morning route starts behind.',
       },
       sectionOrder: ['hero', 'problem', 'solution', 'proof', 'roi', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Beth, let\'s talk about what a system-managed dock looks like for DSD.',
-        subtext: '30 minutes on dock scheduling for the fastest fleet in CPG.',
-        buttonLabel: 'Meet at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Beth',
-        personContext: 'dock scheduling and DSD route loading for Frito-Lay transportation',
-      },
 
       toneShift: 'She is a transportation operator. Speak in fleet and dock language, not executive strategy. She cares about turn times, driver wait, staging sequence, and route loading precision.',
       kpiLanguage: ['turn time', 'dock scheduling', 'DSD route loading', 'fleet utilization', 'driver wait time'],
@@ -412,15 +393,6 @@ export const fritoLay: AccountMicrositeData = {
         subheadline: 'Potatoes, corn, oils - the raw materials that feed Frito-Lay\'s production lines arrive on variable timing. YardFlow gives your dock a system that adapts to that reality instead of fighting it.',
       },
       sectionOrder: ['hero', 'problem', 'solution', 'proof', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'David, let\'s talk about inbound dock scheduling for agricultural freight.',
-        subtext: '30 minutes on how YardFlow handles variable inbound timing.',
-        buttonLabel: 'Meet at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'David',
-        personContext: 'inbound dock scheduling for agricultural and raw material logistics',
-      },
 
       toneShift: 'He is an inbound operations specialist. Do not talk about DSD or outbound - that is Beth\'s world. Talk about agricultural inbound, carrier quality, weather variability, and dock scheduling on the receiving side.',
       kpiLanguage: ['inbound scheduling', 'carrier quality', 'dock utilization', 'agricultural timing', 'raw material flow'],
@@ -452,15 +424,6 @@ export const fritoLay: AccountMicrositeData = {
         subheadline: 'Frito-Lay can optimize routes, capacity, and transportation planning at the network level. But once a trailer hits the dock, each site falls back to its own local process. That is where national variance is born.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'solution', 'proof', 'network-map', 'roi', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Isaac, let\'s look at national transportation variance from the yard up.',
-        subtext: '30 minutes on the execution layer between network transportation planning and site-level dock reality.',
-        buttonLabel: 'Meet at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Isaac',
-        personContext: 'national transportation standardization across the Frito-Lay network',
-      },
 
       toneShift: 'Data-driven and systematic. He has an academic bent and a national remit, so quantify the variance problem and frame YardFlow as a network-standardization mechanism, not a local yard tool.',
       kpiLanguage: ['network optimization', 'standardization', 'turn time', 'route readiness', 'transportation variance'],
@@ -493,15 +456,6 @@ export const fritoLay: AccountMicrositeData = {
         subheadline: 'OTR fleet moves, shipping coordination, and inbound potato logistics all meet at the same dock surface. When that surface depends on radios and memory, your team spends the shift firefighting instead of executing a clean plan.',
       },
       sectionOrder: ['hero', 'problem', 'solution', 'proof', 'roi', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Bob, let\'s talk about a more practical yard workflow.',
-        subtext: '30 minutes on reducing the daily dock and yard scramble across fleet, shipping, and inbound potato flow.',
-        buttonLabel: 'Meet at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Bob',
-        personContext: 'practical yard execution for shipping, OTR fleet, and inbound potato logistics',
-      },
 
       toneShift: 'Practical, direct, operations-first. He does not need a transformation speech. He needs a believable workflow improvement that removes repetitive friction from the team\'s day.',
       kpiLanguage: ['fleet', 'shipping', 'dock', 'logistics', 'practical workflow'],

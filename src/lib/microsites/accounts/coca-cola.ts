@@ -1,7 +1,6 @@
 import type { AccountMicrositeData } from '../schema';
 import { getFacilityCountLabel, getFacilityCountLowerBound } from '../../research/facility-fact-registry';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 const COCA_COLA_FACILITY_COUNT_LABEL = getFacilityCountLabel('Coca-Cola', '70+');
 const COCA_COLA_FACILITY_COUNT = getFacilityCountLowerBound('Coca-Cola', 70) ?? 70;
 
@@ -298,15 +297,6 @@ export const cocaCola: AccountMicrositeData = {
         subheadline: `Coca-Cola Consolidated's $14M in detention costs is public record. That is one bottler. Your system runs ${COCA_COLA_FACILITY_COUNT_LABEL} facilities. YardFlow gives you the system-wide yard protocol your bottler network has never had.`,
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Daniel, your HQ is in Atlanta. MODEX is in Atlanta.',
-        subtext: 'This is the easiest meeting either of us will ever schedule. 30 minutes on what a system-wide yard protocol looks like.',
-        buttonLabel: 'Meet at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Daniel',
-        personContext: 'system-wide yard protocol for the Coca-Cola bottler network',
-      },
 
       toneShift: 'He came from bottling operations. He is not a procurement strategist who has never seen a dock. Talk to him like an operator who now has system-wide authority. Concrete, specific, reference the physical reality he knows.',
       kpiLanguage: ['detention cost', 'system-wide efficiency', 'bottler coordination', 'turn time', 'peak season throughput'],
@@ -338,15 +328,6 @@ export const cocaCola: AccountMicrositeData = {
         subheadline: 'Your role sits where concentrate plants, packaging supply, and bottler operations meet. YardFlow gives BIG a repeatable execution protocol for the yards it directly controls instead of another manual exception process.',
       },
       sectionOrder: ['hero', 'problem', 'solution', 'proof', 'network-map', 'cta'],
-      ctaOverride: {
-        type: 'meeting',
-        headline: 'Dinesh, let\'s look at the yards BIG actually owns.',
-        subtext: '30 minutes on how to standardize dock execution across BIG facilities before the summer surge.',
-        buttonLabel: 'Book a Bottler Review',
-        calendarLink: BOOKING_LINK,
-        personName: 'Dinesh',
-        personContext: 'dock execution across Bottling Investments Group facilities',
-      },
 
       toneShift: 'Operator-to-operator. He lives in bottling execution, not just HQ theory. Talk about concentrate flow, dock sequencing, and peak-season throughput.',
       kpiLanguage: ['throughput', 'dock turns', 'bottling execution', 'staging', 'peak readiness'],
@@ -378,15 +359,6 @@ export const cocaCola: AccountMicrositeData = {
         subheadline: 'You oversee financial performance and supply-chain stewardship for Coca-Cola North America. YardFlow gives you a measurable way to remove hidden dock and yard waste before it compounds into detention cost and missed service.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'roi', 'cta'],
-      ctaOverride: {
-        type: 'meeting',
-        headline: 'Mark, let\'s put real numbers on the hidden yard leak.',
-        subtext: '30 minutes on what detention, dwell, and dock variance are costing North America and how fast that can be recovered.',
-        buttonLabel: 'Book a North America Review',
-        calendarLink: BOOKING_LINK,
-        personName: 'Mark',
-        personContext: 'North America cost, service, and working-capital recovery from yard execution',
-      },
       sectionOverrides: [
         {
           sectionType: 'stakes',

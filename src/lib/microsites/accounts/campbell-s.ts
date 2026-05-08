@@ -12,7 +12,6 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
 // LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
 /*
@@ -220,15 +219,6 @@ export const campbellS: AccountMicrositeData = {
         subheadline: 'Dan Poland\'s role as **Chief Enterprise Transformation Officer** is about finding and scaling operational improvements across the entire company. He\'s not managing day-to-day supply chain anymore — he\'s looking for **transformative capabilities** that drive measurable performance gains. YardFlow fits this mandate perfectly.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'meeting',
-        headline: 'Dan, let\'s walk your yard network',
-        subtext: '30-minute conversation about Campbell\'s\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-        personName: 'Dan',
-        personContext: 'Investment:',
-      },
 
       toneShift: 'Strategic, board-level. Reference Dan\'s mandate and transformation context. Lead with outcomes and business impact, not features.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],

@@ -10,7 +10,6 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
 // LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
 /*
@@ -272,15 +271,6 @@ export const honda: AccountMicrositeData = {
         subheadline: 'Large manufacturing campuses and logistics complexity make yard execution a real operational lever.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Jim, let\'s walk your yard network',
-        subtext: '30-minute conversation about Honda\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Jim',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Jim lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -312,15 +302,6 @@ export const honda: AccountMicrositeData = {
         subheadline: 'Large manufacturing campuses and logistics complexity make yard execution a real operational lever.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Derek, let\'s walk your yard network',
-        subtext: '30-minute conversation about Honda\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Derek',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Derek lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -352,15 +333,6 @@ export const honda: AccountMicrositeData = {
         subheadline: 'Large manufacturing campuses and logistics complexity make yard execution a real operational lever.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'David, let\'s walk your yard network',
-        subtext: '30-minute conversation about Honda\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'David',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. David lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -392,15 +364,6 @@ export const honda: AccountMicrositeData = {
         subheadline: 'Large manufacturing campuses and logistics complexity make yard execution a real operational lever.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Ed, let\'s walk your yard network',
-        subtext: '30-minute conversation about Honda\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Ed',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Ed lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['cost per load', 'detention spend', 'labor cost per trailer', 'total cost of ownership'],

@@ -12,7 +12,6 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
 // LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
 /*
@@ -220,15 +219,6 @@ export const mondelezInternational: AccountMicrositeData = {
         subheadline: 'Claudio built his reputation on the **North America turnaround** — taking underperforming supply chain operations and elevating them to best-in-class. Yard management is exactly the type of **unsexy but high-impact operational lever** that turnaround leaders love: - It\'s measurable (truck turn times, dock utilization, trailer dwell) - It\'s fast to implement (weeks, not years) - It compounds across',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'meeting',
-        headline: 'Claudio, let\'s walk your yard network',
-        subtext: '30-minute conversation about Mondelez International\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-        personName: 'Claudio',
-        personContext: 'Clif Bar acquisition ($2.9B, June 2022):',
-      },
 
       toneShift: 'Strategic, board-level. Reference Claudio\'s mandate and transformation context. Lead with outcomes and business impact, not features.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],

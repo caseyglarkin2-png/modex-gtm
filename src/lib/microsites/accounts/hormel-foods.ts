@@ -10,7 +10,6 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
 // LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
 /*
@@ -272,15 +271,6 @@ export const hormelFoods: AccountMicrositeData = {
         subheadline: 'Hormel runs 40+ facilities with a 700-tractor private fleet. A new CSCO inherits every yard protocol those facilities built independently.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Will, let\'s walk your yard network',
-        subtext: '30-minute conversation about Hormel Foods\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Will',
-        personContext: 'New CSCO in March 2026.',
-      },
 
       toneShift: 'Strategic, board-level. Reference Will\'s mandate and transformation context. Lead with outcomes and business impact, not features.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -312,15 +302,6 @@ export const hormelFoods: AccountMicrositeData = {
         subheadline: 'Hormel runs 40+ facilities with a 700-tractor private fleet. A new CSCO inherits every yard protocol those facilities built independently.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Nicholas, let\'s walk your yard network',
-        subtext: '30-minute conversation about Hormel Foods\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Nicholas',
-        personContext: 'New CSCO in March 2026.',
-      },
 
       toneShift: 'Operator-to-operator. Nicholas lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['turn time', 'detention cost', 'dwell time', 'on-time pickup', 'carrier satisfaction'],
@@ -352,15 +333,6 @@ export const hormelFoods: AccountMicrositeData = {
         subheadline: 'Hormel runs 40+ facilities with a 700-tractor private fleet. A new CSCO inherits every yard protocol those facilities built independently.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Connor, let\'s walk your yard network',
-        subtext: '30-minute conversation about Hormel Foods\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Connor',
-        personContext: 'New CSCO in March 2026.',
-      },
 
       toneShift: 'Operator-to-operator. Connor lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['dock utilization', 'throughput per shift', 'production schedule adherence', 'temperature-zone compliance'],
@@ -392,15 +364,6 @@ export const hormelFoods: AccountMicrositeData = {
         subheadline: 'Hormel runs 40+ facilities with a 700-tractor private fleet. A new CSCO inherits every yard protocol those facilities built independently.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Anthony, let\'s walk your yard network',
-        subtext: '30-minute conversation about Hormel Foods\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Anthony',
-        personContext: 'New CSCO in March 2026.',
-      },
 
       toneShift: 'Operator-to-operator. Anthony lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -432,15 +395,6 @@ export const hormelFoods: AccountMicrositeData = {
         subheadline: 'Hormel runs 40+ facilities with a 700-tractor private fleet. A new CSCO inherits every yard protocol those facilities built independently.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Tim, let\'s walk your yard network',
-        subtext: '30-minute conversation about Hormel Foods\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Tim',
-        personContext: 'New CSCO in March 2026.',
-      },
 
       toneShift: 'Operator-to-operator. Tim lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'detention cost', 'throughput', 'operational efficiency'],

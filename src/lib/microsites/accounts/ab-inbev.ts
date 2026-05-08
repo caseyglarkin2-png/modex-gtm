@@ -1,7 +1,6 @@
 import type { AccountMicrositeData } from '../schema';
 import { getFacilityCountLabel, getFacilityCountLowerBound } from '../../research/facility-fact-registry';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 const AB_INBEV_FACILITY_COUNT_LABEL = getFacilityCountLabel('AB InBev', '100');
 const AB_INBEV_FACILITY_COUNT = getFacilityCountLowerBound('AB InBev', 100) ?? 100;
 
@@ -342,15 +341,6 @@ export const abInbev: AccountMicrositeData = {
         subheadline: 'You deployed Sensolus for trailer tracking. You built the o9 planning transformation. But between a perfectly planned load and a tracked trailer, there is a 48-minute gap at the dock door. YardFlow closes it.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'solution', 'proof', 'network-map', 'roi', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Elito, your Cartersville brewery is 90 minutes from MODEX.',
-        subtext: '30 minutes on what touchless yard operations look like. The ABOne network is the perfect pilot.',
-        buttonLabel: 'Meet at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Elito',
-        personContext: 'touchless yard operations for the AB InBev North America network',
-      },
 
       toneShift: 'He is a transformation leader who sees himself as a change agent. He has public talks and case studies to reference. Mirror his own language (touchless, complexity reduction, transformation) and position YardFlow as the next chapter of the story he has been telling publicly for 5 years. Do not sell him - invite him to extend his own narrative.',
       kpiLanguage: ['touchless yard %', 'dock turn time', 'fleet utilization', 'schedule adherence', 'KPIs at all-time high', 'complexity reduction'],
@@ -382,15 +372,6 @@ export const abInbev: AccountMicrositeData = {
         subheadline: 'You have led logistics, procurement, distribution, and post-acquisition integration across AB InBev. YardFlow gives you one execution protocol between brewery, wholesaler, and fleet so the dock no longer depends on local workarounds.',
       },
       sectionOrder: ['hero', 'problem', 'proof', 'solution', 'network-map', 'roi', 'cta'],
-      ctaOverride: {
-        type: 'meeting',
-        headline: 'Ricardo, let\'s compare global standards to yard reality.',
-        subtext: '30 minutes on where dock execution is still creating site-to-site variance across breweries and ABOne distribution.',
-        buttonLabel: 'Book a Supply Review',
-        calendarLink: BOOKING_LINK,
-        personName: 'Ricardo',
-        personContext: 'global supply standardization across brewery and ABOne yards',
-      },
       sectionOverrides: [
         {
           sectionType: 'solution',

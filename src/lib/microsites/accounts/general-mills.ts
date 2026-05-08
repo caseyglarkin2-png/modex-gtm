@@ -1,7 +1,6 @@
 import type { AccountMicrositeData } from '../schema';
 import { getFacilityCountLabel, getFacilityCountLowerBound } from '../../research/facility-fact-registry';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 const GENERAL_MILLS_FACILITY_COUNT_LABEL = getFacilityCountLabel('General Mills', '41');
 const GENERAL_MILLS_FACILITY_COUNT = getFacilityCountLowerBound('General Mills', 41) ?? 41;
 
@@ -345,15 +344,6 @@ export const generalMills: AccountMicrositeData = {
         subheadline: `You built end-to-end supply chain visibility. But the ${GENERAL_MILLS_FACILITY_COUNT_LABEL} facility yards where trailers stage, wait, and compound costs are still running on local tribal knowledge. YardFlow closes that gap.`,
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'meeting',
-        headline: 'Paul, let\'s walk your yard network',
-        subtext: '30-minute conversation about your facility consolidation and where YardFlow fits in the "Transform" phase.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-        personName: 'Paul',
-        personContext: 'your $82M restructuring and facility consolidation',
-      },
       sectionOverrides: [
         {
           sectionType: 'stakes',
@@ -400,15 +390,6 @@ export const generalMills: AccountMicrositeData = {
         subheadline: 'General Mills depends on contract carriers. Every minute of excess dwell time degrades the relationship. When capacity tightens, the carriers who were treated well get served first. YardFlow cuts your turn times in half.',
       },
       sectionOrder: ['hero', 'problem', 'proof', 'solution', 'comparison', 'network-map', 'cta'],
-      ctaOverride: {
-        type: 'audit',
-        headline: 'Nisar, let\'s look at your turn times',
-        subtext: 'We map your top 3 facilities, measure the carrier experience, and show you where 24-minute turns are hiding.',
-        buttonLabel: 'Start the Network Audit',
-        calendarLink: BOOKING_LINK,
-        personName: 'Nisar',
-        personContext: 'carrier satisfaction and detention cost reduction',
-      },
       addSections: [
         {
           type: 'comparison',
@@ -453,15 +434,6 @@ export const generalMills: AccountMicrositeData = {
         subheadline: 'General Mills invested in manufacturing automation, MES systems, and Palantir digital twins. The yard - where trailers stage, dock assignment happens, and production schedule adherence is decided - still runs on manual processes.',
       },
       sectionOrder: ['hero', 'problem', 'solution', 'modules', 'proof', 'timeline', 'cta'],
-      ctaOverride: {
-        type: 'audit',
-        headline: 'Ryan, let\'s walk your yards',
-        subtext: 'We map the gap between your plant floor automation and your yard operations. 30 minutes.',
-        buttonLabel: 'Start the Network Audit',
-        calendarLink: BOOKING_LINK,
-        personName: 'Ryan',
-        personContext: 'bridging the gap between plant automation and yard operations',
-      },
       addSections: [
         {
           type: 'timeline',
@@ -519,15 +491,6 @@ export const generalMills: AccountMicrositeData = {
         subheadline: 'You own the part of the network where service levels become visible. Seasonal surges, carrier coordination, and outbound dock timing all compress into one moment in the yard. YardFlow makes that moment more predictable.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'comparison', 'roi', 'cta'],
-      ctaOverride: {
-        type: 'audit',
-        headline: 'Zoe, let\'s map where yard variance becomes customer-service risk.',
-        subtext: '30 minutes on outbound execution, carrier coordination, and retail service-level protection during peak volume windows.',
-        buttonLabel: 'Start the Network Audit',
-        calendarLink: BOOKING_LINK,
-        personName: 'Zoe',
-        personContext: 'protecting North American retail service levels during seasonal demand surges',
-      },
       addSections: [
         {
           type: 'comparison',
@@ -572,15 +535,6 @@ export const generalMills: AccountMicrositeData = {
         subheadline: 'Gate processes, dock scheduling, and yard visibility determine whether the facility starts the shift clean or spends the day chasing exceptions. YardFlow gives the site one reliable operating sequence.',
       },
       sectionOrder: ['hero', 'problem', 'solution', 'proof', 'timeline', 'cta'],
-      ctaOverride: {
-        type: 'audit',
-        headline: 'Lars, let\'s walk the gate-to-dock sequence at the facility level.',
-        subtext: '30 minutes on the gate process, dock scheduling, and yard congestion points that create the daily scramble.',
-        buttonLabel: 'Start the Network Audit',
-        calendarLink: BOOKING_LINK,
-        personName: 'Lars',
-        personContext: 'cleaning up gate, dock, and yard flow at the facility level',
-      },
       addSections: [
         {
           type: 'timeline',

@@ -11,7 +11,6 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
 // LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
 /*
@@ -219,15 +218,6 @@ export const ford: AccountMicrositeData = {
         subheadline: 'A Chief Supply Chain Officer at Ford is measured on: 1. **Line uptime** — Any line-down event is career-threatening. JIT failures cascade immediately. 2. **Cost per unit** — Ford is publicly behind Toyota/Hyundai on cost. Every inefficiency matters. 3. **Working capital** — 400,000 vehicles sitting in yards = billions in tied-up capital. Reducing dwell by even 2 days frees hundreds of millions. 4.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Elizabeth, let\'s walk your yard network',
-        subtext: '30-minute conversation about Ford\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Elizabeth',
-        personContext: '$5.6B mega-campus',
-      },
 
       toneShift: 'Strategic, board-level. Reference Elizabeth\'s mandate and transformation context. Lead with outcomes and business impact, not features.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],

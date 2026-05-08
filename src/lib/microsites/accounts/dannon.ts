@@ -13,7 +13,6 @@
 import type { AccountMicrositeData } from '../schema';
 import { getFacilityCountLabel, getFacilityCountLowerBound } from '../../research/facility-fact-registry';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 const DANNON_FACILITY_COUNT_LABEL = getFacilityCountLabel('Dannon', '13');
 const DANNON_FACILITY_COUNT = getFacilityCountLowerBound('Dannon', 13) ?? 13;
 
@@ -277,15 +276,6 @@ export const dannon: AccountMicrositeData = {
         subheadline: 'Fresh dairy, plant-based, water, and medical nutrition all compete for the same dock surface. YardFlow gives North America one operating protocol across all four temperature realities.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'warm-intro',
-        headline: 'Heiko, this conversation is routed through Mark Shaughnessy',
-        subtext: 'A trusted mutual connection. 30 minutes to walk Danone\'s yard network with Casey.',
-        buttonLabel: 'Request an Introduction',
-        calendarLink: BOOKING_LINK,
-        personName: 'Heiko',
-        personContext: 'Warm intro via Mark Shaughnessy',
-      },
 
       toneShift: 'Executive operations language. He owns the full handoff from plant through service. Lead with freshness, operating discipline, and cross-functional impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -317,15 +307,6 @@ export const dannon: AccountMicrositeData = {
         subheadline: `You can only standardize what the network can see. YardFlow turns ${DANNON_FACILITY_COUNT_LABEL} local yard routines into one visible, measurable supply layer for Danone North America.`,
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'warm-intro',
-        headline: 'Whitney, this conversation is routed through Mark Shaughnessy',
-        subtext: 'A trusted mutual connection. 30 minutes to walk Danone\'s yard network with Casey.',
-        buttonLabel: 'Request an Introduction',
-        calendarLink: BOOKING_LINK,
-        personName: 'Whitney',
-        personContext: 'Warm intro via Mark Shaughnessy',
-      },
 
       toneShift: 'Network-oriented supply chain language. She is a routing and triangulation contact, so make it easy to see where the real operating owner should lean in.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -357,15 +338,6 @@ export const dannon: AccountMicrositeData = {
         subheadline: 'If a carrier waits at the gate or the wrong reefer gets staged, procurement pays for an execution problem it did not create. YardFlow closes that gap.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'warm-intro',
-        headline: 'Jacqueline, this conversation is routed through Mark Shaughnessy',
-        subtext: 'A trusted mutual connection. 30 minutes to walk Danone\'s yard network with Casey.',
-        buttonLabel: 'Request an Introduction',
-        calendarLink: BOOKING_LINK,
-        personName: 'Jacqueline',
-        personContext: 'Warm intro via Mark Shaughnessy',
-      },
 
       toneShift: 'Procurement and carrier-management language. Focus on accessorials, appointment discipline, and supplier trust.',
       kpiLanguage: ['turn time', 'detention cost', 'dwell time', 'on-time pickup', 'carrier satisfaction'],
@@ -397,15 +369,6 @@ export const dannon: AccountMicrositeData = {
         subheadline: 'S&OP does not stop at the appointment calendar. The refrigerated door sequence has to match the plan or freshness and service both slip.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'warm-intro',
-        headline: 'Annette, this conversation is routed through Mark Shaughnessy',
-        subtext: 'A trusted mutual connection. 30 minutes to walk Danone\'s yard network with Casey.',
-        buttonLabel: 'Request an Introduction',
-        calendarLink: BOOKING_LINK,
-        personName: 'Annette',
-        personContext: 'Warm intro via Mark Shaughnessy',
-      },
 
       toneShift: 'Planning and customer-service language. Tie yard performance directly to schedule adherence and freshness-protected service.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -437,15 +400,6 @@ export const dannon: AccountMicrositeData = {
         subheadline: 'Away From Home orders punish yard variance faster than retail replenishment does. YardFlow gives site teams a deterministic sequence instead of radio-driven guesswork.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'warm-intro',
-        headline: 'Jay, this conversation is routed through Mark Shaughnessy',
-        subtext: 'A trusted mutual connection. 30 minutes to walk Danone\'s yard network with Casey.',
-        buttonLabel: 'Request an Introduction',
-        calendarLink: BOOKING_LINK,
-        personName: 'Jay',
-        personContext: 'Warm intro via Mark Shaughnessy',
-      },
 
       toneShift: 'Field-operations language. He cares about appointment precision, warehouse flow, and what the site team has to do when the yard falls behind.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
