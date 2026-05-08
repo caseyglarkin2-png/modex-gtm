@@ -13,7 +13,22 @@
  */
 
 // ── Section Module Types ──────────────────────────────────────────────
+//
+// The 5 memo-era section types ('yns-thesis', 'observation', 'comparable',
+// 'methodology', 'about') drive the new light-memo template introduced by
+// the YNS Microsite Redesign roadmap (Sprint M2+). The remaining legacy
+// types ('hero' through 'case-study') are kept here so that pre-migration
+// account .ts files still type-check; Sprint M3 migrates each account onto
+// the memo types via a compat adapter, and Sprint M7 deletes the legacy
+// section types entirely.
 export type SectionType =
+  // Memo-era section types (post-M2)
+  | 'yns-thesis'
+  | 'observation'
+  | 'comparable'
+  | 'methodology'
+  | 'about'
+  // Legacy section types (pre-M3 migration; deleted in M7)
   | 'hero'
   | 'problem'
   | 'stakes'
@@ -27,6 +42,13 @@ export type SectionType =
   | 'cta'
   | 'comparison'
   | 'case-study';
+
+export type MemoSectionType =
+  | 'yns-thesis'
+  | 'observation'
+  | 'comparable'
+  | 'methodology'
+  | 'about';
 
 /**
  * PersonaLane is ONLY used as a fallback category when we don't have
@@ -504,7 +526,92 @@ export interface CTASection extends BaseMicrositeSection {
   closingLine?: string;
 }
 
+// ── Memo-era section types (Sprint M2+) ────────────────────────────────
+//
+// These five types drive the light-memo template introduced by the YNS
+// Microsite Redesign. Each section is data-only — the renderer applies
+// the memo voice + footnote treatment + accent line.
+
+export interface FootnoteData {
+  id: string;                         // stable id for the inline marker, e.g. 'ata-2024'
+  source: string;                     // full citation: 'ATA 2024 Yard Ops Survey'
+  confidence: ROISourceConfidence;    // measured / public / estimated / inferred
+  detail?: string;                    // optional 1-line detail shown inline with the footnote
+  url?: string;                       // external link when available
+}
+
+/**
+ * The universal YNS thesis (75% of yards run on radios + clipboards;
+ * WMS/TMS doesn't see the gate-to-dock; YNS is the missing layer).
+ * Content is owned by `src/lib/microsites/yns-thesis.ts` so it stays
+ * universal across accounts; only the headline override is per-account.
+ */
+export interface YnsThesisSection extends BaseMicrositeSection {
+  type: 'yns-thesis';
+  headlineOverride?: string;
+}
+
+/**
+ * "What we observed about your network." Public-data composition + a
+ * bottleneck hypothesis written as observation, not claim.
+ */
+export interface ObservationSection extends BaseMicrositeSection {
+  type: 'observation';
+  headline: string;                                  // e.g. 'What we observed about your network'
+  composition: { label: string; value: string }[];   // facility count, archetype mix
+  hypothesis: string;                                // bottleneck hypothesis paragraph
+  caveat?: string;                                   // 'we may be wrong about parts of this'
+  footnotes?: FootnoteData[];
+}
+
+/**
+ * "What a similar network did." Peer/customer case study, archetype-matched.
+ * Reference availability is noted softly (no booking CTA).
+ */
+export interface ComparableSection extends BaseMicrositeSection {
+  type: 'comparable';
+  headline: string;                                  // e.g. 'What a similar network did'
+  comparableName: string;                            // e.g. 'Primo Brands'
+  comparableProfile: string;                         // 'nine sites, similar archetype mix'
+  metrics: { label: string; before: string; after: string; delta: string }[];
+  timeline: string;                                  // '30 days to first impact'
+  referenceAvailable?: boolean;                      // soft 'their CFO is open to a peer call'
+  footnotes?: FootnoteData[];
+}
+
+/**
+ * "How this analysis was built." Sources, confidence levels, and explicit
+ * intellectual-honesty list of what we don't know.
+ */
+export interface MethodologySection extends BaseMicrositeSection {
+  type: 'methodology';
+  headline: string;                                  // e.g. 'How this analysis was built'
+  sources: FootnoteData[];                           // every claim's underlying source
+  unknowns: string[];                                // 'we can't see your TMS data'
+}
+
+/**
+ * "About this analysis." Author bio + soft sign-off. The deep link to /roi/
+ * is rendered automatically by the section renderer (built from the
+ * account's archetype mix); not stored in section data.
+ */
+export interface AboutSection extends BaseMicrositeSection {
+  type: 'about';
+  headline?: string;                                 // defaults to 'About this analysis'
+  authorBio: string;
+  authorEmail: string;
+  signOff?: string;                                  // optional universal sign-off paragraph
+}
+
+export type MemoMicrositeSection =
+  | YnsThesisSection
+  | ObservationSection
+  | ComparableSection
+  | MethodologySection
+  | AboutSection;
+
 export type MicrositeSection =
+  | MemoMicrositeSection
   | HeroSection
   | ProblemSection
   | StakesSection
