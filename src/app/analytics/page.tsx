@@ -10,7 +10,9 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { EmailAnalyticsClient } from '@/components/analytics/email-analytics-client';
 import { MetricCard } from '@/components/metric-card';
+import { QuarterlyRich } from '@/components/analytics/quarterly-rich';
 import { cn } from '@/lib/utils';
 import { analyticsWorkspaceTabs, parseAnalyticsTab } from '@/lib/analytics-workspace';
 import { dbGetDashboardStats } from '@/lib/db';
@@ -287,6 +289,75 @@ export default async function AnalyticsPage({
   const attributionRows = selectedTab === 'email-engagement'
     ? await getContentAttributionRows(prisma)
     : [];
+
+  const emailLogRows = selectedTab === 'email-engagement'
+    ? await prisma.emailLog.findMany({
+        orderBy: { sent_at: 'desc' },
+        take: 500,
+        select: {
+          id: true,
+          to_email: true,
+          subject: true,
+          status: true,
+          account_name: true,
+          persona_name: true,
+          sent_at: true,
+          opened_at: true,
+          thread_id: true,
+          reply_count: true,
+          hubspot_engagement_id: true,
+        },
+      })
+    : null;
+  const serializedEmailLogRows = emailLogRows
+    ? emailLogRows.map((e) => ({
+        id: e.id,
+        to_email: e.to_email,
+        subject: e.subject,
+        status: e.status,
+        account_name: e.account_name,
+        persona_name: e.persona_name,
+        sent_at: e.sent_at.toISOString(),
+        opened_at: e.opened_at?.toISOString() ?? null,
+        thread_id: e.thread_id,
+        reply_count: e.reply_count,
+        hubspot_engagement_id: e.hubspot_engagement_id,
+      }))
+    : null;
+
+  const quarterlyData = selectedTab === 'quarterly'
+    ? await (async () => {
+        const yearStart = new Date(Date.UTC(now.getUTCFullYear(), 0, 1));
+        const yearEnd = new Date(Date.UTC(now.getUTCFullYear() + 1, 0, 1));
+        const [emails, meetings, qCampaigns, qAccounts, goalConfigs] = await Promise.all([
+          prisma.emailLog.findMany({
+            where: { sent_at: { gte: yearStart, lt: yearEnd } },
+            select: { sent_at: true, reply_count: true },
+          }),
+          prisma.meeting.findMany({
+            where: { created_at: { gte: yearStart, lt: yearEnd } },
+            select: { created_at: true, meeting_status: true },
+          }),
+          prisma.campaign.findMany({
+            where: {
+              OR: [
+                { created_at: { gte: yearStart, lt: yearEnd } },
+                { start_date: { gte: yearStart, lt: yearEnd } },
+              ],
+            },
+            select: { name: true, status: true, created_at: true, start_date: true },
+          }),
+          prisma.account.findMany({
+            select: { name: true, pipeline_stage: true, priority_score: true, updated_at: true },
+          }),
+          prisma.systemConfig.findMany({
+            where: { key: { startsWith: `quarterly-goals:${now.getUTCFullYear()}-` } },
+            select: { key: true, value: true },
+          }),
+        ]);
+        return { emails, meetings, qCampaigns, qAccounts, goalConfigs };
+      })()
+    : null;
   const attributionSummaries = summarizeContentAttribution(attributionRows, attributionView);
   const lowConfidencePresent = hasLowConfidenceSummaries(attributionSummaries);
   const failureTrend = buildWeeklyFailureTrend(
@@ -572,19 +643,9 @@ export default async function AnalyticsPage({
               tone={stats.bounceRate > 5 ? 'text-red-600' : 'text-foreground'}
             />
           </div>
-          <Card>
-            <CardContent className="flex flex-wrap items-center justify-between gap-3 p-4">
-              <div>
-                <p className="text-sm font-medium">Detailed Email Analytics</p>
-                <p className="text-xs text-muted-foreground">
-                  Drill into recipient-level delivery, open, and response behavior.
-                </p>
-              </div>
-              <Link href="/analytics/emails">
-                <Button size="sm">Open Email Analytics</Button>
-              </Link>
-            </CardContent>
-          </Card>
+          {serializedEmailLogRows ? (
+            <EmailAnalyticsClient emails={serializedEmailLogRows} />
+          ) : null}
 
           <Card>
             <CardHeader className="pb-2">
@@ -809,24 +870,29 @@ export default async function AnalyticsPage({
       ) : null}
 
       {selectedTab === 'quarterly' ? (
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-base">Quarterly Review</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3 text-sm">
-            <div className="grid gap-3 md:grid-cols-3">
-              <QuarterCell icon={CalendarRange} label="Current Quarter" value={`${quarterLabel} ${year}`} />
-              <QuarterCell icon={Mail} label="Sends This Quarter" value={String(quarterSendCount)} />
-              <QuarterCell icon={CheckCircle2} label="Meetings Booked" value={String(stats.meetingsBooked)} />
-            </div>
-            <p className="text-muted-foreground">
-              Legacy route compatibility is preserved at <code>/analytics/quarterly</code>, and campaign-level quarterly rollups remain available from campaign analytics.
-            </p>
-            <Link href="/analytics/quarterly">
-              <Button size="sm">Open Quarterly Detail</Button>
-            </Link>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base">Quarterly Snapshot</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3 text-sm">
+              <div className="grid gap-3 md:grid-cols-3">
+                <QuarterCell icon={CalendarRange} label="Current Quarter" value={`${quarterLabel} ${year}`} />
+                <QuarterCell icon={Mail} label="Sends This Quarter" value={String(quarterSendCount)} />
+                <QuarterCell icon={CheckCircle2} label="Meetings Booked" value={String(stats.meetingsBooked)} />
+              </div>
+            </CardContent>
+          </Card>
+          {quarterlyData ? (
+            <QuarterlyRich
+              emails={quarterlyData.emails}
+              meetings={quarterlyData.meetings}
+              campaigns={quarterlyData.qCampaigns}
+              accounts={quarterlyData.qAccounts}
+              goalConfigs={quarterlyData.goalConfigs}
+            />
+          ) : null}
+        </div>
       ) : null}
     </div>
   );
