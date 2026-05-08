@@ -1007,16 +1007,6 @@ export default async function AccountDetailPage({
               </CardContent>
             </Card>
           ) : null}
-          <div className="grid gap-4 md:grid-cols-2">
-            <Card>
-              <CardHeader className="pb-2"><CardTitle className="text-sm">Why Now</CardTitle></CardHeader>
-              <CardContent><p className="text-sm">{account.why_now}</p></CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-2"><CardTitle className="text-sm">Primo Angle</CardTitle></CardHeader>
-              <CardContent><p className="text-sm">{account.primo_angle}</p></CardContent>
-            </Card>
-          </div>
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm">Microsite Engagement</CardTitle>
