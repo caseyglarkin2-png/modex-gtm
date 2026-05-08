@@ -22,7 +22,6 @@ export type NavModule = {
   href: string;
   icon: LucideIcon;
   aliases: string[];
-  section: 'Operator Flow' | 'Platform';
 };
 
 export type CommandRoute = {
@@ -34,16 +33,16 @@ export type CommandRoute = {
 };
 
 export const canonicalNavModules: NavModule[] = [
-  { id: 'accounts', label: 'Accounts', href: '/accounts', icon: Building2, aliases: ['/accounts'], section: 'Operator Flow' },
-  { id: 'content-studio', label: 'Content Studio', href: '/studio', icon: FileText, aliases: ['/studio', '/generated-content', '/briefs', '/search', '/intel', '/audit-routes', '/qr', '/for', '/proposal'], section: 'Operator Flow' },
-  { id: 'work-queue', label: 'Work Queue', href: '/queue', icon: ListTodo, aliases: ['/queue', '/queue/generations', '/capture'], section: 'Operator Flow' },
-  { id: 'engagement', label: 'Engagement', href: '/engagement', icon: Inbox, aliases: ['/engagement', '/api/notifications'], section: 'Operator Flow' },
-  { id: 'analytics', label: 'Analytics', href: '/analytics', icon: BarChart3, aliases: ['/analytics', '/analytics/emails', '/analytics/quarterly'], section: 'Operator Flow' },
-  { id: 'home', label: 'Home', href: '/', icon: Home, aliases: ['/'], section: 'Platform' },
-  { id: 'campaigns', label: 'Campaigns', href: '/campaigns', icon: Megaphone, aliases: ['/campaigns', '/waves', '/waves/campaign'], section: 'Platform' },
-  { id: 'contacts', label: 'Contacts', href: '/contacts', icon: Users, aliases: ['/contacts', '/personas'], section: 'Platform' },
-  { id: 'pipeline', label: 'Pipeline', href: '/pipeline', icon: GitBranch, aliases: ['/pipeline', '/activities', '/meetings'], section: 'Platform' },
-  { id: 'ops', label: 'Ops', href: '/ops', icon: Settings, aliases: ['/ops', '/admin/crons', '/admin/generation-metrics'], section: 'Platform' },
+  { id: 'home', label: 'Home', href: '/', icon: Home, aliases: ['/'] },
+  { id: 'accounts', label: 'Accounts', href: '/accounts', icon: Building2, aliases: ['/accounts'] },
+  { id: 'content-studio', label: 'Content Studio', href: '/studio', icon: FileText, aliases: ['/studio', '/generated-content', '/briefs', '/search', '/intel', '/audit-routes', '/qr', '/for', '/proposal'] },
+  { id: 'pipeline', label: 'Pipeline', href: '/pipeline', icon: GitBranch, aliases: ['/pipeline', '/activities', '/meetings'] },
+  { id: 'campaigns', label: 'Campaigns', href: '/campaigns', icon: Megaphone, aliases: ['/campaigns', '/waves', '/waves/campaign'] },
+  { id: 'contacts', label: 'Contacts', href: '/contacts', icon: Users, aliases: ['/contacts', '/personas'] },
+  { id: 'engagement', label: 'Engagement', href: '/engagement', icon: Inbox, aliases: ['/engagement', '/api/notifications'] },
+  { id: 'work-queue', label: 'Work Queue', href: '/queue', icon: ListTodo, aliases: ['/queue', '/queue/generations', '/capture'] },
+  { id: 'analytics', label: 'Analytics', href: '/analytics', icon: BarChart3, aliases: ['/analytics', '/analytics/emails', '/analytics/quarterly'] },
+  { id: 'ops', label: 'Ops', href: '/ops', icon: Settings, aliases: ['/ops', '/admin/crons', '/admin/generation-metrics'] },
 ];
 
 export const commandRoutes: CommandRoute[] = [
