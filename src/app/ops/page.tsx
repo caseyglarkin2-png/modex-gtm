@@ -4,6 +4,8 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { CronHealthRich } from '@/components/ops/cron-health-rich';
+import { GenerationMetricsRich } from '@/components/ops/generation-metrics-rich';
 import { MetricCard } from '@/components/metric-card';
 import { cn } from '@/lib/utils';
 import { opsWorkspaceTabs, parseOpsTab, type OpsTabId } from '@/lib/ops-workspace';
@@ -68,6 +70,8 @@ export default async function OpsPage({
           { key: { startsWith: 'cron:' } },
           { key: { startsWith: 'coverage_' } },
           { key: { startsWith: 'event_qa_' } },
+          { key: { startsWith: 'runbook:' } },
+          { key: 'enrichment_hubspot_ingestion_audit' },
         ],
       },
       select: { key: true, value: true },
@@ -182,7 +186,6 @@ export default async function OpsPage({
   const generationMetrics = computeGenerationMetrics(generationJobs);
   const sendMetrics = computeSendJobMetrics(sendJobs, sendJobRecipients);
   const cronHealthy = cronRows.filter((row) => row.value.includes('"status":"ok"')).length;
-  const cronErrors = cronRows.filter((row) => row.value.includes('"status":"error"') || row.value.includes('"status":"skipped"')).length;
   const configMap = new Map(cronRows.map((row) => [row.key, row.value]));
   const tamCompanies = Number(process.env.TAM_COMPANY_TARGET || 1000);
   const tamContacts = Number(process.env.TAM_CONTACT_TARGET || 13000);
@@ -410,18 +413,7 @@ export default async function OpsPage({
       ) : null}
 
       {selectedTab === 'cron-health' ? (
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-base">Cron Health</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3 text-sm">
-            <div className="grid gap-3 md:grid-cols-3">
-              <MiniMetric label="Healthy Jobs" value={cronHealthy} tone="text-emerald-600" />
-              <MiniMetric label="Attention Needed" value={cronErrors} tone={cronErrors > 0 ? 'text-amber-600' : 'text-foreground'} />
-              <MiniMetric label="Total Tracked" value={cronRows.length} />
-            </div>
-          </CardContent>
-        </Card>
+        <CronHealthRich configs={cronRows} generationJobs={generationJobs} />
       ) : null}
 
       {selectedTab === 'generation-metrics' ? (
@@ -496,6 +488,14 @@ export default async function OpsPage({
             </div>
           </CardContent>
         </Card>
+      ) : null}
+
+      {selectedTab === 'generation-metrics' ? (
+        <GenerationMetricsRich
+          jobs={generationJobs}
+          sendJobs={sendJobs}
+          sendJobRecipients={sendJobRecipients}
+        />
       ) : null}
 
       {selectedTab === 'provider-health' ? (
