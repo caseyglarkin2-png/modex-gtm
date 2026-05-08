@@ -410,6 +410,20 @@ export default async function AccountDetailPage({
                     </div>
                   )}
                 </div>
+                {account.best_intro_path ? (
+                  <div>
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--muted-foreground)]">Best intro path</p>
+                    <div className="mt-0.5 text-sm">
+                      <EditableLongText
+                        accountSlug={slug}
+                        field="best_intro_path"
+                        currentValue={account.best_intro_path}
+                        emptyFallback="No intro path captured yet."
+                        placeholder="How should we get into this account?"
+                      />
+                    </div>
+                  </div>
+                ) : null}
                 {timeline[0] ? (
                   <div>
                     <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--muted-foreground)]">Latest signal</p>
@@ -924,7 +938,9 @@ export default async function AccountDetailPage({
             </Card>
           ) : null}
           <AccountEngagementSummaryCard summary={engagementSummary} accountSlug={slug} />
-          {canonicalAccountSummary ? (
+          {canonicalAccountSummary
+            && (canonicalAccountSummary.unresolvedConflicts > 0
+              || canonicalAccountSummary.duplicateCompanyAccounts.length > 0) ? (
             <Card>
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm">Canonical Record Summary</CardTitle>
@@ -1079,33 +1095,6 @@ export default async function AccountDetailPage({
               )}
             </CardContent>
           </Card>
-          <div className="grid gap-4 md:grid-cols-3">
-            <Card>
-              <CardHeader className="pb-2"><CardTitle className="text-xs text-[var(--muted-foreground)]">Best Intro Path</CardTitle></CardHeader>
-              <CardContent>
-                <EditableLongText
-                  accountSlug={slug}
-                  field="best_intro_path"
-                  currentValue={account.best_intro_path}
-                  emptyFallback="No intro path captured yet."
-                  placeholder="How should we get into this account?"
-                />
-                {latestFieldEditByField.get('best_intro_path') ? (
-                  <p className="mt-2 text-[10px] text-[var(--muted-foreground)]">
-                    Edited {formatActivityDate(latestFieldEditByField.get('best_intro_path')!.at)} by {latestFieldEditByField.get('best_intro_path')!.actor}
-                  </p>
-                ) : null}
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-2"><CardTitle className="text-xs text-[var(--muted-foreground)]">Current Motion</CardTitle></CardHeader>
-              <CardContent><p className="text-sm font-medium">{account.current_motion}</p></CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-2"><CardTitle className="text-xs text-[var(--muted-foreground)]">Next Action</CardTitle></CardHeader>
-              <CardContent><p className="text-sm font-medium">{account.next_action}</p></CardContent>
-            </Card>
-          </div>
           {account.notes && (
             <Card>
               <CardHeader className="pb-2"><CardTitle className="text-sm">Notes</CardTitle></CardHeader>

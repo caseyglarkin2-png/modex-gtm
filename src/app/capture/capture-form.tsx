@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MetricCard } from '@/components/metric-card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
@@ -97,10 +98,10 @@ export default function CaptureForm({ accountSuggestions }: { accountSuggestions
       </div>
 
       <div className="grid gap-4 md:grid-cols-4">
-        <CaptureMetricCard label="Pending sync" value={pendingCount} tone={pendingCount > 0 ? 'text-amber-600' : 'text-emerald-600'} />
-        <CaptureMetricCard label="Current heat" value={heatScore} tone={heatScore >= 16 ? 'text-red-600' : heatScore >= 12 ? 'text-amber-600' : 'text-[var(--foreground)]'} suffix=" / 20" />
-        <CaptureMetricCard label="Connection" value={isOnline ? 'Online' : 'Offline'} tone={isOnline ? 'text-emerald-600' : 'text-amber-600'} />
-        <CaptureMetricCard label="Follow-up band" value={heatScore >= 16 ? 'Hot' : heatScore >= 12 ? 'Warm' : 'Nurture'} tone={heatScore >= 16 ? 'text-red-600' : heatScore >= 12 ? 'text-amber-600' : 'text-[var(--foreground)]'} />
+        <MetricCard label="Pending sync" value={pendingCount} tone={pendingCount > 0 ? 'text-amber-600' : 'text-emerald-600'} />
+        <MetricCard label="Current heat" value={`${heatScore} / 20`} tone={heatScore >= 16 ? 'text-red-600' : heatScore >= 12 ? 'text-amber-600' : 'text-[var(--foreground)]'} />
+        <MetricCard label="Connection" value={isOnline ? 'Online' : 'Offline'} tone={isOnline ? 'text-emerald-600' : 'text-amber-600'} />
+        <MetricCard label="Follow-up band" value={heatScore >= 16 ? 'Hot' : heatScore >= 12 ? 'Warm' : 'Nurture'} tone={heatScore >= 16 ? 'text-red-600' : heatScore >= 12 ? 'text-amber-600' : 'text-[var(--foreground)]'} />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
@@ -203,23 +204,3 @@ export default function CaptureForm({ accountSuggestions }: { accountSuggestions
   );
 }
 
-function CaptureMetricCard({
-  label,
-  value,
-  tone,
-  suffix = '',
-}: {
-  label: string;
-  value: number | string;
-  tone: string;
-  suffix?: string;
-}) {
-  return (
-    <Card>
-      <CardContent className="p-4 text-center">
-        <p className="text-[11px] uppercase tracking-wide text-[var(--muted-foreground)]">{label}</p>
-        <p className={`mt-2 text-2xl font-bold ${tone}`}>{value}{suffix}</p>
-      </CardContent>
-    </Card>
-  );
-}

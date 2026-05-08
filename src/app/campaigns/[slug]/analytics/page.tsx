@@ -1,4 +1,3 @@
-import type { ComponentType } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowRight, DollarSign, Mail, MessageSquare, TrendingUp, Users } from 'lucide-react';
@@ -6,6 +5,7 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MetricCard } from '@/components/metric-card';
 import { ensureDefaultCampaign } from '@/lib/campaigns';
 import { derivePipelineStage, PIPELINE_STAGE_LABELS, type PipelineStage } from '@/lib/pipeline';
 import { prisma } from '@/lib/prisma';
@@ -124,11 +124,11 @@ export default async function CampaignAnalyticsPage({ params }: { params: Promis
       </div>
 
       <div className="grid gap-4 md:grid-cols-5">
-        <MetricCard label="Sends" value={sent} icon={Mail} sublabel={`${delivered} delivered`} />
-        <MetricCard label="Open Rate" value={formatPercent(openRate)} icon={TrendingUp} sublabel={`${opened} total opens`} />
-        <MetricCard label="Reply Rate" value={formatPercent(replyRate)} icon={MessageSquare} sublabel={`${replies} replies`} />
-        <MetricCard label="Meetings" value={meetingsBooked} icon={Users} sublabel="booked or held" />
-        <MetricCard label="Estimated Pipeline" value={formatCurrency(estimatedPipeline)} icon={DollarSign} sublabel="active deal value" />
+        <MetricCard label="Sends" value={sent} icon={Mail} detail={`${delivered} delivered`} />
+        <MetricCard label="Open Rate" value={formatPercent(openRate)} icon={TrendingUp} detail={`${opened} total opens`} />
+        <MetricCard label="Reply Rate" value={formatPercent(replyRate)} icon={MessageSquare} detail={`${replies} replies`} />
+        <MetricCard label="Meetings" value={meetingsBooked} icon={Users} detail="booked or held" />
+        <MetricCard label="Estimated Pipeline" value={formatCurrency(estimatedPipeline)} icon={DollarSign} detail="active deal value" />
       </div>
 
       <div className="grid gap-4 lg:grid-cols-2">
@@ -227,31 +227,3 @@ export default async function CampaignAnalyticsPage({ params }: { params: Promis
   );
 }
 
-function MetricCard({
-  label,
-  value,
-  sublabel,
-  icon: Icon,
-}: {
-  label: string;
-  value: string | number;
-  sublabel: string;
-  icon: ComponentType<{ className?: string }>;
-}) {
-  return (
-    <Card>
-      <CardContent className="p-5">
-        <div className="flex items-center justify-between gap-3">
-          <div>
-            <p className="text-sm text-muted-foreground">{label}</p>
-            <p className="mt-1 text-2xl font-bold">{value}</p>
-            <p className="mt-1 text-xs text-muted-foreground">{sublabel}</p>
-          </div>
-          <div className="rounded-lg bg-[var(--accent)] p-2.5">
-            <Icon className="h-5 w-5 text-[var(--muted-foreground)]" />
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
