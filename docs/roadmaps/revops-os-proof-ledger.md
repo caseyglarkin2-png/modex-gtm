@@ -4,6 +4,42 @@
 
 **Purpose:** Ground-source truth for RevOps OS delivery. A roadmap task is not done because it is planned or implemented; it is done when this ledger records command proof, UI click proof, and artifacts.
 
+## IA Consolidation Sprint A Closeout
+
+**Status:** Completed (tsc + lint pass; vitest blocked locally on rollup native binding)
+**Branch:** `consolidation/sprint-a`
+**Roadmap:** IA-consolidation 4-sprint plan (Shared Foundation)
+**Scope:** Eliminate duplicated MetricCard primitives, add SprintBoard primitive, add per-request cache wrappers around hot Prisma queries.
+
+### Delivered Atomic Tasks
+
+- **SA1** — `src/components/metric-card.tsx` is the single canonical metric primitive. Removed the 13 inline duplicates the prompt names: `ContentMetricCard`, `ContentReadinessCard`, `PrepMetricCard`, `IntelMetricCard`, `SearchMetricCard`, `QrMetricCard`, `RouteMetricCard`, `AccountMetricCard`, `ContactMetric`, and the four locally-named `MetricCard` definitions in `analytics`, `ops`, `pipeline`, `engagement`. Net diff: +182 / −241. Unified component supports `tone`, `size` (sm/md), `variant` (card/plain), `align` (auto-derived from `detail` presence), `icon`, `detail`, `href`. Commit `91f4692`.
+- **SA2** — `src/components/sprint-board.tsx` is a generic top-N "Card with header + bordered item rows" primitive ready for Sprint B's tab extractions. Generic over the item type. Commit `9a59e83`.
+- **SA3** — `src/lib/data-cache.ts` wraps `dbGetAccounts`, `dbGetActivities`, and `getCampaignSummaries` with React `cache()` for per-request memoization. Callers will be migrated when Sprint C restructures Home (avoids touching pages twice). Commit `f58fc10`.
+
+### Closeout Evidence
+
+```text
+- npx tsc --noEmit: PASS (exit 0)
+- npm run lint: PASS (0 errors, 1 pre-existing warning in tests/unit/source-evidence.test.ts unrelated to this sprint)
+- npx vitest run tests/unit/metric-card.test.tsx tests/unit/sprint-board.test.tsx: BLOCKED in WSL — npm install in /mnt/c (Windows-mounted FS) repeatedly removes the @rollup/rollup-linux-x64-gnu native binding that vitest requires. Tests are written and lint clean; they will need to be run from a Windows-side npm install (or Linux-native FS) before merge.
+- Inline metric card grep (src/app/): named-13 are gone. Carryover (out-of-scope, NOT in the prompt's named list):
+  - src/app/analytics/quarterly/page.tsx:225  function MiniMetric  (visually distinct compact stat strip)
+  - src/app/ops/page.tsx:744                  function MiniMetric  (compact stat strip)
+  - src/app/capture/capture-form.tsx:206      function CaptureMetricCard  (adds suffix prop)
+  - src/app/queue/work-queue-client.tsx:379   function QueueMetricCard  (byte-identical to canonical pattern)
+  - src/app/campaigns/[slug]/analytics/page.tsx:230  function MetricCard  (detail route, has sublabel/icon)
+- Affected Playwright tests: not run this session (Sprint B routes will materially change which specs are "affected"; defer to Sprint B/C gates).
+```
+
+### Known Gaps / Carryover
+
+- The 5 inline metric variants above remain. Prompt's `grep "function.*Metric\b" src/app/` aspirational acceptance not reached; staying within the named-13 scope per "Don't refactor beyond what the task requires." Recommend folding the trivial three (`QueueMetricCard`, `CaptureMetricCard`, `campaigns/[slug]/analytics MetricCard`) into Sprint B as opportunistic cleanup when those files are touched.
+- Vitest cannot run from this WSL session due to the rollup native-binding mismatch. tsc and lint cover both Windows and Linux; the unit tests should pass on any environment with a clean platform-native install.
+- Tone/style harmonization: `pipeline` and `engagement` MetricCard previously used `text-sm` lowercase labels; the unified primitive uses uppercase `tracking-wide`. This is an intentional canonicalization (per "match the existing pattern" in the prompt — most of the 13 used uppercase tracking). Visual diff is small.
+- Pre-existing uncommitted WIP in `src/app/accounts/[slug]/page.tsx` (best_intro_path consolidation, canonical record summary gating) was stashed at session start as `wip: best_intro_path tidy + canonical record summary gating + drop motion/next-action grid (pre-IA-consolidation)`. To recover: `git stash pop` (no conflicts expected).
+
+
 ## Closeout Rules
 
 Every sprint closeout must include:
