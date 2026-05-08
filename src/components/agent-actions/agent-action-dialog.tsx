@@ -40,10 +40,12 @@ type AgentActionDialogRequest = Omit<AgentActionRequest, 'refresh' | 'depth'> & 
 type AgentActionDialogProps = {
   request: AgentActionDialogRequest;
   title?: string;
-  trigger: React.ReactNode;
+  trigger?: React.ReactNode;
   autoLoad?: boolean;
   onResult?: (result: AgentActionResult) => void;
   recipients?: AssetSendRecipient[];
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 };
 
 type SuggestedContact = {
@@ -447,8 +449,16 @@ export function AgentActionDialog({
   autoLoad = true,
   onResult,
   recipients = [],
+  open: controlledOpen,
+  onOpenChange: controlledOnOpenChange,
 }: AgentActionDialogProps) {
-  const [open, setOpen] = useState(false);
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isControlled = controlledOpen !== undefined;
+  const open = isControlled ? controlledOpen : internalOpen;
+  const setOpen = (next: boolean) => {
+    if (!isControlled) setInternalOpen(next);
+    controlledOnOpenChange?.(next);
+  };
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [result, setResult] = useState<AgentActionResult | null>(null);
@@ -636,7 +646,7 @@ export function AgentActionDialog({
 
   return (
       <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>{trigger}</DialogTrigger>
+      {trigger ? <DialogTrigger asChild>{trigger}</DialogTrigger> : null}
       <DialogContent className="max-h-[88vh] max-w-5xl overflow-hidden p-0">
         <div className="flex h-full max-h-[88vh] flex-col">
           <DialogHeader className="shrink-0 border-b border-[var(--border)] px-6 py-5">

@@ -16,10 +16,25 @@ const ACTIVITY_TYPES = ['Email', 'LinkedIn DM', 'Phone Call', 'Meeting', 'Event'
 interface Props {
   accountName: string;
   personas: Array<{ name: string }>;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  hideTrigger?: boolean;
 }
 
-export function LogActivityDialog({ accountName, personas }: Props) {
-  const [open, setOpen] = useState(false);
+export function LogActivityDialog({
+  accountName,
+  personas,
+  open: controlledOpen,
+  onOpenChange: controlledOnOpenChange,
+  hideTrigger = false,
+}: Props) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isControlled = controlledOpen !== undefined;
+  const open = isControlled ? controlledOpen : internalOpen;
+  const setOpen = (next: boolean) => {
+    if (!isControlled) setInternalOpen(next);
+    controlledOnOpenChange?.(next);
+  };
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     activity_type: 'Email' as typeof ACTIVITY_TYPES[number],
@@ -53,9 +68,11 @@ export function LogActivityDialog({ accountName, personas }: Props) {
 
   return (
     <>
-      <Button variant="outline" size="sm" className="gap-1.5" onClick={() => setOpen(true)}>
-        <Plus className="h-3.5 w-3.5" /> Log Activity
-      </Button>
+      {hideTrigger ? null : (
+        <Button variant="outline" size="sm" className="gap-1.5" onClick={() => setOpen(true)}>
+          <Plus className="h-3.5 w-3.5" /> Log Activity
+        </Button>
+      )}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-w-md max-h-[85vh] overflow-y-auto">
           <DialogHeader>
