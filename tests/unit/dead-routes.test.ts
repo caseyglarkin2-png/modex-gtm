@@ -65,11 +65,11 @@ describe('dead-route detector', () => {
   it('every canonical sidebar href resolves to a page file or a permanent redirect', () => {
     const redirectSources = getRedirectSources();
     const orphans: string[] = [];
-    for (const module of canonicalNavModules) {
-      const pathname = module.href.split('?')[0];
-      if (hasPageFile(module.href)) continue;
+    for (const navModule of canonicalNavModules) {
+      const pathname = navModule.href.split('?')[0];
+      if (hasPageFile(navModule.href)) continue;
       if (redirectSources.has(pathname)) continue;
-      orphans.push(`${module.label} -> ${module.href}`);
+      orphans.push(`${navModule.label} -> ${navModule.href}`);
     }
     expect(orphans).toEqual([]);
   });
@@ -77,13 +77,13 @@ describe('dead-route detector', () => {
   it('every legacy alias path resolves to a page file, a dynamic child route, or a permanent redirect', () => {
     const redirectSources = getRedirectSources();
     const orphans: string[] = [];
-    for (const module of canonicalNavModules) {
-      for (const alias of module.aliases) {
+    for (const navModule of canonicalNavModules) {
+      for (const alias of navModule.aliases) {
         if (alias.startsWith('/api/')) continue;
         if (hasPageFile(alias)) continue;
         if (hasDynamicChildPage(alias)) continue;
         if (redirectSources.has(alias)) continue;
-        orphans.push(`${module.label} alias -> ${alias}`);
+        orphans.push(`${navModule.label} alias -> ${alias}`);
       }
     }
     expect(orphans).toEqual([]);
@@ -91,8 +91,8 @@ describe('dead-route detector', () => {
 
   it('top-level route segments are either canonical modules, in the explicit allowlist, or a known dynamic detail route', () => {
     const canonicalSegments = new Set<string>();
-    for (const module of canonicalNavModules) {
-      const pathname = module.href.split('?')[0];
+    for (const navModule of canonicalNavModules) {
+      const pathname = navModule.href.split('?')[0];
       const segment = pathname.split('/').filter(Boolean)[0];
       if (segment) canonicalSegments.add(segment);
     }
