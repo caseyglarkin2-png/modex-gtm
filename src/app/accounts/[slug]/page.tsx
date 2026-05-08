@@ -381,12 +381,55 @@ export default async function AccountDetailPage({
               <p className="mt-1 text-sm text-[var(--muted-foreground)]">
                 {account.parent_brand} &middot; {account.vertical} &middot; {account.signal_type}
               </p>
-              <p className="mt-2 text-sm font-medium text-[var(--foreground)]">Account Command Center</p>
+              <div className="mt-3 space-y-2 max-w-prose">
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--muted-foreground)]">Why now</p>
+                  <div className="mt-0.5 text-sm">
+                    <EditableLongText
+                      accountSlug={slug}
+                      field="why_now"
+                      currentValue={account.why_now}
+                      emptyFallback="Add a why-now signal so the next touch has a current trigger."
+                      placeholder="What makes this account a priority right now?"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--muted-foreground)]">Best angle</p>
+                  {recommendedAngle ? (
+                    <p className="mt-0.5 text-sm">{recommendedAngle}</p>
+                  ) : (
+                    <div className="mt-0.5 text-sm">
+                      <EditableLongText
+                        accountSlug={slug}
+                        field="primo_angle"
+                        currentValue={account.primo_angle}
+                        emptyFallback="Add a hand-curated angle, or wait for the agent to suggest one."
+                        placeholder="Your hand-curated framing for this account."
+                      />
+                    </div>
+                  )}
+                </div>
+                {timeline[0] ? (
+                  <div>
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--muted-foreground)]">Latest signal</p>
+                    <p className="mt-0.5 text-sm">
+                      {timeline[0].href ? (
+                        <Link href={timeline[0].href} className="text-[var(--primary)] hover:underline">
+                          {timeline[0].title}
+                        </Link>
+                      ) : (
+                        <span>{timeline[0].title}</span>
+                      )}
+                      <span className="text-[var(--muted-foreground)]"> &middot; {formatActivityDate(timeline[0].occurredAt)}</span>
+                    </p>
+                  </div>
+                ) : null}
+              </div>
             </div>
             <div className="flex flex-col items-start gap-3 sm:items-end">
               <div className="flex flex-wrap items-center gap-2">
                 <Badge variant="outline" className="font-mono">{account.tier}</Badge>
-                <Badge variant="outline" className="font-mono">Score: {account.priority_score}</Badge>
                 <Badge variant="secondary">{account.owner}</Badge>
               </div>
               <div className="flex flex-wrap items-center gap-2 sm:justify-end">
@@ -514,67 +557,27 @@ export default async function AccountDetailPage({
                 <CardTitle className="text-sm">Outbound Command Center</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="grid gap-3 md:grid-cols-4">
-                  <div className="rounded-lg border border-[var(--border)] p-3">
-                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Recommendation</p>
-                    <p className="mt-1 font-medium">{agentContentContext?.nextActions[0] ?? 'Refresh intel and pick the strongest first touch.'}</p>
-                  </div>
-                  <div className="rounded-lg border border-[var(--border)] p-3">
-                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Why now</p>
-                    <div className="mt-1">
-                      <EditableLongText
-                        accountSlug={slug}
-                        field="why_now"
-                        currentValue={account.why_now}
-                        emptyFallback="Use current live intel to sharpen the hypothesis."
-                        placeholder="Why is this account a priority right now?"
-                      />
+                <div className="rounded-lg border border-[var(--border)] p-3">
+                  <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Recommendation</p>
+                  <p className="mt-1 font-medium">{agentContentContext?.nextActions[0] ?? 'Refresh intel and pick the strongest first touch.'}</p>
+                  {recommendedAngleCitations.length > 0 ? (
+                    <div className="mt-2 flex flex-wrap gap-1.5">
+                      {recommendedAngleCitations.map((citation) => (
+                        <a
+                          key={citation.url}
+                          href={citation.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center"
+                          title={citation.label}
+                        >
+                          <Badge variant="outline" className="text-[10px] font-normal hover:bg-[var(--accent)]">
+                            {citation.label} &uarr;
+                          </Badge>
+                        </a>
+                      ))}
                     </div>
-                    {latestFieldEditByField.get('why_now') ? (
-                      <p className="mt-2 text-[10px] text-[var(--muted-foreground)]">
-                        Edited {formatActivityDate(latestFieldEditByField.get('why_now')!.at)} by {latestFieldEditByField.get('why_now')!.actor}
-                      </p>
-                    ) : null}
-                  </div>
-                  <div className="rounded-lg border border-[var(--border)] p-3">
-                    <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Best angle</p>
-                    <p className="mt-1 text-sm">{recommendedAngle || 'Lead with gate-to-dock variance and throughput pressure.'}</p>
-                    {recommendedAngleCitations.length > 0 ? (
-                      <div className="mt-2 flex flex-wrap gap-1.5">
-                        {recommendedAngleCitations.map((citation) => (
-                          <a
-                            key={citation.url}
-                            href={citation.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center"
-                            title={citation.label}
-                          >
-                            <Badge variant="outline" className="text-[10px] font-normal hover:bg-[var(--accent)]">
-                              {citation.label} ↗
-                            </Badge>
-                          </a>
-                        ))}
-                      </div>
-                    ) : null}
-                    <div className="mt-3 border-t border-[var(--border)] pt-2">
-                      <p className="text-[10px] uppercase text-[var(--muted-foreground)]">Curated Primo angle (fallback)</p>
-                      <div className="mt-1">
-                        <EditableLongText
-                          accountSlug={slug}
-                          field="primo_angle"
-                          currentValue={account.primo_angle}
-                          emptyFallback="No hand-curated angle yet — agent recommendation is shown above."
-                          placeholder="Your hand-curated framing for this account."
-                        />
-                      </div>
-                      {latestFieldEditByField.get('primo_angle') ? (
-                        <p className="mt-2 text-[10px] text-[var(--muted-foreground)]">
-                          Edited {formatActivityDate(latestFieldEditByField.get('primo_angle')!.at)} by {latestFieldEditByField.get('primo_angle')!.actor}
-                        </p>
-                      ) : null}
-                    </div>
-                  </div>
+                  ) : null}
                 </div>
                 <div className="grid gap-3 md:grid-cols-3">
                   <div className="rounded-lg border border-[var(--border)] p-3">
