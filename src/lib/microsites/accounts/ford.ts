@@ -11,7 +11,154 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
+
+// LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
+/*
+ * [
+ *     {
+ *       type: 'hero',
+ *       headline: 'Inbound Parts Yard Management. That is a yard problem.',
+ *       subheadline: 'A Chief Supply Chain Officer at Ford is measured on: 1. Line uptime — Any line-down event is career-threatening. JIT failures cascade immediately. 2. Cost per unit — Ford is publicly behind Toyota/Hyundai on cost. Every inefficiency matters. 3. Working capital — 400,000 vehicles sitting in yards = billions in tied-up capital. Reducing dwell by even 2 days frees hundreds of millions. 4.',
+ *       accountCallout: 'Ford - Manufacturing',
+ *       backgroundTheme: 'dark',
+ *       cta: {
+ *         type: 'modex-meeting',
+ *         headline: 'See what a standardized yard network looks like for Ford',
+ *         subtext: '30-minute walk-through of your facility network with board-ready ROI.',
+ *         buttonLabel: 'Book a Meeting at MODEX',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *     },
+ *     {
+ *       type: 'problem',
+ *       sectionLabel: 'The Hidden Constraint',
+ *       headline: 'The yard is where Ford\'s supply chain math breaks down',
+ *       narrative: 'A Chief Supply Chain Officer at Ford is measured on: 1. Line uptime — Any line-down event is career-threatening. JIT failures cascade immediately. 2. Cost per unit — Ford is publicly behind Toyota/Hyundai on cost. Every inefficiency matters. 3. Working capital — 400,000 vehicles sitting in yards = billions in tied-up capital. Reducing dwell by even 2 days frees hundreds of millions. 4.',
+ *       painPoints: [
+ *         {
+ *           headline: 'Inbound Parts Yard Management',
+ *           description: 'Problem: Ford plants receive 300-800 inbound trailers per day at major assembly plants (Dearborn, Kentucky Truck, Kansas City) - JIT precision: Parts must arrive within ±30 minute windows. A late trailer = potential line-down event costing $20,000-50,000+ per minute - Yard conges',
+ *           relevantPeople: ['ford-door'],
+ *         },
+ *         {
+ *           headline: 'Finished Vehicle Yard Management',
+ *           description: 'Problem: Ford\'s finished vehicle yards hold 5,000-15,000+ vehicles per plant - Tracking challenge: Which vehicles are ready for shipment? Which need holds (quality, accessory, recall)? - Carrier coordination: Rail and truck carriers need precise bay assignments and load sequencing -',
+ *           relevantPeople: ['ford-door'],
+ *         },
+ *         {
+ *           headline: '🟡 HIGH: Supplier Coordination & Gate Management',
+ *           description: 'Problem: 1,200+ production suppliers shipping to 25+ plants across NA - Gate throughput: Commercial vehicle gates at major plants handle 500+ check-ins/check-outs daily - Appointment compliance: Suppliers with poor on-time arrival disrupt JIS sequencing - YardFlow fit: Appointment',
+ *           relevantPeople: ['ford-door'],
+ *         },
+ *         {
+ *           headline: '🟡 HIGH: Multi-Modal Yard Complexity',
+ *           description: 'Ford yards manage simultaneously: inbound parts trailers, outbound finished vehicles, rail cars, employee parking, supplier shuttles, prototype/engineering vehicles - Major plants like Dearborn Truck have yards spanning hundreds of acres - YardFlow fit: Multi-zone yard mapping, asset t',
+ *           relevantPeople: ['ford-door'],
+ *         },
+ *         {
+ *           headline: '🟡 MEDIUM: BlueOval City — Greenfield Yard Design',
+ *           description: 'Brand-new facility = opportunity to design yard management from scratch - Integrated battery + vehicle assembly = complex inbound flows (hazmat battery materials + standard auto parts) - YardFlow fit: Greenfield yard design consulting + YMS deployment -',
+ *           relevantPeople: ['ford-door'],
+ *         }
+ *       ],
+ *     },
+ *     {
+ *       type: 'stakes',
+ *       sectionLabel: 'What This Costs You',
+ *       headline: 'The math Ford is not tracking in one place',
+ *       narrative: 'Problem: Ford plants receive 300-800 inbound trailers per day at major assembly plants (Dearborn, Kentucky Truck, Kansas City) - JIT precision: Parts must arrive within ±30 minute windows. A late trailer = potential line-down event costing $20,000-50,000+ per minute - Yard conges Meanwhile, problem: Ford\'s finished vehicle yards hold 5,000-15,000+ vehicles per plant - Tracking challenge: Which vehicles are ready for shipment? Which need holds (quality, accessory, recall)? - Carrier coordination: Rail and truck carriers need precise bay assignments and load sequencing -',
+ *       annualCost: '$5M-$8M in estimated yard-driven inefficiency across the network',
+ *       costBreakdown: [
+ *         { label: 'Carrier detention / demurrage', value: '$2M+' },
+ *         { label: 'Dock contention and turn time excess', value: '$2M+' },
+ *         { label: 'Gate and spotter labor overhead', value: '$2M+' },
+ *         { label: 'Peak season surge inefficiency', value: '$1M+' },
+ *       ],
+ *       urgencyDriver: '$5.6B mega-campus',
+ *     },
+ *     {
+ *       type: 'solution',
+ *       sectionLabel: 'The Fix',
+ *       headline: 'One protocol across every Ford yard',
+ *       narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
+ *       modules: [
+ *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Ford\'s facility network.' },
+ *         { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Ford\'s facility network.' },
+ *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Ford\'s facility network.' },
+ *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Ford\'s facility network.' },
+ *       ],
+ *       accountFit: 'A Chief Supply Chain Officer at Ford is measured on: 1. **Line uptime** — Any line-down event is career-threatening. JIT failures cascade immediately. 2. **Cost per unit** — Ford is publicly behind Toyota/Hyundai on cost. Every inefficiency matters. 3. **Working capital** — 400,000 vehicles sitting in yards = billions in tied-up capital. Reducing dwell by even 2 days frees hundreds of millions. 4.',
+ *     },
+ *     {
+ *       type: 'proof',
+ *       sectionLabel: 'Proof from Live Deployment',
+ *       headline: 'Running today across 24 facilities',
+ *       blocks: [
+ *         {
+ *           type: 'metric',
+ *           stats: [
+ *             { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable manufacturing operations' },
+ *             { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
+ *             { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+ *             { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at manufacturing facilities' },
+ *           ],
+ *         },
+ *         {
+ *           type: 'quote',
+ *           quote: {
+ *             text: 'When you are running a just-in-time line, the yard is the last mile you cannot afford to lose. YardFlow gave us that visibility and control back.',
+ *             role: 'Operations Director',
+ *             company: 'Major Industrial Manufacturer',
+ *           },
+ *         },
+ *       ],
+ *     },
+ *     {
+ *       type: 'network-map',
+ *       sectionLabel: 'Your Network',
+ *       headline: 'Ford\'s yard network at scale',
+ *       narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
+ *       facilityCount: '20+',
+ *       facilityTypes: ['Manufacturing Plants', 'Distribution Centers'],
+ *       geographicSpread: 'North America',
+ *       dailyTrailerMoves: '1,000+ across the network',
+ *     },
+ *     {
+ *       type: 'roi',
+ *       sectionLabel: 'The Business Case',
+ *       headline: 'Conservative ROI model for Ford',
+ *       narrative: 'Based on measured YardFlow improvements at comparable operations.',
+ *       roiLines: [
+ *         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
+ *         { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
+ *         { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
+ *         { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
+ *       ],
+ *       totalAnnualSavings: '$5M-$8M across the network',
+ *       paybackPeriod: '< 6 months',
+ *       methodology: 'Based on measured results at 24 live facilities extrapolated to Ford facility count and operational profile.',
+ *     },
+ *     {
+ *       type: 'testimonial',
+ *       sectionLabel: 'From an Operator Who Runs It',
+ *       quote: 'The production line does not care why the parts trailer is late. YardFlow makes sure it is never late because of the yard.',
+ *       role: 'Operations Director',
+ *       company: 'Major Industrial Manufacturer',
+ *       context: 'After 12 months of full YardFlow deployment across their facility network.',
+ *     },
+ *     {
+ *       type: 'cta',
+ *       cta: {
+ *         type: 'modex-meeting',
+ *         headline: 'See what a standardized yard network looks like for Ford',
+ *         subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
+ *         buttonLabel: 'Book a Meeting at MODEX',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *       closingLine: 'One conversation. Your yard network. A clear path to $5M-$8M in annual savings.',
+ *     },
+ *   ]
+ */
 
 export const ford: AccountMicrositeData = {
   slug: 'ford',
@@ -24,150 +171,7 @@ export const ford: AccountMicrositeData = {
   pageTitle: 'YardFlow for Ford - Yard Network Standardization',
   metaDescription: 'How YardFlow eliminates the yard bottleneck across Ford\'s facility network.',
 
-  sections: [
-    {
-      type: 'hero',
-      headline: 'Inbound Parts Yard Management. That is a yard problem.',
-      subheadline: 'A Chief Supply Chain Officer at Ford is measured on: 1. Line uptime — Any line-down event is career-threatening. JIT failures cascade immediately. 2. Cost per unit — Ford is publicly behind Toyota/Hyundai on cost. Every inefficiency matters. 3. Working capital — 400,000 vehicles sitting in yards = billions in tied-up capital. Reducing dwell by even 2 days frees hundreds of millions. 4.',
-      accountCallout: 'Ford - Manufacturing',
-      backgroundTheme: 'dark',
-      cta: {
-        type: 'modex-meeting',
-        headline: 'See what a standardized yard network looks like for Ford',
-        subtext: '30-minute walk-through of your facility network with board-ready ROI.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-      },
-    },
-    {
-      type: 'problem',
-      sectionLabel: 'The Hidden Constraint',
-      headline: 'The yard is where Ford\'s supply chain math breaks down',
-      narrative: 'A Chief Supply Chain Officer at Ford is measured on: 1. Line uptime — Any line-down event is career-threatening. JIT failures cascade immediately. 2. Cost per unit — Ford is publicly behind Toyota/Hyundai on cost. Every inefficiency matters. 3. Working capital — 400,000 vehicles sitting in yards = billions in tied-up capital. Reducing dwell by even 2 days frees hundreds of millions. 4.',
-      painPoints: [
-        {
-          headline: 'Inbound Parts Yard Management',
-          description: 'Problem: Ford plants receive 300-800 inbound trailers per day at major assembly plants (Dearborn, Kentucky Truck, Kansas City) - JIT precision: Parts must arrive within ±30 minute windows. A late trailer = potential line-down event costing $20,000-50,000+ per minute - Yard conges',
-          relevantPeople: ['ford-door'],
-        },
-        {
-          headline: 'Finished Vehicle Yard Management',
-          description: 'Problem: Ford\'s finished vehicle yards hold 5,000-15,000+ vehicles per plant - Tracking challenge: Which vehicles are ready for shipment? Which need holds (quality, accessory, recall)? - Carrier coordination: Rail and truck carriers need precise bay assignments and load sequencing -',
-          relevantPeople: ['ford-door'],
-        },
-        {
-          headline: '🟡 HIGH: Supplier Coordination & Gate Management',
-          description: 'Problem: 1,200+ production suppliers shipping to 25+ plants across NA - Gate throughput: Commercial vehicle gates at major plants handle 500+ check-ins/check-outs daily - Appointment compliance: Suppliers with poor on-time arrival disrupt JIS sequencing - YardFlow fit: Appointment',
-          relevantPeople: ['ford-door'],
-        },
-        {
-          headline: '🟡 HIGH: Multi-Modal Yard Complexity',
-          description: 'Ford yards manage simultaneously: inbound parts trailers, outbound finished vehicles, rail cars, employee parking, supplier shuttles, prototype/engineering vehicles - Major plants like Dearborn Truck have yards spanning hundreds of acres - YardFlow fit: Multi-zone yard mapping, asset t',
-          relevantPeople: ['ford-door'],
-        },
-        {
-          headline: '🟡 MEDIUM: BlueOval City — Greenfield Yard Design',
-          description: 'Brand-new facility = opportunity to design yard management from scratch - Integrated battery + vehicle assembly = complex inbound flows (hazmat battery materials + standard auto parts) - YardFlow fit: Greenfield yard design consulting + YMS deployment -',
-          relevantPeople: ['ford-door'],
-        }
-      ],
-    },
-    {
-      type: 'stakes',
-      sectionLabel: 'What This Costs You',
-      headline: 'The math Ford is not tracking in one place',
-      narrative: 'Problem: Ford plants receive 300-800 inbound trailers per day at major assembly plants (Dearborn, Kentucky Truck, Kansas City) - JIT precision: Parts must arrive within ±30 minute windows. A late trailer = potential line-down event costing $20,000-50,000+ per minute - Yard conges Meanwhile, problem: Ford\'s finished vehicle yards hold 5,000-15,000+ vehicles per plant - Tracking challenge: Which vehicles are ready for shipment? Which need holds (quality, accessory, recall)? - Carrier coordination: Rail and truck carriers need precise bay assignments and load sequencing -',
-      annualCost: '$5M-$8M in estimated yard-driven inefficiency across the network',
-      costBreakdown: [
-        { label: 'Carrier detention / demurrage', value: '$2M+' },
-        { label: 'Dock contention and turn time excess', value: '$2M+' },
-        { label: 'Gate and spotter labor overhead', value: '$2M+' },
-        { label: 'Peak season surge inefficiency', value: '$1M+' },
-      ],
-      urgencyDriver: '$5.6B mega-campus',
-    },
-    {
-      type: 'solution',
-      sectionLabel: 'The Fix',
-      headline: 'One protocol across every Ford yard',
-      narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
-      modules: [
-        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Ford\'s facility network.' },
-        { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Ford\'s facility network.' },
-        { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Ford\'s facility network.' },
-        { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Ford\'s facility network.' },
-      ],
-      accountFit: 'A Chief Supply Chain Officer at Ford is measured on: 1. **Line uptime** — Any line-down event is career-threatening. JIT failures cascade immediately. 2. **Cost per unit** — Ford is publicly behind Toyota/Hyundai on cost. Every inefficiency matters. 3. **Working capital** — 400,000 vehicles sitting in yards = billions in tied-up capital. Reducing dwell by even 2 days frees hundreds of millions. 4.',
-    },
-    {
-      type: 'proof',
-      sectionLabel: 'Proof from Live Deployment',
-      headline: 'Running today across 24 facilities',
-      blocks: [
-        {
-          type: 'metric',
-          stats: [
-            { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable manufacturing operations' },
-            { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
-            { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
-            { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at manufacturing facilities' },
-          ],
-        },
-        {
-          type: 'quote',
-          quote: {
-            text: 'When you are running a just-in-time line, the yard is the last mile you cannot afford to lose. YardFlow gave us that visibility and control back.',
-            role: 'Operations Director',
-            company: 'Major Industrial Manufacturer',
-          },
-        },
-      ],
-    },
-    {
-      type: 'network-map',
-      sectionLabel: 'Your Network',
-      headline: 'Ford\'s yard network at scale',
-      narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
-      facilityCount: '20+',
-      facilityTypes: ['Manufacturing Plants', 'Distribution Centers'],
-      geographicSpread: 'North America',
-      dailyTrailerMoves: '1,000+ across the network',
-    },
-    {
-      type: 'roi',
-      sectionLabel: 'The Business Case',
-      headline: 'Conservative ROI model for Ford',
-      narrative: 'Based on measured YardFlow improvements at comparable operations.',
-      roiLines: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
-        { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
-        { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
-        { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
-      ],
-      totalAnnualSavings: '$5M-$8M across the network',
-      paybackPeriod: '< 6 months',
-      methodology: 'Based on measured results at 24 live facilities extrapolated to Ford facility count and operational profile.',
-    },
-    {
-      type: 'testimonial',
-      sectionLabel: 'From an Operator Who Runs It',
-      quote: 'The production line does not care why the parts trailer is late. YardFlow makes sure it is never late because of the yard.',
-      role: 'Operations Director',
-      company: 'Major Industrial Manufacturer',
-      context: 'After 12 months of full YardFlow deployment across their facility network.',
-    },
-    {
-      type: 'cta',
-      cta: {
-        type: 'modex-meeting',
-        headline: 'See what a standardized yard network looks like for Ford',
-        subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-      },
-      closingLine: 'One conversation. Your yard network. A clear path to $5M-$8M in annual savings.',
-    },
-  ],
+  sections: [],
 
   people: [
     {
@@ -214,15 +218,6 @@ export const ford: AccountMicrositeData = {
         subheadline: 'A Chief Supply Chain Officer at Ford is measured on: 1. **Line uptime** — Any line-down event is career-threatening. JIT failures cascade immediately. 2. **Cost per unit** — Ford is publicly behind Toyota/Hyundai on cost. Every inefficiency matters. 3. **Working capital** — 400,000 vehicles sitting in yards = billions in tied-up capital. Reducing dwell by even 2 days frees hundreds of millions. 4.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Elizabeth, let\'s walk your yard network',
-        subtext: '30-minute conversation about Ford\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Elizabeth',
-        personContext: '$5.6B mega-campus',
-      },
 
       toneShift: 'Strategic, board-level. Reference Elizabeth\'s mandate and transformation context. Lead with outcomes and business impact, not features.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],

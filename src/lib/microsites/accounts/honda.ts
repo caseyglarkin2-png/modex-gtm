@@ -10,7 +10,147 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
+
+// LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
+/*
+ * [
+ *     {
+ *       type: 'hero',
+ *       headline: 'Honda built its production system on eliminating waste. The yard between the gate and the line is where waste hides.',
+ *       subheadline: 'Large manufacturing campuses and logistics complexity make yard execution a real operational lever.',
+ *       accountCallout: 'Honda - Manufacturing',
+ *       backgroundTheme: 'dark',
+ *       cta: {
+ *         type: 'modex-meeting',
+ *         headline: 'See what a standardized yard network looks like for Honda',
+ *         subtext: '30-minute walk-through of your facility network with board-ready ROI.',
+ *         buttonLabel: 'Book a Meeting at MODEX',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *     },
+ *     {
+ *       type: 'problem',
+ *       sectionLabel: 'The Hidden Constraint',
+ *       headline: 'The yard is where Honda\'s supply chain math breaks down',
+ *       narrative: 'Large manufacturing campuses and logistics complexity make yard execution a real operational lever.',
+ *       painPoints: [
+ *         {
+ *           headline: 'Just-in-time assembly lines amplify every minute of yard delay',
+ *           description: 'Honda\'s production lines operate on JIT principles where parts arrive in sequence within hours of installation. When an inbound parts trailer is delayed in the yard, the line does not wait. It runs out of sequence, creating rework or stoppage that costs $50K+ per hour.',
+ *           kpiImpact: 'Line stoppage from yard-related parts delay: $50K+/hour per assembly line',
+ *           relevantPeople: ['honda-small', 'honda-beard'],
+ *         },
+ *         {
+ *           headline: 'Multi-plant campus yards have no centralized coordination',
+ *           description: 'Honda\'s Marysville complex includes auto assembly, engine, and transmission plants sharing interconnected yards. Trailer moves between plants are coordinated by radio and phone calls. No single system tracks the campus-wide trailer position.',
+ *           kpiImpact: 'Zero campus-wide yard visibility across co-located manufacturing plants',
+ *           relevantPeople: ['honda-small', 'honda-beard'],
+ *         },
+ *         {
+ *           headline: 'Carrier sequencing for line-side delivery starts in the yard',
+ *           description: 'The Toyota Production System, which Honda adapted, assumes materials arrive in sequence. But the sequencing logic often stops at the gate. Inside the yard, trailers are parked wherever there is space. Sequence breaks. The line pays.',
+ *           kpiImpact: 'Parts sequencing errors traceable to yard parking: 3-5% of daily dock turns',
+ *           relevantPeople: ['honda-small', 'honda-beard'],
+ *         }
+ *       ],
+ *     },
+ *     {
+ *       type: 'stakes',
+ *       sectionLabel: 'What This Costs You',
+ *       headline: 'The math Honda is not tracking in one place',
+ *       narrative: 'Honda\'s production lines operate on JIT principles where parts arrive in sequence within hours of installation. When an inbound parts trailer is delayed in the yard, the line does not wait. It runs out of sequence, creating rework or stoppage that costs $50K+ per hour. Meanwhile, honda\'s Marysville complex includes auto assembly, engine, and transmission plants sharing interconnected yards. Trailer moves between plants are coordinated by radio and phone calls. No single system tracks the campus-wide trailer position.',
+ *       annualCost: '$5M-$8M in estimated yard-driven inefficiency across the network',
+ *       costBreakdown: [
+ *         { label: 'Carrier detention / demurrage', value: '$2M+' },
+ *         { label: 'Dock contention and turn time excess', value: '$2M+' },
+ *         { label: 'Gate and spotter labor overhead', value: '$2M+' },
+ *         { label: 'Peak season surge inefficiency', value: '$1M+' },
+ *       ],
+ *       urgencyDriver: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+ *     },
+ *     {
+ *       type: 'solution',
+ *       sectionLabel: 'The Fix',
+ *       headline: 'One protocol across every Honda yard',
+ *       narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
+ *       modules: [
+ *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Honda\'s facility network.' },
+ *         { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Honda\'s facility network.' },
+ *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Honda\'s facility network.' },
+ *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Honda\'s facility network.' },
+ *       ],
+ *       accountFit: 'Large manufacturing campuses and logistics complexity make yard execution a real operational lever.',
+ *     },
+ *     {
+ *       type: 'proof',
+ *       sectionLabel: 'Proof from Live Deployment',
+ *       headline: 'Running today across 24 facilities',
+ *       blocks: [
+ *         {
+ *           type: 'metric',
+ *           stats: [
+ *             { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable manufacturing operations' },
+ *             { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
+ *             { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+ *             { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at manufacturing facilities' },
+ *           ],
+ *         },
+ *         {
+ *           type: 'quote',
+ *           quote: {
+ *             text: 'When you are running a just-in-time line, the yard is the last mile you cannot afford to lose. YardFlow gave us that visibility and control back.',
+ *             role: 'Operations Director',
+ *             company: 'Major Industrial Manufacturer',
+ *           },
+ *         },
+ *       ],
+ *     },
+ *     {
+ *       type: 'network-map',
+ *       sectionLabel: 'Your Network',
+ *       headline: 'Honda\'s yard network at scale',
+ *       narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
+ *       facilityCount: '12',
+ *       facilityTypes: ['Auto Assembly Plants', 'Engine Plants', 'Transmission Plants', 'Parts Distribution Centers'],
+ *       geographicSpread: 'North America',
+ *       dailyTrailerMoves: '3,000+ across the network',
+ *     },
+ *     {
+ *       type: 'roi',
+ *       sectionLabel: 'The Business Case',
+ *       headline: 'Conservative ROI model for Honda',
+ *       narrative: 'Based on measured YardFlow improvements at comparable operations.',
+ *       roiLines: [
+ *         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
+ *         { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
+ *         { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
+ *         { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
+ *       ],
+ *       totalAnnualSavings: '$5M-$8M across the network',
+ *       paybackPeriod: '< 6 months',
+ *       methodology: 'Based on measured results at 24 live facilities extrapolated to Honda facility count and operational profile.',
+ *     },
+ *     {
+ *       type: 'testimonial',
+ *       sectionLabel: 'From an Operator Who Runs It',
+ *       quote: 'The production line does not care why the parts trailer is late. YardFlow makes sure it is never late because of the yard.',
+ *       role: 'Operations Director',
+ *       company: 'Major Industrial Manufacturer',
+ *       context: 'After 12 months of full YardFlow deployment across their facility network.',
+ *     },
+ *     {
+ *       type: 'cta',
+ *       cta: {
+ *         type: 'modex-meeting',
+ *         headline: 'See what a standardized yard network looks like for Honda',
+ *         subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
+ *         buttonLabel: 'Book a Meeting at MODEX',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *       closingLine: 'One conversation. Your yard network. A clear path to $5M-$8M in annual savings.',
+ *     },
+ *   ]
+ */
 
 export const honda: AccountMicrositeData = {
   slug: 'honda',
@@ -24,143 +164,7 @@ export const honda: AccountMicrositeData = {
   pageTitle: 'YardFlow for Honda - Yard Network Standardization',
   metaDescription: 'How YardFlow eliminates the yard bottleneck across Honda\'s facility network.',
 
-  sections: [
-    {
-      type: 'hero',
-      headline: 'Honda built its production system on eliminating waste. The yard between the gate and the line is where waste hides.',
-      subheadline: 'Large manufacturing campuses and logistics complexity make yard execution a real operational lever.',
-      accountCallout: 'Honda - Manufacturing',
-      backgroundTheme: 'dark',
-      cta: {
-        type: 'modex-meeting',
-        headline: 'See what a standardized yard network looks like for Honda',
-        subtext: '30-minute walk-through of your facility network with board-ready ROI.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-      },
-    },
-    {
-      type: 'problem',
-      sectionLabel: 'The Hidden Constraint',
-      headline: 'The yard is where Honda\'s supply chain math breaks down',
-      narrative: 'Large manufacturing campuses and logistics complexity make yard execution a real operational lever.',
-      painPoints: [
-        {
-          headline: 'Just-in-time assembly lines amplify every minute of yard delay',
-          description: 'Honda\'s production lines operate on JIT principles where parts arrive in sequence within hours of installation. When an inbound parts trailer is delayed in the yard, the line does not wait. It runs out of sequence, creating rework or stoppage that costs $50K+ per hour.',
-          kpiImpact: 'Line stoppage from yard-related parts delay: $50K+/hour per assembly line',
-          relevantPeople: ['honda-small', 'honda-beard'],
-        },
-        {
-          headline: 'Multi-plant campus yards have no centralized coordination',
-          description: 'Honda\'s Marysville complex includes auto assembly, engine, and transmission plants sharing interconnected yards. Trailer moves between plants are coordinated by radio and phone calls. No single system tracks the campus-wide trailer position.',
-          kpiImpact: 'Zero campus-wide yard visibility across co-located manufacturing plants',
-          relevantPeople: ['honda-small', 'honda-beard'],
-        },
-        {
-          headline: 'Carrier sequencing for line-side delivery starts in the yard',
-          description: 'The Toyota Production System, which Honda adapted, assumes materials arrive in sequence. But the sequencing logic often stops at the gate. Inside the yard, trailers are parked wherever there is space. Sequence breaks. The line pays.',
-          kpiImpact: 'Parts sequencing errors traceable to yard parking: 3-5% of daily dock turns',
-          relevantPeople: ['honda-small', 'honda-beard'],
-        }
-      ],
-    },
-    {
-      type: 'stakes',
-      sectionLabel: 'What This Costs You',
-      headline: 'The math Honda is not tracking in one place',
-      narrative: 'Honda\'s production lines operate on JIT principles where parts arrive in sequence within hours of installation. When an inbound parts trailer is delayed in the yard, the line does not wait. It runs out of sequence, creating rework or stoppage that costs $50K+ per hour. Meanwhile, honda\'s Marysville complex includes auto assembly, engine, and transmission plants sharing interconnected yards. Trailer moves between plants are coordinated by radio and phone calls. No single system tracks the campus-wide trailer position.',
-      annualCost: '$5M-$8M in estimated yard-driven inefficiency across the network',
-      costBreakdown: [
-        { label: 'Carrier detention / demurrage', value: '$2M+' },
-        { label: 'Dock contention and turn time excess', value: '$2M+' },
-        { label: 'Gate and spotter labor overhead', value: '$2M+' },
-        { label: 'Peak season surge inefficiency', value: '$1M+' },
-      ],
-      urgencyDriver: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-    },
-    {
-      type: 'solution',
-      sectionLabel: 'The Fix',
-      headline: 'One protocol across every Honda yard',
-      narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
-      modules: [
-        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Honda\'s facility network.' },
-        { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Honda\'s facility network.' },
-        { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Honda\'s facility network.' },
-        { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Honda\'s facility network.' },
-      ],
-      accountFit: 'Large manufacturing campuses and logistics complexity make yard execution a real operational lever.',
-    },
-    {
-      type: 'proof',
-      sectionLabel: 'Proof from Live Deployment',
-      headline: 'Running today across 24 facilities',
-      blocks: [
-        {
-          type: 'metric',
-          stats: [
-            { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable manufacturing operations' },
-            { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
-            { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
-            { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at manufacturing facilities' },
-          ],
-        },
-        {
-          type: 'quote',
-          quote: {
-            text: 'When you are running a just-in-time line, the yard is the last mile you cannot afford to lose. YardFlow gave us that visibility and control back.',
-            role: 'Operations Director',
-            company: 'Major Industrial Manufacturer',
-          },
-        },
-      ],
-    },
-    {
-      type: 'network-map',
-      sectionLabel: 'Your Network',
-      headline: 'Honda\'s yard network at scale',
-      narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
-      facilityCount: '12',
-      facilityTypes: ['Auto Assembly Plants', 'Engine Plants', 'Transmission Plants', 'Parts Distribution Centers'],
-      geographicSpread: 'North America',
-      dailyTrailerMoves: '3,000+ across the network',
-    },
-    {
-      type: 'roi',
-      sectionLabel: 'The Business Case',
-      headline: 'Conservative ROI model for Honda',
-      narrative: 'Based on measured YardFlow improvements at comparable operations.',
-      roiLines: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
-        { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
-        { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
-        { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
-      ],
-      totalAnnualSavings: '$5M-$8M across the network',
-      paybackPeriod: '< 6 months',
-      methodology: 'Based on measured results at 24 live facilities extrapolated to Honda facility count and operational profile.',
-    },
-    {
-      type: 'testimonial',
-      sectionLabel: 'From an Operator Who Runs It',
-      quote: 'The production line does not care why the parts trailer is late. YardFlow makes sure it is never late because of the yard.',
-      role: 'Operations Director',
-      company: 'Major Industrial Manufacturer',
-      context: 'After 12 months of full YardFlow deployment across their facility network.',
-    },
-    {
-      type: 'cta',
-      cta: {
-        type: 'modex-meeting',
-        headline: 'See what a standardized yard network looks like for Honda',
-        subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-      },
-      closingLine: 'One conversation. Your yard network. A clear path to $5M-$8M in annual savings.',
-    },
-  ],
+  sections: [],
 
   people: [
     {
@@ -267,15 +271,6 @@ export const honda: AccountMicrositeData = {
         subheadline: 'Large manufacturing campuses and logistics complexity make yard execution a real operational lever.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Jim, let\'s walk your yard network',
-        subtext: '30-minute conversation about Honda\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Jim',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Jim lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -307,15 +302,6 @@ export const honda: AccountMicrositeData = {
         subheadline: 'Large manufacturing campuses and logistics complexity make yard execution a real operational lever.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Derek, let\'s walk your yard network',
-        subtext: '30-minute conversation about Honda\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Derek',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Derek lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -347,15 +333,6 @@ export const honda: AccountMicrositeData = {
         subheadline: 'Large manufacturing campuses and logistics complexity make yard execution a real operational lever.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'David, let\'s walk your yard network',
-        subtext: '30-minute conversation about Honda\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'David',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. David lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -387,15 +364,6 @@ export const honda: AccountMicrositeData = {
         subheadline: 'Large manufacturing campuses and logistics complexity make yard execution a real operational lever.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Ed, let\'s walk your yard network',
-        subtext: '30-minute conversation about Honda\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Ed',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Ed lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['cost per load', 'detention spend', 'labor cost per trailer', 'total cost of ownership'],

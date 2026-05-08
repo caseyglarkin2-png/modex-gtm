@@ -10,7 +10,147 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
+
+// LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
+/*
+ * [
+ *     {
+ *       type: 'hero',
+ *       headline: 'H-E-B built the most admired grocery supply chain in America. The yard is the one layer they have not standardized yet.',
+ *       subheadline: 'Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
+ *       accountCallout: 'H-E-B - Retail',
+ *       backgroundTheme: 'dark',
+ *       cta: {
+ *         type: 'modex-meeting',
+ *         headline: 'See what a standardized yard network looks like for H-E-B',
+ *         subtext: '30-minute walk-through of your facility network with board-ready ROI.',
+ *         buttonLabel: 'Book a Meeting at MODEX',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *     },
+ *     {
+ *       type: 'problem',
+ *       sectionLabel: 'The Hidden Constraint',
+ *       headline: 'H-E-B is famous for freshness. But fresh product loses shelf days in the yard before it ever hits the shelf.',
+ *       narrative: 'Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
+ *       painPoints: [
+ *         {
+ *           headline: 'Texas-scale distribution means Texas-scale yard complexity',
+ *           description: 'H-E-B serves 400+ stores from 50+ distribution and manufacturing facilities across Texas and Mexico. Their private fleet of 1,500+ vehicles moves 4,000+ trailers daily. The yard infrastructure connecting those assets has no unified operating protocol.',
+ *           kpiImpact: '$15M+ estimated annual yard inefficiency across the Texas network',
+ *           relevantPeople: ['h-e-b-retzloff', 'h-e-b-stucker'],
+ *         },
+ *         {
+ *           headline: 'Fresh grocery margins demand sub-hour dock turns',
+ *           description: 'In grocery, product life starts burning the moment it leaves cold storage. H-E-B\'s fresh and perishable categories require dock turns measured in minutes, not hours. Yard dwell is where that clock runs out.',
+ *           kpiImpact: 'Every 30 minutes of excess yard dwell = measurable shrink increase on perishables',
+ *           relevantPeople: ['h-e-b-retzloff', 'h-e-b-stucker'],
+ *         },
+ *         {
+ *           headline: 'Own-brand manufacturing adds inbound complexity most grocers do not have',
+ *           description: 'H-E-B manufactures many of its own products, from tortillas to ice cream. That means their distribution centers handle both internal manufacturing inbound and vendor inbound through the same yard. The scheduling complexity is unique.',
+ *           kpiImpact: 'Dual inbound streams (manufacturing + vendor) competing for the same dock doors',
+ *           relevantPeople: ['h-e-b-retzloff', 'h-e-b-stucker'],
+ *         }
+ *       ],
+ *     },
+ *     {
+ *       type: 'stakes',
+ *       sectionLabel: 'What This Costs You',
+ *       headline: 'The math H-E-B is not tracking in one place',
+ *       narrative: 'H-E-B serves 400+ stores from 50+ distribution and manufacturing facilities across Texas and Mexico. Their private fleet of 1,500+ vehicles moves 4,000+ trailers daily. The yard infrastructure connecting those assets has no unified operating protocol. Meanwhile, in grocery, product life starts burning the moment it leaves cold storage. H-E-B\'s fresh and perishable categories require dock turns measured in minutes, not hours. Yard dwell is where that clock runs out.',
+ *       annualCost: '$5M-$8M in estimated yard-driven inefficiency across the network',
+ *       costBreakdown: [
+ *         { label: 'Carrier detention / demurrage', value: '$2M+' },
+ *         { label: 'Dock contention and turn time excess', value: '$2M+' },
+ *         { label: 'Gate and spotter labor overhead', value: '$2M+' },
+ *         { label: 'Peak season surge inefficiency', value: '$1M+' },
+ *       ],
+ *       urgencyDriver: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+ *     },
+ *     {
+ *       type: 'solution',
+ *       sectionLabel: 'The Fix',
+ *       headline: 'One protocol across every H-E-B yard',
+ *       narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
+ *       modules: [
+ *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across H-E-B\'s facility network.' },
+ *         { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across H-E-B\'s facility network.' },
+ *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across H-E-B\'s facility network.' },
+ *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across H-E-B\'s facility network.' },
+ *       ],
+ *       accountFit: 'Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
+ *     },
+ *     {
+ *       type: 'proof',
+ *       sectionLabel: 'Proof from Live Deployment',
+ *       headline: 'Running today across 24 facilities',
+ *       blocks: [
+ *         {
+ *           type: 'metric',
+ *           stats: [
+ *             { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable retail operations' },
+ *             { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
+ *             { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+ *             { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at retail facilities' },
+ *           ],
+ *         },
+ *         {
+ *           type: 'quote',
+ *           quote: {
+ *             text: 'The yard used to be where we lost visibility. Now it is where we gain control over every trailer in the network. The dock office runs itself.',
+ *             role: 'Operations Director',
+ *             company: 'National Retail Distributor',
+ *           },
+ *         },
+ *       ],
+ *     },
+ *     {
+ *       type: 'network-map',
+ *       sectionLabel: 'Your Network',
+ *       headline: 'H-E-B\'s yard network at scale',
+ *       narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
+ *       facilityCount: '50+',
+ *       facilityTypes: ['Grocery Distribution Centers', 'Manufacturing Plants', 'E-commerce Fulfillment', 'Central Market DCs'],
+ *       geographicSpread: 'North America',
+ *       dailyTrailerMoves: '4,000+ across the network',
+ *     },
+ *     {
+ *       type: 'roi',
+ *       sectionLabel: 'The Business Case',
+ *       headline: 'Conservative ROI model for H-E-B',
+ *       narrative: 'Based on measured YardFlow improvements at comparable operations.',
+ *       roiLines: [
+ *         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
+ *         { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
+ *         { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
+ *         { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
+ *       ],
+ *       totalAnnualSavings: '$5M-$8M across the network',
+ *       paybackPeriod: '< 6 months',
+ *       methodology: 'Based on measured results at 24 live facilities extrapolated to H-E-B facility count and operational profile.',
+ *     },
+ *     {
+ *       type: 'testimonial',
+ *       sectionLabel: 'From an Operator Who Runs It',
+ *       quote: 'Before YardFlow, we had 30 trailers in the yard and no idea which ones were loaded. Now every trailer has a status and a plan.',
+ *       role: 'Operations Director',
+ *       company: 'National Retail Distributor',
+ *       context: 'After 12 months of full YardFlow deployment across their facility network.',
+ *     },
+ *     {
+ *       type: 'cta',
+ *       cta: {
+ *         type: 'modex-meeting',
+ *         headline: 'See what a standardized yard network looks like for H-E-B',
+ *         subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
+ *         buttonLabel: 'Book a Meeting at MODEX',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *       closingLine: 'One conversation. Your yard network. A clear path to $5M-$8M in annual savings.',
+ *     },
+ *   ]
+ */
 
 export const hEB: AccountMicrositeData = {
   slug: 'h-e-b',
@@ -24,143 +164,7 @@ export const hEB: AccountMicrositeData = {
   pageTitle: 'YardFlow for H-E-B - Yard Network Standardization',
   metaDescription: 'How YardFlow eliminates the yard bottleneck across H-E-B\'s facility network.',
 
-  sections: [
-    {
-      type: 'hero',
-      headline: 'H-E-B built the most admired grocery supply chain in America. The yard is the one layer they have not standardized yet.',
-      subheadline: 'Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
-      accountCallout: 'H-E-B - Retail',
-      backgroundTheme: 'dark',
-      cta: {
-        type: 'modex-meeting',
-        headline: 'See what a standardized yard network looks like for H-E-B',
-        subtext: '30-minute walk-through of your facility network with board-ready ROI.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-      },
-    },
-    {
-      type: 'problem',
-      sectionLabel: 'The Hidden Constraint',
-      headline: 'H-E-B is famous for freshness. But fresh product loses shelf days in the yard before it ever hits the shelf.',
-      narrative: 'Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
-      painPoints: [
-        {
-          headline: 'Texas-scale distribution means Texas-scale yard complexity',
-          description: 'H-E-B serves 400+ stores from 50+ distribution and manufacturing facilities across Texas and Mexico. Their private fleet of 1,500+ vehicles moves 4,000+ trailers daily. The yard infrastructure connecting those assets has no unified operating protocol.',
-          kpiImpact: '$15M+ estimated annual yard inefficiency across the Texas network',
-          relevantPeople: ['h-e-b-retzloff', 'h-e-b-stucker'],
-        },
-        {
-          headline: 'Fresh grocery margins demand sub-hour dock turns',
-          description: 'In grocery, product life starts burning the moment it leaves cold storage. H-E-B\'s fresh and perishable categories require dock turns measured in minutes, not hours. Yard dwell is where that clock runs out.',
-          kpiImpact: 'Every 30 minutes of excess yard dwell = measurable shrink increase on perishables',
-          relevantPeople: ['h-e-b-retzloff', 'h-e-b-stucker'],
-        },
-        {
-          headline: 'Own-brand manufacturing adds inbound complexity most grocers do not have',
-          description: 'H-E-B manufactures many of its own products, from tortillas to ice cream. That means their distribution centers handle both internal manufacturing inbound and vendor inbound through the same yard. The scheduling complexity is unique.',
-          kpiImpact: 'Dual inbound streams (manufacturing + vendor) competing for the same dock doors',
-          relevantPeople: ['h-e-b-retzloff', 'h-e-b-stucker'],
-        }
-      ],
-    },
-    {
-      type: 'stakes',
-      sectionLabel: 'What This Costs You',
-      headline: 'The math H-E-B is not tracking in one place',
-      narrative: 'H-E-B serves 400+ stores from 50+ distribution and manufacturing facilities across Texas and Mexico. Their private fleet of 1,500+ vehicles moves 4,000+ trailers daily. The yard infrastructure connecting those assets has no unified operating protocol. Meanwhile, in grocery, product life starts burning the moment it leaves cold storage. H-E-B\'s fresh and perishable categories require dock turns measured in minutes, not hours. Yard dwell is where that clock runs out.',
-      annualCost: '$5M-$8M in estimated yard-driven inefficiency across the network',
-      costBreakdown: [
-        { label: 'Carrier detention / demurrage', value: '$2M+' },
-        { label: 'Dock contention and turn time excess', value: '$2M+' },
-        { label: 'Gate and spotter labor overhead', value: '$2M+' },
-        { label: 'Peak season surge inefficiency', value: '$1M+' },
-      ],
-      urgencyDriver: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-    },
-    {
-      type: 'solution',
-      sectionLabel: 'The Fix',
-      headline: 'One protocol across every H-E-B yard',
-      narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
-      modules: [
-        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across H-E-B\'s facility network.' },
-        { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across H-E-B\'s facility network.' },
-        { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across H-E-B\'s facility network.' },
-        { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across H-E-B\'s facility network.' },
-      ],
-      accountFit: 'Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
-    },
-    {
-      type: 'proof',
-      sectionLabel: 'Proof from Live Deployment',
-      headline: 'Running today across 24 facilities',
-      blocks: [
-        {
-          type: 'metric',
-          stats: [
-            { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable retail operations' },
-            { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
-            { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
-            { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at retail facilities' },
-          ],
-        },
-        {
-          type: 'quote',
-          quote: {
-            text: 'The yard used to be where we lost visibility. Now it is where we gain control over every trailer in the network. The dock office runs itself.',
-            role: 'Operations Director',
-            company: 'National Retail Distributor',
-          },
-        },
-      ],
-    },
-    {
-      type: 'network-map',
-      sectionLabel: 'Your Network',
-      headline: 'H-E-B\'s yard network at scale',
-      narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
-      facilityCount: '50+',
-      facilityTypes: ['Grocery Distribution Centers', 'Manufacturing Plants', 'E-commerce Fulfillment', 'Central Market DCs'],
-      geographicSpread: 'North America',
-      dailyTrailerMoves: '4,000+ across the network',
-    },
-    {
-      type: 'roi',
-      sectionLabel: 'The Business Case',
-      headline: 'Conservative ROI model for H-E-B',
-      narrative: 'Based on measured YardFlow improvements at comparable operations.',
-      roiLines: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
-        { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
-        { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
-        { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
-      ],
-      totalAnnualSavings: '$5M-$8M across the network',
-      paybackPeriod: '< 6 months',
-      methodology: 'Based on measured results at 24 live facilities extrapolated to H-E-B facility count and operational profile.',
-    },
-    {
-      type: 'testimonial',
-      sectionLabel: 'From an Operator Who Runs It',
-      quote: 'Before YardFlow, we had 30 trailers in the yard and no idea which ones were loaded. Now every trailer has a status and a plan.',
-      role: 'Operations Director',
-      company: 'National Retail Distributor',
-      context: 'After 12 months of full YardFlow deployment across their facility network.',
-    },
-    {
-      type: 'cta',
-      cta: {
-        type: 'modex-meeting',
-        headline: 'See what a standardized yard network looks like for H-E-B',
-        subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-      },
-      closingLine: 'One conversation. Your yard network. A clear path to $5M-$8M in annual savings.',
-    },
-  ],
+  sections: [],
 
   people: [
     {
@@ -267,15 +271,6 @@ export const hEB: AccountMicrositeData = {
         subheadline: 'Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Troy, let\'s walk your yard network',
-        subtext: '30-minute conversation about H-E-B\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Troy',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Troy lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'detention cost', 'throughput', 'operational efficiency'],
@@ -307,15 +302,6 @@ export const hEB: AccountMicrositeData = {
         subheadline: 'Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Craig, let\'s walk your yard network',
-        subtext: '30-minute conversation about H-E-B\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Craig',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Craig lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['turn time', 'detention cost', 'dwell time', 'on-time pickup', 'carrier satisfaction'],
@@ -347,15 +333,6 @@ export const hEB: AccountMicrositeData = {
         subheadline: 'Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Dakota, let\'s walk your yard network',
-        subtext: '30-minute conversation about H-E-B\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Dakota',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Dakota lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['turn time', 'detention cost', 'dwell time', 'on-time pickup', 'carrier satisfaction'],
@@ -387,15 +364,6 @@ export const hEB: AccountMicrositeData = {
         subheadline: 'Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Jeffrey, let\'s walk your yard network',
-        subtext: '30-minute conversation about H-E-B\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Jeffrey',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Jeffrey lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -427,15 +395,6 @@ export const hEB: AccountMicrositeData = {
         subheadline: 'Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Troy, let\'s walk your yard network',
-        subtext: '30-minute conversation about H-E-B\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Troy',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Troy lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],

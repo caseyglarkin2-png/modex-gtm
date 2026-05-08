@@ -10,7 +10,147 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
+
+// LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
+/*
+ * [
+ *     {
+ *       type: 'hero',
+ *       headline: 'New supply chain leadership. 40+ facilities. Zero standardized yard protocol. The window to fix this is now.',
+ *       subheadline: 'Hormel runs 40+ facilities with a 700-tractor private fleet. A new CSCO inherits every yard protocol those facilities built independently.',
+ *       accountCallout: 'Hormel Foods - Food & Beverage',
+ *       backgroundTheme: 'dark',
+ *       cta: {
+ *         type: 'modex-meeting',
+ *         headline: 'See what a standardized yard network looks like for Hormel Foods',
+ *         subtext: '30-minute walk-through of your facility network with board-ready ROI.',
+ *         buttonLabel: 'Book a Meeting at MODEX',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *     },
+ *     {
+ *       type: 'problem',
+ *       sectionLabel: 'The Hidden Constraint',
+ *       headline: 'Hormel runs cold chain at scale. The yard is the one link in that chain without real-time visibility.',
+ *       narrative: 'Hormel runs 40+ facilities with a 700-tractor private fleet. A new CSCO inherits every yard protocol those facilities built independently.',
+ *       painPoints: [
+ *         {
+ *           headline: 'Leadership transition creates a yard standardization window',
+ *           description: 'Hormel is appointing a new Chief Supply Chain Officer in March 2026. New supply chain leadership at a $12B manufacturer means every operational layer gets reviewed. The yard is the layer nobody has standardized yet.',
+ *           kpiImpact: 'First 90-day leadership window to establish new operational standards',
+ *           relevantPeople: ['hormel-foods-bonifant', 'hormel-foods-schwartz'],
+ *         },
+ *         {
+ *           headline: 'Protein processing plants run 24/7 on live-animal schedules',
+ *           description: 'Hormel\'s protein plants do not get to pause inbound. Live hog deliveries and fresh meat outbound operate on biological clocks, not shipping windows. When the yard backs up, the production line feels it in hours, not days.',
+ *           kpiImpact: 'Production downtime from yard backup: $200K+ per incident at a single facility',
+ *           relevantPeople: ['hormel-foods-bonifant', 'hormel-foods-schwartz'],
+ *         },
+ *         {
+ *           headline: 'Cold chain integrity breaks at the yard boundary',
+ *           description: 'Refrigerated trailers maintain temp in transit, but yard dwell between gate and dock is where cold chain breaks happen. Across 40+ facilities with no standardized yard monitoring, Hormel has blind spots at every site.',
+ *           kpiImpact: '$4M+ annual exposure from temperature excursion events across the network',
+ *           relevantPeople: ['hormel-foods-bonifant', 'hormel-foods-schwartz'],
+ *         }
+ *       ],
+ *     },
+ *     {
+ *       type: 'stakes',
+ *       sectionLabel: 'What This Costs You',
+ *       headline: 'The math Hormel Foods is not tracking in one place',
+ *       narrative: 'Hormel is appointing a new Chief Supply Chain Officer in March 2026. New supply chain leadership at a $12B manufacturer means every operational layer gets reviewed. The yard is the layer nobody has standardized yet. Meanwhile, hormel\'s protein plants do not get to pause inbound. Live hog deliveries and fresh meat outbound operate on biological clocks, not shipping windows. When the yard backs up, the production line feels it in hours, not days.',
+ *       annualCost: '$10M-$15M in estimated yard-driven inefficiency across the network',
+ *       costBreakdown: [
+ *         { label: 'Carrier detention / demurrage', value: '$4M+' },
+ *         { label: 'Dock contention and turn time excess', value: '$3M+' },
+ *         { label: 'Gate and spotter labor overhead', value: '$2M+' },
+ *         { label: 'Peak season surge inefficiency', value: '$1M+' },
+ *       ],
+ *       urgencyDriver: 'New CSCO in March 2026.',
+ *     },
+ *     {
+ *       type: 'solution',
+ *       sectionLabel: 'The Fix',
+ *       headline: 'One protocol across every Hormel Foods yard',
+ *       narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
+ *       modules: [
+ *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'One gate process across 40+ protein, grocery, and cold-storage facilities.' },
+ *         { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Captures inbound details before a live-animal delivery or reefer load even reaches the dock.' },
+ *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Sequences reefer and dry loads to the right dock type. 24/7 protein facilities need automated priority.' },
+ *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Network-wide dwell and throughput data the new CSCO needs from day one.' },
+ *       ],
+ *       accountFit: 'Hormel runs 40+ facilities with a 700-tractor private fleet. A new CSCO inherits every yard protocol those facilities built independently.',
+ *     },
+ *     {
+ *       type: 'proof',
+ *       sectionLabel: 'Proof from Live Deployment',
+ *       headline: 'Running today across 24 facilities',
+ *       blocks: [
+ *         {
+ *           type: 'metric',
+ *           stats: [
+ *             { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable food & beverage operations' },
+ *             { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
+ *             { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+ *             { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at food & beverage facilities' },
+ *           ],
+ *         },
+ *         {
+ *           type: 'quote',
+ *           quote: {
+ *             text: 'Primo Water operates 45 plants on the same production-and-distribution model. YardFlow cut their gate-to-dock time from 48 to 24 minutes.',
+ *             role: 'Operations Director',
+ *             company: 'Operations Director, National Beverage/Food Manufacturer',
+ *           },
+ *         },
+ *       ],
+ *     },
+ *     {
+ *       type: 'network-map',
+ *       sectionLabel: 'Your Network',
+ *       headline: 'Hormel Foods\'s yard network at scale',
+ *       narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
+ *       facilityCount: '40+',
+ *       facilityTypes: ['Meat Processing Plants', 'Production Facilities', 'Distribution Centers', 'Cold Storage'],
+ *       geographicSpread: 'North America',
+ *       dailyTrailerMoves: '2,000+ across the network',
+ *     },
+ *     {
+ *       type: 'roi',
+ *       sectionLabel: 'The Business Case',
+ *       headline: 'Conservative ROI model for Hormel Foods',
+ *       narrative: 'Based on measured YardFlow improvements at comparable operations.',
+ *       roiLines: [
+ *         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
+ *         { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
+ *         { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
+ *         { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
+ *       ],
+ *       totalAnnualSavings: '$10M-$15M across the network',
+ *       paybackPeriod: '< 6 months',
+ *       methodology: 'Based on measured results at 24 live facilities extrapolated to Hormel Foods facility count and operational profile.',
+ *     },
+ *     {
+ *       type: 'testimonial',
+ *       sectionLabel: 'From an Operator Who Runs It',
+ *       quote: 'Primo Water operates 45 plants on the same production-and-distribution model. YardFlow cut their gate-to-dock time from 48 to 24 minutes.',
+ *       role: 'Operations Director',
+ *       company: 'Operations Director, National Beverage/Food Manufacturer',
+ *       context: 'After 12 months of full YardFlow deployment across their facility network.',
+ *     },
+ *     {
+ *       type: 'cta',
+ *       cta: {
+ *         type: 'modex-meeting',
+ *         headline: 'See what a standardized yard network looks like for Hormel Foods',
+ *         subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
+ *         buttonLabel: 'Book a Meeting at MODEX',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *       closingLine: 'One conversation. Your yard network. A clear path to $10M-$15M in annual savings.',
+ *     },
+ *   ]
+ */
 
 export const hormelFoods: AccountMicrositeData = {
   slug: 'hormel-foods',
@@ -24,143 +164,7 @@ export const hormelFoods: AccountMicrositeData = {
   pageTitle: 'YardFlow for Hormel Foods - Yard Network Standardization',
   metaDescription: 'How YardFlow eliminates the yard bottleneck across Hormel Foods\'s facility network.',
 
-  sections: [
-    {
-      type: 'hero',
-      headline: 'New supply chain leadership. 40+ facilities. Zero standardized yard protocol. The window to fix this is now.',
-      subheadline: 'Hormel runs 40+ facilities with a 700-tractor private fleet. A new CSCO inherits every yard protocol those facilities built independently.',
-      accountCallout: 'Hormel Foods - Food & Beverage',
-      backgroundTheme: 'dark',
-      cta: {
-        type: 'modex-meeting',
-        headline: 'See what a standardized yard network looks like for Hormel Foods',
-        subtext: '30-minute walk-through of your facility network with board-ready ROI.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-      },
-    },
-    {
-      type: 'problem',
-      sectionLabel: 'The Hidden Constraint',
-      headline: 'Hormel runs cold chain at scale. The yard is the one link in that chain without real-time visibility.',
-      narrative: 'Hormel runs 40+ facilities with a 700-tractor private fleet. A new CSCO inherits every yard protocol those facilities built independently.',
-      painPoints: [
-        {
-          headline: 'Leadership transition creates a yard standardization window',
-          description: 'Hormel is appointing a new Chief Supply Chain Officer in March 2026. New supply chain leadership at a $12B manufacturer means every operational layer gets reviewed. The yard is the layer nobody has standardized yet.',
-          kpiImpact: 'First 90-day leadership window to establish new operational standards',
-          relevantPeople: ['hormel-foods-bonifant', 'hormel-foods-schwartz'],
-        },
-        {
-          headline: 'Protein processing plants run 24/7 on live-animal schedules',
-          description: 'Hormel\'s protein plants do not get to pause inbound. Live hog deliveries and fresh meat outbound operate on biological clocks, not shipping windows. When the yard backs up, the production line feels it in hours, not days.',
-          kpiImpact: 'Production downtime from yard backup: $200K+ per incident at a single facility',
-          relevantPeople: ['hormel-foods-bonifant', 'hormel-foods-schwartz'],
-        },
-        {
-          headline: 'Cold chain integrity breaks at the yard boundary',
-          description: 'Refrigerated trailers maintain temp in transit, but yard dwell between gate and dock is where cold chain breaks happen. Across 40+ facilities with no standardized yard monitoring, Hormel has blind spots at every site.',
-          kpiImpact: '$4M+ annual exposure from temperature excursion events across the network',
-          relevantPeople: ['hormel-foods-bonifant', 'hormel-foods-schwartz'],
-        }
-      ],
-    },
-    {
-      type: 'stakes',
-      sectionLabel: 'What This Costs You',
-      headline: 'The math Hormel Foods is not tracking in one place',
-      narrative: 'Hormel is appointing a new Chief Supply Chain Officer in March 2026. New supply chain leadership at a $12B manufacturer means every operational layer gets reviewed. The yard is the layer nobody has standardized yet. Meanwhile, hormel\'s protein plants do not get to pause inbound. Live hog deliveries and fresh meat outbound operate on biological clocks, not shipping windows. When the yard backs up, the production line feels it in hours, not days.',
-      annualCost: '$10M-$15M in estimated yard-driven inefficiency across the network',
-      costBreakdown: [
-        { label: 'Carrier detention / demurrage', value: '$4M+' },
-        { label: 'Dock contention and turn time excess', value: '$3M+' },
-        { label: 'Gate and spotter labor overhead', value: '$2M+' },
-        { label: 'Peak season surge inefficiency', value: '$1M+' },
-      ],
-      urgencyDriver: 'New CSCO in March 2026.',
-    },
-    {
-      type: 'solution',
-      sectionLabel: 'The Fix',
-      headline: 'One protocol across every Hormel Foods yard',
-      narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
-      modules: [
-        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'One gate process across 40+ protein, grocery, and cold-storage facilities.' },
-        { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Captures inbound details before a live-animal delivery or reefer load even reaches the dock.' },
-        { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Sequences reefer and dry loads to the right dock type. 24/7 protein facilities need automated priority.' },
-        { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Network-wide dwell and throughput data the new CSCO needs from day one.' },
-      ],
-      accountFit: 'Hormel runs 40+ facilities with a 700-tractor private fleet. A new CSCO inherits every yard protocol those facilities built independently.',
-    },
-    {
-      type: 'proof',
-      sectionLabel: 'Proof from Live Deployment',
-      headline: 'Running today across 24 facilities',
-      blocks: [
-        {
-          type: 'metric',
-          stats: [
-            { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable food & beverage operations' },
-            { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
-            { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
-            { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at food & beverage facilities' },
-          ],
-        },
-        {
-          type: 'quote',
-          quote: {
-            text: 'Primo Water operates 45 plants on the same production-and-distribution model. YardFlow cut their gate-to-dock time from 48 to 24 minutes.',
-            role: 'Operations Director',
-            company: 'Operations Director, National Beverage/Food Manufacturer',
-          },
-        },
-      ],
-    },
-    {
-      type: 'network-map',
-      sectionLabel: 'Your Network',
-      headline: 'Hormel Foods\'s yard network at scale',
-      narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
-      facilityCount: '40+',
-      facilityTypes: ['Meat Processing Plants', 'Production Facilities', 'Distribution Centers', 'Cold Storage'],
-      geographicSpread: 'North America',
-      dailyTrailerMoves: '2,000+ across the network',
-    },
-    {
-      type: 'roi',
-      sectionLabel: 'The Business Case',
-      headline: 'Conservative ROI model for Hormel Foods',
-      narrative: 'Based on measured YardFlow improvements at comparable operations.',
-      roiLines: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
-        { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
-        { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
-        { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
-      ],
-      totalAnnualSavings: '$10M-$15M across the network',
-      paybackPeriod: '< 6 months',
-      methodology: 'Based on measured results at 24 live facilities extrapolated to Hormel Foods facility count and operational profile.',
-    },
-    {
-      type: 'testimonial',
-      sectionLabel: 'From an Operator Who Runs It',
-      quote: 'Primo Water operates 45 plants on the same production-and-distribution model. YardFlow cut their gate-to-dock time from 48 to 24 minutes.',
-      role: 'Operations Director',
-      company: 'Operations Director, National Beverage/Food Manufacturer',
-      context: 'After 12 months of full YardFlow deployment across their facility network.',
-    },
-    {
-      type: 'cta',
-      cta: {
-        type: 'modex-meeting',
-        headline: 'See what a standardized yard network looks like for Hormel Foods',
-        subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-      },
-      closingLine: 'One conversation. Your yard network. A clear path to $10M-$15M in annual savings.',
-    },
-  ],
+  sections: [],
 
   people: [
     {
@@ -267,15 +271,6 @@ export const hormelFoods: AccountMicrositeData = {
         subheadline: 'Hormel runs 40+ facilities with a 700-tractor private fleet. A new CSCO inherits every yard protocol those facilities built independently.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Will, let\'s walk your yard network',
-        subtext: '30-minute conversation about Hormel Foods\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Will',
-        personContext: 'New CSCO in March 2026.',
-      },
 
       toneShift: 'Strategic, board-level. Reference Will\'s mandate and transformation context. Lead with outcomes and business impact, not features.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -307,15 +302,6 @@ export const hormelFoods: AccountMicrositeData = {
         subheadline: 'Hormel runs 40+ facilities with a 700-tractor private fleet. A new CSCO inherits every yard protocol those facilities built independently.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Nicholas, let\'s walk your yard network',
-        subtext: '30-minute conversation about Hormel Foods\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Nicholas',
-        personContext: 'New CSCO in March 2026.',
-      },
 
       toneShift: 'Operator-to-operator. Nicholas lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['turn time', 'detention cost', 'dwell time', 'on-time pickup', 'carrier satisfaction'],
@@ -347,15 +333,6 @@ export const hormelFoods: AccountMicrositeData = {
         subheadline: 'Hormel runs 40+ facilities with a 700-tractor private fleet. A new CSCO inherits every yard protocol those facilities built independently.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Connor, let\'s walk your yard network',
-        subtext: '30-minute conversation about Hormel Foods\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Connor',
-        personContext: 'New CSCO in March 2026.',
-      },
 
       toneShift: 'Operator-to-operator. Connor lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['dock utilization', 'throughput per shift', 'production schedule adherence', 'temperature-zone compliance'],
@@ -387,15 +364,6 @@ export const hormelFoods: AccountMicrositeData = {
         subheadline: 'Hormel runs 40+ facilities with a 700-tractor private fleet. A new CSCO inherits every yard protocol those facilities built independently.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Anthony, let\'s walk your yard network',
-        subtext: '30-minute conversation about Hormel Foods\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Anthony',
-        personContext: 'New CSCO in March 2026.',
-      },
 
       toneShift: 'Operator-to-operator. Anthony lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -427,15 +395,6 @@ export const hormelFoods: AccountMicrositeData = {
         subheadline: 'Hormel runs 40+ facilities with a 700-tractor private fleet. A new CSCO inherits every yard protocol those facilities built independently.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Tim, let\'s walk your yard network',
-        subtext: '30-minute conversation about Hormel Foods\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Tim',
-        personContext: 'New CSCO in March 2026.',
-      },
 
       toneShift: 'Operator-to-operator. Tim lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'detention cost', 'throughput', 'operational efficiency'],

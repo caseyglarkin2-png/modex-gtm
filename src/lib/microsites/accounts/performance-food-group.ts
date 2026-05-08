@@ -11,7 +11,154 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
+
+// LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
+/*
+ * [
+ *     {
+ *       type: 'hero',
+ *       headline: '150+ Facilities. That is a yard problem.',
+ *       subheadline: 'Dylan — with the Cheney Brothers integration adding to your 150+ DC network and every reefer trailer in the yard burning fuel while it waits, the yard is where PFG\'s 2-3% margin either grows or leaks. Night-loading 7,000 trucks for AM restaurant delivery across 300,000 stops — a 15-minute yard improvement at each facility is the difference between restaurants opening with product or scrambling.',
+ *       accountCallout: 'Performance Food Group - Food & Beverage',
+ *       backgroundTheme: 'dark',
+ *       cta: {
+ *         type: 'meeting',
+ *         headline: 'See what a standardized yard network looks like for Performance Food Group',
+ *         subtext: '30-minute walk-through of your facility network with board-ready ROI.',
+ *         buttonLabel: 'Book a Network Audit',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *     },
+ *     {
+ *       type: 'problem',
+ *       sectionLabel: 'The Hidden Constraint',
+ *       headline: 'The yard is where Performance Food Group\'s supply chain math breaks down',
+ *       narrative: 'Dylan — with the Cheney Brothers integration adding to your 150+ DC network and every reefer trailer in the yard burning fuel while it waits, the yard is where PFG\'s 2-3% margin either grows or leaks. Night-loading 7,000 trucks for AM restaurant delivery across 300,000 stops — a 15-minute yard improvement at each facility is the difference between restaurants opening with product or scrambling.',
+ *       painPoints: [
+ *         {
+ *           headline: '150+ Facilities',
+ *           description: 'Scale of yard management challenge is staggering. Even modest improvements × 150 = massive savings.',
+ *           relevantPeople: ['performance-food-group-greenbaum'],
+ *         },
+ *         {
+ *           headline: 'Perishable = Time Pressure',
+ *           description: 'Every hour a refrigerated trailer sits in yard = quality risk + energy cost (reefer fuel)',
+ *           relevantPeople: ['performance-food-group-greenbaum'],
+ *         },
+ *         {
+ *           headline: 'Multi-Temp Yard Staging',
+ *           description: 'Frozen, cooler, and dry outbound loads stage simultaneously. Wrong trailer at wrong dock = thaw risk',
+ *           relevantPeople: ['performance-food-group-greenbaum'],
+ *         },
+ *         {
+ *           headline: 'Night Loading',
+ *           description: 'Trucks load 8PM-4AM for AM delivery. Yard operations happen in darkness — visibility (literally) is a problem',
+ *           relevantPeople: ['performance-food-group-greenbaum'],
+ *         },
+ *         {
+ *           headline: 'Restaurant Delivery Complexity',
+ *           description: '300,000+ stop locations mean route-truck loading must be surgically precise. Any yard delay → late restaurant delivery → lost customer',
+ *           relevantPeople: ['performance-food-group-greenbaum'],
+ *         }
+ *       ],
+ *     },
+ *     {
+ *       type: 'stakes',
+ *       sectionLabel: 'What This Costs You',
+ *       headline: 'The math Performance Food Group is not tracking in one place',
+ *       narrative: 'Scale of yard management challenge is staggering. Even modest improvements × 150 = massive savings. Meanwhile, every hour a refrigerated trailer sits in yard = quality risk + energy cost (reefer fuel)',
+ *       annualCost: '$10M-$15M in estimated yard-driven inefficiency across the network',
+ *       costBreakdown: [
+ *         { label: 'Carrier detention / demurrage', value: '$4M+' },
+ *         { label: 'Dock contention and turn time excess', value: '$3M+' },
+ *         { label: 'Gate and spotter labor overhead', value: '$2M+' },
+ *         { label: 'Peak season surge inefficiency', value: '$1M+' },
+ *       ],
+ *       urgencyDriver: '2024: PFG acquired Cheney Brothers (one of the largest independent foodservice distributors) for $2.1B',
+ *     },
+ *     {
+ *       type: 'solution',
+ *       sectionLabel: 'The Fix',
+ *       headline: 'One protocol across every Performance Food Group yard',
+ *       narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
+ *       modules: [
+ *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Performance Food Group\'s facility network.' },
+ *         { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Performance Food Group\'s facility network.' },
+ *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Performance Food Group\'s facility network.' },
+ *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Performance Food Group\'s facility network.' },
+ *       ],
+ *       accountFit: 'Dylan — with the Cheney Brothers integration adding to your 150+ DC network and every reefer trailer in the yard burning fuel while it waits, the yard is where PFG\'s 2-3% margin either grows or leaks. Night-loading 7,000 trucks for AM restaurant delivery across 300,000 stops — a 15-minute yard improvement at each facility is the difference between restaurants opening with product or scrambling.',
+ *     },
+ *     {
+ *       type: 'proof',
+ *       sectionLabel: 'Proof from Live Deployment',
+ *       headline: 'Running today across 24 facilities',
+ *       blocks: [
+ *         {
+ *           type: 'metric',
+ *           stats: [
+ *             { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable food & beverage operations' },
+ *             { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
+ *             { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+ *             { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at food & beverage facilities' },
+ *           ],
+ *         },
+ *         {
+ *           type: 'quote',
+ *           quote: {
+ *             text: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office. That was an integral part of our strategy and has been proven.',
+ *             role: 'Operations Director',
+ *             company: 'National CPG/Beverage Manufacturer',
+ *           },
+ *         },
+ *       ],
+ *     },
+ *     {
+ *       type: 'network-map',
+ *       sectionLabel: 'Your Network',
+ *       headline: 'Performance Food Group\'s yard network at scale',
+ *       narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
+ *       facilityCount: '150+ ',
+ *       facilityTypes: ['Manufacturing Plants', 'Distribution Centers'],
+ *       geographicSpread: 'North America',
+ *       dailyTrailerMoves: '1,000+ across the network',
+ *     },
+ *     {
+ *       type: 'roi',
+ *       sectionLabel: 'The Business Case',
+ *       headline: 'Conservative ROI model for Performance Food Group',
+ *       narrative: 'Based on measured YardFlow improvements at comparable operations.',
+ *       roiLines: [
+ *         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
+ *         { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
+ *         { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
+ *         { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
+ *       ],
+ *       totalAnnualSavings: '$10M-$15M across the network',
+ *       paybackPeriod: '< 6 months',
+ *       methodology: 'Based on measured results at 24 live facilities extrapolated to Performance Food Group facility count and operational profile.',
+ *     },
+ *     {
+ *       type: 'testimonial',
+ *       sectionLabel: 'From an Operator Who Runs It',
+ *       quote: 'We believe system-driven dock door assignment will be a valuable next step for dock office optimization.',
+ *       role: 'Operations Director',
+ *       company: 'National CPG/Beverage Manufacturer',
+ *       context: 'After 12 months of full YardFlow deployment across their facility network.',
+ *     },
+ *     {
+ *       type: 'cta',
+ *       cta: {
+ *         type: 'meeting',
+ *         headline: 'See what a standardized yard network looks like for Performance Food Group',
+ *         subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
+ *         buttonLabel: 'Book a Network Audit',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *       closingLine: 'One conversation. Your yard network. A clear path to $10M-$15M in annual savings.',
+ *     },
+ *   ]
+ */
 
 export const performanceFoodGroup: AccountMicrositeData = {
   slug: 'performance-food-group',
@@ -24,150 +171,7 @@ export const performanceFoodGroup: AccountMicrositeData = {
   pageTitle: 'YardFlow for Performance Food Group - Yard Network Standardization',
   metaDescription: 'How YardFlow eliminates the yard bottleneck across Performance Food Group\'s facility network.',
 
-  sections: [
-    {
-      type: 'hero',
-      headline: '150+ Facilities. That is a yard problem.',
-      subheadline: 'Dylan — with the Cheney Brothers integration adding to your 150+ DC network and every reefer trailer in the yard burning fuel while it waits, the yard is where PFG\'s 2-3% margin either grows or leaks. Night-loading 7,000 trucks for AM restaurant delivery across 300,000 stops — a 15-minute yard improvement at each facility is the difference between restaurants opening with product or scrambling.',
-      accountCallout: 'Performance Food Group - Food & Beverage',
-      backgroundTheme: 'dark',
-      cta: {
-        type: 'meeting',
-        headline: 'See what a standardized yard network looks like for Performance Food Group',
-        subtext: '30-minute walk-through of your facility network with board-ready ROI.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-      },
-    },
-    {
-      type: 'problem',
-      sectionLabel: 'The Hidden Constraint',
-      headline: 'The yard is where Performance Food Group\'s supply chain math breaks down',
-      narrative: 'Dylan — with the Cheney Brothers integration adding to your 150+ DC network and every reefer trailer in the yard burning fuel while it waits, the yard is where PFG\'s 2-3% margin either grows or leaks. Night-loading 7,000 trucks for AM restaurant delivery across 300,000 stops — a 15-minute yard improvement at each facility is the difference between restaurants opening with product or scrambling.',
-      painPoints: [
-        {
-          headline: '150+ Facilities',
-          description: 'Scale of yard management challenge is staggering. Even modest improvements × 150 = massive savings.',
-          relevantPeople: ['performance-food-group-greenbaum'],
-        },
-        {
-          headline: 'Perishable = Time Pressure',
-          description: 'Every hour a refrigerated trailer sits in yard = quality risk + energy cost (reefer fuel)',
-          relevantPeople: ['performance-food-group-greenbaum'],
-        },
-        {
-          headline: 'Multi-Temp Yard Staging',
-          description: 'Frozen, cooler, and dry outbound loads stage simultaneously. Wrong trailer at wrong dock = thaw risk',
-          relevantPeople: ['performance-food-group-greenbaum'],
-        },
-        {
-          headline: 'Night Loading',
-          description: 'Trucks load 8PM-4AM for AM delivery. Yard operations happen in darkness — visibility (literally) is a problem',
-          relevantPeople: ['performance-food-group-greenbaum'],
-        },
-        {
-          headline: 'Restaurant Delivery Complexity',
-          description: '300,000+ stop locations mean route-truck loading must be surgically precise. Any yard delay → late restaurant delivery → lost customer',
-          relevantPeople: ['performance-food-group-greenbaum'],
-        }
-      ],
-    },
-    {
-      type: 'stakes',
-      sectionLabel: 'What This Costs You',
-      headline: 'The math Performance Food Group is not tracking in one place',
-      narrative: 'Scale of yard management challenge is staggering. Even modest improvements × 150 = massive savings. Meanwhile, every hour a refrigerated trailer sits in yard = quality risk + energy cost (reefer fuel)',
-      annualCost: '$10M-$15M in estimated yard-driven inefficiency across the network',
-      costBreakdown: [
-        { label: 'Carrier detention / demurrage', value: '$4M+' },
-        { label: 'Dock contention and turn time excess', value: '$3M+' },
-        { label: 'Gate and spotter labor overhead', value: '$2M+' },
-        { label: 'Peak season surge inefficiency', value: '$1M+' },
-      ],
-      urgencyDriver: '2024: PFG acquired Cheney Brothers (one of the largest independent foodservice distributors) for $2.1B',
-    },
-    {
-      type: 'solution',
-      sectionLabel: 'The Fix',
-      headline: 'One protocol across every Performance Food Group yard',
-      narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
-      modules: [
-        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Performance Food Group\'s facility network.' },
-        { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Performance Food Group\'s facility network.' },
-        { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Performance Food Group\'s facility network.' },
-        { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Performance Food Group\'s facility network.' },
-      ],
-      accountFit: 'Dylan — with the Cheney Brothers integration adding to your 150+ DC network and every reefer trailer in the yard burning fuel while it waits, the yard is where PFG\'s 2-3% margin either grows or leaks. Night-loading 7,000 trucks for AM restaurant delivery across 300,000 stops — a 15-minute yard improvement at each facility is the difference between restaurants opening with product or scrambling.',
-    },
-    {
-      type: 'proof',
-      sectionLabel: 'Proof from Live Deployment',
-      headline: 'Running today across 24 facilities',
-      blocks: [
-        {
-          type: 'metric',
-          stats: [
-            { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable food & beverage operations' },
-            { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
-            { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
-            { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at food & beverage facilities' },
-          ],
-        },
-        {
-          type: 'quote',
-          quote: {
-            text: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office. That was an integral part of our strategy and has been proven.',
-            role: 'Operations Director',
-            company: 'National CPG/Beverage Manufacturer',
-          },
-        },
-      ],
-    },
-    {
-      type: 'network-map',
-      sectionLabel: 'Your Network',
-      headline: 'Performance Food Group\'s yard network at scale',
-      narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
-      facilityCount: '150+ ',
-      facilityTypes: ['Manufacturing Plants', 'Distribution Centers'],
-      geographicSpread: 'North America',
-      dailyTrailerMoves: '1,000+ across the network',
-    },
-    {
-      type: 'roi',
-      sectionLabel: 'The Business Case',
-      headline: 'Conservative ROI model for Performance Food Group',
-      narrative: 'Based on measured YardFlow improvements at comparable operations.',
-      roiLines: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
-        { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
-        { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
-        { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
-      ],
-      totalAnnualSavings: '$10M-$15M across the network',
-      paybackPeriod: '< 6 months',
-      methodology: 'Based on measured results at 24 live facilities extrapolated to Performance Food Group facility count and operational profile.',
-    },
-    {
-      type: 'testimonial',
-      sectionLabel: 'From an Operator Who Runs It',
-      quote: 'We believe system-driven dock door assignment will be a valuable next step for dock office optimization.',
-      role: 'Operations Director',
-      company: 'National CPG/Beverage Manufacturer',
-      context: 'After 12 months of full YardFlow deployment across their facility network.',
-    },
-    {
-      type: 'cta',
-      cta: {
-        type: 'meeting',
-        headline: 'See what a standardized yard network looks like for Performance Food Group',
-        subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-      },
-      closingLine: 'One conversation. Your yard network. A clear path to $10M-$15M in annual savings.',
-    },
-  ],
+  sections: [],
 
   people: [
     {
@@ -214,15 +218,6 @@ export const performanceFoodGroup: AccountMicrositeData = {
         subheadline: 'Dylan — with the Cheney Brothers integration adding to your 150+ DC network and every reefer trailer in the yard burning fuel while it waits, the yard is where PFG\'s 2-3% margin either grows or leaks. Night-loading 7,000 trucks for AM restaurant delivery across 300,000 stops — a 15-minute yard improvement at each facility is the difference between restaurants opening with product or scrambling.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'meeting',
-        headline: 'Dylan, let\'s walk your yard network',
-        subtext: '30-minute conversation about Performance Food Group\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-        personName: 'Dylan',
-        personContext: '2024: PFG acquired Cheney Brothers (one of the largest independent foodservice distributors) for $2.',
-      },
 
       toneShift: 'Operator-to-operator. Dylan lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],

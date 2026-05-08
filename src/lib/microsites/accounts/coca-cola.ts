@@ -1,9 +1,156 @@
 import type { AccountMicrositeData } from '../schema';
 import { getFacilityCountLabel, getFacilityCountLowerBound } from '../../research/facility-fact-registry';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 const COCA_COLA_FACILITY_COUNT_LABEL = getFacilityCountLabel('Coca-Cola', '70+');
 const COCA_COLA_FACILITY_COUNT = getFacilityCountLowerBound('Coca-Cola', 70) ?? 70;
+
+// LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
+/*
+ * [
+ *     {
+ *       type: 'hero',
+ *       headline: `Your bottler network runs ${COCA_COLA_FACILITY_COUNT_LABEL} facilities with 200-400 trailer moves per day in peak. The yards were never designed for this volume.`,
+ *       subheadline: 'Coca-Cola Consolidated alone reported $14M in detention costs. A 15-minute improvement in turn time across the bottler network saves the system $20M+ annually. That is the invisible 48-hour dock bottleneck hiding in your yard.',
+ *       accountCallout: `${COCA_COLA_FACILITY_COUNT_LABEL} disclosed bottler sites, including 60 distribution centers and 10 plants at CCBCC alone, 200-400 trailer moves/day per facility during peak`,
+ *       backgroundTheme: 'dark',
+ *       cta: {
+ *         type: 'meeting',
+ *         headline: 'See what a standardized yard network looks like for Coca-Cola',
+ *         subtext: '30-minute walk-through of your bottler network with board-ready ROI.',
+ *         buttonLabel: 'Book a Network Audit',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *     },
+ *     {
+ *       type: 'problem',
+ *       sectionLabel: 'The Hidden Constraint',
+ *       headline: 'The yard is where your bottler coordination breaks down',
+ *       narrative: 'Coca-Cola\'s franchise model means multiple bottlers sharing inbound ingredients and packaging from the same concentrate plants. When one bottler\'s trailers back up in the yard, it cascades through scheduling for every other bottler waiting for the same ingredients. The yard is the one surface nobody owns but everybody suffers from.',
+ *       painPoints: [
+ *         {
+ *           headline: '$14M in detention costs at Consolidated alone',
+ *           description: 'Coca-Cola Consolidated reported $14M in detention and demurrage costs in their 10-K filing. Extrapolate that across the full bottler network and the number is staggering.',
+ *           kpiImpact: '$14M detention at CCBCC, likely $40M+ system-wide',
+ *           source: 'Coca-Cola Consolidated 2023 10-K filing',
+ *           relevantPeople: ['coke-coe', 'coke-jadhav', 'coke-eppert'],
+ *         },
+ *         {
+ *           headline: 'Summer peak creates 40%+ volume spikes',
+ *           description: 'May through September drives 40% more volume. Yards designed for average throughput cannot handle peak. The result: longer queues, more detention, missed delivery windows.',
+ *           kpiImpact: '40% volume spike, Memorial Day through Labor Day',
+ *           relevantPeople: ['coke-coe', 'coke-jadhav', 'coke-eppert'],
+ *         },
+ *         {
+ *           headline: 'Multi-bottler yard contention',
+ *           description: 'Multiple bottlers receiving from the same concentrate and packaging plants. Scheduling conflicts at shared inbound facilities create cascading delays nobody tracks.',
+ *           relevantPeople: ['coke-coe', 'coke-jadhav', 'coke-eppert'],
+ *         },
+ *         {
+ *           headline: 'Fairlife cold chain complexity',
+ *           description: 'The Fairlife acquisition (2020) added ultra-filtered milk requiring cold chain staging. Juice lines need refrigerated staging. Multiple temperature zones now competing for the same dock doors.',
+ *           source: 'Fairlife acquisition 2020',
+ *           relevantPeople: ['coke-coe', 'coke-jadhav', 'coke-eppert'],
+ *         },
+ *       ],
+ *     },
+ *     {
+ *       type: 'stakes',
+ *       sectionLabel: 'What This Costs Your System',
+ *       headline: 'The math nobody tracks across the bottler network',
+ *       narrative: `Detention costs, dwell time, driver wait hours, seasonal surge inefficiency. Each bottler tracks their own slice. Nobody has the system-wide view. Coca-Cola Consolidated's $14M is public. The rest is hidden across ${COCA_COLA_FACILITY_COUNT_LABEL} facilities.`,
+ *       annualCost: '$40M+ estimated system-wide in yard-driven inefficiency',
+ *       costBreakdown: [
+ *         { label: 'Detention / demurrage (CCBCC alone)', value: '$14M' },
+ *         { label: 'Peak season surge inefficiency', value: '$10M+' },
+ *         { label: 'Multi-bottler scheduling conflicts', value: '$8M+' },
+ *         { label: 'Gate and spotter labor overlay', value: '$8M+' },
+ *       ],
+ *       urgencyDriver: 'Coca-Cola Consolidated investing $500M+ in fleet and facility upgrades 2024-2026. The yards should be part of that investment.',
+ *     },
+ *     {
+ *       type: 'solution',
+ *       sectionLabel: 'The Fix',
+ *       headline: 'One protocol across the bottler network',
+ *       narrative: 'YardFlow gives the Coca-Cola system one operating standard for every yard. Not a mandate - a protocol that makes every bottler\'s operation faster and cheaper. The same driver journey at every facility. The same dock assignment logic. The same evidence trail.',
+ *       modules: [
+ *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID.', relevanceToAccount: `Standardizes gate process across ${COCA_COLA_FACILITY_COUNT_LABEL} bottler facilities.` },
+ *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter task queues. Temperature-zone aware.', relevanceToAccount: 'Critical for Fairlife cold chain and multi-temp staging.' },
+ *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location and dwell.', relevanceToAccount: 'Real-time visibility across every bottler yard in the system.' },
+ *         { id: 'flowNETWORK', name: 'flowNETWORK', verb: 'Scale', shortDescription: 'Network-wide command view.', relevanceToAccount: 'System-wide visibility Coca-Cola HQ has never had across bottler yards.' },
+ *       ],
+ *       accountFit: 'Coca-Cola just partnered with Blue Yonder for supply chain planning. YardFlow fills the physical execution gap - the yard - where Blue Yonder has no reach.',
+ *     },
+ *     {
+ *       type: 'proof',
+ *       sectionLabel: 'Proof from Live Deployment',
+ *       headline: 'Running today across 24 facilities',
+ *       blocks: [
+ *         {
+ *           type: 'metric',
+ *           stats: [
+ *             { value: '24', label: 'Facilities Live' },
+ *             { value: '>200', label: 'Contracted Network' },
+ *             { value: '48-to-24', label: 'Min Truck Turn Time' },
+ *             { value: '$1M+', label: 'Per-Site Profit Impact' },
+ *             { value: '30 min', label: 'Remote Deployment' },
+ *           ],
+ *         },
+ *         {
+ *           type: 'quote',
+ *           quote: {
+ *             text: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office. That was an integral part of our strategy and has been proven.',
+ *             role: 'Operations Director',
+ *             company: 'National CPG Manufacturer',
+ *           },
+ *         },
+ *       ],
+ *     },
+ *     {
+ *       type: 'network-map',
+ *       sectionLabel: 'Your Network',
+ *       headline: 'The Coca-Cola system\'s yard footprint',
+ *       narrative: 'Every bottler runs its own yard differently. The HQ concentrate plants have different processes from Consolidated\'s DCs, which are different from Reyes Beverage\'s operations, which are different from Liberty Coca-Cola\'s NYC metro yards. YardFlow gives the system one standard.',
+ *       facilityCount: COCA_COLA_FACILITY_COUNT_LABEL,
+ *       facilityTypes: ['Concentrate Plants (HQ-owned)', 'Bottling Facilities', 'Distribution Centers', 'Cold Storage'],
+ *       geographicSpread: 'National - Atlanta HQ, Coca-Cola Consolidated (14 states plus DC, 60 distribution centers and 10 manufacturing plants), Reyes, Liberty, Swire networks',
+ *       dailyTrailerMoves: '15,000+ across the system during peak',
+ *       peakMultiplier: '1.4x during summer (May-September)',
+ *     },
+ *     {
+ *       type: 'roi',
+ *       sectionLabel: 'The Business Case',
+ *       headline: 'Conservative ROI for the Coca-Cola system',
+ *       narrative: 'Based on public detention data from CCBCC and measured YardFlow improvements at comparable beverage distribution operations.',
+ *       roiLines: [
+ *         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
+ *         { label: 'Detention cost (CCBCC alone)', before: '$14M/yr', after: '$7M/yr', delta: '-$7M', unit: 'annual' },
+ *         { label: 'Peak season dock contention', before: 'Routine bottleneck', after: 'Protocol-managed', delta: 'Eliminated' },
+ *         { label: 'System-wide savings estimate', before: '$0 (not tracked)', after: '$20M+/yr', delta: '+$20M', unit: 'annual' },
+ *       ],
+ *       totalAnnualSavings: '$20M+ across the bottler system',
+ *       paybackPeriod: '< 4 months at CCBCC alone',
+ *       methodology: `CCBCC detention data from 10-K filing. System-wide estimate based on ${COCA_COLA_FACILITY_COUNT_LABEL} facilities and measured turn time improvements.`,
+ *     },
+ *     {
+ *       type: 'testimonial',
+ *       sectionLabel: 'From an Operator Who Runs It',
+ *       quote: 'We believe system-driven dock door assignment will be a valuable next step for dock office optimization.',
+ *       role: 'Operations Director',
+ *       company: 'National Beverage Distributor',
+ *     },
+ *     {
+ *       type: 'cta',
+ *       cta: {
+ *         type: 'modex-meeting',
+ *         headline: 'Coca-Cola HQ is in Atlanta. MODEX is in Atlanta. Let\'s meet.',
+ *         subtext: 'You are literally local to the venue. 30-minute walk through your bottler network with board-ready ROI.',
+ *         buttonLabel: 'Book a Meeting at MODEX',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *       closingLine: 'Your HQ. Your city. Your meeting. $20M+ in annual savings across the system.',
+ *     },
+ *   ]
+ */
 
 export const cocaCola: AccountMicrositeData = {
   slug: 'coca-cola',
@@ -17,150 +164,7 @@ export const cocaCola: AccountMicrositeData = {
   pageTitle: 'YardFlow for Coca-Cola - Yard Network Standardization',
   metaDescription: `How YardFlow eliminates the yard bottleneck across Coca-Cola's ${COCA_COLA_FACILITY_COUNT_LABEL} disclosed bottler yard sites.`,
 
-  sections: [
-    {
-      type: 'hero',
-      headline: `Your bottler network runs ${COCA_COLA_FACILITY_COUNT_LABEL} facilities with 200-400 trailer moves per day in peak. The yards were never designed for this volume.`,
-      subheadline: 'Coca-Cola Consolidated alone reported $14M in detention costs. A 15-minute improvement in turn time across the bottler network saves the system $20M+ annually. That is the invisible 48-hour dock bottleneck hiding in your yard.',
-      accountCallout: `${COCA_COLA_FACILITY_COUNT_LABEL} disclosed bottler sites, including 60 distribution centers and 10 plants at CCBCC alone, 200-400 trailer moves/day per facility during peak`,
-      backgroundTheme: 'dark',
-      cta: {
-        type: 'meeting',
-        headline: 'See what a standardized yard network looks like for Coca-Cola',
-        subtext: '30-minute walk-through of your bottler network with board-ready ROI.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-      },
-    },
-    {
-      type: 'problem',
-      sectionLabel: 'The Hidden Constraint',
-      headline: 'The yard is where your bottler coordination breaks down',
-      narrative: 'Coca-Cola\'s franchise model means multiple bottlers sharing inbound ingredients and packaging from the same concentrate plants. When one bottler\'s trailers back up in the yard, it cascades through scheduling for every other bottler waiting for the same ingredients. The yard is the one surface nobody owns but everybody suffers from.',
-      painPoints: [
-        {
-          headline: '$14M in detention costs at Consolidated alone',
-          description: 'Coca-Cola Consolidated reported $14M in detention and demurrage costs in their 10-K filing. Extrapolate that across the full bottler network and the number is staggering.',
-          kpiImpact: '$14M detention at CCBCC, likely $40M+ system-wide',
-          source: 'Coca-Cola Consolidated 2023 10-K filing',
-          relevantPeople: ['coke-coe', 'coke-jadhav', 'coke-eppert'],
-        },
-        {
-          headline: 'Summer peak creates 40%+ volume spikes',
-          description: 'May through September drives 40% more volume. Yards designed for average throughput cannot handle peak. The result: longer queues, more detention, missed delivery windows.',
-          kpiImpact: '40% volume spike, Memorial Day through Labor Day',
-          relevantPeople: ['coke-coe', 'coke-jadhav', 'coke-eppert'],
-        },
-        {
-          headline: 'Multi-bottler yard contention',
-          description: 'Multiple bottlers receiving from the same concentrate and packaging plants. Scheduling conflicts at shared inbound facilities create cascading delays nobody tracks.',
-          relevantPeople: ['coke-coe', 'coke-jadhav', 'coke-eppert'],
-        },
-        {
-          headline: 'Fairlife cold chain complexity',
-          description: 'The Fairlife acquisition (2020) added ultra-filtered milk requiring cold chain staging. Juice lines need refrigerated staging. Multiple temperature zones now competing for the same dock doors.',
-          source: 'Fairlife acquisition 2020',
-          relevantPeople: ['coke-coe', 'coke-jadhav', 'coke-eppert'],
-        },
-      ],
-    },
-    {
-      type: 'stakes',
-      sectionLabel: 'What This Costs Your System',
-      headline: 'The math nobody tracks across the bottler network',
-      narrative: `Detention costs, dwell time, driver wait hours, seasonal surge inefficiency. Each bottler tracks their own slice. Nobody has the system-wide view. Coca-Cola Consolidated's $14M is public. The rest is hidden across ${COCA_COLA_FACILITY_COUNT_LABEL} facilities.`,
-      annualCost: '$40M+ estimated system-wide in yard-driven inefficiency',
-      costBreakdown: [
-        { label: 'Detention / demurrage (CCBCC alone)', value: '$14M' },
-        { label: 'Peak season surge inefficiency', value: '$10M+' },
-        { label: 'Multi-bottler scheduling conflicts', value: '$8M+' },
-        { label: 'Gate and spotter labor overlay', value: '$8M+' },
-      ],
-      urgencyDriver: 'Coca-Cola Consolidated investing $500M+ in fleet and facility upgrades 2024-2026. The yards should be part of that investment.',
-    },
-    {
-      type: 'solution',
-      sectionLabel: 'The Fix',
-      headline: 'One protocol across the bottler network',
-      narrative: 'YardFlow gives the Coca-Cola system one operating standard for every yard. Not a mandate - a protocol that makes every bottler\'s operation faster and cheaper. The same driver journey at every facility. The same dock assignment logic. The same evidence trail.',
-      modules: [
-        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID.', relevanceToAccount: `Standardizes gate process across ${COCA_COLA_FACILITY_COUNT_LABEL} bottler facilities.` },
-        { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter task queues. Temperature-zone aware.', relevanceToAccount: 'Critical for Fairlife cold chain and multi-temp staging.' },
-        { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location and dwell.', relevanceToAccount: 'Real-time visibility across every bottler yard in the system.' },
-        { id: 'flowNETWORK', name: 'flowNETWORK', verb: 'Scale', shortDescription: 'Network-wide command view.', relevanceToAccount: 'System-wide visibility Coca-Cola HQ has never had across bottler yards.' },
-      ],
-      accountFit: 'Coca-Cola just partnered with Blue Yonder for supply chain planning. YardFlow fills the physical execution gap - the yard - where Blue Yonder has no reach.',
-    },
-    {
-      type: 'proof',
-      sectionLabel: 'Proof from Live Deployment',
-      headline: 'Running today across 24 facilities',
-      blocks: [
-        {
-          type: 'metric',
-          stats: [
-            { value: '24', label: 'Facilities Live' },
-            { value: '>200', label: 'Contracted Network' },
-            { value: '48-to-24', label: 'Min Truck Turn Time' },
-            { value: '$1M+', label: 'Per-Site Profit Impact' },
-            { value: '30 min', label: 'Remote Deployment' },
-          ],
-        },
-        {
-          type: 'quote',
-          quote: {
-            text: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office. That was an integral part of our strategy and has been proven.',
-            role: 'Operations Director',
-            company: 'National CPG Manufacturer',
-          },
-        },
-      ],
-    },
-    {
-      type: 'network-map',
-      sectionLabel: 'Your Network',
-      headline: 'The Coca-Cola system\'s yard footprint',
-      narrative: 'Every bottler runs its own yard differently. The HQ concentrate plants have different processes from Consolidated\'s DCs, which are different from Reyes Beverage\'s operations, which are different from Liberty Coca-Cola\'s NYC metro yards. YardFlow gives the system one standard.',
-      facilityCount: COCA_COLA_FACILITY_COUNT_LABEL,
-      facilityTypes: ['Concentrate Plants (HQ-owned)', 'Bottling Facilities', 'Distribution Centers', 'Cold Storage'],
-      geographicSpread: 'National - Atlanta HQ, Coca-Cola Consolidated (14 states plus DC, 60 distribution centers and 10 manufacturing plants), Reyes, Liberty, Swire networks',
-      dailyTrailerMoves: '15,000+ across the system during peak',
-      peakMultiplier: '1.4x during summer (May-September)',
-    },
-    {
-      type: 'roi',
-      sectionLabel: 'The Business Case',
-      headline: 'Conservative ROI for the Coca-Cola system',
-      narrative: 'Based on public detention data from CCBCC and measured YardFlow improvements at comparable beverage distribution operations.',
-      roiLines: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
-        { label: 'Detention cost (CCBCC alone)', before: '$14M/yr', after: '$7M/yr', delta: '-$7M', unit: 'annual' },
-        { label: 'Peak season dock contention', before: 'Routine bottleneck', after: 'Protocol-managed', delta: 'Eliminated' },
-        { label: 'System-wide savings estimate', before: '$0 (not tracked)', after: '$20M+/yr', delta: '+$20M', unit: 'annual' },
-      ],
-      totalAnnualSavings: '$20M+ across the bottler system',
-      paybackPeriod: '< 4 months at CCBCC alone',
-      methodology: `CCBCC detention data from 10-K filing. System-wide estimate based on ${COCA_COLA_FACILITY_COUNT_LABEL} facilities and measured turn time improvements.`,
-    },
-    {
-      type: 'testimonial',
-      sectionLabel: 'From an Operator Who Runs It',
-      quote: 'We believe system-driven dock door assignment will be a valuable next step for dock office optimization.',
-      role: 'Operations Director',
-      company: 'National Beverage Distributor',
-    },
-    {
-      type: 'cta',
-      cta: {
-        type: 'modex-meeting',
-        headline: 'Coca-Cola HQ is in Atlanta. MODEX is in Atlanta. Let\'s meet.',
-        subtext: 'You are literally local to the venue. 30-minute walk through your bottler network with board-ready ROI.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-      },
-      closingLine: 'Your HQ. Your city. Your meeting. $20M+ in annual savings across the system.',
-    },
-  ],
+  sections: [],
 
   // ── THE PEOPLE ──────────────────────────────────────────────────────
   people: [
@@ -293,15 +297,6 @@ export const cocaCola: AccountMicrositeData = {
         subheadline: `Coca-Cola Consolidated's $14M in detention costs is public record. That is one bottler. Your system runs ${COCA_COLA_FACILITY_COUNT_LABEL} facilities. YardFlow gives you the system-wide yard protocol your bottler network has never had.`,
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Daniel, your HQ is in Atlanta. MODEX is in Atlanta.',
-        subtext: 'This is the easiest meeting either of us will ever schedule. 30 minutes on what a system-wide yard protocol looks like.',
-        buttonLabel: 'Meet at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Daniel',
-        personContext: 'system-wide yard protocol for the Coca-Cola bottler network',
-      },
 
       toneShift: 'He came from bottling operations. He is not a procurement strategist who has never seen a dock. Talk to him like an operator who now has system-wide authority. Concrete, specific, reference the physical reality he knows.',
       kpiLanguage: ['detention cost', 'system-wide efficiency', 'bottler coordination', 'turn time', 'peak season throughput'],
@@ -333,15 +328,6 @@ export const cocaCola: AccountMicrositeData = {
         subheadline: 'Your role sits where concentrate plants, packaging supply, and bottler operations meet. YardFlow gives BIG a repeatable execution protocol for the yards it directly controls instead of another manual exception process.',
       },
       sectionOrder: ['hero', 'problem', 'solution', 'proof', 'network-map', 'cta'],
-      ctaOverride: {
-        type: 'meeting',
-        headline: 'Dinesh, let\'s look at the yards BIG actually owns.',
-        subtext: '30 minutes on how to standardize dock execution across BIG facilities before the summer surge.',
-        buttonLabel: 'Book a Bottler Review',
-        calendarLink: BOOKING_LINK,
-        personName: 'Dinesh',
-        personContext: 'dock execution across Bottling Investments Group facilities',
-      },
 
       toneShift: 'Operator-to-operator. He lives in bottling execution, not just HQ theory. Talk about concentrate flow, dock sequencing, and peak-season throughput.',
       kpiLanguage: ['throughput', 'dock turns', 'bottling execution', 'staging', 'peak readiness'],
@@ -373,15 +359,6 @@ export const cocaCola: AccountMicrositeData = {
         subheadline: 'You oversee financial performance and supply-chain stewardship for Coca-Cola North America. YardFlow gives you a measurable way to remove hidden dock and yard waste before it compounds into detention cost and missed service.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'roi', 'cta'],
-      ctaOverride: {
-        type: 'meeting',
-        headline: 'Mark, let\'s put real numbers on the hidden yard leak.',
-        subtext: '30 minutes on what detention, dwell, and dock variance are costing North America and how fast that can be recovered.',
-        buttonLabel: 'Book a North America Review',
-        calendarLink: BOOKING_LINK,
-        personName: 'Mark',
-        personContext: 'North America cost, service, and working-capital recovery from yard execution',
-      },
       sectionOverrides: [
         {
           sectionType: 'stakes',

@@ -10,7 +10,147 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
+
+// LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
+/*
+ * [
+ *     {
+ *       type: 'hero',
+ *       headline: 'Hyundai builds 1.3 million vehicles a year in the US. The yard is the gap between JIT delivery and the assembly line.',
+ *       subheadline: 'Automotive has different physics than CPG, but flow variability still kills utilization and visibility.',
+ *       accountCallout: 'Hyundai Motor America - Manufacturing',
+ *       backgroundTheme: 'dark',
+ *       cta: {
+ *         type: 'modex-meeting',
+ *         headline: 'See what a standardized yard network looks like for Hyundai Motor America',
+ *         subtext: '30-minute walk-through of your facility network with board-ready ROI.',
+ *         buttonLabel: 'Book a Meeting at MODEX',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *     },
+ *     {
+ *       type: 'problem',
+ *       sectionLabel: 'The Hidden Constraint',
+ *       headline: 'The yard is where Hyundai Motor America\'s supply chain math breaks down',
+ *       narrative: 'Automotive has different physics than CPG, but flow variability still kills utilization and visibility.',
+ *       painPoints: [
+ *         {
+ *           headline: 'JIT assembly depends on yard-level trailer sequencing that does not exist',
+ *           description: 'Hyundai\'s Alabama assembly plant runs on just-in-time parts delivery. When inbound parts trailers arrive but cannot dock in sequence, the line either waits or runs rework. The problem is not the carrier. It is the yard between the gate and the dock.',
+ *           kpiImpact: 'Line stoppage from yard-related parts delay: $40K+/hour per assembly line',
+ *           relevantPeople: ['hyundai-motor-america-gammon', 'hyundai-motor-america-chung'],
+ *         },
+ *         {
+ *           headline: 'EV production ramp adds battery logistics complexity to already-tight yards',
+ *           description: 'Hyundai is investing $7.6B in a new EV and battery plant in Georgia. Battery module logistics require hazmat-compliant yard staging, separate from standard parts flow. The Georgia plant yard must handle two fundamentally different freight profiles.',
+ *           kpiImpact: 'New Georgia EV plant requires purpose-built yard protocol from day one',
+ *           relevantPeople: ['hyundai-motor-america-gammon', 'hyundai-motor-america-chung'],
+ *         },
+ *         {
+ *           headline: 'Multi-plant campus yard coordination runs on radio and phone calls',
+ *           description: 'Hyundai\'s Montgomery complex includes assembly and engine manufacturing in adjacent facilities. Trailer moves between plants are coordinated manually. When parts are in the yard but the dock team does not know, the line sees a shortage that does not actually exist.',
+ *           kpiImpact: 'Phantom shortages from yard visibility gaps: 2-5 incidents per week',
+ *           relevantPeople: ['hyundai-motor-america-gammon', 'hyundai-motor-america-chung'],
+ *         }
+ *       ],
+ *     },
+ *     {
+ *       type: 'stakes',
+ *       sectionLabel: 'What This Costs You',
+ *       headline: 'The math Hyundai Motor America is not tracking in one place',
+ *       narrative: 'Hyundai\'s Alabama assembly plant runs on just-in-time parts delivery. When inbound parts trailers arrive but cannot dock in sequence, the line either waits or runs rework. The problem is not the carrier. It is the yard between the gate and the dock. Meanwhile, hyundai is investing $7.6B in a new EV and battery plant in Georgia. Battery module logistics require hazmat-compliant yard staging, separate from standard parts flow. The Georgia plant yard must handle two fundamentally different freight profiles.',
+ *       annualCost: '$5M-$8M in estimated yard-driven inefficiency across the network',
+ *       costBreakdown: [
+ *         { label: 'Carrier detention / demurrage', value: '$2M+' },
+ *         { label: 'Dock contention and turn time excess', value: '$2M+' },
+ *         { label: 'Gate and spotter labor overhead', value: '$2M+' },
+ *         { label: 'Peak season surge inefficiency', value: '$1M+' },
+ *       ],
+ *       urgencyDriver: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+ *     },
+ *     {
+ *       type: 'solution',
+ *       sectionLabel: 'The Fix',
+ *       headline: 'One protocol across every Hyundai Motor America yard',
+ *       narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
+ *       modules: [
+ *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Hyundai Motor America\'s facility network.' },
+ *         { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Hyundai Motor America\'s facility network.' },
+ *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Hyundai Motor America\'s facility network.' },
+ *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Hyundai Motor America\'s facility network.' },
+ *       ],
+ *       accountFit: 'Automotive has different physics than CPG, but flow variability still kills utilization and visibility.',
+ *     },
+ *     {
+ *       type: 'proof',
+ *       sectionLabel: 'Proof from Live Deployment',
+ *       headline: 'Running today across 24 facilities',
+ *       blocks: [
+ *         {
+ *           type: 'metric',
+ *           stats: [
+ *             { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable manufacturing operations' },
+ *             { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
+ *             { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+ *             { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at manufacturing facilities' },
+ *           ],
+ *         },
+ *         {
+ *           type: 'quote',
+ *           quote: {
+ *             text: 'When you are running a just-in-time line, the yard is the last mile you cannot afford to lose. YardFlow gave us that visibility and control back.',
+ *             role: 'Operations Director',
+ *             company: 'Major Industrial Manufacturer',
+ *           },
+ *         },
+ *       ],
+ *     },
+ *     {
+ *       type: 'network-map',
+ *       sectionLabel: 'Your Network',
+ *       headline: 'Hyundai Motor America\'s yard network at scale',
+ *       narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
+ *       facilityCount: '5',
+ *       facilityTypes: ['Auto Assembly Plants', 'Engine Plants', 'Parts Distribution Centers'],
+ *       geographicSpread: 'North America',
+ *       dailyTrailerMoves: '1,500+ across the network',
+ *     },
+ *     {
+ *       type: 'roi',
+ *       sectionLabel: 'The Business Case',
+ *       headline: 'Conservative ROI model for Hyundai Motor America',
+ *       narrative: 'Based on measured YardFlow improvements at comparable operations.',
+ *       roiLines: [
+ *         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
+ *         { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
+ *         { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
+ *         { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
+ *       ],
+ *       totalAnnualSavings: '$5M-$8M across the network',
+ *       paybackPeriod: '< 6 months',
+ *       methodology: 'Based on measured results at 24 live facilities extrapolated to Hyundai Motor America facility count and operational profile.',
+ *     },
+ *     {
+ *       type: 'testimonial',
+ *       sectionLabel: 'From an Operator Who Runs It',
+ *       quote: 'The production line does not care why the parts trailer is late. YardFlow makes sure it is never late because of the yard.',
+ *       role: 'Operations Director',
+ *       company: 'Major Industrial Manufacturer',
+ *       context: 'After 12 months of full YardFlow deployment across their facility network.',
+ *     },
+ *     {
+ *       type: 'cta',
+ *       cta: {
+ *         type: 'modex-meeting',
+ *         headline: 'See what a standardized yard network looks like for Hyundai Motor America',
+ *         subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
+ *         buttonLabel: 'Book a Meeting at MODEX',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *       closingLine: 'One conversation. Your yard network. A clear path to $5M-$8M in annual savings.',
+ *     },
+ *   ]
+ */
 
 export const hyundaiMotorAmerica: AccountMicrositeData = {
   slug: 'hyundai-motor-america',
@@ -24,143 +164,7 @@ export const hyundaiMotorAmerica: AccountMicrositeData = {
   pageTitle: 'YardFlow for Hyundai Motor America - Yard Network Standardization',
   metaDescription: 'How YardFlow eliminates the yard bottleneck across Hyundai Motor America\'s facility network.',
 
-  sections: [
-    {
-      type: 'hero',
-      headline: 'Hyundai builds 1.3 million vehicles a year in the US. The yard is the gap between JIT delivery and the assembly line.',
-      subheadline: 'Automotive has different physics than CPG, but flow variability still kills utilization and visibility.',
-      accountCallout: 'Hyundai Motor America - Manufacturing',
-      backgroundTheme: 'dark',
-      cta: {
-        type: 'modex-meeting',
-        headline: 'See what a standardized yard network looks like for Hyundai Motor America',
-        subtext: '30-minute walk-through of your facility network with board-ready ROI.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-      },
-    },
-    {
-      type: 'problem',
-      sectionLabel: 'The Hidden Constraint',
-      headline: 'The yard is where Hyundai Motor America\'s supply chain math breaks down',
-      narrative: 'Automotive has different physics than CPG, but flow variability still kills utilization and visibility.',
-      painPoints: [
-        {
-          headline: 'JIT assembly depends on yard-level trailer sequencing that does not exist',
-          description: 'Hyundai\'s Alabama assembly plant runs on just-in-time parts delivery. When inbound parts trailers arrive but cannot dock in sequence, the line either waits or runs rework. The problem is not the carrier. It is the yard between the gate and the dock.',
-          kpiImpact: 'Line stoppage from yard-related parts delay: $40K+/hour per assembly line',
-          relevantPeople: ['hyundai-motor-america-gammon', 'hyundai-motor-america-chung'],
-        },
-        {
-          headline: 'EV production ramp adds battery logistics complexity to already-tight yards',
-          description: 'Hyundai is investing $7.6B in a new EV and battery plant in Georgia. Battery module logistics require hazmat-compliant yard staging, separate from standard parts flow. The Georgia plant yard must handle two fundamentally different freight profiles.',
-          kpiImpact: 'New Georgia EV plant requires purpose-built yard protocol from day one',
-          relevantPeople: ['hyundai-motor-america-gammon', 'hyundai-motor-america-chung'],
-        },
-        {
-          headline: 'Multi-plant campus yard coordination runs on radio and phone calls',
-          description: 'Hyundai\'s Montgomery complex includes assembly and engine manufacturing in adjacent facilities. Trailer moves between plants are coordinated manually. When parts are in the yard but the dock team does not know, the line sees a shortage that does not actually exist.',
-          kpiImpact: 'Phantom shortages from yard visibility gaps: 2-5 incidents per week',
-          relevantPeople: ['hyundai-motor-america-gammon', 'hyundai-motor-america-chung'],
-        }
-      ],
-    },
-    {
-      type: 'stakes',
-      sectionLabel: 'What This Costs You',
-      headline: 'The math Hyundai Motor America is not tracking in one place',
-      narrative: 'Hyundai\'s Alabama assembly plant runs on just-in-time parts delivery. When inbound parts trailers arrive but cannot dock in sequence, the line either waits or runs rework. The problem is not the carrier. It is the yard between the gate and the dock. Meanwhile, hyundai is investing $7.6B in a new EV and battery plant in Georgia. Battery module logistics require hazmat-compliant yard staging, separate from standard parts flow. The Georgia plant yard must handle two fundamentally different freight profiles.',
-      annualCost: '$5M-$8M in estimated yard-driven inefficiency across the network',
-      costBreakdown: [
-        { label: 'Carrier detention / demurrage', value: '$2M+' },
-        { label: 'Dock contention and turn time excess', value: '$2M+' },
-        { label: 'Gate and spotter labor overhead', value: '$2M+' },
-        { label: 'Peak season surge inefficiency', value: '$1M+' },
-      ],
-      urgencyDriver: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-    },
-    {
-      type: 'solution',
-      sectionLabel: 'The Fix',
-      headline: 'One protocol across every Hyundai Motor America yard',
-      narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
-      modules: [
-        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Hyundai Motor America\'s facility network.' },
-        { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Hyundai Motor America\'s facility network.' },
-        { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Hyundai Motor America\'s facility network.' },
-        { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Hyundai Motor America\'s facility network.' },
-      ],
-      accountFit: 'Automotive has different physics than CPG, but flow variability still kills utilization and visibility.',
-    },
-    {
-      type: 'proof',
-      sectionLabel: 'Proof from Live Deployment',
-      headline: 'Running today across 24 facilities',
-      blocks: [
-        {
-          type: 'metric',
-          stats: [
-            { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable manufacturing operations' },
-            { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
-            { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
-            { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at manufacturing facilities' },
-          ],
-        },
-        {
-          type: 'quote',
-          quote: {
-            text: 'When you are running a just-in-time line, the yard is the last mile you cannot afford to lose. YardFlow gave us that visibility and control back.',
-            role: 'Operations Director',
-            company: 'Major Industrial Manufacturer',
-          },
-        },
-      ],
-    },
-    {
-      type: 'network-map',
-      sectionLabel: 'Your Network',
-      headline: 'Hyundai Motor America\'s yard network at scale',
-      narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
-      facilityCount: '5',
-      facilityTypes: ['Auto Assembly Plants', 'Engine Plants', 'Parts Distribution Centers'],
-      geographicSpread: 'North America',
-      dailyTrailerMoves: '1,500+ across the network',
-    },
-    {
-      type: 'roi',
-      sectionLabel: 'The Business Case',
-      headline: 'Conservative ROI model for Hyundai Motor America',
-      narrative: 'Based on measured YardFlow improvements at comparable operations.',
-      roiLines: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
-        { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
-        { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
-        { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
-      ],
-      totalAnnualSavings: '$5M-$8M across the network',
-      paybackPeriod: '< 6 months',
-      methodology: 'Based on measured results at 24 live facilities extrapolated to Hyundai Motor America facility count and operational profile.',
-    },
-    {
-      type: 'testimonial',
-      sectionLabel: 'From an Operator Who Runs It',
-      quote: 'The production line does not care why the parts trailer is late. YardFlow makes sure it is never late because of the yard.',
-      role: 'Operations Director',
-      company: 'Major Industrial Manufacturer',
-      context: 'After 12 months of full YardFlow deployment across their facility network.',
-    },
-    {
-      type: 'cta',
-      cta: {
-        type: 'modex-meeting',
-        headline: 'See what a standardized yard network looks like for Hyundai Motor America',
-        subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-      },
-      closingLine: 'One conversation. Your yard network. A clear path to $5M-$8M in annual savings.',
-    },
-  ],
+  sections: [],
 
   people: [
     {
@@ -267,15 +271,6 @@ export const hyundaiMotorAmerica: AccountMicrositeData = {
         subheadline: 'Automotive has different physics than CPG, but flow variability still kills utilization and visibility.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Carey, let\'s walk your yard network',
-        subtext: '30-minute conversation about Hyundai Motor America\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Carey',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Carey lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -307,15 +302,6 @@ export const hyundaiMotorAmerica: AccountMicrositeData = {
         subheadline: 'Automotive has different physics than CPG, but flow variability still kills utilization and visibility.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Ashley, let\'s walk your yard network',
-        subtext: '30-minute conversation about Hyundai Motor America\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Ashley',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Ashley lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -347,15 +333,6 @@ export const hyundaiMotorAmerica: AccountMicrositeData = {
         subheadline: 'Automotive has different physics than CPG, but flow variability still kills utilization and visibility.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Sarah, let\'s walk your yard network',
-        subtext: '30-minute conversation about Hyundai Motor America\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Sarah',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Sarah lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['turn time', 'detention cost', 'dwell time', 'on-time pickup', 'carrier satisfaction'],

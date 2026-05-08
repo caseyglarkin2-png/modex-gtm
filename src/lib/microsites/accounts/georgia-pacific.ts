@@ -10,7 +10,147 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
+
+// LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
+/*
+ * [
+ *     {
+ *       type: 'hero',
+ *       headline: 'Georgia Pacific runs 150+ manufacturing sites. Every mill yard is a different universe. Atlanta HQ is 10 miles from MODEX.',
+ *       subheadline: 'Industrial plant flow and trailer variability create real throughput drag across sites.',
+ *       accountCallout: 'Georgia Pacific - Industrial',
+ *       backgroundTheme: 'dark',
+ *       cta: {
+ *         type: 'modex-meeting',
+ *         headline: 'See what a standardized yard network looks like for Georgia Pacific',
+ *         subtext: '30-minute walk-through of your facility network with board-ready ROI.',
+ *         buttonLabel: 'Book a Meeting at MODEX',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *     },
+ *     {
+ *       type: 'problem',
+ *       sectionLabel: 'The Hidden Constraint',
+ *       headline: 'GP runs the highest-volume inbound yards in building products. Manual gate check-in is the bottleneck nobody measures.',
+ *       narrative: 'Industrial plant flow and trailer variability create real throughput drag across sites.',
+ *       painPoints: [
+ *         {
+ *           headline: 'Mill yards handle oversized and heavy loads that standard YMS cannot model',
+ *           description: 'Georgia Pacific\'s paper and lumber mill yards are not retail DCs. Rolls of paper weigh tons, lumber has dimensional constraints, and flatbed staging areas operate on different rules than dock doors. Standard yard management software does not model this.',
+ *           kpiImpact: 'Mill-specific yard processes resist standardization without appropriate tooling',
+ *           relevantPeople: ['georgia-pacific-hutcherson', 'georgia-pacific-finley'],
+ *         },
+ *         {
+ *           headline: 'Koch operational discipline demands measurable yard metrics',
+ *           description: 'As a Koch Industries company, Georgia Pacific operates under a continuous improvement culture that measures everything. The yard is one of the last operational layers without standardized KPIs across the manufacturing network.',
+ *           kpiImpact: 'Koch management system requires quantified yard performance, currently unavailable',
+ *           relevantPeople: ['georgia-pacific-hutcherson', 'georgia-pacific-finley'],
+ *         },
+ *         {
+ *           headline: 'Atlanta headquarters means MODEX is a home game',
+ *           description: 'Georgia Pacific is headquartered in Atlanta, 10 miles from the Georgia World Congress Center where MODEX takes place. Supply chain leadership can attend without travel. Meeting friction is as low as it gets.',
+ *           kpiImpact: 'Zero travel barrier for GP supply chain leadership at MODEX 2026',
+ *           relevantPeople: ['georgia-pacific-hutcherson', 'georgia-pacific-finley'],
+ *         }
+ *       ],
+ *     },
+ *     {
+ *       type: 'stakes',
+ *       sectionLabel: 'What This Costs You',
+ *       headline: 'The math Georgia Pacific is not tracking in one place',
+ *       narrative: 'Georgia Pacific\'s paper and lumber mill yards are not retail DCs. Rolls of paper weigh tons, lumber has dimensional constraints, and flatbed staging areas operate on different rules than dock doors. Standard yard management software does not model this. Meanwhile, as a Koch Industries company, Georgia Pacific operates under a continuous improvement culture that measures everything. The yard is one of the last operational layers without standardized KPIs across the manufacturing network.',
+ *       annualCost: '$5M-$8M in estimated yard-driven inefficiency across the network',
+ *       costBreakdown: [
+ *         { label: 'Carrier detention / demurrage', value: '$2M+' },
+ *         { label: 'Dock contention and turn time excess', value: '$2M+' },
+ *         { label: 'Gate and spotter labor overhead', value: '$2M+' },
+ *         { label: 'Peak season surge inefficiency', value: '$1M+' },
+ *       ],
+ *       urgencyDriver: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+ *     },
+ *     {
+ *       type: 'solution',
+ *       sectionLabel: 'The Fix',
+ *       headline: 'One protocol across every Georgia Pacific yard',
+ *       narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
+ *       modules: [
+ *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Georgia Pacific\'s facility network.' },
+ *         { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Georgia Pacific\'s facility network.' },
+ *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Georgia Pacific\'s facility network.' },
+ *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Georgia Pacific\'s facility network.' },
+ *       ],
+ *       accountFit: 'Industrial plant flow and trailer variability create real throughput drag across sites.',
+ *     },
+ *     {
+ *       type: 'proof',
+ *       sectionLabel: 'Proof from Live Deployment',
+ *       headline: 'Running today across 24 facilities',
+ *       blocks: [
+ *         {
+ *           type: 'metric',
+ *           stats: [
+ *             { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable industrial operations' },
+ *             { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
+ *             { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+ *             { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at industrial facilities' },
+ *           ],
+ *         },
+ *         {
+ *           type: 'quote',
+ *           quote: {
+ *             text: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office.',
+ *             role: 'Operations Director',
+ *             company: 'Fortune 500 Manufacturer',
+ *           },
+ *         },
+ *       ],
+ *     },
+ *     {
+ *       type: 'network-map',
+ *       sectionLabel: 'Your Network',
+ *       headline: 'Georgia Pacific\'s yard network at scale',
+ *       narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
+ *       facilityCount: '150+',
+ *       facilityTypes: ['Paper Mills', 'Tissue/Towel Plants', 'Lumber Mills', 'Distribution Centers'],
+ *       geographicSpread: 'North America',
+ *       dailyTrailerMoves: '3,000+ across the network',
+ *     },
+ *     {
+ *       type: 'roi',
+ *       sectionLabel: 'The Business Case',
+ *       headline: 'Conservative ROI model for Georgia Pacific',
+ *       narrative: 'Based on measured YardFlow improvements at comparable operations.',
+ *       roiLines: [
+ *         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
+ *         { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
+ *         { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
+ *         { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
+ *       ],
+ *       totalAnnualSavings: '$5M-$8M across the network',
+ *       paybackPeriod: '< 6 months',
+ *       methodology: 'Based on measured results at 24 live facilities extrapolated to Georgia Pacific facility count and operational profile.',
+ *     },
+ *     {
+ *       type: 'testimonial',
+ *       sectionLabel: 'From an Operator Who Runs It',
+ *       quote: 'We believe system-driven dock door assignment will be a valuable next step for dock office optimization.',
+ *       role: 'Operations Director',
+ *       company: 'Fortune 500 Manufacturer',
+ *       context: 'After 12 months of full YardFlow deployment across their facility network.',
+ *     },
+ *     {
+ *       type: 'cta',
+ *       cta: {
+ *         type: 'modex-meeting',
+ *         headline: 'See what a standardized yard network looks like for Georgia Pacific',
+ *         subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
+ *         buttonLabel: 'Book a Meeting at MODEX',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *       closingLine: 'One conversation. Your yard network. A clear path to $5M-$8M in annual savings.',
+ *     },
+ *   ]
+ */
 
 export const georgiaPacific: AccountMicrositeData = {
   slug: 'georgia-pacific',
@@ -24,143 +164,7 @@ export const georgiaPacific: AccountMicrositeData = {
   pageTitle: 'YardFlow for Georgia Pacific - Yard Network Standardization',
   metaDescription: 'How YardFlow eliminates the yard bottleneck across Georgia Pacific\'s facility network.',
 
-  sections: [
-    {
-      type: 'hero',
-      headline: 'Georgia Pacific runs 150+ manufacturing sites. Every mill yard is a different universe. Atlanta HQ is 10 miles from MODEX.',
-      subheadline: 'Industrial plant flow and trailer variability create real throughput drag across sites.',
-      accountCallout: 'Georgia Pacific - Industrial',
-      backgroundTheme: 'dark',
-      cta: {
-        type: 'modex-meeting',
-        headline: 'See what a standardized yard network looks like for Georgia Pacific',
-        subtext: '30-minute walk-through of your facility network with board-ready ROI.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-      },
-    },
-    {
-      type: 'problem',
-      sectionLabel: 'The Hidden Constraint',
-      headline: 'GP runs the highest-volume inbound yards in building products. Manual gate check-in is the bottleneck nobody measures.',
-      narrative: 'Industrial plant flow and trailer variability create real throughput drag across sites.',
-      painPoints: [
-        {
-          headline: 'Mill yards handle oversized and heavy loads that standard YMS cannot model',
-          description: 'Georgia Pacific\'s paper and lumber mill yards are not retail DCs. Rolls of paper weigh tons, lumber has dimensional constraints, and flatbed staging areas operate on different rules than dock doors. Standard yard management software does not model this.',
-          kpiImpact: 'Mill-specific yard processes resist standardization without appropriate tooling',
-          relevantPeople: ['georgia-pacific-hutcherson', 'georgia-pacific-finley'],
-        },
-        {
-          headline: 'Koch operational discipline demands measurable yard metrics',
-          description: 'As a Koch Industries company, Georgia Pacific operates under a continuous improvement culture that measures everything. The yard is one of the last operational layers without standardized KPIs across the manufacturing network.',
-          kpiImpact: 'Koch management system requires quantified yard performance, currently unavailable',
-          relevantPeople: ['georgia-pacific-hutcherson', 'georgia-pacific-finley'],
-        },
-        {
-          headline: 'Atlanta headquarters means MODEX is a home game',
-          description: 'Georgia Pacific is headquartered in Atlanta, 10 miles from the Georgia World Congress Center where MODEX takes place. Supply chain leadership can attend without travel. Meeting friction is as low as it gets.',
-          kpiImpact: 'Zero travel barrier for GP supply chain leadership at MODEX 2026',
-          relevantPeople: ['georgia-pacific-hutcherson', 'georgia-pacific-finley'],
-        }
-      ],
-    },
-    {
-      type: 'stakes',
-      sectionLabel: 'What This Costs You',
-      headline: 'The math Georgia Pacific is not tracking in one place',
-      narrative: 'Georgia Pacific\'s paper and lumber mill yards are not retail DCs. Rolls of paper weigh tons, lumber has dimensional constraints, and flatbed staging areas operate on different rules than dock doors. Standard yard management software does not model this. Meanwhile, as a Koch Industries company, Georgia Pacific operates under a continuous improvement culture that measures everything. The yard is one of the last operational layers without standardized KPIs across the manufacturing network.',
-      annualCost: '$5M-$8M in estimated yard-driven inefficiency across the network',
-      costBreakdown: [
-        { label: 'Carrier detention / demurrage', value: '$2M+' },
-        { label: 'Dock contention and turn time excess', value: '$2M+' },
-        { label: 'Gate and spotter labor overhead', value: '$2M+' },
-        { label: 'Peak season surge inefficiency', value: '$1M+' },
-      ],
-      urgencyDriver: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-    },
-    {
-      type: 'solution',
-      sectionLabel: 'The Fix',
-      headline: 'One protocol across every Georgia Pacific yard',
-      narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
-      modules: [
-        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Georgia Pacific\'s facility network.' },
-        { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Georgia Pacific\'s facility network.' },
-        { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Georgia Pacific\'s facility network.' },
-        { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Georgia Pacific\'s facility network.' },
-      ],
-      accountFit: 'Industrial plant flow and trailer variability create real throughput drag across sites.',
-    },
-    {
-      type: 'proof',
-      sectionLabel: 'Proof from Live Deployment',
-      headline: 'Running today across 24 facilities',
-      blocks: [
-        {
-          type: 'metric',
-          stats: [
-            { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable industrial operations' },
-            { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
-            { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
-            { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at industrial facilities' },
-          ],
-        },
-        {
-          type: 'quote',
-          quote: {
-            text: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office.',
-            role: 'Operations Director',
-            company: 'Fortune 500 Manufacturer',
-          },
-        },
-      ],
-    },
-    {
-      type: 'network-map',
-      sectionLabel: 'Your Network',
-      headline: 'Georgia Pacific\'s yard network at scale',
-      narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
-      facilityCount: '150+',
-      facilityTypes: ['Paper Mills', 'Tissue/Towel Plants', 'Lumber Mills', 'Distribution Centers'],
-      geographicSpread: 'North America',
-      dailyTrailerMoves: '3,000+ across the network',
-    },
-    {
-      type: 'roi',
-      sectionLabel: 'The Business Case',
-      headline: 'Conservative ROI model for Georgia Pacific',
-      narrative: 'Based on measured YardFlow improvements at comparable operations.',
-      roiLines: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
-        { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
-        { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
-        { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
-      ],
-      totalAnnualSavings: '$5M-$8M across the network',
-      paybackPeriod: '< 6 months',
-      methodology: 'Based on measured results at 24 live facilities extrapolated to Georgia Pacific facility count and operational profile.',
-    },
-    {
-      type: 'testimonial',
-      sectionLabel: 'From an Operator Who Runs It',
-      quote: 'We believe system-driven dock door assignment will be a valuable next step for dock office optimization.',
-      role: 'Operations Director',
-      company: 'Fortune 500 Manufacturer',
-      context: 'After 12 months of full YardFlow deployment across their facility network.',
-    },
-    {
-      type: 'cta',
-      cta: {
-        type: 'modex-meeting',
-        headline: 'See what a standardized yard network looks like for Georgia Pacific',
-        subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-      },
-      closingLine: 'One conversation. Your yard network. A clear path to $5M-$8M in annual savings.',
-    },
-  ],
+  sections: [],
 
   people: [
     {
@@ -267,15 +271,6 @@ export const georgiaPacific: AccountMicrositeData = {
         subheadline: 'Industrial plant flow and trailer variability create real throughput drag across sites.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Ryan, let\'s walk your yard network',
-        subtext: '30-minute conversation about Georgia Pacific\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Ryan',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Ryan lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -307,15 +302,6 @@ export const georgiaPacific: AccountMicrositeData = {
         subheadline: 'Industrial plant flow and trailer variability create real throughput drag across sites.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Jeremy, let\'s walk your yard network',
-        subtext: '30-minute conversation about Georgia Pacific\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Jeremy',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Jeremy lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -347,15 +333,6 @@ export const georgiaPacific: AccountMicrositeData = {
         subheadline: 'Industrial plant flow and trailer variability create real throughput drag across sites.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Kathryn, let\'s walk your yard network',
-        subtext: '30-minute conversation about Georgia Pacific\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Kathryn',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Kathryn lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -387,15 +364,6 @@ export const georgiaPacific: AccountMicrositeData = {
         subheadline: 'Industrial plant flow and trailer variability create real throughput drag across sites.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Wes, let\'s walk your yard network',
-        subtext: '30-minute conversation about Georgia Pacific\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Wes',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. Wes lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['turn time', 'detention cost', 'dwell time', 'on-time pickup', 'carrier satisfaction'],
@@ -427,15 +395,6 @@ export const georgiaPacific: AccountMicrositeData = {
         subheadline: 'Industrial plant flow and trailer variability create real throughput drag across sites.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'John, let\'s walk your yard network',
-        subtext: '30-minute conversation about Georgia Pacific\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'John',
-        personContext: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-      },
 
       toneShift: 'Operator-to-operator. John lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['turn time', 'detention cost', 'dwell time', 'on-time pickup', 'carrier satisfaction'],

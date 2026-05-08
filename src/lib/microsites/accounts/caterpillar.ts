@@ -11,7 +11,154 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
+
+// LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
+/*
+ * [
+ *     {
+ *       type: 'hero',
+ *       headline: 'Oversized Freight. That is a yard problem.',
+ *       subheadline: 'Margaret — your Griffin GA operation is 120 miles from us at MODEX. When a D11 dozer takes up 4 regular parking spots in the yard and you\'ve got 360,000 part numbers flowing through Morton at 24/7 speed, the invisible constraint isn\'t the assembly line — it\'s the yard staging between build and dealer delivery.',
+ *       accountCallout: 'Caterpillar - Heavy Equipment',
+ *       backgroundTheme: 'dark',
+ *       cta: {
+ *         type: 'meeting',
+ *         headline: 'See what a standardized yard network looks like for Caterpillar',
+ *         subtext: '30-minute walk-through of your facility network with board-ready ROI.',
+ *         buttonLabel: 'Book a Network Audit',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *     },
+ *     {
+ *       type: 'problem',
+ *       sectionLabel: 'The Hidden Constraint',
+ *       headline: 'The yard is where Caterpillar\'s supply chain math breaks down',
+ *       narrative: 'Margaret — your Griffin GA operation is 120 miles from us at MODEX. When a D11 dozer takes up 4 regular parking spots in the yard and you\'ve got 360,000 part numbers flowing through Morton at 24/7 speed, the invisible constraint isn\'t the assembly line — it\'s the yard staging between build and dealer delivery.',
+ *       painPoints: [
+ *         {
+ *           headline: 'Oversized Freight',
+ *           description: 'Machines weigh 5,000 - 400,000+ lbs. Can\'t stack in yard. Each unit takes multiple parking spots.',
+ *           relevantPeople: ['caterpillar-poorman'],
+ *         },
+ *         {
+ *           headline: 'Dealer Delivery Coordination',
+ *           description: '2,500+ dealers worldwide. Equipment ships from factory to dealer yards — dealer yard management is critical',
+ *           relevantPeople: ['caterpillar-poorman'],
+ *         },
+ *         {
+ *           headline: 'Parts Logistics',
+ *           description: '360,000+ part numbers. Morton IL DC handles thousands of picks/day — inbound and outbound trailer staging is 24/7',
+ *           relevantPeople: ['caterpillar-poorman'],
+ *         },
+ *         {
+ *           headline: 'Griffin GA Plant',
+ *           description: '120 miles from MODEX — local Atlanta-area operations',
+ *           relevantPeople: ['caterpillar-poorman'],
+ *         },
+ *         {
+ *           headline: 'Machine Customization',
+ *           description: 'Many machines are built-to-order or modified in yard staging areas before dealer delivery',
+ *           relevantPeople: ['caterpillar-poorman'],
+ *         }
+ *       ],
+ *     },
+ *     {
+ *       type: 'stakes',
+ *       sectionLabel: 'What This Costs You',
+ *       headline: 'The math Caterpillar is not tracking in one place',
+ *       narrative: 'Machines weigh 5,000 - 400,000+ lbs. Can\'t stack in yard. Each unit takes multiple parking spots. Meanwhile, 2,500+ dealers worldwide. Equipment ships from factory to dealer yards — dealer yard management is critical',
+ *       annualCost: '$5M-$8M in estimated yard-driven inefficiency across the network',
+ *       costBreakdown: [
+ *         { label: 'Carrier detention / demurrage', value: '$2M+' },
+ *         { label: 'Dock contention and turn time excess', value: '$2M+' },
+ *         { label: 'Gate and spotter labor overhead', value: '$2M+' },
+ *         { label: 'Peak season surge inefficiency', value: '$1M+' },
+ *       ],
+ *       urgencyDriver: 'Caterpillar is investing in supply chain transformation.',
+ *     },
+ *     {
+ *       type: 'solution',
+ *       sectionLabel: 'The Fix',
+ *       headline: 'One protocol across every Caterpillar yard',
+ *       narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
+ *       modules: [
+ *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Caterpillar\'s facility network.' },
+ *         { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Caterpillar\'s facility network.' },
+ *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Caterpillar\'s facility network.' },
+ *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Caterpillar\'s facility network.' },
+ *       ],
+ *       accountFit: 'Margaret — your Griffin GA operation is 120 miles from us at MODEX. When a D11 dozer takes up 4 regular parking spots in the yard and you\'ve got 360,000 part numbers flowing through Morton at 24/7 speed, the invisible constraint isn\'t the assembly line — it\'s the yard staging between build and dealer delivery.',
+ *     },
+ *     {
+ *       type: 'proof',
+ *       sectionLabel: 'Proof from Live Deployment',
+ *       headline: 'Running today across 24 facilities',
+ *       blocks: [
+ *         {
+ *           type: 'metric',
+ *           stats: [
+ *             { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable heavy equipment operations' },
+ *             { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
+ *             { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+ *             { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at heavy equipment facilities' },
+ *           ],
+ *         },
+ *         {
+ *           type: 'quote',
+ *           quote: {
+ *             text: 'When you are running a just-in-time line, the yard is the last mile you cannot afford to lose. YardFlow gave us that visibility and control back.',
+ *             role: 'Operations Director',
+ *             company: 'Major Industrial Manufacturer',
+ *           },
+ *         },
+ *       ],
+ *     },
+ *     {
+ *       type: 'network-map',
+ *       sectionLabel: 'Your Network',
+ *       headline: 'Caterpillar\'s yard network at scale',
+ *       narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
+ *       facilityCount: '60+ facilities',
+ *       facilityTypes: ['Manufacturing Plants', 'Distribution Centers'],
+ *       geographicSpread: 'North America',
+ *       dailyTrailerMoves: '1,000+ across the network',
+ *     },
+ *     {
+ *       type: 'roi',
+ *       sectionLabel: 'The Business Case',
+ *       headline: 'Conservative ROI model for Caterpillar',
+ *       narrative: 'Based on measured YardFlow improvements at comparable operations.',
+ *       roiLines: [
+ *         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
+ *         { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
+ *         { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
+ *         { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
+ *       ],
+ *       totalAnnualSavings: '$5M-$8M across the network',
+ *       paybackPeriod: '< 6 months',
+ *       methodology: 'Based on measured results at 24 live facilities extrapolated to Caterpillar facility count and operational profile.',
+ *     },
+ *     {
+ *       type: 'testimonial',
+ *       sectionLabel: 'From an Operator Who Runs It',
+ *       quote: 'The production line does not care why the parts trailer is late. YardFlow makes sure it is never late because of the yard.',
+ *       role: 'Operations Director',
+ *       company: 'Major Industrial Manufacturer',
+ *       context: 'After 12 months of full YardFlow deployment across their facility network.',
+ *     },
+ *     {
+ *       type: 'cta',
+ *       cta: {
+ *         type: 'meeting',
+ *         headline: 'See what a standardized yard network looks like for Caterpillar',
+ *         subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
+ *         buttonLabel: 'Book a Network Audit',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *       closingLine: 'One conversation. Your yard network. A clear path to $5M-$8M in annual savings.',
+ *     },
+ *   ]
+ */
 
 export const caterpillar: AccountMicrositeData = {
   slug: 'caterpillar',
@@ -24,150 +171,7 @@ export const caterpillar: AccountMicrositeData = {
   pageTitle: 'YardFlow for Caterpillar - Yard Network Standardization',
   metaDescription: 'How YardFlow eliminates the yard bottleneck across Caterpillar\'s facility network.',
 
-  sections: [
-    {
-      type: 'hero',
-      headline: 'Oversized Freight. That is a yard problem.',
-      subheadline: 'Margaret — your Griffin GA operation is 120 miles from us at MODEX. When a D11 dozer takes up 4 regular parking spots in the yard and you\'ve got 360,000 part numbers flowing through Morton at 24/7 speed, the invisible constraint isn\'t the assembly line — it\'s the yard staging between build and dealer delivery.',
-      accountCallout: 'Caterpillar - Heavy Equipment',
-      backgroundTheme: 'dark',
-      cta: {
-        type: 'meeting',
-        headline: 'See what a standardized yard network looks like for Caterpillar',
-        subtext: '30-minute walk-through of your facility network with board-ready ROI.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-      },
-    },
-    {
-      type: 'problem',
-      sectionLabel: 'The Hidden Constraint',
-      headline: 'The yard is where Caterpillar\'s supply chain math breaks down',
-      narrative: 'Margaret — your Griffin GA operation is 120 miles from us at MODEX. When a D11 dozer takes up 4 regular parking spots in the yard and you\'ve got 360,000 part numbers flowing through Morton at 24/7 speed, the invisible constraint isn\'t the assembly line — it\'s the yard staging between build and dealer delivery.',
-      painPoints: [
-        {
-          headline: 'Oversized Freight',
-          description: 'Machines weigh 5,000 - 400,000+ lbs. Can\'t stack in yard. Each unit takes multiple parking spots.',
-          relevantPeople: ['caterpillar-poorman'],
-        },
-        {
-          headline: 'Dealer Delivery Coordination',
-          description: '2,500+ dealers worldwide. Equipment ships from factory to dealer yards — dealer yard management is critical',
-          relevantPeople: ['caterpillar-poorman'],
-        },
-        {
-          headline: 'Parts Logistics',
-          description: '360,000+ part numbers. Morton IL DC handles thousands of picks/day — inbound and outbound trailer staging is 24/7',
-          relevantPeople: ['caterpillar-poorman'],
-        },
-        {
-          headline: 'Griffin GA Plant',
-          description: '120 miles from MODEX — local Atlanta-area operations',
-          relevantPeople: ['caterpillar-poorman'],
-        },
-        {
-          headline: 'Machine Customization',
-          description: 'Many machines are built-to-order or modified in yard staging areas before dealer delivery',
-          relevantPeople: ['caterpillar-poorman'],
-        }
-      ],
-    },
-    {
-      type: 'stakes',
-      sectionLabel: 'What This Costs You',
-      headline: 'The math Caterpillar is not tracking in one place',
-      narrative: 'Machines weigh 5,000 - 400,000+ lbs. Can\'t stack in yard. Each unit takes multiple parking spots. Meanwhile, 2,500+ dealers worldwide. Equipment ships from factory to dealer yards — dealer yard management is critical',
-      annualCost: '$5M-$8M in estimated yard-driven inefficiency across the network',
-      costBreakdown: [
-        { label: 'Carrier detention / demurrage', value: '$2M+' },
-        { label: 'Dock contention and turn time excess', value: '$2M+' },
-        { label: 'Gate and spotter labor overhead', value: '$2M+' },
-        { label: 'Peak season surge inefficiency', value: '$1M+' },
-      ],
-      urgencyDriver: 'Caterpillar is investing in supply chain transformation.',
-    },
-    {
-      type: 'solution',
-      sectionLabel: 'The Fix',
-      headline: 'One protocol across every Caterpillar yard',
-      narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
-      modules: [
-        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Caterpillar\'s facility network.' },
-        { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Caterpillar\'s facility network.' },
-        { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Caterpillar\'s facility network.' },
-        { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Caterpillar\'s facility network.' },
-      ],
-      accountFit: 'Margaret — your Griffin GA operation is 120 miles from us at MODEX. When a D11 dozer takes up 4 regular parking spots in the yard and you\'ve got 360,000 part numbers flowing through Morton at 24/7 speed, the invisible constraint isn\'t the assembly line — it\'s the yard staging between build and dealer delivery.',
-    },
-    {
-      type: 'proof',
-      sectionLabel: 'Proof from Live Deployment',
-      headline: 'Running today across 24 facilities',
-      blocks: [
-        {
-          type: 'metric',
-          stats: [
-            { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable heavy equipment operations' },
-            { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
-            { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
-            { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at heavy equipment facilities' },
-          ],
-        },
-        {
-          type: 'quote',
-          quote: {
-            text: 'When you are running a just-in-time line, the yard is the last mile you cannot afford to lose. YardFlow gave us that visibility and control back.',
-            role: 'Operations Director',
-            company: 'Major Industrial Manufacturer',
-          },
-        },
-      ],
-    },
-    {
-      type: 'network-map',
-      sectionLabel: 'Your Network',
-      headline: 'Caterpillar\'s yard network at scale',
-      narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
-      facilityCount: '60+ facilities',
-      facilityTypes: ['Manufacturing Plants', 'Distribution Centers'],
-      geographicSpread: 'North America',
-      dailyTrailerMoves: '1,000+ across the network',
-    },
-    {
-      type: 'roi',
-      sectionLabel: 'The Business Case',
-      headline: 'Conservative ROI model for Caterpillar',
-      narrative: 'Based on measured YardFlow improvements at comparable operations.',
-      roiLines: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
-        { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
-        { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
-        { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
-      ],
-      totalAnnualSavings: '$5M-$8M across the network',
-      paybackPeriod: '< 6 months',
-      methodology: 'Based on measured results at 24 live facilities extrapolated to Caterpillar facility count and operational profile.',
-    },
-    {
-      type: 'testimonial',
-      sectionLabel: 'From an Operator Who Runs It',
-      quote: 'The production line does not care why the parts trailer is late. YardFlow makes sure it is never late because of the yard.',
-      role: 'Operations Director',
-      company: 'Major Industrial Manufacturer',
-      context: 'After 12 months of full YardFlow deployment across their facility network.',
-    },
-    {
-      type: 'cta',
-      cta: {
-        type: 'meeting',
-        headline: 'See what a standardized yard network looks like for Caterpillar',
-        subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-      },
-      closingLine: 'One conversation. Your yard network. A clear path to $5M-$8M in annual savings.',
-    },
-  ],
+  sections: [],
 
   people: [
     {
@@ -214,15 +218,6 @@ export const caterpillar: AccountMicrositeData = {
         subheadline: 'Margaret — your Griffin GA operation is 120 miles from us at MODEX. When a D11 dozer takes up 4 regular parking spots in the yard and you\'ve got 360,000 part numbers flowing through Morton at 24/7 speed, the invisible constraint isn\'t the assembly line — it\'s the yard staging between build and dealer delivery.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'meeting',
-        headline: 'Margaret, let\'s walk your yard network',
-        subtext: '30-minute conversation about Caterpillar\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-        personName: 'Margaret',
-        personContext: 'Caterpillar is investing in supply chain transformation.',
-      },
 
       toneShift: 'Operator-to-operator. Margaret lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],

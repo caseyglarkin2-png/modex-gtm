@@ -13,9 +13,149 @@
 import type { AccountMicrositeData } from '../schema';
 import { getFacilityCountLabel, getFacilityCountLowerBound } from '../../research/facility-fact-registry';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 const DANNON_FACILITY_COUNT_LABEL = getFacilityCountLabel('Dannon', '13');
 const DANNON_FACILITY_COUNT = getFacilityCountLowerBound('Dannon', 13) ?? 13;
+
+// LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
+/*
+ * [
+ *     {
+ *       type: 'hero',
+ *       headline: 'Fresh dairy has a 14-day shelf clock. Every hour your trailers wait in the yard is product life you never get back.',
+ *       subheadline: `Danone runs ${DANNON_FACILITY_COUNT_LABEL} North American production facilities across dairy, plant-based, medical nutrition, and water. Four temperature profiles competing for dock doors at every multi-category facility. YardFlow standardizes the yard across all of them.`,
+ *       accountCallout: 'Danone North America - Fresh Dairy, Plant-Based, Medical Nutrition, Waters',
+ *       backgroundTheme: 'dark',
+ *       cta: {
+ *         type: 'meeting',
+ *         headline: 'See what a standardized yard looks like for Danone',
+ *         subtext: '30-minute walk-through of your facility network with board-ready ROI. Routed through Mark Shaughnessy.',
+ *         buttonLabel: 'Request an Introduction',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *     },
+ *     {
+ *       type: 'problem',
+ *       sectionLabel: 'The Hidden Constraint',
+ *       headline: 'The yard is where Danone\'s product freshness commitment breaks down',
+ *       narrative: 'Danone North America produces fresh dairy, plant-based products, and medical nutrition - all with tight shelf life windows. When a refrigerated trailer sits an extra 30 minutes in the yard during summer, product quality degrades. The yard is not just a logistics problem. It is a quality problem.',
+ *       painPoints: [
+ *         {
+ *           headline: 'Temperature-controlled yard dwell erodes shelf life',
+ *           description: `Danone moves fresh and chilled dairy products across ${DANNON_FACILITY_COUNT_LABEL} plants. Reefer trailers sitting in yards without visibility into dock readiness means product shelf life burns before the case is even picked. At dairy margins, that dwell is measurable in shrink dollars.`,
+ *           kpiImpact: '$3M-$5M in annual shrink exposure from excess yard dwell across the fresh network',
+ *           relevantPeople: ['P-001', 'P-002', 'P-004', 'P-005'],
+ *         },
+ *         {
+ *           headline: 'Plant-level yard protocols fragment cross-facility visibility',
+ *           description: `Each Danone production facility runs its own gate, dock, and spotter coordination. When the White Plains supply chain team wants a network view of trailer utilization or dock throughput, they are stitching together spreadsheets from ${DANNON_FACILITY_COUNT_LABEL} different local teams.`,
+ *           kpiImpact: 'Zero real-time network visibility across the yard layer',
+ *           relevantPeople: ['P-001', 'P-002', 'P-004', 'P-005'],
+ *         },
+ *         {
+ *           headline: 'Carrier detention costs compound across the fresh network',
+ *           description: 'Fresh dairy carriers operate on tight appointment windows. When dock contention pushes wait times past the threshold, detention charges hit every facility individually. No one is tracking the aggregate network-level carrier cost.',
+ *           kpiImpact: '$2M+ in annual detention and accessorial charges across the network',
+ *           relevantPeople: ['P-001', 'P-002', 'P-003', 'P-005'],
+ *         },
+ *       ],
+ *     },
+ *     {
+ *       type: 'stakes',
+ *       sectionLabel: 'What This Costs You',
+ *       headline: 'The freshness math Danone is not tracking in one place',
+ *       narrative: `Every minute of excess yard dwell time at a Danone facility is a minute off product shelf life. Across ${DANNON_FACILITY_COUNT_LABEL} facilities producing perishable goods, that time compounds into quality events, carrier dissatisfaction, and hidden costs distributed across dozens of GL codes.`,
+ *       annualCost: '$5M-$8M in estimated yard-driven inefficiency across the North America network',
+ *       costBreakdown: [
+ *         { label: 'Product shrink from yard dwell on perishables', value: '$3M-$5M' },
+ *         { label: 'Carrier detention / demurrage across fresh network', value: '$2M+' },
+ *         { label: `Gate and spotter labor overhead (${DANNON_FACILITY_COUNT_LABEL} facilities)`, value: '$1M+' },
+ *         { label: 'Temperature-zone dock misassignment events', value: '$500K+' },
+ *       ],
+ *       urgencyDriver: 'Fresh dairy and plant-based products have zero tolerance for yard-induced delays. Every season compounds the problem.',
+ *     },
+ *     {
+ *       type: 'solution',
+ *       sectionLabel: 'The Fix',
+ *       headline: 'One protocol across every Danone yard',
+ *       narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Temperature-zone dock assignment enforced automatically. Freshness-critical loads prioritized. Same driver journey at every facility.',
+ *       modules: [
+ *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: `Standardizes the gate process across ${DANNON_FACILITY_COUNT_LABEL} Danone facilities.` },
+ *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. Temperature-zone aware.', relevanceToAccount: 'Enforces temp-zone dock assignment. Fresh dairy goes to refrigerated. Every time.' },
+ *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Visibility into dwell time for perishable loads. Freshness clock starts in the yard.' },
+ *         { id: 'flowNETWORK', name: 'flowNETWORK', verb: 'Scale', shortDescription: 'Network-wide command view with alerting and cross-site performance intelligence.', relevanceToAccount: 'One view across all Danone North America yard operations.' },
+ *       ],
+ *       accountFit: 'Primo proof should land hardest here because both are high-volume food / beverage-style networks with plant throughput pressure.',
+ *     },
+ *     {
+ *       type: 'proof',
+ *       sectionLabel: 'Proof from Live Deployment',
+ *       headline: 'Running today across 24 facilities',
+ *       blocks: [
+ *         {
+ *           type: 'metric',
+ *           stats: [
+ *             { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol today' },
+ *             { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout' },
+ *             { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+ *             { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured across live deployments' },
+ *           ],
+ *         },
+ *         {
+ *           type: 'quote',
+ *           quote: {
+ *             text: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office.',
+ *             role: 'Operations Director',
+ *             company: 'National CPG/Beverage Manufacturer',
+ *           },
+ *         },
+ *       ],
+ *     },
+ *     {
+ *       type: 'network-map',
+ *       sectionLabel: 'Your Network',
+ *       headline: 'Danone North America\'s yard network',
+ *       narrative: 'Every facility runs its own yard protocol today. YardFlow gives Danone one standard across all of them - with temperature-zone intelligence built in.',
+ *       facilityCount: DANNON_FACILITY_COUNT_LABEL,
+ *       facilityTypes: ['Dairy Production', 'Plant-Based Production', 'Water Operations', 'Distribution Centers'],
+ *       geographicSpread: 'North America',
+ *       dailyTrailerMoves: '1,000+ across the network',
+ *     },
+ *     {
+ *       type: 'roi',
+ *       sectionLabel: 'The Business Case',
+ *       headline: 'Conservative ROI model for Danone North America',
+ *       narrative: 'Based on measured YardFlow improvements at comparable fresh food/beverage operations.',
+ *       roiLines: [
+ *         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
+ *         { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
+ *         { label: 'Temp-zone dock errors', before: '3-5/week', after: '<1/week', delta: '-80%', unit: 'per facility' },
+ *         { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
+ *       ],
+ *       totalAnnualSavings: '$5M-$8M across the network',
+ *       paybackPeriod: '< 6 months',
+ *       methodology: 'Based on measured results at 24 live CPG facilities extrapolated to Danone facility count and operational profile.',
+ *     },
+ *     {
+ *       type: 'testimonial',
+ *       sectionLabel: 'From an Operator Who Runs It',
+ *       quote: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office.',
+ *       role: 'Operations Director',
+ *       company: 'National CPG/Beverage Manufacturer',
+ *       context: 'After 12 months of full YardFlow deployment across their facility network.',
+ *     },
+ *     {
+ *       type: 'cta',
+ *       cta: {
+ *         type: 'meeting',
+ *         headline: 'Danone is a warm introduction through Mark Shaughnessy',
+ *         subtext: 'This conversation is routed through a trusted mutual connection. 30 minutes to walk your yard network.',
+ *         buttonLabel: 'Request an Introduction',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *       closingLine: 'One conversation. Your yard network. A clear path to $5M+ in annual freshness-protected savings.',
+ *     },
+ *   ]
+ */
 
 export const dannon: AccountMicrositeData = {
   slug: 'dannon',
@@ -29,143 +169,7 @@ export const dannon: AccountMicrositeData = {
   pageTitle: 'YardFlow for Danone North America - Yard Network Standardization',
   metaDescription: 'How YardFlow eliminates the yard bottleneck across Danone North America\'s production and distribution network.',
 
-  sections: [
-    {
-      type: 'hero',
-      headline: 'Fresh dairy has a 14-day shelf clock. Every hour your trailers wait in the yard is product life you never get back.',
-      subheadline: `Danone runs ${DANNON_FACILITY_COUNT_LABEL} North American production facilities across dairy, plant-based, medical nutrition, and water. Four temperature profiles competing for dock doors at every multi-category facility. YardFlow standardizes the yard across all of them.`,
-      accountCallout: 'Danone North America - Fresh Dairy, Plant-Based, Medical Nutrition, Waters',
-      backgroundTheme: 'dark',
-      cta: {
-        type: 'meeting',
-        headline: 'See what a standardized yard looks like for Danone',
-        subtext: '30-minute walk-through of your facility network with board-ready ROI. Routed through Mark Shaughnessy.',
-        buttonLabel: 'Request an Introduction',
-        calendarLink: BOOKING_LINK,
-      },
-    },
-    {
-      type: 'problem',
-      sectionLabel: 'The Hidden Constraint',
-      headline: 'The yard is where Danone\'s product freshness commitment breaks down',
-      narrative: 'Danone North America produces fresh dairy, plant-based products, and medical nutrition - all with tight shelf life windows. When a refrigerated trailer sits an extra 30 minutes in the yard during summer, product quality degrades. The yard is not just a logistics problem. It is a quality problem.',
-      painPoints: [
-        {
-          headline: 'Temperature-controlled yard dwell erodes shelf life',
-          description: `Danone moves fresh and chilled dairy products across ${DANNON_FACILITY_COUNT_LABEL} plants. Reefer trailers sitting in yards without visibility into dock readiness means product shelf life burns before the case is even picked. At dairy margins, that dwell is measurable in shrink dollars.`,
-          kpiImpact: '$3M-$5M in annual shrink exposure from excess yard dwell across the fresh network',
-          relevantPeople: ['P-001', 'P-002', 'P-004', 'P-005'],
-        },
-        {
-          headline: 'Plant-level yard protocols fragment cross-facility visibility',
-          description: `Each Danone production facility runs its own gate, dock, and spotter coordination. When the White Plains supply chain team wants a network view of trailer utilization or dock throughput, they are stitching together spreadsheets from ${DANNON_FACILITY_COUNT_LABEL} different local teams.`,
-          kpiImpact: 'Zero real-time network visibility across the yard layer',
-          relevantPeople: ['P-001', 'P-002', 'P-004', 'P-005'],
-        },
-        {
-          headline: 'Carrier detention costs compound across the fresh network',
-          description: 'Fresh dairy carriers operate on tight appointment windows. When dock contention pushes wait times past the threshold, detention charges hit every facility individually. No one is tracking the aggregate network-level carrier cost.',
-          kpiImpact: '$2M+ in annual detention and accessorial charges across the network',
-          relevantPeople: ['P-001', 'P-002', 'P-003', 'P-005'],
-        },
-      ],
-    },
-    {
-      type: 'stakes',
-      sectionLabel: 'What This Costs You',
-      headline: 'The freshness math Danone is not tracking in one place',
-      narrative: `Every minute of excess yard dwell time at a Danone facility is a minute off product shelf life. Across ${DANNON_FACILITY_COUNT_LABEL} facilities producing perishable goods, that time compounds into quality events, carrier dissatisfaction, and hidden costs distributed across dozens of GL codes.`,
-      annualCost: '$5M-$8M in estimated yard-driven inefficiency across the North America network',
-      costBreakdown: [
-        { label: 'Product shrink from yard dwell on perishables', value: '$3M-$5M' },
-        { label: 'Carrier detention / demurrage across fresh network', value: '$2M+' },
-        { label: `Gate and spotter labor overhead (${DANNON_FACILITY_COUNT_LABEL} facilities)`, value: '$1M+' },
-        { label: 'Temperature-zone dock misassignment events', value: '$500K+' },
-      ],
-      urgencyDriver: 'Fresh dairy and plant-based products have zero tolerance for yard-induced delays. Every season compounds the problem.',
-    },
-    {
-      type: 'solution',
-      sectionLabel: 'The Fix',
-      headline: 'One protocol across every Danone yard',
-      narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Temperature-zone dock assignment enforced automatically. Freshness-critical loads prioritized. Same driver journey at every facility.',
-      modules: [
-        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: `Standardizes the gate process across ${DANNON_FACILITY_COUNT_LABEL} Danone facilities.` },
-        { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. Temperature-zone aware.', relevanceToAccount: 'Enforces temp-zone dock assignment. Fresh dairy goes to refrigerated. Every time.' },
-        { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Visibility into dwell time for perishable loads. Freshness clock starts in the yard.' },
-        { id: 'flowNETWORK', name: 'flowNETWORK', verb: 'Scale', shortDescription: 'Network-wide command view with alerting and cross-site performance intelligence.', relevanceToAccount: 'One view across all Danone North America yard operations.' },
-      ],
-      accountFit: 'Primo proof should land hardest here because both are high-volume food / beverage-style networks with plant throughput pressure.',
-    },
-    {
-      type: 'proof',
-      sectionLabel: 'Proof from Live Deployment',
-      headline: 'Running today across 24 facilities',
-      blocks: [
-        {
-          type: 'metric',
-          stats: [
-            { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol today' },
-            { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout' },
-            { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
-            { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured across live deployments' },
-          ],
-        },
-        {
-          type: 'quote',
-          quote: {
-            text: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office.',
-            role: 'Operations Director',
-            company: 'National CPG/Beverage Manufacturer',
-          },
-        },
-      ],
-    },
-    {
-      type: 'network-map',
-      sectionLabel: 'Your Network',
-      headline: 'Danone North America\'s yard network',
-      narrative: 'Every facility runs its own yard protocol today. YardFlow gives Danone one standard across all of them - with temperature-zone intelligence built in.',
-      facilityCount: DANNON_FACILITY_COUNT_LABEL,
-      facilityTypes: ['Dairy Production', 'Plant-Based Production', 'Water Operations', 'Distribution Centers'],
-      geographicSpread: 'North America',
-      dailyTrailerMoves: '1,000+ across the network',
-    },
-    {
-      type: 'roi',
-      sectionLabel: 'The Business Case',
-      headline: 'Conservative ROI model for Danone North America',
-      narrative: 'Based on measured YardFlow improvements at comparable fresh food/beverage operations.',
-      roiLines: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
-        { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
-        { label: 'Temp-zone dock errors', before: '3-5/week', after: '<1/week', delta: '-80%', unit: 'per facility' },
-        { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
-      ],
-      totalAnnualSavings: '$5M-$8M across the network',
-      paybackPeriod: '< 6 months',
-      methodology: 'Based on measured results at 24 live CPG facilities extrapolated to Danone facility count and operational profile.',
-    },
-    {
-      type: 'testimonial',
-      sectionLabel: 'From an Operator Who Runs It',
-      quote: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office.',
-      role: 'Operations Director',
-      company: 'National CPG/Beverage Manufacturer',
-      context: 'After 12 months of full YardFlow deployment across their facility network.',
-    },
-    {
-      type: 'cta',
-      cta: {
-        type: 'meeting',
-        headline: 'Danone is a warm introduction through Mark Shaughnessy',
-        subtext: 'This conversation is routed through a trusted mutual connection. 30 minutes to walk your yard network.',
-        buttonLabel: 'Request an Introduction',
-        calendarLink: BOOKING_LINK,
-      },
-      closingLine: 'One conversation. Your yard network. A clear path to $5M+ in annual freshness-protected savings.',
-    },
-  ],
+  sections: [],
 
   people: [
     {
@@ -272,15 +276,6 @@ export const dannon: AccountMicrositeData = {
         subheadline: 'Fresh dairy, plant-based, water, and medical nutrition all compete for the same dock surface. YardFlow gives North America one operating protocol across all four temperature realities.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'warm-intro',
-        headline: 'Heiko, this conversation is routed through Mark Shaughnessy',
-        subtext: 'A trusted mutual connection. 30 minutes to walk Danone\'s yard network with Casey.',
-        buttonLabel: 'Request an Introduction',
-        calendarLink: BOOKING_LINK,
-        personName: 'Heiko',
-        personContext: 'Warm intro via Mark Shaughnessy',
-      },
 
       toneShift: 'Executive operations language. He owns the full handoff from plant through service. Lead with freshness, operating discipline, and cross-functional impact.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -312,15 +307,6 @@ export const dannon: AccountMicrositeData = {
         subheadline: `You can only standardize what the network can see. YardFlow turns ${DANNON_FACILITY_COUNT_LABEL} local yard routines into one visible, measurable supply layer for Danone North America.`,
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'warm-intro',
-        headline: 'Whitney, this conversation is routed through Mark Shaughnessy',
-        subtext: 'A trusted mutual connection. 30 minutes to walk Danone\'s yard network with Casey.',
-        buttonLabel: 'Request an Introduction',
-        calendarLink: BOOKING_LINK,
-        personName: 'Whitney',
-        personContext: 'Warm intro via Mark Shaughnessy',
-      },
 
       toneShift: 'Network-oriented supply chain language. She is a routing and triangulation contact, so make it easy to see where the real operating owner should lean in.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -352,15 +338,6 @@ export const dannon: AccountMicrositeData = {
         subheadline: 'If a carrier waits at the gate or the wrong reefer gets staged, procurement pays for an execution problem it did not create. YardFlow closes that gap.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'warm-intro',
-        headline: 'Jacqueline, this conversation is routed through Mark Shaughnessy',
-        subtext: 'A trusted mutual connection. 30 minutes to walk Danone\'s yard network with Casey.',
-        buttonLabel: 'Request an Introduction',
-        calendarLink: BOOKING_LINK,
-        personName: 'Jacqueline',
-        personContext: 'Warm intro via Mark Shaughnessy',
-      },
 
       toneShift: 'Procurement and carrier-management language. Focus on accessorials, appointment discipline, and supplier trust.',
       kpiLanguage: ['turn time', 'detention cost', 'dwell time', 'on-time pickup', 'carrier satisfaction'],
@@ -392,15 +369,6 @@ export const dannon: AccountMicrositeData = {
         subheadline: 'S&OP does not stop at the appointment calendar. The refrigerated door sequence has to match the plan or freshness and service both slip.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'warm-intro',
-        headline: 'Annette, this conversation is routed through Mark Shaughnessy',
-        subtext: 'A trusted mutual connection. 30 minutes to walk Danone\'s yard network with Casey.',
-        buttonLabel: 'Request an Introduction',
-        calendarLink: BOOKING_LINK,
-        personName: 'Annette',
-        personContext: 'Warm intro via Mark Shaughnessy',
-      },
 
       toneShift: 'Planning and customer-service language. Tie yard performance directly to schedule adherence and freshness-protected service.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
@@ -432,15 +400,6 @@ export const dannon: AccountMicrositeData = {
         subheadline: 'Away From Home orders punish yard variance faster than retail replenishment does. YardFlow gives site teams a deterministic sequence instead of radio-driven guesswork.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'warm-intro',
-        headline: 'Jay, this conversation is routed through Mark Shaughnessy',
-        subtext: 'A trusted mutual connection. 30 minutes to walk Danone\'s yard network with Casey.',
-        buttonLabel: 'Request an Introduction',
-        calendarLink: BOOKING_LINK,
-        personName: 'Jay',
-        personContext: 'Warm intro via Mark Shaughnessy',
-      },
 
       toneShift: 'Field-operations language. He cares about appointment precision, warehouse flow, and what the site team has to do when the yard falls behind.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],

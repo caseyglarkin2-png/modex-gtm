@@ -1,9 +1,182 @@
 import type { AccountMicrositeData } from '../schema';
 import { getFacilityCountLabel, getFacilityCountLowerBound } from '../../research/facility-fact-registry';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 const AB_INBEV_FACILITY_COUNT_LABEL = getFacilityCountLabel('AB InBev', '100');
 const AB_INBEV_FACILITY_COUNT = getFacilityCountLowerBound('AB InBev', 100) ?? 100;
+
+// LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
+/*
+ * [
+ *     {
+ *       type: 'hero',
+ *       headline: 'You achieved 85% touchless planning. But when that perfectly planned load arrives at the dock, what happens?',
+ *       subheadline: `Drivers wait. Trailers sit. The yard is the last analog frontier in AB InBev's supply chain. 12 breweries, ${AB_INBEV_FACILITY_COUNT_LABEL} facilities, 800+ trucks - and the dock still runs on radio calls.`,
+ *       accountCallout: `12 US breweries, ${AB_INBEV_FACILITY_COUNT_LABEL} facilities, 800+ truck fleet, 85% touchless demand planning`,
+ *       backgroundTheme: 'dark',
+ *       cta: {
+ *         type: 'meeting',
+ *         headline: 'See the execution layer between o9 and Sensolus',
+ *         subtext: '30-minute walk-through of your brewery network with board-ready ROI.',
+ *         buttonLabel: 'Book a Network Audit',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *     },
+ *     {
+ *       type: 'problem',
+ *       sectionLabel: 'The Gap in Your Transformation',
+ *       headline: 'o9 plans the supply chain. Sensolus tracks the trailers. Who runs the dock?',
+ *       narrative: 'AB InBev has invested heavily in planning (o9 Solutions) and asset tracking (Sensolus). But between a perfectly planned load and a tracked trailer, there is a 48-minute gap at the dock door. That gap runs on clipboard processes and radio calls from the 1990s. It is the one surface your digital transformation has not touched.',
+ *       painPoints: [
+ *         {
+ *           headline: 'The Sensolus gap',
+ *           description: 'Sensolus tells you where the trailer is. It does not move the trailer faster through the dock. You optimized trailer fleet usage by 15% in 4 months. Now imagine optimizing the dock turn itself by 50%.',
+ *           kpiImpact: 'Sensolus: 15% fleet optimization. YardFlow: 50% dock turn reduction.',
+ *           source: 'Sensolus partnership results, European deployment',
+ *           relevantPeople: ['abi-siqueira', 'abi-moreira'],
+ *         },
+ *         {
+ *           headline: 'Night loading for morning delivery',
+ *           description: 'Route trucks loaded nightly for DSD morning delivery. The dock window is tight. There is no room for congestion. When a trailer misses its slot by 20 minutes, the morning delivery route slips.',
+ *           kpiImpact: 'Missed loading windows cascade to 80+ delivery routes per facility',
+ *           relevantPeople: ['abi-siqueira', 'abi-moreira'],
+ *         },
+ *         {
+ *           headline: 'Summer peak + Super Bowl surge',
+ *           description: 'Memorial Day through Labor Day drives 30-50% volume spikes. Super Bowl week is the single biggest delivery event. Yards designed for average throughput collapse during peak.',
+ *           kpiImpact: '30-50% volume spike during summer peak',
+ *           relevantPeople: ['abi-siqueira', 'abi-moreira'],
+ *         },
+ *         {
+ *           headline: 'Mixed fleet chaos',
+ *           description: '800+ owned trucks, third-party carriers, wholesaler trucks - three different fleets converging on the same dock doors. Add 200+ zero-emission vehicles with charging schedules and the yard becomes a scheduling nightmare.',
+ *           kpiImpact: '3 fleet types competing for dock doors',
+ *           relevantPeople: ['abi-siqueira', 'abi-moreira'],
+ *         },
+ *         {
+ *           headline: 'M&A integration fragmentation',
+ *           description: 'SABMiller (2016), Grupo Modelo, and years of acquisitions created fragmented yard processes. Different breweries run different protocols. Standardization is Elito\'s mandate - the yard is the last holdout.',
+ *           source: 'SABMiller acquisition 2016',
+ *           relevantPeople: ['abi-siqueira', 'abi-moreira'],
+ *         },
+ *       ],
+ *     },
+ *     {
+ *       type: 'stakes',
+ *       sectionLabel: 'What the Yard Costs You',
+ *       headline: 'The math your o9 dashboard does not show',
+ *       narrative: `o9 tracks supply chain KPIs at the planning level. Sensolus tracks fleet utilization. Nobody tracks the 48 minutes a trailer sits at the dock between arrival and unload. Across 12 breweries and ${AB_INBEV_FACILITY_COUNT_LABEL} facilities, that time adds up to millions.`,
+ *       annualCost: '$25M+ estimated in yard-driven inefficiency across the North America network',
+ *       costBreakdown: [
+ *         { label: 'Dock dwell and turn time excess', value: '$10M+' },
+ *         { label: 'Night loading schedule slippage', value: '$5M+' },
+ *         { label: 'Peak season surge inefficiency', value: '$5M+' },
+ *         { label: 'EV fleet idle time at dock (growing)', value: '$3M+' },
+ *         { label: 'Multi-fleet coordination overhead', value: '$2M+' },
+ *       ],
+ *       urgencyDriver: 'AB InBev invested $2B in US facilities over 5 years. The yards were not part of that investment. The EV fleet transition makes yard optimization urgent - EVs need predictable dock times for charging schedules.',
+ *     },
+ *     {
+ *       type: 'solution',
+ *       sectionLabel: 'The Execution Layer',
+ *       headline: 'The layer between o9 planning and Sensolus tracking',
+ *       narrative: 'YardFlow sits between your planning platform and your asset tracking. o9 says what should move. Sensolus says where it is. YardFlow makes it move faster through the dock. One protocol across 12 breweries. Same driver journey, same dock assignment logic, same evidence trail.',
+ *       modules: [
+ *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID.', relevanceToAccount: `Standardizes gate process across 12 breweries and ${AB_INBEV_FACILITY_COUNT_LABEL} distribution points.` },
+ *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter task queues with priority logic.', relevanceToAccount: 'Replaces radio dispatch. Critical for night loading sequence and EV priority.' },
+ *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location and dwell.', relevanceToAccount: 'Complements Sensolus asset tracking with operational intelligence - not just where, but how fast.' },
+ *         { id: 'flowNETWORK', name: 'flowNETWORK', verb: 'Scale', shortDescription: 'Network-wide command view.', relevanceToAccount: 'Gives Elito the yard-level visibility he has for planning (via o9) but has never had for execution.' },
+ *       ],
+ *       accountFit: 'AB InBev already bought yard tech (Sensolus for trailer tracking). YardFlow is complementary, not competitive. Sensolus = where are my trailers. YardFlow = how do I move them faster through the dock. Together they close the yard gap.',
+ *     },
+ *     {
+ *       type: 'proof',
+ *       sectionLabel: 'Running in Production',
+ *       headline: 'Measured results from live deployment',
+ *       proofVisual: {
+ *         type: 'comparison',
+ *         headline: 'Where YardFlow closes the execution gap',
+ *         narrative: 'o9 plans the load. Sensolus knows where the trailer is. YardFlow governs what happens between arrival, staging, dock assignment, and release so the dock no longer depends on radio dispatch and tribal knowledge.',
+ *         comparisonLabel: 'Planning and tracking still leave one unowned layer',
+ *         comparisonData: [
+ *           { metric: 'Supply chain layer', competitor: 'o9: demand and load planning', yardflow: 'YardFlow: dock and yard execution' },
+ *           { metric: 'Trailer visibility', competitor: 'Sensolus: asset location', yardflow: 'YardFlow: move priority, dwell, dock readiness' },
+ *           { metric: 'Operational outcome', competitor: 'Tracked load, manual handoff', yardflow: '48-to-24 minute dock turn with one protocol' },
+ *         ],
+ *       },
+ *       liveDeployment: {
+ *         headline: 'Proven before the beer peak hits',
+ *         summary: 'This deployment pattern is already live in high-volume CPG and beverage-style operations where dock offices absorb additional throughput without adding coordination headcount. That is the exact gap between AB InBev planning and execution today.',
+ *         badges: ['24 facilities live', '48-to-24 min turn time', '30 min remote deployment'],
+ *       },
+ *       methodology: 'Benchmarks pair AB InBev\'s published Sensolus fleet gains with measured YardFlow dock-turn improvements in comparable live deployments.',
+ *       blocks: [
+ *         {
+ *           type: 'metric',
+ *           stats: [
+ *             { value: '24', label: 'Facilities Live' },
+ *             { value: '>200', label: 'Contracted Network' },
+ *             { value: '48-to-24', label: 'Min Truck Turn Time' },
+ *             { value: '$1M+', label: 'Per-Site Profit Impact' },
+ *             { value: '30 min', label: 'Remote Deployment' },
+ *           ],
+ *         },
+ *         {
+ *           type: 'quote',
+ *           quote: {
+ *             text: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office.',
+ *             role: 'Operations Director',
+ *             company: 'National CPG Manufacturer',
+ *           },
+ *         },
+ *       ],
+ *     },
+ *     {
+ *       type: 'network-map',
+ *       sectionLabel: 'Your Brewery Network',
+ *       headline: 'AB InBev North America yard footprint',
+ *       narrative: 'Twelve breweries. Seventeen company-owned distributorships. One hundred-plus total facilities. The yard protocol at each one is different - a legacy of M&A integration. YardFlow gives the network one standard.',
+ *       facilityCount: AB_INBEV_FACILITY_COUNT_LABEL,
+ *       facilityTypes: ['Breweries (12)', 'ABOne Distributors (17)', 'Agricultural/Packaging (23)', 'Distribution Centers'],
+ *       geographicSpread: 'CA, NY, GA, TX, NJ, VA, MO, AZ, PA, CO, FL, OH',
+ *       dailyTrailerMoves: '5,000+ across the brewery network',
+ *       peakMultiplier: '1.5x during summer (Memorial Day-Labor Day)',
+ *     },
+ *     {
+ *       type: 'roi',
+ *       sectionLabel: 'The Business Case',
+ *       headline: 'ROI for AB InBev North America',
+ *       narrative: 'Based on measured YardFlow improvements and AB InBev\'s own Sensolus results as a baseline.',
+ *       roiLines: [
+ *         { label: 'Avg dock turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
+ *         { label: 'Trailer fleet utilization', before: '+15% (Sensolus)', after: '+50% (YardFlow + Sensolus)', delta: '3.3x improvement', unit: 'efficiency' },
+ *         { label: 'Night loading schedule adherence', before: '~80%', after: '95%+', delta: '+15 pts', unit: 'on-time %' },
+ *         { label: 'EV fleet dock priority', before: 'Manual', after: 'Automated', delta: 'EV-ready yard', unit: 'capability' },
+ *         { label: 'Annual network savings', before: '$0 (not tracked)', after: '$15M+', delta: '+$15M', unit: 'annual' },
+ *       ],
+ *       totalAnnualSavings: '$15M+ across brewery network, $25M+ including distribution',
+ *       paybackPeriod: '< 3 months per brewery',
+ *       methodology: 'Sensolus 15% optimization used as baseline. YardFlow measured 50% dock turn improvement at comparable beverage operations. Conservative estimate across 12 breweries.',
+ *     },
+ *     {
+ *       type: 'testimonial',
+ *       sectionLabel: 'From Operations',
+ *       quote: 'We believe system-driven dock door assignment will be a valuable next step for dock office optimization.',
+ *       role: 'Operations Director',
+ *       company: 'National Beverage Distributor',
+ *     },
+ *     {
+ *       type: 'cta',
+ *       cta: {
+ *         type: 'modex-meeting',
+ *         headline: 'Your Cartersville brewery is 90 minutes from MODEX. Let\'s talk.',
+ *         subtext: '30-minute walk through your brewery network ROI. The yard is the last analog frontier.',
+ *         buttonLabel: 'Book a Meeting at MODEX',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *       closingLine: 'You got planning to 85% touchless. The yard is the next 15%. Let\'s talk at MODEX.',
+ *     },
+ *   ]
+ */
 
 export const abInbev: AccountMicrositeData = {
   slug: 'ab-inbev',
@@ -17,176 +190,7 @@ export const abInbev: AccountMicrositeData = {
   pageTitle: 'YardFlow for AB InBev - The Last Analog Frontier in Your Supply Chain',
   metaDescription: 'AB InBev achieved 85% touchless planning. The yard is the one surface your digital transformation has not reached.',
 
-  sections: [
-    {
-      type: 'hero',
-      headline: 'You achieved 85% touchless planning. But when that perfectly planned load arrives at the dock, what happens?',
-      subheadline: `Drivers wait. Trailers sit. The yard is the last analog frontier in AB InBev's supply chain. 12 breweries, ${AB_INBEV_FACILITY_COUNT_LABEL} facilities, 800+ trucks - and the dock still runs on radio calls.`,
-      accountCallout: `12 US breweries, ${AB_INBEV_FACILITY_COUNT_LABEL} facilities, 800+ truck fleet, 85% touchless demand planning`,
-      backgroundTheme: 'dark',
-      cta: {
-        type: 'meeting',
-        headline: 'See the execution layer between o9 and Sensolus',
-        subtext: '30-minute walk-through of your brewery network with board-ready ROI.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-      },
-    },
-    {
-      type: 'problem',
-      sectionLabel: 'The Gap in Your Transformation',
-      headline: 'o9 plans the supply chain. Sensolus tracks the trailers. Who runs the dock?',
-      narrative: 'AB InBev has invested heavily in planning (o9 Solutions) and asset tracking (Sensolus). But between a perfectly planned load and a tracked trailer, there is a 48-minute gap at the dock door. That gap runs on clipboard processes and radio calls from the 1990s. It is the one surface your digital transformation has not touched.',
-      painPoints: [
-        {
-          headline: 'The Sensolus gap',
-          description: 'Sensolus tells you where the trailer is. It does not move the trailer faster through the dock. You optimized trailer fleet usage by 15% in 4 months. Now imagine optimizing the dock turn itself by 50%.',
-          kpiImpact: 'Sensolus: 15% fleet optimization. YardFlow: 50% dock turn reduction.',
-          source: 'Sensolus partnership results, European deployment',
-          relevantPeople: ['abi-siqueira', 'abi-moreira'],
-        },
-        {
-          headline: 'Night loading for morning delivery',
-          description: 'Route trucks loaded nightly for DSD morning delivery. The dock window is tight. There is no room for congestion. When a trailer misses its slot by 20 minutes, the morning delivery route slips.',
-          kpiImpact: 'Missed loading windows cascade to 80+ delivery routes per facility',
-          relevantPeople: ['abi-siqueira', 'abi-moreira'],
-        },
-        {
-          headline: 'Summer peak + Super Bowl surge',
-          description: 'Memorial Day through Labor Day drives 30-50% volume spikes. Super Bowl week is the single biggest delivery event. Yards designed for average throughput collapse during peak.',
-          kpiImpact: '30-50% volume spike during summer peak',
-          relevantPeople: ['abi-siqueira', 'abi-moreira'],
-        },
-        {
-          headline: 'Mixed fleet chaos',
-          description: '800+ owned trucks, third-party carriers, wholesaler trucks - three different fleets converging on the same dock doors. Add 200+ zero-emission vehicles with charging schedules and the yard becomes a scheduling nightmare.',
-          kpiImpact: '3 fleet types competing for dock doors',
-          relevantPeople: ['abi-siqueira', 'abi-moreira'],
-        },
-        {
-          headline: 'M&A integration fragmentation',
-          description: 'SABMiller (2016), Grupo Modelo, and years of acquisitions created fragmented yard processes. Different breweries run different protocols. Standardization is Elito\'s mandate - the yard is the last holdout.',
-          source: 'SABMiller acquisition 2016',
-          relevantPeople: ['abi-siqueira', 'abi-moreira'],
-        },
-      ],
-    },
-    {
-      type: 'stakes',
-      sectionLabel: 'What the Yard Costs You',
-      headline: 'The math your o9 dashboard does not show',
-      narrative: `o9 tracks supply chain KPIs at the planning level. Sensolus tracks fleet utilization. Nobody tracks the 48 minutes a trailer sits at the dock between arrival and unload. Across 12 breweries and ${AB_INBEV_FACILITY_COUNT_LABEL} facilities, that time adds up to millions.`,
-      annualCost: '$25M+ estimated in yard-driven inefficiency across the North America network',
-      costBreakdown: [
-        { label: 'Dock dwell and turn time excess', value: '$10M+' },
-        { label: 'Night loading schedule slippage', value: '$5M+' },
-        { label: 'Peak season surge inefficiency', value: '$5M+' },
-        { label: 'EV fleet idle time at dock (growing)', value: '$3M+' },
-        { label: 'Multi-fleet coordination overhead', value: '$2M+' },
-      ],
-      urgencyDriver: 'AB InBev invested $2B in US facilities over 5 years. The yards were not part of that investment. The EV fleet transition makes yard optimization urgent - EVs need predictable dock times for charging schedules.',
-    },
-    {
-      type: 'solution',
-      sectionLabel: 'The Execution Layer',
-      headline: 'The layer between o9 planning and Sensolus tracking',
-      narrative: 'YardFlow sits between your planning platform and your asset tracking. o9 says what should move. Sensolus says where it is. YardFlow makes it move faster through the dock. One protocol across 12 breweries. Same driver journey, same dock assignment logic, same evidence trail.',
-      modules: [
-        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID.', relevanceToAccount: `Standardizes gate process across 12 breweries and ${AB_INBEV_FACILITY_COUNT_LABEL} distribution points.` },
-        { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter task queues with priority logic.', relevanceToAccount: 'Replaces radio dispatch. Critical for night loading sequence and EV priority.' },
-        { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location and dwell.', relevanceToAccount: 'Complements Sensolus asset tracking with operational intelligence - not just where, but how fast.' },
-        { id: 'flowNETWORK', name: 'flowNETWORK', verb: 'Scale', shortDescription: 'Network-wide command view.', relevanceToAccount: 'Gives Elito the yard-level visibility he has for planning (via o9) but has never had for execution.' },
-      ],
-      accountFit: 'AB InBev already bought yard tech (Sensolus for trailer tracking). YardFlow is complementary, not competitive. Sensolus = where are my trailers. YardFlow = how do I move them faster through the dock. Together they close the yard gap.',
-    },
-    {
-      type: 'proof',
-      sectionLabel: 'Running in Production',
-      headline: 'Measured results from live deployment',
-      proofVisual: {
-        type: 'comparison',
-        headline: 'Where YardFlow closes the execution gap',
-        narrative: 'o9 plans the load. Sensolus knows where the trailer is. YardFlow governs what happens between arrival, staging, dock assignment, and release so the dock no longer depends on radio dispatch and tribal knowledge.',
-        comparisonLabel: 'Planning and tracking still leave one unowned layer',
-        comparisonData: [
-          { metric: 'Supply chain layer', competitor: 'o9: demand and load planning', yardflow: 'YardFlow: dock and yard execution' },
-          { metric: 'Trailer visibility', competitor: 'Sensolus: asset location', yardflow: 'YardFlow: move priority, dwell, dock readiness' },
-          { metric: 'Operational outcome', competitor: 'Tracked load, manual handoff', yardflow: '48-to-24 minute dock turn with one protocol' },
-        ],
-      },
-      liveDeployment: {
-        headline: 'Proven before the beer peak hits',
-        summary: 'This deployment pattern is already live in high-volume CPG and beverage-style operations where dock offices absorb additional throughput without adding coordination headcount. That is the exact gap between AB InBev planning and execution today.',
-        badges: ['24 facilities live', '48-to-24 min turn time', '30 min remote deployment'],
-      },
-      methodology: 'Benchmarks pair AB InBev\'s published Sensolus fleet gains with measured YardFlow dock-turn improvements in comparable live deployments.',
-      blocks: [
-        {
-          type: 'metric',
-          stats: [
-            { value: '24', label: 'Facilities Live' },
-            { value: '>200', label: 'Contracted Network' },
-            { value: '48-to-24', label: 'Min Truck Turn Time' },
-            { value: '$1M+', label: 'Per-Site Profit Impact' },
-            { value: '30 min', label: 'Remote Deployment' },
-          ],
-        },
-        {
-          type: 'quote',
-          quote: {
-            text: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office.',
-            role: 'Operations Director',
-            company: 'National CPG Manufacturer',
-          },
-        },
-      ],
-    },
-    {
-      type: 'network-map',
-      sectionLabel: 'Your Brewery Network',
-      headline: 'AB InBev North America yard footprint',
-      narrative: 'Twelve breweries. Seventeen company-owned distributorships. One hundred-plus total facilities. The yard protocol at each one is different - a legacy of M&A integration. YardFlow gives the network one standard.',
-      facilityCount: AB_INBEV_FACILITY_COUNT_LABEL,
-      facilityTypes: ['Breweries (12)', 'ABOne Distributors (17)', 'Agricultural/Packaging (23)', 'Distribution Centers'],
-      geographicSpread: 'CA, NY, GA, TX, NJ, VA, MO, AZ, PA, CO, FL, OH',
-      dailyTrailerMoves: '5,000+ across the brewery network',
-      peakMultiplier: '1.5x during summer (Memorial Day-Labor Day)',
-    },
-    {
-      type: 'roi',
-      sectionLabel: 'The Business Case',
-      headline: 'ROI for AB InBev North America',
-      narrative: 'Based on measured YardFlow improvements and AB InBev\'s own Sensolus results as a baseline.',
-      roiLines: [
-        { label: 'Avg dock turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
-        { label: 'Trailer fleet utilization', before: '+15% (Sensolus)', after: '+50% (YardFlow + Sensolus)', delta: '3.3x improvement', unit: 'efficiency' },
-        { label: 'Night loading schedule adherence', before: '~80%', after: '95%+', delta: '+15 pts', unit: 'on-time %' },
-        { label: 'EV fleet dock priority', before: 'Manual', after: 'Automated', delta: 'EV-ready yard', unit: 'capability' },
-        { label: 'Annual network savings', before: '$0 (not tracked)', after: '$15M+', delta: '+$15M', unit: 'annual' },
-      ],
-      totalAnnualSavings: '$15M+ across brewery network, $25M+ including distribution',
-      paybackPeriod: '< 3 months per brewery',
-      methodology: 'Sensolus 15% optimization used as baseline. YardFlow measured 50% dock turn improvement at comparable beverage operations. Conservative estimate across 12 breweries.',
-    },
-    {
-      type: 'testimonial',
-      sectionLabel: 'From Operations',
-      quote: 'We believe system-driven dock door assignment will be a valuable next step for dock office optimization.',
-      role: 'Operations Director',
-      company: 'National Beverage Distributor',
-    },
-    {
-      type: 'cta',
-      cta: {
-        type: 'modex-meeting',
-        headline: 'Your Cartersville brewery is 90 minutes from MODEX. Let\'s talk.',
-        subtext: '30-minute walk through your brewery network ROI. The yard is the last analog frontier.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-      },
-      closingLine: 'You got planning to 85% touchless. The yard is the next 15%. Let\'s talk at MODEX.',
-    },
-  ],
+  sections: [],
 
   // ── THE PEOPLE ──────────────────────────────────────────────────────
   people: [
@@ -337,15 +341,6 @@ export const abInbev: AccountMicrositeData = {
         subheadline: 'You deployed Sensolus for trailer tracking. You built the o9 planning transformation. But between a perfectly planned load and a tracked trailer, there is a 48-minute gap at the dock door. YardFlow closes it.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'solution', 'proof', 'network-map', 'roi', 'cta'],
-      ctaOverride: {
-        type: 'modex-meeting',
-        headline: 'Elito, your Cartersville brewery is 90 minutes from MODEX.',
-        subtext: '30 minutes on what touchless yard operations look like. The ABOne network is the perfect pilot.',
-        buttonLabel: 'Meet at MODEX',
-        calendarLink: BOOKING_LINK,
-        personName: 'Elito',
-        personContext: 'touchless yard operations for the AB InBev North America network',
-      },
 
       toneShift: 'He is a transformation leader who sees himself as a change agent. He has public talks and case studies to reference. Mirror his own language (touchless, complexity reduction, transformation) and position YardFlow as the next chapter of the story he has been telling publicly for 5 years. Do not sell him - invite him to extend his own narrative.',
       kpiLanguage: ['touchless yard %', 'dock turn time', 'fleet utilization', 'schedule adherence', 'KPIs at all-time high', 'complexity reduction'],
@@ -377,15 +372,6 @@ export const abInbev: AccountMicrositeData = {
         subheadline: 'You have led logistics, procurement, distribution, and post-acquisition integration across AB InBev. YardFlow gives you one execution protocol between brewery, wholesaler, and fleet so the dock no longer depends on local workarounds.',
       },
       sectionOrder: ['hero', 'problem', 'proof', 'solution', 'network-map', 'roi', 'cta'],
-      ctaOverride: {
-        type: 'meeting',
-        headline: 'Ricardo, let\'s compare global standards to yard reality.',
-        subtext: '30 minutes on where dock execution is still creating site-to-site variance across breweries and ABOne distribution.',
-        buttonLabel: 'Book a Supply Review',
-        calendarLink: BOOKING_LINK,
-        personName: 'Ricardo',
-        personContext: 'global supply standardization across brewery and ABOne yards',
-      },
       sectionOverrides: [
         {
           sectionType: 'solution',

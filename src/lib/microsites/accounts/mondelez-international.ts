@@ -12,7 +12,154 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
+
+// LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
+/*
+ * [
+ *     {
+ *       type: 'hero',
+ *       headline: 'Snack Distribution Velocity. That is a yard problem.',
+ *       subheadline: 'Claudio built his reputation on the North America turnaround — taking underperforming supply chain operations and elevating them to best-in-class. Yard management is exactly the type of unsexy but high-impact operational lever that turnaround leaders love: - It\'s measurable (truck turn times, dock utilization, trailer dwell) - It\'s fast to implement (weeks, not years) - It compounds across',
+ *       accountCallout: 'Mondelez International - Food & Beverage',
+ *       backgroundTheme: 'dark',
+ *       cta: {
+ *         type: 'meeting',
+ *         headline: 'See what a standardized yard network looks like for Mondelez International',
+ *         subtext: '30-minute walk-through of your facility network with board-ready ROI.',
+ *         buttonLabel: 'Book a Network Audit',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *     },
+ *     {
+ *       type: 'problem',
+ *       sectionLabel: 'The Hidden Constraint',
+ *       headline: 'The yard is where Mondelez International\'s supply chain math breaks down',
+ *       narrative: 'Claudio built his reputation on the North America turnaround — taking underperforming supply chain operations and elevating them to best-in-class. Yard management is exactly the type of unsexy but high-impact operational lever that turnaround leaders love: - It\'s measurable (truck turn times, dock utilization, trailer dwell) - It\'s fast to implement (weeks, not years) - It compounds across',
+ *       painPoints: [
+ *         {
+ *           headline: 'Snack Distribution Velocity',
+ *           description: 'Snack foods (Oreo, Ritz, Chips Ahoy) are high-velocity, high-frequency products - Retail customers (Walmart, Kroger, Target, Costco) demand JIT delivery and near-perfect order fill rates - Any dock bottleneck = delayed loads = missed delivery windows = chargebacks and lost shelf space - At hig',
+ *           relevantPeople: ['mondelez-international-parrotta'],
+ *         },
+ *         {
+ *           headline: 'Seasonal Demand Surges (Chocolate)',
+ *           description: 'Halloween, Christmas, Easter, Valentine\'s Day create massive demand spikes for chocolate products (Cadbury, Milka, Toblerone) - Seasonal SKUs require temporary storage, overflow yards, and surge dock capacity - Yards that work fine in Q1 become gridlocked in Q4 when seasonal chocolate shipment',
+ *           relevantPeople: ['mondelez-international-parrotta'],
+ *         },
+ *         {
+ *           headline: 'Acquisition-Driven Network Complexity',
+ *           description: 'Integrating Clif Bar, Ricolino, and Tate\'s Bake Shop facilities into the Mondelez network means: - New plants with different yard configurations, dock setups, and carrier relationships - Legacy systems that may not communicate with Mondelez\'s existing WMS/TMS - Yard management is typically the las',
+ *           relevantPeople: ['mondelez-international-parrotta'],
+ *         },
+ *         {
+ *           headline: 'Multi-Temperature Dock Conflicts',
+ *           description: 'Ambient (biscuits), temp-controlled (chocolate), and cold chain (Philadelphia cheese) products may share facilities or adjacent docks - Different temperature products = different dwell times, different carrier types, different unloading procedures - Yard management must handle priority routing: co',
+ *           relevantPeople: ['mondelez-international-parrotta'],
+ *         },
+ *         {
+ *           headline: '320 Warehouses × Dock Scheduling Chaos',
+ *           description: 'With 320 warehouses globally (estimated 80-100+ in North America), even small per-site efficiency gains compound enormously - If YardFlow saves 20 minutes per truck turn across 50 trucks/day at 80 NA warehouses: - 80 sites × 50 trucks × 20 min = 80,000 truck-minutes saved per day = 1,333 tru',
+ *           relevantPeople: ['mondelez-international-parrotta'],
+ *         }
+ *       ],
+ *     },
+ *     {
+ *       type: 'stakes',
+ *       sectionLabel: 'What This Costs You',
+ *       headline: 'The math Mondelez International is not tracking in one place',
+ *       narrative: 'Snack foods (Oreo, Ritz, Chips Ahoy) are high-velocity, high-frequency products - Retail customers (Walmart, Kroger, Target, Costco) demand JIT delivery and near-perfect order fill rates - Any dock bottleneck = delayed loads = missed delivery windows = chargebacks and lost shelf space - At hig Meanwhile, halloween, Christmas, Easter, Valentine\'s Day create massive demand spikes for chocolate products (Cadbury, Milka, Toblerone) - Seasonal SKUs require temporary storage, overflow yards, and surge dock capacity - Yards that work fine in Q1 become gridlocked in Q4 when seasonal chocolate shipment',
+ *       annualCost: '$10M-$15M in estimated yard-driven inefficiency across the network',
+ *       costBreakdown: [
+ *         { label: 'Carrier detention / demurrage', value: '$4M+' },
+ *         { label: 'Dock contention and turn time excess', value: '$3M+' },
+ *         { label: 'Gate and spotter labor overhead', value: '$2M+' },
+ *         { label: 'Peak season surge inefficiency', value: '$1M+' },
+ *       ],
+ *       urgencyDriver: 'Clif Bar acquisition ($2.9B, June 2022):',
+ *     },
+ *     {
+ *       type: 'solution',
+ *       sectionLabel: 'The Fix',
+ *       headline: 'One protocol across every Mondelez International yard',
+ *       narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
+ *       modules: [
+ *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Mondelez International\'s facility network.' },
+ *         { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Mondelez International\'s facility network.' },
+ *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Mondelez International\'s facility network.' },
+ *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Mondelez International\'s facility network.' },
+ *       ],
+ *       accountFit: 'Claudio built his reputation on the **North America turnaround** — taking underperforming supply chain operations and elevating them to best-in-class. Yard management is exactly the type of **unsexy but high-impact operational lever** that turnaround leaders love: - It\'s measurable (truck turn times, dock utilization, trailer dwell) - It\'s fast to implement (weeks, not years) - It compounds across',
+ *     },
+ *     {
+ *       type: 'proof',
+ *       sectionLabel: 'Proof from Live Deployment',
+ *       headline: 'Running today across 24 facilities',
+ *       blocks: [
+ *         {
+ *           type: 'metric',
+ *           stats: [
+ *             { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable food & beverage operations' },
+ *             { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
+ *             { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+ *             { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at food & beverage facilities' },
+ *           ],
+ *         },
+ *         {
+ *           type: 'quote',
+ *           quote: {
+ *             text: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office. That was an integral part of our strategy and has been proven.',
+ *             role: 'Operations Director',
+ *             company: 'National CPG/Beverage Manufacturer',
+ *           },
+ *         },
+ *       ],
+ *     },
+ *     {
+ *       type: 'network-map',
+ *       sectionLabel: 'Your Network',
+ *       headline: 'Mondelez International\'s yard network at scale',
+ *       narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
+ *       facilityCount: '130+',
+ *       facilityTypes: ['Manufacturing Plants', 'Distribution Centers'],
+ *       geographicSpread: 'North America',
+ *       dailyTrailerMoves: '1,000+ across the network',
+ *     },
+ *     {
+ *       type: 'roi',
+ *       sectionLabel: 'The Business Case',
+ *       headline: 'Conservative ROI model for Mondelez International',
+ *       narrative: 'Based on measured YardFlow improvements at comparable operations.',
+ *       roiLines: [
+ *         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
+ *         { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
+ *         { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
+ *         { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
+ *       ],
+ *       totalAnnualSavings: '$10M-$15M across the network',
+ *       paybackPeriod: '< 6 months',
+ *       methodology: 'Based on measured results at 24 live facilities extrapolated to Mondelez International facility count and operational profile.',
+ *     },
+ *     {
+ *       type: 'testimonial',
+ *       sectionLabel: 'From an Operator Who Runs It',
+ *       quote: 'We believe system-driven dock door assignment will be a valuable next step for dock office optimization.',
+ *       role: 'Operations Director',
+ *       company: 'National CPG/Beverage Manufacturer',
+ *       context: 'After 12 months of full YardFlow deployment across their facility network.',
+ *     },
+ *     {
+ *       type: 'cta',
+ *       cta: {
+ *         type: 'meeting',
+ *         headline: 'See what a standardized yard network looks like for Mondelez International',
+ *         subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
+ *         buttonLabel: 'Book a Network Audit',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *       closingLine: 'One conversation. Your yard network. A clear path to $10M-$15M in annual savings.',
+ *     },
+ *   ]
+ */
 
 export const mondelezInternational: AccountMicrositeData = {
   slug: 'mondelez-international',
@@ -25,150 +172,7 @@ export const mondelezInternational: AccountMicrositeData = {
   pageTitle: 'YardFlow for Mondelez International - Yard Network Standardization',
   metaDescription: 'How YardFlow eliminates the yard bottleneck across Mondelez International\'s facility network.',
 
-  sections: [
-    {
-      type: 'hero',
-      headline: 'Snack Distribution Velocity. That is a yard problem.',
-      subheadline: 'Claudio built his reputation on the North America turnaround — taking underperforming supply chain operations and elevating them to best-in-class. Yard management is exactly the type of unsexy but high-impact operational lever that turnaround leaders love: - It\'s measurable (truck turn times, dock utilization, trailer dwell) - It\'s fast to implement (weeks, not years) - It compounds across',
-      accountCallout: 'Mondelez International - Food & Beverage',
-      backgroundTheme: 'dark',
-      cta: {
-        type: 'meeting',
-        headline: 'See what a standardized yard network looks like for Mondelez International',
-        subtext: '30-minute walk-through of your facility network with board-ready ROI.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-      },
-    },
-    {
-      type: 'problem',
-      sectionLabel: 'The Hidden Constraint',
-      headline: 'The yard is where Mondelez International\'s supply chain math breaks down',
-      narrative: 'Claudio built his reputation on the North America turnaround — taking underperforming supply chain operations and elevating them to best-in-class. Yard management is exactly the type of unsexy but high-impact operational lever that turnaround leaders love: - It\'s measurable (truck turn times, dock utilization, trailer dwell) - It\'s fast to implement (weeks, not years) - It compounds across',
-      painPoints: [
-        {
-          headline: 'Snack Distribution Velocity',
-          description: 'Snack foods (Oreo, Ritz, Chips Ahoy) are high-velocity, high-frequency products - Retail customers (Walmart, Kroger, Target, Costco) demand JIT delivery and near-perfect order fill rates - Any dock bottleneck = delayed loads = missed delivery windows = chargebacks and lost shelf space - At hig',
-          relevantPeople: ['mondelez-international-parrotta'],
-        },
-        {
-          headline: 'Seasonal Demand Surges (Chocolate)',
-          description: 'Halloween, Christmas, Easter, Valentine\'s Day create massive demand spikes for chocolate products (Cadbury, Milka, Toblerone) - Seasonal SKUs require temporary storage, overflow yards, and surge dock capacity - Yards that work fine in Q1 become gridlocked in Q4 when seasonal chocolate shipment',
-          relevantPeople: ['mondelez-international-parrotta'],
-        },
-        {
-          headline: 'Acquisition-Driven Network Complexity',
-          description: 'Integrating Clif Bar, Ricolino, and Tate\'s Bake Shop facilities into the Mondelez network means: - New plants with different yard configurations, dock setups, and carrier relationships - Legacy systems that may not communicate with Mondelez\'s existing WMS/TMS - Yard management is typically the las',
-          relevantPeople: ['mondelez-international-parrotta'],
-        },
-        {
-          headline: 'Multi-Temperature Dock Conflicts',
-          description: 'Ambient (biscuits), temp-controlled (chocolate), and cold chain (Philadelphia cheese) products may share facilities or adjacent docks - Different temperature products = different dwell times, different carrier types, different unloading procedures - Yard management must handle priority routing: co',
-          relevantPeople: ['mondelez-international-parrotta'],
-        },
-        {
-          headline: '320 Warehouses × Dock Scheduling Chaos',
-          description: 'With 320 warehouses globally (estimated 80-100+ in North America), even small per-site efficiency gains compound enormously - If YardFlow saves 20 minutes per truck turn across 50 trucks/day at 80 NA warehouses: - 80 sites × 50 trucks × 20 min = 80,000 truck-minutes saved per day = 1,333 tru',
-          relevantPeople: ['mondelez-international-parrotta'],
-        }
-      ],
-    },
-    {
-      type: 'stakes',
-      sectionLabel: 'What This Costs You',
-      headline: 'The math Mondelez International is not tracking in one place',
-      narrative: 'Snack foods (Oreo, Ritz, Chips Ahoy) are high-velocity, high-frequency products - Retail customers (Walmart, Kroger, Target, Costco) demand JIT delivery and near-perfect order fill rates - Any dock bottleneck = delayed loads = missed delivery windows = chargebacks and lost shelf space - At hig Meanwhile, halloween, Christmas, Easter, Valentine\'s Day create massive demand spikes for chocolate products (Cadbury, Milka, Toblerone) - Seasonal SKUs require temporary storage, overflow yards, and surge dock capacity - Yards that work fine in Q1 become gridlocked in Q4 when seasonal chocolate shipment',
-      annualCost: '$10M-$15M in estimated yard-driven inefficiency across the network',
-      costBreakdown: [
-        { label: 'Carrier detention / demurrage', value: '$4M+' },
-        { label: 'Dock contention and turn time excess', value: '$3M+' },
-        { label: 'Gate and spotter labor overhead', value: '$2M+' },
-        { label: 'Peak season surge inefficiency', value: '$1M+' },
-      ],
-      urgencyDriver: 'Clif Bar acquisition ($2.9B, June 2022):',
-    },
-    {
-      type: 'solution',
-      sectionLabel: 'The Fix',
-      headline: 'One protocol across every Mondelez International yard',
-      narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
-      modules: [
-        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Mondelez International\'s facility network.' },
-        { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Mondelez International\'s facility network.' },
-        { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Mondelez International\'s facility network.' },
-        { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Mondelez International\'s facility network.' },
-      ],
-      accountFit: 'Claudio built his reputation on the **North America turnaround** — taking underperforming supply chain operations and elevating them to best-in-class. Yard management is exactly the type of **unsexy but high-impact operational lever** that turnaround leaders love: - It\'s measurable (truck turn times, dock utilization, trailer dwell) - It\'s fast to implement (weeks, not years) - It compounds across',
-    },
-    {
-      type: 'proof',
-      sectionLabel: 'Proof from Live Deployment',
-      headline: 'Running today across 24 facilities',
-      blocks: [
-        {
-          type: 'metric',
-          stats: [
-            { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable food & beverage operations' },
-            { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
-            { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
-            { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at food & beverage facilities' },
-          ],
-        },
-        {
-          type: 'quote',
-          quote: {
-            text: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office. That was an integral part of our strategy and has been proven.',
-            role: 'Operations Director',
-            company: 'National CPG/Beverage Manufacturer',
-          },
-        },
-      ],
-    },
-    {
-      type: 'network-map',
-      sectionLabel: 'Your Network',
-      headline: 'Mondelez International\'s yard network at scale',
-      narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
-      facilityCount: '130+',
-      facilityTypes: ['Manufacturing Plants', 'Distribution Centers'],
-      geographicSpread: 'North America',
-      dailyTrailerMoves: '1,000+ across the network',
-    },
-    {
-      type: 'roi',
-      sectionLabel: 'The Business Case',
-      headline: 'Conservative ROI model for Mondelez International',
-      narrative: 'Based on measured YardFlow improvements at comparable operations.',
-      roiLines: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
-        { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
-        { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
-        { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
-      ],
-      totalAnnualSavings: '$10M-$15M across the network',
-      paybackPeriod: '< 6 months',
-      methodology: 'Based on measured results at 24 live facilities extrapolated to Mondelez International facility count and operational profile.',
-    },
-    {
-      type: 'testimonial',
-      sectionLabel: 'From an Operator Who Runs It',
-      quote: 'We believe system-driven dock door assignment will be a valuable next step for dock office optimization.',
-      role: 'Operations Director',
-      company: 'National CPG/Beverage Manufacturer',
-      context: 'After 12 months of full YardFlow deployment across their facility network.',
-    },
-    {
-      type: 'cta',
-      cta: {
-        type: 'meeting',
-        headline: 'See what a standardized yard network looks like for Mondelez International',
-        subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-      },
-      closingLine: 'One conversation. Your yard network. A clear path to $10M-$15M in annual savings.',
-    },
-  ],
+  sections: [],
 
   people: [
     {
@@ -215,15 +219,6 @@ export const mondelezInternational: AccountMicrositeData = {
         subheadline: 'Claudio built his reputation on the **North America turnaround** — taking underperforming supply chain operations and elevating them to best-in-class. Yard management is exactly the type of **unsexy but high-impact operational lever** that turnaround leaders love: - It\'s measurable (truck turn times, dock utilization, trailer dwell) - It\'s fast to implement (weeks, not years) - It compounds across',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'meeting',
-        headline: 'Claudio, let\'s walk your yard network',
-        subtext: '30-minute conversation about Mondelez International\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-        personName: 'Claudio',
-        personContext: 'Clif Bar acquisition ($2.9B, June 2022):',
-      },
 
       toneShift: 'Strategic, board-level. Reference Claudio\'s mandate and transformation context. Lead with outcomes and business impact, not features.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],

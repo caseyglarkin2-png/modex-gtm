@@ -1,51 +1,57 @@
 import type { FootnoteData, ROISourceConfidence } from '@/lib/microsites/schema';
 
+const FONT_SANS = 'font-[family-name:var(--font-memo-sans)]';
+const FONT_MONO = 'font-[family-name:var(--font-memo-mono)]';
+
 /**
- * Inline superscript marker for a footnote — `text¹`. The number is
- * assigned by the section renderer (M2.3) which walks all sections,
- * collects footnotes in order of appearance, and passes the resolved
- * `n` here.
+ * Inline numbered marker for a footnote — rendered as a small bracketed
+ * monospace numeral instead of a CSS-default <sup>. Reads as academic
+ * print rather than HTML default. The number is assigned by the section
+ * renderer (M2.3) which walks all sections, collects footnotes in order
+ * of appearance, and passes the resolved `n` here.
  */
 export function FootnoteMarker({ n }: { n: number }) {
   return (
-    <sup className="ml-0.5 align-super text-[0.65em] font-semibold text-[var(--memo-accent,theme(colors.cyan.700))]">
-      <a
-        href={`#fn-${n}`}
-        className="no-underline hover:underline"
-        aria-label={`Footnote ${n}`}
-      >
-        {n}
-      </a>
-    </sup>
+    <a
+      href={`#fn-${n}`}
+      aria-label={`Footnote ${n}`}
+      className={`ml-0.5 inline-block align-baseline text-[0.72em] font-medium tracking-tight text-[var(--memo-accent)] no-underline hover:underline ${FONT_MONO}`}
+    >
+      [{n}]
+    </a>
   );
 }
 
 const CONFIDENCE_LABEL: Record<ROISourceConfidence, string> = {
-  measured: 'Measured',
-  public: 'Public data',
-  estimated: 'Estimated',
-  inferred: 'Inferred',
+  measured: 'measured',
+  public: 'public',
+  estimated: 'estimated',
+  inferred: 'inferred',
 };
 
 const CONFIDENCE_TONE: Record<ROISourceConfidence, string> = {
-  measured: 'border-emerald-300 bg-emerald-50 text-emerald-800',
-  public: 'border-sky-300 bg-sky-50 text-sky-800',
-  estimated: 'border-amber-300 bg-amber-50 text-amber-900',
-  inferred: 'border-slate-300 bg-slate-50 text-slate-700',
+  measured: 'text-emerald-700',
+  public: 'text-slate-600',
+  estimated: 'text-amber-700',
+  inferred: 'text-slate-500',
 };
 
 /**
- * Confidence pill rendered next to each footnote source. Shipping these
- * inline with every claim is one of the trust mechanics of the memo
- * template — readers immediately see whether the underlying data is a
- * measured number, a public-data inference, or a soft estimate.
+ * Confidence tag rendered next to each footnote source. The earlier version
+ * of this badge was a saturated pill (rounded-full with emerald/sky/amber
+ * background fills) — that read as SaaS marketing, not memo. The new
+ * version is a bracketed monospace tag, no background, hairline-tone-only.
+ *
+ * Shipping these inline with every claim is one of the trust mechanics of
+ * the memo template — readers immediately see whether the underlying data
+ * is a measured number, a public-data inference, or a soft estimate.
  */
 export function ConfidenceBadge({ confidence }: { confidence: ROISourceConfidence }) {
   return (
     <span
-      className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider ${CONFIDENCE_TONE[confidence]}`}
+      className={`inline-block text-[10px] uppercase tracking-[0.12em] ${CONFIDENCE_TONE[confidence]} ${FONT_MONO}`}
     >
-      {CONFIDENCE_LABEL[confidence]}
+      [{CONFIDENCE_LABEL[confidence]}]
     </span>
   );
 }
@@ -53,32 +59,37 @@ export function ConfidenceBadge({ confidence }: { confidence: ROISourceConfidenc
 export type NumberedFootnote = FootnoteData & { n: number };
 
 /**
- * Bottom-of-page footnote list for the memo template. The renderer is
- * responsible for collecting unique footnotes from all sections (in order
- * of first appearance) and passing them here numbered. Same numbers
- * reused inline by FootnoteMarker.
+ * Bottom-of-page footnote list for the memo template. Set in the same
+ * sans face as body metadata — footnotes are appendix copy, not
+ * headlines. Same numbers as inline FootnoteMarker.
  */
 export function FootnoteList({ footnotes }: { footnotes: NumberedFootnote[] }) {
   if (footnotes.length === 0) return null;
   return (
     <section
       aria-label="Methodology footnotes"
-      className="mt-12 border-t border-slate-200 pt-6 text-sm text-slate-600"
+      className={`mt-16 border-t border-slate-200 pt-6 text-[13px] leading-[1.55] text-slate-600 ${FONT_SANS}`}
     >
-      <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500">
-        Sources &amp; methodology notes
+      <p
+        className={`mb-4 text-[10px] uppercase tracking-[0.22em] text-slate-500 ${FONT_MONO}`}
+      >
+        Sources
       </p>
-      <ol className="space-y-2.5 font-serif">
+      <ol className="space-y-3">
         {footnotes.map((fn) => (
           <li
             key={fn.id}
             id={`fn-${fn.n}`}
-            className="grid grid-cols-[1.5rem_1fr] gap-x-2 leading-relaxed scroll-mt-24"
+            className="grid grid-cols-[2rem_1fr] gap-x-3 scroll-mt-24"
           >
-            <span className="font-semibold text-slate-700">{fn.n}.</span>
+            <span
+              className={`text-[11px] tracking-tight text-slate-400 ${FONT_MONO}`}
+            >
+              [{fn.n}]
+            </span>
             <div className="space-y-1">
               <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                <span className="font-medium text-slate-800">{fn.source}</span>
+                <span className="text-slate-800">{fn.source}</span>
                 <ConfidenceBadge confidence={fn.confidence} />
               </div>
               {fn.detail ? <p className="text-slate-600">{fn.detail}</p> : null}
@@ -87,7 +98,7 @@ export function FootnoteList({ footnotes }: { footnotes: NumberedFootnote[] }) {
                   href={fn.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block break-all text-xs text-cyan-700 hover:underline"
+                  className="inline-block break-all text-[12px] text-[var(--memo-accent)] hover:underline"
                 >
                   {fn.url}
                 </a>

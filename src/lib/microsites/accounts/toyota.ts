@@ -11,7 +11,154 @@
 
 import type { AccountMicrositeData } from '../schema';
 
-const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
+
+// LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
+/*
+ * [
+ *     {
+ *       type: 'hero',
+ *       headline: 'JIT Precision at Scale — The Yard Is the Execution Layer. That is a yard problem.',
+ *       subheadline: 'The Killer Angle: "Toyota Invented JIT — But Your Yard Still Runs on Paper"',
+ *       accountCallout: 'Toyota - Manufacturing',
+ *       backgroundTheme: 'dark',
+ *       cta: {
+ *         type: 'meeting',
+ *         headline: 'See what a standardized yard network looks like for Toyota',
+ *         subtext: '30-minute walk-through of your facility network with board-ready ROI.',
+ *         buttonLabel: 'Book a Network Audit',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *     },
+ *     {
+ *       type: 'problem',
+ *       sectionLabel: 'The Hidden Constraint',
+ *       headline: 'The yard is where Toyota\'s supply chain math breaks down',
+ *       narrative: 'The Killer Angle: "Toyota Invented JIT — But Your Yard Still Runs on Paper"',
+ *       painPoints: [
+ *         {
+ *           headline: 'JIT Precision at Scale — The Yard Is the Execution Layer',
+ *           description: 'Toyota runs the tightest JIT system in the world — parts inventory at plant is measured in 2-4 hours of production, not days - This means the yard is not a parking lot — it\'s a precision buffer. Every trailer in the yard has a specific dock appointment window, and every minute of delay',
+ *           relevantPeople: ['toyota-nielsen'],
+ *         },
+ *         {
+ *           headline: 'Milkrun Coordination & Supplier Inbound Staging',
+ *           description: 'Toyota\'s milkrun system sends trucks on fixed routes picking up from 5-10 suppliers per run — these trucks arrive at the plant on tight schedules - If a milkrun truck is delayed at the yard gate or can\'t find a dock, it creates a cascading delay across all subsequent supplier pickups - C',
+ *           relevantPeople: ['toyota-nielsen'],
+ *         },
+ *         {
+ *           headline: 'New Facility Buildout (TBMNC Battery Plant)',
+ *           description: 'The $13.9B Liberty, NC battery plant is a greenfield opportunity — yard management design decisions are being made right now - Battery cell production has unique logistics: raw lithium/nickel/cobalt materials inbound, finished battery modules outbound to assembly plants - Hazmat considerations',
+ *           relevantPeople: ['toyota-nielsen'],
+ *         },
+ *         {
+ *           headline: 'Multi-Model / Multi-Powertrain Complexity',
+ *           description: 'Toyota\'s "multi-pathway" electrification strategy means plants now build ICE, hybrid, PHEV, and BEV variants on the same production line - Each powertrain variant requires different components from different suppliers arriving in different sequences - Georgetown alone now builds Camry (8th',
+ *           relevantPeople: ['toyota-nielsen'],
+ *         },
+ *         {
+ *           headline: 'Finished Vehicle Logistics (FVL)',
+ *           description: 'Toyota produces ~1.8M vehicles/year in NA — every one needs to be staged, loaded onto auto haulers, and shipped to ~1,200+ dealers - Finished vehicle yards at assembly plants are separate but adjacent to inbound logistics yards — coordination between the two is critical - Auto hauler drivers f',
+ *           relevantPeople: ['toyota-nielsen'],
+ *         }
+ *       ],
+ *     },
+ *     {
+ *       type: 'stakes',
+ *       sectionLabel: 'What This Costs You',
+ *       headline: 'The math Toyota is not tracking in one place',
+ *       narrative: 'Toyota runs the tightest JIT system in the world — parts inventory at plant is measured in 2-4 hours of production, not days - This means the yard is not a parking lot — it\'s a precision buffer. Every trailer in the yard has a specific dock appointment window, and every minute of delay Meanwhile, toyota\'s milkrun system sends trucks on fixed routes picking up from 5-10 suppliers per run — these trucks arrive at the plant on tight schedules - If a milkrun truck is delayed at the yard gate or can\'t find a dock, it creates a cascading delay across all subsequent supplier pickups - C',
+ *       annualCost: '$5M-$8M in estimated yard-driven inefficiency across the network',
+ *       costBreakdown: [
+ *         { label: 'Carrier detention / demurrage', value: '$2M+' },
+ *         { label: 'Dock contention and turn time excess', value: '$2M+' },
+ *         { label: 'Gate and spotter labor overhead', value: '$2M+' },
+ *         { label: 'Peak season surge inefficiency', value: '$1M+' },
+ *       ],
+ *       urgencyDriver: 'Toyota Battery Manufacturing, North Carolina (TBMNC)',
+ *     },
+ *     {
+ *       type: 'solution',
+ *       sectionLabel: 'The Fix',
+ *       headline: 'One protocol across every Toyota yard',
+ *       narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
+ *       modules: [
+ *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Toyota\'s facility network.' },
+ *         { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Toyota\'s facility network.' },
+ *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Toyota\'s facility network.' },
+ *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Toyota\'s facility network.' },
+ *       ],
+ *       accountFit: '### The Killer Angle: "Toyota Invented JIT — But Your Yard Still Runs on Paper"',
+ *     },
+ *     {
+ *       type: 'proof',
+ *       sectionLabel: 'Proof from Live Deployment',
+ *       headline: 'Running today across 24 facilities',
+ *       blocks: [
+ *         {
+ *           type: 'metric',
+ *           stats: [
+ *             { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable manufacturing operations' },
+ *             { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
+ *             { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+ *             { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at manufacturing facilities' },
+ *           ],
+ *         },
+ *         {
+ *           type: 'quote',
+ *           quote: {
+ *             text: 'When you are running a just-in-time line, the yard is the last mile you cannot afford to lose. YardFlow gave us that visibility and control back.',
+ *             role: 'Operations Director',
+ *             company: 'Major Industrial Manufacturer',
+ *           },
+ *         },
+ *       ],
+ *     },
+ *     {
+ *       type: 'network-map',
+ *       sectionLabel: 'Your Network',
+ *       headline: 'Toyota\'s yard network at scale',
+ *       narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
+ *       facilityCount: '14+',
+ *       facilityTypes: ['Manufacturing Plants', 'Distribution Centers'],
+ *       geographicSpread: 'North America',
+ *       dailyTrailerMoves: '1,000+ across the network',
+ *     },
+ *     {
+ *       type: 'roi',
+ *       sectionLabel: 'The Business Case',
+ *       headline: 'Conservative ROI model for Toyota',
+ *       narrative: 'Based on measured YardFlow improvements at comparable operations.',
+ *       roiLines: [
+ *         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
+ *         { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
+ *         { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
+ *         { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
+ *       ],
+ *       totalAnnualSavings: '$5M-$8M across the network',
+ *       paybackPeriod: '< 6 months',
+ *       methodology: 'Based on measured results at 24 live facilities extrapolated to Toyota facility count and operational profile.',
+ *     },
+ *     {
+ *       type: 'testimonial',
+ *       sectionLabel: 'From an Operator Who Runs It',
+ *       quote: 'The production line does not care why the parts trailer is late. YardFlow makes sure it is never late because of the yard.',
+ *       role: 'Operations Director',
+ *       company: 'Major Industrial Manufacturer',
+ *       context: 'After 12 months of full YardFlow deployment across their facility network.',
+ *     },
+ *     {
+ *       type: 'cta',
+ *       cta: {
+ *         type: 'meeting',
+ *         headline: 'See what a standardized yard network looks like for Toyota',
+ *         subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
+ *         buttonLabel: 'Book a Network Audit',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *       closingLine: 'One conversation. Your yard network. A clear path to $5M-$8M in annual savings.',
+ *     },
+ *   ]
+ */
 
 export const toyota: AccountMicrositeData = {
   slug: 'toyota',
@@ -24,150 +171,7 @@ export const toyota: AccountMicrositeData = {
   pageTitle: 'YardFlow for Toyota - Yard Network Standardization',
   metaDescription: 'How YardFlow eliminates the yard bottleneck across Toyota\'s facility network.',
 
-  sections: [
-    {
-      type: 'hero',
-      headline: 'JIT Precision at Scale — The Yard Is the Execution Layer. That is a yard problem.',
-      subheadline: 'The Killer Angle: "Toyota Invented JIT — But Your Yard Still Runs on Paper"',
-      accountCallout: 'Toyota - Manufacturing',
-      backgroundTheme: 'dark',
-      cta: {
-        type: 'meeting',
-        headline: 'See what a standardized yard network looks like for Toyota',
-        subtext: '30-minute walk-through of your facility network with board-ready ROI.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-      },
-    },
-    {
-      type: 'problem',
-      sectionLabel: 'The Hidden Constraint',
-      headline: 'The yard is where Toyota\'s supply chain math breaks down',
-      narrative: 'The Killer Angle: "Toyota Invented JIT — But Your Yard Still Runs on Paper"',
-      painPoints: [
-        {
-          headline: 'JIT Precision at Scale — The Yard Is the Execution Layer',
-          description: 'Toyota runs the tightest JIT system in the world — parts inventory at plant is measured in 2-4 hours of production, not days - This means the yard is not a parking lot — it\'s a precision buffer. Every trailer in the yard has a specific dock appointment window, and every minute of delay',
-          relevantPeople: ['toyota-nielsen'],
-        },
-        {
-          headline: 'Milkrun Coordination & Supplier Inbound Staging',
-          description: 'Toyota\'s milkrun system sends trucks on fixed routes picking up from 5-10 suppliers per run — these trucks arrive at the plant on tight schedules - If a milkrun truck is delayed at the yard gate or can\'t find a dock, it creates a cascading delay across all subsequent supplier pickups - C',
-          relevantPeople: ['toyota-nielsen'],
-        },
-        {
-          headline: 'New Facility Buildout (TBMNC Battery Plant)',
-          description: 'The $13.9B Liberty, NC battery plant is a greenfield opportunity — yard management design decisions are being made right now - Battery cell production has unique logistics: raw lithium/nickel/cobalt materials inbound, finished battery modules outbound to assembly plants - Hazmat considerations',
-          relevantPeople: ['toyota-nielsen'],
-        },
-        {
-          headline: 'Multi-Model / Multi-Powertrain Complexity',
-          description: 'Toyota\'s "multi-pathway" electrification strategy means plants now build ICE, hybrid, PHEV, and BEV variants on the same production line - Each powertrain variant requires different components from different suppliers arriving in different sequences - Georgetown alone now builds Camry (8th',
-          relevantPeople: ['toyota-nielsen'],
-        },
-        {
-          headline: 'Finished Vehicle Logistics (FVL)',
-          description: 'Toyota produces ~1.8M vehicles/year in NA — every one needs to be staged, loaded onto auto haulers, and shipped to ~1,200+ dealers - Finished vehicle yards at assembly plants are separate but adjacent to inbound logistics yards — coordination between the two is critical - Auto hauler drivers f',
-          relevantPeople: ['toyota-nielsen'],
-        }
-      ],
-    },
-    {
-      type: 'stakes',
-      sectionLabel: 'What This Costs You',
-      headline: 'The math Toyota is not tracking in one place',
-      narrative: 'Toyota runs the tightest JIT system in the world — parts inventory at plant is measured in 2-4 hours of production, not days - This means the yard is not a parking lot — it\'s a precision buffer. Every trailer in the yard has a specific dock appointment window, and every minute of delay Meanwhile, toyota\'s milkrun system sends trucks on fixed routes picking up from 5-10 suppliers per run — these trucks arrive at the plant on tight schedules - If a milkrun truck is delayed at the yard gate or can\'t find a dock, it creates a cascading delay across all subsequent supplier pickups - C',
-      annualCost: '$5M-$8M in estimated yard-driven inefficiency across the network',
-      costBreakdown: [
-        { label: 'Carrier detention / demurrage', value: '$2M+' },
-        { label: 'Dock contention and turn time excess', value: '$2M+' },
-        { label: 'Gate and spotter labor overhead', value: '$2M+' },
-        { label: 'Peak season surge inefficiency', value: '$1M+' },
-      ],
-      urgencyDriver: 'Toyota Battery Manufacturing, North Carolina (TBMNC)',
-    },
-    {
-      type: 'solution',
-      sectionLabel: 'The Fix',
-      headline: 'One protocol across every Toyota yard',
-      narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
-      modules: [
-        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Toyota\'s facility network.' },
-        { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Toyota\'s facility network.' },
-        { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Toyota\'s facility network.' },
-        { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Toyota\'s facility network.' },
-      ],
-      accountFit: '### The Killer Angle: "Toyota Invented JIT — But Your Yard Still Runs on Paper"',
-    },
-    {
-      type: 'proof',
-      sectionLabel: 'Proof from Live Deployment',
-      headline: 'Running today across 24 facilities',
-      blocks: [
-        {
-          type: 'metric',
-          stats: [
-            { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable manufacturing operations' },
-            { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
-            { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
-            { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at manufacturing facilities' },
-          ],
-        },
-        {
-          type: 'quote',
-          quote: {
-            text: 'When you are running a just-in-time line, the yard is the last mile you cannot afford to lose. YardFlow gave us that visibility and control back.',
-            role: 'Operations Director',
-            company: 'Major Industrial Manufacturer',
-          },
-        },
-      ],
-    },
-    {
-      type: 'network-map',
-      sectionLabel: 'Your Network',
-      headline: 'Toyota\'s yard network at scale',
-      narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
-      facilityCount: '14+',
-      facilityTypes: ['Manufacturing Plants', 'Distribution Centers'],
-      geographicSpread: 'North America',
-      dailyTrailerMoves: '1,000+ across the network',
-    },
-    {
-      type: 'roi',
-      sectionLabel: 'The Business Case',
-      headline: 'Conservative ROI model for Toyota',
-      narrative: 'Based on measured YardFlow improvements at comparable operations.',
-      roiLines: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
-        { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
-        { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
-        { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
-      ],
-      totalAnnualSavings: '$5M-$8M across the network',
-      paybackPeriod: '< 6 months',
-      methodology: 'Based on measured results at 24 live facilities extrapolated to Toyota facility count and operational profile.',
-    },
-    {
-      type: 'testimonial',
-      sectionLabel: 'From an Operator Who Runs It',
-      quote: 'The production line does not care why the parts trailer is late. YardFlow makes sure it is never late because of the yard.',
-      role: 'Operations Director',
-      company: 'Major Industrial Manufacturer',
-      context: 'After 12 months of full YardFlow deployment across their facility network.',
-    },
-    {
-      type: 'cta',
-      cta: {
-        type: 'meeting',
-        headline: 'See what a standardized yard network looks like for Toyota',
-        subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-      },
-      closingLine: 'One conversation. Your yard network. A clear path to $5M-$8M in annual savings.',
-    },
-  ],
+  sections: [],
 
   people: [
     {
@@ -214,15 +218,6 @@ export const toyota: AccountMicrositeData = {
         subheadline: '### The Killer Angle: "Toyota Invented JIT — But Your Yard Still Runs on Paper"',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      ctaOverride: {
-        type: 'meeting',
-        headline: 'Chris, let\'s walk your yard network',
-        subtext: '30-minute conversation about Toyota\'s yard operations and where YardFlow fits.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-        personName: 'Chris',
-        personContext: 'Toyota Battery Manufacturing, North Carolina (TBMNC)',
-      },
 
       toneShift: 'Strategic, board-level. Reference Chris\'s mandate and transformation context. Lead with outcomes and business impact, not features.',
       kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],

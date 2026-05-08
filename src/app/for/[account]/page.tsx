@@ -2,24 +2,17 @@ export const dynamic = 'force-dynamic';
 
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import type { MicrositeSection } from '@/lib/microsites/schema';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
-import { getVariantRoutes } from '@/lib/microsites/rules';
-import { materializeMicrositeSections } from '@/lib/microsites/roi';
-import { buildShortOverviewCta, normalizeMicrositeCta } from '@/lib/microsites/cta';
+import { isAccountHandTuned, resolveMemoSections } from '@/lib/microsites/memo-compat';
+import { resolveReader } from '@/lib/microsites/reader-context';
 import { buildPublicShareMetadata } from '@/lib/microsites/share';
-import { MicrositeShell, getMicrositeSectionNavItems } from '@/components/microsites/microsite-shell';
-import { Reveal } from '@/components/microsites/reveal';
-import { MicrositeSectionRenderer } from '@/components/microsites/sections';
+import { buildROIDeepLink } from '@/lib/microsites/roi-deep-link';
+import { MemoShell } from '@/components/microsites/memo-shell';
+import { MemoSectionList } from '@/components/microsites/memo-section';
+import { MemoSoftAction } from '@/components/microsites/memo-soft-action';
 import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
 
-function isHeroSection(section: MicrositeSection): section is Extract<MicrositeSection, { type: 'hero' }> {
-  return section.type === 'hero';
-}
-
-function isProblemSection(section: MicrositeSection): section is Extract<MicrositeSection, { type: 'problem' }> {
-  return section.type === 'problem';
-}
+const PREPARED_DATE = new Date().toISOString().slice(0, 10); // ISO; MemoShell formats display
 
 export async function generateMetadata({
   params,
@@ -34,28 +27,28 @@ export async function generateMetadata({
     description: data.metaDescription,
     pathname: `/for/${account}`,
     imagePath: `/for/${account}/opengraph-image`,
-    imageAlt: `${data.accountName} private field brief with YardFlow network thesis and ROI preview`,
+    imageAlt: `${data.accountName} private field brief — YardFlow Yard Network System analysis`,
   });
 }
 
 export default async function AccountMicrositePage({
   params,
+  searchParams,
 }: {
   params: Promise<{ account: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { account } = await params;
+  const sp = await searchParams;
   const data = getAccountMicrositeData(account);
   if (!data) notFound();
 
-  const sections = materializeMicrositeSections(data, data.sections);
-  const variants = getVariantRoutes(data);
-  const heroSection = sections.find(isHeroSection);
-  const primaryCta = heroSection ? normalizeMicrositeCta(heroSection.cta, data.accountName) : buildShortOverviewCta(data.accountName);
-  const problemSection = sections.find(isProblemSection);
-  const navItems = getMicrositeSectionNavItems(sections);
-  const focusPoints =
-    problemSection?.painPoints.slice(0, 4).map((point) => point.headline) ??
-    ['Dock bottlenecks', 'Trailer staging variance', 'Spotter prioritization', 'Network standardization'];
+  const memoSections = resolveMemoSections(data);
+  const handTuned = isAccountHandTuned(data);
+  const reader = resolveReader(data, sp.p);
+  const facilityFootprint = data.network?.facilityCount
+    ? `${data.network.facilityCount} footprint`
+    : undefined;
 
   return (
     <>
@@ -63,40 +56,26 @@ export default async function AccountMicrositePage({
         accountName={data.accountName}
         accountSlug={data.slug}
         path={`/for/${account}`}
+        personName={reader?.variant.person.name}
+        personSlug={reader?.personSlug}
+        variantSlug={reader?.variant.variantSlug}
       />
-      <MicrositeShell
+      <MemoShell
         accountName={data.accountName}
         accentColor={data.theme?.accentColor}
-        contextLabel={`For ${data.accountName}`}
-        contextDetail={[data.parentBrand, data.tier, `Priority ${data.band}${data.priorityScore ? ` ${data.priorityScore}` : ''}`]
-          .filter(Boolean)
-          .join(' · ')}
-        title={`${data.accountName} yard execution brief`}
-        summary={data.metaDescription}
-        thesis={heroSection?.headline ?? `The yard is the hidden constraint inside ${data.accountName}'s network.`}
-        focusPoints={focusPoints}
-        navItems={navItems}
-        primaryCta={{
-          href: primaryCta.calendarLink ?? '#',
-          label: primaryCta.buttonLabel,
-        }}
-        statusLabel={`${data.band}-Band · ${data.tier}`}
-        variantLinks={variants.map((variant) => ({
-          href: `/for/${account}/${variant.slug}`,
-          label: variant.personName,
-          slug: variant.slug,
-        }))}
+        preparedDate={PREPARED_DATE}
+        title={`Yard execution as a network constraint for ${data.accountName}`}
+        readerEyebrow={reader?.eyebrow}
+        contextDetail={facilityFootprint}
+        authorByline="Casey Larkin · YardFlow by FreightRoll"
+        needsHandTuning={!handTuned}
       >
-        {sections.map((section, i) => (
-          <Reveal key={`${section.type}-${i}`} delayMs={Math.min(i * 90, 360)}>
-            <MicrositeSectionRenderer
-              section={section}
-              sectionId={section.sectionId ?? `${section.type}-${i + 1}`}
-              accentColor={data.theme?.accentColor}
-            />
-          </Reveal>
-        ))}
-      </MicrositeShell>
+        <MemoSectionList sections={memoSections} accentColor={data.theme?.accentColor} />
+        <MemoSoftAction
+          accountName={data.accountName}
+          href={buildROIDeepLink(data, { personSlug: reader?.personSlug })}
+        />
+      </MemoShell>
     </>
   );
 }

@@ -143,16 +143,6 @@ export function resolveMicrositeForPerson(
     });
   }
 
-  // Apply CTA override to CTA sections
-  if (variant.ctaOverride) {
-    sections = sections.map((section) => {
-      if (section.type === 'cta') {
-        return { ...section, cta: variant.ctaOverride } as MicrositeSection;
-      }
-      return section;
-    });
-  }
-
   // Reorder
   sections = applySectionOrder(sections, order);
   sections = materializeMicrositeSections(data, sections);
@@ -160,7 +150,7 @@ export function resolveMicrositeForPerson(
   return {
     variant,
     sections,
-    cta: variant.ctaOverride ?? buildPersonCTA(variant.person, data.accountName),
+    cta: buildPersonCTA(variant.person, data.accountName),
     tone: variant.toneShift,
     kpiLanguage: variant.kpiLanguage,
     person: variant.person,
@@ -219,7 +209,7 @@ export function resolveMicrositeForLane(
 
   return {
     sections,
-    cta: variant?.ctaOverride ?? getDefaultCTAForLane(lane, data.accountName),
+    cta: getDefaultCTAForLane(lane, data.accountName),
     tone: variant?.toneShift ?? DEFAULT_TONE[lane],
     kpiLanguage: variant?.kpiLanguage ?? DEFAULT_KPI_LANGUAGE[lane],
   };
