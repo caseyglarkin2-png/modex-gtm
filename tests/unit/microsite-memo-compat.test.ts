@@ -50,7 +50,14 @@ describe('isMemoSection', () => {
         hypothesis: 'h',
       }),
     ).toBe(true);
-    expect(isMemoSection({ type: 'hero', headline: 'h', subhead: '', body: '', cta: { type: 'audit', headline: 'h', buttonLabel: 'b' } })).toBe(false);
+    expect(
+      isMemoSection({
+        type: 'hero',
+        headline: 'h',
+        subheadline: '',
+        cta: { type: 'audit', headline: 'h', subtext: '', buttonLabel: 'b' },
+      }),
+    ).toBe(false);
   });
 });
 
