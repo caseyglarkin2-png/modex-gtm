@@ -12,6 +12,147 @@ import type { AccountMicrositeData } from '../schema';
 
 const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
+// LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
+/*
+ * [
+ *     {
+ *       type: 'hero',
+ *       headline: 'Kenco manages 100+ warehouses for other companies. Every client yard runs differently. YardFlow is the protocol that standardizes them all.',
+ *       subheadline: 'Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
+ *       accountCallout: 'Kenco Logistics Services - 3PL / Logistics',
+ *       backgroundTheme: 'dark',
+ *       cta: {
+ *         type: 'modex-meeting',
+ *         headline: 'See what a standardized yard network looks like for Kenco Logistics Services',
+ *         subtext: '30-minute walk-through of your facility network with board-ready ROI.',
+ *         buttonLabel: 'Book a Meeting at MODEX',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *     },
+ *     {
+ *       type: 'problem',
+ *       sectionLabel: 'The Hidden Constraint',
+ *       headline: 'The yard is where Kenco Logistics Services\'s supply chain math breaks down',
+ *       narrative: 'Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
+ *       painPoints: [
+ *         {
+ *           headline: 'Contract logistics means managing 100 different yard protocols for 100 different clients',
+ *           description: 'Kenco operates warehouses and DCs for dozens of different shippers, each with different carrier requirements, dock door preferences, and yard rules. The operational complexity is not the warehouse. It is the yard outside the warehouse, multiplied by every client contract.',
+ *           kpiImpact: 'Yard protocol fragmentation across 100+ client-operated facilities',
+ *           relevantPeople: ['kenco-logistics-services-montgomery', 'kenco-logistics-services-weber'],
+ *         },
+ *         {
+ *           headline: 'Innovation VP is speaking at MODEX, which means Kenco is buying, not browsing',
+ *           description: 'Kristi Montgomery, Kenco\'s VP of Innovation, is a named session speaker at MODEX 2026. When the innovation leader is on stage, the operations team is walking the floor looking for technology to bring back.',
+ *           kpiImpact: 'Highest-quality MODEX signal: named speaker indicates active technology evaluation',
+ *           relevantPeople: ['kenco-logistics-services-montgomery', 'kenco-logistics-services-weber'],
+ *         },
+ *         {
+ *           headline: 'YardFlow as a multi-client yard protocol is a partnership play, not a single sale',
+ *           description: 'If Kenco standardizes on YardFlow across their 100+ managed facilities, every one of their clients gets yard visibility. This is not a single logo sale. It is a distribution channel for YardFlow into dozens of enterprise supply chains.',
+ *           kpiImpact: 'Partnership potential: 1 contract = 100+ facility deployments',
+ *           relevantPeople: ['kenco-logistics-services-montgomery', 'kenco-logistics-services-weber'],
+ *         }
+ *       ],
+ *     },
+ *     {
+ *       type: 'stakes',
+ *       sectionLabel: 'What This Costs You',
+ *       headline: 'The math Kenco Logistics Services is not tracking in one place',
+ *       narrative: 'Kenco operates warehouses and DCs for dozens of different shippers, each with different carrier requirements, dock door preferences, and yard rules. The operational complexity is not the warehouse. It is the yard outside the warehouse, multiplied by every client contract. Meanwhile, kristi Montgomery, Kenco\'s VP of Innovation, is a named session speaker at MODEX 2026. When the innovation leader is on stage, the operations team is walking the floor looking for technology to bring back.',
+ *       annualCost: '$5M-$8M in estimated yard-driven inefficiency across the network',
+ *       costBreakdown: [
+ *         { label: 'Carrier detention / demurrage', value: '$2M+' },
+ *         { label: 'Dock contention and turn time excess', value: '$2M+' },
+ *         { label: 'Gate and spotter labor overhead', value: '$2M+' },
+ *         { label: 'Peak season surge inefficiency', value: '$1M+' },
+ *       ],
+ *       urgencyDriver: 'Named session speaker indicates event involvement.',
+ *     },
+ *     {
+ *       type: 'solution',
+ *       sectionLabel: 'The Fix',
+ *       headline: 'One protocol across every Kenco Logistics Services yard',
+ *       narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
+ *       modules: [
+ *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Kenco Logistics Services\'s facility network.' },
+ *         { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Kenco Logistics Services\'s facility network.' },
+ *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Kenco Logistics Services\'s facility network.' },
+ *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Kenco Logistics Services\'s facility network.' },
+ *       ],
+ *       accountFit: 'Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
+ *     },
+ *     {
+ *       type: 'proof',
+ *       sectionLabel: 'Proof from Live Deployment',
+ *       headline: 'Running today across 24 facilities',
+ *       blocks: [
+ *         {
+ *           type: 'metric',
+ *           stats: [
+ *             { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable 3pl / logistics operations' },
+ *             { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
+ *             { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+ *             { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at 3pl / logistics facilities' },
+ *           ],
+ *         },
+ *         {
+ *           type: 'quote',
+ *           quote: {
+ *             text: 'Our customers see the difference. Carrier check-in went from 45 minutes to under 10. That changes the economics of every load we handle.',
+ *             role: 'Operations Director',
+ *             company: 'National 3PL Provider',
+ *           },
+ *         },
+ *       ],
+ *     },
+ *     {
+ *       type: 'network-map',
+ *       sectionLabel: 'Your Network',
+ *       headline: 'Kenco Logistics Services\'s yard network at scale',
+ *       narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
+ *       facilityCount: '100+',
+ *       facilityTypes: ['Contract Warehouses', 'Distribution Centers', 'Cross-Docks', 'Managed Transportation Hubs'],
+ *       geographicSpread: 'North America',
+ *       dailyTrailerMoves: '5,000+ across the network',
+ *     },
+ *     {
+ *       type: 'roi',
+ *       sectionLabel: 'The Business Case',
+ *       headline: 'Conservative ROI model for Kenco Logistics Services',
+ *       narrative: 'Based on measured YardFlow improvements at comparable operations.',
+ *       roiLines: [
+ *         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
+ *         { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
+ *         { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
+ *         { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
+ *       ],
+ *       totalAnnualSavings: '$5M-$8M across the network',
+ *       paybackPeriod: '< 6 months',
+ *       methodology: 'Based on measured results at 24 live facilities extrapolated to Kenco Logistics Services facility count and operational profile.',
+ *     },
+ *     {
+ *       type: 'testimonial',
+ *       sectionLabel: 'From an Operator Who Runs It',
+ *       quote: 'We went from managing yards on whiteboards to managing them on screens. The difference is not cosmetic. It is operational.',
+ *       role: 'Operations Director',
+ *       company: 'National 3PL Provider',
+ *       context: 'After 12 months of full YardFlow deployment across their facility network.',
+ *     },
+ *     {
+ *       type: 'cta',
+ *       cta: {
+ *         type: 'modex-meeting',
+ *         headline: 'See what a standardized yard network looks like for Kenco Logistics Services',
+ *         subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
+ *         buttonLabel: 'Book a Meeting at MODEX',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *       closingLine: 'One conversation. Your yard network. A clear path to $5M-$8M in annual savings.',
+ *     },
+ *   ]
+ */
+
 export const kencoLogisticsServices: AccountMicrositeData = {
   slug: 'kenco-logistics-services',
   accountName: 'Kenco Logistics Services',
@@ -24,143 +165,7 @@ export const kencoLogisticsServices: AccountMicrositeData = {
   pageTitle: 'YardFlow for Kenco Logistics Services - Yard Network Standardization',
   metaDescription: 'How YardFlow eliminates the yard bottleneck across Kenco Logistics Services\'s facility network.',
 
-  sections: [
-    {
-      type: 'hero',
-      headline: 'Kenco manages 100+ warehouses for other companies. Every client yard runs differently. YardFlow is the protocol that standardizes them all.',
-      subheadline: 'Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
-      accountCallout: 'Kenco Logistics Services - 3PL / Logistics',
-      backgroundTheme: 'dark',
-      cta: {
-        type: 'modex-meeting',
-        headline: 'See what a standardized yard network looks like for Kenco Logistics Services',
-        subtext: '30-minute walk-through of your facility network with board-ready ROI.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-      },
-    },
-    {
-      type: 'problem',
-      sectionLabel: 'The Hidden Constraint',
-      headline: 'The yard is where Kenco Logistics Services\'s supply chain math breaks down',
-      narrative: 'Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
-      painPoints: [
-        {
-          headline: 'Contract logistics means managing 100 different yard protocols for 100 different clients',
-          description: 'Kenco operates warehouses and DCs for dozens of different shippers, each with different carrier requirements, dock door preferences, and yard rules. The operational complexity is not the warehouse. It is the yard outside the warehouse, multiplied by every client contract.',
-          kpiImpact: 'Yard protocol fragmentation across 100+ client-operated facilities',
-          relevantPeople: ['kenco-logistics-services-montgomery', 'kenco-logistics-services-weber'],
-        },
-        {
-          headline: 'Innovation VP is speaking at MODEX, which means Kenco is buying, not browsing',
-          description: 'Kristi Montgomery, Kenco\'s VP of Innovation, is a named session speaker at MODEX 2026. When the innovation leader is on stage, the operations team is walking the floor looking for technology to bring back.',
-          kpiImpact: 'Highest-quality MODEX signal: named speaker indicates active technology evaluation',
-          relevantPeople: ['kenco-logistics-services-montgomery', 'kenco-logistics-services-weber'],
-        },
-        {
-          headline: 'YardFlow as a multi-client yard protocol is a partnership play, not a single sale',
-          description: 'If Kenco standardizes on YardFlow across their 100+ managed facilities, every one of their clients gets yard visibility. This is not a single logo sale. It is a distribution channel for YardFlow into dozens of enterprise supply chains.',
-          kpiImpact: 'Partnership potential: 1 contract = 100+ facility deployments',
-          relevantPeople: ['kenco-logistics-services-montgomery', 'kenco-logistics-services-weber'],
-        }
-      ],
-    },
-    {
-      type: 'stakes',
-      sectionLabel: 'What This Costs You',
-      headline: 'The math Kenco Logistics Services is not tracking in one place',
-      narrative: 'Kenco operates warehouses and DCs for dozens of different shippers, each with different carrier requirements, dock door preferences, and yard rules. The operational complexity is not the warehouse. It is the yard outside the warehouse, multiplied by every client contract. Meanwhile, kristi Montgomery, Kenco\'s VP of Innovation, is a named session speaker at MODEX 2026. When the innovation leader is on stage, the operations team is walking the floor looking for technology to bring back.',
-      annualCost: '$5M-$8M in estimated yard-driven inefficiency across the network',
-      costBreakdown: [
-        { label: 'Carrier detention / demurrage', value: '$2M+' },
-        { label: 'Dock contention and turn time excess', value: '$2M+' },
-        { label: 'Gate and spotter labor overhead', value: '$2M+' },
-        { label: 'Peak season surge inefficiency', value: '$1M+' },
-      ],
-      urgencyDriver: 'Named session speaker indicates event involvement.',
-    },
-    {
-      type: 'solution',
-      sectionLabel: 'The Fix',
-      headline: 'One protocol across every Kenco Logistics Services yard',
-      narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
-      modules: [
-        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Kenco Logistics Services\'s facility network.' },
-        { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Kenco Logistics Services\'s facility network.' },
-        { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Kenco Logistics Services\'s facility network.' },
-        { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Kenco Logistics Services\'s facility network.' },
-      ],
-      accountFit: 'Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
-    },
-    {
-      type: 'proof',
-      sectionLabel: 'Proof from Live Deployment',
-      headline: 'Running today across 24 facilities',
-      blocks: [
-        {
-          type: 'metric',
-          stats: [
-            { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable 3pl / logistics operations' },
-            { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
-            { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
-            { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at 3pl / logistics facilities' },
-          ],
-        },
-        {
-          type: 'quote',
-          quote: {
-            text: 'Our customers see the difference. Carrier check-in went from 45 minutes to under 10. That changes the economics of every load we handle.',
-            role: 'Operations Director',
-            company: 'National 3PL Provider',
-          },
-        },
-      ],
-    },
-    {
-      type: 'network-map',
-      sectionLabel: 'Your Network',
-      headline: 'Kenco Logistics Services\'s yard network at scale',
-      narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
-      facilityCount: '100+',
-      facilityTypes: ['Contract Warehouses', 'Distribution Centers', 'Cross-Docks', 'Managed Transportation Hubs'],
-      geographicSpread: 'North America',
-      dailyTrailerMoves: '5,000+ across the network',
-    },
-    {
-      type: 'roi',
-      sectionLabel: 'The Business Case',
-      headline: 'Conservative ROI model for Kenco Logistics Services',
-      narrative: 'Based on measured YardFlow improvements at comparable operations.',
-      roiLines: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
-        { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
-        { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
-        { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
-      ],
-      totalAnnualSavings: '$5M-$8M across the network',
-      paybackPeriod: '< 6 months',
-      methodology: 'Based on measured results at 24 live facilities extrapolated to Kenco Logistics Services facility count and operational profile.',
-    },
-    {
-      type: 'testimonial',
-      sectionLabel: 'From an Operator Who Runs It',
-      quote: 'We went from managing yards on whiteboards to managing them on screens. The difference is not cosmetic. It is operational.',
-      role: 'Operations Director',
-      company: 'National 3PL Provider',
-      context: 'After 12 months of full YardFlow deployment across their facility network.',
-    },
-    {
-      type: 'cta',
-      cta: {
-        type: 'modex-meeting',
-        headline: 'See what a standardized yard network looks like for Kenco Logistics Services',
-        subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-      },
-      closingLine: 'One conversation. Your yard network. A clear path to $5M-$8M in annual savings.',
-    },
-  ],
+  sections: [],
 
   people: [
     {

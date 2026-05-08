@@ -12,6 +12,147 @@ import type { AccountMicrositeData } from '../schema';
 
 const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
+// LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
+/*
+ * [
+ *     {
+ *       type: 'hero',
+ *       headline: 'Diageo ages whiskey for 12 years, then loses 90 minutes at the dock door. The yard is your shortest aging process.',
+ *       subheadline: 'Beverage flow is time-sensitive and network-heavy; YardFlow story should translate well from Primo.',
+ *       accountCallout: 'Diageo - Food & Beverage',
+ *       backgroundTheme: 'dark',
+ *       cta: {
+ *         type: 'modex-meeting',
+ *         headline: 'See what a standardized yard network looks like for Diageo',
+ *         subtext: '30-minute walk-through of your facility network with board-ready ROI.',
+ *         buttonLabel: 'Book a Meeting at MODEX',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *     },
+ *     {
+ *       type: 'problem',
+ *       sectionLabel: 'The Hidden Constraint',
+ *       headline: 'Diageo ships premium product through yards that run the same way they did a decade ago.',
+ *       narrative: 'Beverage flow is time-sensitive and network-heavy; YardFlow story should translate well from Primo.',
+ *       painPoints: [
+ *         {
+ *           headline: 'High-value spirits shipments sit in untracked yard queues',
+ *           description: 'A trailer of Johnnie Walker or Don Julio can hold $500K+ in product. When that trailer sits in a yard queue with no priority flagging or dock assignment logic, you are parking half a million dollars in the dark.',
+ *           kpiImpact: 'Working capital velocity: $500K+ per trailer sitting in yard without dock assignment',
+ *           relevantPeople: ['diageo-mcintosh-hamilton', 'diageo-reddrick'],
+ *         },
+ *         {
+ *           headline: 'Seasonal demand spikes overwhelm manual yard processes',
+ *           description: 'Holiday season drives 3x throughput at Diageo distribution centers. The yard processes that work at baseline volume collapse under peak load. Gate queues back up, spotters are dispatched by phone calls, and dock turns drop below target.',
+ *           kpiImpact: '15-20% throughput loss during peak season from yard bottleneck',
+ *           relevantPeople: ['diageo-mcintosh-hamilton', 'diageo-reddrick'],
+ *         },
+ *         {
+ *           headline: 'Multi-facility compliance and chain-of-custody gaps',
+ *           description: 'Spirits distribution requires chain-of-custody documentation at every transfer point. Manual yard check-in processes create compliance gaps that the audit team catches months later.',
+ *           kpiImpact: 'Regulatory exposure across 30+ facilities',
+ *           relevantPeople: ['diageo-mcintosh-hamilton', 'diageo-reddrick'],
+ *         }
+ *       ],
+ *     },
+ *     {
+ *       type: 'stakes',
+ *       sectionLabel: 'What This Costs You',
+ *       headline: 'The math Diageo is not tracking in one place',
+ *       narrative: 'A trailer of Johnnie Walker or Don Julio can hold $500K+ in product. When that trailer sits in a yard queue with no priority flagging or dock assignment logic, you are parking half a million dollars in the dark. Meanwhile, holiday season drives 3x throughput at Diageo distribution centers. The yard processes that work at baseline volume collapse under peak load. Gate queues back up, spotters are dispatched by phone calls, and dock turns drop below target.',
+ *       annualCost: '$10M-$15M in estimated yard-driven inefficiency across the network',
+ *       costBreakdown: [
+ *         { label: 'Carrier detention / demurrage', value: '$4M+' },
+ *         { label: 'Dock contention and turn time excess', value: '$3M+' },
+ *         { label: 'Gate and spotter labor overhead', value: '$2M+' },
+ *         { label: 'Peak season surge inefficiency', value: '$1M+' },
+ *       ],
+ *       urgencyDriver: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+ *     },
+ *     {
+ *       type: 'solution',
+ *       sectionLabel: 'The Fix',
+ *       headline: 'One protocol across every Diageo yard',
+ *       narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
+ *       modules: [
+ *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Diageo\'s facility network.' },
+ *         { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Diageo\'s facility network.' },
+ *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Diageo\'s facility network.' },
+ *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Diageo\'s facility network.' },
+ *       ],
+ *       accountFit: 'Beverage flow is time-sensitive and network-heavy; YardFlow story should translate well from Primo.',
+ *     },
+ *     {
+ *       type: 'proof',
+ *       sectionLabel: 'Proof from Live Deployment',
+ *       headline: 'Running today across 24 facilities',
+ *       blocks: [
+ *         {
+ *           type: 'metric',
+ *           stats: [
+ *             { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable food & beverage operations' },
+ *             { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
+ *             { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+ *             { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at food & beverage facilities' },
+ *           ],
+ *         },
+ *         {
+ *           type: 'quote',
+ *           quote: {
+ *             text: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office. That was an integral part of our strategy and has been proven.',
+ *             role: 'Operations Director',
+ *             company: 'National CPG/Beverage Manufacturer',
+ *           },
+ *         },
+ *       ],
+ *     },
+ *     {
+ *       type: 'network-map',
+ *       sectionLabel: 'Your Network',
+ *       headline: 'Diageo\'s yard network at scale',
+ *       narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
+ *       facilityCount: '30+',
+ *       facilityTypes: ['Distilleries', 'Bottling Plants', 'Aging Warehouses', 'Distribution Centers'],
+ *       geographicSpread: 'North America',
+ *       dailyTrailerMoves: '1,500+ across the network',
+ *     },
+ *     {
+ *       type: 'roi',
+ *       sectionLabel: 'The Business Case',
+ *       headline: 'Conservative ROI model for Diageo',
+ *       narrative: 'Based on measured YardFlow improvements at comparable operations.',
+ *       roiLines: [
+ *         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
+ *         { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
+ *         { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
+ *         { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
+ *       ],
+ *       totalAnnualSavings: '$10M-$15M across the network',
+ *       paybackPeriod: '< 6 months',
+ *       methodology: 'Based on measured results at 24 live facilities extrapolated to Diageo facility count and operational profile.',
+ *     },
+ *     {
+ *       type: 'testimonial',
+ *       sectionLabel: 'From an Operator Who Runs It',
+ *       quote: 'We believe system-driven dock door assignment will be a valuable next step for dock office optimization.',
+ *       role: 'Operations Director',
+ *       company: 'National CPG/Beverage Manufacturer',
+ *       context: 'After 12 months of full YardFlow deployment across their facility network.',
+ *     },
+ *     {
+ *       type: 'cta',
+ *       cta: {
+ *         type: 'modex-meeting',
+ *         headline: 'See what a standardized yard network looks like for Diageo',
+ *         subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
+ *         buttonLabel: 'Book a Meeting at MODEX',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *       closingLine: 'One conversation. Your yard network. A clear path to $10M-$15M in annual savings.',
+ *     },
+ *   ]
+ */
+
 export const diageo: AccountMicrositeData = {
   slug: 'diageo',
   accountName: 'Diageo',
@@ -24,143 +165,7 @@ export const diageo: AccountMicrositeData = {
   pageTitle: 'YardFlow for Diageo - Yard Network Standardization',
   metaDescription: 'How YardFlow eliminates the yard bottleneck across Diageo\'s facility network.',
 
-  sections: [
-    {
-      type: 'hero',
-      headline: 'Diageo ages whiskey for 12 years, then loses 90 minutes at the dock door. The yard is your shortest aging process.',
-      subheadline: 'Beverage flow is time-sensitive and network-heavy; YardFlow story should translate well from Primo.',
-      accountCallout: 'Diageo - Food & Beverage',
-      backgroundTheme: 'dark',
-      cta: {
-        type: 'modex-meeting',
-        headline: 'See what a standardized yard network looks like for Diageo',
-        subtext: '30-minute walk-through of your facility network with board-ready ROI.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-      },
-    },
-    {
-      type: 'problem',
-      sectionLabel: 'The Hidden Constraint',
-      headline: 'Diageo ships premium product through yards that run the same way they did a decade ago.',
-      narrative: 'Beverage flow is time-sensitive and network-heavy; YardFlow story should translate well from Primo.',
-      painPoints: [
-        {
-          headline: 'High-value spirits shipments sit in untracked yard queues',
-          description: 'A trailer of Johnnie Walker or Don Julio can hold $500K+ in product. When that trailer sits in a yard queue with no priority flagging or dock assignment logic, you are parking half a million dollars in the dark.',
-          kpiImpact: 'Working capital velocity: $500K+ per trailer sitting in yard without dock assignment',
-          relevantPeople: ['diageo-mcintosh-hamilton', 'diageo-reddrick'],
-        },
-        {
-          headline: 'Seasonal demand spikes overwhelm manual yard processes',
-          description: 'Holiday season drives 3x throughput at Diageo distribution centers. The yard processes that work at baseline volume collapse under peak load. Gate queues back up, spotters are dispatched by phone calls, and dock turns drop below target.',
-          kpiImpact: '15-20% throughput loss during peak season from yard bottleneck',
-          relevantPeople: ['diageo-mcintosh-hamilton', 'diageo-reddrick'],
-        },
-        {
-          headline: 'Multi-facility compliance and chain-of-custody gaps',
-          description: 'Spirits distribution requires chain-of-custody documentation at every transfer point. Manual yard check-in processes create compliance gaps that the audit team catches months later.',
-          kpiImpact: 'Regulatory exposure across 30+ facilities',
-          relevantPeople: ['diageo-mcintosh-hamilton', 'diageo-reddrick'],
-        }
-      ],
-    },
-    {
-      type: 'stakes',
-      sectionLabel: 'What This Costs You',
-      headline: 'The math Diageo is not tracking in one place',
-      narrative: 'A trailer of Johnnie Walker or Don Julio can hold $500K+ in product. When that trailer sits in a yard queue with no priority flagging or dock assignment logic, you are parking half a million dollars in the dark. Meanwhile, holiday season drives 3x throughput at Diageo distribution centers. The yard processes that work at baseline volume collapse under peak load. Gate queues back up, spotters are dispatched by phone calls, and dock turns drop below target.',
-      annualCost: '$10M-$15M in estimated yard-driven inefficiency across the network',
-      costBreakdown: [
-        { label: 'Carrier detention / demurrage', value: '$4M+' },
-        { label: 'Dock contention and turn time excess', value: '$3M+' },
-        { label: 'Gate and spotter labor overhead', value: '$2M+' },
-        { label: 'Peak season surge inefficiency', value: '$1M+' },
-      ],
-      urgencyDriver: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
-    },
-    {
-      type: 'solution',
-      sectionLabel: 'The Fix',
-      headline: 'One protocol across every Diageo yard',
-      narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
-      modules: [
-        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Diageo\'s facility network.' },
-        { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Diageo\'s facility network.' },
-        { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Diageo\'s facility network.' },
-        { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Diageo\'s facility network.' },
-      ],
-      accountFit: 'Beverage flow is time-sensitive and network-heavy; YardFlow story should translate well from Primo.',
-    },
-    {
-      type: 'proof',
-      sectionLabel: 'Proof from Live Deployment',
-      headline: 'Running today across 24 facilities',
-      blocks: [
-        {
-          type: 'metric',
-          stats: [
-            { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable food & beverage operations' },
-            { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
-            { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
-            { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at food & beverage facilities' },
-          ],
-        },
-        {
-          type: 'quote',
-          quote: {
-            text: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office. That was an integral part of our strategy and has been proven.',
-            role: 'Operations Director',
-            company: 'National CPG/Beverage Manufacturer',
-          },
-        },
-      ],
-    },
-    {
-      type: 'network-map',
-      sectionLabel: 'Your Network',
-      headline: 'Diageo\'s yard network at scale',
-      narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
-      facilityCount: '30+',
-      facilityTypes: ['Distilleries', 'Bottling Plants', 'Aging Warehouses', 'Distribution Centers'],
-      geographicSpread: 'North America',
-      dailyTrailerMoves: '1,500+ across the network',
-    },
-    {
-      type: 'roi',
-      sectionLabel: 'The Business Case',
-      headline: 'Conservative ROI model for Diageo',
-      narrative: 'Based on measured YardFlow improvements at comparable operations.',
-      roiLines: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
-        { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
-        { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
-        { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
-      ],
-      totalAnnualSavings: '$10M-$15M across the network',
-      paybackPeriod: '< 6 months',
-      methodology: 'Based on measured results at 24 live facilities extrapolated to Diageo facility count and operational profile.',
-    },
-    {
-      type: 'testimonial',
-      sectionLabel: 'From an Operator Who Runs It',
-      quote: 'We believe system-driven dock door assignment will be a valuable next step for dock office optimization.',
-      role: 'Operations Director',
-      company: 'National CPG/Beverage Manufacturer',
-      context: 'After 12 months of full YardFlow deployment across their facility network.',
-    },
-    {
-      type: 'cta',
-      cta: {
-        type: 'modex-meeting',
-        headline: 'See what a standardized yard network looks like for Diageo',
-        subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
-        buttonLabel: 'Book a Meeting at MODEX',
-        calendarLink: BOOKING_LINK,
-      },
-      closingLine: 'One conversation. Your yard network. A clear path to $10M-$15M in annual savings.',
-    },
-  ],
+  sections: [],
 
   people: [
     {

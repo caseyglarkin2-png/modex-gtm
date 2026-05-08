@@ -14,6 +14,154 @@ import type { AccountMicrositeData } from '../schema';
 
 const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
+// LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
+/*
+ * [
+ *     {
+ *       type: 'hero',
+ *       headline: 'Seasonal Demand Complexity. That is a yard problem.',
+ *       subheadline: 'Dan Poland\'s role as Chief Enterprise Transformation Officer is about finding and scaling operational improvements across the entire company. He\'s not managing day-to-day supply chain anymore — he\'s looking for transformative capabilities that drive measurable performance gains. YardFlow fits this mandate perfectly.',
+ *       accountCallout: 'Campbell\'s - Food & Beverage',
+ *       backgroundTheme: 'dark',
+ *       cta: {
+ *         type: 'meeting',
+ *         headline: 'See what a standardized yard network looks like for Campbell\'s',
+ *         subtext: '30-minute walk-through of your facility network with board-ready ROI.',
+ *         buttonLabel: 'Book a Network Audit',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *     },
+ *     {
+ *       type: 'problem',
+ *       sectionLabel: 'The Hidden Constraint',
+ *       headline: 'The yard is where Campbell\'s\'s supply chain math breaks down',
+ *       narrative: 'Dan Poland\'s role as Chief Enterprise Transformation Officer is about finding and scaling operational improvements across the entire company. He\'s not managing day-to-day supply chain anymore — he\'s looking for transformative capabilities that drive measurable performance gains. YardFlow fits this mandate perfectly.',
+ *       painPoints: [
+ *         {
+ *           headline: 'Seasonal Demand Complexity',
+ *           description: 'Soup season (Oct–Mar) creates massive demand swings — plants and DCs must absorb 2-3x volume surges - Snacks are more year-round but spike around holidays, Super Bowl, summer - Seasonal ramp requires flexible dock scheduling and trailer staging',
+ *           relevantPeople: ['campbell-s-poland'],
+ *         },
+ *         {
+ *           headline: 'Product Mix Complexity',
+ *           description: 'Shelf-stable (canned soup, broth, sauces): high-volume, palletized, heavy - Refrigerated (Rao\'s fresh sauces, noosa yoghurt): temperature-controlled, time-sensitive - Snacks (Goldfish, pretzels, chips): lightweight but bulky, different handling - Baked goods (Pepperidge Farm): frag',
+ *           relevantPeople: ['campbell-s-poland'],
+ *         },
+ *         {
+ *           headline: 'Network Consolidation = More Throughput Pressure',
+ *           description: 'Closing Tualatin and shrinking Jeffersonville means remaining plants must handle MORE volume - Maxton expansion from $150M investment means significantly higher inbound/outbound trailer traffic - Kettle chip capacity increase = more raw material inbound + more finished goods outbound - Every',
+ *           relevantPeople: ['campbell-s-poland'],
+ *         },
+ *         {
+ *           headline: 'Sovos Integration Adds Complexity',
+ *           description: 'Rao\'s premium products flowing through Campbell\'s distribution network - New SKUs, new suppliers, new co-manufacturer shipments to coordinate - Premium brand = premium service level expectations (no detention, no damage)',
+ *           relevantPeople: ['campbell-s-poland'],
+ *         },
+ *         {
+ *           headline: 'Driver Detention Exposure',
+ *           description: '24 plants + DCs + co-manufacturers = massive dock footprint - CPG industry average detention: 1.5–2 hours per stop - At Campbell\'s scale (~$9.6B revenue), even 15 minutes saved per dock turn across the network = millions in carrier cost avoidance and goodwill -',
+ *           relevantPeople: ['campbell-s-poland'],
+ *         }
+ *       ],
+ *     },
+ *     {
+ *       type: 'stakes',
+ *       sectionLabel: 'What This Costs You',
+ *       headline: 'The math Campbell\'s is not tracking in one place',
+ *       narrative: 'Soup season (Oct–Mar) creates massive demand swings — plants and DCs must absorb 2-3x volume surges - Snacks are more year-round but spike around holidays, Super Bowl, summer - Seasonal ramp requires flexible dock scheduling and trailer staging Meanwhile, shelf-stable (canned soup, broth, sauces): high-volume, palletized, heavy - Refrigerated (Rao\'s fresh sauces, noosa yoghurt): temperature-controlled, time-sensitive - Snacks (Goldfish, pretzels, chips): lightweight but bulky, different handling - Baked goods (Pepperidge Farm): frag',
+ *       annualCost: '$10M-$15M in estimated yard-driven inefficiency across the network',
+ *       costBreakdown: [
+ *         { label: 'Carrier detention / demurrage', value: '$4M+' },
+ *         { label: 'Dock contention and turn time excess', value: '$3M+' },
+ *         { label: 'Gate and spotter labor overhead', value: '$2M+' },
+ *         { label: 'Peak season surge inefficiency', value: '$1M+' },
+ *       ],
+ *       urgencyDriver: 'Investment:',
+ *     },
+ *     {
+ *       type: 'solution',
+ *       sectionLabel: 'The Fix',
+ *       headline: 'One protocol across every Campbell\'s yard',
+ *       narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
+ *       modules: [
+ *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Campbell\'s\'s facility network.' },
+ *         { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Campbell\'s\'s facility network.' },
+ *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Campbell\'s\'s facility network.' },
+ *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Campbell\'s\'s facility network.' },
+ *       ],
+ *       accountFit: 'Dan Poland\'s role as **Chief Enterprise Transformation Officer** is about finding and scaling operational improvements across the entire company. He\'s not managing day-to-day supply chain anymore — he\'s looking for **transformative capabilities** that drive measurable performance gains. YardFlow fits this mandate perfectly.',
+ *     },
+ *     {
+ *       type: 'proof',
+ *       sectionLabel: 'Proof from Live Deployment',
+ *       headline: 'Running today across 24 facilities',
+ *       blocks: [
+ *         {
+ *           type: 'metric',
+ *           stats: [
+ *             { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable food & beverage operations' },
+ *             { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
+ *             { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+ *             { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at food & beverage facilities' },
+ *           ],
+ *         },
+ *         {
+ *           type: 'quote',
+ *           quote: {
+ *             text: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office. That was an integral part of our strategy and has been proven.',
+ *             role: 'Operations Director',
+ *             company: 'National CPG/Beverage Manufacturer',
+ *           },
+ *         },
+ *       ],
+ *     },
+ *     {
+ *       type: 'network-map',
+ *       sectionLabel: 'Your Network',
+ *       headline: 'Campbell\'s\'s yard network at scale',
+ *       narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
+ *       facilityCount: '24+',
+ *       facilityTypes: ['Manufacturing Plants', 'Distribution Centers'],
+ *       geographicSpread: 'North America',
+ *       dailyTrailerMoves: '1,000+ across the network',
+ *     },
+ *     {
+ *       type: 'roi',
+ *       sectionLabel: 'The Business Case',
+ *       headline: 'Conservative ROI model for Campbell\'s',
+ *       narrative: 'Based on measured YardFlow improvements at comparable operations.',
+ *       roiLines: [
+ *         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
+ *         { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
+ *         { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
+ *         { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
+ *       ],
+ *       totalAnnualSavings: '$10M-$15M across the network',
+ *       paybackPeriod: '< 6 months',
+ *       methodology: 'Based on measured results at 24 live facilities extrapolated to Campbell\'s facility count and operational profile.',
+ *     },
+ *     {
+ *       type: 'testimonial',
+ *       sectionLabel: 'From an Operator Who Runs It',
+ *       quote: 'We believe system-driven dock door assignment will be a valuable next step for dock office optimization.',
+ *       role: 'Operations Director',
+ *       company: 'National CPG/Beverage Manufacturer',
+ *       context: 'After 12 months of full YardFlow deployment across their facility network.',
+ *     },
+ *     {
+ *       type: 'cta',
+ *       cta: {
+ *         type: 'meeting',
+ *         headline: 'See what a standardized yard network looks like for Campbell\'s',
+ *         subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
+ *         buttonLabel: 'Book a Network Audit',
+ *         calendarLink: BOOKING_LINK,
+ *       },
+ *       closingLine: 'One conversation. Your yard network. A clear path to $10M-$15M in annual savings.',
+ *     },
+ *   ]
+ */
+
 export const campbellS: AccountMicrositeData = {
   slug: 'campbell-s',
   accountName: 'Campbell\'s',
@@ -25,150 +173,7 @@ export const campbellS: AccountMicrositeData = {
   pageTitle: 'YardFlow for Campbell\'s - Yard Network Standardization',
   metaDescription: 'How YardFlow eliminates the yard bottleneck across Campbell\'s\'s facility network.',
 
-  sections: [
-    {
-      type: 'hero',
-      headline: 'Seasonal Demand Complexity. That is a yard problem.',
-      subheadline: 'Dan Poland\'s role as Chief Enterprise Transformation Officer is about finding and scaling operational improvements across the entire company. He\'s not managing day-to-day supply chain anymore — he\'s looking for transformative capabilities that drive measurable performance gains. YardFlow fits this mandate perfectly.',
-      accountCallout: 'Campbell\'s - Food & Beverage',
-      backgroundTheme: 'dark',
-      cta: {
-        type: 'meeting',
-        headline: 'See what a standardized yard network looks like for Campbell\'s',
-        subtext: '30-minute walk-through of your facility network with board-ready ROI.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-      },
-    },
-    {
-      type: 'problem',
-      sectionLabel: 'The Hidden Constraint',
-      headline: 'The yard is where Campbell\'s\'s supply chain math breaks down',
-      narrative: 'Dan Poland\'s role as Chief Enterprise Transformation Officer is about finding and scaling operational improvements across the entire company. He\'s not managing day-to-day supply chain anymore — he\'s looking for transformative capabilities that drive measurable performance gains. YardFlow fits this mandate perfectly.',
-      painPoints: [
-        {
-          headline: 'Seasonal Demand Complexity',
-          description: 'Soup season (Oct–Mar) creates massive demand swings — plants and DCs must absorb 2-3x volume surges - Snacks are more year-round but spike around holidays, Super Bowl, summer - Seasonal ramp requires flexible dock scheduling and trailer staging',
-          relevantPeople: ['campbell-s-poland'],
-        },
-        {
-          headline: 'Product Mix Complexity',
-          description: 'Shelf-stable (canned soup, broth, sauces): high-volume, palletized, heavy - Refrigerated (Rao\'s fresh sauces, noosa yoghurt): temperature-controlled, time-sensitive - Snacks (Goldfish, pretzels, chips): lightweight but bulky, different handling - Baked goods (Pepperidge Farm): frag',
-          relevantPeople: ['campbell-s-poland'],
-        },
-        {
-          headline: 'Network Consolidation = More Throughput Pressure',
-          description: 'Closing Tualatin and shrinking Jeffersonville means remaining plants must handle MORE volume - Maxton expansion from $150M investment means significantly higher inbound/outbound trailer traffic - Kettle chip capacity increase = more raw material inbound + more finished goods outbound - Every',
-          relevantPeople: ['campbell-s-poland'],
-        },
-        {
-          headline: 'Sovos Integration Adds Complexity',
-          description: 'Rao\'s premium products flowing through Campbell\'s distribution network - New SKUs, new suppliers, new co-manufacturer shipments to coordinate - Premium brand = premium service level expectations (no detention, no damage)',
-          relevantPeople: ['campbell-s-poland'],
-        },
-        {
-          headline: 'Driver Detention Exposure',
-          description: '24 plants + DCs + co-manufacturers = massive dock footprint - CPG industry average detention: 1.5–2 hours per stop - At Campbell\'s scale (~$9.6B revenue), even 15 minutes saved per dock turn across the network = millions in carrier cost avoidance and goodwill -',
-          relevantPeople: ['campbell-s-poland'],
-        }
-      ],
-    },
-    {
-      type: 'stakes',
-      sectionLabel: 'What This Costs You',
-      headline: 'The math Campbell\'s is not tracking in one place',
-      narrative: 'Soup season (Oct–Mar) creates massive demand swings — plants and DCs must absorb 2-3x volume surges - Snacks are more year-round but spike around holidays, Super Bowl, summer - Seasonal ramp requires flexible dock scheduling and trailer staging Meanwhile, shelf-stable (canned soup, broth, sauces): high-volume, palletized, heavy - Refrigerated (Rao\'s fresh sauces, noosa yoghurt): temperature-controlled, time-sensitive - Snacks (Goldfish, pretzels, chips): lightweight but bulky, different handling - Baked goods (Pepperidge Farm): frag',
-      annualCost: '$10M-$15M in estimated yard-driven inefficiency across the network',
-      costBreakdown: [
-        { label: 'Carrier detention / demurrage', value: '$4M+' },
-        { label: 'Dock contention and turn time excess', value: '$3M+' },
-        { label: 'Gate and spotter labor overhead', value: '$2M+' },
-        { label: 'Peak season surge inefficiency', value: '$1M+' },
-      ],
-      urgencyDriver: 'Investment:',
-    },
-    {
-      type: 'solution',
-      sectionLabel: 'The Fix',
-      headline: 'One protocol across every Campbell\'s yard',
-      narrative: 'YardFlow replaces the patchwork of local yard practices with a single standardized operating protocol. Same driver journey at every facility. same dock assignment logic. Variance dies. Throughput becomes calculable.',
-      modules: [
-        { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID verification, algorithmic lane direction.', relevanceToAccount: 'Standardizes verify across Campbell\'s\'s facility network.' },
-        { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.', relevanceToAccount: 'Standardizes document across Campbell\'s\'s facility network.' },
-        { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter app for move execution and task queues. No more radio dispatching.', relevanceToAccount: 'Standardizes execute across Campbell\'s\'s facility network.' },
-        { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location, dwell, and lane state.', relevanceToAccount: 'Standardizes map across Campbell\'s\'s facility network.' },
-      ],
-      accountFit: 'Dan Poland\'s role as **Chief Enterprise Transformation Officer** is about finding and scaling operational improvements across the entire company. He\'s not managing day-to-day supply chain anymore — he\'s looking for **transformative capabilities** that drive measurable performance gains. YardFlow fits this mandate perfectly.',
-    },
-    {
-      type: 'proof',
-      sectionLabel: 'Proof from Live Deployment',
-      headline: 'Running today across 24 facilities',
-      blocks: [
-        {
-          type: 'metric',
-          stats: [
-            { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable food & beverage operations' },
-            { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
-            { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
-            { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at food & beverage facilities' },
-          ],
-        },
-        {
-          type: 'quote',
-          quote: {
-            text: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office. That was an integral part of our strategy and has been proven.',
-            role: 'Operations Director',
-            company: 'National CPG/Beverage Manufacturer',
-          },
-        },
-      ],
-    },
-    {
-      type: 'network-map',
-      sectionLabel: 'Your Network',
-      headline: 'Campbell\'s\'s yard network at scale',
-      narrative: 'Every one of these facilities runs its own yard protocol today. Different gate processes, different spotter dispatch methods, different tribal knowledge. YardFlow gives you one standard across all of them.',
-      facilityCount: '24+',
-      facilityTypes: ['Manufacturing Plants', 'Distribution Centers'],
-      geographicSpread: 'North America',
-      dailyTrailerMoves: '1,000+ across the network',
-    },
-    {
-      type: 'roi',
-      sectionLabel: 'The Business Case',
-      headline: 'Conservative ROI model for Campbell\'s',
-      narrative: 'Based on measured YardFlow improvements at comparable operations.',
-      roiLines: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
-        { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
-        { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
-        { label: 'Dock utilization', before: '65%', after: '85%', delta: '+20 pts', unit: 'utilization' },
-      ],
-      totalAnnualSavings: '$10M-$15M across the network',
-      paybackPeriod: '< 6 months',
-      methodology: 'Based on measured results at 24 live facilities extrapolated to Campbell\'s facility count and operational profile.',
-    },
-    {
-      type: 'testimonial',
-      sectionLabel: 'From an Operator Who Runs It',
-      quote: 'We believe system-driven dock door assignment will be a valuable next step for dock office optimization.',
-      role: 'Operations Director',
-      company: 'National CPG/Beverage Manufacturer',
-      context: 'After 12 months of full YardFlow deployment across their facility network.',
-    },
-    {
-      type: 'cta',
-      cta: {
-        type: 'meeting',
-        headline: 'See what a standardized yard network looks like for Campbell\'s',
-        subtext: 'We map your top 3 facilities, identify the throughput constraint, and build a board-ready rollout plan.',
-        buttonLabel: 'Book a Network Audit',
-        calendarLink: BOOKING_LINK,
-      },
-      closingLine: 'One conversation. Your yard network. A clear path to $10M-$15M in annual savings.',
-    },
-  ],
+  sections: [],
 
   people: [
     {
