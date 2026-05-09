@@ -3,6 +3,16 @@ import { withSentryConfig } from "@sentry/nextjs";
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ['127.0.0.1', 'localhost'],
+  // yardflow.ai (flow-state-site) rewrites /for/* and /proposal/* to this app,
+  // but does NOT rewrite /_next/* — so without an absolute assetPrefix the
+  // browser would request CSS/JS/fonts from yardflow.ai and 404. Pinning
+  // assets to the canonical modex-gtm.vercel.app origin lets the browser fetch
+  // them directly. CORS is open on Vercel static assets; the corresponding
+  // CSP allowance lives in flow-state-site's next.config.js.
+  assetPrefix:
+    process.env.VERCEL_ENV === 'production'
+      ? 'https://modex-gtm.vercel.app'
+      : undefined,
   async redirects() {
     return [
       // IA consolidation Sprint B: satellite pages absorbed into Content Studio tabs.
