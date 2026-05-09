@@ -1,6 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { MemoSectionList, collectFootnotes } from '@/components/microsites/memo-section';
+import {
+  MemoSectionList,
+  MemoFootnotes,
+  buildTocEntries,
+  collectFootnotes,
+} from '@/components/microsites/memo-section';
 import type {
   ObservationSection,
   ComparableSection,
@@ -77,7 +82,7 @@ describe('collectFootnotes', () => {
 });
 
 describe('MemoSectionList', () => {
-  it('renders all 5 memo section types and the footnote list at the bottom', () => {
+  it('renders all 5 memo section types (sections only — footnotes split out in M8)', () => {
     render(<MemoSectionList sections={[ynsThesis, observation, comparable, methodology, about]} />);
 
     // YNS thesis
@@ -89,11 +94,14 @@ describe('MemoSectionList', () => {
     expect(screen.getByText('Primo Brands')).toBeDefined();
     // Methodology
     expect(screen.getByText('How this analysis was built')).toBeDefined();
-    // About
-    expect(screen.getByText(/About this analysis/i)).toBeDefined();
+    // About — eyebrow is "Author", H2 is "About this analysis".
+    expect(screen.getByText(/^About this analysis$/i)).toBeDefined();
     expect(screen.getByText('casey@freightroll.com')).toBeDefined();
-    // Footnote list
-    expect(screen.getByText(/^Sources$/i)).toBeDefined();
+  });
+
+  it('does NOT render the FootnoteList (split into MemoFootnotes in M8)', () => {
+    render(<MemoSectionList sections={[ynsThesis, observation, comparable, methodology, about]} />);
+    expect(screen.queryByText(/^Sources$/i)).toBeNull();
   });
 
   it('inlines a FootnoteMarker where [^id] tokens appear in body text', () => {
@@ -102,9 +110,34 @@ describe('MemoSectionList', () => {
     const marker = screen.getByLabelText(/Footnote 1/i);
     expect(marker.getAttribute('href')).toBe('#fn-1');
   });
+});
 
-  it('omits the FootnoteList block when no sections carry footnotes', () => {
-    render(<MemoSectionList sections={[about]} />);
+describe('MemoFootnotes', () => {
+  it('renders the Sources block when sections carry footnotes', () => {
+    render(<MemoFootnotes sections={[observation]} />);
+    expect(screen.getByText(/^Sources$/i)).toBeDefined();
+  });
+
+  it('omits the block entirely when no sections carry footnotes', () => {
+    render(<MemoFootnotes sections={[about]} />);
     expect(screen.queryByText(/^Sources$/i)).toBeNull();
+  });
+});
+
+describe('buildTocEntries', () => {
+  it('produces one entry per section, in order, with the §-numbered prefix', () => {
+    const entries = buildTocEntries([ynsThesis, observation, comparable, methodology, about]);
+    expect(entries).toHaveLength(5);
+    expect(entries.map((e) => e.num)).toEqual(['§01', '§02', '§03', '§04', '§05']);
+    expect(entries[0].label).toBe('The thesis');
+    expect(entries[2].label).toBe('Comparable');
+    expect(entries[4].label).toBe('Author');
+  });
+
+  it('uses section.sectionId when set, otherwise falls back to section.type', () => {
+    const customId: ObservationSection = { ...observation, sectionId: 'where-the-cost-lives' };
+    const entries = buildTocEntries([customId, methodology]);
+    expect(entries[0].id).toBe('where-the-cost-lives');
+    expect(entries[1].id).toBe('methodology');
   });
 });

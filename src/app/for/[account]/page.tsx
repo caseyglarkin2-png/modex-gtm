@@ -8,7 +8,11 @@ import { resolveReader } from '@/lib/microsites/reader-context';
 import { buildPublicShareMetadata } from '@/lib/microsites/share';
 import { buildROIDeepLink } from '@/lib/microsites/roi-deep-link';
 import { MemoShell } from '@/components/microsites/memo-shell';
-import { MemoSectionList } from '@/components/microsites/memo-section';
+import {
+  MemoSectionList,
+  MemoFootnotes,
+  buildTocEntries,
+} from '@/components/microsites/memo-section';
 import { MemoSoftAction } from '@/components/microsites/memo-soft-action';
 import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
 
@@ -49,6 +53,7 @@ export default async function AccountMicrositePage({
   const facilityFootprint = data.network?.facilityCount
     ? `${data.network.facilityCount} footprint`
     : undefined;
+  const tocEntries = buildTocEntries(memoSections);
 
   return (
     <>
@@ -69,12 +74,14 @@ export default async function AccountMicrositePage({
         contextDetail={facilityFootprint}
         authorByline="Casey Larkin · YardFlow by FreightRoll"
         needsHandTuning={!handTuned}
+        tocEntries={tocEntries}
       >
         <MemoSectionList sections={memoSections} accentColor={data.theme?.accentColor} />
         <MemoSoftAction
           accountName={data.accountName}
           href={buildROIDeepLink(data, { personSlug: reader?.personSlug })}
         />
+        <MemoFootnotes sections={memoSections} />
       </MemoShell>
     </>
   );

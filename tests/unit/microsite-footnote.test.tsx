@@ -44,17 +44,17 @@ describe('FootnoteMarker', () => {
 });
 
 describe('ConfidenceBadge', () => {
-  it('renders the bracketed label for each confidence level', () => {
-    // Polish pass replaced saturated rounded pills (Measured / Public data
-    // / Estimated / Inferred) with monospace bracketed lowercase tags.
+  it('renders a colored pip + uppercase label for each confidence level', () => {
+    // M8 redesign — bracketed lowercase tags replaced by colored dot +
+    // small-caps mono label (no brackets). Pip color matches text color.
     const { rerender } = render(<ConfidenceBadge confidence="measured" />);
-    expect(screen.getByText('[measured]')).toBeDefined();
+    expect(screen.getByText('Measured')).toBeDefined();
     rerender(<ConfidenceBadge confidence="public" />);
-    expect(screen.getByText('[public]')).toBeDefined();
+    expect(screen.getByText('Public')).toBeDefined();
     rerender(<ConfidenceBadge confidence="estimated" />);
-    expect(screen.getByText('[estimated]')).toBeDefined();
+    expect(screen.getByText('Estimated')).toBeDefined();
     rerender(<ConfidenceBadge confidence="inferred" />);
-    expect(screen.getByText('[inferred]')).toBeDefined();
+    expect(screen.getByText('Inferred')).toBeDefined();
   });
 });
 

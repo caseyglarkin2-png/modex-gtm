@@ -18,8 +18,19 @@ import {
 } from './footnote';
 import { getMemoAccent } from './memo-theme';
 
+const FONT_SERIF = 'font-[family-name:var(--font-memo-serif)]';
 const FONT_SANS = 'font-[family-name:var(--font-memo-sans)]';
 const FONT_MONO = 'font-[family-name:var(--font-memo-mono)]';
+
+// Section-type → display label for the eyebrow ("§ 01 · OBSERVATION").
+// Kept here (not in the schema module) because it's purely presentational.
+const EYEBROW_LABEL: Record<MemoMicrositeSection['type'], string> = {
+  'yns-thesis': 'The thesis',
+  observation: 'Observation',
+  comparable: 'Comparable',
+  methodology: 'Methodology',
+  about: 'Author',
+};
 
 // ── Footnote collection ───────────────────────────────────────────────
 
@@ -49,8 +60,7 @@ function indexFootnotes(footnotes: NumberedFootnote[]): Record<string, NumberedF
 
 /**
  * Splits paragraph bodies on [^id] tokens and replaces them with inline
- * FootnoteMarker components. Unknown ids are left as raw text — the
- * renderer logs but doesn't crash.
+ * FootnoteMarker components. Unknown ids are left as raw text.
  */
 function renderBodyWithFootnotes(
   body: string,
@@ -77,36 +87,78 @@ function renderBodyWithFootnotes(
   return out;
 }
 
-// ── Section frame: numeral + content ──────────────────────────────────
-//
-// Earlier version: heavy 4px brand-saturated border-l-4 on every section.
-// Replaced with a small two-digit numeral set in the brand accent (the only
-// place per-section color appears) and a hairline rule above the H2. Pulls
-// the eye to the writing, not the chrome.
+// ── Section frame ─────────────────────────────────────────────────────
+
+const SECTION_HEADING_STYLE = {
+  fontVariationSettings: "'opsz' 60, 'SOFT' 50",
+  fontWeight: 380,
+  fontSize: 'clamp(1.5rem, 2.4vw, 1.85rem)',
+  lineHeight: 1.2,
+  letterSpacing: '-0.012em',
+} as const;
 
 function MemoSectionFrame({
   number,
   numeralClass,
   sectionId,
+  eyebrow,
+  heading,
   children,
+  endMark = true,
 }: {
   number: number;
   numeralClass: string;
   sectionId?: string;
+  eyebrow: string;
+  heading: string;
   children: ReactNode;
+  endMark?: boolean;
 }) {
   const formatted = String(number).padStart(2, '0');
   return (
-    <section id={sectionId} className="scroll-mt-24">
+    <section id={sectionId} className="mb-24 scroll-mt-20 last:mb-12">
       <p
-        className={`mb-4 text-[11px] tracking-[0.18em] ${numeralClass} ${FONT_MONO}`}
+        className={`mb-4 flex items-center gap-2.5 text-[10px] uppercase tracking-[0.24em] ${FONT_MONO}`}
       >
-        §{formatted}
+        <span className={`font-medium ${numeralClass}`}>§ {formatted}</span>
+        <span className="text-[#8a847b]">·</span>
+        <span className="tracking-[0.18em] text-[#8a847b]">{eyebrow}</span>
       </p>
+      <h2
+        className={`m-0 mb-7 max-w-[24ch] text-[#1a1a1a] ${FONT_SERIF}`}
+        style={SECTION_HEADING_STYLE}
+      >
+        {heading}
+      </h2>
       {children}
+      {endMark ? (
+        <div className={`mt-12 text-center text-[11px] tracking-[0.4em] text-[#8a847b] ${FONT_MONO}`}>
+          ∎ &nbsp;∎ &nbsp;∎
+        </div>
+      ) : null}
     </section>
   );
 }
+
+/**
+ * Inline aside used for the observation caveat, the thesis's "Aside" beat,
+ * and any inline marginalia. On desktop these will eventually flow into
+ * the right gutter; for now they sit inline as a hairline-bordered block.
+ */
+function MemoAside({ mark, children }: { mark: string; children: ReactNode }) {
+  return (
+    <aside
+      className={`my-5 border-l-2 border-[#a89e8b] bg-[rgba(255,253,247,0.5)] px-4 py-3.5 text-[13px] leading-[1.55] text-[#8a847b] ${FONT_SANS}`}
+    >
+      <p className={`mb-1.5 text-[9.5px] uppercase tracking-[0.18em] text-[#6c9384] ${FONT_MONO}`}>
+        {mark}
+      </p>
+      <div className="space-y-1.5">{children}</div>
+    </aside>
+  );
+}
+
+// ── Section variants ──────────────────────────────────────────────────
 
 function MemoYnsThesis({
   section,
@@ -125,13 +177,14 @@ function MemoYnsThesis({
       number={index}
       numeralClass={accent.numeralClass}
       sectionId={section.sectionId ?? 'yns-thesis'}
+      eyebrow={EYEBROW_LABEL['yns-thesis']}
+      heading={headline}
     >
-      <h2>{headline}</h2>
-      <div className="mt-5 space-y-5">
-        {YNS_THESIS.paragraphs.map((para, i) => (
-          <p key={i}>{renderBodyWithFootnotes(para.body, resolved)}</p>
-        ))}
-      </div>
+      {YNS_THESIS.paragraphs.map((para, i) => (
+        <p key={i} className={i === 0 ? 'memo-lead' : undefined}>
+          {renderBodyWithFootnotes(para.body, resolved)}
+        </p>
+      ))}
     </MemoSectionFrame>
   );
 }
@@ -152,28 +205,39 @@ function MemoObservation({
       number={index}
       numeralClass={accent.numeralClass}
       sectionId={section.sectionId ?? 'observation'}
+      eyebrow={EYEBROW_LABEL['observation']}
+      heading={section.headline}
     >
-      <h2>{section.headline}</h2>
       {section.composition.length > 0 ? (
         <dl
-          className={`mt-5 grid gap-x-8 gap-y-0 text-[14px] sm:grid-cols-2 ${FONT_SANS}`}
+          className={`my-7 border-y border-[#d8d2c2] ${FONT_SANS} text-[13.5px] text-[#4a4641]`}
+          style={{ fontVariantNumeric: 'lining-nums tabular-nums' }}
         >
-          {section.composition.map((row) => (
+          {section.composition.map((row, i) => (
             <div
               key={row.label}
-              className="flex justify-between border-b border-slate-200 py-2.5"
+              className={`grid grid-cols-[1fr_1.4fr] gap-x-5 py-2.5 ${
+                i === 0 ? '' : 'border-t border-[#e8e2d4]'
+              }`}
             >
-              <dt className="text-slate-500">{row.label}</dt>
-              <dd className="font-medium text-slate-800">{row.value}</dd>
+              <dt
+                className="pt-px text-[12.5px] uppercase tracking-[0.08em] text-[#8a847b]"
+                style={{ fontVariationSettings: "'wdth' 95" }}
+              >
+                {row.label}
+              </dt>
+              <dd className="m-0 font-medium text-[#1a1a1a]">{row.value}</dd>
             </div>
           ))}
         </dl>
       ) : null}
-      <p className="mt-6">{renderBodyWithFootnotes(section.hypothesis, resolved)}</p>
+      <p className="memo-lead">
+        {renderBodyWithFootnotes(section.hypothesis, resolved)}
+      </p>
       {section.caveat ? (
-        <p className="mt-4 border-l-2 border-slate-200 pl-4 text-[14.5px] italic leading-relaxed text-slate-500">
-          {section.caveat}
-        </p>
+        <MemoAside mark="Caveat">
+          <p className="m-0">{section.caveat}</p>
+        </MemoAside>
       ) : null}
     </MemoSectionFrame>
   );
@@ -195,42 +259,52 @@ function MemoComparable({
       number={index}
       numeralClass={accent.numeralClass}
       sectionId={section.sectionId ?? 'comparable'}
+      eyebrow={EYEBROW_LABEL['comparable']}
+      heading={section.headline}
     >
-      <h2>{section.headline}</h2>
-      <p className="mt-5">
+      <p className="memo-lead">
         <strong>{section.comparableName}</strong> — {section.comparableProfile}
       </p>
       {section.metrics.length > 0 ? (
         <ul
-          className={`mt-5 divide-y divide-slate-200 border-y border-slate-200 ${FONT_SANS}`}
+          className={`my-7 list-none border-y border-[#d8d2c2] p-0 ${FONT_SANS} text-[13.5px]`}
         >
-          {section.metrics.map((row) => (
+          {section.metrics.map((row, i) => (
             <li
               key={row.label}
-              className="grid grid-cols-[minmax(0,11rem)_1fr_auto] items-baseline gap-x-4 py-3 text-[14.5px]"
+              className={`grid grid-cols-1 gap-x-3 gap-y-1 py-3 sm:grid-cols-[12rem_1fr_6rem] sm:items-center sm:gap-y-0 ${
+                i === 0 ? '' : 'border-t border-[#e8e2d4]'
+              }`}
+              style={{ fontVariantNumeric: 'lining-nums tabular-nums' }}
             >
-              <span className="font-medium text-slate-800">{row.label}</span>
-              <span className="text-slate-500">
-                <span className="text-slate-400">{row.before}</span>
-                <span className="mx-2 text-slate-300">→</span>
-                <span className="text-slate-800">{row.after}</span>
+              <span className="font-medium text-[#1a1a1a]">{row.label}</span>
+              <span className="flex items-baseline gap-2 text-[13px] text-[#8a847b]">
+                <span
+                  className="text-[#8a847b]"
+                  style={{ textDecoration: 'line-through', textDecorationColor: '#a89e8b' }}
+                >
+                  {row.before}
+                </span>
+                <span className={`text-[#a89e8b] ${FONT_MONO}`}>→</span>
+                <span className="font-medium text-[#1a1a1a]">{row.after}</span>
               </span>
               <span
-                className={`text-right text-[10px] uppercase tracking-[0.12em] text-slate-400 ${FONT_MONO}`}
+                className={`text-left text-[10.5px] uppercase tracking-[0.08em] sm:text-right ${FONT_MONO}`}
+                style={{ color: 'var(--memo-accent)' }}
               >
-                [{row.delta}]
+                {row.delta}
               </span>
             </li>
           ))}
         </ul>
       ) : null}
-      <p className="mt-5">
+      <p>
         <strong>Time to first impact.</strong>{' '}
         {renderBodyWithFootnotes(section.timeline, resolved)}
       </p>
       {section.referenceAvailable ? (
-        <p className="mt-3 text-[14px] text-slate-500">
-          A peer call with {section.comparableName}’s team can be arranged when
+        <p className="mt-5 text-[14px] text-[#8a847b]">
+          A peer call with {section.comparableName}&rsquo;s team can be arranged when
           the conversation calls for it.
         </p>
       ) : null}
@@ -252,30 +326,56 @@ function MemoMethodology({
       number={index}
       numeralClass={accent.numeralClass}
       sectionId={section.sectionId ?? 'methodology'}
+      eyebrow={EYEBROW_LABEL['methodology']}
+      heading={section.headline}
     >
-      <h2>{section.headline}</h2>
-      <p className="mt-5">Sources used in this analysis, with confidence levels:</p>
-      <ul className={`mt-5 space-y-4 text-[14.5px] ${FONT_SANS}`}>
-        {section.sources.map((src) => (
-          <li key={src.id} className="space-y-1">
-            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <span className="font-medium text-slate-800">{src.source}</span>
+      <p className="memo-lead">
+        Sources used in this analysis, with confidence levels shipped inline so
+        you can see exactly which claims are anchored in measured data and which
+        are extrapolated from public sources.
+      </p>
+      <ol
+        className={`my-6 list-none p-0 ${FONT_SANS} text-[13.5px] leading-[1.5] text-[#4a4641]`}
+      >
+        {section.sources.map((src, i) => (
+          <li
+            key={src.id}
+            className={`grid grid-cols-1 gap-x-6 gap-y-2 border-[#d8d2c2] py-4 sm:grid-cols-[1.3fr_1fr] ${
+              i === 0 ? 'border-t' : 'border-t border-[#e8e2d4]'
+            } ${i === section.sources.length - 1 ? 'border-b' : ''}`}
+          >
+            <div className="flex flex-col gap-1.5">
+              <span className="text-[13.5px] font-medium text-[#1a1a1a]">{src.source}</span>
               <ConfidenceBadge confidence={src.confidence} />
             </div>
-            {src.detail ? <p className="text-slate-600">{src.detail}</p> : null}
+            {src.detail ? <p className="m-0 text-[#4a4641]">{src.detail}</p> : null}
           </li>
         ))}
-      </ul>
+      </ol>
       {section.unknowns.length > 0 ? (
         <>
-          <h3 className="mt-7">What we don’t know</h3>
+          <h3
+            className={`mt-8 mb-3 text-[1.05rem] text-[#1a1a1a] ${FONT_SERIF}`}
+            style={{ fontVariationSettings: "'opsz' 24, 'SOFT' 50", fontWeight: 480 }}
+          >
+            What we don&rsquo;t know
+          </h3>
           <ul
-            className={`mt-3 space-y-1.5 text-[14.5px] text-slate-600 ${FONT_SANS}`}
+            className={`mt-3 list-none p-0 ${FONT_SANS} text-[13.5px] leading-[1.6] text-[#4a4641]`}
           >
             {section.unknowns.map((u, i) => (
-              <li key={i} className="grid grid-cols-[1.25rem_1fr] gap-x-1">
-                <span className="text-slate-400">·</span>
-                <span>{u}</span>
+              <li
+                key={i}
+                className={`relative py-2 pl-5 ${i === 0 ? '' : 'border-t border-dotted border-[#d8d2c2]'}`}
+              >
+                <span
+                  aria-hidden="true"
+                  className={`absolute left-0 top-2 text-[11px] text-[#8a847b] ${FONT_MONO}`}
+                  style={{ top: i === 0 ? 0 : '0.5rem' }}
+                >
+                  ?
+                </span>
+                {u}
               </li>
             ))}
           </ul>
@@ -299,11 +399,13 @@ function MemoAbout({
       number={index}
       numeralClass={accent.numeralClass}
       sectionId={section.sectionId ?? 'about'}
+      eyebrow={EYEBROW_LABEL['about']}
+      heading={section.headline ?? 'About this analysis'}
+      endMark={false}
     >
-      <h2>{section.headline ?? 'About this analysis'}</h2>
-      <p className="mt-5">{section.authorBio}</p>
+      <p className="memo-lead">{section.authorBio}</p>
       {section.signOff ? <p className="mt-4">{section.signOff}</p> : null}
-      <p className="mt-4 text-[14px] text-slate-500">
+      <p className="mt-6 text-[14px] text-[#8a847b]">
         Reach the author at{' '}
         <a href={`mailto:${section.authorEmail}`}>{section.authorEmail}</a>.
       </p>
@@ -318,6 +420,12 @@ interface MemoSectionListProps {
   accentColor?: string;
 }
 
+/**
+ * Renders the prose body — sections only. The footnote list is no longer
+ * coupled here; the page composes it after the soft action via
+ * <MemoFootnotes sections={...} /> so the order in the document column is
+ * sections → soft action → footnotes → colophon.
+ */
 export function MemoSectionList({ sections, accentColor }: MemoSectionListProps) {
   const accent = getMemoAccent(accentColor);
   const numbered = collectFootnotes(sections);
@@ -366,7 +474,30 @@ export function MemoSectionList({ sections, accentColor }: MemoSectionListProps)
             return <MemoAbout key={i} section={section} index={num} accent={accent} />;
         }
       })}
-      <FootnoteList footnotes={numbered} />
     </>
   );
+}
+
+/**
+ * Bottom-of-page footnotes block. Pulled out of MemoSectionList in the M8
+ * redesign so the page can place a soft action between the sections and the
+ * appendix without splitting the section list around it.
+ */
+export function MemoFootnotes({ sections }: { sections: MemoMicrositeSection[] }) {
+  const numbered = collectFootnotes(sections);
+  return <FootnoteList footnotes={numbered} />;
+}
+
+/**
+ * Build the contents-rail entries from the section list. Same order, same
+ * IDs as the rendered sections — the rail anchors and scrollspy line up.
+ */
+export function buildTocEntries(
+  sections: MemoMicrositeSection[],
+): { id: string; num: string; label: string }[] {
+  return sections.map((s, i) => ({
+    id: s.sectionId ?? s.type,
+    num: `§${String(i + 1).padStart(2, '0')}`,
+    label: EYEBROW_LABEL[s.type],
+  }));
 }
