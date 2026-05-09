@@ -816,7 +816,7 @@ export function buildROISectionFromModel(
 const ROI_STUB_BASE: ROISection = {
   type: 'roi',
   sectionLabel: 'The Business Case',
-  headline: 'Modeled annual value',
+  headline: 'The business case',
   narrative:
     'Engine-backed ROI from the live calculator using the account\'s archetype mix and operating assumptions.',
   roiLines: [],
