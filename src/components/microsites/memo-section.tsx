@@ -518,27 +518,34 @@ export function MemoFootnotes({ sections }: { sections: MemoMicrositeSection[] }
  * Pass `withPreambleFor` to prepend a non-numbered "For {firstName}" entry
  * marked with the reference mark `※`. Use this when a personalized reader
  * has been resolved and a MemoPreamble will render above §01.
+ *
+ * Pass `withAudio` to append a non-numbered "Audio brief" entry marked with
+ * the play indicator `▷`. Use this when a MemoAudioBrief register will
+ * render below the §-numbered sections.
  */
 export function buildTocEntries(
   sections: MemoMicrositeSection[],
-  options?: { withPreambleFor?: string },
+  options?: { withPreambleFor?: string; withAudio?: boolean | { label?: string; id?: string } },
 ): { id: string; num: string; label: string }[] {
-  const base = sections.map((s, i) => ({
+  const entries = sections.map((s, i) => ({
     id: s.sectionId ?? s.type,
     num: `§${String(i + 1).padStart(2, '0')}`,
     label: EYEBROW_LABEL[s.type],
   }));
-  if (options?.withPreambleFor) {
-    return [
-      {
-        id: 'note',
-        num: '※',
-        label: `For ${options.withPreambleFor}`,
-      },
-      ...base,
-    ];
-  }
-  return base;
+  const head = options?.withPreambleFor
+    ? [{ id: 'note', num: '※', label: `For ${options.withPreambleFor}` }]
+    : [];
+  const audio = options?.withAudio;
+  const tail = audio
+    ? [
+        {
+          id: typeof audio === 'object' && audio.id ? audio.id : 'audio',
+          num: '▷',
+          label: typeof audio === 'object' && audio.label ? audio.label : 'Audio brief',
+        },
+      ]
+    : [];
+  return [...head, ...entries, ...tail];
 }
 
 // ── MemoPreamble ──────────────────────────────────────────────────────

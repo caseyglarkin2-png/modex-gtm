@@ -155,6 +155,21 @@ describe('buildTocEntries', () => {
     expect(entries).toHaveLength(1);
     expect(entries[0].num).toBe('§01');
   });
+
+  it('appends an "Audio brief" entry marked ▷ when withAudio is true', () => {
+    const entries = buildTocEntries([ynsThesis, observation], { withAudio: true });
+    expect(entries).toHaveLength(3);
+    expect(entries[2]).toEqual({ id: 'audio', num: '▷', label: 'Audio brief' });
+  });
+
+  it('combines preamble and audio entries when both options are set', () => {
+    const entries = buildTocEntries([ynsThesis, observation], {
+      withPreambleFor: 'Heiko',
+      withAudio: true,
+    });
+    expect(entries).toHaveLength(4);
+    expect(entries.map((e) => e.num)).toEqual(['※', '§01', '§02', '▷']);
+  });
 });
 
 describe('MemoPreamble', () => {
