@@ -91,10 +91,12 @@ export default async function AccountMicrositePage({
         {reader ? <MemoPreamble variant={reader.variant} /> : null}
         <MemoSectionList sections={memoSections} accentColor={data.theme?.accentColor} />
         <MemoAudioBrief
-          src={AUDIO_BRIEF_SRC}
-          chapters={AUDIO_BRIEF_CHAPTERS}
+          src={data.audioBrief?.src ?? AUDIO_BRIEF_SRC}
+          chapters={data.audioBrief?.chapters ?? AUDIO_BRIEF_CHAPTERS}
+          heading={data.audioBrief?.heading}
+          intro={data.audioBrief?.intro}
           accentColor={data.theme?.accentColor}
-          expectedDuration={AUDIO_BRIEF_DURATION}
+          expectedDuration={data.audioBrief ? undefined : AUDIO_BRIEF_DURATION}
         />
         <MemoSoftAction
           accountName={data.accountName}
