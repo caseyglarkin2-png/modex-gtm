@@ -13,9 +13,10 @@ describe('MemoShell', () => {
   it('renders the prepared-date eyebrow + title + author byline', () => {
     render(<MemoShell {...baseProps}><p>body</p></MemoShell>);
     // Polish pass split eyebrow into mono "PRIVATE ANALYSIS" + sans
-    // formatted date "May 8, 2026" — assert the parts independently.
+    // formatted date. The same date now appears in both the header and
+    // the footer, so we use queryAllByText and assert at-least-one match.
     expect(screen.getByText(/Private analysis/i)).toBeDefined();
-    expect(screen.getByText(/May 8, 2026/)).toBeDefined();
+    expect(screen.queryAllByText(/May 8, 2026/).length).toBeGreaterThan(0);
     expect(screen.getByRole('heading', { level: 1 }).textContent).toContain('General Mills');
     expect(screen.getByText('Casey Larkin · YardFlow')).toBeDefined();
   });
