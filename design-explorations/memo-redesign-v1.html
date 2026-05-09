@@ -1,0 +1,1216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Yard execution as a network constraint for Dannon · Private analysis · YardFlow</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,30..100,0..1;1,9..144,300..700,30..100,0..1&family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  /* paper + ink */
+  --paper:        #f5f1e8;          /* warm cream */
+  --paper-tint:   #ebe4d3;          /* slightly darker for cover */
+  --ink:          #1a1a1a;          /* near-black, not pure */
+  --ink-quiet:    #4a4641;          /* secondary text */
+  --ink-faint:    #8a847b;          /* tertiary / metadata */
+  --hairline:     #d8d2c2;          /* warm rule */
+  --hairline-soft:#e8e2d4;
+  --hairline-bold:#a89e8b;
+
+  /* accent — Dannon emerald, used in only ~6 places total */
+  --accent:        #047857;
+  --accent-quiet:  #6c9384;          /* for marginalia echoes */
+  --accent-paper:  #e3ede5;          /* for the active contents-rail bg pip */
+
+  /* fonts */
+  --serif:        'Fraunces', ui-serif, Georgia, 'Times New Roman', serif;
+  --sans:         'Mona Sans', ui-sans-serif, -apple-system, system-ui, sans-serif;
+  --mono:         'JetBrains Mono', ui-monospace, 'SF Mono', 'Menlo', monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-optical-sizing: auto;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  font-feature-settings: 'ss01' 1, 'ss02' 1, 'cv11' 1;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  line-height: 1.55;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ── paper grain (barely perceptible) ─────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+}
+
+/* gutter rule — only on desktop, sits between document and marginalia */
+.gutter-rule {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .gutter-rule {
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--hairline-soft);
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+/* ── Cover spread ────────────────────────────────────────────────── */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255,253,247,0.55) 0%, transparent 60%),
+    var(--paper);
+}
+
+.cover-inner {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 5rem 2rem 6rem;
+  width: 100%;
+  position: relative;
+}
+
+/* classification tag at top of cover */
+.cover-classification {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 6rem;
+  border-bottom: 1px solid var(--hairline);
+  padding-bottom: 1.25rem;
+}
+.cover-classification .pip {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+}
+.cover-classification .draft-mark {
+  margin-left: auto;
+  border: 1px solid var(--hairline-bold);
+  padding: 0.18rem 0.6rem 0.13rem;
+  letter-spacing: 0.18em;
+  color: var(--ink-quiet);
+  background: rgba(255,253,247,0.6);
+}
+
+/* document number / volume */
+.cover-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--ink-faint);
+  letter-spacing: 0.04em;
+  margin-bottom: 4rem;
+}
+.cover-meta-row .doc-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* cover title — the headline */
+.cover-title {
+  font-family: var(--serif);
+  font-variation-settings: 'opsz' 130, 'SOFT' 50, 'WONK' 0;
+  font-weight: 360;
+  font-size: clamp(2.5rem, 5.4vw, 4.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin: 0;
+  max-width: 22ch;
+}
+.cover-title em {
+  font-style: italic;
+  font-variation-settings: 'opsz' 130, 'SOFT' 100, 'WONK' 1;
+  color: var(--accent);
+  font-weight: 380;
+}
+
+/* "Prepared for" block */
+.cover-prepared {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 0 1.5rem;
+  border-top: 1px solid var(--hairline);
+  padding-top: 1.75rem;
+  max-width: 36rem;
+}
+.cover-prepared dt {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding-top: 4px;
+}
+.cover-prepared dd {
+  margin: 0 0 0.85rem 0;
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--ink);
+  letter-spacing: 0.005em;
+}
+.cover-prepared dd em {
+  font-style: normal;
+  color: var(--ink-quiet);
+}
+
+/* "continue" affordance at bottom of cover */
+.cover-continue {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  opacity: 0;
+  animation: fadeIn 1.4s ease 1.6s forwards;
+}
+.cover-continue:hover { color: var(--accent); }
+.cover-continue .arrow {
+  font-size: 14px;
+  animation: nudge 2.5s ease-in-out infinite;
+}
+@keyframes nudge {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(4px); }
+}
+
+/* cover stagger */
+.cover-classification, .cover-meta-row, .cover-title, .cover-prepared {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: rise 0.9s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+}
+.cover-classification { animation-delay: 0.1s; }
+.cover-meta-row       { animation-delay: 0.45s; }
+.cover-title          { animation-delay: 0.7s; animation-duration: 1.1s; }
+.cover-prepared       { animation-delay: 1.15s; }
+
+@keyframes rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* ── Document body ───────────────────────────────────────────────── */
+.doc {
+  position: relative;
+  background: var(--paper);
+  padding: 6rem 0 8rem;
+  border-top: 1px solid var(--hairline);
+}
+
+/* main grid: contents-rail | document column | marginalia
+   on desktop, three-track. on mobile, single column. */
+.doc-grid {
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+@media (min-width: 1024px) {
+  .doc-grid {
+    grid-template-columns: 11rem minmax(0, 36rem) 14rem;
+    gap: 3rem;
+    padding: 0 3rem;
+    justify-content: center;
+  }
+}
+
+/* contents rail (desktop only, position: sticky inside grid track) */
+.toc {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .toc {
+    display: block;
+    position: sticky;
+    top: 4rem;
+    align-self: start;
+    padding-top: 0.5rem;
+    font-family: var(--sans);
+  }
+  .toc-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 1.25rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .toc li {
+    margin-bottom: 0.85rem;
+  }
+  .toc a {
+    display: grid;
+    grid-template-columns: 1.6rem 1fr;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--ink-quiet);
+    font-size: 12.5px;
+    letter-spacing: 0.005em;
+    line-height: 1.35;
+    transition: color 0.2s;
+  }
+  .toc a:hover { color: var(--ink); }
+  .toc a .num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    padding-top: 1px;
+  }
+  .toc a.active {
+    color: var(--accent);
+  }
+  .toc a.active .num {
+    color: var(--accent);
+  }
+  .toc a.active::before {
+    content: '';
+    position: absolute;
+    left: -1rem;
+    width: 2px;
+    height: 1em;
+    background: var(--accent);
+    margin-top: 0.4em;
+  }
+  .toc li {
+    position: relative;
+  }
+}
+
+/* document column */
+.doc-col {
+  font-family: var(--serif);
+  font-variation-settings: 'opsz' 14, 'SOFT' 50;
+  font-size: 17.5px;
+  line-height: 1.72;
+  color: var(--ink-quiet);
+  max-width: 36rem;
+  width: 100%;
+}
+.doc-col p { margin: 0 0 1.15rem; }
+.doc-col strong {
+  font-weight: 540;
+  color: var(--ink);
+  font-variation-settings: 'opsz' 14, 'SOFT' 30;
+}
+
+/* document running header — appears on scroll past cover */
+.doc-runhead {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: rgba(245, 241, 232, 0.92);
+  backdrop-filter: blur(6px) saturate(115%);
+  -webkit-backdrop-filter: blur(6px) saturate(115%);
+  border-bottom: 1px solid var(--hairline-soft);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-quiet);
+  padding: 0.7rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+.doc-runhead.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.doc-runhead .left { display: flex; gap: 0.75rem; align-items: center; }
+.doc-runhead .pip {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent);
+}
+.doc-runhead .right { color: var(--ink-faint); }
+
+/* ── Section ─────────────────────────────────────────────────────── */
+.sec {
+  margin-bottom: 6rem;
+  scroll-margin-top: 5rem;
+  position: relative;
+}
+.sec:last-of-type { margin-bottom: 4rem; }
+
+.sec-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+.sec-eyebrow .num {
+  color: var(--accent);
+  font-weight: 500;
+}
+.sec-eyebrow .dot {
+  color: var(--ink-faint);
+}
+.sec-eyebrow .label {
+  color: var(--ink-faint);
+  letter-spacing: 0.18em;
+}
+
+/* H2 — section title */
+.sec h2 {
+  font-family: var(--serif);
+  font-variation-settings: 'opsz' 60, 'SOFT' 50;
+  font-weight: 380;
+  font-size: clamp(1.5rem, 2.4vw, 1.85rem);
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  margin: 0 0 1.75rem;
+  max-width: 24ch;
+}
+.sec h3 {
+  font-family: var(--serif);
+  font-variation-settings: 'opsz' 24, 'SOFT' 50;
+  font-weight: 480;
+  font-size: 1.05rem;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin: 2rem 0 0.85rem;
+}
+
+/* drop cap — first paragraph after H2 */
+.sec p.lead::first-letter {
+  font-family: var(--serif);
+  font-variation-settings: 'opsz' 144, 'SOFT' 50, 'WONK' 0;
+  font-weight: 320;
+  font-size: 4.4em;
+  line-height: 0.85;
+  float: left;
+  margin: 0.05em 0.12em -0.05em 0;
+  color: var(--ink);
+  padding-top: 0.05em;
+}
+
+/* end-of-section dingbat */
+.sec-end {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  text-align: center;
+  margin: 3rem 0 0;
+  letter-spacing: 0.4em;
+}
+
+/* ── Composition table (Observation §02) ──────────────────────────── */
+.composition {
+  margin: 1.75rem 0 2rem;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  font-family: var(--sans);
+  font-size: 13.5px;
+  color: var(--ink-quiet);
+}
+.composition .row {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 1.25rem;
+  padding: 0.65rem 0;
+  border-top: 1px solid var(--hairline-soft);
+}
+.composition .row:first-child { border-top: none; }
+.composition .row dt {
+  color: var(--ink-faint);
+  font-variation-settings: 'wdth' 95;
+  letter-spacing: 0.005em;
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding-top: 1px;
+}
+.composition .row dd {
+  margin: 0;
+  color: var(--ink);
+  font-weight: 500;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* ── Comparable metrics ladder ────────────────────────────────────── */
+.ladder {
+  margin: 1.75rem 0 1.5rem;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+.ladder .rung {
+  display: grid;
+  grid-template-columns: 12rem 1fr 6rem;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--hairline-soft);
+  font-family: var(--sans);
+  font-size: 13.5px;
+}
+.ladder .rung:first-child { border-top: none; }
+.ladder .rung .label {
+  font-weight: 560;
+  color: var(--ink);
+  letter-spacing: 0.005em;
+}
+.ladder .rung .move {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  color: var(--ink-faint);
+  font-variant-numeric: lining-nums tabular-nums;
+  font-size: 13px;
+}
+.ladder .rung .move .before {
+  color: var(--ink-faint);
+  text-decoration: line-through;
+  text-decoration-color: var(--hairline-bold);
+  text-decoration-thickness: 1px;
+}
+.ladder .rung .move .arrow { color: var(--hairline-bold); font-family: var(--mono); }
+.ladder .rung .move .after { color: var(--ink); font-weight: 540; }
+.ladder .rung .delta {
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* ── Methodology source list ──────────────────────────────────────── */
+.sources {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+}
+.sources > li {
+  border-top: 1px solid var(--hairline-soft);
+  padding: 1rem 0;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 1.5rem;
+  font-family: var(--sans);
+  font-size: 13.5px;
+  color: var(--ink-quiet);
+  line-height: 1.5;
+}
+.sources > li:first-child { border-top: 1px solid var(--hairline); }
+.sources > li:last-child  { border-bottom: 1px solid var(--hairline); }
+.sources .src-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.sources .src-name {
+  font-weight: 560;
+  color: var(--ink);
+  font-size: 13.5px;
+  letter-spacing: 0.005em;
+}
+.confidence {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: max-content;
+}
+.confidence::before {
+  content: '';
+  width: 5px; height: 5px; border-radius: 50%;
+  display: inline-block;
+}
+.confidence.measured  { color: #047857; }
+.confidence.measured::before  { background: #047857; }
+.confidence.public    { color: #4a4641; }
+.confidence.public::before    { background: #4a4641; }
+.confidence.estimated { color: #b45309; }
+.confidence.estimated::before { background: #b45309; }
+.confidence.inferred  { color: #6b7280; }
+.confidence.inferred::before  { background: #6b7280; }
+
+/* "What we don't know" list */
+.unknowns {
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  font-family: var(--sans);
+  font-size: 13.5px;
+  color: var(--ink-quiet);
+  line-height: 1.6;
+}
+.unknowns li {
+  padding: 0.5rem 0 0.5rem 1.25rem;
+  position: relative;
+  border-top: 1px dotted var(--hairline);
+}
+.unknowns li:first-child { border-top: none; padding-top: 0; }
+.unknowns li::before {
+  content: '?';
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+}
+.unknowns li:first-child::before { top: 0; }
+
+/* ── Marginalia (right column on desktop, inlined on mobile) ──────── */
+.marg-col {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .marg-col {
+    display: block;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--ink-faint);
+  }
+  .marg-col aside {
+    margin-bottom: 2.5rem;
+    padding-left: 1rem;
+    border-left: 1px solid var(--hairline);
+    position: sticky;
+    /* asides aren't actually sticky — they flow with the column —
+       but we anchor them with margins to align to the body section */
+  }
+  .marg-col aside .marg-mark {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-quiet);
+    margin: 0 0 0.4rem;
+  }
+  .marg-col aside p {
+    margin: 0 0 0.5rem;
+  }
+}
+
+/* on mobile, render marginalia as inline asides */
+.marg-inline {
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink-faint);
+  margin: 1.25rem 0;
+  padding: 0.85rem 1rem;
+  background: rgba(255,253,247,0.5);
+  border-left: 2px solid var(--hairline-bold);
+}
+.marg-inline .marg-mark {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-quiet);
+  margin: 0 0 0.3rem;
+}
+@media (min-width: 1024px) {
+  .marg-inline { display: none; }
+}
+
+/* footnote markers (inline in body) — small bracketed monospace */
+.fn {
+  font-family: var(--mono);
+  font-size: 0.7em;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+  text-decoration: none;
+  vertical-align: 1px;
+  margin-left: 0.1em;
+}
+.fn:hover { text-decoration: underline; }
+
+/* ── Footnote list at bottom ──────────────────────────────────────── */
+.footnotes {
+  margin: 5rem 0 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--hairline);
+  font-family: var(--sans);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink-quiet);
+}
+.footnotes-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 1.25rem;
+}
+.footnotes ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.footnotes li {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr;
+  gap: 0.75rem;
+  padding: 0.7rem 0;
+  border-top: 1px dotted var(--hairline);
+}
+.footnotes li:first-child { border-top: none; }
+.footnotes .fn-num {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--accent);
+  padding-top: 1px;
+}
+.footnotes a {
+  color: var(--accent);
+  text-decoration: none;
+  word-break: break-word;
+}
+.footnotes a:hover { text-decoration: underline; }
+
+/* ── Closing colophon ─────────────────────────────────────────────── */
+.colophon {
+  margin: 6rem auto 0;
+  max-width: 36rem;
+  padding: 2.5rem 0 0;
+  border-top: 1px solid var(--hairline);
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  line-height: 1.8;
+}
+.colophon .end-mark {
+  font-size: 18px;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+  letter-spacing: 0;
+}
+.colophon a {
+  color: var(--ink-quiet);
+  text-decoration: none;
+  border-bottom: 1px solid var(--hairline);
+  letter-spacing: normal;
+  font-family: var(--sans);
+  font-size: 13px;
+  text-transform: none;
+}
+.colophon a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ── soft action (the "what to do next" beat at the very end) ─────── */
+.soft-action {
+  margin: 4.5rem auto 2rem;
+  max-width: 36rem;
+  font-family: var(--serif);
+  font-variation-settings: 'opsz' 18, 'SOFT' 80;
+  font-size: 1.1rem;
+  line-height: 1.55;
+  font-style: italic;
+  color: var(--ink-quiet);
+  text-align: center;
+  padding: 2.25rem 1rem;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+.soft-action a {
+  font-style: normal;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  font-variation-settings: 'opsz' 14, 'SOFT' 30;
+  font-weight: 480;
+}
+.soft-action a:hover { background: rgba(4,120,87,0.07); }
+
+/* ── small responsive tweaks ──────────────────────────────────────── */
+@media (max-width: 640px) {
+  .cover-inner { padding: 3.5rem 1.5rem 5rem; }
+  .cover-classification { margin-bottom: 4rem; }
+  .cover-meta-row       { margin-bottom: 2.5rem; }
+  .cover-prepared {
+    grid-template-columns: 1fr;
+    gap: 0.25rem 0;
+  }
+  .cover-prepared dt { padding-top: 1rem; }
+  .cover-prepared dt:first-child { padding-top: 0; }
+  .doc { padding: 4rem 0 5rem; }
+  .doc-grid { padding: 0 1.5rem; }
+  .ladder .rung { grid-template-columns: 1fr; gap: 0.25rem; padding: 1rem 0; }
+  .ladder .rung .delta { text-align: left; }
+  .sources > li { grid-template-columns: 1fr; gap: 0.65rem; }
+}
+
+/* selection */
+::selection { background: rgba(4,120,87,0.18); color: var(--ink); }
+
+/* link defaults inside body copy */
+.doc-col a:not(.fn) {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(4,120,87,0.35);
+  transition: border-color 0.2s;
+}
+.doc-col a:not(.fn):hover { border-bottom-color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="gutter-rule" style="left: calc(50% - 1rem);" aria-hidden="true"></div>
+
+<!-- Running header (fades in past cover) -->
+<header class="doc-runhead" id="runhead" aria-hidden="true">
+  <div class="left">
+    <span class="pip"></span>
+    <span>Yard execution as a network constraint</span>
+  </div>
+  <div class="right">Dannon · 5/9/26 · Draft v0</div>
+</header>
+
+<!-- ─────────────────────────── COVER SPREAD ─────────────────────────── -->
+<section class="cover" aria-label="Cover">
+  <div class="cover-inner">
+    <div class="cover-classification">
+      <span class="pip"></span>
+      <span>Private analysis</span>
+      <span style="color: var(--hairline-bold)">·</span>
+      <span>Working memo</span>
+      <span style="color: var(--hairline-bold)">·</span>
+      <span>Not for distribution</span>
+      <span class="draft-mark">Draft · v0</span>
+    </div>
+
+    <div class="cover-meta-row">
+      <span class="doc-num">Memo · 2026-05-09 · YF-DAN-NA-001</span>
+      <span>Casey Larkin · YardFlow by FreightRoll</span>
+    </div>
+
+    <h1 class="cover-title">
+      Yard execution as a <em>network constraint</em> for Dannon.
+    </h1>
+
+    <dl class="cover-prepared">
+      <dt>Prepared for</dt>
+      <dd>Heiko Gerling <em>· Chief Operations Officer, North America</em></dd>
+      <dt>Subject</dt>
+      <dd>Dannon North America · 13-plant production footprint</dd>
+      <dt>Date</dt>
+      <dd>May 9, 2026</dd>
+      <dt>Author</dt>
+      <dd>Casey Larkin <em>· casey@freightroll.com</em></dd>
+    </dl>
+  </div>
+
+  <a href="#thesis" class="cover-continue">
+    <span>Continue</span>
+    <span class="arrow">↓</span>
+  </a>
+</section>
+
+<!-- ─────────────────────────── DOCUMENT BODY ─────────────────────────── -->
+<main class="doc">
+  <div class="doc-grid">
+
+    <!-- Contents rail (desktop only) -->
+    <nav class="toc" aria-label="Memo contents">
+      <p class="toc-label">Contents</p>
+      <ol>
+        <li><a href="#thesis"      data-target="thesis"><span class="num">§01</span><span>The thesis</span></a></li>
+        <li><a href="#observation" data-target="observation"><span class="num">§02</span><span>What we observed about Dannon's network</span></a></li>
+        <li><a href="#comparable"  data-target="comparable"><span class="num">§03</span><span>What a comparable network did</span></a></li>
+        <li><a href="#methodology" data-target="methodology"><span class="num">§04</span><span>How this analysis was built</span></a></li>
+        <li><a href="#about"       data-target="about"><span class="num">§05</span><span>About this analysis</span></a></li>
+      </ol>
+    </nav>
+
+    <!-- Document column -->
+    <article class="doc-col">
+
+      <!-- ─── §01 THESIS ─────────────────────────────────────────── -->
+      <section class="sec" id="thesis">
+        <p class="sec-eyebrow">
+          <span class="num">§ 01</span><span class="dot">·</span><span class="label">The thesis</span>
+        </p>
+        <h2>The yard is the network's most expensive blind spot.</h2>
+
+        <p class="lead">
+          Across multi-site supply chain networks, the gate-to-dock layer is the
+          <strong>last manually coordinated handoff</strong> between trucks, dock doors,
+          and shift schedules. In most networks it still runs on radios, paper, and
+          local convention. The cost shows up in detention spend, dock-office
+          headcount, and shelf life that quietly burns before the case is even picked.<a href="#fn-1" class="fn">[1]</a>
+        </p>
+
+        <p>
+          We call this layer the <strong>Yard Network System (YNS)</strong>. It is to the
+          dock what a TMS is to procurement: a system of record for execution. Most
+          enterprises do not have one. The ones that do tend to recover the
+          investment in under six months because the savings come from labor,
+          carrier accessorials, and throughput at the same time.<a href="#fn-2" class="fn">[2]</a>
+        </p>
+
+        <p>
+          The premise of the brief that follows is straightforward. Dannon's
+          North American network has the structural conditions where the yard
+          layer is the binding constraint on freshness and throughput today.
+          A <em>network-grade YNS</em> closes that gap with a single operating
+          protocol across every facility — not site-by-site reinvention.
+        </p>
+
+        <div class="marg-inline">
+          <p class="marg-mark">Aside</p>
+          <p>"Network-grade" matters here. Single-site YMS deployments routinely show measured improvement, but the savings stay local. Network-grade visibility is what unlocks planning, procurement, and S&amp;OP leverage.</p>
+        </div>
+
+        <div class="sec-end">∎ &nbsp;∎ &nbsp;∎</div>
+      </section>
+
+      <!-- ─── §02 OBSERVATION ────────────────────────────────────── -->
+      <section class="sec" id="observation">
+        <p class="sec-eyebrow">
+          <span class="num">§ 02</span><span class="dot">·</span><span class="label">Observation</span>
+        </p>
+        <h2>What we observed about Dannon North America's network.</h2>
+
+        <dl class="composition">
+          <div class="row"><dt>Production footprint</dt><dd>13 North American facilities</dd></div>
+          <div class="row"><dt>Category mix</dt><dd>Fresh dairy · Plant-based · Medical nutrition · Waters</dd></div>
+          <div class="row"><dt>Temperature profiles</dt><dd>Four zones competing for the same dock surface at multi-category sites</dd></div>
+          <div class="row"><dt>Daily trailer moves</dt><dd>1,000+ across the network</dd></div>
+          <div class="row"><dt>Carrier model</dt><dd>Contract carriers and 3PL — no private fleet</dd></div>
+        </dl>
+
+        <p class="lead">
+          The constraint we keep coming back to is <strong>shelf life</strong>. Fresh dairy
+          and plant-based both run on a 14-day clock, and the clock starts well
+          before the case is picked. When a reefer sits an extra 30–45 minutes in
+          the yard during summer, that time comes out of product life you never
+          get back — and the cost shows up in shrink, service recovery, and
+          carrier scorecards at the same time.<a href="#fn-3" class="fn">[3]</a>
+        </p>
+
+        <p>
+          Underneath that, each plant runs its own gate, dock, and spotter
+          coordination, so the White Plains supply chain team has to stitch a
+          network view from <strong>13 different local routines</strong>. That fragmentation
+          is the part that compounds: the more facilities Dannon runs to a different
+          yard standard, the harder it gets to act on the freshness data once you
+          have it.
+        </p>
+
+        <div class="marg-inline">
+          <p class="marg-mark">Caveat</p>
+          <p>This is what public data and our research surface. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don't match what you see internally on detention spend, dock-zone discipline, or how much the yard layer is already standardized today.</p>
+        </div>
+
+        <div class="sec-end">∎ &nbsp;∎ &nbsp;∎</div>
+      </section>
+
+      <!-- ─── §03 COMPARABLE ─────────────────────────────────────── -->
+      <section class="sec" id="comparable">
+        <p class="sec-eyebrow">
+          <span class="num">§ 03</span><span class="dot">·</span><span class="label">Comparable</span>
+        </p>
+        <h2>What a comparable network did when they closed the same gap.</h2>
+
+        <p class="lead">
+          <strong>Primo Brands</strong> — a multi-site bottling and distribution network with
+          a similar archetype mix: high-volume plants, drop-trailer yards, and
+          refrigerated lanes feeding regional DCs. They deployed YardFlow as the
+          network-yard standardization layer in 2024–2025.<a href="#fn-4" class="fn">[4]</a>
+        </p>
+
+        <div class="ladder">
+          <div class="rung">
+            <span class="label">Avg truck turn time</span>
+            <span class="move">
+              <span class="before">48 min</span>
+              <span class="arrow">→</span>
+              <span class="after">24 min</span>
+            </span>
+            <span class="delta">−50%</span>
+          </div>
+          <div class="rung">
+            <span class="label">Per-site profit impact</span>
+            <span class="move">
+              <span class="before">Pre-deployment</span>
+              <span class="arrow">→</span>
+              <span class="after">$1M+ measured</span>
+            </span>
+            <span class="delta">[Measured]</span>
+          </div>
+          <div class="rung">
+            <span class="label">Dock-office headcount</span>
+            <span class="move">
+              <span class="before">Scaled w/ volume</span>
+              <span class="arrow">→</span>
+              <span class="after">Held flat</span>
+            </span>
+            <span class="delta">[Qualitative]</span>
+          </div>
+          <div class="rung">
+            <span class="label">Network rollout</span>
+            <span class="move">
+              <span class="before">Site-by-site</span>
+              <span class="arrow">→</span>
+              <span class="after">24 live · 200+ contracted</span>
+            </span>
+            <span class="delta">[Measured]</span>
+          </div>
+        </div>
+
+        <p>
+          <strong>Time to first impact.</strong> 30–60 days from kickoff to first measurable
+          impact at the pilot site; full network rollout follows the same protocol
+          with diminishing per-site setup time.
+        </p>
+
+        <p style="font-size: 0.92em; color: var(--ink-faint); margin-top: 1.25rem;">
+          A peer call with Primo Brands' team can be arranged when the conversation
+          calls for it.
+        </p>
+
+        <div class="sec-end">∎ &nbsp;∎ &nbsp;∎</div>
+      </section>
+
+      <!-- ─── §04 METHODOLOGY ────────────────────────────────────── -->
+      <section class="sec" id="methodology">
+        <p class="sec-eyebrow">
+          <span class="num">§ 04</span><span class="dot">·</span><span class="label">Methodology</span>
+        </p>
+        <h2>How this analysis was built.</h2>
+
+        <p class="lead">
+          Sources used in this analysis, with confidence levels shipped inline so
+          you can see exactly which claims are anchored in measured data and which
+          are extrapolated from public sources.
+        </p>
+
+        <ol class="sources">
+          <li>
+            <div class="src-head">
+              <span class="src-name">Dannon North America company overview</span>
+              <span class="confidence public">Public</span>
+            </div>
+            <p>Dannon North America states it operates 13 production facilities. Used as the anchor for facility count and category mix.</p>
+          </li>
+          <li>
+            <div class="src-head">
+              <span class="src-name">ATA + Aberdeen yard-operations benchmarks</span>
+              <span class="confidence public">Public</span>
+            </div>
+            <p>Cross-industry baselines on dock-radio prevalence, dwell-time variance, and detention-cost ranges. Not Dannon-specific — they describe the conditions most multi-site networks operate under.</p>
+          </li>
+          <li>
+            <div class="src-head">
+              <span class="src-name">Primo Brands operating data <em style="color: var(--ink-faint); font-style: normal; font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase;">[under NDA]</em></span>
+              <span class="confidence measured">Measured</span>
+            </div>
+            <p>Post-deployment turn time, dock-office headcount, and per-site profit impact have been shared with us by the Primo CFO and ops team. Specific numbers are referenceable in a peer call.</p>
+          </li>
+        </ol>
+
+        <h3>What we don't know</h3>
+        <ul class="unknowns">
+          <li>Your real detention spend by lane and carrier — we estimate, you measure</li>
+          <li>Spotter and dock-office FTE structure per site, including overtime mix</li>
+          <li>Internal SLAs between plants, DCs, and the Away From Home / retail customers</li>
+          <li>Where temperature-zone misassignment events are concentrated today</li>
+          <li>How much of this layer is already covered by an existing YMS at any of the 13 sites</li>
+        </ul>
+
+        <div class="sec-end">∎ &nbsp;∎ &nbsp;∎</div>
+      </section>
+
+      <!-- ─── §05 ABOUT ──────────────────────────────────────────── -->
+      <section class="sec" id="about">
+        <p class="sec-eyebrow">
+          <span class="num">§ 05</span><span class="dot">·</span><span class="label">About this analysis</span>
+        </p>
+        <h2>About this analysis.</h2>
+
+        <p class="lead">
+          Casey Larkin builds YardFlow at FreightRoll. The brief above is a working
+          analysis, not a sales asset — it is the same shape of memo we would
+          circulate internally before sizing a network engagement. The Mark
+          Shaughnessy intro path is the only outreach lane we are using here;
+          nothing on this page is meant to bypass that.
+        </p>
+
+        <p>
+          If parts of this read wrong against what you see internally for Dannon —
+          particularly the shelf-life math, the four-zone dock contention, or the
+          assumption that the yard layer is still 13 different routines — that's
+          the most useful thing to push back on. The next step that makes sense is
+          whatever the analysis prompts, not necessarily a meeting.
+        </p>
+
+        <p style="font-size: 0.92em; margin-top: 1.5rem;">
+          Reach the author at <a href="mailto:casey@freightroll.com">casey@freightroll.com</a>.
+        </p>
+      </section>
+
+      <!-- ─── Soft action beat ─────────────────────────────────── -->
+      <div class="soft-action">
+        If this is the layer worth looking at — there's a model behind every number above.
+        <br />
+        <a href="#">See the ROI calculation for Dannon →</a>
+      </div>
+
+      <!-- ─── Footnotes ────────────────────────────────────────── -->
+      <section class="footnotes" aria-label="Sources">
+        <p class="footnotes-label">Sources</p>
+        <ol>
+          <li id="fn-1">
+            <span class="fn-num">[1]</span>
+            <div>
+              ATA Foundation, <em>Truck Driver Detention Impacts</em> &amp; Aberdeen Group, <em>Yard Management 2.0</em> (2023). Cross-industry baselines on dwell variance and detention spend. <span class="confidence public">Public</span>
+            </div>
+          </li>
+          <li id="fn-2">
+            <span class="fn-num">[2]</span>
+            <div>
+              YardFlow internal deployment data — 24 live sites, &gt;200 contracted facilities. Per-site profit impact measured against pre-deployment baseline. <span class="confidence measured">Measured</span>
+            </div>
+          </li>
+          <li id="fn-3">
+            <span class="fn-num">[3]</span>
+            <div>
+              IDDBA &amp; FMI fresh-dairy shrink data, cross-referenced against Dannon North America category mix on the company overview page. <a href="https://www.danonenorthamerica.com/about-us/" target="_blank" rel="noopener">danonenorthamerica.com/about-us</a> <span class="confidence public">Public</span>
+            </div>
+          </li>
+          <li id="fn-4">
+            <span class="fn-num">[4]</span>
+            <div>
+              Primo Brands operating data shared under NDA by Primo CFO and ops team during 2024–2025 deployment review cadence. Specific figures referenceable in a peer call. <span class="confidence measured">Measured</span>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ─── Colophon ─────────────────────────────────────────── -->
+      <div class="colophon">
+        <div class="end-mark">§ ∎</div>
+        Dannon · YF-DAN-NA-001 · Issued May 9, 2026<br />
+        Set in Fraunces &amp; Mona Sans · Composed by <a href="mailto:casey@freightroll.com">Casey Larkin</a>
+      </div>
+
+    </article>
+
+    <!-- Marginalia column (desktop only) -->
+    <aside class="marg-col" aria-hidden="true">
+      <!-- Marginalia content is currently mirrored via inline blocks above
+           on mobile. On desktop the inline blocks hide and these flow in. -->
+    </aside>
+
+  </div>
+</main>
+
+<script>
+// ── Running header: show after scrolling past cover ────────────────────
+const runhead = document.getElementById('runhead');
+const cover = document.querySelector('.cover');
+const coverObserver = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    runhead.classList.toggle('show', !e.isIntersecting);
+  });
+}, { threshold: 0.05 });
+coverObserver.observe(cover);
+
+// ── Scrollspy on the contents rail ─────────────────────────────────────
+const sections = document.querySelectorAll('.sec[id]');
+const tocLinks = document.querySelectorAll('.toc a[data-target]');
+const linkByTarget = new Map();
+tocLinks.forEach((a) => linkByTarget.set(a.dataset.target, a));
+
+const spy = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (e.isIntersecting) {
+      tocLinks.forEach((a) => a.classList.remove('active'));
+      const link = linkByTarget.get(e.target.id);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-30% 0px -55% 0px', threshold: 0 });
+sections.forEach((s) => spy.observe(s));
+</script>
+
+</body>
+</html>
