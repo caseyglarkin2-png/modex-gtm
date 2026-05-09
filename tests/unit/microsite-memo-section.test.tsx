@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   MemoSectionList,
   MemoFootnotes,
+  MemoPreamble,
   buildTocEntries,
   collectFootnotes,
 } from '@/components/microsites/memo-section';
@@ -12,6 +13,7 @@ import type {
   MethodologySection,
   AboutSection,
   YnsThesisSection,
+  PersonVariant,
 } from '@/lib/microsites/schema';
 
 const ynsThesis: YnsThesisSection = { type: 'yns-thesis' };
@@ -139,5 +141,75 @@ describe('buildTocEntries', () => {
     const entries = buildTocEntries([customId, methodology]);
     expect(entries[0].id).toBe('where-the-cost-lives');
     expect(entries[1].id).toBe('methodology');
+  });
+
+  it('prepends a non-numbered "For {firstName}" entry when withPreambleFor is set', () => {
+    const entries = buildTocEntries([ynsThesis, observation], { withPreambleFor: 'Heiko' });
+    expect(entries).toHaveLength(3);
+    expect(entries[0]).toEqual({ id: 'note', num: '※', label: 'For Heiko' });
+    expect(entries[1].num).toBe('§01');
+  });
+
+  it('omits the preamble entry when withPreambleFor is undefined', () => {
+    const entries = buildTocEntries([ynsThesis], { withPreambleFor: undefined });
+    expect(entries).toHaveLength(1);
+    expect(entries[0].num).toBe('§01');
+  });
+});
+
+describe('MemoPreamble', () => {
+  const heiko: PersonVariant = {
+    person: {
+      personaId: 'P-001',
+      name: 'Heiko Gerling',
+      firstName: 'Heiko',
+      lastName: 'Gerling',
+      title: 'Chief Operations Officer, North America',
+      company: 'Dannon',
+      email: 'heiko.gerling@danone.com',
+      roleInDeal: 'decision-maker',
+      seniority: 'C-level',
+      function: 'Operations / Supply Chain',
+    },
+    fallbackLane: 'ops',
+    label: 'Heiko Gerling - COO',
+    variantSlug: 'heiko-gerling',
+    framingNarrative:
+      'Heiko, your remit spans manufacturing, logistics, customer service, procurement, and S&OP.',
+    openingHook:
+      'You own the North America operating system. The yard is still the least controlled handoff in it.',
+    stakeStatement:
+      'Fresh dairy does not give the team time to recover from yard mistakes.',
+    toneShift: 'Executive operations language.',
+    kpiLanguage: ['turn time', 'detention'],
+    proofEmphasis: 'Lead with temperature-zone discipline.',
+  };
+
+  it('renders the openingHook as a pull quote and the framingNarrative inline', () => {
+    render(<MemoPreamble variant={heiko} />);
+    expect(screen.getByText(/A note for Heiko/i)).toBeDefined();
+    expect(
+      screen.getByText(
+        /You own the North America operating system\. The yard is still the least controlled handoff in it\./,
+      ),
+    ).toBeDefined();
+    expect(
+      screen.getByText(
+        /Heiko, your remit spans manufacturing, logistics, customer service, procurement, and S&OP\./,
+      ),
+    ).toBeDefined();
+  });
+
+  it('renders the stakeStatement under a "What\'s at stake" eyebrow', () => {
+    render(<MemoPreamble variant={heiko} />);
+    expect(screen.getByText(/what.s at stake/i)).toBeDefined();
+    expect(
+      screen.getByText(/Fresh dairy does not give the team time to recover from yard mistakes\./),
+    ).toBeDefined();
+  });
+
+  it('uses the section id="note" so contents-rail anchors line up', () => {
+    const { container } = render(<MemoPreamble variant={heiko} />);
+    expect(container.querySelector('section#note')).not.toBeNull();
   });
 });

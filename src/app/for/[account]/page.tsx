@@ -11,6 +11,7 @@ import { MemoShell } from '@/components/microsites/memo-shell';
 import {
   MemoSectionList,
   MemoFootnotes,
+  MemoPreamble,
   buildTocEntries,
 } from '@/components/microsites/memo-section';
 import { MemoSoftAction } from '@/components/microsites/memo-soft-action';
@@ -53,7 +54,11 @@ export default async function AccountMicrositePage({
   const facilityFootprint = data.network?.facilityCount
     ? `${data.network.facilityCount} footprint`
     : undefined;
-  const tocEntries = buildTocEntries(memoSections);
+  const readerFirstName =
+    reader?.variant.person.firstName ?? reader?.variant.person.name?.split(' ')[0];
+  const tocEntries = buildTocEntries(memoSections, {
+    withPreambleFor: reader ? readerFirstName : undefined,
+  });
 
   return (
     <>
@@ -76,6 +81,7 @@ export default async function AccountMicrositePage({
         needsHandTuning={!handTuned}
         tocEntries={tocEntries}
       >
+        {reader ? <MemoPreamble variant={reader.variant} /> : null}
         <MemoSectionList sections={memoSections} accentColor={data.theme?.accentColor} />
         <MemoSoftAction
           accountName={data.accountName}

@@ -7,6 +7,7 @@ import {
   type ComparableSection,
   type MethodologySection,
   type AboutSection,
+  type PersonVariant,
 } from '@/lib/microsites/schema';
 import { YNS_THESIS } from '@/lib/microsites/yns-thesis';
 import {
@@ -491,13 +492,98 @@ export function MemoFootnotes({ sections }: { sections: MemoMicrositeSection[] }
 /**
  * Build the contents-rail entries from the section list. Same order, same
  * IDs as the rendered sections — the rail anchors and scrollspy line up.
+ *
+ * Pass `withPreambleFor` to prepend a non-numbered "For {firstName}" entry
+ * marked with the reference mark `※`. Use this when a personalized reader
+ * has been resolved and a MemoPreamble will render above §01.
  */
 export function buildTocEntries(
   sections: MemoMicrositeSection[],
+  options?: { withPreambleFor?: string },
 ): { id: string; num: string; label: string }[] {
-  return sections.map((s, i) => ({
+  const base = sections.map((s, i) => ({
     id: s.sectionId ?? s.type,
     num: `§${String(i + 1).padStart(2, '0')}`,
     label: EYEBROW_LABEL[s.type],
   }));
+  if (options?.withPreambleFor) {
+    return [
+      {
+        id: 'note',
+        num: '※',
+        label: `For ${options.withPreambleFor}`,
+      },
+      ...base,
+    ];
+  }
+  return base;
+}
+
+// ── MemoPreamble ──────────────────────────────────────────────────────
+
+interface MemoPreambleProps {
+  variant: PersonVariant;
+}
+
+/**
+ * Personalized preamble rendered above §01 when ?p=<variant-slug> matches
+ * a known PersonVariant. Reads as a "publisher's note" — italic pull
+ * quote of the openingHook, then the framingNarrative as a body
+ * paragraph, then the stakeStatement set off as a small "what's at stake"
+ * line. Distinct visual character from §01 (no numeric eyebrow, no drop
+ * cap on the framing paragraph) so the universal thesis still leads as
+ * the structural argument.
+ */
+export function MemoPreamble({ variant }: MemoPreambleProps) {
+  const firstName = variant.person.firstName ?? variant.person.name ?? 'you';
+  return (
+    <section id="note" className="mb-24 scroll-mt-20">
+      <p
+        className={`mb-4 flex items-center gap-2.5 text-[10px] uppercase tracking-[0.24em] ${FONT_MONO}`}
+      >
+        <span style={{ color: 'var(--memo-accent)' }}>※</span>
+        <span className="text-[#8a847b]">·</span>
+        <span className="tracking-[0.18em] text-[#8a847b]">A note for {firstName}</span>
+      </p>
+
+      <blockquote
+        className={`m-0 mb-8 max-w-[26ch] border-l-2 border-[#a89e8b] pl-5 text-[#1a1a1a] ${FONT_SERIF}`}
+        style={{
+          fontStyle: 'italic',
+          fontVariationSettings: "'opsz' 36, 'SOFT' 100, 'WONK' 1",
+          fontWeight: 400,
+          fontSize: 'clamp(1.35rem, 2.1vw, 1.6rem)',
+          lineHeight: 1.32,
+          letterSpacing: '-0.005em',
+        }}
+      >
+        &ldquo;{variant.openingHook}&rdquo;
+      </blockquote>
+
+      <p>{variant.framingNarrative}</p>
+
+      <div
+        className={`mt-7 border-t border-[#d8d2c2] pt-5 ${FONT_SANS}`}
+      >
+        <p
+          className={`mb-1.5 text-[9.5px] uppercase tracking-[0.22em] text-[#8a847b] ${FONT_MONO}`}
+        >
+          What&rsquo;s at stake
+        </p>
+        <p
+          className={`m-0 text-[15px] leading-[1.55] text-[#4a4641] ${FONT_SERIF}`}
+          style={{
+            fontStyle: 'italic',
+            fontVariationSettings: "'opsz' 18, 'SOFT' 80",
+          }}
+        >
+          {variant.stakeStatement}
+        </p>
+      </div>
+
+      <div className={`mt-12 text-center text-[11px] tracking-[0.4em] text-[#8a847b] ${FONT_MONO}`}>
+        ∎ &nbsp;∎ &nbsp;∎
+      </div>
+    </section>
+  );
 }
