@@ -1,6 +1,21 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
+/**
+ * Canonical-to-dossier-side slug aliases. Account slugs in modex-gtm don't always
+ * match the loose slugs used in dossier filenames; we look both up at match time.
+ *
+ * - "keurig-dr-pepper" account ↔ dossiers using "kdp"
+ * - "mondelez-international" account ↔ dossiers using "mondelez"
+ *
+ * Add new aliases here when a new dossier convention shows up that doesn't
+ * normalize cleanly to the canonical account slug.
+ */
+export const ACCOUNT_SLUG_ALIASES: Record<string, string[]> = {
+  'keurig-dr-pepper': ['kdp'],
+  'mondelez-international': ['mondelez'],
+};
+
 export interface DossierMatch {
   /** Absolute path to the dossier file. */
   path: string;
@@ -37,7 +52,7 @@ interface CollectDossiersOptions {
  * normalized (lowercase + hyphen-strip) before comparison.
  */
 export async function collectDossiers(opts: CollectDossiersOptions): Promise<CollectDossiersResult> {
-  const target = normalize(opts.accountSlug);
+  const targets = targetCandidates(opts.accountSlug);
   let entries: string[];
   try {
     entries = await readdir(opts.dossiersDir);
@@ -47,7 +62,7 @@ export async function collectDossiers(opts: CollectDossiersOptions): Promise<Col
   const candidates = entries.filter((name) => name.endsWith('-dossier.md'));
   const matches: DossierMatch[] = [];
   for (const filename of candidates) {
-    if (!matchesAccount(filename, target)) continue;
+    if (!matchesAccount(filename, targets)) continue;
     const path = resolve(opts.dossiersDir, filename);
     try {
       const body = await readFile(path, 'utf8');
@@ -61,13 +76,19 @@ export async function collectDossiers(opts: CollectDossiersOptions): Promise<Col
   return { matches, fallback: matches.length === 0 };
 }
 
-function matchesAccount(filename: string, normalizedTarget: string): boolean {
+function targetCandidates(accountSlug: string): string[] {
+  const canonical = normalize(accountSlug);
+  const aliases = (ACCOUNT_SLUG_ALIASES[accountSlug] ?? []).map(normalize);
+  return [canonical, ...aliases];
+}
+
+function matchesAccount(filename: string, normalizedTargets: string[]): boolean {
   const stem = filename.replace(/-dossier\.md$/, '');
   const parts = stem.split('-').filter(Boolean);
   // Try every trailing slice from length 1 to length N.
   for (let k = 1; k <= parts.length; k++) {
-    const tail = parts.slice(parts.length - k).join('');
-    if (normalize(tail) === normalizedTarget) return true;
+    const tail = normalize(parts.slice(parts.length - k).join(''));
+    if (normalizedTargets.includes(tail)) return true;
   }
   return false;
 }

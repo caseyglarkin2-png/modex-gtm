@@ -62,6 +62,43 @@ function shouldRun(stage: Stage, skipTo?: Stage): boolean {
   return STAGES.indexOf(stage) >= STAGES.indexOf(skipTo);
 }
 
+/**
+ * Find an unused branch name. Returns `base` if no branch with that name
+ * exists locally OR on origin; otherwise `${base}-2`, `-3`, … up to -99.
+ *
+ * Avoids leaving the account file dirty when re-running the pipeline for
+ * the same slug after a previous PR was merged or stashed.
+ */
+function pickFreeBranchName(repo: string, base: string): string {
+  for (let n = 1; n <= 99; n++) {
+    const candidate = n === 1 ? base : `${base}-${n}`;
+    if (!branchExists(repo, candidate)) return candidate;
+  }
+  throw new Error(`pickFreeBranchName: ${base} and 98 numeric variants are all taken`);
+}
+
+function branchExists(repo: string, branch: string): boolean {
+  // Local check.
+  try {
+    execSync(`git rev-parse --verify --quiet refs/heads/${branch}`, {
+      cwd: repo,
+      stdio: 'pipe',
+    });
+    return true;
+  } catch {
+    // Not local — check origin.
+  }
+  try {
+    execSync(`git rev-parse --verify --quiet refs/remotes/origin/${branch}`, {
+      cwd: repo,
+      stdio: 'pipe',
+    });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 async function main(): Promise<void> {
   const args = parseArgs(process.argv.slice(2));
   const data = getAccountMicrositeData(args.account);
@@ -182,7 +219,7 @@ async function main(): Promise<void> {
 
   // 6. Git: branch + commit + push + open PR
   if (shouldRun('git', args.skipTo)) {
-    const branch = `audio/${args.account}`;
+    const branch = pickFreeBranchName(repo, `audio/${args.account}`);
     execSync(`git checkout -b ${branch}`, { cwd: repo, stdio: 'inherit' });
     execSync(
       `git add public/audio/${args.account}.mp3 src/lib/microsites/accounts/${args.account}.ts`,

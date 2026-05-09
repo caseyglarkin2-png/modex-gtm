@@ -50,6 +50,34 @@ describe('collectDossiers', () => {
     }
   });
 
+  it('matches "keurig-dr-pepper" account slug to "kdp" dossier filename via alias', async () => {
+    const fs = await import('node:fs/promises');
+    const fixture = resolve(FIXTURES, 'kelly-killingsworth-kdp-dossier.md');
+    await fs.writeFile(fixture, '# KDP dossier\n', 'utf8');
+    try {
+      const out = await collectDossiers({ accountSlug: 'keurig-dr-pepper', dossiersDir: FIXTURES });
+      expect(out.matches).toHaveLength(1);
+      expect(out.matches[0].path).toContain('kelly-killingsworth-kdp-dossier.md');
+      expect(out.fallback).toBe(false);
+    } finally {
+      await fs.unlink(fixture);
+    }
+  });
+
+  it('matches "mondelez-international" account slug to "mondelez" dossier filename via alias', async () => {
+    const fs = await import('node:fs/promises');
+    const fixture = resolve(FIXTURES, 'claudio-parrotta-mondelez-dossier.md');
+    await fs.writeFile(fixture, '# Mondelez dossier\n', 'utf8');
+    try {
+      const out = await collectDossiers({ accountSlug: 'mondelez-international', dossiersDir: FIXTURES });
+      expect(out.matches).toHaveLength(1);
+      expect(out.matches[0].path).toContain('claudio-parrotta-mondelez-dossier.md');
+      expect(out.fallback).toBe(false);
+    } finally {
+      await fs.unlink(fixture);
+    }
+  });
+
   it('skips a dossier whose body cannot be read but still returns matches from readable ones', async () => {
     const fs = await import('node:fs/promises');
     const broken = resolve(FIXTURES, 'broken-toyota-dossier.md');
