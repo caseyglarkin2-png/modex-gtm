@@ -19,7 +19,7 @@ const PREPARED_DATE = new Date().toLocaleDateString('en-US', {
 });
 
 /**
- * Load the Newsreader and Inter Tight TTFs that ship in src/assets/fonts.
+ * Load the Fraunces and Mona Sans TTFs that ship in src/assets/fonts.
  *
  * We read the bytes off the filesystem with fs/promises rather than the
  * fetch(new URL(..., import.meta.url)) pattern: the fetch-import.meta
@@ -28,17 +28,18 @@ const PREPARED_DATE = new Date().toLocaleDateString('en-US', {
  * from process.cwd() is the documented escape hatch and works because
  * Vercel ships the entire project root with each Function bundle.
  *
- * Both files are variable fonts; satori (the engine behind ImageResponse)
- * doesn't currently traverse weight axes, so we register one weight per
- * fontFamily slot and let satori synthesize bolds where needed.
+ * Fraunces ships as a single variable TTF (opsz/wght/SOFT/WONK axes);
+ * satori reads only one axis position, so we register it as the default
+ * "Fraunces" family and let the renderer synthesize emphasis where the
+ * social image needs it. Mona Sans is the Regular static cut.
  */
 async function loadMemoFonts() {
   const fontsDir = join(process.cwd(), 'src/assets/fonts');
-  const [newsreader, interTight] = await Promise.all([
-    readFile(join(fontsDir, 'Newsreader-Regular.ttf')),
-    readFile(join(fontsDir, 'InterTight-Regular.ttf')),
+  const [fraunces, monaSans] = await Promise.all([
+    readFile(join(fontsDir, 'Fraunces-Regular.ttf')),
+    readFile(join(fontsDir, 'MonaSans-Regular.ttf')),
   ]);
-  return { newsreader, interTight };
+  return { fraunces, monaSans };
 }
 
 export default async function OpenGraphImage({
@@ -71,16 +72,16 @@ export default async function OpenGraphImage({
       ...size,
       fonts: [
         {
-          name: 'Newsreader',
-          data: fonts.newsreader,
+          name: 'Fraunces',
+          data: fonts.fraunces,
           style: 'normal',
-          weight: 500,
+          weight: 400,
         },
         {
-          name: 'Inter Tight',
-          data: fonts.interTight,
+          name: 'Mona Sans',
+          data: fonts.monaSans,
           style: 'normal',
-          weight: 500,
+          weight: 400,
         },
       ],
     },

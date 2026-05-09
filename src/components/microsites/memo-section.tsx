@@ -143,15 +143,37 @@ function MemoSectionFrame({
 
 /**
  * Inline aside used for the observation caveat, the thesis's "Aside" beat,
- * and any inline marginalia. On desktop these will eventually flow into
- * the right gutter; for now they sit inline as a hairline-bordered block.
+ * and any inline marginalia.
+ *
+ * Mobile: hairline-bordered block, inline below the anchor paragraph.
+ *
+ * Desktop (≥lg): floats right with a negative margin-right of 17rem,
+ * pushing the box outside the 36rem document column into the 14rem
+ * gutter (3rem grid gap + 14rem gutter width). Doc text doesn't wrap
+ * because the float lives entirely outside the doc column. `clear: right`
+ * keeps multiple asides from overlapping each other in the gutter.
+ *
+ * Visually flips from "boxed callout" (mobile) to "true marginalia note"
+ * (desktop) — same source order, same anchor relationship to the body
+ * paragraph above it.
  */
 function MemoAside({ mark, children }: { mark: string; children: ReactNode }) {
   return (
     <aside
-      className={`my-5 border-l-2 border-[#a89e8b] bg-[rgba(255,253,247,0.5)] px-4 py-3.5 text-[13px] leading-[1.55] text-[#8a847b] ${FONT_SANS}`}
+      className={[
+        // Mobile (default) — boxed callout inline in the doc column.
+        'my-5 border-l-2 border-[#a89e8b] bg-[rgba(255,253,247,0.5)] px-4 py-3.5',
+        'text-[13px] leading-[1.55] text-[#8a847b]',
+        FONT_SANS,
+        // Desktop — float right into the gutter, lose the box, keep the rule.
+        'lg:float-right lg:clear-right lg:w-56 lg:-mr-[17rem] lg:my-1 lg:ml-0',
+        'lg:border-l lg:border-l-[#d8d2c2] lg:bg-transparent lg:px-4 lg:py-0',
+        'lg:text-[11.5px] lg:leading-[1.5] lg:text-[#8a847b]',
+      ].join(' ')}
     >
-      <p className={`mb-1.5 text-[9.5px] uppercase tracking-[0.18em] text-[#6c9384] ${FONT_MONO}`}>
+      <p
+        className={`mb-1.5 text-[9.5px] uppercase tracking-[0.18em] text-[#6c9384] lg:mb-1 lg:text-[9px] lg:tracking-[0.2em] ${FONT_MONO}`}
+      >
         {mark}
       </p>
       <div className="space-y-1.5">{children}</div>
