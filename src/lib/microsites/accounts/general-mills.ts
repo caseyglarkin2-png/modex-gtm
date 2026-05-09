@@ -193,7 +193,88 @@ export const generalMills: AccountMicrositeData = {
   pageTitle: 'YardFlow for General Mills - Yard Network Standardization',
   metaDescription: `How YardFlow eliminates the yard bottleneck across General Mills' ${GENERAL_MILLS_FACILITY_COUNT_LABEL}-plant manufacturing network.`,
 
-  sections: [],
+  sections: [
+    { type: 'yns-thesis' },
+    {
+      type: 'observation',
+      headline: 'What we observed about General Mills\' network',
+      composition: [
+        { label: 'Plant footprint', value: `${GENERAL_MILLS_FACILITY_COUNT_LABEL} owned plants — anchor sites: Cedar Rapids, Covington, Belvidere, Hannibal` },
+        { label: 'Temperature zones in play', value: 'Ambient (Cheerios) · Frozen (Pillsbury) · Refrigerated (Yoplait) · Ultra-cold (Häagen-Dazs)' },
+        { label: 'Daily trailer moves', value: '4,400+ across the network' },
+        { label: 'Peak multiplier', value: '1.3-1.5x during baking season (Oct-Dec)' },
+        { label: 'Carrier model', value: 'Contract carriers and 3PL — no private fleet' },
+        { label: 'Active restructuring', value: '$82M program closing 3 Missouri plants through 2026' },
+      ],
+      hypothesis:
+        'Two pressures meet at the yard at the same time. First, the Missouri plant closures push remaining facilities into 15-25% more trailer volume right now — the production lines absorbed the $82M investment, the yards did not. Second, the Palantir digital twin gives end-to-end supply chain visibility everywhere except the dock surface, so the closer the network gets to running on a single operating picture, the more the yard layer stands out as the one place still on local routines. Stack four temperature zones competing for the same dock doors at multi-category sites, and the yard becomes the surface where consolidation math, the HMM cost program, and digital transformation all stop translating into measured dollars. The new Belvidere DC is the cleanest counterpoint — greenfield yard, no legacy habits — which is why it tends to be the obvious first deployment.',
+      caveat:
+        'This is built from public filings, the 2025 Global Responsibility Report, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing on detention spend, dock-zone discipline, or how much existing YMS coverage is already in place across the 41 plants.',
+    },
+    {
+      type: 'comparable',
+      headline: 'What a comparable network did when they closed the same gap',
+      comparableName: 'Primo Brands',
+      comparableProfile:
+        'Multi-site bottling and distribution network with a similar archetype mix — high-throughput plants, drop-trailer yards, and refrigerated lanes feeding regional DCs. Deployed YardFlow as the network-yard standardization layer in 2024-2025 and is the closest live analog to what consolidation pressure does to a CPG yard.',
+      metrics: [
+        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
+        { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+      ],
+      timeline: '30-60 days from kickoff to first measurable impact at the pilot site. Belvidere is the cleanest greenfield candidate; Cedar Rapids is the hardest-tested brownfield candidate.',
+      referenceAvailable: true,
+    },
+    {
+      type: 'methodology',
+      headline: 'How this analysis was built',
+      sources: [
+        {
+          id: 'gm-public-footprint',
+          source: 'General Mills 2025 Global Responsibility Report',
+          confidence: 'public',
+          detail: `Anchors the ${GENERAL_MILLS_FACILITY_COUNT_LABEL} owned-plant figure used as the modeled facility count. Network composition references public 10-K disclosures and the Belvidere DC announcement.`,
+        },
+        {
+          id: 'gm-restructuring-disclosure',
+          source: 'October 2025 restructuring disclosure ($82M charges, 3 Missouri plant closures)',
+          confidence: 'public',
+          detail: 'Source for the consolidation pressure narrative. Volume reallocation percentage is inferred from the closing footprint relative to network plant count.',
+        },
+        {
+          id: 'industry-benchmarks',
+          source: 'ATA + Aberdeen yard-operations benchmarks',
+          confidence: 'public',
+          detail: 'Cross-industry baselines on dock-radio prevalence, dwell-time variance, and detention-cost ranges. These are not General Mills-specific — they describe the conditions most multi-site networks operate under.',
+        },
+        {
+          id: 'primo-q1-2025',
+          source: 'Primo Brands operating data (under NDA)',
+          confidence: 'measured',
+          detail: 'Post-deployment turn time, dock-office headcount, and per-site profit impact have been shared with us by the Primo CFO and ops team. Specific numbers are referenceable in a peer call when relevant.',
+        },
+      ],
+      unknowns: [
+        'Real detention spend by lane and carrier — we estimate, you measure',
+        'How much of the 41-plant network is already on a YMS vs. radio-and-clipboard',
+        'Where temperature-zone misassignment events concentrate today (which plants, which shifts)',
+        'How the Missouri closures are actually being absorbed at the receiving plants — paper plan vs. shift-floor reality',
+        'The exact yard-cost line items already inside the HMM program scope vs. still uncounted',
+      ],
+    },
+    {
+      type: 'about',
+      headline: 'About this analysis',
+      authorBio:
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. The framing leans on Paul Gallagher\'s Run/Improve/Transform language because it\'s the simplest way to describe where the yard layer actually sits in the network: the part of "Transform" the digital twin can\'t see yet.',
+      authorEmail: 'casey@freightroll.com',
+      signOff:
+        'If parts of this read wrong against what you see internally for General Mills — particularly the consolidation absorption math, the four-zone dock contention, or the assumption that the yard layer is still 41 different routines — that\'s the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
+    },
+  ],
+
+  needsHandTuning: false,
 
   // ── THE PEOPLE ──────────────────────────────────────────────────────
   people: [

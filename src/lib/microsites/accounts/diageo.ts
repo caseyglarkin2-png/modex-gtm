@@ -164,7 +164,88 @@ export const diageo: AccountMicrositeData = {
   pageTitle: 'YardFlow for Diageo - Yard Network Standardization',
   metaDescription: 'How YardFlow eliminates the yard bottleneck across Diageo\'s facility network.',
 
-  sections: [],
+  sections: [
+    { type: 'yns-thesis' },
+    {
+      type: 'observation',
+      headline: 'What we observed about Diageo\'s North American network',
+      composition: [
+        { label: 'NA facility footprint', value: '30+ sites — distilleries, bottling plants, aging warehouses, distribution centers' },
+        { label: 'Daily trailer moves', value: '1,500+ across the network' },
+        { label: 'Carrier model', value: '3PL-heavy with contract carriers; mix of dry, temperature-controlled, and high-value spirits loads' },
+        { label: 'Product profile', value: 'Premium spirits — Johnnie Walker, Don Julio, Crown Royal, Captain Morgan' },
+        { label: 'Peak pattern', value: 'Holiday-season throughput surge (Q4) compresses dock and yard capacity sharply' },
+      ],
+      hypothesis:
+        'The unusual thing about Diageo\'s yard math is the per-trailer value. A trailer of premium spirits can carry $500K+ in finished goods, and yet the protocol that decides how long it sits at the gate is the same radio-and-clipboard routine that runs at lower-value CPG networks. The other pressure is the asymmetry between the company\'s production timeline and its execution timeline — product can age for 12+ years upstream and then lose ninety minutes at a single dock door because the staging sequence got reshuffled. Stack the holiday Q4 surge on top, and the yard becomes the surface where a baseline-volume process collapses under peak load: gate queues back up, spotters get dispatched by phone, dock turns drop below target, and chain-of-custody documentation becomes the audit team\'s problem months later. None of this is a Diageo-specific failure — it\'s the default state of a 30+ site network without one operating standard.',
+      caveat:
+        'This is built from public Diageo NA disclosures, MODEX attendee signal, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing on detention spend, dock contention during Q4 surge, or how much existing yard-system coverage is already in place across the network.',
+    },
+    {
+      type: 'comparable',
+      headline: 'What a comparable network did when they closed the same gap',
+      comparableName: 'Primo Brands',
+      comparableProfile:
+        'Multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs. Beverage flow with a similar archetype mix and the same yard-protocol fragmentation Diageo NA still operates with — which is why the operational read-across is unusually clean here.',
+      metrics: [
+        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
+        { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+      ],
+      timeline: '30-60 days from kickoff to first measurable impact at the pilot site. The strongest pilot targets are the plants where Q4 surge volume hits hardest — that\'s where one protocol pays back fastest.',
+      referenceAvailable: true,
+    },
+    {
+      type: 'methodology',
+      headline: 'How this analysis was built',
+      sources: [
+        {
+          id: 'diageo-public-na',
+          source: 'Diageo North America executive team and public network disclosures',
+          confidence: 'public',
+          detail: 'Anchors the 30+ NA facility figure and the leadership map (Marsha McIntosh-Hamilton, President NA Supply; Raymond Reddrick, SVP NA Supply – Manufacturing and Distillation).',
+          url: 'https://www.diageo.com/en/our-business/where-we-operate/north-america/',
+        },
+        {
+          id: 'industry-benchmarks',
+          source: 'ATA + Aberdeen yard-operations benchmarks',
+          confidence: 'public',
+          detail: 'Cross-industry baselines on dock-radio prevalence, dwell-time variance, and detention-cost ranges. These describe the conditions most multi-site beverage networks operate under, not Diageo specifically.',
+        },
+        {
+          id: 'modex-signal',
+          source: 'MODEX past-attendee list',
+          confidence: 'public',
+          detail: 'Diageo is on the MODEX past-attendee list. That signal is part of why we sized this analysis now rather than later.',
+        },
+        {
+          id: 'primo-q1-2025',
+          source: 'Primo Brands operating data (under NDA)',
+          confidence: 'measured',
+          detail: 'Post-deployment turn time, dock-office headcount, and per-site profit impact have been shared with us by the Primo CFO and ops team. Specific numbers are referenceable in a peer call when relevant.',
+        },
+      ],
+      unknowns: [
+        'Real detention spend by lane and carrier — we estimate, you measure',
+        'How chain-of-custody compliance is actually handled at the gate today (paper, scanner, none)',
+        'Existing YMS or dock-scheduling coverage across the 30+ NA sites',
+        'Where the holiday-Q4 surge breaks dock capacity hardest (which sites, which weeks)',
+        'How premium-product priority flagging is — or isn\'t — sequenced into the dock queue today',
+      ],
+    },
+    {
+      type: 'about',
+      headline: 'About this analysis',
+      authorBio:
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. The premium-spirits angle is what makes Diageo distinctive: per-trailer value is unusually high, which means yard variance hits the working-capital line, not just the operating-cost line.',
+      authorEmail: 'casey@freightroll.com',
+      signOff:
+        'If parts of this read wrong against what you see internally for Diageo — particularly the per-trailer working-capital math, the Q4 surge dock pressure, or the assumption that the 30+ NA sites are still operating different yard routines — that\'s the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
+    },
+  ],
+
+  needsHandTuning: false,
 
   people: [
     {

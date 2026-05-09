@@ -193,7 +193,88 @@ export const fritoLay: AccountMicrositeData = {
   pageTitle: 'YardFlow for Frito-Lay - Yard Execution at Snack-Network Speed',
   metaDescription: `How YardFlow eliminates the yard bottleneck across Frito-Lay's ${FRITO_LAY_FACILITY_COUNT_LABEL} site high-velocity snack network.`,
 
-  sections: [],
+  sections: [
+    { type: 'yns-thesis' },
+    {
+      type: 'observation',
+      headline: 'What we observed about Frito-Lay\'s network',
+      composition: [
+        { label: 'Network footprint', value: '30+ manufacturing plants · 200+ distribution centers · DSD coverage to 95% of US retail' },
+        { label: 'Daily trailer moves', value: '14,000+ across the network' },
+        { label: 'Fleet mix at the dock', value: 'Owned fleet + contract carriers + agricultural haulers + DSD route trucks — four fleet types at the same doors' },
+        { label: 'Inbound profile', value: 'Agricultural — potatoes, corn, oils, seasonings — with weather-dependent timing' },
+        { label: 'Outbound profile', value: 'Overnight DSD route loading; staging sequence drives morning-route correctness' },
+        { label: 'Peak multiplier', value: '~1.3x during summer and holiday seasons (Super Bowl, back-to-school)' },
+      ],
+      hypothesis:
+        'The structural mismatch we keep coming back to is speed. Frito-Lay runs the highest-velocity CPG production lines in North America, and the yard between those lines and the road still operates on radio dispatch, clipboards, and site-by-site tribal knowledge. At 14,000+ daily moves, small execution gains compound differently than they do anywhere else — a 15-minute turn-time improvement applied across 230+ sites is not a rounding error. The two surfaces that absorb most of the variance are agricultural inbound, where carrier quality and weather reset the dock schedule daily, and overnight DSD route loading, where the staging sequence has to be right or the morning route starts behind. Underneath both is the same gap: there is no single operating standard for the yard, so every site invents its own and the network never gets to compound the wins.',
+      caveat:
+        'Built from public PepsiCo disclosures, the published Frito-Lay facility split, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing on detention spend, DSD-loading accuracy, or how much existing system coverage is already in place across the 30+ manufacturing plants.',
+    },
+    {
+      type: 'comparable',
+      headline: 'What a comparable network did when they closed the same gap',
+      comparableName: 'Primo Brands',
+      comparableProfile:
+        'Multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs. Smaller footprint than Frito-Lay, but the closest live analog on the dimension that matters here — running one yard protocol across plants, DCs, and a mixed fleet model.',
+      metrics: [
+        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
+        { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted · 30-min remote deployment', delta: 'measured' },
+      ],
+      timeline: '30-60 days from kickoff to first measurable impact at the pilot site. Perry, GA — ~150 miles from the MODEX venue — is the obvious pilot candidate; Plano HQ is the highest-visibility one.',
+      referenceAvailable: true,
+    },
+    {
+      type: 'methodology',
+      headline: 'How this analysis was built',
+      sources: [
+        {
+          id: 'frito-public-footprint',
+          source: 'Frito-Lay company facts and PepsiCo disclosures',
+          confidence: 'public',
+          detail: `Anchors the 30+ manufacturing plant / 200+ DC split that yields the conservative ${FRITO_LAY_FACILITY_COUNT_LABEL}-site lower bound used here. DSD coverage and route model from public PepsiCo / Frito-Lay materials.`,
+        },
+        {
+          id: 'industry-benchmarks',
+          source: 'ATA + Aberdeen yard-operations benchmarks',
+          confidence: 'public',
+          detail: 'Cross-industry baselines on dock-radio prevalence, dwell-time variance, and detention-cost ranges. These describe the conditions most high-volume CPG networks operate under, not Frito-Lay specifically.',
+        },
+        {
+          id: 'modex-signal',
+          source: 'MODEX past-attendee list',
+          confidence: 'public',
+          detail: 'Frito-Lay is on the MODEX past-attendee list. Perry, GA plant is approximately 150 miles from the Atlanta venue, which is why a post-conference pilot keeps coming up in our network conversations.',
+        },
+        {
+          id: 'primo-q1-2025',
+          source: 'Primo Brands operating data (under NDA)',
+          confidence: 'measured',
+          detail: 'Post-deployment turn time, dock-office headcount, and per-site profit impact have been shared with us by the Primo CFO and ops team. Specific numbers are referenceable in a peer call when relevant.',
+        },
+      ],
+      unknowns: [
+        'Real detention spend by lane and carrier — we estimate $20M+, you measure',
+        'DSD route-loading accuracy at the network level (we suspect ~85%, leadership has the real number)',
+        'Existing YMS / dock-scheduling coverage across the 30+ manufacturing plants',
+        'How the four fleet types are sequenced at the dock today — owned, contract, agricultural, DSD',
+        'Where agricultural-inbound variability hits hardest (which plants, which seasons)',
+      ],
+    },
+    {
+      type: 'about',
+      headline: 'About this analysis',
+      authorBio:
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. At Frito-Lay\'s velocity the math is unusual: minutes-per-dock turn into millions-per-network-year, which is why this account sits near the top of the engagement list and why Perry, GA is on the MODEX week shortlist.',
+      authorEmail: 'casey@freightroll.com',
+      signOff:
+        `If parts of this read wrong against what you see internally for Frito-Lay — particularly the production-line / yard speed mismatch, the four-fleet dock contention, or the assumption that the ${FRITO_LAY_FACILITY_COUNT_LABEL}-site network still runs on local routines — that\'s the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.`,
+    },
+  ],
+
+  needsHandTuning: false,
 
   // ── THE PEOPLE ──────────────────────────────────────────────────────
   people: [
