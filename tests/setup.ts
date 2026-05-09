@@ -16,8 +16,8 @@ class IntersectionObserverStub {
 }
 
 if (typeof globalThis.IntersectionObserver === 'undefined') {
-  // @ts-expect-error - intentional minimal stub for test env
-  globalThis.IntersectionObserver = IntersectionObserverStub;
+  globalThis.IntersectionObserver =
+    IntersectionObserverStub as unknown as typeof IntersectionObserver;
 }
 
 afterEach(() => {
