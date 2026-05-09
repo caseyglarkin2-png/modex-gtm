@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (proposal) {
     return buildPublicShareMetadata({
       title: `${proposal.accountName} board-ready yard execution proposal`,
-      description: proposal.hero.headline,
+      description: proposal.headline,
       pathname: proposal.proposalPath,
       imagePath: `${proposal.proposalPath}/opengraph-image`,
       imageAlt: `${proposal.accountName} board-ready proposal preview with network and ROI context`,

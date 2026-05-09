@@ -14,34 +14,20 @@
 
 // ── Section Module Types ──────────────────────────────────────────────
 //
-// The 5 memo-era section types ('yns-thesis', 'observation', 'comparable',
-// 'methodology', 'about') drive the new light-memo template introduced by
-// the YNS Microsite Redesign roadmap (Sprint M2+). The remaining legacy
-// types ('hero' through 'case-study') are kept here so that pre-migration
-// account .ts files still type-check; Sprint M3 migrates each account onto
-// the memo types via a compat adapter, and Sprint M7 deletes the legacy
-// section types entirely.
+// The 5 memo-era section types drive the light-memo template introduced
+// by the YNS Microsite Redesign roadmap. The legacy section types
+// ('hero', 'problem', 'stakes', 'solution', 'proof', 'network-map',
+// 'testimonial', 'modules', 'timeline', 'comparison', 'case-study',
+// 'cta') were deleted in Sprint M7 once the memo template + ROI engine
+// became the only renderable surfaces. The 'roi' string is preserved
+// for the engine output type ROISection.
 export type SectionType =
-  // Memo-era section types (post-M2)
   | 'yns-thesis'
   | 'observation'
   | 'comparable'
   | 'methodology'
   | 'about'
-  // Legacy section types (pre-M3 migration; deleted in M7)
-  | 'hero'
-  | 'problem'
-  | 'stakes'
-  | 'solution'
-  | 'proof'
-  | 'network-map'
-  | 'roi'
-  | 'testimonial'
-  | 'modules'
-  | 'timeline'
-  | 'cta'
-  | 'comparison'
-  | 'case-study';
+  | 'roi';
 
 export type MemoSectionType =
   | 'yns-thesis'
@@ -192,15 +178,18 @@ export interface PersonVariant {
   openingHook: string;            // The first thing they read, tailored to their known priorities
   stakeStatement: string;         // What's at risk if they don't act, in THEIR language
 
-  // Section overrides written for this person
-  heroOverride?: Partial<HeroSection>;
-  sectionOverrides?: {
-    sectionType: SectionType;
-    override: Partial<MicrositeSection>;
-  }[];
-  sectionOrder?: SectionType[];
-  hideSections?: SectionType[];
-  addSections?: MicrositeSection[];
+  // Section overrides written for this person.
+  //
+  // These fields date back to the pre-M7 section-ordering engine and are
+  // intentionally typed loosely now: the production /for/[account] route
+  // doesn't read them (it goes through resolveMemoSections + resolveReader).
+  // Account .ts files still carry the pre-M7 data shapes; the loose types
+  // keep those files compiling without a forced data migration.
+  heroOverride?: { headline?: string; subheadline?: string; [key: string]: unknown };
+  sectionOverrides?: { sectionType: string; override: Record<string, unknown> }[];
+  sectionOrder?: string[];
+  hideSections?: string[];
+  addSections?: Array<{ type: string; [key: string]: unknown }>;
 
   // Voice & language tuning for this person
   toneShift: string;              // "Operator-to-operator. Reference his plant management background."
@@ -351,116 +340,24 @@ export interface ProofBlock {
   comparisonData?: { metric: string; competitor: string; yardflow: string }[];
 }
 
-export interface ProofVisual {
-  type: 'metric-grid' | 'before-after' | 'comparison';
-  headline?: string;
-  narrative?: string;
-  stats?: ProofStat[];
-  beforeAfter?: {
-    before: { label: string; description: string };
-    after: { label: string; description: string };
-  };
-  comparisonLabel?: string;
-  comparisonData?: { metric: string; competitor: string; yardflow: string }[];
-}
-
-export interface LiveDeploymentCallout {
-  headline: string;
-  summary: string;
-  badges?: string[];
-}
-
-// ── Pain Points & Stakes ──────────────────────────────────────────────
-export interface PainPoint {
-  headline: string;
-  description: string;
-  kpiImpact?: string;
-  source?: string;
-  // Which NAMED PEOPLE care about this pain point (not lanes — people)
-  relevantPeople?: string[];      // persona IDs: ["P-041", "P-042"]
-  personaRelevance?: PersonaLane[];  // fallback for accounts without person-level research
-}
-
-// ── Solution Modules ──────────────────────────────────────────────────
-export interface SolutionModule {
-  id: string;
-  name: string;
-  verb: string;
-  shortDescription: string;
-  relevanceToAccount?: string;
-}
-
 // ── CTA Definitions ───────────────────────────────────────────────────
+// CTABlock is no longer wrapped in a CTASection — it's the structured
+// return shape from buildShortOverviewCta and is consumed inline by the
+// proposal brief and the memo soft-action.
 export interface CTABlock {
   type: CTAType;
   headline: string;
   subtext: string;
   buttonLabel: string;
   calendarLink?: string;
-  // Person-specific CTA context
-  personName?: string;            // "Dan" — for personalized CTA copy
-  personContext?: string;         // "your $230M transformation" — their language
+  personName?: string;
+  personContext?: string;
 }
 
-// ── Section Definitions ───────────────────────────────────────────────
-export interface HeroSection extends BaseMicrositeSection {
-  type: 'hero';
-  headline: string;
-  subheadline: string;
-  accountCallout?: string;
-  backgroundTheme?: 'dark' | 'gradient' | 'industrial';
-  cta: CTABlock;
-}
-
-export interface ProblemSection extends BaseMicrositeSection {
-  type: 'problem';
-  sectionLabel?: string;
-  headline: string;
-  narrative: string;
-  painPoints: PainPoint[];
-}
-
-export interface StakesSection extends BaseMicrositeSection {
-  type: 'stakes';
-  sectionLabel?: string;
-  headline: string;
-  narrative: string;
-  annualCost?: string;
-  costBreakdown?: { label: string; value: string }[];
-  urgencyDriver?: string;
-}
-
-export interface SolutionSection extends BaseMicrositeSection {
-  type: 'solution';
-  sectionLabel?: string;
-  headline: string;
-  narrative: string;
-  modules: SolutionModule[];
-  accountFit?: string;
-}
-
-export interface ProofSection extends BaseMicrositeSection {
-  type: 'proof';
-  sectionLabel?: string;
-  headline: string;
-  blocks: ProofBlock[];
-  proofVisual?: ProofVisual;
-  methodology?: string;
-  liveDeployment?: LiveDeploymentCallout;
-}
-
-export interface NetworkMapSection extends BaseMicrositeSection {
-  type: 'network-map';
-  sectionLabel?: string;
-  headline: string;
-  narrative: string;
-  facilityCount: string;
-  facilityTypes?: string[];
-  geographicSpread?: string;
-  dailyTrailerMoves?: string;
-  peakMultiplier?: string;
-}
-
+// ── ROI Engine Output ─────────────────────────────────────────────────
+// ROISection survived the M7 cleanup of the legacy section union because
+// it's the structured engine output for buildROISectionFromModel.
+// Memo content uses MemoMicrositeSection; ROI is a self-contained panel.
 export interface ROISection extends BaseMicrositeSection {
   type: 'roi';
   sectionLabel?: string;
@@ -476,53 +373,6 @@ export interface ROISection extends BaseMicrositeSection {
   totalAnnualSavings?: string;
   paybackPeriod?: string;
   methodology?: string;
-}
-
-export interface TestimonialSection extends BaseMicrositeSection {
-  type: 'testimonial';
-  sectionLabel?: string;
-  quote: string;
-  attribution?: string;
-  role?: string;
-  company?: string;
-  context?: string;
-}
-
-export interface ModulesSection extends BaseMicrositeSection {
-  type: 'modules';
-  sectionLabel?: string;
-  headline: string;
-  narrative: string;
-  modules: SolutionModule[];
-}
-
-export interface TimelineSection extends BaseMicrositeSection {
-  type: 'timeline';
-  sectionLabel?: string;
-  headline: string;
-  steps: { week: string; title: string; description: string }[];
-}
-
-export interface ComparisonSection extends BaseMicrositeSection {
-  type: 'comparison';
-  sectionLabel?: string;
-  headline: string;
-  rows: { dimension: string; before: string; after: string }[];
-}
-
-export interface CaseStudySection extends BaseMicrositeSection {
-  type: 'case-study';
-  sectionLabel?: string;
-  headline: string;
-  narrative: string;
-  results: ProofStat[];
-}
-
-export interface CTASection extends BaseMicrositeSection {
-  type: 'cta';
-  sectionLabel?: string;
-  cta: CTABlock;
-  closingLine?: string;
 }
 
 // ── Memo-era section types (Sprint M2+) ────────────────────────────────
@@ -611,19 +461,7 @@ export type MemoMicrositeSection =
 
 export type MicrositeSection =
   | MemoMicrositeSection
-  | HeroSection
-  | ProblemSection
-  | StakesSection
-  | SolutionSection
-  | ProofSection
-  | NetworkMapSection
-  | ROISection
-  | TestimonialSection
-  | ModulesSection
-  | TimelineSection
-  | ComparisonSection
-  | CaseStudySection
-  | CTASection;
+  | ROISection;
 
 // ── Full Account Microsite Data ───────────────────────────────────────
 export interface AccountMicrositeData {
@@ -728,14 +566,11 @@ export interface KeyFacility {
 export interface GenericPersonaVariant {
   lane: PersonaLane;
   label: string;
-  heroOverride?: Partial<HeroSection>;
-  sectionOverrides?: {
-    sectionType: SectionType;
-    override: Partial<MicrositeSection>;
-  }[];
-  sectionOrder?: SectionType[];
-  hideSections?: SectionType[];
-  addSections?: MicrositeSection[];
+  heroOverride?: { headline?: string; subheadline?: string; [key: string]: unknown };
+  sectionOverrides?: { sectionType: string; override: Record<string, unknown> }[];
+  sectionOrder?: string[];
+  hideSections?: string[];
+  addSections?: Array<{ type: string; [key: string]: unknown }>;
   toneShift?: string;
   kpiLanguage?: string[];
 }

@@ -26,10 +26,10 @@ export default async function OpenGraphImage({
         eyebrow="Board-ready proposal"
         secondaryTitle={proposal.accountName}
         title="Yard execution proposal"
-        summary={proposal.hero.headline}
+        summary={proposal.headline}
         stats={[
           { label: 'Priority', value: `${proposal.band} ${proposal.priorityScore}` },
-          ...(proposal.network?.facilityCount ? [{ label: 'Network', value: proposal.network.facilityCount }] : []),
+          ...(proposal.network.facilityCount ? [{ label: 'Network', value: proposal.network.facilityCount }] : []),
           ...(proposal.roi?.totalAnnualSavings ? [{ label: 'Modeled value', value: proposal.roi.totalAnnualSavings }] : []),
           ...(proposal.roi?.paybackPeriod ? [{ label: 'Payback', value: proposal.roi.paybackPeriod }] : []),
         ]}
