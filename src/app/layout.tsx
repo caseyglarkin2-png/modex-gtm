@@ -1,40 +1,41 @@
 import type { Metadata } from "next";
-import { Newsreader, Inter_Tight, JetBrains_Mono } from "next/font/google";
+import { Fraunces, Mona_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { AppShell } from "@/components/app-shell";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
 import { getSiteUrl } from "@/lib/site-url";
 
-// Memo template typography (Sprint M2 visual upgrade).
-// Newsreader: Adobe's contemporary serif designed for screen reading; the
-// "memo" voice we want — confident headlines, comfortable body. Variable
-// weight so we don't ship five separate weight files.
-const memoSerif = Newsreader({
+// Memo template typography (Sprint M8 redesign — "Private Memorandum").
+// Fraunces: variable serif with optical-size (9-144), SOFT, and WONK axes.
+// Used for everything serif: H1 at opsz 130, H2 at opsz 60, body at opsz 14.
+// Drop caps lift opsz to 144 with WONK enabled for the genuinely
+// publication-grade look.
+const memoSerif = Fraunces({
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
+  axes: ["opsz", "SOFT", "WONK"],
   variable: "--font-memo-serif",
 });
 
-// Inter Tight: Inter's compressed display variant. Used for memo eyebrows,
-// methodology lists, footnotes, and the soft-action label — the "metadata"
-// voice. Tighter than regular Inter, more editorial.
-const memoSans = Inter_Tight({
+// Mona Sans: GitHub's variable sans with a width axis. Used for metadata,
+// eyebrow labels, contents rail — the "operator memo, not magazine" voice.
+// The wdth axis lets us tighten composition-table dt labels without
+// shipping a second face.
+const memoSans = Mona_Sans({
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600"],
+  axes: ["wdth"],
   variable: "--font-memo-sans",
 });
 
-// JetBrains Mono: confidence badge brackets and inline numerical anchors.
-// Variable would bring 12kb of weight axes for two glyph styles — the
-// non-variable 500 weight is enough.
+// JetBrains Mono: confidence pips, footnote brackets, document numbers,
+// classification chrome. The technical scaffolding around the prose.
 const memoMono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
-  weight: ["500"],
+  weight: ["400", "500"],
   variable: "--font-memo-mono",
 });
 

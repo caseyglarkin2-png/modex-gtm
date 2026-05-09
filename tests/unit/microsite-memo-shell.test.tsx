@@ -10,46 +10,46 @@ const baseProps = {
 };
 
 describe('MemoShell', () => {
-  it('renders the prepared-date eyebrow + title + author byline', () => {
+  it('renders the cover classification + title + author byline', () => {
     render(<MemoShell {...baseProps}><p>body</p></MemoShell>);
-    // Polish pass split eyebrow into mono "PRIVATE ANALYSIS" + sans
-    // formatted date. The same date now appears in both the header and
-    // the footer, so we use queryAllByText and assert at-least-one match.
+    // M8 redesign — cover classification chrome includes "Private analysis".
     expect(screen.getByText(/Private analysis/i)).toBeDefined();
+    // Date appears in cover Date row + colophon "Issued ..." line.
     expect(screen.queryAllByText(/May 8, 2026/).length).toBeGreaterThan(0);
     expect(screen.getByRole('heading', { level: 1 }).textContent).toContain('General Mills');
-    expect(screen.getByText('Casey Larkin · YardFlow')).toBeDefined();
+    // Author byline appears on cover meta-row + cover Author row.
+    expect(screen.queryAllByText('Casey Larkin · YardFlow').length).toBeGreaterThan(0);
   });
 
-  it('omits reader eyebrow + context detail when not provided', () => {
+  it('omits the prepared-for row on the cover when no readerEyebrow is set', () => {
     render(<MemoShell {...baseProps}><p>body</p></MemoShell>);
-    // Footer line "{accountName} · {date}" doesn't include "prepared for".
-    expect(screen.queryByText(/prepared for/i)).toBeNull();
+    // The "Prepared for" dt is conditional on readerEyebrow.
+    expect(screen.queryByText(/^prepared for$/i)).toBeNull();
   });
 
-  it('shows reader eyebrow when set (Sprint M5 personalization slot)', () => {
+  it('shows the prepared-for recipient + title when readerEyebrow is set', () => {
     render(
       <MemoShell {...baseProps} readerEyebrow="Prepared for Dan Poland · VP Supply Chain">
         <p>body</p>
       </MemoShell>,
     );
-    // Polish pass renders the name as a separate span (greyer "Prepared for"
-    // prefix + bolder name). Assert the focal name + title is present.
+    // "Prepared for" dt rendered, recipient name + title combined into the dd.
+    expect(screen.getByText(/^prepared for$/i)).toBeDefined();
     expect(screen.getByText(/Dan Poland · VP Supply Chain/)).toBeDefined();
   });
 
-  it('shows context detail (e.g. footprint summary) under the title', () => {
+  it('joins the contextDetail onto the Subject line', () => {
     render(<MemoShell {...baseProps} contextDetail="47-plant footprint"><p>body</p></MemoShell>);
-    expect(screen.getByText('47-plant footprint')).toBeDefined();
+    // Subject row dd is "{accountName} · {contextDetail}".
+    expect(screen.getByText(/General Mills · 47-plant footprint/)).toBeDefined();
   });
 
-  it('renders the needs-hand-tuning banner when flagged', () => {
+  it('renders the Draft v0 badge in the cover classification when needsHandTuning', () => {
     render(<MemoShell {...baseProps} needsHandTuning><p>body</p></MemoShell>);
-    // Polish pass replaced full-width amber strip with a corner DRAFT badge.
     expect(screen.getByText(/Draft · v0/i)).toBeDefined();
   });
 
-  it('does not render the banner when not flagged', () => {
+  it('does not render the Draft badge when not flagged', () => {
     render(<MemoShell {...baseProps}><p>body</p></MemoShell>);
     expect(screen.queryByText(/Draft · v0/i)).toBeNull();
   });
@@ -61,11 +61,10 @@ describe('MemoShell', () => {
     expect(screen.queryByText(/calendar/i)).toBeNull();
   });
 
-  it('renders a minimal footer line with account + prepared date', () => {
+  it('renders a colophon line with account + document id + issued date', () => {
     render(<MemoShell {...baseProps}><p>body</p></MemoShell>);
-    // Polish pass dropped the "YardFlow by FreightRoll · {account} private
-    // brief" cruft. Footer is now mono "{ACCOUNT} · {date}".
-    expect(screen.getByText(/General Mills · May 8, 2026/)).toBeDefined();
+    // M8 colophon pattern: "{ACCOUNT} · {DOC-ID} · Issued {date}"
+    expect(screen.getByText(/General Mills · YF-GEN-001 · Issued May 8, 2026/)).toBeDefined();
   });
 
   it('passes the accent CSS var down for the FootnoteMarker to consume', () => {
@@ -76,5 +75,18 @@ describe('MemoShell', () => {
     expect(shell).not.toBeNull();
     const inlineStyle = shell?.getAttribute('style') ?? '';
     expect(inlineStyle).toContain('--memo-accent');
+  });
+
+  it('emits a Continue affordance pointing at the first toc entry when provided', () => {
+    render(
+      <MemoShell
+        {...baseProps}
+        tocEntries={[{ id: 'thesis', num: '§01', label: 'The thesis' }]}
+      >
+        <p>body</p>
+      </MemoShell>,
+    );
+    const continueLink = screen.getByText(/^continue$/i).closest('a');
+    expect(continueLink?.getAttribute('href')).toBe('#thesis');
   });
 });
