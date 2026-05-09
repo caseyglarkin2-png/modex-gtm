@@ -337,7 +337,6 @@ export function MemoAudioBrief({
                 data-chapter-id={ch.id}
                 onClick={() => {
                   seekTo(ch.start);
-                  setHasInteracted(true);
                   const a = audioRef.current;
                   if (a && a.paused) void a.play();
                 }}
