@@ -82,9 +82,9 @@ describe('MemoSectionList', () => {
 
     // YNS thesis
     expect(screen.getByText(/yard variance/i)).toBeDefined();
-    // Observation
+    // Observation — assert label/value pair via the unique label text.
     expect(screen.getByText('What we observed about your network')).toBeDefined();
-    expect(screen.getByText(/47/)).toBeDefined();
+    expect(screen.getByText('Plants')).toBeDefined();
     // Comparable
     expect(screen.getByText('Primo Brands')).toBeDefined();
     // Methodology

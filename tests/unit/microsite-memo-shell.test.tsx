@@ -12,19 +12,29 @@ const baseProps = {
 describe('MemoShell', () => {
   it('renders the prepared-date eyebrow + title + author byline', () => {
     render(<MemoShell {...baseProps}><p>body</p></MemoShell>);
-    expect(screen.getByText(/Private analysis · prepared 2026-05-08/i)).toBeDefined();
+    // Polish pass split eyebrow into mono "PRIVATE ANALYSIS" + sans
+    // formatted date "May 8, 2026" — assert the parts independently.
+    expect(screen.getByText(/Private analysis/i)).toBeDefined();
+    expect(screen.getByText(/May 8, 2026/)).toBeDefined();
     expect(screen.getByRole('heading', { level: 1 }).textContent).toContain('General Mills');
     expect(screen.getByText('Casey Larkin · YardFlow')).toBeDefined();
   });
 
   it('omits reader eyebrow + context detail when not provided', () => {
     render(<MemoShell {...baseProps}><p>body</p></MemoShell>);
+    // Footer line "{accountName} · {date}" doesn't include "prepared for".
     expect(screen.queryByText(/prepared for/i)).toBeNull();
   });
 
   it('shows reader eyebrow when set (Sprint M5 personalization slot)', () => {
-    render(<MemoShell {...baseProps} readerEyebrow="prepared for Dan Poland"><p>body</p></MemoShell>);
-    expect(screen.getByText('prepared for Dan Poland')).toBeDefined();
+    render(
+      <MemoShell {...baseProps} readerEyebrow="Prepared for Dan Poland · VP Supply Chain">
+        <p>body</p>
+      </MemoShell>,
+    );
+    // Polish pass renders the name as a separate span (greyer "Prepared for"
+    // prefix + bolder name). Assert the focal name + title is present.
+    expect(screen.getByText(/Dan Poland · VP Supply Chain/)).toBeDefined();
   });
 
   it('shows context detail (e.g. footprint summary) under the title', () => {
@@ -34,12 +44,13 @@ describe('MemoShell', () => {
 
   it('renders the needs-hand-tuning banner when flagged', () => {
     render(<MemoShell {...baseProps} needsHandTuning><p>body</p></MemoShell>);
-    expect(screen.getByText(/generic analysis/i)).toBeDefined();
+    // Polish pass replaced full-width amber strip with a corner DRAFT badge.
+    expect(screen.getByText(/Draft · v0/i)).toBeDefined();
   });
 
   it('does not render the banner when not flagged', () => {
     render(<MemoShell {...baseProps}><p>body</p></MemoShell>);
-    expect(screen.queryByText(/generic analysis/i)).toBeNull();
+    expect(screen.queryByText(/Draft · v0/i)).toBeNull();
   });
 
   it('does not include any "book a call" affordance in the chrome', () => {
@@ -49,9 +60,11 @@ describe('MemoShell', () => {
     expect(screen.queryByText(/calendar/i)).toBeNull();
   });
 
-  it('renders the footer brand line', () => {
+  it('renders a minimal footer line with account + prepared date', () => {
     render(<MemoShell {...baseProps}><p>body</p></MemoShell>);
-    expect(screen.getByText(/YardFlow by FreightRoll/i)).toBeDefined();
+    // Polish pass dropped the "YardFlow by FreightRoll · {account} private
+    // brief" cruft. Footer is now mono "{ACCOUNT} · {date}".
+    expect(screen.getByText(/General Mills · May 8, 2026/)).toBeDefined();
   });
 
   it('passes the accent CSS var down for the FootnoteMarker to consume', () => {

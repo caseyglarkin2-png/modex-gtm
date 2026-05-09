@@ -33,24 +33,28 @@ describe('numberFootnotes', () => {
 });
 
 describe('FootnoteMarker', () => {
-  it('renders a superscript anchor pointing at the footnote anchor', () => {
+  it('renders a bracketed numeric anchor pointing at the footnote anchor', () => {
+    // Polish pass replaced raw <sup>2</sup> with bracketed mono "[2]" so
+    // markers read as academic-print, not HTML default.
     render(<FootnoteMarker n={2} />);
     const link = screen.getByLabelText('Footnote 2');
     expect(link.getAttribute('href')).toBe('#fn-2');
-    expect(link.textContent).toBe('2');
+    expect(link.textContent).toBe('[2]');
   });
 });
 
 describe('ConfidenceBadge', () => {
-  it('renders the human label for each confidence level', () => {
+  it('renders the bracketed label for each confidence level', () => {
+    // Polish pass replaced saturated rounded pills (Measured / Public data
+    // / Estimated / Inferred) with monospace bracketed lowercase tags.
     const { rerender } = render(<ConfidenceBadge confidence="measured" />);
-    expect(screen.getByText('Measured')).toBeDefined();
+    expect(screen.getByText('[measured]')).toBeDefined();
     rerender(<ConfidenceBadge confidence="public" />);
-    expect(screen.getByText('Public data')).toBeDefined();
+    expect(screen.getByText('[public]')).toBeDefined();
     rerender(<ConfidenceBadge confidence="estimated" />);
-    expect(screen.getByText('Estimated')).toBeDefined();
+    expect(screen.getByText('[estimated]')).toBeDefined();
     rerender(<ConfidenceBadge confidence="inferred" />);
-    expect(screen.getByText('Inferred')).toBeDefined();
+    expect(screen.getByText('[inferred]')).toBeDefined();
   });
 });
 
