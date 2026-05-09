@@ -51,7 +51,7 @@ export function MicrositeMemoSocialImage({
         overflow: 'hidden',
         background: '#FFFFFF',
         color: '#0F172A',
-        fontFamily: '"Inter Tight", "Inter", system-ui, sans-serif',
+        fontFamily: '"Mona Sans", "Inter", system-ui, sans-serif',
       }}
     >
       {/* Left accent rule */}
@@ -100,7 +100,7 @@ export function MicrositeMemoSocialImage({
           {/* Headline (serif feel via Georgia fallback chain) */}
           <div
             style={{
-              fontFamily: '"Newsreader", "Iowan Old Style", Georgia, serif',
+              fontFamily: '"Fraunces", "Iowan Old Style", Georgia, serif',
               fontSize: 64,
               lineHeight: 1.05,
               fontWeight: 600,
@@ -195,7 +195,7 @@ export function MicrositeMemoSocialImage({
                       fontSize: 26,
                       fontWeight: 600,
                       color: '#0F172A',
-                      fontFamily: '"Newsreader", "Iowan Old Style", Georgia, serif',
+                      fontFamily: '"Fraunces", "Iowan Old Style", Georgia, serif',
                     }}
                   >
                     {stat.value}
