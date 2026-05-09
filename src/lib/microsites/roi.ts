@@ -813,6 +813,15 @@ export function buildROISectionFromModel(
   };
 }
 
+const ROI_STUB_BASE: ROISection = {
+  type: 'roi',
+  sectionLabel: 'The Business Case',
+  headline: 'Modeled annual value',
+  narrative:
+    'Engine-backed ROI from the live calculator using the account\'s archetype mix and operating assumptions.',
+  roiLines: [],
+};
+
 export function materializeMicrositeSections(
   data: Pick<AccountMicrositeData, 'accountName' | 'roiModel'>,
   sections: MicrositeSection[],
@@ -821,6 +830,15 @@ export function materializeMicrositeSections(
 
   if (!roiModel) {
     return sections;
+  }
+
+  const hasRoi = sections.some((section) => section.type === 'roi');
+
+  if (!hasRoi) {
+    return [
+      ...sections,
+      buildROISectionFromModel(ROI_STUB_BASE, data.accountName, roiModel),
+    ];
   }
 
   return sections.map((section) =>

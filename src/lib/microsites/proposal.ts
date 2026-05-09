@@ -1,10 +1,12 @@
 import { getAccountMicrositeData } from './accounts';
 import { materializeMicrositeSections } from './roi';
 import type {
+  AccountMicrositeData,
   CTABlock,
   HeroSection,
   MicrositeSection,
   NetworkMapSection,
+  ObservationSection,
   ProblemSection,
   ProofSection,
   ProofStat,
@@ -12,7 +14,7 @@ import type {
   ROISection,
   ROISourceNote,
 } from './schema';
-import { normalizeMicrositeCta } from './cta';
+import { buildShortOverviewCta, normalizeMicrositeCta } from './cta';
 
 type SectionOf<T extends MicrositeSection['type']> = Extract<MicrositeSection, { type: T }>;
 
@@ -160,17 +162,126 @@ function buildFocusPoints(problem: ProblemSection | undefined, proofStats: Proof
   return proofStats.slice(0, 4).map((stat) => stat.label);
 }
 
+function findObservationSection(sections: MicrositeSection[]): ObservationSection | undefined {
+  return sections.find((section): section is ObservationSection => section.type === 'observation');
+}
+
+function normalizeBackgroundTheme(
+  variant: AccountMicrositeData['theme'] extends infer T
+    ? T extends { backgroundVariant?: infer V } ? V : undefined
+    : undefined,
+): HeroSection['backgroundTheme'] {
+  switch (variant) {
+    case 'industrial':
+    case 'gradient':
+    case 'dark':
+      return variant;
+    default:
+      return 'dark';
+  }
+}
+
+function synthesizeHero(
+  data: AccountMicrositeData,
+  observation: ObservationSection | undefined,
+): HeroSection {
+  const variantHero = data.personVariants[0]?.heroOverride;
+  const observationFirstSentence = observation?.hypothesis.split(/(?<=[.!?])\s+/)[0]?.trim();
+  const headline =
+    variantHero?.headline ??
+    observationFirstSentence ??
+    `${data.accountName} yard execution thesis`;
+  const subheadline =
+    variantHero?.subheadline ??
+    observation?.hypothesis ??
+    `${data.accountName} runs a ${data.network.facilityCount} site ${data.vertical} network. The yard layer is the part of that network most planning systems can't see.`;
+
+  return {
+    type: 'hero',
+    headline,
+    subheadline,
+    accountCallout: data.accountName,
+    backgroundTheme: normalizeBackgroundTheme(data.theme?.backgroundVariant),
+    cta: buildShortOverviewCta(data.accountName),
+  };
+}
+
+function synthesizeProblem(
+  data: AccountMicrositeData,
+  observation: ObservationSection | undefined,
+): ProblemSection {
+  if (observation) {
+    return {
+      type: 'problem',
+      sectionLabel: 'The Hidden Constraint',
+      headline: observation.headline,
+      narrative: observation.hypothesis,
+      painPoints: observation.composition.slice(0, 4).map((entry) => ({
+        headline: entry.label,
+        description: entry.value,
+      })),
+    };
+  }
+
+  const facilityTypes = data.network.facilityTypes?.slice(0, 4) ?? [];
+  return {
+    type: 'problem',
+    sectionLabel: 'The Hidden Constraint',
+    headline: `Where the ${data.accountName} network leaks operating value`,
+    narrative:
+      data.signals?.urgencyDriver ??
+      `${data.accountName}'s ${data.network.facilityCount} facilities each run their own yard routine today. The fragmentation is the part that compounds — every facility absorbs variance the network never aggregates.`,
+    painPoints: facilityTypes.map((type) => ({
+      headline: `${type} dock contention`,
+      description: `${type} flow has its own staging discipline. When that discipline isn't standardized across sites, the network absorbs the variance as cost.`,
+    })),
+  };
+}
+
+function synthesizeProof(data: AccountMicrositeData): ProofSection | undefined {
+  if (!data.proofBlocks || data.proofBlocks.length === 0) return undefined;
+  return {
+    type: 'proof',
+    sectionLabel: 'Proof from Live Deployment',
+    headline: 'What comparable networks measured',
+    blocks: data.proofBlocks,
+  };
+}
+
+function synthesizeNetwork(data: AccountMicrositeData): NetworkMapSection {
+  const types = (data.network.facilityTypes ?? []).slice(0, 3).join(' · ');
+  const narrativeParts = [
+    `${data.network.facilityCount}${types ? ` — ${types}` : ''}${data.network.geographicSpread ? ` across ${data.network.geographicSpread}` : ''}.`,
+    `Today each site runs its own yard protocol; ${data.accountName} does not yet have a single operating standard at the dock.`,
+  ];
+
+  return {
+    type: 'network-map',
+    sectionLabel: 'Your Network',
+    headline: `${data.accountName}'s yard footprint`,
+    narrative: narrativeParts.join(' '),
+    facilityCount: data.network.facilityCount,
+    facilityTypes: data.network.facilityTypes,
+    geographicSpread: data.network.geographicSpread,
+    dailyTrailerMoves: data.network.dailyTrailerMoves,
+    peakMultiplier: data.network.peakMultiplier,
+  };
+}
+
 export function resolveMicrositeProposalBrief(slug: string): MicrositeProposalBrief | null {
   const data = getAccountMicrositeData(slug);
   if (!data) return null;
 
-  const sections = materializeMicrositeSections(data, data.sections);
-  const hero = findSection(sections, 'hero');
-  if (!hero) return null;
+  const observation = findObservationSection(data.sections);
+  const hero = synthesizeHero(data, observation);
+  const problem = synthesizeProblem(data, observation);
+  const proof = synthesizeProof(data);
+  const network = synthesizeNetwork(data);
 
-  const problem = findSection(sections, 'problem');
-  const proof = findSection(sections, 'proof');
-  const network = findSection(sections, 'network-map');
+  const baseSections: MicrositeSection[] = [hero, problem, network];
+  if (proof) baseSections.push(proof);
+
+  const sections = materializeMicrositeSections(data, baseSections);
   const roi = findSection(sections, 'roi');
   const proofStats = buildProofStats(proof);
   const normalizedCta = normalizeMicrositeCta(hero.cta, data.accountName);
