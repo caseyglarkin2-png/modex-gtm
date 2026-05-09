@@ -23,7 +23,7 @@
 
 ```
 [--account <slug>] →
-  1. compose research prompt (account data + Drive dossier)
+  1. compose research prompt (account data + local dossiers from docs/research/)
   2. Playwright opens gemini.google.com (persistent casey@freightroll.com session)
   3. submit deep-research prompt, poll until report renders
   4. capture report markdown
@@ -117,17 +117,19 @@ modex-gtm/
 ├── scripts/audio-pipeline/
 │   ├── run.ts              # entry point, stage orchestration
 │   ├── stages/
-│   │   ├── compose.ts      # prompt assembly from account data + Drive dossier
+│   │   ├── compose.ts      # prompt assembly from account data + local dossiers
 │   │   ├── gemini.ts       # Playwright flow for Gemini deep research
 │   │   ├── notebook-lm.ts  # Playwright flow for podcast generation
 │   │   ├── chapters.ts     # Gemini segmentation prompt (fresh chat)
 │   │   └── patch.ts        # TS AST edit of accounts/<slug>.ts
 │   ├── lib/
 │   │   ├── browser.ts      # persistent context factory
-│   │   ├── drive.ts        # Drive dossier fetch — drives the same Playwright session
-│   │   │                   #   to drive.google.com, searches "<account> dossier",
-│   │   │                   #   opens the top match, captures the body text. No
-│   │   │                   #   service-account or gcloud setup needed.
+│   │   ├── dossiers.ts     # glob docs/research/*-<slug-variants>-dossier.md,
+│   │   │                   #   concat into research seed; also pulls
+│   │   │                   #   docs/research-dossiers-top10.md and
+│   │   │                   #   facility-count-workbench.md if relevant.
+│   │   │                   #   No Drive / no gcloud / no MCP needed —
+│   │   │                   #   dossiers are committed to the repo.
 │   │   └── checkpoint.ts   # per-stage state read/write
 │   └── README.md           # how to bootstrap session + run
 ├── src/lib/microsites/
@@ -143,7 +145,7 @@ modex-gtm/
 
 1. Casey: `npx tsx scripts/audio-pipeline/run.ts --account dannon`
 2. Script reads `accounts/dannon.ts` for `accountName`, `vertical`, `network.facilityCount`
-3. Script attempts to fetch Drive dossier matching `Dannon dossier` (Drive search via authenticated session); if found, includes the body in the prompt
+3. Script globs `docs/research/*-{slug-variants}-dossier.md` and concatenates any matches as the research seed. Slug matching is fuzzy because dossier filenames use loose slugs (`generalmills`, `campbells`, `abinbev`, `kdp`) while modex-gtm account slugs use `general-mills`, `campbell-s`, `ab-inbev`, `keurig-dr-pepper`. The script normalizes both sides (strip hyphens, lowercase) before matching. Also folds in any account-row from `docs/research/facility-count-workbench.md` and the relevant slice of `docs/research-dossiers-top10.md`. If no dossier exists, falls back to account-data-only prompt and notes the gap in the run log so it can be filled later via `clawd-control-plane/scripts/dossier_pipeline.py`.
 4. Script composes prompt; opens persistent Playwright; runs Gemini deep research
 5. Script saves the report markdown to checkpoint, then drives NotebookLM to create the podcast
 6. Mp3 lands in `public/audio/dannon.mp3`; chapter JSON lands in checkpoint
@@ -182,7 +184,11 @@ Integration-testable on demand only (real Google):
 - **Quality bar:** NotebookLM-equivalent (two-host conversational). Forced semi-automated path; ruled out pure-API TTS.
 - **Automation tier:** Semi-automated via Playwright + Casey's Google session. Not full manual, not API-only.
 - **Wave 1 scope:** Canonical mp3 placeholder for every account today; per-account override on demand when a deal warrants. No batch backfill.
-- **Research seed:** Gemini deep research is seeded with existing Drive dossier + account data record. Gemini extends rather than re-derives.
+- **Research seed:** Gemini deep research is seeded with the local dossier(s) under `docs/research/*-<slug>-dossier.md` (already produced by `clawd-control-plane/scripts/dossier_pipeline.py`) plus the account data record. Gemini extends rather than re-derives. No Drive / MCP fetch needed at script time.
 - **Chapter extraction:** Gemini self-segments its own report. PR gate lets Casey hand-tune before merge.
 - **Override mechanism:** `audioBrief?: AccountAudioBrief` field on `AccountMicrositeData`. No parallel directory; one source of truth per account.
 - **PINC/Kaleris is not in scope.** They're competition, not a prospect.
+
+## Known gaps
+
+- **Dossier coverage: 8 of 25 accounts.** Today's local research dossiers exist for `toyota`, `mondelez-international`, `campbell-s`, `ab-inbev`, `ford`, `constellation-brands`, `keurig-dr-pepper`, `general-mills`. The other 17 accounts (`barnes-noble`, `caterpillar`, `coca-cola`, `dannon`, `diageo`, `fedex`, `frito-lay`, `georgia-pacific`, `h-e-b`, `honda`, `hormel-foods`, `hyundai-motor-america`, `jm-smucker`, `john-deere`, `kenco-logistics-services`, `performance-food-group`, `the-home-depot`) will run with the account-data-only fallback prompt — Gemini does its own discovery — until dossiers exist. Generate missing ones via `clawd-control-plane/scripts/dossier_pipeline.py` if a deal heats up and the audio output feels too thin.
