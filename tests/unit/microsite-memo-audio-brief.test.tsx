@@ -4,6 +4,7 @@ import {
   MemoAudioBrief,
   type AudioChapter,
 } from '@/components/microsites/memo-audio-brief';
+import type { AccountMicrositeData, AccountAudioBrief } from '@/lib/microsites/schema';
 
 const chapters: AudioChapter[] = [
   { id: 'thesis', label: 'The thesis', start: 0 },
@@ -97,5 +98,23 @@ describe('MemoAudioBrief', () => {
       />,
     );
     expect(screen.getByText('0:00 / 7:12')).toBeDefined();
+  });
+});
+
+describe('AccountAudioBrief schema', () => {
+  it('AccountMicrositeData accepts an audioBrief override', () => {
+    const audioBrief: AccountAudioBrief = {
+      src: '/audio/dannon.mp3',
+      chapters: [
+        { id: 'thesis', label: 'The thesis', start: 0 },
+        { id: 'beats', label: 'Cold-chain beats', start: 60 },
+      ],
+      heading: 'Listen, Heiko',
+      intro: 'A custom intro for Dannon.',
+      generatedAt: '2026-05-10T14:00:00Z',
+    };
+    // Assignability test — fails to compile if the field isn't on the type.
+    const data: Partial<AccountMicrositeData> = { audioBrief };
+    expect(data.audioBrief?.src).toBe('/audio/dannon.mp3');
   });
 });

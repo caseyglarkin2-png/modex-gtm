@@ -12,6 +12,8 @@
  * every page variant is built for a specific human being.
  */
 
+import type { AudioChapter } from '@/components/microsites/memo-audio-brief';
+
 // ── Section Module Types ──────────────────────────────────────────────
 //
 // The 5 memo-era section types drive the light-memo template introduced
@@ -463,6 +465,20 @@ export type MicrositeSection =
   | MemoMicrositeSection
   | ROISection;
 
+// ── Audio Brief Override ─────────────────────────────────────────────
+export interface AccountAudioBrief {
+  /** mp3 path under /public; if absent, page falls back to canonical AUDIO_BRIEF_SRC. */
+  src: string;
+  /** Chapter list specific to this account's audio. */
+  chapters: AudioChapter[];
+  /** Optional account-specific heading override. Falls back to component default. */
+  heading?: string;
+  /** Optional account-specific intro override. */
+  intro?: string;
+  /** ISO timestamp when this audio was generated. Used by audit / regen flows. */
+  generatedAt: string;
+}
+
 // ── Full Account Microsite Data ───────────────────────────────────────
 export interface AccountMicrositeData {
   // Identity
@@ -538,6 +554,10 @@ export interface AccountMicrositeData {
   showcase?: boolean;               // flagged for DWTB marketplace demo
   showcaseOrder?: number;           // display order in showcase gallery (1 = first)
   layoutPreset?: LayoutPreset;      // controls section rhythm, spacing, emphasis
+
+  // Audio brief override
+  /** When present, replaces the canonical audio brief on this account's memo. */
+  audioBrief?: AccountAudioBrief;
 
   // YNS Microsite Redesign migration flag (Sprint M3).
   //
