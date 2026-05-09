@@ -48,7 +48,7 @@ const methodology: MethodologySection = {
   type: 'methodology',
   headline: 'How this analysis was built',
   sources: [
-    { id: 'ata-2024', source: 'ATA 2024 Yard Operations Survey', confidence: 'public' },
+    { id: 'ata-2024-yard-ops', source: 'ATA 2024 Yard Operations Survey', confidence: 'public' },
     { id: 'primo-q1', source: 'Primo Brands Q1 ops review', confidence: 'measured' },
   ],
   unknowns: [
@@ -67,10 +67,10 @@ describe('collectFootnotes', () => {
   it('walks all sections and dedupes footnotes by id, in document order', () => {
     const numbered = collectFootnotes([ynsThesis, observation, comparable, methodology, about]);
     const ids = numbered.map((fn) => fn.id);
-    // ata-2024 appears in both the YNS thesis and methodology — should appear once.
-    expect(ids.filter((id) => id === 'ata-2024')).toHaveLength(1);
+    // ata-2024-yard-ops appears in both the YNS thesis and methodology — should appear once.
+    expect(ids.filter((id) => id === 'ata-2024-yard-ops')).toHaveLength(1);
     // Ordering is first-appearance: yns thesis first, then observation, then methodology unique entries.
-    expect(ids[0]).toBe('ata-2024');
+    expect(ids[0]).toBe('ata-2024-yard-ops');
     expect(ids).toContain('dot-public-data');
     expect(ids).toContain('primo-q1');
   });
@@ -84,7 +84,7 @@ describe('MemoSectionList', () => {
     expect(screen.getByText(/yard variance/i)).toBeDefined();
     // Observation
     expect(screen.getByText('What we observed about your network')).toBeDefined();
-    expect(screen.getByText('47')).toBeDefined();
+    expect(screen.getByText(/47/)).toBeDefined();
     // Comparable
     expect(screen.getByText('Primo Brands')).toBeDefined();
     // Methodology
@@ -93,7 +93,7 @@ describe('MemoSectionList', () => {
     expect(screen.getByText(/About this analysis/i)).toBeDefined();
     expect(screen.getByText('casey@freightroll.com')).toBeDefined();
     // Footnote list
-    expect(screen.getByText(/Sources & methodology notes/i)).toBeDefined();
+    expect(screen.getByText(/^Sources$/i)).toBeDefined();
   });
 
   it('inlines a FootnoteMarker where [^id] tokens appear in body text', () => {
@@ -105,6 +105,6 @@ describe('MemoSectionList', () => {
 
   it('omits the FootnoteList block when no sections carry footnotes', () => {
     render(<MemoSectionList sections={[about]} />);
-    expect(screen.queryByText(/Sources & methodology notes/i)).toBeNull();
+    expect(screen.queryByText(/^Sources$/i)).toBeNull();
   });
 });
