@@ -50,12 +50,14 @@ describe('isMemoSection', () => {
         hypothesis: 'h',
       }),
     ).toBe(true);
+    // Sanity check that ROISection (engine output, also a SectionType
+    // string but not a memo type) is correctly classified as non-memo.
     expect(
       isMemoSection({
-        type: 'hero',
+        type: 'roi',
         headline: 'h',
-        subheadline: '',
-        cta: { type: 'audit', headline: 'h', subtext: '', buttonLabel: 'b' },
+        narrative: '',
+        roiLines: [],
       }),
     ).toBe(false);
   });

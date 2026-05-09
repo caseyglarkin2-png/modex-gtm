@@ -1,14 +1,10 @@
 import { getAccountMicrositeData } from './accounts';
-import { materializeMicrositeSections } from './roi';
+import { buildROISectionFromModel } from './roi';
 import type {
   AccountMicrositeData,
   CTABlock,
-  HeroSection,
-  MicrositeSection,
-  NetworkMapSection,
   ObservationSection,
-  ProblemSection,
-  ProofSection,
+  ProofBlock,
   ProofStat,
   ROIHeadlineStat,
   ROISection,
@@ -16,12 +12,19 @@ import type {
 } from './schema';
 import { buildShortOverviewCta, normalizeMicrositeCta } from './cta';
 
-type SectionOf<T extends MicrositeSection['type']> = Extract<MicrositeSection, { type: T }>;
-
 export interface MicrositeProposalSummaryStat {
   label: string;
   value: string;
   detail?: string;
+}
+
+export interface MicrositeProposalNetwork {
+  facilityCount?: string;
+  facilityTypes?: string[];
+  geographicSpread?: string;
+  dailyTrailerMoves?: string;
+  peakMultiplier?: string;
+  narrative?: string;
 }
 
 export interface MicrositeProposalBrief {
@@ -38,24 +41,28 @@ export interface MicrositeProposalBrief {
   exportHtmlPath: string;
   exportJsonPath: string;
   bookingLink?: string;
-  hero: HeroSection;
+
+  // Commercial thesis + framing — derived from the observation memo
+  // section when an account has been hand-tuned, otherwise from data.signals
+  // and a generic fallback. No longer the typed HeroSection / ProblemSection
+  // wrappers from the legacy schema (deleted in M7 cleanup).
+  headline: string;
+  subheadline: string;
+  problemNarrative?: string;
+
   cta: CTABlock;
-  sections: MicrositeSection[];
-  problem?: ProblemSection;
-  proof?: ProofSection;
-  network?: NetworkMapSection;
+
+  network: MicrositeProposalNetwork;
   roi?: ROISection;
+
   focusPoints: string[];
   summaryStats: MicrositeProposalSummaryStat[];
   proofStats: ProofStat[];
   sourceNotes: ROISourceNote[];
 }
 
-function findSection<T extends MicrositeSection['type']>(
-  sections: MicrositeSection[],
-  type: T,
-): SectionOf<T> | undefined {
-  return sections.find((section): section is SectionOf<T> => section.type === type);
+function findObservationSection(data: AccountMicrositeData): ObservationSection | undefined {
+  return data.sections.find((section): section is ObservationSection => section.type === 'observation');
 }
 
 function dedupeSourceNotes(...groups: Array<ROISourceNote[] | undefined>): ROISourceNote[] {
@@ -78,8 +85,56 @@ function getHeadlineStat(roi: ROISection | undefined, id: ROIHeadlineStat['id'])
   return roi?.headlineStats?.find((stat) => stat.id === id);
 }
 
+function buildHeadline(data: AccountMicrositeData, observation: ObservationSection | undefined): string {
+  if (observation) {
+    const firstSentence = observation.hypothesis.split(/(?<=[.!?])\s+/)[0]?.trim();
+    if (firstSentence) return firstSentence;
+  }
+  return data.signals?.urgencyDriver ?? `${data.accountName} yard execution thesis`;
+}
+
+function buildSubheadline(data: AccountMicrositeData, observation: ObservationSection | undefined): string {
+  if (observation) return observation.hypothesis;
+  return `${data.accountName} runs a ${data.network.facilityCount} site ${data.vertical} network. The yard layer is the part of that network most planning systems can't see.`;
+}
+
+function buildProblemNarrative(observation: ObservationSection | undefined): string | undefined {
+  return observation?.hypothesis;
+}
+
+function buildNetwork(data: AccountMicrositeData): MicrositeProposalNetwork {
+  const types = (data.network.facilityTypes ?? []).slice(0, 3).join(' · ');
+  const narrative = [
+    `${data.network.facilityCount}${types ? ` — ${types}` : ''}${data.network.geographicSpread ? ` across ${data.network.geographicSpread}` : ''}.`,
+    `Today each site runs its own yard protocol; ${data.accountName} does not yet have a single operating standard at the dock.`,
+  ].join(' ');
+
+  return {
+    facilityCount: data.network.facilityCount,
+    facilityTypes: data.network.facilityTypes,
+    geographicSpread: data.network.geographicSpread,
+    dailyTrailerMoves: data.network.dailyTrailerMoves,
+    peakMultiplier: data.network.peakMultiplier,
+    narrative,
+  };
+}
+
+const ROI_STUB_BASE: ROISection = {
+  type: 'roi',
+  sectionLabel: 'The Business Case',
+  headline: 'The business case',
+  narrative:
+    'Engine-backed ROI from the live calculator using the account\'s archetype mix and operating assumptions.',
+  roiLines: [],
+};
+
+function buildEngineRoi(data: AccountMicrositeData): ROISection | undefined {
+  if (!data.roiModel) return undefined;
+  return buildROISectionFromModel(ROI_STUB_BASE, data.accountName, data.roiModel);
+}
+
 function buildSummaryStats(
-  network: NetworkMapSection | undefined,
+  network: MicrositeProposalNetwork,
   roi: ROISection | undefined,
 ): MicrositeProposalSummaryStat[] {
   const stats: MicrositeProposalSummaryStat[] = [];
@@ -87,7 +142,7 @@ function buildSummaryStats(
   const yearOneRoi = getHeadlineStat(roi, 'year-one-roi');
   const costOfInaction = getHeadlineStat(roi, 'cost-of-inaction');
 
-  if (network?.facilityCount) {
+  if (network.facilityCount) {
     stats.push({
       label: 'Network footprint',
       value: network.facilityCount,
@@ -95,7 +150,7 @@ function buildSummaryStats(
     });
   }
 
-  if (network?.dailyTrailerMoves) {
+  if (network.dailyTrailerMoves) {
     stats.push({
       label: 'Daily trailer moves',
       value: network.dailyTrailerMoves,
@@ -142,149 +197,34 @@ function buildSummaryStats(
   return stats.slice(0, 4);
 }
 
-function buildProofStats(proof: ProofSection | undefined): ProofStat[] {
-  const visualStats = proof?.proofVisual?.stats?.slice(0, 4);
-  if (visualStats && visualStats.length > 0) {
-    return visualStats;
-  }
-
-  const metricBlock = proof?.blocks.find((block) => block.type === 'metric' && block.stats?.length);
+function buildProofStats(blocks: ProofBlock[] | undefined): ProofStat[] {
+  if (!blocks || blocks.length === 0) return [];
+  const metricBlock = blocks.find((block) => block.type === 'metric' && block.stats?.length);
   return metricBlock?.stats?.slice(0, 4) ?? [];
 }
 
-function buildFocusPoints(problem: ProblemSection | undefined, proofStats: ProofStat[]): string[] {
-  const focusPoints = problem?.painPoints.slice(0, 4).map((point) => point.headline) ?? [];
-
-  if (focusPoints.length > 0) {
-    return focusPoints;
-  }
-
-  return proofStats.slice(0, 4).map((stat) => stat.label);
-}
-
-function findObservationSection(sections: MicrositeSection[]): ObservationSection | undefined {
-  return sections.find((section): section is ObservationSection => section.type === 'observation');
-}
-
-function normalizeBackgroundTheme(
-  variant: AccountMicrositeData['theme'] extends infer T
-    ? T extends { backgroundVariant?: infer V } ? V : undefined
-    : undefined,
-): HeroSection['backgroundTheme'] {
-  switch (variant) {
-    case 'industrial':
-    case 'gradient':
-    case 'dark':
-      return variant;
-    default:
-      return 'dark';
-  }
-}
-
-function synthesizeHero(
-  data: AccountMicrositeData,
+function buildFocusPoints(
   observation: ObservationSection | undefined,
-): HeroSection {
-  const variantHero = data.personVariants[0]?.heroOverride;
-  const observationFirstSentence = observation?.hypothesis.split(/(?<=[.!?])\s+/)[0]?.trim();
-  const headline =
-    variantHero?.headline ??
-    observationFirstSentence ??
-    `${data.accountName} yard execution thesis`;
-  const subheadline =
-    variantHero?.subheadline ??
-    observation?.hypothesis ??
-    `${data.accountName} runs a ${data.network.facilityCount} site ${data.vertical} network. The yard layer is the part of that network most planning systems can't see.`;
-
-  return {
-    type: 'hero',
-    headline,
-    subheadline,
-    accountCallout: data.accountName,
-    backgroundTheme: normalizeBackgroundTheme(data.theme?.backgroundVariant),
-    cta: buildShortOverviewCta(data.accountName),
-  };
-}
-
-function synthesizeProblem(
-  data: AccountMicrositeData,
-  observation: ObservationSection | undefined,
-): ProblemSection {
+  proofStats: ProofStat[],
+): string[] {
   if (observation) {
-    return {
-      type: 'problem',
-      sectionLabel: 'The Hidden Constraint',
-      headline: observation.headline,
-      narrative: observation.hypothesis,
-      painPoints: observation.composition.slice(0, 4).map((entry) => ({
-        headline: entry.label,
-        description: entry.value,
-      })),
-    };
+    const points = observation.composition.slice(0, 4).map((entry) => entry.label);
+    if (points.length > 0) return points;
   }
-
-  const facilityTypes = data.network.facilityTypes?.slice(0, 4) ?? [];
-  return {
-    type: 'problem',
-    sectionLabel: 'The Hidden Constraint',
-    headline: `Where the ${data.accountName} network leaks operating value`,
-    narrative:
-      data.signals?.urgencyDriver ??
-      `${data.accountName}'s ${data.network.facilityCount} facilities each run their own yard routine today. The fragmentation is the part that compounds — every facility absorbs variance the network never aggregates.`,
-    painPoints: facilityTypes.map((type) => ({
-      headline: `${type} dock contention`,
-      description: `${type} flow has its own staging discipline. When that discipline isn't standardized across sites, the network absorbs the variance as cost.`,
-    })),
-  };
-}
-
-function synthesizeProof(data: AccountMicrositeData): ProofSection | undefined {
-  if (!data.proofBlocks || data.proofBlocks.length === 0) return undefined;
-  return {
-    type: 'proof',
-    sectionLabel: 'Proof from Live Deployment',
-    headline: 'What comparable networks measured',
-    blocks: data.proofBlocks,
-  };
-}
-
-function synthesizeNetwork(data: AccountMicrositeData): NetworkMapSection {
-  const types = (data.network.facilityTypes ?? []).slice(0, 3).join(' · ');
-  const narrativeParts = [
-    `${data.network.facilityCount}${types ? ` — ${types}` : ''}${data.network.geographicSpread ? ` across ${data.network.geographicSpread}` : ''}.`,
-    `Today each site runs its own yard protocol; ${data.accountName} does not yet have a single operating standard at the dock.`,
-  ];
-
-  return {
-    type: 'network-map',
-    sectionLabel: 'Your Network',
-    headline: `${data.accountName}'s yard footprint`,
-    narrative: narrativeParts.join(' '),
-    facilityCount: data.network.facilityCount,
-    facilityTypes: data.network.facilityTypes,
-    geographicSpread: data.network.geographicSpread,
-    dailyTrailerMoves: data.network.dailyTrailerMoves,
-    peakMultiplier: data.network.peakMultiplier,
-  };
+  return proofStats.slice(0, 4).map((stat) => stat.label);
 }
 
 export function resolveMicrositeProposalBrief(slug: string): MicrositeProposalBrief | null {
   const data = getAccountMicrositeData(slug);
   if (!data) return null;
 
-  const observation = findObservationSection(data.sections);
-  const hero = synthesizeHero(data, observation);
-  const problem = synthesizeProblem(data, observation);
-  const proof = synthesizeProof(data);
-  const network = synthesizeNetwork(data);
+  const observation = findObservationSection(data);
+  const network = buildNetwork(data);
+  const roi = buildEngineRoi(data);
+  const proofStats = buildProofStats(data.proofBlocks);
 
-  const baseSections: MicrositeSection[] = [hero, problem, network];
-  if (proof) baseSections.push(proof);
-
-  const sections = materializeMicrositeSections(data, baseSections);
-  const roi = findSection(sections, 'roi');
-  const proofStats = buildProofStats(proof);
-  const normalizedCta = normalizeMicrositeCta(hero.cta, data.accountName);
+  const baseCta = buildShortOverviewCta(data.accountName);
+  const cta = normalizeMicrositeCta(baseCta, data.accountName);
 
   return {
     slug: data.slug,
@@ -299,18 +239,14 @@ export function resolveMicrositeProposalBrief(slug: string): MicrositeProposalBr
     proposalPath: `/proposal/${data.slug}`,
     exportHtmlPath: `/api/export?type=proposal&slug=${data.slug}&format=html`,
     exportJsonPath: `/api/export?type=proposal&slug=${data.slug}&format=json`,
-    bookingLink: normalizedCta.calendarLink,
-    hero: {
-      ...hero,
-      cta: normalizedCta,
-    },
-    cta: normalizedCta,
-    sections,
-    problem,
-    proof,
+    bookingLink: cta.calendarLink,
+    headline: buildHeadline(data, observation),
+    subheadline: buildSubheadline(data, observation),
+    problemNarrative: buildProblemNarrative(observation),
+    cta,
     network,
     roi,
-    focusPoints: buildFocusPoints(problem, proofStats),
+    focusPoints: buildFocusPoints(observation, proofStats),
     summaryStats: buildSummaryStats(network, roi),
     proofStats,
     sourceNotes: dedupeSourceNotes(data.roiModel?.sourceNotes, roi?.assumptionNotes, roi?.sourceNotes),
@@ -569,7 +505,7 @@ export function renderMicrositeProposalHtml(proposal: MicrositeProposalBrief): s
       <section class="hero">
         <div class="eyebrow">YardFlow by FreightRoll | Board-ready proposal</div>
         <h1>${escapeHtml(proposal.accountName)} yard execution proposal</h1>
-        <p class="summary">${escapeHtml(proposal.hero.subheadline)}</p>
+        <p class="summary">${escapeHtml(proposal.subheadline)}</p>
 
         <div class="meta-row">
           <div class="chip">${escapeHtml(`${proposal.band}-Band | ${proposal.tier}`)}</div>
@@ -585,17 +521,17 @@ export function renderMicrositeProposalHtml(proposal: MicrositeProposalBrief): s
       <section class="section grid-two">
         <div class="panel">
           <div class="section-label">Commercial thesis</div>
-          <p>${escapeHtml(proposal.hero.headline)}</p>
-          ${proposal.problem ? `<p>${escapeHtml(proposal.problem.narrative)}</p>` : ''}
+          <p>${escapeHtml(proposal.headline)}</p>
+          ${proposal.problemNarrative ? `<p>${escapeHtml(proposal.problemNarrative)}</p>` : ''}
           <div class="section-label" style="margin-top: 20px;">Board conversation prompts</div>
           <ul class="focus-list">${renderListItems(proposal.focusPoints, '')}</ul>
         </div>
 
         <div class="panel">
           <div class="section-label">Network reality</div>
-          ${proposal.network ? `<p>${escapeHtml(proposal.network.narrative)}</p>` : '<p>Facility-specific yard evidence is configured in the live microsite model.</p>'}
-          ${proposal.network?.dailyTrailerMoves ? `<p><strong>Daily trailer moves:</strong> ${escapeHtml(proposal.network.dailyTrailerMoves)}</p>` : ''}
-          ${proposal.network?.geographicSpread ? `<p><strong>Footprint:</strong> ${escapeHtml(proposal.network.geographicSpread)}</p>` : ''}
+          ${proposal.network.narrative ? `<p>${escapeHtml(proposal.network.narrative)}</p>` : '<p>Facility-specific yard evidence is configured in the live microsite model.</p>'}
+          ${proposal.network.dailyTrailerMoves ? `<p><strong>Daily trailer moves:</strong> ${escapeHtml(proposal.network.dailyTrailerMoves)}</p>` : ''}
+          ${proposal.network.geographicSpread ? `<p><strong>Footprint:</strong> ${escapeHtml(proposal.network.geographicSpread)}</p>` : ''}
         </div>
       </section>
 

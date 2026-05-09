@@ -1,18 +1,18 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { MicrositeSectionRenderer } from '@/components/microsites/sections';
+import { MicrositeRoiPanel } from '@/components/microsites/roi-section';
 import { generalMills } from '@/lib/microsites/accounts/general-mills';
-import { buildROIDashboard, createDefaultROIEngineInputs, materializeMicrositeSections } from '@/lib/microsites/roi';
-import { resolveMicrositeBySlug } from '@/lib/microsites/rules';
+import { buildROIDashboard, buildROISectionFromModel, createDefaultROIEngineInputs } from '@/lib/microsites/roi';
+import type { ROISection } from '@/lib/microsites/schema';
 
-function findRoiSection(sections: typeof generalMills.sections) {
-  const section = sections.find((candidate) => candidate.type === 'roi');
-  if (!section || section.type !== 'roi') {
-    throw new Error('ROI section not found');
-  }
-
-  return section;
-}
+const ROI_STUB: ROISection = {
+  type: 'roi',
+  sectionLabel: 'The Business Case',
+  headline: 'The business case',
+  narrative:
+    'Engine-backed ROI from the live calculator using the account\'s archetype mix and operating assumptions.',
+  roiLines: [],
+};
 
 describe('microsite ROI engine', () => {
   it('matches the public ROI benchmark scenario closely', () => {
@@ -31,28 +31,10 @@ describe('microsite ROI engine', () => {
     expect(Math.trunc(dashboard.highLevelStats.year1Roi ?? 0)).toBe(165);
   });
 
-  it('materializes the same General Mills ROI math on overview and person routes', () => {
-    const overviewSections = materializeMicrositeSections(generalMills, generalMills.sections);
-    const overviewRoi = findRoiSection(overviewSections);
-
-    const resolved = resolveMicrositeBySlug(generalMills, 'paul-gallagher');
-    expect(resolved).not.toBeNull();
-
-    const personRoi = findRoiSection(resolved!.sections);
-
-    expect(overviewRoi.modelingMode).toBe('engine');
-    expect(personRoi.modelingMode).toBe('engine');
-    expect(overviewRoi.totalAnnualSavings).toBe(personRoi.totalAnnualSavings);
-    expect(overviewRoi.paybackPeriod).toBe(personRoi.paybackPeriod);
-    expect(overviewRoi.totalValueComparison?.yardflowAnnualValue).toBe(personRoi.totalValueComparison?.yardflowAnnualValue);
-    expect(overviewRoi.headlineStats?.map((stat) => stat.value)).toEqual(personRoi.headlineStats?.map((stat) => stat.value));
-  });
-
   it('renders engine-backed ROI sections with benchmark stats and source notes', () => {
-    const overviewSections = materializeMicrositeSections(generalMills, generalMills.sections);
-    const roiSection = findRoiSection(overviewSections);
+    const roiSection = buildROISectionFromModel(ROI_STUB, generalMills.accountName, generalMills.roiModel!);
 
-    render(<MicrositeSectionRenderer section={roiSection} accentColor="#003DA5" />);
+    render(<MicrositeRoiPanel section={roiSection} accentColor="#003DA5" />);
 
     expect(screen.getByText(/modeled annual value/i)).toBeInTheDocument();
     expect(screen.getAllByText(/payback \(all savings\)/i)).toHaveLength(2);

@@ -1,11 +1,9 @@
-import type { MicrositeSection } from '@/lib/microsites/schema';
 import type { MicrositeProposalBrief } from '@/lib/microsites/proposal';
 import {
   FlagshipMetaPills,
   FlagshipSignalRail,
   FlagshipSurface,
 } from './flagship-primitives';
-import { MicrositeSectionRenderer } from './sections';
 import {
   FLAGSHIP_ACTION_CLASS,
   FLAGSHIP_BADGE_CLASS,
@@ -17,10 +15,6 @@ import {
   getAccentClasses,
   getFlagshipThemeStyle,
 } from './theme';
-
-function isHeroSection(section: MicrositeSection): section is Extract<MicrositeSection, { type: 'hero' }> {
-  return section.type === 'hero';
-}
 
 function ActionLink({
   href,
@@ -53,12 +47,11 @@ function ActionLink({
 
 export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }) {
   const accent = getAccentClasses(proposal.accentColor);
-  const renderedSections = proposal.sections.filter((section) => !isHeroSection(section));
   const metaPills = [
     `Priority ${proposal.band} ${proposal.priorityScore}`,
     proposal.vertical,
     'Live ROI model',
-    proposal.network?.facilityCount ? `${proposal.network.facilityCount} disclosed sites` : null,
+    proposal.network.facilityCount ? `${proposal.network.facilityCount} disclosed sites` : null,
   ].filter((item): item is string => Boolean(item));
 
   return (
@@ -131,7 +124,7 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
                 {proposal.accountName} yard execution proposal
               </h1>
               <p className="max-w-5xl text-base leading-relaxed text-slate-300 md:text-lg xl:text-[1.35rem] xl:leading-relaxed">
-                {proposal.hero.subheadline}
+                {proposal.subheadline}
               </p>
 
               <FlagshipMetaPills items={metaPills} accent={accent} />
@@ -149,10 +142,10 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
               <FlagshipSurface tone="hero" className="rounded-[var(--fw-panel-radius-large)] p-7 sm:p-8 xl:p-9">
                 <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>Commercial thesis</div>
                 <p className={`mt-5 text-2xl leading-tight text-white xl:text-3xl ${FLAGSHIP_SECTION_TITLE_CLASS}`}>
-                  {proposal.hero.headline}
+                  {proposal.headline}
                 </p>
-                {proposal.problem && (
-                  <p className="mt-4 text-sm leading-relaxed text-slate-300">{proposal.problem.narrative}</p>
+                {proposal.problemNarrative && (
+                  <p className="mt-4 text-sm leading-relaxed text-slate-300">{proposal.problemNarrative}</p>
                 )}
               </FlagshipSurface>
 
@@ -204,16 +197,7 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
         )}
 
         <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_400px] xl:gap-14 2xl:grid-cols-[minmax(0,1fr)_420px]">
-          <div className="space-y-6">
-            {renderedSections.map((section, index) => (
-              <MicrositeSectionRenderer
-                key={`${section.type}-${index}`}
-                section={section}
-                sectionId={section.sectionId ?? `${section.type}-${index + 1}`}
-                accentColor={proposal.accentColor}
-              />
-            ))}
-          </div>
+          <div className="space-y-6" />
 
           <aside className="space-y-4 xl:sticky xl:top-28 xl:self-start">
             <FlagshipSurface
@@ -224,14 +208,14 @@ export function ProposalBrief({ proposal }: { proposal: MicrositeProposalBrief }
             >
               <div className={`${FLAGSHIP_LABEL_CLASS} text-slate-500`}>Network reality</div>
               <p className="mt-4 text-lg font-semibold text-white">
-                {proposal.network?.facilityCount ?? 'Configured network'} across {proposal.network?.geographicSpread ?? 'the active account footprint'}
+                {proposal.network.facilityCount ?? 'Configured network'} across {proposal.network.geographicSpread ?? 'the active account footprint'}
               </p>
-              {proposal.network?.narrative && (
+              {proposal.network.narrative && (
                 <p className="mt-3 text-sm leading-relaxed text-slate-300">{proposal.network.narrative}</p>
               )}
               <div className="mt-4 space-y-2 text-xs text-slate-400">
-                {proposal.network?.dailyTrailerMoves && <div>Daily trailer moves: {proposal.network.dailyTrailerMoves}</div>}
-                {proposal.network?.peakMultiplier && <div>Peak multiplier: {proposal.network.peakMultiplier}</div>}
+                {proposal.network.dailyTrailerMoves && <div>Daily trailer moves: {proposal.network.dailyTrailerMoves}</div>}
+                {proposal.network.peakMultiplier && <div>Peak multiplier: {proposal.network.peakMultiplier}</div>}
               </div>
             </FlagshipSurface>
 

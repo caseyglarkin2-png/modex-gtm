@@ -34,8 +34,8 @@ export function MicrositesTab({ accounts }: MicrositesTabProps) {
             {showcaseAccounts.map((account) => {
               const accent = getAccentClasses(account.theme?.accentColor);
               const variants = getVariantRoutes(account);
-              const heroSection = account.sections.find((s) => s.type === 'hero');
-              const headline = heroSection && 'headline' in heroSection ? heroSection.headline : '';
+              const observationSection = account.sections.find((s) => s.type === 'observation');
+              const headline = observationSection ? observationSection.headline : '';
               return (
                 <Link
                   key={account.slug}
