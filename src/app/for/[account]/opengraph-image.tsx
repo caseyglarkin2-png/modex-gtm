@@ -1,3 +1,5 @@
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import { ImageResponse } from 'next/og';
 import { notFound } from 'next/navigation';
 import { MicrositeMemoSocialImage } from '@/components/microsites/memo-social-image';
@@ -18,22 +20,23 @@ const PREPARED_DATE = new Date().toLocaleDateString('en-US', {
 
 /**
  * Load the Newsreader and Inter Tight TTFs that ship in src/assets/fonts.
- * The bytes are fetched once per render via the bundled URL — Vercel
- * inlines the font into the OG function output so this stays fast at the
- * edge.
+ *
+ * We read the bytes off the filesystem with fs/promises rather than the
+ * fetch(new URL(..., import.meta.url)) pattern: the fetch-import.meta
+ * approach failed in production with a 500 because Next.js's Turbopack
+ * build doesn't inline non-imported binary assets that way. fs.readFile
+ * from process.cwd() is the documented escape hatch and works because
+ * Vercel ships the entire project root with each Function bundle.
  *
  * Both files are variable fonts; satori (the engine behind ImageResponse)
  * doesn't currently traverse weight axes, so we register one weight per
  * fontFamily slot and let satori synthesize bolds where needed.
  */
 async function loadMemoFonts() {
+  const fontsDir = join(process.cwd(), 'src/assets/fonts');
   const [newsreader, interTight] = await Promise.all([
-    fetch(new URL('../../../assets/fonts/Newsreader-Regular.ttf', import.meta.url)).then(
-      (res) => res.arrayBuffer(),
-    ),
-    fetch(new URL('../../../assets/fonts/InterTight-Regular.ttf', import.meta.url)).then(
-      (res) => res.arrayBuffer(),
-    ),
+    readFile(join(fontsDir, 'Newsreader-Regular.ttf')),
+    readFile(join(fontsDir, 'InterTight-Regular.ttf')),
   ]);
   return { newsreader, interTight };
 }
