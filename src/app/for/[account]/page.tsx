@@ -15,6 +15,12 @@ import {
   buildTocEntries,
 } from '@/components/microsites/memo-section';
 import { MemoSoftAction } from '@/components/microsites/memo-soft-action';
+import { MemoAudioBrief } from '@/components/microsites/memo-audio-brief';
+import {
+  AUDIO_BRIEF_SRC,
+  AUDIO_BRIEF_CHAPTERS,
+  AUDIO_BRIEF_DURATION,
+} from '@/lib/microsites/audio-brief';
 import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
 
 const PREPARED_DATE = new Date().toISOString().slice(0, 10); // ISO; MemoShell formats display
@@ -58,6 +64,7 @@ export default async function AccountMicrositePage({
     reader?.variant.person.firstName ?? reader?.variant.person.name?.split(' ')[0];
   const tocEntries = buildTocEntries(memoSections, {
     withPreambleFor: reader ? readerFirstName : undefined,
+    withAudio: true,
   });
 
   return (
@@ -83,6 +90,12 @@ export default async function AccountMicrositePage({
       >
         {reader ? <MemoPreamble variant={reader.variant} /> : null}
         <MemoSectionList sections={memoSections} accentColor={data.theme?.accentColor} />
+        <MemoAudioBrief
+          src={AUDIO_BRIEF_SRC}
+          chapters={AUDIO_BRIEF_CHAPTERS}
+          accentColor={data.theme?.accentColor}
+          expectedDuration={AUDIO_BRIEF_DURATION}
+        />
         <MemoSoftAction
           accountName={data.accountName}
           href={buildROIDeepLink(data, { personSlug: reader?.personSlug })}
