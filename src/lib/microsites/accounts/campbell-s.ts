@@ -170,9 +170,89 @@ export const campbellS: AccountMicrositeData = {
   priorityScore: 75,
 
   pageTitle: 'YardFlow for Campbell\'s - Yard Network Standardization',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across Campbell\'s\'s facility network.',
+  metaDescription: 'How YardFlow eliminates the yard bottleneck across Campbell\'s facility network.',
 
-  sections: [],
+  sections: [
+    { type: 'yns-thesis' },
+    {
+      type: 'observation',
+      headline: 'What we observed about Campbell\'s network',
+      composition: [
+        { label: 'Facility footprint', value: '24+ manufacturing plants and distribution centers across North America' },
+        { label: 'Product mix at the dock', value: 'Shelf-stable (canned soup, broth, sauces) · Refrigerated (Rao\'s, noosa) · Snacks (Goldfish, pretzels) · Baked goods (Pepperidge Farm)' },
+        { label: 'Daily trailer moves', value: '1,000+ across the network' },
+        { label: 'Peak multiplier', value: '2-3x surge during soup season (Oct-Mar); secondary peaks around Super Bowl and summer snacking' },
+        { label: 'Active network change', value: 'Tualatin closure · Jeffersonville reduction · Maxton expansion ($150M) · Sovos/Rao\'s integration in flight' },
+      ],
+      hypothesis:
+        'The angle that keeps coming back is consolidation under load. Campbell\'s is closing and shrinking some plants while expanding Maxton and absorbing Sovos premium-product flow at the same time — the remaining facilities are taking on more trailer volume, more SKU variety, and more handling profiles right now. Underneath that, the dock has to sequence four genuinely different product profiles (shelf-stable palletized vs. temp-controlled premium vs. lightweight bulky snacks vs. fragile baked goods), each with different staging discipline. Stack soup-season Q4 surge on top of that and the yard becomes the surface where the consolidation math, the Rao\'s premium service-level expectation, and the network\'s seasonal reality all stop translating into clean execution. The Dan Poland reorg in November 2024 — moving him to Chief Enterprise Transformation Officer with Cassandra Green now running supply chain — is the part of the picture that says someone at the top is now explicitly looking for transformation capabilities that scale across the whole company. The yard layer is one of the few places where that brief actually has measurable headroom.',
+      caveat:
+        'This is built from public Campbell\'s disclosures, the November 2024 reorg announcement, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing on detention spend, the four-profile dock contention, or how much existing yard-system coverage already lives across the 24+ sites.',
+    },
+    {
+      type: 'comparable',
+      headline: 'What a comparable network did when they closed the same gap',
+      comparableName: 'Primo Brands',
+      comparableProfile:
+        'Multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs. Closer in shape to Campbell\'s than the headline category suggests — the relevant overlap is multi-profile product mix, seasonal surge, and a yard layer running on local routines before deployment.',
+      metrics: [
+        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
+        { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+      ],
+      timeline: '30-60 days from kickoff to first measurable impact at the pilot site. Maxton (post-expansion) is the cleanest pilot candidate because the new investment can absorb a new operating standard without unwinding legacy habits.',
+      referenceAvailable: true,
+    },
+    {
+      type: 'methodology',
+      headline: 'How this analysis was built',
+      sources: [
+        {
+          id: 'campbells-public-disclosures',
+          source: 'Campbell\'s public network disclosures and the November 2024 leadership reorg announcement',
+          confidence: 'public',
+          detail: 'Anchors the 24+ facility figure, the Tualatin/Jeffersonville/Maxton activity, the Sovos integration context, and the Dan Poland → Chief Enterprise Transformation Officer move with Cassandra Green now running Supply Chain.',
+        },
+        {
+          id: 'industry-benchmarks',
+          source: 'ATA + Aberdeen yard-operations benchmarks',
+          confidence: 'public',
+          detail: 'Cross-industry baselines on dock-radio prevalence, dwell-time variance, and detention-cost ranges. These describe the conditions most multi-profile CPG networks operate under, not Campbell\'s specifically.',
+        },
+        {
+          id: 'modex-signal',
+          source: 'MODEX past-attendee list',
+          confidence: 'public',
+          detail: 'Campbell\'s is on the MODEX past-attendee list. That signal is part of why this analysis was sized now rather than later.',
+        },
+        {
+          id: 'primo-q1-2025',
+          source: 'Primo Brands operating data (under NDA)',
+          confidence: 'measured',
+          detail: 'Post-deployment turn time, dock-office headcount, and per-site profit impact have been shared with us by the Primo CFO and ops team. Specific numbers are referenceable in a peer call when relevant.',
+        },
+      ],
+      unknowns: [
+        'Real detention spend by lane and carrier — we estimate, you measure',
+        'Where the four product-profile dock contention concentrates today (which plants, which shifts)',
+        'Existing YMS or dock-scheduling coverage across the 24+ sites',
+        'How the Maxton expansion ramp-up plan handles incremental yard volume',
+        'How Sovos/Rao\'s premium SLAs are sequenced into the dock queue at multi-profile sites',
+      ],
+    },
+    {
+      type: 'about',
+      headline: 'About this analysis',
+      authorBio:
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. The framing leans on Dan Poland\'s Enterprise Transformation mandate because the yard layer is one of the genuinely scalable operating-improvement surfaces left in a CPG network of this size.',
+      authorEmail: 'casey@freightroll.com',
+      signOff:
+        'If parts of this read wrong against what you see internally for Campbell\'s — particularly the four-profile dock math, the soup-season surge, the Maxton expansion footprint, or the assumption that the 24+ sites are still on local yard routines — that\'s the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
+    },
+  ],
+
+  needsHandTuning: false,
 
   people: [
     {
