@@ -169,7 +169,82 @@ export const dannon: AccountMicrositeData = {
   pageTitle: 'YardFlow for Danone North America - Yard Network Standardization',
   metaDescription: 'How YardFlow eliminates the yard bottleneck across Danone North America\'s production and distribution network.',
 
-  sections: [],
+  sections: [
+    { type: 'yns-thesis' },
+    {
+      type: 'observation',
+      headline: 'What we observed about Danone North America\'s network',
+      composition: [
+        { label: 'Production footprint', value: `${DANNON_FACILITY_COUNT_LABEL} North American facilities` },
+        { label: 'Category mix', value: 'Fresh dairy · Plant-based · Medical nutrition · Waters' },
+        { label: 'Temperature profiles', value: 'Four zones competing for the same dock surface at multi-category sites' },
+        { label: 'Daily trailer moves', value: '1,000+ across the network' },
+        { label: 'Carrier model', value: 'Contract carriers and 3PL — no private fleet' },
+      ],
+      hypothesis:
+        'The constraint we keep coming back to is shelf life. Fresh dairy and plant-based both run on a 14-day clock, and the clock starts well before the case is picked. When a reefer sits an extra 30-45 minutes in the yard during summer, that time comes out of product life you never get back — and the cost shows up in shrink, service recovery, and carrier scorecards at the same time. Underneath that, each plant runs its own gate, dock, and spotter coordination, so the White Plains supply chain team has to stitch a network view from 13 different local routines. That fragmentation is the part that compounds: the more facilities Danone runs to a different yard standard, the harder it gets to act on the freshness data once you have it.',
+      caveat:
+        'This is what public data and our research surface. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what you see internally on detention spend, dock-zone discipline, or how much the yard layer is already standardized today.',
+    },
+    {
+      type: 'comparable',
+      headline: 'What a comparable network did when they closed the same gap',
+      comparableName: 'Primo Brands',
+      comparableProfile:
+        'Multi-site bottling and distribution network with a similar archetype mix — high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs. Deployed YardFlow as the network-yard standardization layer in 2024-2025.',
+      metrics: [
+        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
+        { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
+        { label: 'Network rollout', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+      ],
+      timeline: '30-60 days from kickoff to first measurable impact at the pilot site; full network rollout follows the same protocol with diminishing per-site setup time.',
+      referenceAvailable: true,
+    },
+    {
+      type: 'methodology',
+      headline: 'How this analysis was built',
+      sources: [
+        {
+          id: 'danone-public-footprint',
+          source: 'Danone North America company overview',
+          confidence: 'public',
+          detail: `Danone North America states it operates ${DANNON_FACILITY_COUNT_LABEL} production facilities. Used as the anchor for facility count and category mix.`,
+          url: 'https://www.danonenorthamerica.com/about-us/',
+        },
+        {
+          id: 'industry-benchmarks',
+          source: 'ATA + Aberdeen yard-operations benchmarks',
+          confidence: 'public',
+          detail: 'Cross-industry baselines on dock-radio prevalence, dwell-time variance, and detention-cost ranges. These are not Danone-specific — they describe the conditions most multi-site networks operate under.',
+        },
+        {
+          id: 'primo-q1-2025',
+          source: 'Primo Brands operating data (under NDA)',
+          confidence: 'measured',
+          detail: 'Post-deployment turn time, dock-office headcount, and per-site profit impact have been shared with us by the Primo CFO and ops team. Specific numbers are referenceable in a peer call when relevant.',
+        },
+      ],
+      unknowns: [
+        'Your real detention spend by lane and carrier — we estimate, you measure',
+        'Spotter and dock-office FTE structure per site, including overtime mix',
+        'Internal SLAs between plants, DCs, and the Away From Home / retail customers',
+        'Where temperature-zone misassignment events are concentrated today',
+        'How much of this layer is already covered by an existing YMS at any of the 13 sites',
+      ],
+    },
+    {
+      type: 'about',
+      headline: 'About this analysis',
+      authorBio:
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. The Mark Shaughnessy intro path is the only outreach lane we are using here; nothing on this page is meant to bypass that.',
+      authorEmail: 'casey@freightroll.com',
+      signOff:
+        `If parts of this read wrong against what you see internally for Danone — particularly the shelf-life math, the four-zone dock contention, or the assumption that the yard layer is still ${DANNON_FACILITY_COUNT_LABEL} different routines — that\'s the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.`,
+    },
+  ],
+
+  needsHandTuning: false,
 
   people: [
     {
