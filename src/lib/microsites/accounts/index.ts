@@ -9,11 +9,17 @@ import type { AccountMicrositeData } from '../schema';
 
 import { abInbev } from './ab-inbev';
 import { barnesNoble } from './barnes-noble';
+import { bobEvansFarms } from './bob-evans-farms';
+import { bostonBeerCompany } from './boston-beer-company';
 import { campbellS } from './campbell-s';
 import { caterpillar } from './caterpillar';
+import { cjLogisticsAmerica } from './cj-logistics-america';
 import { cocaCola } from './coca-cola';
 import { constellationBrands } from './constellation-brands';
+import { costPlusWorldMarket } from './cost-plus-world-market';
+import { daimlerTruckNorthAmerica } from './daimler-truck-north-america';
 import { dannon } from './dannon';
+import { dhlSupplyChain } from './dhl-supply-chain';
 import { diageo } from './diageo';
 import { fedex } from './fedex';
 import { ford } from './ford';
@@ -28,19 +34,34 @@ import { jmSmucker } from './jm-smucker';
 import { johnDeere } from './john-deere';
 import { kencoLogisticsServices } from './kenco-logistics-services';
 import { keurigDrPepper } from './keurig-dr-pepper';
+import { kimberlyClark } from './kimberly-clark';
+import { kraftHeinz } from './kraft-heinz';
 import { mondelezInternational } from './mondelez-international';
+import { nestleUsa } from './nestle-usa';
+import { pactivEvergreen } from './pactiv-evergreen';
 import { performanceFoodGroup } from './performance-food-group';
+import { salsonLogistics } from './salson-logistics';
+import { scJohnson } from './sc-johnson';
 import { theHomeDepot } from './the-home-depot';
 import { toyota } from './toyota';
+import { unfi } from './unfi';
+import { universalLogisticsHoldings } from './universal-logistics-holdings';
+import { westrockCoffee } from './westrock-coffee';
 
 const ACCOUNTS: Record<string, AccountMicrositeData> = {
   'ab-inbev': abInbev,
   'barnes-noble': barnesNoble,
+  'bob-evans-farms': bobEvansFarms,
+  'boston-beer-company': bostonBeerCompany,
   'campbell-s': campbellS,
   'caterpillar': caterpillar,
+  'cj-logistics-america': cjLogisticsAmerica,
   'coca-cola': cocaCola,
   'constellation-brands': constellationBrands,
+  'cost-plus-world-market': costPlusWorldMarket,
+  'daimler-truck-north-america': daimlerTruckNorthAmerica,
   'dannon': dannon,
+  'dhl-supply-chain': dhlSupplyChain,
   'diageo': diageo,
   'fedex': fedex,
   'ford': ford,
@@ -55,10 +76,19 @@ const ACCOUNTS: Record<string, AccountMicrositeData> = {
   'john-deere': johnDeere,
   'kenco-logistics-services': kencoLogisticsServices,
   'keurig-dr-pepper': keurigDrPepper,
+  'kimberly-clark': kimberlyClark,
+  'kraft-heinz': kraftHeinz,
   'mondelez-international': mondelezInternational,
+  'nestle-usa': nestleUsa,
+  'pactiv-evergreen': pactivEvergreen,
   'performance-food-group': performanceFoodGroup,
+  'salson-logistics': salsonLogistics,
+  'sc-johnson': scJohnson,
   'the-home-depot': theHomeDepot,
   'toyota': toyota,
+  'unfi': unfi,
+  'universal-logistics-holdings': universalLogisticsHoldings,
+  'westrock-coffee': westrockCoffee,
 };
 
 export function getAccountMicrositeData(slug: string): AccountMicrositeData | null {
