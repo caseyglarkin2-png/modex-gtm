@@ -209,13 +209,13 @@ export const caterpillar: AccountMicrositeData = {
       label: 'Margaret Poorman - VP Integrated Logistics',
       variantSlug: 'margaret-poorman',
 
-      framingNarrative: 'Margaret, Margaret — your Griffin GA operation is 120 miles from us at MODEX. When a D11 dozer takes up 4 regular parking spots in the yard and you\'ve got 360,000 part numbers flowing through Morton at 24/7 speed, the invisible constraint isn\'t the assembly line — it\'s the yard staging between build and dealer delivery.',
+      framingNarrative: 'Margaret — your Griffin GA operation runs ~120 miles from Atlanta. When a D11 dozer takes up 4 regular parking spots in the yard and you\'ve got 360,000 part numbers flowing through Morton at 24/7 speed, the invisible constraint isn\'t the assembly line — it\'s the yard staging between build and dealer delivery.',
       openingHook: 'Your team is dealing with oversized freight. That is a yard problem before it is anything else.',
       stakeStatement: '2,500+ dealers worldwide. Equipment ships from factory to dealer yards — dealer yard management is critical',
 
       heroOverride: {
         headline: 'Margaret, the yard is where Caterpillar\'s execution breaks down',
-        subheadline: 'Margaret — your Griffin GA operation is 120 miles from us at MODEX. When a D11 dozer takes up 4 regular parking spots in the yard and you\'ve got 360,000 part numbers flowing through Morton at 24/7 speed, the invisible constraint isn\'t the assembly line — it\'s the yard staging between build and dealer delivery.',
+        subheadline: 'Margaret — your Griffin GA operation runs ~120 miles from Atlanta. When a D11 dozer takes up 4 regular parking spots in the yard and you\'ve got 360,000 part numbers flowing through Morton at 24/7 speed, the invisible constraint isn\'t the assembly line — it\'s the yard staging between build and dealer delivery.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
 
@@ -260,11 +260,11 @@ export const caterpillar: AccountMicrositeData = {
   },
 
   signals: {
-    modexAttendance: 'Past attendee list',
+    eventAttendance: 'Past attendee list',
     recentNews: [
       'Caterpillar is investing in supply chain transformation.',
     ],
-    supplyChainInitiatives: ['Margaret — your Griffin GA operation is 120 miles from us at MODEX. When a D11 dozer takes up 4 regular parking spots in the yard and you\'ve got 360,000 part numbers flowing through Morton at 24/7 speed, the invisible constraint isn\'t the assembly line — it\'s the yard staging between build and dealer delivery.'],
+    supplyChainInitiatives: ['Margaret — your Griffin GA operation runs ~120 miles from Atlanta. When a D11 dozer takes up 4 regular parking spots in the yard and you\'ve got 360,000 part numbers flowing through Morton at 24/7 speed, the invisible constraint isn\'t the assembly line — it\'s the yard staging between build and dealer delivery.'],
     urgencyDriver: 'Caterpillar is investing in supply chain transformation.',
   },
 

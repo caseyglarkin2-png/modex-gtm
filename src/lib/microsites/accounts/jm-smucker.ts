@@ -476,7 +476,7 @@ export const jmSmucker: AccountMicrositeData = {
   },
 
   signals: {
-    modexAttendance: 'Past attendee list',
+    eventAttendance: 'Past attendee list',
     recentNews: [
       'New Chief Product Supply Officer role in February 2026.',
     ],

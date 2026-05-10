@@ -172,7 +172,7 @@ Dan Poland's role as **Chief Enterprise Transformation Officer** is about findin
 - **Michigan State University** — strong supply chain program; check if Casey or anyone at FreightRoll has MSU connections
 - **Kraft Heinz alumni network** — Poland spent 15 years there; significant industry overlap
 - **Industry events** — Poland likely attends/speaks at CSCMP, FMI, GMA/Consumer Brands Association events
-- **MODEX 2026 attendance** — Campbell's is a major CPG; check exhibitor/attendee lists
+- **Industry event attendance** — Campbell's is a major CPG; confirm via industry contacts.
 
 ---
 

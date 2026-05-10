@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Brian Watson — Frito-Lay (PepsiCo)
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Brian Watson, Vice President of Supply Chain, Frito-Lay (PepsiCo)
 **Email:** brian.watson@pepsico.com
 **Account Priority:** Wave 1 (A-band)
@@ -178,10 +178,10 @@ The mismatch worth flagging: the anchor's network is more depot-heavy (185 of 23
 - Reference Modesto as the sustainability proof point — Frito-Lay treats Modesto as a flagship, gesturing at it signals fluency
 - Avoid Purchase, NY references — Brian operates out of Plano/Dallas; corporate-HQ framing reads as outsider
 
-### MODEX 2026 Meeting Angle
-- MODEX 2026 (Atlanta, March) is post-CES, post-Siemens-announcement, mid-Siete-integration. The timing for a 20-minute meeting with Brian or his designate is unusually live.
-- If Brian doesn't attend personally (likely), the right delegate is the **VP-level lead for FLNA Logistics & Customer Operations** or the **Frito-Lay Director of Supply Chain Operations** running the inbound DC network
-- Pitch frame: "20 minutes on yard execution at one Frito-Lay DC — pick the one absorbing the most post-closure volume"
+### Meeting Angle
+- Mid-Siete-integration is exactly when the yard pressure is most visible and the budget case is easiest to make. The timing for a 20-minute meeting with Brian or his designate is live now.
+- If Brian doesn't attend personally, the right delegate is the **VP-level lead for FLNA Logistics & Customer Operations** or the **Frito-Lay Director of Supply Chain Operations** running the inbound DC network.
+- Pitch frame: "20 minutes on yard execution at one Frito-Lay DC — pick the one absorbing the most post-closure volume."
 
 ### Tone & Approach
 - **Operator-to-operator.** Brian is a long-tenured Frito-Lay supply chain person. He is not the CSCO; he is the person inside the org running an actual transformation. Skip the strategy-deck register.

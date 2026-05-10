@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Jim Small — Honda Logistics North America
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Jim Small, Senior Vice President, Honda Logistics North America (HLNA)
 **Email:** jim.small@honda.com
 **Account Priority:** Strategic Target (Automotive OEM logistics)
@@ -210,7 +210,7 @@ The dossier should arm the field team to answer all five before he asks.
 ### Meeting Path
 - **Likely first meeting:** Jim delegates to a **VP-level Logistics or Operations** counterpart inside MEI or HLNA. That's fine — that's the right altitude for a YMS conversation
 - **Secondary contact:** **Dana McBrien** has been the publicly-cited HLNA voice on capacity and labor constraints `[unverified - role current as of 2026]`
-- **MODEX 2026 angle:** OEM logistics teams send delegates to MODEX. Target HLNA's MEI subsidiary directly via the East Liberty operations layer; Jim will get briefed if the technical conversation passes the smell test
+- **Industry conference angle:** OEM logistics teams send delegates to MHI events. Target HLNA's MEI subsidiary directly via the East Liberty operations layer; Jim will get briefed if the technical conversation passes the smell test.
 - **Tempo:** Do not push. Honda's sales cycle for an operations-layer system will be 6–12 months minimum. Plan the campaign for cadence, not closure
 
 ### Risk Factors

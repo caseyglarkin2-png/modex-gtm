@@ -66,7 +66,7 @@ import type { AccountMicrositeData } from '../schema';
  *         { label: 'Gate and spotter labor overhead', value: '$2M+' },
  *         { label: 'Peak season surge inefficiency', value: '$1M+' },
  *       ],
- *       urgencyDriver: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+ *       urgencyDriver: 'Multi-site execution standardization is the stated opportunity. Industry conference attendee signal confirms active investment evaluation.',
  *     },
  *     {
  *       type: 'solution',
@@ -263,7 +263,7 @@ export const hyundaiMotorAmerica: AccountMicrositeData = {
       variantSlug: 'carey-gammon',
 
       framingNarrative: 'Carey, Automotive has different physics than CPG, but flow variability still kills utilization and visibility.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for Hyundai Motor America.',
+      openingHook: 'The yard is where execution meets reality for Hyundai Motor America — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at Hyundai Motor America\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -294,7 +294,7 @@ export const hyundaiMotorAmerica: AccountMicrositeData = {
       variantSlug: 'ashley-eckel',
 
       framingNarrative: 'Ashley, Automotive has different physics than CPG, but flow variability still kills utilization and visibility.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for Hyundai Motor America.',
+      openingHook: 'The yard is where execution meets reality for Hyundai Motor America — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at Hyundai Motor America\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -325,7 +325,7 @@ export const hyundaiMotorAmerica: AccountMicrositeData = {
       variantSlug: 'sarah-johnson',
 
       framingNarrative: 'Sarah, Automotive has different physics than CPG, but flow variability still kills utilization and visibility.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for Hyundai Motor America.',
+      openingHook: 'The yard is where execution meets reality for Hyundai Motor America — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at Hyundai Motor America\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -371,16 +371,16 @@ export const hyundaiMotorAmerica: AccountMicrositeData = {
   freight: {
     primaryModes: ['Truckload', 'LTL'],
     avgLoadsPerDay: '1,500+',
-    peakSeason: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+    peakSeason: 'Multi-site supply chain standardization opportunity.',
   },
 
   signals: {
-    modexAttendance: 'Past attendee list',
+    eventAttendance: 'Past attendee list',
     recentNews: [
-      'Public MODEX signal plus likely fit for multi-site execution standardization.',
+      'Multi-site execution standardization initiative underway.',
     ],
     supplyChainInitiatives: ['Automotive has different physics than CPG, but flow variability still kills utilization and visibility.'],
-    urgencyDriver: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+    urgencyDriver: 'Multi-site execution standardization is the stated opportunity. Industry conference attendee signal confirms active investment evaluation.',
   },
 
   theme: {

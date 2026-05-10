@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Kelly Killingsworth — Keurig Dr Pepper
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Kelly Killingsworth, SVP Logistics, Keurig Dr Pepper (KDP)
 **Email:** kelly.killingsworth@kdrp.com
 **Account Priority:** TBD (strong ICP fit — dual distribution model, high-volume manufacturing)
@@ -180,7 +180,7 @@ This is the single most important thing to understand about KDP's supply chain:
 
 ### Competitive Intelligence
 - **Coca-Cola** and **PepsiCo** have invested in yard management at their largest bottling plants — KDP would want parity
-- **Anheuser-Busch InBev** (a MODEX target) has deployed yard management technology at several US breweries — similar DSD model to KDP
+- **Anheuser-Busch InBev** has deployed yard management technology at several US breweries — similar DSD model to KDP
 - If YardFlow can reference **beverage industry peers** who have adopted YMS, it creates urgency for KDP
 
 ---
@@ -220,17 +220,17 @@ Here's what would make her personally care about YardFlow:
 
 ---
 
-## 7. MODEX 2026 Relevance
+## 7. Meeting Angle
 
-### KDP at MODEX
-- KDP supply chain leaders attend MODEX and ProMat for **automation, material handling, and logistics technology**
-- K-Cup packaging and fulfillment automation is an active investment area — KDP teams scout for solutions at MODEX
-- **Check exhibitor list** for KDP team attendance / booth presence
+### KDP at Industry Events
+- KDP supply chain leaders attend MHI and ProMat events for **automation, material handling, and logistics technology**.
+- K-Cup packaging and fulfillment automation is an active investment area.
+- Confirm attendance via industry contacts.
 
 ### Meeting Strategy
-- **Ideal setting:** 30-minute meeting at MODEX or pre-show dinner (April 13-16, Atlanta)
-- **KDP has operations in the Atlanta area** — convenient for local team members to attend
-- **Bring:** Facility-specific ROI model for a hypothetical KDP K-Cup plant (30 dock doors, 24/7 production, 200 trailer moves/day) showing before/after YardFlow metrics
+- **Ideal setting:** 30-minute working session at Kelly's timing.
+- **KDP has operations in the Atlanta area** — geography is convenient for local team members.
+- **Bring:** Facility-specific ROI model for a hypothetical KDP K-Cup plant (30 dock doors, 24/7 production, 200 trailer moves/day) showing before/after YardFlow metrics.
 
 ---
 
@@ -243,10 +243,10 @@ Here's what would make her personally care about YardFlow:
 | **Budget Authority** | SVP Logistics likely controls or influences 7-8 figure logistics technology budgets |
 | **Timing** | Good — Fuel for Growth program creates urgency for ROI-positive technology investments; SAP migration creates integration window |
 | **Competition Risk** | Medium — KDP may evaluate Blue Yonder yard management module as part of existing TMS relationship |
-| **Warm Intro Path** | TBD — check FreightRoll / Casey network for KDP connections; check if any KDP leaders will be at MODEX |
+| **Warm Intro Path** | TBD — check FreightRoll / Casey network for KDP connections; confirm conference attendance via industry contacts |
 | **Recommended Priority** | A-band candidate (≥90) — dual distribution complexity + production criticality + active cost savings mandate |
 
 ---
 
-*Dossier prepared for YardFlow by FreightRoll MODEX 2026 outreach campaign.*
+*Dossier prepared for YardFlow by FreightRoll — Account-Based Outreach.*
 *Sources: KDP 10-K filings, investor presentations, industry press, supply chain publications, public LinkedIn profiles.*

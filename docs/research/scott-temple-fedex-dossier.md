@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Scott Temple — FedEx Supply Chain
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Scott Temple, President & CEO, FedEx Supply Chain
 **Email:** scott.temple@fedex.com
 **Account Priority:** Wave 1 (A-band) — 3PL anchor, 5,000+-facility parent footprint
@@ -104,7 +104,7 @@ FedEx Freight separates June 1, 2026 as standalone public company **FDXF**. File
 - Post-spin FedEx Corp is **more concentrated in Express + Ground + Supply Chain**
 - Supply Chain becomes a **bigger relative bet** in the remaining portfolio
 - Scott's strategic visibility inside the C-suite goes up. He will be under more pressure to **show growth and margin discipline** as one of three remaining segment heads
-- MODEX 2026 (March 16–20, 2026) sat right in the middle of the spin runway. Scott was likely highly visible at the show as part of the corporate narrative repositioning
+- The spin runway has elevated Scott's external visibility as part of the corporate narrative repositioning.
 
 ### Customer Wins That Stretch the Yard
 - **Best Buy** named FedEx primary national parcel carrier (2025) — though primarily an Express/Ground deal, Supply Chain handles BBY returns and reverse logistics. Volume implication for Supply Chain reverse-logistics yards is significant
@@ -179,10 +179,8 @@ Network 2.0 is fundamentally a parent-company narrative about "doing more with l
 - Mention **Pittsburgh / Papercraft Park** if there's an in-person opportunity — the Pittsburgh HQ is a tell that he respects heritage operations, not Memphis-FedEx-corporate culture
 - Cite **Memphis 1.1M sq ft / Milton 400K sq ft** multi-tenant healthcare facilities by name as the obvious YardFlow first-fit sites
 
-### MODEX 2026 Meeting Angle
-MODEX 2026 (Atlanta, March 16–20) wrapped two months ago — **opportunity to follow up on any in-person contact** or to position MODEX 2027 outreach. Scott was likely visible at MODEX 2026 given the FedEx Freight spin-runway PR cycle.
-
-If no MODEX contact: pitch a **30-minute working session in Pittsburgh**, focused specifically on (a) Memphis multi-tenant yard standardization, (b) reverse-logistics dock-in workflow at a representative healthcare site. Bring the anchor's redacted shipment data (with permitted artifacts only) as proof.
+### Meeting Angle
+Pitch a **30-minute working session in Pittsburgh**, focused specifically on (a) Memphis multi-tenant yard standardization, (b) reverse-logistics dock-in workflow at a representative healthcare site. Bring the anchor's redacted shipment data (with permitted artifacts only) as proof. If there was prior in-person contact at an industry event, follow up on it as the warm-entry angle.
 
 If Scott delegates: target **VP, Operations** (heritage GENCO operations leadership) and the **VP, Engineering & Technology, FedEx Supply Chain** as alternates. The Nimble deal was likely co-sponsored at that level.
 

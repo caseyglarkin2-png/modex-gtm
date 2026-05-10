@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Heiko Gerling — Danone North America (Dannon)
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Heiko Gerling, Chief Operations Officer, Danone Americas
 **Email:** heiko.gerling@danone.com
 **Account Priority:** Wave 1 (A-band) — warm intro available via Mark Shaughnessy
@@ -224,9 +224,9 @@ The new Southeast distribution hub being built in Jacksonville is the cleanest s
 
 Fresh-network carrier capacity is structurally tight. Carriers who get treated well at Danone yards stay loyal. In a market where regional refrigerated capacity has pricing power, **respecting driver time isn't soft — it's procurement leverage.** Heiko, with procurement reporting up to him, owns this dial.
 
-### Risk to Acknowledge: He's Six Months Out of His Predecessor's Shadow
+### Risk to Acknowledge: He's in His First Year as COO
 
-Heiko was **named COO in June 2025** — meaning at MODEX 2026 (March/April), he'll be ~9–10 months into the role. New COOs in Year 1 are simultaneously:
+Heiko was **named COO in June 2025** — roughly one year into the role at time of outreach. New COOs in Year 1 are simultaneously:
 - Looking for a signature initiative they can claim as their own
 - Cautious about anything that looks like "reversing the last guy"
 - Sensitive to bandwidth — they're still hiring direct reports, doing facility tours
@@ -266,12 +266,12 @@ Casey's primary route to Heiko is **via Mark Shaughnessy (warm intro)**. This is
 - **The Jacksonville DC:** "You're building a new Southeast hub right now. We'd rather be the standard you embed at go-live than the retrofit later."
 - **The Kraft Heinz operating-discipline background:** "Operators with your background tend to ask first what this displaces, not what it adds. The honest answer is: it sits between TMS and WMS — no software it replaces, just a layer that doesn't exist yet."
 
-### MODEX 2026 Meeting Angle
+### Meeting Angle
 
-- **Format:** 20-minute meeting, Tuesday or Wednesday morning of show
-- **Attendees:** Heiko + ideally his **VP of Logistics** (name not publicly identified — likely a Heiko direct report)
+- **Format:** 20-minute working session — virtual or in-person at his timing.
+- **Attendees:** Heiko + ideally his **VP of Logistics** (name not publicly identified — likely a Heiko direct report).
 - **Pitch goal:** Walk-through of the Module Inspector with live yard visual from a comparable fresh-network operator. Anchor on the Jacksonville greenfield pilot.
-- **Leave-behind:** The persona-variant memo at `/for/dannon?p=heiko-gerling`, redacted artifact pack, Primo Brands operating-data citation
+- **Leave-behind:** The persona-variant memo at `/for/dannon?p=heiko-gerling`, redacted artifact pack, Primo Brands operating-data citation.
 - **Decision ask at end:** "30 minutes with your Jacksonville DC project lead before the hub goes live."
 
 ### Tone & Approach

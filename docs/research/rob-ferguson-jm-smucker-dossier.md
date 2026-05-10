@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Rob Ferguson — The J.M. Smucker Co.
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Rob Ferguson, Chief Product Supply Officer | Executive Vice President, Coffee, Pet, and Away From Home
 **Email:** rob.ferguson@jmsmucker.com
 **Account Priority:** Wave 1 (A-band)
@@ -229,11 +229,10 @@ Ferguson ran U.S. Retail Pet Foods. He knows the Buffalo and Meow Mix supply cha
 - **NOLA coffee scale** — flatter the operational gravity of the largest bulk coffee operation on the planet
 - **McCalla timing** — 18 months in, the deployment window is now
 
-### MODEX 2026 Meeting Angle
-- Smucker is **Orrville, OH** — likely sends a contingent to MODEX (Atlanta)
-- Ferguson himself may not attend; Atlanta is also a logical site for Coffee/Hostess team presence (Columbus, GA expansion)
-- Pitch a **20-minute working session** specifically on McCalla as a deployment pilot
-- If Ferguson delegates: target the new **SVP Operations & Supply Chain** (still being recruited as of Feb 2026 — `[unverified]` whether named by MODEX) and the **Transformation Office lead**
+### Meeting Angle
+- Smucker is **Orrville, OH** — their supply chain team attends industry events; Atlanta-area Hostess operations (Columbus, GA expansion) provide geographic convenience for an in-person conversation.
+- Pitch a **20-minute working session** specifically on McCalla as a deployment pilot.
+- If Ferguson delegates: target the new **SVP Operations & Supply Chain** (still being recruited as of Feb 2026 — `[unverified]`) and the **Transformation Office lead**.
 
 ### Tone & Approach
 - **Operator-to-operator** — Ferguson is a consultant-trained GM; he respects clear logic, quantified benefit, low fluff

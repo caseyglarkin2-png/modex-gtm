@@ -254,9 +254,9 @@ export const abInbev: AccountMicrositeData = {
         'Ask about Sensolus deployment in North America - opens the yard conversation',
         'ABOne network (owned wholesalers) is the easiest pilot footprint',
         'EV fleet needs predictable dock times - ties to sustainability mandate',
-        'Cartersville, GA brewery is 90 minutes from MODEX',
+        'Cartersville GA brewery 90 min from major Atlanta industry events',
       ],
-      modexProximity: 'Cartersville, GA brewery is 90 min from MODEX venue. AB InBev is a major CPG/beverage co with likely MODEX attendance.',
+      eventProximity: 'Cartersville GA brewery 90 min from major Atlanta industry events',
     },
     {
       personaId: 'abi-moreira',
@@ -480,7 +480,7 @@ export const abInbev: AccountMicrositeData = {
     peakMultiplier: '1.5x during summer (Memorial Day-Labor Day)',
     fleet: '800+ trucks, 200+ zero-emission vehicles',
     keyFacilities: [
-      { name: 'Cartersville Brewery', location: 'Cartersville, GA', type: 'Brewery', significance: '90 minutes from MODEX venue', yardRelevance: 'Closest brewery to MODEX. Natural pilot site for post-conference deployment.' },
+      { name: 'Cartersville Brewery', location: 'Cartersville, GA', type: 'Brewery', significance: '~90 minutes from Atlanta', yardRelevance: 'Nearest brewery to Atlanta metro. Natural pilot site for early deployment.' },
       { name: 'ABOne Distributorships', location: '17 locations nationwide', type: 'Distribution', significance: 'Company-owned wholesalers, 40,000+ customers', yardRelevance: 'Owned distribution = easiest pilot footprint (no franchise negotiation needed)' },
       { name: 'Fort Collins Brewery', location: 'Fort Collins, CO', type: 'Brewery', significance: 'Major production facility', yardRelevance: 'High-volume brewery with complex dock scheduling' },
       { name: 'Newark Brewery', location: 'Newark, NJ', type: 'Brewery', significance: 'Northeast hub', yardRelevance: 'Dense metro delivery routes = tight night loading windows' },
@@ -503,7 +503,7 @@ export const abInbev: AccountMicrositeData = {
   },
 
   signals: {
-    modexAttendance: 'Major CPG/beverage company. Supply chain technology is stated priority. Cartersville brewery 90 min from venue.',
+    eventAttendance: 'Major CPG/beverage company. Supply chain technology is stated priority. Cartersville brewery 90 min from Atlanta.',
     recentNews: [
       'o9 Solutions partnership achieving 85% touchless demand planning',
       'Sensolus partnership for IoT-based yard management and trailer tracking (Europe)',
@@ -519,7 +519,7 @@ export const abInbev: AccountMicrositeData = {
       'Dispatch automation',
       'M&A integration standardization',
     ],
-    urgencyDriver: 'Already bought yard tech (Sensolus). EV fleet needs predictable dock times. Summer 2026 peak is 2 months after MODEX. Elito is a public transformation champion who needs the next win for Aim10x 2027.',
+    urgencyDriver: 'Already bought yard tech (Sensolus). EV fleet needs predictable dock times. Summer 2026 peak is approaching. Elito is a public transformation champion who needs the next win for Aim10x 2027.',
   },
 
   theme: {

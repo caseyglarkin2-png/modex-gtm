@@ -2,7 +2,7 @@ import type { CTABlock } from './schema';
 
 const FREIGHTROLL_CONTACT_EMAIL = 'casey@freightroll.com';
 const CALENDAR_HOST_PATTERN = /calendar\.google\.com\/calendar/i;
-const COLD_MEETING_LANGUAGE_PATTERN = /\b(book|meeting|audit|demo|walk[- ]?through|modex)\b/i;
+const COLD_MEETING_LANGUAGE_PATTERN = /\b(book|meeting|audit|demo|walk[- ]?through)\b/i;
 
 function buildMailtoHref(accountName?: string) {
   const safeAccountName = accountName?.trim() || 'your network';

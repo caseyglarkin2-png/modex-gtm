@@ -263,7 +263,7 @@ export const fedex: AccountMicrositeData = {
       variantSlug: 'scott-temple',
 
       framingNarrative: 'Scott, Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for FedEx.',
+      openingHook: 'The yard is where execution meets reality for FedEx — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at FedEx\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -294,7 +294,7 @@ export const fedex: AccountMicrositeData = {
       variantSlug: 'ray-hatton',
 
       framingNarrative: 'Ray, Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for FedEx.',
+      openingHook: 'The yard is where execution meets reality for FedEx — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at FedEx\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -325,7 +325,7 @@ export const fedex: AccountMicrositeData = {
       variantSlug: 'jose-a-touzon',
 
       framingNarrative: 'Jose, Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for FedEx.',
+      openingHook: 'The yard is where execution meets reality for FedEx — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at FedEx\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -356,7 +356,7 @@ export const fedex: AccountMicrositeData = {
       variantSlug: 'douglas-spamer',
 
       framingNarrative: 'Douglas, Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for FedEx.',
+      openingHook: 'The yard is where execution meets reality for FedEx — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at FedEx\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -387,7 +387,7 @@ export const fedex: AccountMicrositeData = {
       variantSlug: 'jake-pyke',
 
       framingNarrative: 'Jake, Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for FedEx.',
+      openingHook: 'The yard is where execution meets reality for FedEx — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at FedEx\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -433,16 +433,16 @@ export const fedex: AccountMicrositeData = {
   freight: {
     primaryModes: ['Truckload', 'LTL'],
     avgLoadsPerDay: '200,000+',
-    peakSeason: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+    peakSeason: 'Peak holiday season (Q4). Programmatic FedEx volume seasonality.',
   },
 
   signals: {
-    modexAttendance: 'Past attendee list',
+    eventAttendance: 'Past attendee list',
     recentNews: [
-      'Public MODEX signal plus likely fit for multi-site execution standardization.',
+      'Multi-site execution standardization opportunity — useful strategic logo with complex sell.',
     ],
     supplyChainInitiatives: ['Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.'],
-    urgencyDriver: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+    urgencyDriver: 'Opportunistic — strategic fit is strong, but warm path required before converting.',
   },
 
   theme: {

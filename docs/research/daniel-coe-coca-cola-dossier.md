@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Daniel Coe — The Coca-Cola Company
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Daniel Coe, President, Chief Procurement Officer & Supply Chain Services, The Coca-Cola Company
 **Email:** dcoe@coca-cola.com
 **Account Priority:** Wave 1 (A-band) — beverage parent / system anchor
@@ -37,7 +37,7 @@ Five years at Diageo as Global Procurement Supply Director (packaging, raw mater
 - **Procurement Magazine cover feature (2024–2025):** "Saving Money at the Highest Level" — frames his philosophy as **risk-managed productivity at scale** rather than headline cost-out
 - **Procurement Magazine, "All-Weather Approach to Global Procurement Risk":** describes his framing of TCCC procurement as a system that has to function in commodity volatility, geopolitical disruption, and bottler heterogeneity simultaneously
 - **Stated 2025 priorities** (per Procurement Magazine summary): risk management, sustainability, innovation, **continuity of supply**, **digitisation of the function**, supplier relationships, team development
-- No record of a MODEX or yard-execution-specific keynote — his speaking circuit is procurement-led (DPW, Procurement Foundry, ISM) not warehousing/MHI
+- No record of an MHI or yard-execution-specific keynote — his speaking circuit is procurement-led (DPW, Procurement Foundry, ISM) not warehousing/MHI.
 
 ### Leadership Style Indicators
 - **System operator, not headquarters operator** — runs CEPG, which exists to align 200+ independent bottlers; comfortable with federated execution
@@ -166,10 +166,10 @@ The 237-facility North American CPG anchor we displaced an incumbent at is the r
 - Reference the **Diageo years** — same beverage-logistics complexity, possible Gallagher overlap
 - Reference **Coca-Cola HBC's Edelstal SYNCROSUPPLY** as a system precedent, then position North America as the next frontier (not as criticism — as continuity of an existing system theme)
 
-### MODEX 2026 Meeting Angle
-- Coe is Atlanta-based. MODEX is in Atlanta. Geographic alignment is a gift; do not waste it
-- His circuit is procurement events (DPW, ISM, Procurement Foundry) more than MHI/MODEX. He may not personally attend; **target his SCS deputy or VP of Logistics Procurement** as the on-floor meeting and use Coe as the executive escalation
-- 20-minute meeting framing: **"What we did with the 237-facility CPG anchor, and how it would translate to a CEPG standard"** — system-level conversation, not facility demo
+### Meeting Angle
+- Coe is Atlanta-based — geography favors an in-person meeting with minimal friction.
+- His circuit is procurement events (DPW, ISM, Procurement Foundry) more than MHI. He may not attend MHI events personally; **target his SCS deputy or VP of Logistics Procurement** as the initial meeting and use Coe as the executive escalation.
+- 20-minute meeting framing: **"What we did with the 237-facility CPG anchor, and how it would translate to a CEPG standard"** — system-level conversation, not facility demo.
 
 ### Tone & Approach
 - **Peer-level, system-fluent** — Coe doesn't need TCCC explained back to him

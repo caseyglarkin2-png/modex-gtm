@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Carey Gammon — Hyundai Motor America
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Carey Gammon, Director, Vehicle Operations, Hyundai Motor America (HMA)
 **Email:** carey.gammon@hmna.com
 **Account Priority:** Wave 1 (A-band) — finished-vehicle logistics, post-HMGMA ramp
@@ -216,11 +216,11 @@ Carey is a Director — strong functional ownership, no signature authority on e
 - Reference the **April 2026 Savannah and LA Glovis openings** — shows we read past last quarter
 - Reference **CSX's 2023 Glovis recognition** — shows we understand his rail-side dependencies
 
-### MODEX 2026 Meeting Angle
-- MODEX skews to material handling and DC operations, but **finished-vehicle logistics is a present and growing track**
-- Carey is Atlanta-based [unverified] — MODEX in Atlanta is geographically zero-friction
-- Pitch a **20-minute meeting** focused on the HMGMA compound and rail-spot story
-- If Carey passes, target his **Senior Manager of Logistics** as the next door
+### Meeting Angle
+- Finished-vehicle logistics is a growing track at material-handling industry events, and Carey has shown willingness to engage peer-level operators at conferences.
+- Carey is Atlanta-based [unverified] — geography favors an in-person conversation with minimal friction.
+- Pitch a **20-minute meeting** focused on the HMGMA compound and rail-spot story.
+- If Carey passes, target his **Senior Manager of Logistics** as the next door.
 
 ### Tone & Approach
 - **Operator-to-operator** — he ran allocation and distribution for Genesis and stood up Fisker's logistics from zero. Speak in flow rates, dwell times, spot-and-pull cycles, not platforms-and-paradigms

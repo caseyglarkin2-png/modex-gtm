@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Cory Reed — John Deere
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Cory J. Reed, President, Lifecycle Solutions, Supply Management, and Customer Success, Deere & Company
 **Email:** cory.reed@johndeere.com
 **Account Priority:** Wave 1 (A-band)
@@ -224,10 +224,10 @@ Conservative estimate: Milan alone moves ~250 trailers per day (450K orders/week
 - Reference **Hebron groundbreaking** — "As you commission Hebron, here's what day-one yard ops can look like"
 - Avoid right-to-repair as a lead — too politically charged. Touch on it only as a tailwind for outbound complexity
 
-### MODEX 2026 Meeting Angle
-- Reed is unlikely to attend MODEX personally — he runs a multi-billion dollar function from Moline. **Target his direct reports** in supply management or aftermarket logistics as primary contacts; pitch Reed via warm intro from those reports
-- Alternative: time a meeting around a Q1 2026 Deere earnings cycle (late Feb / late May) when supply chain narrative is freshest in his communications
-- If MODEX path: **20-minute meeting framed around Hebron commissioning timeline**
+### Meeting Angle
+- Reed is unlikely to attend industry events personally — he runs a multi-billion dollar function from Moline. **Target his direct reports** in supply management or aftermarket logistics as primary contacts; pitch Reed via warm intro from those reports.
+- Time the approach around a Deere earnings cycle when supply chain narrative is freshest in his communications.
+- Primary ask: **20-minute working session framed around Hebron commissioning timeline**.
 
 ### Tone & Approach
 - **Operator-to-operator, not vendor-to-buyer** — Reed is a 28-year operator. He responds to people who understand how plants and DCs actually work

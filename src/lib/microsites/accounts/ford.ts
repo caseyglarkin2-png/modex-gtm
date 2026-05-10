@@ -260,7 +260,7 @@ export const ford: AccountMicrositeData = {
   },
 
   signals: {
-    modexAttendance: 'MODEX proximity',
+    eventAttendance: 'Industry conference attendee signal',
     recentNews: [
       '$5.6B mega-campus',
       'Supply chain greenfield:',

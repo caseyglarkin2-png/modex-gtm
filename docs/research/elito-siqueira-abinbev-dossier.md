@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Elito Siqueira — AB InBev
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Elito Siqueira, Chief Supply Chain & Distribution Co. Officer, North America
 **Email:** elito.siqueira@ab-inbev.com
 **Date:** March 28, 2026
@@ -168,8 +168,8 @@ Elito has spent 5+ years championing **touchless planning** — the idea that te
 2. **He owns North America** — the 12 US breweries and 100+ facilities are HIS scope. He can make this decision.
 3. **He's already bought yard tech** (Sensolus) — he's pre-qualified as a buyer. He understands the problem.
 4. **KPIs at all-time highs** — he needs the NEXT win to present at Aim10x 2027
-5. **Fleet electrification** adds urgency — EVs need predictable dock times for charging schedule optimization
-6. **Summer 2026 peak** is coming — MODEX in April is perfect timing to pilot before the surge
+5. **Fleet electrification** adds urgency — EVs need predictable dock times for charging schedule optimization.
+6. **Seasonal peak** — piloting before the summer surge is the natural timing argument.
 
 ### Competitive Position
 - Sensolus = asset tracking (IoT sensors on trailers) — **not a YMS competitor**
@@ -194,10 +194,10 @@ Elito has spent 5+ years championing **touchless planning** — the idea that te
 3. Reference ABOne network — the owned wholesalers are the easy pilot candidates
 4. Sustainability angle: faster dock turns = less idle time = lower emissions for the EV fleet
 
-### MODEX 2026 Relevance
-- AB InBev is a major CPG/beverage company — high likelihood of attendance or representation at MODEX
-- Supply chain technology is Elito's stated priority — MODEX is his conference
-- Offer a 15-minute meeting at MODEX or a pre-show briefing
+### Meeting Angle
+- AB InBev is a major CPG/beverage company — confirm attendance at industry events via industry contacts.
+- Supply chain technology is Elito's stated priority; he speaks on industry panels.
+- Offer a 15-minute working session at his timing.
 
 ### Risk Factors
 - AB InBev is a **massive enterprise** — long sales cycles, procurement complexity
@@ -209,7 +209,7 @@ Elito has spent 5+ years championing **touchless planning** — the idea that te
 
 ## Summary: One-Line Sales Hypothesis
 
-**Elito Siqueira has spent 5 years building touchless planning at AB InBev and achieved 85% automation in demand planning. YardFlow is the natural next chapter — bringing touchless execution to the 12 brewery yards and 100+ facilities where his planning outputs meet physical reality. He's already bought yard tech (Sensolus) proving he owns this budget. The ask: a 15-minute MODEX conversation about closing the gap between digital planning and physical dock execution.**
+**Elito Siqueira has spent 5 years building touchless planning at AB InBev and achieved 85% automation in demand planning. YardFlow is the natural next chapter — bringing touchless execution to the 12 brewery yards and 100+ facilities where his planning outputs meet physical reality. He's already bought yard tech (Sensolus) proving he owns this budget. The ask: a 15-minute working session about closing the gap between digital planning and physical dock execution.**
 
 ---
 

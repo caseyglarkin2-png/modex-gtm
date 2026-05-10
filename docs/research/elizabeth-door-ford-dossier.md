@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Elizabeth Door — Ford Motor Company
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Elizabeth Door, Chief Supply Chain Officer, Ford Motor Company
 **Email:** edoor@ford.com
 **Account Priority:** Expansion Target (not Wave 1/2)
@@ -23,7 +23,7 @@
 1. **Verify on LinkedIn** — Search "Elizabeth Door Ford" directly
 2. **Check ZoomInfo/Apollo** — Confirm title and tenure
 3. **Cross-reference with Ford Media** — media.ford.com leadership announcements
-4. **Check MODEX 2026 attendee/speaker list** — Ford may have registered attendees
+4. **Confirm conference attendance** — check industry event registration lists
 5. **Ford's proxy statement (DEF 14A)** — lists named executive officers (SEC EDGAR)
 
 ### Ford Supply Chain Leadership Context (Verified)
@@ -239,18 +239,16 @@ A Chief Supply Chain Officer at Ford is measured on:
 
 ---
 
-## 8. MODEX 2026 Connection
+## 8. Meeting Angle
 
-### Is Ford Attending MODEX?
-- Ford's manufacturing and supply chain teams attend **major material handling and logistics shows**
-- MODEX (April 13-16, Atlanta) is the largest material handling expo in the Western Hemisphere
-- **Check:** MODEX 2026 exhibitor/attendee list for Ford Motor Company registrations
-- **Alternative events Ford attends:** Automotive Logistics Global, CSCMP EDGE, Gartner Supply Chain Symposium
+### Ford Conference Attendance
+- Ford's manufacturing and supply chain teams attend **major material handling and logistics shows** — confirm Ford registrations via industry contacts.
+- **Alternative events Ford attends:** Automotive Logistics Global, CSCMP EDGE, Gartner Supply Chain Symposium.
 
 ### Meeting Ask
-- **Target setting:** Private meeting at MODEX or virtual meeting before/after the event
-- **Stakeholders to include:** Elizabeth Door (CSCO) + Plant Logistics Director + IT/Systems lead
-- **Demo focus:** Show YardFlow's dock scheduling and real-time yard visibility — use automotive yard scenario
+- **Target setting:** 30-minute working session — virtual or in-person at Ford's convenience.
+- **Stakeholders to include:** Elizabeth Door (CSCO) + Plant Logistics Director + IT/Systems lead.
+- **Demo focus:** Show YardFlow's dock scheduling and real-time yard visibility — use automotive yard scenario.
 
 ---
 
@@ -265,7 +263,7 @@ A Chief Supply Chain Officer at Ford is measured on:
 | **Timing** | ⭐⭐⭐⭐⭐ | BlueOval City greenfield + Ford+ cost mandate |
 | **Contact Verification** | ⚠️ | Elizabeth Door not verified in public sources |
 | **Warm Intro Path** | ❓ | Unknown — check network for Ford connections |
-| **MODEX Attendance** | ❓ | Unconfirmed — verify against attendee list |
+| **Industry Event Attendance** | ❓ | Unconfirmed — verify via industry contacts |
 
 ### Overall: HIGH-VALUE TARGET (if contact verified) — Ford is arguably the #1 company in America for yard management ROI. The combination of JIT inbound, finished vehicle logistics, and BlueOval City greenfield makes this a dream account. But verify the contact first.
 

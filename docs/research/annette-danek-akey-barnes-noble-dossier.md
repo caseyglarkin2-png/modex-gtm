@@ -1,9 +1,9 @@
 # Sales Intelligence Dossier: Annette Danek-Akey — Barnes & Noble
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Annette Danek-Akey, Chief Supply Chain Officer, Barnes & Noble
 **Email:** annette.danek-akey@bn.com
-**Account Priority:** Wave 1 (B-band — small DC count, but unusual leverage given expansion velocity and her MODEX 2026 presence)
+**Account Priority:** Wave 1 (B-band — small DC count, but unusual leverage given expansion velocity and her industry conference presence)
 **Date:** May 10, 2026
 
 ---
@@ -38,8 +38,8 @@ This is unusual and load-bearing for any conversation:
 Per her Bradley alumni profile, Annette worked directly with Eliyahu Goldratt from 2008–2011 to apply Theory of Constraints buffer management to publishing returns — at the time around 35% industry-wide. She credits the work for moving PRH's supply chain to "world-class" status. Her quote on it: *"Buffer management... they hide it because it's a competitive advantage."* She is a TOC operator first and a logistics executive second.
 
 ### Public Speaking & Thought Leadership
-- **MODEX 2026 panelist** — "Women in Supply Chain 2026: Navigating Career Paths," Tuesday April 14, 8:00–11:00 AM, Georgia Ballroom, Georgia World Congress Center. **She will be on-site in Atlanta.** This is the single most actionable fact in this dossier.
-- **Board of Governors, MHI** — the trade body that runs MODEX. She has formal, ongoing affiliation with the same organization YardFlow exhibits under.
+- **Industry conference speaker** — has participated in panels on women in supply chain leadership, including MHI-affiliated events. Recurring speaker and panel participant in the supply-chain conference circuit.
+- **Board of Governors, MHI** — formal, ongoing affiliation with the same organization YardFlow exhibits under.
 - **Past President / Advisory Council, Warehousing Education and Research Council (WERC)**
 - **DC Velocity 2019 Rainmaker**
 - **SCM Talent Group podcast** — extended interview on her career, leadership during COVID, and emerging trends. Her line on automation: physical and process-based automation in distribution and fulfillment "previously underinvested compared to manufacturing." This is the single best opening hook for a yard-execution conversation.
@@ -125,7 +125,7 @@ Annette is the most explicitly **automation-curious** CSCO in this batch of doss
 ### Why This Account is Real, Despite the Small Footprint
 Most Wave-1 accounts are 30+ DC CPG networks. B&N is **2 DCs**. So why is this Wave 1?
 
-1. **Annette personally**, not B&N as an account, is the wedge. She sits on the MHI Board of Governors, is a MODEX 2026 panelist, has 30 years of network in publishing AND retail supply chain, and is explicitly on record saying distribution-side automation is underinvested. **She is a network multiplier** — every CSCO conversation she has in Atlanta touches our category.
+1. **Annette personally**, not B&N as an account, is the wedge. She sits on the MHI Board of Governors, is a recurring industry conference speaker, has 30 years of network in publishing AND retail supply chain, and is explicitly on record saying distribution-side automation is underinvested. **She is a network multiplier** — every CSCO conversation she has at industry events touches our category.
 2. **The 2-DC constraint is the pitch.** When you cannot add facilities, every minute of yard dwell costs more. The math at Monroe Township (1.15M sq ft, 115 doors, e-commerce + retail + international inbound) is the math we are best at.
 3. **IPO window.** Elliott wants a clean supply-chain story for 2H 2026. Yard-execution data feeding into operating-cost narrative is exactly the kind of metric the equity story benefits from.
 4. **Retail specialty is a beachhead category.** If we can land B&N (or even just earn Annette's "have you talked to X" intro), we open a door to Waterstones, Books Inc., and adjacent Elliott portfolio companies.
@@ -163,8 +163,8 @@ The pitch that lands with her is **not** about the truck-turn metric. It's about
 ### Warm Intro Paths
 | Path | Strength | Notes |
 |---|---|---|
-| **MHI Board of Governors** (she is a member; YardFlow exhibits at MODEX) | Strong | MHI staff or fellow board members can broker a 15-min on-floor intro |
-| **MODEX 2026 panel attendees** | Strong | Tuesday April 14, 8–11 AM, Georgia Ballroom — she will be present and accessible |
+| **MHI Board of Governors** (she is a member; YardFlow exhibits at MHI events) | Strong | MHI staff or fellow board members can broker a 15-min intro |
+| **Industry conference speakers network** | Strong | Shared panel circuits create peer-level warm intro paths |
 | **WERC network** (former president / advisory council) | Medium | Less direct but a legitimate community signal |
 | **PRH alumni** in Westminster/Crawfordsville/Reno DC operations | Medium | Warm chain of "I worked for Annette at PRH" |
 | **Bradley University / UT Knoxville Haslam alumni** | Weak-Medium | Personal-network angle; only works if there is a specific name |
@@ -173,10 +173,10 @@ The pitch that lands with her is **not** about the truck-turn metric. It's about
 ### Asset Matrix (What to Send)
 | Stage | Asset | Why |
 |---|---|---|
-| Pre-MODEX cold intro | Short LinkedIn note + 2-paragraph email referencing her SCM Talent podcast quote on under-invested distribution automation | Signals we read her, not just her title |
+| Cold intro | Short LinkedIn note + 2-paragraph email referencing her SCM Talent podcast quote on under-invested distribution automation | Signals we read her, not just her title |
 | First touch | One-page brief: "Yard execution at 2-DC retail networks during 60-store-per-year growth" | Specific to her constraint |
-| MODEX in-person | 15-min on-floor walkthrough of Module Inspector — redacted screenshots showing Primo Brands shape + 237-facility shape | Matches her data-rigor preference |
-| Post-MODEX | Memo: "What yard-execution data should look like in your Power BI" | Tooling-fit signal |
+| Working session | 15-min walkthrough of Module Inspector — redacted screenshots showing Primo Brands shape + 237-facility shape | Matches her data-rigor preference |
+| Follow-through | Memo: "What yard-execution data should look like in your Power BI" | Tooling-fit signal |
 | Closing | Operating data from public Primo Brands comparable + pilot proposal scoped to Monroe Township yard only | Land at one DC; expand to Reno |
 
 ### Suggested First Touch (Email)
@@ -187,12 +187,12 @@ The pitch that lands with her is **not** about the truck-turn metric. It's about
 >
 > Caught your SCM Talent interview where you described physical and process automation in distribution as underinvested compared to manufacturing. That framing is the entire reason YardFlow exists — we treat the yard as the buffer between TMS-in-transit and WMS-in-warehouse, and most retail networks have no instrumentation on that buffer at all.
 >
-> Two specific reasons to talk before MODEX:
+> Two specific reasons to talk this quarter:
 >
 > 1. A 2-DC network growing at 60+ stores/year for the next two years has a system constraint at inbound-yard scheduling, not in-DC throughput. The Monroe Township yard at 115 exterior doors with both retail-replen and international-inbound traffic is the textbook version of this.
 > 2. We run a 237-facility North American CPG network and the public Primo Brands comparable. The shape of what we see at Monroe will look familiar.
 >
-> 15 min on-floor at MODEX, Tuesday or Wednesday after your panel? I can come to you.
+> Open to a 30-min working session at your timing.
 >
 > — [name], YardFlow / FreightRoll
 
@@ -203,11 +203,11 @@ The pitch that lands with her is **not** about the truck-turn metric. It's about
 - **Respect the IPO window.** Pilot proposals should show value inside 6 months, not 18.
 - **Don't over-promise the ROI math.** She will run her own numbers in Excel before the meeting ends. Give her clean inputs, not pre-cooked outputs.
 
-### MODEX 2026 Action Plan
-- **Tuesday April 14, post-panel (~11:00 AM):** Catch her at the Georgia Ballroom exit. Best window of the show.
-- **Wednesday April 15:** Backup window. She is on the MHI board; she will be on the floor.
+### Outreach Action Plan
+- **Primary ask:** 30-minute working session — not a demo, a working session on the inbound-yard constraint.
+- **Access path:** MHI Board connection is the warmest door; lead there before cold outreach.
 - **Bring:** field engineer (not just AE), one redacted Module Inspector tablet, printed Primo Brands operating-data one-pager.
-- **Don't bring:** generic deck, multi-page proposal, anything that requires more than 15 minutes of her time on a panel day.
+- **Don't bring:** generic deck, multi-page proposal, anything that requires more than 15 minutes of her attention before she has agreed to a full session.
 
 ---
 

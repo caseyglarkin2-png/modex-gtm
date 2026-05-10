@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Chris Nielsen — Toyota Motor North America
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Chris Nielsen, Executive Vice President & Chief Supply Chain Officer / Chief Quality Officer
 **Company:** Toyota Motor North America (TMNA)
 **Email:** chris.nielsen@toyota.com
@@ -230,10 +230,9 @@ Nielsen **built TMMTX from the ground up** — he knows what it means to design 
 3. **Mazda JV shared yard** — "Two OEMs, one yard, zero downtime tolerance."
 4. **TPS digital extension** — "Your line has andon. Your yard should too."
 
-### Conference/Event Angle
-- Nielsen is active with NAM and Dallas Regional Chamber — potential conference overlap
-- **MODEX 2026 angle**: Toyota's logistics/purchasing team attends MHI events. Nielsen may send delegates even if he doesn't attend personally
-- Target his direct reports in logistics/purchasing for initial conversations
+### Industry Conference Angle
+- Nielsen is active with NAM and Dallas Regional Chamber — potential conference overlap.
+- Toyota's logistics and purchasing team attends MHI events. Nielsen may send delegates; target his direct reports in logistics/purchasing for initial conversations.
 
 ### Risk Factors
 - **Build vs. buy culture** — Toyota may want to build their own solution. Counter: speed of expansion requires external acceleration
@@ -258,5 +257,5 @@ Nielsen **built TMMTX from the ground up** — he knows what it means to design 
 
 ---
 
-*Dossier prepared for YardFlow by FreightRoll — MODEX 2026 sales campaign*
+*Dossier prepared for YardFlow by FreightRoll — Account-Based Outreach*
 *This is the company that INVENTED just-in-time. If we can show Toyota that their yard is the weak link in their own system, we have the ultimate reference customer.*

@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Margaret Poorman — Caterpillar
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Margaret Poorman, Vice President - Integrated Logistics, Caterpillar Inc. (Building Construction Products Division)
 **Email:** poorman_margaret_s@cat.com
 **Account Priority:** Wave 1 (A-band) — heavy-equipment OEM, oversize-freight, 21-depot parts network
@@ -177,7 +177,7 @@ Primo Brands (the public comparable; not the un-name-able anchor) operates **45 
 
 ### First-touch concept
 **Subject:** "21 depots, 99% in 48 hours, and the gate-in clock"
-**Angle:** Acknowledge the Cat parts-depot service-level commitment publicly. Frame YardFlow as the layer that protects that 48-hour promise as dealer re-stock returns and tariff-amplified margin pressure forces every minute of dock time to count. Reference the Helios direction (without claiming partnership we don't have). Offer a 20-minute meeting at MODEX 2026 or a virtual session before; if she delegates, ask for the BCP transportation lead or a parts-depot ops director.
+**Angle:** Acknowledge the Cat parts-depot service-level commitment publicly. Frame YardFlow as the layer that protects that 48-hour promise as dealer re-stock returns and tariff-amplified margin pressure forces every minute of dock time to count. Reference the Helios direction (without claiming partnership we don't have). Offer a 20-minute working session or virtual session; if she delegates, ask for the BCP transportation lead or a parts-depot ops director.
 
 ### Tone
 - **Operator-to-operator.** Six-sigma vocabulary lands. Hand-wave doesn't.

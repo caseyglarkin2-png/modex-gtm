@@ -744,7 +744,7 @@ export const generalMills: AccountMicrositeData = {
     keyFacilities: [
       { name: 'Belvidere DC', location: 'Belvidere, IL', type: 'Distribution Center', significance: 'State-of-the-art Midwest hub, opened April 2024', yardRelevance: 'Greenfield - no legacy processes, ideal first deployment' },
       { name: 'Cedar Rapids Plant', location: 'Cedar Rapids, IA', type: 'Manufacturing', significance: 'Major cereal production facility' },
-      { name: 'Covington Plant', location: 'Covington, GA', type: 'Manufacturing', significance: 'Near MODEX venue in Atlanta', yardRelevance: 'Proximity to MODEX for potential site visit' },
+      { name: 'Covington Plant', location: 'Covington, GA', type: 'Manufacturing', significance: 'Near Atlanta (~35 miles)', yardRelevance: 'Proximity to Atlanta metro — natural early pilot site' },
     ],
   },
 
@@ -757,7 +757,7 @@ export const generalMills: AccountMicrositeData = {
   },
 
   signals: {
-    modexAttendance: 'General Mills is a major CPG with Covington, GA facility near MODEX venue',
+    eventAttendance: 'General Mills is a major CPG with Covington, GA facility near Atlanta',
     recentNews: [
       '$82M restructuring - 3 Missouri plant closures phasing through 2026',
       'Belvidere, IL DC opened April 2024 as Midwest hub',

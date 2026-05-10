@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Troy Retzloff — H-E-B
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Troy Retzloff, Senior Director of Distribution, H-E-B
 **Email:** troy.retzloff@heb.com
 **Account Priority:** Wave 1 (A-band) — Texas grocery anchor
@@ -192,10 +192,10 @@ If a credible introduction to H-E-B's senior supply chain executive (the chair a
 - **Hurricane Harvey supply chain response** — gesture, don't lecture; he authored the public Prezi
 - **RILA Transportation & Infrastructure Committee** — niche industry-citizen credit, signals fluency
 
-### MODEX 2026 Meeting Angle
-- MODEX 2026 (Atlanta, March) — Texas distribution executives travel to MODEX in meaningful numbers; H-E-B sends representation
-- If Troy doesn't attend personally, the right alternate at the show is the **VP-level lead for H-E-B Logistics or Supply Chain Operations** — confirm the name through a mutual before reaching out
-- Pitch frame: **"20 minutes on yard execution at one H-E-B RSC — pick the one absorbing the most post-eComm-shift volume, or pick Hempstead before the standard is set"**
+### Meeting Angle
+- Industry conference attendance — Texas distribution executives attend MHI events in meaningful numbers; H-E-B typically sends representation.
+- If Troy doesn't attend personally, target the **VP-level lead for H-E-B Logistics or Supply Chain Operations** as the alternate — confirm the name through a mutual before reaching out.
+- Pitch frame: **"20 minutes on yard execution at one H-E-B RSC — pick the one absorbing the most post-eComm-shift volume, or pick Hempstead before the standard is set."**
 
 ### Tone & Approach
 - **Operator-to-operator.** Troy's awards and public posts are people-and-culture-coded, not tech-coded. Skip the AI/digital-twin register Frito-Lay outreach uses; H-E-B distribution culture rewards specifics about doors, trailers, drivers, miles, and SKUs

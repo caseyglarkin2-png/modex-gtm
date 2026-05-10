@@ -260,7 +260,7 @@ export const toyota: AccountMicrositeData = {
   },
 
   signals: {
-    modexAttendance: 'Past attendee list',
+    eventAttendance: 'Past attendee list',
     recentNews: [
       'Toyota Battery Manufacturing, North Carolina (TBMNC)',
       'This is Nielsen\'s baby',

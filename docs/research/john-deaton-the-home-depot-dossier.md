@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: John Deaton — The Home Depot
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** John Deaton, Executive Vice President – Supply Chain & Product Development, The Home Depot
 **Email:** john.deaton@homedepot.com
 **Account Priority:** Wave 1 (A-band)
@@ -211,10 +211,10 @@ Truck idle time at facilities is a measurable Scope 3 contributor. HD reports on
 - Avoid name-dropping SRS/GMS as "yours" — the integration is delicate; frame as "the broader Pro distribution footprint"
 - Atlanta-local angle: Georgia State, SSC, the Atlanta Relay test market
 
-### MODEX 2026 Meeting Angle
-- Deaton is Atlanta-based; MODEX is in Atlanta. **Geography is the easiest meeting unlock he has all year.**
-- He likely doesn't walk the floor, but his SVP of Logistics or VP of Transportation/Last Mile probably will [unverified]
-- Pitch a **20-minute strategic conversation** at the SSC, not a booth visit
+### Meeting Angle
+- Deaton is Atlanta-based — geography favors a local in-person conversation.
+- He likely doesn't attend trade show floors personally, but his SVP of Logistics or VP of Transportation/Last Mile may attend industry events [unverified].
+- Pitch a **20-minute strategic conversation** at the SSC, not a trade show booth visit.
 - Lead with: "We've built the visibility layer for the FDC era of your network. 20 minutes."
 
 ### Tone & Approach

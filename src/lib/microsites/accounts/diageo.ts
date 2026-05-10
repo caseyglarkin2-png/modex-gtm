@@ -179,7 +179,7 @@ export const diageo: AccountMicrositeData = {
       hypothesis:
         'The unusual thing about Diageo\'s yard math is the per-trailer value. A trailer of premium spirits can carry $500K+ in finished goods, and yet the protocol that decides how long it sits at the gate is the same radio-and-clipboard routine that runs at lower-value CPG networks. The other pressure is the asymmetry between the company\'s production timeline and its execution timeline — product can age for 12+ years upstream and then lose ninety minutes at a single dock door because the staging sequence got reshuffled. Stack the holiday Q4 surge on top, and the yard becomes the surface where a baseline-volume process collapses under peak load: gate queues back up, spotters get dispatched by phone, dock turns drop below target, and chain-of-custody documentation becomes the audit team\'s problem months later. None of this is a Diageo-specific failure — it\'s the default state of a 30+ site network without one operating standard.',
       caveat:
-        'This is built from public Diageo NA disclosures, MODEX attendee signal, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing on detention spend, dock contention during Q4 surge, or how much existing yard-system coverage is already in place across the network.',
+        'This is built from public Diageo NA disclosures, industry conference attendee signal, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing on detention spend, dock contention during Q4 surge, or how much existing yard-system coverage is already in place across the network.',
     },
     {
       type: 'comparable',
@@ -214,10 +214,10 @@ export const diageo: AccountMicrositeData = {
           detail: 'Cross-industry baselines on dock-radio prevalence, dwell-time variance, and detention-cost ranges. These describe the conditions most multi-site beverage networks operate under, not Diageo specifically.',
         },
         {
-          id: 'modex-signal',
-          source: 'MODEX past-attendee list',
+          id: 'industry-conference-signal',
+          source: 'Industry conference past-attendee list',
           confidence: 'public',
-          detail: 'Diageo is on the MODEX past-attendee list. That signal is part of why we sized this analysis now rather than later.',
+          detail: 'Diageo is on the industry conference past-attendee list. That signal is part of why we sized this analysis now rather than later.',
         },
         {
           id: 'primo-q1-2025',
@@ -344,7 +344,7 @@ export const diageo: AccountMicrositeData = {
       variantSlug: 'marsha-mcintosh-hamilton',
 
       framingNarrative: 'Marsha, Beverage flow is time-sensitive and network-heavy; YardFlow story should translate well from Primo.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for Diageo.',
+      openingHook: 'The yard is where execution meets reality for Diageo — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at Diageo\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -375,7 +375,7 @@ export const diageo: AccountMicrositeData = {
       variantSlug: 'raymond-reddrick',
 
       framingNarrative: 'Raymond, Beverage flow is time-sensitive and network-heavy; YardFlow story should translate well from Primo.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for Diageo.',
+      openingHook: 'The yard is where execution meets reality for Diageo — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at Diageo\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -406,7 +406,7 @@ export const diageo: AccountMicrositeData = {
       variantSlug: 'joseph-wanshek',
 
       framingNarrative: 'Joseph, Beverage flow is time-sensitive and network-heavy; YardFlow story should translate well from Primo.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for Diageo.',
+      openingHook: 'The yard is where execution meets reality for Diageo — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at Diageo\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -437,7 +437,7 @@ export const diageo: AccountMicrositeData = {
       variantSlug: 'jose-martins',
 
       framingNarrative: 'Jose, Beverage flow is time-sensitive and network-heavy; YardFlow story should translate well from Primo.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for Diageo.',
+      openingHook: 'The yard is where execution meets reality for Diageo — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at Diageo\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -468,7 +468,7 @@ export const diageo: AccountMicrositeData = {
       variantSlug: 'joshua-sallee',
 
       framingNarrative: 'Joshua, Beverage flow is time-sensitive and network-heavy; YardFlow story should translate well from Primo.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for Diageo.',
+      openingHook: 'The yard is where execution meets reality for Diageo — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at Diageo\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -514,16 +514,16 @@ export const diageo: AccountMicrositeData = {
   freight: {
     primaryModes: ['Truckload', 'Intermodal/Rail', 'LTL'],
     avgLoadsPerDay: '1,500+',
-    peakSeason: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+    peakSeason: 'Holiday Q4 surge compresses dock and yard capacity across NA network.',
   },
 
   signals: {
-    modexAttendance: 'Past attendee list',
+    eventAttendance: 'Past attendee list',
     recentNews: [
-      'Public MODEX signal plus likely fit for multi-site execution standardization.',
+      'Multi-site supply chain standardization initiative underway across NA network.',
     ],
     supplyChainInitiatives: ['Beverage flow is time-sensitive and network-heavy; YardFlow story should translate well from Primo.'],
-    urgencyDriver: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+    urgencyDriver: 'Multi-site execution standardization is the stated priority. Holiday Q4 throughput pressure is the timing driver.',
   },
 
   theme: {

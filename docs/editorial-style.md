@@ -70,6 +70,32 @@ reads as Bloomberg-style without ever naming the company. Use the journalism reg
 
 Every prospect in CPG ops knows there are only ~3 companies that fit "237-facility network in North America with a recent yard rebuild." Half will guess right. None will be told. All read the asset more carefully *because* of the puzzle. Don't break the puzzle by naming the answer.
 
+## Event- and date-agnostic copy
+
+Sales content (memos, dossiers, microsite copy, outreach templates, audio chapter labels) must read identically a week before, during, and a year after any specific industry event. Anchoring copy to a particular show, season, or date stamps the asset with a quickly-stale fingerprint and signals that the writer didn't think past the next two weeks.
+
+**Specifically don't bake in:**
+
+- Named upcoming or recent shows: "MODEX 2026," "CSCMP EDGE," "ProMat," "RILA LINK." If a target executive is panel-affiliated with a specific show, write *"on industry conference panels"* or *"recurring industry-conference speaker"* instead of naming the show and year.
+- Date-relative timing: "next month," "in two weeks," "after the holidays," "Q4 push." Use absolute references where the timing actually matters ("after the Anchor Packaging integration closes Oct 2025"), or omit entirely.
+- Imminent-meeting framing: "see you at MODEX," "we'll be in Atlanta the week of." If the meeting is a real plan, address it in the personal email; don't bake it into the durable artifact.
+
+**What to do instead:**
+
+- Frame outreach as event-agnostic and re-runnable: "Two reasons to talk this quarter" / "When you're ready for a working session" / "Open to a 30-minute walkthrough at your timing."
+- If a specific event is unusually leverage-rich (target speaks at it, hosts a panel, won an award there), reference it as a *fact about the target* — not as a planned interaction. *"Recently spoke on the [event-name] panel about Y"* survives the event passing; *"will be at [event-name] next week"* does not.
+- Section headings inside dossiers: prefer "Meeting Angle" / "Outreach Action Plan" over "MODEX 2026 Meeting Angle" / "MODEX 2026 Action Plan."
+- File header: "Prepared for: YardFlow by FreightRoll — Account-Based Outreach" beats "MODEX 2026 Outreach."
+
+**How to apply when the rule conflicts with a real, time-bound action:** the time-bound action lives in the email/Slack/meeting note, not the durable artifact. The durable artifact is the asset Casey re-reads in six months when re-engaging the same account.
+
+**Patterns to grep for during a sweep** (these are the easy-to-miss ones — flat phrase scans usually catch the obvious "at MODEX" hits but not these):
+
+- *"a MODEX target account"* / *"[event] target account"* — cross-references to other accounts that bake the event in. Should read "a YardFlow target account."
+- Scorecard rows or signal columns named *"MODEX Signal"* / *"[event] Attendance"* — rename to *"Industry Event Signal"* / *"Conference Attendance"*.
+- Narrative analysis like *"The pitch that lands at MODEX"* / *"MODEX-week priorities"* — these sit inside a paragraph about psychological framing or timing and aren't obvious in a headings-only review.
+- Schema field names with event names baked in (e.g., `modexAttendance` on `AccountMicrositeData`). Rename to event-neutral (`industryEventAttendance` or just `eventAttendance`) when you touch the schema.
+
 ## Current state — leaks audited
 
 Audited 2026-05-09 against the rules above:

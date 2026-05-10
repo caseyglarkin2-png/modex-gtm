@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Will Bonifant — Hormel Foods
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Will Bonifant, Group Vice President & Chief Supply Chain Officer, Hormel Foods
 **Email:** will.bonifant@hormel.com
 **Account Priority:** Wave 1 (A-band) — new-CSCO window
@@ -206,7 +206,7 @@ A new Chief Supply Chain Officer at a $12B CPG has a predictable first 12 months
 2. **Days 90–180:** Pick 2–3 visible wins to anchor the public narrative on the next earnings call.
 3. **Days 180–365:** Lock in a multi-year program that becomes "his" T&M.
 
-Bonifant is around **day 60 right now**. He's listening. The pitch that lands at MODEX is the one that gives him a **visible, network-spanning, ROI-defensible win** to anchor his Q2/Q3 FY26 narrative.
+Bonifant is around **day 60 right now**. He's listening. The pitch that lands in his first 90 days is the one that gives him a **visible, network-spanning, ROI-defensible win** to anchor his Q2/Q3 FY26 narrative.
 
 ### Primary Hook: T&M Has No Yard Pillar
 T&M is real, it's measured, and it has a logistics pillar that's currently abstract. **YardFlow is the concrete project that fills the logistics-execution hole in T&M.** This isn't us pitching transformation; this is us aligning to a transformation already underway and named.
@@ -249,11 +249,11 @@ Bonifant inherits 3PL relationships in a tight freight market. **Driver wait tim
 - Reference the **Southaven DC ramp** — offer it as a clean greenfield site for a pilot
 - Reference the **CTO partnership** — invite Don Monk to the same meeting
 
-### MODEX 2026 Meeting Angle
-- Bonifant is two months in; MODEX is the kind of event a new CSCO sends a delegation to as a forcing function for vendor evaluation
-- Pitch a **30-minute working session** focused on the T&M logistics-pillar framing
-- Alternates if he delegates: **VP Logistics**, **Director of Distribution**, or the **Data & Analytics Office** lead on Don Monk's side
-- Bring a one-page **T&M-aligned project brief** (not a deck) — a consulting-trained CSCO will appreciate the format
+### Meeting Angle
+- Bonifant is months into the role; a new CSCO often sends a delegation to industry events as a forcing function for vendor evaluation — confirm attendance via industry contacts.
+- Pitch a **30-minute working session** focused on the T&M logistics-pillar framing.
+- Alternates if he delegates: **VP Logistics**, **Director of Distribution**, or the **Data & Analytics Office** lead on Don Monk's side.
+- Bring a one-page **T&M-aligned project brief** (not a deck) — a consulting-trained CSCO will appreciate the format.
 
 ### Tone & Approach
 - **Peer-level, technically literate** — he ran ops-technology at a comparable CPG and went to Wharton. Don't oversimplify.

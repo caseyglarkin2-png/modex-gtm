@@ -179,7 +179,7 @@ export const barnesNoble: AccountMicrositeData = {
       roleInDeal: 'routing-contact',
       seniority: 'VP',
       function: 'Supply Chain',
-      currentMandate: 'Official Barnes & Noble supply-chain chief and MODEX speaker.',
+      currentMandate: 'Official Barnes & Noble supply-chain chief and recurring industry conference speaker.',
       bestIntroPath: 'Conference / executive outreach',
     },
     {
@@ -437,7 +437,7 @@ export const barnesNoble: AccountMicrositeData = {
   },
 
   signals: {
-    modexAttendance: 'Named speaker',
+    eventAttendance: 'Named speaker',
     recentNews: [
       'Named session speaker indicates event involvement.',
     ],

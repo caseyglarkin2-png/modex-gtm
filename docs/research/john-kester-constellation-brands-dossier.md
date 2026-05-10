@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: John Kester — Constellation Brands
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** John Kester, SVP & Chief Supply Chain Officer, Constellation Brands
 **Email:** john.kester@cbrands.com
 **Account Priority:** TBD (recommend A-band — mega-scale cross-border beverage logistics)
@@ -219,19 +219,14 @@
 
 ---
 
-## 8. MODEX 2026 Angle
-
-### Will Constellation Be at MODEX?
-- **Unlikely as an exhibitor** (they're a brand company, not a logistics vendor)
-- Constellation supply chain leaders **may attend** as buyers — MODEX draws beverage/food supply chain executives
-- Even if Kester isn't at MODEX, the **"we're showing this at MODEX and wanted to share with you first"** angle works
+## 8. Outreach Angle
 
 ### Recommended Approach
-1. **Email-first** — Kester is C-suite; he won't be browsing a trade show floor
-2. **Reference the Veracruz expansion** — shows you've done homework
-3. **Anchor on cross-border arrival variability** — this is his unique pain point vs. any domestic brewer
-4. **Offer a 15-minute demo** — focused on "what your yard looks like during a summer Monday morning when 40 trailers arrive from Laredo"
-5. **Don't mention wine/spirits** in the first touch — beer is 82% of revenue and 100% of the supply chain complexity story
+1. **Email-first** — Kester is C-suite; he won't be browsing a trade show floor.
+2. **Reference the Veracruz expansion** — shows you've done homework.
+3. **Anchor on cross-border arrival variability** — this is his unique pain point vs. any domestic brewer.
+4. **Offer a 15-minute demo** — focused on "what your yard looks like during a summer Monday morning when 40 trailers arrive from Laredo."
+5. **Don't mention wine/spirits** in the first touch — beer is 82% of revenue and 100% of the supply chain complexity story.
 
 ---
 
@@ -254,7 +249,7 @@
 |------|------------|
 | **Three-tier system** — Constellation may argue yard problems are at distributors, not their facilities | Frame around their **receiving yards** for Mexico-origin product, which they DO control |
 | **Incumbent YMS** — They may already have C3 Solutions, FourKites Yard, or similar | Ask "How does your current system handle the arrival variability from cross-border?" — expose gaps |
-| **Long sales cycle** — Fortune 500 beverage alcohol company = 6-12 month enterprise sale | Use MODEX as urgency; position as pilot for one receiving hub |
+| **Long sales cycle** — Fortune 500 beverage alcohol company = 6-12 month enterprise sale | Lead with the Veracruz ramp urgency; position as pilot for one receiving hub |
 | **Regulatory sensitivity** — Alcohol companies are cautious about vendor publicity | Offer strict NDA/confidentiality from first touch |
 | **Rochester HQ vs. operations** — Kester may be in Rochester while yards are in TX/AZ | Acknowledge this: "We can deploy remotely at your Laredo receiving ops without disrupting Rochester" |
 
@@ -265,7 +260,7 @@
 | Factor | Score Rationale |
 |--------|----------------|
 | **ICP Fit** | ★★★★★ — Massive yard operations, cross-border receiving, seasonal surges |
-| **MODEX Signal** | ★★★☆☆ — May attend as buyer, not exhibitor |
+| **Industry Event Signal** | ★★★☆☆ — May attend as buyer, not exhibitor |
 | **Pain Intensity** | ★★★★★ — $5.5B brewery investment bottlenecked by US yard throughput |
 | **Strategic Value** | ★★★★★ — Fortune 500 logo, beverage vertical proof point |
 | **Meeting Ease** | ★★★☆☆ — C-suite target, enterprise sales cycle |

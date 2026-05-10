@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Kristi Montgomery — Kenco Logistics Services
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Kristi Montgomery, Vice President of Strategic Transformation, Kenco Logistics Services
 **Email:** kristi.montgomery@kencogroup.com
 **Account Type:** 3PL / Contract Logistics — partnership target, not end-shipper sale
@@ -172,11 +172,11 @@ Other 3PL contacts (operations VPs, IT VPs, sales VPs) would route this to vendo
 - Reference the **Innovation Lab's $75M+ savings track record** — show you understand her batting average matters
 - Reference **CEO Denis Reilly's quote** about understanding complexity before proposing solutions — signal you've done the homework on Kenco's existing YMS estate (Blue Yonder, PINC) and know what the gap actually is
 
-### MODEX 2026 Meeting Angle
-- **Kenco is a near-certain MODEX exhibitor and attendee** — Atlanta is drivable from Chattanooga, and the Innovation Lab team makes the rounds at every major show
-- Pitch a **30-minute Lab-pilot scoping conversation**, not a demo
+### Meeting Angle
+- Kenco attends major supply-chain industry events — Atlanta is drivable from Chattanooga, and the Innovation Lab team makes the rounds at every major show.
+- Pitch a **30-minute Lab-pilot scoping conversation**, not a demo.
 - Specific ask: *"One pilot site, one shared-use Kenco facility with 3+ shipper tenants, 90 days, joint go-to-market readout at the end."*
-- If Kristi delegates, the right alternates are **Ainsley Williams (VP, Automation & Innovation)** [unverified — current title and reporting line] or whoever currently runs the Innovation Lab day-to-day
+- If Kristi delegates, the right alternates are **Ainsley Williams (VP, Automation & Innovation)** [unverified — current title and reporting line] or whoever currently runs the Innovation Lab day-to-day.
 
 ### Tone & Approach
 - **Peer-to-peer, partnership-coded** — not "I'd love 15 minutes to demo." Closer to "we've designed this for the 3PL distribution model and Kenco is the natural first partner."

@@ -261,7 +261,7 @@ export const constellationBrands: AccountMicrositeData = {
   },
 
   signals: {
-    modexAttendance: 'MODEX proximity',
+    eventAttendance: 'Industry conference attendee signal',
     recentNews: [
       'Constellation Brands is investing in supply chain transformation.',
     ],

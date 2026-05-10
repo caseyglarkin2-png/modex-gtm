@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Marsha McIntosh-Hamilton — Diageo
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Marsha McIntosh-Hamilton, President of North America Supply, Diageo
 **Email:** marsha.mcintosh-hamilton@diageo.com
 **Account Priority:** Wave 1 (A-band)
@@ -238,10 +238,10 @@ A network in active re-optimization (USMCA shifts, tariff mitigation) needs yard
 - Acknowledge **Paul Gallagher predecessor relationship** if a warm-intro path is real
 - Avoid generic "spirits market" framing — she lives that, doesn't need our take
 
-### MODEX 2026 Meeting Angle
-- Marsha is based in Plainfield, IL — MODEX (Atlanta) is a flight, but her team almost certainly attends
-- Her **VP of Logistics** or **VP of Manufacturing** is the more likely show-floor target; pitch a 20-minute conversation focused on the Montgomery greenfield opportunity specifically
-- A targeted Plainfield site visit would be more credibility-rich than a booth meeting — offer it as the alt
+### Meeting Angle
+- Marsha is based in Plainfield, IL — her team attends supply-chain industry events.
+- Her **VP of Logistics** or **VP of Manufacturing** is the right initial contact; pitch a 20-minute conversation focused on the Montgomery greenfield opportunity specifically.
+- A targeted Plainfield site visit would be more credibility-rich than a conference meeting — offer it as the primary ask.
 
 ### Tone & Approach
 - **Operator-to-operator, plant-floor literate** — she's based at a plant, not at HQ. Talk like someone who's been on a yard.

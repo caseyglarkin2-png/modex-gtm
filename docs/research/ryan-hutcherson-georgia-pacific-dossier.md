@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Ryan Hutcherson — Georgia-Pacific
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Ryan Hutcherson, Senior Vice President, Supply Chain, Georgia-Pacific
 **Email:** ryan.hutcherson@gapac.com
 **Account Priority:** Wave 1 (A-band) — Koch portfolio, deployed YMS
@@ -229,11 +229,10 @@ GP's 150+ facility footprint is in the same league as the **237-facility N. Amer
 - **Wauna 2026 startup / Alabama River 2027 capacity add:** Tie the YardFlow conversation to capital projects already in flight, where yard re-engineering is already a budgeted line item
 - **Infor + project44 stack:** Acknowledge it explicitly. "I've read the project44 case study. The 10→2 minute gate number is real. Here's what comes after the gate."
 
-### MODEX 2026 Meeting Angle
-- GP HQ is in Atlanta — **same city as MODEX (held in Atlanta annually)**. Geography favors a meeting
-- KBX, GP supply-chain leadership, and Roshan Shah's AI team all sit in Atlanta — a single MODEX week can cover the buying committee
-- Pitch a **20-minute working session** — not a demo, a working session on the gate-to-dock execution gap
-- If Ryan delegates, target his **VP of Demand Fulfillment** or the **VP of Logistics within KBX** as alternates `[unverified — exact org chart not public]`
+### Meeting Angle
+- GP HQ is in Atlanta — geography favors a meeting; KBX, GP supply-chain leadership, and Roshan Shah's AI team all sit locally, so a single visit can cover the buying committee.
+- Pitch a **20-minute working session** — not a demo, a working session on the gate-to-dock execution gap.
+- If Ryan delegates, target his **VP of Demand Fulfillment** or the **VP of Logistics within KBX** as alternates `[unverified — exact org chart not public]`.
 
 ### Tone & Approach
 - **Direct, numerate, light on adjectives.** MBM culture rewards specificity

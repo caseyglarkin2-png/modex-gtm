@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Dylan Greenbaum — Performance Food Group
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Dylan Greenbaum, Director of Logistics, Performance Food Group
 **Email:** dylan.greenbaum@pfgc.com
 **Account Priority:** Wave 1 (A-band) — director-level entry point
@@ -194,7 +194,7 @@ Andy Long is **VP of Supply Chain**, focused on **inbound logistics** specifical
 A reasonable sequencing:
 1. Open with Dylan (peer-level, technical, specific)
 2. If no response in 10 days, send a parallel note to Andy Long referencing PFG's inbound flow optimization work
-3. If MODEX 2026 brings either to Atlanta, request a 20-minute booth or cafe meeting
+3. If an industry event brings either to a shared city, request a 20-minute meeting.
 
 ### The McPherson Tailwind
 A new CEO with an operations background is in his first 6 months. He is looking for:
@@ -227,10 +227,9 @@ A new CEO with an operations background is in his first 6 months. He is looking 
 - Reference McPherson's first quarter — "fits the operations playbook the new CEO ran as COO"
 - Skip the awards / thought-leadership angle — there is none, and forcing it reads false
 
-### MODEX 2026 Meeting Angle
-- PFG HQ is Richmond — Dylan is unlikely to fly to MODEX unless his team requested it
-- Better play: **propose a Richmond visit** in the weeks after MODEX. Bring data from another foodservice or CPG yard pilot
-- Alternate: target **Andy Long** for MODEX since he is industry-panel-visible and may be on-floor
+### Meeting Angle
+- PFG HQ is Richmond — propose a **Richmond visit**. Bring data from another foodservice or CPG yard pilot.
+- Alternate: target **Andy Long** since he is industry-panel-visible and may attend industry events.
 
 ### Tone & Approach
 - **Peer-level, operations-fluent** — Dylan is technical, sub-C, and likely tired of platform pitches. Lead with carrier economics, not features
@@ -262,7 +261,7 @@ A new CEO with an operations background is in his first 6 months. He is looking 
 
 - **[unverified]** Dylan's exact scope at PFG — could be inbound, outbound, network, or carrier procurement focused. The opening note should leave room for him to tell us. Don't over-commit on which problem we're solving until he reveals which one is his
 - **[unverified]** Whether PFG has any YMS pilot already in flight at one of the recently-built facilities (Florence opened with 45 docks — possible they specced a YMS from day one as part of the Cheney integration)
-- **[unverified]** Whether MODEX 2026 has a PFG presence at all — foodservice distributors often skip MODEX in favor of IFDA Distribution Solutions Conference
+- **[unverified]** Whether PFG attends MHI events — foodservice distributors often skip MHI in favor of IFDA Distribution Solutions Conference
 - **Director-level limit** — Dylan likely cannot independently authorize a network deployment. The realistic Dylan outcome is a 30-minute call, a pilot scoping conversation, and a warm intro to Andy Long. Set expectations accordingly
 - **Florence sensitivity** — referencing the Q3 cost drag is the right hook, but tone matters. Don't lead with "your earnings missed because of yard chaos" — lead with "we have pattern-matched DC migrations like this and have something useful to share"
 
