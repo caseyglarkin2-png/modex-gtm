@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
 import { computeDetentionPerSecond } from '@/lib/microsites/detention-rate';
+import { parseLeadingNumber } from '@/lib/microsites/roi-deep-link';
 import { DetentionClock } from '@/components/microsites/detention-clock';
 
 /**
@@ -21,9 +22,7 @@ export default async function AccountLayout({
 }) {
   const { account } = await params;
   const data = getAccountMicrositeData(account);
-  const facilityCount = data?.network?.facilityCount
-    ? parseInt(data.network.facilityCount, 10)
-    : undefined;
+  const facilityCount = parseLeadingNumber(data?.network?.facilityCount) ?? undefined;
 
   return (
     <>

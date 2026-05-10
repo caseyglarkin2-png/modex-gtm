@@ -68,7 +68,7 @@ export function buildROIDeepLink(
  * Parses the leading integer out of a free-text label like "47 plants" or
  * "2,400/day". Returns null if no number can be extracted.
  */
-function parseLeadingNumber(value: string | undefined): number | null {
+export function parseLeadingNumber(value: string | undefined): number | null {
   if (!value) return null;
   const match = value.match(/[\d,]+/);
   if (!match) return null;
