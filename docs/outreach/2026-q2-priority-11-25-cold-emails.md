@@ -59,9 +59,9 @@ special-handling: >
 
 Paul,
 
-General Mills has best-in-class visibility on both ends — Palantir's digital twin from the planning layer, automation inside four warehouses with more coming. The gap is the yard: what happens between a carrier hitting the gate and a dock door opening. With three Missouri plants closing and more volume routing through the remaining network, that gap costs more per trailer than it did a year ago.
+General Mills has best-in-class visibility on both ends — Palantir's digital twin, automation inside four warehouses. The gap is the yard: what happens between a carrier hitting the gate and a dock door opening. Three Missouri plants are closing; remaining facilities absorb more volume through the same dock capacity.
 
-We run a 237-facility North American CPG network through exactly this shape. Belvidere opened in 2024 — embedding a yard standard while operations are still being optimized is materially cheaper than a retrofit.
+We run a 237-facility North American CPG network through this shape. Belvidere opened in 2024 — embedding a yard standard now costs a fraction of the retrofit later.
 
 Worth 15 minutes this quarter?
 
@@ -119,11 +119,11 @@ Casey
 
 Kelly,
 
-KDP's DSD depots have a structural problem that most yard tools don't handle: inbound line-haul trailers from K-Cup plants and Dr Pepper facilities arriving overnight, needing to be sequenced and unloaded to load route trucks before 5am. A trailer that lands in the wrong staging lane at 2am cascades into a late route by 6am.
+KDP runs two yard problems simultaneously. DSD depots need inbound trailers sequenced and unloaded before 5am so route trucks roll on time. K-Cup plants run 24/7; no empty trailer at the dock means the line slows.
 
-K-Cup plants run 24/7. If there's no empty trailer at the dock when a line needs to turn, the line slows. That's the production-continuity version of the same problem.
+Most yard tools handle one of these patterns. Both at once is where they degrade.
 
-We run this for a 237-facility North American CPG network. Worth 15 minutes on how we handle the dual DSD-plus-manufacturing yard pattern?
+We run a 237-facility North American CPG network through a comparable dual pattern. Worth 15 minutes on how we handle it?
 
 Casey
 
@@ -179,11 +179,11 @@ Casey
 
 Chris,
 
-Toyota invented JIT. The assembly line has andon cords, kanban signals, heijunka boards — every second visible. Outside the plant, at the gate and dock, most manufacturers still run on clipboard check-ins and radio calls to yard jockeys. That gap is muda hiding in plain sight.
+Toyota's assembly lines measure waste in seconds. The yard still runs on clipboard check-ins and radio calls — muda in plain sight at the gate-to-dock boundary.
 
-The Liberty battery plant is a greenfield. Yard management decisions for that facility are being made now. Embedding a gate-to-dock standard at commissioning costs a fraction of the retrofit six months after the SOP is written.
+Liberty is a greenfield. Yard management decisions are being made now. Embedding gate-to-dock execution at commissioning costs a fraction of the retrofit after the SOP is written.
 
-We run this for a 237-facility North American CPG network. The parts-depot and crossdock cadence logic maps directly.
+We run this for a 237-facility North American CPG network. The crossdock and parts-depot cadence logic maps directly.
 
 Worth 15 minutes before Liberty's dock SOP is locked?
 
@@ -243,11 +243,11 @@ Casey
 
 Elito,
 
-You've built 85% touchless demand planning at AB InBev. When that perfectly planned load arrives at the brewery yard, what happens? The o9 plan and the Sensolus asset tracker both know where the trailer is. Neither one tells the dock which door to open, when to move the hostler, or what to do when three loads arrive simultaneously because border traffic cleared at once.
+You've built 85% touchless demand planning. When that plan arrives at the brewery yard, o9 knows what to move and Sensolus knows where the trailer is. Neither tells the dock which door to open when three loads arrive at once because border traffic cleared simultaneously.
 
-That in-yard execution gap is where your planning precision loses its last mile. We close it for a 237-facility North American CPG network. The ABOne distributorships are the easiest pilot candidates — owned operations, owned data.
+That in-yard execution gap is where planning precision loses its last mile. We close it for a 237-facility North American CPG network. The ABOne distributorships are the easiest pilot candidates — owned operations, owned data.
 
-Worth 15 minutes before summer peak?
+Worth 15 minutes before summer surge?
 
 Casey
 
@@ -301,7 +301,7 @@ Casey
 
 ### Variant 1 — Cold First Touch
 
-**Subject:** Master Plan 2030 the yard quick win
+**Subject:** Master Plan 2030 yard quick win
 
 Claudio,
 
@@ -337,7 +337,7 @@ Casey
 
 ### Variant 3 — Follow-Up (10-14 Days, No Response)
 
-**Subject:** Ricolino Clif Bar yards not on standard yet
+**Subject:** Ricolino Clif Bar yards not standardized
 
 Claudio,
 
@@ -367,11 +367,11 @@ Casey
 
 Dan,
 
-The $230M supply chain optimization plan invested $150M into Maxton — the largest single-site Campbell's investment in 20 years. Maxton is ramping inbound volume while Tualatin's production is rerouting into the remaining network. Newly-loaded plants typically run 15-25% below optimal dock utilization through the ramp window.
+The $150M Maxton investment is the largest single-site Campbell's build in 20 years. Maxton is ramping inbound volume while Tualatin's production reroutes into the remaining network — newly-loaded plants typically run 15-25% below optimal dock utilization through that window.
 
-That's the kind of fast, defensible productivity improvement the Enterprise Transformation mandate was built to capture — measurable at the dock in 90 days, no capital request.
+A yard execution layer at Maxton is exactly the kind of measurable, no-capex productivity improvement the Enterprise Transformation mandate is built for.
 
-We run a 237-facility North American CPG network. Worth 15 minutes on the Maxton ramp angle specifically?
+We run a 237-facility North American CPG network. Worth 15 minutes on the Maxton dock angle?
 
 Casey
 
@@ -399,7 +399,7 @@ Casey
 
 ### Variant 3 — Follow-Up (10-14 Days, No Response)
 
-**Subject:** Tualatin volume now at Maxton Napoleon Paris
+**Subject:** Tualatin volume Maxton Napoleon Paris
 
 Dan,
 
@@ -425,7 +425,7 @@ Casey
 
 ### Variant 1 — Cold First Touch
 
-**Subject:** Veracruz volume hits US yards on Mexico time
+**Subject:** Veracruz volume US yards Mexico time
 
 John,
 
@@ -489,13 +489,11 @@ Casey
 
 Elizabeth,
 
-BlueOval City is a $5.6B greenfield with no legacy YMS. Every other Ford plant's yard habits were set years before a structured yard management approach existed; this one doesn't have to be.
+BlueOval City is a $5.6B greenfield with no legacy YMS — the yard SOP can be written correctly from day one.
 
-Ford's JIT inbound at Dearborn and Kentucky Truck plants means a single delayed trailer at the dock cascades into a line-down event worth tens of thousands per minute. At BlueOval, inbound battery materials add hazmat complexity on top of the standard parts sequencing problem.
+JIT inbound at Dearborn means a single delayed trailer cascades into a line-down event worth tens of thousands per minute. At BlueOval, battery material inbound adds hazmat classification on top of the standard parts-sequencing problem. Embedding gate-to-dock execution at commissioning costs a fraction of the retrofit later.
 
-We run a 237-facility North American CPG network. The gates-in-day-one argument at BlueOval is identical to the commissioning arguments we've run at food and beverage plants.
-
-Worth 15 minutes on the BlueOval yard SOP specifically?
+We run a 237-facility North American CPG network. Worth 15 minutes on BlueOval's yard SOP?
 
 Casey
 
@@ -555,11 +553,11 @@ Casey
 
 Daniel,
 
-CEPG has standardized fleet, fuel, packaging, and transportation spend across the bottler federation. The one logistics category it hasn't addressed: yard execution — the gate-in to dock-in layer at the 350+ North American bottler distribution centers that sits between the CONA S/4HANA backbone and the carrier network.
+CEPG has centralized fleet, fuel, packaging, and transportation spend. The one logistics layer it hasn't addressed: yard execution — gate-in to dock-in at the 350+ North American bottler DCs between the CONA S/4HANA backbone and the carrier network.
 
-Coca-Cola HBC's SYNCROSUPPLY deployment at Edelstal achieved a 45% reduction in gate-to-gate throughput time. That's a system precedent. North America doesn't have an equivalent standard yet.
+Coca-Cola HBC's SYNCROSUPPLY deployment at Edelstal cut gate-to-gate throughput 45%. That's a system precedent. North America has no equivalent standard yet.
 
-A 20-minute conversation on what a CEPG-negotiated yard execution standard would look like — modeled on the $19B spend categories you've already centralized — would be the right starting point.
+A 20-minute conversation on what a CEPG-negotiated yard standard would look like — same pattern as the categories you've already centralized — is the right starting point.
 
 Casey
 
@@ -615,17 +613,17 @@ Casey
 
 ### Variant 1 — Cold First Touch
 
-**Subject:** After the gate kiosk the next 60 minutes
+**Subject:** After the gate kiosk 60 minutes
 
 Ryan,
 
-I've read the project44 case study — 10-minute driver entry down to under 2 minutes, 80% reduction in manual processes. The gate number is real. Here's what the case study doesn't publish: what does the average trailer-to-door cycle time look like after the kiosk? Gate time and dwell are different problems.
+The project44 gate number is real — 10 minutes to under 2. What the case study doesn't publish: trailer-to-door cycle time after the kiosk.
 
-Infor handles the ERP-level yard record. project44 handles the gate. Neither one orchestrates the 60 minutes of hostling, door assignment, and exception management between check-in and dock release. That window is where your Walmart MABD misses actually originate.
+Infor handles the ERP yard record. project44 handles the gate. Neither orchestrates the 60 minutes of hostling, door assignment, and exception handling between check-in and dock release — where your Walmart MABD misses originate.
 
-We run an orchestration layer between these systems for a 237-facility North American CPG network. The Anchor Packaging plants are the clean pilot entry point while their standardization decision is still open.
+The Anchor Packaging plants are the clean pilot entry point while their standardization is still open.
 
-Worth 15 minutes on what the in-yard data shows after the kiosk?
+Worth 15 minutes on what the in-yard data shows?
 
 Casey
 
@@ -681,13 +679,13 @@ Casey
 
 Jim,
 
-Honda named "Simple Logistics" as one of three pillars of the Ohio EV Hub retool. That commitment — made publicly, at the executive level — means the inbound logistics design is on the table alongside the production layout. The yard is the most visible piece of that layer.
+Honda named "Simple Logistics" as a pillar of the Ohio EV Hub retool — the inbound design is open alongside the production redesign.
 
-The East Liberty crossdock processes 130 inbound trucks and 6,000 delivery scans daily. When a milkrun truck sits 20 extra minutes at the gate, it doesn't just delay one trailer — it disrupts the sequence the entire crossdock day was choreographed around. And with new EV-specific inbound patterns from LGES Jeffersonville and new Tier-1 suppliers replacing ICE-era parts flows, 2026 and 2027 will not look like 2024 at Marysville or East Liberty.
+East Liberty crossdock: 130 inbound trucks, 6,000 scans daily. A milkrun truck delayed 20 minutes at the gate disrupts the sequence the whole day was built around. New EV-specific inbound from LGES Jeffersonville changes the parts flows completely.
 
-We run a 237-facility North American CPG network — different industry, same federated-subsidiary structure, same sequencing discipline.
+We run a 237-facility North American CPG network — same federated-subsidiary structure, same sequencing discipline.
 
-Worth 15 minutes while the Simple Logistics design is still open?
+Worth 15 minutes while the design is open?
 
 Casey
 
@@ -715,7 +713,7 @@ Casey
 
 ### Variant 3 — Follow-Up (10-14 Days, No Response)
 
-**Subject:** Drop and hook needs yard state visibility
+**Subject:** Drop and hook needs yard visibility
 
 Jim,
 
@@ -747,11 +745,11 @@ Casey
 
 Kristi,
 
-The GreyOrange case study cites "fewer trailers required" as a driver of the 20% transportation cost reduction. That phrasing points at trailer economics — and trailer economics live in the yard, not the warehouse. GreyMatter orchestrates inside the building. The dock and the gate are outside its scope.
+GreyOrange's "fewer trailers required" result points at trailer economics — which live in the yard, not the warehouse. GreyMatter orchestrates inside the building; the dock and gate are outside its scope.
 
-Kenco already runs Blue Yonder and PINC for YMS at specific customer sites. Neither was designed for the multi-tenant, multi-shipper yard model — they're single-customer anchored. A yard execution layer built natively for 3PL multi-tenancy, priced for the managed-services billing model you use with GreyMatter and Locus, is the next embeddable product.
+Kenco runs Blue Yonder and PINC for YMS at specific sites. Neither was designed for multi-tenant, multi-shipper yards. A yard execution layer built natively for 3PL multi-tenancy, embeddable and rebillable the same way GreyMatter is, is the next product in that stack.
 
-Worth 30 minutes on what a pilot-then-productize path looks like for one shared-use facility?
+Worth 30 minutes on what a pilot-then-productize path looks like at one shared-use site?
 
 Casey
 
@@ -777,7 +775,7 @@ Casey
 
 ### Variant 3 — Follow-Up (10-14 Days, No Response)
 
-**Subject:** Multi-tenant yard problem PINC was not built for
+**Subject:** Multi-tenant yard PINC wasn't built for
 
 Kristi,
 
@@ -805,17 +803,17 @@ Casey
 
 ### Variant 1 — Cold First Touch
 
-**Subject:** HMGMA compound visibility before IONIQ 9 peaks
+**Subject:** HMGMA compound visibility IONIQ 9 ramp
 
 Carey,
 
-HMGMA's compound was designed for 500,000 vehicles per year. You're ramping from one model to three — IONIQ 5, IONIQ 9, and the first Kia model in 2026 — through the same physical compound. The Glovis Savannah hub opened in April; its standard operating procedures are two months old.
+HMGMA ramps from one model to three — IONIQ 5, IONIQ 9, first Kia in 2026 — through the same compound. Glovis Savannah opened in April; those SOPs are two months old.
 
-Your allocation system commits VINs to regions and dealers. The further the compound's actual physical state drifts from the allocation plan, the harder your job gets. Gate-to-dock visibility at the compound level is what closes that gap.
+Your allocation system commits VINs to regions and dealers. When the compound's physical state drifts from the allocation plan — a VIN blocked, a rail-rack spot invisible in real time — accuracy degrades. Compound visibility closes that gap.
 
-We run yard-execution platforms for multi-site operators. A pilot at HMGMA or the new Savannah hub — before those SOPs harden — is the right starting point.
+A pilot at HMGMA or Savannah before the SOPs harden is the right entry.
 
-Worth 15 minutes on the compound visibility angle specifically?
+Worth 15 minutes?
 
 Casey
 
@@ -843,7 +841,7 @@ Casey
 
 ### Variant 3 — Follow-Up (10-14 Days, No Response)
 
-**Subject:** Tariff flux both sides network runs hot
+**Subject:** Tariff flux both sides network hot
 
 Carey,
 
@@ -875,11 +873,11 @@ Casey
 
 Dylan,
 
-Saw the Q3 commentary — "staffing the new Florence facility while still operating legacy buildings during a four-wave customer transition." We've matched that pattern at other broadline operators. The compressor in the cost line during a multi-wave migration isn't usually headcount. It's dock dwell: trailers holding at legacy facilities because the new facility's yard-to-door cycle hasn't reached its target turn time yet, running both costs in parallel.
+Saw the Q3 commentary on Florence — four-wave customer transition, legacy buildings running in parallel. The cost drag during a DC migration isn't usually headcount. It's dock dwell: trailers holding at the legacy site because the new facility's yard-to-door cycle hasn't hit target turn time yet.
 
-Florence opened with 45 docks and a 386,000-sq-ft refrigerated/freezer build. When yard staging is uncoordinated during the wave transitions, you're paying for two sites and getting throughput of one and a half.
+Florence has 45 docks. When yard staging is uncoordinated during wave transitions, you're paying for two buildings and getting throughput of one and a half.
 
-Worth 15 minutes on what the turn-time math looked like at a comparable DC migration?
+Worth 15 minutes on what the turn-time math looks like at a comparable migration?
 
 Casey
 
@@ -939,11 +937,11 @@ Casey
 
 Troy,
 
-H-E-B's East Side San Antonio campus runs inbound from H-E-B Manufacturing, CPG vendor trailers, and store-bound outbound through the same 200-door yard — three traffic patterns on one footprint. The multi-temperature matching problem you described in the Houston RSC work in the late 1990s is still the same problem; the tooling has finally caught up.
+East Side San Antonio runs three patterns through one 200-door yard: H-E-B Manufacturing inbound, CPG vendor arrivals, store-bound outbound. The multi-temp door-matching problem from the Houston RSC work in 1999 is still the same — the tooling has caught up.
 
-Hempstead Phase 1 is the clean moment: ~500 acres, first phase under construction, standard operating procedures not yet written. Embedding gate-to-dock execution at commissioning — including multi-temp door assignment — costs a fraction of the retrofit after the patterns have set.
+Hempstead Phase 1 is the clean moment: ~500 acres under construction, SOPs not yet written. Embedding gate-to-dock execution at commissioning costs a fraction of the retrofit.
 
-We run a 237-facility North American CPG network. That comparable — multi-site, self-distribution-heavy, manufacturing collocated with distribution — maps closely to H-E-B's structure.
+We run a 237-facility North American CPG network — self-distribution, manufacturing collocated with distribution.
 
 Worth 15 minutes before Hempstead's dock SOP is locked?
 
@@ -973,7 +971,7 @@ Casey
 
 ### Variant 3 — Follow-Up (10-14 Days, No Response)
 
-**Subject:** East Side San Antonio three traffic patterns one yard
+**Subject:** East Side three patterns one yard
 
 Troy,
 
