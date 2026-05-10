@@ -25,8 +25,15 @@ export const GEMINI_SELECTORS = {
   deepResearchToggle:
     'button[aria-label*="Deep Research" i], [data-tool-id="deep_research"]',
   submitButton: 'button[aria-label*="Send message" i]',
-  reportContainer: '[data-message-author-role="model"]',
-  reportSettledMarker: 'button[aria-label*="Copy" i]',
+  // Gemini wraps the model's reply in a custom <model-response> element with
+  // the actual text inside <message-content>. (Discovered 2026-05-10 via DOM
+  // inspection — not the ChatGPT `data-message-author-role="model"` shape.)
+  reportContainer: 'model-response message-content',
+  // The regenerate button appears next to a settled model response. Distinct
+  // from the prompt-copy-button (data-test-id="prompt-copy-button") which
+  // shows up on the USER side immediately after submit and previously caused
+  // the pipeline to think the response was done before it actually was.
+  reportSettledMarker: 'model-response [data-test-id="regenerate-button"]',
   openInNotebookLM: 'a[href*="notebooklm.google.com"], button:has-text("Open in NotebookLM")',
 };
 
@@ -58,7 +65,11 @@ export async function runGemini(input: GeminiInput): Promise<GeminiOutput> {
   }
 
   const input$ = page.locator(GEMINI_SELECTORS.promptInput).first();
-  await input$.waitFor({ state: 'visible', timeout: 15_000 });
+  // Generous ceiling so the first run (empty persistent profile → Casey has
+  // to sign in to Google in the headed window) doesn't time out mid-auth.
+  // Subsequent runs use cached cookies and the input appears in <1s, so the
+  // long ceiling costs nothing in steady state.
+  await input$.waitFor({ state: 'visible', timeout: 5 * 60 * 1000 });
   await input$.fill(input.prompt);
 
   const submit = page.locator(GEMINI_SELECTORS.submitButton).first();
