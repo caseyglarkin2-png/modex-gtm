@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
 
   const metrics = computeMetrics(parsed.data.script);
 
-  const critiquePrompt = `You are a sales call coach for MODEX meeting booking.
+  const critiquePrompt = `You are a sales call coach for industry-event meeting booking.
 Analyze this script and return valid JSON with keys: strengths (string[]), risks (string[]), rewrite (string).
 Constraints:
 - Keep rewrite under 95 words.

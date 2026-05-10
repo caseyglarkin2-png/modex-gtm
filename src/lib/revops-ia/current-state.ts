@@ -32,7 +32,7 @@ export const currentSidebarItems: CurrentNavItem[] = [
   { section: 'Core', label: 'Personas', href: '/personas', canonicalOwner: 'Contacts', disposition: 'Convert to Contacts saved view or legacy alias.', classification: 'should-be-tab' },
   { section: 'Outreach', label: 'Outreach Waves', href: '/waves', canonicalOwner: 'Campaigns', disposition: 'Move into Campaign Phases/Waves.', classification: 'duplicate' },
   { section: 'Outreach', label: 'Campaigns', href: '/campaigns', canonicalOwner: 'Campaigns', disposition: 'Keep as Campaigns.', classification: 'keep-top-level' },
-  { section: 'Outreach', label: 'Campaign HQ', href: '/waves/campaign', canonicalOwner: 'Campaigns', disposition: 'Fold into MODEX campaign saved view.', classification: 'legacy-artifact' },
+  { section: 'Outreach', label: 'Campaign HQ', href: '/waves/campaign', canonicalOwner: 'Campaigns', disposition: 'Fold into industry-event campaign saved view.', classification: 'legacy-artifact' },
   { section: 'Outreach', label: 'Generation Queue', href: '/queue/generations', canonicalOwner: 'Work Queue / Content Studio', disposition: 'Move to System Jobs and/or Studio Queue.', classification: 'duplicate' },
   { section: 'Outreach', label: 'Generated Content', href: '/generated-content', canonicalOwner: 'Content Studio', disposition: 'Move to Studio Library / Send Readiness.', classification: 'duplicate' },
   { section: 'Outreach', label: 'Meeting Briefs', href: '/briefs', canonicalOwner: 'Content Studio / Accounts', disposition: 'Move to Asset Library and Account Assets.', classification: 'should-be-tab' },

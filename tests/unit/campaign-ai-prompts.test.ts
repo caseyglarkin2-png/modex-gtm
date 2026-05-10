@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { buildCallScriptPrompt, buildEmailPrompt, buildMeetingPrepPrompt, buildOutreachSequencePrompt } from '@/lib/ai/prompts';
 
 describe('campaign-aware prompt guidance', () => {
-  it('injects the campaign angle and suppresses MODEX for cold outbound prompts', () => {
+  it('injects the campaign angle and suppresses industry events for cold outbound prompts', () => {
     const prompt = buildEmailPrompt({
       accountName: 'Acme Foods',
       personaName: 'Jordan Lee',
@@ -14,7 +14,7 @@ describe('campaign-aware prompt guidance', () => {
     });
 
     expect(prompt).toContain('Campaign angle: Lead with the dock bottleneck and ask for a reaction.');
-    expect(prompt).toContain('Do not mention MODEX');
+    expect(prompt).toContain('Do not mention specific industry events or trade shows');
   });
 
   it('keeps event guidance for trade show follow-up sequences', () => {

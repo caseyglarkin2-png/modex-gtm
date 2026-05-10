@@ -21,7 +21,7 @@ model Account {
   source_url_1       String?
   source_url_2       String?
   icp_fit            Int       @default(0)
-  modex_signal       Int       @default(0)
+  event_signal       Int       @default(0) @map("modex_signal")
   primo_story_fit    Int       @default(0)
   warm_intro         Int       @default(0)
   strategic_value    Int       @default(0)
@@ -279,7 +279,7 @@ model MeetingBrief {
   id                  Int      @id @default(autoincrement())
   account_name        String   @unique
   vertical            String?
-  modex_signal        String?
+  event_signal        String? @map("modex_signal")
   why_this_account    String?
   why_now             String?
   likely_pain         String?

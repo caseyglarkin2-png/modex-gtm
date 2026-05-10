@@ -120,7 +120,7 @@ export function buildSeededAccountContentContext(now = new Date()): AgentActionR
   const nowIso = now.toISOString();
   return {
     action: 'content_context',
-    provider: 'modex',
+    provider: 'local',
     status: 'ok',
     summary: 'Boston Beer has fresh account intel, one promoted operator contact, a staged logistics candidate, and a recent positive reply to work from.',
     cards: [

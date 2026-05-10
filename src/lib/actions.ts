@@ -204,7 +204,7 @@ export async function createAccount(data: AddAccountInput) {
     const { computePriorityScore, computeTier, computePriorityBand } = await import('./scoring');
     const existing = await prisma.account.count();
     const rank = existing + 1;
-    const score = computePriorityScore({ icp_fit: 3, modex_signal: 3, primo_story_fit: 2, warm_intro: 1, strategic_value: 3, meeting_ease: 2 });
+    const score = computePriorityScore({ icp_fit: 3, event_signal: 3, primo_story_fit: 2, warm_intro: 1, strategic_value: 3, meeting_ease: 2 });
     const tier = parsed.data.tier ?? computeTier(score);
     const band = computePriorityBand(score);
 
@@ -223,7 +223,7 @@ export async function createAccount(data: AddAccountInput) {
         pipeline_stage: 'targeted',
         notes: parsed.data.notes ?? null,
         icp_fit: 3,
-        modex_signal: 3,
+        event_signal: 3,
         primo_story_fit: 2,
         warm_intro: 1,
         strategic_value: 3,

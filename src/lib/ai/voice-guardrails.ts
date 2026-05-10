@@ -147,7 +147,7 @@ Structural rules:
 - open on a truth, risk, or reframe
 - make the current state feel unstable, expensive, or incomplete
 - position YardFlow as the answer without overexplaining
-- use MODEX only when it sharpens the note naturally. Never make it the default ask in first-touch email.
+- reference industry events only when it sharpens the note naturally. Never make it the default ask in first-touch email.
 - end with a clean, direct question or a single declarative ask
 - every sentence must earn its keep
 - shorter is better. cut anything that does not add tension, proof, or a reason to reply

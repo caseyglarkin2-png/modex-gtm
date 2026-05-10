@@ -121,7 +121,7 @@ async function resolveAccount(input: ExternalContactInput, email: string | null)
       priority_band: 'D',
       priority_score: 50,
       icp_fit: 50,
-      modex_signal: 0,
+      event_signal: 0,
       primo_story_fit: 0,
       warm_intro: 0,
       strategic_value: 50,

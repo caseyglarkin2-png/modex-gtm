@@ -79,7 +79,7 @@ export async function POST(req: NextRequest) {
           primo_angle: 'Proof suite validation',
           best_intro_path: 'Ops leadership',
           icp_fit: 4,
-          modex_signal: 3,
+          event_signal: 3,
           primo_story_fit: 4,
           warm_intro: 2,
           strategic_value: 3,

@@ -12,7 +12,6 @@
     "source_url_1": "https://www.modexshow.com/downloads/mx26_attendeeListInsert.pdf",
     "source_url_2": null,
     "icp_fit": 5,
-    "modex_signal": 4,
     "primo_story_fit": 5,
     "warm_intro": 5,
     "strategic_value": 5,
@@ -68,7 +67,8 @@
       "Jacqueline Beckman": "Jacqueline, every carrier detention charge at a Danone plant is a procurement problem hiding in the yard.",
       "Annette Tolve": "Annette, the demand plan is only as good as the dock execution that fulfills it. The yard is the gap.",
       "Jay Luikart": "Jay, the Away From Home network runs on tight appointments. The yard is where appointment precision dies."
-    }
+    },
+    "event_signal": 4
   },
   {
     "rank": 1,
@@ -83,7 +83,6 @@
     "source_url_1": "https://www.modexshow.com/downloads/mx26_attendeeListInsert.pdf",
     "source_url_2": null,
     "icp_fit": 5,
-    "modex_signal": 4,
     "primo_story_fit": 5,
     "warm_intro": 2,
     "strategic_value": 5,
@@ -99,7 +98,8 @@
     "next_action": "Identify target persona(s)",
     "due_date": null,
     "notes": "High-fit food network; Primo story should travel cleanly.",
-    "custom_problem_headline": "At General Mills scale, an extra 20 minutes per truck turn adds up to millions in hidden detention."
+    "custom_problem_headline": "At General Mills scale, an extra 20 minutes per truck turn adds up to millions in hidden detention.",
+    "event_signal": 4
   },
   {
     "rank": 1,
@@ -114,7 +114,6 @@
     "source_url_1": "https://www.modexshow.com/downloads/mx26_attendeeListInsert.pdf",
     "source_url_2": null,
     "icp_fit": 5,
-    "modex_signal": 4,
     "primo_story_fit": 5,
     "warm_intro": 2,
     "strategic_value": 5,
@@ -130,7 +129,8 @@
     "next_action": "Identify target persona(s)",
     "due_date": null,
     "notes": "High-throughput network and obvious yard complexity.",
-    "custom_problem_headline": "Frito-Lay moves more snack trailers per day than most companies move per week. The yard should keep pace."
+    "custom_problem_headline": "Frito-Lay moves more snack trailers per day than most companies move per week. The yard should keep pace.",
+    "event_signal": 4
   },
   {
     "rank": 1,
@@ -145,7 +145,6 @@
     "source_url_1": "https://www.modexshow.com/downloads/mx26_attendeeListInsert.pdf",
     "source_url_2": null,
     "icp_fit": 5,
-    "modex_signal": 4,
     "primo_story_fit": 5,
     "warm_intro": 2,
     "strategic_value": 5,
@@ -194,7 +193,8 @@
     "showcase": true,
     "showcase_order": 6,
     "accent_color_override": "#2563EB",
-    "layout_preset": "executive"
+    "layout_preset": "executive",
+    "event_signal": 4
   },
   {
     "rank": 1,
@@ -209,7 +209,6 @@
     "source_url_1": "https://www.modexshow.com/downloads/mx26_attendeeListInsert.pdf",
     "source_url_2": null,
     "icp_fit": 5,
-    "modex_signal": 4,
     "primo_story_fit": 5,
     "warm_intro": 2,
     "strategic_value": 4,
@@ -275,7 +274,8 @@
       "Connor McKenney": "Connor, the 24/7 protein line does not pause for dock congestion. The yard has to match the production clock.",
       "Anthony Nguyen": "Anthony, carrier detention charges hit every Hormel facility independently. The yard is where those costs stack up.",
       "Tim Whitson": "Tim, cold chain integrity depends on reefer dwell time in the yard. That is the one link without real-time data."
-    }
+    },
+    "event_signal": 4
   },
   {
     "rank": 1,
@@ -290,7 +290,6 @@
     "source_url_1": "https://www.modexshow.com/downloads/mx26_attendeeListInsert.pdf",
     "source_url_2": null,
     "icp_fit": 5,
-    "modex_signal": 4,
     "primo_story_fit": 5,
     "warm_intro": 2,
     "strategic_value": 4,
@@ -356,7 +355,8 @@
       "Amadeo Wei": "Amadeo, three acquisition supply chains, one procurement team. The yard is where those integration gaps surface daily.",
       "Jason Barr": "Jason, carrier procurement gets harder when every facility runs a different yard. Standardize the yard, simplify the bid.",
       "Justin Middleton": "Justin, warehousing ops end at the dock door. The yard between the gate and that door is where your throughput leaks."
-    }
+    },
+    "event_signal": 4
   },
   {
     "rank": 7,
@@ -371,7 +371,6 @@
     "source_url_1": "https://www.modexshow.com/downloads/mx26_attendeeListInsert.pdf",
     "source_url_2": "https://mx2026.mapyourshow.com/8_0/sessions/session-details.cfm?scheduleid=223",
     "icp_fit": 4,
-    "modex_signal": 5,
     "primo_story_fit": 4,
     "warm_intro": 2,
     "strategic_value": 5,
@@ -435,7 +434,8 @@
       "Amit Kalra": "Amit, RDCs, SDCs, flatbed DCs, fulfillment centers. Four facility types, four yard playbooks. One should work everywhere.",
       "Richard McPhail": "Richard, you are keynoting MODEX 2026 on supply chain investment. The yard is the lowest-cost, highest-impact layer left.",
       "Erin Donnelly": "Erin, supply chain development means standardizing the unstandardized. The yard is the last unstandardized layer."
-    }
+    },
+    "event_signal": 5
   },
   {
     "rank": 7,
@@ -450,7 +450,6 @@
     "source_url_1": "https://www.modexshow.com/downloads/mx26_attendeeListInsert.pdf",
     "source_url_2": null,
     "icp_fit": 4,
-    "modex_signal": 4,
     "primo_story_fit": 4,
     "warm_intro": 2,
     "strategic_value": 5,
@@ -495,7 +494,8 @@
         "kpiImpact": "Zero travel barrier for GP supply chain leadership at MODEX 2026"
       }
     ],
-    "custom_problem_headline": "GP runs the highest-volume inbound yards in building products. Manual gate check-in is the bottleneck nobody measures."
+    "custom_problem_headline": "GP runs the highest-volume inbound yards in building products. Manual gate check-in is the bottleneck nobody measures.",
+    "event_signal": 4
   },
   {
     "rank": 7,
@@ -510,7 +510,6 @@
     "source_url_1": "https://www.modexshow.com/downloads/mx26_attendeeListInsert.pdf",
     "source_url_2": null,
     "icp_fit": 4,
-    "modex_signal": 4,
     "primo_story_fit": 4,
     "warm_intro": 2,
     "strategic_value": 4,
@@ -555,7 +554,8 @@
         "kpiImpact": "Dual inbound streams (manufacturing + vendor) competing for the same dock doors"
       }
     ],
-    "custom_problem_headline": "H-E-B is famous for freshness. But fresh product loses shelf days in the yard before it ever hits the shelf."
+    "custom_problem_headline": "H-E-B is famous for freshness. But fresh product loses shelf days in the yard before it ever hits the shelf.",
+    "event_signal": 4
   },
   {
     "rank": 10,
@@ -570,7 +570,6 @@
     "source_url_1": "https://www.modexshow.com/downloads/mx26_attendeeListInsert.pdf",
     "source_url_2": null,
     "icp_fit": 4,
-    "modex_signal": 4,
     "primo_story_fit": 3,
     "warm_intro": 1,
     "strategic_value": 4,
@@ -613,7 +612,8 @@
         "description": "Hyundai's Montgomery complex includes assembly and engine manufacturing in adjacent facilities. Trailer moves between plants are coordinated manually. When parts are in the yard but the dock team does not know, the line sees a shortage that does not actually exist.",
         "kpiImpact": "Phantom shortages from yard visibility gaps: 2-5 incidents per week"
       }
-    ]
+    ],
+    "event_signal": 4
   },
   {
     "rank": 10,
@@ -628,7 +628,6 @@
     "source_url_1": "https://www.modexshow.com/downloads/mx26_attendeeListInsert.pdf",
     "source_url_2": null,
     "icp_fit": 4,
-    "modex_signal": 4,
     "primo_story_fit": 3,
     "warm_intro": 1,
     "strategic_value": 4,
@@ -672,7 +671,8 @@
         "description": "The Toyota Production System, which Honda adapted, assumes materials arrive in sequence. But the sequencing logic often stops at the gate. Inside the yard, trailers are parked wherever there is space. Sequence breaks. The line pays.",
         "kpiImpact": "Parts sequencing errors traceable to yard parking: 3-5% of daily dock turns"
       }
-    ]
+    ],
+    "event_signal": 4
   },
   {
     "rank": 10,
@@ -687,7 +687,6 @@
     "source_url_1": "https://www.modexshow.com/downloads/mx26_attendeeListInsert.pdf",
     "source_url_2": null,
     "icp_fit": 4,
-    "modex_signal": 4,
     "primo_story_fit": 3,
     "warm_intro": 1,
     "strategic_value": 4,
@@ -749,7 +748,8 @@
       "Gia Duke": "Gia, global supply management cannot run on local yard visibility. The gap is between what you see and what happens at the gate.",
       "Kevin Akers": "Kevin, the operations strategy includes dealer-delivery speed. That speed starts in the yard, not on the road.",
       "Catherine Pham": "Catherine, supply chain strategy is only as good as the execution layer. The yard is the execution layer nobody designed."
-    }
+    },
+    "event_signal": 4
   },
   {
     "rank": 13,
@@ -764,7 +764,6 @@
     "source_url_1": "https://mx2026.mapyourshow.com/8_0/sessions/session-details.cfm?scheduleid=218",
     "source_url_2": "https://mx2026.mapyourshow.com/8_0/sessions/speaker-details.cfm?speakerid=154",
     "icp_fit": 3,
-    "modex_signal": 5,
     "primo_story_fit": 2,
     "warm_intro": 1,
     "strategic_value": 4,
@@ -810,7 +809,8 @@
         "description": "If Kenco standardizes on YardFlow across their 100+ managed facilities, every one of their clients gets yard visibility. This is not a single logo sale. It is a distribution channel for YardFlow into dozens of enterprise supply chains.",
         "kpiImpact": "Partnership potential: 1 contract = 100+ facility deployments"
       }
-    ]
+    ],
+    "event_signal": 5
   },
   {
     "rank": 13,
@@ -825,7 +825,6 @@
     "source_url_1": "https://mx2026.mapyourshow.com/8_0/sessions/session-details.cfm?scheduleid=218",
     "source_url_2": "https://mx2026.mapyourshow.com/8_0/sessions/speaker-details.cfm?speakerid=153",
     "icp_fit": 3,
-    "modex_signal": 5,
     "primo_story_fit": 2,
     "warm_intro": 1,
     "strategic_value": 3,
@@ -869,7 +868,8 @@
         "description": "VP Supply Chain Annette Danek-Akey is a named session speaker at MODEX 2026. When supply chain leadership presents at the industry's largest event, they are signaling openness to new solutions and partnerships.",
         "kpiImpact": "Direct meeting path: speaker attendance = high probability of floor presence"
       }
-    ]
+    ],
+    "event_signal": 5
   },
   {
     "rank": 13,
@@ -884,7 +884,6 @@
     "source_url_1": "https://www.modexshow.com/downloads/mx26_attendeeListInsert.pdf",
     "source_url_2": null,
     "icp_fit": 3,
-    "modex_signal": 4,
     "primo_story_fit": 2,
     "warm_intro": 1,
     "strategic_value": 4,
@@ -928,6 +927,7 @@
         "description": "FedEx is the ultimate strategic logo but the most complex sell. This is not a cold-call account. YardFlow needs a warm path, a pilot site, and patience. MODEX presence creates the opportunistic window.",
         "kpiImpact": "Treat as opportunistic: high upside, long cycle, need warm intro"
       }
-    ]
+    ],
+    "event_signal": 4
   }
 ]

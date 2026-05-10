@@ -243,7 +243,7 @@ async function recordAgentActivity(accountName: string | undefined, action: Agen
   }).catch(() => undefined);
 }
 
-async function buildModexPromptContext(target: ResolvedTarget): Promise<PromptContext | null> {
+async function buildLocalPromptContext(target: ResolvedTarget): Promise<PromptContext | null> {
   if (!target.accountName) return null;
   const { account, personas } = await getAccountContext(target.accountName, target.accountNames);
   if (!account) return null;
@@ -275,9 +275,9 @@ function parseSequenceBody(value: string) {
   return { subject, body };
 }
 
-async function buildModexDraftFallback(target: ResolvedTarget, contentContextSummary?: string) {
-  const ctx = await buildModexPromptContext(target);
-  if (!ctx) throw new Error('Account context not found for Modex draft fallback.');
+async function buildLocalDraftFallback(target: ResolvedTarget, contentContextSummary?: string) {
+  const ctx = await buildLocalPromptContext(target);
+  if (!ctx) throw new Error('Account context not found for local draft fallback.');
   const raw = await generateText(buildEmailPrompt({
     ...ctx,
     agentContextSummary: contentContextSummary,
@@ -286,9 +286,9 @@ async function buildModexDraftFallback(target: ResolvedTarget, contentContextSum
   return { subject, body };
 }
 
-async function buildModexSequenceFallback(target: ResolvedTarget, contentContextSummary?: string) {
-  const ctx = await buildModexPromptContext(target);
-  if (!ctx) throw new Error('Account context not found for Modex sequence fallback.');
+async function buildLocalSequenceFallback(target: ResolvedTarget, contentContextSummary?: string) {
+  const ctx = await buildLocalPromptContext(target);
+  if (!ctx) throw new Error('Account context not found for local sequence fallback.');
   const step = 'initial_email' as const;
   const raw = await generateText(buildOutreachSequencePrompt({
     ...ctx,
@@ -302,7 +302,7 @@ function isFresh(savedAt: string, ttlMs: number) {
 }
 
 async function runContentContext(target: ResolvedTarget, refresh: boolean, depth: AgentActionRequest['depth'], limit = 10): Promise<AgentActionResult> {
-  const result = baseResult('content_context', 'modex');
+  const result = baseResult('content_context', 'local');
   const { clawd, salesAgent } = getConfiguredAgentClients();
 
   if (!target.accountName) {
@@ -367,7 +367,7 @@ async function runContentContext(target: ResolvedTarget, refresh: boolean, depth
 
   const summaryParts = [
     safeString(researchPayload?.summary) || safeString(workbenchPayload?.summary),
-    accountBundle.account?.why_now ? `Modex why now: ${accountBundle.account.why_now}` : '',
+    accountBundle.account?.why_now ? `Why now: ${accountBundle.account.why_now}` : '',
     committeePayload && typeof committeePayload === 'object'
       ? `Committee coverage: ${String((committeePayload as Record<string, unknown>).member_count ?? 0)} members`
       : '',
@@ -388,7 +388,7 @@ async function runContentContext(target: ResolvedTarget, refresh: boolean, depth
     ),
     card(
       'Contact Coverage',
-      `${personas.length} Modex personas${contactNames.length ? ` • ${summarizeList(contactNames)}` : ''}${liveContactCount > 0 ? ` • ${liveContactCount} live external contacts • ${summarizeList(liveContactPreview)}` : ''}`,
+      `${personas.length} target personas${contactNames.length ? ` • ${summarizeList(contactNames)}` : ''}${liveContactCount > 0 ? ` • ${liveContactCount} live external contacts • ${summarizeList(liveContactPreview)}` : ''}`,
       liveContactCount > 0 ? 'success' : 'warning',
     ),
     card(
@@ -566,7 +566,7 @@ async function runContentContext(target: ResolvedTarget, refresh: boolean, depth
 
   if (!result.summary) {
     result.status = 'partial';
-    result.summary = `Assembled Modex context for ${scopedAccountName}, but live sidecar research is limited right now.`;
+    result.summary = `Assembled local context for ${scopedAccountName}, but live sidecar research is limited right now.`;
   }
 
   return result;
@@ -583,7 +583,7 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
         return { ...baseResult(request.action, 'clawd'), status: 'error', summary: 'Company is required for account research.' };
       }
       if (!clawd && !salesAgent) {
-        return { ...baseResult(request.action, 'modex'), status: 'partial', summary: 'Clawd is not configured. Modex-only context is available.' };
+        return { ...baseResult(request.action, 'local'), status: 'partial', summary: 'Clawd is not configured. Local context is available.' };
       }
       const [clawdPayload, salesPayload] = await Promise.allSettled([
         clawd?.getAccountResearch(company, request.refresh),
@@ -591,7 +591,7 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
       ]);
       const payload = clawdPayload.status === 'fulfilled' ? clawdPayload.value : null;
       const sales = salesPayload.status === 'fulfilled' ? salesPayload.value : null;
-      const result = baseResult(request.action, payload ? 'clawd' : sales ? 'sales_agent' : 'modex');
+      const result = baseResult(request.action, payload ? 'clawd' : sales ? 'sales_agent' : 'local');
       result.status = payload?.intel || payload?.workbench || sales ? 'ok' : 'partial';
       result.summary =
         safeString(payload?.intel?.summary) ||
@@ -612,7 +612,7 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
     }
     case 'contact_dossier': {
       if (!email || !clawd) {
-        return { ...baseResult(request.action, clawd ? 'clawd' : 'modex'), status: 'error', summary: 'Contact email and Clawd configuration are required for dossier lookup.' };
+        return { ...baseResult(request.action, clawd ? 'clawd' : 'local'), status: 'error', summary: 'Contact email and Clawd configuration are required for dossier lookup.' };
       }
       const payload = await clawd.getContactDossier(email);
       const contactPayload = ((payload as Record<string, unknown>).contact ?? {}) as Record<string, unknown>;
@@ -632,7 +632,7 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
     }
     case 'company_contacts': {
       if (!company || (!clawd && !salesAgent)) {
-        return { ...baseResult(request.action, clawd ? 'clawd' : salesAgent ? 'sales_agent' : 'modex'), status: 'error', summary: 'Company and a live sidecar configuration are required for company contact lookup.' };
+        return { ...baseResult(request.action, clawd ? 'clawd' : salesAgent ? 'sales_agent' : 'local'), status: 'error', summary: 'Company and a live sidecar configuration are required for company contact lookup.' };
       }
       const [clawdPayload, salesPayload] = await Promise.allSettled([
         clawd?.getCompanyContacts(company),
@@ -644,7 +644,7 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
         : [];
       const salesContacts = await getSalesAgentCompanyContacts(salesAgent, company, companyPayload, request.limit ?? 10);
       const contacts = dedupeContacts([...salesContacts, ...decisionMakers]);
-      const result = baseResult(request.action, contacts.length > 0 ? 'sales_agent' : companyPayload ? 'clawd' : 'modex');
+      const result = baseResult(request.action, contacts.length > 0 ? 'sales_agent' : companyPayload ? 'clawd' : 'local');
       result.summary = contacts.length > 0
         ? `Found ${contacts.length} live contacts for ${company}.`
         : companyPayload
@@ -674,7 +674,7 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
     }
     case 'committee_refresh': {
       if (!company || !clawd) {
-        return { ...baseResult(request.action, clawd ? 'clawd' : 'modex'), status: 'error', summary: 'Company and Clawd configuration are required for committee build.' };
+        return { ...baseResult(request.action, clawd ? 'clawd' : 'local'), status: 'error', summary: 'Company and Clawd configuration are required for committee build.' };
       }
       const payload = await clawd.buildCommittee(company);
       const result = baseResult(request.action, 'clawd');
@@ -689,7 +689,7 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
     }
     case 'prospect_discover': {
       const limit = request.limit ?? 10;
-      const result = baseResult(request.action, clawd ? 'clawd' : salesAgent ? 'sales_agent' : 'modex');
+      const result = baseResult(request.action, clawd ? 'clawd' : salesAgent ? 'sales_agent' : 'local');
       const errors: string[] = [];
       if (clawd) {
         try {
@@ -729,9 +729,9 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
     }
     case 'contact_enrich': {
       if (!email) {
-        return { ...baseResult(request.action, 'modex'), status: 'error', summary: 'Contact email is required for enrichment.' };
+        return { ...baseResult(request.action, 'local'), status: 'error', summary: 'Contact email is required for enrichment.' };
       }
-      const result = baseResult(request.action, salesAgent ? 'sales_agent' : clawd ? 'clawd' : 'modex');
+      const result = baseResult(request.action, salesAgent ? 'sales_agent' : clawd ? 'clawd' : 'local');
       const errors: string[] = [];
       if (salesAgent) {
         try {
@@ -764,7 +764,7 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
     }
     case 'pipeline_snapshot': {
       if (!clawd) {
-        return { ...baseResult(request.action, 'modex'), status: 'partial', summary: 'Clawd is not configured for pipeline snapshots.' };
+        return { ...baseResult(request.action, 'local'), status: 'partial', summary: 'Clawd is not configured for pipeline snapshots.' };
       }
       const payload = await clawd.getPipelineSnapshot(request.limit ?? 50);
       const result = baseResult(request.action, 'clawd');
@@ -784,7 +784,7 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
         : null;
       const summary = contentContext?.summary;
       const generationInput = buildGenerationInputContract(contentContext, 'scorecard_reply');
-      const result = baseResult(request.action, salesAgent ? 'sales_agent' : clawd ? 'clawd' : 'modex');
+      const result = baseResult(request.action, salesAgent ? 'sales_agent' : clawd ? 'clawd' : 'local');
       const errors: string[] = [];
       if (salesAgent) {
         try {
@@ -830,7 +830,7 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
         }
       }
       try {
-        const fallback = await buildModexDraftFallback(target, summary);
+        const fallback = await buildLocalDraftFallback(target, summary);
         const sourceAttribution = buildSourceBackedContractFromGeneratedText({
           content: fallback.body,
           accountName: target.accountName ?? '',
@@ -838,8 +838,8 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
           generationInput,
           citationThreshold: 1,
         });
-        result.provider = 'modex';
-        result.summary = `Generated a Modex fallback draft${target.accountName ? ` for ${target.accountName}` : ''}.`;
+        result.provider = 'local';
+        result.summary = `Generated a local fallback draft${target.accountName ? ` for ${target.accountName}` : ''}.`;
         result.cards = [
           card('Subject', fallback.subject, 'success'),
           card('Body', fallback.body, 'default'),
@@ -859,7 +859,7 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
       const contentContext = target.accountName
         ? await runContentContext(target, request.refresh, request.depth, request.limit ?? 10)
         : null;
-      const result = baseResult(request.action, salesAgent ? 'sales_agent' : 'modex');
+      const result = baseResult(request.action, salesAgent ? 'sales_agent' : 'local');
       const errors: string[] = [];
       if (salesAgent) {
         try {
@@ -874,9 +874,9 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
         }
       }
       try {
-        const fallback = await buildModexSequenceFallback(target, contentContext?.summary);
-        result.provider = 'modex';
-        result.summary = `Generated a Modex sequence recommendation${target.accountName ? ` for ${target.accountName}` : ''}.`;
+        const fallback = await buildLocalSequenceFallback(target, contentContext?.summary);
+        result.provider = 'local';
+        result.summary = `Generated a local sequence recommendation${target.accountName ? ` for ${target.accountName}` : ''}.`;
         result.cards = [
           card('Suggested Subject', fallback.subject, 'success'),
           card('Suggested Opening', fallback.body, 'default'),
@@ -895,7 +895,7 @@ async function runActionUncached(request: AgentActionRequest, target: ResolvedTa
     case 'content_context':
       return runContentContext(target, request.refresh, request.depth, request.limit ?? 10);
     default:
-      return { ...baseResult(request.action, 'modex'), status: 'error', summary: 'Unsupported action.' };
+      return { ...baseResult(request.action, 'local'), status: 'error', summary: 'Unsupported action.' };
   }
 }
 
@@ -929,7 +929,7 @@ export async function runAgentAction(request: AgentActionRequest): Promise<Agent
     if (cached) {
       return maybeSanitizeResult(request.action, applyFreshness(cached.result, 'cache', true));
     }
-    const result = baseResult(request.action, 'modex');
+    const result = baseResult(request.action, 'local');
     result.status = 'error';
     result.summary = error instanceof Error ? error.message : 'Agent action failed.';
     return result;
@@ -948,22 +948,22 @@ export function listAgentActionCapabilities(): AgentActionCapability[] {
       case 'sequence_recommendation':
         return {
           action,
-          preferredProvider: salesConfigured ? 'sales_agent' : clawdConfigured ? 'clawd' : 'modex',
-          fallbackProvider: salesConfigured ? (clawdConfigured ? 'clawd' : 'modex') : clawdConfigured ? 'modex' : null,
+          preferredProvider: salesConfigured ? 'sales_agent' : clawdConfigured ? 'clawd' : 'local',
+          fallbackProvider: salesConfigured ? (clawdConfigured ? 'clawd' : 'local') : clawdConfigured ? 'local' : null,
           configured: salesConfigured || clawdConfigured,
         };
       case 'content_context':
         return {
           action,
-          preferredProvider: 'modex',
+          preferredProvider: 'local',
           fallbackProvider: clawdConfigured || salesConfigured ? 'clawd' : null,
           configured: true,
         };
       default:
         return {
           action,
-          preferredProvider: clawdConfigured ? 'clawd' : 'modex',
-          fallbackProvider: clawdConfigured ? 'modex' : null,
+          preferredProvider: clawdConfigured ? 'clawd' : 'local',
+          fallbackProvider: clawdConfigured ? 'local' : null,
           configured: clawdConfigured,
         };
     }

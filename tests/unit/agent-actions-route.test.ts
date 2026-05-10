@@ -22,7 +22,7 @@ describe('agent action routes', () => {
   it('parses defaults and delegates to the broker', async () => {
     mockedRunAgentAction.mockResolvedValue({
       action: 'content_context',
-      provider: 'modex',
+      provider: 'local',
       status: 'ok',
       summary: 'Loaded',
       cards: [],
@@ -66,7 +66,7 @@ describe('agent action routes', () => {
 
   it('returns configured service flags from capabilities', async () => {
     process.env.CLAWD_CONTROL_PLANE_URL = 'https://clawd.example.com';
-    mockedListCapabilities.mockReturnValue([{ action: 'content_context', preferredProvider: 'modex' }] as never);
+    mockedListCapabilities.mockReturnValue([{ action: 'content_context', preferredProvider: 'local' }] as never);
 
     const res = await GET();
     const payload = await res.json();

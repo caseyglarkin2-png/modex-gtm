@@ -48,7 +48,7 @@ export interface AgentActionCard {
 
 export interface AgentActionResult {
   action: AgentActionType;
-  provider: 'clawd' | 'sales_agent' | 'modex';
+  provider: 'clawd' | 'sales_agent' | 'local';
   status: 'ok' | 'partial' | 'error';
   summary: string;
   cards: AgentActionCard[];
@@ -59,7 +59,7 @@ export interface AgentActionResult {
 
 export interface AgentActionCapability {
   action: AgentActionType;
-  preferredProvider: 'clawd' | 'sales_agent' | 'modex';
-  fallbackProvider: 'clawd' | 'sales_agent' | 'modex' | null;
+  preferredProvider: 'clawd' | 'sales_agent' | 'local';
+  fallbackProvider: 'clawd' | 'sales_agent' | 'local' | null;
   configured: boolean;
 }

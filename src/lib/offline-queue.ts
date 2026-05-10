@@ -1,7 +1,7 @@
 // Offline-first capture queue — persists to localStorage, syncs to API when online
 import type { CaptureInput } from './validations';
 
-const QUEUE_KEY = 'modex_offline_queue';
+const QUEUE_KEY = 'gtm_offline_queue';
 
 export interface QueuedCapture extends CaptureInput {
   _id: string;        // local uuid

@@ -12,7 +12,7 @@ import type { AgentActionResult } from '@/lib/agent-actions/types';
 
 const baseResult: AgentActionResult = {
   action: 'content_context',
-  provider: 'modex',
+  provider: 'local',
   status: 'ok',
   summary: 'Context ready.',
   cards: [
@@ -186,7 +186,7 @@ describe('account command center helpers', () => {
     const signals = buildSignalRegistry(baseResult);
 
     expect(signals.length).toBeGreaterThanOrEqual(7);
-    expect(signals.some((signal) => signal.title === 'Research Summary' && signal.source === 'modex')).toBe(true);
+    expect(signals.some((signal) => signal.title === 'Research Summary' && signal.source === 'local')).toBe(true);
     expect(signals.some((signal) => signal.title === 'Latest Send')).toBe(true);
     expect(signals.some((signal) => signal.title === 'Latest Asset')).toBe(true);
   });

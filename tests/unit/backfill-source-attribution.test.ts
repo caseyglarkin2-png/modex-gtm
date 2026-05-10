@@ -19,7 +19,7 @@ describe('backfill-source-attribution — branch coverage (S1-T6)', () => {
       recommended_contacts: ['Taylor Lane'],
       committee_gaps: [],
       cta_mode: 'scorecard_reply',
-      provenance: { provider: 'modex' as const, status: 'ok' as const },
+      provenance: { provider: 'local' as const, status: 'ok' as const },
       freshness: { status: 'fresh', stale: false } as never,
       changed_since_last_refresh: null,
     };
@@ -56,7 +56,7 @@ describe('backfill-source-attribution — branch coverage (S1-T6)', () => {
       recommended_contacts: [],
       committee_gaps: [],
       cta_mode: 'scorecard_reply',
-      provenance: { provider: 'modex' as const, status: 'ok' as const },
+      provenance: { provider: 'local' as const, status: 'ok' as const },
       freshness: { status: 'fresh', stale: false } as never,
       changed_since_last_refresh: null,
     };

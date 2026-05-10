@@ -5,7 +5,7 @@ import type { AgentActionResult } from '@/lib/agent-actions/types';
 function buildResult(overrides?: Partial<AgentActionResult>): AgentActionResult {
   return {
     action: 'content_context',
-    provider: 'modex',
+    provider: 'local',
     status: 'ok',
     summary: 'Baseline summary.',
     cards: [

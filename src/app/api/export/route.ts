@@ -77,7 +77,7 @@ export async function GET(req: NextRequest) {
         ['Account', 'Band', 'Research', 'Outreach', 'Meeting Status'],
         accounts.map((a) => [a.name, a.priority_band ?? '', a.research_status ?? '', a.outreach_status ?? '', a.meeting_status ?? '']),
       );
-      filename = 'modex-pipeline.csv';
+      filename = 'industry-event-pipeline.csv';
       break;
     }
     case 'activities': {
@@ -86,7 +86,7 @@ export async function GET(req: NextRequest) {
         ['Date', 'Account', 'Persona', 'Type', 'Outcome', 'Next Step', 'Due', 'Owner'],
         activities.map((a) => [a.activity_date ? new Date(a.activity_date).toLocaleDateString() : '', a.account_name, a.persona ?? '', a.activity_type, a.outcome ?? '', a.next_step ?? '', a.next_step_due ? new Date(a.next_step_due).toLocaleDateString() : '', a.owner ?? '']),
       );
-      filename = 'modex-activities.csv';
+      filename = 'industry-event-activities.csv';
       break;
     }
     case 'waves': {
@@ -95,7 +95,7 @@ export async function GET(req: NextRequest) {
         ['Wave', 'Account', 'Primary Persona', 'Channel', 'Status', 'Start Date'],
         waves.map((w) => [String(w.wave_order), w.account_name, w.primary_persona_lane ?? '', w.channel_mix ?? '', w.status ?? '', w.start_date ? new Date(w.start_date).toLocaleDateString() : '']),
       );
-      filename = 'modex-waves.csv';
+      filename = 'industry-event-waves.csv';
       break;
     }
     case 'microsites': {
@@ -132,7 +132,7 @@ export async function GET(req: NextRequest) {
           ];
         }),
       );
-      filename = 'modex-microsite-engagement.csv';
+      filename = 'industry-event-microsite-engagement.csv';
       break;
     }
     case 'content-attribution': {
@@ -154,7 +154,7 @@ export async function GET(req: NextRequest) {
           summary.confidence,
         ]),
       );
-      filename = `modex-content-attribution-${view}.csv`;
+      filename = `industry-event-content-attribution-${view}.csv`;
       break;
     }
     default:

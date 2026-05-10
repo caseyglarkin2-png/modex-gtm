@@ -147,7 +147,7 @@ export function CampaignSettingsForm({
             <p className="font-medium text-sm text-red-700">Danger Zone</p>
             <p className="text-xs text-muted-foreground">
               {isSystemDefault
-                ? 'This default system campaign stays in place for MODEX operations and cannot be deleted here.'
+                ? 'This default system campaign is locked and cannot be deleted here.'
                 : `Type the campaign name to confirm deletion: ${name}`}
             </p>
           </div>
