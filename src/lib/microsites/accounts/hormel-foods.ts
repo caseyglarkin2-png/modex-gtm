@@ -437,7 +437,7 @@ export const hormelFoods: AccountMicrositeData = {
   },
 
   signals: {
-    modexAttendance: 'Past attendee list',
+    eventAttendance: 'Past attendee list',
     recentNews: [
       'New CSCO in March 2026.',
     ],

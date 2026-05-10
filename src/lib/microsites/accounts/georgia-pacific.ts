@@ -66,7 +66,7 @@ import type { AccountMicrositeData } from '../schema';
  *         { label: 'Gate and spotter labor overhead', value: '$2M+' },
  *         { label: 'Peak season surge inefficiency', value: '$1M+' },
  *       ],
- *       urgencyDriver: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+ *       urgencyDriver: 'Multi-site execution standardization is the stated opportunity. Industry conference attendee signal confirms active investment evaluation.',
  *     },
  *     {
  *       type: 'solution',
@@ -263,7 +263,7 @@ export const georgiaPacific: AccountMicrositeData = {
       variantSlug: 'ryan-hutcherson',
 
       framingNarrative: 'Ryan, Industrial plant flow and trailer variability create real throughput drag across sites.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for Georgia Pacific.',
+      openingHook: 'The yard is where execution meets reality for Georgia Pacific — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at Georgia Pacific\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -294,7 +294,7 @@ export const georgiaPacific: AccountMicrositeData = {
       variantSlug: 'jeremy-finley',
 
       framingNarrative: 'Jeremy, Industrial plant flow and trailer variability create real throughput drag across sites.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for Georgia Pacific.',
+      openingHook: 'The yard is where execution meets reality for Georgia Pacific — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at Georgia Pacific\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -325,7 +325,7 @@ export const georgiaPacific: AccountMicrositeData = {
       variantSlug: 'kathryn-sherman',
 
       framingNarrative: 'Kathryn, Industrial plant flow and trailer variability create real throughput drag across sites.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for Georgia Pacific.',
+      openingHook: 'The yard is where execution meets reality for Georgia Pacific — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at Georgia Pacific\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -356,7 +356,7 @@ export const georgiaPacific: AccountMicrositeData = {
       variantSlug: 'wes-bunkley',
 
       framingNarrative: 'Wes, Industrial plant flow and trailer variability create real throughput drag across sites.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for Georgia Pacific.',
+      openingHook: 'The yard is where execution meets reality for Georgia Pacific — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at Georgia Pacific\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -387,7 +387,7 @@ export const georgiaPacific: AccountMicrositeData = {
       variantSlug: 'john-pratt',
 
       framingNarrative: 'John, Industrial plant flow and trailer variability create real throughput drag across sites.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for Georgia Pacific.',
+      openingHook: 'The yard is where execution meets reality for Georgia Pacific — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at Georgia Pacific\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -433,16 +433,16 @@ export const georgiaPacific: AccountMicrositeData = {
   freight: {
     primaryModes: ['Truckload', 'LTL'],
     avgLoadsPerDay: '3,000+',
-    peakSeason: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+    peakSeason: 'Multi-site supply chain standardization opportunity.',
   },
 
   signals: {
-    modexAttendance: 'Past attendee list',
+    eventAttendance: 'Past attendee list',
     recentNews: [
-      'Public MODEX signal plus likely fit for multi-site execution standardization.',
+      'Multi-site execution standardization initiative underway.',
     ],
     supplyChainInitiatives: ['Industrial plant flow and trailer variability create real throughput drag across sites.'],
-    urgencyDriver: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+    urgencyDriver: 'Multi-site execution standardization is the stated opportunity. Industry conference attendee signal confirms active investment evaluation.',
   },
 
   theme: {

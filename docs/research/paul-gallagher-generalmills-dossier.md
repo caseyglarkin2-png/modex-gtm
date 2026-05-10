@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Paul Gallagher — General Mills
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Paul Gallagher, Chief Supply Chain Officer, General Mills
 **Email:** paul.gallagher@genmills.com
 **Account Priority:** Wave 1 (A-band)
@@ -28,7 +28,7 @@
 ### Key Insight: Diageo Background
 - Paul spent ~6 years as **President of North America Supply at Diageo** before joining General Mills in 2019. This is significant because:
   - He managed **beverage/spirits supply chains** — high-complexity, regulated, multi-temperature environments
-  - Diageo is also a MODEX target account — potential warm intro angle
+  - Diageo is also a YardFlow target account — potential warm intro angle via his Diageo network
   - He understands **cold chain logistics** from both spirits and now frozen food (Häagen-Dazs, Pillsbury)
 
 ### Public Speaking & Thought Leadership
@@ -220,11 +220,10 @@ Paul built a Palantir digital twin for end-to-end visibility. But there's a **bl
 - Reference the Top 30 award — "Congratulations on the Leaders in Supply Chain recognition"
 - Mention the Belvidere DC — "As you scale up Belvidere, yard ops can be optimized from day one"
 
-### MODEX 2026 Meeting Angle
-- General Mills HQ is in Minneapolis, but Paul travels to industry events
-- MODEX is the largest supply chain trade show — he may attend or send team members
-- Pitch a **20-minute meeting** focused specifically on the digital twin completion angle
-- If Paul delegates, target his **VP of Logistics & Customer Operations** as an alternate
+### Meeting Angle
+- General Mills HQ is in Minneapolis, but Paul travels to industry events.
+- Pitch a **20-minute meeting** focused specifically on the digital twin completion angle.
+- If Paul delegates, target his **VP of Logistics & Customer Operations** as an alternate.
 
 ### Tone & Approach
 - **Peer-level, strategic** — Paul is a Top 30 supply chain leader, he doesn't need education

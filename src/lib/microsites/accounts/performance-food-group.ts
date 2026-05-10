@@ -260,7 +260,7 @@ export const performanceFoodGroup: AccountMicrositeData = {
   },
 
   signals: {
-    modexAttendance: 'Past attendee list',
+    eventAttendance: 'Past attendee list',
     recentNews: [
       '2024: PFG acquired Cheney Brothers (one of the largest independent foodservice distributors) for $2.1B',
       'Integration of Cheney Brothers = overlapping DC territories = yard reorganization',

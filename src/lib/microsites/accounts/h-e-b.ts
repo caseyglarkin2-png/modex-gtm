@@ -66,7 +66,7 @@ import type { AccountMicrositeData } from '../schema';
  *         { label: 'Gate and spotter labor overhead', value: '$2M+' },
  *         { label: 'Peak season surge inefficiency', value: '$1M+' },
  *       ],
- *       urgencyDriver: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+ *       urgencyDriver: 'Multi-site execution standardization is the stated opportunity. Industry conference attendee signal confirms active investment evaluation.',
  *     },
  *     {
  *       type: 'solution',
@@ -263,7 +263,7 @@ export const hEB: AccountMicrositeData = {
       variantSlug: 'troy-retzloff',
 
       framingNarrative: 'Troy, Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for H-E-B.',
+      openingHook: 'The yard is where execution meets reality for H-E-B — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at H-E-B\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -294,7 +294,7 @@ export const hEB: AccountMicrositeData = {
       variantSlug: 'craig-stucker',
 
       framingNarrative: 'Craig, Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for H-E-B.',
+      openingHook: 'The yard is where execution meets reality for H-E-B — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at H-E-B\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -325,7 +325,7 @@ export const hEB: AccountMicrositeData = {
       variantSlug: 'dakota-socha',
 
       framingNarrative: 'Dakota, Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for H-E-B.',
+      openingHook: 'The yard is where execution meets reality for H-E-B — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at H-E-B\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -356,7 +356,7 @@ export const hEB: AccountMicrositeData = {
       variantSlug: 'jeffrey-matthews',
 
       framingNarrative: 'Jeffrey, Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for H-E-B.',
+      openingHook: 'The yard is where execution meets reality for H-E-B — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at H-E-B\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -387,7 +387,7 @@ export const hEB: AccountMicrositeData = {
       variantSlug: 'troy-shaw',
 
       framingNarrative: 'Troy, Grocery distribution is brutally unforgiving; standardized site flow has obvious value.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for H-E-B.',
+      openingHook: 'The yard is where execution meets reality for H-E-B — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at H-E-B\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -433,16 +433,16 @@ export const hEB: AccountMicrositeData = {
   freight: {
     primaryModes: ['Truckload', 'LTL', 'Intermodal'],
     avgLoadsPerDay: '4,000+',
-    peakSeason: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+    peakSeason: 'Multi-site supply chain standardization opportunity.',
   },
 
   signals: {
-    modexAttendance: 'Past attendee list',
+    eventAttendance: 'Past attendee list',
     recentNews: [
-      'Public MODEX signal plus likely fit for multi-site execution standardization.',
+      'Multi-site execution standardization initiative underway.',
     ],
     supplyChainInitiatives: ['Grocery distribution is brutally unforgiving; standardized site flow has obvious value.'],
-    urgencyDriver: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+    urgencyDriver: 'Multi-site execution standardization is the stated opportunity. Industry conference attendee signal confirms active investment evaluation.',
   },
 
   theme: {

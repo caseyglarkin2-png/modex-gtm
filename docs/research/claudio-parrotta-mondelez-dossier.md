@@ -1,6 +1,6 @@
 # Sales Intelligence Dossier: Claudio Parrotta — Mondelez International
 
-**Prepared for:** YardFlow by FreightRoll — MODEX 2026 Outreach
+**Prepared for:** YardFlow by FreightRoll — Account-Based Outreach
 **Target:** Claudio Parrotta, EVP & Chief Supply Chain Officer, Mondelez International
 **Email:** claudio.parrotta@mdlz.com
 **Account Priority:** TBD (New target — not in current Wave 1)
@@ -215,10 +215,9 @@ Managing 130+ plants and 320 warehouses means Claudio thinks at scale. The pitch
 4. **"Seasonal-proof your docks"** — Halloween/Christmas chocolate surges are a pain point only yard management can solve
 
 ### Channel Approach
-- **MODEX 2026 is the venue** — Mondelez's supply chain team will be evaluating technologies
-- Claudio is a **quiet operator**, not a public keynote speaker — approach through **operational peers** or **direct executive outreach** rather than conference networking
-- His engineering background means he'll want to see a **demo, not a slide deck**
-- Buenos Aires native → consider any shared Latin American connections in FreightRoll's network
+- Claudio is a **quiet operator**, not a public keynote speaker — approach through **operational peers** or **direct executive outreach** rather than conference networking.
+- His engineering background means he'll want to see a **demo, not a slide deck**.
+- Buenos Aires native → consider any shared Latin American connections in FreightRoll's network.
 
 ### Email Opener Ideas
 - Reference his NA turnaround: "Your turnaround of Mondelez North America's supply chain is well-documented. We work on the one piece most turnarounds miss — the yard."
@@ -233,7 +232,7 @@ Managing 130+ plants and 320 warehouses means Claudio thinks at scale. The pitch
 - **Mondelez may have enterprise-wide vendor relationships** (SAP, Manhattan Associates, Blue Yonder) that include yard management modules — need to validate
 - **Global scope** = procurement decisions may require regional VP buy-in across NA, EU, and AMEA
 - **Russia/Ukraine reputational issues** may be consuming executive bandwidth
-- **Budget cycles** — Mondelez runs on calendar year fiscal; MODEX in April 2026 aligns with Q2 budget planning
+- **Budget cycles** — Mondelez runs on calendar year fiscal; approach during Q2 budget planning windows.
 
 ### Competitive Advantage for YardFlow
 - **30-day deployment** vs. enterprise system integrations that take 6-12 months

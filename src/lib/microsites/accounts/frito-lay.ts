@@ -223,7 +223,7 @@ export const fritoLay: AccountMicrositeData = {
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted · 30-min remote deployment', delta: 'measured' },
       ],
-      timeline: '30-60 days from kickoff to first measurable impact at the pilot site. Perry, GA — ~150 miles from the MODEX venue — is the obvious pilot candidate; Plano HQ is the highest-visibility one.',
+      timeline: '30-60 days from kickoff to first measurable impact at the pilot site. Perry, GA — ~150 miles from Atlanta — is the obvious pilot candidate; Plano HQ is the highest-visibility one.',
       referenceAvailable: true,
     },
     {
@@ -243,10 +243,10 @@ export const fritoLay: AccountMicrositeData = {
           detail: 'Cross-industry baselines on dock-radio prevalence, dwell-time variance, and detention-cost ranges. These describe the conditions most high-volume CPG networks operate under, not Frito-Lay specifically.',
         },
         {
-          id: 'modex-signal',
-          source: 'MODEX past-attendee list',
+          id: 'industry-conference-signal',
+          source: 'Industry conference past-attendee list',
           confidence: 'public',
-          detail: 'Frito-Lay is on the MODEX past-attendee list. Perry, GA plant is approximately 150 miles from the Atlanta venue, which is why a post-conference pilot keeps coming up in our network conversations.',
+          detail: 'Frito-Lay is on the industry conference past-attendee list. Perry, GA plant is approximately 150 miles from Atlanta, which is why an Atlanta-region pilot keeps coming up in our network conversations.',
         },
         {
           id: 'primo-q1-2025',
@@ -267,7 +267,7 @@ export const fritoLay: AccountMicrositeData = {
       type: 'about',
       headline: 'About this analysis',
       authorBio:
-        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. At Frito-Lay\'s velocity the math is unusual: minutes-per-dock turn into millions-per-network-year, which is why this account sits near the top of the engagement list and why Perry, GA is on the MODEX week shortlist.',
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. At Frito-Lay\'s velocity the math is unusual: minutes-per-dock turn into millions-per-network-year, which is why this account sits near the top of the engagement list.',
       authorEmail: 'casey@freightroll.com',
       signOff:
         `If parts of this read wrong against what you see internally for Frito-Lay — particularly the production-line / yard speed mismatch, the four-fleet dock contention, or the assumption that the ${FRITO_LAY_FACILITY_COUNT_LABEL}-site network still runs on local routines — that\'s the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.`,
@@ -297,7 +297,7 @@ export const fritoLay: AccountMicrositeData = {
 
       communicationStyle: 'Senior executive. Lead with network-level impact and strategic value. He cares about the system, not individual sites.',
       languagePreferences: ['network', 'standardization', 'execution', 'throughput', 'at scale'],
-      connectionHooks: ['Past MODEX attendee signal', 'PepsiCo network / LinkedIn path'],
+      connectionHooks: ['Industry conference attendee signal', 'PepsiCo network / LinkedIn path'],
     },
     {
       personaId: 'fl-mars',
@@ -639,7 +639,7 @@ export const fritoLay: AccountMicrositeData = {
     fleet: 'Large owned fleet + contract carriers + agricultural haulers',
     keyFacilities: [
       { name: 'Plano, TX HQ Campus', location: 'Plano, TX', type: 'HQ / Manufacturing', significance: 'Corporate headquarters and major production facility', yardRelevance: 'Highest-visibility yard in the network. Pilot site candidate.' },
-      { name: 'Perry, GA Plant', location: 'Perry, GA', type: 'Manufacturing', significance: '~150 miles from MODEX venue in Atlanta', yardRelevance: 'Closest Frito-Lay plant to MODEX. Natural pilot site for post-conference deployment.' },
+      { name: 'Perry, GA Plant', location: 'Perry, GA', type: 'Manufacturing', significance: '~150 miles from Atlanta', yardRelevance: 'Closest Frito-Lay plant to Atlanta. Natural early pilot site.' },
       { name: 'Topeka, KS Plant', location: 'Topeka, KS', type: 'Manufacturing', significance: 'Major production facility', yardRelevance: 'High-volume plant with complex inbound agricultural receiving.' },
     ],
   },
@@ -659,14 +659,14 @@ export const fritoLay: AccountMicrositeData = {
   },
 
   signals: {
-    modexAttendance: 'Past MODEX attendee list. Perry GA plant ~150 miles from venue.',
+    eventAttendance: 'Past attendee list signal',
     recentNews: [
       'PepsiCo supply chain technology investment',
       'Network optimization and multi-site standardization initiatives',
       'DSD delivery model evolution',
     ],
     supplyChainInitiatives: ['Network standardization', 'DSD optimization', 'Supply chain technology'],
-    urgencyDriver: 'Past MODEX attendee. Highest-velocity CPG network = highest ROI per minute of dock time saved. Perry GA plant is near MODEX for post-conference pilot.',
+    urgencyDriver: 'Highest-velocity CPG network = highest ROI per minute of dock time saved. Perry GA plant is a natural early pilot candidate.',
   },
 
   theme: {

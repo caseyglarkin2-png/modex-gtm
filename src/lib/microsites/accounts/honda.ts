@@ -66,7 +66,7 @@ import type { AccountMicrositeData } from '../schema';
  *         { label: 'Gate and spotter labor overhead', value: '$2M+' },
  *         { label: 'Peak season surge inefficiency', value: '$1M+' },
  *       ],
- *       urgencyDriver: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+ *       urgencyDriver: 'Multi-site execution standardization is the stated opportunity. Industry conference attendee signal confirms active investment evaluation.',
  *     },
  *     {
  *       type: 'solution',
@@ -263,7 +263,7 @@ export const honda: AccountMicrositeData = {
       variantSlug: 'jim-small',
 
       framingNarrative: 'Jim, Large manufacturing campuses and logistics complexity make yard execution a real operational lever.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for Honda.',
+      openingHook: 'The yard is where execution meets reality for Honda — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at Honda\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -294,7 +294,7 @@ export const honda: AccountMicrositeData = {
       variantSlug: 'derek-johansen',
 
       framingNarrative: 'Derek, Large manufacturing campuses and logistics complexity make yard execution a real operational lever.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for Honda.',
+      openingHook: 'The yard is where execution meets reality for Honda — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at Honda\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -325,7 +325,7 @@ export const honda: AccountMicrositeData = {
       variantSlug: 'david-van-brimmer',
 
       framingNarrative: 'David, Large manufacturing campuses and logistics complexity make yard execution a real operational lever.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for Honda.',
+      openingHook: 'The yard is where execution meets reality for Honda — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at Honda\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -356,7 +356,7 @@ export const honda: AccountMicrositeData = {
       variantSlug: 'ed-allison',
 
       framingNarrative: 'Ed, Large manufacturing campuses and logistics complexity make yard execution a real operational lever.',
-      openingHook: 'Public MODEX signal plus likely fit for multi-site execution standardization. - the yard is where execution meets reality for Honda.',
+      openingHook: 'The yard is where execution meets reality for Honda — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at Honda\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -402,16 +402,16 @@ export const honda: AccountMicrositeData = {
   freight: {
     primaryModes: ['Truckload', 'LTL'],
     avgLoadsPerDay: '3,000+',
-    peakSeason: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+    peakSeason: 'Multi-site supply chain standardization opportunity.',
   },
 
   signals: {
-    modexAttendance: 'Past attendee list',
+    eventAttendance: 'Past attendee list',
     recentNews: [
-      'Public MODEX signal plus likely fit for multi-site execution standardization.',
+      'Multi-site execution standardization initiative underway.',
     ],
     supplyChainInitiatives: ['Large manufacturing campuses and logistics complexity make yard execution a real operational lever.'],
-    urgencyDriver: 'Public MODEX signal plus likely fit for multi-site execution standardization.',
+    urgencyDriver: 'Multi-site execution standardization is the stated opportunity. Industry conference attendee signal confirms active investment evaluation.',
   },
 
   theme: {

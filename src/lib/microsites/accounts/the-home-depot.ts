@@ -17,7 +17,7 @@ import type { AccountMicrositeData } from '../schema';
  *     {
  *       type: 'hero',
  *       headline: 'Home Depot\'s CFO is keynoting MODEX 2026. Their DC network moves 10,000+ trailers a day. We should be in that conversation.',
- *       subheadline: 'Strongest public MODEX signal. Massive retail network makes execution variance expensive.',
+ *       subheadline: 'Massive retail network makes execution variance expensive — the yard is where it compounds.',
  *       accountCallout: 'The Home Depot - Retail',
  *       backgroundTheme: 'dark',
  *       cta: {
@@ -224,7 +224,7 @@ export const theHomeDepot: AccountMicrositeData = {
       roleInDeal: 'routing-contact',
       seniority: 'C-level',
       function: 'Finance / Strategy',
-      currentMandate: 'Official MODEX keynote speaker from Home Depot and strategic route into supply-chain priorities.',
+      currentMandate: 'EVP & CFO of The Home Depot and recurring industry conference keynote speaker — strategic route into supply-chain priorities.',
       bestIntroPath: 'Conference outreach',
     },
     {
@@ -302,12 +302,12 @@ export const theHomeDepot: AccountMicrositeData = {
       variantSlug: 'john-deaton',
 
       framingNarrative: 'John, the question is whether a network this large can keep tolerating site-by-site yard variance.',
-      openingHook: 'MODEX makes the timing relevant, so this page is framed as a short private brief rather than a pitch.',
+      openingHook: 'This page is framed as a short private brief rather than a pitch.',
       stakeStatement: 'Every minute of excess dwell time at The Home Depot\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
         headline: 'John, 200+ facilities. Every DC type runs its own yard. The variance tax across that network is massive.',
-        subheadline: 'Strongest public MODEX signal. Massive retail network makes execution variance expensive.',
+        subheadline: 'Massive retail network makes execution variance expensive — the yard is where it compounds.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
 
@@ -333,12 +333,12 @@ export const theHomeDepot: AccountMicrositeData = {
       variantSlug: 'john-drake',
 
       framingNarrative: 'John, the question is whether transportation throughput is still losing time in the yard before anyone sees it in the network metrics.',
-      openingHook: 'MODEX makes the timing relevant, so this page is framed as a short private brief rather than a pitch.',
+      openingHook: 'This page is framed as a short private brief rather than a pitch.',
       stakeStatement: 'Every minute of excess dwell time at The Home Depot\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
         headline: 'John, the transportation network you run moves 10,000 trailers a day. The yard is where that throughput stalls.',
-        subheadline: 'Strongest public MODEX signal. Massive retail network makes execution variance expensive.',
+        subheadline: 'Massive retail network makes execution variance expensive — the yard is where it compounds.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
 
@@ -364,12 +364,12 @@ export const theHomeDepot: AccountMicrositeData = {
       variantSlug: 'amit-kalra',
 
       framingNarrative: 'Amit, the question is whether four facility types are still running four different yard playbooks inside one network.',
-      openingHook: 'MODEX makes the timing relevant, so this page is framed as a short private brief rather than a pitch.',
+      openingHook: 'This page is framed as a short private brief rather than a pitch.',
       stakeStatement: 'Every minute of excess dwell time at The Home Depot\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
         headline: 'Amit, RDCs, SDCs, flatbed DCs, fulfillment centers. Four facility types, four yard playbooks. One should work everywhere.',
-        subheadline: 'Strongest public MODEX signal. Massive retail network makes execution variance expensive.',
+        subheadline: 'Massive retail network makes execution variance expensive — the yard is where it compounds.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
 
@@ -395,12 +395,12 @@ export const theHomeDepot: AccountMicrositeData = {
       variantSlug: 'richard-mcphail',
 
       framingNarrative: 'Richard, the question is whether the lowest-cost supply chain improvement left is still hiding in the yard layer.',
-      openingHook: 'MODEX makes the timing relevant, so this page is framed as a short private brief rather than a pitch.',
+      openingHook: 'This page is framed as a short private brief rather than a pitch.',
       stakeStatement: 'Every minute of excess dwell time at The Home Depot\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
-        headline: 'Richard, you are keynoting MODEX 2026 on supply chain investment. The yard is the lowest-cost, highest-impact layer left.',
-        subheadline: 'Strongest public MODEX signal. Massive retail network makes execution variance expensive.',
+        headline: 'Richard, you are on record on supply chain investment. The yard is the lowest-cost, highest-impact layer left.',
+        subheadline: 'Massive retail network makes execution variance expensive — the yard is where it compounds.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
 
@@ -426,12 +426,12 @@ export const theHomeDepot: AccountMicrositeData = {
       variantSlug: 'erin-donnelly',
 
       framingNarrative: 'Erin, the question is whether the last unstandardized layer in the network is still the yard.',
-      openingHook: 'MODEX makes the timing relevant, so this page is framed as a short private brief rather than a pitch.',
+      openingHook: 'This page is framed as a short private brief rather than a pitch.',
       stakeStatement: 'Every minute of excess dwell time at The Home Depot\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
         headline: 'Erin, supply chain development means standardizing the unstandardized. The yard is the last unstandardized layer.',
-        subheadline: 'Strongest public MODEX signal. Massive retail network makes execution variance expensive.',
+        subheadline: 'Massive retail network makes execution variance expensive — the yard is where it compounds.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
 
@@ -476,11 +476,11 @@ export const theHomeDepot: AccountMicrositeData = {
   },
 
   signals: {
-    modexAttendance: 'Past attendee + keynote',
+    eventAttendance: 'Past attendee + keynote',
     recentNews: [
       'Official keynote tie gives unusually strong event signal.',
     ],
-    supplyChainInitiatives: ['Strongest public MODEX signal. Massive retail network makes execution variance expensive.'],
+    supplyChainInitiatives: ['Massive retail network makes execution variance expensive — strong industry conference attendance and keynote signal.'],
     urgencyDriver: 'Official keynote tie gives unusually strong event signal.',
   },
 

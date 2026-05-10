@@ -199,8 +199,8 @@ export const cocaCola: AccountMicrositeData = {
 
       communicationStyle: 'Operations executive who rose through bottling - speak to the physical reality he knows.',
       languagePreferences: ['system-wide', 'bottler network', 'operational efficiency', 'procurement leverage'],
-      connectionHooks: ['Atlanta HQ is 15 minutes from MODEX venue', 'Came from BIG (bottling) - understands yard operations personally'],
-      modexProximity: 'Coca-Cola HQ is literally in Atlanta. MODEX is in Atlanta. He could walk to the meeting.',
+      connectionHooks: ['Atlanta HQ — local to major industry events', 'Came from BIG (bottling) - understands yard operations personally'],
+      eventProximity: 'Atlanta HQ — local to major industry events',
     },
     {
       personaId: 'coke-jadhav',
@@ -262,11 +262,11 @@ export const cocaCola: AccountMicrositeData = {
       communicationStyle: 'Finance and supply-chain executive. Lead with cost, service, and capital together, then show the operating lever underneath.',
       languagePreferences: ['performance', 'stewardship', 'growth', 'hidden opportunities', 'operational leadership'],
       connectionHooks: [
-        'Atlanta-based North America role is local to MODEX',
+        'Atlanta-based North America role is local to major industry events',
         'Public descriptions of his role emphasize both financial management and supply leadership',
         'He is one of the few executives who feels yard waste in both the P&L and the operating cadence',
       ],
-      modexProximity: 'Atlanta-based North America leadership role. MODEX is effectively local.',
+      eventProximity: 'Atlanta-based North America leadership role — local to major industry events.',
     },
   ],
 
@@ -466,7 +466,7 @@ export const cocaCola: AccountMicrositeData = {
     peakMultiplier: '1.4x during summer',
     fleet: 'Estimated 15,000+ trucks through bottling system',
     keyFacilities: [
-      { name: 'Coca-Cola HQ', location: 'Atlanta, GA', type: 'Headquarters', significance: 'Literally in Atlanta, same city as MODEX', yardRelevance: 'Proximity = easiest meeting scheduling possible' },
+      { name: 'Coca-Cola HQ', location: 'Atlanta, GA', type: 'Headquarters', significance: 'Atlanta HQ — local to major industry events', yardRelevance: 'Proximity = easiest meeting scheduling possible' },
       { name: 'CCBCC Bottler Footprint', location: '14 states plus DC', type: '10 Manufacturing Plants + 60 Distribution Centers', significance: 'Largest U.S. Coca-Cola bottler disclosed 70 sites in its 2025 10-K', yardRelevance: '$14M detention costs documented in 10-K' },
     ],
   },
@@ -481,7 +481,7 @@ export const cocaCola: AccountMicrositeData = {
   },
 
   signals: {
-    modexAttendance: 'Coca-Cola HQ in Atlanta. MODEX in Atlanta. High likelihood of local attendance.',
+    eventAttendance: 'Atlanta-based, local to major industry events',
     recentNews: [
       'Q4 2024: "supply chain transformation" initiative, digital capabilities investment',
       'Blue Yonder partnership for supply chain planning (2024)',
@@ -489,7 +489,7 @@ export const cocaCola: AccountMicrositeData = {
       'Fairlife acquisition (2020) adding cold chain complexity',
     ],
     supplyChainInitiatives: ['Supply chain transformation', 'Blue Yonder partnership', 'Digital capabilities investment'],
-    urgencyDriver: 'CCBCC $500M facility investment happening now. HQ is local to MODEX. Lowest-friction meeting possible.',
+    urgencyDriver: 'CCBCC $500M facility investment happening now. Atlanta HQ — lowest-friction meeting in the market.',
   },
 
   theme: {

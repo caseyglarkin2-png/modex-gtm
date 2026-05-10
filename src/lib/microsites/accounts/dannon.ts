@@ -589,12 +589,12 @@ export const dannon: AccountMicrositeData = {
   },
 
   signals: {
-    modexAttendance: 'Past attendee list signal',
+    eventAttendance: 'Past attendee list signal',
     recentNews: [
-      'Active Shaughnessy intro path and likely MODEX attendance signal',
+      'Active Shaughnessy intro path and likely industry-conference attendance signal',
     ],
     supplyChainInitiatives: ['Primo proof should land hardest here - high-volume food/beverage network with plant throughput pressure'],
-    urgencyDriver: 'Active Shaughnessy intro path and likely MODEX attendance signal.',
+    urgencyDriver: 'Active Shaughnessy intro path and likely industry-conference attendance signal.',
   },
 
   theme: {

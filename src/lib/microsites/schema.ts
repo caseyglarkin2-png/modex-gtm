@@ -66,7 +66,7 @@ export type CTAType =
   | 'audit'
   | 'roi-review'
   | 'demo'
-  | 'modex-meeting'
+  | 'industry-event-meeting'
   | 'warm-intro';
 
 export type LayoutPreset =
@@ -143,7 +143,7 @@ export interface PersonProfile {
   introRoute?: string;            // detailed routing
   doNotContact?: boolean;
   contactConstraints?: string;    // "Email suppressed — phone only"
-  modexProximity?: string;        // "Atlanta HQ — local" or "Cartersville, GA brewery 90 min from MODEX"
+  eventProximity?: string;        // "Atlanta HQ — local" or "Cartersville, GA brewery 90 min from major industry events"
 }
 
 export interface CareerEntry {
@@ -535,7 +535,7 @@ export interface AccountMicrositeData {
 
   // Signals & timing
   signals: {
-    modexAttendance?: string;
+    eventAttendance?: string;
     recentNews?: string[];
     supplyChainInitiatives?: string[];
     competitivePressure?: string;

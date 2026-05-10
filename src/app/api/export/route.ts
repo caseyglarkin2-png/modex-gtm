@@ -68,7 +68,7 @@ export async function GET(req: NextRequest) {
         ['Date', 'Account', 'Persona', 'Status', 'Objective', 'Notes'],
         meetings.map((m) => [m.meeting_date ? new Date(m.meeting_date).toLocaleDateString() : '', m.account_name ?? '', m.persona ?? '', m.meeting_status ?? '', m.objective ?? '', m.notes ?? '']),
       );
-      filename = 'modex-meetings.csv';
+      filename = 'industry-event-meetings.csv';
       break;
     }
     case 'pipeline': {

@@ -261,7 +261,7 @@ export const mondelezInternational: AccountMicrositeData = {
   },
 
   signals: {
-    modexAttendance: 'Past attendee list',
+    eventAttendance: 'Past attendee list',
     recentNews: [
       'Clif Bar acquisition ($2.9B, June 2022):',
       'Ricolino acquisition ($1.3B, May 2022):',

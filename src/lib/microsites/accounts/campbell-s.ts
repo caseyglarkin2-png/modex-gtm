@@ -221,10 +221,10 @@ export const campbellS: AccountMicrositeData = {
           detail: 'Cross-industry baselines on dock-radio prevalence, dwell-time variance, and detention-cost ranges. These describe the conditions most multi-profile CPG networks operate under, not Campbell\'s specifically.',
         },
         {
-          id: 'modex-signal',
-          source: 'MODEX past-attendee list',
+          id: 'industry-conference-signal',
+          source: 'Industry conference past-attendee list',
           confidence: 'public',
-          detail: 'Campbell\'s is on the MODEX past-attendee list. That signal is part of why this analysis was sized now rather than later.',
+          detail: 'Campbell\'s is on the industry conference past-attendee list. That signal is part of why this analysis was sized now rather than later.',
         },
         {
           id: 'primo-q1-2025',
@@ -341,7 +341,7 @@ export const campbellS: AccountMicrositeData = {
   },
 
   signals: {
-    modexAttendance: 'Past attendee list',
+    eventAttendance: 'Past attendee list',
     recentNews: [
       'Investment:',
       'Plant closure:',

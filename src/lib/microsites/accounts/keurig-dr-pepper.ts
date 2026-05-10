@@ -261,7 +261,7 @@ export const keurigDrPepper: AccountMicrositeData = {
   },
 
   signals: {
-    modexAttendance: 'MODEX proximity',
+    eventAttendance: 'Industry conference attendee signal',
     recentNews: [
       '"KDP Fuel for Growth"',
       'SAP S/4HANA migration',

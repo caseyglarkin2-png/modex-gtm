@@ -179,7 +179,7 @@ export const kencoLogisticsServices: AccountMicrositeData = {
       roleInDeal: 'routing-contact',
       seniority: 'VP',
       function: 'Innovation / Strategy',
-      currentMandate: 'Officially named Kenco transformation leader and MODEX speaker.',
+      currentMandate: 'Officially named Kenco transformation leader and recurring industry conference speaker.',
       bestIntroPath: 'Conference / ecosystem outreach',
     },
     {
@@ -437,7 +437,7 @@ export const kencoLogisticsServices: AccountMicrositeData = {
   },
 
   signals: {
-    modexAttendance: 'Named speaker',
+    eventAttendance: 'Named speaker',
     recentNews: [
       'Named session speaker indicates event involvement.',
     ],
