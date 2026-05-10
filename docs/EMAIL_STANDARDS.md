@@ -263,36 +263,47 @@ Casey
 
 ---
 
-## MODEX 2026 Urgency (Active: now through April 16)
+## CTAs — event-agnostic by default
 
-**MODEX is April 13-16 in Atlanta.** Every CTA should reference it through April 16.
-Default Tier 2 CTA: "Worth 15 minutes before MODEX?" — beats "Would 15 minutes make sense?" on urgency.
+Per `docs/editorial-style.md` "Event- and date-agnostic copy" rule, durable email templates do **not** anchor to a specific show, season, or week. Reserve event-specific framing for hand-personalized one-offs you draft inside Gmail at send time, not for templates that get reused across accounts.
 
-### MODEX Pre-Event Template (2 weeks out):
+### Default Tier 2 CTA
+- "Worth 15 minutes this quarter?" — beats date-bound CTAs because it survives every "I'll pick this up later" reply without rewriting.
+- "Worth 15 minutes when your team's between sprints?" — softer, respects the buyer's calendar.
+
+### When you DO want urgency, anchor to *their* timing, not yours
+Pull a real, account-specific event from the dossier:
+- New role / first 90 days: *"Worth 15 minutes while you're scoping the [role] mandate?"*
+- Plant opening: *"Worth 15 minutes before the [Plant] dock SOP is locked?"*
+- Earnings disclosure: *"Worth 15 minutes given what you flagged on the Q3 call?"*
+
+### Template: Time-of-day-agnostic check-in
 ```
 [First Name],
 
-My earlier note may not have reached you — we resolved a technical issue on our end last week.
+[ONE-SENTENCE company-specific operational insight — name the constraint they're publicly facing.]
 
-We're at MODEX April 13-16 in Atlanta. Given [one sentence company/vertical-specific insight],
-I think there's a specific conversation worth having before then.
+[ONE-SENTENCE value prop tied to that insight, with a quantified comparable where possible.]
 
-Worth 15 minutes this week?
+Worth 15 minutes this quarter?
 
 Casey
 ```
 
-### MODEX At-Event / Floor Request:
+### Template: At-an-event variant (use only when actually attending)
+**Don't bake a specific event into the template** — keep the event name, date, and city in a variable you fill at send time. The skeleton:
+
 ```
 [First Name],
 
-We're at MODEX this week in Atlanta. [One sentence on what you want to show them,
-tied to their operation.]
+I'll be at [Event] on [Date] in [City]. [ONE sentence on what you'd want to show them, tied to their operation.]
 
 Fifteen minutes on the floor?
 
 Casey
 ```
+
+If you find yourself sending this template often enough that it's worth durable-ifying further, write a per-event playbook (e.g., `docs/playbooks/<event>-<year>.md`) that lives next to this file and gets archived once the event passes — not woven into the standards file itself.
 
 ---
 
