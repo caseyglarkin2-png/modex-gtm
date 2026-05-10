@@ -59,7 +59,7 @@ import { AccountOutcomeLogger } from '@/components/accounts/account-outcome-logg
 import { OutboundCardRefreshButton } from '@/components/accounts/outbound-card-refresh-button';
 import { EditableLongText } from '@/components/editable-long-text';
 import { SOURCE_APPROVAL_GATE_ENABLED } from '@/lib/feature-flags';
-import { getModexFloorEntry, isModexPast } from '@/lib/data/modex-floor-plan';
+import { getEventFloorEntry, isEventPast } from '@/lib/data/industry-event-floor-plan';
 import { AgentIntelStrip } from '@/components/agent-actions/agent-intel-strip';
 import { SendJobTracker } from '@/components/generated-content/send-job-tracker';
 import {
@@ -317,7 +317,7 @@ export default async function AccountDetailPage({
 
   const scoreDims = [
     { label: 'ICP Fit', value: account.icp_fit, weight: 30 },
-    { label: 'MODEX Signal', value: account.modex_signal, weight: 20 },
+    { label: 'Industry Event Signal', value: account.event_signal, weight: 20 },
     { label: 'Primo Story', value: account.primo_story_fit, weight: 20 },
     { label: 'Warm Intro', value: account.warm_intro, weight: 15 },
     { label: 'Strategic Value', value: account.strategic_value, weight: 10 },
@@ -358,20 +358,20 @@ export default async function AccountDetailPage({
                 <h1 className="text-2xl font-bold tracking-tight">{account.name}</h1>
                 <BandBadge band={account.priority_band} />
                 {(() => {
-                  const floor = getModexFloorEntry(account.name);
+                  const floor = getEventFloorEntry(account.name);
                   if (!floor) return null;
-                  const past = isModexPast();
+                  const past = isEventPast();
                   const label = past
-                    ? `Was on MODEX floor · ${floor.tier === 'tier_1' ? 'Tier 1' : 'Tier 2'}`
-                    : `MODEX ${floor.tier === 'tier_1' ? 'Tier 1' : 'Tier 2'}`;
+                    ? `Was on industry-event floor · ${floor.tier === 'tier_1' ? 'Tier 1' : 'Tier 2'}`
+                    : `Industry Event ${floor.tier === 'tier_1' ? 'Tier 1' : 'Tier 2'}`;
                   const tooltip = past
-                    ? `${floor.context ?? 'On the MODEX 2026 floor plan'} — event concluded; use for follow-up context.`
-                    : floor.context ?? 'On the MODEX floor plan';
+                    ? `${floor.context ?? 'On the industry-event floor plan'} — event concluded; use for follow-up context.`
+                    : floor.context ?? 'On the industry-event floor plan';
                   return (
                     <Badge
                       variant={past ? 'outline' : floor.tier === 'tier_1' ? 'default' : 'secondary'}
                       title={tooltip}
-                      data-testid="modex-floor-badge"
+                      data-testid="industry-event-floor-badge"
                     >
                       {label}
                     </Badge>

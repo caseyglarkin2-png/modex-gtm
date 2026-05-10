@@ -19,7 +19,7 @@ export default async function BriefDetailPage({ params }: { params: Promise<{ ac
 
   const sections = [
     { label: 'Vertical', value: brief.vertical },
-    { label: 'Public MODEX Signal', value: brief.public_modex_signal },
+    { label: 'Public Industry Event Signal', value: brief.public_event_signal },
     { label: 'Why This Account', value: brief.why_this_account },
     { label: 'Why Now', value: brief.why_now },
     { label: 'Likely Pain Points', value: brief.likely_pain_points },

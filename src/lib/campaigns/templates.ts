@@ -30,7 +30,7 @@ export const CAMPAIGN_TEMPLATES: CampaignTemplate[] = [
     suggestedIntervals: [0, 2, 5, 8],
     aiPromptAngle: 'Ground the email in a real event interaction and move to a soft next step.',
     requiredFields: ['event_name', 'event_dates', 'microsite_url'],
-    defaultMessagingAngle: 'The yard is the constraint. Follow up fast while the MODEX conversation is still warm.',
+    defaultMessagingAngle: 'The yard is the constraint. Follow up fast while the industry-event conversation is still warm.',
     defaultDurationDays: 21,
     defaultTargetAccounts: 8,
   },

@@ -22,7 +22,7 @@ type RefreshSession = {
 
 declare global {
   interface Window {
-    __modexRefreshDiagnostics?: RefreshDiagnosticEvent[];
+    __gtmRefreshDiagnostics?: RefreshDiagnosticEvent[];
   }
 }
 
@@ -31,8 +31,8 @@ let inFlightCount = 0;
 
 function pushRefreshEvent(event: RefreshDiagnosticEvent) {
   if (typeof window !== 'undefined') {
-    window.__modexRefreshDiagnostics = window.__modexRefreshDiagnostics ?? [];
-    window.__modexRefreshDiagnostics.push(event);
+    window.__gtmRefreshDiagnostics = window.__gtmRefreshDiagnostics ?? [];
+    window.__gtmRefreshDiagnostics.push(event);
   }
 }
 

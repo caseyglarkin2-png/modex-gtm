@@ -47,7 +47,7 @@ export async function createAccountWithContext(
     // Compute priority score based on template rules
     const priority_score =
       (template.defaultScoringRules.icp_fit +
-        template.defaultScoringRules.modex_signal +
+        template.defaultScoringRules.event_signal +
         template.defaultScoringRules.primo_story_fit +
         template.defaultScoringRules.strategic_value) *
       10;
@@ -69,7 +69,7 @@ export async function createAccountWithContext(
         primo_angle: input.primo_angle,
         best_intro_path: input.best_intro_path || '',
         icp_fit: template.defaultScoringRules.icp_fit * 20,
-        modex_signal: template.defaultScoringRules.modex_signal * 20,
+        event_signal: template.defaultScoringRules.event_signal * 20,
         primo_story_fit: template.defaultScoringRules.primo_story_fit * 20,
         strategic_value: template.defaultScoringRules.strategic_value * 20,
         priority_score,

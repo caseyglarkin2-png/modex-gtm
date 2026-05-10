@@ -1,12 +1,13 @@
 import type { OnePagerData } from '@/components/ai/one-pager-preview';
 
-const MODEX_PATTERN = /\bmodex\b/i;
+// Detect named industry-event references (currently MODEX; extend if other shows are added)
+const INDUSTRY_EVENT_PATTERN = /\bmodex\b/i;
 const SPECULATIVE_PATTERN = /\b(attendance|attendee|signal|likely)\b/i;
 
 function shouldSuppressPublicContext(value: string): boolean {
   const trimmed = value.trim();
   if (!trimmed) return true;
-  if (!MODEX_PATTERN.test(trimmed)) return false;
+  if (!INDUSTRY_EVENT_PATTERN.test(trimmed)) return false;
   return SPECULATIVE_PATTERN.test(trimmed);
 }
 

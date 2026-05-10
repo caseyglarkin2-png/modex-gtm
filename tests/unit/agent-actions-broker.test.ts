@@ -42,17 +42,17 @@ describe('agent action broker helpers', () => {
 
     expect(enrich?.preferredProvider).toBe('sales_agent');
     expect(sequence?.preferredProvider).toBe('sales_agent');
-    expect(contentContext?.preferredProvider).toBe('modex');
+    expect(contentContext?.preferredProvider).toBe('local');
   });
 
-  it('falls back to modex when no sidecar services are configured', () => {
+  it('falls back to local when no sidecar services are configured', () => {
     delete process.env.CLAWD_CONTROL_PLANE_URL;
     delete process.env.SALES_AGENT_BASE_URL;
 
     const capabilities = listAgentActionCapabilities();
     const accountResearch = capabilities.find((item) => item.action === 'account_research');
 
-    expect(accountResearch?.preferredProvider).toBe('modex');
+    expect(accountResearch?.preferredProvider).toBe('local');
     expect(accountResearch?.configured).toBe(false);
   });
 

@@ -63,7 +63,7 @@ describe('one-pager output quality', () => {
     expect(prompt).toContain('business consequence');
   });
 
-  it('suppresses speculative MODEX public context in exported html', () => {
+  it('suppresses speculative industry-event public context in exported html', () => {
     const html = onePagerToHtml(
       {
         ...sampleData,

@@ -61,7 +61,7 @@ describe('export route', () => {
 
     expect(res.status).toBe(200);
     expect(res.headers.get('content-type')).toContain('text/csv');
-    expect(res.headers.get('content-disposition')).toContain('modex-content-attribution-provider.csv');
+    expect(res.headers.get('content-disposition')).toContain('industry-event-content-attribution-provider.csv');
     expect(text).toContain('Bucket');
     expect(text).toContain('ai_gateway');
     expect(text).toContain('22');

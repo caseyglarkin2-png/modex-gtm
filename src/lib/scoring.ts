@@ -1,10 +1,10 @@
 // Scoring engine derived from Lists.csv weights
-// Fit weight: 30, MODEX signal: 20, Primo story: 20, Warm intro: 15, Strategic value: 10, Meeting ease: 5
+// Fit weight: 30, Industry Event signal: 20, Primo story: 20, Warm intro: 15, Strategic value: 10, Meeting ease: 5
 // Tier 1 cutoff: 85, Tier 2 cutoff: 70
 
 const WEIGHTS = {
   icp_fit: 30,
-  modex_signal: 20,
+  event_signal: 20,
   primo_story_fit: 20,
   warm_intro: 15,
   strategic_value: 10,
@@ -18,7 +18,7 @@ const TIER_CUTOFFS = {
 
 export interface ScoringInput {
   icp_fit: number;
-  modex_signal: number;
+  event_signal: number;
   primo_story_fit: number;
   warm_intro: number;
   strategic_value: number;
@@ -28,7 +28,7 @@ export interface ScoringInput {
 export function computePriorityScore(input: ScoringInput): number {
   const raw =
     input.icp_fit * WEIGHTS.icp_fit +
-    input.modex_signal * WEIGHTS.modex_signal +
+    input.event_signal * WEIGHTS.event_signal +
     input.primo_story_fit * WEIGHTS.primo_story_fit +
     input.warm_intro * WEIGHTS.warm_intro +
     input.strategic_value * WEIGHTS.strategic_value +

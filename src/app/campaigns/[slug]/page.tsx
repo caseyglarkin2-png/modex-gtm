@@ -181,7 +181,7 @@ export default async function CampaignDetailPage({ params }: { params: Promise<{
             </Card>
 
             <Card>
-              <CardHeader className="pb-2"><CardTitle className="text-sm">MODEX Saved View</CardTitle></CardHeader>
+              <CardHeader className="pb-2"><CardTitle className="text-sm">Industry Event Saved View</CardTitle></CardHeader>
               <CardContent className="space-y-3 text-sm text-muted-foreground">
                 <p>This campaign is the canonical home for legacy Outreach Waves and Campaign HQ.</p>
                 <div className="flex flex-wrap gap-2">

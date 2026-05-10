@@ -36,7 +36,7 @@ test('Campaign detail renders the canonical workspace tabs', async ({ page }) =>
   }
 
   await page.getByRole('tab', { name: /Overview/i }).click();
-  await expect(page.getByText('MODEX Saved View')).toBeVisible();
+  await expect(page.getByText('Industry Event Saved View')).toBeVisible();
 
   await page.getByRole('tab', { name: /Phases/i }).click();
   await expect(page.getByText(/progressed/i).first()).toBeVisible();
@@ -64,7 +64,7 @@ test('legacy waves routes land in the canonical campaign workspace', async ({ pa
 
   await page.goto('/waves/campaign', { waitUntil: 'domcontentloaded' });
   await expect(page).toHaveURL(/\/campaigns\/modex-2026-follow-up\?view=overview&legacy=campaign-hq$/);
-  await expect(page.getByText('MODEX Saved View')).toBeVisible();
+  await expect(page.getByText('Industry Event Saved View')).toBeVisible();
 });
 
 test('Campaign list still opens the campaign workspace', async ({ page }) => {

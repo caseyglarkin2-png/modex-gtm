@@ -204,7 +204,7 @@ export async function deleteCampaignAction(slug: string, confirmationName: strin
   const campaign = await prisma.campaign.findUnique({ where: { slug }, select: { id: true, name: true } });
   if (!campaign) return { success: false, error: 'Campaign not found' };
   if (slug === 'modex-2026-follow-up') {
-    return { success: false, error: 'The default MODEX campaign cannot be deleted from this screen' };
+    return { success: false, error: 'The default system campaign cannot be deleted from this screen' };
   }
   if (confirmationName.trim() !== campaign.name) {
     return { success: false, error: 'Type the exact campaign name to confirm deletion' };

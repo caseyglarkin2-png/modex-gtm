@@ -9,7 +9,7 @@ describe('buildRecommendedAngle (existing string contract preserved — S1-T3)',
     const result = buildRecommendedAngle(
       {
         action: 'content_context',
-        provider: 'modex',
+        provider: 'local',
         status: 'ok',
         summary: '',
         cards: [{ title: 'Research Summary', body: 'Lead with throughput pressure.' }],

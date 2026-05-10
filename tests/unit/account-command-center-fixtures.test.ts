@@ -34,7 +34,7 @@ describe('account command center fixtures', () => {
       const result = buildSeededAccountContentContext(fixedNow);
 
       expect(result.action).toBe('content_context');
-      expect(result.provider).toBe('modex');
+      expect(result.provider).toBe('local');
       expect(result.status).toBe('ok');
       expect(result.cards.map((card) => card.title)).toContain('Research Summary');
       expect(result.nextActions[0]).toContain('Promote the staged logistics contact');

@@ -15,10 +15,10 @@
   "waves": ["Wave 0 - Warm intros", "Wave 1 - Must-book", "Wave 2 - High-value", "Wave 3 - Ecosystem / opportunistic"],
   "hunt_status": ["Not started", "Building list", "Searching", "Named targets found", "Ready for outreach", "In outreach", "Meeting set"],
   "channel_mix": ["Warm intro + email", "Warm intro + LinkedIn", "Email + LinkedIn", "Email + call", "LinkedIn only"],
-  "proof_assets": ["Primo infographic", "Danone one-pager", "MODEX booth/meeting note", "Customer reference call", "Throughput / ROI summary"],
+  "proof_assets": ["Primo infographic", "Danone one-pager", "Industry-event meeting note", "Customer reference call", "Throughput / ROI summary"],
   "scoring": {
     "fit_weight": 30,
-    "modex_signal_weight": 20,
+    "event_signal_weight": 20,
     "primo_story_weight": 20,
     "warm_intro_weight": 15,
     "strategic_value_weight": 10,
@@ -28,8 +28,8 @@
   },
   "qr_journey": {
     "concept": "Scan or click -> YardFlow website audit page -> prospect submits basics -> FreightRoll follows up",
-    "master_url": "https://www.yardflow.ai/contact/?intent=audit&utm_source=modex&utm_medium=qr&utm_campaign=modex2026&utm_content=master",
-    "use_when": "You want the fastest generic CTA at MODEX and do not need account-specific routing.",
+    "master_url": "https://www.yardflow.ai/contact/?intent=audit&utm_source=qr&utm_medium=offline&utm_campaign=account-based-outreach&utm_content=master",
+    "use_when": "You want the fastest generic CTA at an industry event and do not need account-specific routing.",
     "website_form_fields": "Website / Work email / What should we know?",
     "fallback": "If booking is blocked, direct people to casey@freightroll.com."
   }

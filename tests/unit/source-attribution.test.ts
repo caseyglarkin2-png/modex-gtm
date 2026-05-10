@@ -28,7 +28,7 @@ describe('source-backed attribution', () => {
         proof_context: ['Primo reduced drop and hook time'],
         cta_mode: 'scorecard_reply',
         provenance: {
-          provider: 'modex',
+          provider: 'local',
           status: 'ok',
         },
         freshness: {

@@ -12,7 +12,7 @@ function buildResult(partial?: Partial<AgentActionResult>): AgentActionResult {
   const freshness = createDefaultAgentActionFreshness('2026-05-06T00:00:00.000Z');
   return {
     action: 'content_context',
-    provider: 'modex',
+    provider: 'local',
     status: 'ok',
     summary: 'Summary',
     cards: [

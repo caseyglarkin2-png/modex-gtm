@@ -64,7 +64,7 @@ function buildCampaignContextBlock(ctx: PromptContext): string {
   if (ctx.campaignType === 'trade_show') {
     lines.push('This is a trade show follow-up. Event context can be used lightly if it helps, but it should not dominate the note.');
   } else if (ctx.campaignType) {
-    lines.push('Do not mention MODEX or trade shows unless the campaign context above explicitly calls for it.');
+    lines.push('Do not mention specific industry events or trade shows unless the campaign context above explicitly calls for it.');
   }
 
   return lines.join('\n');
@@ -72,7 +72,7 @@ function buildCampaignContextBlock(ctx: PromptContext): string {
 
 function buildCampaignAskGuidance(ctx: PromptContext): string {
   if (ctx.campaignType === 'trade_show') {
-    return 'MODEX 2026 is April 13-16 in Atlanta. If you mention the event, keep it secondary and natural. Do not ask for a specific time slot in a cold first touch.';
+    return 'This is a trade show follow-up campaign. If you mention the event, keep it secondary and natural. Do not ask for a specific time slot in a cold first touch.';
   }
   return 'This is not a trade show motion. Ask for a reaction or offer the short scorecard, not a call or booth meet-up.';
 }
@@ -272,7 +272,7 @@ ${getVoiceGuardrails()}
 
 Account: ${ctx.accountName} (${ctx.bandLabel ?? 'Tier 1'}, score: ${ctx.score ?? 'N/A'})
 Contact: ${ctx.personaName ?? 'TBD'}${ctx.personaTitle ? ` (${ctx.personaTitle})` : ''}
-Meeting: ${ctx.campaignType === 'trade_show' ? 'In-person at MODEX 2026 (Atlanta, April 13-16) or a short follow-up call' : 'Short discovery call or network audit review'}
+Meeting: ${ctx.campaignType === 'trade_show' ? 'In-person at an industry event or a short follow-up call' : 'Short discovery call or network audit review'}
 ${ctx.notes ? `Context: ${ctx.notes}` : ''}
 ${buildCampaignContextBlock(ctx)}
 ${buildPlaybookHintsBlock(ctx)}
@@ -400,7 +400,7 @@ export function buildOutreachSequencePrompt(ctx: PromptContext, step: 'initial_e
   ].filter(Boolean).join('\n');
 
   const eventAsk = ctx.campaignType === 'trade_show'
-    ? 'MODEX 2026 is April 13-16 in Atlanta. If event context helps, mention it lightly, but do not ask for specific time windows in a cold sequence.'
+    ? 'This is a trade show follow-up campaign. If event context helps, mention it lightly, but do not ask for specific time windows in a cold sequence.'
     : 'This is not a trade show sequence. Ask for a quick reaction or offer the short scorecard. Do not mention calls, booth times, or event meet-ups.';
 
   const followUpAsk = ctx.campaignType === 'trade_show'

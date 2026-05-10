@@ -146,7 +146,7 @@ export function QrTab({
               <p className="font-medium text-[var(--foreground)]">Fallback master QR</p>
               <p className="mt-1 text-[var(--muted-foreground)]">Use this when account-specific printouts are unavailable at the booth.</p>
               <div className="mt-2 flex items-center justify-between gap-2">
-                <a href={fallbackQrPrint} target="_blank" rel="noopener noreferrer" download="modex-master-qr.png">
+                <a href={fallbackQrPrint} target="_blank" rel="noopener noreferrer" download="yardflow-master-qr.png">
                   <Button variant="outline" size="sm" className="text-xs">Download fallback PNG</Button>
                 </a>
                 <CopyButton text={fallbackQrUrl} />
@@ -183,7 +183,7 @@ export function QrTab({
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <a href={fallbackQrPrint} target="_blank" rel="noopener noreferrer" download="modex-master-qr.png">
+              <a href={fallbackQrPrint} target="_blank" rel="noopener noreferrer" download="yardflow-master-qr.png">
                 <Button variant="outline" size="sm">Download print PNG</Button>
               </a>
               <a href={fallbackQrUrl} target="_blank" rel="noopener noreferrer">

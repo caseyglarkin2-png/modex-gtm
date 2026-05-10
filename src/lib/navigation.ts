@@ -56,7 +56,7 @@ export const commandRoutes: CommandRoute[] = [
   { label: 'Quick Capture', href: '/capture', icon: Smartphone, keywords: ['Mobile Capture', 'Field Capture', 'Capture'], canonicalOwner: 'Work Queue' },
   { label: 'Personas', href: '/contacts', icon: Users, keywords: ['Personas', 'People'], canonicalOwner: 'Contacts' },
   { label: 'Outreach Waves', href: '/campaigns', icon: Megaphone, keywords: ['Outreach Waves', 'Waves'], canonicalOwner: 'Campaigns' },
-  { label: 'Campaign HQ', href: '/campaigns', icon: Megaphone, keywords: ['Campaign HQ', 'MODEX HQ'], canonicalOwner: 'Campaigns' },
+  { label: 'Campaign HQ', href: '/campaigns', icon: Megaphone, keywords: ['Campaign HQ'], canonicalOwner: 'Campaigns' },
   { label: 'Generation Queue', href: '/queue?tab=system-jobs', icon: Activity, keywords: ['Generation Queue', 'AI Jobs', 'System Jobs'], canonicalOwner: 'Work Queue' },
   { label: 'Generated Content', href: '/studio?tab=generated-content', icon: FileText, keywords: ['Generated Content', 'One-Pagers'], canonicalOwner: 'Content Studio' },
   { label: 'Meeting Briefs', href: '/studio?tab=briefs', icon: FileText, keywords: ['Meeting Briefs', 'Briefs'], canonicalOwner: 'Content Studio' },

@@ -4,7 +4,7 @@ export interface VerticalTemplate {
   vertical: string;
   defaultScoringRules: {
     icp_fit: number;
-    modex_signal: number;
+    event_signal: number;
     primo_story_fit: number;
     strategic_value: number;
   };
@@ -108,7 +108,7 @@ export const VERTICAL_TEMPLATES: Record<string, VerticalTemplate> = {
   manufacturing: {
     vertical: 'Manufacturing',
     description: 'Multi-site production with seasonal peaks driving 30-40% volume spikes.',
-    defaultScoringRules: { icp_fit: 4, modex_signal: 3, primo_story_fit: 4, strategic_value: 3 },
+    defaultScoringRules: { icp_fit: 4, event_signal: 3, primo_story_fit: 4, strategic_value: 3 },
     sampleOnePagerContext: MANUFACTURING_CONTEXT,
     sampleWhyNow: 'Multi-site standardization requires coordinated yard operations across facilities.',
     samplePrimoAngle: 'One standard yard protocol reduces execution variability and dock bottlenecks.',
@@ -116,7 +116,7 @@ export const VERTICAL_TEMPLATES: Record<string, VerticalTemplate> = {
   '3pl': {
     vertical: '3PL',
     description: 'Network of client sites with margin pressure and SLA compliance challenges.',
-    defaultScoringRules: { icp_fit: 5, modex_signal: 4, primo_story_fit: 5, strategic_value: 4 },
+    defaultScoringRules: { icp_fit: 5, event_signal: 4, primo_story_fit: 5, strategic_value: 4 },
     sampleOnePagerContext: THREE_PL_CONTEXT,
     sampleWhyNow: 'Margin pressure forces efficiency gains. Detention costs are eating into SLA performance.',
     samplePrimoAngle: 'Client satisfaction depends on dock speed. One protocol improves competitive position.',
@@ -124,7 +124,7 @@ export const VERTICAL_TEMPLATES: Record<string, VerticalTemplate> = {
   retail: {
     vertical: 'Retail',
     description: 'Distribution centers managing seasonal peaks and high-velocity SKU throughput.',
-    defaultScoringRules: { icp_fit: 4, modex_signal: 3, primo_story_fit: 4, strategic_value: 3 },
+    defaultScoringRules: { icp_fit: 4, event_signal: 3, primo_story_fit: 4, strategic_value: 3 },
     sampleOnePagerContext: RETAIL_CONTEXT,
     sampleWhyNow: 'Seasonal peaks (holiday, back-to-school) drive 50%+ volume swings.',
     samplePrimoAngle: 'DC throughput depends on dock choreography. One protocol scales with volume.',
@@ -132,7 +132,7 @@ export const VERTICAL_TEMPLATES: Record<string, VerticalTemplate> = {
   pharma: {
     vertical: 'Pharma',
     description: 'Cold-chain distribution with regulatory compliance and temperature control requirements.',
-    defaultScoringRules: { icp_fit: 5, modex_signal: 4, primo_story_fit: 5, strategic_value: 5 },
+    defaultScoringRules: { icp_fit: 5, event_signal: 4, primo_story_fit: 5, strategic_value: 5 },
     sampleOnePagerContext: PHARMA_CONTEXT,
     sampleWhyNow: 'Cold-chain compliance drives audit risk. Trailer queue delays cause temperature excursions.',
     samplePrimoAngle: 'Yard efficiency is part of cold-chain control. One protocol keeps high-value trailers moving.',
@@ -140,7 +140,7 @@ export const VERTICAL_TEMPLATES: Record<string, VerticalTemplate> = {
   'food-beverage': {
     vertical: 'Food & Beverage',
     description: 'Perishable goods with narrow freshness windows and spoilage risk.',
-    defaultScoringRules: { icp_fit: 4, modex_signal: 3, primo_story_fit: 5, strategic_value: 4 },
+    defaultScoringRules: { icp_fit: 4, event_signal: 3, primo_story_fit: 5, strategic_value: 4 },
     sampleOnePagerContext: FOOD_BEVERAGE_CONTEXT,
     sampleWhyNow: 'Freshness windows are non-negotiable. Yard delays push product out of acceptable ranges.',
     samplePrimoAngle: 'Freshness is a supply chain asset. Yard protocol speeds determine shelf-life at retail.',
@@ -148,7 +148,7 @@ export const VERTICAL_TEMPLATES: Record<string, VerticalTemplate> = {
   automotive: {
     vertical: 'Automotive',
     description: 'Just-in-time suppliers with production-line sequencing requirements.',
-    defaultScoringRules: { icp_fit: 5, modex_signal: 4, primo_story_fit: 5, strategic_value: 5 },
+    defaultScoringRules: { icp_fit: 5, event_signal: 4, primo_story_fit: 5, strategic_value: 5 },
     sampleOnePagerContext: AUTOMOTIVE_CONTEXT,
     sampleWhyNow: 'JIT delivery demands are increasing. Yard delays cascade into production line stoppages.',
     samplePrimoAngle: 'JIT works only if the yard is choreographed. One protocol ensures exact timing.',
