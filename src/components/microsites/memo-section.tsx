@@ -519,9 +519,11 @@ export function MemoFootnotes({ sections }: { sections: MemoMicrositeSection[] }
  * marked with the reference mark `※`. Use this when a personalized reader
  * has been resolved and a MemoPreamble will render above §01.
  *
- * Pass `withAudio` to append a non-numbered "Audio brief" entry marked with
- * the play indicator `▷`. Use this when a MemoAudioBrief register will
- * render below the §-numbered sections.
+ * Pass `withAudio` to insert a non-numbered "Audio brief" entry marked with
+ * the play indicator `▷`. The audio register renders just below the
+ * personalized preamble (or just below the cover when no preamble), above
+ * the §-numbered sections — so the TOC entry slots in the same position
+ * (after preamble, before §01) and the scrollspy anchors line up.
  */
 export function buildTocEntries(
   sections: MemoMicrositeSection[],
@@ -532,11 +534,11 @@ export function buildTocEntries(
     num: `§${String(i + 1).padStart(2, '0')}`,
     label: EYEBROW_LABEL[s.type],
   }));
-  const head = options?.withPreambleFor
+  const preamble = options?.withPreambleFor
     ? [{ id: 'note', num: '※', label: `For ${options.withPreambleFor}` }]
     : [];
   const audio = options?.withAudio;
-  const tail = audio
+  const audioEntry = audio
     ? [
         {
           id: typeof audio === 'object' && audio.id ? audio.id : 'audio',
@@ -545,7 +547,7 @@ export function buildTocEntries(
         },
       ]
     : [];
-  return [...head, ...entries, ...tail];
+  return [...preamble, ...audioEntry, ...entries];
 }
 
 // ── MemoPreamble ──────────────────────────────────────────────────────

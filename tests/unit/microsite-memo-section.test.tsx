@@ -156,19 +156,21 @@ describe('buildTocEntries', () => {
     expect(entries[0].num).toBe('§01');
   });
 
-  it('appends an "Audio brief" entry marked ▷ when withAudio is true', () => {
+  it('inserts an "Audio brief" entry marked ▷ before §01 when withAudio is true', () => {
     const entries = buildTocEntries([ynsThesis, observation], { withAudio: true });
     expect(entries).toHaveLength(3);
-    expect(entries[2]).toEqual({ id: 'audio', num: '▷', label: 'Audio brief' });
+    // Audio register renders above the §-numbered sections so the TOC mirrors that order.
+    expect(entries[0]).toEqual({ id: 'audio', num: '▷', label: 'Audio brief' });
+    expect(entries[1].num).toBe('§01');
   });
 
-  it('combines preamble and audio entries when both options are set', () => {
+  it('combines preamble and audio entries with audio below preamble, both above §01', () => {
     const entries = buildTocEntries([ynsThesis, observation], {
       withPreambleFor: 'Heiko',
       withAudio: true,
     });
     expect(entries).toHaveLength(4);
-    expect(entries.map((e) => e.num)).toEqual(['※', '§01', '§02', '▷']);
+    expect(entries.map((e) => e.num)).toEqual(['※', '▷', '§01', '§02']);
   });
 });
 

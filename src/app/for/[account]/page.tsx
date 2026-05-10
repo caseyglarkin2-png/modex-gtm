@@ -89,7 +89,6 @@ export default async function AccountMicrositePage({
         tocEntries={tocEntries}
       >
         {reader ? <MemoPreamble variant={reader.variant} /> : null}
-        <MemoSectionList sections={memoSections} accentColor={data.theme?.accentColor} />
         <MemoAudioBrief
           src={data.audioBrief?.src ?? AUDIO_BRIEF_SRC}
           chapters={data.audioBrief?.chapters ?? AUDIO_BRIEF_CHAPTERS}
@@ -98,6 +97,7 @@ export default async function AccountMicrositePage({
           accentColor={data.theme?.accentColor}
           expectedDuration={data.audioBrief ? undefined : AUDIO_BRIEF_DURATION}
         />
+        <MemoSectionList sections={memoSections} accentColor={data.theme?.accentColor} />
         <MemoSoftAction
           accountName={data.accountName}
           href={buildROIDeepLink(data, { personSlug: reader?.personSlug })}
