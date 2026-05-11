@@ -39,6 +39,13 @@ const PALETTE: Record<string, MemoPaletteEntry> = {
   '#7C3AED': { numeral: 'text-violet-700', hex: '#6D28D9' },
   '#D97706': { numeral: 'text-amber-700', hex: '#B45309' },
   '#2563EB': { numeral: 'text-blue-700', hex: '#1D4ED8' },
+  // Phase-1 direct-hex entries (2026-05-11): the keys are already at
+  // WCAG-AA on cream, so key === hex (no louder→darker translation needed).
+  // Pairs with the per-account accentColor changes in T5.
+  '#C2410C': { numeral: 'text-orange-700', hex: '#C2410C' }, // the-home-depot
+  '#1E3A8A': { numeral: 'text-blue-900', hex: '#1E3A8A' },   // nestle-usa
+  '#B91C1C': { numeral: 'text-red-800', hex: '#B91C1C' },    // cj-logistics-america — text-red-800 keeps it distinct from #DC2626 cohort
+  '#B45309': { numeral: 'text-amber-800', hex: '#B45309' },  // georgia-pacific — text-amber-800 keeps it distinct from #D97706 cohort
 };
 
 const DEFAULT_PALETTE: MemoPaletteEntry = PALETTE['#06B6D4'];
