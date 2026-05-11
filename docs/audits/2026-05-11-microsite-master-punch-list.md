@@ -11,25 +11,22 @@
 
 ## The headline
 
-Two structural surprises dominate everything else:
+**16 accounts render with `sections: []` — meaning the prose body is literally empty.** This includes Tier 1 Band A (AB InBev, Coca-Cola) and 12 of 14 Tier 2. The pages render a cover spread, an audio brief player, and then a blank scroll. The "Draft · v0" badge on the cover is the symptom; the empty body is the disease.
 
-1. **A live-ticking detention-cost dollar badge renders on every microsite cover.** Values are implausible at scale (DHL: $427.78, Frito-Lay: $81.99). It's antithetical to the anti-sales memo register and undermines the editorial authority of every page. Highest priority to remove.
+Beyond that: the desktop marginalia gutter is empty (the original immersion gap you flagged), there are zero redacted-artifact treatments anywhere (evidence-density hard fail), and the cover H1 has no mechanism for an italic+accent phrase (the typographic anchor of the design system is missing).
 
-2. **16 accounts render with `sections: []` — meaning the prose body is literally empty.** This includes Tier 1 Band A (AB InBev, Coca-Cola) and 12 of 14 Tier 2. The pages render a cover spread, an audio brief player, and then a blank scroll. The "Draft · v0" badge on the cover is the symptom; the empty body is the disease.
-
-Beyond those: the desktop marginalia gutter is empty (the original immersion gap you flagged), there are zero redacted-artifact treatments anywhere (evidence-density hard fail), and the cover H1 has no mechanism for an italic+accent phrase (the typographic anchor of the design system is missing).
+**Audit overreach corrected (2026-05-11):** The audit flagged the Detention Clock widget as a P0 ship-stopper. That was wrong — the widget is an intentional design per `docs/superpowers/specs/2026-05-09-detention-clock-design.md`, with honest math (ATA 2024 yard-ops survey × facility count) and documentary framing chosen specifically to avoid the live-ticker register the audit accused it of. The widget stays. The DHL $427.78 figure isn't a bug; it's the correct output for 1,000 facilities. Demoted to P2: verify mobile-responsive behavior matches the spec (chip should shrink or hide if crowding touch targets).
 
 ---
 
-## Section 1 — P0 systemic (16 findings after dedupe)
+## Section 1 — P0 systemic (15 findings after dedupe + detention-clock correction)
 
-Each row is one PR. Sequenced by severity-of-user-visible-impact and dependency order.
+Each row is one PR. Sequenced by severity-of-user-visible-impact and dependency order. Numbering preserved across the punch list for traceability; the original P0-1 (detention counter) is now P2-1 (verify spec compliance).
 
-### Ship-stopper / immediate (1–4)
+### Ship-stopper / immediate (1–3)
 
 | # | Surface | Finding | Fix | Source |
 |---|---|---|---|---|
-| **P0-1** | cover widget | Live-accumulating "detention accrued while reading" dollar badge renders on every account. Implausible values for large networks (DHL $427.78). Outside accent budget, anti-sales-register-violating. | Remove the widget from all `/for/[account]` routes. If kept for internal review, gate behind `?debug=1`. | Design row P0-cover-color-budget |
 | **P0-2** | mobile | Running header (`MemoRunningHeader`) renders at y=0 on load overlapping cover classification bar; on 390px the title overflows viewport to x=416. | `memo-shell-chrome.tsx`: add `pointer-events-none` + `overflow-hidden` to mobile collapsed state; subtitle `hidden sm:block`; title `max-w-[calc(100vw-5rem)] truncate`. | Design rows P0-gestalt-mobile + P0-mobile-collapse |
 | **P0-3** | motion | Cover continue-nudge `↓` animation loops indefinitely (2.5s × infinite). Reads as desperate after ~10s. | One-line CSS: `.memo-cover-nudge { animation: memo-nudge 2.5s ease-in-out 3; }` (cap at 3 iterations). | Design row P0-motion |
 | **P0-4** | a11y | Soft-action CTA + colophon Casey-Larkin link lack `focus-visible` outline. Audio brief play button has it; soft-action doesn't. Inconsistent + a11y fail. | Add `focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--memo-accent)]` to: `memo-soft-action.tsx:52`, `memo-shell.tsx:218` (colophon `<a>`), `memo-audio-brief.tsx:345` (chapter seek). | Design row P0-interaction-polish |
@@ -111,10 +108,11 @@ For each of the 16 empty-sections accounts (P0-9):
 
 | # | Surface | Finding | Fix |
 |---|---|---|---|
-| P2-1 | Tier 3 polish (all 6) | Same `sections: []` root cause; same metadata patterns. | Apply Tier-2 per-account template after T1+T2 ships. |
-| P2-2 | section end-marks | Triple-∎ section separator (`memo-section.tsx:136`) reads slightly large at `text-[#8a847b]`. Competes with colophon's `§ ∎`. | Reduce to `text-[9.5px] tracking-[0.55em]`. |
-| P2-3 | ::selection color | `color-mix(in srgb, var(--memo-accent) 18%, transparent)` may be invisible for dark accents. | Bump to 28%. Add `@supports not (color-mix)` fallback. |
-| P2-4 | colophon | Various minor microcopy reinforcement opportunities across all 40. | Batch in cleanup PR. |
+| **P2-1** (was P0-1) | detention clock | Audit flagged as ship-stopper; correction: widget is intentional per the 2026-05-09 detention-clock spec. Verify mobile-responsive behavior matches spec: chip should shrink (dollar + dot only) or hide if crowding touch targets at 390px. Verify chip doesn't collide with cover's "Continue ↓" nudge. | Visit `https://yardflow.ai/for/dhl-supply-chain` and `…/dannon` at 390px via Playwright; confirm chip behavior matches `docs/superpowers/specs/2026-05-09-detention-clock-design.md` "Non-goals" / mobile section. If non-compliant, file a targeted P1. |
+| P2-2 | Tier 3 polish (all 6) | Same `sections: []` root cause; same metadata patterns. | Apply Tier-1 per-account template after T1+T2 ships. |
+| P2-3 | section end-marks | Triple-∎ section separator (`memo-section.tsx:136`) reads slightly large at `text-[#8a847b]`. Competes with colophon's `§ ∎`. | Reduce to `text-[9.5px] tracking-[0.55em]`. |
+| P2-4 | ::selection color | `color-mix(in srgb, var(--memo-accent) 18%, transparent)` may be invisible for dark accents. | Bump to 28%. Add `@supports not (color-mix)` fallback. |
+| P2-5 | colophon | Various minor microcopy reinforcement opportunities across all 40. | Batch in cleanup PR. |
 
 ---
 
@@ -122,7 +120,6 @@ For each of the 16 empty-sections accounts (P0-9):
 
 ```
 PR batch 1 — Ship-stoppers (1 day, low-risk):
-  P0-1 (remove detention counter)
   P0-2 (mobile running header)
   P0-3 (cap nudge animation)
   P0-4 (focus rings)
@@ -164,20 +161,12 @@ PR batch 7 — Tier 3 (defer until 1–6 land):
 
 ---
 
-## Casey triage questions
+## Casey triage decisions (resolved 2026-05-11)
 
-Before kicking off fix-phase, three decisions:
+1. **Detention counter (was P0-1):** Resolved — widget is intentional per its own May-9 spec. Demoted to P2-1: verify mobile-responsive behavior. The audit overreached.
 
-1. **Detention counter (P0-1):** Is this widget here on purpose? If yes, what's its intent and what should the audit have noted as expected behavior? If no (best guess), the fix is straightforward removal. The widget being present at all suggests there's a story about why — surface that so we don't accidentally remove a feature you wanted.
+2. **Empty-body scope (P0-9):** Author all 16 to T1-quality. ~6 weeks of content work. Higher cost, but the cohort reads as one polished set instead of carrying a visible T1/T2 quality gradient.
 
-2. **Empty-body scope (P0-9):** 16 accounts is real content authoring work, not a typing exercise. Two paths:
-   - **Path A:** Author all 16 to T1-quality (multi-day per account, ~6 weeks total)
-   - **Path B:** Author Tier 2 to a tighter "T2 floor" (single-section observation + single comparable + single soft-action, ~2 days per account, ~4 weeks total)
-   - I'd recommend B — but the call is yours.
+3. **Marginalia content (P0-7):** Auto-extract from `section.composition`. Hand-authoring per section is a follow-up if the auto-extract reads thin.
 
-3. **Marginalia content (P0-7):** New `MemoMarginalia` component needs content. Two sources:
-   - Pull from `section.composition` (key metrics auto-extracted)
-   - Hand-authored marginalia per section (more work, sharper)
-   - Recommend a hybrid: auto-extract for now (P0 ships), hand-author later (P1).
-
-Once decided, I'll generate the Phase-1 fix plan and dispatch the first PR batch via subagent-driven-development.
+Phase-1 fix plan follows in `docs/superpowers/plans/2026-05-11-microsite-fix-phase-1.md`.
