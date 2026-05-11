@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { getMemoAccent } from './memo-theme';
 import { MemoRunningHeader, MemoContentsRail } from './memo-shell-chrome';
+import { MemoMarginalia, type MemoMarginaliaItem } from './memo-marginalia';
 
 const FONT_SERIF = 'font-[family-name:var(--font-memo-serif)]';
 const FONT_SANS = 'font-[family-name:var(--font-memo-sans)]';
@@ -51,6 +52,9 @@ interface MemoShellProps {
   needsHandTuning?: boolean;
   /** Table-of-contents entries for the desktop scrollspy rail. Defaults to []. */
   tocEntries?: { id: string; num: string; label: string }[];
+  /** Right-gutter marginalia items, typically auto-extracted from
+   *  observation-section compositions via extractMarginaliaItems. */
+  marginaliaItems?: MemoMarginaliaItem[];
   /** Section content (and the bottom-of-page FootnoteList) rendered into the document column. */
   children: ReactNode;
 }
@@ -85,6 +89,7 @@ export function MemoShell({
   documentId,
   needsHandTuning,
   tocEntries = [],
+  marginaliaItems,
   children,
 }: MemoShellProps) {
   const accent = getMemoAccent(accentColor);
@@ -254,7 +259,7 @@ export function MemoShell({
                 until per-section anchoring is wired up properly */}
           </article>
 
-          <aside aria-hidden="true" className="hidden lg:block" />
+          <MemoMarginalia items={marginaliaItems ?? []} />
         </div>
       </main>
     </div>

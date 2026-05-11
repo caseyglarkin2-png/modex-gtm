@@ -19,6 +19,33 @@ import {
   type NumberedFootnote,
 } from './footnote';
 import { getMemoAccent } from './memo-theme';
+import type { MemoMarginaliaItem } from './memo-marginalia';
+
+/**
+ * Extracts one marginalia item per section that carries composition data.
+ * Currently only ObservationSection has a composition field — other section
+ * types contribute no marginalia item (the gutter doesn't try to fill empty
+ * space).
+ *
+ * Surfaces the FIRST { label, value } pair of each composition as the
+ * section's marginalia item. Per-section hand-tuning is a Phase-5 follow-up.
+ */
+export function extractMarginaliaItems(
+  sections: MemoMicrositeSection[],
+): MemoMarginaliaItem[] {
+  const items: MemoMarginaliaItem[] = [];
+  for (const section of sections) {
+    if (section.type !== 'observation') continue;
+    const first = section.composition[0];
+    if (!first) continue;
+    items.push({
+      mark: first.label,
+      body: first.value,
+      sectionId: section.sectionId,
+    });
+  }
+  return items;
+}
 
 const FONT_SERIF = 'font-[family-name:var(--font-memo-serif)]';
 const FONT_SANS = 'font-[family-name:var(--font-memo-sans)]';
