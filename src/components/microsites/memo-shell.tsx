@@ -82,7 +82,7 @@ export function MemoShell({
       {/* Running header (client; fades in past the cover) */}
       <MemoRunningHeader
         title={title}
-        subtitle={`${accountName} · ${compactDate}${needsHandTuning ? ' · Draft v0' : ''}`}
+        subtitle={`${accountName} · ${compactDate}`}
       />
 
       {/* ── COVER SPREAD ─────────────────────────────────────────── */}
@@ -109,11 +109,6 @@ export function MemoShell({
             <span>Working memo</span>
             <span className="text-[#a89e8b]">·</span>
             <span>Not for distribution</span>
-            {needsHandTuning ? (
-              <span className="ml-auto rounded-sm border border-[#a89e8b] bg-[#fffdf7]/60 px-2.5 py-[3px] text-[10px] tracking-[0.18em] text-[#4a4641]">
-                Draft · v0
-              </span>
-            ) : null}
           </div>
 
           <div
@@ -211,6 +206,11 @@ export function MemoShell({
               >
                 § ∎
               </div>
+              {needsHandTuning ? (
+                <div className={`mb-3 ${FONT_MONO} text-[10px] uppercase tracking-[0.18em] text-[#a89e8b]`}>
+                  Working analysis · v0
+                </div>
+              ) : null}
               {`${accountName} · ${docId} · Issued ${formattedDate}`}
               <br />
               <span className={`${FONT_SANS} text-[13px] normal-case tracking-normal text-[#4a4641]`}>
