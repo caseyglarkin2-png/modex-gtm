@@ -169,8 +169,8 @@ export const keurigDrPepper: AccountMicrositeData = {
   band: 'B',
   priorityScore: 75,
 
-  pageTitle: 'YardFlow for Keurig Dr Pepper - Yard Network Standardization',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across Keurig Dr Pepper\'s facility network.',
+  pageTitle: "Keurig Dr Pepper · 300+ DSD depots and the yard inside each one",
+  metaDescription: "Keurig Dr Pepper's DSD operation runs 300+ distribution depots. Each depot manages inbound syrup/finished-goods trailers alongside outbound DSD route trucks — two completely different freight profiles competing for the same yard, every morning.",
 
   sections: [],
 
@@ -211,7 +211,7 @@ export const keurigDrPepper: AccountMicrositeData = {
       variantSlug: 'kelly-killingsworth',
 
       framingNarrative: 'Kelly, **Kelly\'s #1 metric is almost certainly logistics cost per case** — and she\'s under Fuel for Growth pressure to reduce it every quarter.',
-      openingHook: 'Your team is dealing with pain point 1: dsd depot yard chaos. That is a yard problem before it is anything else.',
+      openingHook: "Keurig Dr Pepper's DSD operation runs 300+ distribution depots. Each depot manages inbound syrup and finished goods trailers alongside outbound DSD route trucks — two completely different freight profiles competing for the same yard. When the morning DSD load-out window collides with the inbound trailer arrival, depot throughput collapses. That happens daily across the network.",
       stakeStatement: '- K-Cup production lines run **24/7** with extremely high throughput — a single line can produce 1,000+ pods per minute - Finished goods flow directly from production to palletization to trailer loading - If no empty trailer is available at the dock, **production must slow or stop** — this is the "y',
 
       heroOverride: {

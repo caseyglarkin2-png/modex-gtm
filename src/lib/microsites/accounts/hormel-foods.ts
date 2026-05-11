@@ -161,8 +161,8 @@ export const hormelFoods: AccountMicrositeData = {
   band: 'B',
   priorityScore: 81,
 
-  pageTitle: 'YardFlow for Hormel Foods - Yard Network Standardization',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across Hormel Foods\'s facility network.',
+  pageTitle: "Hormel Foods · Multi-temperature manufacturing and the yard at the dock door",
+  metaDescription: "Hormel runs SPAM, Jennie-O, Skippy, Applegate, Planters across refrigerated and shelf-stable plants. Multi-temp at the same plant means the yard layer handles dock-assignment decisions that no single WMS can route.",
 
   sections: [],
 

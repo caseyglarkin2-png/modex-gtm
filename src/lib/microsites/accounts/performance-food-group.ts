@@ -168,8 +168,8 @@ export const performanceFoodGroup: AccountMicrositeData = {
   band: 'B',
   priorityScore: 75,
 
-  pageTitle: 'YardFlow for Performance Food Group - Yard Network Standardization',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across Performance Food Group\'s facility network.',
+  pageTitle: "Performance Food Group · Foodservice OTIF measured at the dock door",
+  metaDescription: "Performance Food Group's foodservice network — Vistar, Reinhart, the Cheney Brothers integration — runs on on-time-in-full as the operational covenant. The yard outside the restaurant dock is the gap between scheduled and actual that the OTIF dashboard doesn't reach.",
 
   sections: [],
 

@@ -169,8 +169,8 @@ export const constellationBrands: AccountMicrositeData = {
   band: 'B',
   priorityScore: 75,
 
-  pageTitle: 'YardFlow for Constellation Brands - Yard Network Standardization',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across Constellation Brands\'s facility network.',
+  pageTitle: "Constellation Brands · Wine, beer, spirits — three temperature regimes, one yard",
+  metaDescription: "Constellation Brands moves Corona, Modelo, and the Robert Mondavi portfolio through a yard layer that handles three temperature regimes and three regulatory contexts simultaneously. Single-brand WMS doesn't model that constraint.",
 
   sections: [],
 
@@ -211,7 +211,7 @@ export const constellationBrands: AccountMicrositeData = {
       variantSlug: 'john-kester',
 
       framingNarrative: 'John, 1. **The Veracruz Ramp-Up Problem (2025-2027)**    - As the Veracruz brewery comes online, US receiving infrastructure must absorb 30-50% more inbound volume    - Kester needs to prove that existing US yard/DC infrastructure can handle the growth WITHOUT proportional CapEx increases    - YardFlow\'s value prop: **absorb brewery expansion volume through software, not concrete**',
-      openingHook: 'Your team is dealing with 4a. cross-border receiving chaos. That is a yard problem before it is anything else.',
+      openingHook: 'Constellation Brands moves wine, beer, and spirits across three temperature regimes through two import-licensed corridors. Cross-border receiving is what happens when an inbound trailer crosses the dock-receiving threshold without the right paperwork pre-staged in the yard. That gap is a yard problem, in advance of any back-office system.',
       stakeStatement: '| Season | Impact | |--------|--------| | **Memorial Day → Labor Day** (beer) | 40-60% volume surge; Corona/Modelo peak consumption | | **Cinco de Mayo** (beer) | Single biggest beer sales week of the year | | **Thanksgiving → New Year\'s** (wine/spirits) | Wine and spirits peak; Kim Crawford, Robert',
 
       heroOverride: {

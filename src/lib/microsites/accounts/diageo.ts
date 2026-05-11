@@ -161,8 +161,8 @@ export const diageo: AccountMicrositeData = {
   band: 'B',
   priorityScore: 83,
 
-  pageTitle: 'YardFlow for Diageo - Yard Network Standardization',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across Diageo\'s facility network.',
+  pageTitle: "Diageo · Premium spirits distribution and the gate-to-dock visibility gap",
+  metaDescription: "Diageo operates 27 production sites globally and runs Johnnie Walker, Don Julio, and Crown Royal through a North American distribution network where carrier dwell at the dock is unobserved at the network tier.",
 
   sections: [
     { type: 'yns-thesis' },

@@ -168,8 +168,8 @@ export const toyota: AccountMicrositeData = {
   band: 'B',
   priorityScore: 75,
 
-  pageTitle: 'YardFlow for Toyota - Yard Network Standardization',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across Toyota\'s facility network.',
+  pageTitle: "Toyota Motor North America · JIT assembly requires JIT yard execution — the protocol gap",
+  metaDescription: "Toyota Motor North America. 14 manufacturing facilities. The Toyota Production System defines JIT delivery standards for the line. The yard between the gate and the dock is the one layer the Production System has not standardized.",
 
   sections: [],
 
@@ -209,13 +209,13 @@ export const toyota: AccountMicrositeData = {
       label: 'Chris Nielsen - Executive Vice President & Chief Supply Chain Officer / Chief Quality Officer',
       variantSlug: 'chris-nielsen',
 
-      framingNarrative: 'Chris, ### The Killer Angle: "Toyota Invented JIT — But Your Yard Still Runs on Paper"',
-      openingHook: 'Your team is dealing with pain point 1: jit precision at scale — the yard is the execution layer. That is a yard problem before it is anything else.',
+      framingNarrative: "Toyota Motor North America's production philosophy, the Toyota Production System, defines the global standard for JIT supply chain execution. The yard between the supplier gate and the assembly line dock — where parts trailers arrive, queue, and wait — is the one surface in the TPS that still operates without a digital execution layer at most North American plants.",
+      openingHook: "Toyota Production System plants operate to the tightest JIT standards in the industry — parts arrive by the hour, not by the day. The yard between the supplier truck's arrival and the dock assignment is the gap between 'scheduled to arrive' and 'ready to produce.' At 14 North American plants and $13.9B in new EV capacity, that gap has a dollar value Nielsen's team is already measuring.",
       stakeStatement: '- Toyota\'s milkrun system sends trucks on **fixed routes picking up from 5-10 suppliers per run** — these trucks arrive at the plant on tight schedules - If a milkrun truck is delayed at the yard gate or can\'t find a dock, it creates a **cascading delay** across all subsequent supplier pickups - **C',
 
       heroOverride: {
         headline: 'Chris, the yard is where Toyota\'s execution breaks down',
-        subheadline: '### The Killer Angle: "Toyota Invented JIT — But Your Yard Still Runs on Paper"',
+        subheadline: "Toyota Production System principles define JIT delivery for every component on the line. The yard between the supplier truck and the dock is the one layer the TPS has not digitized. Nielsen's TBMNC battery plant is the clean-slate opportunity to set the protocol before the pattern hardens.",
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
 
@@ -265,7 +265,7 @@ export const toyota: AccountMicrositeData = {
       'Toyota Battery Manufacturing, North Carolina (TBMNC)',
       'This is Nielsen\'s baby',
     ],
-    supplyChainInitiatives: ['### The Killer Angle: "Toyota Invented JIT — But Your Yard Still Runs on Paper"'],
+    supplyChainInitiatives: ['TBMNC battery plant greenfield buildout in Liberty, NC — yard execution protocol design phase active in 2025-2026'],
     urgencyDriver: 'Toyota Battery Manufacturing, North Carolina (TBMNC)',
   },
 
