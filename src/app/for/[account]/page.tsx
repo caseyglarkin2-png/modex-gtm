@@ -81,7 +81,8 @@ export default async function AccountMicrositePage({
         accountName={data.accountName}
         accentColor={data.theme?.accentColor}
         preparedDate={PREPARED_DATE}
-        title={`Yard execution as a network constraint for ${data.accountName}`}
+        title={data.coverHeadline ?? `Yard execution as a network constraint for ${data.accountName}`}
+        titleEmphasis={data.titleEmphasis}
         readerEyebrow={reader?.eyebrow}
         contextDetail={facilityFootprint}
         authorByline="Casey Larkin · YardFlow by FreightRoll"

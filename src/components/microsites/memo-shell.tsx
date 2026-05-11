@@ -6,6 +6,27 @@ const FONT_SERIF = 'font-[family-name:var(--font-memo-serif)]';
 const FONT_SANS = 'font-[family-name:var(--font-memo-sans)]';
 const FONT_MONO = 'font-[family-name:var(--font-memo-mono)]';
 
+function renderTitle(title: string, emphasis?: string): ReactNode {
+  if (!emphasis) return title;
+  const idx = title.indexOf(emphasis);
+  if (idx < 0) return title;
+  return (
+    <>
+      {title.slice(0, idx)}
+      <em
+        style={{
+          color: 'var(--memo-accent)',
+          fontStyle: 'italic',
+          fontVariationSettings: "'opsz' 130, 'SOFT' 100, 'WONK' 1",
+        }}
+      >
+        {emphasis}
+      </em>
+      {title.slice(idx + emphasis.length)}
+    </>
+  );
+}
+
 interface MemoShellProps {
   /** "Dannon" — used in the running-header subtitle and colophon. */
   accountName: string;
@@ -15,6 +36,9 @@ interface MemoShellProps {
   preparedDate: string;
   /** Headline shown on the cover and as the running-header title. */
   title: string;
+  /** Substring of title to render as italic + accent in the cover H1.
+   *  If the substring isn't found in title, the H1 falls back to plain rendering. */
+  titleEmphasis?: string;
   /** Reader-aware eyebrow ("Heiko Gerling · Chief Operations Officer"). */
   readerEyebrow?: string;
   /** "13-plant footprint" — context line shown under the cover prepared-for block. */
@@ -54,6 +78,7 @@ export function MemoShell({
   accentColor,
   preparedDate,
   title,
+  titleEmphasis,
   readerEyebrow,
   contextDetail,
   authorByline,
@@ -132,7 +157,7 @@ export function MemoShell({
               letterSpacing: '-0.025em',
             }}
           >
-            {title}
+            {renderTitle(title, titleEmphasis)}
           </h1>
 
           <dl

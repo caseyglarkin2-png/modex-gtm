@@ -550,6 +550,15 @@ export interface AccountMicrositeData {
     backgroundVariant?: 'dark' | 'gradient' | 'industrial' | 'clean';
   };
 
+  /** Substring of the cover H1 to render as italic + accent. If the substring
+   *  isn't found in the rendered title, the H1 falls back to plain rendering. */
+  titleEmphasis?: string;
+
+  /** Full override for the cover H1 (replaces the default
+   *  "Yard execution as a network constraint for {accountName}" template).
+   *  Use when the default produces a wrapping H1 for long account names. */
+  coverHeadline?: string;
+
   // Showcase & layout
   showcase?: boolean;               // flagged for DWTB marketplace demo
   showcaseOrder?: number;           // display order in showcase gallery (1 = first)
