@@ -117,7 +117,7 @@ export const pactivEvergreen: AccountMicrositeData = {
           detail: 'Combined entity: ~95+ facilities, 20,000+ employees, 250+ brands, 39,000+ SKUs. CEO Stan Bikulege (Novolex); CFO Dennis Norman (Novolex); COO Tamer Abuaita (July 2025, succeeding Doug Owenby who served as Interim COO from Pactiv); CTO Chuck Whittington (legacy Pactiv Evergreen). Apollo Global Management controls; CPP Investments minority equity from the Pactiv side. Combined HQ: Charlotte NC; Lake Forest IL remains a major operating site.',
         },
         {
-          id: 'pactiv-pinc-case-study',
+          id: 'pactiv-yard-automation-case-2019',
           source: 'Published yard-automation case record at 12 Pactiv facilities (October 2019)',
           confidence: 'public',
           detail: 'Pre-acquisition coast-to-coast Pactiv Evergreen yard automation deployment documented across 12 named facilities. Use cases: GPS-based trailer location, RFID gate-and-locate, spotter loop check-in model, 200–300 trailers in yard at named sites, 15–20 minute pre-deployment spotter search time. Public NC job posting at Aberdeen references the yard system in 2026 — current operating signal at the working-operator level.',
