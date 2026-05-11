@@ -282,6 +282,6 @@ export const nestleUsa: AccountMicrositeData = {
   },
 
   theme: {
-    accentColor: '#009FDF',
+    accentColor: '#1E3A8A',
   },
 };

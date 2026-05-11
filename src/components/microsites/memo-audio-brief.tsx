@@ -342,7 +342,7 @@ export function MemoAudioBrief({
                 }}
                 aria-current={active ? 'true' : undefined}
                 className={[
-                  'group grid w-full grid-cols-[1.8rem_1fr_3.2rem] items-baseline gap-3 border-b border-[#e8e2d4] py-3 text-left transition-colors last:border-b-0',
+                  'group grid w-full grid-cols-[1.8rem_1fr_3.2rem] items-baseline gap-3 border-b border-[#e8e2d4] py-3 text-left transition-colors last:border-b-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--memo-accent)]',
                   active
                     ? 'text-[color:var(--memo-accent)]'
                     : 'text-[#4a4641] hover:text-[#1a1a1a]',

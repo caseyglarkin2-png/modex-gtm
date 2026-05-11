@@ -7,6 +7,7 @@ import {
   type ComparableSection,
   type MethodologySection,
   type AboutSection,
+  type ArtifactSection,
   type PersonVariant,
 } from '@/lib/microsites/schema';
 import { YNS_THESIS } from '@/lib/microsites/yns-thesis';
@@ -18,6 +19,33 @@ import {
   type NumberedFootnote,
 } from './footnote';
 import { getMemoAccent } from './memo-theme';
+import type { MemoMarginaliaItem } from './memo-marginalia';
+
+/**
+ * Extracts one marginalia item per section that carries composition data.
+ * Currently only ObservationSection has a composition field — other section
+ * types contribute no marginalia item (the gutter doesn't try to fill empty
+ * space).
+ *
+ * Surfaces the FIRST { label, value } pair of each composition as the
+ * section's marginalia item. Per-section hand-tuning is a Phase-5 follow-up.
+ */
+export function extractMarginaliaItems(
+  sections: MemoMicrositeSection[],
+): MemoMarginaliaItem[] {
+  const items: MemoMarginaliaItem[] = [];
+  for (const section of sections) {
+    if (section.type !== 'observation') continue;
+    const first = section.composition[0];
+    if (!first) continue;
+    items.push({
+      mark: first.label,
+      body: first.value,
+      sectionId: section.sectionId,
+    });
+  }
+  return items;
+}
 
 const FONT_SERIF = 'font-[family-name:var(--font-memo-serif)]';
 const FONT_SANS = 'font-[family-name:var(--font-memo-sans)]';
@@ -31,6 +59,7 @@ const EYEBROW_LABEL: Record<MemoMicrositeSection['type'], string> = {
   comparable: 'Comparable',
   methodology: 'Methodology',
   about: 'Author',
+  artifact: 'Artifact',
 };
 
 // ── Footnote collection ───────────────────────────────────────────────
@@ -46,6 +75,8 @@ function sectionFootnotes(section: MemoMicrositeSection): FootnoteData[] {
     case 'methodology':
       return section.sources;
     case 'about':
+      return [];
+    case 'artifact':
       return [];
   }
 }
@@ -436,6 +467,41 @@ function MemoAbout({
   );
 }
 
+function MemoArtifact({
+  section,
+  index,
+  accent,
+}: {
+  section: ArtifactSection;
+  index: number;
+  accent: ReturnType<typeof getMemoAccent>;
+}) {
+  const a = section.artifact;
+  return (
+    <MemoSectionFrame
+      number={index}
+      numeralClass={accent.numeralClass}
+      sectionId={section.sectionId ?? 'artifact'}
+      eyebrow={EYEBROW_LABEL['artifact']}
+      heading={section.headline}
+    >
+      <figure className="border border-[#d8d2c2] bg-[#fffdf7] p-4">
+        <img
+          src={a.imageSrc}
+          alt={a.imageAlt}
+          className="block w-full"
+        />
+        <figcaption className={`mt-3 text-[11px] tracking-[0.1em] uppercase text-[#4a4641] ${FONT_MONO}`}>
+          {a.caption}
+        </figcaption>
+        <div className={`mt-2 text-[10.5px] tracking-[0.18em] uppercase text-[#8a847b] ${FONT_SANS}`}>
+          {a.source}
+        </div>
+      </figure>
+    </MemoSectionFrame>
+  );
+}
+
 // ── Main entry points ─────────────────────────────────────────────────
 
 interface MemoSectionListProps {
@@ -495,6 +561,8 @@ export function MemoSectionList({ sections, accentColor }: MemoSectionListProps)
             );
           case 'about':
             return <MemoAbout key={i} section={section} index={num} accent={accent} />;
+          case 'artifact':
+            return <MemoArtifact key={i} section={section} index={num} accent={accent} />;
         }
       })}
     </>

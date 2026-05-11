@@ -1,10 +1,32 @@
 import type { ReactNode } from 'react';
 import { getMemoAccent } from './memo-theme';
 import { MemoRunningHeader, MemoContentsRail } from './memo-shell-chrome';
+import { MemoMarginalia, type MemoMarginaliaItem } from './memo-marginalia';
 
 const FONT_SERIF = 'font-[family-name:var(--font-memo-serif)]';
 const FONT_SANS = 'font-[family-name:var(--font-memo-sans)]';
 const FONT_MONO = 'font-[family-name:var(--font-memo-mono)]';
+
+function renderTitle(title: string, emphasis?: string): ReactNode {
+  if (!emphasis) return title;
+  const idx = title.indexOf(emphasis);
+  if (idx < 0) return title;
+  return (
+    <>
+      {title.slice(0, idx)}
+      <em
+        style={{
+          color: 'var(--memo-accent)',
+          fontStyle: 'italic',
+          fontVariationSettings: "'opsz' 130, 'SOFT' 100, 'WONK' 1",
+        }}
+      >
+        {emphasis}
+      </em>
+      {title.slice(idx + emphasis.length)}
+    </>
+  );
+}
 
 interface MemoShellProps {
   /** "Dannon" — used in the running-header subtitle and colophon. */
@@ -15,6 +37,9 @@ interface MemoShellProps {
   preparedDate: string;
   /** Headline shown on the cover and as the running-header title. */
   title: string;
+  /** Substring of title to render as italic + accent in the cover H1.
+   *  If the substring isn't found in title, the H1 falls back to plain rendering. */
+  titleEmphasis?: string;
   /** Reader-aware eyebrow ("Heiko Gerling · Chief Operations Officer"). */
   readerEyebrow?: string;
   /** "13-plant footprint" — context line shown under the cover prepared-for block. */
@@ -27,6 +52,9 @@ interface MemoShellProps {
   needsHandTuning?: boolean;
   /** Table-of-contents entries for the desktop scrollspy rail. Defaults to []. */
   tocEntries?: { id: string; num: string; label: string }[];
+  /** Right-gutter marginalia items, typically auto-extracted from
+   *  observation-section compositions via extractMarginaliaItems. */
+  marginaliaItems?: MemoMarginaliaItem[];
   /** Section content (and the bottom-of-page FootnoteList) rendered into the document column. */
   children: ReactNode;
 }
@@ -54,12 +82,14 @@ export function MemoShell({
   accentColor,
   preparedDate,
   title,
+  titleEmphasis,
   readerEyebrow,
   contextDetail,
   authorByline,
   documentId,
   needsHandTuning,
   tocEntries = [],
+  marginaliaItems,
   children,
 }: MemoShellProps) {
   const accent = getMemoAccent(accentColor);
@@ -82,7 +112,7 @@ export function MemoShell({
       {/* Running header (client; fades in past the cover) */}
       <MemoRunningHeader
         title={title}
-        subtitle={`${accountName} · ${compactDate}${needsHandTuning ? ' · Draft v0' : ''}`}
+        subtitle={`${accountName} · ${compactDate}`}
       />
 
       {/* ── COVER SPREAD ─────────────────────────────────────────── */}
@@ -109,11 +139,6 @@ export function MemoShell({
             <span>Working memo</span>
             <span className="text-[#a89e8b]">·</span>
             <span>Not for distribution</span>
-            {needsHandTuning ? (
-              <span className="ml-auto rounded-sm border border-[#a89e8b] bg-[#fffdf7]/60 px-2.5 py-[3px] text-[10px] tracking-[0.18em] text-[#4a4641]">
-                Draft · v0
-              </span>
-            ) : null}
           </div>
 
           <div
@@ -137,7 +162,7 @@ export function MemoShell({
               letterSpacing: '-0.025em',
             }}
           >
-            {title}
+            {renderTitle(title, titleEmphasis)}
           </h1>
 
           <dl
@@ -211,13 +236,18 @@ export function MemoShell({
               >
                 § ∎
               </div>
+              {needsHandTuning ? (
+                <div className={`mb-3 ${FONT_MONO} text-[10px] uppercase tracking-[0.18em] text-[#a89e8b]`}>
+                  Working analysis · v0
+                </div>
+              ) : null}
               {`${accountName} · ${docId} · Issued ${formattedDate}`}
               <br />
               <span className={`${FONT_SANS} text-[13px] normal-case tracking-normal text-[#4a4641]`}>
                 Set in Fraunces &amp; Mona Sans · Composed by{' '}
                 <a
                   href="mailto:casey@freightroll.com"
-                  className="border-b border-[#d8d2c2] text-[#4a4641] transition-colors hover:border-[color:var(--memo-accent)] hover:text-[color:var(--memo-accent)]"
+                  className="border-b border-[#d8d2c2] text-[#4a4641] transition-colors hover:border-[color:var(--memo-accent)] hover:text-[color:var(--memo-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--memo-accent)]"
                 >
                   Casey Larkin
                 </a>
@@ -229,7 +259,7 @@ export function MemoShell({
                 until per-section anchoring is wired up properly */}
           </article>
 
-          <aside aria-hidden="true" className="hidden lg:block" />
+          <MemoMarginalia items={marginaliaItems ?? []} />
         </div>
       </main>
     </div>
@@ -272,7 +302,7 @@ const MEMO_CHROME_CSS = `
 .memo-cover-rise-3 { animation-delay: 0.7s; animation-duration: 1.1s; }
 .memo-cover-rise-4 { animation-delay: 1.15s; }
 .memo-cover-fade  { opacity: 0; animation: memo-fade 1.4s ease 1.6s forwards; }
-.memo-cover-nudge { animation: memo-nudge 2.5s ease-in-out infinite; }
+.memo-cover-nudge { animation: memo-nudge 2.5s ease-in-out 3; }
 
 @media (prefers-reduced-motion: reduce) {
   .memo-cover-rise, .memo-cover-fade {

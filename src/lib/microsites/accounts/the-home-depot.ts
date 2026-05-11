@@ -485,7 +485,7 @@ export const theHomeDepot: AccountMicrositeData = {
   },
 
   theme: {
-    accentColor: '#F97316',
+    accentColor: '#C2410C',
     backgroundVariant: 'dark',
   },
 

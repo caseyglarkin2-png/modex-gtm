@@ -13,6 +13,7 @@ import {
   MemoFootnotes,
   MemoPreamble,
   buildTocEntries,
+  extractMarginaliaItems,
 } from '@/components/microsites/memo-section';
 import { MemoSoftAction } from '@/components/microsites/memo-soft-action';
 import { MemoAudioBrief } from '@/components/microsites/memo-audio-brief';
@@ -55,6 +56,7 @@ export default async function AccountMicrositePage({
   if (!data) notFound();
 
   const memoSections = resolveMemoSections(data);
+  const marginaliaItems = extractMarginaliaItems(memoSections);
   const handTuned = isAccountHandTuned(data);
   const reader = resolveReader(data, sp.p);
   const facilityFootprint = data.network?.facilityCount
@@ -81,12 +83,14 @@ export default async function AccountMicrositePage({
         accountName={data.accountName}
         accentColor={data.theme?.accentColor}
         preparedDate={PREPARED_DATE}
-        title={`Yard execution as a network constraint for ${data.accountName}`}
+        title={data.coverHeadline ?? `Yard execution as a network constraint for ${data.accountName}`}
+        titleEmphasis={data.titleEmphasis}
         readerEyebrow={reader?.eyebrow}
         contextDetail={facilityFootprint}
         authorByline="Casey Larkin · YardFlow by FreightRoll"
         needsHandTuning={!handTuned}
         tocEntries={tocEntries}
+        marginaliaItems={marginaliaItems}
       >
         {reader ? <MemoPreamble variant={reader.variant} /> : null}
         <MemoAudioBrief

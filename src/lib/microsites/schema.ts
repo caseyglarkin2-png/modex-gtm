@@ -36,7 +36,8 @@ export type MemoSectionType =
   | 'observation'
   | 'comparable'
   | 'methodology'
-  | 'about';
+  | 'about'
+  | 'artifact';
 
 /**
  * PersonaLane is ONLY used as a fallback category when we don't have
@@ -454,12 +455,29 @@ export interface AboutSection extends BaseMicrositeSection {
   signOff?: string;                                  // optional universal sign-off paragraph
 }
 
+/**
+ * Redacted artifact — Module Inspector screenshot, redacted shipment
+ * manifest, attribution-free quote image. The "receipts > claims" surface
+ * the editorial-style guide mandates. Spec requires ≥1 per memo.
+ */
+export interface ArtifactSection extends BaseMicrositeSection {
+  type: 'artifact';
+  headline: string;
+  artifact: {
+    imageSrc: string;
+    imageAlt: string;
+    caption: string;        // Mono caption under the image
+    source: string;         // Source hairline below caption
+  };
+}
+
 export type MemoMicrositeSection =
   | YnsThesisSection
   | ObservationSection
   | ComparableSection
   | MethodologySection
-  | AboutSection;
+  | AboutSection
+  | ArtifactSection;
 
 export type MicrositeSection =
   | MemoMicrositeSection
@@ -549,6 +567,15 @@ export interface AccountMicrositeData {
     badgeColor?: string;            // stat/KPI badge background
     backgroundVariant?: 'dark' | 'gradient' | 'industrial' | 'clean';
   };
+
+  /** Substring of the cover H1 to render as italic + accent. If the substring
+   *  isn't found in the rendered title, the H1 falls back to plain rendering. */
+  titleEmphasis?: string;
+
+  /** Full override for the cover H1 (replaces the default
+   *  "Yard execution as a network constraint for {accountName}" template).
+   *  Use when the default produces a wrapping H1 for long account names. */
+  coverHeadline?: string;
 
   // Showcase & layout
   showcase?: boolean;               // flagged for DWTB marketplace demo

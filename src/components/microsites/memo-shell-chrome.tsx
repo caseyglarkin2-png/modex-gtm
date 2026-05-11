@@ -35,7 +35,7 @@ export function MemoRunningHeader({ title, subtitle }: MemoRunningHeaderProps) {
     <header
       aria-hidden={!show}
       className={[
-        'fixed inset-x-0 top-0 z-50 flex items-center justify-between',
+        'fixed inset-x-0 top-0 z-50 flex items-center justify-between overflow-hidden',
         'border-b border-[#e8e2d4] bg-[#f5f1e8]/90 px-6 py-2.5 backdrop-blur-md',
         'transition-opacity duration-300',
         show ? 'opacity-100' : 'pointer-events-none opacity-0',
@@ -49,9 +49,9 @@ export function MemoRunningHeader({ title, subtitle }: MemoRunningHeaderProps) {
           className="size-[5px] rounded-full"
           style={{ background: 'var(--memo-accent)' }}
         />
-        <span className="truncate">{title}</span>
+        <span className="block max-w-[calc(100vw-9rem)] truncate sm:max-w-none">{title}</span>
       </div>
-      <div className="text-[#8a847b]">{subtitle}</div>
+      <div className="hidden text-[#8a847b] sm:block">{subtitle}</div>
     </header>
   );
 }
