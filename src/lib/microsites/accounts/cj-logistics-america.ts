@@ -275,6 +275,6 @@ export const cjLogisticsAmerica: AccountMicrositeData = {
   },
 
   theme: {
-    accentColor: '#E8401C',
+    accentColor: '#B91C1C',
   },
 };

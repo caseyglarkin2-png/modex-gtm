@@ -446,7 +446,7 @@ export const georgiaPacific: AccountMicrositeData = {
   },
 
   theme: {
-    accentColor: '#4B5563',
+    accentColor: '#B45309',
     backgroundVariant: 'dark',
   },
 
