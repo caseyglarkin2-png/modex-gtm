@@ -49,7 +49,7 @@ export function MemoSoftAction({ accountName, href, description }: MemoSoftActio
       <a
         data-ms-cta-id="roi-deep-link"
         href={href}
-        className="mt-3 inline-block border-b font-medium not-italic transition-colors"
+        className="mt-3 inline-block border-b font-medium not-italic transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--memo-accent)]"
         style={{
           color: 'var(--memo-accent)',
           borderBottomColor: 'currentColor',

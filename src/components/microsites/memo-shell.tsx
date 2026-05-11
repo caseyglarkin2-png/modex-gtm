@@ -217,7 +217,7 @@ export function MemoShell({
                 Set in Fraunces &amp; Mona Sans · Composed by{' '}
                 <a
                   href="mailto:casey@freightroll.com"
-                  className="border-b border-[#d8d2c2] text-[#4a4641] transition-colors hover:border-[color:var(--memo-accent)] hover:text-[color:var(--memo-accent)]"
+                  className="border-b border-[#d8d2c2] text-[#4a4641] transition-colors hover:border-[color:var(--memo-accent)] hover:text-[color:var(--memo-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--memo-accent)]"
                 >
                   Casey Larkin
                 </a>
