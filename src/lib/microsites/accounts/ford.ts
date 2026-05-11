@@ -168,8 +168,8 @@ export const ford: AccountMicrositeData = {
   band: 'B',
   priorityScore: 75,
 
-  pageTitle: 'YardFlow for Ford - Yard Network Standardization',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across Ford\'s facility network.',
+  pageTitle: "Ford BlueOval City · Yard-execution protocol for the EV transition network",
+  metaDescription: "Ford's BlueOval City is the largest greenfield industrial site in North America — 3,600 acres, $5.6B investment, F-150 Lightning production. Every inbound parts trailer arrives at a yard still being designed. The protocol won't be inherited from Dearborn.",
 
   sections: [],
 

@@ -161,8 +161,8 @@ export const theHomeDepot: AccountMicrositeData = {
   band: 'C',
   priorityScore: 77,
 
-  pageTitle: 'YardFlow for The Home Depot - Yard Network Standardization',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across The Home Depot\'s facility network.',
+  pageTitle: "The Home Depot · 200+ DCs, seasonal surge, and the yard between four DC types",
+  metaDescription: "The Home Depot operates 200+ distribution centers across RDC, BDC, FDC, and the SRS Distribution acquisition — four DC types, four yard playbooks. The seasonal garden-center surge and pro-order staging constraint isn't visible to a single-DC-type WMS.",
 
   sections: [],
 

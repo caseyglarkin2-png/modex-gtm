@@ -161,8 +161,8 @@ export const georgiaPacific: AccountMicrositeData = {
   band: 'C',
   priorityScore: 75,
 
-  pageTitle: 'YardFlow for Georgia Pacific - Yard Network Standardization',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across Georgia Pacific\'s facility network.',
+  pageTitle: "Georgia-Pacific · The yard layer for 150 mills, plants, and distribution sites",
+  metaDescription: "Georgia-Pacific runs 150+ paper, packaging, and consumer products facilities under Koch ownership. The cube-heavy tissue and packaging freight profile compounds yard dwell into a margin lever the WMS doesn't see.",
 
   sections: [],
 

@@ -161,8 +161,8 @@ export const hEB: AccountMicrositeData = {
   band: 'C',
   priorityScore: 73,
 
-  pageTitle: 'YardFlow for H-E-B - Yard Network Standardization',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across H-E-B\'s facility network.',
+  pageTitle: "H-E-B · Texas fresh-grocery yard execution as the shrink-rate lever",
+  metaDescription: "H-E-B operates 425+ stores and a Texas DC network designed for sub-24-hour fresh produce turnaround. Yard dwell on the inbound side directly translates to shelf-life loss — the yard is the shrink-rate input nobody's measuring at the network.",
 
   sections: [],
 

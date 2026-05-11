@@ -169,8 +169,8 @@ export const campbellS: AccountMicrositeData = {
   band: 'B',
   priorityScore: 75,
 
-  pageTitle: 'YardFlow for Campbell\'s - Yard Network Standardization',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across Campbell\'s facility network.',
+  pageTitle: "Campbell's · The yard layer between Camden HQ and 22 plants",
+  metaDescription: "Campbell's runs 22 manufacturing sites across soup, sauce, snacks, and the Sovos acquisition. The yard between the carrier gate and the plant dock is where multi-temp, multi-brand, multi-acquisition execution still lives on paper.",
 
   sections: [
     { type: 'yns-thesis' },

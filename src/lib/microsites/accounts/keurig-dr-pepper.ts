@@ -169,8 +169,8 @@ export const keurigDrPepper: AccountMicrositeData = {
   band: 'B',
   priorityScore: 75,
 
-  pageTitle: 'YardFlow for Keurig Dr Pepper - Yard Network Standardization',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across Keurig Dr Pepper\'s facility network.',
+  pageTitle: "Keurig Dr Pepper · 300+ DSD depots and the yard inside each one",
+  metaDescription: "Keurig Dr Pepper's DSD operation runs 300+ distribution depots. Each depot manages inbound syrup/finished-goods trailers alongside outbound DSD route trucks — two completely different freight profiles competing for the same yard, every morning.",
 
   sections: [],
 

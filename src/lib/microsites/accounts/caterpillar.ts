@@ -168,8 +168,8 @@ export const caterpillar: AccountMicrositeData = {
   band: 'B',
   priorityScore: 75,
 
-  pageTitle: 'YardFlow for Caterpillar - Yard Network Standardization',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across Caterpillar\'s facility network.',
+  pageTitle: "Caterpillar · The gap between autonomous machines and manual yards",
+  metaDescription: "Caterpillar operates 60+ manufacturing and parts-distribution facilities. The autonomous machines in the field run on JIT principles. The yards between the factory and the dealer still operate on paper logs and radio dispatch.",
 
   sections: [],
 

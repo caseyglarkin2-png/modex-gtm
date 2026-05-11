@@ -161,8 +161,8 @@ export const jmSmucker: AccountMicrositeData = {
   band: 'B',
   priorityScore: 81,
 
-  pageTitle: 'YardFlow for JM Smucker - Yard Network Standardization',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across JM Smucker\'s facility network.',
+  pageTitle: "J.M. Smucker · Coffee and pet food — two seasonal rhythms in one yard",
+  metaDescription: "J.M. Smucker manages Folgers, Smucker's, Milk-Bone, and Meow Mix across 25+ facilities. Coffee runs on a different seasonal cadence than pet food. The yard is where the two cadences collide every day, with no protocol mediating the dock-door arbitration.",
 
   sections: [],
 

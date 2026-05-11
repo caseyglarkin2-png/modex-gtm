@@ -169,8 +169,8 @@ export const constellationBrands: AccountMicrositeData = {
   band: 'B',
   priorityScore: 75,
 
-  pageTitle: 'YardFlow for Constellation Brands - Yard Network Standardization',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across Constellation Brands\'s facility network.',
+  pageTitle: "Constellation Brands · Wine, beer, spirits — three temperature regimes, one yard",
+  metaDescription: "Constellation Brands moves Corona, Modelo, and the Robert Mondavi portfolio through a yard layer that handles three temperature regimes and three regulatory contexts simultaneously. Single-brand WMS doesn't model that constraint.",
 
   sections: [],
 

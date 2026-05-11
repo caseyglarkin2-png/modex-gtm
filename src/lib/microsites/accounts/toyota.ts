@@ -168,8 +168,8 @@ export const toyota: AccountMicrositeData = {
   band: 'B',
   priorityScore: 75,
 
-  pageTitle: 'YardFlow for Toyota - Yard Network Standardization',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across Toyota\'s facility network.',
+  pageTitle: "Toyota Motor North America · JIT assembly requires JIT yard execution — the protocol gap",
+  metaDescription: "Toyota Motor North America. 14 manufacturing facilities. The Toyota Production System defines JIT delivery standards for the line. The yard between the gate and the dock is the one layer the Production System has not standardized.",
 
   sections: [],
 

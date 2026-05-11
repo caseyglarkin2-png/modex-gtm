@@ -169,8 +169,8 @@ export const mondelezInternational: AccountMicrositeData = {
   band: 'B',
   priorityScore: 75,
 
-  pageTitle: 'YardFlow for Mondelez International - Yard Network Standardization',
-  metaDescription: 'How YardFlow eliminates the yard bottleneck across Mondelez International\'s facility network.',
+  pageTitle: "Mondelez North America · The yard layer below 130 plants and post-acquisition integration",
+  metaDescription: "Mondelez operates 130+ manufacturing plants globally, with North America anchored by the Clif Bar and Ricolino integrations. The yard layer has never been standardized at this scale. The question is whether it gets standardized before or after the next acquisition.",
 
   sections: [],
 
