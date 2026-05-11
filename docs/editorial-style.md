@@ -66,6 +66,35 @@ reads as Bloomberg-style without ever naming the company. Use the journalism reg
 | Audio brief chapter labels | Same rules as the memo body — short and observational | "What 237 facilities taught" | "What Primo taught" / "What BlueTriton taught" |
 | Module Inspector screenshots | Redacted with intact silhouettes | Bottle shapes, plant-town names, brand-color hints | Logos, ID numbers, full driver names |
 
+## The Primo Brands comparable: the hard-freight unlock
+
+Primo Brands is the *public* comparable cited across all prospect-facing surfaces. The named-customer case study works because Primo runs what is, by most operating measures, the **hardest CPG freight in North America** — and any other CPG category is the easier lift from there.
+
+**Why water is the hardest CPG freight:**
+
+- **Weight-out before cube-out.** A fully loaded trailer of bottled water maxes gross vehicle weight before it maxes cube. Every load is at the weight ceiling, which means trailer mix and dock-door arbitration have zero margin for routing error.
+- **Low-margin, no recovery line.** Bottled water is a low-margin commodity at the case level. Every minute of yard waste is a margin point you can't recover with price. Yard discipline is the margin lever, not a nice-to-have.
+- **Multi-temp at the premium SKU layer.** Premium spring and alkaline SKUs sit alongside ambient. Multi-temp dock arbitration at a beverage plant is the same shape as multi-temp at a foodservice plant — but at thinner margin per load.
+- **Refill returns logistics.** 5-gallon refillable formats add a reverse leg with its own yard implications: empty-trailer staging, return-flow sequencing, cross-dock handling.
+- **Multi-site bottling + regional distribution.** Plants feed regional DCs feed routes. The yard problem compounds across three node types, not one.
+
+**The framing line to use (and adapt):**
+
+> "If a network operating model can run on water — the hardest CPG freight in North America — the read-across to [the prospect's freight profile] is the easier lift, not the harder one."
+
+**How to apply it on a microsite comparable section:**
+
+- Lead with the freight-difficulty case for water specifically (weight, margin, multi-temp, refill returns).
+- Anchor on Primo Brands being "years ahead on yard automation and digitization — they had to be." That framing turns Primo's incumbent yard-tech stack from a confound into a credibility flex: they bought the category first because the category cost them first.
+- Identify the *shape* similarities the prospect shares (multi-site, multi-temp, 3PL-dependent, mature site-level yard automation in place) and the *freight* differences that make the prospect's category the easier read-across.
+- Never name the un-name-able 237-facility anchor in the same paragraph as Primo. Primo is the public flex; the anchor is the directly-shaped reference for peer calls.
+
+**What to avoid:**
+
+- *"Primo is the closest comparable we have"* — implies grasping for an analog. Be specific about the freight-difficulty case instead.
+- *"Water is just one category"* — concedes the wrong point. The point is that water is the *operationally hardest* category, not a niche one.
+- *"Primo runs a YMS"* — collapses the wedge. They run a network operating model **on top of** their site-level YMS. That is the wedge for prospects who already bought site-level yard tech (Kaleris/PINC, 4Site, etc.) twenty years ago.
+
 ## The asymmetry to exploit
 
 Every prospect in CPG ops knows there are only ~3 companies that fit "237-facility network in North America with a recent yard rebuild." Half will guess right. None will be told. All read the asset more carefully *because* of the puzzle. Don't break the puzzle by naming the answer.
