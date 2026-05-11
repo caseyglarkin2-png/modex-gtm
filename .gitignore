@@ -13,3 +13,5 @@ docs/showcase-proof/*.png
 my-contacts.csv
 .claude/
 .superpowers/
+docs/audits/screenshots/.progress.json
+!docs/audits/screenshots/
