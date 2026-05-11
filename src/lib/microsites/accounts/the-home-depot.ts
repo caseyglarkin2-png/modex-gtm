@@ -302,7 +302,7 @@ export const theHomeDepot: AccountMicrositeData = {
       variantSlug: 'john-deaton',
 
       framingNarrative: 'John, the question is whether a network this large can keep tolerating site-by-site yard variance.',
-      openingHook: 'This page is framed as a short private brief rather than a pitch.',
+      openingHook: 'Supply chain development at Home Depot means standardizing the last unstandardized layer — the yard. Four DC types run four different yard playbooks, and the SRS Distribution integration just added a fifth.',
       stakeStatement: 'Every minute of excess dwell time at The Home Depot\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -333,7 +333,7 @@ export const theHomeDepot: AccountMicrositeData = {
       variantSlug: 'john-drake',
 
       framingNarrative: 'John, the question is whether transportation throughput is still losing time in the yard before anyone sees it in the network metrics.',
-      openingHook: 'This page is framed as a short private brief rather than a pitch.',
+      openingHook: 'The transportation network you run moves 10,000 trailers per day. The yard is the gap between the carrier arriving and the trailer reaching a dock — and at this scale, that gap is a measurable number the carrier satisfaction data is already capturing.',
       stakeStatement: 'Every minute of excess dwell time at The Home Depot\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -364,7 +364,7 @@ export const theHomeDepot: AccountMicrositeData = {
       variantSlug: 'amit-kalra',
 
       framingNarrative: 'Amit, the question is whether four facility types are still running four different yard playbooks inside one network.',
-      openingHook: 'This page is framed as a short private brief rather than a pitch.',
+      openingHook: 'Every Home Depot DC type — RDC, BDC, FDC, and the SRS network — has its own dock-assignment logic, but the yard outside each of them runs on the same paper logs the operation has used for two decades. The seasonal garden-center surge stress-tests it twice a year and the WMS doesn\'t see it.',
       stakeStatement: 'Every minute of excess dwell time at The Home Depot\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -395,7 +395,7 @@ export const theHomeDepot: AccountMicrositeData = {
       variantSlug: 'richard-mcphail',
 
       framingNarrative: 'Richard, the question is whether the lowest-cost supply chain improvement left is still hiding in the yard layer.',
-      openingHook: 'This page is framed as a short private brief rather than a pitch.',
+      openingHook: '200+ distribution centers across four DC types serve 2,300+ stores plus the pro channel. The yard layer connecting carriers to docks is the one execution surface where each DC type\'s playbook diverges — and where standardization at the network tier has the largest leverage.',
       stakeStatement: 'Every minute of excess dwell time at The Home Depot\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
@@ -426,7 +426,7 @@ export const theHomeDepot: AccountMicrositeData = {
       variantSlug: 'erin-donnelly',
 
       framingNarrative: 'Erin, the question is whether the last unstandardized layer in the network is still the yard.',
-      openingHook: 'This page is framed as a short private brief rather than a pitch.',
+      openingHook: 'Supply chain development at Home Depot means standardizing the last unstandardized layer — the yard. Four DC types run four different yard playbooks, and the SRS Distribution integration just added a fifth.',
       stakeStatement: 'Every minute of excess dwell time at The Home Depot\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {

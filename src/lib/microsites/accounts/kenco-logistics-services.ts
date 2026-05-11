@@ -262,13 +262,13 @@ export const kencoLogisticsServices: AccountMicrositeData = {
       label: 'Kristi Montgomery - Vice President of Strategic Transformation',
       variantSlug: 'kristi-montgomery',
 
-      framingNarrative: 'Kristi, Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
+      framingNarrative: "Kristi's public speaking at MODEX and ProMat positions her as the most visible transformation advocate in the 3PL innovation space. Her agenda items — warehouse automation, carrier integration, last-mile visibility — are all upstream of the yard execution layer YardFlow operates on. The partnership conversation is: 'what's the yard execution standard for the 100 shippers you manage, and who sets it?'",
       openingHook: 'Named session speaker indicates event involvement. - the yard is where execution meets reality for Kenco Logistics Services.',
       stakeStatement: 'Every minute of excess dwell time at Kenco Logistics Services\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
         headline: 'Kristi, the yard is where Kenco Logistics Services\'s execution breaks down',
-        subheadline: 'Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
+        subheadline: "Kenco manages 100+ warehouses for 70+ enterprise clients. Each client has different carrier requirements, different dock rules, different yard protocols. The operational complexity isn't the warehouse — it's the yard outside the warehouse, multiplied by 70 different shipper contracts. A single yard operating standard applied at the managed-services level would deliver 100+ deployments from one partnership decision.",
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
 
@@ -293,13 +293,13 @@ export const kencoLogisticsServices: AccountMicrositeData = {
       label: 'Shanon Weber - Group Vice President',
       variantSlug: 'shanon-weber',
 
-      framingNarrative: 'Shanon, Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
+      framingNarrative: 'Shanon leads operations across Kenco\'s managed-services portfolio — 100+ warehouses, dozens of client contracts, each with different carrier protocols and dock rules. The operational complexity at Kenco is not warehouse automation; it is the yard outside each warehouse, where client-specific carrier requirements collide with Kenco\'s standardized service delivery. A single yard operating standard across managed facilities is the margin lever that sits below the WMS.',
       openingHook: 'Named session speaker indicates event involvement. - the yard is where execution meets reality for Kenco Logistics Services.',
       stakeStatement: 'Every minute of excess dwell time at Kenco Logistics Services\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
         headline: 'Shanon, the yard is where Kenco Logistics Services\'s execution breaks down',
-        subheadline: 'Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
+        subheadline: "Kenco's operations portfolio spans 100+ managed warehouses. The variance across those facilities isn't warehouse automation — it's the yard outside each one, where client carrier protocols diverge and dwell time accumulates below the WMS visibility threshold. Standardizing the yard layer at the managed-services tier is the operations lever Kenco controls directly.",
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
 
@@ -324,13 +324,13 @@ export const kencoLogisticsServices: AccountMicrositeData = {
       label: 'Jason Minghini - Engineering leader',
       variantSlug: 'jason-minghini',
 
-      framingNarrative: 'Jason, Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
+      framingNarrative: 'Jason leads engineering and solutions design across Kenco\'s facility portfolio — the team that specifies warehouse automation, conveyor integration, and dock configuration for new client builds. Every engineered facility has a yard outside it. The yard is typically designed last, specified loosely, and operated manually long after the warehouse automation is live. Integrating a yard execution standard into the solution design phase is the gap Jason\'s team is positioned to close.',
       openingHook: 'Named session speaker indicates event involvement. - the yard is where execution meets reality for Kenco Logistics Services.',
       stakeStatement: 'Every minute of excess dwell time at Kenco Logistics Services\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
         headline: 'Jason, the yard is where Kenco Logistics Services\'s execution breaks down',
-        subheadline: 'Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
+        subheadline: "Kenco's engineering team specifies the warehouse automation, conveyor integration, and dock layout for each managed facility build. The yard outside the dock is the one system that typically gets specified last and operated manually after go-live. Integrating a yard execution protocol into the facility engineering scope closes the gap between the warehouse automation and the carrier arrival.",
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
 
@@ -355,13 +355,13 @@ export const kencoLogisticsServices: AccountMicrositeData = {
       label: 'Emmanuel (Pete) Bradley - Operations executive',
       variantSlug: 'emmanuel-pete-bradley',
 
-      framingNarrative: 'Emmanuel, Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
+      framingNarrative: 'Emmanuel leads large-scale distribution operations at Kenco — the day-to-day execution layer across managed warehouses and DCs. At that operational scale, 70+ client contracts means 70+ different carrier protocols, 70+ different dock rules, and 70+ different yard operating norms. The referral path is direct: a yard operating standard that Kenco applies at the managed-services level is a decision Emmanuel\'s team makes once and deploys across the entire client base.',
       openingHook: 'Named session speaker indicates event involvement. - the yard is where execution meets reality for Kenco Logistics Services.',
       stakeStatement: 'Every minute of excess dwell time at Kenco Logistics Services\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
         headline: 'Emmanuel, the yard is where Kenco Logistics Services\'s execution breaks down',
-        subheadline: 'Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
+        subheadline: "Large-scale distribution at Kenco means managing 70+ client carrier contracts through a single operations team. Each client's carrier has different check-in expectations, dock preferences, and yard dwell tolerances. A yard operating standard applied across managed facilities removes the per-client protocol negotiation from daily operations.",
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
 
@@ -386,13 +386,13 @@ export const kencoLogisticsServices: AccountMicrositeData = {
       label: 'Andre Pereira - General Manager',
       variantSlug: 'andre-pereira',
 
-      framingNarrative: 'Andre, Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
+      framingNarrative: 'Andre manages a Kenco facility at the general manager level — the operational layer closest to daily yard execution. The client relationship for each managed facility runs through the GM, which means the yard protocol decision is made at the site level before it reaches corporate. Andre\'s view on what a standardized yard operating layer would change in daily operations is the conversation that converts a partnership discussion into a deployment plan.',
       openingHook: 'Named session speaker indicates event involvement. - the yard is where execution meets reality for Kenco Logistics Services.',
       stakeStatement: 'Every minute of excess dwell time at Kenco Logistics Services\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
         headline: 'Andre, the yard is where Kenco Logistics Services\'s execution breaks down',
-        subheadline: 'Less direct logo hunt, more partnership / ecosystem / referral opportunity.',
+        subheadline: "General manager at a Kenco managed facility means owning the client relationship and the daily yard operation simultaneously. The yard is where carrier delays become client service issues — and where a digital execution layer replaces the radio dispatch and paper log that currently mediate between the two.",
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
 
@@ -441,7 +441,10 @@ export const kencoLogisticsServices: AccountMicrositeData = {
     recentNews: [
       'Named session speaker indicates event involvement.',
     ],
-    supplyChainInitiatives: ['Less direct logo hunt, more partnership / ecosystem / referral opportunity.'],
+    supplyChainInitiatives: [
+      'Network-wide yard operating standard for 100+ managed warehouses',
+      'Multi-client carrier protocol mediation across 70+ shipper contracts',
+    ],
     urgencyDriver: 'Named session speaker indicates event involvement.',
   },
 

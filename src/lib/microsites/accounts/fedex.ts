@@ -262,13 +262,13 @@ export const fedex: AccountMicrositeData = {
       label: 'Scott Temple - President',
       variantSlug: 'scott-temple',
 
-      framingNarrative: 'Scott, Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.',
+      framingNarrative: 'Scott leads FedEx Supply Chain — the contract logistics and managed transportation arm that operates on behalf of enterprise shippers. The yard standardization conversation at FedEx sits at the intersection of the Ground-Express network integration and the managed-services portfolio Scott owns. FedEx operates four service networks on overlapping physical infrastructure, and the yard at every hub is where those service profiles compete for dock access.',
       openingHook: 'The yard is where execution meets reality for FedEx — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at FedEx\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
         headline: 'Scott, the yard is where FedEx\'s execution breaks down',
-        subheadline: 'Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.',
+        subheadline: 'FedEx operates four service networks — Ground, Express, Freight, Custom Critical — on overlapping infrastructure. The yard at every hub is where the network meets reality, and where the four service profiles arbitrate dock access in real time.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
 
@@ -293,13 +293,13 @@ export const fedex: AccountMicrositeData = {
       label: 'Ray Hatton - Vice President',
       variantSlug: 'ray-hatton',
 
-      framingNarrative: 'Ray, Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.',
+      framingNarrative: 'Ray is a named VP-level operations executive at FedEx Supply Chain — the layer that manages the physical execution across the Ground-Express integrated network. VP Operations at FedEx Supply Chain means owning the throughput metrics at the facility tier. The yard is the first execution surface where network integration decisions become visible in daily operations numbers.',
       openingHook: 'The yard is where execution meets reality for FedEx — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at FedEx\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
         headline: 'Ray, the yard is where FedEx\'s execution breaks down',
-        subheadline: 'Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.',
+        subheadline: 'FedEx operates four service networks — Ground, Express, Freight, Custom Critical — on overlapping infrastructure. The yard at every hub is where the network meets reality, and where the four service profiles arbitrate dock access in real time.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
 
@@ -324,13 +324,13 @@ export const fedex: AccountMicrositeData = {
       label: 'Jose A. Touzon - Vice President',
       variantSlug: 'jose-a-touzon',
 
-      framingNarrative: 'Jose, Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.',
+      framingNarrative: "Jose leads customer operations for FedEx's technology and industrial client base in North America — the accounts where supply chain SLAs are contractually defined and yard dwell directly impacts scorecard performance. The pre-dock yard is the execution surface FedEx has not yet digitized end-to-end. For Jose's client portfolio, that gap is a service agreement risk.",
       openingHook: 'The yard is where execution meets reality for FedEx — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at FedEx\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
         headline: 'Jose, the yard is where FedEx\'s execution breaks down',
-        subheadline: 'Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.',
+        subheadline: 'FedEx has digitized every stop after the dock door — pickup, sort, scan, deliver. The pre-dock yard at the hub is the one execution surface where the scan starts later than the trailer arrived.',
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
 
@@ -355,13 +355,13 @@ export const fedex: AccountMicrositeData = {
       label: 'Douglas Spamer - Managing Director - Linehaul / Transportation',
       variantSlug: 'douglas-spamer',
 
-      framingNarrative: 'Douglas, Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.',
+      framingNarrative: "Douglas manages linehaul and transportation for FedEx Ground — the network that moves freight between hubs and service centers on scheduled lane departures. Every linehaul run starts and ends in a yard. The yard queue depth at the origin hub determines whether the trailer makes its departure window, and the yard state at the destination service center determines whether the freight hits the next outbound cycle.",
       openingHook: 'The yard is where execution meets reality for FedEx — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at FedEx\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
         headline: 'Douglas, the yard is where FedEx\'s execution breaks down',
-        subheadline: 'Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.',
+        subheadline: "FedEx Freight's LTL network moves through 350+ service centers, each with a yard between the carrier handoff and the freight dock. Service center yard cadence is the gap between the published transit time and the realized one.",
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
 
@@ -386,13 +386,13 @@ export const fedex: AccountMicrositeData = {
       label: 'Jake Pyke - Senior Manager - Linehaul Operations',
       variantSlug: 'jake-pyke',
 
-      framingNarrative: 'Jake, Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.',
+      framingNarrative: "Jake manages linehaul operations and terminal/network execution at FedEx Ground — the hub-level layer where trailer arrivals, sort cycles, and lane departures are sequenced to the minute. The yard between the ramp gate and the hub sort belt is the queue that determines whether the next sort cycle starts on time. At terminal scale, that queue is measured in minutes and managed manually.",
       openingHook: 'The yard is where execution meets reality for FedEx — and where multi-site standardization pays back fastest.',
       stakeStatement: 'Every minute of excess dwell time at FedEx\'s facilities erodes the margin your team is working to protect.',
 
       heroOverride: {
         headline: 'Jake, the yard is where FedEx\'s execution breaks down',
-        subheadline: 'Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.',
+        subheadline: "FedEx Ground's hub-sort operation runs to the minute — packages move from inbound dock to outbound conveyor on cycle. The yard between the ramp gate and the hub door is the queue depth that determines whether the next cycle starts on time.",
       },
       sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
 
@@ -441,7 +441,7 @@ export const fedex: AccountMicrositeData = {
     recentNews: [
       'Multi-site execution standardization opportunity — useful strategic logo with complex sell.',
     ],
-    supplyChainInitiatives: ['Useful strategic logo, but more complex sell. Treat as opportunistic unless a warm path appears.'],
+    supplyChainInitiatives: ['Ground-Express network integration — consolidating parcel sort and freight cross-dock operations across thousands of facilities under a unified operating model by FY2027'],
     urgencyDriver: 'Opportunistic — strategic fit is strong, but warm path required before converting.',
   },
 

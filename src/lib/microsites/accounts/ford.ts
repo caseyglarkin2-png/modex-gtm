@@ -210,7 +210,7 @@ export const ford: AccountMicrositeData = {
       variantSlug: 'elizabeth-door',
 
       framingNarrative: 'Elizabeth, A Chief Supply Chain Officer at Ford is measured on: 1. **Line uptime** — Any line-down event is career-threatening. JIT failures cascade immediately. 2. **Cost per unit** — Ford is publicly behind Toyota/Hyundai on cost. Every inefficiency matters. 3. **Working capital** — 400,000 vehicles sitting in yards = billions in tied-up capital. Reducing dwell by even 2 days frees hundreds of millions. 4.',
-      openingHook: 'Your team is dealing with 🔴 critical: inbound parts yard management. That is a yard problem before it is anything else.',
+      openingHook: 'BlueOval City in Stanton, Tennessee is the largest greenfield industrial site in North America — 3,600 acres, $5.6B capital investment, F-150 Lightning and next-generation EV production. Every inbound parts trailer to that facility in 2025 and 2026 is arriving into a yard that is still being built. The yard execution protocol for BlueOval City is not inherited from the Dearborn legacy — it is being designed right now.',
       stakeStatement: '- **Problem:** Ford\'s finished vehicle yards hold 5,000-15,000+ vehicles per plant - **Tracking challenge:** Which vehicles are ready for shipment? Which need holds (quality, accessory, recall)? - **Carrier coordination:** Rail and truck carriers need precise bay assignments and load sequencing - **',
 
       heroOverride: {
