@@ -57,11 +57,11 @@ export const dhlSupplyChain: AccountMicrositeData = {
       type: 'observation',
       headline: 'What we observed about the DHL Supply Chain operating model',
       composition: [
-        { label: 'Network scale', value: '1,000+ facilities under management globally; 52,000 NA associates under CEO Mark Kunar (appointed June 2025); NA HQ Westerville OH (former Exel HQ)' },
+        { label: 'Network scale', value: '1,000+ facilities under management globally; 52,000 NA associates under CEO Mark Kunar (appointed June 2025); NA HQ Westerville OH' },
         { label: 'Customer-facing surface', value: 'Every facility is a customer-facing site by definition — yard performance is a customer-experience surface in a way it never is for a CPG end-shipper. Customers include Diageo NA (Plainfield IL), Daimler, and hundreds of Fortune-500 shippers across consumer, retail, auto-mobility, life sciences, e-commerce' },
         { label: 'Multi-tenant surface area', value: 'Multi-customer DCs (IDS Fulfillment acquisition: 1.3M sq ft across Atlanta, Indianapolis, Salt Lake City, Plainfield IN); the DHL ReTurn Network (11 multi-customer returns facilities, launched Oct 2025); 10 new dedicated warehouse sites totaling 7M+ sq ft for data-center logistics (announced March 2026) — multi-shipper trailer fleets behind shared gates' },
         { label: 'Acquired networks in active SOP integration', value: 'Inmar Supply Chain Solutions (14 returns centers, ~800 associates, Jan 2025 — made DHL the largest reverse-logistics provider in NA); CRYOPDP specialty pharma courier (Mar 2025); IDS Fulfillment (May 2025). 14+ yards being re-SOP\'d into the DHL operating standard right now' },
-        { label: 'Existing yard-tech layer', value: 'Exel-era yard-management deployments still exist in parts of the NA network as system of record (vehicle/asset tracking, gate logs). The multi-tenant execution and orchestration layer above the records layer is unsolved — and the IDS / ReTurn / data-center logistics expansions are by-definition multi-tenant yards the legacy single-tenant tools were not designed for' },
+        { label: 'Existing yard-tech layer', value: 'Site-level yard-management deployments exist in parts of the NA network as system of record (vehicle/asset tracking, gate logs). The multi-tenant execution and orchestration layer above the records layer is unsolved — and the IDS / ReTurn / data-center logistics expansions are by-definition multi-tenant yards the legacy single-tenant tools were not designed for' },
         { label: 'Productization pattern', value: 'DHL takes third-party technology (Locus Robotics — 5,000+ bots, 500M+ picks; Boston Dynamics — 1,000-unit Stretch MOU signed May 2025; Orange EV — first customer since 2015, ~100 NA yard trucks; Nikola hydrogen Class 8 at Diageo Plainfield) into the DHL operating standard and resells it as a managed-service component to shipper customers. Solutions Design Americas is the engineering gatekeeper for what enters the standard' },
       ],
       hypothesis:
@@ -245,7 +245,7 @@ export const dhlSupplyChain: AccountMicrositeData = {
       'Innovation Centers (Westerville OH, Memphis TN, Liverpool UK)',
     ],
     geographicSpread:
-      'Global; NA HQ Westerville OH (former Exel HQ); Americas Innovation Center based in Westerville. NA M&A 2025: Inmar (14 returns centers); IDS (Atlanta, Indianapolis, Salt Lake City, Plainfield IN); CRYOPDP courier network',
+      'Global; NA HQ Westerville OH; Americas Innovation Center based in Westerville. NA M&A 2025: Inmar (14 returns centers); IDS (Atlanta, Indianapolis, Salt Lake City, Plainfield IN); CRYOPDP courier network',
     dailyTrailerMoves:
       'High-volume — modeled at network level across 1,000+ global facilities; multi-tenant yards behind shared gates at IDS Fulfillment, the ReTurn Network, and the incoming data-center logistics network. Different shipper trailer fleets compete for the same docks under shipper-specific appointment-window rules',
   },
