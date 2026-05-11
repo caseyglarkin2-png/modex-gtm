@@ -1,4 +1,25 @@
 /**
+ * Internal competitive intelligence (NOT for prospect-facing surfaces):
+ * Westrock Coffee is a confirmed PINC/Kaleris incumbent per the Inbound Logistics
+ * "Yard Management: Grounds for Improvement" feature (January 2026, pp. 179–181),
+ * which quotes J.T. Hinson (Director of Freight Logistics) on the Kaleris YMS
+ * deployment at the legacy S&D Coffee & Tea / Westrock Concord NC operation. Specifics:
+ *   - Kaleris YMS deployed for visibility, move requests, and driver workflow across
+ *     a multi-county facility spread in the Concord NC area (five county-spread locations)
+ *   - Yard grew from 120–130 trailers to roughly 400 trailers under the Kaleris deployment
+ *   - Hinson quote: "If it's used properly, with supervisors and managers holding teams
+ *     accountable, you'll actually have software, not shelfware."
+ *   - Phone-based move coordination replaced by shared move-request queue
+ *   - Green-coffee staging area relocated to within ~100 yards of the roaster
+ *
+ * This intel powers the "modernization" cold-email framing (see
+ * docs/research/j-t-hinson-westrock-coffee-dossier.md and the cold-email kit at
+ * docs/outreach/2026-q2-pinc-displacement-15-cold-emails.md). It must
+ * not appear in any prospect-facing surface — including proofBlocks
+ * which feed memo-compat's fallback comparable section.
+ */
+
+/**
  * Westrock Coffee — ABM Microsite Data
  * Quality Tier: A (confirmed Kaleris customer — Inbound Logistics report on S&D/Westrock yard ops)
  * Pitch shape: modernization
@@ -71,35 +92,27 @@ export const westrockCoffee: AccountMicrositeData = {
     },
   ],
 
-  proofBlocks: [
-    {
-      type: 'case-result',
-      headline: 'Inbound Logistics: Westrock Coffee replaced phone-based move coordination; increased output using same resources',
-      quote: {
-        text: 'Westrock Coffee uses Kaleris YMS shared queues and says efficiencies allow more output using the same resources. Yard grew from 120-130 trailers to roughly 400.',
-        company: 'Inbound Logistics, January 2026',
-      },
-    },
-  ],
+  proofBlocks: [],
 
   network: {
-    facilityCount: 'Offices in 10 countries; inherited S&D multi-site yard operation across 5 county-spread locations',
-    facilityTypes: ['Coffee Processing Plants', 'Distribution Centers'],
-    geographicSpread: 'North America / Global (HQ: Little Rock, AR)',
-    dailyTrailerMoves: '400+ trailers across the yard network',
+    facilityCount: 'Concord NC legacy operation (5 county-spread locations including remote yard + roasting plant) + Conway AR campus (530,000 sq ft DC + 570,000 sq ft roast-to-RTD facility + 525,000 sq ft single-serve facility) + Little Rock/North Little Rock AR + offices in 10 countries',
+    facilityTypes: ['Coffee Roasting Plants', 'Ready-to-Drink Manufacturing', 'Distribution Centers'],
+    geographicSpread: 'North America / Global (HQ: Little Rock, AR; major ops: Concord NC, Conway AR)',
+    dailyTrailerMoves: '400+ trailers across the Concord NC yard network; Conway DC runs 72 dock doors',
   },
 
   freight: {
     primaryModes: ['Truckload', 'Intermodal', 'LTL'],
-    avgLoadsPerDay: 'see dossier',
+    avgLoadsPerDay: 'High-volume — sourcing ~150M lbs green coffee/year; Conway campus in full operational ramp as of 2026',
   },
 
   signals: {
     recentNews: [
-      'Inbound Logistics January 2026 reports Westrock Coffee uses Kaleris YMS shared move-request queue and real-time visibility.',
-      'Digital driver journey wedge — replace phone coordination with full gate-to-dock standardization.',
+      'Conway AR campus fully operational as of 2026 — CEO Scott Ford described transition from "construction mode into regular daily operations."',
+      'Adjusted EBITDA guidance of $90M–$100M for 2026 (29–44% YoY growth) — the operating-leverage year.',
+      '$70M Conway DC (530,000 sq ft, 72 dock doors) opened Dec 2023; single-serve facility ("Clark," 525,000 sq ft) opened July 2025.',
     ],
-    urgencyDriver: 'Modernization wedge — digital driver journey plus network standardization on top of existing Kaleris move queues.',
+    urgencyDriver: 'A yard that grew from 120 to 400 trailers at Concord — and a Conway campus adding three major facilities in two years — is a network that has outpaced its yard operating model. Phone-based coordination has been replaced at Concord; the next step is a consistent gate-to-dock driver journey across all campus nodes as volume scales toward the 2026 EBITDA ramp.',
   },
 
   theme: {

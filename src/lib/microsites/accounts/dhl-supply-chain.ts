@@ -74,22 +74,25 @@ export const dhlSupplyChain: AccountMicrositeData = {
   proofBlocks: [],
 
   network: {
-    facilityCount: 'Very large global logistics network (see dossier)',
-    facilityTypes: ['Contract Logistics Warehouses', 'Distribution Centers', 'Fulfillment Centers'],
-    geographicSpread: 'Global (North America focus for YardFlow engagement)',
-    dailyTrailerMoves: 'see dossier',
+    facilityCount: '1,000+ facilities globally; 52,000 NA associates (NA HQ Westerville OH)',
+    facilityTypes: ['Contract Logistics Warehouses', 'Distribution Centers', 'Fulfillment Centers', 'Returns Processing Centers'],
+    geographicSpread: 'Global; NA HQ Westerville OH; 2026 expansion: 10 new dedicated warehouse sites totaling 7M+ sq ft for data-center logistics',
+    dailyTrailerMoves: 'High-volume — modeled at network level across 1,000+ global facilities',
   },
 
   freight: {
     primaryModes: ['Truckload', 'LTL', 'Intermodal'],
-    avgLoadsPerDay: 'see dossier',
+    avgLoadsPerDay: 'High-volume — 500+ customer-facing engagements per year across consumer, retail, auto-mobility, life sciences, and technology verticals',
   },
 
   signals: {
     recentNews: [
-      'DHL/Exel named in Kaleris Daimler case study customer list and HID/RFID.com. Verify active Exel-era PINC sites.',
+      '2025 M&A buildout: Inmar Supply Chain Solutions (14 returns centers, Jan 2025), IDS Fulfillment (1.3M sq ft e-commerce DC space, May 2025), CRYOPDP specialty pharma courier (Mar 2025).',
+      'DHL ReTurn Network (Oct 2025): 11 purpose-built multi-customer returns facilities — first publicly named multi-tenant network product.',
+      '10 new dedicated warehouse sites totaling 7M+ sq ft for data-center logistics announced March 2026.',
+      'Boston Dynamics MOU (May 2025): 1,000+ additional Stretch robots for global deployment.',
     ],
-    urgencyDriver: '3PL customer visibility wedge — partner on yard standardization as a customer-facing differentiator.',
+    urgencyDriver: 'DHL\'s customers measure consistency across every site. A 3PL managing 1,000+ facilities that each runs a different yard protocol is leaving customer-facing network consistency on the table. The yard standardization conversation for DHL is about differentiating the customer experience, not just reducing internal operating cost.',
   },
 
   theme: {

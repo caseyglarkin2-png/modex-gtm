@@ -74,24 +74,25 @@ export const pactivEvergreen: AccountMicrositeData = {
   proofBlocks: [],
 
   network: {
-    facilityCount: '50+ manufacturing facilities, 42 distribution centers',
-    facilityTypes: ['Manufacturing Plants', 'Distribution Centers'],
-    geographicSpread: 'North America (HQ: Lake Forest, IL)',
-    dailyTrailerMoves: 'see dossier',
-    peakMultiplier: 'see dossier',
+    facilityCount: '~95+ combined manufacturing, warehousing, and distribution sites (Pactiv Evergreen: 50+ manufacturing facilities + 42 DCs; combined with Novolex post-April 2025 merger)',
+    facilityTypes: ['Manufacturing Plants', 'Distribution Centers', 'Mixing Centers'],
+    geographicSpread: 'North America (combined HQ: Charlotte, NC; major operating site: Lake Forest, IL; plants include Canandaigua NY, Aberdeen NC, Temple TX, Abilene TX, Bakersfield CA)',
+    dailyTrailerMoves: 'High-volume — hub-and-spoke distribution model with regional mixing centers feeding downstream warehouses across ~95 sites',
   },
 
   freight: {
     primaryModes: ['Truckload', 'LTL', 'Intermodal'],
-    avgLoadsPerDay: 'see dossier',
+    avgLoadsPerDay: 'High-volume — foodservice packaging (trays, containers, cups, cutlery) moving from 50+ manufacturing plants through 42 DCs to restaurant and retail customers',
   },
 
   signals: {
     recentNews: [
-      'Mooresville, NC job post references PINC in yard management / trailer placement / dock setup context.',
-      '50+ manufacturing facilities and 42 DCs confirmed via company profile.',
+      'Novolex acquired Pactiv Evergreen in a $6.7B combination that closed April 1, 2025 — combined entity now has ~95+ sites, 20,000+ employees, 250+ brands, 39,000+ SKUs.',
+      'Pactiv Evergreen PINC deployment documented at 12 facilities (coast-to-coast, per Oct 2019 PINC case study); Novolex legacy yard stack is unconfirmed — two yard operating models running in parallel.',
+      'Plant closures: Canton NC (2023), Olmsted Falls OH (2023), Pine Bluff AR sold to Suzano (Oct 2024), Kalamazoo MI (April–June 2025).',
+      'Whittington is Chief Transformation Officer at Novolex, running the IMO across the combined entity.',
     ],
-    urgencyDriver: 'Manufacturing yard orchestration wedge — verify PINC footprint; then standardize across network.',
+    urgencyDriver: 'The Novolex combination created two yard operating models running in parallel across ~95 sites. The IMO\'s job over the next 24 months is to standardize operating SOPs across the combined footprint — yard execution is one of the highest-impact places to establish a single standard quickly, because it doesn\'t require re-engineering inside the plant.',
   },
 
   theme: {
