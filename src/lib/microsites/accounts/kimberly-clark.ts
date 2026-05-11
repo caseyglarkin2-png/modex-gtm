@@ -74,22 +74,24 @@ export const kimberlyClark: AccountMicrositeData = {
   proofBlocks: [],
 
   network: {
-    facilityCount: 'Global manufacturing and distribution network (see dossier)',
+    facilityCount: '~15–20 North America manufacturing facilities (Personal Care + Consumer Tissue + K-C Professional); ~50 globally [~15–20 NA figure reflects post-Powering Care closures; public estimate]',
     facilityTypes: ['Manufacturing Plants', 'Distribution Centers'],
-    geographicSpread: 'North America (HQ: Irving, TX)',
-    dailyTrailerMoves: 'see dossier',
+    geographicSpread: 'North America (HQ: Irving, TX; key plants in Beech Island SC, Mobile AL, Loudon TN, Owensboro KY, Maumelle AR)',
+    dailyTrailerMoves: 'High-volume — K-C\'s cube-heavy products (diapers, tissue, feminine care) move in far more trailers per ton than tonnage-heavy peers; yard turn-time savings compound harder here',
   },
 
   freight: {
     primaryModes: ['Truckload', 'Intermodal', 'LTL'],
-    avgLoadsPerDay: 'see dossier',
+    avgLoadsPerDay: 'High-volume — cube-heavy outbound (diapers cube out at ~25–30% of weight limit); heavy inbound pulp and recycled fiber by rail and truck to tissue mills',
   },
 
   signals: {
     recentNews: [
-      'Named in 2009 PINC Yard Hound press release (Transfreight/Kraft). Legacy signal — verify active footprint.',
+      'Powering Care restructuring: Marinette WI mill closures (Cold Spring and Lakeview) announced; volume consolidating into surviving facilities.',
+      'International Personal Care spin-off announced 2024, executing 2025–2026 — NA-focused entity will have more visible yard KPIs, not fewer.',
+      'HQ relocated Neenah WI → Irving TX in 2023–2024.',
     ],
-    urgencyDriver: 'Network standardization wedge — verify PINC/Kaleris footprint before outreach.',
+    urgencyDriver: 'The Powering Care consolidation is loading more trailers through surviving K-C yards right now. Facilities absorbing Marinette volume are running the same dock layout with higher throughput demand. The cube-heavy product mix (diapers, tissue) means yard turn-time savings at K-C compound faster than at food-CPG peers at the same revenue scale.',
   },
 
   theme: {

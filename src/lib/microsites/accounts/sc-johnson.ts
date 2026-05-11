@@ -74,22 +74,25 @@ export const scJohnson: AccountMicrositeData = {
   proofBlocks: [],
 
   network: {
-    facilityCount: 'Distributed manufacturing network (see dossier)',
+    facilityCount: 'Waxdale (Sturtevant WI, 2.2M sq ft, world\'s largest single aerosol-producing facility, 60M cases/year) + Bay City MI (Ziploc, ~500 acres, 6 production buildings) + Brantford ON ($50M Glade expansion, Mar 2024) + Toluca MX + global plants',
     facilityTypes: ['Manufacturing Plants', 'Distribution Centers'],
-    geographicSpread: 'North America (HQ: Racine, WI)',
-    dailyTrailerMoves: 'see dossier',
+    geographicSpread: 'North America (HQ: Racine, WI; flagship plant: Sturtevant WI; Bay City MI; Brantford ON; Toluca MX) + global',
+    dailyTrailerMoves: 'High-volume — Waxdale produces 60M cases/year; outbound includes hazmat-classified aerosols (DOT-regulated routing), cube-heavy home storage (Ziploc), and ambient liquid cleaners',
   },
 
   freight: {
     primaryModes: ['Truckload', 'Intermodal', 'LTL'],
-    avgLoadsPerDay: 'see dossier',
+    avgLoadsPerDay: 'High-volume — Waxdale\'s 430M aerosol cans/year and Bay City\'s billions of Ziploc bags create structurally high trailer counts for the revenue base; hazmat aerosol classification adds yard staging complexity',
+    specialRequirements: ['DOT hazmat for aerosols (Glade, Raid, Off!, Pledge)', 'Cube-heavy home storage (Ziploc cubes out before weight limit)', 'Mixed hazmat + ambient + liquid outbound on shared yard surface'],
   },
 
   signals: {
     recentNews: [
-      'Seed account — no source-backed PINC/Kaleris evidence. Do not assert competitor usage in outreach.',
+      'Brantford ON $50M Glade investment announced March 2024 — expanding manufacturing + warehousing + distribution at the Canadian site.',
+      'Bay City MI Ziploc hub recently added 56,000 sq ft; runs on 100% wind energy.',
+      'Jamie Westfahl joined as Chief Procurement Officer January 2025 (ex-Molson Coors VP Procurement, $3.5B packaging responsibility) — new CPO-CSCO pairing within their first three years in seat.',
     ],
-    urgencyDriver: 'Manufacturing yard orchestration wedge — manual review required before PINC/Kaleris assertion.',
+    urgencyDriver: 'SC Johnson\'s outbound trailer population is not uniform — hazmat aerosols, cube-heavy plastics, ambient liquid cleaners, and B2B Professional-channel loads share the same yard surface at Waxdale. That mixed-fleet yard problem is structurally harder to solve with per-site point tools than with a network operating standard that distinguishes trailer types across gate, dock, and staging.',
   },
 
   theme: {

@@ -71,35 +71,28 @@ export const daimlerTruckNorthAmerica: AccountMicrositeData = {
     },
   ],
 
-  proofBlocks: [
-    {
-      type: 'case-result',
-      headline: 'Kaleris case study: Daimler achieved 50% reduction in yard drivers across the network',
-      quote: {
-        text: 'PINC/Kaleris passive RFID YMS implemented across hundreds of sites; Daimler Trucks achieved 50% reduction in yard drivers and lower operating costs.',
-        company: 'Kaleris + HID/RFID.com case studies, 2025',
-      },
-    },
-  ],
+  proofBlocks: [],
 
   network: {
-    facilityCount: 'Multi-site manufacturing and parts network (see dossier)',
+    facilityCount: '9 U.S.+Mexico manufacturing plants (Portland OR, Cleveland NC, Mt. Holly NC, Gastonia NC, High Point NC, Gaffney SC, Saltillo MX, Redford MI + one additional) + 10 PDCs + Whitestown IN RDC (605,000 sq ft, opened Aug 2023)',
     facilityTypes: ['Manufacturing Plants', 'Parts Distribution Centers'],
-    geographicSpread: 'North America (HQ: Portland, OR)',
-    dailyTrailerMoves: 'see dossier',
+    geographicSpread: 'North America (HQ: Portland, OR; manufacturing concentrated in NC/SC, plus Saltillo MX and Redford MI)',
+    dailyTrailerMoves: '500+ trailers in yard at peak (Saltillo); network-wide modeled at high volume across 9 plants',
   },
 
   freight: {
     primaryModes: ['Flatbed', 'Specialized/Heavy Haul', 'Parts LTL'],
-    avgLoadsPerDay: 'see dossier',
+    avgLoadsPerDay: 'High-volume — 9 manufacturing plants with JIT inbound components; finished-vehicle outbound via dealer convoy and rail',
   },
 
   signals: {
     recentNews: [
-      'Named in Kaleris Daimler case study — RFID YMS across manufacturing network.',
-      'Confirmed Kaleris customer; RTLS-is-not-orchestration wedge applies.',
+      '850,000th truck delivered at Cleveland NC in July 2025 — 70 years of accumulated yard process at the flagship plant.',
+      'Q1 2026 incoming orders +85% YoY — production ramp coming on a 14-year-old yard-management footprint.',
+      'eCascadia / eM2 battery-electric series production at Portland introduces new yard surfaces (battery handling, charging-bay marshalling) the 2012-era RFID config wasn\'t designed for.',
+      'Whitestown IN RDC (605,000 sq ft) opened August 2023 — the aftermarket parts network was reorganized for throughput three years ago; the same logic applies to plant yards.',
     ],
-    urgencyDriver: 'Modernization wedge — RFID/RTLS visibility versus true network workflow orchestration.',
+    urgencyDriver: 'A 14-year-old RFID deployment, specified for 2012\'s yard visibility problem, now runs across a network absorbing an 85% order rebound, EV assembly at Portland, and a Thomas Built Bus capacity expansion at High Point. Site-level visibility is not the same as the cross-plant orchestration the ramp requires.',
   },
 
   theme: {

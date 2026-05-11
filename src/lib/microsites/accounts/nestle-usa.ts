@@ -74,22 +74,25 @@ export const nestleUsa: AccountMicrositeData = {
   proofBlocks: [],
 
   network: {
-    facilityCount: 'Large distributed manufacturing and distribution network (see dossier)',
+    facilityCount: '~20 U.S. factories across 28 states (frozen meals, frozen pizza, coffee, creamers, candy, beverages); Glendale AZ greenfield factory + DC opened mid-2024 as the 20th factory',
     facilityTypes: ['Manufacturing Plants', 'Distribution Centers'],
-    geographicSpread: 'North America (HQ: Arlington, VA)',
-    dailyTrailerMoves: 'see dossier',
+    geographicSpread: 'North America (corp HQ: Arlington, VA; supply-chain HQ: Solon, OH; key plants in Jonesboro AR, Gaffney SC, Anderson IN, Glendale AZ, Suffolk VA)',
+    dailyTrailerMoves: 'High-volume — modeled at the network level across 20 U.S. factories',
   },
 
   freight: {
     primaryModes: ['Truckload', 'Intermodal', 'LTL'],
-    avgLoadsPerDay: 'see dossier',
+    avgLoadsPerDay: 'High-volume — multi-temperature complexity: frozen (Stouffer\'s, DiGiorno, Hot Pockets), ambient (Coffee mate, Toll House), refrigerated (fresh creamers)',
   },
 
   signals: {
     recentNews: [
-      'Named in Kaleris/PINC Daimler case study customer list — verify active footprint before outreach.',
+      'Gaffney SC $150M expansion announced Nov 2024 for Stouffer\'s, Hot Pockets, Lean Cuisine, Tombstone, CPK, Jack\'s, DiGiorno.',
+      'Glendale AZ new $675M beverage factory + DC opened mid-2024 — net-new yard with SOP being defined now.',
+      'Solon OH restructuring (216 layoffs Jan 2024) shifted production to Gaffney and Jonesboro — same dock surface, more trailers at surviving facilities.',
+      'Nestlé Group SAP S/4HANA Cloud upgrade scaling to ~90% of 335 global factories; the yard between gate and dock is the data gap the digital core doesn\'t address.',
     ],
-    urgencyDriver: 'Network standardization wedge — confirm PINC/Kaleris footprint in discovery.',
+    urgencyDriver: 'Volume that left Solon in 2024 landed at Gaffney and Jonesboro — more trailers through the same dock surface at those sites. The Glendale AZ greenfield opened mid-2024 with SOPs still being defined. A network operating standard across 20 U.S. factories is the natural next step to the SAP S/4HANA digital core Nestlé is scaling globally.',
   },
 
   theme: {

@@ -74,22 +74,25 @@ export const bostonBeerCompany: AccountMicrositeData = {
   proofBlocks: [],
 
   network: {
-    facilityCount: 'Multi-site brewery and distribution network (see dossier)',
-    facilityTypes: ['Breweries', 'Distribution Centers'],
-    geographicSpread: 'North America (HQ: Boston, MA)',
-    dailyTrailerMoves: 'see dossier',
+    facilityCount: '4 company-owned breweries (Breinigsville/Fogelsville PA, Cincinnati OH, Jamaica Plain Boston MA, Milton DE Dogfish Head) + contract brewing via City Brewing (LaCrosse WI, Memphis TN, Latrobe PA, Irwindale CA)',
+    facilityTypes: ['Breweries', 'Contract Brewing Sites'],
+    geographicSpread: 'North America (HQ: Boston, MA; largest brewery: Breinigsville/Fogelsville PA; Cincinnati OH; Milton DE; City Brewing contract sites)',
+    dailyTrailerMoves: 'High-volume — 95% internal production in Q1 2026 (up from 85%), increasing PA and Cincinnati yard load; three-tier alcoholic beverage distribution mandates wholesaler-to-retailer flow',
   },
 
   freight: {
     primaryModes: ['Truckload', 'LTL'],
-    avgLoadsPerDay: 'see dossier',
+    avgLoadsPerDay: 'High-volume — Sam Adams, Twisted Tea, Truly, Angry Orchard, Dogfish Head, Hard MTN Dew, Sun Cruiser brand mix; distributor inventory at 4.5 weeks on hand at end of Q1 2026',
+    specialRequirements: ['Three-tier distribution (alcoholic beverage law mandate)', 'Glass + aluminum + can SKU mix', 'Wholesaler appointment cadence differs from direct-DC CPG patterns'],
   },
 
   signals: {
     recentNews: [
-      'Boston Brewing named in HID/RFID.com PINC/Kaleris passive RFID customer list (2026). Verify site history.',
+      'Phil Savastano promoted to CSCO October 20, 2025 — new CSCO window is the highest-leverage timing for a vendor pitch.',
+      'Q1 2026: 95% internal production (up from 85%), gross margin +100 bps from procurement + brewery efficiencies.',
+      'City Brewing (LaCrosse WI, Memphis TN, Latrobe PA, Irwindale CA) contract brewing relationships add multi-site yard coordination.',
     ],
-    urgencyDriver: 'Manufacturing yard orchestration wedge — verify PINC footprint before asserting in outreach.',
+    urgencyDriver: 'Boston Beer shifted from 85% to 95% internal production in Q1 2026 — more volume moving through PA and Cincinnati yards that were sized for a different brand and SKU mix. A CSCO who came up running the PA brewery for 18 months knows exactly what the yard looks like from the floor; the conversation starts at the operating-model level, not the category-introduction level.',
   },
 
   theme: {

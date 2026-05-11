@@ -74,23 +74,26 @@ export const universalLogisticsHoldings: AccountMicrositeData = {
   proofBlocks: [],
 
   network: {
-    facilityCount: 'Distributed logistics network (see dossier)',
-    facilityTypes: ['Truckload Terminals', 'Contract Logistics Sites', 'Intermodal Ramps'],
-    geographicSpread: 'North America (HQ: Warren, MI)',
-    dailyTrailerMoves: 'see dossier',
+    facilityCount: 'Contract Logistics (~67% of 2025 revenue) + Intermodal + Trucking; Parsec rail terminal services (acquired Sept 2024, $193.6M, 20+ rail yards US/Canada, ~2,100 employees); LINC value-added operations at automotive OEM plants',
+    facilityTypes: ['Truckload Terminals', 'Contract Logistics Sites', 'Rail Terminals (Parsec)', 'Intermodal Ramps'],
+    geographicSpread: 'North America (HQ: Warren, MI; heaviest density in Michigan/Midwest auto corridor; Parsec rail yards across US/Canada; Southern CA ports for intermodal/drayage)',
+    dailyTrailerMoves: 'High-volume — modeled at network level across automotive plant yards (LINC), 20+ rail terminals (Parsec), and truckload/intermodal operations',
     fleet: 'Private fleet signal confirmed (yes)',
   },
 
   freight: {
     primaryModes: ['Truckload', 'Intermodal', 'Contract Logistics'],
-    avgLoadsPerDay: 'see dossier',
+    avgLoadsPerDay: 'High-volume — supports every major automaker on their pickup truck and SUV plants; GM Supplier of the Year 2022, 2023, 2024; ~$1B+ annualized contract logistics revenue post-Parsec',
   },
 
   signals: {
     recentNews: [
-      'Universal Truckload Services named in Kaleris/PINC Daimler case study customer list. Manual review required before asserting PINC usage.',
+      'Parsec rail terminal operator acquired Sept 2024 ($193.6M): 20+ rail yards in US/Canada, ~2,100 employees — adds a distinct yard-management surface to the ULH portfolio.',
+      '2025 revenue $1.558B (−15.6% YoY); net loss $(99.9M) — Intermodal segment in recovery; contract logistics remains stable at ~67% of revenue.',
+      'LINC operates ~1M sq ft parts sequencing plant for Stellantis east-side Detroit; GM EV value-added assembly at Orion Township.',
+      'Tim Phillips CEO since Jan 2020; Matthew Moroun controls ~73.2% voting equity (Moroun family-controlled company).',
     ],
-    urgencyDriver: 'Private fleet trailer control wedge — validate then approach with customer-facing network consistency angle.',
+    urgencyDriver: 'ULH operates three distinct yard-management surfaces in parallel: automotive OEM plant yards (LINC), rail terminal yards (Parsec), and truckload/intermodal yards. Each service line has its own trailer-control and gate discipline. A network that wins business on customer-facing consistency needs a yard operating standard that travels across all three surfaces without requiring per-subsidiary re-engineering.',
   },
 
   theme: {

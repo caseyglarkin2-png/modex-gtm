@@ -71,35 +71,29 @@ export const cjLogisticsAmerica: AccountMicrositeData = {
     },
   ],
 
-  proofBlocks: [
-    {
-      type: 'case-result',
-      headline: 'SupplyChainMarket: DSC Logistics selected PINC advanced YMS for Mira Loma to improve speed, control, productivity, and visibility',
-      quote: {
-        text: 'DSC Logistics selected PINC Solutions\' advanced yard management to increase speed, control, productivity, visibility, and lower customer supply-chain costs.',
-        company: 'SupplyChainMarket, 2012',
-      },
-    },
-  ],
+  proofBlocks: [],
 
   network: {
-    facilityCount: 'Distributed 3PL network (see dossier)',
-    facilityTypes: ['Contract Logistics Warehouses', 'Distribution Centers'],
-    geographicSpread: 'North America (HQ: Itasca, IL); Mira Loma, CA as known legacy site',
-    dailyTrailerMoves: 'see dossier',
+    facilityCount: '~70+ North America locations; ~30M sq ft+ warehousing (at DSC integration in 2020; materially larger today with post-2020 expansions)',
+    facilityTypes: ['Contract Logistics Warehouses', 'Distribution Centers', 'Cold Storage Facilities'],
+    geographicSpread: 'North America (HQ: Des Plaines, IL; Mira Loma CA intermodal legacy site; Gainesville GA cold storage 2024; New Century KS cold storage Q3 2025; Elwood IL 1.1M sq ft H1 2026)',
+    dailyTrailerMoves: 'High-volume — 500+ active customer engagements; new Elwood IL 1.1M sq ft site (jointly funded with Korea Ocean Business Corp, $457M) going live H1 2026',
   },
 
   freight: {
     primaryModes: ['Truckload', 'Intermodal', 'LTL'],
-    avgLoadsPerDay: 'see dossier',
+    avgLoadsPerDay: 'High-volume — food, CPG, and consumer goods dominant; WMS-agnostic architecture (runs Blue Yonder, Korber, SAP EWM) means yard-tech must integrate without WMS exclusivity',
+    specialRequirements: ['Cold storage logistics (Gainesville GA, New Century KS)', 'WMS-agnostic integration required'],
   },
 
   signals: {
     recentNews: [
-      'DSC Logistics Mira Loma PINC deployment documented in SupplyChainMarket (2012). Age risk — validate current footprint.',
-      'CJ Logistics acquisition of DSC creates modernization story for legacy yard tooling.',
+      'New Century KS cold storage (291,000 sq ft) opened Q3 2025 — connected by conveyor bridge to Upfield manufacturing; serves 85% of US within two days.',
+      'Elwood IL 1.1M sq ft new logistics center (H1 2026): jointly funded with Korea Ocean Business Corporation ($457M investment program).',
+      'Laura Adams promoted to SVP Technology, Engineering, Systems & Solutions + Continuous Improvement in January 2025.',
+      'CJ Logistics America explicitly WMS-agnostic — runs Blue Yonder, Korber, and SAP EWM across the network; yard-tech that doesn\'t demand WMS exclusivity is the architectural fit.',
     ],
-    urgencyDriver: '3PL customer visibility wedge — reframe legacy DSC yard visibility into customer-facing network consistency.',
+    urgencyDriver: 'CJ Logistics is scaling rapidly — three major facility openings in 2024–2026, plus the Elwood mega-center. Each new site needs a yard operating standard at go-live. The TES function under Adams is the technology gatekeeper: a yard-execution layer that lands with her team gets distributed across customer engagements by design, not on a site-by-site basis.',
   },
 
   theme: {
