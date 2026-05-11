@@ -454,9 +454,9 @@ export const jmSmucker: AccountMicrositeData = {
     {
       type: 'quote',
       quote: {
-        text: 'When a beverage manufacturer integrated 45 plants onto one yard platform, they absorbed 15% more volume without adding dock staff.',
+        text: 'When a beverage manufacturer integrated >200 contracted facilities onto one yard platform, they absorbed 15% more volume without adding dock staff.',
         role: 'Operations Director',
-        company: 'Operations Director, Multi-Site Food & Beverage Manufacturer',
+        company: 'Multi-Site Food & Beverage Manufacturer',
       },
     },
   ],
