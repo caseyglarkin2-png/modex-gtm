@@ -36,7 +36,8 @@ export type MemoSectionType =
   | 'observation'
   | 'comparable'
   | 'methodology'
-  | 'about';
+  | 'about'
+  | 'artifact';
 
 /**
  * PersonaLane is ONLY used as a fallback category when we don't have
@@ -454,12 +455,29 @@ export interface AboutSection extends BaseMicrositeSection {
   signOff?: string;                                  // optional universal sign-off paragraph
 }
 
+/**
+ * Redacted artifact — Module Inspector screenshot, redacted shipment
+ * manifest, attribution-free quote image. The "receipts > claims" surface
+ * the editorial-style guide mandates. Spec requires ≥1 per memo.
+ */
+export interface ArtifactSection extends BaseMicrositeSection {
+  type: 'artifact';
+  headline: string;
+  artifact: {
+    imageSrc: string;
+    imageAlt: string;
+    caption: string;        // Mono caption under the image
+    source: string;         // Source hairline below caption
+  };
+}
+
 export type MemoMicrositeSection =
   | YnsThesisSection
   | ObservationSection
   | ComparableSection
   | MethodologySection
-  | AboutSection;
+  | AboutSection
+  | ArtifactSection;
 
 export type MicrositeSection =
   | MemoMicrositeSection
