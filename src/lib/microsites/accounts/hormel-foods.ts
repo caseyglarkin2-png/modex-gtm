@@ -415,9 +415,9 @@ export const hormelFoods: AccountMicrositeData = {
     {
       type: 'quote',
       quote: {
-        text: 'Primo Water operates 45 plants on the same production-and-distribution model. YardFlow cut their gate-to-dock time from 48 to 24 minutes.',
+        text: 'Primo Brands operates more than 200 contracted facilities on the same production-and-distribution model. YardFlow cut their gate-to-dock time from 48 to 24 minutes.',
         role: 'Operations Director',
-        company: 'Operations Director, National Beverage/Food Manufacturer',
+        company: 'National Beverage Manufacturer',
       },
     },
   ],
