@@ -272,7 +272,7 @@ const MEMO_CHROME_CSS = `
 .memo-cover-rise-3 { animation-delay: 0.7s; animation-duration: 1.1s; }
 .memo-cover-rise-4 { animation-delay: 1.15s; }
 .memo-cover-fade  { opacity: 0; animation: memo-fade 1.4s ease 1.6s forwards; }
-.memo-cover-nudge { animation: memo-nudge 2.5s ease-in-out infinite; }
+.memo-cover-nudge { animation: memo-nudge 2.5s ease-in-out 3; }
 
 @media (prefers-reduced-motion: reduce) {
   .memo-cover-rise, .memo-cover-fade {
