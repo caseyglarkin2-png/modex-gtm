@@ -20,6 +20,9 @@ import type { AccountMicrositeData } from '../schema';
 export const performanceFoodGroup: AccountMicrositeData = {
   slug: 'performance-food-group',
   accountName: 'Performance Food Group',
+  coverHeadline: "Yard execution across PFG's 150 distribution centers",
+  titleEmphasis: "PFG's",
+  coverFootprint: '150 DCs across the US',
   vertical: 'grocery',
   tier: 'Tier 2',
   band: 'B',
@@ -273,7 +276,7 @@ export const performanceFoodGroup: AccountMicrositeData = {
   },
 
   theme: {
-    accentColor: '#2563EB',
+    accentColor: '#003E7E',
     backgroundVariant: 'dark',
   },
 };

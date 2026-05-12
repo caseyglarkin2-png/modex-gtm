@@ -598,7 +598,7 @@ export const dannon: AccountMicrositeData = {
   },
 
   theme: {
-    accentColor: '#059669',
+    accentColor: '#0046AD',
     backgroundVariant: 'dark',
   },
 

@@ -41,6 +41,7 @@ import type { AccountMicrositeData } from '../schema';
 export const dhlSupplyChain: AccountMicrositeData = {
   slug: 'dhl-supply-chain',
   accountName: 'DHL Supply Chain',
+  coverFootprint: '1,000+ sites globally',
   parentBrand: 'DHL Group',
   vertical: 'logistics-3pl',
   tier: 'Tier 1',

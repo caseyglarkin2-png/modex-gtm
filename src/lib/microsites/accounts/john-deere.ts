@@ -22,6 +22,7 @@ import type { AccountMicrositeData } from '../schema';
 export const johnDeere: AccountMicrositeData = {
   slug: 'john-deere',
   accountName: 'John Deere',
+  coverFootprint: '~60 US sites · Quad Cities',
   parentBrand: 'John Deere',
   vertical: 'heavy-equipment',
   tier: 'Tier 3',

@@ -285,9 +285,11 @@ function MemoObservation({
           ))}
         </dl>
       ) : null}
-      <p className="memo-lead">
-        {renderBodyWithFootnotes(section.hypothesis, resolved)}
-      </p>
+      {section.hypothesis.split(/\n\n+/).map((para, i) => (
+        <p key={i} className={i === 0 ? 'memo-lead' : undefined}>
+          {renderBodyWithFootnotes(para, resolved)}
+        </p>
+      ))}
       {section.caveat ? (
         <MemoAside mark="Caveat">
           <p className="m-0">{section.caveat}</p>

@@ -506,7 +506,7 @@ export const hormelFoods: AccountMicrositeData = {
   },
 
   theme: {
-    accentColor: '#DC2626',
+    accentColor: '#A6192E',
     backgroundVariant: 'dark',
   },
 

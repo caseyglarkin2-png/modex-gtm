@@ -21,6 +21,7 @@ import type { AccountMicrositeData } from '../schema';
 export const caterpillar: AccountMicrositeData = {
   slug: 'caterpillar',
   accountName: 'Caterpillar',
+  coverFootprint: '60+ NA plants · 100 global',
   vertical: 'heavy-equipment',
   tier: 'Tier 2',
   band: 'B',

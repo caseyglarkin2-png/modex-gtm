@@ -14,6 +14,9 @@ import type { AccountMicrositeData } from '../schema';
 export const mondelezInternational: AccountMicrositeData = {
   slug: 'mondelez-international',
   accountName: 'Mondelez International',
+  coverHeadline: 'Yard execution as a network constraint for Mondelēz',
+  titleEmphasis: 'Mondelēz',
+  coverFootprint: '~30 NA + 130 global plants',
   vertical: 'cpg',
   tier: 'Tier 2',
   band: 'B',

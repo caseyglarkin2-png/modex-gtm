@@ -83,6 +83,7 @@ import type { AccountMicrositeData } from '../schema';
 export const westrockCoffee: AccountMicrositeData = {
   slug: 'westrock-coffee',
   accountName: 'Westrock Coffee',
+  coverFootprint: 'Concord + Conway + Little Rock',
   parentBrand: 'Westrock Coffee Company',
   vertical: 'beverage',
   tier: 'Tier 1',

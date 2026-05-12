@@ -266,7 +266,7 @@ export const toyota: AccountMicrositeData = {
   },
 
   theme: {
-    accentColor: '#DC2626',
+    accentColor: '#EB0A1E',
     backgroundVariant: 'dark',
   },
 };

@@ -72,6 +72,7 @@ import type { AccountMicrositeData } from '../schema';
 export const unfi: AccountMicrositeData = {
   slug: 'unfi',
   accountName: 'UNFI',
+  coverFootprint: '52 DCs · US + Canada',
   parentBrand: 'United Natural Foods, Inc.',
   vertical: 'grocery',
   tier: 'Tier 1',

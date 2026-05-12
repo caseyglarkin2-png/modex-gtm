@@ -476,7 +476,7 @@ export const honda: AccountMicrositeData = {
   },
 
   theme: {
-    accentColor: '#DC2626',
+    accentColor: '#CC0000',
     backgroundVariant: 'dark',
   },
 };

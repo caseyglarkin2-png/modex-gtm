@@ -24,6 +24,7 @@ import type { AccountMicrositeData } from '../schema';
 export const fedex: AccountMicrositeData = {
   slug: 'fedex',
   accountName: 'FedEx',
+  coverFootprint: '~360 hubs · ~26K dock doors',
   parentBrand: 'FedEx',
   vertical: 'logistics-3pl',
   tier: 'Tier 3',
@@ -458,7 +459,7 @@ export const fedex: AccountMicrositeData = {
   },
 
   theme: {
-    accentColor: '#0891B2',
+    accentColor: '#4D148C',
     backgroundVariant: 'dark',
   },
 

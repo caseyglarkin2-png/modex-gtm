@@ -52,6 +52,9 @@ import type { AccountMicrositeData } from '../schema';
 export const costPlusWorldMarket: AccountMicrositeData = {
   slug: 'cost-plus-world-market',
   accountName: 'Cost Plus World Market',
+  coverHeadline: 'Yard execution at Cost Plus World Market — direct-import to DC to store',
+  titleEmphasis: 'Cost Plus World Market',
+  coverFootprint: '2 DCs · ~250 stores',
   parentBrand: 'World Market',
   vertical: 'retail',
   tier: 'Tier 1',

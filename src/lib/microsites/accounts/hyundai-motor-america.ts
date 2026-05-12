@@ -23,6 +23,9 @@ import type { AccountMicrositeData } from '../schema';
 export const hyundaiMotorAmerica: AccountMicrositeData = {
   slug: 'hyundai-motor-america',
   accountName: 'Hyundai Motor America',
+  coverHeadline: "Yard execution across HMA's 5-facility US footprint",
+  titleEmphasis: "HMA's",
+  coverFootprint: '5-facility US cluster',
   parentBrand: 'Hyundai',
   vertical: 'automotive',
   tier: 'Tier 3',

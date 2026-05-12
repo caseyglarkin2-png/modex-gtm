@@ -577,6 +577,12 @@ export interface AccountMicrositeData {
    *  Use when the default produces a wrapping H1 for long account names. */
   coverHeadline?: string;
 
+  /** Short override for the cover Subject row's contextDetail (the dd is
+   *  "{accountName} · {coverFootprint ?? `${facilityCount} footprint`}").
+   *  Use when network.facilityCount is a long descriptive string and the
+   *  Subject row wraps. Keep ≤ 30 characters. */
+  coverFootprint?: string;
+
   // Showcase & layout
   showcase?: boolean;               // flagged for DWTB marketplace demo
   showcaseOrder?: number;           // display order in showcase gallery (1 = first)

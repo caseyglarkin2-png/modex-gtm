@@ -16,6 +16,9 @@ import type { AccountMicrositeData } from '../schema';
 export const constellationBrands: AccountMicrositeData = {
   slug: 'constellation-brands',
   accountName: 'Constellation Brands',
+  coverHeadline: 'Yard execution as a margin constraint for Constellation Brands',
+  titleEmphasis: 'Constellation Brands',
+  coverFootprint: '3 MX breweries + US distrib',
   vertical: 'beverage',
   tier: 'Tier 2',
   band: 'B',
@@ -245,7 +248,7 @@ export const constellationBrands: AccountMicrositeData = {
   },
 
   theme: {
-    accentColor: '#7C3AED',
+    accentColor: '#7A1F45',
     backgroundVariant: 'dark',
   },
 };
