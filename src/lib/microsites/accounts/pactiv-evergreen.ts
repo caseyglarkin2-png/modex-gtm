@@ -58,10 +58,14 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
+import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 export const pactivEvergreen: AccountMicrositeData = {
   slug: 'pactiv-evergreen',
   accountName: 'Pactiv Evergreen',
+  coverHeadline: 'The yard layer above the Combined Network',
+  titleEmphasis: 'above the Combined Network',
+  coverFootprint: '~95 sites · two yard stacks',
   parentBrand: 'Novolex (post-April 2025 combination)',
   vertical: 'industrial',
   tier: 'Tier 1',
@@ -86,7 +90,8 @@ export const pactivEvergreen: AccountMicrositeData = {
         { label: 'Hub-and-spoke mixing-center model', value: 'Regional mixing centers (Temple TX cited publicly) blend formulations from upstream manufacturing and distribute to downstream warehouses. The same trailer often serves multiple downstream nodes — yard misroutes compound non-linearly when the SKU count grows from Pactiv-only to Pactiv + Novolex combined' },
       ],
       hypothesis:
-        'The interesting thing about the Pactiv Evergreen / Novolex yard math is what site-level success has not done. The 12-site coast-to-coast yard automation deployment from 2019 worked — site-level GPS trailer location, spotter loop check-in, the 15–20 minute trailer search time eliminated. Those are real wins; the case study is public; and at the standalone-Pactiv network as it existed in 2019, that part of the conversation was closed. What is unsolved is the layer that did not exist when the deployment was specified: a combined-network view across ~95 yards, ingesting from the site-level tools at the Pactiv-legacy sites, ingesting from whatever Novolex-legacy sites run, and presenting a single operating view to the integration team. Three pressures compound that gap in the April 2025–April 2027 integration window. First, synergy delivery to Apollo and CPP Investments is the explicit operating mandate — and running two parallel yard stacks indefinitely is the opposite of synergy. Second, the foodservice JIT customer base — McDonald\'s and Starbucks at the top of the revenue book — operates on appointment-and-chargeback discipline that is the choke-point for service-level reliability, and a yard-induced miss is a customer-relationship event, not a soft cost. Third, the hub-and-spoke mixing-center model (Temple TX publicly named) is the highest-leverage yard surface in the combined network — multi-destination outbound trailers, multi-SKU blending, and orchestration math that scales non-linearly with SKU count. Site-level tools at a mixing center can identify where a trailer is; they cannot orchestrate which trailer should leave next across a unified combined-network plan. The cleanest pitch shape is the additive one: ingest from the existing Pactiv-side site tools (which have a 30-year company insider as the operating sponsor at the CTO seat), ingest from the Novolex-side stack (whatever it is), and present a single combined-network view to the integration team. That is the only path that does not waste the existing investment on the Pactiv side while still delivering the combined-network view Apollo and CPP are paying for.',
+        'The interesting thing about the Pactiv Evergreen / Novolex yard math is what site-level success has not done. The 12-site coast-to-coast yard automation deployment from 2019 worked — site-level GPS trailer location, spotter loop check-in, the 15–20 minute trailer search time eliminated. Those are real wins; the case study is public; and at the standalone-Pactiv network as it existed in 2019, that part of the conversation was closed. What is unsolved is the layer that did not exist when the deployment was specified: a combined-network view across ~95 yards, ingesting from the site-level tools at the Pactiv-legacy sites, ingesting from whatever Novolex-legacy sites run, and presenting a single operating view to the integration team.\n\nThree pressures compound that gap in the April 2025–April 2027 integration window. First, synergy delivery to Apollo and CPP Investments is the explicit operating mandate — and running two parallel yard stacks indefinitely is the opposite of synergy. Second, the foodservice JIT customer base — McDonald\'s and Starbucks at the top of the revenue book — operates on appointment-and-chargeback discipline that is the choke-point for service-level reliability, and a yard-induced miss is a customer-relationship event, not a soft cost. Third, the hub-and-spoke mixing-center model (Temple TX publicly named) is the highest-leverage yard surface in the combined network — multi-destination outbound trailers, multi-SKU blending, and orchestration math that scales non-linearly with SKU count. Site-level tools at a mixing center can identify where a trailer is; they cannot orchestrate which trailer should leave next across a unified combined-network plan.\n\nThe cleanest pitch shape is the additive one: ingest from the existing Pactiv-side site tools (which have a 30-year company insider as the operating sponsor at the CTO seat), ingest from the Novolex-side stack (whatever it is), and present a single combined-network view to the integration team. That is the only path that does not waste the existing investment on the Pactiv side while still delivering the combined-network view Apollo and CPP are paying for.',
+      pullQuote: 'What is unsolved is the layer that did not exist when the deployment was specified.',
       caveat:
         'This is built from Pactiv Evergreen / Novolex public disclosures, the published yard-automation case record at the 12 Pactiv sites, the post-merger announcements, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: which Novolex-legacy sites run what yard stack, where the Pactiv Footprint Optimization volume re-concentration is biting hardest at surviving sites, and how the Temple TX mixing-center workflow is currently handling the post-combination SKU expansion.',
     },
@@ -275,6 +280,23 @@ export const pactivEvergreen: AccountMicrositeData = {
     ],
     urgencyDriver:
       'Apollo Global Management and CPP Investments have a fiduciary obligation to deliver combined-network synergies to the $6.7B transaction underwriting. Running two parallel yard stacks across the combined ~95-yard network is the opposite of synergy capture, and the integration team has roughly 11 more months in the April 2025–April 2027 window to land a combined-network operating layer at integration speed rather than after. The Footprint Optimization volume re-concentration is happening now at surviving sites; the McDonald\'s and Starbucks JIT service-level surface is downstream of every gate-to-dock decision; the Temple TX mixing center and equivalent regional nodes are the highest-leverage yard surfaces in the combined network for an operating-layer pilot that lands inside the synergy scorecard.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Combination close', body: 'Novolex + Pactiv Evergreen · $6.7B · April 1, 2025 · ~95 sites · 250 brands · 39,000 SKUs.' },
+    { mark: 'Synergy window', body: 'Apollo + CPP underwriting · April 2025–April 2027 · month 13 of 24 as of May 2026.' },
+    { mark: 'Site-level case', body: '12 Pactiv yards · 2019 case study · 15–20 min spotter search eliminated · Aberdeen NC still hiring against it in 2026.' },
+    { mark: 'Whittington in his own words', body: 'Built the PMO and IMO before he owned the CTO seat. Knows both sides of the integration line.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for Chuck Whittington. The PMO/IMO discipline you carried into the Business Transformation seat — and the structured-execution thinking from the Army War College credential — already runs the Novolex + Pactiv combination. The five minutes that follow are about the one operating layer the integration plan still routes through two parallel yard stacks.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
