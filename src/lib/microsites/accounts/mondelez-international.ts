@@ -10,12 +10,13 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
+import { AUDIO_BRIEF_CHAPTERS, AUDIO_BRIEF_SRC } from '../audio-brief';
 
 export const mondelezInternational: AccountMicrositeData = {
   slug: 'mondelez-international',
   accountName: 'Mondelez International',
-  coverHeadline: 'Yard execution as a network constraint for Mondelēz',
-  titleEmphasis: 'Mondelēz',
+  coverHeadline: 'The yard layer underneath the Master Plan 2030',
+  titleEmphasis: 'Master Plan 2030',
   coverFootprint: '~30 NA + 130 global plants',
   vertical: 'cpg',
   tier: 'Tier 2',
@@ -40,7 +41,8 @@ export const mondelezInternational: AccountMicrositeData = {
         { label: 'Leadership context', value: 'Claudio Parrotta — 35-year company lifer, NA turnaround leader 2018-2024, author of the North America Supply Chain Master Plan 2030, elevated to global EVP & Chief Supply Chain Officer in 2024' },
       ],
       hypothesis:
-        'The interesting thing about the Mondelez yard math is what brand-and-plant integration has not finished. Hu Kitchen came in with a small-batch premium-chocolate operating habit. Chipita came in with a European bakery cadence that didn\'t look like Nabisco\'s. Clif came in with an energy-bar carrier roster and a different appointment culture from biscuit ops. Ricolino came in with a Mexican confectionery operating reality that didn\'t map cleanly onto NA dock SOPs. Each acquisition got rationalized at the brand layer — pricing, packaging, retailer relationships — and largely at the plant layer, where production has been redistributed across the existing footprint. But the yard layer at the sites that absorbed those flows is where the integration is least finished. Different appointment cadences, different carrier preferences inherited from the acquired company\'s shipper, different multi-temp dock priority rules where ambient cookie production now shares a yard with the chocolate or specialty SKUs that came in with the deal. Stack that on top of two structural features of the Mondelez NA network — the seasonal chocolate surge (Halloween through Easter producing 2-4x baseline at chocolate plants) and the DSD-versus-warehouse split at high-velocity biscuit sites — and the yard becomes the surface where post-acquisition operating practice converges or doesn\'t. Claudio is the part of the picture that says this is the kind of seam someone at the top is actively looking for. He spent six years rebuilding the NA supply chain into "industry-leading" before getting the global seat, he wrote the Master Plan 2030 himself, and the yard layer is one of the few remaining domains in CPG ops where the operating-system thinking he applied to safety, quality, service, and productivity hasn\'t been extended yet. Network-level convergence of the inherited yard practices is the unsolved seam, and it sits underneath every acquisition Mondelez has done since 2018.',
+        'The interesting thing about the Mondelez yard math is what brand-and-plant integration has not finished. Hu Kitchen came in with a small-batch premium-chocolate operating habit. Chipita came in with a European bakery cadence that didn\'t look like Nabisco\'s. Clif came in with an energy-bar carrier roster and a different appointment culture from biscuit ops. Ricolino came in with a Mexican confectionery operating reality that didn\'t map cleanly onto NA dock SOPs. Each acquisition got rationalized at the brand layer — pricing, packaging, retailer relationships — and largely at the plant layer, where production has been redistributed across the existing footprint. But the yard layer at the sites that absorbed those flows is where the integration is least finished. Different appointment cadences, different carrier preferences inherited from the acquired company\'s shipper, different multi-temp dock priority rules where ambient cookie production now shares a yard with the chocolate or specialty SKUs that came in with the deal.\n\nStack that on top of two structural features of the Mondelez NA network — the seasonal chocolate surge (Halloween through Easter producing 2-4x baseline at chocolate plants) and the DSD-versus-warehouse split at high-velocity biscuit sites — and the yard becomes the surface where post-acquisition operating practice converges or doesn\'t. Claudio is the part of the picture that says this is the kind of seam someone at the top is actively looking for. He spent six years rebuilding the NA supply chain into "industry-leading" before getting the global seat, he wrote the Master Plan 2030 himself, and the yard layer is one of the few remaining domains in CPG ops where the operating-system thinking he applied to safety, quality, service, and productivity hasn\'t been extended yet. Network-level convergence of the inherited yard practices is the unsolved seam, and it sits underneath every acquisition Mondelez has done since 2018.',
+      pullQuote: 'The yard is the surface where post-acquisition operating practice converges or doesn\'t.',
       caveat:
         'This is built from Mondelez public disclosures, the Clif Bar / Ricolino / Chipita / Hu Kitchen acquisition records, the NA Master Plan 2030 framing in Claudio\'s public bio, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: whether acquired-brand yard SOPs have already been collapsed into a single NA standard, where multi-temp dock arbitration is most contested today, and how much of the inherited carrier-and-appointment posture from each deal is still in place.',
     },
@@ -248,6 +250,23 @@ export const mondelezInternational: AccountMicrositeData = {
     ],
     urgencyDriver:
       'The operating-system thinking that produced the NA turnaround and the Master Plan 2030 hasn\'t yet been extended to the yard layer across the post-acquisition network. Each of the last five deals brought its own yard-ops history, and the convergence work above the sites is the kind of seam Claudio is shaped to recognize.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Master Plan 2030', body: 'Claudio\'s NA framework · safety, quality, service, productivity · authored as SVP NA before the global seat.' },
+    { mark: 'Acquisition sequence', body: 'Tate\'s 2018 · Hu 2021 · Chipita Jan 2022 · Clif $2.9B Jun 2022 · Ricolino $1.3B May 2022.' },
+    { mark: 'Network footprint', body: '130+ plants · 320 warehouses · ~160 countries · ~30 plants in North America.' },
+    { mark: 'Seasonal surge', body: 'Halloween-to-Easter chocolate cycle · 2-4x baseline at chocolate plants.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same shape, harder freight.' },
+  ],
+
+  audioBrief: {
+    src: AUDIO_BRIEF_SRC,
+    intro:
+      'This brief is for Claudio Parrotta. The operating-system thinking you applied to the NA turnaround — and the Master Plan 2030 you authored underneath it — is the thinking the next five minutes builds on. What follows is the layer above the sites where each of the last five acquisitions still shows its inherited operating practice.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
