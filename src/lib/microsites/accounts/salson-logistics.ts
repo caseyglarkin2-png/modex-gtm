@@ -61,10 +61,13 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
+import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 export const salsonLogistics: AccountMicrositeData = {
   slug: 'salson-logistics',
   accountName: 'SalSon Logistics',
+  coverHeadline: 'The next product-catalog entry in My SalSon',
+  titleEmphasis: 'My SalSon',
   coverFootprint: 'Newark flagship + 11 sites',
   parentBrand: 'SalSon Logistics (Sun Capital Partners portfolio)',
   vertical: 'logistics-3pl',
@@ -89,7 +92,8 @@ export const salsonLogistics: AccountMicrositeData = {
         { label: 'Revenue trajectory', value: 'Public Fisk-on-record framing: revenue "more than doubled since 2021" off ~$100M baseline → implied 2025/2026 run-rate $250M+. The M&A flywheel is on, not off. Every future tuck-in arrives with a different yard operating model, and standardizing across newly acquired yards is a known PE roll-up pain point' },
       ],
       hypothesis:
-        'The interesting thing about the SalSon yard math is what the company already does well, not what is broken. The Newark campus runs on a working records-layer yard tracking system that SalSon has publicly named — and putting your name to a vendor is a different kind of commitment than buying it quietly. TMS is on TMW; the My SalSon portal already wraps third-party systems under a single shipper-facing UI; the productization muscle to take a third-party capability and resell it as a branded service is already exercised. That makes SalSon a different kind of conversation than an end-shipper procurement: the right unit of analysis is not "do you need yard tools" but "what is the next product-catalog entry for the shipper-facing service line that drayage and transload customers already pay for." The August 2024 seven-company roll-up created an integration shape where each merged entity arrived with its own dispatch, yard, and customer mix going in. Operating-tool integration across all seven is an active workstream — and the cleanest moment for a new yard-execution and multi-tenant-orchestration layer to enter the SalSon operating standard is now, while integration is still active. Three forward-looking pressures compound that opportunity. First, Compton CA is under construction (260,000 sq ft, 66 dock doors, 20-acre secured yard) — a greenfield where the yard-execution layer can ship as part of go-live rather than retrofit. Second, Fisk\'s stated $20–50M tuck-in cadence means every future acquisition arrives with a yard operating model that has to be reconciled against the SalSon standard — and a standard that already includes a productized yard-execution layer de-risks the integration math at every future close. Third, port drayage yard variance is more expensive per event than almost any other logistics operation — missed windows, container detention, gate backup all compound faster than at a standard DC, and a productized yard-execution layer is the differentiated service line drayage competitors do not have.',
+        'The interesting thing about the SalSon yard math is what the company already does well, not what is broken. The Newark campus runs on a working records-layer yard tracking system that SalSon has publicly named — and putting your name to a vendor is a different kind of commitment than buying it quietly. TMS is on TMW; the My SalSon portal already wraps third-party systems under a single shipper-facing UI; the productization muscle to take a third-party capability and resell it as a branded service is already exercised. That makes SalSon a different kind of conversation than an end-shipper procurement: the right unit of analysis is not "do you need yard tools" but "what is the next product-catalog entry for the shipper-facing service line that drayage and transload customers already pay for."\n\nThe August 2024 seven-company roll-up created an integration shape where each merged entity arrived with its own dispatch, yard, and customer mix going in. Operating-tool integration across all seven is an active workstream — and the cleanest moment for a new yard-execution and multi-tenant-orchestration layer to enter the SalSon operating standard is now, while integration is still active. Three forward-looking pressures compound that opportunity. First, Compton CA is under construction (260,000 sq ft, 66 dock doors, 20-acre secured yard) — a greenfield where the yard-execution layer can ship as part of go-live rather than retrofit. Second, Fisk\'s stated $20–50M tuck-in cadence means every future acquisition arrives with a yard operating model that has to be reconciled against the SalSon standard — and a standard that already includes a productized yard-execution layer de-risks the integration math at every future close. Third, port drayage yard variance is more expensive per event than almost any other logistics operation — missed windows, container detention, gate backup all compound faster than at a standard DC, and a productized yard-execution layer is the differentiated service line drayage competitors do not have.',
+      pullQuote: 'The right unit of analysis is not "do you need yard tools" but "what is the next product-catalog entry for the shipper-facing service line that drayage and transload customers already pay for."',
       caveat:
         'This is built from SalSon Logistics public disclosures, the Sun Capital Partners roll-up press cycle, Fisk\'s ION Analytics / Transport Topics on-record commentary, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: which acquired yards from the August 2024 merger have been integrated onto the SalSon standard and which have not, whether Compton\'s yard-execution design is in the engineering conversation today, and how the productization economics would flow through the SalSon shipper service-line P&L.',
     },
@@ -279,6 +283,23 @@ export const salsonLogistics: AccountMicrositeData = {
     ],
     urgencyDriver:
       'The August 2024 seven-company roll-up created an active integration window where each merged entity arrived with its own dispatch, yard, and customer mix. Operating-tool integration across the seven is an active workstream, and the cleanest moment for a new yard-execution and multi-tenant-orchestration layer to enter the SalSon operating standard is now, while integration is still active. Compton CA is under construction as a greenfield embed window. Every future $20–50M tuck-in on Fisk\'s stated cadence arrives with a yard operating model that has to be reconciled against the SalSon standard — and a standard that already includes a productized yard-execution layer is a known PE roll-up de-risking lever at every future close.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'The roll-up', body: 'Seven companies into one platform · August 2024 · Sun Capital underwrite.' },
+    { mark: 'Newark scoreboard', body: '55-acre flagship · 3 yards · ~2,000 containers/week · ~100,000/year.' },
+    { mark: 'Greenfield', body: 'Compton CA · 260K sq ft · 66 dock doors · 20-acre secured yard · under construction.' },
+    { mark: 'Fisk on the record', body: 'Revenue more than doubled since 2021 · $20–50M tuck-in cadence at mid-single-digit EBITDA multiples.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for Jason Fisk. The deal-architecture you assembled at Sun Capital — seven companies into one platform in August 2024, $20–50M tuck-in cadence on mid-single-digit EBITDA multiples — is the architecture that turns the next five minutes from a tooling conversation into a service-line conversation.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
