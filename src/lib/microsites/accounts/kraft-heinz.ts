@@ -51,12 +51,13 @@ export const kraftHeinz: AccountMicrositeData = {
         { label: 'U.S. manufacturing footprint', value: '~30 plants across ambient, refrigerated, and frozen; multi-temp at most sites' },
         { label: 'Greenfield deployment site', value: 'DeKalb IL automated DC — $400M, 775,000 sq ft, opens 2027; >60% of foodservice volume + ~30% of all dry goods' },
         { label: 'Active modernization', value: '$3B U.S. plant investment announced May 2025 — throughput-out-the-door capacity climbing across ~30 sites' },
-        { label: 'Existing yard-tech layer', value: 'Site-level yard automation in place at multiple sites; the network-level operating layer above it is unsolved' },
+        { label: 'Existing yard-tech layer', value: 'Legacy site-level yard automation from a 2007–2009 rollout; current production status across the surviving sites is mixed. The network-level operating layer above the sites is unsolved either way' },
+        { label: 'Yard archetype mix', value: '~37% no-gate sites · ~56% guarded with gate+GS (some campus, some scale) · ~63% rural with connectivity exposure · majority three-shift cadence (27-site internal survey)' },
         { label: 'Carrier model', value: '3PL / contract-carrier dependent; heavy rail and intermodal inbound; foodservice + grocery channels run on different cadences' },
         { label: 'Working-capital posture', value: 'Agile@Scale program cut inventory ~20% — leaner inventory makes dock-execution variance a working-capital problem, not just an operations one' },
       ],
       hypothesis:
-        'The interesting thing about the Kraft Heinz yard math is what site-level success has *not* done. The dozen-site yard-automation rollout that started at Stockton two decades ago worked — manual yard checks went away, demurrage came down, overflow lots disappeared. Those are real wins and the case study is real. But site-level automation, multiplied across six campuses, is not the same as a network operating model. Each site optimizes its own gate, its own dock priority, its own appointment-versus-walk-in mix, its own multi-temp dock-door arbitration. The network doesn\'t agree with itself on what good looks like.\n\nThat gap got more expensive in the last three years for two reasons. First, Agile@Scale cut inventory roughly 20% — leaner networks turn yard variance into stockouts, so a 90-minute trailer delay that used to land inside safety stock now shows up at the shelf. Second, the $3B U.S. modernization will lift throughput at the plant; throughput-out-the-door becomes trailer-into-the-yard, and modernizing the building without modernizing the yard layer above the sites creates a known flow-control wall at the gatehouse.\n\nThe third thing is forward-looking: DeKalb opens in 2027 as the highest-throughput single node in the U.S. portfolio, and it has no entrenched yard-ops process to displace. The yard outside the Daifuku-automated DC is the unsolved seam — and once that seam is solved at DeKalb, the operating model laddered up from the existing site-level automation across the rest of the network is the obvious second move.',
+        'The interesting thing about the Kraft Heinz yard math is what site-level success has *not* done. The dozen-site yard-automation rollout that started at Stockton two decades ago worked — manual yard checks went away, demurrage came down, overflow lots disappeared. Those are real wins and the case study is real. But site-level automation, multiplied across six campuses, is not the same as a network operating model. Each site optimizes its own gate, its own dock priority, its own appointment-versus-walk-in mix, its own multi-temp dock-door arbitration. The network doesn\'t agree with itself on what good looks like.\n\nThat gap got more expensive in the last three years for two reasons. First, Agile@Scale cut inventory roughly 20% — leaner networks turn yard variance into stockouts, so a 90-minute trailer delay that used to land inside safety stock now shows up at the shelf. Second, the $3B U.S. modernization will lift throughput at the plant; throughput-out-the-door becomes trailer-into-the-yard, and modernizing the building without modernizing the yard layer above the sites creates a known flow-control wall at the gatehouse.\n\nThe third thing is forward-looking, and it is where the pilot question lives. DeKalb opens in 2027 as the highest-throughput single node in the U.S. portfolio, with Daifuku driving inside-the-building automation and no entrenched yard-ops process around it. That makes DeKalb the natural *scale-up* target for a network operating model — but not the first pilot. The first pilot lands at one of the smaller no-gate, urban-connectivity facilities — the kind of site where the carrier yard is simplest to instrument, the displacement risk is lowest, and the operating model can be proven without putting the marquee deployment at risk. The proof at the simple site is what earns the right to operate the layer above DeKalb in 2027 and the $3B-modernized plants in the second wave.',
       caveat:
         'This is built from public Kraft Heinz disclosures, the public yard-automation case record, Lighthouse press materials, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: whether site-level yard data actually ladders into Lighthouse in a way you can act on, whether the DeKalb yard-ops design has been spec\'d yet, and how the $3B plant investment is changing trailer arrival patterns at the sites where capex landed first.',
     },
@@ -73,7 +74,7 @@ export const kraftHeinz: AccountMicrositeData = {
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
       ],
       timeline:
-        '30–60 days from kickoff to first measurable impact at the pilot site. The two highest-leverage pilot targets at Kraft Heinz are different in kind: (1) DeKalb when it opens, because greenfield yard-ops design avoids any displacement of existing site-level workflows; (2) the single existing plant where the $3B modernization throughput has already landed hardest, because the throughput-into-the-yard pressure is most visible there. We would expect the network to make sense of itself within two to four quarters of the pilot.',
+        '30–60 days from kickoff to first measurable impact at the pilot site. The sites where this lands first are not the marquee nodes — they are the smaller no-gate, no-YMS, urban-connectivity facilities where the carrier yard is simplest to instrument, the displacement risk is lowest, and the operating model can be proven before it has to scale. DeKalb 2027 is where the proven model expands into the highest-throughput node in the U.S. portfolio; the $3B-modernized plants are the second wave once the network operating layer has its first 60-day proof. We would expect the network to make sense of itself within two to four quarters of that first pilot.',
       referenceAvailable: true,
     },
     {
@@ -104,7 +105,8 @@ export const kraftHeinz: AccountMicrositeData = {
           id: 'khc-lighthouse',
           source: 'Kraft Heinz Lighthouse (Microsoft-built control tower)',
           confidence: 'public',
-          detail: 'Proprietary control tower built with Microsoft for real-time visibility across plants and distribution. Public reporting confirms the program exists and is operating; whether the existing site-level yard feeds ladder into it in real time is a discovery question, not a public fact.',
+          detail: 'Proprietary control tower built with Microsoft (announced April 2022 as the foundation of the broader digital transformation). End-to-end farm-to-fork visibility; AI-coordinated demand planning and disruption response; CEO Carlos Abrams-Rivera frames the impact as "reactive to proactive." Public reporting cites ~12% production-efficiency gains and ~$30M in sales-side impact attributed to AI + Lighthouse. Whether site-level yard feeds ladder into Lighthouse at the network layer in a usable way is a discovery question, not a public fact.',
+          url: 'https://news.microsoft.com/source/2022/04/21/kraft-heinz-and-microsoft-join-forces-to-accelerate-supply-chain-innovation-as-part-of-broader-digital-transformation/',
         },
         {
           id: 'khc-agile-at-scale',
@@ -127,6 +129,7 @@ export const kraftHeinz: AccountMicrositeData = {
       ],
       unknowns: [
         'Whether site-level yard data currently feeds Lighthouse in a way the control-tower operator can act on at the network layer',
+        'Which of the 2007–2009 site-level yard-automation deployments are still in production today vs. retired through facility consolidation or end-of-life refresh',
         'Whether the DeKalb yard-ops design has been spec\'d yet — and who owns that design',
         'How the $3B modernization is changing trailer arrival patterns at the plants that received capex first',
         'How multi-temp dock-door arbitration is decided today at the multi-temp plants — site policy, system logic, or operator judgment',
@@ -195,7 +198,7 @@ export const kraftHeinz: AccountMicrositeData = {
       heroOverride: {
         headline: 'The Lighthouse tile no one has filled yet is the yard network operating layer.',
         subheadline:
-          'Site-level yard automation is proven at Kraft Heinz. The network operating model above it — the one Agile@Scale\'s leaner inventory now needs and Lighthouse is shaped to host — is the unfilled tile. DeKalb 2027 is the cleanest place to land it first.',
+          'Site-level yard automation is proven at Kraft Heinz. The network operating model above it — the one Agile@Scale\'s leaner inventory now needs and Lighthouse is shaped to host — is the unfilled tile. The smaller no-gate sites are the cleanest place to prove it; DeKalb 2027 is where it scales.',
       },
       sectionOrder: ['yns-thesis', 'observation', 'comparable', 'methodology', 'about'],
 
