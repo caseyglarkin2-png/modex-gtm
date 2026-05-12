@@ -40,13 +40,14 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
+import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 export const daimlerTruckNorthAmerica: AccountMicrositeData = {
   slug: 'daimler-truck-north-america',
   accountName: 'Daimler Truck North America',
-  coverHeadline: 'Yard execution as a constraint for Daimler Truck',
-  titleEmphasis: 'Daimler Truck',
-  coverFootprint: '14 NA plants + Mt Holly NC',
+  coverHeadline: 'The network layer above 9 plants',
+  titleEmphasis: 'above 9 plants',
+  coverFootprint: '9 NA plants · Saltillo 2012',
   parentBrand: 'Daimler Truck',
   vertical: 'industrial',
   tier: 'Tier 1',
@@ -72,7 +73,8 @@ export const daimlerTruckNorthAmerica: AccountMicrositeData = {
         { label: 'Margin posture', value: 'Q1 2026 EBIT halved (group €498M vs €1.08B prior year); DTNA EBIT −73%. Tariff overhang in "low triple-digit million" euros on DTNA. No-capex, software-only changes are the only changes that get oxygen this year' },
       ],
       hypothesis:
-        'The interesting thing about the Daimler Truck NA yard math is the timing. The site-level yard system you have run across the 9 US+Mexico plants since 2012 was the right answer to the 2012 problem — drivers walking the yard with clipboards reading trailer serial numbers, no visibility into which trailer was where, and no measurement of detention or dwell. RFID solved that. The 50% reduction in carrier detention fees and the 50% reduction in yard drivers are real numbers from the original case record; they are not in dispute and they should not be reframed as failures. They are not failures. They are the proof that yard tech pays back at this network — and that part of the conversation is closed. What is unsolved is the layer above. The 9 plants run as 9 site-level yard systems with their own gate logic, their own dock priorities, their own marshalling cadence, their own appointment-versus-walk-in mix. The system of record gives you 9 yard logs. It does not give you one operating model. That gap got more expensive in the last twelve months for three reasons. First, Q1 2026 order intake came in at +85% YoY against a production network that just finished a soft quarter — the binding constraint in the next four quarters is throughput per existing dock door, not new capex. Second, tariff exposure on the Saltillo cross-border lane converts every minute of dwell into landed-cost amplification on components that move from Mexico to the U.S. plants. Third, the eCascadia and eM2 battery-electric series production at Portland is a greenfield yard surface — battery handling, charging-bay marshalling, HV-component inbound — and specifying network orchestration into a new EV-assembly yard is materially cheaper than retrofitting it later at Cleveland. The Detroit Diesel-to-Cleveland engine choreography is the canonical example of what site-level yard records can\'t coordinate: when Cleveland is dock-blocked, where does the inbound Detroit engine load divert, and how does Cleveland\'s line-readiness signal reach Detroit\'s outbound yard in time to matter?',
+        'The interesting thing about the Daimler Truck NA yard math is the timing. The site-level yard system you have run across the 9 US+Mexico plants since 2012 was the right answer to the 2012 problem — drivers walking the yard with clipboards reading trailer serial numbers, no visibility into which trailer was where, and no measurement of detention or dwell. RFID solved that. The 50% reduction in carrier detention fees and the 50% reduction in yard drivers are real numbers from the original case record; they are not in dispute and they should not be reframed as failures. They are not failures. They are the proof that yard tech pays back at this network — and that part of the conversation is closed.\n\nWhat is unsolved is the layer above. The 9 plants run as 9 site-level yard systems with their own gate logic, their own dock priorities, their own marshalling cadence, their own appointment-versus-walk-in mix. The system of record gives you 9 yard logs. It does not give you one operating model. That gap got more expensive in the last twelve months for three reasons. First, Q1 2026 order intake came in at +85% YoY against a production network that just finished a soft quarter — the binding constraint in the next four quarters is throughput per existing dock door, not new capex. Second, tariff exposure on the Saltillo cross-border lane converts every minute of dwell into landed-cost amplification on components that move from Mexico to the U.S. plants. Third, the eCascadia and eM2 battery-electric series production at Portland is a greenfield yard surface — battery handling, charging-bay marshalling, HV-component inbound — and specifying network orchestration into a new EV-assembly yard is materially cheaper than retrofitting it later at Cleveland.\n\nThe Detroit Diesel-to-Cleveland engine choreography is the canonical example of what site-level yard records can\'t coordinate: when Cleveland is dock-blocked, where does the inbound Detroit engine load divert, and how does Cleveland\'s line-readiness signal reach Detroit\'s outbound yard in time to matter?',
+      pullQuote: 'The system of record gives you 9 yard logs. It does not give you one operating model.',
       caveat:
         'This is built from Daimler Truck Holding AG public investor disclosures, the public yard-tech case record, DTNA press releases, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: whether the Detroit-Diesel-to-Cleveland engine sequencing is currently coordinated through the planning layer or still resolved at the dock, how the eM2 series-production yard is being scoped at Portland, and where the +85% Q1 order intake is loading hardest in the production schedule.',
     },
@@ -262,6 +264,23 @@ export const daimlerTruckNorthAmerica: AccountMicrositeData = {
     ],
     urgencyDriver:
       'The site-level yard system is 14 years into production at the 9 US+Mexico plants — the original Saltillo pilot was specified for 2012\'s yard visibility problem, which RFID solved. The unsolved problem now is network-tier orchestration above the site-level signals: the +85% Q1 order intake is landing into the same dock-door count, the Saltillo tariff lane converts every minute of dwell into landed-cost amplification, and the eM2 series-production yard at Portland is a once-per-cycle greenfield spec opportunity where network orchestration is materially cheaper to design in than retrofit later.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Site-level tenure', body: 'Saltillo pilot 2012 · rollout across 9 US+Mexico plants · 14 years in production.' },
+    { mark: 'Order intake', body: 'Q1 2026 Trucks NA orders +85% YoY · the ramp lands on the same dock-door count.' },
+    { mark: 'Margin posture', body: 'Q1 2026 group EBIT halved · DTNA EBIT −73% · tariff overhang in low-triple-digit million euros.' },
+    { mark: 'Greenfield', body: 'eCascadia + eM2 series production at Portland · new yard surfaces the 2012 config was never designed to track.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same network shape, different freight.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for Jeff Allen. The lean-manufacturing discipline you carried out of twenty-five years at Detroit Diesel — takt time, variance reduction, standard work, line readiness — proved out the site-level yard case at Saltillo in 2012 and across the 9 US+Mexico plants since. The five minutes that follow are about the layer above the 9 site-level yard logs that the +85% Q1 order intake now needs.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
