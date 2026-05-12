@@ -195,9 +195,9 @@ export function MemoAudioBrief({
         style={{
           fontVariationSettings: "'opsz' 60, 'SOFT' 50",
           fontWeight: 380,
-          fontSize: 'clamp(1.65rem, 1.1vw + 1.15rem, 2.2rem)',
-          lineHeight: 1.2,
-          letterSpacing: '-0.012em',
+          fontSize: 'clamp(1.75rem, 1.4vw + 1.15rem, 2.6rem)',
+          lineHeight: 1.18,
+          letterSpacing: '-0.014em',
         }}
       >
         {heading}
