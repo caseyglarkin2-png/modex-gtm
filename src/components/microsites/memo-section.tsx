@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { Fragment, type ReactNode } from 'react';
 import {
   type FootnoteData,
   type MemoMicrositeSection,
@@ -27,8 +27,11 @@ import type { MemoMarginaliaItem } from './memo-marginalia';
  * types contribute no marginalia item (the gutter doesn't try to fill empty
  * space).
  *
- * Surfaces the FIRST { label, value } pair of each composition as the
- * section's marginalia item. Per-section hand-tuning is a Phase-5 follow-up.
+ * Surfaces every other { label, value } pair of each composition (rows 0,
+ * 2, 4...) so the right gutter has visible density across the scroll on
+ * accounts that have not hand-tuned `marginaliaItems`. Hand-tuned override
+ * lives on AccountMicrositeData.marginaliaItems and short-circuits this
+ * extraction in page.tsx.
  */
 export function extractMarginaliaItems(
   sections: MemoMicrositeSection[],
@@ -36,13 +39,15 @@ export function extractMarginaliaItems(
   const items: MemoMarginaliaItem[] = [];
   for (const section of sections) {
     if (section.type !== 'observation') continue;
-    const first = section.composition[0];
-    if (!first) continue;
-    items.push({
-      mark: first.label,
-      body: first.value,
-      sectionId: section.sectionId,
-    });
+    for (let i = 0; i < section.composition.length; i += 2) {
+      const row = section.composition[i];
+      if (!row) continue;
+      items.push({
+        mark: row.label,
+        body: row.value,
+        sectionId: section.sectionId,
+      });
+    }
   }
   return items;
 }
@@ -50,6 +55,31 @@ export function extractMarginaliaItems(
 const FONT_SERIF = 'font-[family-name:var(--font-memo-serif)]';
 const FONT_SANS = 'font-[family-name:var(--font-memo-sans)]';
 const FONT_MONO = 'font-[family-name:var(--font-memo-mono)]';
+
+/**
+ * Body-flow pull-quote. Renders as a centered max-w-26ch italic Fraunces
+ * blockquote with a 2px accent left rule. Use inside Observation
+ * hypothesis to break up dense prose and surface the section's punchline.
+ * Visually mirrors the MemoPreamble blockquote so the two registers feel
+ * like one author.
+ */
+export function MemoPullQuote({ children }: { children: ReactNode }) {
+  return (
+    <blockquote
+      className={`my-10 max-w-[26ch] border-l-2 border-[color:var(--memo-accent)] pl-6 text-[#1a1a1a] ${FONT_SERIF}`}
+      style={{
+        fontStyle: 'italic',
+        fontVariationSettings: "'opsz' 36, 'SOFT' 100, 'WONK' 1",
+        fontWeight: 400,
+        fontSize: 'clamp(1.25rem, 1.9vw, 1.5rem)',
+        lineHeight: 1.32,
+        letterSpacing: '-0.005em',
+      }}
+    >
+      {children}
+    </blockquote>
+  );
+}
 
 // Section-type → display label for the eyebrow ("§ 01 · OBSERVATION").
 // Kept here (not in the schema module) because it's purely presentational.
@@ -285,11 +315,19 @@ function MemoObservation({
           ))}
         </dl>
       ) : null}
-      {section.hypothesis.split(/\n\n+/).map((para, i) => (
-        <p key={i} className={i === 0 ? 'memo-lead' : undefined}>
-          {renderBodyWithFootnotes(para, resolved)}
-        </p>
-      ))}
+      {(() => {
+        const paragraphs = section.hypothesis.split(/\n\n+/);
+        return paragraphs.map((para, i) => (
+          <Fragment key={i}>
+            <p className={i === 0 ? 'memo-lead' : undefined}>
+              {renderBodyWithFootnotes(para, resolved)}
+            </p>
+            {i === 0 && section.pullQuote ? (
+              <MemoPullQuote>{section.pullQuote}</MemoPullQuote>
+            ) : null}
+          </Fragment>
+        ));
+      })()}
       {section.caveat ? (
         <MemoAside mark="Caveat">
           <p className="m-0">{section.caveat}</p>

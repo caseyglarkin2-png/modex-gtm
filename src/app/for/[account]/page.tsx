@@ -56,7 +56,7 @@ export default async function AccountMicrositePage({
   if (!data) notFound();
 
   const memoSections = resolveMemoSections(data);
-  const marginaliaItems = extractMarginaliaItems(memoSections);
+  const marginaliaItems = data.marginaliaItems ?? extractMarginaliaItems(memoSections);
   const handTuned = isAccountHandTuned(data);
   const reader = resolveReader(data, sp.p);
   const facilityFootprint =
