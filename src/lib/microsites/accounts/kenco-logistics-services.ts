@@ -3,17 +3,25 @@
  * Quality Tier: B (Tier 3 Band D, logistics-3pl vertical)
  *
  * Pitch shape: OPERATOR-FRAME — Kenco runs other companies' yards. The
- * unit of analysis is whether yard-execution-as-a-service becomes a
- * productizable competence Kenco offers shipper customers, versus a
- * line item peer 3PLs all under-deliver on equally.
+ * unit of analysis is whether yard-execution-as-a-service-line becomes
+ * a productizable Kenco competence versus a line item peer 3PLs all
+ * under-deliver on equally.
  *
- * Angle: NETWORK-LEVEL YARD OPERATING STANDARD across the ~141-facility
- * Kenco-managed estate. Kenco is the operator, not the shipper — the
- * Primo comparable applies because Primo's pilot landed inside the same
- * shape of CPG anchor that Kenco peer 3PLs handle freight for. The
- * conversation for Kenco's ops leadership is whether Kenco-managed yards
- * leak the same minutes Primo's pilot recovered, and whether closing
- * that gap is a competitive differentiator vs. the rest of the IL Top 10.
+ * Angle: INNOVATION LAB PRODUCTIZATION + 75-YR FAMILY-OWNED OPERATOR
+ * DISCIPLINE as the signature thread. Kristi Montgomery's $40M+
+ * identified savings / $75M+ customer savings record is the public
+ * template for how new capabilities enter the Kenco operating standard
+ * (pilot in the 10,000 sq ft Chattanooga test-warehouse → productize
+ * for the customer base → distribute as a Kenco-branded service across
+ * the ~141-facility managed estate). The Primo comparable applies via
+ * the read-across — Kenco's shipper customers look operationally like
+ * Primo's peer group, productization across that customer base is what
+ * turns one operating-model proof into a 1-to-many distribution play.
+ *
+ * Stakeholder vocabulary: innovation-leader / operator-frame register
+ * (Kristi's 35-year tenure since 1990, family-operator culture since
+ * 1950, the productization pattern she has run for a decade) —
+ * candidate-evaluation, not vendor-pitch. Operator-frame, not vendor.
  */
 
 import type { AccountMicrositeData } from '../schema';
@@ -21,8 +29,8 @@ import type { AccountMicrositeData } from '../schema';
 export const kencoLogisticsServices: AccountMicrositeData = {
   slug: 'kenco-logistics-services',
   accountName: 'Kenco Logistics Services',
-  coverHeadline: 'Yard execution as productizable competence at Kenco',
-  titleEmphasis: 'Kenco',
+  coverHeadline: 'The next Innovation Lab productization at Kenco',
+  titleEmphasis: 'Innovation Lab productization',
   coverFootprint: '~141 sites · 43M sq ft',
   parentBrand: 'Kenco',
   vertical: 'logistics-3pl',
@@ -30,9 +38,9 @@ export const kencoLogisticsServices: AccountMicrositeData = {
   band: 'D',
   priorityScore: 61,
 
-  pageTitle: 'Kenco Logistics Services · Yard execution as a productizable 3PL competence',
+  pageTitle: 'Kenco Logistics Services · Yard execution as the next Innovation Lab productization candidate',
   metaDescription:
-    'Kenco operates ~141 distribution facilities across 33 U.S. states and a growing Canadian footprint. Every yard belongs to a shipper customer. The question is whether yard-execution discipline becomes a Kenco-branded capability or stays a per-site negotiation.',
+    'How yard-execution-as-a-service-line enters the Kenco Innovation Lab pipeline — the same pilot-to-productize pattern that has paid back $40M+ identified savings and $75M+ customer savings under Kristi Montgomery — and distributes across the ~141-facility managed estate as a Kenco-branded capability.',
 
   sections: [
     { type: 'yns-thesis' },
@@ -40,24 +48,35 @@ export const kencoLogisticsServices: AccountMicrositeData = {
       type: 'observation',
       headline: 'What we observed about the Kenco-operated network',
       composition: [
-        { label: 'Facilities under management', value: '~141 distribution facilities across North America; 43M+ sq ft warehouse space; 90+ distribution centers across the U.S. and Canada' },
-        { label: 'Customers', value: '390+ customer relationships served across the network; multi-industry (CPG, retail, industrial, e-commerce, returns)' },
-        { label: 'HQ + ownership', value: 'Chattanooga TN; privately held, family-operated since 1950; 75 years of continuous 3PL operation; Pritzker Private Capital growth investment behind the recent M&A cadence' },
-        { label: '2025 expansion', value: 'Drexel Industries\' Canadian 3PL business acquired May 2025 — four London ON multi-client warehouses, 820K sq ft, ~100 associates; Contract Packaging Division launched July 2025 under GVP Rob Doyle' },
-        { label: 'Innovation Lab', value: '10,000 sq ft live test-warehouse in Chattanooga (expanded 2019); $40M+ identified savings since launch; $75M+ customer savings under Kristi Montgomery, VP Innovation R&D (in role since 2015, with Kenco since 1990)' },
-        { label: 'Recognition + scale', value: 'Inbound Logistics Top 10 3PL — 12 consecutive years (2025); first-ever Inc. 5000 ranking 2025; 7,500 employees; operates in 33 U.S. states with growing Canadian footprint' },
+        { label: 'Innovation Lab productization template', value: '10,000 sq ft live test-warehouse in Chattanooga (expanded 2019); $40M+ identified savings since launch; $75M+ customer savings under Kristi Montgomery (with Kenco since 1990; in the innovation-leader role since 2015). The public pattern: pilot a capability inside the controlled live-warehouse environment → prove it under real operational stress → distribute across the customer base as a Kenco-branded service inside contract-logistics service-level reporting. The repeatable Kenco walk' },
+        { label: '2025 Drexel Canadian multi-client acquisition', value: 'Drexel Industries\' 3PL business acquired May 2025 (close date May 1, 2025) — four London ON multi-client warehouses, 820K sq ft, ~100 associates. By design four multi-client distribution spaces in a campus-like environment equidistant from Toronto, Detroit, and Buffalo. The Canadian operating standard is being scoped fresh post-close — the cheapest moment for a new operating-standard layer to enter at integration speed instead of after' },
+        { label: '2025 Contract Packaging Division launch', value: 'Launched July 2025 under GVP Rob Doyle — retail-ready, e-commerce fulfillment, promotional, labeling, compliance. End-to-end customer-wrap thesis adds dock-and-stage steps inside the same facility footprint at customer engagements. A second greenfield specification window for the yard layer the new lane sits on top of, opened the same quarter as the Drexel integration window' },
+        { label: '75-year family-owned operator discipline', value: 'Privately held, family-operated since 1950 — 75 consecutive years of 3PL operation as of 2025. Pritzker Private Capital growth-investment partnership behind the recent M&A cadence. The operator-frame is structural, not rhetorical: every decision about what enters the Kenco operating standard runs through a closely-held family-operator culture, not a quarterly-earnings cycle. The productization pattern compounds because the operator runs the same business across decades, not the same plan across quarters' },
+        { label: 'Facilities under management', value: '~141 distribution facilities across North America; 43M+ sq ft warehouse space; 90+ distribution centers across the U.S. and Canada; 7,500 employees; operates in 33 U.S. states with growing Canadian footprint' },
+        { label: 'Customers', value: '390+ customer relationships served across the network; multi-industry (CPG, retail, industrial, e-commerce, returns); Inbound Logistics Top 10 3PL — 12 consecutive years (2025); first-ever Inc. 5000 ranking 2025' },
       ],
       hypothesis:
-        'The interesting thing about the Kenco yard math is that it is not Kenco\'s yard. Every one of the ~141 facilities under Kenco management belongs to a shipper customer, runs against a shipper-specific scope of work, and is graded on service-level metrics the shipper writes into the contract. That makes the unit of analysis different from the CPG end-shipper or the Tier-1 carrier networks: Kenco is the operator, the freight discipline is delivered as a service, and the yard between the gate and the dock is the surface where service-level performance is most visible to the customer and most opaque to the operator running it. Kenco has built the surrounding capabilities at the highest tier in the industry — the Innovation Lab has paid for itself many times over ($40M+ identified, $75M+ customer savings under Kristi Montgomery), the Inbound Logistics Top 10 placement is now twelve consecutive years, the Drexel acquisition added 820K sq ft of multi-client Canadian capacity in a London ON campus, the Contract Packaging Division opened a new lane of end-to-end customer wrap-around in July 2025. What none of those programs touch directly is the yard layer above the WMS. Site-level yard practice at Kenco-managed facilities runs the same shape it runs across peer 3PLs in the IL Top 10: gate logs, radio dispatch, spotter dispatch by tribal knowledge, dwell-and-detention reporting after the fact. That is the industry baseline, not a Kenco-specific gap — but it is also the layer where shipper customers are increasingly applying competitive pressure, because the leaner inventory positions their planning teams have taken since 2022 turn yard variance into stockouts that show up at the shelf, not buffer that absorbs in safety stock. Two things make the operator-frame question urgent at Kenco specifically. First, the multi-client distribution model Kenco runs at scale — the Drexel campus in London ON is by design four multi-client warehouses, the broader network includes multi-customer DCs that already share docks across shipper fleets — is the operating context where yard discipline compounds fastest. A multi-client yard with three shipper fleets behind one gate has three times the appointment-window arbitration load of a dedicated-customer yard, three times the carrier-protocol variance, and three times the surface area where one shipper\'s detention bill is another shipper\'s dock contention. Second, the Innovation Lab is the public template for how new capabilities enter the Kenco operating standard — pilot in a controlled 10,000 sq ft test environment, productize for the customer base, distribute as a Kenco-branded service across the relevant subset of facilities. That is the same productization shape that turns yard execution from a per-site negotiation into a competitive moat against the rest of the IL Top 10. The question for Kenco operations leadership is not whether the yard runs cleanly enough today; it is whether yard-execution-as-a-service becomes a Kenco capability the customer doesn\'t source separately, or whether it stays a line item every peer 3PL under-delivers on equally.',
+        'The interesting thing about the Kenco yard math is that it is not Kenco\'s yard. Every one of the ~141 facilities under Kenco management belongs to a shipper customer, runs against a shipper-specific scope of work, and is graded on service-level metrics the shipper writes into the contract. That makes the unit of analysis different from a CPG end-shipper or a Tier-1 carrier network: Kenco is the operator, the freight discipline is delivered as a service, and the yard between the gate and the dock is the surface where service-level performance is most visible to the customer and most opaque to the operator running it. Kenco has built the surrounding capabilities at the highest tier in the industry — the Innovation Lab has paid for itself many times over ($40M+ identified, $75M+ customer savings under Kristi Montgomery), the Inbound Logistics Top 10 placement is now twelve consecutive years, the Drexel acquisition added 820K sq ft of multi-client Canadian capacity, the Contract Packaging Division opened a new lane of end-to-end customer wrap-around in July 2025. What none of those programs touch directly is the yard layer above the WMS.\n\nThe Innovation Lab productization template is the right way to read the rest of this. The repeatable Kenco motion is documented across more than a decade of capability launches: pilot a capability inside a controlled 10,000 sq ft live test-warehouse environment in Chattanooga, prove it under real operational stress, then distribute it across the customer base as a Kenco-branded service inside contract-logistics service-level reporting. $40M+ identified and $75M+ customer savings is the canonical proof — the pattern that has paid back many times over and become the public template for how new capabilities enter the Kenco operating standard. Yard-execution-as-a-service-line is the natural next entry in that template: it sits at the layer above WMS and below TMS that no peer 3PL has productized, it generates exactly the operating-KPI shape Kenco\'s service-level reporting already measures (dwell, gate-to-dock, dock contention, shipper-specific appointment arbitration), and it travels across customer engagements the same way every prior Innovation Lab productization did — pilot, prove, distribute.\n\nTwo things make the operator-frame question urgent at Kenco specifically, and they are not always open together. First, the multi-client distribution model Kenco runs at scale — the Drexel campus in London ON is by design four multi-client warehouses, the broader network includes multi-customer DCs that already share docks across shipper fleets — is the operating context where yard discipline compounds fastest. A multi-client yard with three shipper fleets behind one gate has three times the appointment-window arbitration load of a dedicated-customer yard, three times the carrier-protocol variance, and three times the surface area where one shipper\'s detention bill becomes another shipper\'s dock contention. Second, the 75-year family-operator discipline is the cultural reason productization compounds at Kenco specifically: a closely-held family-operator culture runs the same business across decades, which is why pilot-to-productize at the Innovation Lab pays back $40M+ in customer-base distribution, not in a single-cycle quarterly win. The question for Kenco leadership is not whether the yard runs cleanly enough today; it is whether yard-execution-as-a-service-line becomes a Kenco-branded capability the customer doesn\'t source separately, or whether it stays a line item every peer 3PL under-delivers on equally.',
+      pullQuote: 'The competitive question is not whether the freight moves; it is whether yard-execution discipline becomes a Kenco-branded capability or stays a line item peer 3PLs all under-deliver on equally.',
       caveat:
         'This is built from Kenco public disclosures, the 2025 Drexel and Contract Packaging announcements, Innovation Lab press, Kristi Montgomery\'s public profile and conference appearances, the Inbound Logistics Top 10 placement history, and reasonable inference about how the multi-client distribution model maps to yard execution. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: which Kenco-operated yards are running multi-tenant contention most acutely, where shipper-customer service-level pressure on yard performance has already shown up in renewals, and whether the Innovation Lab has formally scoped yard-execution as a productization candidate.',
+    },
+    {
+      type: 'artifact',
+      headline: 'A coverage map for the Kenco operating standard',
+      artifact: {
+        imageSrc: '/artifacts/kenco-logistics-services-coverage-map.svg',
+        imageAlt: 'Kenco operating-standard coverage map. Six tiles representing the capabilities productized through the Kenco operating standard. The Innovation Lab, Drexel CA Multi-Client acquisition, Contract Packaging Division, ~141 distribution facilities, and Inbound Logistics Top 10 placement are covered. The Yard-Execution-as-Service-Line tile is unfilled, marked with a Kenco navy hairline outline.',
+        caption: 'Kenco operating-standard coverage map · 1 layer unfilled.',
+        source: 'Composition modeled from public Kenco Group + Innovation Lab + Drexel acquisition + Contract Packaging Division + Inbound Logistics Top 10 disclosures. Account names redacted.',
+      },
     },
     {
       type: 'comparable',
       headline: 'What a comparable network did when they closed the same gap',
       comparableName: 'Primo Brands',
       comparableProfile:
-        'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water maxes gross vehicle weight before it maxes cube, it is low-margin (every minute of yard waste is a margin point you can\'t recover with price), and it ships across multi-temp lanes with refillable-return logistics. Primo is also years ahead of every other CPG category on yard automation and digitization — they had to be, because the category cost them first. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-level yard operating model on top of their existing site-level yard systems. The read-across to Kenco is not "Kenco is shaped like Primo" — Kenco is a 3PL operator, not a CPG end-shipper. The read-across is: Primo\'s pilot landed inside a CPG anchor whose freight peer 3PLs also handle, and the yard discipline that produced Primo\'s numbers is exactly the operating standard Kenco could productize for shipper customers across the ~141-facility managed network. Many of Kenco\'s most demanding shipper customers — the food-and-beverage anchors, the retail consumer-vertical accounts, the multi-client e-commerce DC tenants — look operationally like Primo\'s peer group. If a network operating model works on the per-case-hardest freight in CPG, putting that operating model inside the Kenco service standard means many Kenco customer engagements gain access to it as a Kenco-branded capability instead of a separately sourced shipper tool. The directly-shaped reference — a Tier-1 CPG anchor running this operating model across 237 facilities on a multi-year, contracted term — is available for peer call when the productization conversation gets specific.',
+        'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water maxes gross vehicle weight before it maxes cube, it is low-margin (every minute of yard waste is a margin point you can\'t recover with price), and it ships across multi-temp lanes with refillable-return logistics. Primo is also years ahead of every other CPG category on yard automation and digitization — they had to be, because the category cost them first. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-level yard operating model on top of their existing site-level yard systems. The read-across to Kenco is not "Kenco is shaped like Primo" — Kenco is a 3PL operator, not a CPG end-shipper. The read-across is: Primo\'s pilot landed inside a CPG anchor whose freight peer 3PLs also handle, and the yard discipline that produced Primo\'s numbers is exactly the operating standard Kenco could productize for shipper customers across the ~141-facility managed network. Many of Kenco\'s most demanding shipper customers — the food-and-beverage anchors, the retail consumer-vertical accounts, the multi-client e-commerce DC tenants — look operationally like Primo\'s peer group. If a network operating model works on the per-case-hardest freight in CPG, putting that operating model inside the Kenco service standard means many Kenco customer engagements gain access to it as a Kenco-branded capability instead of a separately sourced shipper tool. The directly-shaped reference — a Tier-1 CPG anchor running this operating model across 237 facilities on a multi-year, contracted term — is available for peer call when the productization conversation gets specific. The competitive question, in one line: is yard-execution-as-a-service-line a Kenco-branded capability the Innovation Lab productizes and distributes across the customer base (per-site SaaS plus rebill into customer service-level reporting, multi-tenant revenue share at the multi-client DCs, white-label inside customer engagements) the same commercial shape every prior Innovation Lab productization already travels under — or a per-customer line item that every peer 3PL on the IL Top 10 list under-delivers on equally.',
       metrics: [
         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
@@ -76,14 +95,14 @@ export const kencoLogisticsServices: AccountMicrositeData = {
           id: 'kenco-public',
           source: 'Kenco Group public disclosures + corporate site',
           confidence: 'public',
-          detail: 'Anchors the ~141 distribution facilities figure, 43M+ sq ft, 90+ DC count, 390+ customer relationships, 7,500 employees, 33 U.S. states + Canadian footprint, 75-year operating history, Chattanooga TN HQ.',
+          detail: 'Anchors the ~141 distribution facilities figure, 43M+ sq ft, 90+ DC count, 390+ customer relationships, 7,500 employees, 33 U.S. states + Canadian footprint, 75-year operating history (privately held, family-operated since 1950), Chattanooga TN HQ.',
           url: 'https://kencogroup.com/',
         },
         {
           id: 'kenco-drexel-2025',
           source: 'Kenco / Drexel Industries 3PL acquisition (May 2025)',
           confidence: 'public',
-          detail: 'Four London ON multi-client warehouses, 820K sq ft, ~100 associates transitioning. Pritzker Private Capital-backed expansion; Canadian footprint anchored in a campus equidistant from Toronto, Detroit, and Buffalo.',
+          detail: 'Close date May 1, 2025; announced May 5, 2025. Four London ON multi-client warehouses, 820K sq ft, ~100 associates transitioning. Multi-client distribution spaces in a campus-like environment equidistant from Toronto, Detroit, and Buffalo. Pritzker Private Capital-backed expansion.',
           url: 'https://kencogroup.com/news/kenco-expands-canadian-footprint-with-acquisition-of-drexel-industries-3pl-business/',
         },
         {
@@ -97,14 +116,21 @@ export const kencoLogisticsServices: AccountMicrositeData = {
           id: 'kenco-innovation-lab',
           source: 'Kenco Innovation Lab + Kristi Montgomery public profile',
           confidence: 'public',
-          detail: '10,000 sq ft live-warehouse R&D facility in Chattanooga; expanded 2019. $40M+ identified savings since launch under Kristi Montgomery (VP Innovation R&D since 2015; with Kenco since 1990). $75M+ customer savings cited in public profiles. Recipient of Supply Chain Xchange Outstanding Women in Supply Chain Award; recurring industry-conference speaker.',
+          detail: '10,000 sq ft live-warehouse R&D facility in Chattanooga; expanded 2019. $40M+ identified savings since launch under Kristi Montgomery. $75M+ customer savings cited in public profiles. Recipient of Supply Chain Xchange Outstanding Women in Supply Chain Award and SDCE Lifetime Achievement Award; recurring industry-conference speaker.',
           url: 'https://kencogroup.com/innovation-technology/',
+        },
+        {
+          id: 'kenco-montgomery-tenure',
+          source: 'Kristi Montgomery tenure record — Kenco Logistics Services (LinkedIn + Kenco corporate profile + SupplyChainBrain bylined author page)',
+          confidence: 'public',
+          detail: 'With Kenco since 1990 — 35+ year tenure. Moved into the Vice President, Innovation, Research & Development role and began leading the Innovation Lab in 2015. Recognized with the Supply Chain Xchange Outstanding Women in Supply Chain Award and the SDCE Lifetime Achievement Award. Recurring speaker at FreightWaves, SupplyChainBrain, DC Velocity, and industry events. The tenure shape matters because it explains why Innovation-Lab-internal productization moves at family-operator cadence rather than vendor-procurement cadence — and why the entry sequence runs through the Innovation seat rather than enterprise procurement.',
+          url: 'https://www.linkedin.com/in/kristilmontgomery/',
         },
         {
           id: 'kenco-il-top10',
           source: 'Inbound Logistics Top 10 3PL ranking — 2025 (12th consecutive year)',
           confidence: 'public',
-          detail: 'Industry peer benchmark for competitive set framing: the IL Top 10 is the cohort Kenco competes against for shipper-customer renewals, and the surface where capability differentiation shows up in win/loss reviews.',
+          detail: 'Industry peer benchmark for competitive set framing: the IL Top 10 is the cohort Kenco competes against for shipper-customer renewals, and the surface where capability differentiation shows up in win/loss reviews. 12 consecutive years on the list as of 2025; first-ever Inc. 5000 ranking 2025.',
           url: 'https://kencogroup.com/news/kenco-inbound-logistics-top-10-3pl-list-2025/',
         },
         {
@@ -126,6 +152,7 @@ export const kencoLogisticsServices: AccountMicrositeData = {
         'How shipper-customer service-level pressure on yard performance is showing up in renewal cycles — whether yard KPIs are being added to contract scope at re-up, and by which customer segments first',
         'How the Contract Packaging Division\'s end-to-end customer-wrap thesis interacts with yard execution — packaging adds dock-and-stage steps inside the same facility footprint, which compounds yard sequencing decisions',
         'Whether productization of yard-execution as a Kenco capability is a Kristi Montgomery / Innovation Lab conversation, a Shanon Weber / Group VP Operations conversation, or both — and what the right entry point looks like',
+        'What KPI thresholds the Innovation Lab productization scorecard requires for a candidate to graduate from controlled-lab validation into customer-base distribution — the $40M+ identified / $75M+ customer savings track record is the public reference point, but the internal pass/fail thresholds and review cadence are not',
         'How the partnership economics would be structured if yard-execution becomes a Kenco-branded service offering (per-site SaaS plus rebill into customer service-level reporting, multi-tenant revenue share at the multi-client DCs, white-label inside customer engagements)',
       ],
     },
@@ -133,10 +160,10 @@ export const kencoLogisticsServices: AccountMicrositeData = {
       type: 'about',
       headline: 'About this analysis',
       authorBio:
-        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a partnership engagement, not an end-shipper procurement engagement. Kenco is distinctive in this round because the question is not whether yard discipline matters in 3PL operations (it always has) but whether the network-level yard-execution layer is the right next capability to productize through the Innovation Lab and distribute across the ~141-facility managed estate as a Kenco-branded service. The water comparable is intentional. Primo Brands runs the operationally hardest CPG freight in the country, and many of Kenco\'s most demanding shipper customers look operationally like Primo\'s peer group. Productizing the yard-execution layer into the Kenco operating standard means many Kenco customer engagements gain it as a Kenco-branded capability rather than as a separately sourced shipper tool — the kind of differentiation that shows up in renewal and win/loss against the rest of the IL Top 10.',
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a partnership engagement, not an end-shipper procurement engagement. Kristi, your Innovation Lab is the only seat in the IL Top 10 with a thirty-five-year operator tenure behind a decade of pilot-to-productize wins that read in customer-base savings, not vendor receipts; the memo is shaped to that pattern, not to a vendor-procurement cadence. Kenco is distinctive in this round because the question is not whether yard discipline matters in 3PL operations (it always has) but whether the network-level yard-execution layer is the right next capability to productize through the Innovation Lab and distribute across the ~141-facility managed estate as a Kenco-branded service. The water comparable is intentional. Primo Brands runs the operationally hardest CPG freight in the country, and many of Kenco\'s most demanding shipper customers look operationally like Primo\'s peer group. Productizing the yard-execution layer into the Kenco operating standard means many Kenco customer engagements gain it as a Kenco-branded capability rather than as a separately sourced shipper tool — the kind of differentiation that shows up in renewal and win/loss against the rest of the IL Top 10.',
       authorEmail: 'casey@freightroll.com',
       signOff:
-        'If parts of this read wrong against what you see internally for Kenco — particularly whether yard-execution has already been scoped inside the Innovation Lab pipeline, which managed yards are running the highest multi-tenant contention, or whether shipper-customer service-level pressure on yard performance is already showing up in renewals — that\'s the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts: an Innovation Lab scoping conversation, a multi-client DC scoping session, or a peer call with the directly-shaped reference — not necessarily a vendor demo.',
+        'Kristi — the part most worth pushing back on is whether the Innovation Lab pilot-to-productize motion you have run since 2015 — the one that has paid back $40M+ identified and $75M+ in customer savings — currently scopes yard-execution as a candidate, or whether the lab\'s current focus areas sit upstream and downstream of the yard layer without crossing it. That answer reshapes the rest of this. The next step that makes sense is whatever the analysis prompts: an Innovation Lab scoping conversation against the productization scorecard, a controlled lab pilot configured to read in customer-base savings the same way prior productizations have, a Drexel London ON multi-client scoping session, or a peer call with the directly-shaped 237-facility reference — not necessarily a vendor demo.',
     },
   ],
 
@@ -151,12 +178,12 @@ export const kencoLogisticsServices: AccountMicrositeData = {
       title: 'Vice President of Innovation, Research & Development',
       company: 'Kenco Logistics Services',
       email: 'kristi.montgomery@kencogroup.com',
-      linkedinUrl: 'https://kencogroup.com/news/kristi-montgomery-vp-strategic-transformation/',
-      roleInDeal: 'routing-contact',
+      linkedinUrl: 'https://www.linkedin.com/in/kristilmontgomery/',
+      roleInDeal: 'decision-maker',
       seniority: 'VP',
       function: 'Innovation / Strategy',
-      currentMandate: 'Runs the Kenco Innovation Lab (10,000 sq ft live test-warehouse in Chattanooga). $40M+ identified savings since the lab launched; $75M+ customer savings under her tenure. With Kenco since 1990; in the innovation-leader role since 2015. Recipient of Supply Chain Xchange Outstanding Women in Supply Chain Award and SDCE Lifetime Achievement Award. Recurring industry-conference speaker on logistics innovation, AI, and emerging supply chain technology.',
-      bestIntroPath: 'Direct outreach framed as Innovation Lab productization candidate — yard-execution as the next capability that fits the lab\'s pilot → productize → customer-base distribution pattern. Conference / industry-event ecosystem also works.',
+      currentMandate: 'Runs the Kenco Innovation Lab (10,000 sq ft live test-warehouse in Chattanooga). $40M+ identified savings since the lab launched; $75M+ customer savings under her tenure. With Kenco since 1990 — 35+ year tenure; moved into the innovation-leader role and began leading the lab in 2015. Recipient of Supply Chain Xchange Outstanding Women in Supply Chain Award and SDCE Lifetime Achievement Award. Recurring industry-conference speaker on logistics innovation, AI, and emerging supply chain technology.',
+      bestIntroPath: 'Direct outreach framed as Innovation Lab productization candidate — yard-execution-as-a-service-line as the next capability that fits the lab\'s pilot → productize → customer-base distribution pattern. Conference / industry-event ecosystem also works.',
     },
     {
       personaId: 'P-062',
@@ -230,7 +257,7 @@ export const kencoLogisticsServices: AccountMicrositeData = {
         title: 'Vice President of Innovation, Research & Development',
         company: 'Kenco Logistics Services',
         email: 'kristi.montgomery@kencogroup.com',
-        roleInDeal: 'routing-contact',
+        roleInDeal: 'decision-maker',
         seniority: 'VP',
         function: 'Innovation / Strategy',
       },
@@ -239,24 +266,24 @@ export const kencoLogisticsServices: AccountMicrositeData = {
       variantSlug: 'kristi-montgomery',
 
       framingNarrative:
-        'Kristi, the productization pattern your Innovation Lab has run for a decade — pilot a capability inside a controlled 10,000 sq ft live-warehouse environment, prove it under real operational stress, then distribute it across the customer base as a Kenco-branded service — is the pattern that has produced the $40M+ identified and $75M+ customer savings cited in your public profile. The yard-execution layer above the WMS fits that productization template exactly: a software stack designed for multi-tenant 3PL deployment, embedded into the Kenco operating standard, distributed across customer engagements as a Kenco capability inside contract-logistics service-level reporting.',
+        'Kristi, you have run the Innovation Lab productization motion end-to-end already — pilot a capability inside the controlled 10,000 sq ft Chattanooga live-warehouse environment, prove it under real operational stress, then distribute it across the Kenco customer base as a Kenco-branded service inside contract-logistics service-level reporting. $40M+ identified savings since the lab launched and $75M+ in customer savings under your tenure is the canonical proof. With Kenco since 1990 and in the innovation-leader role since 2015, you have run the pilot-to-productize pattern for a decade — at family-operator cadence, not vendor-procurement cadence, which is the reason it has compounded. The yard-execution and multi-tenant orchestration layer above the WMS is the natural next entry in that same operating-standard catalog — multi-tenant from the data model up (which the 3PL operating model requires), generating the operating-KPI shape Kenco\'s service-level reporting already measures (dwell, gate-to-dock, dock contention, shipper-specific appointment arbitration), and traveling across customer engagements the same 1-to-many way every prior Innovation Lab productization did.',
       openingHook:
-        'The Innovation Lab is the public template for how new capabilities enter the Kenco operating standard. Yard-execution-as-a-service is the natural next capability — it sits at the layer above WMS and below TMS that no peer 3PL has productized, and the Drexel-acquired multi-client campus in London ON is the cleanest place to scope a live-customer pilot after the lab reads clean.',
+        'The Innovation Lab is the public template for how new capabilities enter the Kenco operating standard. $40M+ identified · $75M+ customer savings · ten years of pilot-to-productize · the canonical Kenco walk. Yard-execution-as-a-service-line is the next productization entry — multi-tenant from the data model up, partnership-economics-shaped (per-site SaaS plus rebill, white-label embed in contract-logistics service-level reporting), Innovation-Lab-scorecard KPIs from day one. The Drexel London ON multi-client campus is the cleanest live-customer pilot once the lab pilot reads clean.',
       stakeStatement:
-        'The IL Top 10 cohort is the same cohort every year, and the differentiation surface in shipper-customer renewals is narrow. Lean shipper inventory has turned yard variance into a service-level metric that ladders into renewal scoring, and yard-execution productization is the kind of capability that shows up in win/loss reviews against the rest of the peer set.',
+        'The IL Top 10 cohort is the same cohort every year, and the differentiation surface in shipper-customer renewals is narrow. Lean shipper inventory has turned yard variance into a service-level metric that ladders into renewal scoring, and yard-execution productization is the kind of capability that shows up in win/loss reviews against the rest of the peer set. The Drexel integration window (May 2025) and the Contract Packaging Division greenfield (July 2025) are open simultaneously — two operating-standard specification windows in a single year, the cheapest moments for a new layer to enter at integration speed instead of after.',
 
       heroOverride: {
-        headline: 'The yard-execution layer that fits the Kenco Innovation Lab template.',
+        headline: 'After ten years of Innovation Lab productization — yard execution is the next entry in the Kenco operating standard.',
         subheadline:
-          'After a decade of pilot-to-productize wins out of the Chattanooga lab, the multi-tenant yard-execution layer is the natural next capability — productization, not procurement, distributed across customer engagements as a Kenco-branded service. The Drexel London ON multi-client campus is the cleanest live-customer pilot after the lab reads clean.',
+          'Multi-tenant from the data model up. Partnership-economics-shaped (per-site SaaS plus rebill, white-label embed in contract-logistics service-level reporting). Productization, not procurement. Distributed across customer engagements, not bought for a single site. The Drexel May 2025 integration window, the Contract Packaging Division July 2025 greenfield, and the family-operator productization rhythm your team is already running at can absorb the next adjacency.',
       },
-      sectionOrder: ['yns-thesis', 'observation', 'comparable', 'methodology', 'about'],
+      sectionOrder: ['yns-thesis', 'observation', 'artifact', 'comparable', 'methodology', 'about'],
 
       toneShift:
-        'Innovation-leader register. Kristi has been running pilot-to-productize for a decade; frame the conversation as candidate evaluation against the Innovation Lab\'s actual scoping criteria, not as a vendor pitch. Reference the lab\'s public track record ($40M+ identified, $75M+ customer savings) as the operating context, not as flattery. Productization path — pilot → operating standard → customer-base distribution — should be explicit, not implicit.',
-      kpiLanguage: ['productization candidate', 'Innovation Lab pilot scope', 'customer-base distribution', 'service-level differentiation', 'multi-tenant dock orchestration', 'shipper-customer renewal scoring'],
+        'Innovation-leader register. Kristi has been running pilot-to-productize for a decade; frame the conversation as candidate evaluation against the Innovation Lab\'s actual scoping criteria, not as a vendor pitch. Reference the lab\'s public track record ($40M+ identified, $75M+ customer savings) and the 35-year operator tenure as the operating context, not as flattery. Productization path — pilot → operating standard → customer-base distribution — should be explicit, not implicit. Family-operator cadence is structural, not rhetorical: acknowledge the compounding effect across decades.',
+      kpiLanguage: ['productization candidate', 'Innovation Lab pilot scope', 'customer-base distribution', 'service-level differentiation', 'multi-tenant dock orchestration', 'shipper-customer renewal scoring', 'per-site SaaS plus rebill', 'family-operator cadence'],
       proofEmphasis:
-        'Primo is the *public* comparable to cite as the operating-model proof. The DHL-Supply-Chain-style read-across applies: Kenco\'s shipper customers look operationally like Primo\'s peer group, productization across that customer base is what turns one operating-model proof into a 1-to-many distribution play.',
+        'Primo is the *public* comparable to cite as the operating-model proof. The read-across applies as Kenco\'s shipper customers look operationally like Primo\'s peer group, and productization across that customer base is what turns one operating-model proof into a 1-to-many distribution play the same way every prior Innovation Lab capability already became.',
     },
     {
       person: {
@@ -287,7 +314,7 @@ export const kencoLogisticsServices: AccountMicrositeData = {
         subheadline:
           'The operations layer across ~141 managed facilities is where shipper-customer service-level pressure on yard performance lands first. Multi-client DCs concentrate that pressure. A yard operating standard applied at the managed-services tier moves the conversation from per-site negotiation to network-level Kenco capability.',
       },
-      sectionOrder: ['yns-thesis', 'observation', 'comparable', 'methodology', 'about'],
+      sectionOrder: ['yns-thesis', 'observation', 'artifact', 'comparable', 'methodology', 'about'],
 
       toneShift:
         'Operations register. Shanon owns the daily execution layer across the managed-services portfolio; lead with multi-tenant dock arbitration, multi-client DC contention, shipper-specific carrier-protocol variance. The Innovation Lab productization framing is upstream of operations — acknowledge it but don\'t lead with it.',
@@ -324,7 +351,7 @@ export const kencoLogisticsServices: AccountMicrositeData = {
         subheadline:
           'The Drexel-acquired Canadian operating standard and the Contract Packaging Division\'s new engagement footprint are two specification windows open simultaneously. Integrating the yard-execution layer into the solutions-design scope at engagement spec is materially cheaper than retrofit after go-live.',
       },
-      sectionOrder: ['yns-thesis', 'observation', 'comparable', 'methodology', 'about'],
+      sectionOrder: ['yns-thesis', 'observation', 'artifact', 'comparable', 'methodology', 'about'],
 
       toneShift:
         'Solutions-design / engineering register. Frameworks, costed assumptions, scoped trade-offs. The yard is the surface that gets specified last and operates manually first — name that pattern directly and position the layer as something that enters engagement spec, not bolts on after.',
@@ -361,7 +388,7 @@ export const kencoLogisticsServices: AccountMicrositeData = {
         subheadline:
           'Large-scale distribution at Kenco runs against shipper-specific carrier protocols, dock rules, and yard tolerances. A yard operating standard applied at the managed-services tier removes the per-customer protocol negotiation from daily operations and concentrates the contention-management problem at the multi-client DCs where it compounds fastest.',
       },
-      sectionOrder: ['yns-thesis', 'observation', 'comparable', 'methodology', 'about'],
+      sectionOrder: ['yns-thesis', 'observation', 'artifact', 'comparable', 'methodology', 'about'],
 
       toneShift:
         'Operations register. Lead with multi-client DC contention, shipper-specific carrier-protocol variance, dock arbitration in the moment. The productization framing from Innovation is upstream of daily operations — acknowledge but don\'t lead.',
@@ -398,7 +425,7 @@ export const kencoLogisticsServices: AccountMicrositeData = {
         subheadline:
           'At the GM tier, the yard is the surface where the customer relationship and daily operations intersect. A network-level yard operating standard applied at the managed-services tier reaches the site where Andre runs the customer relationship through the daily yard — and proves out (or doesn\'t) at the site-level operating reality.',
       },
-      sectionOrder: ['yns-thesis', 'observation', 'comparable', 'methodology', 'about'],
+      sectionOrder: ['yns-thesis', 'observation', 'artifact', 'comparable', 'methodology', 'about'],
 
       toneShift:
         'Site-GM register. Daily operating reality, customer-relationship interface, the specific way radio dispatch and paper logs mediate between yard and dock today. Lead with the site-level felt experience of the operating-standard change, not the corporate productization frame.',
@@ -412,7 +439,7 @@ export const kencoLogisticsServices: AccountMicrositeData = {
 
   network: {
     facilityCount: '~141 distribution facilities across North America; 43M+ sq ft warehouse space; 90+ DCs across U.S. and Canada',
-    facilityTypes: ['Contract Warehouses', 'Distribution Centers', 'Multi-Client DCs', 'Cross-Docks', 'Managed Transportation Hubs', 'Contract Packaging Operations'],
+    facilityTypes: ['Contract Warehouses', 'Distribution Centers', 'Multi-Client DCs', 'Cross-Docks', 'Managed Transportation Hubs', 'Contract Packaging Operations', 'Innovation Lab (Chattanooga, 10,000 sq ft)'],
     geographicSpread:
       'North America — 33 U.S. states with growing Canadian footprint. HQ Chattanooga TN. May 2025 Drexel acquisition added a four-warehouse multi-client campus in London ON (820K sq ft) equidistant from Toronto, Detroit, and Buffalo NY',
     dailyTrailerMoves: 'High-volume — modeled at the network level across ~141 managed facilities; multi-client DCs concentrate shipper-fleet contention behind shared gates',
@@ -426,19 +453,43 @@ export const kencoLogisticsServices: AccountMicrositeData = {
 
   signals: {
     recentNews: [
-      'Drexel Industries 3PL acquisition (May 2025) — four London ON multi-client warehouses, 820K sq ft, ~100 associates; Kenco\'s anchor Canadian campus equidistant from Toronto, Detroit, and Buffalo.',
+      'Drexel Industries 3PL acquisition (close date May 1, 2025; announced May 5, 2025) — four London ON multi-client warehouses, 820K sq ft, ~100 associates; Kenco\'s anchor Canadian campus equidistant from Toronto, Detroit, and Buffalo.',
       'Contract Packaging Division launched July 2025 under GVP Rob Doyle — retail-ready, e-commerce, promotional, labeling, compliance. End-to-end customer-wrap thesis adds dock-and-stage steps inside the same facility footprint.',
       'Inbound Logistics Top 10 3PL — 2025 (12th consecutive year). First-ever Inc. 5000 ranking 2025.',
-      '75-year operating anniversary 2025; Pritzker Private Capital growth investment behind the recent M&A cadence; 7,500 employees; family-operated since 1950.',
+      '75-year operating anniversary 2025; Pritzker Private Capital growth investment behind the recent M&A cadence; 7,500 employees; privately held, family-operated since 1950.',
       'Kenco Innovation Lab — 10,000 sq ft Chattanooga test-warehouse; $40M+ identified savings since launch; $75M+ customer savings under Kristi Montgomery (VP Innovation R&D since 2015, with Kenco since 1990).',
     ],
     supplyChainInitiatives: [
-      'Yard-execution productization candidate inside the Innovation Lab pilot → operating-standard → customer-base distribution pattern',
+      'Yard-execution-as-a-service-line productization candidate inside the Innovation Lab pilot → operating-standard → customer-base distribution pattern',
       'Multi-client DC operating standard across the Drexel-acquired London ON campus and the broader multi-customer subset of the network',
       'Service-level differentiation against the IL Top 10 peer set in shipper-customer renewal cycles',
     ],
     urgencyDriver:
       'Two specification windows are open simultaneously and they are not always open. First, the Drexel-acquired Canadian operating standard is being scoped fresh post-close (May 2025), which is the cheapest moment for a new operating-standard layer to enter. Second, the Contract Packaging Division (July 2025) adds dock-and-stage steps inside the same facility footprint at customer engagements — a greenfield specification window for the yard layer the new lane sits on top of. Underneath both is the Innovation Lab productization pattern that has paid back $40M+ identified and $75M+ in customer savings — the public template for how new capabilities enter the Kenco operating standard.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Innovation Lab', body: '10,000 sq ft Chattanooga · $40M+ identified · $75M+ customer savings · Kristi Montgomery since 2015 · with Kenco since 1990.' },
+    { mark: '2025 Drexel acquisition', body: 'Four London ON multi-client warehouses · 820K sq ft · close May 1, 2025 · Canadian operating standard scoped fresh.' },
+    { mark: 'Contract Packaging Division', body: 'Launched July 2025 · GVP Rob Doyle · dock-and-stage steps inside the same facility footprint.' },
+    { mark: 'IL Top 10 cohort', body: '12 consecutive years on the Inbound Logistics Top 10 3PL list. The peer set is the same set every year.' },
+    { mark: '75-year operator discipline', body: 'Privately held, family-operated since 1950. Productization compounds at decade cadence, not quarter cadence.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for Kristi Montgomery. The Innovation Lab productization pattern your team has run for a decade — pilot a capability inside the 10,000 sq ft Chattanooga live-warehouse environment, prove it under real operational stress, distribute it across the Kenco customer base as a Kenco-branded service — is the pattern that has paid back $40M+ identified and $75M+ in customer savings. The five minutes that follow are about the yard-execution layer fitting that same template.',
+    chapters: [
+      { id: 'thesis', label: 'I. Kenco runs other companies\' yards', start: 0 },
+      { id: 'what-lab-made', label: 'II. What the Innovation Lab productized', start: 65 },
+      { id: 'unfilled-tile', label: 'III. The unfilled layer in the operating standard', start: 130 },
+      { id: 'two-windows', label: 'IV. Drexel and Contract Packaging — two windows open at once', start: 195 },
+      { id: 'productize-not-procure', label: 'V. Productize, don\'t procure', start: 260 },
+    ],
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
