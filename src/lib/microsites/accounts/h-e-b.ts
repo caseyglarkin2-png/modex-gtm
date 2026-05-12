@@ -17,11 +17,15 @@
  *        cadence in a high-density Texas store cluster
  */
 
+import { AUDIO_BRIEF_CHAPTERS, AUDIO_BRIEF_SRC } from '../audio-brief';
 import type { AccountMicrositeData } from '../schema';
 
 export const hEB: AccountMicrositeData = {
   slug: 'h-e-b',
   accountName: 'H-E-B',
+  coverHeadline: 'Three-flow dock arbitration at the Texas yard',
+  titleEmphasis: 'Three-flow dock arbitration',
+  coverFootprint: '~430 stores · San Antonio + Hempstead',
   parentBrand: 'H-E-B',
   vertical: 'grocery',
   tier: 'Tier 2',
@@ -70,7 +74,8 @@ export const hEB: AccountMicrositeData = {
         },
       ],
       hypothesis:
-        'The interesting thing about the H-E-B yard math is the three-flow arbitration problem that almost no other U.S. grocer faces in the same shape. At an H-E-B regional DC, three fundamentally different inbound flows meet at the same dock infrastructure. The first is own-manufacturing inbound — trailers arriving from H-E-B-owned dairies, bakeries, tortilla plants, meat-processing, and ice-cream plants on a high-frequency, short-haul cadence dictated by H-E-B\'s own production schedule. The second is CPG-partner inbound — the conventional national-brand and regional-brand freight on the appointment-and-detention cadence every grocery DC operates under. The third is import inbound — Texas is the largest U.S. port-of-entry state by container volume after California, and Mexico cross-border freight comes through Laredo on a separate customs-clearance cadence; HEB Mexico cross-border flows compound that pattern. Each of these three flows has a different priority logic, a different acceptable dwell window, and a different downstream consequence of delay. Vertical integration is the part that makes the consequences asymmetric: a 90-minute delay on a CPG-partner inbound is a detention-and-OTIF problem; a 90-minute delay on an H-E-B-owned dairy inbound is an H-E-B-owned production-line problem one step upstream and a fresh-shelf-life problem one step downstream. The operating consequences of yard variance compound across more of the value chain than at peer grocers because more of the value chain is H-E-B. The Houston expansion is the timing accelerant. A new ~500-acre Hempstead campus, an active Houston DC, and three Houston eCommerce fulfillment centers built in 2024–2025 mean throughput-into-the-Houston-yard is climbing materially over an 18–36 month window. Modernizing the building automation inside the DC without modernizing the yard layer above the sites moves the throughput constraint from the warehouse to the gatehouse. Private-label SKU depth — every category covered on the H-E-B-brand and Central Market-brand side, plus Mi Tienda, plus Joe V\'s, plus Heritage Ranch pet food — multiplies the number of receiving sequencing decisions per dock door per shift, which compounds the arbitration problem rather than easing it.',
+        'The interesting thing about the H-E-B yard math is the three-flow arbitration problem that almost no other U.S. grocer faces in the same shape. At an H-E-B regional DC, three fundamentally different inbound flows meet at the same dock infrastructure. The first is own-manufacturing inbound — trailers arriving from H-E-B-owned dairies, bakeries, tortilla plants, meat-processing, and ice-cream plants on a high-frequency, short-haul cadence dictated by H-E-B\'s own production schedule. The second is CPG-partner inbound — the conventional national-brand and regional-brand freight on the appointment-and-detention cadence every grocery DC operates under. The third is import inbound — Texas is the largest U.S. port-of-entry state by container volume after California, and Mexico cross-border freight comes through Laredo on a separate customs-clearance cadence; HEB Mexico cross-border flows compound that pattern. Each of these three flows has a different priority logic, a different acceptable dwell window, and a different downstream consequence of delay. Vertical integration is the part that makes the consequences asymmetric: a 90-minute delay on a CPG-partner inbound is a detention-and-OTIF problem; a 90-minute delay on an H-E-B-owned dairy inbound is an H-E-B-owned production-line problem one step upstream and a fresh-shelf-life problem one step downstream.\n\nThe operating consequences of yard variance compound across more of the value chain than at peer grocers because more of the value chain is H-E-B. The Houston expansion is the timing accelerant. A new ~500-acre Hempstead campus, an active Houston DC, and three Houston eCommerce fulfillment centers built in 2024–2025 mean throughput-into-the-Houston-yard is climbing materially over an 18–36 month window. Modernizing the building automation inside the DC without modernizing the yard layer above the sites moves the throughput constraint from the warehouse to the gatehouse. Private-label SKU depth — every category covered on the H-E-B-brand and Central Market-brand side, plus Mi Tienda, plus Joe V\'s, plus Heritage Ranch pet food — multiplies the number of receiving sequencing decisions per dock door per shift, which compounds the arbitration problem rather than easing it.',
+      pullQuote: 'More of the value chain is H-E-B, so more of the value chain is exposed to yard variance.',
       caveat:
         'This is built from H-E-B public statements (limited because the company is private), Texas trade-press coverage of the San Antonio Super Regional Warehouse and the Hempstead campus, the Houston Chronicle and Supply Chain Dive coverage of the Houston eCommerce expansion, the Wikipedia and trade-press inventory of H-E-B-owned manufacturing plants, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: how much of own-manufacturing inbound versus CPG-partner inbound versus import inbound actually shares the same dock doors at the regional DCs today, what the explicit prioritization rule is when those three flows contend for the same slot, and how the Hempstead-campus yard-operations design is being scoped relative to the existing San Antonio Super Regional standard.',
     },
@@ -520,6 +525,23 @@ export const hEB: AccountMicrositeData = {
     ],
     urgencyDriver:
       'The three-flow inbound arbitration problem at H-E-B regional DCs (own-manufacturing + CPG-partner + import) is structurally harder than the single-flow shape at mainstream-grocer peers, and vertical-integration depth makes the downstream cost of yard variance asymmetric — yard delay compounds across more of the value chain because more of the value chain is H-E-B. The Houston expansion (existing Houston DC + new ~500-acre Hempstead campus + third eCommerce fulfillment center opened early 2025) is the timing accelerant: throughput is climbing materially over an 18–36 month window, and modernizing the buildings without modernizing the yard layer above the sites moves the throughput constraint from the warehouse to the gatehouse.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Texas-only operating discipline', body: 'Privately-held since 1905 · Butt family ownership · San Antonio HQ · ~430 stores across TX and northeastern Mexico.' },
+    { mark: 'Three-flow inbound', body: 'Own-manufacturing (13+ owned plants) · CPG-partner (appointment cadence) · import (Texas ports + Laredo cross-border) — same dock surface, three priority logics.' },
+    { mark: 'Multi-banner cadence', body: 'H-E-B core · Central Market (premium) · Mi Tienda (Hispanic-format) · Joe V\'s (value) · HEB Mexico — each banner pulls a different SKU mix through the same DCs.' },
+    { mark: 'Vertical integration asymmetry', body: 'A 90-minute CPG-partner delay is a detention line. A 90-minute own-manufacturing delay is an H-E-B-owned production-line and fresh-shelf-life problem.' },
+    { mark: 'Houston throughput accelerant', body: '~500-acre Hempstead campus · third Houston eCommerce FC (early 2025) · existing Houston DC — throughput climbing materially over 18–36 months.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+  ],
+
+  audioBrief: {
+    src: AUDIO_BRIEF_SRC,
+    intro:
+      'This brief is for the H-E-B distribution operating layer. The operating discipline that built H-E-B\'s reputation in U.S. grocery — Texas-only density, family-owned long-cadence capex, multi-banner cadence across H-E-B core, Central Market, and Mi Tienda — is the same discipline that sees the three-flow arbitration problem the next five minutes are about: own-manufacturing inbound, CPG-partner inbound, and import inbound meeting at the same dock surface as the Hempstead campus stands up.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
