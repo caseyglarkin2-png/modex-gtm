@@ -26,6 +26,7 @@ import { ford } from './ford';
 import { fritoLay } from './frito-lay';
 import { generalMills } from './general-mills';
 import { georgiaPacific } from './georgia-pacific';
+import { gxo } from './gxo';
 import { hEB } from './h-e-b';
 import { honda } from './honda';
 import { hormelFoods } from './hormel-foods';
@@ -68,6 +69,7 @@ const ACCOUNTS: Record<string, AccountMicrositeData> = {
   'frito-lay': fritoLay,
   'general-mills': generalMills,
   'georgia-pacific': georgiaPacific,
+  'gxo': gxo,
   'h-e-b': hEB,
   'honda': honda,
   'hormel-foods': hormelFoods,
