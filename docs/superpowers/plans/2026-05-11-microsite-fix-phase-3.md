@@ -10,7 +10,11 @@
 
 ---
 
-## Account roster (14 atomic tasks)
+## Account roster (20 atomic tasks — updated 2026-05-11 post-recon)
+
+**Update:** Recon revealed 18 empty-section accounts at branch base (not 14). The original punch list deferred the 6 Tier 3 reach accounts to P2; aggregated total = 14 (T1+T2) + 6 (T3) = **20 atomic tasks** if we close the entire empty-body backlog. Per Casey's "exhaustive" directive, Tier 3 folded in as Cohort E.
+
+## Account roster
 
 Sequenced by cohort. Within a cohort, all tasks dispatch in parallel (separate files → no conflicts).
 
@@ -30,8 +34,14 @@ Sequenced by cohort. Within a cohort, all tasks dispatch in parallel (separate f
 | **D** | `h-e-b` | Tier 2 · B | grocery | High (454 lines) | |
 | **D** | `mondelez-international` | Tier 2 · B | cpg | Med (282 lines, 130 plants + integration thesis already in metaDescription) | |
 | **D** | `performance-food-group` | Tier 2 · B | grocery | Med (280 lines) | |
+| **E** | `barnes-noble` | Tier 3 | retail | Legacy comments TBD | Reach account — previously P2 deferred |
+| **E** | `fedex` | Tier 3 | logistics-3pl | Legacy comments TBD | Reach account — pitch-shape note in punch list (CPG frame on carrier) |
+| **E** | `honda` | Tier 3 | automotive | Legacy comments TBD | Reach account |
+| **E** | `hyundai-motor-america` | Tier 3 | automotive | Legacy comments TBD | Reach account — pitch-shape note (5-facility footprint) |
+| **E** | `john-deere` | Tier 3 | heavy-equipment | Legacy comments TBD | Reach account |
+| **E** | `kenco-logistics-services` | Tier 3 | logistics-3pl | Legacy comments TBD | Reach account |
 
-Cohort A first (validate approach), then B/C/D parallel-dispatch as bandwidth allows.
+Cohort A first (validate approach), then B/C/D/E parallel-dispatch as bandwidth allows.
 
 ---
 
@@ -179,6 +189,14 @@ Closes part of P0-9 (16-account section migration)."
 12. h-e-b
 13. mondelez-international
 14. performance-food-group
+
+**Cohort E — Tier 3 reach accounts (parallel, 6 implementers):**
+15. barnes-noble
+16. fedex
+17. honda
+18. hyundai-motor-america
+19. john-deere
+20. kenco-logistics-services
 
 Each cohort: dispatch all implementers in parallel (single message, multiple Agent calls). After all return, dispatch spec reviewers in parallel. After all approve, dispatch code-quality reviewers in parallel. After all approve, commit the cohort as one PR and merge.
 
