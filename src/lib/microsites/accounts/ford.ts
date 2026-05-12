@@ -18,10 +18,13 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
+import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 export const ford: AccountMicrositeData = {
   slug: 'ford',
   accountName: 'Ford',
+  coverHeadline: 'The yard layer above the Ford+ reset',
+  titleEmphasis: 'above the Ford+ reset',
   coverFootprint: '~100 yards · 15 assembly',
   parentBrand: 'Ford Motor Company',
   vertical: 'automotive',
@@ -40,14 +43,16 @@ export const ford: AccountMicrositeData = {
       headline: 'What we observed about the Ford U.S. yard network',
       composition: [
         { label: 'U.S. yard footprint', value: '~100 yards across ~15 vehicle assembly plant yards, ~50 finished-vehicle distribution yards (railhead and dealer-feeder), 22 Parts Distribution Center yards, and 20–30 overflow / 3PL-run yards' },
-        { label: 'Strategy reconfiguration in flight', value: '$19.5B in special charges announced December 2025 — Model e restructured for 2029 profitability; BlueOval City retooled from F-150 Lightning successor to gas-powered and hybrid trucks; full-size electric truck and commercial van plans cancelled' },
+        { label: 'Strategy reconfiguration in flight', value: '$19.5B in special charges announced December 2025; further $15.5B non-cash EV-asset impairment booked February 2026 — Model e profitability target moved to 2029, Ford Blue / Ford Model e / Ford Pro reframed under what Jim Farley calls Powertrain Pluralism, BlueOval City retooled from F-150 Lightning successor to gas-powered and hybrid trucks, full-size electric truck and commercial van plans cancelled' },
+        { label: 'Ford Pro is carrying the network', value: 'Ford Pro generated $14.7B revenue at 11.4% EBIT margin with 879,000 paid software subscribers; 2026 Pro EBIT guidance $6.5–7.5B (larger than Ford Blue and Ford Model e combined). Super Duty just posted its best sales in 20 years; Transit hit a U.S. sales record. The reallocated capital from cancelled Model e programs is moving to Pro — and the trailer flows into dealer, fleet-customer, and upfitter yards touch the same ~100-yard footprint' },
         { label: 'Battery + EV node status', value: 'BlueOval SK (Kentucky JV with SK On) began battery production August 2025; BlueOval City battery production now 2027, vehicle production roughly a year after; F-150 Lightning Rouge Electric Vehicle Center paused indefinitely after the Novelis aluminum-plant fire in Oswego NY' },
         { label: 'Inbound profile', value: 'JIT to ±30-minute windows at assembly plants; mixed inbound at any given dock now spans ICE-only inputs, hybrid-specific components, and EV-cell/battery-pack flows during the transition window — different staging discipline, same dock infrastructure' },
         { label: 'Existing operating layer', value: 'Yard ops today run on XLS + tribal knowledge + terminal radios + clipboards, with dozens of 3PLs operating to plant-by-plant standards. The site-by-site case is real; the network-level operating layer above the sites is unsolved' },
         { label: 'Lean-manufacturing inheritance', value: 'Ford was the original JIT-at-scale manufacturer in North America — the discipline is deep at the plant level. The yard is the link in the chain where that discipline still lives on radios and tribal habit' },
       ],
       hypothesis:
-        'The interesting thing about Ford\'s yard math right now is that the analytical wedge isn\'t a clean EV-greenfield design problem anymore. For roughly two years the obvious framing would have been BlueOval City — 3,600 acres, $5.6B campus, designed from scratch — as the place to land a yard operating model with no legacy displacement cost. That framing is still partially true, but it changed shape in late 2025. Ford took $19.5B in special charges in December 2025, retooled BlueOval City from a Lightning successor to gas and hybrid trucks, and paused F-150 Lightning production at the Rouge Electric Vehicle Center indefinitely after the Novelis fire. Battery production at the BlueOval SK joint venture in Kentucky did start on schedule in August 2025, and the BlueOval City battery side will follow in 2027. What that adds up to operationally is not a single greenfield to optimize but a network in the middle of a moving strategy — assembly plants converting their input mix between ICE, hybrid, and EV at different rates, battery-cell inbound flow opening up at one campus while the matching vehicle-assembly side slips a year, finished-vehicle distribution absorbing a product mix that keeps reshuffling, and ~100 yards still running on plant-by-plant local routine through all of it. The lean-manufacturing inheritance — Ford was the JIT-at-scale company in North America — sits at the plant level today and not at the yard layer above it. JIT logic on the line, ±30-minute trailer windows at the dock, and clipboards-and-radios in the yard between them is the seam where the transition costs the most. The two highest-leverage pilot surfaces are different in kind: a railhead like Chicago that already absorbs the highest VIN velocity in the network (where unit-level tracking accuracy is the immediate lever), and a plant yard like Louisville where the takt-time sensitivity makes carrier-dwell and yard-truck choreography the immediate lever. The Memphis PDC is the third — LTL plus TL inbound clustering is the cleanest place to prove the door-assignment and load-queue logic at a non-assembly node. The angle isn\'t "yard automation finally arrives at Ford." It\'s that the operating layer above the sites has to exist before the rest of the network reconfiguration finishes, because the transition window is when the value of standardization is highest and the cost of waiting compounds across every plant that\'s mid-pivot.',
+        'The interesting thing about Ford\'s yard math right now is that the analytical wedge isn\'t a clean EV-greenfield design problem anymore. For roughly two years the obvious framing would have been BlueOval City — 3,600 acres, $5.6B campus, designed from scratch — as the place to land a yard operating model with no legacy displacement cost. That framing is still partially true, but it changed shape in late 2025 and again in early 2026. Ford took $19.5B in special charges in December 2025, retooled BlueOval City from a Lightning successor to gas and hybrid trucks, paused F-150 Lightning production at the Rouge Electric Vehicle Center indefinitely after the Novelis fire, and then in February 2026 booked a further $15.5B non-cash impairment as Jim Farley reframed the strategy around what he calls Powertrain Pluralism — Ford Blue for ICE, Ford Model e for battery-electric, and Ford Pro as the commercial profit engine that gets the reallocated EV capital.\n\nFord Pro is the operating reality. It posted $14.7B in revenue and an 11.4% EBIT margin with 879,000 paid software subscribers, and the 2026 EBIT guide of $6.5–7.5B implies it remains larger than Ford Blue and Ford Model e combined. Super Duty just printed its best sales in twenty years; Transit hit a U.S. sales record. That is the part of the company carrying the network today — and the part whose trailer-into-dealer-yard, trailer-into-fleet-customer, and trailer-into-upfitter flows touch the same ~100-yard footprint that the Q4 2025 reshuffle didn\'t change. What the reset adds up to operationally is not a single greenfield to optimize but a network in the middle of a moving strategy: assembly plants converting their input mix between ICE, hybrid, and EV at different rates, battery-cell inbound flow opening up at one campus while the matching vehicle-assembly side slips a year, finished-vehicle distribution absorbing a product mix that keeps reshuffling toward Pro and away from Model e, and ~100 yards still running on plant-by-plant local routine through all of it. The lean-manufacturing inheritance — Ford was the JIT-at-scale company in North America — sits at the plant level today and not at the yard layer above it. JIT logic on the line, ±30-minute trailer windows at the dock, and clipboards-and-radios in the yard between them is the seam where the transition costs the most. The two highest-leverage pilot surfaces are different in kind: a railhead like Chicago that already absorbs the highest VIN velocity in the network (where unit-level tracking accuracy is the immediate lever), and a plant yard like Louisville where the takt-time sensitivity makes carrier-dwell and yard-truck choreography the immediate lever. The Memphis PDC is the third — LTL plus TL inbound clustering is the cleanest place to prove the door-assignment and load-queue logic at a non-assembly node. The angle isn\'t "yard automation finally arrives at Ford." It\'s that the operating layer above the sites has to exist before the rest of the network reconfiguration finishes, because the transition window is when the value of standardization is highest and the cost of waiting compounds across every plant that\'s mid-pivot.',
+      pullQuote: 'Ford Pro is the operating reality. The yard layer above the ~100 sites is the one part of the network the reset didn\'t change.',
       caveat:
         'This is built from public Ford disclosures (the December 2025 restructuring announcement, the BlueOval City and BlueOval SK timelines, the Lightning pause), the Liz Door appointment record, and reasonable network inference layered onto an internal yard-network business case we maintain on Ford. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: whether the input-mix complexity at the mid-pivot plants is actually showing up as dock arbitration cost, whether the BlueOval City yard-ops design is being scoped to the new product mix or still to the cancelled one, and how much of the ~100-yard footprint is already on a site-level YMS we should treat as installed coverage rather than greenfield.',
     },
@@ -247,6 +252,8 @@ export const ford: AccountMicrositeData = {
     eventAttendance: 'Automotive Logistics and supply-chain industry conference circuit',
     recentNews: [
       '$19.5B in special charges announced December 15, 2025 — Model e restructured for 2029 profitability; BlueOval City retooled from F-150 Lightning successor to gas-powered and hybrid trucks; full-size electric truck and commercial van plans cancelled.',
+      'Additional $15.5B non-cash EV-asset impairment booked February 2026; Jim Farley reframed the company under Powertrain Pluralism (Ford Blue / Ford Model e / Ford Pro) with reallocated EV capital flowing to Pro.',
+      'Ford Pro posted $14.7B revenue at 11.4% EBIT margin with 879,000 paid software subscribers; 2026 Pro EBIT guidance $6.5–7.5B — larger than Ford Blue and Ford Model e combined.',
       'BlueOval SK joint venture with SK On began battery production at the Kentucky campus in August 2025.',
       'BlueOval City battery production now scheduled for 2027; vehicle production roughly a year after that.',
       'F-150 Lightning production at the Rouge Electric Vehicle Center paused indefinitely following the Novelis aluminum-plant fire in Oswego NY (late 2025).',
@@ -259,6 +266,23 @@ export const ford: AccountMicrositeData = {
     ],
     urgencyDriver:
       'The transition window itself is the urgency driver. Standardizing the operating layer above the ~100 yards costs less and yields more during the current network reconfiguration than after it settles — and the next eighteen months are the window where the most plants are mid-pivot and the most local yard routines are already in motion.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'EV reset', body: '$19.5B special charges Dec 2025 · $15.5B non-cash impairment Feb 2026 · Model e profitability moved to 2029.' },
+    { mark: 'Ford Pro', body: '$14.7B revenue · 11.4% EBIT margin · 879,000 paid software subscribers · 2026 EBIT guide $6.5–7.5B.' },
+    { mark: 'BlueOval timing', body: 'BlueOval SK Kentucky live Aug 2025 · BlueOval City battery 2027 · vehicle production roughly a year after.' },
+    { mark: 'Lightning Rouge', body: 'F-150 Lightning paused indefinitely after the Novelis aluminum-plant fire — Dearborn inbound is reshuffling.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same network shape, different freight.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for Liz Door. The Ford+ plan created the Chief Supply Chain Officer seat to make supply chain a competitive-advantage lever. The five minutes that follow are about the one layer above the ~100 yards that the Powertrain Pluralism reset — $19.5B in special charges, the $15.5B impairment, Ford Pro carrying the network — did not change.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
