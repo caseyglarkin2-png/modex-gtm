@@ -3,6 +3,9 @@ import type { AccountMicrositeData } from '../schema';
 export const jmSmucker: AccountMicrositeData = {
   slug: 'jm-smucker',
   accountName: 'JM Smucker',
+  coverHeadline: 'The yard layer the new CPSO seat inherits',
+  titleEmphasis: 'the new CPSO seat inherits',
+  coverFootprint: '~20+ plants · Hostess integration yr 2',
   parentBrand: 'The J.M. Smucker Company',
   vertical: 'cpg',
   tier: 'Tier 2',
@@ -27,7 +30,8 @@ export const jmSmucker: AccountMicrositeData = {
         { label: 'Public synergy target', value: '$100M Hostess synergies — disclosed and being aggressively pursued at the supply-chain layer' },
       ],
       hypothesis:
-        'The Hostess integration is two years in, and the place where the integration math is still unfinished is the yard. Coffee, peanut butter, fruit spreads, and pet food all share the same freight grammar at the dock — ambient, palletized, weight-bounded but cube-tolerant, predictable shelf life, ship to DC, ship to retailer, done. Sweet baked goods is a different grammar. Lower density (you cube out before you weight out), shorter shelf life, retailer expectations that look more like fresh than ambient, and in some channels a DSD-adjacent pattern that the legacy Smucker network was never designed to host. Stack those two grammars in a network that just absorbed a $5.6B acquisition, hasn\'t finished consolidating plants (Indianapolis closing, Columbus GA expanding $120M, Cloverhill divested), and is reorganizing its own supply chain org at the top (Chief Product Supply Officer role newly created, COO eliminated), and the yard is where every one of those moves shows up first. Dock-door arbitration is the most visible surface. When a Twinkies trailer and a Folgers trailer want the same door at the same Columbus or Emporia yard, somebody is deciding by hand which one wins — and that decision is the integration friction made physical. The third piece is forward-looking: the $100M synergy commitment is public, and a meaningful portion of that synergy lives in the trailer-into-the-yard, dock-to-stock, and out-the-door cadence at sites where the two freight profiles share infrastructure. Whatever yard logic the legacy Smucker plants run on, and whatever yard logic the Hostess sites inherited, they were not designed to agree with each other. The integration window is the moment to make them agree.',
+        'The Hostess integration is two years in, and the place where the integration math is still unfinished is the yard. Coffee, peanut butter, fruit spreads, and pet food all share the same freight grammar at the dock — ambient, palletized, weight-bounded but cube-tolerant, predictable shelf life, ship to DC, ship to retailer, done. Sweet baked goods is a different grammar. Lower density (you cube out before you weight out), shorter shelf life, retailer expectations that look more like fresh than ambient, and in some channels a DSD-adjacent pattern that the legacy Smucker network was never designed to host. Stack those two grammars in a network that just absorbed a $5.6B acquisition, hasn\'t finished consolidating plants (Indianapolis closing, Columbus GA expanding $120M, Cloverhill divested), and is reorganizing its own supply chain org at the top (Chief Product Supply Officer role newly created, COO eliminated), and the yard is where every one of those moves shows up first.\n\nDock-door arbitration is the most visible surface. When a Twinkies trailer and a Folgers trailer want the same door at the same Columbus or Emporia yard, somebody is deciding by hand which one wins — and that decision is the integration friction made physical. The third piece is forward-looking: the $100M synergy commitment is public, fiscal-2026 is the year the company expects to hit run-rate on it, and a meaningful portion of that synergy lives in the trailer-into-the-yard, dock-to-stock, and out-the-door cadence at sites where the two freight profiles share infrastructure. Whatever yard logic the legacy Smucker plants run on, and whatever yard logic the Hostess sites inherited, they were not designed to agree with each other. The integration window is the moment to make them agree.',
+      pullQuote: 'Two freight grammars sharing one set of dock doors. Somebody on a radio is the integration plan.',
       caveat:
         'This is built from public J.M. Smucker disclosures, the Hostess acquisition record, public reporting on the supply chain reorg, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: whether Hostess yards and legacy Smucker yards already share dock infrastructure or are still operationally separate, where the sweet-baked-goods short-shelf-life cadence is actually colliding with the ambient cadence, and how much of the $100M synergy commitment is being modeled through plant capex versus through execution-layer standardization.',
     },
@@ -479,6 +483,29 @@ export const jmSmucker: AccountMicrositeData = {
     ],
     urgencyDriver:
       'The Chief Product Supply Officer role is two months old; the COO role was eliminated to put enterprise execution under a single seat. The Hostess integration is two years in and the public $100M synergy target needs to convert into observable throughput. Columbus GA throughput from the $120M expansion lands through early 2027 — that throughput becomes trailer-into-the-yard at the same site over the same window.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Synergy clock', body: '$100M Hostess synergy target · run-rate expected by end of fiscal 2026.' },
+    { mark: 'Columbus expansion', body: 'Hostess plant · $120M · new building + equipment · early 2027 throughput.' },
+    { mark: 'Org structure', body: 'CPSO role created Feb 2026 (Rob Ferguson) · COO eliminated · supply chain decoupled from manufacturing.' },
+    { mark: 'Three-vertical mix', body: 'Coffee · peanut butter & fruit spreads · pet food · plus sweet baked goods inherited from Hostess.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for Rob Ferguson. The Chief Product Supply Officer seat is two months old, the COO role was eliminated to put enterprise execution under a single mandate, and the Hostess integration is two years in with the $100M synergy run-rate expected by the end of fiscal 2026. The five minutes that follow are about the layer where that mandate becomes visible.',
+    chapters: [
+      { id: 'two-grammars', label: 'I. Two freight grammars, one set of dock doors', start: 0 },
+      { id: 'what-hostess-added', label: 'II. What the Hostess freight profile added', start: 65 },
+      { id: 'synergy-at-the-dock', label: 'III. Where the $100M synergy lives at the dock', start: 130 },
+      { id: 'cpso-mandate', label: 'IV. What the new CPSO mandate inherits', start: 195 },
+      { id: 'columbus-pilot', label: 'V. Why New Orleans or Columbus runs the pilot', start: 260 },
+    ],
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
