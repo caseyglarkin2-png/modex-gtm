@@ -206,9 +206,9 @@ export function MemoAudioBrief({
       <p>
         {intro ?? (
           <>
-            Seven minutes, spoken aloud &mdash; the same five beats this memo
-            walks in print, dictated for the commute or the office walk. Skip
-            into any chapter below; the page won&rsquo;t move.
+            Just over five minutes, spoken aloud &mdash; the same five beats
+            this memo walks in print, dictated for the commute or the office
+            walk. Skip into any chapter below; the page won&rsquo;t move.
           </>
         )}
       </p>

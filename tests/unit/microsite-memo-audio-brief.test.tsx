@@ -19,8 +19,9 @@ describe('MemoAudioBrief', () => {
     render(<MemoAudioBrief src="/audio/yard-network-brief.mp3" chapters={chapters} />);
     expect(screen.getByText(/Audio register/i)).toBeDefined();
     expect(screen.getByRole('heading', { level: 2 }).textContent).toMatch(/listen, if you/i);
-    // Default intro mentions "Seven minutes" so prospects know the run-time before they click.
-    expect(screen.getByText(/seven minutes/i)).toBeDefined();
+    // Default intro mentions the run-time so prospects know it before they click.
+    // The canonical brief is 5:24, so the copy now says "Just over five minutes."
+    expect(screen.getByText(/just over five minutes/i)).toBeDefined();
   });
 
   it('renders a section with id="audio" and matching tracking attribute', () => {
