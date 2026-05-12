@@ -16,11 +16,14 @@
  * delivery.
  */
 
+import { AUDIO_BRIEF_CHAPTERS, AUDIO_BRIEF_SRC } from '../audio-brief';
 import type { AccountMicrositeData } from '../schema';
 
 export const caterpillar: AccountMicrositeData = {
   slug: 'caterpillar',
   accountName: 'Caterpillar',
+  coverHeadline: 'The yard between autonomous machines and manual dispatch',
+  titleEmphasis: 'between autonomous machines and manual dispatch',
   coverFootprint: '60+ NA plants · 100 global',
   vertical: 'heavy-equipment',
   tier: 'Tier 2',
@@ -45,7 +48,8 @@ export const caterpillar: AccountMicrositeData = {
         { label: 'In-field automation posture', value: 'Cat Digital + NVIDIA partnership announced CES 2026 — AI assistant, five autonomous construction machines (excavators, loaders, haul trucks, dozers, compactors); nearly 700 autonomous mining trucks already in operation' },
       ],
       hypothesis:
-        'The interesting thing about Caterpillar\'s yard math is that the machines coming off the line are now smarter than the yards they roll into. The CES 2026 unveil — autonomous excavators, loaders, dozers, the Cat AI Assistant, nearly 700 autonomous haul trucks already running in production mines — is a real industrial-AI program, and it lives downstream of an assembly line that has been continuously modernized for decades. The asset in the field has been digitized. The yard between the factory and the dealer has not. Trailer staging at Morton, dock arbitration at Griffin, yard sequencing for built-to-order machines headed to dealer yards — those still run on radios, paper logs, and tribal knowledge that lives in the heads of the spotters who have been on site the longest. That gap matters in heavy equipment in a way it does not matter in CPG. A typical grocery trailer is one truck, one cube, one dock door. A D11 dozer takes multiple parking spots per unit, requires specialized flatbed or low-boy equipment, often arrives with customer-specific customization staged in the yard before dealer handoff, and books a dock for materially longer than a CPG drop-hook. The dock-arbitration math is different in kind: fewer load events per day, but each event blocks more dock real estate, longer setup and breakdown, more staging area committed to one unit. And because most Cat machines are built to order, the yard sequence *is* the customer-delivery sequence — a reshuffle at Morton or Griffin doesn\'t just delay a trailer, it slips a dealer commitment and, one step further, the construction-site or mine-site delivery that dealer made to their customer. Variance at the yard compounds outward through the dealer network in a way that variance at a CPG yard does not. The CPG playbook for yard digitization translates here, but the dock-arbitration logic has to be rebuilt for per-LOAD-hardest freight rather than per-case-hardest freight.',
+        'The interesting thing about Caterpillar\'s yard math is that the machines coming off the line are now smarter than the yards they roll into. The CES 2026 unveil — five autonomous machine classes (excavators, loaders, haul trucks, dozers, compactors), the Cat AI Assistant running on NVIDIA Jetson Thor at the edge, nearly 700 autonomous haul trucks already in production mines — is a real industrial-AI program, and it lives downstream of an assembly line that has been continuously modernized for decades. The asset in the field has been digitized. The yard between the factory and the dealer has not. Trailer staging at Morton, dock arbitration at Griffin, yard sequencing for built-to-order machines headed to dealer yards — those still run on radios, paper logs, and tribal knowledge that lives in the heads of the spotters who have been on site the longest.\n\nThat gap matters in heavy equipment in a way it does not matter in CPG. A typical grocery trailer is one truck, one cube, one dock door. A D11 dozer takes multiple parking spots per unit, requires specialized flatbed or low-boy equipment, often arrives with customer-specific customization staged in the yard before dealer handoff, and books a dock for materially longer than a CPG drop-hook. The dock-arbitration math is different in kind: fewer load events per day, but each event blocks more dock real estate, longer setup and breakdown, more staging area committed to one unit. And because most Cat machines are built to order, the yard sequence *is* the customer-delivery sequence — a reshuffle at Morton or Griffin doesn\'t just delay a trailer, it slips a dealer commitment and, one step further, the construction-site or mine-site delivery that dealer made to their customer. Variance at the yard compounds outward through the dealer network in a way that variance at a CPG yard does not. The CPG playbook for yard digitization translates here, but the dock-arbitration logic has to be rebuilt for per-LOAD-hardest freight rather than per-case-hardest freight.',
+      pullQuote: 'The machines coming off the line are smarter than the yards they roll into.',
       caveat:
         'This is built from public Caterpillar disclosures, the CES 2026 autonomy announcements, the publicly visible Morton + Griffin operations, the CEVA Logistics supplier-of-the-year recognition for integrated logistics (Sep 2025), and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: how much yard-tech is already in place at Morton versus the manufacturing plants, where the autonomous-asset program has touched yard operations (if anywhere), and how dealer-handoff SOPs vary across the ~160 dealer organizations.',
     },
@@ -245,6 +249,23 @@ export const caterpillar: AccountMicrositeData = {
     ],
     urgencyDriver:
       'The autonomous-machine program is the public proof that Caterpillar can run AI-grade systems thinking on the asset. The yard operating layer above the sites — Morton parts, Griffin and the other plants, customization staging for built-to-order machines, dealer handoff — is the place where the same systems thinking has not yet been applied. The contradiction is unusually visible right now.',
+  },
+
+  marginaliaItems: [
+    { mark: 'In-field autonomy', body: 'CES 2026 · Cat Digital + NVIDIA · 5 autonomous machine classes · Cat AI Assistant on Jetson Thor.' },
+    { mark: 'Mining baseline', body: 'Nearly 700 autonomous haul trucks in production · 11B+ tonnes moved.' },
+    { mark: 'Manufacturing footprint', body: '60+ NA plants · 100+ globally across 25 countries · Morton IL parts hub · Griffin GA dealer-flow.' },
+    { mark: 'Dealer network', body: '~160 independent dealer organizations · thousands of branches · 197 countries.' },
+    { mark: 'Freight profile', body: 'D11-class dozers 5,000–400,000+ lbs · multiple parking spots per unit · per-LOAD-hardest, not per-case-hardest.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
+  ],
+
+  audioBrief: {
+    src: AUDIO_BRIEF_SRC,
+    intro:
+      'This brief is for Margaret. The integrated-logistics function you have run for the better part of three decades — Morton, the dealer-delivery network, the supplier integration the CEVA award called out — is the part of Caterpillar that sees the contradiction first. The five minutes that follow are about the yard layer above the sites that the autonomous-machine program has not yet reached.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
