@@ -11,10 +11,14 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
+import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 export const hormelFoods: AccountMicrositeData = {
   slug: 'hormel-foods',
   accountName: 'Hormel Foods',
+  coverHeadline: 'The yard layer above o9 and the Hormel Production System',
+  titleEmphasis: 'above o9 and the Hormel Production System',
+  coverFootprint: '30+ U.S. plants · T&M · o9 live 2025',
   parentBrand: 'Hormel',
   vertical: 'cpg',
   tier: 'Tier 2',
@@ -57,7 +61,8 @@ export const hormelFoods: AccountMicrositeData = {
         },
       ],
       hypothesis:
-        "The interesting thing about the Hormel yard math is what o9 cannot solve for. The five-phase o9 go-live through 2025 closed a real gap — touchless forecasting, system-recommended inventory transfers, optimized truckload grouping by weight, volume, and stackability — and it now sees demand, supply, and deployment on a single model across 70-plus sites covering both the dry and the refrigerated networks. That is the planning layer working as designed. The execution layer at the dock door is a different problem. A plant that runs SPAM in the morning, Jennie-O in the afternoon, and a Planters shelf-stable lane in parallel is arbitrating dock-door assignment across three temperature regimes, three product handling profiles, three carrier mixes, and three different downstream lane structures at the same gate. o9 grouped the truckload; it did not pick the door, decide whether the reefer waits for the dry trailer to finish, sequence the temperature transition at the dock between a refrigerated outbound and an ambient inbound, or know whether the spotter on shift today has the institutional memory to handle that sequence cleanly. The gap between what the plan says and what the yard does got more expensive in the last three years for three reasons. First, T&M is structurally about removing operating-income waste — every minute of avoidable dock dwell that the program does not visibly own is a piece of the $250M number that has to come from somewhere else, and the FY25 number ($100M–$150M of incremental benefit) only compounds if the underlying execution holds. Second, the Planters integration laid a shelf-stable network on top of a company whose yard reflexes were built around refrigerated meat. The Planters acquisition closed in 2021 and the supply-chain integration ran through One Supply Chain and Project Orion at the planning and inventory layer, but the yard SOPs at a former-Kraft-Heinz shelf-stable plant are not the same as the yard SOPs at the Austin protein flagship, and a unified planning model does not unify the gatehouse. Third, the four-DC build-out over the last five years (three shelf-stable, one refrigerated, plus the Memphis metro DC) biased capacity adds toward shelf-stable just as the Planters portfolio reshaped the inbound mix — meaning the refrigerated-vs-shelf-stable handoff is happening at more nodes now, not fewer. The Hormel Production System standardizes work inside the plant; the network-level yard layer above the plants is the one piece of the operating system that does not yet have a unified standard. The forward-looking piece is straightforward: as T&M throughput compounds into FY26, trailer-into-the-yard pressure rises with it, and the o9 plan starts depending on a dock execution layer that has not been built at the network level. That is the seam.",
+        "The interesting thing about the Hormel yard math is what o9 cannot solve for. The five-phase o9 go-live through 2025 closed a real gap — touchless forecasting, system-recommended inventory transfers, optimized truckload grouping by weight, volume, and stackability — and it now sees demand, supply, and deployment on a single model across 70-plus sites covering both the dry and the refrigerated networks. That is the planning layer working as designed. The execution layer at the dock door is a different problem. A plant that runs SPAM in the morning, Jennie-O in the afternoon, and a Planters shelf-stable lane in parallel is arbitrating dock-door assignment across three temperature regimes, three product handling profiles, three carrier mixes, and three different downstream lane structures at the same gate. o9 grouped the truckload; it did not pick the door, decide whether the reefer waits for the dry trailer to finish, sequence the temperature transition at the dock between a refrigerated outbound and an ambient inbound, or know whether the spotter on shift today has the institutional memory to handle that sequence cleanly.\n\nThe gap between what the plan says and what the yard does got more expensive in the last three years for three reasons. First, T&M is structurally about removing operating-income waste — every minute of avoidable dock dwell that the program does not visibly own is a piece of the $250M number that has to come from somewhere else, and the FY25 number ($100M–$150M of incremental benefit) only compounds if the underlying execution holds. Second, the Planters integration laid a shelf-stable network on top of a company whose yard reflexes were built around refrigerated meat. The Planters acquisition closed in 2021 and the supply-chain integration ran through One Supply Chain and Project Orion at the planning and inventory layer, but the yard SOPs at a former-Kraft-Heinz shelf-stable plant are not the same as the yard SOPs at the Austin protein flagship, and a unified planning model does not unify the gatehouse. Third, the four-DC build-out over the last five years (three shelf-stable, one refrigerated, plus the Memphis metro DC) biased capacity adds toward shelf-stable just as the Planters portfolio reshaped the inbound mix — meaning the refrigerated-vs-shelf-stable handoff is happening at more nodes now, not fewer.\n\nThe Hormel Production System standardizes work inside the plant; the network-level yard layer above the plants is the one piece of the operating system that does not yet have a unified standard. The forward-looking piece is straightforward: as T&M throughput compounds into FY26, trailer-into-the-yard pressure rises with it, and the o9 plan starts depending on a dock execution layer that has not been built at the network level. That is the seam.",
+      pullQuote: 'o9 grouped the truckload. It did not pick the door.',
       caveat:
         "This is built from public Hormel disclosures, T&M and o9 reporting, the Planters acquisition record, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don't match what your team is seeing: whether the Hormel Production System already extends to yard operations or stops at the plant fence, whether multi-temp dock arbitration is decided by site policy or operator judgment today, whether the Planters-network yards have been brought onto the same SOPs as the legacy protein plants, and where T&M throughput lift has already started showing up as trailer congestion at the gatehouse.",
     },
@@ -503,6 +508,23 @@ export const hormelFoods: AccountMicrositeData = {
     ],
     urgencyDriver:
       "T&M throughput lift compounds into FY26; o9 has unified planning at the network level; the yard layer between the plan and the dock execution is the one piece of the operating system that does not yet have a unified standard.",
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'T&M target', body: '$250M annualized operating-income lift · three years · FY25 incremental $100M–$150M.' },
+    { mark: 'o9 live', body: '70+ sites · dry + refrigerated · five phased go-lives Mar–Dec 2025.' },
+    { mark: 'Planters seam', body: '$3.35B acquisition from Kraft Heinz · 2021 · shelf-stable layered on refrigerated-meat-native yards.' },
+    { mark: 'Multi-temp at the dock', body: 'SPAM, Jennie-O, and Planters arbitrate the same gate at multi-temp plants.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for the Hormel supply-chain leader sitting at the seam between T&M and the dock. T&M has set the $250M operating-income target. o9 unified planning across 70-plus sites and both temperature networks through 2025. The Hormel Production System set the in-plant work standard. The five minutes that follow are about the one layer of that operating system that does not yet have a unified standard — the yard above the plants, where multi-temp dock arbitration, Planters-network SOPs, and trailer-into-yard pressure from T&M throughput lift all land.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
