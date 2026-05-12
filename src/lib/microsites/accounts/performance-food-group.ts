@@ -16,13 +16,14 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
+import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 export const performanceFoodGroup: AccountMicrositeData = {
   slug: 'performance-food-group',
   accountName: 'Performance Food Group',
-  coverHeadline: "Yard execution across PFG's 150 distribution centers",
-  titleEmphasis: "PFG's",
-  coverFootprint: '150 DCs across the US',
+  coverHeadline: 'The yard layer above the Cheney integration',
+  titleEmphasis: 'above the Cheney integration',
+  coverFootprint: '~155 DCs · Cheney integrating',
   vertical: 'grocery',
   tier: 'Tier 2',
   band: 'B',
@@ -64,7 +65,9 @@ export const performanceFoodGroup: AccountMicrositeData = {
         },
       ],
       hypothesis:
-        "The interesting thing about the PFG yard math is what happens at a broadline foodservice DC every single morning. The site is arbitrating refrigerated, frozen, and ambient inbound from hundreds of CPG suppliers — Tyson reefers, Conagra ambient pallets, frozen-protein inbound from a co-packer, produce from a regional grower — against the outbound DSD route loading that has to be on the truck by 8 PM so the driver can hit forty-plus restaurant stops between 4 AM and noon the next day. Three different temperature zones competing for dock priority at the same gate, with the inbound side coming from a long-tail of carriers PFG does not control and the outbound side gated on a fixed route schedule the customer side depends on. Site-level operating discipline at a foodservice DC is mature in the sense that the people inside the building have done this for decades; what is less mature, across a 155-DC network, is a unified standard for how that arbitration is decided. Each DC runs against its own dock-policy reflex, its own appointment-versus-walk-in mix, its own DSD route-load sequencing logic, its own carrier-detention practice. That gap got more expensive in the last eighteen months for three reasons. First, Cheney Brothers closed in October 2024 and added five broadline DCs in Florida and the Carolinas with their own pre-acquisition operating practice — Cheney was the largest independent foodservice distributor in the Southeast for a reason, and integration friction shows up at the dock layer before it shows up at the procurement layer, because procurement integrates on a system and operations integrates on a habit. The $50M of run-rate synergies the deal underwrote sits in procurement, operations, and logistics; the operations and logistics share of that number is the share that depends on the yard layer above the sites agreeing with itself across legacy PFG DCs and Cheney DCs. Second, the capacity build-out is concentrated in the Southeast — the Cheney SC DC $42.5M expansion, the Hanover County VA $80.2M regional DC, the Miami Empire expansion — which is the same geography where the integration seam is most operationally exposed. New DCs going into a network whose operating standard is not yet unified bake the legacy variance into the next decade. Third, the segment mix is structurally unforgiving. Foodservice is 53% of revenue but it is the segment with the highest dock-arbitration complexity per site; Convenience (Core-Mark) is 39% but runs against a different customer cadence (c-store deliveries on weekly/twice-weekly rather than daily) and different freight profile; Specialty is 8% but pulls into a vending/theater/concession channel mix with its own pickup windows. The three segments run against different operating-day shapes at the same parent company, and the yard layer is the surface where those shapes either coordinate or quietly cost. The forward-looking piece is straightforward: as the Cheney integration moves through its three-year synergy window and as the Southeast capacity adds come online, trailer-into-the-yard pressure rises at exactly the DCs where the legacy-versus-Cheney handoff is happening. That is the seam.",
+        "The interesting thing about the PFG yard math is what happens at a broadline foodservice DC every single morning. The site is arbitrating refrigerated, frozen, and ambient inbound from hundreds of CPG suppliers — Tyson reefers, Conagra ambient pallets, frozen-protein inbound from a co-packer, produce from a regional grower — against the outbound DSD route loading that has to be on the truck by 8 PM so the driver can hit forty-plus restaurant stops between 4 AM and noon the next day. Three different temperature zones competing for dock priority at the same gate, with the inbound side coming from a long-tail of carriers PFG does not control and the outbound side gated on a fixed route schedule the customer side depends on. Site-level operating discipline at a foodservice DC is mature in the sense that the people inside the building have done this for decades; what is less mature, across a 155-DC network, is a unified standard for how that arbitration is decided. Each DC runs against its own dock-policy reflex, its own appointment-versus-walk-in mix, its own DSD route-load sequencing logic, its own carrier-detention practice.\n\nThat gap got more expensive in the last eighteen months for three reasons. First, Cheney Brothers closed in October 2024 and added five broadline DCs in Florida and the Carolinas with their own pre-acquisition operating practice — Cheney was the largest independent foodservice distributor in the Southeast for a reason, and integration friction shows up at the dock layer before it shows up at the procurement layer, because procurement integrates on a system and operations integrates on a habit. The $50M of run-rate synergies the deal underwrote sits in procurement, operations, and logistics; the operations and logistics share of that number is the share that depends on the yard layer above the sites agreeing with itself across legacy PFG DCs and Cheney DCs. Second, the capacity build-out is concentrated in the Southeast — the Cheney SC DC $42.5M expansion, the Hanover County VA $80.2M regional DC, the Miami Empire expansion — which is the same geography where the integration seam is most operationally exposed. New DCs going into a network whose operating standard is not yet unified bake the legacy variance into the next decade. Third, the segment mix is structurally unforgiving. Foodservice is 53% of revenue but it is the segment with the highest dock-arbitration complexity per site; Convenience (Core-Mark) is 39% but runs against a different customer cadence (c-store deliveries on weekly/twice-weekly rather than daily) and different freight profile; Specialty is 8% but pulls into a vending/theater/concession channel mix with its own pickup windows. The three segments run against different operating-day shapes at the same parent company, and the yard layer is the surface where those shapes either coordinate or quietly cost.\n\nThe forward-looking piece is straightforward: as the Cheney integration moves through its three-year synergy window and as the Southeast capacity adds come online, trailer-into-the-yard pressure rises at exactly the DCs where the legacy-versus-Cheney handoff is happening. That is the seam — and it is arriving on Scott McPherson's desk in his first full year as CEO, with George Holm staying close on M&A.",
+      pullQuote:
+        'Procurement integrates on a system. Operations integrates on a habit. The yard is where the habit either becomes the standard or quietly costs the synergy number.',
       caveat:
         "This is built from PFG’s public segment disclosures, the Cheney Brothers acquisition record, public facility-expansion press, and reasonable network inference on the broadline foodservice operating model. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don't match what your team is seeing: whether multi-temp dock arbitration at the broadline DCs is decided by site policy, system logic, or operator judgment today; whether the legacy PFG yard SOPs have already been propagated to the Cheney-acquired DCs or whether each Cheney site still runs against pre-acquisition habits; how DSD route-truck loading interacts with inbound dock priority at the same gate during the 4 PM–8 PM peak load window; and where the Southeast capacity build-out has already put visible pressure on the dock layer at the integrating sites.",
     },
@@ -273,6 +276,23 @@ export const performanceFoodGroup: AccountMicrositeData = {
     ],
     urgencyDriver:
       "Cheney Brothers integration is inside its three-year synergy window; the Southeast capacity build-out is concentrating new throughput at exactly the DCs where the integration seam is most operationally exposed; and the operations-and-logistics share of the $50M synergy number depends on a yard layer above the sites that does not yet have a unified standard across legacy PFG DCs and Cheney-acquired DCs.",
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'The integration', body: 'Cheney Brothers · closed Oct 8, 2024 · $2.1B · 5 broadline DCs · ~$3.2B revenue · $50M synergies over 3 years.' },
+    { mark: 'Southeast build-out', body: 'Cheney SC $42.5M expansion · Hanover County VA $80.2M, 325K sq ft · Miami Empire expansion.' },
+    { mark: 'Segment mix', body: 'Foodservice ~53% · Convenience (Core-Mark) ~39% · Specialty ~8% · three operating-day shapes, one parent.' },
+    { mark: 'Leadership transition', body: 'Scott McPherson · CEO Jan 1, 2026 · Holm stays Executive Chair on M&A.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      "This brief is for the PFG operating bench heading into Scott McPherson's first full year as CEO. The Cheney integration is inside its three-year synergy window, the Southeast capacity build-out is landing at exactly the DCs where the integration seam is most exposed, and the operations-and-logistics share of the $50M synergy number depends on a yard layer above 155 sites that does not yet have a unified standard. The five minutes that follow are about that layer.",
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
