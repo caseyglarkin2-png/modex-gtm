@@ -1,0 +1,150 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1600 1100"
+  role="img"
+  aria-label="Daimler Truck NA yard-system coverage map: nine tiles representing the 9 US+Mexico site-level yard systems Daimler Truck North America has run since the 2012 Saltillo pilot. Portland BEV, Cleveland flagship, Mt Holly, Gastonia, High Point Thomas Built, Gaffney FCCC, Saltillo, and Detroit Diesel are covered; Network Orchestration above the site-level layer is unfilled."
+>
+  <!-- Cream background to blend with memo body -->
+  <rect width="1600" height="1100" fill="#f5f1e8" />
+
+  <g font-family="'Courier New', ui-monospace, SFMono-Regular, Menlo, monospace">
+    <!-- Top eyebrow -->
+    <text x="80" y="64" fill="#8a847b" font-size="14" letter-spacing="3.5" font-weight="500">
+      DTNA YARD-SYSTEM COVERAGE MAP
+    </text>
+    <text x="1520" y="64" text-anchor="end" fill="#8a847b" font-size="14" letter-spacing="2.5" font-weight="500">
+      9 TILES · 8 COVERED · 1 UNFILLED
+    </text>
+
+    <!-- Hairline rule under eyebrow -->
+    <line x1="80" y1="90" x2="1520" y2="90" stroke="#d8d2c2" stroke-width="1" />
+
+    <!-- ── Tile 1 : PORTLAND OR ───────────────────────────────────── -->
+    <rect x="80" y="130" width="460" height="280" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="110" cy="160" r="4" fill="#a89e8b" />
+    <text x="310" y="255" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      PORTLAND OR
+    </text>
+    <text x="310" y="290" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      Western Star · eCascadia · eM2 BEV
+    </text>
+    <text x="310" y="325" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 2 : CLEVELAND NC ───────────────────────────────────── -->
+    <rect x="570" y="130" width="460" height="280" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="600" cy="160" r="4" fill="#a89e8b" />
+    <text x="800" y="255" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      CLEVELAND NC
+    </text>
+    <text x="800" y="290" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      Cascadia flagship · 850,000th July 2025
+    </text>
+    <text x="800" y="325" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 3 : MT HOLLY NC ─────────────────────────────────────── -->
+    <rect x="1060" y="130" width="460" height="280" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="1090" cy="160" r="4" fill="#a89e8b" />
+    <text x="1290" y="255" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      MT HOLLY NC
+    </text>
+    <text x="1290" y="290" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      M2 medium-duty
+    </text>
+    <text x="1290" y="325" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 4 : GASTONIA NC ──────────────────────────────────── -->
+    <rect x="80" y="440" width="460" height="280" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="110" cy="470" r="4" fill="#a89e8b" />
+    <text x="310" y="565" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      GASTONIA NC
+    </text>
+    <text x="310" y="600" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      components
+    </text>
+    <text x="310" y="635" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 5 : HIGH POINT NC ───────────────────────────────────────── -->
+    <rect x="570" y="440" width="460" height="280" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="600" cy="470" r="4" fill="#a89e8b" />
+    <text x="800" y="565" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      HIGH POINT NC
+    </text>
+    <text x="800" y="600" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      Thomas Built Buses
+    </text>
+    <text x="800" y="635" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 6 : GAFFNEY SC ───────────────────────────────────────── -->
+    <rect x="1060" y="440" width="460" height="280" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="1090" cy="470" r="4" fill="#a89e8b" />
+    <text x="1290" y="565" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      GAFFNEY SC
+    </text>
+    <text x="1290" y="600" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      FCCC custom chassis
+    </text>
+    <text x="1290" y="635" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 7 : SALTILLO MX ───────────────────────────────────── -->
+    <rect x="80" y="750" width="460" height="280" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="110" cy="780" r="4" fill="#a89e8b" />
+    <text x="310" y="875" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      SALTILLO MX
+    </text>
+    <text x="310" y="910" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      Cascadia · pilot site 2012
+    </text>
+    <text x="310" y="945" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 8 : DETROIT DIESEL ───────────────────────────────────── -->
+    <rect x="570" y="750" width="460" height="280" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="600" cy="780" r="4" fill="#a89e8b" />
+    <text x="800" y="865" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      DETROIT DIESEL
+    </text>
+    <text x="800" y="900" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      Redford MI · engine plant
+    </text>
+    <text x="800" y="935" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 9 : NETWORK ORCHESTRATION  (unfilled — accent border) ── -->
+    <rect x="1060" y="750" width="460" height="280" fill="none" stroke="#0078D4" stroke-width="2" />
+    <circle cx="1090" cy="780" r="4" fill="none" stroke="#0078D4" stroke-width="1.5" />
+    <text x="1290" y="855" text-anchor="middle" fill="#0078D4" font-size="22" font-weight="700" letter-spacing="5">
+      NETWORK
+    </text>
+    <text x="1290" y="890" text-anchor="middle" fill="#0078D4" font-size="22" font-weight="700" letter-spacing="5">
+      ORCHESTRATION
+    </text>
+    <text x="1290" y="925" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      layer above the 9 site systems
+    </text>
+    <text x="1290" y="960" text-anchor="middle" fill="#a89e8b" font-size="13" letter-spacing="3" font-weight="500">
+      — unfilled —
+    </text>
+
+    <!-- Hairline rule above source attribution -->
+    <line x1="80" y1="1050" x2="1520" y2="1050" stroke="#d8d2c2" stroke-width="1" />
+
+    <!-- Bottom source attribution -->
+    <text x="800" y="1082" text-anchor="middle" fill="#a89e8b" font-size="12" letter-spacing="2.5" font-weight="500">
+      COMPOSITION · PUBLIC-RECORD DTNA DISCLOSURES · SITE-LEVEL YARD VENDOR REDACTED
+    </text>
+  </g>
+</svg>
