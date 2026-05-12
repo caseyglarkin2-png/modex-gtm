@@ -1,0 +1,105 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1600 900"
+  role="img"
+  aria-label="Operating-tower coverage map: six tiles representing Danone North America operating-system domains. Renew Productivity, Microsoft AI, S&OP, Quality & Food Safety, and Scope 3 Logistics are covered; Yard Network Ops is unfilled."
+>
+  <!-- Cream background to blend with memo body -->
+  <rect width="1600" height="900" fill="#f5f1e8" />
+
+  <g font-family="'Courier New', ui-monospace, SFMono-Regular, Menlo, monospace">
+    <!-- Top eyebrow -->
+    <text x="80" y="64" fill="#8a847b" font-size="14" letter-spacing="3.5" font-weight="500">
+      OPERATING-SYSTEM COVERAGE MAP
+    </text>
+    <text x="1520" y="64" text-anchor="end" fill="#8a847b" font-size="14" letter-spacing="2.5" font-weight="500">
+      6 TILES &#183; 5 COVERED &#183; 1 UNFILLED
+    </text>
+
+    <!-- Hairline rule under eyebrow -->
+    <line x1="80" y1="90" x2="1520" y2="90" stroke="#d8d2c2" stroke-width="1" />
+
+    <!-- Tile 1 : RENEW PRODUCTIVITY -->
+    <rect x="80" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="110" cy="160" r="4" fill="#a89e8b" />
+    <text x="310" y="275" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      RENEW
+    </text>
+    <text x="310" y="315" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      PRODUCTIVITY
+    </text>
+    <text x="310" y="355" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      &#8212; covered &#8212;
+    </text>
+
+    <!-- Tile 2 : MICROSOFT AI -->
+    <rect x="570" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="600" cy="160" r="4" fill="#a89e8b" />
+    <text x="800" y="275" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      MICROSOFT
+    </text>
+    <text x="800" y="315" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      AI ACADEMY
+    </text>
+    <text x="800" y="355" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      &#8212; covered &#8212;
+    </text>
+
+    <!-- Tile 3 : S&OP -->
+    <rect x="1060" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="1090" cy="160" r="4" fill="#a89e8b" />
+    <text x="1290" y="295" text-anchor="middle" fill="#1a1a1a" font-size="28" font-weight="600" letter-spacing="6">
+      S&amp;OP
+    </text>
+    <text x="1290" y="335" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      &#8212; covered &#8212;
+    </text>
+
+    <!-- Tile 4 : QUALITY & FOOD SAFETY -->
+    <rect x="80" y="480" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="110" cy="510" r="4" fill="#a89e8b" />
+    <text x="310" y="625" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      QUALITY &amp;
+    </text>
+    <text x="310" y="665" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      FOOD SAFETY
+    </text>
+    <text x="310" y="705" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      &#8212; covered &#8212;
+    </text>
+
+    <!-- Tile 5 : SCOPE 3 LOGISTICS -->
+    <rect x="570" y="480" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="600" cy="510" r="4" fill="#a89e8b" />
+    <text x="800" y="625" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      SCOPE 3
+    </text>
+    <text x="800" y="665" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      LOGISTICS
+    </text>
+    <text x="800" y="705" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      &#8212; covered &#8212;
+    </text>
+
+    <!-- Tile 6 : YARD NETWORK OPS  (unfilled - accent border) -->
+    <rect x="1060" y="480" width="460" height="320" fill="none" stroke="#0046AD" stroke-width="2" />
+    <circle cx="1090" cy="510" r="4" fill="none" stroke="#0046AD" stroke-width="1.5" />
+    <text x="1290" y="625" text-anchor="middle" fill="#0046AD" font-size="24" font-weight="700" letter-spacing="6">
+      YARD NETWORK
+    </text>
+    <text x="1290" y="665" text-anchor="middle" fill="#0046AD" font-size="24" font-weight="700" letter-spacing="6">
+      OPS
+    </text>
+    <text x="1290" y="705" text-anchor="middle" fill="#a89e8b" font-size="13" letter-spacing="3" font-weight="500">
+      &#8212; unfilled &#8212;
+    </text>
+
+    <!-- Hairline rule above source attribution -->
+    <line x1="80" y1="840" x2="1520" y2="840" stroke="#d8d2c2" stroke-width="1" />
+
+    <!-- Bottom source attribution -->
+    <text x="800" y="872" text-anchor="middle" fill="#a89e8b" font-size="12" letter-spacing="2.5" font-weight="500">
+      COMPOSITION &#183; PUBLIC-RECORD SOURCES &#183; ACCOUNT NAMES REDACTED
+    </text>
+  </g>
+</svg>
