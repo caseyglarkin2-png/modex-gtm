@@ -9,6 +9,7 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
+import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 
 // LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
@@ -155,6 +156,9 @@ import type { AccountMicrositeData } from '../schema';
 export const diageo: AccountMicrositeData = {
   slug: 'diageo',
   accountName: 'Diageo',
+  coverHeadline: 'The yard layer Accelerate has not reached',
+  titleEmphasis: 'Accelerate has not reached',
+  coverFootprint: 'Plainfield · Lebanon · Alabama',
   parentBrand: 'Diageo',
   vertical: 'cpg',
   tier: 'Tier 2',
@@ -177,7 +181,8 @@ export const diageo: AccountMicrositeData = {
         { label: 'Peak pattern', value: 'Holiday-season throughput surge (Q4) compresses dock and yard capacity sharply' },
       ],
       hypothesis:
-        'The unusual thing about Diageo\'s yard math is the per-trailer value. A trailer of premium spirits can carry $500K+ in finished goods, and yet the protocol that decides how long it sits at the gate is the same radio-and-clipboard routine that runs at lower-value CPG networks. The other pressure is the asymmetry between the company\'s production timeline and its execution timeline — product can age for 12+ years upstream and then lose ninety minutes at a single dock door because the staging sequence got reshuffled. Stack the holiday Q4 surge on top, and the yard becomes the surface where a baseline-volume process collapses under peak load: gate queues back up, spotters get dispatched by phone, dock turns drop below target, and chain-of-custody documentation becomes the audit team\'s problem months later. None of this is a Diageo-specific failure — it\'s the default state of a 30+ site network without one operating standard.',
+        'Accelerate has reached procurement, footprint, and decarbonization. It has not yet reached the yard between the named sites. The $625M three-year cost-savings program announced under Debra Crew (and now running through Nik Jhangiani\'s interim seat after the July 2025 transition) has restructured the North American manufacturing baseline in visible ways — the Lebanon KY carbon-neutral distillery paused production for efficiency in spring 2025, the Plainfield IL bottling complex expanded behind a $80M RTD canning investment with 100% renewable electricity on top of an existing 1.5M sq ft DC, the Montgomery AL $415M manufacturing-and-warehousing site opened in April 2026 as the Southern U.S. supply anchor, and procurement plus USMCA-aligned production shifts are the headline cost levers. What it has not done — and what the premiumization math now requires — is reach the layer between those named sites where a trailer of Casamigos, Don Julio, Johnnie Walker, or Bulleit waits ninety minutes at a gatehouse because the staging sequence got reshuffled. The yard is where Accelerate\'s premiumization math either lands or quietly stops landing.\n\nThat gap got more expensive in the last cycle for three reasons. First, the per-trailer value at Diageo is unusually high — a trailer of premium spirits can carry $500K+ in finished goods, which means yard variance hits the working-capital line and not just the operating-cost line. Second, the Casamigos and Don Julio tequila ramp is the named growth bet of the portfolio and the lever Accelerate is structurally designed to fund — and the same brands are absorbing real H1 demand pressure (U.S. tequila −23%, U.S. spirits −9.3%) that makes every operational margin point matter more, not less. Third, the holiday Q4 surge has not gotten any easier; the gate queues that back up under peak load, the spotters dispatched by phone, the dock turns that drop below target, and the chain-of-custody documentation that becomes the audit team\'s problem months later all surface on the same yard layer the Accelerate program has been engineered around rather than through. Modernizing the production footprint and the procurement spine without modernizing the yard layer between them creates a known flow-control wall at the gate at exactly the moment the premium-tequila trajectory is the scoreboard.\n\nThe third thing is the pilot question itself. Plainfield IL is the marquee — 600+ employees, the brand technical center, the 1.5M sq ft DC, the RTD growth engine — and Montgomery AL is the new Southern anchor that has barely been broken in. Those are the scale-up targets once the operating model is proven, not the proving ground. The cleanest first pilot lands at one of the smaller distribution sites or at Lebanon KY on the production restart, where the yard surface is simplest to instrument, the displacement risk is lowest, and one operating standard can be proven before it has to scale across distilleries, bottling plants, aging warehouses, and distribution centers simultaneously. The proof at the simple site is what earns the right to operate the layer above Plainfield, Montgomery, and the Q4-surge dock surface in the wave that follows.',
+      pullQuote: 'The yard is where Accelerate\'s premiumization math either lands or quietly stops landing.',
       caveat:
         'This is built from public Diageo NA disclosures, industry conference attendee signal, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing on detention spend, dock contention during Q4 surge, or how much existing yard-system coverage is already in place across the network.',
     },
@@ -524,6 +529,23 @@ export const diageo: AccountMicrositeData = {
     ],
     supplyChainInitiatives: ['Beverage flow is time-sensitive and network-heavy; YardFlow story should translate well from Primo.'],
     urgencyDriver: 'Multi-site execution standardization is the stated priority. Holiday Q4 throughput pressure is the timing driver.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Accelerate program', body: '$625M three-year cost-savings target · premiumization-funding · USMCA-aligned production.' },
+    { mark: 'Footprint moves', body: 'Plainfield IL $80M RTD expansion · Lebanon KY paused 2025 for efficiency · Montgomery AL $415M opened April 2026.' },
+    { mark: 'Per-trailer math', body: '$500K+ of premium spirits per trailer. Yard variance hits working capital, not just opex.' },
+    { mark: 'CEO seat', body: 'Debra Crew exit July 2025 · Nik Jhangiani interim · strategic review underway · Casamigos / Don Julio the named growth bet.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for the Diageo North America supply team. Accelerate has reached procurement, the production footprint, and decarbonization across Plainfield, Lebanon, and the new Montgomery site. The five minutes that follow are about the one layer between them it has not yet reached — at the moment a trailer of Casamigos or Don Julio carries half a million dollars in finished goods through a gate that still runs on a radio.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
