@@ -163,7 +163,7 @@ export const abInbev: AccountMicrositeData = {
         { period: '~1998-present', role: 'Multiple roles spanning 28 years', company: 'AB InBev', relevance: 'Entire career at AB InBev. Understands every layer of the operation.' },
         { period: 'Early career', role: 'Logistics Director, Asia Pacific', company: 'AB InBev', relevance: 'Deep logistics foundation - started in the physical operations.' },
         { period: 'Mid career', role: 'Global SVP Supply Chain Planning', company: 'AB InBev', relevance: 'Led the o9 planning transformation that achieved 85% touchless.' },
-        { period: 'Current', role: 'Chief Supply Chain & Distribution Co. Officer, North America', company: 'AB InBev', relevance: `Top supply chain role for US. Owns 12 breweries, ${AB_INBEV_FACILITY_COUNT_LABEL} facilities, 800+ trucks. Can make the decision.` },
+        { period: 'Current', role: 'Chief Supply Chain & Distribution Co. Officer, North America', company: 'AB InBev', relevance: `Top supply chain role for US. Owns nine flagship breweries (post-Newark/Merrimack/Fairfield rationalization), ${AB_INBEV_FACILITY_COUNT_LABEL} facilities, 800+ trucks. Can make the decision.` },
       ],
       yearsAtCompany: '28+',
       knownForPhrase: 'Touchless planning champion - automation-first approach to supply chain',
