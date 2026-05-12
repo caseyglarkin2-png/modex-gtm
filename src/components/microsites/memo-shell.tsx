@@ -125,9 +125,9 @@ export function MemoShell({
             'radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255,253,247,0.55) 0%, transparent 60%), #f5f1e8',
         }}
       >
-        <div className="mx-auto w-full max-w-5xl px-8 pb-24 pt-20 md:px-12 xl:max-w-6xl 2xl:max-w-7xl">
+        <div className="mx-auto w-full max-w-5xl px-8 pb-20 pt-14 md:px-12 md:pt-16 xl:max-w-6xl 2xl:max-w-7xl">
           <div
-            className={`memo-cover-rise memo-cover-rise-1 mb-24 flex flex-wrap items-center gap-3 border-b border-[#d8d2c2] pb-5 ${FONT_MONO} text-[11.5px] uppercase tracking-[0.22em] text-[#8a847b]`}
+            className={`memo-cover-rise memo-cover-rise-1 mb-14 flex flex-wrap items-center gap-3 border-b border-[#d8d2c2] pb-5 md:mb-16 ${FONT_MONO} text-[11.5px] uppercase tracking-[0.22em] text-[#8a847b]`}
           >
             <span
               aria-hidden="true"
@@ -142,7 +142,7 @@ export function MemoShell({
           </div>
 
           <div
-            className={`memo-cover-rise memo-cover-rise-2 mb-16 flex flex-wrap items-baseline justify-between gap-4 ${FONT_SANS} text-[13px] tracking-[0.04em] text-[#8a847b]`}
+            className={`memo-cover-rise memo-cover-rise-2 mb-10 flex flex-wrap items-baseline justify-between gap-4 md:mb-12 ${FONT_SANS} text-[13px] tracking-[0.04em] text-[#8a847b]`}
           >
             <span
               className={`${FONT_MONO} text-[12px] uppercase tracking-[0.15em]`}
@@ -166,7 +166,7 @@ export function MemoShell({
           </h1>
 
           <dl
-            className="memo-cover-rise memo-cover-rise-4 mt-16 grid max-w-2xl grid-cols-[8rem_1fr] gap-x-6 border-t border-[#d8d2c2] pt-7 sm:grid-cols-[8rem_1fr]"
+            className="memo-cover-rise memo-cover-rise-4 mt-12 grid max-w-2xl grid-cols-[8rem_1fr] gap-x-6 border-t border-[#d8d2c2] pt-6 sm:grid-cols-[8rem_1fr] md:mt-14"
             style={{ fontSize: 'clamp(15px, 0.35vw + 0.85rem, 17.5px)' }}
           >
             {recipientName ? (
@@ -210,13 +210,13 @@ export function MemoShell({
       </section>
 
       {/* ── DOCUMENT BODY ────────────────────────────────────────── */}
-      <main className="border-t border-[#d8d2c2] bg-[#f5f1e8] py-24 md:py-32">
-        <div className="mx-auto grid max-w-[80rem] grid-cols-1 gap-0 px-6 md:px-8 lg:grid-cols-[11rem_minmax(0,40rem)_14rem] lg:gap-12 lg:px-12 xl:max-w-[92rem] xl:grid-cols-[12rem_minmax(0,48rem)_16rem] 2xl:max-w-[104rem] 2xl:grid-cols-[13rem_minmax(0,56rem)_18rem]">
+      <main className="border-t border-[#d8d2c2] bg-[#f5f1e8] py-14 md:py-20">
+        <div className="mx-auto grid max-w-[84rem] grid-cols-1 gap-0 px-6 md:px-8 lg:grid-cols-[12rem_minmax(0,1fr)_12rem] lg:gap-12 lg:px-12 xl:max-w-[100rem] xl:grid-cols-[14rem_minmax(0,1fr)_14rem] 2xl:max-w-[112rem] 2xl:grid-cols-[16rem_minmax(0,1fr)_16rem]">
           <MemoContentsRail entries={tocEntries} />
 
           <article
             className={[
-              'memo-prose w-full max-w-[40rem] text-[#4a4641] xl:max-w-[48rem] 2xl:max-w-[56rem]',
+              'memo-prose mx-auto w-full max-w-[40rem] text-[#4a4641] xl:max-w-[52rem] 2xl:max-w-[64rem]',
               FONT_SERIF,
             ].join(' ')}
             style={{
@@ -228,7 +228,7 @@ export function MemoShell({
             {children}
 
             <div
-              className="mx-auto mt-24 max-w-[40rem] border-t border-[#d8d2c2] pt-10 text-center text-[11.5px] uppercase tracking-[0.22em] text-[#8a847b] xl:max-w-[48rem] 2xl:max-w-[56rem]"
+              className="mx-auto mt-20 max-w-[40rem] border-t border-[#d8d2c2] pt-10 text-center text-[11.5px] uppercase tracking-[0.22em] text-[#8a847b] xl:max-w-[52rem] 2xl:max-w-[64rem]"
               style={{ lineHeight: 1.8 }}
             >
               <div
