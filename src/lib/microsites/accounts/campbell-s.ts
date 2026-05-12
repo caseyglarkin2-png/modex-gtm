@@ -167,45 +167,63 @@ export const campbellS: AccountMicrositeData = {
   accountName: 'Campbell\'s',
   coverHeadline: 'The yard layer inside Enterprise Transformation',
   titleEmphasis: 'inside Enterprise Transformation',
+  coverFootprint: '24+ sites · Enterprise Transformation yr 2',
+  parentBrand: 'The Campbell\'s Company',
   vertical: 'cpg',
   tier: 'Tier 2',
   band: 'B',
   priorityScore: 75,
 
-  pageTitle: "Campbell's · The yard layer between Camden HQ and 22 plants",
-  metaDescription: "Campbell's runs 22 manufacturing sites across soup, sauce, snacks, and the Sovos acquisition. The yard between the carrier gate and the plant dock is where multi-temp, multi-brand, multi-acquisition execution still lives on paper.",
+  pageTitle: "Campbell's · The yard layer inside Enterprise Transformation",
+  metaDescription: "Campbell's runs 24+ sites across soup, sauce, snacks, and baked goods on top of a $2.7B Sovos integration and an SAP ERP rollout. The yard layer above the sites is the operating surface the Enterprise Transformation Office has not yet caught.",
 
   sections: [
     { type: 'yns-thesis' },
     {
       type: 'observation',
-      headline: 'What we observed about Campbell\'s network',
+      headline: 'What we observed about the Campbell\'s U.S. network',
       composition: [
-        { label: 'Facility footprint', value: '24+ manufacturing plants and distribution centers across North America' },
-        { label: 'Product mix at the dock', value: 'Shelf-stable (canned soup, broth, sauces) · Refrigerated (Rao\'s, noosa) · Snacks (Goldfish, pretzels) · Baked goods (Pepperidge Farm)' },
+        { label: 'U.S. manufacturing footprint', value: '24+ plants and DCs across soup, sauce, snacks, and baked goods — soup at Maxton NC (+$150M expansion), Napoleon OH, Paris TX; snacks at Hanover PA (+$72M Snyder\'s upgrade), Charlotte NC; Pepperidge Farm at Bloomfield CT, Denver PA, Lakeland FL, Richmond UT, Willard OH; with Tualatin OR closed and Jeffersonville IN reduced' },
+        { label: 'Enterprise Transformation reorg (Nov 14 2024)', value: 'Dan Poland moved from EVP & Chief Supply Chain Officer to EVP & Chief Enterprise Transformation Officer · new cross-functional Enterprise Transformation Office spans digital transformation, integrated business planning, innovation process, food safety and quality, sustainability, and "the supply chain network of the future" · Operating Committee seat, reports to CEO · Cassandra Green elevated to SVP & Head of Supply Chain under Poland at the time' },
+        { label: 'CEO transition (Feb 1 2025)', value: 'Mick Beekhuizen succeeded Mark Clouse as 15th CEO in company history · 5+ years inside Campbell\'s (CFO from Sep 2019, then President of the $5.3B Meals & Beverages division from 2022) · was the executive who led the $2.7B Sovos acquisition and the subsequent SAP integration of Sovos onto Campbell\'s ERP' },
+        { label: 'Supply chain seat (Mar 3 2026)', value: 'Cassandra Green promoted to Chief Supply Chain Officer, end-to-end supply chain (customer logistics, planning, procurement, operational excellence, manufacturing, food safety and quality), reports to CEO Beekhuizen, joins Operating Committee · the seat decouples from Enterprise Transformation reporting, putting Poland\'s mandate one level up from day-to-day SCM' },
+        { label: 'ERP rollout (Sovos onto SAP HANA)', value: 'Campbell\'s SAP HANA on Azure environment — completed during the prior Snyder\'s-Lance integration — extended into Sovos in fiscal 2025; Q3 FY25 results disclosed Rao\'s sales lift tied to "timing of shipments related to this implementation" · the ERP layer now sees demand, shipments, and inventory in one place across legacy Campbell\'s, Snyder\'s-Lance, and Sovos; the yard layer above the 24+ sites does not yet ladder into that visibility' },
+        { label: 'Sovos integration in flight', value: '$2.7B closed March 12 2024 (Rao\'s, Michael Angelo\'s, noosa) · additional 49% La Regina acquisition in 2025 to advance Rao\'s sauce supply · premium SLAs (no-detention, no-damage) flow through Campbell\'s distribution network · the most operationally consequential integration since Snyder\'s-Lance, and the one Beekhuizen carried into the CEO seat' },
+        { label: 'Snyder\'s-Lance overhang', value: '$6.1B March 2018 acquisition · added a third DSD system to the network · Charlotte office closed, roles to Camden · public synergies sit "mostly in depots and warehousing" · $72M Hanover plant upgrade announced 2024 · the depot-and-warehousing seam is the part of the integration that has stayed open the longest' },
+        { label: 'Four-profile dock complexity', value: 'Shelf-stable (canned soup, broth, sauces — high-volume, palletized, weight-bounded) · Refrigerated premium (Rao\'s fresh sauces, noosa yoghurt — temperature-controlled, time-sensitive, premium SLAs) · Snacks (Goldfish, Snyder\'s pretzels, Kettle, Cape Cod — lightweight but cube-tolerant, DSD-adjacent in some channels) · Baked goods (Pepperidge Farm — shorter shelf life, fragile, retailer-direct in some lanes) — each with different staging discipline, on the same dock at the multi-profile sites' },
+        { label: 'Peak multiplier', value: '2-3x surge during soup season (Oct-Mar) at the soup plants; secondary peaks around Super Bowl, summer snacking, and the back-to-school noosa cycle' },
         { label: 'Daily trailer moves', value: '1,000+ across the network' },
-        { label: 'Peak multiplier', value: '2-3x surge during soup season (Oct-Mar); secondary peaks around Super Bowl and summer snacking' },
-        { label: 'Active network change', value: 'Tualatin closure · Jeffersonville reduction · Maxton expansion ($150M) · Sovos/Rao\'s integration in flight' },
       ],
       hypothesis:
-        'The angle that keeps coming back is consolidation under load. Campbell\'s is closing and shrinking some plants while expanding Maxton and absorbing Sovos premium-product flow at the same time — the remaining facilities are taking on more trailer volume, more SKU variety, and more handling profiles right now. Underneath that, the dock has to sequence four genuinely different product profiles (shelf-stable palletized vs. temp-controlled premium vs. lightweight bulky snacks vs. fragile baked goods), each with different staging discipline. Stack soup-season Q4 surge on top of that and the yard becomes the surface where the consolidation math, the Rao\'s premium service-level expectation, and the network\'s seasonal reality all stop translating into clean execution.\n\nThe Dan Poland reorg in November 2024 — moving him to Chief Enterprise Transformation Officer with Cassandra Green now running supply chain — is the part of the picture that says someone at the top is now explicitly looking for transformation capabilities that scale across the whole company. Under Mick Beekhuizen, who stepped into the CEO seat in February 2025 carrying the Sovos integration and the ERP rollout that gave Campbell\'s a single visibility layer over demand, shipments, and inventory, Enterprise Transformation is the operating discipline the rest of the company is now expected to ladder into. Planning has caught it. The finance and ERP layer has caught it. The yard layer above the 24+ sites is one of the few surfaces that has not — and one of the few where the Transformation brief actually has measurable headroom.',
-      pullQuote: 'The yard becomes the surface where the consolidation math, the Rao\'s premium service-level expectation, and the seasonal reality all stop translating into clean execution.',
+        'The angle that keeps coming back is consolidation under load. Campbell\'s closed Tualatin, shrank Jeffersonville, expanded Maxton (+$150M) and Hanover (+$72M), and absorbed Sovos premium-product flow over the same window. The remaining sites are taking on more trailer volume, more SKU variety, and more handling profiles right now — and the dock has to sequence four genuinely different freight grammars (shelf-stable palletized vs. temperature-controlled premium vs. lightweight DSD-adjacent snacks vs. fragile shorter-shelf-life baked) on the same infrastructure. Stack soup-season Q4 surge on top of that and the yard becomes the surface where the consolidation math, the Rao\'s premium service-level expectation, and the seasonal reality all stop translating into clean execution.\n\nThe November 14 2024 reorg is the part of the picture that says someone at the top is now explicitly looking for transformation capabilities that scale across the whole company. Dan Poland moved out of Chief Supply Chain Officer and into a newly created Chief Enterprise Transformation Officer seat reporting to the CEO, with a cross-functional Enterprise Transformation Office spanning digital transformation, integrated business planning, innovation process, food safety and quality, sustainability, and "the supply chain network of the future." Under Mick Beekhuizen — who stepped into the CEO seat February 1 2025 carrying the $2.7B Sovos integration and the SAP HANA rollout that extended Campbell\'s ERP environment into Sovos in fiscal 2025 — Enterprise Transformation is the operating discipline the rest of the company is now expected to ladder into. The ERP has caught it. Planning has caught it. The SCM seat itself just got elevated again: on March 3 2026, Cassandra Green was promoted from SVP Supply Chain to Chief Supply Chain Officer with an Operating Committee seat and direct reporting to Beekhuizen, decoupling end-to-end SCM from Enterprise Transformation and putting Poland\'s mandate one level up from day-to-day supply chain. The yard layer above the 24+ sites is one of the few operating surfaces that has not caught the same discipline yet — and one of the few where the Transformation brief still has measurable headroom.\n\nThe third piece is the integration math itself. Sovos closed March 12 2024 and the SAP integration into Campbell\'s HANA environment is the layer that gave finance, planning, and logistics a single visibility tier across legacy Campbell\'s, Snyder\'s-Lance, and Sovos. Underneath that, the Snyder\'s-Lance acquisition is now eight years in and the public synergy commentary still points to depots and warehousing as the surface where integration value lives — the same surface the Rao\'s premium-SLA flow now runs through. Stack two integrations on top of each other inside a network that just expanded Maxton, upgraded Hanover, retired Tualatin, and reduced Jeffersonville, and the place where those moves all show up first is the trailer-into-the-yard, dock-to-stock, and out-the-door cadence at the multi-profile sites. The Enterprise Transformation Office is the seat the operating model can be authored from; the yard is one of the layers that has not yet been written into it.',
+      pullQuote: 'Four freight grammars on one set of dock doors, two open integrations, and one Enterprise Transformation seat the operating model can finally be authored from.',
       caveat:
-        'This is built from public Campbell\'s disclosures, the November 2024 reorg announcement, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing on detention spend, the four-profile dock contention, or how much existing yard-system coverage already lives across the 24+ sites.',
+        'This is built from public Campbell\'s disclosures, the November 2024 Enterprise Transformation reorg announcement, the February 2025 CEO transition, the March 2026 Green-to-CSCO move, the Sovos and Snyder\'s-Lance acquisition records, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: where the four-profile dock contention concentrates today (which plants, which shifts), how the Sovos SAP rollout changed visible trailer arrival patterns at the Sovos-flow sites, how the Snyder\'s-Lance DSD depot footprint is currently sequenced into shared dock queues, and how much existing yard-system coverage already lives across the 24+ sites.',
+    },
+    {
+      type: 'artifact',
+      headline: 'A coverage map for the Enterprise Transformation Office',
+      artifact: {
+        imageSrc: '/artifacts/campbell-s-coverage-map.svg',
+        imageAlt: 'Campbell\'s enterprise transformation coverage map. Six tiles representing the operating surfaces the Enterprise Transformation Office is moving across the 24+ site U.S. network. ERP Rollout (Sovos onto Campbell\'s SAP HANA), Sovos Integration (Rao\'s, noosa, La Regina), Snyder\'s-Lance DSD (Pepperidge Farm + Snyder\'s depots), Rao\'s Premium Service (no-detention, no-damage SLAs), and the Four-Profile Dock (shelf-stable, refrigerated, snacks, baked) all run under defined ownership and are marked covered. The Yard Network Ops tile representing the layer above the 24+ sites the Enterprise Transformation mandate has not yet caught is unfilled, marked with a Campbell wave red hairline outline.',
+        caption: 'Campbell\'s enterprise transformation coverage map · 5 tiles covered · 1 unfilled.',
+        source: 'Composition modeled from public Campbell\'s + Sovos disclosures. Enterprise Transformation year 2; site-level yard vendors redacted.',
+      },
     },
     {
       type: 'comparable',
       headline: 'What a comparable network did when they closed the same gap',
       comparableName: 'Primo Brands',
       comparableProfile:
-        'Multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs. Closer in shape to Campbell\'s than the headline category suggests — the relevant overlap is multi-profile product mix, seasonal surge, and a yard layer running on local routines before deployment.',
+        'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes out gross-vehicle weight before it maxes cube), low-margin (so every minute of yard waste is a margin point you can\'t recover with price), shipped across multi-temp (premium SKUs sit alongside ambient), and complicated by return logistics for refillable formats. Primo is also years ahead of every other CPG category on yard automation and digitization — they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-level yard operating model on top of their existing site-level yard systems. The Campbell\'s operating profile is similar in shape — multi-site, multi-profile (shelf-stable, refrigerated premium, snacks, baked), 3PL-dependent, mid-integration across two acquisitions (Snyder\'s-Lance eight years in, Sovos two years in), and now governed by a newly created Enterprise Transformation Office — but with freight economics that are friendlier per trailer than water and seasonal swings (soup Oct-Mar, Super Bowl snacking, summer noosa) that look more rhythmic than the bottled-water margin floor. If a network operating model can run on water, the read-across to a four-profile CPG dock is the easier lift, not the harder one. The translation that matters for Campbell\'s is consolidation shape, not category: Primo is the proof that a network operating model can standardize execution across genuinely different freight profiles — bottled water, premium spring, refillable formats, ambient — without forcing every site onto the same site-level stack. That is the exact move the Enterprise Transformation Office needs across soup, sauce, Sovos premium, Snyder\'s-Lance DSD-adjacent snacks, and Pepperidge Farm baked goods as the consolidation math compounds (Maxton +$150M, Hanover +$72M, Tualatin closed, Jeffersonville reduced) without forcing the 24+ sites to converge their individual plant floors.',
       metrics: [
         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
       ],
-      timeline: '30-60 days from kickoff to first measurable impact at the pilot site. Maxton (post-expansion) is the cleanest pilot candidate because the new investment can absorb a new operating standard without unwinding legacy habits.',
+      timeline:
+        '30-60 days from kickoff to first measurable impact at the pilot site. Two pilot candidates fit the Campbell\'s consolidation profile: (1) Maxton NC, where the $150M expansion is landing post-investment and the new throughput can absorb a new operating standard from day one without unwinding legacy habits; and (2) a Sovos-flow site where Rao\'s premium-SLA execution is most visible against the underlying four-profile dock — the place the integration math is tightest. The Enterprise Transformation seat is the ownership; the soup-season Q4 surge is the timing driver; and the consolidation math (Maxton up, Hanover up, Tualatin out, Jeffersonville smaller, Sovos in) is the calendar that says the Transformation brief either reaches the yard now or stays a per-site negotiation. Primo is the proof that a network operating model can standardize execution across genuinely different freight profiles without forcing site-level convergence — the exact move the four-profile Campbell\'s dock needs as the consolidation compounds and the integration math runs its second year.',
       referenceAvailable: true,
     },
     {
@@ -214,9 +232,51 @@ export const campbellS: AccountMicrositeData = {
       sources: [
         {
           id: 'campbells-public-disclosures',
-          source: 'Campbell\'s public network disclosures and the November 2024 leadership reorg announcement',
+          source: 'Campbell\'s public network disclosures and 10-K filings',
           confidence: 'public',
-          detail: 'Anchors the 24+ facility figure, the Tualatin/Jeffersonville/Maxton activity, the Sovos integration context, and the Dan Poland → Chief Enterprise Transformation Officer move with Cassandra Green now running Supply Chain.',
+          detail: 'Anchors the 24+ facility figure, the Maxton +$150M expansion, the Hanover +$72M Snyder\'s plant upgrade, the Tualatin closure and Jeffersonville reduction, the Sovos and Snyder\'s-Lance acquisition history, and the multi-profile product mix across soup, sauce, snacks, and baked goods.',
+          url: 'https://www.thecampbellscompany.com/',
+        },
+        {
+          id: 'campbells-transformation-reorg',
+          source: 'Campbell\'s Enterprise Transformation reorg (November 14, 2024)',
+          confidence: 'public',
+          detail: 'Dan Poland appointed EVP & Chief Enterprise Transformation Officer; new cross-functional Enterprise Transformation Office covers digital transformation, integrated business planning, innovation process, food safety and quality, sustainability, and "the supply chain network of the future." Cassandra Green named SVP & Head of Supply Chain reporting to Poland at the time of the announcement.',
+          url: 'https://www.thecampbellscompany.com/newsroom/press-releases/campbells-appoints-daniel-l-poland-chief-enterprise-transformation-officer/',
+        },
+        {
+          id: 'campbells-ceo-transition',
+          source: 'Campbell\'s CEO transition — Mick Beekhuizen succeeds Mark Clouse (effective February 1, 2025)',
+          confidence: 'public',
+          detail: '15th CEO in company history. Joined Campbell\'s as CFO September 2019; named President of the $5.3B Meals & Beverages division in 2022; led the $2.7B Sovos acquisition and the subsequent SAP integration of Sovos onto Campbell\'s ERP.',
+          url: 'https://www.thecampbellscompany.com/newsroom/press-releases/the-campbells-company-board-of-directors-elects-mick-beekhuizen-chief-executive-officer-to-succeed-mark-clouse/',
+        },
+        {
+          id: 'campbells-csco-green',
+          source: 'Campbell\'s Cassandra Green promoted to Chief Supply Chain Officer (March 3, 2026)',
+          confidence: 'public',
+          detail: 'End-to-end supply chain (customer logistics and planning, procurement, operational excellence, manufacturing and supply chain category leadership, food safety and quality). Reports to CEO Beekhuizen; joins Operating Committee. 14-year company veteran (joined 2010 as plant manager in Australia). The promotion decouples end-to-end SCM from Enterprise Transformation reporting and puts Poland\'s seat one level up from day-to-day supply chain.',
+          url: 'https://www.thecampbellscompany.com/newsroom/press-releases/campbells-appoints-cassandra-green-chief-supply-chain-officer/',
+        },
+        {
+          id: 'campbells-sovos-acquisition',
+          source: 'Campbell\'s Sovos Brands acquisition (closed March 12, 2024; $2.7B)',
+          confidence: 'public',
+          detail: 'Added Rao\'s, Michael Angelo\'s, and noosa. Sovos volume now flows through Campbell\'s distribution network. La Regina additional 49% interest acquired in 2025 to advance Rao\'s sauce supply. Premium SLAs (no-detention, no-damage) carry through into the carrier conversation.',
+          url: 'https://www.nasdaq.com/press-release/campbell-completes-acquisition-of-sovos-brands-inc.-2024-03-12',
+        },
+        {
+          id: 'campbells-sap-erp',
+          source: 'Campbell\'s SAP HANA on Azure ERP environment (Snyder\'s-Lance migration; Sovos extension fiscal 2025)',
+          confidence: 'public',
+          detail: 'Single global SAP HANA on Azure environment originally migrated from Oracle following the Snyder\'s-Lance acquisition. Sovos extended onto the same environment in fiscal 2025; Q3 FY25 disclosed Rao\'s sales lift tied to "timing of shipments related to this implementation." S/4 HANA upgrade has been signaled publicly without a named timeline. The ERP layer gives finance, planning, and logistics a single visibility tier the yard layer does not yet ladder into.',
+          url: 'https://www.ciodive.com/news/campbell-soup-company-sap-migration-cio-francisco-fraga/586001/',
+        },
+        {
+          id: 'campbells-snyders-lance',
+          source: 'Campbell\'s Snyder\'s-Lance acquisition and integration record',
+          confidence: 'public',
+          detail: '$6.1B closed March 2018. Added a third DSD system to the network. Charlotte office closed, roles to Camden; Hanover PA plant +$72M upgrade announced 2024. Public synergy commentary points to depots and warehousing as the surface where integration value lives.',
         },
         {
           id: 'industry-benchmarks',
@@ -234,25 +294,35 @@ export const campbellS: AccountMicrositeData = {
           id: 'primo-q1-2025',
           source: 'Primo Brands operating data (under NDA)',
           confidence: 'measured',
-          detail: 'Post-deployment turn time, dock-office headcount, and per-site profit impact have been shared with us by the Primo CFO and ops team. Specific numbers are referenceable in a peer call when relevant.',
+          detail: 'Post-deployment turn time, dock-office headcount during volume growth, and per-site profit impact have been shared with us by the Primo CFO and ops team. Specific numbers are referenceable in a peer call when relevant.',
+        },
+        {
+          id: 'poland-tenure',
+          source: 'Dan Poland — public tenure record',
+          confidence: 'public',
+          detail: 'Joined Campbell\'s in 2022 as EVP & Chief Supply Chain Officer; promoted to the newly created EVP & Chief Enterprise Transformation Officer role on November 14, 2024. Prior leadership roles at KIND Snacks, Pinnacle Foods, WhiteWave Foods, and H.J. Heinz Company across senior supply chain, operations, plant management, and R&D. The Enterprise Transformation seat sits on the Operating Committee and reports directly to CEO Beekhuizen — the rare internal résumé where the seat is structurally above day-to-day SCM but built on a CSCO operator\'s reflexes.',
+          url: 'https://www.thecampbellscompany.com/our-team/daniel-l-poland/',
         },
       ],
       unknowns: [
-        'Real detention spend by lane and carrier — we estimate, you measure',
-        'Where the four product-profile dock contention concentrates today (which plants, which shifts)',
-        'Existing YMS or dock-scheduling coverage across the 24+ sites',
-        'How the Maxton expansion ramp-up plan handles incremental yard volume',
-        'How Sovos/Rao\'s premium SLAs are sequenced into the dock queue at multi-profile sites',
+        'Where the four-profile dock contention concentrates today (which plants, which shifts) — particularly at the Sovos-flow sites carrying Rao\'s premium SLAs alongside legacy shelf-stable volume',
+        'Existing YMS or dock-scheduling coverage across the 24+ sites — site-level vendor mix is not in public disclosure',
+        'How the Maxton +$150M expansion ramp-up plan handles incremental yard volume from the new building',
+        'How Sovos / Rao\'s premium SLAs (no-detention, no-damage) are sequenced into the dock queue at multi-profile sites today',
+        'Whether yard data currently feeds into the SAP HANA on Azure ERP environment in a way the Enterprise Transformation Office can act on without screen-switching — or whether yard variance is currently absorbed into forecast and inventory error downstream',
+        'How much of the open Snyder\'s-Lance depots-and-warehousing synergy commentary is being modeled through execution-layer standardization versus continued plant and depot capex',
+        'Where the Cass Green CSCO seat (Mar 3 2026) and the Enterprise Transformation Office\'s yard-layer remit divide — and which seat is the routing path for a network operating-model conversation',
+        'What yard-ops design, if any, has been spec\'d alongside the Maxton expansion and the Hanover Snyder\'s upgrade as those buildings come online',
       ],
     },
     {
       type: 'about',
       headline: 'About this analysis',
       authorBio:
-        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. The framing leans on Dan Poland\'s Enterprise Transformation mandate because the yard layer is one of the genuinely scalable operating-improvement surfaces left in a CPG network of this size.',
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. Campbell\'s is distinctive in this round because the operating-system thinking is already on the floor — the November 2024 reorg created a cross-functional Enterprise Transformation Office reporting to the CEO, the February 2025 CEO transition put the executive who led the Sovos acquisition into the seat that now governs it, and the March 2026 promotion of Cassandra Green to Chief Supply Chain Officer decoupled end-to-end SCM from Enterprise Transformation reporting. The yard layer above the 24+ sites is one of the few operating surfaces that has not yet caught the same discipline. This brief sizes that gap, not the site-level wins under it.',
       authorEmail: 'casey@freightroll.com',
       signOff:
-        'If parts of this read wrong against what you see internally for Campbell\'s — particularly the four-profile dock math, the soup-season surge, the Maxton expansion footprint, or the assumption that the 24+ sites are still on local yard routines — that\'s the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
+        'Dan — the Enterprise Transformation seat is the unusual place inside Campbell\'s where the operating discipline is structurally one level up from day-to-day SCM, by design. The November 2024 reorg created the seat to drive cross-functional capability across digital transformation, integrated business planning, the supply chain network of the future, and the rest; the February 2025 CEO transition put the executive who led the Sovos integration into the chair it reports to; and the March 2026 Green-to-CSCO move freed the seat from day-to-day end-to-end supply chain so that the Transformation brief can actually scale. The part most worth pushing back on is whether the yard layer above the 24+ sites is currently inside the Enterprise Transformation Office\'s remit or sitting in the new CSCO\'s seat, whether the four-profile dock math at the Sovos-flow sites is already inside the SAP HANA visibility tier or absorbed into forecast and inventory variance downstream, and whether the Maxton expansion and the Hanover Snyder\'s upgrade are opening the segment-wide yard-protocol moment your seat is uniquely positioned to author — or whether each plant integration is going to keep landing the decision separately. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
     },
   ],
 
@@ -270,9 +340,9 @@ export const campbellS: AccountMicrositeData = {
       roleInDeal: 'decision-maker',
       seniority: 'C-level',
       function: 'Supply Chain / Operations',
-      currentMandate: '### Current Role (CRITICAL UPDATE)\n**As of November 14, 2024, Dan Poland is NO LONGER Chief Supply Chain Officer.** He was promoted to the newly created role of **EVP & Chief Enterprise Transformation Officer**, focused on:\n- Accelerating business performance\n- Elevating capabilities\n- Driving continuous improvement\n- Member of the Operating Committee (reports directly to CEO)\n\n**Cassandra Green** was promoted to SVP & Head of Supply Chain, reporting to Poland.\n\n> ⚠️ **Outreach implication:** Hi',
-      knownForPhrase: '### Current Role (CRITICAL UPDATE)\n**As of November 14, 2024, Dan Poland is NO LONGER Chief Supply Chain Officer.** He was promoted to the newly created role of **EVP & Chief Enterprise Transformation',
-      bestIntroPath: 'Direct outreach',
+      currentMandate: 'Appointed EVP & Chief Enterprise Transformation Officer November 14, 2024 — newly created cross-functional role covering digital transformation, integrated business planning, innovation process, food safety and quality, sustainability, and "the supply chain network of the future." Operating Committee seat, reports to CEO. End-to-end supply chain decoupled from this seat on March 3, 2026, when Cassandra Green was promoted to Chief Supply Chain Officer reporting directly to CEO Beekhuizen.',
+      knownForPhrase: 'Transformation-oriented operator structurally one level up from day-to-day SCM by design.',
+      bestIntroPath: 'Direct outreach to the Enterprise Transformation Office',
     },
   ],
 
@@ -290,23 +360,38 @@ export const campbellS: AccountMicrositeData = {
         seniority: 'C-level',
         function: 'Supply Chain / Operations',
       },
-      fallbackLane: 'ops',
+      fallbackLane: 'executive',
       label: 'Dan Poland - EVP & Chief Enterprise Transformation Officer',
       variantSlug: 'dan-poland',
 
-      framingNarrative: 'Dan, Dan Poland\'s role as **Chief Enterprise Transformation Officer** is about finding and scaling operational improvements across the entire company. He\'s not managing day-to-day supply chain anymore — he\'s looking for **transformative capabilities** that drive measurable performance gains. YardFlow fits this mandate perfectly.',
-      openingHook: 'Your team is dealing with seasonal demand complexity. That is a yard problem before it is anything else.',
-      stakeStatement: '- **Shelf-stable** (canned soup, broth, sauces): high-volume, palletized, heavy - **Refrigerated** (Rao\'s fresh sauces, noosa yoghurt): temperature-controlled, time-sensitive - **Snacks** (Goldfish, pretzels, chips): lightweight but bulky, different handling - **Baked goods** (Pepperidge Farm): frag',
+      framingNarrative:
+        'Dan, the Enterprise Transformation seat is eighteen months old and is the deliberate output of a reorg that lifted you out of Chief Supply Chain Officer and into a newly created, cross-functional remit covering digital transformation, integrated business planning, innovation process, food safety and quality, sustainability, and "the supply chain network of the future." The seat sits on the Operating Committee and reports to the CEO. With Cassandra Green\'s March 2026 promotion to Chief Supply Chain Officer, end-to-end SCM is decoupled from Enterprise Transformation reporting — the Transformation brief is now structurally one level up from day-to-day supply chain. Two integrations are in flight at the same time: the Snyder\'s-Lance overhang (eight years in, depots-and-warehousing still the named synergy surface) and the Sovos integration carrying Rao\'s premium SLAs across the network the SAP HANA on Azure environment now sees end-to-end. The yard layer above the 24+ sites is one of the operating surfaces that has not yet been written into the Enterprise Transformation operating model — and the rare one where the brief was scoped exactly to scale across the network.',
+      openingHook:
+        'The Enterprise Transformation Office is the seat the operating model can be authored from. The ERP has caught the discipline; planning has caught it; the new CSCO seat now owns end-to-end SCM under it. The yard layer above the 24+ sites has not.',
+      stakeStatement:
+        'Maxton +$150M, Hanover +$72M, Tualatin closed, Jeffersonville reduced, Sovos onto the SAP HANA environment in fiscal 2025, Rao\'s premium-SLA flow now in the carrier conversation. The four-profile dock math at the multi-profile sites is the surface where every one of those moves shows up first. Without an operating model at the yard layer, the consolidation and integration math keeps landing the decision plant-by-plant on whoever is on the radio that shift. The Enterprise Transformation seat is the ownership; the soup-season Q4 surge is the timing driver; the consolidation calendar is the window.',
 
       heroOverride: {
-        headline: 'Dan, the yard is where Campbell\'s\'s execution breaks down',
-        subheadline: 'Dan Poland\'s role as **Chief Enterprise Transformation Officer** is about finding and scaling operational improvements across the entire company. He\'s not managing day-to-day supply chain anymore — he\'s looking for **transformative capabilities** that drive measurable performance gains. YardFlow fits this mandate perfectly.',
+        headline: 'The yard layer inside Enterprise Transformation.',
+        subheadline:
+          'The November 2024 reorg created a cross-functional Enterprise Transformation Office reporting to the CEO. The March 2026 promotion of Cassandra Green to CSCO decoupled end-to-end SCM from Enterprise Transformation reporting. The yard layer above the 24+ sites is one of the few operating surfaces still inside your remit that has not yet been written into a single operating model.',
       },
-      sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
+      sectionOrder: ['yns-thesis', 'observation', 'artifact', 'comparable', 'methodology', 'about'],
 
-      toneShift: 'Strategic, board-level. Reference Dan\'s mandate and transformation context. Lead with outcomes and business impact, not features.',
-      kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
-      proofEmphasis: 'The headcount-neutral customer quote resonates with Dan\'s operational reality.',
+      toneShift:
+        'Peer-to-peer enterprise-transformation framing. The seat is structurally above day-to-day SCM by design — acknowledge the reorg architecture (Nov 2024 reorg, Feb 2025 CEO transition, Mar 2026 Green-to-CSCO) without restating it back as a quote. Position the wedge as the yard-layer operating model that the Transformation Office can author once and scale across the 24+ sites, alongside the planning, ERP, and CSCO-end-to-end tiers that have already caught the discipline. Avoid plant-manager register; avoid pitching features.',
+      kpiLanguage: [
+        'network throughput variance',
+        'trailer turn time',
+        'dock-door arbitration',
+        'multi-profile dock sequencing',
+        'integration synergy realization',
+        'execution-layer standardization',
+        'detention spend',
+        'carrier scorecard',
+      ],
+      proofEmphasis:
+        'Primo is the public comparable to cite — same network shape (multi-site, multi-profile, 3PL-dependent, mid-integration), harder freight (water), already running the network-level operating layer on top of site-level systems. The directly-shaped 237-facility CPG anchor is the peer-reference credibility flex if that becomes the topic.',
     },
   ],
 
@@ -341,35 +426,45 @@ export const campbellS: AccountMicrositeData = {
   freight: {
     primaryModes: ['Truckload', 'Intermodal/Rail', 'LTL'],
     avgLoadsPerDay: '1,000+',
-    peakSeason: 'Investment:',
+    peakSeason: 'Soup season Oct-Mar (2-3x surge at soup plants) layered on Super Bowl, summer snacking, and back-to-school noosa cycles',
   },
 
   signals: {
     eventAttendance: 'Past attendee list',
     recentNews: [
-      'Investment:',
-      'Plant closure:',
-      'Facility reduction:',
-      'Expansion:',
-      'Jobs:',
+      'Cassandra Green promoted to Chief Supply Chain Officer (March 3, 2026); end-to-end SCM decoupled from Enterprise Transformation reporting and elevated to Operating Committee.',
+      'Mick Beekhuizen succeeds Mark Clouse as 15th CEO (effective February 1, 2025); led the prior $2.7B Sovos acquisition and SAP integration.',
+      'Dan Poland appointed EVP & Chief Enterprise Transformation Officer (November 14, 2024); new cross-functional Enterprise Transformation Office reports to CEO.',
+      'Sovos Brands acquisition closed March 12, 2024 ($2.7B); Rao\'s, Michael Angelo\'s, noosa now flow through the Campbell\'s distribution network.',
+      'La Regina additional 49% interest acquired in 2025 to advance Rao\'s sauce supply.',
+      'Sovos onto Campbell\'s SAP HANA on Azure ERP environment extended in fiscal 2025; Q3 FY25 disclosed Rao\'s sales lift tied to "timing of shipments related to this implementation."',
+      'Maxton NC plant expansion (+$150M) underway; Hanover PA Snyder\'s plant +$72M upgrade announced 2024; Tualatin OR closed; Jeffersonville IN reduced.',
     ],
-    supplyChainInitiatives: ['Dan Poland\'s role as **Chief Enterprise Transformation Officer** is about finding and scaling operational improvements across the entire company. He\'s not managing day-to-day supply chain anymore — he\'s looking for **transformative capabilities** that drive measurable performance gains. YardFlow fits this mandate perfectly.'],
-    urgencyDriver: 'Investment:',
+    supplyChainInitiatives: [
+      'Cross-functional Enterprise Transformation Office (created November 2024) covering digital transformation, integrated business planning, innovation process, food safety and quality, sustainability, and "the supply chain network of the future"',
+      'Sovos integration and the SAP HANA ERP extension that gave Campbell\'s a single visibility tier across legacy Campbell\'s, Snyder\'s-Lance, and Sovos',
+      'Snyder\'s-Lance integration overhang — depots-and-warehousing named publicly as the surface where synergy still lives',
+      'Maxton +$150M and Hanover +$72M expansions concentrating throughput at the soup and snacks sites',
+    ],
+    urgencyDriver:
+      'The Enterprise Transformation seat is eighteen months old; the CEO who governs it (Beekhuizen) is the executive who led the Sovos acquisition before stepping into the chair; the CSCO seat under it (Green) was just elevated in March 2026 and decoupled from Enterprise Transformation reporting. The yard layer above the 24+ sites is one of the few operating surfaces inside the Transformation remit that has not yet been written into a single operating model — and the soup-season Q4 surge is the calendar that says it either gets authored now or stays a per-site negotiation.',
   },
 
   marginaliaItems: [
     { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
-    { mark: 'Reorg', body: 'Nov 2024 · Poland → Chief Enterprise Transformation Officer · Cassandra Green → SVP Supply Chain.' },
-    { mark: 'New CEO', body: 'Mick Beekhuizen · Feb 2025 · led the $2.7B Sovos acquisition and ERP integration.' },
-    { mark: 'Network change', body: 'Tualatin closure · Jeffersonville reduction · Maxton +$150M · Sovos/Rao\'s integrating.' },
-    { mark: 'Four-profile dock', body: 'Shelf-stable · refrigerated premium · snacks · baked goods — each with different staging discipline.' },
+    { mark: 'Enterprise Transformation', body: 'Nov 14 2024 · Poland → EVP & Chief Enterprise Transformation Officer · Operating Committee · reports to CEO.' },
+    { mark: 'New CEO', body: 'Mick Beekhuizen · Feb 1 2025 · 15th CEO in 155 years · led the $2.7B Sovos acquisition and SAP integration.' },
+    { mark: 'New CSCO', body: 'Cass Green · Mar 3 2026 · end-to-end SCM decoupled from Enterprise Transformation reporting.' },
+    { mark: 'ERP', body: 'SAP HANA on Azure · Sovos onto Campbell\'s environment in FY25 · S/4 HANA roadmap signaled.' },
+    { mark: 'Network change', body: 'Maxton +$150M · Hanover Snyder\'s +$72M · Tualatin closed · Jeffersonville reduced.' },
+    { mark: 'Four-profile dock', body: 'Shelf-stable · refrigerated premium · snacks · baked — different staging discipline, same doors.' },
     { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
   ],
 
   audioBrief: {
     src: '/audio/yard-network-brief.mp3',
     intro:
-      'This brief is for Dan Poland. The Enterprise Transformation mandate you carried out of the November 2024 reorg has reached planning, finance, and the ERP layer Sovos brought in. The five minutes that follow are about the one layer above the 24+ sites that has not caught the same operating discipline yet.',
+      'This brief is for Dan Poland. The Enterprise Transformation seat you took on in the November 2024 reorg has reached planning, the SAP HANA environment Sovos extended into, and the newly elevated Chief Supply Chain Officer seat under it. The five minutes that follow are about the one layer above the 24+ sites that has not caught the same operating discipline yet.',
     chapters: AUDIO_BRIEF_CHAPTERS,
     generatedAt: '2026-05-12T00:00:00Z',
   },
