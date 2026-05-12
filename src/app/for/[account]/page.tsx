@@ -28,17 +28,27 @@ const PREPARED_DATE = new Date().toISOString().slice(0, 10); // ISO; MemoShell f
 
 export async function generateMetadata({
   params,
+  searchParams,
 }: {
   params: Promise<{ account: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }): Promise<Metadata> {
   const { account } = await params;
+  const sp = await searchParams;
   const data = getAccountMicrositeData(account);
   if (!data) return { title: 'YardFlow' };
+  const reader = resolveReader(data, sp.p);
+  const personSlug = reader?.personSlug;
+  const imagePath = personSlug
+    ? `/for/${account}/p/${personSlug}/opengraph-image`
+    : `/for/${account}/opengraph-image`;
+  const pathname = personSlug ? `/for/${account}?p=${personSlug}` : `/for/${account}`;
+  const title = personSlug ? `${data.pageTitle} — for ${reader.variant.person.firstName ?? reader.variant.person.name}` : data.pageTitle;
   return buildPublicShareMetadata({
-    title: data.pageTitle,
+    title,
     description: data.metaDescription,
-    pathname: `/for/${account}`,
-    imagePath: `/for/${account}/opengraph-image`,
+    pathname,
+    imagePath,
     imageAlt: `${data.accountName} private field brief — YardFlow Yard Network System analysis`,
   });
 }

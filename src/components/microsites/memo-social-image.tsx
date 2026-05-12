@@ -1,13 +1,12 @@
 /**
  * Memo-aesthetic OG image for the YNS Microsite Redesign.
  *
- * Replaces the dark slate-950 + glow social card with a clean white
- * "private analysis" memo card that matches the in-page MemoShell
- * aesthetic. Same 1200×630 dimensions.
+ * Cream-paper "private analysis" card matching the in-page MemoShell
+ * aesthetic. 1200×630. Accent rule left + content on right.
  *
- * The dark MicrositeSocialImage stays around until Sprint M7 (when the
- * dark MicrositeShell is deleted) so any callers still using it keep
- * working during the transition.
+ * Satori notes: every container with children needs an explicit
+ * `display: 'flex'`. Leaf text goes inside <div style={{display:flex}}>
+ * (NOT <span>) for reliable rendering.
  */
 
 interface MemoSocialImageStat {
@@ -16,12 +15,14 @@ interface MemoSocialImageStat {
 }
 
 interface MicrositeMemoSocialImageProps {
-  /** Account accent — drives the left rule + section eyebrow color. */
+  /** Account accent — drives the left rule + accent dot color. */
   accentColor?: string;
   /** "PRIVATE ANALYSIS · 2026-05-08" — top eyebrow line. */
   eyebrow: string;
   /** Headline ("Yard execution as a network constraint for General Mills"). */
   title: string;
+  /** Account name — used in the initial badge. */
+  accountName?: string;
   /** Author byline ("Casey Larkin · YardFlow"). */
   byline: string;
   /** Optional reader name ("prepared for Dan Poland") for personalized previews. */
@@ -31,6 +32,12 @@ interface MicrositeMemoSocialImageProps {
   /** Up to 3-4 short stats shown as a footer strip. */
   stats?: MemoSocialImageStat[];
 }
+
+const COVER_BG = '#f5f1e8';
+const INK = '#1a1a1a';
+const HAIRLINE = '#d8d2c2';
+const MUTED = '#8a847b';
+const SUBTLE = '#4a4641';
 
 export function MicrositeMemoSocialImage({
   accentColor = '#0E7490',
@@ -49,15 +56,16 @@ export function MicrositeMemoSocialImage({
         display: 'flex',
         position: 'relative',
         overflow: 'hidden',
-        background: '#FFFFFF',
-        color: '#0F172A',
+        background: COVER_BG,
+        color: INK,
         fontFamily: '"Mona Sans", "Inter", system-ui, sans-serif',
       }}
     >
       {/* Left accent rule */}
       <div
         style={{
-          width: 14,
+          display: 'flex',
+          width: 18,
           height: '100%',
           background: accentColor,
         }}
@@ -65,68 +73,88 @@ export function MicrositeMemoSocialImage({
 
       <div
         style={{
-          position: 'relative',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
           width: '100%',
-          padding: '64px 72px 56px',
+          paddingTop: 64,
+          paddingRight: 72,
+          paddingBottom: 52,
+          paddingLeft: 72,
         }}
       >
-        {/* Top — eyebrow */}
+        {/* Top — eyebrow + headline */}
         <div
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: 24,
-            maxWidth: 980,
           }}
         >
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 14,
-              fontSize: 18,
+              fontSize: 17,
               fontWeight: 600,
-              letterSpacing: '0.22em',
+              letterSpacing: 4,
               textTransform: 'uppercase',
-              color: '#475569',
+              color: MUTED,
+              marginBottom: 28,
             }}
           >
-            <span>{eyebrow}</span>
+            <div
+              style={{
+                display: 'flex',
+                width: 8,
+                height: 8,
+                borderRadius: 8,
+                background: accentColor,
+                marginRight: 14,
+              }}
+            />
+            <div style={{ display: 'flex' }}>{eyebrow}</div>
           </div>
 
-          {/* Headline (serif feel via Georgia fallback chain) */}
+          {/* Headline */}
           <div
             style={{
+              display: 'flex',
               fontFamily: '"Fraunces", "Iowan Old Style", Georgia, serif',
               fontSize: 64,
               lineHeight: 1.05,
-              fontWeight: 600,
-              letterSpacing: '-0.02em',
-              color: '#0F172A',
+              fontWeight: 400,
+              letterSpacing: -1.4,
+              color: INK,
               maxWidth: 1000,
             }}
           >
             {title}
           </div>
 
-          {/* Sub-line: prepared for + context */}
-          {(preparedFor || contextLine) ? (
+          {preparedFor ? (
             <div
               style={{
                 display: 'flex',
-                flexDirection: 'column',
-                gap: 6,
                 fontSize: 22,
-                color: '#334155',
+                fontWeight: 500,
+                color: INK,
+                marginTop: 28,
               }}
             >
-              {preparedFor ? (
-                <span style={{ fontWeight: 500, color: '#1E293B' }}>{preparedFor}</span>
-              ) : null}
-              {contextLine ? <span>{contextLine}</span> : null}
+              {preparedFor}
+            </div>
+          ) : null}
+
+          {contextLine ? (
+            <div
+              style={{
+                display: 'flex',
+                fontSize: 21,
+                color: SUBTLE,
+                marginTop: preparedFor ? 6 : 28,
+              }}
+            >
+              {contextLine}
             </div>
           ) : null}
         </div>
@@ -138,68 +166,73 @@ export function MicrositeMemoSocialImage({
             justifyContent: 'space-between',
             alignItems: 'flex-end',
             width: '100%',
+            borderTop: `1px solid ${HAIRLINE}`,
+            paddingTop: 22,
           }}
         >
           <div
             style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: 4,
             }}
           >
-            <span style={{ fontSize: 16, fontWeight: 600, color: '#0F172A' }}>{byline}</span>
-            <span
+            <div style={{ display: 'flex', fontSize: 16, fontWeight: 600, color: INK, marginBottom: 6 }}>
+              {byline}
+            </div>
+            <div
               style={{
-                fontSize: 12,
+                display: 'flex',
+                fontSize: 11,
                 fontWeight: 600,
-                letterSpacing: '0.18em',
+                letterSpacing: 3,
                 textTransform: 'uppercase',
-                color: '#94A3B8',
+                color: MUTED,
               }}
             >
               YardFlow by FreightRoll
-            </span>
+            </div>
           </div>
 
           {stats.length > 0 ? (
             <div
               style={{
                 display: 'flex',
-                gap: 36,
                 alignItems: 'flex-end',
               }}
             >
-              {stats.map((stat) => (
+              {stats.map((stat, i) => (
                 <div
                   key={stat.label}
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: 2,
-                    alignItems: 'flex-start',
+                    marginLeft: i === 0 ? 0 : 32,
                   }}
                 >
-                  <span
+                  <div
                     style={{
+                      display: 'flex',
                       fontSize: 11,
                       fontWeight: 600,
-                      letterSpacing: '0.18em',
+                      letterSpacing: 3,
                       textTransform: 'uppercase',
-                      color: '#64748B',
+                      color: MUTED,
+                      marginBottom: 4,
                     }}
                   >
                     {stat.label}
-                  </span>
-                  <span
+                  </div>
+                  <div
                     style={{
-                      fontSize: 26,
-                      fontWeight: 600,
-                      color: '#0F172A',
+                      display: 'flex',
+                      fontSize: 24,
+                      fontWeight: 400,
+                      color: INK,
                       fontFamily: '"Fraunces", "Iowan Old Style", Georgia, serif',
                     }}
                   >
                     {stat.value}
-                  </span>
+                  </div>
                 </div>
               ))}
             </div>
