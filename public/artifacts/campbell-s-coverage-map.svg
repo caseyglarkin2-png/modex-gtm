@@ -1,0 +1,123 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1600 900"
+  role="img"
+  aria-label="Campbell's enterprise transformation coverage map: six tiles representing the operating surfaces the Enterprise Transformation Office is moving across the 24+ site U.S. network. ERP Rollout (Sovos onto Campbell's SAP), Sovos Integration (Rao's premium SLAs), Snyder's-Lance DSD (Pepperidge Farm + Snyder's depots), Rao's Premium Service (no-detention, no-damage), and the Four-Profile Dock (shelf-stable, refrigerated, snacks, baked) all run under defined ownership and are marked covered. The Yard Network Ops tile representing the layer above the 24+ sites that the Enterprise Transformation mandate has not yet caught is unfilled, marked with a Campbell wave red hairline outline."
+>
+  <!-- Cream background to blend with memo body -->
+  <rect width="1600" height="900" fill="#f5f1e8" />
+
+  <g font-family="'Courier New', ui-monospace, SFMono-Regular, Menlo, monospace">
+    <!-- Top eyebrow -->
+    <text x="80" y="64" fill="#8a847b" font-size="14" letter-spacing="3.5" font-weight="500">
+      CAMPBELL'S ENTERPRISE TRANSFORMATION COVERAGE MAP
+    </text>
+    <text x="1520" y="64" text-anchor="end" fill="#8a847b" font-size="14" letter-spacing="2.5" font-weight="500">
+      6 TILES · 5 COVERED · 1 UNFILLED
+    </text>
+
+    <!-- Hairline rule under eyebrow -->
+    <line x1="80" y1="90" x2="1520" y2="90" stroke="#d8d2c2" stroke-width="1" />
+
+    <!-- ── Tile 1 : ERP ROLLOUT ───────────────────────────────────── -->
+    <rect x="80" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="110" cy="160" r="4" fill="#a89e8b" />
+    <text x="310" y="285" text-anchor="middle" fill="#1a1a1a" font-size="28" font-weight="600" letter-spacing="6">
+      ERP ROLLOUT
+    </text>
+    <text x="310" y="320" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      Sovos · onto Campbell's SAP HANA
+    </text>
+    <text x="310" y="355" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 2 : SOVOS INTEGRATION ───────────────────────────────────── -->
+    <rect x="570" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="600" cy="160" r="4" fill="#a89e8b" />
+    <text x="800" y="270" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      SOVOS INTEGRATION
+    </text>
+    <text x="800" y="305" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      Rao's · noosa · $2.7B · closed Mar 2024
+    </text>
+    <text x="800" y="340" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      La Regina 49% · premium sauces
+    </text>
+    <text x="800" y="375" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 3 : SNYDER'S-LANCE DSD ─────────────────────────────────────── -->
+    <rect x="1060" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="1090" cy="160" r="4" fill="#a89e8b" />
+    <text x="1290" y="270" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      SNYDER'S-LANCE
+    </text>
+    <text x="1290" y="305" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      DSD
+    </text>
+    <text x="1290" y="340" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      Pepperidge Farm + Snyder's depots
+    </text>
+    <text x="1290" y="375" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 4 : RAO'S PREMIUM SERVICE ──────────────────────────────────── -->
+    <rect x="80" y="480" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="110" cy="510" r="4" fill="#a89e8b" />
+    <text x="310" y="615" text-anchor="middle" fill="#1a1a1a" font-size="24" font-weight="600" letter-spacing="5">
+      RAO'S PREMIUM
+    </text>
+    <text x="310" y="650" text-anchor="middle" fill="#1a1a1a" font-size="24" font-weight="600" letter-spacing="5">
+      SERVICE
+    </text>
+    <text x="310" y="685" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      no-detention · no-damage SLAs
+    </text>
+    <text x="310" y="720" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 5 : FOUR-PROFILE DOCK ───────────────────────────────────────── -->
+    <rect x="570" y="480" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="600" cy="510" r="4" fill="#a89e8b" />
+    <text x="800" y="615" text-anchor="middle" fill="#1a1a1a" font-size="24" font-weight="600" letter-spacing="5">
+      FOUR-PROFILE
+    </text>
+    <text x="800" y="650" text-anchor="middle" fill="#1a1a1a" font-size="24" font-weight="600" letter-spacing="5">
+      DOCK
+    </text>
+    <text x="800" y="685" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      shelf-stable · refrigerated · snacks · baked
+    </text>
+    <text x="800" y="720" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 6 : YARD NETWORK OPS  (unfilled — accent border) ── -->
+    <rect x="1060" y="480" width="460" height="320" fill="none" stroke="#E31837" stroke-width="2" />
+    <circle cx="1090" cy="510" r="4" fill="none" stroke="#E31837" stroke-width="1.5" />
+    <text x="1290" y="615" text-anchor="middle" fill="#E31837" font-size="24" font-weight="700" letter-spacing="6">
+      YARD NETWORK
+    </text>
+    <text x="1290" y="655" text-anchor="middle" fill="#E31837" font-size="24" font-weight="700" letter-spacing="6">
+      OPS
+    </text>
+    <text x="1290" y="690" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      layer above the 24+ sites
+    </text>
+    <text x="1290" y="720" text-anchor="middle" fill="#a89e8b" font-size="13" letter-spacing="3" font-weight="500">
+      — unfilled —
+    </text>
+
+    <!-- Hairline rule above source attribution -->
+    <line x1="80" y1="840" x2="1520" y2="840" stroke="#d8d2c2" stroke-width="1" />
+
+    <!-- Bottom source attribution -->
+    <text x="800" y="872" text-anchor="middle" fill="#a89e8b" font-size="12" letter-spacing="2.5" font-weight="500">
+      COMPOSITION · PUBLIC CAMPBELL'S + SOVOS DISCLOSURES · ENTERPRISE TRANSFORMATION YEAR 2
+    </text>
+  </g>
+</svg>
