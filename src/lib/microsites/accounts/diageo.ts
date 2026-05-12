@@ -177,8 +177,11 @@ export const diageo: AccountMicrositeData = {
         { label: 'NA facility footprint', value: '30+ sites — distilleries, bottling plants, aging warehouses, distribution centers' },
         { label: 'Daily trailer moves', value: '1,500+ across the network' },
         { label: 'Carrier model', value: '3PL-heavy with contract carriers; mix of dry, temperature-controlled, and high-value spirits loads' },
-        { label: 'Product profile', value: 'Premium spirits — Johnnie Walker, Don Julio, Crown Royal, Captain Morgan' },
+        { label: 'Product profile', value: 'Premium spirits — Johnnie Walker, Crown Royal, Captain Morgan, Bulleit, plus the Casamigos and Don Julio tequila growth engines' },
         { label: 'Peak pattern', value: 'Holiday-season throughput surge (Q4) compresses dock and yard capacity sharply' },
+        { label: 'Accelerate coverage seam', value: '$625M three-year cost-savings program has reached procurement, A&P optimization, USMCA-aligned production shifts, and the manufacturing footprint. The yard layer between those named sites is where Accelerate has not yet been engineered through' },
+        { label: 'Montgomery AL greenfield', value: '$415M premium-spirits manufacturing and warehousing facility opened April 2026 — Southern U.S. supply anchor, 100 employees, designed for the Casamigos/Don Julio tequila trajectory and tariff-resilient USMCA flow' },
+        { label: 'Per-trailer working-capital exposure', value: '$500K+ of premium spirits per trailer. Yard variance hits the working-capital line, not just opex — a 90-minute gatehouse delay on a Casamigos trailer is a working-capital event' },
       ],
       hypothesis:
         'Accelerate has reached procurement, footprint, and decarbonization. It has not yet reached the yard between the named sites. The $625M three-year cost-savings program announced under Debra Crew (and now running through Nik Jhangiani\'s interim seat after the July 2025 transition) has restructured the North American manufacturing baseline in visible ways — the Lebanon KY carbon-neutral distillery paused production for efficiency in spring 2025, the Plainfield IL bottling complex expanded behind a $80M RTD canning investment with 100% renewable electricity on top of an existing 1.5M sq ft DC, the Montgomery AL $415M manufacturing-and-warehousing site opened in April 2026 as the Southern U.S. supply anchor, and procurement plus USMCA-aligned production shifts are the headline cost levers. What it has not done — and what the premiumization math now requires — is reach the layer between those named sites where a trailer of Casamigos, Don Julio, Johnnie Walker, or Bulleit waits ninety minutes at a gatehouse because the staging sequence got reshuffled. The yard is where Accelerate\'s premiumization math either lands or quietly stops landing.\n\nThat gap got more expensive in the last cycle for three reasons. First, the per-trailer value at Diageo is unusually high — a trailer of premium spirits can carry $500K+ in finished goods, which means yard variance hits the working-capital line and not just the operating-cost line. Second, the Casamigos and Don Julio tequila ramp is the named growth bet of the portfolio and the lever Accelerate is structurally designed to fund — and the same brands are absorbing real H1 demand pressure (U.S. tequila −23%, U.S. spirits −9.3%) that makes every operational margin point matter more, not less. Third, the holiday Q4 surge has not gotten any easier; the gate queues that back up under peak load, the spotters dispatched by phone, the dock turns that drop below target, and the chain-of-custody documentation that becomes the audit team\'s problem months later all surface on the same yard layer the Accelerate program has been engineered around rather than through. Modernizing the production footprint and the procurement spine without modernizing the yard layer between them creates a known flow-control wall at the gate at exactly the moment the premium-tequila trajectory is the scoreboard.\n\nThe third thing is the pilot question itself. Plainfield IL is the marquee — 600+ employees, the brand technical center, the 1.5M sq ft DC, the RTD growth engine — and Montgomery AL is the new Southern anchor that has barely been broken in. Those are the scale-up targets once the operating model is proven, not the proving ground. The cleanest first pilot lands at one of the smaller distribution sites or at Lebanon KY on the production restart, where the yard surface is simplest to instrument, the displacement risk is lowest, and one operating standard can be proven before it has to scale across distilleries, bottling plants, aging warehouses, and distribution centers simultaneously. The proof at the simple site is what earns the right to operate the layer above Plainfield, Montgomery, and the Q4-surge dock surface in the wave that follows.',
@@ -187,18 +190,28 @@ export const diageo: AccountMicrositeData = {
         'This is built from public Diageo NA disclosures, industry conference attendee signal, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing on detention spend, dock contention during Q4 surge, or how much existing yard-system coverage is already in place across the network.',
     },
     {
+      type: 'artifact',
+      headline: 'A coverage map for the Accelerate operating model',
+      artifact: {
+        imageSrc: '/artifacts/diageo-coverage-map.svg',
+        imageAlt: 'Accelerate coverage map. Six tiles representing the Diageo North America cost-and-efficiency operating model. Procurement, A&P Optimization, USMCA Production, Decarbonization, and Footprint are covered. The Yard Network Ops tile is unfilled, marked with a Diageo navy hairline outline.',
+        caption: 'Accelerate coverage map · 1 tile unfilled.',
+        source: 'Composition modeled from public Accelerate, Montgomery AL, Plainfield IL, and Lebanon KY disclosures. Account names redacted.',
+      },
+    },
+    {
       type: 'comparable',
       headline: 'What a comparable network did when they closed the same gap',
       comparableName: 'Primo Brands',
       comparableProfile:
-        'Multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs. Beverage flow with a similar archetype mix and the same yard-protocol fragmentation Diageo NA still operates with — which is why the operational read-across is unusually clean here.',
+        'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes out gross-vehicle weight before it maxes cube), low-margin (so every minute of yard waste is a margin point you can\'t recover with price), and shipped across multi-temp (premium SKUs sit alongside ambient). Primo is also years ahead of every other CPG category on yard automation and digitization — they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-level yard operating model on top of their existing site-level yard systems. The Diageo NA operating profile is similar in shape — multi-site, multi-temp at the high-value spirits layer, 3PL-dependent, holiday-Q4-surge-driven — but with significantly higher per-trailer value, which is why yard variance lands on working capital here, not just opex. Primo runs the operating layer Accelerate is structurally shaped to host across Plainfield, Lebanon, Montgomery, and the rest of the network — same coordinates, harder freight.',
       metrics: [
         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
       ],
-      timeline: '30-60 days from kickoff to first measurable impact at the pilot site. The strongest pilot targets are the plants where Q4 surge volume hits hardest — that\'s where one protocol pays back fastest.',
+      timeline: '30–60 days from kickoff to first measurable impact at the pilot site. The sites where this lands first are not the marquee Plainfield or Montgomery nodes — they are the smaller distribution facilities or Lebanon KY on its production restart, where the carrier yard is simplest to instrument and the displacement risk is lowest. Plainfield and Montgomery are where the proven model scales into the highest-throughput nodes once the operating standard has its first 60-day proof; the Q4-surge dock surface is the second wave. If Primo\'s network operating layer runs cleanly on the hardest CPG freight in North America, the read-across into the Accelerate cost-and-efficiency model is the easier lift, not the harder one.',
       referenceAvailable: true,
     },
     {
@@ -211,6 +224,27 @@ export const diageo: AccountMicrositeData = {
           confidence: 'public',
           detail: 'Anchors the 30+ NA facility figure and the leadership map (Marsha McIntosh-Hamilton, President NA Supply; Raymond Reddrick, SVP NA Supply – Manufacturing and Distillation).',
           url: 'https://www.diageo.com/en/our-business/where-we-operate/north-america/',
+        },
+        {
+          id: 'diageo-accelerate-fy25',
+          source: 'Diageo Accelerate program — FY25 preliminary results and FY26 Q1 trading statement',
+          confidence: 'public',
+          detail: '$625M three-year cost-savings program (raised from $500M), positioned as the agile-operating-model funding mechanism for the Casamigos / Don Julio / Johnnie Walker premiumization bet. Procurement, A&P optimization (non-working development cuts from 21% to 14% of A&P), USMCA-aligned production shifts, and footprint moves are the named operating levers; the yard layer between the sites is not.',
+          url: 'https://www.diageo.com/~/media/Files/D/Diageo-V2/Diageo-Corp/press-release/2025/f25-preliminary-results-press-release.pdf',
+        },
+        {
+          id: 'diageo-montgomery',
+          source: 'Diageo Montgomery AL premium-spirits manufacturing facility',
+          confidence: 'public',
+          detail: '$415M premium-spirits manufacturing and warehousing facility opened April 2026 in Montgomery AL. McIntosh-Hamilton, on the record at the opening, framed Montgomery as a long-term commitment to "accelerating innovation, ensuring our iconic brands reach consumers with greater speed and significantly lower environmental impact." Designed as the Southern U.S. supply anchor for the tequila trajectory.',
+          url: 'https://www.diageo.com/en/news-and-media/press-releases/2025/diageo-plc-announces-strategic-changes-to-increase-resiliency-of-north-american-manufacturing-operations',
+        },
+        {
+          id: 'mcintosh-hamilton-tenure',
+          source: 'Marsha McIntosh-Hamilton — public tenure record',
+          confidence: 'public',
+          detail: 'Named President North America Supply at Diageo. Public sponsor of the Montgomery AL site opening, the Crown Royal Canadian-mash standard ("All Crown Royal will be mashed, distilled, and aged at our Canadian facilities"), and the broader Accelerate-aligned manufacturing resiliency moves across NA.',
+          url: 'https://www.diageo.com/en/our-business/where-we-operate/north-america/diageo-north-america-executive-team/marsha-mcintosh-hamilton',
         },
         {
           id: 'industry-benchmarks',
@@ -237,16 +271,18 @@ export const diageo: AccountMicrositeData = {
         'Existing YMS or dock-scheduling coverage across the 30+ NA sites',
         'Where the holiday-Q4 surge breaks dock capacity hardest (which sites, which weeks)',
         'How premium-product priority flagging is — or isn\'t — sequenced into the dock queue today',
+        'Whether yard-layer cost and throughput variance is currently captured inside the Accelerate $625M scorecard, or absorbed into per-site overhead lines that never roll up to the program tracker',
+        'Whether the Montgomery AL yard-ops design has been spec\'d yet — and who owns that design across the new Southern supply anchor and the Plainfield IL bottling complex it shares the tequila trajectory with',
       ],
     },
     {
       type: 'about',
       headline: 'About this analysis',
       authorBio:
-        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. The premium-spirits angle is what makes Diageo distinctive: per-trailer value is unusually high, which means yard variance hits the working-capital line, not just the operating-cost line.',
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. Diageo is distinctive in this round because Accelerate is already laying a single operating standard across procurement, A&P, USMCA production shifts, and the manufacturing footprint — Lebanon paused for efficiency, Plainfield expanded behind RTD, Montgomery opened as the Southern anchor. The yard is the one layer between those named sites that has not yet caught the same operating discipline. This brief sizes that gap, not the program wins around it.',
       authorEmail: 'casey@freightroll.com',
       signOff:
-        'If parts of this read wrong against what you see internally for Diageo — particularly the per-trailer working-capital math, the Q4 surge dock pressure, or the assumption that the 30+ NA sites are still operating different yard routines — that\'s the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
+        'Marsha — the part most worth pushing back on is whether the Accelerate operating discipline that is now visible across procurement, A&P, USMCA production shifts, and the Plainfield / Lebanon / Montgomery footprint has reached the yard layer between those sites yet, or whether it has stopped at the named program levers. That answer reshapes the rest of this. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
     },
   ],
 
@@ -340,27 +376,42 @@ export const diageo: AccountMicrositeData = {
         title: 'President of North America Supply',
         company: 'Diageo',
         email: 'marsha.mcintosh-hamilton@diageo.com',
-        roleInDeal: 'routing-contact',
-        seniority: 'VP',
+        roleInDeal: 'decision-maker',
+        seniority: 'SVP/EVP',
         function: 'Supply Chain',
       },
       fallbackLane: 'ops',
-      label: 'Marsha McIntosh-Hamilton - President of North America Supply',
+      label: 'Marsha McIntosh-Hamilton — President of North America Supply',
       variantSlug: 'marsha-mcintosh-hamilton',
 
-      framingNarrative: 'Marsha, Beverage flow is time-sensitive and network-heavy; YardFlow story should translate well from Primo.',
-      openingHook: 'The yard is where execution meets reality for Diageo — and where multi-site standardization pays back fastest.',
-      stakeStatement: 'Every minute of excess dwell time at Diageo\'s facilities erodes the margin your team is working to protect.',
+      framingNarrative:
+        'Marsha, the operating discipline Accelerate is laying across procurement, A&P, USMCA-aligned production, and the manufacturing footprint — Lebanon paused for efficiency, Plainfield expanded behind RTD, Montgomery opened in April 2026 as the Southern anchor — is the same discipline the yard layer between those sites has not yet caught. Site-level execution has its own gravity at every gatehouse. The network operating layer above the sites is what the Accelerate cost-and-efficiency math now needs, and what the premium-tequila trajectory is structurally relying on.',
+      openingHook:
+        'At the Montgomery opening you framed it as accelerating innovation, ensuring iconic brands reach consumers with greater speed and significantly lower environmental impact. That standard has landed on the building. It has not yet landed on the yard between the buildings.',
+      stakeStatement:
+        'A trailer of Casamigos, Don Julio, Johnnie Walker, or Bulleit carries $500K+ in finished goods through a gate that still runs on a radio. Accelerate\'s $625M three-year target is the cost-and-efficiency scorecard. The yard layer between Plainfield, Lebanon, Montgomery, and the rest of the 30+ NA sites is the only operating-system tile in that scorecard that is not yet running to a single standard — and it is the one where the per-trailer working-capital math compounds fastest.',
 
       heroOverride: {
-        headline: 'Marsha, the yard is where Diageo\'s execution breaks down',
-        subheadline: 'Beverage flow is time-sensitive and network-heavy; YardFlow story should translate well from Primo.',
+        headline: 'The Accelerate tile no one has filled yet is the yard network operating layer.',
+        subheadline:
+          'Procurement, A&P, USMCA production shifts, and the Plainfield / Lebanon / Montgomery footprint are running to a single operating standard. The yard layer between those sites is not. The smaller distribution sites and Lebanon on its production restart are the cleanest place to prove the operating model; Plainfield and Montgomery are where it scales.',
       },
-      sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
+      sectionOrder: ['yns-thesis', 'observation', 'artifact', 'comparable', 'methodology', 'about'],
 
-      toneShift: 'Operator-to-operator. Marsha lives in the operational details. Lead with metrics, turn times, and facility-level impact.',
-      kpiLanguage: ['truck turn time', 'dock utilization', 'throughput per shift', 'detention cost', 'carrier satisfaction'],
-      proofEmphasis: 'The headcount-neutral customer quote resonates with Marsha\'s operational reality.',
+      toneShift:
+        'Peer-to-peer network-operator framing. Marsha runs Diageo NA supply at the President level — she has signed off on the Crown Royal Canadian-mash standard, the Montgomery AL opening, and the broader manufacturing-resiliency moves. She doesn\'t need a glossary, and she doesn\'t need a sales pitch. Position the wedge as the layer above sites (network operating model), not as replacement of sites. Quote her own public language back at her ("accelerating innovation," "greater speed and significantly lower environmental impact") only where it earns the quote.',
+      kpiLanguage: [
+        'network OEE',
+        'dock-door utilization',
+        'trailer dwell',
+        'dock-to-stock cycle time',
+        'high-value-trailer working-capital exposure',
+        'chain-of-custody compliance at the gate',
+        'Q4-surge dock contention',
+        'carrier scorecard',
+      ],
+      proofEmphasis:
+        'Primo is the *public* comparable to cite — same network shape, harder freight (water), already running the network-level layer above site-level yard systems. The directly-shaped comparable (un-name-able 237-facility CPG anchor) is the credibility flex if peer reference becomes the topic.',
     },
     {
       person: {
