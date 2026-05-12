@@ -44,14 +44,14 @@ describe('MemoShell', () => {
     expect(screen.getByText(/General Mills · 47-plant footprint/)).toBeDefined();
   });
 
-  it('renders the Draft v0 badge in the cover classification when needsHandTuning', () => {
+  it('renders the Working-analysis v0 badge in the colophon when needsHandTuning', () => {
     render(<MemoShell {...baseProps} needsHandTuning><p>body</p></MemoShell>);
-    expect(screen.getByText(/Draft · v0/i)).toBeDefined();
+    expect(screen.getByText(/Working analysis · v0/i)).toBeDefined();
   });
 
-  it('does not render the Draft badge when not flagged', () => {
+  it('does not render the Working-analysis badge when not flagged', () => {
     render(<MemoShell {...baseProps}><p>body</p></MemoShell>);
-    expect(screen.queryByText(/Draft · v0/i)).toBeNull();
+    expect(screen.queryByText(/Working analysis · v0/i)).toBeNull();
   });
 
   it('does not include any "book a call" affordance in the chrome', () => {
