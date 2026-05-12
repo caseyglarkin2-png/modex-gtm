@@ -1,3 +1,24 @@
+/**
+ * Frito-Lay — ABM Microsite Data
+ * Quality Tier: A+ (Phase 6A — top-of-list account, public PepsiCo Foods
+ * North America anchor)
+ *
+ * Pitch shape: coexistence wedge — a network-level yard operating layer
+ * above PepsiCo Foods' digital surfaces (pep+, the Siemens / NVIDIA digital
+ * twin program, plant-floor AI, route-loading systems). Not displacement.
+ *
+ * Angle: YARD MANAGEMENT at snack-network velocity (dock-door utilization,
+ * trailer dwell, DSD route-loading sequence, agricultural inbound
+ * arbitration, network OEE) — NOT driver experience.
+ *
+ * Decision-maker anchor: Brian Watson, VP Supply Chain, Frito-Lay /
+ * PepsiCo. Steven Williams (former CEO Frito-Lay / PepsiCo Foods North
+ * America, now EVP & Vice Chairman, Global Chief Commercial Officer) is
+ * the corporate sponsor of the snack-network operating discipline this
+ * memo names. The memo speaks past Watson to the operating-system surface
+ * Williams handed off.
+ */
+
 import type { AccountMicrositeData } from '../schema';
 import { getFacilityCountLabel, getFacilityCountLowerBound } from '../../research/facility-fact-registry';
 
@@ -6,224 +27,74 @@ const FRITO_LAY_FACILITY_COUNT = getFacilityCountLowerBound('Frito-Lay', 230) ??
 
 // LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
 /*
- * [
- *     {
- *       type: 'hero',
- *       headline: 'Your snack network runs at a velocity most supply chains never see. Your yards were not built for this speed.',
- *       subheadline: 'Frito-Lay moves product from plant to shelf faster than almost any CPG network in the world. But between the production line and the outbound trailer, there is a yard that still runs on clipboards and radio calls. That gap costs you more than you are tracking.',
- *       accountCallout: '30+ manufacturing plants, 200+ distribution centers, highest-velocity CPG network in North America',
- *       backgroundTheme: 'dark',
- *       cta: {
- *         type: 'meeting',
- *         headline: 'See what standardized yard execution looks like at snack-network speed',
- *         subtext: '30-minute walk-through of your plant network with board-ready ROI.',
- *         buttonLabel: 'Book a Network Audit',
- *         calendarLink: BOOKING_LINK,
- *       },
- *     },
- *     {
- *       type: 'problem',
- *       sectionLabel: 'The Hidden Constraint',
- *       headline: 'The fastest production lines in CPG are feeding the slowest yards',
- *       narrative: 'Frito-Lay\'s manufacturing lines run at extraordinary speed. Lays, Doritos, Cheetos - continuous production that does not wait. But when that product hits the yard for outbound staging, the pace drops to whatever speed a radio-dispatched spotter can manage. The production line runs at 2026 speed. The yard runs at 1996 speed.',
- *       painPoints: [
- *         {
- *           headline: 'Production-to-trailer handoff gap',
- *           description: 'Continuous production lines generate outbound loads at a pace the yard was never designed to match. Every 30-minute delay in trailer staging cascades to delivery routes across the region.',
- *           kpiImpact: 'Minutes of dock delay = hours of route delay downstream',
- *           relevantPeople: ['fl-watson', 'fl-mars', 'fl-chambers'],
- *         },
- *         {
- *           headline: 'Inbound raw material coordination',
- *           description: 'Potatoes, corn, oils, seasonings - agricultural inbound with weather-dependent timing and variable carrier quality. The inbound yard is a scheduling puzzle that resets every day.',
- *           kpiImpact: 'Agricultural inbound variability hits dock scheduling daily',
- *           relevantPeople: ['fl-chambers', 'fl-fanslow'],
- *         },
- *         {
- *           headline: 'DSD route loading precision',
- *           description: 'Direct store delivery routes are loaded overnight for morning departure. Loading sequence matters - wrong staging order means wrong trailer-to-route assignment. The yard is where that sequence either works or breaks.',
- *           kpiImpact: 'Staging errors cascade to retail stock-outs',
- *           relevantPeople: ['fl-mars', 'fl-scott'],
- *         },
- *         {
- *           headline: 'Multi-site standardization gap',
- *           description: 'Thirty-plus manufacturing plants and 200-plus distribution centers. Every site runs its yard differently. What works at the Plano headquarters campus does not transfer to the Topeka plant or the Perry, GA facility.',
- *           kpiImpact: `No standard yard protocol across ${FRITO_LAY_FACILITY_COUNT_LABEL} sites`,
- *           relevantPeople: ['fl-watson', 'fl-scott'],
- *         },
- *         {
- *           headline: 'Carrier and fleet coordination',
- *           description: 'Owned fleet, contract carriers, agricultural haulers, DSD route trucks - four different fleet types hitting the same dock doors. No unified system manages that traffic.',
- *           kpiImpact: '4 fleet types, no unified yard system',
- *           relevantPeople: ['fl-mars', 'fl-scott', 'fl-fanslow'],
- *         },
- *       ],
- *     },
- *     {
- *       type: 'stakes',
- *       sectionLabel: 'What the Yard Costs You',
- *       headline: 'The variance tax on the fastest CPG network in America',
- *       narrative: `At Frito-Lay's volume, small execution gains matter enormously. A 15-minute improvement in truck turn time across ${FRITO_LAY_FACILITY_COUNT_LABEL} facilities is not a rounding error. It is tens of millions in recovered capacity. But nobody is measuring it because the yard has never had a system.`,
- *       annualCost: '$30M+ estimated in yard-driven inefficiency across the network',
- *       costBreakdown: [
- *         { label: 'Dock dwell and turn time excess', value: '$12M+' },
- *         { label: 'DSD route loading delays', value: '$6M+' },
- *         { label: 'Inbound agricultural staging waste', value: '$5M+' },
- *         { label: 'Multi-fleet coordination overhead', value: '$4M+' },
- *         { label: 'Site-to-site process variance', value: '$3M+' },
- *       ],
- *       urgencyDriver: 'PepsiCo is investing in supply chain technology and network optimization. The yard is the one surface that investment has not reached.',
- *     },
- *     {
- *       type: 'solution',
- *       sectionLabel: 'The Fix',
- *       headline: 'One yard protocol at snack-network speed',
- *       narrative: 'YardFlow gives Frito-Lay one operating standard for every yard. Same driver journey at the Plano campus and the Perry plant. Same dock assignment logic at every facility. Same evidence trail for every trailer move. The system matches the speed your production lines already run.',
- *       modules: [
- *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID.', relevanceToAccount: 'Standardizes gate process for owned fleet, contract carriers, and agricultural haulers.' },
- *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter task queues with priority logic.', relevanceToAccount: 'Critical for DSD route loading - ensures correct staging sequence for morning departures.' },
- *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location and dwell.', relevanceToAccount: 'Replaces clipboard tracking. Real-time view of every trailer at every plant.' },
- *         { id: 'flowNETWORK', name: 'flowNETWORK', verb: 'Scale', shortDescription: 'Network-wide command view.', relevanceToAccount: 'Gives Brian Watson the network-level yard visibility that Frito-Lay has never had.' },
- *       ],
- *       accountFit: 'High-velocity CPG + DSD delivery model = the exact use case YardFlow was designed for. Frito-Lay\'s network speed amplifies the ROI of every minute saved at the dock.',
- *     },
- *     {
- *       type: 'proof',
- *       sectionLabel: 'Running in Production',
- *       headline: 'Measured results from live CPG deployment',
- *       proofVisual: {
- *         type: 'before-after',
- *         headline: 'What changes when the yard runs on one protocol',
- *         narrative: 'The difference is not cosmetic. The production-to-trailer handoff stops depending on local tribal knowledge and starts running on one operating standard across the network.',
- *         beforeAfter: {
- *           before: {
- *             label: 'Today',
- *             description: 'Clipboards, radio dispatch, and site-by-site variance slow the outbound handoff just as production volume peaks.',
- *           },
- *           after: {
- *             label: 'With YardFlow',
- *             description: 'Standardized gate flow, staged move queues, and live dock visibility compress truck turn time at snack-network speed.',
- *           },
- *         },
- *       },
- *       liveDeployment: {
- *         headline: 'Already live in high-volume CPG operations',
- *         summary: 'This is not a concept deck. The operating model is running today across 24 facilities, contracted for more than 200, and proven to absorb new volume without adding dock-office headcount.',
- *         badges: ['24 facilities live', '>200 network contracted', '30 min remote deployment'],
- *       },
- *       methodology: 'Proof metrics reflect measured truck-turn improvement, documented dock-office leverage, and live deployment rollouts in comparable CPG environments.',
- *       blocks: [
- *         {
- *           type: 'metric',
- *           stats: [
- *             { value: '24', label: 'Facilities Live' },
- *             { value: '>200', label: 'Contracted Network' },
- *             { value: '48-to-24', label: 'Min Truck Turn Time' },
- *             { value: '$1M+', label: 'Per-Site Profit Impact' },
- *             { value: '30 min', label: 'Remote Deployment' },
- *           ],
- *         },
- *         {
- *           type: 'quote',
- *           quote: {
- *             text: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office. That was an integral part of our strategy and has been proven.',
- *             role: 'Operations Director',
- *             company: 'National CPG Manufacturer',
- *           },
- *         },
- *       ],
- *     },
- *     {
- *       type: 'network-map',
- *       sectionLabel: 'Your Network',
- *       headline: 'Frito-Lay\'s yard footprint across North America',
- *       narrative: 'Thirty-plus manufacturing plants and 200-plus distribution centers. Agricultural inbound from potato and corn country. DSD routes loading overnight at every facility. The yard protocol at each site is different. YardFlow makes it one.',
- *       facilityCount: FRITO_LAY_FACILITY_COUNT_LABEL,
- *       facilityTypes: ['Manufacturing Plants (30+)', 'Distribution Centers', 'Regional Mixing Centers', 'Agricultural Receiving'],
- *       geographicSpread: 'National - Plano TX (HQ), plants across 20+ states, DSD network covering 95% of US retail',
- *       dailyTrailerMoves: '14,000+ across the network',
- *       peakMultiplier: '1.3x during summer and holiday seasons (Super Bowl, back-to-school)',
- *     },
- *     {
- *       type: 'roi',
- *       sectionLabel: 'The Business Case',
- *       headline: 'ROI for the Frito-Lay network',
- *       narrative: `At Frito-Lay's volume, small gains compound fast. Measured YardFlow improvements applied conservatively across ${FRITO_LAY_FACILITY_COUNT_LABEL} facilities.`,
- *       roiLines: [
- *         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
- *         { label: 'DSD route loading accuracy', before: '~85%', after: '97%+', delta: '+12 pts', unit: 'on-time %' },
- *         { label: 'Inbound dock scheduling', before: 'Manual / radio', after: 'System-managed', delta: 'Automated' },
- *         { label: 'Network site standardization', before: '0% (every site different)', after: '100% standard protocol', delta: 'Full network' },
- *         { label: 'Annual network savings', before: '$0 (not tracked)', after: '$20M+', delta: '+$20M', unit: 'annual' },
- *       ],
- *       totalAnnualSavings: '$20M+ across the Frito-Lay network',
- *       paybackPeriod: '< 3 months per facility',
- *       methodology: `Based on measured 50% truck turn time reduction at comparable CPG operations. Conservative estimate for ${FRITO_LAY_FACILITY_COUNT_LABEL} facilities at Frito-Lay volume.`,
- *     },
- *     {
- *       type: 'testimonial',
- *       sectionLabel: 'From a CPG Operator',
- *       quote: 'We believe system-driven dock door assignment will be a valuable next step for dock office optimization.',
- *       role: 'Operations Director',
- *       company: 'National CPG Manufacturer',
- *     },
- *     {
- *       type: 'cta',
- *       cta: {
- *         type: 'modex-meeting',
- *         headline: 'Frito-Lay is a past MODEX attendee. Let\'s meet this year.',
- *         subtext: '30-minute walk through your network with board-ready ROI. The yard is where snack-network speed breaks down.',
- *         buttonLabel: 'Book a Meeting at MODEX',
- *         calendarLink: BOOKING_LINK,
- *       },
- *       closingLine: 'The fastest production lines in CPG deserve the fastest yards. Let\'s talk at MODEX.',
- *     },
- *   ]
+ * Pre-M3 hero/problem/stakes/solution/proof/network-map/roi/testimonial/cta
+ * shapes were collapsed into the memo template in Sprint M3. Original
+ * narrative beats (production-line / yard speed mismatch, four-fleet dock
+ * contention, DSD route-loading precision, agricultural inbound
+ * variability) are preserved in the observation + comparable + about
+ * sections below.
  */
 
 export const fritoLay: AccountMicrositeData = {
   slug: 'frito-lay',
   accountName: 'Frito-Lay',
+  coverHeadline: 'The yard tile pep+ has not laid yet',
+  titleEmphasis: 'pep+ has not laid yet',
+  coverFootprint: '~30 plants · 200+ DCs · DSD to 95%',
   parentBrand: 'PepsiCo',
   vertical: 'cpg',
   tier: 'Tier 1',
   band: 'A',
   priorityScore: 93,
 
-  pageTitle: 'YardFlow for Frito-Lay - Yard Execution at Snack-Network Speed',
-  metaDescription: `How YardFlow eliminates the yard bottleneck across Frito-Lay's ${FRITO_LAY_FACILITY_COUNT_LABEL} site high-velocity snack network.`,
+  pageTitle: 'YardFlow for Frito-Lay - The Yard Layer Above pep+',
+  metaDescription: `How a network-level yard operating model lands on top of the digital surfaces pep+ and the PepsiCo Foods digital-twin program already touch — across Frito-Lay's ${FRITO_LAY_FACILITY_COUNT_LABEL}-site snack network at industry-leading velocity.`,
 
   sections: [
     { type: 'yns-thesis' },
     {
       type: 'observation',
-      headline: 'What we observed about Frito-Lay\'s network',
+      headline: 'What we observed about the Frito-Lay U.S. network',
       composition: [
-        { label: 'Network footprint', value: '30+ manufacturing plants · 200+ distribution centers · DSD coverage to 95% of US retail' },
-        { label: 'Daily trailer moves', value: '14,000+ across the network' },
-        { label: 'Fleet mix at the dock', value: 'Owned fleet + contract carriers + agricultural haulers + DSD route trucks — four fleet types at the same doors' },
-        { label: 'Inbound profile', value: 'Agricultural — potatoes, corn, oils, seasonings — with weather-dependent timing' },
-        { label: 'Outbound profile', value: 'Overnight DSD route loading; staging sequence drives morning-route correctness' },
-        { label: 'Peak multiplier', value: '~1.3x during summer and holiday seasons (Super Bowl, back-to-school)' },
+        { label: 'U.S. manufacturing footprint', value: '30+ manufacturing plants · 200+ distribution centers · DSD coverage to 95% of US retail — the operating-system surface pep+ already touches, and the yard layer above the sites does not' },
+        { label: 'pep+ visibility tile', value: 'PepsiCo Positive (pep+) is the end-to-end transformation announced September 2021; the digital surfaces it stitches together — planning, plant-floor AI, route loading, sustainability reporting — reach the dock but stop short of the gate' },
+        { label: 'Siemens / NVIDIA digital-twin program', value: 'Industry-first PepsiCo / Siemens / NVIDIA collaboration (CES 2026) — physics-level twins of every machine, conveyor, pallet route, and operator path. Reported 20% throughput lift on initial deployment; 10–15% capex reduction through virtual validation. The twin covers the four walls of the plant. The yard outside the dock door is not in the twin' },
+        { label: 'Plant-floor AI in production', value: 'Cheetos AI: a model trained on ideal product attributes scans every Cheeto on the production line and makes nanosecond adjustments to temperature, shape, and consistency. The line is running on machine vision. The trailer staging is not' },
+        { label: 'Autonomous yard pilot', value: 'PepsiCo / Outrider autonomous yard-truck deployment at a Frito-Lay DC reported ~50% reduction in yard-truck idle time. Validates that yard-side automation pays back at Frito-Lay; the question now is the operating layer above multiple sites' },
+        { label: 'Daily trailer moves', value: '14,000+ across the network — at 1.3x peak during summer and holiday seasons (Super Bowl, back-to-school)' },
+        { label: 'Fleet mix at the dock', value: 'Owned fleet + contract carriers + agricultural haulers + DSD route trucks — four fleet types arbitrating the same doors at overnight load-out' },
+        { label: 'Working-capital posture', value: 'PepsiCo Foods has become the #1 supplier in Kantar PoweRanking nine consecutive years (2016–2024). Leaner planning and faster shelf turn make trailer dwell a working-capital line, not just an ops line' },
       ],
       hypothesis:
-        'The structural mismatch we keep coming back to is speed. Frito-Lay runs the highest-velocity CPG production lines in North America, and the yard between those lines and the road still operates on radio dispatch, clipboards, and site-by-site tribal knowledge. At 14,000+ daily moves, small execution gains compound differently than they do anywhere else — a 15-minute turn-time improvement applied across 230+ sites is not a rounding error. The two surfaces that absorb most of the variance are agricultural inbound, where carrier quality and weather reset the dock schedule daily, and overnight DSD route loading, where the staging sequence has to be right or the morning route starts behind. Underneath both is the same gap: there is no single operating standard for the yard, so every site invents its own and the network never gets to compound the wins.',
+        'Frito-Lay runs the highest-velocity CPG production lines in North America, and pep+ has already proven that the digital operating model lands inside the plant. The Siemens / NVIDIA twin is up at the machine-conveyor-operator level. Cheetos AI runs the line in nanoseconds. The Outrider pilot showed that yard-side automation pays back at a single Frito-Lay DC. The case for digital execution inside the four walls is closed. What it has not become, across 30+ manufacturing plants and 200+ distribution centers, is a network operating model for the yard outside the dock door. Each site invents its own gate routine, its own dock priority, its own DSD-staging sequence. The network does not agree with itself on what good looks like — and that is the part pep+ cannot fix from the strategy layer and the plant twin cannot fix from inside the building.\n\nThat gap got more expensive in the last three years for two reasons. First, plant-floor velocity has pulled away from yard-side execution. A 90-minute trailer delay used to be absorbed inside DSD slack; with the production line running on machine vision and the twin lifting throughput 20% on initial deployment, the yard is the variance that lands on the route. Second, the four-fleet dock — owned, contract, agricultural, DSD — has no shared operating standard. Overnight DSD route-loading sequence is the moment that has to be right or the morning route starts behind; agricultural inbound resets the dock schedule every weather day; and neither shows up at the network layer in a way the snack-network operator can act on without screen-switching.\n\nThe third thing is the pilot question itself. Plano is the highest-visibility yard in the portfolio — the marquee deployment. That makes it the scale-up target once the operating model is proven, not the proving ground. The first pilot lands at a smaller, simpler site — the Perry, GA plant sits ~150 miles from Atlanta with a manageable carrier yard, and Topeka is a high-volume single-shift candidate with complex agricultural inbound to stress-test multi-fleet sequencing. The proof at the simple site is what earns the right to operate the layer above Plano, above the digital-twin plants in the second wave, and across the 200+ DCs in the third.',
+      pullQuote: 'The network does not agree with itself on what good looks like.',
       caveat:
-        'Built from public PepsiCo disclosures, the published Frito-Lay facility split, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing on detention spend, DSD-loading accuracy, or how much existing system coverage is already in place across the 30+ manufacturing plants.',
+        'This is built from public PepsiCo and Frito-Lay disclosures, the public pep+ and digital-twin record, the Outrider yard pilot reporting, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: whether yard-side feeds reach the pep+ control surface in a way the network operator can act on, whether the digital-twin program is already extending past the dock door, how the four-fleet dock is sequenced today, and where DSD route-loading accuracy is actually landing across the 30+ manufacturing plants.',
+    },
+    {
+      type: 'artifact',
+      headline: 'A coverage map for the operating system',
+      artifact: {
+        imageSrc: '/artifacts/frito-lay-coverage-map.svg',
+        imageAlt: 'pep+ digital coverage map. Six tiles representing the PepsiCo Foods operating surfaces touched by pep+ and the Siemens/NVIDIA digital twin program. Plant Twin, Throughput, Forecast, Inventory, and Route Loading are covered. The Yard Network Ops tile is unfilled, marked with a Frito-Lay red hairline outline.',
+        caption: 'pep+ digital coverage map · 1 tile unfilled.',
+        source: 'Composition modeled from public pep+, PepsiCo / Siemens / NVIDIA, and PepsiCo Foods digital disclosures. Account names redacted.',
+      },
     },
     {
       type: 'comparable',
       headline: 'What a comparable network did when they closed the same gap',
       comparableName: 'Primo Brands',
       comparableProfile:
-        'Multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs. Smaller footprint than Frito-Lay, but the closest live analog on the dimension that matters here — running one yard protocol across plants, DCs, and a mixed fleet model.',
+        'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes out gross-vehicle weight before it maxes cube), low-margin (so every minute of yard waste is a margin point you can\'t recover with price), and shipped across multi-temp (premium SKUs sit alongside ambient). Primo is also years ahead of every other CPG category on yard automation and digitization — they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-level yard operating model on top of their existing site-level yard systems. The Frito-Lay operating profile is the same shape — multi-site, multi-fleet, DSD-dependent, plant-floor automation already in motion under pep+ — but with significantly more forgiving freight economics per trailer and a velocity profile that turns every saved dock minute into network-level capacity. Primo runs the operating layer pep+ is shaped to host — same coordinates, harder freight.',
       metrics: [
         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted · 30-min remote deployment', delta: 'measured' },
       ],
-      timeline: '30-60 days from kickoff to first measurable impact at the pilot site. Perry, GA — ~150 miles from Atlanta — is the obvious pilot candidate; Plano HQ is the highest-visibility one.',
+      timeline:
+        '30–60 days from kickoff to first measurable impact at the pilot site. The sites where this lands first are not the marquee nodes — Perry, GA (~150 miles from Atlanta) and Topeka, KS are the simpler, lower-risk facilities where the carrier yard is most instrument-able, the displacement risk is lowest, and the operating model can be proven before it has to scale. Plano is where the proven model expands into the highest-visibility node in the U.S. portfolio; the digital-twin plants are the second wave once the network operating layer has its first 60-day proof, and the 200+ DCs are the third. We would expect the network to make sense of itself within two to four quarters of that first pilot.',
       referenceAvailable: true,
     },
     {
@@ -234,7 +105,35 @@ export const fritoLay: AccountMicrositeData = {
           id: 'frito-public-footprint',
           source: 'Frito-Lay company facts and PepsiCo disclosures',
           confidence: 'public',
-          detail: `Anchors the 30+ manufacturing plant / 200+ DC split that yields the conservative ${FRITO_LAY_FACILITY_COUNT_LABEL}-site lower bound used here. DSD coverage and route model from public PepsiCo / Frito-Lay materials.`,
+          detail: `Anchors the 30+ manufacturing plant / 200+ DC split that yields the conservative ${FRITO_LAY_FACILITY_COUNT_LABEL}-site lower bound used here. DSD coverage to 95% of US retail and route model from public PepsiCo / Frito-Lay materials.`,
+          url: 'https://www.fritolay.com/about-frito-lay/company-story',
+        },
+        {
+          id: 'pep-plus-program',
+          source: 'PepsiCo pep+ (PepsiCo Positive) end-to-end transformation',
+          confidence: 'public',
+          detail: 'Strategic end-to-end transformation announced September 2021. The operating surface pep+ touches — planning, plant-floor execution, route loading, sustainability reporting — reaches the dock but stops short of the gate. Whether yard-side feeds ladder into the pep+ control surface in a usable way is a discovery question, not a public fact.',
+          url: 'https://www.pepsico.com/our-stories/press-release/pepsico-announces-strategic-end-to-end-transformation-pep-pepsico-positive09142021',
+        },
+        {
+          id: 'pepsico-siemens-nvidia-twin',
+          source: 'PepsiCo / Siemens / NVIDIA digital-twin collaboration (CES 2026)',
+          confidence: 'public',
+          detail: 'Industry-first multi-year collaboration covering U.S. manufacturing and warehouse facilities. Physics-level twins of machines, conveyors, pallet routes, operator paths. Public reporting cites 20% throughput lift on initial deployment, 90% of issues identified pre-build, 10–15% capex reduction. Coverage is inside the building.',
+          url: 'https://www.pepsico.com/newsroom/press-releases/2025/pepsico-announces-industry-first-ai-and-digital-twin-collaboration-with-siemens-and-nvidia',
+        },
+        {
+          id: 'frito-outrider-pilot',
+          source: 'PepsiCo / Outrider autonomous yard-truck pilot at Frito-Lay DC',
+          confidence: 'public',
+          detail: 'Reported ~50% reduction in yard-truck idle time at a Frito-Lay distribution center. Single-site proof that yard-side automation pays back at Frito-Lay velocity; the open question is the operating layer above multiple sites and across the four-fleet dock.',
+          url: 'https://www.outrider.ai/',
+        },
+        {
+          id: 'frito-cheetos-ai',
+          source: 'Frito-Lay plant-floor AI (Cheetos production-line vision model)',
+          confidence: 'public',
+          detail: 'Public reporting describes a Cheetos-specific vision model that scans every product on the line and adjusts temperature, shape, and consistency in nanoseconds. The plant floor is running on machine vision; the trailer staging outside the dock is not.',
         },
         {
           id: 'industry-benchmarks',
@@ -243,34 +142,37 @@ export const fritoLay: AccountMicrositeData = {
           detail: 'Cross-industry baselines on dock-radio prevalence, dwell-time variance, and detention-cost ranges. These describe the conditions most high-volume CPG networks operate under, not Frito-Lay specifically.',
         },
         {
-          id: 'industry-conference-signal',
-          source: 'Industry conference past-attendee list',
-          confidence: 'public',
-          detail: 'Frito-Lay is on the industry conference past-attendee list. Perry, GA plant is approximately 150 miles from Atlanta, which is why an Atlanta-region pilot keeps coming up in our network conversations.',
-        },
-        {
           id: 'primo-q1-2025',
           source: 'Primo Brands operating data (under NDA)',
           confidence: 'measured',
-          detail: 'Post-deployment turn time, dock-office headcount, and per-site profit impact have been shared with us by the Primo CFO and ops team. Specific numbers are referenceable in a peer call when relevant.',
+          detail: 'Post-deployment turn time, dock-office headcount during volume growth, and per-site profit impact have been shared with us by the Primo CFO and ops team. Specific numbers are referenceable in a peer call when relevant.',
+        },
+        {
+          id: 'watson-tenure',
+          source: 'Brian Watson — public tenure and remit',
+          confidence: 'public',
+          detail: 'VP Supply Chain at Frito-Lay / PepsiCo. Network-wide remit covering manufacturing, logistics, and distribution standardization across the snack network. Reports up into the PepsiCo Foods supply-chain organization that Steven Williams (former CEO PepsiCo Foods North America, now EVP & Vice Chairman, Global CCO) built into the #1-ranked CPG supplier on Kantar PoweRanking nine years running.',
+          url: 'https://www.linkedin.com/in/brian-watson-906532142',
         },
       ],
       unknowns: [
-        'Real detention spend by lane and carrier — we estimate $20M+, you measure',
-        'DSD route-loading accuracy at the network level (we suspect ~85%, leadership has the real number)',
-        'Existing YMS / dock-scheduling coverage across the 30+ manufacturing plants',
-        'How the four fleet types are sequenced at the dock today — owned, contract, agricultural, DSD',
-        'Where agricultural-inbound variability hits hardest (which plants, which seasons)',
+        'Whether yard-side feeds reach the pep+ control surface in a way the network operator can act on without screen-switching',
+        'Whether the Siemens / NVIDIA digital-twin program is already extending past the dock door into trailer staging, gate sequencing, or carrier flow — or whether the twin stops at the building line',
+        'How the four fleet types — owned, contract, agricultural, DSD — are sequenced at the dock today; site policy, system logic, or operator judgment',
+        'Where DSD route-loading accuracy is actually landing across the 30+ manufacturing plants, and where the variance concentrates',
+        'How the Outrider pilot is being scoped for expansion — single-DC scale-up, multi-site rollout, or evaluation hold',
+        'Existing YMS / dock-scheduling coverage across the manufacturing plants vs. the 200+ DCs — and where the operating-standard gap is widest',
+        'How agricultural-inbound variability propagates into overnight DSD staging at the plants that run both flows on the same dock surface',
       ],
     },
     {
       type: 'about',
       headline: 'About this analysis',
       authorBio:
-        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. At Frito-Lay\'s velocity the math is unusual: minutes-per-dock turn into millions-per-network-year, which is why this account sits near the top of the engagement list.',
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. Frito-Lay is distinctive in this round because the operating-system thinking is already on the floor — pep+ for the end-to-end transformation, the Siemens / NVIDIA twin for the plant, Cheetos AI for the line, Outrider for the yard at one site. The yard layer above the sites is the one that has not yet caught the same operating discipline. This brief sizes that gap, not the site-level and plant-floor wins under it.',
       authorEmail: 'casey@freightroll.com',
       signOff:
-        `If parts of this read wrong against what you see internally for Frito-Lay — particularly the production-line / yard speed mismatch, the four-fleet dock contention, or the assumption that the ${FRITO_LAY_FACILITY_COUNT_LABEL}-site network still runs on local routines — that\'s the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.`,
+        `Brian — the part most worth pushing back on is whether the operating-system discipline that turned PepsiCo Foods into the #1-ranked CPG supplier nine years running has reached the yard layer yet, or whether it stopped at the plant floor and the route truck. That answer reshapes the rest of this. The ${FRITO_LAY_FACILITY_COUNT_LABEL}-site assumption, the four-fleet contention frame, and the pep+ coverage seam are all worth challenging if any of them read wrong against what you see internally. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.`,
     },
   ],
 
@@ -291,13 +193,13 @@ export const fritoLay: AccountMicrositeData = {
       seniority: 'SVP/EVP',
       function: 'Supply Chain',
 
-      currentMandate: 'Network-wide supply chain performance and standardization',
+      currentMandate: 'Network-wide supply chain performance and standardization across the Frito-Lay snack network',
       strategicPriorities: ['Multi-site standardization', 'Throughput optimization', 'Network execution visibility'],
-      knownPainPoints: ['No network-wide yard protocol', 'Site-to-site process variance', 'No unified yard metrics'],
+      knownPainPoints: ['No network-wide yard protocol', 'Site-to-site process variance', 'No unified yard metrics across the four-fleet dock'],
 
       communicationStyle: 'Senior executive. Lead with network-level impact and strategic value. He cares about the system, not individual sites.',
       languagePreferences: ['network', 'standardization', 'execution', 'throughput', 'at scale'],
-      connectionHooks: ['Industry conference attendee signal', 'PepsiCo network / LinkedIn path'],
+      connectionHooks: ['Industry conference attendee signal', 'PepsiCo Foods network / LinkedIn path', 'pep+ operating-system framing'],
     },
     {
       personaId: 'fl-mars',
@@ -403,19 +305,33 @@ export const fritoLay: AccountMicrositeData = {
       label: 'Brian Watson - VP Supply Chain',
       variantSlug: 'brian-watson',
 
-      framingNarrative: `Brian, Frito-Lay runs the highest-velocity CPG network in North America. Your production lines are world-class. But when product hits the yard for outbound staging, the pace drops to whatever speed a radio-dispatched spotter can manage. Across ${FRITO_LAY_FACILITY_COUNT_LABEL} facilities, that gap is costing the network more than anyone is measuring.`,
-      openingHook: 'Your production lines run at 2026 speed. Your yards run at 1996 speed.',
-      stakeStatement: `At Frito-Lay's volume, a 15-minute improvement in truck turn time across ${FRITO_LAY_FACILITY_COUNT_LABEL} facilities is not a rounding error. It is $20M+ in recovered capacity that nobody is tracking.`,
+      framingNarrative:
+        'Brian, the operating-system discipline that turned PepsiCo Foods into the #1-ranked CPG supplier nine years running has already reached the plant floor at Frito-Lay. pep+ stitches the end-to-end strategy together. The Siemens / NVIDIA twin runs inside the building. Cheetos AI runs the line in nanoseconds. The Outrider pilot proved yard-side automation pays back at a single DC. The yard layer above the sites — the one that arbitrates a four-fleet dock across 30+ manufacturing plants and 200+ DCs at snack-network velocity — is the tile that has not been laid into that operating system yet. Site-level proof exists. The network operating layer above the sites is what pep+ is shaped to host.',
+      openingHook:
+        'pep+ has reached the plant floor at Frito-Lay. The Siemens / NVIDIA twin covers the building. The yard outside the dock door is the one operating surface still running on local routines.',
+      stakeStatement:
+        'The plant twin is lifting throughput 20% on initial deployment; Cheetos AI is making nanosecond line adjustments. Plant-floor velocity has pulled away from yard-side execution, and the four-fleet dock has no shared operating standard. The gap between those two is the network yard layer — and it is the only operating-system surface at Frito-Lay that is not yet running to a single standard across the snack network.',
 
       heroOverride: {
-        headline: 'Brian, the fastest production lines in CPG are feeding the slowest yards.',
-        subheadline: `Frito-Lay's network speed is unmatched. But the yard - the surface between production and the road - still runs on clipboards and radio calls. One protocol across ${FRITO_LAY_FACILITY_COUNT_LABEL} facilities changes the math.`,
+        headline: 'The pep+ tile no one has filled yet is the yard network operating layer.',
+        subheadline: `Plant-floor digitization is proven at Frito-Lay — pep+, the Siemens / NVIDIA twin, Cheetos AI, the Outrider pilot. The network operating model above the sites — the one snack-network velocity now needs and pep+ is shaped to host — is the unfilled tile. The smaller plants (Perry, Topeka) are the cleanest place to prove it; Plano is where it scales; the ${FRITO_LAY_FACILITY_COUNT_LABEL}-site network is the third wave.`,
       },
-      sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'cta'],
+      sectionOrder: ['yns-thesis', 'observation', 'artifact', 'comparable', 'methodology', 'about'],
 
-      toneShift: 'He is the senior supply chain leader. Speak to network-level impact, not individual sites. He cares about standardization across the system, not fixing one dock.',
-      kpiLanguage: ['network throughput', 'standardization', 'turn time', 'capacity recovery', 'multi-site ROI'],
-      proofEmphasis: `Lead with the ${FRITO_LAY_FACILITY_COUNT_LABEL} site network stat - it mirrors his world. The $1M+ per-site impact multiplied across his ${FRITO_LAY_FACILITY_COUNT_LABEL} facilities is the number that gets his attention.`,
+      toneShift:
+        'Peer-to-peer network-operator framing. Watson runs network-wide supply chain for the highest-velocity CPG network in North America; he does not need a glossary. Acknowledge the plant-floor and single-site wins as wins — they are. Position the wedge as the layer above sites (network operating model), not as replacement of sites or of the digital twin. Reference pep+ and the Siemens / NVIDIA twin by name only where they earn the mention; the discipline you are naming is the operating-system discipline Steven Williams built into PepsiCo Foods.',
+      kpiLanguage: [
+        'network throughput',
+        'multi-site standardization',
+        'truck turn time',
+        'dock-door utilization',
+        'four-fleet dock arbitration',
+        'DSD route-loading sequence',
+        'capacity recovery',
+        'pep+ control-surface coverage',
+      ],
+      proofEmphasis:
+        'Primo is the *public* comparable to cite — same network shape, harder freight (water), already running the network-level layer above site-level yard systems. The directly-shaped comparable (un-name-able 237-facility CPG anchor) is the credibility flex if peer reference becomes the topic.',
     },
     {
       person: {
@@ -638,9 +554,9 @@ export const fritoLay: AccountMicrositeData = {
     peakMultiplier: '1.3x during summer and holiday seasons',
     fleet: 'Large owned fleet + contract carriers + agricultural haulers',
     keyFacilities: [
-      { name: 'Plano, TX HQ Campus', location: 'Plano, TX', type: 'HQ / Manufacturing', significance: 'Corporate headquarters and major production facility', yardRelevance: 'Highest-visibility yard in the network. Pilot site candidate.' },
+      { name: 'Plano, TX HQ Campus', location: 'Plano, TX', type: 'HQ / Manufacturing', significance: 'Corporate headquarters and major production facility', yardRelevance: 'Highest-visibility yard in the network. Marquee deployment, not pilot candidate.' },
       { name: 'Perry, GA Plant', location: 'Perry, GA', type: 'Manufacturing', significance: '~150 miles from Atlanta', yardRelevance: 'Closest Frito-Lay plant to Atlanta. Natural early pilot site.' },
-      { name: 'Topeka, KS Plant', location: 'Topeka, KS', type: 'Manufacturing', significance: 'Major production facility', yardRelevance: 'High-volume plant with complex inbound agricultural receiving.' },
+      { name: 'Topeka, KS Plant', location: 'Topeka, KS', type: 'Manufacturing', significance: 'Major production facility', yardRelevance: 'High-volume plant with complex inbound agricultural receiving. Pilot candidate for four-fleet dock arbitration.' },
     ],
   },
 
@@ -661,12 +577,38 @@ export const fritoLay: AccountMicrositeData = {
   signals: {
     eventAttendance: 'Past attendee list signal',
     recentNews: [
-      'PepsiCo supply chain technology investment',
-      'Network optimization and multi-site standardization initiatives',
-      'DSD delivery model evolution',
+      'pep+ (PepsiCo Positive) end-to-end transformation — September 2021 — the corporate operating-system program covering planning, plant-floor execution, route loading, and sustainability reporting.',
+      'PepsiCo / Siemens / NVIDIA digital-twin collaboration (CES 2026) — industry-first; physics-level twins of machines, conveyors, pallet routes, operator paths. 20% throughput lift reported on initial deployment; 10–15% capex reduction through virtual validation.',
+      'PepsiCo / Outrider autonomous yard-truck pilot at a Frito-Lay DC — reported ~50% reduction in yard-truck idle time. Yard-side automation proof at a single site.',
+      'Cheetos AI: production-line vision model adjusting temperature, shape, and consistency in nanoseconds — plant-floor velocity is on machine vision; yard-side execution is not.',
+      'PepsiCo Foods has been the #1 supplier in Kantar PoweRanking nine consecutive years (2016–2024) — the operating-system discipline Steven Williams built and Brian Watson now runs at the supply-chain layer.',
     ],
-    supplyChainInitiatives: ['Network standardization', 'DSD optimization', 'Supply chain technology'],
-    urgencyDriver: 'Highest-velocity CPG network = highest ROI per minute of dock time saved. Perry GA plant is a natural early pilot candidate.',
+    supplyChainInitiatives: ['pep+ end-to-end transformation', 'Siemens / NVIDIA digital twin', 'Outrider autonomous yard pilot', 'Cheetos AI plant-floor vision', 'Network standardization across 30+ manufacturing plants and 200+ DCs'],
+    urgencyDriver:
+      'Plant-floor digitization is proven at Frito-Lay — pep+, the Siemens / NVIDIA twin, Cheetos AI, the Outrider single-site pilot. Plant-floor velocity has pulled away from yard-side execution. Perry, GA (~150 mi from Atlanta) and Topeka, KS are the natural early-pilot candidates; Plano is the marquee scale-up; the 200+ DC tier is the third wave.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'pep+ transformation', body: 'PepsiCo Positive · end-to-end · announced September 2021.' },
+    { mark: 'Plant twin', body: 'Siemens / NVIDIA digital twin · 20% throughput lift · 10–15% capex reduction.' },
+    { mark: 'Yard-side proof', body: 'Outrider autonomous yard-truck pilot · ~50% reduction in idle time at a Frito-Lay DC.' },
+    { mark: 'Network rank', body: 'PepsiCo Foods · #1 supplier on Kantar PoweRanking, nine years running (2016–2024).' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for Brian Watson. The operating-system discipline that turned PepsiCo Foods into the #1-ranked CPG supplier nine years running has already reached the plant floor at Frito-Lay — pep+, the Siemens / NVIDIA twin, Cheetos AI, the Outrider single-site pilot. The five minutes that follow are about the one tile it has not yet reached.',
+    chapters: [
+      { id: 'thesis', label: 'I. The plant-floor case is closed', start: 0 },
+      { id: 'what-velocity-made', label: 'II. What snack-network velocity made expensive', start: 65 },
+      { id: 'unfilled-tile', label: 'III. The unfilled pep+ tile', start: 130 },
+      { id: 'not-plano', label: 'IV. Why the first pilot is not Plano', start: 195 },
+      { id: 'simple-site-proof', label: 'V. What proof at the simple site earns', start: 260 },
+    ],
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {

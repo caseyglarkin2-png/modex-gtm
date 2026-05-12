@@ -1,13 +1,29 @@
 /**
+ * Internal competitive intelligence (NOT for prospect-facing surfaces):
+ * AB InBev has a documented PINC/Kaleris incumbent footprint at brewery
+ * yards (site-level yard automation legacy). Specifics live in internal
+ * dossier; rendered prospect copy MUST refer only to "site-level yard
+ * automation" or "existing yard-tech layer" generically — never name
+ * PINC, Kaleris, or the rollout history. The wedge is the network
+ * operating layer above the sites (same shape as Kraft Heinz), not
+ * displacement of the site-level stack.
+ */
+
+/**
  * AB InBev (Anheuser-Busch InBev) — ABM Microsite Data
- * Quality Tier: A (named C-level targets; substantive public intel on
- * digital-supply-chain stack; Gartner Top 25 2025 winner)
+ * Quality Tier: A+ (named C-level targets; substantive public intel on
+ * digital-supply-chain stack; Gartner Top 25 2025 winner; signature
+ * touchless-planning thread is Elito Siqueira's own scoreboard)
  * Pitch shape: coexistence wedge — yard-execution operating layer sits
- * between o9 (planning) and Sensolus (asset tracking); not replacement
- * of either.
+ * between o9 (planning) and Sensolus (asset telemetry); not replacement
+ * of either, and does not touch the site-level yard-tech layer beneath.
  * Angle: YARD MANAGEMENT — dock-door arbitration, multi-fleet
  * coordination, three-tier-distribution dock variability, night-loading
- * windows for DSD morning delivery.
+ * windows for DSD morning delivery, EV-charging-aware dock priority.
+ * Signature-initiative thread: Touchless Planning (o9, 85% U.S.) +
+ * Brewing Futures ($600M U.S. capex 2025-2026). These two together are
+ * the AB InBev "operating-system" surface; the yard is the unfilled
+ * tile.
  */
 
 import type { AccountMicrositeData } from '../schema';
@@ -19,15 +35,18 @@ const AB_INBEV_FACILITY_COUNT = getFacilityCountLowerBound('AB InBev', 100) ?? 1
 export const abInbev: AccountMicrositeData = {
   slug: 'ab-inbev',
   accountName: 'AB InBev',
+  coverHeadline: 'The yard layer between o9 and Sensolus',
+  titleEmphasis: 'between o9 and Sensolus',
+  coverFootprint: '~100 US facilities · 9 flagship breweries',
   parentBrand: 'Anheuser-Busch InBev',
   vertical: 'beverage',
   tier: 'Tier 1',
   band: 'A',
   priorityScore: 91,
 
-  pageTitle: 'AB InBev · The execution layer between o9 planning and Sensolus tracking',
+  pageTitle: 'YardFlow for AB InBev — The execution layer between o9 and Sensolus',
   metaDescription:
-    'AB InBev runs ~100 U.S. facilities, an 800-truck dedicated fleet, an owned wholesaler network (ABOne), and a three-tier system that varies state by state. The yard layer between o9 demand plans and Sensolus trailer telemetry is the one execution surface that has not been standardized.',
+    'Touchless planning on o9 reached 85% in the U.S. Sensolus proved 15% trailer-fleet utilization in Europe. The yard layer between the o9 plan and the Sensolus telemetry — across nine flagship breweries, ~100 U.S. facilities, an 800-truck dedicated fleet, ABOne owned distribution, and the three-tier wholesaler overlay — is the operating-system tile that has not yet been laid in. The $600M Brewing Futures capex is the timing driver.',
 
   sections: [
     { type: 'yns-thesis' },
@@ -35,24 +54,37 @@ export const abInbev: AccountMicrositeData = {
       type: 'observation',
       headline: 'What we observed about the AB InBev U.S. brewing network',
       composition: [
-        { label: 'U.S. footprint', value: `~${AB_INBEV_FACILITY_COUNT_LABEL} facilities — nine flagship breweries (post-Newark/Merrimack/Fairfield rationalization) plus agricultural, packaging, and ABOne distributorships` },
-        { label: 'Active capex program', value: '$600M U.S. manufacturing investment doubled in 2025 under the Brewing Futures program — Cartersville GA ($9.2M), Houston TX ($17M), Jacksonville FL ($30M), Los Angeles CA ($7.4M) among the named sites' },
-        { label: 'Domestic production share', value: '99% of beer sold in the U.S. is manufactured in the U.S. — throughput pressure lands inside the existing network, not on imports' },
-        { label: 'Distribution model', value: 'Three-tier (brewery → wholesaler → retailer) with ABOne (ABSD) owned wholesalers held below ~10% national volume per the operative DOJ understanding; Southern Glazer\'s absorbed the NYC owned-distribution arm in 2025' },
-        { label: 'Existing digital stack', value: 'o9 Solutions runs demand and supply planning at 85% touchless in the U.S.; Sensolus IoT trailer telemetry deployed in Europe with a published 15% fleet-utilization lift in four months; Lighthouse-style control-tower discipline implied by the Gartner Supply Chain Top 25 2025 win' },
-        { label: 'Fleet posture', value: '800+ owned trucks, 200+ zero-emission units (Nikola/BYD), plus 3PL and wholesaler equipment converging on the same dock doors at the high-volume breweries' },
+        { label: 'U.S. manufacturing footprint', value: `~${AB_INBEV_FACILITY_COUNT_LABEL} U.S. facilities — nine flagship breweries (post-Newark/Merrimack/Fairfield rationalization) plus agricultural, packaging, and ABOne distributorships. This is the operating-system surface o9 and Sensolus already touch, and the yard layer above the sites does not.` },
+        { label: 'Active capex program', value: 'Brewing Futures — $600M U.S. manufacturing investment doubled for 2025–2026 with named site-level commitments at Cartersville GA ($9.2M), Houston TX ($17M), Jacksonville FL ($30M), and Los Angeles CA ($7.4M). Throughput-out-the-brewline becomes trailer-into-the-yard at the same sites within the same cycle.' },
+        { label: 'Touchless planning scoreboard', value: 'o9 Solutions runs U.S. demand and supply planning at 85% touchless; forecast accuracy +11pp to 87%; U.S. service levels at 99.5%; U.S. out-of-stocks below 0.5%; inventory cut ~20%. The plan has gotten sharper; the yard has not.' },
+        { label: 'Trailer-telemetry coverage seam', value: 'Sensolus IoT trailer telemetry deployed in Europe — published 15% fleet-utilization lift in four months. Whether the partnership has been extended to North American breweries is a discovery question, not a public fact. Either way, telemetry tells the dock where trailers are; it does not tell the dock office which trailer is next, which door, or which spotter move clears the most downstream value.' },
+        { label: 'Distribution model', value: 'Three-tier (brewery → wholesaler → retailer) with ABOne (ABSD) owned wholesalers held below ~10% national volume per the operative DOJ understanding; Southern Glazer\'s absorbed the NYC owned-distribution arm in 2025. The same load type leaves a brewery into three different ownership models — owned ABOne, franchise wholesaler, or 3PL cross-dock — and each one runs a different process at the gate.' },
+        { label: 'Existing yard-tech layer', value: 'Site-level yard automation has been on the floor at the high-volume breweries for years; current production status across the surviving sites is mixed. The network operating layer above the sites is unsolved either way.' },
+        { label: 'Fleet posture', value: '800+ owned trucks, 200+ zero-emission units (Nikola/BYD), plus 3PL and wholesaler equipment converging on the same dock doors. A zero-emission truck cannot wait out yard variability the way a diesel can — battery state of charge is a hard constraint, and the dock is where EV economics either work or quietly stop working.' },
+        { label: 'Yard archetype mix', value: 'High-volume breweries with tight night-loading windows for morning DSD · single-facility SKU spread (Cartersville: ~48 SKUs into ~32 states) · summer 1.5× peak (Memorial Day → Labor Day) · Super Bowl week surge · majority three-shift cadence at the flagship sites' },
       ],
       hypothesis:
-        'The thing that\'s interesting about the AB InBev yard math is what the digital-supply-chain investment has *not* yet touched. o9 has taken U.S. demand planning to 85% touchless and Sensolus has demonstrated a 15% trailer-fleet optimization lift in the European deployment — both are real wins, both are publicly disclosed, and both stop short of the dock. Between the o9 load that\'s perfectly planned and the Sensolus trailer that\'s perfectly tracked, there is still a window where the driver pulls up to a gatehouse and waits for a human with a radio to decide which door to open. That window is roughly forty-eight minutes on industry-benchmark math, and at a brewery like Cartersville — forty-eight SKUs flowing to thirty-two states out of one facility — it is the throughput-limiting constraint, not the brewline. Three things are making that gap more expensive in the current cycle. First, the $600M Brewing Futures program is putting throughput-into-the-yard pressure on specific named sites (Cartersville, Houston, Jacksonville, Los Angeles) faster than the yard layer at those sites has been re-engineered to absorb it; capex that lifts plant throughput becomes trailer arrivals at the dock, and the dock at most of these sites still arbitrates appointments versus walk-ins on operator judgment. Second, the three-tier system gives AB InBev no single dock standard to enforce — the same load type leaves the brewery into an owned ABOne yard, a franchise-wholesaler yard, or a 3PL cross-dock, and each one has a different process at the gate. Standardizing brewery dock execution does not standardize the wholesaler dock; that variability ricochets back into the brewery loading sequence the next morning. Third, the night-loading window for morning DSD delivery has zero slack. The dock window is tight by design — route trucks load through the night to feed regional DSD runs at dawn — and a single twenty-minute slip cascades into eighty-plus delivery routes the next day. The mixed-fleet reality is where the gap shows up hardest. Eight hundred owned trucks, two hundred-plus EVs whose charging schedules require predictable dock times, third-party carriers, and wholesaler trucks all converge on the same doors; on a Memorial-Day-to-Labor-Day surge or a Super Bowl week, the radio-and-clipboard arbitration that works at average throughput collapses. The forward-looking item is the EV transition itself: a zero-emission truck cannot wait out yard variability the way a diesel can — battery state of charge is a hard constraint, and the yard layer is where EV economics either work or quietly stop working. Sensolus tells you where the trailer is. It does not tell the dock office which trailer is the next priority, which spotter move clears the most downstream value, or which door the EV needs in the next twenty minutes to make its return run. That layer is the unsolved seam.',
+        'Touchless planning at AB InBev has already paid back — five years running, 85% in the U.S., 99.5% service levels, sub-0.5% out-of-stocks, the Gartner Supply Chain Top 25 citation in 2025. The case is closed at the plan. What it has not become, after five years and a Gartner trophy, is a network operating standard at the dock. Between the o9 load that\'s perfectly planned and the Sensolus trailer that\'s perfectly tracked there is still a window where the driver pulls up to a gatehouse and waits for a human with a radio to decide which door to open. Each site arbitrates that window on its own logic — its own dock priority, its own multi-fleet sequencing, its own treatment of EV-charging constraints — and the three-tier overlay means the same load type lands into three different yard ownership models the moment it leaves the brewery. The network doesn\'t agree with itself on what good looks like at the dock — and that is the part o9 cannot fix from the plan and Sensolus cannot fix from the trailer.\n\nThat gap got more expensive in the last cycle for three reasons. First, touchless planning at 85% removed the slack the dock used to absorb. A 90-minute trailer delay that used to land inside safety stock now lands on a DSD route at dawn; with U.S. out-of-stocks below 0.5%, the headroom is gone. Second, Brewing Futures is putting throughput-into-the-yard pressure on specific named sites (Cartersville, Houston, Jacksonville, Los Angeles) faster than the yard layer at those sites has been re-engineered to absorb it; capex that lifts brewline throughput becomes trailer arrivals at the dock, and modernizing the building without modernizing the yard layer above the sites creates a known flow-control wall at the gatehouse. Third, the EV transition has turned the dock into a battery-economics surface — a zero-emission truck cannot wait out yard variability the way a diesel can, and the yard is where the 200+ Nikola/BYD units either earn their charge schedules or quietly stop running their routes.\n\nThe third thing is the pilot question itself. The flagship high-volume breweries are the marquee deployment targets — they are not the proving ground. The two highest-leverage pilot footprints are different in kind: Cartersville, because it is a single facility producing ~48 SKUs into ~32 states with a $9.2M Brewing Futures capex lift landing on top of an unchanged yard layer (the throughput-into-the-yard pressure is concentrated and visible there); and the ABOne network specifically, because owned distribution avoids the franchise-negotiation overhead that would slow a network rollout, and it is the place where one dock standard can be enforced end-to-end without a wholesaler-by-wholesaler conversation. The proof at either of those earns the right to operate the layer above the rest of the flagship breweries and the franchise-wholesaler dock surface in the wave that follows.',
+      pullQuote: 'The network doesn\'t agree with itself on what good looks like at the dock.',
       caveat:
-        'This is built from AB InBev\'s public disclosures (the $600M Brewing Futures release, the o9 case material from aim10x 2024 and 2025, the published Sensolus partnership results, and the Gartner Supply Chain Top 25 2025 citation) plus reasonable network inference. We may be wrong about parts of it — the most useful pushback is on whether Sensolus has been rolled out in North America at all (the published case is European), whether the dock-door logic at the high-capex breweries has already been re-spec\'d ahead of the throughput lift, and which sites the EV-charging-versus-dock-window constraint is biting first.',
+        'This is built from AB InBev\'s public disclosures (the Brewing Futures $600M release, the published o9 customer case material from 2024 and 2025, the published Sensolus partnership results, the Gartner Supply Chain Top 25 2025 citation, and the corporate facilities page) plus reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: whether Sensolus has been rolled out in North America at all (the published case is European), whether the dock-door logic at the Brewing Futures capex sites has already been re-spec\'d ahead of the throughput lift, and which sites the EV-charging-versus-dock-window constraint is biting first.',
+    },
+    {
+      type: 'artifact',
+      headline: 'A coverage map for the operating system',
+      artifact: {
+        imageSrc: '/artifacts/ab-inbev-coverage-map.svg',
+        imageAlt: 'Operating-system coverage map. Six tiles representing AB InBev\'s digital-supply-chain operating surface. Planning, Forecast, Inventory, Telemetry, and B2B Demand are covered. The Yard Execution tile is unfilled, marked with an AB InBev navy hairline outline.',
+        caption: 'Operating-system coverage map · 1 tile unfilled.',
+        source: 'Composition modeled from public AB InBev × o9, AB InBev × Sensolus, BEES, and Brewing Futures disclosures. Account names redacted.',
+      },
     },
     {
       type: 'comparable',
       headline: 'What a comparable network did when they closed the same gap',
       comparableName: 'Primo Brands',
       comparableProfile:
-        'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes gross-vehicle weight before it maxes cube — every load is at the weight ceiling), low-margin (every minute of yard waste is a margin point you cannot recover with price), multi-temp at the premium SKU layer (premium spring and alkaline sit alongside ambient), and complicated by return logistics for the refillable five-gallon format. Primo is years ahead of every other CPG category on yard automation and digitization — they had to be, because the freight cost them first. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, mixed owned-and-3PL fleets, and an existing site-level yard-tech stack — and they have layered a network-level yard operating model on top of that stack. The shape similarities to AB InBev\'s U.S. operation are tight: multi-site (Primo bottling plants ↔ AB InBev breweries), regional drop-trailer distribution (Primo DCs ↔ ABOne and franchise wholesalers), mixed fleet (owned + 3PL + wholesaler equipment converging at the same doors), and a mature digital supply chain stack already in place that the yard layer needs to ladder up into. The freight differences favor AB InBev: a case of beer is materially easier than a case of water on the weight-and-margin math, and there is no refill leg. If a network operating model can run on water, beer is the easier read-across, not the harder one.',
+        'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes gross-vehicle weight before it maxes cube — every load is at the weight ceiling), low-margin (every minute of yard waste is a margin point you cannot recover with price), and multi-temp at the premium SKU layer (premium spring and alkaline sit alongside ambient). Primo is years ahead of every other CPG category on yard automation and digitization — they had to be, because the freight cost them first. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, mixed owned-and-3PL fleets, and a mature site-level yard-tech stack — and they have layered a network-level yard operating model on top of that stack. The shape similarities to AB InBev are tight: multi-site (Primo bottling plants ↔ AB InBev breweries), regional drop-trailer distribution (Primo DCs ↔ ABOne and franchise wholesalers), mixed fleet (owned + 3PL + wholesaler equipment converging on the same doors), tight night-loading windows for next-morning route delivery, and a digital-supply-chain stack already in place that the yard layer needs to ladder up into. The freight differences favor AB InBev: a case of beer is materially easier than a case of water on the weight-and-margin math. Primo runs the operating layer that sits between a planning system and trailer telemetry — same coordinates as o9-and-Sensolus, harder freight.',
       metrics: [
         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
@@ -60,7 +92,7 @@ export const abInbev: AccountMicrositeData = {
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
       ],
       timeline:
-        '30–60 days from kickoff to first measurable impact at the pilot site. The two highest-leverage pilot targets at AB InBev are different in kind: (1) Cartersville, because it is a single facility producing 48 SKUs into 32 states with a fresh $9.2M Brewing Futures capex lift landing on top of an unchanged yard layer — the throughput-into-the-yard pressure is concentrated and visible; and (2) the ABOne network specifically, because owned distribution avoids the franchise-negotiation overhead that would slow a network rollout, and it is the place where AB InBev can enforce one dock standard end-to-end. The expectation is that the U.S. brewery network agrees with itself on dock-door logic, multi-fleet arbitration, and EV-charging-aware sequencing within two to four quarters of the pilot.',
+        '30–60 days from kickoff to first measurable impact at the pilot site. The sites where this lands first are not the marquee flagships — they are the highest-leverage proving grounds: Cartersville, a single facility producing ~48 SKUs into ~32 states with a $9.2M Brewing Futures capex lift landing on top of an unchanged yard layer; or the ABOne network specifically, where owned distribution avoids the franchise-negotiation overhead and one dock standard can be enforced end-to-end. The proof at either earns the right to operate the layer above the rest of the flagship breweries and the franchise-wholesaler dock surface in the wave that follows. We would expect the U.S. brewery network to agree with itself on dock-door logic, multi-fleet arbitration, and EV-charging-aware sequencing within two to four quarters of that first pilot.',
       referenceAvailable: true,
     },
     {
@@ -83,7 +115,7 @@ export const abInbev: AccountMicrositeData = {
         },
         {
           id: 'abi-o9-results',
-          source: 'AB InBev × o9 Solutions planning transformation (aim10x 2024 / 2025)',
+          source: 'AB InBev × o9 Solutions planning transformation (published customer case material, 2024–2025)',
           confidence: 'public',
           detail: 'Published outcomes: ~20% inventory reduction, forecast accuracy +11pp to 87%, U.S. service levels at 99.5%, U.S. out-of-stocks below 0.5%, and 85% touchless demand planning in the U.S. Elito Siqueira is the named executive sponsor. The relevance is that the leaner the inventory, the more dock-execution variance shows up as a working-capital and service-level problem rather than a buffer-absorbed one.',
           url: 'https://o9solutions.com/articles/ab-inbev-journey-with-o9-transforming-supply-chain-planning',
@@ -121,24 +153,32 @@ export const abInbev: AccountMicrositeData = {
           confidence: 'measured',
           detail: 'Post-deployment turn time, dock-office headcount during volume growth, and per-site profit impact have been shared with us by the Primo CFO and operations team. Specific numbers are referenceable in a peer call when relevant.',
         },
+        {
+          id: 'siqueira-tenure',
+          source: 'Elito Siqueira — public tenure record',
+          confidence: 'public',
+          detail: '~28 years at AB InBev across logistics, planning, and operations leadership in Asia Pacific, the global supply seat (Global SVP Supply Chain Planning — the o9 era), and now Chief Supply Chain & Distribution Co. Officer for North America. Public executive sponsor of the touchless-planning transformation; AB InBev\'s named voice on supply chain at recurring industry-conference panels in 2024 and 2025.',
+          url: 'https://o9solutions.com/articles/ab-inbev-journey-with-o9-transforming-supply-chain-planning',
+        },
       ],
       unknowns: [
+        'Whether o9 outputs and Sensolus telemetry already arbitrate yard-induced supply variance at the network layer, or whether yard variance is currently absorbed into forecast error and dock-office judgment',
         'Whether Sensolus has been rolled out at North American breweries, or whether the published 15% fleet-utilization result is still Europe-only',
         'Whether the dock-door logic at the Brewing Futures capex sites (Cartersville, Houston, Jacksonville, LA) has been re-spec\'d ahead of the throughput lift, or whether the yard layer at those sites is operating against pre-capex baselines',
-        'How multi-temp considerations actually play in U.S. beer dock arbitration — heat sensitivity at the high-volume sites versus ambient for the long-tail SKUs',
         'How the EV-charging-versus-dock-window constraint is being resolved today at the breweries running the 200+ Nikola/BYD units, and which sites are biting first',
         'Whether the ABOne dock standard varies measurably from independent-wholesaler dock practice, and where the standardization gap is widest in the network',
         'How the night-loading-into-DSD-morning sequence is currently arbitrated at sites where the route count exceeds the dock door count by a meaningful multiple',
+        'Which of the surviving site-level yard-automation deployments are still in active production today vs. retired through facility consolidation or end-of-life refresh',
       ],
     },
     {
       type: 'about',
       headline: 'About this analysis',
       authorBio:
-        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. AB InBev is distinctive in this round because the digital-supply-chain stack is unusually mature (o9 at 85% touchless in the U.S., Sensolus deployed in Europe, Gartner Top 25 in 2025) but the yard layer that sits between planning and asset telemetry has not been re-engineered against the throughput pressure the $600M Brewing Futures program is putting on specific named sites. The three-tier-distribution overlay — owned ABOne yards, franchise-wholesaler yards, 3PL cross-docks — makes dock-execution standardization a genuinely harder problem than at a single-channel CPG network, which is the reason a multi-site multi-fleet comparable like Primo Brands reads across cleanly even though the freight category is different.',
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. AB InBev is distinctive in this round because the operating-system thinking is already on the floor — o9 for planning, Sensolus for trailer telemetry, BEES for B2B demand capture, the Gartner Supply Chain Top 25 citation as the public scoreboard. The yard is the one layer that has not yet caught the same operating discipline. The three-tier overlay — owned ABOne yards, franchise-wholesaler yards, 3PL cross-docks — makes dock standardization a genuinely harder problem than at a single-channel CPG network, which is the reason a multi-site, multi-fleet comparable like Primo Brands reads across cleanly even though the freight category is different. This brief sizes that gap, not the plan-side wins above it.',
       authorEmail: 'casey@freightroll.com',
       signOff:
-        'If parts of this read wrong against what you see internally for AB InBev — whether Sensolus is already running in North America, whether the dock-door logic at the Brewing Futures capex sites has been touched, or where EV-charging-versus-dock-window is biting first — that is the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
+        'Elito — the part most worth pushing back on is whether the touchless-planning discipline you have spent five years building at AB InBev has reached the dock layer yet, or whether it stopped at the o9 output and the Sensolus trailer. That answer reshapes the rest of this. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
     },
   ],
 
@@ -285,30 +325,30 @@ export const abInbev: AccountMicrositeData = {
       variantSlug: 'elito-siqueira',
 
       framingNarrative:
-        'Elito, the operating-system thinking that took U.S. demand planning to 85% touchless on o9, dropped inventory roughly 20%, and earned the Gartner Supply Chain Top 25 citation in 2025 is the same thinking that hasn\'t yet been applied to the dock layer between the o9 plan and the Sensolus telemetry. The site-level case for digital supply chain at AB InBev is closed — and won. The next tier is the one your leaner inventory now demands and your Brewing Futures throughput is about to surface at the named capex sites.',
+        'Elito, the touchless-planning discipline you carried through twenty-eight years at AB InBev — uniform standards across every region, every plan cycle, every shift — is the same discipline you brought to U.S. demand planning at 85% touchless on o9, to forecast accuracy at 87%, to U.S. service at 99.5%, and to the Gartner Supply Chain Top 25 citation in 2025. The yard is the tile that has not been laid into that operating system yet. The plan-side case for touchless is closed — and won. The network operating layer above the dock is what 85% touchless now demands and what Brewing Futures throughput is about to land on at the named capex sites.',
       openingHook:
-        'You proved end-to-end at the planning layer: 85% touchless in the U.S., inventory down 20%, service at 99.5%. The unsolved question is the dock layer above the sites — how Cartersville, Houston, Jacksonville, and the LA yards agree on the same dock-door arbitration, the same multi-fleet sequencing, and the same EV-charging-aware priority logic, in a way that feeds the same control-tower discipline o9 outputs already do.',
+        'Touchless planning was your phrase, and the U.S. scoreboard is yours: 85% touchless demand, +11pp forecast accuracy to 87%, service at 99.5%, out-of-stocks below 0.5%, inventory down ~20%. It has reached planning and trailer telemetry. It has not yet reached the dock.',
       stakeStatement:
-        'Throughput-out-the-door from a $600M Brewing Futures capex program becomes trailer-into-the-yard at the same nine flagship breweries within the same cycle. The o9 plan can be 85% touchless; if the dock arbitrates on operator judgment, the leaner inventory turns the unarbitrated minute into a missed DSD route, not a recoverable buffer.',
+        'The $600M Brewing Futures program is moving throughput-out-the-brewline across nine flagship breweries — Cartersville, Houston, Jacksonville, Los Angeles are already named. Touchless planning at 85% removed the inventory buffer that used to absorb dock variance. The gap between those two is the network yard layer — and it is the only operating-system tile at AB InBev that is not yet running to a single standard from brewery to ABOne to franchise wholesaler.',
 
       heroOverride: {
-        headline: 'Elito, the operating-system discipline you built on planning has not yet reached the dock.',
+        headline: 'Elito, the touchless discipline you built on planning has not yet reached the dock.',
         subheadline:
-          'o9 runs U.S. demand at 85% touchless. Sensolus proved 15% fleet utilization in Europe. The yard layer between the o9 plan and the Sensolus trailer telemetry is the unsolved seam — and the $600M Brewing Futures throughput is about to land on it.',
+          'o9 runs U.S. demand at 85% touchless. Sensolus proved 15% trailer-fleet utilization in Europe. The yard layer between the o9 plan and the Sensolus trailer is the unsolved seam — and the $600M Brewing Futures throughput is about to land on it.',
       },
       sectionOrder: ['yns-thesis', 'observation', 'comparable', 'methodology', 'about'],
 
       toneShift:
-        'Peer-to-peer transformation-operator framing. Twenty-eight years inside AB InBev; he doesn\'t need a glossary. Acknowledge the o9 and Sensolus wins as wins — they are. Position the wedge as the operating layer above sites (network-level dock execution), not as a replacement of either platform. Quote his own language ("touchless," "KPIs at all-time high") sparingly and only where it earns the quote.',
+        'Peer-to-peer transformation-operator framing. Twenty-eight years inside AB InBev; he doesn\'t need a glossary. Acknowledge the o9 and Sensolus wins as wins — they are. Position the wedge as the operating layer above sites (network-level dock execution), not as a replacement of either platform. Quote his own language ("touchless," "KPIs at all-time high") sparingly and only where it earns the quote. Cartersville is the most credible single-pilot anchor; ABOne is the most credible network-rollout anchor.',
       kpiLanguage: [
-        'touchless yard %',
+        'touchless dock %',
         'dock-door utilization',
         'trailer dwell',
-        'dock-to-stock cycle time',
+        'dock-to-route cycle time',
         'multi-fleet dock arbitration',
         'EV-charging-aware sequencing',
         'site-to-site execution variance',
-        'control-tower coverage at the dock',
+        'three-tier dock standardization',
       ],
       proofEmphasis:
         'Primo is the *public* comparable to cite — same multi-site, multi-fleet, mature-digital-supply-chain shape, on harder freight (water). The directly-shaped reference (un-name-able 237-facility CPG anchor) is the credibility flex if peer reference becomes the topic.',
@@ -477,23 +517,49 @@ export const abInbev: AccountMicrositeData = {
   },
 
   signals: {
-    eventAttendance: 'Major CPG/beverage company. Supply chain technology is stated priority. Cartersville brewery 90 min from Atlanta.',
+    eventAttendance: 'Major CPG/beverage operator. Supply-chain technology is a stated priority; Siqueira is a recurring industry-conference speaker on touchless planning.',
     recentNews: [
-      'o9 Solutions partnership achieving 85% touchless demand planning',
-      'Sensolus partnership for IoT-based yard management and trailer tracking (Europe)',
-      'Fleet electrification: 200+ EVs operating, Nikola/BYD partnerships',
-      '$2B invested in US facilities over 5 years',
-      'Aim10x 2024/2025: Elito keynotes on supply chain transformation',
-      'Dispatch automation reduced late deliveries by 80%',
+      'Brewing Futures — $600M U.S. manufacturing investment doubled for 2025–2026 with named site commitments at Cartersville, Houston, Jacksonville, and Los Angeles',
+      'o9 Solutions partnership — 85% touchless U.S. demand planning, +11pp forecast accuracy to 87%, 99.5% U.S. service, U.S. out-of-stocks below 0.5%, ~20% inventory reduction',
+      'Sensolus partnership — IoT trailer telemetry with a published 15% fleet-utilization lift in four months (European deployment)',
+      'Gartner Supply Chain Top 25 — 2025 winner; integrated planning, visibility, and execution discipline as the cited evaluation criteria',
+      'Fleet electrification — 200+ zero-emission vehicles operating; Nikola hydrogen-electric and BYD electric partnerships; ENGIE charging/solar infrastructure',
+      'BEES B2B platform — 3.7M+ monthly active users; the demand-side digitization layer feeding the o9 plan',
+      'Dispatch automation — late deliveries reduced 80% through automated dispatching',
     ],
     supplyChainInitiatives: [
       'Touchless planning (o9)',
-      'Yard management (Sensolus - Europe)',
+      'Trailer telemetry (Sensolus — Europe)',
+      'Brewing Futures plant capex',
       'Fleet electrification',
       'Dispatch automation',
+      'BEES B2B demand capture',
       'M&A integration standardization',
     ],
-    urgencyDriver: 'Already bought yard tech (Sensolus). EV fleet needs predictable dock times. Summer 2026 peak is approaching. Elito is a public transformation champion who needs the next win for Aim10x 2027.',
+    urgencyDriver: 'The touchless-planning discipline Siqueira applied at AB InBev — uniform standards across every region, every plan cycle, every shift — has been delivered for planning (o9 at 85%) and trailer telemetry (Sensolus in Europe) but not for the dock layer above the sites. Brewing Futures throughput is the timing driver: $600M of plant capex landing at named breweries (Cartersville, Houston, Jacksonville, LA) while the yard layer at those sites is operating against pre-capex baselines. Summer-peak surge (1.5× Memorial Day → Labor Day) and the 200+ EV fleet\'s charge-schedule dependence on dock predictability are the operating pressures behind the timing.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Capex program', body: 'Brewing Futures · $600M U.S. plant investment · 2025–2026 · doubled mid-cycle.' },
+    { mark: 'Named capex sites', body: 'Cartersville $9.2M · Houston $17M · Jacksonville $30M · LA $7.4M.' },
+    { mark: 'Touchless scoreboard', body: 'o9 · 85% touchless U.S. demand · 99.5% service · OOS below 0.5%.' },
+    { mark: 'Siqueira in his own words', body: '"Our supply chain KPIs are at an all-time high." Touchless reached planning and telemetry. Not the dock.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for Elito Siqueira. The touchless-planning discipline you have spent five years building at AB InBev now runs U.S. demand at 85% touchless and trailer telemetry at 15% lift in the European deployment. The five minutes that follow are about the one tile it has not yet reached.',
+    chapters: [
+      { id: 'thesis', label: 'I. The plan-side case is closed', start: 0 },
+      { id: 'what-touchless-made', label: 'II. What touchless planning made expensive', start: 65 },
+      { id: 'unfilled-tile', label: 'III. The unfilled tile between o9 and Sensolus', start: 130 },
+      { id: 'not-flagship', label: 'IV. Why the first pilot is not a flagship brewery', start: 195 },
+      { id: 'simple-site-proof', label: 'V. What proof at Cartersville or ABOne earns', start: 260 },
+    ],
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
