@@ -1,0 +1,135 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1600 1100"
+  role="img"
+  aria-label="Hyundai Motor Group U.S. cluster coverage map: six tiles representing the five-facility footprint plus the network operating layer. HMMA Montgomery, HMGMA Metaplant, HL-GA Battery JV, Hyundai Mobis Richmond Hill, and Kia Georgia West Point are covered. The Yard Network Ops tile is unfilled."
+>
+  <!-- Cream background to blend with memo body -->
+  <rect width="1600" height="1100" fill="#f5f1e8" />
+
+  <g font-family="'Courier New', ui-monospace, SFMono-Regular, Menlo, monospace">
+    <!-- Top eyebrow -->
+    <text x="80" y="64" fill="#8a847b" font-size="14" letter-spacing="3.5" font-weight="500">
+      HYUNDAI MOTOR GROUP U.S. CLUSTER COVERAGE MAP
+    </text>
+    <text x="1520" y="64" text-anchor="end" fill="#8a847b" font-size="14" letter-spacing="2.5" font-weight="500">
+      6 NODES · 5 COVERED · 1 UNFILLED
+    </text>
+
+    <!-- Hairline rule under eyebrow -->
+    <line x1="80" y1="90" x2="1520" y2="90" stroke="#d8d2c2" stroke-width="1" />
+
+    <!-- ── Tile 1 : HMMA MONTGOMERY ───────────────────────────────────── -->
+    <rect x="80" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="110" cy="160" r="4" fill="#a89e8b" />
+    <text x="310" y="265" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="6">
+      HMMA
+    </text>
+    <text x="310" y="300" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="6">
+      MONTGOMERY
+    </text>
+    <text x="310" y="340" text-anchor="middle" fill="#8a847b" font-size="12" letter-spacing="2.5" font-weight="500">
+      2005 · 20 YEARS JIT
+    </text>
+    <text x="310" y="378" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 2 : HMGMA METAPLANT ───────────────────────────────────── -->
+    <rect x="570" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="600" cy="160" r="4" fill="#a89e8b" />
+    <text x="800" y="265" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="6">
+      HMGMA
+    </text>
+    <text x="800" y="300" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="6">
+      METAPLANT
+    </text>
+    <text x="800" y="340" text-anchor="middle" fill="#8a847b" font-size="12" letter-spacing="2.5" font-weight="500">
+      $7.6B · BRYAN COUNTY GA
+    </text>
+    <text x="800" y="378" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 3 : HL-GA BATTERY JV ─────────────────────────────────────── -->
+    <rect x="1060" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="1090" cy="160" r="4" fill="#a89e8b" />
+    <text x="1290" y="265" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="6">
+      HL-GA
+    </text>
+    <text x="1290" y="300" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="6">
+      BATTERY JV
+    </text>
+    <text x="1290" y="340" text-anchor="middle" fill="#8a847b" font-size="12" letter-spacing="2.5" font-weight="500">
+      $4.3B · CO-LOCATED LGES
+    </text>
+    <text x="1290" y="378" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 4 : HYUNDAI MOBIS RICHMOND HILL ──────────────────────────────────── -->
+    <rect x="80" y="480" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="110" cy="510" r="4" fill="#a89e8b" />
+    <text x="310" y="615" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="6">
+      MOBIS
+    </text>
+    <text x="310" y="650" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="6">
+      RICHMOND HILL
+    </text>
+    <text x="310" y="690" text-anchor="middle" fill="#8a847b" font-size="12" letter-spacing="2.5" font-weight="500">
+      $926M · 1.2M SQ FT · 3 DEST
+    </text>
+    <text x="310" y="728" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 5 : KIA GEORGIA WEST POINT ───────────────────────────────────────── -->
+    <rect x="570" y="480" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="600" cy="510" r="4" fill="#a89e8b" />
+    <text x="800" y="615" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="6">
+      KIA GEORGIA
+    </text>
+    <text x="800" y="650" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="6">
+      WEST POINT
+    </text>
+    <text x="800" y="690" text-anchor="middle" fill="#8a847b" font-size="12" letter-spacing="2.5" font-weight="500">
+      350K/YR · EV6 + EV9
+    </text>
+    <text x="800" y="728" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 6 : YARD NETWORK OPS  (unfilled — Hyundai navy border) ── -->
+    <rect x="1060" y="480" width="460" height="320" fill="none" stroke="#002C5F" stroke-width="2" />
+    <circle cx="1090" cy="510" r="4" fill="none" stroke="#002C5F" stroke-width="1.5" />
+    <text x="1290" y="615" text-anchor="middle" fill="#002C5F" font-size="24" font-weight="700" letter-spacing="6">
+      YARD NETWORK
+    </text>
+    <text x="1290" y="655" text-anchor="middle" fill="#002C5F" font-size="24" font-weight="700" letter-spacing="6">
+      OPS
+    </text>
+    <text x="1290" y="695" text-anchor="middle" fill="#8a847b" font-size="12" letter-spacing="2.5" font-weight="500">
+      THE LAYER ABOVE THE 5
+    </text>
+    <text x="1290" y="728" text-anchor="middle" fill="#a89e8b" font-size="13" letter-spacing="3" font-weight="500">
+      — unfilled —
+    </text>
+
+    <!-- ── Outbound flow caption row -->
+    <line x1="80" y1="860" x2="1520" y2="860" stroke="#d8d2c2" stroke-width="1" />
+    <text x="800" y="905" text-anchor="middle" fill="#1a1a1a" font-size="16" letter-spacing="4" font-weight="600">
+      FINISHED-VEHICLE OUTBOUND · GLOVIS AMERICA · COLONEL'S ISLAND BRUNSWICK + SAVANNAH CONSOLIDATION
+    </text>
+    <text x="800" y="945" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2.5" font-weight="500">
+      ~69,000 SQ M SAVANNAH EV-LOGISTICS CONSOLIDATION CENTER · RO-RO AT COLONEL'S ISLAND
+    </text>
+
+    <!-- Hairline rule above source attribution -->
+    <line x1="80" y1="1000" x2="1520" y2="1000" stroke="#d8d2c2" stroke-width="1" />
+
+    <!-- Bottom source attribution -->
+    <text x="800" y="1040" text-anchor="middle" fill="#a89e8b" font-size="12" letter-spacing="2.5" font-weight="500">
+      COMPOSITION · PUBLIC-RECORD HYUNDAI MOTOR GROUP DISCLOSURES · ACCOUNT NAMES REDACTED
+    </text>
+  </g>
+</svg>
