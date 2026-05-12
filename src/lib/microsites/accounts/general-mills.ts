@@ -208,26 +208,39 @@ export const generalMills: AccountMicrositeData = {
         { label: 'Peak multiplier', value: '1.3-1.5x during baking season (Oct-Dec)' },
         { label: 'Carrier model', value: 'Contract carriers and 3PL — no private fleet' },
         { label: 'Active restructuring', value: '$82M program closing 3 Missouri plants through 2026' },
+        { label: 'Accelerate coverage seam', value: 'Five-year strategy framing — boldly build · relentlessly innovate · unleash scale · stand for good. Planning, forecast, the Palantir digital twin, and warehouse automation already operate to a single Accelerate standard. The yard surface above the plants is the one operating layer the strategy has not yet reached' },
+        { label: 'HMM productivity program', value: 'Holistic Margin Management lifted from a ~4% historical annual savings rate to an industry-leading ~5% in recent years on the back of digital supply-chain investment — fiscal 2026 targets ~5% HMM savings, ~$100M reinvested in brand. The published productivity engine; the question is whether yard-driven cost variance is currently inside its accounting scope or sitting in the GL codes it does not touch' },
+        { label: 'CSCO transition', value: 'Paul Gallagher departed February 2026 for 3M; Jonathan Ness named CSCO effective March 16, 2026 after serving interim from late January. ~20-year General Mills tenure across Supply Chain Strategy, Global Finance, Manufacturing, Procurement, and Transformation. Reports to CEO Jeff Harmening' },
       ],
       hypothesis:
-        'Two pressures meet at the yard at the same time. First, the Missouri plant closures push remaining facilities into 15-25% more trailer volume right now — the production lines absorbed the $82M investment, the yards did not. Second, the Palantir digital twin gives end-to-end supply chain visibility everywhere except the dock surface, so the closer the network gets to running on a single operating picture, the more the yard layer stands out as the one place still on local routines.\n\nStack four temperature zones competing for the same dock doors at multi-category sites, and the yard becomes the surface where consolidation math, the HMM cost program, and the Accelerate operating discipline all stop translating into measured dollars. The new Belvidere DC is the cleanest counterpoint — greenfield yard, no legacy habits — which is why it tends to be the obvious first deployment, while Cedar Rapids is the hardest-tested brownfield candidate where twenty years of local routine has to be rewritten.',
+        'Two pressures meet at the yard at the same time. First, the Missouri plant closures push remaining facilities into 15-25% more trailer volume right now — the production lines absorbed the $82M investment, the yards did not. Second, the Palantir digital twin gives end-to-end supply chain visibility everywhere except the dock surface, so the closer the network gets to running on a single operating picture, the more the yard layer stands out as the one place still on local routines.\n\nStack four temperature zones competing for the same dock doors at multi-category sites, and the yard becomes the surface where consolidation math, the HMM productivity program, and the Accelerate operating discipline all stop translating into measured dollars. HMM has already lifted from a ~4% historical savings rate to ~5% on the back of digital supply-chain investment — the engine is running faster than it ever has, which means the cost variance that sits outside its accounting scope is the part of the savings curve that no longer self-resolves. Yard-driven cost (detention, dwell, gate labor, dock contention, temperature-zone misrouting) sits across 12+ GL codes and rarely surfaces as a single line item the HMM scorecard can act on.\n\nThe third thing is the CSCO transition itself. Paul Gallagher\'s "Run, Improve, Transform" framework already covered planning, forecast, the Palantir digital twin, and warehouse automation. Jonathan Ness inherits the framework and the FY2026 reset — softer top line, sharper cost discipline — into seat as of March 16, 2026, with ~20 years of internal tenure across Supply Chain Strategy, Global Finance, Manufacturing, Procurement, and Transformation. That mix is unusual: the new CSCO\'s background is the cost-and-transformation seam where a yard-layer operating model lands cleanly, and the timing is the cleanest 12-month window in a decade for a new operating-layer addition that does not relitigate the existing Run/Improve/Transform map. Belvidere stays the obvious greenfield first deployment; Cedar Rapids stays the hardest-tested brownfield candidate where twenty years of local routine has to be rewritten.',
       pullQuote: 'The closer the network gets to running on a single operating picture, the more the yard layer stands out as the one place still on local routines.',
       caveat:
-        'This is built from public filings, the 2025 Global Responsibility Report, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing on detention spend, dock-zone discipline, or how much existing YMS coverage is already in place across the 41 plants.',
+        'This is built from public filings, the 2025 Global Responsibility Report, the March 2026 CSCO announcement, the CAGNY 2026 Accelerate progress update, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing on detention spend, dock-zone discipline, how much existing YMS coverage is already in place across the 41 plants, and which yard-cost line items the HMM program already counts versus the ones it does not.',
+    },
+    {
+      type: 'artifact',
+      headline: 'A coverage map for the Accelerate operating layer',
+      artifact: {
+        imageSrc: '/artifacts/general-mills-coverage-map.svg',
+        imageAlt: 'Accelerate coverage map. Six tiles representing the General Mills operating surfaces touched by the Accelerate strategy. HMM Productivity, Palantir Digital Twin, Forecast & Planning, Warehouse Automation, and Stand for Good are covered. The Yard Network Ops tile is unfilled, marked with a General Mills blue hairline outline.',
+        caption: 'Accelerate operating-layer coverage map · 1 tile unfilled.',
+        source: 'Composition modeled from public Accelerate strategy, HMM productivity, Palantir digital twin, and Stand for Good disclosures. Site-level yard vendors redacted.',
+      },
     },
     {
       type: 'comparable',
       headline: 'What a comparable network did when they closed the same gap',
       comparableName: 'Primo Brands',
       comparableProfile:
-        'Multi-site bottling and distribution network with a similar archetype mix — high-throughput plants, drop-trailer yards, and refrigerated lanes feeding regional DCs. Deployed YardFlow as the network-yard standardization layer in 2024-2025 and is the closest live analog to what consolidation pressure does to a CPG yard.',
+        'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes gross-vehicle weight before it maxes cube), low-margin (every minute of yard waste is a margin point you cannot recover with price), and shipped across multi-temp (premium SKUs sit alongside ambient). Primo is years ahead of every other CPG category on yard automation and digitization — they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-level operating model on top of existing site-level yard systems. The General Mills operating profile is shape-similar — multi-site, multi-temp, contract-carrier-dependent, 41 plants under one Accelerate strategy — with significantly more forgiving freight economics per trailer (cereal and refrigerated yogurt do not weight-out at the same intensity as water). The translation that matters for General Mills is integration shape, not category: Primo is the proof that a network operating model lands on top of mature planning, forecast, and digital-twin investment without disrupting the existing stack — exactly the move Accelerate now needs as Missouri consolidation pushes more volume through fewer plants and as HMM\'s ~5% savings curve runs out of room inside the cost lines it already counts.',
       metrics: [
         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
       ],
-      timeline: '30-60 days from kickoff to first measurable impact at the pilot site. Belvidere is the cleanest greenfield candidate; Cedar Rapids is the hardest-tested brownfield candidate.',
+      timeline: '30-60 days from kickoff to first measurable impact at the pilot site. Belvidere is the cleanest greenfield candidate; Cedar Rapids is the hardest-tested brownfield candidate. The first 60-day proof is what earns the right to author the yard-layer entry into the Accelerate operating standard the same way HMM and the Palantir digital twin entered it.',
       referenceAvailable: true,
     },
     {
@@ -247,6 +260,24 @@ export const generalMills: AccountMicrositeData = {
           detail: 'Source for the consolidation pressure narrative. Volume reallocation percentage is inferred from the closing footprint relative to network plant count.',
         },
         {
+          id: 'gm-accelerate-cagny-2026',
+          source: 'CAGNY February 2026 — Accelerate strategy progress update',
+          confidence: 'public',
+          detail: 'Five-year Accelerate framing (boldly build · relentlessly innovate · unleash scale · stand for good), FY2026 outlook reset (organic net sales down 1.5–2%, adjusted operating profit down 16–20% constant currency), and the recommitment to digital supply-chain investment as the productivity engine. The operating-discipline frame the yard layer has to fit inside.',
+        },
+        {
+          id: 'gm-hmm-productivity',
+          source: 'General Mills HMM productivity disclosures',
+          confidence: 'public',
+          detail: 'Holistic Margin Management run rate lifted from a ~4% historical annual savings rate to an industry-leading ~5% in recent years on the back of digital supply-chain investment. FY2026 targets ~5% HMM savings and ~$100M reinvested in brand; FY2027 outlook is ≥4% as digital investment returns accelerate. The productivity engine the yard-layer business case has to be sized inside.',
+        },
+        {
+          id: 'gm-ness-tenure',
+          source: 'Jonathan Ness — public tenure and CSCO appointment record (March 2026)',
+          confidence: 'public',
+          detail: 'Named Chief Supply Chain Officer effective March 16, 2026 after serving as interim CSCO from late January following Paul Gallagher\'s February 2026 departure to 3M. ~20 years at General Mills with leadership roles across Supply Chain Strategy, Global Finance, Manufacturing, Procurement, and Transformation. Reports to CEO Jeff Harmening; joined the company\'s Senior Leadership Team. The cost-and-transformation seam in his background is the seat where a yard-layer operating model is the cleanest next entry into the Accelerate map.',
+        },
+        {
           id: 'industry-benchmarks',
           source: 'ATA + Aberdeen yard-operations benchmarks',
           confidence: 'public',
@@ -264,17 +295,19 @@ export const generalMills: AccountMicrositeData = {
         'How much of the 41-plant network is already on a YMS vs. radio-and-clipboard',
         'Where temperature-zone misassignment events concentrate today (which plants, which shifts)',
         'How the Missouri closures are actually being absorbed at the receiving plants — paper plan vs. shift-floor reality',
-        'The exact yard-cost line items already inside the HMM program scope vs. still uncounted',
+        'The exact yard-cost line items already inside the HMM program scope vs. still uncounted — and whether yard variance currently surfaces in the FY2026 productivity scorecard or gets absorbed elsewhere',
+        'Whether the CSCO transition has paused or accelerated any in-flight Run/Improve/Transform operating-layer additions — and where a yard-layer entry sequences against the inherited roadmap',
+        'Whether the Palantir digital twin already ingests yard-state data from any of the 41 plants in a way the network-level operator can act on, or whether the dock surface stops at the warehouse door for the twin today',
       ],
     },
     {
       type: 'about',
       headline: 'About this analysis',
       authorBio:
-        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. The framing leans on Paul Gallagher\'s Run/Improve/Transform language because it\'s the simplest way to describe where the yard layer actually sits in the network: the part of "Transform" the digital twin can\'t see yet.',
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. General Mills is distinctive in this round because the operating-system thinking is already on the floor — HMM for productivity, the Palantir digital twin for visibility, warehouse automation at the four-plus sites, planning and forecast at Accelerate cadence. The yard is the one operating layer the strategy has not yet reached. The Run/Improve/Transform framing Paul Gallagher built remains the simplest way to describe where the yard layer actually sits — the part of "Transform" the digital twin cannot see yet — and Jonathan Ness inherits both the framework and the FY2026 reset into seat. This brief sizes that gap, not the site-level work under it.',
       authorEmail: 'casey@freightroll.com',
       signOff:
-        'If parts of this read wrong against what you see internally for General Mills — particularly the consolidation absorption math, the four-zone dock contention, or the assumption that the yard layer is still 41 different routines — that\'s the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
+        'Jonathan — the part most worth pushing back on is whether the cost-and-transformation seam you carried through ~20 years of General Mills tenure (Supply Chain Strategy, Global Finance, Manufacturing, Procurement, Transformation) already counts yard-driven variance inside the HMM scorecard you inherit, or whether it sits in the GL codes the productivity engine does not touch yet. That answer reshapes the rest of this. The Missouri consolidation, the four-zone dock contention, and the assumption that the yard layer is still 41 different routines under one Accelerate strategy are the next things to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
     },
   ],
 
@@ -283,65 +316,61 @@ export const generalMills: AccountMicrositeData = {
   // ── THE PEOPLE ──────────────────────────────────────────────────────
   people: [
     {
-      personaId: 'gm-gallagher',
-      name: 'Paul Gallagher',
-      firstName: 'Paul',
-      lastName: 'Gallagher',
-      title: 'Chief Supply Chain Officer',
-      company: 'General Mills',
-      email: 'paul.gallagher@genmills.com',
-      roleInDeal: 'decision-maker',
-      seniority: 'C-level',
-      function: 'Supply Chain',
-      reportsTo: 'CEO',
-      directReports: '18,000 supply chain employees',
-
-      currentMandate: `Driving digital transformation and cost savings across ${GENERAL_MILLS_FACILITY_COUNT_LABEL} facilities, $82M restructuring program`,
-      strategicPriorities: ['Digital transformation', 'Cost savings via HMM', 'Facility consolidation', 'Sustainability (Scope 3)'],
-      operationalPhilosophy: 'Run, Improve, and Transform',
-      knownPainPoints: [
-        'Facility consolidation pushing more volume through fewer sites',
-        'Multi-temperature logistics across 4 zones',
-        'Seasonal demand spikes (30-50%)',
-        'Blue Buffalo integration complexity',
-      ],
-      publicQuotes: [
-        {
-          text: 'The nature of supply chain is always you\'re dealing with complexities',
-          source: 'Supply Chain Dive, March 2024',
-          relevanceToYardFlow: 'He frames complexity as the constant. YardFlow reduces complexity at the yard level.',
-        },
-        {
-          text: 'AI transformation revolves around people at all stages of the journey',
-          source: 'NA Supply Chain Executive Summit 2024, keynote "The People-Centric Approach to AI"',
-          relevanceToYardFlow: 'He leads with people, not tech. Position YardFlow as a protocol people follow, not software they learn.',
-        },
-      ],
-      speakingTopics: ['AI transformation', 'People-centric technology', 'Digital twin (Palantir)', 'Cost savings'],
-
-      communicationStyle: 'Data-driven but people-first. Leads with outcomes, not features. Values proven results over promises.',
-      languagePreferences: ['cost savings', 'service levels', 'digital transformation', 'operational discipline', 'Run/Improve/Transform'],
-      avoidTopics: ['Generic AI hype', 'Technology-first positioning', 'Unproven ROI claims'],
-      connectionHooks: ['Diageo background (also a target account)', 'Top 30 Leaders in Supply Chain 2025 award', 'Palantir digital twin champion'],
-
-      bestIntroPath: 'Direct email (suppressed) - phone only. HQ Minneapolis.',
-      contactConstraints: 'Email suppressed - phone only',
-    },
-    {
       personaId: 'gm-ness',
       name: 'Jonathan Ness',
       firstName: 'Jonathan',
       lastName: 'Ness',
       title: 'Chief Supply Chain Officer',
       company: 'General Mills',
-      roleInDeal: 'routing-contact',
+      roleInDeal: 'decision-maker',
       seniority: 'C-level',
       function: 'Supply Chain',
-      reportsTo: 'Paul Gallagher',
+      reportsTo: 'Jeff Harmening (Chairman & CEO)',
+      directReports: '18,000+ supply chain employees',
 
-      currentMandate: 'Day-to-day supply chain operations oversight',
-      bestIntroPath: 'Phone only - email suppressed',
-      contactConstraints: 'Email suppressed - phone only',
+      currentMandate: `Owns global supply chain operations across ${GENERAL_MILLS_FACILITY_COUNT_LABEL} owned plants. Effective March 16, 2026 after serving interim CSCO from late January following Paul Gallagher\'s February 2026 departure to 3M. ~20 years General Mills tenure spanning Supply Chain Strategy, Global Finance, Manufacturing, Procurement, and Transformation.`,
+      strategicPriorities: ['HMM productivity acceleration', 'Digital supply-chain investment returns', 'Missouri consolidation absorption', 'Accelerate operating-discipline standardization'],
+      operationalPhilosophy: 'Inherits the Run/Improve/Transform framework; cost-and-transformation seam in background.',
+      knownPainPoints: [
+        'FY2026 reset — softer top line, sharper cost discipline expected',
+        'Missouri plant closures pushing more volume through fewer sites',
+        'Multi-temperature logistics across 4 zones',
+        'HMM savings curve running out of room inside the GL lines already counted',
+        'Inherits the Accelerate operating standard mid-cycle',
+      ],
+      speakingTopics: ['Supply chain transformation', 'HMM productivity', 'Manufacturing operations', 'Procurement strategy', 'Digital supply chain'],
+
+      communicationStyle: 'Internal-tenure CSCO — fluent in the cross-functional language of the Accelerate map. Cost discipline, transformation, manufacturing, and procurement vocabulary all live in his background.',
+      languagePreferences: ['cost savings', 'HMM', 'productivity', 'transformation', 'operating discipline', 'Run/Improve/Transform'],
+      avoidTopics: ['Generic AI hype', 'Technology-first positioning', 'Unproven ROI claims'],
+      connectionHooks: ['~20-year General Mills internal tenure', 'Cost-and-transformation cross-functional background', 'Senior Leadership Team member, reports directly to Jeff Harmening'],
+
+      bestIntroPath: 'Direct outreach to CSCO office. If delegated, target VP Logistics / VP Network Operations or the digital supply-chain lead who owns the HMM productivity scorecard.',
+    },
+    {
+      personaId: 'gm-gallagher',
+      name: 'Paul Gallagher',
+      firstName: 'Paul',
+      lastName: 'Gallagher',
+      title: 'Group President, Enterprise Supply Chain (3M) — former CSCO, General Mills',
+      company: '3M',
+      roleInDeal: 'influencer',
+      seniority: 'C-level',
+      function: 'Supply Chain',
+
+      currentMandate: 'Author of the Run/Improve/Transform framework at General Mills (CSCO June 2021–February 2026); departed February 2026 for 3M. Framework and HMM productivity step-change remain the inherited operating standard.',
+      strategicPriorities: ['(Historical) Digital transformation', '(Historical) Cost savings via HMM', '(Historical) Facility consolidation'],
+      operationalPhilosophy: 'Run, Improve, and Transform',
+      publicQuotes: [
+        {
+          text: 'AI transformation revolves around people at all stages of the journey',
+          source: 'NA Supply Chain Executive Summit 2024, keynote "The People-Centric Approach to AI"',
+          relevanceToYardFlow: 'The Run/Improve/Transform framework Jonathan Ness inherits — yard layer is the part of Transform the digital twin cannot see yet.',
+        },
+      ],
+      connectionHooks: ['Top 30 Leaders in Supply Chain 2025 award', 'Palantir digital twin champion', 'Author of the inherited Accelerate operating standard'],
+
+      bestIntroPath: 'No longer at General Mills. Historical-context reference only.',
     },
     {
       personaId: 'gm-ahsanullah',
@@ -405,49 +434,47 @@ export const generalMills: AccountMicrositeData = {
   personVariants: [
     {
       person: {
-        personaId: 'gm-gallagher',
-        name: 'Paul Gallagher',
-        firstName: 'Paul',
-        lastName: 'Gallagher',
+        personaId: 'gm-ness',
+        name: 'Jonathan Ness',
+        firstName: 'Jonathan',
+        lastName: 'Ness',
         title: 'Chief Supply Chain Officer',
         company: 'General Mills',
-        email: 'paul.gallagher@genmills.com',
         roleInDeal: 'decision-maker',
         seniority: 'C-level',
         function: 'Supply Chain',
       },
       fallbackLane: 'executive',
-      label: 'Paul Gallagher - CSCO',
-      variantSlug: 'paul-gallagher',
+      label: 'Jonathan Ness - CSCO',
+      variantSlug: 'jonathan-ness',
 
-      framingNarrative: 'Paul, your "Run, Improve, Transform" framework is exactly right. You\'ve already handled "Run" (record service levels) and "Improve" (HMM cost savings, 230bp gross margin expansion). YardFlow is "Transform" - the standardized operating protocol that turns your yard from a tribal knowledge surface into a calculable network asset.',
-      openingHook: 'You built a digital twin with Palantir to see your entire supply chain. There is one surface it cannot see: the yard.',
-      stakeStatement: 'With 3 Missouri plants closing through 2026, remaining facilities are absorbing 15-25% more volume right now. The $82M restructuring made the plants more competitive. Nothing was allocated to make the yards keep pace.',
+      framingNarrative:
+        'Jonathan, the seat you took on March 16, 2026 is the cleanest 12-month window in a decade to lay one more tile into the Accelerate operating standard. Paul Gallagher\'s Run/Improve/Transform framework already covered planning, forecast, the Palantir digital twin, and warehouse automation — and your ~20 years inside General Mills span exactly the cost-and-transformation seam (Supply Chain Strategy, Global Finance, Manufacturing, Procurement, Transformation) where a yard-layer operating model lands cleanly. The HMM productivity curve has lifted from a ~4% historical rate to ~5%, which is industry-leading and also means the savings inside the GL lines already counted are running out of room. The yard-driven cost variance that sits across 12+ GL codes — detention, dwell, gate labor, dock contention, temperature-zone misrouting — is exactly the kind of line item HMM has not had a way to act on yet, and it is the natural next entry into the productivity scorecard you now own.',
+      openingHook:
+        'The Accelerate strategy already runs to a single standard for planning, forecast, the Palantir digital twin, and warehouse automation. The yard layer above the 41 plants is the operating surface it has not yet reached — and the productivity engine you inherit is the one place inside General Mills where that gap shows up as a sized number.',
+      stakeStatement:
+        'Two things are open simultaneously and they are not always open together. The Missouri consolidation is pushing 15-25% more trailer volume through the receiving plants right now, on a $82M restructuring envelope that funded the plants and not the yards. And the FY2026 reset — softer top line, sharper cost discipline — makes the HMM productivity scorecard the most-watched number on your inherited roadmap, at the moment its savings curve runs out of room inside the cost lines already counted. The yard-layer entry into the operating standard lands cleanest now, before either window closes.',
 
       heroOverride: {
-        headline: 'Paul, your Palantir digital twin sees everything except the yard',
-        subheadline: `You built end-to-end supply chain visibility. But the ${GENERAL_MILLS_FACILITY_COUNT_LABEL} facility yards where trailers stage, wait, and compound costs are still running on local tribal knowledge. YardFlow closes that gap.`,
+        headline: 'The Accelerate tile no one has filled yet is the yard network operating layer.',
+        subheadline: `Planning, forecast, the Palantir digital twin, warehouse automation, and Stand for Good already operate to one Accelerate standard. The yard surface above the ${GENERAL_MILLS_FACILITY_COUNT_LABEL} plants — where Missouri consolidation lands, where four-zone dock contention compounds, and where HMM\'s next savings slice lives — is the unfilled tile.`,
       },
-      sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'testimonial', 'cta'],
-      sectionOverrides: [
-        {
-          sectionType: 'stakes',
-          override: {
-            headline: 'The cost your HMM program cannot reach',
-            narrative: `Your Holistic Margin Management program drove gross margin up 230 basis points. That is real discipline. But yard-driven costs sit across 12+ GL codes and never surface as a single line item. Detention, dwell, gate labor, dock contention, temperature-zone conflicts. At ${GENERAL_MILLS_FACILITY_COUNT_LABEL} facilities, it aggregates to a number your board would notice if they could see it.`,
-          },
-        },
-        {
-          sectionType: 'solution',
-          override: {
-            accountFit: 'You already champion digital transformation - the Palantir digital twin proves that. YardFlow extends your visibility to the physical execution layer. Your "Run, Improve, Transform" framework has a gap at the yard. This fills it.',
-          },
-        },
-      ],
+      sectionOrder: ['yns-thesis', 'observation', 'artifact', 'comparable', 'methodology', 'about'],
 
-      toneShift: 'Strategic, people-first, transformation-focused. Reference his Run/Improve/Transform framework. He values proven results and people-centric technology. Lead with what operators experience, not what dashboards show.',
-      kpiLanguage: ['cost savings', 'service levels', 'digital transformation', 'operational discipline', 'headcount neutral', 'margin expansion'],
-      proofEmphasis: 'The "headcount neutral" customer quote is key - Gallagher cares about people. Frame YardFlow as enabling his team, not replacing it.',
+      toneShift:
+        'Peer-to-peer internal-tenure framing. Ness is a 20-year General Mills lifer; he does not need the company\'s strategy explained back to him. Acknowledge the existing operating layer (HMM, Palantir, planning, forecast, warehouse automation) as the strategy doing its job — it is. Position the wedge as the next layer above what already runs to one standard, not as a critique of what is in place. The cost-and-transformation seam in his background is the language register; lead with productivity scorecard math, GL-code coverage, and operating-standard sequencing rather than carrier-experience anecdotes.',
+      kpiLanguage: [
+        'HMM productivity',
+        'operating discipline',
+        'cost savings',
+        'GL-code coverage',
+        'dock-door utilization',
+        'trailer dwell',
+        'transformation',
+        'Run/Improve/Transform',
+      ],
+      proofEmphasis:
+        'Primo is the public comparable to cite — same multi-site multi-temp shape, harder freight (water), already running the network-level operating layer above existing site-level systems. The "headcount-neutral while absorbing more volume" quote is the proof shape that maps to the Missouri-consolidation absorption problem he inherits.',
       avoidPhrases: ['AI-powered', 'disruptive', 'cutting-edge', 'paradigm shift'],
     },
     {
@@ -763,30 +790,35 @@ export const generalMills: AccountMicrositeData = {
   signals: {
     eventAttendance: 'General Mills is a major CPG with Covington, GA facility near Atlanta',
     recentNews: [
+      'Jonathan Ness named Chief Supply Chain Officer effective March 16, 2026; ~20-year internal tenure spanning Supply Chain Strategy, Global Finance, Manufacturing, Procurement, and Transformation. Reports to CEO Jeff Harmening',
+      'Paul Gallagher departed February 2026 to become 3M group president of enterprise supply chain',
+      'CAGNY February 2026 — Accelerate strategy progress update; FY2026 organic net sales now expected down 1.5–2%, adjusted operating profit down 16–20% in constant currency',
+      'HMM productivity program lifted from ~4% historical annual savings rate to ~5% industry-leading rate; FY2026 targets ~5% HMM savings, ~$100M reinvested in brand',
       '$82M restructuring - 3 Missouri plant closures phasing through 2026',
       'Belvidere, IL DC opened April 2024 as Midwest hub',
       'Warehouse automation at 4+ locations with more in progress',
       'Palantir digital twin for supply chain visibility',
-      'Top 30 Leaders in Supply Chain award for Paul Gallagher (2025)',
     ],
-    supplyChainInitiatives: ['Digital twin (Palantir)', 'Warehouse automation expansion', 'HMM cost savings program', 'Sustainability / Scope 3'],
-    competitivePressure: 'Post mills CPG competitors investing in supply chain digitization',
-    urgencyDriver: 'Missouri plant closures happening NOW - remaining facilities absorbing volume through 2026',
+    supplyChainInitiatives: ['Accelerate strategy operating standard', 'HMM productivity acceleration', 'Digital twin (Palantir)', 'Warehouse automation expansion', 'Sustainability / Scope 3'],
+    competitivePressure: 'Peer CPG competitors investing in supply chain digitization',
+    urgencyDriver: 'CSCO transition March 2026 + Missouri plant closures absorbing volume through 2026 — cleanest 12-month window in a decade to add one more tile to the Accelerate operating standard',
   },
 
   marginaliaItems: [
     { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
     { mark: 'Accelerate strategy', body: 'Boldly build · relentlessly innovate · unleash scale · stand for good.' },
+    { mark: 'CSCO transition', body: 'Jonathan Ness · effective March 16, 2026 · ~20-year General Mills tenure · reports to Jeff Harmening.' },
+    { mark: 'HMM productivity', body: '~4% historical → ~5% industry-leading. FY2026 ~$100M reinvested in brand.' },
     { mark: 'Restructuring', body: '$82M program · 3 Missouri plants closing through 2026.' },
     { mark: 'Greenfield', body: 'Belvidere IL DC · opened April 2024 · Midwest hub, no legacy yard habits.' },
-    { mark: 'Gallagher in his own words', body: 'Run, Improve, and Transform. The yard is the part of Transform the digital twin cannot see yet.' },
+    { mark: 'Gallagher in his own words', body: 'Run, Improve, and Transform. The yard is the part of Transform the digital twin cannot see yet — the framework Jonathan Ness inherits.' },
     { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
   ],
 
   audioBrief: {
     src: '/audio/yard-network-brief.mp3',
     intro:
-      'This brief is for Paul Gallagher. The Run / Improve / Transform discipline that drove 230 basis points of gross-margin expansion has already reached planning and the Palantir digital twin. The five minutes that follow are about the one layer of Transform the digital twin cannot see yet.',
+      'This brief is for Jonathan Ness. The Run / Improve / Transform framework you inherit already covers planning, forecast, the Palantir digital twin, and warehouse automation. The five minutes that follow are about the one operating layer the Accelerate strategy has not yet reached.',
     chapters: AUDIO_BRIEF_CHAPTERS,
     generatedAt: '2026-05-12T00:00:00Z',
   },
