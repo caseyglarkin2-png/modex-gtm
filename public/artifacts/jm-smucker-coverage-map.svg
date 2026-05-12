@@ -1,0 +1,120 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1600 900"
+  role="img"
+  aria-label="J.M. Smucker portfolio coverage map: six tiles representing the five product verticals across Smucker's U.S. manufacturing footprint. Coffee (Folgers, Cafe Bustelo), Peanut Butter and Fruit Spreads (Jif, Smucker's), Pet Food (Meow Mix, Milk-Bone), Hostess Sweet Baked Goods (Twinkies, Ding Dongs), and Frozen Sandwiches (Uncrustables) all run site-level operations and are marked covered. The Yard Network Ops tile representing the integration-era operating model is unfilled, marked with a Smucker purple hairline outline."
+>
+  <!-- Cream background to blend with memo body -->
+  <rect width="1600" height="900" fill="#f5f1e8" />
+
+  <g font-family="'Courier New', ui-monospace, SFMono-Regular, Menlo, monospace">
+    <!-- Top eyebrow -->
+    <text x="80" y="64" fill="#8a847b" font-size="14" letter-spacing="3.5" font-weight="500">
+      J.M. SMUCKER PORTFOLIO COVERAGE MAP
+    </text>
+    <text x="1520" y="64" text-anchor="end" fill="#8a847b" font-size="14" letter-spacing="2.5" font-weight="500">
+      6 TILES · 5 COVERED · 1 UNFILLED
+    </text>
+
+    <!-- Hairline rule under eyebrow -->
+    <line x1="80" y1="90" x2="1520" y2="90" stroke="#d8d2c2" stroke-width="1" />
+
+    <!-- ── Tile 1 : COFFEE ───────────────────────────────────── -->
+    <rect x="80" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="110" cy="160" r="4" fill="#a89e8b" />
+    <text x="310" y="285" text-anchor="middle" fill="#1a1a1a" font-size="28" font-weight="600" letter-spacing="6">
+      COFFEE
+    </text>
+    <text x="310" y="320" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      Folgers · Cafe Bustelo · New Orleans
+    </text>
+    <text x="310" y="355" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 2 : PEANUT BUTTER & FRUIT SPREADS ───────────────────────────────────── -->
+    <rect x="570" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="600" cy="160" r="4" fill="#a89e8b" />
+    <text x="800" y="270" text-anchor="middle" fill="#1a1a1a" font-size="24" font-weight="600" letter-spacing="5">
+      PEANUT BUTTER
+    </text>
+    <text x="800" y="305" text-anchor="middle" fill="#1a1a1a" font-size="24" font-weight="600" letter-spacing="5">
+      &amp; FRUIT SPREADS
+    </text>
+    <text x="800" y="340" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      Jif · Smucker's · Lexington KY · Orrville OH
+    </text>
+    <text x="800" y="375" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 3 : PET FOOD ─────────────────────────────────────── -->
+    <rect x="1060" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="1090" cy="160" r="4" fill="#a89e8b" />
+    <text x="1290" y="285" text-anchor="middle" fill="#1a1a1a" font-size="28" font-weight="600" letter-spacing="6">
+      PET FOOD
+    </text>
+    <text x="1290" y="320" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      Meow Mix · Milk-Bone · Nutrish
+    </text>
+    <text x="1290" y="355" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 4 : HOSTESS SWEET BAKED GOODS ──────────────────────────────────── -->
+    <rect x="80" y="480" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="110" cy="510" r="4" fill="#a89e8b" />
+    <text x="310" y="625" text-anchor="middle" fill="#1a1a1a" font-size="24" font-weight="600" letter-spacing="5">
+      HOSTESS SWEET
+    </text>
+    <text x="310" y="660" text-anchor="middle" fill="#1a1a1a" font-size="24" font-weight="600" letter-spacing="5">
+      BAKED GOODS
+    </text>
+    <text x="310" y="695" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      Twinkies · Ding Dongs · Columbus GA
+    </text>
+    <text x="310" y="725" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 5 : FROZEN SANDWICHES ───────────────────────────────────────── -->
+    <rect x="570" y="480" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="600" cy="510" r="4" fill="#a89e8b" />
+    <text x="800" y="625" text-anchor="middle" fill="#1a1a1a" font-size="24" font-weight="600" letter-spacing="5">
+      FROZEN
+    </text>
+    <text x="800" y="660" text-anchor="middle" fill="#1a1a1a" font-size="24" font-weight="600" letter-spacing="5">
+      SANDWICHES
+    </text>
+    <text x="800" y="695" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      Uncrustables · category-leading growth
+    </text>
+    <text x="800" y="725" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 6 : YARD NETWORK OPS  (unfilled — accent border) ── -->
+    <rect x="1060" y="480" width="460" height="320" fill="none" stroke="#5B2C82" stroke-width="2" />
+    <circle cx="1090" cy="510" r="4" fill="none" stroke="#5B2C82" stroke-width="1.5" />
+    <text x="1290" y="615" text-anchor="middle" fill="#5B2C82" font-size="24" font-weight="700" letter-spacing="6">
+      YARD NETWORK
+    </text>
+    <text x="1290" y="655" text-anchor="middle" fill="#5B2C82" font-size="24" font-weight="700" letter-spacing="6">
+      OPS
+    </text>
+    <text x="1290" y="690" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      integration-era operating layer
+    </text>
+    <text x="1290" y="720" text-anchor="middle" fill="#a89e8b" font-size="13" letter-spacing="3" font-weight="500">
+      — unfilled —
+    </text>
+
+    <!-- Hairline rule above source attribution -->
+    <line x1="80" y1="840" x2="1520" y2="840" stroke="#d8d2c2" stroke-width="1" />
+
+    <!-- Bottom source attribution -->
+    <text x="800" y="872" text-anchor="middle" fill="#a89e8b" font-size="12" letter-spacing="2.5" font-weight="500">
+      COMPOSITION · PUBLIC J.M. SMUCKER + HOSTESS DISCLOSURES · INTEGRATION YEAR 2
+    </text>
+  </g>
+</svg>
