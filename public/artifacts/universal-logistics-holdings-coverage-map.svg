@@ -1,0 +1,129 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1600 900"
+  role="img"
+  aria-label="LINC operating-layer coverage map: seven tiles representing the ULH / Logistics Insight Corporation operating layers. AccuLinc WMS, TMS, YMS records, Parsec rail terminals, LINC plant-side, and Trucking are covered; Execution Orchestration is unfilled."
+>
+  <!-- Cream background to blend with memo body -->
+  <rect width="1600" height="900" fill="#f5f1e8" />
+
+  <g font-family="'Courier New', ui-monospace, SFMono-Regular, Menlo, monospace">
+    <!-- Top eyebrow -->
+    <text x="80" y="64" fill="#8a847b" font-size="14" letter-spacing="3.5" font-weight="500">
+      LINC OPERATING-LAYER COVERAGE MAP
+    </text>
+    <text x="1520" y="64" text-anchor="end" fill="#8a847b" font-size="14" letter-spacing="2.5" font-weight="500">
+      7 LAYERS · 6 COVERED · 1 UNFILLED
+    </text>
+
+    <!-- Hairline rule under eyebrow -->
+    <line x1="80" y1="90" x2="1520" y2="90" stroke="#d8d2c2" stroke-width="1" />
+
+    <!-- Top row: 4 tiles (AccuLinc WMS, TMS, YMS Records, Parsec Rail) -->
+    <!-- Tile widths: 340; gaps: 20; left margin 80; (4*340)+(3*20)+(2*80)=1580 ≈ 1600 -->
+
+    <!-- ── Tile 1 : ACCULINC WMS ───────────────────────────────────── -->
+    <rect x="80" y="130" width="340" height="280" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="105" cy="158" r="4" fill="#a89e8b" />
+    <text x="250" y="265" text-anchor="middle" fill="#1a1a1a" font-size="22" font-weight="600" letter-spacing="4">
+      ACCULINC
+    </text>
+    <text x="250" y="298" text-anchor="middle" fill="#1a1a1a" font-size="22" font-weight="600" letter-spacing="4">
+      WMS
+    </text>
+    <text x="250" y="338" text-anchor="middle" fill="#8a847b" font-size="12" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 2 : TMS ───────────────────────────────────── -->
+    <rect x="440" y="130" width="340" height="280" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="465" cy="158" r="4" fill="#a89e8b" />
+    <text x="610" y="282" text-anchor="middle" fill="#1a1a1a" font-size="24" font-weight="600" letter-spacing="6">
+      TMS
+    </text>
+    <text x="610" y="338" text-anchor="middle" fill="#8a847b" font-size="12" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 3 : YMS RECORDS ─────────────────────────────────────── -->
+    <rect x="800" y="130" width="340" height="280" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="825" cy="158" r="4" fill="#a89e8b" />
+    <text x="970" y="265" text-anchor="middle" fill="#1a1a1a" font-size="22" font-weight="600" letter-spacing="4">
+      YMS
+    </text>
+    <text x="970" y="298" text-anchor="middle" fill="#1a1a1a" font-size="22" font-weight="600" letter-spacing="4">
+      RECORDS
+    </text>
+    <text x="970" y="338" text-anchor="middle" fill="#8a847b" font-size="12" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 4 : PARSEC RAIL TERMINALS ──────────────────────────────────── -->
+    <rect x="1160" y="130" width="340" height="280" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="1185" cy="158" r="4" fill="#a89e8b" />
+    <text x="1330" y="265" text-anchor="middle" fill="#1a1a1a" font-size="22" font-weight="600" letter-spacing="4">
+      PARSEC RAIL
+    </text>
+    <text x="1330" y="298" text-anchor="middle" fill="#1a1a1a" font-size="22" font-weight="600" letter-spacing="4">
+      TERMINALS
+    </text>
+    <text x="1330" y="338" text-anchor="middle" fill="#8a847b" font-size="12" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- Bottom row: 3 tiles (LINC Plant-Side, Trucking, Execution Orchestration) -->
+    <!-- Centered: x starts at 260 (=(1600-(3*340+2*20))/2) → 260 leaves 1340 → first at 260 -->
+
+    <!-- ── Tile 5 : LINC PLANT-SIDE ───────────────────────────────────────── -->
+    <rect x="260" y="450" width="340" height="280" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="285" cy="478" r="4" fill="#a89e8b" />
+    <text x="430" y="585" text-anchor="middle" fill="#1a1a1a" font-size="22" font-weight="600" letter-spacing="4">
+      LINC
+    </text>
+    <text x="430" y="618" text-anchor="middle" fill="#1a1a1a" font-size="22" font-weight="600" letter-spacing="4">
+      PLANT-SIDE
+    </text>
+    <text x="430" y="658" text-anchor="middle" fill="#8a847b" font-size="12" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 6 : TRUCKING ───────────────────────────────────────── -->
+    <rect x="620" y="450" width="340" height="280" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="645" cy="478" r="4" fill="#a89e8b" />
+    <text x="790" y="602" text-anchor="middle" fill="#1a1a1a" font-size="24" font-weight="600" letter-spacing="5">
+      TRUCKING
+    </text>
+    <text x="790" y="658" text-anchor="middle" fill="#8a847b" font-size="12" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 7 : EXECUTION ORCHESTRATION  (unfilled — accent border) ── -->
+    <rect x="980" y="450" width="340" height="280" fill="none" stroke="#1E3A5F" stroke-width="2" />
+    <circle cx="1005" cy="478" r="4" fill="none" stroke="#1E3A5F" stroke-width="1.5" />
+    <text x="1150" y="582" text-anchor="middle" fill="#1E3A5F" font-size="20" font-weight="700" letter-spacing="4">
+      EXECUTION
+    </text>
+    <text x="1150" y="618" text-anchor="middle" fill="#1E3A5F" font-size="20" font-weight="700" letter-spacing="4">
+      ORCHESTRATION
+    </text>
+    <text x="1150" y="658" text-anchor="middle" fill="#a89e8b" font-size="12" letter-spacing="3" font-weight="500">
+      — unfilled —
+    </text>
+
+    <!-- Caption beneath grid -->
+    <text x="800" y="790" text-anchor="middle" fill="#5a5550" font-size="14" letter-spacing="2" font-style="italic">
+      Records + WMS + plant-side + rail are in the operating model.
+    </text>
+    <text x="800" y="814" text-anchor="middle" fill="#5a5550" font-size="14" letter-spacing="2" font-style="italic">
+      Execution orchestration is the layer the LINC bid template has not yet absorbed.
+    </text>
+
+    <!-- Hairline rule above source attribution -->
+    <line x1="80" y1="848" x2="1520" y2="848" stroke="#d8d2c2" stroke-width="1" />
+
+    <!-- Bottom source attribution -->
+    <text x="800" y="880" text-anchor="middle" fill="#a89e8b" font-size="12" letter-spacing="2.5" font-weight="500">
+      COMPOSITION · PUBLIC-RECORD SOURCES · ACCOUNT NAMES REDACTED
+    </text>
+  </g>
+</svg>
