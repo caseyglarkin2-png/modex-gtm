@@ -13,6 +13,7 @@
  */
 
 import type { AudioChapter } from '@/components/microsites/memo-audio-brief';
+import type { MemoMarginaliaItem } from '@/components/microsites/memo-marginalia';
 
 // ── Section Module Types ──────────────────────────────────────────────
 //
@@ -412,6 +413,9 @@ export interface ObservationSection extends BaseMicrositeSection {
   headline: string;                                  // e.g. 'What we observed about your network'
   composition: { label: string; value: string }[];   // facility count, archetype mix
   hypothesis: string;                                // bottleneck hypothesis paragraph
+  /** Pull-quote rendered between paragraph 1 and 2 of the hypothesis.
+   *  Use a single tight sentence — the punchline of the lead paragraph. */
+  pullQuote?: string;
   caveat?: string;                                   // 'we may be wrong about parts of this'
   footnotes?: FootnoteData[];
 }
@@ -582,6 +586,12 @@ export interface AccountMicrositeData {
    *  Use when network.facilityCount is a long descriptive string and the
    *  Subject row wraps. Keep ≤ 30 characters. */
   coverFootprint?: string;
+
+  /** Per-account hand-tuned marginalia items. When present, replaces the
+   *  default auto-extraction (first composition rows of each observation
+   *  section). Use on Tier-1 memos where the right gutter should be
+   *  authored, not derived. */
+  marginaliaItems?: MemoMarginaliaItem[];
 
   // Showcase & layout
   showcase?: boolean;               // flagged for DWTB marketplace demo
