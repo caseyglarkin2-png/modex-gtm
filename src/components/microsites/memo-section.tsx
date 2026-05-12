@@ -71,7 +71,7 @@ export function MemoPullQuote({ children }: { children: ReactNode }) {
         fontStyle: 'italic',
         fontVariationSettings: "'opsz' 36, 'SOFT' 100, 'WONK' 1",
         fontWeight: 400,
-        fontSize: 'clamp(1.25rem, 1.9vw, 1.5rem)',
+        fontSize: 'clamp(1.35rem, 1.1vw + 0.85rem, 1.75rem)',
         lineHeight: 1.32,
         letterSpacing: '-0.005em',
       }}
@@ -154,7 +154,7 @@ function renderBodyWithFootnotes(
 const SECTION_HEADING_STYLE = {
   fontVariationSettings: "'opsz' 60, 'SOFT' 50",
   fontWeight: 380,
-  fontSize: 'clamp(1.5rem, 2.4vw, 1.85rem)',
+  fontSize: 'clamp(1.65rem, 1.1vw + 1.15rem, 2.2rem)',
   lineHeight: 1.2,
   letterSpacing: '-0.012em',
 } as const;
@@ -180,7 +180,7 @@ function MemoSectionFrame({
   return (
     <section id={sectionId} className="mb-24 scroll-mt-20 last:mb-12">
       <p
-        className={`mb-4 flex items-center gap-2.5 text-[10px] uppercase tracking-[0.24em] ${FONT_MONO}`}
+        className={`mb-4 flex items-center gap-2.5 text-[11px] uppercase tracking-[0.24em] ${FONT_MONO}`}
       >
         <span className={`font-medium ${numeralClass}`}>§ {formatted}</span>
         <span className="text-[#8a847b]">·</span>
@@ -194,7 +194,7 @@ function MemoSectionFrame({
       </h2>
       {children}
       {endMark ? (
-        <div className={`mt-12 text-center text-[11px] tracking-[0.4em] text-[#8a847b] ${FONT_MONO}`}>
+        <div className={`mt-12 text-center text-[12px] tracking-[0.4em] text-[#8a847b] ${FONT_MONO}`}>
           ∎ &nbsp;∎ &nbsp;∎
         </div>
       ) : null}
@@ -224,16 +224,16 @@ function MemoAside({ mark, children }: { mark: string; children: ReactNode }) {
       className={[
         // Mobile (default) — boxed callout inline in the doc column.
         'my-5 border-l-2 border-[#a89e8b] bg-[rgba(255,253,247,0.5)] px-4 py-3.5',
-        'text-[13px] leading-[1.55] text-[#8a847b]',
+        'text-[14.5px] leading-[1.55] text-[#8a847b]',
         FONT_SANS,
         // Desktop — float right into the gutter, lose the box, keep the rule.
-        'lg:float-right lg:clear-right lg:w-56 lg:-mr-[17rem] lg:my-1 lg:ml-0',
+        'lg:float-right lg:clear-right lg:w-56 lg:-mr-[17rem] lg:my-1 lg:ml-0 xl:w-64 xl:-mr-[19rem] 2xl:w-[17rem] 2xl:-mr-[20rem]',
         'lg:border-l lg:border-l-[#d8d2c2] lg:bg-transparent lg:px-4 lg:py-0',
-        'lg:text-[11.5px] lg:leading-[1.5] lg:text-[#8a847b]',
+        'lg:text-[12.5px] lg:leading-[1.5] lg:text-[#8a847b] xl:text-[13px]',
       ].join(' ')}
     >
       <p
-        className={`mb-1.5 text-[9.5px] uppercase tracking-[0.18em] text-[#6c9384] lg:mb-1 lg:text-[9px] lg:tracking-[0.2em] ${FONT_MONO}`}
+        className={`mb-1.5 text-[10.5px] uppercase tracking-[0.18em] text-[#6c9384] lg:mb-1 lg:text-[10px] lg:tracking-[0.2em] ${FONT_MONO}`}
       >
         {mark}
       </p>
@@ -294,18 +294,18 @@ function MemoObservation({
     >
       {section.composition.length > 0 ? (
         <dl
-          className={`my-7 border-y border-[#d8d2c2] ${FONT_SANS} text-[13.5px] text-[#4a4641]`}
+          className={`my-7 border-y border-[#d8d2c2] ${FONT_SANS} text-[15px] text-[#4a4641]`}
           style={{ fontVariantNumeric: 'lining-nums tabular-nums' }}
         >
           {section.composition.map((row, i) => (
             <div
               key={row.label}
-              className={`grid grid-cols-[1fr_1.4fr] gap-x-5 py-2.5 ${
+              className={`grid grid-cols-[1fr_1.4fr] gap-x-5 py-3 ${
                 i === 0 ? '' : 'border-t border-[#e8e2d4]'
               }`}
             >
               <dt
-                className="pt-px text-[12.5px] uppercase tracking-[0.08em] text-[#8a847b]"
+                className="pt-px text-[13px] uppercase tracking-[0.08em] text-[#8a847b]"
                 style={{ fontVariationSettings: "'wdth' 95" }}
               >
                 {row.label}
@@ -361,18 +361,18 @@ function MemoComparable({
       </p>
       {section.metrics.length > 0 ? (
         <ul
-          className={`my-7 list-none border-y border-[#d8d2c2] p-0 ${FONT_SANS} text-[13.5px]`}
+          className={`my-7 list-none border-y border-[#d8d2c2] p-0 ${FONT_SANS} text-[15px]`}
         >
           {section.metrics.map((row, i) => (
             <li
               key={row.label}
-              className={`grid grid-cols-1 gap-x-3 gap-y-1 py-3 sm:grid-cols-[12rem_1fr_6rem] sm:items-center sm:gap-y-0 ${
+              className={`grid grid-cols-1 gap-x-3 gap-y-1 py-3.5 sm:grid-cols-[12rem_1fr_6rem] sm:items-center sm:gap-y-0 ${
                 i === 0 ? '' : 'border-t border-[#e8e2d4]'
               }`}
               style={{ fontVariantNumeric: 'lining-nums tabular-nums' }}
             >
               <span className="font-medium text-[#1a1a1a]">{row.label}</span>
-              <span className="flex items-baseline gap-2 text-[13px] text-[#8a847b]">
+              <span className="flex items-baseline gap-2 text-[14.5px] text-[#8a847b]">
                 <span
                   className="text-[#8a847b]"
                   style={{ textDecoration: 'line-through', textDecorationColor: '#a89e8b' }}
@@ -383,7 +383,7 @@ function MemoComparable({
                 <span className="font-medium text-[#1a1a1a]">{row.after}</span>
               </span>
               <span
-                className={`text-left text-[10.5px] uppercase tracking-[0.08em] sm:text-right ${FONT_MONO}`}
+                className={`text-left text-[11.5px] uppercase tracking-[0.08em] sm:text-right ${FONT_MONO}`}
                 style={{ color: 'var(--memo-accent)' }}
               >
                 {row.delta}
@@ -397,7 +397,7 @@ function MemoComparable({
         {renderBodyWithFootnotes(section.timeline, resolved)}
       </p>
       {section.referenceAvailable ? (
-        <p className="mt-5 text-[14px] text-[#8a847b]">
+        <p className="mt-5 text-[15px] text-[#8a847b]">
           A peer call with {section.comparableName}&rsquo;s team can be arranged when
           the conversation calls for it.
         </p>
@@ -429,7 +429,7 @@ function MemoMethodology({
         are extrapolated from public sources.
       </p>
       <ol
-        className={`my-6 list-none p-0 ${FONT_SANS} text-[13.5px] leading-[1.5] text-[#4a4641]`}
+        className={`my-6 list-none p-0 ${FONT_SANS} text-[15px] leading-[1.55] text-[#4a4641]`}
       >
         {section.sources.map((src, i) => (
           <li
@@ -439,7 +439,7 @@ function MemoMethodology({
             } ${i === section.sources.length - 1 ? 'border-b' : ''}`}
           >
             <div className="flex flex-col gap-1.5">
-              <span className="text-[13.5px] font-medium text-[#1a1a1a]">{src.source}</span>
+              <span className="text-[15px] font-medium text-[#1a1a1a]">{src.source}</span>
               <ConfidenceBadge confidence={src.confidence} />
             </div>
             {src.detail ? <p className="m-0 text-[#4a4641]">{src.detail}</p> : null}
@@ -449,13 +449,13 @@ function MemoMethodology({
       {section.unknowns.length > 0 ? (
         <>
           <h3
-            className={`mt-8 mb-3 text-[1.05rem] text-[#1a1a1a] ${FONT_SERIF}`}
+            className={`mt-8 mb-3 text-[1.15rem] text-[#1a1a1a] ${FONT_SERIF}`}
             style={{ fontVariationSettings: "'opsz' 24, 'SOFT' 50", fontWeight: 480 }}
           >
             What we don&rsquo;t know
           </h3>
           <ul
-            className={`mt-3 list-none p-0 ${FONT_SANS} text-[13.5px] leading-[1.6] text-[#4a4641]`}
+            className={`mt-3 list-none p-0 ${FONT_SANS} text-[15px] leading-[1.6] text-[#4a4641]`}
           >
             {section.unknowns.map((u, i) => (
               <li
@@ -464,7 +464,7 @@ function MemoMethodology({
               >
                 <span
                   aria-hidden="true"
-                  className={`absolute left-0 top-2 text-[11px] text-[#8a847b] ${FONT_MONO}`}
+                  className={`absolute left-0 top-2 text-[12px] text-[#8a847b] ${FONT_MONO}`}
                   style={{ top: i === 0 ? 0 : '0.5rem' }}
                 >
                   ?
@@ -499,7 +499,7 @@ function MemoAbout({
     >
       <p className="memo-lead">{section.authorBio}</p>
       {section.signOff ? <p className="mt-4">{section.signOff}</p> : null}
-      <p className="mt-6 text-[14px] text-[#8a847b]">
+      <p className="mt-6 text-[15px] text-[#8a847b]">
         Reach the author at{' '}
         <a href={`mailto:${section.authorEmail}`}>{section.authorEmail}</a>.
       </p>
@@ -531,10 +531,10 @@ function MemoArtifact({
           alt={a.imageAlt}
           className="block w-full"
         />
-        <figcaption className={`mt-3 text-[11px] tracking-[0.1em] uppercase text-[#4a4641] ${FONT_MONO}`}>
+        <figcaption className={`mt-3 text-[12px] tracking-[0.1em] uppercase text-[#4a4641] ${FONT_MONO}`}>
           {a.caption}
         </figcaption>
-        <div className={`mt-2 text-[10.5px] tracking-[0.18em] uppercase text-[#8a847b] ${FONT_SANS}`}>
+        <div className={`mt-2 text-[11.5px] tracking-[0.18em] uppercase text-[#8a847b] ${FONT_SANS}`}>
           {a.source}
         </div>
       </figure>
@@ -678,7 +678,7 @@ export function MemoPreamble({ variant }: MemoPreambleProps) {
   return (
     <section id="note" className="mb-24 scroll-mt-20">
       <p
-        className={`mb-4 flex items-center gap-2.5 text-[10px] uppercase tracking-[0.24em] ${FONT_MONO}`}
+        className={`mb-4 flex items-center gap-2.5 text-[11px] uppercase tracking-[0.24em] ${FONT_MONO}`}
       >
         <span style={{ color: 'var(--memo-accent)' }}>※</span>
         <span className="text-[#8a847b]">·</span>
@@ -691,7 +691,7 @@ export function MemoPreamble({ variant }: MemoPreambleProps) {
           fontStyle: 'italic',
           fontVariationSettings: "'opsz' 36, 'SOFT' 100, 'WONK' 1",
           fontWeight: 400,
-          fontSize: 'clamp(1.35rem, 2.1vw, 1.6rem)',
+          fontSize: 'clamp(1.45rem, 1.2vw + 0.95rem, 1.95rem)',
           lineHeight: 1.32,
           letterSpacing: '-0.005em',
         }}
@@ -705,12 +705,12 @@ export function MemoPreamble({ variant }: MemoPreambleProps) {
         className={`mt-7 border-t border-[#d8d2c2] pt-5 ${FONT_SANS}`}
       >
         <p
-          className={`mb-1.5 text-[9.5px] uppercase tracking-[0.22em] text-[#8a847b] ${FONT_MONO}`}
+          className={`mb-1.5 text-[10.5px] uppercase tracking-[0.22em] text-[#8a847b] ${FONT_MONO}`}
         >
           What&rsquo;s at stake
         </p>
         <p
-          className={`m-0 text-[15px] leading-[1.55] text-[#4a4641] ${FONT_SERIF}`}
+          className={`m-0 text-[16.5px] leading-[1.55] text-[#4a4641] ${FONT_SERIF}`}
           style={{
             fontStyle: 'italic',
             fontVariationSettings: "'opsz' 18, 'SOFT' 80",
@@ -720,7 +720,7 @@ export function MemoPreamble({ variant }: MemoPreambleProps) {
         </p>
       </div>
 
-      <div className={`mt-12 text-center text-[11px] tracking-[0.4em] text-[#8a847b] ${FONT_MONO}`}>
+      <div className={`mt-12 text-center text-[12px] tracking-[0.4em] text-[#8a847b] ${FONT_MONO}`}>
         ∎ &nbsp;∎ &nbsp;∎
       </div>
     </section>

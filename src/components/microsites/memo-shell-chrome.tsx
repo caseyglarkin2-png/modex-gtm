@@ -40,7 +40,7 @@ export function MemoRunningHeader({ title, subtitle }: MemoRunningHeaderProps) {
         'transition-opacity duration-300',
         show ? 'opacity-100' : 'pointer-events-none opacity-0',
         FONT_MONO,
-        'text-[10.5px] uppercase tracking-[0.18em] text-[#4a4641]',
+        'text-[11.5px] uppercase tracking-[0.18em] text-[#4a4641]',
       ].join(' ')}
     >
       <div className="flex items-center gap-2.5">
@@ -103,11 +103,11 @@ export function MemoContentsRail({ entries }: MemoContentsRailProps) {
       className="hidden lg:block lg:sticky lg:top-16 lg:self-start lg:pt-2"
     >
       <p
-        className={`mb-5 border-b border-[#d8d2c2] pb-2.5 text-[10px] uppercase tracking-[0.22em] text-[#8a847b] ${FONT_MONO}`}
+        className={`mb-5 border-b border-[#d8d2c2] pb-2.5 text-[11px] uppercase tracking-[0.22em] text-[#8a847b] ${FONT_MONO}`}
       >
         Contents
       </p>
-      <ol className="space-y-3.5 text-[12.5px] leading-snug">
+      <ol className="space-y-3.5 text-[13.5px] leading-snug xl:text-[14px]">
         {entries.map((e) => {
           const active = e.id === activeId;
           return (
@@ -128,7 +128,7 @@ export function MemoContentsRail({ entries }: MemoContentsRailProps) {
               >
                 <span
                   className={[
-                    `pt-[1px] text-[10px] tracking-[0.1em] ${FONT_MONO}`,
+                    `pt-[1px] text-[11px] tracking-[0.1em] ${FONT_MONO}`,
                     active ? 'text-[color:var(--memo-accent)]' : 'text-[#8a847b]',
                   ].join(' ')}
                 >

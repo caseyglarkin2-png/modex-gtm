@@ -32,12 +32,12 @@ export function MemoMarginalia({ items }: MemoMarginaliaProps): ReactNode {
       {items.map((item, i) => (
         <div key={`${item.sectionId ?? 'item'}-${i}`} className="text-[#4a4641]">
           <div
-            className={`${FONT_MONO} mb-2 text-[10px] uppercase tracking-[0.18em] text-[#8a847b]`}
+            className={`${FONT_MONO} mb-2 text-[11px] uppercase tracking-[0.18em] text-[#8a847b]`}
           >
             {item.mark}
           </div>
           <div
-            className={`${FONT_SERIF} text-[15px] leading-snug`}
+            className={`${FONT_SERIF} text-[16.5px] leading-snug xl:text-[17.5px]`}
             style={{ fontVariationSettings: "'opsz' 14, 'SOFT' 50" }}
           >
             {item.body}
