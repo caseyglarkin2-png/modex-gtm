@@ -17,6 +17,7 @@ import { cjLogisticsAmerica } from './cj-logistics-america';
 import { cocaCola } from './coca-cola';
 import { constellationBrands } from './constellation-brands';
 import { costPlusWorldMarket } from './cost-plus-world-market';
+import { crowley } from './crowley';
 import { daimlerTruckNorthAmerica } from './daimler-truck-north-america';
 import { dannon } from './dannon';
 import { dhlSupplyChain } from './dhl-supply-chain';
@@ -59,6 +60,7 @@ const ACCOUNTS: Record<string, AccountMicrositeData> = {
   'coca-cola': cocaCola,
   'constellation-brands': constellationBrands,
   'cost-plus-world-market': costPlusWorldMarket,
+  'crowley': crowley,
   'daimler-truck-north-america': daimlerTruckNorthAmerica,
   'dannon': dannon,
   'dhl-supply-chain': dhlSupplyChain,
