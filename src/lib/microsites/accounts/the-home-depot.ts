@@ -8,10 +8,14 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
+import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 export const theHomeDepot: AccountMicrositeData = {
   slug: 'the-home-depot',
   accountName: 'The Home Depot',
+  coverHeadline: 'Four archetypes coordinating one Pro-customer operating model',
+  titleEmphasis: 'one Pro-customer operating model',
+  coverFootprint: '2,300 stores · 4 DC archetypes',
   parentBrand: 'The Home Depot',
   vertical: 'retail',
   tier: 'Tier 2',
@@ -37,7 +41,8 @@ export const theHomeDepot: AccountMicrositeData = {
         { label: 'Pro channel acceleration', value: 'SRS Distribution acquisition closed Sep 2024 ($18.25B); GMS wallboard acquisition closed summer 2025 ($5.5B). Pro-and-trade volume is the growth lane the network was rebuilt for' },
       ],
       hypothesis:
-        'The interesting thing about The Home Depot yard math is what One Supply Chain has and has not solved. The planning layer is now coherent — the network knows what inventory should be where, the MDO/DFC/FDC archetypes are built, and the CFO said the capex curve is past its peak. What is not coherent is the yard layer underneath each archetype, because each archetype is doing a fundamentally different job out of the same physical dock infrastructure. An MDO is the clearest case: the same building stages an appliance for a Saturday B2C delivery window, a kitchen-cabinet pallet for a Pro contractor pickup, and inbound store replenishment for the nearest RDC. Three channels, three appointment cadences, three downstream service-level commitments, one set of dock doors. The yard is where they arbitrate. RDCs and FDCs each have their own version of the problem — RDC trailer flow is dense and short-dwell against store delivery windows, FDC flatbed staging is heavy and rail-fed against same-day contractor cycles — but the multi-channel mix at the MDO is the seam that bends hardest, and it bends harder every quarter as the Pro channel grows. The SRS Distribution and GMS acquisitions did not just add SKU breadth; they added Pro-side trailer flow at scale, sitting on top of an already-mixed dock environment. The planning layer can route a load to the right archetype. The yard layer at that archetype still arbitrates which door it lands at, in what order, against which channel\'s clock — and that arbitration is largely site-by-site judgment running on tooling that was built when MDOs only did appliances and FDCs only did lumber.',
+        'The interesting thing about The Home Depot yard math is what One Supply Chain has and has not solved. The planning layer is now coherent — the network knows what inventory should be where, the MDO/DFC/FDC archetypes are built, and the CFO said the capex curve is past its peak. What is not coherent is the yard layer underneath each archetype, because each archetype is doing a fundamentally different job out of the same physical dock infrastructure. An MDO is the clearest case: the same building stages an appliance for a Saturday B2C delivery window, a kitchen-cabinet pallet for a Pro contractor pickup, and inbound store replenishment for the nearest RDC. Three channels, three appointment cadences, three downstream service-level commitments, one set of dock doors. The yard is where they arbitrate.\n\nRDCs and FDCs each have their own version of the problem — RDC trailer flow is dense and short-dwell against store delivery windows, FDC flatbed staging is heavy and rail-fed against same-day contractor cycles — but the multi-channel mix at the MDO is the seam that bends hardest, and it bends harder every quarter as the Pro channel grows. The SRS Distribution and GMS acquisitions did not just add SKU breadth; they added Pro-side trailer flow at scale, sitting on top of an already-mixed dock environment. The Mingledorff\'s HVAC close in May 2026 lifted the Pro-customer TAM to $1.2 trillion and put another distribution vertical on top of the same operating model. The planning layer can route a load to the right archetype. The yard layer at that archetype still arbitrates which door it lands at, in what order, against which channel\'s clock — and that arbitration is largely site-by-site judgment running on tooling that was built when MDOs only did appliances and FDCs only did lumber.',
+      pullQuote: 'Three channels, three appointment cadences, three downstream service-level commitments, one set of dock doors.',
       caveat:
         'This is built from public Home Depot disclosures, the One Supply Chain reporting cadence, trade press on the FDC/MDO/DFC buildout, and the SRS/GMS acquisition record. The most useful thing you can do with this is push back on the parts that do not match what the network looks like internally — particularly whether multi-channel dock arbitration at the MDO is already systematized or still operator-judgment, whether the post-SRS Pro mix has stressed yard cadence at specific sites, and how One Supply Chain reporting treats the yard layer today.',
     },
@@ -501,6 +506,7 @@ export const theHomeDepot: AccountMicrositeData = {
       'CFO confirmed in 2025 that the MDO/DFC/FDC buildout is essentially complete; program pivots to utilization and gross-margin extraction.',
       'SRS Distribution acquisition closed September 2024 ($18.25B) — added roofing and building-materials Pro-channel volume on top of the FDC network.',
       'GMS wallboard acquisition closed summer 2025 ($5.5B) — additional Pro-channel SKU breadth flowing through overlapping distribution geographies.',
+      'SRS-led Mingledorff\'s HVAC acquisition closed May 11, 2026 — 42 locations across five southeastern states, a new HVAC distribution vertical lifting the Pro-customer TAM to $1.2 trillion.',
       '17 FDCs operating at ~1M sq ft each, ~32 flatbeds staged simultaneously; same- or next-day Pro-channel delivery is the service-level commitment.',
     ],
     supplyChainInitiatives: [
@@ -508,6 +514,23 @@ export const theHomeDepot: AccountMicrositeData = {
     ],
     urgencyDriver:
       'The capex chapter of One Supply Chain is closing; the utilization chapter is starting. Multi-channel dock arbitration at the MDO is the operating-leverage tier of that next chapter, and Pro-channel growth from SRS and GMS keeps tightening the constraint.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'The archetypes', body: '~2,300 stores · 17 FDCs · 160 MDOs · 20 DFCs · plus the RDC layer.' },
+    { mark: 'CFO on the record', body: 'MDO/DFC/FDC buildout "essentially complete" · program pivots to utilization and gross-margin extraction.' },
+    { mark: 'Pro-channel stack', body: 'SRS Sep 2024 · $18.25B · GMS summer 2025 · $5.5B · Mingledorff\'s HVAC closed May 2026 · 42 locations.' },
+    { mark: 'Pro-customer TAM', body: '$90B of $165B FY sales today · $700B Pro market · $1.2T post-Mingledorff\'s.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same shape, harder freight.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for John Deaton. The One Supply Chain buildout you led — RDC, FDC, MDO, and DFC archetypes in the field, capex curve past its peak per the CFO\'s 2025 reading — is the foundation the next five minutes builds on. What follows is the yard layer below the archetypes, where the Pro-customer growth coming out of SRS, GMS, and the May 2026 Mingledorff\'s close lands as either operating leverage or variance.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
