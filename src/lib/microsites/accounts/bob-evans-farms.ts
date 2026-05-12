@@ -46,14 +46,15 @@
  *        dollars per hour, dwell math, FSIS-aware
  */
 
+import { AUDIO_BRIEF_CHAPTERS, AUDIO_BRIEF_SRC } from '../audio-brief';
 import type { AccountMicrositeData } from '../schema';
-import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 export const bobEvansFarms: AccountMicrositeData = {
   slug: 'bob-evans-farms',
   accountName: 'Bob Evans Farms',
-  coverHeadline: 'The yard layer above Refrigerated Retail',
-  titleEmphasis: 'above Refrigerated Retail',
+  coverHeadline: 'The operating model above the reefer-dwell win',
+  titleEmphasis: 'above the reefer-dwell win',
+  coverFootprint: '4 plants · 1 hub · ~134K reefer hrs',
   parentBrand: 'Post Holdings',
   vertical: 'cpg',
   tier: 'Tier 1',
@@ -78,8 +79,8 @@ export const bobEvansFarms: AccountMicrositeData = {
         { label: 'Post Holdings Refrigerated Retail segment', value: 'Michael Foods (eggs, refrigerated potatoes — much larger cold-chain footprint than Bob Evans alone), Crystal Farms (refrigerated dairy), Potato Products of Idaho (closed March 2025), 8th Avenue (pasta + peanut butter + granola, closed July 2025). No shared parent yard stack across these OpCos today — the slot is open' },
       ],
       hypothesis:
-        'The interesting thing about the Bob Evans yard math is what the site-level win has not yet done. The cold-chain dwell program that started in 2022 worked. The four-plant footprint runs cleaner reefer hours, fewer fuel-burning gensets, and an attributable year-one number — those are real, they are not in dispute, and they should not be reframed as failures. They are the proof that yard discipline pays back at this network — and at the site level that part of the conversation is closed.\n\nWhat is unsolved is the layer above. Bob Evans is one operating company inside Post Holdings Refrigerated Retail. Michael Foods alone is a materially larger cold-chain footprint than Bob Evans, with the same Refrigerated Retail leadership above it and the same loaded-reefer dwell problem at every plant. Crystal Farms sits next door. Potato Products of Idaho closed into Refrigerated Retail in March 2025; 8th Avenue closed in July 2025 — two newly acquired plant networks running on whatever they were running on at close, neither standardized onto a parent yard stack because there is not yet one. That is the gap.\n\nTwo things made it more expensive in the last twelve months. First, the new EVP/COO at Post (in seat since January 2026) is the kind of executive who needs cross-portfolio operating wins he can credit himself with — and a Refrigerated-Retail-wide cold-chain yard story is one no single OpCo leader can claim alone. Second, the FY2026 capex envelope is $350M–$390M with most of that earmarked elsewhere; the residual is plenty for a software-and-operating-model line item that is by-definition sub-million-per-site implementation against a nine-figure capex envelope. The decision-rights conversation is harder than the ROI conversation. The yard math is favorable.',
-      pullQuote: 'At the site level, that part of the conversation is closed.',
+        'The interesting thing about the Bob Evans yard math is what the site-level win has not yet done. The cold-chain dwell program that started in 2022 worked. The four-plant footprint runs cleaner reefer hours, fewer fuel-burning gensets, and an attributable year-one number — those are real, they are not in dispute, and they should not be reframed as failures. They are the proof that yard discipline pays back at this network — and at the site level that part of the conversation is closed.\n\nWhat is unsolved is the layer above. Bob Evans is one operating company inside Post Holdings Refrigerated Retail. Michael Foods alone is a materially larger cold-chain footprint than Bob Evans, with the same Refrigerated Retail leadership above it and the same loaded-reefer dwell problem at every plant. Crystal Farms sits next door. Potato Products of Idaho closed into Refrigerated Retail in March 2025; 8th Avenue closed in July 2025 — two newly acquired plant networks running on whatever they were running on at close, neither standardized onto a parent yard stack because there is not yet one. That is the gap.\n\nTwo things made it more expensive in the last twelve months. First, the new EVP/COO at Post (in seat since January 2026) is the kind of executive who needs cross-portfolio operating wins he can credit himself with — and a Refrigerated-Retail-wide cold-chain yard story is one no single OpCo leader can claim alone. Second, the FY2026 capex envelope is $350M–$390M with most of that earmarked for cage-free egg expansion and the Norwalk precooked-egg facility; the residual is plenty for a software-and-operating-model line item that is by-definition sub-million-per-site implementation against a nine-figure capex envelope. The decision-rights conversation is harder than the ROI conversation. The yard math is favorable.',
+      pullQuote: 'The site-level case is closed. What is unsolved is the layer above.',
       caveat:
         'This is built from Bob Evans / Post Holdings public disclosures, the published cold-chain yard-automation case record, Refrigerated Retail segment reporting, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: whether the Michael Foods plants run on the same yard stack as Bob Evans or a different one, where the Potato Products of Idaho and 8th Avenue acquisition integrations are landing the yard-protocol decision, and how the FY2026 capex envelope is being allocated between cage-free egg expansion and everything else.',
     },
@@ -273,18 +274,18 @@ export const bobEvansFarms: AccountMicrositeData = {
   },
 
   marginaliaItems: [
-    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
-    { mark: 'Site-level scoreboard', body: '~40% loaded-reefer-hours reduction · ~134,000 hours · ~$471K year-one fuel + M&R.' },
-    { mark: 'Refrigerated Retail segment', body: 'Bob Evans · Michael Foods · Crystal Farms · Potato Products of Idaho · 8th Avenue — no shared parent yard stack today.' },
-    { mark: 'Cross-portfolio sponsor', body: 'New EVP/COO at Post in seat since January 2026 · cross-portfolio operating wins on the scorecard.' },
-    { mark: 'Ash in his own words', body: 'J.B. Hunt → Exel → Weston Foods → Bob Evans. The site-level case is his. The layer above is the next one.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+    { mark: 'Site-level win', body: '~134,000 reefer hours eliminated · ~40% loaded-reefer reduction · ~$471K year-one.' },
+    { mark: 'Manufacturing footprint', body: '4 plants — Xenia OH · Lima OH · Hillsdale MI · Sulphur Springs TX — plus the Springfield OH hub.' },
+    { mark: 'Segment portfolio', body: 'Bob Evans · Michael Foods · Crystal Farms · Potato Products of Idaho · 8th Avenue — no shared parent yard stack.' },
+    { mark: 'New parent sponsor', body: 'EVP/COO in seat January 2026. Cross-portfolio operating wins is the mandate.' },
+    { mark: 'FY26 capex envelope', body: '$350M–$390M total · $80M–$90M earmarked for cage-free + Norwalk · the residual is the operating-model slot.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
   ],
 
   audioBrief: {
-    src: '/audio/yard-network-brief.mp3',
+    src: AUDIO_BRIEF_SRC,
     intro:
-      'This brief is for John Ash. The cold-chain yard discipline you put on the four-plant scoreboard — ~134,000 reefer hours eliminated, ~$471K year-one — is the proof case the next five minutes builds on. What follows is the layer above the site system the Refrigerated Retail segment now needs.',
+      'This brief is for John. The cold-chain yard discipline you proved at the four plants is your win — the ~134,000 reefer hours, the ~$471K year-one number, the case is closed at the site level. The five minutes that follow are about the layer above the sites across the rest of the Refrigerated Retail segment.',
     chapters: AUDIO_BRIEF_CHAPTERS,
     generatedAt: '2026-05-12T00:00:00Z',
   },
