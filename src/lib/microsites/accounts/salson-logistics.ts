@@ -65,6 +65,7 @@ import type { AccountMicrositeData } from '../schema';
 export const salsonLogistics: AccountMicrositeData = {
   slug: 'salson-logistics',
   accountName: 'SalSon Logistics',
+  coverFootprint: 'Newark flagship + 11 sites',
   parentBrand: 'SalSon Logistics (Sun Capital Partners portfolio)',
   vertical: 'logistics-3pl',
   tier: 'Tier 1',

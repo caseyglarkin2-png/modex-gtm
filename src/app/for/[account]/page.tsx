@@ -59,9 +59,9 @@ export default async function AccountMicrositePage({
   const marginaliaItems = extractMarginaliaItems(memoSections);
   const handTuned = isAccountHandTuned(data);
   const reader = resolveReader(data, sp.p);
-  const facilityFootprint = data.network?.facilityCount
-    ? `${data.network.facilityCount} footprint`
-    : undefined;
+  const facilityFootprint =
+    data.coverFootprint ??
+    (data.network?.facilityCount ? `${data.network.facilityCount} footprint` : undefined);
   const readerFirstName =
     reader?.variant.person.firstName ?? reader?.variant.person.name?.split(' ')[0];
   const tocEntries = buildTocEntries(memoSections, {

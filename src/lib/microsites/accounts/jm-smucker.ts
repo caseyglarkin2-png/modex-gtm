@@ -482,7 +482,7 @@ export const jmSmucker: AccountMicrositeData = {
   },
 
   theme: {
-    accentColor: '#7C3AED',
+    accentColor: '#5B2C82',
     backgroundVariant: 'dark',
   },
 

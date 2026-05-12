@@ -46,6 +46,7 @@ import type { AccountMicrositeData } from '../schema';
 export const cjLogisticsAmerica: AccountMicrositeData = {
   slug: 'cj-logistics-america',
   accountName: 'CJ Logistics America',
+  coverFootprint: '~70+ NA · 30M+ sq ft',
   parentBrand: 'CJ Logistics Corp (Seoul)',
   vertical: 'logistics-3pl',
   tier: 'Tier 1',

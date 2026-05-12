@@ -16,6 +16,7 @@ import type { AccountMicrositeData } from '../schema';
 export const barnesNoble: AccountMicrositeData = {
   slug: 'barnes-noble',
   accountName: 'Barnes & Noble',
+  coverFootprint: '~600 stores · Monroe Twp DC',
   parentBrand: 'Barnes & Noble',
   vertical: 'retail',
   tier: 'Tier 3',
@@ -514,7 +515,7 @@ export const barnesNoble: AccountMicrositeData = {
   },
 
   theme: {
-    accentColor: '#059669',
+    accentColor: '#005C2F',
     backgroundVariant: 'dark',
   },
 };

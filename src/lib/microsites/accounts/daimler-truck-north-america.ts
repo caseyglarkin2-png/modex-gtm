@@ -44,6 +44,9 @@ import type { AccountMicrositeData } from '../schema';
 export const daimlerTruckNorthAmerica: AccountMicrositeData = {
   slug: 'daimler-truck-north-america',
   accountName: 'Daimler Truck North America',
+  coverHeadline: 'Yard execution as a constraint for Daimler Truck',
+  titleEmphasis: 'Daimler Truck',
+  coverFootprint: '14 NA plants + Mt Holly NC',
   parentBrand: 'Daimler Truck',
   vertical: 'industrial',
   tier: 'Tier 1',

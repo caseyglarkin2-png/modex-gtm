@@ -354,7 +354,7 @@ export const campbellS: AccountMicrositeData = {
   },
 
   theme: {
-    accentColor: '#2563EB',
+    accentColor: '#E31837',
     backgroundVariant: 'dark',
   },
 

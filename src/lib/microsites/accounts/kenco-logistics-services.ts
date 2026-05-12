@@ -21,6 +21,9 @@ import type { AccountMicrositeData } from '../schema';
 export const kencoLogisticsServices: AccountMicrositeData = {
   slug: 'kenco-logistics-services',
   accountName: 'Kenco Logistics Services',
+  coverHeadline: 'Yard execution as productizable competence at Kenco',
+  titleEmphasis: 'Kenco',
+  coverFootprint: '~141 sites · 43M sq ft',
   parentBrand: 'Kenco',
   vertical: 'logistics-3pl',
   tier: 'Tier 3',
@@ -439,7 +442,7 @@ export const kencoLogisticsServices: AccountMicrositeData = {
   },
 
   theme: {
-    accentColor: '#0891B2',
+    accentColor: '#1C4E80',
     backgroundVariant: 'dark',
   },
 };

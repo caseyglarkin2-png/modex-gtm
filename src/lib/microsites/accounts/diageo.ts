@@ -527,7 +527,7 @@ export const diageo: AccountMicrositeData = {
   },
 
   theme: {
-    accentColor: '#2563EB',
+    accentColor: '#1F3A93',
     backgroundVariant: 'dark',
   },
 

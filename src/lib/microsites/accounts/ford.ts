@@ -22,6 +22,7 @@ import type { AccountMicrositeData } from '../schema';
 export const ford: AccountMicrositeData = {
   slug: 'ford',
   accountName: 'Ford',
+  coverFootprint: '~100 yards · 15 assembly',
   parentBrand: 'Ford Motor Company',
   vertical: 'automotive',
   tier: 'Tier 2',

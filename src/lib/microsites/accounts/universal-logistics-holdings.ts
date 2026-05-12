@@ -66,6 +66,9 @@ import type { AccountMicrositeData } from '../schema';
 export const universalLogisticsHoldings: AccountMicrositeData = {
   slug: 'universal-logistics-holdings',
   accountName: 'Universal Logistics Holdings',
+  coverHeadline: 'Yard execution as the unit economic for Universal Logistics',
+  titleEmphasis: 'Universal Logistics',
+  coverFootprint: 'Intermodal + dedicated + truck',
   parentBrand: 'Universal Logistics Holdings (Moroun-controlled)',
   vertical: 'logistics-3pl',
   tier: 'Tier 1',
