@@ -1,0 +1,114 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1600 900"
+  role="img"
+  aria-label="H-E-B multi-banner coverage map: six tiles representing the five H-E-B store banners plus the operating surface above the three-flow regional DC yard. H-E-B core, Central Market, Mi Tienda, Joe V's, and HEB Mexico are covered; Three-Flow Dock Arbitration is unfilled."
+>
+  <!-- Cream background to blend with memo body -->
+  <rect width="1600" height="900" fill="#f5f1e8" />
+
+  <g font-family="'Courier New', ui-monospace, SFMono-Regular, Menlo, monospace">
+    <!-- Top eyebrow -->
+    <text x="80" y="64" fill="#8a847b" font-size="14" letter-spacing="3.5" font-weight="500">
+      H-E-B MULTI-BANNER COVERAGE MAP
+    </text>
+    <text x="1520" y="64" text-anchor="end" fill="#8a847b" font-size="14" letter-spacing="2.5" font-weight="500">
+      6 TILES · 5 COVERED · 1 UNFILLED
+    </text>
+
+    <!-- Hairline rule under eyebrow -->
+    <line x1="80" y1="90" x2="1520" y2="90" stroke="#d8d2c2" stroke-width="1" />
+
+    <!-- ── Tile 1 : H-E-B CORE ─────────────────────────────────── -->
+    <rect x="80" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="110" cy="160" r="4" fill="#a89e8b" />
+    <text x="310" y="285" text-anchor="middle" fill="#1a1a1a" font-size="28" font-weight="600" letter-spacing="6">
+      H-E-B CORE
+    </text>
+    <text x="310" y="320" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2.5" font-weight="500">
+      TEXAS STORE NETWORK
+    </text>
+    <text x="310" y="350" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 2 : CENTRAL MARKET ─────────────────────────────── -->
+    <rect x="570" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="600" cy="160" r="4" fill="#a89e8b" />
+    <text x="800" y="275" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      CENTRAL
+    </text>
+    <text x="800" y="310" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      MARKET
+    </text>
+    <text x="800" y="350" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2.5" font-weight="500">
+      PREMIUM · SPECIALTY
+    </text>
+    <text x="800" y="380" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 3 : MI TIENDA ──────────────────────────────────── -->
+    <rect x="1060" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="1090" cy="160" r="4" fill="#a89e8b" />
+    <text x="1290" y="285" text-anchor="middle" fill="#1a1a1a" font-size="28" font-weight="600" letter-spacing="6">
+      MI TIENDA
+    </text>
+    <text x="1290" y="320" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2.5" font-weight="500">
+      HISPANIC FORMAT
+    </text>
+    <text x="1290" y="350" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 4 : JOE V'S SMART SHOP ─────────────────────────── -->
+    <rect x="80" y="480" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="110" cy="510" r="4" fill="#a89e8b" />
+    <text x="310" y="635" text-anchor="middle" fill="#1a1a1a" font-size="28" font-weight="600" letter-spacing="6">
+      JOE V&apos;S
+    </text>
+    <text x="310" y="670" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2.5" font-weight="500">
+      VALUE FORMAT
+    </text>
+    <text x="310" y="700" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 5 : HEB MEXICO ─────────────────────────────────── -->
+    <rect x="570" y="480" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="600" cy="510" r="4" fill="#a89e8b" />
+    <text x="800" y="635" text-anchor="middle" fill="#1a1a1a" font-size="28" font-weight="600" letter-spacing="6">
+      HEB MEXICO
+    </text>
+    <text x="800" y="670" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2.5" font-weight="500">
+      ~70 STORES · CROSS-BORDER
+    </text>
+    <text x="800" y="700" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 6 : THREE-FLOW DOCK ARBITRATION  (unfilled — HEB red) ── -->
+    <rect x="1060" y="480" width="460" height="320" fill="none" stroke="#E1241A" stroke-width="2" />
+    <circle cx="1090" cy="510" r="4" fill="none" stroke="#E1241A" stroke-width="1.5" />
+    <text x="1290" y="615" text-anchor="middle" fill="#E1241A" font-size="22" font-weight="700" letter-spacing="5">
+      THREE-FLOW
+    </text>
+    <text x="1290" y="650" text-anchor="middle" fill="#E1241A" font-size="22" font-weight="700" letter-spacing="5">
+      DOCK
+    </text>
+    <text x="1290" y="685" text-anchor="middle" fill="#E1241A" font-size="22" font-weight="700" letter-spacing="5">
+      ARBITRATION
+    </text>
+    <text x="1290" y="725" text-anchor="middle" fill="#a89e8b" font-size="13" letter-spacing="3" font-weight="500">
+      — unfilled —
+    </text>
+
+    <!-- Hairline rule above source attribution -->
+    <line x1="80" y1="840" x2="1520" y2="840" stroke="#d8d2c2" stroke-width="1" />
+
+    <!-- Bottom source attribution -->
+    <text x="800" y="872" text-anchor="middle" fill="#a89e8b" font-size="12" letter-spacing="2.5" font-weight="500">
+      COMPOSITION · PUBLIC H-E-B BANNER + DC + VERTICAL-INTEGRATION DISCLOSURES · ACCOUNT NAMES REDACTED
+    </text>
+  </g>
+</svg>
