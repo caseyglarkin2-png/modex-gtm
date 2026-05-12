@@ -19,6 +19,9 @@ import type { AccountMicrositeData } from '../schema';
 export const keurigDrPepper: AccountMicrositeData = {
   slug: 'keurig-dr-pepper',
   accountName: 'Keurig Dr Pepper',
+  coverHeadline: 'The yard layer between K-Cup pods and the DSD dawn',
+  titleEmphasis: 'between K-Cup pods and the DSD dawn',
+  coverFootprint: '30+ sites · DSD + warehouse',
   vertical: 'beverage',
   tier: 'Tier 2',
   band: 'B',
@@ -39,10 +42,12 @@ export const keurigDrPepper: AccountMicrositeData = {
         { label: 'Brand portfolio at the dock', value: 'Dr Pepper · Snapple · 7UP · Mott\'s · Schweppes · Bai · A&W · Sunkist · Canada Dry · Core Hydration · Keurig K-Cup' },
         { label: 'K-Cup manufacturing footprint', value: 'Continuous-process pod plants in Essex VT · Knoxville TN · Sumner WA, plus Spartanburg SC roasting — warehouse-distribution outbound at every site' },
         { label: 'Recent DSD expansion', value: 'Kalil Bottling acquisition (May 2024) — first KDP-owned DSD operation in Arizona; Tucson production + Tucson/Tempe distribution; ~4,500 outlets, 7.4M consumers, ~425 employees absorbed' },
+        { label: 'GHOST Energy onto DSD', value: 'GHOST acquisition announced October 2024 (60% stake, ~$990M; remainder by 2028). KDP investing up to $250M to transition GHOST distribution onto KDP-owned DSD starting mid-2025 — a new LRB SKU set landing on the same yards already running K-Cup continuous outbound' },
         { label: 'Active corporate change', value: 'Tim Cofer assumed CEO April 2024; JDE Peet\'s acquisition announced with planned separation into a Refreshment Beverage company and a Global Coffee company, targeting ~$200M coffee-side supply chain savings' },
       ],
       hypothesis:
-        'The thing that makes Keurig Dr Pepper structurally unusual in CPG is that the company actually runs two different distribution models at meaningful scale out of the same operating footprint, and the seam between them lives in the yard. Cold-beverage DSD has its own rhythm: route trucks have to be sequenced and dispatched in a tight pre-dawn window so they hit retail at opening, which means the inbound line-haul from a bottling plant or partner-bottler depot has to land overnight and stage in dock-door order before the first driver arrives. Warehouse distribution for K-Cup pods and shelf-stable runs the opposite shape: continuous-process production feeding palletized outbound to retailer DCs and e-commerce nodes across the day, where the cost of a dock-door not being available shows up as a slowed production line, not a missed retail morning. At any KDP site that does both — and many of the larger ones do — the same doors get arbitrated against two operating rhythms with different urgency profiles, different trailer types, different staging discipline, and different financial consequences for getting it wrong. The Kalil Bottling acquisition is the part that makes this concrete: KDP now operates production, sales, and distribution in Arizona under its own roof for the first time, which means the company is actively absorbing more dock surface where DSD route loading and warehouse-distribution outbound have to share the same yard logic. Layered on top of that, the JDE Peet\'s acquisition and planned coffee/beverage separation puts every cross-modal handoff under scrutiny: which doors belong to which company, which yard standards survive the split, and where the $200M coffee-side supply chain savings actually have to come from in practice. The bottling-partner overlay — Dr Pepper volume flowing through Coca-Cola and PepsiCo bottlers in different territories — adds a fourth carrier-flow profile into KDP-owned yards at sites that touch the partner network. None of those four flows is hard in isolation. The arbitration between them on a shared dock surface is the part where local routine and tribal knowledge currently does the work, and that arbitration becomes a lot more visible once a new CEO\'s operating mandate is looking for variance, and once the coffee-side separation starts measuring which handoffs cost what.',
+        'The thing that makes Keurig Dr Pepper structurally unusual in CPG is that the company actually runs two different distribution models at meaningful scale out of the same operating footprint, and the seam between them lives in the yard. Cold-beverage DSD has its own rhythm: route trucks have to be sequenced and dispatched in a tight pre-dawn window so they hit retail at opening, which means the inbound line-haul from a bottling plant or partner-bottler depot has to land overnight and stage in dock-door order before the first driver arrives. Warehouse distribution for K-Cup pods and shelf-stable runs the opposite shape: continuous-process production feeding palletized outbound to retailer DCs and e-commerce nodes across the day, where the cost of a dock-door not being available shows up as a slowed production line, not a missed retail morning. At any KDP site that does both — and many of the larger ones do — the same doors get arbitrated against two operating rhythms with different urgency profiles, different trailer types, different staging discipline, and different financial consequences for getting it wrong.\n\nThe Kalil Bottling acquisition is the part that makes this concrete: KDP now operates production, sales, and distribution in Arizona under its own roof for the first time, which means the company is actively absorbing more dock surface where DSD route loading and warehouse-distribution outbound have to share the same yard logic. The GHOST Energy acquisition (announced October 2024) layers on top of that — up to $250M earmarked starting mid-2025 to transition GHOST distribution onto KDP\'s own DSD network, which adds another high-velocity LRB SKU set into the same dock-door arbitration at sites that already do K-Cup outbound. Layered on top of both, the JDE Peet\'s acquisition and planned coffee/beverage separation puts every cross-modal handoff under scrutiny: which doors belong to which company, which yard standards survive the split, and where the $200M coffee-side supply chain savings actually have to come from in practice.\n\nThe bottling-partner overlay — Dr Pepper volume flowing through Coca-Cola and PepsiCo bottlers in different territories — adds a fourth carrier-flow profile into KDP-owned yards at sites that touch the partner network. None of those four flows is hard in isolation. The arbitration between them on a shared dock surface is the part where local routine and tribal knowledge currently does the work, and that arbitration becomes a lot more visible once a Cofer-era operating mandate is looking for variance, once the GHOST DSD onboarding has to land on yards already running K-Cup continuous outbound, and once the coffee-side separation starts measuring which handoffs cost what.',
+      pullQuote: 'DSD at dawn, K-Cup continuous outbound across the day, GHOST onto the same network mid-2025, partner-bottler trailers on top. The arbitration between those rhythms is still a site-level operator decision.',
       caveat:
         'This is built from public KDP disclosures (the Kalil acquisition release, the JDE Peet\'s transaction materials, the K-Cup manufacturing footprint, Cofer\'s strategy review) and reasonable network inference about how DSD and warehouse rhythms interact on shared dock surfaces. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: how DSD-versus-warehouse dock priority is actually arbitrated today, whether partner-bottler flows touch KDP yards at the sites we\'re thinking of, and how much of the $200M coffee-side savings runs through the yard layer.',
     },
@@ -95,6 +100,13 @@ export const keurigDrPepper: AccountMicrositeData = {
           url: 'https://www.supplychaindive.com/news/keurig-dr-pepper-jde-peets-acquisition-supply-chain-benefits/804822/',
         },
         {
+          id: 'kdp-ghost',
+          source: 'KDP GHOST Energy acquisition (October 2024)',
+          confidence: 'public',
+          detail: 'Initial 60% stake for ~$990M with the remaining 40% to follow by 2028 based on 2027 performance. Public release commits up to $250M in distribution-transition investment to move GHOST Energy off existing third-party distribution agreements and onto KDP\'s own DSD network beginning mid-2025 — an incremental high-velocity LRB SKU set landing on KDP-owned yards.',
+          url: 'https://news.keurigdrpepper.com/2024-10-24-Keurig-Dr-Pepper-to-Acquire-Disruptive-Energy-Drink-Business-GHOST',
+        },
+        {
           id: 'kdp-bottler-overlay',
           source: 'Dr Pepper bottling-partner distribution (Coca-Cola + PepsiCo bottlers)',
           confidence: 'public',
@@ -116,6 +128,7 @@ export const keurigDrPepper: AccountMicrositeData = {
       unknowns: [
         'How DSD route-loading priority versus warehouse-distribution outbound priority is arbitrated today at sites that do both — site policy, system logic, or operator judgment',
         'Whether the newly acquired Kalil Arizona footprint is being set up with a yard-ops standard from day one, or absorbing legacy Kalil routines first',
+        'How the mid-2025 GHOST DSD transition is being staged across the network — which yards absorb the SKU set first, and how dock priority is being arbitrated against existing K-Cup outbound at those sites',
         'Where in the K-Cup pod plant network production-stoppage events from dock unavailability concentrate today',
         'How much of the $200M coffee-side supply chain savings target depends on logistics-network and dock-execution improvements versus pure manufacturing footprint consolidation',
         'How Dr Pepper partner-bottler trailer flows interact with KDP-owned yards in the territories where both touch — and whether the carrier scorecards for those flows roll up to the same operator',
@@ -227,18 +240,42 @@ export const keurigDrPepper: AccountMicrositeData = {
   freight: {
     primaryModes: ['Truckload', 'DSD Route', 'LTL', 'Intermodal/Rail'],
     avgLoadsPerDay: '1,000+ — split across DSD route trucks (dawn dispatch) and warehouse-distribution outbound (continuous through the day)',
-    specialRequirements: ['Hybrid DSD + warehouse-distribution dock arbitration', 'Continuous-process K-Cup outbound dock availability', 'Partner-bottler carrier coordination in Dr Pepper territories'],
+    specialRequirements: ['Hybrid DSD + warehouse-distribution dock arbitration', 'Continuous-process K-Cup outbound dock availability', 'GHOST Energy DSD onboarding onto existing yards (mid-2025)', 'Partner-bottler carrier coordination in Dr Pepper territories'],
   },
 
   signals: {
     recentNews: [
       'Tim Cofer assumed CEO April 2024; March 2024 strategy review framed DSD growth and disciplined network optimization as the operating priorities.',
       'Kalil Bottling acquisition (May 2024) — first KDP-owned production, sales, and distribution operation in Arizona; ~4,500 outlets, 7.4M consumers, ~425 employees absorbed; Tucson production + Tucson/Tempe distribution.',
+      'GHOST Energy acquisition (October 2024) — 60% stake for ~$990M with the remaining 40% by 2028; up to $250M earmarked to transition GHOST distribution onto KDP-owned DSD beginning mid-2025.',
       'JDE Peet\'s acquisition announced with planned separation into a Refreshment Beverage company and a Global Coffee company; ~$200M in coffee-side supply chain savings targeted as part of a $400M total post-separation cost program.',
       'Hybrid distribution model — Company-owned DSD for cold beverages, warehouse distribution for K-Cup pods and shelf-stable, partner-bottler distribution for portions of Dr Pepper volume across Coca-Cola and PepsiCo bottler networks.',
     ],
     urgencyDriver:
-      'The hybrid-distribution operating model is unique enough at scale that the dock-arbitration math between DSD route loading and warehouse-distribution outbound has been allowed to live as a site-level operator decision for years. The Cofer strategy mandate, the Kalil integration, and the JDE Peet\'s coffee/beverage separation each independently make that arbitration a measured network metric rather than a local routine.',
+      'The hybrid-distribution operating model is unique enough at scale that the dock-arbitration math between DSD route loading and warehouse-distribution outbound has been allowed to live as a site-level operator decision for years. The Cofer strategy mandate, the Kalil integration, the GHOST DSD onboarding starting mid-2025, and the JDE Peet\'s coffee/beverage separation each independently make that arbitration a measured network metric rather than a local routine.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Hybrid distribution', body: 'DSD at dawn + K-Cup continuous outbound across the day on the same dock surface. Most CPG networks run one model; KDP runs both.' },
+    { mark: 'Kalil West', body: 'Kalil Bottling (May 2024) — first KDP-owned production, sales, and distribution in Arizona. ~4,500 outlets · 7.4M consumers · ~425 employees absorbed.' },
+    { mark: 'GHOST onto DSD', body: 'October 2024 announcement · up to $250M to transition GHOST Energy onto KDP-owned DSD starting mid-2025.' },
+    { mark: 'Cofer operating reset', body: 'CEO April 2024 · DSD growth + disciplined network optimization framed as the operating priorities.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for Kelly Killingsworth. KDP runs one of the only true hybrid-distribution networks in CPG at scale — DSD at dawn, K-Cup continuous warehouse outbound across the day, GHOST Energy moving onto the same network mid-2025, partner-bottler trailers on top in the Dr Pepper territories. The five minutes that follow are about where the arbitration between those rhythms stops being a local routine.',
+    chapters: [
+      { id: 'thesis', label: 'I. Two distribution models, one dock surface', start: 0 },
+      { id: 'what-hybrid-made', label: 'II. What hybrid distribution made expensive', start: 65 },
+      { id: 'kalil-and-ghost', label: 'III. Kalil West and GHOST onto DSD', start: 130 },
+      { id: 'not-the-marquee', label: 'IV. Why the first pilot is Arizona, not a K-Cup plant', start: 195 },
+      { id: 'simple-site-proof', label: 'V. What proof at the simple site earns', start: 260 },
+    ],
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
