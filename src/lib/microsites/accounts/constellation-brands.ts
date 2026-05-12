@@ -12,12 +12,13 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
+import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 export const constellationBrands: AccountMicrositeData = {
   slug: 'constellation-brands',
   accountName: 'Constellation Brands',
-  coverHeadline: 'Yard execution as a margin constraint for Constellation Brands',
-  titleEmphasis: 'Constellation Brands',
+  coverHeadline: 'The yard layer crosses a border',
+  titleEmphasis: 'crosses a border',
   coverFootprint: '3 MX breweries + US distrib',
   vertical: 'beverage',
   tier: 'Tier 2',
@@ -42,7 +43,8 @@ export const constellationBrands: AccountMicrositeData = {
         { label: 'Capex posture', value: 'Beer capex run rate ~$1.2B/yr in Mexico through FY26; total ~$4–4.5B FY24–FY26 against the Veracruz buildout and Obregón expansion' },
       ],
       hypothesis:
-        'The interesting thing about Constellation\'s yard math is that the question crosses a border. The 2013 settlement with AB InBev fixed the production geography in place — every case of Modelo, Corona, and Pacifico sold in the United States is brewed in Mexico, which means the yard layer Constellation actually operates spans two countries. The outbound side of the brewery yard in Nava and the inbound side of the receiving yard at a US DC sit on either end of a cross-border move with its own customs windowing, its own broker handoff, and its own bridge-congestion variance — and they are not the same yard, run by the same workforce, against the same operating standard. That asymmetry compounds because of scale. Modelo Especial finished 2025 as the #1 US beer by dollars and Constellation\'s Mexican brands account for the overwhelming majority of the imported-Mexican-beer category in the US. At that volume, a one-percent miss on Nava\'s outbound dock-turn cadence isn\'t a local KPI — it\'s a measurable share of the country\'s best-selling beer not in transit on a given afternoon. The second pressure is that Veracruz is ramping into commercial production in late 2025 as the third Mexican brewery, adding capacity on the order of 30 million hectoliters, and a greenfield brewery is also a greenfield brewery yard. There is no entrenched site-level SOP to displace at Veracruz; the operating standard that gets installed in 2026 is the one that defines yard execution at the newest, largest piece of the network for the next decade. The third pressure is portfolio attention. The Wine Group divestiture closed June 2025 and removed mainstream wine from the operating surface — Woodbridge, Meiomi, and the Robert Mondavi Private Selection tier are gone — and the retained beer-led portfolio is now the dominant claim on supply-chain management bandwidth. The combination of those three — fixed cross-border production geography, #1-category volume sensitivity to yard variance, and a divestiture-freed beer-ops focus — is what makes Constellation distinctive against a single-country CPG comparable. The yard layer above the brewery network is not a domestic problem.',
+        'The interesting thing about Constellation\'s yard math is that the question crosses a border. The 2013 settlement with AB InBev fixed the production geography in place — every case of Modelo, Corona, and Pacifico sold in the United States is brewed in Mexico, which means the yard layer Constellation actually operates spans two countries. The outbound side of the brewery yard in Nava and the inbound side of the receiving yard at a US DC sit on either end of a cross-border move with its own customs windowing, its own broker handoff, and its own bridge-congestion variance — and they are not the same yard, run by the same workforce, against the same operating standard.\n\nThat asymmetry compounds because of scale. Modelo Especial finished 2025 as the #1 US beer by dollars and Constellation\'s Mexican brands account for the overwhelming majority of the imported-Mexican-beer category in the US. At that volume, a one-percent miss on Nava\'s outbound dock-turn cadence isn\'t a local KPI — it\'s a measurable share of the country\'s best-selling beer not in transit on a given afternoon. The second pressure is that Veracruz is ramping into commercial production in late 2025 as the third Mexican brewery, adding capacity on the order of 30 million hectoliters, and a greenfield brewery is also a greenfield brewery yard. There is no entrenched site-level SOP to displace at Veracruz; the operating standard that gets installed in 2026 is the one that defines yard execution at the newest, largest piece of the network for the next decade.\n\nThe third pressure is portfolio attention. The Wine Group divestiture closed June 2025 and removed mainstream wine from the operating surface — Woodbridge, Meiomi, and the Robert Mondavi Private Selection tier are gone — and the retained beer-led portfolio is now the dominant claim on supply-chain management bandwidth. The combination of those three — fixed cross-border production geography, #1-category volume sensitivity to yard variance, and a divestiture-freed beer-ops focus — is what makes Constellation distinctive against a single-country CPG comparable. The yard layer above the brewery network is not a domestic problem.',
+      pullQuote: 'They are not the same yard.',
       caveat:
         'This is built from Constellation\'s public capex disclosures, the Mexican-brewery construction press, the Wine Group transaction filings, and reasonable network inference on the US-side DC and wholesaler-handoff layer. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: whether the cross-border customs cadence into the US receiving yards is already smoothed by a current operating standard, whether the Veracruz yard-ops design has been spec\'d yet and who owns it, and how the US-side DC yards relate to the wholesaler-pickup handoff that gates everything downstream of Constellation\'s control.',
     },
@@ -245,6 +247,23 @@ export const constellationBrands: AccountMicrositeData = {
     ],
     urgencyDriver:
       'Two converging windows: (1) Veracruz greenfield brewery yard-ops design happens once, in 2025–2026, and the operating standard installed there defines yard execution at the newest piece of the network for the next decade; (2) the Wine Group divestiture closed in mid-2025 and freed supply-chain operating attention back toward the beer franchise at the same moment that the #1-category volume sensitivity to yard variance is most visible.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Brewery footprint', body: 'Nava ~370M cases/yr · Obregón ~170M cases/yr · Veracruz ~30M hL added on completion.' },
+    { mark: 'Greenfield window', body: 'Veracruz ramping late 2025 · no entrenched site-level SOP · operating standard installed in 2026 defines the next decade.' },
+    { mark: 'Category sensitivity', body: 'Modelo Especial #1 US beer by dollars · ~$5.2B · ~92% of imported-Mexican-beer dollars.' },
+    { mark: 'Portfolio attention', body: 'Wine Group transaction closed June 2025 · ~$846M cash · beer-led retained portfolio claims SC bandwidth.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, single-country freight.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for John Kester. The 2013 settlement fixed Constellation\'s brewing geography in Mexico, which means the yard layer above the network spans two countries — and most operating models stop at the customs line. The five minutes that follow are about the standard that runs both sides of that flow.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
