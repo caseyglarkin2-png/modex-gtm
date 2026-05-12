@@ -157,7 +157,7 @@ export function MemoShell({
             style={{
               fontVariationSettings: "'opsz' 130, 'SOFT' 50, 'WONK' 0",
               fontWeight: 360,
-              fontSize: 'clamp(2.75rem, 4.4vw + 0.7rem, 5.5rem)',
+              fontSize: 'clamp(2.75rem, 4.4vw + 0.7rem, 6.25rem)',
               lineHeight: 1.02,
               letterSpacing: '-0.025em',
             }}
@@ -211,24 +211,24 @@ export function MemoShell({
 
       {/* ── DOCUMENT BODY ────────────────────────────────────────── */}
       <main className="border-t border-[#d8d2c2] bg-[#f5f1e8] py-24 md:py-32">
-        <div className="mx-auto grid max-w-[78rem] grid-cols-1 gap-0 px-6 md:px-8 lg:grid-cols-[11rem_minmax(0,38rem)_14rem] lg:gap-12 lg:px-12 xl:max-w-[88rem] xl:grid-cols-[12rem_minmax(0,42rem)_16rem] 2xl:max-w-[94rem] 2xl:grid-cols-[13rem_minmax(0,44rem)_17rem]">
+        <div className="mx-auto grid max-w-[80rem] grid-cols-1 gap-0 px-6 md:px-8 lg:grid-cols-[11rem_minmax(0,40rem)_14rem] lg:gap-12 lg:px-12 xl:max-w-[92rem] xl:grid-cols-[12rem_minmax(0,48rem)_16rem] 2xl:max-w-[104rem] 2xl:grid-cols-[13rem_minmax(0,56rem)_18rem]">
           <MemoContentsRail entries={tocEntries} />
 
           <article
             className={[
-              'memo-prose w-full max-w-[38rem] text-[#4a4641] xl:max-w-[42rem] 2xl:max-w-[44rem]',
+              'memo-prose w-full max-w-[40rem] text-[#4a4641] xl:max-w-[48rem] 2xl:max-w-[56rem]',
               FONT_SERIF,
             ].join(' ')}
             style={{
               fontVariationSettings: "'opsz' 14, 'SOFT' 50",
-              fontSize: 'clamp(17.5px, 0.55vw + 0.92rem, 21px)',
-              lineHeight: 1.68,
+              fontSize: 'clamp(17.5px, 0.55vw + 0.95rem, 23px)',
+              lineHeight: 1.7,
             }}
           >
             {children}
 
             <div
-              className="mx-auto mt-24 max-w-[38rem] border-t border-[#d8d2c2] pt-10 text-center text-[11.5px] uppercase tracking-[0.22em] text-[#8a847b] xl:max-w-[42rem] 2xl:max-w-[44rem]"
+              className="mx-auto mt-24 max-w-[40rem] border-t border-[#d8d2c2] pt-10 text-center text-[11.5px] uppercase tracking-[0.22em] text-[#8a847b] xl:max-w-[48rem] 2xl:max-w-[56rem]"
               style={{ lineHeight: 1.8 }}
             >
               <div
