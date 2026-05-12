@@ -1,156 +1,39 @@
+/**
+ * Coca-Cola (The Coca-Cola Company + the U.S. bottler system) — ABM Microsite Data
+ * Quality Tier: A (Tier 1 Band A; named C-level targets; public 10-K
+ * disclosures from largest bottler franchisee; KORE / Refresh / Fairlife
+ * public intel).
+ *
+ * Structural reality this microsite handles:
+ *   - TCCC manufactures concentrate and owns the brand + system-wide
+ *     operating standards (KORE for quality, safety, environment).
+ *   - The U.S. yards are operated by independent franchise bottlers:
+ *     Coca-Cola Consolidated (CCBCC, public — largest), Reyes Coca-Cola
+ *     Bottling (private — second largest), Swire Coca-Cola USA (Asian
+ *     conglomerate, western U.S.), Liberty Coca-Cola (NYC metro), and
+ *     ~60 other regional franchisees post-refranchising (2017).
+ *   - TCCC's North America operating company (CCNA) sits above the
+ *     bottler network on system-wide standards but does not run yards.
+ *   - The Bottling Investments Group (BIG) owns and operates bottlers
+ *     directly, but BIG is now international — its U.S. footprint was
+ *     refranchised in 2017.
+ *
+ * Pitch shape: system-wide yard operating standards land on
+ * independently-operated bottler yards — shape-similar to how KORE
+ * already lands quality and safety standards across the same yards.
+ * The wedge is the operating layer above franchise sovereignty, not
+ * displacement of any one bottler's site-level practice.
+ *
+ * Angle: YARD MANAGEMENT — dock arbitration, multi-temp staging
+ * (ambient + Fairlife cold chain), summer-peak surge readiness,
+ * concentrate-plant-to-bottler trailer flow at shared inbound nodes.
+ */
+
 import type { AccountMicrositeData } from '../schema';
 import { getFacilityCountLabel, getFacilityCountLowerBound } from '../../research/facility-fact-registry';
 
 const COCA_COLA_FACILITY_COUNT_LABEL = getFacilityCountLabel('Coca-Cola', '70+');
 const COCA_COLA_FACILITY_COUNT = getFacilityCountLowerBound('Coca-Cola', 70) ?? 70;
-
-// LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
-/*
- * [
- *     {
- *       type: 'hero',
- *       headline: `Your bottler network runs ${COCA_COLA_FACILITY_COUNT_LABEL} facilities with 200-400 trailer moves per day in peak. The yards were never designed for this volume.`,
- *       subheadline: 'Coca-Cola Consolidated alone reported $14M in detention costs. A 15-minute improvement in turn time across the bottler network saves the system $20M+ annually. That is the invisible 48-hour dock bottleneck hiding in your yard.',
- *       accountCallout: `${COCA_COLA_FACILITY_COUNT_LABEL} disclosed bottler sites, including 60 distribution centers and 10 plants at CCBCC alone, 200-400 trailer moves/day per facility during peak`,
- *       backgroundTheme: 'dark',
- *       cta: {
- *         type: 'meeting',
- *         headline: 'See what a standardized yard network looks like for Coca-Cola',
- *         subtext: '30-minute walk-through of your bottler network with board-ready ROI.',
- *         buttonLabel: 'Book a Network Audit',
- *         calendarLink: BOOKING_LINK,
- *       },
- *     },
- *     {
- *       type: 'problem',
- *       sectionLabel: 'The Hidden Constraint',
- *       headline: 'The yard is where your bottler coordination breaks down',
- *       narrative: 'Coca-Cola\'s franchise model means multiple bottlers sharing inbound ingredients and packaging from the same concentrate plants. When one bottler\'s trailers back up in the yard, it cascades through scheduling for every other bottler waiting for the same ingredients. The yard is the one surface nobody owns but everybody suffers from.',
- *       painPoints: [
- *         {
- *           headline: '$14M in detention costs at Consolidated alone',
- *           description: 'Coca-Cola Consolidated reported $14M in detention and demurrage costs in their 10-K filing. Extrapolate that across the full bottler network and the number is staggering.',
- *           kpiImpact: '$14M detention at CCBCC, likely $40M+ system-wide',
- *           source: 'Coca-Cola Consolidated 2023 10-K filing',
- *           relevantPeople: ['coke-coe', 'coke-jadhav', 'coke-eppert'],
- *         },
- *         {
- *           headline: 'Summer peak creates 40%+ volume spikes',
- *           description: 'May through September drives 40% more volume. Yards designed for average throughput cannot handle peak. The result: longer queues, more detention, missed delivery windows.',
- *           kpiImpact: '40% volume spike, Memorial Day through Labor Day',
- *           relevantPeople: ['coke-coe', 'coke-jadhav', 'coke-eppert'],
- *         },
- *         {
- *           headline: 'Multi-bottler yard contention',
- *           description: 'Multiple bottlers receiving from the same concentrate and packaging plants. Scheduling conflicts at shared inbound facilities create cascading delays nobody tracks.',
- *           relevantPeople: ['coke-coe', 'coke-jadhav', 'coke-eppert'],
- *         },
- *         {
- *           headline: 'Fairlife cold chain complexity',
- *           description: 'The Fairlife acquisition (2020) added ultra-filtered milk requiring cold chain staging. Juice lines need refrigerated staging. Multiple temperature zones now competing for the same dock doors.',
- *           source: 'Fairlife acquisition 2020',
- *           relevantPeople: ['coke-coe', 'coke-jadhav', 'coke-eppert'],
- *         },
- *       ],
- *     },
- *     {
- *       type: 'stakes',
- *       sectionLabel: 'What This Costs Your System',
- *       headline: 'The math nobody tracks across the bottler network',
- *       narrative: `Detention costs, dwell time, driver wait hours, seasonal surge inefficiency. Each bottler tracks their own slice. Nobody has the system-wide view. Coca-Cola Consolidated's $14M is public. The rest is hidden across ${COCA_COLA_FACILITY_COUNT_LABEL} facilities.`,
- *       annualCost: '$40M+ estimated system-wide in yard-driven inefficiency',
- *       costBreakdown: [
- *         { label: 'Detention / demurrage (CCBCC alone)', value: '$14M' },
- *         { label: 'Peak season surge inefficiency', value: '$10M+' },
- *         { label: 'Multi-bottler scheduling conflicts', value: '$8M+' },
- *         { label: 'Gate and spotter labor overlay', value: '$8M+' },
- *       ],
- *       urgencyDriver: 'Coca-Cola Consolidated investing $500M+ in fleet and facility upgrades 2024-2026. The yards should be part of that investment.',
- *     },
- *     {
- *       type: 'solution',
- *       sectionLabel: 'The Fix',
- *       headline: 'One protocol across the bottler network',
- *       narrative: 'YardFlow gives the Coca-Cola system one operating standard for every yard. Not a mandate - a protocol that makes every bottler\'s operation faster and cheaper. The same driver journey at every facility. The same dock assignment logic. The same evidence trail.',
- *       modules: [
- *         { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID.', relevanceToAccount: `Standardizes gate process across ${COCA_COLA_FACILITY_COUNT_LABEL} bottler facilities.` },
- *         { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter task queues. Temperature-zone aware.', relevanceToAccount: 'Critical for Fairlife cold chain and multi-temp staging.' },
- *         { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Digital twin of the yard. Real-time trailer location and dwell.', relevanceToAccount: 'Real-time visibility across every bottler yard in the system.' },
- *         { id: 'flowNETWORK', name: 'flowNETWORK', verb: 'Scale', shortDescription: 'Network-wide command view.', relevanceToAccount: 'System-wide visibility Coca-Cola HQ has never had across bottler yards.' },
- *       ],
- *       accountFit: 'Coca-Cola just partnered with Blue Yonder for supply chain planning. YardFlow fills the physical execution gap - the yard - where Blue Yonder has no reach.',
- *     },
- *     {
- *       type: 'proof',
- *       sectionLabel: 'Proof from Live Deployment',
- *       headline: 'Running today across 24 facilities',
- *       blocks: [
- *         {
- *           type: 'metric',
- *           stats: [
- *             { value: '24', label: 'Facilities Live' },
- *             { value: '>200', label: 'Contracted Network' },
- *             { value: '48-to-24', label: 'Min Truck Turn Time' },
- *             { value: '$1M+', label: 'Per-Site Profit Impact' },
- *             { value: '30 min', label: 'Remote Deployment' },
- *           ],
- *         },
- *         {
- *           type: 'quote',
- *           quote: {
- *             text: 'It is accurate that your software has enabled us to take on additional volume while remaining headcount neutral in the dock office. That was an integral part of our strategy and has been proven.',
- *             role: 'Operations Director',
- *             company: 'National CPG Manufacturer',
- *           },
- *         },
- *       ],
- *     },
- *     {
- *       type: 'network-map',
- *       sectionLabel: 'Your Network',
- *       headline: 'The Coca-Cola system\'s yard footprint',
- *       narrative: 'Every bottler runs its own yard differently. The HQ concentrate plants have different processes from Consolidated\'s DCs, which are different from Reyes Beverage\'s operations, which are different from Liberty Coca-Cola\'s NYC metro yards. YardFlow gives the system one standard.',
- *       facilityCount: COCA_COLA_FACILITY_COUNT_LABEL,
- *       facilityTypes: ['Concentrate Plants (HQ-owned)', 'Bottling Facilities', 'Distribution Centers', 'Cold Storage'],
- *       geographicSpread: 'National - Atlanta HQ, Coca-Cola Consolidated (14 states plus DC, 60 distribution centers and 10 manufacturing plants), Reyes, Liberty, Swire networks',
- *       dailyTrailerMoves: '15,000+ across the system during peak',
- *       peakMultiplier: '1.4x during summer (May-September)',
- *     },
- *     {
- *       type: 'roi',
- *       sectionLabel: 'The Business Case',
- *       headline: 'Conservative ROI for the Coca-Cola system',
- *       narrative: 'Based on public detention data from CCBCC and measured YardFlow improvements at comparable beverage distribution operations.',
- *       roiLines: [
- *         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
- *         { label: 'Detention cost (CCBCC alone)', before: '$14M/yr', after: '$7M/yr', delta: '-$7M', unit: 'annual' },
- *         { label: 'Peak season dock contention', before: 'Routine bottleneck', after: 'Protocol-managed', delta: 'Eliminated' },
- *         { label: 'System-wide savings estimate', before: '$0 (not tracked)', after: '$20M+/yr', delta: '+$20M', unit: 'annual' },
- *       ],
- *       totalAnnualSavings: '$20M+ across the bottler system',
- *       paybackPeriod: '< 4 months at CCBCC alone',
- *       methodology: `CCBCC detention data from 10-K filing. System-wide estimate based on ${COCA_COLA_FACILITY_COUNT_LABEL} facilities and measured turn time improvements.`,
- *     },
- *     {
- *       type: 'testimonial',
- *       sectionLabel: 'From an Operator Who Runs It',
- *       quote: 'We believe system-driven dock door assignment will be a valuable next step for dock office optimization.',
- *       role: 'Operations Director',
- *       company: 'National Beverage Distributor',
- *     },
- *     {
- *       type: 'cta',
- *       cta: {
- *         type: 'modex-meeting',
- *         headline: 'Coca-Cola HQ is in Atlanta. MODEX is in Atlanta. Let\'s meet.',
- *         subtext: 'You are literally local to the venue. 30-minute walk through your bottler network with board-ready ROI.',
- *         buttonLabel: 'Book a Meeting at MODEX',
- *         calendarLink: BOOKING_LINK,
- *       },
- *       closingLine: 'Your HQ. Your city. Your meeting. $20M+ in annual savings across the system.',
- *     },
- *   ]
- */
 
 export const cocaCola: AccountMicrositeData = {
   slug: 'coca-cola',
@@ -158,13 +41,119 @@ export const cocaCola: AccountMicrositeData = {
   parentBrand: 'The Coca-Cola Company',
   vertical: 'beverage',
   tier: 'Tier 1',
-  band: 'B',
+  band: 'A',
   priorityScore: 84,
 
-  pageTitle: 'YardFlow for Coca-Cola - Yard Network Standardization',
-  metaDescription: `How YardFlow eliminates the yard bottleneck across Coca-Cola's ${COCA_COLA_FACILITY_COUNT_LABEL} disclosed bottler yard sites.`,
+  pageTitle: 'Coca-Cola · System-wide yard standards across an independently-operated bottler network',
+  metaDescription: `The Coca-Cola system runs ${COCA_COLA_FACILITY_COUNT_LABEL} U.S. bottler sites across ~60 independent franchisees. KORE sets system-wide quality and safety standards; the yard layer above the sites is the unstandardized seam.`,
 
-  sections: [],
+  sections: [
+    { type: 'yns-thesis' },
+    {
+      type: 'observation',
+      headline: 'What we observed about the Coca-Cola bottling network',
+      composition: [
+        { label: 'U.S. bottler structure', value: `~60 independent franchisees post-refranchising (2017). Largest three: Coca-Cola Consolidated (CCBCC, public; ${COCA_COLA_FACILITY_COUNT_LABEL} sites across 14 states + DC), Reyes Coca-Cola Bottling (private; Chicago, CA, Midwest), Swire Coca-Cola USA (13 western states; $475M Colorado Springs plant breaking ground 2026).` },
+        { label: 'TCCC operating layer', value: 'Concentrate plants + brand + system-wide standards via KORE (quality, safety, environment). North America operating company (CCNA) sits above the bottler system; Bottling Investments Group (BIG) operates internationally after U.S. refranchising completed in 2017.' },
+        { label: 'Existing site-level yard tech', value: 'Mature at the largest franchisees — Consolidated and the regional bottlers have layered point solutions and 3PL practices into their yards over the last decade. What does not exist yet is a network-level operating layer that lets KORE-style standards land on yard ops the same way they land on quality.' },
+        { label: 'Multi-temp + multi-format complexity', value: 'Cans, bottles, fountain syrup, and Fairlife cold chain (acquired 2020) compete for the same dock doors at bottler DCs. Multi-temp arbitration is a site-by-site decision today.' },
+        { label: 'Peak pattern', value: 'Summer surge (Memorial Day → Labor Day) drives ~40% volume spike; yards designed for average throughput compress hardest in that window. Holiday and Super Bowl windows add secondary peaks.' },
+        { label: 'Public detention anchor', value: 'Coca-Cola Consolidated 10-K cites material detention and demurrage costs at one bottler. Across the full U.S. franchisee footprint, the same line item is unaggregated by design — each bottler reports its own.' },
+        { label: 'Working-capital structure', value: 'TCCC earns concentrate margin; bottlers earn distribution margin. Yard variance lands on bottler P&Ls, but service variance lands on TCCC brand commitments. The two halves of the system feel the same yard problem differently.' },
+      ],
+      hypothesis:
+        'The interesting thing about Coca-Cola is that the company already solved the harder version of this problem twenty-some years ago. KORE is the operating-system answer to how you land system-wide quality and safety standards on yards you do not directly operate. Every franchise bottler runs to the same KORE specifications even though Coca-Cola does not run the plant — it works because the standard is unambiguous, the audit cadence is real, and the franchise agreement makes adherence non-optional. The yard layer above the sites is the surface where that operating-system thinking has not yet landed. Each bottler runs its yard the way it has always run it. Consolidated\'s gatehouse practice is not Reyes\'s, which is not Swire\'s, which is not Liberty\'s. None of those are wrong individually; they are the accumulated tribal knowledge of mature operators. But none of them roll up into a single number the CCNA leadership team can read against a KORE-style standard, and none of them describe the dock-arbitration logic at a Fairlife-staging plant the same way as at an ambient-only plant. The franchise structural reality also has a working-capital wrinkle. TCCC earns concentrate margin, bottlers earn distribution margin, and the yard sits inside the bottler P&L — which means the operating-line consequence of yard variance reads as a bottler problem, while the brand-commitment consequence reads as a TCCC problem. The two halves of the system feel the same delay differently, and neither half is set up to add it up across operators. Three pressures make this more expensive than it used to be. First, Refresh-era inventory tightening across the orchestrated supply chain — leaner system-wide inventory turns a 90-minute yard delay that used to land inside safety stock into a service miss to a retail customer who scorecards the bottler directly. Second, the AI and demand-sensing analytics layer Coca-Cola has been building with partners is the layer that needs clean, comparable yard execution data underneath it; today that data is bottler-specific and not normalized, which means the analytics layer reads execution variance as noise it cannot decompose. Third — and this one is forward-looking — Swire\'s new Colorado Springs plant breaks ground in 2026, Consolidated\'s ongoing facility investment program is throughputting out at the sites that received capex first, and Fairlife cold-chain expansion is adding dock-arbitration competition at multi-temp bottler DCs. Each of those adds throughput-out-the-door capacity at sites where the yard is the next constraint, not the plant. The pilot logic for this account is not "Coca-Cola HQ rolls out a yard system across 70 facilities." The pilot logic is "one Consolidated campus where the public detention number already anchors the business case, or one Reyes campus where the summer peak makes the operating case, runs the operating layer first; CCNA endorses it as a KORE-style standard the rest of the system can opt into without giving up franchise sovereignty." That sequence is the precedent the system already knows how to execute on.',
+      caveat:
+        'This is built from public TCCC and CCBCC disclosures, the public Refresh strategy materials, KORE program descriptions, and reasonable inference about how the franchise governance layer actually translates into operating practice across bottlers. We may be wrong about parts of it — the most useful pushback is on whether CCNA already has a yard-ops working group across the largest bottlers that we are not seeing publicly, whether Consolidated\'s site-level yard practice is mature enough to be the system reference rather than the pilot target, and how the Fairlife cold-chain integration is actually changing dock-door arbitration at the bottlers running both ambient and refrigerated lines.',
+    },
+    {
+      type: 'comparable',
+      headline: 'What a comparable network did when they closed the same gap',
+      comparableName: 'Primo Brands',
+      comparableProfile:
+        'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes gross vehicle weight before it maxes cube), low-margin (so every minute of yard waste is a margin point you cannot recover with price), shipped across multi-temp (premium SKUs sit alongside ambient), and complicated by refill returns for 5-gallon formats. Primo is also years ahead of every other CPG category on yard automation and digitization — they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-level yard operating model on top of their existing site-level yard systems. The shape-similarity to the Coca-Cola system is unusually clean: multi-site bottling, multi-temp dock-door competition, regional-DC structure, peak-season surge, and an existing yard-tech layer at the operator level. The freight-economics difference is the other direction from the usual analogy — soft drinks are higher-margin per case than bottled water, which means the yard-waste recovery line is wider, not narrower. The franchise-network wrinkle does not change the operating logic; it changes who endorses the standard and how it lands across sovereign operators.',
+      metrics: [
+        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
+        { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+      ],
+      timeline:
+        '30–60 days from kickoff to first measurable impact at the pilot site. The Coca-Cola pilot logic is different in kind from a single-operator pilot. The two highest-leverage starting points are: (1) one Coca-Cola Consolidated campus where the $14M public detention anchor already names the cost, which means the business case is pre-written; (2) one Reyes Coca-Cola Bottling site in California, where the summer peak hits hardest and Reyes\'s broader logistics organization can carry the operating learning across other beverage and food businesses inside the parent group. Either pilot lands inside one bottler\'s operating sovereignty, ladders to a CCNA-endorsed system standard within two to four quarters, and becomes opt-in across the remaining ~60 franchisees over the following year.',
+      referenceAvailable: true,
+    },
+    {
+      type: 'methodology',
+      headline: 'How this analysis was built',
+      sources: [
+        {
+          id: 'ko-10k-2024',
+          source: 'The Coca-Cola Company 2024 Form 10-K',
+          confidence: 'public',
+          detail: 'Anchors the U.S. franchise structure post-2017 refranchising, the concentrate-plant + Bottling Investments Group operating model, and the system-wide volume footprint that sits above the bottler network.',
+          url: 'https://investors.coca-colacompany.com/filings-reports/all-sec-filings/content/0000021344-25-000011/ko-20241231.htm',
+        },
+        {
+          id: 'ccbcc-10k',
+          source: 'Coca-Cola Consolidated 2024 Form 10-K',
+          confidence: 'public',
+          detail: `Public disclosure of the ${COCA_COLA_FACILITY_COUNT_LABEL}-site CCBCC bottler footprint (60 distribution centers + 10 manufacturing plants across the Carolinas, Central, Mid-Atlantic, Mid-South, and Mid-West markets). CCBCC is the largest U.S. Coca-Cola bottler franchisee and the only major one whose detention and demurrage costs appear in public filings.`,
+          url: 'https://investor.cokeconsolidated.com/',
+        },
+        {
+          id: 'ko-system-kore',
+          source: 'The Coca-Cola System + KORE public materials',
+          confidence: 'public',
+          detail: 'KORE is the system-wide quality, safety, and environmental operating-standards framework that lands at every bottler\'s plant despite franchise sovereignty. This is the precedent for how operating-layer standards translate across the network. ~60 U.S. franchisees today, down from 300+ in 2010 per public consolidation reporting.',
+          url: 'https://www.coca-colacompany.com/about-us/coca-cola-system',
+        },
+        {
+          id: 'ko-refresh-2025',
+          source: 'TCCC Refresh strategic plan + supply chain transformation reporting',
+          confidence: 'public',
+          detail: 'Refresh strategic pillars (Crafting Beloved Brands, Refreshing Body & Spirit, Sustainable Business) plus the $2.1B sustainability capex line and the orchestrated-supply-chain shift to a partner-based network with centralized standards and distributed execution.',
+        },
+        {
+          id: 'swire-cspr',
+          source: 'Swire Coca-Cola USA $475M Colorado Springs plant announcement',
+          confidence: 'public',
+          detail: '620,000-sq.-ft. bottling facility breaking ground 2026 in southeast Colorado Springs. Adds throughput in Swire\'s 13-state western footprint and creates a greenfield yard-design entry point with no entrenched operating practice to displace.',
+          url: 'https://www.fooddive.com/news/coca-cola-bottling-plant-colorado/807898/',
+        },
+        {
+          id: 'industry-benchmarks',
+          source: 'ATA + Aberdeen yard-operations benchmarks',
+          confidence: 'public',
+          detail: 'Cross-industry baselines on dock-radio prevalence, dwell-time variance, and detention-cost ranges. These describe the conditions most multi-site CPG and beverage networks operate under, not the Coca-Cola system specifically.',
+        },
+        {
+          id: 'primo-q1-2025',
+          source: 'Primo Brands operating data (under NDA)',
+          confidence: 'measured',
+          detail: 'Post-deployment turn time, dock-office headcount during volume growth, and per-site profit impact have been shared with us by the Primo CFO and ops team. Specific numbers are referenceable in a peer call when relevant.',
+        },
+      ],
+      unknowns: [
+        'Whether CCNA already runs a cross-bottler yard-ops working group that we are not seeing in public disclosures',
+        'How franchise governance actually translates KORE-style standards onto yard execution today — audit cadence, scorecard structure, opt-in mechanics',
+        'Whether the largest franchisees (Consolidated, Reyes, Swire) share carrier or dock-performance scorecards across the system, or each one runs its own',
+        'Where Fairlife cold-chain integration has already produced visible multi-temp dock contention at bottler DCs running both ambient and refrigerated lines',
+        'How the existing AI / demand-sensing analytics partnerships ingest bottler yard execution data today — and whether that data is normalized across operators',
+        'How Coca-Cola Consolidated\'s ongoing facility investment program is changing trailer arrival patterns at the sites that received capex first',
+      ],
+    },
+    {
+      type: 'about',
+      headline: 'About this analysis',
+      authorBio:
+        'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. Coca-Cola is distinctive in this round for one reason: the question is not whether yard standardization works (KORE already proved at the quality and safety layer that system-wide standards can land on independently-operated yards), but whether the same operating-system thinking should now run the yard layer above the sites. The water comparable is intentional. Primo Brands runs the hardest CPG freight in North America, and the read-across to a soft-drink franchise network is the easier lift, not the harder one — both on freight economics and on the operating-layer-above-the-sites question.',
+      authorEmail: 'casey@freightroll.com',
+      signOff:
+        'If parts of this read wrong against what you see internally for Coca-Cola — particularly the picture of how franchise governance translates KORE-style standards into yard ops, the assumption that yard execution data is not yet normalized into the analytics layer, or the pilot logic of starting at Consolidated or Reyes rather than at CCNA — that is the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
+    },
+  ],
+
+  needsHandTuning: false,
 
   // ── THE PEOPLE ──────────────────────────────────────────────────────
   people: [
@@ -288,19 +277,33 @@ export const cocaCola: AccountMicrositeData = {
       label: 'Daniel Coe - CPO & Supply Chain',
       variantSlug: 'daniel-coe',
 
-      framingNarrative: 'Daniel, you ran the Bottling Investments Group. You have been inside the bottler yards. You know what happens when a trailer sits for an extra 30 minutes during summer peak. Now you own the system-wide supply chain mandate. The yard is the one surface your digital transformation has not reached yet.',
-      openingHook: 'You came from the bottling side. You know what those yards look like in July.',
-      stakeStatement: `Consolidated reported $14M in detention. That is one bottler. Your system has ${COCA_COLA_FACILITY_COUNT_LABEL} facilities. The number nobody has added up is the one that would get the most attention in your next board meeting.`,
+      framingNarrative:
+        'Daniel, your background inside the Bottling Investments Group means the yard is not abstract to you. You know what concentrate-plant-to-bottler trailer flow looks like in July, and you know the difference between a KORE-style standard that actually lands at the plant and one that sits in a binder. The question on the table is whether the operating-system thinking that put quality and safety on a single KORE stack should now run the yard layer above the sites the same way — across the ~60 independent U.S. franchisees you do not operate but do set standards for.',
+      openingHook:
+        'The yard is the surface where KORE-style operating-system thinking has not yet landed. The franchise governance precedent exists; the yard standard does not.',
+      stakeStatement:
+        `Coca-Cola Consolidated\'s detention and demurrage line is public — at one bottler. Across the rest of the U.S. franchisee footprint the same line item is unaggregated by design, which means the system-wide number is the one nobody has the right to add up and the one that would matter most in any procurement or system-economics conversation.`,
 
       heroOverride: {
-        headline: 'Daniel, you came from the bottling side. You know what those yards look like in July.',
-        subheadline: `Coca-Cola Consolidated's $14M in detention costs is public record. That is one bottler. Your system runs ${COCA_COLA_FACILITY_COUNT_LABEL} facilities. YardFlow gives you the system-wide yard protocol your bottler network has never had.`,
+        headline: 'The yard standard is the next KORE-shaped opportunity in the Coca-Cola system.',
+        subheadline:
+          `KORE landed system-wide quality and safety standards on yards Coca-Cola does not directly operate. The yard execution layer above the sites is the unstandardized seam — ${COCA_COLA_FACILITY_COUNT_LABEL} bottler sites running their own dock arbitration, their own multi-temp staging, their own carrier scorecards.`,
       },
-      sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'solution', 'network-map', 'roi', 'cta'],
+      sectionOrder: ['yns-thesis', 'observation', 'comparable', 'methodology', 'about'],
 
-      toneShift: 'He came from bottling operations. He is not a procurement strategist who has never seen a dock. Talk to him like an operator who now has system-wide authority. Concrete, specific, reference the physical reality he knows.',
-      kpiLanguage: ['detention cost', 'system-wide efficiency', 'bottler coordination', 'turn time', 'peak season throughput'],
-      proofEmphasis: 'The $14M CCBCC detention number is public. Use it. The 48-to-24 min stat maps directly to his system.',
+      toneShift:
+        'Peer-to-peer operating-system framing. Coe came up through bottling; he does not need a glossary. Anchor on KORE as the precedent for how system-wide standards land on franchise-operated yards — the pattern works because the standard is unambiguous, the audit is real, and the franchise agreement makes adherence non-optional. Position the yard layer as the next KORE-shaped surface, not as replacement of any one bottler\'s practice.',
+      kpiLanguage: [
+        'system-wide operating standard',
+        'KORE-shaped standard',
+        'franchise-network coordination',
+        'detention and demurrage',
+        'peak-season throughput',
+        'dock-door arbitration',
+        'multi-temp staging',
+      ],
+      proofEmphasis:
+        'The Primo comparable is the public flex — same shape, harder freight, already running the operating layer above site-level yard systems. The directly-shaped reference (un-name-able 237-facility CPG anchor) is the peer-call escalation if the question becomes "who else runs this at our scale."',
     },
     {
       person: {
@@ -319,19 +322,32 @@ export const cocaCola: AccountMicrositeData = {
       label: 'Dinesh Jadhav - BIG Supply Chain',
       variantSlug: 'dinesh-jadhav',
 
-      framingNarrative: 'Dinesh, BIG owns the bottling reality that corporate strategy can only describe. When concentrate, packaging, and outbound trailer flow fall out of sync, the delay is physical before it is digital. You have run end-to-end supply chains across multi-market bottling environments. The fastest lever left is not another planning layer. It is making trailer-to-dock execution deterministic at the yards Coca-Cola actually controls.',
-      openingHook: 'You run the bottling side directly. The yard problem shows up in your world first.',
-      stakeStatement: 'BIG does not get to blame an independent bottler when dock turns slip. When a yard backs up, the operating company absorbs the service miss, the labor drag, and the peak-season scramble.',
+      framingNarrative:
+        'Dinesh, BIG is where the operating reality lives. Post-2017 U.S. refranchising, BIG is the part of the Coca-Cola system that still operates bottling end-to-end at scale — across multi-market environments where concentrate flow, packaging supply, and outbound trailer coordination have to stay synchronized. The yard is the surface where that synchronization breaks first. The lift here is not a planning-layer upgrade; it is making trailer-to-dock execution deterministic across the bottling environments BIG runs, and giving the U.S. franchise system a reference implementation it can opt into.',
+      openingHook:
+        'Bottling execution breaks at the yard before it shows up in service or cost. BIG is the operating company that feels both halves of that break.',
+      stakeStatement:
+        'When the yard goes sideways, the cost lands on the bottling operating P&L and the service miss lands on the brand commitment. BIG is one of the few seats in the Coca-Cola system that carries both at once — which is why the yard-execution standard matters here before it matters anywhere else.',
 
       heroOverride: {
-        headline: 'Dinesh, bottling execution breaks at the yard before it shows up in service or cost.',
-        subheadline: 'Your role sits where concentrate plants, packaging supply, and bottler operations meet. YardFlow gives BIG a repeatable execution protocol for the yards it directly controls instead of another manual exception process.',
+        headline: 'Bottling execution breaks at the yard before it breaks anywhere else in the system.',
+        subheadline:
+          'BIG operates bottling end-to-end across multiple markets. The yard layer above the sites is where dock arbitration, multi-temp staging, and peak-season throughput either hold together or do not — and where one execution standard pays back fastest.',
       },
-      sectionOrder: ['hero', 'problem', 'solution', 'proof', 'network-map', 'cta'],
+      sectionOrder: ['yns-thesis', 'observation', 'comparable', 'methodology', 'about'],
 
-      toneShift: 'Operator-to-operator. He lives in bottling execution, not just HQ theory. Talk about concentrate flow, dock sequencing, and peak-season throughput.',
-      kpiLanguage: ['throughput', 'dock turns', 'bottling execution', 'staging', 'peak readiness'],
-      proofEmphasis: 'Lead with repeatability across beverage facilities. The 48-to-24 minute turn-time improvement matters because BIG owns the operating consequence directly.',
+      toneShift:
+        'Operator-to-operator. Jadhav lives in bottling execution across multi-market environments — concentrate flow, dock sequencing, peak-season throughput. He does not need the franchise governance argument explained; he needs the operating-layer case. Speak to the physical reality of the dock and the gate.',
+      kpiLanguage: [
+        'throughput',
+        'dock turns',
+        'bottling execution',
+        'multi-temp staging',
+        'peak-season readiness',
+        'trailer-to-dock cycle',
+      ],
+      proofEmphasis:
+        'Lead with operating repeatability across multi-site beverage networks. The Primo comparable matters because water is the operationally hardest CPG freight in North America — if the operating layer lands on water, soft-drink beverage is the easier read-across.',
     },
     {
       person: {
@@ -350,28 +366,32 @@ export const cocaCola: AccountMicrositeData = {
       label: 'Mark Eppert - NA Finance & Supply Chain',
       variantSlug: 'mark-eppert',
 
-      framingNarrative: 'Mark, very few executives carry both the North America P&L and the supply chain. That means the yard problem lands on your desk twice: once as service friction and again as cost leakage. Detention, dwell, and staging variance are exactly the kind of hidden opportunities and unintended consequences your role is built to surface.',
-      openingHook: 'North America feels the yard problem in both the P&L and the supply plan.',
-      stakeStatement: 'Detention and dwell are not just operating issues. They are one of the few leaks that hits cost, service, and working capital at the same time across the North America network.',
+      framingNarrative:
+        'Mark, the unusual thing about your role is that very few executives carry both a North America P&L and the North America supply chain at the same time. That means the yard problem reads differently from where you sit than from anywhere else in the Coca-Cola system: a service miss to a retail customer, a cost leakage on the operating line, and a working-capital drag on the lean-inventory posture the Refresh-era supply chain runs on — all expressed at the same time, by the same trailer, at the same dock door. CCNA is the seat in the system where that compounded picture lives.',
+      openingHook:
+        'For North America, the yard problem lands on the P&L, the supply plan, and the working-capital line simultaneously — and CCNA is the only seat that sees all three at once.',
+      stakeStatement:
+        'Leaner system-wide inventory turns yard variance into a customer-facing service variance, not a recoverable internal buffer. The yard becomes one of the few execution leaks that hits cost, service, and working capital across the North America network in the same week.',
 
       heroOverride: {
-        headline: 'Mark, North America feels the yard problem in both the P&L and the supply plan.',
-        subheadline: 'You oversee financial performance and supply-chain stewardship for Coca-Cola North America. YardFlow gives you a measurable way to remove hidden dock and yard waste before it compounds into detention cost and missed service.',
+        headline: 'North America is the seat in the system that feels the yard problem on three lines at once.',
+        subheadline:
+          'Detention and dwell sit on the operating line. Service variance sits on retail-customer scorecards. Leaner inventory turns the same delay into a working-capital drag. CCNA is where all three converge — and where the case for a system-wide standard pays back across all three at the same time.',
       },
-      sectionOrder: ['hero', 'problem', 'stakes', 'proof', 'roi', 'cta'],
-      sectionOverrides: [
-        {
-          sectionType: 'stakes',
-          override: {
-            headline: 'The cost leak North America feels but never sees in one line',
-            narrative: 'Detention, dwell, trailer staging delay, and dock contention typically sit in different operating reports. That is why the yard problem hides. But for the executive carrying both finance and supply chain, it is one leak expressed in three ways: avoidable cost, avoidable service risk, and avoidable working-capital drag.',
-          },
-        },
-      ],
+      sectionOrder: ['yns-thesis', 'observation', 'comparable', 'methodology', 'about'],
 
-      toneShift: 'Numbers first, but still operationally grounded. Show how one execution protocol changes cost, service, and capital together.',
-      kpiLanguage: ['detention cost', 'service risk', 'working capital', 'dock turn time', 'North America productivity'],
-      proofEmphasis: 'Lead with the public $14M detention number and then convert the 48-to-24 minute turn-time improvement into a North America operating and financial story.',
+      toneShift:
+        'Numbers first, but operationally grounded. Eppert reads the operating consequence and the financial consequence on the same page. Show how one execution standard changes cost, service, and working capital together — not as three separate cases.',
+      kpiLanguage: [
+        'detention and demurrage',
+        'service variance',
+        'working-capital drag',
+        'dock turn time',
+        'North America productivity',
+        'inventory-coverage discipline',
+      ],
+      proofEmphasis:
+        'Lead with the public detention disclosure at Consolidated as the cost anchor; then layer in the Primo measured turn-time improvement and per-site profit impact as the operating-financial story translated into the CCNA frame.',
     },
   ],
 
