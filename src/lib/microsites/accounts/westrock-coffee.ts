@@ -79,10 +79,13 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
+import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 export const westrockCoffee: AccountMicrositeData = {
   slug: 'westrock-coffee',
   accountName: 'Westrock Coffee',
+  coverHeadline: 'The network layer above Conway roast-to-RTD',
+  titleEmphasis: 'Conway roast-to-RTD',
   coverFootprint: 'Concord + Conway + Little Rock',
   parentBrand: 'Westrock Coffee Company',
   vertical: 'beverage',
@@ -108,7 +111,8 @@ export const westrockCoffee: AccountMicrositeData = {
         { label: 'Product cadence mix', value: 'Roasted whole bean and ground coffee (retail) + K-cup single-serve pods + extract concentrate + ready-to-drink canned/bottled coffee and tea + energy beverages + first high-protein beverage in commercialization. Foodservice + retail + private-label channels run with distinctly different cadence and appointment patterns; single-serve and RTD lines at Conway introduce a fourth cadence' },
       ],
       hypothesis:
-        'The interesting thing about the Westrock Coffee yard math is what site-level success has not yet done. The site-level yard system at the Concord NC operation worked. It absorbed the trailer-count growth from 120–130 to ~400 across the five county-spread locations; it replaced phone-based move coordination with shared visibility; it took the green-coffee trailer staging from miles away to ~100 yards from the roaster and dropped acceptance-to-roasting from ~45–50 minutes to ~15 minutes. The "software not shelfware" adoption discipline that produced those wins is the worldview of the operator who runs Concord — and at the site level that part of the conversation is closed. What is unsolved is the layer that did not exist when the Concord deployment was specified. The Conway AR campus is fully operational as of 2026, with three major facilities (roast-to-RTD opened June 2024, DC opened December 2023, single-serve "Clark" opened July 2025) standing up a second major operating geography for Westrock Coffee — and a second major yard surface running on whatever the SOP at commissioning was, separate from the Concord operating model. Little Rock AR sits as the third operating geography. The 2026 EBITDA guidance ($90M–$100M, 29–44% YoY growth) is the operating-leverage year — and operating leverage in a network this shape runs through the yard, where green coffee, RTD canning, single-serve K-cup packaging, and the first high-protein beverage in commercialization compete for trailer movements across three states and four product cadences. The site-level system at Concord can identify where a trailer is at Concord. It cannot orchestrate which trailer should leave Conway next against the Concord roasting demand, or coordinate the cross-campus green-coffee flow as Conway\'s roast-to-RTD volume scales. That gap is the modernization wedge — and the operator who recognized "software not shelfware" at Concord is exactly the operator who recognizes the gap between a 2019-era site system and a 2026-scale multi-state network operating model.',
+        'The interesting thing about the Westrock Coffee yard math is what site-level success has not yet done. The site-level yard system at the Concord NC operation worked. It absorbed the trailer-count growth from 120–130 to ~400 across the five county-spread locations; it replaced phone-based move coordination with shared visibility; it took the green-coffee trailer staging from miles away to ~100 yards from the roaster and dropped acceptance-to-roasting from ~45–50 minutes to ~15 minutes. The "software not shelfware" adoption discipline that produced those wins is the worldview of the operator who runs Concord — and at the site level that part of the conversation is closed.\n\nWhat is unsolved is the layer that did not exist when the Concord deployment was specified. The Conway AR campus is fully operational as of 2026, with three major facilities (roast-to-RTD opened June 2024, DC opened December 2023, single-serve "Clark" opened July 2025) standing up a second major operating geography for Westrock Coffee — and a second major yard surface running on whatever the SOP at commissioning was, separate from the Concord operating model. Little Rock AR sits as the third operating geography. The 2026 EBITDA guidance ($90M–$100M, 29–44% YoY growth) is the operating-leverage year — and operating leverage in a network this shape runs through the yard, where green coffee, RTD canning, single-serve K-cup packaging, and the first high-protein beverage in commercialization compete for trailer movements across three states and four product cadences.\n\nThe site-level system at Concord can identify where a trailer is at Concord. It cannot orchestrate which trailer should leave Conway next against the Concord roasting demand, or coordinate the cross-campus green-coffee flow as Conway\'s roast-to-RTD volume scales. That gap is the modernization wedge — and the operator who recognized "software not shelfware" at Concord is exactly the operator who recognizes the gap between a 2019-era site system and a 2026-scale multi-state network operating model.',
+      pullQuote: 'At the site level, that part of the conversation is closed.',
       caveat:
         'This is built from Westrock Coffee public disclosures, the Inbound Logistics yard-management feature documenting the Concord operation, the Conway campus opening announcements, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: how the Conway-side yard SOPs are coordinating today against the Concord operating model, where the cross-campus green-coffee + RTD + single-serve cadence interleaving is biting hardest in the operating-leverage ramp, and whether the existing site-level yard configuration at Concord has been extended to Conway or remains Concord-only.',
     },
@@ -299,6 +303,23 @@ export const westrockCoffee: AccountMicrositeData = {
     ],
     urgencyDriver:
       'The Conway AR campus is fully operational as of 2026 — three major facilities (DC, roast-to-RTD, single-serve "Clark") standing up in two years, plus a first high-protein beverage in commercialization disclosed Q4 2025. The site-level yard system at the Concord NC operation has done what it was bought to do (~3× trailer growth absorbed, phone coordination replaced, green-coffee staging redesign), and the existing operating model is the proven foundation. The unsolved layer is the network-tier coordination across Concord NC + Conway AR + Little Rock AR as the campus ramps into the 2026 EBITDA guidance, with multi-cadence dock-surface arbitration becoming the operating lever the EBITDA number runs through.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Conway campus', body: 'Roast-to-RTD 570K sq ft · DC 530K sq ft · single-serve "Clark" 525K sq ft · 2023–2025.' },
+    { mark: 'Operating-leverage year', body: '2026 Adjusted EBITDA $90M–$100M · 29–44% YoY · "construction mode to daily operations."' },
+    { mark: 'Concord scoreboard', body: '120–130 → ~400 trailers · acceptance-to-roasting ~45–50 min → ~15 min.' },
+    { mark: 'Hinson on the record', body: '"You\'ll actually have software, not shelfware." Site-level discipline is the foundation. The layer above three states is unsolved.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for J.T. Hinson. The site-level yard discipline you put on the record at Concord — "software not shelfware," ~3× trailer growth absorbed, ~70% acceptance-to-roasting cycle reduction — is the foundation the next five minutes builds on. What follows is the layer above three states the Conway ramp now needs.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
