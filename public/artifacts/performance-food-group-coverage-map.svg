@@ -1,0 +1,108 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1600 900"
+  role="img"
+  aria-label="PFG network coverage map: six tiles representing the Performance Food Group distribution surfaces touched by the legacy network, the Cheney Brothers integration, and the three reportable segments. Legacy PFG DCs, Cheney-Acquired DCs, Foodservice Segment, Convenience Segment, and Vistar Segment are covered; Integrated Yard Ops is unfilled."
+>
+  <!-- Cream background to blend with memo body -->
+  <rect width="1600" height="900" fill="#f5f1e8" />
+
+  <g font-family="'Courier New', ui-monospace, SFMono-Regular, Menlo, monospace">
+    <!-- Top eyebrow -->
+    <text x="80" y="64" fill="#8a847b" font-size="14" letter-spacing="3.5" font-weight="500">
+      PFG NETWORK COVERAGE MAP
+    </text>
+    <text x="1520" y="64" text-anchor="end" fill="#8a847b" font-size="14" letter-spacing="2.5" font-weight="500">
+      6 TILES · 5 COVERED · 1 UNFILLED
+    </text>
+
+    <!-- Hairline rule under eyebrow -->
+    <line x1="80" y1="90" x2="1520" y2="90" stroke="#d8d2c2" stroke-width="1" />
+
+    <!-- ── Tile 1 : LEGACY PFG DCs ───────────────────────────── -->
+    <rect x="80" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="110" cy="160" r="4" fill="#a89e8b" />
+    <text x="310" y="275" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      LEGACY PFG
+    </text>
+    <text x="310" y="310" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      DCs
+    </text>
+    <text x="310" y="350" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 2 : CHENEY-ACQUIRED DCs ───────────────────────────── -->
+    <rect x="570" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="600" cy="160" r="4" fill="#a89e8b" />
+    <text x="800" y="275" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      CHENEY-ACQUIRED
+    </text>
+    <text x="800" y="310" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      DCs
+    </text>
+    <text x="800" y="350" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 3 : FOODSERVICE SEGMENT ───────────────────────────── -->
+    <rect x="1060" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="1090" cy="160" r="4" fill="#a89e8b" />
+    <text x="1290" y="275" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      FOODSERVICE
+    </text>
+    <text x="1290" y="310" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      SEGMENT
+    </text>
+    <text x="1290" y="350" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 4 : CONVENIENCE SEGMENT ────────────────────────── -->
+    <rect x="80" y="480" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="110" cy="510" r="4" fill="#a89e8b" />
+    <text x="310" y="625" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      CONVENIENCE
+    </text>
+    <text x="310" y="660" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      SEGMENT
+    </text>
+    <text x="310" y="700" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 5 : VISTAR SEGMENT ──────────────────────────────── -->
+    <rect x="570" y="480" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="600" cy="510" r="4" fill="#a89e8b" />
+    <text x="800" y="625" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      VISTAR
+    </text>
+    <text x="800" y="660" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
+      SEGMENT
+    </text>
+    <text x="800" y="700" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 6 : INTEGRATED YARD OPS  (unfilled — PFG navy border) ── -->
+    <rect x="1060" y="480" width="460" height="320" fill="none" stroke="#003E7E" stroke-width="2" />
+    <circle cx="1090" cy="510" r="4" fill="none" stroke="#003E7E" stroke-width="1.5" />
+    <text x="1290" y="625" text-anchor="middle" fill="#003E7E" font-size="24" font-weight="700" letter-spacing="6">
+      INTEGRATED
+    </text>
+    <text x="1290" y="665" text-anchor="middle" fill="#003E7E" font-size="24" font-weight="700" letter-spacing="6">
+      YARD OPS
+    </text>
+    <text x="1290" y="705" text-anchor="middle" fill="#a89e8b" font-size="13" letter-spacing="3" font-weight="500">
+      — unfilled —
+    </text>
+
+    <!-- Hairline rule above source attribution -->
+    <line x1="80" y1="840" x2="1520" y2="840" stroke="#d8d2c2" stroke-width="1" />
+
+    <!-- Bottom source attribution -->
+    <text x="800" y="872" text-anchor="middle" fill="#a89e8b" font-size="12" letter-spacing="2.5" font-weight="500">
+      COMPOSITION · PUBLIC-RECORD SOURCES · ACCOUNT NAMES REDACTED
+    </text>
+  </g>
+</svg>
