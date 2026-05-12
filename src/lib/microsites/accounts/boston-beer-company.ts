@@ -50,10 +50,14 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
+import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 export const bostonBeerCompany: AccountMicrositeData = {
   slug: 'boston-beer-company',
   accountName: 'Boston Beer Company',
+  coverHeadline: 'The dock-cycle layer above gate-and-locate',
+  titleEmphasis: 'above gate-and-locate',
+  coverFootprint: 'PA · Cincinnati · Milton DE',
   parentBrand: 'Boston Beer Company',
   vertical: 'beverage',
   tier: 'Tier 1',
@@ -78,7 +82,8 @@ export const bostonBeerCompany: AccountMicrositeData = {
         { label: 'Existing yard-tech layer', value: 'Site-level gate-and-locate yard tracking is in production at the named breweries; the in-yard execution and dock-cycle measurement layer above it is unsolved. The 2018-era architecture answers "where is trailer X?" — it does not answer "why was dock 3 idle for 18 minutes between trailers, and what should have happened differently?"' },
       ],
       hypothesis:
-        'The interesting thing about the Boston Beer yard math is the timing collision of three things in one operating year. First, Phil Savastano was promoted from running the Sam Adams PA brewery for 18 months to running the whole supply chain in October 2025 — the kind of CSCO whose mental model is "what works at one plant should work at every plant," because that is literally his career arc. Second, Q1 2026 delivered +100 bps gross margin attributed publicly to procurement savings and brewery efficiencies — the first quarter of his tenure, and the lever he is now being measured on. Third, internal production climbed to 95% in the same quarter (up from 85%), meaning ten points of volume just landed at PA, Cincinnati, and Milton DE — the yards that were sized for a different SKU and brand mix four years ago. The gate-and-locate yard system you already operate gives the site-level system of record. It tells you where trailers are at PA today, the same way it told you in 2020 — and that is the right thing for a 2018-era architecture to do. What it does not give — and what the brewery-efficiency margin number now requires — is the in-yard execution and dock-cycle measurement logic that determines whether the consolidated internal volume lands inside the dock-cycle envelope at the existing brewery yards, or breaks it. Twisted Tea, Sun Cruiser, Hard MTN Dew through traditional beer wholesalers, and the Sam Adams / Angry Orchard / Dogfish Head craft tail all share dock doors with peak-Truly-era SOPs. Hard MTN Dew specifically shifted from Blue Cloud Distribution to traditional beer wholesalers in February 2024 — the same wholesaler appointment windows as Sam Adams, with the "distribution friction with independent Pepsi bottlers" line Q1 2026 called out by name. That friction surfaces at the brewery yard, not at the wholesaler — which trailer goes to which distributor at which dock when. The conversation about the PA brewery yard is the conversation about the next 30–50 bps of margin, not about whether yard tech is worth buying.',
+        'The interesting thing about the Boston Beer yard math is the timing collision of three things in one operating year. First, Phil Savastano was promoted from running the Sam Adams PA brewery for 18 months to running the whole supply chain in October 2025 — the kind of CSCO whose mental model is "what works at one plant should work at every plant," because that is literally his career arc. Second, Q1 2026 delivered +100 bps gross margin attributed publicly to procurement savings and brewery efficiencies — the first quarter of his tenure, and the lever he is now being measured on. Third, internal production climbed to 95% in the same quarter (up from 85%), meaning ten points of volume just landed at PA, Cincinnati, and Milton DE — the yards that were sized for a different SKU and brand mix four years ago.\n\nThe gate-and-locate yard system you already operate gives the site-level system of record. It tells you where trailers are at PA today, the same way it told you in 2020 — and that is the right thing for a 2018-era architecture to do. What it does not give — and what the brewery-efficiency margin number now requires — is the in-yard execution and dock-cycle measurement logic that determines whether the consolidated internal volume lands inside the dock-cycle envelope at the existing brewery yards, or breaks it. Twisted Tea, Sun Cruiser, Hard MTN Dew through traditional beer wholesalers, and the Sam Adams / Angry Orchard / Dogfish Head craft tail all share dock doors with peak-Truly-era SOPs. Hard MTN Dew specifically shifted from Blue Cloud Distribution to traditional beer wholesalers in February 2024 — the same wholesaler appointment windows as Sam Adams, with the "distribution friction with independent Pepsi bottlers" line Q1 2026 called out by name. That friction surfaces at the brewery yard, not at the wholesaler — which trailer goes to which distributor at which dock when. The conversation about the PA brewery yard is the conversation about the next 30–50 bps of margin, not about whether yard tech is worth buying.',
+      pullQuote: 'The conversation about the PA brewery yard is the conversation about the next 30–50 bps of margin, not about whether yard tech is worth buying.',
       caveat:
         'This is built from Boston Beer\'s Q1 2026 earnings call commentary, the October 2025 Hodges-to-COO / Savastano-to-CSCO announcement, public brewery acquisition history, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: which breweries are running the existing gate-and-locate system at what depth, where the volume shift from contract brewers is biting hardest, and how Hard MTN Dew appointment-window arbitration is being handled today at the PA and Cincinnati yards.',
     },
@@ -270,6 +275,23 @@ export const bostonBeerCompany: AccountMicrositeData = {
     ],
     urgencyDriver:
       'Boston Beer shifted ten points of volume from contract brewers to internal production in a single year — Q1 2026 went from 85% to 95% internal. That volume landed at PA, Cincinnati, and Milton DE yards sized for the 2020–2021 peak-Truly SKU and brand mix, against the same dock infrastructure. Q1 2026 delivered +100 bps gross margin attributed publicly to brewery efficiency; Savastano is the CSCO of record on that number and is being measured on whether Q2, Q3, Q4 continue the trajectory. Brewery efficiency without yard efficiency hits the same dock-cycle wall. The in-yard execution and dock-cycle measurement layer above the existing site-level yard tech is the no-capex margin lever that compounds the Q1 win.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Internal production', body: '85% → 95% in one year. Ten points of volume landed on peak-Truly-era dock infrastructure.' },
+    { mark: 'Q1 2026 scoreboard', body: 'Gross margin 49.3% · +100 bps · attributed publicly to procurement + brewery efficiencies.' },
+    { mark: 'Cincinnati canning', body: '$85M expansion · 4× canning capacity · the packaging-density anchor.' },
+    { mark: 'Savastano on the floor', body: '18 months running the Sam Adams PA brewery before the CSCO seat. "What works at one plant should work at every plant" — literally his career arc.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for Phil Savastano. The eighteen months you spent running the Sam Adams PA brewery before the CSCO seat — and the +100 bps gross-margin number Q1 2026 attributed publicly to brewery efficiency — are the foundation the next five minutes builds on. What follows is the dock-cycle measurement layer above the gate-and-locate system you already operate, at the moment 95% internal production lands ten more points of volume through the same brewery yards.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
