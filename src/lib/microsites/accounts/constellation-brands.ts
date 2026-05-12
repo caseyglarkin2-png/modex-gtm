@@ -38,7 +38,10 @@ export const constellationBrands: AccountMicrositeData = {
         { label: 'Mexican brewery footprint', value: 'Nava (Coahuila) ~370M cases/yr · Obregón (Sonora) ~170M cases/yr · Veracruz greenfield ramping into commercial production late 2025 (~30M hL added on completion)' },
         { label: 'US-side network', value: 'Distribution centers + cross-border receiving yards on the US side of the Nava and Obregón corridors; smaller premium wine ops in CA Napa Valley post-divestiture' },
         { label: 'Cross-border flow', value: 'Mexican breweries are the production base for the entire US Mexican-beer category; the 2013 AB-InBev settlement constrains brewing to Mexico, so every Modelo/Corona/Pacifico case ships across the border before reaching a US wholesaler' },
-        { label: 'Portfolio shape after divestiture', value: 'Wine & Spirits transaction with The Wine Group closed June 2025 (~$846M cash); retained portfolio is beer-led with premium wine (Robert Mondavi Winery, The Prisoner) and craft spirits (Casa Noble, Mi Campo, High West) on top' },
+        { label: 'Veracruz greenfield window', value: '~$1.2B brewery commercial-production ramp targeted for 2026 · third Mexican brewery after Nava and Obregón · no entrenched site-level yard SOP to displace · the operating standard installed in 2026 defines yard execution at the newest piece of the network for the next decade' },
+        { label: 'Cross-border tariff exposure', value: 'A USMCA-aligned cross-border flow that books ~$1.2B/yr of Mexican beer capex is the part of the network most exposed to any future tariff or customs-rule shift. The yard layer is where any cross-border friction shows up first — in dwell at the bridge, dwell at the receiving yard, and dwell at the US-side DC' },
+        { label: 'Wine Group divestiture', value: 'Transaction with The Wine Group closed June 2, 2025 for ~$845.9M cash. Divested mainstream wine (Woodbridge, Meiomi, Robert Mondavi Private Selection, Cook\'s, SIMI, J. Rogét) freed supply-chain management attention back to the beer franchise at the same moment Veracruz is ramping' },
+        { label: 'Portfolio shape after divestiture', value: 'Retained portfolio is beer-led with premium wine (Robert Mondavi Winery, The Prisoner) and craft spirits (Casa Noble, Mi Campo, High West) on top' },
         { label: 'Demand-side scale', value: 'Modelo Especial held #1 US beer by dollars through 2025 (~$5.2B; ~8% category share). Constellation\'s Mexican imports account for ~92% of the imported-Mexican-beer dollar category' },
         { label: 'Capex posture', value: 'Beer capex run rate ~$1.2B/yr in Mexico through FY26; total ~$4–4.5B FY24–FY26 against the Veracruz buildout and Obregón expansion' },
       ],
@@ -49,11 +52,21 @@ export const constellationBrands: AccountMicrositeData = {
         'This is built from Constellation\'s public capex disclosures, the Mexican-brewery construction press, the Wine Group transaction filings, and reasonable network inference on the US-side DC and wholesaler-handoff layer. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: whether the cross-border customs cadence into the US receiving yards is already smoothed by a current operating standard, whether the Veracruz yard-ops design has been spec\'d yet and who owns it, and how the US-side DC yards relate to the wholesaler-pickup handoff that gates everything downstream of Constellation\'s control.',
     },
     {
+      type: 'artifact',
+      headline: 'A coverage map for the cross-border yard layer',
+      artifact: {
+        imageSrc: '/artifacts/constellation-brands-coverage-map.svg',
+        imageAlt: 'Cross-border yard coverage map. Six tiles representing the Constellation Brands US-bound beer network. Nava brewery, Obregón brewery, Veracruz greenfield, US distribution centers, and Cross-border receiving yards are covered. The Cross-border yard ops tile is unfilled, marked with a Constellation wine maroon hairline outline.',
+        caption: 'Cross-border yard coverage map · 1 tile unfilled.',
+        source: 'Composition modeled from public Constellation capex, Mexican-brewery construction press, and the 2013 AB-InBev settlement record. Account names redacted.',
+      },
+    },
+    {
       type: 'comparable',
       headline: 'What a comparable network did when they closed the same gap',
       comparableName: 'Primo Brands',
       comparableProfile:
-        'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes out gross-vehicle weight before it maxes cube), low-margin (so every minute of yard waste is a margin point that can\'t be recovered with price), shipped across multi-temp (premium SKUs sit alongside ambient), and complicated by return logistics for refillable formats. Primo is years ahead of every other CPG category on yard automation and digitization — they had to be — and they run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, with a network-level yard operating model layered on top of their existing site-level systems. The shape similarities to Constellation are direct: high-volume bottling and packaging, weight-out before cube-out (a beer trailer maxes gross-vehicle-weight at roughly 20 pallets of cases, same constraint Primo runs against on water), multi-site network feeding a wholesaler/distributor handoff, and a category leader\'s sensitivity to dock-turn variance. The freight shape transfers cleanly. What does not transfer is the cross-border dimension — Primo operates inside a single regulatory and labor regime, and Constellation does not. The Mexico-side breweries (Nava, Obregón, Veracruz) sit inside one labor market and one set of customs-clearance dynamics; the US-side DCs sit inside another. That layer is Constellation-specific and not modeled by the Primo comparable. The operating-model read-across covers what happens inside a yard at either end of the cross-border move; the customs-cadence layer between them is its own design conversation.',
+        'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes out gross-vehicle weight before it maxes cube), low-margin (so every minute of yard waste is a margin point that can\'t be recovered with price), shipped across multi-temp (premium SKUs sit alongside ambient), and complicated by return logistics for refillable formats. Primo is years ahead of every other CPG category on yard automation and digitization — they had to be — and they run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, with a network-level yard operating model layered on top of their existing site-level systems. The shape similarities to Constellation are direct: high-volume bottling and packaging, weight-out before cube-out (a beer trailer maxes gross-vehicle-weight at roughly 20 pallets of cases, same constraint Primo runs against on water), multi-site network feeding a wholesaler/distributor handoff, and a category leader\'s sensitivity to dock-turn variance. The freight shape transfers cleanly. What does not transfer is the cross-border dimension — Primo operates inside a single regulatory and labor regime, and Constellation does not. The Mexico-side breweries (Nava, Obregón, Veracruz) sit inside one labor market and one set of customs-clearance dynamics; the US-side DCs sit inside another. That layer is Constellation-specific and not modeled by the Primo comparable. Primo runs the operating layer Constellation needs across Nava, Obregón, Veracruz, and the US-side DCs — same coordinates, same drop-trailer cadence, harder freight on one side and a customs line on the other. The operating-model read-across covers what happens inside a yard at either end of the cross-border move; the customs-cadence layer between them is the Constellation-specific design conversation on top.',
       metrics: [
         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
@@ -114,6 +127,13 @@ export const constellationBrands: AccountMicrositeData = {
           confidence: 'measured',
           detail: 'Post-deployment turn time, dock-office headcount during volume growth, and per-site profit impact have been shared with us by the Primo CFO and ops team. Specific numbers are referenceable in a peer call when relevant.',
         },
+        {
+          id: 'kester-tenure',
+          source: 'John Kester — public tenure record',
+          confidence: 'public',
+          detail: '~30 years in the beer industry across supply-chain operations (Molson Coors, Rocky Mountain Bottle, Metal Container Corporation). Joined Constellation Brands in 2014; named SVP & Chief Supply Chain Officer for the Beer Division, reporting to EVP & President of Beer Jim Sabia. Owns forecasting, procurement, logistics, customer management, and glass operations against ~$2B of beer-supply spend. BS University of Akron · MS University of Pittsburgh.',
+          url: 'https://www.cbrands.com/blogs/leadership/john-kester',
+        },
       ],
       unknowns: [
         'How the cross-border customs cadence (CBP windowing, broker handoff, bridge-crossing variance) interacts with the outbound dock schedule at Nava and Obregón today — and whether either side runs against a shared operating standard or two local ones',
@@ -122,6 +142,8 @@ export const constellationBrands: AccountMicrositeData = {
         'Whether the Wine Group divestiture freed enough supply-chain management bandwidth to take on a network-yard operating-model investment in the FY26 window, or whether the Veracruz ramp itself absorbs the available attention',
         'Whether existing site-level yard tooling (gate, appointment, spotter dispatch) is in place at any of the breweries or US DCs, and at what coverage',
         'How peak-season volume (Memorial Day → Labor Day; Cinco de Mayo week) shows up on the brewery-side outbound yard versus the US-side receiving yard, and which side absorbs the surge',
+        'Whether glass-operations inbound (the captive-supply piece Kester explicitly owns) shares yard surface with finished-goods outbound at Nava and Obregón, and how that arbitration is decided today',
+        'Whether any of the cross-border yard discipline carried out of Kester\'s ~30 years in beer (Molson Coors, Rocky Mountain Bottle, Metal Container) is already installed at the Mexican breweries today, or whether it stopped at the Nava dock door when the trailer left for the bridge',
       ],
     },
     {
@@ -131,7 +153,7 @@ export const constellationBrands: AccountMicrositeData = {
         'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. Constellation is distinctive in this round because the yard layer crosses a border. The 2013 AB-InBev settlement fixed brewing in Mexico for the US Mexican-beer category, which means the operating standard that runs a Modelo case from a Nava dock door to a Texas wholesaler\'s pickup window spans two countries — and most network yard models stop at the customs line. The Primo comparable covers what happens inside a yard at either end; the layer between them is its own design conversation. Veracruz coming online in 2025 is the cleanest place to install a network operating standard from scratch, because greenfield avoids any displacement of entrenched site-level workflows. Nava is the cleanest place to measure throughput sensitivity, because it carries the highest volume in the network and any improvement shows up immediately in the cross-border outbound cadence.',
       authorEmail: 'casey@freightroll.com',
       signOff:
-        'If parts of this read wrong against what you see internally — particularly how the cross-border customs cadence and the brewery outbound schedule are currently held together, whether the Veracruz yard-ops design is already further along than the public record suggests, or how the US-side DC yards sit against the wholesaler-pickup window — that\'s the most useful thing to push back on. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
+        'John — the part most worth pushing back on is whether the cross-border yard discipline you carried out of ~30 years in the beer industry has reached both sides of the Nava and Obregón outbound moves yet, or whether it stops at the dock door when the trailer leaves for the bridge. That answer reshapes the rest of this, and it gets sharper at Veracruz where the operating standard is still open to first-principles design. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
     },
   ],
 
@@ -143,15 +165,15 @@ export const constellationBrands: AccountMicrositeData = {
       name: 'John Kester',
       firstName: 'John',
       lastName: 'Kester',
-      title: 'SVP & Chief Supply Chain Officer, Constellation Brands',
+      title: 'SVP & Chief Supply Chain Officer, Beer Division',
       company: 'Constellation Brands',
       email: 'john.kester@cbrands.com',
       roleInDeal: 'decision-maker',
       seniority: 'C-level',
       function: 'Supply Chain / Operations',
       currentMandate:
-        'SVP and Chief Supply Chain Officer at Constellation Brands (NYSE: STZ). Owns end-to-end supply chain for the #1-by-dollars US imported beer franchise (Modelo, Corona, Pacifico) plus the retained premium wine and craft-spirits portfolio. Reports to CEO Bill Newlands. Responsible for the Mexican brewery footprint (Nava, Obregón, Veracruz), cross-border logistics into the US, US-side distribution infrastructure, and the post-divestiture beer-led portfolio focus.',
-      bestIntroPath: 'Direct outreach to the CSCO office. If delegated, target VP Logistics or VP US Operations on the supply-chain leadership team.',
+        'SVP & Chief Supply Chain Officer, Beer Division at Constellation Brands (NYSE: STZ). Owns the integrated end-to-end supply chain for the #1-by-dollars US imported beer franchise — Modelo, Corona, Pacifico — covering forecasting, planning, procurement, logistics & distribution, customer management, and glass operations against ~$2B of beer-supply spend. Reports to EVP & President of Beer Jim Sabia, who in turn reports to CEO Bill Newlands. ~30 years in the beer industry prior to Constellation (Molson Coors, Rocky Mountain Bottle, Metal Container Corporation); joined Constellation Brands in 2014. Responsible for the Mexican brewery footprint (Nava, Obregón, Veracruz), cross-border logistics into the US, and US-side distribution infrastructure.',
+      bestIntroPath: 'Direct outreach to the CSCO Beer office. If delegated, target VP Logistics or VP US Operations on the beer supply-chain leadership team.',
     },
   ],
 
@@ -162,7 +184,7 @@ export const constellationBrands: AccountMicrositeData = {
         name: 'John Kester',
         firstName: 'John',
         lastName: 'Kester',
-        title: 'SVP & Chief Supply Chain Officer, Constellation Brands',
+        title: 'SVP & Chief Supply Chain Officer, Beer Division',
         company: 'Constellation Brands',
         email: 'john.kester@cbrands.com',
         roleInDeal: 'decision-maker',
@@ -170,25 +192,25 @@ export const constellationBrands: AccountMicrositeData = {
         function: 'Supply Chain / Operations',
       },
       fallbackLane: 'ops',
-      label: 'John Kester — SVP & Chief Supply Chain Officer',
+      label: 'John Kester — SVP & Chief Supply Chain Officer, Beer Division',
       variantSlug: 'john-kester',
 
       framingNarrative:
-        'John, the 2013 settlement fixed Constellation\'s brewing geography in Mexico, which means the operating standard that runs a Modelo case from a Nava dock door to a US wholesaler pickup spans two countries — and most network yard models stop at the customs line. Veracruz coming online is the cleanest place to install a network standard from scratch; Nava is the cleanest place to measure throughput sensitivity at the #1-category volume level. The Wine Group divestiture freed the operating attention to do this now.',
+        'John, the cross-border yard discipline you have built across ~30 years in the beer industry — Molson Coors, Rocky Mountain Bottle, Metal Container Corporation, and now the ~$2B Beer Division supply-chain seat reporting to Jim Sabia — is the same discipline that does or does not currently run on both sides of the Nava and Obregón outbound moves. The 2013 settlement fixed the production geography in Mexico, which means every Modelo, Corona, and Pacifico case sold in the US ships across a border that most network operating models treat as out of scope. Veracruz is ramping into commercial production now with no entrenched site-level SOP to displace, the Wine Group divestiture closed in mid-2025 and freed the operating attention back toward beer, and the network-yard layer above the breweries is the one operating-system tile that is not yet running to a single standard on both sides of that border.',
       openingHook:
-        'Every case of Modelo, Corona, and Pacifico sold in the United States is brewed in Mexico. That structural fact — fixed by the 2013 settlement, reinforced by the Veracruz ramp — means Constellation\'s yard layer crosses a border that most network operating models treat as out of scope. The question the analysis below works through is what changes when the layer above the yard runs to a single standard on both sides of that border.',
+        'Every case of Modelo, Corona, and Pacifico sold in the United States is brewed in Mexico. That structural fact — fixed by the 2013 settlement, reinforced by the Veracruz ramp — means Constellation\'s yard layer crosses a border that most network operating models treat as out of scope. The question the analysis below works through is what changes when the cross-border yard discipline runs to a single standard on both sides of that border.',
       stakeStatement:
-        'At #1-category US volume, a one-percent miss on Nava\'s outbound dock-turn cadence is a measurable share of the country\'s best-selling beer not in transit on a given afternoon. Veracruz comes online with no entrenched site-level SOP to displace; the operating standard installed in 2026 is the one that defines yard execution at the newest piece of the network for the next decade.',
+        'At #1-category US volume, a one-percent miss on Nava\'s outbound dock-turn cadence is a measurable share of the country\'s best-selling beer not in transit on a given afternoon. Veracruz comes online with no entrenched site-level SOP to displace; the operating standard installed in 2026 is the one that defines yard execution at the newest piece of the network for the next decade. The cross-border yard layer is the only piece of the ~$2B Beer Division supply-chain surface still running to two local standards instead of one.',
 
       heroOverride: {
         headline: 'The yard layer crosses a border. Most operating models stop at the customs line.',
         subheadline:
           'Modelo, Corona, and Pacifico are brewed in Mexico for the US market under the 2013 settlement. Nava and Obregón ship across the border into US DCs and the three-tier wholesaler network. Veracruz comes online in 2025 with no entrenched yard SOP to displace. The operating standard that runs both sides of that flow is the unsolved layer.',
       },
-      sectionOrder: ['yns-thesis', 'observation', 'comparable', 'methodology', 'about'],
+      sectionOrder: ['yns-thesis', 'observation', 'artifact', 'comparable', 'methodology', 'about'],
 
       toneShift:
-        'Peer-to-peer supply-chain-operator framing. The Wine Group divestiture and the Veracruz ramp are the operating context — name them as facts, not as urgency manufacturing. The cross-border dimension is the analytical wedge; lead with it. Acknowledge the Primo comparable for shape and flag the customs-cadence layer as the thing the comparable does not cover.',
+        'Peer-to-peer supply-chain-operator framing. Kester runs the ~$2B Beer Division supply chain after ~30 years in the beer industry — he doesn\'t need a glossary, and he doesn\'t need a sales pitch. The Wine Group divestiture and the Veracruz ramp are the operating context, named as facts, not as urgency manufacturing. The cross-border yard discipline is the analytical wedge; lead with it. Acknowledge the Primo comparable for shape and flag the customs-cadence layer as the thing the comparable does not cover.',
       kpiLanguage: [
         'cross-border dock-turn cadence',
         'outbound brewery yard cycle',
@@ -196,6 +218,7 @@ export const constellationBrands: AccountMicrositeData = {
         'wholesaler pickup window',
         'multi-site yard operating standard',
         'greenfield yard-ops design',
+        'glass-operations inbound arbitration',
         'detention spend',
         'gate-to-dock dwell',
       ],
@@ -255,6 +278,7 @@ export const constellationBrands: AccountMicrositeData = {
     { mark: 'Greenfield window', body: 'Veracruz ramping late 2025 · no entrenched site-level SOP · operating standard installed in 2026 defines the next decade.' },
     { mark: 'Category sensitivity', body: 'Modelo Especial #1 US beer by dollars · ~$5.2B · ~92% of imported-Mexican-beer dollars.' },
     { mark: 'Portfolio attention', body: 'Wine Group transaction closed June 2025 · ~$846M cash · beer-led retained portfolio claims SC bandwidth.' },
+    { mark: 'Kester tenure', body: '~30 years in beer · Molson Coors · Rocky Mountain Bottle · Metal Container · Constellation since 2014 · ~$2B Beer Division spend.' },
     { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, single-country freight.' },
   ],
 
