@@ -11,6 +11,7 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
+import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 
 // LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
@@ -164,6 +165,8 @@ import type { AccountMicrositeData } from '../schema';
 export const campbellS: AccountMicrositeData = {
   slug: 'campbell-s',
   accountName: 'Campbell\'s',
+  coverHeadline: 'The yard layer inside Enterprise Transformation',
+  titleEmphasis: 'inside Enterprise Transformation',
   vertical: 'cpg',
   tier: 'Tier 2',
   band: 'B',
@@ -185,7 +188,8 @@ export const campbellS: AccountMicrositeData = {
         { label: 'Active network change', value: 'Tualatin closure · Jeffersonville reduction · Maxton expansion ($150M) · Sovos/Rao\'s integration in flight' },
       ],
       hypothesis:
-        'The angle that keeps coming back is consolidation under load. Campbell\'s is closing and shrinking some plants while expanding Maxton and absorbing Sovos premium-product flow at the same time — the remaining facilities are taking on more trailer volume, more SKU variety, and more handling profiles right now. Underneath that, the dock has to sequence four genuinely different product profiles (shelf-stable palletized vs. temp-controlled premium vs. lightweight bulky snacks vs. fragile baked goods), each with different staging discipline. Stack soup-season Q4 surge on top of that and the yard becomes the surface where the consolidation math, the Rao\'s premium service-level expectation, and the network\'s seasonal reality all stop translating into clean execution. The Dan Poland reorg in November 2024 — moving him to Chief Enterprise Transformation Officer with Cassandra Green now running supply chain — is the part of the picture that says someone at the top is now explicitly looking for transformation capabilities that scale across the whole company. The yard layer is one of the few places where that brief actually has measurable headroom.',
+        'The angle that keeps coming back is consolidation under load. Campbell\'s is closing and shrinking some plants while expanding Maxton and absorbing Sovos premium-product flow at the same time — the remaining facilities are taking on more trailer volume, more SKU variety, and more handling profiles right now. Underneath that, the dock has to sequence four genuinely different product profiles (shelf-stable palletized vs. temp-controlled premium vs. lightweight bulky snacks vs. fragile baked goods), each with different staging discipline. Stack soup-season Q4 surge on top of that and the yard becomes the surface where the consolidation math, the Rao\'s premium service-level expectation, and the network\'s seasonal reality all stop translating into clean execution.\n\nThe Dan Poland reorg in November 2024 — moving him to Chief Enterprise Transformation Officer with Cassandra Green now running supply chain — is the part of the picture that says someone at the top is now explicitly looking for transformation capabilities that scale across the whole company. Under Mick Beekhuizen, who stepped into the CEO seat in February 2025 carrying the Sovos integration and the ERP rollout that gave Campbell\'s a single visibility layer over demand, shipments, and inventory, Enterprise Transformation is the operating discipline the rest of the company is now expected to ladder into. Planning has caught it. The finance and ERP layer has caught it. The yard layer above the 24+ sites is one of the few surfaces that has not — and one of the few where the Transformation brief actually has measurable headroom.',
+      pullQuote: 'The yard becomes the surface where the consolidation math, the Rao\'s premium service-level expectation, and the seasonal reality all stop translating into clean execution.',
       caveat:
         'This is built from public Campbell\'s disclosures, the November 2024 reorg announcement, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing on detention spend, the four-profile dock contention, or how much existing yard-system coverage already lives across the 24+ sites.',
     },
@@ -351,6 +355,23 @@ export const campbellS: AccountMicrositeData = {
     ],
     supplyChainInitiatives: ['Dan Poland\'s role as **Chief Enterprise Transformation Officer** is about finding and scaling operational improvements across the entire company. He\'s not managing day-to-day supply chain anymore — he\'s looking for **transformative capabilities** that drive measurable performance gains. YardFlow fits this mandate perfectly.'],
     urgencyDriver: 'Investment:',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Reorg', body: 'Nov 2024 · Poland → Chief Enterprise Transformation Officer · Cassandra Green → SVP Supply Chain.' },
+    { mark: 'New CEO', body: 'Mick Beekhuizen · Feb 2025 · led the $2.7B Sovos acquisition and ERP integration.' },
+    { mark: 'Network change', body: 'Tualatin closure · Jeffersonville reduction · Maxton +$150M · Sovos/Rao\'s integrating.' },
+    { mark: 'Four-profile dock', body: 'Shelf-stable · refrigerated premium · snacks · baked goods — each with different staging discipline.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for Dan Poland. The Enterprise Transformation mandate you carried out of the November 2024 reorg has reached planning, finance, and the ERP layer Sovos brought in. The five minutes that follow are about the one layer above the 24+ sites that has not caught the same operating discipline yet.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
