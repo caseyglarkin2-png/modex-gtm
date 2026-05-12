@@ -62,12 +62,13 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
+import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 export const universalLogisticsHoldings: AccountMicrositeData = {
   slug: 'universal-logistics-holdings',
   accountName: 'Universal Logistics Holdings',
-  coverHeadline: 'Yard execution as the unit economic for Universal Logistics',
-  titleEmphasis: 'Universal Logistics',
+  coverHeadline: 'The yard-execution layer for LINC\'s bid template',
+  titleEmphasis: 'LINC\'s bid template',
   coverFootprint: 'Intermodal + dedicated + truck',
   parentBrand: 'Universal Logistics Holdings (Moroun-controlled)',
   vertical: 'logistics-3pl',
@@ -93,7 +94,8 @@ export const universalLogisticsHoldings: AccountMicrositeData = {
         { label: 'Capital posture', value: '2025 revenue $1.558B (−15.6% YoY); net loss $(99.9M); intermodal segment in recovery. ~$150M capex planned for 2026 — capital discipline is the operating theme. New CFO Michael H. Rogers from June 1, 2026 succeeding Jude Beres through a period of internal-control remediation and segment repositioning. Apollo-comparable PE-rational decision math (Moroun family-controlled, NASDAQ controlled company, ~73.2% voting equity)' },
       ],
       hypothesis:
-        'The interesting thing about ULH is the natural distinction between two yard problems and one productization opportunity. The first yard problem is the corporate ULH category fight against the YMS market: ULH has named its WMS + TMS + YMS stack publicly, the category is mature, and any vendor pitch routed to corporate IT lands in a procurement evaluation against the YMS market leader. That is not the path. The second yard problem is the LINC plant-side operating model — Stellantis east-side Detroit, GM Orion EV / Factory Zero, the next OEM pursuit response that has not yet been written. LINC operates inside customer plants; the yard at every one of those operations is plant-side (sequencing centers, sub-assembly plants, parts-marshalling yards, returnable-container loops), and the yard is the operating system. LINC is already on its third decade of embedding third-party technology into its plant-side operating model and billing it through to the OEM as part of the value-added services contract — the day job is exactly this. The productization opportunity is the yard-execution and multi-tenant orchestration layer entering the LINC bid template, the way the existing WMS estate did, the way the existing YMS did, but designed for the multi-OEM multi-customer plant-side operating model rather than for single-customer single-yard end-shipper procurement. Three forward pressures compound the timing. First, Contract Logistics is the segment ULH is leaning into post-Parsec ($1B+ annualized; ~67% of 2025 revenue) — margin compression is the watch-item but volume base is the largest by far. Second, ULH is GM Supplier of the Year for the third consecutive year — OEMs are starting to ask about real-time gate-to-dock orchestration, driver-facing workflows, and shipper-visible feeds in the next RFP response. Third, the Parsec rail-terminal integration creates a third yard surface (rail terminal yards) that has its own operating model distinct from LINC plant-side and from truckload drayage — and tying Parsec rail moves to LINC plant moves on the same execution surface is the kind of cross-segment operating-model investment a CTO-mandated synergy program is exactly the right buyer for.',
+        'The interesting thing about ULH is the natural distinction between two yard problems and one productization opportunity. The first yard problem is the corporate ULH category fight against the YMS market: ULH has named its WMS + TMS + YMS stack publicly, the category is mature, and any vendor pitch routed to corporate IT lands in a procurement evaluation against the YMS market leader. That is not the path. The second yard problem is the LINC plant-side operating model — Stellantis east-side Detroit, GM Orion EV / Factory Zero, the next OEM pursuit response that has not yet been written. LINC operates inside customer plants; the yard at every one of those operations is plant-side — sequencing centers, sub-assembly plants, parts-marshalling yards, returnable-container loops — and the yard is the operating system.\n\nLINC is already on its third decade of embedding third-party technology into its plant-side operating model and billing it through to the OEM as part of the value-added services contract — the day job is exactly this. The productization opportunity is the yard-execution and multi-tenant orchestration layer entering the LINC bid template, the way the existing WMS estate did, the way the existing YMS did, but designed for the multi-OEM multi-customer plant-side operating model rather than for single-customer single-yard end-shipper procurement.\n\nThree forward pressures compound the timing. First, Contract Logistics is the segment ULH is leaning into post-Parsec ($1B+ annualized; ~67% of 2025 revenue) — margin compression is the watch-item but the volume base is the largest by far. Second, ULH is GM Supplier of the Year for the third consecutive year — OEMs are starting to ask about real-time gate-to-dock orchestration, driver-facing workflows, and shipper-visible feeds in the next RFP response. Third, the Parsec rail-terminal integration creates a third yard surface (rail terminal yards) that has its own operating model distinct from LINC plant-side and from truckload drayage — and tying Parsec rail moves to LINC plant moves on the same execution surface is the kind of cross-segment operating-model investment a CTO-mandated synergy program is exactly the right buyer for.',
+      pullQuote: 'LINC operates inside customer plants; the yard at every one of those operations is plant-side — and the yard is the operating system.',
       caveat:
         'This is built from ULH 2025 10-K disclosures, the Parsec acquisition announcement, ULH technology page positioning, Morrish\'s LINC public-facing role, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: what the existing YMS at ULH actually is at depth (the public technology page names AccuLinc + a TMS + a YMS but not the YMS vendor specifically), how the Parsec rail-terminal operating model is being integrated against the LINC plant-side operating model, and which OEM RFP cadence is most actionable for a yard-execution-layer pursuit response.',
     },
@@ -288,6 +290,23 @@ export const universalLogisticsHoldings: AccountMicrositeData = {
     ],
     urgencyDriver:
       'Contract Logistics is the segment ULH is leaning into post-Parsec (~67% of 2025 revenue at $1B+ annualized) — and the next OEM RFP response is the surface where a LINC value-added services bid template gets re-cut for what differentiated capability LINC can put in front of the customer. GM Supplier of the Year three years running is the operating reputation; the next visible differentiator OEMs are asking about is the real-time gate-to-dock orchestration + driver-facing workflows + shipper-visible feeds layer above the records-layer YMS that ULH already names publicly. The cleanest path is partnership economics through the LINC customer billing — embedded in value-added services pricing — not procurement against the YMS market leader at corporate IT.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Parsec', body: 'Sept 2024 · $193.6M · 2,100 employees · 20+ rail yards US/Canada · joins Contract Logistics.' },
+    { mark: 'GM Supplier of the Year', body: '2022 · 2023 · 2024 — three consecutive years. LINC plant-side value-added operations are publicly tied to the award.' },
+    { mark: 'Existing stack', body: 'AccuLinc WMS + TMS + YMS named publicly. Records layer exists; the execution + multi-tenant orchestration layer above is the gap.' },
+    { mark: 'Morrish on the seat', body: 'LINC Business Development — the pre-sale solution-design door that decides what tools are in the next OEM RFP response.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · operating-model proof for the next OEM RFP response.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for Jeff Morrish. The LINC value-added services bid template — the document that decides what tools are in the standard playbook for the next OEM plant contract — is the surface the next five minutes is about. GM Supplier of the Year three years running is the operating reputation; what follows is the layer above the records-layer YMS that ULH already names publicly, designed for the multi-OEM multi-customer plant-side operating model LINC runs every day.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
