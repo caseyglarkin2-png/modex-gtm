@@ -277,18 +277,16 @@ export const kraftHeinz: AccountMicrositeData = {
   ],
 
   audioBrief: {
-    src: '/audio/yard-network-brief.mp3',
-    intro:
-      'This brief is for Flavio Torres. The operating-system discipline you carried out of twenty-five years at AB InBev now runs Kraft Heinz planning and visibility — Agile@Scale and Lighthouse. The five minutes that follow are about the one tile it has not yet reached.',
+    src: '/audio/kraft-heinz.mp3',
     chapters: [
-      { id: 'thesis', label: 'I. The site-level case is closed', start: 0 },
-      { id: 'what-agile-made', label: 'II. What Agile@Scale made expensive', start: 65 },
-      { id: 'unfilled-tile', label: 'III. The unfilled Lighthouse tile', start: 130 },
-      { id: 'not-dekalb', label: 'IV. Why the first pilot is not DeKalb', start: 195 },
-      { id: 'simple-site-proof', label: 'V. What proof at the simple site earns', start: 260 },
+      { id: 'the-yard-visibility-gap', label: 'The Yard Visibility Gap', start: 0 },
+      { id: 'kraft-heinz-network-analysis', label: 'Kraft Heinz Network Analysis', start: 180 },
+      { id: 'the-primo-brands-comparable', label: 'The Primo Brands Comparable', start: 420 },
+      { id: 'methodology-and-limitations', label: 'Methodology and Limitations', start: 580 },
+      { id: 'the-operating-system-opportunity', label: 'The Operating System Opportunity', start: 720 },
     ],
-    generatedAt: '2026-05-12T00:00:00Z',
-  },
+    generatedAt: '2026-05-12T22:32:55.911Z',
+  }
 
   theme: {
     accentColor: '#C8102E',
