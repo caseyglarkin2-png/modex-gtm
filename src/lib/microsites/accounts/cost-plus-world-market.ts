@@ -48,12 +48,13 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
+import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 export const costPlusWorldMarket: AccountMicrositeData = {
   slug: 'cost-plus-world-market',
   accountName: 'Cost Plus World Market',
-  coverHeadline: 'Yard execution at Cost Plus World Market — direct-import to DC to store',
-  titleEmphasis: 'Cost Plus World Market',
+  coverHeadline: 'The yard layer above Stockton and Windsor',
+  titleEmphasis: 'above Stockton and Windsor',
   coverFootprint: '2 DCs · ~250 stores',
   parentBrand: 'World Market',
   vertical: 'retail',
@@ -79,7 +80,8 @@ export const costPlusWorldMarket: AccountMicrositeData = {
         { label: 'Ownership posture', value: 'Kingswood Capital Management since January 2021 (acquired from Bed Bath & Beyond for $110M). Middle-market operational-PE shop; year 5 of hold. Operating-partner reviews speak hard savings, IRR, and operating-partner-review cadence — the same dialect the original case-study justification spoke' },
       ],
       hypothesis:
-        'The interesting thing about the Cost Plus yard math is what site-level success has not yet done. The yard automation deployment at Stockton and Windsor worked. Yard-driver headcount came down to one-per-shift-per-facility, daily yard checks went away, fleet pool reduction was earned, fuel came out, and the cellphone yard coordination model ended. Those are real wins; the case study is public; the operating sponsor is named. That part of the conversation is closed at the site level, and it has been closed for roughly a decade. What is unsolved is the layer above. Two DCs running site-level operating models against a 250-store retail surface accumulates a different problem than the one yard automation solved a decade ago. First, the mixed-temperature dock complexity at both Stockton and Windsor is structurally harder than the dry-DC norm the original deployment was sized against — refrigerated wine, cheese, and gourmet food share dock surface with furniture and ambient home decor, and the marginal minute of dwell on a reefer is a margin point you cannot recover with price. Second, bursty international-inbound seasonality (Q4 holiday, Q1 spring resets, mid-summer back-to-school) compresses port-to-DC trailer flow into narrow windows; the site-level system arbitrates inside-a-DC priority, not cross-DC capacity arbitration. Third, year 5 of Kingswood ownership is the moment operational PE shops underwrite a fresh hard-savings story — Kingswood operating partners run quarterly P&L reviews where DC operating cost is a recurring line item, and yard-related costs are exactly the category most-frequently questioned. The original case study justification is the dialect Kingswood speaks. The same dialect justifies the layer above the site system, in the same format, ten years later.',
+        'The interesting thing about the Cost Plus yard math is what site-level success has not yet done. The yard automation deployment at Stockton and Windsor worked. Yard-driver headcount came down to one-per-shift-per-facility, daily yard checks went away, fleet pool reduction was earned, fuel came out, and the cellphone yard coordination model ended. Those are real wins; the case study is public; the operating sponsor is named. At the site level, that part of the conversation is closed, and it has been closed for roughly a decade.\n\nWhat is unsolved is the layer above. Two DCs running site-level operating models against a 250-store retail surface accumulates a different problem than the one yard automation solved a decade ago. First, the mixed-temperature dock complexity at both Stockton and Windsor is structurally harder than the dry-DC norm the original deployment was sized against — refrigerated wine, cheese, and gourmet food share dock surface with furniture and ambient home decor, and the marginal minute of dwell on a reefer is a margin point you cannot recover with price. Second, bursty international-inbound seasonality (Q4 holiday, Q1 spring resets, mid-summer back-to-school) compresses port-to-DC trailer flow into narrow windows; the site-level system arbitrates inside-a-DC priority, not cross-DC capacity arbitration. Third, year 5 of Kingswood ownership is the moment operational PE shops underwrite a fresh hard-savings story — Kingswood operating partners run quarterly P&L reviews where DC operating cost is a recurring line item, and yard-related costs are exactly the category most-frequently questioned.\n\nThe original case study justification is the dialect Kingswood speaks. The same dialect justifies the layer above the site system, in the same format, ten years later.',
+      pullQuote: 'At the site level, that part of the conversation is closed, and it has been closed for roughly a decade.',
       caveat:
         'This is built from Cost Plus / Kingswood public disclosures, the published yard-automation case study, third-party retail-data sources, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: whether the Stockton vs. Windsor mixed-temp dock contention is biting harder at one DC than the other right now, how the bursty Q4 international-inbound waves are being arbitrated against west-coast vs. east-coast capacity, and whether the trailer-mounted RFID hardware footprint is in a refresh window in 2026.',
     },
@@ -261,6 +263,23 @@ export const costPlusWorldMarket: AccountMicrositeData = {
     ],
     urgencyDriver:
       'A 2-DC mixed-temperature network running roughly a decade into a site-level yard automation deployment has earned the published hard-savings list — and the marginal hour at the site level gets harder every quarter. Year 5 of Kingswood ownership is the moment operational PE shops underwrite a fresh hard-savings story for the next CIM, in the same format that justified the original deployment a decade ago. The operating-model layer above the two site systems — mixed-temp dock arbitration, cross-DC capacity arbitration during Q4 bursty inbound, and the next slice of hard savings that falls to operating-model logic rather than YMS records — is the no-capex margin lever that compounds the original win.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Network footprint', body: 'Stockton CA + Windsor VA · 2M sq ft · 100+ dock doors · 550 trailer positions.' },
+    { mark: 'Site-level scoreboard', body: 'Yard-driver headcount cut to one-per-shift-per-facility · daily yard checks eliminated · fleet pool reduced · fuel out · cellphone coordination ended.' },
+    { mark: 'Ownership clock', body: 'Kingswood Capital since January 2021 · $110M from BBBY · year 5 of PE hold = fresh-CIM hard-savings window.' },
+    { mark: 'Direct-import shape', body: 'Ocean container → Port of Oakland / LA-Long Beach → Stockton · Norfolk / Savannah → Windsor. Bursty Q4 + Q1 + mid-summer inbound.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for Steve Ming. The published hard-savings list at Stockton and Windsor — yard-driver headcount to one-per-shift-per-facility, daily yard checks eliminated, fleet pool reduced, fuel out, cellphone coordination ended — is yours, and it is one of the cleanest YMS ROI cases on the public record. The five minutes that follow are about the layer above two DCs that the year-5 Kingswood operating-partner review now needs.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
