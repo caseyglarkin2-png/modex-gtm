@@ -10,10 +10,14 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
+import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 export const toyota: AccountMicrositeData = {
   slug: 'toyota',
   accountName: 'Toyota',
+  coverHeadline: 'The yard layer above TPS',
+  titleEmphasis: 'above TPS',
+  coverFootprint: '14 US plants · Liberty NC 2026',
   parentBrand: 'Toyota Motor North America',
   vertical: 'automotive',
   tier: 'Tier 2',
@@ -56,7 +60,8 @@ export const toyota: AccountMicrositeData = {
         },
       ],
       hypothesis:
-        "The interesting thing about the Toyota yard math is that Toyota's own operating philosophy already names the problem. TPS is built on the kanban-pull principle: a downstream station signals upstream for the part it needs, and the part arrives exactly when the line is ready to consume it. Inside the plant, TPS has standardized that handoff to a level no other manufacturer in the world has matched — sequenced delivery, line-side rack discipline, andon-cord authority that stops the entire line if a part isn't there. The kanban signal works because the part is there. The kanban signal cannot pull a part that hasn't reached the dock. That is the structural observation. Every minute of variance in the yard between the supplier truck arriving at the gate and the trailer being live at the right dock door is, by definition, a TPS violation. The line was ready; the part wasn't. TPS doesn't reach across the gatehouse, not because TPS doesn't have an opinion about it but because the yard layer has been operating below the visibility threshold that TPS standardizes against. Plants have radios, schedulers, and gate guards who know which carriers run which milkruns. That is the same execution architecture most manufacturing yards in North America use, and at most manufacturers it is good enough. At a Toyota assembly plant, with line-side inventory measured in hours, it is the one layer of the JIT chain still operating on the pre-TPS standard. That gap got more expensive in the last three years for two reasons. First, the multi-pathway electrification strategy expanded the inbound supplier base — ICE plus hybrid plus PHEV plus BEV variants on the same line means more SKUs, more carriers, more milkrun routes, more dock-door arbitration decisions per shift than the same plant made five years ago. The variance budget per supplier shrinks as the supplier count grows. Second, TBMNC is the timing accelerant. Liberty NC is a greenfield, the largest single investment in Toyota history, and it is shipping cells into the assembly network as the 2026 ramp builds out. Battery-cell freight is heavy, hazmat-classified, and single-source to the assembly plants it feeds. The yard-ops design for Liberty itself, and for the assembly plants receiving the cells, is being decided now in the window before the operating pattern hardens. The opportunity isn't replacing TPS; nobody is going to replace TPS. The opportunity is extending TPS principles — standardized work, sequenced flow, andon-equivalent stop authority — to the yard layer above the dock, in the same way TPS extended them to the line above the operator decades ago.",
+        "The interesting thing about the Toyota yard math is that Toyota's own operating philosophy already names the problem. TPS is built on the kanban-pull principle: a downstream station signals upstream for the part it needs, and the part arrives exactly when the line is ready to consume it. Inside the plant, TPS has standardized that handoff to a level no other manufacturer in the world has matched — sequenced delivery, line-side rack discipline, andon-cord authority that stops the entire line if a part isn't there. The kanban signal works because the part is there. The kanban signal cannot pull a part that hasn't reached the dock. That is the structural observation. Every minute of variance in the yard between the supplier truck arriving at the gate and the trailer being live at the right dock door is, by definition, a TPS violation. The line was ready; the part wasn't.\n\nTPS doesn't reach across the gatehouse, not because TPS doesn't have an opinion about it but because the yard layer has been operating below the visibility threshold that TPS standardizes against. Plants have radios, schedulers, and gate guards who know which carriers run which milkruns. That is the same execution architecture most manufacturing yards in North America use, and at most manufacturers it is good enough. At a Toyota assembly plant, with line-side inventory measured in hours, it is the one layer of the JIT chain still operating on the pre-TPS standard.\n\nThat gap got more expensive in the last three years for two reasons. First, the multi-pathway electrification strategy expanded the inbound supplier base — ICE plus hybrid plus PHEV plus BEV variants on the same line means more SKUs, more carriers, more milkrun routes, more dock-door arbitration decisions per shift than the same plant made five years ago. The variance budget per supplier shrinks as the supplier count grows. Second, TBMNC is the timing accelerant. Liberty NC is a greenfield, the largest single investment in Toyota history, and it is shipping cells into the assembly network as the 2026 ramp builds out. Battery-cell freight is heavy, hazmat-classified, and single-source to the assembly plants it feeds. The yard-ops design for Liberty itself, and for the assembly plants receiving the cells, is being decided now in the window before the operating pattern hardens.\n\nThe opportunity isn't replacing TPS; nobody is going to replace TPS. The opportunity is extending TPS principles — standardized work, sequenced flow, andon-equivalent stop authority — to the yard layer above the dock, in the same way TPS extended them to the line above the operator decades ago.",
+      pullQuote: "The kanban signal cannot pull a part that hasn't reached the dock.",
       caveat:
         "This is built from public TMNA disclosures, the public TBMNC investment record, Toyota Production System literature, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don't match what your team is seeing: whether yard variance currently surfaces in TPS metrics today or sits below the visibility threshold, how Toyota Tsusho's lane-planning visibility extends into the receiving yards at the assembly plants, where the TBMNC yard-ops design currently sits in the project plan, and which assembly plant has already started feeling the inbound-mix expansion from multi-pathway electrification at the dock.",
     },
@@ -263,6 +268,23 @@ export const toyota: AccountMicrositeData = {
     ],
     urgencyDriver:
       'TBMNC at Liberty NC is the cleanest greenfield in the portfolio and the largest single investment in Toyota history; the receiving-yard design at Liberty and at the cell-receiving assembly plants is being scoped now. Multi-pathway electrification is the structural driver — the inbound-supplier base on every line is broader than it was three years ago, and the variance budget per supplier has shrunk with it.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Greenfield', body: 'TBMNC Liberty NC · $13.9B build · largest single investment in Toyota history · cells shipping through 2026.' },
+    { mark: 'Operating philosophy', body: 'TPS standardizes the line above the operator. The yard above the dock is the unstandardized seam.' },
+    { mark: 'Inbound mix', body: 'Multi-pathway electrification — ICE + hybrid + PHEV + BEV on one line. Variance budget per supplier shrinks as supplier count grows.' },
+    { mark: 'Line-side tolerance', body: 'TMNA assembly plants run line-side inventory in hours, not days. Yard variance lands on the line.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same network shape, different freight.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      "This brief is for Chris Nielsen. The Toyota Production System has standardized the line-side handoff inside the plant on the kanban-pull principle for four decades. The five minutes that follow are about the one layer TPS has not yet covered — the yard between the supplier truck and the dock — and why Liberty NC is the cleanest greenfield in the network to extend the standard before the pattern hardens.",
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
