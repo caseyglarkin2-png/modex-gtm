@@ -37,10 +37,13 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
+import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 export const dhlSupplyChain: AccountMicrositeData = {
   slug: 'dhl-supply-chain',
   accountName: 'DHL Supply Chain',
+  coverHeadline: 'The yard-execution layer in the DHL operating standard',
+  titleEmphasis: 'in the DHL operating standard',
   coverFootprint: '1,000+ sites globally',
   parentBrand: 'DHL Group',
   vertical: 'logistics-3pl',
@@ -66,7 +69,8 @@ export const dhlSupplyChain: AccountMicrositeData = {
         { label: 'Productization pattern', value: 'DHL takes third-party technology (Locus Robotics — 5,000+ bots, 500M+ picks; Boston Dynamics — 1,000-unit Stretch MOU signed May 2025; Orange EV — first customer since 2015, ~100 NA yard trucks; Nikola hydrogen Class 8 at Diageo Plainfield) into the DHL operating standard and resells it as a managed-service component to shipper customers. Solutions Design Americas is the engineering gatekeeper for what enters the standard' },
       ],
       hypothesis:
-        'The interesting thing about DHL Supply Chain is that the yard problem is not internal — it is customer-facing. Every facility you operate is a customer\'s yard. Diageo measures its decarbonization story at Plainfield by what happens on the DHL-operated yard there. The Inmar returns network\'s ~14 sites are now DHL-branded customer experiences for many retail clients running reverse logistics in parallel. The IDS Fulfillment multi-customer DCs are by definition multi-shipper yards where different fleets compete for the same docks. The 10 new data-center logistics sites coming online in 2026 are multi-hyperscaler. The single-tenant yard tools that exist in the network today were specified for a different operating model — one customer per site, gate-and-locate records, dwell-and-detention reporting. They are not multi-tenant by design, and they sit at the system-of-record layer rather than the execution-and-orchestration layer. That gap matters more right now than it did three years ago for two reasons. First, the 2025 acquisitions (Inmar, IDS, CRYOPDP) loaded 14+ acquired yards into active SOP integration — operating standards are being rewritten across multiple sites simultaneously, which is the one window in a decade when a new layer can enter the standard at integration speed instead of after. Second, DHL\'s automation track record (Locus from pilot to 5,000 bots, Boston Dynamics from case-handling pilot to a 1,000-unit MOU framed explicitly as "moving beyond a traditional vendor relationship," Orange EV from first-customer-in-2015 to ~100 NA yard trucks) is now the public template for how partner technology enters the DHL operating standard. The yard-execution layer fits that template exactly: a software stack designed for multi-tenant 3PL deployment, embedded into the DHL solutions-design standard, distributed across customer engagements as a DHL-branded capability, billed through to shipper customers inside contract-logistics service-level reporting. The unit of analysis is not "does DHL Supply Chain need a YMS" — DHL has yard tech where it needs records. The unit of analysis is "is the yard-execution layer the right next addition to the DHL operating standard, and does it productize the same way Locus and Boston Dynamics did?"',
+        'The interesting thing about DHL Supply Chain is that the yard problem is not internal — it is customer-facing. Every facility you operate is a customer\'s yard. Diageo measures its decarbonization story at Plainfield by what happens on the DHL-operated yard there. The Inmar returns network\'s ~14 sites are now DHL-branded customer experiences for many retail clients running reverse logistics in parallel. The IDS Fulfillment multi-customer DCs are by definition multi-shipper yards where different fleets compete for the same docks. The 10 new data-center logistics sites coming online in 2026 are multi-hyperscaler. The single-tenant yard tools that exist in the network today were specified for a different operating model — one customer per site, gate-and-locate records, dwell-and-detention reporting. They are not multi-tenant by design, and they sit at the system-of-record layer rather than the execution-and-orchestration layer.\n\nThat gap matters more right now than it did three years ago for two reasons. First, the 2025 acquisitions (Inmar, IDS, CRYOPDP) loaded 14+ acquired yards into active SOP integration — operating standards are being rewritten across multiple sites simultaneously, which is the one window in a decade when a new layer can enter the standard at integration speed instead of after. Second, DHL\'s automation track record (Locus from pilot to 5,000 bots, Boston Dynamics from case-handling pilot to a 1,000-unit MOU framed explicitly as "moving beyond a traditional vendor relationship," Orange EV from first-customer-in-2015 to ~100 NA yard trucks) is now the public template for how partner technology enters the DHL operating standard. The yard-execution layer fits that template exactly: a software stack designed for multi-tenant 3PL deployment, embedded into the DHL solutions-design standard, distributed across customer engagements as a DHL-branded capability, billed through to shipper customers inside contract-logistics service-level reporting. The unit of analysis is not "does DHL Supply Chain need a YMS" — DHL has yard tech where it needs records. The unit of analysis is "is the yard-execution layer the right next addition to the DHL operating standard, and does it productize the same way Locus and Boston Dynamics did?"',
+      pullQuote: 'The yard problem is not internal — it is customer-facing. Every facility you operate is a customer\'s yard.',
       caveat:
         'This is built from DHL Group public press releases, DHL Supply Chain announcements, the public partnership track record (Locus, Boston Dynamics, Orange EV, Nikola), the 2025 acquisition disclosures, and Adrian Kumar\'s published interviews and conference talks. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: which IDS / Inmar / ReTurn sites are running multi-tenant yard contention most acutely, where the operating-standard rewrite from the 2025 acquisitions is most receptive to a new layer, and how the joint-scoping opportunity at Diageo Plainfield could be sequenced.',
     },
@@ -270,6 +274,23 @@ export const dhlSupplyChain: AccountMicrositeData = {
     ],
     urgencyDriver:
       'Three windows are open simultaneously and they are not always open. First, the 2025 acquisitions (Inmar, IDS, CRYOPDP) are in active SOP integration — operating standards are being rewritten across 14+ yards right now, which is the cheapest moment for a new layer to enter. Second, the data-center logistics expansion (10 sites, 7M+ sq ft, announced March 2026) is a greenfield multi-tenant yard surface where solutions-design spec is materially cheaper than retrofit. Third, the Diageo Plainfield site is the live cross-reference: DHL operates the yard, Diageo measures the customer-experience surface, YardFlow is in conversation with both — that is the cleanest joint-scoping opportunity in the 3PL/CPG pipeline in 2026.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Productization template', body: 'Locus · 5,000+ bots, 35+ sites · Boston Dynamics · 1,000-unit MOU · Orange EV · ~100 NA yard trucks since 2015.' },
+    { mark: '2025 acquisitions', body: 'Inmar · 14 returns centers · IDS · 1.3M sq ft · CRYOPDP · 14+ yards in active SOP integration.' },
+    { mark: 'ReTurn Network', body: '11 multi-customer returns facilities · launched Oct 2025 · DHL\'s first publicly named multi-tenant network product.' },
+    { mark: 'Data-center logistics', body: '10 new sites · 7M+ sq ft · announced March 2026 · multi-hyperscaler by design.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for Adrian Kumar. The productization pattern your Solutions Design team has run for a decade — pilot a partner technology, roll it into a customer site, embed it into the DHL operating standard, distribute across the customer base — is the pattern that put Locus into 35+ sites, Stretch into the 1,000-unit MOU, and Orange EV from first-customer in 2015 to ~100 NA yard trucks. The five minutes that follow are about the yard-execution layer fitting that same template.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
