@@ -1,5 +1,6 @@
 import type { AccountMicrositeData } from '../schema';
 import { getFacilityCountLabel, getFacilityCountLowerBound } from '../../research/facility-fact-registry';
+import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 const GENERAL_MILLS_FACILITY_COUNT_LABEL = getFacilityCountLabel('General Mills', '41');
 const GENERAL_MILLS_FACILITY_COUNT = getFacilityCountLowerBound('General Mills', 41) ?? 41;
@@ -184,6 +185,8 @@ const GENERAL_MILLS_FACILITY_COUNT = getFacilityCountLowerBound('General Mills',
 export const generalMills: AccountMicrositeData = {
   slug: 'general-mills',
   accountName: 'General Mills',
+  coverHeadline: 'The yard layer above Accelerate',
+  titleEmphasis: 'above Accelerate',
   parentBrand: 'General Mills, Inc.',
   vertical: 'cpg',
   tier: 'Tier 1',
@@ -207,7 +210,8 @@ export const generalMills: AccountMicrositeData = {
         { label: 'Active restructuring', value: '$82M program closing 3 Missouri plants through 2026' },
       ],
       hypothesis:
-        'Two pressures meet at the yard at the same time. First, the Missouri plant closures push remaining facilities into 15-25% more trailer volume right now — the production lines absorbed the $82M investment, the yards did not. Second, the Palantir digital twin gives end-to-end supply chain visibility everywhere except the dock surface, so the closer the network gets to running on a single operating picture, the more the yard layer stands out as the one place still on local routines. Stack four temperature zones competing for the same dock doors at multi-category sites, and the yard becomes the surface where consolidation math, the HMM cost program, and digital transformation all stop translating into measured dollars. The new Belvidere DC is the cleanest counterpoint — greenfield yard, no legacy habits — which is why it tends to be the obvious first deployment.',
+        'Two pressures meet at the yard at the same time. First, the Missouri plant closures push remaining facilities into 15-25% more trailer volume right now — the production lines absorbed the $82M investment, the yards did not. Second, the Palantir digital twin gives end-to-end supply chain visibility everywhere except the dock surface, so the closer the network gets to running on a single operating picture, the more the yard layer stands out as the one place still on local routines.\n\nStack four temperature zones competing for the same dock doors at multi-category sites, and the yard becomes the surface where consolidation math, the HMM cost program, and the Accelerate operating discipline all stop translating into measured dollars. The new Belvidere DC is the cleanest counterpoint — greenfield yard, no legacy habits — which is why it tends to be the obvious first deployment, while Cedar Rapids is the hardest-tested brownfield candidate where twenty years of local routine has to be rewritten.',
+      pullQuote: 'The closer the network gets to running on a single operating picture, the more the yard layer stands out as the one place still on local routines.',
       caveat:
         'This is built from public filings, the 2025 Global Responsibility Report, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing on detention spend, dock-zone discipline, or how much existing YMS coverage is already in place across the 41 plants.',
     },
@@ -768,6 +772,23 @@ export const generalMills: AccountMicrositeData = {
     supplyChainInitiatives: ['Digital twin (Palantir)', 'Warehouse automation expansion', 'HMM cost savings program', 'Sustainability / Scope 3'],
     competitivePressure: 'Post mills CPG competitors investing in supply chain digitization',
     urgencyDriver: 'Missouri plant closures happening NOW - remaining facilities absorbing volume through 2026',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Accelerate strategy', body: 'Boldly build · relentlessly innovate · unleash scale · stand for good.' },
+    { mark: 'Restructuring', body: '$82M program · 3 Missouri plants closing through 2026.' },
+    { mark: 'Greenfield', body: 'Belvidere IL DC · opened April 2024 · Midwest hub, no legacy yard habits.' },
+    { mark: 'Gallagher in his own words', body: 'Run, Improve, and Transform. The yard is the part of Transform the digital twin cannot see yet.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for Paul Gallagher. The Run / Improve / Transform discipline that drove 230 basis points of gross-margin expansion has already reached planning and the Palantir digital twin. The five minutes that follow are about the one layer of Transform the digital twin cannot see yet.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
