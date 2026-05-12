@@ -66,6 +66,16 @@ export const kraftHeinz: AccountMicrositeData = {
         'This is built from public Kraft Heinz disclosures, the public yard-automation case record, Lighthouse press materials, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: whether site-level yard data actually ladders into Lighthouse in a way you can act on, whether the DeKalb yard-ops design has been spec\'d yet, and how the $3B plant investment is changing trailer arrival patterns at the sites where capex landed first.',
     },
     {
+      type: 'artifact',
+      headline: 'A coverage map for the operating system',
+      artifact: {
+        imageSrc: '/artifacts/kraft-heinz-lighthouse-tile.svg',
+        imageAlt: 'Operating-tower coverage map. Six tiles representing Kraft Heinz control-tower domains. Planning, Forecast, Demand, Inventory, and OTIF are covered. The Yard Network Ops tile is unfilled, marked with a Kraft Heinz red hairline outline.',
+        caption: 'Operating-tower coverage map · 1 tile unfilled.',
+        source: 'Composition modeled from public Lighthouse + Agile@Scale + OMP/o9 disclosures. Account names redacted.',
+      },
+    },
+    {
       type: 'comparable',
       headline: 'What a comparable network did when they closed the same gap',
       comparableName: 'Primo Brands',
