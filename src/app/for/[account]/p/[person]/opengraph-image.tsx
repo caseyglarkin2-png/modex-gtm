@@ -1,9 +1,24 @@
+/**
+ * Personalized OG image for /for/[account]?p=[person] shares.
+ *
+ * The canonical reader-aware page URL is /for/{account}?p={person} (the
+ * /for/{account}/{person} path redirects to it). When the page's
+ * generateMetadata resolves a ?p= reader, it points og:image at THIS
+ * route. Unfurl bots fetch this URL directly with no query string, so
+ * the personSlug rides in the path.
+ *
+ * Falls back gracefully: if the account is unknown → 404; if the
+ * person slug doesn't match a variant on the account → render the
+ * standard (non-personalized) OG.
+ */
+
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { ImageResponse } from 'next/og';
 import { notFound } from 'next/navigation';
 import { MicrositeMemoSocialImage } from '@/components/microsites/memo-social-image';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
+import { resolveReader } from '@/lib/microsites/reader-context';
 
 export const size = {
   width: 1200,
@@ -18,21 +33,6 @@ const PREPARED_DATE = new Date().toLocaleDateString('en-US', {
   year: 'numeric',
 });
 
-/**
- * Load the Fraunces and Mona Sans TTFs that ship in src/assets/fonts.
- *
- * We read the bytes off the filesystem with fs/promises rather than the
- * fetch(new URL(..., import.meta.url)) pattern: the fetch-import.meta
- * approach failed in production with a 500 because Next.js's Turbopack
- * build doesn't inline non-imported binary assets that way. fs.readFile
- * from process.cwd() is the documented escape hatch and works because
- * Vercel ships the entire project root with each Function bundle.
- *
- * Fraunces ships as a single variable TTF (opsz/wght/SOFT/WONK axes);
- * satori reads only one axis position, so we register it as the default
- * "Fraunces" family and let the renderer synthesize emphasis where the
- * social image needs it. Mona Sans is the Regular static cut.
- */
 async function loadMemoFonts() {
   const fontsDir = join(process.cwd(), 'src/assets/fonts');
   const [fraunces, monaSans] = await Promise.all([
@@ -42,14 +42,23 @@ async function loadMemoFonts() {
   return { fraunces, monaSans };
 }
 
-export default async function OpenGraphImage({
+export default async function PersonalizedOpenGraphImage({
   params,
 }: {
-  params: Promise<{ account: string }>;
+  params: Promise<{ account: string; person: string }>;
 }) {
-  const { account } = await params;
+  const { account, person } = await params;
   const data = getAccountMicrositeData(account);
   if (!data) notFound();
+
+  const reader = resolveReader(data, person);
+  const personName = reader?.variant.person.name ?? reader?.variant.person.firstName;
+  const personTitle = reader?.variant.person.title;
+  const preparedFor = personName
+    ? personTitle
+      ? `Prepared for ${personName} · ${personTitle}`
+      : `Prepared for ${personName}`
+    : undefined;
 
   const footprintShort = data.coverFootprint ?? data.network?.facilityCount;
   const verticalLabel = formatVertical(data.vertical);
@@ -70,23 +79,14 @@ export default async function OpenGraphImage({
         accountName={data.accountName}
         byline="YardFlow private brief · prepared by Casey Larkin"
         contextLine={contextLine}
+        preparedFor={preparedFor}
       />
     ),
     {
       ...size,
       fonts: [
-        {
-          name: 'Fraunces',
-          data: fonts.fraunces,
-          style: 'normal',
-          weight: 400,
-        },
-        {
-          name: 'Mona Sans',
-          data: fonts.monaSans,
-          style: 'normal',
-          weight: 400,
-        },
+        { name: 'Fraunces', data: fonts.fraunces, style: 'normal', weight: 400 },
+        { name: 'Mona Sans', data: fonts.monaSans, style: 'normal', weight: 400 },
       ],
     },
   );
