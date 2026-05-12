@@ -14,10 +14,14 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
+import { AUDIO_BRIEF_CHAPTERS, AUDIO_BRIEF_SRC } from '../audio-brief';
 
 export const georgiaPacific: AccountMicrositeData = {
   slug: 'georgia-pacific',
   accountName: 'Georgia-Pacific',
+  coverHeadline: 'The yard layer above Market-Based Management',
+  titleEmphasis: 'above Market-Based Management',
+  coverFootprint: '~150 sites · dual-flow under Koch MBM',
   parentBrand: 'Georgia-Pacific (Koch Industries)',
   vertical: 'building-materials',
   tier: 'Tier 2',
@@ -26,7 +30,7 @@ export const georgiaPacific: AccountMicrositeData = {
 
   pageTitle: 'Georgia-Pacific · The yard layer when one mill ships to retail and to contractors at the same time',
   metaDescription:
-    'Georgia-Pacific runs ~150 facilities across consumer tissue (Quilted Northern, Angel Soft, Brawny) and building products (plywood, OSB, gypsum) under Koch ownership. At the dual-flow sites, the yard arbitrates between two customer types with different appointment cadences and carrier mixes — and the operating layer above that arbitration is the unsolved seam.',
+    'Georgia-Pacific runs ~150 facilities across consumer tissue (Quilted Northern, Angel Soft, Brawny), building products (plywood, OSB, gypsum), and Cellulose specialty fibers under Koch ownership. At the dual-flow sites, the yard arbitrates between two customer types with different appointment cadences and carrier mixes — and the operating layer above that arbitration is the unsolved seam in an otherwise MBM-measured operating company.',
 
   sections: [
     { type: 'yns-thesis' },
@@ -35,14 +39,16 @@ export const georgiaPacific: AccountMicrositeData = {
       headline: 'What we observed about the Georgia-Pacific facility network',
       composition: [
         { label: 'US facility footprint', value: '~150 mills, plants, converting sites, and distribution centers across the US; ~30,000 employees. HQ Atlanta GA. Wholly-owned subsidiary of Koch Industries since the 2005 acquisition ($21B at the time).' },
-        { label: 'Dual business structure', value: 'Consumer products (tissue, towel, napkin, tableware) — Quilted Northern, Angel Soft, Brawny, Sparkle, Vanity Fair, Dixie — shipped toward retail DCs and foodservice distributors. Building products — plywood, OSB, lumber, gypsum (DensGlass, DensDeck), Plytanium, Wood I Beam — shipped toward contractor channels and building-products distributors.' },
+        { label: 'Dual business structure', value: 'Consumer products (tissue, towel, napkin, tableware) — Quilted Northern, Angel Soft, Brawny, Sparkle, Vanity Fair, Dixie — shipped toward retail DCs and foodservice distributors. Building products — plywood, OSB, lumber, gypsum (DensGlass, DensDeck), Plytanium, Wood I Beam — shipped toward contractor channels and building-products distributors. GP Cellulose — bleached pulp + specialty fibers across four mills (Brunswick GA, Crossett AR retained, Leaf River MS, Port Hudson LA) — adds an industrial-customer outbound on top of that.' },
         { label: 'Anchor mill examples', value: 'Brewton AL (paper/bleached board); Naheola AL (paper); Crossett AR (tissue operations retained after the 2019 bleached-board shutdown — ~500 retained jobs); Palatka FL (paper; $83M expansion + 400,000 sq ft warehouse breaking ground February 2026); Green Bay WI (tissue/towel capacity additions). Plywood/OSB and gypsum sites are distributed across the South and West.' },
         { label: 'Recent capex and M&A', value: 'Anchor Packaging acquisition closed October 2025 (Northeast Arkansas; sustainable food packaging). ~$550M sustainable-packaging capacity build completed 2025. Palatka $83M expansion plus warehouse breaks ground Feb 2026. The capex cadence inside Koch is described publicly as $7–12B/yr across the portfolio for acquisitions and facility upgrades through 2027.' },
         { label: 'Digital and AI posture', value: 'Point A supply-chain innovation center opened in Atlanta (2018). Public partnerships with SAS on AWS — more than 15,000 production ML models in service of plant operating settings. Computer-vision QA on inbound wood and fiber. Driver-facing mobile app for purchase-order entry and load weighing. GenAI piloted for manufacturing decision-support.' },
         { label: 'Koch operating context', value: 'Koch Industries operates against Market-Based Management — a framework that pushes operational metrics far down the organization and surfaces variance to leadership in a way most parent companies do not. Koch Engineered Solutions and Optimized Process Designs are internal logistics/engineering consulting groups inside the conglomerate.' },
       ],
       hypothesis:
-        'The interesting thing about the Georgia-Pacific yard math is that the question is dual-flow at a single site. Most CPG networks ship one kind of customer — retail DCs, foodservice depots, distributor warehouses. Most building-products networks ship one kind too — contractors, building-products distributors, big-box DCs. Georgia-Pacific does both, often inside the same operating company, sometimes inside the same site. The driver mobile app for inbound load weighing that G-P built sits at the gate. What it does not, on its own, decide is which dock door the driver belongs to when the same mill is loading rolls of Quilted Northern toward a Walmart DC appointment window and pallets of OSB toward a regional plywood-distributor truck that runs walk-in. Those are two different appointment cadences, two different carrier mixes, two different exception profiles, and the dock-door arbitration logic that gets them both through the same yard is genuinely harder than at a single-flow plant. That dual-flow complexity has been there as long as Georgia-Pacific has run consumer paper and building products under the same roof; what is new is the second pressure. The ~$550M sustainable-packaging build closed in 2025; the Anchor Packaging acquisition closed in October 2025; the Palatka FL paper-mill expansion plus a 400,000 sq ft warehouse begins construction in February 2026. Throughput is climbing at the plants where capex is landing first, and throughput-out-the-door becomes trailer-into-the-yard. The third pressure is the Koch operating context. Market-Based Management is, by reputation and by the public record, one of the most operationally measured environments in American industry — fifteen thousand production ML models tuning plant settings is not a yard number, but it is the signature of a parent company that has chosen to push metrics far down the org. That makes the yard layer at the dual-flow sites distinctive in a particular way: the variance exists and the operating philosophy is set up to see it, but the operating layer above the gate that would make the dual-flow yard deterministic across the network has not been built yet. The interior of the building has been digitized aggressively; the gate-to-dock layer at the site, and the network operating standard above the sites, is the unsolved seam.',
+        'The interesting thing about the Georgia-Pacific yard math is that the question is dual-flow at a single site. Most CPG networks ship one kind of customer — retail DCs, foodservice depots, distributor warehouses. Most building-products networks ship one kind too — contractors, building-products distributors, big-box DCs. Georgia-Pacific does both, often inside the same operating company, sometimes inside the same site, and the Cellulose business adds a third outbound (bleached pulp and specialty fibers running on industrial-customer cadence) on top of that. The driver mobile app for inbound load weighing that G-P built sits at the gate. What it does not, on its own, decide is which dock door the driver belongs to when the same mill is loading rolls of Quilted Northern toward a Walmart DC appointment window and pallets of OSB toward a regional plywood-distributor truck that runs walk-in. Those are two different appointment cadences, two different carrier mixes, two different exception profiles, and the dock-door arbitration logic that gets them both through the same yard is genuinely harder than at a single-flow plant. The mill-to-converting-to-DC chain inside Georgia-Pacific (paper mill rolls feed converting plants feed regional DCs feed retail-bound trailers) compounds that — every inter-node trailer move is a yard event at both ends, and the dual-flow gate problem repeats at three site types.\n\nThat dual-flow complexity has been there as long as Georgia-Pacific has run consumer paper and building products under the same roof; what is new is the second pressure. The ~$550M sustainable-packaging build closed in 2025; the Anchor Packaging acquisition closed in October 2025; the Palatka FL paper-mill expansion plus a 400,000 sq ft warehouse begins construction in February 2026. Throughput is climbing at the plants where capex is landing first, and throughput-out-the-door becomes trailer-into-the-yard.\n\nThe third pressure is the Koch operating context, and it is the one that gives this analysis its shape. Market-Based Management is, by reputation and by the public record, one of the most operationally measured frameworks in American industry — five dimensions (vision, virtue and talents, knowledge processes, decision rights, incentives) that push metric ownership and decision rights deep into the org, and fifteen thousand production ML models tuning plant settings is not a yard number but it is the signature of a parent company that has chosen to see variance. That makes the yard layer at the dual-flow sites distinctive in a particular way: the variance exists, MBM is set up to see it, and the operating layer above the gate that would make the dual-flow yard deterministic across the network has not been built yet. The interior of the building has been digitized aggressively; the gate-to-dock layer at the site, and the network operating standard above the sites, is the unsolved seam. The leadership transition reinforces the timing — Christian Fischer retired October 2025 after 35 years, Mark Luetters (Koch EVP, nine years running G-P building products) is interim, and a permanent CEO is to be named within 2026. The yard layer is the kind of standard a new operating leader gets to ratify rather than inherit.',
+      pullQuote:
+        'MBM is set up to see the variance. The yard layer above the gate is the one operating surface where it has not yet landed.',
       caveat:
         'Georgia-Pacific is privately held inside Koch Industries, which means the public-record material is meaningfully thinner than for a public-company peer of the same size. The facility count (~150), the brand footprint, the recent capex projects (Palatka, Green Bay, the sustainable-packaging build, the Anchor Packaging acquisition), and the AI/digital posture are all publicly disclosed; the internal yard operating standard, the dock-arbitration policy at any specific dual-flow site, the status of any Koch Engineered Solutions internal-logistics review of the yard layer, and the post-2019 network shape after the Crossett partial decommissioning are not. We may be wrong about parts of the picture above — the most useful thing to push back on is which dual-flow sites in the network actually handle both customer types in the same yard today, whether the gate-side digital posture (the driver app, the inbound CV QA) already feeds an operating layer above the sites that we cannot see, and how the Palatka warehouse breaking ground in February 2026 is changing the operating model on that mill\'s yard.',
     },
@@ -494,6 +500,7 @@ export const georgiaPacific: AccountMicrositeData = {
   signals: {
     eventAttendance: 'Past attendee list',
     recentNews: [
+      'CEO transition: Christian Fischer retired October 2025 after 35 years at G-P / Koch. Mark Luetters (Koch EVP; nine years running G-P building products) named interim president and CEO. A permanent long-term CEO is expected to be named within 2026.',
       'Palatka FL paper-mill expansion: $83M project plus 400,000 sq ft warehouse, construction breaks ground February 2026.',
       '~$550M sustainable-packaging capacity build completed in 2025.',
       'Anchor Packaging acquisition closed October 2025 — Northeast Arkansas sustainable food packaging footprint added.',
@@ -508,6 +515,23 @@ export const georgiaPacific: AccountMicrositeData = {
     ],
     urgencyDriver:
       'Throughput is climbing where the recent capex is landing first — the Palatka expansion (Feb 2026 ground-breaking, 400,000 sq ft warehouse), the sustainable-packaging build that closed in 2025, the Anchor Packaging integration that closed in late 2025. At a dual-flow site, additional throughput on the consumer-products side compresses dock time for the building-products outbound running against a different appointment regime. The yard-layer operating standard is the lever that scales with that throughput uplift rather than gets squeezed by it.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Koch operating context', body: 'Market-Based Management · five dimensions · decision rights pushed deep · 15,000+ production ML models tuning plant settings.' },
+    { mark: 'Dual-flow structure', body: 'Tissue / towel / tableware to retail DCs · plywood / OSB / gypsum to contractors and distributors · Cellulose to industrial buyers · sometimes the same mill.' },
+    { mark: 'Capex landing now', body: 'Palatka $83M + 400,000 sq ft warehouse breaks ground Feb 2026 · $550M sustainable-packaging build closed 2025 · Anchor Packaging integrated Oct 2025.' },
+    { mark: 'Leadership transition', body: 'Fischer retired Oct 2025 after 35 yrs · Luetters interim · permanent CEO named in 2026. The yard layer is a standard a new operator ratifies, not inherits.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+  ],
+
+  audioBrief: {
+    src: AUDIO_BRIEF_SRC,
+    intro:
+      'This brief is for the Georgia-Pacific supply-chain leadership team. The operating-system discipline Market-Based Management already applies to plant settings — five dimensions, decision rights pushed deep, fifteen thousand production ML models — reaches every interior surface of the building. The five minutes that follow are about the one operating surface above the gate where it has not yet landed.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
