@@ -125,9 +125,9 @@ export function MemoShell({
             'radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255,253,247,0.55) 0%, transparent 60%), #f5f1e8',
         }}
       >
-        <div className="mx-auto w-full max-w-5xl px-8 pb-24 pt-20 md:px-12">
+        <div className="mx-auto w-full max-w-5xl px-8 pb-24 pt-20 md:px-12 xl:max-w-6xl 2xl:max-w-7xl">
           <div
-            className={`memo-cover-rise memo-cover-rise-1 mb-24 flex flex-wrap items-center gap-3 border-b border-[#d8d2c2] pb-5 ${FONT_MONO} text-[10.5px] uppercase tracking-[0.22em] text-[#8a847b]`}
+            className={`memo-cover-rise memo-cover-rise-1 mb-24 flex flex-wrap items-center gap-3 border-b border-[#d8d2c2] pb-5 ${FONT_MONO} text-[11.5px] uppercase tracking-[0.22em] text-[#8a847b]`}
           >
             <span
               aria-hidden="true"
@@ -142,10 +142,10 @@ export function MemoShell({
           </div>
 
           <div
-            className={`memo-cover-rise memo-cover-rise-2 mb-16 flex flex-wrap items-baseline justify-between gap-4 ${FONT_SANS} text-[12px] tracking-[0.04em] text-[#8a847b]`}
+            className={`memo-cover-rise memo-cover-rise-2 mb-16 flex flex-wrap items-baseline justify-between gap-4 ${FONT_SANS} text-[13px] tracking-[0.04em] text-[#8a847b]`}
           >
             <span
-              className={`${FONT_MONO} text-[11px] uppercase tracking-[0.15em]`}
+              className={`${FONT_MONO} text-[12px] uppercase tracking-[0.15em]`}
             >
               Memo · {compactDate} · {docId}
             </span>
@@ -157,7 +157,7 @@ export function MemoShell({
             style={{
               fontVariationSettings: "'opsz' 130, 'SOFT' 50, 'WONK' 0",
               fontWeight: 360,
-              fontSize: 'clamp(2.5rem, 5.4vw, 4.25rem)',
+              fontSize: 'clamp(2.75rem, 4.4vw + 0.7rem, 5.5rem)',
               lineHeight: 1.02,
               letterSpacing: '-0.025em',
             }}
@@ -166,11 +166,12 @@ export function MemoShell({
           </h1>
 
           <dl
-            className="memo-cover-rise memo-cover-rise-4 mt-16 grid max-w-2xl grid-cols-[8rem_1fr] gap-x-6 border-t border-[#d8d2c2] pt-7 text-[15px] sm:grid-cols-[8rem_1fr]"
+            className="memo-cover-rise memo-cover-rise-4 mt-16 grid max-w-2xl grid-cols-[8rem_1fr] gap-x-6 border-t border-[#d8d2c2] pt-7 sm:grid-cols-[8rem_1fr]"
+            style={{ fontSize: 'clamp(15px, 0.35vw + 0.85rem, 17.5px)' }}
           >
             {recipientName ? (
               <>
-                <dt className={`pt-1 ${FONT_MONO} text-[10px] uppercase tracking-[0.18em] text-[#8a847b]`}>
+                <dt className={`pt-1 ${FONT_MONO} text-[11px] uppercase tracking-[0.18em] text-[#8a847b]`}>
                   Prepared for
                 </dt>
                 <dd className={`mb-3.5 ${FONT_SANS} text-[#1a1a1a]`}>
@@ -178,17 +179,17 @@ export function MemoShell({
                 </dd>
               </>
             ) : null}
-            <dt className={`pt-1 ${FONT_MONO} text-[10px] uppercase tracking-[0.18em] text-[#8a847b]`}>
+            <dt className={`pt-1 ${FONT_MONO} text-[11px] uppercase tracking-[0.18em] text-[#8a847b]`}>
               Subject
             </dt>
             <dd className={`mb-3.5 ${FONT_SANS} text-[#1a1a1a]`}>
               {contextDetail ? `${accountName} · ${contextDetail}` : accountName}
             </dd>
-            <dt className={`pt-1 ${FONT_MONO} text-[10px] uppercase tracking-[0.18em] text-[#8a847b]`}>
+            <dt className={`pt-1 ${FONT_MONO} text-[11px] uppercase tracking-[0.18em] text-[#8a847b]`}>
               Date
             </dt>
             <dd className={`mb-3.5 ${FONT_SANS} text-[#1a1a1a]`}>{formattedDate}</dd>
-            <dt className={`pt-1 ${FONT_MONO} text-[10px] uppercase tracking-[0.18em] text-[#8a847b]`}>
+            <dt className={`pt-1 ${FONT_MONO} text-[11px] uppercase tracking-[0.18em] text-[#8a847b]`}>
               Author
             </dt>
             <dd className={`mb-3.5 ${FONT_SANS} text-[#1a1a1a]`}>{authorByline}</dd>
@@ -198,7 +199,7 @@ export function MemoShell({
         {tocEntries.length > 0 ? (
           <a
             href={`#${tocEntries[0].id}`}
-            className={`memo-cover-fade absolute bottom-12 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1.5 ${FONT_MONO} text-[10.5px] uppercase tracking-[0.22em] text-[#8a847b] transition-colors hover:text-[color:var(--memo-accent)]`}
+            className={`memo-cover-fade absolute bottom-12 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1.5 ${FONT_MONO} text-[11.5px] uppercase tracking-[0.22em] text-[#8a847b] transition-colors hover:text-[color:var(--memo-accent)]`}
           >
             <span>Continue</span>
             <span aria-hidden="true" className="memo-cover-nudge text-[14px]">
@@ -210,40 +211,40 @@ export function MemoShell({
 
       {/* ── DOCUMENT BODY ────────────────────────────────────────── */}
       <main className="border-t border-[#d8d2c2] bg-[#f5f1e8] py-24 md:py-32">
-        <div className="mx-auto grid max-w-[76rem] grid-cols-1 gap-0 px-6 md:px-8 lg:grid-cols-[11rem_minmax(0,36rem)_14rem] lg:gap-12 lg:px-12">
+        <div className="mx-auto grid max-w-[78rem] grid-cols-1 gap-0 px-6 md:px-8 lg:grid-cols-[11rem_minmax(0,38rem)_14rem] lg:gap-12 lg:px-12 xl:max-w-[88rem] xl:grid-cols-[12rem_minmax(0,42rem)_16rem] 2xl:max-w-[94rem] 2xl:grid-cols-[13rem_minmax(0,44rem)_17rem]">
           <MemoContentsRail entries={tocEntries} />
 
           <article
             className={[
-              'memo-prose w-full max-w-[36rem] text-[#4a4641]',
+              'memo-prose w-full max-w-[38rem] text-[#4a4641] xl:max-w-[42rem] 2xl:max-w-[44rem]',
               FONT_SERIF,
             ].join(' ')}
             style={{
               fontVariationSettings: "'opsz' 14, 'SOFT' 50",
-              fontSize: '17.5px',
-              lineHeight: 1.72,
+              fontSize: 'clamp(17.5px, 0.55vw + 0.92rem, 21px)',
+              lineHeight: 1.68,
             }}
           >
             {children}
 
             <div
-              className="mx-auto mt-24 max-w-[36rem] border-t border-[#d8d2c2] pt-10 text-center text-[10.5px] uppercase tracking-[0.22em] text-[#8a847b]"
+              className="mx-auto mt-24 max-w-[38rem] border-t border-[#d8d2c2] pt-10 text-center text-[11.5px] uppercase tracking-[0.22em] text-[#8a847b] xl:max-w-[42rem] 2xl:max-w-[44rem]"
               style={{ lineHeight: 1.8 }}
             >
               <div
-                className={`mb-5 text-[18px] tracking-normal ${FONT_MONO}`}
+                className={`mb-5 text-[20px] tracking-normal ${FONT_MONO}`}
                 style={{ color: 'var(--memo-accent)' }}
               >
                 § ∎
               </div>
               {needsHandTuning ? (
-                <div className={`mb-3 ${FONT_MONO} text-[10px] uppercase tracking-[0.18em] text-[#a89e8b]`}>
+                <div className={`mb-3 ${FONT_MONO} text-[11px] uppercase tracking-[0.18em] text-[#a89e8b]`}>
                   Working analysis · v0
                 </div>
               ) : null}
               {`${accountName} · ${docId} · Issued ${formattedDate}`}
               <br />
-              <span className={`${FONT_SANS} text-[13px] normal-case tracking-normal text-[#4a4641]`}>
+              <span className={`${FONT_SANS} text-[14px] normal-case tracking-normal text-[#4a4641]`}>
                 Set in Fraunces &amp; Mona Sans · Composed by{' '}
                 <a
                   href="mailto:casey@freightroll.com"

@@ -181,7 +181,7 @@ export function MemoAudioBrief({
       {/* Eyebrow ─ matches the §-section eyebrow geometry but uses a non-§ mark
           (the audio register is a parallel register, not a numbered section). */}
       <p
-        className={`mb-4 flex items-center gap-2.5 text-[10px] uppercase tracking-[0.24em] ${FONT_MONO}`}
+        className={`mb-4 flex items-center gap-2.5 text-[11px] uppercase tracking-[0.24em] ${FONT_MONO}`}
       >
         <span aria-hidden="true" className="font-medium" style={{ color: 'var(--memo-accent)' }}>
           ▷
@@ -195,7 +195,7 @@ export function MemoAudioBrief({
         style={{
           fontVariationSettings: "'opsz' 60, 'SOFT' 50",
           fontWeight: 380,
-          fontSize: 'clamp(1.5rem, 2.4vw, 1.85rem)',
+          fontSize: 'clamp(1.65rem, 1.1vw + 1.15rem, 2.2rem)',
           lineHeight: 1.2,
           letterSpacing: '-0.012em',
         }}
@@ -241,7 +241,7 @@ export function MemoAudioBrief({
           <div className="flex flex-1 flex-col gap-2">
             <div
               id={`${playStripId}-label`}
-              className={`flex items-baseline justify-between text-[10px] uppercase tracking-[0.18em] text-[#8a847b] ${FONT_MONO}`}
+              className={`flex items-baseline justify-between text-[11.5px] uppercase tracking-[0.18em] text-[#8a847b] ${FONT_MONO}`}
             >
               <span>
                 {chapters[activeChapterIdx]
@@ -319,7 +319,7 @@ export function MemoAudioBrief({
       </div>
 
       {/* Chapter list */}
-      <ol className={`mt-2 ${FONT_SANS} text-[14px] text-[#4a4641]`}>
+      <ol className={`mt-2 ${FONT_SANS} text-[15px] text-[#4a4641]`}>
         {chapters.map((ch, i) => {
           const active = i === activeChapterIdx;
           return (
@@ -350,18 +350,18 @@ export function MemoAudioBrief({
               >
                 <span
                   className={[
-                    `text-[10.5px] uppercase tracking-[0.22em] ${FONT_MONO}`,
+                    `text-[11.5px] uppercase tracking-[0.22em] ${FONT_MONO}`,
                     active ? 'text-[color:var(--memo-accent)]' : 'text-[#8a847b]',
                   ].join(' ')}
                 >
                   {toRoman(i + 1)}
                 </span>
-                <span className={`${FONT_SERIF} text-[16px] leading-snug`} style={{ fontVariationSettings: "'opsz' 24, 'SOFT' 50" }}>
+                <span className={`${FONT_SERIF} text-[17.5px] leading-snug`} style={{ fontVariationSettings: "'opsz' 24, 'SOFT' 50" }}>
                   {ch.label}
                 </span>
                 <span
                   className={[
-                    `justify-self-end text-[10.5px] tabular-nums tracking-[0.04em] ${FONT_MONO}`,
+                    `justify-self-end text-[11.5px] tabular-nums tracking-[0.04em] ${FONT_MONO}`,
                     active ? 'text-[color:var(--memo-accent)]' : 'text-[#8a847b]',
                   ].join(' ')}
                 >
@@ -373,7 +373,7 @@ export function MemoAudioBrief({
         })}
       </ol>
 
-      <div className={`mt-12 text-center text-[11px] tracking-[0.4em] text-[#8a847b] ${FONT_MONO}`}>
+      <div className={`mt-12 text-center text-[12px] tracking-[0.4em] text-[#8a847b] ${FONT_MONO}`}>
         ∎ &nbsp;∎ &nbsp;∎
       </div>
     </section>
