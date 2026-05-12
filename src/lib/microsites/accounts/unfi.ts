@@ -72,6 +72,8 @@ import type { AccountMicrositeData } from '../schema';
 export const unfi: AccountMicrositeData = {
   slug: 'unfi',
   accountName: 'UNFI',
+  coverHeadline: 'The yard layer for The Great Consolidation',
+  titleEmphasis: 'The Great Consolidation',
   coverFootprint: '52 DCs · US + Canada',
   parentBrand: 'United Natural Foods, Inc.',
   vertical: 'grocery',
@@ -97,7 +99,8 @@ export const unfi: AccountMicrositeData = {
         { label: 'Dual chair + transformation seam', value: 'Bushway is President of Natural/Organic/Specialty & Fresh Products AND CSCO since January 2025 — divisional P&L plus enterprise supply chain in one seat. Erin Horvath joined in a new Chief Supply Chain Transformation Officer role separating "run the network" (Bushway) from "rebuild the operating model" (Horvath). Both names belong in any operating-model conversation' },
       ],
       hypothesis:
-        'The interesting thing about the UNFI yard math is the structural unevenness. The 2018 SuperValu acquisition brought a 2010-era yard RFID footprint into the company overnight — sized for the conventional-grocery wholesale Plains DC pattern, on a customer mix that included Cub Foods (now UNFI-owned) and a long tail of conventional independents. The legacy UNFI side that pre-dated SuperValu was the natural-organic specialist with a smaller-average-facility, refrigerated-heavy, cluster-near-Whole-Foods profile that never had the same RFID build-out investment. The Manchester PA and Sarasota FL new-builds being commissioned now run on whatever the current standard is — three generations of yard tooling across the same enterprise. That gap got more expensive in three steps in the last twenty-four months. First, The Great Consolidation closure cadence (Logan Township into Allentown, Billings + Bismarck, Fort Wayne, the Central region DCs, Sturtevant, Allentown closing in 2026) inherently compresses trailers through fewer surviving docks — same demand, fewer DCs, more trucks per surviving yard. Each closure is a forced yard-protocol decision at the receiving facility, because the inbound trailer pool changes shape with every closure. Second, the June 2024 cyberattack made cyber-and-operational resilience the screening criterion for every operating-technology proposal — vendors who do not have a documented graceful-degradation mode lose the meeting in the first conversation. Third, the January 2025 division split (Natural/Organic/Specialty/Fresh under Bushway, Conventional Grocery under a separate President, Retail under David Best running the Cub Foods / Shoppers banner business) made the yard the point where three divisions\' priorities meet — and there is no network-level yard operating system today that surfaces the right ownership lens at the right moment. The modernization wedge writes itself from this combination, and it writes itself in a particular shape: not rip-and-replace, but operating-model layer above the legacy SuperValu RFID footprint, the legacy UNFI natural-organic footprint, and the new-build third generation, with documented resilience under outage.',
+        'The interesting thing about the UNFI yard math is the structural unevenness. The 2018 SuperValu acquisition brought a 2010-era yard RFID footprint into the company overnight — sized for the conventional-grocery wholesale Plains DC pattern, on a customer mix that included Cub Foods (now UNFI-owned) and a long tail of conventional independents. The legacy UNFI side that pre-dated SuperValu was the natural-organic specialist with a smaller-average-facility, refrigerated-heavy, cluster-near-Whole-Foods profile that never had the same RFID build-out investment. The Manchester PA and Sarasota FL new-builds being commissioned now run on whatever the current standard is — three generations of yard tooling across the same enterprise.\n\nThat gap got more expensive in three steps in the last twenty-four months. First, The Great Consolidation closure cadence (Logan Township into Allentown, Billings + Bismarck, Fort Wayne, the Central region DCs, Sturtevant, Allentown closing in 2026) inherently compresses trailers through fewer surviving docks — same demand, fewer DCs, more trucks per surviving yard. Each closure is a forced yard-protocol decision at the receiving facility, because the inbound trailer pool changes shape with every closure. Second, the June 2024 cyberattack made cyber-and-operational resilience the screening criterion for every operating-technology proposal — vendors who do not have a documented graceful-degradation mode lose the meeting in the first conversation. Third, the January 2025 division split (Natural/Organic/Specialty/Fresh under Bushway, Conventional Grocery under a separate President, Retail under David Best running the Cub Foods / Shoppers banner business) made the yard the point where three divisions\' priorities meet — and there is no network-level yard operating system today that surfaces the right ownership lens at the right moment.\n\nThe modernization wedge writes itself from this combination, and it writes itself in a particular shape: not rip-and-replace, but operating-model layer above the legacy SuperValu RFID footprint, the legacy UNFI natural-organic footprint, and the new-build third generation, with documented resilience under outage. The Manchester PA + Sarasota FL greenfield window is the rare moment when the operating-model layer can ship into the building rather than retrofit around it — and The Great Consolidation closure cadence is the math that makes the operating-model layer above all three generations a margin lever, not an operating-cost line.',
+      pullQuote: 'Three generations of yard tooling are running across the same enterprise — and the closure cadence is shoving more trailers per dock through the surviving facilities every quarter.',
       caveat:
         'This is built from UNFI investor disclosures, the Great Consolidation analyst framing, the June 2024 cyberattack disclosures and recovery commentary, the published DC closure cadence, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: how much of the legacy SuperValu yard RFID footprint remains active after 3+ years of UNFI integration and the closure cadence, which surviving DCs are running closest to dock-cycle saturation in 2026, and how the Bushway-Horvath role split is currently coordinating around operating-model decisions vs. operating-network decisions.',
     },
@@ -294,6 +297,29 @@ export const unfi: AccountMicrositeData = {
     ],
     urgencyDriver:
       'Three generations of yard tooling are running across the same enterprise simultaneously — the legacy SuperValu RFID stack from 2018, the legacy UNFI natural-organic-specialty footprint, and the new-build third generation at Manchester PA and Sarasota FL. The Great Consolidation closure cadence compresses more trailers per dock through surviving facilities every quarter. The June 2024 cyberattack made cyber-and-operational resilience the screening criterion every vendor has to pass first. The Bushway-Horvath role split (operating + transformation) makes the operating-model layer above the site systems the explicit artifact both seats can sponsor. Efficiency-over-growth is the FY26 thesis the CEO is selling Wall Street, and yard efficiency translates directly to the margin line.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Three generations', body: 'Legacy SuperValu RFID (2018) · legacy UNFI natural-organic · Manchester PA + Sarasota FL new-build standard.' },
+    { mark: 'Closure cadence', body: 'Logan Township → Billings + Bismarck → Fort Wayne → Sturtevant → Allentown 2026. Same demand, fewer docks.' },
+    { mark: 'Greenfield window', body: 'Manchester PA opened Q1 FY25 · Sarasota FL H1 FY26. The rare moment the operating-model layer ships into the building.' },
+    { mark: 'Resilience screen', body: 'June 2024 cyberattack · $350M–$425M sales loss · cached-local, graceful-degradation is now the first filter every vendor passes.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for Mark Bushway. Twenty-three years of DC and regional GM seat-time inside UNFI — and the cyberattack-rebuild leadership of 2024 — is the operator discipline The Great Consolidation is being run on. The five minutes that follow are about the one layer above the three generations of yard tooling that is not yet running to a single standard.',
+    chapters: [
+      { id: 'thesis', label: 'I. Three generations of yard tooling, one enterprise', start: 0 },
+      { id: 'consolidation-math', label: 'II. What The Great Consolidation made expensive', start: 65 },
+      { id: 'resilience-screen', label: 'III. The cyberattack-resilience screening criterion', start: 130 },
+      { id: 'greenfield-window', label: 'IV. The Manchester + Sarasota greenfield window', start: 195 },
+      { id: 'first-pilot', label: 'V. What proof at the first consolidation-receiving DC earns', start: 260 },
+    ],
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
