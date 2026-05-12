@@ -42,10 +42,13 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
+import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 export const cjLogisticsAmerica: AccountMicrositeData = {
   slug: 'cj-logistics-america',
   accountName: 'CJ Logistics America',
+  coverHeadline: 'The next TES product-catalog entry after OneTrack',
+  titleEmphasis: 'after OneTrack',
   coverFootprint: '~70+ NA · 30M+ sq ft',
   parentBrand: 'CJ Logistics Corp (Seoul)',
   vertical: 'logistics-3pl',
@@ -71,7 +74,9 @@ export const cjLogisticsAmerica: AccountMicrositeData = {
         { label: 'OneTrack productization precedent', value: '6-year partnership; deployed across 40+ CJ Logistics America locations; 73% reduction in potential safety events (up to 98% at some sites); 11% average UPH increase; 60% product damage reduction; Feb 2025 GlobeNewswire announcement explicitly recommitted to expansion. The productization template Adams\' team has executed at scale' },
       ],
       hypothesis:
-        'The interesting thing about CJ Logistics America is not whether the company needs yard tools at the four walls — there are tools at parts of the network today, the DSC-era Mira Loma site-level deployment among them, and operations continue. The interesting thing is the structural distance between the records layer and the execution-and-orchestration layer, in a 3PL operating model where every facility is a customer-facing yard. Multi-customer DCs (the IDS Fulfillment acquisition pattern, the cold-chain sites at Gainesville and New Century, the Elwood mega-center coming online in H1 2026, the NEXUS Korea-US trade-lane hubs) are by definition multi-tenant — different shipper fleets compete for the same dock under shipper-specific appointment rules. The TES function under Adams\' SVP-plus-Continuous-Improvement remit is structurally the right buyer for that gap, not because CJ Logistics America has an internal yard problem in the way an end-shipper does, but because TES exists to identify a customer-side need, pilot a partner technology, validate the KPIs, scale across the network, and productize for the customer base. OneTrack is the most recent precedent (6 years, 40+ sites, 73% safety event reduction, 11% UPH lift, Feb 2025 expansion announcement). The yard-execution layer is the natural next adjacency to that productization model — for two reasons. First, the WMS-agnostic architecture principle Adams has stated on the record is a discriminating differentiator: legacy enterprise YMS tools are typically anchored to a single WMS estate, where a 3PL operating Blue Yonder + Korber + SAP EWM simultaneously per customer choice cannot use that without re-engineering. Second, the Elwood Phase 2 mega-center and the NEXUS Project hubs are greenfield — and the cost of specifying network-tier yard orchestration into a TES-engineered greenfield is materially lower than retrofitting it after the building goes live.',
+        'The interesting thing about CJ Logistics America is not whether the company needs yard tools at the four walls — there are tools at parts of the network today, and operations continue. The interesting thing is the structural distance between the records layer and the execution-and-orchestration layer, in a 3PL operating model where every facility is a customer-facing yard. Multi-customer DCs (the cold-chain sites at Gainesville and New Century, the Elwood mega-center coming online in H1 2026, the NEXUS Korea-US trade-lane hubs) are by definition multi-tenant — different shipper fleets compete for the same dock under shipper-specific appointment rules. The competitive question is not whether the freight moves; it is whether yard-execution discipline becomes a CJ-branded capability or stays a line item peer 3PLs all under-deliver on equally.\n\nThe TES function under Adams\' SVP-plus-Continuous-Improvement remit is structurally the right buyer for that gap, not because CJ Logistics America has an internal yard problem in the way an end-shipper does, but because TES exists to identify a customer-side need, pilot a partner technology, validate the KPIs, scale across the network, and productize for the customer base. OneTrack is the most recent precedent (6 years, 40+ sites, 73% safety event reduction, 11% UPH lift, Feb 2025 expansion announcement). The yard-execution layer is the natural next adjacency to that productization model.\n\nTwo things make the timing distinctive. First, the WMS-agnostic architecture principle Adams has stated on the record is a discriminating differentiator: legacy enterprise YMS tools are typically anchored to a single WMS estate, where a 3PL operating Blue Yonder + Korber + SAP EWM simultaneously per customer choice cannot use that without re-engineering. Second, the Elwood Phase 2 mega-center and the NEXUS Project hubs are greenfield — and the cost of specifying network-tier yard orchestration into a TES-engineered greenfield is materially lower than retrofitting it after the building goes live.',
+      pullQuote:
+        'The competitive question is not whether the freight moves; it is whether yard-execution discipline becomes a CJ-branded capability or stays a line item peer 3PLs all under-deliver on equally.',
       caveat:
         'This is built from CJ Logistics America public press releases, the OneTrack partnership announcements, the Korea Ocean Business Corporation joint-investment disclosures, Adams\' on-record interviews (Inbound Logistics May 2025, Robotics 24/7), and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: which sites are most receptive to entering the TES product catalog right now, whether the Elwood Phase 2 yard-ops design has been scoped yet, and how the cold-chain sites (Gainesville, New Century) are handling multi-customer trailer arbitration today.',
     },
@@ -273,6 +278,23 @@ export const cjLogisticsAmerica: AccountMicrositeData = {
     ],
     urgencyDriver:
       'Three windows are open simultaneously and they are not always open. First, the Elwood Phase 2 mega-center (1.1M sq ft, H1 2026) and the additional NEXUS Project hubs are greenfield yard-ops design opportunities where embedding network-tier orchestration at the design phase is materially cheaper than retrofitting later. Second, the OneTrack expansion (Feb 2025 announcement) shows the TES productization cadence is in active expansion mode — the catalog is taking new entries, not closed. Third, Adams\' January 2025 Continuous Improvement scope addition means the operating-KPI scorecard for what TES productizes is now explicit, and yard-execution KPIs (dwell, gate-to-dock cycle, dock contention) are exactly the category Continuous Improvement programs need ammunition for.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'OneTrack precedent', body: '6-year partnership · 40+ sites · 73% safety event reduction · 11% UPH lift · Feb 2025 expansion announcement.' },
+    { mark: 'Greenfield window', body: 'Elwood IL Phase 2 · 1.1M sq ft · H1 2026 · Korea Ocean Business Corporation $457M co-investment.' },
+    { mark: 'Adams on the record', body: 'WMS-agnostic by design. Blue Yonder + Korber + SAP EWM run in parallel per customer choice.' },
+    { mark: 'Continuous Improvement', body: 'Adams\' January 2025 SVP scope addition · the operating-KPI scorecard for what TES productizes.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for Laura Adams. The productization pattern your team ran for six years with OneTrack — one site to 40+, 73% safety event reduction, 11% UPH lift, Feb 2025 expansion announcement — is the pattern the next five minutes builds on. What follows is the yard-execution layer as the next entry in the TES product catalog.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
