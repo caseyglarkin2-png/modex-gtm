@@ -227,7 +227,7 @@ function MemoAside({ mark, children }: { mark: string; children: ReactNode }) {
         'text-[14.5px] leading-[1.55] text-[#8a847b]',
         FONT_SANS,
         // Desktop — float right into the gutter, lose the box, keep the rule.
-        'lg:float-right lg:clear-right lg:w-56 lg:-mr-[17rem] lg:my-1 lg:ml-0 xl:w-64 xl:-mr-[19rem] 2xl:w-[18rem] 2xl:-mr-[21rem]',
+        'lg:float-right lg:clear-right lg:w-48 lg:-mr-[15rem] lg:my-1 lg:ml-0 xl:w-56 xl:-mr-[17rem] 2xl:w-64 2xl:-mr-[19rem]',
         'lg:border-l lg:border-l-[#d8d2c2] lg:bg-transparent lg:px-4 lg:py-0',
         'lg:text-[12.5px] lg:leading-[1.5] lg:text-[#8a847b] xl:text-[13px]',
       ].join(' ')}

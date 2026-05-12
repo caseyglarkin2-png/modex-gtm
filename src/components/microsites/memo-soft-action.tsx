@@ -30,7 +30,7 @@ export function MemoSoftAction({ accountName, href, description }: MemoSoftActio
   return (
     <section
       data-ms-section-id="soft-action"
-      className={`mx-auto my-16 max-w-[40rem] border-y border-[#d8d2c2] py-10 px-4 text-center text-[#4a4641] xl:max-w-[48rem] 2xl:max-w-[56rem] ${FONT_SERIF}`}
+      className={`mx-auto my-14 max-w-[40rem] border-y border-[#d8d2c2] py-10 px-4 text-center text-[#4a4641] xl:max-w-[52rem] 2xl:max-w-[64rem] ${FONT_SERIF}`}
       style={{
         fontVariationSettings: "'opsz' 18, 'SOFT' 80",
         fontStyle: 'italic',
