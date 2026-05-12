@@ -1,0 +1,117 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1600 900"
+  role="img"
+  aria-label="Brewery network coverage map: six tiles representing Boston Beer brewery sites and contract footprint. PA Brewery, Cincinnati OH, Milton DE, Jamaica Plain MA, and Contract Brewing are covered; Yard Network Ops is unfilled."
+>
+  <!-- Cream background to blend with memo body -->
+  <rect width="1600" height="900" fill="#f5f1e8" />
+
+  <g font-family="'Courier New', ui-monospace, SFMono-Regular, Menlo, monospace">
+    <!-- Top eyebrow -->
+    <text x="80" y="64" fill="#8a847b" font-size="14" letter-spacing="3.5" font-weight="500">
+      BREWERY NETWORK COVERAGE MAP
+    </text>
+    <text x="1520" y="64" text-anchor="end" fill="#8a847b" font-size="14" letter-spacing="2.5" font-weight="500">
+      6 TILES · 5 COVERED · 1 UNFILLED
+    </text>
+
+    <!-- Hairline rule under eyebrow -->
+    <line x1="80" y1="90" x2="1520" y2="90" stroke="#d8d2c2" stroke-width="1" />
+
+    <!-- ── Tile 1 : PA BREWERY ───────────────────────────────────── -->
+    <rect x="80" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="110" cy="160" r="4" fill="#a89e8b" />
+    <text x="310" y="285" text-anchor="middle" fill="#1a1a1a" font-size="28" font-weight="600" letter-spacing="6">
+      PA BREWERY
+    </text>
+    <text x="310" y="320" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      Breinigsville · largest plant
+    </text>
+    <text x="310" y="355" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 2 : CINCINNATI OH ───────────────────────────────────── -->
+    <rect x="570" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="600" cy="160" r="4" fill="#a89e8b" />
+    <text x="800" y="285" text-anchor="middle" fill="#1a1a1a" font-size="28" font-weight="600" letter-spacing="6">
+      CINCINNATI OH
+    </text>
+    <text x="800" y="320" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      4× canning · packaging anchor
+    </text>
+    <text x="800" y="355" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 3 : MILTON DE ─────────────────────────────────────── -->
+    <rect x="1060" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="1090" cy="160" r="4" fill="#a89e8b" />
+    <text x="1290" y="285" text-anchor="middle" fill="#1a1a1a" font-size="28" font-weight="600" letter-spacing="6">
+      MILTON DE
+    </text>
+    <text x="1290" y="320" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      Dogfish Head · acquired 2019
+    </text>
+    <text x="1290" y="355" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 4 : JAMAICA PLAIN MA ──────────────────────────────────── -->
+    <rect x="80" y="480" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="110" cy="510" r="4" fill="#a89e8b" />
+    <text x="310" y="625" text-anchor="middle" fill="#1a1a1a" font-size="24" font-weight="600" letter-spacing="5">
+      JAMAICA PLAIN
+    </text>
+    <text x="310" y="660" text-anchor="middle" fill="#1a1a1a" font-size="24" font-weight="600" letter-spacing="5">
+      MA
+    </text>
+    <text x="310" y="695" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      heritage · taproom
+    </text>
+    <text x="310" y="725" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 5 : CONTRACT BREWING ───────────────────────────────────────── -->
+    <rect x="570" y="480" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
+    <circle cx="600" cy="510" r="4" fill="#a89e8b" />
+    <text x="800" y="625" text-anchor="middle" fill="#1a1a1a" font-size="24" font-weight="600" letter-spacing="5">
+      CONTRACT
+    </text>
+    <text x="800" y="660" text-anchor="middle" fill="#1a1a1a" font-size="24" font-weight="600" letter-spacing="5">
+      BREWING
+    </text>
+    <text x="800" y="695" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      City Brewing · WI / TN / PA / CA
+    </text>
+    <text x="800" y="725" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+      — covered —
+    </text>
+
+    <!-- ── Tile 6 : YARD NETWORK OPS  (unfilled — accent border) ── -->
+    <rect x="1060" y="480" width="460" height="320" fill="none" stroke="#8B1A1A" stroke-width="2" />
+    <circle cx="1090" cy="510" r="4" fill="none" stroke="#8B1A1A" stroke-width="1.5" />
+    <text x="1290" y="615" text-anchor="middle" fill="#8B1A1A" font-size="24" font-weight="700" letter-spacing="6">
+      YARD NETWORK
+    </text>
+    <text x="1290" y="655" text-anchor="middle" fill="#8B1A1A" font-size="24" font-weight="700" letter-spacing="6">
+      OPS
+    </text>
+    <text x="1290" y="690" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="2" font-weight="500">
+      dock-cycle measurement layer
+    </text>
+    <text x="1290" y="720" text-anchor="middle" fill="#a89e8b" font-size="13" letter-spacing="3" font-weight="500">
+      — unfilled —
+    </text>
+
+    <!-- Hairline rule above source attribution -->
+    <line x1="80" y1="840" x2="1520" y2="840" stroke="#d8d2c2" stroke-width="1" />
+
+    <!-- Bottom source attribution -->
+    <text x="800" y="872" text-anchor="middle" fill="#a89e8b" font-size="12" letter-spacing="2.5" font-weight="500">
+      COMPOSITION · PUBLIC-RECORD BOSTON BEER DISCLOSURES · SITE-LEVEL YARD VENDORS REDACTED
+    </text>
+  </g>
+</svg>
