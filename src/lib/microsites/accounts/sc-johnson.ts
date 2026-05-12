@@ -60,10 +60,14 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
+import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 export const scJohnson: AccountMicrositeData = {
   slug: 'sc-johnson',
   accountName: 'SC Johnson',
+  coverHeadline: 'The network layer above the per-site yard tools',
+  titleEmphasis: 'above the per-site yard tools',
+  coverFootprint: 'Waxdale · Bay City · Brantford · Toluca',
   parentBrand: 'S.C. Johnson & Son, Inc.',
   vertical: 'cpg',
   tier: 'Tier 1',
@@ -88,7 +92,8 @@ export const scJohnson: AccountMicrositeData = {
         { label: 'Ownership posture', value: 'Privately held, controlled by the Johnson family (Fisk Johnson Chairman and CEO, fifth-generation). ~$13B revenue (2025); ~13,000 employees globally. Long-horizon capex posture — multi-decade family-stewardship time, not quarterly-EPS pressure. EPR/sustainability advocacy (Fisk testified to US Senate Committee on Environment & Public Works March 2024)' },
       ],
       hypothesis:
-        'The interesting thing about the SC Johnson yard math is that the mixed-fleet outbound is structurally harder than any of the household-goods CPG peers Rick Camacho ran supply chain at before (Reckitt, Hershey, Danone). Aerosols + ambient liquids + Ziploc cube-extreme + B2B Professional is a four-modality outbound — and no two trailers in the yard have the same constraints. Hazmat aerosols have DOT-regulated routing and dock-door rules that constrain yard flexibility; Ziploc cubes out at a fraction of weight limit so trailer count is disproportionately high for tonnage; ambient liquids run standard CPG truckload economics; B2B Professional channel runs on different appointment cadence than retail. Per-site yard tools handle these mixes with site-specific rules — what gets lost is network-level standardization across the mix. Two things change the math in 2026. First, the Brantford Canadian DC consolidation (announced March 2024) is the canonical yard-bottleneck-creation event — same demand, fewer DCs, more trailers per surviving yard. Second, the Westfahl seam: Jamie Westfahl joined as CPO in January 2025 from Molson Coors with $3.5B packaging-procurement responsibility. Logistics-carrier procurement (carrier rates, carrier-experience metrics, demurrage and detention spend, 3PL contract terms) sits exactly at the Camacho-Westfahl seam — both within their first three years in seat, both with cross-functional incentive to make the carrier-experience number visible at the network level. The Waxdale criticality concentration is the structural risk: one plant carrying an outsized fraction of the brand portfolio means yard disruption at Waxdale ripples through Glade, Raid, Off!, Pledge, Scrubbing Bubbles, and Windex simultaneously. The criticality concentration here is much higher than at more-distributed networks like Kraft Heinz or General Mills, and the operating-model layer above the per-site tool is the lever that protects single-site risk without adding capex.',
+        'The interesting thing about the SC Johnson yard math is that the mixed-fleet outbound is structurally harder than any of the household-goods CPG peers Rick Camacho ran supply chain at before (Reckitt, Hershey, Danone). Aerosols + ambient liquids + Ziploc cube-extreme + B2B Professional is a four-modality outbound — and no two trailers in the yard have the same constraints. Hazmat aerosols have DOT-regulated routing and dock-door rules that constrain yard flexibility; Ziploc cubes out at a fraction of weight limit so trailer count is disproportionately high for tonnage; ambient liquids run standard CPG truckload economics; B2B Professional channel runs on different appointment cadence than retail. Per-site yard tools handle these mixes with site-specific rules — what gets lost is network-level standardization across the mix.\n\nTwo things change the math in 2026. First, the Brantford Canadian DC consolidation (announced March 2024) is the canonical yard-bottleneck-creation event — same demand, fewer DCs, more trailers per surviving yard. Second, the Westfahl seam: Jamie Westfahl joined as CPO in January 2025 from Molson Coors with $3.5B packaging-procurement responsibility. Logistics-carrier procurement (carrier rates, carrier-experience metrics, demurrage and detention spend, 3PL contract terms) sits exactly at the Camacho-Westfahl seam — both within their first three years in seat, both with cross-functional incentive to make the carrier-experience number visible at the network level.\n\nThe Waxdale criticality concentration is the structural risk: one plant carrying an outsized fraction of the brand portfolio means yard disruption at Waxdale ripples through Glade, Raid, Off!, Pledge, Scrubbing Bubbles, and Windex simultaneously. The criticality concentration here is much higher than at more-distributed networks like Kraft Heinz or General Mills, and the operating-model layer above the per-site tool is the lever that protects single-site risk without adding capex.',
+      pullQuote: 'No two trailers in the yard have the same constraints.',
       caveat:
         'This is built from SC Johnson public disclosures, Fisk Johnson\'s sustainability and EPR advocacy, the Brantford / Bay City expansion press materials, Camacho\'s public career record, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: whatever per-site yard tool runs at Waxdale and Bay City today, where the Brantford Canadian DC consolidation is creating the most pressure at surviving sites, and how the Westfahl-Camacho procurement-supply-chain seam currently coordinates carrier-experience metrics across the network.',
     },
@@ -278,6 +283,23 @@ export const scJohnson: AccountMicrositeData = {
     ],
     urgencyDriver:
       'SC Johnson\'s outbound trailer population is structurally not uniform — hazmat aerosols, cube-heavy Ziploc plastics, ambient liquid cleaners, and B2B Professional-channel loads share the same yard surface at every plant. Per-site yard tools where they exist handle this with site-specific rules; the network-tier operating model above them is the gap. The Brantford Canadian DC consolidation (announced March 2024) is loading more trailers through surviving Canadian sites right now. Mass-retail MABD penalty pressure at Walmart, Target, Costco, Sam\'s, Kroger, and Amazon has tightened materially through 2024–2025 — DC operating cost is one of the few levers that does not trade off against merchandising. The family-ownership long-horizon capex posture plays particularly well to a network-tier operating-model investment that takes 18–36 months to fully land and pays back through the decade.',
+  },
+
+  marginaliaItems: [
+    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Waxdale concentration', body: 'World\'s largest single-site aerosol plant · 2.2M sq ft · 430M cans/year · 60M cases/year · outsized brand-portfolio exposure.' },
+    { mark: 'Four-modality outbound', body: 'Hazmat aerosols + cube-extreme Ziploc + ambient liquids + B2B Professional on shared yard surface at every plant.' },
+    { mark: 'Brantford pressure', body: '$50M Glade investment · Canadian DC consolidation · March 2024 · more trailers through surviving yards.' },
+    { mark: 'Family-ownership window', body: 'Fifth-generation Johnson family · ~$13B private · long-horizon capex posture, not quarterly-EPS pressure.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+  ],
+
+  audioBrief: {
+    src: '/audio/yard-network-brief.mp3',
+    intro:
+      'This brief is for Rick Camacho. The standards-and-procedures discipline you carried from the Navy SWO foundation through P&G, Reckitt, Coca-Cola HBC, Hershey, and Danone is the discipline that turns a four-modality mixed-fleet outbound into one operating standard. The five minutes that follow are about the network-tier layer above the per-site yard tools at Waxdale, Bay City, Brantford, and Toluca — the lever the long-horizon family-ownership capex window is well-shaped to fund.',
+    chapters: AUDIO_BRIEF_CHAPTERS,
+    generatedAt: '2026-05-12T00:00:00Z',
   },
 
   theme: {
