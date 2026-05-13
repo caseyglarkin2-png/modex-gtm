@@ -90,7 +90,7 @@ export const keurigDrPepper: AccountMicrositeData = {
       comparableProfile:
         'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes out gross-vehicle weight before it maxes cube), low-margin (so every minute of yard waste is a margin point you can\'t recover with price), shipped across multi-temp (premium spring and alkaline SKUs sit alongside ambient), and complicated by refillable-format returns logistics. Primo is also years ahead of every other CPG category on yard automation — they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-level yard operating model on top of their existing site-level systems. The shape overlap with Keurig Dr Pepper is in the structural seams, not in the freight itself: multi-site, multi-temp, mix of company-owned and partner-distributed volume, plants feeding both retail and DC, yard layer still running on local routines before the network-operating layer landed. Primo\'s freight is genuinely harder per trailer than KDP\'s. KDP\'s distribution model is genuinely more complex than Primo\'s. If a network operating model can run on the harder freight at Primo, the read-across to hybrid-distribution beverage at KDP is the easier lift in the freight dimension and a parallel lift in the coordination dimension — same operating model, different seam to arbitrate, and the Primo deployment is the public proof that the coordination layer can hold across multi-site beverage at scale.',
       metrics: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
@@ -265,7 +265,7 @@ export const keurigDrPepper: AccountMicrositeData = {
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Running the full network-level yard operating model at comparable beverage and CPG operations' },
         { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar multi-site networks' },
-        { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+        { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at comparable beverage facilities' },
       ],
     },

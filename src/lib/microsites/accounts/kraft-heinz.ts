@@ -82,7 +82,7 @@ export const kraftHeinz: AccountMicrositeData = {
       comparableProfile:
         'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes out gross-vehicle weight before it maxes cube), low-margin (so every minute of yard waste is a margin point you can\'t recover with price), and shipped across multi-temp (premium SKUs sit alongside ambient). Primo is also years ahead of every other CPG category on yard automation and digitization — they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-level yard operating model on top of their existing site-level yard systems. The Kraft Heinz operating profile is similar in shape — multi-site, multi-temp, 3PL-dependent, mature site-level yard automation already in place — but with significantly more forgiving freight economics per trailer. Primo runs the operating layer Lighthouse is shaped to host — same coordinates, harder freight.',
       metrics: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },

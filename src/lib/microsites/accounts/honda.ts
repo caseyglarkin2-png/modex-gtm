@@ -112,7 +112,7 @@ export const honda: AccountMicrositeData = {
       comparableProfile:
         "Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes out gross-vehicle weight before it maxes cube), low-margin (every minute of yard waste is a margin point you can't recover with price), shipped across multi-temp (premium SKUs sit alongside ambient), and complicated by refillable-format return logistics. Primo is years ahead of every other CPG category on yard automation and digitization — they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-level yard operating model on top of their existing site-level yard systems. The Honda operating profile is a different vertical with the same structural shape: multi-site, multi-supplier, multi-input, with mature in-plant operating discipline already in place and the network-level yard layer above the sites as the unsolved seam. The freight comparison runs the opposite direction from the usual read-across — Primo's freight is harder per case, but a Honda flex-line plant has a tighter tolerance per minute than any beverage plant in the country. If a network operating model can run on water — the operationally hardest CPG freight — the read-across to a JIT-flex automotive network is a different vertical with the same shape, not a harder lift. The hard-freight discipline translates down to the JIT-assembly cadence; if a bottled-water network can dock-turn in 24 minutes, the line-side delivery window is the same physics. The shape Primo built above its plants is the same shape Honda's JIT discipline would extend above the dock: standardized work, sequenced flow, and stop-authority at the layer that today still runs on radios.",
       metrics: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
@@ -464,14 +464,14 @@ export const honda: AccountMicrositeData = {
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured across live deployments' },
         { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
-        { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+        { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at manufacturing facilities' },
       ],
     },
     {
       type: 'quote',
       quote: {
-        text: 'Primo Brands operates more than 200 contracted facilities on the same production-and-distribution model. YardFlow cut their gate-to-dock time from 48 to 24 minutes.',
+        text: 'Primo Brands operates more than 200 contracted facilities on the same production-and-distribution model. YardFlow cut their gate-to-dock time on drop-and-hook trailers from 48 to 24 minutes.',
         role: 'Operations Director',
         company: 'National Beverage Manufacturer',
       },

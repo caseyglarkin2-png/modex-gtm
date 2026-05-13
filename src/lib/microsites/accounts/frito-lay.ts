@@ -88,7 +88,7 @@ export const fritoLay: AccountMicrositeData = {
       comparableProfile:
         'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes out gross-vehicle weight before it maxes cube), low-margin (so every minute of yard waste is a margin point you can\'t recover with price), and shipped across multi-temp (premium SKUs sit alongside ambient). Primo is also years ahead of every other CPG category on yard automation and digitization — they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-level yard operating model on top of their existing site-level yard systems. The Frito-Lay operating profile is the same shape — multi-site, multi-fleet, DSD-dependent, plant-floor automation already in motion under pep+ — but with significantly more forgiving freight economics per trailer and a velocity profile that turns every saved dock minute into network-level capacity. Primo runs the operating layer pep+ is shaped to host — same coordinates, harder freight.',
       metrics: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted · 30-min remote deployment', delta: 'measured' },
@@ -469,7 +469,7 @@ export const fritoLay: AccountMicrositeData = {
       stats: [
         { value: '24', label: 'Facilities Live' },
         { value: '>200', label: 'Contracted Network' },
-        { value: '48-to-24', label: 'Min Truck Turn Time' },
+        { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)' },
         { value: '$1M+', label: 'Per-Site Profit Impact' },
       ],
     },

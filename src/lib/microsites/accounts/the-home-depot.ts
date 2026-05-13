@@ -121,7 +121,7 @@ export const theHomeDepot: AccountMicrositeData = {
       comparableProfile:
         'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes out gross-vehicle weight before it maxes cube), low-margin (every minute of yard waste is a margin point you cannot recover with price), shipped across multi-temp (premium SKUs sit alongside ambient), and complicated by return logistics for refillable formats. Primo is also years ahead of every other CPG category on yard automation and digitization — they had to be. They run a multi-site bottling and distribution network feeding stores, foodservice, and direct-to-consumer, and they have layered a network-level yard operating model on top of the site-level yard systems each plant already had. The Home Depot operating profile is shaped differently — retail rather than CPG, multi-channel rather than multi-temp — but the underlying problem rhymes: multiple flow types arbitrating across shared dock infrastructure, where the site-by-site answer is not the same as a network answer. If a network can run this operating model on water — weight-out before cube-out, returns flow on top of forward flow, premium SKUs sharing the dock with ambient — the read-across to multi-channel retail (B2C delivery, contractor pickup, store replenishment sharing the same MDO) is the easier lift, not the harder one. The freight category is different; the network-coordination-across-flows shape is the same — and the post-buildout pivot Richard McPhail named publicly (the utilization-and-gross-margin-extraction chapter) is precisely the chapter Primo is already running, where the network operating model above existing site-level tooling is where the operating leverage compounds.',
       metrics: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
@@ -570,7 +570,7 @@ export const theHomeDepot: AccountMicrositeData = {
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured across live deployments at a comparable multi-flow network' },
         { value: '>200', label: 'Contracted Network', context: 'Contracted rollout cadence across comparable operating profiles' },
-        { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+        { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at comparable multi-channel facilities' },
       ],
     },

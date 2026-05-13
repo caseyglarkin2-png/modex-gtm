@@ -83,7 +83,7 @@ export const caterpillar: AccountMicrositeData = {
       comparableProfile:
         'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water maxes gross vehicle weight before it maxes cube, it is low-margin (so every minute of yard waste is a margin point unrecoverable with price), and it is shipped across multi-temp lanes with refillable return logistics. Primo is also years ahead of every other CPG category on yard automation and network-level digitization — they had to be, because the category cost them first. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and regional DCs, and they have layered a network-level yard operating model on top of their site-level yard systems. The read-across to Caterpillar is the inverse of the usual comparable framing: Primo\'s freight is hardest *per case*, Caterpillar\'s freight is hardest *per load*. The dock-arbitration logic is shaped differently — fewer load events for Caterpillar, more dock real estate per event, longer staging windows, customization sequencing — but the operating model is the same shape: one protocol across every yard in the network, one sequencing logic at the dock, one source of truth for trailer location and dwell. If the operating model works on the per-case-hardest freight in CPG, the read-across to per-LOAD-hardest freight in heavy equipment is the harder version of the same problem, not a different problem. The translation that matters at Caterpillar is at the seam where autonomy meets dispatch: Primo is the public proof that a network operating layer slots cleanly above mature site-level systems without contesting the operating logic of the asset doing the work, which is exactly the entry condition a yard-layer standard at Caterpillar must meet to ratify next to the Cat Digital + NVIDIA in-field autonomy program rather than relitigate it. The directly-shaped reference for Caterpillar — a Tier-1 CPG anchor running this operating model across 237 facilities on a multi-year, contracted term — is available for peer call if it becomes useful.',
       metrics: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
@@ -243,7 +243,7 @@ export const caterpillar: AccountMicrositeData = {
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured at comparable network operations' },
         { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
-        { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+        { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at comparable facilities' },
       ],
     },

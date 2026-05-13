@@ -78,7 +78,7 @@ export const georgiaPacific: AccountMicrositeData = {
       comparableProfile:
         'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes out gross-vehicle weight before it maxes cube), low-margin (so every minute of yard waste is a margin point that can\'t be recovered with price), shipped across multi-temp (premium SKUs sit alongside ambient), and complicated by return logistics for refillable formats. Primo is years ahead of every other CPG category on yard automation and digitization — they had to be — and they run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, with a network-level yard operating model layered on top of their existing site-level systems. The shape similarities to Georgia-Pacific are real where they exist: multi-site network, heavy freight (rolls of tissue and pallets of OSB both push weight envelopes hard, the way a water trailer does), category-leading volume, and the same fundamental question of how a network agrees with itself on what good looks like at the yard layer. Where Primo is single-customer-type, Georgia-Pacific is the multi-customer-type case — same mill, consumer-bound retail freight, contractor-bound building-products freight, and industrial-bound Cellulose freight, three appointment regimes, three carrier mixes, three dock-arbitration rules. The operating-model read-across covers what happens inside a yard for any one flow; the arbitration-between-flows layer is Georgia-Pacific-specific and not modeled by the Primo comparable. The freight transfers; the multi-customer wrinkle is its own design conversation — and the right place to read the translation is back through MBM\'s five dimensions: Primo is the public proof that a network operating layer slots cleanly above mature site-level systems without contesting Decision Rights at the unit doing the work, which is exactly the entry condition a yard-layer standard at Georgia-Pacific needs to meet to ratify into the MBM map rather than relitigate it.',
       metrics: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%' },
+        { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '-50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
@@ -505,7 +505,7 @@ export const georgiaPacific: AccountMicrositeData = {
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured at comparable manufacturing operations' },
         { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
-        { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+        { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at manufacturing facilities' },
       ],
     },

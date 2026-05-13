@@ -100,7 +100,7 @@ export const performanceFoodGroup: AccountMicrositeData = {
       comparableProfile:
         "Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes out gross-vehicle weight before it maxes cube), low-margin (so every minute of yard waste is a margin point that can't be recovered with price), shipped across multi-temp (premium SKUs sit alongside ambient), and complicated by return logistics for refillable formats. Primo is years ahead of every other CPG category on yard automation and digitization — they had to be — and they run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, with a network-level yard operating model layered on top of their existing site-level systems. The shape similarities to PFG are direct: multi-site network operating across multiple temperature zones, drop-trailer dock arbitration, and a customer-delivery cadence that gates everything downstream. The shape differences are where the framing earns its keep. Primo runs hard freight against three or four product profiles at a bottling-and-distribution plant; a PFG broadline foodservice DC runs against ten thousand-plus SKUs at three temperature regimes from hundreds of inbound suppliers, then loads route trucks across the same temperature spread for daily DSD delivery to thousands of restaurants. The multi-temp dimension that is the premium-SKU edge case at Primo is the operating baseline at every PFG broadline site. The customer count Primo coordinates against — regional DCs and retailers — is dwarfed by the ~300,000 stop locations PFG delivers to daily. The framing line: if a network operating model lands on water — the hardest CPG freight in the country — the read-across to foodservice broadline isn't easier because the freight is gentler, it's easier because the operating-model surface area is the same shape, just with more SKUs, more channels, and more temperature zones to arbitrate. Same shape, different freight, more of it. The translation that matters for PFG is integration shape, not category: Primo is the proof that a network operating model lands cleanly on top of existing site-level yard systems without disrupting them — which is precisely the move the Cheney integration needs as the operations-and-logistics share of the $50M synergy number comes due against the dock layer that has to absorb it.",
       metrics: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
@@ -294,14 +294,14 @@ export const performanceFoodGroup: AccountMicrositeData = {
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured across live deployments' },
         { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
-        { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+        { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at food & beverage facilities' },
       ],
     },
     {
       type: 'quote',
       quote: {
-        text: 'Primo Brands operates more than 200 contracted facilities on the same production-and-distribution model. YardFlow cut their gate-to-dock time from 48 to 24 minutes.',
+        text: 'Primo Brands operates more than 200 contracted facilities on the same production-and-distribution model. YardFlow cut their gate-to-dock time on drop-and-hook trailers from 48 to 24 minutes.',
         role: 'Operations Director',
         company: 'National Beverage Manufacturer',
       },
