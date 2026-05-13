@@ -68,7 +68,7 @@ export const constellationBrands: AccountMicrositeData = {
       comparableProfile:
         'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes out gross-vehicle weight before it maxes cube), low-margin (so every minute of yard waste is a margin point that can\'t be recovered with price), shipped across multi-temp (premium SKUs sit alongside ambient), and complicated by return logistics for refillable formats. Primo is years ahead of every other CPG category on yard automation and digitization — they had to be — and they run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, with a network-level yard operating model layered on top of their existing site-level systems. The shape similarities to Constellation are direct: high-volume bottling and packaging, weight-out before cube-out (a beer trailer maxes gross-vehicle-weight at roughly 20 pallets of cases, same constraint Primo runs against on water), multi-site network feeding a wholesaler/distributor handoff, and a category leader\'s sensitivity to dock-turn variance. The freight shape transfers cleanly. What does not transfer is the cross-border dimension — Primo operates inside a single regulatory and labor regime, and Constellation does not. The Mexico-side breweries (Nava, Obregón, Veracruz) sit inside one labor market and one set of customs-clearance dynamics; the US-side DCs sit inside another. That layer is Constellation-specific and not modeled by the Primo comparable. Primo runs the operating layer Constellation needs across Nava, Obregón, Veracruz, and the US-side DCs — same coordinates, same drop-trailer cadence, harder freight on one side and a customs line on the other. The operating-model read-across covers what happens inside a yard at either end of the cross-border move; the customs-cadence layer between them is the Constellation-specific design conversation on top.',
       metrics: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%' },
+        { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '-50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
@@ -233,7 +233,7 @@ export const constellationBrands: AccountMicrositeData = {
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured at comparable beverage operations' },
         { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
-        { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+        { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at beverage facilities' },
       ],
     },

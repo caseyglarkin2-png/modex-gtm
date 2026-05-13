@@ -53,7 +53,7 @@ export const jmSmucker: AccountMicrositeData = {
       comparableProfile:
         'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes out gross-vehicle weight before it maxes cube), low-margin (so every minute of yard waste is a margin point you can\'t recover with price), shipped across multi-temp (premium SKUs sit alongside ambient), and complicated by return logistics for refillable formats. Primo is also years ahead of every other CPG category on yard automation and digitization — they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-level yard operating model on top of their existing site-level yard systems. The Smucker operating profile is similar in shape — multi-site, multi-category, 3PL-dependent, mid-integration with a recently-acquired business that brought its own freight grammar — but with freight economics that are friendlier per trailer than water and more forgiving than the bottled-water margin floor. If a network can run this operating model on water, the read-across to ambient food and sweet baked goods is the easier lift, not the harder one. The translation that matters for Smucker is integration shape, not category: Primo is the proof that a network operating model can standardize execution across genuinely different freight profiles — bottled water, premium spring, refillable formats, ambient — without forcing every site onto the same site-level stack. That is the exact move the post-Hostess Smucker network needs as coffee, peanut butter, fruit spreads, pet food, frozen sandwiches, and sweet baked goods integrate under one CPSO mandate without ever having to converge their individual plant floors.',
       metrics: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
@@ -457,7 +457,7 @@ export const jmSmucker: AccountMicrositeData = {
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured across live deployments' },
         { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
-        { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+        { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at food & beverage facilities' },
       ],
     },

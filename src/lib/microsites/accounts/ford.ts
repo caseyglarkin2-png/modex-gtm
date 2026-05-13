@@ -80,7 +80,7 @@ export const ford: AccountMicrositeData = {
       comparableProfile:
         'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes out gross-vehicle weight before it maxes cube), low-margin (every minute of yard waste is a margin point you can\'t recover with price), shipped across multi-temp (premium SKUs sit alongside ambient), and complicated by refill returns logistics with reverse-leg yard implications. Primo is also years ahead of the rest of CPG on yard automation and digitization — they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-level yard operating model on top of their existing site-level yard systems. The Ford operating profile is different in vertical but similar in shape: multi-site, multi-input, multi-node (plant → railhead → PDC → dealer), 3PL-dependent, with mature local routines at each site that don\'t arbitrate across the network. The freight inputs are heavier and more safety-regulated than CPG (battery cells in particular), but if a network operating model lands on water — weight-out-before-cube-out, no-recovery-line margin — the read-across to a transitioning automotive network is the easier lift, not the harder one. Primo is the proof that the network operating layer lands on top of existing site-level yard systems without disrupting the stack underneath — exactly the move Powertrain Pluralism now needs as the input mix at every assembly dock keeps shifting and the cost of plant-by-plant local routine compounds across every site mid-pivot.',
       metrics: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
@@ -240,7 +240,7 @@ export const ford: AccountMicrositeData = {
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured at comparable multi-site network operations' },
         { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
-        { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+        { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at comparable network facilities' },
       ],
     },

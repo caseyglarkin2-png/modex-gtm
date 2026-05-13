@@ -92,7 +92,7 @@ export const barnesNoble: AccountMicrositeData = {
       comparableProfile:
         'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes gross-vehicle weight before it maxes cube), low-margin (every minute of yard waste is a margin point you cannot recover with price), shipped across multi-temp (premium SKUs sit alongside ambient), and complicated by return logistics for refillable formats. Primo is years ahead of every other CPG category on yard automation and digitization — they had to be — and they have layered a network-level operating model on top of their existing site-level yard systems. The Barnes & Noble operating profile is different in category (retail books, not bottled water) and different in network shape (one large hub plus regional fulfillment, not a many-plants-many-DCs map), but the underlying problem rhymes: multiple channels arbitrating against the same dock infrastructure, where each channel has a different downstream clock and the site-by-site (in B&N\'s case, the shift-by-shift) answer is not the same as a network answer. If a network operating model can run on water — weight-out before cube-out, returns flow on top of forward flow, premium SKUs sharing the dock with ambient — the read-across to retail-DC dual-channel dock arbitration is the easier lift, not the harder one. The freight category is different; the multi-channel-on-shared-infrastructure shape is the same, and the dock-tier arbitration problem at Monroe Township is the cleanest single-site test of the network operating layer Primo already runs at scale.',
       metrics: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
@@ -500,7 +500,7 @@ export const barnesNoble: AccountMicrositeData = {
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured across live deployments at comparable multi-channel operations' },
         { value: '>200', label: 'Contracted Network', context: 'Contracted rollout cadence across comparable operating profiles' },
-        { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+        { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at comparable retail-DC facilities' },
       ],
     },

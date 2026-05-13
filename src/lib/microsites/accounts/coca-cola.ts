@@ -90,7 +90,7 @@ export const cocaCola: AccountMicrositeData = {
       comparableProfile:
         'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes gross vehicle weight before it maxes cube), low-margin (so every minute of yard waste is a margin point you cannot recover with price), shipped across multi-temp (premium SKUs sit alongside ambient), and complicated by refill returns for 5-gallon formats. Primo is years ahead of every other CPG category on yard automation and digitization — they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-level yard operating model on top of their existing site-level yard systems. The shape-similarity to the Coca-Cola system is unusually clean: multi-site bottling, multi-temp dock-door competition, regional-DC structure, peak-season surge, and an existing yard-tech layer at the operator level. The freight-economics difference runs the other way from the usual analogy — soft drinks are higher-margin per case than bottled water, so the yard-waste recovery line is wider, not narrower. The franchise structure does not change the operating logic; it changes who endorses the standard and how it lands across sovereign operators. Primo runs the network operating layer the orchestrated supply chain is already shaped to host — same coordinates, harder freight, lower-margin per case.',
       metrics: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
@@ -434,7 +434,7 @@ export const cocaCola: AccountMicrositeData = {
       stats: [
         { value: '24', label: 'Facilities Live' },
         { value: '>200', label: 'Contracted Network' },
-        { value: '48-to-24', label: 'Min Truck Turn Time' },
+        { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)' },
         { value: '$1M+', label: 'Per-Site Profit Impact' },
       ],
     },

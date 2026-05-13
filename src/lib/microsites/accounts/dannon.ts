@@ -115,7 +115,7 @@ const DANNON_FACILITY_COUNT = getFacilityCountLowerBound('Dannon', 13) ?? 13;
  *           stats: [
  *             { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol today' },
  *             { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout' },
- *             { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+ *             { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
  *             { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured across live deployments' },
  *           ],
  *         },
@@ -145,7 +145,7 @@ const DANNON_FACILITY_COUNT = getFacilityCountLowerBound('Dannon', 13) ?? 13;
  *       headline: 'Conservative ROI model for Danone North America',
  *       narrative: 'Based on measured YardFlow improvements at comparable fresh food/beverage operations.',
  *       roiLines: [
- *         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
+ *         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
  *         { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
  *         { label: 'Temp-zone dock errors', before: '3-5/week', after: '<1/week', delta: '-80%', unit: 'per facility' },
  *         { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
@@ -230,7 +230,7 @@ export const dannon: AccountMicrositeData = {
       comparableProfile:
         'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes out gross-vehicle weight before it maxes cube), low-margin (so every minute of yard waste is a margin point you cannot recover with price), and shipped across multi-temp (premium spring and alkaline SKUs sit alongside ambient). Primo is also years ahead of every other CPG category on yard automation and digitization — they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-level yard operating model on top of their existing site-level yard systems. The Danone North America operating profile is similar in shape — multi-site, multi-temp, 3PL-dependent, premium-import water inside the mix — but with significantly more forgiving freight economics per trailer and a 14-day fresh-dairy clock that makes shrink the leading indicator instead of margin per case. Primo runs the operating layer Renew Danone is shaped to host — same coordinates, harder freight.',
       metrics: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
@@ -585,7 +585,7 @@ export const dannon: AccountMicrositeData = {
       stats: [
         { value: '24', label: 'Facilities Live' },
         { value: '>200', label: 'Contracted Network' },
-        { value: '48-to-24', label: 'Min Truck Turn Time' },
+        { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)' },
         { value: '$1M+', label: 'Per-Site Profit Impact' },
       ],
     },

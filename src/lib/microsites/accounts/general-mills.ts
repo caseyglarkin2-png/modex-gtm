@@ -119,7 +119,7 @@ const GENERAL_MILLS_FACILITY_COUNT = getFacilityCountLowerBound('General Mills',
  *           stats: [
  *             { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol today' },
  *             { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout' },
- *             { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+ *             { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
  *             { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured across live deployments' },
  *             { value: '30 min', label: 'Remote Deployment', context: 'From zero to live at a new facility' },
  *           ],
@@ -151,7 +151,7 @@ const GENERAL_MILLS_FACILITY_COUNT = getFacilityCountLowerBound('General Mills',
  *       headline: 'Conservative ROI model for General Mills',
  *       narrative: `Based on ${GENERAL_MILLS_FACILITY_COUNT} facilities, current industry-average turn times, and measured YardFlow improvements at comparable CPG sites.`,
  *       roiLines: [
- *         { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
+ *         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '-50%', unit: 'minutes' },
  *         { label: 'Carrier detention per facility', before: '$80K/yr', after: '$40K/yr', delta: '-$40K', unit: 'per site' },
  *         { label: 'Temp-zone dock errors', before: '3-5/week', after: '<1/week', delta: '-80%', unit: 'per facility' },
  *         { label: 'Gate labor per facility', before: '2.5 FTE', after: '1.5 FTE', delta: '-1 FTE', unit: 'per site' },
@@ -235,7 +235,7 @@ export const generalMills: AccountMicrositeData = {
       comparableProfile:
         'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes gross-vehicle weight before it maxes cube), low-margin (every minute of yard waste is a margin point you cannot recover with price), and shipped across multi-temp (premium SKUs sit alongside ambient). Primo is years ahead of every other CPG category on yard automation and digitization — they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-level operating model on top of existing site-level yard systems. The General Mills operating profile is shape-similar — multi-site, multi-temp, contract-carrier-dependent, 41 plants under one Accelerate strategy — with significantly more forgiving freight economics per trailer (cereal and refrigerated yogurt do not weight-out at the same intensity as water). The translation that matters for General Mills is integration shape, not category: Primo is the proof that a network operating model lands on top of mature planning, forecast, and digital-twin investment without disrupting the existing stack — exactly the move Accelerate now needs as Missouri consolidation pushes more volume through fewer plants and as HMM\'s ~5% savings curve runs out of room inside the cost lines it already counts.',
       metrics: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
@@ -499,7 +499,7 @@ export const generalMills: AccountMicrositeData = {
 
       heroOverride: {
         headline: 'Your carriers remember who made them wait',
-        subheadline: 'General Mills depends on contract carriers. Every minute of excess dwell time degrades the relationship. When capacity tightens, the carriers who were treated well get served first. YardFlow cuts your turn times in half.',
+        subheadline: 'General Mills depends on contract carriers. Every minute of excess dwell time degrades the relationship. When capacity tightens, the carriers who were treated well get served first. YardFlow cuts your drop-and-hook turn times in half.',
       },
       sectionOrder: ['hero', 'problem', 'proof', 'solution', 'comparison', 'network-map', 'cta'],
       addSections: [
@@ -674,7 +674,7 @@ export const generalMills: AccountMicrositeData = {
       stats: [
         { value: '24', label: 'Facilities Live' },
         { value: '>200', label: 'Contracted Network' },
-        { value: '48-to-24', label: 'Min Truck Turn Time' },
+        { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)' },
         { value: '$1M+', label: 'Per-Site Profit Impact' },
       ],
     },

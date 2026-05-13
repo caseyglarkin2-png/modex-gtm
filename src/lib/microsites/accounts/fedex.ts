@@ -323,7 +323,7 @@ export const fedex: AccountMicrositeData = {
       heroOverride: {
         headline: 'The consolidated-hub yard is the queue Network 2.0 just made single-point-of-failure.',
         subheadline:
-          '~360 Network 2.0 facilities live today; 475+ station closures planned by end of 2027; ~30% of the NA footprint rewriting its yard procedure on the way through. The shipper-side comparable already pulled 48 minutes to 24 on the trailers crossing these hubs.',
+          '~360 Network 2.0 facilities live today; 475+ station closures planned by end of 2027; ~30% of the NA footprint rewriting its yard procedure on the way through. The shipper-side comparable already pulled drop-and-hook turn time from 48 minutes to 24 on the trailers crossing these hubs.',
       },
       sectionOrder: ['yns-thesis', 'observation', 'artifact', 'comparable', 'methodology', 'about'],
 
@@ -390,14 +390,14 @@ export const fedex: AccountMicrositeData = {
       framingNarrative:
         'Douglas runs the linehaul and transportation layer where Ground hubs and Freight service centers meet on scheduled lane departures. Every linehaul run starts and ends in a yard — origin yard queue depth determines whether the trailer makes its departure window, destination yard state determines whether the freight hits the next outbound cycle. With Network 2.0 collapsing the overlapping-station safety net and FedEx Freight separating in June, the linehaul-yard handshake at each end of the lane carries more weight per minute than it did a year ago.',
       openingHook:
-        '~26,000 dock doors across ~360 FedEx Freight service centers handle the LTL leg of freight that, for the largest CPG shippers in the country, has already been yard-disciplined on the shipper side. The 237-facility CPG anchor — North America\'s largest bottled-water producer — recovered 24 minutes per trailer on its own yards. The carrier-side end of the same hand-off is where the next minute lives.',
+        '~26,000 dock doors across ~360 FedEx Freight service centers handle the LTL leg of freight that, for the largest CPG shippers in the country, has already been yard-disciplined on the shipper side. The 237-facility CPG anchor — North America\'s largest bottled-water producer — recovered 24 minutes per drop-and-hook trailer cycle on its own yards. The carrier-side end of the same hand-off is where the next minute lives.',
       stakeStatement:
         'After June 1, 2026, FedEx Freight\'s service-level math becomes a standalone NYSE filing under FDXF. Linehaul on-time-arrival becomes a per-quarter public number, not a parent-company line item. The yard at each end of the lane is the variable that decides whether the published number and the realized number agree.',
 
       heroOverride: {
         headline: 'Linehaul cadence at both ends of the lane — the carrier-side yard math after the spin.',
         subheadline:
-          'FedEx Freight separates June 1, 2026 with ~323 terminals + ~13 relay locations and ~26,000 dock doors. The shipper-side comparable already pulled 48 minutes to 24 on its own yards. The carrier-side end of the same hand-off is the open seam.',
+          'FedEx Freight separates June 1, 2026 with ~323 terminals + ~13 relay locations and ~26,000 dock doors. The shipper-side comparable already pulled drop-and-hook turn time from 48 minutes to 24 on its own yards. The carrier-side end of the same hand-off is the open seam.',
       },
       sectionOrder: ['yns-thesis', 'observation', 'artifact', 'comparable', 'methodology', 'about'],
 
@@ -452,7 +452,7 @@ export const fedex: AccountMicrositeData = {
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured across live deployments' },
         { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
-        { value: '48-to-24', label: 'Min Truck Turn Time', context: 'Average improvement in drop-hook cycle' },
+        { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at 3pl / logistics facilities' },
       ],
     },

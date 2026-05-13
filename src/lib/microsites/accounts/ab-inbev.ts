@@ -86,7 +86,7 @@ export const abInbev: AccountMicrositeData = {
       comparableProfile:
         'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes gross-vehicle weight before it maxes cube — every load is at the weight ceiling), low-margin (every minute of yard waste is a margin point you cannot recover with price), and multi-temp at the premium SKU layer (premium spring and alkaline sit alongside ambient). Primo is years ahead of every other CPG category on yard automation and digitization — they had to be, because the freight cost them first. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, mixed owned-and-3PL fleets, and a mature site-level yard-tech stack — and they have layered a network-level yard operating model on top of that stack. The shape similarities to AB InBev are tight: multi-site (Primo bottling plants ↔ AB InBev breweries), regional drop-trailer distribution (Primo DCs ↔ ABOne and franchise wholesalers), mixed fleet (owned + 3PL + wholesaler equipment converging on the same doors), tight night-loading windows for next-morning route delivery, and a digital-supply-chain stack already in place that the yard layer needs to ladder up into. The freight differences favor AB InBev: a case of beer is materially easier than a case of water on the weight-and-margin math. Primo runs the operating layer that sits between a planning system and trailer telemetry — same coordinates as o9-and-Sensolus, harder freight.',
       metrics: [
-        { label: 'Avg truck turn time', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
@@ -409,7 +409,7 @@ export const abInbev: AccountMicrositeData = {
       stats: [
         { value: '24', label: 'Facilities Live' },
         { value: '>200', label: 'Contracted Network' },
-        { value: '48-to-24', label: 'Min Truck Turn Time' },
+        { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)' },
         { value: '$1M+', label: 'Per-Site Profit Impact' },
       ],
     },
