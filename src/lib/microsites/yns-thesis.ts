@@ -33,7 +33,7 @@ export const YNS_THESIS: YnsThesisContent = {
   defaultHeadline: 'Why your TMS and WMS spend isn’t moving yard variance',
   paragraphs: [
     {
-      body: 'Most yards across the industry still run on radios, paper trip sheets, and clipboards.[^ata-2024-yard-ops] The yard sits between every other digital system you’ve invested in — TMS, WMS, OMS, ERP — and none of them see what happens between the guard shack and the dock door. Trailers stage. Spotters wait. Drivers idle. The variance shows up downstream as missed appointments, detention, and OTIF misses, but the source is upstream of every system that’s supposed to fix it.',
+      body: 'The yard sits between every digital system you’ve invested in — TMS, WMS, OMS, ERP — and none of them see what happens between the guard shack and the dock door. Some yards still run on radios and clipboards; many more run with site-level tools but no network-level operating discipline — held hostage by tribal knowledge, inconsistent processes across facilities, and uneven visibility into how each yard actually executes.[^ata-2024-yard-ops] Trailers stage. Spotters wait. Drivers idle. The variance shows up downstream as missed appointments, detention, and OTIF misses, but the source is upstream of every system that’s supposed to fix it.',
     },
     {
       body: 'Layering more software on top of a yard your planning systems can’t observe doesn’t make the yard deterministic. It moves the cost of variance from one team’s P&L to another’s. The TMS sees the appointment slip; it doesn’t see the spotter who took 47 minutes to find a trailer. The WMS sees the dock idle; it doesn’t see the gate guard waiting for a paper bill of lading.',
