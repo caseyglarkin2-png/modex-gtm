@@ -489,7 +489,7 @@ export type MicrositeSection =
 
 // ── Audio Brief Override ─────────────────────────────────────────────
 export interface AccountAudioBrief {
-  /** mp3 path under /public; if absent, page falls back to canonical AUDIO_BRIEF_SRC. */
+  /** Audio file path under /public (mp3 or m4a). Falls back to canonical AUDIO_BRIEF_SRC when absent. */
   src: string;
   /** Chapter list specific to this account's audio. */
   chapters: AudioChapter[];
@@ -497,6 +497,15 @@ export interface AccountAudioBrief {
   heading?: string;
   /** Optional account-specific intro override. */
   intro?: string;
+  /** Optional video coda — rendered as a self-hosted <video> player below the audio chapter list, same register. */
+  videoFollowUp?: {
+    /** Self-hosted video path under /public (e.g. "/video/kraft-heinz.mp4"). */
+    src: string;
+    /** Optional intro line above the player. */
+    intro?: string;
+    /** Optional poster image path under /public. */
+    poster?: string;
+  };
   /** ISO timestamp when this audio was generated. Used by audit / regen flows. */
   generatedAt: string;
 }
