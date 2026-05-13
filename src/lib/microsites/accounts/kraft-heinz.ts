@@ -292,7 +292,7 @@ export const kraftHeinz: AccountMicrositeData = {
       intro:
         "Or watch. The same memo, compressed, with the coverage map on screen the whole way through — for the times forwarding the video is easier than describing it.",
     },
-    generatedAt: '2026-05-13T00:00:00Z',
+    generatedAt: '2026-05-13T19:58:00Z',
   },
 
   theme: {
