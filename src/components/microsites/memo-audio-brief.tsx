@@ -6,6 +6,12 @@ const FONT_SERIF = 'font-[family-name:var(--font-memo-serif)]';
 const FONT_SANS = 'font-[family-name:var(--font-memo-sans)]';
 const FONT_MONO = 'font-[family-name:var(--font-memo-mono)]';
 
+const PLAYBACK_SPEEDS = [1, 1.25, 1.5, 2, 0.75] as const;
+
+function formatSpeed(rate: number): string {
+  return `${Number.isInteger(rate) ? rate : rate.toString().replace(/\.?0+$/, '')}×`;
+}
+
 export interface AudioChapter {
   /** Stable id used for the active-chapter state and section anchoring. */
   id: string;
@@ -13,6 +19,15 @@ export interface AudioChapter {
   label: string;
   /** Start time in seconds. The first chapter must start at 0. */
   start: number;
+}
+
+export interface VideoFollowUp {
+  /** Self-hosted video path under /public (e.g. "/video/kraft-heinz.mp4"). */
+  src: string;
+  /** Optional intro line above the player. */
+  intro?: ReactNode;
+  /** Optional poster image path. */
+  poster?: string;
 }
 
 interface MemoAudioBriefProps {
@@ -32,6 +47,8 @@ interface MemoAudioBriefProps {
   sectionId?: string;
   /** Optional total-length hint shown next to "Run time" before audio metadata loads. */
   expectedDuration?: string;
+  /** Optional follow-up video CTA rendered as a hairline-separated footer below chapters. */
+  videoFollowUp?: VideoFollowUp;
 }
 
 /**
@@ -71,6 +88,7 @@ export function MemoAudioBrief({
   accentColor,
   sectionId = 'audio',
   expectedDuration,
+  videoFollowUp,
 }: MemoAudioBriefProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const stripRef = useRef<HTMLDivElement | null>(null);
@@ -78,7 +96,18 @@ export function MemoAudioBrief({
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [scrubFraction, setScrubFraction] = useState<number | null>(null);
+  const [playbackRate, setPlaybackRate] = useState(1);
   const playStripId = useId();
+
+  const cycleSpeed = useCallback(() => {
+    setPlaybackRate((curr) => {
+      const idx = PLAYBACK_SPEEDS.indexOf(curr);
+      const next = PLAYBACK_SPEEDS[(idx + 1) % PLAYBACK_SPEEDS.length] ?? 1;
+      const a = audioRef.current;
+      if (a) a.playbackRate = next;
+      return next;
+    });
+  }, []);
 
   const accentStyle = accentColor ? ({ ['--memo-accent']: accentColor } as React.CSSProperties) : undefined;
 
@@ -241,17 +270,28 @@ export function MemoAudioBrief({
           <div className="flex flex-1 flex-col gap-2">
             <div
               id={`${playStripId}-label`}
-              className={`flex items-baseline justify-between text-[11.5px] uppercase tracking-[0.18em] text-[#8a847b] ${FONT_MONO}`}
+              className={`flex items-baseline justify-between gap-3 text-[11.5px] uppercase tracking-[0.18em] text-[#8a847b] ${FONT_MONO}`}
             >
-              <span>
+              <span className="truncate">
                 {chapters[activeChapterIdx]
                   ? `${toRoman(activeChapterIdx + 1)} · ${chapters[activeChapterIdx].label}`
                   : 'Run time'}
               </span>
-              <span className="tabular-nums text-[#4a4641]">
-                {duration > 0
-                  ? `${formatTime(currentTime)} / ${formatTime(duration)}`
-                  : `0:00 / ${expectedDuration ?? '—:—'}`}
+              <span className="flex items-baseline gap-3 shrink-0">
+                <span className="tabular-nums text-[#4a4641]">
+                  {duration > 0
+                    ? `${formatTime(currentTime)} / ${formatTime(duration)}`
+                    : `0:00 / ${expectedDuration ?? '—:—'}`}
+                </span>
+                <button
+                  type="button"
+                  onClick={cycleSpeed}
+                  data-ms-cta-id="audio-speed"
+                  aria-label={`Playback speed ${formatSpeed(playbackRate)}. Click to change.`}
+                  className="tabular-nums tracking-[0.04em] text-[#8a847b] transition-colors hover:text-[color:var(--memo-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--memo-accent)]"
+                >
+                  {formatSpeed(playbackRate)}
+                </button>
               </span>
             </div>
 
@@ -372,6 +412,25 @@ export function MemoAudioBrief({
           );
         })}
       </ol>
+
+      {videoFollowUp ? (
+        <div className="mt-10 border-t border-[#d8d2c2] pt-9">
+          {videoFollowUp.intro ? (
+            <p className="mb-6">{videoFollowUp.intro}</p>
+          ) : null}
+          <video
+            controls
+            preload="metadata"
+            poster={videoFollowUp.poster}
+            data-ms-cta-id="audio-video-follow-up"
+            data-testid="memo-video-brief-element"
+            className="w-full border border-[#d8d2c2] bg-black"
+          >
+            <source src={videoFollowUp.src} />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      ) : null}
 
       <div className={`mt-12 text-center text-[12px] tracking-[0.4em] text-[#8a847b] ${FONT_MONO}`}>
         ∎ &nbsp;∎ &nbsp;∎

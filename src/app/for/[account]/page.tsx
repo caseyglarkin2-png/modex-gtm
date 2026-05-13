@@ -110,6 +110,7 @@ export default async function AccountMicrositePage({
           intro={data.audioBrief?.intro}
           accentColor={data.theme?.accentColor}
           expectedDuration={data.audioBrief ? undefined : AUDIO_BRIEF_DURATION}
+          videoFollowUp={data.audioBrief?.videoFollowUp}
         />
         <MemoSectionList sections={memoSections} accentColor={data.theme?.accentColor} />
         <MemoSoftAction

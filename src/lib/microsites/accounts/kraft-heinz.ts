@@ -165,7 +165,7 @@ export const kraftHeinz: AccountMicrositeData = {
         'Casey Larkin builds YardFlow at FreightRoll. The brief above is a working analysis, not a sales asset — it is the same shape of memo we would circulate internally before sizing a network engagement. Kraft Heinz is distinctive in this round because the operating-system thinking is already on the floor — Agile@Scale for planning, Lighthouse for visibility, OMP and o9 for orchestration. The yard is the one layer that has not yet caught the same operating discipline. This brief sizes that gap, not the site-level wins under it.',
       authorEmail: 'casey@freightroll.com',
       signOff:
-        'Flavio — the part most worth pushing back on is whether the operating-system discipline you carried out of twenty-five years at AB InBev has reached the yard layer yet, or whether it stopped at the planning and visibility tiers. That answer reshapes the rest of this. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
+        'Flavio — the part most worth pushing back on is whether the operating discipline that runs Agile@Scale and Lighthouse has actually reached the yard, or whether it stopped at the planning and visibility tiers. That answer reshapes the rest of this. The next step that makes sense is whatever the analysis prompts, not necessarily a meeting.',
     },
   ],
 
@@ -277,17 +277,22 @@ export const kraftHeinz: AccountMicrositeData = {
   ],
 
   audioBrief: {
-    src: '/audio/yard-network-brief.mp3',
+    src: '/audio/kraft-heinz.m4a',
     intro:
-      'This brief is for Flavio Torres. The operating-system discipline you carried out of twenty-five years at AB InBev now runs Kraft Heinz planning and visibility — Agile@Scale and Lighthouse. The five minutes that follow are about the one tile it has not yet reached.',
+      "Twenty minutes, dictated for the commute or the office walk. The same five sections this memo walks in print, in audio. Skip into any chapter below; the page won't move.",
     chapters: [
-      { id: 'thesis', label: 'I. The site-level case is closed', start: 0 },
-      { id: 'what-agile-made', label: 'II. What Agile@Scale made expensive', start: 65 },
-      { id: 'unfilled-tile', label: 'III. The unfilled Lighthouse tile', start: 130 },
-      { id: 'not-dekalb', label: 'IV. Why the first pilot is not DeKalb', start: 195 },
-      { id: 'simple-site-proof', label: 'V. What proof at the simple site earns', start: 260 },
+      { id: 'thesis', label: 'The site-level case is closed', start: 0 },
+      { id: 'what-agile-made', label: 'What Agile@Scale made expensive', start: 240 },
+      { id: 'unfilled-tile', label: 'The unfilled Lighthouse tile', start: 480 },
+      { id: 'not-dekalb', label: 'Why the first pilot is not DeKalb', start: 720 },
+      { id: 'simple-site-proof', label: 'What proof at the simple site earns', start: 960 },
     ],
-    generatedAt: '2026-05-12T00:00:00Z',
+    videoFollowUp: {
+      src: '/video/kraft-heinz.mp4',
+      intro:
+        "Or watch. The same memo, compressed, with the coverage map on screen the whole way through — for the times forwarding the video is easier than describing it.",
+    },
+    generatedAt: '2026-05-13T00:00:00Z',
   },
 
   theme: {
