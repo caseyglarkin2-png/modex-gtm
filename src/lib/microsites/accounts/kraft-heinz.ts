@@ -31,8 +31,8 @@ import type { AccountMicrositeData } from '../schema';
 export const kraftHeinz: AccountMicrositeData = {
   slug: 'kraft-heinz',
   accountName: 'Kraft Heinz',
-  coverHeadline: 'The yard layer above Lighthouse',
-  titleEmphasis: 'above Lighthouse',
+  coverHeadline: 'The yard layer below Lighthouse',
+  titleEmphasis: 'below Lighthouse',
   coverFootprint: '~30 US plants · DeKalb 2027',
   parentBrand: 'The Kraft Heinz Company',
   vertical: 'cpg',
@@ -80,15 +80,15 @@ export const kraftHeinz: AccountMicrositeData = {
       headline: 'What a comparable network did when they closed the same gap',
       comparableName: 'Primo Brands',
       comparableProfile:
-        'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes out gross-vehicle weight before it maxes cube), low-margin (so every minute of yard waste is a margin point you can\'t recover with price), and shipped across multi-temp (premium SKUs sit alongside ambient). Primo is also years ahead of every other CPG category on yard automation and digitization — they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-level yard operating model on top of their existing site-level yard systems. The Kraft Heinz operating profile is similar in shape — multi-site, multi-temp, 3PL-dependent, mature site-level yard automation already in place — but with significantly more forgiving freight economics per trailer. Primo runs the operating layer Lighthouse is shaped to host — same coordinates, harder freight.',
+        'Primo Brands runs what is, by most operating measures, the hardest CPG freight in North America. Bottled water is heavy (a fully loaded trailer maxes out gross-vehicle weight before it maxes cube), low-margin (so every minute of yard waste is a margin point you can\'t recover with price), and shipped across multi-temp (premium SKUs sit alongside ambient). Primo is also years ahead of every other CPG category on yard automation and digitization — they had to be. They run a multi-site bottling and distribution network with high-volume plants, drop-trailer yards, and refrigerated lanes feeding regional DCs, and they have layered a network-level yard operating model on top of their existing site-level yard systems. The Kraft Heinz operating profile is similar in shape — multi-site, multi-temp, 3PL-dependent, mature site-level yard automation already in place — but with significantly more forgiving freight economics per trailer. Primo runs the operating layer that feeds the kind of visibility tower Lighthouse was built to be — same coordinates, harder freight.',
       metrics: [
-        { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
+        { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: 'up to −50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
         { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
       ],
       timeline:
-        '30–60 days from kickoff to first measurable impact at the pilot site. The sites where this lands first are not the marquee nodes — they are the smaller no-gate, no-YMS, urban-connectivity facilities where the carrier yard is simplest to instrument, the displacement risk is lowest, and the operating model can be proven before it has to scale. DeKalb 2027 is where the proven model expands into the highest-throughput node in the U.S. portfolio; the $3B-modernized plants are the second wave once the network operating layer has its first 60-day proof. We would expect the network to make sense of itself within two to four quarters of that first pilot.',
+        'Roughly 90 days kickoff-to-deployed-pilot — discovery, integration, configuration, and live deployment, with front-end cadence dependent on Kraft Heinz resource availability and the existing Kaleris footprint at the chosen site. The first measurable impact lands inside 30–60 days of monitored post-deployment operation; that\'s the window where the comparable network numbers were read against the pre-deployment baseline. The sites where this proves out first are not the marquee nodes — they are the smaller no-gate, no-YMS, urban-connectivity facilities where the carrier yard is simplest to instrument and the displacement risk is lowest. DeKalb 2027 is where the proven model expands into the highest-throughput node in the U.S. portfolio; the $3B-modernized plants are the second wave once the network operating layer has its first post-deployment proof. We would expect the network to make sense of itself within two to four quarters of that first pilot\'s deployment.',
       referenceAvailable: true,
     },
     {
@@ -138,7 +138,7 @@ export const kraftHeinz: AccountMicrositeData = {
           id: 'primo-q1-2025',
           source: 'Primo Brands operating data (under NDA)',
           confidence: 'measured',
-          detail: 'Post-deployment turn time, dock-office headcount during volume growth, and per-site profit impact have been shared with us by the Primo CFO and ops team. Specific numbers are referenceable in a peer call when relevant.',
+          detail: 'Post-deployment turn time, dock-office headcount during volume growth, and per-site profit impact were measured by us across the Primo deployment, then validated with the Primo CFO and ops team. Specific numbers are referenceable in a peer call when relevant.',
         },
         {
           id: 'torres-tenure',
@@ -210,16 +210,16 @@ export const kraftHeinz: AccountMicrositeData = {
       variantSlug: 'flavio-torres',
 
       framingNarrative:
-        'Flavio, the operating-system discipline you carried out of twenty-five years at AB InBev — uniform standards across every brewery, every site, every shift — is the same discipline you brought to planning at Kraft Heinz through Agile@Scale and to visibility through Lighthouse. The yard is the tile that has not been laid into that operating system yet. Site-level automation closed the site-level case two decades ago. The network operating layer above the sites is what Agile@Scale\'s leaner inventory now needs and what Lighthouse is shaped to host.',
+        'Flavio, the operating-system discipline you carried out of twenty-five years at AB InBev — uniform standards across every brewery, every site, every shift — is the same discipline you brought to planning at Kraft Heinz through Agile@Scale and to visibility through Lighthouse. The yard is the tile that has not been laid into that operating system yet. Site-level automation closed the site-level case two decades ago. The network operating layer above the sites is what Agile@Scale\'s leaner inventory now needs — and the ground-truth feed Lighthouse can\'t operate without. Without it, Lighthouse sees the plan but not the floor; with it, the plan-to-floor gap closes from underneath.',
       openingHook:
         'Speed and scale was your phrase. At Kraft Heinz it has reached planning and visibility — Agile@Scale, Lighthouse, OMP, o9. It has not yet reached the yard.',
       stakeStatement:
         'The $3B modernization is moving throughput-out-the-door across ~30 plants. Agile@Scale removed the inventory buffer that used to absorb yard variance. The gap between those two is the network yard layer — and it is the only operating-system tile at Kraft Heinz that is not yet running to a single standard.',
 
       heroOverride: {
-        headline: 'The Lighthouse tile no one has filled yet is the yard network operating layer.',
+        headline: 'The Lighthouse tile no one is feeding yet is the yard network operating layer.',
         subheadline:
-          'Site-level yard automation is proven at Kraft Heinz. The network operating model above it — the one Agile@Scale\'s leaner inventory now needs and Lighthouse is shaped to host — is the unfilled tile. The smaller no-gate sites are the cleanest place to prove it; DeKalb 2027 is where it scales.',
+          'Site-level yard automation is proven at Kraft Heinz. The network operating model above the sites — the data feed Agile@Scale\'s leaner inventory now needs and the ground-truth Lighthouse can\'t operate without — is the unfilled tile. The smaller no-gate sites are the cleanest place to prove it; DeKalb 2027 is where it scales.',
       },
       sectionOrder: ['yns-thesis', 'observation', 'comparable', 'methodology', 'about'],
 
@@ -268,7 +268,7 @@ export const kraftHeinz: AccountMicrositeData = {
   },
 
   marginaliaItems: [
-    { mark: 'Industry baseline', body: '75% of yards still run on radios and clipboards.' },
+    { mark: 'Industry baseline', body: 'Even where site-level YMS coverage is in place, network-level operating variance — tribal knowledge, inconsistent SOPs, uneven visibility — is the dominant unattributed driver of yard cycle-time loss across multi-site CPG.' },
     { mark: 'Greenfield', body: 'DeKalb · $400M · opens 2027 · highest-throughput single node.' },
     { mark: 'Modernization', body: '$3B U.S. plant investment · ~30 sites · May 2025.' },
     { mark: 'Working capital', body: 'Agile@Scale cut inventory ~20%. Yard variance is now a working-capital line.' },

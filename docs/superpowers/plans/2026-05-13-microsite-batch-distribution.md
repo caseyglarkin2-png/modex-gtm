@@ -1,13 +1,13 @@
 # 2026-05-13 Microsite Batch Distribution Manifest
 
-**Send date:** 2026-05-13 (10 accounts)
-**Goal:** Validate whether custom audio + heavy per-account investment moves the needle. Small, curated batch out of the 42 live microsites.
+**Send date:** 2026-05-13 (13 accounts)
+**Goal:** Validate whether custom audio + heavy per-account investment moves the needle. Curated batch of 13 out of 42 live microsites.
 
 ## Summary table
 
 | # | Slug | Tier | POC | Hook (one-line) |
 |---|------|------|-----|-----------------|
-| 1 | kraft-heinz | T1·A | Flavio Torres · EVP & Global CSCO | The Lighthouse tile no one has filled yet is the yard network operating layer — proven at a no-gate site, not DeKalb. |
+| 1 | kraft-heinz | T1·A | Flavio Torres · EVP & Global CSCO | The Lighthouse tile no one is feeding yet is the yard network operating layer — proven at a no-gate site, not DeKalb. |
 | 2 | dannon | T1·A | Heiko Gerling · COO, NA | Renew Danone's unfilled tile, embedded at the Jacksonville greenfield before local routines lock in. |
 | 3 | frito-lay | T1·A | Brian Watson · VP Supply Chain | pep+ reached the plant floor; the four-fleet dock at snack-network velocity is the tile still on radios. |
 | 4 | ab-inbev | T1·A | Elito Siqueira · CSCO NA | Touchless landed at o9. Telemetry landed at Sensolus. The dock between them is the unfilled tile. |
@@ -17,6 +17,9 @@
 | 8 | john-deere | T3·D | Cory Reed · President, Lifecycle Solutions | Smart Industrial sees the machine. It does not see the yard the machine left. |
 | 9 | kenco-logistics-services | T3·D | Kristi Montgomery · VP Innovation R&D | Yard-execution-as-a-service-line is the next Innovation Lab productization candidate — pilot, prove, distribute. |
 | 10 | hormel-foods | T2·B | Will Bonifant · GVP & CSCO | o9 grouped the truckload. It did not pick the door. The unfilled tile in the Hormel operating stack. |
+| 11 | gxo | T1·A | Michael Jacobs · President, Americas & APAC | The yard-execution layer above the GXO operating standard — multi-tenant from the data model up. |
+| 12 | crowley | T1·A | James C. Fowler · EVP & Division President, Shipping & Logistics | The yard layer for the integrated maritime + land operator. |
+| 13 | mondelez-international | T1·A | Claudio Parrotta · EVP & CSCO | The yard layer underneath the Master Plan 2030. |
 
 ---
 
@@ -29,8 +32,9 @@
 - Public: https://yardflow.ai/for/kraft-heinz
 - Personalized: https://yardflow.ai/for/kraft-heinz?p=flavio-torres
 - Accent: `#C8102E`
-- Cover headline: "The yard layer above Lighthouse"
+- Cover headline: "The yard layer below Lighthouse"
 - Send hook: "We mapped the ~30 US-plant footprint against Lighthouse coverage — the unfilled tile is the yard network operating layer, and the first pilot is one of the smaller no-gate sites, not DeKalb."
+- **Follow-up video (NotebookLM, post-engagement):** https://notebooklm.google.com/notebook/5a6ec107-d8b2-4856-94ee-29776fe49c23/artifact/f2517990-76a6-4d87-9581-c8ee9e6bb43d
 
 ### 2. Dannon
 
@@ -140,9 +144,51 @@
 
 ---
 
+## 3PL (continued)
+
+### 11. GXO Logistics
+
+- Account: Tier 1 · Band A · 3PL / Logistics
+- POC: Michael Jacobs · President, Americas & Asia Pacific
+- Public: https://yardflow.ai/for/gxo
+- Personalized: https://yardflow.ai/for/gxo?p=michael-jacobs
+- Accent: `#E11D27`
+- Cover headline: "The yard-execution layer above the GXO operating standard"
+- Send hook: "1,000+ sites and 150K+ team operating under one standard already; yard-execution as a sub-standard inside that template is the layer with the highest variance and the lowest coverage. Multi-tenant from the data model up, deployable as the next operating-standard chapter."
+
+---
+
+## Maritime / Logistics
+
+### 12. Crowley Maritime
+
+- Account: Tier 1 · Band A · 3PL / Logistics
+- POC: James C. Fowler · EVP and Division President, Shipping & Logistics
+- Public: https://yardflow.ai/for/crowley
+- Personalized: https://yardflow.ai/for/crowley?p=james-fowler
+- Accent: `#13294B`
+- Cover headline: "The yard layer for the integrated maritime + land operator"
+- Send hook: "The integrated container, terminal, and inland network operates with port-side discipline that the inland yards have not yet inherited. The yard layer is the seam between ocean-side throughput and inland delivery — the standard that ties the two halves of the same operator together."
+
+---
+
+## CPG (continued — Tier 1)
+
+### 13. Mondelez International
+
+- Account: Tier 1 · Band A · CPG
+- POC: Claudio Parrotta · EVP & Chief Supply Chain Officer
+- Public: https://yardflow.ai/for/mondelez-international
+- Personalized: https://yardflow.ai/for/mondelez-international?p=claudio-parrotta
+- Accent: `#1E40AF`
+- Cover headline: "The yard layer underneath the Master Plan 2030"
+- Send hook: "Master Plan 2030 is shifting capex into automation, brand-investment, and emerging-market scale. The yard layer underneath every plant in that plan is the variance source most likely to absorb the productivity story before it reaches the P&L — and the layer no Master Plan document yet calls out by name."
+
+---
+
 ## Tracking notes — first 48 hours
 
-Watch the following signals across the 10-account batch to validate whether the per-account investment (custom audio brief, coverage-map artifact, hand-shaped framing) is producing differential engagement vs. the generic-microsite baseline:
+Watch the following signals across the 13-account batch to validate whether the per-account investment (custom audio brief, coverage-map artifact, hand-shaped framing) is producing differential engagement vs. the generic-microsite baseline:
 
 - **Open / first-touch rate** — personalized URL hits vs. public URL hits within 6h, 24h, 48h windows. The `?p=…` query string is the signal that the named POC opened the link rather than an unrelated viewer.
 - **Click-through to /roi** — the ROI calculator is the strongest intent signal short of a meeting request. Track which accounts route there and how long they spend.
