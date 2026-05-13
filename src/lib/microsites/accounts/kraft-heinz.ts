@@ -288,7 +288,7 @@ export const kraftHeinz: AccountMicrositeData = {
       { id: 'simple-site-proof', label: 'What proof at the simple site earns', start: 960 },
     ],
     videoFollowUp: {
-      src: '/video/kraft-heinz.mp4',
+      src: '/audio/kraft-heinz-video.mp4',
       intro:
         "Or watch. The same memo, compressed, with the coverage map on screen the whole way through — for the times forwarding the video is easier than describing it.",
     },
