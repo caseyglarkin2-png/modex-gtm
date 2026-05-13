@@ -6,7 +6,7 @@ const FONT_SERIF = 'font-[family-name:var(--font-memo-serif)]';
 const FONT_SANS = 'font-[family-name:var(--font-memo-sans)]';
 const FONT_MONO = 'font-[family-name:var(--font-memo-mono)]';
 
-const PLAYBACK_SPEEDS = [1, 1.25, 1.5, 2, 0.75] as const;
+const PLAYBACK_SPEEDS: readonly number[] = [1, 1.25, 1.5, 2, 0.75];
 
 function formatSpeed(rate: number): string {
   return `${Number.isInteger(rate) ? rate : rate.toString().replace(/\.?0+$/, '')}×`;
