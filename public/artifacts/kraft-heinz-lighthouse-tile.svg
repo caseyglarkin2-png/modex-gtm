@@ -1,93 +1,110 @@
 <svg
   xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 1600 900"
+  viewBox="0 0 1600 1100"
   role="img"
-  aria-label="Operating-tower coverage map: six tiles representing Kraft Heinz control-tower domains. Planning, Forecast, Demand, Inventory, and OTIF are covered; Yard Network Ops is unfilled."
+  aria-label="Operating-system coverage map. Lighthouse sits as the visibility tower above five covered Kraft Heinz operating-system tiles: Planning, Forecast, Demand, Inventory, and OTIF. The Yard Network Ops layer below them is unfilled — the ground-truth data feed Lighthouse cannot operate without."
 >
-  <!-- Cream background to blend with memo body -->
-  <rect width="1600" height="900" fill="#f5f1e8" />
+  <rect width="1600" height="1100" fill="#f5f1e8" />
 
   <g font-family="'Courier New', ui-monospace, SFMono-Regular, Menlo, monospace">
-    <!-- Top eyebrow -->
-    <text x="80" y="64" fill="#8a847b" font-size="14" letter-spacing="3.5" font-weight="500">
-      OPERATING-TOWER COVERAGE MAP
+
+    <text x="80" y="72" fill="#8a847b" font-size="18" letter-spacing="3.5" font-weight="500">
+      KRAFT HEINZ OPERATING SYSTEM · COVERAGE MAP
     </text>
-    <text x="1520" y="64" text-anchor="end" fill="#8a847b" font-size="14" letter-spacing="2.5" font-weight="500">
-      6 TILES · 5 COVERED · 1 UNFILLED
+    <text x="1520" y="72" text-anchor="end" fill="#8a847b" font-size="18" letter-spacing="2.5" font-weight="500">
+      5 OF 6 TILES FEEDING THE TOWER
     </text>
 
-    <!-- Hairline rule under eyebrow -->
-    <line x1="80" y1="90" x2="1520" y2="90" stroke="#d8d2c2" stroke-width="1" />
+    <line x1="80" y1="104" x2="1520" y2="104" stroke="#d8d2c2" stroke-width="1.5" />
 
-    <!-- ── Tile 1 : PLANNING ───────────────────────────────────── -->
-    <rect x="80" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
-    <circle cx="110" cy="160" r="4" fill="#a89e8b" />
-    <text x="310" y="295" text-anchor="middle" fill="#1a1a1a" font-size="28" font-weight="600" letter-spacing="6">
+    <rect x="80" y="150" width="1440" height="100" fill="#fffdf7" stroke="#a89e8b" stroke-width="1.5" />
+    <circle cx="108" cy="178" r="4" fill="#a89e8b" />
+    <text x="800" y="212" text-anchor="middle" fill="#1a1a1a" font-size="30" font-weight="700" letter-spacing="8">
+      LIGHTHOUSE  ·  VISIBILITY TOWER
+    </text>
+
+    <rect x="80" y="310" width="270" height="270" fill="none" stroke="#a89e8b" stroke-width="1.5" />
+    <circle cx="100" cy="330" r="4" fill="#a89e8b" />
+    <text x="215" y="445" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="700" letter-spacing="5">
       PLANNING
     </text>
-    <text x="310" y="335" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+    <text x="215" y="490" text-anchor="middle" fill="#8a847b" font-size="15" letter-spacing="4" font-weight="500">
       — covered —
     </text>
+    <text x="215" y="528" text-anchor="middle" fill="#a89e8b" font-size="14" letter-spacing="3" font-weight="500">
+      AGILE@SCALE
+    </text>
 
-    <!-- ── Tile 2 : FORECAST ───────────────────────────────────── -->
-    <rect x="570" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
-    <circle cx="600" cy="160" r="4" fill="#a89e8b" />
-    <text x="800" y="295" text-anchor="middle" fill="#1a1a1a" font-size="28" font-weight="600" letter-spacing="6">
+    <rect x="370" y="310" width="270" height="270" fill="none" stroke="#a89e8b" stroke-width="1.5" />
+    <circle cx="390" cy="330" r="4" fill="#a89e8b" />
+    <text x="505" y="445" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="700" letter-spacing="5">
       FORECAST
     </text>
-    <text x="800" y="335" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+    <text x="505" y="490" text-anchor="middle" fill="#8a847b" font-size="15" letter-spacing="4" font-weight="500">
       — covered —
     </text>
+    <text x="505" y="528" text-anchor="middle" fill="#a89e8b" font-size="14" letter-spacing="3" font-weight="500">
+      AGILE@SCALE
+    </text>
 
-    <!-- ── Tile 3 : DEMAND ─────────────────────────────────────── -->
-    <rect x="1060" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
-    <circle cx="1090" cy="160" r="4" fill="#a89e8b" />
-    <text x="1290" y="295" text-anchor="middle" fill="#1a1a1a" font-size="28" font-weight="600" letter-spacing="6">
+    <rect x="660" y="310" width="270" height="270" fill="none" stroke="#a89e8b" stroke-width="1.5" />
+    <circle cx="680" cy="330" r="4" fill="#a89e8b" />
+    <text x="795" y="445" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="700" letter-spacing="5">
       DEMAND
     </text>
-    <text x="1290" y="335" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+    <text x="795" y="490" text-anchor="middle" fill="#8a847b" font-size="15" letter-spacing="4" font-weight="500">
       — covered —
     </text>
+    <text x="795" y="528" text-anchor="middle" fill="#a89e8b" font-size="14" letter-spacing="3" font-weight="500">
+      OMP  /  o9
+    </text>
 
-    <!-- ── Tile 4 : INVENTORY ──────────────────────────────────── -->
-    <rect x="80" y="480" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
-    <circle cx="110" cy="510" r="4" fill="#a89e8b" />
-    <text x="310" y="645" text-anchor="middle" fill="#1a1a1a" font-size="28" font-weight="600" letter-spacing="6">
+    <rect x="950" y="310" width="270" height="270" fill="none" stroke="#a89e8b" stroke-width="1.5" />
+    <circle cx="970" cy="330" r="4" fill="#a89e8b" />
+    <text x="1085" y="445" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="700" letter-spacing="5">
       INVENTORY
     </text>
-    <text x="310" y="685" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+    <text x="1085" y="490" text-anchor="middle" fill="#8a847b" font-size="15" letter-spacing="4" font-weight="500">
       — covered —
     </text>
+    <text x="1085" y="528" text-anchor="middle" fill="#a89e8b" font-size="14" letter-spacing="3" font-weight="500">
+      AGILE@SCALE
+    </text>
 
-    <!-- ── Tile 5 : OTIF ───────────────────────────────────────── -->
-    <rect x="570" y="480" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
-    <circle cx="600" cy="510" r="4" fill="#a89e8b" />
-    <text x="800" y="645" text-anchor="middle" fill="#1a1a1a" font-size="28" font-weight="600" letter-spacing="6">
+    <rect x="1240" y="310" width="270" height="270" fill="none" stroke="#a89e8b" stroke-width="1.5" />
+    <circle cx="1260" cy="330" r="4" fill="#a89e8b" />
+    <text x="1375" y="445" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="700" letter-spacing="5">
       OTIF
     </text>
-    <text x="800" y="685" text-anchor="middle" fill="#8a847b" font-size="13" letter-spacing="3" font-weight="500">
+    <text x="1375" y="490" text-anchor="middle" fill="#8a847b" font-size="15" letter-spacing="4" font-weight="500">
       — covered —
     </text>
-
-    <!-- ── Tile 6 : YARD NETWORK OPS  (unfilled — accent border) ── -->
-    <rect x="1060" y="480" width="460" height="320" fill="none" stroke="#C8102E" stroke-width="2" />
-    <circle cx="1090" cy="510" r="4" fill="none" stroke="#C8102E" stroke-width="1.5" />
-    <text x="1290" y="625" text-anchor="middle" fill="#C8102E" font-size="24" font-weight="700" letter-spacing="6">
-      YARD NETWORK
-    </text>
-    <text x="1290" y="665" text-anchor="middle" fill="#C8102E" font-size="24" font-weight="700" letter-spacing="6">
-      OPS
-    </text>
-    <text x="1290" y="705" text-anchor="middle" fill="#a89e8b" font-size="13" letter-spacing="3" font-weight="500">
-      — unfilled —
+    <text x="1375" y="528" text-anchor="middle" fill="#a89e8b" font-size="14" letter-spacing="3" font-weight="500">
+      AGILE@SCALE
     </text>
 
-    <!-- Hairline rule above source attribution -->
-    <line x1="80" y1="840" x2="1520" y2="840" stroke="#d8d2c2" stroke-width="1" />
+    <line x1="80" y1="640" x2="640" y2="640" stroke="#d8d2c2" stroke-width="1.5" />
+    <text x="800" y="648" text-anchor="middle" fill="#a89e8b" font-size="15" letter-spacing="4" font-weight="500">
+      ↑  DATA FEED INTO LIGHTHOUSE  ↑
+    </text>
+    <line x1="960" y1="640" x2="1520" y2="640" stroke="#d8d2c2" stroke-width="1.5" />
 
-    <!-- Bottom source attribution -->
-    <text x="800" y="872" text-anchor="middle" fill="#a89e8b" font-size="12" letter-spacing="2.5" font-weight="500">
-      COMPOSITION · PUBLIC-RECORD SOURCES · ACCOUNT NAMES REDACTED
+    <rect x="80" y="700" width="1440" height="300" fill="none" stroke="#C8102E" stroke-width="2.5" stroke-dasharray="10,8" />
+    <circle cx="108" cy="728" r="5" fill="none" stroke="#C8102E" stroke-width="2" />
+    <text x="800" y="820" text-anchor="middle" fill="#C8102E" font-size="44" font-weight="700" letter-spacing="10">
+      YARD NETWORK OPS
+    </text>
+    <text x="800" y="870" text-anchor="middle" fill="#C8102E" font-size="18" letter-spacing="6" font-weight="600">
+      —  UNFILLED  —
+    </text>
+    <text x="800" y="935" text-anchor="middle" fill="#4a4641" font-size="17" letter-spacing="2" font-weight="500">
+      the ground-truth feed Lighthouse cannot operate without
+    </text>
+
+    <line x1="80" y1="1040" x2="1520" y2="1040" stroke="#d8d2c2" stroke-width="1.5" />
+
+    <text x="80" y="1074" text-anchor="start" fill="#a89e8b" font-size="14" letter-spacing="2.5" font-weight="500">
+      COMPOSITION · PUBLIC LIGHTHOUSE + AGILE@SCALE + OMP/o9 DISCLOSURES · ACCOUNT NAMES REDACTED
     </text>
   </g>
 </svg>
