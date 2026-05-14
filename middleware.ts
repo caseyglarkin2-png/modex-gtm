@@ -23,9 +23,10 @@ export const config = {
      * - /opengraph-image, /twitter-image (public social metadata images)
      * - /audio (public audio briefs served alongside /for/* memos)
      * - /video (public video codas served alongside /for/* memos)
+     * - /artifacts (public artifact SVGs embedded in /for/* memos)
      * - /_next (Next.js internals)
      * - /manifest.json, /robots.txt, /favicon.ico (static assets)
      */
-    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/cron|api/proposal|api/proof|unsubscribe|proposal|for|opengraph-image|twitter-image|audio|video|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
+    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/cron|api/proposal|api/proof|unsubscribe|proposal|for|opengraph-image|twitter-image|audio|video|artifacts|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
   ],
 };
