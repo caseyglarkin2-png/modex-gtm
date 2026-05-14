@@ -1,0 +1,110 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1600 1100"
+  role="img"
+  aria-label="Operating-system coverage map for Kroger. Six supply-chain operating-system tiles: Planning (o9), Procurement, Inventory, E-Commerce, Transportation, and Yard Network Ops. Yard Network Ops is unfilled — the layer the arriving operating discipline has not yet landed on."
+>
+  <rect width="1600" height="1100" fill="#f5f1e8" />
+
+  <g font-family="'Courier New', ui-monospace, SFMono-Regular, Menlo, monospace">
+
+    <text x="80" y="72" fill="#8a847b" font-size="18" letter-spacing="3.5" font-weight="500">
+      KROGER SUPPLY CHAIN · OPERATING-SYSTEM COVERAGE MAP
+    </text>
+    <text x="1520" y="72" text-anchor="end" fill="#8a847b" font-size="18" letter-spacing="2.5" font-weight="500">
+      5 OF 6 TILES UNDER SINGLE-STANDARD DISCIPLINE
+    </text>
+
+    <line x1="80" y1="104" x2="1520" y2="104" stroke="#d8d2c2" stroke-width="1.5" />
+
+    <rect x="80" y="150" width="1440" height="100" fill="#fffdf7" stroke="#a89e8b" stroke-width="1.5" />
+    <circle cx="108" cy="178" r="4" fill="#a89e8b" />
+    <text x="800" y="212" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="700" letter-spacing="6">
+      OPERATING DISCIPLINE  ·  ARRIVING WITH FORAN
+    </text>
+
+    <rect x="80" y="310" width="270" height="270" fill="none" stroke="#a89e8b" stroke-width="1.5" />
+    <circle cx="100" cy="330" r="4" fill="#a89e8b" />
+    <text x="215" y="445" text-anchor="middle" fill="#1a1a1a" font-size="22" font-weight="700" letter-spacing="4">
+      PLANNING
+    </text>
+    <text x="215" y="490" text-anchor="middle" fill="#8a847b" font-size="15" letter-spacing="4" font-weight="500">
+      — covered —
+    </text>
+    <text x="215" y="528" text-anchor="middle" fill="#a89e8b" font-size="14" letter-spacing="3" font-weight="500">
+      o9 SOLUTIONS
+    </text>
+
+    <rect x="370" y="310" width="270" height="270" fill="none" stroke="#a89e8b" stroke-width="1.5" />
+    <circle cx="390" cy="330" r="4" fill="#a89e8b" />
+    <text x="505" y="445" text-anchor="middle" fill="#1a1a1a" font-size="20" font-weight="700" letter-spacing="4">
+      PROCUREMENT
+    </text>
+    <text x="505" y="490" text-anchor="middle" fill="#8a847b" font-size="15" letter-spacing="4" font-weight="500">
+      — covered —
+    </text>
+    <text x="505" y="528" text-anchor="middle" fill="#a89e8b" font-size="14" letter-spacing="3" font-weight="500">
+      COST-OUT LEVER
+    </text>
+
+    <rect x="660" y="310" width="270" height="270" fill="none" stroke="#a89e8b" stroke-width="1.5" />
+    <circle cx="680" cy="330" r="4" fill="#a89e8b" />
+    <text x="795" y="445" text-anchor="middle" fill="#1a1a1a" font-size="22" font-weight="700" letter-spacing="4">
+      INVENTORY
+    </text>
+    <text x="795" y="490" text-anchor="middle" fill="#8a847b" font-size="15" letter-spacing="4" font-weight="500">
+      — covered —
+    </text>
+    <text x="795" y="528" text-anchor="middle" fill="#a89e8b" font-size="14" letter-spacing="3" font-weight="500">
+      REPLENISHMENT
+    </text>
+
+    <rect x="950" y="310" width="270" height="270" fill="none" stroke="#a89e8b" stroke-width="1.5" />
+    <circle cx="970" cy="330" r="4" fill="#a89e8b" />
+    <text x="1085" y="445" text-anchor="middle" fill="#1a1a1a" font-size="22" font-weight="700" letter-spacing="4">
+      E-COMMERCE
+    </text>
+    <text x="1085" y="490" text-anchor="middle" fill="#8a847b" font-size="15" letter-spacing="4" font-weight="500">
+      — covered —
+    </text>
+    <text x="1085" y="528" text-anchor="middle" fill="#a89e8b" font-size="14" letter-spacing="3" font-weight="500">
+      STORE-FULFILL
+    </text>
+
+    <rect x="1240" y="310" width="270" height="270" fill="none" stroke="#a89e8b" stroke-width="1.5" />
+    <circle cx="1260" cy="330" r="4" fill="#a89e8b" />
+    <text x="1375" y="445" text-anchor="middle" fill="#1a1a1a" font-size="20" font-weight="700" letter-spacing="4">
+      TRANSPORT
+    </text>
+    <text x="1375" y="490" text-anchor="middle" fill="#8a847b" font-size="15" letter-spacing="4" font-weight="500">
+      — covered —
+    </text>
+    <text x="1375" y="528" text-anchor="middle" fill="#a89e8b" font-size="14" letter-spacing="3" font-weight="500">
+      PRIVATE FLEET
+    </text>
+
+    <line x1="80" y1="640" x2="540" y2="640" stroke="#d8d2c2" stroke-width="1.5" />
+    <text x="800" y="648" text-anchor="middle" fill="#a89e8b" font-size="15" letter-spacing="4" font-weight="500">
+      ↑  WHERE THE OPERATING DISCIPLINE LANDS  ↑
+    </text>
+    <line x1="1060" y1="640" x2="1520" y2="640" stroke="#d8d2c2" stroke-width="1.5" />
+
+    <rect x="80" y="700" width="1440" height="300" fill="none" stroke="#0d4d8b" stroke-width="2.5" stroke-dasharray="10,8" />
+    <circle cx="108" cy="728" r="5" fill="none" stroke="#0d4d8b" stroke-width="2" />
+    <text x="800" y="820" text-anchor="middle" fill="#0d4d8b" font-size="44" font-weight="700" letter-spacing="10">
+      YARD NETWORK OPS
+    </text>
+    <text x="800" y="870" text-anchor="middle" fill="#0d4d8b" font-size="18" letter-spacing="6" font-weight="600">
+      —  UNFILLED  —
+    </text>
+    <text x="800" y="935" text-anchor="middle" fill="#4a4641" font-size="17" letter-spacing="2" font-weight="500">
+      the tile Foran will ask about first
+    </text>
+
+    <line x1="80" y1="1040" x2="1520" y2="1040" stroke="#d8d2c2" stroke-width="1.5" />
+
+    <text x="80" y="1074" text-anchor="start" fill="#a89e8b" font-size="14" letter-spacing="2.5" font-weight="500">
+      COMPOSITION · KROGER PUBLIC DISCLOSURES + PLANNING-VENDOR CUSTOMER LISTS + FORAN APPOINTMENT CONTEXT
+    </text>
+  </g>
+</svg>

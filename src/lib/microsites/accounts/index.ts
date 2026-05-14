@@ -38,6 +38,7 @@ import { kencoLogisticsServices } from './kenco-logistics-services';
 import { keurigDrPepper } from './keurig-dr-pepper';
 import { kimberlyClark } from './kimberly-clark';
 import { kraftHeinz } from './kraft-heinz';
+import { kroger } from './kroger';
 import { mondelezInternational } from './mondelez-international';
 import { nestleUsa } from './nestle-usa';
 import { pactivEvergreen } from './pactiv-evergreen';
@@ -82,6 +83,7 @@ const ACCOUNTS: Record<string, AccountMicrositeData> = {
   'keurig-dr-pepper': keurigDrPepper,
   'kimberly-clark': kimberlyClark,
   'kraft-heinz': kraftHeinz,
+  'kroger': kroger,
   'mondelez-international': mondelezInternational,
   'nestle-usa': nestleUsa,
   'pactiv-evergreen': pactivEvergreen,
