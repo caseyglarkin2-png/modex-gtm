@@ -45,6 +45,7 @@ import type {
 const MEMO_TYPES = new Set<MicrositeSection['type']>([
   'yns-thesis',
   'observation',
+  'artifact',
   'comparable',
   'methodology',
   'about',

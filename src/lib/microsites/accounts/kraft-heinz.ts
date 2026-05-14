@@ -279,13 +279,9 @@ export const kraftHeinz: AccountMicrositeData = {
   audioBrief: {
     src: '/audio/kraft-heinz.m4a',
     intro:
-      "Twenty minutes, dictated for the commute or the office walk. The same five sections this memo walks in print, in audio. Skip into any chapter below; the page won't move.",
+      "Ninety seconds, dictated. The thesis of the memo above, compressed for the time between meetings.",
     chapters: [
-      { id: 'thesis', label: 'The site-level case is closed', start: 0 },
-      { id: 'what-agile-made', label: 'What Agile@Scale made expensive', start: 240 },
-      { id: 'unfilled-tile', label: 'The unfilled Lighthouse tile', start: 480 },
-      { id: 'not-dekalb', label: 'Why the first pilot is not DeKalb', start: 720 },
-      { id: 'simple-site-proof', label: 'What proof at the simple site earns', start: 960 },
+      { id: 'full', label: 'The brief, compressed', start: 0 },
     ],
     videoFollowUp: {
       src: '/audio/kraft-heinz-video.mp4',
