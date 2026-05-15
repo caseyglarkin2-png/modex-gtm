@@ -302,17 +302,17 @@ export const kimberlyClark: AccountMicrositeData = {
   ],
 
   audioBrief: {
-    src: '/audio/yard-network-brief.mp3',
+    src: '/audio/kimberly-clark.m4a',
     intro:
-      'This brief is for Tamera Fenske. The operating-standards muscle you carried out of twenty-two years at 3M now runs Kimberly-Clark planning, procurement, and manufacturing under Powering Care. The five minutes that follow are about the one layer it has not yet reached.',
+      'A thirty-one-minute brief for Tamera Fenske. The operating-standards muscle you carried out of twenty-two years at 3M now runs Kimberly-Clark planning, procurement, and manufacturing under Powering Care. What follows is about the one layer it has not yet reached.',
     chapters: [
-      { id: 'thesis', label: 'I. Powering Care is a running productivity engine', start: 0 },
-      { id: 'cube-amplifier', label: 'II. The cube-out / weight-out amplifier', start: 65 },
-      { id: 'unfilled-tile', label: 'III. The layer above gate-and-locate', start: 130 },
-      { id: 'suzano-window', label: 'IV. The Suzano JV close as a timing driver', start: 195 },
-      { id: 'first-pilot', label: 'V. What proof at the worst-dock-cycle plant earns', start: 260 },
+      { id: 'thesis', label: 'Powering Care as a running productivity engine', start: 0 },
+      { id: 'cube-amplifier', label: 'The cube-out / weight-out structural amplifier', start: 373 },
+      { id: 'unfilled-tile', label: 'The in-yard execution layer above gate-and-locate', start: 746 },
+      { id: 'suzano-window', label: 'The Suzano JV close as a timing driver', start: 1119 },
+      { id: 'first-pilot', label: 'Proof at the worst-dock-cycle NA plant', start: 1492 },
     ],
-    generatedAt: '2026-05-12T00:00:00Z',
+    generatedAt: '2026-05-14T22:00:00Z',
   },
 
   theme: {

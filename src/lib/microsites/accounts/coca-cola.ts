@@ -555,17 +555,17 @@ export const cocaCola: AccountMicrositeData = {
   ],
 
   audioBrief: {
-    src: '/audio/yard-network-brief.mp3',
+    src: '/audio/coca-cola.m4a',
     intro:
-      'This brief is for Daniel Coe. The operating-system discipline KORE put on yards Coca-Cola does not operate, and the orchestrated supply chain extended into joint planning across the bottler network, is the same discipline this brief proposes for the yard layer above the sites. The five minutes that follow are about the one surface it has not yet reached.',
+      'This brief is for Daniel Coe. The operating-system discipline KORE put on yards Coca-Cola does not operate, and the orchestrated supply chain extended into joint planning across the bottler network, is the same discipline this brief proposes for the yard layer above the sites. The fifteen minutes that follow are about the one surface it has not yet reached.',
     chapters: [
-      { id: 'kore-precedent', label: 'I. KORE is the precedent', start: 0 },
-      { id: 'orchestrated-supply-chain', label: 'II. What the orchestrated supply chain made expensive', start: 65 },
-      { id: 'unstandardized-seam', label: 'III. The unstandardized seam above the sites', start: 130 },
-      { id: 'pilot-not-ccna', label: 'IV. Why the first pilot is one bottler, not CCNA', start: 195 },
-      { id: 'opt-in-standard', label: 'V. What proof at one bottler earns across the system', start: 260 },
+      { id: 'kore-precedent', label: 'KORE is the precedent for non-optional', start: 0 },
+      { id: 'orchestrated-supply-chain', label: 'What the orchestrated supply chain made expensive', start: 183 },
+      { id: 'unstandardized-seam', label: 'The unstandardized seam above the sites', start: 365 },
+      { id: 'primo-shape-similar', label: 'Primo — same coordinates, harder freight', start: 548 },
+      { id: 'one-bottler-then-system', label: 'One Consolidated campus, then a system standard', start: 730 },
     ],
-    generatedAt: '2026-05-12T00:00:00Z',
+    generatedAt: '2026-05-14T22:00:00Z',
   },
 
   theme: {

@@ -549,17 +549,17 @@ export const abInbev: AccountMicrositeData = {
   ],
 
   audioBrief: {
-    src: '/audio/yard-network-brief.mp3',
+    src: '/audio/ab-inbev.m4a',
     intro:
-      'This brief is for Elito Siqueira. The touchless-planning discipline you have spent five years building at AB InBev now runs U.S. demand at 85% touchless and trailer telemetry at 15% lift in the European deployment. The five minutes that follow are about the one tile it has not yet reached.',
+      'Thirty-seven minutes for Elito Siqueira. The touchless-planning discipline you have spent five years building at AB InBev now runs U.S. demand at 85% touchless and trailer telemetry at 15% lift in the European deployment. What follows is about the one tile it has not yet reached.',
     chapters: [
-      { id: 'thesis', label: 'I. The plan-side case is closed', start: 0 },
-      { id: 'what-touchless-made', label: 'II. What touchless planning made expensive', start: 65 },
-      { id: 'unfilled-tile', label: 'III. The unfilled tile between o9 and Sensolus', start: 130 },
-      { id: 'not-flagship', label: 'IV. Why the first pilot is not a flagship brewery', start: 195 },
-      { id: 'simple-site-proof', label: 'V. What proof at Cartersville or ABOne earns', start: 260 },
+      { id: 'thesis', label: 'The plan-side case is closed — and won', start: 0 },
+      { id: 'observation', label: 'Where the network does not agree with itself at the dock', start: 453 },
+      { id: 'comparable', label: 'Primo Brands — same coordinates, harder freight', start: 907 },
+      { id: 'methodology', label: 'How the unfilled tile between o9 and Sensolus was sized', start: 1360 },
+      { id: 'about', label: 'What proof at Cartersville or ABOne earns next', start: 1814 },
     ],
-    generatedAt: '2026-05-12T00:00:00Z',
+    generatedAt: '2026-05-14T22:00:00Z',
   },
 
   theme: {

@@ -62,7 +62,6 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
-import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 export const theHomeDepot: AccountMicrositeData = {
   slug: 'the-home-depot',
@@ -625,11 +624,17 @@ export const theHomeDepot: AccountMicrositeData = {
   ],
 
   audioBrief: {
-    src: '/audio/yard-network-brief.mp3',
+    src: '/audio/the-home-depot.m4a',
     intro:
-      'This brief is for John Deaton. The One Supply Chain buildout you led — the 19-RDC rollout in 2007 that the network still runs on, then SVP Supply Chain through the FDC architecture, then EVP since November 2021 across MDO, DFC, and the post-buildout chapter Richard McPhail named publicly in December 2025 — is the foundation the next five minutes builds on. What follows is the yard layer above the four archetypes, where the Pro-customer growth lifting the TAM to ~$1.2 trillion through SRS, GMS, and the May 2026 Mingledorff\'s close lands as either operating leverage or carrier-scorecard variance.',
-    chapters: AUDIO_BRIEF_CHAPTERS,
-    generatedAt: '2026-05-12T00:00:00Z',
+      "Forty-two minutes, dictated for the commute or the office walk. The same five beats this memo walks in print, in audio. Skip into any chapter below; the page won't move.",
+    chapters: [
+      { id: 'thesis', label: 'The layer above the archetypes', start: 0 },
+      { id: 'four-archetypes', label: 'Four archetypes, one set of dock doors', start: 505 },
+      { id: 'primo-proof', label: 'If it lands on water, it lands on retail', start: 1010 },
+      { id: 'methodology', label: 'How this analysis was built', start: 1515 },
+      { id: 'run-it-hot', label: 'You built the network — now run it hot', start: 2020 },
+    ],
+    generatedAt: '2026-05-14T22:00:00Z',
   },
 
   theme: {
