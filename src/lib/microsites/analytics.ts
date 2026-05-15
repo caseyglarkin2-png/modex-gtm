@@ -1,3 +1,5 @@
+import { readTrafficQuality } from './bot-detection';
+
 export interface MicrositeEngagementAnalyticsInput {
   account_name: string;
   account_slug: string;
@@ -10,6 +12,8 @@ export interface MicrositeEngagementAnalyticsInput {
   scroll_depth_pct: number;
   duration_seconds: number;
   updated_at: Date;
+  /** Engagement metadata Json — carries server-derived trafficQuality. */
+  metadata?: unknown;
 }
 
 export interface MicrositeSessionSignalInput {
@@ -64,7 +68,16 @@ export interface HotMicrositeAccount {
 }
 
 export interface MicrositeAnalyticsSummary {
+  /** Human sessions only — bot + suspect traffic is excluded. */
   totalSessions: number;
+  /** Distinct people (person_slug) across human sessions. */
+  uniquePeople: number;
+  /** Every session row, including filtered traffic. */
+  rawSessions: number;
+  /** Sessions classified as automated scanners (UA match). */
+  botSessions: number;
+  /** Sessions with no engagement trace — probably automation. */
+  suspectSessions: number;
   accountsEngaged: number;
   highIntentSessions: number;
   ctaSessions: number;
@@ -225,11 +238,36 @@ export function buildMicrositeAnalyticsSummary(
   sessions: MicrositeEngagementAnalyticsInput[],
   now = new Date(),
 ): MicrositeAnalyticsSummary {
-  const orderedSessions = [...sessions].sort((left, right) => right.updated_at.getTime() - left.updated_at.getTime());
+  // Microsite links arrive by email, so every URL is hit by the
+  // recipient's security scanner. Partition the raw rows and run every
+  // downstream metric on human traffic only — bots never inflate
+  // session counts, intent scores, or hot-account rankings.
+  const rawSessions = sessions.length;
+  let botSessions = 0;
+  let suspectSessions = 0;
+  const humanSessions: MicrositeEngagementAnalyticsInput[] = [];
+  for (const session of sessions) {
+    const quality = readTrafficQuality(session.metadata);
+    if (quality === 'bot') botSessions++;
+    else if (quality === 'suspect') suspectSessions++;
+    else humanSessions.push(session);
+  }
+
+  // Uniques = distinct people across human sessions. Every outreach
+  // link carries ?p=<person>, so person_slug is the cleanest "who".
+  const uniquePeople = new Set(
+    humanSessions.map((session) => session.person_slug ?? session.person_name ?? session.path),
+  ).size;
+
+  const orderedSessions = [...humanSessions].sort((left, right) => right.updated_at.getTime() - left.updated_at.getTime());
 
   if (orderedSessions.length === 0) {
     return {
       totalSessions: 0,
+      uniquePeople: 0,
+      rawSessions,
+      botSessions,
+      suspectSessions,
       accountsEngaged: 0,
       highIntentSessions: 0,
       ctaSessions: 0,
@@ -375,6 +413,10 @@ export function buildMicrositeAnalyticsSummary(
 
   return {
     totalSessions: orderedSessions.length,
+    uniquePeople,
+    rawSessions,
+    botSessions,
+    suspectSessions,
     accountsEngaged: hotAccountMap.size,
     highIntentSessions,
     ctaSessions,
@@ -395,7 +437,11 @@ export function buildMicrositeAccountAnalytics(
   const summary = buildMicrositeAnalyticsSummary(sessions, now);
   const variantMap = new Map<string, Omit<MicrositeVariantPerformance, 'avgScrollDepthPct' | 'avgDurationSeconds'>>();
 
-  for (const session of sessions) {
+  // Variant rollups run on human traffic only — same filtering the
+  // summary applies — so per-variant counts match the headline numbers.
+  const humanSessions = sessions.filter((session) => readTrafficQuality(session.metadata) === 'human');
+
+  for (const session of humanSessions) {
     const label = session.person_name ?? 'Overview';
     const slug = session.person_slug ?? 'overview';
     const key = session.path;
@@ -425,7 +471,7 @@ export function buildMicrositeAccountAnalytics(
 
   const variants = Array.from(variantMap.values())
     .map((variant) => {
-      const variantSessions = sessions.filter((session) => session.path === variant.path);
+      const variantSessions = humanSessions.filter((session) => session.path === variant.path);
 
       return {
         ...variant,

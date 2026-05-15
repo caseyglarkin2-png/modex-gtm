@@ -220,6 +220,7 @@ export async function dbGetMicrositeAccountAnalytics(accountName: string): Promi
       scroll_depth_pct: session.scroll_depth_pct,
       duration_seconds: session.duration_seconds,
       updated_at: session.updated_at,
+      metadata: session.metadata,
     })),
   );
 }
@@ -243,6 +244,7 @@ export async function dbGetMicrositeAccountAnalyticsByAccounts(accountNames: str
       scroll_depth_pct: session.scroll_depth_pct,
       duration_seconds: session.duration_seconds,
       updated_at: session.updated_at,
+      metadata: session.metadata,
     })),
   );
 }
@@ -267,6 +269,7 @@ export async function dbGetMicrositeAnalytics() {
       scroll_depth_pct: session.scroll_depth_pct,
       duration_seconds: session.duration_seconds,
       updated_at: session.updated_at,
+      metadata: session.metadata,
     })),
   );
 }
