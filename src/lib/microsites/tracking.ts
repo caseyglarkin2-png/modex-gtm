@@ -36,6 +36,10 @@ export const micrositeTrackingSnapshotSchema = z.object({
   variantHistory: z.array(z.string().min(1).max(120)).default([]),
   scrollDepthPct: z.number().int().min(0).max(100).default(0),
   durationSeconds: z.number().int().min(0).max(86_400).default(0),
+  /** Furthest point reached in the audio brief, 0-100. */
+  audioProgressPct: z.number().int().min(0).max(100).default(0),
+  /** Furthest point reached in the video coda, 0-100. */
+  videoProgressPct: z.number().int().min(0).max(100).default(0),
   variantSlug: z.string().min(1).max(120).optional(),
   lastCtaId: z.string().min(1).max(120).optional(),
   metadata: z.record(z.string(), z.string()).optional(),
@@ -58,6 +62,8 @@ export function dedupeTrackingSnapshot(snapshot: MicrositeTrackingSnapshot): str
     variantHistory: [...snapshot.variantHistory].sort(),
     scrollDepthPct: snapshot.scrollDepthPct,
     durationSeconds: snapshot.durationSeconds,
+    audioProgressPct: snapshot.audioProgressPct,
+    videoProgressPct: snapshot.videoProgressPct,
     variantSlug: snapshot.variantSlug,
     lastCtaId: snapshot.lastCtaId,
   });

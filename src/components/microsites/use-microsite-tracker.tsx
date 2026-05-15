@@ -63,6 +63,8 @@ export function useMicrositeTracker({
   const ctaIds = useRef(new Set<string>());
   const variantHistory = useRef(new Set<string>());
   const scrollDepthPct = useRef(0);
+  const audioProgressPct = useRef(0);
+  const videoProgressPct = useRef(0);
   const startTime = useRef(Date.now());
   const lastPayloadHash = useRef('');
 
@@ -79,6 +81,8 @@ export function useMicrositeTracker({
       variantHistory: Array.from(variantHistory.current),
       scrollDepthPct: scrollDepthPct.current,
       durationSeconds: Math.round((Date.now() - startTime.current) / 1000),
+      audioProgressPct: audioProgressPct.current,
+      videoProgressPct: videoProgressPct.current,
       variantSlug,
       lastCtaId: Array.from(ctaIds.current).at(-1),
     });
@@ -131,6 +135,32 @@ export function useMicrositeTracker({
       sectionObserver.observe(element);
     });
 
+    // Audio/video depth — listen for timeupdate and keep the furthest
+    // point reached (monotonic max), so every flush reports the deepest
+    // the visitor got, not where the playhead currently sits.
+    const trackMediaProgress = (
+      element: HTMLMediaElement,
+      progressRef: { current: number },
+    ) => {
+      const onTimeUpdate = () => {
+        const duration = element.duration;
+        if (!duration || !Number.isFinite(duration)) return;
+        const pct = Math.round((element.currentTime / duration) * 100);
+        if (pct > progressRef.current) progressRef.current = Math.min(pct, 100);
+      };
+      element.addEventListener('timeupdate', onTimeUpdate);
+      return () => element.removeEventListener('timeupdate', onTimeUpdate);
+    };
+
+    const audioElement = document.querySelector('audio');
+    const videoElement = document.querySelector('video');
+    const detachAudioProgress = audioElement
+      ? trackMediaProgress(audioElement, audioProgressPct)
+      : undefined;
+    const detachVideoProgress = videoElement
+      ? trackMediaProgress(videoElement, videoProgressPct)
+      : undefined;
+
     let scrollTick: ReturnType<typeof setTimeout> | null = null;
 
     const onScroll = () => {
@@ -182,6 +212,8 @@ export function useMicrositeTracker({
       window.removeEventListener('pagehide', onPageHide);
       window.clearInterval(interval);
       if (scrollTick) clearTimeout(scrollTick);
+      detachAudioProgress?.();
+      detachVideoProgress?.();
       flush('beacon', true);
     };
   }, [flush, flushIntervalMs, path, variantSlug]);

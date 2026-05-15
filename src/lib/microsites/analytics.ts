@@ -39,6 +39,8 @@ export interface RecentMicrositeSession {
   variantCount: number;
   scrollDepthPct: number;
   durationSeconds: number;
+  audioProgressPct: number;
+  videoProgressPct: number;
   viewedAt: Date;
   intentScore: number;
   isHighIntent: boolean;
@@ -121,6 +123,16 @@ function hasSection(sections: string[], sectionId: string) {
   return sections.some((section) => section === sectionId || section.startsWith(`${sectionId}-`));
 }
 
+/** Reads a 0-100 progress value stored as a string in engagement metadata. */
+export function readMetadataProgress(metadata: unknown, key: string): number {
+  if (metadata && typeof metadata === 'object' && !Array.isArray(metadata)) {
+    const raw = (metadata as Record<string, unknown>)[key];
+    const value = typeof raw === 'string' ? Number.parseInt(raw, 10) : typeof raw === 'number' ? raw : Number.NaN;
+    if (Number.isFinite(value)) return Math.max(0, Math.min(100, value));
+  }
+  return 0;
+}
+
 export function buildMicrositeSessionSignals(session: MicrositeSessionSignalInput): MicrositeSessionSignals {
   const proposalViewed = session.path.startsWith('/proposal/')
     || session.cta_ids.some((ctaId) => ctaId.includes('proposal'));
@@ -138,6 +150,8 @@ export function buildMicrositeSessionSignals(session: MicrositeSessionSignalInpu
 export function scoreMicrositeSession(session: MicrositeEngagementAnalyticsInput): number {
   let score = 0;
   const signals = buildMicrositeSessionSignals(session);
+  const audioProgress = readMetadataProgress(session.metadata, 'audioProgressPct');
+  const videoProgress = readMetadataProgress(session.metadata, 'videoProgressPct');
 
   if (session.sections_viewed.length >= 3) score += 15;
   if (session.sections_viewed.length >= 5) score += 10;
@@ -150,12 +164,17 @@ export function scoreMicrositeSession(session: MicrositeEngagementAnalyticsInput
   if (signals.proposalViewed) score += 10;
   if (signals.roiViewed) score += 10;
   if (signals.exportClicked) score += 20;
+  // Listening / watching deep is a strong, deliberate intent signal.
+  if (audioProgress >= 50 || videoProgress >= 50) score += 10;
+  if (audioProgress >= 90 || videoProgress >= 90) score += 15;
 
   return Math.min(100, score);
 }
 
 export function isHighIntentMicrositeSession(session: MicrositeEngagementAnalyticsInput): boolean {
   const signals = buildMicrositeSessionSignals(session);
+  const audioProgress = readMetadataProgress(session.metadata, 'audioProgressPct');
+  const videoProgress = readMetadataProgress(session.metadata, 'videoProgressPct');
 
   if (signals.exportClicked) return true;
   if (signals.proposalViewed && signals.roiViewed) return true;
@@ -163,6 +182,9 @@ export function isHighIntentMicrositeSession(session: MicrositeEngagementAnalyti
   if (session.sections_viewed.length >= 4 && session.scroll_depth_pct >= 70) return true;
   if (session.sections_viewed.length >= 3 && session.duration_seconds >= 90) return true;
   if (session.variant_history.length > 1 && session.scroll_depth_pct >= 60) return true;
+  // Listening to most of the audio brief, or watching most of the video
+  // coda, is a deliberate deep-engagement signal.
+  if (audioProgress >= 75 || videoProgress >= 75) return true;
 
   return scoreMicrositeSession(session) >= 50;
 }
@@ -357,6 +379,8 @@ export function buildMicrositeAnalyticsSummary(
       variantCount: session.variant_history.length,
       scrollDepthPct: session.scroll_depth_pct,
       durationSeconds: session.duration_seconds,
+      audioProgressPct: readMetadataProgress(session.metadata, 'audioProgressPct'),
+      videoProgressPct: readMetadataProgress(session.metadata, 'videoProgressPct'),
       viewedAt: session.updated_at,
       intentScore,
       isHighIntent,
