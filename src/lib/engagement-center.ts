@@ -588,3 +588,49 @@ export function parseEngagementTab(tab: string | undefined): EngagementTabId {
   const tabIds = new Set(engagementCenterTabs.map((item) => item.id));
   return tabIds.has(tab as EngagementTabId) ? (tab as EngagementTabId) : 'inbox';
 }
+
+// ── Recency: relative time + activity-window helpers ──────────────────
+//
+// A sales rep opening the engagement workspace scans for *motion*, not
+// dates. These power the Recent Activity feed: relative timestamps and
+// a selectable look-back window.
+
+export type EngagementWindowId = '1h' | '24h' | '7d';
+
+export const engagementWindows: { id: EngagementWindowId; label: string; ms: number }[] = [
+  { id: '1h', label: 'Last hour', ms: 60 * 60 * 1000 },
+  { id: '24h', label: 'Last 24h', ms: 24 * 60 * 60 * 1000 },
+  { id: '7d', label: 'Last 7 days', ms: 7 * 24 * 60 * 60 * 1000 },
+];
+
+export function parseEngagementWindow(value: string | undefined): EngagementWindowId {
+  return value === '1h' || value === '7d' ? value : '24h';
+}
+
+/** "just now" / "12m ago" / "3h ago" / "2d ago" / "3w ago" / date. */
+export function formatRelativeTime(date: Date, now: Date = new Date()): string {
+  const diffMs = now.getTime() - date.getTime();
+  if (diffMs < 0) return 'just now';
+  const seconds = Math.floor(diffMs / 1000);
+  if (seconds < 45) return 'just now';
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  if (days < 7) return `${days}d ago`;
+  const weeks = Math.floor(days / 7);
+  if (weeks < 5) return `${weeks}w ago`;
+  return date.toLocaleDateString();
+}
+
+/** Items from buildEngagementItems() that occurred within the window. */
+export function filterItemsWithinWindow(
+  items: EngagementItem[],
+  windowId: EngagementWindowId,
+  now: Date = new Date(),
+): EngagementItem[] {
+  const config = engagementWindows.find((entry) => entry.id === windowId) ?? engagementWindows[1];
+  const cutoff = now.getTime() - config.ms;
+  return items.filter((item) => item.occurredAt.getTime() >= cutoff);
+}

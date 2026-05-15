@@ -10,8 +10,13 @@ import {
   buildEngagementItems,
   buildHotAccounts,
   engagementCenterTabs,
+  engagementWindows,
+  filterItemsWithinWindow,
+  formatRelativeTime,
   parseEngagementTab,
+  parseEngagementWindow,
   type EngagementItem,
+  type EngagementWindowId,
 } from '@/lib/engagement-center';
 import { buildFailureClusters, buildRetryRecommendations } from '@/lib/revops/failure-intelligence';
 import { computeLearningReviewSlaDueAt } from '@/lib/revops/engagement-learning';
@@ -25,6 +30,7 @@ export const metadata = { title: 'Engagement' };
 
 type SearchParams = {
   tab?: string;
+  window?: string;
   markRead?: string;
   followUpAccount?: string;
   followUpSource?: string;
@@ -44,6 +50,7 @@ export default async function EngagementPage({
 }) {
   const params = (await searchParams) ?? {};
   const selectedTab = parseEngagementTab(params.tab);
+  const selectedWindow = parseEngagementWindow(params.window);
 
   const markReadId = Number(params.markRead);
   if (!Number.isNaN(markReadId) && markReadId > 0) {
@@ -360,6 +367,9 @@ export default async function EngagementPage({
     activities,
   });
   const hotAccounts = buildHotAccounts(items).slice(0, 12);
+  // Recency-first feed — every signal source, newest-first, within the
+  // selected look-back window. items is already sorted occurredAt desc.
+  const recentItems = filterItemsWithinWindow(items, selectedWindow);
   const inboxItems = items.filter((item) => item.tab === 'inbox').slice(0, 20);
   const micrositeItems = items.filter((item) => item.tab === 'microsite-sessions').slice(0, 20);
   const failureItems = items.filter((item) => item.tab === 'bounces-failures').slice(0, 20);
@@ -401,6 +411,12 @@ export default async function EngagementPage({
           </Link>
         </div>
       </div>
+
+      <RecentActivityFeed
+        items={recentItems}
+        selectedWindow={selectedWindow}
+        selectedTab={selectedTab}
+      />
 
       <div className="grid gap-3 md:grid-cols-4">
         <MetricCard size="md" icon={Inbox} label="Replies" value={replyCount} />
@@ -652,7 +668,7 @@ function EngagementSignalCard({ item }: { item: EngagementItem }) {
                 item.accountName,
                 item.personaLabel,
                 item.campaignName,
-                item.occurredAt.toLocaleString(),
+                formatRelativeTime(item.occurredAt),
               ]
                 .filter(Boolean)
                 .join(' · ')}
@@ -726,5 +742,102 @@ function EngagementSignalCard({ item }: { item: EngagementItem }) {
         </div>
       </CardContent>
     </Card>
+  );
+}
+
+/**
+ * Recency-first feed pinned above the workspace tabs. Every signal
+ * source merged, newest-first, within a selectable look-back window —
+ * the answer to "what happened since I sent that email?" without
+ * clicking into a tab.
+ */
+function RecentActivityFeed({
+  items,
+  selectedWindow,
+  selectedTab,
+}: {
+  items: EngagementItem[];
+  selectedWindow: EngagementWindowId;
+  selectedTab: string;
+}) {
+  const accountCount = new Set(
+    items.map((item) => item.accountName).filter(Boolean),
+  ).size;
+  const windowLabel = (
+    engagementWindows.find((entry) => entry.id === selectedWindow)?.label ?? 'Last 24h'
+  ).toLowerCase();
+
+  return (
+    <Card>
+      <CardHeader className="pb-3">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <CardTitle className="text-base">Recent Activity</CardTitle>
+            <p className="mt-1 text-xs text-muted-foreground">
+              {items.length === 0
+                ? `No engagement in the ${windowLabel}`
+                : `${items.length} engagement${items.length === 1 ? '' : 's'} · ${accountCount} account${accountCount === 1 ? '' : 's'} · ${windowLabel}`}
+            </p>
+          </div>
+          <div className="flex gap-1">
+            {engagementWindows.map((entry) => (
+              <Link key={entry.id} href={`/engagement?tab=${selectedTab}&window=${entry.id}`}>
+                <Button
+                  variant={entry.id === selectedWindow ? 'default' : 'outline'}
+                  size="sm"
+                  className="h-7 px-2.5 text-xs"
+                >
+                  {entry.label}
+                </Button>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent className="pt-0">
+        {items.length === 0 ? (
+          <p className="py-2 text-sm text-muted-foreground">
+            Nothing yet — engagement from the {windowLabel} lands here newest-first.
+          </p>
+        ) : (
+          <div className="divide-y divide-[var(--border)]">
+            {items.slice(0, 15).map((item) => (
+              <RecentActivityRow key={item.id} item={item} />
+            ))}
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+function RecentActivityRow({ item }: { item: EngagementItem }) {
+  const href = item.actions.accountHref ?? item.actions.followUpHref;
+  const inner = (
+    <div className="flex items-center justify-between gap-3 py-2">
+      <div className="min-w-0">
+        <p className="truncate text-sm">
+          <span className="font-semibold">{item.accountName ?? 'Unknown account'}</span>
+          <span className="text-muted-foreground"> — {item.statusLabel}</span>
+        </p>
+        <p className="truncate text-xs text-muted-foreground">{item.title}</p>
+      </div>
+      <div className="flex shrink-0 items-center gap-2">
+        {item.unread ? (
+          <Badge variant="default" className="h-5 px-1.5 text-[10px]">new</Badge>
+        ) : null}
+        <Badge variant="outline" className="h-5 px-1.5 text-[10px]">{item.kind}</Badge>
+        <span className="w-16 text-right text-xs tabular-nums text-muted-foreground">
+          {formatRelativeTime(item.occurredAt)}
+        </span>
+      </div>
+    </div>
+  );
+  return href ? (
+    <Link href={href} className="block transition hover:bg-[var(--accent)]/40">
+      {inner}
+    </Link>
+  ) : (
+    inner
   );
 }
