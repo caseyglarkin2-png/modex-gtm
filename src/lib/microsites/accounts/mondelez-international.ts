@@ -30,7 +30,6 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
-import { AUDIO_BRIEF_CHAPTERS, AUDIO_BRIEF_SRC } from '../audio-brief';
 
 export const mondelezInternational: AccountMicrositeData = {
   slug: 'mondelez-international',
@@ -304,11 +303,17 @@ export const mondelezInternational: AccountMicrositeData = {
   ],
 
   audioBrief: {
-    src: AUDIO_BRIEF_SRC,
+    src: '/audio/mondelez-international.m4a',
     intro:
-      'This brief is for Claudio Parrotta. The operating-system thinking you applied to the NA turnaround — and the Master Plan 2030 you authored underneath it — is the thinking the next five minutes builds on. What follows is the layer above the sites where each of the last five acquisitions still shows its inherited operating practice.',
-    chapters: AUDIO_BRIEF_CHAPTERS,
-    generatedAt: '2026-05-12T00:00:00Z',
+      'Thirty minutes for Claudio Parrotta. The operating-system thinking you applied to the NA turnaround — and the Master Plan 2030 you authored underneath it — is the thinking what follows builds on. What follows is the layer above the sites where each of the last five acquisitions still shows its inherited operating practice.',
+    chapters: [
+      { id: 'thesis', label: 'The yard layer as the unfinished part of the Master Plan', start: 0 },
+      { id: 'observation', label: 'Five acquisitions in five years, converging through the chocolate-surge weeks', start: 366 },
+      { id: 'comparable', label: 'Primo Brands — same shape, harder freight', start: 732 },
+      { id: 'methodology', label: 'How the post-2018 acquisition sequence was traced to the yard', start: 1098 },
+      { id: 'about', label: 'What the productivity pillar has not yet counted', start: 1464 },
+    ],
+    generatedAt: '2026-05-14T22:30:00Z',
   },
 
   theme: {
