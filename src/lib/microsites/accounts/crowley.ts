@@ -439,6 +439,11 @@ export const crowley: AccountMicrositeData = {
       { id: 'family-cadence', label: 'What family-ownership underwrites', start: 660 },
       { id: 'pilot-config', label: 'The pilot that proves the integrated standard', start: 890 },
     ],
+    videoFollowUp: {
+      src: '/audio/crowley-video.mp4',
+      intro:
+        'Or watch. The same brief, compressed into a few minutes — for the times forwarding a video is easier than describing the memo.',
+    },
     generatedAt: '2026-05-14T21:16:00Z',
   },
 
