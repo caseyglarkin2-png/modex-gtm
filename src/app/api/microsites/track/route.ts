@@ -7,6 +7,7 @@ import {
   shouldLogMicrositeCtaActivity,
 } from '@/lib/microsites/engagement';
 import { micrositeTrackingSnapshotSchema } from '@/lib/microsites/tracking';
+import { classifyMicrositeTraffic } from '@/lib/microsites/bot-detection';
 
 async function parseRequestBody(req: NextRequest): Promise<unknown> {
   const contentType = req.headers.get('content-type') ?? '';
@@ -40,6 +41,26 @@ export async function POST(req: NextRequest) {
   }
 
   const snapshot = parsed.data;
+
+  // Server-derived traffic metadata. Microsite links are delivered by
+  // email, so every URL gets hit by the recipient's security scanner —
+  // classify each session so analytics + intent alerts can ignore it.
+  const userAgent = req.headers.get('user-agent');
+  const referrer = req.headers.get('referer') ?? undefined;
+  const trafficQuality = classifyMicrositeTraffic({
+    userAgent,
+    scrollDepthPct: snapshot.scrollDepthPct,
+    durationSeconds: snapshot.durationSeconds,
+    ctaCount: snapshot.ctaIds.length,
+    sectionCount: snapshot.sectionsViewed.length,
+  });
+  snapshot.metadata = {
+    ...(snapshot.metadata ?? {}),
+    ip,
+    trafficQuality,
+    ...(userAgent ? { userAgent: userAgent.slice(0, 512) } : {}),
+    ...(referrer ? { referrer: referrer.slice(0, 512) } : {}),
+  };
 
   try {
     const existing = await prisma.micrositeEngagement.findUnique({
