@@ -9,7 +9,6 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
-import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 
 // LEGACY SECTIONS (preserved for reference — M3.2-M3.6 may lift prose into memo sections)
@@ -592,11 +591,17 @@ export const diageo: AccountMicrositeData = {
   ],
 
   audioBrief: {
-    src: '/audio/yard-network-brief.mp3',
+    src: '/audio/diageo.m4a',
     intro:
-      'This brief is for the Diageo North America supply team. Accelerate has reached procurement, the production footprint, and decarbonization across Plainfield, Lebanon, and the new Montgomery site. The five minutes that follow are about the one layer between them it has not yet reached — at the moment a trailer of Casamigos or Don Julio carries half a million dollars in finished goods through a gate that still runs on a radio.',
-    chapters: AUDIO_BRIEF_CHAPTERS,
-    generatedAt: '2026-05-12T00:00:00Z',
+      'This brief is for the Diageo North America supply team. Accelerate has reached procurement, the production footprint, and decarbonization across Plainfield, Lebanon, and the new Montgomery site. The thirty-six minutes that follow are about the one layer between them it has not yet reached — at the moment a trailer of Casamigos or Don Julio carries half a million dollars in finished goods through a gate that still runs on a radio.',
+    chapters: [
+      { id: 'yard-constraint', label: 'Why the yard is the network constraint', start: 0 },
+      { id: 'accelerate-tile', label: 'The Accelerate tile no one has filled yet', start: 430 },
+      { id: 'primo-comparable', label: 'Primo Brands: same coordinates, harder freight', start: 861 },
+      { id: 'how-built', label: 'How this analysis was built', start: 1291 },
+      { id: 'working-memo', label: 'A working memo, not a sales asset', start: 1722 },
+    ],
+    generatedAt: '2026-05-14T23:55:00Z',
   },
 
   theme: {
