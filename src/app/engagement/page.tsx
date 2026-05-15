@@ -17,6 +17,8 @@ import { buildFailureClusters, buildRetryRecommendations } from '@/lib/revops/fa
 import { computeLearningReviewSlaDueAt } from '@/lib/revops/engagement-learning';
 import { OPERATOR_OUTCOME_TAXONOMY, parseOperatorOutcomeLabel } from '@/lib/revops/operator-outcomes';
 import { prisma } from '@/lib/prisma';
+import { dbGetMicrositeAnalytics } from '@/lib/db';
+import { readTrafficQuality } from '@/lib/microsites/bot-detection';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Engagement' };
@@ -219,10 +221,10 @@ export default async function EngagementPage({
     }
   }
 
-  const [replyCount, notificationCount, micrositeCount, failedRecipients, notifications, emailLogs, sendFailures, micrositeSessions, meetings, activities, learningReviewItems] = await Promise.all([
+  const [replyCount, notificationCount, micrositeAnalytics, failedRecipients, notifications, emailLogs, sendFailures, micrositeSessions, meetings, activities, learningReviewItems] = await Promise.all([
     prisma.notification.count({ where: { type: { contains: 'reply', mode: 'insensitive' } } }),
     prisma.notification.count(),
-    prisma.micrositeEngagement.count(),
+    dbGetMicrositeAnalytics(),
     prisma.sendJobRecipient.count({ where: { status: 'failed' } }),
     prisma.notification.findMany({
       orderBy: { created_at: 'desc' },
@@ -297,6 +299,7 @@ export default async function EngagementPage({
         duration_seconds: true,
         cta_ids: true,
         updated_at: true,
+        metadata: true,
       },
     }),
     prisma.meeting.findMany({
@@ -341,11 +344,18 @@ export default async function EngagementPage({
     }),
   ]);
 
+  // Exclude bot/scanner sessions from the engagement feed. Microsite
+  // links are delivered by email, so every URL is hit by the recipient's
+  // security scanner — those rows would otherwise pollute the session
+  // list and the hot-account ranking.
+  const humanMicrositeSessions = micrositeSessions.filter(
+    (session) => readTrafficQuality(session.metadata) === 'human',
+  );
   const items = buildEngagementItems({
     notifications,
     emailLogs,
     sendFailures,
-    micrositeSessions,
+    micrositeSessions: humanMicrositeSessions,
     meetings,
     activities,
   });
@@ -395,7 +405,13 @@ export default async function EngagementPage({
       <div className="grid gap-3 md:grid-cols-4">
         <MetricCard size="md" icon={Inbox} label="Replies" value={replyCount} />
         <MetricCard size="md" icon={Activity} label="Notifications" value={notificationCount} />
-        <MetricCard size="md" icon={MousePointerClick} label="Microsite Sessions" value={micrositeCount} />
+        <MetricCard
+          size="md"
+          icon={MousePointerClick}
+          label="Microsite Reads"
+          value={micrositeAnalytics.totalSessions}
+          detail={`${micrositeAnalytics.uniquePeople} unique · ${micrositeAnalytics.botSessions + micrositeAnalytics.suspectSessions} scanner hits filtered`}
+        />
         <MetricCard size="md" icon={AlertTriangle} label="Send Failures" value={failedRecipients} tone="text-amber-600" />
       </div>
 
