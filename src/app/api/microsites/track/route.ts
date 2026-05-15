@@ -60,6 +60,14 @@ export async function POST(req: NextRequest) {
     trafficQuality,
     ...(userAgent ? { userAgent: userAgent.slice(0, 512) } : {}),
     ...(referrer ? { referrer: referrer.slice(0, 512) } : {}),
+    // Audio/video depth — only written when non-zero so an early
+    // pre-playback flush never clobbers a deeper value already stored.
+    ...(snapshot.audioProgressPct > 0
+      ? { audioProgressPct: String(snapshot.audioProgressPct) }
+      : {}),
+    ...(snapshot.videoProgressPct > 0
+      ? { videoProgressPct: String(snapshot.videoProgressPct) }
+      : {}),
   };
 
   try {
