@@ -293,6 +293,20 @@ export const kroger: AccountMicrositeData = {
     { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
   ],
 
+  audioBrief: {
+    src: '/audio/kroger.m4a',
+    intro:
+      "Twenty-five minutes, dictated for the commute or the office walk. The same five beats this memo walks in print, in audio. Skip into any chapter below; the page won't move.",
+    chapters: [
+      { id: 'thesis', label: 'The yard between the systems', start: 0 },
+      { id: 'foran-inherits', label: "The supply chain Foran inherits", start: 300 },
+      { id: 'platform-costs', label: 'Why platform costs the meeting', start: 600 },
+      { id: 'single-dc-wedge', label: 'The single-DC wedge', start: 900 },
+      { id: 'primo-proof', label: 'What Primo proved', start: 1200 },
+    ],
+    generatedAt: '2026-05-14T21:10:00Z',
+  },
+
   theme: {
     accentColor: '#0d4d8b',
   },
