@@ -8,6 +8,12 @@ import {
 } from '@/lib/microsites/engagement';
 import { micrositeTrackingSnapshotSchema } from '@/lib/microsites/tracking';
 import { classifyMicrositeTraffic } from '@/lib/microsites/bot-detection';
+import type { MicrositeEngagementAnalyticsInput } from '@/lib/microsites/analytics';
+import {
+  buildIntentMessage,
+  decideIntentNotification,
+  sendSlackNotification,
+} from '@/lib/microsites/intent-notifications';
 
 async function parseRequestBody(req: NextRequest): Promise<unknown> {
   const contentType = req.headers.get('content-type') ?? '';
@@ -83,6 +89,28 @@ export async function POST(req: NextRequest) {
     const merged = buildMicrositeEngagementUpdate(existing, snapshot);
     const shouldLogActivity = shouldLogMicrositeCtaActivity(existing, snapshot);
 
+    // Intent notification — decide before the write so the dedup flag
+    // can ride along in the same upsert. The merged session is the
+    // existing record plus this flush.
+    const mergedSession: MicrositeEngagementAnalyticsInput = {
+      account_name: snapshot.accountName,
+      account_slug: snapshot.accountSlug,
+      person_name: snapshot.personName ?? null,
+      person_slug: snapshot.personSlug ?? null,
+      path: snapshot.path,
+      sections_viewed: merged.sections_viewed,
+      cta_ids: merged.cta_ids,
+      variant_history: merged.variant_history,
+      scroll_depth_pct: merged.scroll_depth_pct,
+      duration_seconds: merged.duration_seconds,
+      updated_at: new Date(),
+      metadata: merged.metadata,
+    };
+    const intentDecision = decideIntentNotification({ existing, snapshot, mergedSession });
+    if (intentDecision.notify) {
+      merged.metadata = { ...(merged.metadata ?? {}), intentNotified: 'true' };
+    }
+
     const engagement = existing
       ? await prisma.micrositeEngagement.update({
           where: {
@@ -132,6 +160,18 @@ export async function POST(req: NextRequest) {
         });
       } catch (activityError) {
         console.error('Failed to log microsite CTA activity', activityError);
+      }
+    }
+
+    // Fire the Slack ping after the dedup flag is persisted — a missed
+    // alert is better than a duplicate, and the flag is now written.
+    if (intentDecision.notify) {
+      try {
+        await sendSlackNotification(
+          buildIntentMessage(snapshot, mergedSession, intentDecision.reason),
+        );
+      } catch (notifyError) {
+        console.error('Failed to send intent notification', notifyError);
       }
     }
 
