@@ -593,6 +593,11 @@ export const hormelFoods: AccountMicrositeData = {
       { id: 'methodology', label: 'How the T&M-and-o9 stack was traced to the yard', start: 1279 },
       { id: 'about', label: 'The piece of the wrap-year scoreboard worth pushing back on', start: 1706 },
     ],
+    videoFollowUp: {
+      src: '/audio/hormel-foods-video.mp4',
+      intro:
+        'Or watch. The same brief, compressed into a few minutes — for the times forwarding a video is easier than describing the memo.',
+    },
     generatedAt: '2026-05-14T22:50:00Z',
   },
 

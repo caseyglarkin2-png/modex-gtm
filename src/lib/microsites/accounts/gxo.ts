@@ -405,6 +405,11 @@ export const gxo: AccountMicrositeData = {
       { id: 'how-this-was-built', label: 'How this analysis was built', start: 1348 },
       { id: 'push-back', label: 'The part most worth pushing back on', start: 1797 },
     ],
+    videoFollowUp: {
+      src: '/audio/gxo-video.mp4',
+      intro:
+        'Or watch. The same brief, compressed into a few minutes — for the times forwarding a video is easier than describing the memo.',
+    },
     generatedAt: '2026-05-14T22:30:00Z',
   },
 

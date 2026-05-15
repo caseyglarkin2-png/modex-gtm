@@ -608,6 +608,11 @@ export const fritoLay: AccountMicrositeData = {
       { id: 'not-plano', label: 'Why the first pilot is not Plano', start: 675 },
       { id: 'simple-site-proof', label: 'What proof at the simple site earns', start: 900 },
     ],
+    videoFollowUp: {
+      src: '/audio/frito-lay-video.mp4',
+      intro:
+        'Or watch. The same brief, compressed into a few minutes — for the times forwarding a video is easier than describing the memo.',
+    },
     generatedAt: '2026-05-14T21:16:00Z',
   },
 

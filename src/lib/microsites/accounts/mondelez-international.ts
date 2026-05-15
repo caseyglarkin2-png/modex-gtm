@@ -313,6 +313,11 @@ export const mondelezInternational: AccountMicrositeData = {
       { id: 'methodology', label: 'How the post-2018 acquisition sequence was traced to the yard', start: 1098 },
       { id: 'about', label: 'What the productivity pillar has not yet counted', start: 1464 },
     ],
+    videoFollowUp: {
+      src: '/audio/mondelez-international-video.mp4',
+      intro:
+        'Or watch. The same brief, compressed into a few minutes — for the times forwarding a video is easier than describing the memo.',
+    },
     generatedAt: '2026-05-14T22:30:00Z',
   },
 

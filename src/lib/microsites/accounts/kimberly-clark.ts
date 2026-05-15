@@ -312,6 +312,11 @@ export const kimberlyClark: AccountMicrositeData = {
       { id: 'suzano-window', label: 'The Suzano JV close as a timing driver', start: 1119 },
       { id: 'first-pilot', label: 'Proof at the worst-dock-cycle NA plant', start: 1492 },
     ],
+    videoFollowUp: {
+      src: '/audio/kimberly-clark-video.mp4',
+      intro:
+        'Or watch. The same brief, compressed into a few minutes — for the times forwarding a video is easier than describing the memo.',
+    },
     generatedAt: '2026-05-14T22:00:00Z',
   },
 
