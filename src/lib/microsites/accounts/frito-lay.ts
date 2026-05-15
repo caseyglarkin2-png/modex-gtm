@@ -598,17 +598,17 @@ export const fritoLay: AccountMicrositeData = {
   ],
 
   audioBrief: {
-    src: '/audio/yard-network-brief.mp3',
+    src: '/audio/frito-lay.m4a',
     intro:
-      'This brief is for Brian Watson. The operating-system discipline that turned PepsiCo Foods into the #1-ranked CPG supplier nine years running has already reached the plant floor at Frito-Lay — pep+, the Siemens / NVIDIA twin, Cheetos AI, the Outrider single-site pilot. The five minutes that follow are about the one tile it has not yet reached.',
+      'Nineteen minutes, for Brian Watson. The operating-system discipline that turned PepsiCo Foods into the #1-ranked CPG supplier nine years running has already reached the plant floor at Frito-Lay — pep+, the Siemens / NVIDIA twin, Cheetos AI, the Outrider single-site pilot. What follows is about the one tile it has not yet reached.',
     chapters: [
-      { id: 'thesis', label: 'I. The plant-floor case is closed', start: 0 },
-      { id: 'what-velocity-made', label: 'II. What snack-network velocity made expensive', start: 65 },
-      { id: 'unfilled-tile', label: 'III. The unfilled pep+ tile', start: 130 },
-      { id: 'not-plano', label: 'IV. Why the first pilot is not Plano', start: 195 },
-      { id: 'simple-site-proof', label: 'V. What proof at the simple site earns', start: 260 },
+      { id: 'thesis', label: 'The plant-floor case is closed', start: 0 },
+      { id: 'what-velocity-made', label: 'What snack-network velocity made expensive', start: 225 },
+      { id: 'unfilled-tile', label: 'The unfilled pep+ tile', start: 450 },
+      { id: 'not-plano', label: 'Why the first pilot is not Plano', start: 675 },
+      { id: 'simple-site-proof', label: 'What proof at the simple site earns', start: 900 },
     ],
-    generatedAt: '2026-05-12T00:00:00Z',
+    generatedAt: '2026-05-14T21:16:00Z',
   },
 
   theme: {

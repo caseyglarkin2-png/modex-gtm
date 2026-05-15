@@ -716,17 +716,17 @@ export const dannon: AccountMicrositeData = {
   ],
 
   audioBrief: {
-    src: '/audio/yard-network-brief.mp3',
+    src: '/audio/dannon.m4a',
     intro:
-      'This brief is for Heiko Gerling. The operating-discipline-first instinct you carried through the Kraft Heinz Managing Director years now runs Danone North America productivity and plant intelligence — Renew Danone and the Microsoft AI Academy. The five minutes that follow are about the one tile it has not yet reached.',
+      'Twenty-three minutes, for Heiko Gerling. The operating-discipline-first instinct you carried through the Kraft Heinz Managing Director years now runs Danone North America productivity and plant intelligence — Renew Danone and the Microsoft AI Academy. What follows is about the one tile it has not yet reached.',
     chapters: [
-      { id: 'thesis', label: 'I. The plant-level case is closed', start: 0 },
-      { id: 'what-renew-made', label: 'II. What Renew Danone made expensive', start: 65 },
-      { id: 'unfilled-tile', label: 'III. The unfilled operating-system tile', start: 130 },
-      { id: 'jacksonville-window', label: 'IV. Why the first pilot is Jacksonville, not Mount Crawford', start: 195 },
-      { id: 'greenfield-proof', label: 'V. What proof at the greenfield earns', start: 260 },
+      { id: 'thesis', label: 'The plant-level case is closed', start: 0 },
+      { id: 'what-renew-made', label: 'What Renew Danone made expensive', start: 280 },
+      { id: 'unfilled-tile', label: 'The unfilled operating-system tile', start: 560 },
+      { id: 'jacksonville-window', label: 'Why the first pilot is Jacksonville, not Mount Crawford', start: 840 },
+      { id: 'greenfield-proof', label: 'What proof at the greenfield earns', start: 1120 },
     ],
-    generatedAt: '2026-05-12T00:00:00Z',
+    generatedAt: '2026-05-14T21:16:00Z',
   },
 
   theme: {
