@@ -74,7 +74,6 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
-import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 export const gxo: AccountMicrositeData = {
   slug: 'gxo',
@@ -396,11 +395,17 @@ export const gxo: AccountMicrositeData = {
   ],
 
   audioBrief: {
-    src: '/audio/yard-network-brief.mp3',
+    src: '/audio/gxo.m4a',
     intro:
-      'This brief is for Michael Jacobs. The partner-productization pattern the GXO operating standard already runs end-to-end — identify a customer-side need, pilot a partner technology at one site, embed it into the operating standard, distribute across the customer base — is the pattern that put Agility Digit into the industry\'s first commercial humanoid deployment, Apptronik Apollo into a multi-phase R&D initiative, Reflex into the second humanoid RaaS pilot, and Dexory from one Oosterhout NL pilot into expanding U.S. and European deployment. The five minutes that follow are about the yard-execution layer fitting that same template.',
-    chapters: AUDIO_BRIEF_CHAPTERS,
-    generatedAt: '2026-05-12T00:00:00Z',
+      'This brief is for Michael Jacobs. The partner-productization pattern the GXO operating standard already runs end-to-end — identify a customer-side need, pilot a partner technology at one site, embed it into the operating standard, distribute across the customer base — is the pattern that put Agility Digit into the industry\'s first commercial humanoid deployment, Apptronik Apollo into a multi-phase R&D initiative, Reflex into the second humanoid RaaS pilot, and Dexory from one Oosterhout NL pilot into expanding U.S. and European deployment. The thirty-seven minutes that follow are about the yard-execution layer fitting that same template.',
+    chapters: [
+      { id: 'yard-is-the-layer', label: 'The yard is the layer, not the tool', start: 0 },
+      { id: 'after-agility-apptronik', label: 'After Agility, Apptronik, Reflex, Dexory — the next entry in the catalog', start: 449 },
+      { id: 'shippers-like-primo', label: 'GXO\'s shipper customers look operationally like Primo', start: 899 },
+      { id: 'how-this-was-built', label: 'How this analysis was built', start: 1348 },
+      { id: 'push-back', label: 'The part most worth pushing back on', start: 1797 },
+    ],
+    generatedAt: '2026-05-14T22:30:00Z',
   },
 
   theme: {
