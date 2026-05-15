@@ -28,7 +28,6 @@
  * Cory Reed tenure source; first-name personalized about + signOff;
  * marginalia; per-account audio brief intro.
  */
-import { AUDIO_BRIEF_CHAPTERS, AUDIO_BRIEF_SRC } from '../audio-brief';
 import type { AccountMicrositeData } from '../schema';
 
 export const johnDeere: AccountMicrositeData = {
@@ -597,11 +596,17 @@ export const johnDeere: AccountMicrositeData = {
   ],
 
   audioBrief: {
-    src: AUDIO_BRIEF_SRC,
+    src: '/audio/john-deere.m4a',
     intro:
-      "This brief is for Cory Reed. You have been at Deere since 1998 and built the precision-ag stack out of the Intelligent Solutions Group seat — See & Spray and ExactShot rode out of that work. On November 3, 2025 the Lifecycle Solutions, Supply Management, and Customer Success P&L put aftermarket parts, supply chain, and customer-delivery commitment under a single seat. The five minutes that follow are about the one layer Smart Industrial has not yet reached — the yard between the factory and the dealer — and why your seat is the first one where that gap is a single accountable seam.",
-    chapters: AUDIO_BRIEF_CHAPTERS,
-    generatedAt: '2026-05-12T00:00:00Z',
+      "This brief is for Cory Reed. You have been at Deere since 1998 and built the precision-ag stack out of the Intelligent Solutions Group seat — See & Spray and ExactShot rode out of that work. On November 3, 2025 the Lifecycle Solutions, Supply Management, and Customer Success P&L put aftermarket parts, supply chain, and customer-delivery commitment under a single seat. The roughly thirty minutes that follow walk the one layer Smart Industrial has not yet reached — the yard between the factory and the dealer — and why your seat is the first one where that gap is a single accountable seam.",
+    chapters: [
+      { id: 'thesis', label: 'The yard as the unsolved seam', start: 0 },
+      { id: 'observation', label: 'Smart Industrial sees the machine, not the yard the machine left', start: 365 },
+      { id: 'comparable', label: 'Primo: per-case-hardest freight, same network shape', start: 731 },
+      { id: 'methodology', label: 'How this analysis was built', start: 1096 },
+      { id: 'about', label: 'Why the Lifecycle Solutions seat is the single accountable seam', start: 1462 },
+    ],
+    generatedAt: '2026-05-14T22:50:00Z',
   },
 
   theme: {

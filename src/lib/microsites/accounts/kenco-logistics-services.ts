@@ -479,17 +479,17 @@ export const kencoLogisticsServices: AccountMicrositeData = {
   ],
 
   audioBrief: {
-    src: '/audio/yard-network-brief.mp3',
+    src: '/audio/kenco-logistics-services.m4a',
     intro:
-      'This brief is for Kristi Montgomery. The Innovation Lab productization pattern your team has run for a decade — pilot a capability inside the 10,000 sq ft Chattanooga live-warehouse environment, prove it under real operational stress, distribute it across the Kenco customer base as a Kenco-branded service — is the pattern that has paid back $40M+ identified and $75M+ in customer savings. The five minutes that follow are about the yard-execution layer fitting that same template.',
+      'This brief is for Kristi Montgomery. The Innovation Lab productization pattern your team has run for a decade — pilot a capability inside the 10,000 sq ft Chattanooga live-warehouse environment, prove it under real operational stress, distribute it across the Kenco customer base as a Kenco-branded service — is the pattern that has paid back $40M+ identified and $75M+ in customer savings. The thirty-two minutes that follow are about the yard-execution layer fitting that same template.',
     chapters: [
-      { id: 'thesis', label: 'I. Kenco runs other companies\' yards', start: 0 },
-      { id: 'what-lab-made', label: 'II. What the Innovation Lab productized', start: 65 },
-      { id: 'unfilled-tile', label: 'III. The unfilled layer in the operating standard', start: 130 },
-      { id: 'two-windows', label: 'IV. Drexel and Contract Packaging — two windows open at once', start: 195 },
-      { id: 'productize-not-procure', label: 'V. Productize, don\'t procure', start: 260 },
+      { id: 'thesis', label: 'Kenco runs other companies\' yards', start: 0 },
+      { id: 'innovation-lab-template', label: 'Ten years of pilot-to-productize at the Innovation Lab', start: 383 },
+      { id: 'unfilled-tile', label: 'The unfilled layer above WMS in the operating standard', start: 766 },
+      { id: 'two-windows', label: 'Drexel London ON and Contract Packaging — two specification windows open at once', start: 1149 },
+      { id: 'productize-not-procure', label: 'Productization, not procurement — Primo as the operating-model proof', start: 1532 },
     ],
-    generatedAt: '2026-05-12T00:00:00Z',
+    generatedAt: '2026-05-14T23:04:00Z',
   },
 
   theme: {
