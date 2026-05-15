@@ -317,17 +317,17 @@ export const keurigDrPepper: AccountMicrositeData = {
   ],
 
   audioBrief: {
-    src: '/audio/yard-network-brief.mp3',
+    src: '/audio/keurig-dr-pepper.m4a',
     intro:
-      'This brief is for Kelly Killingsworth. KDP runs one of the only true hybrid-distribution networks in CPG at scale — DSD at dawn, K-Cup continuous warehouse outbound across the day, GHOST Energy moving onto the same network mid-2025, partner-bottler trailers on top in the Dr Pepper territories. The five minutes that follow are about where the arbitration between those rhythms stops being a local routine.',
+      'This brief is for Kelly Killingsworth. KDP runs one of the only true hybrid-distribution networks in CPG at scale — DSD at dawn, K-Cup continuous warehouse outbound across the day, GHOST Energy moving onto the same network mid-2025, partner-bottler trailers on top in the Dr Pepper territories. The roughly 46 minutes that follow are about where the arbitration between those four rhythms stops being a site-level operator decision.',
     chapters: [
-      { id: 'thesis', label: 'I. Two distribution models, one dock surface', start: 0 },
-      { id: 'what-hybrid-made', label: 'II. What hybrid distribution made expensive', start: 65 },
-      { id: 'kalil-and-ghost', label: 'III. Kalil West and GHOST onto DSD', start: 130 },
-      { id: 'not-the-marquee', label: 'IV. Why the first pilot is Arizona, not a K-Cup plant', start: 195 },
-      { id: 'simple-site-proof', label: 'V. What proof at the simple site earns', start: 260 },
+      { id: 'thesis', label: 'Four distribution rhythms, the same dock surface', start: 0 },
+      { id: 'what-hybrid-made', label: 'The seam between two distribution models lives in the yard', start: 553 },
+      { id: 'kalil-and-ghost', label: 'Kalil West and the mid-2025 GHOST DSD onboarding', start: 1106 },
+      { id: 'comparable', label: 'Primo Brands: harder freight, the operating layer already runs', start: 1659 },
+      { id: 'about', label: 'The multi-channel coordination tile KDP has not laid yet', start: 2212 },
     ],
-    generatedAt: '2026-05-12T00:00:00Z',
+    generatedAt: '2026-05-14T23:55:00Z',
   },
 
   theme: {

@@ -1,6 +1,5 @@
 import type { AccountMicrositeData } from '../schema';
 import { getFacilityCountLabel, getFacilityCountLowerBound } from '../../research/facility-fact-registry';
-import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 const GENERAL_MILLS_FACILITY_COUNT_LABEL = getFacilityCountLabel('General Mills', '41');
 const GENERAL_MILLS_FACILITY_COUNT = getFacilityCountLowerBound('General Mills', 41) ?? 41;
@@ -816,11 +815,17 @@ export const generalMills: AccountMicrositeData = {
   ],
 
   audioBrief: {
-    src: '/audio/yard-network-brief.mp3',
+    src: '/audio/general-mills.m4a',
     intro:
-      'This brief is for Jonathan Ness. The Run / Improve / Transform framework you inherit already covers planning, forecast, the Palantir digital twin, and warehouse automation. The five minutes that follow are about the one operating layer the Accelerate strategy has not yet reached.',
-    chapters: AUDIO_BRIEF_CHAPTERS,
-    generatedAt: '2026-05-12T00:00:00Z',
+      'This brief is for Jonathan Ness. The Run / Improve / Transform framework you inherit already covers planning, forecast, the Palantir digital twin, and warehouse automation. The roughly 39 minutes that follow are about the one operating layer the Accelerate strategy has not yet reached — the yard surface above the 41 plants.',
+    chapters: [
+      { id: 'thesis', label: 'The unfilled tile in the Accelerate operating standard', start: 0 },
+      { id: 'observation', label: 'Where Missouri consolidation and the digital twin both land on the yard', start: 465 },
+      { id: 'comparable', label: 'Primo Brands — same multi-temp shape, harder freight', start: 930 },
+      { id: 'methodology', label: 'How the brief was built — and where to push back', start: 1395 },
+      { id: 'about', label: 'HMM\'s next savings slice and the cleanest 12-month window', start: 1859 },
+    ],
+    generatedAt: '2026-05-14T23:55:00Z',
   },
 
   theme: {
