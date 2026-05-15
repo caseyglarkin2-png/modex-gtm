@@ -21,7 +21,6 @@
  */
 
 import type { AccountMicrositeData } from '../schema';
-import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
 
 export const hormelFoods: AccountMicrositeData = {
   slug: 'hormel-foods',
@@ -584,11 +583,17 @@ export const hormelFoods: AccountMicrositeData = {
   ],
 
   audioBrief: {
-    src: '/audio/yard-network-brief.mp3',
+    src: '/audio/hormel-foods.m4a',
     intro:
-      'This brief is for Will Bonifant, taking the CSCO seat March 9, 2026 with T&M inside its wrap year, the o9 Digital Brain live across 70-plus sites and both temperature networks, and the Hormel Production System running as the in-plant work standard. The five minutes that follow are about the one layer of that operating system that does not yet have a unified standard — the yard above the plants, where multi-temp dock arbitration, Planters-network SOPs, the Tucker reallocation, and trailer-into-yard pressure from T&M throughput lift all land.',
-    chapters: AUDIO_BRIEF_CHAPTERS,
-    generatedAt: '2026-05-12T00:00:00Z',
+      'Thirty-five minutes for Will Bonifant, taking the CSCO seat March 9, 2026 with T&M inside its wrap year, the o9 Digital Brain live across 70-plus sites and both temperature networks, and the Hormel Production System running as the in-plant work standard. What follows is the one layer of that operating system that does not yet have a unified standard — the yard above the plants, where multi-temp dock arbitration, Planters-network SOPs, the Tucker reallocation, and trailer-into-yard pressure from T&M throughput lift all land.',
+    chapters: [
+      { id: 'thesis', label: 'One more tile into the Hormel operating stack', start: 0 },
+      { id: 'observation', label: 'o9 grouped the truckload; it did not pick the door', start: 426 },
+      { id: 'comparable', label: 'Primo Brands — same network shape, harder freight', start: 853 },
+      { id: 'methodology', label: 'How the T&M-and-o9 stack was traced to the yard', start: 1279 },
+      { id: 'about', label: 'The piece of the wrap-year scoreboard worth pushing back on', start: 1706 },
+    ],
+    generatedAt: '2026-05-14T22:50:00Z',
   },
 
   theme: {
