@@ -726,6 +726,11 @@ export const dannon: AccountMicrositeData = {
       { id: 'jacksonville-window', label: 'Why the first pilot is Jacksonville, not Mount Crawford', start: 840 },
       { id: 'greenfield-proof', label: 'What proof at the greenfield earns', start: 1120 },
     ],
+    videoFollowUp: {
+      src: '/audio/dannon-video.mp4',
+      intro:
+        'Or watch. The same brief, compressed into a few minutes — for the times forwarding a video is easier than describing the memo.',
+    },
     generatedAt: '2026-05-14T21:16:00Z',
   },
 
