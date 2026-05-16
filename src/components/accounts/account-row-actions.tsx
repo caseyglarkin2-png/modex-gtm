@@ -75,11 +75,13 @@ export function AccountRowActions({
   }
 
   function handleBookMeeting() {
-    // Open Calendly link
-    window.open(
-      'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW',
-      '_blank'
-    );
+    const bookingLink = process.env.NEXT_PUBLIC_CALENDLY_LINK;
+    if (!bookingLink) {
+      toast.error('No booking link configured');
+      setOpen(false);
+      return;
+    }
+    window.open(bookingLink, '_blank');
     setOpen(false);
   }
 
