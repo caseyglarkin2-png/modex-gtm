@@ -24,6 +24,7 @@ import { OPERATOR_OUTCOME_TAXONOMY, parseOperatorOutcomeLabel } from '@/lib/revo
 import { prisma } from '@/lib/prisma';
 import { dbGetMicrositeAnalytics } from '@/lib/db';
 import { readTrafficQuality } from '@/lib/microsites/bot-detection';
+import { loadInboxThreads, type InboxThreadRow } from '@/lib/inbox';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Engagement' };
@@ -228,7 +229,7 @@ export default async function EngagementPage({
     }
   }
 
-  const [replyCount, notificationCount, micrositeAnalytics, failedRecipients, notifications, emailLogs, sendFailures, micrositeSessions, meetings, activities, learningReviewItems] = await Promise.all([
+  const [replyCount, notificationCount, micrositeAnalytics, failedRecipients, notifications, emailLogs, sendFailures, micrositeSessions, meetings, activities, learningReviewItems, inboxThreads] = await Promise.all([
     prisma.notification.count({ where: { type: { contains: 'reply', mode: 'insensitive' } } }),
     prisma.notification.count(),
     dbGetMicrositeAnalytics(),
@@ -349,6 +350,7 @@ export default async function EngagementPage({
         created_at: true,
       },
     }),
+    loadInboxThreads(),
   ]);
 
   // Exclude bot/scanner sessions from the engagement feed. Microsite
@@ -370,7 +372,6 @@ export default async function EngagementPage({
   // Recency-first feed — every signal source, newest-first, within the
   // selected look-back window. items is already sorted occurredAt desc.
   const recentItems = filterItemsWithinWindow(items, selectedWindow);
-  const inboxItems = items.filter((item) => item.tab === 'inbox').slice(0, 20);
   const micrositeItems = items.filter((item) => item.tab === 'microsite-sessions').slice(0, 20);
   const failureItems = items.filter((item) => item.tab === 'bounces-failures').slice(0, 20);
   const failureClusters = buildFailureClusters(
@@ -495,13 +496,13 @@ export default async function EngagementPage({
         </TabsList>
 
         <TabsContent value="inbox" className="space-y-3">
-          {inboxItems.length === 0 ? (
+          {inboxThreads.length === 0 ? (
             <EmptyTabCard
               title="Inbox"
-              copy="No replies or tracked opens/clicks are available yet."
+              copy="No conversations yet — replies you receive thread here, readable and answerable in-app."
             />
           ) : (
-            inboxItems.map((item) => <EngagementSignalCard key={item.id} item={item} />)
+            inboxThreads.map((thread) => <InboxThreadCard key={thread.id} thread={thread} />)
           )}
         </TabsContent>
 
@@ -652,6 +653,32 @@ function EmptyTabCard({ title, copy }: { title: string; copy: string }) {
         <p className="text-sm text-muted-foreground">{copy}</p>
       </CardContent>
     </Card>
+  );
+}
+
+function InboxThreadCard({ thread }: { thread: InboxThreadRow }) {
+  return (
+    <Link href={`/engagement/thread/${encodeURIComponent(thread.id)}`} className="block">
+      <Card className="transition-colors hover:bg-[var(--accent)]/40">
+        <CardContent className="flex items-start justify-between gap-3 p-4">
+          <div className="min-w-0">
+            <p className="truncate text-sm font-semibold">{thread.subject ?? '(no subject)'}</p>
+            <p className="mt-1 truncate text-sm text-muted-foreground">{thread.snippet}</p>
+            <p className="mt-2 text-xs text-muted-foreground">
+              {[thread.accountName, thread.personaEmail, formatRelativeTime(thread.lastMessageAt)]
+                .filter(Boolean)
+                .join(' · ')}
+            </p>
+          </div>
+          <div className="flex shrink-0 items-center gap-2">
+            {thread.unreadCount > 0 ? (
+              <Badge variant="default">{thread.unreadCount} new</Badge>
+            ) : null}
+            <Button size="sm" variant="outline">Open</Button>
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
   );
 }
 
