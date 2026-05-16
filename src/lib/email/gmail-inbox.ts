@@ -54,14 +54,20 @@ export interface GmailMessage {
   threadId: string;
 }
 
+export interface GmailMessagePart {
+  mimeType?: string;
+  filename?: string;
+  headers?: Array<{ name: string; value: string }>;
+  body?: { data?: string; size?: number };
+  parts?: GmailMessagePart[];
+}
+
 export interface GmailMessageDetail {
   id: string;
   threadId: string;
   snippet: string;
   labelIds?: string[];
-  payload?: {
-    headers?: Array<{ name: string; value: string }>;
-  };
+  payload?: GmailMessagePart;
   internalDate?: string;
 }
 
@@ -69,9 +75,12 @@ export interface ReplyMetadata {
   messageId: string;
   threadId: string;
   from: string;
+  fromName: string;
   fromEmail: string;
   subject: string;
   snippet: string;
+  bodyHtml: string;
+  bodyText: string;
   receivedAt: Date;
 }
 
@@ -84,6 +93,52 @@ function getHeader(msg: GmailMessageDetail, name: string): string {
 function extractEmail(fromHeader: string): string {
   const match = fromHeader.match(/<([^>]+)>/);
   return match ? match[1].toLowerCase() : fromHeader.toLowerCase().trim();
+}
+
+function extractName(fromHeader: string): string {
+  const name = fromHeader.replace(/<[^>]*>/, '').replace(/["']/g, '').trim();
+  return name || extractEmail(fromHeader);
+}
+
+function decodeBase64Url(data: string): string {
+  return Buffer.from(data.replace(/-/g, '+').replace(/_/g, '/'), 'base64').toString('utf8');
+}
+
+/** Walks a Gmail payload tree, returning the first html + plain bodies. */
+function extractBodies(part: GmailMessagePart | undefined): { html: string; text: string } {
+  let html = '';
+  let text = '';
+  const walk = (node?: GmailMessagePart) => {
+    if (!node) return;
+    const mime = (node.mimeType ?? '').toLowerCase();
+    const data = node.body?.data;
+    if (data && mime === 'text/html' && !html) html = decodeBase64Url(data);
+    else if (data && mime === 'text/plain' && !text) text = decodeBase64Url(data);
+    node.parts?.forEach(walk);
+  };
+  walk(part);
+  return { html, text };
+}
+
+/**
+ * Strips quoted history from a plain-text reply — the Gmail "On … wrote:"
+ * attribution and everything after it, Outlook-style separators, and a
+ * trailing run of `>` quote lines. Heuristic; keeps the operator's text.
+ */
+export function stripQuotedReply(body: string): string {
+  if (!body) return '';
+  const lines = body.split(/\r?\n/);
+  const kept: string[] = [];
+  for (let i = 0; i < lines.length; i++) {
+    const trimmed = lines[i].trim();
+    if (/^On\b.*\bwrote:$/.test(trimmed)) break;
+    if (/^On\b.+\bat\b.+/.test(trimmed) && /wrote:\s*$/.test(`${trimmed} ${(lines[i + 1] ?? '').trim()}`)) break;
+    if (/^-{2,}\s*Original Message\s*-{2,}/i.test(trimmed)) break;
+    if (/^_{10,}$/.test(trimmed)) break;
+    if (/^From:\s.+/.test(trimmed) && kept.some((line) => line.trim().length > 0)) break;
+    kept.push(lines[i]);
+  }
+  return kept.join('\n').replace(/(?:\n>.*)+\s*$/, '').trim();
 }
 
 /**
@@ -137,13 +192,18 @@ export async function getRecentReplies(sinceTimestamp?: string | number): Promis
       // Skip messages from Casey (not replies FROM prospects)
       if (fromEmail === 'casey@freightroll.com') continue;
 
+      const { html, text } = extractBodies(detail.payload);
+
       replies.push({
         messageId: detail.id,
         threadId: detail.threadId,
         from,
+        fromName: extractName(from),
         fromEmail,
         subject: getHeader(detail, 'Subject'),
         snippet: detail.snippet || '',
+        bodyHtml: html,
+        bodyText: stripQuotedReply(text),
         receivedAt: detail.internalDate
           ? new Date(parseInt(detail.internalDate, 10))
           : new Date(),
@@ -157,6 +217,20 @@ export async function getRecentReplies(sinceTimestamp?: string | number): Promis
 }
 
 /**
+ * Resolves just the Gmail threadId for a message id — used by the
+ * one-shot thread-linkage backfill to thread historical sends.
+ */
+export async function getMessageThreadId(messageId: string): Promise<string | null> {
+  const config = getGmailConfig();
+  const accessToken = await getAccessToken();
+  const url = `${GMAIL_API}/users/${encodeURIComponent(config.userEmail)}/messages/${messageId}?format=minimal`;
+  const res = await fetch(url, { headers: { Authorization: `Bearer ${accessToken}` } });
+  if (!res.ok) return null;
+  const data = (await res.json()) as { threadId?: string };
+  return data.threadId ?? null;
+}
+
+/**
  * Fetch full message metadata from Gmail.
  */
 async function getMessageDetail(
@@ -164,7 +238,9 @@ async function getMessageDetail(
   userEmail: string,
   messageId: string,
 ): Promise<GmailMessageDetail> {
-  const url = `${GMAIL_API}/users/${encodeURIComponent(userEmail)}/messages/${messageId}?format=metadata&metadataHeaders=From&metadataHeaders=Subject&metadataHeaders=Date&metadataHeaders=In-Reply-To&metadataHeaders=References`;
+  // format=full returns the MIME body parts so the full reply can be
+  // captured, not just the snippet.
+  const url = `${GMAIL_API}/users/${encodeURIComponent(userEmail)}/messages/${messageId}?format=full`;
 
   const res = await fetch(url, {
     headers: { Authorization: `Bearer ${accessToken}` },
