@@ -74,6 +74,7 @@ export interface GmailMessageDetail {
 export interface ReplyMetadata {
   messageId: string;
   threadId: string;
+  rfcMessageId: string | null;
   from: string;
   fromName: string;
   fromEmail: string;
@@ -197,6 +198,7 @@ export async function getRecentReplies(sinceTimestamp?: string | number): Promis
       replies.push({
         messageId: detail.id,
         threadId: detail.threadId,
+        rfcMessageId: getHeader(detail, 'Message-ID') || null,
         from,
         fromName: extractName(from),
         fromEmail,

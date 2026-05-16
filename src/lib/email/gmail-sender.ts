@@ -25,6 +25,8 @@ interface GmailSendPayload {
   text?: string;
   replyTo?: string;
   headers?: Record<string, string>;
+  /** Gmail threadId — set to thread a reply into an existing conversation. */
+  threadId?: string;
 }
 
 interface OAuthTokenResponse {
@@ -127,7 +129,7 @@ export async function sendViaGmail(
         Authorization: `Bearer ${accessToken}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ raw }),
+      body: JSON.stringify(payload.threadId ? { raw, threadId: payload.threadId } : { raw }),
     }
   );
 

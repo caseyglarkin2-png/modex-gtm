@@ -120,6 +120,7 @@ export async function GET(request: Request) {
           create: {
             id: reply.messageId,
             thread_id: reply.threadId,
+            rfc_message_id: reply.rfcMessageId,
             from_email: reply.fromEmail,
             from_name: reply.fromName,
             subject: reply.subject,

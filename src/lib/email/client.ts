@@ -10,6 +10,8 @@ export interface EmailPayload {
   text?: string;
   replyTo?: string;
   headers?: Record<string, string>;
+  /** Gmail threadId — set to thread a reply into an existing conversation. */
+  threadId?: string;
 }
 
 export interface EmailSendResult {
