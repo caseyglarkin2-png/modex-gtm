@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { Bell } from 'lucide-react';
+import { slugify } from '@/lib/data';
 
 interface Notification {
   id: number;
@@ -59,8 +60,7 @@ export function NotificationBell() {
     }
     // Navigate to account if available
     if (notification.account_name) {
-      const slug = notification.account_name.toLowerCase().replace(/\s+/g, '-');
-      window.location.href = `/accounts/${slug}`;
+      window.location.href = `/accounts/${slugify(notification.account_name)}`;
     }
     setOpen(false);
   };
