@@ -26,6 +26,8 @@ import {
   isSameCalendarDay,
   startOfDay,
 } from '@/lib/home-cockpit';
+import { loadRecentEngagementItems } from '@/lib/home-recency';
+import { HomeRecencyFeed, type RecencyItem } from '@/components/home/recency-feed';
 import { prisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
@@ -37,7 +39,7 @@ const BAND_ORDER: Record<string, number> = { A: 0, B: 1, C: 2, D: 3 };
 export default async function DashboardPage() {
   const today = startOfDay(new Date());
 
-  const [accounts, activities, contactedCount, campaigns, replyCount, failureCount] = await Promise.all([
+  const [accounts, activities, contactedCount, campaigns, replyCount, failureCount, recentItems, meetingsThisWeek] = await Promise.all([
     getCachedAccounts(),
     getCachedActivities(),
     prisma.emailLog
@@ -50,7 +52,24 @@ export default async function DashboardPage() {
       prisma.sendJob.count({ where: { status: { in: ['failed', 'partial'] } } }),
       prisma.sendJobRecipient.count({ where: { status: 'failed' } }),
     ]).then(([gen, send, recipients]) => gen + send + recipients),
+    loadRecentEngagementItems(),
+    prisma.meeting.count({
+      where: {
+        meeting_status: { in: ['Scheduled', 'Meeting Booked', 'Meeting Held'] },
+        updated_at: { gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) },
+      },
+    }),
   ]);
+
+  const recencyItems: RecencyItem[] = recentItems.slice(0, 12).map((item) => ({
+    id: item.id,
+    title: item.title,
+    accountName: item.accountName ?? null,
+    statusLabel: item.statusLabel,
+    kind: item.kind,
+    occurredAt: item.occurredAt.toISOString(),
+    href: item.actions.accountHref ?? null,
+  }));
 
   const researchedCount = accounts.filter(
     (account) => account.research_status === 'Ready' || account.research_status === 'Complete',
@@ -138,6 +157,11 @@ export default async function DashboardPage() {
             />
           </div>
         )}
+      </section>
+
+      <section aria-labelledby="recency-heading">
+        <h2 id="recency-heading" className="sr-only">Recent engagement</h2>
+        <HomeRecencyFeed items={recencyItems} meetingsThisWeek={meetingsThisWeek} />
       </section>
 
       <section aria-labelledby="focus-heading">
