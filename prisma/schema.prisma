@@ -957,6 +957,49 @@ model Notification {
   @@map("notifications")
 }
 
+// A prospect conversation, keyed on the Gmail threadId. Sent messages
+// live in email_logs (which carry the same thread_id); inbound replies
+// live in inbound_messages. The thread view merges both by date.
+model EmailThread {
+  id              String   @id // Gmail threadId
+  account_name    String?
+  persona_email   String?
+  subject         String?
+  last_message_at DateTime @default(now())
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  messages InboundMessage[]
+
+  @@index([account_name])
+  @@index([last_message_at])
+  @@map("email_threads")
+}
+
+// A single inbound reply, keyed on the Gmail messageId (natural dedup).
+// Stores the full parsed body so a reply can be read without Gmail.
+model InboundMessage {
+  id          String   @id // Gmail messageId
+  thread_id   String
+  from_email  String
+  from_name   String?
+  subject     String?
+  body_html   String?
+  body_text   String?
+  snippet     String?
+  received_at DateTime
+  read        Boolean  @default(false)
+  created_at  DateTime @default(now())
+
+  thread EmailThread @relation(fields: [thread_id], references: [id], onDelete: Cascade)
+
+  @@index([thread_id])
+  @@index([from_email])
+  @@index([received_at])
+  @@index([read])
+  @@map("inbound_messages")
+}
+
 model CanonicalCompany {
   id                 String   @id
   company_key        String   @unique
