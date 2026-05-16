@@ -11,6 +11,7 @@ import { classifyMicrositeTraffic } from '@/lib/microsites/bot-detection';
 import type { MicrositeEngagementAnalyticsInput } from '@/lib/microsites/analytics';
 import {
   buildIntentMessage,
+  buildIntentNotificationData,
   decideIntentNotification,
   sendSlackNotification,
 } from '@/lib/microsites/intent-notifications';
@@ -163,9 +164,18 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Fire the Slack ping after the dedup flag is persisted — a missed
-    // alert is better than a duplicate, and the flag is now written.
+    // Fire the intent alerts after the dedup flag is persisted — a missed
+    // alert is better than a duplicate, and the flag is now written. The
+    // in-app Notification row surfaces in the bell + Engagement Inbox;
+    // the Slack ping is the out-of-app mirror.
     if (intentDecision.notify) {
+      try {
+        await prisma.notification.create({
+          data: buildIntentNotificationData(snapshot, mergedSession, intentDecision.reason),
+        });
+      } catch (notifyError) {
+        console.error('Failed to record intent notification', notifyError);
+      }
       try {
         await sendSlackNotification(
           buildIntentMessage(snapshot, mergedSession, intentDecision.reason),

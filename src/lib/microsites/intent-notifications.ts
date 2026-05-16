@@ -117,6 +117,52 @@ export function buildIntentMessage(
   ].join('\n');
 }
 
+/**
+ * Builds the row data for an in-app Notification mirroring an intent
+ * Slack ping — so a hot signal also lands in the bell and the Engagement
+ * Inbox, not only Slack. type `hot_engagement` is already styled by the
+ * notification bell.
+ */
+export function buildIntentNotificationData(
+  snapshot: MicrositeTrackingSnapshot,
+  mergedSession: MicrositeEngagementAnalyticsInput,
+  reason: string,
+): {
+  type: string;
+  account_name: string | null;
+  persona_email: string | null;
+  subject: string;
+  preview: string;
+  source_id: string;
+  read: boolean;
+} {
+  const who = snapshot.personName ?? 'An unknown viewer';
+  const trigger = reason.startsWith('cta:')
+    ? `clicked ${reason.slice(4)}`
+    : 'hit a high-intent read';
+  const audioPct = readProgress(mergedSession.metadata, 'audioProgressPct');
+  const videoPct = readProgress(mergedSession.metadata, 'videoProgressPct');
+
+  const facts: string[] = [
+    `${formatDuration(mergedSession.duration_seconds)} on page`,
+    `${mergedSession.scroll_depth_pct}% scroll`,
+    `${mergedSession.sections_viewed.length} sections`,
+  ];
+  if (audioPct > 0) facts.push(`audio ${audioPct}%`);
+  if (videoPct > 0) facts.push(`video ${videoPct}%`);
+  if (mergedSession.cta_ids.length > 0) facts.push(`CTA: ${mergedSession.cta_ids.join(', ')}`);
+
+  return {
+    type: 'hot_engagement',
+    account_name: snapshot.accountName,
+    persona_email: null,
+    subject: `${who} — ${trigger}`,
+    preview: facts.join(' · '),
+    source_id: `microsite-intent:${snapshot.sessionId}:${snapshot.path}`,
+    read: false,
+  };
+}
+
 /** Posts a message to the Slack incoming webhook. No-op if unconfigured. */
 export async function sendSlackNotification(text: string): Promise<boolean> {
   const url = process.env.SLACK_WEBHOOK_URL;
