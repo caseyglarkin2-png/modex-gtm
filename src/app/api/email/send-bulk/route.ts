@@ -237,6 +237,7 @@ export async function POST(req: NextRequest) {
       const r = results[i];
       const recipient = eligibleRecipients[i];
       const providerMessageId = r.status === 'fulfilled' ? (r.value as { headers?: Record<string, string> })?.headers?.['x-message-id'] ?? null : null;
+      const providerThreadId = r.status === 'fulfilled' ? (r.value as { threadId?: string | null })?.threadId ?? null : null;
       const hubspotResult = r.status === 'fulfilled'
         ? (r.value as { hubspotEngagementId?: string | null; hubspotError?: string | null })
         : null;
@@ -302,6 +303,7 @@ export async function POST(req: NextRequest) {
           body_html: html,
           status: r.status === 'fulfilled' ? 'sent' : 'failed',
           provider_message_id: providerMessageId,
+          thread_id: providerThreadId,
           hubspot_engagement_id: hubspotResult?.hubspotEngagementId ?? null,
           metadata: logMetadata,
           ...(generatedContentId ? { generated_content_id: generatedContentId } : {}),

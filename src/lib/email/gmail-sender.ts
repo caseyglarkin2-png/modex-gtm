@@ -112,7 +112,9 @@ async function getAccessToken(): Promise<string> {
   return data.access_token;
 }
 
-export async function sendViaGmail(payload: GmailSendPayload): Promise<{ provider: 'gmail'; id: string | null }> {
+export async function sendViaGmail(
+  payload: GmailSendPayload,
+): Promise<{ provider: 'gmail'; id: string | null; threadId: string | null }> {
   const { userEmail } = getGmailConfig();
   const accessToken = await getAccessToken();
   const raw = base64Url(buildMimeMessage(payload));
@@ -134,8 +136,8 @@ export async function sendViaGmail(payload: GmailSendPayload): Promise<{ provide
     throw new Error(`Gmail send failed (${res.status}): ${errBody.slice(0, 200)}`);
   }
 
-  const result = (await res.json()) as { id?: string };
-  return { provider: 'gmail', id: result.id ?? null };
+  const result = (await res.json()) as { id?: string; threadId?: string };
+  return { provider: 'gmail', id: result.id ?? null, threadId: result.threadId ?? null };
 }
 
 /**

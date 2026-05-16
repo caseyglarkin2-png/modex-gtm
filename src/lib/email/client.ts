@@ -16,6 +16,8 @@ export interface EmailSendResult {
   headers: { 'x-message-id': string };
   statusCode: number;
   provider: string;
+  /** Gmail threadId — stamp onto EmailLog so replies thread to the send. */
+  threadId: string | null;
   hubspotEngagementId: string | null;
   hubspotError?: string;
 }
@@ -49,6 +51,7 @@ export async function sendEmail(payload: EmailPayload): Promise<EmailSendResult>
     headers: { 'x-message-id': result.id ?? '' },
     statusCode: 202,
     provider: result.provider,
+    threadId: result.threadId,
     hubspotEngagementId,
     hubspotError,
   };

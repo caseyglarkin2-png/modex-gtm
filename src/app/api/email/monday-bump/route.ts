@@ -227,6 +227,7 @@ async function handle(req: NextRequest) {
               body_html: html,
               status: 'sent',
               provider_message_id: messageId,
+              thread_id: response.threadId ?? null,
             },
           });
 

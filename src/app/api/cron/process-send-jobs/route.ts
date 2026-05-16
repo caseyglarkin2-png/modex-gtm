@@ -112,6 +112,7 @@ export async function GET(request: NextRequest) {
               body_html: recipient.body_html,
               status: 'sent',
               provider_message_id: result.headers['x-message-id'] ?? null,
+              thread_id: result.threadId ?? null,
               generated_content_id: recipient.generated_content_id,
               hubspot_engagement_id: result.hubspotEngagementId ?? null,
               metadata: (() => {
