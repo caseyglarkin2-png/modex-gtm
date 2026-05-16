@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
         location: parsed.data.location,
         notes: parsed.data.notes,
         objective: parsed.data.objective,
-        owner: parsed.data.owner ?? 'Jake',
+        owner: parsed.data.owner ?? 'Casey',
         meeting_status: parsed.data.status ?? 'Scheduled',
       },
     });

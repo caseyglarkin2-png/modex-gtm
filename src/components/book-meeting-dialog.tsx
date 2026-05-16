@@ -39,7 +39,7 @@ export function BookMeetingDialog({
     location: '',
     objective: '',
     notes: '',
-    owner: 'Jake',
+    owner: 'Casey',
   });
 
   // Pre-select P1 personas by default
@@ -65,7 +65,7 @@ export function BookMeetingDialog({
       if (result.success) {
         toast.success(`Meeting booked: ${accountName} on ${form.date}`);
         setOpen(false);
-        setForm({ meeting_type: 'In-Person', attendees: '', date: '', time: '', location: '', objective: '', notes: '', owner: 'Jake' });
+        setForm({ meeting_type: 'In-Person', attendees: '', date: '', time: '', location: '', objective: '', notes: '', owner: 'Casey' });
       } else if (result.offline) {
         toast.success(`Meeting saved locally`);
         setOpen(false);
@@ -109,26 +109,14 @@ export function BookMeetingDialog({
                 <Input type="time" className="mt-1" value={form.time} onChange={(e) => setForm({ ...form, time: e.target.value })} />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label>Type</Label>
-                <Select value={form.meeting_type} onValueChange={(v) => setForm({ ...form, meeting_type: v as typeof MEETING_TYPES[number] })}>
-                  <SelectTrigger className="mt-1"><SelectValue /></SelectTrigger>
-                  <SelectContent>
-                    {MEETING_TYPES.map((t) => <SelectItem key={t} value={t}>{t}</SelectItem>)}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <Label>Owner</Label>
-                <Select value={form.owner} onValueChange={(v) => setForm({ ...form, owner: v })}>
-                  <SelectTrigger className="mt-1"><SelectValue /></SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Jake">Jake</SelectItem>
-                    <SelectItem value="Casey">Casey</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+            <div>
+              <Label>Type</Label>
+              <Select value={form.meeting_type} onValueChange={(v) => setForm({ ...form, meeting_type: v as typeof MEETING_TYPES[number] })}>
+                <SelectTrigger className="mt-1"><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  {MEETING_TYPES.map((t) => <SelectItem key={t} value={t}>{t}</SelectItem>)}
+                </SelectContent>
+              </Select>
             </div>
             <div>
               <Label>Attendees</Label>

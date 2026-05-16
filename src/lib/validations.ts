@@ -40,7 +40,7 @@ export const MeetingSchema = z.object({
   location: z.string().optional(),
   notes: z.string().optional(),
   objective: z.string().optional(),
-  owner: z.string().optional().default('Jake'),
+  owner: z.string().optional().default('Casey'),
   status: z.string().optional().default('Scheduled'),
 });
 export type MeetingInput = z.infer<typeof MeetingSchema>;
