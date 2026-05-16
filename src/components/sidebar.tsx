@@ -89,6 +89,9 @@ function CollapsedNav({ pathname }: { pathname: string }) {
       </div>
       <nav className="flex-1 overflow-y-auto px-2 py-4">
         <TooltipProvider delayDuration={0}>
+          <div className="mb-3 flex justify-center">
+            <NotificationBell align="left" />
+          </div>
           <div className="mb-3">
             <Tooltip>
               <TooltipTrigger asChild>
