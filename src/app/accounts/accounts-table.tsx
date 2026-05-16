@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { DataTable, type Column } from '@/components/data-table';
 import { BandBadge } from '@/components/band-badge';
 import { StatusBadge } from '@/components/status-badge';
+import { HotBadge } from '@/components/hot-badge';
 import { AccountRowActions } from '@/components/accounts/account-row-actions';
 
 export interface AccountRow {
@@ -19,11 +20,22 @@ export interface AccountRow {
   outreach_status: string | null;
   meeting_status: string | null;
   slug: string;
+  is_hot: boolean;
 }
 
 const columns: Column<AccountRow>[] = [
   { key: 'rank', label: '#', sortable: true, className: 'w-12 text-center' },
-  { key: 'name', label: 'Account', sortable: true, render: (a) => <span className="font-medium">{a.name}</span> },
+  {
+    key: 'name',
+    label: 'Account',
+    sortable: true,
+    render: (a) => (
+      <span className="flex items-center gap-1.5">
+        <span className="font-medium">{a.name}</span>
+        {a.is_hot ? <HotBadge /> : null}
+      </span>
+    ),
+  },
   { key: 'vertical', label: 'Vertical', sortable: true, className: 'hidden lg:table-cell' },
   { key: 'priority_band', label: 'Band', sortable: true, render: (a) => <BandBadge band={a.priority_band ?? ''} /> },
   { key: 'tier', label: 'Tier', sortable: true, className: 'hidden md:table-cell' },

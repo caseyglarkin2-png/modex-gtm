@@ -5,6 +5,7 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { AddAccountDialog } from '@/components/add-account-dialog';
 import { BandBadge } from '@/components/band-badge';
 import { StatusBadge } from '@/components/status-badge';
+import { HotBadge } from '@/components/hot-badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { MetricCard } from '@/components/metric-card';
@@ -31,7 +32,25 @@ export default async function AccountsPage({
   const untouchedDaysMatch = /^(\d{1,3})d$/.exec(untouchedDaysRaw);
   const filterUntouchedDays = untouchedDaysMatch ? Math.min(180, Number.parseInt(untouchedDaysMatch[1], 10)) : null;
 
-  const [rawAccounts, rawPersonas] = await Promise.all([dbGetAccounts(), dbGetPersonas()]);
+  const [rawAccounts, rawPersonas, hotNotifications] = await Promise.all([
+    dbGetAccounts(),
+    dbGetPersonas(),
+    prisma.notification.findMany({
+      where: {
+        type: 'hot_engagement',
+        read: false,
+        created_at: { gte: new Date(Date.now() - 24 * 60 * 60 * 1000) },
+      },
+      select: { account_name: true },
+    }),
+  ]);
+  // Accounts with a live intent signal — surfaced as a Hot badge so they
+  // read off the list without opening the notification bell.
+  const hotAccountNames = new Set(
+    hotNotifications
+      .map((n) => n.account_name)
+      .filter((name): name is string => Boolean(name)),
+  );
 
   // S5-T5: optional filters scoped to priority A/B accounts. Each runs as a
   // single batched query — no N+1 — so adding more filters later stays cheap.
@@ -76,6 +95,7 @@ export default async function AccountsPage({
     outreach_status: a.outreach_status,
     meeting_status: a.meeting_status,
     slug: slugify(a.name),
+    is_hot: hotAccountNames.has(a.name),
   }));
 
   const activeFilterChips: Array<{ key: string; label: string }> = [];
@@ -165,6 +185,7 @@ export default async function AccountsPage({
                           {account.name}
                         </Link>
                         <BandBadge band={account.priority_band ?? ''} />
+                        {account.is_hot ? <HotBadge /> : null}
                       </div>
                       <p className="mt-1 text-sm text-[var(--muted-foreground)]">
                         Score {account.priority_score ?? '—'} · {account.persona_count} persona{account.persona_count === 1 ? '' : 's'} · {account.owner ?? 'Unassigned'}
