@@ -15,23 +15,6 @@ export type HomeActivitySource = {
   outcome?: string | null;
 };
 
-export type HomeCampaignSource = {
-  name: string;
-  slug: string;
-  status: string;
-  owner: string;
-  target_account_count: number;
-  start_date: Date | string | null;
-  end_date: Date | string | null;
-  messaging_angle: string | null;
-  _count: {
-    outreach_waves: number;
-    email_logs: number;
-    activities: number;
-    generated_content: number;
-  };
-};
-
 export type HomeFocusItem = {
   type: 'Account' | 'Activity';
   account: string;
@@ -40,63 +23,6 @@ export type HomeFocusItem = {
   due: Date;
   dueLabel: string;
   urgency: 'overdue' | 'today' | 'upcoming';
-};
-
-export type HomeCampaignHealth = {
-  name: string;
-  slug: string;
-  owner: string;
-  status: string;
-  label: string;
-  targetAccountCount: number;
-  generatedCount: number;
-  sentCount: number;
-  activityCount: number;
-  waveCount: number;
-  readinessScore: number;
-  href: string;
-};
-
-export type HomeHealthSnapshot = {
-  generationFailures: number;
-  sendFailures: number;
-  stuckJobs: number;
-  engagementAlerts: number;
-  tone: 'healthy' | 'attention' | 'blocked';
-  label: string;
-};
-
-export type HomeProofStatus = {
-  sprint: string;
-  status: string;
-  result: 'pass' | 'pending' | 'fail';
-  route: string;
-  evidence: string;
-};
-
-export type HomeCockpitSnapshot = {
-  today: {
-    overdue: number;
-    dueToday: number;
-    dueThisWeek: number;
-    engagementAlerts: number;
-    focusItems: HomeFocusItem[];
-  };
-  activeCampaigns: HomeCampaignHealth[];
-  health: HomeHealthSnapshot;
-  proofStatus: HomeProofStatus;
-};
-
-type BuildHomeCockpitInput = {
-  accounts: HomeAccountSource[];
-  activities: HomeActivitySource[];
-  campaigns: HomeCampaignSource[];
-  generationFailures: number;
-  sendFailures: number;
-  stuckJobs: number;
-  engagementAlerts: number;
-  proofStatus: HomeProofStatus;
-  now?: Date;
 };
 
 export function startOfDay(value: Date) {
@@ -172,69 +98,4 @@ export function buildFocusItems(
       urgency,
     };
   });
-}
-
-function buildCampaignHealth(campaign: HomeCampaignSource): HomeCampaignHealth {
-  const targetAccountCount = Math.max(campaign.target_account_count, campaign._count.outreach_waves, 0);
-  const readinessScore = targetAccountCount === 0
-    ? 0
-    : Math.min(100, Math.round((campaign._count.generated_content / targetAccountCount) * 100));
-
-  return {
-    name: campaign.name,
-    slug: campaign.slug,
-    owner: campaign.owner,
-    status: campaign.status,
-    label: campaign.messaging_angle ?? 'Campaign motion ready for operator review.',
-    targetAccountCount,
-    generatedCount: campaign._count.generated_content,
-    sentCount: campaign._count.email_logs,
-    activityCount: campaign._count.activities,
-    waveCount: campaign._count.outreach_waves,
-    readinessScore,
-    href: `/campaigns/${campaign.slug}`,
-  };
-}
-
-function buildHealthSnapshot(input: Pick<BuildHomeCockpitInput, 'generationFailures' | 'sendFailures' | 'stuckJobs' | 'engagementAlerts'>): HomeHealthSnapshot {
-  const issueCount = input.generationFailures + input.sendFailures + input.stuckJobs;
-  const tone = input.stuckJobs > 0 || input.sendFailures > 0
-    ? 'blocked'
-    : issueCount > 0 || input.engagementAlerts > 0
-      ? 'attention'
-      : 'healthy';
-
-  return {
-    generationFailures: input.generationFailures,
-    sendFailures: input.sendFailures,
-    stuckJobs: input.stuckJobs,
-    engagementAlerts: input.engagementAlerts,
-    tone,
-    label: tone === 'healthy' ? 'Ready' : tone === 'attention' ? 'Needs review' : 'Blocked work',
-  };
-}
-
-export function buildHomeCockpitSnapshot(input: BuildHomeCockpitInput): HomeCockpitSnapshot {
-  const now = input.now ?? new Date();
-  const today = startOfDay(now);
-  const sevenDaysOut = new Date(today);
-  sevenDaysOut.setDate(today.getDate() + 7);
-  const focusItems = buildFocusItems(input.accounts, input.activities, now);
-
-  return {
-    today: {
-      overdue: focusItems.filter((item) => item.urgency === 'overdue').length,
-      dueToday: focusItems.filter((item) => item.urgency === 'today').length,
-      dueThisWeek: focusItems.filter((item) => item.due.getTime() >= today.getTime() && item.due.getTime() <= sevenDaysOut.getTime()).length,
-      engagementAlerts: input.engagementAlerts,
-      focusItems: focusItems.slice(0, 6),
-    },
-    activeCampaigns: input.campaigns
-      .filter((campaign) => campaign.status !== 'archived')
-      .map(buildCampaignHealth)
-      .sort((left, right) => right.readinessScore - left.readinessScore)
-      .slice(0, 3),
-    health: buildHealthSnapshot(input),
-    proofStatus: input.proofStatus,
-  };
 }
