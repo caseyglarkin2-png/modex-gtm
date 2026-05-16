@@ -98,6 +98,42 @@ export async function GET(request: Request) {
         },
       });
 
+      // Persist the full conversation message + thread so the reply can
+      // be read and answered in-app without opening Gmail.
+      try {
+        await prisma.emailThread.upsert({
+          where: { id: reply.threadId },
+          create: {
+            id: reply.threadId,
+            account_name: persona?.account_name ?? null,
+            persona_email: reply.fromEmail,
+            subject: reply.subject,
+            last_message_at: reply.receivedAt,
+          },
+          update: {
+            last_message_at: reply.receivedAt,
+            ...(persona?.account_name ? { account_name: persona.account_name } : {}),
+          },
+        });
+        await prisma.inboundMessage.upsert({
+          where: { id: reply.messageId },
+          create: {
+            id: reply.messageId,
+            thread_id: reply.threadId,
+            from_email: reply.fromEmail,
+            from_name: reply.fromName,
+            subject: reply.subject,
+            body_html: reply.bodyHtml || null,
+            body_text: reply.bodyText || null,
+            snippet: reply.snippet,
+            received_at: reply.receivedAt,
+          },
+          update: {},
+        });
+      } catch (persistError) {
+        console.error('Failed to persist inbound message', persistError);
+      }
+
       // Create Activity if persona found
       if (persona) {
         await prisma.activity.create({
