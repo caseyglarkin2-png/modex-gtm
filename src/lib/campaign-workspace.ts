@@ -20,6 +20,13 @@ export function getCampaignTabForLegacyRoute(route: string): CampaignWorkspaceTa
   return campaignWorkspaceTabs.find((tab) => tab.legacyRoutes.includes(route));
 }
 
+export const WAVE_STATUSES = ['Not started', 'In progress', 'Awaiting reply', 'Complete'] as const;
+export type WaveStatus = (typeof WAVE_STATUSES)[number];
+
+export function isWaveStatus(value: string): value is WaveStatus {
+  return (WAVE_STATUSES as readonly string[]).includes(value);
+}
+
 export type CampaignTargetInput = {
   accountName: string;
   wave: string;

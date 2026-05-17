@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import { CreateCampaignSchema, UpdateCampaignSettingsSchema, type UpdateCampaignSettingsInput } from '@/lib/validations';
 import { getCampaignTemplate } from '@/lib/campaigns/templates';
+import { isWaveStatus } from '@/lib/campaign-workspace';
 
 function extractCampaignSettings(keyDates: unknown) {
   if (!keyDates || typeof keyDates !== 'object' || Array.isArray(keyDates)) return {} as Record<string, unknown>;
@@ -162,6 +163,21 @@ export async function resetCampaignDripQueueAction(slug: string) {
   revalidatePath(`/campaigns/${slug}`);
   revalidatePath('/admin/crons');
   return { success: true, cleared: deleted.count };
+}
+
+export async function setWaveStatusAction(waveId: number, status: string, slug: string) {
+  if (!isWaveStatus(status)) {
+    return { success: false, error: 'Invalid wave status' };
+  }
+
+  const wave = await prisma.outreachWave.findUnique({ where: { id: waveId }, select: { id: true } });
+  if (!wave) return { success: false, error: 'Outreach wave not found' };
+
+  await prisma.outreachWave.update({ where: { id: waveId }, data: { status } });
+
+  revalidatePath(`/campaigns/${slug}`);
+  revalidatePath('/campaigns');
+  return { success: true };
 }
 
 export async function updateCampaignSettingsAction(slug: string, input: UpdateCampaignSettingsInput) {

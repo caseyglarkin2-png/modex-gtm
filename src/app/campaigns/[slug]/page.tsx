@@ -16,6 +16,7 @@ import {
   type CampaignWorkspaceTabId,
 } from '@/lib/campaign-workspace';
 import { CampaignControls } from './campaign-controls';
+import { WaveStatusControl } from './wave-status-control';
 import { CampaignSettingsForm } from './campaign-settings-form';
 import { CampaignGenerationContractForm } from './campaign-generation-contract-form';
 import { isGenerationContractPolicyEnabled } from '@/lib/revops/campaign-generation-contract';
@@ -226,7 +227,7 @@ export default async function CampaignDetailPage({ params }: { params: Promise<{
                             <Link href={`/accounts/${slugify(wave.account_name)}`} className="font-medium text-primary hover:underline">
                               {wave.account_name}
                             </Link>
-                            <Badge variant="secondary">{wave.status}</Badge>
+                            <WaveStatusControl waveId={wave.id} slug={campaign.slug} status={wave.status} />
                           </div>
                           <p className="mt-1 text-xs text-muted-foreground">{wave.channel_mix} · {wave.primary_objective}</p>
                         </div>
