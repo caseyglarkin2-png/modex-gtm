@@ -180,6 +180,8 @@ Nine sprints, each independently shippable with its own demo. Tasks are atomic �
 | 7.6 | Make `/campaigns/[slug]` executable — add "generate for all targets" and "send wave" actions on the content/phases tabs | A campaign runs end-to-end from its detail page without bouncing to `/generated-content` | campaign detail + actions |
 | 7.7 | Design-system unification — convert hardcoded `bg-emerald/amber/red` badges to the `success`/`warning` variants; replace the 4+ duplicate mini-metric components with `MetricCard variant="plain"`; replace inline "No X yet" strings with `EmptyState` | Grep finds no hardcoded status-color badges; one mini-metric component; `EmptyState` used app-wide | per-area, one commit each |
 
+> **Verification note — 2026-05-17 (post-ship live walkthrough):** 7.1–7.5 and 7.7 confirmed on production as specified. **7.6 shipped a narrower surface than worded** — `/campaigns/[slug]` is executable via pause / resume / reset-drip controls plus a per-wave `WaveStatusControl` (server-action backed, `setWaveStatusAction`) on the Phases tab, rather than dedicated "generate for all targets" / "send wave" buttons. The campaign is operable end-to-end from its detail page, so the goal holds; the two named actions were not built as standalone buttons.
+
 ---
 
 ### Sprint 8 — Microsite Operations In-App
@@ -193,6 +195,8 @@ Nine sprints, each independently shippable with its own demo. Tasks are atomic �
 | 8.2 | Wire microsite high-intent sessions into Work Queue follow-ups | A high-intent microsite session raises a Work Queue item | queue lib + intent path |
 | 8.3 | Batch-distribution status surface — a per-account readiness matrix (sent, audio ready, video ready) | The tab reads the batch manifest and shows per-account readiness | microsites-tab + manifest read |
 | 8.4 | "Regenerate audio/video" trigger from the UI — enqueues a job the audio pipeline consumes | A button enqueues a generation job; status reflects back into the UI | API route + tab + job model |
+
+> **Verification note — 2026-05-17 (post-ship live walkthrough):** 8.1–8.3 confirmed on production as specified. **8.4 shipped a copy-command pattern, not an in-app job enqueue** — the Audio & video panel renders a per-account "Regen command" button (43 audio briefs · 8 video codas) that copies a CLI command to run regeneration offline through the audio pipeline in the repo terminal. There is no API route that enqueues a job and no in-UI status reflection; the worded "API route + tab + job model" was reduced to "tab + copy-command". Adequate for the offline pipeline, but it does not meet the literal assertion.
 
 ---
 
