@@ -29,8 +29,10 @@ const SCOPES = [
   'openid',
   'email',
   'profile',
+  // send: outbound email. modify: read inbox replies + label them
+  // (check-inbox needs read; send-only tokens 403 on messages.list).
   'https://www.googleapis.com/auth/gmail.send',
-  'https://www.googleapis.com/auth/gmail.insert',
+  'https://www.googleapis.com/auth/gmail.modify',
 ].join(' ');
 
 const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?` + new URLSearchParams({
