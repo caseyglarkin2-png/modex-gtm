@@ -11,7 +11,6 @@ describe('content studio contract', () => {
   it('declares the canonical Content Studio tabs', () => {
     expect(contentStudioTabs.map((tab) => tab.label)).toEqual([
       'Generate',
-      'Library',
       'Generated Content',
       'Briefs',
       'Search Strings',
@@ -19,8 +18,6 @@ describe('content studio contract', () => {
       'Audit Routes',
       'QR Assets',
       'Microsites',
-      'Queue',
-      'Send Readiness',
       'Playbook',
     ]);
   });
@@ -48,7 +45,7 @@ describe('content studio contract', () => {
 
   it('maps legacy content routes into canonical Studio views', () => {
     expect(getContentStudioTabForLegacyRoute('/generated-content')?.label).toBe('Generated Content');
-    expect(getContentStudioTabForLegacyRoute('/queue/generations')?.label).toBe('Queue');
+    expect(getContentStudioTabForLegacyRoute('/queue/generations')?.label).toBe('Generated Content');
     expect(getContentStudioTabForLegacyRoute('/briefs/general-mills')?.label).toBe('Briefs');
     expect(getContentStudioTabForLegacyRoute('/search')?.label).toBe('Search Strings');
     expect(getContentStudioTabForLegacyRoute('/intel')?.label).toBe('Intel');

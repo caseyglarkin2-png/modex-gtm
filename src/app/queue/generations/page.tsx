@@ -54,11 +54,11 @@ export default async function GenerationQueuePage() {
         </div>
         <div className="flex items-center gap-2">
           <Link
-            href="/studio?tab=queue"
+            href="/studio?tab=generated-content"
             className="inline-flex items-center gap-1 rounded-lg border px-3 py-2 text-xs text-muted-foreground hover:bg-muted"
           >
             <Zap className="h-3.5 w-3.5" />
-            Content Studio Queue
+            Content Studio
           </Link>
           <Link
             href="/queue?tab=system-jobs"

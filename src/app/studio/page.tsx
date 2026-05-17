@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight, Library, ListChecks, Send, Sparkles } from 'lucide-react';
+import { ArrowRight, Library, Sparkles } from 'lucide-react';
 import QRCode from 'qrcode';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { Badge } from '@/components/ui/badge';
@@ -70,8 +70,6 @@ export default async function StudioPage({
   const auditRoutes = getAuditRoutes();
   const qrAssets = getQrAssets();
   const microsites = getAllAccountMicrositeData();
-  const firstBrief = briefs[0];
-  const firstMicrosite = microsites[0];
 
   const [generatedRows, jobs] = await Promise.all([
     prisma.generatedContent.findMany({
@@ -102,59 +100,6 @@ export default async function StudioPage({
     generatedRows,
     jobs,
   );
-
-  const failedJob = jobs.find((job) => job.status === 'failed');
-
-  const assetCards = [
-    {
-      label: 'Generated Content',
-      count: summary.generated,
-      href: '/studio?tab=generated-content',
-      detail: `${summary.sendReadyGenerated} send-ready, ${summary.reviewRequiredGenerated} requiring review`,
-    },
-    {
-      label: 'Meeting Briefs',
-      count: summary.briefs,
-      href: firstBrief ? `/briefs/${slugify(firstBrief.account)}` : '/studio?tab=briefs',
-      detail: 'Account prep, talking points, and pain hypotheses',
-    },
-    {
-      label: 'Search Strings',
-      count: summary.searchStrings,
-      href: '/studio?tab=search-strings',
-      detail: 'Copyable Sales Nav, LinkedIn, and X-Ray queries',
-    },
-    {
-      label: 'Actionable Intel',
-      count: summary.intel,
-      href: '/studio?tab=intel',
-      detail: 'Research items with owner and status',
-    },
-    {
-      label: 'Audit Routes',
-      count: summary.auditRoutes,
-      href: '/studio?tab=audit-routes',
-      detail: 'Copyable URLs and audit asks',
-    },
-    {
-      label: 'QR Assets',
-      count: summary.qrAssets,
-      href: '/studio?tab=qr-assets',
-      detail: 'Scannable booth and leave-behind assets',
-    },
-    {
-      label: 'Microsites',
-      count: summary.microsites,
-      href: firstMicrosite ? `/for/${firstMicrosite.slug}` : '/studio?tab=microsites',
-      detail: 'Public account experiences and variants',
-    },
-    {
-      label: 'Proposals',
-      count: summary.proposals,
-      href: firstMicrosite ? `/proposal/${firstMicrosite.slug}` : '/studio?tab=microsites',
-      detail: 'Board-ready public proposal assets',
-    },
-  ];
 
   // Per-tab data — only fetched for the active tab
   const generateData = activeTab === 'generate'
@@ -239,11 +184,20 @@ export default async function StudioPage({
   return (
     <div className="space-y-6">
       <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Content Studio' }]} />
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">Content Studio</h1>
-        <p className="text-sm text-[var(--muted-foreground)]">
-          Generate, find, review, queue, and send-ready every content asset from one canonical workspace.
-        </p>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight">Content Studio</h1>
+          <p className="text-sm text-[var(--muted-foreground)]">
+            Generate, review, and send every content asset from one canonical workspace.
+          </p>
+        </div>
+        <Link href="/queue/generations">
+          <Button variant="outline" size="sm" className="gap-1.5">
+            Generation queue
+            {summary.failedJobs > 0 ? ` · ${summary.failedJobs} failed` : ''}
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Button>
+        </Link>
       </div>
 
       <div className="grid gap-4 md:grid-cols-4">
@@ -287,34 +241,6 @@ export default async function StudioPage({
               personasByAccount={personasByAccount}
               recipientsByAccount={recipientsByAccount}
             />
-          </TabsContent>
-        ) : null}
-
-        {activeTab === 'library' ? (
-          <TabsContent value="library" className="space-y-4">
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-center gap-2 text-base">
-                  <Library className="h-4 w-4" /> Asset Library
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-                {assetCards.map((asset) => (
-                  <Link key={asset.label} href={asset.href} className="rounded-lg border p-4 transition-colors hover:bg-[var(--muted)]">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <p className="text-sm font-medium">{asset.label}</p>
-                        <p className="mt-1 text-xs text-[var(--muted-foreground)]">{asset.detail}</p>
-                      </div>
-                      <Badge variant="outline">{asset.count}</Badge>
-                    </div>
-                    <p className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-[var(--primary)]">
-                      Open asset <ArrowRight className="h-3 w-3" />
-                    </p>
-                  </Link>
-                ))}
-              </CardContent>
-            </Card>
           </TabsContent>
         ) : null}
 
@@ -368,67 +294,6 @@ export default async function StudioPage({
         {activeTab === 'microsites' ? (
           <TabsContent value="microsites" className="space-y-4">
             <MicrositesTab accounts={microsites} />
-          </TabsContent>
-        ) : null}
-
-        {activeTab === 'queue' ? (
-          <TabsContent value="queue" className="space-y-4">
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-center gap-2 text-base">
-                  <ListChecks className="h-4 w-4" /> Queue
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid gap-3 md:grid-cols-4">
-                  {['pending', 'processing', 'completed', 'failed'].map((status) => (
-                    <div key={status} className="rounded-lg border p-3">
-                      <p className="text-xs uppercase tracking-wide text-[var(--muted-foreground)]">{status}</p>
-                      <p className="mt-1 text-2xl font-bold">{jobs.filter((job) => job.status === status).length}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border p-4 text-sm text-[var(--muted-foreground)]">
-                  <p>
-                    {failedJob
-                      ? `${failedJob.account_name} has a failed generation job with retry history available.`
-                      : 'Generation retry paths remain available from the queue workspace.'}
-                  </p>
-                  <Link href="/queue/generations">
-                    <Button size="sm" className="gap-1.5">
-                      Open Generation Queue <ArrowRight className="h-3.5 w-3.5" />
-                    </Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        ) : null}
-
-        {activeTab === 'send-readiness' ? (
-          <TabsContent value="send-readiness" className="space-y-4">
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-center gap-2 text-base">
-                  <Send className="h-4 w-4" /> Send Readiness
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid gap-3 md:grid-cols-3">
-                  <MetricCard variant="plain" size="md" label="Published, unsent" value={summary.sendReadyGenerated} tone="text-emerald-600" />
-                  <MetricCard variant="plain" size="md" label="Needs review" value={summary.reviewRequiredGenerated} tone="text-amber-600" />
-                  <MetricCard variant="plain" size="md" label="Already sent" value={generatedRows.filter((row) => row.external_send_count > 0).length} />
-                </div>
-                <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border p-4 text-sm text-[var(--muted-foreground)]">
-                  <p>Generated one-pagers keep their existing filters, recipient selection, publish, preview, and send controls.</p>
-                  <Link href="/studio?tab=generated-content">
-                    <Button size="sm" className="gap-1.5">
-                      Review Generated Content <ArrowRight className="h-3.5 w-3.5" />
-                    </Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
           </TabsContent>
         ) : null}
 

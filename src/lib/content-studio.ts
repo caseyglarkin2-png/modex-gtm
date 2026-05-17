@@ -1,8 +1,5 @@
 export type ContentStudioTabId =
   | 'generate'
-  | 'library'
-  | 'queue'
-  | 'send-readiness'
   | 'playbook'
   | 'briefs'
   | 'search-strings'
@@ -60,16 +57,13 @@ export type ContentStudioSummary = ContentAssetSourceCounts & {
 
 export const contentStudioTabs: ContentStudioTab[] = [
   { id: 'generate', label: 'Generate', purpose: 'Create new AI-assisted assets and campaign-specific drafts.' },
-  { id: 'library', label: 'Library', purpose: 'Find account, campaign, and field assets across legacy asset routes.' },
-  { id: 'generated-content', label: 'Generated Content', purpose: 'Review generated one-pagers, filter, publish drafts, and send.' },
+  { id: 'generated-content', label: 'Generated Content', purpose: 'Review, filter, publish, and send generated one-pagers.' },
   { id: 'briefs', label: 'Briefs', purpose: 'Pre-meeting preparation documents and prep priority board.' },
   { id: 'search-strings', label: 'Search Strings', purpose: 'Sales Navigator, LinkedIn, and Google X-Ray queries.' },
   { id: 'intel', label: 'Intel', purpose: 'Open research items, owner status, and field-to-update tracking.' },
   { id: 'audit-routes', label: 'Audit Routes', purpose: 'UTM-tracked landing-page URLs with copyable asks.' },
   { id: 'qr-assets', label: 'QR Assets', purpose: 'Booth-ready QR codes and account-specific scan destinations.' },
   { id: 'microsites', label: 'Microsites', purpose: 'Internal gallery of public-facing account microsites.' },
-  { id: 'queue', label: 'Queue', purpose: 'Track generation jobs, failures, and retry paths.' },
-  { id: 'send-readiness', label: 'Send Readiness', purpose: 'Review publish/send prerequisites before outbound execution.' },
   { id: 'playbook', label: 'Playbook', purpose: 'Rank, manage, and reuse winning message blocks across segments.' },
 ];
 
@@ -87,9 +81,9 @@ export const contentAssetTypes: ContentAssetType[] = [
     id: 'generation-job',
     label: 'Generation Jobs',
     owner: 'Content Studio',
-    canonicalTab: 'queue',
+    canonicalTab: 'generated-content',
     legacyRoutes: ['/queue/generations'],
-    routeBehavior: 'Legacy queue remains reachable from Studio Queue and Work Queue.',
+    routeBehavior: 'Generation jobs feed the Generated Content tab; the full queue remains at /queue/generations.',
     statusBehavior: 'Uses pending, processing, completed, failed, and retry count.',
   },
   {
