@@ -143,6 +143,7 @@ describe('work queue contract', () => {
       'operator-action',
       'follow-up',
       'content-revision-required',
+      'microsite-intent',
       'capture',
       'approval',
       'generation-job',

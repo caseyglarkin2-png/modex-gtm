@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import { buildWorkQueueItems, parseWorkQueueTab } from '@/lib/work-queue';
 import { auditOperatorOutcomeQuality } from '@/lib/revops/operator-outcomes';
+import { dbGetMicrositeAnalytics } from '@/lib/db';
 import { WorkQueueClient } from './work-queue-client';
 
 export const dynamic = 'force-dynamic';
@@ -18,7 +19,7 @@ export default async function QueuePage({
   const params = (await searchParams) ?? {};
   const defaultTab = parseWorkQueueTab(params.tab);
 
-  const [activities, captures, notificationApprovals, sendApprovalRequests, generationJobs, sendJobs, operatorOutcomes, messageEvolutions] = await Promise.all([
+  const [activities, captures, notificationApprovals, sendApprovalRequests, generationJobs, sendJobs, operatorOutcomes, messageEvolutions, micrositeAnalytics] = await Promise.all([
     prisma.activity.findMany({
       where: {
         OR: [
@@ -181,7 +182,21 @@ export default async function QueuePage({
         created_at: true,
       },
     }),
+    dbGetMicrositeAnalytics(),
   ]);
+
+  const micrositeIntent = micrositeAnalytics.hotAccounts
+    .filter((account) => account.highIntentSessions > 0 || account.ctaSessions > 0)
+    .map((account) => ({
+      accountName: account.accountName,
+      accountSlug: account.accountSlug,
+      engagementScore: account.engagementScore,
+      primarySignal: account.primarySignal,
+      recommendedAction: account.recommendedAction,
+      highIntentSessions: account.highIntentSessions,
+      ctaSessions: account.ctaSessions,
+      lastViewedAt: account.lastViewedAt,
+    }));
   const approvals = [
     ...notificationApprovals.map((item) => ({
       id: `notification-${item.id}`,
@@ -222,6 +237,7 @@ export default async function QueuePage({
     approvals,
     generationJobs,
     sendJobs,
+    micrositeIntent,
     outcomeAudits,
     messageEvolutions,
   });

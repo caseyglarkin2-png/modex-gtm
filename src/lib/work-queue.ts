@@ -22,6 +22,7 @@ export type WorkQueueItemTypeId =
   | 'operator-action'
   | 'follow-up'
   | 'content-revision-required'
+  | 'microsite-intent'
   | 'capture'
   | 'approval'
   | 'generation-job'
@@ -106,6 +107,17 @@ export type QueueApprovalSource = {
   comment?: string | null;
 };
 
+export type QueueMicrositeIntentSource = {
+  accountName: string;
+  accountSlug: string;
+  engagementScore: number;
+  primarySignal: string;
+  recommendedAction: string;
+  highIntentSessions: number;
+  ctaSessions: number;
+  lastViewedAt: Date;
+};
+
 export type QueueGenerationSource = {
   id: number;
   account_name: string;
@@ -151,6 +163,7 @@ export type WorkQueueSources = {
   approvals: QueueApprovalSource[];
   generationJobs: QueueGenerationSource[];
   sendJobs: QueueSendSource[];
+  micrositeIntent?: QueueMicrositeIntentSource[];
   outcomeAudits: OutcomeQualityIssue[];
   messageEvolutions: Array<{
     id: string;
@@ -196,6 +209,13 @@ export const workQueueItemTypes: WorkQueueItemType[] = [
     label: 'Content Revision Required',
     source: 'Engagement signal follow-up',
     displayBehavior: 'Routes negative/wrong-person/timing outcomes into a regeneration workflow.',
+    canonicalTab: 'follow-ups',
+  },
+  {
+    id: 'microsite-intent',
+    label: 'Microsite Intent',
+    source: 'Microsite engagement analytics',
+    displayBehavior: 'Surfaces accounts engaging with their microsite and the recommended next step.',
     canonicalTab: 'follow-ups',
   },
   {
@@ -449,6 +469,33 @@ export function buildWorkQueueItems(input: WorkQueueSources): WorkQueueItem[] {
     },
   }));
 
+  const micrositeIntentItems: WorkQueueItem[] = (input.micrositeIntent ?? []).map((signal) => {
+    const severity: QueueSeverity =
+      signal.ctaSessions > 0 || signal.engagementScore >= 60
+        ? 'high'
+        : signal.engagementScore >= 35
+          ? 'medium'
+          : 'low';
+    return {
+      id: `microsite-intent-${signal.accountSlug}`,
+      itemType: 'microsite-intent',
+      sourceId: signal.accountSlug,
+      accountName: signal.accountName,
+      accountSlug: signal.accountSlug,
+      title: 'Microsite intent follow-up',
+      detail: `${signal.primarySignal} — ${signal.recommendedAction}`,
+      createdAt: signal.lastViewedAt,
+      statusLabel: signal.ctaSessions > 0 ? 'CTA clicked' : 'High intent',
+      severity,
+      sourceTab: 'follow-ups',
+      quickActions: {
+        completeKey: `microsite-intent-${signal.accountSlug}-complete`,
+        snoozeKey: `microsite-intent-${signal.accountSlug}-snooze`,
+        accountHref: `/accounts/${signal.accountSlug}`,
+      },
+    };
+  });
+
   const outcomeAuditItems: WorkQueueItem[] = input.outcomeAudits.map((issue) => ({
     id: `outcome-audit-${issue.issueId}`,
     itemType: 'outcome-audit',
@@ -503,7 +550,7 @@ export function buildWorkQueueItems(input: WorkQueueSources): WorkQueueItem[] {
     };
   });
 
-  return [...activityItems, ...captureItems, ...approvalItems, ...generationItems, ...sendItems, ...stuckItems, ...outcomeAuditItems, ...learningReviewItems]
+  return [...activityItems, ...captureItems, ...approvalItems, ...micrositeIntentItems, ...generationItems, ...sendItems, ...stuckItems, ...outcomeAuditItems, ...learningReviewItems]
     .sort((left, right) => right.createdAt.getTime() - left.createdAt.getTime());
 }
 
