@@ -1208,7 +1208,7 @@ export default async function AccountDetailPage({
             <GeneratorDialog accountName={account.name} defaultType="meeting_prep" />
             <GeneratorDialog accountName={account.name} defaultType="call_script" />
             <Button variant="outline" size="sm" asChild>
-              <Link href={`/generated-content?account=${encodeURIComponent(account.name)}`}>
+              <Link href={`/studio?tab=generated-content&account=${encodeURIComponent(account.name)}`}>
                 Open Content Studio
               </Link>
             </Button>
@@ -1233,7 +1233,7 @@ export default async function AccountDetailPage({
                       </div>
                     ))}
                     <Link href={`/briefs/${slug}`} className="inline-flex items-center gap-1 text-sm font-medium text-[var(--primary)] hover:underline">
-                      Open legacy brief <ExternalLink className="h-3.5 w-3.5" />
+                      Open full brief <ExternalLink className="h-3.5 w-3.5" />
                     </Link>
                   </>
                 )}

@@ -32,9 +32,9 @@ export default async function BriefDetailPage({ params }: { params: Promise<{ ac
 
   return (
     <div className="space-y-6">
-      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Meeting Briefs', href: '/briefs' }, { label: brief.account }]} />
+      <Breadcrumb items={[{ label: 'Dashboard', href: '/' }, { label: 'Content Studio', href: '/studio?tab=briefs' }, { label: brief.account }]} />
       <div className="flex items-center justify-between">
-        <Link href="/briefs" className="inline-flex items-center gap-1 text-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors">
+        <Link href="/studio?tab=briefs" className="inline-flex items-center gap-1 text-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors">
           <ArrowLeft className="h-3.5 w-3.5" /> Back to Briefs
         </Link>
         <Link href={`/accounts/${slugify(brief.account)}`}>

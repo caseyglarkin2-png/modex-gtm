@@ -15,7 +15,7 @@ export default function BriefNotFound() {
           <p className="text-sm text-[var(--muted-foreground)]">
             The meeting brief you&apos;re looking for doesn&apos;t exist or the URL is incorrect.
           </p>
-          <Link href="/briefs">
+          <Link href="/studio?tab=briefs">
             <Button className="w-full">Back to Briefs</Button>
           </Link>
         </CardContent>

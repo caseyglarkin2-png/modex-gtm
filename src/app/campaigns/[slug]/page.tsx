@@ -294,8 +294,8 @@ export default async function CampaignDetailPage({ params }: { params: Promise<{
             }}
           />
           <div className="flex justify-end">
-            <Link href={`/generated-content?campaign=${encodeURIComponent(campaign.slug)}`}>
-              <Button size="sm" className="gap-1.5">Open Filtered Content Studio <ArrowRight className="h-3.5 w-3.5" /></Button>
+            <Link href={`/studio?tab=generated-content&campaign=${encodeURIComponent(campaign.name)}`}>
+              <Button size="sm" className="gap-1.5">Review &amp; send in Content Studio <ArrowRight className="h-3.5 w-3.5" /></Button>
             </Link>
           </div>
           {campaign.generated_content.length === 0 ? (
