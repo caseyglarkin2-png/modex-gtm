@@ -115,7 +115,7 @@ export function OnePageVersionSelector({
                 </p>
               </div>
               {isPublished ? (
-                <Badge className="bg-emerald-100 text-emerald-800">
+                <Badge variant="success">
                   <CheckCircle2 className="mr-1 h-3 w-3" />
                   Published
                 </Badge>

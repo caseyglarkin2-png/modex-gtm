@@ -72,21 +72,21 @@ export function GenerationJobList({ jobs, onRetry }: GenerationJobListProps) {
     switch (status) {
       case 'completed':
         return (
-          <Badge className="bg-emerald-100 text-emerald-800">
+          <Badge variant="success">
             <CheckCircle2 className="mr-1 h-3 w-3" />
             Completed
           </Badge>
         );
       case 'processing':
         return (
-          <Badge className="bg-blue-100 text-blue-800">
+          <Badge variant="info">
             <Zap className="mr-1 h-3 w-3" />
             Processing
           </Badge>
         );
       case 'failed':
         return (
-          <Badge className="bg-red-100 text-red-800">
+          <Badge variant="destructive">
             <AlertTriangle className="mr-1 h-3 w-3" />
             Failed
           </Badge>

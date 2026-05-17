@@ -491,9 +491,9 @@ export function BulkPreviewDialog({ items, onJobCreated }: BulkPreviewDialogProp
                   </p>
                 </div>
                 <div className="flex items-center gap-1">
-                  {guard.requiresGuard && <Badge className="bg-amber-100 text-amber-900">Needs Review</Badge>}
-                  {sendableRecipients.length === 0 && <Badge className="bg-red-100 text-red-900">No Recipients After Filters</Badge>}
-                  {item.checklist && !item.checklist.complete && <Badge className="bg-amber-100 text-amber-900">Checklist Advisory</Badge>}
+                  {guard.requiresGuard && <Badge variant="warning">Needs Review</Badge>}
+                  {sendableRecipients.length === 0 && <Badge variant="destructive">No Recipients After Filters</Badge>}
+                  {item.checklist && !item.checklist.complete && <Badge variant="warning">Checklist Advisory</Badge>}
                   <Badge variant="outline">{rendering.source}</Badge>
                 </div>
               </div>

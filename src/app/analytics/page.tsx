@@ -825,7 +825,7 @@ export default async function AnalyticsPage({
                       <Badge variant={row.promotion.status === 'candidate' ? 'default' : 'outline'}>
                         {row.promotion.status === 'candidate' ? 'Promotion Candidate' : row.promotion.status.replaceAll('_', ' ')}
                       </Badge>
-                      {row.drift.drifting ? <Badge className="bg-amber-100 text-amber-900">Drift</Badge> : null}
+                      {row.drift.drifting ? <Badge variant="warning">Drift</Badge> : null}
                     </div>
                   </div>
                   <div className="mt-2 grid gap-2 text-xs text-muted-foreground sm:grid-cols-3 xl:grid-cols-6">

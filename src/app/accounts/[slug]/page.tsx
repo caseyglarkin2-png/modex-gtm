@@ -1068,9 +1068,9 @@ export default async function AccountDetailPage({
                                     {variant.label}
                                   </Link>
                                   {variant.ctaSessions > 0 ? (
-                                    <Badge className="bg-emerald-600 text-white">CTA active</Badge>
+                                    <Badge variant="success">CTA active</Badge>
                                   ) : variant.highIntentSessions > 0 ? (
-                                    <Badge className="bg-amber-500 text-white">High intent</Badge>
+                                    <Badge variant="warning">High intent</Badge>
                                   ) : (
                                     <Badge variant="outline">Watch</Badge>
                                   )}
@@ -1547,8 +1547,8 @@ function buildAssetProvenanceLine(versionMetadata: unknown) {
 }
 
 function MicrositeAccountHeatBadge({ score }: { score: number }) {
-  if (score >= 70) return <Badge className="bg-red-500 text-white">Hot {score}</Badge>;
-  if (score >= 45) return <Badge className="bg-amber-500 text-white">Warm {score}</Badge>;
+  if (score >= 70) return <Badge variant="destructive">Hot {score}</Badge>;
+  if (score >= 45) return <Badge variant="warning">Warm {score}</Badge>;
   return <Badge variant="outline">Watch {score}</Badge>;
 }
 
@@ -1569,7 +1569,7 @@ function MicrositeSessionRow({ session }: { session: RecentMicrositeSession }) {
               {session.personName ?? 'Overview microsite'}
             </Link>
             {session.isHighIntent ? (
-              <Badge className="bg-emerald-600 text-white">High intent</Badge>
+              <Badge variant="success">High intent</Badge>
             ) : (
               <Badge variant="outline">Light read</Badge>
             )}

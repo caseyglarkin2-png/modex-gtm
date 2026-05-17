@@ -48,9 +48,9 @@ function parseJsonValue<T>(value?: string): T | null {
 function statusBadge(status?: string) {
   switch (status) {
     case 'ok':
-      return <Badge className="bg-emerald-600 text-white">Healthy</Badge>;
+      return <Badge variant="success">Healthy</Badge>;
     case 'running':
-      return <Badge className="bg-blue-600 text-white">Running</Badge>;
+      return <Badge variant="info">Running</Badge>;
     case 'skipped':
       return <Badge variant="secondary">Skipped</Badge>;
     case 'error':
@@ -66,7 +66,7 @@ function formatTime(value?: string) {
 }
 
 function FlagBadge({ enabled }: { enabled: boolean }) {
-  return enabled ? <Badge className="bg-emerald-600 text-white">On</Badge> : <Badge variant="secondary">Off</Badge>;
+  return enabled ? <Badge variant="success">On</Badge> : <Badge variant="secondary">Off</Badge>;
 }
 
 export function CronHealthRich({ configs, generationJobs }: CronHealthRichProps) {
