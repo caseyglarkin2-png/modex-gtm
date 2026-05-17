@@ -30,7 +30,7 @@ import { BandBadge } from '@/components/band-badge';
 import { StatusBadge } from '@/components/status-badge';
 import { CopyButton } from '@/components/copy-button';
 import { EmptyState } from '@/components/empty-state';
-import { ExternalLink, Users, FileText, GitBranch, BriefcaseBusiness, ChevronDown } from 'lucide-react';
+import { ExternalLink, Users, FileText, GitBranch, BriefcaseBusiness } from 'lucide-react';
 import { LogActivityDialog } from '@/components/log-activity-dialog';
 import { BookMeetingDialog } from '@/components/book-meeting-dialog';
 import { GeneratorDialog } from '@/components/ai/generator-dialog';
@@ -521,16 +521,16 @@ export default async function AccountDetailPage({
             )}
           </div>
 
-          {/* Account details — collapsed by default. Score breakdown, research-backed
-              tags, agent intel, and the Outbound Command Center / Suggested Recipients
-              cards live here so the hero stays "name + status + one CTA" at a glance.
-              The composite priority score is already shown as a badge in the top-right. */}
-          <details className="mt-4 group">
-            <summary className="flex cursor-pointer list-none items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--muted-foreground)] hover:text-[var(--foreground)]">
-              <ChevronDown className="h-3 w-3 transition-transform group-open:rotate-180" />
-              Account details
-            </summary>
-            <div className="mt-4 space-y-4">
+          {/* Quick actions — log a call or book a meeting from the hero */}
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+            <LogActivityDialog accountName={account.name} personas={personas.map((p) => ({ name: p.name }))} />
+            <BookMeetingDialog accountName={account.name} personas={personas.map((p) => ({ name: p.name, priority: p.priority }))} calendlyLink={process.env.NEXT_PUBLIC_CALENDLY_LINK} />
+          </div>
+
+          {/* Account details — score breakdown, agent intel, and the Outbound
+              Command Center / Suggested Recipients. Always visible so the send
+              and recipient surface is one glance from the hero. */}
+          <div className="mt-4 space-y-4">
           {/* Score Dimensions */}
           <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
             {scoreDims.map((dim) => (
@@ -819,7 +819,6 @@ export default async function AccountDetailPage({
             </Card>
           </div>
             </div>
-          </details>
         </CardContent>
       </Card>
 
