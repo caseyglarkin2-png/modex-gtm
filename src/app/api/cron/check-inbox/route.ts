@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { z } from 'zod';
+import { isAuthorizedCronRequest } from '@/lib/cron-auth';
 import { prisma } from '@/lib/prisma';
 import { getRecentReplies, markAsProcessed } from '@/lib/email/gmail-inbox';
 import { logReplyToHubSpot } from '@/lib/hubspot/emails';
@@ -11,20 +11,13 @@ import * as Sentry from '@sentry/nextjs';
 
 export const dynamic = 'force-dynamic';
 
-const querySchema = z.object({
-  secret: z.string().min(1),
-});
-
 const CRON_NAME = 'check-inbox';
 const CRON_PATH = '/api/cron/check-inbox';
 const CRON_SCHEDULE = '*/5 * * * *';
 
 export async function GET(request: Request) {
-  // Auth: validate CRON_SECRET
-  const { searchParams } = new URL(request.url);
-  const parsed = querySchema.safeParse({ secret: searchParams.get('secret') ?? '' });
-
-  if (!parsed.success || parsed.data.secret !== process.env.CRON_SECRET) {
+  // Auth: Vercel cron Bearer header or ?secret= query, vs CRON_SECRET
+  if (!isAuthorizedCronRequest(request)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
