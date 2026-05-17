@@ -5,6 +5,7 @@ import type { AccountMicrositeData } from '@/lib/microsites/schema';
 import { getVariantRoutes } from '@/lib/microsites/rules';
 import type { MicrositeAnalyticsSummary } from '@/lib/microsites/analytics';
 import type { MicrositeBatchAccountStatus, MicrositeBatchSummary } from '@/lib/microsites/batch-distribution';
+import { MicrositeAudioPanel, type MicrositeAudioAsset } from './microsite-audio-panel';
 
 type MicrositesTabProps = {
   accounts: AccountMicrositeData[];
@@ -143,6 +144,19 @@ export function MicrositesTab({ accounts, analytics, batch }: MicrositesTabProps
     .filter((a) => !a.showcase)
     .sort((a, b) => b.priorityScore - a.priorityScore);
 
+  const audioAssets: MicrositeAudioAsset[] = accounts
+    .map((account) => ({
+      slug: account.slug,
+      accountName: account.accountName,
+      hasCustomAudio: Boolean(account.audioBrief),
+      audioGeneratedAt: account.audioBrief?.generatedAt ?? null,
+      hasVideo: Boolean(account.audioBrief?.videoFollowUp),
+    }))
+    .sort((a, b) => {
+      if (a.hasCustomAudio !== b.hasCustomAudio) return a.hasCustomAudio ? -1 : 1;
+      return a.accountName.localeCompare(b.accountName);
+    });
+
   return (
     <div className="space-y-6">
       <div>
@@ -154,6 +168,7 @@ export function MicrositesTab({ accounts, analytics, batch }: MicrositesTabProps
 
       {analytics ? <EngagementPanel analytics={analytics} /> : null}
       {batch ? <BatchPanel batch={batch} /> : null}
+      {audioAssets.length > 0 ? <MicrositeAudioPanel assets={audioAssets} /> : null}
 
       {showcaseAccounts.length > 0 ? (
         <section>
