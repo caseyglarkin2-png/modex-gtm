@@ -1,9 +1,11 @@
 /**
- * One-off admin endpoint — backfills historical sent emails into Gmail
+ * One-off endpoint — backfills historical sent emails into Gmail
  * threads so old conversations appear in the in-app inbox.
  *
- * Resumable: pass `?after=<lastId>` to continue from a cursor. Each call
- * runs within a time budget and reports `done` once no rows remain.
+ * Lives under /api/cron so the NextAuth middleware skips it (same as the
+ * scheduled cron routes); gated by its own token. Resumable: pass
+ * `?after=<lastId>` to continue from a cursor. Each call runs within a
+ * time budget and reports `done` once no rows remain.
  *
  * This route is temporary and is removed once the backfill completes.
  */
