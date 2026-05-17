@@ -88,9 +88,14 @@ export function NotificationBell({ align = 'right' }: { align?: 'left' | 'right'
     if (!notification.read) {
       markRead([notification.id]);
     }
-    // Navigate to account if available
+    // Navigate to the account. Hot-engagement alerts land on the outreach
+    // tab — the action surface — not the Brief tab.
     if (notification.account_name) {
-      window.location.href = `/accounts/${slugify(notification.account_name)}`;
+      const slug = slugify(notification.account_name);
+      window.location.href =
+        notification.type === 'hot_engagement'
+          ? `/accounts/${slug}?tab=outreach`
+          : `/accounts/${slug}`;
     }
     setOpen(false);
   };
