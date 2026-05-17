@@ -1,7 +1,7 @@
 /**
- * Gmail API Send — Primary email provider.
- * Sends email via Gmail API (messages.send) which also places it in Sent folder automatically.
- * Reuses OAuth token refresh from gmail-mirror.ts infrastructure.
+ * Gmail API Send — the only email send path.
+ * Sends email via Gmail API (messages.send), which also files the message
+ * in the Sent folder automatically and assigns a real Gmail threadId.
  */
 
 // Read at call time, not module load time, so dynamically-set values work
