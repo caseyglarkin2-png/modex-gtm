@@ -16,7 +16,7 @@ const TARGET_ACCOUNT_COUNT = 1000;
 const TARGET_CONTACT_COUNT = 13000;
 
 export default async function ContactsPage() {
-  const [personas, accounts, enrichmentCount, apolloLinkedCount, sendReadyCount, activeCampaign, canonicalWorkspace] = await Promise.all([
+  const [personas, accounts, enrichmentCount, apolloLinkedCount, sendReadyCount, activeCampaign, canonicalWorkspace, engagementSignals] = await Promise.all([
     prisma.persona.findMany({
       select: {
         id: true,
@@ -70,13 +70,32 @@ export default async function ContactsPage() {
       select: { name: true, slug: true },
     }),
     ensureCanonicalRecords(),
+    prisma.emailLog.findMany({
+      where: { OR: [{ opened_at: { not: null } }, { clicked_at: { not: null } }] },
+      select: { to_email: true, opened_at: true, clicked_at: true },
+      take: 1000,
+    }),
   ]);
 
   const accountMap = new Map(accounts.map(a => [a.name, a]));
 
+  // Most recent open/click per contact email — the "who's hot" signal.
+  const signalByEmail = new Map<string, { label: string; at: Date }>();
+  for (const row of engagementSignals) {
+    const email = row.to_email.toLowerCase();
+    const points: Array<{ label: string; at: Date }> = [];
+    if (row.clicked_at) points.push({ label: 'Clicked', at: row.clicked_at });
+    if (row.opened_at) points.push({ label: 'Opened', at: row.opened_at });
+    for (const point of points) {
+      const existing = signalByEmail.get(email);
+      if (!existing || point.at > existing.at) signalByEmail.set(email, point);
+    }
+  }
+
   const contacts = personas.map((p) => {
     const readiness = resolveContactReadiness(p);
     const account = accountMap.get(p.account_name);
+    const signal = p.email ? signalByEmail.get(p.email.toLowerCase()) : undefined;
     const canonical = canonicalWorkspace.contactsByPersonaId.get(p.id);
     const canonicalTone: 'success' | 'warning' | 'destructive' = canonical?.status === 'resolved'
       ? 'success'
@@ -109,6 +128,8 @@ export default async function ContactsPage() {
       emailValid: p.email_valid,
       lastEnrichedAt: p.last_enriched_at?.toISOString() ?? null,
       updatedAt: p.updated_at.toISOString(),
+      lastSignalLabel: signal?.label ?? null,
+      lastSignalAt: signal?.at.toISOString() ?? null,
       readinessKey: readiness.key,
       readinessLabel: readiness.label,
       readinessTone: readiness.tone,

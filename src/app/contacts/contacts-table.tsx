@@ -43,6 +43,8 @@ export interface ContactRow {
   emailValid: boolean;
   lastEnrichedAt: string | null;
   updatedAt: string;
+  lastSignalLabel: string | null;
+  lastSignalAt: string | null;
   readinessKey: ContactReadinessKey;
   readinessLabel: string;
   readinessTone: 'success' | 'warning' | 'destructive' | 'secondary';
@@ -241,6 +243,23 @@ export function ContactsTable({ contacts, savedViews }: { contacts: ContactRow[]
           {c.readinessLabel}
         </Badge>
       ),
+    },
+    {
+      key: 'lastSignalAt' as keyof ContactRow,
+      label: 'Intent',
+      sortable: true,
+      className: 'hidden lg:table-cell',
+      render: (c) =>
+        c.lastSignalLabel ? (
+          <Badge
+            variant={c.lastSignalLabel === 'Clicked' ? 'default' : 'secondary'}
+            className="text-[10px]"
+          >
+            {c.lastSignalLabel}
+          </Badge>
+        ) : (
+          <span className="text-xs text-[var(--muted-foreground)]">—</span>
+        ),
     },
     {
       key: 'canonicalStatus' as keyof ContactRow,
