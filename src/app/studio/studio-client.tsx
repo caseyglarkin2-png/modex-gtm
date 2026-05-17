@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -49,6 +50,8 @@ import { COLD_OUTBOUND_PROMPT_POLICY_VERSION, DEFAULT_CTA_MODE } from '@/lib/rev
 
 type Tab = 'assets' | 'sequence' | 'one-pager' | 'history' | 'models' | 'rehearsal' | 'prompts' | 'handoff';
 
+const STUDIO_SUB_TABS: Tab[] = ['assets', 'sequence', 'one-pager', 'history', 'models', 'rehearsal', 'prompts', 'handoff'];
+
 interface Voice {
   voice_id: string;
   name: string;
@@ -92,10 +95,34 @@ function slugifyAccountName(value: string): string {
 }
 
 export function StudioClient({ accounts, personasByAccount, recipientsByAccount }: StudioClientProps) {
-  const [tab, setTab] = useState<Tab>('assets');
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const subParam = searchParams.get('sub');
+
+  const [tab, setTabState] = useState<Tab>(
+    STUDIO_SUB_TABS.includes(subParam as Tab) ? (subParam as Tab) : 'assets',
+  );
   const [selectedAccount, setSelectedAccount] = useState(accounts[0]?.name ?? '');
   const [selectedPersona, setSelectedPersona] = useState('');
   const [latestPack, setLatestPack] = useState<AssetPackResult | null>(null);
+
+  const setTab = useCallback(
+    (next: Tab) => {
+      setTabState(next);
+      const params = new URLSearchParams(searchParams);
+      params.set('sub', next);
+      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    },
+    [pathname, router, searchParams],
+  );
+
+  // Keep the sub-tab in sync with browser back/forward navigation.
+  useEffect(() => {
+    if (subParam && STUDIO_SUB_TABS.includes(subParam as Tab)) {
+      setTabState(subParam as Tab);
+    }
+  }, [subParam]);
 
   const personas = useMemo(() => personasByAccount[selectedAccount] ?? [], [personasByAccount, selectedAccount]);
 
