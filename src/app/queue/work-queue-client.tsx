@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { Button } from '@/components/ui/button';
@@ -51,6 +52,7 @@ function localCaptureToItem(capture: QueuedCapture): WorkQueueItem {
 }
 
 export function WorkQueueClient({ defaultTab, initialItems }: WorkQueueClientProps) {
+  const router = useRouter();
   const [completed, setCompleted] = useState<Set<string>>(new Set());
   const [snoozed, setSnoozed] = useState<Set<string>>(new Set());
   const [localCaptureItems, setLocalCaptureItems] = useState<WorkQueueItem[]>([]);
@@ -174,7 +176,7 @@ export function WorkQueueClient({ defaultTab, initialItems }: WorkQueueClientPro
       const payload = await response.json().catch(() => ({} as { error?: string }));
       if (!response.ok) throw new Error(payload.error ?? 'Learning-review update failed');
       toast.success(`Learning review updated: ${action}`);
-      window.location.reload();
+      router.refresh();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Learning-review update failed');
     }

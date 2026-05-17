@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -85,6 +86,7 @@ function buildTrendPoints(values: number[]): string {
 }
 
 export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedContentGridProps) {
+  const router = useRouter();
   const [selectedByAccount, setSelectedByAccount] = useState<Record<string, number>>(() =>
     Object.fromEntries(cards.map((card) => [card.account_name, card.versions[0]?.id ?? 0])),
   );
@@ -108,7 +110,7 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
       const response = await fetch(`/api/ai/generated-content/${versionId}/publish`, { method: 'PATCH' });
       if (!response.ok) throw new Error('Publish failed');
       toast.success('Published version');
-      window.location.reload();
+      router.refresh();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Publish failed');
     } finally {
@@ -122,7 +124,7 @@ export function GeneratedContentGrid({ cards, recipientsByAccount }: GeneratedCo
       const response = await fetch(`/api/revops/infographic-bundles/${encodeURIComponent(bundleId)}/publish`, { method: 'PATCH' });
       if (!response.ok) throw new Error('Bundle publish failed');
       toast.success('Published infographic bundle');
-      window.location.reload();
+      router.refresh();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Bundle publish failed');
     } finally {

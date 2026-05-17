@@ -256,7 +256,7 @@ export function GeneratedContentWorkspace({ cards, recipientsByAccount }: Genera
       const payload = await response.json().catch(() => ({} as { error?: string }));
       if (!response.ok) throw new Error(payload.error ?? 'Regeneration failed');
       toast.success('Regeneration queued from signal context');
-      window.location.reload();
+      router.refresh();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Regeneration failed');
     } finally {

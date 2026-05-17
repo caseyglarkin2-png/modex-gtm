@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -41,6 +42,7 @@ export function OnePageVersionSelector({
   selectedVersionId,
   onVersionChange,
 }: OnePageVersionSelectorProps) {
+  const router = useRouter();
   const [isPublishing, setIsPublishing] = useState<number | null>(null);
 
   const selectedVersion = versions.find((v) => v.id === selectedVersionId);
@@ -58,8 +60,7 @@ export function OnePageVersionSelector({
       }
 
       toast.success('Version published');
-      // Reload to update UI
-      window.location.reload();
+      router.refresh();
     } catch (err) {
       toast.error(`Publish failed: ${err instanceof Error ? err.message : 'Unknown error'}`);
     } finally {
