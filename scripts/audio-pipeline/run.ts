@@ -15,11 +15,13 @@ import { homedir } from 'node:os';
 import { writeFile, readFile } from 'node:fs/promises';
 import { execSync } from 'node:child_process';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
+import { isAccountHandTuned } from '@/lib/microsites/memo-compat';
 import type { AccountAudioBrief } from '@/lib/microsites/schema';
 import { Checkpoint } from './lib/checkpoint';
 import { collectDossiers } from './lib/dossiers';
 import { openContext, closeContext } from './lib/browser';
 import { composeResearchPrompt } from './stages/compose';
+import { composeFromMemo } from './stages/compose-from-memo';
 import { runGemini } from './stages/gemini';
 import { runNotebookLM } from './stages/notebook-lm';
 import {
@@ -108,26 +110,52 @@ async function main(): Promise<void> {
   const cp = new Checkpoint({ root, account: args.account });
   const repo = process.cwd();
 
-  await cp.appendLog(`run start: account=${args.account} skipTo=${args.skipTo ?? '(none)'}`);
+  const handTuned = isAccountHandTuned(data);
+  await cp.appendLog(
+    `run start: account=${args.account} skipTo=${args.skipTo ?? '(none)'} handTuned=${handTuned}`,
+  );
 
   // 1. Compose
+  //
+  // For hand-tuned accounts (Kraft-Heinz, Dannon, etc.) the memo body on
+  // disk is richer than anything a fresh Gemini pass would produce. Feed
+  // it straight to NotebookLM and skip Gemini entirely. The same memo body
+  // is reused as the chapter-segmentation source.
+  //
+  // For un-tuned accounts, fall through to the original research-prompt
+  // path: dossiers → Gemini deep research → NotebookLM.
   let prompt: string;
+  let memoCustomization: string | undefined;
   if (shouldRun('compose', args.skipTo)) {
-    const { matches, fallback } = await collectDossiers({
-      accountSlug: args.account,
-      dossiersDir: resolve(repo, 'docs/research'),
-    });
-    prompt = composeResearchPrompt({ account: data, dossiers: matches });
-    await cp.write('compose', {
-      prompt,
-      dossierFallback: fallback,
-      dossierFiles: matches.map((m) => m.filename),
-    });
-    await cp.appendLog(`compose: ${matches.length} dossier(s) used, fallback=${fallback}`);
+    if (handTuned) {
+      const { source, customizationPrompt } = composeFromMemo(data);
+      prompt = source;
+      memoCustomization = customizationPrompt;
+      await cp.write('compose', {
+        mode: 'memo',
+        prompt,
+        customizationPrompt,
+      });
+      await cp.appendLog(`compose: memo-body mode (${prompt.length} chars)`);
+    } else {
+      const { matches, fallback } = await collectDossiers({
+        accountSlug: args.account,
+        dossiersDir: resolve(repo, 'docs/research'),
+      });
+      prompt = composeResearchPrompt({ account: data, dossiers: matches });
+      await cp.write('compose', {
+        mode: 'research',
+        prompt,
+        dossierFallback: fallback,
+        dossierFiles: matches.map((m) => m.filename),
+      });
+      await cp.appendLog(`compose: research mode, ${matches.length} dossier(s) used, fallback=${fallback}`);
+    }
   } else {
-    const cached = await cp.read<{ prompt: string }>('compose');
+    const cached = await cp.read<{ prompt: string; customizationPrompt?: string }>('compose');
     if (!cached) throw new Error('--skip-to past compose but no compose checkpoint exists');
     prompt = cached.prompt;
+    memoCustomization = cached.customizationPrompt;
   }
 
   // 2 + 3. Gemini + NotebookLM (browser stages)
@@ -137,7 +165,13 @@ async function main(): Promise<void> {
   let mp3Path: string;
   let durationSeconds: number;
   try {
-    if (shouldRun('gemini', args.skipTo)) {
+    if (handTuned) {
+      // Skip Gemini entirely — NotebookLM ingests the memo body directly.
+      report = prompt;
+      threadUrl = '';
+      await cp.write('gemini', { report, threadUrl, skipped: true });
+      await cp.appendLog('gemini: skipped (hand-tuned account)');
+    } else if (shouldRun('gemini', args.skipTo)) {
       const out = await runGemini({ prompt, ctx });
       report = out.report;
       threadUrl = out.threadUrl;
@@ -157,6 +191,11 @@ async function main(): Promise<void> {
         geminiThreadUrl: threadUrl,
         outputPath,
         fallbackReport: report,
+        // Customization disabled until customize-panel selectors are
+        // verified live. Memo body is the source so the audio still
+        // tracks the document. Re-enable by passing memoCustomization.
+        customizationPrompt: undefined,
+        debugLabel: args.account,
       });
       mp3Path = out.mp3Path;
       durationSeconds = out.durationSeconds;
