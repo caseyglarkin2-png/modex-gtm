@@ -1,13 +1,141 @@
 import Link from 'next/link';
 import { getAccentClasses } from '@/components/microsites/theme';
+import { Badge } from '@/components/ui/badge';
 import type { AccountMicrositeData } from '@/lib/microsites/schema';
 import { getVariantRoutes } from '@/lib/microsites/rules';
+import type { MicrositeAnalyticsSummary } from '@/lib/microsites/analytics';
+import type { MicrositeBatchAccountStatus, MicrositeBatchSummary } from '@/lib/microsites/batch-distribution';
 
 type MicrositesTabProps = {
   accounts: AccountMicrositeData[];
+  analytics?: MicrositeAnalyticsSummary | null;
+  batch?: MicrositeBatchSummary | null;
 };
 
-export function MicrositesTab({ accounts }: MicrositesTabProps) {
+function formatDuration(seconds: number) {
+  if (seconds < 60) return `${seconds}s`;
+  return `${Math.floor(seconds / 60)}m ${seconds % 60}s`;
+}
+
+function daysSince(date: Date) {
+  return Math.max(0, Math.floor((Date.now() - date.getTime()) / 86_400_000));
+}
+
+const BATCH_STATE_BADGE: Record<MicrositeBatchAccountStatus['state'], { variant: 'success' | 'warning' | 'info' | 'outline'; label: string }> = {
+  cta: { variant: 'success', label: 'CTA clicked' },
+  'high-intent': { variant: 'warning', label: 'High intent' },
+  engaged: { variant: 'info', label: 'Viewed' },
+  'no-traffic': { variant: 'outline', label: 'No traffic yet' },
+};
+
+function EngagementPanel({ analytics }: { analytics: MicrositeAnalyticsSummary }) {
+  return (
+    <section className="rounded-lg border border-[var(--border)] bg-[var(--background)] p-4">
+      <h3 className="text-sm font-semibold">Live engagement</h3>
+      <p className="text-xs text-[var(--muted-foreground)]">
+        Human microsite traffic — bot and scanner hits are excluded.
+      </p>
+      <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        {[
+          { label: 'Sessions', value: String(analytics.totalSessions) },
+          { label: 'Unique people', value: String(analytics.uniquePeople) },
+          { label: 'High-intent', value: String(analytics.highIntentSessions) },
+          { label: 'CTA sessions', value: String(analytics.ctaSessions) },
+          { label: 'Avg scroll', value: `${analytics.avgScrollDepthPct}%` },
+        ].map((metric) => (
+          <div key={metric.label} className="rounded-md border border-[var(--border)] p-3">
+            <p className="text-[10px] uppercase tracking-wide text-[var(--muted-foreground)]">{metric.label}</p>
+            <p className="mt-1 text-2xl font-bold">{metric.value}</p>
+          </div>
+        ))}
+      </div>
+
+      {analytics.hotAccounts.length > 0 ? (
+        <div className="mt-4 space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Hot accounts</p>
+          {analytics.hotAccounts.map((account) => (
+            <div
+              key={account.accountSlug}
+              className="flex flex-wrap items-start justify-between gap-3 rounded-md border border-[var(--border)] p-3"
+            >
+              <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                  <Link
+                    href={`/accounts/${account.accountSlug}`}
+                    className="text-sm font-semibold text-[var(--primary)] hover:underline"
+                  >
+                    {account.accountName}
+                  </Link>
+                  <Badge variant={account.engagementScore >= 60 ? 'destructive' : account.engagementScore >= 35 ? 'warning' : 'secondary'}>
+                    Heat {account.engagementScore}
+                  </Badge>
+                </div>
+                <p className="mt-1 text-xs text-[var(--muted-foreground)]">
+                  {account.primarySignal} · {account.sessionCount} session{account.sessionCount !== 1 ? 's' : ''} · avg {formatDuration(account.avgDurationSeconds)}
+                </p>
+                <p className="mt-1 text-xs">{account.recommendedAction}</p>
+              </div>
+              <Link
+                href={`/for/${account.accountSlug}`}
+                className="shrink-0 text-xs font-medium text-[var(--primary)] hover:underline"
+              >
+                View microsite
+              </Link>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p className="mt-4 text-xs text-[var(--muted-foreground)]">No microsite engagement recorded yet.</p>
+      )}
+    </section>
+  );
+}
+
+function BatchPanel({ batch }: { batch: MicrositeBatchSummary }) {
+  const daysOut = daysSince(batch.sendDate);
+
+  return (
+    <section className="rounded-lg border border-[var(--border)] bg-[var(--background)] p-4">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <h3 className="text-sm font-semibold">Batch distribution</h3>
+        <span className="text-xs text-[var(--muted-foreground)]">
+          Sent {batch.sendDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} · {daysOut} day{daysOut !== 1 ? 's' : ''} out
+        </span>
+      </div>
+      <p className="text-xs text-[var(--muted-foreground)]">
+        {batch.engagedAccounts}/{batch.totalAccounts} engaged · {batch.highIntentAccounts} high-intent · {batch.ctaAccounts} CTA
+      </p>
+      <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+        {batch.accounts.map((account) => {
+          const badge = BATCH_STATE_BADGE[account.state];
+          return (
+            <div key={account.slug} className="rounded-md border border-[var(--border)] p-3">
+              <div className="flex items-center justify-between gap-2">
+                <Link
+                  href={`/for/${account.slug}`}
+                  className="truncate text-sm font-medium text-[var(--foreground)] hover:text-[var(--primary)]"
+                >
+                  {account.accountName}
+                </Link>
+                <Badge variant={badge.variant}>{badge.label}</Badge>
+              </div>
+              <p className="mt-1 text-[11px] text-[var(--muted-foreground)]">
+                {account.tier}·{account.band} · {account.poc}
+              </p>
+              <p className="mt-1 text-[11px] text-[var(--muted-foreground)]">
+                {account.sessions > 0
+                  ? `${account.sessions} session${account.sessions !== 1 ? 's' : ''}${account.lastViewedAt ? ` · last ${account.lastViewedAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}` : ''}`
+                  : 'Awaiting first open'}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+export function MicrositesTab({ accounts, analytics, batch }: MicrositesTabProps) {
   const showcaseAccounts = accounts
     .filter((a) => a.showcase)
     .sort((a, b) => (a.showcaseOrder ?? 99) - (b.showcaseOrder ?? 99));
@@ -23,6 +151,9 @@ export function MicrositesTab({ accounts }: MicrositesTabProps) {
           Internal index of public-facing account microsites — {showcaseAccounts.length} showcase, {otherAccounts.length} other.
         </p>
       </div>
+
+      {analytics ? <EngagementPanel analytics={analytics} /> : null}
+      {batch ? <BatchPanel batch={batch} /> : null}
 
       {showcaseAccounts.length > 0 ? (
         <section>

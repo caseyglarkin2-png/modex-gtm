@@ -22,7 +22,14 @@ import {
   slugify,
   type AuditRoute,
 } from '@/lib/data';
-import { dbGetAccounts, dbGetActionableIntel, dbGetMeetings, dbGetPersonas } from '@/lib/db';
+import {
+  dbGetAccounts,
+  dbGetActionableIntel,
+  dbGetMeetings,
+  dbGetMicrositeAnalytics,
+  dbGetMicrositeBatchStatus,
+  dbGetPersonas,
+} from '@/lib/db';
 import { fetchGeneratedContentWorkspaceData } from '@/lib/generated-content/queries';
 import { getAllAccountMicrositeData } from '@/lib/microsites/accounts';
 import { prisma } from '@/lib/prisma';
@@ -149,6 +156,10 @@ export default async function StudioPage({
 
   const generatedContentData = activeTab === 'generated-content'
     ? await fetchGeneratedContentWorkspaceData()
+    : null;
+
+  const micrositeEngagement = activeTab === 'microsites'
+    ? await Promise.all([dbGetMicrositeAnalytics(), dbGetMicrositeBatchStatus()])
     : null;
 
   const rankedPlaybookBlocks = activeTab === 'playbook'
@@ -293,7 +304,11 @@ export default async function StudioPage({
 
         {activeTab === 'microsites' ? (
           <TabsContent value="microsites" className="space-y-4">
-            <MicrositesTab accounts={microsites} />
+            <MicrositesTab
+              accounts={microsites}
+              analytics={micrositeEngagement?.[0] ?? null}
+              batch={micrositeEngagement?.[1] ?? null}
+            />
           </TabsContent>
         ) : null}
 

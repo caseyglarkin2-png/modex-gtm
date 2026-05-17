@@ -4,6 +4,7 @@ import {
   buildMicrositeAnalyticsSummary,
   type MicrositeAccountAnalytics,
 } from './microsites/analytics';
+import { buildMicrositeBatchStatus, MICROSITE_BATCH_DISTRIBUTION } from './microsites/batch-distribution';
 
 // ── Accounts ──────────────────────────────────────────────────────────
 export async function dbGetAccounts() {
@@ -257,6 +258,31 @@ export async function dbGetMicrositeAnalytics() {
   const sessions = await dbGetMicrositeEngagements();
 
   return buildMicrositeAnalyticsSummary(
+    sessions.map((session) => ({
+      account_name: session.account_name,
+      account_slug: session.account_slug,
+      person_name: session.person_name,
+      person_slug: session.person_slug,
+      path: session.path,
+      sections_viewed: session.sections_viewed,
+      cta_ids: session.cta_ids,
+      variant_history: session.variant_history,
+      scroll_depth_pct: session.scroll_depth_pct,
+      duration_seconds: session.duration_seconds,
+      updated_at: session.updated_at,
+      metadata: session.metadata,
+    })),
+  );
+}
+
+export async function dbGetMicrositeBatchStatus() {
+  const slugs = MICROSITE_BATCH_DISTRIBUTION.map((entry) => entry.slug);
+  const sessions = await prisma.micrositeEngagement.findMany({
+    where: { account_slug: { in: slugs } },
+    orderBy: { updated_at: 'desc' },
+  });
+
+  return buildMicrositeBatchStatus(
     sessions.map((session) => ({
       account_name: session.account_name,
       account_slug: session.account_slug,
