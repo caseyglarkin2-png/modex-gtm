@@ -7,6 +7,7 @@ import {
   Mail,
 } from 'lucide-react';
 import { Breadcrumb } from '@/components/breadcrumb';
+import { AutoRefresh } from '@/components/auto-refresh';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -431,7 +432,8 @@ export default async function AnalyticsPage({
             Business performance workspace across campaigns, engagement, pipeline, and quarterly review.
           </p>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          <AutoRefresh intervalMs={60_000} />
           <Link href="/ops?tab=proof-ledger">
             <Button variant="outline" size="sm">Open Ops Proof Ledger</Button>
           </Link>
@@ -443,11 +445,13 @@ export default async function AnalyticsPage({
 
       <Card>
         <CardContent className="p-3">
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2" role="tablist" aria-label="Analytics views">
             {analyticsWorkspaceTabs.map((tab) => (
               <Link
                 key={tab.id}
                 href={tabHref(tab.id)}
+                role="tab"
+                aria-selected={selectedTab === tab.id}
                 className={cn(
                   'inline-flex items-center rounded-md border px-3 py-1.5 text-sm transition-colors',
                   selectedTab === tab.id

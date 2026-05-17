@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Activity, BarChart3, ExternalLink, ShieldCheck, TriangleAlert } from 'lucide-react';
 import { Breadcrumb } from '@/components/breadcrumb';
+import { AutoRefresh } from '@/components/auto-refresh';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -315,15 +316,18 @@ export default async function OpsPage({
             System reliability, evidence, provider operations, and admin-control workspace.
           </p>
         </div>
+        <AutoRefresh intervalMs={60_000} />
       </div>
 
       <Card>
         <CardContent className="p-3">
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2" role="tablist" aria-label="Ops views">
             {opsWorkspaceTabs.map((tab) => (
               <Link
                 key={tab.id}
                 href={tabHref(tab.id)}
+                role="tab"
+                aria-selected={selectedTab === tab.id}
                 className={cn(
                   'inline-flex items-center rounded-md border px-3 py-1.5 text-sm transition-colors',
                   selectedTab === tab.id
