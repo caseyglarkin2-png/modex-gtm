@@ -3014,6 +3014,264 @@
         "coordinates": [
           [
             [
+              -86.858,
+              34.6488
+            ],
+            [
+              -86.848,
+              34.6488
+            ],
+            [
+              -86.848,
+              34.6565
+            ],
+            [
+              -86.858,
+              34.6565
+            ],
+            [
+              -86.858,
+              34.6488
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
+        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 400,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 194,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8532,
+              34.654
+            ],
+            [
+              -86.8524,
+              34.654
+            ],
+            [
+              -86.8524,
+              34.6546
+            ],
+            [
+              -86.8532,
+              34.6546
+            ],
+            [
+              -86.8532,
+              34.654
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
+        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.857,
+              34.6495
+            ],
+            [
+              -86.855,
+              34.6495
+            ],
+            [
+              -86.855,
+              34.6542
+            ],
+            [
+              -86.857,
+              34.6542
+            ],
+            [
+              -86.857,
+              34.6495
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
+        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8535,
+              34.6545
+            ],
+            [
+              -86.851,
+              34.6545
+            ],
+            [
+              -86.851,
+              34.6562
+            ],
+            [
+              -86.8535,
+              34.6562
+            ],
+            [
+              -86.8535,
+              34.6545
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
+        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8545,
+              34.6498
+            ],
+            [
+              -86.8536,
+              34.6498
+            ],
+            [
+              -86.8536,
+              34.653
+            ],
+            [
+              -86.8545,
+              34.653
+            ],
+            [
+              -86.8545,
+              34.6498
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
+        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8545,
+              34.6538
+            ],
+            [
+              -86.852,
+              34.6538
+            ],
+            [
+              -86.852,
+              34.6547
+            ],
+            [
+              -86.8545,
+              34.6547
+            ],
+            [
+              -86.8545,
+              34.6538
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
+        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               -89.557,
               40.8462
             ],
@@ -3473,57 +3731,215 @@
         "coordinates": [
           [
             [
-              -87.6413,
-              41.5852
+              -87.6455,
+              41.5862
             ],
             [
-              -87.6392,
-              41.5852
+              -87.642,
+              41.5862
             ],
             [
-              -87.6392,
-              41.5864
+              -87.642,
+              41.5888
             ],
             [
-              -87.6413,
-              41.5864
+              -87.6455,
+              41.5888
             ],
             [
-              -87.6413,
-              41.5852
+              -87.6455,
+              41.5862
             ]
           ]
         ]
       },
       "properties": {
         "account": "universal-logistics",
-        "name": "Universal Intermodal Services - Harvey Terminal - Harvey IL",
-        "type": "Intermodal / Drayage Terminal / Rail Yard (owned)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "low",
+        "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
+        "type": "Intermodal / Drayage container & chassis yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
         "zone": "perimeter",
-        "truckGate": false,
+        "truckGate": true,
         "guardShack": false,
-        "remoteGs": false,
-        "fastLaneOpportunity": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
         "backupSensitive": false,
-        "dropYard": false,
+        "dropYard": true,
         "multipleFacilities": false,
         "scale": false,
         "shipRcvSeparate": false,
         "urbanRural": "Urban",
         "dockDoors": "0-10",
-        "dropArea": "0-10",
+        "dropArea": "50+",
         "yardMetrics": {
-          "dockDoorCount": 2,
-          "trailersVisible": 5,
-          "trailerParkingCapacity": 30,
+          "dockDoorCount": 4,
+          "trailersVisible": 250,
+          "trailerParkingCapacity": 600,
           "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 4,
+          "buildingCount": 3,
+          "siteAreaAcres": 20.9,
           "railServed": false
         }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.644,
+              41.58625
+            ],
+            [
+              -87.6434,
+              41.58625
+            ],
+            [
+              -87.6434,
+              41.5866
+            ],
+            [
+              -87.644,
+              41.5866
+            ],
+            [
+              -87.644,
+              41.58625
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
+        "type": "Intermodal / Drayage container & chassis yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.6455,
+              41.5866
+            ],
+            [
+              -87.6436,
+              41.5866
+            ],
+            [
+              -87.6436,
+              41.5887
+            ],
+            [
+              -87.6455,
+              41.5887
+            ],
+            [
+              -87.6455,
+              41.5866
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
+        "type": "Intermodal / Drayage container & chassis yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.643,
+              41.5868
+            ],
+            [
+              -87.6421,
+              41.5868
+            ],
+            [
+              -87.6421,
+              41.5886
+            ],
+            [
+              -87.643,
+              41.5886
+            ],
+            [
+              -87.643,
+              41.5868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
+        "type": "Intermodal / Drayage container & chassis yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.6436,
+              41.5868
+            ],
+            [
+              -87.6426,
+              41.5868
+            ],
+            [
+              -87.6426,
+              41.5878
+            ],
+            [
+              -87.6436,
+              41.5878
+            ],
+            [
+              -87.6436,
+              41.5868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
+        "type": "Intermodal / Drayage container & chassis yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
       }
     },
     {

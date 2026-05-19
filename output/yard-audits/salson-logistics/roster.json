@@ -1,7 +1,7 @@
 {
   "account": "SalSon Logistics",
   "generatedAt": "2026-05-18",
-  "facilityCount": 15,
+  "facilityCount": 14,
   "facilities": [
     {
       "idx": 1,
@@ -218,21 +218,6 @@
       "lat": null,
       "lng": null,
       "source": "Dossier and Transport Topics merger coverage name Bakersfield as a SalSon intermodal/fleet market; specific street address not surfaced in public sources",
-      "geocode": {
-        "source": "none",
-        "precision": "no-address"
-      }
-    },
-    {
-      "idx": 15,
-      "name": "SalSon Logistics - Inland Empire CA",
-      "city": "Inland Empire (Riverside/San Bernardino area)",
-      "state": "CA",
-      "type": "Intermodal / Warehouse Market",
-      "address": null,
-      "lat": null,
-      "lng": null,
-      "source": "Dossier and Transport Topics merger coverage name the Inland Empire as a SalSon intermodal/warehouse market; no specific city or street address surfaced in public sources",
       "geocode": {
         "source": "none",
         "precision": "no-address"

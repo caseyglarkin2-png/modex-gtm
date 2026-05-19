@@ -18,38 +18,36 @@ Mondelez Aurora Distribution Center (DHL/Exel-operated) - Aurora IL,"Distributio
 Mondelez North America Headquarters / East Hanover Bakery Campus - East Hanover NJ,Corporate HQ + active manufacturing/distribution campus (Nabisco bakery),#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@40.812,-74.3738,400m/data=!3m1!1e3"
 Mondelez Global R&D Innovation Center - Whippany NJ,"R&D / global innovation center (office + lab, pilot & scale-up lines)",#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@40.82,-74.4097,400m/data=!3m1!1e3"
 Mondelez Global Headquarters - Chicago IL,Corporate HQ (global) - downtown office building,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,YES,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@41.8866,-87.6513,400m/data=!3m1!1e3"
-Nabisco Allentown Sales Distribution Center - Allentown PA,Distribution center / sales warehouse (unresolved - possibly a sales territory designation),#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@40.6084,-75.4902,400m/data=!3m1!1e3"
 Nabisco Memphis Sales Distribution Center - Memphis TN,Distribution center / sales warehouse,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,,YES,,1,1,,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@35.0184,-89.8695,400m/data=!3m1!1e3"
-Nabisco Dallas/Garland Sales Distribution Center - Garland TX,Distribution center / sales warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@32.9126,-96.6389,400m/data=!3m1!1e3"
-Nabisco Houston Sales Distribution Center - Houston TX,Distribution center / sales warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@29.7604,-95.3698,400m/data=!3m1!1e3"
-Nabisco Atlanta Sales Distribution Center - Atlanta GA,Distribution center / sales warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@33.7490,-84.3880,400m/data=!3m1!1e3"
-Nabisco Los Angeles Sales Distribution Center - Los Angeles CA,Distribution center / sales warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@34.0522,-118.2437,400m/data=!3m1!1e3"
+Mondelez Fort Worth Distribution Center - Fort Worth TX,Distribution center / cross-dock warehouse,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@33.03158,-97.30073,400m/data=!3m1!1e3"
+Mondelez Houston Distribution Center - Houston TX,Distribution center / multi-tenant warehouse (tenant),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,YES,,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@29.87074,-95.56503,400m/data=!3m1!1e3"
+Mondelez Ontario Distribution Center - Ontario CA,Distribution center / sales warehouse,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,YES,Urban,,,,,"https://www.google.com/maps/@34.04500,-117.52555,400m/data=!3m1!1e3"
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,#3,16,67%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,#4,1,4%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,11,50%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,1,5%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,#6,3,13%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,3,14%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,#9,4,17%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,7,32%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Total,24,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,22,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Fast Lane Opportunity,9,38%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,10,45%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Rural / connectivity,7,29%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,8,36%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Guarded,4,17%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Not-Guarded,20,83%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,4,18%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,18,82%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,NA,24,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Total,24,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,22,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,22,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

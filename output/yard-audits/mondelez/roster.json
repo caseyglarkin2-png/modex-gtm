@@ -1,7 +1,7 @@
 {
   "account": "Mondelez",
   "generatedAt": "2026-05-18",
-  "facilityCount": 24,
+  "facilityCount": 22,
   "facilities": [
     {
       "idx": 1,
@@ -292,22 +292,6 @@
       }
     },
     {
-      "idx": 19,
-      "name": "Nabisco Allentown Sales Distribution Center - Allentown PA",
-      "city": "Allentown",
-      "state": "PA",
-      "type": "Distribution center / sales warehouse",
-      "address": "Allentown, PA (Lehigh Valley) - exact street address not published",
-      "lat": 40.6084,
-      "lng": -75.4902,
-      "source": "Indeed/Mondelez office-location directory - Mondelez/Nabisco sales-distribution presence in the Allentown area of the Lehigh Valley logistics corridor. City-level only; exact street address not pinned down.",
-      "geocode": {
-        "source": "research",
-        "precision": "APPROXIMATE",
-        "movedMeters": 0
-      }
-    },
-    {
       "idx": 20,
       "name": "Nabisco Memphis Sales Distribution Center - Memphis TN",
       "city": "Memphis",
@@ -349,22 +333,6 @@
       "lat": 29.7604,
       "lng": -95.3698,
       "source": "Indeed/Mondelez office-location directory - Mondelez/Nabisco sales-distribution presence in Houston serving the Gulf Coast. City-level only; exact street address not pinned down.",
-      "geocode": {
-        "source": "research",
-        "precision": "APPROXIMATE",
-        "movedMeters": 0
-      }
-    },
-    {
-      "idx": 23,
-      "name": "Nabisco Atlanta Sales Distribution Center - Atlanta GA",
-      "city": "Atlanta",
-      "state": "GA",
-      "type": "Distribution center / sales warehouse",
-      "address": "Atlanta, GA - exact street address not published",
-      "lat": 33.749,
-      "lng": -84.388,
-      "source": "Indeed/Mondelez office-location directory - Mondelez/Nabisco sales-distribution and merchandising presence in metro Atlanta (distinct from the closed 1400 Murphy Ave bakery and the Norcross DC at idx 9). City-level only; exact street address not pinned down.",
       "geocode": {
         "source": "research",
         "precision": "APPROXIMATE",

@@ -1,52 +1,52 @@
 # Yard-Audit Run — Status & Resume Point
 
-**Updated:** 2026-05-18 (evening) — **run COMPLETE.**
+**Updated:** 2026-05-19 — **run COMPLETE.**
 Project = top-prospect truck-yard audits for YardFlow by FreightRoll.
 
 ## Snapshot — COMPLETE
-- **43 account folders · 870 facilities** — every account has `sites/`,
+- **43 account folders · 867 facilities** — every account has `sites/`,
   `dossiers/`, and a per-account `*-location-breakdown.csv`.
-- Mondelez expanded 10 → **24 sites** (full U.S. footprint across all brands —
-  Nabisco bakeries, Clif Bar, Tate's, flour mill, DCs, HQ/R&D).
+- Mondelez expanded 10 → 24, then 2 confirmed duplicates dropped → **22 sites**.
 - Phase 4 packaging done (see below).
 
 ## Phase 4 outputs (`output/yard-audits/`)
-- `YardFlow-Master-Audit.xlsx` — 43 account tabs + Index; 870 facilities,
-  43,149 dock doors, 119,350 trailer-parking capacity, 214 rail-served.
+- `YardFlow-Master-Audit.xlsx` — 43 account tabs + Index; 867 facilities,
+  43,516 dock doors, 121,280 trailer-parking capacity, 214 rail-served.
 - `YardFlow-Master-Index.csv` — per-account rollup.
 - `INDEX.md` — master index of all 43 accounts.
-- Per account: `<slug>.geojson`, `<slug>-geofence-links.md`,
-  `<slug>-sales-summary.md`.
-- `YardFlow-All-Geofences.geojson` — combined, 3,890 geofence features.
+- Per account: `<slug>.geojson`, `<slug>-geofence-links.md`, `<slug>-sales-summary.md`.
+- `YardFlow-All-Geofences.geojson` — combined, 3,918 geofence features.
 
 ## Google Drive (root `1arpvfAFP2Gyj1PmVtPvPgrw7Z_XZ115P`)
 - Master Index sheet: https://docs.google.com/spreadsheets/d/133MUua2PCnsAZk03tKyCOPwr3461rJsuCb0K4U1O-FE/edit
-- Mondelez per-account sheet (24 sites) — uploaded to the project folder.
-- The 43-tab `YardFlow-Master-Audit.xlsx` is local (317 KB binary, too large to
-  stream through the Drive tool reliably) — drop it into Drive to open natively
-  in Google Sheets, or upload per-account sheets on request.
+- Mondelez per-account sheet — refreshed to the 22-site version.
+- Full 43-tab `YardFlow-Master-Audit.xlsx` is local — drop into Drive to open natively in Sheets.
 
-## Pipeline scripts (`scripts/yard-audit/`)
-`probe.ts` (fixed — resolves `.env.local` from repo root), `generate-csv.ts`,
-`build-master-workbook.ts`, `build-master-index.ts`, `build-geojson.ts`,
-`build-geofence-links.ts`, `build-sales-summary.ts`, `deep-audit-prompt.md`,
-`classify-prompt.md`.
+## Round 2 — address re-research + roster cleanup (2026-05-19)
 
-## Data-quality flags — sites needing a human address / review
+**Dropped — confirmed not separate facilities (idx gaps left intentionally for traceability; not renumbered):**
+- mondelez idx 19 Allentown — duplicate of idx 14 (Tatamy DC).
+- mondelez idx 23 Atlanta — duplicate of idx 9 (Norcross DC).
+- salson-logistics idx 15 "Inland Empire" — a market-area label, no physical site.
 
-**Unresolved (low confidence, no public address — re-audit when an address is supplied):**
-- unfi idx 23 Lebec CA, idx 24 Twin Falls ID.
+**Re-audited from newly-found addresses (stub → full audit, high confidence):**
+- mondelez idx 21 → Fort Worth TX, 16200 Three Wide Dr (roster said "Garland").
+- mondelez idx 22 → Houston TX, 6903 W Sam Houston Pkwy N.
+- mondelez idx 24 → Ontario CA, 5815 Clark St (roster said "Los Angeles").
+- universal-logistics idx 17 → Madison AL, 7049 Greenbrier Pkwy NW (Polaris plant).
+- universal-logistics idx 21 → Harvey IL, 250 E 167th St (prior audit geocoded the wrong building).
+- salson-logistics idx 11 → Conklin NY, 1314 Conklin Rd (roster said "Fishkill").
+
+## Data-quality flags
+
+**Genuinely unresolved — no public address/coordinates; need internal records:**
+- unfi idx 23 Lebec CA; idx 24 Twin Falls ID (may not be a UNFI DC at all).
 - universal-logistics idx 13 Vance AL, 15 Spring Hill TN, 16 San Antonio TX
-  (Universal value-added ops embedded inside customer/OEM plants — no
-  independent street identity), 21 Harvey IL, 22 Gary IN.
-- salson-logistics idx 11 Fishkill NY, 13 Oakland CA, 15 Inland Empire CA.
-- mondelez idx 19 Allentown PA, 21 Garland TX, 22 Houston TX, 23 Atlanta GA,
-  24 Los Angeles CA (Nabisco merchandiser sales depots — not publicly addressed).
+  (Universal value-added ops run inside the customer/OEM plants — no separate
+  building), 22 Gary IN.
+- salson-logistics idx 13 Oakland CA (only a Stockton back-office found).
 
 **Possible duplicates — reconcile:**
-- mondelez idx 19 (Allentown) likely == idx 14 (Tatamy DC).
-- mondelez idx 23 (Atlanta) may overlap idx 9 (Norcross DC).
-- salson-logistics idx 15 (Inland Empire) may == idx 4 (Compton).
 - cj-logistics-america idx 21 (Carlisle PA) ≈ idx 3 (Newville).
 - crowley idx 1/3/4 — three roster addresses for one Talleyrand terminal.
 
@@ -70,7 +70,6 @@ Project = top-prospect truck-yard audits for YardFlow by FreightRoll.
 ## Related — Mondelez microsite reframe
 The `mondelez-international` ABM microsite + assets were reframed from the
 (unverified) "Master Plan 2030" to Mondelez's real **Vision 2030** growth
-strategy: `src/lib/microsites/accounts/mondelez-international.ts`, the
-coverage-map SVG, the Parrotta dossier, and the batch-distribution plan doc.
-**Deploy pending review.** The audio `.m4a` and follow-up `.mp4` still narrate
-the old term — they need a re-render.
+strategy and **deployed to production** (live at yardflow.ai/for/mondelez-international;
+reframe commit on `main`). The audio `.m4a` and follow-up `.mp4` still narrate
+the old term — they need a re-render (owner: Casey).

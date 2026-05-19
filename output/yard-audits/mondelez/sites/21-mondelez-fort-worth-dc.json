@@ -1,0 +1,66 @@
+{
+  "name": "Mondelez Fort Worth Distribution Center - Fort Worth TX",
+  "type": "Distribution center / cross-dock warehouse",
+  "coords": { "lat": 33.03158, "lng": -97.30073 },
+  "geofences": {
+    "perimeter": { "south": 33.03010, "west": -97.30380, "north": 33.03340, "east": -97.29750 },
+    "truckGate": { "south": 33.03060, "west": -97.29590, "north": 33.03110, "east": -97.29510 },
+    "dropYards": [
+      { "south": 33.03230, "west": -97.30340, "north": 33.03330, "east": -97.29760 }
+    ],
+    "dockAprons": [
+      { "south": 33.03190, "west": -97.30340, "north": 33.03250, "east": -97.29760 },
+      { "south": 33.03070, "west": -97.30340, "north": 33.03110, "east": -97.29780 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 115,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 53.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.03158,-97.30073,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "guardShack"],
+  "fieldNotes": {
+    "locate": "Resolved to 16200 Three Wide Dr, Fort Worth TX 76177 (IDI/Speedway Distribution Center Building C), in the AllianceTexas industrial corridor near Texas Motor Speedway. Google geocode returned a ROOFTOP hit at 33.0315793,-97.3007312 (returned with the 76247 Northlake ZIP, but the building is the one a confirmed-address probe pinned). Satellite confirms a large completed Class-A cross-dock distribution building consistent with the listed 316,128 SF Building C. The old stub mislabeled this site 'Garland TX' — corrected to Fort Worth.",
+    "shipRcvSeparate": "Cross-dock building: dock banks on BOTH the north and the south building faces. The north face carries the bulk of the trailer activity plus the drop yard; the south face has a second dock bank fronting the office/car-parking side. Counted as separate ship/receive clusters.",
+    "truckGate": "The truck court is fully enclosed by chain-link fencing. Street View (Dec 2024) at the SE truck-court entrance shows a sliding chain-link gate across the truck driveway where it enters the fenced truck court between Building C and the adjacent building. truckGate = true.",
+    "guardShack": "No staffed guard booth observed beside the truck-court gate in Street View — a sliding chain-link gate only. remoteGs (kiosk / app / call-box check-in) inferred. Flagged uncertain: a small booth could be obscured by trailers in the available panos.",
+    "fastLaneOpportunity": "The truck court and gate apron are very wide with substantial unused paved width and deep stacking depth — physical room to add an express/bypass lane.",
+    "dockDoorCount": "Estimated ~115 doors total across the long north dock bank and the south dock bank of this ~316k SF cross-dock building. Honest overhead estimate — flagged uncertain.",
+    "drop": "Large drop yard along the north side with rows of parked trailers (no tractors); dropArea 50+.",
+    "urbanRural": "AllianceTexas is an edge-of-metro master-planned logistics park surrounded by open land, the speedway, and FM-156 — graded Rural per the rubric tie-breaker (large speculative-industrial park, not dense metro fabric).",
+    "geofences": "Perimeter captures the building plus the north truck/drop yard and south car-parking apron: ~367 m N-S x ~588 m E-W = ~53 acres. truckGate box is the SE fenced-court entrance.",
+    "railServed": false
+  },
+  "method": "deep-audit"
+}

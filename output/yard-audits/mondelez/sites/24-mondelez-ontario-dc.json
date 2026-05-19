@@ -1,0 +1,64 @@
+{
+  "name": "Mondelez Ontario Distribution Center - Ontario CA",
+  "type": "Distribution center / sales warehouse",
+  "coords": { "lat": 34.04500, "lng": -117.52555 },
+  "geofences": {
+    "perimeter": { "south": 34.04420, "west": -117.52685, "north": 34.04575, "east": -117.52450 },
+    "truckGate": { "south": 34.04425, "west": -117.52640, "north": 34.04455, "east": -117.52595 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 34.04440, "west": -117.52670, "north": 34.04480, "east": -117.52545 },
+      { "south": 34.04475, "west": -117.52680, "north": 34.04545, "east": -117.52645 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 38,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 9.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.04500,-117.52555,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "guardShack"],
+  "fieldNotes": {
+    "locate": "Resolved to 5815 Clark St, Ontario CA 91761 — a single-tenant distribution warehouse in the dense Inland Empire industrial fabric of Ontario, San Bernardino County. Google geocode returned a ROOFTOP hit at 34.0451114,-117.524735. The old stub mislabeled this site 'Los Angeles CA' — corrected to Ontario, CA (Inland Empire).",
+    "truckGate": "The truck court is screened by a tilt-up concrete screen wall along the public street. Street View (Jan 2025) at the truck-court driveway shows a wheeled SLIDING CHAIN-LINK GATE across the entrance, set between the screen-wall sections. truckGate = true.",
+    "guardShack": "No staffed guard booth observed at the truck-court gate — a sliding chain-link gate with what appears to be a small kiosk/call-box and signage post beside it; no standalone guard building. remoteGs (kiosk/call-box/app) inferred. Flagged uncertain.",
+    "shipRcvSeparate": "The building has dock banks on TWO faces — a dock bank along the south face (in the screened truck court) and a second dock bank along the building's west-facing court. Two distinct dock clusters — shipRcvSeparate = true.",
+    "dockDoorCount": "Estimated ~38 doors total across the south and west dock banks. Overhead estimate — flagged uncertain.",
+    "drop": "Trailers backed into docks and a modest band of parked trailers within the truck court — drop area in the 10-25 band. No separate dedicated trailer-storage lot, so dropYard = false.",
+    "rail": "A rail line runs E-W along the building's NORTH property line, but it serves the building to the north and does NOT spur into the 5815 Clark St property — railServed = false.",
+    "urbanRural": "Ontario / Inland Empire is one of the densest warehouse-industrial submarkets in the US — clearly Urban.",
+    "geofences": "Perimeter captures the building plus the screened south truck court and the west dock court: ~173 m N-S x ~217 m E-W ≈ 9.3 acres. truckGate box is the south-side screened-court entrance off the public street.",
+    "railServed": false
+  },
+  "method": "deep-audit"
+}
