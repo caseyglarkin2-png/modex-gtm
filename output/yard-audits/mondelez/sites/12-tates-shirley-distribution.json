@@ -1,0 +1,49 @@
+{
+  "name": "Tate's Bake Shop Production & Distribution Facility - Shirley NY",
+  "type": "Manufacturing / warehouse - cookie bakery + distribution",
+  "coords": { "lat": 40.84720, "lng": -72.87170 },
+  "geofences": {
+    "perimeter": { "south": 40.84610, "west": -72.87290, "north": 40.84850, "east": -72.87020 },
+    "truckGate": { "south": 40.84810, "west": -72.87200, "north": 40.84860, "east": -72.87120 },
+    "dropYards": [
+      { "south": 40.84680, "west": -72.87110, "north": 40.84830, "east": -72.87040 }
+    ],
+    "dockAprons": [
+      { "south": 40.84660, "west": -72.87130, "north": 40.84840, "east": -72.87060 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 28, "trailersVisible": 12, "trailerParkingCapacity": 35,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 14.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.84720,-72.87170,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "truckGate"],
+  "fieldNotes": {
+    "location": "Positively resolved to 111 Precision Drive, Shirley NY 11967 — a monument sign at the entrance reads 'TATE'S — PICK UP AND DELIVERIES — 111 Precision Drive — ENTRANCE' (Street View, Jun 2024). This is a building in the Precision Innovation Park, a Class-A logistics development directly off the Long Island Expressway delivered 2023; Mondelez moved Tate's into this newly-built warehouse/distribution facility in December 2023. Roster city-centroid coords (40.8015,-72.8743) were ~5km south; corrected — note the roster longitude already matched Precision Drive.",
+    "truckGate": "The truck court runs the full east face of the warehouse and connects to the Precision Innovation Park internal loop road at the NE corner. No barrier arm, sliding gate or checkpoint pinch-point is visible at the truck-court entry or at the 111 Precision Drive driveway. Classified false.",
+    "guardShack": "No staffed booth structure visible at the entrance, the truck court, or beside the building. False.",
+    "remoteGs": "False — no gate present.",
+    "dockDoors": "Dock doors line the full east face; ~25-30 doors estimated with ~12 trailers backed in / parked. Banded 25-50.",
+    "dropArea": "Trailers parked in the east truck court drop lanes outside the active dock positions; ~10-25.",
+    "shipRcvSeparate": "All dock doors are on a single (east) building face — shipping and receiving are not on physically separate banks.",
+    "fastLaneOpportunity": "Generous truck-court width and unused paved apron — room to add a bypass lane.",
+    "urbanRural": "Edge-of-town logistics park off the LIE, bordered by woods with single-family residential beyond; judged Rural per the small-town-industrial tie-break rule.",
+    "drivewayLong": "Loop road plus deep truck court can hold a 3+ truck queue.",
+    "buildingCount": "One large warehouse on this parcel; the cleared land to the NE is the (un-built) second building of the Precision Innovation Park master plan, not part of the Tate's parcel."
+  },
+  "method": "deep-audit"
+}

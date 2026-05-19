@@ -1,0 +1,44 @@
+{
+  "name": "Danone - Chatsworth CA",
+  "type": "Plant-based products plant",
+  "coords": { "lat": 34.23785, "lng": -118.60255 },
+  "geofences": {
+    "perimeter": { "south": 34.23700, "west": -118.60310, "north": 34.23865, "east": -118.60215 },
+    "truckGate": { "south": 34.23730, "west": -118.60250, "north": 34.23748, "east": -118.60230 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 34.23735, "west": -118.60250, "north": 34.23800, "east": -118.60225 }
+    ],
+    "staging": { "south": 34.23735, "west": -118.60248, "north": 34.23780, "east": -118.60228 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 6, "trailersVisible": 2, "trailerParkingCapacity": 4,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 4.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.23785,-118.60255,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Sliding/swing metal gate across the truck driveway through a tall wrought-iron perimeter fence on the Owensmouth Ave (east) frontage, seen in Jan-2026 Street View at ~34.2373,-118.6024.",
+    "guardShack": "No staffed booth structure beside the gate - the entrance is just a gate in the fence line.",
+    "remoteGs": "Gate present with a small call-box/intercom post beside it and no guard shack - remote/kiosk-style check-in.",
+    "dockDoors": "Recessed dock doors face the fenced east yard inside the perimeter; ~6 estimated, partly obscured by roof overhang and trees - low confidence.",
+    "dropArea": "No dedicated drop lot; a couple of box trucks/trailers seen in the alley and yard - small capacity.",
+    "postGateStaging": "The fenced east yard inside the gate functions as a small paved holding/dock-approach area before the doors.",
+    "urbanRural": "Dense San Fernando Valley industrial park, Chatsworth - clearly Urban.",
+    "siteAreaAcres": "Estimated from perimeter box - constrained urban legacy parcel, ~4-5 acres including building footprint and surface parking."
+  },
+  "method": "deep-audit"
+}

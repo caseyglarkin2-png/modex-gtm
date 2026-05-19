@@ -1,0 +1,48 @@
+{
+  "name": "Frito-Lay - Arlington TX",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 32.7370, "lng": -97.0915 },
+  "geofences": {
+    "perimeter": null,
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 0,
+    "buildingCount": 0,
+    "siteAreaAcres": 0.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.7370,-97.0915,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "location": "COULD NOT POSITIVELY CONFIRM the building. Roster address '5500 Watson Rd, Arlington TX 76018' is incorrect: it geocoded (RANGE_INTERPOLATED) into a residential subdivision near a highway, not an industrial site. Web research consistently identifies the real Frito-Lay Arlington plant as '948 Avenue H E, Arlington TX 76011' — listed as 'Frito-Lay Inc - Dip Plant', production began 1971, ~80 employees (Yelp, Cylex, PotatoPro, D&B).",
+    "search": "Surveyed the Arlington avenue/industrial corridor along the Union Pacific rail NE of downtown (the district where the lettered avenues run) at z16-z17 satellite and multiple Street View headings. The corridor contains many small/medium industrial buildings; no single building presents an unmistakable Frito-Lay manufacturing signature (rooftop process equipment, large dock bank, trailer drop yard). The plant is small and old, consistent with a dip/salsa facility rather than a large potato-chip plant, which makes it hard to distinguish from neighboring industrial tenants from overhead imagery.",
+    "coords": "Placeholder coords (32.7370, -97.0915) point to the general Avenue H E industrial corridor and should NOT be treated as the plant center.",
+    "recommendation": "Needs human review: obtain a verified street address / parcel for the Frito-Lay Arlington (Avenue H E) plant before auditing. Note this is a small legacy facility (~80 employees) and may have limited yard infrastructure."
+  },
+  "method": "deep-audit"
+}

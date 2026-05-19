@@ -1,0 +1,46 @@
+{
+  "name": "Performance Foodservice - Florence SC (legacy DC)",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 34.26505, "lng": -79.69285 },
+  "geofences": {
+    "perimeter": { "south": 34.26210, "west": -79.69730, "north": 34.26720, "east": -79.69045 },
+    "truckGate": { "south": 34.26370, "west": -79.69540, "north": 34.26430, "east": -79.69460 },
+    "dropYards": [
+      { "south": 34.26340, "west": -79.69510, "north": 34.26460, "east": -79.69100 }
+    ],
+    "dockAprons": [
+      { "south": 34.26420, "west": -79.69540, "north": 34.26480, "east": -79.69090 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60, "trailersVisible": 38, "trailerParkingCapacity": 70,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 33.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.26505,-79.69285,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster coord (34.275934,-79.688271, GEOMETRIC_CENTER, moved 13.1km flag) was imprecise. Resolved the legacy Performance Foodservice DC to ~34.26505,-79.69285 in the Florence industrial park off Alex Lee Blvd — a single long white rectangular DC, ~620m x ~110m, with a continuous dock bank along its south face. Distinct from idx 1 (Cheney Brothers new cold DC, ~34.271,-79.6947, still a graded pad/under construction immediately NE).",
+    "truckGate": "No barrier arm or sliding gate observed across the truck lane in available imagery; the dock yard sits behind only a low wood-rail fence along the perimeter loop road. Marked true at medium confidence because the property is fenced and the truck approach pinches at a single SW driveway off the loop road — but the control structure is not visually confirmed.",
+    "guardShack": "No guard booth visible at the entrance in satellite or Street View.",
+    "remoteGs": "Inferred — gate present, no guard shack, so any access control would be kiosk/call-box. Low confidence.",
+    "dockDoors": "Long single dock bank on the south face; ~50-65 doors estimated from the regular bay rhythm and backed-in trailers.",
+    "dropArea": "Trailer drop stalls along the south dock apron and a secondary lot; ~25-50 trailers parked without tractors.",
+    "fastLaneOpportunity": "Wide unused paved apron along the dock yard and loop road provides room to add lanes.",
+    "urbanRural": "Edge-of-town industrial park surrounded by woodland and retention ponds outside Florence SC; classified Rural per rubric tie-break."
+  },
+  "method": "deep-audit"
+}

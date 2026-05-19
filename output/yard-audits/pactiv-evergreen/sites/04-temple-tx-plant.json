@@ -1,0 +1,59 @@
+{
+  "name": "Pactiv Evergreen - Temple TX Plant",
+  "type": "Manufacturing Plant (Foodservice)",
+  "coords": { "lat": 31.131000, "lng": -97.339000 },
+  "geofences": {
+    "perimeter": { "south": 31.12620, "west": -97.34320, "north": 31.13420, "east": -97.33650 },
+    "truckGate": { "south": 31.12640, "west": -97.34110, "north": 31.12720, "east": -97.34010 },
+    "dropYards": [
+      { "south": 31.13050, "west": -97.33850, "north": 31.13380, "east": -97.33680 }
+    ],
+    "dockAprons": [
+      { "south": 31.13050, "west": -97.33870, "north": 31.13380, "east": -97.33730 },
+      { "south": 31.12950, "west": -97.34180, "north": 31.13250, "east": -97.34060 }
+    ],
+    "staging": { "south": 31.12720, "west": -97.34120, "north": 31.12950, "east": -97.33950 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 95.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@31.131,-97.339,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "truckGateCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "The plant is fully ringed by chain-link perimeter fencing (some with green privacy slats), confirmed in Street View (2026-04) on multiple road frontages. The SW-corner driveway off Pegasus Drive is a wide controlled access point: a fenced pinch-point with on-post signage where the property driveway meets the public road. Marked true on the fenced controlled-entry evidence; the exact barrier-arm hardware is screened by mature trees and not fully verifiable — flagged uncertain.",
+    "guardShack": "No staffed guard booth could be positively confirmed from Street View. A small blue-roof structure sits near the SW entrance in z20 satellite that may be a gatehouse, but it could not be confirmed as a staffed multi-window booth — marked false, flagged uncertain.",
+    "remoteGs": "Set true on the basis that there is a controlled fenced gate but no confirmed staffed booth (implying kiosk / call-box / app check-in). Flagged uncertain alongside guardShack.",
+    "postGateStaging": "Broad internal paved aprons and access roads inside the fence line give ample queue room before the dock banks.",
+    "drivewayLong": "Long internal approach from the SW entrance to the dock banks — well over 3 trucks of stacking room.",
+    "fastLaneOpportunity": "Wide gate apron at the SW driveway with ample unused paved width to add a dedicated express/bypass lane.",
+    "dockDoors": "The large east warehouse building has a continuous dock face with 30+ trailers backed in along its east side (visible z19); the manufacturing buildings have additional dock faces on the west/rail side. Total estimated 50+ doors. Low-confidence overhead count.",
+    "dropArea": "Trailer drop/parking lots around the east warehouse and along the rail side hold an estimated 25-50 parked trailers; honest overhead estimate.",
+    "shipRcvSeparate": "Distinct dock banks on different building faces (east warehouse dock bank vs. west/rail-side plant docks) imply physically separate ship/receive flows; functional split not verifiable from imagery.",
+    "multipleFacilities": "True — a multi-building manufacturing campus: a large warehouse building plus several connected manufacturing buildings on the same fenced property.",
+    "scale": "No truck scale identified in the imagery.",
+    "dropYard": "Dedicated trailer-storage lots full of parked trailers are present alongside active dock staging.",
+    "railServed": "A rail line/spur runs N-S along the west edge of the plant with rail cars parked directly against the plant building (visible z19) — the plant is rail-served.",
+    "truckGateCount": "At least one main controlled entrance at the SW corner; a second access driveway exists on the south frontage. Estimated 2; flagged uncertain.",
+    "urbanRural": "The plant sits within Temple TX's developed industrial fabric, immediately beside an I-35-area highway interchange with continuous surrounding industrial development. Urban setting.",
+    "siteAreaAcres": "Derived from the perimeter box (~95 acres) — a large multi-building plant property."
+  },
+  "method": "deep-audit"
+}

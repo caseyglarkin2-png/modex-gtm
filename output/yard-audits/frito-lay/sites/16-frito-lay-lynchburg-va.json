@@ -1,0 +1,54 @@
+{
+  "name": "Frito-Lay - Lynchburg VA",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 37.40036, "lng": -79.238328 },
+  "geofences": {
+    "perimeter": { "south": 37.3982, "west": -79.2405, "north": 37.4030, "east": -79.2360 },
+    "truckGate": { "south": 37.4022, "west": -79.2368, "north": 37.4029, "east": -79.2359 },
+    "dropYards": [
+      { "south": 37.4011, "west": -79.2374, "north": 37.4025, "east": -79.2362 },
+      { "south": 37.3994, "west": -79.2390, "north": 37.4011, "east": -79.2363 }
+    ],
+    "dockAprons": [
+      { "south": 37.3995, "west": -79.2382, "north": 37.4012, "east": -79.2373 },
+      { "south": 37.3984, "west": -79.2397, "north": 37.3992, "east": -79.2378 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 45.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.40036,-79.238328,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "multipleFacilities"],
+  "fieldNotes": {
+    "location": "Roster address (4500 Murray Pl) is wrong. Real plant confirmed at 230 Jefferson Ridge Pkwy, Lynchburg VA 24501 via Waze/Yelp/PotatoPro. Locked center 37.40036,-79.238328.",
+    "truckGate": "Truck driveway connects to Jefferson Ridge Pkwy as a wide open paved apron at z19/z20 imagery with no barrier arm, sliding gate, or pinch-point checkpoint. Open ingress.",
+    "guardShack": "No guard booth visible at the entrance or inside the yard. A cluster mid-yard read as parked tractors, not a structure. Listed uncertain because Street View coverage on the private parkway is partial.",
+    "drivewayLong": "Long approach from parkway into the trailer yard easily holds 3+ trucks.",
+    "fastLaneOpportunity": "Very wide gate apron and large open yard mouth; ample paved width to add an express bypass lane.",
+    "dropArea": "Two large drop-trailer fields (north fan-out lot ~50+ stalls; east linear rows 40+) — well over 50 trailers visible.",
+    "shipRcvSeparate": "Docks span multiple building faces (long east bank plus south/southeast bank) — distinct clusters consistent with separate ship/receive.",
+    "multipleFacilities": "A separate smaller building sits at the north end of the property near the drop yard; counted as buildingCount 2 but it is a single Frito-Lay campus, not separate facilities.",
+    "urbanRural": "Edge-of-town hilltop industrial park in Lynchburg surrounded by woods; Rural per rubric.",
+    "yardMetrics": "Counts are honest overhead estimates; dock doors ~70 across long east bank and south bank, trailers ~110 in drop rows and at docks."
+  },
+  "method": "deep-audit"
+}

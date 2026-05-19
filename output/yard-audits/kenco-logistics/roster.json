@@ -1,0 +1,488 @@
+{
+  "account": "Kenco Logistics Services",
+  "generatedAt": "2026-05-18",
+  "facilityCount": 30,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Kenco MCS Jeffersonville I - Jeffersonville IN",
+      "city": "Jeffersonville",
+      "state": "IN",
+      "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+      "address": "201 River Ridge Parkway, Jeffersonville, IN 47130",
+      "lat": 38.387587,
+      "lng": -85.676299,
+      "source": "Kenco press release + River Ridge Commerce Center listings; 664,800 SF, AutoStore robotics site, 113 dock doors",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 69
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Kenco MCS Mississippi - Olive Branch MS",
+      "city": "Olive Branch",
+      "state": "MS",
+      "type": "Multi-Client Distribution Center",
+      "address": "11244 S Distribution Cove, Olive Branch, MS 38654",
+      "lat": 34.988452,
+      "lng": -89.782908,
+      "source": "Kenco warehousing-map (800,000 SF) + Colliers/LoopNet Olive Branch DC listing (Stateline Rd & Polk Ln)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Kenco MCS Allentown - Northampton PA",
+      "city": "Northampton",
+      "state": "PA",
+      "type": "Multi-Client Distribution Center",
+      "address": "6975 Ambassador Drive, Allentown, PA 18106",
+      "lat": 40.598247,
+      "lng": -75.616265,
+      "source": "Kenco warehousing-map (601,836 SF, 92 dock doors, 40 ft clear); address per Chamber of Commerce/BBB Allentown listing. Map labels city as Northampton, PA",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Kenco MCS Dallas I - DeSoto TX",
+      "city": "DeSoto",
+      "state": "TX",
+      "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+      "address": "2119 N Interstate 35 East Service Rd, Suite 200, DeSoto, TX 75115",
+      "lat": 32.631712,
+      "lng": -96.82947,
+      "source": "Kenco warehousing-map (458,000 SF, 36 ft clear) + Chamber of Commerce Walker Edison/Kenco DeSoto listing",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 128
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Kenco MCS Perris I - Perris CA",
+      "city": "Perris",
+      "state": "CA",
+      "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+      "address": "3900 Indian Avenue, Perris, CA 92571",
+      "lat": 33.841558,
+      "lng": -117.228703,
+      "source": "Inland Empire Business Journal / Connect CRE lease coverage (Perris Logistics Center, 579,708 SF) + Kenco warehousing-map",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Kenco MCS Perris II - Perris CA",
+      "city": "Perris",
+      "state": "CA",
+      "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+      "address": "Indian Avenue / Ramona Expressway area, Perris, CA 92571",
+      "lat": 33.844633,
+      "lng": -117.230351,
+      "source": "Kenco warehousing-map (579,708 SF, 32 ft clear, food grade); second building on Kenco's Perris campus - exact street number not separately published",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 4
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Kenco MCS Chino - Chino CA",
+      "city": "Chino",
+      "state": "CA",
+      "type": "Multi-Client Distribution Center",
+      "address": "6509 Kimball Avenue, Chino, CA 91708",
+      "lat": 33.966541,
+      "lng": -117.661269,
+      "source": "Kenco warehousing-map (410,260 SF, 32 ft clear) + Chamber of Commerce / Waze Kenco Logistics Services Chino listing",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 217
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Kenco MCS Georgia I - Austell GA",
+      "city": "Austell",
+      "state": "GA",
+      "type": "Multi-Client Distribution Center",
+      "address": "Austell, GA 30168",
+      "lat": 33.777949,
+      "lng": -84.574624,
+      "source": "Kenco warehousing-map (540,000 SF, temperature controlled, food grade); exact street address not publicly confirmed",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 10
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Kenco MCS Georgia II - Austell GA",
+      "city": "Austell",
+      "state": "GA",
+      "type": "Multi-Client Distribution Center",
+      "address": "Austell, GA 30168",
+      "lat": 33.777949,
+      "lng": -84.574624,
+      "source": "Kenco warehousing-map (499,960 SF, temperature controlled, food grade); exact street address not publicly confirmed",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 10
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Kenco MCS Jeffersonville II - Jeffersonville IN",
+      "city": "Jeffersonville",
+      "state": "IN",
+      "type": "Multi-Client Distribution Center",
+      "address": "River Ridge Commerce Center, Jeffersonville, IN 47130",
+      "lat": 38.356949,
+      "lng": -85.66387,
+      "source": "Kenco warehousing-map (468,635 SF, food grade, bulk space); River Ridge campus - exact street number not separately published",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 101
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Kenco MCS Jeffersonville III - Sellersburg IN",
+      "city": "Sellersburg",
+      "state": "IN",
+      "type": "Multi-Client Distribution Center",
+      "address": "Sellersburg, IN 47172",
+      "lat": 38.398626,
+      "lng": -85.776916,
+      "source": "Kenco warehousing-map (417,270 SF); exact street address not publicly confirmed",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Kenco MCS Dallas III - Lancaster TX",
+      "city": "Lancaster",
+      "state": "TX",
+      "type": "Multi-Client Distribution Center",
+      "address": "Lancaster, TX 75134",
+      "lat": 32.635612,
+      "lng": -96.802949,
+      "source": "Kenco warehousing-map (589,362 SF, temperature controlled, food grade); exact street address not publicly confirmed",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Kenco MCS Dallas IV - Lancaster TX",
+      "city": "Lancaster",
+      "state": "TX",
+      "type": "Multi-Client Distribution Center",
+      "address": "Lancaster, TX 75134",
+      "lat": 32.635612,
+      "lng": -96.802949,
+      "source": "Kenco warehousing-map (560,000 SF, temperature controlled, food grade); exact street address not publicly confirmed",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Kenco MCS Dallas II - Lancaster TX",
+      "city": "Lancaster",
+      "state": "TX",
+      "type": "Multi-Client Distribution Center",
+      "address": "Lancaster, TX 75134",
+      "lat": 32.635612,
+      "lng": -96.802949,
+      "source": "Kenco warehousing-map (200,000 SF, food grade); exact street address not publicly confirmed",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 15,
+      "name": "Kenco LIXIL Americas DC - Groveport OH",
+      "city": "Groveport",
+      "state": "OH",
+      "type": "Dedicated Distribution Center",
+      "address": "3099 Rohr Road, Groveport, OH 43125",
+      "lat": 39.841255,
+      "lng": -82.919529,
+      "source": "Kenco/BusinessWire LIXIL Americas announcement (May 2024) + BBB/Waze Kenco Logistic Services Groveport listing; ~906,000 SF",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 57
+      }
+    },
+    {
+      "idx": 16,
+      "name": "Kenco MCS Chattanooga CH29 - Chattanooga TN",
+      "city": "Chattanooga",
+      "state": "TN",
+      "type": "Multi-Client Distribution Center",
+      "address": "Chattanooga, TN 37406",
+      "lat": 35.067592,
+      "lng": -85.261899,
+      "source": "Kenco warehousing-map (284,720 SF, bulk space); exact street address not publicly confirmed",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 157
+      }
+    },
+    {
+      "idx": 17,
+      "name": "Kenco MCS Chattanooga CH7B - Chattanooga TN",
+      "city": "Chattanooga",
+      "state": "TN",
+      "type": "Multi-Client Distribution Center",
+      "address": "Chattanooga, TN 37406",
+      "lat": 35.067592,
+      "lng": -85.261899,
+      "source": "Kenco warehousing-map (242,000 SF, temperature controlled, food grade); exact street address not publicly confirmed",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 157
+      }
+    },
+    {
+      "idx": 18,
+      "name": "Kenco MCS Chattanooga BP2 - Chattanooga TN",
+      "city": "Chattanooga",
+      "state": "TN",
+      "type": "Multi-Client Distribution Center",
+      "address": "Chattanooga, TN 37406",
+      "lat": 35.067592,
+      "lng": -85.261899,
+      "source": "Kenco warehousing-map (210,000 SF); exact street address not publicly confirmed",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 157
+      }
+    },
+    {
+      "idx": 19,
+      "name": "Kenco MCS Ogden I - Ogden UT",
+      "city": "Ogden",
+      "state": "UT",
+      "type": "Multi-Client Distribution Center",
+      "address": "1025 Depot Drive, Ogden, UT 84404",
+      "lat": 41.247999,
+      "lng": -111.995675,
+      "source": "Kenco warehousing-map (172,000 SF, 30 ft clear, 44+ dock doors); address per Kenco Ogden warehouse listings (Depot Dr / Business Depot Ogden area)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 77
+      }
+    },
+    {
+      "idx": 20,
+      "name": "Kenco MCS Clearfield - Clearfield UT",
+      "city": "Clearfield",
+      "state": "UT",
+      "type": "Multi-Client Distribution Center",
+      "address": "Building G8, 7th Street, Freeport Center, Clearfield, UT 84016",
+      "lat": 41.100339,
+      "lng": -112.035023,
+      "source": "Kenco warehousing-map (90,000 SF, food grade) + Freeport Center tenant / azlogistics Kenco Clearfield listing",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 21
+      }
+    },
+    {
+      "idx": 21,
+      "name": "Kenco Mead Johnson DC - Mount Vernon IN",
+      "city": "Mount Vernon",
+      "state": "IN",
+      "type": "Dedicated Distribution Center",
+      "address": "3101 Highway 62 East, Mount Vernon, IN 47620",
+      "lat": 37.937193,
+      "lng": -87.870498,
+      "source": "Chamber of Commerce / Foursquare Mead Johnson-Kenco Logistics Mount Vernon listing; long-running Kenco dedicated DC",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 22,
+      "name": "Kenco Kerry Group DC - Calhoun GA",
+      "city": "Calhoun",
+      "state": "GA",
+      "type": "Dedicated Distribution Center",
+      "address": "315 Clarence King Drive, Calhoun, GA 30701",
+      "lat": 34.430206,
+      "lng": -84.927789,
+      "source": "Kenco/Kerry Group press release + Northwest Georgia News coverage; ~468,000 SF North Georgia DC",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 31
+      }
+    },
+    {
+      "idx": 23,
+      "name": "Kenco / The Shippers Group - Hutchins TX (HQ campus)",
+      "city": "Hutchins",
+      "state": "TX",
+      "type": "Distribution Center / 3PL Warehouse",
+      "address": "1015 W Wintergreen Road, Hutchins, TX 75141",
+      "lat": 32.625775,
+      "lng": -96.716523,
+      "source": "The Shippers Group locations page (acquired by Kenco Jan 2024); former TSG headquarters / DFW warehouse campus",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 24,
+      "name": "Kenco American Standard DC - Hutchins TX",
+      "city": "Hutchins",
+      "state": "TX",
+      "type": "Dedicated Distribution Center",
+      "address": "801 E Wintergreen Road, Hutchins, TX 75141",
+      "lat": 32.635388,
+      "lng": -96.69556,
+      "source": "Manta Kenco American Standard Hutchins TX listing; dedicated warehouse for American Standard / durable goods",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 103
+      }
+    },
+    {
+      "idx": 25,
+      "name": "Kenco / The Shippers Group - Wilmer TX",
+      "city": "Wilmer",
+      "state": "TX",
+      "type": "Distribution Center / 3PL Warehouse",
+      "address": "500 S Millers Ferry Road, Wilmer, TX 75172",
+      "lat": 32.586422,
+      "lng": -96.683656,
+      "source": "Kenco/TSG warehouse listings (LogiCore Kenco-Wilmer); DFW-area DC acquired via The Shippers Group",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 26,
+      "name": "Kenco / The Shippers Group - Orlando FL",
+      "city": "Orlando",
+      "state": "FL",
+      "type": "Distribution Center / 3PL Warehouse",
+      "address": "Orlando, FL 32824",
+      "lat": 28.375647,
+      "lng": -81.36194,
+      "source": "The Shippers Group locations page (acquired by Kenco Jan 2024); Florida DC, ~58,000 SF dedicated space cited - exact street address not publicly confirmed",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 16
+      }
+    },
+    {
+      "idx": 27,
+      "name": "Kenco / The Shippers Group - Jonesboro GA",
+      "city": "Jonesboro",
+      "state": "GA",
+      "type": "Distribution Center / 3PL Warehouse",
+      "address": "Jonesboro, GA 30236",
+      "lat": 33.521501,
+      "lng": -84.353813,
+      "source": "The Shippers Group locations page (acquired by Kenco Jan 2024); ~500,000 SF ambient warehouse - exact street address not publicly confirmed",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 834
+      }
+    },
+    {
+      "idx": 28,
+      "name": "Kenco / The Shippers Group - Grand Prairie TX",
+      "city": "Grand Prairie",
+      "state": "TX",
+      "type": "Distribution Center / 3PL Warehouse",
+      "address": "Grand Prairie, TX 75050",
+      "lat": 32.781145,
+      "lng": -97.017588,
+      "source": "The Shippers Group locations page (acquired by Kenco Jan 2024); ~280,000 SF dedicated DFW warehouse - exact street address not publicly confirmed",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 29,
+      "name": "Kenco Devens DC - Devens MA",
+      "city": "Devens",
+      "state": "MA",
+      "type": "Distribution Center / Northeast Warehouse",
+      "address": "50 Independence Drive, Suite 1, Devens, MA 01434",
+      "lat": 42.546746,
+      "lng": -71.594485,
+      "source": "Dun & Bradstreet / Manta Kenco Group Devens MA listing; Northeast distribution facility",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 30,
+      "name": "Kenco Memphis DC - Memphis TN",
+      "city": "Memphis",
+      "state": "TN",
+      "type": "Distribution Center / Warehouse",
+      "address": "3346 Democrat Drive, Memphis, TN 38118",
+      "lat": 35.070065,
+      "lng": -89.952907,
+      "source": "Manta / Yellow Pages Kenco Logistic Service Memphis listing; Memphis-area distribution facility",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 40
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

@@ -1,0 +1,55 @@
+{
+  "name": "Kenco MCS Dallas I - DeSoto TX",
+  "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+  "coords": { "lat": 32.63200, "lng": -96.82960 },
+  "geofences": {
+    "perimeter": { "south": 32.6300, "west": -96.8316, "north": 32.6336, "east": -96.8278 },
+    "truckGate": { "south": 32.63035, "west": -96.83025, "north": 32.63075, "east": -96.82960 },
+    "dropYards": [
+      { "south": 32.6304, "west": -96.8316, "north": 32.6328, "east": -96.8305 },
+      { "south": 32.6304, "west": -96.8305, "north": 32.6312, "east": -96.8281 }
+    ],
+    "dockAprons": [
+      { "south": 32.6311, "west": -96.8307, "north": 32.6314, "east": -96.8281 },
+      { "south": 32.6329, "west": -96.8307, "north": 32.6332, "east": -96.8281 }
+    ],
+    "staging": { "south": 32.62985, "west": -96.8307, "north": 32.6303, "east": -96.8281 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 80,
+    "trailersVisible": 25,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 35.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.63200,-96.82960,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Fully fenced perimeter with a controlled truck gate on the S/SW driveway off the I-35E service road. Confirmed in 2025-02 Street View and z20 satellite — chain-link perimeter fence, gated truck driveway with gate arms.",
+    "guardShack": "A small 1-vehicle-footprint guard booth sits beside the gate driveway, visible in both z20 satellite and 2025-02 Street View.",
+    "preGateStaging": "Paved apron between the I-35E service road and the gate gives trucks room to wait outside the gate.",
+    "postGateStaging": "Large paved truck court inside the gate before the dock doors.",
+    "fastLaneOpportunity": "Wide gate apron with twin landscaped islands and room for an express bypass lane.",
+    "shipRcvSeparate": "Cross-dock building: dock banks on both the N face and the S face — physically separate clusters.",
+    "dockDoors": "Long dock banks on both long faces of a ~458,000-490,000 SF e-commerce DC; banded 50+. Door count ~80 is an overhead estimate.",
+    "dropArea": "Extensive striped trailer-parking drop yards on the W end and along the S side, well over 50 stalls.",
+    "urbanRural": "Within the Dallas metro fabric along I-35E, immediately adjacent to dense residential; judged Urban.",
+    "trailersVisible": "~25 trailers counted in dock aprons / drop yards; drop yards largely empty in this imagery, approximate.",
+    "trailerParkingCapacity": "~160 estimated from the large striped W and S drop yards; low confidence."
+  },
+  "method": "deep-audit"
+}

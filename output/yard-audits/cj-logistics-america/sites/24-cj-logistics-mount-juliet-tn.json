@@ -1,0 +1,52 @@
+{
+  "name": "CJ Logistics - Mount Juliet TN",
+  "type": "Distribution Center",
+  "coords": { "lat": 36.0717, "lng": -86.43315 },
+  "geofences": {
+    "perimeter": { "south": 36.06950, "west": -86.43500, "north": 36.07390, "east": -86.43130 },
+    "truckGate": { "south": 36.06975, "west": -86.43430, "north": 36.07025, "east": -86.43380 },
+    "dropYards": [
+      { "south": 36.07150, "west": -86.43500, "north": 36.07360, "east": -86.43400 }
+    ],
+    "dockAprons": [
+      { "south": 36.06980, "west": -86.43480, "north": 36.07380, "east": -86.43360 },
+      { "south": 36.07000, "west": -86.43250, "north": 36.07390, "east": -86.43130 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 50,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 40.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.0717,-86.43315,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster supplied no street address (Indeed locations list) and city-centroid coords (36.2, -86.5186) ~17km off. Resolved to 648 Couchville Pike, Mount Juliet TN 37122 - the documented DSC Logistics Mt Juliet warehouse. DSC Logistics is the legacy company CJ Logistics America was formed from, so this is the CJ Logistics Mt Juliet facility. Geocoded ROOFTOP to 36.0714, -86.4330; satellite confirmed a large cross-dock DC. Note: directory listings show the building is currently operated as a Denso/ABB Supply Chain facility (~380,000 sq ft) - tenancy may have changed since the roster was built.",
+    "truckGate": "An access road runs ~150m from Couchville Pike up to the building. A small white guard-booth structure with canopy sits at the truck court / building entrance beside the auto parking lot (z20-z21 satellite). truckGate=true.",
+    "guardShack": "Small ~1-vehicle-footprint white booth with dark roof at the building entrance / truck court entry, with a walkway - consistent with a staffed guard shack.",
+    "dockDoors": "Cross-dock building with rows of trailers backed into dock doors with canopies along BOTH long faces (NW and SE). For a ~380,000 sq ft building, total doors estimated ~60 (50+ band). Approximate from overhead imagery.",
+    "dropArea": "Trailer storage and parked trailers across the NW and NE truck courts; ~50 trailers visible. dropArea 25-50, dropYard=true.",
+    "shipRcvSeparate": "Docks on two opposing long faces (NW and SE) form physically separate dock clusters.",
+    "drivewayLong": "Long ~150m access road from Couchville Pike to the gate/building plus deep truck courts -> can hold a 3+ truck queue.",
+    "urbanRural": "Couchville Pike SE of Mount Juliet is a Nashville-metro logistics corridor with several adjacent million-sqft DCs; classified Urban.",
+    "siteAreaAcres": "~40 acres from the perimeter box (building plus truck courts on both faces)."
+  },
+  "method": "deep-audit"
+}

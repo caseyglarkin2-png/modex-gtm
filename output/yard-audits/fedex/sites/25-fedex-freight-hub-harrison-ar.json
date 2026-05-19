@@ -1,0 +1,52 @@
+{
+  "name": "FedEx Freight Hub - Harrison AR (HRO)",
+  "type": "Freight LTL hub / former American Freightways HQ campus",
+  "coords": { "lat": 36.2575, "lng": -93.1320 },
+  "geofences": {
+    "perimeter": { "south": 36.2545, "west": -93.1355, "north": 36.2605, "east": -93.1285 },
+    "truckGate": { "south": 36.2552, "west": -93.1308, "north": 36.2558, "east": -93.1300 },
+    "dropYards": [
+      { "south": 36.2560, "west": -93.1352, "north": 36.2592, "east": -93.1330 }
+    ],
+    "dockAprons": [
+      { "south": 36.2580, "west": -93.1340, "north": 36.2590, "east": -93.1322 },
+      { "south": 36.2562, "west": -93.1340, "north": 36.2572, "east": -93.1322 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90, "trailersVisible": 70, "trailerParkingCapacity": 160,
+    "truckGateCount": 1, "buildingCount": 5, "siteAreaAcres": 104.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.2575,-93.1320,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "entryLanes", "exitLanes", "dockDoorCount", "postGateStaging"],
+  "fieldNotes": {
+    "location": "Roster address '2200 Forward Dr, Harrison AR' and coordinates (36.256793, -93.132174, GEOMETRIC_CENTER) resolve to the correct campus. This is the FedEx Freight HRO service center co-located with FedEx Freight Corporate Offices on the heritage American Freightways HQ campus. Confirmed by satellite (corporate office complex + two LTL cross-dock buildings + large employee parking) and Street View (2024) showing FedEx-branded trailers in the operations yard and perimeter fencing.",
+    "multipleFacilities": "Campus has distinct building clusters: a connected corporate-office complex on the east side plus two separate long LTL cross-dock terminal buildings on the west side, with internal roads and ponds between them.",
+    "truckGate": "Entire campus is perimeter-fenced (chain-link around the operations/parking sides, decorative metal fence on the corporate frontage). The operating LTL terminal yard is access-controlled as a FedEx Freight network standard. The corporate-office driveway off Forward Dr is open-access employee parking; the truck entrance to the dock yard is a separate controlled point. Exact gate not directly Street-View confirmed.",
+    "guardShack": "No staffed guard booth identified in satellite or Street View at the truck entrance. Classified as remote/kiosk check-in (remoteGs true). Low-medium confidence.",
+    "dockDoors": "Two long narrow LTL cross-dock buildings each with a regular rhythm of dock doors on both long faces and trailers backed in; combined estimate ~90 doors, placing the site in the 50+ band. Door count is an overhead estimate.",
+    "dropArea": "Paved trailer parking around both dock buildings holds dozens of trailers/pups without tractors; estimated 25-50 band.",
+    "dropYard": "Dedicated paved trailer-storage areas flank the two cross-dock buildings.",
+    "drivewayLong": "Large internal paved yard between the dock buildings and the office complex gives ample room for a 3+ truck queue.",
+    "urbanRural": "Harrison AR is a small town (~13,000 population) in the Ozarks; the campus sits on the edge of town surrounded by fields and low-density development. Classified Rural.",
+    "buildingCount": "Two LTL cross-dock buildings + a connected corporate-office complex counted as ~3 office structures = 5 distinct buildings.",
+    "railServed": "No rail spur enters the campus; classified false.",
+    "postGateStaging": "Large internal paved yard could serve as a post-gate holding area; inferred, medium confidence.",
+    "siteAreaAcres": "Derived from the perimeter box; includes corporate offices, large employee parking, ponds, and lawns in addition to the truck-operations area."
+  },
+  "method": "deep-audit"
+}

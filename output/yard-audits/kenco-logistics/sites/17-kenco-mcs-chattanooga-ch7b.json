@@ -1,0 +1,52 @@
+{
+  "name": "Kenco MCS Chattanooga CH7B - Chattanooga TN",
+  "type": "Multi-Client Distribution Center",
+  "coords": { "lat": 35.06912, "lng": -85.18225 },
+  "geofences": {
+    "perimeter": { "south": 35.06790, "west": -85.18370, "north": 35.07010, "east": -85.18090 },
+    "truckGate": { "south": 35.06970, "west": -85.18130, "north": 35.07005, "east": -85.18085 },
+    "dropYards": [
+      { "south": 35.06840, "west": -85.18320, "north": 35.06900, "east": -85.18130 }
+    ],
+    "dockAprons": [
+      { "south": 35.06850, "west": -85.18330, "north": 35.06905, "east": -85.18120 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 34,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 20,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 13.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.06912,-85.18225,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea", "entryLanes", "exitLanes", "siteAreaAcres"],
+  "fieldNotes": {
+    "location": "Roster gave an APPROXIMATE geocode for 'Chattanooga, TN 37406' that landed on the CSX DeButts rail yard. Web research resolved Kenco's Chattanooga MCS operations to the Enterprise Park Drive industrial cluster. 6170 Enterprise Park Dr is a CONFIRMED Kenco building (ROOFTOP geocode 35.0696387,-85.1823609; Yelp/CoStar 'Kenco Logistics Services-Stryker').",
+    "buildingChoice": "Audited the warehouse at the confirmed Kenco address 6170 Enterprise Park Dr (building center ~35.0691,-85.1822) as CH7B. CH7B is described as 242,000 SF temperature-controlled/food-grade; the audited building is a large single-tenant warehouse with a long dock bank consistent with a food-grade DC. Public sources cite ~162,500 SF for the 6170 building (a 1990 listing) which may understate the current footprint, so the CH-code-to-building match is best-effort - medium confidence.",
+    "truckGate": "No barrier arm, gate, or guard booth at the property driveway off Enterprise Park Drive. Open paved access typical of a leased industrial-park warehouse. Street View (Feb 2026) of the NE wall shows plain metal cladding with a small entry vestibule and no gate. Medium confidence.",
+    "guardShack": "No booth structure visible at any entrance.",
+    "dockDoors": "Counted ~34 dock doors along the south/SW building face from z19 imagery (regular bay rhythm, dock levelers, a few trailers and one truck backed in). Band 25-50; low-confidence exact count.",
+    "dropArea": "Roughly 6 trailers visible in the deep south apron in current imagery; the wide paved yard could hold ~20. Band 10-25.",
+    "fastLaneOpportunity": "Very deep, wide south truck apron with large unused paved area - ample room to add a bypass/express lane.",
+    "dropYard": "South apron doubles as trailer drop storage; trailers parked without tractors.",
+    "railServed": "A rail line runs immediately along the south property boundary but no spur enters the parcel - the building is not rail-served.",
+    "urbanRural": "Within the Chattanooga metro Enterprise Park industrial fabric - Urban."
+  },
+  "method": "deep-audit"
+}

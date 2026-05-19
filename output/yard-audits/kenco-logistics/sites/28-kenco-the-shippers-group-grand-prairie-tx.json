@@ -1,0 +1,53 @@
+{
+  "name": "Kenco / The Shippers Group - Grand Prairie TX",
+  "type": "Distribution Center / 3PL Warehouse",
+  "coords": { "lat": 32.79050, "lng": -97.01300 },
+  "geofences": {
+    "perimeter": { "south": 32.78870, "west": -97.01510, "north": 32.79280, "east": -97.01040 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 32.78900, "west": -97.01230, "north": 32.79230, "east": -97.01060 }
+    ],
+    "dockAprons": [
+      { "south": 32.78900, "west": -97.01480, "north": 32.79230, "east": -97.01390 },
+      { "south": 32.78900, "west": -97.01290, "north": 32.79230, "east": -97.01210 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 42.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.79050,-97.01300,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["shipRcvSeparate", "dockDoorCount", "entryExitTogether", "entryExitSeparate"],
+  "fieldNotes": {
+    "location": "Roster coords (32.781145,-97.017588, APPROXIMATE) and the cited 3845 Grand Lakes Way address were both off-target: 3845 Grand Lakes Way is the Inmar Rx Solutions building. Dallas County tax records (city-data) list 'WAREHOUSE SHIPPERS' (Shippers Warehouse / TSG) as a tenant at 3953 Grand Lakes Way - the correct facility. Confirmed via TruckMap/Waze listings ('Shippers Warehouse, 3953 Grand Lakes Way') and a Street View pano showing a 'TENNANT' tenant sign on the building (Tennant is a co-tenant at 3953). 3953 Grand Lakes Way is a ~1,060,075 SF Duke Realty/Prologis distribution building (Grand Lakes Industrial Park) in which TSG occupies a ~281,206 SF dedicated suite. Locked center on the building footprint at 32.79050,-97.01300.",
+    "truckGate": "No barrier arm, sliding/swing gate, or guard booth visible at the driveway connections off Grand Lakes Way or at the truck-court drive aisles. Street View (Dec 2024) shows open landscaped frontage and open drive aisles into the truck courts - typical Class A Duke Realty open-access spec building. truckGate=false.",
+    "guardShack": "No staffed booth. guardShack=false, remoteGs=false (no gate).",
+    "dockDoors": "Massive 1.06M SF building with continuous dock-door banks along BOTH long faces (west and east). Counted ~130 doors total across the two faces; banded 50+. Exact count low-confidence due to scale.",
+    "shipRcvSeparate": "Dock doors run along two opposite (west and east) building faces, each with its own truck court - consistent with separate shipping vs receiving operations in a building this size. shipRcvSeparate=true, flagged uncertain (could also be one tenant using both sides).",
+    "dropArea": "Very large east-side drop yard packed with rows of parked trailers (~90 trailers visible across both courts); 50+ band. dropYard=true.",
+    "drivewayLong": "Truck courts are deep (~185 ft per Duke Realty park spec) - easily holds 3+ trucks queued. postGateStaging=true.",
+    "multipleFacilities": "3953 Grand Lakes Way is a single (very large) multi-tenant building; not a multi-building campus. multipleFacilities=false. TSG occupies one suite within it.",
+    "urbanRural": "Great Southwest / Grand Lakes industrial district between Dallas and Fort Worth on I-30 - dense metro industrial fabric, Urban.",
+    "yardMetrics": "Counts (dockDoorCount ~130, trailersVisible ~90, capacity ~160, siteAreaAcres ~42) are honest estimates for the whole 3953 building; TSG's 281k SF suite is a fraction of this. Reported at building level per audit convention."
+  },
+  "method": "deep-audit"
+}

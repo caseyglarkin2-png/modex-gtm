@@ -1,0 +1,68 @@
+{
+  "name": "Jennie-O Turkey Store - Willmar MN",
+  "type": "Meat Processing Plant",
+  "coords": { "lat": 45.10870, "lng": -95.07950 },
+  "geofences": {
+    "perimeter": { "south": 45.10560, "west": -95.08360, "north": 45.11060, "east": -95.07650 },
+    "truckGate": { "south": 45.10905, "west": -95.08320, "north": 45.10960, "east": -95.08250 },
+    "dropYards": [
+      { "south": 45.10580, "west": -95.08330, "north": 45.10780, "east": -95.08020 }
+    ],
+    "dockAprons": [
+      { "south": 45.10800, "west": -95.08200, "north": 45.10920, "east": -95.07980 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 2,
+    "buildingCount": 8,
+    "siteAreaAcres": 75.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@45.10870,-95.07950,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "scale"],
+  "fieldNotes": {
+    "location": "Roster coords (45.110536,-95.008269) landed in farmland ~5.5 km east of the plant; address listed 'SE' but is actually Willmar Ave SW. Corrected via web search to 2505 Willmar Ave SW; locked center 45.10870,-95.07950 on the main processing campus on the SW edge of Willmar.",
+    "truckGate": "Plant is fully enclosed by a continuous white privacy-slat chain-link fence (StreetView 2025). A posted sign at the north visitor gate reads 'ALL TRUCKS MUST USE SOUTH ENTRANCE' -> there is a controlled, function-separated truck gate. truckGate true.",
+    "guardShack": "Could not positively confirm a guard-booth structure at the truck gate from satellite or StreetView (gate obscured by fence/trees). Large USDA turkey plants often have staffed security, but with no visual confirmation classified guardShack false and flagged as uncertain.",
+    "remoteGs": "Set true (gate present, no confirmed booth); flagged uncertain alongside guardShack.",
+    "entryExitSeparate": "North gate handles visitors/employees; trucks routed to a separate south entrance per posted signage -> entry and exit functions are at distinct points -> entryExitSeparate true.",
+    "shipRcvSeparate": "Large multi-building turkey campus with dock banks on separate building faces (raw receiving vs finished shipping typical for a slaughter+processing plant) -> shipRcvSeparate true.",
+    "railServed": "An active rail line runs along the SE edge of the property; spur access into the campus is plausible -> railServed true.",
+    "multipleFacilities": "Sprawling ~8-building turkey-processing campus -> multipleFacilities true.",
+    "dropYard": "Extensive trailer drop yards in the SW with 100+ trailers parked in rows -> dropYard true; dropArea 50+.",
+    "dockDoors": "~45 dock doors estimated across multiple building faces; banded 25-50, low-confidence.",
+    "fastLaneOpportunity": "Wide paved entrances and large yard space leave room for an express/bypass lane.",
+    "urbanRural": "Willmar is a small rural city (~21k); the plant sits at the SW edge surrounded by farmland -> Rural.",
+    "scale": "A truck scale is likely at a USDA slaughter plant but was not positively identified in imagery -> flagged uncertain, classified false."
+  },
+  "method": "deep-audit"
+}

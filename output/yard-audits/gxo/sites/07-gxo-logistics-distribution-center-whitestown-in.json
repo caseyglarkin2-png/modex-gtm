@@ -1,0 +1,54 @@
+{
+  "name": "GXO Logistics Distribution Center - Whitestown IN",
+  "type": "Distribution Center",
+  "coords": { "lat": 39.96345, "lng": -86.38215 },
+  "geofences": {
+    "perimeter": { "south": 39.96135, "west": -86.38505, "north": 39.96565, "east": -86.37965 },
+    "truckGate": { "south": 39.96235, "west": -86.38475, "north": 39.96285, "east": -86.38405 },
+    "dropYards": [
+      { "south": 39.96255, "west": -86.38465, "north": 39.96545, "east": -86.38205 },
+      { "south": 39.96155, "west": -86.38215, "north": 39.96445, "east": -86.37985 }
+    ],
+    "dockAprons": [
+      { "south": 39.96305, "west": -86.38445, "north": 39.96535, "east": -86.38215 },
+      { "south": 39.96165, "west": -86.38235, "north": 39.96395, "east": -86.38015 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 76,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 55.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.96345,-86.38215,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["truckGate", "entryLanes", "exitLanes", "truckGateCount"],
+  "fieldNotes": {
+    "location": "Confirmed the large cross-dock DC building at 5490 Industrial Ct, Whitestown (AllPoints at Anson logistics park, NW of Indianapolis just W of I-65). LoopNet lists 628,206 SF, 36-ft clear, 257 parking spaces, 76 dock doors. Roster ROOFTOP geocode landed on the building's SW corner; locked center moved to the building centroid (~39.96345, -86.38215).",
+    "truckGate": "No barrier arm, sliding gate, or checkpoint structure visible at the NW or SE truck-yard driveway entrances; both are open paved approaches off the perimeter park road. Marked false; listed uncertain.",
+    "guardShack": "No small staffed booth visible at any truck-yard entrance. A small orange structure near the NW dock face appears to be a maintenance/utility unit, not a gate booth.",
+    "shipRcvSeparate": "Building is a cross-dock layout with two separate dock banks on opposite long faces (NW face and SE face), each with its own truck yard — consistent with separated shipping vs receiving.",
+    "dockDoors": "LoopNet specifies 76 dock doors; satellite shows two long banks of doors with trailers backed in on the NW and SE faces, consistent with that figure.",
+    "dropArea": "Both the NW and SE truck yards are very large paved lots holding many parked trailers; combined drop capacity is well into the 50+ band.",
+    "truckGateCount": "Two truck-yard access driveways observed (NW yard and SE yard); each connects directly to the perimeter park road. Counted as 2; uncertain whether one is gated or controlled.",
+    "fastLaneOpportunity": "Both truck yards have large unused paved width and wide driveway aprons; ample room for an express/bypass lane.",
+    "urbanRural": "Whitestown sits in the Indianapolis metro's dense industrial logistics fabric (AllPoints at Anson park, surrounded by mega-DCs and I-65 interchange retail) — classified Urban.",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

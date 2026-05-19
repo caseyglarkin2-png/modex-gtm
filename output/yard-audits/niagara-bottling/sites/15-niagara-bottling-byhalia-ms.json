@@ -1,0 +1,56 @@
+{
+  "name": "Niagara Bottling - Byhalia MS",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 34.97800, "lng": -89.60680 },
+  "geofences": {
+    "perimeter": { "south": 34.97550, "west": -89.60880, "north": 34.98060, "east": -89.60480 },
+    "truckGate": { "south": 34.97550, "west": -89.60570, "north": 34.97640, "east": -89.60480 },
+    "dropYards": [
+      { "south": 34.97600, "west": -89.60850, "north": 34.98000, "east": -89.60760 },
+      { "south": 34.97650, "west": -89.60540, "north": 34.98000, "east": -89.60480 }
+    ],
+    "dockAprons": [
+      { "south": 34.97600, "west": -89.60790, "north": 34.98000, "east": -89.60720 },
+      { "south": 34.97650, "west": -89.60600, "north": 34.98000, "east": -89.60540 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 72,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 48.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.97800,-89.60680,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "entryExitSeparate"],
+  "fieldNotes": {
+    "buildingId": "Address 168 E Wingo Rd geocoded ROOFTOP onto a large warehouse/manufacturing building in a Byhalia MS logistics park outside Memphis. Confirmed Niagara: a cluster of tall white process silos and water-treatment tanks lines the S/SE building face - the classic bottling-plant signature - matching a web facility note describing the delivery entrance 'adjacent to the large silos'. The plant opened 2018.",
+    "truckGate": "The site has a continuous chain-link perimeter fence along E Wingo Rd. The truck entrance at the SE corner is a controlled gated drive with a digital driver check-in sign board. truckGate = true.",
+    "guardShack": "No staffed multi-window guard booth is visible at the entrance; check-in is handled by a digital sign board / kiosk - classed remoteGs = true, guardShack = false. The kiosk-vs-booth call is medium-confidence from Street View distance.",
+    "entryExitSeparate": "A web facility note mentions a separate 'exit gate' with shipping restrooms, implying split entry/exit. Satellite shows one main SE entrance complex, so classed entryExitTogether; the possible separate exit gate is flagged uncertain.",
+    "dockDoors": "Dock doors run BOTH the W and E building faces, each densely lined with trailers - combined estimate ~100-120 doors, well into the 50+ band. Exact count low-confidence.",
+    "dropArea": "Trailer drop rows on both the W side (beyond the W dock apron) and the E side - capacity well over 50, band 50+.",
+    "shipRcvSeparate": "Two physically separate dock banks on opposite (W and E) building faces - shipping and receiving run from distinct dock clusters. shipRcvSeparate = true.",
+    "dropYard": "Dedicated on-site trailer-storage rows flank both long sides of the building.",
+    "drivewayLong": "Deep entrance drive and large dock aprons on both faces give 3+ truck post-gate stacking room.",
+    "fastLaneOpportunity": "Wide entrance apron leaves room to add an express bypass lane.",
+    "urbanRural": "Byhalia MS logistics park, edge-of-town, bordered by woodland and open ground southeast of Memphis - classed Rural.",
+    "railServed": "No rail spur runs into the property."
+  },
+  "method": "deep-audit"
+}

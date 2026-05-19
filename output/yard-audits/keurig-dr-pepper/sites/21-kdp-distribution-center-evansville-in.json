@@ -1,0 +1,47 @@
+{
+  "name": "KDP Distribution Center - Evansville IN",
+  "type": "Distribution Center - DSD",
+  "coords": { "lat": 37.94420, "lng": -87.54700 },
+  "geofences": {
+    "perimeter": { "south": 37.94330, "west": -87.54790, "north": 37.94510, "east": -87.54620 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 3.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.94420,-87.54700,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep",
+    "dockDoorCount", "trailersVisible", "trailerParkingCapacity",
+    "truckGateCount", "buildingCount", "siteAreaAcres", "railServed"
+  ],
+  "fieldNotes": {
+    "location": "COULD NOT POSITIVELY LOCATE. Roster lat/lng (37.971559, -87.57109) point to downtown Evansville's civic/office core — not an industrial site; clearly wrong for a DSD depot. The only consistently-cited address across business directories (Cortera, Indeed) is '2600 S Kentucky Ave, Evansville, IN 47714-4513' for 'Keurig Dr Pepper Inc'. That address geocodes (Nominatim) to 37.9440, -87.5481; satellite imagery there shows a large empty parking lot and a generic white-roof industrial building with NO beverage-distribution signage, NO visible loading docks with trailers, and NO recognizable truck yard. Street View (2019/2023) of S Kentucky Ave shows generic light-industrial buildings and a green-fenced vehicle/equipment lot. The address is most likely an administrative/registered address rather than an active beverage-distribution warehouse, or the depot has minimal footprint / has relocated. Note: historically the Dr Pepper / RC distribution in Evansville was tied to Royal Crown Bottling Corp (1100 Independence Ave), which was renamed 'Vision Beverage' in 2020 and stopped distributing KDP brands.",
+    "coords": "Best-effort placeholder centered on the white-roof building near 2600 S Kentucky Ave; NOT a confirmed KDP facility.",
+    "classification": "All classification flags are unverified and default to false/null. The site could not be confirmed, so no truck-yard evidence could be assessed.",
+    "yardMetrics": "All metrics are unverified placeholders. The perimeter box and 3-acre area are a rough estimate around the candidate building only.",
+    "recommendation": "Flag for human review. Suggested next steps: contact KDP directly for the Evansville DSD depot address, check Vanderburgh County GIS / property records for KDP or American Bottling Company parcels, or pull a current KDP careers posting for Evansville which may list the worksite address."
+  },
+  "method": "deep-audit"
+}

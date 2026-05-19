@@ -1,0 +1,66 @@
+{
+  "name": "Niagara Bottling - Stockton CA (Arch Rd)",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 37.90620, "lng": -121.19720 },
+  "geofences": {
+    "perimeter": { "south": 37.90500, "west": -121.19950, "north": 37.90800, "east": -121.19380 },
+    "truckGate": { "south": 37.90600, "west": -121.19490, "north": 37.90650, "east": -121.19430 },
+    "dropYards": [
+      { "south": 37.90680, "west": -121.19900, "north": 37.90785, "east": -121.19480 }
+    ],
+    "dockAprons": [
+      { "south": 37.90665, "west": -121.19900, "north": 37.90700, "east": -121.19480 }
+    ],
+    "staging": { "south": 37.90655, "west": -121.19550, "north": 37.90785, "east": -121.19430 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 25,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 41.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.90620,-121.19720,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "urbanRural"],
+  "fieldNotes": {
+    "buildingId": "Confirmed Niagara via the 'niagara' wordmark on the east building face and a Niagara monument sign at the east entrance (Street View, captured 2026-03). ~600,000 sq ft single-story concrete tilt-up plant, operational 2023, 5959 Arch Rd.",
+    "truckGate": "Fully fenced site (black metal perimeter fence). The SE truck/yard entrance has a wide rolling chain-link gate across the driveway - clearly visible in 2026-03 Street View. A second gated driveway exists at the NE corner.",
+    "guardShack": "No guard booth beside either gate - just the rolling gates. Open driveway with gate but no staffed structure.",
+    "remoteGs": "Gate present, no guard shack -> remote check-in (kiosk / call-box / app). Standard for this newer 2023 plant.",
+    "fastLaneOpportunity": "Wide gate apron and a deep, wide north dock yard - ample paved width to add an express/bypass lane.",
+    "dockDoors": "Long canopied dock run along the north face plus additional doors on the SW face; estimated ~45 - band 25-50.",
+    "dropArea": "Deep, wide paved trailer yard along the north face holds many dropped trailers; band 50+.",
+    "railServed": "A rail line runs in a corridor NW of the building but there is NO spur into the property - the north dock face is truck docks only.",
+    "urbanRural": "SE Stockton industrial logistics district - dense cluster of big-box distribution buildings, within the Stockton metro. Called Urban; borderline edge-of-town - flagged.",
+    "truckGateCount": "2 gated driveways (SE and NE).",
+    "siteAreaAcres": "~41 acres from the perimeter box (large 600k-sq-ft plant + north dock yard + east employee parking)."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,54 @@
+{
+  "name": "Sovos / Rao's - Austin TX",
+  "type": "Manufacturing - premium pasta sauces / frozen Italian foods (Michael Angelo's Gourmet Foods; Rao's Made for Home)",
+  "coords": { "lat": 30.47105, "lng": -97.67700 },
+  "geofences": {
+    "perimeter": { "south": 30.47015, "west": -97.67830, "north": 30.47230, "east": -97.67600 },
+    "truckGate": { "south": 30.47075, "west": -97.67625, "north": 30.47120, "east": -97.67575 },
+    "dropYards": [
+      { "south": 30.47030, "west": -97.67710, "north": 30.47085, "east": -97.67600 }
+    ],
+    "dockAprons": [
+      { "south": 30.47055, "west": -97.67790, "north": 30.47100, "east": -97.67620 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 18,
+    "trailerParkingCapacity": 28,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 9.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.47105,-97.677,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible"],
+  "fieldNotes": {
+    "location": "Roster gave only 'Austin, TX' (city centroid). The Sovos/Rao's Austin operation is the Michael Angelo's Gourmet Foods plant at 200 Michael Angelo Way, Austin TX 78728 (Wells Branch / north Austin) - where Sovos produced Rao's Made for Home and Michael Angelo's frozen Italian foods. Confirmed via web research and Street View signage reading 'MICHAEL ANGELO'S Gourmet Foods, Inc.' Google Maps places 200 Michael Angelo Way at 30.4713683,-97.6768125; locked plant center 30.47105,-97.67700.",
+    "truckGate": "The truck dock yard on the south side of the building is enclosed by chain-link fence (confirmed in Street View). A sliding gate controls the truck-yard access opening on the east side; classified truckGate true.",
+    "guardShack": "No staffed guard booth at the truck-yard gate. The small white-roofed structure near the building edge is a utility building abutting the plant, not a freestanding 1-3-vehicle booth beside the truck lane.",
+    "remoteGs": "True - there is a controlled (fenced) truck gate but no guard shack, implying kiosk/call-box/app check-in.",
+    "drivewayShort": "Short approach: the gate sits close to the perimeter road inside a compact business-park parcel; only 1-2 trucks of stacking depth between the gate and the docks.",
+    "dropYard": "Drop trailers parked along the SE of the fenced truck yard.",
+    "dockDoors": "Dock doors along the south building face with ~12-15 trailers backed in; 10-25 band, estimate ~22, flagged low-confidence.",
+    "urbanRural": "Urban - the plant sits inside a dense north-Austin (Wells Branch) industrial/business park surrounded by large warehouses, within the Austin metro fabric.",
+    "backupSensitive": "False - the gate opens onto an internal business-park cul-de-sac/loop road, not a busy public arterial; a short queue would not block public traffic.",
+    "buildingCount": "Single L-shaped manufacturing/warehouse building.",
+    "scale": "No truck scale visible.",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

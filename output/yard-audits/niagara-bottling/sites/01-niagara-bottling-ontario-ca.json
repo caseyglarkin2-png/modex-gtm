@@ -1,0 +1,60 @@
+{
+  "name": "Niagara Bottling - Ontario CA",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 34.07480, "lng": -117.53200 },
+  "geofences": {
+    "perimeter": { "south": 34.07350, "west": -117.53285, "north": 34.07585, "east": -117.53120 },
+    "truckGate": { "south": 34.07430, "west": -117.53270, "north": 34.07475, "east": -117.53235 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 34.07435, "west": -117.53265, "north": 34.07555, "east": -117.53225 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 12,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 8,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 9.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.07480,-117.53200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "remoteGs", "dockDoors", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "No barrier arm or guard booth at the public road. The truck dock apron on the building's west face IS fenced off from the adjacent employee parking lot, with a gate at the apron mouth - so the working truck yard is access-controlled, but the gate is an internal apron gate, not a road-edge checkpoint. Classified truckGate true on the basis of the fenced apron entry; medium confidence.",
+    "remoteGs": "No guard shack anywhere on site; if the apron gate is controlled it would be via keypad/call-box/driver check-in at the shipping office (driver instructions say check in on foot at the south-side shipping office).",
+    "dockDoors": "~12 canopied dock positions counted along the west face at z20-21; band 10-25, near the low end.",
+    "dropArea": "No marked trailer-drop stalls; apron only holds trailers actively at docks.",
+    "drivewayShort": "Compact parcel in a dense industrial park; apron approach holds only 1-2 trucks.",
+    "trailerParkingCapacity": "Narrow west apron; could stage roughly 8 trailers at/near docks - rough estimate.",
+    "siteAreaAcres": "~9.5 acres derived from perimeter box (building + west apron + south/west employee parking)."
+  },
+  "method": "deep-audit"
+}

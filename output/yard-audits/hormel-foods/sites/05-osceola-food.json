@@ -1,0 +1,55 @@
+{
+  "name": "Osceola Food - Osceola IA",
+  "type": "Meat Processing Plant",
+  "coords": { "lat": 41.02380, "lng": -93.78600 },
+  "geofences": {
+    "perimeter": { "south": 41.02100, "west": -93.79100, "north": 41.02650, "east": -93.78200 },
+    "truckGate": { "south": 41.02180, "west": -93.78760, "north": 41.02240, "east": -93.78680 },
+    "dropYards": [
+      { "south": 41.02130, "west": -93.78580, "north": 41.02300, "east": -93.78340 },
+      { "south": 41.02480, "west": -93.78760, "north": 41.02620, "east": -93.78560 },
+      { "south": 41.02340, "west": -93.79080, "north": 41.02430, "east": -93.78930 }
+    ],
+    "dockAprons": [
+      { "south": 41.02250, "west": -93.78580, "north": 41.02320, "east": -93.78340 }
+    ],
+    "staging": { "south": 41.02200, "west": -93.78760, "north": 41.02300, "east": -93.78640 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45, "trailersVisible": 90, "trailerParkingCapacity": 140,
+    "truckGateCount": 1, "buildingCount": 6, "siteAreaAcres": 90.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.0238,-93.786,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "scale", "dockDoorCount", "multiStep"],
+  "fieldNotes": {
+    "location": "Roster address '2280 W McLane St' and coordinates were wrong (GEOMETRIC_CENTER, landed in residential Osceola). Web research found the real address: 1027 Warren Ave, Osceola IA 50213. Locked center 41.0238,-93.7860 — a large multi-building meat-processing campus (Osceola Food LLC, Hormel-owned since 1995/1996, originally Jimmy Dean, 900+ employees, 24/7 operations).",
+    "truckGate": "A guard booth with an apparent gate arm controls the truck entrance on the SW access road (~41.0221,-93.7872, clearly visible at z20). The campus is enclosed by chain-link perimeter fence (confirmed in Street View). Trucks were observed queued at the checkpoint.",
+    "guardShack": "Small (~1-vehicle footprint) white booth set beside the truck lane at the SW checkpoint, with a thin barrier line across the lane. Consistent with a 900-employee secured meat plant.",
+    "remoteGs": "False — a staffed guard booth is present.",
+    "drivewayLong": "Long SW access road from the public road to the checkpoint and on to the docks easily holds a 3+ truck queue.",
+    "postGateStaging": "Paved holding area inside the gate before the docks.",
+    "fastLaneOpportunity": "Wide access road and paved aprons leave room for a bypass/express lane.",
+    "dockDoors": "25-50 band — dock faces with trailers backed in along the south building face plus other faces. Overhead estimate, flagged uncertain.",
+    "dropArea": "50+ band — very extensive trailer drop yards: a packed south yard (~40-50 trailers), additional trailer rows north of the plant, and trailers at the SW warehouse.",
+    "dropYard": "Multiple dedicated trailer-storage lots (south, north, SW warehouse).",
+    "shipRcvSeparate": "Multiple distinct dock banks on different building faces across a multi-building campus.",
+    "multipleFacilities": "Campus of 6+ buildings including a large SW distribution/cold-storage warehouse connected by the internal access road.",
+    "scale": "A truck scale is plausible at the SW checkpoint for a plant of this scale but not positively isolated in imagery; flagged uncertain.",
+    "railServed": "No rail spur into the property.",
+    "urbanRural": "Plant sits in an industrial area on the edge of Osceola (pop ~5,000) surrounded by farmland — Rural."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,57 @@
+{
+  "name": "Kenco LIXIL Americas DC - Groveport OH",
+  "type": "Dedicated Distribution Center",
+  "coords": { "lat": 39.83950, "lng": -82.91820 },
+  "geofences": {
+    "perimeter": { "south": 39.83660, "west": -82.92120, "north": 39.84200, "east": -82.91620 },
+    "truckGate": { "south": 39.84100, "west": -82.91790, "north": 39.84180, "east": -82.91680 },
+    "dropYards": [
+      { "south": 39.83720, "west": -82.91950, "north": 39.84080, "east": -82.91830 },
+      { "south": 39.83720, "west": -82.91720, "north": 39.84080, "east": -82.91620 }
+    ],
+    "dockAprons": [
+      { "south": 39.83700, "west": -82.92030, "north": 39.84110, "east": -82.91930 },
+      { "south": 39.83700, "west": -82.91740, "north": 39.84110, "east": -82.91640 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 70.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.83950,-82.91820,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "Confirmed: 3099 Rohr Road, Groveport OH 43125 - the ~906,000 SF LIXIL Americas distribution center managed by Kenco (BusinessWire/Kenco announcement May 2024). Roster ROOFTOP coords pin the NW corner of the building; verified on satellite + Street View. The DC is a two-building tan-roofed complex in the Rickenbacker/Groveport logistics hub; the roster coordinate sits on the west building.",
+    "truckGate": "Open access driveways off Rohr Road - no barrier arm, no gate, no guard booth. Street View (capture 2024-08) shows wide open paved entrance drives. Drive aisles between the two buildings are open as well.",
+    "guardShack": "No guard booth observed at any property entrance.",
+    "remoteGs": "False - no truck gate present, so remote check-in does not apply.",
+    "shipRcvSeparate": "Cross-dock building - continuous dock banks on BOTH long faces (SW and NE), trailers backed in on both. Shipping and receiving from physically separate dock clusters.",
+    "dropYard": "Large trailer drop yards along both dock faces and in the central aisle between the two buildings, with 70+ trailers parked.",
+    "dockDoors": "Cross-dock building ~370 m long with dock doors on both long faces; combined count well into the 50+ band. dockDoorCount ~90 is an overhead estimate.",
+    "multipleFacilities": "The LIXIL Americas DC is a two-building tan-roofed complex; both buildings form the ~906,000 SF facility. Marked true at campus level.",
+    "fastLaneOpportunity": "Wide aprons and drives leave ample room to add an express/bypass lane.",
+    "urbanRural": "Groveport is a southeast Columbus suburb inside the Columbus OH metro / Rickenbacker logistics hub - dense industrial fabric. Urban.",
+    "connectivityIssue": "False - a cellular tower stands adjacent to the site on Rohr Road; coverage is strong.",
+    "railServed": "No rail spur enters the property.",
+    "confidence": "High - facility positively confirmed by address and the May 2024 LIXIL/Kenco announcement; ROOFTOP-accurate coords verified on current imagery."
+  },
+  "method": "deep-audit"
+}

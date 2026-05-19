@@ -1,0 +1,50 @@
+{
+  "name": "Campbell's - Franklin WI",
+  "type": "Manufacturing - tortilla chips (Late July; capacity expanded 2024)",
+  "coords": { "lat": 42.8594, "lng": -87.9863 },
+  "geofences": {
+    "perimeter": { "south": 42.8585, "west": -87.9888, "north": 42.8608, "east": -87.9845 },
+    "truckGate": { "south": 42.86055, "west": -87.98875, "north": 42.86075, "east": -87.98835 },
+    "dropYards": [
+      { "south": 42.85895, "west": -87.98775, "north": 42.85935, "east": -87.98730 }
+    ],
+    "dockAprons": [
+      { "south": 42.85895, "west": -87.98760, "north": 42.85955, "east": -87.98690 },
+      { "south": 42.85910, "west": -87.98520, "north": 42.85945, "east": -87.98480 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14, "trailersVisible": 13, "trailerParkingCapacity": 18,
+    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 16.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.8594,-87.9863,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoors", "shipRcvSeparate", "dropArea", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "identity": "Roster address 9999 S 60th St is incorrect; the Baptista's Bakery / Campbell Snacks tortilla-chip plant is at 4625 W Oakwood Park Dr in the Franklin Business Park. Locked the large white industrial building at 42.8594,-87.9863 - footprint measures ~205m x 114m (~252,000 sq ft, matches the ~250-300K sq ft reported plant size), has a curved-glass office wing at the NW corner and ~10 dock doors with trailers backed in on the SW face. 2019 Street View showed a 'Central' monument sign (likely a former tenant or office sub-tenant); building footprint, food-plant dock layout, and Franklin Business Park location all match the Campbell snacks plant - medium confidence on identity.",
+    "truckGate": "Both driveways from the road (NW truck/parking drive and NE office drive) are open paved entrances with no barrier arm, sliding gate, or pinch-point checkpoint. truckGate=false.",
+    "guardShack": "No booth structure at either driveway; office front and dock areas show no guard shack.",
+    "drivewayLong": "Long N-S internal drive runs from the road down the W side past parking to the SW dock apron - holds 3+ trucks.",
+    "dockDoors": "~10 dock doors on the SW face (trailers backed in confirm) plus a small dock/material-handling apron at the SE corner; total estimated 12-14 -> 10-25 band. Low confidence on exact count.",
+    "dropArea": "3-4 free-standing trailers parked near the SW dock apron without tractors - small drop area, 0-10 band.",
+    "dropYard": "A modest cluster of parked trailers exists adjacent to the SW dock apron; counted as a small on-site drop yard.",
+    "shipRcvSeparate": "Main dock bank on SW face plus a separate small dock/staging apron on the SE corner - likely separate ship/receive clusters; medium confidence.",
+    "entryExitSeparate": "Two distinct driveways to the road (NW and NE) allow separate in/out routing.",
+    "urbanRural": "Franklin WI is a suburb within the Milwaukee metro; the site sits in a dense business park - Urban.",
+    "trailerParkingCapacity": "Estimated from SW apron + adjacent paved space; honest overhead estimate."
+  },
+  "method": "deep-audit"
+}

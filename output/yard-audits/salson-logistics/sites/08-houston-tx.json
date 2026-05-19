@@ -1,0 +1,47 @@
+{
+  "name": "SalSon Logistics - Houston TX",
+  "type": "Drayage Terminal / Truck & Trailer Parking Yard",
+  "coords": { "lat": 29.806200, "lng": -95.275000 },
+  "geofences": {
+    "perimeter": { "south": 29.804500, "west": -95.276900, "north": 29.807400, "east": -95.272600 },
+    "truckGate": { "south": 29.805350, "west": -95.274700, "north": 29.805650, "east": -95.274200 },
+    "dropYards": [
+      { "south": 29.804900, "west": -95.276700, "north": 29.807300, "east": -95.272800 }
+    ],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 160,
+    "trailerParkingCapacity": 500,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 16.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.806200,-95.275000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "NONE", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "8357 Liberty Rd is the 'Outpost' / 'Secure Trailer Lots' commercial truck-parking yard — a fully fenced 16-acre lot. 2021 Street View shows metal-panel perimeter fencing with a gravel driveway gap; the yard is gated.",
+    "guardShack": "No staffed guard booth visible at the gate. Outpost truck-parking yards operate self-service with app/keypad access, so remoteGs is true. Flagged uncertain — 2021 imagery is the most recent Street View.",
+    "dockDoors": "No dock-door warehouse. The site is an open dirt/gravel truck and trailer parking yard with only a small office/support structure. LogiCore lists SalSon-Houston dock doors as 'No'.",
+    "dropArea": "16-acre yard rated for 500 truck/trailer spaces, packed with rows of parked trailers; clearly 50+.",
+    "fastLaneOpportunity": "Vast open gravel area with ample room for additional lanes / bypass at the entry.",
+    "siteAreaAcres": "~16 acres per the Outpost / LoopNet listing for 8357 Liberty Rd.",
+    "facilityNature": "SalSon uses this third-party Outpost truck-parking yard as its Houston drayage trailer-pool / staging yard; it is not a SalSon-built warehouse."
+  },
+  "method": "deep-audit"
+}

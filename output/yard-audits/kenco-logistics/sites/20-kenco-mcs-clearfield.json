@@ -1,0 +1,53 @@
+{
+  "name": "Kenco MCS Clearfield - Clearfield UT",
+  "type": "Multi-Client Distribution Center",
+  "coords": { "lat": 41.10090, "lng": -112.03460 },
+  "geofences": {
+    "perimeter": { "south": 41.10005, "west": -112.03570, "north": 41.10180, "east": -112.03360 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 41.10025, "west": -112.03555, "north": 41.10165, "east": -112.03445 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 7,
+    "trailerParkingCapacity": 10,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 5.5,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.10090,-112.03460,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "dropArea", "shipRcvSeparate", "siteAreaAcres"],
+  "fieldNotes": {
+    "location": "Building G8, 7th Street, Freeport Center, Clearfield UT 84016 - positively confirmed. Roster ROOFTOP geocode (41.100339,-112.035023) matches the Google geocode for 'G-8, 7th St' exactly, and Street View shows a 'G-8 7th Street' sign on the building. Freeport Center is a 680-acre former WWII military depot with 78 long warehouse buildings on an internal street grid; Kenco occupies building G8 (~90,000 SF, food grade).",
+    "buildingLayout": "G8 is one long, narrow Freeport Center warehouse (~230 m x 35 m) running NW-SE. Per Freeport Center's published description, most buildings have a railroad loading dock on one side and a truck loading dock on the other.",
+    "truckGate": "FALSE. Individual Freeport buildings have no truck gate of their own - trucks pull directly off the internal Freeport streets and back into the comb-shaped dock canopy. No barrier arm, gate, or guard booth at building G8. (Note: the overall Freeport Center complex may have perimeter control, but G8 itself has none.)",
+    "guardShack": "FALSE. No staffed booth at the building.",
+    "remoteGs": "FALSE - no building-level gate.",
+    "dockDoors": "Truck docks are under a comb-shaped canopy along one long side; estimated ~16 truck dock doors for a building this size. Band 10-25. Low-confidence count - the canopy obscures exact door count from overhead.",
+    "shipRcvSeparate": "TRUE (Freeport-pattern) - rail dock on one long side, truck dock on the opposite long side, so inbound rail receiving and outbound truck shipping run from physically separate building faces. Flagged - inferred from the Freeport Center standard layout rather than directly counted.",
+    "dropArea": "Only a few trailers park along the street frontage; no dedicated per-building drop lot. Band 0-10.",
+    "drivewayShort": "Trucks back into the comb dock directly from the narrow internal street - the approach holds only 1-2 trucks.",
+    "backupSensitive": "TRUE - a backing truck occupies the narrow internal Freeport street; a queue would block the shared street and adjacent buildings' access.",
+    "multipleFacilities": "TRUE - G8 sits within the 78-building Freeport Center campus; many large building clusters share the property.",
+    "railServed": "TRUE - rail spurs run through the Freeport Center streets and along the building rows; G8 has a rail dock per the Freeport standard layout.",
+    "urbanRural": "Within the Clearfield/Ogden metro and the dense Freeport Center industrial complex - Urban."
+  },
+  "method": "deep-audit"
+}

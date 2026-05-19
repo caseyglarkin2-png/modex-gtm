@@ -1,0 +1,55 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+"Ford - Dearborn Truck Plant, Dearborn MI",Vehicle Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,2,2,YES,,,YES,,,,YES,,YES,Urban,,YES,,YES,"https://www.google.com/maps/@42.31280,-83.16400,400m/data=!3m1!1e3"
+"Ford - Kentucky Truck Plant, Louisville KY",Vehicle Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@38.29400,-85.53350,400m/data=!3m1!1e3"
+"Ford - Kansas City Assembly Plant, Claycomo MO",Vehicle Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@39.20250,-94.47700,400m/data=!3m1!1e3"
+"Ford - Louisville Assembly Plant, Louisville KY",Vehicle Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,2,2,YES,,,YES,,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@38.15470,-85.72850,400m/data=!3m1!1e3"
+"Ford - Michigan Assembly Plant, Wayne MI",Vehicle Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,2,2,YES,,,YES,,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@42.27640,-83.41360,400m/data=!3m1!1e3"
+"Ford - Chicago Assembly Plant, Chicago IL",Vehicle Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,1,YES,,,YES,,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@41.66662,-87.559702,400m/data=!3m1!1e3"
+"Ford - Ohio Assembly Plant, Avon Lake OH",Vehicle Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,2,2,YES,,,YES,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@41.48720,-82.06550,400m/data=!3m1!1e3"
+"Ford - Flat Rock Assembly Plant, Flat Rock MI",Vehicle Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,2,2,YES,,,YES,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@42.10560,-83.24820,400m/data=!3m1!1e3"
+"Ford - BlueOval City / Tennessee Electric Vehicle Center, Stanton TN","Vehicle Assembly Plant (greenfield, ramp-up)",#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,2,2,YES,,,YES,,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@35.42000,-89.41800,400m/data=!3m1!1e3"
+"Ford - BlueOval SK Battery Park, Glendale KY",Battery Manufacturing Plant (JV with SK On),#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,YES,,,YES,,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@37.586,-85.88,400m/data=!3m1!1e3"
+"Ford - Dearborn Stamping Plant, Dearborn MI",Stamping Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,,YES,,,,,,,,,Urban,,YES,,,"https://www.google.com/maps/@42.3068,-83.1605,400m/data=!3m1!1e3"
+"Ford - Dearborn Engine Plant, Dearborn MI",Engine Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,,YES,,,,,,,,,Urban,,YES,,,"https://www.google.com/maps/@42.3128,-83.1588,400m/data=!3m1!1e3"
+"Ford - Cleveland Engine Plant, Brook Park OH",Engine Plant,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@41.41645,-81.8219,400m/data=!3m1!1e3"
+"Ford - Lima Engine Plant, Lima OH",Engine Plant,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,1,YES,,YES,,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@40.7775,-84.086,400m/data=!3m1!1e3"
+"Ford - Livonia Transmission Plant, Livonia MI",Transmission Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,YES,,,,YES,,,YES,Urban,,YES,,YES,"https://www.google.com/maps/@42.3715,-83.398,400m/data=!3m1!1e3"
+"Ford - Sharonville Transmission Plant, Sharonville OH",Transmission Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,2,YES,,,YES,,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@39.27229,-84.42525,400m/data=!3m1!1e3"
+"Ford - Van Dyke Electric Powertrain Center, Sterling Heights MI",Powertrain / Transmission Plant,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@42.5978,-83.0355,400m/data=!3m1!1e3"
+"Ford - Sterling Axle Plant, Sterling Heights MI",Axle / Components Plant,#1,Gate + GS (not BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@42.58358,-83.04497,400m/data=!3m1!1e3"
+"Ford - Rawsonville Components Plant, Ypsilanti MI",Components / Battery Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,YES,,,YES,,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@42.19920,-83.55700,400m/data=!3m1!1e3"
+"Ford - Buffalo Stamping Plant, Hamburg NY",Stamping Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@42.78650,-78.84280,400m/data=!3m1!1e3"
+"Ford - Chicago Stamping Plant, Chicago Heights IL",Stamping Plant,#4,Gate + GS (BU sens.),,,,,,,,,,,YES,YES,,,YES,,YES,YES,YES,,1,1,,,,YES,,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@41.50315,-87.60230,400m/data=!3m1!1e3"
+"Ford - National Parts Distribution Center, Livonia MI",Parts Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@42.37280,-83.33600,400m/data=!3m1!1e3"
+"Ford - Parts Redistribution Center, Brownstown Township MI",Parts Distribution / Redistribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@42.17640,-83.28120,400m/data=!3m1!1e3"
+"Ford - Parts Distribution Center, Rancho Cucamonga CA",Parts Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,YES,,,,YES,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@34.09990,-117.55250,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,1,4%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,1,4%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,13,54%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,3,13%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,6,25%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,24,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,19,79%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,9,38%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,18,75%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,6,25%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,24,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,24,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

@@ -1,0 +1,48 @@
+{
+  "name": "SalSon Logistics - North Charleston SC",
+  "type": "Drayage Terminal / Food-Grade Warehouse",
+  "coords": { "lat": 32.919050, "lng": -80.066800 },
+  "geofences": {
+    "perimeter": { "south": 32.918100, "west": -80.068000, "north": 32.919650, "east": -80.065900 },
+    "truckGate": { "south": 32.919150, "west": -80.068050, "north": 32.919400, "east": -80.067700 },
+    "dropYards": [
+      { "south": 32.918150, "west": -80.067350, "north": 32.918900, "east": -80.066050 }
+    ],
+    "dockAprons": [
+      { "south": 32.918850, "west": -80.067350, "north": 32.919250, "east": -80.066850 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 28,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 4.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.919050,-80.066800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "guardShack"],
+  "fieldNotes": {
+    "truckGate": "Per LoopNet, 7225 Cross County Rd is a 17-door truck terminal with a 3.3-acre rock/gravel fenced yard. The site is fully enclosed; trucks enter via a single internal driveway off Cross County Rd.",
+    "guardShack": "No staffed booth resolvable. The terminal is set well back behind a treeline and Street View cannot see the gate; satellite shows an internal driveway with no booth structure. remoteGs marked true; flagged uncertain.",
+    "dockDoors": "LoopNet building listing for 7225 Cross County Rd specifies 16 dock-high doors + 1 drive-in door (a '17-door truck terminal'). Reported as 10-25 band, dockDoorCount 16.",
+    "dropArea": "Large rock/dirt yard south of the building holds rows of intermodal containers and trailers (red/green/orange units visible) — a crossdock/drayage drop yard.",
+    "fastLaneOpportunity": "Wide unpaved rock yard with ample room to add lanes/bypass at the entry.",
+    "siteAreaAcres": "~3.3-acre fenced yard per LoopNet plus building footprint and driveway ~4.3 acres total."
+  },
+  "method": "deep-audit"
+}

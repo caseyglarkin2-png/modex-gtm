@@ -1,0 +1,65 @@
+{
+  "name": "Universal Logistics - Mossville Contract Logistics Warehouse - Mossville IL",
+  "type": "Contract Logistics / Value-Added Warehouse",
+  "coords": { "lat": 40.84100, "lng": -89.55600 },
+  "geofences": {
+    "perimeter": { "south": 40.83550, "west": -89.56350, "north": 40.84600, "east": -89.54850 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 40.84150, "west": -89.55400, "north": 40.84400, "east": -89.55050 }
+    ],
+    "dockAprons": [
+      { "south": 40.84050, "west": -89.55600, "north": 40.84300, "east": -89.55350 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 50,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 180.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.841,-89.556,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "shipRcvSeparate", "scale"],
+  "fieldNotes": {
+    "siteResolution": "No street address in roster. Resolved to the Caterpillar Mossville manufacturing plant complex along Old Galena Road / IL-29, Mossville IL (~40.8410, -89.5560) — the large contiguous Caterpillar plant identified via the Caterpillar Mossville plant address (1900 E Old Galena Road) and EPA Superfund records. Universal Logistics' Mossville operation provides value-added / sequencing / contract-logistics support embedded in the Caterpillar engine/manufacturing complex. The Universal-operated sub-area within this very large Caterpillar campus cannot be isolated from imagery — medium confidence.",
+    "truckGate": "A Caterpillar manufacturing plant of this scale operates controlled truck-side access; internal entrance roads off Old Galena Road run into the plant. No barrier arm / booth was directly resolved in available imagery — classed truckGate true with remoteGs true (gate/checkpoint access without a clearly visible staffed booth). Flagged uncertain.",
+    "guardShack": "No staffed guard booth positively resolved in the imagery captured. Caterpillar campuses typically gate-control the truck side; classed guardShack false / remoteGs true pending direct confirmation — flagged uncertain.",
+    "dockDoors": "Very large multi-building plant complex; dock banks are present along multiple building faces. Estimate 50+ dock doors total across the complex — flagged as an overhead estimate.",
+    "shipRcvSeparate": "A complex of this size runs inbound parts receiving and outbound shipping from physically distinct dock clusters on different building faces — classed shipRcvSeparate true (inferred from plant scale, flagged uncertain).",
+    "dropYard": "Trailer staging rows visible along the plant's internal roads/aprons; dedicated trailer staging present.",
+    "multipleFacilities": "Multi-building Caterpillar plant campus — true.",
+    "railServed": "No active rail spur clearly resolved entering the audited building footprint; classed false.",
+    "urbanRural": "Edge-of-river-bluff rural setting — farmland surrounds the complex on the west/north; Illinois River and a small residential strip on the SE across IL-29. Rural.",
+    "scale": "No truck scale positively identified — flagged uncertain given the campus scale."
+  },
+  "method": "deep-audit"
+}

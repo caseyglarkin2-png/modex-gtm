@@ -1,0 +1,55 @@
+{
+  "name": "Honda Transmission Mfg. of America - Russells Point OH",
+  "type": "Transmission Plant",
+  "coords": { "lat": 40.44750, "lng": -83.89950 },
+  "geofences": {
+    "perimeter": { "south": 40.44350, "west": -83.90420, "north": 40.45150, "east": -83.89400 },
+    "truckGate": { "south": 40.44780, "west": -83.90400, "north": 40.44870, "east": -83.90300 },
+    "dropYards": [
+      { "south": 40.44760, "west": -83.89720, "north": 40.45010, "east": -83.89480 },
+      { "south": 40.44550, "west": -83.89700, "north": 40.44760, "east": -83.89500 }
+    ],
+    "dockAprons": [
+      { "south": 40.44830, "west": -83.89800, "north": 40.45000, "east": -83.89600 },
+      { "south": 40.44760, "west": -83.90050, "north": 40.44900, "east": -83.89850 }
+    ],
+    "staging": { "south": 40.44850, "west": -83.89980, "north": 40.45030, "east": -83.89720 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 80.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.4475,-83.8995,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount", "trailersVisible", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Plant property is fully enclosed by chain-link fence with green privacy slats (confirmed in Street View from multiple headings along SR 235). A single managed driveway crosses the fence line from SR 235; entrance has lane markings and a covered island/canopy - controlled truck gate.",
+    "guardShack": "A small white booth-sized structure with an adjacent canopy island sits in the entrance driveway just inside the property line (z20 satellite). Consistent with a staffed guard booth at a Honda powertrain plant; classified true, flagged uncertain because Street View pano coverage stays on the public road and does not directly image the booth.",
+    "postGateStaging": "Wide internal paved aprons between the gate and the dock/trailer lots provide deep queuing room - drivewayLong = true.",
+    "dropArea": "Multiple organized trailer-parking rows east of the building with ~90 trailers visible across the drop lots - 25-50 band.",
+    "dockDoors": "Dock lines with trailers backed in on the east and northeast building faces; ~40 doors estimated, flagged approximate.",
+    "shipRcvSeparate": "Docks and trailer rows are concentrated along the east/northeast faces in one general cluster; no clearly separate second ship-vs-receive bank confirmed - false, flagged uncertain.",
+    "railServed": "No rail spur runs into the property.",
+    "urbanRural": "Rural - plant sits amid farmland near Russells Point in Logan County, OH; no dense metro fabric.",
+    "multipleFacilities": "Single main transmission plant building with attached wings plus a few small support/storage buildings - treated as one facility cluster (long warehouse buildings west of SR 235 appear separate-use).",
+    "siteAreaAcres": "~80 acres derived from the perimeter box; approximate.",
+    "scale": "No truck scale identified."
+  },
+  "method": "deep-audit"
+}

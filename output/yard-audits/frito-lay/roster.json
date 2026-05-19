@@ -1,0 +1,488 @@
+{
+  "account": "Frito-Lay",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 30,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Frito-Lay - Modesto CA",
+      "city": "Modesto",
+      "state": "CA",
+      "type": "Manufacturing Plant",
+      "address": "600 Garner Rd, Modesto, CA 95357",
+      "lat": 37.631499,
+      "lng": -120.920769,
+      "source": "Dossier flagship plant (500k sq ft, 80 acres, zero-emissions showcase); address from Yelp/Yellowpages; co-located Modesto Exchange Warehouse at 305 Codoni Ave",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1713
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Frito-Lay - Rancho Cucamonga CA (DC)",
+      "city": "Rancho Cucamonga",
+      "state": "CA",
+      "type": "Distribution Center",
+      "address": "9535 Archibald Ave, Rancho Cucamonga, CA 91730",
+      "lat": 34.080051,
+      "lng": -117.591112,
+      "source": "Dossier — manufacturing ended June 2025 but warehouse/distribution/fleet/transportation continue; now DC-only absorbing inbound. Address from Yelp/FoodBusinessNews",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 740
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Frito-Lay - Memphis TN",
+      "city": "Memphis",
+      "state": "TN",
+      "type": "Manufacturing Plant",
+      "address": "5160 E Raines Rd, Memphis, TN 38118",
+      "lat": 35.035607,
+      "lng": -89.891572,
+      "source": "Dossier — Einride EV deployment site; Frito-Lay Memphis plant, address from public business listings",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 19
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Frito-Lay - Perry GA (Kathleen)",
+      "city": "Kathleen",
+      "state": "GA",
+      "type": "Manufacturing Plant",
+      "address": "1200 GA Highway 247 S, Kathleen, GA 31047",
+      "lat": 32.483737,
+      "lng": -83.609766,
+      "source": "Largest Frito-Lay snack plant in the U.S. by bags produced; address from PotatoPro / Houston County Georgia gov",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 4244
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Frito-Lay - Casa Grande AZ",
+      "city": "Casa Grande",
+      "state": "AZ",
+      "type": "Manufacturing Plant",
+      "address": "1450 W Maricopa-Casa Grande Hwy, Casa Grande, AZ 85193",
+      "lat": 32.900692,
+      "lng": -111.793276,
+      "source": "Near net-zero flagship plant (Fritos, Lay's, Ruffles, Doritos, Tostitos, Cheetos, SunChips); address from Yelp / Pinal County / Levelset",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 160
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Frito-Lay - Kern Plant Bakersfield CA",
+      "city": "Bakersfield",
+      "state": "CA",
+      "type": "Manufacturing Plant",
+      "address": "28490 Highway 58, Bakersfield, CA 93308",
+      "lat": 35.367588,
+      "lng": -119.07772,
+      "source": "World's largest Frito factory, LEED Gold; address per Center for Land Use Interpretation / GreenBusinessCA (approximate)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 1
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Frito-Lay - Killingly CT",
+      "city": "Dayville",
+      "state": "CT",
+      "type": "Manufacturing Plant",
+      "address": "20 Killingly Commons Dr, Dayville (Killingly), CT 06241",
+      "lat": 41.84156,
+      "lng": -71.88248,
+      "source": "Opened 1980, ~740 FT workers, Connecticut's first existing manufacturing site to achieve LEED Gold; address approximate from fritolay.com news / PotatoPro",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 2
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Frito-Lay - Topeka KS",
+      "city": "Topeka",
+      "state": "KS",
+      "type": "Manufacturing Plant",
+      "address": "4236 SW Kirklawn Ave, Topeka, KS 66609",
+      "lat": 38.987236,
+      "lng": -95.691136,
+      "source": "Site of July 2021 labor strikes; address from Yelp / PotatoPro",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 279
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Frito-Lay - San Antonio TX",
+      "city": "San Antonio",
+      "state": "TX",
+      "type": "Manufacturing Plant",
+      "address": "4855 Greatland, San Antonio, TX 78218",
+      "lat": 29.473168,
+      "lng": -98.396746,
+      "source": "Processes 150M+ lbs potatoes annually; address from Yelp / Foodstuffs",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 3745
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Frito-Lay - Arlington TX",
+      "city": "Arlington",
+      "state": "TX",
+      "type": "Manufacturing Plant",
+      "address": "5500 Watson Rd, Arlington, TX 76018",
+      "lat": 32.657998,
+      "lng": -97.062805,
+      "source": "Named in PotatoPro plant roster and dossier-region; address approximate from public business listings",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 5
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Frito-Lay - Brookhollow Plant Dallas TX",
+      "city": "Dallas",
+      "state": "TX",
+      "type": "Manufacturing Plant",
+      "address": "1500 N Cockrell Hill Rd, Dallas, TX 75211",
+      "lat": 32.762606,
+      "lng": -96.894419,
+      "source": "Brookhollow plant named in PotatoPro roster; address approximate from public listings (Dallas area)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 10
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Frito-Lay - Beloit WI",
+      "city": "Beloit",
+      "state": "WI",
+      "type": "Manufacturing Plant",
+      "address": "2810 Kennedy Dr, Beloit, WI 53511",
+      "lat": 42.518064,
+      "lng": -88.981689,
+      "source": "Address from Groupon / public business listings",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 19
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Frito-Lay - Canton OH",
+      "city": "Canton",
+      "state": "OH",
+      "type": "Manufacturing Plant",
+      "address": "5555 Sterilite St SE, Canton, OH 44730",
+      "lat": 40.737888,
+      "lng": -81.502568,
+      "source": "Named in PotatoPro plant roster; address approximate from public listings (Canton area)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 17150
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Frito-Lay - Frankfort IN (Core & East Plants)",
+      "city": "Frankfort",
+      "state": "IN",
+      "type": "Manufacturing Plant",
+      "address": "323 S County Road 300 W, Frankfort, IN 46041",
+      "lat": 40.283092,
+      "lng": -86.56001,
+      "source": "Frankfort Core and East plants (PotatoPro lists two); East Plant address from Waze/Yelp",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 2643
+      }
+    },
+    {
+      "idx": 15,
+      "name": "Frito-Lay - Kirkwood Plant Binghamton NY",
+      "city": "Kirkwood",
+      "state": "NY",
+      "type": "Manufacturing Plant",
+      "address": "200 Frito Lay Dr, Kirkwood, NY 13795",
+      "lat": 42.039983,
+      "lng": -75.79687,
+      "source": "Binghamton/Kirkwood plant named in plant listings; address approximate from public listings",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 4
+      }
+    },
+    {
+      "idx": 16,
+      "name": "Frito-Lay - Lynchburg VA",
+      "city": "Lynchburg",
+      "state": "VA",
+      "type": "Manufacturing Plant",
+      "address": "4500 Murray Pl, Lynchburg, VA 24502",
+      "lat": 37.371152,
+      "lng": -79.170245,
+      "source": "Named in plant roster; address approximate from public business listings",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 92
+      }
+    },
+    {
+      "idx": 17,
+      "name": "Frito-Lay - Charlotte NC",
+      "city": "Charlotte",
+      "state": "NC",
+      "type": "Manufacturing Plant",
+      "address": "2911 Nevada Blvd, Charlotte, NC 28273",
+      "lat": 35.115626,
+      "lng": -80.941746,
+      "source": "Frito-Lay Inc Manufacturing Plant; address from Hub.biz business listing",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 5764
+      }
+    },
+    {
+      "idx": 18,
+      "name": "Frito-Lay - Aberdeen MD",
+      "city": "Aberdeen",
+      "state": "MD",
+      "type": "Manufacturing Plant",
+      "address": "1080 Old Philadelphia Rd, Aberdeen, MD 21001",
+      "lat": 39.489025,
+      "lng": -76.189621,
+      "source": "Named in PotatoPro plant roster; address approximate from public listings",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 80
+      }
+    },
+    {
+      "idx": 19,
+      "name": "Frito-Lay - Vancouver WA",
+      "city": "Vancouver",
+      "state": "WA",
+      "type": "Manufacturing Plant",
+      "address": "4808 NW Fruit Valley Rd, Vancouver, WA 98660",
+      "lat": 45.656846,
+      "lng": -122.691343,
+      "source": "Manufactures/distributes for Northwest, western Canada, sole provider to Alaska; address from Yelp / WA Ecology records",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 53
+      }
+    },
+    {
+      "idx": 20,
+      "name": "Frito-Lay - Jonesboro AR",
+      "city": "Jonesboro",
+      "state": "AR",
+      "type": "Manufacturing Plant",
+      "address": "2810 Quality Way, Jonesboro, AR 72401",
+      "lat": 35.814768,
+      "lng": -90.56181,
+      "source": "Address from TruckMap / Yellowpages",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 8439
+      }
+    },
+    {
+      "idx": 21,
+      "name": "Frito-Lay - Pulaski TN",
+      "city": "Pulaski",
+      "state": "TN",
+      "type": "Manufacturing Plant",
+      "address": "298 Industrial Blvd, Pulaski, TN 38478",
+      "lat": 35.215835,
+      "lng": -87.060473,
+      "source": "Address from Yelp / Giles County Chamber",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 90
+      }
+    },
+    {
+      "idx": 22,
+      "name": "Frito-Lay - Fayetteville TN",
+      "city": "Fayetteville",
+      "state": "TN",
+      "type": "Manufacturing Plant",
+      "address": "101 Industrial Blvd, Fayetteville, TN 37334",
+      "lat": 35.156146,
+      "lng": -86.510063,
+      "source": "Production began 1997, ~500 employees; address from Elk Valley Times / Fayetteville Main Street",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 93
+      }
+    },
+    {
+      "idx": 23,
+      "name": "Frito-Lay - Rosenberg TX",
+      "city": "Rosenberg",
+      "state": "TX",
+      "type": "Manufacturing Plant",
+      "address": "3310 Highway 36 S, Rosenberg, TX 77471",
+      "lat": 29.57769,
+      "lng": -95.86902,
+      "source": "Address from Yelp",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 8524
+      }
+    },
+    {
+      "idx": 24,
+      "name": "Frito-Lay - Williamsport PA (DC)",
+      "city": "Williamsport",
+      "state": "PA",
+      "type": "Distribution Center",
+      "address": "220 N Reach Rd, Williamsport, PA 17701",
+      "lat": 41.227785,
+      "lng": -77.068961,
+      "source": "Frito-Lay warehouse/distribution facility; address from search results / D&B",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 44
+      }
+    },
+    {
+      "idx": 25,
+      "name": "Frito-Lay - Denver CO",
+      "city": "Denver",
+      "state": "CO",
+      "type": "Manufacturing Plant",
+      "address": "3601 Brighton Blvd, Denver, CO 80216",
+      "lat": 39.771666,
+      "lng": -104.977696,
+      "source": "Named in reference.com plant list; address approximate from public listings",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 32
+      }
+    },
+    {
+      "idx": 26,
+      "name": "Frito-Lay - Orlando FL",
+      "city": "Orlando",
+      "state": "FL",
+      "type": "Manufacturing Plant",
+      "address": "8000 S Orange Ave, Orlando, FL 32809",
+      "lat": 28.4546,
+      "lng": -81.365487,
+      "source": "Two FLNA Orlando facilities announced for closure Nov 2025 (dossier); address approximate from public listings",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 26
+      }
+    },
+    {
+      "idx": 27,
+      "name": "Frito-Lay - West Valley City UT (DC)",
+      "city": "West Valley City",
+      "state": "UT",
+      "type": "Distribution Center",
+      "address": "3450 W 2100 S, West Valley City, UT 84119",
+      "lat": 40.727376,
+      "lng": -111.97316,
+      "source": "Large Frito-Lay distribution center; address approximate from public listings",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 50
+      }
+    },
+    {
+      "idx": 28,
+      "name": "Frito-Lay - Forest City NC (DC)",
+      "city": "Forest City",
+      "state": "NC",
+      "type": "Distribution Center",
+      "address": "277 Lawing Rd, Forest City, NC 28043",
+      "lat": 35.33886,
+      "lng": -81.886211,
+      "source": "Frito-Lay PepsiCo distribution warehouse / product exchange center; address from Matthews property listing",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1876
+      }
+    },
+    {
+      "idx": 29,
+      "name": "Frito-Lay - Prichard AL (DC)",
+      "city": "Prichard",
+      "state": "AL",
+      "type": "Distribution Center",
+      "address": "Prichard, AL 36610",
+      "lat": 30.732069,
+      "lng": -88.060756,
+      "source": "New Frito-Lay distribution center for the Mobile, Alabama region (Business Facilities / WKRG); exact street address not yet published",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 49
+      }
+    },
+    {
+      "idx": 30,
+      "name": "Frito-Lay - Burbank WA (DC)",
+      "city": "Burbank",
+      "state": "WA",
+      "type": "Distribution Center",
+      "address": "Burbank, WA 99323",
+      "lat": 46.199857,
+      "lng": -119.013062,
+      "source": "~107,200 sq ft Frito-Lay distribution warehouse; exact street address not published in sources",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 1254
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

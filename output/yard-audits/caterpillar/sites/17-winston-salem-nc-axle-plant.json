@@ -1,0 +1,50 @@
+{
+  "name": "Caterpillar - Winston-Salem NC Axle Plant",
+  "type": "Manufacturing plant (axles, ~850k sq ft on 102 acres)",
+  "coords": { "lat": 36.06030, "lng": -80.11800 },
+  "geofences": {
+    "perimeter": { "south": 36.05750, "west": -80.12100, "north": 36.06350, "east": -80.11450 },
+    "truckGate": { "south": 36.06150, "west": -80.11820, "north": 36.06220, "east": -80.11730 },
+    "dropYards": [
+      { "south": 36.06090, "west": -80.11830, "north": 36.06250, "east": -80.11620 },
+      { "south": 36.05950, "west": -80.12020, "north": 36.06120, "east": -80.11880 }
+    ],
+    "dockAprons": [
+      { "south": 36.06100, "west": -80.11830, "north": 36.06180, "east": -80.11600 }
+    ],
+    "staging": { "south": 36.06150, "west": -80.11830, "north": 36.06240, "east": -80.11720 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 96.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.06030,-80.11800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster lat/lng (ROOFTOP, movedMeters 63) landed directly on the plant building - accurate. Confirmed via Gray Construction / Dun & Bradstreet (4770 Axle Dr) and Caterpillar's own description: 850,000 sq ft axle-machining/assembly/test/paint plant on a 102-acre site, opened 2011, produces axle assemblies for the largest Cat mining trucks.",
+    "truckGate": "Controlled entrance: a private access road runs from the public road (Axle Dr) past a CATERPILLAR monument sign to a gatehouse/booth structure where the road forks into the operational area (36.0618,-80.1178). Confirmed in z21 satellite and 2026 Street View.",
+    "guardShack": "A small gatehouse building sits at the entrance road fork; a separate larger building W of it is the electrical substation. The gatehouse functions as the guard/security checkpoint - guardShack true.",
+    "dockDoors": "Manufacturing plant (not a DC), so a modest dock count. Dock doors with trailers backed in are visible on the N and NE building faces; estimated ~14 doors, 10-25 band - flagged.",
+    "dropArea": "Trailers parked along the N face and W face; extensive outdoor laydown of axle components (pallets/stacks) on the N apron. Trailer-equivalent area 10-25.",
+    "railServed": "No rail spur runs into the property.",
+    "siteAreaAcres": "~96 acres from the perimeter box; the parcel is reported as 102 acres."
+  },
+  "method": "deep-audit"
+}

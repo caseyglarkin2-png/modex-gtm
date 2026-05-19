@@ -1,0 +1,51 @@
+{
+  "name": "Glovis America Vehicle Processing Center - Tacoma WA (Hyundai)",
+  "type": "Port / Vehicle Import Processing Center",
+  "coords": { "lat": 47.261300, "lng": -122.370000 },
+  "geofences": {
+    "perimeter": { "south": 47.25720, "west": -122.37420, "north": 47.26560, "east": -122.36560 },
+    "truckGate": { "south": 47.26280, "west": -122.37340, "north": 47.26340, "east": -122.37250 },
+    "dropYards": [
+      { "south": 47.25760, "west": -122.37400, "north": 47.26500, "east": -122.36900 }
+    ],
+    "dockAprons": [],
+    "staging": { "south": 47.26300, "west": -122.37250, "north": 47.26380, "east": -122.37050 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 8000,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 110.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@47.261300,-122.370000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "NONE", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "trailerParkingCapacity", "siteAreaAcres", "multiStep"],
+  "fieldNotes": {
+    "facility": "Port of Tacoma vehicle processing center operated by Glovis America / WWS for Hyundai-Kia auto imports. Confirmed via Glovis locations page + NWSA press release naming 3400 Taylor Way, Tacoma. Massive finished-vehicle marshalling yard, not a freight warehouse.",
+    "truckGate": "Double-leaf chain-link swing gate across the gravel driveway entering the NW corner of the vehicle yard, confirmed in two Street View headings (2024-04). Rail crossing immediately in front of the gate on the access road.",
+    "guardShack": "Small white booth / kiosk structure visible just inside the gate, left of the lane, in Street View. Footprint is small; possible it functions as remote check-in rather than a continuously staffed shack -- flagged uncertain.",
+    "dockDoors": "NONE -- this is a vehicle processing center; vehicles drive on/off car-carriers and ships. The on-site PDI/processing building has roll-up service doors but no freight loading docks.",
+    "dropArea": "50+ -- the yard is overwhelmingly finished-vehicle storage (thousands of cars in marked rows); also stages car-carrier trailers. dropYard true.",
+    "postGateStaging": "Paved staging/queue area with KEEP CLEAR markings just inside the gate where car-carriers and processing trucks stage.",
+    "railServed": "Rail spurs run alongside the access road and into the property -- inbound vehicles arrive by both rail and RoRo ship.",
+    "trailerParkingCapacity": "Estimate expressed as vehicle-storage capacity (~8,000 cars across the marshalling rows); not trailer stalls. Low confidence on exact figure.",
+    "siteAreaAcres": "~110 acres derived from the perimeter box covering the core marshalling yard; the broader Glovis/WWS port footprint is larger.",
+    "fastLaneOpportunity": "Wide gravel apron at the gate and broad internal roadways leave ample room to add a bypass / express lane.",
+    "urbanRural": "Urban -- inside the Port of Tacoma industrial tideflats, dense industrial fabric of the Tacoma metro."
+  },
+  "method": "deep-audit"
+}

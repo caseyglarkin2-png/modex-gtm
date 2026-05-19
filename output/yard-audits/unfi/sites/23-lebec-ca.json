@@ -1,0 +1,48 @@
+{
+  "name": "UNFI - Lebec CA DC",
+  "type": "Distribution Center",
+  "coords": { "lat": 34.841644, "lng": -118.864819 },
+  "geofences": {
+    "perimeter": null,
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 0,
+    "buildingCount": 0,
+    "siteAreaAcres": 0.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.841644,-118.864819,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "resolution": "FACILITY NOT POSITIVELY LOCATED. The roster supplied a city-level entry ('Lebec, CA', source: supplyve / Indeed locations list) with APPROXIMATE coordinates 34.841644, -118.864819. Those coordinates resolve to the small town of Lebec along I-5 in the Tejon Pass, where satellite imagery shows only small roadside commercial buildings (gas stations, shops) and rural residential — no distribution center of any kind.",
+    "investigation": "The only large-scale industrial development in the Lebec/Tejon area is the Tejon Ranch Commerce Center (TRCC), a major logistics park ~6 km north along I-5 near Wheeler Ridge (around 34.97-34.99, -118.95). TRCC contains roughly 8-12 large distribution buildings (anchored by a 1.7M sq ft IKEA DC, plus L'Oreal, Dollar General, Caterpillar, Famous Footwear, Camping World, RectorSeal and others). Multiple web searches (UNFI corporate locations, TRCC tenant announcements, real-estate trade press, job listings) did NOT surface UNFI as a named TRCC tenant, and no specific UNFI street address in the 93243 ZIP could be confirmed. Without distinguishing UNFI signage or a confirmed address, no single TRCC building could be positively identified as the UNFI facility.",
+    "assessment": "UNFI's published locations list does include 'Lebec' as a West-region point, but this may be a small West-region branch/cross-dock rather than a mega-DC, or the roster entry may be imprecise. All 22 classification fields are left at conservative defaults and flagged uncertain. Geofences and yardMetrics are null/zero. Recommend human verification of the exact UNFI Lebec address (likely within TRCC) before this site is used for outreach.",
+    "urbanRural": "If the facility is in fact at TRCC, the setting is Rural — an isolated logistics park in open ranchland/farmland in the Tejon Pass."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,52 @@
+{
+  "name": "Danone - DuBois PA",
+  "type": "Plant-based yogurt plant",
+  "coords": { "lat": 41.105800, "lng": -78.731100 },
+  "geofences": {
+    "perimeter": { "south": 41.103900, "west": -78.733100, "north": 41.107600, "east": -78.729400 },
+    "truckGate": { "south": 41.104600, "west": -78.732900, "north": 41.105000, "east": -78.732400 },
+    "dropYards": [
+      { "south": 41.105900, "west": -78.730500, "north": 41.106400, "east": -78.729900 }
+    ],
+    "dockAprons": [
+      { "south": 41.105500, "west": -78.732200, "north": 41.106100, "east": -78.731600 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 4,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 24.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.105800,-78.731100,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "dockDoors", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "The plant driveway off Oklahoma-Salem Road is a paved open driveway with directional pavement arrows but no barrier arm or sliding gate at the road. A decorative metal fence with stone pillars runs along the road frontage, but the driveway entrance itself is uncontrolled (Street View Jun 2025).",
+    "guardShack": "No staffed booth visible at the driveway entrance or the internal Y-fork in Street View or satellite. A small orange-roofed structure near the building SE corner is a pump/utility house, not a gate booth.",
+    "remoteGs": "False - no controlled truck gate exists.",
+    "multipleFacilities": "buildingCount=2 (main plant plus the blue-roofed building to the south), but they read as one integrated plant complex on one property, so multipleFacilities (campus) is false.",
+    "dockDoors": "Compact 189,158 sq ft plant; dock face partly under a blue sawtooth canopy on the west side. Estimate ~14 doors - low confidence due to snow-tinted, moderate-resolution imagery.",
+    "dropArea": "Only ~3-4 trailers visible in an informal staging area NE of the building; no marked drop-yard stalls. Banded 0-10, low confidence.",
+    "urbanRural": "Rural - the plant sits in forested countryside outside DuBois, PA, surrounded by woods with only scattered rural homes nearby.",
+    "connectivityIssue": "Rural forested setting; the town of DuBois is a few km away so coverage is likely adequate but not certain - flagged as medium confidence.",
+    "drivewayLong": "The driveway from the road to the dock area is long and curving with ample room for a 3+ truck queue.",
+    "postGateStaging": "Large open paved/graded yard areas inside the property give trucks room to stage before the docks."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Swire Coca-Cola USA - Salt Lake City Production Plant, UT",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 40.72870, "lng": -111.97120 },
+  "geofences": {
+    "perimeter": { "south": 40.72760, "west": -111.97250, "north": 40.73000, "east": -111.96900 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 12.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.72870,-111.97120,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "multipleFacilities", "scale",
+    "dropYard", "multiStep", "dockDoorCount", "trailersVisible",
+    "trailerParkingCapacity", "siteAreaAcres", "railServed", "coords",
+    "perimeter"
+  ],
+  "fieldNotes": {
+    "location": "Roster supplied '5405 W 1730 S, Salt Lake City' and coords 40.732482,-112.02077. That address is NOT in Swire Coca-Cola's official Utah facility list (Draper HQ 12634 S 265 W, West Valley City 2269 S 3270 W, Ogden, Logan, Price, Richfield) and the building at the roster coords is an office-style building with a barrier-gate driveway and a 'West 1730 South' monument sign - no Coca-Cola branding. The roster coordinates appear to be wrong.",
+    "resolvedAddress": "The confirmed Swire Coca-Cola Salt Lake City production/manufacturing plant is at 2269 S 3270 W, West Valley City, UT 84119 (phone 801-816-5300; multiple directories incl. Yelp and a Waze 'Swire Coca-Cola truck staging area' entry confirm this). This is the plant that won a 2023 environmental award and cut water use 19% in 2022.",
+    "coords": "Best-estimate ~40.7287,-111.9712, a large warehouse-with-docks complex in the 3270 W industrial corridor of West Valley City. NOT positively confirmed - the corridor is a dense multi-tenant logistics park. One nearby building was observed handling Gatorade (a competitor brand) and others show third-party logistics tenants (UPS, PDIIKE Distribution Logistics), so the exact Swire Coca-Cola building footprint could not be unambiguously isolated in satellite/Street View imagery. Low confidence.",
+    "perimeter": "Estimated box around the candidate warehouse complex - not a confirmed parcel.",
+    "classification": "All physical-layout flags left false/null because the exact Swire Coca-Cola building could not be confirmed; the truck gate, docks, guard booth and yard could not be reliably attributed to the correct facility.",
+    "urbanRural": "Urban - West Valley City industrial corridor within the Salt Lake City metro.",
+    "recommendation": "Correct the roster address to 2269 S 3270 W, West Valley City, UT 84119 and re-audit once the exact Swire Coca-Cola building footprint is confirmed (e.g. via a precise geocode or a Coca-Cola sign in updated imagery)."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,64 @@
+{
+  "name": "Pactiv Evergreen - Columbus OH",
+  "type": "Manufacturing Plant (Food Merchandising)",
+  "coords": { "lat": 39.99585, "lng": -83.12255 },
+  "geofences": {
+    "perimeter": { "south": 39.99455, "west": -83.12360, "north": 39.99735, "east": -83.12155 },
+    "truckGate": { "south": 39.99478, "west": -83.12345, "north": 39.99500, "east": -83.12315 },
+    "dropYards": [
+      { "south": 39.99478, "west": -83.12320, "north": 39.99545, "east": -83.12210 }
+    ],
+    "dockAprons": [
+      { "south": 39.99500, "west": -83.12320, "north": 39.99545, "east": -83.12210 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 10,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 12.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.99585,-83.12255,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "0-10",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dropYard", "fastLaneOpportunity"],
+  "fieldNotes": {
+    "truckGate": "Fenced truck yard south of the building; gated driveway off the internal loop road with chain-link fence and a row of bollards/posts across the lane (2023-07 Street View).",
+    "guardShack": "No staffed booth visible at the entrance in any Street View heading (2019 & 2023 panos). Gate controlled by fence/bollards only.",
+    "remoteGs": "Gate present, no guard booth -> implies kiosk/call-box/app check-in.",
+    "dockDoors": "~9-10 dock doors on the south building face; several trailers backed in (z20 satellite).",
+    "dropArea": "Fenced dock apron holds parked trailers; estimated 10-25 stalls of yard space but not a dedicated standalone drop lot.",
+    "dropYard": "The adjacent colorful-trailer lot to the south is a SEPARATE trucking/cross-dock facility (own building), NOT Pactiv. Pactiv's own trailer parking is the fenced dock apron only.",
+    "fastLaneOpportunity": "Wide single-point gate apron with generous unused paved width; room to add a bypass lane. Medium confidence.",
+    "railServed": "A rail line runs along the east property edge but no spur enters the Pactiv building; the large intermodal terminal is the Norfolk Southern yard west of Westbelt Dr, unrelated.",
+    "drivewayLong": "Deep paved apron between the gate and the south dock doors easily holds a 3+ truck queue."
+  },
+  "method": "deep-audit"
+}

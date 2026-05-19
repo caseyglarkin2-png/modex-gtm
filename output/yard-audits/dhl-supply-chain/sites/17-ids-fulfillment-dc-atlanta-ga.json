@@ -1,0 +1,51 @@
+{
+  "name": "DHL Supply Chain - IDS Fulfillment DC - Atlanta GA",
+  "type": "Multi-Customer E-Commerce Fulfillment Center",
+  "coords": { "lat": 33.41010, "lng": -84.72560 },
+  "geofences": {
+    "perimeter": { "south": 33.40895, "west": -84.72720, "north": 33.41155, "east": -84.72470 },
+    "truckGate": { "south": 33.40895, "west": -84.72740, "north": 33.40935, "east": -84.72680 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 33.40905, "west": -84.72690, "north": 33.41115, "east": -84.72510 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 32,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 16.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.4101,-84.7256,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "remoteGs", "dockDoors", "trailerParkingCapacity", "dropArea"],
+  "fieldNotes": {
+    "location": "Roster had no address/coords. Resolved via web research: IDS Fulfillment's Atlanta-metro DC is at 495 Coweta Industrial Parkway, Newnan GA 30265 ('Scout 85 Logistics' / 'Scout Cold Logistics Center Atlanta-II'), a 215,822 sq ft Class A rear-load building completed 2022, full-building lease to IDS Fulfillment (now DHL Supply Chain). Building is in Coweta Industrial Park, ~3 mi east of I-85 Exit 47.",
+    "buildingIdNote": "Audited the large single-tenant white tilt-up rear-load building at ~33.4101,-84.7256 on the south side of Coweta Industrial Parkway. Street View read a building plate as '355' on the NW end, which conflicts with the marketed address '495'; the 355 plate may be a suite/door designation. This is the only building in the park matching the Scout description (single-tenant, ~215k sq ft, rear-load, fully secured/fenced, 2022 construction). Building identity is high-probability but the street-number discrepancy is unresolved — confidence set to medium.",
+    "truckGate": "Street View (May 2025) shows the SW dock yard enclosed by chain-link fencing with a sliding gate across the truck driveway at the SW end. Controlled truck entry confirmed; flagged uncertain due to tree cover partially obscuring the gate.",
+    "guardShack": "No guard booth at this building's gate. (A separate guarded gate with a booth exists at the much larger DC further NE in the park, but that is a different building.)",
+    "remoteGs": "true — there is a truck gate (sliding gate) but no guard shack, implying kiosk/app/call-box check-in.",
+    "dockDoors": "Rear-load building: all docks on the SW long face. ~35-45 dock positions counted at z19 with ~32 trailers backed in. Banded 25-50.",
+    "dropArea": "No dedicated drop-trailer lot — trailers are all backed at docks; the narrow dock apron has little marked drop parking. 0-10.",
+    "drivewayShort": "Tight dock-yard apron — single drive aisle width along the dock face; queue room is short (1-2 trucks).",
+    "urbanRural": "Coweta Industrial Park sits in a wooded edge-of-Newnan setting, a small exurban city SW of Atlanta; bordered by tree cover. Rural per rubric (small-town industrial defaults to Rural).",
+    "trailerParkingCapacity": "Low — the fenced dock court is narrow with limited room for drop trailers beyond the dock face itself; estimate ~12.",
+    "method": "deep-audit"
+  },
+  "method": "deep-audit"
+}

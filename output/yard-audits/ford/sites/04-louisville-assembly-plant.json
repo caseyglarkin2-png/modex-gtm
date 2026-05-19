@@ -1,0 +1,52 @@
+{
+  "name": "Ford - Louisville Assembly Plant, Louisville KY",
+  "type": "Vehicle Assembly Plant",
+  "coords": { "lat": 38.15470, "lng": -85.72850 },
+  "geofences": {
+    "perimeter": { "south": 38.14930, "west": -85.73400, "north": 38.15850, "east": -85.72180 },
+    "truckGate": { "south": 38.15680, "west": -85.73120, "north": 38.15780, "east": -85.72950 },
+    "dropYards": [
+      { "south": 38.15300, "west": -85.73380, "north": 38.15620, "east": -85.73180 },
+      { "south": 38.15180, "west": -85.73180, "north": 38.15360, "east": -85.72880 }
+    ],
+    "dockAprons": [
+      { "south": 38.15280, "west": -85.73180, "north": 38.15420, "east": -85.72900 },
+      { "south": 38.15480, "west": -85.73320, "north": 38.15600, "east": -85.73100 }
+    ],
+    "staging": { "south": 38.15600, "west": -85.73120, "north": 38.15700, "east": -85.72950 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45, "trailersVisible": 90, "trailerParkingCapacity": 160,
+    "truckGateCount": 2, "buildingCount": 6, "siteAreaAcres": 277.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.15470,-85.72850,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "scale", "entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "facility": "Louisville Assembly Plant (Ford Escape, Lincoln Corsair), 2000 Fern Valley Rd. Geocode landed on the rooftop (moved 15m); confirmed as the large assembly complex immediately south of Louisville International Airport / UPS Worldport, bounded by Fern Valley Rd to the north, Grade Lane to the west, and a rail corridor to the south. ~3.15M sq ft of building.",
+    "truckGate": "Secured Ford assembly campus with continuous perimeter chain-link fencing visible in multiple Street View captures along Grade Lane and Fern Valley Rd. Controlled truck access driveway off Fern Valley Rd into the west dock/yard area. A clearly visible internal vehicle-control gate (blue-roofed booth with gate arms and crosswalk markings) controls movement between the plant and finished-vehicle lots on the east side.",
+    "guardShack": "Ford assembly plants run staffed security gatehouses at controlled entrances; a distinct booth structure with gate arms is visible at the internal east checkpoint. Marked uncertain - the perimeter truck-gate booth could not be crisply isolated because Street View panos sit on the secured campus loop road rather than at the public-road gate itself.",
+    "multiStep": "Outer perimeter truck gate plus a separate internal vehicle-control checkpoint (booth + gate arms) between the plant and the finished-vehicle storage lots.",
+    "railServed": "Active rail yard with auto-rack rail cars running the full length of the south side of the plant; covered rail loading and adjacent trailer drop rows visible.",
+    "dropYard": "Large dedicated trailer drop yard along the west side (Grade Lane frontage) plus trailer rows south of the building near the rail corridor - dozens of parked trailers without tractors.",
+    "dropArea": "50+ trailers visible across the west drop yard and south dock face.",
+    "dockDoors": "Counted ~45 loading doors across the south and west building faces; banked dock doors with trailers backed in. Estimate from overhead imagery - marked uncertain.",
+    "shipRcvSeparate": "Distinct dock banks on the south face and the west face, plus a separate finished-vehicle dispatch operation on the east - shipping and receiving run from physically separate clusters.",
+    "fastLaneOpportunity": "Wide paved aprons and multi-lane driveways at the Fern Valley Rd entry with unused width for an express bypass.",
+    "urbanRural": "Inside the dense Louisville metro fabric, hemmed by the international airport, interstate, and industrial corridor - Urban.",
+    "scale": "No truck scale clearly identified; left uncertain."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,53 @@
+{
+  "name": "CJ Logistics - West Memphis AR",
+  "type": "Distribution Center",
+  "coords": { "lat": 35.18595, "lng": -90.2467 },
+  "geofences": {
+    "perimeter": { "south": 35.18430, "west": -90.24920, "north": 35.18760, "east": -90.24420 },
+    "truckGate": { "south": 35.18540, "west": -90.24650, "north": 35.18585, "east": -90.24590 },
+    "dropYards": [
+      { "south": 35.18680, "west": -90.24900, "north": 35.18760, "east": -90.24450 }
+    ],
+    "dockAprons": [
+      { "south": 35.18460, "west": -90.24880, "north": 35.18540, "east": -90.24470 },
+      { "south": 35.18670, "west": -90.24880, "north": 35.18740, "east": -90.24470 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 41.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.18595,-90.2467,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "dropArea", "trailerParkingCapacity", "connectivityIssue", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster supplied no street address (Indeed locations list) and city-centroid coords (35.1465, -90.1842), ~7km off. Resolved to 3271 Infinity Parkway, West Memphis AR 72301 - the documented CJ Logistics America (legacy DSC Logistics) West Memphis DC (Yahoo Local, Indeed). Geocoded ROOFTOP to 35.1869, -90.2472; satellite confirmed a large cross-dock DC in open farmland.",
+    "truckGate": "z20-z21 satellite shows a controlled truck gate on the south side: a guard booth, gate spanning the lane (sliding/swing), and chain-link perimeter fencing. A semi-truck is visible at the gate. 2013 Street View confirms continuous chain-link perimeter fencing around the property. truckGate=true.",
+    "guardShack": "A small tan booth structure sits beside the gate at the south truck entrance, with vehicles/truck present - a staffed guard shack.",
+    "dockDoors": "Large cross-dock building with trailers backed into dock doors along BOTH long faces (north and south). ~70 doors estimated (50+ band). Approximate from overhead imagery.",
+    "dropArea": "Deep truck courts on the north and south faces with ~60 trailers visible, including trailer storage rows in the north court. dropArea 25-50, dropYard=true.",
+    "shipRcvSeparate": "Docks on opposing north and south building faces form physically separate dock clusters.",
+    "drivewayLong": "Gate set well back from any public road, reached by an access road (Infinity Parkway) winding through farmland, with deep truck courts -> holds a 3+ truck queue.",
+    "urbanRural": "Building sits in open farmland off Infinity Parkway, edge of West Memphis -> Rural.",
+    "connectivityIssue": "Site is in open farmland but within the West Memphis logistics/intermodal area; cellular coverage likely adequate - left false (low confidence).",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,50 @@
+{
+  "name": "Diageo Lincolnway RTD Canning - Plainfield IL",
+  "type": "Manufacturing - RTD Canning Facility",
+  "coords": { "lat": 41.6241, "lng": -88.2155 },
+  "geofences": {
+    "perimeter": { "south": 41.6210, "west": -88.2192, "north": 41.6272, "east": -88.2135 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 41.6228, "west": -88.2192, "north": 41.6253, "east": -88.2170 }
+    ],
+    "dockAprons": [
+      { "south": 41.6240, "west": -88.2168, "north": 41.6248, "east": -88.2160 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 2,
+    "buildingCount": 3,
+    "siteAreaAcres": 80.9,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.6241,-88.2155,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "entryExitTogether", "entryExitSeparate"],
+  "fieldNotes": {
+    "truckGate": "Two driveways off W 143rd St (a divided campus boulevard near -88.2174 and an office drive near -88.2154). Street View at both, captured 2023-05 and 2024-07, shows open ungated entries with no barrier arm, sliding gate, or checkpoint pinch-point at the public road. Internal road junctions also show no checkpoint.",
+    "guardShack": "No staffed booth at any entrance. The small orange/red structure at the trailer-yard road junction (41.6245,-88.2173) sits at the drop-yard edge, not on the truck entry path, and is not a multi-window guard booth.",
+    "multipleFacilities": "Large connected Diageo Plainfield campus: the RTD canning plant, an attached bottling/manufacturing wing with a major tank farm to the north, plus a large detached trailer drop yard on the west. Three distinct building masses.",
+    "dropYard": "Large dedicated trailer storage lot west of the buildings, ~70 trailers visible in rows, capacity ~110.",
+    "dockDoorCount": "East dock bank of the canning building shows a bank of trailers backed in (~15-20 doors visible); additional dock positions on the north building face. Estimate 30 total, moderate confidence given roof glare.",
+    "fastLaneOpportunity": "Wide ungated campus boulevard with ample paved apron width; physical room for express/bypass lane exists.",
+    "drivewayLong": "Long internal approach from 143rd St entrances to docks/drop yard easily holds 3+ trucks.",
+    "urbanRural": "Edge-of-town Plainfield IL industrial park; farmland abuts the west side. Rural per rubric tie-break."
+  },
+  "method": "deep-audit"
+}

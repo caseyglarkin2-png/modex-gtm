@@ -1,0 +1,54 @@
+{
+  "name": "Performance Foodservice - Boston (Taunton MA)",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 41.943300, "lng": -71.137000 },
+  "geofences": {
+    "perimeter": { "south": 41.94090, "west": -71.13970, "north": 41.94530, "east": -71.13420 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 41.94170, "west": -71.13700, "north": 41.94320, "east": -71.13470 }
+    ],
+    "dockAprons": [
+      { "south": 41.94250, "west": -71.13880, "north": 41.94360, "east": -71.13560 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 50,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 95,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 26.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.9433,-71.137,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "No controlled truck gate. The property fronts John Hancock Rd with fully open access — Street View (Aug 2025) shows the employee parking lot running directly off the public road with no perimeter fence, no barrier arm, no sliding gate, and no checkpoint pinch-point. Trucks enter the same open driveway and proceed into the truck court / drop yard. Google's Street View car was able to drive onto the interior truck-yard pavement, confirming the entrance is uncontrolled.",
+    "guardShack": "No guard booth at the entrance or on the property. A small dark flat-roofed structure sits deep inside the trailer drop yard (z21 imagery) but it is a fuel-island/maintenance shed in the yard interior, not an entrance guard booth.",
+    "remoteGs": "False — there is no truck gate at all.",
+    "dockDoors": "Long dock face along the south side of the main building with many trailers backed in (z18-z19). Counted ~50; band 50+. Exact count uncertain — trailers obscure doors.",
+    "dropArea": "Large dedicated trailer drop yard south of the dock face — dense rows of drop trailers (75+ visible in imagery); a true standalone trailer-storage lot, band 50+.",
+    "dropYard": "True — a dedicated trailer-storage lot occupies the area south of the dock apron, separate from active dock staging.",
+    "postGateStaging": "Wide paved truck court between the dock face and the drop yard provides ample interior queue/staging room.",
+    "drivewayLong": "The entrance drive plus the deep interior truck court easily holds a queue of 3+ trucks.",
+    "urbanRural": "Located in an industrial park on the edge of Taunton MA, a small-to-mid-size city; surrounded by other warehouses with wooded buffers. Edge-of-town small-industrial setting — classified Rural per the rubric tie-break.",
+    "scale": "No truck scale visible in overhead imagery.",
+    "multipleFacilities": "Single PFG building. Other large buildings nearby (NW and SE) are separate occupants of the same industrial park.",
+    "railServed": "No rail spur runs into the property."
+  },
+  "method": "deep-audit"
+}

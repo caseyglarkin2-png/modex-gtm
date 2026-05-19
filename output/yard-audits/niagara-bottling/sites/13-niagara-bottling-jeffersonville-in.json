@@ -1,0 +1,52 @@
+{
+  "name": "Niagara Bottling - Jeffersonville IN",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 38.37990, "lng": -85.67500 },
+  "geofences": {
+    "perimeter": { "south": 38.37860, "west": -85.67780, "north": 38.38140, "east": -85.67260 },
+    "truckGate": { "south": 38.37880, "west": -85.67540, "north": 38.37920, "east": -85.67460 },
+    "dropYards": [
+      { "south": 38.37880, "west": -85.67760, "north": 38.37990, "east": -85.67400 }
+    ],
+    "dockAprons": [
+      { "south": 38.37920, "west": -85.67740, "north": 38.38010, "east": -85.67420 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 100,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 34.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.37990,-85.67500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "buildingId": "Address 350 Logistics Ave geocoded ROOFTOP onto a single large warehouse/manufacturing building in River Ridge Commerce Center. Confirmed Niagara via a red 'Niagara' wall sign visible on the building's office front in a March 2026 Street View pano, and via web research (469,000 sq ft plant, opened 2019, expanded ~2020/2023).",
+    "truckGate": "No barrier arm, sliding/swing gate, or guard booth visible anywhere along the property line. The S frontage on Logistics Avenue is open behind a grass berm; the truck driveway into the dock yard is uncontrolled. truckGate false.",
+    "drivewayLong": "Very deep dock apron and a large trailer yard provide 3+ truck stacking room well inside the property.",
+    "dockDoors": "A single continuous, very long dock face runs the entire S side of the building, densely lined with trailers - estimated ~80-120 doors, band 50+. Exact count low-confidence.",
+    "dropArea": "The S/W dock yard is packed with rows of parked trailers - a large drop yard, capacity well over 50, band 50+.",
+    "shipRcvSeparate": "All docks are on one continuous building face; shipping and receiving are not on physically separate dock banks.",
+    "dropYard": "Dedicated on-site trailer storage rows fill the dock yard south and west of the building.",
+    "fastLaneOpportunity": "Open, wide unguarded entrance leaves ample room to add an express lane if a gate were installed.",
+    "urbanRural": "River Ridge Commerce Center is an edge-of-town industrial park bordered by open farmland on the N and W - classed Rural.",
+    "buildingCount": "One large plant building; the office is integrated into the SE end, not a separate structure."
+  },
+  "method": "deep-audit"
+}

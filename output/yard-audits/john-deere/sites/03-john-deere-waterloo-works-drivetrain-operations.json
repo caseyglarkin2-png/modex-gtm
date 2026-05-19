@@ -1,0 +1,52 @@
+{
+  "name": "John Deere Waterloo Works - Drivetrain Operations - Waterloo IA",
+  "type": "Component Plant",
+  "coords": { "lat": 42.5025, "lng": -92.3535 },
+  "geofences": {
+    "perimeter": { "south": 42.4975, "west": -92.3590, "north": 42.5060, "east": -92.3460 },
+    "truckGate": { "south": 42.5043, "west": -92.3545, "north": 42.5053, "east": -92.3530 },
+    "dropYards": [
+      { "south": 42.5020, "west": -92.3500, "north": 42.5045, "east": -92.3470 }
+    ],
+    "dockAprons": [
+      { "south": 42.5045, "west": -92.3550, "north": 42.5055, "east": -92.3520 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22, "trailersVisible": 12, "trailerParkingCapacity": 35,
+    "truckGateCount": 2, "buildingCount": 5, "siteAreaAcres": 110.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.5025,-92.3535,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "postGateStaging", "drivewayShort", "dropArea", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "Confirmed John Deere Drivetrain Operations (formerly Drive Train) at 400 Westfield Ave, Waterloo IA. Roster ROOFTOP coords (moved only 53m) landed correctly. Street View confirmed the John Deere Tractor & Engine Museum sign and TechWorks Campus signage on the southern part of the campus; the active production buildings are the large fenced cluster along the Cedar River to the north.",
+    "truckGate": "Inferred true, medium confidence. The active production complex is enclosed by a continuous chain-link perimeter fence — clearly visible along the north road on multiple Street View headings (2026 imagery). Truck gate is a driveway break in this fence; a barrier arm could not be individually resolved.",
+    "guardShack": "No staffed guard booth positively identified at a gate pinch-point. A small peaked-roof structure SE of the production building is a utility/maintenance building, not a guard shack. Set false; remoteGs true by rule.",
+    "campus": "Mixed-use campus — active Drivetrain Operations production buildings plus the John Deere Tractor & Engine Museum and TechWorks innovation campus on the south side. Significant building demolition visible (cleared foundations across the central/southern parcels).",
+    "dockDoorCount": "~22 dock doors across the production building faces; recessed dock bays visible in Street View along the north road. Approximate.",
+    "dropArea": "Fenced production yard holds material storage racks and ~12 trailers; band 10-25, medium confidence.",
+    "dropYard": "No single dedicated multi-row trailer-storage lot — yard mixes material racks and trailer staging; set false.",
+    "drivewayShort": "Gate-to-dock approach is short (docks face the perimeter road closely); chosen over drivewayLong, low confidence.",
+    "urbanRural": "Within the urban fabric of Waterloo IA — residential neighborhood adjacent to the south, museum and business park on-campus, river and rail corridor — Urban.",
+    "multipleFacilities": "Campus with 5+ distinct building masses (production buildings, museum, TechWorks).",
+    "buildingCount": "5 distinct building masses estimated.",
+    "siteAreaAcres": "~110 acres bounded by the Cedar River (W), the north perimeter road, and Westfield Ave / the highway corridor (S).",
+    "scale": "No truck scale identified; left false.",
+    "postGateStaging": "Paved yard inside the fence ahead of the docks; inferred true, low confidence."
+  },
+  "method": "deep-audit"
+}

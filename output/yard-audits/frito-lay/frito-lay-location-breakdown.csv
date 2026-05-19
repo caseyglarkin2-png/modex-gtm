@@ -1,0 +1,61 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Frito-Lay - Modesto CA,Manufacturing Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@37.631150,-120.920200,400m/data=!3m1!1e3"
+Frito-Lay - Rancho Cucamonga CA (DC),Distribution Center,#1,Gate + GS (not BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@34.080051,-117.591112,400m/data=!3m1!1e3"
+Frito-Lay - Memphis TN,Manufacturing Plant,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@35.032500,-89.891000,400m/data=!3m1!1e3"
+Frito-Lay - Perry GA (Kathleen),Manufacturing Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@32.483737,-83.609766,400m/data=!3m1!1e3"
+Frito-Lay - Casa Grande AZ,Manufacturing Plant,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@32.901500,-111.792000,400m/data=!3m1!1e3"
+Frito-Lay - Kern Plant Bakersfield CA,Manufacturing Plant,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@35.39575,-119.32045,400m/data=!3m1!1e3"
+Frito-Lay - Killingly CT,Manufacturing Plant,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@41.860500,-71.890500,400m/data=!3m1!1e3"
+Frito-Lay - Topeka KS,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@38.987236,-95.691136,400m/data=!3m1!1e3"
+Frito-Lay - San Antonio TX,Manufacturing Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@29.472769,-98.396782,400m/data=!3m1!1e3"
+Frito-Lay - Arlington TX,Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@32.7370,-97.0915,400m/data=!3m1!1e3"
+Frito-Lay - Brookhollow Plant Dallas TX,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,,,YES,YES,YES,,1,1,,,YES,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@32.829250,-96.885400,400m/data=!3m1!1e3"
+Frito-Lay - Beloit WI,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@42.51650,-88.98450,400m/data=!3m1!1e3"
+Frito-Lay - Canton OH,Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,,,,,,YES,,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@40.78310,-81.42220,400m/data=!3m1!1e3"
+Frito-Lay - Frankfort IN (Core & East Plants),Manufacturing Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@40.28400,-86.55750,400m/data=!3m1!1e3"
+Frito-Lay - Kirkwood Plant Binghamton NY,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@42.0978,-75.8388,400m/data=!3m1!1e3"
+Frito-Lay - Lynchburg VA,Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@37.40036,-79.238328,400m/data=!3m1!1e3"
+Frito-Lay - Charlotte NC,Manufacturing Plant,#1,Gate + GS (not BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@35.115626,-80.941746,400m/data=!3m1!1e3"
+Frito-Lay - Aberdeen MD,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@39.49876,-76.18868,400m/data=!3m1!1e3"
+Frito-Lay - Vancouver WA,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@45.65685,-122.6918,400m/data=!3m1!1e3"
+Frito-Lay - Jonesboro AR,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@35.8145,-90.5605,400m/data=!3m1!1e3"
+Frito-Lay - Pulaski TN,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@35.21580,-87.06050,400m/data=!3m1!1e3"
+Frito-Lay - Fayetteville TN,Manufacturing Plant,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@35.156,-86.5101,400m/data=!3m1!1e3"
+Frito-Lay - Rosenberg TX,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@29.57769,-95.86902,400m/data=!3m1!1e3"
+Frito-Lay - Williamsport PA (DC),Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,,YES,,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@41.227785,-77.068961,400m/data=!3m1!1e3"
+Frito-Lay - Denver CO,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,,YES,,1,1,,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@39.77066,-104.85292,400m/data=!3m1!1e3"
+Frito-Lay - Orlando FL,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@28.5772,-81.4182,400m/data=!3m1!1e3"
+Frito-Lay - West Valley City UT (DC),Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@40.6662,-112.0402,400m/data=!3m1!1e3"
+Frito-Lay - Forest City NC (DC),Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,,,YES,,YES,,1,1,,YES,,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@35.33855,-81.88640,400m/data=!3m1!1e3"
+Frito-Lay - Prichard AL (DC),Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,YES,,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@30.74010,-88.12010,400m/data=!3m1!1e3"
+Frito-Lay - Burbank WA (DC),Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@46.20650,-119.01500,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,2,7%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,6,20%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,4,13%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,3,10%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,13,43%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,2,7%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,14,47%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,16,53%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,11,37%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,19,63%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

@@ -1,0 +1,57 @@
+{
+  "name": "Westrock Coffee - Conway AR Roast-to-RTD Plant",
+  "type": "Manufacturing Plant (roast-to-ready-to-drink)",
+  "coords": { "lat": 35.072100, "lng": -92.418800 },
+  "geofences": {
+    "perimeter": { "south": 35.069600, "west": -92.422300, "north": 35.076400, "east": -92.416300 },
+    "truckGate": { "south": 35.075900, "west": -92.419100, "north": 35.076400, "east": -92.418400 },
+    "dropYards": [
+      { "south": 35.073100, "west": -92.418800, "north": 35.074400, "east": -92.417300 }
+    ],
+    "dockAprons": [
+      { "south": 35.073000, "west": -92.419100, "north": 35.073700, "east": -92.417100 },
+      { "south": 35.070600, "west": -92.418400, "north": 35.071400, "east": -92.417300 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 85,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 47.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.072100,-92.418800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "dockDoorCount", "scale", "multiStep", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Confirmed as the former Kimberly-Clark Conway paper-products plant at 480 Exchange Avenue, now Westrock Coffee's roast-to-RTD facility ($315M, 570K sq ft, ~45 acres, opened June 2024). The roster pin sat at the NE construction/laydown corner; locked center moved SW to the main building mass at 35.0721,-92.4188.",
+    "truckGate": "A sliding chain-link gate across a truck driveway is clearly visible in 2024-08 Street View on the NE side of the property (near 35.0760,-92.4188), with continuous chain-link perimeter fencing running along the warehouse face. The truck/yard side of the campus is access-controlled.",
+    "guardShack": "No staffed guard booth was positively identified at the truck gate in available imagery. The NE truck gate is a rolling chain-link gate with no adjacent booth visible — implying remote/kiosk check-in. A large former-paper-mill campus of this scale may have a manned gate elsewhere; marked uncertain.",
+    "remoteGs": "Truck gate present, no guard shack seen — remote check-in inferred.",
+    "dropYard": "Large dedicated trailer drop yard on the NE flank of the plant (wc-rtd-dropyard-z19) holding ~60-85 trailers parked in rows, separate from active dock staging.",
+    "dropArea": "Drop yard rows visibly hold well over 50 trailers — banded 50+.",
+    "dockDoors": "Dock doors distributed across multiple building faces (NE drop-yard side and the SE face along I-40). ~30-45 doors estimated across the sprawling complex; exact count limited by roof complexity and scale — banded 25-50.",
+    "multipleFacilities": "Campus-scale site: a sprawling main manufacturing building plus several distinct ancillary/warehouse structures (NE warehouse, NW building, support buildings) within one fenced property.",
+    "railServed": "A rail line runs along the south edge of the property (visible in wc-rtd-sw); former Kimberly-Clark paper mills were rail-served and a spur appears to enter the site.",
+    "fastLaneOpportunity": "Very wide paved aprons and multiple driveways/access points give ample room to add an express/bypass lane.",
+    "urbanRural": "Inside the Conway industrial fabric directly along Interstate I-40 with dense surrounding commercial/retail development — judged Urban.",
+    "postGateStaging": "Extensive paved internal yard provides holding/queue room inside the fence before the docks.",
+    "drivewayLong": "The internal gate-to-dock approach is long and can stack 3+ trucks.",
+    "scale": "No truck scale positively identified; marked uncertain given site scale."
+  },
+  "method": "deep-audit"
+}

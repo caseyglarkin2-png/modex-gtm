@@ -1,0 +1,68 @@
+{
+  "name": "Home Depot SDC - Jersey Village TX",
+  "type": "Stocking Distribution Center",
+  "coords": { "lat": 29.87742, "lng": -95.557076 },
+  "geofences": {
+    "perimeter": { "south": 29.87480, "west": -95.55880, "north": 29.88010, "east": -95.55580 },
+    "truckGate": { "south": 29.87635, "west": -95.55665, "north": 29.87675, "east": -95.55630 },
+    "dropYards": [
+      { "south": 29.87520, "west": -95.55855, "north": 29.87960, "east": -95.55755 }
+    ],
+    "dockAprons": [
+      { "south": 29.87510, "west": -95.55780, "north": 29.87980, "east": -95.55720 }
+    ],
+    "staging": { "south": 29.87560, "west": -95.55720, "north": 29.87960, "east": -95.55620 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 71,
+    "trailersVisible": 25,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 44.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.87742,-95.557076,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["trailerParkingCapacity", "dropArea"],
+  "fieldNotes": {
+    "truckGate": "The truck dock court is fully enclosed by a black metal perimeter fence; a cantilever/rolling gate spans the truck driveway at the SE entrance (~29.8766,-95.5565). Confirmed in 2025 Street View — controlled truck entrance.",
+    "guardShack": "No guard booth anywhere along the fenced perimeter — Street View shows only the automated rolling gate, no staffed structure.",
+    "remoteGs": "True — a real truck gate with no guard shack, implying badge/kiosk/automated check-in.",
+    "entryLanes": "Single rolling gate across one driveway lane; entry and exit share the one gate → entryExitTogether.",
+    "drivewayShort": "The gate sits close to Security Way with only a short paved apron between road and dock court — holds ~1-2 trucks, not a long queue.",
+    "shipRcvSeparate": "Single dock bank along the W (truck-court) face of the building; no second separate dock cluster. Ship and receive run from the one dock line.",
+    "dockDoors": "Leasing listing for 7301 Security Way states 67 numbered dock-high doors plus 4 semi-dock doors and 1 drive-in ramp; Street View shows the long single dock line with numbered doors (e.g. door 78 visible). Reported as 50+.",
+    "dockDoorCount": "71 = 67 dock-high + 4 semi-dock doors per the Prologis/leasing listing.",
+    "dropArea": "Moderate trailer parking in the fenced W truck court; imagery shows the court partly empty (the 7301 building had ~161,099 SF marketed for lease, suggesting partial occupancy). 10-25 trailers detached at time of capture — flagged as uncertain.",
+    "urbanRural": "Inside the Prologis Jersey Village industrial park at the US-290 / Beltway 8 interchange in NW Houston — dense urban industrial fabric.",
+    "siteAreaAcres": "44.74-acre lot per the Prologis/leasing listing for 7301 Security Way; building footprint ~296,839 sq ft.",
+    "postGateStaging": "Paved truck court inside the gate before the dock doors provides holding room.",
+    "multipleFacilities": "The HD SDC occupies one building (7301 Security Way, 'Prologis Jersey Village 4'); neighboring large warehouses in the same Prologis park are separate facilities/tenants."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,54 @@
+{
+  "name": "Jif Peanut Butter - Lexington KY",
+  "type": "Manufacturing - Peanut butter (Jif)",
+  "coords": { "lat": 38.04280, "lng": -84.47780 },
+  "geofences": {
+    "perimeter": { "south": 38.04090, "west": -84.48050, "north": 38.04450, "east": -84.47530 },
+    "truckGate": { "south": 38.04150, "west": -84.47600, "north": 38.04210, "east": -84.47520 },
+    "dropYards": [
+      { "south": 38.04250, "west": -84.47930, "north": 38.04340, "east": -84.47770 },
+      { "south": 38.04330, "west": -84.47980, "north": 38.04420, "east": -84.47830 }
+    ],
+    "dockAprons": [
+      { "south": 38.04190, "west": -84.47620, "north": 38.04280, "east": -84.47530 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 80,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 2,
+    "buildingCount": 9,
+    "siteAreaAcres": 30.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.04280,-84.47780,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "truckGateCount"],
+  "fieldNotes": {
+    "truckGate": "The Jif plant is a fully fenced urban complex. Street View along the internal access road off Winchester Rd shows chain-link / ornamental perimeter fencing and rolling gates at the access points (rail-crossing gate visible open). Trucks enter through a controlled gated point.",
+    "guardShack": "No guard booth positively identified at the truck driveway off Winchester Rd despite checking multiple Street View headings (2024-2025). Signage at the office entrance reads NO TRACTOR TRAILERS, directing trucks to a separate gate; that gate appears to be a rolling fence gate without a staffed booth.",
+    "remoteGs": "Set true: a controlled truck gate exists but no guard shack was found, implying kiosk/call-box/app check-in. Flagged uncertain.",
+    "drivewayShort": "The internal access road off Winchester Rd is short before it reaches dock aprons and the yard; only 1-2 trucks of stacking room.",
+    "backupSensitive": "Tight urban site jammed against Winchester Rd (a major divided arterial) with a rail line; a truck queue at the gate has little room and could spill toward the road.",
+    "dockDoors": "Visible dock faces show ~12-14 trailers backed in on each of multiple building faces; the world's-largest Jif plant spans ~28 acres / multiple buildings, putting the total in the 25-50 band (overhead estimate).",
+    "dropArea": "Multiple large trailer-storage lots on the west/northwest of the complex, 80+ trailers visible, capacity well above 50.",
+    "truckGateCount": "At least one main internal truck driveway off Winchester Rd plus a rail-side gate; counted 2, low confidence.",
+    "multipleFacilities": "Confirmed campus of 9+ interconnected buildings (process plant, warehouses, office) across ~28 acres per web sources.",
+    "railServed": "Active rail spur runs into the plant; Jif-branded silo and rail tracks visible in Street View.",
+    "urbanRural": "Site is within dense Lexington urban fabric — residential, commercial and arterial roads on all sides."
+  },
+  "method": "deep-audit"
+}

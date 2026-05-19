@@ -1,0 +1,49 @@
+{
+  "name": "Danone - Minster OH",
+  "type": "Fresh yogurt plant",
+  "coords": { "lat": 40.38440, "lng": -84.37300 },
+  "geofences": {
+    "perimeter": { "south": 40.38255, "west": -84.37610, "north": 40.38660, "east": -84.36970 },
+    "truckGate": { "south": 40.38320, "west": -84.37320, "north": 40.38370, "east": -84.37250 },
+    "dropYards": [
+      { "south": 40.38350, "west": -84.37320, "north": 40.38600, "east": -84.37000 }
+    ],
+    "dockAprons": [
+      { "south": 40.38390, "west": -84.37170, "north": 40.38640, "east": -84.37120 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 38, "trailersVisible": 60, "trailerParkingCapacity": 80,
+    "truckGateCount": 1, "buildingCount": 3, "siteAreaAcres": 58.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.38440,-84.37300,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "The truck/trailer yard on the south side is fully enclosed by chain-link fence. Street View (pano 40.38332,-84.37285) shows a rolling/sliding gate in the fence across the truck entrance lane.",
+    "guardShack": "No staffed guard booth at the gate - Street View shows only signage ('NO PARKING') at the fenced gate, no 1-3-vehicle structure beside the lane.",
+    "remoteGs": "Gate present but unstaffed - implies badge/kiosk/remote check-in.",
+    "dropArea": "Fenced yard holds many trailers parked in rows (drop yard); estimated 60 visible, banded 25-50 of dedicated drop stalls.",
+    "dockDoors": "Long dock face on the west side of the east DC building with trailers backed in (~25-30 doors), plus dock positions on the older plant face; total ~38, banded 25-50.",
+    "drivewayLong": "Large fenced yard interior provides deep stacking room inside the gate.",
+    "multipleFacilities": "Single integrated plant with an attached east DC expansion and a southwest fuel/maintenance support area - treated as one facility, buildingCount 3 counts the support/maintenance structures.",
+    "scale": "No truck scale identified in imagery; possible but unconfirmed.",
+    "railServed": "No rail spur enters the property.",
+    "postGateStaging": "Wide paved interior yard between trailer rows and dock doors offers ample inside staging.",
+    "urbanRural": "Edge-of-town site - the plant abuts a residential subdivision on the north but open farmland on the south, east, and west; small-town setting -> Rural."
+  },
+  "method": "deep-audit"
+}

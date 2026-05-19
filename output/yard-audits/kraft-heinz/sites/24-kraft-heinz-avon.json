@@ -1,0 +1,22 @@
+{
+  "name": "Kraft Heinz - Avon",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors", "dropArea"],
+  "fieldNotes": {
+    "truckGate": "Street View faces a wide grass setback with only a low chain-link fence at the building base; the truck entrance is off-frame. Satellite is ambiguous on a checkpoint. Marked no gate, low confidence.",
+    "drivewayLong": "Large paved truck court on the south/west sides with ample stacking room.",
+    "urbanRural": "Large legacy plant at the edge of a small town with farmland and low-density development around.",
+    "dockDoors": "Dock banks on the south face; exact count hard to resolve on the dark imagery."
+  }
+}

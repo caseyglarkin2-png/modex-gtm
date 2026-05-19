@@ -1,0 +1,52 @@
+{
+  "name": "Crowley JAXPORT Terminal Office #3 - Jacksonville FL",
+  "type": "Marine terminal / container yard",
+  "coords": { "lat": 30.356990, "lng": -81.625431 },
+  "geofences": {
+    "perimeter": { "south": 30.354000, "west": -81.628000, "north": 30.359000, "east": -81.621000 },
+    "truckGate": { "south": 30.356550, "west": -81.626100, "north": 30.357600, "east": -81.625000 },
+    "dropYards": [
+      { "south": 30.354000, "west": -81.625900, "north": 30.356700, "east": -81.622200 },
+      { "south": 30.356500, "west": -81.622600, "north": 30.358500, "east": -81.621000 }
+    ],
+    "dockAprons": [],
+    "staging": { "south": 30.356800, "west": -81.626200, "north": 30.357600, "east": -81.625400 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 6,
+    "trailersVisible": 350,
+    "trailerParkingCapacity": 900,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 93.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.356990,-81.625431,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 3, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "0-10", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": true, "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "dockDoors", "exitLanes"],
+  "fieldNotes": {
+    "siteIdentification": "3001 Talleyrand Ave = Crowley Port Office #3. The roster point sits essentially ON the modernized north-gate canopy of the Talleyrand terminal. Idx 1 (2831), idx 3 (3001) and idx 4 (2085) are three Crowley offices on the SAME physical Talleyrand terminal complex; idx 3 is the gate/office at the north end. Audited as the northern terminal section centered on the gate.",
+    "truckGate": "Confirmed at satellite z20: a multi-lane covered gate canopy with yellow lane chevrons painted on the apron - the modernized 'north gate'. A check-in booth structure sits at the head of the canopy.",
+    "guardShack": "A booth/check-in structure is integrated at the head of the gate canopy. Staffed gate (port TWIC access).",
+    "entryLanes": "~5 covered lanes under the gate canopy by the chevron count; assigned ~3 inbound / ~2 outbound. Exit-lane split low confidence.",
+    "fastLaneOpportunity": "Multi-lane covered canopy with a wide apron - clear room for an express/bypass lane.",
+    "scale": "Web profile states the Talleyrand terminal has 3 scales; the modernized multi-lane gate canopy is consistent with in-lane scales. Set true but flagged uncertain (not individually resolved in imagery).",
+    "multiStep": "Multi-lane gated check-in plus the booth at the canopy head, with likely in-lane scaling, indicates a staged check-in process.",
+    "dropArea": "Extensive container/trailer stacking yard east of the gate - hundreds of units; banded 50+.",
+    "dockDoors": "Marine terminal - minimal warehouse dock doors near the gate area; ~6 estimated, low confidence.",
+    "railServed": "Rail spurs serve the Talleyrand terminal complex (visible NW and along the west edge).",
+    "multipleFacilities": "Campus: gate complex, multiple offices/transit sheds, tank farm, container yards."
+  },
+  "method": "deep-audit"
+}

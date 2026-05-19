@@ -1,0 +1,62 @@
+{
+  "account": "The Boston Beer Company",
+  "generatedAt": "2026-05-18",
+  "facilityCount": 5,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Samuel Adams Pennsylvania Brewery - Breinigsville PA",
+      "city": "Breinigsville",
+      "state": "PA",
+      "type": "Brewery / production facility (largest in network; includes ~1M sq ft brewery + warehouse space on ~76 acres)",
+      "address": "7880 Penn Drive, Breinigsville, PA 18031",
+      "lat": 40.5328,
+      "lng": -75.6388,
+      "source": "Dossier (PA brewery, Savastano's home site); Yelp, Lehigh Valley Chamber, Trade & Industry Development, D&B all confirm 7880 Penn Dr, Breinigsville PA 18031 (Fogelsville/Lehigh Valley)"
+    },
+    {
+      "idx": 2,
+      "name": "Cincinnati Brewery - Cincinnati OH",
+      "city": "Cincinnati",
+      "state": "OH",
+      "type": "Brewery / canning production facility (Over-the-Rhine; $85M canning expansion 2020 quadrupled canning capacity)",
+      "address": "1625 Central Parkway, Cincinnati, OH 45202",
+      "lat": 39.1126,
+      "lng": -84.521,
+      "source": "Dossier (Cincinnati Brewery, $85M canning build); REDI Cincinnati, Food Processing, CityBeat confirm 1625 Central Parkway, Over-the-Rhine (former Hudepohl-Schoenling/Schoenling plant)"
+    },
+    {
+      "idx": 3,
+      "name": "Milton Brewery (Dogfish Head) - Milton DE",
+      "city": "Milton",
+      "state": "DE",
+      "type": "Brewery / production facility (Dogfish Head main production; acquired by Boston Beer 2019)",
+      "address": "6 Cannery Village Center, Milton, DE 19968",
+      "lat": 38.7782,
+      "lng": -75.3082,
+      "source": "Dossier (Milton DE brewery); Dogfish Head official site, Yelp, Brewbound confirm 6 Cannery Village Center, Milton DE 19968"
+    },
+    {
+      "idx": 4,
+      "name": "Samuel Adams Boston Brewery - Jamaica Plain, Boston MA",
+      "city": "Boston",
+      "state": "MA",
+      "type": "Brewery / production facility (heritage Jamaica Plain site; smaller footprint, taproom-attached)",
+      "address": "30 Germania Street, Boston, MA 02130",
+      "lat": 42.3144,
+      "lng": -71.1031,
+      "source": "Dossier (Jamaica Plain heritage brewery); Yelp, Apple Maps, BeerAdvocate confirm 30 Germania St, Boston MA 02130 (Jamaica Plain)"
+    },
+    {
+      "idx": 5,
+      "name": "Angry Orchard Innovation Cidery - Walden NY",
+      "city": "Walden",
+      "state": "NY",
+      "type": "Cidery / production facility (company-owned 60-acre apple orchard + Innovation Cider House; specialty/small-batch cider production)",
+      "address": "2241 Albany Post Road, Walden, NY 12586",
+      "lat": 41.584,
+      "lng": -74.138,
+      "source": "Boston Beer 10-K (Item 2: company owns apple orchard and cidery in Walden NY); Yelp, I Love NY confirm 2241 Albany Post Rd, Walden NY 12586. Note: majority of Angry Orchard volume is produced at the Cincinnati Brewery; Walden is R&D/specialty cider"
+    }
+  ]
+}

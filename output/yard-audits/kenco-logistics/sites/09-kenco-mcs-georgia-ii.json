@@ -1,0 +1,49 @@
+{
+  "name": "Kenco MCS Georgia II - Austell GA",
+  "type": "Multi-Client Distribution Center",
+  "coords": { "lat": 33.777949, "lng": -84.574624 },
+  "geofences": {
+    "perimeter": null,
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 0.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.777949,-84.574624,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "locationStatus": "FACILITY NOT POSITIVELY LOCATED. Roster supplies only 'Austell, GA 30168' with an APPROXIMATE geocode (33.777949, -84.574624) identical to idx 8 (Georgia I); the point lands on a residential apartment complex / water tower, not an industrial building.",
+    "research": "Kenco MCS Georgia II (499,960 SF, temperature controlled, food grade) is the second building of the same Kenco Austell, GA campus as idx 8. It is most likely a building in the former The Shippers Group Austell footprint (Kenco acquired TSG January 2024). The documented TSG Austell facility at 300 Interstate West Parkway, Lithia Springs GA 30122 is 530,000 SF; a second ~500,000 SF building adjacent on the same campus would correspond to this Georgia II entry. No street address is published for it.",
+    "candidates": "Probed the Interstate West Parkway corridor (Lithia Springs, I-20 Exit 44) and the Six Flags Road / Riverside big-box DC park in Austell 30168. Neither yielded a positively confirmable Kenco-tenanted 500,000 SF building in available imagery / Street View.",
+    "recommendation": "Flagged for human review. Resolve by obtaining the exact street address from Kenco, then re-running the deep audit. See dossier 08 for the shared-campus research.",
+    "urbanRural": "Suburban metro-Atlanta industrial setting if located in the candidate parks - classified Urban but unverified."
+  },
+  "method": "deep-audit"
+}

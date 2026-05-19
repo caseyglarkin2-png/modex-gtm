@@ -1,0 +1,56 @@
+{
+  "name": "Toyota Motor Manufacturing Indiana - Princeton IN",
+  "type": "Vehicle Assembly Plant",
+  "coords": { "lat": 38.290, "lng": -87.563 },
+  "geofences": {
+    "perimeter": { "south": 38.2820, "west": -87.5720, "north": 38.2985, "east": -87.5530 },
+    "truckGate": { "south": 38.28680, "west": -87.56300, "north": 38.28780, "east": -87.56140 },
+    "dropYards": [
+      { "south": 38.28700, "west": -87.56000, "north": 38.29050, "east": -87.55650 },
+      { "south": 38.28900, "west": -87.56850, "north": 38.29350, "east": -87.56400 },
+      { "south": 38.28950, "west": -87.56300, "north": 38.29300, "east": -87.55950 }
+    ],
+    "dockAprons": [
+      { "south": 38.28850, "west": -87.56500, "north": 38.29200, "east": -87.56100 },
+      { "south": 38.29100, "west": -87.56000, "north": 38.29400, "east": -87.55650 }
+    ],
+    "staging": { "south": 38.28700, "west": -87.56250, "north": 38.28950, "east": -87.55950 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 150,
+    "trailersVisible": 600,
+    "trailerParkingCapacity": 850,
+    "truckGateCount": 2,
+    "buildingCount": 9,
+    "siteAreaAcres": 730.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.29,-87.563,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "entryLanes", "exitLanes", "dockDoorCount", "multiStep"],
+  "fieldNotes": {
+    "site": "TMMI — Toyota's Indiana assembly plant (Highlander, Grand Highlander, 3-row BEV SUV; $8B total IN investment incl. $1.4B BEV retool). Large central white-roof assembly building plus ~8 supporting structures (logistics/cross-dock, paint, supplier buildings, on-site test track on the east).",
+    "truckGate": "Fully fenced, security-controlled automotive plant set in farmland. Wide multi-lane internal approach road (Tulip Tree Drive) leads from the public road into the plant; truck entrances are controlled checkpoints. truckGate true with high confidence.",
+    "guardShack": "Manned guard houses are standard at Toyota assembly-plant gates; small guard structures present at the plant entrance points. guardShack true; remoteGs false.",
+    "dropArea": "Very large drop yards: multiple distinct trailer lots on the west and east sides of the plant, each with dozens of trailers in dense rows (z16-z18 imagery). Easily 50+ band; dropYard true.",
+    "dockDoors": "Extensive dock banks along the assembly plant and logistics buildings; ~150 conservative estimate, 50+ band certain.",
+    "urbanRural": "Plant is surrounded by open farmland and forest buffer outside Princeton IN (pop ~8,500) — clearly Rural.",
+    "shipRcvSeparate": "Separate inbound cross-dock/logistics buildings vs. finished-vehicle outbound staging lots (rows of finished cars seen on the N and E sides).",
+    "multipleFacilities": "Campus has multiple large buildings plus an on-site vehicle test track.",
+    "fastLaneOpportunity": "Wide multi-lane approach roads and large gate aprons leave clear room for express/bypass lanes.",
+    "railServed": "Rail spur serves the plant (standard for an assembly plant of this scale; rail-served areas visible on campus).",
+    "perimeter": "Box covers the core developed plant campus; TMMI owns substantial additional open buffer land beyond it."
+  },
+  "method": "deep-audit"
+}

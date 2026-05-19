@@ -1,0 +1,53 @@
+{
+  "name": "Coffee Roasting - New Orleans LA",
+  "type": "Manufacturing - Coffee roasting/packaging (bulk)",
+  "coords": { "lat": 30.0335, "lng": -89.9112 },
+  "geofences": {
+    "perimeter": { "south": 30.0312, "west": -89.9140, "north": 30.0360, "east": -89.9082 },
+    "truckGate": { "south": 30.03145, "west": -89.91375, "north": 30.03175, "east": -89.91325 },
+    "dropYards": [
+      { "south": 30.03255, "west": -89.91185, "north": 30.03300, "east": -89.91120 }
+    ],
+    "dockAprons": [
+      { "south": 30.03260, "west": -89.91240, "north": 30.03310, "east": -89.91100 },
+      { "south": 30.03285, "west": -89.91130, "north": 30.03340, "east": -89.91020 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 11,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 73.8,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.0335,-89.9112,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Folgers/J.M. Smucker Old Gentilly Rd coffee roasting plant, New Orleans East. Confirmed via Street View (Nov 2025) showing the large industrial roasting building with processing tower and continuous perimeter fence/hedge, plus web research (largest bulk coffee facility of its kind in the world; opened 1960).",
+    "truckGate": "Wide gated truck entrance on the SW frontage road (~30.0316,-89.9135): a fence opening with sliding/swing gate panels set back from the road and an overhead gantry sign structure spanning the driveway. Clear controlled checkpoint.",
+    "guardShack": "No distinct staffed guard booth resolved at the gate in Street View or satellite; a small structure sits near the gate apron but its function is ambiguous. Low confidence — treated as remote check-in (kiosk/call-box).",
+    "remoteGs": "Set true because a controlled truck gate is present but no clear guard shack — implies kiosk / call-box check-in. Flagged uncertain.",
+    "shipRcvSeparate": "Dock activity is split across more than one building face (south face dock apron near 30.0328,-89.9116 and a separate SE dock band near 30.0331,-89.9109); green coffee receiving and finished-goods shipping are physically distinct per site operations.",
+    "railServed": "Rail spur runs along the north edge of the property; web research confirms finished coffee ships by rail, truck and water.",
+    "multipleFacilities": "Large multi-building campus: main roasting/packaging building, separate processing/silo structures to the NE, and ancillary buildings — more than one large cluster behind the fence.",
+    "fastLaneOpportunity": "Gate driveway is wide with substantial unused paved apron width; room exists to add a bypass/express lane.",
+    "dockDoorCount": "~30 estimate from overhead imagery; many bays partially obscured by building shadow and tree cover along faces. Flagged low confidence.",
+    "siteAreaAcres": "73.8 acres for the full fenced manufacturing complex (building cluster plus rail-served processing yard and dock aprons). Historical 1960 footprint was ~20 acres; the operation has expanded substantially."
+  },
+  "method": "deep-audit"
+}

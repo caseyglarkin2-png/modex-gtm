@@ -1,0 +1,52 @@
+{
+  "name": "Niagara Bottling - Brigham City UT",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 41.511870, "lng": -112.042220 },
+  "geofences": {
+    "perimeter": { "south": 41.51080, "west": -112.04470, "north": 41.51350, "east": -112.04050 },
+    "truckGate": { "south": 41.51075, "west": -112.04360, "north": 41.51110, "east": -112.04300 },
+    "dropYards": [
+      { "south": 41.51250, "west": -112.04400, "north": 41.51330, "east": -112.04080 }
+    ],
+    "dockAprons": [
+      { "south": 41.51210, "west": -112.04390, "north": 41.51270, "east": -112.04090 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 34,
+    "trailersVisible": 32,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 30.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.511870,-112.042220,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "entryLanes"],
+  "fieldNotes": {
+    "facility": "Niagara Bottling Brigham City, 77 N Industrial Way, ~257,000 sq ft plant opened 2017. Confirmed by the red 'niagara' logo on the east office face and water-treatment silos along the building's east side in Street View (2023-08).",
+    "truckGate": "Truck yard is fully enclosed by a continuous chain-link perimeter fence (clearly visible in Street View). The truck drive enters the fenced yard at the SW corner where the perimeter loop meets W Forest St. A controlled gate is present where the drive crosses the fence; the exact barrier element is obscured by landscaping at max zoom.",
+    "guardShack": "No staffed multi-window guard booth visible at the entrance.",
+    "remoteGs": "Fenced/gated yard with no manned booth; a driver review explicitly describes 'a checkout system for trucking operations' - consistent with an automated / kiosk / remote check-in.",
+    "dockDoors": "Long dock-door row along the full north face with many trailers backed in; estimated ~34 doors from z18 imagery, flagged approximate.",
+    "dropArea": "A dedicated row of parked trailers runs along the north edge of the truck yard, separate from the active dock apron.",
+    "fastLaneOpportunity": "Wide paved perimeter yard and unused width inside the fence; room to add an express bypass lane.",
+    "entryLanes": "Lane count at the SW gate could not be resolved (landscaping obstruction); estimated 1 in / 1 out, flagged.",
+    "urbanRural": "Edge-of-town industrial area in small Brigham City, surrounded by fields - Rural per rubric (small-town industrial -> Rural).",
+    "buildingCount": "Single large Niagara building; the perimeter drive loops the whole building."
+  },
+  "method": "deep-audit"
+}

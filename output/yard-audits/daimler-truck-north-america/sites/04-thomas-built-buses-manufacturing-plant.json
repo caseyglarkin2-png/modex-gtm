@@ -1,0 +1,55 @@
+{
+  "name": "Thomas Built Buses Manufacturing Plant - High Point NC",
+  "type": "Bus assembly plant",
+  "coords": { "lat": 35.941867, "lng": -80.022076 },
+  "geofences": {
+    "perimeter": { "south": 35.938500, "west": -80.026000, "north": 35.944500, "east": -80.019000 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 35.941700, "west": -80.021600, "north": 35.942800, "east": -80.020100 }
+    ],
+    "dockAprons": [
+      { "south": 35.940200, "west": -80.024100, "north": 35.942600, "east": -80.022000 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 25,
+    "trailersVisible": 50,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 0,
+    "buildingCount": 8,
+    "siteAreaAcres": 80.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.941867,-80.022076,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "dropArea", "scale"],
+  "fieldNotes": {
+    "location": "Roster coords (ROOFTOP, moved 30m) landed on the legacy Thomas Built Buses plant. Confirmed via Thomas Built Buses / DTNA news pages - 1408 Courtesy Road, High Point NC, the company's original site since 1916, building Type A Minotour / Type C / Type D school buses (Minotour capacity expansion announced Dec 2025).",
+    "truckGate": "Sprawling legacy urban industrial complex straddling Courtesy Road; buildings line both sides of the public street. Individual yards are fenced (privacy-slat chain-link seen in Street View) but there is no single dominant manned perimeter gate or barrier arm controlling all truck traffic - access is from the public road into multiple fenced yards. truckGate set false, flagged uncertain.",
+    "guardShack": "No guard booth identified at any frontage in Street View.",
+    "dockDoors": "Trailers backed at docks across several buildings; estimate 25-50 doors total, flagged uncertain (legacy multi-building layout, several faces obscured).",
+    "dropArea": "School buses and some trailers staged in lots along the rail side; banded 10-25, flagged uncertain.",
+    "dropYard": "No single dedicated trailer-storage lot - finished buses and trailers staged in working yards.",
+    "railServed": "Multiple active rail spurs run into the property along the NE-SW rail corridor.",
+    "multipleFacilities": "Legacy campus of many connected/adjacent buildings straddling Courtesy Road = a multi-building complex.",
+    "backupSensitive": "Plant fronts directly on a narrow public street (Courtesy Road) with little stacking room; a truck queue at any yard entrance would spill onto the road.",
+    "shipRcvSeparate": "Dock activity is spread across separate buildings/faces handling different inbound and outbound flows.",
+    "drivewayShort": "Yard approaches off Courtesy Road are short (1-2 trucks).",
+    "urbanRural": "Dense urban industrial fabric of High Point - Urban.",
+    "scale": "No truck scale identified - flagged uncertain."
+  },
+  "method": "deep-audit"
+}

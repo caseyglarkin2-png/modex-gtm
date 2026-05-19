@@ -1,0 +1,54 @@
+{
+  "name": "Crowley JAXPORT Marine Terminal - Jacksonville FL",
+  "type": "Marine terminal / container port",
+  "coords": { "lat": 30.354400, "lng": -81.623900 },
+  "geofences": {
+    "perimeter": { "south": 30.350000, "west": -81.628000, "north": 30.358800, "east": -81.619500 },
+    "truckGate": { "south": 30.357050, "west": -81.625600, "north": 30.357600, "east": -81.624700 },
+    "dropYards": [
+      { "south": 30.354200, "west": -81.625900, "north": 30.356700, "east": -81.622900 },
+      { "south": 30.351000, "west": -81.624500, "north": 30.354000, "east": -81.620500 },
+      { "south": 30.355500, "west": -81.622800, "north": 30.358200, "east": -81.620000 }
+    ],
+    "dockAprons": [
+      { "south": 30.350300, "west": -81.621500, "north": 30.351800, "east": -81.620200 }
+    ],
+    "staging": { "south": 30.356800, "west": -81.626200, "north": 30.357700, "east": -81.625400 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 12,
+    "trailersVisible": 600,
+    "trailerParkingCapacity": 1400,
+    "truckGateCount": 1,
+    "buildingCount": 9,
+    "siteAreaAcres": 197.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.354400,-81.623900,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 3, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "dockDoors"],
+  "fieldNotes": {
+    "siteIdentification": "Pinned address 2831 Talleyrand Ave is the Crowley Main Port Office (L-shaped office building w/ employee lot). The audited facility is the full Crowley Talleyrand container terminal that the office serves - a large ConRo terminal running ~1km along the St. Johns River.",
+    "truckGate": "Modernized 'north gate' confirmed in satellite z20 and Street View (2022/2023): a multi-lane covered canopy gate structure with painted yellow lane chevrons and check-in booth modules. Crowley press states the north gate was reconstructed and trucker turn time cut to ~20 min.",
+    "guardShack": "Canopied gate has integrated check-in booth modules under/beside the canopy; a separate small booth structure sits near the road - staffed gate operation.",
+    "entryLanes": "~3 inbound lanes visible under the gate canopy with yellow directional chevrons; exit lanes ~2. Counts approximate.",
+    "fastLaneOpportunity": "Wide gate apron and multi-lane canopy provide physical room for an express/bypass lane.",
+    "dropYard": "Extensive container/chassis stacking yard and trailer parking - many hundreds of containers and trailers visible across the terminal.",
+    "dockDoors": "Marine terminal - no warehouse-style dock bank; count reflects loading doors on the riverside transit shed at the south end (z17). Low confidence.",
+    "scale": "No truck scale clearly resolved in imagery; common at ports but not confirmed - flagged uncertain.",
+    "railServed": "Rail spurs run into the terminal area (visible NW of the gate and along the west edge); Talleyrand has an adjacent intermodal yard (ICTF).",
+    "multipleFacilities": "Campus-scale: gate complex, multiple transit sheds/warehouses, tank farm, container yards and crane-served berths."
+  },
+  "method": "deep-audit"
+}

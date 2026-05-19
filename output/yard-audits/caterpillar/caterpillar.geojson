@@ -1,0 +1,4676 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.918,
+              39.8725
+            ],
+            [
+              -88.902,
+              39.8725
+            ],
+            [
+              -88.902,
+              39.8862
+            ],
+            [
+              -88.918,
+              39.8862
+            ],
+            [
+              -88.918,
+              39.8725
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Decatur IL Plant",
+        "type": "Manufacturing plant (mining trucks, large wheel loaders, motor graders)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 38,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 2,
+          "buildingCount": 9,
+          "siteAreaAcres": 360,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9162,
+              39.8744
+            ],
+            [
+              -88.9152,
+              39.8744
+            ],
+            [
+              -88.9152,
+              39.8752
+            ],
+            [
+              -88.9162,
+              39.8752
+            ],
+            [
+              -88.9162,
+              39.8744
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Decatur IL Plant",
+        "type": "Manufacturing plant (mining trucks, large wheel loaders, motor graders)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9162,
+              39.883
+            ],
+            [
+              -88.9135,
+              39.883
+            ],
+            [
+              -88.9135,
+              39.8845
+            ],
+            [
+              -88.9162,
+              39.8845
+            ],
+            [
+              -88.9162,
+              39.883
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Decatur IL Plant",
+        "type": "Manufacturing plant (mining trucks, large wheel loaders, motor graders)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9105,
+              39.8826
+            ],
+            [
+              -88.9088,
+              39.8826
+            ],
+            [
+              -88.9088,
+              39.8842
+            ],
+            [
+              -88.9105,
+              39.8842
+            ],
+            [
+              -88.9105,
+              39.8826
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Decatur IL Plant",
+        "type": "Manufacturing plant (mining trucks, large wheel loaders, motor graders)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9112,
+              39.882
+            ],
+            [
+              -88.9092,
+              39.882
+            ],
+            [
+              -88.9092,
+              39.8832
+            ],
+            [
+              -88.9112,
+              39.8832
+            ],
+            [
+              -88.9112,
+              39.882
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Decatur IL Plant",
+        "type": "Manufacturing plant (mining trucks, large wheel loaders, motor graders)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9152,
+              39.8755
+            ],
+            [
+              -88.9128,
+              39.8755
+            ],
+            [
+              -88.9128,
+              39.8775
+            ],
+            [
+              -88.9152,
+              39.8775
+            ],
+            [
+              -88.9152,
+              39.8755
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Decatur IL Plant",
+        "type": "Manufacturing plant (mining trucks, large wheel loaders, motor graders)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.6025,
+              40.667
+            ],
+            [
+              -89.588,
+              40.667
+            ],
+            [
+              -89.588,
+              40.6775
+            ],
+            [
+              -89.6025,
+              40.6775
+            ],
+            [
+              -89.6025,
+              40.667
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - East Peoria IL Plant",
+        "type": "Manufacturing plant (track-type tractors, components)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 230,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.592,
+              40.673
+            ],
+            [
+              -89.5905,
+              40.673
+            ],
+            [
+              -89.5905,
+              40.674
+            ],
+            [
+              -89.592,
+              40.674
+            ],
+            [
+              -89.592,
+              40.673
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - East Peoria IL Plant",
+        "type": "Manufacturing plant (track-type tractors, components)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.5985,
+              40.6745
+            ],
+            [
+              -89.5895,
+              40.6745
+            ],
+            [
+              -89.5895,
+              40.6765
+            ],
+            [
+              -89.5985,
+              40.6765
+            ],
+            [
+              -89.5985,
+              40.6745
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - East Peoria IL Plant",
+        "type": "Manufacturing plant (track-type tractors, components)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.5925,
+              40.6735
+            ],
+            [
+              -89.5905,
+              40.6735
+            ],
+            [
+              -89.5905,
+              40.6755
+            ],
+            [
+              -89.5925,
+              40.6755
+            ],
+            [
+              -89.5925,
+              40.6735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - East Peoria IL Plant",
+        "type": "Manufacturing plant (track-type tractors, components)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.7515,
+              40.553
+            ],
+            [
+              -89.74,
+              40.553
+            ],
+            [
+              -89.74,
+              40.564
+            ],
+            [
+              -89.7515,
+              40.564
+            ],
+            [
+              -89.7515,
+              40.553
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Mapleton IL Foundry",
+        "type": "Manufacturing plant (foundry - engine castings for 3500/3600/C175)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 200,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.7468,
+              40.5602
+            ],
+            [
+              -89.7455,
+              40.5602
+            ],
+            [
+              -89.7455,
+              40.5612
+            ],
+            [
+              -89.7468,
+              40.5612
+            ],
+            [
+              -89.7468,
+              40.5602
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Mapleton IL Foundry",
+        "type": "Manufacturing plant (foundry - engine castings for 3500/3600/C175)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.7465,
+              40.5598
+            ],
+            [
+              -89.7448,
+              40.5598
+            ],
+            [
+              -89.7448,
+              40.5612
+            ],
+            [
+              -89.7465,
+              40.5612
+            ],
+            [
+              -89.7465,
+              40.5598
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Mapleton IL Foundry",
+        "type": "Manufacturing plant (foundry - engine castings for 3500/3600/C175)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.747,
+              40.5595
+            ],
+            [
+              -89.7452,
+              40.5595
+            ],
+            [
+              -89.7452,
+              40.561
+            ],
+            [
+              -89.747,
+              40.561
+            ],
+            [
+              -89.747,
+              40.5595
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Mapleton IL Foundry",
+        "type": "Manufacturing plant (foundry - engine castings for 3500/3600/C175)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8512,
+              40.4095
+            ],
+            [
+              -86.842,
+              40.4095
+            ],
+            [
+              -86.842,
+              40.4178
+            ],
+            [
+              -86.8512,
+              40.4178
+            ],
+            [
+              -86.8512,
+              40.4095
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Lafayette IN Large Engine Center",
+        "type": "Manufacturing plant (large engines; $725M campus expansion underway)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 24,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 230,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.847,
+              40.4118
+            ],
+            [
+              -86.8458,
+              40.4118
+            ],
+            [
+              -86.8458,
+              40.4128
+            ],
+            [
+              -86.847,
+              40.4128
+            ],
+            [
+              -86.847,
+              40.4118
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Lafayette IN Large Engine Center",
+        "type": "Manufacturing plant (large engines; $725M campus expansion underway)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8475,
+              40.4118
+            ],
+            [
+              -86.8452,
+              40.4118
+            ],
+            [
+              -86.8452,
+              40.4135
+            ],
+            [
+              -86.8475,
+              40.4135
+            ],
+            [
+              -86.8475,
+              40.4118
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Lafayette IN Large Engine Center",
+        "type": "Manufacturing plant (large engines; $725M campus expansion underway)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.848,
+              40.4125
+            ],
+            [
+              -86.8455,
+              40.4125
+            ],
+            [
+              -86.8455,
+              40.4138
+            ],
+            [
+              -86.848,
+              40.4138
+            ],
+            [
+              -86.848,
+              40.4125
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Lafayette IN Large Engine Center",
+        "type": "Manufacturing plant (large engines; $725M campus expansion underway)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.847,
+              40.4112
+            ],
+            [
+              -86.845,
+              40.4112
+            ],
+            [
+              -86.845,
+              40.4122
+            ],
+            [
+              -86.847,
+              40.4122
+            ],
+            [
+              -86.847,
+              40.4112
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Lafayette IN Large Engine Center",
+        "type": "Manufacturing plant (large engines; $725M campus expansion underway)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.1772,
+              35.5408
+            ],
+            [
+              -79.1682,
+              35.5408
+            ],
+            [
+              -79.1682,
+              35.5512
+            ],
+            [
+              -79.1772,
+              35.5512
+            ],
+            [
+              -79.1772,
+              35.5408
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Sanford NC Plant",
+        "type": "Manufacturing plant (BCP - skid-steer, multi-terrain, compact track loaders)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 220,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.176,
+              35.5448
+            ],
+            [
+              -79.1748,
+              35.5448
+            ],
+            [
+              -79.1748,
+              35.5458
+            ],
+            [
+              -79.176,
+              35.5458
+            ],
+            [
+              -79.176,
+              35.5448
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Sanford NC Plant",
+        "type": "Manufacturing plant (BCP - skid-steer, multi-terrain, compact track loaders)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.1748,
+              35.5448
+            ],
+            [
+              -79.1725,
+              35.5448
+            ],
+            [
+              -79.1725,
+              35.5462
+            ],
+            [
+              -79.1748,
+              35.5462
+            ],
+            [
+              -79.1748,
+              35.5448
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Sanford NC Plant",
+        "type": "Manufacturing plant (BCP - skid-steer, multi-terrain, compact track loaders)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.1712,
+              35.5468
+            ],
+            [
+              -79.1692,
+              35.5468
+            ],
+            [
+              -79.1692,
+              35.5482
+            ],
+            [
+              -79.1712,
+              35.5482
+            ],
+            [
+              -79.1712,
+              35.5468
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Sanford NC Plant",
+        "type": "Manufacturing plant (BCP - skid-steer, multi-terrain, compact track loaders)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.1745,
+              35.5448
+            ],
+            [
+              -79.173,
+              35.5448
+            ],
+            [
+              -79.173,
+              35.5468
+            ],
+            [
+              -79.1745,
+              35.5468
+            ],
+            [
+              -79.1745,
+              35.5448
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Sanford NC Plant",
+        "type": "Manufacturing plant (BCP - skid-steer, multi-terrain, compact track loaders)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.1755,
+              35.544
+            ],
+            [
+              -79.1742,
+              35.544
+            ],
+            [
+              -79.1742,
+              35.545
+            ],
+            [
+              -79.1755,
+              35.545
+            ],
+            [
+              -79.1755,
+              35.544
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Sanford NC Plant",
+        "type": "Manufacturing plant (BCP - skid-steer, multi-terrain, compact track loaders)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.4282,
+              35.6372
+            ],
+            [
+              -78.4205,
+              35.6372
+            ],
+            [
+              -78.4205,
+              35.6435
+            ],
+            [
+              -78.4282,
+              35.6435
+            ],
+            [
+              -78.4282,
+              35.6372
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Clayton NC Plant",
+        "type": "Manufacturing plant (BCP - small wheel loader assembly)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 130,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.4222,
+              35.6398
+            ],
+            [
+              -78.421,
+              35.6398
+            ],
+            [
+              -78.421,
+              35.6408
+            ],
+            [
+              -78.4222,
+              35.6408
+            ],
+            [
+              -78.4222,
+              35.6398
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Clayton NC Plant",
+        "type": "Manufacturing plant (BCP - small wheel loader assembly)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.4248,
+              35.6412
+            ],
+            [
+              -78.4222,
+              35.6412
+            ],
+            [
+              -78.4222,
+              35.6432
+            ],
+            [
+              -78.4248,
+              35.6432
+            ],
+            [
+              -78.4248,
+              35.6412
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Clayton NC Plant",
+        "type": "Manufacturing plant (BCP - small wheel loader assembly)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.424,
+              35.6388
+            ],
+            [
+              -78.4218,
+              35.6388
+            ],
+            [
+              -78.4218,
+              35.6402
+            ],
+            [
+              -78.424,
+              35.6402
+            ],
+            [
+              -78.424,
+              35.6388
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Clayton NC Plant",
+        "type": "Manufacturing plant (BCP - small wheel loader assembly)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.4248,
+              35.6398
+            ],
+            [
+              -78.4228,
+              35.6398
+            ],
+            [
+              -78.4228,
+              35.6412
+            ],
+            [
+              -78.4248,
+              35.6412
+            ],
+            [
+              -78.4248,
+              35.6398
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Clayton NC Plant",
+        "type": "Manufacturing plant (BCP - small wheel loader assembly)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.5635,
+              40.8385
+            ],
+            [
+              -89.5495,
+              40.8385
+            ],
+            [
+              -89.5495,
+              40.85
+            ],
+            [
+              -89.5635,
+              40.85
+            ],
+            [
+              -89.5635,
+              40.8385
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Mossville IL Engine & Research Campus",
+        "type": "Manufacturing & research campus (engines, components)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 320,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.5605,
+              40.8424
+            ],
+            [
+              -89.5592,
+              40.8424
+            ],
+            [
+              -89.5592,
+              40.8432
+            ],
+            [
+              -89.5605,
+              40.8432
+            ],
+            [
+              -89.5605,
+              40.8424
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Mossville IL Engine & Research Campus",
+        "type": "Manufacturing & research campus (engines, components)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.5615,
+              40.8455
+            ],
+            [
+              -89.5595,
+              40.8455
+            ],
+            [
+              -89.5595,
+              40.847
+            ],
+            [
+              -89.5615,
+              40.847
+            ],
+            [
+              -89.5615,
+              40.8455
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Mossville IL Engine & Research Campus",
+        "type": "Manufacturing & research campus (engines, components)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.56,
+              40.8398
+            ],
+            [
+              -89.5585,
+              40.8398
+            ],
+            [
+              -89.5585,
+              40.841
+            ],
+            [
+              -89.56,
+              40.841
+            ],
+            [
+              -89.56,
+              40.8398
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Mossville IL Engine & Research Campus",
+        "type": "Manufacturing & research campus (engines, components)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.5585,
+              40.84
+            ],
+            [
+              -89.5565,
+              40.84
+            ],
+            [
+              -89.5565,
+              40.8415
+            ],
+            [
+              -89.5585,
+              40.8415
+            ],
+            [
+              -89.5585,
+              40.84
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Mossville IL Engine & Research Campus",
+        "type": "Manufacturing & research campus (engines, components)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.372,
+              41.7095
+            ],
+            [
+              -88.358,
+              41.7095
+            ],
+            [
+              -88.358,
+              41.7188
+            ],
+            [
+              -88.372,
+              41.7188
+            ],
+            [
+              -88.372,
+              41.7095
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Aurora (Montgomery) IL Plant",
+        "type": "Manufacturing plant (wheel loaders; site reportedly listed for sale)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 298,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.3716,
+              41.7176
+            ],
+            [
+              -88.3708,
+              41.7176
+            ],
+            [
+              -88.3708,
+              41.7188
+            ],
+            [
+              -88.3716,
+              41.7188
+            ],
+            [
+              -88.3716,
+              41.7176
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Aurora (Montgomery) IL Plant",
+        "type": "Manufacturing plant (wheel loaders; site reportedly listed for sale)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.3645,
+              41.7184
+            ],
+            [
+              -88.3628,
+              41.7184
+            ],
+            [
+              -88.3628,
+              41.7196
+            ],
+            [
+              -88.3645,
+              41.7196
+            ],
+            [
+              -88.3645,
+              41.7184
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Aurora (Montgomery) IL Plant",
+        "type": "Manufacturing plant (wheel loaders; site reportedly listed for sale)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.367,
+              41.7105
+            ],
+            [
+              -88.362,
+              41.7105
+            ],
+            [
+              -88.362,
+              41.7145
+            ],
+            [
+              -88.367,
+              41.7145
+            ],
+            [
+              -88.367,
+              41.7105
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Aurora (Montgomery) IL Plant",
+        "type": "Manufacturing plant (wheel loaders; site reportedly listed for sale)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.3648,
+              41.7184
+            ],
+            [
+              -88.3634,
+              41.7184
+            ],
+            [
+              -88.3634,
+              41.7191
+            ],
+            [
+              -88.3648,
+              41.7191
+            ],
+            [
+              -88.3648,
+              41.7184
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Aurora (Montgomery) IL Plant",
+        "type": "Manufacturing plant (wheel loaders; site reportedly listed for sale)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.465,
+              40.614
+            ],
+            [
+              -89.452,
+              40.614
+            ],
+            [
+              -89.452,
+              40.623
+            ],
+            [
+              -89.465,
+              40.623
+            ],
+            [
+              -89.465,
+              40.614
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Morton IL Global Parts Distribution Center",
+        "type": "Parts distribution center (anchor depot, 3M+ sq ft)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 100,
+          "truckGateCount": 2,
+          "buildingCount": 5,
+          "siteAreaAcres": 272,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.458,
+              40.6165
+            ],
+            [
+              -89.456,
+              40.6165
+            ],
+            [
+              -89.456,
+              40.6178
+            ],
+            [
+              -89.458,
+              40.6178
+            ],
+            [
+              -89.458,
+              40.6165
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Morton IL Global Parts Distribution Center",
+        "type": "Parts distribution center (anchor depot, 3M+ sq ft)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.462,
+              40.6145
+            ],
+            [
+              -89.455,
+              40.6145
+            ],
+            [
+              -89.455,
+              40.6175
+            ],
+            [
+              -89.462,
+              40.6175
+            ],
+            [
+              -89.462,
+              40.6145
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Morton IL Global Parts Distribution Center",
+        "type": "Parts distribution center (anchor depot, 3M+ sq ft)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.456,
+              40.619
+            ],
+            [
+              -89.4525,
+              40.619
+            ],
+            [
+              -89.4525,
+              40.6215
+            ],
+            [
+              -89.456,
+              40.6215
+            ],
+            [
+              -89.456,
+              40.619
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Morton IL Global Parts Distribution Center",
+        "type": "Parts distribution center (anchor depot, 3M+ sq ft)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.4555,
+              40.6188
+            ],
+            [
+              -89.453,
+              40.6188
+            ],
+            [
+              -89.453,
+              40.6202
+            ],
+            [
+              -89.4555,
+              40.6202
+            ],
+            [
+              -89.4555,
+              40.6188
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Morton IL Global Parts Distribution Center",
+        "type": "Parts distribution center (anchor depot, 3M+ sq ft)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.549,
+              47.5942
+            ],
+            [
+              -117.544,
+              47.5942
+            ],
+            [
+              -117.544,
+              47.599
+            ],
+            [
+              -117.549,
+              47.599
+            ],
+            [
+              -117.549,
+              47.5942
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Spokane WA Distribution Center (DC-3)",
+        "type": "Parts distribution center (~562k-600k sq ft, 24/7 three-shift)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 49,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5488,
+              47.5944
+            ],
+            [
+              -117.5478,
+              47.5944
+            ],
+            [
+              -117.5478,
+              47.5956
+            ],
+            [
+              -117.5488,
+              47.5956
+            ],
+            [
+              -117.5488,
+              47.5944
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Spokane WA Distribution Center (DC-3)",
+        "type": "Parts distribution center (~562k-600k sq ft, 24/7 three-shift)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5485,
+              47.596
+            ],
+            [
+              -117.5455,
+              47.596
+            ],
+            [
+              -117.5455,
+              47.5985
+            ],
+            [
+              -117.5485,
+              47.5985
+            ],
+            [
+              -117.5485,
+              47.596
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Spokane WA Distribution Center (DC-3)",
+        "type": "Parts distribution center (~562k-600k sq ft, 24/7 three-shift)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5487,
+              47.5948
+            ],
+            [
+              -117.5475,
+              47.5948
+            ],
+            [
+              -117.5475,
+              47.5962
+            ],
+            [
+              -117.5487,
+              47.5962
+            ],
+            [
+              -117.5487,
+              47.5948
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Spokane WA Distribution Center (DC-3)",
+        "type": "Parts distribution center (~562k-600k sq ft, 24/7 three-shift)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5455,
+              47.5953
+            ],
+            [
+              -117.5444,
+              47.5953
+            ],
+            [
+              -117.5444,
+              47.5985
+            ],
+            [
+              -117.5455,
+              47.5985
+            ],
+            [
+              -117.5455,
+              47.5953
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Spokane WA Distribution Center (DC-3)",
+        "type": "Parts distribution center (~562k-600k sq ft, 24/7 three-shift)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5482,
+              47.5982
+            ],
+            [
+              -117.5445,
+              47.5982
+            ],
+            [
+              -117.5445,
+              47.599
+            ],
+            [
+              -117.5482,
+              47.599
+            ],
+            [
+              -117.5482,
+              47.5982
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Spokane WA Distribution Center (DC-3)",
+        "type": "Parts distribution center (~562k-600k sq ft, 24/7 three-shift)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.183,
+              31.4762
+            ],
+            [
+              -97.1768,
+              31.4762
+            ],
+            [
+              -97.1768,
+              31.4803
+            ],
+            [
+              -97.183,
+              31.4803
+            ],
+            [
+              -97.183,
+              31.4762
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Waco TX Distribution Center",
+        "type": "Parts distribution center (opened 2009)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 66,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.179,
+              31.4784
+            ],
+            [
+              -97.1778,
+              31.4784
+            ],
+            [
+              -97.1778,
+              31.4794
+            ],
+            [
+              -97.179,
+              31.4794
+            ],
+            [
+              -97.179,
+              31.4784
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Waco TX Distribution Center",
+        "type": "Parts distribution center (opened 2009)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.182,
+              31.4764
+            ],
+            [
+              -97.178,
+              31.4764
+            ],
+            [
+              -97.178,
+              31.4785
+            ],
+            [
+              -97.182,
+              31.4785
+            ],
+            [
+              -97.182,
+              31.4764
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Waco TX Distribution Center",
+        "type": "Parts distribution center (opened 2009)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.1828,
+              31.4778
+            ],
+            [
+              -97.1812,
+              31.4778
+            ],
+            [
+              -97.1812,
+              31.48
+            ],
+            [
+              -97.1828,
+              31.48
+            ],
+            [
+              -97.1828,
+              31.4778
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Waco TX Distribution Center",
+        "type": "Parts distribution center (opened 2009)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.1812,
+              31.4764
+            ],
+            [
+              -97.1785,
+              31.4764
+            ],
+            [
+              -97.1785,
+              31.478
+            ],
+            [
+              -97.1812,
+              31.478
+            ],
+            [
+              -97.1812,
+              31.4764
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Waco TX Distribution Center",
+        "type": "Parts distribution center (opened 2009)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.337,
+              39.8395
+            ],
+            [
+              -84.33,
+              39.8395
+            ],
+            [
+              -84.33,
+              39.845
+            ],
+            [
+              -84.337,
+              39.845
+            ],
+            [
+              -84.337,
+              39.8395
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Clayton OH Distribution Center (DC-2)",
+        "type": "Parts distribution center (opened 2011)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 80,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 90,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3323,
+              39.8412
+            ],
+            [
+              -84.3313,
+              39.8412
+            ],
+            [
+              -84.3313,
+              39.8421
+            ],
+            [
+              -84.3323,
+              39.8421
+            ],
+            [
+              -84.3323,
+              39.8412
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Clayton OH Distribution Center (DC-2)",
+        "type": "Parts distribution center (opened 2011)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.335,
+              39.8398
+            ],
+            [
+              -84.3305,
+              39.8398
+            ],
+            [
+              -84.3305,
+              39.843
+            ],
+            [
+              -84.335,
+              39.843
+            ],
+            [
+              -84.335,
+              39.8398
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Clayton OH Distribution Center (DC-2)",
+        "type": "Parts distribution center (opened 2011)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3335,
+              39.8425
+            ],
+            [
+              -84.3305,
+              39.8425
+            ],
+            [
+              -84.3305,
+              39.8448
+            ],
+            [
+              -84.3335,
+              39.8448
+            ],
+            [
+              -84.3335,
+              39.8425
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Clayton OH Distribution Center (DC-2)",
+        "type": "Parts distribution center (opened 2011)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3368,
+              39.8405
+            ],
+            [
+              -84.3352,
+              39.8405
+            ],
+            [
+              -84.3352,
+              39.8445
+            ],
+            [
+              -84.3368,
+              39.8445
+            ],
+            [
+              -84.3368,
+              39.8405
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Clayton OH Distribution Center (DC-2)",
+        "type": "Parts distribution center (opened 2011)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6895,
+              39.9785
+            ],
+            [
+              -76.682,
+              39.9785
+            ],
+            [
+              -76.682,
+              39.984
+            ],
+            [
+              -76.6895,
+              39.984
+            ],
+            [
+              -76.6895,
+              39.9785
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - York PA Distribution Center",
+        "type": "Parts distribution center (~1.1M sq ft, opened 1953)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 97,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6834,
+              39.9818
+            ],
+            [
+              -76.6822,
+              39.9818
+            ],
+            [
+              -76.6822,
+              39.9828
+            ],
+            [
+              -76.6834,
+              39.9828
+            ],
+            [
+              -76.6834,
+              39.9818
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - York PA Distribution Center",
+        "type": "Parts distribution center (~1.1M sq ft, opened 1953)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.684,
+              39.9815
+            ],
+            [
+              -76.6815,
+              39.9815
+            ],
+            [
+              -76.6815,
+              39.9838
+            ],
+            [
+              -76.684,
+              39.9838
+            ],
+            [
+              -76.684,
+              39.9815
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - York PA Distribution Center",
+        "type": "Parts distribution center (~1.1M sq ft, opened 1953)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6845,
+              39.9792
+            ],
+            [
+              -76.682,
+              39.9792
+            ],
+            [
+              -76.682,
+              39.9808
+            ],
+            [
+              -76.6845,
+              39.9808
+            ],
+            [
+              -76.6845,
+              39.9792
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - York PA Distribution Center",
+        "type": "Parts distribution center (~1.1M sq ft, opened 1953)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6838,
+              39.9815
+            ],
+            [
+              -76.6818,
+              39.9815
+            ],
+            [
+              -76.6818,
+              39.9833
+            ],
+            [
+              -76.6838,
+              39.9833
+            ],
+            [
+              -76.6838,
+              39.9815
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - York PA Distribution Center",
+        "type": "Parts distribution center (~1.1M sq ft, opened 1953)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6885,
+              39.979
+            ],
+            [
+              -76.6865,
+              39.979
+            ],
+            [
+              -76.6865,
+              39.9805
+            ],
+            [
+              -76.6885,
+              39.9805
+            ],
+            [
+              -76.6885,
+              39.979
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - York PA Distribution Center",
+        "type": "Parts distribution center (~1.1M sq ft, opened 1953)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.001,
+              29.572
+            ],
+            [
+              -97.992,
+              29.572
+            ],
+            [
+              -97.992,
+              29.579
+            ],
+            [
+              -98.001,
+              29.579
+            ],
+            [
+              -98.001,
+              29.572
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Seguin TX Engine Plant",
+        "type": "Manufacturing plant (diesel & gas engine assembly, ~1.7M sq ft)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 168,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.9975,
+              29.573
+            ],
+            [
+              -97.9963,
+              29.573
+            ],
+            [
+              -97.9963,
+              29.574
+            ],
+            [
+              -97.9975,
+              29.574
+            ],
+            [
+              -97.9975,
+              29.573
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Seguin TX Engine Plant",
+        "type": "Manufacturing plant (diesel & gas engine assembly, ~1.7M sq ft)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.998,
+              29.5735
+            ],
+            [
+              -97.994,
+              29.5735
+            ],
+            [
+              -97.994,
+              29.578
+            ],
+            [
+              -97.998,
+              29.578
+            ],
+            [
+              -97.998,
+              29.5735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Seguin TX Engine Plant",
+        "type": "Manufacturing plant (diesel & gas engine assembly, ~1.7M sq ft)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.0005,
+              29.5755
+            ],
+            [
+              -97.998,
+              29.5755
+            ],
+            [
+              -97.998,
+              29.5785
+            ],
+            [
+              -98.0005,
+              29.5785
+            ],
+            [
+              -98.0005,
+              29.5755
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Seguin TX Engine Plant",
+        "type": "Manufacturing plant (diesel & gas engine assembly, ~1.7M sq ft)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.997,
+              29.5735
+            ],
+            [
+              -97.995,
+              29.5735
+            ],
+            [
+              -97.995,
+              29.578
+            ],
+            [
+              -97.997,
+              29.578
+            ],
+            [
+              -97.997,
+              29.5735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Seguin TX Engine Plant",
+        "type": "Manufacturing plant (diesel & gas engine assembly, ~1.7M sq ft)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.9425,
+              28.8145
+            ],
+            [
+              -96.9335,
+              28.8145
+            ],
+            [
+              -96.9335,
+              28.8235
+            ],
+            [
+              -96.9425,
+              28.8235
+            ],
+            [
+              -96.9425,
+              28.8145
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Victoria TX Hydraulic Excavator Plant",
+        "type": "Manufacturing plant (hydraulic / large excavators)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 161,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.939,
+              28.816
+            ],
+            [
+              -96.9378,
+              28.816
+            ],
+            [
+              -96.9378,
+              28.817
+            ],
+            [
+              -96.939,
+              28.817
+            ],
+            [
+              -96.939,
+              28.816
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Victoria TX Hydraulic Excavator Plant",
+        "type": "Manufacturing plant (hydraulic / large excavators)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.9412,
+              28.8185
+            ],
+            [
+              -96.9392,
+              28.8185
+            ],
+            [
+              -96.9392,
+              28.8208
+            ],
+            [
+              -96.9412,
+              28.8208
+            ],
+            [
+              -96.9412,
+              28.8185
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Victoria TX Hydraulic Excavator Plant",
+        "type": "Manufacturing plant (hydraulic / large excavators)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.9387,
+              28.817
+            ],
+            [
+              -96.9372,
+              28.817
+            ],
+            [
+              -96.9372,
+              28.8205
+            ],
+            [
+              -96.9387,
+              28.8205
+            ],
+            [
+              -96.9387,
+              28.817
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Victoria TX Hydraulic Excavator Plant",
+        "type": "Manufacturing plant (hydraulic / large excavators)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.9387,
+              28.8162
+            ],
+            [
+              -96.9372,
+              28.8162
+            ],
+            [
+              -96.9372,
+              28.8172
+            ],
+            [
+              -96.9387,
+              28.8172
+            ],
+            [
+              -96.9387,
+              28.8162
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Victoria TX Hydraulic Excavator Plant",
+        "type": "Manufacturing plant (hydraulic / large excavators)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.522,
+              33.9368
+            ],
+            [
+              -83.511,
+              33.9368
+            ],
+            [
+              -83.511,
+              33.9442
+            ],
+            [
+              -83.522,
+              33.9442
+            ],
+            [
+              -83.522,
+              33.9368
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Athens GA Plant",
+        "type": "Manufacturing plant (BCP - mini hydraulic excavators, small track-type tractors)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 180,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5159,
+              33.9409
+            ],
+            [
+              -83.5149,
+              33.9409
+            ],
+            [
+              -83.5149,
+              33.9416
+            ],
+            [
+              -83.5159,
+              33.9416
+            ],
+            [
+              -83.5159,
+              33.9409
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Athens GA Plant",
+        "type": "Manufacturing plant (BCP - mini hydraulic excavators, small track-type tractors)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.521,
+              33.9398
+            ],
+            [
+              -83.5182,
+              33.9398
+            ],
+            [
+              -83.5182,
+              33.9422
+            ],
+            [
+              -83.521,
+              33.9422
+            ],
+            [
+              -83.521,
+              33.9398
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Athens GA Plant",
+        "type": "Manufacturing plant (BCP - mini hydraulic excavators, small track-type tractors)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5172,
+              33.9387
+            ],
+            [
+              -83.5128,
+              33.9387
+            ],
+            [
+              -83.5128,
+              33.9432
+            ],
+            [
+              -83.5172,
+              33.9432
+            ],
+            [
+              -83.5172,
+              33.9387
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Athens GA Plant",
+        "type": "Manufacturing plant (BCP - mini hydraulic excavators, small track-type tractors)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5209,
+              33.9398
+            ],
+            [
+              -83.5187,
+              33.9398
+            ],
+            [
+              -83.5187,
+              33.9421
+            ],
+            [
+              -83.5209,
+              33.9421
+            ],
+            [
+              -83.5209,
+              33.9398
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Athens GA Plant",
+        "type": "Manufacturing plant (BCP - mini hydraulic excavators, small track-type tractors)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5164,
+              33.9406
+            ],
+            [
+              -83.5146,
+              33.9406
+            ],
+            [
+              -83.5146,
+              33.9416
+            ],
+            [
+              -83.5164,
+              33.9416
+            ],
+            [
+              -83.5164,
+              33.9406
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Athens GA Plant",
+        "type": "Manufacturing plant (BCP - mini hydraulic excavators, small track-type tractors)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.121,
+              36.0575
+            ],
+            [
+              -80.1145,
+              36.0575
+            ],
+            [
+              -80.1145,
+              36.0635
+            ],
+            [
+              -80.121,
+              36.0635
+            ],
+            [
+              -80.121,
+              36.0575
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Winston-Salem NC Axle Plant",
+        "type": "Manufacturing plant (axles, ~850k sq ft on 102 acres)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 96,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.1182,
+              36.0615
+            ],
+            [
+              -80.1173,
+              36.0615
+            ],
+            [
+              -80.1173,
+              36.0622
+            ],
+            [
+              -80.1182,
+              36.0622
+            ],
+            [
+              -80.1182,
+              36.0615
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Winston-Salem NC Axle Plant",
+        "type": "Manufacturing plant (axles, ~850k sq ft on 102 acres)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.1183,
+              36.0609
+            ],
+            [
+              -80.1162,
+              36.0609
+            ],
+            [
+              -80.1162,
+              36.0625
+            ],
+            [
+              -80.1183,
+              36.0625
+            ],
+            [
+              -80.1183,
+              36.0609
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Winston-Salem NC Axle Plant",
+        "type": "Manufacturing plant (axles, ~850k sq ft on 102 acres)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.1202,
+              36.0595
+            ],
+            [
+              -80.1188,
+              36.0595
+            ],
+            [
+              -80.1188,
+              36.0612
+            ],
+            [
+              -80.1202,
+              36.0612
+            ],
+            [
+              -80.1202,
+              36.0595
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Winston-Salem NC Axle Plant",
+        "type": "Manufacturing plant (axles, ~850k sq ft on 102 acres)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.1183,
+              36.061
+            ],
+            [
+              -80.116,
+              36.061
+            ],
+            [
+              -80.116,
+              36.0618
+            ],
+            [
+              -80.1183,
+              36.0618
+            ],
+            [
+              -80.1183,
+              36.061
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Winston-Salem NC Axle Plant",
+        "type": "Manufacturing plant (axles, ~850k sq ft on 102 acres)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.1183,
+              36.0615
+            ],
+            [
+              -80.1172,
+              36.0615
+            ],
+            [
+              -80.1172,
+              36.0624
+            ],
+            [
+              -80.1183,
+              36.0624
+            ],
+            [
+              -80.1183,
+              36.0615
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Winston-Salem NC Axle Plant",
+        "type": "Manufacturing plant (axles, ~850k sq ft on 102 acres)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8642,
+              42.9085
+            ],
+            [
+              -87.8601,
+              42.9085
+            ],
+            [
+              -87.8601,
+              42.9165
+            ],
+            [
+              -87.8642,
+              42.9165
+            ],
+            [
+              -87.8642,
+              42.9085
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar Global Mining - South Milwaukee WI Plant",
+        "type": "Manufacturing plant (large mining equipment - electric rope shovels, draglines)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 72,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8614,
+              42.914
+            ],
+            [
+              -87.8604,
+              42.914
+            ],
+            [
+              -87.8604,
+              42.9147
+            ],
+            [
+              -87.8614,
+              42.9147
+            ],
+            [
+              -87.8614,
+              42.914
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar Global Mining - South Milwaukee WI Plant",
+        "type": "Manufacturing plant (large mining equipment - electric rope shovels, draglines)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8625,
+              42.913
+            ],
+            [
+              -87.8612,
+              42.913
+            ],
+            [
+              -87.8612,
+              42.9145
+            ],
+            [
+              -87.8625,
+              42.9145
+            ],
+            [
+              -87.8625,
+              42.913
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar Global Mining - South Milwaukee WI Plant",
+        "type": "Manufacturing plant (large mining equipment - electric rope shovels, draglines)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.862,
+              42.9135
+            ],
+            [
+              -87.8608,
+              42.9135
+            ],
+            [
+              -87.8608,
+              42.9145
+            ],
+            [
+              -87.862,
+              42.9145
+            ],
+            [
+              -87.862,
+              42.9135
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar Global Mining - South Milwaukee WI Plant",
+        "type": "Manufacturing plant (large mining equipment - electric rope shovels, draglines)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.6555,
+              40.884
+            ],
+            [
+              -88.649,
+              40.884
+            ],
+            [
+              -88.649,
+              40.8888
+            ],
+            [
+              -88.6555,
+              40.8888
+            ],
+            [
+              -88.6555,
+              40.884
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Pontiac IL Plant",
+        "type": "Manufacturing plant (fuel injectors / fuel systems)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 10,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 68,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.6509,
+              40.8872
+            ],
+            [
+              -88.6499,
+              40.8872
+            ],
+            [
+              -88.6499,
+              40.8879
+            ],
+            [
+              -88.6509,
+              40.8879
+            ],
+            [
+              -88.6509,
+              40.8872
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Pontiac IL Plant",
+        "type": "Manufacturing plant (fuel injectors / fuel systems)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.6512,
+              40.8868
+            ],
+            [
+              -88.65,
+              40.8868
+            ],
+            [
+              -88.65,
+              40.8878
+            ],
+            [
+              -88.6512,
+              40.8878
+            ],
+            [
+              -88.6512,
+              40.8868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Pontiac IL Plant",
+        "type": "Manufacturing plant (fuel injectors / fuel systems)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.6516,
+              40.8865
+            ],
+            [
+              -88.6504,
+              40.8865
+            ],
+            [
+              -88.6504,
+              40.8872
+            ],
+            [
+              -88.6516,
+              40.8872
+            ],
+            [
+              -88.6516,
+              40.8865
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Pontiac IL Plant",
+        "type": "Manufacturing plant (fuel injectors / fuel systems)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.6512,
+              40.887
+            ],
+            [
+              -88.6502,
+              40.887
+            ],
+            [
+              -88.6502,
+              40.8877
+            ],
+            [
+              -88.6512,
+              40.8877
+            ],
+            [
+              -88.6512,
+              40.887
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Pontiac IL Plant",
+        "type": "Manufacturing plant (fuel injectors / fuel systems)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.2976,
+              39.2012
+            ],
+            [
+              -96.2895,
+              39.2012
+            ],
+            [
+              -96.2895,
+              39.2064
+            ],
+            [
+              -96.2976,
+              39.2064
+            ],
+            [
+              -96.2976,
+              39.2012
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar Work Tools - Wamego KS Plant & Distribution",
+        "type": "Manufacturing & distribution facility (machine attachments / work tools)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 10,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 0,
+          "buildingCount": 9,
+          "siteAreaAcres": 104,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.2928,
+              39.2033
+            ],
+            [
+              -96.2898,
+              39.2033
+            ],
+            [
+              -96.2898,
+              39.2056
+            ],
+            [
+              -96.2928,
+              39.2056
+            ],
+            [
+              -96.2928,
+              39.2033
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar Work Tools - Wamego KS Plant & Distribution",
+        "type": "Manufacturing & distribution facility (machine attachments / work tools)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.2942,
+              39.2018
+            ],
+            [
+              -96.2913,
+              39.2018
+            ],
+            [
+              -96.2913,
+              39.2033
+            ],
+            [
+              -96.2942,
+              39.2033
+            ],
+            [
+              -96.2942,
+              39.2018
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar Work Tools - Wamego KS Plant & Distribution",
+        "type": "Manufacturing & distribution facility (machine attachments / work tools)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.2944,
+              39.2036
+            ],
+            [
+              -96.293,
+              39.2036
+            ],
+            [
+              -96.293,
+              39.2048
+            ],
+            [
+              -96.2944,
+              39.2048
+            ],
+            [
+              -96.2944,
+              39.2036
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar Work Tools - Wamego KS Plant & Distribution",
+        "type": "Manufacturing & distribution facility (machine attachments / work tools)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.9425,
+              34.9995
+            ],
+            [
+              -118.9372,
+              34.9995
+            ],
+            [
+              -118.9372,
+              35.0031
+            ],
+            [
+              -118.9425,
+              35.0031
+            ],
+            [
+              -118.9425,
+              34.9995
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Tejon Ranch (Lebec) CA Parts Distribution Center",
+        "type": "Parts distribution center (~400k sq ft, opened ~2012)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 24,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 46,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.9412,
+              35
+            ],
+            [
+              -118.9402,
+              35
+            ],
+            [
+              -118.9402,
+              35.0006
+            ],
+            [
+              -118.9412,
+              35.0006
+            ],
+            [
+              -118.9412,
+              35
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Tejon Ranch (Lebec) CA Parts Distribution Center",
+        "type": "Parts distribution center (~400k sq ft, opened ~2012)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.9392,
+              35.0005
+            ],
+            [
+              -118.9373,
+              35.0005
+            ],
+            [
+              -118.9373,
+              35.0028
+            ],
+            [
+              -118.9392,
+              35.0028
+            ],
+            [
+              -118.9392,
+              35.0005
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Tejon Ranch (Lebec) CA Parts Distribution Center",
+        "type": "Parts distribution center (~400k sq ft, opened ~2012)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.9411,
+              34.9999
+            ],
+            [
+              -118.9387,
+              34.9999
+            ],
+            [
+              -118.9387,
+              35.0006
+            ],
+            [
+              -118.9411,
+              35.0006
+            ],
+            [
+              -118.9411,
+              34.9999
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Tejon Ranch (Lebec) CA Parts Distribution Center",
+        "type": "Parts distribution center (~400k sq ft, opened ~2012)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.941,
+              35
+            ],
+            [
+              -118.9395,
+              35
+            ],
+            [
+              -118.9395,
+              35.0007
+            ],
+            [
+              -118.941,
+              35.0007
+            ],
+            [
+              -118.941,
+              35
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "caterpillar",
+        "name": "Caterpillar - Tejon Ranch (Lebec) CA Parts Distribution Center",
+        "type": "Parts distribution center (~400k sq ft, opened ~2012)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "zone": "staging"
+      }
+    }
+  ]
+}

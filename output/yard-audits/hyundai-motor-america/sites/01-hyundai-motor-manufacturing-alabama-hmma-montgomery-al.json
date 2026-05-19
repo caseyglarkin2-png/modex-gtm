@@ -1,0 +1,53 @@
+{
+  "name": "Hyundai Motor Manufacturing Alabama (HMMA) - Montgomery AL",
+  "type": "Auto Assembly Plant",
+  "coords": { "lat": 32.281200, "lng": -86.323500 },
+  "geofences": {
+    "perimeter": { "south": 32.27550, "west": -86.33300, "north": 32.29150, "east": -86.31000 },
+    "truckGate": { "south": 32.27680, "west": -86.32620, "north": 32.27820, "east": -86.32440 },
+    "dropYards": [
+      { "south": 32.27770, "west": -86.31530, "north": 32.27980, "east": -86.31230 },
+      { "south": 32.28000, "west": -86.31900, "north": 32.28220, "east": -86.31550 }
+    ],
+    "dockAprons": [
+      { "south": 32.28030, "west": -86.31850, "north": 32.28230, "east": -86.31500 },
+      { "south": 32.28150, "west": -86.32830, "north": 32.28350, "east": -86.32600 }
+    ],
+    "staging": { "south": 32.27850, "west": -86.31480, "north": 32.27990, "east": -86.31230 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90, "trailersVisible": 220, "trailerParkingCapacity": 320,
+    "truckGateCount": 2, "buildingCount": 12, "siteAreaAcres": 620.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.281200,-86.323500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "exitLanes", "multiStep"],
+  "fieldNotes": {
+    "site": "1,744-acre HMMA campus (per hmmausa.com / Wikipedia). Operational developed footprint geofenced here is ~620 acres; full owned land much larger. 3.4M sq ft of buildings: stamping, weld, paint, assembly, three engine shops, plus an east logistics/parts warehouse complex and a 2-mile test track at the north edge.",
+    "truckGate": "HMMA uses controlled, numbered gates (web research confirms 'Gate 2' as the visitor entrance). Main multi-lane entry off Hyundai Blvd at 32.2769,-86.3253; access control is set back inside the property, standard for a large guarded automotive campus.",
+    "guardShack": "Inferred true — large captive-OEM assembly plant with numbered, staffed security gates is industry-standard. A security/check-in structure is visible inside the entry road near the dock-side at ~32.2799,-86.3252. Booth not crisply resolvable at road edge, hence medium-confidence on exact footprint.",
+    "dropArea": "Large dedicated trailer drop yard on the SE/east side off Hyundai Blvd (~32.2788,-86.3145) holding ~80-100 trailers, plus extensive trailer rows along the logistics warehouse faces. dropArea 50+.",
+    "dockDoors": "East logistics/parts warehouse complex shows long banks of dock doors with trailers backed in on multiple faces; assembly building has additional truck docks. Total across the site comfortably 50+; 90 is an honest overhead estimate.",
+    "multipleFacilities": "Campus with 12+ distinct large buildings (assembly hall, stamping, paint, three engine shops, multiple logistics warehouses) — clear multi-facility campus.",
+    "shipRcvSeparate": "Inbound parts logistics warehouses (east complex) are physically separate from the assembly-building shipping docks — distinct dock clusters on different parts of the campus.",
+    "fastLaneOpportunity": "Main entry is a wide multi-lane apron with abundant paved width — physical room for an express/bypass lane.",
+    "urbanRural": "Surrounded by farmland and woods on the south edge of Montgomery; rural-edge setting.",
+    "scale": "No truck scale positively identified in imagery; flagged uncertain.",
+    "railServed": "No rail spur observed running into the developed campus footprint.",
+    "trailersVisible": "Honest overhead estimate (~220) across drop yard and warehouse dock faces; counts approximate.",
+    "geofence": "Center 32.2812,-86.3235. Perimeter box covers the developed operational footprint (buildings, lots, test track) — the YardFlow-relevant geofence — not the full 1,744-acre land parcel."
+  },
+  "method": "deep-audit"
+}

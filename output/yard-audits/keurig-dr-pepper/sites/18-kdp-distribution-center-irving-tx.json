@@ -1,0 +1,48 @@
+{
+  "name": "KDP Distribution Center - Irving TX",
+  "type": "Distribution Center - Beverage/DSD",
+  "coords": { "lat": 32.8428, "lng": -96.89475 },
+  "geofences": {
+    "perimeter": { "south": 32.839566, "west": -96.898278, "north": 32.846034, "east": -96.891222 },
+    "truckGate": { "south": 32.842853, "west": -96.897521, "north": 32.843347, "east": -96.896879 },
+    "dropYards": [
+      { "south": 32.841132, "west": -96.89389, "north": 32.843468, "east": -96.89111 }
+    ],
+    "dockAprons": [
+      { "south": 32.84182, "west": -96.896069, "north": 32.84218, "east": -96.893931 }
+    ],
+    "staging": { "south": 32.841961, "west": -96.896481, "north": 32.843039, "east": -96.895519 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70, "trailersVisible": 180, "trailerParkingCapacity": 240,
+    "truckGateCount": 2, "buildingCount": 6, "siteAreaAcres": 117.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.8428,-96.89475,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "guardShack", "entryExitSeparate"],
+  "fieldNotes": {
+    "location": "Roster geocode (GEOMETRIC_CENTER, moved 6209m) landed directly on the correct facility. Confirmed by a 'Keurig Dr Pepper' monument sign reading '2304' at the main entrance off Century Center Blvd. This is the Dr Pepper / Dallas-Fort Worth Bottling Company campus (The American Bottling Company, a KDP subsidiary).",
+    "facility": "Very large beverage manufacturing + distribution campus. One massive main warehouse/bottling building (with rooftop processing tanks/silos visible) plus several separate office, dock and shop buildings — campus → multipleFacilities true.",
+    "truckGate": "Main entrance off Century Center Blvd has a KDP monument sign and a small booth-footprint structure beside the entrance lane (guard booth). Truck circulation uses dedicated dock-side gates; multiple entry/exit driveways around the campus → truckGateCount 2, entryExitSeparate true.",
+    "guardShack": "A small structure consistent with a guard booth sits beside the main entrance lane; medium confidence — flagged uncertain.",
+    "dropYard": "Very large dedicated trailer storage/drop yard on the SE side of the campus — dozens of rows of 53' trailers plus pallet/material storage, capacity well into the 200+ range.",
+    "dockDoors": "50+ band — extensive dock banks along the main building's south/southeast faces with trailers backed in; ~70 doors estimated, partly obscured — flagged uncertain.",
+    "shipRcvSeparate": "true — distinct dock clusters on different building faces (DSD van docks on the SW, large-trailer docks toward the trailer yard).",
+    "fastLaneOpportunity": "Wide entry drives and large paved circulation aprons — room for an express/bypass lane.",
+    "railServed": "No rail spur enters the property; a CSX/freight line and the Trinity River floodway run nearby but do not serve the site.",
+    "urbanRural": "Las Colinas / Valley Ranch industrial district of Irving inside the Dallas-Fort Worth metro — Urban."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,52 @@
+{
+  "name": "Coca-Cola UNITED - Birmingham Production Plant, AL",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 33.561277, "lng": -86.768222 },
+  "geofences": {
+    "perimeter": { "south": 33.5600, "west": -86.7705, "north": 33.5635, "east": -86.7655 },
+    "truckGate": { "south": 33.5601, "west": -86.7698, "north": 33.5607, "east": -86.7690 },
+    "dropYards": [
+      { "south": 33.5618, "west": -86.7702, "north": 33.5628, "east": -86.7682 },
+      { "south": 33.5620, "west": -86.7672, "north": 33.5630, "east": -86.7656 }
+    ],
+    "dockAprons": [
+      { "south": 33.5605, "west": -86.7702, "north": 33.5618, "east": -86.7688 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 50, "trailersVisible": 90, "trailerParkingCapacity": 140,
+    "truckGateCount": 2, "buildingCount": 3, "siteAreaAcres": 44.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.561277,-86.768222,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "truckGateCount", "dockDoorCount", "entryExitSeparate"],
+  "fieldNotes": {
+    "location": "Roster geocode flagged 'moved 5725 m' but the supplied lat/lng (33.561277,-86.768222) is correct - it lands on the Coca-Cola UNITED Birmingham campus. Confirmed in Street View: a large red 'Coca-Cola' script logo is mounted on the building facing East Lake Blvd. This is the Coca-Cola Bottling Company UNITED corporate HQ + Birmingham Production Plant, 4600 E Lake Blvd, Birmingham AL 35217 - ~350,000 sq ft on ~39 acres, in operation since 1979, 750+ employees.",
+    "campus": "Multi-building HQ + production campus: a large sawtooth-roof production warehouse, a separate north warehouse, and an attached office complex. multipleFacilities=true.",
+    "truckGate": "Property is fenced; trucks enter via a service/truck drive off East Lake Blvd at the SW (separate from the office/visitor entrance to the east). Gate hardware not directly resolvable in overhead imagery; controlled entrance inferred from continuous fence and a distinct truck approach.",
+    "truckGateCount": "Two access points off East Lake Blvd - a SW truck/service drive and a SE office/visitor drive. Truck-relevant gate count ~2; flagged as approximate.",
+    "guardShack": "No clear freestanding beside-the-lane guard booth visible at the truck entrance in z20 imagery. A small structure sits near the SW service drive but reads as a utility/maintenance building, not a guard booth. guardShack=false at medium confidence.",
+    "remoteGs": "Truck gate present, no guard shack identified -> remoteGs=true (kiosk/badge check-in implied). Medium confidence given this is a corporate HQ where staffed security is plausible.",
+    "entryExitSeparate": "Separate truck (SW) and office (SE) entrances; truck in/out likely shares the SW drive. entryExitSeparate set true on the campus-level distinct gates - flagged uncertain.",
+    "dockDoors": "50+ - extensive dock doors along the production warehouse SW face plus the north warehouse, trailers backed in at both. ~50 estimated, approximate.",
+    "dropArea": "50+ trailers parked without tractors across the west and central trailer yards; large red Coca-Cola / UNITED fleet plus delivery trucks.",
+    "shipRcvSeparate": "Dock banks on physically separate building faces (production warehouse SW face and the north warehouse) support separate ship/receive operations.",
+    "railServed": "No rail spur enters the property. railServed=false.",
+    "urbanRural": "Within Birmingham city limits beside I-59, surrounded by dense residential and industrial development - Urban.",
+    "note": "Coca-Cola UNITED announced (May 2024) a $330M new Birmingham facility; this audit covers the existing 4600 E Lake Blvd campus, which remains the active production plant."
+  },
+  "method": "deep-audit"
+}

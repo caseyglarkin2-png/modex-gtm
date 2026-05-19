@@ -1,0 +1,48 @@
+{
+  "name": "DHL Supply Chain - IDS Fulfillment DC - Salt Lake City UT",
+  "type": "Multi-Customer E-Commerce Fulfillment Center",
+  "coords": { "lat": 40.734188, "lng": -112.001148 },
+  "geofences": {
+    "perimeter": { "south": 40.73250, "west": -112.00250, "north": 40.73600, "east": -112.00000 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 40.73280, "west": -112.00250, "north": 40.73580, "east": -112.00180 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 32,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 10,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 13.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.734188,-112.001148,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "No controlled truck entrance. The building's west dock face fronts directly onto the public street (4650 West) — trucks back off the road into the docks. Street View (2021-05 and 2025-07) shows no barrier arm, no sliding gate, no perimeter fence. South-end driveway also open.",
+    "guardShack": "No guard booth at any entrance.",
+    "remoteGs": "No gate, so no remote check-in.",
+    "dockDoors": "Dock doors run along the building's west face directly on the street; ~32 doors estimated from Street View, band 25-50.",
+    "dropArea": "Only a handful of trailers parked at the docks; no dedicated drop yard. Trailers back directly off the public road.",
+    "drivewayShort": "Trucks back off the street directly into docks; no internal queueing depth.",
+    "urbanRural": "Dense SLC-west industrial park = Urban.",
+    "siteAreaAcres": "~220,000 sq ft temperature-controlled building (per IDS site); parcel ~13 acres."
+  },
+  "method": "deep-audit"
+}

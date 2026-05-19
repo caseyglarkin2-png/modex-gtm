@@ -1,0 +1,56 @@
+{
+  "name": "Liberty Coca-Cola Beverages - Philadelphia Production Plant, PA",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 40.00700, "lng": -75.11150 },
+  "geofences": {
+    "perimeter": { "south": 40.00540, "west": -75.11380, "north": 40.00920, "east": -75.10920 },
+    "truckGate": { "south": 40.00825, "west": -75.11010, "north": 40.00865, "east": -75.10955 },
+    "dropYards": [
+      { "south": 40.00640, "west": -75.11150, "north": 40.00900, "east": -75.10960 }
+    ],
+    "dockAprons": [
+      { "south": 40.00600, "west": -75.11280, "north": 40.00800, "east": -75.11150 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 2,
+    "buildingCount": 3,
+    "siteAreaAcres": 14.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.00700,-75.11150,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "Roster coords 40.006386,-75.113266 (725 E Erie Ave) confirmed. The plant is positively identified: a large Coca-Cola logo is painted on the building's NE face, and an enclosed pedestrian skybridge over the side street is Coca-Cola branded. Coca-Cola trucks and trailers fill the yard.",
+    "truckGate": "Multiple chain-link sliding gates along E Erie Ave control the yard - one is explicitly marked 'EXIT'. Carrier-instruction signage on the fence: 'ALL CARRIERS Park on the Street ... Check in With Guard With Paper Work ... Coiled in By Appointment ... DO NOT DOUBLE PARK'.",
+    "guardShack": "A fence sign explicitly reads 'GUARD SHACK - Check in Here' with a directional arrow; carriers are directed to check in with a guard. A small booth structure is visible near the gate inside the yard.",
+    "preGateStaging": "Carrier signage directs all carriers to 'Park on the Street' before check-in - the public E Erie Ave / side streets serve as pre-gate staging.",
+    "postGateStaging": "The very large paved drop yard inside the gate functions as a post-gate holding/queue area before docks.",
+    "entryExitSeparate": "A dedicated 'EXIT' gate is marked separately from the carrier check-in/entrance gate along E Erie Ave - distinct in and out points.",
+    "drivewayLong": "The drop yard is deep and very large, easily holding a queue of 3+ trucks between the gate and the dock banks.",
+    "backupSensitive": "Carrier sign explicitly warns 'DO NOT DOUBLE PARK' and directs street parking - the gate fronts a busy urban arterial (E Erie Ave) with limited stacking room, so a queue spills onto public roads.",
+    "dockDoors": "Large multi-building urban plant - the production building plus a long dock/warehouse building have extensive dock banks with dozens of trailers backed in. Banded 50+; exact count is an overhead estimate.",
+    "dropArea": "Extensive trailer drop yard packed with 100+ Coca-Cola trailers and red delivery trucks - banded 50+.",
+    "multipleFacilities": "Campus of 3+ connected buildings: the main production plant, a long dock/warehouse building, and a building west of the side street linked by the Coca-Cola branded skybridge.",
+    "shipRcvSeparate": "Multiple dock faces across the complex but a single integrated operation - could not confirm physically separate ship vs receive clusters; left false, flagged uncertain.",
+    "siteAreaAcres": "Derived from perimeter box (~420m N-S x ~390m E-W complex) ~ 14 acres - approximate.",
+    "railServed": "No rail spur runs into the property (rail line runs nearby but not into the yard)."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,52 @@
+{
+  "name": "GP Broadway Mill - Green Bay WI",
+  "type": "Tissue/Towel Mill",
+  "coords": { "lat": 44.49271, "lng": -88.034475 },
+  "geofences": {
+    "perimeter": { "south": 44.4855, "west": -88.0445, "north": 44.4985, "east": -88.0280 },
+    "truckGate": { "south": 44.4948, "west": -88.0438, "north": 44.4960, "east": -88.0418 },
+    "dropYards": [
+      { "south": 44.4938, "west": -88.0428, "north": 44.4972, "east": -88.0388 },
+      { "south": 44.4885, "west": -88.0388, "north": 44.4910, "east": -88.0355 }
+    ],
+    "dockAprons": [
+      { "south": 44.4912, "west": -88.0420, "north": 44.4945, "east": -88.0392 },
+      { "south": 44.4938, "west": -88.0398, "north": 44.4958, "east": -88.0372 }
+    ],
+    "staging": { "south": 44.4948, "west": -88.0428, "north": 44.4962, "east": -88.0408 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70, "trailersVisible": 240, "trailerParkingCapacity": 320,
+    "truckGateCount": 2, "buildingCount": 16, "siteAreaAcres": 240.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.49271,-88.034475,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "multiStep", "entryLanes", "exitLanes", "dockDoorCount", "truckGateCount"],
+  "fieldNotes": {
+    "location": "Roster coords (44.49271,-88.034475, ROOFTOP, movedMeters 222) sit within the mill core on a peninsula along the Fox River. Address 1919 S Broadway, Green Bay WI confirmed. Mill core retained at the given coords.",
+    "truckGate": "Large urban tissue mill bounded by S Broadway / a rail line (W) and the Fox River (E). Main truck entrance is off S Broadway near an admin/office building at the NW intersection; the property is a controlled industrial campus. Internal roads have Street View coverage but the public-road perimeter entry is gated/checkpointed.",
+    "guardShack": "An admin/office building sits at the main Broadway entrance intersection serving as the entry checkpoint; a dedicated guard booth is consistent with a mill of this trucking volume but not separately resolved — flagged uncertain.",
+    "multipleFacilities": "Very large multi-building campus: pulp/paper machines, multiple converting plants, multiple finished-goods warehouses, water-treatment clarifiers, office buildings.",
+    "railServed": "Active rail line runs along the W boundary beside S Broadway with spurs into the property.",
+    "dropArea": "Massive trailer operation — multiple drop yards with dozens of rows; 200+ trailers visible across the site.",
+    "dockDoors": "Multiple warehouse buildings with extensive dock-door banks and trailers backed in on multiple faces; ~70 estimated, 50+ band confident, exact count low confidence.",
+    "scale": "Truck scale expected at this trucking volume; not definitively resolved overhead.",
+    "shipRcvSeparate": "Inbound raw material and outbound finished tissue handled from distinct warehouse/dock clusters on different building faces.",
+    "truckGateCount": "At least one main Broadway gate; the large campus likely has a second gate (counted 2, flagged uncertain).",
+    "fastLaneOpportunity": "Very wide paved aprons and multi-lane internal roads provide ample room for express/bypass lanes.",
+    "urbanRural": "Mill is within the dense urban fabric of Green Bay, surrounded by residential neighborhoods and other industry. Urban."
+  },
+  "method": "deep-audit"
+}

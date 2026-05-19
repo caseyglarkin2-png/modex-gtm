@@ -1,0 +1,42 @@
+{
+  "name": "GXO Logistics Distribution Center - Fort Worth TX (Sylvania)",
+  "type": "Distribution Center",
+  "coords": { "lat": 32.81880, "lng": -97.30715 },
+  "geofences": {
+    "perimeter": { "south": 32.8172, "west": -97.3079, "north": 32.8203, "east": -97.3060 },
+    "truckGate": { "south": 32.81928, "west": -97.30850, "north": 32.81972, "east": -97.30790 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 32.81790, "west": -97.30700, "north": 32.81960, "east": -97.30640 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 24, "trailersVisible": 0, "trailerParkingCapacity": 12,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 15.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.81880,-97.30715,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "site": "GXO occupies Suite 100 of a large multi-tenant flex/industrial building in the North Fort Worth (N Sylvania Ave) industrial park. The pin and address resolve to the northern building; Street View confirms GXO branding (GXO box truck parked at curb, GXO signage visible).",
+    "truckGate": "No barrier arm, sliding gate, or guard booth. The truck court is entered via a fully open driveway off N Sylvania Ave. Only a low (~4 ft) decorative ornamental metal fence with hedge runs along the road frontage — purely cosmetic, not a security checkpoint.",
+    "dockDoors": "Recessed dock courts along the building's east face; multi-tenant building so GXO uses only a portion. Estimated ~24 doors across the building's dock face from overhead imagery — low confidence on exact count.",
+    "dropArea": "No marked trailer-drop stalls. The east-side paved area is predominantly marked auto/employee parking with a recessed dock apron — no dedicated trailer storage observed.",
+    "trailerParkingCapacity": "Open paved apron at the recessed dock court could hold roughly a dozen trailers if used for staging; low confidence.",
+    "entryExitTogether": "Single open driveway serves both entry and exit to the shared truck court."
+  },
+  "method": "deep-audit"
+}

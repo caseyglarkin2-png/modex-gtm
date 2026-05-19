@@ -1,0 +1,47 @@
+{
+  "name": "Universal Logistics - Spring Hill Contract Logistics Warehouse - Spring Hill TN",
+  "type": "Contract Logistics / Value-Added Warehouse",
+  "coords": { "lat": 35.71200, "lng": -86.92500 },
+  "geofences": {
+    "perimeter": null,
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 0.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.71200,-86.92500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "_location": "Could NOT positively resolve to a discrete building. Universal Logistics' Spring Hill TN Contract Logistics operation is REAL and active - a Universal Facebook post shows the 'Spring Hill, TN Universal Contract Logistics team celebrating a successful launch', and Universal/ZipRecruiter/Glassdoor list ~100+ active Spring Hill jobs (forklift operator $22.25/hr, warehouse associate, operations manager/associate, line operator) supporting GM Spring Hill (Universal = 2024 GM Supplier of the Year). However, no public source ties Universal to a specific Spring Hill building/street address.",
+    "_candidate": "Spring Hill's automotive 3PL warehouse stock is concentrated near Cleburne Rd / Saturn Pkwy SW of the GM plant. The major named logistics centers (e.g. 3521 Cleburne Rd 'Spring Hill/Legacy Logistics Center', 115 dock doors) are tenanted by Comprehensive Logistics, Magna Seating, and Tenneco - NOT Universal. Universal most plausibly runs a value-added/sequencing line INSIDE a GM-controlled building (GM converted Powertrain space into an on-site Logistics Operations Center) or a leased warehouse not publicly documented. coords here point at the GM Spring Hill plant complex as a best-available area anchor only - NOT a confirmed Universal building.",
+    "_classification": "All 22 classification fields are best-guess defaults pending a confirmed address and must be treated as unverified. Geofences and yardMetrics left null/zero because no specific building was locked."
+  },
+  "method": "deep-audit"
+}

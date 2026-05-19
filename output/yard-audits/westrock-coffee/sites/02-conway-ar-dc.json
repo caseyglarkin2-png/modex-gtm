@@ -1,0 +1,56 @@
+{
+  "name": "Westrock Coffee - Conway AR Distribution Center",
+  "type": "Distribution Center",
+  "coords": { "lat": 35.060700, "lng": -92.406700 },
+  "geofences": {
+    "perimeter": { "south": 35.058900, "west": -92.408500, "north": 35.062100, "east": -92.404900 },
+    "truckGate": { "south": 35.059000, "west": -92.408300, "north": 35.059400, "east": -92.407700 },
+    "dropYards": [
+      { "south": 35.059500, "west": -92.408400, "north": 35.061400, "east": -92.407800 }
+    ],
+    "dockAprons": [
+      { "south": 35.059400, "west": -92.408000, "north": 35.061700, "east": -92.407300 },
+      { "south": 35.059300, "west": -92.407300, "north": 35.059800, "east": -92.405400 }
+    ],
+    "staging": { "south": 35.059000, "west": -92.407800, "north": 35.059500, "east": -92.406400 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 72,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 30.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.060700,-92.406700,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Confirmed as 1430 William J. Clark Drive. Street View (2024-07) from William J. Clark Dr looking NE shows '1430' clearly on the building's office-entry facade. This is the Westrock Coffee DC: $70M, 530,000 sq ft, ~30-acre site, 36-ft clear, ~72 dock doors, ESFR, developed by Tempus Realty Partners, completed late 2023.",
+    "truckGate": "Chain-link perimeter fencing runs across the property frontage along William J. Clark Drive (visible in 2024-07 Street View and z19/z20 satellite). A truck driveway enters at the SW with a gate in the fence line; the truck yard is fully enclosed.",
+    "guardShack": "No staffed guard booth identified at the gate. The SW truck entrance reads as a gate in the perimeter fence with no adjacent booth — implying kiosk/remote check-in. Small structures near the building are utility/electrical, not a gatehouse. Flagged uncertain.",
+    "remoteGs": "Truck gate present, no guard shack seen — remote check-in inferred.",
+    "dockDoors": "Published spec is ~72 dock doors. Satellite confirms long banks of dock doors with trailers backed in along the building's west face and additional doors on the north/south ends — banded 50+.",
+    "dropYard": "Marked trailer-parking stalls and drop lanes line the west yard with ~30-55 trailers present (dropArea banded 25-50); a dedicated drop lot is present.",
+    "dropArea": "25-50 trailers parked in marked stalls/lanes in the west yard.",
+    "fastLaneOpportunity": "Wide paved perimeter aprons and a deep yard give room to add an express/bypass lane.",
+    "drivewayLong": "Deep gate-to-dock approach down the west yard easily stacks 3+ trucks.",
+    "postGateStaging": "Large paved yard between the gate and the dock faces serves as inside-the-fence staging.",
+    "urbanRural": "Located in the Conway industrial corridor near I-40 with surrounding commercial/industrial development — Urban.",
+    "shipRcvSeparate": "Single large DC dock operation; no clearly separate ship vs. receive dock clusters — false.",
+    "scale": "No truck scale identified."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,57 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+General Mills - Cedar Rapids IA (Wenig Rd),Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@41.93220,-91.72020,400m/data=!3m1!1e3"
+General Mills - Cedar Rapids IA (Edgewood Rd),Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@41.93220,-91.72020,400m/data=!3m1!1e3"
+General Mills - Buffalo NY,Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,YES,YES,,1,1,,,YES,,,,,,,,Urban,,YES,,,"https://www.google.com/maps/@42.87213,-78.87597,400m/data=!3m1!1e3"
+General Mills - Wellston OH,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@39.09580,-82.54100,400m/data=!3m1!1e3"
+General Mills - Murfreesboro TN,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@35.80100,-86.39150,400m/data=!3m1!1e3"
+General Mills - Covington GA,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@33.62280,-83.82400,400m/data=!3m1!1e3"
+General Mills - Hannibal MO,Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@39.68180,-91.41440,400m/data=!3m1!1e3"
+General Mills - Belvidere IL Distribution Center,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@42.24400,-88.89750,400m/data=!3m1!1e3"
+General Mills (Blue Buffalo) - Richmond IN,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@39.85500,-84.96450,400m/data=!3m1!1e3"
+General Mills - Vineland NJ,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@39.46100,-75.03650,400m/data=!3m1!1e3"
+General Mills - Cincinnati OH,Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Urban,,YES,,YES,"https://www.google.com/maps/@39.27900,-84.43170,400m/data=!3m1!1e3"
+General Mills - Milwaukee WI,Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,,Urban,,YES,,YES,"https://www.google.com/maps/@42.96105,-87.92190,400m/data=!3m1!1e3"
+General Mills - New Albany IN,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,YES,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@38.32840,-85.82400,400m/data=!3m1!1e3"
+General Mills - Reed City MI,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,YES,YES,,1,1,,,YES,,,,,YES,,,Rural,,YES,,YES,"https://www.google.com/maps/@43.87560,-85.50870,400m/data=!3m1!1e3"
+General Mills - Martel OH,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,YES,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@40.671600,-82.908600,400m/data=!3m1!1e3"
+General Mills - Carson CA,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@33.86340,-118.24560,400m/data=!3m1!1e3"
+General Mills - Lodi CA,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@38.14280,-121.30030,400m/data=!3m1!1e3"
+General Mills - Albuquerque NM,Manufacturing Plant,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@35.177200,-106.608000,400m/data=!3m1!1e3"
+General Mills - Hazleton PA,Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,YES,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@40.927400,-76.065200,400m/data=!3m1!1e3"
+General Mills - Allentown PA,Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,,YES,,,,,,,,Urban,,,,,"https://www.google.com/maps/@40.570800,-75.477900,400m/data=!3m1!1e3"
+General Mills - Federalsburg MD,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,,,YES,,YES,,1,1,,YES,,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@38.69120,-75.76540,400m/data=!3m1!1e3"
+General Mills - Vinita OK,Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,YES,,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@36.65830,-95.13520,400m/data=!3m1!1e3"
+General Mills - Great Falls MT (Flour Mill),Flour Mill,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,,,YES,,YES,,1,1,,YES,,,,,,,,,Urban,,,YES,,"https://www.google.com/maps/@47.515200,-111.261600,400m/data=!3m1!1e3"
+General Mills - Fridley MN (Flour Mill),Flour Mill,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,YES,,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@45.04830,-93.27080,400m/data=!3m1!1e3"
+General Mills - Chattanooga TN Distribution Center,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@34.99430,-85.38350,400m/data=!3m1!1e3"
+General Mills - Fontana CA Distribution Center,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@34.04330,-117.50810,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,8,31%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,17,65%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,1,4%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,26,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,10,38%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,15,58%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,1,4%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,25,96%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,26,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,26,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

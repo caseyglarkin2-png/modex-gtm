@@ -1,0 +1,61 @@
+{
+  "name": "FedEx Express Regional Hub - Fort Worth TX",
+  "type": "Express regional hub (Fort Worth Alliance Airport)",
+  "coords": { "lat": 32.994650, "lng": -97.312900 },
+  "geofences": {
+    "perimeter": { "south": 32.99020, "west": -97.31760, "north": 33.00050, "east": -97.30760 },
+    "truckGate": { "south": 32.99175, "west": -97.30960, "north": 32.99250, "east": -97.30855 },
+    "dropYards": [
+      { "south": 32.99180, "west": -97.31280, "north": 32.99360, "east": -97.31050 },
+      { "south": 32.99000, "west": -97.31320, "north": 32.99130, "east": -97.31180 }
+    ],
+    "dockAprons": [
+      { "south": 32.99100, "west": -97.31420, "north": 32.99280, "east": -97.31230 }
+    ],
+    "staging": { "south": 32.99155, "west": -97.30960, "north": 32.99260, "east": -97.30760 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 95.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.994650,-97.312900,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "siteAreaAcres", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "siteConfirmation": "Roster address (2851 Alliance Gateway Fwy) was RANGE_INTERPOLATED onto a residential block ~3 km south of the actual hub - the supplied coords were wrong. Web research established the FedEx Express Fort Worth Hub is at 2001 World Wide Dr, on the east cargo apron of Perot Field / Fort Worth Alliance Airport. Satellite confirmed a large white-roofed sort building with aircraft at airside positions, a second large sort/cross-dock building, an office building, and an extensive ULD/trailer drop yard. Locked center 32.99465, -97.31290. FedEx Express opened the Fort Worth Hub in 1997; ~600,000 sq ft, 800+ employees, ~100,000 packages/day on two sorts, ~650 flights/month.",
+    "truckGate": "Z20 satellite at 32.9921,-97.3092 shows a controlled checkpoint where the public access road enters the hub: a small guard booth flanked by sliding gates, perimeter fencing, and lane striping. Street View (2016/2021 panos) confirms a manned gate with a green-windowed guard booth, an overhead gate canopy/barrier frame, multiple in/out lanes, and a 'FedEx Security' sign on the booth. Definitive controlled truck gate.",
+    "guardShack": "Street View clearly shows a small 1-vehicle-footprint booth with windows on multiple sides beside the entrance lane, signed for FedEx Security - a staffed guard shack.",
+    "remoteGs": "False - entrance is staffed, not kiosk/call-box only.",
+    "preGateStaging": "Wide paved apron outside the gate on the public access road provides truck queue/staging room before the checkpoint.",
+    "postGateStaging": "Large paved area inside the gate between the checkpoint and the dock/ramp area allows trucks to hold before docking.",
+    "drivewayLong": "The gate-to-dock approach is long and wide - easily holds a queue of 3+ trucks.",
+    "fastLaneOpportunity": "Gate apron is wide with multiple striped lanes and unused paved width - physical room for an express/bypass lane.",
+    "dockDoors": "Truck/road-feeder docks line the south (second) building face; trailers seen backed in. Door count estimated in the 25-50 band from overhead imagery; flagged uncertain.",
+    "dropArea": "Z20 imagery between the buildings shows dozens of trailers/ULD containers parked in long rows in a dedicated drop yard - well into the 50+ band.",
+    "multipleFacilities": "Campus has the main sort building, a second large sort/cross-dock building, an office building, and support structures - a multi-building campus.",
+    "dropYard": "Dedicated trailer/container storage lot full of parked trailers between the two main buildings.",
+    "shipRcvSeparate": "Hub operation (air-to-ground sort); docks are not split into clearly separate ship vs receive banks on different faces - judged false.",
+    "scale": "No truck scale / weigh platform observed in the truck path.",
+    "railServed": "No rail spur into the property; airside cargo facility.",
+    "siteAreaAcres": "Perimeter box approximates the core landside hub footprint (buildings + drop yard + gate apron); ~95 acres is an estimate, flagged uncertain.",
+    "entryLanes": "Street View shows multiple striped lanes through the checkpoint; ~2 inbound / 2 outbound estimated, flagged uncertain.",
+    "urbanRural": "Inside the AllianceTexas industrial development at a major-metro airport (DFW); Urban."
+  },
+  "method": "deep-audit"
+}

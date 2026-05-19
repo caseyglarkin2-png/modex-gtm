@@ -1,0 +1,52 @@
+{
+  "name": "Honda - Anna Engine Plant (AEP) - Anna OH",
+  "type": "Engine Plant / EV Battery Pack (IPU) Assembly",
+  "coords": { "lat": 40.37600, "lng": -84.19250 },
+  "geofences": {
+    "perimeter": { "south": 40.37050, "west": -84.19980, "north": 40.38100, "east": -84.18650 },
+    "truckGate": { "south": 40.37550, "west": -84.19620, "north": 40.37650, "east": -84.19480 },
+    "dropYards": [
+      { "south": 40.37450, "west": -84.19850, "north": 40.37820, "east": -84.19500 },
+      { "south": 40.37250, "west": -84.19450, "north": 40.37550, "east": -84.18900 },
+      { "south": 40.37200, "west": -84.20030, "north": 40.37420, "east": -84.19620 }
+    ],
+    "dockAprons": [
+      { "south": 40.37500, "west": -84.19620, "north": 40.37720, "east": -84.19380 },
+      { "south": 40.37320, "west": -84.19350, "north": 40.37520, "east": -84.18950 }
+    ],
+    "staging": { "south": 40.37520, "west": -84.19500, "north": 40.37650, "east": -84.19300 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110, "trailersVisible": 320, "trailerParkingCapacity": 420,
+    "truckGateCount": 3, "buildingCount": 9, "siteAreaAcres": 690.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.376,-84.1925,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "guardShack", "scale", "multiStep"],
+  "fieldNotes": {
+    "location": "Anna Engine Plant confirmed via satellite + roster address 12500 Meranda Road. Roster point landed near plant center; the engine-plant campus is the massive multi-building complex centered ~40.3760,-84.1925, amid farmland N of Anna OH.",
+    "scale_of_facility": "AEP is ~2.8 million sq ft - Honda's largest auto engine plant in the world (web research). Now also building EV battery packs (IPU).",
+    "truckGate": "Major OEM engine plant on a fully secured private campus - public Street View only shows wide-lawn road frontage on Meranda Rd, no gates. Controlled truck gates standard; treated true (medium confidence on lane geometry).",
+    "guardShack": "Guarded entry assumed for a high-security plant of this scale; not individually imaged. Listed uncertain.",
+    "dropArea": "Extremely large trailer drop yards on the west and south sides - hundreds of trailers in dense rows; clearly 50+.",
+    "dockDoors": "Multiple long dock banks with trailers backed in on several building faces; 50+ band, overhead estimate ~110.",
+    "railServed": "No rail spur identified entering the property in z16-z18 probes of all sides; AEP runs truck-based inbound/outbound logistics. Set false.",
+    "multipleFacilities": "Campus of engine machining/assembly, casting, support and logistics buildings.",
+    "shipRcvSeparate": "Dock activity on physically separate building faces (west vs south banks) supports separate ship/receive.",
+    "scale": "No truck scale clearly identified; left false.",
+    "urbanRural": "Open farmland setting N of Anna - Rural."
+  },
+  "method": "deep-audit"
+}

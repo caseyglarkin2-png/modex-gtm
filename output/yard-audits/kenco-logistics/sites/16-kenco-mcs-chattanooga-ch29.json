@@ -1,0 +1,51 @@
+{
+  "name": "Kenco MCS Chattanooga CH29 - Chattanooga TN",
+  "type": "Multi-Client Distribution Center",
+  "coords": { "lat": 35.07155, "lng": -85.17815 },
+  "geofences": {
+    "perimeter": { "south": 35.07015, "west": -85.17955, "north": 35.07290, "east": -85.17675 },
+    "truckGate": { "south": 35.07020, "west": -85.17945, "north": 35.07055, "east": -85.17900 },
+    "dropYards": [
+      { "south": 35.07060, "west": -85.17900, "north": 35.07210, "east": -85.17830 }
+    ],
+    "dockAprons": [
+      { "south": 35.07060, "west": -85.17900, "north": 35.07215, "east": -85.17840 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 38,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 16.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.07155,-85.17815,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea", "entryLanes", "exitLanes", "siteAreaAcres"],
+  "fieldNotes": {
+    "location": "Roster gave an APPROXIMATE geocode for 'Chattanooga, TN 37406' that landed on the CSX DeButts rail classification yard ~5 km west of any Kenco warehouse. Web research resolved Kenco's Chattanooga MCS operations to the Enterprise Park Drive industrial cluster (zip 37416). Kenco Logistic Services has a confirmed building at 6170 Enterprise Park Dr (ROOFTOP geocode 35.0696,-85.1824) and a Kenco affiliate sold a 7-warehouse Chattanooga portfolio in 2022 including a 210,000 SF building near Enterprise South. CH29/CH7B/BP2 are internal Kenco building codes with no public address-to-code mapping, so the specific building for CH29 cannot be verified with certainty.",
+    "buildingChoice": "Audited the large ~200x130 m warehouse at 35.0716,-85.1782 in the Enterprise Park Dr cluster as the best fit for CH29 (284,720 SF bulk space) - it is the largest single-tenant warehouse in the immediate cluster with a single dominant dock bank consistent with bulk distribution.",
+    "truckGate": "No barrier arm, sliding gate, or guard booth visible at the property driveway off Enterprise Park Drive. Open paved loop driveway typical of a leased multi-tenant industrial-park warehouse. Medium confidence - the SW dock yard is not fully fenced/controlled in imagery.",
+    "dockDoors": "Counted ~38 dock doors along the SW building face from z18/z19 imagery (regular bay rhythm, several trailers backed in). Band 25-50; low-confidence exact count.",
+    "dropArea": "10-25 trailers staged in the SW apron/yard, including bobtail trailers without tractors; estimate from z18.",
+    "fastLaneOpportunity": "Wide SW apron with substantial unused paved width - room to add a bypass lane if a gate were installed.",
+    "dropYard": "Shared SW yard holds parked trailers used for drop storage adjacent to the dock apron.",
+    "railServed": "A rail line runs through the broader Enterprise Park area but no spur enters this building's parcel.",
+    "urbanRural": "Inside the Chattanooga metro within the Enterprise Park / Enterprise South industrial fabric - Urban."
+  },
+  "method": "deep-audit"
+}

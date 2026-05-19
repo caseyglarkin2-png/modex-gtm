@@ -1,0 +1,249 @@
+{
+  "account": "John Deere",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 22,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "John Deere Waterloo Works - Tractor Operations - Waterloo IA",
+      "city": "Waterloo",
+      "state": "IA",
+      "type": "Assembly Plant",
+      "address": "3500 E Donald St, Waterloo, IA 50703",
+      "lat": 42.4978,
+      "lng": -92.2828,
+      "source": "Dossier anchor site (largest Deere complex globally, 7/8/9 Series tractors); address from Iowa DNR Facility Explorer + about.deere.com Waterloo factory page"
+    },
+    {
+      "idx": 2,
+      "name": "John Deere Waterloo Works - Engine Works - Waterloo IA",
+      "city": "Waterloo",
+      "state": "IA",
+      "type": "Engine Plant",
+      "address": "3801 W Ridgeway Ave, Waterloo, IA 50704",
+      "lat": 42.4719,
+      "lng": -92.3865,
+      "source": "Dossier (Waterloo complex co-located Engine Works); address from Iowa DNR Facility Explorer + Yelp listing"
+    },
+    {
+      "idx": 3,
+      "name": "John Deere Waterloo Works - Drivetrain Operations - Waterloo IA",
+      "city": "Waterloo",
+      "state": "IA",
+      "type": "Component Plant",
+      "address": "400 Westfield Ave, Waterloo, IA 50703",
+      "lat": 42.5072,
+      "lng": -92.3263,
+      "source": "Dossier (Waterloo complex Drive Train Operations); address from US EPA Drivetrain Operations fact sheet"
+    },
+    {
+      "idx": 4,
+      "name": "John Deere Waterloo Foundry - Waterloo IA",
+      "city": "Waterloo",
+      "state": "IA",
+      "type": "Foundry",
+      "address": "2000 Westfield Ave, Waterloo, IA 50703",
+      "lat": 42.5132,
+      "lng": -92.321,
+      "source": "Dossier (Waterloo complex Foundry); address from Waze listing for John Deere Waterloo Foundry Operations"
+    },
+    {
+      "idx": 5,
+      "name": "John Deere Harvester Works - East Moline IL",
+      "city": "East Moline",
+      "state": "IL",
+      "type": "Assembly Plant",
+      "address": "1100 13th Ave, East Moline, IL 61244",
+      "lat": 41.5092,
+      "lng": -90.429,
+      "source": "Dossier anchor site (combine harvesters); address from Enjoy Illinois + about.deere.com Harvester Works page"
+    },
+    {
+      "idx": 6,
+      "name": "John Deere Cylinder Works - Moline IL",
+      "city": "Moline",
+      "state": "IL",
+      "type": "Component Plant",
+      "address": "909 River Dr, Moline, IL 61265",
+      "lat": 41.5092,
+      "lng": -90.5104,
+      "source": "Dossier (Moline - hydraulic cylinders); address from Panjiva + Waze listings for John Deere Cylinder Division"
+    },
+    {
+      "idx": 7,
+      "name": "John Deere Seeding Group / Planter Works - Moline IL",
+      "city": "Moline",
+      "state": "IL",
+      "type": "Assembly Plant",
+      "address": "501 River Dr, Moline, IL 61265",
+      "lat": 41.5085,
+      "lng": -90.516,
+      "source": "Dossier (Moline - planting equipment / Seeding Group); approximate address along Moline riverfront industrial corridor - verify in deep-audit"
+    },
+    {
+      "idx": 8,
+      "name": "John Deere Davenport Works - Davenport IA",
+      "city": "Davenport",
+      "state": "IA",
+      "type": "Assembly Plant",
+      "address": "1175 E 90th St, Davenport, IA 52807",
+      "lat": 41.587,
+      "lng": -90.521,
+      "source": "Dossier anchor site (articulated dump trucks, motor graders, wheel loaders); address from Iowa DNR Facility Explorer (intersection of Hwy 61 & I-80)"
+    },
+    {
+      "idx": 9,
+      "name": "John Deere Dubuque Works - Dubuque IA",
+      "city": "Dubuque",
+      "state": "IA",
+      "type": "Assembly Plant",
+      "address": "18600 S John Deere Rd, Dubuque, IA 52001",
+      "lat": 42.4444,
+      "lng": -90.744,
+      "source": "Dossier anchor site (backhoes, crawlers, skid-steer loaders); address from Iowa DNR Facility Explorer + Yelp listing"
+    },
+    {
+      "idx": 10,
+      "name": "John Deere Des Moines Works - Ankeny IA",
+      "city": "Ankeny",
+      "state": "IA",
+      "type": "Assembly Plant",
+      "address": "825 SW Irvinedale Dr, Ankeny, IA 50023",
+      "lat": 41.7155,
+      "lng": -93.631,
+      "source": "Dossier anchor site (cotton harvesters, sprayers, tillage, See & Spray); address from Greater Des Moines Partnership + Yelp listings"
+    },
+    {
+      "idx": 11,
+      "name": "John Deere Ottumwa Works - Ottumwa IA",
+      "city": "Ottumwa",
+      "state": "IA",
+      "type": "Assembly Plant",
+      "address": "928 E Vine St, Ottumwa, IA 52501",
+      "lat": 41.0186,
+      "lng": -92.396,
+      "source": "Deere U.S. locations (hay and forage equipment, windrowers); address from TruckMap + Yelp listings"
+    },
+    {
+      "idx": 12,
+      "name": "John Deere Augusta Works (Commercial Products) - Grovetown GA",
+      "city": "Grovetown",
+      "state": "GA",
+      "type": "Assembly Plant",
+      "address": "234 John Deere Pkwy, Grovetown, GA 30813",
+      "lat": 33.448,
+      "lng": -82.169,
+      "source": "Dossier (Augusta + Grovetown - compact + utility tractors); address from OurAugusta + Macrae's Blue Book listings"
+    },
+    {
+      "idx": 13,
+      "name": "John Deere Coffeyville Works - Coffeyville KS",
+      "city": "Coffeyville",
+      "state": "KS",
+      "type": "Component Plant",
+      "address": "2624 N US Highway 169, Coffeyville, KS 67337",
+      "lat": 37.0719,
+      "lng": -95.616,
+      "source": "Dossier (power transmission - planetaries, pump drives, transmissions); address from Yelp + Dun & Bradstreet listings"
+    },
+    {
+      "idx": 14,
+      "name": "John Deere Thibodaux - Thibodaux LA",
+      "city": "Thibodaux",
+      "state": "LA",
+      "type": "Assembly Plant",
+      "address": "1000 Coulon Rd, Thibodaux, LA 70301",
+      "lat": 29.833,
+      "lng": -90.821,
+      "source": "Dossier (sugarcane harvesters, cotton stripper heads, scrapers, cane loaders); address from Yelp listing - multiple addresses exist, verify in deep-audit"
+    },
+    {
+      "idx": 15,
+      "name": "John Deere Reman - Springfield MO",
+      "city": "Springfield",
+      "state": "MO",
+      "type": "Remanufacturing Plant",
+      "address": "4500 E Mustard Way, Springfield, MO 65803",
+      "lat": 37.268,
+      "lng": -93.215,
+      "source": "Dossier (Springfield MO - reman engines, transmissions, axles); address from BBB + EPA TRI facility data"
+    },
+    {
+      "idx": 16,
+      "name": "John Deere Horicon Works - Horicon WI",
+      "city": "Horicon",
+      "state": "WI",
+      "type": "Assembly Plant",
+      "address": "300 N Vine St, Horicon, WI 53032",
+      "lat": 43.45,
+      "lng": -88.632,
+      "source": "Deere U.S. locations (lawn/garden equipment, Gator utility vehicles); address from Waze / D&B listings - production site at 1501 W Lake St"
+    },
+    {
+      "idx": 17,
+      "name": "John Deere Power Products - Greeneville TN",
+      "city": "Greeneville",
+      "state": "TN",
+      "type": "Assembly Plant",
+      "address": "1630 Hal Henard Rd, Greeneville, TN 37743",
+      "lat": 36.149,
+      "lng": -82.809,
+      "source": "Deere U.S. locations (D100 lawn tractors, EZTrak zero-turn mowers); address from Yelp + Tennessee ECD listings"
+    },
+    {
+      "idx": 18,
+      "name": "John Deere Kernersville (Deere-Hitachi Construction) - Kernersville NC",
+      "city": "Kernersville",
+      "state": "NC",
+      "type": "Assembly Plant",
+      "address": "1000 John Deere Rd, Kernersville, NC 27284",
+      "lat": 36.101,
+      "lng": -80.044,
+      "source": "Dossier (excavators; new $70M factory opening 2026 transferring excavator production from Japan); address from Waze + about.deere.com Kernersville page"
+    },
+    {
+      "idx": 19,
+      "name": "John Deere North American Parts Distribution Center - Milan IL",
+      "city": "Milan",
+      "state": "IL",
+      "type": "Parts Distribution Center",
+      "address": "1600 1st Ave E, Milan, IL 61264",
+      "lat": 41.447,
+      "lng": -90.576,
+      "source": "Dossier anchor DC (2.8M sq ft, 800K+ SKUs, up to 450K orders/week, operating since 1973); address from CLUI + Chamber of Commerce listings"
+    },
+    {
+      "idx": 20,
+      "name": "John Deere Distribution Center - Hebron IN",
+      "city": "Hebron",
+      "state": "IN",
+      "type": "Parts Distribution Center",
+      "address": "2105 W 181st Ave, Hebron, IN 46341",
+      "lat": 41.334,
+      "lng": -87.238,
+      "source": "Dossier (new $125M, 1.2M sq ft, 234-acre DC; groundbreaking early 2026, opens ~2026 - greenfield); address from Indiana EDC + Hoosier Ag Today (SW of I-65/SR-2 interchange)"
+    },
+    {
+      "idx": 21,
+      "name": "John Deere Parts Distribution Center - Waterloo IA",
+      "city": "Waterloo",
+      "state": "IA",
+      "type": "Parts Distribution Center",
+      "address": "2280 Northeast Dr, Waterloo, IA 50703",
+      "lat": 42.531,
+      "lng": -92.307,
+      "source": "Service parts operations at Waterloo (dossier notes Waterloo includes service parts operations); address from Panjiva buyer report"
+    },
+    {
+      "idx": 22,
+      "name": "John Deere All-Makes Parts Distribution Center - Rock Valley IA",
+      "city": "Rock Valley",
+      "state": "IA",
+      "type": "Parts Distribution Center",
+      "address": "1300 16th Ave, Rock Valley, IA 51247",
+      "lat": 43.201,
+      "lng": -96.296,
+      "source": "Dossier (Rock Valley IA regional depot - all-makes parts distribution); approximate address - exact street not confirmed in public sources, verify in deep-audit"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "name": "Home Depot SDC - Savannah GA",
+  "type": "Stocking Distribution Center",
+  "coords": { "lat": 32.15820, "lng": -81.20380 },
+  "geofences": {
+    "perimeter": { "south": 32.15450, "west": -81.20850, "north": 32.16150, "east": -81.20000 },
+    "truckGate": { "south": 32.15920, "west": -81.20720, "north": 32.16030, "east": -81.20580 },
+    "dropYards": [
+      { "south": 32.15550, "west": -81.20850, "north": 32.16030, "east": -81.20620 },
+      { "south": 32.15500, "west": -81.20350, "north": 32.16020, "east": -81.20020 }
+    ],
+    "dockAprons": [
+      { "south": 32.15560, "west": -81.20680, "north": 32.16030, "east": -81.20560 },
+      { "south": 32.15520, "west": -81.20480, "north": 32.16000, "east": -81.20360 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 200,
+    "trailersVisible": 300,
+    "trailerParkingCapacity": 380,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 154.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.15820,-81.20380,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Confirmed: Street View (2025-11) shows a metal swing-gate / barrier with a central island and bollards across the access road; the truck yards are fully fenced (perimeter fence visible in multiple satellite views).",
+    "guardShack": "No standalone guard booth positively resolved. The roadway barrier in the woods has no booth; the NW truck-yard entrance has a maintenance canopy and a round storage tank, not a clear guard booth. Flagged uncertain.",
+    "remoteGs": "Set true because truckGate is confirmed and no guard booth was confirmable — implies kiosk / call-box check-in. The site is a 1995-vintage import DC newly acquired by HD (Jan 2025); security posture may be evolving. Flagged uncertain.",
+    "shipRcvSeparate": "Cross-dock SDC: dock doors run along both long faces (NE and SW) of the building.",
+    "drivewayLong": "Long wooded access drive from Crossroads Pkwy plus a deep internal truck yard give 3+ truck stacking room.",
+    "backupSensitive": "Gate set far back from public roads on a long wooded drive — no risk of queue spilling onto a through road.",
+    "fastLaneOpportunity": "Wide paved truck yards and entrance apron leave room for an express/bypass lane.",
+    "urbanRural": "Edge-of-metro site ringed by woodland and water-retention ponds outside Savannah's dense fabric; judged Rural.",
+    "dropArea": "Hundreds of trailers / import containers parked along both long faces; 50+ band.",
+    "dropYard": "Dedicated trailer / container storage rows on both dock-yard faces, fed by Port of Savannah import flow.",
+    "dockDoorCount": "~200 doors estimated across both long faces of the 1.4M sq ft building; approximate.",
+    "entryLanes": "Single access drive serving as both entry and exit; lane counts estimated."
+  },
+  "method": "deep-audit"
+}

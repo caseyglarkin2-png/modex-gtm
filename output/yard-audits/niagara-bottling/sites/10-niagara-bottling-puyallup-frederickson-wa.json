@@ -1,0 +1,53 @@
+{
+  "name": "Niagara Bottling - Puyallup (Frederickson) WA",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 47.076030, "lng": -122.355800 },
+  "geofences": {
+    "perimeter": { "south": 47.07440, "west": -122.35760, "north": 47.07770, "east": -122.35400 },
+    "truckGate": { "south": 47.07670, "west": -122.35490, "north": 47.07720, "east": -122.35430 },
+    "dropYards": [
+      { "south": 47.07680, "west": -122.35740, "north": 47.07760, "east": -122.35430 }
+    ],
+    "dockAprons": [
+      { "south": 47.07630, "west": -122.35740, "north": 47.07680, "east": -122.35430 },
+      { "south": 47.07460, "west": -122.35740, "north": 47.07500, "east": -122.35480 }
+    ],
+    "staging": { "south": 47.07720, "west": -122.35490, "north": 47.07760, "east": -122.35420 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 42,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 55,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 32.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@47.076030,-122.355800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "facility": "Niagara Bottling Frederickson plant, 19820 57th Ave E, Puyallup WA. ~311,000 sq ft plant opened 2014, expanded multiple times. Confirmed by three large water-treatment silos on the building's east face in Street View (2024-05).",
+    "truckGate": "Truck yard is enclosed by a black chain-link perimeter fence with a sliding gate across the truck entry drive on the NE side (clearly visible in Street View 2024-05); a truck is shown passing through the gate, with yellow bollards channeling the lane.",
+    "guardShack": "A canopy/check-in structure stands beside the gate drive, but no traditional multi-window manned guard booth is visible.",
+    "remoteGs": "Controlled sliding gate with a canopy check-in point and no manned booth implies kiosk / automated / remote check-in.",
+    "dockDoors": "Long dock-door row along the full north face with many trailers backed in, plus a separate dock bank on the south face; estimated ~42 doors total. Approximate, flagged.",
+    "dropArea": "Multiple rows of parked trailers in the north truck yard - a substantial dedicated drop yard.",
+    "shipRcvSeparate": "Two physically separate dock clusters - a large bank on the north face and a smaller bank on the south face - suggesting separate ship/receive operations. Flagged as inferred.",
+    "fastLaneOpportunity": "Wide paved truck yard and gate apron with unused width; room to add an express bypass lane.",
+    "urbanRural": "Frederickson industrial corridor SE of Tacoma - dense metro-edge industrial fabric with adjacent large warehouses - Urban.",
+    "buildingCount": "Single large Niagara building; the dark-roofed buildings to the east and the RV/equipment storage yard to the north are separate properties."
+  },
+  "method": "deep-audit"
+}

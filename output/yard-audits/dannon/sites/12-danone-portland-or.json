@@ -1,0 +1,48 @@
+{
+  "name": "Danone - Portland OR",
+  "type": "Frozen yogurt / ice cream plant",
+  "coords": { "lat": 45.56475, "lng": -122.57250 },
+  "geofences": {
+    "perimeter": { "south": 45.56405, "west": -122.57335, "north": 45.56545, "east": -122.57185 },
+    "truckGate": { "south": 45.56450, "west": -122.57305, "north": 45.56462, "east": -122.57288 },
+    "dropYards": [
+      { "south": 45.56500, "west": -122.57270, "north": 45.56545, "east": -122.57205 }
+    ],
+    "dockAprons": [
+      { "south": 45.56412, "west": -122.57305, "north": 45.56445, "east": -122.57260 },
+      { "south": 45.56445, "west": -122.57225, "north": 45.56500, "east": -122.57195 }
+    ],
+    "staging": { "south": 45.56448, "west": -122.57290, "north": 45.56490, "east": -122.57255 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 12, "trailersVisible": 9, "trailerParkingCapacity": 15,
+    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 6.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@45.56475,-122.57250,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "railServed"],
+  "fieldNotes": {
+    "truckGate": "Sliding iron gate across the NE 87th Ave entrance into the parking/yard, plus a gated dock driveway to the south dock apron. Whole site fenced with tall iron perimeter fence.",
+    "guardShack": "No staffed booth structure at either gate.",
+    "remoteGs": "Main NE 87th Ave gate has a call-box/intercom post beside it and no guard shack - remote/kiosk check-in.",
+    "dockDoors": "Reefer (refrigerated) trailers backed into dock doors on the SW/south building face, seen in May/Jul 2025 Street View; additional dock positions along the east face by the bulk silos. ~12 total estimated - low confidence.",
+    "dropYard": "Paved trailer-staging yard north/NE of the building holds parked trailers separate from active docks.",
+    "railServed": "A rail track curves along the east/NE edge of the property, but it appears to be a through-siding on/along the adjacent parcel - no rail dock spur visibly entering the YoCream building. Marked false, flagged uncertain.",
+    "truckGateCount": "Counted the NE 87th Ave parking gate plus the separate gated south dock driveway.",
+    "urbanRural": "NE Portland industrial district near the airport - Urban.",
+    "siteAreaAcres": "Estimated from perimeter box; tight urban parcel ~6 acres including building and yard."
+  },
+  "method": "deep-audit"
+}

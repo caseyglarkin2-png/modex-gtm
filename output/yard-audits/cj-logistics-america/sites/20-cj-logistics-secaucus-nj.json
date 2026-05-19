@@ -1,0 +1,51 @@
+{
+  "name": "CJ Logistics - Secaucus NJ",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.7717, "lng": -74.0806 },
+  "geofences": {
+    "perimeter": { "south": 40.7704, "west": -74.0815, "north": 40.7726, "east": -74.0799 },
+    "truckGate": { "south": 40.7704, "west": -74.0812, "north": 40.7708, "east": -74.0807 },
+    "dropYards": [
+      { "south": 40.7705, "west": -74.0812, "north": 40.7712, "east": -74.0800 }
+    ],
+    "dockAprons": [
+      { "south": 40.7707, "west": -74.0813, "north": 40.7712, "east": -74.0801 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 19,
+    "trailersVisible": 20,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 8.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.7717,-74.0806,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "siteAreaAcres"],
+  "fieldNotes": {
+    "location": "Confirmed 901 Castle Rd, Secaucus NJ - CJ Logistics America NJ Secaucus Center. CJ open-space spec sheet: 107,929 SF warehouse, 188,615 SF total property (~4.33 acres), 19 exterior docks, 19 trailer positions, 4 drive-in doors, 20 ft clear height.",
+    "truckGate": "The property is enclosed by a continuous chain-link perimeter fence (visible in 2019 and 2024 Street View). The truck driveway off Castle Rd passes through a fence gate opening - a controlled truck entrance.",
+    "guardShack": "No clear guard booth visible at the driveway in Street View; a small structure sits at the SW corner of the yard but is not positioned as a gate booth. Classified guardShack false / remoteGs true.",
+    "dockDoors": "CJ spec sheet states 19 exterior docks - matches the 10-25 band. Docks on the SW and SE faces of the building.",
+    "siteAreaAcres": "Geofence box (~8.2 acres) captures the full building footprint plus the south truck yard. CJ's cited parcel is ~4.33 acres - the dark-roofed building appears to be multi-tenant and larger than CJ's 107,929 SF lease; site-area figure is therefore approximate.",
+    "dropYard": "South truck yard holds parked trailers and tractors - functions as a drop yard.",
+    "drivewayShort": "Short approach from Castle Rd into a tight infill yard - minimal stacking depth.",
+    "urbanRural": "Secaucus / NJ Meadowlands - extremely dense urban industrial area.",
+    "railServed": "A rail line runs nearby (Meadowlands corridor) but no spur into this property."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,55 @@
+{
+  "name": "Lance - Burlington IA",
+  "type": "Manufacturing - snacks/crackers",
+  "coords": { "lat": 40.82770, "lng": -91.13950 },
+  "geofences": {
+    "perimeter": { "south": 40.82620, "west": -91.14180, "north": 40.82950, "east": -91.13750 },
+    "truckGate": { "south": 40.82780, "west": -91.13880, "north": 40.82820, "east": -91.13820 },
+    "dropYards": [
+      { "south": 40.82790, "west": -91.13870, "north": 40.82870, "east": -91.13770 }
+    ],
+    "dockAprons": [
+      { "south": 40.82790, "west": -91.14000, "north": 40.82850, "east": -91.13820 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 32.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.82770,-91.13950,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "dockDoors", "dropArea", "buildingCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "ownership": "IMPORTANT: This site is the former Lance / Snyder's-Lance private-label cookie/cracker plant, but it was DIVESTED to Shearer's Foods in 2014 (sale of Snyder's-Lance's private-label business) - four years before Campbell's acquired Snyder's-Lance in 2018. The current operator is Shearer's Foods (~800 employees, address 3000 Mt Pleasant St / Roosevelt Ave, Burlington IA). The roster lists it under the Campbell's account; audited as the intended physical site but it is NOT currently a Campbell's facility.",
+    "location": "Roster coords (40.832609, -91.14054) were ~1.2 km off in a residential area. Correct plant located via web research at 3000 Mt Pleasant St, Burlington IA - the large industrial snack building.",
+    "truckGate": "Open-access site. Driveways from Mt Pleasant Street are uncontrolled - 2016/2019 Street View shows wide open aprons with no barrier arm, sliding gate, or checkpoint. No perimeter fence around the property.",
+    "guardShack": "No guard booth at any entrance. The structure near the office front is the plant office building, not a gate booth.",
+    "drivewayLong": "Long approach from Mt Pleasant Street across deep paved aprons to the building.",
+    "entryExitSeparate": "Multiple separate driveways onto Mt Pleasant Street serving the office, parking, and truck/dock areas.",
+    "dockDoors": "Dock activity on the building's N/NE face with a few trailers visible; the wide single-story plant likely has ~15-25 doors - band 10-25, flagged uncertain (docks partly obscured / hard to count from overhead).",
+    "dropArea": "Trailers parked on the NE side without tractors; ~10-25 band, flagged uncertain.",
+    "buildingCount": "Main plant building plus a long metal-roofed warehouse to the NE on the same property; buildingCount = 2. (A separate industrial complex to the WEST and a baseball complex to the EAST are distinct properties, not part of this site.)",
+    "urbanRural": "Burlington IA - a small Mississippi River city; the plant is in an edge-of-town industrial/commercial area with adjacent farmland and a sports complex. Per rubric tiebreak (small-town industrial), classified Rural.",
+    "siteAreaAcres": "~32 acres from perimeter box (~365m N-S x ~365m E-W).",
+    "railServed": "A rail mainline runs along the NW edge of the property but no spur enters; railServed false.",
+    "confidence": "Medium - the plant is positively identified and the open-access (no gate/no guard) determination is confident from Street View, but dock/trailer counts are difficult to read from overhead and the ownership is a notable data discrepancy."
+  },
+  "method": "deep-audit"
+}

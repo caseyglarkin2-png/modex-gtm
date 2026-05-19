@@ -1,0 +1,50 @@
+{
+  "name": "Niagara Bottling - Groveland FL",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 28.63920, "lng": -81.82750 },
+  "geofences": {
+    "perimeter": { "south": 28.63770, "west": -81.82960, "north": 28.64085, "east": -81.82610 },
+    "truckGate": { "south": 28.63790, "west": -81.82850, "north": 28.63820, "east": -81.82800 },
+    "dropYards": [
+      { "south": 28.63800, "west": -81.82920, "north": 28.64060, "east": -81.82830 }
+    ],
+    "dockAprons": [
+      { "south": 28.63800, "west": -81.82890, "north": 28.64060, "east": -81.82820 }
+    ],
+    "staging": { "south": 28.63760, "west": -81.82850, "north": 28.63800, "east": -81.82800 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 42.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@28.63920,-81.82750,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "dropArea", "scale"],
+  "fieldNotes": {
+    "facility": "Niagara Bottling Groveland plant, 7633 American Way, operating since 2007. Confirmed via Street View: building with bulk silos/storage tanks (bottling water tanks), gated entry. Located in a multi-tenant industrial park; the Niagara building is the standalone large building, distinct from neighboring warehouses.",
+    "truckGate": "Street View up the entry driveway shows a controlled checkpoint: a gate with a stop sign, perimeter chain-link fencing across the property line, and a guard booth with a canopy beside the lane.",
+    "guardShack": "A small canopied guard booth is clearly visible at the gate, set beside the driveway on the building side.",
+    "dockDoors": "Docks run along the west face with a long row of angled-bay trailer parking; angled docks make exact counting hard. Estimate ~55 doors, 50+ band.",
+    "dropArea": "Trailers parked in angled bays / drop rows along the west apron; honest overhead estimate 10-25 dropped trailers.",
+    "scale": "No truck scale clearly identified; flagged uncertain.",
+    "siteAreaAcres": "Derived from perimeter box (~350m N-S x ~340m E-W); ~42 acres.",
+    "drivewayLong": "The gated driveway runs a long distance from the public road up the west side; ample queue depth inside the gate."
+  },
+  "method": "deep-audit"
+}

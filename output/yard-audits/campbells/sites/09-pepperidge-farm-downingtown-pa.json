@@ -1,0 +1,54 @@
+{
+  "name": "Pepperidge Farm - Downingtown PA",
+  "type": "Manufacturing - bakery",
+  "coords": { "lat": 40.00420, "lng": -75.68550 },
+  "geofences": {
+    "perimeter": { "south": 40.00300, "west": -75.68900, "north": 40.00500, "east": -75.68350 },
+    "truckGate": { "south": 40.00345, "west": -75.68530, "north": 40.00375, "east": -75.68480 },
+    "dropYards": [
+      { "south": 40.00420, "west": -75.68500, "north": 40.00485, "east": -75.68380 }
+    ],
+    "dockAprons": [
+      { "south": 40.00455, "west": -75.68530, "north": 40.00500, "east": -75.68450 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 11,
+    "trailerParkingCapacity": 18,
+    "truckGateCount": 3,
+    "buildingCount": 2,
+    "siteAreaAcres": 14.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.00420,-75.68550,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "buildingCount"],
+  "fieldNotes": {
+    "truckGate": "Older 1949 urban bakery; multiple driveways open directly off Boot Road into a combined parking/yard area. No barrier arm, sliding gate, or checkpoint pinch-point visible in 2023-08 Street View of all road frontage.",
+    "guardShack": "No guard booth at any entrance. Small employee break gazebos near building 425 are not gate booths.",
+    "drivewayShort": "Constrained urban site - driveways run a short distance from Boot Road straight into the yard/dock area; little stacking depth.",
+    "backupSensitive": "Boot Road frontage is tight with employee parking abutting the road; a truck queue at any driveway would quickly spill toward the public road - flagged as backup-sensitive.",
+    "entryExitSeparate": "Three separate curb cuts onto Boot Road serving the parking lots and the east-end truck yard.",
+    "dockDoors": "Dock canopies on the NE/east face of the main building plus dock positions on the secondary east-end building; ~12-20 doors estimated - band 10-25. Old facility, many doors hidden under canopies.",
+    "dropArea": "East-end yard holds parked trailers without tractors; ~10-15 - band 10-25.",
+    "multipleFacilities": "Main bakery building plus a separate white-roofed warehouse/distribution structure at the east end share the lot; treated as the same campus so multipleFacilities left false (single cluster), buildingCount = 2.",
+    "urbanRural": "Downingtown PA - dense industrial/commercial corridor along Boot Road with adjacent warehouses and residential townhouses across the street; classified Urban (Philadelphia exurban metro fabric).",
+    "siteAreaAcres": "~14 acres from perimeter box (~220m N-S x ~470m E-W) - a compact older urban plant.",
+    "railServed": "Multi-track rail mainline runs along the north property edge but no spur enters the property; not rail-served.",
+    "confidence": "Building positively confirmed - a Campbell's-marked box truck and building 425 signage visible in Street View; Pepperidge Farm Downingtown plant at 421 Boot Road."
+  },
+  "method": "deep-audit"
+}

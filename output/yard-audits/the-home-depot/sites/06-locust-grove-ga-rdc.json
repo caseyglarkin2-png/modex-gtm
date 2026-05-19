@@ -1,0 +1,54 @@
+{
+  "name": "Home Depot RDC - Locust Grove GA",
+  "type": "Rapid Deployment Center",
+  "coords": { "lat": 33.36300, "lng": -84.11900 },
+  "geofences": {
+    "perimeter": { "south": 33.35950, "west": -84.12300, "north": 33.36700, "east": -84.11450 },
+    "truckGate": { "south": 33.36050, "west": -84.12030, "north": 33.36180, "east": -84.11880 },
+    "dropYards": [
+      { "south": 33.36280, "west": -84.11720, "north": 33.36600, "east": -84.11550 }
+    ],
+    "dockAprons": [
+      { "south": 33.36100, "west": -84.11800, "north": 33.36560, "east": -84.11620 },
+      { "south": 33.36080, "west": -84.12130, "north": 33.36380, "east": -84.11980 }
+    ],
+    "staging": { "south": 33.36080, "west": -84.12000, "north": 33.36280, "east": -84.11820 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 130.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.36300,-84.11900,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "10-25",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dropArea", "trailersVisible", "scale"],
+  "fieldNotes": {
+    "resolution": "Roster geocode (33.216581,-83.930773) was wrong by ~25 km — landed in rural farmland SE of Locust Grove. Correct facility resolved via web research to 3150 Hwy 42 S, Locust Grove (HD DC #5250 / RDC 5250), a 657,518 sq ft RDC on ~130 acres off I-75, bought by Monmouth REIT for $96.7M in 2020. Building positively located at ~33.363,-84.119.",
+    "imagery": "Satellite imagery of this site is significantly cloud-affected at z16-z19 — the central building roof and the truck entrance are partially obscured. Building outline, the SE-face dock bank, and trailer rows are still readable; the gate structure itself could not be directly imaged.",
+    "truckGate": "Not directly imaged due to cloud cover; HD's own security-guard role descriptions for its RDC network describe staffed truck check-in (in-gate/out-gate). Inferred TRUE as standard for an HD RDC of this scale; flagged uncertain.",
+    "guardShack": "Inferred TRUE — HD RDC security guards staff truck check-in per HD job descriptions; booth not directly imaged. Flagged uncertain.",
+    "shipRcvSeparate": "Continuous dock doors visible on the long SE face plus a separate dock bank on the SW face — inbound/outbound likely run from separate banks (typical RDC cross-dock).",
+    "dropArea": "A trailer parking area is visible NE of the building; count obscured by cloud — estimated 10-25 band, flagged uncertain.",
+    "drivewayLong": "130-acre site with deep ring-road approach gives ample queue depth before docks.",
+    "fastLaneOpportunity": "Very large site (land-to-building ratio ~9x) with abundant unused paved/undeveloped width near the entrance — room for an express lane.",
+    "urbanRural": "Edge-of-town Locust Grove (Henry County), small town 36 mi south of Atlanta — industrial pocket surrounded by woodland and farmland. Classed Rural per rubric (small-town industrial -> Rural).",
+    "railServed": "A rail line runs along the SW edge between Hwy 42 and the property, but no spur is visible entering the DC — set false.",
+    "siteAreaAcres": "130 acres per the Monmouth REIT acquisition disclosure (authoritative)."
+  },
+  "method": "deep-audit"
+}

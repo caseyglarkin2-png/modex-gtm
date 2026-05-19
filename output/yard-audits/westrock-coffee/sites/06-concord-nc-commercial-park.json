@@ -1,0 +1,47 @@
+{
+  "name": "Westrock Coffee - Concord NC Commercial Park Extract & Tea Facility",
+  "type": "Extract & Tea Manufacturing",
+  "coords": { "lat": 35.392817, "lng": -80.616512 },
+  "geofences": {
+    "perimeter": { "south": 35.391650, "west": -80.617900, "north": 35.393900, "east": -80.615700 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 35.392050, "west": -80.617350, "north": 35.392500, "east": -80.616750 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 9,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 8,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 6.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.392817,-80.616512,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "No controlled truck entrance. Multiple Street View captures (2019, 2020, 2023, 2026) of Commercial Park Drive SW and the building's dock side show open driveways, no barrier arm, no sliding gate, and no checkpoint pinch-point. The only fencing seen is a small chain-link enclosure around process/utility equipment on the building flank — not a perimeter or gate.",
+    "guardShack": "No staffed booth visible at the entrance or anywhere on the parcel.",
+    "dockDoorCount": "The dock bank on the SW face has roughly 6-9 doors; 2019 Street View shows ~6 doors with 2 trailers backed in plus more bays around the corner. Exact count limited by tree screening and oblique angles (uncertain).",
+    "dropArea": "A few trailers/box bodies park near the dock bank and along the SW lot; no large dedicated drop-stall yard.",
+    "urbanRural": "Sits in the Commercial Park Drive SW industrial subdivision within the Charlotte-metro / Concord fabric, near big-box retail and a signalized arterial — Urban.",
+    "drivewayShort": "Short approach from the Commercial Park loop road to the dock bank (1-2 trucks).",
+    "locationDisambiguation": "Roster geocode for this address moved 1693 m. The building was independently verified at 101 Commercial Park Drive SW (Waze, BusinessYab, Panjiva 'S&D Tea Annex' buyer records) — a distinct facility ~0.4 mi SW of idx 5 (300 Concord Pkwy S). Confirmed as the correct, separate building; not confused with idx 5."
+  },
+  "method": "deep-audit"
+}

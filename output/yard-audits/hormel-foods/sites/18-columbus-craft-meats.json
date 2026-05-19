@@ -1,0 +1,47 @@
+{
+  "name": "Columbus Craft Meats - Hayward CA",
+  "type": "Meat Processing Plant",
+  "coords": { "lat": 37.61330, "lng": -122.05260 },
+  "geofences": {
+    "perimeter": { "south": 37.61240, "west": -122.05420, "north": 37.61420, "east": -122.05230 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 37.61300, "west": -122.05290, "north": 37.61400, "east": -122.05240 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 13, "trailersVisible": 4, "trailerParkingCapacity": 8,
+    "truckGateCount": 0, "buildingCount": 1, "siteAreaAcres": 7.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.61330,-122.05260,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster coords landed in a dense Hayward industrial park; address 30977 San Clemente St geocoded (OSM) to 37.6133,-122.0526. Note: Hormel/Columbus has TWO Hayward plants - the San Antonio St plant was announced for closure (March 2025), the San Clemente St plant remains. This audit is the San Clemente St facility. Locked center 37.6133,-122.0526.",
+    "truckGate": "No perimeter fence, barrier arm, or gate. The building's dock face fronts directly on San Clemente St with open parking-lot access on all sides - fully uncontrolled.",
+    "guardShack": "No staffed booth observed anywhere on the property in Street View (2025-10) or satellite.",
+    "remoteGs": "False - no gate, so no remote check-in.",
+    "dockDoors": "Dock doors recessed along the east face fronting San Clemente St; ~10-15 doors visible with a few trailers/vans backed in. 10-25 band. A couple of additional dock positions at the SE corner.",
+    "dropArea": "No trailer drop yard - the lots around the building are marked car-parking stalls (employee parking), no parked trailers without tractors observed. dropArea NONE.",
+    "drivewayShort": "Docks open onto a narrow apron directly off San Clemente St; only 1-2 trucks fit in the approach.",
+    "railServed": "A single through-track runs along the west side between buildings but does not spur into the plant - no rail dock. railServed false.",
+    "urbanRural": "Dense Hayward (San Francisco Bay Area metro) industrial-park fabric - Urban.",
+    "buildingCount": "One large single-tenant industrial building.",
+    "shipRcvSeparate": "Dock activity concentrated on a single east-face bank - combined ship/receive."
+  },
+  "method": "deep-audit"
+}

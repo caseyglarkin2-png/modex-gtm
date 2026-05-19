@@ -1,0 +1,61 @@
+{
+  "name": "American Honda - Irving Parts Distribution Center - Irving TX",
+  "type": "Parts Distribution Center",
+  "coords": { "lat": 32.92215, "lng": -97.00910 },
+  "geofences": {
+    "perimeter": { "south": 32.92065, "west": -97.01010, "north": 32.92410, "east": -97.00790 },
+    "truckGate": { "south": 32.92160, "west": -97.00845, "north": 32.92195, "east": -97.00805 },
+    "dropYards": [
+      { "south": 32.92300, "west": -97.00900, "north": 32.92375, "east": -97.00820 }
+    ],
+    "dockAprons": [
+      { "south": 32.92140, "west": -97.00880, "north": 32.92340, "east": -97.00815 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 35,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 19.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.92215,-97.00910,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "siteAreaAcres"],
+  "fieldNotes": {
+    "truckGate": "Two controlled truck gates confirmed in Street View 2025-05: a south driveway signed 'HONDA - TRUCK ENTRANCE ONLY' and a NE driveway signed 'NO ENTRY / EXIT ONLY'. Both have sliding chain-link gates and perimeter fencing.",
+    "guardShack": "No staffed guard booth visible at either truck gate in Street View - the gates read as remote/badge-operated sliding gates. A small set-back utility/pump structure near the entry is not a gate booth. Flagged uncertain.",
+    "remoteGs": "Set true - truck gates exist with no visible guard shack, implying badge/kiosk/remote check-in. Moderate confidence.",
+    "preGateStaging": "No dedicated paved waiting area outside the gate; the entry driveway apron is short.",
+    "postGateStaging": "Wide paved truck apron inside the gate along the east dock face provides inside queuing room.",
+    "drivewayLong": "The internal truck apron along the east face is long enough to hold 3+ trucks between the entry gate and the docks.",
+    "entryExitSeparate": "Distinct gates at different points of the property line: a dedicated entry gate on the south and a dedicated exit gate on the NE - clearly signed.",
+    "entryLanes": "One inbound lane at the truck-entrance gate.",
+    "exitLanes": "One outbound lane at the exit-only gate.",
+    "dockDoors": "Dock bank on the east building face with trailers backed in along most of the building length; door total estimated ~30, in the 25-50 band. Mid-size 1980s-era PDC.",
+    "dropArea": "A row of trailers parked in a staging/drop area at the NE of the property; estimated 10-25 stalls.",
+    "shipRcvSeparate": "Loading concentrated on a single east-face dock bank - shipping and receiving not on physically separate dock clusters.",
+    "urbanRural": "Dense Irving/Las Colinas industrial-office corridor near DFW Airport, fully surrounded by city development - Urban.",
+    "multipleFacilities": "One Honda PDC warehouse plus an attached/adjacent office building on the same property - a single facility. buildingCount=2 counts the warehouse and the SW office building.",
+    "dropYard": "Dedicated trailer-staging/drop area at the NE of the property, separate from the active dock apron.",
+    "siteAreaAcres": "~19 acres derived from the perimeter box - estimate; no published acreage found.",
+    "trailerParkingCapacity": "Estimate from the NE staging area plus apron - approximate.",
+    "railServed": "No rail spur enters the property.",
+    "location": "Roster coords (32.911717,-96.99072, APPROXIMATE) landed in the Las Colinas office/residential district. Resolved to 4525 W Royal Lane, Irving TX via web research; satellite and Street View confirmed the warehouse with 'HONDA' signage on the building and gates."
+  },
+  "method": "deep-audit"
+}

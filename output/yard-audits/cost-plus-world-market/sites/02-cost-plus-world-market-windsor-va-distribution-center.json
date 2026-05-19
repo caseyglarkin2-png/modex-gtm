@@ -1,0 +1,71 @@
+{
+  "name": "Cost Plus World Market - Windsor VA Distribution Center",
+  "type": "Distribution Center / Import Warehouse (East Coast)",
+  "coords": { "lat": 36.799902, "lng": -76.713042 },
+  "geofences": {
+    "perimeter": { "south": 36.79800, "west": -76.71900, "north": 36.80160, "east": -76.71050 },
+    "truckGate": { "south": 36.79820, "west": -76.71320, "north": 36.79870, "east": -76.71250 },
+    "dropYards": [
+      { "south": 36.80020, "west": -76.71800, "north": 36.80080, "east": -76.71150 },
+      { "south": 36.79830, "west": -76.71800, "north": 36.79890, "east": -76.71250 }
+    ],
+    "dockAprons": [
+      { "south": 36.80000, "west": -76.71800, "north": 36.80020, "east": -76.71150 },
+      { "south": 36.79880, "west": -76.71800, "north": 36.79900, "east": -76.71200 }
+    ],
+    "staging": { "south": 36.79830, "west": -76.71350, "north": 36.79900, "east": -76.71240 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 75.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.799902,-76.713042,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "shipRcvSeparate", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "Trucks use a dedicated gate separate from the car/office entrance. The west driveway off Route 460 carries a 'NO TRUCKS' sign (Street View). The truck route wraps to the SE corner of the building where a controlled gate / guard-booth pinch-point sits beside the truck lane.",
+    "guardShack": "A small rectangular guard-booth structure is clearly visible at z20 sitting on a triangular paved island at the SE corner of the building, with the truck lane splitting around it (in/out). Web research (TruckMap driver notes) explicitly states 'Check-in is at the security guard shack.' High confidence.",
+    "remoteGs": "False - a staffed guard shack is present, confirmed by imagery and driver notes.",
+    "dockDoors": "Dock doors run the full length of both long building faces (north and south), each ~600 m, with trailers backed in. Driver notes reference door 17 and door 41 and a high-numbered door range. Combined estimate ~110 doors - clearly 50+.",
+    "dropArea": "Trailer drop stalls line the north drop yard and the south drop-yard apron; estimated 25-50 trailers parked without tractors in captured imagery.",
+    "shipRcvSeparate": "Two distinct dock banks on opposite (north and south) building faces - likely separate shipping vs. receiving. Medium confidence.",
+    "dropYard": "Dedicated trailer-storage rows along the north face drop yard and the NW corner; trailers stored separate from active dock staging.",
+    "railServed": "No rail spur enters the property - the site is served entirely by truck off US Route 460.",
+    "urbanRural": "Rural - the DC sits in open farmland and woods on the edge of the small town of Windsor, VA, surrounded by fields, forest and a few scattered houses.",
+    "connectivityIssue": "Rural location but directly on a US highway with nearby development - cellular coverage likely adequate; set false, low confidence.",
+    "entryLanes": "Single shared truck gate at the guard shack; estimated 1 in / 1 out lane - could not positively count.",
+    "preGateStaging": "No dedicated paved pre-gate truck staging area observed outside the gate; driver notes say no overnight parking.",
+    "postGateStaging": "Paved internal yard space inside the gate before the dock doors provides queue/holding room.",
+    "siteAreaAcres": "~75 acres derived from the perimeter box covering the building, north and south drop yards, retention ponds, employee parking and truck circulation."
+  },
+  "method": "deep-audit"
+}

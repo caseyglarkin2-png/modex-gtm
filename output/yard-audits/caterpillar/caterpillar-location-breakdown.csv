@@ -1,0 +1,52 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Caterpillar - Decatur IL Plant,"Manufacturing plant (mining trucks, large wheel loaders, motor graders)",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,2,YES,,YES,,,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@39.8788,-88.9100,400m/data=!3m1!1e3"
+Caterpillar - East Peoria IL Plant,"Manufacturing plant (track-type tractors, components)",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,,,YES,YES,YES,,1,1,,,YES,,,,YES,,,,Urban,,YES,,YES,"https://www.google.com/maps/@40.6730,-89.5955,400m/data=!3m1!1e3"
+Caterpillar - Mapleton IL Foundry,Manufacturing plant (foundry - engine castings for 3500/3600/C175),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,YES,,,,YES,,,,Rural,,YES,YES,YES,"https://www.google.com/maps/@40.5597,-89.7475,400m/data=!3m1!1e3"
+Caterpillar - Lafayette IN Large Engine Center,Manufacturing plant (large engines; $725M campus expansion underway),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,YES,,,,,YES,,,Urban,,YES,,YES,"https://www.google.com/maps/@40.4138,-86.8460,400m/data=!3m1!1e3"
+Caterpillar - Sanford NC Plant,"Manufacturing plant (BCP - skid-steer, multi-terrain, compact track loaders)",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@35.5455,-79.1722,400m/data=!3m1!1e3"
+Caterpillar - Clayton NC Plant,Manufacturing plant (BCP - small wheel loader assembly),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,YES,,,,,YES,,,Rural,,YES,,YES,"https://www.google.com/maps/@35.6405,-78.4248,400m/data=!3m1!1e3"
+Caterpillar - Mossville IL Engine & Research Campus,"Manufacturing & research campus (engines, components)",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,YES,,,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@40.8445,-89.5565,400m/data=!3m1!1e3"
+Caterpillar - Aurora (Montgomery) IL Plant,Manufacturing plant (wheel loaders; site reportedly listed for sale),#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,,,1,1,YES,,YES,,,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@41.714,-88.3645,400m/data=!3m1!1e3"
+Caterpillar - Morton IL Global Parts Distribution Center,"Parts distribution center (anchor depot, 3M+ sq ft)",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,,,,,YES,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@40.6185,-89.4585,400m/data=!3m1!1e3"
+Caterpillar - Spokane WA Distribution Center (DC-3),"Parts distribution center (~562k-600k sq ft, 24/7 three-shift)",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@47.5966,-117.5465,400m/data=!3m1!1e3"
+Caterpillar - Waco TX Distribution Center,Parts distribution center (opened 2009),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@31.4783,-97.1799,400m/data=!3m1!1e3"
+Caterpillar - Clayton OH Distribution Center (DC-2),Parts distribution center (opened 2011),#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@39.8425,-84.334,400m/data=!3m1!1e3"
+Caterpillar - York PA Distribution Center,"Parts distribution center (~1.1M sq ft, opened 1953)",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,,,,,YES,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@39.9812,-76.6857,400m/data=!3m1!1e3"
+Caterpillar - Seguin TX Engine Plant,"Manufacturing plant (diesel & gas engine assembly, ~1.7M sq ft)",#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@29.5755,-97.9955,400m/data=!3m1!1e3"
+Caterpillar - Victoria TX Hydraulic Excavator Plant,Manufacturing plant (hydraulic / large excavators),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,2,YES,,YES,,,,,YES,,,Rural,,YES,,YES,"https://www.google.com/maps/@28.81950,-96.93750,400m/data=!3m1!1e3"
+Caterpillar - Athens GA Plant,"Manufacturing plant (BCP - mini hydraulic excavators, small track-type tractors)",#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,YES,,,,,YES,,,Rural,,YES,,YES,"https://www.google.com/maps/@33.94000,-83.51850,400m/data=!3m1!1e3"
+Caterpillar - Winston-Salem NC Axle Plant,"Manufacturing plant (axles, ~850k sq ft on 102 acres)",#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,1,YES,,YES,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@36.06030,-80.11800,400m/data=!3m1!1e3"
+Caterpillar Global Mining - South Milwaukee WI Plant,"Manufacturing plant (large mining equipment - electric rope shovels, draglines)",#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,,YES,YES,,YES,1,1,,YES,,,,YES,,,,,Urban,,YES,,,"https://www.google.com/maps/@42.91270,-87.86150,400m/data=!3m1!1e3"
+Caterpillar - Pontiac IL Plant,Manufacturing plant (fuel injectors / fuel systems),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,YES,,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@40.88670,-88.65180,400m/data=!3m1!1e3"
+Caterpillar Work Tools - Wamego KS Plant & Distribution,Manufacturing & distribution facility (machine attachments / work tools),#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,,,,,,,YES,,,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@39.20380,-96.29330,400m/data=!3m1!1e3"
+Caterpillar - Tejon Ranch (Lebec) CA Parts Distribution Center,"Parts distribution center (~400k sq ft, opened ~2012)",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@35.00120,-118.94050,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,1,5%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,4,19%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,2,10%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,14,67%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,21,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,11,52%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,17,81%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,6,29%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,15,71%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,21,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,21,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

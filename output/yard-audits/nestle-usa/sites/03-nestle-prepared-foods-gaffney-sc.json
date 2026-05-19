@@ -1,0 +1,65 @@
+{
+  "name": "Nestlé Prepared Foods - Gaffney SC",
+  "type": "Frozen food manufacturing plant",
+  "coords": { "lat": 35.05400, "lng": -81.68720 },
+  "geofences": {
+    "perimeter": { "south": 35.05130, "west": -81.69000, "north": 35.05680, "east": -81.68480 },
+    "truckGate": { "south": 35.05230, "west": -81.68930, "north": 35.05280, "east": -81.68870 },
+    "dropYards": [
+      { "south": 35.05250, "west": -81.68820, "north": 35.05330, "east": -81.68700 }
+    ],
+    "dockAprons": [
+      { "south": 35.05290, "west": -81.68830, "north": 35.05370, "east": -81.68700 }
+    ],
+    "staging": { "south": 35.05280, "west": -81.68900, "north": 35.05380, "east": -81.68760 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 28,
+    "trailersVisible": 18,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 71.7,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.054,-81.6872,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "scale"],
+  "fieldNotes": {
+    "truckGate": "Definitive - Street View (2024-05) shows a 'TRUCK ENTRANCE' sign, a stop sign, a 'SPEED LIMIT 10' sign and a controlled driveway leaving Old Georgia Hwy into the fenced plant property.",
+    "guardShack": "Definitive - a guard booth with a canopy over the truck lane, with traffic cones and check-in equipment beside it, sits at the truck entrance (clear in Street View 2024-05).",
+    "drivewayLong": "Truck driveway from Old Georgia Hwy through the guard gate runs a long distance into the property before reaching the docks.",
+    "dropArea": "Trailer drop yard on the SW holds ~12-18 trailers in two rows (z20 imagery).",
+    "fastLaneOpportunity": "Wide gate apron and large open paved yard provide room for a bypass/express lane around the single booth.",
+    "dockDoorCount": "~28 estimated; dock bays read along the south building face with trailers backed in - partly obscured, low-confidence count.",
+    "railServed": "A rail spur runs along the SE edge of the property and serves a silo-equipped industrial building (bulk ingredient receiving) associated with the plant.",
+    "buildingCount": "Main plant building plus a separate rail-served silo/ingredient building on the SE.",
+    "urbanRural": "Gaffney SC is a small town; the plant sits on the edge of town along a highway with farmland and woods around it - rural.",
+    "scale": "No truck scale clearly confirmed; an elongated marked strip in the truck yard is more likely a parking median - flagged uncertain."
+  },
+  "method": "deep-audit"
+}

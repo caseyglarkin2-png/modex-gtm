@@ -1,0 +1,51 @@
+{
+  "name": "DHL Supply Chain - East Coast Center of Excellence (Project Empire) - Jacksonville FL",
+  "type": "Distribution Center",
+  "coords": { "lat": 30.43930, "lng": -81.57100 },
+  "geofences": {
+    "perimeter": { "south": 30.43600, "west": -81.57270, "north": 30.44220, "east": -81.56980 },
+    "truckGate": { "south": 30.43560, "west": -81.57160, "north": 30.43640, "east": -81.57080 },
+    "dropYards": [
+      { "south": 30.43720, "west": -81.57255, "north": 30.44150, "east": -81.57190 },
+      { "south": 30.43680, "west": -81.57050, "north": 30.44170, "east": -81.56990 }
+    ],
+    "dockAprons": [
+      { "south": 30.43680, "west": -81.57195, "north": 30.44180, "east": -81.57150 },
+      { "south": 30.43680, "west": -81.57100, "north": 30.44180, "east": -81.57050 }
+    ],
+    "staging": { "south": 30.43620, "west": -81.57120, "north": 30.43720, "east": -81.57000 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110, "trailersVisible": 115, "trailerParkingCapacity": 210,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 49.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.43930,-81.57100,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "Roster lat/lng (30.4189,-81.5988) pointed at the JEA Northside power-plant tank farm on the Broward River, ~1.4 km W of the true site. Corrected via web research: Project Empire is at 10030/10300 Eastport Road, SW corner of Kraft & Eastport Rds, south of San Mateo Little League. Confirmed the large central N-S cross-dock warehouse at 30.4393,-81.5710 by Feb-2025 Street View showing the DHL building, office and entrance.",
+    "truckGate": "Single divided main entrance off Eastport Road at the SW corner (SV Feb-2025 shows a median-split in/out drive with site signage). Fenced perimeter (chain-link visible in Street View). No public-road conflict.",
+    "guardShack": "No staffed guard booth visible at the entrance in Feb-2025 Street View or z20-21 satellite; modern fenced DC entrance with signage only.",
+    "remoteGs": "Gate present but no guard booth -> remote/kiosk check-in inferred (typical of recent DHL e-commerce builds).",
+    "entryExitSeparate": "Entrance drive is split by a landscaped median into separate inbound/outbound lanes.",
+    "dockDoors": "Cross-dock building with continuous dock-door rhythm on BOTH long faces (east and west); ~50+ doors per face, 110 total estimate is low-confidence, banded 50+.",
+    "shipRcvSeparate": "Docks split across two opposite building faces (east and west banks) - likely separate ship/receive operations; medium confidence.",
+    "dropYard": "Drop-yard trailer rows along the west fence line and additional rows on the east apron; 100+ trailers parked across the site.",
+    "fastLaneOpportunity": "Wide entrance apron and large interior truck-court turning area with ample unused paved width.",
+    "siteAreaAcres": "Derived from perimeter box ~690m N-S x ~290m E-W; roster cites 47.13-49.8 acres for the parcel.",
+    "trailersVisible": "Approx 115 trailers counted across west drop row, west dock, east dock and east drop rows in Feb-2025 imagery."
+  },
+  "method": "deep-audit"
+}

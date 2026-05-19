@@ -1,0 +1,55 @@
+{
+  "name": "FedEx Ground Hub - Kernersville NC",
+  "type": "Ground regional sortation hub",
+  "coords": { "lat": 36.10625, "lng": -80.03550 },
+  "geofences": {
+    "perimeter": { "south": 36.10350, "west": -80.03980, "north": 36.10950, "east": -80.03200 },
+    "truckGate": { "south": 36.10895, "west": -80.03665, "north": 36.10935, "east": -80.03615 },
+    "dropYards": [
+      { "south": 36.10630, "west": -80.03980, "north": 36.10900, "east": -80.03700 },
+      { "south": 36.10550, "west": -80.03450, "north": 36.10850, "east": -80.03210 },
+      { "south": 36.10380, "west": -80.03700, "north": 36.10560, "east": -80.03350 }
+    ],
+    "dockAprons": [
+      { "south": 36.10560, "west": -80.03700, "north": 36.10760, "east": -80.03350 },
+      { "south": 36.10380, "west": -80.03600, "north": 36.10480, "east": -80.03250 }
+    ],
+    "staging": { "south": 36.10780, "west": -80.03680, "north": 36.10890, "east": -80.03450 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 200,
+    "trailersVisible": 600,
+    "trailerParkingCapacity": 700,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 116.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.10625,-80.03550,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "Confirmed FedEx Ground regional sortation hub in Triad Business Park, ~493,000 sq ft on a ~125-acre site (opened 2011 at 410K sq ft, expanded 2015 to 493K sq ft). Roster coordinate landed directly on the hub building despite a 9.1 km geocode move from the listed Old Greensboro Rd address.",
+    "truckGate": "Controlled truck gate confirmed on the north access road off the public road. z20 satellite shows a checkpoint with painted multi-lane markings and a small booth structure straddling the entrance lanes.",
+    "guardShack": "Small guard-booth structure visible centered in the gate lanes in z20 imagery (footprint of ~1-2 vehicle spaces, set between in/out lanes). Standard FedEx Ground guarded hub entry.",
+    "drivewayLong": "Long curved private access road from the public road to the gate, then a deep paved approach into the yard — easily holds 3+ trucks.",
+    "fastLaneOpportunity": "Wide multi-lane gate apron with painted lanes and ample paved width for an express bypass.",
+    "dockDoors": "Very large hub: dock doors on multiple wrapping faces of the central building, well over 50 — estimated ~200 total from z18 imagery. Honest overhead estimate.",
+    "dropArea": "Extensive trailer-parking rows surround the building on all sides, hundreds of drop trailers — clearly 50+. Estimated ~600 trailers visible / ~700 capacity.",
+    "urbanRural": "Edge-of-town industrial business park (Triad Business Park) outside Kernersville's dense fabric, surrounded by woods and other large warehouses. Classed Rural per the small-town-industrial guidance.",
+    "entryLanes": "~2 inbound lanes at the gate from painted markings; exitLanes ~2. Medium confidence on exact lane count.",
+    "siteAreaAcres": "~116 acres from the perimeter box; documented site is ~125 acres in Triad Business Park."
+  },
+  "method": "deep-audit"
+}

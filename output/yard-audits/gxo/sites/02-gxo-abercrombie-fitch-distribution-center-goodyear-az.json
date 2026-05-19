@@ -1,0 +1,53 @@
+{
+  "name": "GXO Abercrombie & Fitch Distribution Center - Goodyear AZ",
+  "type": "Distribution Center",
+  "coords": { "lat": 33.412000, "lng": -112.421800 },
+  "geofences": {
+    "perimeter": { "south": 33.410600, "west": -112.426200, "north": 33.414000, "east": -112.418000 },
+    "truckGate": { "south": 33.413200, "west": -112.421600, "north": 33.413550, "east": -112.421000 },
+    "dropYards": [
+      { "south": 33.413350, "west": -112.425800, "north": 33.413950, "east": -112.418200 },
+      { "south": 33.412700, "west": -112.419000, "north": 33.413300, "east": -112.418200 }
+    ],
+    "dockAprons": [
+      { "south": 33.413100, "west": -112.425800, "north": 33.413400, "east": -112.418400 },
+      { "south": 33.410900, "west": -112.425800, "north": 33.411250, "east": -112.418400 }
+    ],
+    "staging": { "south": 33.413200, "west": -112.422200, "north": 33.413350, "east": -112.420800 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 71.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.412000,-112.421800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Confirmed at z21: a cantilever/rolling gate spans the truck driveway at the NE corner where the entrance road meets the truck court; clear pinch-point with lane markings.",
+    "guardShack": "Confirmed at z21: a small dark booth structure sits beside the gate lane, separate from the main building (≈1-2 vehicle footprint). Street View 2024-09 shows the gate and screening wall.",
+    "shipRcvSeparate": "Cross-dock building — dock doors with trailers backed in on BOTH the north face and the south face (separate dock banks on opposite faces). z18 full view confirms.",
+    "dockDoors": "50+ band confident. dockDoorCount 130 is an estimate counting dock-door rhythm across the north face (~65) and south face (~65); flagged uncertain.",
+    "dropArea": "Drop yard of parked trailers along the north truck court and at the NE corner; 25-50 stalls of parked trailers without tractors.",
+    "fastLaneOpportunity": "Wide truck court and generous gate apron at the NE entrance leave room for a bypass/express lane.",
+    "urbanRural": "PV303 master-planned industrial park, NE corner of Thomas & Citrus Rds, within the Phoenix metropolitan area; multiple adjacent large DCs. Urban.",
+    "buildingCount": "Single A&F building; the two-tone roof reflects a phased roof installation, not separate structures. Other PV303 buildings are separate properties, excluded.",
+    "siteAreaAcres": "From perimeter box ~378m N-S x ~762m E-W ≈ 71 acres."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,49 @@
+{
+  "name": "KDP Distribution Center - Jacksonville FL",
+  "type": "Distribution Center - Beverage",
+  "coords": { "lat": 30.3522, "lng": -81.76505 },
+  "geofences": {
+    "perimeter": { "south": 30.34946, "west": -81.766611, "north": 30.35494, "east": -81.763489 },
+    "truckGate": { "south": 30.351053, "west": -81.764386, "north": 30.351547, "east": -81.763814 },
+    "dropYards": [
+      { "south": 30.353992, "west": -81.764981, "north": 30.355608, "east": -81.763419 }
+    ],
+    "dockAprons": [
+      { "south": 30.349685, "west": -81.764208, "north": 30.354715, "east": -81.763792 },
+      { "south": 30.349685, "west": -81.766408, "north": 30.354715, "east": -81.765992 }
+    ],
+    "staging": { "south": 30.350896, "west": -81.765268, "north": 30.351704, "east": -81.764332 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 128, "trailersVisible": 110, "trailerParkingCapacity": 118,
+    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 45.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.3522,-81.76505,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs"],
+  "fieldNotes": {
+    "location": "Roster address (3800 Fairchild St) is incorrect — that parcel (0839720000R, owned by First Global Import & Export) is a 5.95-acre junk yard / open-storage lot, confirmed by Florida Parcels land-use record and Street View. The actual KDP Jacksonville Distribution Center is at 2300 Pickettville Rd, Jacksonville FL 32220, coords 30.3522,-81.76505. Confirmed by KDP brand mural (A&W, RC, Snapple) on the building wall and a 'Keurig Dr Pepper Visitor & Vendor Entrance' sign at the gate.",
+    "facility": "598,587 sq ft cross-dock distribution warehouse built 2009 (former Hillwood spec building); KDP southeast distribution hub; 32' clear height. Per leasing records: 128 dock doors, 326 car spaces, 118 trailer parking spaces.",
+    "truckGate": "Controlled entry — driveway painted 'GATE 2' with a sliding chain-link gate across the truck lane; KDP visitor/vendor sign. Numbered gates imply at least 2 truck gates (truckGateCount 2).",
+    "guardShack": "No clearly staffed multi-window guard booth visible at the Gate 2 entrance in 2025 Street View; a small gate-control kiosk/structure sits beside the lane. Treated as remote/kiosk check-in (remoteGs true) — flagged uncertain.",
+    "dockDoors": "50+ band — leasing records cite 128 dock doors; trailers backed in along BOTH long building faces, confirmed in z18/z20 satellite.",
+    "shipRcvSeparate": "true — distinct dock banks on the east and west building faces (cross-dock layout).",
+    "dropYard": "Trailer staging along both dock aprons plus a large trailer storage/parking yard off the north end (~118 trailer capacity).",
+    "fastLaneOpportunity": "Very wide entry apron and deep dock aprons (3+ truck stacking) — room to add an express/bypass lane.",
+    "railServed": "A rail line runs west of the property but is separated by a drainage canal; no spur enters the site.",
+    "urbanRural": "West Jacksonville industrial corridor inside the metro, near I-10 — Urban."
+  },
+  "method": "deep-audit"
+}

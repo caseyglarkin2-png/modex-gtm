@@ -1,0 +1,48 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Coffee Roasting - New Orleans LA,Manufacturing - Coffee roasting/packaging (bulk),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,1,YES,,,YES,,,YES,,,YES,Urban,,YES,,YES,"https://www.google.com/maps/@30.0335,-89.9112,400m/data=!3m1!1e3"
+Coffee Silo Operations - New Orleans LA,Distribution/Processing - Green coffee bean silo operations,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,,,YES,YES,,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@29.9139,-90.1122,400m/data=!3m1!1e3"
+Uncrustables - McCalla AL,Manufacturing - Frozen handhelds (Uncrustables),#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@33.2992,-87.0595,400m/data=!3m1!1e3"
+Uncrustables - Longmont CO,Manufacturing - Frozen handhelds (Uncrustables),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,YES,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@40.164,-105.0525,400m/data=!3m1!1e3"
+Uncrustables - Scottsville KY,Manufacturing - Frozen handhelds (Uncrustables),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,YES,,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@36.7628,-86.1815,400m/data=!3m1!1e3"
+Smucker's Spreads/Toppings - Orrville OH,"Manufacturing - Fruit spreads, syrups, ice cream toppings",#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@40.84780,-81.76050,400m/data=!3m1!1e3"
+Jif Peanut Butter - Lexington KY,Manufacturing - Peanut butter (Jif),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,,,YES,YES,YES,,1,1,,,,YES,,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@38.04280,-84.47780,400m/data=!3m1!1e3"
+Smucker's Peanut Butter - New Bethlehem PA,Manufacturing - Peanut butter / spreads,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,YES,YES,,1,1,,YES,,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@41.00290,-79.32600,400m/data=!3m1!1e3"
+R.W. Knudsen Juices - Chico CA,Manufacturing - Juices/beverages (Knudsen),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,YES,,,,,YES,,,Rural,,YES,,YES,"https://www.google.com/maps/@39.70670,-121.80250,400m/data=!3m1!1e3"
+Smucker Plant - Salinas CA,Manufacturing - Fruit/produce processing,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,,YES,,YES,,1,1,,,,YES,,,YES,,,,Urban,,YES,,YES,"https://www.google.com/maps/@36.65760,-121.62480,400m/data=!3m1!1e3"
+Smucker Plant - Havre de Grace MD,Manufacturing - Spreads / portion control products,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,YES,,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@39.530705,-76.108505,400m/data=!3m1!1e3"
+Milk-Bone Pet Treats - Buffalo NY,"Manufacturing - Pet treats (Milk-Bone), ambient + refrigerated",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,YES,,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@42.909089,-78.829817,400m/data=!3m1!1e3"
+Meow Mix Pet Food - Decatur AL,Manufacturing - Cat food (Meow Mix),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,YES,,YES,,,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@34.606800,-86.968500,400m/data=!3m1!1e3"
+Pet Food Plant - Topeka KS,Manufacturing/Distribution - Pet food plant + distribution center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,YES,YES,"https://www.google.com/maps/@39.087119,-95.722563,400m/data=!3m1!1e3"
+Hostess Bakery - Emporia KS,Manufacturing - Sweet baked snacks (Hostess),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@38.4173,-96.2192,400m/data=!3m1!1e3"
+Hostess Bakery - Arkadelphia AR,Manufacturing - Sweet baked snacks (Hostess Donettes),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,YES,,,,YES,,,YES,Rural,,,,YES,"https://www.google.com/maps/@34.0535,-93.0935,400m/data=!3m1!1e3"
+Hostess Bakery - Columbus GA,"Manufacturing - Sweet baked snacks (Hostess), $120M expansion underway",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,YES,YES,,YES,YES,,1,1,,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@32.4442,-84.9676,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,9,53%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,2,12%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,6,35%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,17,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,12,71%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,11,65%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,2,12%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,15,88%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,17,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,17,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

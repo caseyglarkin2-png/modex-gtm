@@ -1,0 +1,52 @@
+{
+  "name": "H-E-B Manufacturing - San Antonio Snack Plant - San Antonio TX",
+  "type": "Manufacturing Plant (Snacks / Chips)",
+  "coords": { "lat": 29.485000, "lng": -98.389300 },
+  "geofences": {
+    "perimeter": { "south": 29.48430, "west": -98.39010, "north": 29.48590, "east": -98.38830 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 29.48560, "west": -98.39010, "north": 29.48650, "east": -98.38830 }
+    ],
+    "dockAprons": [
+      { "south": 29.48450, "west": -98.39010, "north": 29.48560, "east": -98.38960 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 8,
+    "trailersVisible": 25,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 4.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.485000,-98.389300,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "entryLanes", "exitLanes", "buildingCount"],
+  "fieldNotes": {
+    "location": "Address 5311 Rittiman Rd, San Antonio TX 78218 confirmed by web research (TDLR/Zabalist 'H.E.B. SAS Bakery Chips' renovation project, Waze, city-data). The plant sits within the larger H-E-B Rittiman/Fratt Rd manufacturing & distribution campus on NE San Antonio. The roster's APPROXIMATE coordinate (moved 6794 m) was wrong; relocated to the Rittiman Rd campus.",
+    "buildingIdentification": "The audited building (~29.4850, -98.3893) is a square food-processing building with extensive rooftop process/HVAC equipment and a small annex - the strongest manufacturing-plant candidate within the campus. Exact snack-plant building could not be confirmed by signage; medium confidence on the building-level pin.",
+    "truckGate": "Campus entrances from Rittiman Rd appear to be open driveways with no controlled checkpoint, barrier arm or guard booth visible at the public road in satellite or Street View. Classified false; flagged uncertain because internal campus controls may exist.",
+    "guardShack": "No guard booth visible at the campus road entrances.",
+    "multipleFacilities": "The snack plant is one of many buildings on a large H-E-B manufacturing/distribution campus (RSC warehouse with rooftop solar, fleet site, milk/bakery facilities, multiple warehouses).",
+    "dropYard": "Campus trailer drop yards with many H-E-B trailers (red-branded) flank the plant building to the north and around it.",
+    "dockDoors": "The plant building has only a small canopied loading area - estimated ~8 doors; 0-10 band.",
+    "railServed": "No rail spur into the campus near the plant.",
+    "urbanRural": "Dense NE San Antonio industrial corridor - Urban.",
+    "siteAreaAcres": "~4.5 acres for the plant building footprint and immediate yard; the full campus is much larger but the audited unit is the snack plant."
+  },
+  "method": "deep-audit"
+}

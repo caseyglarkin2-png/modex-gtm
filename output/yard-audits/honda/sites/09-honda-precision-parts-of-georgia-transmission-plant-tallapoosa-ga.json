@@ -1,0 +1,59 @@
+{
+  "name": "Honda Precision Parts of Georgia (Transmission Plant) - Tallapoosa GA",
+  "type": "Transmission Plant",
+  "coords": { "lat": 33.69100, "lng": -85.28450 },
+  "geofences": {
+    "perimeter": { "south": 33.68650, "west": -85.28850, "north": 33.69500, "east": -85.27900 },
+    "truckGate": { "south": 33.69210, "west": -85.28150, "north": 33.69300, "east": -85.28030 },
+    "dropYards": [
+      { "south": 33.68870, "west": -85.28620, "north": 33.69020, "east": -85.28430 },
+      { "south": 33.69200, "west": -85.28280, "north": 33.69330, "east": -85.28100 }
+    ],
+    "dockAprons": [
+      { "south": 33.68880, "west": -85.28600, "north": 33.69100, "east": -85.28350 },
+      { "south": 33.69100, "west": -85.28300, "north": 33.69280, "east": -85.28150 }
+    ],
+    "staging": { "south": 33.69150, "west": -85.28280, "north": 33.69330, "east": -85.28080 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 50,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 130.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.691,-85.2845,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": true, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["entryLanes", "exitLanes", "connectivityIssue", "dockDoorCount", "trailersVisible", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "A controlled truck checkpoint sits on the east access road: a small guard-booth structure stands beside/in the truck lanes with a parked vehicle next to it and painted lane markings splitting the truck path into multiple lanes (z20 satellite). Clear controlled truck gate.",
+    "guardShack": "The small booth-sized structure positioned in the truck lanes at the checkpoint is a staffed guard shack - high confidence from z20 imagery.",
+    "remoteGs": "false - a physical guard booth is present.",
+    "preGateStaging": "false - the area before the gate is the wooded access road; no dedicated outside-the-gate truck stalls.",
+    "postGateStaging": "Trailers staged on the apron just inside the checkpoint; broad internal aprons give deep queuing (drivewayLong = true).",
+    "fastLaneOpportunity": "Truck lanes at the checkpoint are already split into 2+ marked lanes with paved width to add an express bypass.",
+    "dockDoors": "Extensive dock lines with trailers backed in along the south and southwest building faces; ~50 doors estimated - 50+ band.",
+    "dropArea": "Multiple organized trailer-parking rows on the south apron and near the checkpoint, ~110 trailers visible - 25-50 band.",
+    "shipRcvSeparate": "Dock banks appear on two distinct building faces (south and southwest) - likely separate ship/receive; flagged uncertain.",
+    "railServed": "No rail spur into the property.",
+    "urbanRural": "Rural - plant is set deep in forested terrain near Tallapoosa, Haralson County, GA; surrounded by woodland with scattered rural homes.",
+    "connectivityIssue": "Inferred - the site is rural and ringed by dense forest, away from town fabric; cellular coverage may be weaker. Medium-confidence at best, flagged uncertain.",
+    "multipleFacilities": "Single large transmission plant building with attached wings plus minor support buildings - one facility cluster.",
+    "siteAreaAcres": "~130 acres derived from the perimeter box; approximate (much of the surrounding land is forest buffer).",
+    "scale": "No truck scale identified."
+  },
+  "method": "deep-audit"
+}

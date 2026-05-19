@@ -1,0 +1,54 @@
+{
+  "name": "GP Brunswick Cellulose Mill - Brunswick GA",
+  "type": "Cellulose/Pulp Mill",
+  "coords": { "lat": 31.1760, "lng": -81.5120 },
+  "geofences": {
+    "perimeter": { "south": 31.169263, "west": -81.521974, "north": 31.182737, "east": -81.502026 },
+    "truckGate": { "south": 31.180500, "west": -81.509800, "north": 31.181400, "east": -81.508400 },
+    "dropYards": [
+      { "south": 31.180000, "west": -81.509000, "north": 31.182500, "east": -81.504800 },
+      { "south": 31.175200, "west": -81.515500, "north": 31.177000, "east": -81.512500 }
+    ],
+    "dockAprons": [
+      { "south": 31.172500, "west": -81.518500, "north": 31.174500, "east": -81.516000 }
+    ],
+    "staging": { "south": 31.179500, "west": -81.510000, "north": 31.180500, "east": -81.508500 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 450,
+    "truckGateCount": 1,
+    "buildingCount": 22,
+    "siteAreaAcres": 704.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@31.176,-81.512,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "scale", "dockDoorCount", "entryLanes", "exitLanes", "shipRcvSeparate", "multiStep"],
+  "fieldNotes": {
+    "truckGate": "Large bleached-kraft pulp mill receiving ~1,000 truckloads of pine logs per day; single controlled access road off the city street network; container/trailer yard is fenced with chain-link and privacy screening (Street View, Nov 2024).",
+    "guardShack": "No frontal booth view obtained (no Street View on the private mill road), but a 600-employee pulp mill handling ~1,000 trucks/day operates a staffed gatehouse by standard. Flagged uncertain.",
+    "scale": "Pulp mills weigh inbound wood loads on truck scales; inferred true for a mill receiving 1,000 truckloads/day. Flagged uncertain.",
+    "dropArea": "Very large container/trailer drop yard NE of the process buildings - hundreds of intermodal containers on chassis (UASC, Hapag-Lloyd visible in Street View) plus trailers; clearly 50+.",
+    "dockDoors": "Bleached-kraft mill ships baled/containerized fluff pulp; finished-goods dock banks are limited - 10-25 band, ~20 estimated. Flagged uncertain.",
+    "railServed": "Active rail yard with rail cars along the NW edge of the woodyard; rail serves the mill.",
+    "fastLaneOpportunity": "Extensive paved width at the container-yard entrance allows an express/bypass lane.",
+    "multipleFacilities": "Large multi-building campus: kraft process buildings, recovery, woodyard, baleline, container yard, plus extensive settling-pond/clarifier complex.",
+    "urbanRural": "Mill is on the Turtle River at the edge of Brunswick, bordered by residential neighborhoods and a cemetery, but the broader setting is a small coastal city / edge-of-town - judged Rural per rubric (small-town industrial).",
+    "drivewayLong": "Ample paved approach from the access road to the container yard provides deep truck queuing.",
+    "perimeter": "Box covers the developed footprint - process buildings, woodyard, and the NE container/trailer drop yard; excludes outlying settling ponds and sludge fields."
+  },
+  "method": "deep-audit"
+}

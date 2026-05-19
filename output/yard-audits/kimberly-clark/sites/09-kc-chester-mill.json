@@ -1,0 +1,51 @@
+{
+  "name": "K-C Chester Mill - Chester PA",
+  "type": "Non-integrated tissue mill (Scott 1000 bathroom tissue; ~1.3M sq ft, ~570 employees)",
+  "coords": { "lat": 39.844200, "lng": -75.357500 },
+  "geofences": {
+    "perimeter": { "south": 39.840800, "west": -75.360500, "north": 39.847200, "east": -75.354500 },
+    "truckGate": { "south": 39.845600, "west": -75.357900, "north": 39.846100, "east": -75.357200 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 39.844200, "west": -75.358200, "north": 39.844900, "east": -75.357000 }
+    ],
+    "staging": { "south": 39.844200, "west": -75.357900, "north": 39.844900, "east": -75.357100 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 2,
+    "buildingCount": 8,
+    "siteAreaAcres": 74.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.844200,-75.357500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "dockDoorCount", "scale", "truckGateCount", "multiStep", "entryExitTogether"],
+  "fieldNotes": {
+    "location": "Confirmed K-C Chester non-integrated tissue mill (Scott 1000), ~74 acres on the Delaware River. Roster coord (39.8416,-75.3694) sat ~1 km W of the actual mill in downtown Chester. Resolved via the documented border 'East by Harrah's Casino and Race Track' — the mill is the large dense paper-mill complex immediately W of Harrah's Philadelphia racetrack oval, at ~39.844,-75.357. Address 800 W 2nd St, Chester PA 19013.",
+    "truckGate": "The mill is fully perimeter chain-link fenced (visible all along W 2nd St in Street View). Trucks enter through fence gates; the main entrance off W 2nd St (~39.846,-75.357) opens into the mill yard. Classed truckGate true; a hard barrier arm was not clearly resolved.",
+    "guardShack": "No staffed booth positively confirmed at the W 2nd St entrance — the entry reads as an open fence gate into a parking/yard area. A small white-roofed structure in the freight yard near the rail siding (~39.8446,-75.3576) may be a scale house or gatehouse. Classed guardShack false / remoteGs true; listed uncertain.",
+    "scale": "A small structure beside the rail siding in the freight yard is consistent with a truck scale / scale house, but cannot be confirmed — listed uncertain.",
+    "railServed": "Rail tracks run into and through the mill property (siding visible by the freight yard and along the complex) — classed rail-served.",
+    "dropArea": "No dedicated trailer drop yard — dense urban mill with no room for a trailer storage lot. Only a few trailers parked near the dock building.",
+    "dockDoors": "Compact shipping dock on the warehouse building; ~18 doors estimated — listed uncertain (mill is dense and partly obscured by overhead conveyors).",
+    "backupSensitive": "Tight urban site hemmed in by the river, Harrah's casino, and city streets — little truck stacking room; a queue would spill onto W 2nd St.",
+    "multipleFacilities": "Campus of multiple connected buildings — mill, converting/warehouse, cogeneration plant, wastewater treatment — linked by overhead pipe/conveyor bridges.",
+    "urbanRural": "Dense urban waterfront in Chester, in the Philadelphia metro — Urban.",
+    "truckGateCount": "At least two fence-gate entries observed (W 2nd St main entrance and a freight-yard access); listed uncertain."
+  },
+  "method": "deep-audit"
+}

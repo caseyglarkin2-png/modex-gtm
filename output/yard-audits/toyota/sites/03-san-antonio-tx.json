@@ -1,0 +1,55 @@
+{
+  "name": "Toyota Motor Manufacturing Texas - San Antonio TX",
+  "type": "Vehicle Assembly Plant",
+  "coords": { "lat": 29.2625, "lng": -98.5425 },
+  "geofences": {
+    "perimeter": { "south": 29.2520, "west": -98.5530, "north": 29.2700, "east": -98.5340 },
+    "truckGate": { "south": 29.25880, "west": -98.54620, "north": 29.25980, "east": -98.54460 },
+    "dropYards": [
+      { "south": 29.26350, "west": -98.54550, "north": 29.26700, "east": -98.54250 },
+      { "south": 29.26000, "west": -98.54300, "north": 29.26350, "east": -98.53950 }
+    ],
+    "dockAprons": [
+      { "south": 29.26100, "west": -98.54350, "north": 29.26450, "east": -98.53900 },
+      { "south": 29.25950, "west": -98.54550, "north": 29.26250, "east": -98.54250 }
+    ],
+    "staging": { "south": 29.25800, "west": -98.54550, "north": 29.26050, "east": -98.54300 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130,
+    "trailersVisible": 350,
+    "trailerParkingCapacity": 600,
+    "truckGateCount": 2,
+    "buildingCount": 20,
+    "siteAreaAcres": 900.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.2625,-98.5425,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "entryLanes", "exitLanes", "dockDoorCount", "dropArea", "multiStep"],
+  "fieldNotes": {
+    "site": "TMMTX — the $1.2B San Antonio assembly plant that Chris Nielsen designed and built (2003-2006); produces Tundra and Tacoma trucks. Notable for an integrated on-site supplier park: ~20 co-located Tier-1 supplier buildings inside the campus feeding the assembly line directly.",
+    "truckGate": "Fully fenced, security-controlled campus. Web sources confirm the main gate is reached where Lone Star Pass / Watson Rd dead-ends into the campus at Applewhite Rd, with visitors continuing through the intersection to the Main Gate. Truck entrances are controlled checkpoints. truckGate true, high confidence.",
+    "guardShack": "Manned guard houses are standard at Toyota assembly-plant primary gates and the 'Main Gate' is a staffed checkpoint; small guard structures visible near the plant entrance. guardShack true; remoteGs false.",
+    "dropArea": "Substantial trailer drop yards visible center-campus (rows of trailers near the assembly plant and logistics buildings) — placed in the 25-50 band, flagged uncertain; the on-site supplier-park model reduces external trailer staging vs. a comparable Toyota plant. dropYard true.",
+    "dockDoors": "Extensive dock banks on the assembly plant, logistics buildings and the ~20 supplier buildings; 130 conservative estimate, 50+ band certain.",
+    "multipleFacilities": "Campus is effectively a manufacturing park: central assembly plant plus ~20 on-site supplier buildings plus logistics/utility structures and an on-site test track. multipleFacilities true.",
+    "urbanRural": "Located at the rural southern edge of San Antonio surrounded by open scrubland and farmland — judged Rural per rubric (edge-of-metro, open country setting).",
+    "shipRcvSeparate": "Inbound supplier/parts flow (supplier park + cross-dock) is physically separate from finished-vehicle (Tundra/Tacoma) outbound staging.",
+    "fastLaneOpportunity": "Wide multi-lane internal roads and large gate aprons leave room for express/bypass lanes.",
+    "railServed": "Rail-served (standard for an assembly plant of this scale; the plant was master-planned with rail access).",
+    "perimeter": "Box covers the core developed campus including the supplier park; TMMTX owns substantial additional buffer/test-track land beyond it."
+  },
+  "method": "deep-audit"
+}

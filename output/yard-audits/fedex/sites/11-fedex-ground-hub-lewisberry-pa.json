@@ -1,0 +1,67 @@
+{
+  "name": "FedEx Ground Hub - Lewisberry PA",
+  "type": "Ground regional sortation hub (Harrisburg market)",
+  "coords": { "lat": 40.16450, "lng": -76.84050 },
+  "geofences": {
+    "perimeter": { "south": 40.16190, "west": -76.84380, "north": 40.16760, "east": -76.83520 },
+    "truckGate": { "south": 40.16370, "west": -76.83620, "north": 40.16420, "east": -76.83550 },
+    "dropYards": [
+      { "south": 40.16560, "west": -76.84300, "north": 40.16760, "east": -76.83850 },
+      { "south": 40.16240, "west": -76.84280, "north": 40.16480, "east": -76.83950 },
+      { "south": 40.16210, "west": -76.83950, "north": 40.16330, "east": -76.83650 }
+    ],
+    "dockAprons": [
+      { "south": 40.16420, "west": -76.84200, "north": 40.16560, "east": -76.83700 },
+      { "south": 40.16300, "west": -76.84200, "north": 40.16450, "east": -76.83700 }
+    ],
+    "staging": { "south": 40.16360, "west": -76.83680, "north": 40.16470, "east": -76.83560 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 150,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 420,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 62.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.16450,-76.84050,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Multi-lane controlled gate canopy with guard booth visible at z21 on the E-side access driveway (~40.1640,-76.8358); lane separators and barrier/gate equipment present.",
+    "guardShack": "Small ~1-2 vehicle-footprint white booth set beside the gate lanes, distinct from the main sort building.",
+    "fastLaneOpportunity": "Wide multi-lane gate apron with ample paved width; physical room for an express bypass lane.",
+    "entryLanes": "Approx 2 inbound lanes through the gate canopy; exact lane split hard to read under shadow/tree cover - low confidence.",
+    "dockDoors": "Central sort building has continuous dock-door rhythm on both long faces plus a secondary NW building; total well above 50, estimated ~150 - count is approximate.",
+    "dropYard": "Hundreds of bare trailers parked in marked rows across N, W and S of the property - clearly a dedicated drop/storage operation.",
+    "urbanRural": "Lewisberry is a small town; site sits at edge-of-town in a semi-rural light-industrial pocket with woods and a retention pond to the W - classified Rural per rubric tie-break.",
+    "postGateStaging": "Paved holding area inside the gate before the dock aprons.",
+    "buildingCount": "Main sort building, a secondary NW dock building, plus 1-2 small ancillary structures (gatehouse, maintenance)."
+  },
+  "method": "deep-audit"
+}

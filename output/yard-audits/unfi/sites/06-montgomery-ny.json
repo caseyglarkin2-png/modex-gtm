@@ -1,0 +1,57 @@
+{
+  "name": "UNFI - Montgomery NY DC (Hudson Valley)",
+  "type": "Distribution Center",
+  "coords": { "lat": 41.49355, "lng": -74.23700 },
+  "geofences": {
+    "perimeter": { "south": 41.49080, "west": -74.24150, "north": 41.49620, "east": -74.23250 },
+    "truckGate": { "south": 41.49150, "west": -74.23900, "north": 41.49250, "east": -74.23750 },
+    "dropYards": [
+      { "south": 41.49420, "west": -74.24080, "north": 41.49600, "east": -74.23700 }
+    ],
+    "dockAprons": [
+      { "south": 41.49150, "west": -74.24090, "north": 41.49560, "east": -74.23850 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 48.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.49355,-74.23700,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes",
+    "preGateStaging", "postGateStaging", "multipleFacilities", "scale", "multiStep"
+  ],
+  "fieldNotes": {
+    "location": "Confirmed UNFI Montgomery NY DC (Hudson Valley DC), 525 Neelytown Rd, Montgomery NY 12549. Roster ROOFTOP geocode 41.493552,-74.235922 lands squarely on a large L-shaped distribution building off Neelytown Rd in the Orange County / Hudson Valley region. Web-corroborated: UNFI press release - Hudson Valley DC opened 2014, LEED Gold, built to serve the NYC-metro Whole Foods customer base.",
+    "buildingShape": "Large L-shaped DC building. Continuous dock-door rhythm along the W and NW long faces with ~75 trailers backed in and parked across the imagery. A small separate ancillary building sits SE of the main DC (likely a fleet/maintenance shop) -> buildingCount 2; multipleFacilities left false because the second building is small and ancillary, not a co-equal large cluster (flagged).",
+    "dockDoors": "Continuous bands of dock doors on the W and NW faces; ~75 trailers backed/parked -> band 50+ (estimated ~90 positions).",
+    "dropYard": "A large marked trailer-parking lot occupies the NW corner of the property holding many trailers without tractors -> dropYard true, dropArea band 50+.",
+    "truckGate": "Single private access road serves the property from Neelytown Rd; the truck drive wraps the W side of the building into the dock aprons and NW drop yard. Street View on Neelytown Rd (2025-03) shows the building set well back behind employee parking; the truck gate is not directly resolved in the road-level imagery. A controlled gate with a staffed booth is assumed for a modern (2014) LEED Gold UNFI DC serving NYC-metro Whole Foods -> truckGate true, guardShack true, remoteGs false; all flagged medium-confidence.",
+    "shipRcvSeparate": "Docks concentrated on the W/NW faces of the L-shaped building as one continuous dock system, not two clearly separated ship/rcv banks on opposing faces -> false.",
+    "drivewayLong": "Long approach from Neelytown Rd through the property to the deep dock aprons -> drivewayLong true.",
+    "fastLaneOpportunity": "Wide access road and large open paved apron -> physical room for an express/bypass lane.",
+    "urbanRural": "The Town of Montgomery, Orange County NY is a small Hudson Valley community; the parcel is bordered by woods and open land with scattered rural/industrial development -> per rubric, Rural.",
+    "railServed": "No rail spur enters the property; truck-served grocery DC.",
+    "siteAreaAcres": "~48 acres derived from the perimeter box around the building, dock aprons, drop yard, and employee parking.",
+    "entryLanes/exitLanes": "Estimated 2/2; gate not directly resolved in Street View."
+  },
+  "method": "deep-audit"
+}

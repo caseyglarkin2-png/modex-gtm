@@ -1,0 +1,51 @@
+{
+  "name": "CJ Logistics - Chester VA",
+  "type": "Distribution Center",
+  "coords": { "lat": 37.29775, "lng": -77.39925 },
+  "geofences": {
+    "perimeter": { "south": 37.29550, "west": -77.40150, "north": 37.30000, "east": -77.39700 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 37.29570, "west": -77.40110, "north": 37.29920, "east": -77.39880 },
+      { "south": 37.29600, "west": -77.39950, "north": 37.29950, "east": -77.39730 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 55,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 49.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.29775,-77.39925,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "10-25",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "dropArea", "trailerParkingCapacity", "connectivityIssue", "dropYard"],
+  "fieldNotes": {
+    "location": "Roster supplied no street address (Indeed locations list) and city-centroid coords (37.3565, -77.4317) for Chester VA, ~7km off. Resolved to 16000 Walthall Industrial Pkwy, South Chesterfield VA 23834 - the documented DSC Logistics / CJ Logistics America Richmond-area facility (the Manta/Yellowpages/D&B listings give cjlogistics.com as the company site). DSC Logistics is CJ Logistics America's legacy brand. Geocoded ROOFTOP to 37.2983, -77.3998; satellite confirmed a large multi-section cross-dock DC.",
+    "truckGate": "The facility is reached by a winding access road through woods from Walthall Industrial Pkwy. At the building, the truck driveway runs into the truck court as an open approach - no barrier arm, sliding gate, or guard booth observed on the truck route (z19-z21 satellite; only utility transformers near the entry). truckGate=false.",
+    "guardShack": "No staffed booth observed at the building entrance or truck court.",
+    "dockDoors": "Long multi-section warehouse (~6 connected gabled sections, ~700ft) with trailers backed into dock doors along BOTH long faces (SW and NE) - cross-dock. ~60 doors estimated (50+ band). Approximate.",
+    "dropArea": "Trailers visible at docks along both faces; no clearly dedicated separate trailer-storage lot - most trailers are backed into docks. dropArea 10-25, dropYard=false (low confidence).",
+    "shipRcvSeparate": "Docks on opposing building faces (SW and NE) form physically separate dock clusters.",
+    "drivewayLong": "Long winding access road from Walthall Industrial Pkwy plus a deep truck court -> holds a 3+ truck queue.",
+    "railServed": "A rail line runs NW-SE just NE of the building beyond a drainage ditch, but it is a through line - no spur enters the property. railServed=false.",
+    "urbanRural": "Site sits in a wooded edge-of-town industrial area off Walthall Industrial Pkwy in South Chesterfield, scattered rural residential and woodland around it -> Rural per the small-town-industrial tie-breaker.",
+    "connectivityIssue": "Site is somewhat isolated in woods but an industrial park is adjacent - cellular coverage likely adequate; left false (low confidence)."
+  },
+  "method": "deep-audit"
+}

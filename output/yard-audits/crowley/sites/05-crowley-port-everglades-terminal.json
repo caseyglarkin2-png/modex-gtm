@@ -1,0 +1,53 @@
+{
+  "name": "Crowley Port Everglades Terminal - Fort Lauderdale FL",
+  "type": "Marine terminal / container port",
+  "coords": { "lat": 26.065508, "lng": -80.124022 },
+  "geofences": {
+    "perimeter": { "south": 26.063500, "west": -80.126200, "north": 26.070000, "east": -80.121500 },
+    "truckGate": { "south": 26.064900, "west": -80.124600, "north": 26.066200, "east": -80.123400 },
+    "dropYards": [
+      { "south": 26.063600, "west": -80.123600, "north": 26.069500, "east": -80.121600 },
+      { "south": 26.064000, "west": -80.126100, "north": 26.069000, "east": -80.124700 }
+    ],
+    "dockAprons": [],
+    "staging": { "south": 26.066400, "west": -80.123900, "north": 26.067200, "east": -80.122800 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 700,
+    "trailerParkingCapacity": 1500,
+    "truckGateCount": 1,
+    "buildingCount": 7,
+    "siteAreaAcres": 78.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@26.065508,-80.124022,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 4, "exitLanes": 4, "fastLaneOpportunity": true,
+    "dockDoors": "NONE", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": true, "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": ["exitLanes"],
+  "fieldNotes": {
+    "siteIdentification": "4300 McIntosh Road = Crowley Port Everglades Terminal, a 78-acre container terminal in Port Everglades' Southport area. Confirmed by imagery + web (crowley.com, porteverglades.net, petpev.com): container stacks, chassis yards, 3 gantry-crane berths, rail spurs. Roster coords accurate.",
+    "truckGate": "Confirmed - the terminal has a covered multi-lane in-gate (white canopy structures at z20 with painted lane arrows and an office/check-in building). Trucks also pass the outer McIntosh Road port security checkpoint. Web: 8 lanes, 4 scales.",
+    "guardShack": "Check-in booth structures at the covered gate canopy plus the McIntosh Road security checkpoint; staffed (TWIC port access, escort fees collected).",
+    "entryLanes": "Web states 8 total lanes; assigned ~4 inbound / ~4 outbound. Exit-lane split flagged uncertain.",
+    "fastLaneOpportunity": "8-lane covered gate with wide aprons - clear room for express/bypass lanes.",
+    "scale": "Web confirms 4 scales at the terminal gate complex - scale TRUE (high confidence).",
+    "multiStep": "Two-stage entry: outer McIntosh Road port security checkpoint, then the terminal's own multi-lane scaled in-gate - clearly a staged check-in.",
+    "dropArea": "Very large container/chassis stacking yard, 5,000 FEU yard capacity per web; hundreds of trailers/containers - banded 50+.",
+    "dockDoors": "Marine container terminal - no warehouse dock-door bank; cargo handled crane-to-yard at 3 berths. dockDoors NONE.",
+    "railServed": "Rail spurs run along the west side of the terminal (intermodal rail yard) - rail-served TRUE.",
+    "multipleFacilities": "Campus-scale terminal: gate complex, offices, maintenance buildings, multiple container/chassis yards, 3 berths.",
+    "backupSensitive": "Large queuing aprons and a roundabout at the McIntosh Road entry give ample truck stacking room - not backup-sensitive."
+  },
+  "method": "deep-audit"
+}

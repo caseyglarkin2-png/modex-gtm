@@ -1,0 +1,67 @@
+{
+  "name": "Crowley Jacksonville Cross Dock Facility - Jacksonville FL",
+  "type": "Cross-dock / distribution warehouse",
+  "coords": { "lat": 30.34640, "lng": -81.69680 },
+  "geofences": {
+    "perimeter": { "south": 30.34470, "west": -81.69820, "north": 30.34810, "east": -81.69540 },
+    "truckGate": { "south": 30.34735, "west": -81.69605, "north": 30.34775, "east": -81.69560 },
+    "dropYards": [
+      { "south": 30.34490, "west": -81.69820, "north": 30.34620, "east": -81.69640 },
+      { "south": 30.34620, "west": -81.69620, "north": 30.34760, "east": -81.69545 }
+    ],
+    "dockAprons": [
+      { "south": 30.34620, "west": -81.69790, "north": 30.34700, "east": -81.69620 }
+    ],
+    "staging": { "south": 30.34700, "west": -81.69640, "north": 30.34800, "east": -81.69555 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 58,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 12.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.34640,-81.69680,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["entryLanes", "exitLanes", "guardShack", "trailerParkingCapacity", "railServed"],
+  "fieldNotes": {
+    "facility": "Crowley Jacksonville Cross Dock at 2061 Seaboard Coast Line (SCL) Drive, 32209. The roster's geocoded coordinate (30.324541,-81.663312, GEOMETRIC_CENTER) was WRONG — it pointed at downtown Jacksonville's St. Johns riverfront. SCL Drive is named for the Seaboard Coast Line railroad; web research places the cross-dock near I-95 / MLK Jr Parkway adjacent to the West Jacksonville rail yard. The resolved site is the large LTL/cross-dock terminal complex hard against the CSX/Seaboard rail yard at ~30.3464,-81.6968.",
+    "identification": "No explicit Crowley nameplate was visible in available Street View, so identification is by strong circumstantial match: it is the only large cross-dock/LTL terminal complex on SCL Drive beside the rail yard in 32209, and its physical profile matches Crowley's published spec exactly (12.1 acres, ~45,580 sq ft of buildings with a 31,500 sq ft long cross-dock, a separate ~10,000 sq ft trailer maintenance building, 150+ trailer yard). Hapag-Lloyd / China Shipping ocean containers in the yard fit an ocean-carrier LCL/cross-dock operation.",
+    "truckGate": "TRUE. Street View (2022-12) shows a chain-link sliding gate across the truck driveway off the east access road.",
+    "guardShack": "TRUE (medium confidence). Street View shows a small peaked-roof gatehouse structure beside the entrance lane just inside the gate; satellite z20 confirms a small building footprint at the gate. Listed in uncertainFields because the structure could not be 100% confirmed as a manned booth vs a small office.",
+    "dockDoors": "50+ band. Web research states 58 dock doors; satellite confirms a long cross-dock building with dock doors and trailers backed in along both long faces.",
+    "shipRcvSeparate": "TRUE. The long cross-dock building has dock banks on both opposing long faces — a classic cross-dock through-flow with separate inbound/outbound sides.",
+    "dropArea": "50+. A very large paved trailer drop yard holds well over 100 trailers/tractors; Crowley spec lists 150+ yard capacity.",
+    "multipleFacilities": "TRUE. The campus has the long cross-dock building plus several support buildings, including a separate ~10,000 sq ft trailer maintenance facility.",
+    "fastLaneOpportunity": "TRUE. Wide paved gate apron and abundant unused paved width inside the gate provide room to add an express/bypass lane.",
+    "railServed": "Set false. The site abuts a major rail yard but no dedicated rail spur is clearly visible running into the property; flagged uncertain.",
+    "confidence": "Medium — the cross-dock site is resolved with high spatial confidence (only matching facility on SCL Drive by the rail yard) and the layout matches Crowley's published spec, but no on-site Crowley signage was visible and the roster geocode was badly wrong, so the operator identity rests on circumstantial evidence."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,50 @@
+{
+  "name": "KDP Coffee Roasting & K-Cup Plant - Spartanburg (Moore) SC",
+  "type": "Manufacturing - Coffee/K-Cup",
+  "coords": { "lat": 34.870100, "lng": -82.032100 },
+  "geofences": {
+    "perimeter": { "south": 34.86880, "west": -82.03400, "north": 34.87200, "east": -82.03000 },
+    "truckGate": { "south": 34.87165, "west": -82.03190, "north": 34.87210, "east": -82.03120 },
+    "dropYards": [
+      { "south": 34.86950, "west": -82.03210, "north": 34.87170, "east": -82.03060 }
+    ],
+    "dockAprons": [
+      { "south": 34.86950, "west": -82.03200, "north": 34.87160, "east": -82.03090 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 32,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 27.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.870100,-82.032100,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "Building 500, Tyger River Industrial Park (TRIP), 3220 Moore Duncan Hwy, Moore SC. KDP leased ~203,000 sq ft here Sept 2024 for next-gen K-Rounds production ($141M expansion). Confirmed via SC Commerce / Colliers releases and June 2025 Street View showing the spec building with a Colliers leasing sign.",
+    "truckGate": "Open driveways at both NW and SE ends of the NE truck court connecting to the internal park road. No barrier arm, sliding/swing gate or checkpoint pinch-point visible in z20 satellite or June 2025 Street View. No perimeter fence around the property.",
+    "guardShack": "No booth structure at either truck-court access point in satellite or Street View.",
+    "dockDoors": "Long single bank of dock doors along the NE face; counted ~12-18 visible bays/trailers in z19 probes, full wall longer - banded 25-50 as a medium-confidence estimate.",
+    "dropArea": "NE truck court has marked trailer stalls but only a handful of trailers parked in available imagery (newly occupied building).",
+    "fastLaneOpportunity": "Wide open truck court and two access points give ample room for a bypass/express lane.",
+    "urbanRural": "Industrial park on the rural edge of Moore SC, surrounded by woods and farmland; broader setting is small-town/rural.",
+    "buildingCount": "Single KDP building. Two other large buildings sit in the same park (one to the SE with heavy trailer activity) but are separate facilities on separate parcels - not counted."
+  },
+  "method": "deep-audit"
+}

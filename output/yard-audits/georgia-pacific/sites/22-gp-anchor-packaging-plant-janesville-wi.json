@@ -1,0 +1,50 @@
+{
+  "name": "GP Anchor Packaging Plant - Janesville WI",
+  "type": "Packaging/Film Plant",
+  "coords": { "lat": 42.71205, "lng": -89.00955 },
+  "geofences": {
+    "perimeter": { "south": 42.7108, "west": -89.0107, "north": 42.7130, "east": -89.0083 },
+    "truckGate": { "south": 42.71210, "west": -89.00930, "north": 42.71260, "east": -89.00870 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 42.71200, "west": -89.00910, "north": 42.71270, "east": -89.00850 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 12,
+    "trailersVisible": 9,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 11.9,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.71205,-89.00955,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "urbanRural"],
+  "fieldNotes": {
+    "location": "Resolved to the former Panoramic Inc. plant (acquired by Anchor Packaging, which Georgia-Pacific acquired Oct 2025) at 1500 N Parker Dr, Janesville WI, in the Arrow Park industrial complex (former Parker Pen site). The roster's geocoded point (42.6442,-88.9605) was ~9 km SSE in open farmland and wrong. Building centroid locked at 42.71205,-89.00955.",
+    "truckGate": "Open industrial-park facility. North Parker Drive has no gate or fence; the building's parking lots and dock-side driveways are open with no barrier arm, sliding gate, or checkpoint. Confirmed in Street View 2019-08 from multiple headings. False.",
+    "guardShack": "No staffed booth at any driveway. False.",
+    "remoteGs": "False because there is no truck gate.",
+    "drivewayShort": "Dock apron is accessed by a short driveway directly off North Parker Drive; only room for 1-2 trucks to stack before the apron.",
+    "dockDoorCount": "~12 dock doors estimated along the NE face of the building, with ~9 trailers/box trucks backed in (z20 imagery). Low-confidence count.",
+    "dropArea": "Trailers stand on the NE dock apron; no marked dedicated trailer-storage lot. Banded 0-10.",
+    "buildingCount": "Single contiguous building (brick 2-story office plus white and green warehouse wings); other buildings nearby belong to separate tenants in the Arrow Park park.",
+    "railServed": "No rail spur into the property.",
+    "urbanRural": "On the north edge of Janesville (mid-size city) inside the Arrow Park industrial park, with open farmland directly NW. Judged Rural per the rubric's edge-of-town / abutting-farmland guidance; flagged uncertain."
+  },
+  "method": "deep-audit"
+}

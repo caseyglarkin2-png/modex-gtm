@@ -1,0 +1,48 @@
+{
+  "name": "Performance Foodservice - Tidewater (Suffolk VA)",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 36.76720, "lng": -76.54480 },
+  "geofences": {
+    "perimeter": { "south": 36.76560, "west": -76.54720, "north": 36.76970, "east": -76.54250 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 36.76600, "west": -76.54720, "north": 36.76720, "east": -76.54620 },
+      { "south": 36.76830, "west": -76.54480, "north": 36.76920, "east": -76.54330 }
+    ],
+    "dockAprons": [
+      { "south": 36.76820, "west": -76.54660, "north": 36.76900, "east": -76.54350 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55, "trailersVisible": 60, "trailerParkingCapacity": 90,
+    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 38.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.7672,-76.5448,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "dockDoorCount", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster coord (36.769855,-76.542823, movedMeters 5887) is a stale geocode and lands in trees NE of the actual building. Resolved to the very large single rectangular DC at ~36.7672,-76.5448 — bounded by a divided highway (Holland Rd / Rt 58 corridor) on the south, Progress Road and a rail spur on the north, and a creek/pond on the west. Confirmed PFG: Street View on the south frontage and along Progress Road repeatedly shows Performance Foodservice-branded delivery trucks (red/white 'Performance' logo, 800-849-7110) parked at and driving past this building. Address 1201 Progress Rd, Suffolk VA (operating entity Reinhart Foodservice LLC).",
+    "buildingSize": "Building is unusually large for a single broadline DC (~600k+ sq ft footprint). It may be a large multi-use warehouse with PFG as the dominant/primary tenant — flagged as a size uncertainty; trailer rows and PFG trucks confirm active foodservice DC operations.",
+    "truckGate": "No barrier arm or sliding gate seen in any Street View pass along Progress Road or the divided highway. North-side access driveways off Progress Road are open; a perimeter screening fence runs along the south but the truck entrances themselves appear uncontrolled. Classed false (open-access broadline pattern), but listed uncertain — trees obscure the exact NE entrance.",
+    "guardShack": "No guard booth structure visible at any entrance. A round white structure at the SW is a water tank, not a booth.",
+    "dockDoors": "Long dock bank along the north face with ~50+ trailers backed in; banded 50+.",
+    "dropArea": "Extensive trailer parking — rows along the west/SW edge plus a north-side lot; 50+ trailers, banded 50+.",
+    "railServed": "A rail spur runs along the north property line into the site — railServed true.",
+    "entryExitSeparate": "Two separate driveways off Progress Road (NE and N) plus circulation; classed entry/exit separate, low confidence.",
+    "urbanRural": "Edge-of-town Suffolk industrial park beside a residential subdivision and marshland — judged Rural per the rubric tie-break."
+  },
+  "method": "deep-audit"
+}

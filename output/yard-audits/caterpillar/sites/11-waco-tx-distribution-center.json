@@ -1,0 +1,54 @@
+{
+  "name": "Caterpillar - Waco TX Distribution Center",
+  "type": "Parts distribution center (opened 2009)",
+  "coords": { "lat": 31.47830, "lng": -97.17990 },
+  "geofences": {
+    "perimeter": { "south": 31.47620, "west": -97.18300, "north": 31.48030, "east": -97.17680 },
+    "truckGate": { "south": 31.47840, "west": -97.17900, "north": 31.47940, "east": -97.17780 },
+    "dropYards": [
+      { "south": 31.47640, "west": -97.18200, "north": 31.47850, "east": -97.17800 }
+    ],
+    "dockAprons": [
+      { "south": 31.47780, "west": -97.18280, "north": 31.48000, "east": -97.18120 },
+      { "south": 31.47640, "west": -97.18120, "north": 31.47800, "east": -97.17850 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 66.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@31.4783,-97.1799,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "scale"],
+  "fieldNotes": {
+    "site": "Confirmed via Street View - 'CATERPILLAR' wall signage on the building. This is the Caterpillar Waco Distribution Center (2901 Gateway Blvd), a ~750k sq ft parts DC opened 2009. Roster geocode (31.478258, -97.180998, ROOFTOP, moved 14552m) landed correctly on the L-shaped building.",
+    "truckGate": "The truck/dock yards are enclosed by green-screened chain-link perimeter fencing (confirmed at the NW and SE corners). The truck route circulates inside that fence from the Gateway Blvd access road. No barrier arm or guard booth could be cleanly imaged - employee parking on the NE screens the entrance. truckGate set true on the fenced truck yard; flagged uncertain.",
+    "guardShack": "No staffed booth identified; remoteGs set true assuming kiosk/badge check-in at a controlled DC. Both flagged.",
+    "dockDoors": "Long dock-door banks confirmed on the NW/west face (~30+ trailers backed in) and the SE face. Estimated 50+ total; low confidence on exact count.",
+    "dropArea": "Large outdoor storage yard on the south side full of rows of palletized parts/material plus trailer parking; 25-50 band.",
+    "shipRcvSeparate": "Dock banks on the NW/west face and the SE face are on physically separate building faces.",
+    "drivewayLong": "Long access drive from Gateway Blvd / TX-6 and a truck route circling the building - ample queueing room.",
+    "urbanRural": "Edge-of-town location off TX-6 in Woodway/Waco amid open land and a rail corridor - classed Rural per rubric.",
+    "railServed": "A rail line runs along the SE/south of the area but no spur enters the Caterpillar property; left false.",
+    "scale": "No truck scale identified; left false.",
+    "metrics": "Counts are honest estimates from overhead imagery of a large parts DC; flagged."
+  },
+  "method": "deep-audit"
+}

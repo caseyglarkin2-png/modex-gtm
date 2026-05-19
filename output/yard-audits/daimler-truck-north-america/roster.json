@@ -1,0 +1,264 @@
+{
+  "account": "Daimler Truck North America",
+  "generatedAt": "2026-05-18",
+  "facilityCount": 16,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Cleveland Truck Manufacturing Plant - Cleveland NC",
+      "city": "Cleveland",
+      "state": "NC",
+      "type": "Truck assembly plant",
+      "address": "11550 Statesville Boulevard, Cleveland, NC 27013",
+      "lat": 35.730924,
+      "lng": -80.694178,
+      "source": "DTNA official locations page; dossier flagship NA assembly site (Freightliner Cascadia / Western Star, 850,000th truck July 2025); address corroborated by Rowan EDC and Waze listings",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 54
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Mount Holly Truck Manufacturing Plant - Mount Holly NC",
+      "city": "Mount Holly",
+      "state": "NC",
+      "type": "Truck assembly plant",
+      "address": "1800 North Main Street, Mount Holly, NC 28120",
+      "lat": 35.322672,
+      "lng": -81.00161,
+      "source": "DTNA official locations page; dossier (Freightliner medium-duty M2/SD); address corroborated by FreightWaves, CMac listings",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 2149
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Portland Truck Manufacturing Plant - Portland OR",
+      "city": "Portland",
+      "state": "OR",
+      "type": "Truck assembly plant (battery-electric)",
+      "address": "6936 North Fathom Street, Portland, OR 97217",
+      "lat": 45.573869,
+      "lng": -122.714444,
+      "source": "DTNA official locations page; dossier (Western Star X-Series + Freightliner eCascadia / eM2 series production); Swan Island Industrial Park",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 188
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Thomas Built Buses Manufacturing Plant - High Point NC",
+      "city": "High Point",
+      "state": "NC",
+      "type": "Bus assembly plant",
+      "address": "1408 Courtesy Road, High Point, NC 27260",
+      "lat": 35.941867,
+      "lng": -80.022076,
+      "source": "DTNA official locations page; dossier (school bus assembly; Type A Minotour expansion Dec 2025); address corroborated by Thomas Built Buses, Waze",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 30
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Freightliner Custom Chassis Manufacturing Plant - Gaffney SC",
+      "city": "Gaffney",
+      "state": "SC",
+      "type": "Custom chassis assembly plant",
+      "address": "552 Hyatt Street, Gaffney, SC 29341",
+      "lat": 35.074048,
+      "lng": -81.68243,
+      "source": "DTNA official locations page; dossier (FCCC RV/motorhome/walk-in van chassis); address corroborated by Yelp, Waze",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 2489
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Detroit Diesel Corporation Engine Plant - Redford MI",
+      "city": "Redford",
+      "state": "MI",
+      "type": "Engine / powertrain plant",
+      "address": "13400 West Outer Drive, Redford, MI 48239",
+      "lat": 42.377655,
+      "lng": -83.26273,
+      "source": "DTNA official locations page (listed as Detroit, MI - 13400 Outer Drive West); dossier (heavy-duty engines, transmissions, axles supplying truck plants); address corroborated by Demand Detroit, Yelp, MI EGLE; in Redford Township",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 1434
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Gastonia Components and Logistics - Gastonia NC",
+      "city": "Gastonia",
+      "state": "NC",
+      "type": "Component / parts subassembly and logistics plant",
+      "address": "1400 Tulip Drive, Gastonia, NC 28052",
+      "lat": 35.287626,
+      "lng": -81.202855,
+      "source": "DTNA official locations page; dossier (components / parts subassembly)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 44
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Detroit Reman East - Byesville OH",
+      "city": "Byesville",
+      "state": "OH",
+      "type": "Remanufacturing plant (engines/components)",
+      "address": "60703 Country Club Road, Byesville, OH 43723",
+      "lat": 39.978736,
+      "lng": -81.56699,
+      "source": "DTNA careers locations (Byesville OH Detroit Reman East); address corroborated by Yelp, Dun & Bradstreet",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 2417
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Detroit Reman West - Tooele UT",
+      "city": "Tooele",
+      "state": "UT",
+      "type": "Remanufacturing plant (engines/components)",
+      "address": "100 South Lodestone Way, Tooele, UT 84074",
+      "lat": 40.529445,
+      "lng": -112.349796,
+      "source": "DTNA careers locations (Tooele UT Detroit Reman West); address corroborated by Yelp, CMac, Local.com",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 145
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Detroit Diesel Remanufacturing - Hibbing MN",
+      "city": "Hibbing",
+      "state": "MN",
+      "type": "Remanufacturing plant (engines/components)",
+      "address": "3895 South Hughes Road, Hibbing, MN 55746",
+      "lat": 47.393282,
+      "lng": -92.829402,
+      "source": "DTNA careers locations (Hibbing MN Detroit Diesel Remanufacturing); 2024 facility expansion doubled footprint; address from business listings (Range Regional Airport campus)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 115
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Whitestown Redistribution Center (RDC) - Whitestown IN",
+      "city": "Whitestown",
+      "state": "IN",
+      "type": "Parts redistribution center",
+      "address": "4337 AllPoints Drive, Whitestown, IN 46075",
+      "lat": 39.978443,
+      "lng": -86.364644,
+      "source": "DTNA press release Aug 2023 and Town of Whitestown; dossier (605,000 sq ft RDC replenishing the PDC network; AllPoints at Anson Building 10)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1950
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Indianapolis Parts Distribution Center - Whitestown IN",
+      "city": "Whitestown",
+      "state": "IN",
+      "type": "Parts distribution center",
+      "address": "4140 Anson Boulevard, Whitestown, IN 46075",
+      "lat": 39.979271,
+      "lng": -86.386135,
+      "source": "DTNA official locations page (Indianapolis PDC); separate from the Whitestown RDC",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 181
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Memphis Parts Distribution Center - Memphis TN",
+      "city": "Memphis",
+      "state": "TN",
+      "type": "Parts distribution center",
+      "address": "5745 Challenge Drive, Memphis, TN 38115",
+      "lat": 35.037713,
+      "lng": -89.873982,
+      "source": "DTNA official locations page; dossier names Memphis PDC as a network node",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 3427
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Atlanta Parts Distribution Center - Buford GA",
+      "city": "Buford",
+      "state": "GA",
+      "type": "Parts distribution center",
+      "address": "2510 Mill Center Parkway, Buford, GA 30518",
+      "lat": 34.11763,
+      "lng": -83.983054,
+      "source": "DTNA official locations page (Atlanta PDC, located in Buford GA)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 4842
+      }
+    },
+    {
+      "idx": 15,
+      "name": "Dallas Parts Distribution Center - Grand Prairie TX",
+      "city": "Grand Prairie",
+      "state": "TX",
+      "type": "Parts distribution center",
+      "address": "3010 Roy Orr Boulevard, Grand Prairie, TX 75050",
+      "lat": 32.797248,
+      "lng": -97.031664,
+      "source": "DTNA official locations page (Dallas PDC, located in Grand Prairie TX); corroborated by DTNA careers locations",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 111
+      }
+    },
+    {
+      "idx": 16,
+      "name": "Des Moines Parts Distribution Center - Grimes IA",
+      "city": "Grimes",
+      "state": "IA",
+      "type": "Parts distribution center",
+      "address": "1000 SE 19th Street, Grimes, IA 50111",
+      "lat": 41.671071,
+      "lng": -93.783676,
+      "source": "DTNA official locations page (Des Moines PDC, located in Grimes IA)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1901
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

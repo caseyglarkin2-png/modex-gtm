@@ -1,0 +1,50 @@
+{
+  "name": "Coca-Cola UNITED - Baton Rouge Production Plant, LA",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 30.53650, "lng": -91.13500 },
+  "geofences": {
+    "perimeter": { "south": 30.53250, "west": -91.14050, "north": 30.53950, "east": -91.13250 },
+    "truckGate": { "south": 30.53400, "west": -91.13990, "north": 30.53520, "east": -91.13880 },
+    "dropYards": [
+      { "south": 30.53700, "west": -91.13560, "north": 30.53830, "east": -91.13320 }
+    ],
+    "dockAprons": [
+      { "south": 30.53560, "west": -91.13680, "north": 30.53640, "east": -91.13300 }
+    ],
+    "staging": { "south": 30.53420, "west": -91.13780, "north": 30.53500, "east": -91.13650 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60, "trailersVisible": 55, "trailerParkingCapacity": 90,
+    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 112.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.53650,-91.13500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "scale"],
+  "fieldNotes": {
+    "location": "Roster address (8484 Airline Hwy) is an obsolete historical Coca-Cola location. The current Coca-Cola UNITED Baton Rouge production plant is at 9696 Plank Rd, Baton Rouge LA 70811, confirmed by the Coca-Cola UNITED Baton Rouge location page and Waze. Roster coords (30.4558,-91.0991) were ~10km southeast of the real plant. Identified the large white-roofed bottling complex beside Baton Rouge Metro Airport with red Coca-Cola fleet trucks at the docks.",
+    "campus": "112-acre LEED-certified campus per Coca-Cola UNITED / Louisiana Economic Development: ~750,000 sq ft bottling facility, 56,000 sq ft corporate office, 50,000 sq ft fleet-maintenance building, plus support buildings. $42M expansion broke ground 2021.",
+    "truckGate": "Could not positively confirm a barrier or gate. The campus is reached via a long winding access road off Plank Rd; the Street View car drove freely down the access road in 2022 with no gate seen, but SV coverage ends before reaching the building checkpoint. A facility of this scale typically has a controlled entrance, but no barrier is visible in satellite or available Street View - flagged uncertain (called FALSE on visible evidence).",
+    "guardShack": "No standalone guard booth confirmed at the entrance from imagery. Flagged uncertain.",
+    "drivewayLong": "Very deep approach - a long access road from Plank Rd plus internal roads provide ample stacking for 3+ trucks.",
+    "postGateStaging": "Trucks observed staged in a long line on a wide internal paved area between the fleet building and the bottling plant - clear post-gate staging/queue zone.",
+    "dockDoors": "Estimated ~60 dock doors along the south and east faces of the bottling building, banded 50+. Counted from zoom-19 imagery.",
+    "dropArea": "Large trailer drop yard on the north side of the building holds ~55 trailers visible plus additional dock-side parking; banded 50+.",
+    "fastLaneOpportunity": "Wide internal paved aprons and a long approach road provide ample room for a bypass/express lane.",
+    "multipleFacilities": "Campus has multiple large buildings: bottling plant, corporate office, fleet-maintenance building, and support structures.",
+    "scale": "No truck scale clearly identified; flagged uncertain.",
+    "buildingCount": "Bottling plant + office + fleet maintenance + pump/utility structure = 4 distinct buildings."
+  },
+  "method": "deep-audit"
+}

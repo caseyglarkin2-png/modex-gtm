@@ -1,0 +1,50 @@
+{
+  "name": "Glovis America Vehicle Processing Center - West Point GA",
+  "type": "Vehicle Processing Center",
+  "coords": { "lat": 32.913000, "lng": -85.131500 },
+  "geofences": {
+    "perimeter": { "south": 32.907800, "west": -85.138500, "north": 32.918500, "east": -85.124500 },
+    "truckGate": { "south": 32.910300, "west": -85.138100, "north": 32.911300, "east": -85.136800 },
+    "dropYards": [
+      { "south": 32.907900, "west": -85.135500, "north": 32.913200, "east": -85.127000 },
+      { "south": 32.913300, "west": -85.137000, "north": 32.916500, "east": -85.130000 }
+    ],
+    "dockAprons": [],
+    "staging": { "south": 32.910300, "west": -85.137500, "north": 32.912000, "east": -85.134500 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 385.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.9130,-85.1315,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "NONE", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "multiStep"],
+  "fieldNotes": {
+    "siteSelection": "Roster point (2000 Webb Rd) lands at an open paved parking-lot entrance off Webb Rd at the SW tip of the Kia Georgia (KaGA) / Glovis campus. The Glovis Vehicle Processing Center is the finished-vehicle marshaling/processing operation co-located on the KaGA campus; audited the VPC vehicle-storage yards and rail facility rather than the empty roster pixel. Locked center on the core vehicle lots at 32.9130,-85.1315.",
+    "facilityType": "Finished-vehicle Processing Center: no traditional loading docks. Vehicles move by car-carrier truck and rail. dockDoorCount=0 and dockDoors=NONE reflect VPC layout, not a missing count.",
+    "railServed": "Confirmed - multiple parallel auto-rack rail spurs run directly into the vehicle yards on the NW side (probe rail.png), classic VPC rail receiving/shipping.",
+    "dropArea": "50+ - tens of thousands of finished-vehicle stalls in marked rows fill the southern and western lots; this is the dominant feature of the site. Counted as vehicle storage, not box-trailer drop, but dropArea band reflects massive vehicle marshaling capacity.",
+    "truckGate": "Medium confidence. The KaGA/Glovis campus is a secured private facility with controlled access; no Street View inside. Internal guard/checkpoint structure visible near campus interior roads (gate2.png). Public-road Street View at Webb Rd shows only an open employee-lot apron. Car-carrier trucks enter through a controlled campus gate - treated as truckGate true / remoteGs not certain.",
+    "guardShack": "Could not positively confirm a staffed booth at the car-carrier gate from imagery; small internal structures present. Left guardShack false, remoteGs true as best estimate; flagged uncertain.",
+    "multipleFacilities": "True - the property is a large campus with the Kia assembly plant building cluster plus separate Glovis VPC processing buildings and rail yard.",
+    "urbanRural": "Rural - West Point GA, small town; campus surrounded by forest and farmland with an I-85 interchange nearby.",
+    "siteAreaAcres": "~385 acres for the audited VPC vehicle-yard perimeter; the full KaGA campus including the assembly plant is far larger (~2000+ acres)."
+  },
+  "method": "deep-audit"
+}

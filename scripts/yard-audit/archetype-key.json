@@ -1,0 +1,92 @@
+{
+  "$comment": "Phase 0.1 — Yard archetype taxonomy. Derived from Jake's Kraft Location Breakdown (27 sites). The 'always-on' flag for each archetype was confirmed empirically by parse-kraft-baseline.ts. assignArchetype() in lib.ts encodes the precedence below. Calibration vs Jake's labels (Phase 0 dry run): 26/27 archetype match — #6 (campus) is ordered ahead of #4 (backup-sensitive) because Jake classifies Kraft Champaign (both flags set) as #6; the lone residual is Davenport #5, since multi-step check-in is not detectable from a single overhead frame.",
+  "source": "Jake's Kraft Location Breakdown — 27 classified sites",
+  "assignmentPrecedence": [
+    "Evaluated top-to-bottom; first match wins.",
+    "1. NOT truckGate AND NOT guardShack                 -> #3",
+    "2. truckGate AND NOT guardShack AND remoteGs         -> #9",
+    "3. truckGate AND guardShack AND multipleFacilities   -> #6",
+    "4. truckGate AND guardShack AND backupSensitive      -> #4",
+    "5. truckGate AND guardShack AND shipRcvSeparate      -> #10",
+    "6. truckGate AND guardShack AND fastLaneOpportunity  -> #7",
+    "7. truckGate AND guardShack AND scale                -> #8",
+    "8. truckGate AND guardShack AND entryExitSeparate    -> #2",
+    "9. truckGate AND guardShack AND multiStep            -> #5",
+    "10. truckGate AND guardShack (no other flag)         -> #1",
+    "Fallback (e.g. gate but no GS and no remoteGs): nearest of #1/#9, flagged low-confidence."
+  ],
+  "archetypes": [
+    {
+      "id": "#1",
+      "name": "Gate + GS (not BU sens.)",
+      "definition": "Standard guarded entry: a truck gate with a staffed guard shack, no business-unit-sensitive backup constraint.",
+      "alwaysOn": ["truckGate", "guardShack"],
+      "visualEvidence": "Checkpoint booth + barrier arm at entry; lane markings; no tight queue geometry."
+    },
+    {
+      "id": "#2",
+      "name": "Gate + GS (not BU sens.) + separate",
+      "definition": "Guarded entry where the entry and exit lanes are physically separated paths.",
+      "alwaysOn": ["truckGate", "guardShack", "entryExitSeparate"],
+      "visualEvidence": "Distinct in-gate and out-gate at different points of the property line."
+    },
+    {
+      "id": "#3",
+      "name": "No Gate / No GS",
+      "definition": "Open site: no truck gate and no guard shack. Trucks enter directly.",
+      "alwaysOn": [],
+      "visualEvidence": "No checkpoint structure; driveway runs straight from the public road to the docks."
+    },
+    {
+      "id": "#4",
+      "name": "Gate + GS (BU sens.)",
+      "definition": "Guarded entry where the layout is backup-sensitive — a gate queue spills into traffic or blocks an artery.",
+      "alwaysOn": ["truckGate", "guardShack", "backupSensitive"],
+      "visualEvidence": "Gate sits close to a public road / intersection; little room to stack trucks before the gate."
+    },
+    {
+      "id": "#5",
+      "name": "Gate + GS (not BU sens.) + multi-step",
+      "definition": "Guarded entry with a multi-step check-in process (e.g. gate, then a second scale/checkpoint, then dock staging).",
+      "alwaysOn": ["truckGate", "guardShack"],
+      "distinguisher": "multiStep",
+      "note": "Not a single boolean in the satellite set — set multiStep=true only when imagery shows a clear second checkpoint stage. Flag medium-confidence.",
+      "visualEvidence": "Two sequential checkpoint structures, or a gate followed by a separate scale house before the docks."
+    },
+    {
+      "id": "#6",
+      "name": "Gate + GS (not BU sens.) + campus",
+      "definition": "Guarded entry serving a multi-building campus — more than one facility cluster behind the gate.",
+      "alwaysOn": ["truckGate", "guardShack", "multipleFacilities"],
+      "visualEvidence": "Two or more large building clusters sharing the gated property."
+    },
+    {
+      "id": "#7",
+      "name": "Gate + GS (not BU sens.) + fast lane opp",
+      "definition": "Guarded entry where physical space exists to add a bypass / fast lane at the gate.",
+      "alwaysOn": ["truckGate", "guardShack", "fastLaneOpportunity"],
+      "visualEvidence": "Wide apron at the gate, or 3+ entry lanes already, with unused paved width for a bypass."
+    },
+    {
+      "id": "#8",
+      "name": "Gate + GS (not BU sens.) + scale",
+      "definition": "Guarded entry with a truck scale / weigh platform on site.",
+      "alwaysOn": ["truckGate", "guardShack", "scale"],
+      "visualEvidence": "Rectangular weigh-platform pad with a scale house adjacent to the entry path."
+    },
+    {
+      "id": "#9",
+      "name": "Gate + No GS (remote check-in)",
+      "definition": "Truck gate with no staffed guard shack — check-in is remote (kiosk / call box / app).",
+      "alwaysOn": ["truckGate", "remoteGs"],
+      "visualEvidence": "Barrier arm or gate with no booth structure beside it."
+    },
+    {
+      "id": "#10",
+      "name": "Ship/Rcv Separate (Gate+GS)",
+      "definition": "Guarded entry where shipping and receiving operate from physically separate dock clusters.",
+      "alwaysOn": ["truckGate", "guardShack", "shipRcvSeparate"],
+      "visualEvidence": "Two distinct dock-door banks on different building faces, served as separate operations."
+    }
+  ]
+}

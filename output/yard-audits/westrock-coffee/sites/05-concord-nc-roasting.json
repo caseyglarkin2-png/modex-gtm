@@ -1,0 +1,50 @@
+{
+  "name": "Westrock Coffee - Concord NC Roasting & Extract Campus (S&D legacy)",
+  "type": "Roasting Plant / Extract Manufacturing",
+  "coords": { "lat": 35.396271, "lng": -80.614895 },
+  "geofences": {
+    "perimeter": { "south": 35.394700, "west": -80.616750, "north": 35.398100, "east": -80.613100 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 35.397250, "west": -80.616450, "north": 35.397950, "east": -80.615550 }
+    ],
+    "dockAprons": [
+      { "south": 35.396750, "west": -80.616100, "north": 35.397600, "east": -80.615150 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 24,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 23.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.396271,-80.614895,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "No barrier arm or sliding gate found at the truck entrance off the campus drive. The truck yard is reached by a curved private campus drive from Concord Parkway South; satellite shows wide open paved aprons and no checkpoint pinch-point. Some campus drives off Concord Pkwy could not be Street-Viewed at the actual yard entrance (2017/2026 panos cover the highway frontage and the across-road dealership side), so this is marked uncertain — but no gate structure is visible in overhead imagery.",
+    "guardShack": "No staffed booth visible at the yard entrance or along the campus drive.",
+    "dockDoorCount": "Long dock apron on the NE face of the north building shows ~14 trailer/dock positions in the close-up, plus additional bays around the building cluster — ~22 estimated site-wide. Multi-building campus makes an exact total hard to confirm.",
+    "multipleFacilities": "Campus of ~4 connected/adjacent large buildings — the legacy S&D Coffee & Tea main roasting-and-extract complex.",
+    "dropYard": "Trailers parked in a yard area NW of the dock apron, separate from active dock staging.",
+    "fastLaneOpportunity": "Wide paved yard aprons and ample maneuvering width — physical room to add a bypass/express lane.",
+    "urbanRural": "Located on Concord Parkway South, a busy multi-lane signalized arterial within the Charlotte-metro fabric (apartments, big-box retail, dealerships adjacent) — Urban.",
+    "postGateStaging": "Large paved yard between the campus entrance and the dock doors gives interior holding room."
+  },
+  "method": "deep-audit"
+}

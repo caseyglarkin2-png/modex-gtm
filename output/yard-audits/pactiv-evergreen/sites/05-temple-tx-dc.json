@@ -1,0 +1,58 @@
+{
+  "name": "Pactiv Evergreen - Temple TX Distribution Center",
+  "type": "Distribution Center / Regional Mixing Center",
+  "coords": { "lat": 31.133300, "lng": -97.337600 },
+  "geofences": {
+    "perimeter": { "south": 31.13050, "west": -97.34050, "north": 31.13560, "east": -97.33530 },
+    "truckGate": { "south": 31.13290, "west": -97.33680, "north": 31.13360, "east": -97.33580 },
+    "dropYards": [
+      { "south": 31.13320, "west": -97.33720, "north": 31.13540, "east": -97.33560 }
+    ],
+    "dockAprons": [
+      { "south": 31.13110, "west": -97.34010, "north": 31.13470, "east": -97.33880 },
+      { "south": 31.13330, "west": -97.33800, "north": 31.13540, "east": -97.33650 }
+    ],
+    "staging": { "south": 31.13320, "west": -97.33720, "north": 31.13460, "east": -97.33580 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 70.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@31.1333,-97.3376,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "dockDoorCount", "trailersVisible", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "The DC has full chain-link perimeter fencing (with dark privacy mesh) confirmed in Street View (2026-04). The entrance driveway off Pegasus Drive (marked with a '3776' address sign on the road) reads as an open / uncontrolled driveway opening in the fence — no barrier arm, sliding gate, or pinch-point checkpoint structure was visible in Street View or z20 satellite. Marked false; flagged uncertain (the fence may carry a swing gate that is normally open).",
+    "guardShack": "No staffed guard booth visible at the entrance. The small structure at the building's NE corner is an office/maintenance building set against the warehouse, not a gate booth.",
+    "remoteGs": "False — no truck gate confirmed, so remoteGs does not apply.",
+    "postGateStaging": "Large paved yard inside the fence on the NE and west sides gives ample internal queue/holding room before the dock doors.",
+    "drivewayLong": "Deep paved yard from the entrance to the dock faces — well over 3 trucks of stacking room.",
+    "fastLaneOpportunity": "Very wide unfenced paved yard at the entrance; ample room to add a dedicated express/bypass lane if a controlled gate were installed.",
+    "dockDoors": "Massive distribution warehouse with long continuous dock banks: ~25-30 doors with trailers on the west face along the rail line, plus a further dock bank with dock canopies on the NE face. Estimated 50+ doors total. Low-confidence overhead count.",
+    "dropArea": "Trailer drop/parking on the NE and west yards holds an estimated 25-50 trailers; honest overhead estimate.",
+    "shipRcvSeparate": "Two distinct dock banks on different building faces (west/rail face vs. NE face) imply physically separate ship/receive flows; functional split not verifiable from imagery.",
+    "multipleFacilities": "One dominant large distribution warehouse building plus a small ancillary structure — treated as a single facility, not a multi-building campus.",
+    "scale": "No truck scale identified in the imagery.",
+    "dropYard": "Dedicated trailer-storage yard areas with parked trailers are present alongside active dock staging.",
+    "railServed": "A rail line / spur runs N-S directly along the west face of the warehouse with a long string of rail cars parked on it (visible z17/z18) — the DC is rail-served.",
+    "urbanRural": "The DC sits within Temple TX's developed industrial corridor on Pegasus Drive, adjacent to the Pactiv plant, an electrical substation, and continuous industrial development. Urban setting.",
+    "siteAreaAcres": "Derived from the perimeter box (~70 acres) — a large single-warehouse distribution property."
+  },
+  "method": "deep-audit"
+}

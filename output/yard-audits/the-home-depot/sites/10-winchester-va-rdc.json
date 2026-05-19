@@ -1,0 +1,50 @@
+{
+  "name": "Home Depot RDC - Winchester VA",
+  "type": "Rapid Deployment Center",
+  "coords": { "lat": 39.201000, "lng": -78.140200 },
+  "geofences": {
+    "perimeter": { "south": 39.19790, "west": -78.14430, "north": 39.20410, "east": -78.13620 },
+    "truckGate": { "south": 39.20180, "west": -78.14290, "north": 39.20270, "east": -78.14150 },
+    "dropYards": [
+      { "south": 39.20180, "west": -78.13950, "north": 39.20410, "east": -78.13620 },
+      { "south": 39.19800, "west": -78.14310, "north": 39.20020, "east": -78.13980 }
+    ],
+    "dockAprons": [
+      { "south": 39.20020, "west": -78.14180, "north": 39.20330, "east": -78.13760 },
+      { "south": 39.19850, "west": -78.14350, "north": 39.20160, "east": -78.13930 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 140, "trailersVisible": 200, "trailerParkingCapacity": 280,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 58.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.201000,-78.140200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "No barrier arm, sliding gate, or guard checkpoint found at the NW-end access drive or anywhere along the property line. Building sits well back from Park Center Drive behind a grass buffer; Street View (2024-06) shows the access road curving in openly with no gate.",
+    "guardShack": "No staffed booth structure at any entrance in zoom-19/20 imagery; the only office structure is the building's own attached front office.",
+    "remoteGs": "False because there is no controlled truck gate at all.",
+    "dropYard": "Dedicated trailer-storage rows on the NE side and at the SW corner, separate from active dock staging.",
+    "shipRcvSeparate": "Dock doors run along both long faces (NE and SW) — two distinct dock banks.",
+    "dockDoors": "~140 doors estimated across both long faces; large cross-dock RDC (~466,000 sq ft per public listing).",
+    "fastLaneOpportunity": "Very wide paved truck yard on both long faces with ample unused width for an express/bypass lane.",
+    "entryLanes": "Estimated 2 inbound at the NW access drive; no painted lane control, count approximate.",
+    "urbanRural": "Edge-of-Winchester industrial park beside I-81 with adjacent farmland and a mobile-home neighborhood; Rural per rubric.",
+    "geocode": "Roster lat/lng geocode had an 8493 m offset; verified pin still lands on the correct HD RDC building. ZIP corrected to 22603 (roster says 22602)."
+  },
+  "method": "deep-audit"
+}

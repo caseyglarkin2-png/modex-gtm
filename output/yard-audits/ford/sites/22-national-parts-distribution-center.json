@@ -1,0 +1,49 @@
+{
+  "name": "Ford - National Parts Distribution Center, Livonia MI",
+  "type": "Parts Distribution Center",
+  "coords": { "lat": 42.37280, "lng": -83.33600 },
+  "geofences": {
+    "perimeter": { "south": 42.36900, "west": -83.33850, "north": 42.37800, "east": -83.33340 },
+    "truckGate": { "south": 42.37170, "west": -83.33420, "north": 42.37230, "east": -83.33350 },
+    "dropYards": [
+      { "south": 42.37570, "west": -83.33800, "north": 42.37720, "east": -83.33420 },
+      { "south": 42.37200, "west": -83.33550, "north": 42.37500, "east": -83.33400 }
+    ],
+    "dockAprons": [
+      { "south": 42.36980, "west": -83.33560, "north": 42.37560, "east": -83.33440 }
+    ],
+    "staging": { "south": 42.37000, "west": -83.33440, "north": 42.37550, "east": -83.33350 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70, "trailersVisible": 90, "trailerParkingCapacity": 160,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 100.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.37280,-83.33600,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "railServed"],
+  "fieldNotes": {
+    "truckGate": "Continuous chain-link perimeter fence rings the property along Middlebelt Rd (confirmed in 2025 Street View). Controlled driveway entrances through the fence into the dock yard.",
+    "guardShack": "No clearly identifiable staffed booth at the entrances in Street View; small structures present but not confirmable as guard booths - flagged uncertain.",
+    "remoteGs": "Gate present, no confirmed booth - set true at low confidence.",
+    "dockDoors": "Long bank of dock doors running the full east face of the ~1M sq ft building with trailers backed in; ~70 estimated -> 50+ band.",
+    "dropArea": "Large dedicated trailer-storage yard north of the property across the CSX rail line, plus trailers staged in the east yard; well over 50 -> 50+ band.",
+    "dropYard": "Dedicated trailer-storage lot (dozens of trailers) immediately north across the rail line.",
+    "railServed": "CSX rail line with sidings runs along the entire north edge of the property; rail cars present on the siding. A direct spur into the building is not clearly visible - set true at medium confidence.",
+    "multipleFacilities": "Main ~1M sq ft DC plus a separate office/support building and trailer yard on the same campus.",
+    "urbanRural": "Dense Livonia industrial/commercial corridor on Middlebelt Rd between major roads -> Urban.",
+    "fastLaneOpportunity": "Wide paved yard and multiple driveway aprons leave room for an express lane."
+  },
+  "method": "deep-audit"
+}

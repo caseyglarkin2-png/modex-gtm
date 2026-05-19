@@ -1,0 +1,51 @@
+{
+  "name": "Universal Logistics - Louisville Terminal - Louisville KY",
+  "type": "Terminal Yard / Intermodal Cross-Dock Terminal (owned)",
+  "coords": { "lat": 38.21422, "lng": -85.80280 },
+  "geofences": {
+    "perimeter": { "south": 38.21345, "west": -85.80360, "north": 38.21500, "east": -85.80205 },
+    "truckGate": { "south": 38.21490, "west": -85.80305, "north": 38.21512, "east": -85.80270 },
+    "dropYards": [
+      { "south": 38.21345, "west": -85.80360, "north": 38.21455, "east": -85.80305 }
+    ],
+    "dockAprons": [
+      { "south": 38.21400, "west": -85.80315, "north": 38.21475, "east": -85.80265 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 46,
+    "trailersVisible": 35,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 4.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.21422,-85.8028,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["trailerParkingCapacity", "trailersVisible"],
+  "fieldNotes": {
+    "location": "Resolved to 2338 Millers Ln, Louisville KY 40216 via loadmatch.com directory (Universal Intermodal Services) and the Crown Enterprises real-estate listing (gocrown.ws), which is the Moroun-family property company that holds ULH/Universal real estate. Crown's Google Maps embed placed the parcel at 38.214222,-85.802804.",
+    "truckGate": "Street View (2024-07) from Millers Lane shows the yard frontage fully open — no barrier arm, no sliding/swing gate, no fencing across the truck driveway at the public road. Trucks enter directly off Millers Lane.",
+    "guardShack": "No guard booth visible at the entrance or anywhere on the property in satellite or Street View. Only the metal-sided terminal/office building is present.",
+    "dockDoors": "Crown Enterprises listing states 46 cross-dock doors on the 16,195 SF terminal building; satellite confirms a long narrow cross-dock building with trailers backed against both long faces. Banded 25-50.",
+    "dropArea": "Yard (mostly gravel/dirt) is filled with stacked ocean containers and parked trailers/chassis — clearly a working drop/storage yard. Banded 50+.",
+    "drivewayLong": "Open paved/gravel apron and internal yard provide ample stacking depth between the road and the dock building — 3+ trucks could queue.",
+    "buildingCount": "Three structures per the property record: 16,195 SF terminal, 2,516 SF warehouse, 4,880 SF office (the office is integrated into the terminal building's near end).",
+    "railServed": "No rail spur runs into this parcel. It is a drayage/cross-dock terminal that trucks containers to/from the nearby CSX Osborn intermodal ramp; rail does not enter the property.",
+    "urbanRural": "Inside the Louisville metro industrial fabric (40216 / I-264 corridor) — Urban."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,48 @@
+{
+  "name": "Rochelle Foods - Rochelle IL",
+  "type": "Meat Processing Plant",
+  "coords": { "lat": 41.92050, "lng": -89.06980 },
+  "geofences": {
+    "perimeter": { "south": 41.919467, "west": -89.071792, "north": 41.921533, "east": -89.067808 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 41.919786, "west": -89.070924, "north": 41.920414, "east": -89.069476 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 8,
+    "trailersVisible": 2,
+    "trailerParkingCapacity": 8,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 18.8,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.92050,-89.06980,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "dropArea", "trailerParkingCapacity", "buildingCount"],
+  "fieldNotes": {
+    "location": "Roster's geocode (200 Caron Rd / 41.9356,-89.0546) landed on a large white retail/warehouse-type building with no docks or trailer yard — NOT the meat plant. Hormel's own page lists the plant at 1001 S Main St. Resolved the plant to the old rail-served industrial parcel at the Main St rail crossing (~41.9205,-89.0698), confirmed by Street View showing a tall smokestack, water tower, ammonia/refrigeration tanks and rail tank cars — classic markers of an older urban meat-packing plant.",
+    "truckGate": "No barrier arm, sliding gate, or checkpoint visible at any access point. The plant is an old, compact, open urban facility hemmed by residential streets and rail; truck access is via the rail-crossing road and an unpaved/gravel lot on the east side (Street View 2022).",
+    "guardShack": "No staffed booth structure visible.",
+    "dockDoors": "Low-confidence — this is a dense multi-building old plant with conveyor bridges between structures; visible dock-door banks are small. Estimated ~8 doors (0-10 band).",
+    "backupSensitive": "Plant is tightly bounded by active rail lines on both north and south and by residential streets; any truck queue would have very little stacking room and could foul a rail crossing.",
+    "railServed": "Rail spur and tank cars confirmed in Street View; the plant sits between two rail lines.",
+    "urbanRural": "Rochelle is a small Ogle County town (~9,000 pop.); the plant sits just outside a two-block downtown surrounded by residential blocks — small-town industrial, classified Rural per rubric.",
+    "buildingCount": "Multiple connected old structures with overhead conveyor/pipe bridges; counted ~4 distinct buildings, low confidence."
+  },
+  "method": "deep-audit"
+}

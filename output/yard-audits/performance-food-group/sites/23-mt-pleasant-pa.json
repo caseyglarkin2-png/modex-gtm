@@ -1,0 +1,65 @@
+{
+  "name": "Performance Foodservice - Pittsburgh (Mt. Pleasant PA)",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 40.18120, "lng": -79.59140 },
+  "geofences": {
+    "perimeter": { "south": 40.17960, "west": -79.59370, "north": 40.18290, "east": -79.58930 },
+    "truckGate": { "south": 40.18020, "west": -79.59090, "north": 40.18075, "east": -79.59020 },
+    "dropYards": [
+      { "south": 40.18090, "west": -79.59000, "north": 40.18250, "east": -79.58920 }
+    ],
+    "dockAprons": [
+      { "south": 40.18075, "west": -79.59010, "north": 40.18250, "east": -79.58940 },
+      { "south": 40.18055, "west": -79.59320, "north": 40.18130, "east": -79.59180 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 58,
+    "trailersVisible": 34,
+    "trailerParkingCapacity": 55,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 30.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.18120,-79.59140,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors", "guardShack"],
+  "fieldNotes": {
+    "location": "Supplied coords were ROOFTOP-precision (movedMeters 125) and landed on the correct building. Confirmed via web research (226 East View Drive, Mt. Pleasant PA 15666, Performance Foodservice Pittsburgh Division, 724-696-2200) and Street View, which shows a 'PERFORMANCE FOODSERVICE' branded building and a Performance Foodservice monument sign at the East View Drive entrance.",
+    "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point. The truck driveway runs open from East View Drive up to the building. Perimeter chain-link fencing surrounds the property, but the entrance driveway itself is uncontrolled in both 2023 and 2024 Street View captures.",
+    "guardShack": "No small staffed booth structure beside the driveway. The dark peaked-roof structure at the building's south side is the office entry portico of the main building, not a guard shack. A booth is not visible in Street View either — confidence high that there is none.",
+    "shipRcvSeparate": "Dock banks on two physically separate building faces: a long dock line on the east face (with a dedicated trailer drop yard) and a second dock line on the southwest/west face. Consistent with separate inbound-receiving and outbound-shipping clusters.",
+    "dockDoors": "Estimated ~58 total — a long east dock line (~30-35 doors, ~15-20 trailers backed in) plus a west/southwest dock line (~20-25 doors). Banded 50+; roof glare makes the exact count an estimate.",
+    "dropArea": "Trailer drop yard along the east side of the building holds ~25-40 trailers in marked rows.",
+    "urbanRural": "Edge-of-town industrial park outside Mt. Pleasant PA, ringed by forest, reclaimed land and farm fields — small-town / rural setting.",
+    "railServed": "A rail line runs through the wooded corridor north of the property, but no spur enters the PFG site — railServed false.",
+    "entryExitTogether": "Single driveway off East View Drive serves as both entry and exit."
+  },
+  "method": "deep-audit"
+}

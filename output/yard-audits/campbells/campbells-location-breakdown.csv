@@ -1,0 +1,52 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Campbell's Soup - Maxton NC,Manufacturing - thermal/aseptic soup,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,1,YES,,,YES,,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@34.770800,-79.325200,400m/data=!3m1!1e3"
+Campbell's Soup - Napoleon OH,Manufacturing - soup/broth/V8 juice,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@41.397500,-84.103500,400m/data=!3m1!1e3"
+Campbell's - Paris TX,Manufacturing - sauces (flagship sauce facility),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@33.690500,-95.561000,400m/data=!3m1!1e3"
+Snyder's of Hanover - Hanover PA,Manufacturing - pretzels/snacks (kettle chip lines added 2024),#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,,,,,,YES,,,,YES,,,Rural,,YES,,YES,"https://www.google.com/maps/@39.805700,-76.952000,400m/data=!3m1!1e3"
+Pepperidge Farm - Willard OH,Manufacturing - bakery (primary Goldfish cracker plant),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@41.054400,-82.708500,400m/data=!3m1!1e3"
+Pepperidge Farm - Richmond UT,"Manufacturing - bakery (Goldfish crackers, +50% capacity 2024)",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,,YES,,1,1,,,,YES,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@41.939600,-111.816300,400m/data=!3m1!1e3"
+Pepperidge Farm - Denver PA,Manufacturing - bakery (baked goods and cookies),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,YES,,,YES,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@40.222800,-76.085500,400m/data=!3m1!1e3"
+Pepperidge Farm - Bloomfield CT,"Manufacturing - bakery (bread, rolls, stuffing, croutons)",#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,,YES,1,1,,,,YES,,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@41.86885,-72.71900,400m/data=!3m1!1e3"
+Pepperidge Farm - Downingtown PA,Manufacturing - bakery,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,YES,,YES,1,1,,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@40.00420,-75.68550,400m/data=!3m1!1e3"
+Pepperidge Farm - Lakeland FL,Manufacturing - bakery and crackers,#1,Gate + GS (not BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@28.07405,-81.98150,400m/data=!3m1!1e3"
+Lance - Charlotte NC,Manufacturing - crackers/sandwich snacks,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@35.12180,-80.88450,400m/data=!3m1!1e3"
+Lance - Burlington IA,Manufacturing - snacks/crackers,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,,YES,1,1,,,YES,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@40.82770,-91.13950,400m/data=!3m1!1e3"
+Kettle Brand - Salem OR,Manufacturing - kettle potato chips,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,,YES,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@44.92530,-122.99850,400m/data=!3m1!1e3"
+Snyder's-Lance - Beloit WI,Manufacturing - snacks/potato chips,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,YES,,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@42.51210,-88.99380,400m/data=!3m1!1e3"
+Campbell's - Franklin WI,Manufacturing - tortilla chips (Late July; capacity expanded 2024),#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,,YES,1,1,,,YES,,,YES,,,,YES,Urban,,,,YES,"https://www.google.com/maps/@42.8594,-87.9863,400m/data=!3m1!1e3"
+Campbell's - Milwaukee WI,Manufacturing - spice production (Campbell Soup Supply Co.),#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,YES,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@42.9525,-87.9182,400m/data=!3m1!1e3"
+Pace / Prego - Dixon CA,"Manufacturing - tomato processing for sauces (Prego / Pace), Campbell Soup Supply Co.",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,YES,,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@38.4745,-121.8025,400m/data=!3m1!1e3"
+Campbell's - Stockton CA,Manufacturing - tomato processing (Campbell Soup Supply Co.),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,,YES,,1,1,,YES,,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@37.9087,-121.2654,400m/data=!3m1!1e3"
+Campbell's - Goodyear AZ,Manufacturing - snacks/food production (Snyder's of Hanover pretzel plant),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@33.4595,-112.3795,400m/data=!3m1!1e3"
+Sovos / Rao's - Austin TX,Manufacturing - premium pasta sauces / frozen Italian foods (Michael Angelo's Gourmet Foods; Rao's Made for Home),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,,YES,,1,1,,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@30.47105,-97.677,400m/data=!3m1!1e3"
+Campbell's Distribution Center - Findlay OH,"Distribution center (740,000 sq ft; DHL Supply Chain operated)",#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@41.079,-83.6355,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,1,5%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,9,43%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,2,10%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,1,5%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,8,38%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,21,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,7,33%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,13,62%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,4,19%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,17,81%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,21,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,21,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

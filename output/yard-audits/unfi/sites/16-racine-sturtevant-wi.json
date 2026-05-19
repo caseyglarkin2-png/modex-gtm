@@ -1,0 +1,66 @@
+{
+  "name": "UNFI - Racine WI DC (Sturtevant)",
+  "type": "Distribution Center",
+  "coords": { "lat": 42.69450, "lng": -87.91870 },
+  "geofences": {
+    "perimeter": { "south": 42.68950, "west": -87.92200, "north": 42.69760, "east": -87.91440 },
+    "truckGate": { "south": 42.69620, "west": -87.91540, "north": 42.69720, "east": -87.91440 },
+    "dropYards": [
+      { "south": 42.69200, "west": -87.91680, "north": 42.69700, "east": -87.91500 }
+    ],
+    "dockAprons": [
+      { "south": 42.69150, "west": -87.91720, "north": 42.69720, "east": -87.91620 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 54,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 55.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.69450,-87.91870,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["trailerParkingCapacity", "buildingCount"],
+  "fieldNotes": {
+    "truckGate": "Truck driveway curves off County Highway H (105th St) into the truck court as an open paved entrance. z20 satellite of the road entrance and three Street-View headings along Highway H show no barrier arm, no sliding gate, and no checkpoint pinch-point. No perimeter fence at the road.",
+    "guardShack": "No staffed booth at the entrance. No 1-3-vehicle-footprint structure beside the truck lane in any view.",
+    "remoteGs": "False — requires a gate; there is none.",
+    "postGateStaging": "Very wide paved truck court on the east side of the building between the dock face and Highway H gives ample interior holding before the docks.",
+    "drivewayLong": "The truck court easily holds a long (3+) truck queue; the curved approach runs several hundred feet.",
+    "dockDoors": "Docks run nearly the full length of the long east building face; UNFI/USGBC materials cite 54 dock doors for semis at this 425,000-450,000 sq ft facility — `dockDoors` 50+.",
+    "dropArea": "Large bank of drop trailers parked without tractors fills the east-side truck court — `dropArea` 50+; `dropYard: true`.",
+    "buildingCount": "Main DC plus a separate smaller building at the SW corner of the property; the second structure's exact ownership/use is not confirmed from imagery — could be a related shop/annex or a separate parcel.",
+    "railServed": "No rail spur enters the property.",
+    "urbanRural": "Edge-of-town industrial corridor in Sturtevant/Mount Pleasant WI, with open farm fields on the west and south property lines; rural per rubric.",
+    "status": "UNFI announced (March 2026) the permanent closure of this Sturtevant facility, eliminating 443 jobs; consolidation absorbs volume into surviving Midwest DCs. Audit reflects the yard's physical state from current imagery."
+  },
+  "method": "deep-audit"
+}

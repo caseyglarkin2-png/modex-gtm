@@ -1,0 +1,64 @@
+{
+  "name": "Home Depot RDC - Salem OR",
+  "type": "Rapid Deployment Center",
+  "coords": { "lat": 44.90460, "lng": -122.96170 },
+  "geofences": {
+    "perimeter": { "south": 44.90080, "west": -122.96450, "north": 44.90750, "east": -122.95950 },
+    "truckGate": { "south": 44.90460, "west": -122.96320, "north": 44.90520, "east": -122.96230 },
+    "dropYards": [
+      { "south": 44.90090, "west": -122.96440, "north": 44.90460, "east": -122.96100 },
+      { "south": 44.90420, "west": -122.96320, "north": 44.90560, "east": -122.96130 }
+    ],
+    "dockAprons": [
+      { "south": 44.90300, "west": -122.96270, "north": 44.90650, "east": -122.96050 },
+      { "south": 44.90480, "west": -122.96250, "north": 44.90780, "east": -122.96030 }
+    ],
+    "staging": { "south": 44.90420, "west": -122.96280, "north": 44.90490, "east": -122.96180 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130,
+    "trailersVisible": 230,
+    "trailerParkingCapacity": 300,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 72.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.90460,-122.96170,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Truck-only entrance off Depot Court SE; internal yard controlled by a checkpoint with gate islands and lane markings.",
+    "guardShack": "Small dark-roofed booth (~1-vehicle footprint) sits in the middle of the central truck drive between the RDC building and the trailer drop yard, with gate islands and a queuing truck visible at z20.",
+    "shipRcvSeparate": "Cross-dock RDC: dock doors run along both long faces of the building (inbound one side, outbound the other).",
+    "fastLaneOpportunity": "Very wide paved gate apron and large open yard around the checkpoint leave ample room for an express/bypass lane.",
+    "dropYard": "Hundreds of marked trailer stalls fill the yard SW of the building and along the NE side.",
+    "entryLanes": "Lane count at the checkpoint estimated from overhead gate-island markings; not crisply resolved.",
+    "buildingCount": "HD RDC is the single ~467k sq ft building; the larger building to the SW is a separate tenant in the Mill Creek Corporate Center industrial park, excluded from the HD perimeter."
+  },
+  "method": "deep-audit"
+}

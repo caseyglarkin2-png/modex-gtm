@@ -1,0 +1,52 @@
+{
+  "name": "Danone - Fort Worth TX",
+  "type": "Fresh yogurt plant",
+  "coords": { "lat": 32.741022, "lng": -97.339329 },
+  "geofences": {
+    "perimeter": { "south": 32.739700, "west": -97.341000, "north": 32.742350, "east": -97.337800 },
+    "truckGate": { "south": 32.740400, "west": -97.340700, "north": 32.740900, "east": -97.340200 },
+    "dropYards": [
+      { "south": 32.740400, "west": -97.341000, "north": 32.741400, "east": -97.340300 }
+    ],
+    "dockAprons": [
+      { "south": 32.741400, "west": -97.339800, "north": 32.742100, "east": -97.338600 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 20,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 10.9,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.741022,-97.339329,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "A sliding chain-link gate spans the truck driveway off the west street, with a 'Shipping & Receiving' directional sign at the entrance (Street View Jan 2025). Clear controlled truck gate.",
+    "guardShack": "No staffed guard booth - no small windowed structure beside the gate in Street View or satellite. The 'Shipping & Receiving' sign directs drivers; check-in is at the building.",
+    "remoteGs": "True - a controlled gate exists with no guard shack, implying call-box/intercom/app check-in.",
+    "backupSensitive": "Dense urban site with the truck gate opening directly onto a narrow city street and little stacking room - a truck queue would spill onto the public street. Backup-sensitive.",
+    "drivewayShort": "Tight urban site; the gate-to-dock approach holds only 1-2 trucks.",
+    "dropYard": "A fenced trailer/equipment yard on the west side holds parked trailers (XTRA Lease and other rental reefers) and equipment laydown, separate from active dock staging.",
+    "dockDoors": "Historic dense plant (founded 1925, 10.9 acres); dock doors spread across building faces are partly obscured by parked trailers and process structures. Estimate ~18, banded 10-25 - moderate confidence.",
+    "railServed": "Mainline railroad tracks run parallel to the plant's north edge beneath the I-30 overpass, but no spur turns into the property - not rail-served.",
+    "multipleFacilities": "One large contiguous multi-section plant building, not a multi-building campus.",
+    "urbanRural": "Urban - the plant sits in Fort Worth's dense Near Southside district, adjacent to I-30, surrounded by city streets and commercial blocks."
+  },
+  "method": "deep-audit"
+}

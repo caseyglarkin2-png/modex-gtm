@@ -1,0 +1,53 @@
+{
+  "name": "Frito-Lay - Charlotte NC",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 35.115626, "lng": -80.941746 },
+  "geofences": {
+    "perimeter": { "south": 35.1135, "west": -80.9446, "north": 35.1182, "east": -80.9405 },
+    "truckGate": { "south": 35.1160, "west": -80.9412, "north": 35.1168, "east": -80.9404 },
+    "dropYards": [
+      { "south": 35.1162, "west": -80.9445, "north": 35.1180, "east": -80.9420 },
+      { "south": 35.1135, "west": -80.9425, "north": 35.1148, "east": -80.9405 }
+    ],
+    "dockAprons": [
+      { "south": 35.1150, "west": -80.9432, "north": 35.1170, "east": -80.9422 }
+    ],
+    "staging": { "south": 35.1158, "west": -80.9416, "north": 35.1168, "east": -80.9408 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 80,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 42.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.115626,-80.941746,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "Address 2911 Nevada Blvd, Charlotte NC 28273 confirmed via Hub.biz/Yellowpages/PotatoPro. Plant positively identified by the red Frito-Lay logo on the building wall in Street View. Locked center 35.115626,-80.941746.",
+    "truckGate": "Continuous chain-link perimeter fence runs along Nevada Blvd; the truck driveway pierces the fence at a controlled gated opening. Visible in Street View (Oct 2025) and z20 satellite.",
+    "guardShack": "Small white booth structure sits just inside the fenced truck entrance off Nevada Blvd, confirmed in multiple Street View headings and z20 satellite — staffed guard shack at the gate.",
+    "drivewayLong": "Deep paved approach from the Nevada Blvd gate into the truck yard; holds 3+ trucks.",
+    "dockDoors": "Trailers backed against the building west/southwest face; ~35 doors estimated but smoke/equipment clutter obscures an exact count — flagged uncertain.",
+    "dropArea": "Two large drop-trailer fields — long angled rows along the northwest woods edge and a southern lot — well over 50 trailers parked.",
+    "shipRcvSeparate": "Single dominant dock bank on the building west face; could not confirm a physically separate ship/receive cluster — flagged uncertain.",
+    "multipleFacilities": "An office building and a conveyor-bridged warehouse across Nevada Blvd are associated, but the plant proper is one building cluster; buildingCount 2 counts the plant office.",
+    "urbanRural": "Inside the Charlotte metro industrial fabric (Steele Creek / I-485 corridor); Urban.",
+    "yardMetrics": "Honest overhead estimates; ~35 dock doors, ~80 trailers visible across drop yards and docks, ~42 acres from perimeter box."
+  },
+  "method": "deep-audit"
+}

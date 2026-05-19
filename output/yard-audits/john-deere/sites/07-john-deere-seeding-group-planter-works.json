@@ -1,0 +1,49 @@
+{
+  "name": "John Deere Seeding Group / Planter Works - Moline IL",
+  "type": "Assembly Plant",
+  "coords": { "lat": 41.50849, "lng": -90.531986 },
+  "geofences": {
+    "perimeter": { "south": 41.50730, "west": -90.53450, "north": 41.51010, "east": -90.52780 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 41.50880, "west": -90.52990, "north": 41.50985, "east": -90.52830 }
+    ],
+    "dockAprons": [
+      { "south": 41.50910, "west": -90.53300, "north": 41.50985, "east": -90.52950 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 0,
+    "buildingCount": 3,
+    "siteAreaAcres": 38.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.50849,-90.531986,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoors", "truckGate", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Open campus. River Drive fronts the property directly with a John Deere logo monument and open driveways into the lots; no barrier arm, sliding gate, or guard booth visible in 2023-2025 Street View. Truck access to docks and drop yard is via uncontrolled internal driveways from River Drive.",
+    "multipleFacilities": "Three large building masses on the riverfront campus (Deere's oldest factory, est. 1879); contiguous with the broader Moline Deere riverfront corridor.",
+    "dropYard": "Open gravel/paved lot NE of the building holds ~7-8 dropped trailers in marked rows.",
+    "postGateStaging": "Wide paved apron between the dock bank and the open yard provides interior holding room.",
+    "dockDoors": "~22 estimated along the north (riverside) building face where multiple trailers are backed in; exact count limited by imagery resolution.",
+    "fastLaneOpportunity": "Broad open paved/gravel aprons and wide internal driveways leave ample room for added or express lanes.",
+    "urbanRural": "Quad Cities metro riverfront industrial fabric, Moline."
+  },
+  "method": "deep-audit"
+}

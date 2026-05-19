@@ -1,0 +1,392 @@
+{
+  "account": "Mondelez",
+  "generatedAt": "2026-05-18",
+  "facilityCount": 24,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Nabisco Richmond Biscuit Bakery - Richmond VA",
+      "city": "Richmond",
+      "state": "VA",
+      "type": "Manufacturing - biscuit/cookie bakery",
+      "address": "6002 S Laburnum Ave, Richmond, VA 23231",
+      "lat": 37.495999,
+      "lng": -77.352959,
+      "source": "Yelp/Richmond BizSense/WTVR - Mondelez's largest US biscuit bakery (Oreo, Ritz, Nilla, Wheat Thins, Chips Ahoy!); dossier-named East Coast hub. Verified street address.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 4562
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Nabisco Chicago Bakery - Chicago IL",
+      "city": "Chicago",
+      "state": "IL",
+      "type": "Manufacturing - biscuit/cracker bakery",
+      "address": "7300 S Kedzie Ave, Chicago, IL 60629",
+      "lat": 41.760327,
+      "lng": -87.703165,
+      "source": "Businessyab/OpenGovCA/Chicago Sun-Times - major Nabisco bakery (Wheat Thins, Chips Ahoy, Cheese Nips, Premium, Nutter Butter, Barnum Animal Crackers); dossier-named Midwest hub. Verified street address.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 84
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Nabisco Portland Bakery - Portland OR",
+      "city": "Portland",
+      "state": "OR",
+      "type": "Manufacturing - biscuit/cookie bakery",
+      "address": "100 NE Columbia Blvd, Portland, OR 97211",
+      "lat": 45.581046,
+      "lng": -122.664875,
+      "source": "Waze/Panjiva/Restaurantji - Nabisco bakery (Oreo, Ritz, Chips Ahoy!, Wheat Thins, Good Thins, Premium); dossier-named West Coast hub. Verified street address.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 729
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Nabisco Naperville Bakery - Naperville IL",
+      "city": "Naperville",
+      "state": "IL",
+      "type": "Manufacturing - cracker bakery",
+      "address": "1555 W Ogden Ave, Naperville, IL 60540",
+      "lat": 41.771784,
+      "lng": -88.187766,
+      "source": "Yelp/Waze/Dun & Bradstreet - sole North America Triscuit plant; one of Mondelez's four strategic US biscuit bakeries. Verified street address.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 72
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Clif Bar Baking Co. of Indianapolis - Indianapolis IN",
+      "city": "Indianapolis",
+      "state": "IN",
+      "type": "Manufacturing - energy/nutrition bar bakery",
+      "address": "7575 Georgetown Rd, Indianapolis, IN 46268",
+      "lat": 39.888649,
+      "lng": -86.241363,
+      "source": "Commercial Baking/IBJ - one of two Clif Bar self-manufacturing plants (acquired 2022); 185,000 sq ft. Verified street address.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 9
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Tate's Bake Shop Factory - East Moriches NY",
+      "city": "East Moriches",
+      "state": "NY",
+      "type": "Manufacturing - cookie bakery",
+      "address": "62 Pine St, East Moriches, NY 11940",
+      "lat": 40.810409,
+      "lng": -72.765168,
+      "source": "Waze/Restaurantji - Tate's Bake Shop production factory (acquired 2018), 40,000 sq ft, still in use. Verified street address.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 99
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Mondelez Richmond Distribution Center - Sandston VA",
+      "city": "Sandston",
+      "state": "VA",
+      "type": "Distribution center (3PL-operated, Kenco)",
+      "address": "Airport Drive at SR-895 Interchange, Henrico County (Sandston), VA 23150",
+      "lat": 37.465612,
+      "lng": -77.372007,
+      "source": "Kenco Group/Intercontinental Real Estate/GRPVA - 450,000 sq ft regional supply chain DC opened Dec 2022, operated by Kenco; serves Oreo/Chips Ahoy/Ritz. Approximate location near Richmond International Airport; exact street number not published.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 1
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Mondelez Montgomery Sales Distribution Center - Montgomery NY",
+      "city": "Montgomery",
+      "state": "NY",
+      "type": "Distribution center / sales warehouse",
+      "address": "272 Neelytown Rd, Montgomery, NY 12549",
+      "lat": 41.493975,
+      "lng": -74.223428,
+      "source": "Times Hudson Valley/ARCO Design-Build/Yelp - 100,300 sq ft food-grade sales distribution center, 37 truck spots; distributes Oreo, Triscuit, Wheat Thins. Verified street address.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 65
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Nabisco Norcross Distribution Center - Norcross GA",
+      "city": "Norcross",
+      "state": "GA",
+      "type": "Distribution center",
+      "address": "Norcross, GA (metro Atlanta) - exact street address not published",
+      "lat": 33.941108,
+      "lng": -84.213744,
+      "source": "Food Manufacturing/WSWS - Nabisco distribution center named in 2021 BCTGM strike coverage; serves the Southeast. Street address not pinned down - city-level only.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 3
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Nabisco Aurora Sales & Distribution Center - Aurora CO",
+      "city": "Aurora",
+      "state": "CO",
+      "type": "Sales / distribution center",
+      "address": "Aurora, CO 80011 - exact street address not published",
+      "lat": 39.754247,
+      "lng": -104.7871,
+      "source": "Chamber of Commerce/Yellowpages/Food Manufacturing - Nabisco sales-distribution facility named in 2021 strike coverage; serves the Mountain West. ZIP-level only (80011), exact street address not pinned down.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 26
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Clif Bar Baking Co. of Twin Falls - Twin Falls ID",
+      "city": "Twin Falls",
+      "state": "ID",
+      "type": "Manufacturing - energy/nutrition bar bakery",
+      "address": "4101 Pole Line Rd, Twin Falls, ID 83301",
+      "lat": 42.5826,
+      "lng": -114.4286,
+      "source": "BoiseDev/Magic Valley/Twin Falls Chamber/Idaho State Journal - one of two Clif Bar self-manufacturing plants (acquired by Mondelez June 2022 in the $2.9B Clif Bar deal); ~300,000 sq ft sustainable factory on a 90-acre site opened 2016, ~295 employees, still operating under Mondelez. Approximate coordinate on Pole Line Rd corridor near the Chobani plant; exact street number not officially published.",
+      "geocode": {
+        "source": "research",
+        "precision": "APPROXIMATE",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Tate's Bake Shop Production & Distribution Facility - Shirley NY",
+      "city": "Shirley",
+      "state": "NY",
+      "type": "Manufacturing / warehouse - cookie bakery + distribution",
+      "address": "Shirley, NY 11967 (newly constructed warehouse & distribution development) - exact street address not published",
+      "lat": 40.8015,
+      "lng": -72.8743,
+      "source": "Long Island Business News/Tate's Bake Shop Wikipedia - newly constructed warehouse & distribution development in Shirley, Long Island that Mondelez moved Tate's into in December 2023 as part of a factory-and-warehouse expansion (added ~100 workers, raised output to ~2M cookies/day). City-level only; exact street address not pinned down.",
+      "geocode": {
+        "source": "research",
+        "precision": "APPROXIMATE",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Mondelez Toledo Flour Mill - Toledo OH",
+      "city": "Toledo",
+      "state": "OH",
+      "type": "Manufacturing - flour mill (input/ingredient)",
+      "address": "Toledo, OH - exact street address not published",
+      "lat": 41.6528,
+      "lng": -83.5379,
+      "source": "Mondelez official US office-locations page - listed as a Mondelez flour mill that 'produces our flour' supplying the biscuit bakery network. City-level only; exact street address not published by Mondelez.",
+      "geocode": {
+        "source": "research",
+        "precision": "APPROXIMATE",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Mondelez/Nabisco Tatamy Sales Distribution Center - Tatamy PA",
+      "city": "Tatamy",
+      "state": "PA",
+      "type": "Distribution center / sales warehouse",
+      "address": "Tatamy, PA 18085 (Northampton County, Lehigh Valley) - exact street address not published",
+      "lat": 40.7401,
+      "lng": -75.2557,
+      "source": "Becknell Industrial/Mondelez hourly-jobs portal/Indeed - ~100,300 sq ft build-to-suit Nabisco distribution/sales warehouse in the Lehigh Valley; handles Oreo, Chips Ahoy!, Ritz, Triscuit, Swedish Fish, Sour Patch Kids. City-level only; exact street address not pinned down.",
+      "geocode": {
+        "source": "research",
+        "precision": "APPROXIMATE",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 15,
+      "name": "Mondelez Aurora Distribution Center (DHL/Exel-operated) - Aurora IL",
+      "city": "Aurora",
+      "state": "IL",
+      "type": "Distribution center (3PL-operated, DHL/Exel Logistics)",
+      "address": "2380 Sullivan Rd, Aurora, IL 60506",
+      "lat": 41.7405,
+      "lng": -88.3506,
+      "source": "Businessyab/Chamber of Commerce/Yellowpages - Mondelez/Kraft Foods distribution center operated by DHL Supply Chain (Exel Logistics) in the Chicago metro; serves the Midwest biscuit network alongside the Chicago and Naperville bakeries. Verified street address.",
+      "geocode": {
+        "source": "research",
+        "precision": "APPROXIMATE",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 16,
+      "name": "Mondelez North America Headquarters - East Hanover NJ",
+      "city": "East Hanover",
+      "state": "NJ",
+      "type": "Corporate HQ / regional office (North America)",
+      "address": "100 Deforest Ave, East Hanover, NJ 07936",
+      "lat": 40.8126,
+      "lng": -74.3676,
+      "source": "Mondelez official US site/Claudio Parrotta dossier - Mondelez International North America headquarters; regional functional and supply-chain leadership. Verified street address.",
+      "geocode": {
+        "source": "research",
+        "precision": "APPROXIMATE",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 17,
+      "name": "Mondelez Global R&D Innovation Center - Whippany NJ",
+      "city": "Whippany",
+      "state": "NJ",
+      "type": "R&D / global innovation center (pilot & scale-up lines)",
+      "address": "200 DeForest Ave area, Whippany (Hanover Township), NJ 07981 - off Route 10",
+      "lat": 40.8198,
+      "lng": -74.4179,
+      "source": "Mondelez IR/Real Estate NJ/NJBIZ/Morris County - ~150,000 sq ft Global R&D Innovation Center opened May 2023 (~$50M investment) in a repurposed former Cadbury R&D building; includes pilot and scale-up lines for cookies, crackers and candy. Approximate location off Route 10; exact street number not published.",
+      "geocode": {
+        "source": "research",
+        "precision": "APPROXIMATE",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 18,
+      "name": "Mondelez Global Headquarters - Chicago IL",
+      "city": "Chicago",
+      "state": "IL",
+      "type": "Corporate HQ (global)",
+      "address": "905 W Fulton Market, Chicago, IL 60607",
+      "lat": 41.8866,
+      "lng": -87.6513,
+      "source": "Mondelez official US site/Crain's Chicago Business - Mondelez International global headquarters in the West Fulton Market neighborhood (moved from Deerfield, IL in 2020). Verified street address.",
+      "geocode": {
+        "source": "research",
+        "precision": "APPROXIMATE",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 19,
+      "name": "Nabisco Allentown Sales Distribution Center - Allentown PA",
+      "city": "Allentown",
+      "state": "PA",
+      "type": "Distribution center / sales warehouse",
+      "address": "Allentown, PA (Lehigh Valley) - exact street address not published",
+      "lat": 40.6084,
+      "lng": -75.4902,
+      "source": "Indeed/Mondelez office-location directory - Mondelez/Nabisco sales-distribution presence in the Allentown area of the Lehigh Valley logistics corridor. City-level only; exact street address not pinned down.",
+      "geocode": {
+        "source": "research",
+        "precision": "APPROXIMATE",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 20,
+      "name": "Nabisco Memphis Sales Distribution Center - Memphis TN",
+      "city": "Memphis",
+      "state": "TN",
+      "type": "Distribution center / sales warehouse",
+      "address": "Memphis, TN - exact street address not published",
+      "lat": 35.1175,
+      "lng": -89.9711,
+      "source": "Indeed/Mondelez office-location directory - Mondelez/Nabisco sales-distribution presence in Memphis serving the mid-South. City-level only; exact street address not pinned down.",
+      "geocode": {
+        "source": "research",
+        "precision": "APPROXIMATE",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 21,
+      "name": "Nabisco Dallas/Garland Sales Distribution Center - Garland TX",
+      "city": "Garland",
+      "state": "TX",
+      "type": "Distribution center / sales warehouse",
+      "address": "Garland, TX (metro Dallas) - exact street address not published",
+      "lat": 32.9126,
+      "lng": -96.6389,
+      "source": "Monster/ZipRecruiter/Mondelez office-location directory - Mondelez/Nabisco sales-distribution and merchandising hub in the Dallas-Garland metro serving Texas/South Central. City-level only; exact street address not pinned down.",
+      "geocode": {
+        "source": "research",
+        "precision": "APPROXIMATE",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 22,
+      "name": "Nabisco Houston Sales Distribution Center - Houston TX",
+      "city": "Houston",
+      "state": "TX",
+      "type": "Distribution center / sales warehouse",
+      "address": "Houston, TX - exact street address not published",
+      "lat": 29.7604,
+      "lng": -95.3698,
+      "source": "Indeed/Mondelez office-location directory - Mondelez/Nabisco sales-distribution presence in Houston serving the Gulf Coast. City-level only; exact street address not pinned down.",
+      "geocode": {
+        "source": "research",
+        "precision": "APPROXIMATE",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 23,
+      "name": "Nabisco Atlanta Sales Distribution Center - Atlanta GA",
+      "city": "Atlanta",
+      "state": "GA",
+      "type": "Distribution center / sales warehouse",
+      "address": "Atlanta, GA - exact street address not published",
+      "lat": 33.749,
+      "lng": -84.388,
+      "source": "Indeed/Mondelez office-location directory - Mondelez/Nabisco sales-distribution and merchandising presence in metro Atlanta (distinct from the closed 1400 Murphy Ave bakery and the Norcross DC at idx 9). City-level only; exact street address not pinned down.",
+      "geocode": {
+        "source": "research",
+        "precision": "APPROXIMATE",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 24,
+      "name": "Nabisco Los Angeles Sales Distribution Center - Los Angeles CA",
+      "city": "Los Angeles",
+      "state": "CA",
+      "type": "Distribution center / sales warehouse",
+      "address": "Los Angeles, CA - exact street address not published",
+      "lat": 34.0522,
+      "lng": -118.2437,
+      "source": "Indeed/Mondelez office-location directory - Mondelez/Nabisco sales-distribution presence in the Los Angeles metro serving Southern California. City-level only; exact street address not pinned down.",
+      "geocode": {
+        "source": "research",
+        "precision": "APPROXIMATE",
+        "movedMeters": 0
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

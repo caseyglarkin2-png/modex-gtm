@@ -1,0 +1,50 @@
+{
+  "name": "CJ Logistics - Wilmer TX (Southport Logistics Park)",
+  "type": "Distribution Center",
+  "coords": { "lat": 32.62280, "lng": -96.68500 },
+  "geofences": {
+    "perimeter": { "south": 32.6195, "west": -96.6878, "north": 32.6262, "east": -96.6828 },
+    "truckGate": { "south": 32.6255, "west": -96.6852, "north": 32.6262, "east": -96.6843 },
+    "dropYards": [
+      { "south": 32.6200, "west": -96.6878, "north": 32.6258, "east": -96.6862 },
+      { "south": 32.6198, "west": -96.6845, "north": 32.6255, "east": -96.6828 }
+    ],
+    "dockAprons": [
+      { "south": 32.6202, "west": -96.6868, "north": 32.6258, "east": -96.6860 },
+      { "south": 32.6200, "west": -96.6850, "north": 32.6255, "east": -96.6843 }
+    ],
+    "staging": { "south": 32.6253, "west": -96.6850, "north": 32.6260, "east": -96.6843 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 141, "trailersVisible": 220, "trailerParkingCapacity": 310,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 86.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.62280,-96.68500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "scale"],
+  "fieldNotes": {
+    "truckGate": "CJ's own facility sheet explicitly describes Wilmer as a 'gated lot with a Welcome Center.' Truck yard is enclosed by chain-link perimeter fencing (confirmed in Street View 2026-02 along E Fulghum Rd); the access driveway off Fulghum Rd is the controlled truck entry.",
+    "guardShack": "The 'Welcome Center' is a staffed driver check-in facility at the gated truck entrance - functions as the guard shack. Check-in lane with chevron markings visible near the NW entry in zoom-20 satellite.",
+    "dockDoors": "Southport Logistics Park Building 1 - 1.1M sq ft with 141 dock doors per CJ's facility sheet. Satellite confirms continuous dock-door banks with trailers backed in on BOTH long building faces - 50+ band.",
+    "shipRcvSeparate": "Dock banks on two physically separate long building faces.",
+    "dropYard": "310 yard spots per CJ's facility sheet; satellite shows extensive trailer drop yards on both sides of the building with 200+ parked trailers - 50+ band.",
+    "fastLaneOpportunity": "Very wide entry apron and large truck courts provide ample room for a bypass/express lane.",
+    "urbanRural": "Southport Logistics Park, Wilmer TX - edge-of-town logistics park south of Dallas, surrounded by undeveloped land and an older industrial yard; rural setting.",
+    "railServed": "No rail spur visible entering the property; facility is 0.5 miles from the nearest intermodal yard but not directly rail-served.",
+    "entryLanes": "Estimated 2 inbound lanes at the gated entry; not precisely resolvable.",
+    "scale": "No truck scale clearly visible; left in uncertainFields."
+  },
+  "method": "deep-audit"
+}

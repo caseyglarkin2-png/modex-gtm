@@ -1,0 +1,50 @@
+{
+  "name": "UNFI - Chesterfield NH DC",
+  "type": "Distribution Center",
+  "coords": { "lat": 42.89139, "lng": -72.490558 },
+  "geofences": {
+    "perimeter": { "south": 42.890222, "west": -72.492275, "north": 42.892648, "east": -72.488106 },
+    "truckGate": { "south": 42.891031, "west": -72.491662, "north": 42.891749, "east": -72.49019 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 42.890671, "west": -72.491907, "north": 42.891929, "east": -72.49019 }
+    ],
+    "staging": { "south": 42.8913, "west": -72.491048, "north": 42.892019, "east": -72.490068 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 36,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 22.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.89139,-72.490558,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["connectivityIssue", "dropArea"],
+  "fieldNotes": {
+    "truckGate": "No barrier arm, sliding gate, perimeter fence, or pinch-point checkpoint at the property entrance. The site is reached by a long open access drive (Stow Dr) off NH Route 9; Street View (2023-06) shows the Google car drove the access road unobstructed straight into the truck court. Open site.",
+    "guardShack": "No booth structure anywhere along the access drive or at the truck court entrance.",
+    "remoteGs": "False because there is no truck gate at all.",
+    "postGateStaging": "Wide open paved truck court on the NE/E side of the building serves as an interior holding/queue area before trucks reach the dock face; ample room.",
+    "drivewayLong": "Access drive from Route 9 to the truck court is roughly 250m of open paved road — easily holds a 3+ truck queue.",
+    "dockDoors": "Single continuous dock bank on the west building face; ~30-36 trailers backed in nose-out in z18/z19 imagery. 319,000 sq ft DC. 25-50 band.",
+    "dropArea": "No dedicated marked drop-yard; trailers without tractors appear parked in the open truck court and along the access road. Estimate 10-25; flagged uncertain — no striped trailer stalls visible.",
+    "connectivityIssue": "Rural wooded setting in West Chesterfield NH but adjacent to NH Route 9 (a state highway) with a small industrial cluster nearby — cellular coverage likely adequate; set false, flagged uncertain.",
+    "buildingCount": "Main DC plus an attached/adjacent office wing on the NW corner; counted as 2.",
+    "railServed": "No rail spur into the property; nearest rail is well away from the site."
+  },
+  "method": "deep-audit"
+}

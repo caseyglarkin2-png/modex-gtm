@@ -1,0 +1,22 @@
+{
+  "name": "Kraft Heinz - Lowville",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "multipleFacilities"],
+  "fieldNotes": {
+    "truckGate": "Street View faces a long blank side wall of the plant behind a low chain-link fence; the truck entrance is not in frame. Satellite shows driveways meeting the public road with no clear checkpoint. Marked no gate, low confidence.",
+    "multipleFacilities": "Two large connected building masses plus ancillary structures form a campus-scale site.",
+    "dropYard": "Multiple rows of unhitched trailers staged on the property.",
+    "urbanRural": "Small upstate village setting surrounded by farmland."
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Niagara Bottling - Upper Macungie (Allentown) PA",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 40.571100, "lng": -75.614900 },
+  "geofences": {
+    "perimeter": { "south": 40.568700, "west": -75.616900, "north": 40.573300, "east": -75.612400 },
+    "truckGate": { "south": 40.572000, "west": -75.615700, "north": 40.572600, "east": -75.615000 },
+    "dropYards": [
+      { "south": 40.571900, "west": -75.617100, "north": 40.573200, "east": -75.615300 },
+      { "south": 40.568900, "west": -75.613600, "north": 40.570400, "east": -75.612400 }
+    ],
+    "dockAprons": [
+      { "south": 40.569600, "west": -75.616300, "north": 40.572400, "east": -75.614600 },
+      { "south": 40.568900, "west": -75.614000, "north": 40.570600, "east": -75.612700 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 38.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.571100,-75.614900,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Property is fenced (chain-link around the dock and trailer yards, visible in Street View 2023-08), but the truck access road off Industrial Blvd shows no barrier arm and no guard booth across the lane in any Street View heading walked along the road. Classified as open driveway / no controlled gate, medium confidence — a sliding yard gate could exist closer to the building, out of Street View reach.",
+    "guardShack": "No staffed booth structure visible at the entrance in satellite or Street View.",
+    "dockDoors": "Two dock banks: a long row on the SW face along Industrial Blvd and a long row on the SE face with trailers backed in; combined ~55 doors estimated from z18/z19 imagery — band 50+ is confident even if exact count is approximate.",
+    "dropArea": "Large fenced trailer drop yard on the NW side with 40+ tractor-trailers/trailers parked in rows, plus a marked trailer-stall row on the SE dock apron; 50+ band.",
+    "shipRcvSeparate": "Distinct dock banks on two different building faces (SW and SE) implying separate ship/receive clusters.",
+    "fastLaneOpportunity": "Wide paved access road and large apron with unused width near the entrance leaves room for a bypass lane.",
+    "postGateStaging": "Wide internal paved yard between the access road and the dock doors provides post-gate holding room.",
+    "urbanRural": "Located in the dense Lehigh Valley logistics corridor surrounded by large distribution buildings — Urban setting.",
+    "siteAreaAcres": "~38 acres derived from the perimeter box spanning the plant building, both dock aprons, the NW drop yard, and the NE process/silo area."
+  },
+  "method": "deep-audit"
+}

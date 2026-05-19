@@ -1,0 +1,139 @@
+{
+  "account": "Constellation Brands",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 11,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Constellation Beer DC - Jurupa Valley CA",
+      "city": "Jurupa Valley",
+      "state": "CA",
+      "type": "Distribution Center (beer/wine/spirits)",
+      "address": "3413 Manitou Court, Jurupa Valley, CA 92509",
+      "lat": 33.9956,
+      "lng": -117.4869,
+      "source": "Commercial Observer 2023 - Constellation preleased 1.4M sq ft at the 'Space Center' development (Link Logistics/Blackstone) near I-15/SR-60 in Riverside County; primary US receiving/distribution hub for Mexico-origin beer. Highest-volume yard site.",
+      "priority": "high"
+    },
+    {
+      "idx": 2,
+      "name": "Constellation Beer DC - Wilmer TX (Dallas I-45)",
+      "city": "Wilmer",
+      "state": "TX",
+      "type": "Distribution Center (beer cross-dock, rail-served)",
+      "address": "I-45 corridor / southern Dallas County, Wilmer, TX (approx.)",
+      "lat": 32.5912,
+      "lng": -96.6842,
+      "source": "Good Beer Hunting Sightlines 2016 + Biagi Bros/Evans GC: 450-475K sq ft build-to-suit cross-dock for Constellation beer, rail-served (can unload four 30-car trains), 24 rail + 64 truck dock doors; operated by 3PL Biagi Bros in the I-45 corridor near Dallas. Exact street address not published.",
+      "priority": "high"
+    },
+    {
+      "idx": 3,
+      "name": "Constellation Beer DC - Jacksonville FL",
+      "city": "Jacksonville",
+      "state": "FL",
+      "type": "Distribution Center (beer, rail-served)",
+      "address": "600 Whittaker Road, Imeson Industrial Park, Jacksonville, FL 32218",
+      "lat": 30.4413,
+      "lng": -81.6097,
+      "source": "Jacksonville Daily Record 2022 - 469,830 sq ft warehouse on 24 acres, ~1.5 mi east of I-95; first Constellation DC in North Florida; receives beer by rail, distributes by truck; 54 docks plus trailer yard and guard house.",
+      "priority": "high"
+    },
+    {
+      "idx": 4,
+      "name": "Constellation Gonzales Winery - Gonzales CA",
+      "city": "Gonzales",
+      "state": "CA",
+      "type": "Winery / Production Facility",
+      "address": "800 S. Alta Street, Gonzales, CA 93926",
+      "lat": 36.5052,
+      "lng": -121.4444,
+      "source": "California Sustainable Winegrowing + cbrands locations: Monterey County production winery; Constellation invested in tank expansion raising Central Coast crush capacity from 70K to 80K tons. Retained after 2025 Wine Group sale.",
+      "priority": "medium"
+    },
+    {
+      "idx": 5,
+      "name": "Robert Mondavi Winery - Oakville CA",
+      "city": "Oakville",
+      "state": "CA",
+      "type": "Winery / Production Facility",
+      "address": "7801 St. Helena Highway, Oakville, CA 94562",
+      "lat": 38.4419,
+      "lng": -122.4106,
+      "source": "cbrands.com/Napa Valley listings - flagship Napa winery (To Kalon Vineyard); reopened April 2026 after multi-year transformation. Core retained premium asset post-2025 divestiture.",
+      "priority": "medium"
+    },
+    {
+      "idx": 6,
+      "name": "The Prisoner Wine Company - St. Helena CA",
+      "city": "St. Helena",
+      "state": "CA",
+      "type": "Winery / Production Facility",
+      "address": "1178 Galleron Road, St. Helena, CA 94574",
+      "lat": 38.4866,
+      "lng": -122.4314,
+      "source": "St. Helena / Napa Valley tourism listings - Napa Valley winery and production estate; retained premium brand post-2025 Wine Group sale.",
+      "priority": "medium"
+    },
+    {
+      "idx": 7,
+      "name": "Mount Veeder Winery / Franciscan Estate - Napa CA",
+      "city": "Napa",
+      "state": "CA",
+      "type": "Winery / Production Facility",
+      "address": "Mount Veeder area, Napa, CA (vineyard at 1999 Mount Veeder Rd; tasting at 930 3rd St, Napa 94559)",
+      "lat": 38.4036,
+      "lng": -122.4214,
+      "source": "Napa Wine Project - acquired with Franciscan Winery in 1999; houses Mount Veeder, Schrader, To Kalon Vineyard Co, Double Diamond brands. Retained post-2025.",
+      "priority": "medium"
+    },
+    {
+      "idx": 8,
+      "name": "Booker Vineyard / My Favorite Neighbor - Paso Robles CA",
+      "city": "Paso Robles",
+      "state": "CA",
+      "type": "Winery / Production Facility",
+      "address": "2644 Anderson Road, Paso Robles, CA 93446",
+      "lat": 35.5933,
+      "lng": -120.7727,
+      "source": "Wine Spectator / Yelp - Constellation holds majority/option stake; produces the My Favorite Neighbor Cabernet brand retained in the premium portfolio.",
+      "priority": "low"
+    },
+    {
+      "idx": 9,
+      "name": "Sea Smoke Cellars - Lompoc CA",
+      "city": "Lompoc",
+      "state": "CA",
+      "type": "Winery / Production Facility",
+      "address": "1604 N. O Street, Lompoc, CA 93436 (winemaking; vineyard at 111 Mail Rd)",
+      "lat": 34.6533,
+      "lng": -120.4579,
+      "source": "winetasting.com / American Winery Guide - Santa Rita Hills (Santa Barbara) producer; retained gem in Constellation premium wine portfolio.",
+      "priority": "low"
+    },
+    {
+      "idx": 10,
+      "name": "Lingua Franca Winery - Salem OR",
+      "city": "Salem",
+      "state": "OR",
+      "type": "Winery / Production Facility",
+      "address": "9675 Hopewell Road NW, Salem, OR 97304",
+      "lat": 44.9876,
+      "lng": -123.1376,
+      "source": "Oregon Wine Board / linguafranca.wine - Willamette Valley estate winery, acquired by Constellation April 2022; retained premium brand.",
+      "priority": "low"
+    },
+    {
+      "idx": 11,
+      "name": "High West Distillery - Wanship UT",
+      "city": "Wanship",
+      "state": "UT",
+      "type": "Distillery / Production Facility",
+      "address": "27649 Old Lincoln Highway, Wanship, UT 84017",
+      "lat": 40.8649,
+      "lng": -111.4072,
+      "source": "High West / Whiskey Lore - main production distillery (Park City area); retained craft spirits brand. Note: Nelson's Green Brier Distillery, 1414 Clinton St, Nashville TN 37203 is also retained but is primarily a small urban tasting/production site.",
+      "priority": "low"
+    }
+  ]
+}

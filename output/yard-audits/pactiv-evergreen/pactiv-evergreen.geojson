@@ -1,0 +1,5973 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.43915,
+              35.13765
+            ],
+            [
+              -79.43645,
+              35.13765
+            ],
+            [
+              -79.43645,
+              35.13945
+            ],
+            [
+              -79.43915,
+              35.13945
+            ],
+            [
+              -79.43915,
+              35.13765
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Aberdeen NC",
+        "type": "Manufacturing Plant (Food Merchandising; foam tray/pad converting)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 2,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 11.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.43885,
+              35.13805
+            ],
+            [
+              -79.43845,
+              35.13805
+            ],
+            [
+              -79.43845,
+              35.1384
+            ],
+            [
+              -79.43885,
+              35.1384
+            ],
+            [
+              -79.43885,
+              35.13805
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Aberdeen NC",
+        "type": "Manufacturing Plant (Food Merchandising; foam tray/pad converting)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.4373,
+              35.13835
+            ],
+            [
+              -79.4365,
+              35.13835
+            ],
+            [
+              -79.4365,
+              35.1391
+            ],
+            [
+              -79.4373,
+              35.1391
+            ],
+            [
+              -79.4373,
+              35.13835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Aberdeen NC",
+        "type": "Manufacturing Plant (Food Merchandising; foam tray/pad converting)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.4383,
+              35.1383
+            ],
+            [
+              -79.4371,
+              35.1383
+            ],
+            [
+              -79.4371,
+              35.13855
+            ],
+            [
+              -79.4383,
+              35.13855
+            ],
+            [
+              -79.4383,
+              35.1383
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Aberdeen NC",
+        "type": "Manufacturing Plant (Food Merchandising; foam tray/pad converting)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3072,
+              42.902
+            ],
+            [
+              -77.2972,
+              42.902
+            ],
+            [
+              -77.2972,
+              42.9082
+            ],
+            [
+              -77.3072,
+              42.9082
+            ],
+            [
+              -77.3072,
+              42.902
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Canandaigua NY",
+        "type": "Manufacturing Plant (Food Merchandising campus)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 145,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3033,
+              42.9025
+            ],
+            [
+              -77.30255,
+              42.9025
+            ],
+            [
+              -77.30255,
+              42.90305
+            ],
+            [
+              -77.3033,
+              42.90305
+            ],
+            [
+              -77.3033,
+              42.9025
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Canandaigua NY",
+        "type": "Manufacturing Plant (Food Merchandising campus)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.307,
+              42.9049
+            ],
+            [
+              -77.3042,
+              42.9049
+            ],
+            [
+              -77.3042,
+              42.9069
+            ],
+            [
+              -77.307,
+              42.9069
+            ],
+            [
+              -77.307,
+              42.9049
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Canandaigua NY",
+        "type": "Manufacturing Plant (Food Merchandising campus)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3034,
+              42.9053
+            ],
+            [
+              -77.3018,
+              42.9053
+            ],
+            [
+              -77.3018,
+              42.9068
+            ],
+            [
+              -77.3034,
+              42.9068
+            ],
+            [
+              -77.3034,
+              42.9053
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Canandaigua NY",
+        "type": "Manufacturing Plant (Food Merchandising campus)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3013,
+              42.9059
+            ],
+            [
+              -77.3,
+              42.9059
+            ],
+            [
+              -77.3,
+              42.9066
+            ],
+            [
+              -77.3013,
+              42.9066
+            ],
+            [
+              -77.3013,
+              42.9059
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Canandaigua NY",
+        "type": "Manufacturing Plant (Food Merchandising campus)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.301,
+              42.9046
+            ],
+            [
+              -77.2997,
+              42.9046
+            ],
+            [
+              -77.2997,
+              42.9056
+            ],
+            [
+              -77.301,
+              42.9056
+            ],
+            [
+              -77.301,
+              42.9046
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Canandaigua NY",
+        "type": "Manufacturing Plant (Food Merchandising campus)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3033,
+              42.9029
+            ],
+            [
+              -77.3018,
+              42.9029
+            ],
+            [
+              -77.3018,
+              42.9046
+            ],
+            [
+              -77.3033,
+              42.9046
+            ],
+            [
+              -77.3033,
+              42.9029
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Canandaigua NY",
+        "type": "Manufacturing Plant (Food Merchandising campus)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3072,
+              42.902
+            ],
+            [
+              -77.2972,
+              42.902
+            ],
+            [
+              -77.2972,
+              42.9082
+            ],
+            [
+              -77.3072,
+              42.9082
+            ],
+            [
+              -77.3072,
+              42.902
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Canandaigua CTC Distribution Center NY",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 280,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 145,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3033,
+              42.9025
+            ],
+            [
+              -77.30255,
+              42.9025
+            ],
+            [
+              -77.30255,
+              42.90305
+            ],
+            [
+              -77.3033,
+              42.90305
+            ],
+            [
+              -77.3033,
+              42.9025
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Canandaigua CTC Distribution Center NY",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.307,
+              42.9049
+            ],
+            [
+              -77.3042,
+              42.9049
+            ],
+            [
+              -77.3042,
+              42.907
+            ],
+            [
+              -77.307,
+              42.907
+            ],
+            [
+              -77.307,
+              42.9049
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Canandaigua CTC Distribution Center NY",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3048,
+              42.9042
+            ],
+            [
+              -77.3028,
+              42.9042
+            ],
+            [
+              -77.3028,
+              42.9056
+            ],
+            [
+              -77.3048,
+              42.9056
+            ],
+            [
+              -77.3048,
+              42.9042
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Canandaigua CTC Distribution Center NY",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3044,
+              42.9054
+            ],
+            [
+              -77.3033,
+              42.9054
+            ],
+            [
+              -77.3033,
+              42.9065
+            ],
+            [
+              -77.3044,
+              42.9065
+            ],
+            [
+              -77.3044,
+              42.9054
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Canandaigua CTC Distribution Center NY",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3036,
+              42.9045
+            ],
+            [
+              -77.3026,
+              42.9045
+            ],
+            [
+              -77.3026,
+              42.9056
+            ],
+            [
+              -77.3036,
+              42.9056
+            ],
+            [
+              -77.3036,
+              42.9045
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Canandaigua CTC Distribution Center NY",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3033,
+              42.9029
+            ],
+            [
+              -77.3018,
+              42.9029
+            ],
+            [
+              -77.3018,
+              42.9046
+            ],
+            [
+              -77.3033,
+              42.9046
+            ],
+            [
+              -77.3033,
+              42.9029
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Canandaigua CTC Distribution Center NY",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3432,
+              31.1262
+            ],
+            [
+              -97.3365,
+              31.1262
+            ],
+            [
+              -97.3365,
+              31.1342
+            ],
+            [
+              -97.3432,
+              31.1342
+            ],
+            [
+              -97.3432,
+              31.1262
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Temple TX Plant",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 95,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3411,
+              31.1264
+            ],
+            [
+              -97.3401,
+              31.1264
+            ],
+            [
+              -97.3401,
+              31.1272
+            ],
+            [
+              -97.3411,
+              31.1272
+            ],
+            [
+              -97.3411,
+              31.1264
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Temple TX Plant",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3385,
+              31.1305
+            ],
+            [
+              -97.3368,
+              31.1305
+            ],
+            [
+              -97.3368,
+              31.1338
+            ],
+            [
+              -97.3385,
+              31.1338
+            ],
+            [
+              -97.3385,
+              31.1305
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Temple TX Plant",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3387,
+              31.1305
+            ],
+            [
+              -97.3373,
+              31.1305
+            ],
+            [
+              -97.3373,
+              31.1338
+            ],
+            [
+              -97.3387,
+              31.1338
+            ],
+            [
+              -97.3387,
+              31.1305
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Temple TX Plant",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3418,
+              31.1295
+            ],
+            [
+              -97.3406,
+              31.1295
+            ],
+            [
+              -97.3406,
+              31.1325
+            ],
+            [
+              -97.3418,
+              31.1325
+            ],
+            [
+              -97.3418,
+              31.1295
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Temple TX Plant",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3412,
+              31.1272
+            ],
+            [
+              -97.3395,
+              31.1272
+            ],
+            [
+              -97.3395,
+              31.1295
+            ],
+            [
+              -97.3412,
+              31.1295
+            ],
+            [
+              -97.3412,
+              31.1272
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Temple TX Plant",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3405,
+              31.1305
+            ],
+            [
+              -97.3353,
+              31.1305
+            ],
+            [
+              -97.3353,
+              31.1356
+            ],
+            [
+              -97.3405,
+              31.1356
+            ],
+            [
+              -97.3405,
+              31.1305
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Temple TX Distribution Center",
+        "type": "Distribution Center / Regional Mixing Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 70,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3368,
+              31.1329
+            ],
+            [
+              -97.3358,
+              31.1329
+            ],
+            [
+              -97.3358,
+              31.1336
+            ],
+            [
+              -97.3368,
+              31.1336
+            ],
+            [
+              -97.3368,
+              31.1329
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Temple TX Distribution Center",
+        "type": "Distribution Center / Regional Mixing Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3372,
+              31.1332
+            ],
+            [
+              -97.3356,
+              31.1332
+            ],
+            [
+              -97.3356,
+              31.1354
+            ],
+            [
+              -97.3372,
+              31.1354
+            ],
+            [
+              -97.3372,
+              31.1332
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Temple TX Distribution Center",
+        "type": "Distribution Center / Regional Mixing Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3401,
+              31.1311
+            ],
+            [
+              -97.3388,
+              31.1311
+            ],
+            [
+              -97.3388,
+              31.1347
+            ],
+            [
+              -97.3401,
+              31.1347
+            ],
+            [
+              -97.3401,
+              31.1311
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Temple TX Distribution Center",
+        "type": "Distribution Center / Regional Mixing Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.338,
+              31.1333
+            ],
+            [
+              -97.3365,
+              31.1333
+            ],
+            [
+              -97.3365,
+              31.1354
+            ],
+            [
+              -97.338,
+              31.1354
+            ],
+            [
+              -97.338,
+              31.1333
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Temple TX Distribution Center",
+        "type": "Distribution Center / Regional Mixing Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3372,
+              31.1332
+            ],
+            [
+              -97.3358,
+              31.1332
+            ],
+            [
+              -97.3358,
+              31.1346
+            ],
+            [
+              -97.3372,
+              31.1346
+            ],
+            [
+              -97.3372,
+              31.1332
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Temple TX Distribution Center",
+        "type": "Distribution Center / Regional Mixing Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -99.812,
+              32.4567
+            ],
+            [
+              -99.8082,
+              32.4567
+            ],
+            [
+              -99.8082,
+              32.4615
+            ],
+            [
+              -99.812,
+              32.4615
+            ],
+            [
+              -99.812,
+              32.4567
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Abilene TX",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 11,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 49,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -99.8105,
+              32.4601
+            ],
+            [
+              -99.8087,
+              32.4601
+            ],
+            [
+              -99.8087,
+              32.46075
+            ],
+            [
+              -99.8105,
+              32.46075
+            ],
+            [
+              -99.8105,
+              32.4601
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Abilene TX",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -99.8105,
+              32.4601
+            ],
+            [
+              -99.8087,
+              32.4601
+            ],
+            [
+              -99.8087,
+              32.46075
+            ],
+            [
+              -99.8105,
+              32.46075
+            ],
+            [
+              -99.8105,
+              32.4601
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Abilene TX",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -99.8116,
+              32.4576
+            ],
+            [
+              -99.8102,
+              32.4576
+            ],
+            [
+              -99.8102,
+              32.4585
+            ],
+            [
+              -99.8116,
+              32.4585
+            ],
+            [
+              -99.8116,
+              32.4576
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Abilene TX",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.4233,
+              32.0959
+            ],
+            [
+              -96.4178,
+              32.0959
+            ],
+            [
+              -96.4178,
+              32.1003
+            ],
+            [
+              -96.4233,
+              32.1003
+            ],
+            [
+              -96.4233,
+              32.0959
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Corsicana TX Plant",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 28,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.4213,
+              32.0999
+            ],
+            [
+              -96.4205,
+              32.0999
+            ],
+            [
+              -96.4205,
+              32.1003
+            ],
+            [
+              -96.4213,
+              32.1003
+            ],
+            [
+              -96.4213,
+              32.0999
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Corsicana TX Plant",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.4232,
+              32.0964
+            ],
+            [
+              -96.4209,
+              32.0964
+            ],
+            [
+              -96.4209,
+              32.0993
+            ],
+            [
+              -96.4232,
+              32.0993
+            ],
+            [
+              -96.4232,
+              32.0964
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Corsicana TX Plant",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.4213,
+              32.097
+            ],
+            [
+              -96.4201,
+              32.097
+            ],
+            [
+              -96.4201,
+              32.0995
+            ],
+            [
+              -96.4213,
+              32.0995
+            ],
+            [
+              -96.4213,
+              32.097
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Corsicana TX Plant",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.4615,
+              32.0721
+            ],
+            [
+              -96.4533,
+              32.0721
+            ],
+            [
+              -96.4533,
+              32.078
+            ],
+            [
+              -96.4615,
+              32.078
+            ],
+            [
+              -96.4615,
+              32.0721
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Corsicana TX Warehouse",
+        "type": "Warehouse / Distribution",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 58,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.4547,
+              32.0739
+            ],
+            [
+              -96.4535,
+              32.0739
+            ],
+            [
+              -96.4535,
+              32.0747
+            ],
+            [
+              -96.4547,
+              32.0747
+            ],
+            [
+              -96.4547,
+              32.0739
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Corsicana TX Warehouse",
+        "type": "Warehouse / Distribution",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.4612,
+              32.0726
+            ],
+            [
+              -96.4585,
+              32.0726
+            ],
+            [
+              -96.4585,
+              32.0748
+            ],
+            [
+              -96.4612,
+              32.0748
+            ],
+            [
+              -96.4612,
+              32.0726
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Corsicana TX Warehouse",
+        "type": "Warehouse / Distribution",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.459,
+              32.0732
+            ],
+            [
+              -96.4552,
+              32.0732
+            ],
+            [
+              -96.4552,
+              32.0764
+            ],
+            [
+              -96.459,
+              32.0764
+            ],
+            [
+              -96.459,
+              32.0732
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Corsicana TX Warehouse",
+        "type": "Warehouse / Distribution",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3912,
+              33.9775
+            ],
+            [
+              -83.3868,
+              33.9775
+            ],
+            [
+              -83.3868,
+              33.9818
+            ],
+            [
+              -83.3912,
+              33.9818
+            ],
+            [
+              -83.3912,
+              33.9775
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Athens GA",
+        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 24,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 32,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3906,
+              33.9787
+            ],
+            [
+              -83.3896,
+              33.9787
+            ],
+            [
+              -83.3896,
+              33.9795
+            ],
+            [
+              -83.3906,
+              33.9795
+            ],
+            [
+              -83.3906,
+              33.9787
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Athens GA",
+        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.389,
+              33.9795
+            ],
+            [
+              -83.3876,
+              33.9795
+            ],
+            [
+              -83.3876,
+              33.981
+            ],
+            [
+              -83.389,
+              33.981
+            ],
+            [
+              -83.389,
+              33.9795
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Athens GA",
+        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.389,
+              33.9795
+            ],
+            [
+              -83.3873,
+              33.9795
+            ],
+            [
+              -83.3873,
+              33.9812
+            ],
+            [
+              -83.389,
+              33.9812
+            ],
+            [
+              -83.389,
+              33.9795
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Athens GA",
+        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.6808,
+              41.9523
+            ],
+            [
+              -91.677,
+              41.9523
+            ],
+            [
+              -91.677,
+              41.9562
+            ],
+            [
+              -91.6808,
+              41.9562
+            ],
+            [
+              -91.6808,
+              41.9523
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Cedar Rapids IA",
+        "type": "Manufacturing Plant (Filling Equipment / carton filling machinery)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 1,
+          "trailerParkingCapacity": 6,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 17,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.679,
+              41.9533
+            ],
+            [
+              -91.6776,
+              41.9533
+            ],
+            [
+              -91.6776,
+              41.9544
+            ],
+            [
+              -91.679,
+              41.9544
+            ],
+            [
+              -91.679,
+              41.9533
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Cedar Rapids IA",
+        "type": "Manufacturing Plant (Filling Equipment / carton filling machinery)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.1019,
+              28.017
+            ],
+            [
+              -82.0985,
+              28.017
+            ],
+            [
+              -82.0985,
+              28.01905
+            ],
+            [
+              -82.1019,
+              28.01905
+            ],
+            [
+              -82.1019,
+              28.017
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Plant City FL",
+        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 9,
+          "trailerParkingCapacity": 14,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 18.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.0993,
+              28.01695
+            ],
+            [
+              -82.0986,
+              28.01695
+            ],
+            [
+              -82.0986,
+              28.01735
+            ],
+            [
+              -82.0993,
+              28.01735
+            ],
+            [
+              -82.0993,
+              28.01695
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Plant City FL",
+        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.0993,
+              28.01735
+            ],
+            [
+              -82.09855,
+              28.01735
+            ],
+            [
+              -82.09855,
+              28.0188
+            ],
+            [
+              -82.0993,
+              28.0188
+            ],
+            [
+              -82.0993,
+              28.01735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Plant City FL",
+        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.6423,
+              35.7499
+            ],
+            [
+              -78.6394,
+              35.7499
+            ],
+            [
+              -78.6394,
+              35.75175
+            ],
+            [
+              -78.6423,
+              35.75175
+            ],
+            [
+              -78.6423,
+              35.7499
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Raleigh NC",
+        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 10,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 11.5,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.64225,
+              35.75035
+            ],
+            [
+              -78.6419,
+              35.75035
+            ],
+            [
+              -78.6419,
+              35.75065
+            ],
+            [
+              -78.64225,
+              35.75065
+            ],
+            [
+              -78.64225,
+              35.75035
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Raleigh NC",
+        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.6417,
+              35.75025
+            ],
+            [
+              -78.6409,
+              35.75025
+            ],
+            [
+              -78.6409,
+              35.7506
+            ],
+            [
+              -78.6417,
+              35.7506
+            ],
+            [
+              -78.6417,
+              35.75025
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Raleigh NC",
+        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.6409,
+              35.75015
+            ],
+            [
+              -78.6402,
+              35.75015
+            ],
+            [
+              -78.6402,
+              35.75042
+            ],
+            [
+              -78.6409,
+              35.75042
+            ],
+            [
+              -78.6409,
+              35.75015
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Raleigh NC",
+        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -120.86735,
+              37.4904
+            ],
+            [
+              -120.8649,
+              37.4904
+            ],
+            [
+              -120.8649,
+              37.49245
+            ],
+            [
+              -120.86735,
+              37.49245
+            ],
+            [
+              -120.86735,
+              37.4904
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Turlock CA",
+        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -120.86735,
+              37.491
+            ],
+            [
+              -120.8669,
+              37.491
+            ],
+            [
+              -120.8669,
+              37.4913
+            ],
+            [
+              -120.86735,
+              37.4913
+            ],
+            [
+              -120.86735,
+              37.491
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Turlock CA",
+        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -120.8669,
+              37.49095
+            ],
+            [
+              -120.8652,
+              37.49095
+            ],
+            [
+              -120.8652,
+              37.4914
+            ],
+            [
+              -120.8669,
+              37.4914
+            ],
+            [
+              -120.8669,
+              37.49095
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Turlock CA",
+        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -120.867,
+              37.4904
+            ],
+            [
+              -120.865,
+              37.4904
+            ],
+            [
+              -120.865,
+              37.49095
+            ],
+            [
+              -120.867,
+              37.49095
+            ],
+            [
+              -120.867,
+              37.4904
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Turlock CA",
+        "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.7707,
+              41.7599
+            ],
+            [
+              -87.7675,
+              41.7599
+            ],
+            [
+              -87.7675,
+              41.7632
+            ],
+            [
+              -87.7707,
+              41.7632
+            ],
+            [
+              -87.7707,
+              41.7599
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Bedford Park IL",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 28,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.7692,
+              41.7612
+            ],
+            [
+              -87.7683,
+              41.7612
+            ],
+            [
+              -87.7683,
+              41.7617
+            ],
+            [
+              -87.7692,
+              41.7617
+            ],
+            [
+              -87.7692,
+              41.7612
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Bedford Park IL",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.7702,
+              41.7607
+            ],
+            [
+              -87.7694,
+              41.7607
+            ],
+            [
+              -87.7694,
+              41.761
+            ],
+            [
+              -87.7702,
+              41.761
+            ],
+            [
+              -87.7702,
+              41.7607
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Bedford Park IL",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8118,
+              41.7445
+            ],
+            [
+              -87.8094,
+              41.7445
+            ],
+            [
+              -87.8094,
+              41.7473
+            ],
+            [
+              -87.8118,
+              41.7473
+            ],
+            [
+              -87.8118,
+              41.7445
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Bridgeview IL",
+        "type": "Manufacturing Plant (Foodservice; ISCC PLUS certified)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 16,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8115,
+              41.7449
+            ],
+            [
+              -87.811,
+              41.7449
+            ],
+            [
+              -87.811,
+              41.7453
+            ],
+            [
+              -87.8115,
+              41.7453
+            ],
+            [
+              -87.8115,
+              41.7449
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Bridgeview IL",
+        "type": "Manufacturing Plant (Foodservice; ISCC PLUS certified)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8104,
+              41.7446
+            ],
+            [
+              -87.8095,
+              41.7446
+            ],
+            [
+              -87.8095,
+              41.7454
+            ],
+            [
+              -87.8104,
+              41.7454
+            ],
+            [
+              -87.8104,
+              41.7446
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Bridgeview IL",
+        "type": "Manufacturing Plant (Foodservice; ISCC PLUS certified)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8115,
+              41.7452
+            ],
+            [
+              -87.8109,
+              41.7452
+            ],
+            [
+              -87.8109,
+              41.7464
+            ],
+            [
+              -87.8115,
+              41.7464
+            ],
+            [
+              -87.8115,
+              41.7452
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Bridgeview IL",
+        "type": "Manufacturing Plant (Foodservice; ISCC PLUS certified)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8109,
+              41.7446
+            ],
+            [
+              -87.8095,
+              41.7446
+            ],
+            [
+              -87.8095,
+              41.7453
+            ],
+            [
+              -87.8109,
+              41.7453
+            ],
+            [
+              -87.8109,
+              41.7446
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Bridgeview IL",
+        "type": "Manufacturing Plant (Foodservice; ISCC PLUS certified)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8653,
+              41.92365
+            ],
+            [
+              -87.8623,
+              41.92365
+            ],
+            [
+              -87.8623,
+              41.9279
+            ],
+            [
+              -87.8653,
+              41.9279
+            ],
+            [
+              -87.8653,
+              41.92365
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Franklin Park IL",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 24,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 22,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8647,
+              41.9254
+            ],
+            [
+              -87.8642,
+              41.9254
+            ],
+            [
+              -87.8642,
+              41.9258
+            ],
+            [
+              -87.8647,
+              41.9258
+            ],
+            [
+              -87.8647,
+              41.9254
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Franklin Park IL",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8631,
+              41.9256
+            ],
+            [
+              -87.8623,
+              41.9256
+            ],
+            [
+              -87.8623,
+              41.9266
+            ],
+            [
+              -87.8631,
+              41.9266
+            ],
+            [
+              -87.8631,
+              41.9256
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Franklin Park IL",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8647,
+              41.924
+            ],
+            [
+              -87.8636,
+              41.924
+            ],
+            [
+              -87.8636,
+              41.9247
+            ],
+            [
+              -87.8647,
+              41.9247
+            ],
+            [
+              -87.8647,
+              41.924
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Franklin Park IL",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8643,
+              41.9262
+            ],
+            [
+              -87.8634,
+              41.9262
+            ],
+            [
+              -87.8634,
+              41.927
+            ],
+            [
+              -87.8643,
+              41.927
+            ],
+            [
+              -87.8643,
+              41.9262
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Franklin Park IL",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8201,
+              41.2356
+            ],
+            [
+              -87.8156,
+              41.2356
+            ],
+            [
+              -87.8156,
+              41.2401
+            ],
+            [
+              -87.8201,
+              41.2401
+            ],
+            [
+              -87.8201,
+              41.2356
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Manteno IL",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 16,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 30,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8183,
+              41.2359
+            ],
+            [
+              -87.8174,
+              41.2359
+            ],
+            [
+              -87.8174,
+              41.2364
+            ],
+            [
+              -87.8183,
+              41.2364
+            ],
+            [
+              -87.8183,
+              41.2359
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Manteno IL",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8172,
+              41.2383
+            ],
+            [
+              -87.8156,
+              41.2383
+            ],
+            [
+              -87.8156,
+              41.2396
+            ],
+            [
+              -87.8172,
+              41.2396
+            ],
+            [
+              -87.8172,
+              41.2383
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Manteno IL",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8183,
+              41.2369
+            ],
+            [
+              -87.817,
+              41.2369
+            ],
+            [
+              -87.817,
+              41.2382
+            ],
+            [
+              -87.8183,
+              41.2382
+            ],
+            [
+              -87.8183,
+              41.2369
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Manteno IL",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8505,
+              41.487
+            ],
+            [
+              -87.8413,
+              41.487
+            ],
+            [
+              -87.8413,
+              41.4933
+            ],
+            [
+              -87.8505,
+              41.4933
+            ],
+            [
+              -87.8505,
+              41.487
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Frankfort IL",
+        "type": "Manufacturing Plant (Foodservice; co-located warehouse)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 80,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 55,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8478,
+              41.4874
+            ],
+            [
+              -87.8468,
+              41.4874
+            ],
+            [
+              -87.8468,
+              41.4879
+            ],
+            [
+              -87.8478,
+              41.4879
+            ],
+            [
+              -87.8478,
+              41.4874
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Frankfort IL",
+        "type": "Manufacturing Plant (Foodservice; co-located warehouse)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8485,
+              41.4908
+            ],
+            [
+              -87.8461,
+              41.4908
+            ],
+            [
+              -87.8461,
+              41.4926
+            ],
+            [
+              -87.8485,
+              41.4926
+            ],
+            [
+              -87.8485,
+              41.4908
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Frankfort IL",
+        "type": "Manufacturing Plant (Foodservice; co-located warehouse)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8502,
+              41.4882
+            ],
+            [
+              -87.8483,
+              41.4882
+            ],
+            [
+              -87.8483,
+              41.4897
+            ],
+            [
+              -87.8502,
+              41.4897
+            ],
+            [
+              -87.8502,
+              41.4882
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Frankfort IL",
+        "type": "Manufacturing Plant (Foodservice; co-located warehouse)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8462,
+              41.4888
+            ],
+            [
+              -87.8438,
+              41.4888
+            ],
+            [
+              -87.8438,
+              41.4912
+            ],
+            [
+              -87.8462,
+              41.4912
+            ],
+            [
+              -87.8462,
+              41.4888
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Frankfort IL",
+        "type": "Manufacturing Plant (Foodservice; co-located warehouse)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1192,
+              41.6229
+            ],
+            [
+              -88.1127,
+              41.6229
+            ],
+            [
+              -88.1127,
+              41.6308
+            ],
+            [
+              -88.1192,
+              41.6308
+            ],
+            [
+              -88.1192,
+              41.6229
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Romeoville Regional Mixing Center IL",
+        "type": "Distribution Center / Regional Mixing Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 91,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 50,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.116,
+              41.626
+            ],
+            [
+              -88.1152,
+              41.626
+            ],
+            [
+              -88.1152,
+              41.6265
+            ],
+            [
+              -88.116,
+              41.6265
+            ],
+            [
+              -88.116,
+              41.626
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Romeoville Regional Mixing Center IL",
+        "type": "Distribution Center / Regional Mixing Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1192,
+              41.6242
+            ],
+            [
+              -88.1179,
+              41.6242
+            ],
+            [
+              -88.1179,
+              41.6301
+            ],
+            [
+              -88.1192,
+              41.6301
+            ],
+            [
+              -88.1192,
+              41.6242
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Romeoville Regional Mixing Center IL",
+        "type": "Distribution Center / Regional Mixing Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1142,
+              41.6245
+            ],
+            [
+              -88.1129,
+              41.6245
+            ],
+            [
+              -88.1129,
+              41.6296
+            ],
+            [
+              -88.1142,
+              41.6296
+            ],
+            [
+              -88.1142,
+              41.6245
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Romeoville Regional Mixing Center IL",
+        "type": "Distribution Center / Regional Mixing Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1183,
+              41.6243
+            ],
+            [
+              -88.1176,
+              41.6243
+            ],
+            [
+              -88.1176,
+              41.6299
+            ],
+            [
+              -88.1183,
+              41.6299
+            ],
+            [
+              -88.1183,
+              41.6243
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Romeoville Regional Mixing Center IL",
+        "type": "Distribution Center / Regional Mixing Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1146,
+              41.6246
+            ],
+            [
+              -88.1139,
+              41.6246
+            ],
+            [
+              -88.1139,
+              41.6295
+            ],
+            [
+              -88.1146,
+              41.6295
+            ],
+            [
+              -88.1146,
+              41.6246
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Romeoville Regional Mixing Center IL",
+        "type": "Distribution Center / Regional Mixing Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1236,
+              39.99455
+            ],
+            [
+              -83.12155,
+              39.99455
+            ],
+            [
+              -83.12155,
+              39.99735
+            ],
+            [
+              -83.1236,
+              39.99735
+            ],
+            [
+              -83.1236,
+              39.99455
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Columbus OH",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 10,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 12.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.12345,
+              39.99478
+            ],
+            [
+              -83.12315,
+              39.99478
+            ],
+            [
+              -83.12315,
+              39.995
+            ],
+            [
+              -83.12345,
+              39.995
+            ],
+            [
+              -83.12345,
+              39.99478
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Columbus OH",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1232,
+              39.99478
+            ],
+            [
+              -83.1221,
+              39.99478
+            ],
+            [
+              -83.1221,
+              39.99545
+            ],
+            [
+              -83.1232,
+              39.99545
+            ],
+            [
+              -83.1232,
+              39.99478
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Columbus OH",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1232,
+              39.995
+            ],
+            [
+              -83.1221,
+              39.995
+            ],
+            [
+              -83.1221,
+              39.99545
+            ],
+            [
+              -83.1232,
+              39.99545
+            ],
+            [
+              -83.1232,
+              39.995
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Columbus OH",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.0384,
+              33.6754
+            ],
+            [
+              -84.0357,
+              33.6754
+            ],
+            [
+              -84.0357,
+              33.67835
+            ],
+            [
+              -84.0384,
+              33.67835
+            ],
+            [
+              -84.0384,
+              33.6754
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Conyers GA",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 17,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.0369,
+              33.67555
+            ],
+            [
+              -84.0365,
+              33.67555
+            ],
+            [
+              -84.0365,
+              33.6758
+            ],
+            [
+              -84.0369,
+              33.6758
+            ],
+            [
+              -84.0369,
+              33.67555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Conyers GA",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.0376,
+              33.6754
+            ],
+            [
+              -84.0365,
+              33.6754
+            ],
+            [
+              -84.0365,
+              33.6761
+            ],
+            [
+              -84.0376,
+              33.6761
+            ],
+            [
+              -84.0376,
+              33.6754
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Conyers GA",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.0376,
+              33.67555
+            ],
+            [
+              -84.0366,
+              33.67555
+            ],
+            [
+              -84.0366,
+              33.6764
+            ],
+            [
+              -84.0376,
+              33.6764
+            ],
+            [
+              -84.0376,
+              33.67555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Conyers GA",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8483,
+              33.6096
+            ],
+            [
+              -83.843,
+              33.6096
+            ],
+            [
+              -83.843,
+              33.6148
+            ],
+            [
+              -83.8483,
+              33.6148
+            ],
+            [
+              -83.8483,
+              33.6096
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Covington GA Plant",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 52,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8458,
+              33.6143
+            ],
+            [
+              -83.8452,
+              33.6143
+            ],
+            [
+              -83.8452,
+              33.61475
+            ],
+            [
+              -83.8458,
+              33.61475
+            ],
+            [
+              -83.8458,
+              33.6143
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Covington GA Plant",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8448,
+              33.6105
+            ],
+            [
+              -83.8436,
+              33.6105
+            ],
+            [
+              -83.8436,
+              33.6132
+            ],
+            [
+              -83.8448,
+              33.6132
+            ],
+            [
+              -83.8448,
+              33.6105
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Covington GA Plant",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8456,
+              33.6108
+            ],
+            [
+              -83.8444,
+              33.6108
+            ],
+            [
+              -83.8444,
+              33.6134
+            ],
+            [
+              -83.8456,
+              33.6134
+            ],
+            [
+              -83.8456,
+              33.6108
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Covington GA Plant",
+        "type": "Manufacturing Plant (Foodservice)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8148,
+              33.6044
+            ],
+            [
+              -83.8104,
+              33.6044
+            ],
+            [
+              -83.8104,
+              33.60825
+            ],
+            [
+              -83.8148,
+              33.60825
+            ],
+            [
+              -83.8148,
+              33.6044
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Covington GA Distribution Center",
+        "type": "Distribution Center / Regional Mixing Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 140,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 30,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.814,
+              33.6049
+            ],
+            [
+              -83.8134,
+              33.6049
+            ],
+            [
+              -83.8134,
+              33.60525
+            ],
+            [
+              -83.814,
+              33.60525
+            ],
+            [
+              -83.814,
+              33.6049
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Covington GA Distribution Center",
+        "type": "Distribution Center / Regional Mixing Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8133,
+              33.6046
+            ],
+            [
+              -83.8115,
+              33.6046
+            ],
+            [
+              -83.8115,
+              33.6056
+            ],
+            [
+              -83.8133,
+              33.6056
+            ],
+            [
+              -83.8133,
+              33.6046
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Covington GA Distribution Center",
+        "type": "Distribution Center / Regional Mixing Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8123,
+              33.607
+            ],
+            [
+              -83.8108,
+              33.607
+            ],
+            [
+              -83.8108,
+              33.6082
+            ],
+            [
+              -83.8123,
+              33.6082
+            ],
+            [
+              -83.8123,
+              33.607
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Covington GA Distribution Center",
+        "type": "Distribution Center / Regional Mixing Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8136,
+              33.6048
+            ],
+            [
+              -83.8123,
+              33.6048
+            ],
+            [
+              -83.8123,
+              33.6079
+            ],
+            [
+              -83.8136,
+              33.6079
+            ],
+            [
+              -83.8136,
+              33.6048
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Covington GA Distribution Center",
+        "type": "Distribution Center / Regional Mixing Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8122,
+              33.6054
+            ],
+            [
+              -83.8106,
+              33.6054
+            ],
+            [
+              -83.8106,
+              33.6083
+            ],
+            [
+              -83.8122,
+              33.6083
+            ],
+            [
+              -83.8122,
+              33.6054
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Covington GA Distribution Center",
+        "type": "Distribution Center / Regional Mixing Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8141,
+              33.6047
+            ],
+            [
+              -83.8135,
+              33.6047
+            ],
+            [
+              -83.8135,
+              33.6053
+            ],
+            [
+              -83.8141,
+              33.6053
+            ],
+            [
+              -83.8141,
+              33.6047
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Covington GA Distribution Center",
+        "type": "Distribution Center / Regional Mixing Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6493,
+              32.7049
+            ],
+            [
+              -83.6462,
+              32.7049
+            ],
+            [
+              -83.6462,
+              32.7084
+            ],
+            [
+              -83.6493,
+              32.7084
+            ],
+            [
+              -83.6493,
+              32.7049
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Macon GA",
+        "type": "Manufacturing Plant (Food Merchandising; molded fibre / egg-tray converting)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 27,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.64945,
+              32.70605
+            ],
+            [
+              -83.64905,
+              32.70605
+            ],
+            [
+              -83.64905,
+              32.70645
+            ],
+            [
+              -83.64945,
+              32.70645
+            ],
+            [
+              -83.64945,
+              32.70605
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Macon GA",
+        "type": "Manufacturing Plant (Food Merchandising; molded fibre / egg-tray converting)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6496,
+              32.7067
+            ],
+            [
+              -83.6476,
+              32.7067
+            ],
+            [
+              -83.6476,
+              32.7083
+            ],
+            [
+              -83.6496,
+              32.7083
+            ],
+            [
+              -83.6496,
+              32.7067
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Macon GA",
+        "type": "Manufacturing Plant (Food Merchandising; molded fibre / egg-tray converting)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.647,
+              32.7052
+            ],
+            [
+              -83.6463,
+              32.7052
+            ],
+            [
+              -83.6463,
+              32.706
+            ],
+            [
+              -83.647,
+              32.706
+            ],
+            [
+              -83.647,
+              32.7052
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Macon GA",
+        "type": "Manufacturing Plant (Food Merchandising; molded fibre / egg-tray converting)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6487,
+              32.7063
+            ],
+            [
+              -83.6465,
+              32.7063
+            ],
+            [
+              -83.6465,
+              32.70665
+            ],
+            [
+              -83.6487,
+              32.70665
+            ],
+            [
+              -83.6487,
+              32.7063
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Macon GA",
+        "type": "Manufacturing Plant (Food Merchandising; molded fibre / egg-tray converting)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.8212,
+              34.3769
+            ],
+            [
+              -92.8174,
+              34.3769
+            ],
+            [
+              -92.8174,
+              34.3811
+            ],
+            [
+              -92.8212,
+              34.3811
+            ],
+            [
+              -92.8212,
+              34.3769
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Malvern AR",
+        "type": "Manufacturing Plant (Food Merchandising; polystyrene foam food tray converting; ISCC PLUS certified)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 33,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.8197,
+              34.3779
+            ],
+            [
+              -92.8193,
+              34.3779
+            ],
+            [
+              -92.8193,
+              34.37825
+            ],
+            [
+              -92.8197,
+              34.37825
+            ],
+            [
+              -92.8197,
+              34.3779
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Malvern AR",
+        "type": "Manufacturing Plant (Food Merchandising; polystyrene foam food tray converting; ISCC PLUS certified)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.8192,
+              34.3771
+            ],
+            [
+              -92.8178,
+              34.3771
+            ],
+            [
+              -92.8178,
+              34.3781
+            ],
+            [
+              -92.8192,
+              34.3781
+            ],
+            [
+              -92.8192,
+              34.3771
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Malvern AR",
+        "type": "Manufacturing Plant (Food Merchandising; polystyrene foam food tray converting; ISCC PLUS certified)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.821,
+              34.38
+            ],
+            [
+              -92.8196,
+              34.38
+            ],
+            [
+              -92.8196,
+              34.381
+            ],
+            [
+              -92.821,
+              34.381
+            ],
+            [
+              -92.821,
+              34.38
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Malvern AR",
+        "type": "Manufacturing Plant (Food Merchandising; polystyrene foam food tray converting; ISCC PLUS certified)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.8193,
+              34.3779
+            ],
+            [
+              -92.8179,
+              34.3779
+            ],
+            [
+              -92.8179,
+              34.37825
+            ],
+            [
+              -92.8193,
+              34.37825
+            ],
+            [
+              -92.8193,
+              34.3779
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Malvern AR",
+        "type": "Manufacturing Plant (Food Merchandising; polystyrene foam food tray converting; ISCC PLUS certified)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.789,
+              35.6297
+            ],
+            [
+              -80.785,
+              35.6297
+            ],
+            [
+              -80.785,
+              35.6333
+            ],
+            [
+              -80.789,
+              35.6333
+            ],
+            [
+              -80.789,
+              35.6297
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Mooresville NC",
+        "type": "Manufacturing Plant (Foodservice; foodservice & grocery packaging converting; ISCC PLUS certified)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 34,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.7884,
+              35.6297
+            ],
+            [
+              -80.787,
+              35.6297
+            ],
+            [
+              -80.787,
+              35.6311
+            ],
+            [
+              -80.7884,
+              35.6311
+            ],
+            [
+              -80.7884,
+              35.6297
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Mooresville NC",
+        "type": "Manufacturing Plant (Foodservice; foodservice & grocery packaging converting; ISCC PLUS certified)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.7877,
+              35.6302
+            ],
+            [
+              -80.7862,
+              35.6302
+            ],
+            [
+              -80.7862,
+              35.6311
+            ],
+            [
+              -80.7877,
+              35.6311
+            ],
+            [
+              -80.7877,
+              35.6302
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Mooresville NC",
+        "type": "Manufacturing Plant (Foodservice; foodservice & grocery packaging converting; ISCC PLUS certified)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.6696,
+              35.2697
+            ],
+            [
+              -77.6658,
+              35.2697
+            ],
+            [
+              -77.6658,
+              35.2736
+            ],
+            [
+              -77.6696,
+              35.2736
+            ],
+            [
+              -77.6696,
+              35.2697
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Kinston NC Plant",
+        "type": "Manufacturing Plant / Distribution (Foodservice paper packaging; ex-Dopaco facility)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 23,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.6668,
+              35.2707
+            ],
+            [
+              -77.6659,
+              35.2707
+            ],
+            [
+              -77.6659,
+              35.2727
+            ],
+            [
+              -77.6668,
+              35.2727
+            ],
+            [
+              -77.6668,
+              35.2707
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Kinston NC Plant",
+        "type": "Manufacturing Plant / Distribution (Foodservice paper packaging; ex-Dopaco facility)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.6671,
+              35.2708
+            ],
+            [
+              -77.6663,
+              35.2708
+            ],
+            [
+              -77.6663,
+              35.2727
+            ],
+            [
+              -77.6671,
+              35.2727
+            ],
+            [
+              -77.6671,
+              35.2708
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Kinston NC Plant",
+        "type": "Manufacturing Plant / Distribution (Foodservice paper packaging; ex-Dopaco facility)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7079,
+              46.8409
+            ],
+            [
+              -96.70555,
+              46.8409
+            ],
+            [
+              -96.70555,
+              46.84265
+            ],
+            [
+              -96.7079,
+              46.84265
+            ],
+            [
+              -96.7079,
+              46.8409
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Moorhead MN",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 18,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 8.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7079,
+              46.8413
+            ],
+            [
+              -96.7074,
+              46.8413
+            ],
+            [
+              -96.7074,
+              46.8417
+            ],
+            [
+              -96.7079,
+              46.8417
+            ],
+            [
+              -96.7079,
+              46.8413
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Moorhead MN",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7079,
+              46.84175
+            ],
+            [
+              -96.70745,
+              46.84175
+            ],
+            [
+              -96.70745,
+              46.84235
+            ],
+            [
+              -96.7079,
+              46.84235
+            ],
+            [
+              -96.7079,
+              46.84175
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Moorhead MN",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.70745,
+              46.84165
+            ],
+            [
+              -96.707,
+              46.84165
+            ],
+            [
+              -96.707,
+              46.84245
+            ],
+            [
+              -96.70745,
+              46.84245
+            ],
+            [
+              -96.70745,
+              46.84165
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Moorhead MN",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.26165,
+              37.89255
+            ],
+            [
+              -121.2591,
+              37.89255
+            ],
+            [
+              -121.2591,
+              37.8954
+            ],
+            [
+              -121.26165,
+              37.8954
+            ],
+            [
+              -121.26165,
+              37.89255
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Stockton CA",
+        "type": "Manufacturing Plant (Foodservice; co-located warehouse)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 16.5,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2602,
+              37.89255
+            ],
+            [
+              -121.25955,
+              37.89255
+            ],
+            [
+              -121.25955,
+              37.893
+            ],
+            [
+              -121.2602,
+              37.893
+            ],
+            [
+              -121.2602,
+              37.89255
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Stockton CA",
+        "type": "Manufacturing Plant (Foodservice; co-located warehouse)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.261,
+              37.893
+            ],
+            [
+              -121.25985,
+              37.893
+            ],
+            [
+              -121.25985,
+              37.8947
+            ],
+            [
+              -121.261,
+              37.8947
+            ],
+            [
+              -121.261,
+              37.893
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Stockton CA",
+        "type": "Manufacturing Plant (Foodservice; co-located warehouse)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2611,
+              37.893
+            ],
+            [
+              -121.26005,
+              37.893
+            ],
+            [
+              -121.26005,
+              37.8948
+            ],
+            [
+              -121.2611,
+              37.8948
+            ],
+            [
+              -121.2611,
+              37.893
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Stockton CA",
+        "type": "Manufacturing Plant (Foodservice; co-located warehouse)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.4552,
+              44.7085
+            ],
+            [
+              -73.449,
+              44.7085
+            ],
+            [
+              -73.449,
+              44.7137
+            ],
+            [
+              -73.4552,
+              44.7137
+            ],
+            [
+              -73.4552,
+              44.7085
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Plattsburgh NY",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 39,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.4505,
+              44.7108
+            ],
+            [
+              -73.4497,
+              44.7108
+            ],
+            [
+              -73.4497,
+              44.7113
+            ],
+            [
+              -73.4505,
+              44.7113
+            ],
+            [
+              -73.4505,
+              44.7108
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Plattsburgh NY",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.4543,
+              44.7111
+            ],
+            [
+              -73.453,
+              44.7111
+            ],
+            [
+              -73.453,
+              44.7123
+            ],
+            [
+              -73.4543,
+              44.7123
+            ],
+            [
+              -73.4543,
+              44.7111
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Plattsburgh NY",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.4504,
+              44.7119
+            ],
+            [
+              -73.4493,
+              44.7119
+            ],
+            [
+              -73.4493,
+              44.7128
+            ],
+            [
+              -73.4504,
+              44.7128
+            ],
+            [
+              -73.4504,
+              44.7119
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Plattsburgh NY",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.4539,
+              44.7113
+            ],
+            [
+              -73.4529,
+              44.7113
+            ],
+            [
+              -73.4529,
+              44.7122
+            ],
+            [
+              -73.4539,
+              44.7122
+            ],
+            [
+              -73.4539,
+              44.7113
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "pactiv-evergreen",
+        "name": "Pactiv Evergreen - Plattsburgh NY",
+        "type": "Manufacturing Plant (Food Merchandising)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    }
+  ]
+}

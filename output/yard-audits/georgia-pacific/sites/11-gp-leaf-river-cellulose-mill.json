@@ -1,0 +1,52 @@
+{
+  "name": "GP Leaf River Cellulose Mill - New Augusta MS",
+  "type": "Cellulose/Pulp Mill",
+  "coords": { "lat": 31.2432, "lng": -89.0455 },
+  "geofences": {
+    "perimeter": { "south": 31.2360, "west": -89.0512, "north": 31.2505, "east": -89.0388 },
+    "truckGate": { "south": 31.2434, "west": -89.0478, "north": 31.2444, "east": -89.0466 },
+    "dropYards": [
+      { "south": 31.2386, "west": -89.0470, "north": 31.2402, "east": -89.0451 }
+    ],
+    "dockAprons": [
+      { "south": 31.2388, "west": -89.0467, "north": 31.2399, "east": -89.0450 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 9,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 12,
+    "siteAreaAcres": 285.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@31.2432,-89.0455,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "dockDoors", "entryLanes", "exitLanes", "connectivityIssue"],
+  "fieldNotes": {
+    "location": "Geocoded roster point (31.2189,-89.0521) was a rural residential property ~2.7 km south of the mill; mill core relocated via satellite + web research to ~31.2432,-89.0455.",
+    "truckGate": "Mill is fully enclosed by chain-link perimeter fencing (clearly visible in Street View along the west boundary road). Main controlled access road enters the fenced property from the intersection near the admin/control building at ~31.2438,-89.0473.",
+    "guardShack": "No distinct standalone guard booth observed at the truck lane; the green admin/control building sits at the entry and serves the access-control function. Treated as remote/admin-managed gate.",
+    "scale": "Pulp mills of this type require a truck scale for chip/log van weigh-in; a scale is highly likely in the woodyard but not pinpointed in imagery - flagged low-confidence.",
+    "dockDoors": "Finished-goods warehouse south face shows ~6-9 trailers backed in plus additional doors; counted band 10-25, medium confidence.",
+    "shipRcvSeparate": "Receiving (woodchip/log yard and chemical tank farm) is physically separate from finished-cellulose shipping at the warehouse - distinct clusters on the site.",
+    "multipleFacilities": "Campus: pulp processing core, woodchip storage yard, chemical tank farm, finished-goods warehouse, and wastewater treatment ponds are distinct building/area clusters.",
+    "railServed": "Multiple rail spurs run through the site alongside the warehouse and woodyard; rail cars visible.",
+    "urbanRural": "Deep pine forest, far from any town; New Augusta is a very small community well south. Rural.",
+    "fastLaneOpportunity": "Wide paved entry apron at the gate with ample unused width to add a bypass lane."
+  },
+  "method": "deep-audit"
+}

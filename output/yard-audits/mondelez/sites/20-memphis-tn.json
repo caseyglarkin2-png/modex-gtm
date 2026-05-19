@@ -1,0 +1,50 @@
+{
+  "name": "Nabisco Memphis Sales Distribution Center - Memphis TN",
+  "type": "Distribution center / sales warehouse",
+  "coords": { "lat": 35.0184, "lng": -89.8695 },
+  "geofences": {
+    "perimeter": { "south": 35.0173, "west": -89.8712, "north": 35.0196, "east": -89.8678 },
+    "truckGate": { "south": 35.0182, "west": -89.8692, "north": 35.0187, "east": -89.8686 },
+    "dropYards": [
+      { "south": 35.0186, "west": -89.8708, "north": 35.0193, "east": -89.8682 }
+    ],
+    "dockAprons": [
+      { "south": 35.0184, "west": -89.8710, "north": 35.0190, "east": -89.8680 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 9,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 7.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.0184,-89.8695,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "railServed"],
+  "fieldNotes": {
+    "location": "Roster coords (35.1175,-89.9711) were a downtown-Memphis centroid ~16 km NW of the real site. Resolved to 5812 Distribution Dr, Memphis TN 38141 via web research; Shelby County tax-assessor records confirm the 5812 parcel is owned by MONDELEZ GLOBAL LLC. Locked center 35.0184,-89.8695 in the SE Memphis (Lamar/Getwell) industrial corridor.",
+    "facilityType": "Genuine freight facility - a single-story Nabisco/Mondelez sales-distribution warehouse, not an office. Freight relevance HIGH.",
+    "truckGate": "Property is fully chain-link fenced. Street View shows a gate opening at the office-front entrance off Distribution Dr; no manned guard booth is visible at the gate - classified truckGate true, guardShack false, remoteGs true (kiosk / call-box check-in implied). guardShack/remoteGs flagged uncertain since a small booth could be obscured.",
+    "docks": "Long dock bank fronting Distribution Dr on the north building face; Street View shows a continuous run of dock doors with trailers/pallets staged. Counted ~22 doors -> band 10-25.",
+    "dropArea": "A row of trailers and several tractors parked on the north apron / yard; capacity ~25 -> band 10-25. dropYard true.",
+    "railServed": "A rail line runs E-W immediately along the SOUTH edge of the building, but it reads as a through-line with no spur or rail dock into the property - classified false, flagged uncertain.",
+    "drivewayShort": "Short entrance drive from Distribution Dr into the yard - only 1-2 truck depth before the apron.",
+    "urbanRural": "Dense SE Memphis industrial park, surrounded by warehouses and metro fabric - Urban."
+  },
+  "method": "deep-audit"
+}

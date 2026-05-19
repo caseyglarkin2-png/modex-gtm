@@ -1,0 +1,50 @@
+{
+  "name": "CJ Logistics - Dallas TX (Regal Row)",
+  "type": "Distribution Center",
+  "coords": { "lat": 32.8130, "lng": -96.9013 },
+  "geofences": {
+    "perimeter": { "south": 32.8123, "west": -96.9027, "north": 32.8137, "east": -96.8999 },
+    "truckGate": { "south": 32.8132, "west": -96.9003, "north": 32.8136, "east": -96.8999 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 32.8131, "west": -96.9026, "north": 32.8135, "east": -96.9000 },
+      { "south": 32.8123, "west": -96.9026, "north": 32.8126, "east": -96.9000 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 15,
+    "trailerParkingCapacity": 20,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 10.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.8130,-96.9013,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "10-25",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes", "dropArea"],
+  "fieldNotes": {
+    "location": "Confirmed 151 Regal Row, Dallas TX 75247 - Prologis Stemmons Industrial Center Building 11, a 217,290 sq ft 1974-era Class B multi-tenant warehouse. CJ Logistics USA Corp occupies a suite (151 Regal Row Suite 112) per Panjiva buyer report.",
+    "truckGate": "Open multi-tenant industrial park - no perimeter fence, no barrier arm, no checkpoint at any driveway. Truck courts on the north and south faces are accessed via open driveways directly off Regal Row. 2025 Street View shows fully open access with trucks parked along the dock court.",
+    "guardShack": "No guard booth anywhere on the property.",
+    "shipRcvSeparate": "True - this is a cross-dock building with dock banks on BOTH the north face and the south face (separate dock courts).",
+    "dockDoors": "Dock doors on both the north and south faces; estimated ~60 total across both banks - low-confidence overhead count for an older multi-tenant building.",
+    "dropYard": "No dedicated marked drop yard; a modest number of trailers park along the open dock courts. dropArea band 10-25 reflects trailers backed in / parked, but dropYard flag is false (no dedicated trailer-storage lot).",
+    "drivewayShort": "Short open driveways from Regal Row into the dock courts - minimal stacking depth before docks.",
+    "urbanRural": "Dallas Medical District / Stemmons industrial corridor - dense urban, minutes from downtown and Love Field.",
+    "railServed": "No rail spur into the property (an old rail line runs nearby but not into this parcel)."
+  },
+  "method": "deep-audit"
+}

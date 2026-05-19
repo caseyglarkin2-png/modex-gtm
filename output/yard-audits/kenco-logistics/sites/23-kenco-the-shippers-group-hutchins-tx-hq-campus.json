@@ -1,0 +1,51 @@
+{
+  "name": "Kenco / The Shippers Group - Hutchins TX (HQ campus)",
+  "type": "Distribution Center / 3PL Warehouse",
+  "coords": { "lat": 32.62620, "lng": -96.71600 },
+  "geofences": {
+    "perimeter": { "south": 32.62400, "west": -96.71790, "north": 32.62810, "east": -96.71400 },
+    "truckGate": { "south": 32.62600, "west": -96.71570, "north": 32.62650, "east": -96.71490 },
+    "dropYards": [
+      { "south": 32.62500, "west": -96.71560, "north": 32.62790, "east": -96.71440 }
+    ],
+    "dockAprons": [
+      { "south": 32.62480, "west": -96.71600, "north": 32.62790, "east": -96.71520 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 89,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 39.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.62620,-96.71600,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Fully fenced/secured yard (corroborated by The Shippers Group's own facility page describing a 'secured yard'). 2026-02 Street View shows a chain-link perimeter all the way around the dock/yard area with a sliding gate across the SE truck entrance driveway.",
+    "guardShack": "No clear dedicated 1-3-car guard booth. There IS a long metal building beside the entrance, but it reads as an office/annex/maintenance building rather than a gatehouse. With a controlled gate but no obvious booth, classified remoteGs (kiosk / app / call-box check-in likely).",
+    "remoteGs": "True because there is a truck gate but no identifiable guard shack.",
+    "dockDoors": "The Shippers Group facility page states 89 dock doors plus 5 rail doors; Street View / satellite confirm a long dock bank on the east face with trailers backed in. Band 50+.",
+    "dropArea": "Drop / trailer parking along the east and NE yard holds 25-50 unhitched trailers within the secured yard.",
+    "railServed": "TRUE - facility page states served by Union Pacific Railroad with 5 rail doors; a rail line runs along the NW edge of the property with a spur into the site.",
+    "multipleFacilities": "Counted the main 560k SF warehouse plus the adjacent long metal annex/office building as 2 buildings, but this is a single facility/parcel, not a multi-cluster campus - multipleFacilities false.",
+    "urbanRural": "Hutchins is an edge-of-metro DFW industrial-park setting south of Dallas off I-45, surrounded by farmland and scattered warehouses; classified Rural per the small-town-industrial tie-breaker.",
+    "facts": "1015 W Wintergreen Rd / WG-2: 560,000 SF, built 2018, 109,000 SF cooler, multi-client food-grade BRC-certified. Former TSG corporate HQ; The Shippers Group acquired by Kenco Jan 2024."
+  },
+  "method": "deep-audit"
+}

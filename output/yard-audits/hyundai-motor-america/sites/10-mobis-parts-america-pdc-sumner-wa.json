@@ -1,0 +1,51 @@
+{
+  "name": "Mobis Parts America PDC - Sumner WA",
+  "type": "Parts Distribution Center",
+  "coords": { "lat": 47.23440, "lng": -122.24260 },
+  "geofences": {
+    "perimeter": { "south": 47.23300, "west": -122.24430, "north": 47.23560, "east": -122.24130 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 47.23360, "west": -122.24430, "north": 47.23500, "east": -122.24380 }
+    ],
+    "dockAprons": [
+      { "south": 47.23490, "west": -122.24370, "north": 47.23545, "east": -122.24150 },
+      { "south": 47.23330, "west": -122.24370, "north": 47.23390, "east": -122.24150 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 28,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 16.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@47.23440,-122.24260,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "10-25",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Open multi-tenant distribution building (the Cascade Building, Sumner Corporate Park). North dock court fronts 24th St E directly via open curb cuts with only a landscape strip; no barrier, fence, or checkpoint. South court connects to the open park road network. Confirmed in z19 satellite and Mar-2025 Street View.",
+    "guardShack": "No booth structure at any court entrance.",
+    "shipRcvSeparate": "Cross-dock building with two distinct dock banks on opposite (north and south) faces, both holding backed-in trailers.",
+    "backupSensitive": "North dock doors face directly onto 24th St E across only a narrow landscape strip; trucks back in from the street-side apron with minimal stacking depth, so a queue would spill toward the road.",
+    "drivewayShort": "Shallow street-side dock apron on the north face; only 1-2 trucks of approach depth before docking.",
+    "dropYard": "Drop trailers (no tractors) parked along the building's west side and within the dock courts.",
+    "dockDoors": "~70 doors combined across the north and south faces of the Cascade Building (band 50+); multi-tenant building (Mobis occupies ~181,000 of 385,468 SF) so Mobis-allocated share uncertain.",
+    "dropArea": "Drop trailers along the west strip and courts; estimate 10-25 band."
+  },
+  "method": "deep-audit"
+}

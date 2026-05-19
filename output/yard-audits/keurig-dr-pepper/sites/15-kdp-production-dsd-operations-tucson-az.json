@@ -1,0 +1,52 @@
+{
+  "name": "KDP Production / DSD Operations - Tucson AZ",
+  "type": "Manufacturing & Distribution - Beverage/DSD",
+  "coords": { "lat": 32.210800, "lng": -110.951400 },
+  "geofences": {
+    "perimeter": { "south": 32.209800, "west": -110.952500, "north": 32.212000, "east": -110.950500 },
+    "truckGate": { "south": 32.211500, "west": -110.951400, "north": 32.211900, "east": -110.951000 },
+    "dropYards": [
+      { "south": 32.210000, "west": -110.952500, "north": 32.211000, "east": -110.951900 }
+    ],
+    "dockAprons": [
+      { "south": 32.210300, "west": -110.951600, "north": 32.211400, "east": -110.951000 }
+    ],
+    "staging": { "south": 32.210800, "west": -110.951700, "north": 32.211700, "east": -110.951000 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16, "trailersVisible": 14, "trailerParkingCapacity": 25,
+    "truckGateCount": 2, "buildingCount": 5, "siteAreaAcres": 7.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.210800,-110.951400,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "remoteGs", "guardShack", "dockDoorCount", "trailersVisible", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster gave 3401 E Columbia St (32.1727/-110.9171) - that point is a different industrial area ~3 km SE and not the facility. Web research confirms the actual KDP/Kalil site: KDP acquired Kalil Bottling Co.'s Tucson real estate (May/2024 announcement, deal closed Q3 2024) for $8.55M - seven buildings totaling 161,835 sq ft on 7.71 acres at 931 S Highland Ave and 1201-1262 E 19th Street, Tucson AZ 85719 (Real Estate Daily News; Waze lists Kalil Bottling at 931 S Highland Ave). Locked center 32.2108/-110.9514.",
+    "truckGate": "The whole complex is enclosed by chain-link perimeter fencing with gated openings off E 19th St / S Highland Ave. This is a controlled fenced perimeter (counts as a truck gate). However no barrier-arm across a single truck lane was clearly resolved in imagery - flagged uncertain.",
+    "guardShack": "No guard booth structure observed at any gate opening - the fenced openings appear to be unstaffed.",
+    "remoteGs": "True - there is a controlled fenced/gated perimeter but no guard shack, implying badge/keypad/remote check-in. Flagged uncertain.",
+    "dockDoors": "10-25 band. Dock doors visible on the production/warehouse building faces; ~16 estimated. Older compact plant - exact count approximate, flagged.",
+    "dropArea": "10-25 band. Trailers staged in the central yard plus pallet/crate storage; ~14 trailers visible.",
+    "dropYard": "A dedicated trailer/pallet staging yard exists within the fenced complex (SW area also holds DSD fleet vehicles).",
+    "multipleFacilities": "True - the site is a multi-building campus: per the real-estate record it comprises seven buildings (production plant, warehouse, fleet/DSD operations buildings) on one contiguous fenced parcel.",
+    "backupSensitive": "Tight older-urban site - compact yard, short driveways, and a chain-link gate close to E 19th St; a truck queue would have little internal stacking room and could spill onto the street.",
+    "drivewayShort": "Compact plant - gate-to-dock approach holds only 1-2 trucks.",
+    "shipRcvSeparate": "Docks are not on clearly separate ship vs receive banks - single compact dock area.",
+    "urbanRural": "Site is inside Tucson's dense south-side industrial district, immediately adjacent to Interstate 10. Urban.",
+    "railServed": "No rail spur enters the parcel (a rail corridor runs nearby through the district but not into this site).",
+    "OVERALL": "Confidence MEDIUM: facility positively re-located via the KDP-Kalil real-estate transaction record, but the roster address was wrong, the site is an older compact multi-building complex that is harder to read from overhead, and gate-detail (barrier arm vs open fenced gate, lane counts) could not be fully resolved."
+  },
+  "method": "deep-audit"
+}

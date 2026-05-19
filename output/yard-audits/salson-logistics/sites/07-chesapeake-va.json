@@ -1,0 +1,47 @@
+{
+  "name": "SalSon Logistics - Chesapeake VA (Norfolk)",
+  "type": "Drayage Terminal / Container & Trailer Yard",
+  "coords": { "lat": 36.770500, "lng": -76.376100 },
+  "geofences": {
+    "perimeter": { "south": 36.768900, "west": -76.377600, "north": 36.772400, "east": -76.374000 },
+    "truckGate": { "south": 36.772050, "west": -76.375700, "north": 36.772350, "east": -76.375300 },
+    "dropYards": [
+      { "south": 36.769200, "west": -76.377100, "north": 36.771400, "east": -76.374600 }
+    ],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 400,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 16.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.770500,-76.376100,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "NONE", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "entryLanes", "exitLanes", "buildingCount"],
+  "fieldNotes": {
+    "truckGate": "3832 S Military Hwy is a multi-tenant industrial address shared by several trucking/logistics firms (M&J Transport, Sheridan Logistics, CDS Trucking, SalSon-Norfolk). The complex is accessed by an open dirt/gravel driveway with no barrier arm or gate visible in 2026-04 Street View — entrance is uncontrolled at the road, so truckGate is false.",
+    "guardShack": "No guard booth visible. The 3832 address marker is just a wooden sign with a bank of mailboxes at the open driveway entrance.",
+    "dockDoors": "No dock-door warehouse on the SalSon portion — the site is an open container/trailer/chassis storage yard with only small office/support structures.",
+    "dropArea": "Sprawling unpaved gravel yard with rows of hundreds of trailers and intermodal containers; clearly 50+.",
+    "multipleFacilities": "Multi-tenant complex — several distinct yards and small buildings under the shared 3832 S Military Hwy address; SalSon occupies one portion.",
+    "siteAreaAcres": "Perimeter box covers the full multi-tenant complex (~16 acres); SalSon's tenant footprint is a subset of that.",
+    "confidence": "Medium — SalSon's exact sub-parcel within the multi-tenant 3832 S Military Hwy complex could not be isolated; the audit characterizes the whole shared container/trailer yard."
+  },
+  "method": "deep-audit"
+}

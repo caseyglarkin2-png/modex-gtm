@@ -1,0 +1,47 @@
+{
+  "name": "GXO Logistics Distribution Center - Houston TX (West Greens)",
+  "type": "Distribution Center",
+  "coords": { "lat": 29.94470, "lng": -95.49050 },
+  "geofences": {
+    "perimeter": { "south": 29.94230, "west": -95.49250, "north": 29.94680, "east": -95.48830 },
+    "truckGate": { "south": 29.94380, "west": -95.49050, "north": 29.94420, "east": -95.48990 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 29.94310, "west": -95.49040, "north": 29.94640, "east": -95.48870 },
+      { "south": 29.94250, "west": -95.49210, "north": 29.94440, "east": -95.49080 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90, "trailersVisible": 8, "trailerParkingCapacity": 25,
+    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 50.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.94470,-95.49050,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "0-10",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes", "dropArea"],
+  "fieldNotes": {
+    "site": "GXO Logistics warehouse at 4800 W Greens Rd, NW Houston. Pin (ROOFTOP geocode) lands on a very large bulk-distribution warehouse oriented NW-SE; address confirmed via warehouse directories (Evopra, Racklify, AWCO). Building set back from W Greens Rd behind a fenced lawn.",
+    "truckGate": "FALSE — the property has a perimeter fence (black ornamental metal along the W Greens Rd frontage, chain-link along side property lines), but no guard booth and no barrier arm/sliding gate across any truck lane was found. The truck courts on the NE and SW building faces are entered via open driveways. The frontage fence is a property-line/decorative fence around the office and lawn, not a controlled truck checkpoint.",
+    "guardShack": "FALSE — no booth structure observed at any entrance in satellite or Street View.",
+    "dockDoors": "50+ — very large warehouse with continuous dock-door banks on the NE long face (main truck court) and the SW face; ~90 doors estimated, low confidence on exact count.",
+    "dropArea": "0-10 — the NE truck court holds mostly staged industrial materials (pipe/conduit bundles) rather than parked trailers; only a handful of trailers seen. No dedicated trailer-storage lot.",
+    "dropYard": "FALSE — no dedicated trailer-storage yard; the NE yard is a working dock apron with material staging.",
+    "shipRcvSeparate": "Dock banks on opposite (NE and SW) building faces support physically separate shipping/receiving.",
+    "postGateStaging": "Wide internal truck court on the NE side provides ample paved holding space inside the property.",
+    "fastLaneOpportunity": "Wide open driveways and generous paved aprons leave physical room to add a bypass lane if a gate were installed.",
+    "confidence": "Medium — building positively located but no Street View coverage of the interior truck courts; dock-door and trailer counts are honest overhead estimates. The gate/guard-shack call (none) is confident from satellite."
+  },
+  "method": "deep-audit"
+}

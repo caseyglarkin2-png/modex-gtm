@@ -1,0 +1,344 @@
+{
+  "account": "Campbell's",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 21,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Campbell's Soup - Maxton NC",
+      "city": "Maxton",
+      "state": "NC",
+      "type": "Manufacturing - thermal/aseptic soup",
+      "address": "2120 NC Highway 71 N, Maxton, NC 28364",
+      "lat": 34.771797,
+      "lng": -79.325047,
+      "source": "Dossier (named: $150M aseptic soup expansion); address from Waze/Panjiva/Yellowpages listings",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 5524
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Campbell's Soup - Napoleon OH",
+      "city": "Napoleon",
+      "state": "OH",
+      "type": "Manufacturing - soup/broth/V8 juice",
+      "address": "12773 State Route 110, Napoleon, OH 43545",
+      "lat": 41.399251,
+      "lng": -84.102768,
+      "source": "Dossier (named: soup/broth); address from Waze listing; V8 production confirmed by Campbell's newsroom",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 5350
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Campbell's - Paris TX",
+      "city": "Paris",
+      "state": "TX",
+      "type": "Manufacturing - sauces (flagship sauce facility; soup production ceased July 2024)",
+      "address": "500 NW Loop 286, Paris, TX 75460",
+      "lat": 33.689773,
+      "lng": -95.560415,
+      "source": "Dossier (named); Food Business News - converted to flagship sauce plant; address from TruckMap/Yelp",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 1800
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Snyder's of Hanover - Hanover PA",
+      "city": "Hanover",
+      "state": "PA",
+      "type": "Manufacturing - pretzels/snacks (kettle chip lines added 2024)",
+      "address": "1250 York Street, Hanover, PA 17331",
+      "lat": 39.804032,
+      "lng": -76.952609,
+      "source": "Dossier (named: Snyder's pretzel/snack); $72M kettle chip investment per Food Dive; address from Indeed listing",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1155
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Pepperidge Farm - Willard OH",
+      "city": "Willard",
+      "state": "OH",
+      "type": "Manufacturing - bakery (primary Goldfish cracker plant)",
+      "address": "601 Tegtmeyer Road, Willard, OH 44890",
+      "lat": 41.053111,
+      "lng": -82.726291,
+      "source": "Encyclopedia.com / Food Business News - primary Goldfish bakery, $40M 2019 investment",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 6
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Pepperidge Farm - Richmond UT",
+      "city": "Richmond",
+      "state": "UT",
+      "type": "Manufacturing - bakery (Goldfish crackers, +50% capacity 2024)",
+      "address": "350 South 200 West, Richmond, UT 84333",
+      "lat": 41.915383,
+      "lng": -111.815136,
+      "source": "Dossier (named: Pepperidge Farm UT); Food Dive - Goldfish +50% and 80 new jobs",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 53
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Pepperidge Farm - Denver PA",
+      "city": "Denver",
+      "state": "PA",
+      "type": "Manufacturing - bakery (baked goods and cookies)",
+      "address": "1 Pepperidge Farm Drive, Denver, PA 17517",
+      "lat": 40.222873,
+      "lng": -76.085963,
+      "source": "Encyclopedia.com - 611,000 sq ft Denver PA bakery (opened 1991)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 4693
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Pepperidge Farm - Bloomfield CT",
+      "city": "Bloomfield",
+      "state": "CT",
+      "type": "Manufacturing - bakery (bread, rolls, stuffing, croutons)",
+      "address": "1414 Blue Hills Avenue, Bloomfield, CT 06002",
+      "lat": 41.868955,
+      "lng": -72.718849,
+      "source": "Dossier (named: Pepperidge Farm CT); Encyclopedia.com - 265,000 sq ft bakery; address from Campbell's location listing",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 2020
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Pepperidge Farm - Downingtown PA",
+      "city": "Downingtown",
+      "state": "PA",
+      "type": "Manufacturing - bakery",
+      "address": "300 Pepperidge Farm Lane, Downingtown, PA 19335",
+      "lat": 40.004013,
+      "lng": -75.686531,
+      "source": "Food Processing / Supply Chain Dive - Campbell's current plant list (Downingtown PA)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 89
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Pepperidge Farm - Lakeland FL",
+      "city": "Lakeland",
+      "state": "FL",
+      "type": "Manufacturing - bakery and crackers",
+      "address": "2222 Interstate Drive, Lakeland, FL 33805",
+      "lat": 28.074353,
+      "lng": -81.981258,
+      "source": "Reliable Plant / Lakeland Chamber - Pepperidge Farm bakery serving Southeastern US",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 5684
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Lance - Charlotte NC",
+      "city": "Charlotte",
+      "state": "NC",
+      "type": "Manufacturing - crackers/sandwich snacks",
+      "address": "8600 South Boulevard, Charlotte, NC 28273",
+      "lat": 35.121741,
+      "lng": -80.884208,
+      "source": "Grokipedia / Campbell's newsroom - Lance crackers + Cape Cod chip production",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 3415
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Lance - Burlington IA",
+      "city": "Burlington",
+      "state": "IA",
+      "type": "Manufacturing - snacks/crackers",
+      "address": "3300 Roosevelt Avenue, Burlington, IA 52601",
+      "lat": 40.832609,
+      "lng": -91.14054,
+      "source": "Food Processing - Lance facility list (Burlington, IA)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 67
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Kettle Brand - Salem OR",
+      "city": "Salem",
+      "state": "OR",
+      "type": "Manufacturing - kettle potato chips",
+      "address": "3125 Kettle Court SE, Salem, OR 97301",
+      "lat": 44.925622,
+      "lng": -122.998298,
+      "source": "Oregon Encyclopedia / Wikipedia - Kettle Foods Salem OR manufacturing",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 2108
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Snyder's-Lance - Beloit WI",
+      "city": "Beloit",
+      "state": "WI",
+      "type": "Manufacturing - snacks/potato chips",
+      "address": "1101 Willowbrook Road, Beloit, WI 53511",
+      "lat": 42.510708,
+      "lng": -88.995032,
+      "source": "Campbell's newsroom - Cape Cod/Kettle chip consolidation site; Food Processing plant list",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 6
+      }
+    },
+    {
+      "idx": 15,
+      "name": "Campbell's - Franklin WI",
+      "city": "Franklin",
+      "state": "WI",
+      "type": "Manufacturing - tortilla chips (Late July; capacity expanded 2024)",
+      "address": "9999 South 60th Street, Franklin, WI 53132",
+      "lat": 42.863254,
+      "lng": -87.991311,
+      "source": "Dossier (named indirectly via snacks); Food Dive - expanded tortilla chip capacity",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 41
+      }
+    },
+    {
+      "idx": 16,
+      "name": "Campbell's - Milwaukee WI",
+      "city": "Milwaukee",
+      "state": "WI",
+      "type": "Manufacturing - snacks/food production",
+      "address": "445 South 32nd Street, Milwaukee, WI 53215",
+      "lat": 43.023446,
+      "lng": -87.953873,
+      "source": "Wikipedia / Food Processing - Campbell's current plant list (Milwaukee WI)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 17,
+      "name": "Pace / Prego - Dixon CA",
+      "city": "Dixon",
+      "state": "CA",
+      "type": "Manufacturing - sauces/food production",
+      "address": "1606 Pedrick Road, Dixon, CA 95620",
+      "lat": 38.47074,
+      "lng": -121.803936,
+      "source": "Wikipedia / Food Processing - Campbell's current plant list (Dixon CA)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 5
+      }
+    },
+    {
+      "idx": 18,
+      "name": "Campbell's - Stockton CA",
+      "city": "Stockton",
+      "state": "CA",
+      "type": "Manufacturing - food production",
+      "address": "1330 W Fremont Street, Stockton, CA 95203",
+      "lat": 37.954263,
+      "lng": -121.309958,
+      "source": "Food Processing / Supply Chain Dive - Campbell's current plant list (Stockton CA)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 33
+      }
+    },
+    {
+      "idx": 19,
+      "name": "Campbell's - Goodyear AZ",
+      "city": "Goodyear",
+      "state": "AZ",
+      "type": "Manufacturing - snacks/food production",
+      "address": "13301 W Van Buren Street, Goodyear, AZ 85338",
+      "lat": 33.44986,
+      "lng": -112.34641,
+      "source": "Food Processing / Supply Chain Dive - Campbell's current plant list (Goodyear AZ)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 4
+      }
+    },
+    {
+      "idx": 20,
+      "name": "Sovos / Rao's - Austin TX",
+      "city": "Austin",
+      "state": "TX",
+      "type": "Manufacturing - premium pasta sauces (Rao's)",
+      "address": "Austin, TX",
+      "lat": 30.267153,
+      "lng": -97.743061,
+      "source": "Sovos Brands profiles - Rao's manufacturing operations in Austin, TX (street address not pinned down)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 4614
+      }
+    },
+    {
+      "idx": 21,
+      "name": "Campbell's Distribution Center - Findlay OH",
+      "city": "Findlay",
+      "state": "OH",
+      "type": "Distribution center (740,000 sq ft)",
+      "address": "Findlay, OH 45840",
+      "lat": 41.039128,
+      "lng": -83.650231,
+      "source": "Food Logistics - $44M, 740,000 sq ft Campbell's distribution center in Findlay OH (street address not pinned down)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 589
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

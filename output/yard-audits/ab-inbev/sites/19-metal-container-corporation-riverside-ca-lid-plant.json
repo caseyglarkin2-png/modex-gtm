@@ -1,0 +1,59 @@
+{
+  "name": "Metal Container Corporation - Riverside CA Lid Plant",
+  "type": "Lid Manufacturing Plant",
+  "coords": { "lat": 33.9480, "lng": -117.4500 },
+  "geofences": {
+    "perimeter": { "south": 33.94700, "west": -117.45120, "north": 33.94900, "east": -117.44880 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 0.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.9480,-117.4500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "_locationUncertainty": "The exact MCC Riverside Lid Plant building could not be positively identified. The roster supplied only city-level coordinates (33.9533, -117.3962, generic Riverside center) and no address. Web research resolved the address to 7155 Central Ave, Riverside, CA 92504 (Yelp, Yahoo Local, Manta, D&B, CommercialCafe; phone 951-354-0444). CommercialCafe describes it as a Class B industrial building, 83,914 SF, completed 1987, in the 'Airport neighborhood' of Riverside (near Riverside Municipal Airport), with ~200 employees per the listing. However, no precise latitude/longitude could be obtained from any source (Waze, EPA FRS/TRI, real-estate listings all lacked coordinates), and extensive satellite + Street View probing of the industrial districts around Riverside Municipal Airport could not isolate a single building confirmable as the MCC lid plant - the airport-adjacent industrial fabric is dense with similar multi-tenant and mid-size industrial buildings, none with confirmable MCC signage. Coordinates recorded here (33.9480, -117.4500) are a best-estimate point in the airport-NE industrial cluster; the perimeter box is a nominal placeholder and yardMetrics are zeroed. Recommend human review with Riverside County parcel/GIS data for 7155 Central Ave, or a direct facility contact, to confirm the building footprint.",
+    "urbanRural": "The facility is within the dense Riverside metro industrial fabric near Riverside Municipal Airport - classified Urban with reasonable confidence even though the exact building is unconfirmed."
+  },
+  "method": "deep-audit"
+}

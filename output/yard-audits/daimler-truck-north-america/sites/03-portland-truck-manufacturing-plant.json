@@ -1,0 +1,56 @@
+{
+  "name": "Portland Truck Manufacturing Plant - Portland OR",
+  "type": "Truck assembly plant (battery-electric)",
+  "coords": { "lat": 45.573869, "lng": -122.714444 },
+  "geofences": {
+    "perimeter": { "south": 45.571000, "west": -122.717200, "north": 45.575600, "east": -122.709500 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 45.573600, "west": -122.712200, "north": 45.574600, "east": -122.710300 }
+    ],
+    "dockAprons": [
+      { "south": 45.572400, "west": -122.716200, "north": 45.575000, "east": -122.713800 },
+      { "south": 45.574100, "west": -122.713600, "north": 45.575100, "east": -122.711200 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 0,
+    "buildingCount": 5,
+    "siteAreaAcres": 72.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@45.573869,-122.714444,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dropArea", "dockDoorCount", "scale"],
+  "fieldNotes": {
+    "location": "Roster coords (ROOFTOP, moved 188m) landed on the roof of the main Portland Truck Manufacturing Plant in the Swan Island Industrial Park. Confirmed via DTNA career-locations page and OPB/Oregon Business reporting - DTNA's Portland operation (Western Star X-Series, Freightliner eCascadia/eM2) at 6936 N Fathom Street.",
+    "truckGate": "Open industrial-park layout: the plant and DTNA's adjacent buildings front directly onto N Fathom Street / N Channel Avenue with no single controlled perimeter gate. Dock yards are open to the park roads. Some rail-side yards have chain-link fencing but no manned gate/barrier arm was identified - truckGate set false, flagged uncertain.",
+    "guardShack": "No guard booth identified in satellite or Street View.",
+    "dockDoors": "Trailers backed at docks across multiple building faces (W face of the main building and N face of the NE wing); estimate 25-50 doors, flagged uncertain.",
+    "dropArea": "Trailer staging present in lots and along dock faces but no single large dedicated drop yard; banded 10-25, flagged uncertain.",
+    "dropYard": "No dedicated standalone trailer-storage lot - trailers are staged in working dock yards.",
+    "railServed": "An active rail spur runs through the industrial park directly alongside the plant.",
+    "multipleFacilities": "DTNA's Portland operation spans several adjacent large buildings within the Swan Island park (main plant plus the SW and NE buildings).",
+    "backupSensitive": "Tight industrial-park geometry - dock aprons open directly onto narrow shared park streets with little stacking room; a truck queue would block the internal artery.",
+    "shipRcvSeparate": "Dock banks on different building faces / different buildings handle separate inbound and outbound flows.",
+    "drivewayShort": "Approaches from the park street to the dock faces are short (1-2 trucks).",
+    "urbanRural": "Swan Island is a dense industrial peninsula inside the Portland metro - Urban.",
+    "scale": "No truck scale identified - flagged uncertain."
+  },
+  "method": "deep-audit"
+}

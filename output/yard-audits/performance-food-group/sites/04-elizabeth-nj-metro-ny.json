@@ -1,0 +1,47 @@
+{
+  "name": "Performance Foodservice - Metro NY (Elizabeth NJ)",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 40.67085, "lng": -74.17055 },
+  "geofences": {
+    "perimeter": { "south": 40.66950, "west": -74.17220, "north": 40.67230, "east": -74.16830 },
+    "truckGate": { "south": 40.67120, "west": -74.17110, "north": 40.67170, "east": -74.17030 },
+    "dropYards": [
+      { "south": 40.67120, "west": -74.17000, "north": 40.67230, "east": -74.16830 }
+    ],
+    "dockAprons": [
+      { "south": 40.67100, "west": -74.17080, "north": 40.67180, "east": -74.16900 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45, "trailersVisible": 55, "trailerParkingCapacity": 90,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 20.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.67085,-74.17055,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Confirmed via Street View — the building carries the red 'PERFORMANCE foodservice' logo on its office front facing Ikea Drive. Located at 1 Ikea Drive, Elizabeth NJ, in the Elizabeth port-industrial district adjacent to IKEA, Floor & Decor and the Maher container terminals. Center ~40.67085,-74.17055.",
+    "truckGate": "Property is fully chain-link fenced along Ikea Drive (clearly visible in Street View). The truck yard and dock face are on the NE side; truck traffic enters through a fenced driveway. Gate hardware not individually resolved but the fenced single-driveway funnel supports a controlled entrance.",
+    "guardShack": "No standalone guard booth identified at the entrance.",
+    "remoteGs": "Inferred kiosk/call-box check-in (fenced gate, no shack); medium-low confidence.",
+    "dropArea": "Very large trailer drop yard on the NE/N side, packed with 50+ trailers; the yard adjoins the next industrial building's yard. dropArea 50+.",
+    "dockDoors": "Dock bank on the NE building face with many trailers backed in; ~40-50 doors estimated.",
+    "backupSensitive": "Dense urban port-industrial block — Ikea Drive is a busy two-lane artery; a queue at the gate has limited stacking space and could spill toward the IKEA/Floor & Decor intersection.",
+    "fastLaneOpportunity": "Tight urban site with limited unused paved width at the entrance; no clear room for an express lane.",
+    "urbanRural": "Dense Elizabeth NJ port-industrial fabric — Urban."
+  },
+  "method": "deep-audit"
+}

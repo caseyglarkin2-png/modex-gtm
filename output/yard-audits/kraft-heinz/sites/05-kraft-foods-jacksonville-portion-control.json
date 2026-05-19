@@ -1,0 +1,23 @@
+{
+  "name": "Kraft Foods - Jacksonville Portion Control",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "entryLanes", "exitLanes", "connectivityIssue"],
+  "fieldNotes": {
+    "streetview": "Street View shows the Kraft Heinz brick building set back behind trees with an open driveway from the public road - no gate or guard booth.",
+    "truckGate": "Open driveway approach; no checkpoint structure resolved.",
+    "urbanRural": "Single plant surrounded by dense woods on an edge-of-town parcel; judged Rural.",
+    "connectivityIssue": "Heavily wooded, isolated parcel - inferred possible weak coverage; medium confidence at best.",
+    "dockDoors": "Dock bank along the east face with trailers backed in."
+  }
+}

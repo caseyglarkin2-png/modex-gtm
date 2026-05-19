@@ -1,0 +1,52 @@
+{
+  "name": "John Deere Waterloo Works - Tractor Operations - Waterloo IA",
+  "type": "Assembly Plant",
+  "coords": { "lat": 42.5210, "lng": -92.2695 },
+  "geofences": {
+    "perimeter": { "south": 42.5095, "west": -92.2810, "north": 42.5300, "east": -92.2555 },
+    "truckGate": { "south": 42.5118, "west": -92.2615, "north": 42.5135, "east": -92.2595 },
+    "dropYards": [
+      { "south": 42.5180, "west": -92.2715, "north": 42.5230, "east": -92.2650 },
+      { "south": 42.5145, "west": -92.2665, "north": 42.5170, "east": -92.2615 }
+    ],
+    "dockAprons": [
+      { "south": 42.5195, "west": -92.2720, "north": 42.5240, "east": -92.2660 }
+    ],
+    "staging": { "south": 42.5108, "west": -92.2620, "north": 42.5128, "east": -92.2585 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45, "trailersVisible": 90, "trailerParkingCapacity": 200,
+    "truckGateCount": 2, "buildingCount": 6, "siteAreaAcres": 620.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.5210,-92.2695,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "multiStep", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "Confirmed flagship John Deere Waterloo Works Tractor Operations complex at 3500 E Donald St, Waterloo IA. Largest Deere assembly complex globally (7/8/9 Series tractors). Roster geometric-center coords (moved 2958m) landed on the building mass; locked center refined to 42.5210,-92.2695.",
+    "truckGate": "Inferred true with medium confidence. This is a Fortune-500 flagship assembly campus set far back from public roads behind long private internal drives; such plants are universally fenced and gate-controlled. Street View coverage stops at public rural roads (E Donald St / 41st St) and never reaches the actual truck gate, so the barrier arm could not be directly confirmed.",
+    "guardShack": "Inferred true with medium confidence. A staffed guard post is standard for a plant of this scale running public riding-tours; not directly confirmed in imagery as SV cannot reach the internal gate.",
+    "drivewayLong": "Internal private drives from the SE road junction to the docks are very long (>1 km of approach) — easily holds a 3+ truck queue.",
+    "dropArea": "Central yard between building wings holds 60-90+ trailers in organized rows in the z18 imagery; capacity 50+.",
+    "dropYard": "Dedicated multi-row trailer storage lots visible between building wings (z18 view at 42.521,-92.2695).",
+    "dockDoorCount": "Estimated 45 across multiple building faces from z18-z20 imagery; long building wings with trailers backed in on east and south faces. Approximate.",
+    "multipleFacilities": "Campus with 6+ distinct building masses plus an on-site tractor test loop (42.517,-92.266) and two retention ponds.",
+    "shipRcvSeparate": "Dock activity on physically separate building faces (north/east wings vs south wing staging) suggests separate ship/receive clusters; medium confidence.",
+    "fastLaneOpportunity": "Very wide paved aprons and multi-lane internal drives provide ample room for express/bypass lanes.",
+    "entryLanes": "Estimate; internal drives are wide multi-lane but exact gate lane count not visible.",
+    "scale": "No truck scale positively identified in imagery; left false, flagged uncertain.",
+    "urbanRural": "Complex is surrounded entirely by farmland on the rural east edge of Waterloo IA — Rural."
+  },
+  "method": "deep-audit"
+}

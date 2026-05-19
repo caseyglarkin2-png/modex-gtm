@@ -1,0 +1,52 @@
+{
+  "name": "Universal Intermodal Services - Dearborn Terminal - Dearborn MI",
+  "type": "Intermodal / Drayage Terminal (owned)",
+  "coords": { "lat": 42.321600, "lng": -83.154800 },
+  "geofences": {
+    "perimeter": { "south": 42.319500, "west": -83.157000, "north": 42.323500, "east": -83.152500 },
+    "truckGate": { "south": 42.321300, "west": -83.157100, "north": 42.321900, "east": -83.156500 },
+    "dropYards": [
+      { "south": 42.321800, "west": -83.155400, "north": 42.323400, "east": -83.152600 },
+      { "south": 42.319600, "west": -83.156200, "north": 42.321400, "east": -83.153000 }
+    ],
+    "dockAprons": [],
+    "staging": { "south": 42.321200, "west": -83.156600, "north": 42.322000, "east": -83.155600 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 300,
+    "trailerParkingCapacity": 450,
+    "truckGateCount": 2,
+    "buildingCount": 3,
+    "siteAreaAcres": 41.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.321600,-83.154800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "NONE", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "entryLanes", "exitLanes", "truckGateCount", "railServed"],
+  "fieldNotes": {
+    "facility": "Universal Intermodal Services drayage / intermodal terminal at 4440 Wyoming Ave (St), Dearborn MI — a 10-K named owned terminal property. Per Universal Intermodal's own description these are 'secure container yards coupled with maintenance and repair facilities offering container storage.' Confirmed via loadmatch.com directory and a Universal-branded sign visible at the yard entrance in 2025 Street View. The roster geocode landed on a small red-roofed office building on the west side of Wyoming Ave; the operational terminal yard is the large fenced container/chassis lot on the east side of Wyoming.",
+    "type": "This is an intermodal/drayage CONTAINER YARD, not a dock-door warehouse — it stores and stages ocean/domestic containers and chassis and contains a container maintenance & repair (M&R) building. dockDoors classified NONE accordingly.",
+    "truckGate": "The yard is fully fenced (chain-link along Wyoming Ave, confirmed in 2025 Street View) with wide controlled driveway openings / sliding gates and a Universal-branded sign at the entrance. Truck access is gated. Estimated ~2 gate openings along the Wyoming Ave frontage.",
+    "guardShack": "No standalone guard booth resolves at the gate openings in imagery or Street View. Container/drayage yards of this type typically run a gate-clerk kiosk / OCR check rather than a manned shack -> remoteGs true. Low confidence.",
+    "dropArea": "The yard is wall-to-wall container, chassis and trailer storage — hundreds of units parked across multiple gravel/paved lots -> 50+ band; the whole site is a drop yard.",
+    "multipleFacilities": "Multi-element terminal: a long maintenance/repair building, an office, and several distinct container/chassis storage sub-yards.",
+    "scale": "No truck scale clearly resolved; intermodal terminals sometimes have one but none confirmed here -> left false, flagged uncertain.",
+    "railServed": "An active rail line runs through the broader district to the south, but no rail spur is visible entering this drayage yard (drayage terminals move containers by truck to/from separate rail ramps) -> railServed false, flagged uncertain.",
+    "fastLaneOpportunity": "Very large open yard apron and wide gate openings leave ample room to add an express/bypass lane.",
+    "urbanRural": "Dense Dearborn/Detroit industrial fabric -> Urban.",
+    "siteAreaAcres": "~41 acres for the fenced Universal terminal parcel; the surrounding corridor holds other operators' yards and is excluded."
+  },
+  "method": "deep-audit"
+}

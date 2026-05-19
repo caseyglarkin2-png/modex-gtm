@@ -1,0 +1,53 @@
+{
+  "name": "Toyota Logistics Services Vehicle Distribution Center - Long Beach CA",
+  "type": "Vehicle Distribution Center (port processing)",
+  "coords": { "lat": 33.778, "lng": -118.2185 },
+  "geofences": {
+    "perimeter": { "south": 33.77330, "west": -118.22330, "north": 33.78230, "east": -118.21470 },
+    "truckGate": { "south": 33.78010, "west": -118.21950, "north": 33.78090, "east": -118.21850 },
+    "dropYards": [
+      { "south": 33.77700, "west": -118.22330, "north": 33.78200, "east": -118.21850 },
+      { "south": 33.77400, "west": -118.22000, "north": 33.77700, "east": -118.21650 }
+    ],
+    "dockAprons": [
+      { "south": 33.77480, "west": -118.21800, "north": 33.77620, "east": -118.21650 }
+    ],
+    "staging": { "south": 33.77620, "west": -118.21800, "north": 33.77780, "east": -118.21620 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 18,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 62.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.778,-118.2185,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "dockDoors", "entryLanes", "exitLanes", "truckGateCount", "scale"],
+  "fieldNotes": {
+    "facilityType": "Port of Long Beach vehicle processing & distribution center (TLS, ~180,000-200,000 vehicles/yr). Not a conventional dock warehouse — vehicles arrive by ro/ro ship at the Pier B wharf and by unit train on the rail spurs along the NE edge, are processed (accessory install, car wash, fuel) at the 155,000 sf processing building, and leave on auto-hauler trucks.",
+    "truckGate": "Whole property is inside a port-secure fenced perimeter (chain-link fence visible in Street View on every public-road edge; z20 sat shows a continuous fence line with marked lane crossings). Port of Long Beach maritime-security site (TWIC required, USCG oversight, random checks per construction-phase reporting) — controlled gated entry is certain.",
+    "guardShack": "Inferred true — TWIC-controlled maritime facilities have staffed gatehouses for vehicle ID/credential checks. A small gatehouse structure is consistent with the office cluster at the NW corner near the rail crossing, but a discrete guard booth could not be isolated in imagery; medium confidence.",
+    "dockDoors": "The processing building has a bank of dock-style doors along its NE face where auto-haulers and parts trailers load (a row of ~12-18 trailers is staged along that face in z18 imagery). Banded 10-25; this is a vehicle-processing site so 'dock doors' are atypical.",
+    "dropArea": "Vast — the entire site is effectively a vehicle marshalling yard; thousands of finished vehicles staged in striped lots. 'dropArea' as trailer stalls is less applicable, but auto-hauler/trailer drop capacity is large; banded 50+.",
+    "railServed": "Confirmed — multiple rail spurs run into the NE edge of the property; Street View shows tank/covered-hopper rail cars on the in-site track. TLS uses unit trains to distribute vehicles inland.",
+    "scale": "No truck scale identified; vehicle-processing ports typically do not weigh auto-haulers. Left false, flagged uncertain.",
+    "fastLaneOpportunity": "Wide paved aprons and multi-lane gate crossings at the rail-side entrance give ample room for an express/bypass lane.",
+    "siteAreaAcres": "Perimeter box ~62 acres covering the contiguous TLS fenced lots and processing buildings between Pico Ave / the rail corridor and the Pier B wharf.",
+    "truckGateCount": "At least one main rail-side gate plus a secondary lot access; estimated 2, flagged uncertain."
+  },
+  "method": "deep-audit"
+}

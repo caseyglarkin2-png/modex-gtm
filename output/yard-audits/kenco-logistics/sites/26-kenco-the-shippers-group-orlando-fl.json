@@ -1,0 +1,51 @@
+{
+  "name": "Kenco / The Shippers Group - Orlando FL",
+  "type": "Distribution Center / 3PL Warehouse",
+  "coords": { "lat": 28.43655, "lng": -81.41865 },
+  "geofences": {
+    "perimeter": { "south": 28.43505, "west": -81.42035, "north": 28.43815, "east": -81.41685 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 28.43560, "west": -81.41830, "north": 28.43690, "east": -81.41685 }
+    ],
+    "dockAprons": [
+      { "south": 28.43560, "west": -81.41870, "north": 28.43700, "east": -81.41805 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 44,
+    "trailersVisible": 18,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 11.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@28.43655,-81.41865,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["entryExitTogether", "entryExitSeparate", "dropYard", "dockDoors"],
+  "fieldNotes": {
+    "location": "Roster coords (28.3756,-81.3619) pointed to a residential subdivision and were wrong. The Shippers Group / Kenco Orlando is a ~58,000 SF dedicated suite (Suite 800) inside Building 600 at 2612 Consulate Drive, Infinity Park, Orlando FL 32819. Confirmed via The Shippers Group locations page and CRE listings (LoopNet APN 33-2329-9463-10-000). Locked center on the Building 600 footprint at 28.43655,-81.41865.",
+    "truckGate": "No barrier arm, sliding gate, or guard booth anywhere along Consulate Drive frontage or at the truck-court driveways. Street View (Jan 2026) shows open landscaped frontage and open truck-court drive aisles - classic open-access Class A speculative industrial park. truckGate=false.",
+    "guardShack": "No staffed booth visible. guardShack=false, remoteGs=false (no gate).",
+    "dockDoors": "Building 600 is a rear-load DC; z20 imagery shows a long bank of dock doors with trailers backed in along the building's truck-court face. Counted ~44 doors on the single building face; banded 25-50. The Shippers Group occupies only one suite, so its share is a subset, but the audited building's total is reported. Low-confidence on exact count.",
+    "dropArea": "Marked trailer-parking stalls in the shared truck court hold ~18 trailers in current imagery; ~10-25 band.",
+    "drivewayLong": "Truck court is a deep shared drive aisle between buildings - easily holds 3+ trucks queued.",
+    "entryExitTogether": "Truck court is open with multiple drive-aisle connections to Consulate Drive; entry/exit pattern not constrained to a single controlled point - left null/false as uncertain.",
+    "multipleFacilities": "Infinity Park is a multi-building park but each building is a separate parcel/address; the audited facility is one building, so multipleFacilities=false for this site.",
+    "urbanRural": "Within Orlando metro dense industrial fabric near John Young Pkwy / Beachline Expwy - Urban."
+  },
+  "method": "deep-audit"
+}

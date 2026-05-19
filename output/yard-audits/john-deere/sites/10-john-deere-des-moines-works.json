@@ -1,0 +1,54 @@
+{
+  "name": "John Deere Des Moines Works - Ankeny IA",
+  "type": "Assembly Plant",
+  "coords": { "lat": 41.720916, "lng": -93.62938 },
+  "geofences": {
+    "perimeter": { "south": 41.71250, "west": -93.63750, "north": 41.72850, "east": -93.62250 },
+    "truckGate": { "south": 41.72330, "west": -93.62450, "north": 41.72440, "east": -93.62280 },
+    "dropYards": [
+      { "south": 41.72280, "west": -93.62850, "north": 41.72500, "east": -93.62450 },
+      { "south": 41.71750, "west": -93.63050, "north": 41.72000, "east": -93.62550 }
+    ],
+    "dockAprons": [
+      { "south": 41.72280, "west": -93.62900, "north": 41.72420, "east": -93.62550 },
+      { "south": 41.71900, "west": -93.63500, "north": 41.72050, "east": -93.63200 }
+    ],
+    "staging": { "south": 41.71900, "west": -93.63100, "north": 41.72200, "east": -93.62650 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 3,
+    "buildingCount": 12,
+    "siteAreaAcres": 620.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.720916,-93.62938,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors", "entryLanes", "exitLanes", "entryExitSeparate", "scale", "truckGateCount"],
+  "fieldNotes": {
+    "truckGate": "Very large campus fully enclosed by a chain-link perimeter fence (confirmed on the west side in 2024 Street View) with a landscaped berm. Access is through controlled gates on the internal perimeter ring road off SW State St and other public roads; gate hardware itself is not reachable by Street View. A controlled truck gate is inferred from the fenced campus layout.",
+    "guardShack": "Set true: a fully fenced assembly campus of this scale (one of Deere's largest plants) is operated with staffed entry points; specific booth structures were not resolved in satellite imagery (medium confidence).",
+    "multipleFacilities": "~12 distinct building masses across the campus: multiple assembly halls, large warehouses, and finished-goods buildings.",
+    "dropYard": "Multiple trailer drop areas plus enormous finished-goods marshaling yards holding rows of green John Deere equipment (sprayers, tillage tools, cotton harvesters) staged for shipment.",
+    "dockDoors": "~45 truck dock positions estimated across multiple building faces; trailers seen backed in along north and west faces. Exact count not resolvable from overhead imagery.",
+    "shipRcvSeparate": "Distinct dock clusters on different building faces (north-face trailer banks vs west/central docks) indicate separated shipping and receiving.",
+    "siteAreaAcres": "~620 acres for the fenced campus footprint; surrounding land includes Deere-owned development parcels.",
+    "urbanRural": "Urban — campus sits inside the Des Moines metro fabric, ringed by Ankeny residential subdivisions and commercial development.",
+    "fastLaneOpportunity": "Vast paved aprons and wide internal ring roads leave abundant room for added or express truck lanes.",
+    "truckGateCount": "Estimated 3 controlled gates on the perimeter ring road; not all individually confirmed."
+  },
+  "method": "deep-audit"
+}

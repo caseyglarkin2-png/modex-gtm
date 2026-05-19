@@ -1,0 +1,47 @@
+{
+  "name": "Home Depot SDC - Baytown TX",
+  "type": "Stocking Distribution Center",
+  "coords": { "lat": 29.732166, "lng": -94.917884 },
+  "geofences": {
+    "perimeter": { "south": 29.72860, "west": -94.92115, "north": 29.73560, "east": -94.91460 },
+    "truckGate": { "south": 29.73130, "west": -94.91680, "north": 29.73220, "east": -94.91570 },
+    "dropYards": [
+      { "south": 29.72950, "west": -94.92030, "north": 29.73480, "east": -94.91720 },
+      { "south": 29.73000, "west": -94.91560, "north": 29.73500, "east": -94.91460 }
+    ],
+    "dockAprons": [
+      { "south": 29.72950, "west": -94.91990, "north": 29.73510, "east": -94.91760 },
+      { "south": 29.73010, "west": -94.91570, "north": 29.73520, "east": -94.91470 }
+    ],
+    "staging": { "south": 29.73120, "west": -94.91720, "north": 29.73250, "east": -94.91560 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130, "trailersVisible": 95, "trailerParkingCapacity": 130,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 53.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.732166,-94.917884,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Single internal access road off FM 1405 funnels truck traffic to a controlled property entrance at the SE of the building; perimeter fencing rings the truck yard.",
+    "guardShack": "No clearly resolvable staffed booth at the entrance in current imagery; treated as kiosk/app check-in (remoteGs true). Low-confidence call — modern HD DC, security typically gate-controlled.",
+    "dockDoors": "Loading docks line both long faces (NW and SE); 60+ doors per face, total well above 50.",
+    "dropArea": "Extensive paved trailer rows along the NW and SE drop yards, easily 80-130 trailer slots; large dedicated drop yard present.",
+    "shipRcvSeparate": "Two distinct dock banks on opposite building faces (NW and SE).",
+    "urbanRural": "Edge-of-town greenfield industrial park east of Baytown, surrounded by farmland — Rural per rubric.",
+    "fastLaneOpportunity": "Wide gate apron and generous internal paved width; room to add an express lane."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Glovis America Port Vehicle Processing - Newark/Elizabeth NJ",
+  "type": "Port / Vehicle Import Processing Center",
+  "coords": { "lat": 40.694000, "lng": -74.134000 },
+  "geofences": {
+    "perimeter": { "south": 40.688500, "west": -74.140500, "north": 40.701000, "east": -74.127000 },
+    "truckGate": { "south": 40.698200, "west": -74.138400, "north": 40.698900, "east": -74.137200 },
+    "dropYards": [
+      { "south": 40.689000, "west": -74.139500, "north": 40.697000, "east": -74.128500 },
+      { "south": 40.697000, "west": -74.139000, "north": 40.701000, "east": -74.131000 }
+    ],
+    "dockAprons": [],
+    "staging": { "south": 40.697800, "west": -74.139000, "north": 40.699200, "east": -74.137000 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 1,
+    "buildingCount": 7,
+    "siteAreaAcres": 270.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.6940,-74.1340,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": true
+  },
+  "confidence": "medium",
+  "uncertainFields": ["entryLanes", "exitLanes", "scale", "multiStep", "preGateStaging"],
+  "fieldNotes": {
+    "siteSelection": "Roster address 'E Bay Ave, Elizabeth NJ' geocoded to GEOMETRIC_CENTER and landed inside the APM/Maher CONTAINER terminal on the Elizabeth side - wrong building. Web research (Glovis America locations; Moran Shipping; Ports America) shows the Glovis Newark vehicle-processing operation is at the Port Newark Auto Terminal. Street View at the entrance carries a clear 'PORTS AMERICA - Port Newark Auto Terminal, 325 Distribution St, Newark, NJ 07114' sign. FAPS Inc. and Glovis process Hyundai/Kia vehicles at Port Newark's auto terminals. Relocated the locked center to the Port Newark Auto Terminal core at 40.6940,-74.1340.",
+    "facilityType": "Port RoRo vehicle import/export processing terminal on the Port Newark peninsula tip. No traditional loading docks - vehicles roll on/off ships at the wharf and move within the terminal by drive-away and rail. dockDoorCount=0 / dockDoors=NONE reflect this.",
+    "truckGate": "TRUE - confirmed in Street View (2019-07): a sliding chain-link gate (with reflective markers) spans the truck entrance off Distribution St.",
+    "guardShack": "TRUE - confirmed in Street View: a low windowed guard/terminal-office building sits immediately beside the gate at 325 Distribution St under the Ports America sign.",
+    "railServed": "TRUE - rail tracks cross the access road at the gate ('DO NOT STOP ON TRACKS' sign) and multiple parallel tracks run along the terminal's north edge in satellite imagery; auto-rack rail service.",
+    "backupSensitive": "TRUE - dense urban port environment; the gate sits at a rail-crossed intersection on Distribution St with limited stacking room, so a truck queue would foul the rail crossing / port road.",
+    "multiStep": "TRUE (best estimate, flagged uncertain) - secured port auto terminals typically run a gate check plus internal yard/processor checkpoints.",
+    "dropArea": "50+ - the terminal is filled with tens of thousands of finished vehicles in densely packed marked rows across the peninsula.",
+    "multipleFacilities": "True - multiple large PDI/processing buildings plus terminal-office and wharf infrastructure on one terminal campus.",
+    "urbanRural": "Urban - the facility is inside the dense Port Newark/Elizabeth marine-terminal complex in the Newark metro core.",
+    "shipRcvSeparate": "False - this is a RoRo import/export terminal; vehicles flow through shared wharf and storage rather than separate shipping/receiving dock banks.",
+    "siteAreaAcres": "~270 acres for the secured auto-terminal perimeter (irregular peninsula footprint within the ~390-acre bounding box)."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,51 @@
+{
+  "name": "Glovis America Vehicle Processing Center - Shreveport LA",
+  "type": "Vehicle Processing Center",
+  "coords": { "lat": 32.426875, "lng": -93.920747 },
+  "geofences": {
+    "perimeter": { "south": 32.421500, "west": -93.928500, "north": 32.435500, "east": -93.910000 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 32.431500, "west": -93.925500, "north": 32.436500, "east": -93.920500 }
+    ],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 12,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 8,
+    "siteAreaAcres": 730.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.4269,-93.9207,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoors", "dropArea", "scale", "postGateStaging", "fastLaneOpportunity"],
+  "fieldNotes": {
+    "siteSelection": "Roster point (7600 Antoine Blvd) lands directly on the former GM Shreveport Operations plant - a confirmed positive ID via web research (KTBS, KSLA, Louisiana Economic Development): Glovis America operates a vehicle processing and distribution hub here, occupying a 125,000 sqft facility plus ~90 adjoining acres within the much larger ~730-acre former-GM complex. Center kept on the main building.",
+    "facilityType": "Vehicle Processing Center inside a repurposed former auto-assembly plant. Glovis outfits imported vehicles with dealer-requested equipment and exterior upgrades. dockDoorCount/dockDoors reflect legacy plant truck docks; vehicle movement is mainly by car-carrier and rail.",
+    "railServed": "Confirmed - active rail yard on the east side with auto-rack and boxcar railcars parked on multiple tracks (Street View 2024-10), plus rail spurs into the property.",
+    "occupancyState": "The former-GM complex is largely vacant / partly disused; perimeter roads are wide but empty and decaying (Street View shows weed-grown disused roads). A February 2024 fire was reported at the former GM plant. Glovis occupies only an operational fraction of the site.",
+    "dropYard": "Active vehicle-storage marshaling lot in the NW portion of the property holding several hundred finished vehicles in marked rows (probe vstore.png), with adjacent rail.",
+    "truckGate": "Medium-to-low confidence. Could not positively confirm a controlled, staffed truck gate from public Street View - the perimeter access roads are open and disused. Glovis operates a secured processing operation so a controlled gate is assumed (truckGate true, remoteGs true as best estimate). truckGate area could not be boxed.",
+    "guardShack": "Not confirmed - no staffed booth identified in available imagery. Left false; flagged uncertain.",
+    "dockDoors": "Legacy GM-plant truck docks exist on the building faces; exact active count uncertain given partial disuse. Estimated 10-25 band, flagged uncertain.",
+    "multipleFacilities": "True - large multi-building former auto-plant campus with interconnected and separate structures plus a newer standalone building.",
+    "urbanRural": "Rural - edge of Shreffeport in a semi-rural/industrial area surrounded by forest and cleared land.",
+    "siteAreaAcres": "~730 acres for the full former-GM complex perimeter; Glovis's contracted footprint is ~90 acres + 125k sqft building."
+  },
+  "method": "deep-audit"
+}

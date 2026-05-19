@@ -1,0 +1,51 @@
+{
+  "name": "Coca-Cola Consolidated - Roanoke Production Center, VA",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 37.27550, "lng": -79.94830 },
+  "geofences": {
+    "perimeter": { "south": 37.27350, "west": -79.95000, "north": 37.27750, "east": -79.94600 },
+    "truckGate": { "south": 37.27580, "west": -79.94900, "north": 37.27640, "east": -79.94840 },
+    "dropYards": [
+      { "south": 37.27430, "west": -79.94900, "north": 37.27680, "east": -79.94760 }
+    ],
+    "dockAprons": [
+      { "south": 37.27500, "west": -79.94760, "north": 37.27680, "east": -79.94640 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 28.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.27550,-79.94830,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "locationCorrection": "Roster address 2001 Towne Square Blvd NW is a retail/mall address (Valley View area) — wrong site. The actual Coca-Cola Consolidated Roanoke production/distribution facility is at 235 Shenandoah Ave NW, Roanoke VA 24016 (37.27386, -79.94698). Audited at the corrected location.",
+    "truckGate": "Chain-link perimeter fence fully encloses the trailer yard along the public road; a driveway gate provides controlled entry. No formal guard booth structure is visible in satellite or Street View — flagged uncertain.",
+    "guardShack": "No staffed guard booth identified at the entrance.",
+    "remoteGs": "Set true: a fenced controlled entry without a visible staffed booth implies kiosk / remote check-in.",
+    "dropYard": "Very extensive on-site trailer yard — diagonal trailer stalls fill the center/west of the property, ~70 trailers visible (many are Red Classic, Coca-Cola Consolidated's logistics fleet).",
+    "multipleFacilities": "Multiple connected/adjacent buildings: main production building plus warehouse/ancillary structures on a campus.",
+    "dockDoors": "Dock banks on the production/warehouse building faces, estimated ~30 doors; approximate.",
+    "railServed": "A rail yard runs south of the property but no clear spur enters the Coca-Cola facility.",
+    "urbanRural": "Dense urban industrial setting in the city of Roanoke."
+  },
+  "method": "deep-audit"
+}

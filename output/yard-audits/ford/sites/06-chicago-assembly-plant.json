@@ -1,0 +1,68 @@
+{
+  "name": "Ford - Chicago Assembly Plant, Chicago IL",
+  "type": "Vehicle Assembly Plant",
+  "coords": { "lat": 41.66662, "lng": -87.559702 },
+  "geofences": {
+    "perimeter": { "south": 41.65930, "west": -87.56450, "north": 41.66880, "east": -87.55925 },
+    "truckGate": { "south": 41.66120, "west": -87.55965, "north": 41.66200, "east": -87.55905 },
+    "dropYards": [
+      { "south": 41.65955, "west": -87.56080, "north": 41.66130, "east": -87.55935 },
+      { "south": 41.66020, "west": -87.56260, "north": 41.66180, "east": -87.56075 }
+    ],
+    "dockAprons": [
+      { "south": 41.66020, "west": -87.56110, "north": 41.66110, "east": -87.55980 }
+    ],
+    "staging": { "south": 41.66110, "west": -87.55960, "north": 41.66230, "east": -87.55905 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 130.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.66662,-87.559702,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false,
+    "entryLanesNote": "two inbound lanes at the Torrence Ave guarded gate"
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "scale", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Guarded truck gate confirmed mid-property on Torrence Ave (~41.6615, -87.5593). 2024 Street View shows a tan single-story guard house with multi-side windows at the perimeter fence line, bollards/lane-control structures, directional signage ('ALL INBOUND TRAFFIC', 'VISITOR PARKING'), and trucks staged in the apron.",
+    "guardShack": "Confirmed - small staffed booth (1-2 vehicle footprint, Ford-branded) set beside the gate lane, distinct from the main building.",
+    "fastLaneOpportunity": "Very wide paved gate apron with multiple usable lane widths; room for a bypass/express lane.",
+    "drivewayLong": "Deep paved approach between Torrence Ave and the docks/fence; easily holds a 3+ truck queue.",
+    "shipRcvSeparate": "Inbound supplier/sequencing docks (LEAR seat plant + JIT yard) on the south/SE; finished-vehicle outbound handled separately via rail and the river-side marshalling lots - distinct dock clusters.",
+    "multipleFacilities": "Large interconnected campus - main sawtooth assembly building plus a body shop, paint, the LEAR supplier building, water-treatment plant, and a river-side marshalling/staging lot.",
+    "railServed": "Multiple rail tracks run the SW property edge with spurs entering the plant - historic and active rail service.",
+    "dropYard": "Dedicated south trailer-storage yard packed with parked drop trailers (Innovative Logistics Group and others), separate from active dock staging.",
+    "dockDoorCount": "Estimate ~45 across the supplier/JIT dock banks visible in z19-20 imagery; full plant has additional internal docks not all visible from overhead - low confidence.",
+    "scale": "No clear truck scale identified in imagery; left false.",
+    "exitLanes": "Single combined entry/exit gate group; outbound lane count inferred."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,65 @@
+{
+  "name": "Jennie-O Turkey Store - Melrose MN",
+  "type": "Meat Processing Plant",
+  "coords": { "lat": 45.67630, "lng": -94.79420 },
+  "geofences": {
+    "perimeter": { "south": 45.67380, "west": -94.79620, "north": 45.67790, "east": -94.79210 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 45.67560, "west": -94.79320, "north": 45.67680, "east": -94.79220 }
+    ],
+    "dockAprons": [
+      { "south": 45.67620, "west": -94.79320, "north": 45.67720, "east": -94.79230 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 18,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 34.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@45.67630,-94.79420,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "trailerParkingCapacity", "buildingCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "LOW-CONFIDENCE LOCATION. Roster coords (45.675694,-94.807948) for '123 5th Ave E' landed in downtown Melrose with no plant. The large food-processing complex at ~45.6705,-94.800 was positively identified by StreetView signage as a LAND O'LAKES Inc. plant, not Jennie-O. The audited building is the next-largest modern processing plant on the NE edge of Melrose by the Sauk River (~45.6763,-94.7942) -- a large single-building plant with numbered truck drive-in bays (1B-5B), dock doors with trailers, an E-side trailer drop yard, and a perimeter loop drive. This best matches the new $137M / ~300k-sq-ft Jennie-O Melrose plant profile but could NOT be confirmed by signage; treat the identity as unverified.",
+    "truckGate": "Open site -- StreetView shows no perimeter fence and no gate/barrier at the plant approach. Classified false but flagged given the location uncertainty.",
+    "guardShack": "No guard booth visible at any approach.",
+    "drivewayLong": "A perimeter loop drive and large paved yard give a long approach able to stack 3+ trucks.",
+    "dropYard": "Rows of untethered trailers on the E side of the building -> dropYard true; dropArea 10-25.",
+    "dockDoors": "~22 doors estimated: numbered drive-in bays plus dock doors with trailers backed in; banded 10-25, low-confidence.",
+    "fastLaneOpportunity": "Wide open paved yard and loop drive leave ample room for an express/bypass lane.",
+    "urbanRural": "Melrose is a small rural city (~3,700); the plant is on the NE edge by the Sauk River and farmland -> Rural.",
+    "buildingCount": "One main processing building plus a detached SW building (~2); uncertain.",
+    "shipRcvSeparate": "Could not confirm separate ship/receive dock banks from imagery -> classified false, flagged."
+  },
+  "method": "deep-audit"
+}

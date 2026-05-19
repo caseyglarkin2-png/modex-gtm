@@ -1,0 +1,43 @@
+{
+  "name": "UNFI - Mansfield OH DC",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.758536, "lng": -82.514085 },
+  "geofences": {
+    "perimeter": null,
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
+    "truckGateCount": 0, "buildingCount": 0, "siteAreaAcres": 0.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.758536,-82.514085,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "location": "COULD NOT RESOLVE. No UNFI distribution center could be confirmed in Mansfield, Ohio. The roster entry derives only from an Indeed company 'office locations' listing (which shows Cleveland OH and Mansfield OH for UNFI but provides no address); the roster's own geocode was APPROXIMATE and moved 7,198 m. The supplied coordinates land in downtown Mansfield (retail/civic, no DC).",
+    "research": "Multiple targeted web searches found no street address for any UNFI facility in Mansfield. The UNFI Conventional GLN master list (1WorldSync v5.0) contains zero Ohio entries. Legacy SuperValu / Nash Finch Ohio distribution centers were in Bellefontaine, Cincinnati, Lima and Dayton - never Mansfield. The Indeed 'Mansfield, OH' entry is most plausibly a UNFI delivery branch, sales office, or a stale/mislabeled directory record, not an operating distribution building.",
+    "recommendation": "Flag for human review. If UNFI does retain any Mansfield-area presence it is likely a small office or branch with no meaningful truck yard; treat as not-a-DC unless a corporate facility list confirms otherwise."
+  },
+  "method": "deep-audit"
+}

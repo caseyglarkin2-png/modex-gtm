@@ -1,0 +1,70 @@
+{
+  "name": "UNFI - Rocklin CA DC (Western Region)",
+  "type": "Distribution Center",
+  "coords": { "lat": 38.81370, "lng": -121.28320 },
+  "geofences": {
+    "perimeter": { "south": 38.81130, "west": -121.28560, "north": 38.81610, "east": -121.28100 },
+    "truckGate": { "south": 38.81460, "west": -121.28480, "north": 38.81560, "east": -121.28380 },
+    "dropYards": [
+      { "south": 38.81470, "west": -121.28430, "north": 38.81560, "east": -121.28230 },
+      { "south": 38.81200, "west": -121.28220, "north": 38.81520, "east": -121.28150 }
+    ],
+    "dockAprons": [
+      { "south": 38.81300, "west": -121.28440, "north": 38.81540, "east": -121.28360 },
+      { "south": 38.81470, "west": -121.28380, "north": 38.81560, "east": -121.28220 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 65,
+    "trailerParkingCapacity": 100,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 38.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.81370,-121.28320,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "No controlled truck entrance. The truck court wraps the W, N and E faces and connects to the surrounding street network by open paved driveways. z19 satellite of every entry point and 2020-era Street-View on Sunset Blvd and the SE service road show no barrier arm, no sliding gate, no guard booth and no perimeter fence. Open-access urban infill DC.",
+    "guardShack": "No staffed booth anywhere on the truck circulation.",
+    "remoteGs": "False — requires a gate; there is none.",
+    "postGateStaging": "Wide paved truck courts on the W and N sides give ample interior holding before the docks.",
+    "drivewayLong": "The truck courts run the full building length; easily hold 3+ truck queues.",
+    "entryExitSeparate": "Truck circulation enters and leaves the wrap-around court at more than one point on different building faces (W dock court, N drop yard) rather than through a single shared gate group.",
+    "dockDoors": "Large facility with dock banks on the W/SW face and the N face; combined door count estimated ~70 — `dockDoors` 50+.",
+    "dropArea": "Two distinct drop-trailer concentrations — a N-face drop yard and a long E-face trailer row — both full of trailers without tractors; `dropArea` 50+, `dropYard: true`.",
+    "shipRcvSeparate": "Two physically separate dock clusters on different building faces (W/SW and N) suggest split shipping/receiving; medium confidence from overhead imagery only.",
+    "buildingCount": "Main DC plus a separate 2-story glass office building at the W end of the property.",
+    "railServed": "No rail spur enters the property.",
+    "urbanRural": "Dense Rocklin (Sacramento metro) setting — apartments to the north, single-family residential to the east, retail/industrial to the south and west; Urban per rubric.",
+    "truckGateCount": "Two open truck-court access points (no gate structures); counted as truck entrances per the metric definition."
+  },
+  "method": "deep-audit"
+}

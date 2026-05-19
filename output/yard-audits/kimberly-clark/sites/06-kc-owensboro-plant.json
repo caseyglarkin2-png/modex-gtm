@@ -1,0 +1,51 @@
+{
+  "name": "K-C Owensboro Plant - Owensboro KY",
+  "type": "Diaper / personal care manufacturing plant",
+  "coords": { "lat": 37.819400, "lng": -87.303200 },
+  "geofences": {
+    "perimeter": { "south": 37.814600, "west": -87.308600, "north": 37.824000, "east": -87.298200 },
+    "truckGate": { "south": 37.820850, "west": -87.305700, "north": 37.821300, "east": -87.305000 },
+    "dropYards": [
+      { "south": 37.819700, "west": -87.308400, "north": 37.822500, "east": -87.305000 },
+      { "south": 37.819400, "west": -87.305000, "north": 37.821000, "east": -87.303400 }
+    ],
+    "dockAprons": [
+      { "south": 37.819400, "west": -87.305000, "north": 37.820700, "east": -87.303700 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 160,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 230.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.819400,-87.303200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "scale", "multiStep", "postGateStaging"],
+  "fieldNotes": {
+    "location": "Roster coords landed on the correct building; geocode movedMeters (21762) reflects a poor city-center geocoder start, not an error. Confirmed as 601 Innovative Way, Owensboro KY — large K-C diaper/personal-care manufacturing complex + on-site DC on a peninsula bounded by the Green River.",
+    "truckGate": "Open campus-style entrance off Innovative Way at the public road — Street View (2019) shows a K-C monument sign and manicured-lawn drive with NO barrier at the road. An internal truck-yard checkpoint/pinch-point with fencing and a small structure is visible at ~37.8211,-87.3053 controlling access to the drop yard. Classed truckGate=true on the internal control point; low confidence on a hard barrier.",
+    "guardShack": "No clearly resolvable guard booth at the public-road entrance or the internal checkpoint. A small structure plus parked vehicles sits beside the internal truck route but cannot be confirmed as a staffed booth at z20-21. Classed false / remoteGs true as best estimate.",
+    "dropArea": "Extensive trailer drop yard NW of the main building — 100+ trailers parked in long rows visible at z19-20. Honest estimate of 220 capacity is approximate.",
+    "dockDoors": "Long dock face on the NW edge of the main warehouse/DC building with ~50+ trailers backed in; 55 is an approximate count from z20 imagery.",
+    "multipleFacilities": "Campus: large manufacturing building cluster, separate warehouse/DC, on-site wastewater treatment plant, steam/utility plant, and office front — multiple distinct building clusters.",
+    "railServed": "No rail spur visible entering the property.",
+    "fastLaneOpportunity": "Wide internal paved truck routes and large open apron offer room for an express/bypass lane."
+  },
+  "method": "deep-audit"
+}

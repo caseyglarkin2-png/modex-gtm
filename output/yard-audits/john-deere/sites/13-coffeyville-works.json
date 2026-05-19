@@ -1,0 +1,52 @@
+{
+  "name": "John Deere Coffeyville Works - Coffeyville KS",
+  "type": "Component Plant",
+  "coords": { "lat": 37.09708, "lng": -95.584703 },
+  "geofences": {
+    "perimeter": { "south": 37.09530, "west": -95.58680, "north": 37.10080, "east": -95.58130 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 37.09800, "west": -95.58370, "north": 37.09930, "east": -95.58180 }
+    ],
+    "staging": { "south": 37.09820, "west": -95.58360, "north": 37.09980, "east": -95.58200 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 4,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 0,
+    "buildingCount": 4,
+    "siteAreaAcres": 74.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.09708,-95.584703,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "dropArea"],
+  "fieldNotes": {
+    "truckGate": "Open campus - no controlled truck entrance. Buildings sit on a large open parcel; access roads from US-169 lead directly onto the property and to the office entrance and material yards with no barrier arm, gate, or checkpoint pinch-point. Street View (2025-10) confirms an open lawn frontage with no perimeter fence.",
+    "guardShack": "No guard booth present anywhere on the site.",
+    "remoteGs": "False - there is no truck gate at all.",
+    "drivewayLong": "Internal access roads from the public road to the docks/material yards are long and open; would hold 3+ trucks.",
+    "dockDoors": "Dock doors observed along the north/east face of the main building (dock-leveler shadows visible at z20) plus the satellite north warehouse; estimated 10-25 total, low-confidence count typical of a legacy component plant with scattered docks.",
+    "dropArea": "A few trailers and material laydown observed in the east yard; no dedicated trailer-storage lot. 0-10 band.",
+    "shipRcvSeparate": "Docks concentrated on the north/east building face; no clearly separated ship vs. receive clusters.",
+    "urbanRural": "Semi-rural site on the north edge of Coffeyville, KS, surrounded by farm fields and open land; classified Rural.",
+    "multipleFacilities": "Main manufacturing building plus an attached office building, a detached north warehouse, and other small structures - a campus of 4+ buildings.",
+    "dropYard": "No dedicated trailer drop yard observed; component plant relies on material laydown yards instead.",
+    "railServed": "No rail spur observed running into the property.",
+    "connectivityIssue": "Site is semi-rural but adjacent to the town of Coffeyville and an established industrial area; cellular coverage likely adequate - connectivityIssue set false."
+  },
+  "method": "deep-audit"
+}

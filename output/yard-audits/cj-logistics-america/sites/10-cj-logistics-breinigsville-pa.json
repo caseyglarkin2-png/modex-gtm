@@ -1,0 +1,51 @@
+{
+  "name": "CJ Logistics - Breinigsville PA",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.572700, "lng": -75.632400 },
+  "geofences": {
+    "perimeter": { "south": 40.570700, "west": -75.634600, "north": 40.574800, "east": -75.630000 },
+    "truckGate": { "south": 40.571000, "west": -75.634600, "north": 40.571600, "east": -75.633900 },
+    "dropYards": [
+      { "south": 40.572400, "west": -75.634600, "north": 40.574200, "east": -75.633400 },
+      { "south": 40.573800, "west": -75.631200, "north": 40.575000, "east": -75.629800 }
+    ],
+    "dockAprons": [
+      { "south": 40.571100, "west": -75.633900, "north": 40.573600, "east": -75.631200 },
+      { "south": 40.572400, "west": -75.634600, "north": 40.574200, "east": -75.633400 }
+    ],
+    "staging": { "south": 40.572400, "west": -75.634800, "north": 40.574300, "east": -75.633200 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120, "trailersVisible": 160, "trailerParkingCapacity": 220,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 43.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.572700,-75.632400,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes", "railServed"],
+  "fieldNotes": {
+    "truckGate": "Controlled truck entrance at the SW corner: a guard-booth structure sits on a raised island in the truck driveway, with the lane splitting in/out around it - a clear checkpoint pinch-point. Internal pavement markings read 'ALL TRUCKS' directing truck flow. Confirmed in z20-z21 satellite.",
+    "guardShack": "Small dark-roofed booth structure on a raised island in the truck lane at the SW entrance, with a vehicle parked beside it - classic guard shack footprint. Visible in z19-z20 satellite.",
+    "remoteGs": "False - a staffed guard shack is present.",
+    "shipRcvSeparate": "Dock banks on both long building faces (NW and SE), consistent with separate shipping and receiving clusters.",
+    "drivewayLong": "Deep internal truck circulation with a teardrop-shaped 'ALL TRUCKS' staging loop on the NW side; ample room for 3+ trucks to queue between gate and docks.",
+    "dropYard": "Large trailer-storage areas on both the NW and NE sides packed with parked trailers; legacy DSC Logistics DC operating heavy trailer-pool activity.",
+    "dockDoors": "Continuous dock banks on both long faces with many trailers backed in; ~120 doors estimated - low confidence on exact count from overhead imagery.",
+    "railServed": "A rail line runs along the NW side of the industrial park but appears to serve the adjacent buildings/Nestle plant, not the CJ building; no spur enters the CJ DC. Marked false, low confidence.",
+    "urbanRural": "Site is in the Breinigsville/Lehigh Valley industrial corridor - a large warehouse cluster on the edge of farmland and woods, not within dense metro fabric; judged Rural per the broader edge-of-town setting.",
+    "siteAreaAcres": "Estimated from perimeter box (~455m x ~380m) covering the CJ building and its trailer yards.",
+    "facilityNote": "400 Nestle Way is a legacy DSC Logistics distribution center; DSC was acquired by and is now operated as CJ Logistics America. The white-roof building is the CJ DC; the adjacent red/dark building to the NE is the Nestle plant (separate facility)."
+  },
+  "method": "deep-audit"
+}

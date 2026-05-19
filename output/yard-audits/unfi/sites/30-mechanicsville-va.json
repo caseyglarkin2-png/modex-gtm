@@ -1,0 +1,55 @@
+{
+  "name": "UNFI - Mechanicsville VA DC (Richmond)",
+  "type": "Distribution Center",
+  "coords": { "lat": 37.63407, "lng": -77.40284 },
+  "geofences": {
+    "perimeter": { "south": 37.62930, "west": -77.40720, "north": 37.63780, "east": -77.39830 },
+    "truckGate": { "south": 37.63080, "west": -77.40340, "north": 37.63140, "east": -77.40250 },
+    "dropYards": [
+      { "south": 37.63070, "west": -77.40660, "north": 37.63340, "east": -77.40480 },
+      { "south": 37.63420, "west": -77.40320, "north": 37.63620, "east": -77.40000 },
+      { "south": 37.63250, "west": -77.39970, "north": 37.63520, "east": -77.39840 }
+    ],
+    "dockAprons": [
+      { "south": 37.63430, "west": -77.40720, "north": 37.63620, "east": -77.40430 },
+      { "south": 37.63260, "west": -77.39990, "north": 37.63520, "east": -77.39860 }
+    ],
+    "staging": { "south": 37.63100, "west": -77.40460, "north": 37.63270, "east": -77.40300 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110, "trailersVisible": 130, "trailerParkingCapacity": 240,
+    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 70.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.63407,-77.40284,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "siteAreaAcres", "scale"],
+  "fieldNotes": {
+    "location": "Confirmed. UNFI Mechanicsville DC at 8258 Richfood Rd, Mechanicsville, VA 23116 (geocoded ROOFTOP to 37.63407,-77.40284, matching the roster coords almost exactly). Legacy Richfood / SuperValu conventional-grocery distribution complex serving the Richmond mid-Atlantic region; the road name 'Richfood Rd' is itself the heritage tell.",
+    "truckGate": "TRUE - the main truck entrance off Richfood Rd / the south access road has a guard checkpoint: at z19-z20 a booth structure with a lane canopy/island, queue lanes and a checkpoint apron is visible where the truck road enters the property.",
+    "guardShack": "TRUE - small staffed booth at the entry checkpoint beside the inbound lanes. remoteGs=false accordingly.",
+    "multipleFacilities": "TRUE - a campus: the main multi-section warehouse plus a separate building cluster to the south (fleet maintenance / fuel island) and additional adjoining structures - 4+ distinct buildings.",
+    "shipRcvSeparate": "TRUE - distinct dock banks on different building faces; trailer drop yards on the west, north and east sides indicate physically separated shipping and receiving clusters typical of a large conventional-grocery DC.",
+    "dockDoors": "50+ - very large multi-section warehouse with dock banks on multiple faces; estimate ~110 doors total.",
+    "dropArea": "50+ - extensive trailer drop yards on three sides of the complex, well over 100 trailers parked in the captured imagery.",
+    "dropYard": "TRUE - multiple dedicated trailer-storage lots distinct from active dock staging.",
+    "preGateStaging": "TRUE - paved areas and staged trailers along the access road outside the checkpoint give pre-gate waiting room.",
+    "postGateStaging": "TRUE - large paved holding areas inside the gate before the dock faces.",
+    "fastLaneOpportunity": "TRUE - wide entry apron with multiple lanes and unused paved width; room for an express bypass lane.",
+    "urbanRural": "Rural - the DC sits on a wooded exurban parcel north of Richmond off a divided highway; broader setting is edge-of-metro/rural rather than dense urban fabric.",
+    "scale": "Not clearly confirmed - a weigh platform may exist near the maintenance/fuel cluster but is not unambiguous in imagery; left false and flagged uncertain.",
+    "siteAreaAcres": "~70 acres estimated from the perimeter box covering the campus and its trailer yards."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,42 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Constellation Beer DC - Jurupa Valley CA,Distribution Center (beer/wine/spirits),#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@34.02585,-117.53575,400m/data=!3m1!1e3"
+Constellation Beer DC - Wilmer TX (Dallas I-45),"Distribution Center (beer cross-dock, rail-served)",#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@32.62120,-96.72950,400m/data=!3m1!1e3"
+Constellation Beer DC - Jacksonville FL,"Distribution Center (beer, rail-served)",#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,YES,,,YES,Urban,,,,YES,"https://www.google.com/maps/@30.42385,-81.63238,400m/data=!3m1!1e3"
+Constellation Gonzales Winery - Gonzales CA,Winery / Production Facility,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,YES,YES,,,,YES,,,,YES,Rural,,YES,,,"https://www.google.com/maps/@36.502400,-121.434700,400m/data=!3m1!1e3"
+Robert Mondavi Winery - Oakville CA,Winery / Production Facility,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,YES,,,,,,,,,Rural,,YES,,,"https://www.google.com/maps/@38.435700,-122.401300,400m/data=!3m1!1e3"
+The Prisoner Wine Company - St. Helena CA,Winery / Production Facility,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,YES,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@38.474750,-122.431850,400m/data=!3m1!1e3"
+Mount Veeder Winery / Franciscan Estate - Napa CA,Winery / Production Facility,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,,,,,,,,,,Rural,YES,,,,"https://www.google.com/maps/@38.360450,-122.401900,400m/data=!3m1!1e3"
+Booker Vineyard / My Favorite Neighbor - Paso Robles CA,Winery / Production Facility,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,YES,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@35.578650,-120.740150,400m/data=!3m1!1e3"
+Sea Smoke Cellars - Lompoc CA,Winery / Production Facility,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,YES,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@34.664044,-120.465851,400m/data=!3m1!1e3"
+Lingua Franca Winery - Salem OR,Winery / Production Facility,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,YES,,,,,,,,,Rural,YES,,,,"https://www.google.com/maps/@45.073200,-123.093450,400m/data=!3m1!1e3"
+High West Distillery - Wanship UT,Distillery / Production Facility,#1,Gate + GS (not BU sens.),,,,,,,,,,,YES,YES,,,,YES,,,YES,,1,1,,YES,,,,,,,,,Rural,YES,,,,"https://www.google.com/maps/@40.808264,-111.444419,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,1,9%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,9,82%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,1,9%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,11,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,3,27%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,9,82%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,2,18%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,9,82%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,11,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,11,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

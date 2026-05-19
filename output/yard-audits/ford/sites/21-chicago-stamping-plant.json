@@ -1,0 +1,58 @@
+{
+  "name": "Ford - Chicago Stamping Plant, Chicago Heights IL",
+  "type": "Stamping Plant",
+  "coords": { "lat": 41.50315, "lng": -87.60230 },
+  "geofences": {
+    "perimeter": { "south": 41.49950, "west": -87.60850, "north": 41.50560, "east": -87.59750 },
+    "truckGate": { "south": 41.50560, "west": -87.60175, "north": 41.50625, "east": -87.60110 },
+    "dropYards": [
+      { "south": 41.50230, "west": -87.60560, "north": 41.50370, "east": -87.60330 },
+      { "south": 41.49980, "west": -87.59980, "north": 41.50140, "east": -87.59760 }
+    ],
+    "dockAprons": [
+      { "south": 41.50150, "west": -87.60280, "north": 41.50260, "east": -87.59980 },
+      { "south": 41.50230, "west": -87.59920, "north": 41.50420, "east": -87.59800 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 154.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.50315,-87.60230,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount", "multiStep"],
+  "fieldNotes": {
+    "location": "Roster lat/lng (41.506099,-87.673466) was ~6 km off, landing on a retail strip on W Lincoln Hwy in Chicago Heights. Correct site is 1000 E Lincoln Hwy at the Chicago Heights/Ford Heights line, ~41.50315,-87.60230, confirmed via web research and satellite (a ~2M sq ft stamping plant, opened 1956, 136-acre Ford parcel).",
+    "truckGate": "Single controlled entrance off the south side of Lincoln Hwy at a signalized 4-way intersection (~41.5060,-87.6014). Chain-link gate across the driveway with access-control signage ('STOP / NO TRUCK ... ENTRY ... ACCESS ... ONLY'). A former second truck entrance ~250 m west (~41.5061,-87.6045) is barricaded with concrete jersey barriers and out of service.",
+    "guardShack": "A small structure with a 1-vehicle footprint sits beside the gate driveway just inside the property (visible at z21 satellite and in Street View). Consistent with a guard booth; medium confidence as resolution does not let me confirm multi-side windows.",
+    "drivewayShort": "Gate sits close to the public highway; the approach offers room for only 1-2 trucks before reaching the office parking area.",
+    "backupSensitive": "Gate is at a busy signalized intersection on a 5-lane arterial (Lincoln Hwy / US-30 corridor); a truck queue at the gate would quickly spill toward the intersection.",
+    "dockDoors": "Dock banks are on the building's south and east faces (trailers seen backed in). Estimated 45 total doors across faces; rooftop imagery obscures full counts - low confidence.",
+    "dropArea": "Two large trailer drop yards: one on the south/SW side (trailers in rows amid laydown storage) and one on the SE side (~40+ trailers in tidy rows). Combined well over 50 trailer stalls.",
+    "railServed": "Multiple parallel rail tracks and a rail spur run along the entire south boundary with railcars present - heavy inbound steel-coil rail service typical of a stamping plant.",
+    "shipRcvSeparate": "Dock activity is split between the south face and the SE face, indicating physically separate dock clusters.",
+    "multipleFacilities": "false - one large connected stamping building; a small detached structure (guard/ancillary) does not count as a separate facility cluster.",
+    "buildingCount": "Main stamping building plus the gate/guard structure = 2.",
+    "postGateStaging": "Large paved yard areas inside the gate before the dock faces provide ample internal truck holding space.",
+    "urbanRural": "Site sits within the dense south-suburban Chicago industrial fabric (Chicago Heights / Ford Heights), bordered by other plants, a salvage yard and residential blocks - Urban.",
+    "multiStep": "No clearly visible second checkpoint after the gate; left false."
+  },
+  "method": "deep-audit"
+}

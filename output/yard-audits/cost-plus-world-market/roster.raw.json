@@ -1,0 +1,29 @@
+{
+  "account": "Cost Plus World Market",
+  "generatedAt": "2026-05-18",
+  "facilityCount": 2,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Cost Plus World Market - Stockton CA Distribution Center",
+      "city": "Stockton",
+      "state": "CA",
+      "type": "Distribution Center / Import Warehouse (West Coast)",
+      "address": "3610 S Airport Way, Stockton, CA 95206",
+      "lat": 37.8983,
+      "lng": -121.2697,
+      "source": "Dossier (Kaleris case study, named West Coast DC); web research: Yelp, Foursquare, Manta, Yellowpages list this DC at 3610 S Airport Way, Stockton CA 95206. Truck gate is at 1735 Zephyr St (same campus, per Waze 'Cost Plus World Market Truck Gate' and dossier). West-coast store replenishment + import receiving from Port of Oakland / LA-Long Beach."
+    },
+    {
+      "idx": 2,
+      "name": "Cost Plus World Market - Windsor VA Distribution Center",
+      "city": "Windsor",
+      "state": "VA",
+      "type": "Distribution Center / Import Warehouse (East Coast)",
+      "address": "12300 Dominion Way, Windsor, VA 23487",
+      "lat": 36.8085,
+      "lng": -76.7445,
+      "source": "Dossier (Kaleris case study, named East Coast DC; explicitly corrects internal notes that listed Salt Lake City UT). Web research: Nextdoor, CMac, Waze, chamberofcommerce.com confirm 'Cost Plus World Market Virginia Distribution Center' at 12300 Dominion Way, Windsor VA 23487 (Waze also references nearby 12300 Windsor Blvd cross-street). East-coast store replenishment + import receiving from Norfolk / Savannah ports; mixed dry + refrigerated trailers."
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "name": "Sea Smoke Cellars - Lompoc CA",
+  "type": "Winery / Production Facility",
+  "coords": { "lat": 34.664044, "lng": -120.465851 },
+  "geofences": {
+    "perimeter": { "south": 34.663250, "west": -120.466500, "north": 34.664850, "east": -120.465250 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 34.663600, "west": -120.465700, "north": 34.664550, "east": -120.465350 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 3,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 2,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 4.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.664044,-120.465851,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors"],
+  "fieldNotes": {
+    "truckGate": "No controlled truck entrance. Property fronts a public street (N O Street) that ends in a cul-de-sac turnaround; the building's parking and the east-side tank/work yard are reached directly from the street with no barrier arm, gate, or checkpoint.",
+    "guardShack": "No staffed booth anywhere on the property. Modern office facade on the west end, but no guard structure.",
+    "drivewayShort": "Short access straight off the N O Street cul-de-sac to the parking lot and yard; minimal queuing depth.",
+    "dockDoors": "Winery production building. No bank of dedicated freight dock doors visible. Personnel doors and ~2-4 at-grade service/roll-up doors estimated along the working (east) face by the tank farm. Low confidence on exact count.",
+    "dropArea": "No marked trailer-parking stalls with parked trailers. The east-side row is outdoor wine storage tanks, not a trailer drop.",
+    "urbanRural": "Lompoc is a small city (~42K). The facility sits in the Lompoc industrial/'Wine Ghetto' district on the edge of town next to the airport and farmland. Per rubric, small-town industrial resolves to Rural.",
+    "buildingCount": "Single long winery production building (the maroon-roof structure at 1604 N O Street). The adjacent large white building to the east is a separate, unrelated tenant.",
+    "railServed": "No rail spur into the property.",
+    "publicAccess": "Sea Smoke is not open for public tastings; wines are pre-allocated. Operation is winery production and allocated shipping only."
+  },
+  "method": "deep-audit"
+}

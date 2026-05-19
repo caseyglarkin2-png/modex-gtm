@@ -1,0 +1,60 @@
+{
+  "name": "SalSon Logistics - Bakersfield CA",
+  "type": "Intermodal / Fleet Location",
+  "coords": { "lat": 35.239200, "lng": -119.109300 },
+  "geofences": {
+    "perimeter": { "south": 35.237987, "west": -119.110455, "north": 35.240413, "east": -119.108145 },
+    "truckGate": { "south": 35.237803, "west": -119.109852, "north": 35.238297, "east": -119.109248 },
+    "dropYards": [
+      { "south": 35.239611, "west": -119.110595, "north": 35.240689, "east": -119.109605 }
+    ],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 22,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 14.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.239200,-119.109300,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "NONE", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "postGateStaging", "fastLaneOpportunity",
+    "dropArea", "scale", "dropYard", "buildingCount", "trailersVisible",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "location": "PROBABLE, NOT CONFIRMED. No SalSon Bakersfield street address is published anywhere. Resolved by merged-company trace: Sierra Trucking was one of the seven companies merged into SalSon (Aug 2024). 'Sierra Transport LLC' (USDOT 2153955, FMCSA status ACTIVE) registers its physical address as 12856 Old River Rd, Bakersfield CA 93311 — geocoded ROOFTOP to 35.238757,-119.109127. Satellite there shows a real trucking yard (metal buildings, a row of parked trailers, a building marked 'S T'). It is treated as the likely SalSon Bakersfield yard but this is an inference, not a SalSon-confirmed fact — hence low confidence. NOTE: Yelp lists 'Lutrel Trucking' at the same 12856 Old River Rd address, so directory data for this parcel is conflicting.",
+    "siteType": "This is a small RURAL bulk/aggregate-haul trucking yard, NOT the port-drayage intermodal terminal the roster type label implies. Street View shows dump-body and tanker trailers along the fence — consistent with Sierra Transport's aggregate/biosolids hauling heritage, not container drayage.",
+    "truckGate": "No barrier arm or gate seen at the entrance. Street View of the entry shows a wide graded/dirt apron with an OPAL-branded CNG/RNG fueling canopy; the lane is open. Chain-link perimeter fencing runs along Old River Rd but the vehicle entrance itself is uncontrolled. Called false; flagged uncertain.",
+    "guardShack": "No guard booth visible at the entrance. false.",
+    "remoteGs": "false because there is no truck gate at all.",
+    "postGateStaging": "Large open graded apron just inside the entrance can hold queued trucks — set true, low confidence.",
+    "drivewayLong": "Deep open yard from the road to the buildings; >3 trucks could stack. true.",
+    "fastLaneOpportunity": "Abundant unused unpaved width at the entry apron — physical room exists; true but low confidence.",
+    "dockDoors": "No loading-dock building rhythm visible; this is a yard/maintenance/fuel operation, not a warehouse. NONE.",
+    "dropArea": "A row of ~20-25 trailers/dump-bodies parked along the north fence — banded 10-25, low confidence (overhead count is approximate and mixes trailers with tankers).",
+    "dropYard": "Dedicated trailer/equipment storage along the north edge — true.",
+    "scale": "No truck scale clearly visible; false (not certain — flagged).",
+    "buildingCount": "Approximately 6 distinct metal buildings/sheds plus a fuel canopy; approximate.",
+    "urbanRural": "Surrounded by orchards and open farmland southwest of Bakersfield — clearly Rural.",
+    "connectivityIssue": "On a paved arterial (Old River Rd) within the Bakersfield metro fringe — cellular coverage likely adequate. false.",
+    "geofence": "Perimeter drawn around the operational truck-yard compound (buildings + trailer row), excluding the adjacent orchard and residence at the southeast. ~14 acres."
+  },
+  "method": "deep-audit"
+}

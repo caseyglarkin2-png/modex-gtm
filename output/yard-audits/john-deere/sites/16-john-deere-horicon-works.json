@@ -1,0 +1,67 @@
+{
+  "name": "John Deere Horicon Works - Horicon WI",
+  "type": "Assembly Plant",
+  "coords": { "lat": 43.4540, "lng": -88.6336 },
+  "geofences": {
+    "perimeter": { "south": 43.44850, "west": -88.63620, "north": 43.45780, "east": -88.63140 },
+    "truckGate": { "south": 43.45380, "west": -88.63320, "north": 43.45460, "east": -88.63220 },
+    "dropYards": [
+      { "south": 43.45560, "west": -88.63500, "north": 43.45770, "east": -88.63280 }
+    ],
+    "dockAprons": [
+      { "south": 43.45470, "west": -88.63440, "north": 43.45620, "east": -88.63300 }
+    ],
+    "staging": { "south": 43.45200, "west": -88.63320, "north": 43.45380, "east": -88.63200 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 22,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 12,
+    "siteAreaAcres": 105.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@43.4540,-88.6336,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoors", "shipRcvSeparate", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Old-style urban factory campus straddling the public street grid (W Lake St, N Vine St, E Walnut St run THROUGH the campus). No barrier arm or gate observed at any public-road / property-line interface in 2024-2025 Street View. Truck access into the north trailer yard is via an internal private campus drive; classified false because no controlled checkpoint exists where the property meets the public road.",
+    "guardShack": "No guard booth observed at any street-level entrance. One small ~1-vehicle structure seen on an internal campus road near E Walnut St may be a watchman post, but it does not control a property-line truck gate, so guardShack=false.",
+    "remoteGs": "False because there is no controlled truck gate at all (precondition not met).",
+    "drivewayLong": "Internal campus drive from N Vine St up to the north trailer yard / dock area is several hundred metres long and can stack 3+ trucks.",
+    "dockDoors": "Estimate 25-50: complex has multiple loading faces (sawtooth-roof factory bays, north dock building, staged-product yard with apron). Resolution limited by old factory roofs; counted ~35.",
+    "dropArea": "North trailer yard shows trailers in rows plus extensive staged-product / outside-storage area; web sources cite ~1.2M sq ft of outside storage & trailer area. Banded 25-50.",
+    "shipRcvSeparate": "Multi-building campus with assembly buildings, a north dock/trailer yard, and the south cluster across Lake St - shipping and receiving run from physically separate dock clusters.",
+    "multipleFacilities": "Campus: multiple large building clusters - main complex north of W Lake St plus a secondary cluster south of Lake St, joined by a John Deere-branded enclosed bridge over the street.",
+    "urbanRural": "Horicon WI is a small town (~3,500 population); facility is small-town industrial on the Rock River - per rubric, choose Rural.",
+    "entryLanes": "Internal campus drive is 2 lanes; no formal gate lanes - low confidence.",
+    "siteAreaAcres": "Perimeter box bounds the built campus on the river peninsula at ~105 acres; total Horicon Works site is cited at 214 acres including outside storage spread across the peninsula.",
+    "railServed": "No active rail spur into the property observed; the surrounding area has no rail line adjacent."
+  },
+  "method": "deep-audit"
+}

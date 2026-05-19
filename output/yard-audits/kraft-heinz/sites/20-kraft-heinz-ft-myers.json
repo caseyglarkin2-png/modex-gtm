@@ -1,0 +1,22 @@
+{
+  "name": "Kraft Heinz - Ft Myers",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors"],
+  "fieldNotes": {
+    "truckGate": "Street View shows a continuous chain-link perimeter fence around the property; the truck side is fenced, implying a controlled gate, but the entrance itself is screened by mature trees so a barrier could not be confirmed.",
+    "guardShack": "No staffed booth resolved; marked remoteGs given the fenced perimeter without a visible shack.",
+    "urbanRural": "Dense Lee County industrial park, multiple warehouses and an interstate alongside.",
+    "dropArea": "A few unhitched trailers near the north dock area."
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "Kraft Foods - Jacksonville",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "streetview": "Street View shows a brick warehouse end wall and an open parking lot - no truck gate visible in this frame.",
+    "multipleFacilities": "Industrial park with several very large warehouse/distribution buildings.",
+    "dockDoors": "Long dock banks with dozens of doors and trailers backed in across multiple buildings.",
+    "shipRcvSeparate": "Dock clusters on opposite building faces suggest separate ship/receive banks.",
+    "dropYard": "Trailer storage rows along the building perimeters.",
+    "truckGate": "No checkpoint resolved; access roads run open through the park."
+  }
+}

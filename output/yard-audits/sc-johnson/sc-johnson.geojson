@@ -1,0 +1,2552 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8905,
+              42.7018
+            ],
+            [
+              -87.881,
+              42.7018
+            ],
+            [
+              -87.881,
+              42.7128
+            ],
+            [
+              -87.8905,
+              42.7128
+            ],
+            [
+              -87.8905,
+              42.7018
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Waxdale Plant - Mt. Pleasant WI",
+        "type": "Manufacturing Plant (Aerosol / Liquid / Gel)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 9,
+          "siteAreaAcres": 218,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8866,
+              42.7116
+            ],
+            [
+              -87.8852,
+              42.7116
+            ],
+            [
+              -87.8852,
+              42.713
+            ],
+            [
+              -87.8866,
+              42.713
+            ],
+            [
+              -87.8866,
+              42.7116
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Waxdale Plant - Mt. Pleasant WI",
+        "type": "Manufacturing Plant (Aerosol / Liquid / Gel)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8878,
+              42.7098
+            ],
+            [
+              -87.8856,
+              42.7098
+            ],
+            [
+              -87.8856,
+              42.7115
+            ],
+            [
+              -87.8878,
+              42.7115
+            ],
+            [
+              -87.8878,
+              42.7098
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Waxdale Plant - Mt. Pleasant WI",
+        "type": "Manufacturing Plant (Aerosol / Liquid / Gel)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8878,
+              42.707
+            ],
+            [
+              -87.8856,
+              42.707
+            ],
+            [
+              -87.8856,
+              42.7088
+            ],
+            [
+              -87.8878,
+              42.7088
+            ],
+            [
+              -87.8878,
+              42.707
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Waxdale Plant - Mt. Pleasant WI",
+        "type": "Manufacturing Plant (Aerosol / Liquid / Gel)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8856,
+              42.7056
+            ],
+            [
+              -87.8842,
+              42.7056
+            ],
+            [
+              -87.8842,
+              42.709
+            ],
+            [
+              -87.8856,
+              42.709
+            ],
+            [
+              -87.8856,
+              42.7056
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Waxdale Plant - Mt. Pleasant WI",
+        "type": "Manufacturing Plant (Aerosol / Liquid / Gel)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8856,
+              42.7082
+            ],
+            [
+              -87.8838,
+              42.7082
+            ],
+            [
+              -87.8838,
+              42.7092
+            ],
+            [
+              -87.8856,
+              42.7092
+            ],
+            [
+              -87.8856,
+              42.7082
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Waxdale Plant - Mt. Pleasant WI",
+        "type": "Manufacturing Plant (Aerosol / Liquid / Gel)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8842,
+              42.7056
+            ],
+            [
+              -87.8825,
+              42.7056
+            ],
+            [
+              -87.8825,
+              42.7068
+            ],
+            [
+              -87.8842,
+              42.7068
+            ],
+            [
+              -87.8842,
+              42.7056
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Waxdale Plant - Mt. Pleasant WI",
+        "type": "Manufacturing Plant (Aerosol / Liquid / Gel)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8866,
+              42.7095
+            ],
+            [
+              -87.8852,
+              42.7095
+            ],
+            [
+              -87.8852,
+              42.7116
+            ],
+            [
+              -87.8866,
+              42.7116
+            ],
+            [
+              -87.8866,
+              42.7095
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Waxdale Plant - Mt. Pleasant WI",
+        "type": "Manufacturing Plant (Aerosol / Liquid / Gel)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8738,
+              43.6156
+            ],
+            [
+              -83.8645,
+              43.6156
+            ],
+            [
+              -83.8645,
+              43.6256
+            ],
+            [
+              -83.8738,
+              43.6256
+            ],
+            [
+              -83.8738,
+              43.6156
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Bay City Plant (Ziploc) - Bay City MI",
+        "type": "Manufacturing Plant (Home Storage - Ziploc)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 400,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8734,
+              43.623
+            ],
+            [
+              -83.8723,
+              43.623
+            ],
+            [
+              -83.8723,
+              43.6239
+            ],
+            [
+              -83.8734,
+              43.6239
+            ],
+            [
+              -83.8734,
+              43.623
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Bay City Plant (Ziploc) - Bay City MI",
+        "type": "Manufacturing Plant (Home Storage - Ziploc)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8734,
+              43.6236
+            ],
+            [
+              -83.8695,
+              43.6236
+            ],
+            [
+              -83.8695,
+              43.6254
+            ],
+            [
+              -83.8734,
+              43.6254
+            ],
+            [
+              -83.8734,
+              43.6236
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Bay City Plant (Ziploc) - Bay City MI",
+        "type": "Manufacturing Plant (Home Storage - Ziploc)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8712,
+              43.6186
+            ],
+            [
+              -83.8685,
+              43.6186
+            ],
+            [
+              -83.8685,
+              43.62
+            ],
+            [
+              -83.8712,
+              43.62
+            ],
+            [
+              -83.8712,
+              43.6186
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Bay City Plant (Ziploc) - Bay City MI",
+        "type": "Manufacturing Plant (Home Storage - Ziploc)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8734,
+              43.6224
+            ],
+            [
+              -83.8665,
+              43.6224
+            ],
+            [
+              -83.8665,
+              43.6233
+            ],
+            [
+              -83.8734,
+              43.6233
+            ],
+            [
+              -83.8734,
+              43.6224
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Bay City Plant (Ziploc) - Bay City MI",
+        "type": "Manufacturing Plant (Home Storage - Ziploc)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8732,
+              43.6194
+            ],
+            [
+              -83.872,
+              43.6194
+            ],
+            [
+              -83.872,
+              43.6203
+            ],
+            [
+              -83.8732,
+              43.6203
+            ],
+            [
+              -83.8732,
+              43.6194
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Bay City Plant (Ziploc) - Bay City MI",
+        "type": "Manufacturing Plant (Home Storage - Ziploc)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8732,
+              43.62
+            ],
+            [
+              -83.8717,
+              43.62
+            ],
+            [
+              -83.8717,
+              43.6216
+            ],
+            [
+              -83.8732,
+              43.6216
+            ],
+            [
+              -83.8732,
+              43.62
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Bay City Plant (Ziploc) - Bay City MI",
+        "type": "Manufacturing Plant (Home Storage - Ziploc)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.6032,
+              41.6954
+            ],
+            [
+              -87.5998,
+              41.6954
+            ],
+            [
+              -87.5998,
+              41.6987
+            ],
+            [
+              -87.6032,
+              41.6987
+            ],
+            [
+              -87.6032,
+              41.6954
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "South Side Soapbox Plant (method / Ecover) - Chicago IL",
+        "type": "Manufacturing Plant + Distribution (method / Ecover)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 24,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 22,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.6024,
+              41.6977
+            ],
+            [
+              -87.6,
+              41.6977
+            ],
+            [
+              -87.6,
+              41.6987
+            ],
+            [
+              -87.6024,
+              41.6987
+            ],
+            [
+              -87.6024,
+              41.6977
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "South Side Soapbox Plant (method / Ecover) - Chicago IL",
+        "type": "Manufacturing Plant + Distribution (method / Ecover)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.6026,
+              41.6978
+            ],
+            [
+              -87.6008,
+              41.6978
+            ],
+            [
+              -87.6008,
+              41.6985
+            ],
+            [
+              -87.6026,
+              41.6985
+            ],
+            [
+              -87.6026,
+              41.6978
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "South Side Soapbox Plant (method / Ecover) - Chicago IL",
+        "type": "Manufacturing Plant + Distribution (method / Ecover)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.6011,
+              41.6978
+            ],
+            [
+              -87.5999,
+              41.6978
+            ],
+            [
+              -87.5999,
+              41.6985
+            ],
+            [
+              -87.6011,
+              41.6985
+            ],
+            [
+              -87.6011,
+              41.6978
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "South Side Soapbox Plant (method / Ecover) - Chicago IL",
+        "type": "Manufacturing Plant + Distribution (method / Ecover)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0798,
+              35.3393
+            ],
+            [
+              -81.0762,
+              35.3393
+            ],
+            [
+              -81.0762,
+              35.3413
+            ],
+            [
+              -81.0798,
+              35.3413
+            ],
+            [
+              -81.0798,
+              35.3393
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "SC Johnson Professional Plant - Stanley NC",
+        "type": "Manufacturing Plant (Professional - hand care / floor care)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 10,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0776,
+              35.3397
+            ],
+            [
+              -81.0764,
+              35.3397
+            ],
+            [
+              -81.0764,
+              35.3406
+            ],
+            [
+              -81.0776,
+              35.3406
+            ],
+            [
+              -81.0776,
+              35.3397
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "SC Johnson Professional Plant - Stanley NC",
+        "type": "Manufacturing Plant (Professional - hand care / floor care)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0774,
+              35.3404
+            ],
+            [
+              -81.0762,
+              35.3404
+            ],
+            [
+              -81.0762,
+              35.3411
+            ],
+            [
+              -81.0774,
+              35.3411
+            ],
+            [
+              -81.0774,
+              35.3404
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "SC Johnson Professional Plant - Stanley NC",
+        "type": "Manufacturing Plant (Professional - hand care / floor care)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0776,
+              35.3405
+            ],
+            [
+              -81.0764,
+              35.3405
+            ],
+            [
+              -81.0764,
+              35.3412
+            ],
+            [
+              -81.0776,
+              35.3412
+            ],
+            [
+              -81.0776,
+              35.3405
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "SC Johnson Professional Plant - Stanley NC",
+        "type": "Manufacturing Plant (Professional - hand care / floor care)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.9134,
+              42.7025
+            ],
+            [
+              -87.9094,
+              42.7025
+            ],
+            [
+              -87.9094,
+              42.7048
+            ],
+            [
+              -87.9134,
+              42.7048
+            ],
+            [
+              -87.9134,
+              42.7025
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Sturtevant Regional Distribution Center - Sturtevant WI",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 118,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 33,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.9124,
+              42.7029
+            ],
+            [
+              -87.9116,
+              42.7029
+            ],
+            [
+              -87.9116,
+              42.7032
+            ],
+            [
+              -87.9124,
+              42.7032
+            ],
+            [
+              -87.9124,
+              42.7029
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Sturtevant Regional Distribution Center - Sturtevant WI",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.913,
+              42.70285
+            ],
+            [
+              -87.9099,
+              42.70285
+            ],
+            [
+              -87.9099,
+              42.7032
+            ],
+            [
+              -87.913,
+              42.7032
+            ],
+            [
+              -87.913,
+              42.70285
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Sturtevant Regional Distribution Center - Sturtevant WI",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.913,
+              42.70435
+            ],
+            [
+              -87.9099,
+              42.70435
+            ],
+            [
+              -87.9099,
+              42.70475
+            ],
+            [
+              -87.913,
+              42.70475
+            ],
+            [
+              -87.913,
+              42.70435
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Sturtevant Regional Distribution Center - Sturtevant WI",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.913,
+              42.70295
+            ],
+            [
+              -87.9099,
+              42.70295
+            ],
+            [
+              -87.9099,
+              42.70322
+            ],
+            [
+              -87.913,
+              42.70322
+            ],
+            [
+              -87.913,
+              42.70295
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Sturtevant Regional Distribution Center - Sturtevant WI",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.913,
+              42.70432
+            ],
+            [
+              -87.9099,
+              42.70432
+            ],
+            [
+              -87.9099,
+              42.70458
+            ],
+            [
+              -87.913,
+              42.70458
+            ],
+            [
+              -87.913,
+              42.70432
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Sturtevant Regional Distribution Center - Sturtevant WI",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.333,
+              32.9669
+            ],
+            [
+              -97.3299,
+              32.9669
+            ],
+            [
+              -97.3299,
+              32.9709
+            ],
+            [
+              -97.333,
+              32.9709
+            ],
+            [
+              -97.333,
+              32.9669
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Fort Worth Regional Distribution Center - Fort Worth TX",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 140,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 30,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3338,
+              32.9672
+            ],
+            [
+              -97.3331,
+              32.9672
+            ],
+            [
+              -97.3331,
+              32.9677
+            ],
+            [
+              -97.3338,
+              32.9677
+            ],
+            [
+              -97.3338,
+              32.9672
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Fort Worth Regional Distribution Center - Fort Worth TX",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3329,
+              32.9673
+            ],
+            [
+              -97.332,
+              32.9673
+            ],
+            [
+              -97.332,
+              32.9709
+            ],
+            [
+              -97.3329,
+              32.9709
+            ],
+            [
+              -97.3329,
+              32.9673
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Fort Worth Regional Distribution Center - Fort Worth TX",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3308,
+              32.9673
+            ],
+            [
+              -97.3299,
+              32.9673
+            ],
+            [
+              -97.3299,
+              32.9709
+            ],
+            [
+              -97.3308,
+              32.9709
+            ],
+            [
+              -97.3308,
+              32.9673
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Fort Worth Regional Distribution Center - Fort Worth TX",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3322,
+              32.9674
+            ],
+            [
+              -97.3317,
+              32.9674
+            ],
+            [
+              -97.3317,
+              32.9707
+            ],
+            [
+              -97.3322,
+              32.9707
+            ],
+            [
+              -97.3322,
+              32.9674
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Fort Worth Regional Distribution Center - Fort Worth TX",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3313,
+              32.9674
+            ],
+            [
+              -97.3308,
+              32.9674
+            ],
+            [
+              -97.3308,
+              32.9707
+            ],
+            [
+              -97.3313,
+              32.9707
+            ],
+            [
+              -97.3313,
+              32.9674
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Fort Worth Regional Distribution Center - Fort Worth TX",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5972,
+              33.5317
+            ],
+            [
+              -84.5944,
+              33.5317
+            ],
+            [
+              -84.5944,
+              33.5356
+            ],
+            [
+              -84.5972,
+              33.5356
+            ],
+            [
+              -84.5972,
+              33.5317
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Fairburn Regional Distribution Center - Fairburn GA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 26,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5954,
+              33.535
+            ],
+            [
+              -84.5946,
+              33.535
+            ],
+            [
+              -84.5946,
+              33.5356
+            ],
+            [
+              -84.5954,
+              33.5356
+            ],
+            [
+              -84.5954,
+              33.535
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Fairburn Regional Distribution Center - Fairburn GA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.597,
+              33.5321
+            ],
+            [
+              -84.5964,
+              33.5321
+            ],
+            [
+              -84.5964,
+              33.5348
+            ],
+            [
+              -84.597,
+              33.5348
+            ],
+            [
+              -84.597,
+              33.5321
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Fairburn Regional Distribution Center - Fairburn GA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5954,
+              33.5321
+            ],
+            [
+              -84.5947,
+              33.5321
+            ],
+            [
+              -84.5947,
+              33.5348
+            ],
+            [
+              -84.5954,
+              33.5348
+            ],
+            [
+              -84.5954,
+              33.5321
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Fairburn Regional Distribution Center - Fairburn GA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5966,
+              33.5321
+            ],
+            [
+              -84.5963,
+              33.5321
+            ],
+            [
+              -84.5963,
+              33.5348
+            ],
+            [
+              -84.5966,
+              33.5348
+            ],
+            [
+              -84.5966,
+              33.5321
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Fairburn Regional Distribution Center - Fairburn GA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5956,
+              33.5321
+            ],
+            [
+              -84.5953,
+              33.5321
+            ],
+            [
+              -84.5953,
+              33.5348
+            ],
+            [
+              -84.5956,
+              33.5348
+            ],
+            [
+              -84.5956,
+              33.5321
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Fairburn Regional Distribution Center - Fairburn GA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5966,
+              33.5316
+            ],
+            [
+              -84.5952,
+              33.5316
+            ],
+            [
+              -84.5952,
+              33.5322
+            ],
+            [
+              -84.5966,
+              33.5322
+            ],
+            [
+              -84.5966,
+              33.5316
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Fairburn Regional Distribution Center - Fairburn GA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.7285,
+              38.6774
+            ],
+            [
+              -121.7262,
+              38.6774
+            ],
+            [
+              -121.7262,
+              38.6793
+            ],
+            [
+              -121.7285,
+              38.6793
+            ],
+            [
+              -121.7285,
+              38.6774
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Woodland Regional Distribution Center - Woodland CA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 42,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.7267,
+              38.6776
+            ],
+            [
+              -121.7262,
+              38.6776
+            ],
+            [
+              -121.7262,
+              38.678
+            ],
+            [
+              -121.7267,
+              38.678
+            ],
+            [
+              -121.7267,
+              38.6776
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Woodland Regional Distribution Center - Woodland CA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.7282,
+              38.6776
+            ],
+            [
+              -121.7264,
+              38.6776
+            ],
+            [
+              -121.7264,
+              38.678
+            ],
+            [
+              -121.7282,
+              38.678
+            ],
+            [
+              -121.7282,
+              38.6776
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Woodland Regional Distribution Center - Woodland CA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.7282,
+              38.6789
+            ],
+            [
+              -121.7264,
+              38.6789
+            ],
+            [
+              -121.7264,
+              38.67925
+            ],
+            [
+              -121.7282,
+              38.67925
+            ],
+            [
+              -121.7282,
+              38.6789
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Woodland Regional Distribution Center - Woodland CA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.7281,
+              38.67772
+            ],
+            [
+              -121.7265,
+              38.67772
+            ],
+            [
+              -121.7265,
+              38.67795
+            ],
+            [
+              -121.7281,
+              38.67795
+            ],
+            [
+              -121.7281,
+              38.67772
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Woodland Regional Distribution Center - Woodland CA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.7281,
+              38.67875
+            ],
+            [
+              -121.7265,
+              38.67875
+            ],
+            [
+              -121.7265,
+              38.67898
+            ],
+            [
+              -121.7281,
+              38.67898
+            ],
+            [
+              -121.7281,
+              38.67875
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Woodland Regional Distribution Center - Woodland CA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.245,
+              40.1733
+            ],
+            [
+              -77.2408,
+              40.1733
+            ],
+            [
+              -77.2408,
+              40.177
+            ],
+            [
+              -77.245,
+              40.177
+            ],
+            [
+              -77.245,
+              40.1733
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Carlisle Regional Distribution Center - Carlisle PA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 38,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.242,
+              40.176
+            ],
+            [
+              -77.241,
+              40.176
+            ],
+            [
+              -77.241,
+              40.1766
+            ],
+            [
+              -77.242,
+              40.1766
+            ],
+            [
+              -77.242,
+              40.176
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Carlisle Regional Distribution Center - Carlisle PA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.2448,
+              40.1736
+            ],
+            [
+              -77.2438,
+              40.1736
+            ],
+            [
+              -77.2438,
+              40.1764
+            ],
+            [
+              -77.2448,
+              40.1764
+            ],
+            [
+              -77.2448,
+              40.1736
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Carlisle Regional Distribution Center - Carlisle PA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.2421,
+              40.1736
+            ],
+            [
+              -77.241,
+              40.1736
+            ],
+            [
+              -77.241,
+              40.1764
+            ],
+            [
+              -77.2421,
+              40.1764
+            ],
+            [
+              -77.2421,
+              40.1736
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Carlisle Regional Distribution Center - Carlisle PA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.2443,
+              40.1737
+            ],
+            [
+              -77.2439,
+              40.1737
+            ],
+            [
+              -77.2439,
+              40.1763
+            ],
+            [
+              -77.2443,
+              40.1763
+            ],
+            [
+              -77.2443,
+              40.1737
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Carlisle Regional Distribution Center - Carlisle PA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.2424,
+              40.1737
+            ],
+            [
+              -77.242,
+              40.1737
+            ],
+            [
+              -77.242,
+              40.1763
+            ],
+            [
+              -77.2424,
+              40.1763
+            ],
+            [
+              -77.2424,
+              40.1737
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Carlisle Regional Distribution Center - Carlisle PA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.6197,
+              34.045
+            ],
+            [
+              -117.6173,
+              34.045
+            ],
+            [
+              -117.6173,
+              34.0472
+            ],
+            [
+              -117.6197,
+              34.0472
+            ],
+            [
+              -117.6197,
+              34.045
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Ontario Distribution Center - Ontario CA",
+        "type": "Distribution Center (aerosol storage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 20,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 13,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.6196,
+              34.0453
+            ],
+            [
+              -117.6191,
+              34.0453
+            ],
+            [
+              -117.6191,
+              34.0457
+            ],
+            [
+              -117.6196,
+              34.0457
+            ],
+            [
+              -117.6196,
+              34.0453
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Ontario Distribution Center - Ontario CA",
+        "type": "Distribution Center (aerosol storage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.6196,
+              34.04545
+            ],
+            [
+              -117.61905,
+              34.04545
+            ],
+            [
+              -117.61905,
+              34.0469
+            ],
+            [
+              -117.6196,
+              34.0469
+            ],
+            [
+              -117.6196,
+              34.04545
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Ontario Distribution Center - Ontario CA",
+        "type": "Distribution Center (aerosol storage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.61905,
+              34.04545
+            ],
+            [
+              -117.6187,
+              34.04545
+            ],
+            [
+              -117.6187,
+              34.0469
+            ],
+            [
+              -117.61905,
+              34.0469
+            ],
+            [
+              -117.61905,
+              34.04545
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Ontario Distribution Center - Ontario CA",
+        "type": "Distribution Center (aerosol storage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.6187,
+              34.0451
+            ],
+            [
+              -117.6174,
+              34.0451
+            ],
+            [
+              -117.6174,
+              34.0454
+            ],
+            [
+              -117.6187,
+              34.0454
+            ],
+            [
+              -117.6187,
+              34.0451
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "sc-johnson",
+        "name": "Ontario Distribution Center - Ontario CA",
+        "type": "Distribution Center (aerosol storage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    }
+  ]
+}

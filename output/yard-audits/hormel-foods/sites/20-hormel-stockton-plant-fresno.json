@@ -1,0 +1,50 @@
+{
+  "name": "Hormel Stockton Plant / Fresno - Fresno CA",
+  "type": "Production Facility",
+  "coords": { "lat": 36.71840, "lng": -119.75270 },
+  "geofences": {
+    "perimeter": { "south": 36.71700, "west": -119.75420, "north": 36.71960, "east": -119.75210 },
+    "truckGate": { "south": 36.71750, "west": -119.75230, "north": 36.71790, "east": -119.75180 },
+    "dropYards": [
+      { "south": 36.71800, "west": -119.75420, "north": 36.71930, "east": -119.75330 }
+    ],
+    "dockAprons": [
+      { "south": 36.71820, "west": -119.75370, "north": 36.71930, "east": -119.75320 }
+    ],
+    "staging": { "south": 36.71800, "west": -119.75340, "north": 36.71920, "east": -119.75280 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 10, "trailersVisible": 20, "trailerParkingCapacity": 30,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 12.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.71840,-119.75270,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "dockDoorCount", "entryLanes", "exitLanes", "railServed"],
+  "fieldNotes": {
+    "location": "Roster address '3438 W Pontiac Way' geocoded to a residential neighborhood in NW Fresno - wrong. The Hormel Fresno Plant is the Corn Nuts roasting/packaging facility at 4343 E Florence Ave, Fresno 93725 (SE Fresno industrial area), confirmed via web search (Hormel 'Our Locations' Fresno Plant + Corn Nuts solar-array articles). A matching processing plant with a solar field, trailer docks, and a fenced yard sits at 36.7184,-119.7527. Locked center there. Note: roster name also mentions 'Stockton' - the audited site is the Fresno plant.",
+    "truckGate": "Property is fully enclosed by a tubular-metal perimeter fence with a landscaped buffer along E Florence Ave. Vehicle access is via gated driveway openings in the fence. A gate is present (medium confidence - Street View only reaches the public road and could not capture the gate panel directly).",
+    "guardShack": "No staffed guard booth visible at any driveway in Street View (2024-12) or satellite imagery.",
+    "remoteGs": "Gate present, no guard shack -> remote/kiosk check-in inferred.",
+    "dockDoorCount": "~6-8 dock doors along the west building face with green/white trailers backed in; ~10 total estimated, 0-10 band.",
+    "dropArea": "Trailers parked in the paved west truck yard plus an adjacent dirt overflow lot with ~8-12 parked trailers; dropArea 10-25, dedicated drop yard present.",
+    "drivewayLong": "Large paved truck yard on the west side easily holds a 3+ truck queue between the gate and the docks.",
+    "postGateStaging": "Open paved truck yard inside the fence before the docks serves as staging.",
+    "railServed": "A rail line runs along the east edge of the property; spur tracks appear to serve a neighboring facility rather than the Hormel building - no clear rail dock on the plant. Marked false, flagged uncertain.",
+    "urbanRural": "Dense SE Fresno industrial district (Fresno metro) - Urban.",
+    "buildingCount": "Single Corn Nuts processing/packaging building.",
+    "shipRcvSeparate": "Dock activity concentrated on the single west face - combined ship/receive."
+  },
+  "method": "deep-audit"
+}

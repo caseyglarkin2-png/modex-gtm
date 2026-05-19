@@ -1,0 +1,51 @@
+{
+  "name": "FedEx Freight Hub - Dallas/Fort Worth TX",
+  "type": "Freight LTL hub service center (DFW metro)",
+  "coords": { "lat": 32.8378, "lng": -97.3340 },
+  "geofences": {
+    "perimeter": { "south": 32.8362, "west": -97.3395, "north": 32.8398, "east": -97.3300 },
+    "truckGate": { "south": 32.8384, "west": -97.3318, "north": 32.8390, "east": -97.3308 },
+    "dropYards": [
+      { "south": 32.8366, "west": -97.3392, "north": 32.8384, "east": -97.3305 }
+    ],
+    "dockAprons": [
+      { "south": 32.8378, "west": -97.3392, "north": 32.8388, "east": -97.3305 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130, "trailersVisible": 110, "trailerParkingCapacity": 250,
+    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 70.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.8378,-97.3340,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "dropArea", "multipleFacilities", "postGateStaging", "siteAreaAcres"],
+  "fieldNotes": {
+    "location": "Roster address '3600 Reeves Pl, Fort Worth TX 76119' and coordinates (32.790629, -97.223508, RANGE_INTERPOLATED) resolve to a small multi-tenant flex/industrial building in the Carter Industrial Park (SE Fort Worth) - NOT a freight LTL hub. The official FedEx Freight FTW service center is at 1909 Great Southwest Pkwy, Fort Worth, TX 76106 (confirmed by the FedEx Freight FTW service-center map PDF and locator). That address sits in the Great Southwest Industrial District (GSID), inside Loop 820 north of Meacham Blvd. Satellite at the geocoded GSID location reveals an LTL cross-dock terminal complex (multiple long narrow cross-dock buildings with trailers backed in on both faces, dock aprons, trailer parking, rail along the south edge) at approximately 32.8378, -97.3340.",
+    "facilityIdentity": "The cross-dock terminal complex at the resolved GSID location is unmistakably an LTL truck terminal, but it appears to be a multi-carrier terminal corridor (a 'C.M.I.' trailer was seen at one cross-dock in Street View). FedEx Freight FTW occupies a cross-dock within this complex; the exact building could not be 100% confirmed with FedEx signage in Street View. Facility-type and location are confident; the precise FedEx footprint within the complex is medium-confidence.",
+    "truckGate": "LTL cross-dock terminals in this complex have controlled yard access; the terminal yards are fenced and gated off Great Southwest Pkwy. Exact gate not directly confirmed.",
+    "guardShack": "No staffed guard booth identified; LTL service centers of this size typically use remote/kiosk gate check-in. Classified remoteGs true, low-medium confidence.",
+    "dockDoors": "Long narrow cross-dock buildings with a regular rhythm of dock doors on both long faces, trailers backed in; combined estimate ~130 doors across the cross-docks attributable to the terminal -> 50+ band. Overhead estimate.",
+    "dropArea": "Paved trailer parking and dock aprons hold dozens of trailers/pups; estimated 25-50.",
+    "dropYard": "Dedicated trailer parking flanks the cross-dock buildings.",
+    "drivewayLong": "Deep paved aprons and yard between gate and docks give room for a 3+ truck queue.",
+    "fastLaneOpportunity": "Wide paved terminal apron gives physical room to add a bypass/express lane.",
+    "multipleFacilities": "The GSID terminal corridor hosts multiple long cross-dock buildings (multi-carrier); flagged true, but FedEx's own footprint is a subset.",
+    "urbanRural": "Within the dense Fort Worth metro industrial fabric (GSID, inside Loop 820); classified Urban.",
+    "railServed": "A rail line runs along the south edge of the terminal corridor but no spur enters the FedEx truck yard; classified false.",
+    "siteAreaAcres": "Derived from the perimeter box around the terminal complex; FedEx Freight's leased portion is a subset of this."
+  },
+  "method": "deep-audit"
+}

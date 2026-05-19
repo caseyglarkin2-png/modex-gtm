@@ -1,0 +1,51 @@
+{
+  "name": "Hormel Beloit Plant - Beloit WI",
+  "type": "Production Facility",
+  "coords": { "lat": 42.52100, "lng": -88.97780 },
+  "geofences": {
+    "perimeter": { "south": 42.51960, "west": -88.98010, "north": 42.52280, "east": -88.97600 },
+    "truckGate": { "south": 42.52030, "west": -88.97920, "north": 42.52080, "east": -88.97860 },
+    "dropYards": [
+      { "south": 42.51990, "west": -88.98010, "north": 42.52220, "east": -88.97870 },
+      { "south": 42.51960, "west": -88.97840, "north": 42.52010, "east": -88.97700 }
+    ],
+    "dockAprons": [
+      { "south": 42.52000, "west": -88.97870, "north": 42.52220, "east": -88.97820 },
+      { "south": 42.51975, "west": -88.97820, "north": 42.52005, "east": -88.97680 }
+    ],
+    "staging": { "south": 42.52020, "west": -88.97950, "north": 42.52110, "east": -88.97880 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 34, "trailersVisible": 55, "trailerParkingCapacity": 70,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 23.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.52100,-88.97780,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Roster coords (2001 Gateway Blvd, 42.5328,-88.9565) landed in an empty farm field near the I-43/I-90 interchange. Correct facility is at 3000 Kennedy Dr, Beloit, confirmed via web search and OSM (Hormel Foods industrial building, 42.5210,-88.9776). Hormel logo visible on the west wall in Street View.",
+    "truckGate": "Sliding chain-link gate across the truck driveway at the SW corner of the yard (off the Kennedy Dr / Gateway business-park cul-de-sac). The whole truck yard is enclosed by chain-link fence with green privacy slats. Open driveway apron leads to the gate.",
+    "guardShack": "No staffed booth observed beside the truck gate in Street View (2022-11) or satellite imagery; entry appears uncontrolled-by-person / kiosk-style.",
+    "remoteGs": "Gate present but no guard shack -> remote check-in inferred.",
+    "dockDoorCount": "Counted ~20 dock doors with trailers backed in along the west wall plus ~12-14 along the south wall; ~34 total is an honest estimate, hence 25-50 band.",
+    "dropArea": "Two trailer drop areas: long row of parked trailers along the west drop yard (40+ trailers in rows) and an angled row of ~10-12 trailers at the SE; clearly 50+ across the site.",
+    "shipRcvSeparate": "Dock banks on two distinct building faces (west wall and south wall) - likely separate ship/receive clusters.",
+    "fastLaneOpportunity": "Wide paved gate apron and large open yard at the SW entrance gives room for a bypass/express lane.",
+    "urbanRural": "Edge-of-town Beloit business park, bordered by farm fields and I-90; small-metro industrial setting -> Rural per rubric.",
+    "buildingCount": "Main plant building plus a small detached storage shed/building north of the parking lot.",
+    "railServed": "No rail spur runs into the property; I-90 borders the east side."
+  },
+  "method": "deep-audit"
+}

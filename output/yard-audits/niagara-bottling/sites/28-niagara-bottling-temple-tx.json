@@ -1,0 +1,57 @@
+{
+  "name": "Niagara Bottling - Temple TX",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 31.156095, "lng": -97.354586 },
+  "geofences": {
+    "perimeter": { "south": 31.151200, "west": -97.355900, "north": 31.158600, "east": -97.350400 },
+    "truckGate": { "south": 31.154500, "west": -97.355900, "north": 31.155200, "east": -97.355100 },
+    "dropYards": [
+      { "south": 31.155800, "west": -97.352600, "north": 31.158100, "east": -97.351200 },
+      { "south": 31.151500, "west": -97.355600, "north": 31.153100, "east": -97.351800 }
+    ],
+    "dockAprons": [
+      { "south": 31.155500, "west": -97.353000, "north": 31.158200, "east": -97.351600 },
+      { "south": 31.151500, "west": -97.355000, "north": 31.153100, "east": -97.351000 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 85,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 78.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@31.156095,-97.354586,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity", "scale"],
+  "fieldNotes": {
+    "truckGate": "No controlled checkpoint found. The campus has only a landscaped grass buffer along Wendland Rd with a Niagara monument sign at the entrance driveway (Street View 2026-04) — no perimeter security fence, no barrier arm and no guard booth across any driveway. Classified false, medium confidence.",
+    "guardShack": "No staffed-booth structure visible at any entrance. A small white structure near the main plant NE corner appears to be a process/utility building, not a gatehouse.",
+    "multipleFacilities": "Campus of two large Niagara buildings: the original ~728,000 sq ft manufacturing plant (north) and the $48M logistics-center expansion (south), connected by an internal road.",
+    "dockDoors": "Main plant has a long dock bank on its east face with trailers backed in; the logistics center has dock banks on its south/north faces. Combined estimate ~90 doors across both buildings — 50+ band confident.",
+    "dropArea": "Large trailer yards at both buildings hold 80+ tractor-trailers and drop trailers in marked rows; 50+ band, dedicated drop yard present.",
+    "shipRcvSeparate": "Separate dock clusters on the two distinct buildings (manufacturing plant vs. logistics center) imply physically separate ship/receive operations.",
+    "fastLaneOpportunity": "Very wide internal roads and broad aprons with substantial unused paved width leave clear room for bypass/express lanes.",
+    "postGateStaging": "Deep paved yards between the internal roads and the dock doors at both buildings provide ample post-gate staging.",
+    "railServed": "A rail line runs immediately south of the logistics center with rail cars on it, but it is a separate mainline/siding — no spur enters the Niagara property; classified not rail-served.",
+    "urbanRural": "Located in the Temple Industrial Park on the edge of Temple, surrounded by farm fields — Rural setting.",
+    "truckGateCount": "Two driveway connections to Wendland Rd serve the campus; counted as 2 truck gates (both uncontrolled).",
+    "scale": "No truck scale clearly identified; flagged as uncertain.",
+    "siteAreaAcres": "~78 acres derived from the perimeter box covering both buildings, their dock aprons and trailer yards."
+  },
+  "method": "deep-audit"
+}

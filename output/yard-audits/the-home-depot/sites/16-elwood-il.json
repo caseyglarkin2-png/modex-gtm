@@ -1,0 +1,56 @@
+{
+  "name": "Home Depot RDC - Elwood IL",
+  "type": "Rapid Deployment Center",
+  "coords": { "lat": 41.44010, "lng": -88.14320 },
+  "geofences": {
+    "perimeter": { "south": 41.43620, "west": -88.14620, "north": 41.44320, "east": -88.14070 },
+    "truckGate": { "south": 41.43620, "west": -88.14470, "north": 41.43710, "east": -88.14300 },
+    "dropYards": [
+      { "south": 41.43760, "west": -88.14600, "north": 41.44280, "east": -88.14470 },
+      { "south": 41.43800, "west": -88.14250, "north": 41.44280, "east": -88.14090 }
+    ],
+    "dockAprons": [
+      { "south": 41.43760, "west": -88.14470, "north": 41.44280, "east": -88.14380 },
+      { "south": 41.43760, "west": -88.14260, "north": 41.44280, "east": -88.14180 }
+    ],
+    "staging": { "south": 41.43650, "west": -88.14430, "north": 41.43760, "east": -88.14250 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 150,
+    "trailersVisible": 280,
+    "trailerParkingCapacity": 360,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 60.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.44010,-88.14320,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 3, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Cross-dock RDC #5851 (657K sq ft) in the CenterPoint Intermodal Center, Joliet/Elwood. A clear guarded gate complex on the south side: guard booth with a canopy, multiple inbound/outbound lanes, and a chevron-striped apron with trucks queued through the checkpoint (z19 imagery).",
+    "guardShack": "A canopy-roofed guard booth straddling the gate lanes is plainly visible at the south truck entrance. remoteGs = false accordingly.",
+    "preGateStaging": "Trucks visibly staged/queued on the approach road before the gate; striped apron and road shoulder provide pre-gate waiting room.",
+    "postGateStaging": "Wide internal aprons inside the gate before the dock faces.",
+    "drivewayLong": "Long internal aprons running both long faces of the N-S building — well over 3 trucks of stacking.",
+    "fastLaneOpportunity": "Multi-lane gate (3 inbound observed) with a wide striped apron — room for an express bypass lane.",
+    "dockDoors": "Dense dock-door rhythm with trailers backed in along both the long east and long west faces — well over 100 doors (cross-dock RDC).",
+    "shipRcvSeparate": "Cross-dock layout — receiving on one long face, shipping on the opposite; two distinct dock banks.",
+    "dropYard": "Dedicated trailer drop-yard rows flanking both long faces.",
+    "urbanRural": "CenterPoint Intermodal Center is a large logistics park on rural land between Joliet and Elwood IL, surrounded by farmland and warehouses — judged Rural per rubric.",
+    "railServed": "The CenterPoint Intermodal Center has major intermodal rail yards, but no rail spur runs into this RDC's own property — railServed = false for this facility.",
+    "entryLanes": "Three inbound lanes estimated from gate imagery; exact count not fully resolved."
+  },
+  "method": "deep-audit"
+}

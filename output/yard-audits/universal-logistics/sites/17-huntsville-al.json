@@ -1,0 +1,47 @@
+{
+  "name": "Universal Logistics - Huntsville Contract Logistics Warehouse - Huntsville/Madison AL",
+  "type": "Contract Logistics / Value-Added Warehouse",
+  "coords": { "lat": 34.74900, "lng": -86.86500 },
+  "geofences": {
+    "perimeter": null,
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 0.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.74900,-86.86500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "_location": "Operator, customer, and street address are CONFIRMED, but the building footprint could NOT be visually locked. Universal Logistics runs an active Huntsville-area contract-logistics / value-added warehouse operation at the POLARIS INDUSTRIES plant - business listings and Universal job postings give the work address as 7049 Greenbrier Pkwy NW, Madison, AL 35756 (the Polaris ATV/ORV manufacturing plant); a Snagajob listing 'Universal Logistics Holdings Warehouse Associates - Huntsville' and the 'Universal Logistics - Huntsville' Facebook page confirm an active operation. NOTE: roster idx 17 'Huntsville' is described as serving Mazda Toyota, but the address evidence resolves the Universal Huntsville operation to the Polaris Madison plant - this is the better-supported attribution and is distinct from idx 14 Tanner (5271 Endeavor Way, MTM value-added).",
+    "_imagery": "Repeated satellite probes around Greenbrier Pkwy NW / the Madison-Limestone County industrial corridor and the I-565 Greenbrier interchange did not positively isolate the Polaris building (sparse high-res coverage; 'Greenbrier Pkwy NW' coordinate guesses landed in farmland). Per methodology, the building was NOT locked, so geofences and yardMetrics are left null/zero rather than risk auditing the wrong structure. coords here are a Madison/Greenbrier-corridor area anchor only.",
+    "_classification": "All 22 classification fields are best-guess defaults (open-site / no-gate is typical for a Tier-1-plant value-added warehouse; corridor is Rural) and must be treated as unverified pending locked rooftop coordinates for 7049 Greenbrier Pkwy NW."
+  },
+  "method": "deep-audit"
+}

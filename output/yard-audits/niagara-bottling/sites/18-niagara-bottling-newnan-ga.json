@@ -1,0 +1,48 @@
+{
+  "name": "Niagara Bottling - Newnan GA (Coweta County)",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 33.40570, "lng": -84.75880 },
+  "geofences": {
+    "perimeter": { "south": 33.40360, "west": -84.76070, "north": 33.40810, "east": -84.75660 },
+    "truckGate": { "south": 33.40730, "west": -84.75740, "north": 33.40800, "east": -84.75670 },
+    "dropYards": [
+      { "south": 33.40620, "west": -84.75980, "north": 33.40760, "east": -84.75700 }
+    ],
+    "dockAprons": [
+      { "south": 33.40600, "west": -84.75990, "north": 33.40730, "east": -84.75690 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45, "trailersVisible": 70, "trailerParkingCapacity": 90,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 32.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.40570,-84.75880,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "The plant's access drive connects to Niagara Way as a single open, uncontrolled driveway. No barrier arm, sliding gate, or checkpoint pinch-point visible in satellite imagery. The plant is set deep behind a tree screen so Street View (2025-05) cannot reach the entrance - hence medium confidence.",
+    "guardShack": "No staffed booth resolvable at the access drive. A small dark structure sits along the NE dock face but reads as a dock-side utility/canopy structure, not an entrance guard shack.",
+    "remoteGs": "False - no truck gate identified.",
+    "drivewayLong": "Long internal access drive from Niagara Way curves to the NE dock face / drop yard; ample queue room for 3+ trucks.",
+    "dropArea": "Drop yard along the NE side holds trailers parked nose-out plus dock-staged trailers; 50+ stalls.",
+    "dockDoors": "Long bank of dock doors along the NE building face with many trailers backed in; ~45 estimated, banded 25-50.",
+    "fastLaneOpportunity": "Wide open access drive and large paved apron with no existing control structure - physical room for a bypass lane.",
+    "siteAreaAcres": "Niagara acquired ~49 acres at Shenandoah Industrial Park; the developed/fenced footprint measures ~32 acres.",
+    "railServed": "No rail spur enters the property.",
+    "urbanRural": "Located in the developed Shenandoah Industrial Park, Coweta County, on the south side of the Atlanta metro - surrounded by multiple large distribution warehouses. Called Urban."
+  },
+  "method": "deep-audit"
+}

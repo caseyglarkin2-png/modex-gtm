@@ -1,0 +1,55 @@
+{
+  "name": "Toyota Parts Distribution Center - Mansfield MA",
+  "type": "Parts Distribution Center",
+  "coords": { "lat": 42.01685, "lng": -71.23445 },
+  "geofences": {
+    "perimeter": { "south": 42.01530, "west": -71.23680, "north": 42.01830, "east": -71.23300 },
+    "truckGate": { "south": 42.01680, "west": -71.23420, "north": 42.01740, "east": -71.23340 },
+    "dropYards": [
+      { "south": 42.01710, "west": -71.23660, "north": 42.01800, "east": -71.23520 }
+    ],
+    "dockAprons": [
+      { "south": 42.01720, "west": -71.23620, "north": 42.01790, "east": -71.23420 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 22,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 16.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.01685,-71.23445,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["truckGate", "railServed"],
+  "fieldNotes": {
+    "facilityType": "Toyota Parts Distribution Center (Boston-region PDC), 440 Forbes Blvd, Mansfield MA — a regional service-parts warehouse for Toyota's New England dealer network, in the Forbes Blvd / Cabot industrial park.",
+    "buildingIdentification": "Resolved to the white-roof warehouse at ~42.0168, -71.2344. Street View at the Forbes Blvd entrance shows monument signage, an American flag and a building with trailers staged alongside; satellite confirms the dock bank, drop yard and employee parking. The roster's GEOMETRIC_CENTER point sits on this building. High confidence.",
+    "truckGate": "The entrance off Forbes Blvd is an open driveway — no barrier arm, sliding gate or guard booth was visible at the road in 2025-06 Street View or in z20 satellite. The truck driveway runs straight into the dock yard. Classified truckGate false (open site). A small structure beside the employee-parking lot is an ancillary building, not a gate booth. Flagged uncertain — perimeter security at the dock yard could not be fully ruled out.",
+    "guardShack": "False — no gate, so no guard booth.",
+    "remoteGs": "False — no truck gate.",
+    "dockDoors": "The building's NW face is a single dock bank — ~18 dock doors with trailers (green/orange/white) backed into most. Banded 10-25.",
+    "dropArea": "A drop yard at the NW corner holds ~20+ parked trailers in rows; banded 10-25; dropYard true.",
+    "postGateStaging": "Deep paved truck apron between the dock face and the drop yard gives interior queue room (drivewayLong true).",
+    "shipRcvSeparate": "All dock activity is on the single NW face — shipping and receiving not on separate building faces. False.",
+    "railServed": "A rail line runs along the NW edge and crosses Forbes Blvd near the facility, but it serves the adjacent corridor / neighboring buildings — no spur clearly enters the Toyota parcel itself. Classified false, flagged uncertain.",
+    "urbanRural": "Suburban Mansfield MA industrial park — edge-of-town setting with woods around the parcel; per the rubric's tie-break toward Rural for small-town industrial, classified Rural.",
+    "scale": "No truck scale identified. False.",
+    "siteAreaAcres": "Perimeter box ~16 acres for the building + dock yard + drop yard + employee parking."
+  },
+  "method": "deep-audit"
+}

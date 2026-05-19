@@ -1,0 +1,52 @@
+{
+  "name": "Mondelez North America Headquarters / East Hanover Bakery Campus - East Hanover NJ",
+  "type": "Corporate HQ + active manufacturing/distribution campus (Nabisco bakery)",
+  "coords": { "lat": 40.812, "lng": -74.3738 },
+  "geofences": {
+    "perimeter": { "south": 40.8082, "west": -74.3795, "north": 40.8162, "east": -74.3692 },
+    "truckGate": { "south": 40.8085, "west": -74.3752, "north": 40.8092, "east": -74.3742 },
+    "dropYards": [
+      { "south": 40.8112, "west": -74.3742, "north": 40.8128, "east": -74.3718 },
+      { "south": 40.8132, "west": -74.3768, "north": 40.8148, "east": -74.3742 }
+    ],
+    "dockAprons": [
+      { "south": 40.8110, "west": -74.3748, "north": 40.8130, "east": -74.3712 },
+      { "south": 40.8130, "west": -74.3772, "north": 40.8150, "east": -74.3740 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 2,
+    "buildingCount": 8,
+    "siteAreaAcres": 78.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.812,-74.3738,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "scale", "entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Roster coords (40.8126,-74.3676) were a city centroid landing in Restland/Whippany-area cemetery green space ~600m east of the real site. Resolved to the Mondelez East Hanover industrial campus at 100 DeForest Ave via web research + satellite. Locked center 40.8120,-74.3738.",
+    "facilityType": "This is NOT a pure office. The East Hanover address is Mondelez's North America HQ, but the campus is a large multi-building industrial complex housing the Nabisco East Hanover bakery and a major distribution operation. Satellite shows extensive truck activity: long warehouse rows, dock aprons on multiple building faces, and 100+ trailers parked across two large drop areas. Freight relevance is HIGH.",
+    "truckGate": "Campus is a private internal-road industrial complex set well back from public roads (DeForest Ave). Public Street View only reaches the adjacent retail plaza and brick building exteriors, not the truck entrance. A controlled/fenced perimeter with internal access roads is visible in satellite; a guarded gate is the strong norm for a corporate-HQ-grade industrial campus of this size — classified true with guardShack true, but flagged uncertain because the booth itself was not directly imaged.",
+    "railServed": "Street View on the NW frontage shows a rail spur running along the base of a brick Mondelez building - confirms rail service into the property.",
+    "multipleFacilities": "Confirmed campus: 8+ distinct large buildings, mix of warehouse rows and an office-profile structure at the NW end.",
+    "fastLaneOpportunity": "Wide internal aprons and abundant paved width seen in satellite.",
+    "dockDoorCount": "90 is an overhead estimate across multiple building faces; bands clearly land in 50+.",
+    "scale": "No truck scale positively identified in available imagery; left false."
+  },
+  "method": "deep-audit"
+}

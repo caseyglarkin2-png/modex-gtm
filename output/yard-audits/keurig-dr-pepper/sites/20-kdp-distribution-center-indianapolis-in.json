@@ -1,0 +1,50 @@
+{
+  "name": "KDP Distribution Center - Indianapolis IN",
+  "type": "Distribution Center - Beverage/DSD",
+  "coords": { "lat": 39.90270, "lng": -86.24190 },
+  "geofences": {
+    "perimeter": { "south": 39.90080, "west": -86.24400, "north": 39.90470, "east": -86.24010 },
+    "truckGate": { "south": 39.90510, "west": -86.24180, "north": 39.90570, "east": -86.24090 },
+    "dropYards": [
+      { "south": 39.90150, "west": -86.24350, "north": 39.90370, "east": -86.24260 }
+    ],
+    "dockAprons": [
+      { "south": 39.90230, "west": -86.24290, "north": 39.90360, "east": -86.24210 }
+    ],
+    "staging": { "south": 39.90400, "west": -86.24290, "north": 39.90470, "east": -86.24150 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22, "trailersVisible": 28, "trailerParkingCapacity": 45,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 35.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.90270,-86.24190,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Confirmed via Street View — building bears 'DR PEPPER SNAPPLE' signage and '8150' address numerals on the east (office) face. Address 8150 Georgetown Rd, Indianapolis, IN 46268, in the Park 100 industrial area. Roster lat/lng were Indianapolis city-center (geocode moved 12.8 km); resolved correct site by web research.",
+    "truckGate": "Open paved driveways connect the public road (Georgetown Rd) to the property's loop driveway and yard. Street View of the NE entrance shows no barrier arm, sliding gate, or pinch-point — free-flowing curb cut. A chain-link property-line fence runs along part of the east boundary but no controlled gate across the truck lane was observed. truckGate = false.",
+    "guardShack": "No guard booth observed at any entrance in satellite or Street View. guardShack = false.",
+    "remoteGs": "remoteGs is false because there is no truck gate.",
+    "dockDoors": "Dock doors are on the NW long face of the building (trailers backed in, several with tractors visible in z20 imagery). Estimated ~22 doors — band 10-25. Count is approximate from overhead imagery.",
+    "dropArea": "A dedicated trailer drop row of ~30-40 marked stalls runs along the west side of the property between the building and the retention pond; many trailers parked nose-out without tractors. Band 25-50.",
+    "dropYard": "true — dedicated trailer storage row west of the building, separate from active dock apron.",
+    "postGateStaging": "Large open paved yard area on the NW side of the building (with a circular landscaped island) provides substantial internal queue/maneuvering space before the docks.",
+    "fastLaneOpportunity": "Wide open paved entrance aprons and a large internal paved yard provide ample room to add an express/bypass lane.",
+    "urbanRural": "Park 100 industrial park within the Indianapolis metro (NW side) — Urban.",
+    "buildingCount": "Single KDP building. Adjacent large buildings (gray-roof facility to the NW, buildings to the south) are separate properties, not part of this campus.",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,65 @@
+{
+  "name": "Dan's Prize - Long Prairie MN",
+  "type": "Meat Processing Plant",
+  "coords": { "lat": 45.97720, "lng": -94.86780 },
+  "geofences": {
+    "perimeter": { "south": 45.97480, "west": -94.87010, "north": 45.97900, "east": -94.86510 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 45.97670, "west": -94.86940, "north": 45.97790, "east": -94.86780 },
+      { "south": 45.97500, "west": -94.86940, "north": 45.97580, "east": -94.86780 }
+    ],
+    "dockAprons": [
+      { "south": 45.97700, "west": -94.86730, "north": 45.97800, "east": -94.86600 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 5,
+    "siteAreaAcres": 28.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@45.97720,-94.86780,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "Roster coords (45.975374,-94.865992) landed at the SE corner of the property near the river; the plant complex sits NW of that point. Locked center 45.97720,-94.86780 on the main plant building. Confirmed via Hormel careers page and the 20 Riverside Dr address.",
+    "truckGate": "Open site. StreetView (2014) shows the access road running straight into the complex with no barrier arm, no gate across the truck drive, and no perimeter fence. A tractor-trailer is parked in the open yard directly off the public road. truckGate false.",
+    "guardShack": "No guard booth anywhere along the entry road or yard.",
+    "multipleFacilities": "Sprawling campus of ~5 separate large buildings (main processing plant, attached gray building, a separate gray-roofed dock building, plus support warehouses) -> multipleFacilities true.",
+    "dropYard": "Large open trailer-storage areas with 40+ trailers parked across the campus, separate from the active dock apron -> dropYard true.",
+    "dockDoors": "~22 dock doors counted, primarily on the SW face of the lower gray-roofed building plus the main plant; banded 10-25, low-confidence due to scattered building faces.",
+    "dropArea": "25-50 untethered trailers parked in the open lots.",
+    "urbanRural": "Long Prairie MN is a small rural town (~3,400 pop); the plant sits at the edge of town beside the Long Prairie River and farmland -> Rural.",
+    "truckGateCount": "No controlled gate; the count of 1 reflects the single open access point off the public road."
+  },
+  "method": "deep-audit"
+}

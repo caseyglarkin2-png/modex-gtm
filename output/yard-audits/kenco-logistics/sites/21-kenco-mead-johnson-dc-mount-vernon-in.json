@@ -1,0 +1,48 @@
+{
+  "name": "Kenco Mead Johnson DC - Mount Vernon IN",
+  "type": "Dedicated Distribution Center",
+  "coords": { "lat": 37.93550, "lng": -87.87000 },
+  "geofences": {
+    "perimeter": { "south": 37.93300, "west": -87.87200, "north": 37.93960, "east": -87.86790 },
+    "truckGate": { "south": 37.93760, "west": -87.86970, "north": 37.93810, "east": -87.86900 },
+    "dropYards": [
+      { "south": 37.93820, "west": -87.87050, "north": 37.93960, "east": -87.86810 }
+    ],
+    "dockAprons": [
+      { "south": 37.93780, "west": -87.87100, "north": 37.93840, "east": -87.86810 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 53.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.93550,-87.87000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "postGateStaging", "drivewayLong", "entryLanes", "exitLanes", "fastLaneOpportunity", "dockDoors", "dropArea", "dropYard", "shipRcvSeparate"],
+  "fieldNotes": {
+    "SITE_STATUS": "FACILITY DESTROYED AND DEMOLISHED. An EF-3 tornado struck the Mead Johnson / Kenco DC on 9 Jul 2024, collapsing the roof and multiple walls. Current 2026 Maxar imagery and 2025-09 Street View show the warehouse fully razed to a bare concrete slab with exposed foundation footings and demolition debris. The site is non-operational. All operational classification fields are inferred from the surviving slab footprint and access roads, not a working yard.",
+    "truckGate": "No barrier arm or guard structure visible at the NE entrance off the loop road; classified false but the pre-tornado state is unknowable from current imagery.",
+    "dockDoors": "Estimated 25-50 band from the slab footprint and a dock-apron strip along the west/south face; the actual building no longer exists to count doors.",
+    "dropYard": "Large paved loop-yard area north and east of the slab could function as trailer storage; marked true tentatively but no trailers present.",
+    "urbanRural": "Edge-of-town along Highway 62 E surrounded by farmland; classified Rural.",
+    "multipleFacilities": "The racetrack-shaped tank/manufacturing complex to the SW is the separate Mead Johnson Mount Vernon manufacturing plant, not part of this DC parcel."
+  },
+  "method": "deep-audit"
+}

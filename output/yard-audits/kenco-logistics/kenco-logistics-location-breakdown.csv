@@ -1,0 +1,61 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Kenco MCS Jeffersonville I - Jeffersonville IN,Multi-Client Distribution Center / E-Commerce Fulfillment,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@38.38585,-85.67760,400m/data=!3m1!1e3"
+Kenco MCS Mississippi - Olive Branch MS,Multi-Client Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,,,,,,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@34.98890,-89.78290,400m/data=!3m1!1e3"
+Kenco MCS Allentown - Northampton PA,Multi-Client Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,YES,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@40.59820,-75.61650,400m/data=!3m1!1e3"
+Kenco MCS Dallas I - DeSoto TX,Multi-Client Distribution Center / E-Commerce Fulfillment,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@32.63200,-96.82960,400m/data=!3m1!1e3"
+Kenco MCS Perris I - Perris CA,Multi-Client Distribution Center / E-Commerce Fulfillment,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@33.84200,-117.22890,400m/data=!3m1!1e3"
+Kenco MCS Perris II - Perris CA,Multi-Client Distribution Center / E-Commerce Fulfillment,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@33.83915,-117.23035,400m/data=!3m1!1e3"
+Kenco MCS Chino - Chino CA,Multi-Client Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@33.96700,-117.66150,400m/data=!3m1!1e3"
+Kenco MCS Georgia I - Austell GA,Multi-Client Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@33.777949,-84.574624,400m/data=!3m1!1e3"
+Kenco MCS Georgia II - Austell GA,Multi-Client Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@33.777949,-84.574624,400m/data=!3m1!1e3"
+Kenco MCS Jeffersonville II - Jeffersonville IN,Multi-Client Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,,,,,,,,,YES,,YES,,,,Rural,,YES,,,"https://www.google.com/maps/@38.39105,-85.67900,400m/data=!3m1!1e3"
+Kenco MCS Jeffersonville III - Sellersburg IN,Multi-Client Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,,Rural,,YES,,YES,"https://www.google.com/maps/@38.37820,-85.75300,400m/data=!3m1!1e3"
+Kenco MCS Dallas III - Lancaster TX,Multi-Client Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@32.63750,-96.80130,400m/data=!3m1!1e3"
+Kenco MCS Dallas IV - Lancaster TX,Multi-Client Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@32.63900,-96.79900,400m/data=!3m1!1e3"
+Kenco MCS Dallas II - Lancaster TX,Multi-Client Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,YES,,,YES,,,,Urban,,YES,,YES,"https://www.google.com/maps/@32.63250,-96.80380,400m/data=!3m1!1e3"
+Kenco LIXIL Americas DC - Groveport OH,Dedicated Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@39.83950,-82.91820,400m/data=!3m1!1e3"
+Kenco MCS Chattanooga CH29 - Chattanooga TN,Multi-Client Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,,,YES,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@35.07155,-85.17815,400m/data=!3m1!1e3"
+Kenco MCS Chattanooga CH7B - Chattanooga TN,Multi-Client Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,,,YES,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@35.06912,-85.18225,400m/data=!3m1!1e3"
+Kenco MCS Chattanooga BP2 - Chattanooga TN,Multi-Client Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,,,YES,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@35.06929,-85.17642,400m/data=!3m1!1e3"
+Kenco MCS Ogden I - Ogden UT,Multi-Client Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,,,YES,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@41.24828,-111.99625,400m/data=!3m1!1e3"
+Kenco MCS Clearfield - Clearfield UT,Multi-Client Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,YES,,,,,,,YES,,,YES,,,,YES,Urban,,YES,,,"https://www.google.com/maps/@41.10090,-112.03460,400m/data=!3m1!1e3"
+Kenco Mead Johnson DC - Mount Vernon IN,Dedicated Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,,,Rural,,,,YES,"https://www.google.com/maps/@37.93550,-87.87000,400m/data=!3m1!1e3"
+Kenco Kerry Group DC - Calhoun GA,Dedicated Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@34.43370,-84.92520,400m/data=!3m1!1e3"
+Kenco / The Shippers Group - Hutchins TX (HQ campus),Distribution Center / 3PL Warehouse,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@32.62620,-96.71600,400m/data=!3m1!1e3"
+Kenco American Standard DC - Hutchins TX,Dedicated Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@32.63560,-96.69640,400m/data=!3m1!1e3"
+Kenco / The Shippers Group - Wilmer TX,Distribution Center / 3PL Warehouse,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@32.58580,-96.68070,400m/data=!3m1!1e3"
+Kenco / The Shippers Group - Orlando FL,Distribution Center / 3PL Warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,,,,,,,,YES,,,YES,,,,Urban,,,,,"https://www.google.com/maps/@28.43655,-81.41865,400m/data=!3m1!1e3"
+Kenco / The Shippers Group - Jonesboro GA,Distribution Center / 3PL Warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@33.50560,-84.34810,400m/data=!3m1!1e3"
+Kenco / The Shippers Group - Grand Prairie TX,Distribution Center / 3PL Warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,,,,,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@32.79050,-97.01300,400m/data=!3m1!1e3"
+Kenco Devens DC - Devens MA,Distribution Center / Northeast Warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,YES,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@42.54620,-71.59450,400m/data=!3m1!1e3"
+Kenco Memphis DC - Memphis TN,Distribution Center / Warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@35.07060,-89.95290,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,22,73%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,7,23%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,1,3%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,15,50%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,11,37%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,1,3%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,29,97%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

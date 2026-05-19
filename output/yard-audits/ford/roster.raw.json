@@ -1,0 +1,271 @@
+{
+  "account": "Ford",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 24,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Ford - Dearborn Truck Plant, Dearborn MI",
+      "city": "Dearborn",
+      "state": "MI",
+      "type": "Vehicle Assembly Plant",
+      "address": "3001 Miller Rd, Dearborn, MI 48120",
+      "lat": 42.30444,
+      "lng": -83.16667,
+      "source": "Dossier (F-150 / F-150 Lightning assembly, highest-volume yard); address confirmed via AmericanAutoWorker and EPA permit records"
+    },
+    {
+      "idx": 2,
+      "name": "Ford - Kentucky Truck Plant, Louisville KY",
+      "city": "Louisville",
+      "state": "KY",
+      "type": "Vehicle Assembly Plant",
+      "address": "3001 Chamberlain Ln, Louisville, KY 40241",
+      "lat": 38.29333,
+      "lng": -85.55611,
+      "source": "Dossier (Super Duty, Expedition, Navigator); address confirmed via Ford corporate locations page and AmericanAutoWorker"
+    },
+    {
+      "idx": 3,
+      "name": "Ford - Kansas City Assembly Plant, Claycomo MO",
+      "city": "Claycomo",
+      "state": "MO",
+      "type": "Vehicle Assembly Plant",
+      "address": "8121 US Highway 69, Claycomo, MO 64119",
+      "lat": 39.20611,
+      "lng": -94.49222,
+      "source": "Dossier (F-150 + Transit, two high-volume lines); address confirmed via Ford corporate locations page and EPA TRI facility profile"
+    },
+    {
+      "idx": 4,
+      "name": "Ford - Louisville Assembly Plant, Louisville KY",
+      "city": "Louisville",
+      "state": "KY",
+      "type": "Vehicle Assembly Plant",
+      "address": "2000 Fern Valley Rd, Louisville, KY 40213",
+      "lat": 38.16778,
+      "lng": -85.69861,
+      "source": "Dossier (Ford Escape, Lincoln Corsair); address confirmed via Wikipedia and Loc8NearMe"
+    },
+    {
+      "idx": 5,
+      "name": "Ford - Michigan Assembly Plant, Wayne MI",
+      "city": "Wayne",
+      "state": "MI",
+      "type": "Vehicle Assembly Plant",
+      "address": "38303 Michigan Ave, Wayne, MI 48184",
+      "lat": 42.28083,
+      "lng": -83.39222,
+      "source": "Dossier (Ranger, Bronco); address confirmed via Ford corporate locations page and chamber of commerce listing"
+    },
+    {
+      "idx": 6,
+      "name": "Ford - Chicago Assembly Plant, Chicago IL",
+      "city": "Chicago",
+      "state": "IL",
+      "type": "Vehicle Assembly Plant",
+      "address": "12600 S Torrence Ave, Chicago, IL 60633",
+      "lat": 41.66667,
+      "lng": -87.5575,
+      "source": "Dossier (Explorer, Aviator, Police Interceptor Utility); address confirmed via Wikipedia and Ford corporate locations page"
+    },
+    {
+      "idx": 7,
+      "name": "Ford - Ohio Assembly Plant, Avon Lake OH",
+      "city": "Avon Lake",
+      "state": "OH",
+      "type": "Vehicle Assembly Plant",
+      "address": "650 Miller Rd, Avon Lake, OH 44012",
+      "lat": 41.49444,
+      "lng": -82.05278,
+      "source": "Dossier (Super Duty - recently retooled); address confirmed via Ford corporate locations page and EPA permit records"
+    },
+    {
+      "idx": 8,
+      "name": "Ford - Flat Rock Assembly Plant, Flat Rock MI",
+      "city": "Flat Rock",
+      "state": "MI",
+      "type": "Vehicle Assembly Plant",
+      "address": "1 International Dr, Flat Rock, MI 48134",
+      "lat": 42.09556,
+      "lng": -83.28528,
+      "source": "Wikipedia List of Ford factories (Mustang assembly); large active U.S. assembly site not individually named in dossier table but part of Ford's NA assembly footprint"
+    },
+    {
+      "idx": 9,
+      "name": "Ford - BlueOval City / Tennessee Electric Vehicle Center, Stanton TN",
+      "city": "Stanton",
+      "state": "TN",
+      "type": "Vehicle Assembly Plant (greenfield, ramp-up)",
+      "address": "TN-222 at Stanton-Somerville Rd, Stanton, TN 38069",
+      "lat": 35.45,
+      "lng": -89.41667,
+      "source": "Dossier (BlueOval City greenfield EV/truck campus, $5.6B); location confirmed via LoopNet/Crexi parcel listings and Ford corporate BlueOval City page"
+    },
+    {
+      "idx": 10,
+      "name": "Ford - BlueOval SK Battery Park, Glendale KY",
+      "city": "Glendale",
+      "state": "KY",
+      "type": "Battery Manufacturing Plant (JV with SK On)",
+      "address": "Glendale Megasite, Glendale, KY 42740",
+      "lat": 37.6,
+      "lng": -85.91667,
+      "source": "Dossier (BlueOval SK battery JV greenfield); Wikipedia List of Ford factories; precise street address not yet published"
+    },
+    {
+      "idx": 11,
+      "name": "Ford - Dearborn Stamping Plant, Dearborn MI",
+      "city": "Dearborn",
+      "state": "MI",
+      "type": "Stamping Plant",
+      "address": "3001 Miller Rd, Dearborn, MI 48120 (Rouge Complex)",
+      "lat": 42.30667,
+      "lng": -83.15833,
+      "source": "Dossier (Ford's ~15 NA stamping/powertrain plants); Wikipedia List of Ford factories - part of Rouge manufacturing complex"
+    },
+    {
+      "idx": 12,
+      "name": "Ford - Dearborn Engine Plant, Dearborn MI",
+      "city": "Dearborn",
+      "state": "MI",
+      "type": "Engine Plant",
+      "address": "Rouge Complex, Dearborn, MI 48120",
+      "lat": 42.30667,
+      "lng": -83.15833,
+      "source": "Dossier (NA powertrain plants); Wikipedia List of Ford factories and Ford Authority"
+    },
+    {
+      "idx": 13,
+      "name": "Ford - Cleveland Engine Plant, Brook Park OH",
+      "city": "Brook Park",
+      "state": "OH",
+      "type": "Engine Plant",
+      "address": "17601 Brookpark Rd, Cleveland (Brook Park), OH 44142",
+      "lat": 41.40139,
+      "lng": -81.81944,
+      "source": "Dossier (NA powertrain plants); Wikipedia List of Ford factories"
+    },
+    {
+      "idx": 14,
+      "name": "Ford - Lima Engine Plant, Lima OH",
+      "city": "Lima",
+      "state": "OH",
+      "type": "Engine Plant",
+      "address": "1155 Bible Rd, Lima, OH 45801",
+      "lat": 40.78333,
+      "lng": -84.07778,
+      "source": "Dossier (NA powertrain plants); Wikipedia List of Ford factories"
+    },
+    {
+      "idx": 15,
+      "name": "Ford - Livonia Transmission Plant, Livonia MI",
+      "city": "Livonia",
+      "state": "MI",
+      "type": "Transmission Plant",
+      "address": "36200 Plymouth Rd, Livonia, MI 48150",
+      "lat": 42.36833,
+      "lng": -83.38528,
+      "source": "Dossier (NA powertrain plants); Wikipedia List of Ford factories"
+    },
+    {
+      "idx": 16,
+      "name": "Ford - Sharonville Transmission Plant, Sharonville OH",
+      "city": "Sharonville",
+      "state": "OH",
+      "type": "Transmission Plant",
+      "address": "3000 E Sharon Rd, Cincinnati (Sharonville), OH 45241",
+      "lat": 39.27944,
+      "lng": -84.39833,
+      "source": "Dossier (NA powertrain plants); address confirmed via AmericanAutoWorker and Ford Authority"
+    },
+    {
+      "idx": 17,
+      "name": "Ford - Van Dyke Electric Powertrain Center, Sterling Heights MI",
+      "city": "Sterling Heights",
+      "state": "MI",
+      "type": "Powertrain / Transmission Plant",
+      "address": "8000 Van Dyke Ave, Sterling Heights, MI 48311",
+      "lat": 42.58056,
+      "lng": -83.02583,
+      "source": "Dossier (NA powertrain plants); Wikipedia List of Ford factories"
+    },
+    {
+      "idx": 18,
+      "name": "Ford - Sterling Axle Plant, Sterling Heights MI",
+      "city": "Sterling Heights",
+      "state": "MI",
+      "type": "Axle / Components Plant",
+      "address": "29900 Mound Rd, Sterling Heights, MI 48310",
+      "lat": 42.55389,
+      "lng": -83.07306,
+      "source": "Dossier (NA powertrain/component plants); Wikipedia List of Ford factories"
+    },
+    {
+      "idx": 19,
+      "name": "Ford - Rawsonville Components Plant, Ypsilanti MI",
+      "city": "Ypsilanti",
+      "state": "MI",
+      "type": "Components / Battery Plant",
+      "address": "9000 Textile Rd, Ypsilanti, MI 48197",
+      "lat": 42.20833,
+      "lng": -83.55,
+      "source": "Dossier (NA component plants); Wikipedia List of Ford factories"
+    },
+    {
+      "idx": 20,
+      "name": "Ford - Buffalo Stamping Plant, Hamburg NY",
+      "city": "Hamburg",
+      "state": "NY",
+      "type": "Stamping Plant",
+      "address": "5000 Lakeshore Rd, Hamburg, NY 14075",
+      "lat": 42.74167,
+      "lng": -78.85,
+      "source": "Dossier (NA stamping plants); Wikipedia List of Ford factories"
+    },
+    {
+      "idx": 21,
+      "name": "Ford - Chicago Stamping Plant, Chicago Heights IL",
+      "city": "Chicago Heights",
+      "state": "IL",
+      "type": "Stamping Plant",
+      "address": "1000 W Lincoln Hwy, Chicago Heights, IL 60411",
+      "lat": 41.50611,
+      "lng": -87.66333,
+      "source": "Dossier (NA stamping plants); Wikipedia List of Ford factories"
+    },
+    {
+      "idx": 22,
+      "name": "Ford - National Parts Distribution Center, Livonia MI",
+      "city": "Livonia",
+      "state": "MI",
+      "type": "Parts Distribution Center",
+      "address": "11871 Middlebelt Rd, Livonia, MI 48150",
+      "lat": 42.40417,
+      "lng": -83.33861,
+      "source": "Dossier (Ford Customer Service Division PDC network, 10+ NA centers); address confirmed via Livonia chamber and Cylex listings"
+    },
+    {
+      "idx": 23,
+      "name": "Ford - Parts Redistribution Center, Brownstown Township MI",
+      "city": "Brownstown Township",
+      "state": "MI",
+      "type": "Parts Distribution / Redistribution Center",
+      "address": "25555 Pennsylvania Rd, Brownstown Charter Twp, MI 48174",
+      "lat": 42.13333,
+      "lng": -83.25,
+      "source": "Dossier (PDC network); address confirmed via Macrae's Blue Book and Brownstown Township business directory"
+    },
+    {
+      "idx": 24,
+      "name": "Ford - Parts Distribution Center, Rancho Cucamonga CA",
+      "city": "Rancho Cucamonga",
+      "state": "CA",
+      "type": "Parts Distribution Center",
+      "address": "8449 Milliken Ave, Rancho Cucamonga, CA 91730",
+      "lat": 34.08889,
+      "lng": -117.55833,
+      "source": "Dossier (PDC network, West Coast); address confirmed via Yelp business listing"
+    }
+  ]
+}

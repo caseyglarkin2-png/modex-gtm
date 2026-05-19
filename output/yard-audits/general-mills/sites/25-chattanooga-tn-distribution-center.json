@@ -1,0 +1,68 @@
+{
+  "name": "General Mills - Chattanooga TN Distribution Center",
+  "type": "Distribution Center",
+  "coords": { "lat": 34.99430, "lng": -85.38350 },
+  "geofences": {
+    "perimeter": { "south": 34.99240, "west": -85.38520, "north": 34.99620, "east": -85.38170 },
+    "truckGate": { "south": 34.99630, "west": -85.38420, "north": 34.99700, "east": -85.38330 },
+    "dropYards": [
+      { "south": 34.99260, "west": -85.38510, "north": 34.99570, "east": -85.38400 }
+    ],
+    "dockAprons": [
+      { "south": 34.99280, "west": -85.38460, "north": 34.99590, "east": -85.38360 },
+      { "south": 34.99300, "west": -85.38290, "north": 34.99500, "east": -85.38210 }
+    ],
+    "staging": { "south": 34.99580, "west": -85.38420, "north": 34.99660, "east": -85.38300 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 28.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.99430,-85.38350,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "remoteGs"],
+  "fieldNotes": {
+    "siteIdentity": "Confirmed General Mills Chattanooga distribution center, 650 Wauhatchie Pike, Chattanooga TN 37419 (verified via Yelp, Manta, Hyster GM plant locations list). Large two-building DC complex on the west bank of the rail corridor; the roster address (650) is the southern of the two long warehouse buildings. A second General Mills address (960 Wauhatchie Pike) is the northern building - both are part of the same fenced industrial complex.",
+    "truckGate": "Property is enclosed by a continuous chain-link perimeter fence. The main truck entrance is a wide paved driveway off Wauhatchie Pike in the gap between the two buildings; Street View (2025-10) shows a fence-line gate opening signed 'Gate 3' with a sliding gate panel and yellow concrete jersey barriers channelizing the lane. truckGate = true.",
+    "guardShack": "No staffed guard booth visible at the Gate 3 entrance in any Street View heading - just the gate opening and barriers. guardShack = false.",
+    "remoteGs": "Gate present with no guard booth, implying kiosk / call-box / app or remote check-in. remoteGs = true (medium confidence - listed uncertain).",
+    "dockDoors": "Each of the two long buildings has an extensive dock-door bank running its full length with dozens of trailers backed in; the southern (650) building alone shows roughly 50-60 dock positions. dockDoors band 50+. Count is an estimate from overhead imagery.",
+    "dropArea": "Very large trailer yards along the dock faces and in the open paved lots, with well over 100 trailers parked across the complex - many without tractors. dropArea band 50+, dedicated drop yard present.",
+    "shipRcvSeparate": "The southern building has a long dock bank on its SW face (fronting Wauhatchie Pike) and a separate rail-served dock on its NE/E face alongside the rail spurs - physically separate dock clusters.",
+    "railServed": "Multiple rail spurs run into the property along the east side with covered hopper cars and boxcars parked at the rail dock - the complex is rail-served.",
+    "multipleFacilities": "Two large warehouse buildings (650 and 960 Wauhatchie Pike) on the same fenced complex - a multi-building campus.",
+    "urbanRural": "Edge-of-town industrial corridor along Wauhatchie Pike at the foot of Lookout Mountain, west of Chattanooga proper, with woods/ridge and scattered rural residential nearby - judged Rural per the rubric's small-town-vs-urban tie-breaker.",
+    "drivewayLong": "The Gate 3 driveway runs a long way from Wauhatchie Pike into the interior yard between the buildings before reaching the docks - deep approach, holds 3+ trucks.",
+    "backupSensitive": "Wauhatchie Pike is a low-traffic two-lane road and the gate apron has ample paved width, so a truck queue at the gate would not block a public artery."
+  },
+  "method": "deep-audit"
+}

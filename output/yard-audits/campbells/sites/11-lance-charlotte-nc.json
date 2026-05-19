@@ -1,0 +1,60 @@
+{
+  "name": "Lance - Charlotte NC",
+  "type": "Manufacturing - crackers/sandwich snacks",
+  "coords": { "lat": 35.12180, "lng": -80.88450 },
+  "geofences": {
+    "perimeter": { "south": 35.11850, "west": -80.88950, "north": 35.12480, "east": -80.88100 },
+    "truckGate": { "south": 35.12110, "west": -80.88260, "north": 35.12160, "east": -80.88190 },
+    "dropYards": [
+      { "south": 35.12260, "west": -80.88820, "north": 35.12360, "east": -80.88600 },
+      { "south": 35.11920, "west": -80.88560, "north": 35.12020, "east": -80.88420 },
+      { "south": 35.12320, "west": -80.88550, "north": 35.12420, "east": -80.88400 }
+    ],
+    "dockAprons": [
+      { "south": 35.12230, "west": -80.88560, "north": 35.12300, "east": -80.88380 },
+      { "south": 35.11930, "west": -80.88620, "north": 35.11990, "east": -80.88480 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 108.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.12180,-80.88450,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "buildingCount", "scale", "postGateStaging", "fastLaneOpportunity"],
+  "fieldNotes": {
+    "truckGate": "Large 108-acre Campbell's Snacks campus enclosed by a continuous chain-link perimeter fence (clearly visible in 2019-2025 Street View around the bakery building and yards). Access is via a single bridge road off South Boulevard crossing the LYNX light-rail line. Web sources reference a 'Campbell's Snacks Bakery Production Plant Entrance' sign. Classified as a controlled gated entry.",
+    "guardShack": "A major 1,500-employee Campbell's production campus with a dedicated plant entrance - a manned gatehouse is the strong norm for this facility profile. However, the specific booth could not be positively pinpointed in available imagery (Street View covers the outer campus loop road but not the inner production-yard gate). Marked true on operational likelihood; flagged uncertain.",
+    "remoteGs": "False given guardShack assumed true; flagged uncertain.",
+    "multipleFacilities": "Confirmed campus - the ~700,000 sq ft Lance cracker bakery plus distribution warehouses, a mixing center, and a 2024 office building; 6+ distinct large buildings on 108 acres.",
+    "dropYard": "Extensive trailer storage - trailers lined along the campus perimeter road and in multiple lots throughout the campus.",
+    "dockDoors": "Numerous dock banks across multiple buildings; aggregate well into the 50+ band - estimated ~70 doors.",
+    "dropArea": "Many parked trailers without tractors across multiple lots; 50+ band.",
+    "shipRcvSeparate": "Multiple buildings (bakery, distribution warehouses, mixing center) run shipping/receiving from physically separate dock clusters.",
+    "drivewayLong": "Long access road from South Boulevard over the rail bridge and through the campus before reaching dock areas - ample queue depth.",
+    "fastLaneOpportunity": "Wide multi-lane campus access road with room for an express lane; medium confidence.",
+    "postGateStaging": "Extensive internal paved areas can hold queued trucks inside the campus; medium confidence.",
+    "urbanRural": "Charlotte NC - inside the metro, served by the LYNX Blue Line light rail, dense commercial/industrial surroundings; Urban.",
+    "siteAreaAcres": "108 acres per published facility history (Lance moved to the South Boulevard site on 108 acres in 1962).",
+    "railServed": "A light-rail (LYNX) passenger line runs through/alongside the campus, but no freight rail spur serves the docks; railServed false.",
+    "confidence": "Medium overall - the facility is positively identified (LANCE water tower and buildings visible in Street View) and the fenced campus perimeter is confirmed, but the exact gate/guard-booth structure and several counts are estimates from a very large multi-building campus."
+  },
+  "method": "deep-audit"
+}

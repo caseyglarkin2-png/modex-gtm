@@ -1,0 +1,50 @@
+{
+  "name": "Caterpillar - Decatur IL Plant",
+  "type": "Manufacturing plant (mining trucks, large wheel loaders, motor graders)",
+  "coords": { "lat": 39.8788, "lng": -88.9100 },
+  "geofences": {
+    "perimeter": { "south": 39.8725, "west": -88.9180, "north": 39.8862, "east": -88.9020 },
+    "truckGate": { "south": 39.8744, "west": -88.9162, "north": 39.8752, "east": -88.9152 },
+    "dropYards": [
+      { "south": 39.8830, "west": -88.9162, "north": 39.8845, "east": -88.9135 },
+      { "south": 39.8826, "west": -88.9105, "north": 39.8842, "east": -88.9088 }
+    ],
+    "dockAprons": [
+      { "south": 39.8820, "west": -88.9112, "north": 39.8832, "east": -88.9092 }
+    ],
+    "staging": { "south": 39.8755, "west": -88.9152, "north": 39.8775, "east": -88.9128 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22, "trailersVisible": 38, "trailerParkingCapacity": 70,
+    "truckGateCount": 2, "buildingCount": 9, "siteAreaAcres": 360.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.8788,-88.9100,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "multiStep", "truckGate"],
+  "fieldNotes": {
+    "location": "Roster point (39.8563,-88.9169) landed on a rail yard ~2.3 km SSW. Resolved the true plant to 39.8788,-88.9100 - the large multi-building Caterpillar manufacturing campus at N 27th St & E Pershing Rd, confirmed by web (TruckMap 3000 N 27th St) and satellite (test-track oval, mining-truck staging rows, ~3M sq ft footprint).",
+    "truckGate": "Continuous slatted chain-link perimeter fence around the whole campus confirmed in Street View on the west road. Truck access via a wide entrance driveway at the SW corner (~39.8748,-88.9158) feeding a long internal road; gate/checkpoint is set deep inside the property, not visible from the public road.",
+    "guardShack": "No guard booth visible from the public road - the checkpoint sits well inside the fence line. Classified remoteGs given a controlled fenced campus with an internal/deep checkpoint and no road-visible booth; low confidence.",
+    "drivewayLong": "SW entrance driveway runs several hundred feet from N 27th St to the plant interior - ample queue depth for 3+ trucks.",
+    "dockDoors": "~22 dock doors estimated across the central building's E face and the north building; many obscured by trailers and by laydown material.",
+    "dropArea": "North drop yard holds 30+ trailers (multiple carriers - Meijer, MHS, McElroy visible in Street View); plus a second trailer cluster near the east dock face.",
+    "railServed": "Extensive rail yard along the south boundary with multiple spurs running into the property and material/laydown alongside.",
+    "multipleFacilities": "Campus of 9+ distinct large manufacturing/assembly buildings plus a test-track oval.",
+    "scale": "No truck scale clearly identified; the deep internal layout could contain one not resolvable from imagery.",
+    "siteAreaAcres": "~360 acres for the fenced campus including staging and rail - approximate from the perimeter box.",
+    "urbanRural": "Edge-of-Decatur industrial setting bordered by farmland east and a residential subdivision north - classified Rural per the small-town/edge-of-town rule."
+  },
+  "method": "deep-audit"
+}

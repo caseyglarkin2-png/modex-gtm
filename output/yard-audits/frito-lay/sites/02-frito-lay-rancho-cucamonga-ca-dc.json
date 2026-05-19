@@ -1,0 +1,61 @@
+{
+  "name": "Frito-Lay - Rancho Cucamonga CA (DC)",
+  "type": "Distribution Center",
+  "coords": { "lat": 34.080051, "lng": -117.591112 },
+  "geofences": {
+    "perimeter": { "south": 34.077500, "west": -117.593500, "north": 34.081300, "east": -117.588500 },
+    "truckGate": { "south": 34.077550, "west": -117.590700, "north": 34.078500, "east": -117.590200 },
+    "dropYards": [
+      { "south": 34.077900, "west": -117.592600, "north": 34.079400, "east": -117.589000 }
+    ],
+    "dockAprons": [
+      { "south": 34.079200, "west": -117.592600, "north": 34.079700, "east": -117.588800 }
+    ],
+    "staging": { "south": 34.078300, "west": -117.590800, "north": 34.079200, "east": -117.590000 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 150,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 48.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.080051,-117.591112,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["entryLanes", "exitLanes", "guardShack", "dockDoorCount", "buildingCount"],
+  "fieldNotes": {
+    "operationalStatus": "Web research (KTLA, Food Dive, The Real Deal, June 2025) confirms PepsiCo SHUT DOWN this facility entirely: manufacturing ended ~June 2024, the distribution hub closed June 6 2025 with 248 layoffs (680 total over the round). The roster's premise that the DC continues is outdated - the site is likely vacant or being repurposed. Classification reflects the PHYSICAL yard as it exists in imagery; operationally it is no longer an active Frito-Lay DC.",
+    "truckGate": "Single controlled truck entrance on the south frontage (6th St). Satellite z19 shows a guard-booth structure set inside the entrance with a divided in/out lane and channelization; perimeter wall/fence flanks the driveway.",
+    "guardShack": "A small booth structure is visible inside the entrance lane in z19 satellite; Street View partly obscured by mature trees. Moderate confidence.",
+    "remoteGs": "False - a physical guard booth appears present at the gate.",
+    "postGateStaging": "Large paved yard inside the gate before the dock doors provides ample queue/holding room.",
+    "drivewayLong": "Deep internal yard between gate and docks holds well over 3 trucks.",
+    "entryExitTogether": "Single entrance point on the south frontage serves both directions.",
+    "entryLanes": "Estimated 1 inbound from the divided driveway - low confidence.",
+    "exitLanes": "Estimated 1 outbound - low confidence.",
+    "dockDoors": "Long dock bank along the building's south face with many trailers backed in. Estimated 55+ doors - 50+ band.",
+    "dropArea": "Extensive marked trailer-parking rows fill the south yard - well over 50 stalls.",
+    "shipRcvSeparate": "Dock activity concentrated on the single south face - no clearly separate ship/receive cluster.",
+    "urbanRural": "Within the Rancho Cucamonga / Inland Empire dense industrial fabric.",
+    "multipleFacilities": "One primary large building; a smaller ancillary building sits at the SE - not a true multi-building campus.",
+    "buildingCount": "Primary warehouse plus a small ancillary structure - count approximate.",
+    "scale": "No truck scale identifiable in the truck path.",
+    "railServed": "No rail spur enters the property.",
+    "siteAreaAcres": "Perimeter box yields ~48 acres for the large DC/plant footprint.",
+    "dockDoorCount": "Overhead estimate; trailers obscure portions of the dock face - moderate confidence."
+  },
+  "method": "deep-audit"
+}

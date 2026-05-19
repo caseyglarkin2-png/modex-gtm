@@ -1,0 +1,47 @@
+{
+  "name": "General Mills - Buffalo NY",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 42.87213, "lng": -78.87597 },
+  "geofences": {
+    "perimeter": { "south": 42.86930, "west": -78.87820, "north": 42.87480, "east": -78.87350 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 42.87090, "west": -78.87470, "north": 42.87190, "east": -78.87360 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18, "trailersVisible": 12, "trailerParkingCapacity": 15,
+    "truckGateCount": 1, "buildingCount": 5, "siteAreaAcres": 58.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.87213,-78.87597,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["truckGate", "guardShack", "entryLanes", "exitLanes", "scale", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Confirmed historic General Mills Cheerios plant at 54 South Michigan Ave, Buffalo NY - a 10-floor high-rise mill on the spit of land between the Buffalo River and the City Ship Canal. GM-branded trailers visible at the street-level docks in 2025 Street View. Geocode landed accurately on the building.",
+    "truckGate": "FALSE. This is a dense pre-war urban mill: loading-dock doors open directly onto South Michigan Avenue (numbered dock doors and trailers backed in directly from the public street, seen in 2025 Street View). There is no setback, no checkpoint pinch-point, and no controlled gate at a property line. Chain-link fencing exists in spots but the public street runs through the complex. Flagged uncertain.",
+    "guardShack": "No guard booth seen at any entrance.",
+    "backupSensitive": "Trucks back into street-level docks directly off the public road - any queue spills onto South Michigan Avenue. Tight urban geometry.",
+    "dockDoors": "10-25 band. A bank of street-level dock doors along the SW face of the main mill building; ~12-18 doors estimated. Count is approximate - flagged.",
+    "dropArea": "NONE. No dedicated trailer drop yard on this constrained peninsula site; trailers are worked directly at the docks.",
+    "railServed": "Rail tracks run along the W edge of the peninsula and historically served the grain elevators; the site has integral rail/grain-elevator infrastructure. Set true.",
+    "multipleFacilities": "Complex of multiple connected buildings - the high-rise mill, grain elevators, processing buildings, and riverfront structures.",
+    "urbanRural": "Dense urban industrial waterfront within the City of Buffalo.",
+    "scale": "No truck scale identified; flagged uncertain.",
+    "truckGateCount": "Set to 1 as a nominal value (main dock-side access off South Michigan Ave); there is no true controlled gate."
+  },
+  "method": "deep-audit"
+}

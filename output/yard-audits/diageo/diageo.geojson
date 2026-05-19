@@ -1,0 +1,1598 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2192,
+              41.621
+            ],
+            [
+              -88.2135,
+              41.621
+            ],
+            [
+              -88.2135,
+              41.6272
+            ],
+            [
+              -88.2192,
+              41.6272
+            ],
+            [
+              -88.2192,
+              41.621
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo Lincolnway RTD Canning - Plainfield IL",
+        "type": "Manufacturing - RTD Canning Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 80.9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2192,
+              41.6228
+            ],
+            [
+              -88.217,
+              41.6228
+            ],
+            [
+              -88.217,
+              41.6253
+            ],
+            [
+              -88.2192,
+              41.6253
+            ],
+            [
+              -88.2192,
+              41.6228
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo Lincolnway RTD Canning - Plainfield IL",
+        "type": "Manufacturing - RTD Canning Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2168,
+              41.624
+            ],
+            [
+              -88.216,
+              41.624
+            ],
+            [
+              -88.216,
+              41.6248
+            ],
+            [
+              -88.2168,
+              41.6248
+            ],
+            [
+              -88.2168,
+              41.624
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo Lincolnway RTD Canning - Plainfield IL",
+        "type": "Manufacturing - RTD Canning Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.251,
+              41.622
+            ],
+            [
+              -88.2455,
+              41.622
+            ],
+            [
+              -88.2455,
+              41.6285
+            ],
+            [
+              -88.251,
+              41.6285
+            ],
+            [
+              -88.251,
+              41.622
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo Plainfield Distribution Warehouse - Plainfield IL",
+        "type": "Distribution Center / Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 81.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2473,
+              41.6235
+            ],
+            [
+              -88.2463,
+              41.6235
+            ],
+            [
+              -88.2463,
+              41.6246
+            ],
+            [
+              -88.2473,
+              41.6246
+            ],
+            [
+              -88.2473,
+              41.6235
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo Plainfield Distribution Warehouse - Plainfield IL",
+        "type": "Distribution Center / Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2473,
+              41.6235
+            ],
+            [
+              -88.2457,
+              41.6235
+            ],
+            [
+              -88.2457,
+              41.6283
+            ],
+            [
+              -88.2473,
+              41.6283
+            ],
+            [
+              -88.2473,
+              41.6235
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo Plainfield Distribution Warehouse - Plainfield IL",
+        "type": "Distribution Center / Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2508,
+              41.6235
+            ],
+            [
+              -88.25,
+              41.6235
+            ],
+            [
+              -88.25,
+              41.6283
+            ],
+            [
+              -88.2508,
+              41.6283
+            ],
+            [
+              -88.2508,
+              41.6235
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo Plainfield Distribution Warehouse - Plainfield IL",
+        "type": "Distribution Center / Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.25,
+              41.6235
+            ],
+            [
+              -88.2491,
+              41.6235
+            ],
+            [
+              -88.2491,
+              41.6283
+            ],
+            [
+              -88.25,
+              41.6283
+            ],
+            [
+              -88.25,
+              41.6235
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo Plainfield Distribution Warehouse - Plainfield IL",
+        "type": "Distribution Center / Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2474,
+              41.6235
+            ],
+            [
+              -88.2466,
+              41.6235
+            ],
+            [
+              -88.2466,
+              41.6283
+            ],
+            [
+              -88.2474,
+              41.6283
+            ],
+            [
+              -88.2474,
+              41.6235
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo Plainfield Distribution Warehouse - Plainfield IL",
+        "type": "Distribution Center / Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2168,
+              41.6222
+            ],
+            [
+              -88.2118,
+              41.6222
+            ],
+            [
+              -88.2118,
+              41.6276
+            ],
+            [
+              -88.2168,
+              41.6276
+            ],
+            [
+              -88.2168,
+              41.6222
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo Plainfield Bottling Plant - Plainfield IL",
+        "type": "Manufacturing - Bottling Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 61.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2134,
+              41.6238
+            ],
+            [
+              -88.2128,
+              41.6238
+            ],
+            [
+              -88.2128,
+              41.6244
+            ],
+            [
+              -88.2134,
+              41.6244
+            ],
+            [
+              -88.2134,
+              41.6238
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo Plainfield Bottling Plant - Plainfield IL",
+        "type": "Manufacturing - Bottling Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2138,
+              41.6224
+            ],
+            [
+              -88.2122,
+              41.6224
+            ],
+            [
+              -88.2122,
+              41.627
+            ],
+            [
+              -88.2138,
+              41.627
+            ],
+            [
+              -88.2138,
+              41.6224
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo Plainfield Bottling Plant - Plainfield IL",
+        "type": "Manufacturing - Bottling Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2138,
+              41.6224
+            ],
+            [
+              -88.213,
+              41.6224
+            ],
+            [
+              -88.213,
+              41.627
+            ],
+            [
+              -88.2138,
+              41.627
+            ],
+            [
+              -88.2138,
+              41.6224
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo Plainfield Bottling Plant - Plainfield IL",
+        "type": "Manufacturing - Bottling Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.213,
+              41.6235
+            ],
+            [
+              -88.212,
+              41.6235
+            ],
+            [
+              -88.212,
+              41.6244
+            ],
+            [
+              -88.213,
+              41.6244
+            ],
+            [
+              -88.213,
+              41.6235
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo Plainfield Bottling Plant - Plainfield IL",
+        "type": "Manufacturing - Bottling Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3672,
+              32.2748
+            ],
+            [
+              -86.3622,
+              32.2748
+            ],
+            [
+              -86.3622,
+              32.282
+            ],
+            [
+              -86.3672,
+              32.282
+            ],
+            [
+              -86.3672,
+              32.2748
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo Montgomery Manufacturing & Warehousing - Hope Hull AL",
+        "type": "Manufacturing & Warehousing Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 93.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3658,
+              32.279
+            ],
+            [
+              -86.364,
+              32.279
+            ],
+            [
+              -86.364,
+              32.2808
+            ],
+            [
+              -86.3658,
+              32.2808
+            ],
+            [
+              -86.3658,
+              32.279
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo Montgomery Manufacturing & Warehousing - Hope Hull AL",
+        "type": "Manufacturing & Warehousing Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.2848,
+              37.541
+            ],
+            [
+              -85.2762,
+              37.541
+            ],
+            [
+              -85.2762,
+              37.5478
+            ],
+            [
+              -85.2848,
+              37.5478
+            ],
+            [
+              -85.2848,
+              37.541
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo Lebanon Distillery - Lebanon KY",
+        "type": "Distillery (Carbon-Neutral)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 11,
+          "siteAreaAcres": 142,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.2796,
+              37.5452
+            ],
+            [
+              -85.279,
+              37.5452
+            ],
+            [
+              -85.279,
+              37.546
+            ],
+            [
+              -85.2796,
+              37.546
+            ],
+            [
+              -85.2796,
+              37.5452
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo Lebanon Distillery - Lebanon KY",
+        "type": "Distillery (Carbon-Neutral)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.1495,
+              38.2155
+            ],
+            [
+              -85.14,
+              38.2155
+            ],
+            [
+              -85.14,
+              38.2276
+            ],
+            [
+              -85.1495,
+              38.2276
+            ],
+            [
+              -85.1495,
+              38.2155
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Bulleit Distilling Co. (Shelbyville) - Shelbyville KY",
+        "type": "Distillery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 4,
+          "trailersVisible": 1,
+          "trailerParkingCapacity": 8,
+          "truckGateCount": 1,
+          "buildingCount": 14,
+          "siteAreaAcres": 38,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.144,
+              38.2225
+            ],
+            [
+              -85.1426,
+              38.2225
+            ],
+            [
+              -85.1426,
+              38.2236
+            ],
+            [
+              -85.144,
+              38.2236
+            ],
+            [
+              -85.144,
+              38.2225
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Bulleit Distilling Co. (Shelbyville) - Shelbyville KY",
+        "type": "Distillery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.8115,
+              38.2065
+            ],
+            [
+              -85.8055,
+              38.2065
+            ],
+            [
+              -85.8055,
+              38.213
+            ],
+            [
+              -85.8115,
+              38.213
+            ],
+            [
+              -85.8115,
+              38.2065
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Stitzel-Weller Distillery - Louisville KY",
+        "type": "Distillery / Aging Warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 24,
+          "siteAreaAcres": 33,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.8112,
+              38.2085
+            ],
+            [
+              -85.8104,
+              38.2085
+            ],
+            [
+              -85.8104,
+              38.2091
+            ],
+            [
+              -85.8112,
+              38.2091
+            ],
+            [
+              -85.8112,
+              38.2085
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Stitzel-Weller Distillery - Louisville KY",
+        "type": "Distillery / Aging Warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.8112,
+              38.21
+            ],
+            [
+              -85.8105,
+              38.21
+            ],
+            [
+              -85.8105,
+              38.2109
+            ],
+            [
+              -85.8112,
+              38.2109
+            ],
+            [
+              -85.8112,
+              38.21
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Stitzel-Weller Distillery - Louisville KY",
+        "type": "Distillery / Aging Warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.8113,
+              38.2076
+            ],
+            [
+              -85.8108,
+              38.2076
+            ],
+            [
+              -85.8108,
+              38.2083
+            ],
+            [
+              -85.8113,
+              38.2083
+            ],
+            [
+              -85.8113,
+              38.2076
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Stitzel-Weller Distillery - Louisville KY",
+        "type": "Distillery / Aging Warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.8111,
+              38.2092
+            ],
+            [
+              -85.8103,
+              38.2092
+            ],
+            [
+              -85.8103,
+              38.2099
+            ],
+            [
+              -85.8111,
+              38.2099
+            ],
+            [
+              -85.8111,
+              38.2092
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Stitzel-Weller Distillery - Louisville KY",
+        "type": "Distillery / Aging Warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.248,
+              35.434
+            ],
+            [
+              -86.239,
+              35.434
+            ],
+            [
+              -86.239,
+              35.441
+            ],
+            [
+              -86.248,
+              35.441
+            ],
+            [
+              -86.248,
+              35.434
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Cascade Hollow Distilling Co. (George Dickel) - Tullahoma TN",
+        "type": "Distillery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 18,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.244,
+              35.4385
+            ],
+            [
+              -86.243,
+              35.4385
+            ],
+            [
+              -86.243,
+              35.4392
+            ],
+            [
+              -86.244,
+              35.4392
+            ],
+            [
+              -86.244,
+              35.4385
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Cascade Hollow Distilling Co. (George Dickel) - Tullahoma TN",
+        "type": "Distillery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2434,
+              35.4388
+            ],
+            [
+              -86.2425,
+              35.4388
+            ],
+            [
+              -86.2425,
+              35.4395
+            ],
+            [
+              -86.2434,
+              35.4395
+            ],
+            [
+              -86.2434,
+              35.4388
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Cascade Hollow Distilling Co. (George Dickel) - Tullahoma TN",
+        "type": "Distillery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.13625,
+              31.54985
+            ],
+            [
+              -97.13525,
+              31.54985
+            ],
+            [
+              -97.13525,
+              31.55075
+            ],
+            [
+              -97.13625,
+              31.55075
+            ],
+            [
+              -97.13625,
+              31.54985
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Balcones Distilling - Waco TX",
+        "type": "Distillery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 2,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 1.1,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.1362,
+              31.55
+            ],
+            [
+              -97.1359,
+              31.55
+            ],
+            [
+              -97.1359,
+              31.5506
+            ],
+            [
+              -97.1362,
+              31.5506
+            ],
+            [
+              -97.1362,
+              31.55
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Balcones Distilling - Waco TX",
+        "type": "Distillery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -64.8465,
+              17.7034
+            ],
+            [
+              -64.8405,
+              17.7034
+            ],
+            [
+              -64.8405,
+              17.7095
+            ],
+            [
+              -64.8465,
+              17.7095
+            ],
+            [
+              -64.8465,
+              17.7034
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo USVI Captain Morgan Distillery - Frederiksted USVI",
+        "type": "Distillery & Barrel Aging Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 7,
+          "siteAreaAcres": 32,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -64.8428,
+              17.7074
+            ],
+            [
+              -64.8418,
+              17.7074
+            ],
+            [
+              -64.8418,
+              17.708
+            ],
+            [
+              -64.8428,
+              17.708
+            ],
+            [
+              -64.8428,
+              17.7074
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo USVI Captain Morgan Distillery - Frederiksted USVI",
+        "type": "Distillery & Barrel Aging Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -64.8438,
+              17.7045
+            ],
+            [
+              -64.8423,
+              17.7045
+            ],
+            [
+              -64.8423,
+              17.7056
+            ],
+            [
+              -64.8438,
+              17.7056
+            ],
+            [
+              -64.8438,
+              17.7045
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo USVI Captain Morgan Distillery - Frederiksted USVI",
+        "type": "Distillery & Barrel Aging Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -64.844,
+              17.7047
+            ],
+            [
+              -64.8428,
+              17.7047
+            ],
+            [
+              -64.8428,
+              17.7056
+            ],
+            [
+              -64.844,
+              17.7056
+            ],
+            [
+              -64.844,
+              17.7047
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo USVI Captain Morgan Distillery - Frederiksted USVI",
+        "type": "Distillery & Barrel Aging Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -64.8435,
+              17.706
+            ],
+            [
+              -64.842,
+              17.706
+            ],
+            [
+              -64.842,
+              17.7072
+            ],
+            [
+              -64.8435,
+              17.7072
+            ],
+            [
+              -64.8435,
+              17.706
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "diageo",
+        "name": "Diageo USVI Captain Morgan Distillery - Frederiksted USVI",
+        "type": "Distillery & Barrel Aging Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    }
+  ]
+}

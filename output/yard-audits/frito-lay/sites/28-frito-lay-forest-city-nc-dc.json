@@ -1,0 +1,48 @@
+{
+  "name": "Frito-Lay - Forest City NC (DC)",
+  "type": "Distribution Center",
+  "coords": { "lat": 35.33855, "lng": -81.88640 },
+  "geofences": {
+    "perimeter": { "south": 35.33760, "west": -81.88740, "north": 35.33960, "east": -81.88540 },
+    "truckGate": { "south": 35.33790, "west": -81.88700, "north": 35.33820, "east": -81.88660 },
+    "dropYards": [
+      { "south": 35.33780, "west": -81.88660, "north": 35.33850, "east": -81.88560 }
+    ],
+    "dockAprons": [
+      { "south": 35.33780, "west": -81.88640, "north": 35.33840, "east": -81.88560 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 9, "trailersVisible": 6, "trailerParkingCapacity": 14,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 5.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.33855,-81.88640,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "April-2025 Street View shows the whole truck yard enclosed by a chain-link perimeter fence with box trucks/trailers parked inside; the access driveway passes through a gate opening in the fence. Controlled entry confirmed.",
+    "guardShack": "No guard-booth structure visible at the gate. As a small ~115k sq ft product-exchange DC (built 2023, leased Nov 2023), the gate is a remote/badge-controlled sliding gate.",
+    "remoteGs": "Gate present, no booth -> remote check-in (kiosk/badge/call-box).",
+    "drivewayShort": "Access drive from Lawing Rd to the gated yard is short (~80 m), with room for only 1-2 trucks before the gate.",
+    "dockDoors": "Single dock bank on the SW building face; ~9 doors estimated (0-10 band) — Frito-Lay route-truck/exchange operation, not a high-door DC.",
+    "dropArea": "A few trailers/box trucks parked in the small fenced yard; no dedicated drop-yard lot — dropArea 0-10.",
+    "dropYard": "False — no dedicated trailer-storage lot; only a small operational truck yard.",
+    "urbanRural": "Rural — single building surrounded by woods on a wooded access road off Lawing Rd, edge of Forest City, NC.",
+    "siteAreaAcres": "Small parcel, ~5 acres of cleared/paved area within the wooded lot.",
+    "railServed": "No rail spur — facility is a truck-only product-exchange DC."
+  },
+  "method": "deep-audit"
+}

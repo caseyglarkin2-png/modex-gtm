@@ -1,0 +1,48 @@
+{
+  "name": "Nabisco Allentown Sales Distribution Center - Allentown PA",
+  "type": "Distribution center / sales warehouse (unresolved - possibly a sales territory designation)",
+  "coords": { "lat": 40.6084, "lng": -75.4902 },
+  "geofences": {
+    "perimeter": null,
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 0,
+    "buildingCount": 0,
+    "siteAreaAcres": 0.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.6084,-75.4902,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "UNRESOLVED": "Could not positively identify a distinct Nabisco/Mondelez distribution-center building in Allentown PA after extensive web research. The roster source itself flags this as city-level only with no published street address. Roster coords (40.6084,-75.4902) fall in downtown/residential Allentown - satellite confirms no warehouse there.",
+    "assessment": "Job-listing and directory evidence indicates 'Allentown' is most likely a Mondelez/Nabisco SALES & MERCHANDISER TERRITORY designation in the Lehigh Valley, not a discrete large DC. Mondelez/Nabisco's actual Lehigh Valley physical distribution appears consolidated at the Tatamy PA DC (roster idx 14, ~10 mi NE) - a ~100,300 sq ft Becknell build-to-suit. The Allentown entry may double-count that operation or refer to a small sales office.",
+    "classification": "All 22 fields default to false/NONE/null and are listed in uncertainFields because no building was confirmed. They are placeholders, not observations.",
+    "recommendation": "Human review: either (a) drop this entry as a duplicate of the Tatamy DC (idx 14), or (b) obtain the exact street address from Mondelez before re-auditing."
+  },
+  "method": "deep-audit"
+}

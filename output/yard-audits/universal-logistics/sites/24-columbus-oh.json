@@ -1,0 +1,54 @@
+{
+  "name": "Universal Logistics - Columbus Terminal - Columbus OH",
+  "type": "Intermodal / Drayage Terminal Yard (owned)",
+  "coords": { "lat": 40.01300, "lng": -83.13080 },
+  "geofences": {
+    "perimeter": { "south": 40.01170, "west": -83.13190, "north": 40.01470, "east": -83.12880 },
+    "truckGate": { "south": 40.01278, "west": -83.13195, "north": 40.01305, "east": -83.13150 },
+    "dropYards": [
+      { "south": 40.01180, "west": -83.13120, "north": 40.01450, "east": -83.12890 }
+    ],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 21.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.013,-83.1308,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "NONE", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "Resolved to 2950 International St, Columbus, OH 43228 via the loadmatch.com intermodal directory (Universal Intermodal Services, Inc. / Columbus OH, companyID 5853). Address independently corroborated by iBegin, Superpages, and Yelp listings (all show 2950 International St, phone 614-777-9393, also branded 'Mason Dixon Lines' — a Universal/ULH operating brand). The geocoding-API rooftop point (40.0129, -83.1330) landed on a neighboring multi-tenant DC; the terminal yard is the parcel ~150 m east, fronting International St — confirmed by a Street View 'Universal Intermodal Services' sign on the property fence (pano 2021-07).",
+    "truckGate": "Street View along International St (2021-07) shows the truck entrance driveway is a wide open paved apron meeting International St — NO barrier arm, NO sliding/swing gate across the truck lane. The container yard has perimeter chain-link fencing along the road frontage, but the entrance driveway itself is uncontrolled and open.",
+    "guardShack": "No staffed booth visible at the entrance or anywhere on the property in satellite or Street View. Only an L-shaped metal office/equipment-shop building is present.",
+    "remoteGs": "No truck gate (open uncontrolled entrance), so no remote check-in implied.",
+    "dockDoors": "NONE — this is a drayage/intermodal terminal yard, not a cross-dock. The only building is an office/equipment-shop with no rhythm of loading-dock doors.",
+    "dropArea": "Banded 50+. Street View (2021) showed the yard densely stacked with ocean containers (MSC, Maersk and others). 2026 satellite shows the yard dominated by flatbed/chassis rows carrying steel/material loads plus parked trailers — a large working drop/storage yard.",
+    "drivewayLong": "The wide gravel/paved yard provides deep stacking between International St and the yard interior — 3+ trucks could queue inside without spilling onto the road.",
+    "fastLaneOpportunity": "The entrance apron is very wide with substantial unused paved width — physical room to add a bypass/express lane exists.",
+    "buildingCount": "Two structures: a long L-shaped office/equipment-shop building near the SW corner and a small adjacent shed.",
+    "railServed": "No rail spur runs into the parcel. It is a truck drayage terminal in the I-270 / West Belt Dr corridor that interchanges with the nearby CSX Columbus intermodal ramp; rail does not enter the property.",
+    "siteAreaAcres": "~21.8 acres computed from the perimeter box — a large open terminal yard bounded by International St (W) and the I-270 / rail corridor tree line (N/E).",
+    "trailersVisible": "~40 trailers/chassis estimated from 2026 satellite — low confidence, the yard is irregularly loaded.",
+    "trailerParkingCapacity": "~200 — the yard is mostly open gravel/paved and could hold a large number of trailers/chassis/containers; honest estimate.",
+    "urbanRural": "Inside the west-Columbus industrial fabric (43228, I-270/I-70 corridor) — Urban."
+  },
+  "method": "deep-audit"
+}

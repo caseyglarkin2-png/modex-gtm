@@ -1,0 +1,54 @@
+{
+  "name": "Home Depot RDC - Pittston Township PA",
+  "type": "Rapid Deployment Center",
+  "coords": { "lat": 41.31555, "lng": -75.76660 },
+  "geofences": {
+    "perimeter": { "south": 41.31300, "west": -75.77020, "north": 41.31820, "east": -75.76250 },
+    "truckGate": { "south": 41.31380, "west": -75.76950, "north": 41.31440, "east": -75.76850 },
+    "dropYards": [
+      { "south": 41.31600, "west": -75.76520, "north": 41.31760, "east": -75.76270 }
+    ],
+    "dockAprons": [
+      { "south": 41.31430, "west": -75.76900, "north": 41.31620, "east": -75.76430 },
+      { "south": 41.31540, "west": -75.76760, "north": 41.31700, "east": -75.76350 }
+    ],
+    "staging": { "south": 41.31380, "west": -75.76830, "north": 41.31480, "east": -75.76650 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 150,
+    "trailersVisible": 230,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 75.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.31555,-75.76660,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Cross-dock RDC; truck entrance off the public road at the SW corner. A z20 view of the inner perimeter point shows a small guard-booth structure beside the drive where it crosses the property line into the yard.",
+    "guardShack": "Small 1-2-vehicle-footprint booth visible at the inner gate point where the access drive enters the truck yard, set back from the public road behind the employee parking.",
+    "postGateStaging": "Large paved apron between the inner gate and the dock faces gives ample post-gate queue room.",
+    "drivewayLong": "Deep approach from the SW gate along the long dock apron; comfortably 3+ trucks of stacking.",
+    "fastLaneOpportunity": "Wide gate apron and generous paved width at the SW entrance; room for an express/bypass lane.",
+    "dockDoors": "Dense regular dock-door rhythm with trailers backed in along the long NW face and the long SE face — well over 100 doors total (cross-dock RDC).",
+    "shipRcvSeparate": "Cross-dock layout: receiving on one long face, shipping on the opposite long face — two distinct dock banks.",
+    "dropYard": "Dedicated trailer drop yard with multiple rows of parked trailers on the NE end of the property.",
+    "urbanRural": "Edge-of-town industrial park (CenterPoint Commerce & Trade Park) outside Pittston Township, surrounded by warehouses and woodland — judged Rural per rubric.",
+    "entryLanes": "Estimated from imagery; lane count at the gate not fully resolved.",
+    "trailersVisible": "Approximate count from z17-z19 imagery across dock faces and drop yard."
+  },
+  "method": "deep-audit"
+}

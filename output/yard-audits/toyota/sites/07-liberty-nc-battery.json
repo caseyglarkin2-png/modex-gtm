@@ -1,0 +1,52 @@
+{
+  "name": "Toyota Battery Manufacturing North Carolina - Liberty NC",
+  "type": "Battery Manufacturing Plant",
+  "coords": { "lat": 35.8955, "lng": -79.6300 },
+  "geofences": {
+    "perimeter": { "south": 35.8860, "west": -79.6420, "north": 35.9060, "east": -79.6195 },
+    "truckGate": { "south": 35.89320, "west": -79.63320, "north": 35.89460, "east": -79.63180 },
+    "dropYards": [
+      { "south": 35.89500, "west": -79.63250, "north": 35.89720, "east": -79.62950 }
+    ],
+    "dockAprons": [
+      { "south": 35.89460, "west": -79.63350, "north": 35.89620, "east": -79.63060 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 50,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 5,
+    "siteAreaAcres": 1116.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.8955,-79.63,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging", "drivewayLong", "entryExitSeparate", "entryLanes", "exitLanes", "dockDoors", "dropArea", "shipRcvSeparate", "scale", "multiStep", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "truckGateCount", "buildingCount"],
+  "fieldNotes": {
+    "_general": "TBMNC is a $13.9B greenfield battery megasite on the Greensboro-Randolph Megasite. The latest available Maxar satellite imagery shows the site mid-construction - large operational buildings are complete (the plant has produced HEV batteries since 2025) but extensive areas remain graded construction land and additional production phases are still being built. Yard configuration is therefore still in flux and most classification values are best-effort estimates flagged uncertain.",
+    "_location": "Roster coordinates (35.896442, -79.642555) moved 11.4 km and pointed near Liberty town center, NOT the plant. The actual megasite was relocated by web search + satellite scan to ~35.8955, -79.6300, southeast of Liberty along the megasite access roads off US-421.",
+    "truckGate": "Site is a controlled megasite with a roundabout-based internal road network and gated industrial access; truck access is controlled. Gate structure not directly viewable - no Street View coverage at this remote greenfield site. Inferred.",
+    "guardShack": "Could not be confirmed from overhead construction-era imagery. Set false / remoteGs true at low confidence.",
+    "multipleFacilities": "Large multi-building campus - the main battery building plus several support/utility buildings and an electrical substation; further production buildings under construction.",
+    "dropYard": "Trailer parking and a construction/logistics lay-down yard observed adjacent to the main building; a dedicated operational drop yard is present but its mature extent is not yet clear from construction-era imagery.",
+    "dockDoors": "Dock doors with trailers backed in observed along the north face of the main building; ~50 estimated but the full operational dock count is uncertain while the plant is still ramping.",
+    "urbanRural": "Rural - the megasite is greenfield, surrounded by farmland and woods in northeast Randolph County near the small town of Liberty.",
+    "railServed": "No rail spur observed entering the operational footprint in current imagery.",
+    "siteAreaAcres": "~1,116 acres for the active/operational footprint estimated here; the full Greensboro-Randolph Megasite parcel is ~1,850 acres."
+  },
+  "method": "deep-audit"
+}

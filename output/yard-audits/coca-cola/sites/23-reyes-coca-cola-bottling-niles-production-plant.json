@@ -1,0 +1,51 @@
+{
+  "name": "Reyes Coca-Cola Bottling - Niles Production Plant, IL",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 42.01620, "lng": -87.79500 },
+  "geofences": {
+    "perimeter": { "south": 42.01430, "west": -87.79720, "north": 42.01820, "east": -87.79350 },
+    "truckGate": { "south": 42.01680, "west": -87.79440, "north": 42.01760, "east": -87.79380 },
+    "dropYards": [
+      { "south": 42.01660, "west": -87.79560, "north": 42.01800, "east": -87.79390 }
+    ],
+    "dockAprons": [
+      { "south": 42.01620, "west": -87.79600, "north": 42.01780, "east": -87.79420 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30, "trailersVisible": 35, "trailerParkingCapacity": 55,
+    "truckGateCount": 2, "buildingCount": 3, "siteAreaAcres": 28.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.01620,-87.79500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "railServed"],
+  "fieldNotes": {
+    "location": "Roster coords (42.0158,-87.7945, ROOFTOP) are accurate - confirmed 7400 N Oak Park Ave, Niles IL 60714, the Reyes Coca-Cola Bottling Niles production plant and Reyes Coca-Cola headquarters. Confirmed by Street View showing Coca-Cola and Sprite branded trailers parked along the truck yard. Facility opened 1964, acquired by Reyes 2016, 365,000+ sq ft, bottles 24M+ cases/year for the Midwest.",
+    "truckGate": "Open site - the truck yard fronts the public road with no perimeter fence, no barrier arm, no sliding gate, and no guard booth at any entrance. Coca-Cola/Sprite trailers are parked openly within view of the road. Multiple wide open driveway entrances. truckGate false.",
+    "guardShack": "No guard booth anywhere on the perimeter - confirmed across multiple Street View headings. False.",
+    "remoteGs": "No gate, so remoteGs false.",
+    "truckGateCount": "Two open driveway entrances into the truck yard counted (one mid-block, one further along) - recorded truckGateCount 2 although neither is a controlled gate.",
+    "entryExitSeparate": "The site has multiple open driveways serving the truck yard at different points along the road, so in-and-out movement is split across separate openings - recorded entryExitSeparate true.",
+    "dockDoors": "Estimated ~30 dock doors along the building faces with trailers backed in; banded 25-50. Flagged uncertain - dock face partly obscured by trailers and rooftop angle.",
+    "dropArea": "Trailer drop yard holds ~35 trailers in marked rows; banded 25-50. dropYard true.",
+    "postGateStaging": "Large open paved truck yard between the entrances and the dock doors provides ample internal staging.",
+    "drivewayLong": "Deep open yard easily holds a 3+ truck queue.",
+    "multipleFacilities": "Campus has the main production/warehouse building plus a connected south warehouse building plus an office building - multiple large structures on one property.",
+    "railServed": "No rail spur into the property evident; flagged uncertain.",
+    "urbanRural": "Niles is a dense inner-ring Chicago suburb - Urban."
+  },
+  "method": "deep-audit"
+}

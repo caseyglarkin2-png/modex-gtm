@@ -1,0 +1,62 @@
+{
+  "name": "GP Dixie Tableware Plant - Jackson TN",
+  "type": "Tableware/Converting Plant",
+  "coords": { "lat": 35.6276, "lng": -88.9168 },
+  "geofences": {
+    "perimeter": { "south": 35.623378, "west": -88.922547, "north": 35.632271, "east": -88.911385 },
+    "truckGate": { "south": 35.629351, "west": -88.920274, "north": 35.630249, "east": -88.918726 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 35.626832, "west": -88.913832, "north": 35.629168, "east": -88.913168 }
+    ],
+    "staging": { "south": 35.626602, "west": -88.915663, "north": 35.628398, "east": -88.914337 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 25,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 247.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.6276,-88.9168,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoors", "dropArea", "trailersVisible", "entryLanes", "exitLanes", "scale", "fastLaneOpportunity"],
+  "fieldNotes": {
+    "facility": "New $425M greenfield Dixie tableware manufacturing plant (paper plates/bowls/platters), 900,000 sq ft on 241 acres at 65 Cardinal Drive, west Jackson TN, near I-40 and TN-223. Production started June 2024; ribbon-cut Oct 2024. Roster coordinate (35.551418, -89.184861) was ~13 km SE in farmland; relocated via web research (65 Cardinal Drive, near I-40/Hwy 223) and confirmed in satellite + Feb-2026 Street View showing the building with the Georgia-Pacific logo.",
+    "imagery": "Maxar satellite of this area is from the construction era (~2023) — the building roof is visible but the truck dock yard not fully built. Feb-2026 Street View confirms the operational plant: large single building, full perimeter chain-link fence, dock apron with trailers on the east side, employee parking on the west.",
+    "truckGate": "Fully fenced ~247-acre site (continuous chain-link perimeter confirmed in Street View). The truck driveway enters off Cardinal Drive; a controlled gate is standard for a modern greenfield manufacturing plant. Called true.",
+    "guardShack": "No staffed guard booth imaged; a modern cost-efficient greenfield plant with ~220 employees typically uses kiosk / app / call-box check-in rather than a 24/7 manned booth — set guardShack false, remoteGs true. Both flagged uncertain.",
+    "dockDoors": "Single 900,000 sq ft building with a long dock apron on the east side; ~40 doors estimated — low confidence band 25-50.",
+    "dropArea": "Trailers parked at the dock apron in Street View; no dedicated separate drop lot visible — dropArea 0-10, dropYard false.",
+    "railServed": "No rail spur into the property — site is near I-40, served by truck.",
+    "fastLaneOpportunity": "New site with ample paved width and a long driveway approach; inferred room to add a bypass lane — low confidence.",
+    "urbanRural": "Rural — greenfield site on former farmland on the western edge of Jackson, surrounded by open fields."
+  },
+  "method": "deep-audit"
+}

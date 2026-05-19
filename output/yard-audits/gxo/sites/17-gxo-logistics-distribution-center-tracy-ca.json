@@ -1,0 +1,50 @@
+{
+  "name": "GXO Logistics Distribution Center - Tracy CA",
+  "type": "Distribution Center",
+  "coords": { "lat": 37.762200, "lng": -121.411800 },
+  "geofences": {
+    "perimeter": { "south": 37.761400, "west": -121.414300, "north": 37.763300, "east": -121.410200 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 37.761500, "west": -121.413300, "north": 37.761900, "east": -121.410800 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 57,
+    "trailersVisible": 4,
+    "trailerParkingCapacity": 92,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 19.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.762200,-121.411800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "trailersVisible", "dropArea", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "1700 E Pescadero Ave, Tracy CA = Tracy Pescadero Distribution Center, a 381,600 SF Class A regional DC on a 19.46-acre site, completed 2016 by Ridgeline Property Group / LaSalle. Spec: 57 dock-high doors, 2 drive-in doors, 185 ft truck court, 92 trailer parking spaces, 317 auto parking spaces. Historically split-leased to Pactra and DHL; GXO Logistics now operates here per Racklify and Bandana 3PL directories. Building is an L-shaped multi-tenant distribution building just south of I-205 with a large interior auto-parking lot. Roster GEOMETRIC_CENTER geocode (5 m) landed correctly on this parcel.",
+    "truckGate": "No barrier arm, sliding gate, or checkpoint visible at the E Pescadero Ave driveway entrances. The west and interior auto-parking areas are fully open and unfenced (2023 Street View). Two drive entrances serve the site off E Pescadero. Classified false; flagged uncertain since the truck-side dock area is partly tree-screened from the road.",
+    "guardShack": "No staffed booth observed at any entrance.",
+    "remoteGs": "No gate present, so no remote check-in.",
+    "dockDoors": "57 dock-high doors per developer spec; dock indents visible along the building's south face - 50+ band.",
+    "dropArea": "92 trailer parking spaces per spec; only a few trailers visible in imagery (estimated 4). Recorded 0-10 band for trailers parked without tractors; flagged uncertain.",
+    "drivewayShort": "Dock apron and driveway approach are shallow; the site is compact (19.46 acres) with limited internal queuing depth.",
+    "entryExitSeparate": "Two separate driveway entrances off E Pescadero Ave provide distinct in/out points; flagged uncertain as exact lane assignment is not visible.",
+    "urbanRural": "Located within the Northeast Industrial Specific Plan Area of Tracy, a dense Central Valley industrial / logistics district immediately south of I-205.",
+    "siteAreaAcres": "19.46-acre site per developer documentation; perimeter box yields ~16.5 acres (box excludes some peripheral landscaping)."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,52 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Anheuser-Busch Brewery - St. Louis MO,Brewery,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,YES,YES,,2,2,YES,,,,YES,,,,YES,YES,Urban,,YES,YES,YES,"https://www.google.com/maps/@38.59650,-90.20800,400m/data=!3m1!1e3"
+Anheuser-Busch Brewery - Houston TX,Brewery,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,2,YES,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@29.77150,-95.26900,400m/data=!3m1!1e3"
+Anheuser-Busch Brewery - Columbus OH,Brewery,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@40.10500,-82.99350,400m/data=!3m1!1e3"
+Anheuser-Busch Brewery - Jacksonville FL,Brewery,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@30.43250,-81.64900,400m/data=!3m1!1e3"
+Anheuser-Busch Brewery - Williamsburg VA,Brewery,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,YES,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@37.23800,-76.65350,400m/data=!3m1!1e3"
+Anheuser-Busch Brewery - Baldwinsville NY,Brewery,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,YES,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@43.16800,-76.31050,400m/data=!3m1!1e3"
+Anheuser-Busch Brewery - Fort Collins CO,Brewery,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,YES,,,,,YES,,Rural,,YES,YES,YES,"https://www.google.com/maps/@40.62000,-105.00750,400m/data=!3m1!1e3"
+Anheuser-Busch Brewery - Cartersville GA,Brewery,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,YES,YES,"https://www.google.com/maps/@34.25700,-84.78300,400m/data=!3m1!1e3"
+Anheuser-Busch Brewery - Van Nuys (Los Angeles) CA,Brewery,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,,YES,YES,YES,,2,2,YES,,,YES,,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@34.21850,-118.47900,400m/data=!3m1!1e3"
+Anheuser-Busch Brewery - Fairfield CA,Brewery,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,YES,Rural,,YES,YES,YES,"https://www.google.com/maps/@38.23550,-122.09050,400m/data=!3m1!1e3"
+Anheuser-Busch Brewery - Merrimack NH,Brewery,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@42.82530,-71.48650,400m/data=!3m1!1e3"
+Anheuser-Busch Brewery - Newark NJ,Brewery,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,1,1,,,,YES,,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@40.69400,-74.19250,400m/data=!3m1!1e3"
+Metal Container Corporation - Arnold MO Can Plant,Can Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,,,YES,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@38.43380,-90.35350,400m/data=!3m1!1e3"
+Metal Container Corporation - Jacksonville FL Can Plant,Can Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,,YES,,1,1,,,,YES,,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@30.33980,-81.74480,400m/data=!3m1!1e3"
+Metal Container Corporation - Mira Loma CA Can Plant,Can Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,YES,,,,YES,,,,Urban,,YES,,YES,"https://www.google.com/maps/@34.032,-117.5226,400m/data=!3m1!1e3"
+Metal Container Corporation - Newburgh NY Can Plant,Can Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,,,YES,,,,YES,,,YES,Rural,,,,YES,"https://www.google.com/maps/@41.4878,-74.0958,400m/data=!3m1!1e3"
+Metal Container Corporation - Windsor CO Can Plant,Can Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,YES,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@40.467,-104.8623,400m/data=!3m1!1e3"
+Metal Container Corporation - Oklahoma City OK Lid Plant,Lid Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@35.425,-97.608,400m/data=!3m1!1e3"
+Metal Container Corporation - Riverside CA Lid Plant,Lid Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@33.9480,-117.4500,400m/data=!3m1!1e3"
+Busch Agricultural Resources - Jonesboro AR Rice Mill,Agricultural Processing - Rice Mill,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,,YES,,,,YES,,,,,Rural,,YES,YES,,"https://www.google.com/maps/@35.8748,-90.6005,400m/data=!3m1!1e3"
+Busch Agricultural Resources - Idaho Falls ID Malt Plant,Agricultural Processing - Malt Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,YES,,,,,,,,,Rural,,YES,YES,,"https://www.google.com/maps/@43.4444,-112.0685,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,8,38%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,7,33%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,4,19%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,2,10%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,21,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,10,48%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,11,52%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,11,52%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,10,48%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,21,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,21,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

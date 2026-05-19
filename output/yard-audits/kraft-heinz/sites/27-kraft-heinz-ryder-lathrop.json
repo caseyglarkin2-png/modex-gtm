@@ -1,0 +1,25 @@
+{
+  "name": "Kraft Heinz - Ryder Lathrop",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryExitSeparate"],
+  "fieldNotes": {
+    "truckGate": "Street View shows the office front with a 'Visitor Parking' sign and a fenced truck yard with a gate visible to the right; the truck court is enclosed by perimeter fencing.",
+    "guardShack": "No staffed booth resolved at the gate; modern Ryder 3PL DC, likely kiosk/app check-in, so marked remoteGs.",
+    "entryExitSeparate": "Mega distribution center with truck courts on both long faces and multiple access points, indicating separate in/out flows.",
+    "shipRcvSeparate": "Distinct dock banks on opposite sides of the building.",
+    "dropYard": "Very large trailer parking fields along both sides of the building.",
+    "fastLaneOpportunity": "Expansive paved truck courts with abundant unused lane width.",
+    "urbanRural": "Lathrop CA logistics corridor; large-format DCs amid open land at the metro edge."
+  }
+}

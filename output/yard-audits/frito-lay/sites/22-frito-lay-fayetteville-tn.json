@@ -1,0 +1,49 @@
+{
+  "name": "Frito-Lay - Fayetteville TN",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 35.15600, "lng": -86.51010 },
+  "geofences": {
+    "perimeter": { "south": 35.15330, "west": -86.51270, "north": 35.15850, "east": -86.50780 },
+    "truckGate": { "south": 35.15700, "west": -86.50950, "north": 35.15780, "east": -86.50850 },
+    "dropYards": [
+      { "south": 35.15600, "west": -86.50940, "north": 35.15820, "east": -86.50780 },
+      { "south": 35.15400, "west": -86.51270, "north": 35.15680, "east": -86.51150 }
+    ],
+    "dockAprons": [
+      { "south": 35.15440, "west": -86.51100, "north": 35.15560, "east": -86.50880 },
+      { "south": 35.15700, "west": -86.51080, "north": 35.15820, "east": -86.50950 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55, "trailersVisible": 140, "trailerParkingCapacity": 180,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 71.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.156,-86.5101,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "scale", "fastLaneOpportunity"],
+  "fieldNotes": {
+    "location": "Roster point (35.156146,-86.510063, geocode ROOFTOP, moved 93 m) landed directly on the plant. Web research confirmed 101 Industrial Blvd, Fayetteville TN 37334 - a Frito-Lay manufacturing plant operating since 1997 (~500 employees; the company bought the plant from Eagle Snacks). Street View confirmed the plant with silos and Frito-Lay/Eagle-era trailers.",
+    "truckGate": "The plant access road runs from a wide entrance off US-64; Street View (2023 pano) shows a checkpoint structure with yellow bollards at the entrance to the plant proper, and the trailer drop yard is enclosed by chain-link fencing. Controlled truck gate confirmed.",
+    "guardShack": "A small structure with yellow bollards sits at the plant entrance pinch-point in Street View - reads as a guard/check-in booth. Classified guardShack true; flagged uncertain (could not confirm it is staffed).",
+    "dockDoors": "Dock doors with trailers backed in along multiple building faces (north, south); total well into the 50+ band (~55 estimated).",
+    "dropArea": "Trailer drop yards on the NE side (large fenced lot) and the west/SW side - dozens of trailers in rows, 50+ stalls combined.",
+    "fastLaneOpportunity": "Wide multi-lane entrance apron off US-64 with abundant paved width suggests room for an express/bypass lane; flagged uncertain.",
+    "railServed": "No rail spur visible reaching the property; the NE boundary is a divided highway (US-64), not rail. railServed false.",
+    "urbanRural": "The plant sits in a small-town industrial area on the edge of Fayetteville, surrounded by woods and farm fields - Rural.",
+    "buildingCount": "One large continuous manufacturing-distribution building; counted as 1 despite multiple roof sections."
+  },
+  "method": "deep-audit"
+}

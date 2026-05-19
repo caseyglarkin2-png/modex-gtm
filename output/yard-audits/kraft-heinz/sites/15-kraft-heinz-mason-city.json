@@ -1,0 +1,23 @@
+{
+  "name": "Kraft Heinz - Mason City",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "entryLanes", "exitLanes", "dropArea"],
+  "fieldNotes": {
+    "truckGate": "Street View shows the entry corner with a Kraft Heinz monument sign and landscaped curving entry drive - an open driveway with no visible barrier arm or guard booth. Read as no controlled gate.",
+    "guardShack": "No booth visible at the entrance in Street View or satellite.",
+    "urbanRural": "Large distribution building in a developed suburban fabric with residential subdivisions and a sports complex adjacent - judged Urban.",
+    "dockDoors": "Long continuous row of dock doors with trailers along the south face.",
+    "dropArea": "Some parked trailers along the dock apron."
+  }
+}

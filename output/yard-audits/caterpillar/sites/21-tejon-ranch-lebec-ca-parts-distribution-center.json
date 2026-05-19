@@ -1,0 +1,50 @@
+{
+  "name": "Caterpillar - Tejon Ranch (Lebec) CA Parts Distribution Center",
+  "type": "Parts distribution center (~400k sq ft, opened ~2012)",
+  "coords": { "lat": 35.00120, "lng": -118.94050 },
+  "geofences": {
+    "perimeter": { "south": 34.99950, "west": -118.94250, "north": 35.00310, "east": -118.93720 },
+    "truckGate": { "south": 35.00000, "west": -118.94120, "north": 35.00060, "east": -118.94020 },
+    "dropYards": [
+      { "south": 35.00050, "west": -118.93920, "north": 35.00280, "east": -118.93730 }
+    ],
+    "dockAprons": [
+      { "south": 34.99990, "west": -118.94110, "north": 35.00060, "east": -118.93870 }
+    ],
+    "staging": { "south": 35.00000, "west": -118.94100, "north": 35.00070, "east": -118.93950 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 24,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 46.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.00120,-118.94050,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": ["coords", "truckGate", "guardShack", "remoteGs", "dockDoors", "dockDoorCount", "dropArea", "trailerParkingCapacity", "entryLanes", "exitLanes", "buildingCount"],
+  "fieldNotes": {
+    "location": "LOW CONFIDENCE on exact building. Roster had no street address (geocode APPROXIMATE) and the roster point was in hills near I-5, ~16 km from the actual site. Confirmed via Tejon Ranch Co. / Clayco that the facility IS at the Tejon Ranch Commerce Center (TRCC), at the I-5/Hwy 99 junction near Lebec/Grapevine: a 409,000 sq ft one-level tilt-up parts distribution center plus a 200,000 sq ft outdoor oversized-parts storage area, on a 46-acre site, dedicated Jan 2013.",
+    "building": "Best-match building locked at ~35.0012,-118.9405: a large (~400k+ sq ft) one-level distribution building with two-phase construction (original white-roof section + grey-roof expansion - consistent with the documented 'room next door for an additional 350k sq ft'), a large outdoor yard on the E side (consistent with the 200k sq ft oversized-parts outdoor storage), dock doors on the S face, and employee car parking on the W. Could NOT positively confirm via signage that this specific TRCC building is Caterpillar versus an adjacent tenant - flagged.",
+    "truckGate": "Modern distribution warehouse - the truck dock yard on the S/E side is typically gated/fenced. truckGate set true, guardShack false / remoteGs true on a remote-checkin assumption - all flagged given the building could not be positively confirmed.",
+    "dockDoors": "Dock doors run along the S building face; estimated ~24, 25-50 band - flagged (overhead estimate, limited imagery resolution).",
+    "dropArea": "Large outdoor yard E of the building used for oversized-parts storage and trailer staging; dropArea 25-50, dropYard true.",
+    "railServed": "No rail spur into the property; TRCC warehouses are truck-served (the rail line follows the I-5 corridor but does not enter the site).",
+    "urbanRural": "Rural - TRCC sits at the foot of the Grapevine surrounded by farmland and open hills, not within a metro's dense fabric.",
+    "siteAreaAcres": "46 acres per the Tejon Ranch Co. land-acquisition press release."
+  },
+  "method": "deep-audit"
+}

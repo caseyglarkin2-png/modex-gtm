@@ -1,0 +1,962 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.91245,
+              39.67905
+            ],
+            [
+              -83.9099,
+              39.67905
+            ],
+            [
+              -83.9099,
+              39.68105
+            ],
+            [
+              -83.91245,
+              39.68105
+            ],
+            [
+              -83.91245,
+              39.67905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Xenia OH Plant",
+        "type": "Manufacturing plant (fresh pork sausage rolls & links)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 1,
+          "trailerParkingCapacity": 8,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 10.1,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.9109,
+              39.67935
+            ],
+            [
+              -83.9101,
+              39.67935
+            ],
+            [
+              -83.9101,
+              39.67965
+            ],
+            [
+              -83.9109,
+              39.67965
+            ],
+            [
+              -83.9109,
+              39.67935
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Xenia OH Plant",
+        "type": "Manufacturing plant (fresh pork sausage rolls & links)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.0971,
+              40.6949
+            ],
+            [
+              -84.0939,
+              40.6949
+            ],
+            [
+              -84.0939,
+              40.6992
+            ],
+            [
+              -84.0971,
+              40.6992
+            ],
+            [
+              -84.0971,
+              40.6949
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Lima OH Plant",
+        "type": "Manufacturing plant (refrigerated sides - mashed potatoes & macaroni & cheese; former Kettle Creations facility)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 23.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.09545,
+              40.6952
+            ],
+            [
+              -84.09515,
+              40.6952
+            ],
+            [
+              -84.09515,
+              40.69555
+            ],
+            [
+              -84.09545,
+              40.69555
+            ],
+            [
+              -84.09545,
+              40.6952
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Lima OH Plant",
+        "type": "Manufacturing plant (refrigerated sides - mashed potatoes & macaroni & cheese; former Kettle Creations facility)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.0951,
+              40.6989
+            ],
+            [
+              -84.0942,
+              40.6989
+            ],
+            [
+              -84.0942,
+              40.6994
+            ],
+            [
+              -84.0951,
+              40.6994
+            ],
+            [
+              -84.0951,
+              40.6989
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Lima OH Plant",
+        "type": "Manufacturing plant (refrigerated sides - mashed potatoes & macaroni & cheese; former Kettle Creations facility)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.0949,
+              40.6953
+            ],
+            [
+              -84.0941,
+              40.6953
+            ],
+            [
+              -84.0941,
+              40.6964
+            ],
+            [
+              -84.0949,
+              40.6964
+            ],
+            [
+              -84.0949,
+              40.6953
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Lima OH Plant",
+        "type": "Manufacturing plant (refrigerated sides - mashed potatoes & macaroni & cheese; former Kettle Creations facility)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.0961,
+              40.69585
+            ],
+            [
+              -84.0948,
+              40.69585
+            ],
+            [
+              -84.0948,
+              40.6962
+            ],
+            [
+              -84.0961,
+              40.6962
+            ],
+            [
+              -84.0961,
+              40.69585
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Lima OH Plant",
+        "type": "Manufacturing plant (refrigerated sides - mashed potatoes & macaroni & cheese; former Kettle Creations facility)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6169,
+              41.9199
+            ],
+            [
+              -84.6137,
+              41.9199
+            ],
+            [
+              -84.6137,
+              41.9231
+            ],
+            [
+              -84.6169,
+              41.9231
+            ],
+            [
+              -84.6169,
+              41.9199
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Hillsdale MI Plant",
+        "type": "Manufacturing plant (fresh pork sausage rolls & patties; USDA FSIS inspected)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 18.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6149,
+              41.9217
+            ],
+            [
+              -84.6139,
+              41.9217
+            ],
+            [
+              -84.6139,
+              41.9225
+            ],
+            [
+              -84.6149,
+              41.9225
+            ],
+            [
+              -84.6149,
+              41.9217
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Hillsdale MI Plant",
+        "type": "Manufacturing plant (fresh pork sausage rolls & patties; USDA FSIS inspected)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.61545,
+              41.92125
+            ],
+            [
+              -84.6147,
+              41.92125
+            ],
+            [
+              -84.6147,
+              41.9216
+            ],
+            [
+              -84.61545,
+              41.9216
+            ],
+            [
+              -84.61545,
+              41.92125
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Hillsdale MI Plant",
+        "type": "Manufacturing plant (fresh pork sausage rolls & patties; USDA FSIS inspected)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6158,
+              41.92175
+            ],
+            [
+              -84.6152,
+              41.92175
+            ],
+            [
+              -84.6152,
+              41.92205
+            ],
+            [
+              -84.6158,
+              41.92205
+            ],
+            [
+              -84.6158,
+              41.92175
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Hillsdale MI Plant",
+        "type": "Manufacturing plant (fresh pork sausage rolls & patties; USDA FSIS inspected)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5821,
+              33.1278
+            ],
+            [
+              -95.5791,
+              33.1278
+            ],
+            [
+              -95.5791,
+              33.1309
+            ],
+            [
+              -95.5821,
+              33.1309
+            ],
+            [
+              -95.5821,
+              33.1278
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Sulphur Springs TX Plant",
+        "type": "Manufacturing plant (refrigerated sides, including Bob Evans Macaroni & Cheese)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 15,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 14.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5813,
+              33.1289
+            ],
+            [
+              -95.5803,
+              33.1289
+            ],
+            [
+              -95.5803,
+              33.1293
+            ],
+            [
+              -95.5813,
+              33.1293
+            ],
+            [
+              -95.5813,
+              33.1289
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Sulphur Springs TX Plant",
+        "type": "Manufacturing plant (refrigerated sides, including Bob Evans Macaroni & Cheese)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.9021,
+              43.6821
+            ],
+            [
+              -111.898,
+              43.6821
+            ],
+            [
+              -111.898,
+              43.68455
+            ],
+            [
+              -111.9021,
+              43.68455
+            ],
+            [
+              -111.9021,
+              43.6821
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Rigby ID Plant",
+        "type": "Manufacturing plant (refrigerated and frozen potato products; Potato Products of Idaho facility absorbed under Post Holdings)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 10,
+          "trailersVisible": 3,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 22,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.9016,
+              43.6835
+            ],
+            [
+              -111.9009,
+              43.6835
+            ],
+            [
+              -111.9009,
+              43.684
+            ],
+            [
+              -111.9016,
+              43.684
+            ],
+            [
+              -111.9016,
+              43.6835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Rigby ID Plant",
+        "type": "Manufacturing plant (refrigerated and frozen potato products; Potato Products of Idaho facility absorbed under Post Holdings)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.9013,
+              43.6836
+            ],
+            [
+              -111.9006,
+              43.6836
+            ],
+            [
+              -111.9006,
+              43.68395
+            ],
+            [
+              -111.9013,
+              43.68395
+            ],
+            [
+              -111.9013,
+              43.6836
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Rigby ID Plant",
+        "type": "Manufacturing plant (refrigerated and frozen potato products; Potato Products of Idaho facility absorbed under Post Holdings)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8587,
+              39.8361
+            ],
+            [
+              -83.8556,
+              39.8361
+            ],
+            [
+              -83.8556,
+              39.8397
+            ],
+            [
+              -83.8587,
+              39.8397
+            ],
+            [
+              -83.8587,
+              39.8361
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Springfield OH Transportation Hub",
+        "type": "Distribution / transportation hub (private fleet terminal - Bob Evans Transportation Company LLC, USDOT 911163; ~100 tractor-trailers)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 4,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 26,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8565,
+              39.8383
+            ],
+            [
+              -83.8559,
+              39.8383
+            ],
+            [
+              -83.8559,
+              39.8387
+            ],
+            [
+              -83.8565,
+              39.8387
+            ],
+            [
+              -83.8565,
+              39.8383
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Springfield OH Transportation Hub",
+        "type": "Distribution / transportation hub (private fleet terminal - Bob Evans Transportation Company LLC, USDOT 911163; ~100 tractor-trailers)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8584,
+              39.8371
+            ],
+            [
+              -83.8575,
+              39.8371
+            ],
+            [
+              -83.8575,
+              39.8389
+            ],
+            [
+              -83.8584,
+              39.8389
+            ],
+            [
+              -83.8584,
+              39.8371
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Springfield OH Transportation Hub",
+        "type": "Distribution / transportation hub (private fleet terminal - Bob Evans Transportation Company LLC, USDOT 911163; ~100 tractor-trailers)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.857,
+              39.8371
+            ],
+            [
+              -83.8561,
+              39.8371
+            ],
+            [
+              -83.8561,
+              39.8389
+            ],
+            [
+              -83.857,
+              39.8389
+            ],
+            [
+              -83.857,
+              39.8371
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Springfield OH Transportation Hub",
+        "type": "Distribution / transportation hub (private fleet terminal - Bob Evans Transportation Company LLC, USDOT 911163; ~100 tractor-trailers)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8575,
+              39.8376
+            ],
+            [
+              -83.857,
+              39.8376
+            ],
+            [
+              -83.857,
+              39.8385
+            ],
+            [
+              -83.8575,
+              39.8385
+            ],
+            [
+              -83.8575,
+              39.8376
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "bob-evans-farms",
+        "name": "Bob Evans Farms - Springfield OH Transportation Hub",
+        "type": "Distribution / transportation hub (private fleet terminal - Bob Evans Transportation Company LLC, USDOT 911163; ~100 tractor-trailers)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "name": "Nabisco Naperville Bakery - Naperville IL",
+  "type": "Manufacturing - cracker bakery",
+  "coords": { "lat": 41.77140, "lng": -88.18800 },
+  "geofences": {
+    "perimeter": { "south": 41.77000, "west": -88.19150, "north": 41.77420, "east": -88.18450 },
+    "truckGate": { "south": 41.77030, "west": -88.18920, "north": 41.77085, "east": -88.18850 },
+    "dropYards": [
+      { "south": 41.77100, "west": -88.19100, "north": 41.77340, "east": -88.18900 }
+    ],
+    "dockAprons": [
+      { "south": 41.77260, "west": -88.18960, "north": 41.77360, "east": -88.18850 }
+    ],
+    "staging": { "south": 41.77100, "west": -88.18820, "north": 41.77200, "east": -88.18720 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 32,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 100,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 58.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.77140,-88.18800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "scale", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Plant is fully perimeter-fenced (chain-link with barbed wire confirmed in Street View 2018/2024). The internal truck road off Quincy Ave (south) passes a gate/checkpoint structure with a canopy near the rail-car loading area (~41.7705,-88.1888) - a controlled truck entrance.",
+    "guardShack": "A canopy-covered checkpoint structure stands at the truck gate lane (visible in Street View background, panos at 41.7694/-88.1895 and 41.7701/-88.1884). Consistent with a staffed guard booth/checkpoint; called true at medium confidence and flagged uncertain.",
+    "drivewayLong": "The internal truck road runs a long distance from the Quincy Ave gate up to the docks and trailer yard - ample queue depth for 3+ trucks.",
+    "fastLaneOpportunity": "Wide internal road and large open yard areas; physical room to add an express/bypass lane.",
+    "dockDoors": "Dock doors with trailers backed in on multiple building faces (NW face and others); estimate ~32, banded 25-50.",
+    "dropArea": "Large U-shaped trailer drop yard on the west side, full of trailers parked in rows (z19 imagery at 41.7718,-88.1908); 60+ trailers visible, capacity ~100.",
+    "shipRcvSeparate": "Rail receiving (flour hopper cars at the silos) is physically separate from the truck dock clusters.",
+    "railServed": "Rail spur runs into the property; rail hopper/tank cars parked at the flour silos (z19 imagery at 41.7709,-88.1888). Corroborated by industrial-history source noting the Naperville plant 'is still rail served'.",
+    "multipleFacilities": "Multiple buildings on the campus: the main bakery, a separate trailer-dock building to the N, and ancillary/utility structures.",
+    "scale": "No truck scale clearly identified; left low-confidence.",
+    "exitLanes": "Single shared in/out gate; outbound lane count not separately determinable."
+  },
+  "method": "deep-audit"
+}

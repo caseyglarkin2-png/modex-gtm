@@ -1,0 +1,57 @@
+{
+  "name": "Honda of South Carolina Mfg. (ATV/UTV Plant) - Timmonsville SC",
+  "type": "ATV / UTV / Side-by-Side Plant",
+  "coords": { "lat": 34.11050, "lng": -79.91650 },
+  "geofences": {
+    "perimeter": { "south": 34.10650, "west": -79.92350, "north": 34.11550, "east": -79.91150 },
+    "truckGate": { "south": 34.11340, "west": -79.91490, "north": 34.11420, "east": -79.91390 },
+    "dropYards": [
+      { "south": 34.10780, "west": -79.92320, "north": 34.11030, "east": -79.92020 },
+      { "south": 34.10880, "west": -79.91950, "north": 34.11080, "east": -79.91700 }
+    ],
+    "dockAprons": [
+      { "south": 34.11050, "west": -79.91550, "north": 34.11280, "east": -79.91350 },
+      { "south": 34.10950, "west": -79.92000, "north": 34.11150, "east": -79.91800 }
+    ],
+    "staging": { "south": 34.11150, "west": -79.91500, "north": 34.11340, "east": -79.91300 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 230.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.1105,-79.9165,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "trailersVisible", "scale"],
+  "fieldNotes": {
+    "truckGate": "Confirmed in Street View and z20 satellite: a controlled entrance on the access road (Honda Way) with a guard booth straddling the entry, traffic cones marking multiple lanes, and an island. Clear controlled truck gate.",
+    "guardShack": "Confirmed - Street View (2019 capture) shows a uniformed guard standing at the gate beside a small multi-window guard booth. High confidence.",
+    "remoteGs": "false - a staffed guard booth is present.",
+    "postGateStaging": "Internal paved aprons between the gate and the dock/trailer areas provide deep queuing room (drivewayLong = true).",
+    "fastLaneOpportunity": "The gate has multiple marked lanes and paved apron width allowing an express/bypass lane.",
+    "dockDoors": "Extensive dock lines with trailers backed in along multiple building wings (east face and interior wings); ~55 doors estimated - 50+ band.",
+    "dropArea": "Very large trailer drop yards southwest of the plant with hundreds of trailers in organized rows (multiple carrier colors); well into the 50+ band.",
+    "shipRcvSeparate": "Dock banks appear on physically separate building faces / wings - shipping and receiving run from distinct clusters.",
+    "railServed": "No rail spur runs into the property.",
+    "urbanRural": "Rural - plant is in farmland/woodland near Timmonsville, Florence County, SC, beside I-95; small-town industrial setting, not dense metro.",
+    "multipleFacilities": "Campus has multiple connected and adjacent large building wings plus an ATV proving/test track to the northwest - multiple building clusters.",
+    "siteAreaAcres": "~230 acres derived from the perimeter box (excludes the separate test-track land); approximate.",
+    "scale": "No truck scale identified in imagery; flagged uncertain."
+  },
+  "method": "deep-audit"
+}

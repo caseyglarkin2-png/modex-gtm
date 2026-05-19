@@ -1,0 +1,55 @@
+{
+  "name": "Mount Holly Truck Manufacturing Plant - Mount Holly NC",
+  "type": "Truck assembly plant",
+  "coords": { "lat": 35.323000, "lng": -81.001500 },
+  "geofences": {
+    "perimeter": { "south": 35.318500, "west": -81.005800, "north": 35.331000, "east": -80.995500 },
+    "truckGate": { "south": 35.327400, "west": -81.002100, "north": 35.327900, "east": -81.001300 },
+    "dropYards": [
+      { "south": 35.324200, "west": -81.003400, "north": 35.326300, "east": -81.000900 }
+    ],
+    "dockAprons": [
+      { "south": 35.320900, "west": -81.001800, "north": 35.324200, "east": -80.999600 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 130.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.323000,-81.001500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "multiStep", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Geocode (GEOMETRIC_CENTER, moved 2149m) landed inside the campus. Confirmed Freightliner Mount Holly M2/SD medium-duty truck plant via DTNA career-locations page and Waze (1803 N Main St). Two-building campus: SW main assembly building plus a large NE rail-served building, joined by an internal road.",
+    "truckGate": "Campus is a controlled industrial site; the access road enters from the residential road network to the NE. The actual gate sits back behind a wooded buffer and could not be reached in Street View (only residential roads have panos, all from 2023-04). Controlled-access industrial campus, so truckGate set true with the gate box placed at the access-road head.",
+    "guardShack": "No guard booth confirmed; gate area not reachable in Street View. Defaulted guardShack false / remoteGs true - flagged uncertain.",
+    "dockDoors": "Trailers backed against the NW and S/SE faces of the SW main building; estimate 25-50 doors, flagged uncertain (some faces obscured).",
+    "dropArea": "Large dedicated trailer drop yard between the two buildings with many rows of dropped trailers - clearly 50+.",
+    "trailersVisible": "Approximate count (~130) from drop-yard and dock imagery.",
+    "railServed": "Rail line runs alongside the NE building.",
+    "multipleFacilities": "Two large building clusters (SW assembly building, NE rail-served building) on one connected campus.",
+    "shipRcvSeparate": "Inbound parts docks on the NW/S faces are physically separate from the NE rail-served building and the SE laydown/yard flow.",
+    "urbanRural": "Mount Holly is a Charlotte-metro suburb; the campus is ringed by dense residential subdivisions - judged Urban.",
+    "entryLanes": "Could not count lanes at the gate (not reachable in Street View) - flagged uncertain.",
+    "scale": "No truck scale identified - flagged uncertain.",
+    "preGateStaging": "Quarry/construction activity SE of the NE building may serve staging but is not a clear pre-gate truck apron - left false."
+  },
+  "method": "deep-audit"
+}

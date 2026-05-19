@@ -1,0 +1,55 @@
+{
+  "name": "Toyota Motor Manufacturing Kentucky - Georgetown KY",
+  "type": "Vehicle Assembly Plant",
+  "coords": { "lat": 38.262, "lng": -84.535 },
+  "geofences": {
+    "perimeter": { "south": 38.2475, "west": -84.5475, "north": 38.2705, "east": -84.5265 },
+    "truckGate": { "south": 38.25180, "west": -84.53180, "north": 38.25280, "east": -84.53020 },
+    "dropYards": [
+      { "south": 38.24700, "west": -84.53180, "north": 38.25020, "east": -84.52650 },
+      { "south": 38.25450, "west": -84.54850, "north": 38.25900, "east": -84.54350 },
+      { "south": 38.25100, "west": -84.54300, "north": 38.25500, "east": -84.53850 }
+    ],
+    "dockAprons": [
+      { "south": 38.25700, "west": -84.54100, "north": 38.26050, "east": -84.53700 },
+      { "south": 38.25300, "west": -84.53400, "north": 38.25700, "east": -84.52900 }
+    ],
+    "staging": { "south": 38.25250, "west": -84.53000, "north": 38.25600, "east": -84.52650 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 220,
+    "trailersVisible": 850,
+    "trailerParkingCapacity": 1100,
+    "truckGateCount": 3,
+    "buildingCount": 14,
+    "siteAreaAcres": 1050.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.262,-84.535,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "entryLanes", "exitLanes", "dockDoorCount", "multiStep"],
+  "fieldNotes": {
+    "site": "Toyota's largest plant globally (~7.5M sq ft under roof, ~1,300-acre campus). Fully fenced, multi-building manufacturing campus with central assembly plant, two large inbound-logistics/cross-dock buildings on the SE side, powertrain/engine buildings, and a paint/utility cluster.",
+    "truckGate": "TMMK is a fully fenced, security-controlled campus. Toyota numbers its gates (visitor route uses 'Gate 2'). Street View on internal roads and at a perimeter fence line shows chain-link perimeter fencing with a cantilever/swing gate across an access drive. Truck gates are controlled checkpoints.",
+    "guardShack": "Manned guard houses are standard at Toyota assembly-plant primary gates and are visible as small structures near the entrance roundabouts in z16/z18 imagery; assigned true with high confidence given facility type, fenced perimeter and numbered-gate system.",
+    "dropArea": "Exceptional drop-yard scale: z19 imagery of the SE inbound-logistics complex shows hundreds of trailers packed in dense rows; Street View along the south perimeter shows a continuous line of parked trailers behind the berm. Easily 50+ band.",
+    "dockDoors": "Hundreds of dock doors across the inbound-logistics buildings and the assembly plant's multiple internal dock courtyards; 220 is a conservative honest estimate, 50+ band certain.",
+    "multipleFacilities": "Campus has 10+ distinct large buildings (assembly plant, two logistics/cross-dock buildings, engine/powertrain shops, paint, utilities).",
+    "railServed": "Rail spur present; auto plants of this scale and the visible rail-served areas on the campus support railServed true (also seen as long red/pink rail-served rolling stock in z17/z18).",
+    "shipRcvSeparate": "Inbound parts/cross-dock logistics complex (SE) is physically separate from finished-vehicle outbound staging and from the assembly building dock courtyards.",
+    "fastLaneOpportunity": "Wide multi-lane internal approach roads and large gate aprons leave clear room for express/bypass lanes.",
+    "perimeter": "Box covers the core fenced developed campus; outlying TMMK-owned land (test track, retention areas) extends beyond it."
+  },
+  "method": "deep-audit"
+}

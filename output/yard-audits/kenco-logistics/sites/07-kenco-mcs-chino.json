@@ -1,0 +1,52 @@
+{
+  "name": "Kenco MCS Chino - Chino CA",
+  "type": "Multi-Client Distribution Center",
+  "coords": { "lat": 33.96700, "lng": -117.66150 },
+  "geofences": {
+    "perimeter": { "south": 33.96465, "west": -117.66290, "north": 33.96875, "east": -117.66045 },
+    "truckGate": { "south": 33.96810, "west": -117.66095, "north": 33.96865, "east": -117.66030 },
+    "dropYards": [
+      { "south": 33.96500, "west": -117.66290, "north": 33.96720, "east": -117.66200 }
+    ],
+    "dockAprons": [
+      { "south": 33.96500, "west": -117.66290, "north": 33.96810, "east": -117.66220 },
+      { "south": 33.96500, "west": -117.66100, "north": 33.96810, "east": -117.66045 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 105,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 25.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.96700,-117.66150,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "site": "Positively identified as 6509 Kimball Avenue, Chino CA - the roof number '6509' is legible on the west building's roof in z20 satellite imagery. Cross-dock Class-A Inland Empire warehouse in the dense Chino logistics district south of Kimball Avenue.",
+    "truckGate": "Truck yards on both the west and east faces are enclosed by chain-link fencing (visible in Street View off Kimball Avenue and around the perimeter). Two truck entrances: the east truck corridor off Kimball Avenue (shared drive between this building and the solar-roofed building east) and a SW perimeter-road drive into the west drop yard.",
+    "guardShack": "No staffed guard-booth structure visible at any entrance in Street View. Modern multi-tenant IE spec building - access consistent with sliding/cantilever gate plus kiosk/intercom (remote check-in).",
+    "shipRcvSeparate": "Cross-dock building - distinct dock banks on the west face and the east face.",
+    "dockDoors": "Cross-dock: roughly 50-55 doors on the west face and 50-55 on the east face; estimated total ~105 (50+ band).",
+    "dropArea": "Trailers parked without tractors in the west drop yard alongside stacked materials; estimated 25-50 band.",
+    "fastLaneOpportunity": "Wide truck corridor and deep aprons on both faces leave room for an express/bypass lane.",
+    "truckGateCount": "Two truck access points - east corridor and SW drive.",
+    "siteAreaAcres": "~25.5 acres for the 6509 parcel including building, west drop yard and east corridor."
+  },
+  "method": "deep-audit"
+}

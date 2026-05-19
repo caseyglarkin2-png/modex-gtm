@@ -1,0 +1,66 @@
+{
+  "name": "SalSon Logistics - Newark NJ (Flagship Campus)",
+  "type": "Warehouse / Container Yard",
+  "coords": { "lat": 40.701641, "lng": -74.131704 },
+  "geofences": {
+    "perimeter": { "south": 40.69905, "west": -74.13560, "north": 40.70470, "east": -74.12830 },
+    "truckGate": { "south": 40.70075, "west": -74.13310, "north": 40.70130, "east": -74.13230 },
+    "dropYards": [
+      { "south": 40.69960, "west": -74.13280, "north": 40.70100, "east": -74.13070 },
+      { "south": 40.70150, "west": -74.13170, "north": 40.70460, "east": -74.12850 }
+    ],
+    "dockAprons": [
+      { "south": 40.70080, "west": -74.13230, "north": 40.70150, "east": -74.12950 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 600,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 53.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.701641,-74.131704,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Main truck entrance off Doremus Ave at SW corner (~40.7010,-74.1326). Z20 satellite shows yellow-painted entry apron with painted STOP lines and a yellow OCR/portal gantry spanning the truck lanes; Street View confirms a steel portal gantry over the gated entry with chainlink fencing on both sides.",
+    "guardShack": "Small structure(s) beside the yellow gantry visible in z20 satellite and Street View at the gate apron — consistent with a gate/check-in booth for a 24/7 port drayage operation tracking ~2,000 containers/week.",
+    "multiStep": "Yellow portal gantry at the gate is an OCR/inspection structure, then drivers proceed to interior container-yard / dock staging — effectively a two-stage gate-then-yard-control flow typical of PINC-managed container yards.",
+    "multipleFacilities": "55-acre multi-building campus: ~1M sq ft warehouse plus container-yard parcels, an office building (SE), and a maintenance/secondary building cluster.",
+    "dockDoors": "Loading docks along the south face of the main warehouse; numerous trailers backed in. 50+ band; estimate ~70 doors.",
+    "dropArea": "Very large container/chassis drop yards on south and north sides — z20 imagery shows dense rows of multicolored containers and trailers, well into the 50+ band; capacity ~600 trailers/containers.",
+    "railServed": "Active multi-track rail yard runs along the north edge of the property; rail tank/box cars and a siding adjacent to the campus.",
+    "backupSensitive": "Gate sits directly on Doremus Ave, a narrow two-lane city street; a truck queue at the gate would stack onto the public road.",
+    "fastLaneOpportunity": "Wide gate apron with a multi-lane painted approach under the gantry; physical room exists to designate an express/bypass lane.",
+    "scale": "No truck scale positively identified from overhead imagery; left uncertain."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,56 @@
+{
+  "name": "Toyota Logistics Services Vehicle Distribution Center - Portland OR",
+  "type": "Vehicle Distribution Center (port processing)",
+  "coords": { "lat": 45.6365, "lng": -122.7540 },
+  "geofences": {
+    "perimeter": { "south": 45.63250, "west": -122.75650, "north": 45.64050, "east": -122.74900 },
+    "truckGate": { "south": 45.63660, "west": -122.75560, "north": 45.63760, "east": -122.75430 },
+    "dropYards": [
+      { "south": 45.63700, "west": -122.75550, "north": 45.64050, "east": -122.75050 },
+      { "south": 45.63550, "west": -122.75450, "north": 45.63720, "east": -122.74950 }
+    ],
+    "dockAprons": [
+      { "south": 45.63600, "west": -122.75500, "north": 45.63720, "east": -122.75300 }
+    ],
+    "staging": { "south": 45.63620, "west": -122.75560, "north": 45.63720, "east": -122.75430 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 8,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 1,
+    "buildingCount": 5,
+    "siteAreaAcres": 48.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@45.6365,-122.754,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "0-10", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "dockDoors", "entryLanes", "exitLanes", "scale", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "facilityType": "Port of Portland Terminal 4 vehicle distribution center operated by Toyota Logistics Services. ~101,000 sf VDC building; Toyota has handled vehicles here since 1971, >10,000 vehicles/month. Vehicles arrive by ro/ro ship at the Terminal 4 wharf and by auto-rack rail and leave on auto-hauler trucks.",
+    "truckGate": "Facility is enclosed within the Port of Portland Terminal 4 secure area with chain-link perimeter and internal fencing visible in z19-z21 satellite. Maritime port facility — controlled gated entry. The access road off N Lombard St runs into the property as a wide multi-lane apron with stop markings; a small standalone gatehouse-type building sits at the NW corner of the operational yard.",
+    "guardShack": "Inferred true. A small standalone building with its own short-side footprint sits beside the internal yard entrance at the NW; consistent with a gatehouse. Port facilities are credentialed/staffed at the gate. Could not unambiguously confirm a discrete booth at the road edge; medium confidence.",
+    "remoteGs": "False — guard shack inferred present.",
+    "railServed": "Confirmed — auto-rack rail tracks run into and through the yard; rail cars / covered rail-side structures visible in z20 imagery. TLS uses rail for inland vehicle distribution from Terminal 4.",
+    "dockDoors": "VDC building is a vehicle-processing building, not a classic cross-dock. A small number of dock/grade doors for parts and accessory work; banded 0-10. Atypical metric for this facility type.",
+    "dropArea": "Large vehicle marshalling lots fill the N and E of the site; striped lots holding finished vehicles. Auto-hauler / trailer drop capacity moderate; banded 25-50.",
+    "drivewayLong": "Entrance apron off N Lombard is deep and multi-lane — room for a 3+ truck queue.",
+    "fastLaneOpportunity": "Wide entrance apron with unused paved width gives room for an express/bypass lane.",
+    "backupSensitive": "Entrance apron is set well back from N Lombard with a deep throat; a queue would not immediately spill onto the public road. False.",
+    "scale": "No truck scale identified. Left false, flagged uncertain.",
+    "siteAreaAcres": "Perimeter box ~48 acres covering the TLS-operated VDC building and vehicle lots within Terminal 4; the broader Terminal 4 also hosts container/other operations not part of the Toyota lease.",
+    "urbanRural": "Within the Portland metro industrial waterfront (Rivergate / Terminal 4); classified Urban."
+  },
+  "method": "deep-audit"
+}

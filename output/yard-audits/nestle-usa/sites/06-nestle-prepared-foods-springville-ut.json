@@ -1,0 +1,53 @@
+{
+  "name": "Nestlé Prepared Foods - Springville UT",
+  "type": "Frozen food manufacturing plant",
+  "coords": { "lat": 40.18870, "lng": -111.62380 },
+  "geofences": {
+    "perimeter": { "south": 40.18650, "west": -111.62545, "north": 40.19095, "east": -111.62195 },
+    "truckGate": { "south": 40.18995, "west": -111.62360, "north": 40.19055, "east": -111.62290 },
+    "dropYards": [
+      { "south": 40.18760, "west": -111.62330, "north": 40.18960, "east": -111.62200 }
+    ],
+    "dockAprons": [
+      { "south": 40.18840, "west": -111.62380, "north": 40.18960, "east": -111.62315 },
+      { "south": 40.18935, "west": -111.62420, "north": 40.18995, "east": -111.62355 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 38.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.18870,-111.62380,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Whole property is fully fenced (chain-link perimeter confirmed in multiple Street Views along Ray Klauck Way). Truck flow enters via an internal access road that wraps the NW/N of the plant down to the NE corner and into the secured drop yard. Controlled truck gate is near-certain for a fenced 1000-employee Nestlé plant of this scale, but the exact barrier arm could not be resolved in 2023 satellite/Street View.",
+    "guardShack": "No guard booth positively identified at the truck entrance in available imagery; a small structure exists near the NE corner but reads as a maintenance/utility shed, not a windowed guard booth beside the lane. Marked false with remoteGs true (kiosk/app check-in implied), low confidence.",
+    "dropArea": "Large dedicated drop yard on the SE/E of the plant packed with 80-110+ parked trailers in z19 imagery; clearly 50+.",
+    "dockDoors": "Dock banks on the building's E and NE faces with trailers backed in; counted ~35-50 across faces, banded 25-50.",
+    "railServed": "Rail spur clearly runs into the property: tracks cross the yard pavement and curve in on the E side (z19 edocks/edrop crops). A UP main line also parallels the E boundary.",
+    "shipRcvSeparate": "Two physically separate dock clusters on different building faces (E face and NE face) suggest split ship/receive; medium confidence.",
+    "urbanRural": "Edge-of-town industrial park at the foot of the Wasatch range in Springville, a small city; per rubric tie-break, classified Rural.",
+    "siteAreaAcres": "Derived from perimeter box (~490m N-S x ~300m E-W) ~ 38 acres.",
+    "buildingCount": "Main plant plus two ancillary structures (small NE yard shed and a utility/process building cluster on the W).",
+    "multiStep": "No second checkpoint visible."
+  },
+  "method": "deep-audit"
+}

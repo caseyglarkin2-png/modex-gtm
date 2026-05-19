@@ -1,0 +1,54 @@
+{
+  "name": "Niagara Bottling - Seguin TX",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 29.588439, "lng": -97.979524 },
+  "geofences": {
+    "perimeter": { "south": 29.586000, "west": -97.982200, "north": 29.589700, "east": -97.976300 },
+    "truckGate": { "south": 29.588900, "west": -97.977200, "north": 29.589500, "east": -97.976500 },
+    "dropYards": [
+      { "south": 29.586800, "west": -97.981800, "north": 29.587600, "east": -97.976700 }
+    ],
+    "dockAprons": [
+      { "south": 29.587100, "west": -97.981800, "north": 29.587900, "east": -97.976700 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 65,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 100,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 32.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.588439,-97.979524,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "No controlled checkpoint found. The site sits in open farm fields with no perimeter security fence; the access road off the E-side public road shows no barrier arm and no guard booth. Classified false, medium confidence. Note: Street View coverage of the immediate plant driveway is sparse (ZERO_RESULTS at several nearby points); call relies mainly on satellite.",
+    "guardShack": "No staffed-booth structure visible at the entrance in satellite imagery.",
+    "dockDoors": "A single long dock bank runs the south face of the 557,533 sq ft building with trailers backed in along its length; estimate ~65 doors from z18 imagery — 50+ band confident.",
+    "dropArea": "A long row of marked trailer-parking stalls on the south apron holds many trailers without tractors; 50+ band, dedicated drop yard present.",
+    "shipRcvSeparate": "All dock doors are on one continuous south face; ship and receive share the same dock bank — not separate.",
+    "fastLaneOpportunity": "Very wide access road and broad apron with abundant unused paved width leave clear room for a bypass/express lane.",
+    "postGateStaging": "Deep paved yard between the access road and the dock doors provides internal post-gate staging.",
+    "railServed": "A rail line runs near the highway interchange NW of the plant, but no spur enters the Niagara property; classified not rail-served.",
+    "urbanRural": "Plant sits in an isolated edge-of-Seguin industrial area surrounded by open farm fields — Rural.",
+    "connectivityIssue": "Site is somewhat isolated but lies in an active industrial park beside a highway interchange, so cellular coverage is likely adequate; left false but flagged as uncertain.",
+    "siteAreaAcres": "~32 acres derived from the perimeter box, consistent with the ~30-acre figure in the Seguin EDC listing.",
+    "buildingCount": "Single Niagara building; other large buildings nearby (NE/E) belong to separate companies and are excluded."
+  },
+  "method": "deep-audit"
+}

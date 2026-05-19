@@ -1,0 +1,55 @@
+{
+  "name": "Anheuser-Busch Brewery - Fort Collins CO",
+  "type": "Brewery",
+  "coords": { "lat": 40.62000, "lng": -105.00750 },
+  "geofences": {
+    "perimeter": { "south": 40.6140, "west": -105.0110, "north": 40.6255, "east": -105.0010 },
+    "truckGate": { "south": 40.61410, "west": -105.00480, "north": 40.61490, "east": -105.00390 },
+    "dropYards": [
+      { "south": 40.61500, "west": -105.01000, "north": 40.61850, "east": -105.00600 },
+      { "south": 40.61800, "west": -105.01000, "north": 40.62050, "east": -105.00750 }
+    ],
+    "dockAprons": [
+      { "south": 40.61650, "west": -105.00800, "north": 40.61850, "east": -105.00600 }
+    ],
+    "staging": { "south": 40.61450, "west": -105.00550, "north": 40.61600, "east": -105.00400 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 260,
+    "trailerParkingCapacity": 400,
+    "truckGateCount": 1,
+    "buildingCount": 10,
+    "siteAreaAcres": 267.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.62000,-105.00750,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "site": "Fort Collins CO A-B brewery (opened 1988) at 2351 Busch Dr; Budweiser brewery-tour site with Clydesdale paddock. Large rural brewery campus surrounded by farmland, with brewery, distribution warehouse, extensive trailer drop yards, and a large on-site rail yard.",
+    "truckGate": "CONFIRMED. z19/z20 satellite shows a dedicated truck checkpoint structure on the south access road - a building/canopy over the truck lane with a truck positioned at it. Clear controlled truck gate, separate from the landscaped visitor/Clydesdale entrance off Busch Dr.",
+    "guardShack": "CONFIRMED. The truck checkpoint includes a guard-booth-sized structure alongside the lane. A-B breweries operate guarded truck gates as standard.",
+    "scale": "A truck appears positioned on a weigh-pad-style platform at the gate checkpoint - likely a truck scale; flagged uncertain as exact pad not fully resolved.",
+    "preGateStaging": "Paved truck staging on the south access road before the checkpoint.",
+    "dropYard": "Extensive trailer drop yards on the SW with ~200+ trailers in long rows; capacity ~400.",
+    "dockDoors": "Dock banks with trailers backed in on the distribution warehouse W/NW faces; estimated ~40 (band 25-50).",
+    "railServed": "Large on-site rail yard with curved spurs and rail cars on the SW side - heavily rail-served.",
+    "multipleFacilities": "Campus includes the brewery, a distribution warehouse, the Clydesdale stables/visitor center, and rail facilities - multiple building clusters.",
+    "urbanRural": "Surrounded by open farmland NE of Fort Collins - clearly Rural.",
+    "fastLaneOpportunity": "Wide access roads and yard aprons leave ample room to add lanes.",
+    "siteAreaAcres": "Boxed footprint ~267 acres for the operational campus."
+  },
+  "method": "deep-audit"
+}

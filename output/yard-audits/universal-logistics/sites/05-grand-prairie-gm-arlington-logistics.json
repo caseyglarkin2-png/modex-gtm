@@ -1,0 +1,55 @@
+{
+  "name": "Universal Logistics - GM Arlington Logistics Center - Grand Prairie TX",
+  "type": "Value-Added Logistics / Sub-Assembly Center",
+  "coords": { "lat": 32.719500, "lng": -97.037200 },
+  "geofences": {
+    "perimeter": { "south": 32.716300, "west": -97.039300, "north": 32.722800, "east": -97.035600 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 32.717400, "west": -97.039000, "north": 32.720600, "east": -97.038200 }
+    ],
+    "dockAprons": [
+      { "south": 32.716700, "west": -97.038900, "north": 32.722300, "east": -97.038100 },
+      { "south": 32.716700, "west": -97.036900, "north": 32.722300, "east": -97.036000 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 0,
+    "buildingCount": 2,
+    "siteAreaAcres": 62.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.719500,-97.037200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "10-25",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dropArea"],
+  "fieldNotes": {
+    "facility": "Universal Logistics value-added logistics / sub-assembly center serving GM Arlington Assembly (Tahoe/Suburban/Yukon/Escalade), at 2305 W Marshall Dr, Grand Prairie TX, inside the Great Southwest Industrial District. A ~1.2M sq ft campus: a long N-S main warehouse with dock doors on both long faces plus a second blue-roofed building at the north end. Confirmed via TruckMap/Waze ('Universal & GM'), Panjiva shipper records ('GM Arlington (Universal Logistics)'), and 2022 Street View showing Universal-branded trailers backed in at the docks.",
+    "truckGate": "Open speculative-build industrial-park campus — 2022 Street View shows the dock aprons on both faces of the building open directly to the campus drives with NO perimeter fence, NO barrier arm/gate, and NO checkpoint structure. Trucks drive straight from W Marshall Dr onto the dock apron. Matches the 'No Gate / No GS' archetype.",
+    "guardShack": "No guard booth anywhere on the site.",
+    "dockDoors": "The long main building has continuous dock-door banks on BOTH its east and west long faces (trailers backed in along both), plus dock doors on the second building -> very high total, estimated ~120-140 -> 50+ band.",
+    "shipRcvSeparate": "Dock banks on two physically separate building faces (east face and west face) -> shipping and receiving can run from separate clusters.",
+    "dropArea": "Some trailer-parking rows on the west side beyond the dock apron, but most parked trailers are dock-staged at doors; modest dedicated drop space -> 10-25 band. Flagged uncertain.",
+    "dropYard": "No large dedicated standalone trailer-storage lot separate from dock staging -> false.",
+    "multipleFacilities": "Two-building campus — the long main warehouse plus a second (blue-roofed) building at the north end.",
+    "drivewayShort": "Open apron directly off the public drive — no deep gated approach; the staging is the apron itself -> drivewayShort.",
+    "urbanRural": "Dense Dallas-Fort Worth metro industrial fabric (Great Southwest Industrial District) -> Urban.",
+    "railServed": "No rail spur enters the property -> false.",
+    "siteAreaAcres": "~62 acres for the two-building campus parcel including dock aprons and parking."
+  },
+  "method": "deep-audit"
+}

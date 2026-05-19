@@ -1,0 +1,54 @@
+{
+  "name": "Bob Evans Farms - Lima OH Plant",
+  "type": "Manufacturing plant (refrigerated sides - mashed potatoes & macaroni & cheese; former Kettle Creations facility)",
+  "coords": { "lat": 40.696800, "lng": -84.095300 },
+  "geofences": {
+    "perimeter": { "south": 40.694900, "west": -84.097100, "north": 40.699200, "east": -84.093900 },
+    "truckGate": { "south": 40.695200, "west": -84.095450, "north": 40.695550, "east": -84.095150 },
+    "dropYards": [
+      { "south": 40.698900, "west": -84.095100, "north": 40.699400, "east": -84.094200 },
+      { "south": 40.695300, "west": -84.094900, "north": 40.696400, "east": -84.094100 }
+    ],
+    "dockAprons": [
+      { "south": 40.695850, "west": -84.096100, "north": 40.696200, "east": -84.094800 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 28,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 23.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.696800,-84.095300,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "guardShack", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Single truck driveway off Commerce Pkwy crosses a chain-link perimeter fence; a gate opening is visible in the fence line at satellite z21 (~40.6953, -84.0952). The whole trailer yard is fenced. Truck gate confirmed.",
+    "guardShack": "No booth structure visible beside the gate in satellite z20/z21 or in Street View (2024-10) from the road. Street View coverage does not extend up the private drive; absence of a booth at the fence crossing is the basis for the call. Flagged uncertain.",
+    "remoteGs": "Gate present but no guard shack -> remote/unmanned check-in implied (sliding gate / call-box / app).",
+    "postGateStaging": "Long paved drive and a wide internal apron between the gate and the dock bank give ample inside-the-fence staging room.",
+    "drivewayLong": "Gate-to-dock approach is a long deep drive that can hold 3+ trucks.",
+    "dockDoors": "Large dock bank on the south building face with ~12-15 trailers backed in plus additional doors; estimated ~28 doors total. 25-50 band; exact count uncertain from overhead angles.",
+    "dropArea": "Multiple dedicated trailer-storage lots on the NE and SE of the property, full of parked trailers without tractors; well over 50 trailer stalls visible.",
+    "dropYard": "Dedicated trailer-storage lots clearly present on the NE and SE corners.",
+    "urbanRural": "Edge-of-town industrial park on the south edge of Lima near I-75, bordered by farm fields; classified Rural.",
+    "trailerParkingCapacity": "~55 trailers visible in the imagery; lots could hold ~70. Estimate.",
+    "buildingCount": "One large ~150,000 sq ft connected plant building (the adjacent Logoplaste building to the west is a separate company, excluded)."
+  },
+  "method": "deep-audit"
+}

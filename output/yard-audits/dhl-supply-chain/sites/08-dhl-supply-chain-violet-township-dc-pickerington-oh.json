@@ -1,0 +1,47 @@
+{
+  "name": "DHL Supply Chain - Violet Township DC - Pickerington OH",
+  "type": "Distribution Center",
+  "coords": { "lat": 39.846447, "lng": -82.704257 },
+  "geofences": {
+    "perimeter": { "south": 39.84300, "west": -82.70850, "north": 39.84990, "east": -82.70000 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 0.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.846447,-82.704257,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": true, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep",
+    "dockDoorCount", "trailersVisible", "trailerParkingCapacity",
+    "buildingCount", "siteAreaAcres", "railServed"
+  ],
+  "fieldNotes": {
+    "location": "Address resolved (8695 Basil Western Road NW, Violet Township / NW Fairfield County, OH; geocode ROOFTOP, moved 20m) but the BUILDING IS NOT VISIBLE in any available imagery. Google satellite for the whole area is pre-development USDA/FPAC farmland tiles, and the latest Street View (Aug 2024) along Basil Western Road shows only cornfields - no construction.",
+    "status": "DHL announced/broke ground 2023 with a Q2-2024 target for this 755,000 sq ft DC. As of the most recent imagery (Aug 2024 Street View) the site was still farmland - the project appears delayed and not yet built. The yard cannot be deep-audited.",
+    "classification": "All classification fields are placeholder defaults and CANNOT be verified - the facility is not visible. urbanRural=Rural is the one defensible call (the parcel sits in open NW Fairfield County farmland north of Carroll, OH). connectivityIssue=true is inferred from the rural/isolated setting (low confidence).",
+    "perimeter": "The perimeter box is a nominal ~700m x ~700m square around the resolved address; it does NOT represent an observed fence line - no building or fence is visible.",
+    "recommendation": "Re-audit once post-2024 satellite/Street-View imagery becomes available and the building is visible. Flag for human review."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,51 @@
+{
+  "name": "General Mills - Allentown PA",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 40.570800, "lng": -75.477900 },
+  "geofences": {
+    "perimeter": { "south": 40.569700, "west": -75.479600, "north": 40.572000, "east": -75.476200 },
+    "truckGate": { "south": 40.571500, "west": -75.477700, "north": 40.571900, "east": -75.477000 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 40.569900, "west": -75.479000, "north": 40.570800, "east": -75.478300 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 12,
+    "trailersVisible": 5,
+    "trailerParkingCapacity": 15,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 19.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.570800,-75.477900,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "truckGate"],
+  "fieldNotes": {
+    "location": "Confirmed at 2132 Downyflake Lane, Allentown, PA 18103. Roster geocode moved 88m and resolved correctly onto the large industrial building. Verified via web search (D&B - cereal breakfast foods manufacturing).",
+    "ownership": "Roster source (Hyster GM plant list) is stale. The building now carries 'AAi' signage - American Atelier Inc., a hospitality/institutional furniture manufacturer - and web directories list American Atelier at 2132 Downyflake Ln alongside the historical General Mills cereal listing. The physical building audited is the correct site for the roster entry.",
+    "truckGate": "The building's parking lot and truck yard connect directly to the public road via open driveways - no barrier arm, sliding gate, fence line, or checkpoint pinch-point visible in satellite or Street View imagery. Open site. truckGate=false; flagged uncertain.",
+    "guardShack": "No guard booth or staffed structure anywhere near the entrances. false.",
+    "drivewayShort": "Open-site approach; the gate-to-dock distance is short with no controlled queue area.",
+    "dockDoors": "Dock activity is on the building's SW/W face under a dock canopy with trailers backed in; estimated 10-25 doors total. The site is now a furniture-manufacturing operation with modest truck traffic and yard clutter (pallets/material). Exact count uncertain.",
+    "dropArea": "No dedicated on-site trailer drop yard for this building. A large trailer drop yard lies ~150m south but belongs to a SEPARATE neighboring facility, not this property - dropArea=NONE, dropYard=false.",
+    "railServed": "A rail line runs along the W edge of the property corridor but no spur enters the building - railServed=false.",
+    "urbanRural": "Within the Allentown metro area in a dense industrial/commercial district (strip retail, multiple large industrial buildings nearby) - Urban.",
+    "buildingCount": "One large interconnected industrial building complex.",
+    "trailersVisible": "Only ~5 trailers visible at/near the docks in the imagery captured - low truck activity consistent with the current furniture-manufacturing tenant."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "Kraft Heinz - Cedar Rapids",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dropArea"],
+  "fieldNotes": {
+    "truckGate": "Street View faces the long front office face behind a chain-link fence and grass setback - fencing confirmed but the truck entrance is not squarely shown. Gate inferred from continuous perimeter fence.",
+    "guardShack": "No booth visible; entrance not clearly framed by Street View.",
+    "urbanRural": "Industrial site in a low-density business-park setting surrounded by woods/greenfield - judged Rural.",
+    "dropYard": "Rows of parked trailers in an adjacent lot to the southwest, separate from dock staging.",
+    "dockDoors": "Dock doors with trailers along the south face."
+  }
+}

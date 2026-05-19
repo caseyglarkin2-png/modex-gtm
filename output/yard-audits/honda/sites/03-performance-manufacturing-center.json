@@ -1,0 +1,48 @@
+{
+  "name": "Honda - Performance Manufacturing Center (PMC) - Marysville OH",
+  "type": "Auto Assembly Plant (low-volume)",
+  "coords": { "lat": 40.27930, "lng": -83.52530 },
+  "geofences": {
+    "perimeter": { "south": 40.27700, "west": -83.52720, "north": 40.28110, "east": -83.52280 },
+    "truckGate": { "south": 40.27780, "west": -83.52440, "north": 40.27850, "east": -83.52360 },
+    "dropYards": [
+      { "south": 40.27880, "west": -83.52470, "north": 40.28020, "east": -83.52340 }
+    ],
+    "dockAprons": [
+      { "south": 40.27880, "west": -83.52520, "north": 40.28010, "east": -83.52440 }
+    ],
+    "staging": { "south": 40.27840, "west": -83.52470, "north": 40.27920, "east": -83.52380 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 9, "trailersVisible": 8, "trailerParkingCapacity": 18,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 36.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.2793,-83.5253,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "PMC confirmed - roster geocode moved only 26 m. Satellite shows a single dark-roof main building with a white-roof east annex; a user-contributed Street View interior photo shows the NSX assembly floor, positively identifying the Performance Manufacturing Center.",
+    "scale_of_facility": "PMC is a small low-volume specialty plant (~184,000 sq ft, ~100 associates) housed in Honda's former North American Logistics facility (per hondanews / Gardner Web). Modest yard footprint compared to the big assembly plants.",
+    "truckGate": "Driveway from Honda Parkway runs to the building's east-side yard. No barrier arm or guard booth resolvable in z19-z21 imagery; the entrance reads as an open driveway. Set false (truckGate) with low confidence - flagged uncertain.",
+    "guardShack": "No guard booth identified at the entrance; false.",
+    "dockDoors": "Dock bank on the building's east face - roughly 6-9 doors with several trailers backed in (former logistics building retains dock infrastructure). 0-10 band; count is an overhead estimate.",
+    "dropArea": "Small paved yard on the east side holds a handful of parked trailers - 0-10.",
+    "drivewayLong": "Long approach drive from Honda Parkway into the building yard - can hold 3+ trucks.",
+    "buildingCount": "Main plant building plus an attached white-roof east annex.",
+    "railServed": "No rail spur into the property.",
+    "urbanRural": "Open farmland setting on the Marysville complex outskirts - Rural."
+  },
+  "method": "deep-audit"
+}

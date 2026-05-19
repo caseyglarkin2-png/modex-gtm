@@ -1,0 +1,64 @@
+{
+  "name": "Burke Corp. - Nevada IA",
+  "type": "Production Facility",
+  "coords": { "lat": 42.0085, "lng": -93.4392 },
+  "geofences": {
+    "perimeter": { "south": 42.00730, "west": -93.44180, "north": 42.01070, "east": -93.43650 },
+    "truckGate": { "south": 42.01000, "west": -93.44150, "north": 42.01055, "east": -93.44090 },
+    "dropYards": [
+      { "south": 42.00855, "west": -93.43720, "north": 42.00910, "east": -93.43660 },
+      { "south": 42.01000, "west": -93.44060, "north": 42.01030, "east": -93.43900 }
+    ],
+    "dockAprons": [
+      { "south": 42.00790, "west": -93.43850, "north": 42.00840, "east": -93.43740 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 41.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.0085,-93.4392,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "truckGate", "guardShack", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "Roster coords (42.0268,-93.4482) were ~2.3km off in a residential district. Correct facility is 1516 S D Avenue, Nevada IA 50201, confirmed via Ames Chamber/Panjiva/USDA FSIS listings (Burke Marketing Corporation). Locked center ~42.0085,-93.4392.",
+    "truckGate": "No barrier arm, sliding gate, or pinch-point checkpoint visible at any perimeter road junction. Driveways from the bounding public roads run open into the campus paved yard. Marked false.",
+    "guardShack": "No small 1-3-vehicle-footprint guard booth at a defined truck entrance. Two small buildings sit near the NW driveway off the perimeter road, but they are larger office/maintenance-scale structures, not gate booths beside a controlled lane.",
+    "dockDoorCount": "Diagonal SW dock bank shows ~12-14 trailers backed in; additional dock doors on north and east building faces. Total estimated 25-50 band (~35) - low confidence from overhead-only imagery, much of the roof is overexposed.",
+    "shipRcvSeparate": "Two distinct dock clusters on different faces (diagonal SW bank and additional doors on the north/east faces) suggest separate ship/receive operations - inferred.",
+    "dropYard": "Dedicated trailer storage: a ~20+ trailer row along the east edge plus drop rows along the north of the property, separate from active dock staging.",
+    "fastLaneOpportunity": "Very wide paved aprons and multiple open driveways give ample room to add bypass/express lanes.",
+    "railServed": "A rail line runs through northern Nevada IA but no spur reaches this plant, which sits on the south edge of town beside US-30."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,56 @@
+{
+  "name": "Kenco MCS Dallas IV - Lancaster TX",
+  "type": "Multi-Client Distribution Center",
+  "coords": { "lat": 32.63900, "lng": -96.79900 },
+  "geofences": {
+    "perimeter": { "south": 32.63550, "west": -96.80050, "north": 32.64200, "east": -96.79680 },
+    "truckGate": { "south": 32.63560, "west": -96.79980, "north": 32.63640, "east": -96.79880 },
+    "dropYards": [
+      { "south": 32.63620, "west": -96.79820, "north": 32.64080, "east": -96.79700 },
+      { "south": 32.63620, "west": -96.80050, "north": 32.64080, "east": -96.79960 }
+    ],
+    "dockAprons": [
+      { "south": 32.63620, "west": -96.79980, "north": 32.64090, "east": -96.79900 },
+      { "south": 32.63620, "west": -96.79880, "north": 32.64090, "east": -96.79800 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 95,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 170,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 62.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.63900,-96.79900,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoors", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryExitSeparate", "truckGate"],
+  "fieldNotes": {
+    "location": "Roster gives identical APPROXIMATE coords for three Kenco Lancaster facilities (Dallas III/IV/II = 589,362 / 560,000 / 200,000 SF) in the Danieldale Road multi-tenant logistics corridor, Lancaster TX 75134. Per-building Kenco leasing is not publicly disambiguated. idx 13 (Dallas IV, 560,000 SF) was assigned to the large cross-dock building with a full rooftop solar array, center ~32.6390,-96.7990 - the second-largest building in the immediate cluster.",
+    "truckGate": "Building/office access drives off the corridor street are open with no barrier or guard booth. The trailer dock yards along both faces appear to have perimeter security fencing typical of DFW logistics parks, but no manned/gated truck checkpoint was confirmed - marked false and listed uncertain.",
+    "guardShack": "No guard booth observed at any property entrance.",
+    "remoteGs": "False - no confirmed truck gate, so remote check-in does not apply.",
+    "shipRcvSeparate": "Cross-dock building with dock banks on BOTH long faces (east and west), trailers backed in on both - shipping and receiving from separate clusters.",
+    "dropYard": "Dedicated fenced trailer drop yards run along both dock faces with 80+ trailers parked.",
+    "dockDoors": "Cross-dock building with continuous dock banks on two long faces; combined count in the 50+ band. dockDoorCount ~95 is an overhead estimate.",
+    "multipleFacilities": "Large multi-building logistics park; Kenco occupies three buildings in the corridor. True at campus level.",
+    "fastLaneOpportunity": "Wide aprons and drives leave room for an express/bypass lane.",
+    "urbanRural": "Lancaster TX, a southern Dallas-Fort Worth metro suburb in dense industrial fabric. Urban.",
+    "railServed": "No rail spur enters the property.",
+    "confidence": "Medium - the corridor and Kenco presence are confirmed, but the three same-coord Kenco Lancaster facilities cannot be individually pinned from public data; idx 13 reflects the solar-roof cross-dock building."
+  },
+  "method": "deep-audit"
+}

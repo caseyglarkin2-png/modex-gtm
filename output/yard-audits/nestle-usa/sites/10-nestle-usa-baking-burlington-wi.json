@@ -1,0 +1,57 @@
+{
+  "name": "Nestlé USA Baking - Burlington WI",
+  "type": "Baking ingredients manufacturing plant",
+  "coords": { "lat": 42.66550, "lng": -88.26800 },
+  "geofences": {
+    "perimeter": { "south": 42.66380, "west": -88.27210, "north": 42.66790, "east": -88.26540 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 42.66640, "west": -88.27110, "north": 42.66720, "east": -88.26900 },
+      { "south": 42.66440, "west": -88.27010, "north": 42.66540, "east": -88.26830 }
+    ],
+    "dockAprons": [
+      { "south": 42.66460, "west": -88.27030, "north": 42.66560, "east": -88.26780 },
+      { "south": 42.66640, "west": -88.27120, "north": 42.66700, "east": -88.26880 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 65,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 30.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.66550,-88.26800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "entryLanes", "exitLanes", "dockDoorCount", "shipRcvSeparate", "scale"],
+  "fieldNotes": {
+    "locating": "Roster coords (42.666811, -88.267276, ROOFTOP, moved 103m) landed accurately on the plant. Web research confirmed the Nestlé USA baking plant at 637 S Pine St, Burlington WI - the Toll House plant (chocolate-chip morsels + refrigerated cookie dough; began 1966; ~520,000 sq ft; recent $70M+ cookie-dough conversion). Locked center 42.66550, -88.26800.",
+    "truckGate": "No controlled truck gate identified. The plant sits in an industrial park; the SW truck yard reads as open paved area continuous with the industrial-park streets - Google Street View cars drove freely into the truck yard, capturing parked tractors and box trucks with no barrier arm or pinch-point. The corporate office frontage on S Pine St is also open (monument sign, lawn, no gate). Classified false; flagged uncertain (a gate could be open/unstaffed during capture, and an active Nestlé plant typically has some entry control).",
+    "guardShack": "No guard booth visible at any entrance in satellite or Street View. False.",
+    "dockDoors": "Substantial dock banks on the S and SW building faces with many trailers backed in; ~30-50 doors estimated, banded 25-50.",
+    "dropArea": "Trailer drop yards on the W/NW and SW holding ~50-70 parked trailers in rows; banded 25-50.",
+    "dropYard": "Dedicated trailer-storage rows separate from the active dock aprons - dropYard true.",
+    "shipRcvSeparate": "Distinct dock clusters on the S and the NW building faces suggest physically separate ship/receive - medium confidence.",
+    "railServed": "A rail spur curves off the adjacent rail line and runs into the plant property on the NW - railServed true.",
+    "urbanRural": "Burlington is a small Wisconsin city (~10,000); the plant is in an edge-of-town industrial park beside the Fox River with adjacent residential subdivisions. Per rubric tie-break (small-town industrial), classified Rural.",
+    "drivewayLong": "Deep paved truck yard gives ample internal stacking room - long approach.",
+    "siteAreaAcres": "Derived from perimeter box (~455m N-S x ~545m E-W) ~ 30 acres.",
+    "buildingCount": "Main multi-section plant building plus a large secondary building/warehouse on the W.",
+    "multiStep": "No second checkpoint visible."
+  },
+  "method": "deep-audit"
+}

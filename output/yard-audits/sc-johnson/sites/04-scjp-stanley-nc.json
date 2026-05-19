@@ -1,0 +1,56 @@
+{
+  "name": "SC Johnson Professional Plant - Stanley NC",
+  "type": "Manufacturing Plant (Professional - hand care / floor care)",
+  "coords": { "lat": 35.34030, "lng": -81.07800 },
+  "geofences": {
+    "perimeter": { "south": 35.33930, "west": -81.07980, "north": 35.34130, "east": -81.07620 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 35.33970, "west": -81.07760, "north": 35.34060, "east": -81.07640 }
+    ],
+    "dockAprons": [
+      { "south": 35.34040, "west": -81.07740, "north": 35.34110, "east": -81.07620 }
+    ],
+    "staging": { "south": 35.34050, "west": -81.07760, "north": 35.34120, "east": -81.07640 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 12,
+    "trailersVisible": 10,
+    "trailerParkingCapacity": 20,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 14.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.3403,-81.078,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "railServed", "siteAreaAcres"],
+  "fieldNotes": {
+    "addressCorrection": "Roster address '100 Technology Center Dr' is incorrect. Verified address is 1100 S Highway 27 (NC-27), Stanley, NC 28164 — the former Deb USA plant, now SC Johnson Professional USA (Waze, LoopNet APN 176716, FDA/Panjiva records). Roster coordinate (35.353526, -81.090317) was a city-centroid in downtown Stanley; corrected to the plant at ~35.3403, -81.0780.",
+    "truckGate": "No barrier arm, gate or checkpoint. The dock face fronts NC-27 directly with an open paved truck apron; trucks pull in straight off the highway. truckGate false.",
+    "guardShack": "No guard booth on the property. False.",
+    "remoteGs": "False — no gate, so no remote check-in implied.",
+    "drivewayShort": "The apron between NC-27 and the dock doors is shallow — room for only 1-2 trucks staged before the docks.",
+    "postGateStaging": "The paved apron in front of the docks doubles as a small post-entry staging strip.",
+    "dockDoors": "A continuous bank of ~10-12 dock doors along the NE building face fronting NC-27, confirmed in Street View (red-trimmed dock wall with dock doors and trailers). Banded 10-25.",
+    "dropArea": "Only a handful of trailers parked on the apron / east side; no dedicated trailer-storage lot. Banded 0-10; dropYard false.",
+    "shipRcvSeparate": "Single dock bank on one face. Raw materials likely received at the SW tank/silo area but no separate truck dock bank there; shipRcvSeparate false.",
+    "multipleFacilities": "One building (~73,956 sq ft, built 1986). buildingCount 1.",
+    "scale": "No truck scale observed.",
+    "railServed": "A rail line runs immediately along the west edge of the property; trailers/rail cars seen alongside the building's west face. Rail access likely but an in-property spur not definitively confirmed — flagged uncertain.",
+    "urbanRural": "Small-town Stanley, NC (Gaston County), surrounded by fields and woods; Rural per rubric.",
+    "siteAreaAcres": "Building ~73,956 sq ft; the fenced/paved operational parcel is small (~14 acres estimated from the perimeter box). Flagged uncertain."
+  },
+  "method": "deep-audit"
+}

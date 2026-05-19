@@ -1,0 +1,55 @@
+{
+  "name": "Kenco / The Shippers Group - Wilmer TX",
+  "type": "Distribution Center / 3PL Warehouse",
+  "coords": { "lat": 32.58580, "lng": -96.68070 },
+  "geofences": {
+    "perimeter": { "south": 32.58350, "west": -96.68350, "north": 32.58800, "east": -96.67800 },
+    "truckGate": { "south": 32.58680, "west": -96.68300, "north": 32.58730, "east": -96.68210 },
+    "dropYards": [
+      { "south": 32.58700, "west": -96.68210, "north": 32.58800, "east": -96.67850 },
+      { "south": 32.58400, "west": -96.68210, "north": 32.58500, "east": -96.67850 }
+    ],
+    "dockAprons": [
+      { "south": 32.58700, "west": -96.68240, "north": 32.58780, "east": -96.67850 },
+      { "south": 32.58420, "west": -96.68230, "north": 32.58490, "east": -96.67850 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 60.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.58580,-96.68070,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "site": "500 S Millers Ferry Rd is the Whirlpool Regional Distribution Center - a ~1,020,000 SF building on ~57 acres. The Shippers Group / Kenco operates the Whirlpool finished-goods warehouse here (~822,000 SF dedicated space cited for the Kenco-Wilmer operation).",
+    "truckGate": "The dock yard is enclosed by a continuous chain-link perimeter fence. 2026-02 Street View shows a wide gated opening (sliding chain-link gate) at the north-end truck entrance off S Millers Ferry Road; the dock yards on the N and S faces are inside the fence.",
+    "guardShack": "No dedicated 1-3-car guard booth is visible at the truck gate in available imagery. The white cylindrical structure at the SW corner is a water tank, not a gatehouse. Classified false; flagged uncertain.",
+    "remoteGs": "True - controlled truck gate but no identifiable guard booth (kiosk / app / call-box check-in likely).",
+    "dockDoors": "Very large 1M+ SF building with long dock banks on both the north and south faces, trailers backed in; well into the 50+ band (estimated ~110 doors).",
+    "dropArea": "Marked trailer-parking drop stalls on both the north and south truck courts hold 50+ unhitched trailers.",
+    "shipRcvSeparate": "Two physically separate dock clusters on opposite (north and south) building faces, consistent with split shipping vs receiving flows.",
+    "multipleFacilities": "Single very large warehouse on its own parcel; the other warehouses along S Millers Ferry Road are separate properties - multipleFacilities false.",
+    "railServed": "No rail spur enters this property; a rail corridor runs through the broader Wilmer logistics district but does not serve this building.",
+    "urbanRural": "Wilmer is a small town SE of Dallas off I-45; the site sits in an edge-of-town logistics district bordered by farmland - classified Rural.",
+    "siteAreaAcres": "Published figure is ~57 acres; the perimeter box yields ~60 - consistent within estimate tolerance."
+  },
+  "method": "deep-audit"
+}

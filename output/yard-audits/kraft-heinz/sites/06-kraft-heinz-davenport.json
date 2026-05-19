@@ -1,0 +1,24 @@
+{
+  "name": "Kraft Heinz - Davenport",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "connectivityIssue"],
+  "fieldNotes": {
+    "streetview": "Street View shows a perimeter chain-link fence in front of a blank building wall - confirms the site is fenced, but the truck entrance is not in this frame.",
+    "truckGate": "Satellite shows a controlled entry drive at the south corner with a small structure beside it; fenced perimeter supports a gated entry.",
+    "guardShack": "Small structure visible near the south entry road on satellite, consistent with a guard booth.",
+    "dropYard": "Large trailer-storage lots on the southeast side of the plant.",
+    "urbanRural": "Modern plant surrounded by open farm fields; clearly Rural.",
+    "connectivityIssue": "Rural but near the Davenport metro edge - low likelihood of coverage gap; flagged uncertain."
+  }
+}

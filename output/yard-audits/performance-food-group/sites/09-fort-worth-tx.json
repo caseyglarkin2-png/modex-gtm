@@ -1,0 +1,50 @@
+{
+  "name": "Performance Foodservice - Dallas Fort Worth (Fort Worth TX)",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 32.767167, "lng": -97.265073 },
+  "geofences": {
+    "perimeter": { "south": 32.76480, "west": -97.26800, "north": 32.76950, "east": -97.26230 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 100,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 40.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.767167,-97.265073,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "dropArea", "dropYard", "postGateStaging", "scale", "fastLaneOpportunity", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "_locationNote": "Roster coords (32.767167,-97.265073, ROOFTOP, 58 m moved) are correct, but Google's overhead satellite imagery of this exact spot still shows graded greenfield — it predates the building. Street View from John Hancock-equivalent road at this point, captured Jan 2025, shows a large white industrial building under final construction directly behind a stone-faced retaining wall, with an office/admin front elevation and a dock-area wing. This is the new PFG / Scannell cold-storage DC. Overhead yard-detail imagery is unavailable.",
+    "truckGate": "Medium-confidence true. This is a brand-new, build-to-suit cold-storage food DC (developer Scannell Properties / GC ARCO National; TDLR project 'Scannell - PFG Dallas', completion June 2025). New build-to-suit food DCs of this class are essentially always built with a controlled, fenced truck entrance. The Jan-2025 Street View shows a partly-built perimeter wall and a defined site entry, but the gate hardware itself is not yet resolvable. Flagged uncertain.",
+    "guardShack": "No guard booth confirmed. Modern new-build food DCs typically use a kiosk / camera / app check-in rather than a staffed booth; no booth structure was visible in the construction-phase Street View. Flagged uncertain.",
+    "remoteGs": "Medium-confidence true — assumes a controlled gate with kiosk/app check-in and no staffed guard shack, the standard pattern for a 2025-vintage cold-storage DC. Flagged uncertain; depends on truckGate being true.",
+    "dockDoors": "50+ band. The facility is a 343,000-355,000 sq ft cold-storage DC (per TDLR / ARCO / Scannell). A DC of this size and class typically carries 50+ dock doors. Exact count not verifiable from available imagery; flagged uncertain.",
+    "dropArea": "NONE recorded because no trailers were visible (building was still under construction in the imagery). The completed facility will have a truck court / trailer parking, but it could not be measured. Flagged uncertain.",
+    "dropYard": "Not confirmed — yard not yet built out in available imagery. Flagged uncertain.",
+    "postGateStaging": "A facility of this size will have a deep interior truck court; recorded true on that basis but flagged uncertain.",
+    "urbanRural": "Far east Fort Worth on a greenfield industrial site surrounded by graded land, oilfield-services pads, and an emerging industrial corridor; sparse surrounding development. Classified Rural.",
+    "buildingCount": "Single large cold-storage distribution building (343,000-355,000 sq ft).",
+    "railServed": "No rail spur — none visible in imagery and not mentioned in project documentation.",
+    "scale": "No truck scale confirmed; not verifiable from available imagery."
+  },
+  "method": "deep-audit"
+}

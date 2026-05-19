@@ -1,0 +1,50 @@
+{
+  "name": "Glovis EV Logistics America - Savannah Integrated Warehouse (Pooler GA)",
+  "type": "Distribution Warehouse / Logistics Hub",
+  "coords": { "lat": 32.088338, "lng": -81.262896 },
+  "geofences": {
+    "perimeter": { "south": 32.08654, "west": -81.26502, "north": 32.09014, "east": -81.26077 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 0.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.088338,-81.262896,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "UNRESOLVED": "Facility could not be located. The Glovis EV Logistics America 'Savannah integrated warehouse' opened only in Q1 2026; the two primary sources (Seoul Economic Daily 2026-04-15, Korea Herald) place it only in 'Savannah, Georgia' with no street address, industrial park, or highway named. The roster itself records 'exact street address not publicly disclosed - city/ZIP only' and the geocode precision is APPROXIMATE (Pooler ZIP 31322 centroid).",
+    "geocode": "The roster coordinate 32.088338,-81.262896 lands inside a residential subdivision in eastern Pooler -- definitely not the warehouse. It is a ZIP centroid, not the building.",
+    "research": "FMCSA registers GLOVIS EV LOGISTICS AMERICA LLC at 600 Kona Drive, Ellabell GA 31308 -- that is the HMGMA Metaplant campus support address, not the new 69,000 sqm (~742,000 sqft) integrated warehouse. The Pooler / I-16 corridor contains many large speculative logistics warehouses; none is publicly attributable to Glovis from available sources.",
+    "perimeter": "PLACEHOLDER ONLY -- the perimeter box is a nominal ~0.2 mi square centered on the unverified ZIP-centroid coordinate. It does NOT represent a confirmed building footprint and must not be used as a real geofence.",
+    "classification": "All 22 classification fields are defaults (no facility imagery available) and are listed in uncertainFields. As a Glovis HMGMA-linked integrated distribution warehouse, the facility would most plausibly be a dock-door cross-dock building with a truck gate, but this is unverified.",
+    "urbanRural": "Tentatively Rural -- the Pooler / I-16 logistics corridor is edge-of-town / interchange industrial; unverified."
+  },
+  "method": "deep-audit"
+}

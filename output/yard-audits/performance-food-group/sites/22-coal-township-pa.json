@@ -1,0 +1,65 @@
+{
+  "name": "Performance Foodservice - Eastern PA (Coal Township PA)",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 40.78785, "lng": -76.49245 },
+  "geofences": {
+    "perimeter": { "south": 40.78555, "west": -76.49520, "north": 40.78975, "east": -76.49010 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 40.78715, "west": -76.49370, "north": 40.78870, "east": -76.49215 }
+    ],
+    "dockAprons": [
+      { "south": 40.78735, "west": -76.49270, "north": 40.78815, "east": -76.49080 },
+      { "south": 40.78650, "west": -76.49500, "north": 40.78720, "east": -76.49420 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 42,
+    "trailersVisible": 36,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 24.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.78785,-76.49245,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoors", "guardShack", "connectivityIssue", "multiStep"],
+  "fieldNotes": {
+    "location": "Supplied coords were ~5.7 km off (geocode movedMeters 5761 was understated; actual building is SW of the pin). Resolved to the large DC building inside the Coal Township industrial park, 100 Industrial Park Road, on a raised pad above Industrial Park Road.",
+    "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point visible at the single driveway connecting Industrial Park Road to the site. The driveway runs uphill, open, to a loop road serving both buildings. Two teardrop islands seen in the car-park area are landscaped parking medians, not a guarded checkpoint.",
+    "guardShack": "No small staffed booth structure beside the driveway or loop road in any satellite view. Street View has no pano on the facility driveway (public road is screened by an overgrown embankment), so a small booth cannot be 100% excluded — flagged.",
+    "preGateStaging": "A small paved cul-de-sac/loop at the foot of the driveway off Industrial Park Road can hold a truck or two; a trailer was parked there in imagery.",
+    "postGateStaging": "Large paved central drop yard and wide loop road give ample inside-the-property staging before docks.",
+    "dockDoors": "Estimated ~42 total across both buildings (large DC ~28-32 on its SW face, secondary building ~10-12). Roof glare and trailer occlusion make this a band estimate — flagged.",
+    "multipleFacilities": "Two distinct large buildings on one pad: the main DC (right/east) and a secondary building (left/west), sharing the loop road and drop yard.",
+    "multiStep": "No second checkpoint stage observed; default false.",
+    "connectivityIssue": "Site is in an industrial park with a town (Coal Township / Shamokin) nearby; not truly isolated, so cellular coverage likely adequate — connectivityIssue false but listed as inferred."
+  },
+  "method": "deep-audit"
+}

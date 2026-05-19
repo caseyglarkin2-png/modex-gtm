@@ -1,0 +1,67 @@
+{
+  "name": "Dold Foods - Wichita KS",
+  "type": "Meat Processing Plant",
+  "coords": { "lat": 37.7352, "lng": -97.3256 },
+  "geofences": {
+    "perimeter": { "south": 37.73310, "west": -97.32720, "north": 37.73710, "east": -97.32400 },
+    "truckGate": { "south": 37.73400, "west": -97.32490, "north": 37.73450, "east": -97.32420 },
+    "dropYards": [
+      { "south": 37.73510, "west": -97.32685, "north": 37.73620, "east": -97.32630 },
+      { "south": 37.73340, "west": -97.32685, "north": 37.73420, "east": -97.32630 }
+    ],
+    "dockAprons": [
+      { "south": 37.73530, "west": -97.32610, "north": 37.73600, "east": -97.32560 },
+      { "south": 37.73590, "west": -97.32600, "north": 37.73640, "east": -97.32540 }
+    ],
+    "staging": { "south": 37.73400, "west": -97.32480, "north": 37.73470, "east": -97.32420 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 32,
+    "trailersVisible": 38,
+    "trailerParkingCapacity": 55,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 31.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.7352,-97.3256,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "Roster coords (37.736379,-97.325459) were ~well-placed at the plant; geocode noted movedMeters 2004 but landed on the correct complex. Confirmed by Street View 'DOLD' building signage. Locked center ~37.7352,-97.3256, address 2929 N Ohio St, Wichita KS 67219.",
+    "truckGate": "Confirmed via Street View (captured 2026-02): fenced perimeter with sliding gates across the truck driveway off N Ohio St on the south end of the plant. Truck Entrance/Exit signage present.",
+    "guardShack": "A small booth structure sits on an island in the entrance driveway, splitting inbound and outbound truck lanes - visible in multiple Street View frames. Classic gate + guard-shack configuration.",
+    "dockDoorCount": "Multiple dock faces with trailers backed in: a west-facing dock (~5-6 trailers seen), a north-segment dock (~5-6), plus additional dock banks. Total estimated 25-50 band (~32). Roof imagery partly overexposed - estimate.",
+    "shipRcvSeparate": "Distinct dock clusters on the west and north building faces suggest separate shipping/receiving - inferred.",
+    "dropYard": "Two trailer drop-yard clusters along the west side of the plant (between the building and the rail/canal), ~18-20 marked trailer stalls total.",
+    "fastLaneOpportunity": "Wide entrance apron with an island booth and lanes on both sides; ample paved width to add an express bypass.",
+    "railServed": "A rail line runs N-S in the floodway corridor immediately west of the plant but no spur crosses the grass buffer into the property. Not rail-served.",
+    "urbanRural": "Located within a dense industrial district of north Wichita, a major metro - Urban.",
+    "multipleFacilities": "Plant complex includes the main processing building plus connected secondary buildings (a south warehouse and a north office block) - treated as a campus."
+  },
+  "method": "deep-audit"
+}

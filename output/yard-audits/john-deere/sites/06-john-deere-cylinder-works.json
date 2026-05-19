@@ -1,0 +1,48 @@
+{
+  "name": "John Deere Cylinder Works - Moline IL",
+  "type": "Component Plant",
+  "coords": { "lat": 41.508049, "lng": -90.52593 },
+  "geofences": {
+    "perimeter": { "south": 41.50650, "west": -90.52960, "north": 41.50970, "east": -90.52380 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 41.50855, "west": -90.52900, "north": 41.50935, "east": -90.52760 }
+    ],
+    "dockAprons": [
+      { "south": 41.50870, "west": -90.52780, "north": 41.50960, "east": -90.52480 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 9,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 0,
+    "buildingCount": 4,
+    "siteAreaAcres": 18.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.508049,-90.52593,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoors", "truckGate", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Building fronts River Drive directly with no controlled perimeter checkpoint visible in 2023-2025 Street View; drive-in dock doors face the road with no fence or barrier arm. 'Gate 24' in shipping records is an internal Deere dock/department number, not a guarded perimeter gate.",
+    "multipleFacilities": "Four distinct building masses on the riverfront campus, shares the corridor with adjacent Deere Planter Works (idx 7).",
+    "dropYard": "Open paved apron on the riverside (north) face holds scattered trailers and containers used for material storage and drop staging.",
+    "dockDoors": "Estimated 16 from drive-in doors visible on the south (River Drive) face plus loading positions along the north apron; imagery resolution limits an exact count.",
+    "fastLaneOpportunity": "Very wide open paved aprons on the riverside and broad internal driveways leave ample room for added truck lanes.",
+    "urbanRural": "Located in the dense Quad Cities metro riverfront industrial fabric of Moline."
+  },
+  "method": "deep-audit"
+}

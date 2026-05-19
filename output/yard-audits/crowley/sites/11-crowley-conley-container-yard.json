@@ -1,0 +1,64 @@
+{
+  "name": "Crowley Conley Container Yard - Conley GA (Atlanta)",
+  "type": "Inland container yard / intermodal logistics hub",
+  "coords": { "lat": 33.65645, "lng": -84.34470 },
+  "geofences": {
+    "perimeter": { "south": 33.65480, "west": -84.34620, "north": 33.65730, "east": -84.34330 },
+    "truckGate": { "south": 33.65655, "west": -84.34430, "north": 33.65685, "east": -84.34395 },
+    "dropYards": [
+      { "south": 33.65555, "west": -84.34610, "north": 33.65730, "east": -84.34420 },
+      { "south": 33.65500, "west": -84.34420, "north": 33.65650, "east": -84.34335 }
+    ],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 13.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.65645,-84.34470,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["entryLanes", "exitLanes", "buildingCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "facility": "Crowley's Conley (Atlanta) inland container yard sits inside the 'Transport City' industrial outdoor storage park off Transport City Drive. It is a drayage/intermodal container drop yard, not a dock-door warehouse.",
+    "truckGate": "Street View (pano 33.65675,-84.34416, captured 2025-02) shows a chain-link SWING GATE across a single yard drive, with multiple signs mounted on the gate/fence. Whole yard ringed by chain-link perimeter fence.",
+    "guardShack": "No staffed booth at the gate. The only structure is a single-story metal office building set well back from the gate, not a gate-side booth — classified remoteGs (gate but no guard shack, kiosk/sign check-in).",
+    "dropArea": "Large gravel/paved drop yard holds ~50-55 visible parked trailers/containers in diagonal rows plus a separate container storage area with stacked containers and chassis; capacity easily 50+.",
+    "dockDoors": "No loading-dock doors; this is a container/trailer storage and drayage yard with no warehouse dock face.",
+    "postGateStaging": "Open paved apron immediately inside the gate provides interior staging room before trailers are spotted.",
+    "drivewayLong": "Internal yard drive from the gate is long with ample room to stack 3+ trucks before reaching parking rows.",
+    "urbanRural": "Conley is at Atlanta's dense SE industrial edge ('Trucker's Alley'), surrounded by warehouses and LTL terminals — Urban.",
+    "buildingCount": "Two small structures: a metal office building and an adjacent office trailer/equipment shed; no large warehouse.",
+    "confidence": "Medium — facility is unambiguously Crowley's Conley container yard within Transport City, gate and yard layout clearly visible in 2025 Street View and Maxar satellite, but exact parcel boundary between Crowley's yard and neighboring IOS tenants is approximate, and lane counts are inferred from a single-drive gate."
+  },
+  "method": "deep-audit"
+}

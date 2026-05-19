@@ -1,0 +1,52 @@
+{
+  "name": "Coca-Cola Atlanta Syrup Plant - Atlanta GA",
+  "type": "Concentrate / Syrup Plant",
+  "coords": { "lat": 33.65735, "lng": -84.39335 },
+  "geofences": {
+    "perimeter": { "south": 33.65480, "west": -84.39450, "north": 33.65970, "east": -84.39120 },
+    "truckGate": { "south": 33.65580, "west": -84.39250, "north": 33.65640, "east": -84.39200 },
+    "dropYards": [
+      { "south": 33.65490, "west": -84.39300, "north": 33.65640, "east": -84.39170 },
+      { "south": 33.65700, "west": -84.39280, "north": 33.65840, "east": -84.39160 }
+    ],
+    "dockAprons": [
+      { "south": 33.65820, "west": -84.39400, "north": 33.65900, "east": -84.39300 },
+      { "south": 33.65640, "west": -84.39450, "north": 33.65780, "east": -84.39400 }
+    ],
+    "staging": { "south": 33.65560, "west": -84.39260, "north": 33.65620, "east": -84.39180 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 33.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.65735,-84.39335,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Controlled entrance off Browns Mill Rd SE; checkpoint canopy/structure visible in Street View (2025-03) near flagpoles, with barrier across the truck lane visible in z20 satellite.",
+    "guardShack": "Small staffed booth/checkpoint canopy beside the truck lane at the entrance drive, distinct from the main building.",
+    "fastLaneOpportunity": "Wide paved gate apron with room for additional lanes; long internal approach drive.",
+    "dropYard": "Extensive diagonal trailer-parking stalls south and east of the main building hold 100+ trailers without tractors.",
+    "railServed": "Active rail line runs along the eastern property boundary with a spur curving into the south yard.",
+    "shipRcvSeparate": "Dock banks on both the north building face (red Coca-Cola trucks) and the southwest face suggest separate dock clusters; medium confidence.",
+    "scale": "No clear truck scale identified in imagery; left false but flagged as uncertain.",
+    "dockDoorCount": "Estimate ~35 across north and southwest dock faces from z18/z19 imagery; approximate."
+  },
+  "method": "deep-audit"
+}

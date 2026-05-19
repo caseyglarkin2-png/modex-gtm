@@ -1,0 +1,23 @@
+{
+  "name": "Kraft Heinz - Beaver Dam",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Street View shows a brick plant wall with silos and a tight paved apron against the street - no barrier arm or checkpoint visible. Open/uncontrolled entrance read.",
+    "backupSensitive": "Older plant hemmed in by residential streets on all sides; a truck queue would spill directly onto neighborhood roads with little stacking room.",
+    "urbanRural": "Plant embedded in a dense downtown/residential city core - Urban.",
+    "dropYard": "Small dedicated trailer parking lot to the southwest holding parked trailers.",
+    "dockDoors": "Limited dock frontage; few doors resolvable on the cramped site."
+  }
+}

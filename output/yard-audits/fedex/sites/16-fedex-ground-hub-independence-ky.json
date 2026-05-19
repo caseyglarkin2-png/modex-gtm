@@ -1,0 +1,49 @@
+{
+  "name": "FedEx Ground Hub - Independence KY (Northern Kentucky / Cincinnati)",
+  "type": "Ground regional sortation hub",
+  "coords": { "lat": 38.94100, "lng": -84.61700 },
+  "geofences": {
+    "perimeter": { "south": 38.93850, "west": -84.62100, "north": 38.94400, "east": -84.60750 },
+    "truckGate": { "south": 38.94235, "west": -84.61200, "north": 38.94300, "east": -84.61130 },
+    "dropYards": [
+      { "south": 38.94100, "west": -84.62050, "north": 38.94380, "east": -84.61700 },
+      { "south": 38.94000, "west": -84.61000, "north": 38.94250, "east": -84.60780 }
+    ],
+    "dockAprons": [
+      { "south": 38.94150, "west": -84.61980, "north": 38.94370, "east": -84.61480 },
+      { "south": 38.94050, "west": -84.61750, "north": 38.94350, "east": -84.61450 }
+    ],
+    "staging": { "south": 38.93850, "west": -84.61480, "north": 38.94020, "east": -84.61250 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 160, "trailersVisible": 220, "trailerParkingCapacity": 320,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 110.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.941,-84.617,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "z20/z21 satellite shows a cantilever sliding gate spanning the inbound truck lane where the access road meets the property, with chain-link + barbed-wire perimeter fencing on both sides; vehicles visible queued at the gate.",
+    "guardShack": "Small white ~1-vehicle-footprint booth set beside the lane just inside the gate (z21). Footprint is small enough it could be an unstaffed check-in kiosk; classified as guard shack given major sortation hub, but flagged uncertain.",
+    "entryLanes": "Single shared paved gate lane with yellow centerline visible (z21) - in/out share the gate; lane count an estimate.",
+    "fastLaneOpportunity": "Wide paved gate apron and broad access-road throat give room to add a bypass/express lane.",
+    "dockDoors": "FedEx Ground sortation hub - dock doors with trailers backed in along multiple long building faces (z19 NW/dock views); easily 150+, banded 50+.",
+    "dropArea": "Dense trailer rows in two distinct lots - NW of the building and a large eastern drop lot east of the access road; well over 50.",
+    "postGateStaging": "Large paved aprons inside the gate before the dock faces allow trucks to hold/queue.",
+    "buildingCount": "One large cross/H-shaped sortation building plus a small ancillary structure; counted as 2.",
+    "siteAreaAcres": "Derived from perimeter box (~612 m N-S x ~1169 m E-W), discounted for the irregular L-shaped property footprint."
+  },
+  "method": "deep-audit"
+}

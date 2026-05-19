@@ -1,0 +1,52 @@
+{
+  "name": "Logistics Insight Corp - GM EV Parts Warehouse - Detroit MI",
+  "type": "Value-Added Logistics Center / Sequencing Warehouse",
+  "coords": { "lat": 42.375600, "lng": -83.184600 },
+  "geofences": {
+    "perimeter": { "south": 42.372650, "west": -83.186600, "north": 42.379400, "east": -83.181900 },
+    "truckGate": { "south": 42.372750, "west": -83.185100, "north": 42.373300, "east": -83.184400 },
+    "dropYards": [
+      { "south": 42.373400, "west": -83.186300, "north": 42.377100, "east": -83.185500 }
+    ],
+    "dockAprons": [
+      { "south": 42.373300, "west": -83.185600, "north": 42.377600, "east": -83.184900 },
+      { "south": 42.378700, "west": -83.185300, "north": 42.379200, "east": -83.183600 }
+    ],
+    "staging": { "south": 42.373300, "west": -83.184900, "north": 42.374000, "east": -83.184200 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 68.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.375600,-83.184600,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "facility": "Brand-new (~2023-2024) 793,520 sq ft single warehouse on the redeveloped former AMC headquarters site at 14250 Plymouth Rd; built by NorthPoint Development, GM-owned, operated by Logistics Insight Corp (LINC, a Universal Logistics Holdings company) supplying EV parts to GM Factory Zero. Confirmed via Crain's Detroit / GM Authority and current satellite imagery.",
+    "truckGate": "Single controlled truck entrance off Plymouth Rd via a wide divided access drive that leads into the SW truck yard. Property is fully fenced/landscaped-bermed. No barrier arm or booth resolvable in current imagery at the road, but the truck yard is a secured private GM-owned operation; classified as a controlled gate.",
+    "guardShack": "No guard booth resolvable in satellite imagery at the entrance. Given a GM-owned EV-parts secured site, access is most likely kiosk / call-box / badge controlled rather than a staffed shack — remoteGs set true. Low confidence on the absence of a shack.",
+    "dockDoors": "Continuous loading-dock run the full length of the SW long face (trailers backed in at intervals) plus a secondary bank along the north end wall. NE long face along the railroad is solid windowless wall. Estimate ~100-120 doors total -> 50+ band.",
+    "dropYard": "Long striped trailer-parking lot runs parallel to the SW dock apron with marked stalls and trailers parked without tractors -> dedicated drop yard.",
+    "shipRcvSeparate": "Two physically distinct dock clusters on different faces (SW long face and north end wall) -> ship/receive can run from separate banks.",
+    "fastLaneOpportunity": "Wide divided access drive and a large open SW truck yard apron leave ample paved width to add an express/bypass lane.",
+    "railServed": "An active rail line runs immediately along the NE property edge but no spur enters the property; building is not rail-served.",
+    "siteAreaAcres": "~68 acres for the fenced industrial parcel (excludes the adjacent public park strip on the west side)."
+  },
+  "method": "deep-audit"
+}

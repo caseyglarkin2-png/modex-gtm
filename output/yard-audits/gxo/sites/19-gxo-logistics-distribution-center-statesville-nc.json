@@ -1,0 +1,58 @@
+{
+  "name": "GXO Logistics Distribution Center - Statesville NC",
+  "type": "Distribution Center",
+  "coords": { "lat": 35.770854, "lng": -80.841310 },
+  "geofences": {
+    "perimeter": { "south": 35.769300, "west": -80.843000, "north": 35.772800, "east": -80.839800 },
+    "truckGate": { "south": 35.770100, "west": -80.842200, "north": 35.770500, "east": -80.841800 },
+    "dropYards": [
+      { "south": 35.769600, "west": -80.842000, "north": 35.770200, "east": -80.839900 },
+      { "south": 35.772100, "west": -80.842200, "north": 35.772700, "east": -80.840000 }
+    ],
+    "dockAprons": [
+      { "south": 35.769900, "west": -80.842100, "north": 35.770400, "east": -80.840000 },
+      { "south": 35.771800, "west": -80.842200, "north": 35.772300, "east": -80.840000 }
+    ],
+    "staging": { "south": 35.770000, "west": -80.842900, "north": 35.770900, "east": -80.842100 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 28.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.770854,-80.841310,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "10-25",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "dropArea", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "2203 Sherrill Dr, Statesville NC - confirmed via roster ROOFTOP geocode landing on the large distribution building, plus Dun & Bradstreet, Panjiva ('Gxo USA DC, 2203 Sherrill Drive') and GXO jobs site (active Statesville hiring). A large cross-dock DC in a wooded edge-of-town Iredell County industrial area; employee review notes the building is non-temperature-controlled.",
+    "truckGate": "A sliding/swing chain-link gate spans the truck lane entering the fenced dock/truck yard, visible in 2019/2022 Street View along the south dock face. The dock yard is fully chain-link-fenced. Classified true.",
+    "guardShack": "No staffed guard booth (no 1-3 vehicle-footprint structure) at the gate. Only a small post / call-box-style fixture beside the gate. guardShack false.",
+    "remoteGs": "Truck gate present but no guard booth - implies kiosk / call-box / remote check-in. remoteGs true.",
+    "preGateStaging": "The driveway approach and employee-parking apron outside the dock-yard gate provide paved room for trucks to stage before the gate.",
+    "postGateStaging": "Wide, deep truck courts on both the north and south faces give ample internal staging before the docks.",
+    "shipRcvSeparate": "Cross-dock building with dock banks on two opposite faces (north truck court and south truck court) - shipping and receiving run from physically separate dock clusters.",
+    "dockDoors": "Dock doors line both the north and south building faces. Estimated ~60 doors total for this ~495,000 SF building - 50+ band. Flagged uncertain (overhead count).",
+    "dropArea": "Marked trailer-parking stalls run along the outer edge of both truck courts (north and south); ~12 trailers visible, capacity ~70. 10-25 band for trailers parked without tractors.",
+    "dropYard": "Dedicated striped trailer-parking stalls in both truck courts.",
+    "drivewayLong": "Truck courts are long and deep, holding well over 3 trucks in queue.",
+    "urbanRural": "Edge-of-town Statesville, surrounded by woods - small-town industrial; classified Rural per the rubric tiebreaker.",
+    "connectivityIssue": "Wooded edge-of-town but still within the Statesville industrial area near other warehouses - cellular coverage likely adequate; recorded false.",
+    "siteAreaAcres": "Perimeter box yields ~28 acres for the fenced parcel including the building, truck courts, and employee parking."
+  },
+  "method": "deep-audit"
+}

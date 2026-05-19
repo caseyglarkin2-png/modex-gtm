@@ -1,0 +1,57 @@
+{
+  "name": "Diageo Montgomery Manufacturing & Warehousing - Hope Hull AL",
+  "type": "Manufacturing & Warehousing Facility",
+  "coords": { "lat": 32.2785, "lng": -86.3645 },
+  "geofences": {
+    "perimeter": { "south": 32.2748, "west": -86.3672, "north": 32.2820, "east": -86.3622 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 32.2790, "west": -86.3658, "north": 32.2808, "east": -86.3640 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 93.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.2785,-86.3645,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "scale", "dropYard", "multiStep",
+    "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "truckGateCount"
+  ],
+  "fieldNotes": {
+    "_general": "Brand-new $415M facility, officially opened April 21, 2026. The latest available satellite imagery (Maxar) is from the construction phase: roofs partially installed, yards graded but unpaved, no finished gates/fences/docks/trailer lots visible. Location is confirmed with HIGH confidence, but most yard-classification fields cannot be reliably determined from construction-era imagery and are flagged uncertain.",
+    "location": "Positively identified: 7000 Celebration Way, Hope Hull AL. Two large buildings under construction in a logistics park ~south of Montgomery off I-65, matching Diageo press releases and WSFA coverage of the 360,000 sq ft manufacturing + warehousing site.",
+    "multipleFacilities": "Confirmed - two distinct large buildings on one campus: a manufacturing building (north) and a warehouse building (south).",
+    "buildingCount": "2 (manufacturing + warehouse).",
+    "dockDoors": "Estimated band 25-50 - a 360K sq ft warehousing operation typically has a substantial dock bank; the warehouse building's south/west face is the likely dock location, but doors are not yet built/visible. Low confidence.",
+    "truckGate": "Cannot confirm - no finished gate visible in construction imagery. Defaulted false but flagged uncertain; a new automated $415M plant may well install a controlled gate.",
+    "guardShack": "Cannot confirm from imagery - flagged uncertain.",
+    "trailersVisible": "0 - no operational trailers in construction-era imagery (only construction equipment and material laydown).",
+    "railServed": "No rail spur visible entering the property; the site sits in a road-served logistics park.",
+    "urbanRural": "Hope Hull AL - rural/edge-of-metro south of Montgomery, surrounded by farmland and woods. Rural.",
+    "highlyAutomated": "Press notes the facility uses robotics, automated blending, and five on-site AGVs - relevant operational context though not a classification field."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,54 @@
+{
+  "name": "GXO Logistics Distribution Center - West Jefferson OH",
+  "type": "Distribution Center",
+  "coords": { "lat": 39.94550, "lng": -83.33280 },
+  "geofences": {
+    "perimeter": { "south": 39.94300, "west": -83.33530, "north": 39.94780, "east": -83.33010 },
+    "truckGate": { "south": 39.94320, "west": -83.33450, "north": 39.94390, "east": -83.33370 },
+    "dropYards": [
+      { "south": 39.94310, "west": -83.33470, "north": 39.94700, "east": -83.33340 },
+      { "south": 39.94470, "west": -83.33200, "north": 39.94780, "east": -83.33010 }
+    ],
+    "dockAprons": [
+      { "south": 39.94310, "west": -83.33420, "north": 39.94700, "east": -83.33330 },
+      { "south": 39.94470, "west": -83.33260, "north": 39.94780, "east": -83.33170 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 78,
+    "trailersVisible": 36,
+    "trailerParkingCapacity": 85,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 55.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.94550,-83.33280,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "10-25",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "dropArea"],
+  "fieldNotes": {
+    "truckGate": "Building I sits on an open Park West Drive frontage with a perimeter loop road. z18/z19 satellite and Street View (2024) show no barrier arm, sliding gate, or checkpoint pinch-point at any property-line connection, and no perimeter fence around the operational yard. Classed false.",
+    "guardShack": "No 1-3-vehicle booth at any entrance in z19/z20 satellite or Street View. A small box-shaped structure at the NW edge of the employee parking lot is a utility cabinet/transformer, not a staffed guard booth at a truck lane.",
+    "remoteGs": "No gate, so no remote check-in inference.",
+    "dockDoors": "Cross-dock building (~712,000 SF, Columbus Logistics Park West Building I) with dock-door banks on both the SW and NE long faces; both faces show trailers backed in. Developer documents 38 docks for the south 343,500 SF portion alone, so the full building exceeds 50 - placed in the 50+ band. Total ~78 estimated; approximate.",
+    "shipRcvSeparate": "Dock doors run from two physically separate banks on opposite (SW and NE) building faces, so shipping and receiving operate from separate clusters.",
+    "dropArea": "Building is recently completed and partly occupied; ~36 trailers parked in the dock courts and drop rows at imagery time, with documented capacity of 85 trailer stalls. Placed in 10-25 visible band; flagged as the building is still ramping up.",
+    "drivewayLong": "Wide truck courts on both dock faces hold queues well over 3 trucks.",
+    "urbanRural": "Located in Columbus Logistics Park West, a 232-acre logistics park off I-70 at West Jefferson OH - a small town ~20 miles west of Columbus, surrounded by farmland; per rubric this small-town/edge-of-metro industrial setting resolves to Rural.",
+    "railServed": "No rail spur enters the property; truck-served only.",
+    "fastLaneOpportunity": "Wide multi-lane access road and large paved dock courts give ample room to add an express/bypass lane."
+  },
+  "method": "deep-audit"
+}

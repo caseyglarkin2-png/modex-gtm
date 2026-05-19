@@ -1,0 +1,62 @@
+{
+  "name": "Frito-Lay - Modesto CA",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 37.631150, "lng": -120.920200 },
+  "geofences": {
+    "perimeter": { "south": 37.629400, "west": -120.923000, "north": 37.633600, "east": -120.915000 },
+    "truckGate": { "south": 37.629350, "west": -120.917450, "north": 37.630300, "east": -120.916700 },
+    "dropYards": [
+      { "south": 37.629600, "west": -120.917000, "north": 37.633200, "east": -120.915000 },
+      { "south": 37.629500, "west": -120.922900, "north": 37.630600, "east": -120.920700 }
+    ],
+    "dockAprons": [
+      { "south": 37.629800, "west": -120.921800, "north": 37.630300, "east": -120.918600 },
+      { "south": 37.630300, "west": -120.917900, "north": 37.633200, "east": -120.917200 }
+    ],
+    "staging": { "south": 37.629500, "west": -120.917450, "north": 37.630300, "east": -120.916500 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 160,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 81.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.631150,-120.920200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "scale", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Single controlled truck entrance off Garner Rd at the SE corner. Wide divided driveway with a landscaped median island, yellow lane channelization striping, and a guard booth set inside the apron (visible z21 satellite as a dark canopied structure).",
+    "guardShack": "Small canopied guard booth structure inside the entrance lane, ~1-2 vehicle footprint, beside the divided in/out lanes - confirmed in z21 satellite imagery.",
+    "remoteGs": "False - a physical guard booth is present.",
+    "postGateStaging": "Large paved apron and trailer staging area inside the gate before docks; the SE entrance opens onto an expansive yard.",
+    "drivewayLong": "Deep apron and internal yard easily holds 3+ trucks between the gate and dock doors.",
+    "fastLaneOpportunity": "Very wide entrance apron and divided lanes with ample unused paved width - room to add an express/bypass lane.",
+    "entryExitTogether": "Single entrance point on Garner Rd serves both in and out via the divided driveway.",
+    "entryLanes": "Estimated 2 inbound from divided-lane striping; satellite resolution limits exact count - low confidence.",
+    "exitLanes": "Estimated 1 outbound - low confidence.",
+    "dockDoors": "South face of the lower plant building shows a long bank of dock doors with branded Frito-Lay trailers backed in; additional dock bank on the east face. Total estimated 60+ across faces - 50+ band.",
+    "dropArea": "Extensive marked trailer-parking rows on the east side and along the south - well over 50 trailer stalls.",
+    "shipRcvSeparate": "Dock banks on two distinct building faces (south face and east face) indicating separate ship/receive clusters.",
+    "urbanRural": "Within Modesto metro industrial fabric, surrounded by other large DCs/warehouses.",
+    "multipleFacilities": "Plant comprises multiple connected building masses plus a separate large warehouse building to the north (co-located Modesto Exchange Warehouse) - campus character.",
+    "scale": "No truck scale clearly visible in the truck path - low confidence, possible but not confirmed.",
+    "railServed": "No active rail spur entering the property; a rail/road corridor runs along the north boundary but no spur into the yard.",
+    "siteAreaAcres": "Perimeter box yields ~81 acres, matching the publicly stated 80-acre / 500k sq ft facility.",
+    "dockDoorCount": "Overhead count estimate; some dock faces partially obscured by trailers - moderate confidence."
+  },
+  "method": "deep-audit"
+}

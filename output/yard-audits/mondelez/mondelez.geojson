@@ -1,0 +1,3208 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3572,
+              37.4928
+            ],
+            [
+              -77.3507,
+              37.4928
+            ],
+            [
+              -77.3507,
+              37.4983
+            ],
+            [
+              -77.3572,
+              37.4983
+            ],
+            [
+              -77.3572,
+              37.4928
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Richmond Biscuit Bakery - Richmond VA",
+        "type": "Manufacturing - biscuit/cookie bakery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 84,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3554,
+              37.4944
+            ],
+            [
+              -77.3547,
+              37.4944
+            ],
+            [
+              -77.3547,
+              37.4949
+            ],
+            [
+              -77.3554,
+              37.4949
+            ],
+            [
+              -77.3554,
+              37.4944
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Richmond Biscuit Bakery - Richmond VA",
+        "type": "Manufacturing - biscuit/cookie bakery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3564,
+              37.4946
+            ],
+            [
+              -77.3551,
+              37.4946
+            ],
+            [
+              -77.3551,
+              37.4972
+            ],
+            [
+              -77.3564,
+              37.4972
+            ],
+            [
+              -77.3564,
+              37.4946
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Richmond Biscuit Bakery - Richmond VA",
+        "type": "Manufacturing - biscuit/cookie bakery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3548,
+              37.495
+            ],
+            [
+              -77.352,
+              37.495
+            ],
+            [
+              -77.352,
+              37.496
+            ],
+            [
+              -77.3548,
+              37.496
+            ],
+            [
+              -77.3548,
+              37.495
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Richmond Biscuit Bakery - Richmond VA",
+        "type": "Manufacturing - biscuit/cookie bakery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3546,
+              37.4938
+            ],
+            [
+              -77.3536,
+              37.4938
+            ],
+            [
+              -77.3536,
+              37.4949
+            ],
+            [
+              -77.3546,
+              37.4949
+            ],
+            [
+              -77.3546,
+              37.4938
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Richmond Biscuit Bakery - Richmond VA",
+        "type": "Manufacturing - biscuit/cookie bakery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.7123,
+              41.7566
+            ],
+            [
+              -87.7025,
+              41.7566
+            ],
+            [
+              -87.7025,
+              41.7615
+            ],
+            [
+              -87.7123,
+              41.7615
+            ],
+            [
+              -87.7123,
+              41.7566
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Chicago Bakery - Chicago IL",
+        "type": "Manufacturing - biscuit/cracker bakery",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 100,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.7033,
+              41.7599
+            ],
+            [
+              -87.7027,
+              41.7599
+            ],
+            [
+              -87.7027,
+              41.76045
+            ],
+            [
+              -87.7033,
+              41.76045
+            ],
+            [
+              -87.7033,
+              41.7599
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Chicago Bakery - Chicago IL",
+        "type": "Manufacturing - biscuit/cracker bakery",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.712,
+              41.757
+            ],
+            [
+              -87.7085,
+              41.757
+            ],
+            [
+              -87.7085,
+              41.7588
+            ],
+            [
+              -87.712,
+              41.7588
+            ],
+            [
+              -87.712,
+              41.757
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Chicago Bakery - Chicago IL",
+        "type": "Manufacturing - biscuit/cracker bakery",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.7075,
+              41.757
+            ],
+            [
+              -87.7035,
+              41.757
+            ],
+            [
+              -87.7035,
+              41.7579
+            ],
+            [
+              -87.7075,
+              41.7579
+            ],
+            [
+              -87.7075,
+              41.757
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Chicago Bakery - Chicago IL",
+        "type": "Manufacturing - biscuit/cracker bakery",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.668,
+              45.5797
+            ],
+            [
+              -122.6625,
+              45.5797
+            ],
+            [
+              -122.6625,
+              45.5825
+            ],
+            [
+              -122.668,
+              45.5825
+            ],
+            [
+              -122.668,
+              45.5797
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Portland Bakery - Portland OR",
+        "type": "Manufacturing - biscuit/cookie bakery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 33,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.6634,
+              45.5804
+            ],
+            [
+              -122.6628,
+              45.5804
+            ],
+            [
+              -122.6628,
+              45.58095
+            ],
+            [
+              -122.6634,
+              45.58095
+            ],
+            [
+              -122.6634,
+              45.5804
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Portland Bakery - Portland OR",
+        "type": "Manufacturing - biscuit/cookie bakery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.6648,
+              45.5795
+            ],
+            [
+              -122.663,
+              45.5795
+            ],
+            [
+              -122.663,
+              45.5803
+            ],
+            [
+              -122.6648,
+              45.5803
+            ],
+            [
+              -122.6648,
+              45.5795
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Portland Bakery - Portland OR",
+        "type": "Manufacturing - biscuit/cookie bakery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.6638,
+              45.5805
+            ],
+            [
+              -122.6628,
+              45.5805
+            ],
+            [
+              -122.6628,
+              45.5812
+            ],
+            [
+              -122.6638,
+              45.5812
+            ],
+            [
+              -122.6638,
+              45.5805
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Portland Bakery - Portland OR",
+        "type": "Manufacturing - biscuit/cookie bakery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1915,
+              41.77
+            ],
+            [
+              -88.1845,
+              41.77
+            ],
+            [
+              -88.1845,
+              41.7742
+            ],
+            [
+              -88.1915,
+              41.7742
+            ],
+            [
+              -88.1915,
+              41.77
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Naperville Bakery - Naperville IL",
+        "type": "Manufacturing - cracker bakery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 100,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 58,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1892,
+              41.7703
+            ],
+            [
+              -88.1885,
+              41.7703
+            ],
+            [
+              -88.1885,
+              41.77085
+            ],
+            [
+              -88.1892,
+              41.77085
+            ],
+            [
+              -88.1892,
+              41.7703
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Naperville Bakery - Naperville IL",
+        "type": "Manufacturing - cracker bakery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.191,
+              41.771
+            ],
+            [
+              -88.189,
+              41.771
+            ],
+            [
+              -88.189,
+              41.7734
+            ],
+            [
+              -88.191,
+              41.7734
+            ],
+            [
+              -88.191,
+              41.771
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Naperville Bakery - Naperville IL",
+        "type": "Manufacturing - cracker bakery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1896,
+              41.7726
+            ],
+            [
+              -88.1885,
+              41.7726
+            ],
+            [
+              -88.1885,
+              41.7736
+            ],
+            [
+              -88.1896,
+              41.7736
+            ],
+            [
+              -88.1896,
+              41.7726
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Naperville Bakery - Naperville IL",
+        "type": "Manufacturing - cracker bakery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1882,
+              41.771
+            ],
+            [
+              -88.1872,
+              41.771
+            ],
+            [
+              -88.1872,
+              41.772
+            ],
+            [
+              -88.1882,
+              41.772
+            ],
+            [
+              -88.1882,
+              41.771
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Naperville Bakery - Naperville IL",
+        "type": "Manufacturing - cracker bakery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2432,
+              39.8868
+            ],
+            [
+              -86.2395,
+              39.8868
+            ],
+            [
+              -86.2395,
+              39.89
+            ],
+            [
+              -86.2432,
+              39.89
+            ],
+            [
+              -86.2432,
+              39.8868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Clif Bar Baking Co. of Indianapolis - Indianapolis IN",
+        "type": "Manufacturing - energy/nutrition bar bakery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 16,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 28,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2425,
+              39.8874
+            ],
+            [
+              -86.2413,
+              39.8874
+            ],
+            [
+              -86.2413,
+              39.8882
+            ],
+            [
+              -86.2425,
+              39.8882
+            ],
+            [
+              -86.2425,
+              39.8874
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Clif Bar Baking Co. of Indianapolis - Indianapolis IN",
+        "type": "Manufacturing - energy/nutrition bar bakery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2413,
+              39.888
+            ],
+            [
+              -86.2401,
+              39.888
+            ],
+            [
+              -86.2401,
+              39.8892
+            ],
+            [
+              -86.2413,
+              39.8892
+            ],
+            [
+              -86.2413,
+              39.888
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Clif Bar Baking Co. of Indianapolis - Indianapolis IN",
+        "type": "Manufacturing - energy/nutrition bar bakery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.7661,
+              40.8098
+            ],
+            [
+              -72.76425,
+              40.8098
+            ],
+            [
+              -72.76425,
+              40.8117
+            ],
+            [
+              -72.7661,
+              40.8117
+            ],
+            [
+              -72.7661,
+              40.8098
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Tate's Bake Shop Factory - East Moriches NY",
+        "type": "Manufacturing - cookie bakery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 5,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 6,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 7.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.76475,
+              40.81055
+            ],
+            [
+              -72.7643,
+              40.81055
+            ],
+            [
+              -72.7643,
+              40.81085
+            ],
+            [
+              -72.76475,
+              40.81085
+            ],
+            [
+              -72.76475,
+              40.81055
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Tate's Bake Shop Factory - East Moriches NY",
+        "type": "Manufacturing - cookie bakery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.76555,
+              40.8108
+            ],
+            [
+              -72.7649,
+              40.8108
+            ],
+            [
+              -72.7649,
+              40.81105
+            ],
+            [
+              -72.76555,
+              40.81105
+            ],
+            [
+              -72.76555,
+              40.8108
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Tate's Bake Shop Factory - East Moriches NY",
+        "type": "Manufacturing - cookie bakery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.34,
+              37.4777
+            ],
+            [
+              -77.3358,
+              37.4777
+            ],
+            [
+              -77.3358,
+              37.4825
+            ],
+            [
+              -77.34,
+              37.4825
+            ],
+            [
+              -77.34,
+              37.4777
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Richmond Distribution Center - Sandston VA",
+        "type": "Distribution center (3PL-operated, Kenco)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 45,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3397,
+              37.4813
+            ],
+            [
+              -77.339,
+              37.4813
+            ],
+            [
+              -77.339,
+              37.482
+            ],
+            [
+              -77.3397,
+              37.482
+            ],
+            [
+              -77.3397,
+              37.4813
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Richmond Distribution Center - Sandston VA",
+        "type": "Distribution center (3PL-operated, Kenco)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3378,
+              37.4788
+            ],
+            [
+              -77.336,
+              37.4788
+            ],
+            [
+              -77.336,
+              37.4807
+            ],
+            [
+              -77.3378,
+              37.4807
+            ],
+            [
+              -77.3378,
+              37.4788
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Richmond Distribution Center - Sandston VA",
+        "type": "Distribution center (3PL-operated, Kenco)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3383,
+              37.4782
+            ],
+            [
+              -77.3364,
+              37.4782
+            ],
+            [
+              -77.3364,
+              37.481
+            ],
+            [
+              -77.3383,
+              37.481
+            ],
+            [
+              -77.3383,
+              37.4782
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Richmond Distribution Center - Sandston VA",
+        "type": "Distribution center (3PL-operated, Kenco)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3397,
+              37.4788
+            ],
+            [
+              -77.3387,
+              37.4788
+            ],
+            [
+              -77.3387,
+              37.4817
+            ],
+            [
+              -77.3397,
+              37.4817
+            ],
+            [
+              -77.3397,
+              37.4788
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Richmond Distribution Center - Sandston VA",
+        "type": "Distribution center (3PL-operated, Kenco)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.22455,
+              41.49255
+            ],
+            [
+              -74.22215,
+              41.49255
+            ],
+            [
+              -74.22215,
+              41.4949
+            ],
+            [
+              -74.22455,
+              41.4949
+            ],
+            [
+              -74.22455,
+              41.49255
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Montgomery Sales Distribution Center - Montgomery NY",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 32,
+          "trailerParkingCapacity": 37,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 11.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.2242,
+              41.49405
+            ],
+            [
+              -74.22375,
+              41.49405
+            ],
+            [
+              -74.22375,
+              41.49445
+            ],
+            [
+              -74.2242,
+              41.49445
+            ],
+            [
+              -74.2242,
+              41.49405
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Montgomery Sales Distribution Center - Montgomery NY",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.2242,
+              41.49255
+            ],
+            [
+              -74.223,
+              41.49255
+            ],
+            [
+              -74.223,
+              41.49385
+            ],
+            [
+              -74.2242,
+              41.49385
+            ],
+            [
+              -74.2242,
+              41.49255
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Montgomery Sales Distribution Center - Montgomery NY",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.2231,
+              41.4932
+            ],
+            [
+              -74.22215,
+              41.4932
+            ],
+            [
+              -74.22215,
+              41.4942
+            ],
+            [
+              -74.2231,
+              41.4942
+            ],
+            [
+              -74.2231,
+              41.4932
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Montgomery Sales Distribution Center - Montgomery NY",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.224,
+              41.4936
+            ],
+            [
+              -74.2232,
+              41.4936
+            ],
+            [
+              -74.2232,
+              41.4942
+            ],
+            [
+              -74.224,
+              41.4942
+            ],
+            [
+              -74.224,
+              41.4936
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Montgomery Sales Distribution Center - Montgomery NY",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.219,
+              33.92105
+            ],
+            [
+              -84.2173,
+              33.92105
+            ],
+            [
+              -84.2173,
+              33.9226
+            ],
+            [
+              -84.219,
+              33.9226
+            ],
+            [
+              -84.219,
+              33.92105
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Norcross Distribution Center - Norcross GA",
+        "type": "Distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 13,
+          "trailersVisible": 5,
+          "trailerParkingCapacity": 14,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 6.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.21895,
+              33.9221
+            ],
+            [
+              -84.2185,
+              33.9221
+            ],
+            [
+              -84.2185,
+              33.92245
+            ],
+            [
+              -84.21895,
+              33.92245
+            ],
+            [
+              -84.21895,
+              33.9221
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Norcross Distribution Center - Norcross GA",
+        "type": "Distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.21805,
+              33.9216
+            ],
+            [
+              -84.21735,
+              33.9216
+            ],
+            [
+              -84.21735,
+              33.9224
+            ],
+            [
+              -84.21805,
+              33.9224
+            ],
+            [
+              -84.21805,
+              33.9216
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Norcross Distribution Center - Norcross GA",
+        "type": "Distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.2181,
+              33.9215
+            ],
+            [
+              -84.21755,
+              33.9215
+            ],
+            [
+              -84.21755,
+              33.92215
+            ],
+            [
+              -84.2181,
+              33.92215
+            ],
+            [
+              -84.2181,
+              33.9215
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Norcross Distribution Center - Norcross GA",
+        "type": "Distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.7821,
+              39.7581
+            ],
+            [
+              -104.7806,
+              39.7581
+            ],
+            [
+              -104.7806,
+              39.75985
+            ],
+            [
+              -104.7821,
+              39.75985
+            ],
+            [
+              -104.7821,
+              39.7581
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Aurora Sales & Distribution Center - Aurora CO",
+        "type": "Sales / distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.78095,
+              39.7595
+            ],
+            [
+              -104.78055,
+              39.7595
+            ],
+            [
+              -104.78055,
+              39.7599
+            ],
+            [
+              -104.78095,
+              39.7599
+            ],
+            [
+              -104.78095,
+              39.7595
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Aurora Sales & Distribution Center - Aurora CO",
+        "type": "Sales / distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.7813,
+              39.75835
+            ],
+            [
+              -104.78075,
+              39.75835
+            ],
+            [
+              -104.78075,
+              39.7597
+            ],
+            [
+              -104.7813,
+              39.7597
+            ],
+            [
+              -104.7813,
+              39.75835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Aurora Sales & Distribution Center - Aurora CO",
+        "type": "Sales / distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.78145,
+              39.75835
+            ],
+            [
+              -104.78095,
+              39.75835
+            ],
+            [
+              -104.78095,
+              39.75975
+            ],
+            [
+              -104.78145,
+              39.75975
+            ],
+            [
+              -104.78145,
+              39.75835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Aurora Sales & Distribution Center - Aurora CO",
+        "type": "Sales / distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -114.4106,
+              42.5378
+            ],
+            [
+              -114.4056,
+              42.5378
+            ],
+            [
+              -114.4056,
+              42.5418
+            ],
+            [
+              -114.4106,
+              42.5418
+            ],
+            [
+              -114.4106,
+              42.5378
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Clif Bar Baking Co. of Twin Falls - Twin Falls ID",
+        "type": "Manufacturing - energy/nutrition bar bakery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 10,
+          "trailersVisible": 9,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 88,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -114.4079,
+              42.5405
+            ],
+            [
+              -114.4062,
+              42.5405
+            ],
+            [
+              -114.4062,
+              42.5411
+            ],
+            [
+              -114.4079,
+              42.5411
+            ],
+            [
+              -114.4079,
+              42.5405
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Clif Bar Baking Co. of Twin Falls - Twin Falls ID",
+        "type": "Manufacturing - energy/nutrition bar bakery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -114.40895,
+              42.5396
+            ],
+            [
+              -114.4084,
+              42.5396
+            ],
+            [
+              -114.4084,
+              42.54035
+            ],
+            [
+              -114.40895,
+              42.54035
+            ],
+            [
+              -114.40895,
+              42.5396
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Clif Bar Baking Co. of Twin Falls - Twin Falls ID",
+        "type": "Manufacturing - energy/nutrition bar bakery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.8729,
+              40.8461
+            ],
+            [
+              -72.8702,
+              40.8461
+            ],
+            [
+              -72.8702,
+              40.8485
+            ],
+            [
+              -72.8729,
+              40.8485
+            ],
+            [
+              -72.8729,
+              40.8461
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Tate's Bake Shop Production & Distribution Facility - Shirley NY",
+        "type": "Manufacturing / warehouse - cookie bakery + distribution",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.872,
+              40.8481
+            ],
+            [
+              -72.8712,
+              40.8481
+            ],
+            [
+              -72.8712,
+              40.8486
+            ],
+            [
+              -72.872,
+              40.8486
+            ],
+            [
+              -72.872,
+              40.8481
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Tate's Bake Shop Production & Distribution Facility - Shirley NY",
+        "type": "Manufacturing / warehouse - cookie bakery + distribution",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.8711,
+              40.8468
+            ],
+            [
+              -72.8704,
+              40.8468
+            ],
+            [
+              -72.8704,
+              40.8483
+            ],
+            [
+              -72.8711,
+              40.8483
+            ],
+            [
+              -72.8711,
+              40.8468
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Tate's Bake Shop Production & Distribution Facility - Shirley NY",
+        "type": "Manufacturing / warehouse - cookie bakery + distribution",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.8713,
+              40.8466
+            ],
+            [
+              -72.8706,
+              40.8466
+            ],
+            [
+              -72.8706,
+              40.8484
+            ],
+            [
+              -72.8713,
+              40.8484
+            ],
+            [
+              -72.8713,
+              40.8466
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Tate's Bake Shop Production & Distribution Facility - Shirley NY",
+        "type": "Manufacturing / warehouse - cookie bakery + distribution",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5022,
+              41.663
+            ],
+            [
+              -83.4965,
+              41.663
+            ],
+            [
+              -83.4965,
+              41.6672
+            ],
+            [
+              -83.5022,
+              41.6672
+            ],
+            [
+              -83.5022,
+              41.663
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Toledo Flour Mill - Toledo OH",
+        "type": "Manufacturing - flour mill (input/ingredient)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 2,
+          "trailerParkingCapacity": 10,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 22,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4985,
+              41.664
+            ],
+            [
+              -83.4975,
+              41.664
+            ],
+            [
+              -83.4975,
+              41.6649
+            ],
+            [
+              -83.4985,
+              41.6649
+            ],
+            [
+              -83.4985,
+              41.664
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Toledo Flour Mill - Toledo OH",
+        "type": "Manufacturing - flour mill (input/ingredient)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.2634,
+              40.7337
+            ],
+            [
+              -75.2596,
+              40.7337
+            ],
+            [
+              -75.2596,
+              40.7362
+            ],
+            [
+              -75.2634,
+              40.7362
+            ],
+            [
+              -75.2634,
+              40.7337
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez/Nabisco Tatamy Sales Distribution Center - Tatamy PA",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 24,
+          "trailersVisible": 32,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 12.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.2634,
+              40.7349
+            ],
+            [
+              -75.2627,
+              40.7349
+            ],
+            [
+              -75.2627,
+              40.7358
+            ],
+            [
+              -75.2634,
+              40.7358
+            ],
+            [
+              -75.2634,
+              40.7349
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez/Nabisco Tatamy Sales Distribution Center - Tatamy PA",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.2633,
+              40.7346
+            ],
+            [
+              -75.2624,
+              40.7346
+            ],
+            [
+              -75.2624,
+              40.736
+            ],
+            [
+              -75.2633,
+              40.736
+            ],
+            [
+              -75.2633,
+              40.7346
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez/Nabisco Tatamy Sales Distribution Center - Tatamy PA",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.2624,
+              40.7344
+            ],
+            [
+              -75.2606,
+              40.7344
+            ],
+            [
+              -75.2606,
+              40.7356
+            ],
+            [
+              -75.2624,
+              40.7356
+            ],
+            [
+              -75.2624,
+              40.7344
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez/Nabisco Tatamy Sales Distribution Center - Tatamy PA",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.3496,
+              41.733
+            ],
+            [
+              -88.3442,
+              41.733
+            ],
+            [
+              -88.3442,
+              41.7385
+            ],
+            [
+              -88.3496,
+              41.7385
+            ],
+            [
+              -88.3496,
+              41.733
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Aurora Distribution Center (DHL/Exel-operated) - Aurora IL",
+        "type": "Distribution center (3PL-operated, DHL/Exel Logistics)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 7,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 38,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.349,
+              41.7335
+            ],
+            [
+              -88.3481,
+              41.7335
+            ],
+            [
+              -88.3481,
+              41.7342
+            ],
+            [
+              -88.349,
+              41.7342
+            ],
+            [
+              -88.349,
+              41.7335
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Aurora Distribution Center (DHL/Exel-operated) - Aurora IL",
+        "type": "Distribution center (3PL-operated, DHL/Exel Logistics)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.3478,
+              41.7333
+            ],
+            [
+              -88.3445,
+              41.7333
+            ],
+            [
+              -88.3445,
+              41.7348
+            ],
+            [
+              -88.3478,
+              41.7348
+            ],
+            [
+              -88.3478,
+              41.7333
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Aurora Distribution Center (DHL/Exel-operated) - Aurora IL",
+        "type": "Distribution center (3PL-operated, DHL/Exel Logistics)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.349,
+              41.7343
+            ],
+            [
+              -88.3447,
+              41.7343
+            ],
+            [
+              -88.3447,
+              41.7349
+            ],
+            [
+              -88.349,
+              41.7349
+            ],
+            [
+              -88.349,
+              41.7343
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Aurora Distribution Center (DHL/Exel-operated) - Aurora IL",
+        "type": "Distribution center (3PL-operated, DHL/Exel Logistics)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.3795,
+              40.8082
+            ],
+            [
+              -74.3692,
+              40.8082
+            ],
+            [
+              -74.3692,
+              40.8162
+            ],
+            [
+              -74.3795,
+              40.8162
+            ],
+            [
+              -74.3795,
+              40.8082
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez North America Headquarters / East Hanover Bakery Campus - East Hanover NJ",
+        "type": "Corporate HQ + active manufacturing/distribution campus (Nabisco bakery)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 78,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.3752,
+              40.8085
+            ],
+            [
+              -74.3742,
+              40.8085
+            ],
+            [
+              -74.3742,
+              40.8092
+            ],
+            [
+              -74.3752,
+              40.8092
+            ],
+            [
+              -74.3752,
+              40.8085
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez North America Headquarters / East Hanover Bakery Campus - East Hanover NJ",
+        "type": "Corporate HQ + active manufacturing/distribution campus (Nabisco bakery)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.3742,
+              40.8112
+            ],
+            [
+              -74.3718,
+              40.8112
+            ],
+            [
+              -74.3718,
+              40.8128
+            ],
+            [
+              -74.3742,
+              40.8128
+            ],
+            [
+              -74.3742,
+              40.8112
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez North America Headquarters / East Hanover Bakery Campus - East Hanover NJ",
+        "type": "Corporate HQ + active manufacturing/distribution campus (Nabisco bakery)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.3768,
+              40.8132
+            ],
+            [
+              -74.3742,
+              40.8132
+            ],
+            [
+              -74.3742,
+              40.8148
+            ],
+            [
+              -74.3768,
+              40.8148
+            ],
+            [
+              -74.3768,
+              40.8132
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez North America Headquarters / East Hanover Bakery Campus - East Hanover NJ",
+        "type": "Corporate HQ + active manufacturing/distribution campus (Nabisco bakery)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.3748,
+              40.811
+            ],
+            [
+              -74.3712,
+              40.811
+            ],
+            [
+              -74.3712,
+              40.813
+            ],
+            [
+              -74.3748,
+              40.813
+            ],
+            [
+              -74.3748,
+              40.811
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez North America Headquarters / East Hanover Bakery Campus - East Hanover NJ",
+        "type": "Corporate HQ + active manufacturing/distribution campus (Nabisco bakery)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.3772,
+              40.813
+            ],
+            [
+              -74.374,
+              40.813
+            ],
+            [
+              -74.374,
+              40.815
+            ],
+            [
+              -74.3772,
+              40.815
+            ],
+            [
+              -74.3772,
+              40.813
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez North America Headquarters / East Hanover Bakery Campus - East Hanover NJ",
+        "type": "Corporate HQ + active manufacturing/distribution campus (Nabisco bakery)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.4118,
+              40.8186
+            ],
+            [
+              -74.4076,
+              40.8186
+            ],
+            [
+              -74.4076,
+              40.8214
+            ],
+            [
+              -74.4118,
+              40.8214
+            ],
+            [
+              -74.4118,
+              40.8186
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Global R&D Innovation Center - Whippany NJ",
+        "type": "R&D / global innovation center (office + lab, pilot & scale-up lines)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 1,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.6517,
+              41.8862
+            ],
+            [
+              -87.6509,
+              41.8862
+            ],
+            [
+              -87.6509,
+              41.887
+            ],
+            [
+              -87.6517,
+              41.887
+            ],
+            [
+              -87.6517,
+              41.8862
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Global Headquarters - Chicago IL",
+        "type": "Corporate HQ (global) - downtown office building",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 1,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 0.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.8712,
+              35.0173
+            ],
+            [
+              -89.8678,
+              35.0173
+            ],
+            [
+              -89.8678,
+              35.0196
+            ],
+            [
+              -89.8712,
+              35.0196
+            ],
+            [
+              -89.8712,
+              35.0173
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Memphis Sales Distribution Center - Memphis TN",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 9,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 7.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.8692,
+              35.0182
+            ],
+            [
+              -89.8686,
+              35.0182
+            ],
+            [
+              -89.8686,
+              35.0187
+            ],
+            [
+              -89.8692,
+              35.0187
+            ],
+            [
+              -89.8692,
+              35.0182
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Memphis Sales Distribution Center - Memphis TN",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.8708,
+              35.0186
+            ],
+            [
+              -89.8682,
+              35.0186
+            ],
+            [
+              -89.8682,
+              35.0193
+            ],
+            [
+              -89.8708,
+              35.0193
+            ],
+            [
+              -89.8708,
+              35.0186
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Memphis Sales Distribution Center - Memphis TN",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.871,
+              35.0184
+            ],
+            [
+              -89.868,
+              35.0184
+            ],
+            [
+              -89.868,
+              35.019
+            ],
+            [
+              -89.871,
+              35.019
+            ],
+            [
+              -89.871,
+              35.0184
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Nabisco Memphis Sales Distribution Center - Memphis TN",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    }
+  ]
+}

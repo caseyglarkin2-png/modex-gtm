@@ -1,0 +1,54 @@
+{
+  "name": "General Mills - Murfreesboro TN",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 35.80100, "lng": -86.39150 },
+  "geofences": {
+    "perimeter": { "south": 35.79580, "west": -86.39500, "north": 35.80580, "east": -86.38750 },
+    "truckGate": { "south": 35.80200, "west": -86.39570, "north": 35.80280, "east": -86.39470 },
+    "dropYards": [
+      { "south": 35.79680, "west": -86.39320, "north": 35.79900, "east": -86.39120 },
+      { "south": 35.79720, "west": -86.39100, "north": 35.79950, "east": -86.38900 },
+      { "south": 35.79900, "west": -86.39480, "north": 35.80060, "east": -86.39300 }
+    ],
+    "dockAprons": [
+      { "south": 35.80150, "west": -86.39100, "north": 35.80350, "east": -86.38900 },
+      { "south": 35.79850, "west": -86.39120, "north": 35.80050, "east": -86.38950 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60, "trailersVisible": 130, "trailerParkingCapacity": 200,
+    "truckGateCount": 1, "buildingCount": 6, "siteAreaAcres": 186.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.80100,-86.39150,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "railServed"],
+  "fieldNotes": {
+    "location": "Confirmed General Mills food-manufacturing plant in Murfreesboro TN (makes Yoplait yogurt, Toaster Strudel, and Pillsbury products). The roster geocode was RANGE_INTERPOLATED and moved 3274m; satellite + web research locked the actual plant center at 35.8010,-86.3915. Plant address is 2695 Stevenson Dr / 2533 General Mills Way. Active manufacturing confirmed by steam plumes in 2026 Street View.",
+    "truckGate": "TRUE. The campus is fully enclosed by a black ornamental metal perimeter fence (clearly visible along the road on multiple sides in 2019/2026 Street View). Wide controlled internal road (Stevenson Dr / General Mills Way) serves the plant. Treated as a controlled truck entrance.",
+    "guardShack": "Not definitively confirmed. A small white booth-like structure was seen near the road at the entrance area in Street View/satellite, which may be a gate/guard house, but it could not be positively confirmed as a staffed truck-gate booth. Flagged uncertain.",
+    "remoteGs": "Set true on the assumption of a gate without a confirmed staffed booth; low confidence - flagged.",
+    "dockDoors": "50+ band. Multiple dock banks: a long dock face with trailers backed in (seen behind the fence in Street View) on the warehouse buildings, plus additional docks. Estimated ~55-65 total.",
+    "dropArea": "50+ band. Several large trailer drop yards: rows of parked trailers in the SW, S-central, and W lots - well over 100 trailer stalls combined.",
+    "multipleFacilities": "Campus comprises the dense central process building, large warehouse buildings, a separate dark-roof building, on-site wastewater treatment, and supporting structures - multiple distinct clusters.",
+    "shipRcvSeparate": "Dock activity is spread across separate building faces (warehouse dock banks on different sides), supporting separate ship/receive clusters.",
+    "fastLaneOpportunity": "Wide internal roads and large aprons leave room for a bypass/express lane.",
+    "railServed": "A rail line runs along the E edge of the property; rail spurs appear to serve the site. Set true but flagged - the spur penetration into the plant is not fully confirmed in imagery.",
+    "scale": "No truck scale positively identified; flagged uncertain.",
+    "siteAreaAcres": "Perimeter box ~186 acres; the developed paved/built core is roughly 90-110 acres.",
+    "urbanRural": "Located within the Murfreesboro / Nashville metro fabric beside I-24 with surrounding industrial and residential development; classified Urban."
+  },
+  "method": "deep-audit"
+}

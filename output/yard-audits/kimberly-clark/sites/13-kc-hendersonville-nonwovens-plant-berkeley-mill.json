@@ -1,0 +1,72 @@
+{
+  "name": "K-C Hendersonville Nonwovens Plant (Berkeley Mill) - Hendersonville NC",
+  "type": "Nonwovens manufacturing plant (materials for Depend, Poise, U by Kotex)",
+  "coords": { "lat": 35.34630, "lng": -82.46880 },
+  "geofences": {
+    "perimeter": { "south": 35.34250, "west": -82.47230, "north": 35.35000, "east": -82.46550 },
+    "truckGate": { "south": 35.34860, "west": -82.47020, "north": 35.34940, "east": -82.46880 },
+    "dropYards": [
+      { "south": 35.34620, "west": -82.46820, "north": 35.34830, "east": -82.46580 },
+      { "south": 35.34280, "west": -82.47120, "north": 35.34480, "east": -82.46900 },
+      { "south": 35.34380, "west": -82.46900, "north": 35.34540, "east": -82.46680 }
+    ],
+    "dockAprons": [
+      { "south": 35.34440, "west": -82.47090, "north": 35.34560, "east": -82.46950 },
+      { "south": 35.34560, "west": -82.46760, "north": 35.34660, "east": -82.46620 }
+    ],
+    "staging": { "south": 35.34780, "west": -82.46900, "north": 35.34860, "east": -82.46780 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 36,
+    "trailersVisible": 240,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 78.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.34630,-82.46880,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "Roster lat/lng (35.318728,-82.460953, APPROXIMATE) landed in downtown Hendersonville - wrong. Web research (PR Newswire, Henderson County EDP, Yelp) gave 32 Smyth Ave (the historic Balfour Mills / Berkeley Mill site). Satellite confirmed a large nonwovens manufacturing plant ~3 km NW of downtown. Locked center 35.34630,-82.46880.",
+    "truckGate": "A dedicated K-C wayfinding sign on the public access road reads 'Kimberly-Clark - TRUCK ENTRANCE - 1/4 MILE NORTH - DOCKS 1-6'. The whole property is enclosed by a continuous chain-link perimeter fence; the truck entrance is a controlled, signed gate on the internal access road set well back from public roads.",
+    "guardShack": "No guard booth could be directly photographed - the truck entrance gate is behind a wood/grass buffer that Street View on public roads does not reach. Marked false (no booth seen); flagged uncertain.",
+    "remoteGs": "Gate present, no guard shack observed - set true (likely kiosk / badge check-in). Flagged uncertain since the gate itself was not directly imaged.",
+    "dockDoors": "Estimated ~36 across multiple building faces - dock banks with trailers backed in on the SW (Docks 1-6 area) and on the building's NE face. Banded 25-50; exact count uncertain due to building size.",
+    "dropArea": "Very large drop-yard operation - multiple gravel/paved lots with hundreds of parked trailers in organized rows (NE lot, south lot, SW lot). ~240 trailers visible, capacity ~320. Banded 50+.",
+    "dropYard": "Clear dedicated trailer-storage lots, distinct from active dock staging.",
+    "drivewayLong": "Long internal access road from the signed truck entrance to the docks - easily holds a 3+ truck queue.",
+    "fastLaneOpportunity": "Wide internal access roads and large open paved yard - ample room for an express/bypass lane.",
+    "railServed": "A rail spur runs into the property on the SW side - rail cars/boxcars observed parked adjacent to the trailer yard alongside the rail corridor.",
+    "shipRcvSeparate": "Dock activity is split between the SW building face ('Docks 1-6') and the building's NE face, suggesting separate shipping/receiving clusters - moderate confidence, flagged uncertain.",
+    "urbanRural": "Edge-of-town industrial site ~3 km NW of small-town Hendersonville, surrounded by woods, grassland and scattered residential - Rural per rubric.",
+    "buildingCount": "One very large interconnected manufacturing complex plus minor support structures - counted as 3 distinct buildings.",
+    "siteAreaAcres": "~78 acres for the fenced property including the building, drop yards, rail siding, parking and grass buffer."
+  },
+  "method": "deep-audit"
+}

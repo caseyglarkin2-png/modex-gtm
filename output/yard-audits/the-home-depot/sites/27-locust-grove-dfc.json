@@ -1,0 +1,47 @@
+{
+  "name": "Home Depot DFC - Locust Grove GA",
+  "type": "Direct Fulfillment Center",
+  "coords": { "lat": 33.37055, "lng": -84.18450 },
+  "geofences": {
+    "perimeter": { "south": 33.36720, "west": -84.19030, "north": 33.37430, "east": -84.17880 },
+    "truckGate": { "south": 33.37300, "west": -84.18180, "north": 33.37390, "east": -84.18060 },
+    "dropYards": [
+      { "south": 33.37230, "west": -84.18950, "north": 33.37430, "east": -84.18000 }
+    ],
+    "dockAprons": [
+      { "south": 33.37060, "west": -84.18960, "north": 33.37260, "east": -84.17900 },
+      { "south": 33.36740, "west": -84.18960, "north": 33.36880, "east": -84.18000 }
+    ],
+    "staging": { "south": 33.37230, "west": -84.18250, "north": 33.37320, "east": -84.18000 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 160, "trailersVisible": 260, "trailerParkingCapacity": 320,
+    "truckGateCount": 2, "buildingCount": 2, "siteAreaAcres": 105.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.37055,-84.18450,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "buildingCount"],
+  "fieldNotes": {
+    "truckGate": "Controlled entrances off the perimeter road into a fenced truck court; the campus is fully enclosed with truck circulation wrapping the buildings.",
+    "guardShack": "No staffed booth positively resolved at the entry in current imagery; classified as remote kiosk/app check-in. Lower-confidence call.",
+    "multipleFacilities": "Large DFC campus — two large distribution buildings (the 2016 DFC plus an adjacent later building) share trailer yards in the Gardner / Locust Grove logistics corridor.",
+    "dockDoors": "Dock banks on multiple building faces; well above 50 doors total across the campus.",
+    "dropArea": "Very large trailer-storage fields on the north side and a long apron south; 250+ trailers visible, ample dedicated drop yard.",
+    "shipRcvSeparate": "Distinct dock clusters on opposing faces of the main building.",
+    "urbanRural": "Locust Grove / Henry County logistics corridor — edge-of-town industrial amid woods and farmland; Rural per rubric.",
+    "fastLaneOpportunity": "Wide gate aprons and generous internal paved width support an express bypass."
+  },
+  "method": "deep-audit"
+}

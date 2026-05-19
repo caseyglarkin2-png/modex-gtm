@@ -1,0 +1,66 @@
+{
+  "name": "Coca-Cola Consolidated - Whitestown Distribution & Warehouse, IN",
+  "type": "Distribution Center / Automated Warehouse",
+  "coords": { "lat": 39.95200, "lng": -86.37200 },
+  "geofences": {
+    "perimeter": { "south": 39.94920, "west": -86.37280, "north": 39.95400, "east": -86.37050 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 39.95000, "west": -86.37280, "north": 39.95350, "east": -86.37230 }
+    ],
+    "dockAprons": [
+      { "south": 39.95000, "west": -86.37250, "north": 39.95350, "east": -86.37200 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 25,
+    "trailerParkingCapacity": 50,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 17.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.952,-86.372,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "multipleFacilities",
+    "scale", "dropYard", "multiStep", "dockDoorCount", "trailersVisible",
+    "trailerParkingCapacity", "siteAreaAcres", "buildingCount"
+  ],
+  "fieldNotes": {
+    "RESOLUTION_WARNING": "EXACT BUILDING NOT POSITIVELY CONFIRMED. The roster lat/lng (39.966379,-86.381749) are wrong - they land on a large multi-thousand-car surface parking lot / auto-auction-type campus, not a beverage distribution center. The real facility, per web research, is Coca-Cola Consolidated's $60M, 400,000 sq ft automated distribution & warehouse facility (opened April 19, 2021; 26,000 sq ft office; separate 15,000 sq ft Red Classic fleet shop; 450 employees) at 3690 S 500 E, Whitestown IN 46075, in Fishback Creek Business Park (north side of Albert S. White Blvd, between CR 450E and CR 575E, east of I-65 exit 133).",
+    "identification": "Fishback Creek Business Park contains many near-identical large spec warehouses built 2020-2024. Google Street View in the park is from 2019 (pre-construction of the Coca-Cola building) and shows only farmland, so road-level signage could not be used to disambiguate. No aerial/exterior photo with Coca-Cola branding was findable. The coords given (39.95200,-86.37200) are a BEST-ESTIMATE candidate building - a large warehouse with active trailer staging and a west-face dock row in the park - but this is NOT confirmed to be the Coca-Cola building.",
+    "classification": "All classification fields are best-effort estimates from overhead imagery of the candidate building and should be treated as LOW confidence. The candidate showed an open driveway with no visible barrier gate or guard booth (truckGate/guardShack false), a west-face dock row, and trailer parking - but because the building identity is unconfirmed, every field is listed uncertain.",
+    "recommendation": "Flag idx 9 for human review. Confirm the exact building via Boone County GIS parcel lookup for 3690 S 500 E, or current (2024+) Street View / aerial imagery showing Coca-Cola or Red Classic branding."
+  },
+  "method": "deep-audit"
+}

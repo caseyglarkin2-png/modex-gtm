@@ -1,0 +1,66 @@
+{
+  "name": "Hormel Suffolk Plant - Suffolk VA",
+  "type": "Production Facility",
+  "coords": { "lat": 36.72320, "lng": -76.58270 },
+  "geofences": {
+    "perimeter": { "south": 36.71980, "west": -76.58530, "north": 36.72530, "east": -76.57990 },
+    "truckGate": { "south": 36.72385, "west": -76.58325, "north": 36.72425, "east": -76.58280 },
+    "dropYards": [
+      { "south": 36.72280, "west": -76.58330, "north": 36.72400, "east": -76.58230 },
+      { "south": 36.72020, "west": -76.58500, "north": 36.72120, "east": -76.58400 }
+    ],
+    "dockAprons": [
+      { "south": 36.72290, "west": -76.58320, "north": 36.72400, "east": -76.58250 },
+      { "south": 36.72290, "west": -76.58250, "north": 36.72400, "east": -76.58170 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 38,
+    "trailersVisible": 24,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 32.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.72320,-76.58270,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "Roster lat/lng (36.723019,-76.619984) landed in a residential subdivision ~3.5 km west of the real plant. Corrected via EPA FRS registry 110001135762 and the 245 Culloden St address to the historic Planters/Mr. Peanut factory complex in downtown Suffolk; locked center 36.72320,-76.58270.",
+    "truckGate": "Truck yard is fully enclosed by chain-link fence with privacy slats (StreetView 2022-2023). A chain-link gate spans the truck drive at the north end of the internal yard. No barrier arm but a controlled fenced gate = truckGate true.",
+    "guardShack": "No guard booth visible at the truck gate in satellite or StreetView. The blue-roofed pavilion on Culloden St is the office/visitor entrance (Mr. Peanut statue), not a truck checkpoint.",
+    "remoteGs": "Gated truck entry with no guard shack -> remote check-in (kiosk/call-box) implied.",
+    "dockDoors": "Counted ~38 dock doors across the two building faces lining the internal drive yard plus the SW dock apron; banded 25-50.",
+    "dropArea": "10-25 leased XTRA trailers parked in the internal yard and SW lot without tractors.",
+    "urbanRural": "Old urban factory in downtown Suffolk VA, surrounded on all sides by dense residential streets; classified Urban.",
+    "drivewayLong": "Internal drive yard between buildings is long enough to stack 3+ trucks before docks.",
+    "multipleFacilities": "Single connected industrial complex (4 attached/adjacent buildings); treated as one facility, not a multi-campus -> multipleFacilities false."
+  },
+  "method": "deep-audit"
+}

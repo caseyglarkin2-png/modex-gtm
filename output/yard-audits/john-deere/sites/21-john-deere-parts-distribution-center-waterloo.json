@@ -1,0 +1,58 @@
+{
+  "name": "John Deere Parts Distribution Center - Waterloo IA",
+  "type": "Parts Distribution Center",
+  "coords": { "lat": 42.50990, "lng": -92.28540 },
+  "geofences": {
+    "perimeter": { "south": 42.50770, "west": -92.28720, "north": 42.51290, "east": -92.28320 },
+    "truckGate": { "south": 42.51190, "west": -92.28680, "north": 42.51250, "east": -92.28610 },
+    "dropYards": [
+      { "south": 42.50790, "west": -92.28430, "north": 42.51170, "east": -92.28330 }
+    ],
+    "dockAprons": [
+      { "south": 42.50800, "west": -92.28480, "north": 42.51140, "east": -92.28430 },
+      { "south": 42.51150, "west": -92.28460, "north": 42.51230, "east": -92.28400 }
+    ],
+    "staging": { "south": 42.51190, "west": -92.28470, "north": 42.51280, "east": -92.28370 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40, "trailersVisible": 65, "trailerParkingCapacity": 90,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 45.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.50990,-92.28540,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors", "connectivityIssue"],
+  "fieldNotes": {
+    "site": "Confirmed John Deere Parts Distribution Center at 2280 Northeast Dr, Waterloo IA, NE of the city in an edge-of-town industrial area. Panjiva buyer report and Waze list this address; Ryder Integrated Logistics operates 3PL logistics on site (typical for a Deere parts DC). A blue 'JOHN DEERE' monument sign at the entrance was visible in Street View, positively identifying the property.",
+    "buildings": "Two buildings on one campus: a large gray-roofed distribution warehouse running N-S (the main DC) and a separate blue-roofed building to its north (offices / secondary warehouse). multipleFacilities = true.",
+    "truckGate": "FALSE. The single truck entrance off Northeast Dr is a wide open driveway apron with generous radii. Street View from 2021-06 (inside, looking N and S) and 2025-03 (from the public road looking S into the entrance) both show NO barrier arm, NO sliding/swing gate, and NO guard booth - only a JD monument sign on the grass. Uncontrolled open entrance.",
+    "guardShack": "FALSE. No staffed booth at or near the entrance in any Street View heading. The only small structure is the JD sign monument.",
+    "remoteGs": "FALSE. remoteGs requires a truck gate to exist; there is no gate, so false.",
+    "postGateStaging": "TRUE. A large paved/graded apron sits between the entrance and the dock face / drop yard, plus a gravel staging area NE of the blue building - ample room for trucks to hold inside the property before docks.",
+    "drivewayLong": "TRUE. The entrance driveway runs a long distance (several hundred feet) from Northeast Dr south along the west side before reaching the buildings and yard - easily holds 3+ trucks.",
+    "fastLaneOpportunity": "TRUE. The entrance is a very wide unmarked apron with no gate hardware; abundant paved width to add an express / bypass lane if a gate were ever installed.",
+    "dockDoors": "25-50 band, MEDIUM confidence. The gray DC building's east face has dock doors with trailers backed in along most of its ~700ft+ length; the blue building has a smaller dock bank on its SE corner. Overhead count of backed-in trailers and door rhythm supports ~40 doors; the true total for a parts DC of this size could reach 50+. Flagged uncertain.",
+    "dropArea": "50+. A large dedicated drop yard runs along the entire east side of the gray building with multiple rows of parked trailers - clearly 50+ stalls of unhitched trailer storage. dropYard = true.",
+    "trailersVisible": "~65 trailers counted across the drop yard and dock face in the captured z18-z20 imagery; approximate.",
+    "trailerParkingCapacity": "~90, estimated from the marked-row drop-yard footprint east of the building.",
+    "shipRcvSeparate": "FALSE. All loading docks are on the east building face (single-sided); no second dock bank on a different face for separate ship vs receive.",
+    "entryExitTogether": "TRUE. One combined entrance/exit driveway off Northeast Dr; no separate in-gate/out-gate.",
+    "urbanRural": "Rural. The site sits in an edge-of-town industrial pocket NE of Waterloo, ringed by active farmland - not dense metro fabric.",
+    "connectivityIssue": "FALSE (medium confidence). Edge-of-town location with a neighboring industrial campus and nearby Waterloo development; cellular coverage is likely adequate. Flagged uncertain.",
+    "railServed": "FALSE. No rail spur runs into the property; access is highway/road only.",
+    "siteAreaAcres": "~45 acres, derived from the perimeter box (~565 m N-S x ~320 m E-W of used property). Estimate.",
+    "scale": "FALSE. No truck scale / weigh pad visible in the truck path."
+  },
+  "method": "deep-audit"
+}

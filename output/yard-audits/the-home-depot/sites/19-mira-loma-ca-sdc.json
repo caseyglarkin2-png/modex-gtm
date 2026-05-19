@@ -1,0 +1,67 @@
+{
+  "name": "Home Depot SDC - Mira Loma CA",
+  "type": "Stocking Distribution Center",
+  "coords": { "lat": 34.02900, "lng": -117.53575 },
+  "geofences": {
+    "perimeter": { "south": 34.02630, "west": -117.54180, "north": 34.03160, "east": -117.53000 },
+    "truckGate": { "south": 34.02740, "west": -117.53270, "north": 34.02800, "east": -117.53180 },
+    "dropYards": [
+      { "south": 34.02680, "west": -117.54100, "north": 34.02810, "east": -117.53100 },
+      { "south": 34.03020, "west": -117.54100, "north": 34.03150, "east": -117.53100 }
+    ],
+    "dockAprons": [
+      { "south": 34.02680, "west": -117.54100, "north": 34.02790, "east": -117.53080 },
+      { "south": 34.03010, "west": -117.54100, "north": 34.03130, "east": -117.53080 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 360,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 420,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 158.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.02900,-117.53575,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "truckGateCount"],
+  "fieldNotes": {
+    "truckGate": "Very large fenced SDC truck yards on both long faces; striped checkpoint pinch-point lane markings observed at the SE corner where the access road meets the truck yard — a controlled entrance.",
+    "guardShack": "No standalone guard booth positively resolved on satellite imagery; the dock yards are open paved aprons inside the property fence. HD's practice at large DCs likely includes a staffed gate, but imagery could not confirm a booth — call flagged as uncertain.",
+    "remoteGs": "Set true on the basis truckGate is true and no booth was confirmed; flagged as uncertain.",
+    "shipRcvSeparate": "Dock doors run along both N and S long faces of the building (cross-dock SDC).",
+    "multipleFacilities": "Single physical building, but it houses five HD DC operations (DCs #5556-5559, #5645) under one roof — set false because it is one building cluster, not a campus of separate buildings.",
+    "fastLaneOpportunity": "Very wide paved truck yards leave ample room for express/bypass lanes.",
+    "dropYard": "Hundreds of trailers parked along both dock-yard faces; dedicated trailer storage rows.",
+    "urbanRural": "Located in the Mira Loma / Jurupa Valley industrial cluster of the Inland Empire — the densest warehouse fabric in the US; Urban.",
+    "truckGateCount": "Estimated 2 truck entrances (one per long-face yard); not all positively confirmed.",
+    "dockDoorCount": "~360 doors estimated across both faces of this ~700m-long building; approximate."
+  },
+  "method": "deep-audit"
+}

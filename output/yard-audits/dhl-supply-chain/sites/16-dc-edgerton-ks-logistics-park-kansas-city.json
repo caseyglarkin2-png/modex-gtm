@@ -1,0 +1,55 @@
+{
+  "name": "DHL Supply Chain - DC - Edgerton KS (Logistics Park Kansas City)",
+  "type": "Distribution Center (intermodal logistics park)",
+  "coords": { "lat": 38.78275, "lng": -94.9581 },
+  "geofences": {
+    "perimeter": { "south": 38.7819, "west": -94.96015, "north": 38.78385, "east": -94.95625 },
+    "truckGate": { "south": 38.78175, "west": -94.95995, "north": 38.78215, "east": -94.95935 },
+    "dropYards": [
+      { "south": 38.78305, "west": -94.95985, "north": 38.78385, "east": -94.95635 }
+    ],
+    "dockAprons": [
+      { "south": 38.78300, "west": -94.95985, "north": 38.78340, "east": -94.95635 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 42,
+    "trailersVisible": 38,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 18.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.78275,-94.9581,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dropArea", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "DHL Supply Chain operates this single-tenant DC at 32190 W 191st St, Edgerton KS 66021 within Logistics Park Kansas City (LPKC). Roster lng was ~1.1km too far west (landed on the BNSF intermodal yard); corrected via web search + Street View pano confirming the building.",
+    "customer": "Building bears prominent 'HERSHEY' signage on the office front (confirmed in two Street View captures, Aug 2024). This is a DHL-operated dedicated-customer DC for The Hershey Company — consistent with DHL Supply Chain's contract-logistics model and with directory listings ('DHL Supply Chain - Edgerton, KS', ph 913-856-2414).",
+    "truckGate": "No barrier arm, sliding gate, or checkpoint at either driveway entrance on W 191st St. Both the east and west driveways are open paved drives with only a small address monument sign. Open spec-building access typical of LPKC.",
+    "guardShack": "No guard booth at either entrance — Street View confirms open driveways with no staffed structure.",
+    "remoteGs": "false because there is no truck gate at all (open access).",
+    "entryExitSeparate": "Two separate driveways off W 191st St (east end and west end of the building) both lead to the north truck court; trucks can enter one and exit the other. truckGateCount=2.",
+    "dockDoors": "All loading docks on the north face. Counted ~38-45 dock positions with trailers backed in at z19; banded 25-50.",
+    "dropArea": "A marked trailer-parking lot sits at the NW corner / north court holding drop trailers; estimated 10-25 stalls. Low confidence on exact count — adjacent large trailer lot to the NW belongs to a separate parcel and was excluded.",
+    "fastLaneOpportunity": "Wide open driveway aprons and broad north truck court provide ample paved width to add an express/bypass lane.",
+    "urbanRural": "LPKC sits in rural Johnson County farmland on the SW edge of the KC metro; the building is bordered by open cropland to the south. Rural.",
+    "backupSensitive": "W 191st St is a low-traffic industrial-park road with deep open driveways; a truck queue would not spill onto a public artery.",
+    "postGateStaging": "Broad paved north truck court provides interior holding/queue space ahead of the docks.",
+    "method": "deep-audit"
+  },
+  "method": "deep-audit"
+}

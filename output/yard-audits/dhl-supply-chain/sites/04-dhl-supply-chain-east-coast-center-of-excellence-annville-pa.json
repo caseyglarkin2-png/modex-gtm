@@ -1,0 +1,54 @@
+{
+  "name": "DHL Supply Chain - East Coast Center of Excellence - Annville PA",
+  "type": "Life Sciences & Healthcare Distribution Center (Foreign Trade Zone)",
+  "coords": { "lat": 40.318500, "lng": -76.535800 },
+  "geofences": {
+    "perimeter": { "south": 40.31530, "west": -76.54120, "north": 40.32080, "east": -76.53050 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 40.31560, "west": -76.53850, "north": 40.31720, "east": -76.53250 }
+    ],
+    "dockAprons": [
+      { "south": 40.31700, "west": -76.53880, "north": 40.31760, "east": -76.53290 },
+      { "south": 40.31920, "west": -76.53880, "north": 40.31980, "east": -76.53290 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 100,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 230,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 70.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.318500,-76.535800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "NONE",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging", "entryExitTogether", "entryLanes", "exitLanes", "fastLaneOpportunity", "dropArea", "trailersVisible", "dropYard"],
+  "fieldNotes": {
+    "_general": "Brand-new facility — DHL East Coast Center of Excellence, 700 Killinger Rd, Clear Springs Logistics Park, Annville PA. 1,000,000 sq ft, opened/opening 2026. Available satellite imagery was captured DURING construction: the building shell is complete but the surrounding truck yard and trailer-stall lot were still graded dirt (unpaved), and no Street View coverage exists. Gate/guard/yard finishing cannot be confirmed from imagery.",
+    "truckGate": "INFERRED. Not visible in construction-stage imagery. A new FDA/GMP-compliant pharma DC operating as a Foreign Trade Zone is, by industry norm, fully fenced and gated for customs/security control. Marked true on that basis but flagged uncertain.",
+    "guardShack": "INFERRED false / remoteGs INFERRED true. No booth visible; modern DCs of this type typically use kiosk/app check-in. Low confidence.",
+    "dockDoors": "Per DHL press release: 100 dock doors. Building is a cross-dock with door banks on both the north and south long faces (visible in z18 imagery). Band 50+.",
+    "dropArea": "Press release cites 230 trailer parking stalls; in the available imagery the trailer lot was unpaved and empty (0 trailers visible). dropYard true (planned dedicated trailer lot), dropArea band NONE reflects 0 trailers actually visible in imagery.",
+    "shipRcvSeparate": "Cross-dock building, dock banks on two opposite long faces.",
+    "multipleFacilities": "Clear Springs Logistics Park is approved for three warehouses (~3M sq ft total); a second large building is under construction immediately NW.",
+    "fastLaneOpportunity": "Large undeveloped/paved-to-be yard gives ample room for express lanes.",
+    "urbanRural": "South Annville, Lebanon County PA — small-town / farmland edge setting = Rural.",
+    "trailerParkingCapacity": "230 stalls per DHL press release (planned).",
+    "siteAreaAcres": "~70 acres estimated for the 1M sq ft building parcel within the park."
+  },
+  "method": "deep-audit"
+}

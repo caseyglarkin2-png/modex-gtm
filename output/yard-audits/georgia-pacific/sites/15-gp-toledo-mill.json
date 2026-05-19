@@ -1,0 +1,60 @@
+{
+  "name": "GP Toledo Mill - Toledo OR",
+  "type": "Containerboard/Linerboard Mill",
+  "coords": { "lat": 44.6145, "lng": -123.9370 },
+  "geofences": {
+    "perimeter": { "south": 44.6090, "west": -123.9520, "north": 44.6215, "east": -123.9320 },
+    "truckGate": { "south": 44.6160, "west": -123.9382, "north": 44.6172, "east": -123.9362 },
+    "dropYards": [
+      { "south": 44.6155, "west": -123.9375, "north": 44.6195, "east": -123.9335 },
+      { "south": 44.6135, "west": -123.9355, "north": 44.6160, "east": -123.9335 }
+    ],
+    "dockAprons": [
+      { "south": 44.6115, "west": -123.9385, "north": 44.6140, "east": -123.9360 }
+    ],
+    "staging": { "south": 44.6150, "west": -123.9372, "north": 44.6170, "east": -123.9345 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 18,
+    "siteAreaAcres": 230.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.6145,-123.9370,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "scale", "dockDoors", "entryLanes", "exitLanes", "fastLaneOpportunity", "multiStep"],
+  "fieldNotes": {
+    "location": "Roster geocode (44.60417,-123.935516, address 1 Butler Bridge Rd) sat in the Yaquina River / treatment-pond area south of the actual mill - imprecise. Mill relocated via satellite and web research to the GP Toledo Mill complex on a peninsula on the east bank of the Yaquina River, ~44.6145,-123.9370. Confirmed address: 1400 SE Butler Bridge Rd, Toledo, OR 97391.",
+    "facility": "Georgia-Pacific Toledo Mill - an integrated kraft pulp and linerboard (containerboard) mill operating since 1957; makes linerboard for corrugated boxes from virgin wood chips and recycled fiber. GP also operates the Juno recycling technology facility on-site. Subject of the Infor Phase 2 dossier item. Compact, water-bound campus: paper-machine and process buildings, chemical recovery, large chip pile, woodyard with conveyors, finished-goods warehouses along the riverfront, trailer drop yards, rail yard, and a private Butler Bridge linking to west-bank facilities (additional warehouses / log storage).",
+    "truckGate": "TRUE - controlled mill entrance. The site is fully enclosed by perimeter chain-link/mesh fencing (visible in Street View, 2024-07, all along SE Butler Bridge Rd) with a rail spur separating the public road from the yard. All truck traffic funnels through one controlled entrance; a guarded/scaled checkpoint is universal for an integrated kraft pulp/linerboard mill receiving chip and recycled-fiber vans.",
+    "guardShack": "TRUE (medium confidence) - a small building cluster sits at the yard entrance area near 44.6165,-123.9372, consistent with a guard/scale house. Not pinpointed at high resolution - flagged. (Note: a separate white shed on the road shoulder with a 'City of Toledo' sign is a city utility building, not the mill gate.)",
+    "preGateStaging": "Paved staging/parking areas along SE Butler Bridge Rd hold queued semis (Street View shows trucks staged there).",
+    "postGateStaging": "Large paved yard inside the gate before the docks; trailers staged on the entrance loop road.",
+    "drivewayLong": "Internal roads (the curved entrance loop plus the access road past the chip pile) easily hold a queue of 3+ trucks.",
+    "fastLaneOpportunity": "Site is constrained between the river and the rail line; limited unused paved width for a dedicated bypass lane - left true at low confidence given the wide entrance loop, flagged.",
+    "shipRcvSeparate": "Receiving (chip/recycled-fiber vans to the woodyard, rail receiving) is physically separate from finished-linerboard shipping at the riverfront warehouses - distinct clusters.",
+    "dockDoors": "Finished-goods warehouses along the SW riverfront show dock-door banks; counted band 10-25 (~14 estimated), medium confidence (roof shadow / resolution).",
+    "dropArea": "Extensive trailer drop yards: rows of dozens of parked trailers along the curved entrance loop and the eastern yard - well over 50 trailers visible, band 50+.",
+    "multipleFacilities": "Campus: pulp/paper process core, chemical recovery, chip pile and woodyard, multiple riverfront warehouses, rail yard, the Juno recycling facility, plus west-bank facilities across the private Butler Bridge - 18+ distinct structures.",
+    "railServed": "TRUE - rail spurs run directly along and into the property; rail cars (boxcars) visible parked at the yard frontage in both satellite and Street View.",
+    "scale": "TRUE (medium confidence) - truck scales for chip/fiber van weigh-in are operationally required at an integrated kraft mill; a scale-house-sized structure sits in the truck path near the gate. Not resolved precisely - flagged.",
+    "multiStep": "Possible gate-then-scale sequence but not clearly confirmed - left false, flagged.",
+    "urbanRural": "Toledo is a small Oregon town (~3,500 people) on the central Oregon coast; the mill is on a peninsula at the edge of town surrounded by the Yaquina River and forest. Rural.",
+    "siteAreaAcres": "~230 acres for the full fenced industrial property including east-bank mill core, warehouses, woodyard, drop yards and west-bank facilities; honest estimate from the perimeter box."
+  },
+  "method": "deep-audit"
+}

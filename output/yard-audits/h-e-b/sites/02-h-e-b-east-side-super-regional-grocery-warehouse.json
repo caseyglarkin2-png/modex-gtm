@@ -1,0 +1,57 @@
+{
+  "name": "H-E-B East Side Super Regional Grocery Warehouse - San Antonio TX",
+  "type": "Super Regional Grocery Distribution Center",
+  "coords": { "lat": 29.406300, "lng": -98.367000 },
+  "geofences": {
+    "perimeter": { "south": 29.400900, "west": -98.372200, "north": 29.409200, "east": -98.362400 },
+    "truckGate": { "south": 29.401000, "west": -98.364800, "north": 29.401600, "east": -98.364000 },
+    "dropYards": [
+      { "south": 29.404400, "west": -98.371800, "north": 29.405400, "east": -98.367000 },
+      { "south": 29.408800, "west": -98.370200, "north": 29.409200, "east": -98.364800 },
+      { "south": 29.401700, "west": -98.365400, "north": 29.402400, "east": -98.363900 }
+    ],
+    "dockAprons": [
+      { "south": 29.405300, "west": -98.371800, "north": 29.405900, "east": -98.367000 },
+      { "south": 29.408200, "west": -98.370200, "north": 29.408800, "east": -98.364800 }
+    ],
+    "staging": { "south": 29.401700, "west": -98.365400, "north": 29.402600, "east": -98.363800 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 200,
+    "trailersVisible": 170,
+    "trailerParkingCapacity": 280,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 130.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.406300,-98.367000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "scale", "multiStep"],
+  "fieldNotes": {
+    "location": "Roster coordinates (29.365943, -98.360808) were ~5.5 km off (GEOMETRIC_CENTER of a city polygon over farmland). Web search resolved the facility to 2045 S Foster Rd, San Antonio TX 78222; the 1.6M sq ft warehouse sits at ~29.4063, -98.3670 along I-10 / Foster Rd on H-E-B's 871-acre East Side campus.",
+    "truckGate": "Dedicated truck entrance off Foster Rd, separate from the 'Partner/Visitor Entrance (No Trucks)' roundabout at the NE. A gatehouse building (red roof) with an attached smaller white-roofed structure sits beside the truck lanes; sliding perimeter gate visible on the fence line at z21. Clear controlled, fenced entrance.",
+    "guardShack": "The gatehouse complex at the truck entrance includes a small booth-footprint structure beside the lanes — a staffed gatehouse. guardShack true.",
+    "drivewayLong": "Long landscaped truck approach road (~600 m) runs from the Foster Rd gatehouse to the warehouse; ample stacking depth for many trucks.",
+    "postGateStaging": "Large paved truck staging lot with parked trailers immediately inside the gate, before the docks.",
+    "dockDoors": "Purpose-built cross-dock; roster/news cite ~200 dock doors. Dock banks with trailers backed in visible on the north and south building faces.",
+    "shipRcvSeparate": "Dock banks on two distinct building faces (north and south of the L-shaped structure) — consistent with separate shipping/receiving operations.",
+    "dropArea": "Extensive drop yards with parked trailers along the warehouse faces and in the gate staging lot; well over 50.",
+    "fastLaneOpportunity": "Wide truck gate apron and long multi-lane approach road — clear room for a dedicated express/bypass lane.",
+    "urbanRural": "Site is on undeveloped land at the far East Side edge of San Antonio, surrounded by open fields and woods; functionally rural/edge-of-metro despite the city address.",
+    "railServed": "No rail spur into the property visible in current imagery.",
+    "siteAreaAcres": "Operational fenced footprint (warehouse + yards + gate); the full H-E-B campus parcel is 871 acres but most is undeveloped. Estimate from perimeter box."
+  },
+  "method": "deep-audit"
+}

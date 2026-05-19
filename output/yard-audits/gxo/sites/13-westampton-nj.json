@@ -1,0 +1,54 @@
+{
+  "name": "GXO IKEA Distribution Center - Westampton NJ",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.01400, "lng": -74.85340 },
+  "geofences": {
+    "perimeter": { "south": 40.01080, "west": -74.85620, "north": 40.01700, "east": -74.85070 },
+    "truckGate": { "south": 40.01230, "west": -74.85560, "north": 40.01300, "east": -74.85460 },
+    "dropYards": [
+      { "south": 40.01100, "west": -74.85600, "north": 40.01680, "east": -74.85440 },
+      { "south": 40.01100, "west": -74.85220, "north": 40.01680, "east": -74.85090 }
+    ],
+    "dockAprons": [
+      { "south": 40.01100, "west": -74.85580, "north": 40.01680, "east": -74.85500 },
+      { "south": 40.01100, "west": -74.85320, "north": 40.01680, "east": -74.85230 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130,
+    "trailersVisible": 280,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 67.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.01400,-74.85340,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "The building is ringed by an open perimeter loop road fed from the surrounding Westampton industrial-park street network. No barrier arm, sliding gate, or checkpoint pinch-point appears at any property-line connection in z18/z19 satellite or Street View; no perimeter fence. Classed false.",
+    "guardShack": "No 1-3-vehicle booth at any entrance in z19 satellite or Street View along the perimeter road. Site is open.",
+    "remoteGs": "No gate, so no remote check-in inference.",
+    "dockDoors": "Large IKEA DC (~1.09M SF) with continuous dock-door banks running the full length of both the east and west long faces; counted ~130 doors total - solidly in the 50+ band. Exact count approximate; roof solar array does not obscure the dock faces.",
+    "shipRcvSeparate": "Dock doors run from two physically separate banks on opposite (east and west) building faces, so shipping and receiving operate from separate clusters.",
+    "dropArea": "Hundreds of IKEA trailers parked along both faces, including dedicated drop rows separate from active dock aprons - 50+ band.",
+    "drivewayLong": "Wide perimeter dock courts on both faces hold queues well over 3 trucks.",
+    "urbanRural": "Located in a dense industrial-park / suburban fabric in Westampton NJ (Burlington County, Philadelphia metro); a residential subdivision abuts the north side - Urban.",
+    "railServed": "No rail spur enters the property; the building is truck-served only.",
+    "fastLaneOpportunity": "Wide perimeter road and large paved dock courts give ample room to add an express/bypass lane."
+  },
+  "method": "deep-audit"
+}

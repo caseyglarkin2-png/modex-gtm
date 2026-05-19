@@ -1,0 +1,54 @@
+{
+  "name": "Logistics Insight Corp - Stellantis Sequencing Plant - Detroit MI (Georgia St)",
+  "type": "Parts Sequencing / Sub-Assembly Plant",
+  "coords": { "lat": 42.391100, "lng": -83.031200 },
+  "geofences": {
+    "perimeter": { "south": 42.389700, "west": -83.035000, "north": 42.393500, "east": -83.028200 },
+    "truckGate": { "south": 42.390150, "west": -83.034400, "north": 42.390650, "east": -83.033700 },
+    "dropYards": [
+      { "south": 42.392100, "west": -83.035000, "north": 42.393500, "east": -83.032600 },
+      { "south": 42.389800, "west": -83.029400, "north": 42.390700, "east": -83.028200 }
+    ],
+    "dockAprons": [
+      { "south": 42.390250, "west": -83.034400, "north": 42.390750, "east": -83.028700 },
+      { "south": 42.391900, "west": -83.034200, "north": 42.392400, "east": -83.028800 }
+    ],
+    "staging": { "south": 42.390700, "west": -83.034400, "north": 42.391900, "east": -83.029000 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 150,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 2,
+    "buildingCount": 3,
+    "siteAreaAcres": 58.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.391100,-83.031200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "truckGate", "entryLanes", "exitLanes", "truckGateCount"],
+  "fieldNotes": {
+    "facility": "Large (~1,000,000 sq ft) Universal/LINC parts-sequencing & sub-assembly campus at 6836 Georgia St on Detroit's east side, sequencing/sub-assembling ~114 components for Jeep Grand Cherokees at the Stellantis Mack Avenue assembly plant. Crown Enterprises (Moroun-family) nearly doubled the building; Teamsters Local 299. NOTE: WARN-noticed for closure beginning Feb 2025 with ~677 layoffs (Stellantis reportedly moving the work to a lower-cost operator) — operational status uncertain as of 2026. Building positively identified via Crain's Detroit / MoparInsiders and 2023 Street View showing Universal/ULC-branded trailers behind a fenced yard.",
+    "truckGate": "Whole site is fully fenced — 2023 Street View along Georgia St and the SE/SW corners shows continuous chain-link perimeter fence with trailers parked behind it. Truck access through the fence is gated but no barrier arm resolves cleanly in imagery; classified as a controlled gate. Two probable gate openings (SW corner near the rail crossing and the north internal-road junction) -> truckGateCount estimated 2.",
+    "guardShack": "No staffed guard booth (1-3 vehicle footprint) resolvable at any gate. For a JIT auto-sequencing site access is most likely badge/kiosk controlled -> remoteGs true. Low confidence.",
+    "dockDoors": "Dense loading-dock banks on BOTH the north and south long faces of the main building (trailers backed in continuously) -> a true cross-dock sequencing layout, ~150+ doors total -> 50+ band.",
+    "shipRcvSeparate": "Inbound parts and outbound sequenced/sub-assembled modules run from physically separate north-face and south-face dock banks.",
+    "dropArea": "Multiple large trailer-parking yards across the campus (north/NW gravel lots full of parked trailers, plus an SE drop lot) -> 50+ band; dedicated drop yards.",
+    "multipleFacilities": "Campus is multi-parcel: the main ~1M sq ft sequencing building plus an older secondary building cluster to the west and several distinct satellite trailer-storage yards.",
+    "backupSensitive": "Tight urban site hemmed by public streets and an adjacent residential neighborhood on the south; a truck queue at a gate would quickly spill onto the public street with little stacking room.",
+    "railServed": "A rail line runs along the west edge of the campus with old/abandoned spurs but no live spur servicing the building -> railServed false.",
+    "siteAreaAcres": "~58 acres for the main fenced operation including the immediate trailer yards."
+  },
+  "method": "deep-audit"
+}

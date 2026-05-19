@@ -1,0 +1,47 @@
+{
+  "name": "Home Depot DFC - Luckey OH",
+  "type": "Direct Fulfillment Center",
+  "coords": { "lat": 41.48068, "lng": -83.46420 },
+  "geofences": {
+    "perimeter": { "south": 41.47720, "west": -83.47180, "north": 41.48430, "east": -83.45680 },
+    "truckGate": { "south": 41.47800, "west": -83.47120, "north": 41.47900, "east": -83.46980 },
+    "dropYards": [
+      { "south": 41.47930, "west": -83.47100, "north": 41.48280, "east": -83.46550 }
+    ],
+    "dockAprons": [
+      { "south": 41.48050, "west": -83.47080, "north": 41.48330, "east": -83.45720 },
+      { "south": 41.47760, "west": -83.47080, "north": 41.47980, "east": -83.45720 }
+    ],
+    "staging": { "south": 41.48180, "west": -83.46950, "north": 41.48340, "east": -83.46550 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 200, "trailersVisible": 180, "trailerParkingCapacity": 230,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 130.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.48068,-83.46420,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": true, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "Single access drive from Pemberville Rd runs through farmland to a controlled entrance at the building's SW; the truck court is ringed by perimeter fencing.",
+    "guardShack": "No staffed booth positively resolved at the entrance; classified as remote kiosk/app check-in. Lower-confidence call.",
+    "dockDoors": "Very long dock banks down both long faces with trailers backed in; 200+ doors total — well into the 50+ band.",
+    "dropArea": "Large trailer-storage field at the NW end plus apron staging on both faces; 50+ band; dedicated drop yard present.",
+    "shipRcvSeparate": "Distinct dock banks on the north and south long faces.",
+    "urbanRural": "Single massive DC isolated in open farmland near Luckey, surrounded by retention ponds — Rural.",
+    "connectivityIssue": "Isolated rural setting far from any town center; cellular coverage may be marginal. Medium-confidence inference.",
+    "fastLaneOpportunity": "Generous internal paved width and a wide approach drive support an express lane."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,60 @@
+{
+  "name": "Honda - Marysville Motorcycle Plant (MMP) - Marysville OH",
+  "type": "Motorcycle / Powersports Assembly Plant",
+  "coords": { "lat": 40.279000, "lng": -83.502500 },
+  "geofences": {
+    "perimeter": { "south": 40.27300, "west": -83.50900, "north": 40.28350, "east": -83.49650 },
+    "truckGate": { "south": 40.27420, "west": -83.50640, "north": 40.27500, "east": -83.50530 },
+    "dropYards": [
+      { "south": 40.27680, "west": -83.50320, "north": 40.28080, "east": -83.49680 },
+      { "south": 40.28000, "west": -83.50500, "north": 40.28200, "east": -83.50100 }
+    ],
+    "dockAprons": [
+      { "south": 40.27900, "west": -83.50480, "north": 40.28100, "east": -83.50320 },
+      { "south": 40.27680, "west": -83.50360, "north": 40.27820, "east": -83.50260 }
+    ],
+    "staging": { "south": 40.27950, "west": -83.50200, "north": 40.28100, "east": -83.49950 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 450,
+    "truckGateCount": 3,
+    "buildingCount": 1,
+    "siteAreaAcres": 130.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.279000,-83.502500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "entryLanes", "exitLanes", "buildingCount", "dockDoorCount", "multiStep"],
+  "fieldNotes": {
+    "siteIdentity": "The Marysville Motorcycle Plant (Honda's original 1979 US plant) ceased motorcycle production in June 2009 and was converted to vehicle suspension sub-assembly. It is NOT a separable standalone facility — it occupies the eastern wing of the contiguous Marysville Auto Plant (MAP) building footprint and shares the MAP truck/trailer/rail infrastructure. Coordinates and geofences were placed on that eastern wing and its associated east-side truck yard. The roster's idx-1 (MAP) and idx-12 (MMP) reference the same physical complex.",
+    "truckGate": "The MAP/MMP complex is a fully guarded, fenced auto-manufacturing campus. Honda Parkway entrances are signalized and controlled; satellite shows checkpoint/booth structures at the truck-yard access. Classified true with medium confidence — no Street View coverage exists inside the secured property to confirm a specific barrier arm.",
+    "guardShack": "Small booth-footprint structures visible at the truck-yard checkpoint on satellite, consistent with staffed guard booths standard at auto plants of this scale. Medium confidence (no on-the-ground SV inside the gate).",
+    "postGateStaging": "Extensive paved internal aprons and holding lanes between the gate and the dock banks / drop yard.",
+    "drivewayLong": "Long internal approach roads easily hold queues of 3+ trucks.",
+    "entryExitSeparate": "Multiple separate entrances around the complex perimeter (employee entrances on Honda Parkway, truck/rail access on the east) — distinct in and out points.",
+    "dockDoors": "Long dock-door banks with trailers backed in along multiple building faces of the eastern wing; 90+ doors estimated. Honest overhead estimate.",
+    "dropArea": "Massive marked trailer drop yard on the east side holding hundreds of trailers without tractors.",
+    "dropYard": "Dedicated multi-row trailer-storage yard east of the building, clearly separate from active dock staging.",
+    "railServed": "A rail spur runs along and into the east side of the complex serving the manufacturing operation.",
+    "multipleFacilities": "The MMP wing is one part of the larger contiguous Marysville complex (MAP + MMP + adjacent support buildings) — a multi-building campus.",
+    "fastLaneOpportunity": "Vast paved truck-yard width leaves ample room for express/bypass lanes.",
+    "buildingCount": "Counted as 1 for the MMP wing itself, though it is physically joined to the larger MAP complex.",
+    "multiStep": "An auto-plant truck yard of this size plausibly has a gate plus a separate yard-control checkpoint, but a clear second checkpoint stage was not confirmed in imagery — left flagged.",
+    "scale": "No truck scale identified.",
+    "urbanRural": "Rural — the complex sits in open farmland NW of Marysville, OH."
+  },
+  "method": "deep-audit"
+}

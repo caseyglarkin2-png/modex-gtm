@@ -1,0 +1,3262 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.628,
+              30.35
+            ],
+            [
+              -81.6195,
+              30.35
+            ],
+            [
+              -81.6195,
+              30.3588
+            ],
+            [
+              -81.628,
+              30.3588
+            ],
+            [
+              -81.628,
+              30.35
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Marine Terminal - Jacksonville FL",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 600,
+          "trailerParkingCapacity": 1400,
+          "truckGateCount": 1,
+          "buildingCount": 9,
+          "siteAreaAcres": 197,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6256,
+              30.35705
+            ],
+            [
+              -81.6247,
+              30.35705
+            ],
+            [
+              -81.6247,
+              30.3576
+            ],
+            [
+              -81.6256,
+              30.3576
+            ],
+            [
+              -81.6256,
+              30.35705
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Marine Terminal - Jacksonville FL",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6259,
+              30.3542
+            ],
+            [
+              -81.6229,
+              30.3542
+            ],
+            [
+              -81.6229,
+              30.3567
+            ],
+            [
+              -81.6259,
+              30.3567
+            ],
+            [
+              -81.6259,
+              30.3542
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Marine Terminal - Jacksonville FL",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6245,
+              30.351
+            ],
+            [
+              -81.6205,
+              30.351
+            ],
+            [
+              -81.6205,
+              30.354
+            ],
+            [
+              -81.6245,
+              30.354
+            ],
+            [
+              -81.6245,
+              30.351
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Marine Terminal - Jacksonville FL",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6228,
+              30.3555
+            ],
+            [
+              -81.62,
+              30.3555
+            ],
+            [
+              -81.62,
+              30.3582
+            ],
+            [
+              -81.6228,
+              30.3582
+            ],
+            [
+              -81.6228,
+              30.3555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Marine Terminal - Jacksonville FL",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6215,
+              30.3503
+            ],
+            [
+              -81.6202,
+              30.3503
+            ],
+            [
+              -81.6202,
+              30.3518
+            ],
+            [
+              -81.6215,
+              30.3518
+            ],
+            [
+              -81.6215,
+              30.3503
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Marine Terminal - Jacksonville FL",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6262,
+              30.3568
+            ],
+            [
+              -81.6254,
+              30.3568
+            ],
+            [
+              -81.6254,
+              30.3577
+            ],
+            [
+              -81.6262,
+              30.3577
+            ],
+            [
+              -81.6262,
+              30.3568
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Marine Terminal - Jacksonville FL",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6306,
+              30.3358
+            ],
+            [
+              -81.627,
+              30.3358
+            ],
+            [
+              -81.627,
+              30.3392
+            ],
+            [
+              -81.6306,
+              30.3392
+            ],
+            [
+              -81.6306,
+              30.3358
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Terminal Office #2 - Jacksonville FL",
+        "type": "Marine terminal / container yard",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 32,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6303,
+              30.3381
+            ],
+            [
+              -81.6297,
+              30.3381
+            ],
+            [
+              -81.6297,
+              30.3386
+            ],
+            [
+              -81.6303,
+              30.3386
+            ],
+            [
+              -81.6303,
+              30.3381
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Terminal Office #2 - Jacksonville FL",
+        "type": "Marine terminal / container yard",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6301,
+              30.3379
+            ],
+            [
+              -81.6272,
+              30.3379
+            ],
+            [
+              -81.6272,
+              30.3391
+            ],
+            [
+              -81.6301,
+              30.3391
+            ],
+            [
+              -81.6301,
+              30.3379
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Terminal Office #2 - Jacksonville FL",
+        "type": "Marine terminal / container yard",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6287,
+              30.3368
+            ],
+            [
+              -81.6278,
+              30.3368
+            ],
+            [
+              -81.6278,
+              30.3377
+            ],
+            [
+              -81.6287,
+              30.3377
+            ],
+            [
+              -81.6287,
+              30.3368
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Terminal Office #2 - Jacksonville FL",
+        "type": "Marine terminal / container yard",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.628,
+              30.354
+            ],
+            [
+              -81.621,
+              30.354
+            ],
+            [
+              -81.621,
+              30.359
+            ],
+            [
+              -81.628,
+              30.359
+            ],
+            [
+              -81.628,
+              30.354
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Terminal Office #3 - Jacksonville FL",
+        "type": "Marine terminal / container yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 350,
+          "trailerParkingCapacity": 900,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 93,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6261,
+              30.35655
+            ],
+            [
+              -81.625,
+              30.35655
+            ],
+            [
+              -81.625,
+              30.3576
+            ],
+            [
+              -81.6261,
+              30.3576
+            ],
+            [
+              -81.6261,
+              30.35655
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Terminal Office #3 - Jacksonville FL",
+        "type": "Marine terminal / container yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6259,
+              30.354
+            ],
+            [
+              -81.6222,
+              30.354
+            ],
+            [
+              -81.6222,
+              30.3567
+            ],
+            [
+              -81.6259,
+              30.3567
+            ],
+            [
+              -81.6259,
+              30.354
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Terminal Office #3 - Jacksonville FL",
+        "type": "Marine terminal / container yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6226,
+              30.3565
+            ],
+            [
+              -81.621,
+              30.3565
+            ],
+            [
+              -81.621,
+              30.3585
+            ],
+            [
+              -81.6226,
+              30.3585
+            ],
+            [
+              -81.6226,
+              30.3565
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Terminal Office #3 - Jacksonville FL",
+        "type": "Marine terminal / container yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6262,
+              30.3568
+            ],
+            [
+              -81.6254,
+              30.3568
+            ],
+            [
+              -81.6254,
+              30.3576
+            ],
+            [
+              -81.6262,
+              30.3576
+            ],
+            [
+              -81.6262,
+              30.3568
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Terminal Office #3 - Jacksonville FL",
+        "type": "Marine terminal / container yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6285,
+              30.3445
+            ],
+            [
+              -81.621,
+              30.3445
+            ],
+            [
+              -81.621,
+              30.3505
+            ],
+            [
+              -81.6285,
+              30.3505
+            ],
+            [
+              -81.6285,
+              30.3445
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Terminal Office #4 - Jacksonville FL",
+        "type": "Marine terminal / container yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 15,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 300,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 120,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6259,
+              30.348
+            ],
+            [
+              -81.625,
+              30.348
+            ],
+            [
+              -81.625,
+              30.3487
+            ],
+            [
+              -81.6259,
+              30.3487
+            ],
+            [
+              -81.6259,
+              30.348
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Terminal Office #4 - Jacksonville FL",
+        "type": "Marine terminal / container yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.628,
+              30.3455
+            ],
+            [
+              -81.6255,
+              30.3455
+            ],
+            [
+              -81.6255,
+              30.3495
+            ],
+            [
+              -81.628,
+              30.3495
+            ],
+            [
+              -81.628,
+              30.3455
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Terminal Office #4 - Jacksonville FL",
+        "type": "Marine terminal / container yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.625,
+              30.3465
+            ],
+            [
+              -81.6228,
+              30.3465
+            ],
+            [
+              -81.6228,
+              30.349
+            ],
+            [
+              -81.625,
+              30.349
+            ],
+            [
+              -81.625,
+              30.3465
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Terminal Office #4 - Jacksonville FL",
+        "type": "Marine terminal / container yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.624,
+              30.347
+            ],
+            [
+              -81.6215,
+              30.347
+            ],
+            [
+              -81.6215,
+              30.35
+            ],
+            [
+              -81.624,
+              30.35
+            ],
+            [
+              -81.624,
+              30.347
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Terminal Office #4 - Jacksonville FL",
+        "type": "Marine terminal / container yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6259,
+              30.3487
+            ],
+            [
+              -81.6249,
+              30.3487
+            ],
+            [
+              -81.6249,
+              30.3495
+            ],
+            [
+              -81.6259,
+              30.3495
+            ],
+            [
+              -81.6259,
+              30.3487
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley JAXPORT Terminal Office #4 - Jacksonville FL",
+        "type": "Marine terminal / container yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.1262,
+              26.0635
+            ],
+            [
+              -80.1215,
+              26.0635
+            ],
+            [
+              -80.1215,
+              26.07
+            ],
+            [
+              -80.1262,
+              26.07
+            ],
+            [
+              -80.1262,
+              26.0635
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Port Everglades Terminal - Fort Lauderdale FL",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 700,
+          "trailerParkingCapacity": 1500,
+          "truckGateCount": 1,
+          "buildingCount": 7,
+          "siteAreaAcres": 78,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.1246,
+              26.0649
+            ],
+            [
+              -80.1234,
+              26.0649
+            ],
+            [
+              -80.1234,
+              26.0662
+            ],
+            [
+              -80.1246,
+              26.0662
+            ],
+            [
+              -80.1246,
+              26.0649
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Port Everglades Terminal - Fort Lauderdale FL",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.1236,
+              26.0636
+            ],
+            [
+              -80.1216,
+              26.0636
+            ],
+            [
+              -80.1216,
+              26.0695
+            ],
+            [
+              -80.1236,
+              26.0695
+            ],
+            [
+              -80.1236,
+              26.0636
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Port Everglades Terminal - Fort Lauderdale FL",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.1261,
+              26.064
+            ],
+            [
+              -80.1247,
+              26.064
+            ],
+            [
+              -80.1247,
+              26.069
+            ],
+            [
+              -80.1261,
+              26.069
+            ],
+            [
+              -80.1261,
+              26.064
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Port Everglades Terminal - Fort Lauderdale FL",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.1239,
+              26.0664
+            ],
+            [
+              -80.1228,
+              26.0664
+            ],
+            [
+              -80.1228,
+              26.0672
+            ],
+            [
+              -80.1239,
+              26.0672
+            ],
+            [
+              -80.1239,
+              26.0664
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Port Everglades Terminal - Fort Lauderdale FL",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.1045,
+              18.45
+            ],
+            [
+              -66.096,
+              18.45
+            ],
+            [
+              -66.096,
+              18.4565
+            ],
+            [
+              -66.1045,
+              18.4565
+            ],
+            [
+              -66.1045,
+              18.45
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Isla Grande Terminal - San Juan PR",
+        "type": "Marine terminal / container port (LNG-fueled microgrid, ConRo)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 1,
+          "buildingCount": 9,
+          "siteAreaAcres": 160,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.1021,
+              18.4542
+            ],
+            [
+              -66.1013,
+              18.4542
+            ],
+            [
+              -66.1013,
+              18.4548
+            ],
+            [
+              -66.1021,
+              18.4548
+            ],
+            [
+              -66.1021,
+              18.4542
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Isla Grande Terminal - San Juan PR",
+        "type": "Marine terminal / container port (LNG-fueled microgrid, ConRo)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.1018,
+              18.4525
+            ],
+            [
+              -66.0965,
+              18.4525
+            ],
+            [
+              -66.0965,
+              18.4547
+            ],
+            [
+              -66.1018,
+              18.4547
+            ],
+            [
+              -66.1018,
+              18.4525
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Isla Grande Terminal - San Juan PR",
+        "type": "Marine terminal / container port (LNG-fueled microgrid, ConRo)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.1008,
+              18.4505
+            ],
+            [
+              -66.097,
+              18.4505
+            ],
+            [
+              -66.097,
+              18.453
+            ],
+            [
+              -66.1008,
+              18.453
+            ],
+            [
+              -66.1008,
+              18.4505
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Isla Grande Terminal - San Juan PR",
+        "type": "Marine terminal / container port (LNG-fueled microgrid, ConRo)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.1042,
+              18.4538
+            ],
+            [
+              -66.1025,
+              18.4538
+            ],
+            [
+              -66.1025,
+              18.4552
+            ],
+            [
+              -66.1042,
+              18.4552
+            ],
+            [
+              -66.1042,
+              18.4538
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Isla Grande Terminal - San Juan PR",
+        "type": "Marine terminal / container port (LNG-fueled microgrid, ConRo)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -66.1025,
+              18.4547
+            ],
+            [
+              -66.0985,
+              18.4547
+            ],
+            [
+              -66.0985,
+              18.4553
+            ],
+            [
+              -66.1025,
+              18.4553
+            ],
+            [
+              -66.1025,
+              18.4547
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Isla Grande Terminal - San Juan PR",
+        "type": "Marine terminal / container port (LNG-fueled microgrid, ConRo)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.3415,
+              39.8495
+            ],
+            [
+              -75.3345,
+              39.8495
+            ],
+            [
+              -75.3345,
+              39.856
+            ],
+            [
+              -75.3415,
+              39.856
+            ],
+            [
+              -75.3415,
+              39.8495
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Penn Terminals - Eddystone PA",
+        "type": "Marine terminal with dry + refrigerated warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 260,
+          "trailerParkingCapacity": 500,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 107,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.3392,
+              39.8549
+            ],
+            [
+              -75.338,
+              39.8549
+            ],
+            [
+              -75.338,
+              39.8556
+            ],
+            [
+              -75.3392,
+              39.8556
+            ],
+            [
+              -75.3392,
+              39.8549
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Penn Terminals - Eddystone PA",
+        "type": "Marine terminal with dry + refrigerated warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.34,
+              39.851
+            ],
+            [
+              -75.3355,
+              39.851
+            ],
+            [
+              -75.3355,
+              39.8545
+            ],
+            [
+              -75.34,
+              39.8545
+            ],
+            [
+              -75.34,
+              39.851
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Penn Terminals - Eddystone PA",
+        "type": "Marine terminal with dry + refrigerated warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.338,
+              39.8525
+            ],
+            [
+              -75.335,
+              39.8525
+            ],
+            [
+              -75.335,
+              39.8555
+            ],
+            [
+              -75.338,
+              39.8555
+            ],
+            [
+              -75.338,
+              39.8525
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Penn Terminals - Eddystone PA",
+        "type": "Marine terminal with dry + refrigerated warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.34,
+              39.8532
+            ],
+            [
+              -75.337,
+              39.8532
+            ],
+            [
+              -75.337,
+              39.8547
+            ],
+            [
+              -75.34,
+              39.8547
+            ],
+            [
+              -75.34,
+              39.8532
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Penn Terminals - Eddystone PA",
+        "type": "Marine terminal with dry + refrigerated warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.3405,
+              39.8544
+            ],
+            [
+              -75.338,
+              39.8544
+            ],
+            [
+              -75.338,
+              39.8556
+            ],
+            [
+              -75.3405,
+              39.8556
+            ],
+            [
+              -75.3405,
+              39.8544
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Penn Terminals - Eddystone PA",
+        "type": "Marine terminal with dry + refrigerated warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.1305,
+              39.9005
+            ],
+            [
+              -75.1215,
+              39.9005
+            ],
+            [
+              -75.1215,
+              39.907
+            ],
+            [
+              -75.1305,
+              39.907
+            ],
+            [
+              -75.1305,
+              39.9005
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Holt Terminals (Gloucester Terminal) - Gloucester City NJ",
+        "type": "Marine terminal / breakbulk yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 1,
+          "buildingCount": 7,
+          "siteAreaAcres": 137,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.1242,
+              39.9023
+            ],
+            [
+              -75.123,
+              39.9023
+            ],
+            [
+              -75.123,
+              39.903
+            ],
+            [
+              -75.1242,
+              39.903
+            ],
+            [
+              -75.1242,
+              39.9023
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Holt Terminals (Gloucester Terminal) - Gloucester City NJ",
+        "type": "Marine terminal / breakbulk yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.127,
+              39.901
+            ],
+            [
+              -75.1225,
+              39.901
+            ],
+            [
+              -75.1225,
+              39.9035
+            ],
+            [
+              -75.127,
+              39.9035
+            ],
+            [
+              -75.127,
+              39.901
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Holt Terminals (Gloucester Terminal) - Gloucester City NJ",
+        "type": "Marine terminal / breakbulk yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.1275,
+              39.904
+            ],
+            [
+              -75.123,
+              39.904
+            ],
+            [
+              -75.123,
+              39.9068
+            ],
+            [
+              -75.1275,
+              39.9068
+            ],
+            [
+              -75.1275,
+              39.904
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Holt Terminals (Gloucester Terminal) - Gloucester City NJ",
+        "type": "Marine terminal / breakbulk yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.1295,
+              39.901
+            ],
+            [
+              -75.1265,
+              39.901
+            ],
+            [
+              -75.1265,
+              39.9032
+            ],
+            [
+              -75.1295,
+              39.9032
+            ],
+            [
+              -75.1295,
+              39.901
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Holt Terminals (Gloucester Terminal) - Gloucester City NJ",
+        "type": "Marine terminal / breakbulk yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.126,
+              39.9023
+            ],
+            [
+              -75.1235,
+              39.9023
+            ],
+            [
+              -75.1235,
+              39.9033
+            ],
+            [
+              -75.126,
+              39.9033
+            ],
+            [
+              -75.126,
+              39.9023
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Holt Terminals (Gloucester Terminal) - Gloucester City NJ",
+        "type": "Marine terminal / breakbulk yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.9555,
+              34.187
+            ],
+            [
+              -77.9485,
+              34.187
+            ],
+            [
+              -77.9485,
+              34.198
+            ],
+            [
+              -77.9555,
+              34.198
+            ],
+            [
+              -77.9555,
+              34.187
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Wilmington Port Terminal - Wilmington NC",
+        "type": "Marine terminal / cargo yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 400,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 182,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.9497,
+              34.1913
+            ],
+            [
+              -77.9485,
+              34.1913
+            ],
+            [
+              -77.9485,
+              34.192
+            ],
+            [
+              -77.9497,
+              34.192
+            ],
+            [
+              -77.9497,
+              34.1913
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Wilmington Port Terminal - Wilmington NC",
+        "type": "Marine terminal / cargo yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.9535,
+              34.189
+            ],
+            [
+              -77.949,
+              34.189
+            ],
+            [
+              -77.949,
+              34.1945
+            ],
+            [
+              -77.9535,
+              34.1945
+            ],
+            [
+              -77.9535,
+              34.189
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Wilmington Port Terminal - Wilmington NC",
+        "type": "Marine terminal / cargo yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.9555,
+              34.188
+            ],
+            [
+              -77.953,
+              34.188
+            ],
+            [
+              -77.953,
+              34.196
+            ],
+            [
+              -77.9555,
+              34.196
+            ],
+            [
+              -77.9555,
+              34.188
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Wilmington Port Terminal - Wilmington NC",
+        "type": "Marine terminal / cargo yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.951,
+              34.1912
+            ],
+            [
+              -77.949,
+              34.1912
+            ],
+            [
+              -77.949,
+              34.1925
+            ],
+            [
+              -77.951,
+              34.1925
+            ],
+            [
+              -77.951,
+              34.1912
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Wilmington Port Terminal - Wilmington NC",
+        "type": "Marine terminal / cargo yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.097,
+              30.355
+            ],
+            [
+              -89.0905,
+              30.355
+            ],
+            [
+              -89.0905,
+              30.3645
+            ],
+            [
+              -89.097,
+              30.3645
+            ],
+            [
+              -89.097,
+              30.355
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Gulfport Terminal - Gulfport MS",
+        "type": "Marine terminal / port facility",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 10,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 163,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.0952,
+              30.3628
+            ],
+            [
+              -89.0942,
+              30.3628
+            ],
+            [
+              -89.0942,
+              30.3642
+            ],
+            [
+              -89.0952,
+              30.3642
+            ],
+            [
+              -89.0952,
+              30.3628
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Gulfport Terminal - Gulfport MS",
+        "type": "Marine terminal / port facility",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.096,
+              30.3555
+            ],
+            [
+              -89.0925,
+              30.3555
+            ],
+            [
+              -89.0925,
+              30.361
+            ],
+            [
+              -89.096,
+              30.361
+            ],
+            [
+              -89.096,
+              30.3555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Gulfport Terminal - Gulfport MS",
+        "type": "Marine terminal / port facility",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.0965,
+              30.361
+            ],
+            [
+              -89.094,
+              30.361
+            ],
+            [
+              -89.094,
+              30.364
+            ],
+            [
+              -89.0965,
+              30.364
+            ],
+            [
+              -89.0965,
+              30.361
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Gulfport Terminal - Gulfport MS",
+        "type": "Marine terminal / port facility",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.0965,
+              30.3555
+            ],
+            [
+              -89.0948,
+              30.3555
+            ],
+            [
+              -89.0948,
+              30.36
+            ],
+            [
+              -89.0965,
+              30.36
+            ],
+            [
+              -89.0965,
+              30.3555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Gulfport Terminal - Gulfport MS",
+        "type": "Marine terminal / port facility",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.096,
+              30.3628
+            ],
+            [
+              -89.0945,
+              30.3628
+            ],
+            [
+              -89.0945,
+              30.3642
+            ],
+            [
+              -89.096,
+              30.3642
+            ],
+            [
+              -89.096,
+              30.3628
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Gulfport Terminal - Gulfport MS",
+        "type": "Marine terminal / port facility",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3462,
+              33.6548
+            ],
+            [
+              -84.3433,
+              33.6548
+            ],
+            [
+              -84.3433,
+              33.6573
+            ],
+            [
+              -84.3462,
+              33.6573
+            ],
+            [
+              -84.3462,
+              33.6548
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Conley Container Yard - Conley GA (Atlanta)",
+        "type": "Inland container yard / intermodal logistics hub",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 13.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3443,
+              33.65655
+            ],
+            [
+              -84.34395,
+              33.65655
+            ],
+            [
+              -84.34395,
+              33.65685
+            ],
+            [
+              -84.3443,
+              33.65685
+            ],
+            [
+              -84.3443,
+              33.65655
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Conley Container Yard - Conley GA (Atlanta)",
+        "type": "Inland container yard / intermodal logistics hub",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3461,
+              33.65555
+            ],
+            [
+              -84.3442,
+              33.65555
+            ],
+            [
+              -84.3442,
+              33.6573
+            ],
+            [
+              -84.3461,
+              33.6573
+            ],
+            [
+              -84.3461,
+              33.65555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Conley Container Yard - Conley GA (Atlanta)",
+        "type": "Inland container yard / intermodal logistics hub",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3442,
+              33.655
+            ],
+            [
+              -84.34335,
+              33.655
+            ],
+            [
+              -84.34335,
+              33.6565
+            ],
+            [
+              -84.3442,
+              33.6565
+            ],
+            [
+              -84.3442,
+              33.655
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Conley Container Yard - Conley GA (Atlanta)",
+        "type": "Inland container yard / intermodal logistics hub",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6956,
+              30.3627
+            ],
+            [
+              -81.69335,
+              30.3627
+            ],
+            [
+              -81.69335,
+              30.36405
+            ],
+            [
+              -81.6956,
+              30.36405
+            ],
+            [
+              -81.6956,
+              30.3627
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Jacksonville Distribution Center (Dry/LCL) - Jacksonville FL",
+        "type": "Distribution center / dry + LCL warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 27,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 5.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6956,
+              30.3629
+            ],
+            [
+              -81.69525,
+              30.3629
+            ],
+            [
+              -81.69525,
+              30.3632
+            ],
+            [
+              -81.6956,
+              30.3632
+            ],
+            [
+              -81.6956,
+              30.3629
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Jacksonville Distribution Center (Dry/LCL) - Jacksonville FL",
+        "type": "Distribution center / dry + LCL warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6943,
+              30.3628
+            ],
+            [
+              -81.69335,
+              30.3628
+            ],
+            [
+              -81.69335,
+              30.3636
+            ],
+            [
+              -81.6943,
+              30.3636
+            ],
+            [
+              -81.6943,
+              30.3628
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Jacksonville Distribution Center (Dry/LCL) - Jacksonville FL",
+        "type": "Distribution center / dry + LCL warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.695,
+              30.3632
+            ],
+            [
+              -81.69455,
+              30.3632
+            ],
+            [
+              -81.69455,
+              30.3639
+            ],
+            [
+              -81.695,
+              30.3639
+            ],
+            [
+              -81.695,
+              30.3632
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Jacksonville Distribution Center (Dry/LCL) - Jacksonville FL",
+        "type": "Distribution center / dry + LCL warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.69455,
+              30.3628
+            ],
+            [
+              -81.69385,
+              30.3628
+            ],
+            [
+              -81.69385,
+              30.36335
+            ],
+            [
+              -81.69455,
+              30.36335
+            ],
+            [
+              -81.69455,
+              30.3628
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Jacksonville Distribution Center (Dry/LCL) - Jacksonville FL",
+        "type": "Distribution center / dry + LCL warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6982,
+              30.3447
+            ],
+            [
+              -81.6954,
+              30.3447
+            ],
+            [
+              -81.6954,
+              30.3481
+            ],
+            [
+              -81.6982,
+              30.3481
+            ],
+            [
+              -81.6982,
+              30.3447
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Jacksonville Cross Dock Facility - Jacksonville FL",
+        "type": "Cross-dock / distribution warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 58,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 12.1,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.69605,
+              30.34735
+            ],
+            [
+              -81.6956,
+              30.34735
+            ],
+            [
+              -81.6956,
+              30.34775
+            ],
+            [
+              -81.69605,
+              30.34775
+            ],
+            [
+              -81.69605,
+              30.34735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Jacksonville Cross Dock Facility - Jacksonville FL",
+        "type": "Cross-dock / distribution warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6982,
+              30.3449
+            ],
+            [
+              -81.6964,
+              30.3449
+            ],
+            [
+              -81.6964,
+              30.3462
+            ],
+            [
+              -81.6982,
+              30.3462
+            ],
+            [
+              -81.6982,
+              30.3449
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Jacksonville Cross Dock Facility - Jacksonville FL",
+        "type": "Cross-dock / distribution warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6962,
+              30.3462
+            ],
+            [
+              -81.69545,
+              30.3462
+            ],
+            [
+              -81.69545,
+              30.3476
+            ],
+            [
+              -81.6962,
+              30.3476
+            ],
+            [
+              -81.6962,
+              30.3462
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Jacksonville Cross Dock Facility - Jacksonville FL",
+        "type": "Cross-dock / distribution warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6979,
+              30.3462
+            ],
+            [
+              -81.6962,
+              30.3462
+            ],
+            [
+              -81.6962,
+              30.347
+            ],
+            [
+              -81.6979,
+              30.347
+            ],
+            [
+              -81.6979,
+              30.3462
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Jacksonville Cross Dock Facility - Jacksonville FL",
+        "type": "Cross-dock / distribution warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6964,
+              30.347
+            ],
+            [
+              -81.69555,
+              30.347
+            ],
+            [
+              -81.69555,
+              30.348
+            ],
+            [
+              -81.6964,
+              30.348
+            ],
+            [
+              -81.6964,
+              30.347
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley Jacksonville Cross Dock Facility - Jacksonville FL",
+        "type": "Cross-dock / distribution warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.35935,
+              25.8728
+            ],
+            [
+              -80.3572,
+              25.8728
+            ],
+            [
+              -80.3572,
+              25.87445
+            ],
+            [
+              -80.35935,
+              25.87445
+            ],
+            [
+              -80.35935,
+              25.8728
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley CrowleyFresh Distribution Center (Temperature Controlled) - Medley FL",
+        "type": "Temperature-controlled distribution center / warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 52,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 6.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.3583,
+              25.8729
+            ],
+            [
+              -80.3573,
+              25.8729
+            ],
+            [
+              -80.3573,
+              25.87385
+            ],
+            [
+              -80.3583,
+              25.87385
+            ],
+            [
+              -80.3583,
+              25.8729
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley CrowleyFresh Distribution Center (Temperature Controlled) - Medley FL",
+        "type": "Temperature-controlled distribution center / warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.3593,
+              25.87295
+            ],
+            [
+              -80.3579,
+              25.87295
+            ],
+            [
+              -80.3579,
+              25.8738
+            ],
+            [
+              -80.3593,
+              25.8738
+            ],
+            [
+              -80.3593,
+              25.87295
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley CrowleyFresh Distribution Center (Temperature Controlled) - Medley FL",
+        "type": "Temperature-controlled distribution center / warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.3587,
+              25.8737
+            ],
+            [
+              -80.35735,
+              25.8737
+            ],
+            [
+              -80.35735,
+              25.87445
+            ],
+            [
+              -80.3587,
+              25.87445
+            ],
+            [
+              -80.3587,
+              25.8737
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "crowley",
+        "name": "Crowley CrowleyFresh Distribution Center (Temperature Controlled) - Medley FL",
+        "type": "Temperature-controlled distribution center / warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    }
+  ]
+}

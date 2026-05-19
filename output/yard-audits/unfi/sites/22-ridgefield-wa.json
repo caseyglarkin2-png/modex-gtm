@@ -1,0 +1,58 @@
+{
+  "name": "UNFI - Ridgefield WA DC",
+  "type": "Distribution Center",
+  "coords": { "lat": 45.80660, "lng": -122.66585 },
+  "geofences": {
+    "perimeter": { "south": 45.80420, "west": -122.66800, "north": 45.80870, "east": -122.66280 },
+    "truckGate": { "south": 45.80790, "west": -122.66445, "north": 45.80860, "east": -122.66380 },
+    "dropYards": [
+      { "south": 45.80560, "west": -122.66440, "north": 45.80820, "east": -122.66300 }
+    ],
+    "dockAprons": [
+      { "south": 45.80540, "west": -122.66445, "north": 45.80820, "east": -122.66415 },
+      { "south": 45.80540, "west": -122.66790, "north": 45.80800, "east": -122.66760 }
+    ],
+    "staging": { "south": 45.80790, "west": -122.66445, "north": 45.80850, "east": -122.66360 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 150,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 50.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@45.80660,-122.66585,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "shipRcvSeparate", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Dedicated controlled truck entrance off S Union Ridge Pkwy at the NE corner — a posted 'TRUCK ENTRANCE' sign at the parkway (confirmed in 2025-09 Street View), a structured entrance island and painted directional lane arrows where the drive meets the truck yard.",
+    "guardShack": "No staffed guard booth could be visually confirmed. The truck entrance is heavily screened by a landscaped berm and conifer trees, and no Street View pano penetrates past the parkway frontage. A booth may exist but is not imaging-confirmed — flagged uncertain.",
+    "remoteGs": "Set true because a controlled truck gate exists but no booth is visually confirmed; check-in is likely kiosk/intercom. Verify in discovery.",
+    "drivewayLong": "Long entrance drive from the parkway gate into a very large open truck yard along the east face — comfortably holds a 3+ truck queue inside the property.",
+    "postGateStaging": "Large paved truck yard inside the gate before the dock apron offers ample inside-the-gate holding room.",
+    "fastLaneOpportunity": "Wide gate apron and a very large internal truck yard; clear physical room to add an express/bypass lane.",
+    "dockDoors": "~800,000 sq ft DC (232,000 sq ft original + 541,000 sq ft 2019 expansion per UNFI Pacific Northwest optimization announcement). Long dock banks run BOTH the east and west faces of the building with trailers backed in; 50+ band, ~150 doors estimated.",
+    "shipRcvSeparate": "Two physically separate dock clusters on different building faces (a west-face dock bank and an east-face dock bank), consistent with separate shipping vs. receiving operations. Medium confidence — flagged.",
+    "dropArea": "Large striped trailer drop yard on the east side holds many rows of parked trailers without tractors, plus a covered canopy structure among the rows; 50+ band.",
+    "dropYard": "Dedicated trailer-storage drop yard on the east side, separate from active dock staging.",
+    "urbanRural": "Ridgefield WA — edge-of-town location surrounded by farmland, woods and low-density rural residential; part of a small industrial park (Discovery Ridge area). Rural per the rubric (small-town/edge-of-town setting).",
+    "scale": "No truck scale identified in imagery.",
+    "railServed": "No rail spur enters the property.",
+    "siteAreaAcres": "Perimeter box (~501m x ~404m) yields ~50 acres.",
+    "address": "Confirmed 7909 S Union Ridge Pkwy, Ridgefield WA via Waze/TruckMap listings; given coordinates landed directly on the building. A separate large logistics facility (with a colorful orange/green trailer fleet) sits just NW and is a different operator — excluded."
+  },
+  "method": "deep-audit"
+}

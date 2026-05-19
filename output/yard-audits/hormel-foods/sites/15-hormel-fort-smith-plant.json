@@ -1,0 +1,55 @@
+{
+  "name": "Hormel Fort Smith Plant - Fort Smith AR",
+  "type": "Production Facility",
+  "coords": { "lat": 35.30350, "lng": -94.38130 },
+  "geofences": {
+    "perimeter": { "south": 35.300985, "west": -94.383612, "north": 35.306015, "east": -94.378988 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 35.304161, "west": -94.381071, "north": 35.305239, "east": -94.379529 }
+    ],
+    "dockAprons": [
+      { "south": 35.301702, "west": -94.381885, "north": 35.303498, "east": -94.381115 },
+      { "south": 35.304586, "west": -94.382401, "north": 35.305214, "east": -94.380199 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 35,
+    "trailerParkingCapacity": 55,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 58.1,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.30350,-94.38130,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "Roster address (4307 Planters Rd) is wrong — Hormel-Planters' Fort Smith plant is at 4020 Planters Rd, Fort Smith AR 72908 (confirmed by Hormel, Fort Smith Chamber, ADEQ permit records; a 'Mr Peanut Sign' landmark sits at 4020). 4307, 4215 (International Paper) and 3807 (Grainger) are separate neighboring addresses on Planters Rd. Resolved to the large multi-building rail-served processing complex at ~35.3035,-94.3813; the roster's geocoded pin landed at the NW employee parking of this complex, so the complex itself is confirmed.",
+    "truckGate": "No controlled perimeter gate, barrier arm, or checkpoint pinch-point identified. The Google Street View vehicle drove freely along internal plant roads and dock areas with no gate, and the public-road frontage / employee parking entrances are open. Flagged uncertain because the sprawling complex has several access points. truckGateCount kept at 1 as a nominal value for the primary truck entrance.",
+    "guardShack": "No staffed guard booth straddling a truck lane was identified.",
+    "multipleFacilities": "A campus of multiple connected processing/warehouse buildings — main processing block plus a long dock warehouse and ancillary structures.",
+    "shipRcvSeparate": "Dock activity occurs on physically separate building faces (a west-facing dock bank on the long warehouse and a north-facing dock area), supporting separate ship/receive clusters.",
+    "railServed": "Rail spur runs into the property on the east side with rail cars present in imagery.",
+    "dockDoors": "Dock banks across multiple building faces; estimated ~45 total doors (25-50 band) from z18-z19 imagery.",
+    "dropArea": "Trailers parked across the interior yards and dock aprons; estimated ~35 visible (25-50 band).",
+    "drivewayLong / postGateStaging": "Deep internal roads and yard space easily hold 3+ trucks before the docks.",
+    "fastLaneOpportunity": "Ample open paved internal yard width.",
+    "urbanRural": "Fort Smith industrial district on the edge of town, surrounded by woods and other plants — classified Rural per the small-town-industrial rubric.",
+    "buildingCount": "Estimated ~4 distinct connected buildings; low confidence given the merged complex."
+  },
+  "method": "deep-audit"
+}

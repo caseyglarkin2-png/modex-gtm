@@ -1,0 +1,51 @@
+{
+  "name": "KDP Mott's Plant - Williamson NY",
+  "type": "Manufacturing - Juice/Applesauce",
+  "coords": { "lat": 43.236600, "lng": -77.175500 },
+  "geofences": {
+    "perimeter": { "south": 43.233900, "west": -77.181500, "north": 43.241000, "east": -77.170000 },
+    "truckGate": { "south": 43.237300, "west": -77.173800, "north": 43.238100, "east": -77.172800 },
+    "dropYards": [
+      { "south": 43.237600, "west": -77.174600, "north": 43.239400, "east": -77.172600 },
+      { "south": 43.235300, "west": -77.176800, "north": 43.236400, "east": -77.174800 }
+    ],
+    "dockAprons": [
+      { "south": 43.237600, "west": -77.176000, "north": 43.238500, "east": -77.173800 },
+      { "south": 43.234700, "west": -77.178400, "north": 43.235300, "east": -77.176800 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 36, "trailersVisible": 70, "trailerParkingCapacity": 140,
+    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 105.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@43.236600,-77.175500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "scale"],
+  "fieldNotes": {
+    "truckGate": "Truck yard, docks and trailer drop lots are wide open directly off the public access road on the east side of the property. Multiple Street View headings (2024-08) along that road show no barrier arm, no sliding/swing gate, and no pinch-point checkpoint where the yard meets the road - the paved truck apron simply abuts the road.",
+    "guardShack": "No staffed booth at any truck approach. A metal gantry frame stands in the yard but is a lighting/sign structure, not a guard booth.",
+    "remoteGs": "False because there is no truck gate at all (remoteGs requires a gate without a shack).",
+    "multipleFacilities": "Large interconnected manufacturing complex plus a separate building cluster to the NE and on-site wastewater treatment ponds to the west - a campus.",
+    "shipRcvSeparate": "Dock banks appear on at least two distinct building faces (the north/NE face fronting the main trailer drop yard, and a SW face) - consistent with separate shipping/receiving clusters.",
+    "dockDoors": "Roughly 30-40 doors estimated across the multiple building faces from z18-z20 imagery; counted indirectly via trailers backed in and dock-bay rhythm - flagged as estimate.",
+    "dropArea": "Very large drop yards: rows of dozens of parked trailers (white and orange) on the NE lot plus additional rows near the SW dock apron - well over 50.",
+    "scale": "No truck scale clearly visible; flagged as uncertain due to the size and openness of the yard.",
+    "railServed": "An active rail line runs along the south edge of the property (parallels Route 104); spur access into the plant is plausible but the line clearly serves/borders the site.",
+    "siteAreaAcres": "Roster cites ~217 acres for the full parcel including orchard/woods; the developed industrial perimeter measured here is roughly 105 acres.",
+    "fastLaneOpportunity": "The truck approach apron is extremely wide and open with abundant unused paved width - ample room for express/bypass lanes."
+  },
+  "method": "deep-audit"
+}

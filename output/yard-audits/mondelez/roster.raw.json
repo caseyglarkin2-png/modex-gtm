@@ -1,0 +1,117 @@
+{
+  "account": "Mondelez",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 10,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Nabisco Richmond Biscuit Bakery - Richmond VA",
+      "city": "Richmond",
+      "state": "VA",
+      "type": "Manufacturing - biscuit/cookie bakery",
+      "address": "6002 S Laburnum Ave, Richmond, VA 23231",
+      "lat": 37.4555,
+      "lng": -77.3447,
+      "source": "Yelp/Richmond BizSense/WTVR - Mondelez's largest US biscuit bakery (Oreo, Ritz, Nilla, Wheat Thins, Chips Ahoy!); dossier-named East Coast hub. Verified street address."
+    },
+    {
+      "idx": 2,
+      "name": "Nabisco Chicago Bakery - Chicago IL",
+      "city": "Chicago",
+      "state": "IL",
+      "type": "Manufacturing - biscuit/cracker bakery",
+      "address": "7300 S Kedzie Ave, Chicago, IL 60629",
+      "lat": 41.7596,
+      "lng": -87.7019,
+      "source": "Businessyab/OpenGovCA/Chicago Sun-Times - major Nabisco bakery (Wheat Thins, Chips Ahoy, Cheese Nips, Premium, Nutter Butter, Barnum Animal Crackers); dossier-named Midwest hub. Verified street address."
+    },
+    {
+      "idx": 3,
+      "name": "Nabisco Portland Bakery - Portland OR",
+      "city": "Portland",
+      "state": "OR",
+      "type": "Manufacturing - biscuit/cookie bakery",
+      "address": "100 NE Columbia Blvd, Portland, OR 97211",
+      "lat": 45.5876,
+      "lng": -122.6648,
+      "source": "Waze/Panjiva/Restaurantji - Nabisco bakery (Oreo, Ritz, Chips Ahoy!, Wheat Thins, Good Thins, Premium); dossier-named West Coast hub. Verified street address."
+    },
+    {
+      "idx": 4,
+      "name": "Nabisco Naperville Bakery - Naperville IL",
+      "city": "Naperville",
+      "state": "IL",
+      "type": "Manufacturing - cracker bakery",
+      "address": "1555 W Ogden Ave, Naperville, IL 60540",
+      "lat": 41.772,
+      "lng": -88.1797,
+      "source": "Yelp/Waze/Dun & Bradstreet - sole North America Triscuit plant; one of Mondelez's four strategic US biscuit bakeries. Verified street address."
+    },
+    {
+      "idx": 5,
+      "name": "Clif Bar Baking Co. of Indianapolis - Indianapolis IN",
+      "city": "Indianapolis",
+      "state": "IN",
+      "type": "Manufacturing - energy/nutrition bar bakery",
+      "address": "7575 Georgetown Rd, Indianapolis, IN 46268",
+      "lat": 39.8957,
+      "lng": -86.2625,
+      "source": "Commercial Baking/IBJ - one of two Clif Bar self-manufacturing plants (acquired 2022); 185,000 sq ft. Verified street address."
+    },
+    {
+      "idx": 6,
+      "name": "Tate's Bake Shop Factory - East Moriches NY",
+      "city": "East Moriches",
+      "state": "NY",
+      "type": "Manufacturing - cookie bakery",
+      "address": "62 Pine St, East Moriches, NY 11940",
+      "lat": 40.8086,
+      "lng": -72.7619,
+      "source": "Waze/Restaurantji - Tate's Bake Shop production factory (acquired 2018), 40,000 sq ft, still in use. Verified street address."
+    },
+    {
+      "idx": 7,
+      "name": "Mondelez Richmond Distribution Center - Sandston VA",
+      "city": "Sandston",
+      "state": "VA",
+      "type": "Distribution center (3PL-operated, Kenco)",
+      "address": "Airport Drive at SR-895 Interchange, Henrico County (Sandston), VA 23150",
+      "lat": 37.447,
+      "lng": -77.326,
+      "source": "Kenco Group/Intercontinental Real Estate/GRPVA - 450,000 sq ft regional supply chain DC opened Dec 2022, operated by Kenco; serves Oreo/Chips Ahoy/Ritz. Approximate location near Richmond International Airport; exact street number not published."
+    },
+    {
+      "idx": 8,
+      "name": "Mondelez Montgomery Sales Distribution Center - Montgomery NY",
+      "city": "Montgomery",
+      "state": "NY",
+      "type": "Distribution center / sales warehouse",
+      "address": "272 Neelytown Rd, Montgomery, NY 12549",
+      "lat": 41.5197,
+      "lng": -74.184,
+      "source": "Times Hudson Valley/ARCO Design-Build/Yelp - 100,300 sq ft food-grade sales distribution center, 37 truck spots; distributes Oreo, Triscuit, Wheat Thins. Verified street address."
+    },
+    {
+      "idx": 9,
+      "name": "Nabisco Norcross Distribution Center - Norcross GA",
+      "city": "Norcross",
+      "state": "GA",
+      "type": "Distribution center",
+      "address": "Norcross, GA (metro Atlanta) - exact street address not published",
+      "lat": 33.9412,
+      "lng": -84.2135,
+      "source": "Food Manufacturing/WSWS - Nabisco distribution center named in 2021 BCTGM strike coverage; serves the Southeast. Street address not pinned down - city-level only."
+    },
+    {
+      "idx": 10,
+      "name": "Nabisco Aurora Sales & Distribution Center - Aurora CO",
+      "city": "Aurora",
+      "state": "CO",
+      "type": "Sales / distribution center",
+      "address": "Aurora, CO 80011 - exact street address not published",
+      "lat": 39.7392,
+      "lng": -104.7522,
+      "source": "Chamber of Commerce/Yellowpages/Food Manufacturing - Nabisco sales-distribution facility named in 2021 strike coverage; serves the Mountain West. ZIP-level only (80011), exact street address not pinned down."
+    }
+  ]
+}

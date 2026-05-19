@@ -1,0 +1,55 @@
+{
+  "name": "Universal Logistics - Clearfield Terminal - Clearfield UT",
+  "type": "Intermodal / Rail-Served Transload & Distribution Terminal (owned)",
+  "coords": { "lat": 41.10540, "lng": -112.02320 },
+  "geofences": {
+    "perimeter": { "south": 41.10455, "west": -112.02455, "north": 41.10625, "east": -112.02200 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 41.10560, "west": -112.02455, "north": 41.10625, "east": -112.02360 }
+    ],
+    "dockAprons": [
+      { "south": 41.10470, "west": -112.02360, "north": 41.10600, "east": -112.02250 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 25,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 9.2,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.1054,-112.0232,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["location", "truckGate", "guardShack", "dockDoors", "dropArea", "trailersVisible", "trailerParkingCapacity", "siteAreaAcres", "dropYard"],
+  "fieldNotes": {
+    "location": "MEDIUM-CONFIDENCE LOCATION. Resolved to 120 E 700 S, Clearfield, UT 84015 — the Specialized Rail Service, Inc. (SRS) facility. SRS is a Clearfield-based intermodal drayage / transload / warehousing operator acquired by Universal Logistics Holdings in October 2018 ($12.3M); it is the ULH operating presence behind the 10-K-named 'Clearfield UT owned terminal property'. Address is firm: confirmed identically by FMCSA SAFER (USDOT 506498), loadmatch.com, Yelp, D&B, and Loc8NearMe. However, 120 E 700 S sits inside a dense multi-tenant industrial district and NO SRS signage was visible in any Street View; the exact parcel is address-interpolated. Resolved to the rail-served warehouse/transload building at ~41.1054,-112.0232 because (a) it is directly served by a Union Pacific rail line/spur — the defining feature of a 'Specialized Rail Service' transload facility, (b) it sits on the 700 South surface street where the address interpolates, and (c) SRS's stated business is rail transload + cross-dock + warehouse distribution. The exact parcel within this district could not be positively confirmed.",
+    "truckGate": "MEDIUM CONFIDENCE. Street View (2022-11) of the building frontage and yard shows internal industrial-park roads with employee parking and decorative block walls; no barrier arm or sliding/swing gate was observed across a truck lane. Classified false (open, uncontrolled industrial-park access), but the exact entrance could not be definitively walked.",
+    "guardShack": "No guard booth visible in satellite or Street View. Classified false.",
+    "remoteGs": "No identified truck gate, so no remote check-in implied; false.",
+    "dockDoors": "Banded 10-25. The rail-served warehouse building shows a dock apron with trailers backed along its SW face in satellite; estimated ~14 doors. Low confidence — partly tree-obscured.",
+    "dropArea": "Banded 10-25. A truck/trailer yard with parked trailers and chassis lies NW of the building; transload material is staged along the rail side. Low confidence.",
+    "dropYard": "true — a dedicated trailer/chassis yard adjoins the building; low confidence.",
+    "railServed": "true — a Union Pacific rail line runs directly alongside the NE face of the building, with covered hopper railcars parked on the spur and lumber/material being transloaded. Consistent with SRS's rail-transload / intermodal-facility-management business. This is the highest-confidence physical finding for the site.",
+    "buildingCount": "One long warehouse/transload building running NW-SE alongside the rail. Adjacent parcels (a petroleum/chemical tank farm to the SW) are separate tenants and excluded.",
+    "siteAreaAcres": "~9.2 acres computed for the building + immediate yard parcel — low confidence given the parcel-boundary ambiguity in this multi-tenant district. SRS operates ~140 tractors regionally; the Clearfield footprint audited here covers the rail-served building and its adjoining truck yard only.",
+    "urbanRural": "Clearfield is a small Davis County city north of Salt Lake City; the facility sits in a small-town industrial district. Per the rubric's small-town-industrial guidance, classified Rural.",
+    "trailersVisible": "~25 — honest overhead estimate, low confidence.",
+    "trailerParkingCapacity": "~90 — honest estimate for the adjoining truck yard, low confidence."
+  },
+  "method": "deep-audit"
+}

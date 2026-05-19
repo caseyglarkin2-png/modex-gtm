@@ -1,0 +1,55 @@
+{
+  "name": "GP Prosperity Plywood Plant - Prosperity SC",
+  "type": "Plywood Plant",
+  "coords": { "lat": 34.21600, "lng": -81.49400 },
+  "geofences": {
+    "perimeter": { "south": 34.2118, "west": -81.4995, "north": 34.2195, "east": -81.4870 },
+    "truckGate": { "south": 34.21940, "west": -81.49560, "north": 34.21990, "east": -81.49480 },
+    "dropYards": [
+      { "south": 34.21380, "west": -81.49350, "north": 34.21600, "east": -81.49000 },
+      { "south": 34.21550, "west": -81.49900, "north": 34.21720, "east": -81.49550 }
+    ],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 6,
+    "trailersVisible": 16,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 1,
+    "buildingCount": 8,
+    "siteAreaAcres": 243.7,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.21600,-81.49400,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "0-10", "dropArea": "NONE",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "scale", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "Resolved to GP's Prosperity plywood/sawmill operations at 191 Georgia Pacific Blvd, off Hwy 76 E of Prosperity SC (~34.2169,-81.4954, cross-checked against the Forest Products Locator). The roster's geocoded point (34.2093,-81.5332) was ~3 km W in downtown Prosperity and wrong. Site centroid locked at 34.21600,-81.49400.",
+    "truckGate": "The plant access road (Georgia Pacific Blvd) connects to the public road as an open, wide entrance with only a GP sign — no barrier arm, gate, or checkpoint at the public-road junction (Street View 2026-02). No gate structure was resolved further in along the entrance road either. Marked false; flagged uncertain because Street View does not cover the interior of the access road.",
+    "guardShack": "No guard booth found at the entrance or along the access road in available imagery. Marked false, flagged uncertain.",
+    "remoteGs": "False — no truck gate identified.",
+    "drivewayLong": "A long internal access road runs deep into the property from the public road, with ample room to queue 3+ trucks.",
+    "fastLaneOpportunity": "Wide open access road and yards with abundant unused paved/graded width.",
+    "shipRcvSeparate": "Log receiving (log yard at the SE plant cluster) and plywood/lumber shipping (NW lumber-storage cluster and rail load-out) are physically separate operations on different parts of the campus.",
+    "multipleFacilities": "Two distinct large building clusters on one property — a SE main plywood plant with log yard and a NW lumber-storage/processing cluster — a campus.",
+    "dockDoors": "Plywood/lumber plants load panels and bundles by forklift from open shipping bays rather than truck-height dock doors; banded 0-10, low confidence.",
+    "dropArea": "Yards hold logs and stacked lumber/plywood bundles, not parked trailers.",
+    "scale": "A truck scale is operationally expected for a log-receiving mill, but no distinct scale pad could be confirmed in imagery. Marked false, flagged uncertain.",
+    "railServed": "An active rail siding runs through the property with railcars present at both the NW and SE clusters.",
+    "buildingCount": "Numerous structures across two clusters (mill buildings, kilns, storage sheds, office) — counted ~8.",
+    "urbanRural": "Isolated mill complex surrounded by woods and farmland E of small-town Prosperity. Rural."
+  },
+  "method": "deep-audit"
+}

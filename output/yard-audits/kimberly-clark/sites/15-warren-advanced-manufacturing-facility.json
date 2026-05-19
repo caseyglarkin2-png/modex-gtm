@@ -1,0 +1,46 @@
+{
+  "name": "K-C Warren Advanced Manufacturing Facility - Warren OH",
+  "type": "New advanced manufacturing facility (Huggies, Pull-Ups, Kleenex, Scott, Viva, Kotex, Poise, Depend; ~1.2M sq ft, $800M, under construction)",
+  "coords": { "lat": 41.2235, "lng": -80.8115 },
+  "geofences": {
+    "perimeter": { "south": 41.2120, "west": -80.8175, "north": 41.2330, "east": -80.8055 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
+    "truckGateCount": 0, "buildingCount": 0, "siteAreaAcres": 560.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.2235,-80.8115,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "multipleFacilities", "scale",
+    "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "site": "Facility under construction. Located on the 560-acre former Republic Steel / BDM Steel brownfield off Pine Avenue (Niles River Road), spanning Howland Twp, Warren Twp and the City of Warren. Mahoning River bounds the property on the west; a NE-SW rail line runs through the site.",
+    "imagery": "Current Maxar/Airbus satellite layer and the Nov-2024 Street View pano both PREDATE the K-C building. The cleared/graded brownfield is visible but no plant structure, gates, docks or yard pavement appear yet. Per K-C (Vindicator, Jan 2026) the manufacturing building is 'sealed up and weathertight'; production begins H1 2027. The white-roofed building and aggregate/sand-gravel operation visible in the SE of current imagery are pre-existing/separate, not the K-C plant.",
+    "railServed": "Active rail line crosses the property NE-SW; a steel-mill site this size will almost certainly retain rail service for the new plant. Marked true with medium confidence.",
+    "urbanRural": "Site is <1 mile from Warren's Courthouse Square, embedded in the Warren urban fabric (residential grids on both sides). Classified Urban.",
+    "yardMetrics": "All yard counts are 0 because no yard infrastructure exists in available imagery. buildingCount 0 reflects the imagery, not the planned facility (1 plant building plus a proposed 500k-sq-ft DC across Pine Ave). siteAreaAcres 560 is the documented purchased acreage, not derived from the perimeter box.",
+    "perimeter": "Perimeter box drawn around the visibly cleared brownfield footprint; approximate, since the eventual fenced plant pad will occupy only part of the 560-acre parcel."
+  },
+  "method": "deep-audit"
+}

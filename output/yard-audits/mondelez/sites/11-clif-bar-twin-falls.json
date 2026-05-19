@@ -1,0 +1,48 @@
+{
+  "name": "Clif Bar Baking Co. of Twin Falls - Twin Falls ID",
+  "type": "Manufacturing - energy/nutrition bar bakery",
+  "coords": { "lat": 42.53985, "lng": -114.40805 },
+  "geofences": {
+    "perimeter": { "south": 42.53780, "west": -114.41060, "north": 42.54180, "east": -114.40560 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 42.54050, "west": -114.40790, "north": 42.54110, "east": -114.40620 }
+    ],
+    "dockAprons": [
+      { "south": 42.53960, "west": -114.40895, "north": 42.54035, "east": -114.40840 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 10, "trailersVisible": 9, "trailerParkingCapacity": 20,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 88.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.53985,-114.40805,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "0-10", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "truckGate"],
+  "fieldNotes": {
+    "location": "Resolved to the Clif Bar bakery in the Jayco Industrial Park, area of Champlin Rd & Eldridge Ave, southeast Twin Falls (street address 3438 Eldridge Ave, ZIP 83341 per Waze listing). Roster city-centroid coords (42.5826,-114.4286) were ~5km NW in a residential/farm area; corrected via web research (Idaho Commerce, BoiseDev, Magic Valley) plus satellite confirmation of the distinctive ~275,000 sq ft biophilic-design plant with on-site solar arrays.",
+    "truckGate": "No barrier arm, sliding gate or checkpoint pinch-point visible at any driveway. The site sits on a ~90-acre standalone parcel with wide-open undeveloped buffer land; access roads are part of the industrial-park network and run open into the property. Classified false.",
+    "guardShack": "No staffed booth structure visible anywhere along the access roads or at the building. False.",
+    "remoteGs": "False — no gate present, so no remote check-in implied.",
+    "dockDoors": "Covered dock canopy on the west building face; ~9 trailers backed in / parked at the dock line. Total dock-door count ~8-12, banded 0-10 (low confidence — partly shadowed). Bulk-bar bakery, modest dock count.",
+    "dropArea": "Drop trailers staged along the north/east internal access road plus the open yard west of the dock; estimated 10-25 trailer capacity.",
+    "fastLaneOpportunity": "Very wide paved aprons and abundant unused paved width around the building loop — ample room to add express/bypass lanes.",
+    "drivewayLong": "Internal loop road from the park network to the dock can hold a 3+ truck queue.",
+    "urbanRural": "Edge-of-town isolated industrial site surrounded by farmland and open scrub; Rural.",
+    "imagery": "Street View at the property dates to 2012 (pre-construction empty land) so gate determination relies on current satellite (Maxar 2026), which is clear."
+  },
+  "method": "deep-audit"
+}

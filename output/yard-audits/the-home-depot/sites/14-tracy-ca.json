@@ -1,0 +1,55 @@
+{
+  "name": "Home Depot RDC - Tracy CA",
+  "type": "Rapid Deployment Center",
+  "coords": { "lat": 37.75920, "lng": -121.40300 },
+  "geofences": {
+    "perimeter": { "south": 37.75700, "west": -121.40850, "north": 37.76130, "east": -121.39800 },
+    "truckGate": { "south": 37.75770, "west": -121.40800, "north": 37.75850, "east": -121.40670 },
+    "dropYards": [
+      { "south": 37.76000, "west": -121.40800, "north": 37.76120, "east": -121.39850 },
+      { "south": 37.75720, "west": -121.40700, "north": 37.75800, "east": -121.39900 }
+    ],
+    "dockAprons": [
+      { "south": 37.75800, "west": -121.40700, "north": 37.75870, "east": -121.39900 },
+      { "south": 37.75960, "west": -121.40700, "north": 37.76010, "east": -121.39900 }
+    ],
+    "staging": { "south": 37.75770, "west": -121.40720, "north": 37.75850, "east": -121.40550 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 160,
+    "trailersVisible": 210,
+    "trailerParkingCapacity": 300,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 70.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.75920,-121.40300,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Cross-dock RDC (DC #5641, 657K sq ft). Truck yard entrance off the access road at the SW corner; the office/parking front faces N Tracy Blvd, the truck side is fenced and gated.",
+    "guardShack": "Standard guarded RDC entry — booth at the SW truck-yard entrance. HD RDCs of this generation consistently run a staffed gate; the SW gate apron shows the checkpoint geometry.",
+    "postGateStaging": "Wide paved aprons on both long faces give substantial inside-the-gate queue room before the dock doors.",
+    "drivewayLong": "Long internal aprons running the full length of both faces — 3+ trucks of stacking.",
+    "fastLaneOpportunity": "Generous paved width at the SW gate apron; room to add a bypass/express lane.",
+    "dockDoors": "Dense regular dock-door rhythm with trailers backed in along both the long north and long south faces — well over 100 doors (cross-dock RDC).",
+    "shipRcvSeparate": "Cross-dock layout — receiving on one long face, shipping on the opposite face; two distinct dock banks.",
+    "dropYard": "Dedicated trailer drop-yard rows along the north side and additional trailer parking on the south.",
+    "urbanRural": "Edge-of-town industrial/logistics district on the north side of Tracy CA; large warehouses and open/fallow parcels around it — judged Rural per rubric.",
+    "entryLanes": "Estimated; exact lane count at the gate not fully resolved from imagery.",
+    "trailersVisible": "Approximate count from z16-z20 imagery."
+  },
+  "method": "deep-audit"
+}

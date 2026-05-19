@@ -1,0 +1,61 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Cheney Brothers - Florence SC (new cold DC),Refrigerated/Freezer Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@34.271014,-79.694676,400m/data=!3m1!1e3"
+Performance Foodservice - Florence SC (legacy DC),Broadline Foodservice Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@34.26505,-79.69285,400m/data=!3m1!1e3"
+Performance Foodservice - Gilroy CA,Broadline Foodservice Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@36.98045,-121.5543,400m/data=!3m1!1e3"
+Performance Foodservice - Metro NY (Elizabeth NJ),Broadline Foodservice Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,YES,YES,,1,1,,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@40.67085,-74.17055,400m/data=!3m1!1e3"
+Performance Foodservice - Southern California (City of Industry),Broadline Foodservice Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@34.00485,-117.9416,400m/data=!3m1!1e3"
+Performance Foodservice - Chicago (Montgomery IL),Broadline Foodservice Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,,"https://www.google.com/maps/@41.7214,-88.3585,400m/data=!3m1!1e3"
+Performance Foodservice - Boston (Taunton MA),Broadline Foodservice Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@41.9433,-71.137,400m/data=!3m1!1e3"
+Performance Foodservice - Atlanta (Oakwood GA),Broadline Foodservice Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@34.2384,-83.873,400m/data=!3m1!1e3"
+Performance Foodservice - Dallas Fort Worth (Fort Worth TX),Broadline Foodservice Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,,,,Rural,,,,,"https://www.google.com/maps/@32.767167,-97.265073,400m/data=!3m1!1e3"
+Performance Foodservice - Houston TX,Broadline Foodservice Distribution Center,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@29.97850,-95.38680,400m/data=!3m1!1e3"
+Performance Foodservice - Twin Cities (Rogers MN),Broadline Foodservice Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@45.197902,-93.54305,400m/data=!3m1!1e3"
+Performance Foodservice - Denver (Commerce City CO),Broadline Foodservice Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@39.877035,-104.864645,400m/data=!3m1!1e3"
+Performance Foodservice - Detroit (Warren MI),Broadline Foodservice Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,YES,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@42.474855,-83.063823,400m/data=!3m1!1e3"
+Performance Foodservice - Northern California (Stockton CA),Broadline Foodservice Distribution Center,#1,Gate + GS (not BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,,YES,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@37.93255,-121.3245,400m/data=!3m1!1e3"
+Performance Foodservice - Pacific Northwest (Portland OR),Broadline Foodservice Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,YES,,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@45.536,-122.4608,400m/data=!3m1!1e3"
+Performance Foodservice - Arizona (Phoenix AZ),Broadline Foodservice Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,YES,,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@33.4426,-112.2195,400m/data=!3m1!1e3"
+Performance Foodservice - Kansas City (Lee's Summit MO),Broadline Foodservice Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,,YES,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@38.89,-94.3664,400m/data=!3m1!1e3"
+Performance Foodservice - Nashville (Lebanon TN),Broadline Foodservice Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@36.17540,-86.28810,400m/data=!3m1!1e3"
+Performance Foodservice - East Tennessee (Morristown TN),Broadline Foodservice Distribution Center,#1,Gate + GS (not BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@36.17760,-83.37150,400m/data=!3m1!1e3"
+Performance Foodservice - Louisville KY,Broadline Foodservice Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,,"https://www.google.com/maps/@38.21080,-85.54900,400m/data=!3m1!1e3"
+Performance Foodservice - Cincinnati OH,Broadline Foodservice Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@39.23030,-84.44910,400m/data=!3m1!1e3"
+Performance Foodservice - Eastern PA (Coal Township PA),Broadline Foodservice Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,YES,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Rural,,YES,,YES,"https://www.google.com/maps/@40.78785,-76.49245,400m/data=!3m1!1e3"
+Performance Foodservice - Pittsburgh (Mt. Pleasant PA),Broadline Foodservice Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,,YES,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@40.18120,-79.59140,400m/data=!3m1!1e3"
+Performance Foodservice - Manassas VA,Broadline Foodservice Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@38.79250,-77.54270,400m/data=!3m1!1e3"
+Performance Foodservice - Glen Allen VA,Broadline Foodservice Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,YES,,,,YES,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@37.69430,-77.46680,400m/data=!3m1!1e3"
+Performance Foodservice - Tidewater (Suffolk VA),Broadline Foodservice Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@36.7672,-76.5448,400m/data=!3m1!1e3"
+Performance Foodservice - Hickory NC,Broadline Foodservice Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@35.7387,-81.363,400m/data=!3m1!1e3"
+Performance Foodservice - New Orleans (Harahan LA),Broadline Foodservice Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,YES,YES,,1,1,,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@29.9539,-90.1951,400m/data=!3m1!1e3"
+Performance Foodservice - Little Rock AR,Broadline Foodservice Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@34.7194,-92.327,400m/data=!3m1!1e3"
+Performance Foodservice - Temple TX,Broadline Foodservice Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,YES,,,YES,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@31.1438,-97.347,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,2,7%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,15,50%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,1,3%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,12,40%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,7,23%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,17,57%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,3,10%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,27,90%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

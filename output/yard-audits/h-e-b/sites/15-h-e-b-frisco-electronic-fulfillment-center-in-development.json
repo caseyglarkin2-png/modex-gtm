@@ -1,0 +1,47 @@
+{
+  "name": "H-E-B Frisco Electronic Fulfillment Center (in development) - Frisco TX",
+  "type": "E-commerce Fulfillment Center (planned, construction 2026-2027)",
+  "coords": { "lat": 33.221200, "lng": -96.878100 },
+  "geofences": {
+    "perimeter": { "south": 33.219600, "west": -96.879600, "north": 33.222200, "east": -96.876800 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
+    "truckGateCount": 0, "buildingCount": 1, "siteAreaAcres": 23.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.221200,-96.878100,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "multipleFacilities",
+    "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "status": "NOT YET BUILT. The H-E-B Frisco Electronic Fulfillment Center is a planned facility - per Community Impact (Dec 2025) and TDLR project TABS2026005469, construction is slated to begin July 2026 and complete June 2027. As of the audit date (May 2026) no EFC building exists; its truck yard, gate, and docks cannot be physically audited.",
+    "location": "The EFC will be a 51,599 sq ft building at FM 423 & US 380 (US 380 = University Dr) in Frisco, built adjacent to / on the parcel of the existing H-E-B Frisco store at 899 University Drive (130,000 sq ft store, opened Aug 2024). Coordinates locked to the existing H-E-B Frisco store building, the confirmed parcel; the EFC pad location within that parcel is not yet public.",
+    "imagery": "Current satellite shows the completed H-E-B Frisco big-box store with customer parking to the south and a back-of-house service dock on the north side facing a creek/drainage corridor. No EFC structure or its yard is present yet.",
+    "expectedArchetype": "Once built, the Frisco EFC is expected to follow H-E-B's store-attached-eFC pattern (cf. Plano idx 12, Cibolo idx 13): an open back-of-house service drive with no controlled freight gate or guard booth, and a small grocery-scale dock. This is an EXPECTATION, not an observation - all yard fields are listed in uncertainFields.",
+    "perimeter": "The perimeter box drawn is the existing H-E-B Frisco store parcel (~23 acres) as a placeholder for the future EFC site; it is NOT a measured EFC geofence.",
+    "siteAreaAcres": "Derived from the placeholder store-parcel perimeter, not the EFC itself.",
+    "urbanRural": "Frisco / FM 423 & US 380 is a dense, fast-growing north Dallas-Fort Worth suburban retail corridor - Urban."
+  },
+  "method": "deep-audit"
+}

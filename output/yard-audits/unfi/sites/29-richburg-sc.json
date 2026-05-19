@@ -1,0 +1,45 @@
+{
+  "name": "UNFI - Richburg SC DC (Charlotte area)",
+  "type": "Distribution Center",
+  "coords": { "lat": 34.70980, "lng": -81.00420 },
+  "geofences": {
+    "perimeter": { "south": 34.70830, "west": -81.00560, "north": 34.71090, "east": -81.00280 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 34.70850, "west": -81.00560, "north": 34.71060, "east": -81.00490 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20, "trailersVisible": 14, "trailerParkingCapacity": 30,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 9.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.70980,-81.00420,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "dropArea", "trailerParkingCapacity", "siteAreaAcres", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Resolved with medium confidence. UNFI Richburg DC sits in the L&C Distribution Park, Richburg SC 29729 (directories give 578 / 578B L&C Distribution Park; the adjacent building 546 L&C Distribution Park is a separately-listed ~110,000 sq ft warehouse). The roster's APPROXIMATE geocode landed in the rural town center ~1.7km NW; the L&C Distribution Park industrial cluster is off Old Richburg Rd E near a highway. The audited building (locked ~34.70980,-81.00420) is the warehouse in this park whose layout - a dock bank with canopies and a trailer-parking apron - is most consistent with a UNFI conventional-grocery satellite DC. Could not get UNFI signage in Street View (panos snap to the highway, not the park access road), so building identity within the multi-tenant park is not 100% certain.",
+    "truckGate": "Uncertain - no controlled gate visible at the audited building; the truck yard and dock apron appear open to the L&C Distribution Park internal road. No barrier arm or booth seen at z19. Listed uncertain because Street View could not corroborate the property line.",
+    "guardShack": "None visible. remoteGs left false (no confirmed gate).",
+    "dockDoors": "~20 doors estimated - a dock bank with a row of dark dock canopies on the building's west face, several trailers backed in; band 10-25.",
+    "dropArea": "10-25 - paved trailer apron alongside the dock bank holds parked trailers; modest drop capacity for a regional satellite DC.",
+    "dropYard": "TRUE - parked trailers staged on the apron separate from active dock positions.",
+    "drivewayLong": "Internal park road and yard give a deep approach; a multi-truck queue could form inside the park without spilling to a public road.",
+    "urbanRural": "Rural - small-town SC industrial park (Richburg) ringed by woodland; an exurban Charlotte-region DC.",
+    "siteAreaAcres": "~9 acres estimated for the audited building's parcel; the L&C park as a whole is larger."
+  },
+  "method": "deep-audit"
+}

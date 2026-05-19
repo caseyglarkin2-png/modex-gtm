@@ -1,0 +1,57 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Logistics Insight Corp - GM EV Parts Warehouse - Detroit MI,Value-Added Logistics Center / Sequencing Warehouse,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,2,YES,,,,YES,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@42.375600,-83.184600,400m/data=!3m1!1e3"
+Logistics Insight Corp - Stellantis Sequencing Plant - Detroit MI (Georgia St),Parts Sequencing / Sub-Assembly Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,YES,,YES,1,1,,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@42.391100,-83.031200,400m/data=!3m1!1e3"
+Universal Logistics / LINC - Romulus Value-Added Center - Romulus MI,Value-Added Logistics Center / Cross-Dock Terminal,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@42.251528,-83.323800,400m/data=!3m1!1e3"
+Universal Intermodal Services - Dearborn Terminal - Dearborn MI,Intermodal / Drayage Terminal (owned),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@42.321600,-83.154800,400m/data=!3m1!1e3"
+Universal Logistics - GM Arlington Logistics Center - Grand Prairie TX,Value-Added Logistics / Sub-Assembly Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,,,,,,,,,YES,,YES,,,YES,Urban,,YES,,,"https://www.google.com/maps/@32.719500,-97.037200,400m/data=!3m1!1e3"
+Universal Logistics - Nissan Integrated Logistics Center - Smyrna TN,Integrated Logistics Center / Sequencing Warehouse,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@35.9525,-86.4848,400m/data=!3m1!1e3"
+Universal Logistics - Roanoke/Botetourt Value-Added Facility - Cloverdale VA,Value-Added Warehouse / Heavy-Truck Assembly Facility (owned),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@37.37224,-79.9034,400m/data=!3m1!1e3"
+Universal Logistics Services - Maryville Terminal - Maryville TN,Trucking / Logistics Terminal,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,,,YES,,,,YES,,,Rural,,YES,,YES,"https://www.google.com/maps/@35.75479,-84.01224,400m/data=!3m1!1e3"
+Universal Intermodal Services - Jacksonville Terminal - Jacksonville FL,Intermodal / Drayage Terminal (owned),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@30.3455,-81.6965,400m/data=!3m1!1e3"
+Universal Intermodal Services - Compton/Rancho Dominguez Terminal - Rancho Dominguez CA,Intermodal / Drayage Terminal / Container Yard (owned),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,YES,YES,,1,1,,,YES,,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@33.8681,-118.2121,400m/data=!3m1!1e3"
+Universal Intermodal Services - Houston Terminal - Houston TX,Intermodal / Drayage Terminal (owned),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,YES,,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@29.8701,-95.2861,400m/data=!3m1!1e3"
+Universal Logistics / LINC - Sturtevant Contract Logistics Warehouse - Sturtevant WI,Contract Logistics / Value-Added Warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@42.70030,-87.87400,400m/data=!3m1!1e3"
+Universal Logistics - Vance Value-Added Facility - Vance AL,Value-Added Logistics / Sequencing Warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@33.18450,-87.27200,400m/data=!3m1!1e3"
+Universal Logistics - Tanner Value-Added Facility - Tanner AL,Value-Added Logistics / Sequencing Warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,,,,,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@34.63115,-86.89625,400m/data=!3m1!1e3"
+Universal Logistics - Spring Hill Contract Logistics Warehouse - Spring Hill TN,Contract Logistics / Value-Added Warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@35.71200,-86.92500,400m/data=!3m1!1e3"
+Universal Logistics - San Antonio Contract Logistics Warehouse - San Antonio TX,Contract Logistics / Value-Added Warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@29.29800,-98.55000,400m/data=!3m1!1e3"
+Universal Logistics - Huntsville Contract Logistics Warehouse - Huntsville/Madison AL,Contract Logistics / Value-Added Warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@34.74900,-86.86500,400m/data=!3m1!1e3"
+Universal Logistics - Chillicothe Contract Logistics Warehouse - Chillicothe IL,Contract Logistics / Value-Added Warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,YES,,,Rural,,YES,,YES,"https://www.google.com/maps/@40.8482,-89.5535,400m/data=!3m1!1e3"
+Universal Logistics - Mossville Contract Logistics Warehouse - Mossville IL,Contract Logistics / Value-Added Warehouse,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,2,YES,,,,YES,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@40.841,-89.556,400m/data=!3m1!1e3"
+Universal Intermodal Services - Savannah Terminal - Savannah GA,Intermodal / Drayage Terminal (owned),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,YES,,,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@32.1332,-81.175,400m/data=!3m1!1e3"
+Universal Intermodal Services - Harvey Terminal - Harvey IL,Intermodal / Drayage Terminal / Rail Yard (owned),#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,YES,,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@41.5859,-87.6403,400m/data=!3m1!1e3"
+Universal Intermodal Services - Gary Terminal - Gary IN,Intermodal / Drayage Terminal / Container Yard (owned),#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@41.602,-87.337,400m/data=!3m1!1e3"
+Universal Logistics - Louisville Terminal - Louisville KY,Terminal Yard / Intermodal Cross-Dock Terminal (owned),#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@38.21422,-85.8028,400m/data=!3m1!1e3"
+Universal Logistics - Columbus Terminal - Columbus OH,Intermodal / Drayage Terminal Yard (owned),#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,2,1,YES,,,,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@40.013,-83.1308,400m/data=!3m1!1e3"
+Universal Logistics - Clearfield Terminal - Clearfield UT,Intermodal / Rail-Served Transload & Distribution Terminal (owned),#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,YES,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@41.1054,-112.0232,400m/data=!3m1!1e3"
+Universal Logistics - Memphis Terminal - Memphis TN,Intermodal / Drayage Terminal & Container Yard (owned),#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,2,1,YES,,,,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@35.038,-89.9002,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,17,65%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,1,4%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,8,31%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,26,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,11,42%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,13,50%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,1,4%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,25,96%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,26,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,26,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

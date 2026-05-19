@@ -1,0 +1,22 @@
+{
+  "name": "Kraft Heinz - Kendallville",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs"],
+  "fieldNotes": {
+    "truckGate": "Street View squarely shows the plant front: open driveway and parking apron with no barrier arm, gate, or guard booth at the road. Calling no gate.",
+    "dropYard": "Long row of parked trailers in a dedicated lot along the southwest side of the property.",
+    "urbanRural": "Small-town plant at the edge of Kendallville with farmland and residential nearby.",
+    "drivewayLong": "Wide paved approach with room for a multi-truck queue."
+  }
+}

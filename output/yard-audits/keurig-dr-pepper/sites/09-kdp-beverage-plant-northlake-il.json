@@ -1,0 +1,44 @@
+{
+  "name": "KDP Beverage Plant - Northlake IL",
+  "type": "Manufacturing - Beverage",
+  "coords": { "lat": 41.918007, "lng": -87.903662 },
+  "geofences": {
+    "perimeter": null,
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 0.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.918007,-87.903662,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "location": "COULD NOT POSITIVELY LOCATE THE SPECIFIC BUILDING. The roster pin (41.918007,-87.903662, RANGE_INTERPOLATED) lands on a residential intersection (Wolf Rd & Palmer Ave) next to a school campus - not an industrial facility. Web research confirms KDP / Dr Pepper Seven Up Bottling operates at '400 N Wolf Rd, Northlake, IL 60164' (alt: '401 N Railroad Ave'), but geocoding that address also resolves to a residential block / city park along Wolf Rd. The facility is confirmed OPERATING (Teamsters Local 727 represents 575+ Dr Pepper employees at Northlake & Harvey IL; recent 2025 employee reviews). Northlake's industrial corridor near the UP Proviso rail yard was probed extensively (multiple z16-z19 satellite crops and Street View passes) but no building could be positively confirmed as the KDP plant - no Dr Pepper signage was visible and several similar warehouse/industrial buildings exist. Listing references ('Dr Pepper Seven Up Bottling', Teamsters 'SSRs & Account Managers') suggest this may be a bottling/DSD distribution operation rather than a large standalone manufacturing plant.",
+    "all": "All 22 classification fields are unverified because the building could not be positively identified. Values are left at conservative defaults and every field is listed in uncertainFields. urbanRural set 'Urban' as the only safely-inferable field - Northlake is dense Chicago-metro fabric. Recommend human review with a verified pin or company-provided address.",
+    "geofences": "Perimeter and all sub-zones left null - no confirmed footprint to box.",
+    "yardMetrics": "Counts left at zero/default - not measured."
+  },
+  "method": "deep-audit"
+}

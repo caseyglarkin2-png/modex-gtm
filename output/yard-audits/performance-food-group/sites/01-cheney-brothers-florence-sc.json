@@ -1,0 +1,50 @@
+{
+  "name": "Cheney Brothers - Florence SC (new cold DC)",
+  "type": "Refrigerated/Freezer Distribution Center",
+  "coords": { "lat": 34.271014, "lng": -79.694676 },
+  "geofences": {
+    "perimeter": { "south": 34.268400, "west": -79.698200, "north": 34.273600, "east": -79.690800 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 0,
+    "siteAreaAcres": 50.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.271014,-79.694676,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "multipleFacilities",
+    "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "siteStatus": "GREENFIELD UNDER CONSTRUCTION. Roster coordinates land on an active earthwork/grading pad in the Pee Dee Commerce City East Industrial Park. Latest available Maxar satellite and Feb-2024 Street View both show bare graded earth, silt fencing, and construction equipment - NO building, docks, gate, or trailers exist in imagery.",
+    "planned": "Per A M King and FCEDP, the completed building will be a 386,047 sq ft refrigerated/freezer DC on ~50 acres with 45 dock positions; a $42.5M expansion with 85 jobs was announced March 2026. These figures are planned, not yet visible.",
+    "dockDoors": "Planned 45 docks per A M King, but band reported as NONE because no building/docks are visible in imagery.",
+    "perimeter": "Drawn around the visible graded site footprint (~50 acres), bounded by Florence Harllee Blvd to the south; this is the planned property, not a measured operational yard.",
+    "urbanRural": "Rural - edge-of-town industrial park off I-95, surrounded by farmland and scattered DCs.",
+    "buildingCount": "0 - no structure stands yet."
+  },
+  "method": "deep-audit"
+}

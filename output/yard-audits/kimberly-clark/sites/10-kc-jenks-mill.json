@@ -1,0 +1,55 @@
+{
+  "name": "K-C Jenks Mill - Jenks OK",
+  "type": "Tissue paper mill (Cottonelle, Scott bathroom tissue) with regional distribution center",
+  "coords": { "lat": 35.971500, "lng": -95.927200 },
+  "geofences": {
+    "perimeter": { "south": 35.964500, "west": -95.932500, "north": 35.977500, "east": -95.919500 },
+    "truckGate": { "south": 35.966700, "west": -95.930700, "north": 35.967500, "east": -95.929700 },
+    "dropYards": [
+      { "south": 35.968000, "west": -95.925500, "north": 35.972500, "east": -95.921500 }
+    ],
+    "dockAprons": [
+      { "south": 35.969300, "west": -95.930000, "north": 35.970200, "east": -95.927500 }
+    ],
+    "staging": { "south": 35.966800, "west": -95.930200, "north": 35.968200, "east": -95.929000 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 1,
+    "buildingCount": 5,
+    "siteAreaAcres": 320.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.971500,-95.927200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "scale", "dockDoorCount", "entryLanes", "exitLanes", "railServed", "multiStep"],
+  "fieldNotes": {
+    "location": "Roster supplied only a city-level address and a coordinate (35.9953,-95.9727) that landed in a Jenks residential subdivision ~10 km from the mill. Directory addresses (13252 S Yale Pl / 13219 S Kimberly-Clark Pl) geocode poorly. Resolved via a documented detail (Tulsa World): the mill 'sits on the Arkansas River between Jenks and Bixby' — a 1.8M sq ft factory on 342 acres. Found and confirmed the large riverside industrial complex at ~35.9715,-95.9272: a multi-building tissue mill + regional DC overlooking the Arkansas River, consistent with the facility (opened 1990).",
+    "truckGate": "Controlled truck entrance at the SW corner where the long access road from the public road reaches the mill. z19 imagery shows a pinch-point with a gatehouse structure, marked lanes, and a parked truck in a staging position; Street View confirms a small gate building with a truck at the access road. Classed truckGate true.",
+    "guardShack": "A gatehouse / canopied structure sits beside the checkpoint pinch-point at the truck entrance — classed as a guard shack. Resolution is limited at z20-21 so listed uncertain; remoteGs false.",
+    "scale": "The structure cluster at the entrance checkpoint is consistent with a truck scale / scale house alongside the gatehouse — classed scale true but listed uncertain.",
+    "preGateStaging": "A truck is visible staged on the access road before the gate; the long approach provides pre-gate waiting room.",
+    "drivewayLong": "Long access road from the public road to the gate and on to the docks — easily holds a 3+ truck queue.",
+    "dropArea": "Large trailer drop yard E of the main building with many long rows of parked trailers — 50+.",
+    "dockDoors": "Long dock bank on the south face of the white warehouse/DC building with many trailers backed in; ~45 doors estimated — listed uncertain.",
+    "railServed": "No clear rail spur confirmed entering the property; some linear features near the SE could be rail or road. Listed uncertain; classed false.",
+    "multipleFacilities": "Campus: integrated tissue mill, a large separate warehouse / regional distribution center, wastewater treatment plant, tank farm, and process buildings — multiple distinct building clusters.",
+    "urbanRural": "Large 320+ acre campus on the rural Arkansas River bank between Jenks and Bixby, surrounded by farmland and woods — Rural.",
+    "fastLaneOpportunity": "Wide entry apron and long approach road give ample room for an express/bypass lane.",
+    "entryLanes": "Entry/exit lane counts estimated from the gate pinch-point — listed uncertain."
+  },
+  "method": "deep-audit"
+}

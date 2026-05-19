@@ -1,0 +1,47 @@
+{
+  "name": "Balcones Distilling - Waco TX",
+  "type": "Distillery",
+  "coords": { "lat": 31.550293, "lng": -97.135725 },
+  "geofences": {
+    "perimeter": { "south": 31.54985, "west": -97.13625, "north": 31.55075, "east": -97.13525 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 31.55000, "west": -97.13620, "north": 31.55060, "east": -97.13590 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 2, "trailersVisible": 0, "trailerParkingCapacity": 0,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 1.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@31.550293,-97.135725,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "No controlled truck entrance. Balcones occupies the historic multi-story Texas Fireproof Storage Company building, which fronts directly onto the downtown Waco street grid (S 11th St). No barrier arm, sliding gate, or checkpoint - trucks load from the public street / alley.",
+    "guardShack": "No guard booth - this is a downtown urban building with no yard.",
+    "dockDoors": "Multi-story historic warehouse with overhead/roll-up service doors on the alley (west) side; ~2 truck-usable loading points estimated, band 0-10, medium confidence. No conventional dock-leveler bank.",
+    "dropArea": "No trailer parking on site; no yard space.",
+    "drivewayShort": "No driveway/approach of meaningful length - the loading face meets the public alley/street directly.",
+    "backupSensitive": "Tight downtown geometry: any truck servicing the building backs in directly from a public street/alley with no off-street stacking room.",
+    "siteAreaAcres": "Single building on a roughly 1.1-acre downtown parcel.",
+    "buildingCount": "One historic building houses all distilling operations.",
+    "urbanRural": "Downtown Waco, inside the dense urban industrial fabric - Urban.",
+    "railServed": "No rail spur into the property.",
+    "general": "Per The Spirits Business, production was paused September 2025; the site continues with tasting room / visitor operations, so truck activity is minimal."
+  },
+  "method": "deep-audit"
+}

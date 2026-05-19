@@ -1,0 +1,48 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Toyota Motor Manufacturing Kentucky - Georgetown KY,Vehicle Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@38.262,-84.535,400m/data=!3m1!1e3"
+Toyota Motor Manufacturing Indiana - Princeton IN,Vehicle Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@38.29,-87.563,400m/data=!3m1!1e3"
+Toyota Motor Manufacturing Texas - San Antonio TX,Vehicle Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,2,2,YES,,,,YES,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@29.2625,-98.5425,400m/data=!3m1!1e3"
+Toyota Motor Manufacturing Mississippi - Blue Springs MS,Vehicle Assembly Plant,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,2,2,YES,,,,YES,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@34.3805,-88.895,400m/data=!3m1!1e3"
+Toyota Motor Manufacturing West Virginia - Buffalo WV,Powertrain Plant (engines/transmissions),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@38.598,-81.992,400m/data=!3m1!1e3"
+Mazda Toyota Manufacturing USA - Huntsville AL,Vehicle Assembly Plant (Mazda-Toyota JV),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@34.6835,-86.848,400m/data=!3m1!1e3"
+Toyota Battery Manufacturing North Carolina - Liberty NC,Battery Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,2,2,YES,,,YES,,,,YES,,,Rural,,YES,,YES,"https://www.google.com/maps/@35.8955,-79.63,400m/data=!3m1!1e3"
+Toyota Motor Manufacturing Alabama - Huntsville AL,Engine Plant,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@34.8295,-86.6375,400m/data=!3m1!1e3"
+Toyota Motor Manufacturing Missouri - Troy MO,Powertrain Plant (aluminum castings),#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,YES,,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@38.96360,-90.96904,400m/data=!3m1!1e3"
+Toyota Motor Manufacturing Tennessee - Jackson TN,Powertrain Plant (aluminum castings),#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,YES,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@35.59800,-88.94100,400m/data=!3m1!1e3"
+TABC Inc - Long Beach CA,"Parts/Components Plant (stamping, welding, catalytic converters)",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,,,YES,YES,YES,,1,1,,YES,,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@33.87150,-118.16200,400m/data=!3m1!1e3"
+North American Parts Center Kentucky - Hebron KY,Parts Procurement & Distribution Hub,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@39.05330,-84.70900,400m/data=!3m1!1e3"
+Toyota Logistics Services Vehicle Distribution Center - Long Beach CA,Vehicle Distribution Center (port processing),#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,YES,,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@33.778,-118.2185,400m/data=!3m1!1e3"
+Toyota Logistics Services Vehicle Distribution Center - Portland OR,Vehicle Distribution Center (port processing),#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,YES,,,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@45.6365,-122.754,400m/data=!3m1!1e3"
+Toyota Logistics Services Vehicle Distribution Center - Newark NJ,Vehicle Distribution Center (port processing),#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,YES,,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@40.694,-74.136,400m/data=!3m1!1e3"
+Toyota Parts Distribution Center - Ontario CA,Parts Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@34.033,-117.5818,400m/data=!3m1!1e3"
+Toyota Parts Distribution Center - Mansfield MA,Parts Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,YES,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@42.01685,-71.23445,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,1,6%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,3,18%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,6,35%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,5,29%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,2,12%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,17,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,15,88%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,12,71%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,11,65%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,6,35%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,17,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,17,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

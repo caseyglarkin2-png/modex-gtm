@@ -1,0 +1,53 @@
+{
+  "name": "General Mills - Covington GA",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 33.62280, "lng": -83.82400 },
+  "geofences": {
+    "perimeter": { "south": 33.61930, "west": -83.82780, "north": 33.62620, "east": -83.81950 },
+    "truckGate": { "south": 33.62290, "west": -83.82690, "north": 33.62360, "east": -83.82600 },
+    "dropYards": [
+      { "south": 33.62470, "west": -83.82680, "north": 33.62560, "east": -83.82540 },
+      { "south": 33.62450, "west": -83.82490, "north": 33.62560, "east": -83.82380 },
+      { "south": 33.62180, "west": -83.82200, "north": 33.62300, "east": -83.82020 },
+      { "south": 33.62040, "west": -83.82200, "north": 33.62140, "east": -83.82020 }
+    ],
+    "dockAprons": [
+      { "south": 33.62200, "west": -83.82200, "north": 33.62290, "east": -83.82060 },
+      { "south": 33.62300, "west": -83.82320, "north": 33.62380, "east": -83.82220 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55, "trailersVisible": 95, "trailerParkingCapacity": 140,
+    "truckGateCount": 1, "buildingCount": 5, "siteAreaAcres": 146.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.62280,-83.82400,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale"],
+  "fieldNotes": {
+    "location": "Confirmed large cereal manufacturing complex (Cinnamon Toast Crunch) at 15200 Industrial Park Blvd NE, Covington GA. Geocode pin was ~2.5km of city-level offset corrected by satellite + web search; locked center 33.6228,-83.8240.",
+    "truckGate": "Property is fully perimeter-fenced (black ornamental metal fence visible in Street View along Industrial Park Blvd NE). Single private access road serves the campus from the SW corner near a road intersection. Treated as a controlled truck entrance.",
+    "guardShack": "No guard booth identifiable at the property line; Street View coverage does not extend onto the private entrance road so a booth could exist but none seen. An interior structure near 33.6225,-83.8246 appears to be a covered break/smoking shelter, not a gate booth.",
+    "remoteGs": "Set true on the assumption of gate without confirmed staffed booth; low confidence - flagged.",
+    "multipleFacilities": "Campus has two large building clusters (west production block and east production/warehouse block) plus several smaller buildings.",
+    "dropArea": "Four distinct trailer drop yards counted: NW lot, N lot near water tower, and two SE lots by the main dock face - well over 50 trailer stalls combined.",
+    "dockDoors": "Main dock face on the SE side shows ~30-40 trailers backed in across two banks; additional doors on the east building. Estimated 50+ total.",
+    "shipRcvSeparate": "Dock activity spread across separate building faces (SE main dock bank and east-building dock bank) supports separate ship/receive clusters.",
+    "scale": "No truck scale identified in imagery; flagged as uncertain.",
+    "siteAreaAcres": "Perimeter box ~146 acres but the property is heavily forested; usable paved industrial core is roughly 45-55 acres.",
+    "railServed": "No rail spur visible entering the property; the diagonal cleared strips east of the plant are a power-line right-of-way, not rail."
+  },
+  "method": "deep-audit"
+}

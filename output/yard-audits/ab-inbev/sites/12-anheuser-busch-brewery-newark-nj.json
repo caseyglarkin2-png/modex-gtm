@@ -1,0 +1,57 @@
+{
+  "name": "Anheuser-Busch Brewery - Newark NJ",
+  "type": "Brewery",
+  "coords": { "lat": 40.69400, "lng": -74.19250 },
+  "geofences": {
+    "perimeter": { "south": 40.69000, "west": -74.19650, "north": 40.69850, "east": -74.18850 },
+    "truckGate": { "south": 40.69570, "west": -74.19050, "north": 40.69640, "east": -74.18950 },
+    "dropYards": [
+      { "south": 40.69500, "west": -74.19500, "north": 40.69700, "east": -74.19250 },
+      { "south": 40.69620, "west": -74.19150, "north": 40.69780, "east": -74.18950 }
+    ],
+    "dockAprons": [
+      { "south": 40.69300, "west": -74.19550, "north": 40.69450, "east": -74.19400 },
+      { "south": 40.69550, "west": -74.19400, "north": 40.69700, "east": -74.19250 }
+    ],
+    "staging": { "south": 40.69480, "west": -74.19250, "north": 40.69580, "east": -74.19100 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 150,
+    "trailerParkingCapacity": 250,
+    "truckGateCount": 2,
+    "buildingCount": 7,
+    "siteAreaAcres": 86.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.69400,-74.19250,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "scale", "entryLanes", "exitLanes", "dockDoorCount", "truckGateCount"],
+  "fieldNotes": {
+    "location": "Confirmed Anheuser-Busch Newark Brewery, 200 US-1, Newark NJ. Roster coords were ~2.4 km off (movedMeters 2445). Locked center on the main brewhouse/warehouse mass at 40.69400,-74.19250. Identity confirmed by the brewing complex (brick brewhouse, grain-silo tank farm), extensive trailer yards, and the 86-acre footprint on Route 1 between rail lines and Newark Liberty Airport - matching the property described in the $360M Goodman Group sale.",
+    "operatingStatus": "IMPORTANT - the Newark brewery (opened 1951, AB's 2nd-oldest) CLOSED in early 2026 and the 86-acre site was SOLD to Goodman Group for ~$360M (deed filed March 2026); Goodman plans an industrial/logistics redevelopment. As of the audit date (May 2026) the facility is no longer operating as a brewery. Audit reflects the physical yard infrastructure from pre-closure imagery.",
+    "truckGate": "Large fenced industrial campus - chain-link perimeter fence confirmed in Street View along the E (Route 1 access road) building face. Multiple controlled access points (truck yard entrances on the N/NE plus a campus entrance off the E access road); exact gate structures not positively imaged.",
+    "guardShack": "A guarded entry is standard for an AB brewery of this scale and age; small structures sit near the trailer-yard entrances, but a truck-gate guard booth could not be positively confirmed at z20 - medium confidence.",
+    "entryExitSeparate": "Distinct truck-yard entrances at different points of the property line (N trailer yard vs E access road) - treated as separate entry/exit points.",
+    "drivewayLong": "Ample internal circulation and stacking room within the large campus.",
+    "dockDoors": "Dock doors with backed-in trailers along multiple building faces; ~45 estimated, 25-50 band.",
+    "dropArea": "Multiple very large trailer yards on the N and NE sides holding ~150 trailers in marked rows; 50+ band, capacity ~250.",
+    "shipRcvSeparate": "Distinct dock banks on separate building faces.",
+    "railServed": "Multiple rail lines run along the W edge with sidings into the property at the tank farm - clearly rail-served.",
+    "multipleFacilities": "Campus: brewhouse with grain-silo tank farm, multiple packaging warehouses, ancillary buildings.",
+    "urbanRural": "Dense Newark / Newark Liberty Airport industrial fabric within the NYC metro - Urban.",
+    "scale": "No truck scale positively identified - flagged uncertain."
+  },
+  "method": "deep-audit"
+}

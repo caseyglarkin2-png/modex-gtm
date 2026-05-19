@@ -1,0 +1,51 @@
+{
+  "name": "K-C Graniteville Distribution Center - Graniteville SC",
+  "type": "Distribution center",
+  "coords": { "lat": 33.62405, "lng": -81.84755 },
+  "geofences": {
+    "perimeter": { "south": 33.62150, "west": -81.85010, "north": 33.62650, "east": -81.84480 },
+    "truckGate": { "south": 33.62290, "west": -81.84680, "north": 33.62340, "east": -81.84610 },
+    "dropYards": [
+      { "south": 33.62480, "west": -81.84960, "north": 33.62620, "east": -81.84860 }
+    ],
+    "dockAprons": [
+      { "south": 33.62380, "west": -81.84920, "north": 33.62620, "east": -81.84790 },
+      { "south": 33.62240, "west": -81.84740, "north": 33.62500, "east": -81.84600 }
+    ],
+    "staging": { "south": 33.62200, "west": -81.84720, "north": 33.62290, "east": -81.84600 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120, "trailersVisible": 55, "trailerParkingCapacity": 70,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 30.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.62405,-81.84755,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "dropArea", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "Confirmed at 1043 Global Ave, Graniteville SC, in Sage Mill Industrial Park. The DC is the 'Global Avenue Logistics Center' - a 450,033 sq ft Class-A cross-dock building on 30.1 acres, leased in full by Kimberly-Clark (CoStar reports K-C renewed its 450,000 sq ft lease). Roster ROOFTOP coords landed within the building footprint; locked center ~33.62405,-81.84755.",
+    "truckGate": "TRUE - Street View (2024-03) of the truck-court entrance off Global Ave clearly shows a chain-link sliding gate across the truck lane plus a chain-link perimeter fence around the property (corroborated by leasing materials describing a 'fully secured site').",
+    "guardShack": "TRUE - a small peaked-roof guard booth sits immediately beside the truck lane at the gate, visible unmistakably in the close Street View frame. remoteGs therefore false.",
+    "docks": "Cross-dock building with dock doors and trailers backed in along BOTH long faces (NE and SW). Total well into the 50+ band; dockDoorCount ~120 is an honest overhead estimate for the two faces combined (loose).",
+    "shipRcvSeparate": "TRUE - cross-dock layout = two dock banks on opposite building faces, standard split shipping/receiving.",
+    "dropYard": "TRUE - marked trailer-parking lanes in the NE truck court hold trailers without tractors; dropArea estimated 25-50.",
+    "postGateStaging": "TRUE - deep paved truck courts (leasing materials cite courts 'up to 185 ft deep') give 3+ trucks of stacking room inside the gate before the docks; drivewayLong true.",
+    "entryExit": "Single combined truck gate at the SE corner off Global Ave - entryExitTogether true; ~1 inbound + 1 outbound lane through the gate.",
+    "fastLaneOpportunity": "FALSE - the gate is a single controlled lane group with no obvious unused paved width for a bypass.",
+    "rail": "FALSE active rail - the site is adjacent to a Norfolk Southern line and leasing materials note it COULD tie in via a rail spur, but no spur currently runs into the property.",
+    "urbanRural": "Sage Mill Industrial Park sits in woodland on the edge of small-town Graniteville SC, ~1.5 mi from I-20. Edge-of-town industrial - classified Rural per rubric.",
+    "siteAreaAcres": "30.1 acres is the documented parcel size; the axis-aligned perimeter box is a loose bounding box around a building elongated NW-SE and so overcounts the corners."
+  },
+  "method": "deep-audit"
+}
