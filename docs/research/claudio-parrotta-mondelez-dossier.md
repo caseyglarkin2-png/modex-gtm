@@ -27,7 +27,7 @@
 
 ### Key Insight: North America Turnaround Leader
 - As SVP Supply Chain North America, Claudio **led a significant turnaround transformation** — "driving step-change improvements across safety, quality, service, and productivity, elevating performance to industry-leading standards"
-- He developed the **North America Supply Chain Master Plan 2030** — a long-term strategic roadmap for the region
+- He led the region's multi-year supply-chain turnaround roadmap, since aligned to Mondelez's company-wide **Vision 2030** growth strategy
 - This turnaround experience means he knows North America's pain points intimately and has personally wrestled with facility-level operational challenges
 - A leader who has **proven he can transform underperforming operations** — YardFlow fits his transformation playbook
 
@@ -93,11 +93,11 @@
 
 ## 3. Recent Mondelez Supply Chain News & Strategic Initiatives
 
-### Supply Chain Master Plan 2030 (Claudio's Signature Initiative)
-- As SVP NA Supply Chain, Claudio personally developed and championed the **North America Supply Chain Master Plan 2030**
-- Positions the region on a "clear and sustainable path toward long-term excellence"
-- This is a multi-year transformation roadmap — **YardFlow could fit as a "quick win" within the Master Plan framework**
-- The plan covers safety, quality, service, and productivity — yard management directly impacts service and productivity
+### Vision 2030 — the Supply-Chain Mandate (Claudio's Domain)
+- **Vision 2030** is Mondelez's company-wide long-term growth strategy — four pillars: Growth, Execution, Culture, Sustainability
+- Its **Execution pillar** calls explicitly for a **customer-centric supply chain** — the dimension Claudio owns as global EVP & CSCO
+- **YardFlow could fit as a "quick win" within the Vision 2030 Execution-pillar agenda**
+- Separately, Claudio's six-year NA turnaround was measured on safety, quality, service, and productivity — yard management lands directly on the service and productivity dimensions
 
 ### North America Turnaround (2018–2024)
 - Under Claudio's leadership, NA supply chain performance was elevated to "industry-leading standards"
@@ -167,7 +167,7 @@
 
 - **No direct public mentions found** of yard management technology at Mondelez specifically
 - This is actually a **positive signal** — it suggests the yard management space is an untapped opportunity
-- Mondelez's investment in the Supply Chain Master Plan 2030 indicates openness to operational technology investments
+- Mondelez's Vision 2030 strategy — and its Execution-pillar mandate for a customer-centric supply chain — indicates openness to operational technology investments
 - The company's scale (130+ plants, 320 warehouses) means even pilot-level implementations can demonstrate massive ROI
 
 ---
@@ -186,10 +186,10 @@ Claudio's bio explicitly states he strives to make "supply chain a business comp
 - Very few have invested in yard management — **the last mile of the first mile**
 - At Mondelez's scale, optimizing the dock-to-yard-to-road interface IS a competitive advantage
 
-### The Master Plan 2030 Framework
-Claudio built a long-term strategic roadmap for North America. YardFlow can be positioned as:
-- A **quick-win technology** that delivers Master Plan 2030 objectives in months
-- Specifically fits the "service" and "productivity" pillars of the plan
+### The Vision 2030 Framework
+Vision 2030 is Mondelez's long-term growth strategy; its Execution pillar names a customer-centric supply chain. YardFlow can be positioned as:
+- A **quick-win technology** that delivers Vision 2030 Execution-pillar objectives in months
+- Specifically fits the customer-centric-supply-chain mandate of the Execution pillar
 - Pilot at 2-3 high-volume NA facilities → prove ROI → scale across the network
 
 ### He's an Engineer
@@ -210,7 +210,7 @@ Managing 130+ plants and 320 warehouses means Claudio thinks at scale. The pitch
 
 ### Messaging Themes
 1. **"The yard is the last unoptimized link in your supply chain"** — he's optimized manufacturing, warehousing, and transportation. The yard connecting them is still manual.
-2. **"Master Plan 2030 accelerator"** — position YardFlow as a technology that delivers his strategic plan objectives on an aggressive timeline
+2. **"Vision 2030 accelerator"** — position YardFlow as a technology that delivers the Execution-pillar supply-chain objectives on an aggressive timeline
 3. **"130 plants × 24-minute improvement"** — lead with the scale math
 4. **"Seasonal-proof your docks"** — Halloween/Christmas chocolate surges are a pain point only yard management can solve
 
@@ -221,7 +221,7 @@ Managing 130+ plants and 320 warehouses means Claudio thinks at scale. The pitch
 
 ### Email Opener Ideas
 - Reference his NA turnaround: "Your turnaround of Mondelez North America's supply chain is well-documented. We work on the one piece most turnarounds miss — the yard."
-- Reference the Master Plan: "As you scale the Supply Chain Master Plan 2030 across 130+ plants, we've helped similar operations cut truck turn times in half at the dock."
+- Reference Vision 2030: "As Vision 2030's Execution pillar pushes a customer-centric supply chain across 130+ plants, we've helped similar operations cut truck turn times in half at the dock."
 - Reference seasonal: "When your chocolate lines surge 3x for Halloween, the yard becomes the bottleneck. YardFlow makes that invisible."
 
 ---

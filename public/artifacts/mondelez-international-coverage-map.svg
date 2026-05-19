@@ -2,7 +2,7 @@
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 1600 900"
   role="img"
-  aria-label="Master Plan 2030 coverage map: six tiles representing the Mondelez North America operating surfaces touched by Claudio Parrotta's Master Plan 2030. Master Plan 2030, Acquisition Integration, Biscuit, Chocolate, and Gum and Candy are covered; Yard Network Ops is unfilled."
+  aria-label="Vision 2030 coverage map: six tiles representing the Mondelez North America operating surfaces under Vision 2030. Vision 2030, Acquisition Integration, Biscuit, Chocolate, and Gum and Candy are covered; Yard Network Ops is unfilled."
 >
   <!-- Cream background to blend with memo body -->
   <rect width="1600" height="900" fill="#f5f1e8" />
@@ -10,7 +10,7 @@
   <g font-family="'Courier New', ui-monospace, SFMono-Regular, Menlo, monospace">
     <!-- Top eyebrow -->
     <text x="80" y="64" fill="#8a847b" font-size="14" letter-spacing="3.5" font-weight="500">
-      MASTER PLAN 2030 COVERAGE MAP
+      VISION 2030 COVERAGE MAP
     </text>
     <text x="1520" y="64" text-anchor="end" fill="#8a847b" font-size="14" letter-spacing="2.5" font-weight="500">
       6 TILES · 5 COVERED · 1 UNFILLED
@@ -19,11 +19,11 @@
     <!-- Hairline rule under eyebrow -->
     <line x1="80" y1="90" x2="1520" y2="90" stroke="#d8d2c2" stroke-width="1" />
 
-    <!-- ── Tile 1 : MASTER PLAN 2030 ────────────────────────────── -->
+    <!-- ── Tile 1 : VISION 2030 ──────────────────────────────────── -->
     <rect x="80" y="130" width="460" height="320" fill="none" stroke="#a89e8b" stroke-width="1" />
     <circle cx="110" cy="160" r="4" fill="#a89e8b" />
     <text x="310" y="275" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
-      MASTER PLAN
+      VISION
     </text>
     <text x="310" y="310" text-anchor="middle" fill="#1a1a1a" font-size="26" font-weight="600" letter-spacing="5">
       2030
