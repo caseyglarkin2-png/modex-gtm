@@ -3203,6 +3203,583 @@
         "zone": "dockApron",
         "index": 1
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3038,
+              33.0301
+            ],
+            [
+              -97.2975,
+              33.0301
+            ],
+            [
+              -97.2975,
+              33.0334
+            ],
+            [
+              -97.3038,
+              33.0334
+            ],
+            [
+              -97.3038,
+              33.0301
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Fort Worth Distribution Center - Fort Worth TX",
+        "type": "Distribution center / cross-dock warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 115,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 53.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.2959,
+              33.0306
+            ],
+            [
+              -97.2951,
+              33.0306
+            ],
+            [
+              -97.2951,
+              33.0311
+            ],
+            [
+              -97.2959,
+              33.0311
+            ],
+            [
+              -97.2959,
+              33.0306
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Fort Worth Distribution Center - Fort Worth TX",
+        "type": "Distribution center / cross-dock warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3034,
+              33.0323
+            ],
+            [
+              -97.2976,
+              33.0323
+            ],
+            [
+              -97.2976,
+              33.0333
+            ],
+            [
+              -97.3034,
+              33.0333
+            ],
+            [
+              -97.3034,
+              33.0323
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Fort Worth Distribution Center - Fort Worth TX",
+        "type": "Distribution center / cross-dock warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3034,
+              33.0319
+            ],
+            [
+              -97.2976,
+              33.0319
+            ],
+            [
+              -97.2976,
+              33.0325
+            ],
+            [
+              -97.3034,
+              33.0325
+            ],
+            [
+              -97.3034,
+              33.0319
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Fort Worth Distribution Center - Fort Worth TX",
+        "type": "Distribution center / cross-dock warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3034,
+              33.0307
+            ],
+            [
+              -97.2978,
+              33.0307
+            ],
+            [
+              -97.2978,
+              33.0311
+            ],
+            [
+              -97.3034,
+              33.0311
+            ],
+            [
+              -97.3034,
+              33.0307
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Fort Worth Distribution Center - Fort Worth TX",
+        "type": "Distribution center / cross-dock warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.56565,
+              29.87015
+            ],
+            [
+              -95.564,
+              29.87015
+            ],
+            [
+              -95.564,
+              29.87195
+            ],
+            [
+              -95.56565,
+              29.87195
+            ],
+            [
+              -95.56565,
+              29.87015
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Houston Distribution Center - Houston TX",
+        "type": "Distribution center / multi-tenant warehouse (tenant)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 7.9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5643,
+              29.87215
+            ],
+            [
+              -95.5638,
+              29.87215
+            ],
+            [
+              -95.5638,
+              29.87255
+            ],
+            [
+              -95.5643,
+              29.87255
+            ],
+            [
+              -95.5643,
+              29.87215
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Houston Distribution Center - Houston TX",
+        "type": "Distribution center / multi-tenant warehouse (tenant)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5656,
+              29.8712
+            ],
+            [
+              -95.5641,
+              29.8712
+            ],
+            [
+              -95.5641,
+              29.87195
+            ],
+            [
+              -95.5656,
+              29.87195
+            ],
+            [
+              -95.5656,
+              29.8712
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Houston Distribution Center - Houston TX",
+        "type": "Distribution center / multi-tenant warehouse (tenant)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5656,
+              29.87105
+            ],
+            [
+              -95.5642,
+              29.87105
+            ],
+            [
+              -95.5642,
+              29.87145
+            ],
+            [
+              -95.5656,
+              29.87145
+            ],
+            [
+              -95.5656,
+              29.87105
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Houston Distribution Center - Houston TX",
+        "type": "Distribution center / multi-tenant warehouse (tenant)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.52685,
+              34.0442
+            ],
+            [
+              -117.5245,
+              34.0442
+            ],
+            [
+              -117.5245,
+              34.04575
+            ],
+            [
+              -117.52685,
+              34.04575
+            ],
+            [
+              -117.52685,
+              34.0442
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Ontario Distribution Center - Ontario CA",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 9.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5264,
+              34.04425
+            ],
+            [
+              -117.52595,
+              34.04425
+            ],
+            [
+              -117.52595,
+              34.04455
+            ],
+            [
+              -117.5264,
+              34.04455
+            ],
+            [
+              -117.5264,
+              34.04425
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Ontario Distribution Center - Ontario CA",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5267,
+              34.0444
+            ],
+            [
+              -117.52545,
+              34.0444
+            ],
+            [
+              -117.52545,
+              34.0448
+            ],
+            [
+              -117.5267,
+              34.0448
+            ],
+            [
+              -117.5267,
+              34.0444
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Ontario Distribution Center - Ontario CA",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5268,
+              34.04475
+            ],
+            [
+              -117.52645,
+              34.04475
+            ],
+            [
+              -117.52645,
+              34.04545
+            ],
+            [
+              -117.5268,
+              34.04545
+            ],
+            [
+              -117.5268,
+              34.04475
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Ontario Distribution Center - Ontario CA",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
     }
   ]
 }

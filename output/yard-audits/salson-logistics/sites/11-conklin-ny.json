@@ -1,0 +1,66 @@
+{
+  "name": "SalSon Logistics - Dick's Sporting Goods Conklin DC (Dedicated Fleet) - Conklin NY",
+  "type": "E-commerce distribution center (SalSon dedicated-fleet operation)",
+  "coords": { "lat": 42.04280, "lng": -75.81000 },
+  "geofences": {
+    "perimeter": { "south": 42.03950, "west": -75.81250, "north": 42.04550, "east": -75.80700 },
+    "truckGate": { "south": 42.04140, "west": -75.81020, "north": 42.04190, "east": -75.80940 },
+    "dropYards": [
+      { "south": 42.04130, "west": -75.80950, "north": 42.04500, "east": -75.80700 }
+    ],
+    "dockAprons": [
+      { "south": 42.04060, "west": -75.81120, "north": 42.04470, "east": -75.80980 }
+    ],
+    "staging": { "south": 42.04150, "west": -75.80980, "north": 42.04280, "east": -75.80850 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 350,
+    "trailerParkingCapacity": 550,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 68.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.04280,-75.81000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "locate": "Resolved to 1314 Conklin Road, Conklin NY 13748 — the Dick's Sporting Goods Conklin e-commerce distribution center, a large single-tenant DC in the Susquehanna River valley south of Binghamton. SalSon Logistics runs a DEDICATED-FLEET transportation operation out of this DC (SalSon is the carrier/transport partner, not the DC operator). Google geocode returned a ROOFTOP hit at 42.0411656,-75.8098423; the locked center is moved onto the building footprint. The old stub mislabeled this site 'Fishkill NY' — corrected to Conklin, NY.",
+    "facilityNature": "A very large modern e-commerce DC building with an extensive trailer drop yard along its NE/east side. The building runs roughly NW-SE; docks face the east into the truck court / drop yard; employee car-parking is at the SE corner with the office.",
+    "truckGate": "The truck court / drop yard is enclosed; the truck access road from Conklin Road runs along the building's SE end and into the truck court through a defined entrance pinch-point. truckGate = true.",
+    "guardShack": "A small structure sits at the building's SE corner beside the truck-court entrance pinch-point, but from satellite it reads as attached to the building rather than a standalone median guard booth, and no barrier arm is clearly visible. Classed remoteGs = true (kiosk/gatehouse-window check-in); guardShack flagged uncertain — a manned gatehouse window is plausible at a DC of this scale but could not be confirmed as a separate booth in imagery.",
+    "drop": "Massive trailer drop yard along the NE/east side — many hundreds of parked trailers in long rows. dropArea 50+, dropYard true.",
+    "dockDoorCount": "A long continuous dock bank along the building's east face — estimated ~120 doors for an e-commerce DC of this footprint. Overhead estimate — flagged uncertain.",
+    "shipRcvSeparate": "Single very long dock bank along one face — ship/receive read as one continuous cluster, not physically separate banks.",
+    "fastLaneOpportunity": "Large truck court with wide aisles and abundant paved width — room for an express/bypass lane.",
+    "urbanRural": "Conklin NY is a small rural town in a wooded river valley; the DC sits among fields, the Susquehanna River, and a parallel rail line, well outside any dense metro fabric — Rural.",
+    "rail": "A rail line runs through the valley near the DC but does not spur into the property — railServed = false.",
+    "geofences": "Perimeter captures the DC building plus the east drop yard and the SE car-parking apron: ~668 m N-S x ~414 m E-W ≈ 68 acres. The truckGate box is the SE truck-court entrance off the Conklin Road access road."
+  },
+  "method": "deep-audit"
+}

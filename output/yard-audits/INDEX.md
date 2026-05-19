@@ -35,16 +35,16 @@
 | [Keurig Dr Pepper](./keurig-dr-pepper/keurig-dr-pepper-sales-summary.md) | 22 | 7 (32%) | 2 (9%) | 12 (55%) | 3 | 851 | 1,838 | #3 (No Gate / No GS) |
 | [Kimberly-Clark](./kimberly-clark/kimberly-clark-sales-summary.md) | 18 | 13 (72%) | 6 (33%) | 8 (44%) | 5 | 807 | 2,264 | #9 (Gate + No GS (remote check-in)) |
 | [Kraft Heinz](./kraft-heinz/kraft-heinz-sales-summary.md) | 27 | 14 (52%) | 6 (22%) | 2 (7%) | 0 | 0 | 0 | #3 (No Gate / No GS) |
-| [Mondelez](./mondelez/mondelez-sales-summary.md) | 24 | 8 (33%) | 4 (17%) | 9 (38%) | 6 | 523 | 1,082 | #3 (No Gate / No GS) |
+| [Mondelez](./mondelez/mondelez-sales-summary.md) | 22 | 11 (50%) | 4 (18%) | 10 (45%) | 6 | 698 | 1,292 | #3 (No Gate / No GS) |
 | [Nestlé USA](./nestle-usa/nestle-usa-sales-summary.md) | 12 | 10 (83%) | 6 (50%) | 9 (75%) | 7 | 534 | 1,180 | #9 (Gate + No GS (remote check-in)) |
 | [Niagara Bottling](./niagara-bottling/niagara-bottling-sales-summary.md) | 30 | 16 (53%) | 6 (20%) | 23 (77%) | 0 | 1,703 | 2,518 | #3 (No Gate / No GS) |
 | [Pactiv Evergreen](./pactiv-evergreen/pactiv-evergreen-sales-summary.md) | 30 | 16 (53%) | 3 (10%) | 14 (47%) | 12 | 950 | 2,408 | #3 (No Gate / No GS) |
 | [Performance Food Group](./performance-food-group/performance-food-group-sales-summary.md) | 30 | 15 (50%) | 3 (10%) | 7 (23%) | 3 | 1,324 | 2,240 | #3 (No Gate / No GS) |
-| [SalSon Logistics](./salson-logistics/salson-logistics-sales-summary.md) | 15 | 7 (47%) | 3 (20%) | 6 (40%) | 2 | 350 | 2,600 | #3 (No Gate / No GS) |
+| [SalSon Logistics](./salson-logistics/salson-logistics-sales-summary.md) | 14 | 8 (57%) | 3 (21%) | 7 (50%) | 2 | 470 | 3,150 | #3 (No Gate / No GS) |
 | [SC Johnson](./sc-johnson/sc-johnson-sales-summary.md) | 10 | 5 (50%) | 1 (10%) | 7 (70%) | 3 | 630 | 1,178 | #3 (No Gate / No GS) |
 | [The Home Depot](./the-home-depot/the-home-depot-sales-summary.md) | 30 | 27 (90%) | 17 (57%) | 26 (87%) | 2 | 4,456 | 8,030 | #10 (Ship/Rcv Separate (Gate+GS)) |
 | [Toyota](./toyota/toyota-sales-summary.md) | 17 | 16 (94%) | 11 (65%) | 15 (88%) | 7 | 1,063 | 4,577 | #7 (Gate + GS (not BU sens.) + fast lane opp) |
 | [UNFI (United Natural Foods, Inc.)](./unfi/unfi-sales-summary.md) | 30 | 14 (47%) | 9 (30%) | 14 (47%) | 2 | 2,362 | 3,874 | #3 (No Gate / No GS) |
-| [Universal Logistics Holdings](./universal-logistics/universal-logistics-sales-summary.md) | 26 | 9 (35%) | 1 (4%) | 11 (42%) | 1 | 1,114 | 4,090 | #3 (No Gate / No GS) |
+| [Universal Logistics Holdings](./universal-logistics/universal-logistics-sales-summary.md) | 26 | 11 (42%) | 2 (8%) | 13 (50%) | 1 | 1,186 | 5,260 | #3 (No Gate / No GS) |
 | [Westrock Coffee](./westrock-coffee/westrock-coffee-sales-summary.md) | 6 | 3 (50%) | 0 (0%) | 4 (67%) | 1 | 211 | 339 | #3 (No Gate / No GS) |
-| **TOTAL** | **870** | **509** | **242** | **429** | **214** | **43,149** | **119,350** | |
+| **TOTAL** | **867** | **515** | **243** | **433** | **214** | **43,516** | **121,280** | |

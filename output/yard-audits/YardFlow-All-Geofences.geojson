@@ -123850,6 +123850,583 @@
         "coordinates": [
           [
             [
+              -97.3038,
+              33.0301
+            ],
+            [
+              -97.2975,
+              33.0301
+            ],
+            [
+              -97.2975,
+              33.0334
+            ],
+            [
+              -97.3038,
+              33.0334
+            ],
+            [
+              -97.3038,
+              33.0301
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Fort Worth Distribution Center - Fort Worth TX",
+        "type": "Distribution center / cross-dock warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 115,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 53.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.2959,
+              33.0306
+            ],
+            [
+              -97.2951,
+              33.0306
+            ],
+            [
+              -97.2951,
+              33.0311
+            ],
+            [
+              -97.2959,
+              33.0311
+            ],
+            [
+              -97.2959,
+              33.0306
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Fort Worth Distribution Center - Fort Worth TX",
+        "type": "Distribution center / cross-dock warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3034,
+              33.0323
+            ],
+            [
+              -97.2976,
+              33.0323
+            ],
+            [
+              -97.2976,
+              33.0333
+            ],
+            [
+              -97.3034,
+              33.0333
+            ],
+            [
+              -97.3034,
+              33.0323
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Fort Worth Distribution Center - Fort Worth TX",
+        "type": "Distribution center / cross-dock warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3034,
+              33.0319
+            ],
+            [
+              -97.2976,
+              33.0319
+            ],
+            [
+              -97.2976,
+              33.0325
+            ],
+            [
+              -97.3034,
+              33.0325
+            ],
+            [
+              -97.3034,
+              33.0319
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Fort Worth Distribution Center - Fort Worth TX",
+        "type": "Distribution center / cross-dock warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3034,
+              33.0307
+            ],
+            [
+              -97.2978,
+              33.0307
+            ],
+            [
+              -97.2978,
+              33.0311
+            ],
+            [
+              -97.3034,
+              33.0311
+            ],
+            [
+              -97.3034,
+              33.0307
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Fort Worth Distribution Center - Fort Worth TX",
+        "type": "Distribution center / cross-dock warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.56565,
+              29.87015
+            ],
+            [
+              -95.564,
+              29.87015
+            ],
+            [
+              -95.564,
+              29.87195
+            ],
+            [
+              -95.56565,
+              29.87195
+            ],
+            [
+              -95.56565,
+              29.87015
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Houston Distribution Center - Houston TX",
+        "type": "Distribution center / multi-tenant warehouse (tenant)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 7.9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5643,
+              29.87215
+            ],
+            [
+              -95.5638,
+              29.87215
+            ],
+            [
+              -95.5638,
+              29.87255
+            ],
+            [
+              -95.5643,
+              29.87255
+            ],
+            [
+              -95.5643,
+              29.87215
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Houston Distribution Center - Houston TX",
+        "type": "Distribution center / multi-tenant warehouse (tenant)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5656,
+              29.8712
+            ],
+            [
+              -95.5641,
+              29.8712
+            ],
+            [
+              -95.5641,
+              29.87195
+            ],
+            [
+              -95.5656,
+              29.87195
+            ],
+            [
+              -95.5656,
+              29.8712
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Houston Distribution Center - Houston TX",
+        "type": "Distribution center / multi-tenant warehouse (tenant)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5656,
+              29.87105
+            ],
+            [
+              -95.5642,
+              29.87105
+            ],
+            [
+              -95.5642,
+              29.87145
+            ],
+            [
+              -95.5656,
+              29.87145
+            ],
+            [
+              -95.5656,
+              29.87105
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Houston Distribution Center - Houston TX",
+        "type": "Distribution center / multi-tenant warehouse (tenant)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.52685,
+              34.0442
+            ],
+            [
+              -117.5245,
+              34.0442
+            ],
+            [
+              -117.5245,
+              34.04575
+            ],
+            [
+              -117.52685,
+              34.04575
+            ],
+            [
+              -117.52685,
+              34.0442
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Ontario Distribution Center - Ontario CA",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 9.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5264,
+              34.04425
+            ],
+            [
+              -117.52595,
+              34.04425
+            ],
+            [
+              -117.52595,
+              34.04455
+            ],
+            [
+              -117.5264,
+              34.04455
+            ],
+            [
+              -117.5264,
+              34.04425
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Ontario Distribution Center - Ontario CA",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5267,
+              34.0444
+            ],
+            [
+              -117.52545,
+              34.0444
+            ],
+            [
+              -117.52545,
+              34.0448
+            ],
+            [
+              -117.5267,
+              34.0448
+            ],
+            [
+              -117.5267,
+              34.0444
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Ontario Distribution Center - Ontario CA",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5268,
+              34.04475
+            ],
+            [
+              -117.52645,
+              34.04475
+            ],
+            [
+              -117.52645,
+              34.04545
+            ],
+            [
+              -117.5268,
+              34.04545
+            ],
+            [
+              -117.5268,
+              34.04475
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "mondelez",
+        "name": "Mondelez Ontario Distribution Center - Ontario CA",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               -81.4723,
               41.4028
             ],
@@ -145445,6 +146022,224 @@
         "archetype": "#6",
         "archetypeName": "Gate + GS (not BU sens.) + campus",
         "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.8125,
+              42.0395
+            ],
+            [
+              -75.807,
+              42.0395
+            ],
+            [
+              -75.807,
+              42.0455
+            ],
+            [
+              -75.8125,
+              42.0455
+            ],
+            [
+              -75.8125,
+              42.0395
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Dick's Sporting Goods Conklin DC (Dedicated Fleet) - Conklin NY",
+        "type": "E-commerce distribution center (SalSon dedicated-fleet operation)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 350,
+          "trailerParkingCapacity": 550,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 68,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.8102,
+              42.0414
+            ],
+            [
+              -75.8094,
+              42.0414
+            ],
+            [
+              -75.8094,
+              42.0419
+            ],
+            [
+              -75.8102,
+              42.0419
+            ],
+            [
+              -75.8102,
+              42.0414
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Dick's Sporting Goods Conklin DC (Dedicated Fleet) - Conklin NY",
+        "type": "E-commerce distribution center (SalSon dedicated-fleet operation)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.8095,
+              42.0413
+            ],
+            [
+              -75.807,
+              42.0413
+            ],
+            [
+              -75.807,
+              42.045
+            ],
+            [
+              -75.8095,
+              42.045
+            ],
+            [
+              -75.8095,
+              42.0413
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Dick's Sporting Goods Conklin DC (Dedicated Fleet) - Conklin NY",
+        "type": "E-commerce distribution center (SalSon dedicated-fleet operation)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.8112,
+              42.0406
+            ],
+            [
+              -75.8098,
+              42.0406
+            ],
+            [
+              -75.8098,
+              42.0447
+            ],
+            [
+              -75.8112,
+              42.0447
+            ],
+            [
+              -75.8112,
+              42.0406
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Dick's Sporting Goods Conklin DC (Dedicated Fleet) - Conklin NY",
+        "type": "E-commerce distribution center (SalSon dedicated-fleet operation)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.8098,
+              42.0415
+            ],
+            [
+              -75.8085,
+              42.0415
+            ],
+            [
+              -75.8085,
+              42.0428
+            ],
+            [
+              -75.8098,
+              42.0428
+            ],
+            [
+              -75.8098,
+              42.0415
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Dick's Sporting Goods Conklin DC (Dedicated Fleet) - Conklin NY",
+        "type": "E-commerce distribution center (SalSon dedicated-fleet operation)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
         "zone": "staging"
       }
     },
@@ -168779,6 +169574,264 @@
         "coordinates": [
           [
             [
+              -86.858,
+              34.6488
+            ],
+            [
+              -86.848,
+              34.6488
+            ],
+            [
+              -86.848,
+              34.6565
+            ],
+            [
+              -86.858,
+              34.6565
+            ],
+            [
+              -86.858,
+              34.6488
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
+        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 400,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 194,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8532,
+              34.654
+            ],
+            [
+              -86.8524,
+              34.654
+            ],
+            [
+              -86.8524,
+              34.6546
+            ],
+            [
+              -86.8532,
+              34.6546
+            ],
+            [
+              -86.8532,
+              34.654
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
+        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.857,
+              34.6495
+            ],
+            [
+              -86.855,
+              34.6495
+            ],
+            [
+              -86.855,
+              34.6542
+            ],
+            [
+              -86.857,
+              34.6542
+            ],
+            [
+              -86.857,
+              34.6495
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
+        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8535,
+              34.6545
+            ],
+            [
+              -86.851,
+              34.6545
+            ],
+            [
+              -86.851,
+              34.6562
+            ],
+            [
+              -86.8535,
+              34.6562
+            ],
+            [
+              -86.8535,
+              34.6545
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
+        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8545,
+              34.6498
+            ],
+            [
+              -86.8536,
+              34.6498
+            ],
+            [
+              -86.8536,
+              34.653
+            ],
+            [
+              -86.8545,
+              34.653
+            ],
+            [
+              -86.8545,
+              34.6498
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
+        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8545,
+              34.6538
+            ],
+            [
+              -86.852,
+              34.6538
+            ],
+            [
+              -86.852,
+              34.6547
+            ],
+            [
+              -86.8545,
+              34.6547
+            ],
+            [
+              -86.8545,
+              34.6538
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
+        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               -89.557,
               40.8462
             ],
@@ -169238,57 +170291,215 @@
         "coordinates": [
           [
             [
-              -87.6413,
-              41.5852
+              -87.6455,
+              41.5862
             ],
             [
-              -87.6392,
-              41.5852
+              -87.642,
+              41.5862
             ],
             [
-              -87.6392,
-              41.5864
+              -87.642,
+              41.5888
             ],
             [
-              -87.6413,
-              41.5864
+              -87.6455,
+              41.5888
             ],
             [
-              -87.6413,
-              41.5852
+              -87.6455,
+              41.5862
             ]
           ]
         ]
       },
       "properties": {
         "account": "universal-logistics",
-        "name": "Universal Intermodal Services - Harvey Terminal - Harvey IL",
-        "type": "Intermodal / Drayage Terminal / Rail Yard (owned)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "low",
+        "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
+        "type": "Intermodal / Drayage container & chassis yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
         "zone": "perimeter",
-        "truckGate": false,
+        "truckGate": true,
         "guardShack": false,
-        "remoteGs": false,
-        "fastLaneOpportunity": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
         "backupSensitive": false,
-        "dropYard": false,
+        "dropYard": true,
         "multipleFacilities": false,
         "scale": false,
         "shipRcvSeparate": false,
         "urbanRural": "Urban",
         "dockDoors": "0-10",
-        "dropArea": "0-10",
+        "dropArea": "50+",
         "yardMetrics": {
-          "dockDoorCount": 2,
-          "trailersVisible": 5,
-          "trailerParkingCapacity": 30,
+          "dockDoorCount": 4,
+          "trailersVisible": 250,
+          "trailerParkingCapacity": 600,
           "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 4,
+          "buildingCount": 3,
+          "siteAreaAcres": 20.9,
           "railServed": false
         }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.644,
+              41.58625
+            ],
+            [
+              -87.6434,
+              41.58625
+            ],
+            [
+              -87.6434,
+              41.5866
+            ],
+            [
+              -87.644,
+              41.5866
+            ],
+            [
+              -87.644,
+              41.58625
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
+        "type": "Intermodal / Drayage container & chassis yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.6455,
+              41.5866
+            ],
+            [
+              -87.6436,
+              41.5866
+            ],
+            [
+              -87.6436,
+              41.5887
+            ],
+            [
+              -87.6455,
+              41.5887
+            ],
+            [
+              -87.6455,
+              41.5866
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
+        "type": "Intermodal / Drayage container & chassis yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.643,
+              41.5868
+            ],
+            [
+              -87.6421,
+              41.5868
+            ],
+            [
+              -87.6421,
+              41.5886
+            ],
+            [
+              -87.643,
+              41.5886
+            ],
+            [
+              -87.643,
+              41.5868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
+        "type": "Intermodal / Drayage container & chassis yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.6436,
+              41.5868
+            ],
+            [
+              -87.6426,
+              41.5868
+            ],
+            [
+              -87.6426,
+              41.5878
+            ],
+            [
+              -87.6436,
+              41.5878
+            ],
+            [
+              -87.6436,
+              41.5868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
+        "type": "Intermodal / Drayage container & chassis yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
       }
     },
     {

@@ -1,65 +1,63 @@
-# Universal Intermodal Services — Harvey Terminal (idx 21)
+# Deep-Audit Dossier — idx 21
 
-**Account:** Universal Logistics Holdings
-**Facility:** Universal Intermodal Services - Harvey Terminal
-**Address:** No street address in roster — directory/property-record address is 250 E 167th St, Harvey IL 60426
-**Type:** Intermodal / Drayage Terminal / Rail Yard (owned)
-**Resolved center:** 41.58590, -87.64029 (directory address — NOT a confirmed operating yard)
-**Confidence:** Low — FLAGGED FOR HUMAN REVIEW
+## Universal Intermodal Services — Harvey Chicago Operations Center — Harvey, IL
 
-## Location resolution — UNRESOLVED
-The roster supplied no address and no coordinates — only "ULH 2025 10-K Item 2
-Properties — Harvey IL named as owned terminal/yard property in the Chicago
-rail-ramp corridor." The loadmatch intermodal directory and a LoopNet property
-record list Universal Intermodal Services' Harvey location at **250 E 167th St,
-Harvey IL 60426**.
+**Status: RESOLVED — confidence HIGH** (re-audit; earlier audit geocoded the wrong building)
 
-That address geocoded (Nominatim) to 41.5865, -87.6403. Satellite and Street
-View probing at that point show an **older brick industrial building with a
-small chain-link-fenced paved lot** on a mixed residential / light-industrial
-block of 167th St — no truck docks, no trailer/chassis storage yard, no visible
-drayage operation. This appears to be a registered or mailing address rather
-than an active operating drayage terminal.
+### Step 0 — Location
+Confirmed address: **250 E 167th St, Harvey IL 60426** — Universal Intermodal
+Services' Chicago operations center, an open container/chassis drayage yard
+against the CN Harvey rail corridor. Google geocode returned `41.5877278,
+-87.6439306`. Locked center: `41.58770, -87.64400`.
 
-The **CN Harvey (CN Gateway) intermodal rail ramp at 16800 S Center St** is the
-gravity center of the area — an extensive container/trailer rail terminal a
-short distance south. Universal Intermodal's actual Harvey drayage terminal /
-yard (with chassis and trailer storage) is presumed somewhere in this CN Harvey
-corridor but **could not be positively located** from imagery or web research.
+> The **earlier audit geocoded the wrong building** — it placed the site at
+> `41.58590, -87.64029`, an older brick industrial building on a mixed
+> residential block — and was correctly flagged low-confidence. This re-audit
+> uses the confirmed address and pins the **actual operating drayage yard**:
+> satellite shows a large open container/chassis yard with an office and
+> maintenance shops, directly against the CN rail corridor.
 
-## What the imagery showed (250 E 167th St)
-- **Satellite z16-z20:** an older brick warehouse with a small paved lot;
-  surrounding blocks are a mix of residences and aged light-industrial
-  buildings. No drayage-terminal signature (no trailer rows, no chassis stacks,
-  no large paved truck yard).
-- **Street View (2024):** the brick building fronts 167th St with a small
-  chain-link-fenced lot; a residential house sits directly across the street.
-  No gate, booth, or truck operation visible.
-- **CN Harvey rail ramp (16800 S Center St):** probed separately — a large
-  CN-operated intermodal rail terminal with dense container/trailer rows; this
-  is the rail facility, not the Universal drayage terminal.
+### Steps 1-5 — Audit
 
-## Gate / guard-shack determination
-- **truckGate = false (low confidence).** No gate or booth at the 250 E 167th
-  St building.
-- **guardShack = false (low confidence).** None observed.
-- All classification flags and yard metrics are **low-confidence placeholders**
-  because the operating yard was not resolved.
+**Facility nature.** An **open intermodal/drayage yard**, not a warehouse — a
+large paved lot for chassis storage, container storage, and drayage-tractor
+parking, with a small office building and maintenance/repair shop buildings.
+Essentially no dock-warehouse function.
 
-## Setting
-Harvey IL is inside the dense south-suburban Chicago metro fabric — Urban.
+**Truck gate.** The yard is fully enclosed by chain-link fence along E 167th
+St. Street View (Jul 2024) shows a defined truck-entrance pinch-point — a wide
+paved gate opening in the fence line off 167th St. `truckGate: true`
+(controlled fenced perimeter with a single defined entrance).
 
-## Web findings
-Universal Intermodal Services operates drayage in the Chicago rail-ramp corridor
-(custom intermodal trucking, drayage, container-yard management, M&R). Harvey is
-a 10-K-named owned terminal/yard property. The CN Chicago Intermodal Terminal
-(CN Harvey / CN Gateway) at 16800 S Center St is the major rail ramp the Harvey
-drayage operation works. No public source provides the street address or
-imagery of Universal's own Harvey operating yard.
+**Guard shack.** No staffed standalone guard booth at the gate opening — a
+fenced entrance with no median booth and no visible barrier arm. Check-in is
+presumed handled at the interior office building. Classed `remoteGs: true`;
+`guardShack` flagged uncertain (a small gate booth could exist but is not
+visible in imagery).
 
-## Final confidence: Low — FLAGGED FOR HUMAN REVIEW
-Universal Intermodal's Harvey IL operating drayage terminal/yard was NOT
-positively resolved. The audited point (250 E 167th St) is the directory /
-property-record address but imagery shows no active terminal there. This site
-should be revisited if a better address (e.g. a yard near the CN Harvey ramp)
-becomes available.
+**Docks.** No warehouse dock bank — the maintenance/repair shops have a
+handful of service-bay doors only (`dockDoors: 0-10`, effectively a
+maintenance shop).
+
+**Drop / storage.** The dominant feature is massive chassis and container
+storage — hundreds of chassis in skeletal rows plus stacked containers across
+the open lot (`dropArea: 50+`, `dropYard: true`).
+
+**Rail.** The CN Harvey (CN Gateway) intermodal rail corridor runs immediately
+**west** of the yard, and the yard exists to dray containers to/from that
+ramp — but **no rail spur runs into this property itself**. `railServed: false`.
+
+**Fast lane.** Very large open paved yard with abundant unused width at the
+entrance — ample room for an express/bypass lane (`fastLaneOpportunity: true`).
+
+**Setting.** Harvey IL — dense south-suburban Chicago metro fabric — **Urban**.
+
+**Geofence.** Perimeter captures the fenced drayage yard: ~290 m N-S x ~292 m
+E-W ≈ **21 acres**.
+
+### Verdicts
+- **Gate verdict:** truck gate present — fenced perimeter with a single
+  defined truck-entrance pinch-point off 167th St.
+- **Guard-shack verdict:** no standalone guard shack observed — interior-office
+  / remote check-in inferred; flagged uncertain.
+- **Confidence:** high.

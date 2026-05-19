@@ -1679,6 +1679,224 @@
         "coordinates": [
           [
             [
+              -75.8125,
+              42.0395
+            ],
+            [
+              -75.807,
+              42.0395
+            ],
+            [
+              -75.807,
+              42.0455
+            ],
+            [
+              -75.8125,
+              42.0455
+            ],
+            [
+              -75.8125,
+              42.0395
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Dick's Sporting Goods Conklin DC (Dedicated Fleet) - Conklin NY",
+        "type": "E-commerce distribution center (SalSon dedicated-fleet operation)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 350,
+          "trailerParkingCapacity": 550,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 68,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.8102,
+              42.0414
+            ],
+            [
+              -75.8094,
+              42.0414
+            ],
+            [
+              -75.8094,
+              42.0419
+            ],
+            [
+              -75.8102,
+              42.0419
+            ],
+            [
+              -75.8102,
+              42.0414
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Dick's Sporting Goods Conklin DC (Dedicated Fleet) - Conklin NY",
+        "type": "E-commerce distribution center (SalSon dedicated-fleet operation)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.8095,
+              42.0413
+            ],
+            [
+              -75.807,
+              42.0413
+            ],
+            [
+              -75.807,
+              42.045
+            ],
+            [
+              -75.8095,
+              42.045
+            ],
+            [
+              -75.8095,
+              42.0413
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Dick's Sporting Goods Conklin DC (Dedicated Fleet) - Conklin NY",
+        "type": "E-commerce distribution center (SalSon dedicated-fleet operation)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.8112,
+              42.0406
+            ],
+            [
+              -75.8098,
+              42.0406
+            ],
+            [
+              -75.8098,
+              42.0447
+            ],
+            [
+              -75.8112,
+              42.0447
+            ],
+            [
+              -75.8112,
+              42.0406
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Dick's Sporting Goods Conklin DC (Dedicated Fleet) - Conklin NY",
+        "type": "E-commerce distribution center (SalSon dedicated-fleet operation)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.8098,
+              42.0415
+            ],
+            [
+              -75.8085,
+              42.0415
+            ],
+            [
+              -75.8085,
+              42.0428
+            ],
+            [
+              -75.8098,
+              42.0428
+            ],
+            [
+              -75.8098,
+              42.0415
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Dick's Sporting Goods Conklin DC (Dedicated Fleet) - Conklin NY",
+        "type": "E-commerce distribution center (SalSon dedicated-fleet operation)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
               -122.3931,
               47.25745
             ],

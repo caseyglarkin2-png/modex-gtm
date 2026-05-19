@@ -7,21 +7,22 @@
 | Metric | Value |
 |---|---|
 | Facilities | 26 |
-| Truck-gated | 9 (35%) |
-| Guarded (staffed shack) | 1 (4%) |
+| Truck-gated | 11 (42%) |
+| Guarded (staffed shack) | 2 (8%) |
 | Rural / connectivity-exposed | 13 (50%) |
-| Fast-lane opportunity | 11 (42%) |
-| Drop-yard operations | 19 (73%) |
+| Fast-lane opportunity | 13 (50%) |
+| Drop-yard operations | 21 (81%) |
 | Rail-served | 1 (4%) |
-| Total dock doors | 1,114 |
-| Total trailer-parking capacity | 4,090 |
+| Total dock doors | 1,186 |
+| Total trailer-parking capacity | 5,260 |
 
 ## Archetype distribution
 
 | Archetype | Name | Sites | Share |
 |---|---|---|---|
-| #3 | No Gate / No GS | 17 | 65% |
-| #9 | Gate + No GS (remote check-in) | 8 | 31% |
+| #3 | No Gate / No GS | 15 | 58% |
+| #9 | Gate + No GS (remote check-in) | 9 | 35% |
+| #6 | Gate + GS (not BU sens.) + campus | 1 | 4% |
 | #7 | Gate + GS (not BU sens.) + fast lane opp | 1 | 4% |
 
 ## Recommended YardFlow entry point
