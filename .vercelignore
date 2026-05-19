@@ -1,4 +1,20 @@
+# Dependencies and build output — Vercel installs deps and builds fresh in the cloud
+node_modules/
+.next/
+*.tsbuildinfo
+
+# Version control, agent tooling, local scratch
+.git/
+.claude/
+.superpowers/
+tmp/
+test-results/
+screenshots/
+
+# Yard-audit run artifacts — data, not application code
+output/
+
+# Docs and data files not needed by the Next.js build
+docs/
 *.csv
 *.xlsx
-docs/
-.git/
