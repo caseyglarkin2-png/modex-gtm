@@ -19,7 +19,7 @@
 | 10 | hormel-foods | T2·B | Will Bonifant · GVP & CSCO | o9 grouped the truckload. It did not pick the door. The unfilled tile in the Hormel operating stack. |
 | 11 | gxo | T1·A | Michael Jacobs · President, Americas & APAC | The yard-execution layer above the GXO operating standard — multi-tenant from the data model up. |
 | 12 | crowley | T1·A | James C. Fowler · EVP & Division President, Shipping & Logistics | The yard layer for the integrated maritime + land operator. |
-| 13 | mondelez-international | T1·A | Claudio Parrotta · EVP & CSCO | The yard layer underneath the Master Plan 2030. |
+| 13 | mondelez-international | T1·A | Claudio Parrotta · EVP & CSCO | The yard layer underneath Vision 2030. |
 
 ---
 
@@ -181,8 +181,8 @@
 - Public: https://yardflow.ai/for/mondelez-international
 - Personalized: https://yardflow.ai/for/mondelez-international?p=claudio-parrotta
 - Accent: `#1E40AF`
-- Cover headline: "The yard layer underneath the Master Plan 2030"
-- Send hook: "Master Plan 2030 is shifting capex into automation, brand-investment, and emerging-market scale. The yard layer underneath every plant in that plan is the variance source most likely to absorb the productivity story before it reaches the P&L — and the layer no Master Plan document yet calls out by name."
+- Cover headline: "The yard layer underneath Vision 2030"
+- Send hook: "Vision 2030 is shifting capex into automation, brand investment, and emerging-market scale. The yard layer underneath every plant in that strategy is the variance source most likely to absorb the productivity story before it reaches the P&L — and the layer no Vision 2030 document yet calls out by name."
 
 ---
 
