@@ -1,0 +1,65 @@
+{
+  "name": "Creative Contract Packaging - Aurora IL",
+  "type": "Production Facility",
+  "coords": { "lat": 41.80475, "lng": -88.27090 },
+  "geofences": {
+    "perimeter": { "south": 41.80360, "west": -88.27180, "north": 41.80610, "east": -88.27000 },
+    "truckGate": { "south": 41.80550, "west": -88.27040, "north": 41.80600, "east": -88.27000 },
+    "dropYards": [
+      { "south": 41.80385, "west": -88.27120, "north": 41.80440, "east": -88.27010 },
+      { "south": 41.80440, "west": -88.27050, "north": 41.80560, "east": -88.27010 }
+    ],
+    "dockAprons": [
+      { "south": 41.80400, "west": -88.27085, "north": 41.80520, "east": -88.27050 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 55,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 10.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.80475,-88.2709,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "entryLanes", "exitLanes", "urbanRural"],
+  "fieldNotes": {
+    "location": "Roster gave '2001 Bilter Rd, Aurora IL 60502' with coords (41.806642,-88.267623). The roster point itself is a residential strip; ~250m south sits a large warehouse/packaging facility with an office annex and a big trailer yard, in the 60502 (NE Aurora) area - consistent with the roster. CCP operates TWO Aurora facilities (Hormel says so); the web-listed 3777 Exchange Ave (60504) is the other one. Audited the building at ~41.8047,-88.2709 as the roster-intended site.",
+    "truckGate": "The truck yard is enclosed by chain-link fencing (visible in Street View), but the driveway entrances appear to be open gate gaps with no barrier arm and no staffed booth. No controlled checkpoint identified - marked false at medium confidence.",
+    "guardShack": "No guard booth identified at any entrance. A canopy/carport structure on the NE side is an equipment shelter, not a guard booth.",
+    "dockDoorCount": "East building face has trailers backed in along a dock bank; estimated ~14-18 doors visible plus more. Total estimated 10-25 band (~22). Estimate from overhead imagery.",
+    "dropYard": "Large trailer drop yard - a south-yard row of ~20+ parked trailers plus additional rows along the east. dropArea 25-50 band; many trailers branded for outside fleets (Penske rental, beverage brands), consistent with a contract-packaging logistics yard.",
+    "fastLaneOpportunity": "Wide paved yard and open driveway aprons give ample room to add a bypass/express lane.",
+    "railServed": "No rail spur into the property.",
+    "urbanRural": "Aurora is part of the Chicago metropolitan area; the site has a major retail/mall complex immediately south and dense suburbs to the west, though farm fields border it north and west. Judged Urban (metro fabric) - flagged as borderline given the edge-of-development setting.",
+    "buildingCount": "Main warehouse/packaging building plus an attached office annex - counted as 2 structures, one integrated facility."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Fairburn Regional Distribution Center - Fairburn GA",
+  "type": "Regional Distribution Center (aerosol storage)",
+  "coords": { "lat": 33.53330, "lng": -84.59590 },
+  "geofences": {
+    "perimeter": { "south": 33.53170, "west": -84.59720, "north": 33.53560, "east": -84.59440 },
+    "truckGate": { "south": 33.53500, "west": -84.59540, "north": 33.53560, "east": -84.59460 },
+    "dropYards": [
+      { "south": 33.53210, "west": -84.59700, "north": 33.53480, "east": -84.59640 },
+      { "south": 33.53210, "west": -84.59540, "north": 33.53480, "east": -84.59470 }
+    ],
+    "dockAprons": [
+      { "south": 33.53210, "west": -84.59660, "north": 33.53480, "east": -84.59630 },
+      { "south": 33.53210, "west": -84.59560, "north": 33.53480, "east": -84.59530 }
+    ],
+    "staging": { "south": 33.53160, "west": -84.59660, "north": 33.53220, "east": -84.59520 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90, "trailersVisible": 95, "trailerParkingCapacity": 130,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 26.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.53330,-84.59590,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Confirmed via EPA RMP record (Fairburn Regional Distribution Center, 1555 Oakley Industrial Blvd) + Panjiva buyer record (S.C. Johnson & Son Inc., 1555 Oakley Ind Blvd Fairburn GA) + Waze 'Exel Logistics/SC Johnson & Son Inc' listing. Atlanta-metro aerosol RDC, operated with Exel/DHL. SCJ building is the LEFT (western) of two warehouses, identified by the distinctive curved truck-loop apron at its south end; the right building (1525 Oakley) is a separate tenant.",
+    "truckGate": "Single private access drive enters the property from the NE off Oakley Industrial Blvd through a wooded buffer. No barrier arm, sliding gate, or checkpoint structure on the drive or at the building loop in Street View (Feb 2022). Open site within a wooded industrial park.",
+    "guardShack": "No staffed booth observed at the access drive or anywhere on the truck loop road.",
+    "shipRcvSeparate": "Cross-dock building: continuous dock banks on BOTH long faces (west face fronts a trailer drop yard, east face has docks with trailers backed in). Shipping and receiving run from separate dock clusters on opposite faces.",
+    "dockDoors": "Continuous dock bank along both ~330m long faces; ~95 trailers backed in across the imagery -> 50+ band.",
+    "dropArea": "Large paved drop yards flank both long faces full of trailers parked without tractors -> 50+.",
+    "preGateStaging": "No gate, so no pre-gate staging.",
+    "postGateStaging": "The wide curved truck-loop apron at the south end functions as an internal staging/queue area before the dock faces.",
+    "fastLaneOpportunity": "Wide truck aprons and the large curved southern loop give ample paved width to add an express lane if a gate were installed.",
+    "drivewayLong": "The private access drive plus the deep wrap-around loop road comfortably hold a 3+ truck queue.",
+    "urbanRural": "Wooded industrial-park setting on the southern edge of the Atlanta metro near I-85; tree buffers and low surrounding density -> judged Rural per rubric tie-break.",
+    "entryLanes": "Single open access drive; lane count approximate.",
+    "siteAreaAcres": "Estimate from perimeter box covering the building, both drop yards and the southern loop apron."
+  },
+  "method": "deep-audit"
+}

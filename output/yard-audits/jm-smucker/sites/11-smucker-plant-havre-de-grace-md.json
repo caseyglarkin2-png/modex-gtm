@@ -1,0 +1,49 @@
+{
+  "name": "Smucker Plant - Havre de Grace MD",
+  "type": "Manufacturing - Spreads / portion control products",
+  "coords": { "lat": 39.530705, "lng": -76.108505 },
+  "geofences": {
+    "perimeter": { "south": 39.52960, "west": -76.10990, "north": 39.53180, "east": -76.10720 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 39.52985, "west": -76.10905, "north": 39.53025, "east": -76.10820 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 9,
+    "trailersVisible": 7,
+    "trailerParkingCapacity": 8,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 14.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.530705,-76.108505,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["truckGate", "guardShack"],
+  "fieldNotes": {
+    "location": "Roster address 1601 Pulaski Hwy was imprecise. Web search resolved the actual plant to 340 Old Bay Lane, Havre de Grace MD (Smucker Quality Beverages / Smucker Natural Foods), ~640m SE of the geocoded point. Locked center 39.5305, -76.1085 on the industrial building with rooftop solar.",
+    "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point visible at the property entrance in satellite z20. The perimeter loop driveway connects to an open industrial-park intersection. Chain-link fencing runs along property lines but the truck driveway is uncontrolled. Classified false; flagged uncertain because Street View coverage did not reach the plant itself (panos clustered on Old Bay Ln near the neighboring building).",
+    "guardShack": "No small staffed booth structure beside any entrance. A small outbuilding sits at the NE corner near the tank farm but it is not positioned as an entry guard booth.",
+    "dockDoors": "~9 dock doors counted on the SE/S building face, several with trailers backed in. Band 0-10.",
+    "dropArea": "A handful of trailers parked along the SE apron and near the NE corner without tractors; no dedicated marked drop lot. Band 0-10.",
+    "urbanRural": "Edge-of-town industrial park on the outskirts of Havre de Grace; farmland immediately south. Rural per rubric (small-town industrial defaults to Rural).",
+    "drivewayShort": "Single perimeter loop drive; gate-to-dock approach holds only 1-2 trucks.",
+    "buildingCount": "One main plant building. Other large buildings nearby (incl. a separate distribution warehouse to the east and a building NW with CFI trailer) are separate properties in the same park, not the same parcel.",
+    "yardMetrics": "Counts are honest estimates from z19-z20 imagery; trailer/dock counts low-confidence at the margin."
+  },
+  "method": "deep-audit"
+}

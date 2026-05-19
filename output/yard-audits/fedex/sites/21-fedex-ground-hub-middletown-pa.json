@@ -1,0 +1,56 @@
+{
+  "name": "FedEx Ground Hub - Middletown PA (Harrisburg)",
+  "type": "Ground regional sortation hub",
+  "coords": { "lat": 40.23310, "lng": -76.73080 },
+  "geofences": {
+    "perimeter": { "south": 40.23040, "west": -76.73380, "north": 40.23600, "east": -76.72820 },
+    "truckGate": { "south": 40.23085, "west": -76.73295, "north": 40.23125, "east": -76.73230 },
+    "dropYards": [
+      { "south": 40.23330, "west": -76.73380, "north": 40.23560, "east": -76.73020 },
+      { "south": 40.23300, "west": -76.73000, "north": 40.23420, "east": -76.72830 }
+    ],
+    "dockAprons": [
+      { "south": 40.23150, "west": -76.73230, "north": 40.23330, "east": -76.73120 },
+      { "south": 40.23130, "west": -76.73120, "north": 40.23290, "east": -76.72870 },
+      { "south": 40.23420, "west": -76.73250, "north": 40.23560, "east": -76.72900 }
+    ],
+    "staging": { "south": 40.23040, "west": -76.73250, "north": 40.23130, "east": -76.73000 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 230,
+    "trailersVisible": 420,
+    "trailerParkingCapacity": 600,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 76.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.23310,-76.73080,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "postGateStaging"],
+  "fieldNotes": {
+    "facility": "Confirmed FedEx Ground hub at 111 Fulling Mill Rd via FedEx logo visible on building face in Street View (panos along internal driveway, captured 2019/2023). Geocoded point landed on the central sort building; correct facility.",
+    "truckGate": "Truck yard is fully fenced - perimeter fence lines clearly visible on N, NW, W and NE boundaries on satellite. Truck route enters the secured yard through a controlled point; classified truckGate true.",
+    "guardShack": "No guard booth could be positively identified at the yard entrance from satellite or Street View. Low confidence - flagged.",
+    "remoteGs": "Set true by rubric (gate present, no confirmed booth implies kiosk/remote check-in). Uncertain.",
+    "multipleFacilities": "Campus: central L-shaped sort building + a long diagonal cross-dock building to the north + massive trailer drop yards. Two separate FedEx buildings on the property.",
+    "dropArea": "Extensive trailer drop yard on the NW packed with several hundred trailers in long rows; 50+ band, dropYard true.",
+    "dockDoors": "Cross-dock doors with trailers backed in on all faces of both buildings; clearly 50+ band. Door count ~230 is an overhead estimate.",
+    "urbanRural": "Edge-of-town industrial park near Middletown PA, surrounded by farmland, fields and the Swatara Creek - Rural per rubric.",
+    "fastLaneOpportunity": "Wide paved aprons and ample yard width around the entry driveway leave room for an express/bypass lane.",
+    "entryLanes": "Entry/exit lane counts estimated at 2 each from the wide entry driveway; not crisply resolved.",
+    "trailersVisible": "Overhead count across all drop yards and dock aprons is approximate (~420)."
+  },
+  "method": "deep-audit"
+}

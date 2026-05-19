@@ -1,0 +1,56 @@
+{
+  "name": "Universal Logistics - Tanner Value-Added Facility - Tanner AL",
+  "type": "Value-Added Logistics / Sequencing Warehouse",
+  "coords": { "lat": 34.63115, "lng": -86.89625 },
+  "geofences": {
+    "perimeter": { "south": 34.62920, "west": -86.90010, "north": 34.63380, "east": -86.89430 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 34.62960, "west": -86.89720, "north": 34.63060, "east": -86.89530 },
+      { "south": 34.63010, "west": -86.89530, "north": 34.63120, "east": -86.89430 }
+    ],
+    "dockAprons": [
+      { "south": 34.63010, "west": -86.89700, "north": 34.63150, "east": -86.89500 },
+      { "south": 34.63140, "west": -86.89760, "north": 34.63280, "east": -86.89560 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 51,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 34.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.63115,-86.89625,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Resolved to 5271 Endeavor Way NW, Tanner, AL 35671 (ROOFTOP geocode 34.6318,-86.8968). Confirmed via Universal Logistics 'Class A Yard Switcher - Tanner, AL' job posting which lists the in-person apply address as 5271 Endeavor Way; LoopNet/Crexi/Showcase list it as a 2021-built ~300k+ sq ft distribution warehouse with 51 dock doors in SouthPoint Business Park. Street View confirms the office-front warehouse and the spec-built dock yards.",
+    "truckGate": "No controlled truck entrance. The building sits inside SouthPoint Business Park; dock yards open directly onto shared internal park drives. Office-front driveway (Street View, NW face) runs straight to the parking lot with no barrier arm, gate, or pinch-point.",
+    "guardShack": "No guard booth at any approach. No staffed structure visible at the office driveway or the truck-side park drives.",
+    "remoteGs": "false because there is no truck gate at all.",
+    "drivewayLong": "The internal park drives and dock aprons provide deep approach room — easily 3+ trucks of stacking before the docks.",
+    "fastLaneOpportunity": "Wide paved aprons and abundant unused paved width around the drop yards; ample room to add an express/bypass lane if a gate were ever installed.",
+    "dockDoors": "Crexi/Showcase listing states 51 dock doors. Satellite corroborates dense dock banks on the SW long face and the NW (office) face with trailers backed in.",
+    "dropArea": "Large drop yard south/southeast of the building with multiple rows of parked trailers; z20 imagery shows 25+ trailers in marked stalls in the southern yard alone, plus more along the SE.",
+    "shipRcvSeparate": "Docks run on two distinct faces of the building (NW long face near the office and SW/SE long face), consistent with separate shipping and receiving banks in a cross-dock value-added layout.",
+    "urbanRural": "Rural — Tanner is a small Limestone County community; the site is in an edge-of-town spec industrial park (SouthPoint Business Park) beside I-565, with farmland and woods adjacent.",
+    "dropYard": "Dedicated trailer-storage rows on the south/southeast side, separate from the active dock aprons.",
+    "yardMetrics": "siteAreaAcres ~34 estimated from the perimeter box. trailersVisible/Capacity are honest overhead estimates; the building footprint plus drop yard rows are extensive. railServed false — no spur into the property; nearest rail is well off-site."
+  },
+  "method": "deep-audit"
+}

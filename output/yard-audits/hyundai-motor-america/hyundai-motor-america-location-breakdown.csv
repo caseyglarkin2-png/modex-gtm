@@ -1,0 +1,48 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Hyundai Motor Manufacturing Alabama (HMMA) - Montgomery AL,Auto Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@32.281200,-86.323500,400m/data=!3m1!1e3"
+Hyundai Motor Group Metaplant America (HMGMA) - Ellabell GA,Auto Assembly Plant (EV),#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,2,2,YES,,,,YES,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@32.162000,-81.448000,400m/data=!3m1!1e3"
+HMMA Cylinder Head Machining Plant - Montgomery AL,Engine / Component Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,YES,,,YES,,,,,Rural,,YES,,YES,"https://www.google.com/maps/@32.282800,-86.332000,400m/data=!3m1!1e3"
+Mobis Parts America PDC - Ontario CA,Parts Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,,"https://www.google.com/maps/@34.040200,-117.553100,400m/data=!3m1!1e3"
+Mobis Parts America PDC - Aurora IL,Parts Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,,"https://www.google.com/maps/@41.793500,-88.357300,400m/data=!3m1!1e3"
+Mobis Parts America PDC - Lawrenceville GA,Parts Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,,,,,,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@33.96768,-84.08648,400m/data=!3m1!1e3"
+Mobis Parts America PDC - Lancaster TX,Parts Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@32.64030,-96.80970,400m/data=!3m1!1e3"
+Mobis Parts America PDC - Jamesburg NJ,Parts Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,,,,,,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@40.35270,-74.47820,400m/data=!3m1!1e3"
+Mobis Parts America PDC - South Windsor CT,Parts Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@41.85530,-72.59800,400m/data=!3m1!1e3"
+Mobis Parts America PDC - Sumner WA,Parts Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,YES,,,,,,,,,YES,,YES,,,YES,Urban,,,,YES,"https://www.google.com/maps/@47.23440,-122.24260,400m/data=!3m1!1e3"
+Glovis America Vehicle Processing Center - West Point GA,Vehicle Processing Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,2,YES,,,,,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@32.9130,-85.1315,400m/data=!3m1!1e3"
+Glovis America Vehicle Processing Center - Shreveport LA,Vehicle Processing Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,,,YES,,YES,,,,YES,,,,Rural,,YES,,YES,"https://www.google.com/maps/@32.4269,-93.9207,400m/data=!3m1!1e3"
+Glovis America Port Vehicle Processing - Brunswick GA,Port / Vehicle Import Processing Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,YES,YES,,2,2,YES,,,,,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@31.1270,-81.5390,400m/data=!3m1!1e3"
+Glovis America Port Vehicle Processing - Newark/Elizabeth NJ,Port / Vehicle Import Processing Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,YES,YES,,2,1,,,,,,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@40.6940,-74.1340,400m/data=!3m1!1e3"
+Glovis America Vehicle Processing Center - Tacoma WA (Hyundai),Port / Vehicle Import Processing Center,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@47.261300,-122.370000,400m/data=!3m1!1e3"
+Glovis America Port Vehicle Processing - Jacksonville FL,Port / Vehicle Import Processing Center,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,YES,,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@30.346000,-81.625000,400m/data=!3m1!1e3"
+Glovis EV Logistics America - Savannah Integrated Warehouse (Pooler GA),Distribution Warehouse / Logistics Hub,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@32.088338,-81.262896,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,7,41%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,5,29%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,2,12%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,3,18%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,17,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,9,53%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,7,41%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,7,41%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,10,59%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,17,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,17,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

@@ -1,0 +1,5102 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.6982,
+              34.2684
+            ],
+            [
+              -79.6908,
+              34.2684
+            ],
+            [
+              -79.6908,
+              34.2736
+            ],
+            [
+              -79.6982,
+              34.2736
+            ],
+            [
+              -79.6982,
+              34.2684
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Cheney Brothers - Florence SC (new cold DC)",
+        "type": "Refrigerated/Freezer Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 0,
+          "siteAreaAcres": 50,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.6973,
+              34.2621
+            ],
+            [
+              -79.69045,
+              34.2621
+            ],
+            [
+              -79.69045,
+              34.2672
+            ],
+            [
+              -79.6973,
+              34.2672
+            ],
+            [
+              -79.6973,
+              34.2621
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Florence SC (legacy DC)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 38,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 33,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.6954,
+              34.2637
+            ],
+            [
+              -79.6946,
+              34.2637
+            ],
+            [
+              -79.6946,
+              34.2643
+            ],
+            [
+              -79.6954,
+              34.2643
+            ],
+            [
+              -79.6954,
+              34.2637
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Florence SC (legacy DC)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.6951,
+              34.2634
+            ],
+            [
+              -79.691,
+              34.2634
+            ],
+            [
+              -79.691,
+              34.2646
+            ],
+            [
+              -79.6951,
+              34.2646
+            ],
+            [
+              -79.6951,
+              34.2634
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Florence SC (legacy DC)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.6954,
+              34.2642
+            ],
+            [
+              -79.6909,
+              34.2642
+            ],
+            [
+              -79.6909,
+              34.2648
+            ],
+            [
+              -79.6954,
+              34.2648
+            ],
+            [
+              -79.6954,
+              34.2642
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Florence SC (legacy DC)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.5572,
+              36.9784
+            ],
+            [
+              -121.5514,
+              36.9784
+            ],
+            [
+              -121.5514,
+              36.9826
+            ],
+            [
+              -121.5572,
+              36.9826
+            ],
+            [
+              -121.5572,
+              36.9784
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Gilroy CA",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 22,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.5565,
+              36.98095
+            ],
+            [
+              -121.5558,
+              36.98095
+            ],
+            [
+              -121.5558,
+              36.9815
+            ],
+            [
+              -121.5565,
+              36.9815
+            ],
+            [
+              -121.5565,
+              36.98095
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Gilroy CA",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.556,
+              36.979
+            ],
+            [
+              -121.5519,
+              36.979
+            ],
+            [
+              -121.5519,
+              36.9801
+            ],
+            [
+              -121.556,
+              36.9801
+            ],
+            [
+              -121.556,
+              36.979
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Gilroy CA",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.5565,
+              36.9798
+            ],
+            [
+              -121.552,
+              36.9798
+            ],
+            [
+              -121.552,
+              36.9804
+            ],
+            [
+              -121.5565,
+              36.9804
+            ],
+            [
+              -121.5565,
+              36.9798
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Gilroy CA",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1722,
+              40.6695
+            ],
+            [
+              -74.1683,
+              40.6695
+            ],
+            [
+              -74.1683,
+              40.6723
+            ],
+            [
+              -74.1722,
+              40.6723
+            ],
+            [
+              -74.1722,
+              40.6695
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Metro NY (Elizabeth NJ)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 20,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1711,
+              40.6712
+            ],
+            [
+              -74.1703,
+              40.6712
+            ],
+            [
+              -74.1703,
+              40.6717
+            ],
+            [
+              -74.1711,
+              40.6717
+            ],
+            [
+              -74.1711,
+              40.6712
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Metro NY (Elizabeth NJ)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.17,
+              40.6712
+            ],
+            [
+              -74.1683,
+              40.6712
+            ],
+            [
+              -74.1683,
+              40.6723
+            ],
+            [
+              -74.17,
+              40.6723
+            ],
+            [
+              -74.17,
+              40.6712
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Metro NY (Elizabeth NJ)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1708,
+              40.671
+            ],
+            [
+              -74.169,
+              40.671
+            ],
+            [
+              -74.169,
+              40.6718
+            ],
+            [
+              -74.1708,
+              40.6718
+            ],
+            [
+              -74.1708,
+              40.671
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Metro NY (Elizabeth NJ)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.9432,
+              34.003
+            ],
+            [
+              -117.9398,
+              34.003
+            ],
+            [
+              -117.9398,
+              34.0068
+            ],
+            [
+              -117.9432,
+              34.0068
+            ],
+            [
+              -117.9432,
+              34.003
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Southern California (City of Industry)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 65,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 24,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.9409,
+              34.0033
+            ],
+            [
+              -117.9401,
+              34.0033
+            ],
+            [
+              -117.9401,
+              34.0038
+            ],
+            [
+              -117.9409,
+              34.0038
+            ],
+            [
+              -117.9409,
+              34.0033
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Southern California (City of Industry)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.9409,
+              34.0034
+            ],
+            [
+              -117.9399,
+              34.0034
+            ],
+            [
+              -117.9399,
+              34.0056
+            ],
+            [
+              -117.9409,
+              34.0056
+            ],
+            [
+              -117.9409,
+              34.0034
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Southern California (City of Industry)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.9408,
+              34.0037
+            ],
+            [
+              -117.94,
+              34.0037
+            ],
+            [
+              -117.94,
+              34.0062
+            ],
+            [
+              -117.9408,
+              34.0062
+            ],
+            [
+              -117.9408,
+              34.0037
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Southern California (City of Industry)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.36,
+              41.7185
+            ],
+            [
+              -88.3565,
+              41.7185
+            ],
+            [
+              -88.3565,
+              41.7234
+            ],
+            [
+              -88.36,
+              41.7234
+            ],
+            [
+              -88.36,
+              41.7185
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Chicago (Montgomery IL)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 34,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.3587,
+              41.7202
+            ],
+            [
+              -88.3576,
+              41.7202
+            ],
+            [
+              -88.3576,
+              41.7226
+            ],
+            [
+              -88.3587,
+              41.7226
+            ],
+            [
+              -88.3587,
+              41.7202
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Chicago (Montgomery IL)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.3584,
+              41.7224
+            ],
+            [
+              -88.357,
+              41.7224
+            ],
+            [
+              -88.357,
+              41.7234
+            ],
+            [
+              -88.3584,
+              41.7234
+            ],
+            [
+              -88.3584,
+              41.7224
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Chicago (Montgomery IL)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.1397,
+              41.9409
+            ],
+            [
+              -71.1342,
+              41.9409
+            ],
+            [
+              -71.1342,
+              41.9453
+            ],
+            [
+              -71.1397,
+              41.9453
+            ],
+            [
+              -71.1397,
+              41.9409
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Boston (Taunton MA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 95,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 26,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.137,
+              41.9417
+            ],
+            [
+              -71.1347,
+              41.9417
+            ],
+            [
+              -71.1347,
+              41.9432
+            ],
+            [
+              -71.137,
+              41.9432
+            ],
+            [
+              -71.137,
+              41.9417
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Boston (Taunton MA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.1388,
+              41.9425
+            ],
+            [
+              -71.1356,
+              41.9425
+            ],
+            [
+              -71.1356,
+              41.9436
+            ],
+            [
+              -71.1388,
+              41.9436
+            ],
+            [
+              -71.1388,
+              41.9425
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Boston (Taunton MA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8755,
+              34.236
+            ],
+            [
+              -83.8705,
+              34.236
+            ],
+            [
+              -83.8705,
+              34.241
+            ],
+            [
+              -83.8755,
+              34.241
+            ],
+            [
+              -83.8755,
+              34.236
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Atlanta (Oakwood GA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 38,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8726,
+              34.2395
+            ],
+            [
+              -83.87,
+              34.2395
+            ],
+            [
+              -83.87,
+              34.2408
+            ],
+            [
+              -83.8726,
+              34.2408
+            ],
+            [
+              -83.8726,
+              34.2395
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Atlanta (Oakwood GA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8742,
+              34.2377
+            ],
+            [
+              -83.8725,
+              34.2377
+            ],
+            [
+              -83.8725,
+              34.2389
+            ],
+            [
+              -83.8742,
+              34.2389
+            ],
+            [
+              -83.8742,
+              34.2377
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Atlanta (Oakwood GA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.268,
+              32.7648
+            ],
+            [
+              -97.2623,
+              32.7648
+            ],
+            [
+              -97.2623,
+              32.7695
+            ],
+            [
+              -97.268,
+              32.7695
+            ],
+            [
+              -97.268,
+              32.7648
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Dallas Fort Worth (Fort Worth TX)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 100,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 40,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.3883,
+              29.9756
+            ],
+            [
+              -95.3847,
+              29.9756
+            ],
+            [
+              -95.3847,
+              29.9808
+            ],
+            [
+              -95.3883,
+              29.9808
+            ],
+            [
+              -95.3883,
+              29.9756
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Houston TX",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 41,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.3893,
+              29.9788
+            ],
+            [
+              -95.3887,
+              29.9788
+            ],
+            [
+              -95.3887,
+              29.97935
+            ],
+            [
+              -95.3893,
+              29.97935
+            ],
+            [
+              -95.3893,
+              29.9788
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Houston TX",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.3883,
+              29.9764
+            ],
+            [
+              -95.387,
+              29.9764
+            ],
+            [
+              -95.387,
+              29.9783
+            ],
+            [
+              -95.3883,
+              29.9783
+            ],
+            [
+              -95.3883,
+              29.9764
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Houston TX",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.387,
+              29.9762
+            ],
+            [
+              -95.3864,
+              29.9762
+            ],
+            [
+              -95.3864,
+              29.98
+            ],
+            [
+              -95.387,
+              29.98
+            ],
+            [
+              -95.387,
+              29.9762
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Houston TX",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.3883,
+              29.979
+            ],
+            [
+              -95.387,
+              29.979
+            ],
+            [
+              -95.387,
+              29.98
+            ],
+            [
+              -95.3883,
+              29.98
+            ],
+            [
+              -95.3883,
+              29.979
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Houston TX",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.5456,
+              45.1951
+            ],
+            [
+              -93.54,
+              45.1951
+            ],
+            [
+              -93.54,
+              45.199
+            ],
+            [
+              -93.5456,
+              45.199
+            ],
+            [
+              -93.5456,
+              45.1951
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Twin Cities (Rogers MN)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 23,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.5456,
+              45.1956
+            ],
+            [
+              -93.5444,
+              45.1956
+            ],
+            [
+              -93.5444,
+              45.199
+            ],
+            [
+              -93.5456,
+              45.199
+            ],
+            [
+              -93.5456,
+              45.1956
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Twin Cities (Rogers MN)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.5444,
+              45.1956
+            ],
+            [
+              -93.5433,
+              45.1956
+            ],
+            [
+              -93.5433,
+              45.199
+            ],
+            [
+              -93.5444,
+              45.199
+            ],
+            [
+              -93.5444,
+              45.1956
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Twin Cities (Rogers MN)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.8656,
+              39.8752
+            ],
+            [
+              -104.8625,
+              39.8752
+            ],
+            [
+              -104.8625,
+              39.8787
+            ],
+            [
+              -104.8656,
+              39.8787
+            ],
+            [
+              -104.8656,
+              39.8752
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Denver (Commerce City CO)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 26,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.8656,
+              39.876
+            ],
+            [
+              -104.8648,
+              39.876
+            ],
+            [
+              -104.8648,
+              39.8768
+            ],
+            [
+              -104.8656,
+              39.8768
+            ],
+            [
+              -104.8656,
+              39.876
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Denver (Commerce City CO)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.8646,
+              39.8752
+            ],
+            [
+              -104.8625,
+              39.8752
+            ],
+            [
+              -104.8625,
+              39.8765
+            ],
+            [
+              -104.8646,
+              39.8765
+            ],
+            [
+              -104.8646,
+              39.8752
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Denver (Commerce City CO)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.8644,
+              39.8762
+            ],
+            [
+              -104.8625,
+              39.8762
+            ],
+            [
+              -104.8625,
+              39.878
+            ],
+            [
+              -104.8644,
+              39.878
+            ],
+            [
+              -104.8644,
+              39.8762
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Denver (Commerce City CO)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.8656,
+              39.876
+            ],
+            [
+              -104.8646,
+              39.876
+            ],
+            [
+              -104.8646,
+              39.8775
+            ],
+            [
+              -104.8656,
+              39.8775
+            ],
+            [
+              -104.8656,
+              39.876
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Denver (Commerce City CO)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.0649,
+              42.4733
+            ],
+            [
+              -83.062,
+              42.4733
+            ],
+            [
+              -83.062,
+              42.476
+            ],
+            [
+              -83.0649,
+              42.476
+            ],
+            [
+              -83.0649,
+              42.4733
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Detroit (Warren MI)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 14.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.0642,
+              42.4755
+            ],
+            [
+              -83.0634,
+              42.4755
+            ],
+            [
+              -83.0634,
+              42.476
+            ],
+            [
+              -83.0642,
+              42.476
+            ],
+            [
+              -83.0642,
+              42.4755
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Detroit (Warren MI)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.0642,
+              42.4754
+            ],
+            [
+              -83.0621,
+              42.4754
+            ],
+            [
+              -83.0621,
+              42.476
+            ],
+            [
+              -83.0642,
+              42.476
+            ],
+            [
+              -83.0642,
+              42.4754
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Detroit (Warren MI)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.0633,
+              42.474
+            ],
+            [
+              -83.0621,
+              42.474
+            ],
+            [
+              -83.0621,
+              42.4756
+            ],
+            [
+              -83.0633,
+              42.4756
+            ],
+            [
+              -83.0633,
+              42.474
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Detroit (Warren MI)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.3256,
+              37.9306
+            ],
+            [
+              -121.3229,
+              37.9306
+            ],
+            [
+              -121.3229,
+              37.9347
+            ],
+            [
+              -121.3256,
+              37.9347
+            ],
+            [
+              -121.3256,
+              37.9306
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Northern California (Stockton CA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 64,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 13.8,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.32345,
+              37.9325
+            ],
+            [
+              -121.32305,
+              37.9325
+            ],
+            [
+              -121.32305,
+              37.933
+            ],
+            [
+              -121.32345,
+              37.933
+            ],
+            [
+              -121.32345,
+              37.9325
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Northern California (Stockton CA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.3243,
+              37.9329
+            ],
+            [
+              -121.3234,
+              37.9329
+            ],
+            [
+              -121.3234,
+              37.9342
+            ],
+            [
+              -121.3243,
+              37.9342
+            ],
+            [
+              -121.3243,
+              37.9329
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Northern California (Stockton CA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.3243,
+              37.9309
+            ],
+            [
+              -121.3237,
+              37.9309
+            ],
+            [
+              -121.3237,
+              37.9342
+            ],
+            [
+              -121.3243,
+              37.9342
+            ],
+            [
+              -121.3243,
+              37.9309
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Northern California (Stockton CA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.3233,
+              37.9323
+            ],
+            [
+              -121.3227,
+              37.9323
+            ],
+            [
+              -121.3227,
+              37.933
+            ],
+            [
+              -121.3233,
+              37.933
+            ],
+            [
+              -121.3233,
+              37.9323
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Northern California (Stockton CA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.4618,
+              45.5348
+            ],
+            [
+              -122.4598,
+              45.5348
+            ],
+            [
+              -122.4598,
+              45.5369
+            ],
+            [
+              -122.4618,
+              45.5369
+            ],
+            [
+              -122.4618,
+              45.5348
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Pacific Northwest (Portland OR)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 4.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.4616,
+              45.5351
+            ],
+            [
+              -122.4601,
+              45.5351
+            ],
+            [
+              -122.4601,
+              45.5359
+            ],
+            [
+              -122.4616,
+              45.5359
+            ],
+            [
+              -122.4616,
+              45.5351
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Pacific Northwest (Portland OR)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.4616,
+              45.5356
+            ],
+            [
+              -122.46,
+              45.5356
+            ],
+            [
+              -122.46,
+              45.536
+            ],
+            [
+              -122.4616,
+              45.536
+            ],
+            [
+              -122.4616,
+              45.5356
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Pacific Northwest (Portland OR)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.2209,
+              33.4408
+            ],
+            [
+              -112.2183,
+              33.4408
+            ],
+            [
+              -112.2183,
+              33.444
+            ],
+            [
+              -112.2209,
+              33.444
+            ],
+            [
+              -112.2209,
+              33.4408
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Arizona (Phoenix AZ)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 24,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 12.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.2208,
+              33.4415
+            ],
+            [
+              -112.2202,
+              33.4415
+            ],
+            [
+              -112.2202,
+              33.4421
+            ],
+            [
+              -112.2208,
+              33.4421
+            ],
+            [
+              -112.2208,
+              33.4415
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Arizona (Phoenix AZ)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.2199,
+              33.4409
+            ],
+            [
+              -112.2183,
+              33.4409
+            ],
+            [
+              -112.2183,
+              33.442
+            ],
+            [
+              -112.2199,
+              33.442
+            ],
+            [
+              -112.2199,
+              33.4409
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Arizona (Phoenix AZ)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.2201,
+              33.4421
+            ],
+            [
+              -112.2185,
+              33.4421
+            ],
+            [
+              -112.2185,
+              33.4428
+            ],
+            [
+              -112.2201,
+              33.4428
+            ],
+            [
+              -112.2201,
+              33.4421
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Arizona (Phoenix AZ)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.2208,
+              33.442
+            ],
+            [
+              -112.2198,
+              33.442
+            ],
+            [
+              -112.2198,
+              33.4427
+            ],
+            [
+              -112.2208,
+              33.4427
+            ],
+            [
+              -112.2208,
+              33.442
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Arizona (Phoenix AZ)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.3676,
+              38.8884
+            ],
+            [
+              -94.3648,
+              38.8884
+            ],
+            [
+              -94.3648,
+              38.8915
+            ],
+            [
+              -94.3676,
+              38.8915
+            ],
+            [
+              -94.3676,
+              38.8884
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Kansas City (Lee's Summit MO)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 13,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.3672,
+              38.8888
+            ],
+            [
+              -94.3654,
+              38.8888
+            ],
+            [
+              -94.3654,
+              38.8898
+            ],
+            [
+              -94.3672,
+              38.8898
+            ],
+            [
+              -94.3672,
+              38.8888
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Kansas City (Lee's Summit MO)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.3672,
+              38.8898
+            ],
+            [
+              -94.3656,
+              38.8898
+            ],
+            [
+              -94.3656,
+              38.8903
+            ],
+            [
+              -94.3672,
+              38.8903
+            ],
+            [
+              -94.3672,
+              38.8898
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Kansas City (Lee's Summit MO)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.3672,
+              38.8893
+            ],
+            [
+              -94.3656,
+              38.8893
+            ],
+            [
+              -94.3656,
+              38.8899
+            ],
+            [
+              -94.3672,
+              38.8899
+            ],
+            [
+              -94.3672,
+              38.8893
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Kansas City (Lee's Summit MO)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.290882,
+              36.173514
+            ],
+            [
+              -86.285318,
+              36.173514
+            ],
+            [
+              -86.285318,
+              36.177286
+            ],
+            [
+              -86.290882,
+              36.177286
+            ],
+            [
+              -86.290882,
+              36.173514
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Nashville (Lebanon TN)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 51.9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.287079,
+              36.175061
+            ],
+            [
+              -86.285521,
+              36.175061
+            ],
+            [
+              -86.285521,
+              36.176139
+            ],
+            [
+              -86.287079,
+              36.176139
+            ],
+            [
+              -86.287079,
+              36.175061
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Nashville (Lebanon TN)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.290602,
+              36.173953
+            ],
+            [
+              -86.288598,
+              36.173953
+            ],
+            [
+              -86.288598,
+              36.176647
+            ],
+            [
+              -86.290602,
+              36.176647
+            ],
+            [
+              -86.290602,
+              36.173953
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Nashville (Lebanon TN)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.286324,
+              36.173881
+            ],
+            [
+              -86.283876,
+              36.173881
+            ],
+            [
+              -86.283876,
+              36.175319
+            ],
+            [
+              -86.286324,
+              36.175319
+            ],
+            [
+              -86.286324,
+              36.173881
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Nashville (Lebanon TN)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.289781,
+              36.174271
+            ],
+            [
+              -86.286219,
+              36.174271
+            ],
+            [
+              -86.286219,
+              36.175529
+            ],
+            [
+              -86.289781,
+              36.175529
+            ],
+            [
+              -86.289781,
+              36.174271
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Nashville (Lebanon TN)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.374394,
+              36.175803
+            ],
+            [
+              -83.368606,
+              36.175803
+            ],
+            [
+              -83.368606,
+              36.179397
+            ],
+            [
+              -83.374394,
+              36.179397
+            ],
+            [
+              -83.374394,
+              36.175803
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - East Tennessee (Morristown TN)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 51.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.370662,
+              36.176156
+            ],
+            [
+              -83.369438,
+              36.176156
+            ],
+            [
+              -83.369438,
+              36.177144
+            ],
+            [
+              -83.370662,
+              36.177144
+            ],
+            [
+              -83.370662,
+              36.176156
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - East Tennessee (Morristown TN)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.371024,
+              36.177212
+            ],
+            [
+              -83.368576,
+              36.177212
+            ],
+            [
+              -83.368576,
+              36.179188
+            ],
+            [
+              -83.371024,
+              36.179188
+            ],
+            [
+              -83.371024,
+              36.177212
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - East Tennessee (Morristown TN)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.373592,
+              36.176261
+            ],
+            [
+              -83.369808,
+              36.176261
+            ],
+            [
+              -83.369808,
+              36.177339
+            ],
+            [
+              -83.373592,
+              36.177339
+            ],
+            [
+              -83.373592,
+              36.176261
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - East Tennessee (Morristown TN)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.550944,
+              38.209632
+            ],
+            [
+              -85.547056,
+              38.209632
+            ],
+            [
+              -85.547056,
+              38.211968
+            ],
+            [
+              -85.550944,
+              38.211968
+            ],
+            [
+              -85.550944,
+              38.209632
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Louisville KY",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 21.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.548629,
+              38.210191
+            ],
+            [
+              -85.547371,
+              38.210191
+            ],
+            [
+              -85.547371,
+              38.210909
+            ],
+            [
+              -85.548629,
+              38.210909
+            ],
+            [
+              -85.548629,
+              38.210191
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Louisville KY",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.550315,
+              38.209896
+            ],
+            [
+              -85.546885,
+              38.209896
+            ],
+            [
+              -85.546885,
+              38.210704
+            ],
+            [
+              -85.550315,
+              38.210704
+            ],
+            [
+              -85.550315,
+              38.209896
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Louisville KY",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.450956,
+              39.227875
+            ],
+            [
+              -84.447244,
+              39.227875
+            ],
+            [
+              -84.447244,
+              39.232725
+            ],
+            [
+              -84.450956,
+              39.232725
+            ],
+            [
+              -84.450956,
+              39.227875
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Cincinnati OH",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 42.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.449138,
+              39.229196
+            ],
+            [
+              -84.447862,
+              39.229196
+            ],
+            [
+              -84.447862,
+              39.230004
+            ],
+            [
+              -84.449138,
+              39.230004
+            ],
+            [
+              -84.449138,
+              39.229196
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Cincinnati OH",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.450144,
+              39.228212
+            ],
+            [
+              -84.448056,
+              39.228212
+            ],
+            [
+              -84.448056,
+              39.230188
+            ],
+            [
+              -84.450144,
+              39.230188
+            ],
+            [
+              -84.450144,
+              39.228212
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Cincinnati OH",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.448548,
+              39.229453
+            ],
+            [
+              -84.447852,
+              39.229453
+            ],
+            [
+              -84.447852,
+              39.232147
+            ],
+            [
+              -84.448548,
+              39.232147
+            ],
+            [
+              -84.448548,
+              39.229453
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Cincinnati OH",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.448964,
+              39.229642
+            ],
+            [
+              -84.448036,
+              39.229642
+            ],
+            [
+              -84.448036,
+              39.232158
+            ],
+            [
+              -84.448964,
+              39.232158
+            ],
+            [
+              -84.448964,
+              39.229642
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Cincinnati OH",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.4952,
+              40.78555
+            ],
+            [
+              -76.4901,
+              40.78555
+            ],
+            [
+              -76.4901,
+              40.78975
+            ],
+            [
+              -76.4952,
+              40.78975
+            ],
+            [
+              -76.4952,
+              40.78555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Eastern PA (Coal Township PA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 42,
+          "trailersVisible": 36,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 24.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.4937,
+              40.78715
+            ],
+            [
+              -76.49215,
+              40.78715
+            ],
+            [
+              -76.49215,
+              40.7887
+            ],
+            [
+              -76.4937,
+              40.7887
+            ],
+            [
+              -76.4937,
+              40.78715
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Eastern PA (Coal Township PA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.4927,
+              40.78735
+            ],
+            [
+              -76.4908,
+              40.78735
+            ],
+            [
+              -76.4908,
+              40.78815
+            ],
+            [
+              -76.4927,
+              40.78815
+            ],
+            [
+              -76.4927,
+              40.78735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Eastern PA (Coal Township PA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.495,
+              40.7865
+            ],
+            [
+              -76.4942,
+              40.7865
+            ],
+            [
+              -76.4942,
+              40.7872
+            ],
+            [
+              -76.495,
+              40.7872
+            ],
+            [
+              -76.495,
+              40.7865
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Eastern PA (Coal Township PA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.5937,
+              40.1796
+            ],
+            [
+              -79.5893,
+              40.1796
+            ],
+            [
+              -79.5893,
+              40.1829
+            ],
+            [
+              -79.5937,
+              40.1829
+            ],
+            [
+              -79.5937,
+              40.1796
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Pittsburgh (Mt. Pleasant PA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 58,
+          "trailersVisible": 34,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 30.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.5909,
+              40.1802
+            ],
+            [
+              -79.5902,
+              40.1802
+            ],
+            [
+              -79.5902,
+              40.18075
+            ],
+            [
+              -79.5909,
+              40.18075
+            ],
+            [
+              -79.5909,
+              40.1802
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Pittsburgh (Mt. Pleasant PA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.59,
+              40.1809
+            ],
+            [
+              -79.5892,
+              40.1809
+            ],
+            [
+              -79.5892,
+              40.1825
+            ],
+            [
+              -79.59,
+              40.1825
+            ],
+            [
+              -79.59,
+              40.1809
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Pittsburgh (Mt. Pleasant PA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.5901,
+              40.18075
+            ],
+            [
+              -79.5894,
+              40.18075
+            ],
+            [
+              -79.5894,
+              40.1825
+            ],
+            [
+              -79.5901,
+              40.1825
+            ],
+            [
+              -79.5901,
+              40.18075
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Pittsburgh (Mt. Pleasant PA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.5932,
+              40.18055
+            ],
+            [
+              -79.5918,
+              40.18055
+            ],
+            [
+              -79.5918,
+              40.1813
+            ],
+            [
+              -79.5932,
+              40.1813
+            ],
+            [
+              -79.5932,
+              40.18055
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Pittsburgh (Mt. Pleasant PA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.544,
+              38.7913
+            ],
+            [
+              -77.54155,
+              38.7913
+            ],
+            [
+              -77.54155,
+              38.79355
+            ],
+            [
+              -77.544,
+              38.79355
+            ],
+            [
+              -77.544,
+              38.7913
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Manassas VA",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 24,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 11.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.5433,
+              38.7915
+            ],
+            [
+              -77.54225,
+              38.7915
+            ],
+            [
+              -77.54225,
+              38.79235
+            ],
+            [
+              -77.5433,
+              38.79235
+            ],
+            [
+              -77.5433,
+              38.7915
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Manassas VA",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.54355,
+              38.79175
+            ],
+            [
+              -77.543,
+              38.79175
+            ],
+            [
+              -77.543,
+              38.7931
+            ],
+            [
+              -77.54355,
+              38.7931
+            ],
+            [
+              -77.54355,
+              38.79175
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Manassas VA",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.4692,
+              37.6924
+            ],
+            [
+              -77.4647,
+              37.6924
+            ],
+            [
+              -77.4647,
+              37.6957
+            ],
+            [
+              -77.4692,
+              37.6957
+            ],
+            [
+              -77.4692,
+              37.6924
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Glen Allen VA",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 30,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.4685,
+              37.6928
+            ],
+            [
+              -77.4668,
+              37.6928
+            ],
+            [
+              -77.4668,
+              37.6942
+            ],
+            [
+              -77.4685,
+              37.6942
+            ],
+            [
+              -77.4685,
+              37.6928
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Glen Allen VA",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.4685,
+              37.693
+            ],
+            [
+              -77.4669,
+              37.693
+            ],
+            [
+              -77.4669,
+              37.6943
+            ],
+            [
+              -77.4685,
+              37.6943
+            ],
+            [
+              -77.4685,
+              37.693
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Glen Allen VA",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.5472,
+              36.7656
+            ],
+            [
+              -76.5425,
+              36.7656
+            ],
+            [
+              -76.5425,
+              36.7697
+            ],
+            [
+              -76.5472,
+              36.7697
+            ],
+            [
+              -76.5472,
+              36.7656
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Tidewater (Suffolk VA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 38,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.5472,
+              36.766
+            ],
+            [
+              -76.5462,
+              36.766
+            ],
+            [
+              -76.5462,
+              36.7672
+            ],
+            [
+              -76.5472,
+              36.7672
+            ],
+            [
+              -76.5472,
+              36.766
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Tidewater (Suffolk VA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.5448,
+              36.7683
+            ],
+            [
+              -76.5433,
+              36.7683
+            ],
+            [
+              -76.5433,
+              36.7692
+            ],
+            [
+              -76.5448,
+              36.7692
+            ],
+            [
+              -76.5448,
+              36.7683
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Tidewater (Suffolk VA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.5466,
+              36.7682
+            ],
+            [
+              -76.5435,
+              36.7682
+            ],
+            [
+              -76.5435,
+              36.769
+            ],
+            [
+              -76.5466,
+              36.769
+            ],
+            [
+              -76.5466,
+              36.7682
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Tidewater (Suffolk VA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.3648,
+              35.7368
+            ],
+            [
+              -81.361,
+              35.7368
+            ],
+            [
+              -81.361,
+              35.7408
+            ],
+            [
+              -81.3648,
+              35.7408
+            ],
+            [
+              -81.3648,
+              35.7368
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Hickory NC",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 14,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.3624,
+              35.7396
+            ],
+            [
+              -81.3616,
+              35.7396
+            ],
+            [
+              -81.3616,
+              35.7401
+            ],
+            [
+              -81.3624,
+              35.7401
+            ],
+            [
+              -81.3624,
+              35.7396
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Hickory NC",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.363,
+              35.7396
+            ],
+            [
+              -81.3615,
+              35.7396
+            ],
+            [
+              -81.3615,
+              35.7406
+            ],
+            [
+              -81.363,
+              35.7406
+            ],
+            [
+              -81.363,
+              35.7396
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Hickory NC",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.3642,
+              35.7385
+            ],
+            [
+              -81.3628,
+              35.7385
+            ],
+            [
+              -81.3628,
+              35.74
+            ],
+            [
+              -81.3642,
+              35.74
+            ],
+            [
+              -81.3642,
+              35.7385
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Hickory NC",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.1962,
+              29.9528
+            ],
+            [
+              -90.1938,
+              29.9528
+            ],
+            [
+              -90.1938,
+              29.9548
+            ],
+            [
+              -90.1962,
+              29.9548
+            ],
+            [
+              -90.1962,
+              29.9528
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - New Orleans (Harahan LA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 9.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.1958,
+              29.9532
+            ],
+            [
+              -90.1952,
+              29.9532
+            ],
+            [
+              -90.1952,
+              29.9536
+            ],
+            [
+              -90.1958,
+              29.9536
+            ],
+            [
+              -90.1958,
+              29.9532
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - New Orleans (Harahan LA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.1947,
+              29.953
+            ],
+            [
+              -90.1938,
+              29.953
+            ],
+            [
+              -90.1938,
+              29.9538
+            ],
+            [
+              -90.1947,
+              29.9538
+            ],
+            [
+              -90.1947,
+              29.953
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - New Orleans (Harahan LA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.1958,
+              29.9533
+            ],
+            [
+              -90.1942,
+              29.9533
+            ],
+            [
+              -90.1942,
+              29.9538
+            ],
+            [
+              -90.1958,
+              29.9538
+            ],
+            [
+              -90.1958,
+              29.9533
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - New Orleans (Harahan LA)",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.329,
+              34.7176
+            ],
+            [
+              -92.3252,
+              34.7176
+            ],
+            [
+              -92.3252,
+              34.7212
+            ],
+            [
+              -92.329,
+              34.7212
+            ],
+            [
+              -92.329,
+              34.7176
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Little Rock AR",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 65,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 17,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.3288,
+              34.7197
+            ],
+            [
+              -92.3282,
+              34.7197
+            ],
+            [
+              -92.3282,
+              34.7201
+            ],
+            [
+              -92.3288,
+              34.7201
+            ],
+            [
+              -92.3288,
+              34.7197
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Little Rock AR",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.3276,
+              34.7179
+            ],
+            [
+              -92.3256,
+              34.7179
+            ],
+            [
+              -92.3256,
+              34.72
+            ],
+            [
+              -92.3276,
+              34.72
+            ],
+            [
+              -92.3276,
+              34.7179
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Little Rock AR",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.3282,
+              34.7182
+            ],
+            [
+              -92.3268,
+              34.7182
+            ],
+            [
+              -92.3268,
+              34.7199
+            ],
+            [
+              -92.3282,
+              34.7199
+            ],
+            [
+              -92.3282,
+              34.7182
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Little Rock AR",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.349,
+              31.1418
+            ],
+            [
+              -97.3445,
+              31.1418
+            ],
+            [
+              -97.3445,
+              31.1462
+            ],
+            [
+              -97.349,
+              31.1462
+            ],
+            [
+              -97.349,
+              31.1418
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Temple TX",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 36,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.347,
+              31.1426
+            ],
+            [
+              -97.3462,
+              31.1426
+            ],
+            [
+              -97.3462,
+              31.1432
+            ],
+            [
+              -97.347,
+              31.1432
+            ],
+            [
+              -97.347,
+              31.1426
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Temple TX",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3468,
+              31.1435
+            ],
+            [
+              -97.3447,
+              31.1435
+            ],
+            [
+              -97.3447,
+              31.1458
+            ],
+            [
+              -97.3468,
+              31.1458
+            ],
+            [
+              -97.3468,
+              31.1435
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Temple TX",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3478,
+              31.1432
+            ],
+            [
+              -97.3464,
+              31.1432
+            ],
+            [
+              -97.3464,
+              31.1448
+            ],
+            [
+              -97.3478,
+              31.1448
+            ],
+            [
+              -97.3478,
+              31.1432
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "performance-food-group",
+        "name": "Performance Foodservice - Temple TX",
+        "type": "Broadline Foodservice Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    }
+  ]
+}

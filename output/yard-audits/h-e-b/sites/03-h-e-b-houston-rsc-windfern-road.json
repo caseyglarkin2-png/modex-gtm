@@ -1,0 +1,56 @@
+{
+  "name": "H-E-B Houston RSC (Windfern Road) - Houston TX",
+  "type": "Retail Support Center / Distribution Center",
+  "coords": { "lat": 29.837000, "lng": -95.539000 },
+  "geofences": {
+    "perimeter": { "south": 29.831500, "west": -95.541800, "north": 29.842800, "east": -95.536200 },
+    "truckGate": { "south": 29.832100, "west": -95.539900, "north": 29.832700, "east": -95.539300 },
+    "dropYards": [
+      { "south": 29.834600, "west": -95.541000, "north": 29.836200, "east": -95.537800 },
+      { "south": 29.838000, "west": -95.541200, "north": 29.840500, "east": -95.537600 },
+      { "south": 29.840800, "west": -95.541000, "north": 29.842500, "east": -95.538000 }
+    ],
+    "dockAprons": [
+      { "south": 29.836000, "west": -95.540400, "north": 29.836500, "east": -95.537900 },
+      { "south": 29.839700, "west": -95.540800, "north": 29.840400, "east": -95.537900 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 160,
+    "trailersVisible": 280,
+    "trailerParkingCapacity": 400,
+    "truckGateCount": 2,
+    "buildingCount": 7,
+    "siteAreaAcres": 130.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.837000,-95.539000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "truckGateCount", "scale", "multiStep"],
+  "fieldNotes": {
+    "facility": "Large H-E-B distribution + production campus on the Windfern Rd corridor, NW Houston. Multiple solar-roofed warehouse buildings (the RSC) plus production buildings with silos (bakery/dairy). Roster idx 8 and 9 (snack plant, milk/bread plant) are separate buildings in this same corridor.",
+    "truckGate": "Campus is fully enclosed by a decorative metal perimeter fence with masonry columns (confirmed in Street View, 2026-01). Web source (hub.biz / chamber listing) explicitly states the facility 'accepts vendor deliveries through a security check-in process' — a controlled truck gate. truckGate true.",
+    "guardShack": "Security check-in process implies a staffed gate. A modern office building anchors the SE corner near the main entrance. guardShack classified true on the strength of the documented security check-in; the booth itself was not isolated in imagery due to tree cover — medium confidence.",
+    "dockDoors": "Multiple warehouse buildings with long dock-door banks and trailers backed in on several faces; total well into the 50+ band (estimated ~160).",
+    "dropArea": "Very extensive trailer drop yards — large arrays of parked trailers (no tractors) on the north, central and south parts of the campus; estimated 280 visible, capacity ~400.",
+    "shipRcvSeparate": "Dock banks on distinct building faces across multiple buildings — separate shipping and receiving operations.",
+    "multipleFacilities": "True multi-building campus: RSC distribution warehouses plus production buildings (silos visible) and an office building.",
+    "drivewayLong": "Long internal access roads run the length of the campus; deep stacking room between the gate and the docks.",
+    "fastLaneOpportunity": "Wide internal roads and gate aprons — room for a dedicated express/bypass lane.",
+    "railServed": "No rail spur into the property; campus bounded by a drainage channel and residential.",
+    "siteAreaAcres": "Estimate from perimeter box covering the fenced campus."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,49 @@
+{
+  "name": "Pactiv Evergreen - Abilene TX",
+  "type": "Manufacturing Plant (Food Merchandising)",
+  "coords": { "lat": 32.459931, "lng": -99.81015 },
+  "geofences": {
+    "perimeter": { "south": 32.45670, "west": -99.81200, "north": 32.46150, "east": -99.80820 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 32.46010, "west": -99.81050, "north": 32.46075, "east": -99.80870 }
+    ],
+    "dockAprons": [
+      { "south": 32.46010, "west": -99.81050, "north": 32.46075, "east": -99.80870 },
+      { "south": 32.45760, "west": -99.81160, "north": 32.45850, "east": -99.81020 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 11,
+    "trailerParkingCapacity": 20,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 49.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.459931,-99.81015,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Open site. The truck driveway off Five Points Pkwy enters the property as an uncontrolled loop road with no barrier arm, gate, or pinch-point checkpoint at any point along the property line (confirmed in Street View 2025-01 from multiple headings).",
+    "guardShack": "No staffed booth anywhere along the entrance road or dock aprons.",
+    "shipRcvSeparate": "Two physically separate dock banks: ~6 doors on the north face of the main building and ~8 doors on the southwest face of the white-roof wing. Likely separate ship/receive flows but functional split not verifiable from imagery.",
+    "dockDoorCount": "~6 doors visible on north face (5-6 trailers backed in) plus ~8 on the SW face; estimate ~14 total. Low-confidence count.",
+    "fastLaneOpportunity": "Wide unfenced gravel/paved aprons at both dock banks and a broad loop road give ample room to add lanes; no current control to bypass.",
+    "urbanRural": "Five Points industrial park on the NW edge of Abilene; open prairie immediately west and south, sparse industrial development. Edge-of-town/rural setting."
+  },
+  "method": "deep-audit"
+}

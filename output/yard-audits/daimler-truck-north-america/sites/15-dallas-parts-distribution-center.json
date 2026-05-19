@@ -1,0 +1,55 @@
+{
+  "name": "Dallas Parts Distribution Center - Grand Prairie TX",
+  "type": "Parts distribution center",
+  "coords": { "lat": 32.797300, "lng": -97.031700 },
+  "geofences": {
+    "perimeter": { "south": 32.795900, "west": -97.033400, "north": 32.798050, "east": -97.029900 },
+    "truckGate": { "south": 32.796300, "west": -97.030800, "north": 32.796600, "east": -97.030400 },
+    "dropYards": [
+      { "south": 32.796150, "west": -97.033100, "north": 32.796800, "east": -97.030200 }
+    ],
+    "dockAprons": [
+      { "south": 32.796550, "west": -97.033100, "north": 32.796950, "east": -97.030200 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 19.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.797300,-97.031700,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "Address 3010 Roy Orr Blvd, Suite 140, Grand Prairie TX 75050 — DTNA Dallas PDC, a 275,000 sq ft facility, confirmed via Daimler careers location page and business listings. Roster rooftop geocode moved only 111 m and landed on the correct building. Center locked at 32.797300, -97.031700.",
+    "truckGate": "TRUE. Street View (2024-12) shows a chain-link perimeter fence enclosing the south truck court / dock yard, with a controlled slide gate at the driveway entrance — a truck was captured driving in through the gate.",
+    "guardShack": "FALSE. No guard booth structure at the gate or anywhere on the truck side.",
+    "remoteGs": "TRUE. There is a controlled truck gate but no guard shack — implies kiosk / badge / app check-in.",
+    "dockDoors": "All dock doors on the south long face (single dock bank). Continuous door rhythm the full building length; estimate ~40 doors, 25-50 band — flagged uncertain.",
+    "dropArea": "South truck court has rows of angled trailer drop stalls plus trailers backed into docks; well over 50 trailers' worth of parking. 50+ band, dropYard true.",
+    "trailersVisible": "Roughly 55 trailers counted across the south truck court (backed-in plus parking rows) — estimate, flagged uncertain.",
+    "shipRcvSeparate": "FALSE. Docks are a single bank on the south face only; the north wall has no dock face (it abuts a neighboring equipment-rental yard).",
+    "drivewayLong": "Wide, deep south truck court easily stages 3+ trucks before the docks.",
+    "entryExitTogether": "Single gated driveway into the fenced truck court used for both entry and exit.",
+    "fastLaneOpportunity": "Single gated entrance into the fenced yard; no obvious unused paved width for an express bypass at the gate.",
+    "urbanRural": "Dense industrial district of Grand Prairie within the Dallas-Fort Worth metroplex; Urban.",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

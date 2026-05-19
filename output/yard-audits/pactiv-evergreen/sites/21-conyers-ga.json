@@ -1,0 +1,65 @@
+{
+  "name": "Pactiv Evergreen - Conyers GA",
+  "type": "Manufacturing Plant (Foodservice)",
+  "coords": { "lat": 33.67700, "lng": -84.03680 },
+  "geofences": {
+    "perimeter": { "south": 33.67540, "west": -84.03840, "north": 33.67835, "east": -84.03570 },
+    "truckGate": { "south": 33.67555, "west": -84.03690, "north": 33.67580, "east": -84.03650 },
+    "dropYards": [
+      { "south": 33.67540, "west": -84.03760, "north": 33.67610, "east": -84.03650 }
+    ],
+    "dockAprons": [
+      { "south": 33.67555, "west": -84.03760, "north": 33.67640, "east": -84.03660 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 55,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 17.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.67700,-84.03680,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Compound fully enclosed by chain-link fence; single access road off Rockdale Industrial Blvd terminates in a chain-link gate across the truck lane (2026-02 Street View).",
+    "guardShack": "No staffed booth visible at the fence gate or building front in any Street View heading (2026-02 imagery). Gate is chain-link only.",
+    "remoteGs": "Gate present, no guard booth -> kiosk / call-box / app check-in implied.",
+    "preGateStaging": "Gravel area outside the fence along the access road holds parked/overflow trailers - functions as pre-gate staging.",
+    "dockDoors": "Long dock face along the south leg of the L-shaped building; ~10-12 trailers backed in plus visible dock rhythm -> estimated ~18 doors, 10-25 band. Count is approximate.",
+    "dropArea": "Large fanned-out trailer drop yard on the south/southwest apron; ~30-40 trailers visible parked without tractors -> 25-50 band.",
+    "dropYard": "Dedicated trailer-storage area on the south apron plus overflow trailers on gravel outside the fence -> true.",
+    "urbanRural": "Conyers GA - Rockdale Industrial Blvd is a small-town industrial park on the outer edge of metro Atlanta, bordered by woods and grading land. Per rubric, small-town industrial -> Rural.",
+    "railServed": "No rail spur enters the property; building is a thermoforming/foodservice converting plant with resin silos, truck-served only.",
+    "drivewayLong": "Deep paved approach from the gate to the south dock apron easily holds a 3+ truck queue."
+  },
+  "method": "deep-audit"
+}

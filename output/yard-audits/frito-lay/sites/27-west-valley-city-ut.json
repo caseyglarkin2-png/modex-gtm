@@ -1,0 +1,67 @@
+{
+  "name": "Frito-Lay - West Valley City UT (DC)",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.6662, "lng": -112.0402 },
+  "geofences": {
+    "perimeter": { "south": 40.6645, "west": -112.0425, "north": 40.6680, "east": -112.0368 },
+    "truckGate": { "south": 40.66700, "west": -112.04090, "north": 40.66760, "east": -112.04055 },
+    "dropYards": [
+      { "south": 40.6655, "west": -112.0388, "north": 40.6678, "east": -112.0368 },
+      { "south": 40.6663, "west": -112.04250, "north": 40.6678, "east": -112.0412 }
+    ],
+    "dockAprons": [
+      { "south": 40.6648, "west": -112.0408, "north": 40.6658, "east": -112.0392 },
+      { "south": 40.6658, "west": -112.04250, "north": 40.6672, "east": -112.0415 }
+    ],
+    "staging": { "south": 40.6664, "west": -112.0412, "north": 40.6678, "east": -112.0398 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 43.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.6662,-112.0402,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "guardShack", "remoteGs", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "Roster address 3450 W 2100 S is wrong (a generic industrial-park point). Resolved to the real Frito-Lay West Valley City facility at 6301 W 4700 S, West Valley City UT 84118 (40.6662,-112.0402). Confirmed via web research and satellite + 2024-10 Street View: large industrial complex with red Frito-Lay logo signage, rooftop snack-food processing equipment, corn silos, and a steam plume.",
+    "facilityType": "Roster types this as a Distribution Center; the site is actually a combined production plant + distribution operation (produces Doritos, Lay's, Ruffles). Audited as the freight/truck yard regardless.",
+    "truckGate": "Entire property enclosed by tall ornamental steel security fencing (clear in Street View). A single controlled driveway off 4700 S leads through a gate; a gate/checkpoint is visible in the driveway in zoom-20 imagery.",
+    "guardShack": "No clearly staffed guard booth visible at the gate; a small checkpoint structure is present in the driveway but cannot be confirmed as a manned shack from imagery. Flagged uncertain; treated as remote/kiosk check-in.",
+    "dockDoors": "~10+ trailers backed in on the south face plus a west-face dock bank; total estimated ~45 doors. Approximate — building is large and some faces obscured by rooftop equipment.",
+    "dropArea": "Very large east-side trailer drop yard with 40+ trailers in rows, plus additional trailer rows on the west and north — well into the 50+ band.",
+    "shipRcvSeparate": "Dock banks on the south face and the west face are physically separate clusters on different building faces.",
+    "fastLaneOpportunity": "Wide entry driveway and large open paved staging area inside the gate give ample room for a bypass/express lane.",
+    "railServed": "No rail spur observed entering the property; not rail-served.",
+    "buildingCount": "Main plant/warehouse plus a smaller separate building to the south."
+  },
+  "method": "deep-audit"
+}

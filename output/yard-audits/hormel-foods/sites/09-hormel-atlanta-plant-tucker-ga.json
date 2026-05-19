@@ -1,0 +1,65 @@
+{
+  "name": "Hormel Atlanta Plant - Tucker GA",
+  "type": "Production Facility",
+  "coords": { "lat": 33.83930, "lng": -84.25060 },
+  "geofences": {
+    "perimeter": { "south": 33.83850, "west": -84.25150, "north": 33.84080, "east": -84.24930 },
+    "truckGate": { "south": 33.84015, "west": -84.25090, "north": 33.84055, "east": -84.25020 },
+    "dropYards": [
+      { "south": 33.83870, "west": -84.24970, "north": 33.83990, "east": -84.24930 }
+    ],
+    "dockAprons": [
+      { "south": 33.83870, "west": -84.25010, "north": 33.83990, "east": -84.24960 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 28,
+    "trailersVisible": 32,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 12.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.8393,-84.2506,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "entryLanes", "exitLanes", "truckGateCount"],
+  "fieldNotes": {
+    "location": "Roster coords (33.86701,-84.188105) and the roster address '3700 Mountain Industrial Blvd' were both wrong - that point is ~6km NE in a commercial/residential area. The real plant is 3367 Montreal Industrial Way, Tucker GA 30084, confirmed via Hormel/Waze/FSIS listings and a Street View sign reading 'ATLANTA PLANT'. Locked center ~33.8393,-84.2506.",
+    "truckGate": "Property has a perimeter chain-link fence, but the truck driveways from Montreal Industrial Way and the east road appear to be open driveway gaps without barrier arms or a guard booth. No controlled checkpoint identified - marked false at medium confidence (Street View coverage does not reach the dock-yard entrance directly).",
+    "guardShack": "No guard booth identified at any truck entrance. A small structure seen near a driveway appears to be a utility/picnic structure beside employee parking, not a gate booth.",
+    "dockDoorCount": "East dock face shows ~14-16 trailers backed in; additional dock doors on other faces. Total estimated 25-50 band (~28). Roof imagery overexposed - estimate.",
+    "dropYard": "Trailer drop yard along the east property edge (~8-12 trailers) plus trailers staged along Montreal Industrial Way. dropArea 10-25 band.",
+    "truckGateCount": "Two driveway access points (off Montreal Industrial Way and the east perimeter road); neither is a controlled gate.",
+    "railServed": "A rail line runs along the SE edge beyond the property's tree buffer but no spur enters the site. Not rail-served.",
+    "urbanRural": "Tucker, GA is part of the Atlanta metro (DeKalb County) - dense industrial/commercial fabric. Urban.",
+    "buildingCount": "The plant is a single large connected processing complex (built 1969). Adjacent large buildings are separate companies' warehouses, not part of this facility.",
+    "operations": "Plant runs Hormel chili and Dinty Moore stew; the precooked bacon line was closed in 2025 with 135 of ~350 employees laid off (Aug 2025) - operations reduced."
+  },
+  "method": "deep-audit"
+}

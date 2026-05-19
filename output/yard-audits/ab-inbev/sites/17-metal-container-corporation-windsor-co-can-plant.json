@@ -1,0 +1,63 @@
+{
+  "name": "Metal Container Corporation - Windsor CO Can Plant",
+  "type": "Can Manufacturing Plant",
+  "coords": { "lat": 40.467, "lng": -104.8623 },
+  "geofences": {
+    "perimeter": { "south": 40.46530, "west": -104.86360, "north": 40.46830, "east": -104.86120 },
+    "truckGate": { "south": 40.46510, "west": -104.86170, "north": 40.46545, "east": -104.86120 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 40.46630, "west": -104.86200, "north": 40.46700, "east": -104.86160 }
+    ],
+    "staging": { "south": 40.46540, "west": -104.86170, "north": 40.46620, "east": -104.86130 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 8,
+    "trailersVisible": 2,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 16.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.467,-104.8623,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Single truck driveway off the south public road (Eastman Park Dr area) is a wide open paved driveway with a yellow sign post on the median - no barrier arm, sliding gate, guard booth, or checkpoint. Street View Oct 2025 confirms open access; the driveway curves up into the property toward the building with no internal gate visible.",
+    "guardShack": "No staffed booth at the entrance in satellite or Street View Oct 2025.",
+    "remoteGs": "No gate exists, so no remote check-in.",
+    "drivewayLong": "The gate-to-dock driveway is long - it curves up roughly 200+ m from the south road through the property to the building's truck apron, with ample queue room.",
+    "dockDoors": "Manufacturing plant (~105,000 sq ft, ~2B cans/yr, ~100 workers) with a modest dock count - roughly 6-8 dock doors counted at the NE corner of the building at zoom 20; estimate.",
+    "dropArea": "No dedicated marked trailer-storage lot observed; the east apron is a paved truck-circulation/staging area, not a drop yard. Only ~2 trailers visible in imagery.",
+    "railServed": "A single rail line runs N-S immediately east of the property but it is a corridor/through-line; no spur enters the MCC building.",
+    "urbanRural": "Facility sits among open farmland and scattered industrial buildings on the edge of Windsor, CO - clearly Rural.",
+    "trailerParkingCapacity": "East paved apron could hold ~10-12 trailers if used for staging; low-confidence estimate.",
+    "buildingCount": "Single connected structure - a windowless warehouse/storage section (north) joined to a process-equipment-laden manufacturing section (south)."
+  },
+  "method": "deep-audit"
+}

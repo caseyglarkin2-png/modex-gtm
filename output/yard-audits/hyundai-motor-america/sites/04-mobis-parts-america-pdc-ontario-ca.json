@@ -1,0 +1,51 @@
+{
+  "name": "Mobis Parts America PDC - Ontario CA",
+  "type": "Parts Distribution Center",
+  "coords": { "lat": 34.040200, "lng": -117.553100 },
+  "geofences": {
+    "perimeter": { "south": 34.03790, "west": -117.55620, "north": 34.04220, "east": -117.55170 },
+    "truckGate": { "south": 34.03850, "west": -117.55290, "north": 34.03930, "east": -117.55210 },
+    "dropYards": [
+      { "south": 34.03850, "west": -117.55520, "north": 34.03960, "east": -117.55230 }
+    ],
+    "dockAprons": [
+      { "south": 34.03880, "west": -117.55520, "north": 34.03970, "east": -117.55230 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 46, "trailersVisible": 38, "trailerParkingCapacity": 55,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 14.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.040200,-117.553100,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "site": "Mobis Parts America West Coast PDC at 1900 S Rochester Ave, Ontario CA — confirmed by web research (BBB, D&B, Panjiva). Large single warehouse building in a multi-tenant Inland Empire industrial park bordered by a freeway on the east; other tenants share the complex (e.g. 'Spartan' signage on the building).",
+    "truckGate": "false — the truck court / dock yard runs off S Rochester Ave via an OPEN driveway. Street View (2021-02, 2025-01) shows no barrier arm, no sliding gate, and no checkpoint pinch-point at the road. Standard open multi-tenant business-park access.",
+    "guardShack": "false — no staffed booth at the truck court entrance. A small structure mid-yard reads as an office/storage cabin, not a gate guard booth.",
+    "remoteGs": "false — no gate at all, so no remote check-in implied.",
+    "dockDoors": "South dock face of the Mobis building carries a long bank of dock doors with trailers backed in; counted ~46, placing it in the 25-50 band. Door count flagged as an honest overhead estimate.",
+    "dropArea": "Row of parked trailers in the truck court between buildings — modest drop activity, 10-25 stalls. Not a dedicated drop yard, so dropYard = false.",
+    "drivewayLong": "The shared truck court drive is long enough to stack 3+ trucks between the buildings.",
+    "urbanRural": "Urban — dense Ontario/Inland Empire logistics corridor, wall-to-wall warehouses and a freeway alongside.",
+    "multipleFacilities": "false — Mobis occupies one building; the surrounding warehouses are separate properties/tenants, not one campus.",
+    "shipRcvSeparate": "false — a single south dock bank serves both ship and receive.",
+    "railServed": "false — no rail spur into the property.",
+    "scale": "false — no truck scale observed.",
+    "geofence": "Center 34.0402,-117.5531 on the Mobis building; perimeter box encloses the building and its shared south truck court."
+  },
+  "method": "deep-audit"
+}

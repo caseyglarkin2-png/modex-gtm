@@ -1,0 +1,66 @@
+{
+  "name": "GP Corrugated Box Plant - Kansas City MO",
+  "type": "Corrugated Box Plant",
+  "coords": { "lat": 39.163500, "lng": -94.482500 },
+  "geofences": {
+    "perimeter": { "south": 39.160800, "west": -94.484800, "north": 39.165200, "east": -94.480500 },
+    "truckGate": { "south": 39.164800, "west": -94.481600, "north": 39.165200, "east": -94.480800 },
+    "dropYards": [
+      { "south": 39.162500, "west": -94.484600, "north": 39.164800, "east": -94.483400 },
+      { "south": 39.161800, "west": -94.481600, "north": 39.164400, "east": -94.480500 }
+    ],
+    "dockAprons": [
+      { "south": 39.163000, "west": -94.483400, "north": 39.164600, "east": -94.482400 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 45.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.1635,-94.4825,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea", "trailersVisible", "trailerParkingCapacity", "truckGateCount", "scale", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster had no street address and coords pointed at the East Bottoms industrial district south of the Missouri River (~2 km off). Actual GP Corrugated box plant is at 8600 NE 38th St, Kansas City MO 64161, in the Northland industrial district south of Worlds of Fun. Confirmed via business listings (GP Corrugated LLC / 'Kansas City Container') and OSM geocode; locked center ~39.1635,-94.4825.",
+    "truckGate": "Open driveway access from NE 38th St — no barrier arm, sliding gate or guard booth resolved at the road. Typical urban box-plant entry. Flagged uncertain (perimeter chain-link fencing exists; a gate may be set back from the street).",
+    "guardShack": "No staffed booth visible at the driveways. Box plants in urban industrial parks generally run un-gated.",
+    "dropYard": "Large dedicated trailer-storage lots: angled marked rows of trailers along the building's W/SW side near the rail line, plus extensive trailer parking on the E side. Substantial drop-yard operation typical of a corrugated box plant.",
+    "dropArea": "50+ trailers parked across the W and E yards in the captured imagery.",
+    "dockDoors": "A dock apron with a regular rhythm of dock doors runs along the building face; estimated 10-25 truck-height doors. Boxes ship out by van trailer; roll stock arrives by truck and rail.",
+    "entryExitSeparate": "The property has driveways at separate points off NE 38th St — an office/parking entrance and a truck-yard entrance.",
+    "railServed": "An active rail line runs along the W edge with a spur serving the plant (visible in satellite).",
+    "urbanRural": "Kansas City, MO metropolitan industrial district — Urban.",
+    "buildingCount": "One large monolithic manufacturing building under one roof; counted as 1."
+  },
+  "method": "deep-audit"
+}

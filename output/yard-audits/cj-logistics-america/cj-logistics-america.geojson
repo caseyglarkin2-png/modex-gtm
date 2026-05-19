@@ -1,0 +1,5713 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1408,
+              41.401
+            ],
+            [
+              -88.1365,
+              41.401
+            ],
+            [
+              -88.1365,
+              41.407
+            ],
+            [
+              -88.1408,
+              41.407
+            ],
+            [
+              -88.1408,
+              41.401
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Elwood IL (Logistics Center 1)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 116,
+          "trailersVisible": 140,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 59.3,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1404,
+              41.4056
+            ],
+            [
+              -88.1394,
+              41.4056
+            ],
+            [
+              -88.1394,
+              41.4065
+            ],
+            [
+              -88.1404,
+              41.4065
+            ],
+            [
+              -88.1404,
+              41.4056
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Elwood IL (Logistics Center 1)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1408,
+              41.4012
+            ],
+            [
+              -88.1392,
+              41.4012
+            ],
+            [
+              -88.1392,
+              41.4068
+            ],
+            [
+              -88.1408,
+              41.4068
+            ],
+            [
+              -88.1408,
+              41.4012
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Elwood IL (Logistics Center 1)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1376,
+              41.4012
+            ],
+            [
+              -88.1365,
+              41.4012
+            ],
+            [
+              -88.1365,
+              41.4068
+            ],
+            [
+              -88.1376,
+              41.4068
+            ],
+            [
+              -88.1376,
+              41.4012
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Elwood IL (Logistics Center 1)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1392,
+              41.4012
+            ],
+            [
+              -88.1388,
+              41.4012
+            ],
+            [
+              -88.1388,
+              41.4068
+            ],
+            [
+              -88.1392,
+              41.4068
+            ],
+            [
+              -88.1392,
+              41.4012
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Elwood IL (Logistics Center 1)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.138,
+              41.4012
+            ],
+            [
+              -88.1376,
+              41.4012
+            ],
+            [
+              -88.1376,
+              41.4068
+            ],
+            [
+              -88.138,
+              41.4068
+            ],
+            [
+              -88.138,
+              41.4012
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Elwood IL (Logistics Center 1)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1402,
+              41.4052
+            ],
+            [
+              -88.1392,
+              41.4052
+            ],
+            [
+              -88.1392,
+              41.406
+            ],
+            [
+              -88.1402,
+              41.406
+            ],
+            [
+              -88.1402,
+              41.4052
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Elwood IL (Logistics Center 1)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.157534,
+              41.388443
+            ],
+            [
+              -88.149536,
+              41.388443
+            ],
+            [
+              -88.149536,
+              41.394443
+            ],
+            [
+              -88.157534,
+              41.394443
+            ],
+            [
+              -88.157534,
+              41.388443
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Elwood IL (Logistics Center 2 / NEXUS)",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 110.2,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3522,
+              40.13
+            ],
+            [
+              -77.3475,
+              40.13
+            ],
+            [
+              -77.3475,
+              40.1352
+            ],
+            [
+              -77.3522,
+              40.1352
+            ],
+            [
+              -77.3522,
+              40.13
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Newville PA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 57.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3524,
+              40.1322
+            ],
+            [
+              -77.3514,
+              40.1322
+            ],
+            [
+              -77.3514,
+              40.133
+            ],
+            [
+              -77.3524,
+              40.133
+            ],
+            [
+              -77.3524,
+              40.1322
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Newville PA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3493,
+              40.1336
+            ],
+            [
+              -77.3475,
+              40.1336
+            ],
+            [
+              -77.3475,
+              40.1352
+            ],
+            [
+              -77.3493,
+              40.1352
+            ],
+            [
+              -77.3493,
+              40.1336
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Newville PA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.35,
+              40.1303
+            ],
+            [
+              -77.348,
+              40.1303
+            ],
+            [
+              -77.348,
+              40.132
+            ],
+            [
+              -77.35,
+              40.132
+            ],
+            [
+              -77.35,
+              40.1303
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Newville PA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.352,
+              40.1322
+            ],
+            [
+              -77.349,
+              40.1322
+            ],
+            [
+              -77.349,
+              40.1345
+            ],
+            [
+              -77.352,
+              40.1345
+            ],
+            [
+              -77.352,
+              40.1322
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Newville PA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.35,
+              40.1335
+            ],
+            [
+              -77.3478,
+              40.1335
+            ],
+            [
+              -77.3478,
+              40.1352
+            ],
+            [
+              -77.35,
+              40.1352
+            ],
+            [
+              -77.35,
+              40.1335
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Newville PA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.2,
+              35.4502
+            ],
+            [
+              -119.1962,
+              35.4502
+            ],
+            [
+              -119.1962,
+              35.454
+            ],
+            [
+              -119.2,
+              35.454
+            ],
+            [
+              -119.2,
+              35.4502
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Shafter CA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 36,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.1978,
+              35.4504
+            ],
+            [
+              -119.1968,
+              35.4504
+            ],
+            [
+              -119.1968,
+              35.451
+            ],
+            [
+              -119.1978,
+              35.451
+            ],
+            [
+              -119.1978,
+              35.4504
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Shafter CA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.1975,
+              35.4505
+            ],
+            [
+              -119.1962,
+              35.4505
+            ],
+            [
+              -119.1962,
+              35.4537
+            ],
+            [
+              -119.1975,
+              35.4537
+            ],
+            [
+              -119.1975,
+              35.4505
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Shafter CA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.198,
+              35.4505
+            ],
+            [
+              -119.1975,
+              35.4505
+            ],
+            [
+              -119.1975,
+              35.4537
+            ],
+            [
+              -119.198,
+              35.4537
+            ],
+            [
+              -119.198,
+              35.4505
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Shafter CA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.2,
+              35.4505
+            ],
+            [
+              -119.1995,
+              35.4505
+            ],
+            [
+              -119.1995,
+              35.4537
+            ],
+            [
+              -119.2,
+              35.4537
+            ],
+            [
+              -119.2,
+              35.4505
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Shafter CA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.1972,
+              35.4504
+            ],
+            [
+              -119.1965,
+              35.4504
+            ],
+            [
+              -119.1965,
+              35.4512
+            ],
+            [
+              -119.1972,
+              35.4512
+            ],
+            [
+              -119.1972,
+              35.4504
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Shafter CA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.3088,
+              33.9352
+            ],
+            [
+              -117.305,
+              33.9352
+            ],
+            [
+              -117.305,
+              33.9388
+            ],
+            [
+              -117.3088,
+              33.9388
+            ],
+            [
+              -117.3088,
+              33.9352
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Riverside CA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 105,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 170,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 34.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.3066,
+              33.9355
+            ],
+            [
+              -117.3059,
+              33.9355
+            ],
+            [
+              -117.3059,
+              33.9361
+            ],
+            [
+              -117.3066,
+              33.9361
+            ],
+            [
+              -117.3066,
+              33.9355
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Riverside CA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.3088,
+              33.9353
+            ],
+            [
+              -117.3082,
+              33.9353
+            ],
+            [
+              -117.3082,
+              33.9383
+            ],
+            [
+              -117.3088,
+              33.9383
+            ],
+            [
+              -117.3088,
+              33.9353
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Riverside CA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.3082,
+              33.9352
+            ],
+            [
+              -117.3062,
+              33.9352
+            ],
+            [
+              -117.3062,
+              33.9358
+            ],
+            [
+              -117.3082,
+              33.9358
+            ],
+            [
+              -117.3082,
+              33.9352
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Riverside CA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.3085,
+              33.9357
+            ],
+            [
+              -117.3081,
+              33.9357
+            ],
+            [
+              -117.3081,
+              33.9385
+            ],
+            [
+              -117.3085,
+              33.9385
+            ],
+            [
+              -117.3085,
+              33.9357
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Riverside CA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.3065,
+              33.9357
+            ],
+            [
+              -117.3061,
+              33.9357
+            ],
+            [
+              -117.3061,
+              33.9385
+            ],
+            [
+              -117.3065,
+              33.9385
+            ],
+            [
+              -117.3065,
+              33.9357
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Riverside CA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.3064,
+              33.9354
+            ],
+            [
+              -117.3057,
+              33.9354
+            ],
+            [
+              -117.3057,
+              33.936
+            ],
+            [
+              -117.3064,
+              33.936
+            ],
+            [
+              -117.3064,
+              33.9354
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Riverside CA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.6878,
+              32.6195
+            ],
+            [
+              -96.6828,
+              32.6195
+            ],
+            [
+              -96.6828,
+              32.6262
+            ],
+            [
+              -96.6878,
+              32.6262
+            ],
+            [
+              -96.6878,
+              32.6195
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Wilmer TX (Southport Logistics Park)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 141,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 310,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 86.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.6852,
+              32.6255
+            ],
+            [
+              -96.6843,
+              32.6255
+            ],
+            [
+              -96.6843,
+              32.6262
+            ],
+            [
+              -96.6852,
+              32.6262
+            ],
+            [
+              -96.6852,
+              32.6255
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Wilmer TX (Southport Logistics Park)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.6878,
+              32.62
+            ],
+            [
+              -96.6862,
+              32.62
+            ],
+            [
+              -96.6862,
+              32.6258
+            ],
+            [
+              -96.6878,
+              32.6258
+            ],
+            [
+              -96.6878,
+              32.62
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Wilmer TX (Southport Logistics Park)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.6845,
+              32.6198
+            ],
+            [
+              -96.6828,
+              32.6198
+            ],
+            [
+              -96.6828,
+              32.6255
+            ],
+            [
+              -96.6845,
+              32.6255
+            ],
+            [
+              -96.6845,
+              32.6198
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Wilmer TX (Southport Logistics Park)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.6868,
+              32.6202
+            ],
+            [
+              -96.686,
+              32.6202
+            ],
+            [
+              -96.686,
+              32.6258
+            ],
+            [
+              -96.6868,
+              32.6258
+            ],
+            [
+              -96.6868,
+              32.6202
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Wilmer TX (Southport Logistics Park)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.685,
+              32.62
+            ],
+            [
+              -96.6843,
+              32.62
+            ],
+            [
+              -96.6843,
+              32.6255
+            ],
+            [
+              -96.685,
+              32.6255
+            ],
+            [
+              -96.685,
+              32.62
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Wilmer TX (Southport Logistics Park)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.685,
+              32.6253
+            ],
+            [
+              -96.6843,
+              32.6253
+            ],
+            [
+              -96.6843,
+              32.626
+            ],
+            [
+              -96.685,
+              32.626
+            ],
+            [
+              -96.685,
+              32.6253
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Wilmer TX (Southport Logistics Park)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2671,
+              33.8589
+            ],
+            [
+              -117.2632,
+              33.8589
+            ],
+            [
+              -117.2632,
+              33.8625
+            ],
+            [
+              -117.2671,
+              33.8625
+            ],
+            [
+              -117.2671,
+              33.8589
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Perris CA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 170,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 35.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.267,
+              33.8619
+            ],
+            [
+              -117.2662,
+              33.8619
+            ],
+            [
+              -117.2662,
+              33.8625
+            ],
+            [
+              -117.267,
+              33.8625
+            ],
+            [
+              -117.267,
+              33.8619
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Perris CA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2671,
+              33.8591
+            ],
+            [
+              -117.2663,
+              33.8591
+            ],
+            [
+              -117.2663,
+              33.8621
+            ],
+            [
+              -117.2671,
+              33.8621
+            ],
+            [
+              -117.2671,
+              33.8591
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Perris CA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2641,
+              33.8589
+            ],
+            [
+              -117.2632,
+              33.8589
+            ],
+            [
+              -117.2632,
+              33.8621
+            ],
+            [
+              -117.2641,
+              33.8621
+            ],
+            [
+              -117.2641,
+              33.8589
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Perris CA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2666,
+              33.8592
+            ],
+            [
+              -117.2661,
+              33.8592
+            ],
+            [
+              -117.2661,
+              33.862
+            ],
+            [
+              -117.2666,
+              33.862
+            ],
+            [
+              -117.2666,
+              33.8592
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Perris CA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2643,
+              33.8591
+            ],
+            [
+              -117.2638,
+              33.8591
+            ],
+            [
+              -117.2638,
+              33.862
+            ],
+            [
+              -117.2643,
+              33.862
+            ],
+            [
+              -117.2643,
+              33.8591
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Perris CA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.277,
+              40.121
+            ],
+            [
+              -88.271,
+              40.121
+            ],
+            [
+              -88.271,
+              40.1253
+            ],
+            [
+              -88.277,
+              40.1253
+            ],
+            [
+              -88.277,
+              40.121
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Champaign IL",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 58,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2771,
+              40.12185
+            ],
+            [
+              -88.2762,
+              40.12185
+            ],
+            [
+              -88.2762,
+              40.1225
+            ],
+            [
+              -88.2771,
+              40.1225
+            ],
+            [
+              -88.2771,
+              40.12185
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Champaign IL",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2766,
+              40.1212
+            ],
+            [
+              -88.2725,
+              40.1212
+            ],
+            [
+              -88.2725,
+              40.12215
+            ],
+            [
+              -88.2766,
+              40.12215
+            ],
+            [
+              -88.2766,
+              40.1212
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Champaign IL",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2755,
+              40.1247
+            ],
+            [
+              -88.272,
+              40.1247
+            ],
+            [
+              -88.272,
+              40.1253
+            ],
+            [
+              -88.2755,
+              40.1253
+            ],
+            [
+              -88.2755,
+              40.1247
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Champaign IL",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.272,
+              40.1229
+            ],
+            [
+              -88.271,
+              40.1229
+            ],
+            [
+              -88.271,
+              40.1247
+            ],
+            [
+              -88.272,
+              40.1247
+            ],
+            [
+              -88.272,
+              40.1229
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Champaign IL",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2766,
+              40.1219
+            ],
+            [
+              -88.2725,
+              40.1219
+            ],
+            [
+              -88.2725,
+              40.1225
+            ],
+            [
+              -88.2766,
+              40.1225
+            ],
+            [
+              -88.2766,
+              40.1219
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Champaign IL",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2724,
+              40.1228
+            ],
+            [
+              -88.2718,
+              40.1228
+            ],
+            [
+              -88.2718,
+              40.1246
+            ],
+            [
+              -88.2724,
+              40.1246
+            ],
+            [
+              -88.2724,
+              40.1228
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Champaign IL",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.402,
+              33.5083
+            ],
+            [
+              -112.3965,
+              33.5083
+            ],
+            [
+              -112.3965,
+              33.5112
+            ],
+            [
+              -112.402,
+              33.5112
+            ],
+            [
+              -112.402,
+              33.5083
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Glendale AZ",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 32,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.4015,
+              33.5083
+            ],
+            [
+              -112.4007,
+              33.5083
+            ],
+            [
+              -112.4007,
+              33.5089
+            ],
+            [
+              -112.4015,
+              33.5089
+            ],
+            [
+              -112.4015,
+              33.5083
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Glendale AZ",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.4012,
+              33.5085
+            ],
+            [
+              -112.3973,
+              33.5085
+            ],
+            [
+              -112.3973,
+              33.5092
+            ],
+            [
+              -112.4012,
+              33.5092
+            ],
+            [
+              -112.4012,
+              33.5085
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Glendale AZ",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.4012,
+              33.5085
+            ],
+            [
+              -112.3973,
+              33.5085
+            ],
+            [
+              -112.3973,
+              33.5092
+            ],
+            [
+              -112.4012,
+              33.5092
+            ],
+            [
+              -112.4012,
+              33.5085
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Glendale AZ",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6346,
+              40.5707
+            ],
+            [
+              -75.63,
+              40.5707
+            ],
+            [
+              -75.63,
+              40.5748
+            ],
+            [
+              -75.6346,
+              40.5748
+            ],
+            [
+              -75.6346,
+              40.5707
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Breinigsville PA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 43,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6346,
+              40.571
+            ],
+            [
+              -75.6339,
+              40.571
+            ],
+            [
+              -75.6339,
+              40.5716
+            ],
+            [
+              -75.6346,
+              40.5716
+            ],
+            [
+              -75.6346,
+              40.571
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Breinigsville PA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6346,
+              40.5724
+            ],
+            [
+              -75.6334,
+              40.5724
+            ],
+            [
+              -75.6334,
+              40.5742
+            ],
+            [
+              -75.6346,
+              40.5742
+            ],
+            [
+              -75.6346,
+              40.5724
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Breinigsville PA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6312,
+              40.5738
+            ],
+            [
+              -75.6298,
+              40.5738
+            ],
+            [
+              -75.6298,
+              40.575
+            ],
+            [
+              -75.6312,
+              40.575
+            ],
+            [
+              -75.6312,
+              40.5738
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Breinigsville PA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6339,
+              40.5711
+            ],
+            [
+              -75.6312,
+              40.5711
+            ],
+            [
+              -75.6312,
+              40.5736
+            ],
+            [
+              -75.6339,
+              40.5736
+            ],
+            [
+              -75.6339,
+              40.5711
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Breinigsville PA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6346,
+              40.5724
+            ],
+            [
+              -75.6334,
+              40.5724
+            ],
+            [
+              -75.6334,
+              40.5742
+            ],
+            [
+              -75.6346,
+              40.5742
+            ],
+            [
+              -75.6346,
+              40.5724
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Breinigsville PA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6348,
+              40.5724
+            ],
+            [
+              -75.6332,
+              40.5724
+            ],
+            [
+              -75.6332,
+              40.5743
+            ],
+            [
+              -75.6348,
+              40.5743
+            ],
+            [
+              -75.6348,
+              40.5724
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Breinigsville PA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.7355,
+              41.5838
+            ],
+            [
+              -87.731,
+              41.5838
+            ],
+            [
+              -87.731,
+              41.5877
+            ],
+            [
+              -87.7355,
+              41.5877
+            ],
+            [
+              -87.7355,
+              41.5838
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Tinley Park IL",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 65,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 40,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.7353,
+              41.5839
+            ],
+            [
+              -87.7346,
+              41.5839
+            ],
+            [
+              -87.7346,
+              41.5845
+            ],
+            [
+              -87.7353,
+              41.5845
+            ],
+            [
+              -87.7353,
+              41.5839
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Tinley Park IL",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.735,
+              41.5847
+            ],
+            [
+              -87.7342,
+              41.5847
+            ],
+            [
+              -87.7342,
+              41.587
+            ],
+            [
+              -87.735,
+              41.587
+            ],
+            [
+              -87.735,
+              41.5847
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Tinley Park IL",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.735,
+              41.5847
+            ],
+            [
+              -87.7342,
+              41.5847
+            ],
+            [
+              -87.7342,
+              41.587
+            ],
+            [
+              -87.735,
+              41.587
+            ],
+            [
+              -87.735,
+              41.5847
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Tinley Park IL",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.519,
+              34.0479
+            ],
+            [
+              -117.515,
+              34.0479
+            ],
+            [
+              -117.515,
+              34.0508
+            ],
+            [
+              -117.519,
+              34.0508
+            ],
+            [
+              -117.519,
+              34.0479
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Fontana CA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 29,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5164,
+              34.048
+            ],
+            [
+              -117.5156,
+              34.048
+            ],
+            [
+              -117.5156,
+              34.0486
+            ],
+            [
+              -117.5164,
+              34.0486
+            ],
+            [
+              -117.5164,
+              34.048
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Fontana CA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5163,
+              34.0483
+            ],
+            [
+              -117.5151,
+              34.0483
+            ],
+            [
+              -117.5151,
+              34.0504
+            ],
+            [
+              -117.5163,
+              34.0504
+            ],
+            [
+              -117.5163,
+              34.0483
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Fontana CA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5163,
+              34.0483
+            ],
+            [
+              -117.5158,
+              34.0483
+            ],
+            [
+              -117.5158,
+              34.0504
+            ],
+            [
+              -117.5163,
+              34.0504
+            ],
+            [
+              -117.5163,
+              34.0483
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Fontana CA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5185,
+              34.0481
+            ],
+            [
+              -117.5174,
+              34.0481
+            ],
+            [
+              -117.5174,
+              34.0486
+            ],
+            [
+              -117.5185,
+              34.0486
+            ],
+            [
+              -117.5185,
+              34.0481
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Fontana CA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5163,
+              34.0483
+            ],
+            [
+              -117.5151,
+              34.0483
+            ],
+            [
+              -117.5151,
+              34.0504
+            ],
+            [
+              -117.5163,
+              34.0504
+            ],
+            [
+              -117.5163,
+              34.0483
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Fontana CA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.7205,
+              34.3782
+            ],
+            [
+              -83.7168,
+              34.3782
+            ],
+            [
+              -83.7168,
+              34.3814
+            ],
+            [
+              -83.7205,
+              34.3814
+            ],
+            [
+              -83.7205,
+              34.3782
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Gainesville GA (Cold Storage)",
+        "type": "Cold Storage Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 10,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 25,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.7201,
+              34.3783
+            ],
+            [
+              -83.7193,
+              34.3783
+            ],
+            [
+              -83.7193,
+              34.3789
+            ],
+            [
+              -83.7201,
+              34.3789
+            ],
+            [
+              -83.7201,
+              34.3783
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Gainesville GA (Cold Storage)",
+        "type": "Cold Storage Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.7178,
+              34.3789
+            ],
+            [
+              -83.7169,
+              34.3789
+            ],
+            [
+              -83.7169,
+              34.3796
+            ],
+            [
+              -83.7178,
+              34.3796
+            ],
+            [
+              -83.7178,
+              34.3789
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Gainesville GA (Cold Storage)",
+        "type": "Cold Storage Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.7196,
+              34.3791
+            ],
+            [
+              -83.7173,
+              34.3791
+            ],
+            [
+              -83.7173,
+              34.3796
+            ],
+            [
+              -83.7196,
+              34.3796
+            ],
+            [
+              -83.7196,
+              34.3791
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Gainesville GA (Cold Storage)",
+        "type": "Cold Storage Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.7196,
+              34.3791
+            ],
+            [
+              -83.7173,
+              34.3791
+            ],
+            [
+              -83.7173,
+              34.3796
+            ],
+            [
+              -83.7196,
+              34.3796
+            ],
+            [
+              -83.7196,
+              34.3791
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Gainesville GA (Cold Storage)",
+        "type": "Cold Storage Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.9035,
+              38.8405
+            ],
+            [
+              -94.9,
+              38.8405
+            ],
+            [
+              -94.9,
+              38.8438
+            ],
+            [
+              -94.9035,
+              38.8438
+            ],
+            [
+              -94.9035,
+              38.8405
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - New Century KS (Cold Storage)",
+        "type": "Cold Storage Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 28,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.554,
+              34.0297
+            ],
+            [
+              -117.5504,
+              34.0297
+            ],
+            [
+              -117.5504,
+              34.0339
+            ],
+            [
+              -117.554,
+              34.0339
+            ],
+            [
+              -117.554,
+              34.0297
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Mira Loma CA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 38.4,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5544,
+              34.0309
+            ],
+            [
+              -117.5536,
+              34.0309
+            ],
+            [
+              -117.5536,
+              34.0317
+            ],
+            [
+              -117.5544,
+              34.0317
+            ],
+            [
+              -117.5544,
+              34.0309
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Mira Loma CA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5524,
+              34.0298
+            ],
+            [
+              -117.5508,
+              34.0298
+            ],
+            [
+              -117.5508,
+              34.0332
+            ],
+            [
+              -117.5524,
+              34.0332
+            ],
+            [
+              -117.5524,
+              34.0298
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Mira Loma CA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5538,
+              34.0306
+            ],
+            [
+              -117.5527,
+              34.0306
+            ],
+            [
+              -117.5527,
+              34.0316
+            ],
+            [
+              -117.5538,
+              34.0316
+            ],
+            [
+              -117.5538,
+              34.0306
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Mira Loma CA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5524,
+              34.0299
+            ],
+            [
+              -117.5512,
+              34.0299
+            ],
+            [
+              -117.5512,
+              34.0333
+            ],
+            [
+              -117.5524,
+              34.0333
+            ],
+            [
+              -117.5524,
+              34.0299
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Mira Loma CA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1338,
+              41.6498
+            ],
+            [
+              -88.1282,
+              41.6498
+            ],
+            [
+              -88.1282,
+              41.6524
+            ],
+            [
+              -88.1338,
+              41.6524
+            ],
+            [
+              -88.1338,
+              41.6498
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Romeoville IL (Normantown)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 33.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1328,
+              41.6516
+            ],
+            [
+              -88.132,
+              41.6516
+            ],
+            [
+              -88.132,
+              41.6521
+            ],
+            [
+              -88.1328,
+              41.6521
+            ],
+            [
+              -88.1328,
+              41.6516
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Romeoville IL (Normantown)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1295,
+              41.65
+            ],
+            [
+              -88.1284,
+              41.65
+            ],
+            [
+              -88.1284,
+              41.6516
+            ],
+            [
+              -88.1295,
+              41.6516
+            ],
+            [
+              -88.1295,
+              41.65
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Romeoville IL (Normantown)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1332,
+              41.6515
+            ],
+            [
+              -88.1286,
+              41.6515
+            ],
+            [
+              -88.1286,
+              41.6521
+            ],
+            [
+              -88.1332,
+              41.6521
+            ],
+            [
+              -88.1332,
+              41.6515
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Romeoville IL (Normantown)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1172,
+              41.6028
+            ],
+            [
+              -88.114,
+              41.6028
+            ],
+            [
+              -88.114,
+              41.6052
+            ],
+            [
+              -88.1172,
+              41.6052
+            ],
+            [
+              -88.1172,
+              41.6028
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Romeoville IL (Pinnacle Drive)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 17.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1145,
+              41.6033
+            ],
+            [
+              -88.1138,
+              41.6033
+            ],
+            [
+              -88.1138,
+              41.6038
+            ],
+            [
+              -88.1145,
+              41.6038
+            ],
+            [
+              -88.1145,
+              41.6033
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Romeoville IL (Pinnacle Drive)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1168,
+              41.6029
+            ],
+            [
+              -88.1144,
+              41.6029
+            ],
+            [
+              -88.1144,
+              41.6034
+            ],
+            [
+              -88.1168,
+              41.6034
+            ],
+            [
+              -88.1168,
+              41.6029
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Romeoville IL (Pinnacle Drive)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1168,
+              41.6033
+            ],
+            [
+              -88.1144,
+              41.6033
+            ],
+            [
+              -88.1144,
+              41.6037
+            ],
+            [
+              -88.1168,
+              41.6037
+            ],
+            [
+              -88.1168,
+              41.6033
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Romeoville IL (Pinnacle Drive)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.9027,
+              32.8123
+            ],
+            [
+              -96.8999,
+              32.8123
+            ],
+            [
+              -96.8999,
+              32.8137
+            ],
+            [
+              -96.9027,
+              32.8137
+            ],
+            [
+              -96.9027,
+              32.8123
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Dallas TX (Regal Row)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 15,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 10.1,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.9003,
+              32.8132
+            ],
+            [
+              -96.8999,
+              32.8132
+            ],
+            [
+              -96.8999,
+              32.8136
+            ],
+            [
+              -96.9003,
+              32.8136
+            ],
+            [
+              -96.9003,
+              32.8132
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Dallas TX (Regal Row)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.9026,
+              32.8131
+            ],
+            [
+              -96.9,
+              32.8131
+            ],
+            [
+              -96.9,
+              32.8135
+            ],
+            [
+              -96.9026,
+              32.8135
+            ],
+            [
+              -96.9026,
+              32.8131
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Dallas TX (Regal Row)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.9026,
+              32.8123
+            ],
+            [
+              -96.9,
+              32.8123
+            ],
+            [
+              -96.9,
+              32.8126
+            ],
+            [
+              -96.9026,
+              32.8126
+            ],
+            [
+              -96.9026,
+              32.8123
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Dallas TX (Regal Row)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0812,
+              32.679
+            ],
+            [
+              -97.0775,
+              32.679
+            ],
+            [
+              -97.0775,
+              32.6822
+            ],
+            [
+              -97.0812,
+              32.6822
+            ],
+            [
+              -97.0812,
+              32.679
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Arlington TX",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 30.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0788,
+              32.6795
+            ],
+            [
+              -97.0781,
+              32.6795
+            ],
+            [
+              -97.0781,
+              32.68
+            ],
+            [
+              -97.0788,
+              32.68
+            ],
+            [
+              -97.0788,
+              32.6795
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Arlington TX",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0788,
+              32.6792
+            ],
+            [
+              -97.0779,
+              32.6792
+            ],
+            [
+              -97.0779,
+              32.6818
+            ],
+            [
+              -97.0788,
+              32.6818
+            ],
+            [
+              -97.0788,
+              32.6792
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Arlington TX",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.079,
+              32.6793
+            ],
+            [
+              -97.0782,
+              32.6793
+            ],
+            [
+              -97.0782,
+              32.6819
+            ],
+            [
+              -97.079,
+              32.6819
+            ],
+            [
+              -97.079,
+              32.6793
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Arlington TX",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0808,
+              32.6793
+            ],
+            [
+              -97.0801,
+              32.6793
+            ],
+            [
+              -97.0801,
+              32.6819
+            ],
+            [
+              -97.0808,
+              32.6819
+            ],
+            [
+              -97.0808,
+              32.6793
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Arlington TX",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.0815,
+              40.7704
+            ],
+            [
+              -74.0799,
+              40.7704
+            ],
+            [
+              -74.0799,
+              40.7726
+            ],
+            [
+              -74.0815,
+              40.7726
+            ],
+            [
+              -74.0815,
+              40.7704
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Secaucus NJ",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 19,
+          "trailersVisible": 20,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 8.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.0812,
+              40.7704
+            ],
+            [
+              -74.0807,
+              40.7704
+            ],
+            [
+              -74.0807,
+              40.7708
+            ],
+            [
+              -74.0812,
+              40.7708
+            ],
+            [
+              -74.0812,
+              40.7704
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Secaucus NJ",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.0812,
+              40.7705
+            ],
+            [
+              -74.08,
+              40.7705
+            ],
+            [
+              -74.08,
+              40.7712
+            ],
+            [
+              -74.0812,
+              40.7712
+            ],
+            [
+              -74.0812,
+              40.7705
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Secaucus NJ",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.0813,
+              40.7707
+            ],
+            [
+              -74.0801,
+              40.7707
+            ],
+            [
+              -74.0801,
+              40.7712
+            ],
+            [
+              -74.0813,
+              40.7712
+            ],
+            [
+              -74.0813,
+              40.7707
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Secaucus NJ",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.7478,
+              40.20705
+            ],
+            [
+              -76.7433,
+              40.20705
+            ],
+            [
+              -76.7433,
+              40.20935
+            ],
+            [
+              -76.7478,
+              40.20935
+            ],
+            [
+              -76.7478,
+              40.20705
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Middletown PA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 24.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.7452,
+              40.2099
+            ],
+            [
+              -76.743,
+              40.2099
+            ],
+            [
+              -76.743,
+              40.21055
+            ],
+            [
+              -76.7452,
+              40.21055
+            ],
+            [
+              -76.7452,
+              40.2099
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Middletown PA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.7478,
+              40.20875
+            ],
+            [
+              -76.7433,
+              40.20875
+            ],
+            [
+              -76.7433,
+              40.20935
+            ],
+            [
+              -76.7478,
+              40.20935
+            ],
+            [
+              -76.7478,
+              40.20875
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Middletown PA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5908,
+              33.541
+            ],
+            [
+              -84.5838,
+              33.541
+            ],
+            [
+              -84.5838,
+              33.5472
+            ],
+            [
+              -84.5908,
+              33.5472
+            ],
+            [
+              -84.5908,
+              33.541
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Fairburn GA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 110.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5911,
+              33.5417
+            ],
+            [
+              -84.59,
+              33.5417
+            ],
+            [
+              -84.59,
+              33.5423
+            ],
+            [
+              -84.5911,
+              33.5423
+            ],
+            [
+              -84.5911,
+              33.5417
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Fairburn GA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5852,
+              33.5448
+            ],
+            [
+              -84.5838,
+              33.5448
+            ],
+            [
+              -84.5838,
+              33.5468
+            ],
+            [
+              -84.5852,
+              33.5468
+            ],
+            [
+              -84.5852,
+              33.5448
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Fairburn GA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.59,
+              33.541
+            ],
+            [
+              -84.5855,
+              33.541
+            ],
+            [
+              -84.5855,
+              33.545
+            ],
+            [
+              -84.59,
+              33.545
+            ],
+            [
+              -84.59,
+              33.541
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Fairburn GA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5903,
+              33.5435
+            ],
+            [
+              -84.5855,
+              33.5435
+            ],
+            [
+              -84.5855,
+              33.547
+            ],
+            [
+              -84.5903,
+              33.547
+            ],
+            [
+              -84.5903,
+              33.5435
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Fairburn GA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.435,
+              36.0695
+            ],
+            [
+              -86.4313,
+              36.0695
+            ],
+            [
+              -86.4313,
+              36.0739
+            ],
+            [
+              -86.435,
+              36.0739
+            ],
+            [
+              -86.435,
+              36.0695
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Mount Juliet TN",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 50,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 40.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4343,
+              36.06975
+            ],
+            [
+              -86.4338,
+              36.06975
+            ],
+            [
+              -86.4338,
+              36.07025
+            ],
+            [
+              -86.4343,
+              36.07025
+            ],
+            [
+              -86.4343,
+              36.06975
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Mount Juliet TN",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.435,
+              36.0715
+            ],
+            [
+              -86.434,
+              36.0715
+            ],
+            [
+              -86.434,
+              36.0736
+            ],
+            [
+              -86.435,
+              36.0736
+            ],
+            [
+              -86.435,
+              36.0715
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Mount Juliet TN",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4348,
+              36.0698
+            ],
+            [
+              -86.4336,
+              36.0698
+            ],
+            [
+              -86.4336,
+              36.0738
+            ],
+            [
+              -86.4348,
+              36.0738
+            ],
+            [
+              -86.4348,
+              36.0698
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Mount Juliet TN",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4325,
+              36.07
+            ],
+            [
+              -86.4313,
+              36.07
+            ],
+            [
+              -86.4313,
+              36.0739
+            ],
+            [
+              -86.4325,
+              36.0739
+            ],
+            [
+              -86.4325,
+              36.07
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Mount Juliet TN",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4085,
+              36.1293
+            ],
+            [
+              -86.4043,
+              36.1293
+            ],
+            [
+              -86.4043,
+              36.1327
+            ],
+            [
+              -86.4085,
+              36.1327
+            ],
+            [
+              -86.4085,
+              36.1293
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Lebanon TN",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 65,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 35.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4079,
+              36.12955
+            ],
+            [
+              -86.4073,
+              36.12955
+            ],
+            [
+              -86.4073,
+              36.13
+            ],
+            [
+              -86.4079,
+              36.13
+            ],
+            [
+              -86.4079,
+              36.12955
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Lebanon TN",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4057,
+              36.1307
+            ],
+            [
+              -86.4047,
+              36.1307
+            ],
+            [
+              -86.4047,
+              36.1323
+            ],
+            [
+              -86.4057,
+              36.1323
+            ],
+            [
+              -86.4057,
+              36.1307
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Lebanon TN",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4082,
+              36.1295
+            ],
+            [
+              -86.4064,
+              36.1295
+            ],
+            [
+              -86.4064,
+              36.1323
+            ],
+            [
+              -86.4082,
+              36.1323
+            ],
+            [
+              -86.4082,
+              36.1295
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Lebanon TN",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4064,
+              36.13
+            ],
+            [
+              -86.4047,
+              36.13
+            ],
+            [
+              -86.4047,
+              36.1327
+            ],
+            [
+              -86.4064,
+              36.1327
+            ],
+            [
+              -86.4064,
+              36.13
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Lebanon TN",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.4015,
+              37.2955
+            ],
+            [
+              -77.397,
+              37.2955
+            ],
+            [
+              -77.397,
+              37.3
+            ],
+            [
+              -77.4015,
+              37.3
+            ],
+            [
+              -77.4015,
+              37.2955
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Chester VA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 49.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.4011,
+              37.2957
+            ],
+            [
+              -77.3988,
+              37.2957
+            ],
+            [
+              -77.3988,
+              37.2992
+            ],
+            [
+              -77.4011,
+              37.2992
+            ],
+            [
+              -77.4011,
+              37.2957
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Chester VA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3995,
+              37.296
+            ],
+            [
+              -77.3973,
+              37.296
+            ],
+            [
+              -77.3973,
+              37.2995
+            ],
+            [
+              -77.3995,
+              37.2995
+            ],
+            [
+              -77.3995,
+              37.296
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Chester VA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.2492,
+              35.1843
+            ],
+            [
+              -90.2442,
+              35.1843
+            ],
+            [
+              -90.2442,
+              35.1876
+            ],
+            [
+              -90.2492,
+              35.1876
+            ],
+            [
+              -90.2492,
+              35.1843
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - West Memphis AR",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 41.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.2465,
+              35.1854
+            ],
+            [
+              -90.2459,
+              35.1854
+            ],
+            [
+              -90.2459,
+              35.18585
+            ],
+            [
+              -90.2465,
+              35.18585
+            ],
+            [
+              -90.2465,
+              35.1854
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - West Memphis AR",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.249,
+              35.1868
+            ],
+            [
+              -90.2445,
+              35.1868
+            ],
+            [
+              -90.2445,
+              35.1876
+            ],
+            [
+              -90.249,
+              35.1876
+            ],
+            [
+              -90.249,
+              35.1868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - West Memphis AR",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.2488,
+              35.1846
+            ],
+            [
+              -90.2447,
+              35.1846
+            ],
+            [
+              -90.2447,
+              35.1854
+            ],
+            [
+              -90.2488,
+              35.1854
+            ],
+            [
+              -90.2488,
+              35.1846
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - West Memphis AR",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.2488,
+              35.1867
+            ],
+            [
+              -90.2447,
+              35.1867
+            ],
+            [
+              -90.2447,
+              35.1874
+            ],
+            [
+              -90.2488,
+              35.1874
+            ],
+            [
+              -90.2488,
+              35.1867
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - West Memphis AR",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.0642,
+              36.125
+            ],
+            [
+              -80.0605,
+              36.125
+            ],
+            [
+              -80.0605,
+              36.1276
+            ],
+            [
+              -80.0642,
+              36.1276
+            ],
+            [
+              -80.0642,
+              36.125
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Kernersville NC",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 15,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 23.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.0611,
+              36.12615
+            ],
+            [
+              -80.06055,
+              36.12615
+            ],
+            [
+              -80.06055,
+              36.12665
+            ],
+            [
+              -80.0611,
+              36.12665
+            ],
+            [
+              -80.0611,
+              36.12615
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Kernersville NC",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.0638,
+              36.1253
+            ],
+            [
+              -80.0611,
+              36.1253
+            ],
+            [
+              -80.0611,
+              36.12595
+            ],
+            [
+              -80.0638,
+              36.12595
+            ],
+            [
+              -80.0638,
+              36.1253
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Kernersville NC",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.064,
+              36.1256
+            ],
+            [
+              -80.061,
+              36.1256
+            ],
+            [
+              -80.061,
+              36.1262
+            ],
+            [
+              -80.064,
+              36.1262
+            ],
+            [
+              -80.064,
+              36.1256
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cj-logistics-america",
+        "name": "CJ Logistics - Kernersville NC",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    }
+  ]
+}

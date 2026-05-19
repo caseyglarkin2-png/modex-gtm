@@ -1,0 +1,50 @@
+{
+  "name": "Coca-Cola Consolidated - Erlanger Distribution & Sales Center, KY",
+  "type": "Distribution / Sales Center",
+  "coords": { "lat": 39.036800, "lng": -84.609800 },
+  "geofences": {
+    "perimeter": { "south": 39.0345, "west": -84.6120, "north": 39.0384, "east": -84.6080 },
+    "truckGate": { "south": 39.0349, "west": -84.6118, "north": 39.0355, "east": -84.6110 },
+    "dropYards": [
+      { "south": 39.0370, "west": -84.6116, "north": 39.0382, "east": -84.6101 }
+    ],
+    "dockAprons": [
+      { "south": 39.0354, "west": -84.6116, "north": 39.0372, "east": -84.6098 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55, "trailersVisible": 60, "trailerParkingCapacity": 90,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 31.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.0368,-84.6098,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "dropArea", "fastLaneOpportunity", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "Roster lat/lng (39.0514,-84.6323) and roster address (600 Circleport Dr) geocoded to a street centerline in the Circleport office park near CVG airport - that area has only office/flex buildings, not a 300,000 sq ft DC. The real Coca-Cola Consolidated Erlanger Distribution & Sales Center is at 680 Erlanger Road (confirmed by company and city of Erlanger sources; 300,000 sq ft on ~32 acres, built on the old Showcase Cinema site, $30M / 430-job project by Hillwood + Al Neyer, opened ~2019-2020). US Census geocoder places 680 Erlanger Rd at the edge of a 3-building Hillwood commerce park beside I-71/75. The northernmost building (audited here, ~39.0368,-84.6098) shows red Coca-Cola Consolidated / Red Classic fleet vehicles and bobtail delivery trucks at its dock apron - the strongest match.",
+    "buildingMatch": "MEDIUM confidence on exact building. Three similar warehouses sit in this Hillwood commerce park; the audited building best matches the 32-acre figure and is the only one showing an active red Coke fleet. The other two appeared larger / lower-activity.",
+    "truckGate": "Single internal commerce-park access drive feeds the building's yard; the property is gated/fenced at the yard entrance. Gate hardware not directly visible (no Street View on park roads) - inferred from layout, low-medium confidence.",
+    "guardShack": "No distinct beside-the-lane guard booth visible at the yard entrance. guardShack=false.",
+    "remoteGs": "Truck gate present, no guard shack -> remoteGs=true (kiosk/badge check-in implied).",
+    "dockDoors": "50+ - cross-dock layout with dock doors along the NW and SW building faces, trailers backed in along both. ~55 estimated; flagged as approximate.",
+    "shipRcvSeparate": "Dock banks on two physically separate building faces (NW and SW) suggest separate ship/receive flows.",
+    "dropYard": "Trailer drop area on the north yard holds 25-50 trailers without tractors; large fleet of red trailers and delivery trucks staged.",
+    "fastLaneOpportunity": "Wide paved yard and generous apron width provide room for an express/bypass lane.",
+    "railServed": "No rail spur enters the property; I-71/75 borders the site, no rail. railServed=false.",
+    "urbanRural": "Cincinnati/Northern Kentucky metro, directly off I-71/75 just south of I-275, dense industrial/commercial fabric - Urban.",
+    "drivewayLong": "Long internal approach from the park access road to the docks holds 3+ trucks."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,50 @@
+{
+  "name": "DHL Supply Chain - DC - Etna OH",
+  "type": "Distribution Center",
+  "coords": { "lat": 39.96055, "lng": -82.71735 },
+  "geofences": {
+    "perimeter": { "south": 39.9582, "west": -82.7195, "north": 39.9625, "east": -82.7158 },
+    "truckGate": { "south": 39.95845, "west": -82.71905, "north": 39.95895, "east": -82.71855 },
+    "dropYards": [
+      { "south": 39.9590, "west": -82.7194, "north": 39.9620, "east": -82.7184 }
+    ],
+    "dockAprons": [
+      { "south": 39.9589, "west": -82.7186, "north": 39.9621, "east": -82.7180 }
+    ],
+    "staging": { "south": 39.9583, "west": -82.7193, "north": 39.9588, "east": -82.7186 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 28,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 37.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.96055,-82.71735,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "dropArea"],
+  "fieldNotes": {
+    "location": "Resolved to the DHL Supply Chain (Exel/Coty) building at 127-143 Heritage Drive, Pataskala OH 43062 (Etna Township, Licking County). Roster gave no address; web research surfaced 'COTY/EXEL (DHL), 131 Heritage Dr' and Panjiva shipping records 'Dc Etna, 127-143 Heritage Dr'. Google Geocoding API returned ROOFTOP precision for 131 Heritage Dr; Street View confirmed office unit '138' on the south face within the 127-143 range.",
+    "truckGate": "Black cantilever sliding gate across the truck driveway on the west side off Heritage Drive, confirmed in multiple Street View frames (2024-08).",
+    "guardShack": "No staffed booth visible beside the gate in any Street View angle.",
+    "remoteGs": "Gated entry with no guard shack implies kiosk / call-box / app check-in.",
+    "dockDoors": "West face of the ~350m building is a continuous dock wall with trailers backed in; counted ~70 doors as a banded estimate (band 50+). Low confidence on exact count.",
+    "dropArea": "Trailers parked in the fenced truck court west of the building; estimated 25-50 stalls. Court is shared/adjacent with the western building so capacity is approximate.",
+    "urbanRural": "Etna Corporate Park, an edge-of-town industrial park in rural Etna Township surrounded by farmland and a small residential pocket; classified Rural per rubric tiebreak.",
+    "railServed": "No rail spur runs into the property; road-served DC."
+  },
+  "method": "deep-audit"
+}

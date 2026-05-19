@@ -1,0 +1,6121 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.172,
+              42.3085
+            ],
+            [
+              -83.158,
+              42.3085
+            ],
+            [
+              -83.158,
+              42.3175
+            ],
+            [
+              -83.172,
+              42.3175
+            ],
+            [
+              -83.172,
+              42.3085
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Dearborn Truck Plant, Dearborn MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 285.3,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1678,
+              42.303
+            ],
+            [
+              -83.1662,
+              42.303
+            ],
+            [
+              -83.1662,
+              42.3042
+            ],
+            [
+              -83.1678,
+              42.3042
+            ],
+            [
+              -83.1678,
+              42.303
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Dearborn Truck Plant, Dearborn MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1635,
+              42.3105
+            ],
+            [
+              -83.1608,
+              42.3105
+            ],
+            [
+              -83.1608,
+              42.3125
+            ],
+            [
+              -83.1635,
+              42.3125
+            ],
+            [
+              -83.1635,
+              42.3105
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Dearborn Truck Plant, Dearborn MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1638,
+              42.3148
+            ],
+            [
+              -83.161,
+              42.3148
+            ],
+            [
+              -83.161,
+              42.3162
+            ],
+            [
+              -83.1638,
+              42.3162
+            ],
+            [
+              -83.1638,
+              42.3148
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Dearborn Truck Plant, Dearborn MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.167,
+              42.3104
+            ],
+            [
+              -83.1648,
+              42.3104
+            ],
+            [
+              -83.1648,
+              42.3115
+            ],
+            [
+              -83.167,
+              42.3115
+            ],
+            [
+              -83.167,
+              42.3104
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Dearborn Truck Plant, Dearborn MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1655,
+              42.3146
+            ],
+            [
+              -83.1628,
+              42.3146
+            ],
+            [
+              -83.1628,
+              42.3156
+            ],
+            [
+              -83.1655,
+              42.3156
+            ],
+            [
+              -83.1655,
+              42.3146
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Dearborn Truck Plant, Dearborn MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1678,
+              42.3042
+            ],
+            [
+              -83.1656,
+              42.3042
+            ],
+            [
+              -83.1656,
+              42.3056
+            ],
+            [
+              -83.1678,
+              42.3056
+            ],
+            [
+              -83.1678,
+              42.3042
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Dearborn Truck Plant, Dearborn MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.542,
+              38.29
+            ],
+            [
+              -85.529,
+              38.29
+            ],
+            [
+              -85.529,
+              38.301
+            ],
+            [
+              -85.542,
+              38.301
+            ],
+            [
+              -85.542,
+              38.29
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Kentucky Truck Plant, Louisville KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 343.7,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.5398,
+              38.2948
+            ],
+            [
+              -85.5382,
+              38.2948
+            ],
+            [
+              -85.5382,
+              38.296
+            ],
+            [
+              -85.5398,
+              38.296
+            ],
+            [
+              -85.5398,
+              38.2948
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Kentucky Truck Plant, Louisville KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.541,
+              38.2928
+            ],
+            [
+              -85.5388,
+              38.2928
+            ],
+            [
+              -85.5388,
+              38.2944
+            ],
+            [
+              -85.541,
+              38.2944
+            ],
+            [
+              -85.541,
+              38.2928
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Kentucky Truck Plant, Louisville KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.53,
+              38.299
+            ],
+            [
+              -85.528,
+              38.299
+            ],
+            [
+              -85.528,
+              38.3005
+            ],
+            [
+              -85.53,
+              38.3005
+            ],
+            [
+              -85.53,
+              38.299
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Kentucky Truck Plant, Louisville KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.538,
+              38.292
+            ],
+            [
+              -85.5352,
+              38.292
+            ],
+            [
+              -85.5352,
+              38.2938
+            ],
+            [
+              -85.538,
+              38.2938
+            ],
+            [
+              -85.538,
+              38.292
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Kentucky Truck Plant, Louisville KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.535,
+              38.295
+            ],
+            [
+              -85.5325,
+              38.295
+            ],
+            [
+              -85.5325,
+              38.2968
+            ],
+            [
+              -85.535,
+              38.2968
+            ],
+            [
+              -85.535,
+              38.295
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Kentucky Truck Plant, Louisville KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.539,
+              38.2944
+            ],
+            [
+              -85.537,
+              38.2944
+            ],
+            [
+              -85.537,
+              38.2956
+            ],
+            [
+              -85.539,
+              38.2956
+            ],
+            [
+              -85.539,
+              38.2944
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Kentucky Truck Plant, Louisville KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.4865,
+              39.1955
+            ],
+            [
+              -94.4695,
+              39.1955
+            ],
+            [
+              -94.4695,
+              39.2095
+            ],
+            [
+              -94.4865,
+              39.2095
+            ],
+            [
+              -94.4865,
+              39.1955
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Kansas City Assembly Plant, Claycomo MO",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 564.8,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.4728,
+              39.2
+            ],
+            [
+              -94.4712,
+              39.2
+            ],
+            [
+              -94.4712,
+              39.2011
+            ],
+            [
+              -94.4728,
+              39.2011
+            ],
+            [
+              -94.4728,
+              39.2
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Kansas City Assembly Plant, Claycomo MO",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.4728,
+              39.2032
+            ],
+            [
+              -94.4702,
+              39.2032
+            ],
+            [
+              -94.4702,
+              39.2048
+            ],
+            [
+              -94.4728,
+              39.2048
+            ],
+            [
+              -94.4728,
+              39.2032
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Kansas City Assembly Plant, Claycomo MO",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.4755,
+              39.1955
+            ],
+            [
+              -94.471,
+              39.1955
+            ],
+            [
+              -94.471,
+              39.1985
+            ],
+            [
+              -94.4755,
+              39.1985
+            ],
+            [
+              -94.4755,
+              39.1955
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Kansas City Assembly Plant, Claycomo MO",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.4815,
+              39.202
+            ],
+            [
+              -94.479,
+              39.202
+            ],
+            [
+              -94.479,
+              39.2042
+            ],
+            [
+              -94.4815,
+              39.2042
+            ],
+            [
+              -94.4815,
+              39.202
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Kansas City Assembly Plant, Claycomo MO",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.4735,
+              39.2025
+            ],
+            [
+              -94.471,
+              39.2025
+            ],
+            [
+              -94.471,
+              39.2046
+            ],
+            [
+              -94.4735,
+              39.2046
+            ],
+            [
+              -94.4735,
+              39.2025
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Kansas City Assembly Plant, Claycomo MO",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.4728,
+              39.1998
+            ],
+            [
+              -94.4708,
+              39.1998
+            ],
+            [
+              -94.4708,
+              39.201
+            ],
+            [
+              -94.4728,
+              39.201
+            ],
+            [
+              -94.4728,
+              39.1998
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Kansas City Assembly Plant, Claycomo MO",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.734,
+              38.1493
+            ],
+            [
+              -85.7218,
+              38.1493
+            ],
+            [
+              -85.7218,
+              38.1585
+            ],
+            [
+              -85.734,
+              38.1585
+            ],
+            [
+              -85.734,
+              38.1493
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Louisville Assembly Plant, Louisville KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 277,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.7312,
+              38.1568
+            ],
+            [
+              -85.7295,
+              38.1568
+            ],
+            [
+              -85.7295,
+              38.1578
+            ],
+            [
+              -85.7312,
+              38.1578
+            ],
+            [
+              -85.7312,
+              38.1568
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Louisville Assembly Plant, Louisville KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.7338,
+              38.153
+            ],
+            [
+              -85.7318,
+              38.153
+            ],
+            [
+              -85.7318,
+              38.1562
+            ],
+            [
+              -85.7338,
+              38.1562
+            ],
+            [
+              -85.7338,
+              38.153
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Louisville Assembly Plant, Louisville KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.7318,
+              38.1518
+            ],
+            [
+              -85.7288,
+              38.1518
+            ],
+            [
+              -85.7288,
+              38.1536
+            ],
+            [
+              -85.7318,
+              38.1536
+            ],
+            [
+              -85.7318,
+              38.1518
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Louisville Assembly Plant, Louisville KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.7318,
+              38.1528
+            ],
+            [
+              -85.729,
+              38.1528
+            ],
+            [
+              -85.729,
+              38.1542
+            ],
+            [
+              -85.7318,
+              38.1542
+            ],
+            [
+              -85.7318,
+              38.1528
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Louisville Assembly Plant, Louisville KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.7332,
+              38.1548
+            ],
+            [
+              -85.731,
+              38.1548
+            ],
+            [
+              -85.731,
+              38.156
+            ],
+            [
+              -85.7332,
+              38.156
+            ],
+            [
+              -85.7332,
+              38.1548
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Louisville Assembly Plant, Louisville KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.7312,
+              38.156
+            ],
+            [
+              -85.7295,
+              38.156
+            ],
+            [
+              -85.7295,
+              38.157
+            ],
+            [
+              -85.7312,
+              38.157
+            ],
+            [
+              -85.7312,
+              38.156
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Louisville Assembly Plant, Louisville KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4215,
+              42.269
+            ],
+            [
+              -83.4055,
+              42.269
+            ],
+            [
+              -83.4055,
+              42.281
+            ],
+            [
+              -83.4215,
+              42.281
+            ],
+            [
+              -83.4215,
+              42.269
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Michigan Assembly Plant, Wayne MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 2,
+          "buildingCount": 5,
+          "siteAreaAcres": 369,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4185,
+              42.2778
+            ],
+            [
+              -83.417,
+              42.2778
+            ],
+            [
+              -83.417,
+              42.2786
+            ],
+            [
+              -83.4185,
+              42.2786
+            ],
+            [
+              -83.4185,
+              42.2778
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Michigan Assembly Plant, Wayne MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4175,
+              42.2718
+            ],
+            [
+              -83.4135,
+              42.2718
+            ],
+            [
+              -83.4135,
+              42.2738
+            ],
+            [
+              -83.4175,
+              42.2738
+            ],
+            [
+              -83.4175,
+              42.2718
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Michigan Assembly Plant, Wayne MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4125,
+              42.272
+            ],
+            [
+              -83.4085,
+              42.272
+            ],
+            [
+              -83.4085,
+              42.2742
+            ],
+            [
+              -83.4125,
+              42.2742
+            ],
+            [
+              -83.4125,
+              42.272
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Michigan Assembly Plant, Wayne MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.411,
+              42.272
+            ],
+            [
+              -83.407,
+              42.272
+            ],
+            [
+              -83.407,
+              42.2734
+            ],
+            [
+              -83.411,
+              42.2734
+            ],
+            [
+              -83.411,
+              42.272
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Michigan Assembly Plant, Wayne MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.412,
+              42.2752
+            ],
+            [
+              -83.408,
+              42.2752
+            ],
+            [
+              -83.408,
+              42.2764
+            ],
+            [
+              -83.412,
+              42.2764
+            ],
+            [
+              -83.412,
+              42.2752
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Michigan Assembly Plant, Wayne MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4185,
+              42.277
+            ],
+            [
+              -83.4165,
+              42.277
+            ],
+            [
+              -83.4165,
+              42.278
+            ],
+            [
+              -83.4185,
+              42.278
+            ],
+            [
+              -83.4185,
+              42.277
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Michigan Assembly Plant, Wayne MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.5645,
+              41.6593
+            ],
+            [
+              -87.55925,
+              41.6593
+            ],
+            [
+              -87.55925,
+              41.6688
+            ],
+            [
+              -87.5645,
+              41.6688
+            ],
+            [
+              -87.5645,
+              41.6593
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Chicago Assembly Plant, Chicago IL",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 130,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.55965,
+              41.6612
+            ],
+            [
+              -87.55905,
+              41.6612
+            ],
+            [
+              -87.55905,
+              41.662
+            ],
+            [
+              -87.55965,
+              41.662
+            ],
+            [
+              -87.55965,
+              41.6612
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Chicago Assembly Plant, Chicago IL",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.5608,
+              41.65955
+            ],
+            [
+              -87.55935,
+              41.65955
+            ],
+            [
+              -87.55935,
+              41.6613
+            ],
+            [
+              -87.5608,
+              41.6613
+            ],
+            [
+              -87.5608,
+              41.65955
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Chicago Assembly Plant, Chicago IL",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.5626,
+              41.6602
+            ],
+            [
+              -87.56075,
+              41.6602
+            ],
+            [
+              -87.56075,
+              41.6618
+            ],
+            [
+              -87.5626,
+              41.6618
+            ],
+            [
+              -87.5626,
+              41.6602
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Chicago Assembly Plant, Chicago IL",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.5611,
+              41.6602
+            ],
+            [
+              -87.5598,
+              41.6602
+            ],
+            [
+              -87.5598,
+              41.6611
+            ],
+            [
+              -87.5611,
+              41.6611
+            ],
+            [
+              -87.5611,
+              41.6602
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Chicago Assembly Plant, Chicago IL",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.5596,
+              41.6611
+            ],
+            [
+              -87.55905,
+              41.6611
+            ],
+            [
+              -87.55905,
+              41.6623
+            ],
+            [
+              -87.5596,
+              41.6623
+            ],
+            [
+              -87.5596,
+              41.6611
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Chicago Assembly Plant, Chicago IL",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.0755,
+              41.4795
+            ],
+            [
+              -82.057,
+              41.4795
+            ],
+            [
+              -82.057,
+              41.4935
+            ],
+            [
+              -82.0755,
+              41.4935
+            ],
+            [
+              -82.0755,
+              41.4795
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Ohio Assembly Plant, Avon Lake OH",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 80,
+          "trailerParkingCapacity": 170,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 419,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.0717,
+              41.4856
+            ],
+            [
+              -82.07,
+              41.4856
+            ],
+            [
+              -82.07,
+              41.4868
+            ],
+            [
+              -82.0717,
+              41.4868
+            ],
+            [
+              -82.0717,
+              41.4856
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Ohio Assembly Plant, Avon Lake OH",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.066,
+              41.49
+            ],
+            [
+              -82.0615,
+              41.49
+            ],
+            [
+              -82.0615,
+              41.4925
+            ],
+            [
+              -82.066,
+              41.4925
+            ],
+            [
+              -82.066,
+              41.49
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Ohio Assembly Plant, Avon Lake OH",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.0735,
+              41.4856
+            ],
+            [
+              -82.071,
+              41.4856
+            ],
+            [
+              -82.071,
+              41.4872
+            ],
+            [
+              -82.0735,
+              41.4872
+            ],
+            [
+              -82.0735,
+              41.4856
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Ohio Assembly Plant, Avon Lake OH",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.0635,
+              41.4845
+            ],
+            [
+              -82.0605,
+              41.4845
+            ],
+            [
+              -82.0605,
+              41.487
+            ],
+            [
+              -82.0635,
+              41.487
+            ],
+            [
+              -82.0635,
+              41.4845
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Ohio Assembly Plant, Avon Lake OH",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.064,
+              41.488
+            ],
+            [
+              -82.061,
+              41.488
+            ],
+            [
+              -82.061,
+              41.49
+            ],
+            [
+              -82.064,
+              41.49
+            ],
+            [
+              -82.064,
+              41.488
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Ohio Assembly Plant, Avon Lake OH",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.0715,
+              41.4865
+            ],
+            [
+              -82.069,
+              41.4865
+            ],
+            [
+              -82.069,
+              41.4882
+            ],
+            [
+              -82.0715,
+              41.4882
+            ],
+            [
+              -82.0715,
+              41.4865
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Ohio Assembly Plant, Avon Lake OH",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.2575,
+              42.098
+            ],
+            [
+              -83.241,
+              42.098
+            ],
+            [
+              -83.241,
+              42.1125
+            ],
+            [
+              -83.2575,
+              42.1125
+            ],
+            [
+              -83.2575,
+              42.098
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Flat Rock Assembly Plant, Flat Rock MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 2,
+          "buildingCount": 5,
+          "siteAreaAcres": 400,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.2508,
+              42.1088
+            ],
+            [
+              -83.2492,
+              42.1088
+            ],
+            [
+              -83.2492,
+              42.1099
+            ],
+            [
+              -83.2508,
+              42.1099
+            ],
+            [
+              -83.2508,
+              42.1088
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Flat Rock Assembly Plant, Flat Rock MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.256,
+              42.103
+            ],
+            [
+              -83.252,
+              42.103
+            ],
+            [
+              -83.252,
+              42.107
+            ],
+            [
+              -83.256,
+              42.107
+            ],
+            [
+              -83.256,
+              42.103
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Flat Rock Assembly Plant, Flat Rock MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.2485,
+              42.1038
+            ],
+            [
+              -83.2445,
+              42.1038
+            ],
+            [
+              -83.2445,
+              42.1095
+            ],
+            [
+              -83.2485,
+              42.1095
+            ],
+            [
+              -83.2485,
+              42.1038
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Flat Rock Assembly Plant, Flat Rock MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.252,
+              42.1035
+            ],
+            [
+              -83.249,
+              42.1035
+            ],
+            [
+              -83.249,
+              42.1065
+            ],
+            [
+              -83.252,
+              42.1065
+            ],
+            [
+              -83.252,
+              42.1035
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Flat Rock Assembly Plant, Flat Rock MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.2485,
+              42.1045
+            ],
+            [
+              -83.2455,
+              42.1045
+            ],
+            [
+              -83.2455,
+              42.108
+            ],
+            [
+              -83.2485,
+              42.108
+            ],
+            [
+              -83.2485,
+              42.1045
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Flat Rock Assembly Plant, Flat Rock MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.25,
+              42.1075
+            ],
+            [
+              -83.248,
+              42.1075
+            ],
+            [
+              -83.248,
+              42.1088
+            ],
+            [
+              -83.25,
+              42.1088
+            ],
+            [
+              -83.25,
+              42.1075
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Flat Rock Assembly Plant, Flat Rock MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.435,
+              35.405
+            ],
+            [
+              -89.402,
+              35.405
+            ],
+            [
+              -89.402,
+              35.438
+            ],
+            [
+              -89.435,
+              35.438
+            ],
+            [
+              -89.435,
+              35.405
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - BlueOval City / Tennessee Electric Vehicle Center, Stanton TN",
+        "type": "Vehicle Assembly Plant (greenfield, ramp-up)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 2,
+          "buildingCount": 12,
+          "siteAreaAcres": 950,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.4125,
+              35.42
+            ],
+            [
+              -89.4105,
+              35.42
+            ],
+            [
+              -89.4105,
+              35.4215
+            ],
+            [
+              -89.4125,
+              35.4215
+            ],
+            [
+              -89.4125,
+              35.42
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - BlueOval City / Tennessee Electric Vehicle Center, Stanton TN",
+        "type": "Vehicle Assembly Plant (greenfield, ramp-up)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.411,
+              35.4205
+            ],
+            [
+              -89.407,
+              35.4205
+            ],
+            [
+              -89.407,
+              35.4225
+            ],
+            [
+              -89.411,
+              35.4225
+            ],
+            [
+              -89.411,
+              35.4205
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - BlueOval City / Tennessee Electric Vehicle Center, Stanton TN",
+        "type": "Vehicle Assembly Plant (greenfield, ramp-up)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.427,
+              35.4185
+            ],
+            [
+              -89.423,
+              35.4185
+            ],
+            [
+              -89.423,
+              35.4205
+            ],
+            [
+              -89.427,
+              35.4205
+            ],
+            [
+              -89.427,
+              35.4185
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - BlueOval City / Tennessee Electric Vehicle Center, Stanton TN",
+        "type": "Vehicle Assembly Plant (greenfield, ramp-up)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.424,
+              35.419
+            ],
+            [
+              -89.412,
+              35.419
+            ],
+            [
+              -89.412,
+              35.4205
+            ],
+            [
+              -89.424,
+              35.4205
+            ],
+            [
+              -89.424,
+              35.419
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - BlueOval City / Tennessee Electric Vehicle Center, Stanton TN",
+        "type": "Vehicle Assembly Plant (greenfield, ramp-up)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.412,
+              35.4195
+            ],
+            [
+              -89.41,
+              35.4195
+            ],
+            [
+              -89.41,
+              35.421
+            ],
+            [
+              -89.412,
+              35.421
+            ],
+            [
+              -89.412,
+              35.4195
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - BlueOval City / Tennessee Electric Vehicle Center, Stanton TN",
+        "type": "Vehicle Assembly Plant (greenfield, ramp-up)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.8895,
+              37.578
+            ],
+            [
+              -85.871,
+              37.578
+            ],
+            [
+              -85.871,
+              37.5945
+            ],
+            [
+              -85.8895,
+              37.5945
+            ],
+            [
+              -85.8895,
+              37.578
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - BlueOval SK Battery Park, Glendale KY",
+        "type": "Battery Manufacturing Plant (JV with SK On)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 740,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.876,
+              37.5905
+            ],
+            [
+              -85.874,
+              37.5905
+            ],
+            [
+              -85.874,
+              37.5918
+            ],
+            [
+              -85.876,
+              37.5918
+            ],
+            [
+              -85.876,
+              37.5905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - BlueOval SK Battery Park, Glendale KY",
+        "type": "Battery Manufacturing Plant (JV with SK On)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "low",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.8795,
+              37.58
+            ],
+            [
+              -85.875,
+              37.58
+            ],
+            [
+              -85.875,
+              37.5835
+            ],
+            [
+              -85.8795,
+              37.5835
+            ],
+            [
+              -85.8795,
+              37.58
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - BlueOval SK Battery Park, Glendale KY",
+        "type": "Battery Manufacturing Plant (JV with SK On)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "low",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.887,
+              37.5815
+            ],
+            [
+              -85.8835,
+              37.5815
+            ],
+            [
+              -85.8835,
+              37.584
+            ],
+            [
+              -85.887,
+              37.584
+            ],
+            [
+              -85.887,
+              37.5815
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - BlueOval SK Battery Park, Glendale KY",
+        "type": "Battery Manufacturing Plant (JV with SK On)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "low",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.877,
+              37.589
+            ],
+            [
+              -85.8745,
+              37.589
+            ],
+            [
+              -85.8745,
+              37.591
+            ],
+            [
+              -85.877,
+              37.591
+            ],
+            [
+              -85.877,
+              37.589
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - BlueOval SK Battery Park, Glendale KY",
+        "type": "Battery Manufacturing Plant (JV with SK On)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "low",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1633,
+              42.3042
+            ],
+            [
+              -83.1578,
+              42.3042
+            ],
+            [
+              -83.1578,
+              42.3092
+            ],
+            [
+              -83.1633,
+              42.3092
+            ],
+            [
+              -83.1633,
+              42.3042
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Dearborn Stamping Plant, Dearborn MI",
+        "type": "Stamping Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 15,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 35,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1696,
+              42.3015
+            ],
+            [
+              -83.1685,
+              42.3015
+            ],
+            [
+              -83.1685,
+              42.3021
+            ],
+            [
+              -83.1696,
+              42.3021
+            ],
+            [
+              -83.1696,
+              42.3015
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Dearborn Stamping Plant, Dearborn MI",
+        "type": "Stamping Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1628,
+              42.3062
+            ],
+            [
+              -83.162,
+              42.3062
+            ],
+            [
+              -83.162,
+              42.3074
+            ],
+            [
+              -83.1628,
+              42.3074
+            ],
+            [
+              -83.1628,
+              42.3062
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Dearborn Stamping Plant, Dearborn MI",
+        "type": "Stamping Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1608,
+              42.3109
+            ],
+            [
+              -83.157,
+              42.3109
+            ],
+            [
+              -83.157,
+              42.3147
+            ],
+            [
+              -83.1608,
+              42.3147
+            ],
+            [
+              -83.1608,
+              42.3109
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Dearborn Engine Plant, Dearborn MI",
+        "type": "Engine Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 7,
+          "trailersVisible": 3,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 31,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1601,
+              42.3094
+            ],
+            [
+              -83.159,
+              42.3094
+            ],
+            [
+              -83.159,
+              42.31
+            ],
+            [
+              -83.1601,
+              42.31
+            ],
+            [
+              -83.1601,
+              42.3094
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Dearborn Engine Plant, Dearborn MI",
+        "type": "Engine Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.16,
+              42.3118
+            ],
+            [
+              -83.1592,
+              42.3118
+            ],
+            [
+              -83.1592,
+              42.3133
+            ],
+            [
+              -83.16,
+              42.3133
+            ],
+            [
+              -83.16,
+              42.3118
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Dearborn Engine Plant, Dearborn MI",
+        "type": "Engine Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.8268,
+              41.4126
+            ],
+            [
+              -81.818,
+              41.4126
+            ],
+            [
+              -81.818,
+              41.4196
+            ],
+            [
+              -81.8268,
+              41.4196
+            ],
+            [
+              -81.8268,
+              41.4126
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Cleveland Engine Plant, Brook Park OH",
+        "type": "Engine Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 19,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 95,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.8218,
+              41.4133
+            ],
+            [
+              -81.8205,
+              41.4133
+            ],
+            [
+              -81.8205,
+              41.4142
+            ],
+            [
+              -81.8218,
+              41.4142
+            ],
+            [
+              -81.8218,
+              41.4133
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Cleveland Engine Plant, Brook Park OH",
+        "type": "Engine Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.822,
+              41.4133
+            ],
+            [
+              -81.8195,
+              41.4133
+            ],
+            [
+              -81.8195,
+              41.4147
+            ],
+            [
+              -81.822,
+              41.4147
+            ],
+            [
+              -81.822,
+              41.4133
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Cleveland Engine Plant, Brook Park OH",
+        "type": "Engine Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.824,
+              41.4136
+            ],
+            [
+              -81.8215,
+              41.4136
+            ],
+            [
+              -81.8215,
+              41.4147
+            ],
+            [
+              -81.824,
+              41.4147
+            ],
+            [
+              -81.824,
+              41.4136
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Cleveland Engine Plant, Brook Park OH",
+        "type": "Engine Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.822,
+              41.413
+            ],
+            [
+              -81.82,
+              41.413
+            ],
+            [
+              -81.82,
+              41.4136
+            ],
+            [
+              -81.822,
+              41.4136
+            ],
+            [
+              -81.822,
+              41.413
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Cleveland Engine Plant, Brook Park OH",
+        "type": "Engine Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.091,
+              40.7735
+            ],
+            [
+              -84.0805,
+              40.7735
+            ],
+            [
+              -84.0805,
+              40.7825
+            ],
+            [
+              -84.091,
+              40.7825
+            ],
+            [
+              -84.091,
+              40.7735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Lima Engine Plant, Lima OH",
+        "type": "Engine Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 219,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.0828,
+              40.7738
+            ],
+            [
+              -84.0812,
+              40.7738
+            ],
+            [
+              -84.0812,
+              40.7748
+            ],
+            [
+              -84.0828,
+              40.7748
+            ],
+            [
+              -84.0828,
+              40.7738
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Lima Engine Plant, Lima OH",
+        "type": "Engine Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.0862,
+              40.78
+            ],
+            [
+              -84.0828,
+              40.78
+            ],
+            [
+              -84.0828,
+              40.7813
+            ],
+            [
+              -84.0862,
+              40.7813
+            ],
+            [
+              -84.0862,
+              40.78
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Lima Engine Plant, Lima OH",
+        "type": "Engine Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.0862,
+              40.7793
+            ],
+            [
+              -84.0835,
+              40.7793
+            ],
+            [
+              -84.0835,
+              40.7801
+            ],
+            [
+              -84.0862,
+              40.7801
+            ],
+            [
+              -84.0862,
+              40.7793
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Lima Engine Plant, Lima OH",
+        "type": "Engine Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.0825,
+              40.7741
+            ],
+            [
+              -84.081,
+              40.7741
+            ],
+            [
+              -84.081,
+              40.7753
+            ],
+            [
+              -84.0825,
+              40.7753
+            ],
+            [
+              -84.0825,
+              40.7741
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Lima Engine Plant, Lima OH",
+        "type": "Engine Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4025,
+              42.3678
+            ],
+            [
+              -83.3925,
+              42.3678
+            ],
+            [
+              -83.3925,
+              42.3762
+            ],
+            [
+              -83.4025,
+              42.3762
+            ],
+            [
+              -83.4025,
+              42.3678
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Livonia Transmission Plant, Livonia MI",
+        "type": "Transmission Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 190,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4022,
+              42.3738
+            ],
+            [
+              -83.4008,
+              42.3738
+            ],
+            [
+              -83.4008,
+              42.3747
+            ],
+            [
+              -83.4022,
+              42.3747
+            ],
+            [
+              -83.4022,
+              42.3738
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Livonia Transmission Plant, Livonia MI",
+        "type": "Transmission Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4005,
+              42.3743
+            ],
+            [
+              -83.397,
+              42.3743
+            ],
+            [
+              -83.397,
+              42.3752
+            ],
+            [
+              -83.4005,
+              42.3752
+            ],
+            [
+              -83.4005,
+              42.3743
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Livonia Transmission Plant, Livonia MI",
+        "type": "Transmission Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4005,
+              42.3742
+            ],
+            [
+              -83.3985,
+              42.3742
+            ],
+            [
+              -83.3985,
+              42.375
+            ],
+            [
+              -83.4005,
+              42.375
+            ],
+            [
+              -83.4005,
+              42.3742
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Livonia Transmission Plant, Livonia MI",
+        "type": "Transmission Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3958,
+              42.3705
+            ],
+            [
+              -83.3948,
+              42.3705
+            ],
+            [
+              -83.3948,
+              42.373
+            ],
+            [
+              -83.3958,
+              42.373
+            ],
+            [
+              -83.3958,
+              42.3705
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Livonia Transmission Plant, Livonia MI",
+        "type": "Transmission Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.4311,
+              39.2685
+            ],
+            [
+              -84.4196,
+              39.2685
+            ],
+            [
+              -84.4196,
+              39.27585
+            ],
+            [
+              -84.4311,
+              39.27585
+            ],
+            [
+              -84.4311,
+              39.2685
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Sharonville Transmission Plant, Sharonville OH",
+        "type": "Transmission Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 168,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.4301,
+              39.27475
+            ],
+            [
+              -84.4293,
+              39.27475
+            ],
+            [
+              -84.4293,
+              39.2754
+            ],
+            [
+              -84.4301,
+              39.2754
+            ],
+            [
+              -84.4301,
+              39.27475
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Sharonville Transmission Plant, Sharonville OH",
+        "type": "Transmission Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.43,
+              39.2737
+            ],
+            [
+              -84.4285,
+              39.2737
+            ],
+            [
+              -84.4285,
+              39.2753
+            ],
+            [
+              -84.43,
+              39.2753
+            ],
+            [
+              -84.43,
+              39.2737
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Sharonville Transmission Plant, Sharonville OH",
+        "type": "Transmission Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.4287,
+              39.2708
+            ],
+            [
+              -84.4273,
+              39.2708
+            ],
+            [
+              -84.4273,
+              39.2724
+            ],
+            [
+              -84.4287,
+              39.2724
+            ],
+            [
+              -84.4287,
+              39.2708
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Sharonville Transmission Plant, Sharonville OH",
+        "type": "Transmission Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.4283,
+              39.2715
+            ],
+            [
+              -84.427,
+              39.2715
+            ],
+            [
+              -84.427,
+              39.2723
+            ],
+            [
+              -84.4283,
+              39.2723
+            ],
+            [
+              -84.4283,
+              39.2715
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Sharonville Transmission Plant, Sharonville OH",
+        "type": "Transmission Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.427,
+              39.275
+            ],
+            [
+              -84.4248,
+              39.275
+            ],
+            [
+              -84.4248,
+              39.2756
+            ],
+            [
+              -84.427,
+              39.2756
+            ],
+            [
+              -84.427,
+              39.275
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Sharonville Transmission Plant, Sharonville OH",
+        "type": "Transmission Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.43,
+              39.2724
+            ],
+            [
+              -84.4285,
+              39.2724
+            ],
+            [
+              -84.4285,
+              39.2737
+            ],
+            [
+              -84.43,
+              39.2737
+            ],
+            [
+              -84.43,
+              39.2724
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Sharonville Transmission Plant, Sharonville OH",
+        "type": "Transmission Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.04,
+              42.5945
+            ],
+            [
+              -83.0295,
+              42.5945
+            ],
+            [
+              -83.0295,
+              42.6015
+            ],
+            [
+              -83.04,
+              42.6015
+            ],
+            [
+              -83.04,
+              42.5945
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Van Dyke Electric Powertrain Center, Sterling Heights MI",
+        "type": "Powertrain / Transmission Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 166,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.039,
+              42.6008
+            ],
+            [
+              -83.0378,
+              42.6008
+            ],
+            [
+              -83.0378,
+              42.6016
+            ],
+            [
+              -83.039,
+              42.6016
+            ],
+            [
+              -83.039,
+              42.6008
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Van Dyke Electric Powertrain Center, Sterling Heights MI",
+        "type": "Powertrain / Transmission Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.0395,
+              42.5965
+            ],
+            [
+              -83.0375,
+              42.5965
+            ],
+            [
+              -83.0375,
+              42.5985
+            ],
+            [
+              -83.0395,
+              42.5985
+            ],
+            [
+              -83.0395,
+              42.5965
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Van Dyke Electric Powertrain Center, Sterling Heights MI",
+        "type": "Powertrain / Transmission Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.039,
+              42.596
+            ],
+            [
+              -83.037,
+              42.596
+            ],
+            [
+              -83.037,
+              42.5978
+            ],
+            [
+              -83.039,
+              42.5978
+            ],
+            [
+              -83.039,
+              42.596
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Van Dyke Electric Powertrain Center, Sterling Heights MI",
+        "type": "Powertrain / Transmission Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.039,
+              42.5995
+            ],
+            [
+              -83.0365,
+              42.5995
+            ],
+            [
+              -83.0365,
+              42.601
+            ],
+            [
+              -83.039,
+              42.601
+            ],
+            [
+              -83.039,
+              42.5995
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Van Dyke Electric Powertrain Center, Sterling Heights MI",
+        "type": "Powertrain / Transmission Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.0495,
+              42.5795
+            ],
+            [
+              -83.0405,
+              42.5795
+            ],
+            [
+              -83.0405,
+              42.5875
+            ],
+            [
+              -83.0495,
+              42.5875
+            ],
+            [
+              -83.0495,
+              42.5795
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Sterling Axle Plant, Sterling Heights MI",
+        "type": "Axle / Components Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 162,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.048,
+              42.5866
+            ],
+            [
+              -83.0468,
+              42.5866
+            ],
+            [
+              -83.0468,
+              42.5874
+            ],
+            [
+              -83.048,
+              42.5874
+            ],
+            [
+              -83.048,
+              42.5866
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Sterling Axle Plant, Sterling Heights MI",
+        "type": "Axle / Components Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.047,
+              42.5855
+            ],
+            [
+              -83.0435,
+              42.5855
+            ],
+            [
+              -83.0435,
+              42.5872
+            ],
+            [
+              -83.047,
+              42.5872
+            ],
+            [
+              -83.047,
+              42.5855
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Sterling Axle Plant, Sterling Heights MI",
+        "type": "Axle / Components Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.043,
+              42.584
+            ],
+            [
+              -83.0415,
+              42.584
+            ],
+            [
+              -83.0415,
+              42.5862
+            ],
+            [
+              -83.043,
+              42.5862
+            ],
+            [
+              -83.043,
+              42.584
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Sterling Axle Plant, Sterling Heights MI",
+        "type": "Axle / Components Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.0478,
+              42.5858
+            ],
+            [
+              -83.046,
+              42.5858
+            ],
+            [
+              -83.046,
+              42.5868
+            ],
+            [
+              -83.0478,
+              42.5868
+            ],
+            [
+              -83.0478,
+              42.5858
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Sterling Axle Plant, Sterling Heights MI",
+        "type": "Axle / Components Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5615,
+              42.195
+            ],
+            [
+              -83.552,
+              42.195
+            ],
+            [
+              -83.552,
+              42.2035
+            ],
+            [
+              -83.5615,
+              42.2035
+            ],
+            [
+              -83.5615,
+              42.195
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Rawsonville Components Plant, Ypsilanti MI",
+        "type": "Components / Battery Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 145,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.553,
+              42.1972
+            ],
+            [
+              -83.5523,
+              42.1972
+            ],
+            [
+              -83.5523,
+              42.1978
+            ],
+            [
+              -83.553,
+              42.1978
+            ],
+            [
+              -83.553,
+              42.1972
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Rawsonville Components Plant, Ypsilanti MI",
+        "type": "Components / Battery Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.557,
+              42.1968
+            ],
+            [
+              -83.5554,
+              42.1968
+            ],
+            [
+              -83.5554,
+              42.1979
+            ],
+            [
+              -83.557,
+              42.1979
+            ],
+            [
+              -83.557,
+              42.1968
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Rawsonville Components Plant, Ypsilanti MI",
+        "type": "Components / Battery Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5553,
+              42.2
+            ],
+            [
+              -83.5538,
+              42.2
+            ],
+            [
+              -83.5538,
+              42.2011
+            ],
+            [
+              -83.5553,
+              42.2011
+            ],
+            [
+              -83.5553,
+              42.2
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Rawsonville Components Plant, Ypsilanti MI",
+        "type": "Components / Battery Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5592,
+              42.197
+            ],
+            [
+              -83.5578,
+              42.197
+            ],
+            [
+              -83.5578,
+              42.198
+            ],
+            [
+              -83.5592,
+              42.198
+            ],
+            [
+              -83.5592,
+              42.197
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Rawsonville Components Plant, Ypsilanti MI",
+        "type": "Components / Battery Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5558,
+              42.1972
+            ],
+            [
+              -83.5547,
+              42.1972
+            ],
+            [
+              -83.5547,
+              42.1983
+            ],
+            [
+              -83.5558,
+              42.1983
+            ],
+            [
+              -83.5558,
+              42.1972
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Rawsonville Components Plant, Ypsilanti MI",
+        "type": "Components / Battery Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5552,
+              42.1985
+            ],
+            [
+              -83.5538,
+              42.1985
+            ],
+            [
+              -83.5538,
+              42.2
+            ],
+            [
+              -83.5552,
+              42.2
+            ],
+            [
+              -83.5552,
+              42.1985
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Rawsonville Components Plant, Ypsilanti MI",
+        "type": "Components / Battery Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.8472,
+              42.7825
+            ],
+            [
+              -78.8385,
+              42.7825
+            ],
+            [
+              -78.8385,
+              42.79
+            ],
+            [
+              -78.8472,
+              42.79
+            ],
+            [
+              -78.8472,
+              42.7825
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Buffalo Stamping Plant, Hamburg NY",
+        "type": "Stamping Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 25,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 165,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.8468,
+              42.7882
+            ],
+            [
+              -78.846,
+              42.7882
+            ],
+            [
+              -78.846,
+              42.7888
+            ],
+            [
+              -78.8468,
+              42.7888
+            ],
+            [
+              -78.8468,
+              42.7882
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Buffalo Stamping Plant, Hamburg NY",
+        "type": "Stamping Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.843,
+              42.789
+            ],
+            [
+              -78.8408,
+              42.789
+            ],
+            [
+              -78.8408,
+              42.7899
+            ],
+            [
+              -78.843,
+              42.7899
+            ],
+            [
+              -78.843,
+              42.789
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Buffalo Stamping Plant, Hamburg NY",
+        "type": "Stamping Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.8426,
+              42.7854
+            ],
+            [
+              -78.8415,
+              42.7854
+            ],
+            [
+              -78.8415,
+              42.7872
+            ],
+            [
+              -78.8426,
+              42.7872
+            ],
+            [
+              -78.8426,
+              42.7854
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Buffalo Stamping Plant, Hamburg NY",
+        "type": "Stamping Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.8458,
+              42.7884
+            ],
+            [
+              -78.8438,
+              42.7884
+            ],
+            [
+              -78.8438,
+              42.7897
+            ],
+            [
+              -78.8458,
+              42.7897
+            ],
+            [
+              -78.8458,
+              42.7884
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Buffalo Stamping Plant, Hamburg NY",
+        "type": "Stamping Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.6085,
+              41.4995
+            ],
+            [
+              -87.5975,
+              41.4995
+            ],
+            [
+              -87.5975,
+              41.5056
+            ],
+            [
+              -87.6085,
+              41.5056
+            ],
+            [
+              -87.6085,
+              41.4995
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Chicago Stamping Plant, Chicago Heights IL",
+        "type": "Stamping Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 154,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.60175,
+              41.5056
+            ],
+            [
+              -87.6011,
+              41.5056
+            ],
+            [
+              -87.6011,
+              41.50625
+            ],
+            [
+              -87.60175,
+              41.50625
+            ],
+            [
+              -87.60175,
+              41.5056
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Chicago Stamping Plant, Chicago Heights IL",
+        "type": "Stamping Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.6056,
+              41.5023
+            ],
+            [
+              -87.6033,
+              41.5023
+            ],
+            [
+              -87.6033,
+              41.5037
+            ],
+            [
+              -87.6056,
+              41.5037
+            ],
+            [
+              -87.6056,
+              41.5023
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Chicago Stamping Plant, Chicago Heights IL",
+        "type": "Stamping Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.5998,
+              41.4998
+            ],
+            [
+              -87.5976,
+              41.4998
+            ],
+            [
+              -87.5976,
+              41.5014
+            ],
+            [
+              -87.5998,
+              41.5014
+            ],
+            [
+              -87.5998,
+              41.4998
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Chicago Stamping Plant, Chicago Heights IL",
+        "type": "Stamping Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.6028,
+              41.5015
+            ],
+            [
+              -87.5998,
+              41.5015
+            ],
+            [
+              -87.5998,
+              41.5026
+            ],
+            [
+              -87.6028,
+              41.5026
+            ],
+            [
+              -87.6028,
+              41.5015
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Chicago Stamping Plant, Chicago Heights IL",
+        "type": "Stamping Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.5992,
+              41.5023
+            ],
+            [
+              -87.598,
+              41.5023
+            ],
+            [
+              -87.598,
+              41.5042
+            ],
+            [
+              -87.5992,
+              41.5042
+            ],
+            [
+              -87.5992,
+              41.5023
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Chicago Stamping Plant, Chicago Heights IL",
+        "type": "Stamping Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3385,
+              42.369
+            ],
+            [
+              -83.3334,
+              42.369
+            ],
+            [
+              -83.3334,
+              42.378
+            ],
+            [
+              -83.3385,
+              42.378
+            ],
+            [
+              -83.3385,
+              42.369
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - National Parts Distribution Center, Livonia MI",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 100,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3342,
+              42.3717
+            ],
+            [
+              -83.3335,
+              42.3717
+            ],
+            [
+              -83.3335,
+              42.3723
+            ],
+            [
+              -83.3342,
+              42.3723
+            ],
+            [
+              -83.3342,
+              42.3717
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - National Parts Distribution Center, Livonia MI",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.338,
+              42.3757
+            ],
+            [
+              -83.3342,
+              42.3757
+            ],
+            [
+              -83.3342,
+              42.3772
+            ],
+            [
+              -83.338,
+              42.3772
+            ],
+            [
+              -83.338,
+              42.3757
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - National Parts Distribution Center, Livonia MI",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3355,
+              42.372
+            ],
+            [
+              -83.334,
+              42.372
+            ],
+            [
+              -83.334,
+              42.375
+            ],
+            [
+              -83.3355,
+              42.375
+            ],
+            [
+              -83.3355,
+              42.372
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - National Parts Distribution Center, Livonia MI",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3356,
+              42.3698
+            ],
+            [
+              -83.3344,
+              42.3698
+            ],
+            [
+              -83.3344,
+              42.3756
+            ],
+            [
+              -83.3356,
+              42.3756
+            ],
+            [
+              -83.3356,
+              42.3698
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - National Parts Distribution Center, Livonia MI",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3344,
+              42.37
+            ],
+            [
+              -83.3335,
+              42.37
+            ],
+            [
+              -83.3335,
+              42.3755
+            ],
+            [
+              -83.3344,
+              42.3755
+            ],
+            [
+              -83.3344,
+              42.37
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - National Parts Distribution Center, Livonia MI",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.2872,
+              42.1725
+            ],
+            [
+              -83.2755,
+              42.1725
+            ],
+            [
+              -83.2755,
+              42.1815
+            ],
+            [
+              -83.2872,
+              42.1815
+            ],
+            [
+              -83.2872,
+              42.1725
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Parts Redistribution Center, Brownstown Township MI",
+        "type": "Parts Distribution / Redistribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 200,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 200,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.287,
+              42.1745
+            ],
+            [
+              -83.286,
+              42.1745
+            ],
+            [
+              -83.286,
+              42.1756
+            ],
+            [
+              -83.287,
+              42.1756
+            ],
+            [
+              -83.287,
+              42.1745
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Parts Redistribution Center, Brownstown Township MI",
+        "type": "Parts Distribution / Redistribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.2856,
+              42.1726
+            ],
+            [
+              -83.28,
+              42.1726
+            ],
+            [
+              -83.28,
+              42.1742
+            ],
+            [
+              -83.2856,
+              42.1742
+            ],
+            [
+              -83.2856,
+              42.1726
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Parts Redistribution Center, Brownstown Township MI",
+        "type": "Parts Distribution / Redistribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.285,
+              42.18
+            ],
+            [
+              -83.279,
+              42.18
+            ],
+            [
+              -83.279,
+              42.1812
+            ],
+            [
+              -83.285,
+              42.1812
+            ],
+            [
+              -83.285,
+              42.18
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Parts Redistribution Center, Brownstown Township MI",
+        "type": "Parts Distribution / Redistribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.2856,
+              42.174
+            ],
+            [
+              -83.28,
+              42.174
+            ],
+            [
+              -83.28,
+              42.1746
+            ],
+            [
+              -83.2856,
+              42.1746
+            ],
+            [
+              -83.2856,
+              42.174
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Parts Redistribution Center, Brownstown Township MI",
+        "type": "Parts Distribution / Redistribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.2848,
+              42.1792
+            ],
+            [
+              -83.279,
+              42.1792
+            ],
+            [
+              -83.279,
+              42.1799
+            ],
+            [
+              -83.2848,
+              42.1799
+            ],
+            [
+              -83.2848,
+              42.1792
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Parts Redistribution Center, Brownstown Township MI",
+        "type": "Parts Distribution / Redistribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.2778,
+              42.176
+            ],
+            [
+              -83.276,
+              42.176
+            ],
+            [
+              -83.276,
+              42.179
+            ],
+            [
+              -83.2778,
+              42.179
+            ],
+            [
+              -83.2778,
+              42.176
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Parts Redistribution Center, Brownstown Township MI",
+        "type": "Parts Distribution / Redistribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.556,
+              34.099
+            ],
+            [
+              -117.5492,
+              34.099
+            ],
+            [
+              -117.5492,
+              34.1011
+            ],
+            [
+              -117.556,
+              34.1011
+            ],
+            [
+              -117.556,
+              34.099
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Parts Distribution Center, Rancho Cucamonga CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 28,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5519,
+              34.099
+            ],
+            [
+              -117.5513,
+              34.099
+            ],
+            [
+              -117.5513,
+              34.0995
+            ],
+            [
+              -117.5519,
+              34.0995
+            ],
+            [
+              -117.5519,
+              34.099
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Parts Distribution Center, Rancho Cucamonga CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5552,
+              34.0993
+            ],
+            [
+              -117.5498,
+              34.0993
+            ],
+            [
+              -117.5498,
+              34.09985
+            ],
+            [
+              -117.5552,
+              34.09985
+            ],
+            [
+              -117.5552,
+              34.0993
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Parts Distribution Center, Rancho Cucamonga CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5553,
+              34.1003
+            ],
+            [
+              -117.5496,
+              34.1003
+            ],
+            [
+              -117.5496,
+              34.10095
+            ],
+            [
+              -117.5553,
+              34.10095
+            ],
+            [
+              -117.5553,
+              34.1003
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Parts Distribution Center, Rancho Cucamonga CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5552,
+              34.09965
+            ],
+            [
+              -117.5498,
+              34.09965
+            ],
+            [
+              -117.5498,
+              34.1
+            ],
+            [
+              -117.5552,
+              34.1
+            ],
+            [
+              -117.5552,
+              34.09965
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Parts Distribution Center, Rancho Cucamonga CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5552,
+              34.1
+            ],
+            [
+              -117.5496,
+              34.1
+            ],
+            [
+              -117.5496,
+              34.1004
+            ],
+            [
+              -117.5552,
+              34.1004
+            ],
+            [
+              -117.5552,
+              34.1
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Parts Distribution Center, Rancho Cucamonga CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.553,
+              34.0993
+            ],
+            [
+              -117.5508,
+              34.0993
+            ],
+            [
+              -117.5508,
+              34.09985
+            ],
+            [
+              -117.553,
+              34.09985
+            ],
+            [
+              -117.553,
+              34.0993
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ford",
+        "name": "Ford - Parts Distribution Center, Rancho Cucamonga CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    }
+  ]
+}

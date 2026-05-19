@@ -1,0 +1,59 @@
+{
+  "name": "American Honda - Chino Parts Distribution Center (NA Hub West) - Chino CA",
+  "type": "Parts / Accessories Distribution Center",
+  "coords": { "lat": 33.99624, "lng": -117.69960 },
+  "geofences": {
+    "perimeter": { "south": 33.99440, "west": -117.70180, "north": 33.99780, "east": -117.69790 },
+    "truckGate": { "south": 33.99485, "west": -117.69835, "north": 33.99520, "east": -117.69795 },
+    "dropYards": [
+      { "south": 33.99500, "west": -117.69870, "north": 33.99720, "east": -117.69790 }
+    ],
+    "dockAprons": [
+      { "south": 33.99540, "west": -117.69920, "north": 33.99700, "east": -117.69860 },
+      { "south": 33.99480, "west": -117.70080, "north": 33.99540, "east": -117.69870 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 30.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.99624,-117.69960,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Wide chain-link rolling/sliding gate across the truck-court driveway off the east frontage road - a controlled truck entrance. Confirmed in Street View 2025-10; trailer court visible behind the gate.",
+    "guardShack": "No staffed guard booth visible at the truck gate in Street View - the gate appears to be a remote/badge-operated sliding gate. The east and south perimeter are hedge-screened so a small booth cannot be 100% excluded, hence flagged uncertain.",
+    "remoteGs": "Set true because there is a truck gate but no visible guard shack, implying badge/kiosk/remote check-in - moderate confidence.",
+    "postGateStaging": "Large paved truck court inside the fence between the gate and the dock doors provides ample inside queuing.",
+    "drivewayLong": "Deep paved truck court inside the gate easily holds 3+ trucks.",
+    "entryLanes": "Estimated 1 - single sliding-gate driveway; approximate.",
+    "exitLanes": "Estimated 1 - shares the single gated driveway.",
+    "dockDoors": "Dock banks on the east face (into the large trailer court) and the south/SW face; building is the 500,000 sq ft NA Hub West with heavy trailer activity - door total estimated ~55, in the 50+ band.",
+    "dropArea": "Large dedicated trailer-storage court on the east/south of the building packed with parked trailers and stacked intermodal containers - well over 50 stalls.",
+    "shipRcvSeparate": "Two distinct dock clusters on different building faces (east face and south/SW face).",
+    "urbanRural": "Dense Chino/Inland Empire industrial fabric, fully surrounded by warehouses and city development - Urban.",
+    "multipleFacilities": "One Honda PDC building on this property; the large warehouse immediately south is a separate (non-Honda) building, not counted.",
+    "dropYard": "Dedicated on-site trailer-storage court, separate from active dock staging - many parked trailers and containers.",
+    "trailerParkingCapacity": "Estimate from the east/south trailer court - approximate.",
+    "railServed": "No rail spur enters the property.",
+    "location": "Roster coords (34.012023,-117.678685, APPROXIMATE) landed in a Chino residential neighborhood. Resolved to 14141 Yorba Ave via web research; satellite/Street View confirmed the large solar-roofed PDC building with Honda-colored trailers."
+  },
+  "method": "deep-audit"
+}

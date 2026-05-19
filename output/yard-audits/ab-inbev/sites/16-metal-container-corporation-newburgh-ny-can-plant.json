@@ -1,0 +1,66 @@
+{
+  "name": "Metal Container Corporation - Newburgh NY Can Plant",
+  "type": "Can Manufacturing Plant",
+  "coords": { "lat": 41.4878, "lng": -74.0958 },
+  "geofences": {
+    "perimeter": { "south": 41.48580, "west": -74.09820, "north": 41.49050, "east": -74.09350 },
+    "truckGate": { "south": 41.48670, "west": -74.09760, "north": 41.48710, "east": -74.09710 },
+    "dropYards": [
+      { "south": 41.48770, "west": -74.09740, "north": 41.48830, "east": -74.09650 }
+    ],
+    "dockAprons": [
+      { "south": 41.48780, "west": -74.09720, "north": 41.48870, "east": -74.09660 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 18,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 50.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.4878,-74.0958,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Main entrance off Breunig Rd (SW) is a wide open driveway with a '130' AB monument sign on a landscaped median - no barrier arm, sliding gate, or checkpoint. Street View Aug 2023 confirms open campus-style frontage with no perimeter fence at the road. A second access road on the NE connects to the broader internal road network; the small peaked-roof structure at that junction is a utility/storage building, not a guard booth.",
+    "guardShack": "No staffed booth at either access point. The NE junction structure is a house-like utility building set back from the road, not a checkpoint booth.",
+    "remoteGs": "No gate exists, so no remote check-in either.",
+    "entryExitSeparate": "The main SW driveway serves the primary entry and the office/parking, while a separate NE road connects the truck-circulation perimeter loop - functioning as distinct in/out points on different sides of the property.",
+    "shipRcvSeparate": "Dock banks appear on two distinct building faces - a row of dock doors with parked trailers on the SW/west face (warehouse side) and a separate dock cluster on the NE face of the building.",
+    "dockDoorCount": "Counted roughly 20-22 dock doors total across the SW/west face and NE face at zoom 19-20; estimate, some obscured by trailers and shadow.",
+    "dropArea": "Two clusters of trailers parked angle-nose-in storage style in the west truck yard - approximately 15-18 trailers visible.",
+    "trailerParkingCapacity": "West yard could hold ~30-40 trailers; estimate from paved area extent.",
+    "railServed": "No rail spur visible entering the property; nearest rail is well off-site.",
+    "urbanRural": "Facility sits in wooded terrain on the edge of New Windsor with only scattered light-industrial and residential development nearby - small-town/edge-of-town setting, classified Rural.",
+    "buildingCount": "Single large connected structure - a warehouse section (NW, large flat roof) joined to a manufacturing section (SE, with rooftop process equipment and silos)."
+  },
+  "method": "deep-audit"
+}

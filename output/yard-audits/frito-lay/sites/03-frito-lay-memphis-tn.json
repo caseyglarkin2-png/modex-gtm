@@ -1,0 +1,63 @@
+{
+  "name": "Frito-Lay - Memphis TN",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 35.032500, "lng": -89.891000 },
+  "geofences": {
+    "perimeter": { "south": 35.029400, "west": -89.895200, "north": 35.035000, "east": -89.886000 },
+    "truckGate": { "south": 35.034300, "west": -89.889600, "north": 35.034800, "east": -89.889000 },
+    "dropYards": [
+      { "south": 35.029700, "west": -89.890500, "north": 35.034000, "east": -89.887500 },
+      { "south": 35.030200, "west": -89.886900, "north": 35.034500, "east": -89.884000 }
+    ],
+    "dockAprons": [
+      { "south": 35.030000, "west": -89.890900, "north": 35.033200, "east": -89.890200 },
+      { "south": 35.029700, "west": -89.893000, "north": 35.030200, "east": -89.890500 }
+    ],
+    "staging": { "south": 35.033600, "west": -89.889700, "north": 35.034500, "east": -89.888900 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 240,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 78.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.032500,-89.891000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "scale", "dockDoorCount", "railServed"],
+  "fieldNotes": {
+    "truckGate": "Single controlled truck entrance via a divided driveway running south off E Raines Rd at a signalized intersection. z19-z20 satellite shows the in/out divided lanes, perimeter chain-link fence meeting the entrance on both sides, and a guard booth in the median - vehicles visibly queued at the checkpoint.",
+    "guardShack": "Confirmed at z20: a small ~1-vehicle-footprint structure sits in the median island of the divided entrance lane, with a stopped vehicle beside it and the perimeter fence terminating at it. Classic staffed guard booth.",
+    "remoteGs": "False - a physical guard booth is present.",
+    "postGateStaging": "Deep paved apron between the gate and the building/dock area; the entrance opens onto a large internal yard with ample holding room.",
+    "drivewayLong": "Long divided approach from Raines Rd to the building plus a large internal apron - easily holds 3+ trucks queued.",
+    "fastLaneOpportunity": "Wide divided entrance apron with significant unused paved width beside the in/out lanes - room to add an express/bypass lane.",
+    "entryExitTogether": "Single entrance point on E Raines Rd handles both in and out via the divided driveway.",
+    "entryLanes": "Estimated 1 inbound lane from the divided-driveway striping; satellite resolution limits exact count - low confidence.",
+    "exitLanes": "Estimated 1 outbound lane - low confidence.",
+    "dockDoors": "Long bank of dock doors on the east face of the main building with many Frito-Lay trailers backed in; additional dock doors on the south/SW face. Total estimated ~55 across faces - 50+ band.",
+    "dropArea": "Extensive marked trailer-parking rows on the east side (hundreds of trailers in long rows) plus additional drop space - well over 50 trailer stalls. Note: the easternmost lot (5261 E Raines Rd) is a separate Container Transload & Export operation; the on-property Frito-Lay drop yard alone still exceeds 50.",
+    "shipRcvSeparate": "Dock banks on two distinct building faces (east face and south/SW face) indicating separate shipping/receiving clusters.",
+    "urbanRural": "Within the Memphis metro southeast industrial corridor, surrounded by large warehouses and distribution centers.",
+    "multipleFacilities": "Single large connected plant building mass; the adjacent transload yard to the east is a separate company, so not a Frito-Lay campus.",
+    "scale": "No truck scale clearly identifiable in the truck path - low confidence, possible but not confirmed.",
+    "railServed": "A major rail yard and curving rail line run along the SW of the broader industrial park, but no spur clearly penetrates the Frito-Lay property; marked false with low confidence.",
+    "siteAreaAcres": "Perimeter box yields ~78 acres for the plant building, dock aprons, and on-property drop yard.",
+    "trailersVisible": "~240 trailers counted across the east-side drop yard and dock faces in z18 imagery - approximate.",
+    "dockDoorCount": "Overhead count estimate; portions of dock faces obscured by backed-in trailers - moderate confidence."
+  },
+  "method": "deep-audit"
+}

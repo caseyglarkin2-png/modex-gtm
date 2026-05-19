@@ -1,0 +1,50 @@
+{
+  "name": "GP Crossett Mill - Crossett AR",
+  "type": "Pulp/Paper/Tissue Mill",
+  "coords": { "lat": 33.1395, "lng": -91.9725 },
+  "geofences": {
+    "perimeter": { "south": 33.1345, "west": -91.9810, "north": 33.1500, "east": -91.9595 },
+    "truckGate": { "south": 33.1353, "west": -91.9728, "north": 33.1362, "east": -91.9716 },
+    "dropYards": [
+      { "south": 33.1360, "west": -91.9742, "north": 33.1378, "east": -91.9718 }
+    ],
+    "dockAprons": [
+      { "south": 33.1362, "west": -91.9722, "north": 33.1382, "east": -91.9700 }
+    ],
+    "staging": { "south": 33.1356, "west": -91.9728, "north": 33.1366, "east": -91.9716 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45, "trailersVisible": 130, "trailerParkingCapacity": 180,
+    "truckGateCount": 2, "buildingCount": 14, "siteAreaAcres": 320.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.1395,-91.9725,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "multiStep", "entryLanes", "exitLanes", "dockDoorCount", "truckGateCount"],
+  "fieldNotes": {
+    "location": "Roster coords (33.135284,-91.968356, geocode movedMeters 3) landed at the south edge of the mill complex near the active warehouse/drop yard. Mill core re-centered to 33.1395,-91.9725. Address 100 Georgia-Pacific Dr, Crossett AR confirmed.",
+    "truckGate": "Property is fully fenced — continuous chain-link perimeter fence clearly visible in Street View (Oct 2024) along the south side. The warehouse drop yard is entered via a driveway that crosses the rail line into the fenced yard with a checkpoint structure; large GP mill is controlled-access.",
+    "guardShack": "Small structure observed at the warehouse-yard gate driveway; consistent with a guard booth but resolution at z20 too low to confirm definitively. Inferred from facility scale.",
+    "multipleFacilities": "Large multi-section campus: pulp mill, paper machines, tissue/converting, finished-goods warehouse, power/recovery, and a former chemical-plant section. Parts of the historic east complex appear decommissioned (cleared concrete pads).",
+    "railServed": "Active rail spurs run through the property; rail line and tank cars visible along the south boundary and east section.",
+    "dropArea": "Very large multi-row drop yard adjacent to the finished-goods warehouse — well over 100 trailers in clearly marked rows.",
+    "dockDoors": "Extensive dock-door banks along the warehouse south/east faces with trailers backed in; ~45 estimated, low confidence due to building scale.",
+    "scale": "Truck scale expected at a mill of this scale handling inbound chips and outbound finished goods; not definitively resolved overhead.",
+    "shipRcvSeparate": "Inbound chips/raw material handled on the north; finished tissue/paper ships from the SW warehouse docks — physically separate.",
+    "truckGateCount": "At least one main warehouse gate; the large campus likely has a separate main mill/personnel gate — counted 2 as estimate, flagged uncertain.",
+    "fastLaneOpportunity": "Wide paved aprons at the drop yard and warehouse driveway offer ample unused width for a bypass lane.",
+    "urbanRural": "Crossett is a small mill town built around this facility; open country and forest beyond. Rural."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,410 @@
+{
+  "account": "Universal Logistics Holdings",
+  "generatedAt": "2026-05-18",
+  "facilityCount": 26,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Logistics Insight Corp - GM EV Parts Warehouse - Detroit MI",
+      "city": "Detroit",
+      "state": "MI",
+      "type": "Value-Added Logistics Center / Sequencing Warehouse",
+      "address": "14250 Plymouth Rd, Detroit, MI 48227",
+      "lat": 42.374891,
+      "lng": -83.184189,
+      "source": "Crain's Detroit / GM Authority — 793,520 sq ft warehouse at former AMC HQ site, staffed/operated by LINC for GM EV parts (Hummer EV, Silverado EV) feeding Factory Zero; dossier-named GM relationship",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Logistics Insight Corp - Stellantis Sequencing Plant - Detroit MI (Georgia St)",
+      "city": "Detroit",
+      "state": "MI",
+      "type": "Parts Sequencing / Sub-Assembly Plant",
+      "address": "6836 Georgia St, Detroit, MI 48211",
+      "lat": 42.391634,
+      "lng": -83.029746,
+      "source": "Crain's Detroit / MoparInsiders — ~1M sq ft LINC parts sequencing/sub-assembly plant for Stellantis Mack Ave Jeep plant; dossier-named. NOTE: WARN-noticed for closure beginning Feb 2025 — status uncertain",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 226
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Universal Logistics / LINC - Romulus Value-Added Center - Romulus MI",
+      "city": "Romulus",
+      "state": "MI",
+      "type": "Value-Added Logistics Center / Warehouse",
+      "address": "29129 Ecorse Rd, Romulus, MI 48174",
+      "lat": 42.251528,
+      "lng": -83.324287,
+      "source": "Yellow Pages / Yelp / D&B — shared Universal Logistics & Logistics Insight Corp facility; Romulus is a 10-K named owned operating property",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Universal Intermodal Services - Dearborn Terminal - Dearborn MI",
+      "city": "Dearborn",
+      "state": "MI",
+      "type": "Intermodal / Drayage Terminal (owned)",
+      "address": "4440 Wyoming Ave, Dearborn, MI 48126",
+      "lat": 42.321888,
+      "lng": -83.156881,
+      "source": "loadmatch.com directory — Universal Intermodal Services Dearborn terminal; Dearborn is a 10-K named owned terminal property",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 64
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Universal Logistics - GM Arlington Logistics Center - Grand Prairie TX",
+      "city": "Grand Prairie",
+      "state": "TX",
+      "type": "Value-Added Logistics / Sub-Assembly Center",
+      "address": "2305 W Marshall Dr, Grand Prairie, TX 75051",
+      "lat": 32.72008,
+      "lng": -97.03707,
+      "source": "Panjiva / ImportYeti shipper records — ~1.2M sq ft two-building campus producing interior cabins for GM Arlington Assembly (Tahoe/Suburban/Yukon/Escalade); dossier-named GM relationship",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 283
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Universal Logistics - Nissan Integrated Logistics Center - Smyrna TN",
+      "city": "Smyrna",
+      "state": "TN",
+      "type": "Integrated Logistics Center / Sequencing Warehouse",
+      "address": "200 Sam Griffin Rd, Smyrna, TN 37167",
+      "lat": 35.952729,
+      "lng": -86.485103,
+      "source": "TruckMap — ~1.5M sq ft Nissan Integrated Logistics Center operated by Universal, adjacent to Nissan Smyrna assembly plant",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Universal Logistics - Roanoke/Botetourt Value-Added Facility - Cloverdale VA",
+      "city": "Cloverdale",
+      "state": "VA",
+      "type": "Value-Added Warehouse / Heavy-Truck Assembly Facility (owned)",
+      "address": "1796 Lee Hwy, Cloverdale, VA 24077",
+      "lat": 37.372241,
+      "lng": -79.903403,
+      "source": "PRNewswire / Virginia Business — $50M expansion of a 254,000 sq ft facility for third-party assembly & value-added services; matches 10-K named owned Cloverdale VA property",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 176
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Universal Logistics Services - Maryville Terminal - Maryville TN",
+      "city": "Maryville",
+      "state": "TN",
+      "type": "Trucking / Logistics Terminal",
+      "address": "1615 Robert C Jackson Dr, Maryville, TN 37801",
+      "lat": 35.754792,
+      "lng": -84.012239,
+      "source": "FMCSA SAFER snapshot (USDOT 839281) — Universal Logistics Services Inc physical terminal address",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Universal Intermodal Services - Jacksonville Terminal - Jacksonville FL",
+      "city": "Jacksonville",
+      "state": "FL",
+      "type": "Intermodal / Drayage Terminal (owned)",
+      "address": "2050 Kings Rd Bldg 3, Jacksonville, FL 32209",
+      "lat": 30.347409,
+      "lng": -81.699267,
+      "source": "loadmatch.com directory — Universal Intermodal Services Jacksonville terminal; Jacksonville is a 10-K named owned terminal property",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Universal Intermodal Services - Compton/Rancho Dominguez Terminal - Rancho Dominguez CA",
+      "city": "Rancho Dominguez",
+      "state": "CA",
+      "type": "Intermodal / Drayage Terminal / Container Yard (owned)",
+      "address": "18020 S Santa Fe Ave, Rancho Dominguez, CA 90221",
+      "lat": 33.868011,
+      "lng": -118.211837,
+      "source": "loadmatch.com directory — Universal Intermodal Services SoCal ports terminal (Rancho Dominguez/Compton); Compton is a 10-K named owned terminal property",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 149
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Universal Intermodal Services - Houston Terminal - Houston TX",
+      "city": "Houston",
+      "state": "TX",
+      "type": "Intermodal / Drayage Terminal (owned)",
+      "address": "7800 E Little York Rd Ste A, Houston, TX 77016",
+      "lat": 29.870647,
+      "lng": -95.286077,
+      "source": "loadmatch.com directory — Universal Intermodal Services Houston terminal; Houston is a 10-K named owned terminal property",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Universal Logistics - Sturtevant Contract Logistics Warehouse - Sturtevant WI",
+      "city": "Sturtevant",
+      "state": "WI",
+      "type": "Contract Logistics / Value-Added Warehouse",
+      "address": "7100 Durand Ave, Sturtevant, WI 53177",
+      "lat": 42.699445,
+      "lng": -87.872248,
+      "source": "Web search — Universal Logistics Sturtevant WI warehouse (Racine County, near Foxconn/auto-supplier corridor)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Universal Logistics - Vance Value-Added Facility - Vance AL",
+      "city": "Vance",
+      "state": "AL",
+      "type": "Value-Added Logistics / Sequencing Warehouse",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations list — Universal Logistics facility in Vance AL serving Mercedes-Benz U.S. International assembly plant; street address not pinned down",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Universal Logistics - Tanner Value-Added Facility - Tanner AL",
+      "city": "Tanner",
+      "state": "AL",
+      "type": "Value-Added Logistics / Sequencing Warehouse",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Universal Logistics LinkedIn post (#tanner #alabama team) + Indeed locations list — facility serving Mazda Toyota Manufacturing (Huntsville area); street address not pinned down",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 15,
+      "name": "Universal Logistics - Spring Hill Contract Logistics Warehouse - Spring Hill TN",
+      "city": "Spring Hill",
+      "state": "TN",
+      "type": "Contract Logistics / Value-Added Warehouse",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Universal Logistics Facebook / Indeed — Spring Hill TN Contract Logistics team supporting GM Spring Hill assembly plant; exact street address (Spring Hill Logistics Center area) not pinned down",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 16,
+      "name": "Universal Logistics - San Antonio Contract Logistics Warehouse - San Antonio TX",
+      "city": "San Antonio",
+      "state": "TX",
+      "type": "Contract Logistics / Value-Added Warehouse",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations list — Universal Logistics San Antonio TX facility, automotive-supplier corridor near Toyota Motor Manufacturing Texas; street address not pinned down",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 17,
+      "name": "Universal Logistics - Huntsville Contract Logistics Warehouse - Huntsville AL",
+      "city": "Huntsville",
+      "state": "AL",
+      "type": "Contract Logistics / Value-Added Warehouse",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations list — Universal Logistics Huntsville AL facility, near Mazda Toyota Manufacturing; street address not pinned down",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 18,
+      "name": "Universal Logistics - Chillicothe Contract Logistics Warehouse - Chillicothe IL",
+      "city": "Chillicothe",
+      "state": "IL",
+      "type": "Contract Logistics / Value-Added Warehouse",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations list — Universal Logistics Chillicothe IL facility supporting Caterpillar manufacturing operations; street address not pinned down",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 19,
+      "name": "Universal Logistics - Mossville Contract Logistics Warehouse - Mossville IL",
+      "city": "Mossville",
+      "state": "IL",
+      "type": "Contract Logistics / Value-Added Warehouse",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations list — Universal Logistics Mossville IL facility supporting Caterpillar engine/manufacturing complex; street address not pinned down",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 20,
+      "name": "Universal Intermodal Services - Savannah Terminal - Savannah GA",
+      "city": "Savannah",
+      "state": "GA",
+      "type": "Intermodal / Drayage Terminal (owned)",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "ULH 2025 10-K Item 2 Properties — Savannah GA named as owned terminal yard property serving Port of Savannah; street address not pinned down",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 21,
+      "name": "Universal Intermodal Services - Harvey Terminal - Harvey IL",
+      "city": "Harvey",
+      "state": "IL",
+      "type": "Intermodal / Drayage Terminal / Rail Yard (owned)",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "ULH 2025 10-K Item 2 Properties — Harvey IL named as owned terminal/yard property in the Chicago rail-ramp corridor; street address not pinned down",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 22,
+      "name": "Universal Intermodal Services - Gary Terminal - Gary IN",
+      "city": "Gary",
+      "state": "IN",
+      "type": "Intermodal / Drayage Terminal / Container Yard (owned)",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "ULH 2025 10-K Item 2 Properties — Gary IN named as owned terminal/yard property; street address not pinned down",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 23,
+      "name": "Universal Logistics - Louisville Terminal - Louisville KY",
+      "city": "Louisville",
+      "state": "KY",
+      "type": "Terminal Yard / Logistics Facility (owned)",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "ULH 2025 10-K Item 2 Properties — Louisville KY named as owned terminal/operating property (Ford Louisville auto corridor); street address not pinned down",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 24,
+      "name": "Universal Logistics - Columbus Terminal - Columbus OH",
+      "city": "Columbus",
+      "state": "OH",
+      "type": "Terminal Yard / Logistics Facility (owned)",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "ULH 2025 10-K Item 2 Properties — Columbus OH named as owned terminal/operating property; street address not pinned down",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 25,
+      "name": "Universal Logistics - Clearfield Terminal - Clearfield UT",
+      "city": "Clearfield",
+      "state": "UT",
+      "type": "Terminal Yard / Logistics Facility (owned)",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "ULH 2025 10-K Item 2 Properties — Clearfield UT named as owned terminal/operating property; street address not pinned down",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 26,
+      "name": "Universal Logistics - Memphis Terminal - Memphis TN",
+      "city": "Memphis",
+      "state": "TN",
+      "type": "Intermodal / Drayage Terminal (owned)",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "ULH 2025 10-K Item 2 Properties — Memphis TN named as owned terminal/yard property (major rail-ramp hub); street address not pinned down",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

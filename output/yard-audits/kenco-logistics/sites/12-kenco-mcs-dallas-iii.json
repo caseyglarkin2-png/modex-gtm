@@ -1,0 +1,57 @@
+{
+  "name": "Kenco MCS Dallas III - Lancaster TX",
+  "type": "Multi-Client Distribution Center",
+  "coords": { "lat": 32.63750, "lng": -96.80130 },
+  "geofences": {
+    "perimeter": { "south": 32.63270, "west": -96.80360, "north": 32.64180, "east": -96.79900 },
+    "truckGate": { "south": 32.63290, "west": -96.80260, "north": 32.63370, "east": -96.80140 },
+    "dropYards": [
+      { "south": 32.63270, "west": -96.80300, "north": 32.63500, "east": -96.79950 },
+      { "south": 32.63600, "west": -96.80330, "north": 32.64100, "east": -96.80230 }
+    ],
+    "dockAprons": [
+      { "south": 32.63350, "west": -96.80300, "north": 32.64080, "east": -96.80230 },
+      { "south": 32.63350, "west": -96.79980, "north": 32.64080, "east": -96.79900 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 78.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.63750,-96.80130,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoors", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryExitSeparate", "multipleFacilities"],
+  "fieldNotes": {
+    "location": "Roster gives identical APPROXIMATE coords (32.635612,-96.802949) for three Kenco Lancaster facilities (Dallas III/IV/II = 589,362 / 560,000 / 200,000 SF). They sit in the dense Danieldale Road multi-tenant logistics corridor in Lancaster TX 75134; confirmed Kenco anchor address 2821 Danieldale Rd (Indeed job posting + Bandana company directory). Per-building Kenco leasing is not publicly disambiguated, so idx 12 (largest, 589,362 SF = Dallas III) was assigned to the large cross-dock building whose west dock face the roster coordinate falls on (center ~32.6375,-96.8013).",
+    "truckGate": "Open speculative-park access drives - no barrier arm, no gate, no guard booth. Street View (2021-02) shows wide open paved entrance drives with only fire-lane striping.",
+    "guardShack": "No guard booth observed at any property entrance.",
+    "remoteGs": "False - no truck gate present, so remote check-in does not apply.",
+    "shipRcvSeparate": "Cross-dock building with continuous dock banks on BOTH long faces (east and west) - shipping and receiving run from physically separate dock clusters.",
+    "dropYard": "Large dedicated trailer drop yards south of the building and along the dock aprons, with 100+ trailers parked in dense rows.",
+    "dockDoors": "Cross-dock building ~330 m long with dock doors along both long faces; combined count well into the 50+ band. dockDoorCount ~110 is an overhead estimate.",
+    "multipleFacilities": "The Danieldale Road corridor is a large multi-building logistics park; Kenco itself occupies three buildings here. Marked true at the campus level.",
+    "fastLaneOpportunity": "Wide paved aprons and drives provide ample room to add an express/bypass lane.",
+    "entryExitSeparate": "Multiple separate drive connections serve the property; estimated separate in/out points. Listed uncertain.",
+    "urbanRural": "Lancaster TX is a southern suburb within the Dallas-Fort Worth metro - dense industrial fabric. Urban.",
+    "railServed": "No rail spur enters this building's property; rail lines in the wider corridor do not serve it.",
+    "confidence": "Medium - building-level identity within the three same-coord Kenco Lancaster facilities could not be confirmed from public data; audit reflects the large cross-dock building at the roster coordinate."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,47 @@
+{
+  "name": "Performance Foodservice - Gilroy CA",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 36.98045, "lng": -121.55430 },
+  "geofences": {
+    "perimeter": { "south": 36.97840, "west": -121.55720, "north": 36.98260, "east": -121.55140 },
+    "truckGate": { "south": 36.98095, "west": -121.55650, "north": 36.98150, "east": -121.55580 },
+    "dropYards": [
+      { "south": 36.97900, "west": -121.55600, "north": 36.98010, "east": -121.55190 }
+    ],
+    "dockAprons": [
+      { "south": 36.97980, "west": -121.55650, "north": 36.98040, "east": -121.55200 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45, "trailersVisible": 30, "trailerParkingCapacity": 60,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 22.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.98045,-121.5543,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Confirmed via roster address 5480 Monterey Rd and PFG/BusinessWire 'Sustainable DC of the Future' coverage. The building is unmistakable: a ~189,000 sq ft DC with a near-fully solar-paneled roof, ZEV charging, the only solar-roof warehouse on this stretch of Monterey Rd between Hwy 101 and the rail line. Center ~36.98045,-121.5543.",
+    "truckGate": "Building fronts Monterey Rd (office/landscaped courtyard) with the truck driveway and yard wrapping the NE/E side. No barrier or sliding gate positively confirmed in available imagery (no internal Street View; Hwy-101-side panos only). Marked true at medium confidence — the yard is fenced/walled and the truck approach funnels to a single NE driveway, consistent with a controlled entrance.",
+    "guardShack": "No guard booth visible.",
+    "remoteGs": "Inferred kiosk/app check-in given gate-but-no-shack pattern; low confidence.",
+    "dockDoors": "Dock bank on the south building face with trailers backed in; ~40-50 doors estimated.",
+    "dropArea": "Large gravel/paved yard south and east of the building holds many parked trailers and reefer/ZEV trailers plus staged equipment.",
+    "fastLaneOpportunity": "Generous yard width and a wide apron on the east side leave room for an express lane.",
+    "urbanRural": "Edge-of-town Gilroy, farmland immediately south and east, adjacent to Hwy 101 — classified Rural.",
+    "railServed": "A rail line runs along the north edge of the property but no spur appears to enter the site; railServed false."
+  },
+  "method": "deep-audit"
+}

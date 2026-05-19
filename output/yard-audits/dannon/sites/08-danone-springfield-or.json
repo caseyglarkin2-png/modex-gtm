@@ -1,0 +1,50 @@
+{
+  "name": "Danone - Springfield OR",
+  "type": "Plant-based frozen-dessert plant",
+  "coords": { "lat": 44.065600, "lng": -123.043500 },
+  "geofences": {
+    "perimeter": { "south": 44.064950, "west": -123.044300, "north": 44.066100, "east": -123.042700 },
+    "truckGate": { "south": 44.065050, "west": -123.043100, "north": 44.065300, "east": -123.042800 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 44.065350, "west": -123.043800, "north": 44.065700, "east": -123.043300 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 8,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 8,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 2.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.065600,-123.043500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "dockDoors", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "A sliding chain-link gate spans the truck/process drive aisle between the plant buildings (visible in Street View Jul 2024). The gate encloses the production yard with its tanks and reefer trailers. It is a controlled pinch-point across the truck lane = truckGate true.",
+    "guardShack": "No staffed guard booth - the gate is a plain sliding chain-link gate with no booth structure beside it. Driver check-in is at the building office (the Danone-branded entrance).",
+    "remoteGs": "True - there is a controlled gate but no guard shack, implying keypad/call-box/buzz-in check-in.",
+    "multipleFacilities": "The Danone operation occupies ~3 connected/adjacent buildings (~2.5 acres total) within a larger multi-tenant industrial park. It reads as one small integrated plant, not a multi-building campus, so multipleFacilities is false. Note other tenants in the park (e.g. a CrossFit gym) are unrelated.",
+    "backupSensitive": "The truck yard between buildings is very tight - a confined courtyard-style yard. A truck queue would quickly choke the shared park drive aisle, so backup-sensitive.",
+    "drivewayShort": "Short, confined approach - room for only 1-2 trucks between the gate and the dock.",
+    "dockDoors": "Small frozen-dessert plant; only a handful of dock doors visible (estimate ~8). Low confidence - dock face is partly obscured by parked reefer trailers and a covered conveyor structure.",
+    "dropArea": "No dedicated marked trailer drop stalls; trailers seen are backed in at docks or staged transiently in the tight yard.",
+    "urbanRural": "Urban - the plant sits within the dense industrial/residential fabric of Springfield, OR, beside Highway 126.",
+    "entryLanes": "Single shared gate/drive serves both entry and exit; lane count not separately determinable - flagged uncertain."
+  },
+  "method": "deep-audit"
+}

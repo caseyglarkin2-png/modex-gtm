@@ -1,0 +1,22 @@
+{
+  "name": "Kraft Heinz - Columbia",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors"],
+  "fieldNotes": {
+    "truckGate": "Street View down the entrance road shows a checkpoint canopy/structure spanning the drive at the property line, consistent with a controlled truck gate.",
+    "guardShack": "The canopy structure at the entrance appears to include a small booth beside the lane.",
+    "drivewayLong": "Long entry road from the public road into the plant gives deep queue room.",
+    "urbanRural": "Large plant on the wooded edge of Columbia with adjacent undeveloped land."
+  }
+}

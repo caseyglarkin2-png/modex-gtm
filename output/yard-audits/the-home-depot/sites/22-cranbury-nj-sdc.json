@@ -1,0 +1,70 @@
+{
+  "name": "Home Depot SDC - Cranbury NJ",
+  "type": "Stocking Distribution Center",
+  "coords": { "lat": 40.307257, "lng": -74.498028 },
+  "geofences": {
+    "perimeter": { "south": 40.30490, "west": -74.50220, "north": 40.30960, "east": -74.49380 },
+    "truckGate": { "south": 40.30610, "west": -74.50040, "north": 40.30660, "east": -74.49980 },
+    "dropYards": [
+      { "south": 40.30790, "west": -74.50130, "north": 40.30940, "east": -74.49430 },
+      { "south": 40.30530, "west": -74.50000, "north": 40.30680, "east": -74.49420 }
+    ],
+    "dockAprons": [
+      { "south": 40.30740, "west": -74.50130, "north": 40.30810, "east": -74.49440 },
+      { "south": 40.30650, "west": -74.50130, "north": 40.30720, "east": -74.49440 }
+    ],
+    "staging": { "south": 40.30620, "west": -74.50010, "north": 40.30720, "east": -74.49850 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 175,
+    "trailersVisible": 230,
+    "trailerParkingCapacity": 260,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 56.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.307257,-74.498028,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Guarded checkpoint on the truck driveway ~150m in from Cranbury Station Road (~40.3063,-74.5001): a guard booth in a center median island with barrier arms extending across the inbound and outbound lanes — clear controlled entrance.",
+    "guardShack": "Small booth with a distinctive pyramidal roof set in the median island between the two truck lanes, beside the barrier arms. Distinct from the DC building.",
+    "remoteGs": "False — a physical guard booth is present.",
+    "entryLanes": "1 inbound lane through the gate (single barrier arm); 1 outbound. The booth sits in the median between them.",
+    "fastLaneOpportunity": "Standard single-lane-each-way gate; no notable unused paved width or extra lanes for an express bypass.",
+    "drivewayLong": "The truck driveway curves ~150m from the public road to the gate, then opens into a deep truck court — holds a 3+ truck queue.",
+    "shipRcvSeparate": "Cross-dock building with dock banks and trailers backed in on both long faces (N and S), physically separate dock clusters.",
+    "dockDoors": "Cross-dock with dock doors along both ~600m long building faces — well over 50 doors. Count is an estimate.",
+    "dropArea": "Dense rows of detached trailers in drop lots on both the N and S truck courts — 50+ band; one of the highest trailer densities observed.",
+    "urbanRural": "Cranbury NJ Exit 8A logistics corridor — a dense, continuous belt of large distribution buildings along the NJ Turnpike. Urban industrial fabric.",
+    "siteAreaAcres": "Estimated from the fenced/developed footprint (building + both truck courts + drop lots); landscaped buffer parcel is somewhat larger.",
+    "preGateStaging": "Paved driveway width outside the gate where a truck can hold; modest stacking room.",
+    "postGateStaging": "Paved yard inside the gate before the dock aprons."
+  },
+  "method": "deep-audit"
+}

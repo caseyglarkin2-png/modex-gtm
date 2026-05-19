@@ -1,0 +1,45 @@
+{
+  "name": "UNFI - Vernon CA DC (Los Angeles / Albert's Organics West)",
+  "type": "Distribution Center",
+  "coords": { "lat": 33.99940, "lng": -118.22170 },
+  "geofences": {
+    "perimeter": { "south": 33.99875, "west": -118.22270, "north": 33.99985, "east": -118.22075 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 33.99905, "west": -118.22120, "north": 33.99975, "east": -118.22075 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22, "trailersVisible": 6, "trailerParkingCapacity": 12,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 4.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.99940,-118.22170,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "dropArea", "siteAreaAcres"],
+  "fieldNotes": {
+    "location": "Confirmed. Albert's Organics West Division (UNFI Fresh produce/specialty distributor) at 2724 Leonis Blvd, Vernon, CA 90058. Address geocoded ROOFTOP to 33.99958,-118.22139; Street View at heading 180 from the road pano shows the building street number '2724' on the office facade, positively confirming identity. Locked building center ~33.99940,-118.22170 (a single warehouse south of Leonis Blvd).",
+    "truckGate": "No controlled truck entrance. This is a dense Vernon (LA industrial core) infill parcel; the warehouse meets the street with an open driveway and dock apron. No barrier arm, sliding gate, or checkpoint pinch-point visible at z19-z20 satellite or in Street View along Leonis Blvd.",
+    "guardShack": "None. No booth structure at any driveway. remoteGs=false because there is no gate.",
+    "railServed": "TRUE - an active rail spur curves along the building's south and west edges, a legacy Vernon industrial siding running right against the warehouse wall.",
+    "dockDoors": "~22 dock doors estimated along the east face of the building facing a small paved court; band 10-25. Refrigerated produce DC - large rooftop refrigeration condenser units (banks of circular evaporator fans) confirm a reefer facility.",
+    "drivewayShort": "Tight urban site - dock apron holds only 1-2 trucks deep; no room for a 3-truck queue.",
+    "backupSensitive": "Leonis Blvd is a busy Vernon arterial; any truck queue at the dock apron would back directly onto the public road / sidewalk with negligible stacking room.",
+    "dropArea": "Minimal - a small east-side yard fits a handful of parked trailers; no dedicated drop lot. Estimate 0-10.",
+    "siteAreaAcres": "~4 acres - compact single-building parcel; the perimeter box is an estimate, this is a tightly-built infill lot with no fenced setback."
+  },
+  "method": "deep-audit"
+}

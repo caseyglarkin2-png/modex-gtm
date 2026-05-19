@@ -1,0 +1,51 @@
+{
+  "name": "K-C Maumelle Plant - Maumelle AR",
+  "type": "Huggies baby wipes manufacturing plant (~400,000 sq ft)",
+  "coords": { "lat": 34.864832, "lng": -92.393775 },
+  "geofences": {
+    "perimeter": { "south": 34.862900, "west": -92.395600, "north": 34.866600, "east": -92.391400 },
+    "truckGate": { "south": 34.865850, "west": -92.393650, "north": 34.866250, "east": -92.393150 },
+    "dropYards": [
+      { "south": 34.865500, "west": -92.394400, "north": 34.866400, "east": -92.391900 }
+    ],
+    "dockAprons": [
+      { "south": 34.865000, "west": -92.394100, "north": 34.865900, "east": -92.392200 }
+    ],
+    "staging": { "south": 34.865700, "west": -92.393700, "north": 34.866400, "east": -92.392600 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 36,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 33.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.864832,-92.393775,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "railServed"],
+  "fieldNotes": {
+    "location": "Confirmed as 500 Murphy Dr, Maumelle, AR 72113 — K-C's Huggies baby-wipes manufacturing plant. Roster coords were ~700m NW of the building; web research yielded the street address and an address-level coordinate (34.864832,-92.393775) that lands squarely on the large white-roofed manufacturing building with extensive trailer parking. Locked center there.",
+    "truckGate": "Confirmed guarded truck gate at the NE corner where the access road from Murphy Dr enters. z21 imagery shows a small white guard booth astride the driveway with barrier arms across the inbound and outbound lanes.",
+    "guardShack": "Small white booth (~1-vehicle footprint) sitting in the pinch-point between the in/out lanes — staffed guard shack.",
+    "dockDoors": "Long dock bank on the NE building face with ~30-40 trailers backed in; 36 is an approximate count from z20 imagery — listed uncertain.",
+    "dropArea": "Trailers parked in rows along the north perimeter, separate from the active dock apron — a drop yard, ~30-40 trailers.",
+    "railServed": "A rail line curves along the SE edge of the property but no spur is visible entering the plant — classed not rail-served, listed uncertain.",
+    "postGateStaging": "Paved area just inside the gate before the dock apron provides truck holding/queue space.",
+    "urbanRural": "Maumelle industrial park on the edge of the Little Rock metro; setting is small-town / edge-of-town industrial with woods around the lot — classed Rural per the tie-break rule.",
+    "multipleFacilities": "One main manufacturing building with an integral eastern addition — a single facility, not a campus. The very large warehouse south of the lot is a separate, unrelated company."
+  },
+  "method": "deep-audit"
+}

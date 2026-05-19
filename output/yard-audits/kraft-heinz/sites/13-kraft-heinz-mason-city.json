@@ -1,0 +1,23 @@
+{
+  "name": "Kraft Heinz - Mason City",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dropArea"],
+  "fieldNotes": {
+    "truckGate": "Street View faces the front office face and employee parking; chain-link perimeter fence is visible, but the truck entrance itself is not squarely shown. Gate inferred from fenced perimeter.",
+    "guardShack": "No booth visible in Street View; entrance not clearly shown.",
+    "urbanRural": "Plant adjoins a small-town residential neighborhood to the south, surrounded otherwise by farmland - small-town industrial, judged Rural.",
+    "multipleFacilities": "Multiple connected/adjacent building structures.",
+    "dropArea": "Trailers staged along the west side of the plant."
+  }
+}

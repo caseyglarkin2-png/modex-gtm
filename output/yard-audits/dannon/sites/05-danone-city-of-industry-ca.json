@@ -1,0 +1,50 @@
+{
+  "name": "Danone - City of Industry CA",
+  "type": "Plant-based & coffee beverage plant (refrigerated)",
+  "coords": { "lat": 34.00460, "lng": -117.90590 },
+  "geofences": {
+    "perimeter": { "south": 34.00355, "west": -117.90730, "north": 34.00580, "east": -117.90480 },
+    "truckGate": { "south": 34.00400, "west": -117.90605, "north": 34.00440, "east": -117.90560 },
+    "dropYards": [
+      { "south": 34.00430, "west": -117.90680, "north": 34.00470, "east": -117.90580 }
+    ],
+    "dockAprons": [
+      { "south": 34.00430, "west": -117.90600, "north": 34.00475, "east": -117.90510 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14, "trailersVisible": 8, "trailerParkingCapacity": 14,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 14.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.00460,-117.90590,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "entryLanes", "exitLanes", "dockDoors"],
+  "fieldNotes": {
+    "truckGate": "The site is fully enclosed by a metal perimeter fence and masonry wall. Street View on Arenth Avenue (pano 34.00407,-117.90599) clearly shows a swing/sliding metal gate across the truck entrance lane, with the process plant (silos, tanks) behind it.",
+    "guardShack": "No staffed guard booth at the gate - Street View shows only wall-mounted signs beside the gate; no 1-3-vehicle-footprint booth structure. Small structures visible inside the fence are process/utility, not a gatehouse.",
+    "remoteGs": "Controlled gate with no guard booth - implies badge/intercom/remote check-in.",
+    "dockDoors": "Tight 284,000 sq ft refrigerated plant; loading occurs on the south/SW face with a covered dock canopy and trailers backed in. Estimated ~14 doors, banded 10-25 (low confidence - dense rooftop process equipment and canopy obscure the dock line).",
+    "dropArea": "Only a handful of trailers parked inside the fence along the SW edge; no dedicated drop-yard lot - banded 0-10, dropYard false.",
+    "backupSensitive": "Tight urban site - the gate opens directly onto Arenth Avenue with almost no stacking depth between the road and the docks; a truck queue would spill onto the public street.",
+    "drivewayShort": "Very short gate-to-dock approach; 1-2 trucks of room at most.",
+    "railServed": "A rail line runs along the north property edge as a through corridor; no spur enters the building.",
+    "multipleFacilities": "One integrated plant plus an SE admin/office building and an on-site wastewater treatment area - counted as one facility, buildingCount 2.",
+    "scale": "No truck scale identified; unconfirmed.",
+    "urbanRural": "Dense City of Industry / San Gabriel Valley industrial fabric - clearly Urban.",
+    "postGateStaging": "Limited paved interior area between the gate and the dock canopy provides minimal inside staging."
+  },
+  "method": "deep-audit"
+}

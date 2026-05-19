@@ -1,0 +1,71 @@
+{
+  "name": "Coca-Cola Consolidated - Twinsburg Sales & Distribution Center, OH",
+  "type": "Sales / Distribution Center",
+  "coords": { "lat": 41.29630, "lng": -81.45540 },
+  "geofences": {
+    "perimeter": { "south": 41.29410, "west": -81.45760, "north": 41.29800, "east": -81.45300 },
+    "truckGate": { "south": 41.29680, "west": -81.45470, "north": 41.29790, "east": -81.45390 },
+    "dropYards": [
+      { "south": 41.29500, "west": -81.45520, "north": 41.29700, "east": -81.45350 },
+      { "south": 41.29410, "west": -81.45620, "north": 41.29560, "east": -81.45430 }
+    ],
+    "dockAprons": [
+      { "south": 41.29610, "west": -81.45610, "north": 41.29720, "east": -81.45520 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 38,
+    "trailersVisible": 160,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 40.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.2963,-81.4554,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "dockDoors", "entryLanes", "exitLanes", "multiStep"],
+  "fieldNotes": {
+    "facility": "Coca-Cola Consolidated Twinsburg facility. The roster lists it as a 'Sales / Distribution Center' at 8909 Twin Hills Pkwy - that address is WRONG. Web research establishes the actual facility as Coca-Cola Consolidated's Twinsburg MANUFACTURING / bottling plant at 1882 E Highland Rd, Twinsburg OH 44087 - a 300,000+ sq ft plant operating since 1974, producing 31M+ cases/year; $35M new can-line investment announced Oct 2025; ~260 employees; also home to Red Classic Transit. (Note: the company's separate storage warehouse is in Macedonia ~2 miles away.) Resolved coordinates via OSM geocode of 1882 Highland Rd (41.2977,-81.4538) then satellite identification.",
+    "facilityType": "Roster type 'Sales / Distribution Center' is inaccurate - this is a manufacturing/bottling plant with heavy truck staging. JSON keeps the roster name/type for tracking but the dossier documents the correction.",
+    "confirmation": "Positively confirmed: 'Coca-Cola' branding clearly visible on the building wall in Street View (2023-07).",
+    "truckGate": "Truck entrance off E Highland Rd shows a defined truck driveway with yellow lane-control bollards and a perimeter chain-link fence with a gated opening. Classified truckGate true (fenced perimeter + controlled gated truck lane). Flagged uncertain - no barrier arm was unambiguously resolved in the imagery.",
+    "guardShack": "No clearly staffed guard booth identified at the road entrance; the small structures near the drive read as facility buildings, not a booth. Set false (uncertain).",
+    "remoteGs": "Set true - a gated/fenced truck entrance exists but no guard booth, implying kiosk / call-box check-in. Flagged uncertain.",
+    "dockDoors": "Long dock-door row on the plant's east face with many trailers backed in; estimated ~30-40, banded 25-50.",
+    "dropArea": "Very large herringbone trailer drop yards (multiple blocks of trailers); well over 50 - high-throughput plant.",
+    "multipleFacilities": "True - campus with the main multi-section plant plus a separate large building to the south.",
+    "drivewayLong": "Deep paved campus interior provides ample truck stacking.",
+    "fastLaneOpportunity": "Wide truck driveway and large aprons; room for an express lane.",
+    "shipRcvSeparate": "Docks appear concentrated on one primary face; set false (could not confirm a separate second dock bank).",
+    "urbanRural": "Twinsburg is a Cleveland-metro suburb; the site sits in an established industrial park. Classified Urban.",
+    "railServed": "No rail spur into the property observed.",
+    "scale": "No truck scale clearly identified."
+  },
+  "method": "deep-audit"
+}

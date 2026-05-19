@@ -1,0 +1,49 @@
+{
+  "name": "FedEx Ground Hub - Nashville TN",
+  "type": "Ground regional sortation hub",
+  "coords": { "lat": 36.23900, "lng": -86.79350 },
+  "geofences": {
+    "perimeter": { "south": 36.23600, "west": -86.79900, "north": 36.24150, "east": -86.79100 },
+    "truckGate": { "south": 36.23640, "west": -86.79680, "north": 36.23720, "east": -86.79580 },
+    "dropYards": [
+      { "south": 36.23950, "west": -86.79280, "north": 36.24080, "east": -86.79120 },
+      { "south": 36.23680, "west": -86.79850, "north": 36.23900, "east": -86.79550 }
+    ],
+    "dockAprons": [
+      { "south": 36.23850, "west": -86.79550, "north": 36.24050, "east": -86.79150 },
+      { "south": 36.23750, "west": -86.79480, "north": 36.23950, "east": -86.79180 }
+    ],
+    "staging": { "south": 36.23680, "west": -86.79620, "north": 36.23820, "east": -86.79420 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 150, "trailersVisible": 180, "trailerParkingCapacity": 260,
+    "truckGateCount": 1, "buildingCount": 3, "siteAreaAcres": 75.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.239,-86.7935,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Street View (2019, Knight Dr) shows a controlled, fenced truck entrance: a check-in canopy spanning the drive lanes with a guard/admin building beside it; perimeter chain-link fencing and a US flag.",
+    "guardShack": "Low building with a green awning beside the entrance lanes plus a canopy over the check-in lanes - a staffed gate/security building. remoteGs therefore false.",
+    "entryLanes": "Multiple lanes pass under the entry canopy (estimated 2 in / 1 out); exact lane split not crisply resolvable from imagery.",
+    "fastLaneOpportunity": "Wide gate apron / canopy with multiple lanes leaves room to designate an express bypass.",
+    "dockDoors": "Long main sort building with dock doors and trailers backed in along both long faces (z17/z18); 100+ positions, banded 50+.",
+    "dropArea": "Two trailer drop areas - a large NE drop yard with dense trailer rows and the SW trailer staging rows; over 50.",
+    "buildingCount": "Long main sort building, a parallel secondary building to the N, and a small structure inside the yard; counted as 3 (the blue-roof building SW of the property line is a separate parcel and excluded).",
+    "postGateStaging": "Large paved apron inside the gate before the dock faces for queuing.",
+    "siteAreaAcres": "Derived from perimeter box (~612 m N-S x ~718 m E-W), discounted for the irregular footprint and wooded N buffer."
+  },
+  "method": "deep-audit"
+}

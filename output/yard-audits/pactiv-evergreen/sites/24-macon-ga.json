@@ -1,0 +1,67 @@
+{
+  "name": "Pactiv Evergreen - Macon GA",
+  "type": "Manufacturing Plant (Food Merchandising; molded fibre / egg-tray converting)",
+  "coords": { "lat": 32.705850, "lng": -83.647600 },
+  "geofences": {
+    "perimeter": { "south": 32.704900, "west": -83.649300, "north": 32.708400, "east": -83.646200 },
+    "truckGate": { "south": 32.706050, "west": -83.649450, "north": 32.706450, "east": -83.649050 },
+    "dropYards": [
+      { "south": 32.706700, "west": -83.649600, "north": 32.708300, "east": -83.647600 },
+      { "south": 32.705200, "west": -83.647000, "north": 32.706000, "east": -83.646300 }
+    ],
+    "dockAprons": [
+      { "south": 32.706300, "west": -83.648700, "north": 32.706650, "east": -83.646500 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 27.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.705850,-83.647600,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Confirmed via 2023-07 Street View showing 'Pactiv Evergreen' blue-logo signage on the south face of the central building of the Airport Drive industrial complex near Middle Georgia Regional Airport. The roster geocode point lands on the western half of this building. Two large buildings sit in the complex; the Pactiv plant is the center/east one with the company sign, NOT the upper-left building.",
+    "truckGate": "Perimeter chain-link fencing rings the plant (confirmed on the south and west faces in 2022-03 and 2023-07 Street View), but the vehicle openings are plain swing gates / parking openings with no barrier arm, no controlled checkpoint pinch-point, and no lane markings. Truck access to the north dock yard is via open driveways. Classified truckGate false - fenced but uncontrolled.",
+    "guardShack": "No staffed booth at any entrance. The small structure at the NW corner is a utility/transformer shed, not a guard booth. No booth visible in any Street View heading.",
+    "drivewayLong": "The driveway from the public road to the north dock apron runs 100+ m through the gravel yard - ample room for a 3+ truck queue.",
+    "dockDoors": "North face has a covered loading canopy at the NE plus a rhythm of dock bays along the north wall; estimated 12-20 doors, banded 10-25. Partly obscured by canopy and tree buffer - medium confidence.",
+    "dropArea": "Large gravel trailer-storage yard along the NW edge holds dozens of parked trailers (counted ~30 in imagery, rows of drop trailers without tractors); banded 50+ for capacity-class drop activity.",
+    "dropYard": "Dedicated gravel trailer-storage lot along the west/NW side of the plant, clearly separate from active dock staging - dropYard true.",
+    "railServed": "A rail line runs in the green corridor immediately east of the property (NE-SW) but no spur branches into the Pactiv plant; docks are not rail-facing. Rail not served.",
+    "entryExitSeparate": "Site has multiple driveway openings (south frontage near the office and a west/NW opening to the dock yard); trucks and cars likely use different openings. Lane counts are estimates.",
+    "urbanRural": "Airport-fringe light-industrial corridor on Airport Drive south of Macon, bordered by pine woods and the regional airport - Rural per rubric.",
+    "siteAreaAcres": "Perimeter box (~390 m N-S x ~290 m E-W of fenced/used land including the north drop yard) yields roughly 27 acres - estimate."
+  },
+  "method": "deep-audit"
+}

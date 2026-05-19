@@ -1,0 +1,54 @@
+{
+  "name": "Ford - Sterling Axle Plant, Sterling Heights MI",
+  "type": "Axle / Components Plant",
+  "coords": { "lat": 42.58358, "lng": -83.04497 },
+  "geofences": {
+    "perimeter": { "south": 42.57950, "west": -83.04950, "north": 42.58750, "east": -83.04050 },
+    "truckGate": { "south": 42.58660, "west": -83.04800, "north": 42.58740, "east": -83.04680 },
+    "dropYards": [
+      { "south": 42.58550, "west": -83.04700, "north": 42.58720, "east": -83.04350 }
+    ],
+    "dockAprons": [
+      { "south": 42.58400, "west": -83.04300, "north": 42.58620, "east": -83.04150 }
+    ],
+    "staging": { "south": 42.58580, "west": -83.04780, "north": 42.58680, "east": -83.04600 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 18,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 162.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.58358,-83.04497,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoors", "dropArea", "shipRcvSeparate", "preGateStaging"],
+  "fieldNotes": {
+    "site": "Ford Sterling Axle Plant, 39000 Mound Rd, Sterling Heights (Macomb County) MI - an active Ford components plant operating since 1956, ~2,295 employees, producing rear axles for the F-150, Super Duty, Expedition, Navigator, Mustang and Transit. LOCATION CORRECTION: the roster address (29900 Mound Rd) and geocode (42.5141,-83.0466, RANGE_INTERPOLATED) are WRONG - they point at an office/tech campus ~3.5 km south. Correct address is 39000 Mound Rd, Sterling Heights MI 48310 (confirmed via Ford Authority, Waze, CommercialCafe). Exact coordinates 42.583580,-83.044966 obtained from the US EPA Superfund site profile for the Ford Motor Company Sterling Axle Plant - confirmed by satellite as the large multi-roof Ford plant building bounded by Mound Rd on the west.",
+    "truckGate": "Confirmed - Street View (2025) on Mound Rd at the NW corner shows a wide gated truck entrance: a tractor pulling an intermodal container is seen exiting through a chain-link sliding-gate opening, with trailers parked inside the yard and dock doors on the adjacent building face. Chain-link perimeter fencing runs the full Mound Rd frontage. truckGateCount 1 (primary truck gate at the NW).",
+    "guardShack": "Marked true at medium confidence - a fenced ~2,295-employee active Ford plant of this scale conventionally operates a staffed gatehouse. A small structure is visible beside the NW truck gate but a clear guard-booth could not be positively confirmed - the gate may be badge/remote-controlled. Flagged uncertain along with remoteGs.",
+    "preGateStaging": "Marked false (uncertain) - the NW truck gate opens more or less directly into the drop yard / dock area; no clear dedicated pre-gate truck staging apron outside the gate identified. Flagged uncertain.",
+    "postGateStaging": "True - the internal yard between the NW gate and the dock doors provides post-gate queue/holding room.",
+    "drivewayLong": "True - the internal yard from the NW truck gate to the dock doors and through the drop yard is deep, with room to queue 3+ trucks.",
+    "dockDoors": "Estimated 10-25 dock doors along the NE/E building faces serving the drop yard; exact count obscured by roof angle - flagged uncertain.",
+    "dropArea": "NW/N drop yard holds an estimated 15-20 parked trailers in rows amid material laydown areas (z19 imagery); banded 10-25. dropYard true. trailersVisible ~18.",
+    "shipRcvSeparate": "Marked false (medium confidence) - freight is concentrated on the N/NE side; no clearly separate second dock cluster confirmed. Flagged uncertain.",
+    "railServed": "A rail spur runs into the property from the rail yard on the east, serving the N/NE material laydown area - rail-served.",
+    "multipleFacilities": "False - a single large interconnected plant building (multi-roof but one structure); buildingCount 1.",
+    "urbanRural": "Sterling Heights is a dense Detroit-metro suburb; the plant is hemmed by continuous suburban/industrial development - Urban."
+  },
+  "method": "deep-audit"
+}

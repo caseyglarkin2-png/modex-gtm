@@ -1,0 +1,51 @@
+{
+  "name": "Danone - West Jordan UT",
+  "type": "Fresh yogurt plant",
+  "coords": { "lat": 40.58110, "lng": -112.03600 },
+  "geofences": {
+    "perimeter": { "south": 40.57920, "west": -112.03880, "north": 40.58300, "east": -112.03340 },
+    "truckGate": { "south": 40.58235, "west": -112.03690, "north": 40.58265, "east": -112.03650 },
+    "dropYards": [
+      { "south": 40.57990, "west": -112.03500, "north": 40.58110, "east": -112.03380 }
+    ],
+    "dockAprons": [
+      { "south": 40.57990, "west": -112.03520, "north": 40.58160, "east": -112.03420 }
+    ],
+    "staging": { "south": 40.58060, "west": -112.03560, "north": 40.58160, "east": -112.03470 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30, "trailersVisible": 45, "trailerParkingCapacity": 70,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 51.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.58110,-112.03600,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "scale"],
+  "fieldNotes": {
+    "truckGate": "Large 51-acre plant fully enclosed by a tall iron perimeter fence (confirmed on all sides in 2024/2025 Street View). Vehicle entrance off Dannon Way has a kerbed checkpoint island in the driveway - controlled entry.",
+    "guardShack": "No clearly visible freestanding guard booth beside the truck lane in available imagery; entrance area is cluttered with staged construction/expansion material. Marked false but flagged uncertain.",
+    "remoteGs": "Gated, fenced entrance with no confirmed guard booth - remote/kiosk check-in inferred. Flagged uncertain alongside guardShack.",
+    "dockDoors": "Large dock apron on the east/SE building face with ~30 doors estimated and many trailers backed in; honest overhead estimate, low confidence.",
+    "dropArea": "Extensive trailer drop yard in the SE with rows of parked trailers - 50+ stalls. Heavy freight operation, 24/7 plant.",
+    "drivewayLong": "Long internal access road wraps from the Dannon Way entrance around the east side to the dock yard - ample queue depth for 3+ trucks.",
+    "fastLaneOpportunity": "Wide entrance apron and broad internal roadways with unused paved width - room for a bypass/express lane.",
+    "dropYard": "Dedicated trailer-storage lot in the SE, separate from the active dock apron.",
+    "railServed": "No rail spur enters the property; rail line in the broader district does not serve this plant.",
+    "scale": "No truck scale clearly identified; flagged uncertain - a scale could be present in the dock-yard area but not confirmed from overhead.",
+    "buildingCount": "Main manufacturing block plus an attached/adjacent large warehouse section - counted as 2.",
+    "urbanRural": "West Jordan industrial district in the Salt Lake City metro - Urban.",
+    "siteAreaAcres": "Roster cites 51.17-acre site; perimeter box drawn to encompass the full parcel including the southern undeveloped portion."
+  },
+  "method": "deep-audit"
+}

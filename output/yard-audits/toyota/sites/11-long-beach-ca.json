@@ -1,0 +1,63 @@
+{
+  "name": "TABC Inc - Long Beach CA",
+  "type": "Parts/Components Plant (stamping, welding, catalytic converters)",
+  "coords": { "lat": 33.87150, "lng": -118.16200 },
+  "geofences": {
+    "perimeter": { "south": 33.8700, "west": -118.1645, "north": 33.8725, "east": -118.1603 },
+    "truckGate": { "south": 33.87250, "west": -118.16095, "north": 33.87290, "east": -118.16030 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 33.87100, "west": -118.16280, "north": 33.87200, "east": -118.16190 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 10,
+    "trailersVisible": 4,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 2,
+    "buildingCount": 5,
+    "siteAreaAcres": 26.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.87150,-118.16200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayShort": true,
+    "drivewayLong": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "truckGateCount", "buildingCount", "drivewayShort", "backupSensitive"],
+  "fieldNotes": {
+    "truckGate": "Fully fenced urban plant; controlled vehicle gates in the steel perimeter fence off N Paramount Blvd confirmed in Street View (2022/2025). Truck access is gated.",
+    "guardShack": "No distinct freestanding guard-booth structure beside a truck lane was visible in imagery. A modern office building sits at the north entrance — check-in is likely handled at/near the office rather than a standalone booth. Flagged uncertain.",
+    "remoteGs": "Set true (truck gate present, no visible standalone guard shack) — but this is a medium-confidence inference; security may be office-based or staffed in a way not resolvable from overhead/Street View.",
+    "backupSensitive": "Tight urban site directly on N Paramount Blvd, a busy arterial; little stacking room outside the gates so a truck queue could spill toward the road.",
+    "dockDoors": "Old (1972) tightly-built urban manufacturing plant; building covers most of the 30-acre parcel. Dock doors are tucked along interior building faces — ~10 estimated, band 0-10.",
+    "dropArea": "Outdoor space is used mainly for stacked metal/parts racks and equipment storage rather than a trailer drop yard; very few free-standing trailers visible.",
+    "truckGateCount": "At least 2 vehicle gates in the perimeter fence (north entrance off Paramount plus additional access) — count is approximate.",
+    "railServed": "A rail line runs along the far west of the industrial district but does not clearly spur into the TABC property; treated as not rail-served.",
+    "multipleFacilities": "One large multi-section manufacturing complex (stamping/welding/cat-converter) plus support structures and a separate office building — single operational facility, not a multi-building campus.",
+    "siteAreaAcres": "Web sources cite ~30 acres; parcel boundaries in the dense industrial district are hard to delineate from imagery — perimeter box estimates ~27 acres."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Frito-Lay - Pulaski TN",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 35.21580, "lng": -87.06050 },
+  "geofences": {
+    "perimeter": { "south": 35.21220, "west": -87.06360, "north": 35.21900, "east": -87.05760 },
+    "truckGate": { "south": 35.21770, "west": -87.06340, "north": 35.21830, "east": -87.06280 },
+    "dropYards": [
+      { "south": 35.21720, "west": -87.06400, "north": 35.21960, "east": -87.06280 }
+    ],
+    "dockAprons": [
+      { "south": 35.21600, "west": -87.06050, "north": 35.21720, "east": -87.05900 },
+      { "south": 35.21300, "west": -87.05980, "north": 35.21420, "east": -87.05850 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 52.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.21580,-87.06050,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dockDoorCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "facility": "Confirmed via Street View — Frito-Lay logo visible on the office building (sv19, 2023-07 capture). Large multi-building manufacturing campus at 298 Industrial Blvd, Pulaski TN. Geocoded coords accurate.",
+    "truckGate": "Whole campus is enclosed by black metal/chain-link fence (confirmed in 5+ Street Views). Trucks reach the active dock yards and the NW drop yard via internal driveways from the public road; the drop-yard entrance is a fenced, controlled opening. Treated as a controlled truck entrance.",
+    "guardShack": "No classic 1-3-vehicle guard booth visible at a public-road gate. A small angled-roof structure sits at the drop-yard entrance and may serve as a transportation/check-in office, but it could not be positively confirmed as a staffed guard shack — flagged uncertain.",
+    "remoteGs": "Set true given a controlled truck entrance with no confirmed guard booth — implies kiosk/app/office check-in. Low confidence.",
+    "dropYard": "Large dedicated drop yard on the NW side — two long rows of carrier trailers (orange/white, ~40-55 trailers) plus box trucks, chain-link fenced, served by a rail spur. Capacity ~70.",
+    "railServed": "Confirmed — a rail spur crosses the west access road and runs into the property alongside the drop yard and dock buildings (sv13, dropyard satellite).",
+    "dockDoorCount": "Estimate ~45 across the rail-served dock building, the warehouse SW/west edge, and a sawtooth dock building. Multiple separate dock banks on different building faces → shipRcvSeparate true. Count is an honest overhead estimate.",
+    "multipleFacilities": "Campus has 6+ distinct buildings — main process plant, large finished-goods warehouse, sawtooth dock building, rail dock building, office, and the drop-yard transportation building.",
+    "urbanRural": "Edge-of-town industrial setting in Pulaski TN, surrounded by woods and open fields — Rural.",
+    "drivewayLong": "Internal driveways from public road to docks are long with ample room to stack 3+ trucks."
+  },
+  "method": "deep-audit"
+}

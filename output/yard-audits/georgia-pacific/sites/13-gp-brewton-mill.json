@@ -1,0 +1,54 @@
+{
+  "name": "GP Brewton Mill - Brewton AL",
+  "type": "Containerboard/Bleached Board Mill",
+  "coords": { "lat": 31.1068, "lng": -87.0658 },
+  "geofences": {
+    "perimeter": { "south": 31.1018, "west": -87.0698, "north": 31.1118, "east": -87.0588 },
+    "truckGate": { "south": 31.1038, "west": -87.0686, "north": 31.1048, "east": -87.0674 },
+    "dropYards": [
+      { "south": 31.1044, "west": -87.0672, "north": 31.1062, "east": -87.0650 }
+    ],
+    "dockAprons": [
+      { "south": 31.1045, "west": -87.0668, "north": 31.1057, "east": -87.0644 }
+    ],
+    "staging": { "south": 31.1040, "west": -87.0688, "north": 31.1050, "east": -87.0678 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 16,
+    "siteAreaAcres": 95.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@31.1068,-87.0658,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "dockDoors", "dropArea", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster geocode (31.1052,-87.0722) sat near the Brewton town center, ~1 km west of the mill (APPROXIMATE, 19 m flagged but actually mislocated to downtown). Mill core relocated via satellite to ~31.1068,-87.0658.",
+    "facility": "Integrated white-top linerboard and solid-bleached-sulfate (SBS) paperboard mill. Former Smurfit-Stone mill, acquired by GP in 2007; ~400+ employees; underwent the $400M 'Project Phoenix' modernization; first U.S. integrated paper mill to earn EPA ENERGY STAR (2021).",
+    "truckGate": "TRUE - confirmed. Street View (2023-05) shows a controlled mill entrance with a clear stop sign and checkpoint.",
+    "guardShack": "TRUE - confirmed. Street View clearly shows a small staffed guard booth (single-vehicle footprint, windows on multiple sides, door, posted signs) beside the entrance lane at ~31.1043,-87.0681.",
+    "preGateStaging": "Paved/gravel apron and yard space outside the gate booth where trucks can wait.",
+    "shipRcvSeparate": "Receiving (woodyard, chip/log piles, chemical receiving) is physically separate from finished paperboard shipping at the warehouse dock banks - distinct clusters.",
+    "dockDoors": "Long shipping warehouses show banks of dock doors with multiple trailers backed in; counted band 10-25 (likely toward the upper end), medium confidence.",
+    "dropArea": "Paved yard near the warehouses holds parked trailers; band 10-25, medium confidence.",
+    "multipleFacilities": "Campus: pulp/paper processing core, woodyard with chip/log storage, multiple shipping/storage warehouses, paper-roll outdoor storage yards, plus support buildings - 16+ distinct structures.",
+    "railServed": "Multiple rail spurs run directly into the mill warehouses; rail cars visible at the buildings.",
+    "scale": "A truck scale is operationally expected for chip/log van weigh-in at an integrated paper mill; not pinpointed in imagery - flagged low-confidence.",
+    "urbanRural": "Brewton is a small Alabama town; the mill sits on the edge of town with forest on the north/east. Rural."
+  },
+  "method": "deep-audit"
+}

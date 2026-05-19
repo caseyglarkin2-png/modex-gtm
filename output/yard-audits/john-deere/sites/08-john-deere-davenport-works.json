@@ -1,0 +1,52 @@
+{
+  "name": "John Deere Davenport Works - Davenport IA",
+  "type": "Assembly Plant",
+  "coords": { "lat": 41.601800, "lng": -90.551500 },
+  "geofences": {
+    "perimeter": { "south": 41.59700, "west": -90.55850, "north": 41.60750, "east": -90.54550 },
+    "truckGate": { "south": 41.61020, "west": -90.55800, "north": 41.61120, "east": -90.55600 },
+    "dropYards": [
+      { "south": 41.60100, "west": -90.54900, "north": 41.60280, "east": -90.54600 },
+      { "south": 41.60330, "west": -90.55600, "north": 41.60500, "east": -90.54850 }
+    ],
+    "dockAprons": [
+      { "south": 41.60260, "west": -90.55600, "north": 41.60360, "east": -90.54850 }
+    ],
+    "staging": { "south": 41.60280, "west": -90.55400, "north": 41.60520, "east": -90.54950 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20,
+    "trailersVisible": 18,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 5,
+    "siteAreaAcres": 290.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.601800,-90.551500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors", "entryLanes", "exitLanes", "scale"],
+  "fieldNotes": {
+    "truckGate": "Site is set ~600 m back from the public road across landscaped grounds, reached by a wide private internal access road off a controlled intersection on E 90th St. Multi-lane markings at the road junction indicate a controlled private entry. No Street View coverage on the internal road and no booth resolved in satellite, so a perimeter control point is inferred from the campus layout.",
+    "guardShack": "No guard booth resolved at the public-road entry or along the access road in available imagery; large Deere assembly campuses of this era typically use a check-in point near the building rather than a road booth.",
+    "remoteGs": "Set true as the corollary of an inferred gate with no resolved booth; low confidence.",
+    "multipleFacilities": "Five distinct building masses on the campus: the giant main assembly hall plus older north/NE building sections and outbuildings.",
+    "dropYard": "Two major yard zones: trailer rows and material storage on the NE, plus a long finished-equipment marshaling apron (graders, articulated dump trucks, wheel loaders) along the north building face.",
+    "dockDoors": "~20 estimated truck dock positions along the north building face; finished construction equipment also ships drive-away / on flatbeds, so dock count understates throughput.",
+    "siteAreaAcres": "~290 acres for the fenced industrial parcel; surrounding farmland excluded.",
+    "urbanRural": "Rural — large standalone plant in open farmland NE of Davenport near the Hwy 130 / I-80 area.",
+    "fastLaneOpportunity": "Enormous paved aprons and wide internal roads leave abundant room for added or express truck lanes."
+  },
+  "method": "deep-audit"
+}

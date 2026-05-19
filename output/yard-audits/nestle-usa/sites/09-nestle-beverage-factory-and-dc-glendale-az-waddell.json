@@ -1,0 +1,53 @@
+{
+  "name": "Nestlé Beverage Factory & DC - Glendale AZ (Waddell)",
+  "type": "Beverage manufacturing plant + distribution center",
+  "coords": { "lat": 33.55520, "lng": -112.38120 },
+  "geofences": {
+    "perimeter": { "south": 33.55020, "west": -112.38420, "north": 33.55890, "east": -112.37730 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 33.55530, "west": -112.38240, "north": 33.55640, "east": -112.37900 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 110.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.55520,-112.38120,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging", "drivewayLong", "entryExitTogether", "entryLanes", "exitLanes", "fastLaneOpportunity", "dockDoors", "dropArea", "shipRcvSeparate", "scale", "dropYard", "trailersVisible", "trailerParkingCapacity", "dockDoorCount", "truckGateCount"],
+  "fieldNotes": {
+    "imageryLimitation": "This is a newly-opened facility - the $675M Nestlé greenfield beverage factory + distribution center, which celebrated its opening on 28 January 2025. The only satellite imagery currently available (Maxar) shows the site MID-CONSTRUCTION: the building roof is still being installed (steel framing and blue under-construction roof sections visible) and the surrounding yard is raw graded dirt with construction laydown. Street View panos are from 2019-2021, pre-construction (empty desert). The building footprint and broad parcel are confirmed, but the operational truck-yard configuration (gate, guard booth, dock count, drop-yard layout, lane counts, staging) CANNOT be reliably read from construction-phase imagery. Most classification fields are best-effort inferences from the facility type, scale and modern-build status, and are flagged uncertain. Confidence: low. Recommend re-audit when post-2025 operational imagery is available.",
+    "locating": "Roster coords (33.558619, -112.384378, RANGE_INTERPOLATED, moved 47m) were accurate to within ~150m. Web research confirmed the address 8531 N 150th Ave, Waddell AZ; the large building under construction in Maxar imagery matches the 630,000 sq ft Nestlé beverage factory + DC ($675M, 300-350 jobs, Coffee mate / natural bliss / Starbucks creamers). Locked center 33.55520, -112.38120.",
+    "truckGate": "Inferred true - a brand-new (2024-25) modern food-grade Nestlé beverage factory + distribution center will have a controlled, guarded truck gate. Not visible in construction imagery; flagged uncertain.",
+    "guardShack": "Not determinable from construction imagery; conservatively false with remoteGs true. Uncertain.",
+    "dockDoors": "Inferred 25-50 band for a 630,000 sq ft combined factory + DC; dock-door positioning is partly visible on the south building face but not countable in construction imagery.",
+    "dropArea": "Inferred 25-50 - the south portion of the parcel is allocated as truck/trailer yard but was still raw dirt when imaged; dropYard true inferred.",
+    "railServed": "No rail spur evident in the site grading; truck-served only.",
+    "urbanRural": "Open desert / former agricultural land in Waddell, SW of metro Glendale, with a golf course adjacent - edge-of-metro; per rubric classified Rural.",
+    "fastLaneOpportunity": "Greenfield site with abundant paved width - room for express/bypass lanes; inferred true.",
+    "siteAreaAcres": "Derived from the graded perimeter box (~960m N-S x ~640m E-W) ~ 110 acres of parcel; the active operational footprint is smaller.",
+    "buildingCount": "Single large multi-section factory + DC building.",
+    "trailersVisible": "Zero trailers in the operational sense - imagery predates operations.",
+    "multiStep": "Not determinable; default false."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,488 @@
+{
+  "account": "Coca-Cola",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 30,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Coca-Cola Atlanta Syrup Plant - Atlanta GA",
+      "city": "Atlanta",
+      "state": "GA",
+      "type": "Concentrate / Syrup Plant",
+      "address": "3791 Browns Mill Rd SE, Atlanta, GA 30354",
+      "lat": 33.654623,
+      "lng": -84.393365,
+      "source": "Waze/Apple Maps listing; TCCC company-owned concentrate plant named in dossier as Coe's direct footprint",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 55
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Coca-Cola Atlanta Beverage Base Plant - Atlanta GA",
+      "city": "Atlanta",
+      "state": "GA",
+      "type": "Concentrate / Beverage Base Plant",
+      "address": "1001 Great Southwest Pkwy SW, Atlanta, GA 30336",
+      "lat": 33.73407,
+      "lng": -84.568761,
+      "source": "A2LA lab directory (The Coca-Cola Company - Atlanta Beverage Base Plant); TCCC company-owned concentrate facility",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1341
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Coca-Cola Consolidated - Charlotte (Snyder) Production Center, NC",
+      "city": "Charlotte",
+      "state": "NC",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "4901 Chesapeake Dr, Charlotte, NC 28216",
+      "lat": 35.284839,
+      "lng": -80.883091,
+      "source": "Coca-Cola Consolidated 2024 10-K (11 manufacturing facilities); Charlotte production/distribution facility per SEC filings",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1649
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Coca-Cola Consolidated - Nashville Production Center, TN",
+      "city": "Nashville",
+      "state": "TN",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "2451 Atrium Way, Nashville, TN 37214",
+      "lat": 36.161268,
+      "lng": -86.690056,
+      "source": "Coca-Cola Consolidated SEC 10-K (leased 297,500 sq ft production/distribution facility, Nashville TN)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 52
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Coca-Cola Consolidated - Mobile Production Center, AL",
+      "city": "Mobile",
+      "state": "AL",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "6350 Rangeline Rd, Mobile, AL 36582",
+      "lat": 30.555828,
+      "lng": -88.123576,
+      "source": "Coca-Cola Consolidated 10-K / company history (Mobile listed among production centers)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 3
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Coca-Cola Consolidated - Roanoke Production Center, VA",
+      "city": "Roanoke",
+      "state": "VA",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "2001 Towne Square Blvd NW, Roanoke, VA 24012",
+      "lat": 37.317912,
+      "lng": -79.9677,
+      "source": "Coca-Cola Consolidated SEC 10-K (Roanoke production/distribution facility); chooseroanokecounty expansion release",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 2
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Coca-Cola Consolidated - Bishopville Production Center, SC",
+      "city": "Bishopville",
+      "state": "SC",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "245 Cale Yarborough Hwy, Bishopville, SC 29010",
+      "lat": 34.218211,
+      "lng": -80.248406,
+      "source": "Coca-Cola Consolidated production facility list (Bishopville SC named among manufacturing sites)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 8
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Coca-Cola Consolidated - Indianapolis Production Facility, IN",
+      "city": "Indianapolis",
+      "state": "IN",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "5000 W 25th St, Indianapolis, IN 46224",
+      "lat": 39.80343,
+      "lng": -86.245173,
+      "source": "Coca-Cola Consolidated news (May 2026 $35M Indianapolis manufacturing investment; America250 mini-can production)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1523
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Coca-Cola Consolidated - Whitestown Distribution & Warehouse, IN",
+      "city": "Whitestown",
+      "state": "IN",
+      "type": "Distribution Center / Automated Warehouse",
+      "address": "5101 S Indianapolis Rd, Whitestown, IN 46075",
+      "lat": 39.966379,
+      "lng": -86.381749,
+      "source": "Coca-Cola Consolidated / Town of Whitestown release ($60M, 400,000 sq ft automated distribution facility)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 31
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Coca-Cola Consolidated - Columbus Distribution Center, OH",
+      "city": "Columbus",
+      "state": "OH",
+      "type": "Distribution Center",
+      "address": "Rohr Rd, Rickenbacker Industrial Center, Columbus, OH 43137",
+      "lat": 39.845821,
+      "lng": -82.956124,
+      "source": "Coca-Cola Consolidated 2023 groundbreaking release ($90M, 400,000 sq ft DC with Vertique semi-automation); street number not disclosed",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 3
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Coca-Cola Consolidated - Cincinnati Sales & Distribution Center, OH",
+      "city": "Cincinnati",
+      "state": "OH",
+      "type": "Sales / Distribution Center",
+      "address": "1547 Kemper Meadow Dr, Cincinnati, OH 45240",
+      "lat": 39.292889,
+      "lng": -84.53697,
+      "source": "Coca-Cola Consolidated office/location directory (Cincinnati OH facility)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 37
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Coca-Cola Consolidated - Twinsburg Sales & Distribution Center, OH",
+      "city": "Twinsburg",
+      "state": "OH",
+      "type": "Sales / Distribution Center",
+      "address": "8909 Twin Hills Pkwy, Twinsburg, OH 44087",
+      "lat": 41.312945,
+      "lng": -81.44751,
+      "source": "Coca-Cola Consolidated office/location directory (Twinsburg OH facility)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 57
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Coca-Cola Consolidated - Sandston Sales & Distribution Center, VA",
+      "city": "Sandston",
+      "state": "VA",
+      "type": "Sales / Distribution Center",
+      "address": "5301 Eubank Rd, Sandston, VA 23150",
+      "lat": 37.510825,
+      "lng": -77.344601,
+      "source": "Coca-Cola Consolidated office/location directory (Sandston VA facility, Richmond metro)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 90
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Coca-Cola Consolidated - Erlanger Distribution & Sales Center, KY",
+      "city": "Erlanger",
+      "state": "KY",
+      "type": "Distribution / Sales Center",
+      "address": "600 Circleport Dr, Erlanger, KY 41018",
+      "lat": 39.051442,
+      "lng": -84.632298,
+      "source": "Wikipedia / 2018 Coca-Cola Consolidated Erlanger KY distribution-sales-warehouse expansion",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 3
+      }
+    },
+    {
+      "idx": 15,
+      "name": "Coca-Cola Consolidated - Louisville Distribution Center, KY",
+      "city": "Louisville",
+      "state": "KY",
+      "type": "Distribution Center",
+      "address": "7100 Global Dr, Louisville, KY 40258",
+      "lat": 38.138117,
+      "lng": -85.890606,
+      "source": "Greater Louisville Chamber listing for Coca-Cola Consolidated distribution facility",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 626
+      }
+    },
+    {
+      "idx": 16,
+      "name": "Coca-Cola UNITED - Birmingham Production Plant, AL",
+      "city": "Birmingham",
+      "state": "AL",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "4600 E Lake Blvd, Birmingham, AL 35217",
+      "lat": 33.561277,
+      "lng": -86.768222,
+      "source": "Coca-Cola UNITED locations page; Birmingham AL HQ + sales/distribution; production presence in metro",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 5725
+      }
+    },
+    {
+      "idx": 17,
+      "name": "Coca-Cola UNITED - Montgomery Production Plant, AL",
+      "city": "Montgomery",
+      "state": "AL",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "2000 Coca Cola Rd, Montgomery, AL 36124",
+      "lat": 32.294107,
+      "lng": -86.347673,
+      "source": "Coca-Cola UNITED locations page (Montgomery AL production center)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 4
+      }
+    },
+    {
+      "idx": 18,
+      "name": "Coca-Cola UNITED - College Park Production Plant, GA",
+      "city": "College Park",
+      "state": "GA",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "3151 Sullivan Rd, Atlanta, GA 30337",
+      "lat": 33.623174,
+      "lng": -84.482599,
+      "source": "Coca-Cola UNITED locations page (College Park GA production center, Atlanta metro)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 1
+      }
+    },
+    {
+      "idx": 19,
+      "name": "Coca-Cola UNITED - Marietta Production Plant, GA",
+      "city": "Marietta",
+      "state": "GA",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "699 Franklin Gateway SE, Marietta, GA 30067",
+      "lat": 33.935695,
+      "lng": -84.503652,
+      "source": "Coca-Cola UNITED locations page (Marietta GA production center)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 38
+      }
+    },
+    {
+      "idx": 20,
+      "name": "Coca-Cola UNITED - Baton Rouge Production Plant, LA",
+      "city": "Baton Rouge",
+      "state": "LA",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "8484 Airline Hwy, Baton Rouge, LA 70815",
+      "lat": 30.45576,
+      "lng": -91.09914,
+      "source": "Coca-Cola UNITED locations page (Baton Rouge LA production center)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 29
+      }
+    },
+    {
+      "idx": 21,
+      "name": "Coca-Cola UNITED - New Orleans Production Plant, LA",
+      "city": "New Orleans",
+      "state": "LA",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "12970 I-10 Service Rd, New Orleans, LA 70128",
+      "lat": 30.052392,
+      "lng": -89.951991,
+      "source": "Coca-Cola UNITED locations page (New Orleans LA production center)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 3
+      }
+    },
+    {
+      "idx": 22,
+      "name": "Coca-Cola UNITED - Chattanooga Production Plant, TN",
+      "city": "Chattanooga",
+      "state": "TN",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "2111 Polymer Dr, Chattanooga, TN 37421",
+      "lat": 35.045885,
+      "lng": -85.193159,
+      "source": "Coca-Cola UNITED locations page (Chattanooga TN production center)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 5
+      }
+    },
+    {
+      "idx": 23,
+      "name": "Reyes Coca-Cola Bottling - Niles Production Plant, IL",
+      "city": "Niles",
+      "state": "IL",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "7400 N Oak Park Ave, Niles, IL 60714",
+      "lat": 42.015774,
+      "lng": -87.794489,
+      "source": "Reyes Coca-Cola Bottling (Chicago-area production/distribution; 59 facilities serving Midwest)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 29
+      }
+    },
+    {
+      "idx": 24,
+      "name": "Reyes Coca-Cola Bottling - Downey Production Plant, CA",
+      "city": "Downey",
+      "state": "CA",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "12320 Smith Ave, Santa Fe Springs, CA 90670",
+      "lat": 33.948887,
+      "lng": -118.072734,
+      "source": "Reyes Coca-Cola Bottling (Downey named as one of four CA manufacturing locations)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 3
+      }
+    },
+    {
+      "idx": 25,
+      "name": "Reyes Coca-Cola Bottling - San Leandro Production Plant, CA",
+      "city": "San Leandro",
+      "state": "CA",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "1101 Marina Blvd, San Leandro, CA 94577",
+      "lat": 37.712931,
+      "lng": -122.160869,
+      "source": "Reyes Coca-Cola Bottling (San Leandro named as one of four CA manufacturing locations)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 2
+      }
+    },
+    {
+      "idx": 26,
+      "name": "Reyes Coca-Cola Bottling - Rancho Cucamonga Bottling & Distribution Center, CA",
+      "city": "Rancho Cucamonga",
+      "state": "CA",
+      "type": "Bottling / Manufacturing + Distribution Center",
+      "address": "11251 6th St, Rancho Cucamonga, CA 91730",
+      "lat": 34.084004,
+      "lng": -117.559144,
+      "source": "PRNewswire / BeverageDaily (RCCB new 620,000 sq ft bottling and distribution center, first new CA Coca-Cola production facility in ~60 years)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 53
+      }
+    },
+    {
+      "idx": 27,
+      "name": "Liberty Coca-Cola Beverages - Philadelphia Production Plant, PA",
+      "city": "Philadelphia",
+      "state": "PA",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "725 E Erie Ave, Philadelphia, PA 19134",
+      "lat": 40.006386,
+      "lng": -75.113266,
+      "source": "Liberty Coca-Cola Beverages (Philadelphia sales/distribution/production site; 4 plants, 10 DCs)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 11
+      }
+    },
+    {
+      "idx": 28,
+      "name": "Liberty Coca-Cola Beverages - Maspeth Production Plant, NY",
+      "city": "Maspeth",
+      "state": "NY",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "5612 56th Rd, Maspeth, NY 11378",
+      "lat": 40.726817,
+      "lng": -73.923183,
+      "source": "Liberty Coca-Cola Beverages locations (Maspeth NY production facility, NYC metro)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 3
+      }
+    },
+    {
+      "idx": 29,
+      "name": "Swire Coca-Cola USA - Salt Lake City Production Plant, UT",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "5405 W 1730 S, Salt Lake City, UT 84104",
+      "lat": 40.732482,
+      "lng": -112.02077,
+      "source": "Swire Coca-Cola USA locations page (Salt Lake City UT manufacturing plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 3
+      }
+    },
+    {
+      "idx": 30,
+      "name": "Swire Coca-Cola USA - Denver Production Plant, CO",
+      "city": "Denver",
+      "state": "CO",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "14025 E 38th Ave, Denver, CO 80239",
+      "lat": 39.770555,
+      "lng": -104.819041,
+      "source": "Swire Coca-Cola USA locations page (Denver CO manufacturing plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 39
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

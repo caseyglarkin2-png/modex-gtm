@@ -1,0 +1,49 @@
+{
+  "name": "Frito-Lay - Brookhollow Plant Dallas TX",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 32.829250, "lng": -96.885400 },
+  "geofences": {
+    "perimeter": { "south": 32.8286, "west": -96.8863, "north": 32.8299, "east": -96.8845 },
+    "truckGate": { "south": 32.82930, "west": -96.88475, "north": 32.82960, "east": -96.88450 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 32.82950, "west": -96.88510, "north": 32.82985, "east": -96.88460 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 6.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.829250,-96.885400,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "dropArea", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster address (1500 N Cockrell Hill Rd) was WRONG. Correct address is 1141 Regal Row, Dallas TX 75247 (PotatoPro + Waze + Yellowpages confirm). Building positively identified by red Frito-Lay wall sign visible in 2024/2025 Street View on the east building face.",
+    "truckGate": "Entire property enclosed by chain-link / iron fence; sliding gates control vehicle access at the east office/parking entrance and the dock-yard entrance. No open uncontrolled driveway.",
+    "guardShack": "No staffed guard booth visible at any gate in Street View or satellite. Older urban plant with self-managed sliding gates.",
+    "remoteGs": "Gate present but no guard shack -> remote / call-box / badge check-in implied.",
+    "railServed": "Rail spur runs along the south/southwest side of the building; covered hopper / tank rail cars visible parked against the building in 2019 Street View (rail-served snack manufacturing — receives bulk grain/corn).",
+    "dockDoors": "Dock doors with trailers backed in visible along the east and north building faces; band 10-25 estimated, exact count obscured by adjacent buildings and fence — low confidence.",
+    "backupSensitive": "Constrained urban site hemmed by neighboring industrial buildings on the south and west; narrow streets and short driveways leave little truck stacking room before gates.",
+    "multipleFacilities": "Single Frito-Lay building. Adjacent large warehouses belong to other companies, not Frito-Lay.",
+    "siteArea": "~6 acres for the fenced property derived from the perimeter box; building footprint alone ~4.2 acres."
+  },
+  "method": "deep-audit"
+}

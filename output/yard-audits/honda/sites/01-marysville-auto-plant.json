@@ -1,0 +1,50 @@
+{
+  "name": "Honda - Marysville Auto Plant (MAP) - Marysville OH",
+  "type": "Auto Assembly Plant",
+  "coords": { "lat": 40.27780, "lng": -83.50600 },
+  "geofences": {
+    "perimeter": { "south": 40.26950, "west": -83.51500, "north": 40.28650, "east": -83.49650 },
+    "truckGate": { "south": 40.27520, "west": -83.50620, "north": 40.27620, "east": -83.50480 },
+    "dropYards": [
+      { "south": 40.27950, "west": -83.50330, "north": 40.28250, "east": -83.49750 },
+      { "south": 40.27620, "west": -83.50230, "north": 40.27880, "east": -83.49780 },
+      { "south": 40.27300, "west": -83.50320, "north": 40.27520, "east": -83.49850 }
+    ],
+    "dockAprons": [
+      { "south": 40.27680, "west": -83.50420, "north": 40.27880, "east": -83.50100 },
+      { "south": 40.28000, "west": -83.50480, "north": 40.28180, "east": -83.50150 }
+    ],
+    "staging": { "south": 40.27500, "west": -83.50350, "north": 40.27640, "east": -83.50100 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90, "trailersVisible": 240, "trailerParkingCapacity": 320,
+    "truckGateCount": 3, "buildingCount": 8, "siteAreaAcres": 720.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.2778,-83.506,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "guardShack", "scale", "multiStep"],
+  "fieldNotes": {
+    "location": "Marysville Auto Plant confirmed via satellite + roster address 24000 Honda Parkway. Roster point landed on the SE office cluster; the assembly campus proper is the massive multi-building complex centered ~40.2778,-83.5060.",
+    "truckGate": "Major OEM auto assembly plant on a fully secured private campus (Honda Parkway is an internal private road). Controlled truck gates are standard and consistent with the gated road network observed; treated as true with medium confidence on exact lane geometry.",
+    "guardShack": "Guarded entry assumed for a high-security auto plant; not individually resolved on Street View (private-road, limited 2021 coverage). Listed uncertain.",
+    "dropArea": "Extensive trailer drop yards visible on multiple building faces and standalone lots - many dozens of parked trailers; clearly 50+.",
+    "dockDoors": "Dock banks with trailers backed in along multiple long building faces; 50+ band, count is an overhead estimate.",
+    "railServed": "Confirmed - a multi-track rail yard with rail cars runs into the property along the north side (autorack staging).",
+    "multipleFacilities": "Campus: assembly plant proper plus logistics/sequencing buildings, paint, stamping and associated structures.",
+    "scale": "No truck scale clearly identified; left false.",
+    "shipRcvSeparate": "Dock activity on physically separate building faces (logistics building docks vs main plant docks) supports separate ship/receive."
+  },
+  "method": "deep-audit"
+}

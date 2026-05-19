@@ -1,0 +1,64 @@
+{
+  "name": "Performance Foodservice - East Tennessee (Morristown TN)",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 36.17760, "lng": -83.37150 },
+  "geofences": {
+    "perimeter": { "south": 36.175803, "west": -83.374394, "north": 36.179397, "east": -83.368606 },
+    "truckGate": { "south": 36.176156, "west": -83.370662, "north": 36.177144, "east": -83.369438 },
+    "dropYards": [
+      { "south": 36.177212, "west": -83.371024, "north": 36.179188, "east": -83.368576 }
+    ],
+    "dockAprons": [
+      { "south": 36.176261, "west": -83.373592, "north": 36.177339, "east": -83.369808 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 51.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.17760,-83.37150,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible"],
+  "fieldNotes": {
+    "truckGate": "Confirmed via Street View (April 2025): a barrier-arm gate spans the truck lane at the property entrance off the airport-business-park road, with painted lane markings and a paved gate island. Perimeter chain-link fencing visible on both sides.",
+    "guardShack": "A small peaked-roof guard booth with windows on multiple sides sits on a paved island between the entry and exit lanes at the gate — classic staffed guard-shack footprint.",
+    "remoteGs": "False — a physical guard booth is present, so this is a manned gate, not a remote/kiosk check-in.",
+    "entryExitTogether": "Entry and exit lanes split around the single guard-booth island at one point of the property line — one gate group, so entry/exit together.",
+    "postGateStaging": "Large paved interior yard between the gate and the dock faces provides ample truck holding/queue space.",
+    "dockDoors": "Multi-section white-roof DC with dock banks on the south/west building faces; satellite imagery is hazy — estimate ~45 doors, flagged.",
+    "dropArea": "Trailer parking rows on the east side of the building hold parked trailers — estimated 25-50 band.",
+    "urbanRural": "Facility sits in the airport-adjacent East Tennessee Progress Center / Air Park business area on the edge of Morristown, surrounded by airport land, open fields, and woods — Rural per rubric.",
+    "railServed": "A rail line runs along the northwest near the airport but does not appear to enter the PFG property with a spur."
+  },
+  "method": "deep-audit"
+}

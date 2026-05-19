@@ -1,0 +1,65 @@
+{
+  "name": "Constellation Beer DC - Jurupa Valley CA",
+  "type": "Distribution Center (beer/wine/spirits)",
+  "coords": { "lat": 34.02585, "lng": -117.53575 },
+  "geofences": {
+    "perimeter": { "south": 34.02410, "west": -117.54000, "north": 34.02730, "east": -117.53150 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 71.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.02585,-117.53575,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "_site": "Building POSITIVELY IDENTIFIED as the Constellation Brands DC at 3413 Manitou Court (Link Logistics 'Space Center' development, Jurupa Valley CA). However, the most recent Maxar/Airbus satellite imagery shows the site MID-CONSTRUCTION: the ~1.4M sq ft warehouse shell is structurally topped out but the surrounding truck court, dock equipment, parking, and trailer yard are still raw graded dirt with construction material stockpiles. No operational yard infrastructure exists in imagery yet.",
+    "dockDoors": "Set to NONE because no dock doors / dock equipment are visible in current imagery — the dock faces are unpaved dirt. The completed facility (1.4M sq ft cross-dock) will almost certainly have 100+ dock doors (likely a '50+' band) once operational; cannot count from construction-phase imagery.",
+    "dropArea": "No trailer parking stalls striped yet; raw dirt. A facility of this scale will have a large drop yard once complete.",
+    "truckGate": "Truck entrance / guard booth not yet constructed. Modern IE cross-dock DCs of this class almost always have a guarded gate; expect truckGate=true once operational, but not confirmable from current imagery.",
+    "urbanRural": "Urban — site sits inside the dense Inland Empire (Mira Loma / Jurupa Valley) industrial corridor, immediately off I-15/SR-60, surrounded by large Amazon/Nestle/Walmart/FedEx warehouses.",
+    "railServed": "Set false: a BNSF main line runs immediately south of the parcel but no rail spur enters the building footprint in current imagery. Given the rail is at the property edge a spur could be added, but none is visible — flagged uncertain.",
+    "buildingCount": "One single very large warehouse on the Constellation parcel. The dark-roofed building to the SE and the long white warehouse to the north are separate parcels/tenants.",
+    "siteAreaAcres": "~71 acres estimated from the perimeter box (parcel ~870m E-W x ~330m N-S). Approximate.",
+    "_recommendation": "Site flagged for human review / re-audit once current satellite imagery captures the completed, operational facility. The 2023 prelease source confirms this was an under-construction build-to-suit; imagery has not yet caught up to completion."
+  },
+  "method": "deep-audit"
+}

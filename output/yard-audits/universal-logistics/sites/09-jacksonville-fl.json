@@ -1,0 +1,64 @@
+{
+  "name": "Universal Intermodal Services - Jacksonville Terminal - Jacksonville FL",
+  "type": "Intermodal / Drayage Terminal (owned)",
+  "coords": { "lat": 30.34550, "lng": -81.69650 },
+  "geofences": {
+    "perimeter": { "south": 30.34300, "west": -81.69900, "north": 30.34780, "east": -81.69520 },
+    "truckGate": { "south": 30.34700, "west": -81.69720, "north": 30.34740, "east": -81.69640 },
+    "dropYards": [
+      { "south": 30.34300, "west": -81.69770, "north": 30.34430, "east": -81.69600 },
+      { "south": 30.34480, "west": -81.69900, "north": 30.34620, "east": -81.69700 },
+      { "south": 30.34560, "west": -81.69700, "north": 30.34700, "east": -81.69560 }
+    ],
+    "dockAprons": [
+      { "south": 30.34620, "west": -81.69740, "north": 30.34680, "east": -81.69560 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 28,
+    "trailersVisible": 230,
+    "trailerParkingCapacity": 420,
+    "truckGateCount": 2,
+    "buildingCount": 5,
+    "siteAreaAcres": 48.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.3455,-81.6965,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "remoteGs", "guardShack", "dockDoors", "multipleFacilities"],
+  "fieldNotes": {
+    "siteResolution": "Universal Intermodal Services occupies the trailer/container drayage yard portion of a large multi-tenant industrial complex at 2050 Kings Rd, Jacksonville FL, immediately east of the CSX Moncrief rail yard. The complex is shared with an Amazon delivery/sortation tenant (the long dock-door building on the south carries an Amazon banner). 'Bldg 3' in the roster address reflects the multi-building campus.",
+    "truckGate": "Site is perimeter chain-link fenced with swing gates at multiple internal points; access driveways run south off the residential streets (off Kings Rd). No barrier arm seen in Street View, but the fenced yard openings act as controlled truck-gate pinch points — classed as truckGate true / remoteGs true (no staffed booth).",
+    "guardShack": "No staffed guard booth observed in any Street View pass of the entrance drives. C-TPAT secure terminal per Universal Intermodal corporate materials implies access control, but it appears gate/fence-based, not a manned shack.",
+    "dockDoors": "~28 dock doors estimated; the long dock building is largely Amazon-tenanted, so dock count primarily serves the co-tenant rather than Universal's drayage operation. Universal's own operation is yard + an M&R-style central building with minimal docks.",
+    "dropYard": "Extensive trailer and chassis storage: a large south trailer-storage lot plus multiple in-complex trailer rows and a stacked-container yard (NE). Clear dedicated drop-yard character.",
+    "multipleFacilities": "Multi-building complex: warehouse/dock building (Amazon), central M&R building, container yard, plus outbuildings — campus layout.",
+    "railServed": "The CSX Moncrief rail yard is immediately adjacent to the west but separated by a tree buffer / drainage canal; no rail spur runs into the Universal-operated property itself — drayage moves are by truck. railServed = false."
+  },
+  "method": "deep-audit"
+}

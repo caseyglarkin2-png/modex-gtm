@@ -1,0 +1,50 @@
+{
+  "name": "Niagara Bottling - Middleburg FL",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 30.13565, "lng": -81.82680 },
+  "geofences": {
+    "perimeter": { "south": 30.13280, "west": -81.82960, "north": 30.13905, "east": -81.82520 },
+    "truckGate": { "south": 30.13420, "west": -81.82665, "north": 30.13455, "east": -81.82610 },
+    "dropYards": [
+      { "south": 30.13420, "west": -81.82650, "north": 30.13830, "east": -81.82530 }
+    ],
+    "dockAprons": [
+      { "south": 30.13430, "west": -81.82625, "north": 30.13860, "east": -81.82545 }
+    ],
+    "staging": { "south": 30.13320, "west": -81.82665, "north": 30.13420, "east": -81.82595 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 65,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 56.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.13565,-81.82680,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "scale"],
+  "fieldNotes": {
+    "facility": "Niagara Bottling Middleburg plant, ~$70M facility opened 2022 near Jacksonville. Confirmed via Street View showing blue 'Niagara' branded building facade at 565 Atlantis Dr.",
+    "truckGate": "Street View up the truck driveway shows a checkpoint structure spanning the lanes mid-driveway with perimeter chain-link fencing along the property line; modern controlled entry.",
+    "guardShack": "A booth/canopy structure is visible across the truck driveway in Street View; consistent with a manned gatehouse, though resolution leaves moderate uncertainty.",
+    "fastLaneOpportunity": "Very wide paved driveway apron (3+ lane width) at the entrance leaves ample room for an express bypass lane.",
+    "dropArea": "Long trailer drop row parallel to the building along the NE face; honest overhead estimate, ~25-50 parked trailers without tractors.",
+    "dockDoors": "Continuous dock-door rhythm runs the full NE building face (~1100 ft); estimate ~65 doors, firmly 50+ band.",
+    "scale": "No truck scale identified in overhead imagery; listed uncertain as a scale could be obscured near the gate canopy.",
+    "siteAreaAcres": "Derived from perimeter box (~690m N-S x ~420m E-W including retention ponds); ~56 acres."
+  },
+  "method": "deep-audit"
+}

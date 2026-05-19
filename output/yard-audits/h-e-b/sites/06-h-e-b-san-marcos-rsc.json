@@ -1,0 +1,54 @@
+{
+  "name": "H-E-B San Marcos RSC - San Marcos TX",
+  "type": "Retail Support Center / Distribution Center",
+  "coords": { "lat": 29.857237, "lng": -97.963000 },
+  "geofences": {
+    "perimeter": { "south": 29.85430, "west": -97.96750, "north": 29.86050, "east": -97.96030 },
+    "truckGate": { "south": 29.85990, "west": -97.96510, "north": 29.86025, "east": -97.96440 },
+    "dropYards": [
+      { "south": 29.85360, "west": -97.96700, "north": 29.85530, "east": -97.96450 },
+      { "south": 29.85770, "west": -97.96320, "north": 29.85900, "east": -97.96150 }
+    ],
+    "dockAprons": [
+      { "south": 29.85780, "west": -97.96420, "north": 29.86000, "east": -97.96200 },
+      { "south": 29.85470, "west": -97.96320, "north": 29.85620, "east": -97.96100 },
+      { "south": 29.85650, "west": -97.96420, "north": 29.85820, "east": -97.96280 }
+    ],
+    "staging": { "south": 29.85920, "west": -97.96510, "north": 29.86010, "east": -97.96380 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 85.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.857237,-97.963000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Truck gate at the north entrance off the Hunter Rd / private access road; wide paved checkpoint apron with painted lane markings splitting around the booth.",
+    "guardShack": "Distinct red-roofed booth, ~1-2 vehicle footprint, set between the truck lanes at the entrance apron (z20/z21 imagery). A separate small kiosk-like structure also visible in an adjacent lane.",
+    "fastLaneOpportunity": "Very wide gate apron with multiple painted lanes and unused paved width on either side of the booth; room to add an express bypass.",
+    "entryLanes": "Estimated 2 inbound from lane markings around the booth; resolution makes exact count uncertain.",
+    "shipRcvSeparate": "Dock banks observed on multiple distinct building faces (NE face, SE/inner-courtyard faces) consistent with separate shipping and receiving operations of a large RSC.",
+    "dockDoors": "Large multi-section RSC; dozens of dock doors with trailers backed in across the NE face, SE face and interior courtyard faces - banded 50+; door count of ~110 is an estimate.",
+    "dropYard": "Extensive marked trailer drop yard on the SW of the property plus a second trailer parking area on the NE; many trailers parked without tractors.",
+    "railServed": "A Union Pacific mainline runs parallel to the SE property line but no spur enters the site.",
+    "urbanRural": "Edge-of-town industrial corridor in San Marcos with adjacent apartments, retail strip and other warehouses; judged Urban given dense surrounding development."
+  },
+  "method": "deep-audit"
+}

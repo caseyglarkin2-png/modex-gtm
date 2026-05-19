@@ -1,0 +1,52 @@
+{
+  "name": "Detroit Reman East - Byesville OH",
+  "type": "Remanufacturing plant (engines/components)",
+  "coords": { "lat": 39.97815, "lng": -81.56675 },
+  "geofences": {
+    "perimeter": { "south": 39.9768, "west": -81.5680, "north": 39.9796, "east": -81.5656 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 39.9789, "west": -81.5677, "north": 39.9795, "east": -81.5658 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 20,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 17.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.97815,-81.56675,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea", "buildingCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "Geocoded point (ROOFTOP, moved 2417m) landed on the large modern blue/dark-roofed industrial building in the Southgate industrial park area near Byesville OH, just west of the Cambridge Country Club golf course (consistent with 'Country Club Road'). Identified this building as Detroit Reman East -- the largest, most modern facility on the parcel. A separate lighter-roofed building sits to the west (a different occupant). DTNA / Yelp / D&B confirm Detroit Diesel Remanufacturing at 60703 Country Club Rd, Byesville.",
+    "truckGate": "No controlled truck gate observed. The buildings sit in an open industrial-park road network; access roads and the shared parking lot connect directly to public roads with no barrier arm, sliding gate or guard booth at the entrance. Some perimeter chain-link fencing exists but the truck approach is uncontrolled. Flagged uncertain.",
+    "guardShack": "No guard booth visible at any entrance.",
+    "drivewayShort": "Short, direct approach from the industrial-park road to the dock apron; little stacking depth.",
+    "dockDoors": "Estimated 10-25: a single dock bank with covered dock canopies along the north face of the blue building; count approximate -- east side had active construction at imagery date.",
+    "dropArea": "0-10: only a handful of trailers in the shared lot; no dedicated drop yard.",
+    "dropYard": "No dedicated trailer-storage lot; trailers park ad hoc in the shared parking lot.",
+    "multipleFacilities": "Detroit Reman East occupies a single large building. A separate building to the west is a different occupant and not part of this facility -> multipleFacilities=false.",
+    "railServed": "No rail spur into the property.",
+    "urbanRural": "Byesville is a small Ohio town; the site is in an edge-of-town industrial park ringed by fields, woods and a golf course -> Rural.",
+    "shipRcvSeparate": "Dock activity appears concentrated on one (north) building face -> shipRcvSeparate=false; flagged uncertain due to active construction obscuring the east face.",
+    "confidence": "Medium: building identity is a reasoned best-fit (Street View cannot resolve building signage and 2025 imagery shows active construction); gate/dock determinations are imagery-based."
+  },
+  "method": "deep-audit"
+}

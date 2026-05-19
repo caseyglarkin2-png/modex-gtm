@@ -1,0 +1,52 @@
+{
+  "name": "Ford - Parts Distribution Center, Rancho Cucamonga CA",
+  "type": "Parts Distribution Center",
+  "coords": { "lat": 34.09990, "lng": -117.55250 },
+  "geofences": {
+    "perimeter": { "south": 34.09900, "west": -117.55600, "north": 34.10110, "east": -117.54920 },
+    "truckGate": { "south": 34.09900, "west": -117.55190, "north": 34.09950, "east": -117.55130 },
+    "dropYards": [
+      { "south": 34.09930, "west": -117.55520, "north": 34.09985, "east": -117.54980 },
+      { "south": 34.10030, "west": -117.55530, "north": 34.10095, "east": -117.54960 }
+    ],
+    "dockAprons": [
+      { "south": 34.09965, "west": -117.55520, "north": 34.10000, "east": -117.54980 },
+      { "south": 34.10000, "west": -117.55520, "north": 34.10040, "east": -117.54960 }
+    ],
+    "staging": { "south": 34.09930, "west": -117.55300, "north": 34.09985, "east": -117.55080 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70, "trailersVisible": 55, "trailerParkingCapacity": 90,
+    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 28.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.09990,-117.55250,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Modern (built 2000) ~449k sq ft cross-dock warehouse. Office driveway has a visible sliding gate (2025 Street View); the two truck yards (north and south faces) are fenced/walled with controlled driveway entrances.",
+    "guardShack": "No staffed guard booth visible at the driveway entrances in Street View; entrances are gated but unmanned-appearing. Flagged uncertain.",
+    "remoteGs": "Controlled gates, no booth - set true at low confidence.",
+    "dockDoors": "Long continuous dock-door banks on BOTH the north and south building faces with many trailers backed in; ~70 estimated -> 50+ band.",
+    "dropArea": "Trailer parking in both the south yard and the shared north yard; ~55 trailers visible -> 25-50 / borderline 50+ band, called 25-50 conservatively.",
+    "dropYard": "Dedicated trailer-parking lots on both the south and north sides of the building.",
+    "shipRcvSeparate": "True cross-dock building - dock banks on physically separate north and south faces.",
+    "entryExitSeparate": "Separate truck yards / driveways serve the north and south dock faces.",
+    "railServed": "No rail spur; dense Inland Empire warehouse district served entirely by truck.",
+    "urbanRural": "Dense Rancho Cucamonga industrial/logistics district off a major arterial (Milliken Ave) -> Urban.",
+    "fastLaneOpportunity": "Wide truck yards and multiple driveway aprons leave room for an express lane.",
+    "siteAreaAcres": "~449k sq ft building on a ~28-acre parcel (overhead estimate from the perimeter box)."
+  },
+  "method": "deep-audit"
+}

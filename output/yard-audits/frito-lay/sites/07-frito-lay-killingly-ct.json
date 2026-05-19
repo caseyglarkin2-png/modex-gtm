@@ -1,0 +1,63 @@
+{
+  "name": "Frito-Lay - Killingly CT",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 41.860500, "lng": -71.890500 },
+  "geofences": {
+    "perimeter": { "south": 41.855500, "west": -71.893200, "north": 41.865800, "east": -71.887500 },
+    "truckGate": { "south": 41.862400, "west": -71.893200, "north": 41.863000, "east": -71.892600 },
+    "dropYards": [
+      { "south": 41.862500, "west": -71.892200, "north": 41.865500, "east": -71.888500 },
+      { "south": 41.855600, "west": -71.892600, "north": 41.859500, "east": -71.889500 }
+    ],
+    "dockAprons": [
+      { "south": 41.860500, "west": -71.891800, "north": 41.862800, "east": -71.890600 },
+      { "south": 41.859500, "west": -71.890400, "north": 41.861500, "east": -71.888800 }
+    ],
+    "staging": { "south": 41.862000, "west": -71.892600, "north": 41.863000, "east": -71.891800 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 50,
+    "trailersVisible": 350,
+    "trailerParkingCapacity": 450,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 90.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.860500,-71.890500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "entryLanes", "exitLanes", "fastLaneOpportunity", "scale", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "ROSTER COORDINATE CORRECTION: the supplied coords landed on the Killingly Commons retail shopping center, not the plant. The real Frito-Lay Killingly plant is at 1886 Upper Maple St, ~2.3 km NW (center ~41.8605, -71.8905). A single access road off Upper Maple St crosses the New England Central rail line at a grade crossing and runs into the secured plant property; the truck entrance is a controlled gate on this access road. The wooded approach obscures the exact gate from satellite and Street View - medium confidence, flagged.",
+    "guardShack": "A guard booth is likely at this 700-employee plant given the single controlled access road, but it could not be visually confirmed - the entrance road runs under heavy tree canopy. Marked true at medium confidence and flagged.",
+    "remoteGs": "False - guard booth assumed present.",
+    "postGateStaging": "Large internal paved aprons and trailer yards between the gate and the dock banks - ample inside holding room.",
+    "drivewayLong": "Long wooded access road from Upper Maple St plus expansive internal yard - holds well over 3 trucks.",
+    "fastLaneOpportunity": "The wooded entrance road is constrained; unclear whether there is room to add an express lane - flagged, left false.",
+    "entryExitTogether": "Single access road serves both in and out.",
+    "entryLanes": "Estimated 1 inbound - low confidence, entrance obscured by tree canopy.",
+    "exitLanes": "Estimated 1 outbound - low confidence.",
+    "dockDoors": "Long dock banks on multiple building faces (north face and east/SE faces) with many trailers backed in. Total estimated ~50 - 50+ band.",
+    "dropArea": "Very extensive trailer drop yards on the north (paved) and south/SW (gravel overflow lot) - hundreds of trailers in long rows, far exceeding 50 stalls.",
+    "shipRcvSeparate": "Dock banks on physically distinct building faces (north face and east/SE faces) indicating separate shipping/receiving clusters.",
+    "urbanRural": "Located in the small town of Dayville (Killingly), CT, surrounded by woods, lakes/ponds, and a quarry; small-town/rural industrial setting - Rural.",
+    "multipleFacilities": "Single large connected plant building mass with attached process structures - not a multi-cluster campus.",
+    "scale": "No truck scale clearly identifiable - low confidence.",
+    "railServed": "Confirmed - the New England Central rail line runs along the west side of the property; the plant access road crosses it at a grade crossing and a spur appears to serve the site.",
+    "siteAreaAcres": "Perimeter box yields ~90 acres including the plant building and the north and south drop yards.",
+    "trailersVisible": "~350 trailers counted across the north paved yard, south gravel yard, and dock faces - approximate.",
+    "dockDoorCount": "Overhead estimate; dock faces partially obscured by backed-in trailers - moderate confidence."
+  },
+  "method": "deep-audit"
+}

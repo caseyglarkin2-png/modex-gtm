@@ -1,0 +1,51 @@
+{
+  "name": "General Mills - Great Falls MT (Flour Mill)",
+  "type": "Flour Mill",
+  "coords": { "lat": 47.515200, "lng": -111.261600 },
+  "geofences": {
+    "perimeter": { "south": 47.514700, "west": -111.264000, "north": 47.515900, "east": -111.259500 },
+    "truckGate": { "south": 47.515400, "west": -111.262000, "north": 47.515700, "east": -111.261400 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 47.514900, "west": -111.260800, "north": 47.515300, "east": -111.259900 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 6,
+    "trailersVisible": 2,
+    "trailerParkingCapacity": 8,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 12.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@47.515200,-111.261600,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": true, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "truckGate", "scale", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Confirmed at 2500 9th Ave N, Great Falls, MT 59401 - an active General Mills flour mill / grain elevator. Roster geocode moved 49m and resolved correctly onto the mill. Verified by web search (Montana Chamber grain-elevator listing, CMac grain-elevator directory) and a 'General Mills' sign visible on the building in Street View.",
+    "facilityCharacter": "This is a grain-milling / flour-mill operation, not a truck-yard distribution site. The complex runs E-W along a rail corridor: tall grain-elevator silos on the W, processing/mill buildings in the center, a long warehouse on the E. Freight is predominantly RAIL - covered hopper railcars sit on multiple sidings against the mill and warehouse in both satellite and Street View imagery.",
+    "truckGate": "Chain-link perimeter fencing is visible along the property frontage in Street View. Truck access is via gates in that fence off the gravel rail-side service road / 9th Ave N. No barrier arm crisply visible, so flagged uncertain - classified true on the fenced-perimeter-with-gated-access basis.",
+    "guardShack": "No staffed guard booth visible at or near the gates in satellite or Street View imagery. false -> remoteGs=true.",
+    "dockDoors": "Truck operations are secondary: a flour-truck loadout area near the silos and a modest dock canopy on the warehouse S face. Estimated 0-10 truck dock doors. Most loading is into railcars, not trucks.",
+    "dropArea": "No dedicated trailer drop yard on-site - dropArea=NONE, dropYard=false. Only 1-2 trailers visible in the yard in the imagery captured.",
+    "scale": "Grain mills almost always weigh inbound/outbound trucks; a truck scale is highly likely near the truck loadout but could not be crisply isolated in overhead imagery - scale=true at low confidence, flagged uncertain.",
+    "railServed": "Strongly rail-served - covered hopper railcars on multiple sidings against the mill and warehouse; this is the primary freight mode for a flour mill.",
+    "urbanRural": "Within the city of Great Falls, surrounded by residential blocks to the S and commercial/industrial development to the N - Urban.",
+    "buildingCount": "Counted as 3: the grain-elevator/silo headhouse, the central mill/processing building, and the long E warehouse - one contiguous campus, multipleFacilities=false.",
+    "entryLanes": "Single combined entry/exit via gravel service road; precise lane count not determinable - estimated 1/1."
+  },
+  "method": "deep-audit"
+}

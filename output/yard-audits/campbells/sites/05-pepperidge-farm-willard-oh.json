@@ -1,0 +1,46 @@
+{
+  "name": "Pepperidge Farm - Willard OH",
+  "type": "Manufacturing - bakery (primary Goldfish cracker plant)",
+  "coords": { "lat": 41.054400, "lng": -82.708500 },
+  "geofences": {
+    "perimeter": { "south": 41.05180, "west": -82.71300, "north": 41.05700, "east": -82.70380 },
+    "truckGate": { "south": 41.05330, "west": -82.71370, "north": 41.05400, "east": -82.71270 },
+    "dropYards": [
+      { "south": 41.05420, "west": -82.70720, "north": 41.05620, "east": -82.70400 }
+    ],
+    "dockAprons": [
+      { "south": 41.05480, "west": -82.71000, "north": 41.05640, "east": -82.70720 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 50, "trailersVisible": 130, "trailerParkingCapacity": 180,
+    "truckGateCount": 1, "buildingCount": 5, "siteAreaAcres": 110.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.054400,-82.708500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Single access road off State Route 103 E (~41.0533,-82.7137) with a Pepperidge Farm sign; chain-link perimeter fence visible along the access drive. Controlled gate inferred, set back from the public road.",
+    "guardShack": "No guard booth visible at the public-road junction (plant set back behind grass buffer). Marked false / remoteGs true at medium confidence.",
+    "dropYard": "Very large trailer drop yard on the east side of the plant with many rows of parked trailers (100+).",
+    "dockDoorCount": "Extensive dock banks on the north and around the plant; trailers backed in. ~50 estimate banded 50+, low confidence.",
+    "multipleFacilities": "Bakery plant complex with attached process buildings, silos, and a separate large warehouse block to the NE.",
+    "fastLaneOpportunity": "Long access drive and wide internal yard aprons.",
+    "siteAreaAcres": "Derived from perimeter box ~580m N-S x ~770m E-W.",
+    "locationResolution": "Roster coordinates (APPROXIMATE) landed in residential Willard; web search located plant at 3320 State Route 103 E. Confirmed by satellite."
+  },
+  "method": "deep-audit"
+}

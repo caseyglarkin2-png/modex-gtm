@@ -1,0 +1,440 @@
+{
+  "account": "Hormel Foods",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 27,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Hormel Flagship Austin Plant - Austin MN",
+      "city": "Austin",
+      "state": "MN",
+      "type": "Meat Processing Plant",
+      "address": "1 Hormel Place, Austin, MN 55912",
+      "lat": 43.68237,
+      "lng": -92.968394,
+      "source": "Hormel careers 'Our Locations' page + dossier (flagship, 1.3M sq ft, SPAM/Cure 81/bacon)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1817
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Hormel Algona Plant - Algona IA",
+      "city": "Algona",
+      "state": "IA",
+      "type": "Meat Processing Plant",
+      "address": "P.O. Box 487, 100 Hormel Dr, Algona, IA 50511",
+      "lat": 43.079868,
+      "lng": -94.222893,
+      "source": "Hormel careers 'Our Locations' page + dossier (live-hog protein plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1042
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Progressive Processing - Dubuque IA",
+      "city": "Dubuque",
+      "state": "IA",
+      "type": "Production Facility",
+      "address": "11400 Stratton Dr, Dubuque, IA 52003",
+      "lat": 42.41162,
+      "lng": -90.658333,
+      "source": "Hormel careers 'Our Locations' page + PR Newswire (microwaveable/shelf-stable entrees)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 9396
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Hormel Knoxville Plant - Knoxville IA",
+      "city": "Knoxville",
+      "state": "IA",
+      "type": "Production Facility",
+      "address": "703 E Robinson St, Knoxville, IA 50138",
+      "lat": 41.318297,
+      "lng": -93.091383,
+      "source": "Hormel careers 'Our Locations' page + dossier (named plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 29
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Osceola Food - Osceola IA",
+      "city": "Osceola",
+      "state": "IA",
+      "type": "Meat Processing Plant",
+      "address": "2280 W McLane St, Osceola, IA 50213",
+      "lat": 41.030578,
+      "lng": -93.773051,
+      "source": "Hormel careers 'Our Locations' page + dossier (named plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 3
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Burke Corp. - Nevada IA",
+      "city": "Nevada",
+      "state": "IA",
+      "type": "Production Facility",
+      "address": "1601 9th St, Nevada, IA 50201",
+      "lat": 42.026791,
+      "lng": -93.448181,
+      "source": "Hormel careers 'Our Locations' page (pizza toppings/pepperoni)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 3
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Dold Foods - Wichita KS",
+      "city": "Wichita",
+      "state": "KS",
+      "type": "Meat Processing Plant",
+      "address": "2929 N Ohio St, Wichita, KS 67219",
+      "lat": 37.736379,
+      "lng": -97.325459,
+      "source": "Hormel careers 'Our Locations' page + web search (bacon, ~760 employees)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 2004
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Alma Foods - Alma KS",
+      "city": "Alma",
+      "state": "KS",
+      "type": "Production Facility",
+      "address": "215 Missouri St, Alma, KS 66401",
+      "lat": 39.012236,
+      "lng": -96.289857,
+      "source": "Hormel careers 'Our Locations' page + Wikipedia",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 28
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Hormel Atlanta Plant - Tucker GA",
+      "city": "Tucker",
+      "state": "GA",
+      "type": "Production Facility",
+      "address": "3700 Mountain Industrial Blvd, Tucker, GA 30084",
+      "lat": 33.86701,
+      "lng": -84.188105,
+      "source": "Hormel careers 'Our Locations' page + dossier (bacon line closed 2025; runs chili/Dinty Moore)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Creative Contract Packaging - Aurora IL",
+      "city": "Aurora",
+      "state": "IL",
+      "type": "Production Facility",
+      "address": "2001 Bilter Rd, Aurora, IL 60502",
+      "lat": 41.806642,
+      "lng": -88.267623,
+      "source": "Hormel careers 'Our Locations' page + dossier (named plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 1
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Fontanini Foods - McCook IL",
+      "city": "McCook",
+      "state": "IL",
+      "type": "Meat Processing Plant",
+      "address": "8499 W 47th St, McCook, IL 60525",
+      "lat": 41.80571,
+      "lng": -87.833375,
+      "source": "Hormel careers 'Our Locations' page (Italian meats/sausage)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 2
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Rochelle Foods - Rochelle IL",
+      "city": "Rochelle",
+      "state": "IL",
+      "type": "Meat Processing Plant",
+      "address": "200 Caron Rd, Rochelle, IL 61068",
+      "lat": 41.935628,
+      "lng": -89.054638,
+      "source": "Hormel careers 'Our Locations' page + Wikipedia (pork processing, ~800 workers)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 1
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Papillion Foods - Papillion NE",
+      "city": "Papillion",
+      "state": "NE",
+      "type": "Production Facility",
+      "address": "11840 Standing Stone Dr, Papillion, NE 68046",
+      "lat": 41.15444,
+      "lng": -96.043031,
+      "source": "Hormel careers 'Our Locations' page + MEAT+POULTRY (dry sausage)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 60
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Skippy Foods - Little Rock AR",
+      "city": "Little Rock",
+      "state": "AR",
+      "type": "Production Facility",
+      "address": "5111 Fairway Ave, Little Rock, AR 72204",
+      "lat": 34.801934,
+      "lng": -92.230937,
+      "source": "Hormel careers 'Our Locations' page (Skippy peanut butter)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 47
+      }
+    },
+    {
+      "idx": 15,
+      "name": "Hormel Fort Smith Plant - Fort Smith AR",
+      "city": "Fort Smith",
+      "state": "AR",
+      "type": "Production Facility",
+      "address": "4307 Planters Rd, Fort Smith, AR 72908",
+      "lat": 35.305593,
+      "lng": -94.38152,
+      "source": "Hormel careers 'Our Locations' page (Planters nuts/snacks)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 5
+      }
+    },
+    {
+      "idx": 16,
+      "name": "Hormel Beloit Plant - Beloit WI",
+      "city": "Beloit",
+      "state": "WI",
+      "type": "Production Facility",
+      "address": "2001 Gateway Blvd, Beloit, WI 53511",
+      "lat": 42.532852,
+      "lng": -88.956507,
+      "source": "Hormel careers 'Our Locations' page (Hormel Compleats/shelf-stable entrees)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 113
+      }
+    },
+    {
+      "idx": 17,
+      "name": "Century Foods International - Sparta WI",
+      "city": "Sparta",
+      "state": "WI",
+      "type": "Production Facility",
+      "address": "400 Century Court, Sparta, WI 54656",
+      "lat": 43.94221,
+      "lng": -90.792002,
+      "source": "Hormel careers 'Our Locations' page (nutritional products/protein powders)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1613
+      }
+    },
+    {
+      "idx": 18,
+      "name": "Columbus Craft Meats - Hayward CA",
+      "city": "Hayward",
+      "state": "CA",
+      "type": "Meat Processing Plant",
+      "address": "30977 San Clemente St, Hayward, CA 94544",
+      "lat": 37.612527,
+      "lng": -122.053272,
+      "source": "Hormel careers 'Our Locations' page (Columbus salami/charcuterie)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 63
+      }
+    },
+    {
+      "idx": 19,
+      "name": "Swiss American Sausage Co. - Lathrop CA",
+      "city": "Lathrop",
+      "state": "CA",
+      "type": "Meat Processing Plant",
+      "address": "16500 Harlan Rd, Lathrop, CA 95330",
+      "lat": 37.811459,
+      "lng": -121.294505,
+      "source": "Hormel careers 'Our Locations' page (sausage products)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 32
+      }
+    },
+    {
+      "idx": 20,
+      "name": "Hormel Stockton Plant / Fresno - Fresno CA",
+      "city": "Fresno",
+      "state": "CA",
+      "type": "Production Facility",
+      "address": "3438 W Pontiac Way, Fresno, CA 93722",
+      "lat": 36.789503,
+      "lng": -119.886569,
+      "source": "Hormel careers 'Our Locations' page (Fresno Plant; dossier also names Stockton CA)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 1
+      }
+    },
+    {
+      "idx": 21,
+      "name": "Hormel Suffolk Plant - Suffolk VA",
+      "city": "Suffolk",
+      "state": "VA",
+      "type": "Production Facility",
+      "address": "1 Planters St, Suffolk, VA 23434",
+      "lat": 36.723019,
+      "lng": -76.619984,
+      "source": "Hormel careers 'Our Locations' page (Planters nuts/peanut processing)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 57
+      }
+    },
+    {
+      "idx": 22,
+      "name": "Dan's Prize - Long Prairie MN",
+      "city": "Long Prairie",
+      "state": "MN",
+      "type": "Meat Processing Plant",
+      "address": "20 Riverside Dr, Long Prairie, MN 56347",
+      "lat": 45.975374,
+      "lng": -94.865992,
+      "source": "Hormel careers 'Our Locations' page + web search (cooked roast beef/pastrami/corned beef)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 2
+      }
+    },
+    {
+      "idx": 23,
+      "name": "Lloyd's Barbeque Company - Mendota Heights MN",
+      "city": "Mendota Heights",
+      "state": "MN",
+      "type": "Production Facility",
+      "address": "1455 Mendota Heights Rd, Mendota Heights, MN 55120",
+      "lat": 44.86629,
+      "lng": -93.170877,
+      "source": "Hormel careers 'Our Locations' page (Lloyd's BBQ ribs/pulled pork)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 74
+      }
+    },
+    {
+      "idx": 24,
+      "name": "Jennie-O Turkey Store - Willmar MN",
+      "city": "Willmar",
+      "state": "MN",
+      "type": "Meat Processing Plant",
+      "address": "2505 Willmar Ave SE, Willmar, MN 56201",
+      "lat": 45.110536,
+      "lng": -95.008269,
+      "source": "Jennie-O Wikipedia + dossier (Jennie-O HQ; turkey processing, multi-plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 2
+      }
+    },
+    {
+      "idx": 25,
+      "name": "Jennie-O Turkey Store - Melrose MN",
+      "city": "Melrose",
+      "state": "MN",
+      "type": "Meat Processing Plant",
+      "address": "123 5th Ave E, Melrose, MN 56352",
+      "lat": 45.675694,
+      "lng": -94.807948,
+      "source": "Web search (Jennie-O turkey plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 20
+      }
+    },
+    {
+      "idx": 26,
+      "name": "Jennie-O Turkey Store - Barron WI",
+      "city": "Barron",
+      "state": "WI",
+      "type": "Meat Processing Plant",
+      "address": "34 N 7th St, Barron, WI 54812",
+      "lat": 45.40239,
+      "lng": -91.847592,
+      "source": "Web search (Jennie-O turkey plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 122
+      }
+    },
+    {
+      "idx": 27,
+      "name": "Hormel / DHL Southaven Distribution Center - Southaven MS",
+      "city": "Southaven",
+      "state": "MS",
+      "type": "Distribution Center",
+      "address": "8690 Tulane Rd W, Southaven, MS 38671",
+      "lat": 34.988048,
+      "lng": -90.040999,
+      "source": "Web search + dossier (280,000 sq ft, Hormel's largest DC, opened summer 2025, DHL-operated)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 6135
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

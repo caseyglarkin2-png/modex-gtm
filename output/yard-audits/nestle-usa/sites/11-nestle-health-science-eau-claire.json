@@ -1,0 +1,69 @@
+{
+  "name": "Nestlé Health Science - Eau Claire WI",
+  "type": "Nutritional beverage manufacturing plant",
+  "coords": { "lat": 44.831500, "lng": -91.525300 },
+  "geofences": {
+    "perimeter": { "south": 44.829500, "west": -91.527800, "north": 44.834000, "east": -91.523200 },
+    "truckGate": { "south": 44.832950, "west": -91.528100, "north": 44.833400, "east": -91.527400 },
+    "dropYards": [
+      { "south": 44.832600, "west": -91.527000, "north": 44.833300, "east": -91.525900 }
+    ],
+    "dockAprons": [
+      { "south": 44.830200, "west": -91.524600, "north": 44.832300, "east": -91.523600 },
+      { "south": 44.832300, "west": -91.526500, "north": 44.833000, "east": -91.525200 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 32,
+    "trailersVisible": 22,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 33.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.8315,-91.5253,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "shipRcvSeparate", "exitLanes"],
+  "fieldNotes": {
+    "locationResolution": "Roster address (3185 Galloway St) and coordinates (44.8212, -91.4667) were approximate / RANGE_INTERPOLATED. Web research confirmed the actual plant address as 1200 Nestlé Ave, Eau Claire WI 54703. Satellite at 44.8321,-91.5260 showed the large NW-SE-oriented manufacturing complex; locked center 44.8315,-91.5253. Roster point was ~6 km off.",
+    "truckGate": "Street View (2023-07 and 2024-08) of the NW driveway off the property frontage road shows a controlled checkpoint: a guard booth with canopy in the driveway throat plus perimeter fencing (decorative brick wall + black metal fence) running the property line.",
+    "guardShack": "Small canopied booth structure visible in Street View at the entrance throat, separate from the main building, ~1-2 vehicle footprint beside the inbound lane.",
+    "fastLaneOpportunity": "Wide paved entrance apron and a large interior paved yard immediately inside the gate give room to add an express bypass lane.",
+    "drivewayLong": "Gate-to-dock approach crosses a large open paved yard (NW staging area) that can hold 3+ trucks before reaching the dock faces.",
+    "dockDoors": "East building face shows a continuous run of ~18-20 dock doors with trailers backed in; NW corner dock apron adds ~8-12 more. Total estimated ~32, banded 25-50. Count is approximate from overhead imagery.",
+    "shipRcvSeparate": "Two physically distinct dock banks on different faces (long east face and NW-corner face) suggest separate shipping/receiving clusters; medium confidence.",
+    "dropYard": "Trailers staged on the open paved yard in the NW corner near ancillary buildings, separate from active dock positions.",
+    "postGateStaging": "Large open paved yard inside the gate before the dock faces serves as a holding/queue area.",
+    "urbanRural": "Facility sits inside the City of Eau Claire's developed fabric, surrounded by residential streets on the west and south; classified Urban.",
+    "buildingCount": "Main sprawling production complex plus a standalone older warehouse building to the south and ancillary sheds/storage-tank structures in the NW yard.",
+    "exitLanes": "Single combined entry/exit at the one gate; exit lane count inferred as 1, not separately confirmed.",
+    "railServed": "No rail spur visible entering the property."
+  },
+  "method": "deep-audit"
+}

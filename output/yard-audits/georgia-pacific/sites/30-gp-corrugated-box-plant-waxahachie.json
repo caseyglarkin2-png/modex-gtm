@@ -1,0 +1,67 @@
+{
+  "name": "GP Corrugated Box Plant - Waxahachie TX",
+  "type": "Corrugated Box Plant",
+  "coords": { "lat": 32.442000, "lng": -96.848000 },
+  "geofences": {
+    "perimeter": { "south": 32.439500, "west": -96.850300, "north": 32.446500, "east": -96.845800 },
+    "truckGate": { "south": 32.440800, "west": -96.850300, "north": 32.441600, "east": -96.849500 },
+    "dropYards": [
+      { "south": 32.443200, "west": -96.850300, "north": 32.446500, "east": -96.848600 },
+      { "south": 32.443400, "west": -96.847200, "north": 32.445400, "east": -96.846000 }
+    ],
+    "dockAprons": [
+      { "south": 32.443200, "west": -96.848200, "north": 32.445200, "east": -96.846800 }
+    ],
+    "staging": { "south": 32.441600, "west": -96.849600, "north": 32.443200, "east": -96.848200 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 28,
+    "trailersVisible": 80,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 81.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.4420,-96.8480,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea", "trailersVisible", "trailerParkingCapacity", "truckGateCount", "scale", "entryLanes", "exitLanes", "urbanRural"],
+  "fieldNotes": {
+    "location": "Roster had no street address; coords pointed at open farmland ~7 km off (geocode moved 7299 m). Actual GP Corrugated box plant is at 5800 N Interstate Hwy 35E, Waxahachie TX 75165, on the west side of I-35E north of Waxahachie between FM-387 and FM-406. Confirmed via Waxahachie Chamber of Commerce and business listings; locked center ~32.4420,-96.8480.",
+    "truckGate": "Open driveway access from the I-35E frontage road; chain-link perimeter fencing present but no barrier arm, sliding gate or guard booth resolved at the road in Street View. Typical un-gated Texas industrial-plant entry. Flagged uncertain.",
+    "guardShack": "No staffed booth visible at the driveways.",
+    "dropYard": "Large dedicated trailer-storage yards: dozens of trailers parked in marked angled rows along the building's NW and W sides; substantial drop-yard operation for a corrugated box plant.",
+    "dropArea": "80+ trailers staged across the drop yards in the captured imagery.",
+    "dockDoors": "Trailers backed into a long dock bank along the building's NE face plus additional dock activity; estimated 25-50 dock doors for this large box plant.",
+    "scale": "No truck scale clearly resolved; box plants generally do not weigh — left false.",
+    "shipRcvSeparate": "Shipping and receiving appear to run from the same general dock complex; not clearly two separate banks.",
+    "railServed": "An active rail line runs along the E edge of the property with a spur (visible in satellite).",
+    "urbanRural": "On the edge of Waxahachie along I-35E in an industrial corridor with adjacent distribution warehouses but surrounded by farmland; judged Rural per the small-town tie-breaker, flagged uncertain.",
+    "buildingCount": "One large monolithic manufacturing building (with attached process/utility structures at the SW); counted as 1."
+  },
+  "method": "deep-audit"
+}

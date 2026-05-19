@@ -1,0 +1,51 @@
+{
+  "name": "Danone - Mount Crawford VA",
+  "type": "Multi-category beverage plant (refrigerated)",
+  "coords": { "lat": 38.36880, "lng": -78.93980 },
+  "geofences": {
+    "perimeter": { "south": 38.36590, "west": -78.94280, "north": 38.37240, "east": -78.93680 },
+    "truckGate": { "south": 38.36560, "west": -78.93800, "north": 38.36620, "east": -78.93720 },
+    "dropYards": [
+      { "south": 38.36830, "west": -78.94170, "north": 38.37060, "east": -78.94010 },
+      { "south": 38.36950, "west": -78.94010, "north": 38.37150, "east": -78.93820 },
+      { "south": 38.36680, "west": -78.94150, "north": 38.36810, "east": -78.94000 }
+    ],
+    "dockAprons": [
+      { "south": 38.36720, "west": -78.94060, "north": 38.36980, "east": -78.94010 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60, "trailersVisible": 180, "trailerParkingCapacity": 220,
+    "truckGateCount": 2, "buildingCount": 4, "siteAreaAcres": 93.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.36880,-78.93980,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Both road accesses off South Valley Pike are wide open driveways with no barrier arm, sliding gate, or checkpoint pinch-point. Street View at the east main entry (38.3657,-78.9376) shows an open driveway with only directional signage ('ALL LIQUID AND OKARA RECEIVING / ALL COLD & DRY STORAGE RECEIVING OFF #1'), confirming a self-routed ungated site.",
+    "guardShack": "No staffed booth visible at any entrance; drivers self-route via posted signs.",
+    "multipleFacilities": "Campus: main 640k sq ft refrigerated plant, a separate west annex/DC building with its own docks and trailer rows, a wastewater treatment area, plus an extensive tank/silo farm.",
+    "dropArea": "Hundreds of trailers parked in long rows along the west and north perimeter of the main building and around the annex; clearly a 50+ drop operation.",
+    "dockDoors": "Long dock apron on the west face of the main building with many trailers backed in (~40-50 doors), plus additional dock banks on the annex and the liquid-receiving area; total estimated 60, banded 50+.",
+    "shipRcvSeparate": "Posted signage directs liquid/okara receiving and cold/dry receiving to different entrances/dock areas; receiving and shipping run from physically distinct dock clusters.",
+    "scale": "No truck scale identified in overhead imagery; possible but not confirmed - listed uncertain.",
+    "fastLaneOpportunity": "Very wide entrance aprons and large internal yard with ample unused paved width.",
+    "entryExitSeparate": "Two separate road accesses off South Valley Pike (east main entry and a central/west drive), functioning as distinct in/out points.",
+    "railServed": "No rail spur runs into the property.",
+    "postGateStaging": "Large paved internal yard between the trailer rows and the dock doors provides ample interior staging."
+  },
+  "method": "deep-audit"
+}

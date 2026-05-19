@@ -1,0 +1,194 @@
+{
+  "account": "JM Smucker",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 17,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Coffee Roasting - New Orleans LA",
+      "city": "New Orleans",
+      "state": "LA",
+      "type": "Manufacturing - Coffee roasting/packaging (bulk)",
+      "address": "14601 Old Gentilly Rd, New Orleans, LA 70129",
+      "lat": 30.0145,
+      "lng": -89.9472,
+      "source": "Dossier names NOLA as largest bulk coffee facility in the world; address from web search (Old Gentilly Rd roasting plant)"
+    },
+    {
+      "idx": 2,
+      "name": "Coffee Silo Operations - New Orleans LA",
+      "city": "New Orleans",
+      "state": "LA",
+      "type": "Distribution/Processing - Green coffee bean silo operations",
+      "address": "5242 Coffee Dr, New Orleans, LA 70115",
+      "lat": 29.9295,
+      "lng": -90.0801,
+      "source": "Web search (Smucker Coffee Silo Operations LLC); separate raw coffee processing/storage node feeding the roasting plant"
+    },
+    {
+      "idx": 3,
+      "name": "Uncrustables - McCalla AL",
+      "city": "McCalla",
+      "state": "AL",
+      "type": "Manufacturing - Frozen handhelds (Uncrustables)",
+      "address": "Sutton Place / Bibb County Industrial Park, McCalla, AL 35111",
+      "lat": 33.2454,
+      "lng": -87.0508,
+      "source": "Dossier ($1.1B, 900,000 sq ft, opened Oct 2024, 3rd Uncrustables plant); exact street address not publicly disclosed - in Birmingham/McCalla industrial park"
+    },
+    {
+      "idx": 4,
+      "name": "Uncrustables - Longmont CO",
+      "city": "Longmont",
+      "state": "CO",
+      "type": "Manufacturing - Frozen handhelds (Uncrustables)",
+      "address": "11555 N 75th St, Longmont, CO 80503",
+      "lat": 40.1962,
+      "lng": -105.1167,
+      "source": "Dossier ($340M plant, ~280M sandwiches/year); address from Longmont facility records"
+    },
+    {
+      "idx": 5,
+      "name": "Uncrustables - Scottsville KY",
+      "city": "Scottsville",
+      "state": "KY",
+      "type": "Manufacturing - Frozen handhelds (Uncrustables)",
+      "address": "299 Smucker Way, Scottsville, KY 42164",
+      "lat": 36.7531,
+      "lng": -86.1903,
+      "source": "Dossier (original Uncrustables plant, ~500 employees, opened 2004); address from web research"
+    },
+    {
+      "idx": 6,
+      "name": "Smucker's Spreads/Toppings - Orrville OH",
+      "city": "Orrville",
+      "state": "OH",
+      "type": "Manufacturing - Fruit spreads, syrups, ice cream toppings",
+      "address": "1 Strawberry Lane, Orrville, OH 44667",
+      "lat": 40.8395,
+      "lng": -81.7646,
+      "source": "Dossier (HQ + manufacturing); Strawberry Lane address from web search - production plant adjacent to corporate HQ"
+    },
+    {
+      "idx": 7,
+      "name": "Jif Peanut Butter - Lexington KY",
+      "city": "Lexington",
+      "state": "KY",
+      "type": "Manufacturing - Peanut butter (Jif)",
+      "address": "767 Winchester Rd, Lexington, KY 40505",
+      "lat": 38.0612,
+      "lng": -84.4719,
+      "source": "Web search - world's largest peanut butter factory; dossier mislabeled Jif plant as Memphis, corrected to Lexington KY per multiple sources"
+    },
+    {
+      "idx": 8,
+      "name": "Smucker's Peanut Butter - New Bethlehem PA",
+      "city": "New Bethlehem",
+      "state": "PA",
+      "type": "Manufacturing - Peanut butter / spreads",
+      "address": "Keck Ave, New Bethlehem, PA 16242",
+      "lat": 41.0017,
+      "lng": -79.3306,
+      "source": "Dossier + web search (one of three Smucker peanut butter facilities, factory on Keck Avenue)"
+    },
+    {
+      "idx": 9,
+      "name": "R.W. Knudsen Juices - Chico CA",
+      "city": "Chico",
+      "state": "CA",
+      "type": "Manufacturing - Juices/beverages (Knudsen)",
+      "address": "37 Speedway Ave, Chico, CA 95928",
+      "lat": 39.7332,
+      "lng": -121.8388,
+      "source": "Dossier (Knudsen) + web search; note Smucker has divested some natural/organic beverage lines - facility status to confirm in deep audit"
+    },
+    {
+      "idx": 10,
+      "name": "Smucker Plant - Salinas CA",
+      "city": "Salinas",
+      "state": "CA",
+      "type": "Manufacturing - Fruit/produce processing",
+      "address": "Salinas, CA 93901",
+      "lat": 36.6777,
+      "lng": -121.6555,
+      "source": "Dossier + Wikipedia (manufacturing plant opened 1960); exact street address not publicly confirmed"
+    },
+    {
+      "idx": 11,
+      "name": "Smucker Plant - Havre de Grace MD",
+      "city": "Havre de Grace",
+      "state": "MD",
+      "type": "Manufacturing - Spreads / portion control products",
+      "address": "1601 Pulaski Hwy, Havre de Grace, MD 21078",
+      "lat": 39.5276,
+      "lng": -76.1227,
+      "source": "Dossier + Wikipedia facilities list; approximate address from industrial corridor"
+    },
+    {
+      "idx": 12,
+      "name": "Milk-Bone Pet Treats - Buffalo NY",
+      "city": "Buffalo",
+      "state": "NY",
+      "type": "Manufacturing - Pet treats (Milk-Bone), ambient + refrigerated",
+      "address": "243 Urban St, Buffalo, NY 14211",
+      "lat": 42.9072,
+      "lng": -78.8221,
+      "source": "Dossier ($52.6M expansion, 550,000 sq ft) + web search confirming 243 Urban St"
+    },
+    {
+      "idx": 13,
+      "name": "Meow Mix Pet Food - Decatur AL",
+      "city": "Decatur",
+      "state": "AL",
+      "type": "Manufacturing - Cat food (Meow Mix)",
+      "address": "1200 Market St NE, Decatur, AL 35601",
+      "lat": 34.6126,
+      "lng": -86.9776,
+      "source": "Web search (The Meow Mix Company, Smucker pet food plant, ~200,000 sq ft); not in dossier but a confirmed Smucker pet manufacturing site"
+    },
+    {
+      "idx": 14,
+      "name": "Pet Food Plant - Topeka KS",
+      "city": "Topeka",
+      "state": "KS",
+      "type": "Manufacturing/Distribution - Pet food plant + distribution center",
+      "address": "Topeka, KS 66619",
+      "lat": 38.9717,
+      "lng": -95.689,
+      "source": "Dossier (distribution/processing node) + web search (Smucker pet food processing plant and distribution center in Topeka); exact street address not publicly confirmed"
+    },
+    {
+      "idx": 15,
+      "name": "Hostess Bakery - Emporia KS",
+      "city": "Emporia",
+      "state": "KS",
+      "type": "Manufacturing - Sweet baked snacks (Hostess)",
+      "address": "1525 Industrial Rd, Emporia, KS 66801",
+      "lat": 38.3795,
+      "lng": -96.1652,
+      "source": "Dossier (operating Hostess plant) + web search confirming 1525 Industrial Rd"
+    },
+    {
+      "idx": 16,
+      "name": "Hostess Bakery - Arkadelphia AR",
+      "city": "Arkadelphia",
+      "state": "AR",
+      "type": "Manufacturing - Sweet baked snacks (Hostess Donettes)",
+      "address": "1 Hostess Way, Arkadelphia, AR 71923",
+      "lat": 34.0958,
+      "lng": -93.0876,
+      "source": "Dossier (operating Hostess plant) + web search confirming 1 Hostess Way"
+    },
+    {
+      "idx": 17,
+      "name": "Hostess Bakery - Columbus GA",
+      "city": "Columbus",
+      "state": "GA",
+      "type": "Manufacturing - Sweet baked snacks (Hostess), $120M expansion underway",
+      "address": "1969 Victory Dr, Columbus, GA 31901",
+      "lat": 32.448,
+      "lng": -84.9712,
+      "source": "Dossier (operating Hostess plant + $120M expansion completing 2027) + web search confirming 1969 Victory Dr"
+    }
+  ]
+}

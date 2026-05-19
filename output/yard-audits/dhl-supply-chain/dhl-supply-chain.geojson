@@ -1,0 +1,4545 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1465,
+              41.647
+            ],
+            [
+              -88.14,
+              41.647
+            ],
+            [
+              -88.14,
+              41.654
+            ],
+            [
+              -88.1465,
+              41.654
+            ],
+            [
+              -88.1465,
+              41.647
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Diageo Campus - Plainfield/Bolingbrook IL",
+        "type": "Dedicated Customer Distribution Center (spirits)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 47,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1429,
+              41.65195
+            ],
+            [
+              -88.142,
+              41.65195
+            ],
+            [
+              -88.142,
+              41.65285
+            ],
+            [
+              -88.1429,
+              41.65285
+            ],
+            [
+              -88.1429,
+              41.65195
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Diageo Campus - Plainfield/Bolingbrook IL",
+        "type": "Dedicated Customer Distribution Center (spirits)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1462,
+              41.65
+            ],
+            [
+              -88.1449,
+              41.65
+            ],
+            [
+              -88.1449,
+              41.6534
+            ],
+            [
+              -88.1462,
+              41.6534
+            ],
+            [
+              -88.1462,
+              41.65
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Diageo Campus - Plainfield/Bolingbrook IL",
+        "type": "Dedicated Customer Distribution Center (spirits)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1452,
+              41.6479
+            ],
+            [
+              -88.1441,
+              41.6479
+            ],
+            [
+              -88.1441,
+              41.6534
+            ],
+            [
+              -88.1452,
+              41.6534
+            ],
+            [
+              -88.1452,
+              41.6479
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Diageo Campus - Plainfield/Bolingbrook IL",
+        "type": "Dedicated Customer Distribution Center (spirits)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1429,
+              41.6485
+            ],
+            [
+              -88.1415,
+              41.6485
+            ],
+            [
+              -88.1415,
+              41.6525
+            ],
+            [
+              -88.1429,
+              41.6525
+            ],
+            [
+              -88.1429,
+              41.6485
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Diageo Campus - Plainfield/Bolingbrook IL",
+        "type": "Dedicated Customer Distribution Center (spirits)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3556,
+              39.7373
+            ],
+            [
+              -86.3514,
+              39.7373
+            ],
+            [
+              -86.3514,
+              39.741
+            ],
+            [
+              -86.3556,
+              39.741
+            ],
+            [
+              -86.3556,
+              39.7373
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - IDS Fulfillment HQ DC - Plainfield IN",
+        "type": "Multi-Customer E-Commerce Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 36,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.355,
+              39.7379
+            ],
+            [
+              -86.3542,
+              39.7379
+            ],
+            [
+              -86.3542,
+              39.74
+            ],
+            [
+              -86.355,
+              39.74
+            ],
+            [
+              -86.355,
+              39.7379
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - IDS Fulfillment HQ DC - Plainfield IN",
+        "type": "Multi-Customer E-Commerce Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3528,
+              39.7379
+            ],
+            [
+              -86.352,
+              39.7379
+            ],
+            [
+              -86.352,
+              39.7401
+            ],
+            [
+              -86.3528,
+              39.7401
+            ],
+            [
+              -86.3528,
+              39.7379
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - IDS Fulfillment HQ DC - Plainfield IN",
+        "type": "Multi-Customer E-Commerce Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3547,
+              39.7378
+            ],
+            [
+              -86.3539,
+              39.7378
+            ],
+            [
+              -86.3539,
+              39.7401
+            ],
+            [
+              -86.3547,
+              39.7401
+            ],
+            [
+              -86.3547,
+              39.7378
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - IDS Fulfillment HQ DC - Plainfield IN",
+        "type": "Multi-Customer E-Commerce Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3529,
+              39.7378
+            ],
+            [
+              -86.3522,
+              39.7378
+            ],
+            [
+              -86.3522,
+              39.7401
+            ],
+            [
+              -86.3529,
+              39.7401
+            ],
+            [
+              -86.3529,
+              39.7378
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - IDS Fulfillment HQ DC - Plainfield IN",
+        "type": "Multi-Customer E-Commerce Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0025,
+              40.7325
+            ],
+            [
+              -112,
+              40.7325
+            ],
+            [
+              -112,
+              40.736
+            ],
+            [
+              -112.0025,
+              40.736
+            ],
+            [
+              -112.0025,
+              40.7325
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - IDS Fulfillment DC - Salt Lake City UT",
+        "type": "Multi-Customer E-Commerce Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 10,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 13,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0025,
+              40.7328
+            ],
+            [
+              -112.0018,
+              40.7328
+            ],
+            [
+              -112.0018,
+              40.7358
+            ],
+            [
+              -112.0025,
+              40.7358
+            ],
+            [
+              -112.0025,
+              40.7328
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - IDS Fulfillment DC - Salt Lake City UT",
+        "type": "Multi-Customer E-Commerce Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.5412,
+              40.3153
+            ],
+            [
+              -76.5305,
+              40.3153
+            ],
+            [
+              -76.5305,
+              40.3208
+            ],
+            [
+              -76.5412,
+              40.3208
+            ],
+            [
+              -76.5412,
+              40.3153
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - East Coast Center of Excellence - Annville PA",
+        "type": "Life Sciences & Healthcare Distribution Center (Foreign Trade Zone)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 100,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 230,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 70,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.5385,
+              40.3156
+            ],
+            [
+              -76.5325,
+              40.3156
+            ],
+            [
+              -76.5325,
+              40.3172
+            ],
+            [
+              -76.5385,
+              40.3172
+            ],
+            [
+              -76.5385,
+              40.3156
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - East Coast Center of Excellence - Annville PA",
+        "type": "Life Sciences & Healthcare Distribution Center (Foreign Trade Zone)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.5388,
+              40.317
+            ],
+            [
+              -76.5329,
+              40.317
+            ],
+            [
+              -76.5329,
+              40.3176
+            ],
+            [
+              -76.5388,
+              40.3176
+            ],
+            [
+              -76.5388,
+              40.317
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - East Coast Center of Excellence - Annville PA",
+        "type": "Life Sciences & Healthcare Distribution Center (Foreign Trade Zone)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.5388,
+              40.3192
+            ],
+            [
+              -76.5329,
+              40.3192
+            ],
+            [
+              -76.5329,
+              40.3198
+            ],
+            [
+              -76.5388,
+              40.3198
+            ],
+            [
+              -76.5388,
+              40.3192
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - East Coast Center of Excellence - Annville PA",
+        "type": "Life Sciences & Healthcare Distribution Center (Foreign Trade Zone)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.8609,
+              34.9968
+            ],
+            [
+              -89.8582,
+              34.9968
+            ],
+            [
+              -89.8582,
+              34.99885
+            ],
+            [
+              -89.8609,
+              34.99885
+            ],
+            [
+              -89.8609,
+              34.9968
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Siemens Healthineers Life Sciences DC - Memphis TN",
+        "type": "Life Sciences & Healthcare Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 24,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.86065,
+              34.99815
+            ],
+            [
+              -89.86025,
+              34.99815
+            ],
+            [
+              -89.86025,
+              34.99855
+            ],
+            [
+              -89.86065,
+              34.99855
+            ],
+            [
+              -89.86065,
+              34.99815
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Siemens Healthineers Life Sciences DC - Memphis TN",
+        "type": "Life Sciences & Healthcare Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.8604,
+              34.99745
+            ],
+            [
+              -89.8595,
+              34.99745
+            ],
+            [
+              -89.8595,
+              34.99845
+            ],
+            [
+              -89.8604,
+              34.99845
+            ],
+            [
+              -89.8604,
+              34.99745
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Siemens Healthineers Life Sciences DC - Memphis TN",
+        "type": "Life Sciences & Healthcare Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.5727,
+              30.436
+            ],
+            [
+              -81.5698,
+              30.436
+            ],
+            [
+              -81.5698,
+              30.4422
+            ],
+            [
+              -81.5727,
+              30.4422
+            ],
+            [
+              -81.5727,
+              30.436
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - East Coast Center of Excellence (Project Empire) - Jacksonville FL",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 115,
+          "trailerParkingCapacity": 210,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 49,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.5716,
+              30.4356
+            ],
+            [
+              -81.5708,
+              30.4356
+            ],
+            [
+              -81.5708,
+              30.4364
+            ],
+            [
+              -81.5716,
+              30.4364
+            ],
+            [
+              -81.5716,
+              30.4356
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - East Coast Center of Excellence (Project Empire) - Jacksonville FL",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.57255,
+              30.4372
+            ],
+            [
+              -81.5719,
+              30.4372
+            ],
+            [
+              -81.5719,
+              30.4415
+            ],
+            [
+              -81.57255,
+              30.4415
+            ],
+            [
+              -81.57255,
+              30.4372
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - East Coast Center of Excellence (Project Empire) - Jacksonville FL",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.5705,
+              30.4368
+            ],
+            [
+              -81.5699,
+              30.4368
+            ],
+            [
+              -81.5699,
+              30.4417
+            ],
+            [
+              -81.5705,
+              30.4417
+            ],
+            [
+              -81.5705,
+              30.4368
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - East Coast Center of Excellence (Project Empire) - Jacksonville FL",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.57195,
+              30.4368
+            ],
+            [
+              -81.5715,
+              30.4368
+            ],
+            [
+              -81.5715,
+              30.4418
+            ],
+            [
+              -81.57195,
+              30.4418
+            ],
+            [
+              -81.57195,
+              30.4368
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - East Coast Center of Excellence (Project Empire) - Jacksonville FL",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.571,
+              30.4368
+            ],
+            [
+              -81.5705,
+              30.4368
+            ],
+            [
+              -81.5705,
+              30.4418
+            ],
+            [
+              -81.571,
+              30.4418
+            ],
+            [
+              -81.571,
+              30.4368
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - East Coast Center of Excellence (Project Empire) - Jacksonville FL",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.5712,
+              30.4362
+            ],
+            [
+              -81.57,
+              30.4362
+            ],
+            [
+              -81.57,
+              30.4372
+            ],
+            [
+              -81.5712,
+              30.4372
+            ],
+            [
+              -81.5712,
+              30.4362
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - East Coast Center of Excellence (Project Empire) - Jacksonville FL",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.7876,
+              35.0578
+            ],
+            [
+              -81.7762,
+              35.0578
+            ],
+            [
+              -81.7762,
+              35.0648
+            ],
+            [
+              -81.7876,
+              35.0648
+            ],
+            [
+              -81.7876,
+              35.0578
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Mann+Hummel DC - Cowpens SC",
+        "type": "Dedicated Customer Distribution Center (filtration)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 104,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 90,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.778,
+              35.063
+            ],
+            [
+              -81.777,
+              35.063
+            ],
+            [
+              -81.777,
+              35.064
+            ],
+            [
+              -81.778,
+              35.064
+            ],
+            [
+              -81.778,
+              35.063
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Mann+Hummel DC - Cowpens SC",
+        "type": "Dedicated Customer Distribution Center (filtration)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.7872,
+              35.059
+            ],
+            [
+              -81.784,
+              35.059
+            ],
+            [
+              -81.784,
+              35.0615
+            ],
+            [
+              -81.7872,
+              35.0615
+            ],
+            [
+              -81.7872,
+              35.059
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Mann+Hummel DC - Cowpens SC",
+        "type": "Dedicated Customer Distribution Center (filtration)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.7825,
+              35.0625
+            ],
+            [
+              -81.7782,
+              35.0625
+            ],
+            [
+              -81.7782,
+              35.0645
+            ],
+            [
+              -81.7825,
+              35.0645
+            ],
+            [
+              -81.7825,
+              35.0625
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Mann+Hummel DC - Cowpens SC",
+        "type": "Dedicated Customer Distribution Center (filtration)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.7855,
+              35.0615
+            ],
+            [
+              -81.7778,
+              35.0615
+            ],
+            [
+              -81.7778,
+              35.0642
+            ],
+            [
+              -81.7855,
+              35.0642
+            ],
+            [
+              -81.7855,
+              35.0615
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Mann+Hummel DC - Cowpens SC",
+        "type": "Dedicated Customer Distribution Center (filtration)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.787,
+              35.0585
+            ],
+            [
+              -81.7792,
+              35.0585
+            ],
+            [
+              -81.7792,
+              35.0625
+            ],
+            [
+              -81.787,
+              35.0625
+            ],
+            [
+              -81.787,
+              35.0585
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Mann+Hummel DC - Cowpens SC",
+        "type": "Dedicated Customer Distribution Center (filtration)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.779,
+              35.0625
+            ],
+            [
+              -81.7772,
+              35.0625
+            ],
+            [
+              -81.7772,
+              35.0638
+            ],
+            [
+              -81.779,
+              35.0638
+            ],
+            [
+              -81.779,
+              35.0625
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Mann+Hummel DC - Cowpens SC",
+        "type": "Dedicated Customer Distribution Center (filtration)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.7085,
+              39.843
+            ],
+            [
+              -82.7,
+              39.843
+            ],
+            [
+              -82.7,
+              39.8499
+            ],
+            [
+              -82.7085,
+              39.8499
+            ],
+            [
+              -82.7085,
+              39.843
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Violet Township DC - Pickerington OH",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 0,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3173,
+              32.8437
+            ],
+            [
+              -97.3147,
+              32.8437
+            ],
+            [
+              -97.3147,
+              32.8484
+            ],
+            [
+              -97.3173,
+              32.8484
+            ],
+            [
+              -97.3173,
+              32.8437
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Campbell Soup DC - Fort Worth TX",
+        "type": "Dedicated Customer Distribution Center (CPG/food)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 100,
+          "trailersVisible": 115,
+          "trailerParkingCapacity": 165,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 30,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3172,
+              32.8463
+            ],
+            [
+              -97.3166,
+              32.8463
+            ],
+            [
+              -97.3166,
+              32.8471
+            ],
+            [
+              -97.3172,
+              32.8471
+            ],
+            [
+              -97.3172,
+              32.8463
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Campbell Soup DC - Fort Worth TX",
+        "type": "Dedicated Customer Distribution Center (CPG/food)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.31695,
+              32.8442
+            ],
+            [
+              -97.31635,
+              32.8442
+            ],
+            [
+              -97.31635,
+              32.8478
+            ],
+            [
+              -97.31695,
+              32.8478
+            ],
+            [
+              -97.31695,
+              32.8442
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Campbell Soup DC - Fort Worth TX",
+        "type": "Dedicated Customer Distribution Center (CPG/food)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3151,
+              32.8442
+            ],
+            [
+              -97.3146,
+              32.8442
+            ],
+            [
+              -97.3146,
+              32.8478
+            ],
+            [
+              -97.3151,
+              32.8478
+            ],
+            [
+              -97.3151,
+              32.8442
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Campbell Soup DC - Fort Worth TX",
+        "type": "Dedicated Customer Distribution Center (CPG/food)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3166,
+              32.8442
+            ],
+            [
+              -97.3161,
+              32.8442
+            ],
+            [
+              -97.3161,
+              32.8479
+            ],
+            [
+              -97.3166,
+              32.8479
+            ],
+            [
+              -97.3166,
+              32.8442
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Campbell Soup DC - Fort Worth TX",
+        "type": "Dedicated Customer Distribution Center (CPG/food)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.31555,
+              32.8442
+            ],
+            [
+              -97.31505,
+              32.8442
+            ],
+            [
+              -97.31505,
+              32.8479
+            ],
+            [
+              -97.31555,
+              32.8479
+            ],
+            [
+              -97.31555,
+              32.8442
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Campbell Soup DC - Fort Worth TX",
+        "type": "Dedicated Customer Distribution Center (CPG/food)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.317,
+              32.8462
+            ],
+            [
+              -97.3164,
+              32.8462
+            ],
+            [
+              -97.3164,
+              32.8479
+            ],
+            [
+              -97.317,
+              32.8479
+            ],
+            [
+              -97.317,
+              32.8462
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Campbell Soup DC - Fort Worth TX",
+        "type": "Dedicated Customer Distribution Center (CPG/food)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.378,
+              39.9665
+            ],
+            [
+              -86.3754,
+              39.9665
+            ],
+            [
+              -86.3754,
+              39.9693
+            ],
+            [
+              -86.378,
+              39.9693
+            ],
+            [
+              -86.378,
+              39.9665
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Whitestown DC - Whitestown IN",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 42,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 15,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.377,
+              39.9682
+            ],
+            [
+              -86.3758,
+              39.9682
+            ],
+            [
+              -86.3758,
+              39.9691
+            ],
+            [
+              -86.377,
+              39.9691
+            ],
+            [
+              -86.377,
+              39.9682
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Whitestown DC - Whitestown IN",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3776,
+              39.9672
+            ],
+            [
+              -86.3764,
+              39.9672
+            ],
+            [
+              -86.3764,
+              39.969
+            ],
+            [
+              -86.3776,
+              39.969
+            ],
+            [
+              -86.3776,
+              39.9672
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Whitestown DC - Whitestown IN",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.9022,
+              39.8438
+            ],
+            [
+              -82.8988,
+              39.8438
+            ],
+            [
+              -82.8988,
+              39.847
+            ],
+            [
+              -82.9022,
+              39.847
+            ],
+            [
+              -82.9022,
+              39.8438
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Groveport DC - Groveport OH",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 10,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 25.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.9013,
+              39.8459
+            ],
+            [
+              -82.9004,
+              39.8459
+            ],
+            [
+              -82.9004,
+              39.8464
+            ],
+            [
+              -82.9013,
+              39.8464
+            ],
+            [
+              -82.9013,
+              39.8459
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Groveport DC - Groveport OH",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.9013,
+              39.84565
+            ],
+            [
+              -82.9001,
+              39.84565
+            ],
+            [
+              -82.9001,
+              39.8465
+            ],
+            [
+              -82.9013,
+              39.8465
+            ],
+            [
+              -82.9013,
+              39.84565
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Groveport DC - Groveport OH",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5372,
+              33.5708
+            ],
+            [
+              -84.531,
+              33.5708
+            ],
+            [
+              -84.531,
+              33.5745
+            ],
+            [
+              -84.5372,
+              33.5745
+            ],
+            [
+              -84.5372,
+              33.5708
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Keurig DC - Union City GA",
+        "type": "Dedicated Customer Distribution Center (beverage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 54,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5365,
+              33.5718
+            ],
+            [
+              -84.536,
+              33.5718
+            ],
+            [
+              -84.536,
+              33.5723
+            ],
+            [
+              -84.5365,
+              33.5723
+            ],
+            [
+              -84.5365,
+              33.5718
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Keurig DC - Union City GA",
+        "type": "Dedicated Customer Distribution Center (beverage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5363,
+              33.5711
+            ],
+            [
+              -84.5316,
+              33.5711
+            ],
+            [
+              -84.5316,
+              33.5718
+            ],
+            [
+              -84.5363,
+              33.5718
+            ],
+            [
+              -84.5363,
+              33.5711
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Keurig DC - Union City GA",
+        "type": "Dedicated Customer Distribution Center (beverage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5363,
+              33.5735
+            ],
+            [
+              -84.5316,
+              33.5735
+            ],
+            [
+              -84.5316,
+              33.5741
+            ],
+            [
+              -84.5363,
+              33.5741
+            ],
+            [
+              -84.5363,
+              33.5735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Keurig DC - Union City GA",
+        "type": "Dedicated Customer Distribution Center (beverage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5363,
+              33.5713
+            ],
+            [
+              -84.5316,
+              33.5713
+            ],
+            [
+              -84.5316,
+              33.572
+            ],
+            [
+              -84.5363,
+              33.572
+            ],
+            [
+              -84.5363,
+              33.5713
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Keurig DC - Union City GA",
+        "type": "Dedicated Customer Distribution Center (beverage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5752,
+              33.6298
+            ],
+            [
+              -84.5692,
+              33.6298
+            ],
+            [
+              -84.5692,
+              33.634
+            ],
+            [
+              -84.5752,
+              33.634
+            ],
+            [
+              -84.5752,
+              33.6298
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Union City DC (Derrick Industrial) - Union City GA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 64,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.574,
+              33.6311
+            ],
+            [
+              -84.5733,
+              33.6311
+            ],
+            [
+              -84.5733,
+              33.6316
+            ],
+            [
+              -84.574,
+              33.6316
+            ],
+            [
+              -84.574,
+              33.6311
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Union City DC (Derrick Industrial) - Union City GA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5732,
+              33.632
+            ],
+            [
+              -84.5704,
+              33.632
+            ],
+            [
+              -84.5704,
+              33.6334
+            ],
+            [
+              -84.5732,
+              33.6334
+            ],
+            [
+              -84.5732,
+              33.632
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Union City DC (Derrick Industrial) - Union City GA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.5378,
+              33.1745
+            ],
+            [
+              -80.5332,
+              33.1745
+            ],
+            [
+              -80.5332,
+              33.1798
+            ],
+            [
+              -80.5378,
+              33.1798
+            ],
+            [
+              -80.5378,
+              33.1745
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DHL Commerce Park DC - St. George SC",
+        "type": "Distribution Center (Charleston port-adjacent campus)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 3,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 75,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.5364,
+              33.1759
+            ],
+            [
+              -80.5344,
+              33.1759
+            ],
+            [
+              -80.5344,
+              33.1771
+            ],
+            [
+              -80.5364,
+              33.1771
+            ],
+            [
+              -80.5364,
+              33.1759
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DHL Commerce Park DC - St. George SC",
+        "type": "Distribution Center (Charleston port-adjacent campus)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.5365,
+              33.1758
+            ],
+            [
+              -80.5342,
+              33.1758
+            ],
+            [
+              -80.5342,
+              33.1773
+            ],
+            [
+              -80.5365,
+              33.1773
+            ],
+            [
+              -80.5365,
+              33.1758
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DHL Commerce Park DC - St. George SC",
+        "type": "Distribution Center (Charleston port-adjacent campus)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.5354,
+              33.1784
+            ],
+            [
+              -80.5338,
+              33.1784
+            ],
+            [
+              -80.5338,
+              33.1793
+            ],
+            [
+              -80.5354,
+              33.1793
+            ],
+            [
+              -80.5354,
+              33.1784
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DHL Commerce Park DC - St. George SC",
+        "type": "Distribution Center (Charleston port-adjacent campus)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.85,
+              41.9123
+            ],
+            [
+              -87.8455,
+              41.9123
+            ],
+            [
+              -87.8455,
+              41.9145
+            ],
+            [
+              -87.85,
+              41.9145
+            ],
+            [
+              -87.85,
+              41.9123
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Melrose Park DC - Melrose Park IL",
+        "type": "Distribution / E-Commerce Sortation Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 22,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8494,
+              41.9122
+            ],
+            [
+              -87.8458,
+              41.9122
+            ],
+            [
+              -87.8458,
+              41.9128
+            ],
+            [
+              -87.8494,
+              41.9128
+            ],
+            [
+              -87.8494,
+              41.9122
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Melrose Park DC - Melrose Park IL",
+        "type": "Distribution / E-Commerce Sortation Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8494,
+              41.9127
+            ],
+            [
+              -87.8458,
+              41.9127
+            ],
+            [
+              -87.8458,
+              41.9134
+            ],
+            [
+              -87.8494,
+              41.9134
+            ],
+            [
+              -87.8494,
+              41.9127
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - Melrose Park DC - Melrose Park IL",
+        "type": "Distribution / E-Commerce Sortation Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.96015,
+              38.7819
+            ],
+            [
+              -94.95625,
+              38.7819
+            ],
+            [
+              -94.95625,
+              38.78385
+            ],
+            [
+              -94.96015,
+              38.78385
+            ],
+            [
+              -94.96015,
+              38.7819
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Edgerton KS (Logistics Park Kansas City)",
+        "type": "Distribution Center (intermodal logistics park)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 42,
+          "trailersVisible": 38,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 18.1,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.95995,
+              38.78175
+            ],
+            [
+              -94.95935,
+              38.78175
+            ],
+            [
+              -94.95935,
+              38.78215
+            ],
+            [
+              -94.95995,
+              38.78215
+            ],
+            [
+              -94.95995,
+              38.78175
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Edgerton KS (Logistics Park Kansas City)",
+        "type": "Distribution Center (intermodal logistics park)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.95985,
+              38.78305
+            ],
+            [
+              -94.95635,
+              38.78305
+            ],
+            [
+              -94.95635,
+              38.78385
+            ],
+            [
+              -94.95985,
+              38.78385
+            ],
+            [
+              -94.95985,
+              38.78305
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Edgerton KS (Logistics Park Kansas City)",
+        "type": "Distribution Center (intermodal logistics park)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.95985,
+              38.783
+            ],
+            [
+              -94.95635,
+              38.783
+            ],
+            [
+              -94.95635,
+              38.7834
+            ],
+            [
+              -94.95985,
+              38.7834
+            ],
+            [
+              -94.95985,
+              38.783
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Edgerton KS (Logistics Park Kansas City)",
+        "type": "Distribution Center (intermodal logistics park)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.7272,
+              33.40895
+            ],
+            [
+              -84.7247,
+              33.40895
+            ],
+            [
+              -84.7247,
+              33.41155
+            ],
+            [
+              -84.7272,
+              33.41155
+            ],
+            [
+              -84.7272,
+              33.40895
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - IDS Fulfillment DC - Atlanta GA",
+        "type": "Multi-Customer E-Commerce Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 32,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 16.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.7274,
+              33.40895
+            ],
+            [
+              -84.7268,
+              33.40895
+            ],
+            [
+              -84.7268,
+              33.40935
+            ],
+            [
+              -84.7274,
+              33.40935
+            ],
+            [
+              -84.7274,
+              33.40895
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - IDS Fulfillment DC - Atlanta GA",
+        "type": "Multi-Customer E-Commerce Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.7269,
+              33.40905
+            ],
+            [
+              -84.7251,
+              33.40905
+            ],
+            [
+              -84.7251,
+              33.41115
+            ],
+            [
+              -84.7269,
+              33.41115
+            ],
+            [
+              -84.7269,
+              33.40905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - IDS Fulfillment DC - Atlanta GA",
+        "type": "Multi-Customer E-Commerce Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3135,
+              39.6834
+            ],
+            [
+              -86.3087,
+              39.6834
+            ],
+            [
+              -86.3087,
+              39.6872
+            ],
+            [
+              -86.3135,
+              39.6872
+            ],
+            [
+              -86.3135,
+              39.6834
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - IDS Fulfillment DC - Indianapolis IN",
+        "type": "Multi-Customer E-Commerce Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 42.9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.31345,
+              39.6848
+            ],
+            [
+              -86.3128,
+              39.6848
+            ],
+            [
+              -86.3128,
+              39.6853
+            ],
+            [
+              -86.31345,
+              39.6853
+            ],
+            [
+              -86.31345,
+              39.6848
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - IDS Fulfillment DC - Indianapolis IN",
+        "type": "Multi-Customer E-Commerce Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.313,
+              39.6836
+            ],
+            [
+              -86.3116,
+              39.6836
+            ],
+            [
+              -86.3116,
+              39.6866
+            ],
+            [
+              -86.313,
+              39.6866
+            ],
+            [
+              -86.313,
+              39.6836
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - IDS Fulfillment DC - Indianapolis IN",
+        "type": "Multi-Customer E-Commerce Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3116,
+              39.6836
+            ],
+            [
+              -86.3105,
+              39.6836
+            ],
+            [
+              -86.3105,
+              39.6866
+            ],
+            [
+              -86.3116,
+              39.6866
+            ],
+            [
+              -86.3116,
+              39.6836
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - IDS Fulfillment DC - Indianapolis IN",
+        "type": "Multi-Customer E-Commerce Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.99985,
+              40.23605
+            ],
+            [
+              -76.99715,
+              40.23605
+            ],
+            [
+              -76.99715,
+              40.238
+            ],
+            [
+              -76.99985,
+              40.238
+            ],
+            [
+              -76.99985,
+              40.23605
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Mechanicsburg PA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 10,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 12.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77,
+              40.23605
+            ],
+            [
+              -76.9994,
+              40.23605
+            ],
+            [
+              -76.9994,
+              40.2364
+            ],
+            [
+              -77,
+              40.2364
+            ],
+            [
+              -77,
+              40.23605
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Mechanicsburg PA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.9979,
+              40.23645
+            ],
+            [
+              -76.9972,
+              40.23645
+            ],
+            [
+              -76.9972,
+              40.23745
+            ],
+            [
+              -76.9979,
+              40.23745
+            ],
+            [
+              -76.9979,
+              40.23645
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Mechanicsburg PA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -114.9362,
+              36.3418
+            ],
+            [
+              -114.9325,
+              36.3418
+            ],
+            [
+              -114.9325,
+              36.349
+            ],
+            [
+              -114.9362,
+              36.349
+            ],
+            [
+              -114.9362,
+              36.3418
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - North Las Vegas NV",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 127,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 174,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 58,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -114.9322,
+              36.3447
+            ],
+            [
+              -114.9315,
+              36.3447
+            ],
+            [
+              -114.9315,
+              36.3452
+            ],
+            [
+              -114.9322,
+              36.3452
+            ],
+            [
+              -114.9322,
+              36.3447
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - North Las Vegas NV",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -114.936,
+              36.3474
+            ],
+            [
+              -114.9328,
+              36.3474
+            ],
+            [
+              -114.9328,
+              36.349
+            ],
+            [
+              -114.936,
+              36.349
+            ],
+            [
+              -114.936,
+              36.3474
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - North Las Vegas NV",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -114.9354,
+              36.3444
+            ],
+            [
+              -114.9328,
+              36.3444
+            ],
+            [
+              -114.9328,
+              36.3456
+            ],
+            [
+              -114.9354,
+              36.3456
+            ],
+            [
+              -114.9354,
+              36.3444
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - North Las Vegas NV",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -114.9357,
+              36.3478
+            ],
+            [
+              -114.933,
+              36.3478
+            ],
+            [
+              -114.933,
+              36.3487
+            ],
+            [
+              -114.9357,
+              36.3487
+            ],
+            [
+              -114.9357,
+              36.3478
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - North Las Vegas NV",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -114.9356,
+              36.3456
+            ],
+            [
+              -114.9329,
+              36.3456
+            ],
+            [
+              -114.9329,
+              36.3462
+            ],
+            [
+              -114.9356,
+              36.3462
+            ],
+            [
+              -114.9356,
+              36.3456
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - North Las Vegas NV",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -114.9358,
+              36.344
+            ],
+            [
+              -114.9328,
+              36.344
+            ],
+            [
+              -114.9328,
+              36.3446
+            ],
+            [
+              -114.9358,
+              36.3446
+            ],
+            [
+              -114.9358,
+              36.344
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - North Las Vegas NV",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.7195,
+              39.9582
+            ],
+            [
+              -82.7158,
+              39.9582
+            ],
+            [
+              -82.7158,
+              39.9625
+            ],
+            [
+              -82.7195,
+              39.9625
+            ],
+            [
+              -82.7195,
+              39.9582
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Etna OH",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 37.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.71905,
+              39.95845
+            ],
+            [
+              -82.71855,
+              39.95845
+            ],
+            [
+              -82.71855,
+              39.95895
+            ],
+            [
+              -82.71905,
+              39.95895
+            ],
+            [
+              -82.71905,
+              39.95845
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Etna OH",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.7194,
+              39.959
+            ],
+            [
+              -82.7184,
+              39.959
+            ],
+            [
+              -82.7184,
+              39.962
+            ],
+            [
+              -82.7194,
+              39.962
+            ],
+            [
+              -82.7194,
+              39.959
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Etna OH",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.7186,
+              39.9589
+            ],
+            [
+              -82.718,
+              39.9589
+            ],
+            [
+              -82.718,
+              39.9621
+            ],
+            [
+              -82.7186,
+              39.9621
+            ],
+            [
+              -82.7186,
+              39.9589
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Etna OH",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.7193,
+              39.9583
+            ],
+            [
+              -82.7186,
+              39.9583
+            ],
+            [
+              -82.7186,
+              39.9588
+            ],
+            [
+              -82.7193,
+              39.9588
+            ],
+            [
+              -82.7193,
+              39.9583
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Etna OH",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.9414,
+              39.8657
+            ],
+            [
+              -82.9386,
+              39.8657
+            ],
+            [
+              -82.9386,
+              39.8688
+            ],
+            [
+              -82.9414,
+              39.8688
+            ],
+            [
+              -82.9414,
+              39.8657
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Obetz OH",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 9,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 20.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.9408,
+              39.8675
+            ],
+            [
+              -82.939,
+              39.8675
+            ],
+            [
+              -82.939,
+              39.8687
+            ],
+            [
+              -82.9408,
+              39.8687
+            ],
+            [
+              -82.9408,
+              39.8675
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Obetz OH",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2738,
+              29.8024
+            ],
+            [
+              -95.2717,
+              29.8024
+            ],
+            [
+              -95.2717,
+              29.8064
+            ],
+            [
+              -95.2738,
+              29.8064
+            ],
+            [
+              -95.2738,
+              29.8024
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Houston TX",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 80,
+          "trailersVisible": 34,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 22.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.27345,
+              29.80255
+            ],
+            [
+              -95.273,
+              29.80255
+            ],
+            [
+              -95.273,
+              29.803
+            ],
+            [
+              -95.27345,
+              29.803
+            ],
+            [
+              -95.27345,
+              29.80255
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Houston TX",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2737,
+              29.8028
+            ],
+            [
+              -95.273,
+              29.8028
+            ],
+            [
+              -95.273,
+              29.8062
+            ],
+            [
+              -95.2737,
+              29.8062
+            ],
+            [
+              -95.2737,
+              29.8028
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Houston TX",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2724,
+              29.8028
+            ],
+            [
+              -95.2718,
+              29.8028
+            ],
+            [
+              -95.2718,
+              29.8062
+            ],
+            [
+              -95.2724,
+              29.8062
+            ],
+            [
+              -95.2724,
+              29.8028
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Houston TX",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2734,
+              29.8028
+            ],
+            [
+              -95.2731,
+              29.8028
+            ],
+            [
+              -95.2731,
+              29.8062
+            ],
+            [
+              -95.2734,
+              29.8062
+            ],
+            [
+              -95.2734,
+              29.8028
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Houston TX",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2723,
+              29.8028
+            ],
+            [
+              -95.2721,
+              29.8028
+            ],
+            [
+              -95.2721,
+              29.8062
+            ],
+            [
+              -95.2723,
+              29.8062
+            ],
+            [
+              -95.2723,
+              29.8028
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Houston TX",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2735,
+              29.8024
+            ],
+            [
+              -95.273,
+              29.8024
+            ],
+            [
+              -95.273,
+              29.8028
+            ],
+            [
+              -95.2735,
+              29.8028
+            ],
+            [
+              -95.2735,
+              29.8024
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Houston TX",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0332,
+              32.8336
+            ],
+            [
+              -97.0298,
+              32.8336
+            ],
+            [
+              -97.0298,
+              32.8362
+            ],
+            [
+              -97.0332,
+              32.8362
+            ],
+            [
+              -97.0332,
+              32.8336
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Dallas/Irving TX",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 22.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.03065,
+              32.834
+            ],
+            [
+              -97.0302,
+              32.834
+            ],
+            [
+              -97.0302,
+              32.8344
+            ],
+            [
+              -97.03065,
+              32.8344
+            ],
+            [
+              -97.03065,
+              32.834
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Dallas/Irving TX",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.032,
+              32.8338
+            ],
+            [
+              -97.0301,
+              32.8338
+            ],
+            [
+              -97.0301,
+              32.835
+            ],
+            [
+              -97.032,
+              32.835
+            ],
+            [
+              -97.032,
+              32.8338
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Dallas/Irving TX",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0327,
+              32.8347
+            ],
+            [
+              -97.0307,
+              32.8347
+            ],
+            [
+              -97.0307,
+              32.8358
+            ],
+            [
+              -97.0327,
+              32.8358
+            ],
+            [
+              -97.0327,
+              32.8347
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Dallas/Irving TX",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0307,
+              32.8338
+            ],
+            [
+              -97.0301,
+              32.8338
+            ],
+            [
+              -97.0301,
+              32.8345
+            ],
+            [
+              -97.0307,
+              32.8345
+            ],
+            [
+              -97.0307,
+              32.8338
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dhl-supply-chain",
+        "name": "DHL Supply Chain - DC - Dallas/Irving TX",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    }
+  ]
+}

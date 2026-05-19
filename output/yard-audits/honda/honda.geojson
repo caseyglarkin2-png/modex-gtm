@@ -1,0 +1,4854 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.515,
+              40.2695
+            ],
+            [
+              -83.4965,
+              40.2695
+            ],
+            [
+              -83.4965,
+              40.2865
+            ],
+            [
+              -83.515,
+              40.2865
+            ],
+            [
+              -83.515,
+              40.2695
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Marysville Auto Plant (MAP) - Marysville OH",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 3,
+          "buildingCount": 8,
+          "siteAreaAcres": 720,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5062,
+              40.2752
+            ],
+            [
+              -83.5048,
+              40.2752
+            ],
+            [
+              -83.5048,
+              40.2762
+            ],
+            [
+              -83.5062,
+              40.2762
+            ],
+            [
+              -83.5062,
+              40.2752
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Marysville Auto Plant (MAP) - Marysville OH",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5033,
+              40.2795
+            ],
+            [
+              -83.4975,
+              40.2795
+            ],
+            [
+              -83.4975,
+              40.2825
+            ],
+            [
+              -83.5033,
+              40.2825
+            ],
+            [
+              -83.5033,
+              40.2795
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Marysville Auto Plant (MAP) - Marysville OH",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5023,
+              40.2762
+            ],
+            [
+              -83.4978,
+              40.2762
+            ],
+            [
+              -83.4978,
+              40.2788
+            ],
+            [
+              -83.5023,
+              40.2788
+            ],
+            [
+              -83.5023,
+              40.2762
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Marysville Auto Plant (MAP) - Marysville OH",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5032,
+              40.273
+            ],
+            [
+              -83.4985,
+              40.273
+            ],
+            [
+              -83.4985,
+              40.2752
+            ],
+            [
+              -83.5032,
+              40.2752
+            ],
+            [
+              -83.5032,
+              40.273
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Marysville Auto Plant (MAP) - Marysville OH",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5042,
+              40.2768
+            ],
+            [
+              -83.501,
+              40.2768
+            ],
+            [
+              -83.501,
+              40.2788
+            ],
+            [
+              -83.5042,
+              40.2788
+            ],
+            [
+              -83.5042,
+              40.2768
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Marysville Auto Plant (MAP) - Marysville OH",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5048,
+              40.28
+            ],
+            [
+              -83.5015,
+              40.28
+            ],
+            [
+              -83.5015,
+              40.2818
+            ],
+            [
+              -83.5048,
+              40.2818
+            ],
+            [
+              -83.5048,
+              40.28
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Marysville Auto Plant (MAP) - Marysville OH",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5035,
+              40.275
+            ],
+            [
+              -83.501,
+              40.275
+            ],
+            [
+              -83.501,
+              40.2764
+            ],
+            [
+              -83.5035,
+              40.2764
+            ],
+            [
+              -83.5035,
+              40.275
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Marysville Auto Plant (MAP) - Marysville OH",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5535,
+              40.323
+            ],
+            [
+              -83.5405,
+              40.323
+            ],
+            [
+              -83.5405,
+              40.3345
+            ],
+            [
+              -83.5535,
+              40.3345
+            ],
+            [
+              -83.5535,
+              40.323
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - East Liberty Auto Plant (ELP) - East Liberty OH",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 2,
+          "buildingCount": 5,
+          "siteAreaAcres": 560,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5494,
+              40.3242
+            ],
+            [
+              -83.548,
+              40.3242
+            ],
+            [
+              -83.548,
+              40.3254
+            ],
+            [
+              -83.5494,
+              40.3254
+            ],
+            [
+              -83.5494,
+              40.3242
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - East Liberty Auto Plant (ELP) - East Liberty OH",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.549,
+              40.3248
+            ],
+            [
+              -83.5445,
+              40.3248
+            ],
+            [
+              -83.5445,
+              40.3276
+            ],
+            [
+              -83.549,
+              40.3276
+            ],
+            [
+              -83.549,
+              40.3248
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - East Liberty Auto Plant (ELP) - East Liberty OH",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5518,
+              40.33
+            ],
+            [
+              -83.5472,
+              40.33
+            ],
+            [
+              -83.5472,
+              40.3328
+            ],
+            [
+              -83.5518,
+              40.3328
+            ],
+            [
+              -83.5518,
+              40.33
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - East Liberty Auto Plant (ELP) - East Liberty OH",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5515,
+              40.3298
+            ],
+            [
+              -83.5482,
+              40.3298
+            ],
+            [
+              -83.5482,
+              40.3315
+            ],
+            [
+              -83.5515,
+              40.3315
+            ],
+            [
+              -83.5515,
+              40.3298
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - East Liberty Auto Plant (ELP) - East Liberty OH",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5475,
+              40.326
+            ],
+            [
+              -83.5448,
+              40.326
+            ],
+            [
+              -83.5448,
+              40.3278
+            ],
+            [
+              -83.5475,
+              40.3278
+            ],
+            [
+              -83.5475,
+              40.326
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - East Liberty Auto Plant (ELP) - East Liberty OH",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5482,
+              40.3244
+            ],
+            [
+              -83.546,
+              40.3244
+            ],
+            [
+              -83.546,
+              40.3258
+            ],
+            [
+              -83.5482,
+              40.3258
+            ],
+            [
+              -83.5482,
+              40.3244
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - East Liberty Auto Plant (ELP) - East Liberty OH",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5272,
+              40.277
+            ],
+            [
+              -83.5228,
+              40.277
+            ],
+            [
+              -83.5228,
+              40.2811
+            ],
+            [
+              -83.5272,
+              40.2811
+            ],
+            [
+              -83.5272,
+              40.277
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Performance Manufacturing Center (PMC) - Marysville OH",
+        "type": "Auto Assembly Plant (low-volume)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 9,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 18,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 36,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5244,
+              40.2778
+            ],
+            [
+              -83.5236,
+              40.2778
+            ],
+            [
+              -83.5236,
+              40.2785
+            ],
+            [
+              -83.5244,
+              40.2785
+            ],
+            [
+              -83.5244,
+              40.2778
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Performance Manufacturing Center (PMC) - Marysville OH",
+        "type": "Auto Assembly Plant (low-volume)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5247,
+              40.2788
+            ],
+            [
+              -83.5234,
+              40.2788
+            ],
+            [
+              -83.5234,
+              40.2802
+            ],
+            [
+              -83.5247,
+              40.2802
+            ],
+            [
+              -83.5247,
+              40.2788
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Performance Manufacturing Center (PMC) - Marysville OH",
+        "type": "Auto Assembly Plant (low-volume)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5252,
+              40.2788
+            ],
+            [
+              -83.5244,
+              40.2788
+            ],
+            [
+              -83.5244,
+              40.2801
+            ],
+            [
+              -83.5252,
+              40.2801
+            ],
+            [
+              -83.5252,
+              40.2788
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Performance Manufacturing Center (PMC) - Marysville OH",
+        "type": "Auto Assembly Plant (low-volume)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5247,
+              40.2784
+            ],
+            [
+              -83.5238,
+              40.2784
+            ],
+            [
+              -83.5238,
+              40.2792
+            ],
+            [
+              -83.5247,
+              40.2792
+            ],
+            [
+              -83.5247,
+              40.2784
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Performance Manufacturing Center (PMC) - Marysville OH",
+        "type": "Auto Assembly Plant (low-volume)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1998,
+              40.3705
+            ],
+            [
+              -84.1865,
+              40.3705
+            ],
+            [
+              -84.1865,
+              40.381
+            ],
+            [
+              -84.1998,
+              40.381
+            ],
+            [
+              -84.1998,
+              40.3705
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Anna Engine Plant (AEP) - Anna OH",
+        "type": "Engine Plant / EV Battery Pack (IPU) Assembly",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 420,
+          "truckGateCount": 3,
+          "buildingCount": 9,
+          "siteAreaAcres": 690,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1962,
+              40.3755
+            ],
+            [
+              -84.1948,
+              40.3755
+            ],
+            [
+              -84.1948,
+              40.3765
+            ],
+            [
+              -84.1962,
+              40.3765
+            ],
+            [
+              -84.1962,
+              40.3755
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Anna Engine Plant (AEP) - Anna OH",
+        "type": "Engine Plant / EV Battery Pack (IPU) Assembly",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1985,
+              40.3745
+            ],
+            [
+              -84.195,
+              40.3745
+            ],
+            [
+              -84.195,
+              40.3782
+            ],
+            [
+              -84.1985,
+              40.3782
+            ],
+            [
+              -84.1985,
+              40.3745
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Anna Engine Plant (AEP) - Anna OH",
+        "type": "Engine Plant / EV Battery Pack (IPU) Assembly",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1945,
+              40.3725
+            ],
+            [
+              -84.189,
+              40.3725
+            ],
+            [
+              -84.189,
+              40.3755
+            ],
+            [
+              -84.1945,
+              40.3755
+            ],
+            [
+              -84.1945,
+              40.3725
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Anna Engine Plant (AEP) - Anna OH",
+        "type": "Engine Plant / EV Battery Pack (IPU) Assembly",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.2003,
+              40.372
+            ],
+            [
+              -84.1962,
+              40.372
+            ],
+            [
+              -84.1962,
+              40.3742
+            ],
+            [
+              -84.2003,
+              40.3742
+            ],
+            [
+              -84.2003,
+              40.372
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Anna Engine Plant (AEP) - Anna OH",
+        "type": "Engine Plant / EV Battery Pack (IPU) Assembly",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1962,
+              40.375
+            ],
+            [
+              -84.1938,
+              40.375
+            ],
+            [
+              -84.1938,
+              40.3772
+            ],
+            [
+              -84.1962,
+              40.3772
+            ],
+            [
+              -84.1962,
+              40.375
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Anna Engine Plant (AEP) - Anna OH",
+        "type": "Engine Plant / EV Battery Pack (IPU) Assembly",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1935,
+              40.3732
+            ],
+            [
+              -84.1895,
+              40.3732
+            ],
+            [
+              -84.1895,
+              40.3752
+            ],
+            [
+              -84.1935,
+              40.3752
+            ],
+            [
+              -84.1935,
+              40.3732
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Anna Engine Plant (AEP) - Anna OH",
+        "type": "Engine Plant / EV Battery Pack (IPU) Assembly",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.195,
+              40.3752
+            ],
+            [
+              -84.193,
+              40.3752
+            ],
+            [
+              -84.193,
+              40.3765
+            ],
+            [
+              -84.195,
+              40.3765
+            ],
+            [
+              -84.195,
+              40.3752
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Anna Engine Plant (AEP) - Anna OH",
+        "type": "Engine Plant / EV Battery Pack (IPU) Assembly",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.153,
+              33.6095
+            ],
+            [
+              -86.1345,
+              33.6095
+            ],
+            [
+              -86.1345,
+              33.6235
+            ],
+            [
+              -86.153,
+              33.6235
+            ],
+            [
+              -86.153,
+              33.6095
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Manufacturing of Alabama (HMA) - Lincoln AL",
+        "type": "Auto Assembly Plant + Engine Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 280,
+          "trailerParkingCapacity": 380,
+          "truckGateCount": 3,
+          "buildingCount": 10,
+          "siteAreaAcres": 900,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.1525,
+              33.6115
+            ],
+            [
+              -86.1505,
+              33.6115
+            ],
+            [
+              -86.1505,
+              33.6128
+            ],
+            [
+              -86.1525,
+              33.6128
+            ],
+            [
+              -86.1525,
+              33.6115
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Manufacturing of Alabama (HMA) - Lincoln AL",
+        "type": "Auto Assembly Plant + Engine Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.146,
+              33.6125
+            ],
+            [
+              -86.139,
+              33.6125
+            ],
+            [
+              -86.139,
+              33.615
+            ],
+            [
+              -86.146,
+              33.615
+            ],
+            [
+              -86.146,
+              33.6125
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Manufacturing of Alabama (HMA) - Lincoln AL",
+        "type": "Auto Assembly Plant + Engine Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.1415,
+              33.6155
+            ],
+            [
+              -86.1355,
+              33.6155
+            ],
+            [
+              -86.1355,
+              33.6185
+            ],
+            [
+              -86.1415,
+              33.6185
+            ],
+            [
+              -86.1415,
+              33.6155
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Manufacturing of Alabama (HMA) - Lincoln AL",
+        "type": "Auto Assembly Plant + Engine Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.1475,
+              33.6105
+            ],
+            [
+              -86.1425,
+              33.6105
+            ],
+            [
+              -86.1425,
+              33.6132
+            ],
+            [
+              -86.1475,
+              33.6132
+            ],
+            [
+              -86.1475,
+              33.6105
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Manufacturing of Alabama (HMA) - Lincoln AL",
+        "type": "Auto Assembly Plant + Engine Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.146,
+              33.613
+            ],
+            [
+              -86.1415,
+              33.613
+            ],
+            [
+              -86.1415,
+              33.6148
+            ],
+            [
+              -86.146,
+              33.6148
+            ],
+            [
+              -86.146,
+              33.613
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Manufacturing of Alabama (HMA) - Lincoln AL",
+        "type": "Auto Assembly Plant + Engine Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.1425,
+              33.616
+            ],
+            [
+              -86.138,
+              33.616
+            ],
+            [
+              -86.138,
+              33.6178
+            ],
+            [
+              -86.1425,
+              33.6178
+            ],
+            [
+              -86.1425,
+              33.616
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Manufacturing of Alabama (HMA) - Lincoln AL",
+        "type": "Auto Assembly Plant + Engine Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.149,
+              33.6124
+            ],
+            [
+              -86.1465,
+              33.6124
+            ],
+            [
+              -86.1465,
+              33.6138
+            ],
+            [
+              -86.149,
+              33.6138
+            ],
+            [
+              -86.149,
+              33.6124
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Manufacturing of Alabama (HMA) - Lincoln AL",
+        "type": "Auto Assembly Plant + Engine Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.5575,
+              39.3555
+            ],
+            [
+              -85.526,
+              39.3555
+            ],
+            [
+              -85.526,
+              39.3785
+            ],
+            [
+              -85.5575,
+              39.3785
+            ],
+            [
+              -85.5575,
+              39.3555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Manufacturing of Indiana (HMIN) - Greensburg IN",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 380,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 1480,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.547,
+              39.3664
+            ],
+            [
+              -85.5455,
+              39.3664
+            ],
+            [
+              -85.5455,
+              39.3676
+            ],
+            [
+              -85.547,
+              39.3676
+            ],
+            [
+              -85.547,
+              39.3664
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Manufacturing of Indiana (HMIN) - Greensburg IN",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.5445,
+              39.3715
+            ],
+            [
+              -85.5355,
+              39.3715
+            ],
+            [
+              -85.5355,
+              39.375
+            ],
+            [
+              -85.5445,
+              39.375
+            ],
+            [
+              -85.5445,
+              39.3715
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Manufacturing of Indiana (HMIN) - Greensburg IN",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.5448,
+              39.3688
+            ],
+            [
+              -85.536,
+              39.3688
+            ],
+            [
+              -85.536,
+              39.3713
+            ],
+            [
+              -85.5448,
+              39.3713
+            ],
+            [
+              -85.5448,
+              39.3688
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Manufacturing of Indiana (HMIN) - Greensburg IN",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.5355,
+              39.3695
+            ],
+            [
+              -85.5295,
+              39.3695
+            ],
+            [
+              -85.5295,
+              39.3755
+            ],
+            [
+              -85.5355,
+              39.3755
+            ],
+            [
+              -85.5355,
+              39.3695
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Manufacturing of Indiana (HMIN) - Greensburg IN",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.5448,
+              39.3693
+            ],
+            [
+              -85.5355,
+              39.3693
+            ],
+            [
+              -85.5355,
+              39.3702
+            ],
+            [
+              -85.5448,
+              39.3702
+            ],
+            [
+              -85.5448,
+              39.3693
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Manufacturing of Indiana (HMIN) - Greensburg IN",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.5425,
+              39.3698
+            ],
+            [
+              -85.536,
+              39.3698
+            ],
+            [
+              -85.536,
+              39.371
+            ],
+            [
+              -85.5425,
+              39.371
+            ],
+            [
+              -85.5425,
+              39.3698
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Manufacturing of Indiana (HMIN) - Greensburg IN",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.5425,
+              39.364
+            ],
+            [
+              -85.5385,
+              39.364
+            ],
+            [
+              -85.5385,
+              39.3675
+            ],
+            [
+              -85.5425,
+              39.3675
+            ],
+            [
+              -85.5425,
+              39.364
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Manufacturing of Indiana (HMIN) - Greensburg IN",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.582,
+              39.6165
+            ],
+            [
+              -83.563,
+              39.6165
+            ],
+            [
+              -83.563,
+              39.6305
+            ],
+            [
+              -83.582,
+              39.6305
+            ],
+            [
+              -83.582,
+              39.6165
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "LG Energy Solution-Honda EV Battery Plant (L-H Battery Co.) - Jeffersonville OH",
+        "type": "EV Battery Cell Plant (JV)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 290,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5672,
+              39.622
+            ],
+            [
+              -83.5656,
+              39.622
+            ],
+            [
+              -83.5656,
+              39.6232
+            ],
+            [
+              -83.5672,
+              39.6232
+            ],
+            [
+              -83.5672,
+              39.622
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "LG Energy Solution-Honda EV Battery Plant (L-H Battery Co.) - Jeffersonville OH",
+        "type": "EV Battery Cell Plant (JV)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "low",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.567,
+              39.623
+            ],
+            [
+              -83.5635,
+              39.623
+            ],
+            [
+              -83.5635,
+              39.6265
+            ],
+            [
+              -83.567,
+              39.6265
+            ],
+            [
+              -83.567,
+              39.623
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "LG Energy Solution-Honda EV Battery Plant (L-H Battery Co.) - Jeffersonville OH",
+        "type": "EV Battery Cell Plant (JV)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "low",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.568,
+              39.6228
+            ],
+            [
+              -83.5662,
+              39.6228
+            ],
+            [
+              -83.5662,
+              39.6268
+            ],
+            [
+              -83.568,
+              39.6268
+            ],
+            [
+              -83.568,
+              39.6228
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "LG Energy Solution-Honda EV Battery Plant (L-H Battery Co.) - Jeffersonville OH",
+        "type": "EV Battery Cell Plant (JV)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "low",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.575,
+              39.6185
+            ],
+            [
+              -83.569,
+              39.6185
+            ],
+            [
+              -83.569,
+              39.6215
+            ],
+            [
+              -83.575,
+              39.6215
+            ],
+            [
+              -83.575,
+              39.6185
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "LG Energy Solution-Honda EV Battery Plant (L-H Battery Co.) - Jeffersonville OH",
+        "type": "EV Battery Cell Plant (JV)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "low",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.9042,
+              40.4435
+            ],
+            [
+              -83.894,
+              40.4435
+            ],
+            [
+              -83.894,
+              40.4515
+            ],
+            [
+              -83.9042,
+              40.4515
+            ],
+            [
+              -83.9042,
+              40.4435
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Transmission Mfg. of America - Russells Point OH",
+        "type": "Transmission Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 80,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.904,
+              40.4478
+            ],
+            [
+              -83.903,
+              40.4478
+            ],
+            [
+              -83.903,
+              40.4487
+            ],
+            [
+              -83.904,
+              40.4487
+            ],
+            [
+              -83.904,
+              40.4478
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Transmission Mfg. of America - Russells Point OH",
+        "type": "Transmission Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8972,
+              40.4476
+            ],
+            [
+              -83.8948,
+              40.4476
+            ],
+            [
+              -83.8948,
+              40.4501
+            ],
+            [
+              -83.8972,
+              40.4501
+            ],
+            [
+              -83.8972,
+              40.4476
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Transmission Mfg. of America - Russells Point OH",
+        "type": "Transmission Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.897,
+              40.4455
+            ],
+            [
+              -83.895,
+              40.4455
+            ],
+            [
+              -83.895,
+              40.4476
+            ],
+            [
+              -83.897,
+              40.4476
+            ],
+            [
+              -83.897,
+              40.4455
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Transmission Mfg. of America - Russells Point OH",
+        "type": "Transmission Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.898,
+              40.4483
+            ],
+            [
+              -83.896,
+              40.4483
+            ],
+            [
+              -83.896,
+              40.45
+            ],
+            [
+              -83.898,
+              40.45
+            ],
+            [
+              -83.898,
+              40.4483
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Transmission Mfg. of America - Russells Point OH",
+        "type": "Transmission Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.9005,
+              40.4476
+            ],
+            [
+              -83.8985,
+              40.4476
+            ],
+            [
+              -83.8985,
+              40.449
+            ],
+            [
+              -83.9005,
+              40.449
+            ],
+            [
+              -83.9005,
+              40.4476
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Transmission Mfg. of America - Russells Point OH",
+        "type": "Transmission Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8998,
+              40.4485
+            ],
+            [
+              -83.8972,
+              40.4485
+            ],
+            [
+              -83.8972,
+              40.4503
+            ],
+            [
+              -83.8998,
+              40.4503
+            ],
+            [
+              -83.8998,
+              40.4485
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Transmission Mfg. of America - Russells Point OH",
+        "type": "Transmission Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.2885,
+              33.6865
+            ],
+            [
+              -85.279,
+              33.6865
+            ],
+            [
+              -85.279,
+              33.695
+            ],
+            [
+              -85.2885,
+              33.695
+            ],
+            [
+              -85.2885,
+              33.6865
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Precision Parts of Georgia (Transmission Plant) - Tallapoosa GA",
+        "type": "Transmission Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 130,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.2815,
+              33.6921
+            ],
+            [
+              -85.2803,
+              33.6921
+            ],
+            [
+              -85.2803,
+              33.693
+            ],
+            [
+              -85.2815,
+              33.693
+            ],
+            [
+              -85.2815,
+              33.6921
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Precision Parts of Georgia (Transmission Plant) - Tallapoosa GA",
+        "type": "Transmission Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.2862,
+              33.6887
+            ],
+            [
+              -85.2843,
+              33.6887
+            ],
+            [
+              -85.2843,
+              33.6902
+            ],
+            [
+              -85.2862,
+              33.6902
+            ],
+            [
+              -85.2862,
+              33.6887
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Precision Parts of Georgia (Transmission Plant) - Tallapoosa GA",
+        "type": "Transmission Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.2828,
+              33.692
+            ],
+            [
+              -85.281,
+              33.692
+            ],
+            [
+              -85.281,
+              33.6933
+            ],
+            [
+              -85.2828,
+              33.6933
+            ],
+            [
+              -85.2828,
+              33.692
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Precision Parts of Georgia (Transmission Plant) - Tallapoosa GA",
+        "type": "Transmission Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.286,
+              33.6888
+            ],
+            [
+              -85.2835,
+              33.6888
+            ],
+            [
+              -85.2835,
+              33.691
+            ],
+            [
+              -85.286,
+              33.691
+            ],
+            [
+              -85.286,
+              33.6888
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Precision Parts of Georgia (Transmission Plant) - Tallapoosa GA",
+        "type": "Transmission Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.283,
+              33.691
+            ],
+            [
+              -85.2815,
+              33.691
+            ],
+            [
+              -85.2815,
+              33.6928
+            ],
+            [
+              -85.283,
+              33.6928
+            ],
+            [
+              -85.283,
+              33.691
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Precision Parts of Georgia (Transmission Plant) - Tallapoosa GA",
+        "type": "Transmission Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.2828,
+              33.6915
+            ],
+            [
+              -85.2808,
+              33.6915
+            ],
+            [
+              -85.2808,
+              33.6933
+            ],
+            [
+              -85.2828,
+              33.6933
+            ],
+            [
+              -85.2828,
+              33.6915
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Precision Parts of Georgia (Transmission Plant) - Tallapoosa GA",
+        "type": "Transmission Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.9235,
+              34.1065
+            ],
+            [
+              -79.9115,
+              34.1065
+            ],
+            [
+              -79.9115,
+              34.1155
+            ],
+            [
+              -79.9235,
+              34.1155
+            ],
+            [
+              -79.9235,
+              34.1065
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda of South Carolina Mfg. (ATV/UTV Plant) - Timmonsville SC",
+        "type": "ATV / UTV / Side-by-Side Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 230,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.9149,
+              34.1134
+            ],
+            [
+              -79.9139,
+              34.1134
+            ],
+            [
+              -79.9139,
+              34.1142
+            ],
+            [
+              -79.9149,
+              34.1142
+            ],
+            [
+              -79.9149,
+              34.1134
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda of South Carolina Mfg. (ATV/UTV Plant) - Timmonsville SC",
+        "type": "ATV / UTV / Side-by-Side Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.9232,
+              34.1078
+            ],
+            [
+              -79.9202,
+              34.1078
+            ],
+            [
+              -79.9202,
+              34.1103
+            ],
+            [
+              -79.9232,
+              34.1103
+            ],
+            [
+              -79.9232,
+              34.1078
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda of South Carolina Mfg. (ATV/UTV Plant) - Timmonsville SC",
+        "type": "ATV / UTV / Side-by-Side Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.9195,
+              34.1088
+            ],
+            [
+              -79.917,
+              34.1088
+            ],
+            [
+              -79.917,
+              34.1108
+            ],
+            [
+              -79.9195,
+              34.1108
+            ],
+            [
+              -79.9195,
+              34.1088
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda of South Carolina Mfg. (ATV/UTV Plant) - Timmonsville SC",
+        "type": "ATV / UTV / Side-by-Side Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.9155,
+              34.1105
+            ],
+            [
+              -79.9135,
+              34.1105
+            ],
+            [
+              -79.9135,
+              34.1128
+            ],
+            [
+              -79.9155,
+              34.1128
+            ],
+            [
+              -79.9155,
+              34.1105
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda of South Carolina Mfg. (ATV/UTV Plant) - Timmonsville SC",
+        "type": "ATV / UTV / Side-by-Side Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.92,
+              34.1095
+            ],
+            [
+              -79.918,
+              34.1095
+            ],
+            [
+              -79.918,
+              34.1115
+            ],
+            [
+              -79.92,
+              34.1115
+            ],
+            [
+              -79.92,
+              34.1095
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda of South Carolina Mfg. (ATV/UTV Plant) - Timmonsville SC",
+        "type": "ATV / UTV / Side-by-Side Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.915,
+              34.1115
+            ],
+            [
+              -79.913,
+              34.1115
+            ],
+            [
+              -79.913,
+              34.1134
+            ],
+            [
+              -79.915,
+              34.1134
+            ],
+            [
+              -79.915,
+              34.1115
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda of South Carolina Mfg. (ATV/UTV Plant) - Timmonsville SC",
+        "type": "ATV / UTV / Side-by-Side Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.3488,
+              36.0298
+            ],
+            [
+              -79.3412,
+              36.0298
+            ],
+            [
+              -79.3412,
+              36.0372
+            ],
+            [
+              -79.3488,
+              36.0372
+            ],
+            [
+              -79.3488,
+              36.0298
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Power Equipment Mfg. - Swepsonville NC",
+        "type": "Power Equipment / General-Purpose Engine Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 95,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.3425,
+              36.03196
+            ],
+            [
+              -79.3418,
+              36.03196
+            ],
+            [
+              -79.3418,
+              36.03236
+            ],
+            [
+              -79.3425,
+              36.03236
+            ],
+            [
+              -79.3425,
+              36.03196
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Power Equipment Mfg. - Swepsonville NC",
+        "type": "Power Equipment / General-Purpose Engine Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.3468,
+              36.0315
+            ],
+            [
+              -79.346,
+              36.0315
+            ],
+            [
+              -79.346,
+              36.0342
+            ],
+            [
+              -79.3468,
+              36.0342
+            ],
+            [
+              -79.3468,
+              36.0315
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Power Equipment Mfg. - Swepsonville NC",
+        "type": "Power Equipment / General-Purpose Engine Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.3468,
+              36.0334
+            ],
+            [
+              -79.3456,
+              36.0334
+            ],
+            [
+              -79.3456,
+              36.0352
+            ],
+            [
+              -79.3468,
+              36.0352
+            ],
+            [
+              -79.3468,
+              36.0334
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Power Equipment Mfg. - Swepsonville NC",
+        "type": "Power Equipment / General-Purpose Engine Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.3448,
+              36.033
+            ],
+            [
+              -79.3436,
+              36.033
+            ],
+            [
+              -79.3436,
+              36.0347
+            ],
+            [
+              -79.3448,
+              36.0347
+            ],
+            [
+              -79.3448,
+              36.033
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Power Equipment Mfg. - Swepsonville NC",
+        "type": "Power Equipment / General-Purpose Engine Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.3456,
+              36.0326
+            ],
+            [
+              -79.3444,
+              36.0326
+            ],
+            [
+              -79.3444,
+              36.0342
+            ],
+            [
+              -79.3456,
+              36.0342
+            ],
+            [
+              -79.3456,
+              36.0326
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Power Equipment Mfg. - Swepsonville NC",
+        "type": "Power Equipment / General-Purpose Engine Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.3448,
+              36.0342
+            ],
+            [
+              -79.3438,
+              36.0342
+            ],
+            [
+              -79.3438,
+              36.0356
+            ],
+            [
+              -79.3448,
+              36.0356
+            ],
+            [
+              -79.3448,
+              36.0342
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Power Equipment Mfg. - Swepsonville NC",
+        "type": "Power Equipment / General-Purpose Engine Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.509,
+              40.273
+            ],
+            [
+              -83.4965,
+              40.273
+            ],
+            [
+              -83.4965,
+              40.2835
+            ],
+            [
+              -83.509,
+              40.2835
+            ],
+            [
+              -83.509,
+              40.273
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Marysville Motorcycle Plant (MMP) - Marysville OH",
+        "type": "Motorcycle / Powersports Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 3,
+          "buildingCount": 1,
+          "siteAreaAcres": 130,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5064,
+              40.2742
+            ],
+            [
+              -83.5053,
+              40.2742
+            ],
+            [
+              -83.5053,
+              40.275
+            ],
+            [
+              -83.5064,
+              40.275
+            ],
+            [
+              -83.5064,
+              40.2742
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Marysville Motorcycle Plant (MMP) - Marysville OH",
+        "type": "Motorcycle / Powersports Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5032,
+              40.2768
+            ],
+            [
+              -83.4968,
+              40.2768
+            ],
+            [
+              -83.4968,
+              40.2808
+            ],
+            [
+              -83.5032,
+              40.2808
+            ],
+            [
+              -83.5032,
+              40.2768
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Marysville Motorcycle Plant (MMP) - Marysville OH",
+        "type": "Motorcycle / Powersports Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.505,
+              40.28
+            ],
+            [
+              -83.501,
+              40.28
+            ],
+            [
+              -83.501,
+              40.282
+            ],
+            [
+              -83.505,
+              40.282
+            ],
+            [
+              -83.505,
+              40.28
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Marysville Motorcycle Plant (MMP) - Marysville OH",
+        "type": "Motorcycle / Powersports Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5048,
+              40.279
+            ],
+            [
+              -83.5032,
+              40.279
+            ],
+            [
+              -83.5032,
+              40.281
+            ],
+            [
+              -83.5048,
+              40.281
+            ],
+            [
+              -83.5048,
+              40.279
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Marysville Motorcycle Plant (MMP) - Marysville OH",
+        "type": "Motorcycle / Powersports Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.5036,
+              40.2768
+            ],
+            [
+              -83.5026,
+              40.2768
+            ],
+            [
+              -83.5026,
+              40.2782
+            ],
+            [
+              -83.5036,
+              40.2782
+            ],
+            [
+              -83.5036,
+              40.2768
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Marysville Motorcycle Plant (MMP) - Marysville OH",
+        "type": "Motorcycle / Powersports Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.502,
+              40.2795
+            ],
+            [
+              -83.4995,
+              40.2795
+            ],
+            [
+              -83.4995,
+              40.281
+            ],
+            [
+              -83.502,
+              40.281
+            ],
+            [
+              -83.502,
+              40.2795
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda - Marysville Motorcycle Plant (MMP) - Marysville OH",
+        "type": "Motorcycle / Powersports Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.93,
+              36.0985
+            ],
+            [
+              -79.9205,
+              36.0985
+            ],
+            [
+              -79.9205,
+              36.1055
+            ],
+            [
+              -79.93,
+              36.1055
+            ],
+            [
+              -79.93,
+              36.0985
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Aircraft Company (HondaJet) - Greensboro NC",
+        "type": "Aircraft Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 2,
+          "trailerParkingCapacity": 8,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 133,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.9213,
+              36.1004
+            ],
+            [
+              -79.9205,
+              36.1004
+            ],
+            [
+              -79.9205,
+              36.101
+            ],
+            [
+              -79.9213,
+              36.101
+            ],
+            [
+              -79.9213,
+              36.1004
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Aircraft Company (HondaJet) - Greensboro NC",
+        "type": "Aircraft Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.9252,
+              36.1013
+            ],
+            [
+              -79.9242,
+              36.1013
+            ],
+            [
+              -79.9242,
+              36.1023
+            ],
+            [
+              -79.9252,
+              36.1023
+            ],
+            [
+              -79.9252,
+              36.1013
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Aircraft Company (HondaJet) - Greensboro NC",
+        "type": "Aircraft Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.483,
+              36.0454
+            ],
+            [
+              -79.4795,
+              36.0454
+            ],
+            [
+              -79.4795,
+              36.0483
+            ],
+            [
+              -79.483,
+              36.0483
+            ],
+            [
+              -79.483,
+              36.0454
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Aero, Inc. (GE Honda HF120 engines) - Burlington NC",
+        "type": "Aircraft Engine Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 4,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 4,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.4831,
+              36.0467
+            ],
+            [
+              -79.4825,
+              36.0467
+            ],
+            [
+              -79.4825,
+              36.0471
+            ],
+            [
+              -79.4831,
+              36.0471
+            ],
+            [
+              -79.4831,
+              36.0467
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Aero, Inc. (GE Honda HF120 engines) - Burlington NC",
+        "type": "Aircraft Engine Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.4818,
+              36.0456
+            ],
+            [
+              -79.4812,
+              36.0456
+            ],
+            [
+              -79.4812,
+              36.0464
+            ],
+            [
+              -79.4818,
+              36.0464
+            ],
+            [
+              -79.4818,
+              36.0456
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "Honda Aero, Inc. (GE Honda HF120 engines) - Burlington NC",
+        "type": "Aircraft Engine Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.2415,
+              40.0455
+            ],
+            [
+              -84.235,
+              40.0455
+            ],
+            [
+              -84.235,
+              40.0512
+            ],
+            [
+              -84.2415,
+              40.0512
+            ],
+            [
+              -84.2415,
+              40.0455
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Troy Parts Distribution Center - Troy OH",
+        "type": "Parts Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 80,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.2396,
+              40.0466
+            ],
+            [
+              -84.2388,
+              40.0466
+            ],
+            [
+              -84.2388,
+              40.0472
+            ],
+            [
+              -84.2396,
+              40.0472
+            ],
+            [
+              -84.2396,
+              40.0466
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Troy Parts Distribution Center - Troy OH",
+        "type": "Parts Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.24,
+              40.0478
+            ],
+            [
+              -84.2386,
+              40.0478
+            ],
+            [
+              -84.2386,
+              40.0508
+            ],
+            [
+              -84.24,
+              40.0508
+            ],
+            [
+              -84.24,
+              40.0478
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Troy Parts Distribution Center - Troy OH",
+        "type": "Parts Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.2408,
+              40.0464
+            ],
+            [
+              -84.2392,
+              40.0464
+            ],
+            [
+              -84.2392,
+              40.0476
+            ],
+            [
+              -84.2408,
+              40.0476
+            ],
+            [
+              -84.2408,
+              40.0464
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Troy Parts Distribution Center - Troy OH",
+        "type": "Parts Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.2372,
+              40.0483
+            ],
+            [
+              -84.2356,
+              40.0483
+            ],
+            [
+              -84.2356,
+              40.0508
+            ],
+            [
+              -84.2372,
+              40.0508
+            ],
+            [
+              -84.2372,
+              40.0483
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Troy Parts Distribution Center - Troy OH",
+        "type": "Parts Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.238,
+              40.0504
+            ],
+            [
+              -84.2356,
+              40.0504
+            ],
+            [
+              -84.2356,
+              40.0512
+            ],
+            [
+              -84.238,
+              40.0512
+            ],
+            [
+              -84.238,
+              40.0504
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Troy Parts Distribution Center - Troy OH",
+        "type": "Parts Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.2362,
+              40.0472
+            ],
+            [
+              -84.2354,
+              40.0472
+            ],
+            [
+              -84.2354,
+              40.0504
+            ],
+            [
+              -84.2362,
+              40.0504
+            ],
+            [
+              -84.2362,
+              40.0472
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Troy Parts Distribution Center - Troy OH",
+        "type": "Parts Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.24,
+              40.0464
+            ],
+            [
+              -84.2388,
+              40.0464
+            ],
+            [
+              -84.2388,
+              40.0492
+            ],
+            [
+              -84.24,
+              40.0492
+            ],
+            [
+              -84.24,
+              40.0464
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Troy Parts Distribution Center - Troy OH",
+        "type": "Parts Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.2405,
+              40.0432
+            ],
+            [
+              -84.2323,
+              40.0432
+            ],
+            [
+              -84.2323,
+              40.0488
+            ],
+            [
+              -84.2405,
+              40.0488
+            ],
+            [
+              -84.2405,
+              40.0432
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Midwest Consolidation Center (MCC) - Troy OH",
+        "type": "Parts Consolidation Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 58,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.24045,
+              40.04595
+            ],
+            [
+              -84.2399,
+              40.04595
+            ],
+            [
+              -84.2399,
+              40.0464
+            ],
+            [
+              -84.24045,
+              40.0464
+            ],
+            [
+              -84.24045,
+              40.04595
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Midwest Consolidation Center (MCC) - Troy OH",
+        "type": "Parts Consolidation Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.2356,
+              40.04335
+            ],
+            [
+              -84.2329,
+              40.04335
+            ],
+            [
+              -84.2329,
+              40.0442
+            ],
+            [
+              -84.2356,
+              40.0442
+            ],
+            [
+              -84.2356,
+              40.04335
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Midwest Consolidation Center (MCC) - Troy OH",
+        "type": "Parts Consolidation Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.2351,
+              40.0464
+            ],
+            [
+              -84.2325,
+              40.0464
+            ],
+            [
+              -84.2325,
+              40.0471
+            ],
+            [
+              -84.2351,
+              40.0471
+            ],
+            [
+              -84.2351,
+              40.0464
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Midwest Consolidation Center (MCC) - Troy OH",
+        "type": "Parts Consolidation Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.2372,
+              40.04425
+            ],
+            [
+              -84.2328,
+              40.04425
+            ],
+            [
+              -84.2328,
+              40.0447
+            ],
+            [
+              -84.2372,
+              40.0447
+            ],
+            [
+              -84.2372,
+              40.04425
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Midwest Consolidation Center (MCC) - Troy OH",
+        "type": "Parts Consolidation Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.2401,
+              40.0459
+            ],
+            [
+              -84.2383,
+              40.0459
+            ],
+            [
+              -84.2383,
+              40.047
+            ],
+            [
+              -84.2401,
+              40.047
+            ],
+            [
+              -84.2401,
+              40.0459
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Midwest Consolidation Center (MCC) - Troy OH",
+        "type": "Parts Consolidation Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.7018,
+              33.9944
+            ],
+            [
+              -117.6979,
+              33.9944
+            ],
+            [
+              -117.6979,
+              33.9978
+            ],
+            [
+              -117.7018,
+              33.9978
+            ],
+            [
+              -117.7018,
+              33.9944
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Chino Parts Distribution Center (NA Hub West) - Chino CA",
+        "type": "Parts / Accessories Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 30,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.69835,
+              33.99485
+            ],
+            [
+              -117.69795,
+              33.99485
+            ],
+            [
+              -117.69795,
+              33.9952
+            ],
+            [
+              -117.69835,
+              33.9952
+            ],
+            [
+              -117.69835,
+              33.99485
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Chino Parts Distribution Center (NA Hub West) - Chino CA",
+        "type": "Parts / Accessories Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.6987,
+              33.995
+            ],
+            [
+              -117.6979,
+              33.995
+            ],
+            [
+              -117.6979,
+              33.9972
+            ],
+            [
+              -117.6987,
+              33.9972
+            ],
+            [
+              -117.6987,
+              33.995
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Chino Parts Distribution Center (NA Hub West) - Chino CA",
+        "type": "Parts / Accessories Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.6992,
+              33.9954
+            ],
+            [
+              -117.6986,
+              33.9954
+            ],
+            [
+              -117.6986,
+              33.997
+            ],
+            [
+              -117.6992,
+              33.997
+            ],
+            [
+              -117.6992,
+              33.9954
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Chino Parts Distribution Center (NA Hub West) - Chino CA",
+        "type": "Parts / Accessories Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.7008,
+              33.9948
+            ],
+            [
+              -117.6987,
+              33.9948
+            ],
+            [
+              -117.6987,
+              33.9954
+            ],
+            [
+              -117.7008,
+              33.9954
+            ],
+            [
+              -117.7008,
+              33.9948
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Chino Parts Distribution Center (NA Hub West) - Chino CA",
+        "type": "Parts / Accessories Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0101,
+              32.92065
+            ],
+            [
+              -97.0079,
+              32.92065
+            ],
+            [
+              -97.0079,
+              32.9241
+            ],
+            [
+              -97.0101,
+              32.9241
+            ],
+            [
+              -97.0101,
+              32.92065
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Irving Parts Distribution Center - Irving TX",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 19,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.00845,
+              32.9216
+            ],
+            [
+              -97.00805,
+              32.9216
+            ],
+            [
+              -97.00805,
+              32.92195
+            ],
+            [
+              -97.00845,
+              32.92195
+            ],
+            [
+              -97.00845,
+              32.9216
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Irving Parts Distribution Center - Irving TX",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.009,
+              32.923
+            ],
+            [
+              -97.0082,
+              32.923
+            ],
+            [
+              -97.0082,
+              32.92375
+            ],
+            [
+              -97.009,
+              32.92375
+            ],
+            [
+              -97.009,
+              32.923
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Irving Parts Distribution Center - Irving TX",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0088,
+              32.9214
+            ],
+            [
+              -97.00815,
+              32.9214
+            ],
+            [
+              -97.00815,
+              32.9234
+            ],
+            [
+              -97.0088,
+              32.9234
+            ],
+            [
+              -97.0088,
+              32.9214
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "honda",
+        "name": "American Honda - Irving Parts Distribution Center - Irving TX",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    }
+  ]
+}

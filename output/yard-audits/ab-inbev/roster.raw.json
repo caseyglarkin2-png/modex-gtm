@@ -1,0 +1,238 @@
+{
+  "account": "AB InBev",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 21,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Anheuser-Busch Brewery - St. Louis MO",
+      "city": "St. Louis",
+      "state": "MO",
+      "type": "Brewery",
+      "address": "1200 Lynch St, St. Louis, MO 63118",
+      "lat": 38.5984,
+      "lng": -90.2106,
+      "source": "Wikipedia / Waze / budweisertours.com - flagship 1852 brewery, world's largest single-site brewery; dossier names MO brewery"
+    },
+    {
+      "idx": 2,
+      "name": "Anheuser-Busch Brewery - Houston TX",
+      "city": "Houston",
+      "state": "TX",
+      "type": "Brewery",
+      "address": "775 Gellhorn Dr, Houston, TX 77029",
+      "lat": 29.777,
+      "lng": -95.2818,
+      "source": "Yelp / Waze / beermapping.com - opened 1966; dossier names TX brewery"
+    },
+    {
+      "idx": 3,
+      "name": "Anheuser-Busch Brewery - Columbus OH",
+      "city": "Columbus",
+      "state": "OH",
+      "type": "Brewery",
+      "address": "700 Schrock Rd, Columbus, OH 43229",
+      "lat": 40.0962,
+      "lng": -82.9889,
+      "source": "Yelp / Waze / openbrewerydb.org - opened 1968, 138-acre site; dossier names OH brewery"
+    },
+    {
+      "idx": 4,
+      "name": "Anheuser-Busch Brewery - Jacksonville FL",
+      "city": "Jacksonville",
+      "state": "FL",
+      "type": "Brewery",
+      "address": "111 Busch Dr, Jacksonville, FL 32218",
+      "lat": 30.4393,
+      "lng": -81.6648,
+      "source": "Yelp / Waze / Jax Daily Record - opened 1969, $30M 2026 investment; dossier names FL brewery"
+    },
+    {
+      "idx": 5,
+      "name": "Anheuser-Busch Brewery - Williamsburg VA",
+      "city": "Williamsburg",
+      "state": "VA",
+      "type": "Brewery",
+      "address": "7801 Pocahontas Trail, Williamsburg, VA 23185",
+      "lat": 37.2389,
+      "lng": -76.6364,
+      "source": "Yelp / Waze - opened 1972; dossier names VA brewery"
+    },
+    {
+      "idx": 6,
+      "name": "Anheuser-Busch Brewery - Baldwinsville NY",
+      "city": "Baldwinsville",
+      "state": "NY",
+      "type": "Brewery",
+      "address": "2885 Belgium Rd, Baldwinsville, NY 13027",
+      "lat": 43.1654,
+      "lng": -76.3,
+      "source": "hub.biz / NYSDEC permit records - opened 1983; dossier names NY brewery"
+    },
+    {
+      "idx": 7,
+      "name": "Anheuser-Busch Brewery - Fort Collins CO",
+      "city": "Fort Collins",
+      "state": "CO",
+      "type": "Brewery",
+      "address": "2351 Busch Dr, Fort Collins, CO 80524",
+      "lat": 40.631,
+      "lng": -105.001,
+      "source": "WebSearch / Loveland Chamber - opened 1988, Budweiser tour site; dossier names CO brewery"
+    },
+    {
+      "idx": 8,
+      "name": "Anheuser-Busch Brewery - Cartersville GA",
+      "city": "Cartersville",
+      "state": "GA",
+      "type": "Brewery",
+      "address": "100 Busch Dr NE, Cartersville, GA 30121",
+      "lat": 34.2126,
+      "lng": -84.7741,
+      "source": "beermapping.com - opened 1993, newest brewery; dossier names GA brewery"
+    },
+    {
+      "idx": 9,
+      "name": "Anheuser-Busch Brewery - Van Nuys (Los Angeles) CA",
+      "city": "Van Nuys",
+      "state": "CA",
+      "type": "Brewery",
+      "address": "15800 Roscoe Blvd, Van Nuys, CA 91406",
+      "lat": 34.2207,
+      "lng": -118.4843,
+      "source": "Yelp - LA-area brewery opened 1954 (operates as Van Nuys); dossier names CA brewery"
+    },
+    {
+      "idx": 10,
+      "name": "Anheuser-Busch Brewery - Fairfield CA",
+      "city": "Fairfield",
+      "state": "CA",
+      "type": "Brewery",
+      "address": "3101 Busch Dr, Fairfield, CA 94534",
+      "lat": 38.2666,
+      "lng": -122.0838,
+      "source": "WebSearch / Wikipedia - opened 1976; AB announced wind-down of this site - verify operating status in deep-audit; dossier names 12 breweries"
+    },
+    {
+      "idx": 11,
+      "name": "Anheuser-Busch Brewery - Merrimack NH",
+      "city": "Merrimack",
+      "state": "NH",
+      "type": "Brewery",
+      "address": "221 Daniel Webster Hwy, Merrimack, NH 03054",
+      "lat": 42.8398,
+      "lng": -71.517,
+      "source": "WebSearch / Manchester Ink Link - opened 1970; AB announced closure of this site - verify operating status in deep-audit; dossier names 12 breweries"
+    },
+    {
+      "idx": 12,
+      "name": "Anheuser-Busch Brewery - Newark NJ",
+      "city": "Newark",
+      "state": "NJ",
+      "type": "Brewery",
+      "address": "200 US-1, Newark, NJ 07114",
+      "lat": 40.7045,
+      "lng": -74.1664,
+      "source": "WebSearch / beermapping.com - 2nd oldest AB brewery (1951); reported being sold - verify operating status in deep-audit; dossier names NJ brewery"
+    },
+    {
+      "idx": 13,
+      "name": "Metal Container Corporation - Arnold MO Can Plant",
+      "city": "Arnold",
+      "state": "MO",
+      "type": "Can Manufacturing Plant",
+      "address": "42 Tenbrook Industrial Park, Arnold, MO 63010",
+      "lat": 38.4326,
+      "lng": -90.3779,
+      "source": "WebSearch / anheuser-busch.com newsroom - AB-owned MCC can plant, $150M expansion announced; dossier names 23 ag/packaging facilities"
+    },
+    {
+      "idx": 14,
+      "name": "Metal Container Corporation - Jacksonville FL Can Plant",
+      "city": "Jacksonville",
+      "state": "FL",
+      "type": "Can Manufacturing Plant",
+      "address": "5775 Skinner Lake Dr, Jacksonville, FL 32219",
+      "lat": 30.429,
+      "lng": -81.69,
+      "source": "WebSearch / anheuser-busch.com newsroom - AB-owned MCC can plant adjacent to Jacksonville brewery, $170M expansion; address approximate, verify in deep-audit"
+    },
+    {
+      "idx": 15,
+      "name": "Metal Container Corporation - Mira Loma CA Can Plant",
+      "city": "Mira Loma",
+      "state": "CA",
+      "type": "Can Manufacturing Plant",
+      "address": "10980 Inland Ave, Mira Loma, CA 91752",
+      "lat": 33.9938,
+      "lng": -117.517,
+      "source": "Yelp / Macrae's Blue Book / Superpages - AB-owned MCC can plant"
+    },
+    {
+      "idx": 16,
+      "name": "Metal Container Corporation - Newburgh NY Can Plant",
+      "city": "Newburgh",
+      "state": "NY",
+      "type": "Can Manufacturing Plant",
+      "address": null,
+      "lat": 41.5034,
+      "lng": -74.0104,
+      "source": "WebSearch / Indeed - AB-owned MCC can plant (New Windsor / Newburgh NY); precise street address not found, verify in deep-audit"
+    },
+    {
+      "idx": 17,
+      "name": "Metal Container Corporation - Windsor CO Can Plant",
+      "city": "Windsor",
+      "state": "CO",
+      "type": "Can Manufacturing Plant",
+      "address": "1201 Metal Container Ct, Windsor, CO 80550",
+      "lat": 40.4775,
+      "lng": -104.9019,
+      "source": "Yelp / Windsor Chamber / EPA fact sheet - AB-owned MCC can plant near Fort Collins brewery"
+    },
+    {
+      "idx": 18,
+      "name": "Metal Container Corporation - Oklahoma City OK Lid Plant",
+      "city": "Oklahoma City",
+      "state": "OK",
+      "type": "Lid Manufacturing Plant",
+      "address": null,
+      "lat": 35.4676,
+      "lng": -97.5164,
+      "source": "WebSearch / OKC VeloCity - AB-owned MCC lid plant (38+ years); precise street address not found, verify in deep-audit"
+    },
+    {
+      "idx": 19,
+      "name": "Metal Container Corporation - Riverside CA Lid Plant",
+      "city": "Riverside",
+      "state": "CA",
+      "type": "Lid Manufacturing Plant",
+      "address": null,
+      "lat": 33.9533,
+      "lng": -117.3962,
+      "source": "WebSearch / packagingdigest.com - AB-owned MCC lid plant; precise street address not found, verify in deep-audit"
+    },
+    {
+      "idx": 20,
+      "name": "Busch Agricultural Resources - Jonesboro AR Rice Mill",
+      "city": "Jonesboro",
+      "state": "AR",
+      "type": "Agricultural Processing - Rice Mill",
+      "address": "3723 County Road 905, Jonesboro, AR 72401",
+      "lat": 35.771,
+      "lng": -90.648,
+      "source": "WebSearch / ADEQ NPDES permit - AB rice facility milling 2.6M lbs/day; dossier names 23 ag/packaging facilities"
+    },
+    {
+      "idx": 21,
+      "name": "Busch Agricultural Resources - Idaho Falls ID Malt Plant",
+      "city": "Idaho Falls",
+      "state": "ID",
+      "type": "Agricultural Processing - Malt Plant",
+      "address": "5755 S Yellowstone Hwy, Idaho Falls, ID 83402",
+      "lat": 43.4258,
+      "lng": -112.0407,
+      "source": "WebSearch / Eventsfy - AB barley malthouse; dossier names 23 ag/packaging facilities"
+    }
+  ]
+}

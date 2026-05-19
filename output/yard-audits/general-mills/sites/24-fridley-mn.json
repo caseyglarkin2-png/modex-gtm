@@ -1,0 +1,64 @@
+{
+  "name": "General Mills - Fridley MN (Flour Mill)",
+  "type": "Flour Mill",
+  "coords": { "lat": 45.04830, "lng": -93.27080 },
+  "geofences": {
+    "perimeter": { "south": 45.04550, "west": -93.27200, "north": 45.05080, "east": -93.26960 },
+    "truckGate": { "south": 45.04720, "west": -93.27010, "north": 45.04770, "east": -93.26960 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 45.04760, "west": -93.27130, "north": 45.04810, "east": -93.27060 }
+    ],
+    "staging": { "south": 45.04780, "west": -93.27060, "north": 45.04870, "east": -93.26980 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 6,
+    "trailersVisible": 4,
+    "trailerParkingCapacity": 15,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 17.5,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@45.04830,-93.27080,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors", "trailerParkingCapacity", "scale"],
+  "fieldNotes": {
+    "siteIdentity": "Confirmed General Mills Fridley plant ('Mill O'), 25 44th Avenue NE, Fridley MN - an oat-milling / flour-mill facility that cleans and mills oats for Cheerios and Lucky Charms. Multi-story concrete mill tower, large concrete grain elevator silos to the north, a long row of low metal grain-storage silos along the rail yard to the west, conveyor bridges, and bulk-handling structures. Located between the BNSF Northtown rail yard (west) and a residential neighborhood (east).",
+    "truckGate": "Truck entrance is a single wide open paved driveway off the public access road at the SE corner of the property. Street View (2022-06 and 2021-08) shows no barrier arm, no slide/swing gate, and no checkpoint pinch-point at the property line - the driveway opens directly onto the road. truckGate = false.",
+    "guardShack": "No guard booth at the truck entrance in any Street View heading. A small structure near the mill building is an equipment/utility structure, not a gate booth.",
+    "railServed": "Strongly rail-served. Multiple BNSF rail spurs run directly into the property along the western edge with covered hopper cars and boxcars parked at the silos and mill loadout; this is the primary inbound (grain) and outbound (bulk flour) mode for the mill.",
+    "dockDoors": "Flour mill - ships/receives mostly via rail and bulk tanker truck, not palletized dock-door freight. Only a modest set of loading positions (estimated 6) along the mill building's south/east faces; no large dock-door bank. dockDoors band 0-10, low confidence.",
+    "dropYard": "No dedicated trailer-storage lot; the paved yard south and east of the mill is open working area. A few grain trailers / hopper trailers seen parked under the silo loadout. dropArea band 0-10.",
+    "postGateStaging": "Deep open paved yard between the entrance driveway and the mill building / silos provides interior queuing space.",
+    "drivewayLong": "Entrance driveway runs a long distance from the public road into the property before reaching the mill and silo loadout - can hold 3+ trucks.",
+    "urbanRural": "Inside the Minneapolis-St. Paul metro, immediately adjacent to dense residential fabric in Fridley - Urban.",
+    "buildingCount": "Multi-structure mill campus: main mill tower, concrete grain elevator silos, low metal silo row, and a separate admin/shop building to the south - counted as ~4 distinct buildings.",
+    "scale": "Possible truck scale near the grain-receiving silo loadout but not clearly confirmed from imagery - listed uncertain."
+  },
+  "method": "deep-audit"
+}

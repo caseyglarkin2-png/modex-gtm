@@ -1,0 +1,66 @@
+{
+  "name": "Performance Foodservice - Glen Allen VA",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 37.69430, "lng": -77.46680 },
+  "geofences": {
+    "perimeter": { "south": 37.69240, "west": -77.46920, "north": 37.69570, "east": -77.46470 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 37.69280, "west": -77.46850, "north": 37.69420, "east": -77.46680 }
+    ],
+    "dockAprons": [
+      { "south": 37.69300, "west": -77.46850, "north": 37.69430, "east": -77.46690 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 22,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 30.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.69430,-77.46680,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoors", "guardShack", "truckGate", "fastLaneOpportunity"],
+  "fieldNotes": {
+    "location": "Supplied coords (movedMeters 2662) landed in the Cardinal Commerce Center area but not exactly on the building. Resolved via web research: PFG occupies Phase I-Building B of Cardinal Commerce Center, a 420,000 SF building (PFG leases 332,000 SF) at 10399 Washington Highway, Hanover County. The building was positively ID'd in March 2026 Street View — a red 'Performance Foodservice' wall logo faces the fenced front employee lot. Locked center: 37.69430, -77.46680.",
+    "truckGate": "No barrier arm, sliding gate across a lane, or guard booth visible at the truck court entrance or at the two front employee-lot driveway openings. The front employee parking lot is enclosed by a black ornamental security fence, but the driveway openings are uncontrolled curb cuts. The truck court is open paved area on a loop road. Because no gate is confirmed across any lane, truckGate is false — flagged given the perimeter fencing could imply a gate not resolvable in imagery.",
+    "guardShack": "No small staffed-booth structure visible at any entrance in satellite or Street View. As a brand-new (2023) build the site may have a kiosk, but no booth — false.",
+    "remoteGs": "False because no truck gate is confirmed; if a gate exists, the absence of a booth would make this true. Flagged.",
+    "dockDoors": "A very large 420,000 SF DC. The southwest face carries a long dock line; estimated ~70 doors total. Banded 50+; construction materials in the truck court and roof glare make this an estimate.",
+    "entryExitSeparate": "The building has a loop road around it with the truck court on the southwest and separate north/east access — distinct in and out routing is likely. Medium confidence.",
+    "fastLaneOpportunity": "Brand-new build with a wide truck court and generous paved aprons — physical room for an express/bypass lane. Inferred — flagged.",
+    "urbanRural": "Cardinal Commerce Center, southern Hanover County near Virginia Center Commons / Glen Allen — within the Richmond metro's developing northern fabric, with residential subdivisions immediately adjacent. Urban.",
+    "railServed": "No rail spur enters the property — railServed false.",
+    "multiStep": "No second checkpoint stage observed; false.",
+    "general": "Imagery shows the site mid-finish-out (2024-2026 captures): construction barriers/materials still staged in the truck yard. Counts are honest estimates."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,49 @@
+{
+  "name": "GP Halsey Mill - Halsey OR",
+  "type": "Tissue/Pulp Mill",
+  "coords": { "lat": 44.3792, "lng": -123.1605 },
+  "geofences": {
+    "perimeter": { "south": 44.3735, "west": -123.1675, "north": 44.3925, "east": -123.1525 },
+    "truckGate": { "south": 44.3800, "west": -123.1648, "north": 44.3812, "east": -123.1632 },
+    "dropYards": [
+      { "south": 44.3760, "west": -123.1635, "north": 44.3792, "east": -123.1588 }
+    ],
+    "dockAprons": [
+      { "south": 44.3782, "west": -123.1602, "north": 44.3792, "east": -123.1582 }
+    ],
+    "staging": { "south": 44.3792, "west": -123.1648, "north": 44.3805, "east": -123.1632 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20, "trailersVisible": 55, "trailerParkingCapacity": 90,
+    "truckGateCount": 1, "buildingCount": 10, "siteAreaAcres": 180.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.3792,-123.1605,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "multiStep", "entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Roster coords (44.316671,-123.107215 / 31831 Cartney Dr) landed in farmland ~8 km SE of the mill. The GP Halsey / Cascade Pacific Pulp mill is at 30470-30480 American Drive, NW of Halsey town. Located via EPA FRS bounding box; mill core locked at 44.3792,-123.1605.",
+    "truckGate": "Single dedicated access road off American Drive is the only land route into the operational yard. Integrated pulp+tissue mill (~250-550 employees) is a controlled-access site. The security checkpoint is internal on the access road; Street View covers only public roads and did not reach it.",
+    "guardShack": "Inferred from facility scale and shared dual-operator campus (Cascade Pacific Pulp kraft mill + GP tissue mill); a manned booth is standard. Booth not positively resolved overhead — flagged uncertain.",
+    "multipleFacilities": "Co-located dual operation: Cascade Pacific Pulp kraft market-pulp mill (30480 American Dr) and Georgia-Pacific tissue/towel mill (30470 American Dr) share the campus, plus large recovery boiler / power buildings and converting plant.",
+    "railServed": "Rail line runs along the west side through the property; tank cars observed parked on the spur in Street View (May 2024).",
+    "dropArea": "Large multi-row drop yard south of the converting building — clear rows totaling ~50+ parked trailers (green, white, orange dry-vans), with room for ~90.",
+    "scale": "Inbound wood-chip / log truck traffic at a mill of this scale uses a truck scale; consistent with the access-road layout but not definitively resolved overhead.",
+    "shipRcvSeparate": "Inbound wood chips to the chip yard (NE); finished tissue/pulp ships from warehouse/converting docks (S/SW) — physically separate.",
+    "dockDoors": "~20 estimated across the converting/warehouse south face; partly obscured by trailers and process equipment; low confidence.",
+    "fastLaneOpportunity": "Wide paved aprons at the drop yard and access road provide ample unused width for a bypass lane.",
+    "urbanRural": "Mill sits in open Willamette Valley farmland NW of the small town of Halsey. Rural."
+  },
+  "method": "deep-audit"
+}

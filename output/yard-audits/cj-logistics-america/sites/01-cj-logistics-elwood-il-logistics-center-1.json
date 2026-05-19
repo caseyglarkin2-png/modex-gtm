@@ -1,0 +1,50 @@
+{
+  "name": "CJ Logistics - Elwood IL (Logistics Center 1)",
+  "type": "Distribution Center",
+  "coords": { "lat": 41.4040, "lng": -88.1384 },
+  "geofences": {
+    "perimeter": { "south": 41.4010, "west": -88.1408, "north": 41.4070, "east": -88.1365 },
+    "truckGate": { "south": 41.4056, "west": -88.1404, "north": 41.4065, "east": -88.1394 },
+    "dropYards": [
+      { "south": 41.4012, "west": -88.1408, "north": 41.4068, "east": -88.1392 },
+      { "south": 41.4012, "west": -88.1376, "north": 41.4068, "east": -88.1365 }
+    ],
+    "dockAprons": [
+      { "south": 41.4012, "west": -88.1392, "north": 41.4068, "east": -88.1388 },
+      { "south": 41.4012, "west": -88.1380, "north": 41.4068, "east": -88.1376 }
+    ],
+    "staging": { "south": 41.4052, "west": -88.1402, "north": 41.4060, "east": -88.1392 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 116, "trailersVisible": 140, "trailerParkingCapacity": 200,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 59.3,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.4040,-88.1384,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "scale"],
+  "fieldNotes": {
+    "truckGate": "Truck yard is fully enclosed by chain-link perimeter fencing (visible in Street View 2025-05). The truck driveway off W Mississippi St funnels into a controlled, fenced yard.",
+    "guardShack": "Small blue-roofed guard-booth structure sits mid-driveway inside the truck yard entrance (zoom-20 satellite at 41.4058,-88.1401), with a truck being processed beside it - footprint ~1-2 vehicle spaces.",
+    "dockDoors": "Racklify lists 116 dock doors + 5 rail doors. Satellite confirms long banks of dock doors with trailers backed in on BOTH long building faces (east and west).",
+    "shipRcvSeparate": "Dock banks on two physically separate building faces (east and west), consistent with separate ship/receive operations.",
+    "dropArea": "Racklify lists 200 yard spots. Satellite shows extensive trailer drop yards on both sides of the building with 100+ parked trailers.",
+    "railServed": "SIDINGS/Standard Rail lists this as a CJ Logistics rail facility; Racklify lists 5 rail doors. CenterPoint Intermodal Center site with rail spurs serving the building (visible along east side).",
+    "fastLaneOpportunity": "Wide entry apron and substantial unused paved width at the gate provide room for a bypass/express lane.",
+    "urbanRural": "Edge-of-town location within the CenterPoint Intermodal Center, surrounded by farmland to the north - rural setting despite the industrial cluster.",
+    "entryLanes": "Single shared entry/exit driveway off W Mississippi St; lane split not clearly resolvable from imagery.",
+    "scale": "No truck scale clearly visible; left in uncertainFields."
+  },
+  "method": "deep-audit"
+}

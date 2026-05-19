@@ -1,0 +1,53 @@
+{
+  "name": "CJ Logistics - Kernersville NC",
+  "type": "Distribution Center",
+  "coords": { "lat": 36.1263, "lng": -80.06235 },
+  "geofences": {
+    "perimeter": { "south": 36.12500, "west": -80.06420, "north": 36.12760, "east": -80.06050 },
+    "truckGate": { "south": 36.12615, "west": -80.06110, "north": 36.12665, "east": -80.06055 },
+    "dropYards": [
+      { "south": 36.12530, "west": -80.06380, "north": 36.12595, "east": -80.06110 }
+    ],
+    "dockAprons": [
+      { "south": 36.12560, "west": -80.06400, "north": 36.12620, "east": -80.06100 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 15,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 23.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.1263,-80.06235,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "dropArea", "trailerParkingCapacity", "shipRcvSeparate", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster supplied no street address (Indeed locations list) and city-centroid coords (36.1199, -80.0736). Resolved to 700 N Main St, Kernersville NC 27284 - the documented CJ Logistics America Kernersville facility (Yahoo Local listing for CJ Logistics America Kernersville; Indeed NC locations). Geocoded ROOFTOP to 36.1261, -80.0627; satellite confirmed a large industrial / distribution building. (200 Forum Pkwy, Rural Hall NC is a separate nearby CJ location, not this one.)",
+    "truckGate": "2026-03 Street View clearly shows a rolling/cantilever gate across the truck driveway at the SE corner, with a STOP sign and PRIVATE PROPERTY NO TRESPASSING signage, and continuous chain-link perimeter fencing around the property. truckGate=true.",
+    "guardShack": "No staffed guard booth observed directly at the gate lane. A small white peaked-roof building sits set back along the building line near the gate but does not read as a gate-side guard booth - treated as remote/badge-controlled entry. Flagged uncertain.",
+    "remoteGs": "Gate present, no staffed booth at the lane -> remote badge/kiosk check-in inferred. Medium confidence.",
+    "dockDoors": "Older industrial/manufacturing-style building with a row of dock doors along the south face and a truck court with marked stalls. ~35 doors estimated (25-50 band). Approximate.",
+    "dropArea": "Truck court on the south face has marked trailer/auto parking stalls; ~15 trailers visible, capacity ~40. dropArea 10-25, dropYard=true.",
+    "shipRcvSeparate": "Docks observed on a single (south) building face only; no separate second dock bank confirmed -> false.",
+    "drivewayShort": "Gate sits close to the public road with a modest truck court -> short approach, holds 1-2 trucks.",
+    "urbanRural": "700 N Main St sits in the Kernersville town fabric, surrounded by residential, commercial and other industrial buildings -> Urban.",
+    "siteAreaAcres": "~24 acres from the perimeter box (building plus south truck court and north auto parking).",
+    "railServed": "No rail spur into the property."
+  },
+  "method": "deep-audit"
+}

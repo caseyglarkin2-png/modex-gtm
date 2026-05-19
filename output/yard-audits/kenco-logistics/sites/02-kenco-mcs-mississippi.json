@@ -1,0 +1,52 @@
+{
+  "name": "Kenco MCS Mississippi - Olive Branch MS",
+  "type": "Multi-Client Distribution Center",
+  "coords": { "lat": 34.98890, "lng": -89.78290 },
+  "geofences": {
+    "perimeter": { "south": 34.9862, "west": -89.7850, "north": 34.9915, "east": -89.7805 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 34.9866, "west": -89.7848, "north": 34.9912, "east": -89.7838 },
+      { "south": 34.9866, "west": -89.7822, "north": 34.9912, "east": -89.7808 }
+    ],
+    "dockAprons": [
+      { "south": 34.9866, "west": -89.7842, "north": 34.9912, "east": -89.7838 },
+      { "south": 34.9866, "west": -89.7822, "north": 34.9912, "east": -89.7818 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 59.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.98890,-89.78290,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "No controlled truck entrance. Truck courts on both long faces are open and connect freely to S Distribution Cove; no barrier arm, sliding gate, or checkpoint visible in z18-z20 satellite or Street View. Property is an open multi-tenant logistics-park building.",
+    "guardShack": "No booth anywhere on the property; S end has only an office and a paved truck turnaround/roundabout.",
+    "shipRcvSeparate": "Cross-dock building: a long dock bank on the W face and a separate long dock bank on the E face — physically distinct clusters.",
+    "dropArea": "Extensive striped trailer-parking drop yards on both the W and E sides, dozens of stalls each — banded 50+.",
+    "dockDoors": "Long continuous dock banks on both long faces of an ~800,000 SF cross-dock; banded 50+. Door count is an overhead estimate.",
+    "urbanRural": "Edge-of-town greenfield logistics park beside an airport runway, surrounded by farmland; judged Rural.",
+    "trailersVisible": "~90 trailers counted across both drop yards / dock aprons; approximate.",
+    "trailerParkingCapacity": "Estimated 200 from the two large striped drop yards; low confidence."
+  },
+  "method": "deep-audit"
+}

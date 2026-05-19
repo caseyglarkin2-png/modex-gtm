@@ -1,0 +1,46 @@
+{
+  "name": "Snyder's of Hanover - Hanover PA",
+  "type": "Manufacturing - pretzels/snacks (kettle chip lines added 2024)",
+  "coords": { "lat": 39.805700, "lng": -76.952000 },
+  "geofences": {
+    "perimeter": { "south": 39.80300, "west": -76.95560, "north": 39.80850, "east": -76.94850 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 39.80470, "west": -76.95480, "north": 39.80710, "east": -76.95280 }
+    ],
+    "dockAprons": [
+      { "south": 39.80560, "west": -76.95350, "north": 39.80720, "east": -76.95150 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45, "trailersVisible": 70, "trailerParkingCapacity": 110,
+    "truckGateCount": 0, "buildingCount": 4, "siteAreaAcres": 70.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.805700,-76.952000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Open campus layout - plant set back behind broad grass buffers, no perimeter fence or controlled checkpoint visible from public-road Street View. Classified no gate.",
+    "guardShack": "No guard booth observed anywhere along the public-road frontage; office building with a Campbell's monument sign at the SW corner.",
+    "dropYard": "Large trailer parking with rows of parked trailers along the west side of the plant.",
+    "dockDoorCount": "Dock banks on the west and around the main plant building; ~45 estimate banded 25-50, low confidence.",
+    "multipleFacilities": "Multiple buildings - main pretzel/snack plant, separate office building SW, additional industrial structures NE.",
+    "drivewayShort": "Short internal approach from the access road to the dock aprons.",
+    "siteAreaAcres": "Derived from perimeter box ~610m N-S x ~610m E-W; excludes the separate solar farm to the south.",
+    "railServed": "No rail spur into the property; adjacent solar farm occupies the land to the south."
+  },
+  "method": "deep-audit"
+}

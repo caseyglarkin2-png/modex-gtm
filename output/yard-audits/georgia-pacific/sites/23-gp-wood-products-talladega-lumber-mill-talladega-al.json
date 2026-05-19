@@ -1,0 +1,55 @@
+{
+  "name": "GP Wood Products - Talladega Lumber Mill - Talladega AL",
+  "type": "Lumber Mill",
+  "coords": { "lat": 33.44400, "lng": -86.06000 },
+  "geofences": {
+    "perimeter": { "south": 33.4408, "west": -86.0640, "north": 33.4472, "east": -86.0570 },
+    "truckGate": { "south": 33.44540, "west": -86.05820, "north": 33.44600, "east": -86.05740 },
+    "dropYards": [
+      { "south": 33.44280, "west": -86.06150, "north": 33.44480, "east": -86.05900 }
+    ],
+    "dockAprons": [],
+    "staging": { "south": 33.44440, "west": -86.05870, "north": 33.44560, "east": -86.05790 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 4,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 114.5,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.44400,-86.06000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "0-10", "dropArea": "NONE",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": true, "dropYard": false, "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "guardShack", "connectivityIssue", "multiStep"],
+  "fieldNotes": {
+    "location": "Resolved to GP's Talladega lumber facility at 400 Ironaton Cutoff Rd, Talladega AL (~33.44459,-86.059685). The roster's geocoded point (33.4359,-86.1058, APPROXIMATE, movedMeters 11764) was ~4.6 km W in downtown Talladega and wrong. Mill complex centroid locked at 33.44400,-86.06000.",
+    "truckGate": "Site has a continuous chain-link perimeter fence (confirmed all around in Street View 2025-11) with a single controlled entrance driveway off Ironaton Cutoff Rd. Loaded log trucks queue internally at a check-in. A barrier arm was not clearly resolved but the fenced perimeter with one defined truck entrance qualifies as a controlled truck gate.",
+    "guardShack": "A small red-roofed structure sits beside the inbound truck check-in lane, consistent with a scale house / gate office for a mill that takes ~150 log trucks/day. Flagged uncertain because the booth function is inferred.",
+    "remoteGs": "False — a guard/scale house is present.",
+    "scale": "Lumber mill receiving ~150 log trucks/day; log trucks must be weighed in and out. A truck scale sits on the inbound truck path near the red-roofed scale house.",
+    "multiStep": "Log trucks pass an entrance gate then a scale/check-in before proceeding to the log yard — a two-stage process. Flagged uncertain.",
+    "drivewayLong": "Long internal truck approach from the gate to the log yard; loaded log trucks observed queued single-file.",
+    "fastLaneOpportunity": "Wide gravel/paved truck yard with ample unused width to add a bypass or express lane.",
+    "shipRcvSeparate": "Receiving (log yard, SE) and shipping (lumber load-out / rail near the kilns on the W side) are physically separate operations.",
+    "dockDoors": "Sawmills load finished lumber bundles by forklift from open sheds rather than truck-height dock doors; a few shipping bays may exist. Banded 0-10; low confidence.",
+    "dropArea": "No marked trailer-parking stalls; the yards hold logs and stacked lumber, not parked trailers.",
+    "railServed": "A rail line runs along the SW edge of the property with a spur curving into the mill near the kiln / lumber load-out area.",
+    "buildingCount": "Multiple connected mill structures (sawmill, planer, kilns, storage sheds) — counted ~6 distinct buildings; treated as one facility.",
+    "connectivityIssue": "Rural and wooded but only ~5 km from Talladega with other industry nearby; cellular coverage likely adequate. Marked false, flagged uncertain.",
+    "urbanRural": "Isolated mill surrounded by woods, a lake, and farmland — clearly Rural."
+  },
+  "method": "deep-audit"
+}

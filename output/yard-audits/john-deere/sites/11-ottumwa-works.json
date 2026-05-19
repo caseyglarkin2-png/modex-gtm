@@ -1,0 +1,58 @@
+{
+  "name": "John Deere Ottumwa Works - Ottumwa IA",
+  "type": "Assembly Plant",
+  "coords": { "lat": 41.003824, "lng": -92.4103 },
+  "geofences": {
+    "perimeter": { "south": 40.99980, "west": -92.41280, "north": 41.00680, "east": -92.40620 },
+    "truckGate": { "south": 41.00030, "west": -92.41090, "north": 41.00075, "east": -92.41020 },
+    "dropYards": [
+      { "south": 40.99970, "west": -92.40820, "north": 41.00130, "east": -92.40560 },
+      { "south": 41.00370, "west": -92.41150, "north": 41.00560, "east": -92.40880 }
+    ],
+    "dockAprons": [
+      { "south": 41.00100, "west": -92.41050, "north": 41.00210, "east": -92.40880 }
+    ],
+    "staging": { "south": 41.00200, "west": -92.40920, "north": 41.00400, "east": -92.40700 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 28,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 8,
+    "siteAreaAcres": 110.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.003824,-92.4103,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "exitLanes", "scale"],
+  "fieldNotes": {
+    "truckGate": "Controlled truck entrance off the south access road from E Vine St; satellite z21 shows a gatehouse structure sitting in the drive with an apron in front and a perimeter fence line running off both sides.",
+    "guardShack": "Small standalone gatehouse booth at the entrance (~1-2 vehicle footprint). Corroborated by driver reviews referencing 'friendly staff from the gate house to the docks' and on-site security.",
+    "remoteGs": "False - a staffed gate house is present.",
+    "preGateStaging": "Large paved employee lot / open apron outside the gate provides ample truck staging room before the checkpoint.",
+    "postGateStaging": "Extensive paved internal yards and open lots between the gate and the scattered dock faces.",
+    "drivewayLong": "Long internal approach from the gate to the building docks; easily holds 3+ trucks.",
+    "fastLaneOpportunity": "Wide entrance apron and abundant unused paved width at the gate; room to add a bypass/express lane.",
+    "dockDoors": "Legacy assembly-plant docks scattered across multiple connected building faces rather than one rhythmic bank; estimated 25-50 total, low-confidence count from overhead imagery.",
+    "dropArea": "Large open trailer/material storage lots on the SE and N sides hold rows of parked trailers without tractors; 25-50 band.",
+    "shipRcvSeparate": "Shipping and receiving docks observed on physically separate building faces (south-central building vs. east/north faces).",
+    "urbanRural": "Edge-of-town industrial site in small-city Ottumwa, IA, bordered by farmland and the Des Moines River; classified Rural.",
+    "multipleFacilities": "Sprawling campus of ~8 distinct connected/adjacent manufacturing buildings.",
+    "dropYard": "Dedicated trailer-storage lots on-site, distinct from active dock staging.",
+    "railServed": "No rail spur observed running into the property in current imagery.",
+    "exitLanes": "Exit lane count not separately determinable; entry/exit share the single gate."
+  },
+  "method": "deep-audit"
+}

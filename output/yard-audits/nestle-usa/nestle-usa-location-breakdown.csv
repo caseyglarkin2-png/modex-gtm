@@ -1,0 +1,43 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Nestlé Prepared Foods - Solon OH,Frozen food manufacturing plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@41.404568,-81.469555,400m/data=!3m1!1e3"
+Nestlé Prepared Foods - Jonesboro AR,Frozen food manufacturing plant,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@35.8193,-90.5795,400m/data=!3m1!1e3"
+Nestlé Prepared Foods - Gaffney SC,Frozen food manufacturing plant,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,YES,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@35.054,-81.6872,400m/data=!3m1!1e3"
+Nestlé Pizza Division - Little Chute WI,Frozen pizza manufacturing plant,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,1,1,YES,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@44.2853,-88.3242,400m/data=!3m1!1e3"
+Nestlé Prepared Foods - Mount Sterling KY,Frozen food manufacturing plant (Hot Pockets),#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@38.097,-83.9065,400m/data=!3m1!1e3"
+Nestlé Prepared Foods - Springville UT,Frozen food manufacturing plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@40.18870,-111.62380,400m/data=!3m1!1e3"
+Nestlé Professional - Trenton MO,Food manufacturing plant (foodservice / Chef-mate),#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,,YES,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@40.08080,-93.61050,400m/data=!3m1!1e3"
+Nestlé Beverage - Anderson IN,Beverage manufacturing plant + distribution center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@40.03820,-85.74400,400m/data=!3m1!1e3"
+Nestlé Beverage Factory & DC - Glendale AZ (Waddell),Beverage manufacturing plant + distribution center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,,,YES,,,YES,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@33.55520,-112.38120,400m/data=!3m1!1e3"
+Nestlé USA Baking - Burlington WI,Baking ingredients manufacturing plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@42.66550,-88.26800,400m/data=!3m1!1e3"
+Nestlé Health Science - Eau Claire WI,Nutritional beverage manufacturing plant,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,YES,,,YES,,,YES,Urban,,,,YES,"https://www.google.com/maps/@44.8315,-91.5253,400m/data=!3m1!1e3"
+Nestlé USA Distribution Center - McDonough GA,Distribution center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@33.4084,-84.1543,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,2,17%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,1,8%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,2,17%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,4,33%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,3,25%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,12,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,9,75%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,9,75%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,6,50%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,6,50%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,12,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,12,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

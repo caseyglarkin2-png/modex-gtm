@@ -1,0 +1,67 @@
+{
+  "name": "North American Parts Center Kentucky - Hebron KY",
+  "type": "Parts Procurement & Distribution Hub",
+  "coords": { "lat": 39.05330, "lng": -84.70900 },
+  "geofences": {
+    "perimeter": { "south": 39.0500, "west": -84.7115, "north": 39.0560, "east": -84.7050 },
+    "truckGate": { "south": 39.05320, "west": -84.70530, "north": 39.05400, "east": -84.70460 },
+    "dropYards": [
+      { "south": 39.05060, "west": -84.71080, "north": 39.05280, "east": -84.70780 },
+      { "south": 39.05180, "west": -84.70780, "north": 39.05430, "east": -84.70600 }
+    ],
+    "dockAprons": [
+      { "south": 39.05130, "west": -84.71010, "north": 39.05450, "east": -84.70830 },
+      { "south": 39.05230, "west": -84.70720, "north": 39.05480, "east": -84.70620 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 240,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 92.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.05330,-84.70900,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Large fenced Toyota parts-distribution hub set back from the public road (Aero Pkwy); a controlled access road funnels traffic onto the property. Truck access is gated.",
+    "guardShack": "Set true on the strong prior that NAPCK — a critical national Toyota parts hub feeding 12 US PDCs — runs a staffed truck-gate checkpoint. A standalone booth could not be positively isolated in imagery (truck-side access is tree-screened from the public road); flagged uncertain.",
+    "remoteGs": "False on the same logic — but the guard-shack vs. remote-check-in split is genuinely uncertain here; flagged for human review.",
+    "dockDoors": "Very large DC — dozens of dock doors with trailers backed in along the SW long face and the SE face; band 50+. Exact count obscured by trailers/canopies — estimate flagged.",
+    "dropArea": "Extensive trailer drop yards: a large cul-de-sac trailer-storage lot off the SW and additional rows along the SE; many dozens of parked trailers. Band 50+.",
+    "shipRcvSeparate": "Docks appear on two distinct building faces (SW and SE) suggesting separate inbound/outbound dock clusters — set true at medium confidence, flagged.",
+    "fastLaneOpportunity": "Wide internal truck roads and a long approach drive give physical room to add an express/bypass lane at the gate.",
+    "railServed": "No rail spur visible running into the property.",
+    "urbanRural": "Industrial-park setting near the CVG airport / Hebron, KY — edge-of-town industrial amid open land and other big-box DCs; classified Rural per rubric. CVG corridor has good connectivity, so connectivityIssue = false.",
+    "siteAreaAcres": "Perimeter box ~93 acres capturing the warehouse plus its surrounding drop yards and parking."
+  },
+  "method": "deep-audit"
+}

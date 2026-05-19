@@ -1,0 +1,53 @@
+{
+  "name": "KDP Beverage Manufacturing & Distribution - Allentown PA",
+  "type": "Manufacturing & Distribution - Beverage",
+  "coords": { "lat": 40.572414, "lng": -75.605843 },
+  "geofences": {
+    "perimeter": { "south": 40.56880, "west": -75.60850, "north": 40.57620, "east": -75.60330 },
+    "truckGate": { "south": 40.57210, "west": -75.60790, "north": 40.57290, "east": -75.60690 },
+    "dropYards": [
+      { "south": 40.57190, "west": -75.60720, "north": 40.57320, "east": -75.60390 }
+    ],
+    "dockAprons": [
+      { "south": 40.57280, "west": -75.60700, "north": 40.57420, "east": -75.60380 },
+      { "south": 40.57050, "west": -75.60700, "north": 40.57180, "east": -75.60380 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 92.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.572414,-75.605843,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "truckGate", "guardShack"],
+  "fieldNotes": {
+    "location": "KDP 'Park 100' campus, 7350 Industrial Blvd (warehouse) + 7356 Industrial Blvd (manufacturing), Upper Macungie Township near Allentown PA. Combined ~1.54M sq ft beverage manufacturing + warehouse/DC on 92 acres; former Kraft-Heinz site; 2021 Food Engineering Plant of the Year. Confirmed via Lehigh Valley EDC, LVB, WFMZ and Food Business News. Despite the roster geocode flag (movedMeters 3237), the roster pin (40.572414,-75.605843) sits correctly on this two-building site.",
+    "truckGate": "Truck access from Industrial Blvd is via open driveways with a monument sign at the W frontage (May 2025 Street View) and internal roads into the truck court. No barrier arm or sliding gate visible at the road or at the truck-court entry in z19-z20 satellite. Marked uncertain - a large beverage plant of this scale plausibly operates manned check-in, but no booth or barrier is visible in available imagery.",
+    "guardShack": "No guard-booth-footprint structure visible at any truck entrance in z20 satellite or 2025 Street View. Marked uncertain for the same scale-related reason.",
+    "shipRcvSeparate": "Two separate buildings - a manufacturing building (rooftop process equipment / HVAC arrays) and a warehouse/DC building - each with its own long dock bank, on opposite sides of the shared central truck court. Distinct shipping/receiving clusters.",
+    "dockDoors": "Both buildings carry very long dock banks; dozens of trailers backed in across both faces. Total estimated well into 50+ band (~100+ doors); exact count uncertain from overhead.",
+    "dropArea": "The central truck court / strip between the two buildings holds long rows of parked trailers - a large shared drop yard, 50+ band.",
+    "entryExitSeparate": "The two-building campus has multiple driveways off Industrial Blvd (W frontage) plus internal circulation - inbound and outbound truck movements use distinct access points.",
+    "railServed": "No rail spur enters the property despite the Lehigh Valley rail corridor in the region.",
+    "urbanRural": "Major Lehigh Valley logistics park (Upper Macungie/Allentown metro), surrounded by other large warehouses - Urban.",
+    "fastLaneOpportunity": "Very wide central truck court and multiple driveways provide ample room for express/bypass lanes."
+  },
+  "method": "deep-audit"
+}

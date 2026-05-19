@@ -1,0 +1,48 @@
+{
+  "name": "Mobis Parts America PDC - Lawrenceville GA",
+  "type": "Parts Distribution Center",
+  "coords": { "lat": 33.96768, "lng": -84.08648 },
+  "geofences": {
+    "perimeter": { "south": 33.96600, "west": -84.08740, "north": 33.96940, "east": -84.08560 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 33.96650, "west": -84.08760, "north": 33.96900, "east": -84.08690 }
+    ],
+    "dockAprons": [
+      { "south": 33.96650, "west": -84.08720, "north": 33.96910, "east": -84.08670 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 38,
+    "trailersVisible": 16,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 15.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.96768,-84.08648,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Open multi-tenant industrial park (Breckinridge Industrial Park). Street View drove freely into the shared dock court; no barrier arm, sliding gate, or checkpoint at any property/road interface.",
+    "guardShack": "No booth structure anywhere at the building or court entrance.",
+    "dropYard": "Trailers parked without tractors along the dock face and in the shared central yard area between buildings.",
+    "dockDoorCount": "~38 estimated along the NW dock face of the Mobis building; multi-tenant building so exact Mobis-allocated count uncertain.",
+    "entryExitTogether": "Open park road network — no defined gate, so entry/exit lane flags left false; trucks circulate freely.",
+    "dropArea": "Central park yard and dock-face trailer storage; estimate 10-25 drop trailers attributable to this building."
+  },
+  "method": "deep-audit"
+}

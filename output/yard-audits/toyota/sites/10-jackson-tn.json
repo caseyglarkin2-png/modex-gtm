@@ -1,0 +1,65 @@
+{
+  "name": "Toyota Motor Manufacturing Tennessee - Jackson TN",
+  "type": "Powertrain Plant (aluminum castings)",
+  "coords": { "lat": 35.59800, "lng": -88.94100 },
+  "geofences": {
+    "perimeter": { "south": 35.5945, "west": -88.9445, "north": 35.6020, "east": -88.9380 },
+    "truckGate": { "south": 35.59700, "west": -88.93995, "north": 35.59740, "east": -88.93940 },
+    "dropYards": [
+      { "south": 35.59980, "west": -88.94310, "north": 35.60080, "east": -88.94170 }
+    ],
+    "dockAprons": [
+      { "south": 35.59760, "west": -88.94250, "north": 35.59900, "east": -88.94120 }
+    ],
+    "staging": { "south": 35.59720, "west": -88.94060, "north": 35.59830, "east": -88.93950 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 12,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 121.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.59800,-88.94100,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "dropArea"],
+  "fieldNotes": {
+    "truckGate": "Single controlled entrance off the public road on the south side; long access drive leads to a gatehouse with a barrier arm visible across the road in zoom-20 imagery.",
+    "guardShack": "Staffed gatehouse confirmed: a white security building set beside the entrance drive with a horizontal barrier-arm gate spanning the truck lane; trucks/trailers staged just inside.",
+    "preGateStaging": "Long paved access drive and apron outside the gatehouse give room for trucks to wait before the checkpoint.",
+    "drivewayLong": "Deep entrance approach off the public road can hold a queue of 3+ trucks.",
+    "dropArea": "Trailer parking / staging is modest for this casting plant — trailers parked along the building aprons and a small NE yard; band 10-25, estimate flagged.",
+    "dockDoorCount": "~12 dock doors estimated along the building's truck-side aprons; partly obscured by canopy structures — flagged as estimate.",
+    "fastLaneOpportunity": "Wide entrance apron and generous paved width at the gatehouse leave room for an express lane.",
+    "multipleFacilities": "One large interconnected casting-plant complex plus a few support structures (utility buildings, materials yard) — single operational facility.",
+    "railServed": "No active rail spur runs into the plant property.",
+    "urbanRural": "Large isolated industrial tract on the edge of Jackson, TN surrounded by farmland and woods — Rural per rubric, but a sizeable town is nearby so connectivity is fine."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,61 @@
+{
+  "name": "Mount Veeder Winery / Franciscan Estate - Napa CA",
+  "type": "Winery / Production Facility",
+  "coords": { "lat": 38.360450, "lng": -122.401900 },
+  "geofences": {
+    "perimeter": { "south": 38.357500, "west": -122.405200, "north": 38.363500, "east": -122.399000 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 60.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.360450,-122.401900,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoors", "connectivityIssue", "siteAreaAcres", "drivewayShort"],
+  "fieldNotes": {
+    "facilityResolution": "Roster coords (38.298851, -122.282898) landed on the downtown Napa tasting room (930 3rd St). The actual Mount Veeder estate is the hillside vineyard at 1999 Mt Veeder Rd, Napa — geocoded via Google Geocoding API to 38.3606213, -122.4017761 (ROOFTOP). Audited the estate.",
+    "facilityNature": "This is a hillside vineyard estate, not a freight/production warehouse. Web research: Mount Veeder Winery is a Constellation brand whose bulk wine has historically been produced at the shared Franciscan/Galleron Road facility (now The Prisoner Wine Co., idx 6). The Mt Veeder Rd site is a terraced mountain vineyard with one modest estate building. Franciscan Estate brand itself was sold to E&J Gallo in 2021 and is no longer Constellation-owned; Mount Veeder remains with Constellation.",
+    "truckGate": "No controlled truck entrance. Access is a narrow one-lane dirt/gravel road off Mount Veeder Road; Street View shows only deer fencing along a rural mountain road, no barrier, no checkpoint.",
+    "guardShack": "No staffed booth anywhere on the property.",
+    "dockDoors": "No loading docks. Single small estate building with an adjacent dirt yard clearing. No freight-dock rhythm visible.",
+    "drivewayShort": "Single short dirt access track from Mount Veeder Road to the building; not built for truck queuing.",
+    "urbanRural": "Remote hillside in the Mayacamas Range, surrounded by forest and terraced vineyard, far from town.",
+    "connectivityIssue": "Isolated mountain location with heavy tree cover and no nearby development — cellular coverage likely weak. Medium confidence.",
+    "siteAreaAcres": "Perimeter is an estimate of the vineyard estate parcel; the built footprint is far smaller.",
+    "buildingCount": "One distinct estate building visible; small outbuildings may exist under tree canopy."
+  },
+  "method": "deep-audit"
+}

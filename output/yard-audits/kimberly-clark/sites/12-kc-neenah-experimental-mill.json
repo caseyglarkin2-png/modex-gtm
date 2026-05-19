@@ -1,0 +1,67 @@
+{
+  "name": "K-C Neenah Experimental Mill - Neenah WI",
+  "type": "Manufacturing / experimental mill (product & process innovation, Family Care)",
+  "coords": { "lat": 44.18830, "lng": -88.46260 },
+  "geofences": {
+    "perimeter": { "south": 44.18680, "west": -88.46470, "north": 44.18950, "east": -88.46110 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 44.18800, "west": -88.46300, "north": 44.18870, "east": -88.46200 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 8,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 4,
+    "truckGateCount": 1,
+    "buildingCount": 5,
+    "siteAreaAcres": 14.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.18830,-88.46260,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "remoteGs", "dockDoorCount", "dockDoors", "buildingCount", "siteAreaAcres", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster lat/lng (44.185819,-88.462609, APPROXIMATE) landed in downtown Neenah - close. Web research (Wisconsin DNR Green Tier, Waze, Foursquare) gave the X-Mill / Experimental Mill at 126 N Commercial St - K-C's original Globe Mill site in the downtown core. Locked center 44.18830,-88.46260.",
+    "site": "This is an atypical site: a downtown-embedded R&D / experimental mill, NOT a freight-oriented plant or DC. The K-C campus occupies a riverfront block with the X-Mill industrial building, connected office buildings, a multi-story parking deck, and surface lots, fronting city streets on all sides. Heavy shadow in available imagery limits dock/structure detail.",
+    "truckGate": "No conventional truck gate at a public road. K-C-owned surface parking lots are fenced with chain-link sliding gates and internal service drives gate access into the campus. Marked truckGate=true on the basis of those controlled internal gates, but it is a soft call - flagged uncertain.",
+    "guardShack": "No staffed guard booth visible anywhere on the urban campus.",
+    "remoteGs": "Set true (gate present, no guard shack) - access is via card/badge-controlled sliding gates typical of urban campuses.",
+    "dockDoors": "Loading is via recessed dock bays on the X-Mill industrial building's west/south faces; heavy shadow prevents a precise count. Estimated <10 doors - banded 0-10, flagged uncertain.",
+    "dropArea": "No drop yard or marked trailer-parking stalls - urban site with no yard space.",
+    "drivewayShort": "Any truck approach is a short urban service drive holding 1-2 trucks at most.",
+    "backupSensitive": "Tight downtown geometry - service drives connect directly to city streets; a truck queue would spill onto public streets.",
+    "multipleFacilities": "The K-C downtown campus is multiple connected buildings (X-Mill, office buildings, parking deck) - a campus.",
+    "urbanRural": "Squarely Urban - dense downtown Neenah core with modern apartment blocks, retail, and parking decks on adjacent blocks.",
+    "railServed": "No rail spur into the property.",
+    "siteAreaAcres": "~14 acres for the K-C-controlled riverfront block; soft estimate given the campus is interleaved with downtown streets.",
+    "confidence": "Medium overall - facility positively identified, but it is an unusual urban R&D mill with no conventional truck yard, and shadow obscures dock detail."
+  },
+  "method": "deep-audit"
+}

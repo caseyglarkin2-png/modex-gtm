@@ -1,0 +1,73 @@
+{
+  "name": "Constellation Gonzales Winery - Gonzales CA",
+  "type": "Winery / Production Facility",
+  "coords": { "lat": 36.502400, "lng": -121.434700 },
+  "geofences": {
+    "perimeter": { "south": 36.499900, "west": -121.436700, "north": 36.504600, "east": -121.432900 },
+    "truckGate": { "south": 36.500250, "west": -121.434900, "north": 36.500650, "east": -121.434350 },
+    "dropYards": [
+      { "south": 36.501900, "west": -121.435700, "north": 36.502700, "east": -121.434900 }
+    ],
+    "dockAprons": [
+      { "south": 36.501700, "west": -121.434900, "north": 36.502300, "east": -121.434100 }
+    ],
+    "staging": { "south": 36.500500, "west": -121.435100, "north": 36.501300, "east": -121.434200 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 10,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 20,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 41.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.502400,-121.434700,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors", "dropArea", "scale", "trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "facilityId": "Constellation Gonzales Winery confirmed at 800 S Alta St, Gonzales CA. The large warehouse + tank farm + crush-pad campus NE of the road is the winery. The SW industrial building with a heavy trailer yard is a SEPARATE company - Braga Fresh produce (500 S Alta St) - confirmed by a 'braga ... LINE TRUCK ENTRANCE' sign in Street View; it was excluded from this audit.",
+    "truckGate": "Winery main entrance is a divided in/out road off the public road at the SE of the campus, with a small admin/office structure beside it. No barrier arm or sliding/swing gate is visible across the truck lane in satellite imagery; Street View does not cover the private drive. Treated as an open/uncontrolled industrial entrance - marked false but low confidence.",
+    "guardShack": "Small structure near the entrance road appears to be an administrative/reception office, not a dedicated 1-3-vehicle guard booth set beside a gated lane. No guard shack identified.",
+    "remoteGs": "No truck gate identified, so remoteGs is false.",
+    "entryExitSeparate": "The entrance road is physically divided into separate inbound and outbound lanes with painted ENTER/EXIT pavement markings.",
+    "fastLaneOpportunity": "Wide divided entrance road and large paved aprons/circulation areas leave ample room to add a bypass/express lane.",
+    "drivewayLong": "Long approach: the entrance road runs several hundred feet from the public road, past the south admin buildings and around a landscaped oval, before reaching the production area - easily holds a 3+ truck queue.",
+    "dockDoors": "Winery production campus, not a freight DC. No long bank of freight dock doors visible. Estimate ~6-12 service/loading doors across the warehouse south face and crush-pad service area. Low confidence from overhead imagery.",
+    "dropArea": "A modest number of trailers (roughly 6-10) seen parked along internal roads and the crush-pad area; not a large dedicated marked drop lot. Banded 0-10, low confidence.",
+    "shipRcvSeparate": "Grape intake / crush pad (receiving) is physically distinct from the finished-goods warehouse and tank-farm loading area - effectively separate receiving and shipping zones.",
+    "postGateStaging": "Large paved circulation/holding areas inside the property between the entrance and the production buildings provide internal staging.",
+    "multipleFacilities": "Campus with multiple distinct large buildings: the main warehouse, the open-air tank farm, a crush/processing structure, and a south administrative/processing building cluster.",
+    "scale": "No truck scale / weigh platform clearly identified in the truck path; marked false with low confidence (a harvest grape scale may exist but is not confirmed in imagery).",
+    "railServed": "A rail line runs along the US-101 corridor on the east side of the property, but no rail spur enters the winery property.",
+    "urbanRural": "Edge of the small town of Gonzales, Monterey County - surrounded by farmland and vineyards, well outside any dense metro fabric.",
+    "connectivityIssue": "Rural, but immediately adjacent to the town of Gonzales and US-101 with normal cellular coverage; connectivityIssue false.",
+    "trailersVisible": "Approximately 8 trailers visible in captured imagery on the winery property (excluding the Braga Fresh yard); honest estimate.",
+    "trailerParkingCapacity": "Ample paved space could hold ~20 trailers, but the site is not laid out as a dedicated drop yard; estimate."
+  },
+  "method": "deep-audit"
+}

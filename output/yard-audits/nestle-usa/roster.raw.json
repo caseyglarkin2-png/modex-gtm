@@ -1,0 +1,139 @@
+{
+  "account": "Nestlé USA",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 12,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Nestlé Prepared Foods - Solon OH",
+      "city": "Solon",
+      "state": "OH",
+      "type": "Frozen food manufacturing plant",
+      "address": "5750 Harper Rd, Solon, OH 44139",
+      "lat": 41.3756,
+      "lng": -81.4407,
+      "source": "Dossier (historic Stouffer's/Lean Cuisine/Hot Pockets/DiGiorno plant, frozen Center of Excellence; 216 layoffs Jan 2024, now runs Out-of-Home lines); CLUI / Yelp confirm 5750 Harper Rd address"
+    },
+    {
+      "idx": 2,
+      "name": "Nestlé Prepared Foods - Jonesboro AR",
+      "city": "Jonesboro",
+      "state": "AR",
+      "type": "Frozen food manufacturing plant",
+      "address": "1 Nestle Way, Jonesboro, AR 72411",
+      "lat": 35.7989,
+      "lng": -90.6601,
+      "source": "Dossier (~750 employees, Stouffer's/Lean Cuisine/DiGiorno/Tombstone/Sweet Earth, Hot Pockets expansion 2020); Arkansas EDC + Yelp confirm 1 Nestle Way, Craighead County Technology Park"
+    },
+    {
+      "idx": 3,
+      "name": "Nestlé Prepared Foods - Gaffney SC",
+      "city": "Gaffney",
+      "state": "SC",
+      "type": "Frozen food manufacturing plant",
+      "address": "2132 Old Georgia Hwy, Gaffney, SC 29340",
+      "lat": 35.0414,
+      "lng": -81.6098,
+      "source": "Dossier (opened 1980, $150M expansion Nov 2024 for Stouffer's/Hot Pockets/Lean Cuisine/Tombstone/CPK/Jack's/DiGiorno); Yelp listing confirms 2132 Old Georgia Hwy plant address"
+    },
+    {
+      "idx": 4,
+      "name": "Nestlé Pizza Division - Little Chute WI",
+      "city": "Little Chute",
+      "state": "WI",
+      "type": "Frozen pizza manufacturing plant",
+      "address": "401 W North Ave, Little Chute, WI 54140",
+      "lat": 44.2856,
+      "lng": -88.3284,
+      "source": "Nestlé USA pizza division materials (DiGiorno, Jack's, California Pizza Kitchen, Tombstone); Yelp + Heart of the Valley Chamber confirm 401 W North Ave"
+    },
+    {
+      "idx": 5,
+      "name": "Nestlé Prepared Foods - Mount Sterling KY",
+      "city": "Mount Sterling",
+      "state": "KY",
+      "type": "Frozen food manufacturing plant (Hot Pockets)",
+      "address": "150 Oak Grove Dr, Mount Sterling, KY 40353",
+      "lat": 38.0651,
+      "lng": -83.9213,
+      "source": "Nestlé USA press release (designated to make all Hot Pockets brand sandwiches; 40,000 sq ft expansion); Yelp confirms 150 Oak Grove Dr"
+    },
+    {
+      "idx": 6,
+      "name": "Nestlé Prepared Foods - Springville UT",
+      "city": "Springville",
+      "state": "UT",
+      "type": "Frozen food manufacturing plant",
+      "address": "815 W Ray Klauck Way, Springville, UT 84663",
+      "lat": 40.1601,
+      "lng": -111.626,
+      "source": "Dossier (historic Stouffer's frozen meals/pizza site); IndustryNet + Wikimapia confirm 815 W Ray Klauck Way, Nestlé Prepared Foods"
+    },
+    {
+      "idx": 7,
+      "name": "Nestlé Professional - Trenton MO",
+      "city": "Trenton",
+      "state": "MO",
+      "type": "Food manufacturing plant (foodservice / Chef-mate)",
+      "address": "1011 Industrial Rd, Trenton, MO 64683",
+      "lat": 40.0686,
+      "lng": -93.6188,
+      "source": "Dossier (frozen meals / foodservice); Nestlé Professional + Missouri DED confirm Trenton plant (former Conagra building, Chef-mate/Minor's/Stouffer's foodservice). Street address approximate - exact street not confirmed in public sources"
+    },
+    {
+      "idx": 8,
+      "name": "Nestlé Beverage - Anderson IN",
+      "city": "Anderson",
+      "state": "IN",
+      "type": "Beverage manufacturing plant + distribution center",
+      "address": "4301 W 450 S, Anderson, IN 46011",
+      "lat": 40.0383,
+      "lng": -85.7595,
+      "source": "Dossier ('beverage powerhouse', Coffee mate / Natural Bliss / Nesquik RTD / Boost); IBJ + Waze confirm 4301 W 450 S; includes co-located beverage distribution center"
+    },
+    {
+      "idx": 9,
+      "name": "Nestlé Beverage Factory & DC - Glendale AZ (Waddell)",
+      "city": "Waddell",
+      "state": "AZ",
+      "type": "Beverage manufacturing plant + distribution center",
+      "address": "8531 N 150th Ave, Waddell, AZ 85355",
+      "lat": 33.5848,
+      "lng": -112.3713,
+      "source": "Dossier ($675M greenfield, opened mid-2024, Nestlé USA's 20th food & beverage factory; Coffee mate / Natural Bliss / Starbucks creamers); KTAR + yourvalley.net confirm 8531 N 150th Ave, Waddell (Glendale-area). 630,000 sq ft combined factory + DC"
+    },
+    {
+      "idx": 10,
+      "name": "Nestlé USA Baking - Burlington WI",
+      "city": "Burlington",
+      "state": "WI",
+      "type": "Baking ingredients manufacturing plant",
+      "address": "637 S Pine St, Burlington, WI 53105",
+      "lat": 42.6716,
+      "lng": -88.2762,
+      "source": "Dossier (Toll House, baking - retained by Nestlé USA post-2018 confectionery divestiture); Journal Times + Yelp confirm 637 S Pine St (Toll House morsels + cookie dough)"
+    },
+    {
+      "idx": 11,
+      "name": "Nestlé Health Science - Eau Claire WI",
+      "city": "Eau Claire",
+      "state": "WI",
+      "type": "Nutritional beverage manufacturing plant",
+      "address": "3185 Galloway St, Eau Claire, WI 54703",
+      "lat": 44.8294,
+      "lng": -91.4593,
+      "source": "Nestlé Health Science (Boost, Carnation Breakfast Essentials, RTD medical nutrition; $43M expansion 2023). Street address approximate - public sources name Eau Claire/Galloway St area, exact street unconfirmed"
+    },
+    {
+      "idx": 12,
+      "name": "Nestlé USA Distribution Center - McDonough GA",
+      "city": "McDonough",
+      "state": "GA",
+      "type": "Distribution center",
+      "address": "1 Nestle Ct, McDonough, GA 30253",
+      "lat": 33.4108,
+      "lng": -84.1297,
+      "source": "Waze + business directories confirm Nestlé Distribution Center at 1 Nestle Ct, McDonough GA - southeast regional DC serving frozen/ambient brands"
+    }
+  ]
+}

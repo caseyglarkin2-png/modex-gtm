@@ -1,0 +1,48 @@
+{
+  "name": "Bob Evans Farms - Xenia OH Plant",
+  "type": "Manufacturing plant (fresh pork sausage rolls & links)",
+  "coords": { "lat": 39.680050, "lng": -83.911100 },
+  "geofences": {
+    "perimeter": { "south": 39.679050, "west": -83.912450, "north": 39.681050, "east": -83.909900 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 39.679350, "west": -83.910900, "north": 39.679650, "east": -83.910100 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 6,
+    "trailersVisible": 1,
+    "trailerParkingCapacity": 8,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 10.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.680050,-83.911100,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "East-side truck yard opens directly onto Birch Rd with no barrier arm, gate, or checkpoint. Street View (2022-06) confirms a wide-open paved apron meeting the public road. The west office/parking driveway is also an open curb cut. No truck gate.",
+    "guardShack": "No booth structure of any kind at either driveway. Confirmed in Street View from multiple headings.",
+    "drivewayShort": "Plant fronts directly on Birch Rd with minimal setback; the truck approach from road to dock is short, holding only 1-2 trucks.",
+    "dockDoors": "Estimated 6 visible loading/overhead doors on the east and south building faces from satellite z20 and Street View; older small-footprint plant (~30,000 sq ft core). Low confidence on exact count due to building face angles.",
+    "dropArea": "No marked trailer-parking stalls; the east apron is open paved space, not a drop lot.",
+    "urbanRural": "Edge-of-town Xenia surrounded by farm fields, ball fields, and scattered rural residential; classified Rural.",
+    "trailerParkingCapacity": "East paved apron could informally hold ~8 trailers but has no marked stalls; low confidence.",
+    "buildingCount": "Single connected/multi-section plant complex counted as ~4 distinct attached structures plus accessory equipment buildings."
+  },
+  "method": "deep-audit"
+}

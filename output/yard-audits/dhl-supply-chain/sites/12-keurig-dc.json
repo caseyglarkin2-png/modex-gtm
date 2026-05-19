@@ -1,0 +1,67 @@
+{
+  "name": "DHL Supply Chain - Keurig DC - Union City GA",
+  "type": "Dedicated Customer Distribution Center (beverage)",
+  "coords": { "lat": 33.572741, "lng": -84.534200 },
+  "geofences": {
+    "perimeter": { "south": 33.570800, "west": -84.537200, "north": 33.574500, "east": -84.531000 },
+    "truckGate": { "south": 33.571800, "west": -84.536500, "north": 33.572300, "east": -84.536000 },
+    "dropYards": [
+      { "south": 33.571100, "west": -84.536300, "north": 33.571800, "east": -84.531600 }
+    ],
+    "dockAprons": [
+      { "south": 33.573500, "west": -84.536300, "north": 33.574100, "east": -84.531600 },
+      { "south": 33.571300, "west": -84.536300, "north": 33.572000, "east": -84.531600 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 54.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.572741,-84.534200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Street View (2025-10) clearly shows a chain-link perimeter fence separating the office/car-parking area from the truck yard, with a gate where the truck access drive crosses the fence line. A 'DEAD END / NO TRACTOR TRAILERS BEYOND THIS POINT' sign marks the car/office side, confirming a controlled separation of truck and visitor traffic.",
+    "guardShack": "No large multi-window staffed guard booth visible at the gate in any Street View capture (2019, 2025). The gate structure is small. Classified guardShack false / remoteGs true (kiosk or automated check-in implied) - flagged as a medium-confidence call given the small/obscured structure.",
+    "remoteGs": "Gate present but no clear guard booth - implies remote/kiosk check-in.",
+    "dockDoors": "Cross-dock building: continuous dock-door banks run the full ~440 m length of both the N and S faces, with dense rows of trailers backed in on both sides. Total door count well into the 100+ range; estimated ~120, banded 50+.",
+    "dropArea": "Marked trailer-parking rows along the S yard hold many trailers without tractors; 50+ band.",
+    "shipRcvSeparate": "Docks on two distinct building faces (N and S) - typical cross-dock shipping/receiving split.",
+    "dropYard": "Dedicated trailer-storage rows in the S yard, separate from active dock staging.",
+    "fastLaneOpportunity": "Wide entry apron and large open dock yards give ample paved width to add a bypass/express lane.",
+    "drivewayLong": "Access drive from Studio Way runs a long distance into the property before reaching the dock yards - room for 3+ trucks to queue.",
+    "urbanRural": "Union City is within the Atlanta metro (Fulton County), adjacent to I-85 and dense industrial development. Urban.",
+    "railServed": "No rail spur into the property; I-85 runs to the SE."
+  },
+  "method": "deep-audit"
+}

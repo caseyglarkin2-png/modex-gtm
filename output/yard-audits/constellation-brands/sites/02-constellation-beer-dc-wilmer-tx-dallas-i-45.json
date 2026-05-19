@@ -1,0 +1,73 @@
+{
+  "name": "Constellation Beer DC - Wilmer TX (Dallas I-45)",
+  "type": "Distribution Center (beer cross-dock, rail-served)",
+  "coords": { "lat": 32.62120, "lng": -96.72950 },
+  "geofences": {
+    "perimeter": { "south": 32.61930, "west": -96.73270, "north": 32.62390, "east": -96.72560 },
+    "truckGate": { "south": 32.61840, "west": -96.73230, "north": 32.61960, "east": -96.73080 },
+    "dropYards": [
+      { "south": 32.61980, "west": -96.73000, "north": 32.62310, "east": -96.72620 }
+    ],
+    "dockAprons": [
+      { "south": 32.61970, "west": -96.73120, "north": 32.62330, "east": -96.72660 },
+      { "south": 32.61990, "west": -96.73270, "north": 32.62340, "east": -96.72900 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 64,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 41.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.62120,-96.72950,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes",
+    "railServed", "dockDoorCount"
+  ],
+  "fieldNotes": {
+    "_site": "Facility identified as the Biagi Bros / Constellation Brands beer cross-dock at 1401 W Wintergreen Rd, Hutchins TX 75141 (roster listed it as Wilmer, but the actual operating address per Biagi Bros' own website is W Wintergreen Rd, Hutchins — same I-45/I-20 logistics corridor immediately adjacent to Wilmer). Confirmed via Biagi Bros website, Evans General Contractors project page, Good Beer Hunting 2016 Sightlines, and current (2026-02) Street View showing the operating building.",
+    "_geocode": "Roster pin (32.589661, -96.678392) was Wilmer city geometric-center and ~5 km off the real building. Re-located via Nominatim + satellite to the verified Biagi building. Locked center 32.62120, -96.72950.",
+    "truckGate": "No barrier-arm or sliding gate is clearly visible across the truck driveway in the available satellite imagery; the SW-end driveway off W Wintergreen Rd appears open. Set false but flagged uncertain — a 3PL beer DC of this class typically controls its entrance; a gate may exist but is not resolvable.",
+    "guardShack": "No guard booth resolvable at the entrance — false, uncertain.",
+    "shipRcvSeparate": "True — this is a true cross-dock with dock doors on BOTH long faces: trailers backed in along the SE apron (truck distribution) and along the NW face (rail-side / receiving). The two dock banks are on physically separate building faces.",
+    "dockDoors": "Banded 50+. Roster cites 64 truck dock doors plus 24 rail doors. Overhead count of trailers backed in on both faces is consistent with a 50+ door building; exact count not verifiable from imagery — flagged uncertain.",
+    "dropArea": "25-50 — a striped trailer-parking apron on the SE side holds dozens of drop trailers separate from active dock positions.",
+    "railServed": "Set true. A rail line runs immediately along the NW face of the building and the NW dock face is configured for rail-side handling; roster (Good Beer Hunting / Biagi / Evans GC) describes the build-to-suit as rail-served with 24 rail doors and capacity to unload four 30-car trains. A dedicated spur curving into the footprint is not crisply resolved in current imagery, so flagged uncertain — but the rail-adjacent NW dock configuration corroborates rail service.",
+    "drivewayLong": "The SE truck court is very wide / deep concrete apron — easily holds a 3+ truck queue between the entrance and the dock face.",
+    "fastLaneOpportunity": "Wide entrance apron and large open truck court provide ample paved width to add an express/bypass lane.",
+    "postGateStaging": "Large paved truck court inside the property before the dock doors functions as a holding/queue area.",
+    "urbanRural": "Rural — the site sits on the developing edge of the Hutchins industrial corridor, surrounded by farm fields and open graded land; not embedded in dense metro fabric. Per rubric, edge-of-town industrial = Rural.",
+    "siteAreaAcres": "~41 acres operational footprint (building + truck court + trailer apron) estimated from the perimeter box; the broader parcel per RealtyTrac is ~33.7 acres for the building lot — perimeter box includes adjacent paved/graded yard.",
+    "buildingCount": "One large cross-dock building. Some adjacent construction activity is visible nearby but not part of this Constellation/Biagi parcel."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,52 @@
+{
+  "name": "CJ Logistics - Arlington TX",
+  "type": "Distribution Center",
+  "coords": { "lat": 32.6806, "lng": -97.0794 },
+  "geofences": {
+    "perimeter": { "south": 32.6790, "west": -97.0812, "north": 32.6822, "east": -97.0775 },
+    "truckGate": { "south": 32.6795, "west": -97.0788, "north": 32.6800, "east": -97.0781 },
+    "dropYards": [
+      { "south": 32.6792, "west": -97.0788, "north": 32.6818, "east": -97.0779 }
+    ],
+    "dockAprons": [
+      { "south": 32.6793, "west": -97.0790, "north": 32.6819, "east": -97.0782 },
+      { "south": 32.6793, "west": -97.0808, "north": 32.6819, "east": -97.0801 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 35,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 30.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.6806,-97.0794,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "10-25",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes", "truckGateCount"],
+  "fieldNotes": {
+    "location": "Confirmed 4001 New York Ave, Arlington TX - CJ Logistics America food-grade DC. Large multi-tenant cross-dock warehouse in a dense DFW industrial park; CJ Logistics occupies a ~50,000 SF portion (per CJ open-space page). Hobby Lobby trailers visible at the docks indicate a major co-tenant.",
+    "truckGate": "Open multi-tenant industrial park. No perimeter fence enclosing the whole site and no barrier arm/checkpoint at any driveway. Truck-court driveways on the east and south connect to internal park roads via open curb cuts (2026-March Street View). Some partial chain-link fencing screens portions of the east dock court but does not gate the entrances.",
+    "guardShack": "No guard booth visible at any driveway.",
+    "remoteGs": "False - no controlled truck gate at all.",
+    "shipRcvSeparate": "True - cross-dock building with dock banks on BOTH the east face and the west face, each fronting its own truck court.",
+    "dockDoors": "Extensive dock doors along both the east and west faces; estimated ~90 doors total - low-confidence overhead count.",
+    "dropYard": "Trailers parked in the wide east truck court, separate from the dock apron - functions as a drop yard though stalls are loosely marked.",
+    "urbanRural": "Arlington TX, dense DFW industrial corridor near the airport/intermodal - Urban.",
+    "railServed": "No rail spur into the property."
+  },
+  "method": "deep-audit"
+}

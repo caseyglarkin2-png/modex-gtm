@@ -1,0 +1,56 @@
+{
+  "name": "Barnes & Noble - Monroe Township NJ DC",
+  "type": "Distribution Center / E-commerce Fulfillment Center",
+  "coords": { "lat": 40.35820, "lng": -74.46510 },
+  "geofences": {
+    "perimeter": { "south": 40.35630, "west": -74.46890, "north": 40.36110, "east": -74.46230 },
+    "truckGate": { "south": 40.35880, "west": -74.46300, "north": 40.35960, "east": -74.46220 },
+    "dropYards": [
+      { "south": 40.35660, "west": -74.46780, "north": 40.35730, "east": -74.46620 },
+      { "south": 40.35620, "west": -74.46420, "north": 40.35690, "east": -74.46230 }
+    ],
+    "dockAprons": [
+      { "south": 40.35680, "west": -74.46760, "north": 40.35740, "east": -74.46280 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 73.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.35820,-74.46510,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "remoteGs", "entryLanes", "exitLanes", "postGateStaging"],
+  "fieldNotes": {
+    "location": "Confirmed 1 Barnes & Noble Way, Monroe Township NJ. Single ~1.15M sq ft DC building; derived site area 73.5 acres matches dossier's stated 73 acres, strongly corroborating the building identification.",
+    "truckGate": "Property is fully chain-link fenced (fence confirmed via Street View on the west side and visible in satellite along the south). The dock yard is a secured enclosure and the truck route necessarily passes a fence line, implying a controlled gate. No barrier-arm or sliding-gate STRUCTURE was directly captured in available imagery (Street View covers only public roads and the east perimeter loop, not the truck-yard entrance), so this is a medium-confidence inference from the fenced perimeter.",
+    "guardShack": "No guard booth found anywhere on the property in satellite (z18-z21) or Street View. The structure cluster at the SE corner is a fenced utility/electrical equipment yard with transformers and storage containers, not a check-in booth.",
+    "remoteGs": "Set true on the basis of truckGate=true with no guard booth; check-in is likely kiosk/app-based. Flagged uncertain.",
+    "dockDoors": "Continuous bank of loading doors spans the entire south face of the building with many trailers backed in; clearly 50+ band. Dossier states 115 doors; overhead count estimate ~110.",
+    "dropArea": "Marked trailer-parking stalls full of dropped trailers at the SW corner and along the SE south edge; estimated 25-50 band.",
+    "dropYard": "Dedicated trailer-storage rows at the SW and SE corners separate from the active dock apron.",
+    "postGateStaging": "Wide paved apron south of the dock face provides interior queuing/staging room; inferred true.",
+    "drivewayLong": "Long internal perimeter route from the public-road entrance, around the east and south of the building to the docks, easily holds 3+ trucks.",
+    "urbanRural": "Large modern industrial park (Docks Corner / Cranbury-Monroe submarket) adjacent to NJ Turnpike and Route 33, dense suburban-NJ industrial fabric; Urban.",
+    "railServed": "A rail line runs E-W south of the property but lies in a separate corridor outside the perimeter fence with no spur entering the site; not rail-served.",
+    "entryLanes": "Not separately determinable; entrance shared with employee traffic. Estimated 1 in / 1 out, flagged uncertain.",
+    "trailersVisible": "Approx 55 trailers counted at docks and in drop areas in the captured imagery; honest overhead estimate."
+  },
+  "method": "deep-audit"
+}

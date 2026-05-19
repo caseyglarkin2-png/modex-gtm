@@ -1,0 +1,46 @@
+{
+  "name": "UNFI - Auburn WA DC (Seattle)",
+  "type": "Distribution Center",
+  "coords": { "lat": 47.32655, "lng": -122.24905 },
+  "geofences": {
+    "perimeter": { "south": 47.32530, "west": -122.25040, "north": 47.32790, "east": -122.24700 },
+    "truckGate": { "south": 47.32600, "west": -122.25040, "north": 47.32640, "east": -122.24990 },
+    "dropYards": [
+      { "south": 47.32555, "west": -122.24960, "north": 47.32625, "east": -122.24720 },
+      { "south": 47.32700, "west": -122.24960, "north": 47.32770, "east": -122.24730 }
+    ],
+    "dockAprons": [
+      { "south": 47.32635, "west": -122.24960, "north": 47.32695, "east": -122.24700 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45, "trailersVisible": 90, "trailerParkingCapacity": 130,
+    "truckGateCount": 2, "buildingCount": 4, "siteAreaAcres": 18.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@47.32655,-122.24905,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "UNFI's 323,000 sq ft Auburn WA DC. Resolved to the Valley Centre industrial complex on B St NW, Auburn 98001 - LoopNet/CoStar tie the 'United Natural Foods - Valley Centre Bldg 3' name and APN 000460-0043 to 2530 B St NW (181,300 sq ft on 8.1 acres). UNFI occupied Bldg 3 plus expansion space; campus center locked at 47.32655,-122.24905.",
+    "status": "UNFI publicly announced (2019) closure of the Auburn DC, consolidating PNW volume into the new Centralia DC (idx 21) and expanded Ridgefield DC (idx 22); customer transition completed early 2020. Imagery still shows an intensely active reefer/dry-van DC operation with yard hostlers - whether UNFI or a successor tenant, the physical yard is a working large-scale grocery DC.",
+    "truckGate": "Chain-link perimeter fence runs the full B St NW frontage; truck driveways are open gaps in the fence with no barrier arm or booth visible from 2025-04 Street View. Classed truckGate true on the controlled-checkpoint pinch-point of a fenced commercial yard, but flagged uncertain - no hard barrier confirmed.",
+    "guardShack": "No guard booth visible at any driveway along B St NW; remoteGs marked true on that basis (gate with no shack implies kiosk/call-box check-in).",
+    "multipleFacilities": "Valley Centre is a multi-building campus - 4+ large warehouse buildings share the truck court and trailer rows.",
+    "dropYard": "Extensive trailer storage rows on the south and north sides of the truck court, full of reefers - clear dedicated drop-yard, 50+ band.",
+    "yardMetrics": "Counts are honest estimates from z19-z20 imagery over a multi-building campus; dock door count spans several building faces and is approximate."
+  },
+  "method": "deep-audit"
+}

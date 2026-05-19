@@ -1,0 +1,45 @@
+{
+  "name": "Campbell's Soup - Maxton NC",
+  "type": "Manufacturing - thermal/aseptic soup",
+  "coords": { "lat": 34.770800, "lng": -79.325200 },
+  "geofences": {
+    "perimeter": { "south": 34.76600, "west": -79.32920, "north": 34.77560, "east": -79.32150 },
+    "truckGate": { "south": 34.77400, "west": -79.32345, "north": 34.77470, "east": -79.32270 },
+    "dropYards": [
+      { "south": 34.76610, "west": -79.32760, "north": 34.76960, "east": -79.32320 }
+    ],
+    "dockAprons": [
+      { "south": 34.76920, "west": -79.32560, "north": 34.77060, "east": -79.32400 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40, "trailersVisible": 95, "trailerParkingCapacity": 130,
+    "truckGateCount": 1, "buildingCount": 8, "siteAreaAcres": 165.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.770800,-79.325200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "scale", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Main entrance off NC-71 N; entrance road splits, guarded checkpoint visible at z20-21 ~34.7743,-79.3231",
+    "guardShack": "Small guard-booth structure with dark roof at the checkpoint apron, ~1-vehicle footprint, confirmed at z21",
+    "dockDoorCount": "Sprawling campus, docks distributed across multiple building faces; ~40 estimate is low-confidence, banded 25-50",
+    "dropYard": "Very large drop yard south of plant, 8+ rows packed with parked trailers (80-100+)",
+    "multipleFacilities": "Campus of 8+ connected/separate buildings: process halls, silos, warehouses",
+    "fastLaneOpportunity": "Wide entrance apron off the highway with room for additional lanes",
+    "siteAreaAcres": "Derived from perimeter box ~1060m N-S x ~700m E-W of fenced/cleared area"
+  },
+  "method": "deep-audit"
+}

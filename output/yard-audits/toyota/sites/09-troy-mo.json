@@ -1,0 +1,62 @@
+{
+  "name": "Toyota Motor Manufacturing Missouri - Troy MO",
+  "type": "Powertrain Plant (aluminum castings)",
+  "coords": { "lat": 38.96360, "lng": -90.96904 },
+  "geofences": {
+    "perimeter": { "south": 38.9608, "west": -90.9712, "north": 38.9662, "east": -90.9655 },
+    "truckGate": { "south": 38.96535, "west": -90.96845, "north": 38.96575, "east": -90.96795 },
+    "dropYards": [
+      { "south": 38.9637, "west": -90.96730, "north": 38.96560, "east": -90.96530 }
+    ],
+    "dockAprons": [
+      { "south": 38.96255, "west": -90.96850, "north": 38.96310, "east": -90.96680 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 73.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.96360,-90.96904,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Single controlled entrance off the public road on the north side; Toyota monument sign + paved entrance with lane split.",
+    "guardShack": "Staffed gatehouse confirmed in Street View (2024-09): a small grey 1-2-vehicle-footprint booth set in the median of the entrance drive, lanes splitting around it.",
+    "dropArea": "Large gravel trailer drop yard on the NE side of the property holding ~40-55 trailers parked angled; counted from zoom-19/20 imagery.",
+    "dockDoorCount": "~14 dock doors estimated along the south face of the plant; partly shadowed in imagery — flagged as estimate.",
+    "fastLaneOpportunity": "Wide entrance apron and generous paved width at the gate; physical room to add an express lane.",
+    "multipleFacilities": "Single primary plant building plus ancillary structures (water treatment, electrical substation, smaller support buildings) — one operational facility, not a multi-building campus.",
+    "railServed": "No rail spur visible entering the property."
+  },
+  "method": "deep-audit"
+}

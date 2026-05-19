@@ -1,0 +1,56 @@
+{
+  "name": "UNFI - Carlisle PA DC",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.22880, "lng": -77.08760 },
+  "geofences": {
+    "perimeter": { "south": 40.22620, "west": -77.09180, "north": 40.23080, "east": -77.08350 },
+    "truckGate": { "south": 40.22640, "west": -77.09150, "north": 40.22730, "east": -77.09000 },
+    "dropYards": [
+      { "south": 40.22920, "west": -77.08900, "north": 40.23060, "east": -77.08420 }
+    ],
+    "dockAprons": [
+      { "south": 40.22730, "west": -77.09140, "north": 40.22960, "east": -77.08560 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 95,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 52.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.22880,-77.08760,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes",
+    "preGateStaging", "postGateStaging", "scale", "multiStep"
+  ],
+  "fieldNotes": {
+    "location": "Confirmed UNFI Carlisle DC, 192 Kost Rd, Carlisle PA 17015. Roster ROOFTOP geocode 40.22871,-77.088179 lands squarely on the large rectangular DC building on the NE/upper side of the Kost Rd industrial cluster. The building is a cross-dock-style food DC oriented WSW-ENE, ~1100 ft long. Web-corroborated via TruckMap / UNFI locations / OpenGovUS (Unfi Distribution Company LLC, 192 Kost Rd) - a legacy-SuperValu mid-Atlantic conventional grocery DC.",
+    "addressAmbiguity": "192 Kost Rd is a multi-tenant industrial address - SC Johnson also has a separate large cross-dock RDC (~450x1100 ft) at this address cluster, the SW/lower building, which is audited separately under the sc-johnson account (idx 9). The UNFI building is the distinct NE/upper building on the ROOFTOP geocode; the two are separate parcels in the same business park off Kost Rd.",
+    "truckGate": "Single private access road serves the property from Kost Rd; the truck drive wraps the WSW corner into the dock apron and drop yard. Street View on Kost Rd does not reach the property entrance (coverage stops at the public road). A controlled truck checkpoint is assumed for a legacy-SuperValu conventional grocery DC of this scale; guardShack assumed true (these SuperValu-generation DCs typically ran staffed gatehouses). Gate/booth not directly visible in imagery -> flagged medium confidence.",
+    "dockDoors": "Long continuous dock door rhythm visible along the NW long face of the building with ~70 trailers backed in (z20 imagery). Estimated 90-100 dock positions total -> band 50+.",
+    "dropYard": "Large marked trailer-parking lot at the NE end of the building (z19 NW-face probe) holding parked trailers without tractors -> dropYard true, dropArea band 50+ (estimated ~110 stall capacity).",
+    "shipRcvSeparate": "Dock activity concentrated on the NW face plus the NE-end drop yard; not two clearly separate ship/rcv dock banks on opposite faces -> false.",
+    "fastLaneOpportunity": "Wide access road and large open paved apron at the WSW corner -> physical room for an express/bypass lane.",
+    "urbanRural": "Edge-of-town Carlisle PA: parcel is bordered by active farmland on the N, W, and S, with a residential subdivision adjacent to the E. Per rubric (small-town industrial defaults to Rural) -> Rural.",
+    "railServed": "A rail line runs along the SE/south boundary of the property (visible in z19 SE probe) but no spur enters the property; the DC is truck-served -> railServed false.",
+    "siteAreaAcres": "~52 acres derived from the perimeter box around the UNFI building, drop yard, dock aprons, and employee parking.",
+    "entryLanes/exitLanes": "Estimated 2/2 for a DC of this scale; not precisely counted - gate not visible in imagery."
+  },
+  "method": "deep-audit"
+}

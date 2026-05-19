@@ -1,0 +1,53 @@
+{
+  "name": "Kenco American Standard DC - Hutchins TX",
+  "type": "Dedicated Distribution Center",
+  "coords": { "lat": 32.63560, "lng": -96.69640 },
+  "geofences": {
+    "perimeter": { "south": 32.63360, "west": -96.69900, "north": 32.63780, "east": -96.69400 },
+    "truckGate": { "south": 32.63390, "west": -96.69720, "north": 32.63440, "east": -96.69640 },
+    "dropYards": [
+      { "south": 32.63600, "west": -96.69850, "north": 32.63780, "east": -96.69600 }
+    ],
+    "dockAprons": [
+      { "south": 32.63380, "west": -96.69820, "north": 32.63440, "east": -96.69440 },
+      { "south": 32.63440, "west": -96.69850, "north": 32.63760, "east": -96.69790 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 54.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.63560,-96.69640,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "The entire dock yard is enclosed by a continuous chain-link perimeter fence on all four sides (confirmed in 2026 Street View on the S, W, and E faces). Truck access is through sliding gates in that fence. Kenco's published scope for this site explicitly includes 'spotter and yard management' and 'contract security', confirming a controlled, access-managed yard.",
+    "guardShack": "No dedicated 1-3-car guard booth is visible at any gate in the available imagery. Classified false; flagged uncertain because 'contract security' is contracted - a guard may be posted at a gate not clearly resolved.",
+    "remoteGs": "True - controlled truck gate but no identifiable guard booth (kiosk / app / posted-security check-in).",
+    "dockDoors": "Very large ~625,000 SF building with dock doors on all four faces and trailers backed in around the entire perimeter; well into the 50+ band (estimated ~130 doors).",
+    "dropArea": "Extensive trailer drop yard - long rows of unhitched trailers parked at the north end and around the building; 50+ band, large capacity (~200).",
+    "drivewayLong": "Deep paved dock aprons (~50-60m) on every face provide ample internal truck stacking.",
+    "multipleFacilities": "Single very large warehouse on its own parcel; adjacent warehouses to the west are separate properties - multipleFacilities false.",
+    "urbanRural": "Hutchins industrial park south of Dallas off I-45, edge-of-metro with farmland nearby; classified Rural per the small-town-industrial tie-breaker.",
+    "railServed": "No rail spur enters the property.",
+    "facts": "801 E Wintergreen Rd: ~625,000 SF Dallas-area DC for American Standard Brands (kitchen/bath products); Kenco runs finished-goods distribution, repackaging, toilet-kit packaging, spotter & yard management, contract security, MHE."
+  },
+  "method": "deep-audit"
+}

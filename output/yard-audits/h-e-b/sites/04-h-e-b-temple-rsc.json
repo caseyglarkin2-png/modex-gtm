@@ -1,0 +1,58 @@
+{
+  "name": "H-E-B Temple RSC - Temple TX",
+  "type": "Retail Support Center / Distribution Center",
+  "coords": { "lat": 31.152500, "lng": -97.361700 },
+  "geofences": {
+    "perimeter": { "south": 31.148600, "west": -97.366500, "north": 31.156800, "east": -97.356000 },
+    "truckGate": { "south": 31.150300, "west": -97.359600, "north": 31.150900, "east": -97.358900 },
+    "dropYards": [
+      { "south": 31.149600, "west": -97.362400, "north": 31.151400, "east": -97.359800 },
+      { "south": 31.153400, "west": -97.366200, "north": 31.155800, "east": -97.363400 },
+      { "south": 31.150400, "west": -97.358900, "north": 31.151600, "east": -97.357200 }
+    ],
+    "dockAprons": [
+      { "south": 31.152000, "west": -97.364200, "north": 31.154400, "east": -97.363400 },
+      { "south": 31.152200, "west": -97.362000, "north": 31.154200, "east": -97.361200 }
+    ],
+    "staging": { "south": 31.149400, "west": -97.359000, "north": 31.150600, "east": -97.357200 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 280,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 105.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@31.152500,-97.361700,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "multiStep", "connectivityIssue"],
+  "fieldNotes": {
+    "facility": "H-E-B Temple Retail Support Center, 4750 Wendland Rd — Central Texas distribution hub. Roster coordinates landed correctly inside the campus. A major $200M expansion adding an automated frozen-distribution line was under construction at the time of imagery (large active construction zone on the east half of the campus).",
+    "truckGate": "Controlled truck entrance off the campus access road; Street View (2026-04) shows a red overhead gantry sign spanning the entrance driveway (check-in / routing instructions) and green perimeter fencing. truckGate true.",
+    "guardShack": "No staffed guard booth resolved at the truck entrance. The overhead gantry sign with instructions is consistent with an automated / remote driver check-in; classified remoteGs true. Medium confidence — a booth was not isolated and the entrance area is partly disturbed by construction.",
+    "preGateStaging": "Trailers were observed staged along the public access road outside the gate (Street View 2026-04) — usable pre-gate staging.",
+    "postGateStaging": "Wide paved truck yard inside the gate before the docks.",
+    "dockDoors": "Long dock-door banks on multiple warehouse buildings with trailers backed in; well into 50+ band (estimated ~110). The new expansion building will add more.",
+    "dropArea": "Multiple large drop yards with extensive parked-trailer arrays on the west and south of the campus; over 50.",
+    "shipRcvSeparate": "Dock banks on distinct building faces / separate buildings.",
+    "multipleFacilities": "Multi-building campus — the existing RSC warehouses plus the new frozen-distribution expansion building.",
+    "urbanRural": "Edge-of-town industrial park on the outskirts of Temple, with adjacent farmland and undeveloped tracts; classified Rural per the small-city tie-breaker.",
+    "fastLaneOpportunity": "Wide gate apron and access road with unused paved width — room for a dedicated express lane.",
+    "railServed": "No rail spur into the property.",
+    "connectivityIssue": "Edge-of-town location; cellular coverage likely adequate given the surrounding industrial park, but flagged as inferred."
+  },
+  "method": "deep-audit"
+}

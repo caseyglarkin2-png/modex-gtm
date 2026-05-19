@@ -1,0 +1,74 @@
+{
+  "name": "John Deere North American Parts Distribution Center - Milan IL",
+  "type": "Parts Distribution Center",
+  "coords": { "lat": 41.44750, "lng": -90.54550 },
+  "geofences": {
+    "perimeter": { "south": 41.44230, "west": -90.54980, "north": 41.45230, "east": -90.53950 },
+    "truckGate": { "south": 41.45100, "west": -90.54480, "north": 41.45180, "east": -90.54380 },
+    "dropYards": [
+      { "south": 41.44640, "west": -90.54320, "north": 41.45000, "east": -90.53980 },
+      { "south": 41.44320, "west": -90.54820, "north": 41.44680, "east": -90.54320 },
+      { "south": 41.44680, "west": -90.54420, "north": 41.44980, "east": -90.54180 }
+    ],
+    "dockAprons": [
+      { "south": 41.44620, "west": -90.54580, "north": 41.45020, "east": -90.54360 }
+    ],
+    "staging": { "south": 41.45000, "west": -90.54420, "north": 41.45120, "east": -90.54260 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 350,
+    "trailerParkingCapacity": 500,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 215.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.44750,-90.54550,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "fastLaneOpportunity"],
+  "fieldNotes": {
+    "truckGate": "No barrier arm, gate, or controlled checkpoint observed at the property-line entrance. The DC is accessed via a wide private entrance drive off the north arterial road; the drive is open at the street (z20 satellite and 2019/2025 Street View). The office entrance at the NE is a circular drive with no control. A facility this large likely has internal gates at the dock yard, but no street-level controlled gate was visible - classified false on visible evidence.",
+    "guardShack": "No guard booth observed at the property-line entrance or office entrance. Web tips mention drivers referencing 'gate' numbers (e.g. Gate 4), suggesting internal gate stations exist, but none was confirmed as a staffed booth at a property-line truck entrance.",
+    "remoteGs": "False - no controlled truck gate at the property line was confirmed (precondition not met).",
+    "postGateStaging": "Large paved staging areas on the building's east face / dock yard before the dock doors.",
+    "drivewayLong": "Long private entrance drive and an extensive internal dock-side road can stack many trucks.",
+    "fastLaneOpportunity": "Ample paved width and a wide entrance apron at the open entrance drive - physical room for express/bypass lanes.",
+    "dockDoors": "50+: the 2.8M sq ft DC has a continuous dock bank running the full length of the building's east face with trailers backed in along its entire length. Estimated ~90 doors - high-confidence band, lower-confidence exact count.",
+    "dropArea / dropYard": "50+: enormous trailer drop yards along the building's east and south sides - z19 imagery shows hundreds of parked trailers in long rows plus intermodal containers. One of the largest trailer-staging operations observed.",
+    "shipRcvSeparate": "Dock activity concentrated on the building's east face; no clearly separate shipping vs. receiving dock clusters on different faces observed - set false.",
+    "urbanRural": "Milan IL is a small town (~5,000 pop) on the Quad Cities metro edge; the DC is surrounded by farmland to the south, residential to the east, and a highway/interchange to the NW. Per the rubric's small-town / edge-of-town guidance, classified Rural.",
+    "scale": "No truck scale / weigh platform observed in the truck path.",
+    "multipleFacilities": "One DC building (plus an attached office wing); not a multi-building campus - false.",
+    "railServed": "No active rail spur observed entering the property - railServed false.",
+    "trailersVisible": "~350 is an estimate from overhead imagery of the very large drop yards; flagged uncertain.",
+    "trailerParkingCapacity": "~500 - the drop yards are extensive with room for very high trailer counts; honest estimate.",
+    "entryLanes": "Estimated 2 lanes at the wide open entrance drive; no formal gate lanes - low confidence.",
+    "siteAreaAcres": "~215 acres - the 2.8M sq ft building footprint (~64 acres) plus extensive trailer drop yards, parking, pond, and grounds. Perimeter bounding box ~265 acres includes some undeveloped margin."
+  },
+  "method": "deep-audit"
+}

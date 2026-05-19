@@ -1,0 +1,7713 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.98,
+              32.7385
+            ],
+            [
+              -96.972,
+              32.7385
+            ],
+            [
+              -96.972,
+              32.7445
+            ],
+            [
+              -96.98,
+              32.7445
+            ],
+            [
+              -96.98,
+              32.7385
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot FDC - Dallas TX",
+        "type": "Flatbed Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 70,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.973,
+              32.739
+            ],
+            [
+              -96.9715,
+              32.739
+            ],
+            [
+              -96.9715,
+              32.743
+            ],
+            [
+              -96.973,
+              32.743
+            ],
+            [
+              -96.973,
+              32.739
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot FDC - Dallas TX",
+        "type": "Flatbed Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.4872,
+              39.2194
+            ],
+            [
+              -76.4815,
+              39.2194
+            ],
+            [
+              -76.4815,
+              39.2256
+            ],
+            [
+              -76.4872,
+              39.2256
+            ],
+            [
+              -76.4872,
+              39.2194
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot FDC - Sparrows Point MD",
+        "type": "Flatbed Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 240,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 64,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.4856,
+              39.2196
+            ],
+            [
+              -76.4847,
+              39.2196
+            ],
+            [
+              -76.4847,
+              39.2202
+            ],
+            [
+              -76.4856,
+              39.2202
+            ],
+            [
+              -76.4856,
+              39.2196
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot FDC - Sparrows Point MD",
+        "type": "Flatbed Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.487,
+              39.2199
+            ],
+            [
+              -76.4853,
+              39.2199
+            ],
+            [
+              -76.4853,
+              39.2248
+            ],
+            [
+              -76.487,
+              39.2248
+            ],
+            [
+              -76.487,
+              39.2199
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot FDC - Sparrows Point MD",
+        "type": "Flatbed Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.4851,
+              39.2203
+            ],
+            [
+              -76.484,
+              39.2203
+            ],
+            [
+              -76.484,
+              39.225
+            ],
+            [
+              -76.4851,
+              39.225
+            ],
+            [
+              -76.4851,
+              39.2203
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot FDC - Sparrows Point MD",
+        "type": "Flatbed Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.4836,
+              39.2205
+            ],
+            [
+              -76.4823,
+              39.2205
+            ],
+            [
+              -76.4823,
+              39.2252
+            ],
+            [
+              -76.4836,
+              39.2252
+            ],
+            [
+              -76.4836,
+              39.2205
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot FDC - Sparrows Point MD",
+        "type": "Flatbed Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.485,
+              39.2195
+            ],
+            [
+              -76.4836,
+              39.2195
+            ],
+            [
+              -76.4836,
+              39.2203
+            ],
+            [
+              -76.485,
+              39.2203
+            ],
+            [
+              -76.485,
+              39.2195
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot FDC - Sparrows Point MD",
+        "type": "Flatbed Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8532,
+              32.6362
+            ],
+            [
+              -96.8492,
+              32.6362
+            ],
+            [
+              -96.8492,
+              32.6408
+            ],
+            [
+              -96.8532,
+              32.6408
+            ],
+            [
+              -96.8532,
+              32.6362
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Dallas TX",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 200,
+          "trailerParkingCapacity": 300,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 55,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8518,
+              32.6399
+            ],
+            [
+              -96.8508,
+              32.6399
+            ],
+            [
+              -96.8508,
+              32.6405
+            ],
+            [
+              -96.8518,
+              32.6405
+            ],
+            [
+              -96.8518,
+              32.6399
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Dallas TX",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.853,
+              32.6364
+            ],
+            [
+              -96.8516,
+              32.6364
+            ],
+            [
+              -96.8516,
+              32.6403
+            ],
+            [
+              -96.853,
+              32.6403
+            ],
+            [
+              -96.853,
+              32.6364
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Dallas TX",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8516,
+              32.6368
+            ],
+            [
+              -96.8509,
+              32.6368
+            ],
+            [
+              -96.8509,
+              32.6404
+            ],
+            [
+              -96.8516,
+              32.6404
+            ],
+            [
+              -96.8516,
+              32.6368
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Dallas TX",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8497,
+              32.637
+            ],
+            [
+              -96.8492,
+              32.637
+            ],
+            [
+              -96.8492,
+              32.6404
+            ],
+            [
+              -96.8497,
+              32.6404
+            ],
+            [
+              -96.8497,
+              32.637
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Dallas TX",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8512,
+              32.6399
+            ],
+            [
+              -96.8496,
+              32.6399
+            ],
+            [
+              -96.8496,
+              32.6406
+            ],
+            [
+              -96.8512,
+              32.6406
+            ],
+            [
+              -96.8512,
+              32.6399
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Dallas TX",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.7,
+              38.9693
+            ],
+            [
+              -95.6943,
+              38.9693
+            ],
+            [
+              -95.6943,
+              38.9752
+            ],
+            [
+              -95.7,
+              38.9752
+            ],
+            [
+              -95.7,
+              38.9693
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Topeka KS",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 60,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.6987,
+              38.9709
+            ],
+            [
+              -95.6977,
+              38.9709
+            ],
+            [
+              -95.6977,
+              38.9716
+            ],
+            [
+              -95.6987,
+              38.9716
+            ],
+            [
+              -95.6987,
+              38.9709
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Topeka KS",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.6985,
+              38.9696
+            ],
+            [
+              -95.6947,
+              38.9696
+            ],
+            [
+              -95.6947,
+              38.9723
+            ],
+            [
+              -95.6985,
+              38.9723
+            ],
+            [
+              -95.6985,
+              38.9696
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Topeka KS",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.6984,
+              38.9724
+            ],
+            [
+              -95.6944,
+              38.9724
+            ],
+            [
+              -95.6944,
+              38.9747
+            ],
+            [
+              -95.6984,
+              38.9747
+            ],
+            [
+              -95.6984,
+              38.9724
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Topeka KS",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.699,
+              38.9707
+            ],
+            [
+              -95.6972,
+              38.9707
+            ],
+            [
+              -95.6972,
+              38.9718
+            ],
+            [
+              -95.699,
+              38.9718
+            ],
+            [
+              -95.699,
+              38.9707
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Topeka KS",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3236,
+              39.431
+            ],
+            [
+              -84.319,
+              39.431
+            ],
+            [
+              -84.319,
+              39.4385
+            ],
+            [
+              -84.3236,
+              39.4385
+            ],
+            [
+              -84.3236,
+              39.431
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Monroe OH",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 220,
+          "trailersVisible": 300,
+          "trailerParkingCapacity": 360,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 73,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3232,
+              39.4334
+            ],
+            [
+              -84.3223,
+              39.4334
+            ],
+            [
+              -84.3223,
+              39.4342
+            ],
+            [
+              -84.3232,
+              39.4342
+            ],
+            [
+              -84.3232,
+              39.4334
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Monroe OH",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3213,
+              39.4362
+            ],
+            [
+              -84.3196,
+              39.4362
+            ],
+            [
+              -84.3196,
+              39.4377
+            ],
+            [
+              -84.3213,
+              39.4377
+            ],
+            [
+              -84.3213,
+              39.4362
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Monroe OH",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3206,
+              39.4318
+            ],
+            [
+              -84.3196,
+              39.4318
+            ],
+            [
+              -84.3196,
+              39.4362
+            ],
+            [
+              -84.3206,
+              39.4362
+            ],
+            [
+              -84.3206,
+              39.4318
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Monroe OH",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3223,
+              39.4318
+            ],
+            [
+              -84.3213,
+              39.4318
+            ],
+            [
+              -84.3213,
+              39.4377
+            ],
+            [
+              -84.3223,
+              39.4377
+            ],
+            [
+              -84.3223,
+              39.4318
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Monroe OH",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3213,
+              39.4318
+            ],
+            [
+              -84.3203,
+              39.4318
+            ],
+            [
+              -84.3203,
+              39.4377
+            ],
+            [
+              -84.3213,
+              39.4377
+            ],
+            [
+              -84.3213,
+              39.4318
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Monroe OH",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3232,
+              39.4325
+            ],
+            [
+              -84.3223,
+              39.4325
+            ],
+            [
+              -84.3223,
+              39.4342
+            ],
+            [
+              -84.3232,
+              39.4342
+            ],
+            [
+              -84.3232,
+              39.4325
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Monroe OH",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.123,
+              33.3595
+            ],
+            [
+              -84.1145,
+              33.3595
+            ],
+            [
+              -84.1145,
+              33.367
+            ],
+            [
+              -84.123,
+              33.367
+            ],
+            [
+              -84.123,
+              33.3595
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Locust Grove GA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 130,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1203,
+              33.3605
+            ],
+            [
+              -84.1188,
+              33.3605
+            ],
+            [
+              -84.1188,
+              33.3618
+            ],
+            [
+              -84.1203,
+              33.3618
+            ],
+            [
+              -84.1203,
+              33.3605
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Locust Grove GA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1172,
+              33.3628
+            ],
+            [
+              -84.1155,
+              33.3628
+            ],
+            [
+              -84.1155,
+              33.366
+            ],
+            [
+              -84.1172,
+              33.366
+            ],
+            [
+              -84.1172,
+              33.3628
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Locust Grove GA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.118,
+              33.361
+            ],
+            [
+              -84.1162,
+              33.361
+            ],
+            [
+              -84.1162,
+              33.3656
+            ],
+            [
+              -84.118,
+              33.3656
+            ],
+            [
+              -84.118,
+              33.361
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Locust Grove GA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1213,
+              33.3608
+            ],
+            [
+              -84.1198,
+              33.3608
+            ],
+            [
+              -84.1198,
+              33.3638
+            ],
+            [
+              -84.1213,
+              33.3638
+            ],
+            [
+              -84.1213,
+              33.3608
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Locust Grove GA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.12,
+              33.3608
+            ],
+            [
+              -84.1182,
+              33.3608
+            ],
+            [
+              -84.1182,
+              33.3628
+            ],
+            [
+              -84.12,
+              33.3628
+            ],
+            [
+              -84.12,
+              33.3608
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Locust Grove GA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2085,
+              34.0856
+            ],
+            [
+              -117.2002,
+              34.0856
+            ],
+            [
+              -117.2002,
+              34.091
+            ],
+            [
+              -117.2085,
+              34.091
+            ],
+            [
+              -117.2085,
+              34.0856
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Redlands CA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 200,
+          "trailersVisible": 280,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 57,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2078,
+              34.0864
+            ],
+            [
+              -117.2068,
+              34.0864
+            ],
+            [
+              -117.2068,
+              34.0872
+            ],
+            [
+              -117.2078,
+              34.0872
+            ],
+            [
+              -117.2078,
+              34.0864
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Redlands CA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2068,
+              34.0892
+            ],
+            [
+              -117.201,
+              34.0892
+            ],
+            [
+              -117.201,
+              34.0906
+            ],
+            [
+              -117.2068,
+              34.0906
+            ],
+            [
+              -117.2068,
+              34.0892
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Redlands CA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2068,
+              34.0866
+            ],
+            [
+              -117.2008,
+              34.0866
+            ],
+            [
+              -117.2008,
+              34.0872
+            ],
+            [
+              -117.2068,
+              34.0872
+            ],
+            [
+              -117.2068,
+              34.0866
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Redlands CA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2068,
+              34.089
+            ],
+            [
+              -117.2008,
+              34.089
+            ],
+            [
+              -117.2008,
+              34.0896
+            ],
+            [
+              -117.2068,
+              34.0896
+            ],
+            [
+              -117.2068,
+              34.089
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Redlands CA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2008,
+              34.087
+            ],
+            [
+              -117.2002,
+              34.087
+            ],
+            [
+              -117.2002,
+              34.0892
+            ],
+            [
+              -117.2008,
+              34.0892
+            ],
+            [
+              -117.2008,
+              34.087
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Redlands CA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2078,
+              34.0872
+            ],
+            [
+              -117.207,
+              34.0872
+            ],
+            [
+              -117.207,
+              34.089
+            ],
+            [
+              -117.2078,
+              34.089
+            ],
+            [
+              -117.2078,
+              34.0872
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Redlands CA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.559,
+              29.9387
+            ],
+            [
+              -95.5502,
+              29.9387
+            ],
+            [
+              -95.5502,
+              29.9448
+            ],
+            [
+              -95.559,
+              29.9448
+            ],
+            [
+              -95.559,
+              29.9387
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Houston TX",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 180,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 400,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 103,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5583,
+              29.939
+            ],
+            [
+              -95.5573,
+              29.939
+            ],
+            [
+              -95.5573,
+              29.9399
+            ],
+            [
+              -95.5583,
+              29.9399
+            ],
+            [
+              -95.5583,
+              29.939
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Houston TX",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5578,
+              29.9418
+            ],
+            [
+              -95.5506,
+              29.9418
+            ],
+            [
+              -95.5506,
+              29.9447
+            ],
+            [
+              -95.5578,
+              29.9447
+            ],
+            [
+              -95.5578,
+              29.9418
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Houston TX",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5573,
+              29.9396
+            ],
+            [
+              -95.551,
+              29.9396
+            ],
+            [
+              -95.551,
+              29.9402
+            ],
+            [
+              -95.5573,
+              29.9402
+            ],
+            [
+              -95.5573,
+              29.9396
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Houston TX",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5573,
+              29.9412
+            ],
+            [
+              -95.551,
+              29.9412
+            ],
+            [
+              -95.551,
+              29.9418
+            ],
+            [
+              -95.5573,
+              29.9418
+            ],
+            [
+              -95.5573,
+              29.9412
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Houston TX",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5583,
+              29.9396
+            ],
+            [
+              -95.5574,
+              29.9396
+            ],
+            [
+              -95.5574,
+              29.9412
+            ],
+            [
+              -95.5583,
+              29.9412
+            ],
+            [
+              -95.5583,
+              29.9396
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Houston TX",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6324,
+              40.5488
+            ],
+            [
+              -75.6233,
+              40.5488
+            ],
+            [
+              -75.6233,
+              40.5546
+            ],
+            [
+              -75.6324,
+              40.5546
+            ],
+            [
+              -75.6324,
+              40.5488
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Breinigsville PA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 64,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6247,
+              40.55075
+            ],
+            [
+              -75.6236,
+              40.55075
+            ],
+            [
+              -75.6236,
+              40.55135
+            ],
+            [
+              -75.6247,
+              40.55135
+            ],
+            [
+              -75.6247,
+              40.55075
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Breinigsville PA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.627,
+              40.54935
+            ],
+            [
+              -75.6236,
+              40.54935
+            ],
+            [
+              -75.6236,
+              40.55175
+            ],
+            [
+              -75.627,
+              40.55175
+            ],
+            [
+              -75.627,
+              40.54935
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Breinigsville PA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6306,
+              40.5523
+            ],
+            [
+              -75.6268,
+              40.5523
+            ],
+            [
+              -75.6268,
+              40.5546
+            ],
+            [
+              -75.6306,
+              40.5546
+            ],
+            [
+              -75.6306,
+              40.5523
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Breinigsville PA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6296,
+              40.55115
+            ],
+            [
+              -75.6252,
+              40.55115
+            ],
+            [
+              -75.6252,
+              40.5534
+            ],
+            [
+              -75.6296,
+              40.5534
+            ],
+            [
+              -75.6296,
+              40.55115
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Breinigsville PA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6319,
+              40.54995
+            ],
+            [
+              -75.6276,
+              40.54995
+            ],
+            [
+              -75.6276,
+              40.552
+            ],
+            [
+              -75.6319,
+              40.552
+            ],
+            [
+              -75.6319,
+              40.54995
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Breinigsville PA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.1443,
+              39.1979
+            ],
+            [
+              -78.1362,
+              39.1979
+            ],
+            [
+              -78.1362,
+              39.2041
+            ],
+            [
+              -78.1443,
+              39.2041
+            ],
+            [
+              -78.1443,
+              39.1979
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Winchester VA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 140,
+          "trailersVisible": 200,
+          "trailerParkingCapacity": 280,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 58,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.1429,
+              39.2018
+            ],
+            [
+              -78.1415,
+              39.2018
+            ],
+            [
+              -78.1415,
+              39.2027
+            ],
+            [
+              -78.1429,
+              39.2027
+            ],
+            [
+              -78.1429,
+              39.2018
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Winchester VA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.1395,
+              39.2018
+            ],
+            [
+              -78.1362,
+              39.2018
+            ],
+            [
+              -78.1362,
+              39.2041
+            ],
+            [
+              -78.1395,
+              39.2041
+            ],
+            [
+              -78.1395,
+              39.2018
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Winchester VA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.1431,
+              39.198
+            ],
+            [
+              -78.1398,
+              39.198
+            ],
+            [
+              -78.1398,
+              39.2002
+            ],
+            [
+              -78.1431,
+              39.2002
+            ],
+            [
+              -78.1431,
+              39.198
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Winchester VA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.1418,
+              39.2002
+            ],
+            [
+              -78.1376,
+              39.2002
+            ],
+            [
+              -78.1376,
+              39.2033
+            ],
+            [
+              -78.1418,
+              39.2033
+            ],
+            [
+              -78.1418,
+              39.2002
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Winchester VA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.1435,
+              39.1985
+            ],
+            [
+              -78.1393,
+              39.1985
+            ],
+            [
+              -78.1393,
+              39.2016
+            ],
+            [
+              -78.1435,
+              39.2016
+            ],
+            [
+              -78.1435,
+              39.1985
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Winchester VA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.0296,
+              33.3187
+            ],
+            [
+              -87.0215,
+              33.3187
+            ],
+            [
+              -87.0215,
+              33.3253
+            ],
+            [
+              -87.0296,
+              33.3253
+            ],
+            [
+              -87.0296,
+              33.3187
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - McCalla AL",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 150,
+          "trailersVisible": 280,
+          "trailerParkingCapacity": 360,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 70,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.0284,
+              33.3187
+            ],
+            [
+              -87.0272,
+              33.3187
+            ],
+            [
+              -87.0272,
+              33.3196
+            ],
+            [
+              -87.0284,
+              33.3196
+            ],
+            [
+              -87.0284,
+              33.3187
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - McCalla AL",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.025,
+              33.3223
+            ],
+            [
+              -87.0216,
+              33.3223
+            ],
+            [
+              -87.0216,
+              33.3252
+            ],
+            [
+              -87.025,
+              33.3252
+            ],
+            [
+              -87.025,
+              33.3223
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - McCalla AL",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.029,
+              33.3196
+            ],
+            [
+              -87.0252,
+              33.3196
+            ],
+            [
+              -87.0252,
+              33.3223
+            ],
+            [
+              -87.029,
+              33.3223
+            ],
+            [
+              -87.029,
+              33.3196
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - McCalla AL",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.0272,
+              33.3205
+            ],
+            [
+              -87.0232,
+              33.3205
+            ],
+            [
+              -87.0232,
+              33.324
+            ],
+            [
+              -87.0272,
+              33.324
+            ],
+            [
+              -87.0272,
+              33.3205
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - McCalla AL",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.0288,
+              33.3192
+            ],
+            [
+              -87.0247,
+              33.3192
+            ],
+            [
+              -87.0247,
+              33.3226
+            ],
+            [
+              -87.0288,
+              33.3226
+            ],
+            [
+              -87.0288,
+              33.3192
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - McCalla AL",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.0283,
+              33.319
+            ],
+            [
+              -87.0265,
+              33.319
+            ],
+            [
+              -87.0265,
+              33.3204
+            ],
+            [
+              -87.0283,
+              33.3204
+            ],
+            [
+              -87.0283,
+              33.319
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - McCalla AL",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0786,
+              33.907
+            ],
+            [
+              -81.071,
+              33.907
+            ],
+            [
+              -81.071,
+              33.9111
+            ],
+            [
+              -81.0786,
+              33.9111
+            ],
+            [
+              -81.0786,
+              33.907
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - West Columbia SC",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 62,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.072,
+              33.9088
+            ],
+            [
+              -81.0706,
+              33.9088
+            ],
+            [
+              -81.0706,
+              33.9097
+            ],
+            [
+              -81.072,
+              33.9097
+            ],
+            [
+              -81.072,
+              33.9088
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - West Columbia SC",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0782,
+              33.9095
+            ],
+            [
+              -81.0712,
+              33.9095
+            ],
+            [
+              -81.0712,
+              33.9109
+            ],
+            [
+              -81.0782,
+              33.9109
+            ],
+            [
+              -81.0782,
+              33.9095
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - West Columbia SC",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.078,
+              33.9072
+            ],
+            [
+              -81.0715,
+              33.9072
+            ],
+            [
+              -81.0715,
+              33.9083
+            ],
+            [
+              -81.078,
+              33.9083
+            ],
+            [
+              -81.078,
+              33.9072
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - West Columbia SC",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0778,
+              33.909
+            ],
+            [
+              -81.0715,
+              33.909
+            ],
+            [
+              -81.0715,
+              33.9099
+            ],
+            [
+              -81.0778,
+              33.9099
+            ],
+            [
+              -81.0778,
+              33.909
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - West Columbia SC",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0778,
+              33.9077
+            ],
+            [
+              -81.0715,
+              33.9077
+            ],
+            [
+              -81.0715,
+              33.9086
+            ],
+            [
+              -81.0778,
+              33.9086
+            ],
+            [
+              -81.0778,
+              33.9077
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - West Columbia SC",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.7702,
+              41.313
+            ],
+            [
+              -75.7625,
+              41.313
+            ],
+            [
+              -75.7625,
+              41.3182
+            ],
+            [
+              -75.7702,
+              41.3182
+            ],
+            [
+              -75.7702,
+              41.313
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Pittston Township PA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 150,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 75,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.7695,
+              41.3138
+            ],
+            [
+              -75.7685,
+              41.3138
+            ],
+            [
+              -75.7685,
+              41.3144
+            ],
+            [
+              -75.7695,
+              41.3144
+            ],
+            [
+              -75.7695,
+              41.3138
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Pittston Township PA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.7652,
+              41.316
+            ],
+            [
+              -75.7627,
+              41.316
+            ],
+            [
+              -75.7627,
+              41.3176
+            ],
+            [
+              -75.7652,
+              41.3176
+            ],
+            [
+              -75.7652,
+              41.316
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Pittston Township PA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.769,
+              41.3143
+            ],
+            [
+              -75.7643,
+              41.3143
+            ],
+            [
+              -75.7643,
+              41.3162
+            ],
+            [
+              -75.769,
+              41.3162
+            ],
+            [
+              -75.769,
+              41.3143
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Pittston Township PA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.7676,
+              41.3154
+            ],
+            [
+              -75.7635,
+              41.3154
+            ],
+            [
+              -75.7635,
+              41.317
+            ],
+            [
+              -75.7676,
+              41.317
+            ],
+            [
+              -75.7676,
+              41.3154
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Pittston Township PA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.7683,
+              41.3138
+            ],
+            [
+              -75.7665,
+              41.3138
+            ],
+            [
+              -75.7665,
+              41.3148
+            ],
+            [
+              -75.7683,
+              41.3148
+            ],
+            [
+              -75.7683,
+              41.3138
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Pittston Township PA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.4085,
+              37.757
+            ],
+            [
+              -121.398,
+              37.757
+            ],
+            [
+              -121.398,
+              37.7613
+            ],
+            [
+              -121.4085,
+              37.7613
+            ],
+            [
+              -121.4085,
+              37.757
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Tracy CA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 160,
+          "trailersVisible": 210,
+          "trailerParkingCapacity": 300,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 70,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.408,
+              37.7577
+            ],
+            [
+              -121.4067,
+              37.7577
+            ],
+            [
+              -121.4067,
+              37.7585
+            ],
+            [
+              -121.408,
+              37.7585
+            ],
+            [
+              -121.408,
+              37.7577
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Tracy CA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.408,
+              37.76
+            ],
+            [
+              -121.3985,
+              37.76
+            ],
+            [
+              -121.3985,
+              37.7612
+            ],
+            [
+              -121.408,
+              37.7612
+            ],
+            [
+              -121.408,
+              37.76
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Tracy CA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.407,
+              37.7572
+            ],
+            [
+              -121.399,
+              37.7572
+            ],
+            [
+              -121.399,
+              37.758
+            ],
+            [
+              -121.407,
+              37.758
+            ],
+            [
+              -121.407,
+              37.7572
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Tracy CA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.407,
+              37.758
+            ],
+            [
+              -121.399,
+              37.758
+            ],
+            [
+              -121.399,
+              37.7587
+            ],
+            [
+              -121.407,
+              37.7587
+            ],
+            [
+              -121.407,
+              37.758
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Tracy CA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.407,
+              37.7596
+            ],
+            [
+              -121.399,
+              37.7596
+            ],
+            [
+              -121.399,
+              37.7601
+            ],
+            [
+              -121.407,
+              37.7601
+            ],
+            [
+              -121.407,
+              37.7596
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Tracy CA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.4072,
+              37.7577
+            ],
+            [
+              -121.4055,
+              37.7577
+            ],
+            [
+              -121.4055,
+              37.7585
+            ],
+            [
+              -121.4072,
+              37.7585
+            ],
+            [
+              -121.4072,
+              37.7577
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Tracy CA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.2562,
+              33.4426
+            ],
+            [
+              -112.249,
+              33.4426
+            ],
+            [
+              -112.249,
+              33.4464
+            ],
+            [
+              -112.2562,
+              33.4464
+            ],
+            [
+              -112.2562,
+              33.4426
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Tolleson AZ",
+        "type": "Rapid Deployment Center",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 330,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 55,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.256,
+              33.4448
+            ],
+            [
+              -112.2549,
+              33.4448
+            ],
+            [
+              -112.2549,
+              33.4456
+            ],
+            [
+              -112.256,
+              33.4456
+            ],
+            [
+              -112.256,
+              33.4448
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Tolleson AZ",
+        "type": "Rapid Deployment Center",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.255,
+              33.4432
+            ],
+            [
+              -112.2495,
+              33.4432
+            ],
+            [
+              -112.2495,
+              33.4446
+            ],
+            [
+              -112.255,
+              33.4446
+            ],
+            [
+              -112.255,
+              33.4432
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Tolleson AZ",
+        "type": "Rapid Deployment Center",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.255,
+              33.4444
+            ],
+            [
+              -112.2495,
+              33.4444
+            ],
+            [
+              -112.2495,
+              33.4451
+            ],
+            [
+              -112.255,
+              33.4451
+            ],
+            [
+              -112.255,
+              33.4444
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Tolleson AZ",
+        "type": "Rapid Deployment Center",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.2556,
+              33.4448
+            ],
+            [
+              -112.254,
+              33.4448
+            ],
+            [
+              -112.254,
+              33.4456
+            ],
+            [
+              -112.2556,
+              33.4456
+            ],
+            [
+              -112.2556,
+              33.4448
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Tolleson AZ",
+        "type": "Rapid Deployment Center",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1462,
+              41.4362
+            ],
+            [
+              -88.1407,
+              41.4362
+            ],
+            [
+              -88.1407,
+              41.4432
+            ],
+            [
+              -88.1462,
+              41.4432
+            ],
+            [
+              -88.1462,
+              41.4362
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Elwood IL",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 150,
+          "trailersVisible": 280,
+          "trailerParkingCapacity": 360,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 60,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1447,
+              41.4362
+            ],
+            [
+              -88.143,
+              41.4362
+            ],
+            [
+              -88.143,
+              41.4371
+            ],
+            [
+              -88.1447,
+              41.4371
+            ],
+            [
+              -88.1447,
+              41.4362
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Elwood IL",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.146,
+              41.4376
+            ],
+            [
+              -88.1447,
+              41.4376
+            ],
+            [
+              -88.1447,
+              41.4428
+            ],
+            [
+              -88.146,
+              41.4428
+            ],
+            [
+              -88.146,
+              41.4376
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Elwood IL",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1425,
+              41.438
+            ],
+            [
+              -88.1409,
+              41.438
+            ],
+            [
+              -88.1409,
+              41.4428
+            ],
+            [
+              -88.1425,
+              41.4428
+            ],
+            [
+              -88.1425,
+              41.438
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Elwood IL",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1447,
+              41.4376
+            ],
+            [
+              -88.1438,
+              41.4376
+            ],
+            [
+              -88.1438,
+              41.4428
+            ],
+            [
+              -88.1447,
+              41.4428
+            ],
+            [
+              -88.1447,
+              41.4376
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Elwood IL",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1426,
+              41.4376
+            ],
+            [
+              -88.1418,
+              41.4376
+            ],
+            [
+              -88.1418,
+              41.4428
+            ],
+            [
+              -88.1426,
+              41.4428
+            ],
+            [
+              -88.1426,
+              41.4376
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Elwood IL",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1443,
+              41.4365
+            ],
+            [
+              -88.1425,
+              41.4365
+            ],
+            [
+              -88.1425,
+              41.4376
+            ],
+            [
+              -88.1443,
+              41.4376
+            ],
+            [
+              -88.1443,
+              41.4365
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Elwood IL",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.9645,
+              44.9008
+            ],
+            [
+              -122.9595,
+              44.9008
+            ],
+            [
+              -122.9595,
+              44.9075
+            ],
+            [
+              -122.9645,
+              44.9075
+            ],
+            [
+              -122.9645,
+              44.9008
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Salem OR",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 300,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 72,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.9632,
+              44.9046
+            ],
+            [
+              -122.9623,
+              44.9046
+            ],
+            [
+              -122.9623,
+              44.9052
+            ],
+            [
+              -122.9632,
+              44.9052
+            ],
+            [
+              -122.9632,
+              44.9046
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Salem OR",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.9644,
+              44.9009
+            ],
+            [
+              -122.961,
+              44.9009
+            ],
+            [
+              -122.961,
+              44.9046
+            ],
+            [
+              -122.9644,
+              44.9046
+            ],
+            [
+              -122.9644,
+              44.9009
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Salem OR",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.9632,
+              44.9042
+            ],
+            [
+              -122.9613,
+              44.9042
+            ],
+            [
+              -122.9613,
+              44.9056
+            ],
+            [
+              -122.9632,
+              44.9056
+            ],
+            [
+              -122.9632,
+              44.9042
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Salem OR",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.9627,
+              44.903
+            ],
+            [
+              -122.9605,
+              44.903
+            ],
+            [
+              -122.9605,
+              44.9065
+            ],
+            [
+              -122.9627,
+              44.9065
+            ],
+            [
+              -122.9627,
+              44.903
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Salem OR",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.9625,
+              44.9048
+            ],
+            [
+              -122.9603,
+              44.9048
+            ],
+            [
+              -122.9603,
+              44.9078
+            ],
+            [
+              -122.9625,
+              44.9078
+            ],
+            [
+              -122.9625,
+              44.9048
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Salem OR",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.9628,
+              44.9042
+            ],
+            [
+              -122.9618,
+              44.9042
+            ],
+            [
+              -122.9618,
+              44.9049
+            ],
+            [
+              -122.9628,
+              44.9049
+            ],
+            [
+              -122.9628,
+              44.9042
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Salem OR",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.7385,
+              42.1685
+            ],
+            [
+              -72.7333,
+              42.1685
+            ],
+            [
+              -72.7333,
+              42.1728
+            ],
+            [
+              -72.7385,
+              42.1728
+            ],
+            [
+              -72.7385,
+              42.1685
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Westfield MA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 50,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.7349,
+              42.1691
+            ],
+            [
+              -72.7341,
+              42.1691
+            ],
+            [
+              -72.7341,
+              42.16965
+            ],
+            [
+              -72.7349,
+              42.16965
+            ],
+            [
+              -72.7349,
+              42.1691
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Westfield MA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.7362,
+              42.1683
+            ],
+            [
+              -72.7347,
+              42.1683
+            ],
+            [
+              -72.7347,
+              42.1698
+            ],
+            [
+              -72.7362,
+              42.1698
+            ],
+            [
+              -72.7362,
+              42.1683
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Westfield MA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.7379,
+              42.1698
+            ],
+            [
+              -72.7362,
+              42.1698
+            ],
+            [
+              -72.7362,
+              42.1728
+            ],
+            [
+              -72.7379,
+              42.1728
+            ],
+            [
+              -72.7379,
+              42.1698
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Westfield MA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.736,
+              42.1698
+            ],
+            [
+              -72.7342,
+              42.1698
+            ],
+            [
+              -72.7342,
+              42.1728
+            ],
+            [
+              -72.736,
+              42.1728
+            ],
+            [
+              -72.736,
+              42.1698
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Westfield MA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.7356,
+              42.16965
+            ],
+            [
+              -72.7347,
+              42.16965
+            ],
+            [
+              -72.7347,
+              42.1703
+            ],
+            [
+              -72.7356,
+              42.1703
+            ],
+            [
+              -72.7356,
+              42.16965
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot RDC - Westfield MA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5418,
+              34.0263
+            ],
+            [
+              -117.53,
+              34.0263
+            ],
+            [
+              -117.53,
+              34.0316
+            ],
+            [
+              -117.5418,
+              34.0316
+            ],
+            [
+              -117.5418,
+              34.0263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Mira Loma CA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 360,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 420,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 158,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5327,
+              34.0274
+            ],
+            [
+              -117.5318,
+              34.0274
+            ],
+            [
+              -117.5318,
+              34.028
+            ],
+            [
+              -117.5327,
+              34.028
+            ],
+            [
+              -117.5327,
+              34.0274
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Mira Loma CA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.541,
+              34.0268
+            ],
+            [
+              -117.531,
+              34.0268
+            ],
+            [
+              -117.531,
+              34.0281
+            ],
+            [
+              -117.541,
+              34.0281
+            ],
+            [
+              -117.541,
+              34.0268
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Mira Loma CA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.541,
+              34.0302
+            ],
+            [
+              -117.531,
+              34.0302
+            ],
+            [
+              -117.531,
+              34.0315
+            ],
+            [
+              -117.541,
+              34.0315
+            ],
+            [
+              -117.541,
+              34.0302
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Mira Loma CA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.541,
+              34.0268
+            ],
+            [
+              -117.5308,
+              34.0268
+            ],
+            [
+              -117.5308,
+              34.0279
+            ],
+            [
+              -117.541,
+              34.0279
+            ],
+            [
+              -117.541,
+              34.0268
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Mira Loma CA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.541,
+              34.0301
+            ],
+            [
+              -117.5308,
+              34.0301
+            ],
+            [
+              -117.5308,
+              34.0313
+            ],
+            [
+              -117.541,
+              34.0313
+            ],
+            [
+              -117.541,
+              34.0301
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Mira Loma CA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.2085,
+              32.1545
+            ],
+            [
+              -81.2,
+              32.1545
+            ],
+            [
+              -81.2,
+              32.1615
+            ],
+            [
+              -81.2085,
+              32.1615
+            ],
+            [
+              -81.2085,
+              32.1545
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Savannah GA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 200,
+          "trailersVisible": 300,
+          "trailerParkingCapacity": 380,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 154,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.2072,
+              32.1592
+            ],
+            [
+              -81.2058,
+              32.1592
+            ],
+            [
+              -81.2058,
+              32.1603
+            ],
+            [
+              -81.2072,
+              32.1603
+            ],
+            [
+              -81.2072,
+              32.1592
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Savannah GA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.2085,
+              32.1555
+            ],
+            [
+              -81.2062,
+              32.1555
+            ],
+            [
+              -81.2062,
+              32.1603
+            ],
+            [
+              -81.2085,
+              32.1603
+            ],
+            [
+              -81.2085,
+              32.1555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Savannah GA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.2035,
+              32.155
+            ],
+            [
+              -81.2002,
+              32.155
+            ],
+            [
+              -81.2002,
+              32.1602
+            ],
+            [
+              -81.2035,
+              32.1602
+            ],
+            [
+              -81.2035,
+              32.155
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Savannah GA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.2068,
+              32.1556
+            ],
+            [
+              -81.2056,
+              32.1556
+            ],
+            [
+              -81.2056,
+              32.1603
+            ],
+            [
+              -81.2068,
+              32.1603
+            ],
+            [
+              -81.2068,
+              32.1556
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Savannah GA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.2048,
+              32.1552
+            ],
+            [
+              -81.2036,
+              32.1552
+            ],
+            [
+              -81.2036,
+              32.16
+            ],
+            [
+              -81.2048,
+              32.16
+            ],
+            [
+              -81.2048,
+              32.1552
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Savannah GA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.1572,
+              39.0768
+            ],
+            [
+              -78.1488,
+              39.0768
+            ],
+            [
+              -78.1488,
+              39.0838
+            ],
+            [
+              -78.1572,
+              39.0838
+            ],
+            [
+              -78.1572,
+              39.0768
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Winchester VA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 200,
+          "trailersVisible": 175,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 62,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.1509,
+              39.07985
+            ],
+            [
+              -78.1501,
+              39.07985
+            ],
+            [
+              -78.1501,
+              39.08035
+            ],
+            [
+              -78.1509,
+              39.08035
+            ],
+            [
+              -78.1509,
+              39.07985
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Winchester VA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.1523,
+              39.08055
+            ],
+            [
+              -78.1498,
+              39.08055
+            ],
+            [
+              -78.1498,
+              39.083
+            ],
+            [
+              -78.1523,
+              39.083
+            ],
+            [
+              -78.1523,
+              39.08055
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Winchester VA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.1556,
+              39.0813
+            ],
+            [
+              -78.1535,
+              39.0813
+            ],
+            [
+              -78.1535,
+              39.0832
+            ],
+            [
+              -78.1556,
+              39.0832
+            ],
+            [
+              -78.1556,
+              39.0813
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Winchester VA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.153,
+              39.08
+            ],
+            [
+              -78.1501,
+              39.08
+            ],
+            [
+              -78.1501,
+              39.0826
+            ],
+            [
+              -78.153,
+              39.0826
+            ],
+            [
+              -78.153,
+              39.08
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Winchester VA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.1562,
+              39.0772
+            ],
+            [
+              -78.1528,
+              39.0772
+            ],
+            [
+              -78.1528,
+              39.0801
+            ],
+            [
+              -78.1562,
+              39.0801
+            ],
+            [
+              -78.1562,
+              39.0772
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Winchester VA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.1514,
+              39.07995
+            ],
+            [
+              -78.1501,
+              39.07995
+            ],
+            [
+              -78.1501,
+              39.0807
+            ],
+            [
+              -78.1514,
+              39.0807
+            ],
+            [
+              -78.1514,
+              39.07995
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Winchester VA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.5022,
+              40.3049
+            ],
+            [
+              -74.4938,
+              40.3049
+            ],
+            [
+              -74.4938,
+              40.3096
+            ],
+            [
+              -74.5022,
+              40.3096
+            ],
+            [
+              -74.5022,
+              40.3049
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Cranbury NJ",
+        "type": "Stocking Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 175,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 56,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.5004,
+              40.3061
+            ],
+            [
+              -74.4998,
+              40.3061
+            ],
+            [
+              -74.4998,
+              40.3066
+            ],
+            [
+              -74.5004,
+              40.3066
+            ],
+            [
+              -74.5004,
+              40.3061
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Cranbury NJ",
+        "type": "Stocking Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.5013,
+              40.3079
+            ],
+            [
+              -74.4943,
+              40.3079
+            ],
+            [
+              -74.4943,
+              40.3094
+            ],
+            [
+              -74.5013,
+              40.3094
+            ],
+            [
+              -74.5013,
+              40.3079
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Cranbury NJ",
+        "type": "Stocking Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.5,
+              40.3053
+            ],
+            [
+              -74.4942,
+              40.3053
+            ],
+            [
+              -74.4942,
+              40.3068
+            ],
+            [
+              -74.5,
+              40.3068
+            ],
+            [
+              -74.5,
+              40.3053
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Cranbury NJ",
+        "type": "Stocking Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.5013,
+              40.3074
+            ],
+            [
+              -74.4944,
+              40.3074
+            ],
+            [
+              -74.4944,
+              40.3081
+            ],
+            [
+              -74.5013,
+              40.3081
+            ],
+            [
+              -74.5013,
+              40.3074
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Cranbury NJ",
+        "type": "Stocking Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.5013,
+              40.3065
+            ],
+            [
+              -74.4944,
+              40.3065
+            ],
+            [
+              -74.4944,
+              40.3072
+            ],
+            [
+              -74.5013,
+              40.3072
+            ],
+            [
+              -74.5013,
+              40.3065
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Cranbury NJ",
+        "type": "Stocking Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.5001,
+              40.3062
+            ],
+            [
+              -74.4985,
+              40.3062
+            ],
+            [
+              -74.4985,
+              40.3072
+            ],
+            [
+              -74.5001,
+              40.3072
+            ],
+            [
+              -74.5001,
+              40.3062
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Cranbury NJ",
+        "type": "Stocking Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5588,
+              29.8748
+            ],
+            [
+              -95.5558,
+              29.8748
+            ],
+            [
+              -95.5558,
+              29.8801
+            ],
+            [
+              -95.5588,
+              29.8801
+            ],
+            [
+              -95.5588,
+              29.8748
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Jersey Village TX",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 71,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 44.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.55665,
+              29.87635
+            ],
+            [
+              -95.5563,
+              29.87635
+            ],
+            [
+              -95.5563,
+              29.87675
+            ],
+            [
+              -95.55665,
+              29.87675
+            ],
+            [
+              -95.55665,
+              29.87635
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Jersey Village TX",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.55855,
+              29.8752
+            ],
+            [
+              -95.55755,
+              29.8752
+            ],
+            [
+              -95.55755,
+              29.8796
+            ],
+            [
+              -95.55855,
+              29.8796
+            ],
+            [
+              -95.55855,
+              29.8752
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Jersey Village TX",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5578,
+              29.8751
+            ],
+            [
+              -95.5572,
+              29.8751
+            ],
+            [
+              -95.5572,
+              29.8798
+            ],
+            [
+              -95.5578,
+              29.8798
+            ],
+            [
+              -95.5578,
+              29.8751
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Jersey Village TX",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5572,
+              29.8756
+            ],
+            [
+              -95.5562,
+              29.8756
+            ],
+            [
+              -95.5562,
+              29.8796
+            ],
+            [
+              -95.5572,
+              29.8796
+            ],
+            [
+              -95.5572,
+              29.8756
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Jersey Village TX",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.299,
+              37.7895
+            ],
+            [
+              -121.2885,
+              37.7895
+            ],
+            [
+              -121.2885,
+              37.7973
+            ],
+            [
+              -121.299,
+              37.7973
+            ],
+            [
+              -121.299,
+              37.7895
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Lathrop CA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 200,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 280,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 75,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2923,
+              37.7949
+            ],
+            [
+              -121.2915,
+              37.7949
+            ],
+            [
+              -121.2915,
+              37.7956
+            ],
+            [
+              -121.2923,
+              37.7956
+            ],
+            [
+              -121.2923,
+              37.7949
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Lathrop CA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2971,
+              37.7928
+            ],
+            [
+              -121.2923,
+              37.7928
+            ],
+            [
+              -121.2923,
+              37.7961
+            ],
+            [
+              -121.2971,
+              37.7961
+            ],
+            [
+              -121.2971,
+              37.7928
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Lathrop CA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2985,
+              37.7899
+            ],
+            [
+              -121.2938,
+              37.7899
+            ],
+            [
+              -121.2938,
+              37.7935
+            ],
+            [
+              -121.2985,
+              37.7935
+            ],
+            [
+              -121.2985,
+              37.7899
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Lathrop CA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2965,
+              37.7932
+            ],
+            [
+              -121.2926,
+              37.7932
+            ],
+            [
+              -121.2926,
+              37.7962
+            ],
+            [
+              -121.2965,
+              37.7962
+            ],
+            [
+              -121.2965,
+              37.7932
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Lathrop CA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2976,
+              37.7902
+            ],
+            [
+              -121.2937,
+              37.7902
+            ],
+            [
+              -121.2937,
+              37.7932
+            ],
+            [
+              -121.2976,
+              37.7932
+            ],
+            [
+              -121.2976,
+              37.7902
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Lathrop CA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1142,
+              41.6625
+            ],
+            [
+              -88.1108,
+              41.6625
+            ],
+            [
+              -88.1108,
+              41.6685
+            ],
+            [
+              -88.1142,
+              41.6685
+            ],
+            [
+              -88.1142,
+              41.6625
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Romeoville IL",
+        "type": "Stocking Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 45,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1133,
+              41.66305
+            ],
+            [
+              -88.1127,
+              41.66305
+            ],
+            [
+              -88.1127,
+              41.6635
+            ],
+            [
+              -88.1133,
+              41.6635
+            ],
+            [
+              -88.1133,
+              41.66305
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Romeoville IL",
+        "type": "Stocking Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1139,
+              41.6638
+            ],
+            [
+              -88.1127,
+              41.6638
+            ],
+            [
+              -88.1127,
+              41.6676
+            ],
+            [
+              -88.1139,
+              41.6676
+            ],
+            [
+              -88.1139,
+              41.6638
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Romeoville IL",
+        "type": "Stocking Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1129,
+              41.6637
+            ],
+            [
+              -88.1121,
+              41.6637
+            ],
+            [
+              -88.1121,
+              41.6678
+            ],
+            [
+              -88.1129,
+              41.6678
+            ],
+            [
+              -88.1129,
+              41.6637
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Romeoville IL",
+        "type": "Stocking Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1132,
+              41.6632
+            ],
+            [
+              -88.1124,
+              41.6632
+            ],
+            [
+              -88.1124,
+              41.664
+            ],
+            [
+              -88.1132,
+              41.664
+            ],
+            [
+              -88.1132,
+              41.6632
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Romeoville IL",
+        "type": "Stocking Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.92115,
+              29.7286
+            ],
+            [
+              -94.9146,
+              29.7286
+            ],
+            [
+              -94.9146,
+              29.7356
+            ],
+            [
+              -94.92115,
+              29.7356
+            ],
+            [
+              -94.92115,
+              29.7286
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Baytown TX",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 53,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.9168,
+              29.7313
+            ],
+            [
+              -94.9157,
+              29.7313
+            ],
+            [
+              -94.9157,
+              29.7322
+            ],
+            [
+              -94.9168,
+              29.7322
+            ],
+            [
+              -94.9168,
+              29.7313
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Baytown TX",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.9203,
+              29.7295
+            ],
+            [
+              -94.9172,
+              29.7295
+            ],
+            [
+              -94.9172,
+              29.7348
+            ],
+            [
+              -94.9203,
+              29.7348
+            ],
+            [
+              -94.9203,
+              29.7295
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Baytown TX",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.9156,
+              29.73
+            ],
+            [
+              -94.9146,
+              29.73
+            ],
+            [
+              -94.9146,
+              29.735
+            ],
+            [
+              -94.9156,
+              29.735
+            ],
+            [
+              -94.9156,
+              29.73
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Baytown TX",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.9199,
+              29.7295
+            ],
+            [
+              -94.9176,
+              29.7295
+            ],
+            [
+              -94.9176,
+              29.7351
+            ],
+            [
+              -94.9199,
+              29.7351
+            ],
+            [
+              -94.9199,
+              29.7295
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Baytown TX",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.9157,
+              29.7301
+            ],
+            [
+              -94.9147,
+              29.7301
+            ],
+            [
+              -94.9147,
+              29.7352
+            ],
+            [
+              -94.9157,
+              29.7352
+            ],
+            [
+              -94.9157,
+              29.7301
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Baytown TX",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.9172,
+              29.7312
+            ],
+            [
+              -94.9156,
+              29.7312
+            ],
+            [
+              -94.9156,
+              29.7325
+            ],
+            [
+              -94.9172,
+              29.7325
+            ],
+            [
+              -94.9172,
+              29.7312
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot SDC - Baytown TX",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1903,
+              33.3672
+            ],
+            [
+              -84.1788,
+              33.3672
+            ],
+            [
+              -84.1788,
+              33.3743
+            ],
+            [
+              -84.1903,
+              33.3743
+            ],
+            [
+              -84.1903,
+              33.3672
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot DFC - Locust Grove GA",
+        "type": "Direct Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 160,
+          "trailersVisible": 260,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 105,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1818,
+              33.373
+            ],
+            [
+              -84.1806,
+              33.373
+            ],
+            [
+              -84.1806,
+              33.3739
+            ],
+            [
+              -84.1818,
+              33.3739
+            ],
+            [
+              -84.1818,
+              33.373
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot DFC - Locust Grove GA",
+        "type": "Direct Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1895,
+              33.3723
+            ],
+            [
+              -84.18,
+              33.3723
+            ],
+            [
+              -84.18,
+              33.3743
+            ],
+            [
+              -84.1895,
+              33.3743
+            ],
+            [
+              -84.1895,
+              33.3723
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot DFC - Locust Grove GA",
+        "type": "Direct Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1896,
+              33.3706
+            ],
+            [
+              -84.179,
+              33.3706
+            ],
+            [
+              -84.179,
+              33.3726
+            ],
+            [
+              -84.1896,
+              33.3726
+            ],
+            [
+              -84.1896,
+              33.3706
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot DFC - Locust Grove GA",
+        "type": "Direct Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1896,
+              33.3674
+            ],
+            [
+              -84.18,
+              33.3674
+            ],
+            [
+              -84.18,
+              33.3688
+            ],
+            [
+              -84.1896,
+              33.3688
+            ],
+            [
+              -84.1896,
+              33.3674
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot DFC - Locust Grove GA",
+        "type": "Direct Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1825,
+              33.3723
+            ],
+            [
+              -84.18,
+              33.3723
+            ],
+            [
+              -84.18,
+              33.3732
+            ],
+            [
+              -84.1825,
+              33.3732
+            ],
+            [
+              -84.1825,
+              33.3723
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot DFC - Locust Grove GA",
+        "type": "Direct Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.218,
+              33.8547
+            ],
+            [
+              -117.2123,
+              33.8547
+            ],
+            [
+              -117.2123,
+              33.8607
+            ],
+            [
+              -117.218,
+              33.8607
+            ],
+            [
+              -117.218,
+              33.8547
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot DFC - Perris CA",
+        "type": "Direct Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 47,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2177,
+              33.8597
+            ],
+            [
+              -117.2166,
+              33.8597
+            ],
+            [
+              -117.2166,
+              33.8604
+            ],
+            [
+              -117.2177,
+              33.8604
+            ],
+            [
+              -117.2177,
+              33.8597
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot DFC - Perris CA",
+        "type": "Direct Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2178,
+              33.855
+            ],
+            [
+              -117.2162,
+              33.855
+            ],
+            [
+              -117.2162,
+              33.8595
+            ],
+            [
+              -117.2178,
+              33.8595
+            ],
+            [
+              -117.2178,
+              33.855
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot DFC - Perris CA",
+        "type": "Direct Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.217,
+              33.8549
+            ],
+            [
+              -117.2156,
+              33.8549
+            ],
+            [
+              -117.2156,
+              33.8596
+            ],
+            [
+              -117.217,
+              33.8596
+            ],
+            [
+              -117.217,
+              33.8549
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot DFC - Perris CA",
+        "type": "Direct Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2168,
+              33.8592
+            ],
+            [
+              -117.2143,
+              33.8592
+            ],
+            [
+              -117.2143,
+              33.8602
+            ],
+            [
+              -117.2168,
+              33.8602
+            ],
+            [
+              -117.2168,
+              33.8592
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot DFC - Perris CA",
+        "type": "Direct Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4718,
+              41.4772
+            ],
+            [
+              -83.4568,
+              41.4772
+            ],
+            [
+              -83.4568,
+              41.4843
+            ],
+            [
+              -83.4718,
+              41.4843
+            ],
+            [
+              -83.4718,
+              41.4772
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot DFC - Luckey OH",
+        "type": "Direct Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 200,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 230,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 130,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4712,
+              41.478
+            ],
+            [
+              -83.4698,
+              41.478
+            ],
+            [
+              -83.4698,
+              41.479
+            ],
+            [
+              -83.4712,
+              41.479
+            ],
+            [
+              -83.4712,
+              41.478
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot DFC - Luckey OH",
+        "type": "Direct Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.471,
+              41.4793
+            ],
+            [
+              -83.4655,
+              41.4793
+            ],
+            [
+              -83.4655,
+              41.4828
+            ],
+            [
+              -83.471,
+              41.4828
+            ],
+            [
+              -83.471,
+              41.4793
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot DFC - Luckey OH",
+        "type": "Direct Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4708,
+              41.4805
+            ],
+            [
+              -83.4572,
+              41.4805
+            ],
+            [
+              -83.4572,
+              41.4833
+            ],
+            [
+              -83.4708,
+              41.4833
+            ],
+            [
+              -83.4708,
+              41.4805
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot DFC - Luckey OH",
+        "type": "Direct Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4708,
+              41.4776
+            ],
+            [
+              -83.4572,
+              41.4776
+            ],
+            [
+              -83.4572,
+              41.4798
+            ],
+            [
+              -83.4708,
+              41.4798
+            ],
+            [
+              -83.4708,
+              41.4776
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot DFC - Luckey OH",
+        "type": "Direct Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4695,
+              41.4818
+            ],
+            [
+              -83.4655,
+              41.4818
+            ],
+            [
+              -83.4655,
+              41.4834
+            ],
+            [
+              -83.4695,
+              41.4834
+            ],
+            [
+              -83.4695,
+              41.4818
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot DFC - Luckey OH",
+        "type": "Direct Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.4795,
+              39.2164
+            ],
+            [
+              -76.4748,
+              39.2164
+            ],
+            [
+              -76.4748,
+              39.2227
+            ],
+            [
+              -76.4795,
+              39.2227
+            ],
+            [
+              -76.4795,
+              39.2164
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot BDC - Baltimore MD",
+        "type": "Bulk Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 80,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 50,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.4778,
+              39.2218
+            ],
+            [
+              -76.4768,
+              39.2218
+            ],
+            [
+              -76.4768,
+              39.2226
+            ],
+            [
+              -76.4778,
+              39.2226
+            ],
+            [
+              -76.4778,
+              39.2218
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot BDC - Baltimore MD",
+        "type": "Bulk Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.477,
+              39.2168
+            ],
+            [
+              -76.4752,
+              39.2168
+            ],
+            [
+              -76.4752,
+              39.2223
+            ],
+            [
+              -76.477,
+              39.2223
+            ],
+            [
+              -76.477,
+              39.2168
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot BDC - Baltimore MD",
+        "type": "Bulk Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.4772,
+              39.2168
+            ],
+            [
+              -76.476,
+              39.2168
+            ],
+            [
+              -76.476,
+              39.2223
+            ],
+            [
+              -76.4772,
+              39.2223
+            ],
+            [
+              -76.4772,
+              39.2168
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot BDC - Baltimore MD",
+        "type": "Bulk Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.4778,
+              39.2212
+            ],
+            [
+              -76.4756,
+              39.2212
+            ],
+            [
+              -76.4756,
+              39.2224
+            ],
+            [
+              -76.4778,
+              39.2224
+            ],
+            [
+              -76.4778,
+              39.2212
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "the-home-depot",
+        "name": "Home Depot BDC - Baltimore MD",
+        "type": "Bulk Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    }
+  ]
+}

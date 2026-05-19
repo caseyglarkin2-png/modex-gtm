@@ -1,0 +1,51 @@
+{
+  "name": "Hostess Bakery - Emporia KS",
+  "type": "Manufacturing - Sweet baked snacks (Hostess)",
+  "coords": { "lat": 38.4173, "lng": -96.2192 },
+  "geofences": {
+    "perimeter": { "south": 38.4153, "west": -96.2216, "north": 38.4197, "east": -96.2168 },
+    "truckGate": { "south": 38.41685, "west": -96.21755, "north": 38.41715, "east": -96.21720 },
+    "dropYards": [
+      { "south": 38.4185, "west": -96.2208, "north": 38.4197, "east": -96.2185 },
+      { "south": 38.4160, "west": -96.2200, "north": 38.4172, "east": -96.2192 }
+    ],
+    "dockAprons": [
+      { "south": 38.4163, "west": -96.2192, "north": 38.4172, "east": -96.2182 },
+      { "south": 38.4172, "west": -96.2200, "north": 38.4180, "east": -96.2190 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 2,
+    "buildingCount": 3,
+    "siteAreaAcres": 49.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.4173,-96.2192,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "guardShack"],
+  "fieldNotes": {
+    "truckGate": "Open driveway openings from Industrial Rd; no barrier arm or sliding gate seen in any Street View pass (2025 imagery). South property edge has chain-link fence but the road frontage is open lawn/parking.",
+    "guardShack": "No staffed booth observed at any entrance. Office front is open with employee parking; truck dock driveways are open. Low residual uncertainty since some panos are inside the property.",
+    "dropArea": "Large trailer drop yard at the NW with 50+ trailers in marked rows; clearly exceeds 50.",
+    "dockDoorCount": "Estimate ~40 doors across central building east face, SW building north face, and additional dock banks; overhead-imagery estimate.",
+    "multipleFacilities": "At least 3 distinct buildings: central production block, SW building, plus ancillary structures - a campus.",
+    "shipRcvSeparate": "Dock banks on at least two different building faces (central building east face and SW building north face).",
+    "fastLaneOpportunity": "Wide open driveway aprons and large yard provide ample room to add a bypass lane."
+  },
+  "method": "deep-audit"
+}

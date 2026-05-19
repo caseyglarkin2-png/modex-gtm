@@ -1,0 +1,65 @@
+{
+  "name": "UNFI - Dayville CT DC",
+  "type": "Distribution Center",
+  "coords": { "lat": 41.86310, "lng": -71.90720 },
+  "geofences": {
+    "perimeter": { "south": 41.86120, "west": -71.90960, "north": 41.86560, "east": -71.90460 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 41.86330, "west": -71.90640, "north": 41.86470, "east": -71.90420 },
+      { "south": 41.86450, "west": -71.90820, "north": 41.86560, "east": -71.90520 }
+    ],
+    "dockAprons": [
+      { "south": 41.86140, "west": -71.90830, "north": 41.86230, "east": -71.90560 },
+      { "south": 41.86230, "west": -71.90910, "north": 41.86380, "east": -71.90840 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 30.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.86310,-71.90720,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "guardShack"],
+  "fieldNotes": {
+    "truckGate": "No barrier arm or sliding gate at the public road (Lake Rd) or anywhere on the long internal access driveway. Street View 2009/2019 confirms an open campus driveway running from Lake Rd, past a pond, with only a monument sign at the road entrance. Open-campus archetype.",
+    "guardShack": "No small staffed booth visible at the building, the trailer-yard mouth, or the driveway. The DC operates from a wholly internal driveway with no checkpoint structure. Listed uncertain because z20 winter imagery is mid-resolution; no booth-footprint structure found in any view.",
+    "multipleFacilities": "Two distinct large buildings on the same parcel cluster: the main UNFI DC (brown roof with rooftop solar) and a separate older warehouse to the north (white/teal roof with its own trailer parking).",
+    "postGateStaging": "Large paved area inside the property between the driveway and the trailer drop yards / dock aprons gives ample internal queuing room.",
+    "dropYard": "Dedicated trailer-storage lots: a large fan of parked trailers SE of the building and additional rows north of the building.",
+    "shipRcvSeparate": "Dock doors run along the south face and wrap to the west face; appears to be one operational dock complex, not physically separate ship/rcv banks.",
+    "dockDoorCount": "Estimated ~60 across the south and west building faces from the rhythm of dock bays and backed-in trailers; mid-resolution winter imagery makes an exact count uncertain.",
+    "urbanRural": "Edge-of-town industrial park in Dayville/Killingly CT, surrounded by woods, fields, a reservoir, and a few other industrial buildings - rural setting."
+  },
+  "method": "deep-audit"
+}

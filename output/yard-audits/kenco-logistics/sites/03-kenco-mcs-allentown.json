@@ -1,0 +1,50 @@
+{
+  "name": "Kenco MCS Allentown - Northampton PA",
+  "type": "Multi-Client Distribution Center",
+  "coords": { "lat": 40.59820, "lng": -75.61650 },
+  "geofences": {
+    "perimeter": { "south": 40.5969, "west": -75.6182, "north": 40.5992, "east": -75.6151 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 40.5984, "west": -75.6175, "north": 40.5991, "east": -75.6158 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 16.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.59820,-75.61650,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "dockDoors", "trailersVisible", "trailerParkingCapacity", "shipRcvSeparate"],
+  "fieldNotes": {
+    "siteDiscrepancy": "Roster source cites 601,836 SF / 92 dock doors for the Kenco Allentown MCS site, but the building at the ROOFTOP-geocoded 6975 Ambassador Drive is a mid-size warehouse of roughly 150,000-250,000 SF with a modest single-face dock bank. The roster figure likely aggregates Kenco's total Allentown footprint or is mislabeled. Audited the physical building at the confirmed address; the '6975' address number is visible on the building wall in 2025-05 Street View.",
+    "truckGate": "No controlled entrance. The site driveway connects to Ambassador Drive as an open driveway with no barrier arm, gate, or checkpoint (2025-05 Street View + z19/z20 satellite).",
+    "guardShack": "No booth anywhere on the property.",
+    "remoteGs": "No gate, so no remote check-in implied.",
+    "dockDoors": "Single dock bank on the NW (back) face; estimated 10-25 doors from z19/z20 imagery — well short of the 92 the roster source cites.",
+    "dropArea": "Small open truck court along the NW dock apron; only a few trailers, no striped drop-yard stalls — banded 0-10.",
+    "urbanRural": "Suburban industrial park (Iron Run / Trexlertown) at the edge of a residential area with farmland alongside; judged Rural per the small-town-industrial tiebreak.",
+    "shipRcvSeparate": "Only one dock face observed; ship/receive separation not confirmed.",
+    "trailersVisible": "~6 trailers/equipment counted at the NW dock apron; approximate.",
+    "trailerParkingCapacity": "Estimated 12; small open court, low confidence."
+  },
+  "method": "deep-audit"
+}

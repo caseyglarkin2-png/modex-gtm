@@ -1,0 +1,488 @@
+{
+  "account": "The Home Depot",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 30,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Home Depot FDC - Dallas TX",
+      "city": "Dallas",
+      "state": "TX",
+      "type": "Flatbed Distribution Center",
+      "address": "9222 W Jefferson Blvd, Dallas, TX 75211",
+      "lat": 32.747894,
+      "lng": -96.923588,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5824); HD's first FDC, dossier-named flatbed network",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 2
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Home Depot FDC - Sparrows Point MD",
+      "city": "Sparrows Point",
+      "state": "MD",
+      "type": "Flatbed Distribution Center",
+      "address": "6311 Trade Point Ave, Sparrows Point, MD 21219",
+      "lat": 39.222006,
+      "lng": -76.482682,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5830); HD Baltimore-region FDC press release",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1439
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Home Depot RDC - Dallas TX",
+      "city": "Dallas",
+      "state": "TX",
+      "type": "Rapid Deployment Center",
+      "address": "2300 Beckleymeade Ave, Dallas, TX 75237",
+      "lat": 32.639055,
+      "lng": -96.852104,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5023); dossier-named RDC architecture",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 5664
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Home Depot RDC - Topeka KS",
+      "city": "Topeka",
+      "state": "KS",
+      "type": "Rapid Deployment Center",
+      "address": "5200 SW Wenger Drive, Topeka, KS 66619",
+      "lat": 38.972986,
+      "lng": -95.697161,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5024)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 5133
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Home Depot RDC - Monroe OH",
+      "city": "Monroe",
+      "state": "OH",
+      "type": "Rapid Deployment Center",
+      "address": "500 Gateway Blvd, Monroe, OH 45050",
+      "lat": 39.434303,
+      "lng": -84.321602,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5084); co-located with IFC XD05",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 337
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Home Depot RDC - Locust Grove GA",
+      "city": "Locust Grove",
+      "state": "GA",
+      "type": "Rapid Deployment Center",
+      "address": "3150 Hwy 42 South, Locust Grove, GA 30248",
+      "lat": 33.216581,
+      "lng": -83.930773,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5250); Atlanta-region RDC, co-located with IFC XD16",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 3
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Home Depot RDC - Redlands CA",
+      "city": "Redlands",
+      "state": "CA",
+      "type": "Rapid Deployment Center",
+      "address": "27352 River Bluff Avenue, Redlands, CA 92374",
+      "lat": 34.088222,
+      "lng": -117.204711,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5087); co-located with IFC XD11",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 142
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Home Depot RDC - Houston TX",
+      "city": "Houston",
+      "state": "TX",
+      "type": "Rapid Deployment Center",
+      "address": "11333 N. Gessner Road, Houston, TX 77064",
+      "lat": 29.940329,
+      "lng": -95.554781,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5521)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 2095
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Home Depot RDC - Breinigsville PA",
+      "city": "Breinigsville",
+      "state": "PA",
+      "type": "Rapid Deployment Center",
+      "address": "8500 Willard Drive, Breinigsville, PA 18031",
+      "lat": 40.551634,
+      "lng": -75.627668,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5034)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 142
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Home Depot RDC - Winchester VA",
+      "city": "Winchester",
+      "state": "VA",
+      "type": "Rapid Deployment Center",
+      "address": "480 Park Center Drive, Winchester, VA 22602",
+      "lat": 39.200647,
+      "lng": -78.139858,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5030)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 8493
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Home Depot RDC - McCalla AL",
+      "city": "McCalla",
+      "state": "AL",
+      "type": "Rapid Deployment Center",
+      "address": "6400 Jefferson Metro Pkwy, McCalla, AL 35111",
+      "lat": 33.322267,
+      "lng": -87.025569,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5086)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 2790
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Home Depot RDC - West Columbia SC",
+      "city": "West Columbia",
+      "state": "SC",
+      "type": "Rapid Deployment Center",
+      "address": "420 Foster Brothers Drive, West Columbia, SC 29172",
+      "lat": 33.908633,
+      "lng": -81.074818,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5088)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 3918
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Home Depot RDC - Pittston Township PA",
+      "city": "Pittston Township",
+      "state": "PA",
+      "type": "Rapid Deployment Center",
+      "address": "300 Enterprise Way, Pittston Township, PA 18640",
+      "lat": 41.314542,
+      "lng": -75.769187,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5089); co-located with IFC XD09",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1714
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Home Depot RDC - Tracy CA",
+      "city": "Tracy",
+      "state": "CA",
+      "type": "Rapid Deployment Center",
+      "address": "1400 Pescadero Avenue, Tracy, CA 95377",
+      "lat": 37.759049,
+      "lng": -121.404099,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5641); confirmed via Yelp listing",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 278
+      }
+    },
+    {
+      "idx": 15,
+      "name": "Home Depot RDC - Tolleson AZ",
+      "city": "Tolleson",
+      "state": "AZ",
+      "type": "Rapid Deployment Center",
+      "address": "9081 W Washington Street, Tolleson, AZ 85353",
+      "lat": 33.445211,
+      "lng": -112.25435,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5643)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1320
+      }
+    },
+    {
+      "idx": 16,
+      "name": "Home Depot RDC - Elwood IL",
+      "city": "Elwood",
+      "state": "IL",
+      "type": "Rapid Deployment Center",
+      "address": "2950 Centerpoint Way, Elwood, IL 60421",
+      "lat": 41.440126,
+      "lng": -88.144081,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5851)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 9468
+      }
+    },
+    {
+      "idx": 17,
+      "name": "Home Depot RDC - Salem OR",
+      "city": "Salem",
+      "state": "OR",
+      "type": "Rapid Deployment Center",
+      "address": "4999 Depot Court SE, Salem, OR 97317",
+      "lat": 44.904755,
+      "lng": -122.962671,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5639)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 17
+      }
+    },
+    {
+      "idx": 18,
+      "name": "Home Depot RDC - Westfield MA",
+      "city": "Westfield",
+      "state": "MA",
+      "type": "Rapid Deployment Center",
+      "address": "50 Campanelli Drive, Westfield, MA 01085",
+      "lat": 42.169402,
+      "lng": -72.734316,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5221)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 11
+      }
+    },
+    {
+      "idx": 19,
+      "name": "Home Depot SDC - Mira Loma CA",
+      "city": "Mira Loma",
+      "state": "CA",
+      "type": "Stocking Distribution Center",
+      "address": "11650 Venture Drive, Mira Loma, CA 91752",
+      "lat": 34.028294,
+      "lng": -117.536009,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DCs #5556-5559, 5645); large multi-building SDC campus",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 3606
+      }
+    },
+    {
+      "idx": 20,
+      "name": "Home Depot SDC - Savannah GA",
+      "city": "Savannah",
+      "state": "GA",
+      "type": "Stocking Distribution Center",
+      "address": "125 Crossroads Pkwy, Savannah, GA 31407",
+      "lat": 32.158137,
+      "lng": -81.203756,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DCs #5150/5155/5157/5160); Port of Savannah import-adjacent",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 4627
+      }
+    },
+    {
+      "idx": 21,
+      "name": "Home Depot SDC - Winchester VA",
+      "city": "Winchester",
+      "state": "VA",
+      "type": "Stocking Distribution Center",
+      "address": "280 Maranto Manor Drive, Winchester, VA 22602",
+      "lat": 39.080075,
+      "lng": -78.153229,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DCs #5362/5364/5365/5366); multi-building SDC campus",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 9866
+      }
+    },
+    {
+      "idx": 22,
+      "name": "Home Depot SDC - Cranbury NJ",
+      "city": "Cranbury",
+      "state": "NJ",
+      "type": "Stocking Distribution Center",
+      "address": "61 Cranbury Station Road, Cranbury, NJ 08512",
+      "lat": 40.307257,
+      "lng": -74.498028,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DCs #5960/5965/5966); Northeast SDC campus",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1434
+      }
+    },
+    {
+      "idx": 23,
+      "name": "Home Depot SDC - Jersey Village TX",
+      "city": "Jersey Village",
+      "state": "TX",
+      "type": "Stocking Distribution Center",
+      "address": "7301 Security Way, Jersey Village, TX 77040",
+      "lat": 29.87742,
+      "lng": -95.557076,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5501; co-located MDO #5822)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 57
+      }
+    },
+    {
+      "idx": 24,
+      "name": "Home Depot SDC - Lathrop CA",
+      "city": "Lathrop",
+      "state": "CA",
+      "type": "Stocking Distribution Center",
+      "address": "18300 Harlan Road, Lathrop, CA 95330",
+      "lat": 37.792762,
+      "lng": -121.295676,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5363)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1553
+      }
+    },
+    {
+      "idx": 25,
+      "name": "Home Depot SDC - Romeoville IL",
+      "city": "Romeoville",
+      "state": "IL",
+      "type": "Stocking Distribution Center",
+      "address": "1070 Windham Pkwy, Romeoville, IL 60446",
+      "lat": 41.663229,
+      "lng": -88.112651,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5061)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 43
+      }
+    },
+    {
+      "idx": 26,
+      "name": "Home Depot SDC - Baytown TX",
+      "city": "Baytown",
+      "state": "TX",
+      "type": "Stocking Distribution Center",
+      "address": "6115 FM 1405, Baytown, TX 77523",
+      "lat": 29.732166,
+      "lng": -94.917884,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5565); Houston port-adjacent import flow",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 221
+      }
+    },
+    {
+      "idx": 27,
+      "name": "Home Depot DFC - Locust Grove GA",
+      "city": "Locust Grove",
+      "state": "GA",
+      "type": "Direct Fulfillment Center",
+      "address": "2400 Highway 155 South, Bldg 200, Locust Grove, GA 30248",
+      "lat": 33.374375,
+      "lng": -84.180811,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #6705); e-commerce DFC",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 8852
+      }
+    },
+    {
+      "idx": 28,
+      "name": "Home Depot DFC - Perris CA",
+      "city": "Perris",
+      "state": "CA",
+      "type": "Direct Fulfillment Center",
+      "address": "4565 Redlands Ave, Perris, CA 92571",
+      "lat": 33.858141,
+      "lng": -117.215915,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #6006); e-commerce DFC",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1199
+      }
+    },
+    {
+      "idx": 29,
+      "name": "Home Depot DFC - Luckey OH",
+      "city": "Luckey",
+      "state": "OH",
+      "type": "Direct Fulfillment Center",
+      "address": "22671 Pemberville Rd, Luckey, OH 43443",
+      "lat": 41.48068,
+      "lng": -83.464208,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #6707); e-commerce DFC",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 3079
+      }
+    },
+    {
+      "idx": 30,
+      "name": "Home Depot BDC - Baltimore MD",
+      "city": "Baltimore",
+      "state": "MD",
+      "type": "Bulk Distribution Center",
+      "address": "7700 Rolling Mill Road, Baltimore, MD 21224",
+      "lat": 39.301709,
+      "lng": -76.509079,
+      "source": "SPS Commerce / SupplierWiki HD DC list (DC #5904); non-conveyable bulk DC",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 3972
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

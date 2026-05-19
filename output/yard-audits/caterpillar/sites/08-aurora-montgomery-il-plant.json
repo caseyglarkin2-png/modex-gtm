@@ -1,0 +1,56 @@
+{
+  "name": "Caterpillar - Aurora (Montgomery) IL Plant",
+  "type": "Manufacturing plant (wheel loaders; site reportedly listed for sale)",
+  "coords": { "lat": 41.71400, "lng": -88.36450 },
+  "geofences": {
+    "perimeter": { "south": 41.70950, "west": -88.37200, "north": 41.71880, "east": -88.35800 },
+    "truckGate": { "south": 41.71760, "west": -88.37160, "north": 41.71880, "east": -88.37080 },
+    "dropYards": [
+      { "south": 41.71840, "west": -88.36450, "north": 41.71960, "east": -88.36280 },
+      { "south": 41.71050, "west": -88.36700, "north": 41.71450, "east": -88.36200 }
+    ],
+    "dockAprons": [
+      { "south": 41.71840, "west": -88.36480, "north": 41.71910, "east": -88.36340 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20,
+    "trailersVisible": 35,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 8,
+    "siteAreaAcres": 298.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.714,-88.3645,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "scale"],
+  "fieldNotes": {
+    "site": "Confirmed via web search as the former Caterpillar Aurora/Montgomery wheel-loader plant at 325 S Route 31, ~350-acre / 4M+ sq ft campus now marketed as 'The Grid at Route 31'. Geocoded point sits inside the main manufacturing complex.",
+    "truckGate": "Divided entry boulevard off Route 31 (NW corner) with a gatehouse in the median - confirmed in z20 satellite and 2018 Street View showing the booth straight ahead and a CATERPILLAR sign on the main building.",
+    "guardShack": "Substantial pyramid-roof gatehouse straddling the median between the inbound and outbound lanes - classic staffed booth footprint.",
+    "fastLaneOpportunity": "Very wide divided entry boulevard with generous paved width and a long approach drive - ample room for an express bypass lane.",
+    "drivewayLong": "Long divided entry drive from Route 31 to the buildings, easily holds 3+ trucks.",
+    "entryExitSeparate": "Entry boulevard is divided into separate in and out lanes either side of the gatehouse median; counted as together-at-one-point but with split lanes - left entryExitTogether/Separate both false-leaning, primary gate is one location with divided lanes.",
+    "shipRcvSeparate": "Dock activity on the north building (south face, trailers backed in) is physically separate from material yards on the south side of the campus.",
+    "dockDoors": "Heavy-manufacturing plant - no large conventional DC dock-door bank; ~20 visible truck doors estimated across the north building and main complex; low confidence.",
+    "dropYard": "Large outdoor trailer/equipment storage yards on the south side and a trailer cluster (~8-10) near the north building.",
+    "railServed": "Rail line runs along the east edge with a spur entering the property on the south side - visible in z16/z18 imagery.",
+    "multipleFacilities": "Multiple distinct large buildings (main manufacturing complex, north building, south buildings) on one ~298-acre campus.",
+    "urbanRural": "Edge-of-town setting in unincorporated Montgomery surrounded by farmland and a rail corridor - Rural per rubric.",
+    "scale": "No truck scale clearly identified; left false, flagged uncertain."
+  },
+  "method": "deep-audit"
+}

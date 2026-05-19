@@ -1,0 +1,66 @@
+{
+  "name": "Pactiv Evergreen - Franklin Park IL",
+  "type": "Manufacturing Plant (Food Merchandising)",
+  "coords": { "lat": 41.926483, "lng": -87.864226 },
+  "geofences": {
+    "perimeter": { "south": 41.92365, "west": -87.86530, "north": 41.92790, "east": -87.86230 },
+    "truckGate": { "south": 41.92540, "west": -87.86470, "north": 41.92580, "east": -87.86420 },
+    "dropYards": [
+      { "south": 41.92560, "west": -87.86310, "north": 41.92660, "east": -87.86230 }
+    ],
+    "dockAprons": [
+      { "south": 41.92400, "west": -87.86470, "north": 41.92470, "east": -87.86360 },
+      { "south": 41.92620, "west": -87.86430, "north": 41.92700, "east": -87.86340 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 24,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 22.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.926483,-87.864226,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Open industrial driveways off N. 25th Ave / Rose St lead directly into the complex; no barrier arm, sliding gate or pinch-point checkpoint visible at the property line on either entrance. Classified false.",
+    "guardShack": "No guard booth structure at any entrance — confirmed in 2025-03 Street View along 25th Ave; entrances are open paved drives flanked by parking.",
+    "remoteGs": "False because there is no controlled truck gate at all.",
+    "multipleFacilities": "Campus of ~4 connected/adjacent industrial buildings (dark-roof main plant, lighter converting buildings, brick dock building on Rose St) occupying the block between N. 25th Ave and the rail corridor.",
+    "railServed": "Active rail spur runs through the property between the building clusters on the east side — visible as a curving track corridor in z18/z19 imagery.",
+    "dropArea": "Sand/gravel fenced trailer lot on the east side holds ~14 trailers without tractors; capacity ~25-30.",
+    "shipRcvSeparate": "Dock banks appear on multiple building faces (Rose St brick building south face plus interior banks) — shipping and receiving run from physically separate clusters.",
+    "backupSensitive": "Tight urban block — residential directly across N. 25th Ave; a truck queue at the open driveway would have minimal stacking room before reaching the public street.",
+    "dockDoorCount": "Estimate ~24 doors across the complex; counting is imprecise because docks face internal drives and several are recessed.",
+    "postGateStaging": "Interior paved drives and yard provide holding room inside the property before docks."
+  },
+  "method": "deep-audit"
+}

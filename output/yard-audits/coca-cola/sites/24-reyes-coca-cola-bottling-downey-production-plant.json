@@ -1,0 +1,54 @@
+{
+  "name": "Reyes Coca-Cola Bottling - Downey Production Plant, CA",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 33.93400, "lng": -118.12880 },
+  "geofences": {
+    "perimeter": { "south": 33.93180, "west": -118.13150, "north": 33.93580, "east": -118.12560 },
+    "truckGate": { "south": 33.93170, "west": -118.12980, "north": 33.93230, "east": -118.12880 },
+    "dropYards": [
+      { "south": 33.93210, "west": -118.13130, "north": 33.93320, "east": -118.12900 },
+      { "south": 33.93420, "west": -118.12780, "north": 33.93560, "east": -118.12560 }
+    ],
+    "dockAprons": [
+      { "south": 33.93230, "west": -118.12950, "north": 33.93330, "east": -118.12700 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55, "trailersVisible": 80, "trailerParkingCapacity": 120,
+    "truckGateCount": 2, "buildingCount": 4, "siteAreaAcres": 40.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.93400,-118.12880,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "scale"],
+  "fieldNotes": {
+    "location": "Roster names this the 'Downey Production Plant' but supplied address '12320 Smith Ave, Santa Fe Springs CA 90670' with coords (33.9489,-118.0727). That address/coords land on a generic warehouse street in Santa Fe Springs with no Coca-Cola signage. Web/business research (Buzzfile, OpenGovUS LA business registry) gives the Reyes Coca-Cola Bottling Downey manufacturing address as 11634 Patton Rd, Downey CA 90241. Satellite probing of that location revealed a large bottling/distribution complex, and Street View confirmed it: Coca-Cola red branding stripe on the building plus Coca-Cola-branded red trailers parked inside the fenced yard.",
+    "truckGate": "The plant perimeter is fully secured - masonry walls and chain-link fencing topped with barbed wire. The truck yard is entered through a chain-link rolling/sliding gate (seen open in Street View) - controlled truck gate confirmed. truckGate true.",
+    "guardShack": "No staffed guard booth observed at the truck rolling gate; recorded guardShack false. Flagged uncertain - a booth may sit at another entrance out of Street View coverage.",
+    "remoteGs": "Gate present without a confirmed staffed booth implies kiosk/remote check-in - recorded remoteGs true (flagged uncertain).",
+    "truckGateCount": "At least two gated truck entrances counted in the walled perimeter; recorded 2.",
+    "entryExitSeparate": "Multiple gated entrances at different points of the walled perimeter - in/out movement split - entryExitSeparate true.",
+    "dockDoors": "Estimated ~55 dock doors across multiple building faces with trailers backed in; banded 50+. Flagged uncertain - several dock faces partly obscured by trailers and rooftop angle.",
+    "dropArea": "Two large trailer drop yards (one on the rail/north side, one on the south side) hold ~80 trailers total in rows; banded 50+. dropYard true.",
+    "shipRcvSeparate": "Dock banks appear on physically separate building faces (north/rail side and south side) - shipRcvSeparate true.",
+    "railServed": "A rail line runs along the north edge of the property and a spur appears to serve the site - railServed true.",
+    "postGateStaging": "Large internal paved yards between the gates and the docks give deep staging room.",
+    "drivewayLong": "Deep internal approach holds a 3+ truck queue.",
+    "multipleFacilities": "Large multi-building complex - main production/warehouse building, additional connected warehouses, and an office/support building.",
+    "scale": "No truck scale clearly identified; flagged uncertain.",
+    "urbanRural": "Dense Downey/LA-metro industrial fabric - Urban."
+  },
+  "method": "deep-audit"
+}

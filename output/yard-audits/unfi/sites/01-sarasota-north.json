@@ -1,0 +1,53 @@
+{
+  "name": "UNFI - Sarasota North DC, Sarasota FL",
+  "type": "Distribution Center",
+  "coords": { "lat": 27.39350, "lng": -82.54180 },
+  "geofences": {
+    "perimeter": { "south": 27.39000, "west": -82.54450, "north": 27.39720, "east": -82.53850 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 27.39100, "west": -82.54300, "north": 27.39600, "east": -82.54150 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 300,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 95.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@27.39350,-82.54180,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "entryExitTogether", "entryLanes", "exitLanes",
+    "fastLaneOpportunity", "dockDoors", "dropArea", "shipRcvSeparate", "scale",
+    "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "location": "Roster geocoded the WRONG building. roster lat/lng 27.264831,-82.484075 / address 6272 McIntosh Rd is UNFI's OLD ~734k sq ft Sarasota DC (Sarasota County). The roster facility NAME explicitly is the new 'Sarasota North DC' / '1M sq ft automated DC opened FY26 (KNAPP robotics)'. That facility is at 8380 21st Street East, in the SRQ Logistics Center on the Manatee-Sarasota county line, east of Sarasota-Bradenton International Airport (KSRQ), near University Pkwy/US-301 and I-75. Resolved coordinates ~27.3935,-82.5418.",
+    "imageryState": "Best available Maxar satellite imagery of the SRQ Logistics Center parcel shows the UNFI building MID-CONSTRUCTION: shell roofed, but surrounding yard is bare earth, parking unstriped, dock doors and gate not yet installed/visible. Facility opened Sept 2025. Street View on 21st St E is 2019/2022, pre-build. Yard-configuration fields therefore could not be observed and are estimated from the building footprint plus UNFI's published spec for comparable new-build DCs.",
+    "dockDoors": "Estimated 50+ band. 1M sq ft modern cross-dock-style food DC; comparable UNFI new build (Manchester PA) has 214 dock positions. Not directly counted — imagery pre-dates dock installation.",
+    "dropArea": "Estimated. Comparable UNFI Manchester new build has 492 trailer parking spaces; Sarasota North footprint supports a large trailer yard. Not directly counted.",
+    "truckGate": "Assumed true — modern 1M sq ft automated grocery DC with KNAPP robotics, on a master-planned logistics-park parcel; perimeter control is standard. Not observed in imagery.",
+    "guardShack": "Assumed false / remoteGs true — current-generation new builds typically use kiosk/app gate check-in rather than a staffed booth. Low confidence; not observed.",
+    "railServed": "A rail line runs N-S immediately along the WEST side of the parcel. No spur observed entering the property in construction-era imagery; the DC is a truck-served grocery DC. Marked false but flagged — verify if a spur is added.",
+    "siteAreaAcres": "~95 acres estimated for the UNFI parcel within the 300-acre SRQ Logistics Center master plan; the perimeter box is approximate."
+  },
+  "method": "deep-audit"
+}

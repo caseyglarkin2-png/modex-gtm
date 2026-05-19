@@ -1,0 +1,67 @@
+{
+  "name": "Nestlé Pizza Division - Little Chute WI",
+  "type": "Frozen pizza manufacturing plant",
+  "coords": { "lat": 44.28530, "lng": -88.32420 },
+  "geofences": {
+    "perimeter": { "south": 44.28350, "west": -88.32750, "north": 44.28720, "east": -88.32100 },
+    "truckGate": { "south": 44.28630, "west": -88.32530, "north": 44.28680, "east": -88.32460 },
+    "dropYards": [
+      { "south": 44.28560, "west": -88.32530, "north": 44.28680, "east": -88.32230 },
+      { "south": 44.28480, "west": -88.32260, "north": 44.28560, "east": -88.32140 }
+    ],
+    "dockAprons": [
+      { "south": 44.28560, "west": -88.32600, "north": 44.28610, "east": -88.32260 }
+    ],
+    "staging": { "south": 44.28570, "west": -88.32620, "north": 44.28640, "east": -88.32480 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 50,
+    "trailerParkingCapacity": 75,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 52.7,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.2853,-88.3242,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount", "truckGateCount", "scale", "urbanRural"],
+  "fieldNotes": {
+    "truckGate": "The north truck yard is fully enclosed by chain-link perimeter fencing. Street View (2024-10) shows a sliding/swing gate across the truck driveway off W North Ave. Two driveway openings serve the fenced yard.",
+    "guardShack": "A small white-roofed booth-footprint structure with a vehicle beside it sits at the truck-yard driveway entrance (z21 imagery). Reads as a guard booth - flagged uncertain as Street View did not give a clean booth view.",
+    "entryExitSeparate": "Two distinct driveway openings onto W North Ave serve the truck yard - likely used as separate in/out gates.",
+    "truckGateCount": "Two driveway openings onto W North Ave; counted as 2 truck gates - flagged uncertain.",
+    "drivewayLong": "The fenced truck yard provides deep queue room between the W North Ave gate and the dock doors.",
+    "dropArea": "Very large drop yard on the north with ~50 trailers parked in long rows; additional trailers on the SE. dropArea 50+.",
+    "fastLaneOpportunity": "Large open paved truck yard with ample width for a bypass/express lane.",
+    "dockDoorCount": "~35 estimated along the building's north face where trailers back in; partly obscured - low-confidence count.",
+    "railServed": "A rail line runs immediately along the building's SE face with a rail siding/car present - the plant is rail-served.",
+    "urbanRural": "Little Chute is a village within the Appleton / Fox Cities metro; the plant is embedded in dense residential fabric. Judged Urban - flagged as borderline.",
+    "scale": "No truck scale clearly visible; flagged uncertain."
+  },
+  "method": "deep-audit"
+}

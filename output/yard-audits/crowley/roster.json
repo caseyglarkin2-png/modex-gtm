@@ -1,0 +1,232 @@
+{
+  "account": "Crowley",
+  "generatedAt": "2026-05-18",
+  "facilityCount": 14,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Crowley JAXPORT Marine Terminal - Jacksonville FL",
+      "city": "Jacksonville",
+      "state": "FL",
+      "type": "Marine terminal / container port",
+      "address": "2831 Talleyrand Avenue, Jacksonville, FL 32206",
+      "lat": 30.356209,
+      "lng": -81.625015,
+      "source": "crowley.com/port-terminals and /locations - JAXPORT Main Port Office; Crowley's flagship Puerto Rico/Caribbean ConRo terminal",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 46
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Crowley JAXPORT Terminal Office #2 - Jacksonville FL",
+      "city": "Jacksonville",
+      "state": "FL",
+      "type": "Marine terminal / container yard",
+      "address": "1163 Talleyrand Avenue, Jacksonville, FL 32206",
+      "lat": 30.337571,
+      "lng": -81.628575,
+      "source": "crowley.com/port-terminals and /locations - JAXPORT Port Office #2 on the Talleyrand terminal complex",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Crowley JAXPORT Terminal Office #3 - Jacksonville FL",
+      "city": "Jacksonville",
+      "state": "FL",
+      "type": "Marine terminal / container yard",
+      "address": "3001 Talleyrand Avenue, Jacksonville, FL 32206",
+      "lat": 30.35699,
+      "lng": -81.625431,
+      "source": "crowley.com/port-terminals and /locations - JAXPORT Port Office #3 on the Talleyrand terminal complex",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 68
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Crowley JAXPORT Terminal Office #4 - Jacksonville FL",
+      "city": "Jacksonville",
+      "state": "FL",
+      "type": "Marine terminal / container yard",
+      "address": "2085 Talleyrand Avenue, Jacksonville, FL 32206",
+      "lat": 30.348098,
+      "lng": -81.622531,
+      "source": "crowley.com/port-terminals and /locations - JAXPORT Port Office #4 on the Talleyrand terminal complex",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 370
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Crowley Port Everglades Terminal - Fort Lauderdale FL",
+      "city": "Fort Lauderdale",
+      "state": "FL",
+      "type": "Marine terminal / container port",
+      "address": "4300 McIntosh Road, Fort Lauderdale, FL 33316",
+      "lat": 26.065508,
+      "lng": -80.124022,
+      "source": "crowley.com/port-terminals and /locations - Port Everglades Terminal",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Crowley Isla Grande Terminal - San Juan PR",
+      "city": "San Juan",
+      "state": "PR",
+      "type": "Marine terminal / container port (LNG-fueled microgrid, ConRo)",
+      "address": "Calle Lindbergh, Isla Grande, San Juan, PR 00907",
+      "lat": 18.45679,
+      "lng": -66.093211,
+      "source": "crowley.com/locations and puertorico.crowley.com - Isla Grande Pier and Terminal, San Juan; rebuilt with new gantry cranes and 900' concrete pier",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 2
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Crowley Penn Terminals - Eddystone PA",
+      "city": "Eddystone",
+      "state": "PA",
+      "type": "Marine terminal with dry + refrigerated warehouse",
+      "address": "1 Saville Avenue, Eddystone, PA 19022",
+      "lat": 39.853752,
+      "lng": -75.338927,
+      "source": "crowley.com/port-terminals - Penn Terminals; 300,000 sq ft dry warehouse + 2.85M cu ft refrigerated warehouse",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Crowley Holt Terminals (Gloucester Terminal) - Gloucester City NJ",
+      "city": "Gloucester City",
+      "state": "NJ",
+      "type": "Marine terminal / breakbulk yard",
+      "address": "160 Essex Street, Gloucester City, NJ 08030",
+      "lat": 39.903121,
+      "lng": -75.122743,
+      "source": "crowley.com/port-terminals and /locations - Holt Terminals / Gloucester Terminal LLC",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 95
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Crowley Wilmington Port Terminal - Wilmington NC",
+      "city": "Wilmington",
+      "state": "NC",
+      "type": "Marine terminal / cargo yard",
+      "address": "2202 Burnett Boulevard, Wilmington, NC 28401",
+      "lat": 34.196262,
+      "lng": -77.948378,
+      "source": "crowley.com/port-terminals and /locations - Wilmington Port Terminal",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 52
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Crowley Gulfport Terminal - Gulfport MS",
+      "city": "Gulfport",
+      "state": "MS",
+      "type": "Marine terminal / port facility",
+      "address": "692 30th Avenue, Gulfport, MS 39501",
+      "lat": 30.363167,
+      "lng": -89.096963,
+      "source": "crowley.com/port-terminals - Gulfport Terminal (Port of Gulfport / West Pier)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 69
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Crowley Conley Container Yard - Conley GA (Atlanta)",
+      "city": "Conley",
+      "state": "GA",
+      "type": "Inland container yard / intermodal logistics hub",
+      "address": "4252 Transport City Drive, Conley, GA 30288",
+      "lat": 33.656392,
+      "lng": -84.344522,
+      "source": "crowley.com/locations - Conley (Atlanta area) container yard; intermodal container shipping and storage yard",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 52
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Crowley Jacksonville Distribution Center (Dry/LCL) - Jacksonville FL",
+      "city": "Jacksonville",
+      "state": "FL",
+      "type": "Distribution center / dry + LCL warehouse",
+      "address": "2113 W 30th Street, Jacksonville, FL 32209",
+      "lat": 30.363189,
+      "lng": -81.694406,
+      "source": "crowley.com warehousing page and /locations - Jacksonville Dry and LCL Facility",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 93
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Crowley Jacksonville Cross Dock Facility - Jacksonville FL",
+      "city": "Jacksonville",
+      "state": "FL",
+      "type": "Cross-dock / distribution warehouse",
+      "address": "2061 Seaboard Coast Line Drive, Jacksonville, FL 32209",
+      "lat": 30.324541,
+      "lng": -81.663312,
+      "source": "crowley.com warehousing page and /locations - Jacksonville Cross Dock Facility",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 3
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Crowley CrowleyFresh Distribution Center (Temperature Controlled) - Medley FL",
+      "city": "Medley",
+      "state": "FL",
+      "type": "Temperature-controlled distribution center / warehouse",
+      "address": "11401 NW 100th Road, Suite 1, Medley, FL 33178",
+      "lat": 25.873515,
+      "lng": -80.358245,
+      "source": "crowley.com warehousing page and /locations - Miami/Medley CrowleyFresh temperature-controlled facility",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 108
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

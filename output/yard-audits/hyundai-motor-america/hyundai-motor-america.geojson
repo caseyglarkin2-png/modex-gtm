@@ -1,0 +1,3087 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.333,
+              32.2755
+            ],
+            [
+              -86.31,
+              32.2755
+            ],
+            [
+              -86.31,
+              32.2915
+            ],
+            [
+              -86.333,
+              32.2915
+            ],
+            [
+              -86.333,
+              32.2755
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Hyundai Motor Manufacturing Alabama (HMMA) - Montgomery AL",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 2,
+          "buildingCount": 12,
+          "siteAreaAcres": 620,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3262,
+              32.2768
+            ],
+            [
+              -86.3244,
+              32.2768
+            ],
+            [
+              -86.3244,
+              32.2782
+            ],
+            [
+              -86.3262,
+              32.2782
+            ],
+            [
+              -86.3262,
+              32.2768
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Hyundai Motor Manufacturing Alabama (HMMA) - Montgomery AL",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3153,
+              32.2777
+            ],
+            [
+              -86.3123,
+              32.2777
+            ],
+            [
+              -86.3123,
+              32.2798
+            ],
+            [
+              -86.3153,
+              32.2798
+            ],
+            [
+              -86.3153,
+              32.2777
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Hyundai Motor Manufacturing Alabama (HMMA) - Montgomery AL",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.319,
+              32.28
+            ],
+            [
+              -86.3155,
+              32.28
+            ],
+            [
+              -86.3155,
+              32.2822
+            ],
+            [
+              -86.319,
+              32.2822
+            ],
+            [
+              -86.319,
+              32.28
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Hyundai Motor Manufacturing Alabama (HMMA) - Montgomery AL",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3185,
+              32.2803
+            ],
+            [
+              -86.315,
+              32.2803
+            ],
+            [
+              -86.315,
+              32.2823
+            ],
+            [
+              -86.3185,
+              32.2823
+            ],
+            [
+              -86.3185,
+              32.2803
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Hyundai Motor Manufacturing Alabama (HMMA) - Montgomery AL",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3283,
+              32.2815
+            ],
+            [
+              -86.326,
+              32.2815
+            ],
+            [
+              -86.326,
+              32.2835
+            ],
+            [
+              -86.3283,
+              32.2835
+            ],
+            [
+              -86.3283,
+              32.2815
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Hyundai Motor Manufacturing Alabama (HMMA) - Montgomery AL",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3148,
+              32.2785
+            ],
+            [
+              -86.3123,
+              32.2785
+            ],
+            [
+              -86.3123,
+              32.2799
+            ],
+            [
+              -86.3148,
+              32.2799
+            ],
+            [
+              -86.3148,
+              32.2785
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Hyundai Motor Manufacturing Alabama (HMMA) - Montgomery AL",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.463,
+              32.147
+            ],
+            [
+              -81.432,
+              32.147
+            ],
+            [
+              -81.432,
+              32.176
+            ],
+            [
+              -81.463,
+              32.176
+            ],
+            [
+              -81.463,
+              32.147
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Hyundai Motor Group Metaplant America (HMGMA) - Ellabell GA",
+        "type": "Auto Assembly Plant (EV)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 300,
+          "truckGateCount": 3,
+          "buildingCount": 15,
+          "siteAreaAcres": 2900,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4538,
+              32.171
+            ],
+            [
+              -81.4512,
+              32.171
+            ],
+            [
+              -81.4512,
+              32.1728
+            ],
+            [
+              -81.4538,
+              32.1728
+            ],
+            [
+              -81.4538,
+              32.171
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Hyundai Motor Group Metaplant America (HMGMA) - Ellabell GA",
+        "type": "Auto Assembly Plant (EV)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.455,
+              32.155
+            ],
+            [
+              -81.45,
+              32.155
+            ],
+            [
+              -81.45,
+              32.1595
+            ],
+            [
+              -81.455,
+              32.1595
+            ],
+            [
+              -81.455,
+              32.155
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Hyundai Motor Group Metaplant America (HMGMA) - Ellabell GA",
+        "type": "Auto Assembly Plant (EV)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.452,
+              32.161
+            ],
+            [
+              -81.4485,
+              32.161
+            ],
+            [
+              -81.4485,
+              32.1645
+            ],
+            [
+              -81.452,
+              32.1645
+            ],
+            [
+              -81.452,
+              32.161
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Hyundai Motor Group Metaplant America (HMGMA) - Ellabell GA",
+        "type": "Auto Assembly Plant (EV)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.333,
+              32.2755
+            ],
+            [
+              -86.31,
+              32.2755
+            ],
+            [
+              -86.31,
+              32.2915
+            ],
+            [
+              -86.333,
+              32.2915
+            ],
+            [
+              -86.333,
+              32.2755
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "HMMA Cylinder Head Machining Plant - Montgomery AL",
+        "type": "Engine / Component Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 2,
+          "buildingCount": 12,
+          "siteAreaAcres": 620,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3262,
+              32.2768
+            ],
+            [
+              -86.3244,
+              32.2768
+            ],
+            [
+              -86.3244,
+              32.2782
+            ],
+            [
+              -86.3262,
+              32.2782
+            ],
+            [
+              -86.3262,
+              32.2768
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "HMMA Cylinder Head Machining Plant - Montgomery AL",
+        "type": "Engine / Component Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3343,
+              32.2815
+            ],
+            [
+              -86.3325,
+              32.2815
+            ],
+            [
+              -86.3325,
+              32.2833
+            ],
+            [
+              -86.3343,
+              32.2833
+            ],
+            [
+              -86.3343,
+              32.2815
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "HMMA Cylinder Head Machining Plant - Montgomery AL",
+        "type": "Engine / Component Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3334,
+              32.2815
+            ],
+            [
+              -86.3318,
+              32.2815
+            ],
+            [
+              -86.3318,
+              32.284
+            ],
+            [
+              -86.3334,
+              32.284
+            ],
+            [
+              -86.3334,
+              32.2815
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "HMMA Cylinder Head Machining Plant - Montgomery AL",
+        "type": "Engine / Component Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5562,
+              34.0379
+            ],
+            [
+              -117.5517,
+              34.0379
+            ],
+            [
+              -117.5517,
+              34.0422
+            ],
+            [
+              -117.5562,
+              34.0422
+            ],
+            [
+              -117.5562,
+              34.0379
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Ontario CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 46,
+          "trailersVisible": 38,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5529,
+              34.0385
+            ],
+            [
+              -117.5521,
+              34.0385
+            ],
+            [
+              -117.5521,
+              34.0393
+            ],
+            [
+              -117.5529,
+              34.0393
+            ],
+            [
+              -117.5529,
+              34.0385
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Ontario CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5552,
+              34.0385
+            ],
+            [
+              -117.5523,
+              34.0385
+            ],
+            [
+              -117.5523,
+              34.0396
+            ],
+            [
+              -117.5552,
+              34.0396
+            ],
+            [
+              -117.5552,
+              34.0385
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Ontario CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5552,
+              34.0388
+            ],
+            [
+              -117.5523,
+              34.0388
+            ],
+            [
+              -117.5523,
+              34.0397
+            ],
+            [
+              -117.5552,
+              34.0397
+            ],
+            [
+              -117.5552,
+              34.0388
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Ontario CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.3587,
+              41.7914
+            ],
+            [
+              -88.3553,
+              41.7914
+            ],
+            [
+              -88.3553,
+              41.7952
+            ],
+            [
+              -88.3587,
+              41.7952
+            ],
+            [
+              -88.3587,
+              41.7914
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Aurora IL",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 34,
+          "trailersVisible": 24,
+          "trailerParkingCapacity": 38,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 11.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.3566,
+              41.7919
+            ],
+            [
+              -88.3558,
+              41.7919
+            ],
+            [
+              -88.3558,
+              41.7925
+            ],
+            [
+              -88.3566,
+              41.7925
+            ],
+            [
+              -88.3566,
+              41.7919
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Aurora IL",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.3564,
+              41.7923
+            ],
+            [
+              -88.3556,
+              41.7923
+            ],
+            [
+              -88.3556,
+              41.7948
+            ],
+            [
+              -88.3564,
+              41.7948
+            ],
+            [
+              -88.3564,
+              41.7923
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Aurora IL",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.3566,
+              41.7924
+            ],
+            [
+              -88.3558,
+              41.7924
+            ],
+            [
+              -88.3558,
+              41.7948
+            ],
+            [
+              -88.3566,
+              41.7948
+            ],
+            [
+              -88.3566,
+              41.7924
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Aurora IL",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.0874,
+              33.966
+            ],
+            [
+              -84.0856,
+              33.966
+            ],
+            [
+              -84.0856,
+              33.9694
+            ],
+            [
+              -84.0874,
+              33.9694
+            ],
+            [
+              -84.0874,
+              33.966
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Lawrenceville GA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 16,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 15.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.0876,
+              33.9665
+            ],
+            [
+              -84.0869,
+              33.9665
+            ],
+            [
+              -84.0869,
+              33.969
+            ],
+            [
+              -84.0876,
+              33.969
+            ],
+            [
+              -84.0876,
+              33.9665
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Lawrenceville GA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.0872,
+              33.9665
+            ],
+            [
+              -84.0867,
+              33.9665
+            ],
+            [
+              -84.0867,
+              33.9691
+            ],
+            [
+              -84.0872,
+              33.9691
+            ],
+            [
+              -84.0872,
+              33.9665
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Lawrenceville GA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8114,
+              32.6387
+            ],
+            [
+              -96.8082,
+              32.6387
+            ],
+            [
+              -96.8082,
+              32.6418
+            ],
+            [
+              -96.8114,
+              32.6418
+            ],
+            [
+              -96.8114,
+              32.6387
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Lancaster TX",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 25.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.81095,
+              32.63868
+            ],
+            [
+              -96.81055,
+              32.63868
+            ],
+            [
+              -96.81055,
+              32.63915
+            ],
+            [
+              -96.81095,
+              32.63915
+            ],
+            [
+              -96.81095,
+              32.63868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Lancaster TX",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8114,
+              32.6392
+            ],
+            [
+              -96.8102,
+              32.6392
+            ],
+            [
+              -96.8102,
+              32.6416
+            ],
+            [
+              -96.8114,
+              32.6416
+            ],
+            [
+              -96.8114,
+              32.6392
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Lancaster TX",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8091,
+              32.6392
+            ],
+            [
+              -96.8082,
+              32.6392
+            ],
+            [
+              -96.8082,
+              32.6416
+            ],
+            [
+              -96.8091,
+              32.6416
+            ],
+            [
+              -96.8091,
+              32.6392
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Lancaster TX",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8103,
+              32.6393
+            ],
+            [
+              -96.8099,
+              32.6393
+            ],
+            [
+              -96.8099,
+              32.6415
+            ],
+            [
+              -96.8103,
+              32.6415
+            ],
+            [
+              -96.8103,
+              32.6393
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Lancaster TX",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8094,
+              32.6393
+            ],
+            [
+              -96.80905,
+              32.6393
+            ],
+            [
+              -96.80905,
+              32.6415
+            ],
+            [
+              -96.8094,
+              32.6415
+            ],
+            [
+              -96.8094,
+              32.6393
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Lancaster TX",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.811,
+              32.63868
+            ],
+            [
+              -96.8105,
+              32.63868
+            ],
+            [
+              -96.8105,
+              32.63915
+            ],
+            [
+              -96.811,
+              32.63915
+            ],
+            [
+              -96.811,
+              32.63868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Lancaster TX",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.4799,
+              40.3513
+            ],
+            [
+              -74.4765,
+              40.3513
+            ],
+            [
+              -74.4765,
+              40.3548
+            ],
+            [
+              -74.4799,
+              40.3548
+            ],
+            [
+              -74.4799,
+              40.3513
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Jamesburg NJ",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 34,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 27.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.4783,
+              40.3537
+            ],
+            [
+              -74.4768,
+              40.3537
+            ],
+            [
+              -74.4768,
+              40.3547
+            ],
+            [
+              -74.4783,
+              40.3547
+            ],
+            [
+              -74.4783,
+              40.3537
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Jamesburg NJ",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.479,
+              40.353
+            ],
+            [
+              -74.4772,
+              40.353
+            ],
+            [
+              -74.4772,
+              40.3545
+            ],
+            [
+              -74.479,
+              40.3545
+            ],
+            [
+              -74.479,
+              40.353
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Jamesburg NJ",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.5992,
+              41.8538
+            ],
+            [
+              -72.5965,
+              41.8538
+            ],
+            [
+              -72.5965,
+              41.8567
+            ],
+            [
+              -72.5992,
+              41.8567
+            ],
+            [
+              -72.5992,
+              41.8538
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - South Windsor CT",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 36,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 17.9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.5977,
+              41.8542
+            ],
+            [
+              -72.597,
+              41.8542
+            ],
+            [
+              -72.597,
+              41.856
+            ],
+            [
+              -72.5977,
+              41.856
+            ],
+            [
+              -72.5977,
+              41.8542
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - South Windsor CT",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.5975,
+              41.8542
+            ],
+            [
+              -72.5968,
+              41.8542
+            ],
+            [
+              -72.5968,
+              41.8562
+            ],
+            [
+              -72.5975,
+              41.8562
+            ],
+            [
+              -72.5975,
+              41.8542
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - South Windsor CT",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2443,
+              47.233
+            ],
+            [
+              -122.2413,
+              47.233
+            ],
+            [
+              -122.2413,
+              47.2356
+            ],
+            [
+              -122.2443,
+              47.2356
+            ],
+            [
+              -122.2443,
+              47.233
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Sumner WA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 16.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2443,
+              47.2336
+            ],
+            [
+              -122.2438,
+              47.2336
+            ],
+            [
+              -122.2438,
+              47.235
+            ],
+            [
+              -122.2443,
+              47.235
+            ],
+            [
+              -122.2443,
+              47.2336
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Sumner WA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2437,
+              47.2349
+            ],
+            [
+              -122.2415,
+              47.2349
+            ],
+            [
+              -122.2415,
+              47.23545
+            ],
+            [
+              -122.2437,
+              47.23545
+            ],
+            [
+              -122.2437,
+              47.2349
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Sumner WA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2437,
+              47.2333
+            ],
+            [
+              -122.2415,
+              47.2333
+            ],
+            [
+              -122.2415,
+              47.2339
+            ],
+            [
+              -122.2437,
+              47.2339
+            ],
+            [
+              -122.2437,
+              47.2333
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Mobis Parts America PDC - Sumner WA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.1385,
+              32.9078
+            ],
+            [
+              -85.1245,
+              32.9078
+            ],
+            [
+              -85.1245,
+              32.9185
+            ],
+            [
+              -85.1385,
+              32.9185
+            ],
+            [
+              -85.1385,
+              32.9078
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Vehicle Processing Center - West Point GA",
+        "type": "Vehicle Processing Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "NONE",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 385,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.1381,
+              32.9103
+            ],
+            [
+              -85.1368,
+              32.9103
+            ],
+            [
+              -85.1368,
+              32.9113
+            ],
+            [
+              -85.1381,
+              32.9113
+            ],
+            [
+              -85.1381,
+              32.9103
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Vehicle Processing Center - West Point GA",
+        "type": "Vehicle Processing Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.1355,
+              32.9079
+            ],
+            [
+              -85.127,
+              32.9079
+            ],
+            [
+              -85.127,
+              32.9132
+            ],
+            [
+              -85.1355,
+              32.9132
+            ],
+            [
+              -85.1355,
+              32.9079
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Vehicle Processing Center - West Point GA",
+        "type": "Vehicle Processing Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.137,
+              32.9133
+            ],
+            [
+              -85.13,
+              32.9133
+            ],
+            [
+              -85.13,
+              32.9165
+            ],
+            [
+              -85.137,
+              32.9165
+            ],
+            [
+              -85.137,
+              32.9133
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Vehicle Processing Center - West Point GA",
+        "type": "Vehicle Processing Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.1375,
+              32.9103
+            ],
+            [
+              -85.1345,
+              32.9103
+            ],
+            [
+              -85.1345,
+              32.912
+            ],
+            [
+              -85.1375,
+              32.912
+            ],
+            [
+              -85.1375,
+              32.9103
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Vehicle Processing Center - West Point GA",
+        "type": "Vehicle Processing Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.9285,
+              32.4215
+            ],
+            [
+              -93.91,
+              32.4215
+            ],
+            [
+              -93.91,
+              32.4355
+            ],
+            [
+              -93.9285,
+              32.4355
+            ],
+            [
+              -93.9285,
+              32.4215
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Vehicle Processing Center - Shreveport LA",
+        "type": "Vehicle Processing Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 730,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.9255,
+              32.4315
+            ],
+            [
+              -93.9205,
+              32.4315
+            ],
+            [
+              -93.9205,
+              32.4365
+            ],
+            [
+              -93.9255,
+              32.4365
+            ],
+            [
+              -93.9255,
+              32.4315
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Vehicle Processing Center - Shreveport LA",
+        "type": "Vehicle Processing Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.553,
+              31.108
+            ],
+            [
+              -81.53,
+              31.108
+            ],
+            [
+              -81.53,
+              31.1355
+            ],
+            [
+              -81.553,
+              31.1355
+            ],
+            [
+              -81.553,
+              31.108
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Port Vehicle Processing - Brunswick GA",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "NONE",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 1627,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.5439,
+              31.123
+            ],
+            [
+              -81.5424,
+              31.123
+            ],
+            [
+              -81.5424,
+              31.1246
+            ],
+            [
+              -81.5439,
+              31.1246
+            ],
+            [
+              -81.5439,
+              31.123
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Port Vehicle Processing - Brunswick GA",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.5525,
+              31.1085
+            ],
+            [
+              -81.54,
+              31.1085
+            ],
+            [
+              -81.54,
+              31.122
+            ],
+            [
+              -81.5525,
+              31.122
+            ],
+            [
+              -81.5525,
+              31.1085
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Port Vehicle Processing - Brunswick GA",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.546,
+              31.124
+            ],
+            [
+              -81.534,
+              31.124
+            ],
+            [
+              -81.534,
+              31.133
+            ],
+            [
+              -81.546,
+              31.133
+            ],
+            [
+              -81.546,
+              31.124
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Port Vehicle Processing - Brunswick GA",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.545,
+              31.1215
+            ],
+            [
+              -81.5425,
+              31.1215
+            ],
+            [
+              -81.5425,
+              31.124
+            ],
+            [
+              -81.545,
+              31.124
+            ],
+            [
+              -81.545,
+              31.1215
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Port Vehicle Processing - Brunswick GA",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1405,
+              40.6885
+            ],
+            [
+              -74.127,
+              40.6885
+            ],
+            [
+              -74.127,
+              40.701
+            ],
+            [
+              -74.1405,
+              40.701
+            ],
+            [
+              -74.1405,
+              40.6885
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Port Vehicle Processing - Newark/Elizabeth NJ",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 7,
+          "siteAreaAcres": 270,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1384,
+              40.6982
+            ],
+            [
+              -74.1372,
+              40.6982
+            ],
+            [
+              -74.1372,
+              40.6989
+            ],
+            [
+              -74.1384,
+              40.6989
+            ],
+            [
+              -74.1384,
+              40.6982
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Port Vehicle Processing - Newark/Elizabeth NJ",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1395,
+              40.689
+            ],
+            [
+              -74.1285,
+              40.689
+            ],
+            [
+              -74.1285,
+              40.697
+            ],
+            [
+              -74.1395,
+              40.697
+            ],
+            [
+              -74.1395,
+              40.689
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Port Vehicle Processing - Newark/Elizabeth NJ",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.139,
+              40.697
+            ],
+            [
+              -74.131,
+              40.697
+            ],
+            [
+              -74.131,
+              40.701
+            ],
+            [
+              -74.139,
+              40.701
+            ],
+            [
+              -74.139,
+              40.697
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Port Vehicle Processing - Newark/Elizabeth NJ",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.139,
+              40.6978
+            ],
+            [
+              -74.137,
+              40.6978
+            ],
+            [
+              -74.137,
+              40.6992
+            ],
+            [
+              -74.139,
+              40.6992
+            ],
+            [
+              -74.139,
+              40.6978
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Port Vehicle Processing - Newark/Elizabeth NJ",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.3742,
+              47.2572
+            ],
+            [
+              -122.3656,
+              47.2572
+            ],
+            [
+              -122.3656,
+              47.2656
+            ],
+            [
+              -122.3742,
+              47.2656
+            ],
+            [
+              -122.3742,
+              47.2572
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Vehicle Processing Center - Tacoma WA (Hyundai)",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 8000,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 110,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.3734,
+              47.2628
+            ],
+            [
+              -122.3725,
+              47.2628
+            ],
+            [
+              -122.3725,
+              47.2634
+            ],
+            [
+              -122.3734,
+              47.2634
+            ],
+            [
+              -122.3734,
+              47.2628
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Vehicle Processing Center - Tacoma WA (Hyundai)",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.374,
+              47.2576
+            ],
+            [
+              -122.369,
+              47.2576
+            ],
+            [
+              -122.369,
+              47.265
+            ],
+            [
+              -122.374,
+              47.265
+            ],
+            [
+              -122.374,
+              47.2576
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Vehicle Processing Center - Tacoma WA (Hyundai)",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.3725,
+              47.263
+            ],
+            [
+              -122.3705,
+              47.263
+            ],
+            [
+              -122.3705,
+              47.2638
+            ],
+            [
+              -122.3725,
+              47.2638
+            ],
+            [
+              -122.3725,
+              47.263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Vehicle Processing Center - Tacoma WA (Hyundai)",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6287,
+              30.3428
+            ],
+            [
+              -81.6212,
+              30.3428
+            ],
+            [
+              -81.6212,
+              30.3496
+            ],
+            [
+              -81.6287,
+              30.3496
+            ],
+            [
+              -81.6287,
+              30.3428
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Port Vehicle Processing - Jacksonville FL",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 6000,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 70,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6276,
+              30.3451
+            ],
+            [
+              -81.6271,
+              30.3451
+            ],
+            [
+              -81.6271,
+              30.3456
+            ],
+            [
+              -81.6276,
+              30.3456
+            ],
+            [
+              -81.6276,
+              30.3451
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Port Vehicle Processing - Jacksonville FL",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6283,
+              30.3433
+            ],
+            [
+              -81.623,
+              30.3433
+            ],
+            [
+              -81.623,
+              30.3492
+            ],
+            [
+              -81.6283,
+              30.3492
+            ],
+            [
+              -81.6283,
+              30.3433
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Port Vehicle Processing - Jacksonville FL",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6272,
+              30.3453
+            ],
+            [
+              -81.6262,
+              30.3453
+            ],
+            [
+              -81.6262,
+              30.346
+            ],
+            [
+              -81.6272,
+              30.346
+            ],
+            [
+              -81.6272,
+              30.3453
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis America Port Vehicle Processing - Jacksonville FL",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.26502,
+              32.08654
+            ],
+            [
+              -81.26077,
+              32.08654
+            ],
+            [
+              -81.26077,
+              32.09014
+            ],
+            [
+              -81.26502,
+              32.09014
+            ],
+            [
+              -81.26502,
+              32.08654
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hyundai-motor-america",
+        "name": "Glovis EV Logistics America - Savannah Integrated Warehouse (Pooler GA)",
+        "type": "Distribution Warehouse / Logistics Hub",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 0,
+          "railServed": false
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "name": "Kenco MCS Ogden I - Ogden UT",
+  "type": "Multi-Client Distribution Center",
+  "coords": { "lat": 41.24828, "lng": -111.99625 },
+  "geofences": {
+    "perimeter": { "south": 41.24655, "west": -111.99780, "north": 41.25000, "east": -111.99490 },
+    "truckGate": { "south": 41.24905, "west": -111.99720, "north": 41.24945, "east": -111.99660 },
+    "dropYards": [
+      { "south": 41.24770, "west": -111.99760, "north": 41.24960, "east": -111.99670 }
+    ],
+    "dockAprons": [
+      { "south": 41.24700, "west": -111.99700, "north": 41.24955, "east": -111.99645 }
+    ],
+    "staging": { "south": 41.24770, "west": -111.99775, "north": 41.24900, "east": -111.99715 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 46,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 18.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.24828,-111.99625,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["truckGate", "guardShack", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "1025 Depot Dr, Ogden UT 84404 - confirmed as the Kenco Oatly Warehouse (Kenco-built/operated finished-goods DC serving Oatly's Ogden oat-milk plant; listed as 1025 Depot Dr Suite 5). Roster ROOFTOP geocode (41.247999,-111.995675) lands directly on the building in the Business Depot Ogden (BDO) industrial park. Audited coordinate is the building footprint center.",
+    "truckGate": "No barrier arm, sliding/swing gate, or guard booth at the truck apron entrance. The west-side truck apron is reached by open driveways off the BDO industrial-park roads. Medium-confidence FALSE - flagged.",
+    "guardShack": "No staffed booth structure visible at the entrance.",
+    "dockDoors": "Long dock bank along the WEST building face - counted ~46 doors from z18/z19 imagery, consistent with the roster's '44+ dock doors'. Band 25-50.",
+    "dropArea": "~12 trailers staged in the west apron / gravel storage area; estimated ~30-trailer capacity. Band 10-25.",
+    "staging": "A graded gravel area immediately west of the paved dock apron functions as overflow trailer staging.",
+    "fastLaneOpportunity": "Very deep, wide west truck apron plus an adjacent gravel staging strip - ample unused width to add a bypass/express lane.",
+    "dropYard": "West apron and gravel area hold parked drop trailers separate from active dock spotting.",
+    "shipRcvSeparate": "All dock doors are on the single west face - shipping and receiving are not on physically separate dock clusters.",
+    "railServed": "No rail spur enters the parcel.",
+    "urbanRural": "Inside the Ogden metro within the dense Business Depot Ogden industrial fabric - Urban.",
+    "refrigeration": "Roof-mounted refrigeration/HVAC units near the south end are consistent with a food-grade / temperature-controlled DC for Oatly product."
+  },
+  "method": "deep-audit"
+}

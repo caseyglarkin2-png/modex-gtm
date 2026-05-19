@@ -1,0 +1,47 @@
+{
+  "name": "Niagara Bottling - Gahanna OH",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 39.99610, "lng": -82.82290 },
+  "geofences": {
+    "perimeter": { "south": 39.99520, "west": -82.82480, "north": 39.99730, "east": -82.82110 },
+    "truckGate": { "south": 39.99630, "west": -82.82210, "north": 39.99685, "east": -82.82150 },
+    "dropYards": [
+      { "south": 39.99650, "west": -82.82460, "north": 39.99720, "east": -82.82280 }
+    ],
+    "dockAprons": [
+      { "south": 39.99660, "west": -82.82460, "north": 39.99700, "east": -82.82120 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40, "trailersVisible": 55, "trailerParkingCapacity": 70,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 11.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.99610,-82.82290,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point at either road connection. NE driveway off Eastgate Pkwy has only a directional 'TRUCKS ONLY / VISITORS' sign at the road (confirmed in 2024-06 Street View) - an open uncontrolled drive.",
+    "guardShack": "No small staffed booth visible at any entrance in satellite or Street View.",
+    "remoteGs": "False - requires a truck gate to exist; there is none.",
+    "drivewayLong": "Long open driveway wraps the building from the NE entrance around the north dock face; ample room for a 3+ truck queue inside.",
+    "dropArea": "Large NW drop yard with trailers parked nose-out in multiple rows (50+ stalls observed in z20 imagery).",
+    "dockDoors": "North building face shows a regular rhythm of dock doors with trailers backed in; estimated ~40, banded 25-50.",
+    "fastLaneOpportunity": "Wide open driveway apron at NE entrance with unused paved width and no existing control structure - physical room for an express/bypass lane.",
+    "railServed": "A rail line runs parallel to Eastgate Pkwy along the south of the property but no spur enters the site.",
+    "urbanRural": "Located in a built-up industrial park in Gahanna within the Columbus OH metro; dense surrounding warehouse/commercial fabric and residential subdivisions nearby."
+  },
+  "method": "deep-audit"
+}

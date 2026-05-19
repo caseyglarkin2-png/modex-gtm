@@ -1,0 +1,53 @@
+{
+  "name": "K-C Beech Island Mill - Beech Island SC",
+  "type": "Integrated tissue & personal care manufacturing complex (largest K-C facility globally)",
+  "coords": { "lat": 33.41700, "lng": -81.89550 },
+  "geofences": {
+    "perimeter": { "south": 33.40880, "west": -81.90650, "north": 33.42500, "east": -81.88880 },
+    "truckGate": { "south": 33.41770, "west": -81.89340, "north": 33.41830, "east": -81.89230 },
+    "dropYards": [
+      { "south": 33.40920, "west": -81.89800, "north": 33.41330, "east": -81.89250 },
+      { "south": 33.42050, "west": -81.90000, "north": 33.42330, "east": -81.89150 }
+    ],
+    "dockAprons": [
+      { "south": 33.41310, "west": -81.89850, "north": 33.41380, "east": -81.89200 },
+      { "south": 33.41960, "west": -81.89400, "north": 33.42050, "east": -81.89000 }
+    ],
+    "staging": { "south": 33.41680, "west": -81.89380, "north": 33.41780, "east": -81.89180 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 450,
+    "truckGateCount": 1,
+    "buildingCount": 7,
+    "siteAreaAcres": 470.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.41700,-81.89550,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "scale"],
+  "fieldNotes": {
+    "truckGate": "Main entrance off Old Jackson Hwy confirmed in Street View (2026-03): barrier arm across divided lanes, digital 'Beech Island' sign.",
+    "guardShack": "Small guard booth with blue canopy in the median between inbound/outbound lanes, visible in both satellite z20 and Street View.",
+    "fastLaneOpportunity": "Wide gate apron with divided 2-in / 2-out lanes plus landscaped islands; ample paved width to add an express bypass lane.",
+    "shipRcvSeparate": "Dock banks on the south face of the main building and a separate dock bank on the NE building cluster - physically separate clusters on a multi-building campus.",
+    "multipleFacilities": "Sprawling campus: ~7 distinct large building masses plus wastewater treatment ponds, all inside one fenced perimeter.",
+    "dockDoorCount": "Honest estimate - 90+ doors across the south main-building face and the NE building; exact count not resolvable, banded 50+.",
+    "dropArea": "Two large drop yards: a long double row of angled trailers along the south dock apron and extensive rows in the north of the campus; 300+ trailers visible.",
+    "scale": "No truck scale clearly visible from overhead; flagged uncertain.",
+    "urbanRural": "Rural - the complex sits in farmland/forest near the small community of Beech Island, edge of the Augusta GA metro fringe."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,67 @@
+{
+  "name": "General Mills - Fontana CA Distribution Center",
+  "type": "Distribution Center",
+  "coords": { "lat": 34.04330, "lng": -117.50810 },
+  "geofences": {
+    "perimeter": { "south": 34.04080, "west": -117.51000, "north": 34.04550, "east": -117.50700 },
+    "truckGate": { "south": 34.04220, "west": -117.50740, "north": 34.04270, "east": -117.50680 },
+    "dropYards": [
+      { "south": 34.04130, "west": -117.50750, "north": 34.04520, "east": -117.50680 }
+    ],
+    "dockAprons": [
+      { "south": 34.04130, "west": -117.50790, "north": 34.04520, "east": -117.50720 }
+    ],
+    "staging": { "south": 34.04200, "west": -117.50940, "north": 34.04500, "east": -117.50820 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 36.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.04330,-117.50810,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "remoteGs"],
+  "fieldNotes": {
+    "siteIdentity": "Confirmed General Mills Fontana distribution center, 11618 Mulberry Ave, Fontana CA 92337 (verified via Yelp, YellowPages, Superpages, Hyster GM plant locations list; red 'General Mills' sign visible at the entrance in Street View). A single very large rectangular DC warehouse (well over 1M sq ft) in the Southwest Industrial Park, running roughly N-S between Mulberry Ave (east) and a row of neighboring warehouses (west).",
+    "truckGate": "Truck entrance is a controlled driveway off Mulberry Ave on the building's east side, leading into the dock yard. Satellite (z20/z21) shows a chain-link gate panel across the truck lane plus painted STOP and directional lane arrows on the driveway pavement; Street View (2023-12) confirms a sliding chain-link gate at the property line. The entire Mulberry Ave frontage is otherwise enclosed by a perimeter wall/fence. truckGate = true.",
+    "guardShack": "No staffed guard booth visible at the truck entrance in any Street View heading - just the gate and lane markings. guardShack = false.",
+    "remoteGs": "Gate present with no guard booth, implying kiosk / call-box / app or remote check-in. remoteGs = true (medium confidence - listed uncertain).",
+    "dockDoors": "Long dock-door bank runs nearly the full length of the building's east face with dozens of trailers backed in (estimated ~55 dock positions). The west side is primarily a blank wall with a wide paved yard. dockDoors band 50+. Count is an estimate from overhead imagery.",
+    "dropArea": "Large fenced trailer yard along the east dock face holds many trailers (~70 visible), a substantial share without tractors - dedicated drop yard. dropArea band 50+.",
+    "shipRcvSeparate": "Docks are concentrated in a single bank along the east face; no second distinct dock cluster on another building face. shipRcvSeparate = false.",
+    "railServed": "No rail spur runs into the property; this is a road-served distribution center. railServed = false.",
+    "urbanRural": "Dense industrial park within the Fontana / Inland Empire metro, surrounded by big-box warehouses and adjacent residential subdivisions - Urban.",
+    "drivewayLong": "The east-side truck driveway runs from Mulberry Ave deep into the dock yard before reaching the dock doors - deep approach, holds 3+ trucks.",
+    "staging": "Wide paved yard along the building's west side provides additional interior maneuvering / staging space.",
+    "backupSensitive": "Mulberry Ave is a wide multi-lane arterial and the gate apron has ample paved depth, so a truck queue at the gate would not block the public road."
+  },
+  "method": "deep-audit"
+}

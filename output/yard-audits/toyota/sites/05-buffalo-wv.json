@@ -1,0 +1,54 @@
+{
+  "name": "Toyota Motor Manufacturing West Virginia - Buffalo WV",
+  "type": "Powertrain Plant (engines/transmissions)",
+  "coords": { "lat": 38.598, "lng": -81.992 },
+  "geofences": {
+    "perimeter": { "south": 38.591712, "west": -81.997172, "north": 38.604288, "east": -81.986828 },
+    "truckGate": { "south": 38.59475, "west": -81.99560, "north": 38.59585, "east": -81.99420 },
+    "dropYards": [
+      { "south": 38.60010, "west": -81.99180, "north": 38.60430, "east": -81.98780 }
+    ],
+    "dockAprons": [
+      { "south": 38.59700, "west": -81.99110, "north": 38.60020, "east": -81.98990 },
+      { "south": 38.59420, "west": -81.99320, "north": 38.59630, "east": -81.99150 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 85,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 311.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.598,-81.992,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "multiStep", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Site is fully chain-link perimeter-fenced (visible in 2024-10 Street View along the public road). Truck/dock operations are inside a controlled fenced perimeter; truck access is gated. Plant-property gate not directly visible in Street View (coverage stops at the public road) so the gate structure type is inferred.",
+    "guardShack": "No guard booth could be positively identified in imagery; main employee/visitor entrance from the public road is an open unguarded driveway opening into employee parking. Marked false / remoteGs true as a medium-confidence call - a TPS plant of this scale very likely has controlled truck check-in but the structure is not confirmable from overhead.",
+    "remoteGs": "Inferred - gate present, no confirmed guard shack.",
+    "multipleFacilities": "Large campus: a northern main powertrain building cluster and a separate large southern building cluster, plus utility/water-treatment buildings and an electrical substation on a separate east parcel.",
+    "dropYard": "Very large dedicated trailer drop yard on the north side - rows of 80+ trailers (red and silver) parked in marked stalls, separate from the active dock aprons.",
+    "dockDoors": "Trailers backed in along the east face of the north building and the south/east faces of the south building; estimated 60+ total dock doors across the campus.",
+    "shipRcvSeparate": "Inbound parts docks and trailer staging are on the east face; the south building has its own separate dock bank - shipping and receiving run from physically distinct dock clusters.",
+    "fastLaneOpportunity": "Wide internal service roads and a large apron between the drop yard and the dock building leave ample paved width to add an express/bypass lane.",
+    "urbanRural": "Rural - the plant sits between the Kanawha River and farmland near the small town of Buffalo, WV; surrounded by open fields.",
+    "railServed": "No rail spur runs into the property; the plant ships engines/transmissions by truck.",
+    "siteAreaAcres": "~311 acres for the fenced industrial footprint; excludes the adjacent solar farm on a separate parcel to the east."
+  },
+  "method": "deep-audit"
+}

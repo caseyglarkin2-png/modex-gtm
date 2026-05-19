@@ -1,0 +1,56 @@
+{
+  "name": "Frito-Lay - Frankfort IN (Core & East Plants)",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 40.28400, "lng": -86.55750 },
+  "geofences": {
+    "perimeter": { "south": 40.28100, "west": -86.56250, "north": 40.28680, "east": -86.55100 },
+    "truckGate": { "south": 40.28230, "west": -86.56180, "north": 40.28300, "east": -86.56080 },
+    "dropYards": [
+      { "south": 40.28480, "west": -86.56120, "north": 40.28620, "east": -86.55900 },
+      { "south": 40.28250, "west": -86.55700, "north": 40.28430, "east": -86.55350 },
+      { "south": 40.28120, "west": -86.56050, "north": 40.28260, "east": -86.55850 }
+    ],
+    "dockAprons": [
+      { "south": 40.28560, "west": -86.55700, "north": 40.28640, "east": -86.55360 },
+      { "south": 40.28280, "west": -86.56100, "north": 40.28360, "east": -86.55850 }
+    ],
+    "staging": { "south": 40.28230, "west": -86.56080, "north": 40.28330, "east": -86.55920 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 75,
+    "trailersVisible": 160,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 155.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.28400,-86.55750,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "scale", "multiStep"],
+  "fieldNotes": {
+    "location": "Confirmed: 323 S County Road 300 W, Frankfort IN 46041. Roster point landed directly on the plant. Web research confirms two co-located Frito-Lay plants (Core Plant and East Plant) sharing the address — combined ~1100 employees, 17 snack production lines. Satellite shows a very large multi-building manufacturing campus with rooftop process equipment, on-site wastewater treatment ponds, bulk silos, a rail spur/yard, and extensive trailer yards. Frito-Lay monument sign visible at the SW entrance in 2026 Street View.",
+    "truckGate": "Campus is fenced (decorative metal fence visible along the County Road 300 W frontage in Street View). The entrance road has a checkpoint structure / guard booth at the point where it enters the secured plant area; classified as a controlled truck gate.",
+    "guardShack": "A small booth-footprint structure with a canopy sits on the entrance road at the secured-area boundary, consistent with a staffed guard booth. Medium confidence (resolved from satellite, not directly photographed), flagged.",
+    "dockDoors": "Multiple large dock banks across both the Core and East plant buildings with many trailers backed in; aggregate well past 50.",
+    "dropArea": "Several large trailer drop yards (NW yard, an east-side yard, and a south yard) holding 150+ trailers in marked rows; 50+ band. dropYard true.",
+    "shipRcvSeparate": "Dock clusters distributed across multiple, physically separate building faces of the two plants — shipping and receiving run from separate banks.",
+    "railServed": "A rail spur/yard with multiple tracks and rail hopper cars runs onto the NE part of the property alongside bulk silos — confirmed rail-served for raw-material delivery.",
+    "multipleFacilities": "Definitively a campus: two named plants (Core + East), plus a separate warehouse cluster to the north and support buildings — multiple large building clusters on one property.",
+    "fastLaneOpportunity": "Wide entrance apron and ample paved yard width leave clear room for a bypass/express lane.",
+    "urbanRural": "Edge of Frankfort, IN, surrounded on multiple sides by agricultural fields — Rural.",
+    "siteAreaAcres": "~155 acres estimate for the built campus footprint (plants + yards + parking); the surrounding owned land including fields is larger."
+  },
+  "method": "deep-audit"
+}

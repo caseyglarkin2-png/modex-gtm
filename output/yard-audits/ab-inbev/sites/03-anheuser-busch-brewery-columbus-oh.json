@@ -1,0 +1,52 @@
+{
+  "name": "Anheuser-Busch Brewery - Columbus OH",
+  "type": "Brewery",
+  "coords": { "lat": 40.10500, "lng": -82.99350 },
+  "geofences": {
+    "perimeter": { "south": 40.1018, "west": -82.9975, "north": 40.1085, "east": -82.9895 },
+    "truckGate": { "south": 40.10210, "west": -82.99360, "north": 40.10270, "east": -82.99260 },
+    "dropYards": [
+      { "south": 40.10560, "west": -82.99720, "north": 40.10820, "east": -82.99480 },
+      { "south": 40.10300, "west": -82.99720, "north": 40.10550, "east": -82.99520 }
+    ],
+    "dockAprons": [
+      { "south": 40.10440, "west": -82.99500, "north": 40.10560, "east": -82.99300 }
+    ],
+    "staging": { "south": 40.10400, "west": -82.99450, "north": 40.10520, "east": -82.99280 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 32,
+    "trailersVisible": 240,
+    "trailerParkingCapacity": 350,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 138.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.10500,-82.99350,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "truckGate", "entryLanes", "exitLanes", "scale"],
+  "fieldNotes": {
+    "site": "Columbus A-B brewery (opened 1968), documented ~138-acre site at 700 Schrock Rd. Brewery building with adjacent large trailer drop yards to the NW/W and rail service.",
+    "truckGate": "Campus is fully fenced (chain-link confirmed along Schrock Rd in Street View). Main Schrock Rd entrance is a landscaped boulevard with an A-B monument sign and a 'No Trucks' sign - trucks are routed to a dedicated truck gate elsewhere on the perimeter. Truck gate not crisply resolved in Street View (internal roads not on SV) - flagged uncertain.",
+    "guardShack": "A-B breweries operate guarded truck entrances as standard practice; the 'No Trucks' sign at the visitor entrance confirms a separate controlled truck gate. Booth structure not directly imaged - classified guardShack TRUE per site type, flagged uncertain.",
+    "dropYard": "Large organized trailer drop yards NW and W of the brewery, ~200+ trailers, capacity ~350.",
+    "dockDoors": "Dock bank with trailers backed in visible on the brewery building; estimated ~32 (band 25-50).",
+    "railServed": "Multiple rail spurs run into the campus and trailer yards.",
+    "fastLaneOpportunity": "Wide internal roads and yard aprons leave room to add lanes.",
+    "scale": "No truck scale resolved.",
+    "siteAreaAcres": "Documented 138 acres; boxed footprint approximates this."
+  },
+  "method": "deep-audit"
+}

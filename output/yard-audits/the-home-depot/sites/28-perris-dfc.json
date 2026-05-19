@@ -1,0 +1,45 @@
+{
+  "name": "Home Depot DFC - Perris CA",
+  "type": "Direct Fulfillment Center",
+  "coords": { "lat": 33.85820, "lng": -117.21520 },
+  "geofences": {
+    "perimeter": { "south": 33.85470, "west": -117.21800, "north": 33.86070, "east": -117.21230 },
+    "truckGate": { "south": 33.85970, "west": -117.21770, "north": 33.86040, "east": -117.21660 },
+    "dropYards": [
+      { "south": 33.85500, "west": -117.21780, "north": 33.85950, "east": -117.21620 }
+    ],
+    "dockAprons": [
+      { "south": 33.85490, "west": -117.21700, "north": 33.85960, "east": -117.21560 }
+    ],
+    "staging": { "south": 33.85920, "west": -117.21680, "north": 33.86020, "east": -117.21430 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110, "trailersVisible": 60, "trailerParkingCapacity": 110,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 47.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.85820,-117.21520,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Single controlled truck entrance off the perimeter road at the building's NW; fenced truck court wraps the dock side. Office and car parking sit at the NW corner.",
+    "guardShack": "No staffed booth positively resolved; 2018 Street View predates construction and 2025 imagery shows the entrance landscaped but no clear booth. Classified as remote kiosk/app check-in. Lower-confidence call.",
+    "dockDoors": "Long dock bank with trailers backed in down the west face of the building; 50+ doors.",
+    "dropArea": "Trailer rows staged in the apron/yard along the west side; 25-50 band; a dedicated drop area is present.",
+    "shipRcvSeparate": "Docks concentrated on a single (west) building face — shipping and receiving not on physically separate banks.",
+    "urbanRural": "Perris is within the Inland Empire metro fabric; dense residential subdivisions border the site to the east — Urban.",
+    "fastLaneOpportunity": "Wide gate apron and generous paved width support adding an express lane."
+  },
+  "method": "deep-audit"
+}

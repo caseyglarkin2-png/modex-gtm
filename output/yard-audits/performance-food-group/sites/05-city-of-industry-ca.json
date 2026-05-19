@@ -1,0 +1,46 @@
+{
+  "name": "Performance Foodservice - Southern California (City of Industry)",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 34.00485, "lng": -117.94160 },
+  "geofences": {
+    "perimeter": { "south": 34.00300, "west": -117.94320, "north": 34.00680, "east": -117.93980 },
+    "truckGate": { "south": 34.00330, "west": -117.94090, "north": 34.00380, "east": -117.94010 },
+    "dropYards": [
+      { "south": 34.00340, "west": -117.94090, "north": 34.00560, "east": -117.93990 }
+    ],
+    "dockAprons": [
+      { "south": 34.00370, "west": -117.94080, "north": 34.00620, "east": -117.94000 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 50, "trailersVisible": 35, "trailerParkingCapacity": 65,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 24.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.00485,-117.9416,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Confirmed via Street View — building carries the red 'PERFORMANCE foodservice' logo on the west face along Gale Ave. Address 16639 Gale Ave, City of Industry CA; coord cross-checked against LoopNet/assessor parcel 8242-011-065/067 (~34.00485,-117.94161). Roster 'movedMeters 1352' is a stale-geocode artifact — rooftop coord is accurate.",
+    "truckGate": "Street View clearly shows a blue sliding gate spanning the truck driveway off Gale Ave, with chain-link perimeter fencing and a 'VISITOR' parking sign by the office. Controlled truck entrance confirmed.",
+    "guardShack": "No guard booth structure visible at the gate; entrance area is partly tree-shaded in satellite but Street View shows no booth — access is gate-only.",
+    "remoteGs": "Gate present, no shack — kiosk/call-box/app check-in implied. true.",
+    "dockDoors": "Long dock bank on the east face of the DC with trailers backed in; ~50+ doors.",
+    "dropArea": "Trailer drop stalls in the yard east of the building; ~25-50 trailers.",
+    "fastLaneOpportunity": "Tight, fully built-out urban industrial parcel; the gate apron has little spare width for an express lane.",
+    "urbanRural": "Dense City of Industry industrial corridor — Urban."
+  },
+  "method": "deep-audit"
+}

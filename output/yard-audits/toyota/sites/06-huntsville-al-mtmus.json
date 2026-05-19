@@ -1,0 +1,57 @@
+{
+  "name": "Mazda Toyota Manufacturing USA - Huntsville AL",
+  "type": "Vehicle Assembly Plant (Mazda-Toyota JV)",
+  "coords": { "lat": 34.6835, "lng": -86.848 },
+  "geofences": {
+    "perimeter": { "south": 34.6755, "west": -86.8545, "north": 34.6915, "east": -86.8420 },
+    "truckGate": { "south": 34.68330, "west": -86.84650, "north": 34.68470, "east": -86.84510 },
+    "dropYards": [
+      { "south": 34.68380, "west": -86.84620, "north": 34.68560, "east": -86.84340 },
+      { "south": 34.68000, "west": -86.84920, "north": 34.68180, "east": -86.84640 }
+    ],
+    "dockAprons": [
+      { "south": 34.68420, "west": -86.84720, "north": 34.68620, "east": -86.84540 },
+      { "south": 34.68250, "west": -86.84680, "north": 34.68410, "east": -86.84540 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 80,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 300,
+    "truckGateCount": 2,
+    "buildingCount": 8,
+    "siteAreaAcres": 504.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.6835,-86.848,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "multiStep", "entryLanes", "exitLanes", "truckGateCount"],
+  "fieldNotes": {
+    "truckGate": "Massive JV assembly campus, fully perimeter-fenced (chain-link visible in 2026-04 Street View). Truck/dock operations are inside the secured perimeter; multiple controlled access points serve trucks. The truck gate structures are not directly viewable in Street View (coverage is limited to the public approach roads) so the gate-type call is inferred.",
+    "guardShack": "Main employee/visitor entrance off Greenbrier Pkwy is an open parking lot fronting the 'MAZDA TOYOTA' main building - no guard booth on that side. A guard/dispatch building could not be positively confirmed at the truck gates from overhead imagery. guardShack false / remoteGs true at medium confidence; both flagged uncertain.",
+    "remoteGs": "Inferred - gate present, no confirmed guard shack.",
+    "multipleFacilities": "Large campus of 8+ distinct building masses - assembly, body, paint, stamping, plus utility and logistics buildings - spanning a very large site.",
+    "dropYard": "Two large dedicated trailer drop yards observed: one north-central yard with rows of 50+ trailers and a south staging yard; separate from active dock aprons.",
+    "dockDoors": "Trailers backed in along multiple building faces; estimated 80+ total dock doors across the campus (50+ band).",
+    "shipRcvSeparate": "Inbound parts/cross-dock receiving and finished-vehicle outbound run from physically separate dock and yard clusters on different building faces and different sides of the campus.",
+    "entryExitSeparate": "Campus has multiple distinct access roads off Greenbrier Pkwy - separate entry and exit points across the large property line.",
+    "fastLaneOpportunity": "Very wide internal aprons and roadways and large undeveloped/graded paved areas leave ample room to add express/bypass lanes.",
+    "urbanRural": "Rural - the plant sits on a greenfield megasite surrounded by farmland southwest of Huntsville; large open fields border the property.",
+    "railServed": "No rail spur observed running into the property.",
+    "truckGateCount": "Estimated 2 truck access points; the campus has several gated road junctions, exact count uncertain.",
+    "siteAreaAcres": "~504 acres for the fenced campus footprint."
+  },
+  "method": "deep-audit"
+}

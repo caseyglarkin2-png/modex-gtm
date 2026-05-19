@@ -1,0 +1,59 @@
+{
+  "name": "FedEx Express Regional Hub - Newark NJ",
+  "type": "Express regional hub (Newark Liberty International Airport)",
+  "coords": { "lat": 40.706800, "lng": -74.171000 },
+  "geofences": {
+    "perimeter": { "south": 40.70350, "west": -74.17480, "north": 40.70960, "east": -74.16780 },
+    "truckGate": { "south": 40.70750, "west": -74.17320, "north": 40.70830, "east": -74.17200 },
+    "dropYards": [
+      { "south": 40.70500, "west": -74.17350, "north": 40.70680, "east": -74.17180 }
+    ],
+    "dockAprons": [
+      { "south": 40.70400, "west": -74.17440, "north": 40.70680, "east": -74.17280 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 45.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.706800,-74.171000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes", "siteAreaAcres", "drivewayShort", "backupSensitive", "postGateStaging"],
+  "fieldNotes": {
+    "siteConfirmation": "Roster coordinate (40.707912, -74.171912) was RANGE_INTERPOLATED from 350 Brewster Rd (the EWR airport address) and lands directly on the FedEx Express Newark cargo complex in the EWR North Cargo Area. Web research confirms the FedEx Cargo Complex is a ~$60M sort facility occupying Buildings 347, 156 and most of 155 at 155 Earhart Dr, on the grounds of Newark Liberty International Airport; FedEx Express opened its second hub at EWR in 1986. Satellite confirms a cargo building cluster with FedEx-livery freighter aircraft (blue tails) parked at multiple airside positions, an airside ramp with ULD/dolly staging, landside cargo buildings with truck docks, and employee parking. Locked center 40.70680, -74.17100.",
+    "truckGate": "The FedEx complex sits entirely inside the secured EWR airport perimeter; the entire cargo area is access-controlled by the Port Authority, and the airside fence line between the landside cargo buildings and the aircraft ramp is a hard security boundary with controlled vehicle gates. A controlled truck gate is inferred from this secured-airport context rather than directly imaged - flagged uncertain. Public Street View does not reach the FedEx-specific access point.",
+    "guardShack": "Airport cargo facilities of this type are staffed/guarded at the secured access point; guardShack inferred true at medium confidence, flagged uncertain.",
+    "remoteGs": "False given an inferred staffed entry; flagged uncertain.",
+    "postGateStaging": "Paved landside area between the cargo-area road and the dock face allows trucks to hold; inferred, flagged uncertain.",
+    "dockDoors": "Landside faces of the cargo buildings show angled/perpendicular truck dock bays; estimated 25-50 doors band from imagery, flagged uncertain.",
+    "dropArea": "Some trailers and a trailer staging strip visible on the landside; estimated 10-25 band, flagged uncertain.",
+    "drivewayShort": "EWR cargo-area roads are tight with limited dedicated truck queue space at any one building; short approach inferred, flagged uncertain.",
+    "backupSensitive": "Tight airport cargo-area geometry - a truck queue would choke the shared internal cargo-area road; backupSensitive inferred true, flagged uncertain.",
+    "multipleFacilities": "FedEx complex spans multiple buildings (347, 156, 155) plus support structures - a multi-building campus.",
+    "dropYard": "Trailers/ULD staging on the landside function as a drop area.",
+    "shipRcvSeparate": "Air-to-ground hub; docks not clearly split into separate ship vs receive banks - false.",
+    "scale": "No truck scale observed.",
+    "railServed": "No rail spur into the property; airside cargo facility.",
+    "siteAreaAcres": "Perimeter box approximates the FedEx cargo complex footprint within the North Cargo Area; ~45 acres estimate, flagged uncertain.",
+    "urbanRural": "Major-metro airport (Newark) in dense NY/NJ fabric; Urban.",
+    "confidenceNote": "Medium overall: facility positively identified, but truck-gate / guard-shack specifics could not be directly imaged because the FedEx access point is inside the secured airport and not covered by public Street View."
+  },
+  "method": "deep-audit"
+}

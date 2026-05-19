@@ -1,0 +1,69 @@
+{
+  "name": "Niagara Bottling - Phoenix AZ",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 33.44700, "lng": -112.20170 },
+  "geofences": {
+    "perimeter": { "south": 33.44520, "west": -112.20330, "north": 33.44870, "east": -112.20020 },
+    "truckGate": { "south": 33.44800, "west": -112.20320, "north": 33.44850, "east": -112.20250 },
+    "dropYards": [
+      { "south": 33.44680, "west": -112.20310, "north": 33.44740, "east": -112.20040 },
+      { "south": 33.44790, "west": -112.20300, "north": 33.44850, "east": -112.20040 }
+    ],
+    "dockAprons": [
+      { "south": 33.44665, "west": -112.20310, "north": 33.44695, "east": -112.20040 },
+      { "south": 33.44740, "west": -112.20310, "north": 33.44770, "east": -112.20040 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 28.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.44700,-112.20170,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "buildingCount", "shipRcvSeparate", "multipleFacilities", "siteAreaAcres"],
+  "fieldNotes": {
+    "locating": "Roster had no address/coords. Resolved via web research: Niagara Bottling Phoenix is consistently listed at 275 S 67th Ave, Phoenix, AZ 85043 (TruckMap, Yahoo Local, Yellowpages, D&B, chamber listings). Geocoded that address to a two-building warehouse/distribution complex on the east side of S 67th Ave just south of Washington St.",
+    "buildingId": "MEDIUM confidence on identity. The 275 S 67th Ave address is solidly Niagara's, but source data on building size conflicts: Wikipedia cites a 252,000 sq ft Phoenix plant, while a real-estate listing for 275 S 67th Ave describes a 626,970 sq ft warehouse + 3,030 sq ft office + 32 dock doors. The geocoded site is a two-building complex larger than either figure. Could not read a 'Niagara' sign in Street View (heavy tree screening of both office fronts). Audited the complex as the Niagara Phoenix facility per the confirmed address; flagged.",
+    "truckGate": "Both buildings sit behind chain-link/masonry perimeter fencing; the fenced dock yards are accessed via gated driveways off S 67th Ave (NW driveway to the north building's dock yard, SW driveway to the south building). Gates inferred from the fence line; exact hardware not directly imaged due to tree cover.",
+    "guardShack": "No clear guard booth seen at either gated driveway.",
+    "remoteGs": "Gated, fenced site with no visible guard shack -> remote check-in inferred. Flagged - medium confidence.",
+    "dockDoors": "Two large warehouses each with long dock runs facing a shared central dock yard, plus docks on the north building's far-north face; total estimated ~90 - band 50+. High estimate, flagged.",
+    "dropArea": "Central dock yard and north yard hold dozens of dropped trailers in marked rows; band 50+.",
+    "multipleFacilities": "Two distinct large warehouse buildings on the same property -> campus. Whether both are Niagara-occupied is uncertain - flagged.",
+    "shipRcvSeparate": "Dock banks face the shared yard from two separate buildings; plausibly separate ship/receive clusters - inferred, flagged.",
+    "urbanRural": "Dense west-Phoenix industrial corridor abutting residential subdivisions - Urban.",
+    "railServed": "No rail spur into the property.",
+    "siteAreaAcres": "~28 acres from the perimeter box covering both buildings + the shared dock yard + parking; flagged as estimate."
+  },
+  "method": "deep-audit"
+}

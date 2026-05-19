@@ -1,0 +1,50 @@
+{
+  "name": "Kenco Kerry Group DC - Calhoun GA",
+  "type": "Dedicated Distribution Center",
+  "coords": { "lat": 34.43370, "lng": -84.92520 },
+  "geofences": {
+    "perimeter": { "south": 34.43140, "west": -84.92720, "north": 34.43650, "east": -84.92250 },
+    "truckGate": { "south": 34.43175, "west": -84.92710, "north": 34.43215, "east": -84.92640 },
+    "dropYards": [
+      { "south": 34.43480, "west": -84.92560, "north": 34.43620, "east": -84.92320 }
+    ],
+    "dockAprons": [
+      { "south": 34.43200, "west": -84.92680, "north": 34.43560, "east": -84.92620 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 60.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.43370,-84.92520,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Open-access campus. The south driveway off Clarence King Drive is an unrestricted paved intersection with no barrier arm or gate; 2024-02 Street View shows only traffic cones. No perimeter fence anywhere along Clarence King Drive.",
+    "guardShack": "No booth structure at any entrance.",
+    "dockDoors": "West building (315 Clarence King Dr / Union Grove Logistics Center Bldg 1, 720k SF) has a long dock bank along its west face facing the road; Street View shows ~50+ doors with trailers backed in. Combined with the adjacent east building's dock bank the campus exceeds 50.",
+    "dropArea": "Large angled-row trailer drop yard at the north end of the campus holds 50+ trailers, separate from the dock aprons.",
+    "multipleFacilities": "Union Grove Logistics Center is a two-building campus (Bldg 1 west + a larger building to the east) plus additional warehouses to the NW; classified as a campus.",
+    "postGateStaging": "Wide dock apron between Clarence King Drive and the dock doors plus the north yard provide internal queue/staging room.",
+    "urbanRural": "Edge-of-Calhoun industrial park along I-75, surrounded by woods and scattered rural residential; classified Rural.",
+    "railServed": "No rail spur runs into the property; the I-75 corridor is adjacent but no siding."
+  },
+  "method": "deep-audit"
+}

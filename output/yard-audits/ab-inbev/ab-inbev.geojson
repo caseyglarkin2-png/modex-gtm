@@ -1,0 +1,4590 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.215,
+              38.593
+            ],
+            [
+              -90.2025,
+              38.593
+            ],
+            [
+              -90.2025,
+              38.6015
+            ],
+            [
+              -90.215,
+              38.6015
+            ],
+            [
+              -90.215,
+              38.593
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - St. Louis MO",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 420,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 3,
+          "buildingCount": 40,
+          "siteAreaAcres": 254,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.209,
+              38.5962
+            ],
+            [
+              -90.208,
+              38.5962
+            ],
+            [
+              -90.208,
+              38.5968
+            ],
+            [
+              -90.209,
+              38.5968
+            ],
+            [
+              -90.209,
+              38.5962
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - St. Louis MO",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.2085,
+              38.5938
+            ],
+            [
+              -90.2045,
+              38.5938
+            ],
+            [
+              -90.2045,
+              38.5975
+            ],
+            [
+              -90.2085,
+              38.5975
+            ],
+            [
+              -90.2085,
+              38.5938
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - St. Louis MO",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.2045,
+              38.5945
+            ],
+            [
+              -90.202,
+              38.5945
+            ],
+            [
+              -90.202,
+              38.5985
+            ],
+            [
+              -90.2045,
+              38.5985
+            ],
+            [
+              -90.2045,
+              38.5945
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - St. Louis MO",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.2095,
+              38.5956
+            ],
+            [
+              -90.208,
+              38.5956
+            ],
+            [
+              -90.208,
+              38.597
+            ],
+            [
+              -90.2095,
+              38.597
+            ],
+            [
+              -90.2095,
+              38.5956
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - St. Louis MO",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.2065,
+              38.596
+            ],
+            [
+              -90.205,
+              38.596
+            ],
+            [
+              -90.205,
+              38.5975
+            ],
+            [
+              -90.2065,
+              38.5975
+            ],
+            [
+              -90.2065,
+              38.596
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - St. Louis MO",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2745,
+              29.7695
+            ],
+            [
+              -95.264,
+              29.7695
+            ],
+            [
+              -95.264,
+              29.776
+            ],
+            [
+              -95.2745,
+              29.776
+            ],
+            [
+              -95.2745,
+              29.7695
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Houston TX",
+        "type": "Brewery",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 181,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2678,
+              29.7696
+            ],
+            [
+              -95.2668,
+              29.7696
+            ],
+            [
+              -95.2668,
+              29.7702
+            ],
+            [
+              -95.2678,
+              29.7702
+            ],
+            [
+              -95.2678,
+              29.7696
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Houston TX",
+        "type": "Brewery",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2675,
+              29.7698
+            ],
+            [
+              -95.2645,
+              29.7698
+            ],
+            [
+              -95.2645,
+              29.7738
+            ],
+            [
+              -95.2675,
+              29.7738
+            ],
+            [
+              -95.2675,
+              29.7698
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Houston TX",
+        "type": "Brewery",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.272,
+              29.7704
+            ],
+            [
+              -95.2688,
+              29.7704
+            ],
+            [
+              -95.2688,
+              29.7711
+            ],
+            [
+              -95.272,
+              29.7711
+            ],
+            [
+              -95.272,
+              29.7704
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Houston TX",
+        "type": "Brewery",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.27,
+              29.7702
+            ],
+            [
+              -95.268,
+              29.7702
+            ],
+            [
+              -95.268,
+              29.7713
+            ],
+            [
+              -95.27,
+              29.7713
+            ],
+            [
+              -95.27,
+              29.7702
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Houston TX",
+        "type": "Brewery",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.9975,
+              40.1018
+            ],
+            [
+              -82.9895,
+              40.1018
+            ],
+            [
+              -82.9895,
+              40.1085
+            ],
+            [
+              -82.9975,
+              40.1085
+            ],
+            [
+              -82.9975,
+              40.1018
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Columbus OH",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 138,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.9936,
+              40.1021
+            ],
+            [
+              -82.9926,
+              40.1021
+            ],
+            [
+              -82.9926,
+              40.1027
+            ],
+            [
+              -82.9936,
+              40.1027
+            ],
+            [
+              -82.9936,
+              40.1021
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Columbus OH",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.9972,
+              40.1056
+            ],
+            [
+              -82.9948,
+              40.1056
+            ],
+            [
+              -82.9948,
+              40.1082
+            ],
+            [
+              -82.9972,
+              40.1082
+            ],
+            [
+              -82.9972,
+              40.1056
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Columbus OH",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.9972,
+              40.103
+            ],
+            [
+              -82.9952,
+              40.103
+            ],
+            [
+              -82.9952,
+              40.1055
+            ],
+            [
+              -82.9972,
+              40.1055
+            ],
+            [
+              -82.9972,
+              40.103
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Columbus OH",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.995,
+              40.1044
+            ],
+            [
+              -82.993,
+              40.1044
+            ],
+            [
+              -82.993,
+              40.1056
+            ],
+            [
+              -82.995,
+              40.1056
+            ],
+            [
+              -82.995,
+              40.1044
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Columbus OH",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.9945,
+              40.104
+            ],
+            [
+              -82.9928,
+              40.104
+            ],
+            [
+              -82.9928,
+              40.1052
+            ],
+            [
+              -82.9945,
+              40.1052
+            ],
+            [
+              -82.9945,
+              40.104
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Columbus OH",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.653,
+              30.4295
+            ],
+            [
+              -81.6455,
+              30.4295
+            ],
+            [
+              -81.6455,
+              30.436
+            ],
+            [
+              -81.653,
+              30.436
+            ],
+            [
+              -81.653,
+              30.4295
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Jacksonville FL",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 128,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6518,
+              30.4302
+            ],
+            [
+              -81.6508,
+              30.4302
+            ],
+            [
+              -81.6508,
+              30.4309
+            ],
+            [
+              -81.6518,
+              30.4309
+            ],
+            [
+              -81.6518,
+              30.4302
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Jacksonville FL",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6525,
+              30.4305
+            ],
+            [
+              -81.65,
+              30.4305
+            ],
+            [
+              -81.65,
+              30.434
+            ],
+            [
+              -81.6525,
+              30.434
+            ],
+            [
+              -81.6525,
+              30.4305
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Jacksonville FL",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.65,
+              30.4325
+            ],
+            [
+              -81.6482,
+              30.4325
+            ],
+            [
+              -81.6482,
+              30.4352
+            ],
+            [
+              -81.65,
+              30.4352
+            ],
+            [
+              -81.65,
+              30.4325
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Jacksonville FL",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6505,
+              30.4313
+            ],
+            [
+              -81.6488,
+              30.4313
+            ],
+            [
+              -81.6488,
+              30.4328
+            ],
+            [
+              -81.6505,
+              30.4328
+            ],
+            [
+              -81.6505,
+              30.4313
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Jacksonville FL",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6498,
+              30.431
+            ],
+            [
+              -81.6485,
+              30.431
+            ],
+            [
+              -81.6485,
+              30.4323
+            ],
+            [
+              -81.6498,
+              30.4323
+            ],
+            [
+              -81.6498,
+              30.431
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Jacksonville FL",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6585,
+              37.234
+            ],
+            [
+              -76.649,
+              37.234
+            ],
+            [
+              -76.649,
+              37.242
+            ],
+            [
+              -76.6585,
+              37.242
+            ],
+            [
+              -76.6585,
+              37.234
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Williamsburg VA",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 280,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 185,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6576,
+              37.2401
+            ],
+            [
+              -76.6564,
+              37.2401
+            ],
+            [
+              -76.6564,
+              37.2409
+            ],
+            [
+              -76.6576,
+              37.2409
+            ],
+            [
+              -76.6576,
+              37.2401
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Williamsburg VA",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6578,
+              37.2398
+            ],
+            [
+              -76.6558,
+              37.2398
+            ],
+            [
+              -76.6558,
+              37.2418
+            ],
+            [
+              -76.6578,
+              37.2418
+            ],
+            [
+              -76.6578,
+              37.2398
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Williamsburg VA",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.653,
+              37.236
+            ],
+            [
+              -76.6505,
+              37.236
+            ],
+            [
+              -76.6505,
+              37.2385
+            ],
+            [
+              -76.653,
+              37.2385
+            ],
+            [
+              -76.653,
+              37.236
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Williamsburg VA",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6538,
+              37.2356
+            ],
+            [
+              -76.6515,
+              37.2356
+            ],
+            [
+              -76.6515,
+              37.237
+            ],
+            [
+              -76.6538,
+              37.237
+            ],
+            [
+              -76.6538,
+              37.2356
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Williamsburg VA",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6568,
+              37.24
+            ],
+            [
+              -76.6554,
+              37.24
+            ],
+            [
+              -76.6554,
+              37.2413
+            ],
+            [
+              -76.6568,
+              37.2413
+            ],
+            [
+              -76.6568,
+              37.24
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Williamsburg VA",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.3155,
+              43.164
+            ],
+            [
+              -76.3055,
+              43.164
+            ],
+            [
+              -76.3055,
+              43.1715
+            ],
+            [
+              -76.3155,
+              43.1715
+            ],
+            [
+              -76.3155,
+              43.164
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Baldwinsville NY",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 340,
+          "truckGateCount": 1,
+          "buildingCount": 7,
+          "siteAreaAcres": 167,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.3109,
+              43.1676
+            ],
+            [
+              -76.31,
+              43.1676
+            ],
+            [
+              -76.31,
+              43.1681
+            ],
+            [
+              -76.3109,
+              43.1681
+            ],
+            [
+              -76.3109,
+              43.1676
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Baldwinsville NY",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.3128,
+              43.166
+            ],
+            [
+              -76.31,
+              43.166
+            ],
+            [
+              -76.31,
+              43.1672
+            ],
+            [
+              -76.3128,
+              43.1672
+            ],
+            [
+              -76.3128,
+              43.166
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Baldwinsville NY",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.3142,
+              43.1683
+            ],
+            [
+              -76.312,
+              43.1683
+            ],
+            [
+              -76.312,
+              43.171
+            ],
+            [
+              -76.3142,
+              43.171
+            ],
+            [
+              -76.3142,
+              43.1683
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Baldwinsville NY",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.3135,
+              43.1685
+            ],
+            [
+              -76.3115,
+              43.1685
+            ],
+            [
+              -76.3115,
+              43.1698
+            ],
+            [
+              -76.3135,
+              43.1698
+            ],
+            [
+              -76.3135,
+              43.1685
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Baldwinsville NY",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.3115,
+              43.1672
+            ],
+            [
+              -76.31,
+              43.1672
+            ],
+            [
+              -76.31,
+              43.1683
+            ],
+            [
+              -76.3115,
+              43.1683
+            ],
+            [
+              -76.3115,
+              43.1672
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Baldwinsville NY",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.011,
+              40.614
+            ],
+            [
+              -105.001,
+              40.614
+            ],
+            [
+              -105.001,
+              40.6255
+            ],
+            [
+              -105.011,
+              40.6255
+            ],
+            [
+              -105.011,
+              40.614
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Fort Collins CO",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 260,
+          "trailerParkingCapacity": 400,
+          "truckGateCount": 1,
+          "buildingCount": 10,
+          "siteAreaAcres": 267,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.0048,
+              40.6141
+            ],
+            [
+              -105.0039,
+              40.6141
+            ],
+            [
+              -105.0039,
+              40.6149
+            ],
+            [
+              -105.0048,
+              40.6149
+            ],
+            [
+              -105.0048,
+              40.6141
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Fort Collins CO",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.01,
+              40.615
+            ],
+            [
+              -105.006,
+              40.615
+            ],
+            [
+              -105.006,
+              40.6185
+            ],
+            [
+              -105.01,
+              40.6185
+            ],
+            [
+              -105.01,
+              40.615
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Fort Collins CO",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.01,
+              40.618
+            ],
+            [
+              -105.0075,
+              40.618
+            ],
+            [
+              -105.0075,
+              40.6205
+            ],
+            [
+              -105.01,
+              40.6205
+            ],
+            [
+              -105.01,
+              40.618
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Fort Collins CO",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.008,
+              40.6165
+            ],
+            [
+              -105.006,
+              40.6165
+            ],
+            [
+              -105.006,
+              40.6185
+            ],
+            [
+              -105.008,
+              40.6185
+            ],
+            [
+              -105.008,
+              40.6165
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Fort Collins CO",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -105.0055,
+              40.6145
+            ],
+            [
+              -105.004,
+              40.6145
+            ],
+            [
+              -105.004,
+              40.616
+            ],
+            [
+              -105.0055,
+              40.616
+            ],
+            [
+              -105.0055,
+              40.6145
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Fort Collins CO",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.7887,
+              34.2532
+            ],
+            [
+              -84.779,
+              34.2532
+            ],
+            [
+              -84.779,
+              34.2615
+            ],
+            [
+              -84.7887,
+              34.2615
+            ],
+            [
+              -84.7887,
+              34.2532
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Cartersville GA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 70,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.7868,
+              34.2535
+            ],
+            [
+              -84.7858,
+              34.2535
+            ],
+            [
+              -84.7858,
+              34.2542
+            ],
+            [
+              -84.7868,
+              34.2542
+            ],
+            [
+              -84.7868,
+              34.2535
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Cartersville GA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.7835,
+              34.258
+            ],
+            [
+              -84.7805,
+              34.258
+            ],
+            [
+              -84.7805,
+              34.26
+            ],
+            [
+              -84.7835,
+              34.26
+            ],
+            [
+              -84.7835,
+              34.258
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Cartersville GA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.7805,
+              34.2575
+            ],
+            [
+              -84.779,
+              34.2575
+            ],
+            [
+              -84.779,
+              34.2592
+            ],
+            [
+              -84.7805,
+              34.2592
+            ],
+            [
+              -84.7805,
+              34.2575
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Cartersville GA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.7842,
+              34.258
+            ],
+            [
+              -84.783,
+              34.258
+            ],
+            [
+              -84.783,
+              34.259
+            ],
+            [
+              -84.7842,
+              34.259
+            ],
+            [
+              -84.7842,
+              34.258
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Cartersville GA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.7828,
+              34.2562
+            ],
+            [
+              -84.7818,
+              34.2562
+            ],
+            [
+              -84.7818,
+              34.2572
+            ],
+            [
+              -84.7828,
+              34.2572
+            ],
+            [
+              -84.7828,
+              34.2562
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Cartersville GA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.7848,
+              34.2575
+            ],
+            [
+              -84.7838,
+              34.2575
+            ],
+            [
+              -84.7838,
+              34.2584
+            ],
+            [
+              -84.7848,
+              34.2584
+            ],
+            [
+              -84.7848,
+              34.2575
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Cartersville GA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.4828,
+              34.215
+            ],
+            [
+              -118.476,
+              34.215
+            ],
+            [
+              -118.476,
+              34.221
+            ],
+            [
+              -118.4828,
+              34.221
+            ],
+            [
+              -118.4828,
+              34.215
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Van Nuys (Los Angeles) CA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 60,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.4782,
+              34.2206
+            ],
+            [
+              -118.4772,
+              34.2206
+            ],
+            [
+              -118.4772,
+              34.2213
+            ],
+            [
+              -118.4782,
+              34.2213
+            ],
+            [
+              -118.4782,
+              34.2206
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Van Nuys (Los Angeles) CA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.4828,
+              34.2156
+            ],
+            [
+              -118.4812,
+              34.2156
+            ],
+            [
+              -118.4812,
+              34.2178
+            ],
+            [
+              -118.4828,
+              34.2178
+            ],
+            [
+              -118.4828,
+              34.2156
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Van Nuys (Los Angeles) CA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.4812,
+              34.2157
+            ],
+            [
+              -118.4796,
+              34.2157
+            ],
+            [
+              -118.4796,
+              34.2172
+            ],
+            [
+              -118.4812,
+              34.2172
+            ],
+            [
+              -118.4812,
+              34.2157
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Van Nuys (Los Angeles) CA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.4806,
+              34.2176
+            ],
+            [
+              -118.479,
+              34.2176
+            ],
+            [
+              -118.479,
+              34.219
+            ],
+            [
+              -118.4806,
+              34.219
+            ],
+            [
+              -118.4806,
+              34.2176
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Van Nuys (Los Angeles) CA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.4812,
+              34.2165
+            ],
+            [
+              -118.4798,
+              34.2165
+            ],
+            [
+              -118.4798,
+              34.2178
+            ],
+            [
+              -118.4812,
+              34.2178
+            ],
+            [
+              -118.4812,
+              34.2165
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Van Nuys (Los Angeles) CA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.4785,
+              34.2195
+            ],
+            [
+              -118.4772,
+              34.2195
+            ],
+            [
+              -118.4772,
+              34.2205
+            ],
+            [
+              -118.4785,
+              34.2205
+            ],
+            [
+              -118.4785,
+              34.2195
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Van Nuys (Los Angeles) CA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.0965,
+              38.232
+            ],
+            [
+              -122.0865,
+              38.232
+            ],
+            [
+              -122.0865,
+              38.2387
+            ],
+            [
+              -122.0965,
+              38.2387
+            ],
+            [
+              -122.0965,
+              38.232
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Fairfield CA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 75,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.0925,
+              38.237
+            ],
+            [
+              -122.0915,
+              38.237
+            ],
+            [
+              -122.0915,
+              38.2377
+            ],
+            [
+              -122.0925,
+              38.2377
+            ],
+            [
+              -122.0925,
+              38.237
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Fairfield CA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.0915,
+              38.2333
+            ],
+            [
+              -122.089,
+              38.2333
+            ],
+            [
+              -122.089,
+              38.2348
+            ],
+            [
+              -122.0915,
+              38.2348
+            ],
+            [
+              -122.0915,
+              38.2333
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Fairfield CA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.091,
+              38.2359
+            ],
+            [
+              -122.0885,
+              38.2359
+            ],
+            [
+              -122.0885,
+              38.2368
+            ],
+            [
+              -122.091,
+              38.2368
+            ],
+            [
+              -122.091,
+              38.2359
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Fairfield CA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.0905,
+              38.2372
+            ],
+            [
+              -122.0885,
+              38.2372
+            ],
+            [
+              -122.0885,
+              38.238
+            ],
+            [
+              -122.0905,
+              38.238
+            ],
+            [
+              -122.0905,
+              38.2372
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Fairfield CA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.0915,
+              38.2348
+            ],
+            [
+              -122.0895,
+              38.2348
+            ],
+            [
+              -122.0895,
+              38.2358
+            ],
+            [
+              -122.0915,
+              38.2358
+            ],
+            [
+              -122.0915,
+              38.2348
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Fairfield CA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.4895,
+              42.8205
+            ],
+            [
+              -71.4815,
+              42.8205
+            ],
+            [
+              -71.4815,
+              42.829
+            ],
+            [
+              -71.4895,
+              42.829
+            ],
+            [
+              -71.4895,
+              42.8205
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Merrimack NH",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 65,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.4856,
+              42.8264
+            ],
+            [
+              -71.4846,
+              42.8264
+            ],
+            [
+              -71.4846,
+              42.8271
+            ],
+            [
+              -71.4856,
+              42.8271
+            ],
+            [
+              -71.4856,
+              42.8264
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Merrimack NH",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.488,
+              42.827
+            ],
+            [
+              -71.485,
+              42.827
+            ],
+            [
+              -71.485,
+              42.8285
+            ],
+            [
+              -71.488,
+              42.8285
+            ],
+            [
+              -71.488,
+              42.827
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Merrimack NH",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.4882,
+              42.8242
+            ],
+            [
+              -71.4872,
+              42.8242
+            ],
+            [
+              -71.4872,
+              42.8258
+            ],
+            [
+              -71.4882,
+              42.8258
+            ],
+            [
+              -71.4882,
+              42.8242
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Merrimack NH",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.486,
+              42.8255
+            ],
+            [
+              -71.4842,
+              42.8255
+            ],
+            [
+              -71.4842,
+              42.8268
+            ],
+            [
+              -71.486,
+              42.8268
+            ],
+            [
+              -71.486,
+              42.8255
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Merrimack NH",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.487,
+              42.826
+            ],
+            [
+              -71.4856,
+              42.826
+            ],
+            [
+              -71.4856,
+              42.827
+            ],
+            [
+              -71.487,
+              42.827
+            ],
+            [
+              -71.487,
+              42.826
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Merrimack NH",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1965,
+              40.69
+            ],
+            [
+              -74.1885,
+              40.69
+            ],
+            [
+              -74.1885,
+              40.6985
+            ],
+            [
+              -74.1965,
+              40.6985
+            ],
+            [
+              -74.1965,
+              40.69
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Newark NJ",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 150,
+          "trailerParkingCapacity": 250,
+          "truckGateCount": 2,
+          "buildingCount": 7,
+          "siteAreaAcres": 86,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1905,
+              40.6957
+            ],
+            [
+              -74.1895,
+              40.6957
+            ],
+            [
+              -74.1895,
+              40.6964
+            ],
+            [
+              -74.1905,
+              40.6964
+            ],
+            [
+              -74.1905,
+              40.6957
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Newark NJ",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.195,
+              40.695
+            ],
+            [
+              -74.1925,
+              40.695
+            ],
+            [
+              -74.1925,
+              40.697
+            ],
+            [
+              -74.195,
+              40.697
+            ],
+            [
+              -74.195,
+              40.695
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Newark NJ",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1915,
+              40.6962
+            ],
+            [
+              -74.1895,
+              40.6962
+            ],
+            [
+              -74.1895,
+              40.6978
+            ],
+            [
+              -74.1915,
+              40.6978
+            ],
+            [
+              -74.1915,
+              40.6962
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Newark NJ",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1955,
+              40.693
+            ],
+            [
+              -74.194,
+              40.693
+            ],
+            [
+              -74.194,
+              40.6945
+            ],
+            [
+              -74.1955,
+              40.6945
+            ],
+            [
+              -74.1955,
+              40.693
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Newark NJ",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.194,
+              40.6955
+            ],
+            [
+              -74.1925,
+              40.6955
+            ],
+            [
+              -74.1925,
+              40.697
+            ],
+            [
+              -74.194,
+              40.697
+            ],
+            [
+              -74.194,
+              40.6955
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Newark NJ",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1925,
+              40.6948
+            ],
+            [
+              -74.191,
+              40.6948
+            ],
+            [
+              -74.191,
+              40.6958
+            ],
+            [
+              -74.1925,
+              40.6958
+            ],
+            [
+              -74.1925,
+              40.6948
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Anheuser-Busch Brewery - Newark NJ",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.355,
+              38.4322
+            ],
+            [
+              -90.35,
+              38.4322
+            ],
+            [
+              -90.35,
+              38.4365
+            ],
+            [
+              -90.355,
+              38.4365
+            ],
+            [
+              -90.355,
+              38.4322
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Arnold MO Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 35,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.3546,
+              38.434
+            ],
+            [
+              -90.3539,
+              38.434
+            ],
+            [
+              -90.3539,
+              38.4346
+            ],
+            [
+              -90.3546,
+              38.4346
+            ],
+            [
+              -90.3546,
+              38.434
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Arnold MO Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.3528,
+              38.4338
+            ],
+            [
+              -90.3502,
+              38.4338
+            ],
+            [
+              -90.3502,
+              38.4362
+            ],
+            [
+              -90.3528,
+              38.4362
+            ],
+            [
+              -90.3528,
+              38.4338
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Arnold MO Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.3542,
+              38.4328
+            ],
+            [
+              -90.3528,
+              38.4328
+            ],
+            [
+              -90.3528,
+              38.434
+            ],
+            [
+              -90.3542,
+              38.434
+            ],
+            [
+              -90.3542,
+              38.4328
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Arnold MO Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.353,
+              38.4333
+            ],
+            [
+              -90.3515,
+              38.4333
+            ],
+            [
+              -90.3515,
+              38.4345
+            ],
+            [
+              -90.353,
+              38.4345
+            ],
+            [
+              -90.353,
+              38.4333
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Arnold MO Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.7485,
+              30.337
+            ],
+            [
+              -81.743,
+              30.337
+            ],
+            [
+              -81.743,
+              30.342
+            ],
+            [
+              -81.7485,
+              30.342
+            ],
+            [
+              -81.7485,
+              30.337
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Jacksonville FL Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 40,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.7468,
+              30.3376
+            ],
+            [
+              -81.746,
+              30.3376
+            ],
+            [
+              -81.746,
+              30.3382
+            ],
+            [
+              -81.7468,
+              30.3382
+            ],
+            [
+              -81.7468,
+              30.3376
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Jacksonville FL Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.748,
+              30.337
+            ],
+            [
+              -81.7456,
+              30.337
+            ],
+            [
+              -81.7456,
+              30.34
+            ],
+            [
+              -81.748,
+              30.34
+            ],
+            [
+              -81.748,
+              30.337
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Jacksonville FL Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.746,
+              30.34
+            ],
+            [
+              -81.7445,
+              30.34
+            ],
+            [
+              -81.7445,
+              30.3413
+            ],
+            [
+              -81.746,
+              30.3413
+            ],
+            [
+              -81.746,
+              30.34
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Jacksonville FL Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.7464,
+              30.3388
+            ],
+            [
+              -81.7454,
+              30.3388
+            ],
+            [
+              -81.7454,
+              30.3398
+            ],
+            [
+              -81.7464,
+              30.3398
+            ],
+            [
+              -81.7464,
+              30.3388
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Jacksonville FL Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.7462,
+              30.338
+            ],
+            [
+              -81.745,
+              30.338
+            ],
+            [
+              -81.745,
+              30.339
+            ],
+            [
+              -81.7462,
+              30.339
+            ],
+            [
+              -81.7462,
+              30.338
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Jacksonville FL Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.52405,
+              34.03025
+            ],
+            [
+              -117.52085,
+              34.03025
+            ],
+            [
+              -117.52085,
+              34.03395
+            ],
+            [
+              -117.52405,
+              34.03395
+            ],
+            [
+              -117.52405,
+              34.03025
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Mira Loma CA Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 27,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5232,
+              34.03012
+            ],
+            [
+              -117.5228,
+              34.03012
+            ],
+            [
+              -117.5228,
+              34.03045
+            ],
+            [
+              -117.5232,
+              34.03045
+            ],
+            [
+              -117.5232,
+              34.03012
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Mira Loma CA Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.52395,
+              34.03055
+            ],
+            [
+              -117.5229,
+              34.03055
+            ],
+            [
+              -117.5229,
+              34.03155
+            ],
+            [
+              -117.52395,
+              34.03155
+            ],
+            [
+              -117.52395,
+              34.03055
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Mira Loma CA Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.52385,
+              34.0311
+            ],
+            [
+              -117.5225,
+              34.0311
+            ],
+            [
+              -117.5225,
+              34.03155
+            ],
+            [
+              -117.52385,
+              34.03155
+            ],
+            [
+              -117.52385,
+              34.0311
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Mira Loma CA Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.0982,
+              41.4858
+            ],
+            [
+              -74.0935,
+              41.4858
+            ],
+            [
+              -74.0935,
+              41.4905
+            ],
+            [
+              -74.0982,
+              41.4905
+            ],
+            [
+              -74.0982,
+              41.4858
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Newburgh NY Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 50,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.0976,
+              41.4867
+            ],
+            [
+              -74.0971,
+              41.4867
+            ],
+            [
+              -74.0971,
+              41.4871
+            ],
+            [
+              -74.0976,
+              41.4871
+            ],
+            [
+              -74.0976,
+              41.4867
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Newburgh NY Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.0974,
+              41.4877
+            ],
+            [
+              -74.0965,
+              41.4877
+            ],
+            [
+              -74.0965,
+              41.4883
+            ],
+            [
+              -74.0974,
+              41.4883
+            ],
+            [
+              -74.0974,
+              41.4877
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Newburgh NY Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.0972,
+              41.4878
+            ],
+            [
+              -74.0966,
+              41.4878
+            ],
+            [
+              -74.0966,
+              41.4887
+            ],
+            [
+              -74.0972,
+              41.4887
+            ],
+            [
+              -74.0972,
+              41.4878
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Newburgh NY Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.8636,
+              40.4653
+            ],
+            [
+              -104.8612,
+              40.4653
+            ],
+            [
+              -104.8612,
+              40.4683
+            ],
+            [
+              -104.8636,
+              40.4683
+            ],
+            [
+              -104.8636,
+              40.4653
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Windsor CO Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 2,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 16.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.8617,
+              40.4651
+            ],
+            [
+              -104.8612,
+              40.4651
+            ],
+            [
+              -104.8612,
+              40.46545
+            ],
+            [
+              -104.8617,
+              40.46545
+            ],
+            [
+              -104.8617,
+              40.4651
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Windsor CO Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.862,
+              40.4663
+            ],
+            [
+              -104.8616,
+              40.4663
+            ],
+            [
+              -104.8616,
+              40.467
+            ],
+            [
+              -104.862,
+              40.467
+            ],
+            [
+              -104.862,
+              40.4663
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Windsor CO Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.8617,
+              40.4654
+            ],
+            [
+              -104.8613,
+              40.4654
+            ],
+            [
+              -104.8613,
+              40.4662
+            ],
+            [
+              -104.8617,
+              40.4662
+            ],
+            [
+              -104.8617,
+              40.4654
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Windsor CO Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.6088,
+              35.424
+            ],
+            [
+              -97.6068,
+              35.424
+            ],
+            [
+              -97.6068,
+              35.4266
+            ],
+            [
+              -97.6088,
+              35.4266
+            ],
+            [
+              -97.6088,
+              35.424
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Oklahoma City OK Lid Plant",
+        "type": "Lid Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 0,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.4512,
+              33.947
+            ],
+            [
+              -117.4488,
+              33.947
+            ],
+            [
+              -117.4488,
+              33.949
+            ],
+            [
+              -117.4512,
+              33.949
+            ],
+            [
+              -117.4512,
+              33.947
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Metal Container Corporation - Riverside CA Lid Plant",
+        "type": "Lid Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 0,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.6028,
+              35.8732
+            ],
+            [
+              -90.5988,
+              35.8732
+            ],
+            [
+              -90.5988,
+              35.8768
+            ],
+            [
+              -90.6028,
+              35.8768
+            ],
+            [
+              -90.6028,
+              35.8732
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Busch Agricultural Resources - Jonesboro AR Rice Mill",
+        "type": "Agricultural Processing - Rice Mill",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 4,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 15,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 36,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.5993,
+              35.8742
+            ],
+            [
+              -90.5987,
+              35.8742
+            ],
+            [
+              -90.5987,
+              35.8746
+            ],
+            [
+              -90.5993,
+              35.8746
+            ],
+            [
+              -90.5993,
+              35.8742
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Busch Agricultural Resources - Jonesboro AR Rice Mill",
+        "type": "Agricultural Processing - Rice Mill",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.601,
+              35.8737
+            ],
+            [
+              -90.5998,
+              35.8737
+            ],
+            [
+              -90.5998,
+              35.8745
+            ],
+            [
+              -90.601,
+              35.8745
+            ],
+            [
+              -90.601,
+              35.8737
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Busch Agricultural Resources - Jonesboro AR Rice Mill",
+        "type": "Agricultural Processing - Rice Mill",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0715,
+              43.4424
+            ],
+            [
+              -112.0655,
+              43.4424
+            ],
+            [
+              -112.0655,
+              43.4465
+            ],
+            [
+              -112.0715,
+              43.4465
+            ],
+            [
+              -112.0715,
+              43.4424
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Busch Agricultural Resources - Idaho Falls ID Malt Plant",
+        "type": "Agricultural Processing - Malt Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 2,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 7,
+          "siteAreaAcres": 54,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0714,
+              43.4454
+            ],
+            [
+              -112.0706,
+              43.4454
+            ],
+            [
+              -112.0706,
+              43.446
+            ],
+            [
+              -112.0714,
+              43.446
+            ],
+            [
+              -112.0714,
+              43.4454
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Busch Agricultural Resources - Idaho Falls ID Malt Plant",
+        "type": "Agricultural Processing - Malt Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.069,
+              43.443
+            ],
+            [
+              -112.067,
+              43.443
+            ],
+            [
+              -112.067,
+              43.444
+            ],
+            [
+              -112.069,
+              43.444
+            ],
+            [
+              -112.069,
+              43.443
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "ab-inbev",
+        "name": "Busch Agricultural Resources - Idaho Falls ID Malt Plant",
+        "type": "Agricultural Processing - Malt Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    }
+  ]
+}

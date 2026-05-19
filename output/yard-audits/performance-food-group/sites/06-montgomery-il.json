@@ -1,0 +1,52 @@
+{
+  "name": "Performance Foodservice - Chicago (Montgomery IL)",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 41.721400, "lng": -88.358500 },
+  "geofences": {
+    "perimeter": { "south": 41.71850, "west": -88.36000, "north": 41.72340, "east": -88.35650 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 41.72020, "west": -88.35870, "north": 41.72260, "east": -88.35760 }
+    ],
+    "staging": { "south": 41.72240, "west": -88.35840, "north": 41.72340, "east": -88.35700 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 34,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 14.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.7214,-88.3585,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["trailerParkingCapacity", "dropArea"],
+  "fieldNotes": {
+    "truckGate": "No controlled truck gate. The truck driveway leaves Baseline Rd on the NE corner of the property as a wide open paved drive and curves south into the truck court between the PFG building (west) and a neighboring industrial building (east). Street View (Apr 2024) of the entrance shows no barrier arm, no sliding/swing gate, and no checkpoint pinch-point — only a red 'SHIPPING / RECEIVING' sign at the driveway mouth. No perimeter security fence along Baseline Rd.",
+    "guardShack": "No guard booth at the entrance or anywhere on the property. The entrance Street View shows an open landscaped driveway with no gatehouse structure.",
+    "remoteGs": "False — there is no truck gate at all, so remote check-in does not apply.",
+    "dockDoors": "Dock doors run along the east (truck-court) face of the long PFG building; tight z20 imagery shows trailers backed into a gravel/dirt dock apron. Corroborating web research (Fox River Foods / PFG-Chicago) reports 23 refrigerated + 11 dry = 34 dock doors total; band 25-50.",
+    "dropArea": "Modest trailer parking — roughly a dozen trailers staged in the truck court near the entrance and along the dock apron. The very large dense trailer field immediately EAST of the PFG property belongs to a separate neighboring operation (building-products / general industrial) and is excluded. Band 10-25 for PFG's own staging; capacity estimate low-confidence.",
+    "dropYard": "False — no dedicated standalone trailer-storage lot on the PFG parcel; trailers stage in the active truck court only.",
+    "postGateStaging": "The wide paved truck court at the NE end of the building between the entrance and the dock apron provides interior holding/queue room.",
+    "drivewayLong": "The entrance drive plus the long truck court running the length of the dock face can hold a queue of 3+ trucks.",
+    "urbanRural": "Montgomery IL is a far-southwest Chicago-metro exurb; the site sits in a continuous industrial corridor along Baseline Rd with abutting warehouses and lumber/building-products yards. Classified Urban as part of the greater Chicago metro fabric.",
+    "scale": "No truck scale or weigh platform visible in overhead imagery.",
+    "buildingCount": "Single long PFG distribution building (~325,000 sq ft per web research). Adjacent large buildings to the east are separate ownership/operations.",
+    "railServed": "No rail spur runs into the PFG parcel."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,54 @@
+{
+  "name": "GP Madison Plywood Plant - Madison GA",
+  "type": "Plywood Plant",
+  "coords": { "lat": 33.61650, "lng": -83.42200 },
+  "geofences": {
+    "perimeter": { "south": 33.6125, "west": -83.4275, "north": 33.6200, "east": -83.4150 },
+    "truckGate": { "south": 33.61390, "west": -83.42530, "north": 33.61450, "east": -83.42450 },
+    "dropYards": [
+      { "south": 33.61650, "west": -83.42100, "north": 33.61850, "east": -83.41750 }
+    ],
+    "dockAprons": [],
+    "staging": { "south": 33.61400, "west": -83.42470, "north": 33.61560, "east": -83.42330 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 6,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 239.1,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.61650,-83.42200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "NONE",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "scale"],
+  "fieldNotes": {
+    "location": "Resolved to GP's Madison Plywood plant at 1400 Woodkraft Rd, Madison GA, off Hwy 278 NE of town (~33.6165,-83.4220). The roster's geocoded point (33.5775,-83.4768, address '1310 Eatonton Rd') landed ~5 km SW in downtown Madison and was wrong. Coordinates cross-checked against ejmap.org and the Forest Products Locator (both ~33.611,-83.431, near the plant). Plant building centroid locked at 33.61650,-83.42200.",
+    "truckGate": "Street View (2013-04) at the entrance off Woodkraft Rd clearly shows a red-and-white barrier arm across the truck lane plus a controlled checkpoint with 'Welcome to Georgia-Pacific Madison / All visitors report to security' signage. True.",
+    "guardShack": "A small staffed guard booth — windows on multiple sides, ~1-vehicle footprint, set beside the entrance lane next to the barrier arm — is clearly visible in Street View. True.",
+    "remoteGs": "False — a staffed guard booth is present.",
+    "postGateStaging": "Wide paved truck approach inside the gate before reaching the plant / log yard provides queue room.",
+    "drivewayLong": "Long internal truck approach from the guarded gate to the plant and log yard; ample stacking for 3+ trucks.",
+    "shipRcvSeparate": "Log receiving (NE log yard) and plywood shipping (W/SW yard and rail load-out) are physically separate operations on opposite ends of the plant.",
+    "dockDoors": "Plywood plants load finished panels by forklift from open shipping bays rather than truck-height dock doors; a few bays exist. Banded 0-10, low confidence.",
+    "dropArea": "Yards hold logs and stacked plywood bundles, not parked trailers; no marked trailer stalls.",
+    "scale": "A truck scale is operationally expected for a plywood plant with log-truck receiving, but a distinct scale pad could not be confirmed in the available imagery. Marked false, flagged uncertain.",
+    "railServed": "An active rail siding runs along the NW side of the plant with railcars present (gondolas / boxcars).",
+    "buildingCount": "One dominant plant building plus ~3 ancillary structures (gatehouse, log-yard sheds, shipping/storage); counted 4.",
+    "urbanRural": "Plant sits in open woods/farmland NE of small-town Madison, well away from dense development. Rural.",
+    "connectivityIssue": "Rural but within ~5 km of Madison; coverage likely adequate. False."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,51 @@
+{
+  "name": "Coca-Cola UNITED - College Park Production Plant, GA",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 33.626800, "lng": -84.468000 },
+  "geofences": {
+    "perimeter": { "south": 33.6244, "west": -84.4698, "north": 33.6288, "east": -84.4662 },
+    "truckGate": { "south": 33.6245, "west": -84.4694, "north": 33.6250, "east": -84.4688 },
+    "dropYards": [
+      { "south": 33.6258, "west": -84.4698, "north": 33.6285, "east": -84.4682 }
+    ],
+    "dockAprons": [
+      { "south": 33.6252, "west": -84.4678, "north": 33.6282, "east": -84.4670 }
+    ],
+    "staging": { "south": 33.6248, "west": -84.4690, "north": 33.6256, "east": -84.4680 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45, "trailersVisible": 120, "trailerParkingCapacity": 180,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 40.4,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.6268,-84.468,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Roster lat/lng (33.623174,-84.482599) and roster address (3151 Sullivan Rd) landed on a vacant paved lot ~1.5 km west of the real site - wrong location. The Census/Nominatim geocoders for the correct address (2355 Sullivan Rd) also interpolated onto a rural stretch. The actual Coca-Cola UNITED College Park Production Plant is at ~33.6268,-84.4680, off Sullivan Road in the Cooks Crossing industrial area near the I-85/I-285 interchange. Confirmed via an OSM 'Coca-Cola' POI and Street View: the building carries a red 'Coca-Cola' logo and the yard entrance has red 'TRUCK ENTRANCE' signs. It is a production + distribution facility, 325+ associates, acquired by Coca-Cola UNITED in April 2017 from The Coca-Cola Company.",
+    "truckGate": "Positive. Street View shows red 'TRUCK ENTRANCE' signs at a driveway off Sullivan Road and a chain-link perimeter fence. The property is fenced with a controlled truck entrance. Gate barrier hardware not clearly resolved in the available views; truckGate=true.",
+    "guardShack": "No distinct freestanding beside-the-lane guard booth identified at the truck entrance in Street View or z20 satellite. guardShack=false at medium confidence.",
+    "remoteGs": "Truck gate present, no guard shack identified -> remoteGs=true (kiosk/badge check-in implied). Medium confidence.",
+    "dockDoors": "~45 dock doors along the production building's long west face with trailers backed in - band 25-50, approximate count from z19 imagery.",
+    "dropArea": "50+ trailers parked without tractors in the large west drop yard - dense rows of staged trailers, a major drop-yard operation.",
+    "railServed": "A rail line runs through the property between the production building and the west trailer yard, directly alongside the building's east/dock side - the site is rail-served. railServed=true.",
+    "shipRcvSeparate": "Docks read as one continuous bank along the building's west face; no clearly separate ship/receive cluster. shipRcvSeparate=false.",
+    "dropYard": "Large dedicated trailer-storage drop yard on the west half of the property, separate from the active dock apron.",
+    "postGateStaging": "Paved holding area inside the gate before the docks/drop yard.",
+    "buildingCount": "Main production/distribution building plus an attached office building = 2.",
+    "urbanRural": "Inside the Atlanta metro near Hartsfield-Jackson airport and the I-85/I-285 interchange, dense industrial fabric - Urban.",
+    "drivewayLong": "Long internal approach from the Sullivan Road gate to the docks holds 3+ trucks."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,61 @@
+{
+  "name": "The Prisoner Wine Company - St. Helena CA",
+  "type": "Winery / Production Facility",
+  "coords": { "lat": 38.474750, "lng": -122.431850 },
+  "geofences": {
+    "perimeter": { "south": 38.472600, "west": -122.433900, "north": 38.476400, "east": -122.430300 },
+    "truckGate": { "south": 38.472750, "west": -122.434000, "north": 38.472980, "east": -122.433700 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 38.474750, "west": -122.432250, "north": 38.475200, "east": -122.431800 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 3,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 4,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 33.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.474750,-122.431850,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "Driveway entrance off Galleron Road flanked by two decorative stone monument pillars; no barrier arm, sliding/swing gate, or checkpoint pinch-point across the lane. Open winery entrance.",
+    "guardShack": "No staffed booth at the entrance. Only a small white utility cabinet beside the lane and the two ornamental stone pillars.",
+    "drivewayLong": "Long approach from Galleron Road across a rail crossing, then up the west side of the property to the building/parking area — easily holds a 3+ truck queue.",
+    "dockDoors": "No row of dedicated freight dock doors. A small winery service/loading area on the NW (crush-pad) face of the production building shows roughly 2-4 service doors. Low confidence on exact count from overhead imagery.",
+    "railServed": "A rail line (Napa Valley Wine Train corridor) runs along Galleron Road and the property driveway crosses it at grade, but no rail spur enters the property.",
+    "urbanRural": "Napa Valley agricultural setting — winery surrounded entirely by vineyards near St. Helena, well outside any dense metro fabric.",
+    "connectivityIssue": "Rural setting, but St. Helena/Napa Valley is well-developed wine country with reasonable cellular coverage; marked uncertain.",
+    "multipleFacilities": "Single integrated winery building cluster plus a separate small structure to the north (treatment/equipment); treated as one campus, multipleFacilities false."
+  },
+  "method": "deep-audit"
+}

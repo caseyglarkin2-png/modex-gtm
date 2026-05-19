@@ -1,0 +1,56 @@
+{
+  "name": "Toyota Logistics Services Vehicle Distribution Center - Newark NJ",
+  "type": "Vehicle Distribution Center (port processing)",
+  "coords": { "lat": 40.6940, "lng": -74.1360 },
+  "geofences": {
+    "perimeter": { "south": 40.69050, "west": -74.13950, "north": 40.69850, "east": -74.13200 },
+    "truckGate": { "south": 40.69230, "west": -74.13520, "north": 40.69330, "east": -74.13400 },
+    "dropYards": [
+      { "south": 40.69200, "west": -74.13700, "north": 40.69850, "east": -74.13200 },
+      { "south": 40.69050, "west": -74.13900, "north": 40.69350, "east": -74.13550 }
+    ],
+    "dockAprons": [
+      { "south": 40.69380, "west": -74.13700, "north": 40.69520, "east": -74.13520 }
+    ],
+    "staging": { "south": 40.69230, "west": -74.13550, "north": 40.69380, "east": -74.13400 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 12,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 2,
+    "buildingCount": 5,
+    "siteAreaAcres": 58.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.694,-74.136,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "dockDoors", "entryLanes", "exitLanes", "truckGateCount", "scale"],
+  "fieldNotes": {
+    "facilityType": "Port Newark auto-processing terminal operated by Toyota Logistics Services (Toyota Motor Logistics Center), Building 390 E Port St. One of three vehicle processors at the Port of New York/New Jersey (alongside FAPS and BMW Port Jersey). Vehicles arrive by ro/ro vessel at the wharf, are processed (accessory install, recon, PDI) and distributed by auto-hauler truck and rail to the eastern US.",
+    "truckGate": "Port Newark is a TWIC-controlled marine terminal — controlled gated entry is certain. The facility is fenced (chain-link visible in Street View along E Port St) with vehicle lots and processing buildings inside. E Port St frontage gives a controlled entrance to the processing complex.",
+    "guardShack": "Inferred true. A small gatehouse-type structure sits at the SE corner near where E Port St meets the facility. TWIC marine terminals are staffed at the gate. A discrete booth could not be isolated frame-by-frame; medium confidence.",
+    "remoteGs": "False — guard shack inferred present.",
+    "railServed": "Confirmed — rail tracks run along E Port St adjacent to the facility (visible in Street View) and Port Newark's auto terminals are served by on-dock rail. TLS distributes vehicles inland by rail.",
+    "dockDoors": "The processing complex includes a large sawtooth-roof building and an adjacent flat-roof building with dock-style doors for parts/accessory and auto-hauler loading; banded 10-25. Atypical metric for a vehicle-processing site.",
+    "dropArea": "Vast — the facility is dominated by striped vehicle marshalling lots holding thousands of finished vehicles, plus a dense yard of auto-haulers/tractors and trailers (~45 visible in z20 imagery); banded 50+.",
+    "trailersVisible": "z20 imagery shows a packed yard of tractors, trailers and auto-hauler units — estimated ~45 visible; high truck activity.",
+    "scale": "No truck scale identified; left false, flagged uncertain.",
+    "fastLaneOpportunity": "Wide paved aprons and multiple yard lanes give room for an express/bypass lane.",
+    "truckGateCount": "At least one main E Port St gate; a secondary access likely — estimated 2, flagged uncertain.",
+    "siteAreaAcres": "Perimeter box ~58 acres covering the TLS processing buildings and contiguous vehicle lots fronting E Port St between the Port Newark Channel wharf and the rail corridor.",
+    "urbanRural": "Within the Port Newark/Elizabeth marine-terminal complex in the New York metro; classified Urban."
+  },
+  "method": "deep-audit"
+}

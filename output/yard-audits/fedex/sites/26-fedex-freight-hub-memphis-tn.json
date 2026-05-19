@@ -1,0 +1,48 @@
+{
+  "name": "FedEx Freight Hub - Memphis TN",
+  "type": "Freight LTL hub service center (FedEx Freight national HQ market)",
+  "coords": { "lat": 35.05305, "lng": -90.04885 },
+  "geofences": {
+    "perimeter": { "south": 35.0508, "west": -90.0508, "north": 35.0552, "east": -90.0470 },
+    "truckGate": { "south": 35.0543, "west": -90.0494, "north": 35.0547, "east": -90.0487 },
+    "dropYards": [
+      { "south": 35.0508, "west": -90.0508, "north": 35.0535, "east": -90.0470 }
+    ],
+    "dockAprons": [
+      { "south": 35.0533, "west": -90.0500, "north": 35.0543, "east": -90.0472 },
+      { "south": 35.0526, "west": -90.0492, "north": 35.0533, "east": -90.0470 }
+    ],
+    "staging": { "south": 35.0535, "west": -90.0500, "north": 35.0542, "east": -90.0482 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 220, "trailersVisible": 320, "trailerParkingCapacity": 600,
+    "truckGateCount": 1, "buildingCount": 3, "siteAreaAcres": 41.9,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.05305,-90.04885,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Roster address '2851 Bartlett Rd' geocoded to an unrelated commercial strip in central Memphis (38112). Correct facility is the FedEx Freight LTL hub at 461 Winchester Rd, Memphis, TN 38109 (FedEx Freight terminal code MEM), confirmed by Street View showing FedEx Freight tractors/trailers and FedEx Freight building signage.",
+    "truckGate": "Entire property is fenced with black privacy screening (2025 imagery). Inner controlled gate line separates the front employee/visitor parking from the secured trailer yard; gate openings visible at z21.",
+    "guardShack": "Small ~1-vehicle-footprint booth structure sits beside the inner gate opening at the parking/yard boundary (z21 imagery). Privacy fence blocks ground-level confirmation; classified as guard shack with medium confidence.",
+    "drivewayLong": "Wide entrance apron off Winchester Rd plus deep front parking/staging area gives ample room for a 3+ truck queue before the inner gate.",
+    "fastLaneOpportunity": "Very wide entrance apron and large paved front lot give physical room to add a dedicated bypass/express lane.",
+    "dockDoors": "Large LTL break-bulk hub: two long cross-dock buildings with dock doors on both long faces; door count estimated ~220 total, comfortably 50+ band (comparable FedEx Freight hubs ATL ~304, STL ~240 doors).",
+    "dropYard": "Extensive gravel/paved trailer yard south of the docks holds several hundred parked trailers and pup trailers without tractors.",
+    "entryLanes": "Estimated 2 inbound lanes at the controlled gate; exact count not fully resolvable from overhead imagery due to privacy fencing.",
+    "railServed": "A rail line runs along the east edge of the property but no spur enters the FedEx yard; classified false."
+  },
+  "method": "deep-audit"
+}

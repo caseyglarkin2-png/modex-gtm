@@ -1,0 +1,47 @@
+{
+  "name": "Campbell's Soup - Napoleon OH",
+  "type": "Manufacturing - soup/broth/V8 juice",
+  "coords": { "lat": 41.397500, "lng": -84.103500 },
+  "geofences": {
+    "perimeter": { "south": 41.39350, "west": -84.10850, "north": 41.40150, "east": -84.09850 },
+    "truckGate": { "south": 41.39370, "west": -84.10680, "north": 41.39440, "east": -84.10580 },
+    "dropYards": [
+      { "south": 41.39680, "west": -84.10220, "north": 41.39990, "east": -84.09870 },
+      { "south": 41.39230, "west": -84.10520, "north": 41.39300, "east": -84.10250 }
+    ],
+    "dockAprons": [
+      { "south": 41.39620, "west": -84.10350, "north": 41.39780, "east": -84.10100 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55, "trailersVisible": 130, "trailerParkingCapacity": 200,
+    "truckGateCount": 1, "buildingCount": 9, "siteAreaAcres": 175.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.397500,-84.103500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dockDoorCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Large fenced manufacturing campus; perimeter chain-link fence confirmed all around in Street View. Controlled truck entry inferred via internal driveway off the south road / SR-110.",
+    "guardShack": "No guard booth positively identified on public-road Street View frontage (all visible frontage is employee parking behind fence). Marked false / remoteGs true at medium confidence.",
+    "dropYard": "Extensive trailer parking on the NE side (130+ trailers, third-party carriers: Western Express, Marten, etc.) plus rows along the south road.",
+    "dockDoorCount": "Multiple dock banks across NE warehouse faces and central buildings; ~55 estimate banded 50+, low confidence.",
+    "shipRcvSeparate": "Distinct dock clusters on separate building faces (NE warehouse vs central plant docks).",
+    "multipleFacilities": "Large campus: production halls, big NE distribution warehouse, wastewater treatment plant with multiple digester domes.",
+    "fastLaneOpportunity": "Wide internal yard aprons with ample paved width.",
+    "siteAreaAcres": "Derived from perimeter box ~890m N-S x ~830m E-W."
+  },
+  "method": "deep-audit"
+}

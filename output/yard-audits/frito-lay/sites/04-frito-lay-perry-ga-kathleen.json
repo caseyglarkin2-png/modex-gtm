@@ -1,0 +1,65 @@
+{
+  "name": "Frito-Lay - Perry GA (Kathleen)",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 32.483737, "lng": -83.609766 },
+  "geofences": {
+    "perimeter": { "south": 32.479500, "west": -83.613500, "north": 32.487200, "east": -83.604200 },
+    "truckGate": { "south": 32.485400, "west": -83.611400, "north": 32.485900, "east": -83.610600 },
+    "dropYards": [
+      { "south": 32.481800, "west": -83.608200, "north": 32.484800, "east": -83.604800 },
+      { "south": 32.480200, "west": -83.612400, "north": 32.481400, "east": -83.610000 }
+    ],
+    "dockAprons": [
+      { "south": 32.483500, "west": -83.606300, "north": 32.485200, "east": -83.605300 },
+      { "south": 32.485400, "west": -83.610600, "north": 32.486400, "east": -83.608600 }
+    ],
+    "staging": { "south": 32.480100, "west": -83.612500, "north": 32.481400, "east": -83.610600 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 420,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 130.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.483737,-83.609766,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "scale", "dockDoorCount", "multiStep"],
+  "fieldNotes": {
+    "truckGate": "Single primary entrance road off GA Highway 247 in the NW. The entrance road crosses the BNSF/Norfolk Southern mainline at a grade crossing (confirmed in Street View) then runs into the secured plant property. The whole campus is fenced; the controlled entrance is a clear pinch-point.",
+    "guardShack": "A guard booth is almost certainly present at this flagship secured plant - the largest Frito-Lay snack plant in the US with 1000+ employees and tightly controlled internal roads. However it could not be directly confirmed: Street View does not reach the internal entrance road and z20-z21 satellite at the gate zone is washed out. Marked true at medium confidence.",
+    "remoteGs": "False - guard booth assumed present.",
+    "preGateStaging": "Truck staging/parking lot with parked trailers in the SW of the property (confirmed at z20), providing pre-/post-gate holding room.",
+    "postGateStaging": "Large internal paved aprons and a roundabout-style distribution junction between the gate and the dock banks - ample inside holding room.",
+    "drivewayLong": "Long entrance road from GA-247 plus expansive internal road network and staging lots - holds well over 3 trucks.",
+    "fastLaneOpportunity": "Wide entrance road and large paved aprons with significant unused width - room to add an express/bypass lane.",
+    "entryExitTogether": "Single primary entrance road off GA-247 serves both in and out.",
+    "entryLanes": "Estimated 1 inbound; satellite resolution limits exact count - low confidence.",
+    "exitLanes": "Estimated 1 outbound - low confidence.",
+    "dockDoors": "Long dock banks on multiple building faces (east face of the main plant and the NW warehouse face) with many trailers backed in. Total estimated ~70 - 50+ band.",
+    "dropArea": "Massive trailer drop yard on the east side with hundreds of trailers in long rows, plus the SW staging lot - far exceeds 50 stalls.",
+    "shipRcvSeparate": "Dock banks on physically distinct building faces (east face and NW warehouse) indicating separate shipping/receiving clusters.",
+    "urbanRural": "Edge-of-town location in Kathleen/Houston County GA, surrounded by farmland and open fields; small-town industrial setting - Rural.",
+    "multipleFacilities": "Campus character: the main plant mass plus a separate NW warehouse building and process/utility structures - multiple large building clusters on one property.",
+    "scale": "No truck scale clearly identifiable - low confidence, possible but not confirmed.",
+    "railServed": "Confirmed - a rail mainline runs along the west; rail spurs penetrate the plant property and rail tank cars are parked on-site (visible in z19 imagery on the SW side).",
+    "siteAreaAcres": "Perimeter box yields ~130 acres for the very large plant campus, consistent with the largest US Frito-Lay snack plant.",
+    "trailersVisible": "~320 trailers counted across the east drop yard, dock faces, and SW staging - approximate.",
+    "dockDoorCount": "Overhead count estimate; dock faces partially obscured by trailers and washed-out imagery - moderate confidence.",
+    "multiStep": "Possible second checkpoint given the internal road system and rail crossing, but not confirmed - left false."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,66 @@
+{
+  "name": "GP Palatka Mill - Palatka FL",
+  "type": "Kraft/Tissue Mill",
+  "coords": { "lat": 29.6860, "lng": -81.6575 },
+  "geofences": {
+    "perimeter": { "south": 29.679263, "west": -81.661843, "north": 29.693636, "east": -81.653571 },
+    "truckGate": { "south": 29.684371, "west": -81.661931, "north": 29.685629, "east": -81.660069 },
+    "dropYards": [
+      { "south": 29.685661, "west": -81.658914, "north": 29.686739, "east": -81.658086 }
+    ],
+    "dockAprons": [
+      { "south": 29.681212, "west": -81.655414, "north": 29.683188, "east": -81.654586 }
+    ],
+    "staging": { "south": 29.683281, "west": -81.656724, "north": 29.684719, "east": -81.655276 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 18,
+    "siteAreaAcres": 316.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.6860,-81.6575,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "entryLanes", "exitLanes", "dockDoors", "fastLaneOpportunity"],
+  "fieldNotes": {
+    "facility": "Large integrated kraft pulp/paper mill on the west bank of the St. Johns River, ~4 mi NE of downtown Palatka FL. Roster coordinate (29.650032, -81.647668) was in downtown Palatka, ~4 km off. Relocated via web research (215 County Road 216 / US-17 corridor, NE of Palatka) and satellite to the actual mill complex. Confirmed: kraft mill with woodyard, wood storage sheds, paper machines, rail yard, large distribution warehouse.",
+    "truckGate": "Mill is a fully fenced ~316-acre kraft mill complex; access road branches off US-17 with a railroad crossing into the property. A controlled, guarded truck entrance is standard for a paper mill of this scale (700+ employees, $400M tissue machine + $83M expansion). The gate structure is set behind a tree buffer and not directly resolvable in Street View — medium confidence.",
+    "guardShack": "Inferred present from facility scale and security profile; not positively imaged. Listed uncertain.",
+    "multipleFacilities": "Campus with multiple distinct building clusters: the kraft mill processing core, a large modern distribution warehouse to the south, woodyard storage sheds, and warehouse/converting buildings.",
+    "dockDoors": "Loading docks at the distribution warehouse (east face) and converting/warehouse buildings; ~30 doors estimated from overhead imagery — low confidence band 25-50.",
+    "dropArea": "Trailers parked in rows in the mill yard and near the warehouses; ~45 visible, banded 25-50.",
+    "shipRcvSeparate": "Inbound wood fiber received by rail and truck at the woodyard (north); finished-product shipping runs from the distribution warehouse docks (south) — physically separate clusters.",
+    "scale": "A truck scale is standard at a mill receiving wood fiber by truck; not positively imaged — listed uncertain.",
+    "fastLaneOpportunity": "The access road and yard have ample paved width; inferred room for a bypass lane — low confidence.",
+    "railServed": "Extensive multi-track rail yard runs through the complex alongside the woodyard.",
+    "urbanRural": "Rural — mill is in forested/agricultural country NE of small-town Palatka, buffered by woods."
+  },
+  "method": "deep-audit"
+}

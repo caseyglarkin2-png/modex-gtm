@@ -1,0 +1,56 @@
+{
+  "name": "John Deere Thibodaux - Thibodaux LA",
+  "type": "Assembly Plant",
+  "coords": { "lat": 29.805705, "lng": -90.829764 },
+  "geofences": {
+    "perimeter": { "south": 29.80380, "west": -90.83020, "north": 29.80950, "east": -90.82500 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 29.80450, "west": -90.82820, "north": 29.80620, "east": -90.82650 }
+    ],
+    "dockAprons": [
+      { "south": 29.80430, "west": -90.82800, "north": 29.80560, "east": -90.82640 },
+      { "south": 29.80760, "west": -90.82850, "north": 29.80900, "east": -90.82650 }
+    ],
+    "staging": { "south": 29.80600, "west": -90.82900, "north": 29.80800, "east": -90.82680 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 10,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 0,
+    "buildingCount": 8,
+    "siteAreaAcres": 95.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.805705,-90.829764,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "guardShack", "dropArea"],
+  "fieldNotes": {
+    "resolvedLocation": "Roster coords (1000 Coulon Rd) landed in a residential neighborhood. Correct facility is at 244 Highway 3266 (Plant 1) / 234 Highway 3266 (Plant 2), resolved to 29.805705,-90.829764 via web research and confirmed by satellite - a large multi-building manufacturing campus (sugarcane harvesters, CAMECO heritage) bordered by sugarcane fields.",
+    "truckGate": "Open campus - no controlled truck entrance at the road frontage. The access road off Highway 3266 runs directly between the office building and the manufacturing buildings; Street View (2025-10) shows an open frontage with parking and no barrier arm, gate, or guard booth. An interior fence/drainage line runs along the east edge but no gate confirmed.",
+    "guardShack": "No guard booth confirmed at the entrance. A staffed reception is plausible inside the office building but no standalone gate booth observed - flagged uncertain.",
+    "remoteGs": "False - no truck gate at the property line.",
+    "drivewayLong": "Long internal access roads from Highway 3266 to the docks and material yards; would hold 3+ trucks.",
+    "dockDoors": "Dock doors scattered across several building faces (N face and SE face), with a few trailers backed in; estimated 10-25 total, low-confidence count typical of an assembly plant where finished sugarcane harvesters ship by flatbed/drive-off.",
+    "dropArea": "Modest trailer presence (~10 trailers) plus extensive material laydown in the SE/E yards; 10-25 band.",
+    "shipRcvSeparate": "Docks present on multiple building faces but no clearly separated ship vs. receive clusters discernible.",
+    "urbanRural": "Edge-of-town site outside Thibodaux, LA, surrounded by sugarcane fields with an adjacent residential pocket; classified Rural.",
+    "multipleFacilities": "Multi-building campus - two large manufacturing buildings (Plant 1 + Plant 2) plus an office building and several support/storage buildings (8+ structures).",
+    "dropYard": "Trailer/equipment staging and laydown yards present on the SE/E side, distinct from active dock aprons.",
+    "railServed": "No rail spur observed entering the property.",
+    "connectivityIssue": "Site is rural but immediately adjacent to the town of Thibodaux; cellular coverage likely adequate - connectivityIssue set false."
+  },
+  "method": "deep-audit"
+}

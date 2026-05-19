@@ -1,0 +1,61 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+GXO Conair Distribution Center - Hagerstown MD,Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@39.604697,-77.760602,400m/data=!3m1!1e3"
+GXO Abercrombie & Fitch Distribution Center - Goodyear AZ,Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@33.412000,-112.421800,400m/data=!3m1!1e3"
+GXO Hasbro Flagship Distribution Center - Midway GA,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@31.770300,-81.347400,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Fairburn GA,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,,,,,,,,,YES,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@33.552411,-84.537454,400m/data=!3m1!1e3"
+GXO Super Hub - Clayton IN,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@39.605400,-86.483484,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Lebanon IN,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@40.0413,-86.4853,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Whitestown IN,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@39.96345,-86.38215,400m/data=!3m1!1e3"
+GXO IKEA Customer Distribution Center - Quakertown PA,Fulfillment Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@40.46075,-75.3475,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Carlisle PA,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@40.2049,-77.2333,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Bethlehem PA,Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@40.61090,-75.31565,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Middletown PA,Fulfillment Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,YES,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@40.20785,-76.74640,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Palmyra PA,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@40.31050,-76.61450,400m/data=!3m1!1e3"
+GXO IKEA Distribution Center - Westampton NJ,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@40.01400,-74.85340,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - West Jefferson OH,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,,YES,,YES,,,YES,Rural,,,,YES,"https://www.google.com/maps/@39.94550,-83.33280,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - McDonough GA,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@33.41128,-84.19269,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Forest Park GA,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,,YES,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@33.620500,-84.314800,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Tracy CA,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,,YES,1,1,,,,,YES,YES,,,,,Urban,,,,,"https://www.google.com/maps/@37.762200,-121.411800,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Fontana CA,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,,"https://www.google.com/maps/@34.058587,-117.513810,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Statesville NC,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,YES,YES,,,YES,,1,1,,,,,YES,,YES,,,YES,Rural,,,,YES,"https://www.google.com/maps/@35.770854,-80.841310,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Cowpens SC,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@35.060500,-81.812000,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Fort Worth TX (Sylvania),Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,,YES,,,,,,,,Urban,,,,,"https://www.google.com/maps/@32.81880,-97.30715,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Fort Worth TX (Everman),Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,YES,,,,YES,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@32.62890,-97.30680,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Houston TX (Railwood),Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@29.82900,-95.25250,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Houston TX (West Greens),Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,YES,,,,YES,YES,,,,YES,Urban,,,,,"https://www.google.com/maps/@29.94470,-95.49050,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Grapevine TX,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,YES,,,,YES,,YES,,,YES,Urban,,,,,"https://www.google.com/maps/@32.93180,-97.03200,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Arlington TX,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@32.678848,-97.07711,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - West Valley City UT,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,,,,,,,,,YES,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@40.723419,-111.992864,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Hillsboro OR,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@45.555200,-122.943800,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Aloha OR,Distribution Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,,,,,,,,,,,,,,,,,,,Urban,,YES,,,"https://www.google.com/maps/@45.49332,-122.8834,400m/data=!3m1!1e3"
+GXO Logistics Distribution Center - Carrollton TX,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,,,,,,,YES,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@32.989435,-96.928073,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,20,67%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,1,3%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,5,17%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,4,13%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,16,53%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,11,37%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,5,17%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,25,83%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

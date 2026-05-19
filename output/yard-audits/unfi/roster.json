@@ -1,0 +1,488 @@
+{
+  "account": "UNFI (United Natural Foods, Inc.)",
+  "generatedAt": "2026-05-18",
+  "facilityCount": 30,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "UNFI - Sarasota North DC, Sarasota FL",
+      "city": "Sarasota",
+      "state": "FL",
+      "type": "Distribution Center",
+      "address": "6272 McIntosh Rd, Sarasota, FL 34238",
+      "lat": 27.264831,
+      "lng": -82.484075,
+      "source": "Grocery Dive / Supply Chain Dive / UNFI press release - new 1M sq ft automated DC opened FY26 (KNAPP robotics); dossier-named new build",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 2,
+      "name": "UNFI - Manchester PA DC",
+      "city": "Manchester",
+      "state": "PA",
+      "type": "Distribution Center",
+      "address": "1025 Locust Point Rd, Manchester, PA 17345",
+      "lat": 40.070433,
+      "lng": -76.746475,
+      "source": "BusinessWire / Modern Distribution Management - 1.3M sq ft DC opened Q1 FY25; dossier-named new build / consolidation receiving DC",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 3,
+      "name": "UNFI - Carlisle PA DC",
+      "city": "Carlisle",
+      "state": "PA",
+      "type": "Distribution Center",
+      "address": "192 Kost Rd, Carlisle, PA 17015",
+      "lat": 40.22871,
+      "lng": -77.088179,
+      "source": "TruckMap / warehouse.ninja - Carlisle DC; dossier notes Carlisle received automation upgrades",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 4,
+      "name": "UNFI - Allentown PA DC",
+      "city": "Allentown",
+      "state": "PA",
+      "type": "Distribution Center",
+      "address": "8550 Willard Dr, Breinigsville, PA 18031",
+      "lat": 40.554158,
+      "lng": -75.632566,
+      "source": "Dossier-named (Allentown DC, slated to close in 2026; absorbed legacy Logan Township NJ volume). Address is the Lehigh Valley/Breinigsville facility commonly listed as UNFI Allentown; verify exact site - closure in progress",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 1
+      }
+    },
+    {
+      "idx": 5,
+      "name": "UNFI - Chesterfield NH DC",
+      "city": "West Chesterfield",
+      "state": "NH",
+      "type": "Distribution Center",
+      "address": "71 Stow Dr, West Chesterfield, NH 03466",
+      "lat": 42.89139,
+      "lng": -72.490558,
+      "source": "Yelp / warehouse.ninja - 319,000 sq ft New England regional hub; dossier-named (Mark Bushway was GM here 2003-2006)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 6,
+      "name": "UNFI - Montgomery NY DC (Hudson Valley)",
+      "city": "Montgomery",
+      "state": "NY",
+      "type": "Distribution Center",
+      "address": "525 Neelytown Rd, Montgomery, NY 12549",
+      "lat": 41.493552,
+      "lng": -74.235922,
+      "source": "Yellow Pages / UNFI press release - Hudson Valley DC opened 2014, LEED Gold, serves NYC metro Whole Foods",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 7,
+      "name": "UNFI - Howell NJ DC",
+      "city": "Howell",
+      "state": "NJ",
+      "type": "Distribution Center",
+      "address": "433 Oak Glen Rd, Howell, NJ 07731",
+      "lat": 40.139697,
+      "lng": -74.187949,
+      "source": "BBB / NJ BPU filing / Yahoo Local - Howell Township DC, rooftop solar",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 8,
+      "name": "UNFI - Dayville CT DC",
+      "city": "Dayville",
+      "state": "CT",
+      "type": "Distribution Center",
+      "address": "260 Lake Rd, Dayville, CT 06241",
+      "lat": 41.863086,
+      "lng": -71.906995,
+      "source": "Yellow Pages / Connecticut-Places / warehouse.ninja - Killingly/Dayville DC, Teamsters-represented",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 9,
+      "name": "UNFI - New Stanton PA DC (Hunker)",
+      "city": "Hunker",
+      "state": "PA",
+      "type": "Distribution Center",
+      "address": "100 UNFI Way, Hunker, PA 15639",
+      "lat": 40.212001,
+      "lng": -79.611695,
+      "source": "Indeed locations list (New Stanton / Hunker, PA); legacy-UNFI Pittsburgh-area DC. Street address approximate - verify exact site",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 10,
+      "name": "UNFI - York PA DC (Harrisburg area)",
+      "city": "York",
+      "state": "PA",
+      "type": "Distribution Center",
+      "address": "York, PA",
+      "lat": 39.961066,
+      "lng": -76.72696,
+      "source": "Indeed locations list (Harrisburg / York PA); legacy SuperValu mid-Atlantic DC. Street address not pinned down - city-level only",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 673
+      }
+    },
+    {
+      "idx": 11,
+      "name": "UNFI - Iowa City IA DC",
+      "city": "Iowa City",
+      "state": "IA",
+      "type": "Distribution Center",
+      "address": "2340 Heinz Rd, Iowa City, IA 52240",
+      "lat": 41.635358,
+      "lng": -91.486512,
+      "source": "Yellow Pages / warehouse.ninja - Iowa City DC, Central region",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 12,
+      "name": "UNFI - Hopkins MN DC",
+      "city": "Hopkins",
+      "state": "MN",
+      "type": "Distribution Center",
+      "address": "300 2nd Ave S, Hopkins, MN 55343",
+      "lat": 44.91914,
+      "lng": -93.40308,
+      "source": "TruckMap / Waze / dcontrol - legacy SuperValu Hopkins DC, Minneapolis metro (also a related UNFI grocery DC at 201 3rd St S, Hopkins)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 13,
+      "name": "UNFI - Champaign IL DC (Newell)",
+      "city": "Champaign",
+      "state": "IL",
+      "type": "Distribution Center",
+      "address": "3001 Apollo Dr, Champaign, IL 61820",
+      "lat": 40.151009,
+      "lng": -88.232322,
+      "source": "Web search - UNFI 'Newell Distribution Center', Champaign IL, Central region",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 14,
+      "name": "UNFI - Aurora CO DC (Denver)",
+      "city": "Aurora",
+      "state": "CO",
+      "type": "Distribution Center",
+      "address": "17901 E 40th Ave, Aurora, CO 80011",
+      "lat": 39.774031,
+      "lng": -104.776628,
+      "source": "Yelp / Yellow Pages - Denver-metro DC serving Rocky Mountain region",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 199
+      }
+    },
+    {
+      "idx": 15,
+      "name": "UNFI - Prescott WI DC (Twin Cities)",
+      "city": "Prescott",
+      "state": "WI",
+      "type": "Distribution Center",
+      "address": "1000 Eagle Ridge Dr, Prescott, WI 54021",
+      "lat": 44.762586,
+      "lng": -92.784517,
+      "source": "TruckMap / Yahoo Local - 'UNFI Twin Cities Distribution Center', serves Minneapolis-St. Paul metro",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 157
+      }
+    },
+    {
+      "idx": 16,
+      "name": "UNFI - Racine WI DC",
+      "city": "Racine",
+      "state": "WI",
+      "type": "Distribution Center",
+      "address": "Racine, WI",
+      "lat": 42.726131,
+      "lng": -87.782852,
+      "source": "UNFI press release / warehouse.ninja - LEED Gold DC, southeast Wisconsin. Street address not pinned down - city-level only",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 1264
+      }
+    },
+    {
+      "idx": 17,
+      "name": "UNFI - Greenwood IN DC (Indianapolis)",
+      "city": "Greenwood",
+      "state": "IN",
+      "type": "Distribution Center",
+      "address": "655 Commerce Pkwy E Dr, Greenwood, IN 46143",
+      "lat": 39.61008,
+      "lng": -86.057658,
+      "source": "Yelp (updated Mar 2026) - Indianapolis-metro DC. NOTE: some directories flag Greenwood as closed; legacy SuperValu Central footprint under consolidation - verify active status",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 119
+      }
+    },
+    {
+      "idx": 18,
+      "name": "UNFI - Gilroy CA DC",
+      "city": "Gilroy",
+      "state": "CA",
+      "type": "Distribution Center",
+      "address": "6351 Cameron Blvd, Gilroy, CA 95020",
+      "lat": 36.995984,
+      "lng": -121.54485,
+      "source": "Yelp / warehouse.ninja / BusinessWire - 450,000 sq ft DC serving Northern California, opened 2015",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 221
+      }
+    },
+    {
+      "idx": 19,
+      "name": "UNFI - Rocklin CA DC (Western Region)",
+      "city": "Rocklin",
+      "state": "CA",
+      "type": "Distribution Center",
+      "address": "1101 Sunset Blvd, Rocklin, CA 95765",
+      "lat": 38.81344,
+      "lng": -121.282819,
+      "source": "Yelp / Panjiva / OpenGovUS - UNFI Western Region Division DC, Sacramento metro",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 202
+      }
+    },
+    {
+      "idx": 20,
+      "name": "UNFI - Moreno Valley CA DC",
+      "city": "Moreno Valley",
+      "state": "CA",
+      "type": "Distribution Center",
+      "address": "22450 Day St, Moreno Valley, CA 92553",
+      "lat": 33.911201,
+      "lng": -117.2788,
+      "source": "Progressive Grocer / UNFI IR / Panjiva - 613,200 sq ft Inland Empire DC, opened 2008 (Day St / Commerce Center Dr area; verify exact suite)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 1
+      }
+    },
+    {
+      "idx": 21,
+      "name": "UNFI - Centralia WA DC (Pacific Northwest)",
+      "city": "Centralia",
+      "state": "WA",
+      "type": "Distribution Center",
+      "address": "4002 Galvin Rd, Centralia, WA 98531",
+      "lat": 46.732214,
+      "lng": -123.009518,
+      "source": "TruckMap / Waze / Apple Maps - Pacific Northwest DC; dossier notes Centralia received automation upgrades",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 22,
+      "name": "UNFI - Ridgefield WA DC",
+      "city": "Ridgefield",
+      "state": "WA",
+      "type": "Distribution Center",
+      "address": "7909 S Union Ridge Pkwy, Ridgefield, WA 98642",
+      "lat": 45.805563,
+      "lng": -122.66348,
+      "source": "Waze / warehouse.ninja - Ridgefield DC, Portland/Vancouver metro",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 23,
+      "name": "UNFI - Lebec CA DC",
+      "city": "Lebec",
+      "state": "CA",
+      "type": "Distribution Center",
+      "address": "Lebec, CA",
+      "lat": 34.841644,
+      "lng": -118.864819,
+      "source": "supplyve / Indeed locations list - West region DC near Tejon Ranch / I-5 Grapevine. Street address not pinned down - city-level only",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 119
+      }
+    },
+    {
+      "idx": 24,
+      "name": "UNFI - Twin Falls ID DC",
+      "city": "Twin Falls",
+      "state": "ID",
+      "type": "Distribution Center",
+      "address": "Twin Falls, ID",
+      "lat": 42.555838,
+      "lng": -114.470052,
+      "source": "supplyve / Indeed locations list - West/Mountain region DC. Street address not pinned down - city-level only",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 3492
+      }
+    },
+    {
+      "idx": 25,
+      "name": "UNFI - Vernon CA DC (Los Angeles)",
+      "city": "Vernon",
+      "state": "CA",
+      "type": "Distribution Center",
+      "address": "Vernon, CA",
+      "lat": 34.003903,
+      "lng": -118.230073,
+      "source": "supplyve / Indeed locations list - Los Angeles-area DC. Street address not pinned down - city-level only",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 203
+      }
+    },
+    {
+      "idx": 26,
+      "name": "UNFI - Auburn WA DC (Seattle)",
+      "city": "Auburn",
+      "state": "WA",
+      "type": "Distribution Center",
+      "address": "Auburn, WA",
+      "lat": 47.307323,
+      "lng": -122.228453,
+      "source": "Indeed locations list - Seattle-metro DC (Auburn). Street address not pinned down - city-level only",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 1507
+      }
+    },
+    {
+      "idx": 27,
+      "name": "UNFI - Mansfield OH DC",
+      "city": "Mansfield",
+      "state": "OH",
+      "type": "Distribution Center",
+      "address": "Mansfield, OH",
+      "lat": 40.758536,
+      "lng": -82.514085,
+      "source": "Indeed locations list - Ohio Central region DC. Street address not pinned down - city-level only",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 7198
+      }
+    },
+    {
+      "idx": 28,
+      "name": "UNFI - Joliet IL DC (Chicago)",
+      "city": "Joliet",
+      "state": "IL",
+      "type": "Distribution Center",
+      "address": "Joliet, IL",
+      "lat": 41.524951,
+      "lng": -88.08297,
+      "source": "Grocery Dive / Indeed - Chicago-metro DC; absorbed Milwaukee-area (Sturtevant) volume. Street address not pinned down - city-level only",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 19
+      }
+    },
+    {
+      "idx": 29,
+      "name": "UNFI - Richburg SC DC (Charlotte area)",
+      "city": "Richburg",
+      "state": "SC",
+      "type": "Distribution Center",
+      "address": "Richburg, SC",
+      "lat": 34.715975,
+      "lng": -81.019526,
+      "source": "Indeed locations list - Southeast region DC near Charlotte NC. Street address not pinned down - city-level only",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 4
+      }
+    },
+    {
+      "idx": 30,
+      "name": "UNFI - Mechanicsville VA DC (Richmond)",
+      "city": "Mechanicsville",
+      "state": "VA",
+      "type": "Distribution Center",
+      "address": "Mechanicsville, VA",
+      "lat": 37.608756,
+      "lng": -77.373314,
+      "source": "Indeed locations list - Richmond-area mid-Atlantic DC. Street address not pinned down - city-level only",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 8
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

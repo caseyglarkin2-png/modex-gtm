@@ -1,0 +1,52 @@
+{
+  "name": "Glovis America Port Vehicle Processing - Brunswick GA",
+  "type": "Port / Vehicle Import Processing Center",
+  "coords": { "lat": 31.127000, "lng": -81.539000 },
+  "geofences": {
+    "perimeter": { "south": 31.108000, "west": -81.553000, "north": 31.135500, "east": -81.530000 },
+    "truckGate": { "south": 31.123000, "west": -81.543900, "north": 31.124600, "east": -81.542400 },
+    "dropYards": [
+      { "south": 31.108500, "west": -81.552500, "north": 31.122000, "east": -81.540000 },
+      { "south": 31.124000, "west": -81.546000, "north": 31.133000, "east": -81.534000 }
+    ],
+    "dockAprons": [],
+    "staging": { "south": 31.121500, "west": -81.545000, "north": 31.124000, "east": -81.542500 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 8,
+    "siteAreaAcres": 1627.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@31.1270,-81.5390,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "NONE", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": true
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "scale", "multiStep", "preGateStaging"],
+  "fieldNotes": {
+    "siteSelection": "Roster point (1 Joe Frank Harris Blvd) lands inside the Georgia Ports Authority Colonel's Island Terminal at the Port of Brunswick - confirmed via web research (GPA facilities page, glovisusa.com, Automotive Logistics). Colonel's Island is a ~1,700-acre RoRo auto terminal with multiple on-terminal vehicle processors; Glovis America operates as one of those processors. The audited facility is the GPA secured terminal as a whole, since the on-terminal processors share the gate, fence line and storage. Center placed on the terminal core at 31.1270,-81.5390.",
+    "facilityType": "Port / RoRo vehicle import-export processing terminal. No traditional loading docks - vehicles roll on/off ships at the RoRo berths and move within the terminal by drive-away and by rail. dockDoorCount=0 / dockDoors=NONE reflect this.",
+    "railServed": "Confirmed - a curved auto-rack rail loop runs into the terminal on the west side (probe rail.png), used for rail receiving/shipping of finished vehicles.",
+    "truckGate": "TRUE. The terminal is a fully secured GPA port facility (TWIC-controlled). All vehicular traffic funnels across a single 4-lane divided causeway and through a controlled main gate complex before reaching the storage and processing areas.",
+    "guardShack": "TRUE (medium confidence). A secured GPA port terminal of this class operates a staffed main gate complex; small gate-area structures are visible. Exact booth identification flagged uncertain.",
+    "backupSensitive": "TRUE - the entire terminal is served by ONE causeway access road; any queue at the gate would back up along the single causeway with no alternate route. High chokepoint sensitivity.",
+    "multiStep": "TRUE (best estimate, flagged uncertain) - secured port terminals typically run a multi-stage check (port gate, then processor/yard checkpoints). Marked truck-staging grids are visible inside the terminal.",
+    "dropArea": "50+ - GPA states 637+ acres of paved open vehicle storage; tens of thousands of finished vehicles in marked rows fill the terminal.",
+    "multipleFacilities": "True - multiple processing buildings and several on-terminal processors plus RoRo berth infrastructure on a single large campus.",
+    "urbanRural": "Rural - the terminal sits on a marsh peninsula isolated from Brunswick's urban fabric, reached only by the causeway.",
+    "siteAreaAcres": "~1627 acres from the perimeter box, consistent with the GPA-stated ~1,700-acre terminal."
+  },
+  "method": "deep-audit"
+}

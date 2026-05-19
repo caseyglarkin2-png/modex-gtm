@@ -1,0 +1,54 @@
+{
+  "name": "General Mills - Vineland NJ",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 39.46100, "lng": -75.03650 },
+  "geofences": {
+    "perimeter": { "south": 39.45930, "west": -75.03950, "north": 39.46400, "east": -75.03350 },
+    "truckGate": { "south": 39.45930, "west": -75.03570, "north": 39.46010, "east": -75.03490 },
+    "dropYards": [
+      { "south": 39.46330, "west": -75.03720, "north": 39.46420, "east": -75.03450 }
+    ],
+    "dockAprons": [
+      { "south": 39.46060, "west": -75.03840, "north": 39.46280, "east": -75.03740 },
+      { "south": 39.46280, "west": -75.03740, "north": 39.46380, "east": -75.03540 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40, "trailersVisible": 55, "trailerParkingCapacity": 75,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 67.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.46100,-75.03650,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale"],
+  "fieldNotes": {
+    "location": "Roster coordinates (39.461246,-75.036652, ROOFTOP) correctly landed on the large industrial plant at 500 W Elmer Rd, Vineland NJ. Locked center 39.4610,-75.0365.",
+    "ownership": "OWNERSHIP CHANGE - this is the former General Mills Progresso soup plant (built 1970, 580,000 sq ft, 65 acres). General Mills closed the plant in 2017/2018 and sold it for ~$4.5M to F&S Produce Co. (now F&S Fresh Foods), which retrofitted it for fresh-cut produce, salsas, IQF fruits/vegetables and purees. The roster's General Mills attribution (from the Hyster GM plant list) is stale - the physical freight facility is audited as it stands today.",
+    "truckGate": "The truck yard (W-side dock face and N drop yard) is enclosed by a continuous chain-link perimeter fence, clearly visible in 2026-04 Street View behind the front parking lot. A single main access driveway leaves W Elmer Rd on the SE side; trucks pass through a gate in the yard fence to reach the docks. Treated as a controlled truck entrance.",
+    "guardShack": "No staffed guard booth identified at the road or the yard-fence gate in 2026-04 Street View; the entrance driveway is open at the public road. Flagged uncertain.",
+    "remoteGs": "Set true - there is a fenced/gated truck yard but no confirmed staffed booth. Low confidence, flagged.",
+    "drivewayLong": "The access driveway runs from W Elmer Rd up the SE/E side of the plant before reaching the docks/yard - deep enough to stack 3+ trucks.",
+    "dockDoors": "Continuous dock bank along the W wall of the main building with ~25-40 trailers backed in. Banded 25-50.",
+    "dropArea": "A row of drop trailers parked along the N side of the building, separate from the active W dock face - roughly 15-25 stalls. Banded 10-25.",
+    "dropYard": "Dedicated N-side trailer-storage row present.",
+    "shipRcvSeparate": "Dock activity is concentrated on the W building face with the N apron used mainly for trailer storage - treated as a single ship/receive dock cluster.",
+    "urbanRural": "Plant sits on the wooded NW fringe of Vineland (a small South Jersey city) surrounded by woods and farmland - per the rubric's small-town-industrial guidance, classified Rural.",
+    "railServed": "A rail line curves through the woods EAST of the property but does NOT spur into this parcel - it serves other facilities. Not rail-served.",
+    "siteAreaAcres": "Perimeter box ~67 acres, consistent with the reported 65-acre parcel.",
+    "buildingCount": "One large interconnected manufacturing building with attached production/office sections; counted as a single building.",
+    "scale": "No truck scale identified in imagery - flagged uncertain."
+  },
+  "method": "deep-audit"
+}

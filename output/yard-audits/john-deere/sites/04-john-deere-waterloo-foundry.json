@@ -1,0 +1,52 @@
+{
+  "name": "John Deere Waterloo Foundry - Waterloo IA",
+  "type": "Foundry",
+  "coords": { "lat": 42.5072, "lng": -92.3650 },
+  "geofences": {
+    "perimeter": { "south": 42.5030, "west": -92.3700, "north": 42.5105, "east": -92.3590 },
+    "truckGate": { "south": 42.5044, "west": -92.3655, "north": 42.5053, "east": -92.3640 },
+    "dropYards": [
+      { "south": 42.5045, "west": -92.3645, "north": 42.5060, "east": -92.3615 }
+    ],
+    "dockAprons": [
+      { "south": 42.5050, "west": -92.3640, "north": 42.5062, "east": -92.3620 }
+    ],
+    "staging": { "south": 42.5044, "west": -92.3648, "north": 42.5055, "east": -92.3635 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20, "trailersVisible": 8, "trailerParkingCapacity": 50,
+    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 130.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.5072,-92.3650,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "scale", "dropArea", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "Confirmed John Deere Waterloo Foundry at 2000 Westfield Ave, Waterloo IA. Roster ROOFTOP coords (moved 180m) landed on the large foundry building mass along the Cedar River; locked center refined to 42.5072,-92.3650.",
+    "truckGate": "CONFIRMED via Street View (2026 imagery, 42.5049,-92.3648). Multiple yellow barrier arms span the truck lanes, with a chain-link perimeter fence and gates. Definitive controlled truck entrance.",
+    "guardShack": "CONFIRMED. A brick gatehouse with a brown peaked-roof canopy sits directly beside the truck lanes between the inbound and outbound sides — a classic 1-3-vehicle-footprint staffed guard booth. Clearly visible in the 2026 Street View gate shots.",
+    "railServed": "TRUE. Rail tracks run alongside the foundry building between the building and the river levee, with spurs adjacent to the building (z18/z19 at 42.5085,-92.3645). Foundries typically receive scrap/pig iron by rail.",
+    "postGateStaging": "Large paved staging/parking area immediately inside the gate before the docks (visible in the SV east-facing gate shot) — confirmed.",
+    "drivewayLong": "Deep paved approach from the gate to the dock building easily holds a 3+ truck queue.",
+    "fastLaneOpportunity": "Very wide gate apron and multi-lane layout (lanes on both sides of the guard booth) — ample room for an express/bypass lane.",
+    "dockDoorCount": "~20 dock doors across the foundry building's loading faces; a dock-door bank is visible in the SV east-facing gate shot. Approximate.",
+    "dropArea": "Few unaccompanied drop trailers observed (~8); the staging area is large but lightly used in the captured imagery. Band 0-10, medium confidence.",
+    "dropYard": "Large dedicated paved staging/trailer yard inside the gate; set true.",
+    "urbanRural": "Within the industrial fabric of Waterloo IA — residential neighborhood adjacent to the SW, US-218 highway corridor, the broader Waterloo Works campus around it — Urban.",
+    "multipleFacilities": "Multi-building foundry complex (4+ distinct large building masses) on one property.",
+    "entryLanes": "Estimated 2 inbound / 2 outbound from the gate layout; exact count partly obscured.",
+    "scale": "No truck scale positively identified; left false, flagged uncertain."
+  },
+  "method": "deep-audit"
+}

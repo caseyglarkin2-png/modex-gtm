@@ -1,0 +1,6298 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.7658,
+              39.6014
+            ],
+            [
+              -77.7556,
+              39.6014
+            ],
+            [
+              -77.7556,
+              39.6074
+            ],
+            [
+              -77.7658,
+              39.6074
+            ],
+            [
+              -77.7658,
+              39.6014
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Conair Distribution Center - Hagerstown MD",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 378,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 250,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 144,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.75845,
+              39.60255
+            ],
+            [
+              -77.75785,
+              39.60255
+            ],
+            [
+              -77.75785,
+              39.60295
+            ],
+            [
+              -77.75845,
+              39.60295
+            ],
+            [
+              -77.75845,
+              39.60255
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Conair Distribution Center - Hagerstown MD",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.7609,
+              39.6031
+            ],
+            [
+              -77.7566,
+              39.6031
+            ],
+            [
+              -77.7566,
+              39.6042
+            ],
+            [
+              -77.7609,
+              39.6042
+            ],
+            [
+              -77.7609,
+              39.6031
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Conair Distribution Center - Hagerstown MD",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.7624,
+              39.6037
+            ],
+            [
+              -77.7618,
+              39.6037
+            ],
+            [
+              -77.7618,
+              39.6052
+            ],
+            [
+              -77.7624,
+              39.6052
+            ],
+            [
+              -77.7624,
+              39.6037
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Conair Distribution Center - Hagerstown MD",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.762,
+              39.6054
+            ],
+            [
+              -77.756,
+              39.6054
+            ],
+            [
+              -77.756,
+              39.6059
+            ],
+            [
+              -77.762,
+              39.6059
+            ],
+            [
+              -77.762,
+              39.6054
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Conair Distribution Center - Hagerstown MD",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.7594,
+              39.6029
+            ],
+            [
+              -77.758,
+              39.6029
+            ],
+            [
+              -77.758,
+              39.6033
+            ],
+            [
+              -77.7594,
+              39.6033
+            ],
+            [
+              -77.7594,
+              39.6029
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Conair Distribution Center - Hagerstown MD",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.4262,
+              33.4106
+            ],
+            [
+              -112.418,
+              33.4106
+            ],
+            [
+              -112.418,
+              33.414
+            ],
+            [
+              -112.4262,
+              33.414
+            ],
+            [
+              -112.4262,
+              33.4106
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Abercrombie & Fitch Distribution Center - Goodyear AZ",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 71,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.4216,
+              33.4132
+            ],
+            [
+              -112.421,
+              33.4132
+            ],
+            [
+              -112.421,
+              33.41355
+            ],
+            [
+              -112.4216,
+              33.41355
+            ],
+            [
+              -112.4216,
+              33.4132
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Abercrombie & Fitch Distribution Center - Goodyear AZ",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.4258,
+              33.41335
+            ],
+            [
+              -112.4182,
+              33.41335
+            ],
+            [
+              -112.4182,
+              33.41395
+            ],
+            [
+              -112.4258,
+              33.41395
+            ],
+            [
+              -112.4258,
+              33.41335
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Abercrombie & Fitch Distribution Center - Goodyear AZ",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.419,
+              33.4127
+            ],
+            [
+              -112.4182,
+              33.4127
+            ],
+            [
+              -112.4182,
+              33.4133
+            ],
+            [
+              -112.419,
+              33.4133
+            ],
+            [
+              -112.419,
+              33.4127
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Abercrombie & Fitch Distribution Center - Goodyear AZ",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.4258,
+              33.4131
+            ],
+            [
+              -112.4184,
+              33.4131
+            ],
+            [
+              -112.4184,
+              33.4134
+            ],
+            [
+              -112.4258,
+              33.4134
+            ],
+            [
+              -112.4258,
+              33.4131
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Abercrombie & Fitch Distribution Center - Goodyear AZ",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.4258,
+              33.4109
+            ],
+            [
+              -112.4184,
+              33.4109
+            ],
+            [
+              -112.4184,
+              33.41125
+            ],
+            [
+              -112.4258,
+              33.41125
+            ],
+            [
+              -112.4258,
+              33.4109
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Abercrombie & Fitch Distribution Center - Goodyear AZ",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.4222,
+              33.4132
+            ],
+            [
+              -112.4208,
+              33.4132
+            ],
+            [
+              -112.4208,
+              33.41335
+            ],
+            [
+              -112.4222,
+              33.41335
+            ],
+            [
+              -112.4222,
+              33.4132
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Abercrombie & Fitch Distribution Center - Goodyear AZ",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.3493,
+              31.7685
+            ],
+            [
+              -81.3457,
+              31.7685
+            ],
+            [
+              -81.3457,
+              31.7721
+            ],
+            [
+              -81.3493,
+              31.7721
+            ],
+            [
+              -81.3493,
+              31.7685
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Hasbro Flagship Distribution Center - Midway GA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 38,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.3487,
+              31.7692
+            ],
+            [
+              -81.3481,
+              31.7692
+            ],
+            [
+              -81.3481,
+              31.76955
+            ],
+            [
+              -81.3487,
+              31.76955
+            ],
+            [
+              -81.3487,
+              31.7692
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Hasbro Flagship Distribution Center - Midway GA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.3479,
+              31.7693
+            ],
+            [
+              -81.346,
+              31.7693
+            ],
+            [
+              -81.346,
+              31.7715
+            ],
+            [
+              -81.3479,
+              31.7715
+            ],
+            [
+              -81.3479,
+              31.7693
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Hasbro Flagship Distribution Center - Midway GA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.3481,
+              31.7693
+            ],
+            [
+              -81.3462,
+              31.7693
+            ],
+            [
+              -81.3462,
+              31.7716
+            ],
+            [
+              -81.3481,
+              31.7716
+            ],
+            [
+              -81.3481,
+              31.7693
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Hasbro Flagship Distribution Center - Midway GA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.3491,
+              31.769
+            ],
+            [
+              -81.3476,
+              31.769
+            ],
+            [
+              -81.3476,
+              31.7713
+            ],
+            [
+              -81.3491,
+              31.7713
+            ],
+            [
+              -81.3491,
+              31.769
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Hasbro Flagship Distribution Center - Midway GA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.54,
+              33.5505
+            ],
+            [
+              -84.535,
+              33.5505
+            ],
+            [
+              -84.535,
+              33.5546
+            ],
+            [
+              -84.54,
+              33.5546
+            ],
+            [
+              -84.54,
+              33.5505
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Fairburn GA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 115,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 52,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5396,
+              33.5508
+            ],
+            [
+              -84.5364,
+              33.5508
+            ],
+            [
+              -84.5364,
+              33.5534
+            ],
+            [
+              -84.5396,
+              33.5534
+            ],
+            [
+              -84.5396,
+              33.5508
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Fairburn GA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5394,
+              33.551
+            ],
+            [
+              -84.5366,
+              33.551
+            ],
+            [
+              -84.5366,
+              33.5536
+            ],
+            [
+              -84.5394,
+              33.5536
+            ],
+            [
+              -84.5394,
+              33.551
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Fairburn GA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.487,
+              39.6037
+            ],
+            [
+              -86.4805,
+              39.6037
+            ],
+            [
+              -86.4805,
+              39.6076
+            ],
+            [
+              -86.487,
+              39.6076
+            ],
+            [
+              -86.487,
+              39.6037
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Super Hub - Clayton IN",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 220,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 60,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4816,
+              39.6063
+            ],
+            [
+              -86.481,
+              39.6063
+            ],
+            [
+              -86.481,
+              39.6067
+            ],
+            [
+              -86.4816,
+              39.6067
+            ],
+            [
+              -86.4816,
+              39.6063
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Super Hub - Clayton IN",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4865,
+              39.6062
+            ],
+            [
+              -86.481,
+              39.6062
+            ],
+            [
+              -86.481,
+              39.6069
+            ],
+            [
+              -86.4865,
+              39.6069
+            ],
+            [
+              -86.4865,
+              39.6062
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Super Hub - Clayton IN",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4865,
+              39.6039
+            ],
+            [
+              -86.481,
+              39.6039
+            ],
+            [
+              -86.481,
+              39.6046
+            ],
+            [
+              -86.4865,
+              39.6046
+            ],
+            [
+              -86.4865,
+              39.6039
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Super Hub - Clayton IN",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4864,
+              39.606
+            ],
+            [
+              -86.4812,
+              39.606
+            ],
+            [
+              -86.4812,
+              39.60635
+            ],
+            [
+              -86.4864,
+              39.60635
+            ],
+            [
+              -86.4864,
+              39.606
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Super Hub - Clayton IN",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4864,
+              39.6044
+            ],
+            [
+              -86.4812,
+              39.6044
+            ],
+            [
+              -86.4812,
+              39.60475
+            ],
+            [
+              -86.4864,
+              39.60475
+            ],
+            [
+              -86.4864,
+              39.6044
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Super Hub - Clayton IN",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.48697,
+              40.0382
+            ],
+            [
+              -86.48363,
+              40.0382
+            ],
+            [
+              -86.48363,
+              40.0445
+            ],
+            [
+              -86.48697,
+              40.0445
+            ],
+            [
+              -86.48697,
+              40.0382
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Lebanon IN",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 49.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.48655,
+              40.03855
+            ],
+            [
+              -86.48595,
+              40.03855
+            ],
+            [
+              -86.48595,
+              40.03895
+            ],
+            [
+              -86.48655,
+              40.03895
+            ],
+            [
+              -86.48655,
+              40.03855
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Lebanon IN",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.48745,
+              40.04205
+            ],
+            [
+              -86.48645,
+              40.04205
+            ],
+            [
+              -86.48645,
+              40.04305
+            ],
+            [
+              -86.48745,
+              40.04305
+            ],
+            [
+              -86.48745,
+              40.04205
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Lebanon IN",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.48655,
+              40.03955
+            ],
+            [
+              -86.48545,
+              40.03955
+            ],
+            [
+              -86.48545,
+              40.04265
+            ],
+            [
+              -86.48655,
+              40.04265
+            ],
+            [
+              -86.48655,
+              40.03955
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Lebanon IN",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.38505,
+              39.96135
+            ],
+            [
+              -86.37965,
+              39.96135
+            ],
+            [
+              -86.37965,
+              39.96565
+            ],
+            [
+              -86.38505,
+              39.96565
+            ],
+            [
+              -86.38505,
+              39.96135
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Whitestown IN",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 76,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 140,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 55,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.38475,
+              39.96235
+            ],
+            [
+              -86.38405,
+              39.96235
+            ],
+            [
+              -86.38405,
+              39.96285
+            ],
+            [
+              -86.38475,
+              39.96285
+            ],
+            [
+              -86.38475,
+              39.96235
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Whitestown IN",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.38465,
+              39.96255
+            ],
+            [
+              -86.38205,
+              39.96255
+            ],
+            [
+              -86.38205,
+              39.96545
+            ],
+            [
+              -86.38465,
+              39.96545
+            ],
+            [
+              -86.38465,
+              39.96255
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Whitestown IN",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.38215,
+              39.96155
+            ],
+            [
+              -86.37985,
+              39.96155
+            ],
+            [
+              -86.37985,
+              39.96445
+            ],
+            [
+              -86.38215,
+              39.96445
+            ],
+            [
+              -86.38215,
+              39.96155
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Whitestown IN",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.38445,
+              39.96305
+            ],
+            [
+              -86.38215,
+              39.96305
+            ],
+            [
+              -86.38215,
+              39.96535
+            ],
+            [
+              -86.38445,
+              39.96535
+            ],
+            [
+              -86.38445,
+              39.96305
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Whitestown IN",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.38235,
+              39.96165
+            ],
+            [
+              -86.38015,
+              39.96165
+            ],
+            [
+              -86.38015,
+              39.96395
+            ],
+            [
+              -86.38235,
+              39.96395
+            ],
+            [
+              -86.38235,
+              39.96165
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Whitestown IN",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.35005,
+              40.4583
+            ],
+            [
+              -75.345,
+              40.4583
+            ],
+            [
+              -75.345,
+              40.4632
+            ],
+            [
+              -75.35005,
+              40.4632
+            ],
+            [
+              -75.35005,
+              40.4583
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO IKEA Customer Distribution Center - Quakertown PA",
+        "type": "Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 57,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.3466,
+              40.4585
+            ],
+            [
+              -75.3458,
+              40.4585
+            ],
+            [
+              -75.3458,
+              40.45905
+            ],
+            [
+              -75.3466,
+              40.45905
+            ],
+            [
+              -75.3466,
+              40.4585
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO IKEA Customer Distribution Center - Quakertown PA",
+        "type": "Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.3473,
+              40.45855
+            ],
+            [
+              -75.3452,
+              40.45855
+            ],
+            [
+              -75.3452,
+              40.4601
+            ],
+            [
+              -75.3473,
+              40.4601
+            ],
+            [
+              -75.3473,
+              40.45855
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO IKEA Customer Distribution Center - Quakertown PA",
+        "type": "Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.3472,
+              40.45895
+            ],
+            [
+              -75.3453,
+              40.45895
+            ],
+            [
+              -75.3453,
+              40.46245
+            ],
+            [
+              -75.3472,
+              40.46245
+            ],
+            [
+              -75.3472,
+              40.45895
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO IKEA Customer Distribution Center - Quakertown PA",
+        "type": "Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.34965,
+              40.46095
+            ],
+            [
+              -75.3473,
+              40.46095
+            ],
+            [
+              -75.3473,
+              40.46285
+            ],
+            [
+              -75.34965,
+              40.46285
+            ],
+            [
+              -75.34965,
+              40.46095
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO IKEA Customer Distribution Center - Quakertown PA",
+        "type": "Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.238,
+              40.20305
+            ],
+            [
+              -77.2287,
+              40.20305
+            ],
+            [
+              -77.2287,
+              40.2068
+            ],
+            [
+              -77.238,
+              40.2068
+            ],
+            [
+              -77.238,
+              40.20305
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Carlisle PA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 78,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.23755,
+              40.2052
+            ],
+            [
+              -77.237,
+              40.2052
+            ],
+            [
+              -77.237,
+              40.2056
+            ],
+            [
+              -77.23755,
+              40.2056
+            ],
+            [
+              -77.23755,
+              40.2052
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Carlisle PA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.23055,
+              40.20355
+            ],
+            [
+              -77.229,
+              40.20355
+            ],
+            [
+              -77.229,
+              40.2062
+            ],
+            [
+              -77.23055,
+              40.2062
+            ],
+            [
+              -77.23055,
+              40.20355
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Carlisle PA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.2374,
+              40.20545
+            ],
+            [
+              -77.2298,
+              40.20545
+            ],
+            [
+              -77.2298,
+              40.2065
+            ],
+            [
+              -77.2374,
+              40.2065
+            ],
+            [
+              -77.2374,
+              40.20545
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Carlisle PA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.2372,
+              40.20335
+            ],
+            [
+              -77.2298,
+              40.20335
+            ],
+            [
+              -77.2298,
+              40.20435
+            ],
+            [
+              -77.2372,
+              40.20435
+            ],
+            [
+              -77.2372,
+              40.20335
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Carlisle PA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.2377,
+              40.20475
+            ],
+            [
+              -77.237,
+              40.20475
+            ],
+            [
+              -77.237,
+              40.2056
+            ],
+            [
+              -77.2377,
+              40.2056
+            ],
+            [
+              -77.2377,
+              40.20475
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Carlisle PA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.3176,
+              40.6087
+            ],
+            [
+              -75.3132,
+              40.6087
+            ],
+            [
+              -75.3132,
+              40.613
+            ],
+            [
+              -75.3176,
+              40.613
+            ],
+            [
+              -75.3176,
+              40.6087
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Bethlehem PA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 150,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 44,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.31708,
+              40.60887
+            ],
+            [
+              -75.31662,
+              40.60887
+            ],
+            [
+              -75.31662,
+              40.60923
+            ],
+            [
+              -75.31708,
+              40.60923
+            ],
+            [
+              -75.31708,
+              40.60887
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Bethlehem PA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.3168,
+              40.60955
+            ],
+            [
+              -75.31575,
+              40.60955
+            ],
+            [
+              -75.31575,
+              40.6128
+            ],
+            [
+              -75.3168,
+              40.6128
+            ],
+            [
+              -75.3168,
+              40.60955
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Bethlehem PA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.3143,
+              40.60975
+            ],
+            [
+              -75.3133,
+              40.60975
+            ],
+            [
+              -75.3133,
+              40.61215
+            ],
+            [
+              -75.3143,
+              40.61215
+            ],
+            [
+              -75.3143,
+              40.60975
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Bethlehem PA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.3165,
+              40.60955
+            ],
+            [
+              -75.31585,
+              40.60955
+            ],
+            [
+              -75.31585,
+              40.6127
+            ],
+            [
+              -75.3165,
+              40.6127
+            ],
+            [
+              -75.3165,
+              40.60955
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Bethlehem PA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.31415,
+              40.6098
+            ],
+            [
+              -75.3136,
+              40.6098
+            ],
+            [
+              -75.3136,
+              40.6121
+            ],
+            [
+              -75.31415,
+              40.6121
+            ],
+            [
+              -75.31415,
+              40.6098
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Bethlehem PA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.3172,
+              40.6084
+            ],
+            [
+              -75.3164,
+              40.6084
+            ],
+            [
+              -75.3164,
+              40.609
+            ],
+            [
+              -75.3172,
+              40.609
+            ],
+            [
+              -75.3172,
+              40.6084
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Bethlehem PA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.7492,
+              40.2064
+            ],
+            [
+              -76.7438,
+              40.2064
+            ],
+            [
+              -76.7438,
+              40.2092
+            ],
+            [
+              -76.7492,
+              40.2092
+            ],
+            [
+              -76.7492,
+              40.2064
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Middletown PA",
+        "type": "Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 35.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.744,
+              40.20835
+            ],
+            [
+              -76.7434,
+              40.20835
+            ],
+            [
+              -76.7434,
+              40.20885
+            ],
+            [
+              -76.744,
+              40.20885
+            ],
+            [
+              -76.744,
+              40.20835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Middletown PA",
+        "type": "Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.7492,
+              40.2084
+            ],
+            [
+              -76.744,
+              40.2084
+            ],
+            [
+              -76.744,
+              40.2091
+            ],
+            [
+              -76.7492,
+              40.2091
+            ],
+            [
+              -76.7492,
+              40.2084
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Middletown PA",
+        "type": "Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.7492,
+              40.20815
+            ],
+            [
+              -76.744,
+              40.20815
+            ],
+            [
+              -76.744,
+              40.20855
+            ],
+            [
+              -76.7492,
+              40.20855
+            ],
+            [
+              -76.7492,
+              40.20815
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Middletown PA",
+        "type": "Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6182,
+              40.3072
+            ],
+            [
+              -76.6098,
+              40.3072
+            ],
+            [
+              -76.6098,
+              40.3132
+            ],
+            [
+              -76.6182,
+              40.3132
+            ],
+            [
+              -76.6182,
+              40.3072
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Palmyra PA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 220,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 117.7,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6179,
+              40.3074
+            ],
+            [
+              -76.6168,
+              40.3074
+            ],
+            [
+              -76.6168,
+              40.3081
+            ],
+            [
+              -76.6179,
+              40.3081
+            ],
+            [
+              -76.6179,
+              40.3074
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Palmyra PA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6182,
+              40.3123
+            ],
+            [
+              -76.6135,
+              40.3123
+            ],
+            [
+              -76.6135,
+              40.3132
+            ],
+            [
+              -76.6182,
+              40.3132
+            ],
+            [
+              -76.6182,
+              40.3123
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Palmyra PA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6135,
+              40.3123
+            ],
+            [
+              -76.6098,
+              40.3123
+            ],
+            [
+              -76.6098,
+              40.3132
+            ],
+            [
+              -76.6135,
+              40.3132
+            ],
+            [
+              -76.6135,
+              40.3123
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Palmyra PA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6115,
+              40.3096
+            ],
+            [
+              -76.6098,
+              40.3096
+            ],
+            [
+              -76.6098,
+              40.311
+            ],
+            [
+              -76.6115,
+              40.311
+            ],
+            [
+              -76.6115,
+              40.3096
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Palmyra PA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6182,
+              40.309
+            ],
+            [
+              -76.6155,
+              40.309
+            ],
+            [
+              -76.6155,
+              40.3098
+            ],
+            [
+              -76.6182,
+              40.3098
+            ],
+            [
+              -76.6182,
+              40.309
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Palmyra PA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 4
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6182,
+              40.3118
+            ],
+            [
+              -76.6099,
+              40.3118
+            ],
+            [
+              -76.6099,
+              40.3125
+            ],
+            [
+              -76.6182,
+              40.3125
+            ],
+            [
+              -76.6182,
+              40.3118
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Palmyra PA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6155,
+              40.3093
+            ],
+            [
+              -76.6115,
+              40.3093
+            ],
+            [
+              -76.6115,
+              40.31
+            ],
+            [
+              -76.6155,
+              40.31
+            ],
+            [
+              -76.6155,
+              40.3093
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Palmyra PA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.6186,
+              40.3095
+            ],
+            [
+              -76.6181,
+              40.3095
+            ],
+            [
+              -76.6181,
+              40.312
+            ],
+            [
+              -76.6186,
+              40.312
+            ],
+            [
+              -76.6186,
+              40.3095
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Palmyra PA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.8562,
+              40.0108
+            ],
+            [
+              -74.8507,
+              40.0108
+            ],
+            [
+              -74.8507,
+              40.017
+            ],
+            [
+              -74.8562,
+              40.017
+            ],
+            [
+              -74.8562,
+              40.0108
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO IKEA Distribution Center - Westampton NJ",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 280,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 67.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.8556,
+              40.0123
+            ],
+            [
+              -74.8546,
+              40.0123
+            ],
+            [
+              -74.8546,
+              40.013
+            ],
+            [
+              -74.8556,
+              40.013
+            ],
+            [
+              -74.8556,
+              40.0123
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO IKEA Distribution Center - Westampton NJ",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.856,
+              40.011
+            ],
+            [
+              -74.8544,
+              40.011
+            ],
+            [
+              -74.8544,
+              40.0168
+            ],
+            [
+              -74.856,
+              40.0168
+            ],
+            [
+              -74.856,
+              40.011
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO IKEA Distribution Center - Westampton NJ",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.8522,
+              40.011
+            ],
+            [
+              -74.8509,
+              40.011
+            ],
+            [
+              -74.8509,
+              40.0168
+            ],
+            [
+              -74.8522,
+              40.0168
+            ],
+            [
+              -74.8522,
+              40.011
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO IKEA Distribution Center - Westampton NJ",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.8558,
+              40.011
+            ],
+            [
+              -74.855,
+              40.011
+            ],
+            [
+              -74.855,
+              40.0168
+            ],
+            [
+              -74.8558,
+              40.0168
+            ],
+            [
+              -74.8558,
+              40.011
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO IKEA Distribution Center - Westampton NJ",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.8532,
+              40.011
+            ],
+            [
+              -74.8523,
+              40.011
+            ],
+            [
+              -74.8523,
+              40.0168
+            ],
+            [
+              -74.8532,
+              40.0168
+            ],
+            [
+              -74.8532,
+              40.011
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO IKEA Distribution Center - Westampton NJ",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3353,
+              39.943
+            ],
+            [
+              -83.3301,
+              39.943
+            ],
+            [
+              -83.3301,
+              39.9478
+            ],
+            [
+              -83.3353,
+              39.9478
+            ],
+            [
+              -83.3353,
+              39.943
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - West Jefferson OH",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 78,
+          "trailersVisible": 36,
+          "trailerParkingCapacity": 85,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 55.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3345,
+              39.9432
+            ],
+            [
+              -83.3337,
+              39.9432
+            ],
+            [
+              -83.3337,
+              39.9439
+            ],
+            [
+              -83.3345,
+              39.9439
+            ],
+            [
+              -83.3345,
+              39.9432
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - West Jefferson OH",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3347,
+              39.9431
+            ],
+            [
+              -83.3334,
+              39.9431
+            ],
+            [
+              -83.3334,
+              39.947
+            ],
+            [
+              -83.3347,
+              39.947
+            ],
+            [
+              -83.3347,
+              39.9431
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - West Jefferson OH",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.332,
+              39.9447
+            ],
+            [
+              -83.3301,
+              39.9447
+            ],
+            [
+              -83.3301,
+              39.9478
+            ],
+            [
+              -83.332,
+              39.9478
+            ],
+            [
+              -83.332,
+              39.9447
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - West Jefferson OH",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3342,
+              39.9431
+            ],
+            [
+              -83.3333,
+              39.9431
+            ],
+            [
+              -83.3333,
+              39.947
+            ],
+            [
+              -83.3342,
+              39.947
+            ],
+            [
+              -83.3342,
+              39.9431
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - West Jefferson OH",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3326,
+              39.9447
+            ],
+            [
+              -83.3317,
+              39.9447
+            ],
+            [
+              -83.3317,
+              39.9478
+            ],
+            [
+              -83.3326,
+              39.9478
+            ],
+            [
+              -83.3326,
+              39.9447
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - West Jefferson OH",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1955,
+              33.4095
+            ],
+            [
+              -84.1895,
+              33.4095
+            ],
+            [
+              -84.1895,
+              33.4128
+            ],
+            [
+              -84.1955,
+              33.4128
+            ],
+            [
+              -84.1955,
+              33.4095
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - McDonough GA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 50.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.195,
+              33.4099
+            ],
+            [
+              -84.194,
+              33.4099
+            ],
+            [
+              -84.194,
+              33.4106
+            ],
+            [
+              -84.195,
+              33.4106
+            ],
+            [
+              -84.195,
+              33.4099
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - McDonough GA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1954,
+              33.4097
+            ],
+            [
+              -84.1937,
+              33.4097
+            ],
+            [
+              -84.1937,
+              33.4113
+            ],
+            [
+              -84.1954,
+              33.4113
+            ],
+            [
+              -84.1954,
+              33.4097
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - McDonough GA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1944,
+              33.4117
+            ],
+            [
+              -84.1899,
+              33.4117
+            ],
+            [
+              -84.1899,
+              33.4128
+            ],
+            [
+              -84.1944,
+              33.4128
+            ],
+            [
+              -84.1944,
+              33.4117
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - McDonough GA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1942,
+              33.4101
+            ],
+            [
+              -84.1897,
+              33.4101
+            ],
+            [
+              -84.1897,
+              33.412
+            ],
+            [
+              -84.1942,
+              33.412
+            ],
+            [
+              -84.1942,
+              33.4101
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - McDonough GA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1949,
+              33.4115
+            ],
+            [
+              -84.1903,
+              33.4115
+            ],
+            [
+              -84.1903,
+              33.4128
+            ],
+            [
+              -84.1949,
+              33.4128
+            ],
+            [
+              -84.1949,
+              33.4115
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - McDonough GA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3176,
+              33.6164
+            ],
+            [
+              -84.3129,
+              33.6164
+            ],
+            [
+              -84.3129,
+              33.6242
+            ],
+            [
+              -84.3176,
+              33.6242
+            ],
+            [
+              -84.3176,
+              33.6164
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Forest Park GA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 208,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 280,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 48,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3142,
+              33.6166
+            ],
+            [
+              -84.3129,
+              33.6166
+            ],
+            [
+              -84.3129,
+              33.623
+            ],
+            [
+              -84.3142,
+              33.623
+            ],
+            [
+              -84.3142,
+              33.6166
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Forest Park GA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3148,
+              33.6166
+            ],
+            [
+              -84.3136,
+              33.6166
+            ],
+            [
+              -84.3136,
+              33.623
+            ],
+            [
+              -84.3148,
+              33.623
+            ],
+            [
+              -84.3148,
+              33.6166
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Forest Park GA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3169,
+              33.6218
+            ],
+            [
+              -84.3152,
+              33.6218
+            ],
+            [
+              -84.3152,
+              33.6236
+            ],
+            [
+              -84.3169,
+              33.6236
+            ],
+            [
+              -84.3169,
+              33.6218
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Forest Park GA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.4143,
+              37.7614
+            ],
+            [
+              -121.4102,
+              37.7614
+            ],
+            [
+              -121.4102,
+              37.7633
+            ],
+            [
+              -121.4143,
+              37.7633
+            ],
+            [
+              -121.4143,
+              37.7614
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Tracy CA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 57,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 92,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 19.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.4133,
+              37.7615
+            ],
+            [
+              -121.4108,
+              37.7615
+            ],
+            [
+              -121.4108,
+              37.7619
+            ],
+            [
+              -121.4133,
+              37.7619
+            ],
+            [
+              -121.4133,
+              37.7615
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Tracy CA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5151,
+              34.0552
+            ],
+            [
+              -117.5132,
+              34.0552
+            ],
+            [
+              -117.5132,
+              34.0625
+            ],
+            [
+              -117.5151,
+              34.0625
+            ],
+            [
+              -117.5151,
+              34.0552
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Fontana CA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 24,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 16,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5149,
+              34.0622
+            ],
+            [
+              -117.5144,
+              34.0622
+            ],
+            [
+              -117.5144,
+              34.0628
+            ],
+            [
+              -117.5149,
+              34.0628
+            ],
+            [
+              -117.5149,
+              34.0622
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Fontana CA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5149,
+              34.0554
+            ],
+            [
+              -117.5142,
+              34.0554
+            ],
+            [
+              -117.5142,
+              34.0622
+            ],
+            [
+              -117.5149,
+              34.0622
+            ],
+            [
+              -117.5149,
+              34.0554
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Fontana CA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.843,
+              35.7693
+            ],
+            [
+              -80.8398,
+              35.7693
+            ],
+            [
+              -80.8398,
+              35.7728
+            ],
+            [
+              -80.843,
+              35.7728
+            ],
+            [
+              -80.843,
+              35.7693
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Statesville NC",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 28,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.8422,
+              35.7701
+            ],
+            [
+              -80.8418,
+              35.7701
+            ],
+            [
+              -80.8418,
+              35.7705
+            ],
+            [
+              -80.8422,
+              35.7705
+            ],
+            [
+              -80.8422,
+              35.7701
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Statesville NC",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.842,
+              35.7696
+            ],
+            [
+              -80.8399,
+              35.7696
+            ],
+            [
+              -80.8399,
+              35.7702
+            ],
+            [
+              -80.842,
+              35.7702
+            ],
+            [
+              -80.842,
+              35.7696
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Statesville NC",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.8422,
+              35.7721
+            ],
+            [
+              -80.84,
+              35.7721
+            ],
+            [
+              -80.84,
+              35.7727
+            ],
+            [
+              -80.8422,
+              35.7727
+            ],
+            [
+              -80.8422,
+              35.7721
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Statesville NC",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.8421,
+              35.7699
+            ],
+            [
+              -80.84,
+              35.7699
+            ],
+            [
+              -80.84,
+              35.7704
+            ],
+            [
+              -80.8421,
+              35.7704
+            ],
+            [
+              -80.8421,
+              35.7699
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Statesville NC",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.8422,
+              35.7718
+            ],
+            [
+              -80.84,
+              35.7718
+            ],
+            [
+              -80.84,
+              35.7723
+            ],
+            [
+              -80.8422,
+              35.7723
+            ],
+            [
+              -80.8422,
+              35.7718
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Statesville NC",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.8429,
+              35.77
+            ],
+            [
+              -80.8421,
+              35.77
+            ],
+            [
+              -80.8421,
+              35.7709
+            ],
+            [
+              -80.8429,
+              35.7709
+            ],
+            [
+              -80.8429,
+              35.77
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Statesville NC",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.8148,
+              35.0565
+            ],
+            [
+              -81.8105,
+              35.0565
+            ],
+            [
+              -81.8105,
+              35.0635
+            ],
+            [
+              -81.8148,
+              35.0635
+            ],
+            [
+              -81.8148,
+              35.0565
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Cowpens SC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 75,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.8146,
+              35.057
+            ],
+            [
+              -81.813,
+              35.057
+            ],
+            [
+              -81.813,
+              35.0623
+            ],
+            [
+              -81.8146,
+              35.0623
+            ],
+            [
+              -81.8146,
+              35.057
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Cowpens SC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.8115,
+              35.0575
+            ],
+            [
+              -81.8105,
+              35.0575
+            ],
+            [
+              -81.8105,
+              35.0625
+            ],
+            [
+              -81.8115,
+              35.0625
+            ],
+            [
+              -81.8115,
+              35.0575
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Cowpens SC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.8142,
+              35.0573
+            ],
+            [
+              -81.8129,
+              35.0573
+            ],
+            [
+              -81.8129,
+              35.0622
+            ],
+            [
+              -81.8142,
+              35.0622
+            ],
+            [
+              -81.8142,
+              35.0573
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Cowpens SC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.8118,
+              35.0578
+            ],
+            [
+              -81.8108,
+              35.0578
+            ],
+            [
+              -81.8108,
+              35.0623
+            ],
+            [
+              -81.8118,
+              35.0623
+            ],
+            [
+              -81.8118,
+              35.0578
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Cowpens SC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3079,
+              32.8172
+            ],
+            [
+              -97.306,
+              32.8172
+            ],
+            [
+              -97.306,
+              32.8203
+            ],
+            [
+              -97.3079,
+              32.8203
+            ],
+            [
+              -97.3079,
+              32.8172
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Fort Worth TX (Sylvania)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 24,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 15.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3085,
+              32.81928
+            ],
+            [
+              -97.3079,
+              32.81928
+            ],
+            [
+              -97.3079,
+              32.81972
+            ],
+            [
+              -97.3085,
+              32.81972
+            ],
+            [
+              -97.3085,
+              32.81928
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Fort Worth TX (Sylvania)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.307,
+              32.8179
+            ],
+            [
+              -97.3064,
+              32.8179
+            ],
+            [
+              -97.3064,
+              32.8196
+            ],
+            [
+              -97.307,
+              32.8196
+            ],
+            [
+              -97.307,
+              32.8179
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Fort Worth TX (Sylvania)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3093,
+              32.62755
+            ],
+            [
+              -97.3048,
+              32.62755
+            ],
+            [
+              -97.3048,
+              32.63025
+            ],
+            [
+              -97.3093,
+              32.63025
+            ],
+            [
+              -97.3093,
+              32.62755
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Fort Worth TX (Everman)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 31.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3079,
+              32.62725
+            ],
+            [
+              -97.3072,
+              32.62725
+            ],
+            [
+              -97.3072,
+              32.6276
+            ],
+            [
+              -97.3079,
+              32.6276
+            ],
+            [
+              -97.3079,
+              32.62725
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Fort Worth TX (Everman)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3085,
+              32.62995
+            ],
+            [
+              -97.3056,
+              32.62995
+            ],
+            [
+              -97.3056,
+              32.63025
+            ],
+            [
+              -97.3085,
+              32.63025
+            ],
+            [
+              -97.3085,
+              32.62995
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Fort Worth TX (Everman)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3088,
+              32.6276
+            ],
+            [
+              -97.3054,
+              32.6276
+            ],
+            [
+              -97.3054,
+              32.62805
+            ],
+            [
+              -97.3088,
+              32.62805
+            ],
+            [
+              -97.3088,
+              32.6276
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Fort Worth TX (Everman)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3087,
+              32.62955
+            ],
+            [
+              -97.3054,
+              32.62955
+            ],
+            [
+              -97.3054,
+              32.63
+            ],
+            [
+              -97.3087,
+              32.63
+            ],
+            [
+              -97.3087,
+              32.62955
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Fort Worth TX (Everman)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3092,
+              32.6281
+            ],
+            [
+              -97.3089,
+              32.6281
+            ],
+            [
+              -97.3089,
+              32.6296
+            ],
+            [
+              -97.3092,
+              32.6296
+            ],
+            [
+              -97.3092,
+              32.6281
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Fort Worth TX (Everman)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2547,
+              29.8268
+            ],
+            [
+              -95.2503,
+              29.8268
+            ],
+            [
+              -95.2503,
+              29.8304
+            ],
+            [
+              -95.2547,
+              29.8304
+            ],
+            [
+              -95.2547,
+              29.8268
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Houston TX (Railwood)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 42.1,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.25385,
+              29.82835
+            ],
+            [
+              -95.25335,
+              29.82835
+            ],
+            [
+              -95.25335,
+              29.8287
+            ],
+            [
+              -95.25385,
+              29.8287
+            ],
+            [
+              -95.25385,
+              29.82835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Houston TX (Railwood)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2543,
+              29.8269
+            ],
+            [
+              -95.2506,
+              29.8269
+            ],
+            [
+              -95.2506,
+              29.82835
+            ],
+            [
+              -95.2543,
+              29.82835
+            ],
+            [
+              -95.2543,
+              29.8269
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Houston TX (Railwood)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2545,
+              29.8284
+            ],
+            [
+              -95.2506,
+              29.8284
+            ],
+            [
+              -95.2506,
+              29.8287
+            ],
+            [
+              -95.2545,
+              29.8287
+            ],
+            [
+              -95.2545,
+              29.8284
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Houston TX (Railwood)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2545,
+              29.83
+            ],
+            [
+              -95.2506,
+              29.83
+            ],
+            [
+              -95.2506,
+              29.83035
+            ],
+            [
+              -95.2545,
+              29.83035
+            ],
+            [
+              -95.2545,
+              29.83
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Houston TX (Railwood)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.4925,
+              29.9423
+            ],
+            [
+              -95.4883,
+              29.9423
+            ],
+            [
+              -95.4883,
+              29.9468
+            ],
+            [
+              -95.4925,
+              29.9468
+            ],
+            [
+              -95.4925,
+              29.9423
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Houston TX (West Greens)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 50.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.4905,
+              29.9438
+            ],
+            [
+              -95.4899,
+              29.9438
+            ],
+            [
+              -95.4899,
+              29.9442
+            ],
+            [
+              -95.4905,
+              29.9442
+            ],
+            [
+              -95.4905,
+              29.9438
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Houston TX (West Greens)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.4904,
+              29.9431
+            ],
+            [
+              -95.4887,
+              29.9431
+            ],
+            [
+              -95.4887,
+              29.9464
+            ],
+            [
+              -95.4904,
+              29.9464
+            ],
+            [
+              -95.4904,
+              29.9431
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Houston TX (West Greens)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.4921,
+              29.9425
+            ],
+            [
+              -95.4908,
+              29.9425
+            ],
+            [
+              -95.4908,
+              29.9444
+            ],
+            [
+              -95.4921,
+              29.9444
+            ],
+            [
+              -95.4921,
+              29.9425
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Houston TX (West Greens)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0336,
+              32.9306
+            ],
+            [
+              -97.0305,
+              32.9306
+            ],
+            [
+              -97.0305,
+              32.9331
+            ],
+            [
+              -97.0336,
+              32.9331
+            ],
+            [
+              -97.0336,
+              32.9306
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Grapevine TX",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 19.9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0334,
+              32.9323
+            ],
+            [
+              -97.0329,
+              32.9323
+            ],
+            [
+              -97.0329,
+              32.9327
+            ],
+            [
+              -97.0334,
+              32.9327
+            ],
+            [
+              -97.0334,
+              32.9323
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Grapevine TX",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0334,
+              32.9318
+            ],
+            [
+              -97.032,
+              32.9318
+            ],
+            [
+              -97.032,
+              32.9331
+            ],
+            [
+              -97.0334,
+              32.9331
+            ],
+            [
+              -97.0334,
+              32.9318
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Grapevine TX",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0325,
+              32.9309
+            ],
+            [
+              -97.031,
+              32.9309
+            ],
+            [
+              -97.031,
+              32.9321
+            ],
+            [
+              -97.0325,
+              32.9321
+            ],
+            [
+              -97.0325,
+              32.9309
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Grapevine TX",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0788,
+              32.6782
+            ],
+            [
+              -97.0756,
+              32.6782
+            ],
+            [
+              -97.0756,
+              32.6798
+            ],
+            [
+              -97.0788,
+              32.6798
+            ],
+            [
+              -97.0788,
+              32.6782
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Arlington TX",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 10.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0772,
+              32.6797
+            ],
+            [
+              -97.0765,
+              32.6797
+            ],
+            [
+              -97.0765,
+              32.67995
+            ],
+            [
+              -97.0772,
+              32.67995
+            ],
+            [
+              -97.0772,
+              32.6797
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Arlington TX",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0782,
+              32.6793
+            ],
+            [
+              -97.0758,
+              32.6793
+            ],
+            [
+              -97.0758,
+              32.6798
+            ],
+            [
+              -97.0782,
+              32.6798
+            ],
+            [
+              -97.0782,
+              32.6793
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Arlington TX",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0783,
+              32.6791
+            ],
+            [
+              -97.0759,
+              32.6791
+            ],
+            [
+              -97.0759,
+              32.67945
+            ],
+            [
+              -97.0783,
+              32.67945
+            ],
+            [
+              -97.0783,
+              32.6791
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Arlington TX",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.9937,
+              40.7204
+            ],
+            [
+              -111.9915,
+              40.7204
+            ],
+            [
+              -111.9915,
+              40.72615
+            ],
+            [
+              -111.9937,
+              40.72615
+            ],
+            [
+              -111.9937,
+              40.7204
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - West Valley City UT",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 27.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.9925,
+              40.7208
+            ],
+            [
+              -111.99155,
+              40.7208
+            ],
+            [
+              -111.99155,
+              40.7228
+            ],
+            [
+              -111.9925,
+              40.7228
+            ],
+            [
+              -111.9925,
+              40.7208
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - West Valley City UT",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.9936,
+              40.7206
+            ],
+            [
+              -111.9933,
+              40.7206
+            ],
+            [
+              -111.9933,
+              40.726
+            ],
+            [
+              -111.9936,
+              40.726
+            ],
+            [
+              -111.9936,
+              40.7206
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - West Valley City UT",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.9923,
+              40.7206
+            ],
+            [
+              -111.992,
+              40.7206
+            ],
+            [
+              -111.992,
+              40.726
+            ],
+            [
+              -111.9923,
+              40.726
+            ],
+            [
+              -111.9923,
+              40.7206
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - West Valley City UT",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.9447,
+              45.5533
+            ],
+            [
+              -122.9425,
+              45.5533
+            ],
+            [
+              -122.9425,
+              45.5565
+            ],
+            [
+              -122.9447,
+              45.5565
+            ],
+            [
+              -122.9447,
+              45.5533
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Hillsboro OR",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 15,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.9447,
+              45.5542
+            ],
+            [
+              -122.9442,
+              45.5542
+            ],
+            [
+              -122.9442,
+              45.556
+            ],
+            [
+              -122.9447,
+              45.556
+            ],
+            [
+              -122.9447,
+              45.5542
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Hillsboro OR",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.9444,
+              45.554
+            ],
+            [
+              -122.9441,
+              45.554
+            ],
+            [
+              -122.9441,
+              45.5561
+            ],
+            [
+              -122.9444,
+              45.5561
+            ],
+            [
+              -122.9444,
+              45.554
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Hillsboro OR",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.8895,
+              45.4905
+            ],
+            [
+              -122.882,
+              45.4905
+            ],
+            [
+              -122.882,
+              45.496
+            ],
+            [
+              -122.8895,
+              45.496
+            ],
+            [
+              -122.8895,
+              45.4905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Aloha OR",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 88,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.9295,
+              32.9885
+            ],
+            [
+              -96.927,
+              32.9885
+            ],
+            [
+              -96.927,
+              32.9908
+            ],
+            [
+              -96.9295,
+              32.9908
+            ],
+            [
+              -96.9295,
+              32.9885
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Carrollton TX",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 5,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 11,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.9281,
+              32.9886
+            ],
+            [
+              -96.9271,
+              32.9886
+            ],
+            [
+              -96.9271,
+              32.9901
+            ],
+            [
+              -96.9281,
+              32.9901
+            ],
+            [
+              -96.9281,
+              32.9886
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "gxo",
+        "name": "GXO Logistics Distribution Center - Carrollton TX",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    }
+  ]
+}

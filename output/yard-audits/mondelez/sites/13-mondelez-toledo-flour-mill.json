@@ -1,0 +1,45 @@
+{
+  "name": "Mondelez Toledo Flour Mill - Toledo OH",
+  "type": "Manufacturing - flour mill (input/ingredient)",
+  "coords": { "lat": 41.66510, "lng": -83.49930 },
+  "geofences": {
+    "perimeter": { "south": 41.66300, "west": -83.50220, "north": 41.66720, "east": -83.49650 },
+    "truckGate": { "south": 41.66400, "west": -83.49850, "north": 41.66490, "east": -83.49750 },
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 6, "trailersVisible": 2, "trailerParkingCapacity": 10,
+    "truckGateCount": 1, "buildingCount": 6, "siteAreaAcres": 22.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.66510,-83.49930,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "scale"],
+  "fieldNotes": {
+    "location": "Positively resolved to 2221 Front St, Toledo OH 43605 — the historic Toledo Flour Mill on the east bank of the Maumee River in the Birmingham/Ironville industrial district of East Toledo. Street View (Aug 2023) shows the riverside grain-elevator silo cluster branded 'Mondelez'. Roster city-centroid (41.6528,-83.5379) was ~2km SW in a downtown riverfront park; corrected via Nominatim geocode of the street address plus satellite + Street View confirmation. NOTE: Mennel Milling acquired this mill from Mondelez in November 2025 — under Mondelez ownership for the campaign period, now Mennel-operated.",
+    "facilityType": "Bulk soft-wheat flour mill, not a packaged-goods DC. ~61,000 sq ft six-story mill plus extensive grain-elevator silos; 4.9-5.5M bushel storage. Truck activity is bulk flour loadout and bulk wheat receiving via silo spouts, plus heavy rail; there is no conventional packaged-goods dock-door bank.",
+    "truckGate": "TRUE — the property is enclosed by chain-link fencing along Front Street (visible in Street View); the truck driveway off Front St passes through a fenced entry. A controlled fenced industrial entrance.",
+    "guardShack": "FALSE — no staffed guard booth visible at the Front St entrance in 2022/2023 Street View or in satellite. The low brick building at the frontage is the mill office, not a gate booth.",
+    "remoteGs": "TRUE — there is a controlled/fenced truck gate but no guard shack, implying self / kiosk check-in at the mill office.",
+    "dockDoors": "0-10 — bulk flour loadout points, not a packaged-goods dock bank; only a handful of truck loadout positions. Low confidence on exact count.",
+    "dropArea": "NONE — no marked drop-trailer parking; this is a bulk mill, trucks load and leave.",
+    "scale": "TRUE (medium confidence) — a truck scale is standard at a grain/flour mill for inbound wheat and outbound flour weighing; a small scale-house structure is consistent with the imagery near the entrance, though not unambiguously resolved.",
+    "railServed": "TRUE — extensive rail yard with many curving spurs woven through the entire property serving the grain elevators; a railroad-crossing marking is painted on Front St. River barge dock also present.",
+    "multipleFacilities": "TRUE — the site is a campus of multiple distinct structures: the milling building, separate grain-elevator silo banks, warehouse/loadout buildings, and the office.",
+    "urbanRural": "Urban — dense East Toledo industrial/residential fabric on the Maumee riverfront."
+  },
+  "method": "deep-audit"
+}

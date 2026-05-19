@@ -1,0 +1,50 @@
+{
+  "name": "DHL Supply Chain - Whitestown DC - Whitestown IN",
+  "type": "Distribution Center",
+  "coords": { "lat": 39.96780, "lng": -86.37660 },
+  "geofences": {
+    "perimeter": { "south": 39.96650, "west": -86.37800, "north": 39.96930, "east": -86.37540 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 39.96820, "west": -86.37700, "north": 39.96910, "east": -86.37580 }
+    ],
+    "dockAprons": [
+      { "south": 39.96720, "west": -86.37760, "north": 39.96900, "east": -86.37640 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35, "trailersVisible": 42, "trailerParkingCapacity": 70,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 15.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.96780,-86.37660,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "dockDoors", "dropArea",
+    "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "siteAreaAcres",
+    "drivewayLong", "drivewayShort"
+  ],
+  "fieldNotes": {
+    "location": "IDENTIFICATION UNCERTAIN. Roster lat/lng was geocoded from '5000 Anson Blvd, Whitestown IN' but moved 2755m - a large displacement indicating low geocoding precision. The Anson logistics park (Whitestown, off I-65) contains dozens of near-identical speculative warehouses, several vacant in current imagery; no DHL signage could be confirmed in available Street View (most park-interior panos are June-2019 pre-construction). Audited the building AT the geocoded coordinate (39.9678,-86.3766) as the best-available candidate - it is a front-load warehouse with operational dock activity (trailers backed in), consistent with DHL having occupied 5000 Anson Blvd since Q1 2020.",
+    "building": "Single front-load (single-sided) warehouse running SW-NE, ~250m long; dock doors on the NW long face only. SE face borders I-65 with an employee-parking buffer strip and no docks.",
+    "truckGate": "No controlled gate or guard booth visible - access is via open driveways within the Anson industrial park (typical of spec buildings). truckGate=false / guardShack=false, but flagged uncertain as the exact building/entry could not be confirmed.",
+    "dockDoors": "~30-40 dock doors on the single NW face -> banded 25-50; low confidence.",
+    "dropYard": "A short row of ~12 drop-yard trailers in the truck court NW of the building.",
+    "urbanRural": "Whitestown / Anson is an edge-of-metro logistics park surrounded by farmland and I-65; classed Rural per the rubric (small-town industrial leans Rural).",
+    "siteAreaAcres": "Estimated ~15 acres for the diagonal building parcel + truck court; the perimeter bounding box overstates the diagonal lot. Low confidence.",
+    "recommendation": "Re-verify the exact DHL building among the Anson cluster (DHL also has nearby Whitestown sites at 3930 S 500 E and a Fishback Creek facility). Flag for human review of the facility identification."
+  },
+  "method": "deep-audit"
+}

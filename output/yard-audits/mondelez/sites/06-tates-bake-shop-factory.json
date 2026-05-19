@@ -1,0 +1,60 @@
+{
+  "name": "Tate's Bake Shop Factory - East Moriches NY",
+  "type": "Manufacturing - cookie bakery",
+  "coords": { "lat": 40.81055, "lng": -72.76535 },
+  "geofences": {
+    "perimeter": { "south": 40.80980, "west": -72.76610, "north": 40.81170, "east": -72.76425 },
+    "truckGate": { "south": 40.81055, "west": -72.76475, "north": 40.81085, "east": -72.76430 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 40.81080, "west": -72.76555, "north": 40.81105, "east": -72.76490 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 5,
+    "trailersVisible": 4,
+    "trailerParkingCapacity": 6,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 7.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.81055,-72.76535,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Single open driveway off Pine St with a TATE'S monument sign at the corner; no barrier arm, no controlled checkpoint. A short decorative fence segment exists near the sign but is pedestrian-scale, not a truck barrier.",
+    "guardShack": "No staffed booth at the entrance. Only a small office annex on the NE side of the building, well inside the property, not a gate-side guard structure.",
+    "backupSensitive": "Driveway meets a quiet two-lane public road with the dock apron close to the entrance and very little internal stacking room; a truck queue would back toward the road.",
+    "dockDoors": "Small 40,000 sq ft bakery. Loading occurs on the north building face; satellite z21 shows ~4 trailers/units backed against the wall plus a couple of additional bays. Estimated band 0-10.",
+    "dropArea": "A few trailers parked along the north apron without tractors; small count, band 0-10.",
+    "drivewayShort": "Gate-to-dock approach holds only 1-2 trucks; loading apron is immediately inside the entrance.",
+    "buildingCount": "Main bakery building plus a small attached/adjacent office annex on the NE corner."
+  },
+  "method": "deep-audit"
+}

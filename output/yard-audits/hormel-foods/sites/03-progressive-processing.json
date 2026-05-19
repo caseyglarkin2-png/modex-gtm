@@ -1,0 +1,49 @@
+{
+  "name": "Progressive Processing - Dubuque IA",
+  "type": "Production Facility",
+  "coords": { "lat": 42.48790, "lng": -90.76610 },
+  "geofences": {
+    "perimeter": { "south": 42.48620, "west": -90.76870, "north": 42.48950, "east": -90.76340 },
+    "truckGate": { "south": 42.48650, "west": -90.76590, "north": 42.48700, "east": -90.76510 },
+    "dropYards": [
+      { "south": 42.48700, "west": -90.76800, "north": 42.48800, "east": -90.76690 },
+      { "south": 42.48680, "west": -90.76720, "north": 42.48720, "east": -90.76590 }
+    ],
+    "dockAprons": [
+      { "south": 42.48680, "west": -90.76760, "north": 42.48730, "east": -90.76560 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30, "trailersVisible": 55, "trailerParkingCapacity": 80,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 37.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.4879,-90.7661,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "urbanRural", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Roster address '11400 Stratton Dr' and coordinates were wrong (geocode APPROXIMATE, 9396 m off). Web research found the real address: 1205 Chavenelle Court, Dubuque IA 52002, in the Dubuque Industrial Center West. Locked center 42.4879,-90.7661 — a 348,000 sq ft Hormel-owned production plant (Compleats meals, chunk chicken, bacon toppings, SPAM), opened 2010.",
+    "truckGate": "No barrier arm, gate, or checkpoint at the plant entrance; no perimeter fence around the property. The plant is set back behind a landscaped lawn off the public industrial-park road (Chavenelle Court). Open access driveway with a wide truck apron. Classified false.",
+    "guardShack": "No staffed booth at any controlled entrance — fully open site.",
+    "drivewayLong": "Long landscaped approach plus a very wide internal truck apron easily holds a 3+ truck queue.",
+    "fastLaneOpportunity": "Very wide unused paved apron south of the dock face leaves ample room to add a bypass/express lane.",
+    "dockDoors": "25-50 band — clear dock face along the south building wall with ~20+ trailers backed in plus additional dock positions. Overhead estimate.",
+    "dropArea": "25-50 band — multiple rows of parked trailers in the SW drop yard (gravel/paved), ~30-40 trailers without tractors.",
+    "dropYard": "Dedicated SW trailer-storage lot, partly unpaved, separate from the active dock apron.",
+    "urbanRural": "Plant sits in an industrial park on the edge of Dubuque with farmland immediately to the south; borderline call, scored Rural per the 'when torn, choose Rural' guidance. Flagged uncertain.",
+    "railServed": "No rail spur into the property."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,49 @@
+{
+  "name": "CJ Logistics - Tinley Park IL",
+  "type": "Distribution Center",
+  "coords": { "lat": 41.585600, "lng": -87.733400 },
+  "geofences": {
+    "perimeter": { "south": 41.583800, "west": -87.735500, "north": 41.587700, "east": -87.731000 },
+    "truckGate": { "south": 41.583900, "west": -87.735300, "north": 41.584500, "east": -87.734600 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 41.584700, "west": -87.735000, "north": 41.587000, "east": -87.734200 }
+    ],
+    "staging": { "south": 41.584700, "west": -87.735000, "north": 41.587000, "east": -87.734200 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 65, "trailersVisible": 8, "trailerParkingCapacity": 70,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 40.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.585600,-87.733400,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "dockDoors", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Single truck entrance is an open driveway off S Cicero Ave at the SW corner of the property. Pavement turn-arrow markings are present but there is no barrier arm, sliding/swing gate, guard booth, or checkpoint pinch-point in z19-z20 satellite (2026) or 2024 Street View. Open driveway = no controlled truck gate.",
+    "guardShack": "No guard booth structure at the entrance in any view.",
+    "remoteGs": "False - no truck gate exists.",
+    "dockDoors": "Main dock bank on the west face fronting a wide truck court; a second dock band on the south face fronts an employee parking lot. ~65 doors estimated - low confidence, band could be 25-50 or 50+.",
+    "dropArea": "Truck court is nearly empty in 2026 imagery - facility appears lightly utilized; no marked drop-trailer stalls.",
+    "dropYard": "No dedicated trailer-storage lot - the west truck court holds only a few trailers.",
+    "drivewayLong": "Wide deep concrete truck court between the road entrance and the west dock face; ample queuing room for 3+ trucks.",
+    "fastLaneOpportunity": "Very wide entrance and an essentially empty truck court leave abundant room to add an express lane.",
+    "shipRcvSeparate": "Primary truck docks on a single (west) face; the south-face dock band fronts employee parking, not a separate active truck cluster.",
+    "urbanRural": "Site is in Tinley Park, a Chicago southwest-suburb metro area, immediately beside I-80 with residential subdivisions adjacent; judged Urban.",
+    "siteAreaAcres": "Estimated from perimeter box (~435m x ~375m) covering the building, truck court, and surrounding parking.",
+    "railServed": "No rail spur into the property; no rail line adjacent (I-80 borders the SE).",
+    "facilityNote": "Racklify lists the Tinley Park CJ facility at 305,545 sq ft. The 2026 satellite shows a large, modern but lightly-used building with an empty truck court."
+  },
+  "method": "deep-audit"
+}

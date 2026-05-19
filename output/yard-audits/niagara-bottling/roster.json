@@ -1,0 +1,487 @@
+{
+  "account": "Niagara Bottling",
+  "generatedAt": "2026-05-18",
+  "facilityCount": 30,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Niagara Bottling - Ontario CA",
+      "city": "Ontario",
+      "state": "CA",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "5675 E Concours St, Ontario, CA 91764",
+      "lat": 34.074693,
+      "lng": -117.531829,
+      "source": "Web search (company 'Our Communities' lists Ontario CON/PHI plants; address from facility listings)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 90
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Niagara Bottling - Rialto CA",
+      "city": "Rialto",
+      "state": "CA",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "1401 N Alder Ave, Rialto, CA 92376",
+      "lat": 34.133589,
+      "lng": -117.418587,
+      "source": "Web search (Waze/Yellowpages facility listing; company 'Our Communities' RIA plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 5
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Niagara Bottling - Stockton CA (Arch Rd)",
+      "city": "Stockton",
+      "state": "CA",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "5959 Arch Rd, Stockton, CA 95215",
+      "lat": 37.905639,
+      "lng": -121.197715,
+      "source": "Web search (Bandana facility listing; company 'Our Communities' STK plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 31
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Niagara Bottling - Mesa AZ",
+      "city": "Mesa",
+      "state": "AZ",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "3453 S 96th St, Mesa, AZ 85212",
+      "lat": 33.352346,
+      "lng": -111.626925,
+      "source": "Web search (Manta/Waze facility listing; company niagarawater.com/about-us/mesa)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 15
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Niagara Bottling - Phoenix AZ",
+      "city": "Phoenix",
+      "state": "AZ",
+      "type": "Bottling / Manufacturing Plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Web search / Wikipedia (252,000 sq ft Phoenix plant; street address not pinned down)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Niagara Bottling - Los Lunas NM",
+      "city": "Los Lunas",
+      "state": "NM",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "1300 Desert Willow Rd, Los Lunas, NM 87031",
+      "lat": 34.827861,
+      "lng": -106.760925,
+      "source": "Web search (Glassdoor facility listing; company niagarawater.com/about-us/los-lunas)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Niagara Bottling - North Las Vegas NV",
+      "city": "North Las Vegas",
+      "state": "NV",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "6445 E El Campo Grande Ave, Las Vegas, NV 89115",
+      "lat": 36.265047,
+      "lng": -115.030426,
+      "source": "Web search (Chamber of Commerce facility listing; company 'Our Communities' LAS plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 134
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Niagara Bottling - Aurora CO",
+      "city": "Aurora",
+      "state": "CO",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "1933 N Gun Club Rd, Aurora, CO 80019",
+      "lat": 39.745028,
+      "lng": -104.708701,
+      "source": "Web search (facility listing; company 'Our Communities' DEN plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 194
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Niagara Bottling - Brigham City UT",
+      "city": "Brigham City",
+      "state": "UT",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "77 N Industrial Way, Brigham City, UT 84302",
+      "lat": 41.511787,
+      "lng": -112.042187,
+      "source": "Web search (Box Elder Chamber / Yellowpages; ~257,000 sq ft plant opened 2017)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 114
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Niagara Bottling - Puyallup (Frederickson) WA",
+      "city": "Puyallup",
+      "state": "WA",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "19820 57th Ave E, Puyallup, WA 98375",
+      "lat": 47.07603,
+      "lng": -122.354526,
+      "source": "Web search (Tacoma-Pierce Chamber; 311,000 sq ft Frederickson plant opened 2014)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 35
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Niagara Bottling - Kansas City MO (149th St)",
+      "city": "Kansas City",
+      "state": "MO",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "4000 E 149th St, Kansas City, MO 64147",
+      "lat": 38.853841,
+      "lng": -94.549338,
+      "source": "Web search (company niagarawater.com/about-us/kansas-city; first KC plant opened 2019)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 14
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Niagara Bottling - Kansas City MO (Airworld Dr)",
+      "city": "Kansas City",
+      "state": "MO",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "11400 N Airworld Dr, Kansas City, MO 64153",
+      "lat": 39.299633,
+      "lng": -94.675074,
+      "source": "Web search (TruckMap facility listing; 634,000 sq ft second KC plant opened 2021)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 103
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Niagara Bottling - Jeffersonville IN",
+      "city": "Jeffersonville",
+      "state": "IN",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "350 Logistics Ave, Jeffersonville, IN 47130",
+      "lat": 38.379939,
+      "lng": -85.674977,
+      "source": "Web search (Loc8NearMe / River Ridge listings; 469,000 sq ft plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 161
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Niagara Bottling - Plainfield IN",
+      "city": "Plainfield",
+      "state": "IN",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "1250 Whitaker Rd, Plainfield, IN 46168",
+      "lat": 39.683721,
+      "lng": -86.349861,
+      "source": "Web search (facility listings; $62M expansion 2018)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 15,
+      "name": "Niagara Bottling - Byhalia MS",
+      "city": "Byhalia",
+      "state": "MS",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "168 E Wingo Rd, Byhalia, MS 38611",
+      "lat": 34.976643,
+      "lng": -89.607243,
+      "source": "Web search (facility listings; plant opened 2018, outside Memphis)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 68
+      }
+    },
+    {
+      "idx": 16,
+      "name": "Niagara Bottling - Gahanna OH",
+      "city": "Gahanna",
+      "state": "OH",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "1700 Eastgate Pkwy, Gahanna, OH 43230",
+      "lat": 39.995966,
+      "lng": -82.822263,
+      "source": "Web search (facility listings; company 'Our Communities' COL plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 74
+      }
+    },
+    {
+      "idx": 17,
+      "name": "Niagara Bottling - Mooresville NC",
+      "city": "Mooresville",
+      "state": "NC",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "178 Mooresville Blvd, Mooresville, NC 28115",
+      "lat": 35.628494,
+      "lng": -80.785517,
+      "source": "Web search (BBB / Manta facility listings; company 'Our Communities' MOR plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 18,
+      "name": "Niagara Bottling - Newnan GA (Coweta County)",
+      "city": "Newnan",
+      "state": "GA",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "47 Niagara Way, Newnan, GA 30265",
+      "lat": 33.407005,
+      "lng": -84.757017,
+      "source": "Web search (Newnan-Coweta Chamber / Manta; company 'Our Communities' ATL plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 19,
+      "name": "Niagara Bottling - Chester VA",
+      "city": "Chester",
+      "state": "VA",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "1700 Digital Dr, Chester, VA 23836",
+      "lat": 37.35562,
+      "lng": -77.329897,
+      "source": "Web search (facility listings; 557,000 sq ft Chesterfield County plant completed 2017)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 16
+      }
+    },
+    {
+      "idx": 20,
+      "name": "Niagara Bottling - Bloomfield CT",
+      "city": "Bloomfield",
+      "state": "CT",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "380 Woodland Ave, Bloomfield, CT 06002",
+      "lat": 41.860483,
+      "lng": -72.723738,
+      "source": "Web search (TruckMap / Manta facility listings; ~432,000 sq ft plant est. 2016)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 21,
+      "name": "Niagara Bottling - Middleburg FL",
+      "city": "Middleburg",
+      "state": "FL",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "565 Atlantis Dr, Middleburg, FL 32068",
+      "lat": 30.134287,
+      "lng": -81.827665,
+      "source": "Web search (facility listings; $70M plant opened 2022 near Jacksonville)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 119
+      }
+    },
+    {
+      "idx": 22,
+      "name": "Niagara Bottling - Groveland FL",
+      "city": "Groveland",
+      "state": "FL",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "7633 American Way, Groveland, FL 34736",
+      "lat": 28.638988,
+      "lng": -81.827331,
+      "source": "Web search (facility listings; company niagarawater.com/about-us/groveland, est. 2007)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 171
+      }
+    },
+    {
+      "idx": 23,
+      "name": "Niagara Bottling - Jupiter FL",
+      "city": "Jupiter",
+      "state": "FL",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "15832 Corporate Rd N, Jupiter, FL 33478",
+      "lat": 26.904603,
+      "lng": -80.284117,
+      "source": "Web search (Manta facility listing; company 'Our Communities' MIA plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 161
+      }
+    },
+    {
+      "idx": 24,
+      "name": "Niagara Bottling - Hazle Township PA",
+      "city": "Hazle Township",
+      "state": "PA",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "100 Timberline Dr, Hazle Township, PA 18202",
+      "lat": 40.931251,
+      "lng": -76.066517,
+      "source": "Web search (warehouserating / company niagarawater.com/about-us/hazle-township; 1.19M sq ft plant, 2022)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 25,
+      "name": "Niagara Bottling - Imperial PA (Findlay Township)",
+      "city": "Imperial",
+      "state": "PA",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "201 Solar Dr, Imperial, PA 15126",
+      "lat": 40.441904,
+      "lng": -80.295974,
+      "source": "Web search (Bandana / Manta facility listings; $64M Findlay Township plant near Pittsburgh)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 26,
+      "name": "Niagara Bottling - Upper Macungie (Allentown) PA",
+      "city": "Upper Macungie",
+      "state": "PA",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "7561 Industrial Blvd, Allentown, PA 18106",
+      "lat": 40.570886,
+      "lng": -75.614395,
+      "source": "Web search (Waze facility listing; company 'Our Communities' ALN plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 27,
+      "name": "Niagara Bottling - Florence SC",
+      "city": "Florence",
+      "state": "SC",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "2222 Florence Harllee Blvd, Florence, SC 29506",
+      "lat": 34.265035,
+      "lng": -79.695251,
+      "source": "Web search (Florence SC Chamber listing; $70M Pee Dee Commerce Park plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 28,
+      "name": "Niagara Bottling - Temple TX",
+      "city": "Temple",
+      "state": "TX",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "5419 Wendland Rd, Temple, TX 76504",
+      "lat": 31.156095,
+      "lng": -97.354586,
+      "source": "Web search (Temple Chamber / EDC; company niagarawater.com/about-us/temple)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 29,
+      "name": "Niagara Bottling - Seguin TX",
+      "city": "Seguin",
+      "state": "TX",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "1730 N 8th St, Seguin, TX 78155",
+      "lat": 29.588439,
+      "lng": -97.979524,
+      "source": "Web search (Waze facility listing; Seguin EDC; company 'Our Communities' SAN plant)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 30,
+      "name": "Niagara Bottling - Elko New Market MN",
+      "city": "Elko New Market",
+      "state": "MN",
+      "type": "Bottling / Manufacturing Plant",
+      "address": "Park I-35 Industrial Park, County Rd 2 at I-35, Elko New Market, MN 55020",
+      "lat": 46.732498,
+      "lng": -92.201007,
+      "source": "Web search (City of Elko New Market FAQ / company about-us page; 425,000 sq ft plant, Phase 1 operational 2025 - exact street address not yet assigned)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 5
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

@@ -1,0 +1,63 @@
+{
+  "name": "GP Dixie Cup Plant - Lexington KY",
+  "type": "Cup/Converting Plant",
+  "coords": { "lat": 38.0807, "lng": -84.5258 },
+  "geofences": {
+    "perimeter": { "south": 38.078095, "west": -84.528995, "north": 38.083215, "east": -84.523175 },
+    "truckGate": { "south": 38.079641, "west": -84.525485, "north": 38.080359, "east": -84.524115 },
+    "dropYards": [
+      { "south": 38.080981, "west": -84.524628, "north": 38.082419, "east": -84.523372 }
+    ],
+    "dockAprons": [
+      { "south": 38.079992, "west": -84.524942, "north": 38.081608, "east": -84.524258 }
+    ],
+    "staging": { "south": 38.079651, "west": -84.525771, "north": 38.080549, "east": -84.524629 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 50,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 5,
+    "siteAreaAcres": 72.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.0807,-84.5258,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoors", "trailersVisible", "entryLanes", "exitLanes", "scale"],
+  "fieldNotes": {
+    "facility": "Georgia-Pacific Dixie Cup manufacturing plant, Lexington KY — the consolidated sole Dixie cup production site after the Easton PA plant closed (2021). Iconic Dixie Cup water tower on the property. Located in the NW Lexington industrial district. Roster coordinate (38.104086, -84.506349) was ~3 km NE in a residential subdivision; the roster address '1900 Spurr Road' appears imprecise — the plant is at 451 Harbison Road (38.080038, -84.526746). Relocated and confirmed via the water tower, the Georgia-Pacific signage seen in Street View, and the large converting-plant complex.",
+    "truckGate": "Property is fully fenced — black ornamental metal fence along the office/parking frontage and chain-link around the dock yard, with a sliding gate visible at one fence opening (Street View). The truck driveway enters off Harbison Road into the fenced dock yard. Controlled access — called true.",
+    "guardShack": "No staffed guard booth positively imaged at the truck entrance; the truck driveway reads as a fenced but largely open entry. An older urban converting plant of this type typically uses badge/kiosk/intercom access rather than a 24/7 manned booth — guardShack false, remoteGs true. Both flagged uncertain.",
+    "dropArea": "Large trailer drop yard on the NE side of the plant — ~50 trailers parked in regular rows; banded 25-50.",
+    "dockDoors": "Loading docks along the NE/E face of the plant; trailers visible backed in. ~22 doors estimated — low confidence band 10-25.",
+    "railServed": "A rail line runs along the north edge of the property with a spur reaching the plant.",
+    "urbanRural": "Urban — the plant sits within Lexington's dense NW industrial fabric, surrounded by other industrial buildings and adjacent residential subdivisions.",
+    "multipleFacilities": "Treated as a single facility — one main long manufacturing complex plus an office building and small ancillary structures on the same parcel."
+  },
+  "method": "deep-audit"
+}

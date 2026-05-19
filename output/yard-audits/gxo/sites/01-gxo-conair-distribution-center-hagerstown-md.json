@@ -1,0 +1,51 @@
+{
+  "name": "GXO Conair Distribution Center - Hagerstown MD",
+  "type": "Distribution Center",
+  "coords": { "lat": 39.604697, "lng": -77.760602 },
+  "geofences": {
+    "perimeter": { "south": 39.601400, "west": -77.765800, "north": 39.607400, "east": -77.755600 },
+    "truckGate": { "south": 39.602550, "west": -77.758450, "north": 39.602950, "east": -77.757850 },
+    "dropYards": [
+      { "south": 39.603100, "west": -77.760900, "north": 39.604200, "east": -77.756600 }
+    ],
+    "dockAprons": [
+      { "south": 39.603700, "west": -77.762400, "north": 39.605200, "east": -77.761800 },
+      { "south": 39.605400, "west": -77.762000, "north": 39.605900, "east": -77.756000 }
+    ],
+    "staging": { "south": 39.602900, "west": -77.759400, "north": 39.603300, "east": -77.758000 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 378,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 250,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 144.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.604697,-77.760602,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging", "entryLanes", "exitLanes", "trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "imagery": "Maxar satellite imagery (2026 capture cited, but content is mid-construction: slab + structural footings, only the north building wall partially erected). Facility is confirmed operational since March 2024. Gate/yard hardware not yet placed in the imagery, so entry-control fields are inferred from facility class, not observed.",
+    "dockDoors": "Web research confirms 378 dock positions across the building (GXO/Conair press materials). Solidly 50+.",
+    "shipRcvSeparate": "Press materials describe cross-dock loading functionality with 185-ft truck courts, implying dock banks on opposite building faces — treated as separate ship/receive.",
+    "truckGate": "Inferred. A 2.1M sq ft single-tenant DC of this class (largest in Maryland, 700 jobs) is virtually always perimeter-fenced with a controlled truck gate; not visible because imagery predates fence installation.",
+    "guardShack": "Inferred from facility class; not observable in construction-phase imagery.",
+    "dropArea": "185-ft truck courts plus extensive graded yard around three building faces support a large trailer drop capacity (50+ band, estimate ~250 capacity).",
+    "urbanRural": "Edge-of-town setting: site fronts I-70 with farmland to the south and west, residential subdivisions north across the highway. Hagerstown is a small metro; classified Rural per rubric tie-break.",
+    "siteAreaAcres": "Estimated from perimeter box: ~668m N-S x ~875m E-W graded property — roughly 144 acres."
+  },
+  "method": "deep-audit"
+}

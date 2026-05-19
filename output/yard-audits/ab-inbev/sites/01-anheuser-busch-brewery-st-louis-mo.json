@@ -1,0 +1,54 @@
+{
+  "name": "Anheuser-Busch Brewery - St. Louis MO",
+  "type": "Brewery",
+  "coords": { "lat": 38.59650, "lng": -90.20800 },
+  "geofences": {
+    "perimeter": { "south": 38.5930, "west": -90.2150, "north": 38.6015, "east": -90.2025 },
+    "truckGate": { "south": 38.59620, "west": -90.20900, "north": 38.59680, "east": -90.20800 },
+    "dropYards": [
+      { "south": 38.59380, "west": -90.20850, "north": 38.59750, "east": -90.20450 },
+      { "south": 38.59450, "west": -90.20450, "north": 38.59850, "east": -90.20200 }
+    ],
+    "dockAprons": [
+      { "south": 38.59560, "west": -90.20950, "north": 38.59700, "east": -90.20800 }
+    ],
+    "staging": { "south": 38.59600, "west": -90.20650, "north": 38.59750, "east": -90.20500 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 420,
+    "trailerParkingCapacity": 600,
+    "truckGateCount": 3,
+    "buildingCount": 40,
+    "siteAreaAcres": 254.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.59650,-90.20800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": true, "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "multiStep", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "site": "Flagship 1852 A-B brewery, world's largest single-site brewery. Sprawling fully-enclosed legacy urban industrial campus on the Mississippi River, bounded by I-55 to the west.",
+    "truckGate": "Multiple controlled truck gates confirmed in Street View - sliding/swing metal gates with chain-link/wall perimeter fencing throughout the campus (SV at SW corner off Pestalozzi, internal warehouse gate with yellow-marked swing gate, east trailer-yard gate). Whole campus is fenced/walled.",
+    "guardShack": "A-B St. Louis has a long-documented staffed main entrance/guardhouse. Multiple gated checkpoints on a high-security legacy campus; guard presence is standard. High confidence on guarded entry though individual booth structures partly obscured by buildings in imagery.",
+    "multipleFacilities": "Campus comprises 40+ distinct brewery, packaging, warehouse and support buildings across multiple city blocks plus a large distribution warehouse.",
+    "dropArea": "Hundreds of trailers parked across multiple large drop yards east of the distribution warehouse - estimated 400+ trailers visible, 600+ capacity.",
+    "dockDoors": "50+ dock doors on the large white-roof distribution warehouse plus packaging-building docks; trailers backed in confirm active docks.",
+    "railServed": "Extensive on-site rail yards with many spurs running into the campus and warehouses; rail is heavily used at this site.",
+    "scale": "Truck scale presence inferred from heavy freight operation; not individually resolved in imagery - flagged uncertain.",
+    "multiStep": "Multi-gate campus with internal secondary gates between brewery core and warehouse/trailer-yard zones implies staged checkpoints; flagged uncertain.",
+    "backupSensitive": "Urban campus surrounded by public streets, I-55, and residential blocks; truck queues could spill onto city streets.",
+    "siteAreaAcres": "Perimeter box covers the AB operational footprint (brewery core + distribution warehouse + trailer yards). ~254 acres for the boxed area; brewery proper is ~142 acres."
+  },
+  "method": "deep-audit"
+}

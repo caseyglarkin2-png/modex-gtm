@@ -1,0 +1,53 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+KDP Coffee Roasting & K-Cup Plant - Spartanburg (Moore) SC,Manufacturing - Coffee/K-Cup,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,YES,,,YES,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@34.870100,-82.032100,400m/data=!3m1!1e3"
+KDP K-Cup Plant - Essex Junction VT,Manufacturing - Coffee/K-Cup,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,YES,Urban,,YES,,YES,"https://www.google.com/maps/@44.513632,-73.136469,400m/data=!3m1!1e3"
+KDP Coffee Plant - Waterbury VT,Manufacturing - Coffee,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,YES,,,,,,,,,Rural,,YES,,,"https://www.google.com/maps/@44.335800,-72.750500,400m/data=!3m1!1e3"
+KDP Beverage Manufacturing & Distribution - Allentown PA,Manufacturing & Distribution - Beverage,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@40.572414,-75.605843,400m/data=!3m1!1e3"
+KDP Beverage Plant - Victorville CA,Manufacturing - Beverage,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@34.584000,-117.395500,400m/data=!3m1!1e3"
+KDP Mott's Plant - Williamson NY,Manufacturing - Juice/Applesauce,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@43.236600,-77.175500,400m/data=!3m1!1e3"
+KDP Mott's Plant - Aspers PA,Manufacturing - Juice/Applesauce,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,YES,,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@39.975785,-77.220423,400m/data=!3m1!1e3"
+KDP Beverage Plant - Houston TX,Manufacturing - Beverage,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,YES,YES,,1,1,,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@29.683800,-95.394000,400m/data=!3m1!1e3"
+KDP Beverage Plant - Northlake IL,Manufacturing - Beverage,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@41.918007,-87.903662,400m/data=!3m1!1e3"
+KDP Beverage Plant - Waco TX,Manufacturing - Beverage,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@31.626000,-97.063500,400m/data=!3m1!1e3"
+KDP Beverage Concentrates Plant - St. Louis MO,Manufacturing - Concentrates/Syrups,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,YES,Urban,,,,YES,"https://www.google.com/maps/@38.685300,-90.355900,400m/data=!3m1!1e3"
+KDP Coffee Roasting Plant - Castroville CA,Manufacturing - Coffee,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,,YES,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@36.757300,-121.740100,400m/data=!3m1!1e3"
+KDP Coffee Roasting / K-Cup Plant - Sumner WA,Manufacturing - Coffee/K-Cup,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@47.225300,-122.242500,400m/data=!3m1!1e3"
+KDP Coffee Roasting / Distribution - Knoxville TN,Manufacturing & Distribution - Coffee,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,YES,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@35.943600,-83.824200,400m/data=!3m1!1e3"
+KDP Production / DSD Operations - Tucson AZ,Manufacturing & Distribution - Beverage/DSD,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,YES,YES,,1,1,,,YES,,,,YES,,,,Urban,,YES,,YES,"https://www.google.com/maps/@32.210800,-110.951400,400m/data=!3m1!1e3"
+KDP DSD Distribution Center - Tempe AZ,Distribution Center - DSD,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,,YES,,1,1,,,YES,,,,YES,,,,Urban,,YES,,YES,"https://www.google.com/maps/@33.4062,-111.954,400m/data=!3m1!1e3"
+KDP Distribution Center - Jacksonville FL,Distribution Center - Beverage,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@30.3522,-81.76505,400m/data=!3m1!1e3"
+KDP Distribution Center - Irving TX,Distribution Center - Beverage/DSD,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@32.8428,-96.89475,400m/data=!3m1!1e3"
+KDP Cowpens K-Cup Packaging - Cowpens SC,Manufacturing - Coffee/K-Cup Packaging,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@35.016998,-81.804141,400m/data=!3m1!1e3"
+KDP Distribution Center - Indianapolis IN,Distribution Center - Beverage/DSD,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,YES,,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@39.90270,-86.24190,400m/data=!3m1!1e3"
+KDP Distribution Center - Evansville IN,Distribution Center - DSD,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@37.94420,-87.54700,400m/data=!3m1!1e3"
+KDP Distribution Center - Fontana CA,Distribution Center - DSD,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@34.092233,-117.435048,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,15,68%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,1,5%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,5,23%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,1,5%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,22,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,12,55%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,8,36%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,2,9%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,20,91%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,22,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,22,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

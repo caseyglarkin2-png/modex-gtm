@@ -1,0 +1,53 @@
+{
+  "name": "Diageo Plainfield Bottling Plant - Plainfield IL",
+  "type": "Manufacturing - Bottling Plant",
+  "coords": { "lat": 41.6245, "lng": -88.2140 },
+  "geofences": {
+    "perimeter": { "south": 41.6222, "west": -88.2168, "north": 41.6276, "east": -88.2118 },
+    "truckGate": { "south": 41.6238, "west": -88.2134, "north": 41.6244, "east": -88.2128 },
+    "dropYards": [
+      { "south": 41.6224, "west": -88.2138, "north": 41.6270, "east": -88.2122 }
+    ],
+    "dockAprons": [
+      { "south": 41.6224, "west": -88.2138, "north": 41.6270, "east": -88.2130 }
+    ],
+    "staging": { "south": 41.6235, "west": -88.2130, "north": 41.6244, "east": -88.2120 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 35,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 61.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.6245,-88.2140,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "entryLanes"],
+  "fieldNotes": {
+    "truckGate": "TRUE. Street View (2024-07) of the east dock yard shows a sliding gate across the truck driveway with a STOP sign and a numbered gate sign ('GATE 6'), set in a continuous chain-link perimeter fence. The legacy bottling plant runs a secured, fenced dock yard - distinct from the open canning campus next door.",
+    "guardShack": "TRUE. A small red-roofed guard booth (~1-vehicle footprint, windows) sits beside the truck lane on the east side of the gate, visible in Street View at 41.6241,-88.2130.",
+    "remoteGs": "False - a staffed booth is present, so this is not a remote/kiosk check-in.",
+    "multipleFacilities": "True - the bottling plant is part of the larger connected Diageo Plainfield campus shared with the Lincolnway RTD canning facility and a process tank farm; multiple large building masses on one campus.",
+    "dropYard": "Fenced east dock yard holds parked trailers alongside the dock bank.",
+    "dockDoorCount": "Long bank of dock doors on the east building face with trailers backed in; ~45 doors estimated (band 25-50), moderate confidence from Street View and overhead.",
+    "dropArea": "~35 trailers visible in the fenced dock yard, capacity ~60 (band 10-25 for tractorless drop trailers specifically; flagged uncertain).",
+    "truckGateCount": "At least two numbered gates referenced on signage ('GATE 6'); estimated 2 active truck gates into the fenced yard.",
+    "urbanRural": "Edge-of-town Plainfield IL industrial corridor with adjacent farmland; Rural per rubric.",
+    "railServed": "A rail line runs east of the campus but no spur enters the bottling-plant property.",
+    "fastLaneOpportunity": "Gate apron is modest; no obvious unused width for an express bypass lane."
+  },
+  "method": "deep-audit"
+}

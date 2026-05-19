@@ -1,0 +1,46 @@
+{
+  "name": "John Deere Distribution Center - Hebron IN",
+  "type": "Parts Distribution Center",
+  "coords": { "lat": 41.2820, "lng": -87.3020 },
+  "geofences": {
+    "perimeter": null,
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
+    "truckGateCount": 0, "buildingCount": 0, "siteAreaAcres": 234.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.2820,-87.3020,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "site": "Greenfield site. John Deere purchased the 234-acre parcel SW of the I-65 / SR-2 (181st Ave) interchange near Hebron/Lowell IN in July 2024 for $7M and broke ground on the $125M, 1.2M-sq-ft warehouse/distribution center in late January 2026. As of the available ©2026 Airbus satellite imagery, the SW quadrant of the interchange is entirely undeveloped farmland (with a small pond / borrow area) - no graded building pad, no foundation, no truck infrastructure is visible. Nothing to audit yet.",
+    "coords": "Center estimate (41.2820, -87.3020) is the SW quadrant of the I-65 / SR-2 interchange where the 234-acre parcel sits per the address 2105 W 181st Ave. Roster-supplied coords (41.288631, -87.358717) plot ~5 km west of the interchange in unrelated farmland and were not used. Coordinates are approximate to the parcel, not a confirmed building.",
+    "urbanRural": "Rural - open agricultural land at the edge of the small towns of Hebron and Lowell, away from any dense metro fabric.",
+    "siteAreaAcres": "234 acres is the publicly reported parcel size; the eventual fenced perimeter / building footprint cannot be measured until construction is imaged.",
+    "railServed": "No rail spur visible at the site; not expected for this DC (located for I-65 highway access). Low confidence.",
+    "classificationFlags": "All physical-layout flags defaulted to false / NONE / null because the facility does not yet exist in imagery. Re-audit once post-construction satellite imagery becomes available (facility expected to open within ~12 months of the Jan 2026 groundbreaking)."
+  },
+  "method": "deep-audit"
+}

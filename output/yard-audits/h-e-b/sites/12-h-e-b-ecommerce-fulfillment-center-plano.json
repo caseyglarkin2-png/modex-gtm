@@ -1,0 +1,47 @@
+{
+  "name": "H-E-B eCommerce Fulfillment Center - Plano - Plano TX",
+  "type": "E-commerce Fulfillment Center",
+  "coords": { "lat": 33.054800, "lng": -96.796800 },
+  "geofences": {
+    "perimeter": { "south": 33.053800, "west": -96.798300, "north": 33.056000, "east": -96.795200 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 33.054300, "west": -96.797900, "north": 33.054900, "east": -96.797550 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 3, "trailersVisible": 2, "trailerParkingCapacity": 3,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 17.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.054800,-96.796800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "facility": "The Plano eFC (~55,000 sq ft, opened 2023) is NOT a stand-alone freight building - it is attached to / integrated with the H-E-B Plano retail grocery store at 6001 Preston Rd. The audit therefore reads a retail-store back-of-house dock, not a distribution yard.",
+    "truckGate": "No controlled freight gate. Truck access is an open back-of-house service drive that runs along the screened west wall and connects to the shopping-center parking-lot circulation; no barrier arm, sliding gate, or checkpoint.",
+    "guardShack": "No guard booth anywhere on the truck route.",
+    "remoteGs": "False because there is no truck gate.",
+    "dockDoors": "Small grocery-store dock at the SW corner of the building - approx 2-4 dock positions; 2 trailers seen backed in. Banded 0-10. Door count is an estimate (screen wall and canopy partially obscure overhead view).",
+    "dropArea": "No trailer drop / parking lot - trailers are only at the active dock. NONE.",
+    "drivewayShort": "The back-of-house service drive holds only 1-2 trucks at the dock recess.",
+    "scale": "No truck scale.",
+    "dropYard": "No dedicated trailer-storage lot.",
+    "urbanRural": "Dense north-Dallas suburban retail corridor on Preston Rd (Plano).",
+    "entryLanes": "Service drive is a single shared two-way lane; entry/exit lane counts are nominal."
+  },
+  "method": "deep-audit"
+}

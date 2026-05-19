@@ -1,0 +1,53 @@
+{
+  "name": "Crowley Penn Terminals - Eddystone PA",
+  "type": "Marine terminal with dry + refrigerated warehouse",
+  "coords": { "lat": 39.85300, "lng": -75.33800 },
+  "geofences": {
+    "perimeter": { "south": 39.84950, "west": -75.34150, "north": 39.85600, "east": -75.33450 },
+    "truckGate": { "south": 39.85490, "west": -75.33920, "north": 39.85560, "east": -75.33800 },
+    "dropYards": [
+      { "south": 39.85100, "west": -75.34000, "north": 39.85450, "east": -75.33550 },
+      { "south": 39.85250, "west": -75.33800, "north": 39.85550, "east": -75.33500 }
+    ],
+    "dockAprons": [
+      { "south": 39.85320, "west": -75.34000, "north": 39.85470, "east": -75.33700 }
+    ],
+    "staging": { "south": 39.85440, "west": -75.34050, "north": 39.85560, "east": -75.33800 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 260,
+    "trailerParkingCapacity": 500,
+    "truckGateCount": 1,
+    "buildingCount": 8,
+    "siteAreaAcres": 107.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.85300,-75.33800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "entryLanes", "exitLanes", "scale", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Roster coords (39.853752,-75.338927) landed inside the terminal — confirmed correct. Penn Terminals at the end of Saville Avenue, Eddystone PA, on the Delaware River. Confirmed via satellite (warehouses + container yard + pier) and Street View along Saville Ave (terminal warehouse, perimeter fence, historic brick Penn Terminals office building).",
+    "truckGate": "Marine terminal operated under MTSA/ISPS security regime — access is via a controlled gate at the east end of Saville Avenue. Street View coverage ended at the warehouse before the gate itself, so the gate structure was not directly imaged; marked uncertain. Chain-link perimeter fencing visible in multiple Street View frames.",
+    "guardShack": "Inferred from MTSA-regulated marine terminal access control; the Penn Terminals office sits at the entrance and an escort/check-in process is documented (escort fee paid at the terminal entrance). Not directly imaged — marked uncertain.",
+    "dockDoors": "Long ~300,000 sq ft dry warehouse with a continuous bank of dock doors on its NW face; trailers/containers backed in confirm dock positions. Counted ~35; band 25-50.",
+    "dropArea": "Extensive container and chassis storage across the open terminal yard — hundreds of containers/trailers in stacks and rows.",
+    "railServed": "Rail line and rail yard run along the north edge of the terminal; rail tracks cross Saville Avenue at the terminal entrance (visible in Street View). Penn Terminals is rail-served.",
+    "multipleFacilities": "Campus: dry warehouse, refrigerated warehouse, multiple ancillary buildings, pier, large container yard.",
+    "drivewayLong": "Saville Avenue is a long approach road dedicated to the terminal; ample queue room before the gate.",
+    "entryLanes": "Not directly imaged; estimated single in/out lane at the gate — low confidence.",
+    "scale": "No truck scale clearly identified; flagged uncertain."
+  },
+  "method": "deep-audit"
+}

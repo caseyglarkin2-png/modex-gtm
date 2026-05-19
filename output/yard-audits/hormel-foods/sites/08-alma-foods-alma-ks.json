@@ -1,0 +1,64 @@
+{
+  "name": "Alma Foods - Alma KS",
+  "type": "Production Facility",
+  "coords": { "lat": 39.0110, "lng": -96.2879 },
+  "geofences": {
+    "perimeter": { "south": 39.01000, "west": -96.28920, "north": 39.01190, "east": -96.28730 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 39.01010, "west": -96.28850, "north": 39.01070, "east": -96.28790 }
+    ],
+    "dockAprons": [
+      { "south": 39.01075, "west": -96.28840, "north": 39.01110, "east": -96.28790 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 7,
+    "trailersVisible": 11,
+    "trailerParkingCapacity": 14,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 8.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.0110,-96.2879,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster coords (39.012236,-96.289857) landed near the correct block; the plant proper is at ~39.0110,-96.2879. Real address is 110/114 E First St, Alma KS 66401 (geocoded as 215 Missouri St in roster). Confirmed via Street View - a metal industrial plant with office annex, process equipment and trailers in a small-town industrial pocket.",
+    "truckGate": "No barrier arm, gate, or controlled checkpoint. The site is open to the gravel town streets; vehicles park right up to the buildings and a residential house sits across the street. truckGateCount=1 reflects the single open driveway access, not a controlled gate.",
+    "guardShack": "No guard booth anywhere on site - small open small-town facility.",
+    "dockDoorCount": "Modest dock count - a few dock doors with trailers backed in along the south/SW building faces. Estimated 0-10 band (~7). Low confidence from overhead imagery.",
+    "dropYard": "~8-9 trailers parked in an angled row in the south yard along the rail line, plus 2-3 scattered trailers near the docks. Small drop yard, 0-10 band.",
+    "railServed": "A rail line runs along the SE edge of the property but no spur crosses onto the site. Not rail-served.",
+    "urbanRural": "Alma, KS is a small Flint Hills town (~800 population). Edge-of-town small-town industrial setting - Rural.",
+    "drivewayShort": "Short open driveway access from the gravel street; only room for 1-2 trucks to approach the dock.",
+    "buildingCount": "Main processing building plus 2-3 connected/adjacent secondary buildings (office annex, dark-roofed shop/warehouse buildings) - treated as one facility, not a campus."
+  },
+  "method": "deep-audit"
+}

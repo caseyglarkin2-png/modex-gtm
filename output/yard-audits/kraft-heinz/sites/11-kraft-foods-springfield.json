@@ -1,0 +1,23 @@
+{
+  "name": "Kraft Foods - Springfield",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": true, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "connectivityIssue", "dropArea"],
+  "fieldNotes": {
+    "truckGate": "Street View is a blank gray block wall - no gate read. Satellite shows a long curving entry drive with a small standalone building near the entry, consistent with a gated/guarded checkpoint.",
+    "guardShack": "Small standalone structure beside the curving entry drive on satellite, likely a guard booth.",
+    "urbanRural": "Site surrounded by open farmland and fields, isolated.",
+    "connectivityIssue": "Rural and isolated among farm fields; cellular coverage uncertain.",
+    "dropArea": "Truck/trailer parking lot to the south holds parked trailers."
+  }
+}

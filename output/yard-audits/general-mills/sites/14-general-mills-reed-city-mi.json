@@ -1,0 +1,55 @@
+{
+  "name": "General Mills - Reed City MI",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 43.87560, "lng": -85.50870 },
+  "geofences": {
+    "perimeter": { "south": 43.87420, "west": -85.51000, "north": 43.87800, "east": -85.50600 },
+    "truckGate": { "south": 43.87600, "west": -85.50940, "north": 43.87660, "east": -85.50860 },
+    "dropYards": [
+      { "south": 43.87680, "west": -85.50850, "north": 43.87780, "east": -85.50700 }
+    ],
+    "dockAprons": [
+      { "south": 43.87560, "west": -85.50920, "north": 43.87620, "east": -85.50760 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14, "trailersVisible": 50, "trailerParkingCapacity": 55,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 34.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@43.87560,-85.50870,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dockDoors"],
+  "fieldNotes": {
+    "location": "Roster coordinates (43.87584,-85.509751, ROOFTOP, moved only 16m) correctly landed on the General Mills Yoplait yogurt plant at 128 E Slosson Ave, Reed City MI. Locked center 43.8756,-85.5087.",
+    "facility": "Active General Mills facility - the Yoplait yogurt manufacturing plant in downtown Reed City. A dense process plant (visible silos, tanks, pipe racks) plus a separate NE cooler/warehouse and drop yard.",
+    "truckGate": "The truck/dock yard on the N side of the plant appears to have perimeter fencing, and the NE drop yard is a defined trailer-storage lot. However the N approach from the public street is fairly open with no clearly visible barrier arm, swing/sliding gate, or guard booth at the property line in any Street View (2018, 2021, 2024). Set true as a defined fenced truck yard but LOW CONFIDENCE - flagged.",
+    "guardShack": "No guard booth identified at any entrance in available Street View. Flagged uncertain.",
+    "remoteGs": "Set true - fenced truck/dock yard without a confirmed staffed booth. Low confidence, flagged.",
+    "drivewayShort": "The plant fronts directly on downtown streets; the gate-to-dock approach is short (1-2 trucks) - this is a compact, tightly-packed urban-core plant footprint.",
+    "backupSensitive": "Plant sits in the middle of downtown Reed City, hemmed by storefronts, streets and residential blocks; a truck queue at the dock approach would quickly spill onto public streets - backup-sensitive.",
+    "dockDoors": "N-side dock bank shows roughly 6-10 trailers backed in plus dock structures; banded 10-25. Some dock doors may be obscured by process equipment - flagged.",
+    "dropArea": "Large NE drop yard holds roughly 30-40 parked trailers, plus more staged near the dock - banded 25-50.",
+    "dropYard": "Dedicated NE trailer-storage lot, clearly separate from the active dock apron.",
+    "multipleFacilities": "Two building clusters: the main yogurt plant and a separate NE cooler/warehouse building serving the drop yard.",
+    "shipRcvSeparate": "Dock activity concentrated on the N face of the main plant; the NE building is used mainly for trailer storage/cold storage - treated as a single ship/receive dock cluster.",
+    "urbanRural": "Reed City is a small rural Michigan town (~2,400 people); per the rubric's small-town guidance, classified Rural despite the downtown-adjacent setting.",
+    "railServed": "No active rail spur visible entering the plant; the corridor NE near the Hersey River is a rail-trail / recreation path (Reed City Crossroads), not active freight rail into the property.",
+    "siteAreaAcres": "Perimeter box ~34 acres covering the main plant plus the NE drop yard and warehouse.",
+    "buildingCount": "Two primary building clusters counted.",
+    "scale": "No truck scale identified in imagery - flagged uncertain."
+  },
+  "method": "deep-audit"
+}

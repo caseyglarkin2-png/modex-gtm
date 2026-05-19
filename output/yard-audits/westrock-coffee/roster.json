@@ -1,0 +1,104 @@
+{
+  "account": "Westrock Coffee",
+  "generatedAt": "2026-05-18",
+  "facilityCount": 6,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Westrock Coffee - Conway AR Roast-to-RTD Plant",
+      "city": "Conway",
+      "state": "AR",
+      "type": "Manufacturing Plant (roast-to-ready-to-drink)",
+      "address": "480 Exchange Avenue, Conway, AR 72032",
+      "lat": 35.073662,
+      "lng": -92.416857,
+      "source": "Dossier (Conway campus, $315M, 570K sq ft, opened June 2024); Westrock Coffee press release on Conway groundbreaking confirms 480 Exchange Ave (former Kimberly-Clark facility); Arkansas Business",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 3310
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Westrock Coffee - Conway AR Distribution Center",
+      "city": "Conway",
+      "state": "AR",
+      "type": "Distribution Center",
+      "address": "1430 William J. Clark Drive, Conway, AR 72032",
+      "lat": 35.058793,
+      "lng": -92.405415,
+      "source": "Dossier (Conway DC, $70M, 530K sq ft, 72 dock doors, opened Dec 2023, ~2.2 mi from plant); Tempus Realty Partners / REBusinessOnline and Talk Business & Politics confirm 1430 William J. Clark Dr",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 17
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Westrock Coffee - Conway AR Single-Serve \"Clark\" Plant",
+      "city": "Conway",
+      "state": "AR",
+      "type": "Manufacturing Plant (single-serve / K-cup pods)",
+      "address": "William J. Clark Drive, Conway, AR 72032 (exact street number not published)",
+      "lat": 35.058779,
+      "lng": -92.409215,
+      "source": "Dossier (Conway single-serve 'Clark' facility, 525K sq ft, opened July 2025); Westrock Coffee press release and Talk Business & Politics confirm 'William J. Clark Drive' but no street number disclosed",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 4
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Westrock Coffee - North Little Rock AR Roasting & Manufacturing",
+      "city": "North Little Rock",
+      "state": "AR",
+      "type": "Roasting Plant / Private-Label Manufacturing",
+      "address": "30 Collins Industrial Place, North Little Rock, AR 72113",
+      "lat": 34.829921,
+      "lng": -92.388925,
+      "source": "Dossier (Little Rock / North Little Rock original manufacturing); Little Rock Chamber listing and Waze confirm Westrock Coffee Roasting & Manufacturing at 30 Collins Industrial Pl, North Little Rock",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 95
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Westrock Coffee - Concord NC Roasting & Extract Campus (S&D legacy)",
+      "city": "Concord",
+      "state": "NC",
+      "type": "Roasting Plant / Extract Manufacturing",
+      "address": "300 Concord Parkway South, Concord, NC 28027",
+      "lat": 35.396271,
+      "lng": -80.614895,
+      "source": "Dossier (Concord NC legacy S&D Coffee & Tea operation, primary roasting-and-extract origin); CoPack Connect and multiple directories confirm S&D Coffee & Tea / Westrock Coffee at 300 Concord Parkway South",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 90
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Westrock Coffee - Concord NC Commercial Park Extract & Tea Facility",
+      "city": "Concord",
+      "state": "NC",
+      "type": "Extract & Tea Manufacturing",
+      "address": "101 Commercial Park Drive SW, Concord, NC 28027",
+      "lat": 35.392817,
+      "lng": -80.616512,
+      "source": "Dossier (Concord 'Commercial Park' extract manufacturing expansion; three-node Concord footprint - main + remote yard + roasting plant); Waze and BusinessYab confirm S&D Coffee & Tea at 101 Commercial Park Dr SW",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1693
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

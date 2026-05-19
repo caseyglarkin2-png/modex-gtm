@@ -1,0 +1,56 @@
+{
+  "name": "General Mills - Albuquerque NM",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 35.177200, "lng": -106.608000 },
+  "geofences": {
+    "perimeter": { "south": 35.175000, "west": -106.611200, "north": 35.180000, "east": -106.605500 },
+    "truckGate": { "south": 35.175900, "west": -106.610250, "north": 35.176500, "east": -106.609700 },
+    "dropYards": [
+      { "south": 35.176700, "west": -106.611100, "north": 35.179100, "east": -106.609400 },
+      { "south": 35.177900, "west": -106.609000, "north": 35.179100, "east": -106.607500 }
+    ],
+    "dockAprons": [
+      { "south": 35.176400, "west": -106.609400, "north": 35.177900, "east": -106.609000 },
+      { "south": 35.177900, "west": -106.608400, "north": 35.178400, "east": -106.607400 }
+    ],
+    "staging": { "south": 35.175500, "west": -106.610200, "north": 35.176000, "east": -106.609600 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 38,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 65.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.177200,-106.608000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "shipRcvSeparate", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Confirmed at 3501 Paseo del Norte NE, Albuquerque - a General Mills cereal manufacturing plant. Roster geocode moved 2,485m and resolved correctly onto the plant; verified by web search (Rio Rancho/Bernalillo Chamber, D&B - grain & oilseed milling / breakfast cereal).",
+    "truckGate": "Controlled entrance off the SE access road from Paseo del Norte. A guard-booth island sits in the center of the entry roadway; the road splits around it. Gate / barrier crosshatch markings visible at the road entry into the trailer yard.",
+    "guardShack": "Small staffed booth (~1-2 vehicle footprint) on a raised concrete median island mid-roadway at the entrance, windows / roof structure visible in z20-z21 imagery - a classic guarded entry island.",
+    "postGateStaging": "Large open paved areas inside the gate (ring road and yard pavement) provide ample internal queue/holding room before the docks.",
+    "fastLaneOpportunity": "The entry roadway and ring-road apron are very wide with abundant unused paved width around the guard island - room to add a bypass/express lane.",
+    "dockDoors": "Dock doors on the W building face (~8-10 trailers backed in) and an N-face notch (~6-8 trailers backed in), plus additional truck bays; total estimated 25-50 band. Exact count uncertain - many doors obscured by building inset geometry.",
+    "dropArea": "Very large trailer drop yards on the W and NW of the property - dozens of trailers parked in marked rows (well over 50). dropYard=true.",
+    "shipRcvSeparate": "Two distinct dock clusters on different building faces (W face and N-face notch) suggest separate shipping/receiving operations - medium confidence.",
+    "railServed": "Active rail spurs curve into the property on the N and E sides with railcars positioned on-site (grain/cereal inbound).",
+    "urbanRural": "Within the Albuquerque metro fabric (industrial/business-park district off Paseo del Norte, a major arterial) - Urban.",
+    "entryLanes": "Single combined entry/exit roadway split by the guard island; lane count not crisply countable - estimated 1/1.",
+    "buildingCount": "One very large interconnected plant complex (counted as 2 to reflect the main building plus an attached secondary wing); single campus, multipleFacilities=false."
+  },
+  "method": "deep-audit"
+}

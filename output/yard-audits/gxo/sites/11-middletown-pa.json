@@ -1,0 +1,50 @@
+{
+  "name": "GXO Logistics Distribution Center - Middletown PA",
+  "type": "Fulfillment Center",
+  "coords": { "lat": 40.20785, "lng": -76.74640 },
+  "geofences": {
+    "perimeter": { "south": 40.20640, "west": -76.74920, "north": 40.20920, "east": -76.74380 },
+    "truckGate": { "south": 40.20835, "west": -76.74400, "north": 40.20885, "east": -76.74340 },
+    "dropYards": [
+      { "south": 40.20840, "west": -76.74920, "north": 40.20910, "east": -76.74400 }
+    ],
+    "dockAprons": [
+      { "south": 40.20815, "west": -76.74920, "north": 40.20855, "east": -76.74400 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 38,
+    "trailersVisible": 22,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 35.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.20785,-76.74640,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "truckGate"],
+  "fieldNotes": {
+    "truckGate": "Truck court is accessed from the internal east road at the NE corner of the property; the access is an open paved connection with no barrier arm or sliding gate visible in z20 satellite. Chain-link truck-court fencing is present along the dock face (seen in Street View) but the road entrance itself is uncontrolled. Classed false.",
+    "guardShack": "No guard booth visible at any entrance in z20 satellite or Street View. Capital Logistics Center monument-sign entrance is wide and open.",
+    "dockDoorCount": "Counted ~38 dock doors along the single north dock face from z19 imagery; regular bay rhythm with many trailers backed in. Approximate; comparable on-park Building 100 is documented at 39 doors.",
+    "drivewayLong": "North truck court runs the full length of the building (~450 m), easily holds a 3+ truck queue.",
+    "dropYard": "North truck court doubles as trailer-storage; ~22 trailers parked away from active docks in the captured imagery.",
+    "fastLaneOpportunity": "Wide unfenced apron at the NE truck-court entrance and ample paved width to add a bypass lane.",
+    "urbanRural": "Capital Logistics Center is an edge-of-town industrial park outside Middletown PA (Harrisburg metro fringe); per rubric small-town industrial resolves to Rural.",
+    "postGateStaging": "Deep paved truck court inside the dock court provides holding space before the dock doors."
+  },
+  "method": "deep-audit"
+}

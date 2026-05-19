@@ -1,0 +1,5675 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.5445,
+              27.39
+            ],
+            [
+              -82.5385,
+              27.39
+            ],
+            [
+              -82.5385,
+              27.3972
+            ],
+            [
+              -82.5445,
+              27.3972
+            ],
+            [
+              -82.5445,
+              27.39
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Sarasota North DC, Sarasota FL",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 300,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 95,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.543,
+              27.391
+            ],
+            [
+              -82.5415,
+              27.391
+            ],
+            [
+              -82.5415,
+              27.396
+            ],
+            [
+              -82.543,
+              27.396
+            ],
+            [
+              -82.543,
+              27.391
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Sarasota North DC, Sarasota FL",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.7525,
+              40.064
+            ],
+            [
+              -76.7395,
+              40.064
+            ],
+            [
+              -76.7395,
+              40.0765
+            ],
+            [
+              -76.7525,
+              40.0765
+            ],
+            [
+              -76.7525,
+              40.064
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Manchester PA DC",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 214,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 492,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 129,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.7456,
+              40.0662
+            ],
+            [
+              -76.7438,
+              40.0662
+            ],
+            [
+              -76.7438,
+              40.0674
+            ],
+            [
+              -76.7456,
+              40.0674
+            ],
+            [
+              -76.7456,
+              40.0662
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Manchester PA DC",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.743,
+              40.0655
+            ],
+            [
+              -76.7405,
+              40.0655
+            ],
+            [
+              -76.7405,
+              40.0735
+            ],
+            [
+              -76.743,
+              40.0735
+            ],
+            [
+              -76.743,
+              40.0655
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Manchester PA DC",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.751,
+              40.068
+            ],
+            [
+              -76.747,
+              40.068
+            ],
+            [
+              -76.747,
+              40.0755
+            ],
+            [
+              -76.751,
+              40.0755
+            ],
+            [
+              -76.751,
+              40.068
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Manchester PA DC",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.747,
+              40.065
+            ],
+            [
+              -76.7435,
+              40.065
+            ],
+            [
+              -76.7435,
+              40.0725
+            ],
+            [
+              -76.747,
+              40.0725
+            ],
+            [
+              -76.747,
+              40.065
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Manchester PA DC",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.746,
+              40.0655
+            ],
+            [
+              -76.743,
+              40.0655
+            ],
+            [
+              -76.743,
+              40.068
+            ],
+            [
+              -76.746,
+              40.068
+            ],
+            [
+              -76.746,
+              40.0655
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Manchester PA DC",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.0918,
+              40.2262
+            ],
+            [
+              -77.0835,
+              40.2262
+            ],
+            [
+              -77.0835,
+              40.2308
+            ],
+            [
+              -77.0918,
+              40.2308
+            ],
+            [
+              -77.0918,
+              40.2262
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Carlisle PA DC",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 95,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 52,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.0915,
+              40.2264
+            ],
+            [
+              -77.09,
+              40.2264
+            ],
+            [
+              -77.09,
+              40.2273
+            ],
+            [
+              -77.0915,
+              40.2273
+            ],
+            [
+              -77.0915,
+              40.2264
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Carlisle PA DC",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.089,
+              40.2292
+            ],
+            [
+              -77.0842,
+              40.2292
+            ],
+            [
+              -77.0842,
+              40.2306
+            ],
+            [
+              -77.089,
+              40.2306
+            ],
+            [
+              -77.089,
+              40.2292
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Carlisle PA DC",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.0914,
+              40.2273
+            ],
+            [
+              -77.0856,
+              40.2273
+            ],
+            [
+              -77.0856,
+              40.2296
+            ],
+            [
+              -77.0914,
+              40.2296
+            ],
+            [
+              -77.0914,
+              40.2273
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Carlisle PA DC",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.5985,
+              40.6595
+            ],
+            [
+              -75.593,
+              40.6595
+            ],
+            [
+              -75.593,
+              40.6678
+            ],
+            [
+              -75.5985,
+              40.6678
+            ],
+            [
+              -75.5985,
+              40.6595
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Allentown PA DC",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 180,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 107,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.5972,
+              40.6602
+            ],
+            [
+              -75.5956,
+              40.6602
+            ],
+            [
+              -75.5956,
+              40.6613
+            ],
+            [
+              -75.5972,
+              40.6613
+            ],
+            [
+              -75.5972,
+              40.6602
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Allentown PA DC",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.598,
+              40.6605
+            ],
+            [
+              -75.596,
+              40.6605
+            ],
+            [
+              -75.596,
+              40.667
+            ],
+            [
+              -75.598,
+              40.667
+            ],
+            [
+              -75.598,
+              40.6605
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Allentown PA DC",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.5955,
+              40.661
+            ],
+            [
+              -75.594,
+              40.661
+            ],
+            [
+              -75.594,
+              40.6672
+            ],
+            [
+              -75.5955,
+              40.6672
+            ],
+            [
+              -75.5955,
+              40.661
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Allentown PA DC",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.597,
+              40.6605
+            ],
+            [
+              -75.5955,
+              40.6605
+            ],
+            [
+              -75.5955,
+              40.6665
+            ],
+            [
+              -75.597,
+              40.6665
+            ],
+            [
+              -75.597,
+              40.6605
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Allentown PA DC",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.492275,
+              42.890222
+            ],
+            [
+              -72.488106,
+              42.890222
+            ],
+            [
+              -72.488106,
+              42.892648
+            ],
+            [
+              -72.492275,
+              42.892648
+            ],
+            [
+              -72.492275,
+              42.890222
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Chesterfield NH DC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 36,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 22.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.491662,
+              42.891031
+            ],
+            [
+              -72.49019,
+              42.891031
+            ],
+            [
+              -72.49019,
+              42.891749
+            ],
+            [
+              -72.491662,
+              42.891749
+            ],
+            [
+              -72.491662,
+              42.891031
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Chesterfield NH DC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.491907,
+              42.890671
+            ],
+            [
+              -72.49019,
+              42.890671
+            ],
+            [
+              -72.49019,
+              42.891929
+            ],
+            [
+              -72.491907,
+              42.891929
+            ],
+            [
+              -72.491907,
+              42.890671
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Chesterfield NH DC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.491048,
+              42.8913
+            ],
+            [
+              -72.490068,
+              42.8913
+            ],
+            [
+              -72.490068,
+              42.892019
+            ],
+            [
+              -72.491048,
+              42.892019
+            ],
+            [
+              -72.491048,
+              42.8913
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Chesterfield NH DC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.2415,
+              41.4908
+            ],
+            [
+              -74.2325,
+              41.4908
+            ],
+            [
+              -74.2325,
+              41.4962
+            ],
+            [
+              -74.2415,
+              41.4962
+            ],
+            [
+              -74.2415,
+              41.4908
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Montgomery NY DC (Hudson Valley)",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 48,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.239,
+              41.4915
+            ],
+            [
+              -74.2375,
+              41.4915
+            ],
+            [
+              -74.2375,
+              41.4925
+            ],
+            [
+              -74.239,
+              41.4925
+            ],
+            [
+              -74.239,
+              41.4915
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Montgomery NY DC (Hudson Valley)",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.2408,
+              41.4942
+            ],
+            [
+              -74.237,
+              41.4942
+            ],
+            [
+              -74.237,
+              41.496
+            ],
+            [
+              -74.2408,
+              41.496
+            ],
+            [
+              -74.2408,
+              41.4942
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Montgomery NY DC (Hudson Valley)",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.2409,
+              41.4915
+            ],
+            [
+              -74.2385,
+              41.4915
+            ],
+            [
+              -74.2385,
+              41.4956
+            ],
+            [
+              -74.2409,
+              41.4956
+            ],
+            [
+              -74.2409,
+              41.4915
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Montgomery NY DC (Hudson Valley)",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1915,
+              40.1365
+            ],
+            [
+              -74.1855,
+              40.1365
+            ],
+            [
+              -74.1855,
+              40.1425
+            ],
+            [
+              -74.1915,
+              40.1425
+            ],
+            [
+              -74.1915,
+              40.1365
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Howell NJ DC",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 50,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 42,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.19,
+              40.1375
+            ],
+            [
+              -74.1885,
+              40.1375
+            ],
+            [
+              -74.1885,
+              40.1385
+            ],
+            [
+              -74.19,
+              40.1385
+            ],
+            [
+              -74.19,
+              40.1375
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Howell NJ DC",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.19,
+              40.139
+            ],
+            [
+              -74.1882,
+              40.139
+            ],
+            [
+              -74.1882,
+              40.1415
+            ],
+            [
+              -74.19,
+              40.1415
+            ],
+            [
+              -74.19,
+              40.139
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Howell NJ DC",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1898,
+              40.1378
+            ],
+            [
+              -74.188,
+              40.1378
+            ],
+            [
+              -74.188,
+              40.141
+            ],
+            [
+              -74.1898,
+              40.141
+            ],
+            [
+              -74.1898,
+              40.1378
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Howell NJ DC",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.9096,
+              41.8612
+            ],
+            [
+              -71.9046,
+              41.8612
+            ],
+            [
+              -71.9046,
+              41.8656
+            ],
+            [
+              -71.9096,
+              41.8656
+            ],
+            [
+              -71.9096,
+              41.8612
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Dayville CT DC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 30.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.9064,
+              41.8633
+            ],
+            [
+              -71.9042,
+              41.8633
+            ],
+            [
+              -71.9042,
+              41.8647
+            ],
+            [
+              -71.9064,
+              41.8647
+            ],
+            [
+              -71.9064,
+              41.8633
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Dayville CT DC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.9082,
+              41.8645
+            ],
+            [
+              -71.9052,
+              41.8645
+            ],
+            [
+              -71.9052,
+              41.8656
+            ],
+            [
+              -71.9082,
+              41.8656
+            ],
+            [
+              -71.9082,
+              41.8645
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Dayville CT DC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.9083,
+              41.8614
+            ],
+            [
+              -71.9056,
+              41.8614
+            ],
+            [
+              -71.9056,
+              41.8623
+            ],
+            [
+              -71.9083,
+              41.8623
+            ],
+            [
+              -71.9083,
+              41.8614
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Dayville CT DC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.9091,
+              41.8623
+            ],
+            [
+              -71.9084,
+              41.8623
+            ],
+            [
+              -71.9084,
+              41.8638
+            ],
+            [
+              -71.9091,
+              41.8638
+            ],
+            [
+              -71.9091,
+              41.8623
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Dayville CT DC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.6165,
+              40.2085
+            ],
+            [
+              -79.6102,
+              40.2085
+            ],
+            [
+              -79.6102,
+              40.2162
+            ],
+            [
+              -79.6165,
+              40.2162
+            ],
+            [
+              -79.6165,
+              40.2085
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - New Stanton PA DC (Hunker)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 95,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 52,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.6147,
+              40.213
+            ],
+            [
+              -79.6137,
+              40.213
+            ],
+            [
+              -79.6137,
+              40.2138
+            ],
+            [
+              -79.6147,
+              40.2138
+            ],
+            [
+              -79.6147,
+              40.213
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - New Stanton PA DC (Hunker)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.6162,
+              40.2121
+            ],
+            [
+              -79.6149,
+              40.2121
+            ],
+            [
+              -79.6149,
+              40.2147
+            ],
+            [
+              -79.6162,
+              40.2147
+            ],
+            [
+              -79.6162,
+              40.2121
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - New Stanton PA DC (Hunker)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.6132,
+              40.2135
+            ],
+            [
+              -79.6112,
+              40.2135
+            ],
+            [
+              -79.6112,
+              40.2147
+            ],
+            [
+              -79.6132,
+              40.2147
+            ],
+            [
+              -79.6132,
+              40.2135
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - New Stanton PA DC (Hunker)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.6156,
+              40.2118
+            ],
+            [
+              -79.6148,
+              40.2118
+            ],
+            [
+              -79.6148,
+              40.2138
+            ],
+            [
+              -79.6156,
+              40.2138
+            ],
+            [
+              -79.6156,
+              40.2118
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - New Stanton PA DC (Hunker)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.6146,
+              40.2117
+            ],
+            [
+              -79.611,
+              40.2117
+            ],
+            [
+              -79.611,
+              40.2125
+            ],
+            [
+              -79.6146,
+              40.2125
+            ],
+            [
+              -79.6146,
+              40.2117
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - New Stanton PA DC (Hunker)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.615,
+              40.213
+            ],
+            [
+              -79.6137,
+              40.213
+            ],
+            [
+              -79.6137,
+              40.2142
+            ],
+            [
+              -79.615,
+              40.2142
+            ],
+            [
+              -79.615,
+              40.213
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - New Stanton PA DC (Hunker)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.7764,
+              40.0654
+            ],
+            [
+              -76.7729,
+              40.0654
+            ],
+            [
+              -76.7729,
+              40.0723
+            ],
+            [
+              -76.7764,
+              40.0723
+            ],
+            [
+              -76.7764,
+              40.0654
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - York PA DC (Harrisburg area)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 41,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.7743,
+              40.0682
+            ],
+            [
+              -76.7733,
+              40.0682
+            ],
+            [
+              -76.7733,
+              40.0691
+            ],
+            [
+              -76.7743,
+              40.0691
+            ],
+            [
+              -76.7743,
+              40.0682
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - York PA DC (Harrisburg area)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.775,
+              40.0712
+            ],
+            [
+              -76.7729,
+              40.0712
+            ],
+            [
+              -76.7729,
+              40.0723
+            ],
+            [
+              -76.775,
+              40.0723
+            ],
+            [
+              -76.775,
+              40.0712
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - York PA DC (Harrisburg area)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.7762,
+              40.0664
+            ],
+            [
+              -76.7754,
+              40.0664
+            ],
+            [
+              -76.7754,
+              40.0709
+            ],
+            [
+              -76.7762,
+              40.0709
+            ],
+            [
+              -76.7762,
+              40.0664
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - York PA DC (Harrisburg area)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.7754,
+              40.0706
+            ],
+            [
+              -76.7732,
+              40.0706
+            ],
+            [
+              -76.7732,
+              40.0715
+            ],
+            [
+              -76.7754,
+              40.0715
+            ],
+            [
+              -76.7754,
+              40.0706
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - York PA DC (Harrisburg area)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.4885,
+              41.633
+            ],
+            [
+              -91.4843,
+              41.633
+            ],
+            [
+              -91.4843,
+              41.6366
+            ],
+            [
+              -91.4885,
+              41.6366
+            ],
+            [
+              -91.4885,
+              41.633
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Iowa City IA DC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 26,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 33,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.487,
+              41.6336
+            ],
+            [
+              -91.4848,
+              41.6336
+            ],
+            [
+              -91.4848,
+              41.6343
+            ],
+            [
+              -91.487,
+              41.6343
+            ],
+            [
+              -91.487,
+              41.6336
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Iowa City IA DC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.4872,
+              41.634
+            ],
+            [
+              -91.4845,
+              41.634
+            ],
+            [
+              -91.4845,
+              41.6346
+            ],
+            [
+              -91.4872,
+              41.6346
+            ],
+            [
+              -91.4872,
+              41.634
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Iowa City IA DC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.4145,
+              44.9154
+            ],
+            [
+              -93.4018,
+              44.9154
+            ],
+            [
+              -93.4018,
+              44.9212
+            ],
+            [
+              -93.4145,
+              44.9212
+            ],
+            [
+              -93.4145,
+              44.9154
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Hopkins MN DC",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 150,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 150,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.4038,
+              44.9195
+            ],
+            [
+              -93.4028,
+              44.9195
+            ],
+            [
+              -93.4028,
+              44.9203
+            ],
+            [
+              -93.4038,
+              44.9203
+            ],
+            [
+              -93.4038,
+              44.9195
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Hopkins MN DC",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.4062,
+              44.9196
+            ],
+            [
+              -93.4032,
+              44.9196
+            ],
+            [
+              -93.4032,
+              44.9207
+            ],
+            [
+              -93.4062,
+              44.9207
+            ],
+            [
+              -93.4062,
+              44.9196
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Hopkins MN DC",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.414,
+              44.9161
+            ],
+            [
+              -93.4105,
+              44.9161
+            ],
+            [
+              -93.4105,
+              44.9186
+            ],
+            [
+              -93.414,
+              44.9186
+            ],
+            [
+              -93.414,
+              44.9161
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Hopkins MN DC",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.4064,
+              44.9195
+            ],
+            [
+              -93.403,
+              44.9195
+            ],
+            [
+              -93.403,
+              44.92
+            ],
+            [
+              -93.4064,
+              44.92
+            ],
+            [
+              -93.4064,
+              44.9195
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Hopkins MN DC",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.4132,
+              44.9164
+            ],
+            [
+              -93.4105,
+              44.9164
+            ],
+            [
+              -93.4105,
+              44.9179
+            ],
+            [
+              -93.4132,
+              44.9179
+            ],
+            [
+              -93.4132,
+              44.9164
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Hopkins MN DC",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.4036,
+              44.9192
+            ],
+            [
+              -93.4025,
+              44.9192
+            ],
+            [
+              -93.4025,
+              44.9201
+            ],
+            [
+              -93.4036,
+              44.9201
+            ],
+            [
+              -93.4036,
+              44.9192
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Hopkins MN DC",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2356,
+              0.1479
+            ],
+            [
+              -88.2287,
+              0.1479
+            ],
+            [
+              -88.2287,
+              0.153
+            ],
+            [
+              -88.2356,
+              0.153
+            ],
+            [
+              -88.2356,
+              0.1479
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Champaign IL DC (Newell)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 0,
+          "buildingCount": 2,
+          "siteAreaAcres": 36,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2348,
+              0.1482
+            ],
+            [
+              -88.2338,
+              0.1482
+            ],
+            [
+              -88.2338,
+              0.1501
+            ],
+            [
+              -88.2348,
+              0.1501
+            ],
+            [
+              -88.2348,
+              0.1482
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Champaign IL DC (Newell)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2309,
+              0.149
+            ],
+            [
+              -88.2298,
+              0.149
+            ],
+            [
+              -88.2298,
+              0.1524
+            ],
+            [
+              -88.2309,
+              0.1524
+            ],
+            [
+              -88.2309,
+              0.149
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Champaign IL DC (Newell)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.234,
+              0.1492
+            ],
+            [
+              -88.233,
+              0.1492
+            ],
+            [
+              -88.233,
+              0.1524
+            ],
+            [
+              -88.234,
+              0.1524
+            ],
+            [
+              -88.234,
+              0.1492
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Champaign IL DC (Newell)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2326,
+              0.1492
+            ],
+            [
+              -88.2315,
+              0.1492
+            ],
+            [
+              -88.2315,
+              0.1525
+            ],
+            [
+              -88.2326,
+              0.1525
+            ],
+            [
+              -88.2326,
+              0.1492
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Champaign IL DC (Newell)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.7795,
+              39.7708
+            ],
+            [
+              -104.7733,
+              39.7708
+            ],
+            [
+              -104.7733,
+              39.7772
+            ],
+            [
+              -104.7795,
+              39.7772
+            ],
+            [
+              -104.7795,
+              39.7708
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Aurora CO DC (Denver)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 32,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.7752,
+              39.774
+            ],
+            [
+              -104.7735,
+              39.774
+            ],
+            [
+              -104.7735,
+              39.7764
+            ],
+            [
+              -104.7752,
+              39.7764
+            ],
+            [
+              -104.7752,
+              39.774
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Aurora CO DC (Denver)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.779,
+              39.7709
+            ],
+            [
+              -104.7747,
+              39.7709
+            ],
+            [
+              -104.7747,
+              39.7762
+            ],
+            [
+              -104.779,
+              39.7762
+            ],
+            [
+              -104.779,
+              39.7709
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Aurora CO DC (Denver)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.7878,
+              44.76075
+            ],
+            [
+              -92.7834,
+              44.76075
+            ],
+            [
+              -92.7834,
+              44.76445
+            ],
+            [
+              -92.7878,
+              44.76445
+            ],
+            [
+              -92.7878,
+              44.76075
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Prescott WI DC (Twin Cities)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 44,
+          "trailersVisible": 38,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 36,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.7872,
+              44.7611
+            ],
+            [
+              -92.7864,
+              44.7611
+            ],
+            [
+              -92.7864,
+              44.7617
+            ],
+            [
+              -92.7872,
+              44.7617
+            ],
+            [
+              -92.7872,
+              44.7611
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Prescott WI DC (Twin Cities)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.7864,
+              44.76155
+            ],
+            [
+              -92.7856,
+              44.76155
+            ],
+            [
+              -92.7856,
+              44.7633
+            ],
+            [
+              -92.7864,
+              44.7633
+            ],
+            [
+              -92.7864,
+              44.76155
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Prescott WI DC (Twin Cities)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.7858,
+              44.76155
+            ],
+            [
+              -92.7849,
+              44.76155
+            ],
+            [
+              -92.7849,
+              44.7642
+            ],
+            [
+              -92.7858,
+              44.7642
+            ],
+            [
+              -92.7858,
+              44.76155
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Prescott WI DC (Twin Cities)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.922,
+              42.6895
+            ],
+            [
+              -87.9144,
+              42.6895
+            ],
+            [
+              -87.9144,
+              42.6976
+            ],
+            [
+              -87.922,
+              42.6976
+            ],
+            [
+              -87.922,
+              42.6895
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Racine WI DC (Sturtevant)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 54,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 55,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.9154,
+              42.6962
+            ],
+            [
+              -87.9144,
+              42.6962
+            ],
+            [
+              -87.9144,
+              42.6972
+            ],
+            [
+              -87.9154,
+              42.6972
+            ],
+            [
+              -87.9154,
+              42.6962
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Racine WI DC (Sturtevant)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.9168,
+              42.692
+            ],
+            [
+              -87.915,
+              42.692
+            ],
+            [
+              -87.915,
+              42.697
+            ],
+            [
+              -87.9168,
+              42.697
+            ],
+            [
+              -87.9168,
+              42.692
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Racine WI DC (Sturtevant)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.9172,
+              42.6915
+            ],
+            [
+              -87.9162,
+              42.6915
+            ],
+            [
+              -87.9162,
+              42.6972
+            ],
+            [
+              -87.9172,
+              42.6972
+            ],
+            [
+              -87.9172,
+              42.6915
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Racine WI DC (Sturtevant)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.0592,
+              39.60855
+            ],
+            [
+              -86.056,
+              39.60855
+            ],
+            [
+              -86.056,
+              39.6119
+            ],
+            [
+              -86.0592,
+              39.6119
+            ],
+            [
+              -86.0592,
+              39.60855
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Greenwood IN DC (Indianapolis)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 95,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 23.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.05945,
+              39.61105
+            ],
+            [
+              -86.0588,
+              39.61105
+            ],
+            [
+              -86.0588,
+              39.6115
+            ],
+            [
+              -86.05945,
+              39.6115
+            ],
+            [
+              -86.05945,
+              39.61105
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Greenwood IN DC (Indianapolis)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.057,
+              39.6096
+            ],
+            [
+              -86.056,
+              39.6096
+            ],
+            [
+              -86.056,
+              39.61175
+            ],
+            [
+              -86.057,
+              39.61175
+            ],
+            [
+              -86.057,
+              39.6096
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Greenwood IN DC (Indianapolis)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.0592,
+              39.609
+            ],
+            [
+              -86.0584,
+              39.609
+            ],
+            [
+              -86.0584,
+              39.61175
+            ],
+            [
+              -86.0592,
+              39.61175
+            ],
+            [
+              -86.0592,
+              39.609
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Greenwood IN DC (Indianapolis)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.0572,
+              39.609
+            ],
+            [
+              -86.0566,
+              39.609
+            ],
+            [
+              -86.0566,
+              39.61175
+            ],
+            [
+              -86.0572,
+              39.61175
+            ],
+            [
+              -86.0572,
+              39.609
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Greenwood IN DC (Indianapolis)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.0587,
+              39.609
+            ],
+            [
+              -86.0581,
+              39.609
+            ],
+            [
+              -86.0581,
+              39.61175
+            ],
+            [
+              -86.0587,
+              39.61175
+            ],
+            [
+              -86.0587,
+              39.609
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Greenwood IN DC (Indianapolis)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.0587,
+              39.6115
+            ],
+            [
+              -86.0566,
+              39.6115
+            ],
+            [
+              -86.0566,
+              39.61195
+            ],
+            [
+              -86.0587,
+              39.61195
+            ],
+            [
+              -86.0587,
+              39.6115
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Greenwood IN DC (Indianapolis)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.5476,
+              36.9942
+            ],
+            [
+              -121.543,
+              36.9942
+            ],
+            [
+              -121.543,
+              36.999
+            ],
+            [
+              -121.5476,
+              36.999
+            ],
+            [
+              -121.5476,
+              36.9942
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Gilroy CA DC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 32,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 33,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.5448,
+              36.9978
+            ],
+            [
+              -121.5439,
+              36.9978
+            ],
+            [
+              -121.5439,
+              36.9986
+            ],
+            [
+              -121.5448,
+              36.9986
+            ],
+            [
+              -121.5448,
+              36.9978
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Gilroy CA DC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.5462,
+              36.9964
+            ],
+            [
+              -121.5442,
+              36.9964
+            ],
+            [
+              -121.5442,
+              36.9985
+            ],
+            [
+              -121.5462,
+              36.9985
+            ],
+            [
+              -121.5462,
+              36.9964
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Gilroy CA DC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.5464,
+              36.9966
+            ],
+            [
+              -121.5452,
+              36.9966
+            ],
+            [
+              -121.5452,
+              36.9986
+            ],
+            [
+              -121.5464,
+              36.9986
+            ],
+            [
+              -121.5464,
+              36.9966
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Gilroy CA DC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2856,
+              38.8113
+            ],
+            [
+              -121.281,
+              38.8113
+            ],
+            [
+              -121.281,
+              38.8161
+            ],
+            [
+              -121.2856,
+              38.8161
+            ],
+            [
+              -121.2856,
+              38.8113
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Rocklin CA DC (Western Region)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 65,
+          "trailerParkingCapacity": 100,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 38,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2848,
+              38.8146
+            ],
+            [
+              -121.2838,
+              38.8146
+            ],
+            [
+              -121.2838,
+              38.8156
+            ],
+            [
+              -121.2848,
+              38.8156
+            ],
+            [
+              -121.2848,
+              38.8146
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Rocklin CA DC (Western Region)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2843,
+              38.8147
+            ],
+            [
+              -121.2823,
+              38.8147
+            ],
+            [
+              -121.2823,
+              38.8156
+            ],
+            [
+              -121.2843,
+              38.8156
+            ],
+            [
+              -121.2843,
+              38.8147
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Rocklin CA DC (Western Region)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2822,
+              38.812
+            ],
+            [
+              -121.2815,
+              38.812
+            ],
+            [
+              -121.2815,
+              38.8152
+            ],
+            [
+              -121.2822,
+              38.8152
+            ],
+            [
+              -121.2822,
+              38.812
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Rocklin CA DC (Western Region)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2844,
+              38.813
+            ],
+            [
+              -121.2836,
+              38.813
+            ],
+            [
+              -121.2836,
+              38.8154
+            ],
+            [
+              -121.2844,
+              38.8154
+            ],
+            [
+              -121.2844,
+              38.813
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Rocklin CA DC (Western Region)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2838,
+              38.8147
+            ],
+            [
+              -121.2822,
+              38.8147
+            ],
+            [
+              -121.2822,
+              38.8156
+            ],
+            [
+              -121.2838,
+              38.8156
+            ],
+            [
+              -121.2838,
+              38.8147
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Rocklin CA DC (Western Region)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.27895,
+              33.9114
+            ],
+            [
+              -117.27355,
+              33.9114
+            ],
+            [
+              -117.27355,
+              33.9136
+            ],
+            [
+              -117.27895,
+              33.9136
+            ],
+            [
+              -117.27895,
+              33.9114
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Moreno Valley CA DC",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 95,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 30.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.27875,
+              33.9129
+            ],
+            [
+              -117.2779,
+              33.9129
+            ],
+            [
+              -117.2779,
+              33.9134
+            ],
+            [
+              -117.27875,
+              33.9134
+            ],
+            [
+              -117.27875,
+              33.9129
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Moreno Valley CA DC",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.27885,
+              33.9132
+            ],
+            [
+              -117.2736,
+              33.9132
+            ],
+            [
+              -117.2736,
+              33.9136
+            ],
+            [
+              -117.27885,
+              33.9136
+            ],
+            [
+              -117.27885,
+              33.9132
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Moreno Valley CA DC",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2788,
+              33.91305
+            ],
+            [
+              -117.2736,
+              33.91305
+            ],
+            [
+              -117.2736,
+              33.91325
+            ],
+            [
+              -117.2788,
+              33.91325
+            ],
+            [
+              -117.2788,
+              33.91305
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Moreno Valley CA DC",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2779,
+              33.91305
+            ],
+            [
+              -117.2762,
+              33.91305
+            ],
+            [
+              -117.2762,
+              33.9134
+            ],
+            [
+              -117.2779,
+              33.9134
+            ],
+            [
+              -117.2779,
+              33.91305
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Moreno Valley CA DC",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.0143,
+              46.73005
+            ],
+            [
+              -123.0064,
+              46.73005
+            ],
+            [
+              -123.0064,
+              46.73615
+            ],
+            [
+              -123.0143,
+              46.73615
+            ],
+            [
+              -123.0143,
+              46.73005
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Centralia WA DC (Pacific Northwest)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 79,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.0081,
+              46.73255
+            ],
+            [
+              -123.0071,
+              46.73255
+            ],
+            [
+              -123.0071,
+              46.7333
+            ],
+            [
+              -123.0081,
+              46.7333
+            ],
+            [
+              -123.0081,
+              46.73255
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Centralia WA DC (Pacific Northwest)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.0143,
+              46.7305
+            ],
+            [
+              -123.0126,
+              46.7305
+            ],
+            [
+              -123.0126,
+              46.7359
+            ],
+            [
+              -123.0143,
+              46.7359
+            ],
+            [
+              -123.0143,
+              46.7305
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Centralia WA DC (Pacific Northwest)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.0081,
+              46.7326
+            ],
+            [
+              -123.0056,
+              46.7326
+            ],
+            [
+              -123.0056,
+              46.7341
+            ],
+            [
+              -123.0081,
+              46.7341
+            ],
+            [
+              -123.0081,
+              46.7326
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Centralia WA DC (Pacific Northwest)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.0127,
+              46.7305
+            ],
+            [
+              -123.0119,
+              46.7305
+            ],
+            [
+              -123.0119,
+              46.736
+            ],
+            [
+              -123.0127,
+              46.736
+            ],
+            [
+              -123.0127,
+              46.7305
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Centralia WA DC (Pacific Northwest)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.011,
+              46.7301
+            ],
+            [
+              -123.0087,
+              46.7301
+            ],
+            [
+              -123.0087,
+              46.731
+            ],
+            [
+              -123.011,
+              46.731
+            ],
+            [
+              -123.011,
+              46.7301
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Centralia WA DC (Pacific Northwest)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.0087,
+              46.7324
+            ],
+            [
+              -123.0079,
+              46.7324
+            ],
+            [
+              -123.0079,
+              46.7332
+            ],
+            [
+              -123.0087,
+              46.7332
+            ],
+            [
+              -123.0087,
+              46.7324
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Centralia WA DC (Pacific Northwest)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.668,
+              45.8042
+            ],
+            [
+              -122.6628,
+              45.8042
+            ],
+            [
+              -122.6628,
+              45.8087
+            ],
+            [
+              -122.668,
+              45.8087
+            ],
+            [
+              -122.668,
+              45.8042
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Ridgefield WA DC",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 150,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 50,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.66445,
+              45.8079
+            ],
+            [
+              -122.6638,
+              45.8079
+            ],
+            [
+              -122.6638,
+              45.8086
+            ],
+            [
+              -122.66445,
+              45.8086
+            ],
+            [
+              -122.66445,
+              45.8079
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Ridgefield WA DC",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.6644,
+              45.8056
+            ],
+            [
+              -122.663,
+              45.8056
+            ],
+            [
+              -122.663,
+              45.8082
+            ],
+            [
+              -122.6644,
+              45.8082
+            ],
+            [
+              -122.6644,
+              45.8056
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Ridgefield WA DC",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.66445,
+              45.8054
+            ],
+            [
+              -122.66415,
+              45.8054
+            ],
+            [
+              -122.66415,
+              45.8082
+            ],
+            [
+              -122.66445,
+              45.8082
+            ],
+            [
+              -122.66445,
+              45.8054
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Ridgefield WA DC",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.6679,
+              45.8054
+            ],
+            [
+              -122.6676,
+              45.8054
+            ],
+            [
+              -122.6676,
+              45.808
+            ],
+            [
+              -122.6679,
+              45.808
+            ],
+            [
+              -122.6679,
+              45.8054
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Ridgefield WA DC",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.66445,
+              45.8079
+            ],
+            [
+              -122.6636,
+              45.8079
+            ],
+            [
+              -122.6636,
+              45.8085
+            ],
+            [
+              -122.66445,
+              45.8085
+            ],
+            [
+              -122.66445,
+              45.8079
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Ridgefield WA DC",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.2227,
+              33.99875
+            ],
+            [
+              -118.22075,
+              33.99875
+            ],
+            [
+              -118.22075,
+              33.99985
+            ],
+            [
+              -118.2227,
+              33.99985
+            ],
+            [
+              -118.2227,
+              33.99875
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Vernon CA DC (Los Angeles / Albert's Organics West)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 4,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.2212,
+              33.99905
+            ],
+            [
+              -118.22075,
+              33.99905
+            ],
+            [
+              -118.22075,
+              33.99975
+            ],
+            [
+              -118.2212,
+              33.99975
+            ],
+            [
+              -118.2212,
+              33.99905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Vernon CA DC (Los Angeles / Albert's Organics West)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2504,
+              47.3253
+            ],
+            [
+              -122.247,
+              47.3253
+            ],
+            [
+              -122.247,
+              47.3279
+            ],
+            [
+              -122.2504,
+              47.3279
+            ],
+            [
+              -122.2504,
+              47.3253
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Auburn WA DC (Seattle)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 18,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2504,
+              47.326
+            ],
+            [
+              -122.2499,
+              47.326
+            ],
+            [
+              -122.2499,
+              47.3264
+            ],
+            [
+              -122.2504,
+              47.3264
+            ],
+            [
+              -122.2504,
+              47.326
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Auburn WA DC (Seattle)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2496,
+              47.32555
+            ],
+            [
+              -122.2472,
+              47.32555
+            ],
+            [
+              -122.2472,
+              47.32625
+            ],
+            [
+              -122.2496,
+              47.32625
+            ],
+            [
+              -122.2496,
+              47.32555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Auburn WA DC (Seattle)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2496,
+              47.327
+            ],
+            [
+              -122.2473,
+              47.327
+            ],
+            [
+              -122.2473,
+              47.3277
+            ],
+            [
+              -122.2496,
+              47.3277
+            ],
+            [
+              -122.2496,
+              47.327
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Auburn WA DC (Seattle)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2496,
+              47.32635
+            ],
+            [
+              -122.247,
+              47.32635
+            ],
+            [
+              -122.247,
+              47.32695
+            ],
+            [
+              -122.2496,
+              47.32695
+            ],
+            [
+              -122.2496,
+              47.32635
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Auburn WA DC (Seattle)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.0203,
+              41.5036
+            ],
+            [
+              -88.017,
+              41.5036
+            ],
+            [
+              -88.017,
+              41.5088
+            ],
+            [
+              -88.0203,
+              41.5088
+            ],
+            [
+              -88.0203,
+              41.5036
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Joliet IL DC (Chicago)",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 38,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.0188,
+              41.5043
+            ],
+            [
+              -88.018,
+              41.5043
+            ],
+            [
+              -88.018,
+              41.50475
+            ],
+            [
+              -88.0188,
+              41.50475
+            ],
+            [
+              -88.0188,
+              41.5043
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Joliet IL DC (Chicago)",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.0201,
+              41.5042
+            ],
+            [
+              -88.019,
+              41.5042
+            ],
+            [
+              -88.019,
+              41.5056
+            ],
+            [
+              -88.0201,
+              41.5056
+            ],
+            [
+              -88.0201,
+              41.5042
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Joliet IL DC (Chicago)",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.0176,
+              41.5045
+            ],
+            [
+              -88.017,
+              41.5045
+            ],
+            [
+              -88.017,
+              41.5084
+            ],
+            [
+              -88.0176,
+              41.5084
+            ],
+            [
+              -88.0176,
+              41.5045
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Joliet IL DC (Chicago)",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.0189,
+              41.50455
+            ],
+            [
+              -88.0179,
+              41.50455
+            ],
+            [
+              -88.0179,
+              41.5064
+            ],
+            [
+              -88.0189,
+              41.5064
+            ],
+            [
+              -88.0189,
+              41.50455
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Joliet IL DC (Chicago)",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0056,
+              34.7083
+            ],
+            [
+              -81.0028,
+              34.7083
+            ],
+            [
+              -81.0028,
+              34.7109
+            ],
+            [
+              -81.0056,
+              34.7109
+            ],
+            [
+              -81.0056,
+              34.7083
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Richburg SC DC (Charlotte area)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0056,
+              34.7085
+            ],
+            [
+              -81.0049,
+              34.7085
+            ],
+            [
+              -81.0049,
+              34.7106
+            ],
+            [
+              -81.0056,
+              34.7106
+            ],
+            [
+              -81.0056,
+              34.7085
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Richburg SC DC (Charlotte area)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.4072,
+              37.6293
+            ],
+            [
+              -77.3983,
+              37.6293
+            ],
+            [
+              -77.3983,
+              37.6378
+            ],
+            [
+              -77.4072,
+              37.6378
+            ],
+            [
+              -77.4072,
+              37.6293
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Mechanicsville VA DC (Richmond)",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 240,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 70,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.4034,
+              37.6308
+            ],
+            [
+              -77.4025,
+              37.6308
+            ],
+            [
+              -77.4025,
+              37.6314
+            ],
+            [
+              -77.4034,
+              37.6314
+            ],
+            [
+              -77.4034,
+              37.6308
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Mechanicsville VA DC (Richmond)",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.4066,
+              37.6307
+            ],
+            [
+              -77.4048,
+              37.6307
+            ],
+            [
+              -77.4048,
+              37.6334
+            ],
+            [
+              -77.4066,
+              37.6334
+            ],
+            [
+              -77.4066,
+              37.6307
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Mechanicsville VA DC (Richmond)",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.4032,
+              37.6342
+            ],
+            [
+              -77.4,
+              37.6342
+            ],
+            [
+              -77.4,
+              37.6362
+            ],
+            [
+              -77.4032,
+              37.6362
+            ],
+            [
+              -77.4032,
+              37.6342
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Mechanicsville VA DC (Richmond)",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3997,
+              37.6325
+            ],
+            [
+              -77.3984,
+              37.6325
+            ],
+            [
+              -77.3984,
+              37.6352
+            ],
+            [
+              -77.3997,
+              37.6352
+            ],
+            [
+              -77.3997,
+              37.6325
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Mechanicsville VA DC (Richmond)",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.4072,
+              37.6343
+            ],
+            [
+              -77.4043,
+              37.6343
+            ],
+            [
+              -77.4043,
+              37.6362
+            ],
+            [
+              -77.4072,
+              37.6362
+            ],
+            [
+              -77.4072,
+              37.6343
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Mechanicsville VA DC (Richmond)",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3999,
+              37.6326
+            ],
+            [
+              -77.3986,
+              37.6326
+            ],
+            [
+              -77.3986,
+              37.6352
+            ],
+            [
+              -77.3999,
+              37.6352
+            ],
+            [
+              -77.3999,
+              37.6326
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Mechanicsville VA DC (Richmond)",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.4046,
+              37.631
+            ],
+            [
+              -77.403,
+              37.631
+            ],
+            [
+              -77.403,
+              37.6327
+            ],
+            [
+              -77.4046,
+              37.6327
+            ],
+            [
+              -77.4046,
+              37.631
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "unfi",
+        "name": "UNFI - Mechanicsville VA DC (Richmond)",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    }
+  ]
+}

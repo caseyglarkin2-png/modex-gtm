@@ -1,0 +1,168 @@
+{
+  "account": "Diageo",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 10,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Diageo Lincolnway RTD Canning - Plainfield IL",
+      "city": "Plainfield",
+      "state": "IL",
+      "type": "Manufacturing - RTD Canning Facility",
+      "address": "901 W 143rd St, Plainfield, IL 60544",
+      "lat": 41.622577,
+      "lng": -88.215458,
+      "source": "Dossier (Diageo's largest NA site, 225K sq ft, 25M+ cases/yr); Diageo press release 2022 canning facility opening; beverage-world.com / D&B listing for address",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 22
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Diageo Plainfield Distribution Warehouse - Plainfield IL",
+      "city": "Plainfield",
+      "state": "IL",
+      "type": "Distribution Center / Warehouse",
+      "address": "25820 W 143rd St, Plainfield, IL 60544",
+      "lat": 41.622512,
+      "lng": -88.24745,
+      "source": "Dossier (246K sq ft warehouse across the street from Lincolnway, part of 600+ person campus); ImportYeti shipment records 'Diageo Plainfield Warehouse 25820 W 143rd Street'",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 5222
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Diageo Plainfield Bottling Plant - Plainfield IL",
+      "city": "Plainfield",
+      "state": "IL",
+      "type": "Manufacturing - Bottling Plant",
+      "address": "24440 W 143rd St, Plainfield, IL 60544",
+      "lat": 41.624158,
+      "lng": -88.213886,
+      "source": "Dossier (legacy Plainfield bottling site, opened 1966, part of largest NA campus); Patch/PR Newswire coverage of Plainfield bottling facility expansion (24440 W 143rd St)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 4526
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Diageo Montgomery Manufacturing & Warehousing - Hope Hull AL",
+      "city": "Hope Hull",
+      "state": "AL",
+      "type": "Manufacturing & Warehousing Facility",
+      "address": "7000 Celebration Way, Hope Hull, AL 36043",
+      "lat": 32.279069,
+      "lng": -86.36396,
+      "source": "Dossier (brand-new $415M, 360K sq ft plant opened April 21, 2026); Diageo press release April 2026; WSFA reporting facility located in Hope Hull off I-65 (marketed as 'Diageo Montgomery')",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 8043
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Diageo Lebanon Distillery - Lebanon KY",
+      "city": "Lebanon",
+      "state": "KY",
+      "type": "Distillery (Carbon-Neutral)",
+      "address": "100 Bourbon Drive, Lebanon, KY 40033",
+      "lat": 37.544187,
+      "lng": -85.282906,
+      "source": "Dossier (carbon-neutral Bulleit distillery, 72K sq ft, 10M proof gal/yr); Diageo press release 2021 opening; MarionCountyKY.com address",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 3808
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Bulleit Distilling Co. (Shelbyville) - Shelbyville KY",
+      "city": "Shelbyville",
+      "state": "KY",
+      "type": "Distillery",
+      "address": "3464 Benson Pike, Shelbyville, KY 40065",
+      "lat": 38.22032,
+      "lng": -85.145372,
+      "source": "Dossier ($115M Bulleit distillery on 300 acres, opened 2017, absorbing Lebanon/Stitzel-Weller workload); PR Newswire ribbon-cutting; Yelp/Distillery Trail address",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 25
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Stitzel-Weller Distillery - Louisville KY",
+      "city": "Louisville",
+      "state": "KY",
+      "type": "Distillery / Aging Warehouse",
+      "address": "3860 Fitzgerald Road, Louisville, KY 40216",
+      "lat": 38.209594,
+      "lng": -85.808741,
+      "source": "Dossier (bottling closed April 2025; continues distilling and maturing on-site, 18 warehouses ~300K barrel capacity, maturation migrating to Shelbyville/Lebanon over 2-3 yrs); Wikipedia / WDRB",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 12
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Cascade Hollow Distilling Co. (George Dickel) - Tullahoma TN",
+      "city": "Tullahoma",
+      "state": "TN",
+      "type": "Distillery",
+      "address": "1950 Cascade Hollow Rd, Tullahoma, TN 37388",
+      "lat": 35.438419,
+      "lng": -86.246097,
+      "source": "Dossier (George Dickel Tennessee Whisky); Diageo Americas Supply; Yelp/Waze address. Note: production paused Sept 2025 per The Spirits Business; site still operates as warehousing/maturation",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 53
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Balcones Distilling - Waco TX",
+      "city": "Waco",
+      "state": "TX",
+      "type": "Distillery",
+      "address": "225 S 11th St, Waco, TX 76701",
+      "lat": 31.550293,
+      "lng": -97.135725,
+      "source": "Diageo-owned American single malt distillery (acquired 2022); The Spirits Business Sept 2025 'Diageo halts production at Balcones and George Dickel'; Yelp/Balcones address. Note: production paused Sept 2025",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 19
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Diageo USVI Captain Morgan Distillery - Frederiksted USVI",
+      "city": "Frederiksted (St. Croix)",
+      "state": "VI",
+      "type": "Distillery & Barrel Aging Warehouse",
+      "address": "Estate Diamond, Melvin Evans Highway, Frederiksted, St. Croix, VI 00840",
+      "lat": 17.69168,
+      "lng": -64.84829,
+      "source": "Dossier (USVI site referenced in NA operations); Diageo USVI / PR Newswire (Captain Morgan rum distillery + two 100K sq ft barrel warehouses on St. Croix, supplies all US Captain Morgan)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 4
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

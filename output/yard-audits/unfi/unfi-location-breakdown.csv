@@ -1,0 +1,61 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+"UNFI - Sarasota North DC, Sarasota FL",Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,,,YES,,,,YES,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@27.39350,-82.54180,400m/data=!3m1!1e3"
+UNFI - Manchester PA DC,Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@40.07043,-76.74648,400m/data=!3m1!1e3"
+UNFI - Carlisle PA DC,Distribution Center,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@40.22880,-77.08760,400m/data=!3m1!1e3"
+UNFI - Allentown PA DC,Distribution Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@40.66380,-75.59470,400m/data=!3m1!1e3"
+UNFI - Chesterfield NH DC,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,,Rural,,,,,"https://www.google.com/maps/@42.89139,-72.490558,400m/data=!3m1!1e3"
+UNFI - Montgomery NY DC (Hudson Valley),Distribution Center,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@41.49355,-74.23700,400m/data=!3m1!1e3"
+UNFI - Howell NJ DC,Distribution Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,,YES,,YES,,,,Urban,,YES,,YES,"https://www.google.com/maps/@40.13970,-74.18790,400m/data=!3m1!1e3"
+UNFI - Dayville CT DC,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@41.86310,-71.90720,400m/data=!3m1!1e3"
+UNFI - New Stanton PA DC (Hunker),Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@40.21250,-79.61300,400m/data=!3m1!1e3"
+UNFI - York PA DC (Harrisburg area),Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@40.06860,-76.77470,400m/data=!3m1!1e3"
+UNFI - Iowa City IA DC,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@41.63490,-91.48630,400m/data=!3m1!1e3"
+UNFI - Hopkins MN DC,Distribution Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@44.91900,-93.40550,400m/data=!3m1!1e3"
+UNFI - Champaign IL DC (Newell),Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@40.151009,-88.232322,400m/data=!3m1!1e3"
+UNFI - Aurora CO DC (Denver),Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@39.774031,-104.776628,400m/data=!3m1!1e3"
+UNFI - Prescott WI DC (Twin Cities),Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@44.76235,-92.78495,400m/data=!3m1!1e3"
+UNFI - Racine WI DC (Sturtevant),Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@42.69450,-87.91870,400m/data=!3m1!1e3"
+UNFI - Greenwood IN DC (Indianapolis),Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@39.61015,-86.05775,400m/data=!3m1!1e3"
+UNFI - Gilroy CA DC,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@36.99605,-121.54500,400m/data=!3m1!1e3"
+UNFI - Rocklin CA DC (Western Region),Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@38.81370,-121.28320,400m/data=!3m1!1e3"
+UNFI - Moreno Valley CA DC,Distribution Center,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@33.91240,-117.27620,400m/data=!3m1!1e3"
+UNFI - Centralia WA DC (Pacific Northwest),Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@46.732800,-123.009800,400m/data=!3m1!1e3"
+UNFI - Ridgefield WA DC,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@45.80660,-122.66585,400m/data=!3m1!1e3"
+UNFI - Lebec CA DC,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@34.841644,-118.864819,400m/data=!3m1!1e3"
+UNFI - Twin Falls ID DC,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@42.555838,-114.470052,400m/data=!3m1!1e3"
+UNFI - Vernon CA DC (Los Angeles / Albert's Organics West),Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,YES,YES,,1,1,,,YES,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@33.99940,-118.22170,400m/data=!3m1!1e3"
+UNFI - Auburn WA DC (Seattle),Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,YES,,,YES,,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@47.32655,-122.24905,400m/data=!3m1!1e3"
+UNFI - Mansfield OH DC,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@40.758536,-82.514085,400m/data=!3m1!1e3"
+UNFI - Joliet IL DC (Chicago),Distribution Center,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@41.50620,-88.01870,400m/data=!3m1!1e3"
+UNFI - Richburg SC DC (Charlotte area),Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,YES,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@34.70980,-81.00420,400m/data=!3m1!1e3"
+UNFI - Mechanicsville VA DC (Richmond),Distribution Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@37.63407,-77.40284,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,16,53%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,4,13%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,4,13%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,5,17%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,1,3%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,14,47%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,21,70%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,9,30%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,21,70%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

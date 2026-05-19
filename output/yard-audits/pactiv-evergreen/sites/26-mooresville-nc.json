@@ -1,0 +1,67 @@
+{
+  "name": "Pactiv Evergreen - Mooresville NC",
+  "type": "Manufacturing Plant (Foodservice; foodservice & grocery packaging converting; ISCC PLUS certified)",
+  "coords": { "lat": 35.631400, "lng": -80.786700 },
+  "geofences": {
+    "perimeter": { "south": 35.629700, "west": -80.789000, "north": 35.633300, "east": -80.785000 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 35.629700, "west": -80.788400, "north": 35.631100, "east": -80.787000 }
+    ],
+    "dockAprons": [
+      { "south": 35.630200, "west": -80.787700, "north": 35.631100, "east": -80.786200 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 35,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 34.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.631400,-80.786700,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Confirmed via 2026-01 Street View on Mooresville Blvd showing the long industrial building with office front and Pactiv signage, in the south-Iredell industrial park. Web search corroborates the foodservice/grocery packaging plant at 314 Mooresville Blvd (~250 employees, 24/7 operation, $53.7M sales). Roster geocode (ROOFTOP) lands on the plant building - confirmed.",
+    "truckGate": "Open campus. Fresh 2026-01 Street View shows NO perimeter fence along the Mooresville Blvd frontage and NO gate - the lawn runs open from the public road to the parking lots and building. Driveways are uncontrolled open entrances. truckGate false.",
+    "guardShack": "No staffed booth at any entrance. A small dark structure on a grass island near the front parking lot is a portable office/storage trailer, not a guard booth (confirmed at z21 satellite and in 2026-01 Street View). guardShack false.",
+    "remoteGs": "No gate present, so remoteGs false.",
+    "drivewayLong": "Internal driveways from the open road entrance run 100+ m to the SW dock yard - ample room for a 3+ truck queue inside the property.",
+    "dockDoors": "SW building face has a dock bank with ~15-20 trailers backed in (clear in z19 satellite); estimated 18-25 doors, banded 10-25. Medium confidence.",
+    "dropArea": "A trailer drop/storage yard sits SW of the plant holding rows of parked drop trailers and storage containers; counted ~35 trailers, banded 25-50.",
+    "dropYard": "Dedicated trailer-storage lot SW of the plant, separate from active dock staging - dropYard true. Note some items in the SW lot appear to be storage containers / lumber, mixed use.",
+    "railServed": "No rail spur enters the property. Rail not served.",
+    "urbanRural": "South-Iredell industrial park on the edge of Mooresville NC, surrounded by woods and other warehouses with low-density development - Rural per rubric.",
+    "siteAreaAcres": "Perimeter box (~430 m N-S x ~360 m E-W of the plant property including the SW drop yard) yields roughly 34 acres - estimate.",
+    "entryLanes": "Two open driveways from Mooresville Blvd; lane counts are estimates from imagery."
+  },
+  "method": "deep-audit"
+}

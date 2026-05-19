@@ -1,0 +1,51 @@
+{
+  "name": "UNFI - Aurora CO DC (Denver)",
+  "type": "Distribution Center",
+  "coords": { "lat": 39.774031, "lng": -104.776628 },
+  "geofences": {
+    "perimeter": { "south": 39.77080, "west": -104.77950, "north": 39.77720, "east": -104.77330 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 39.77400, "west": -104.77520, "north": 39.77640, "east": -104.77350 }
+    ],
+    "dockAprons": [
+      { "south": 39.77090, "west": -104.77900, "north": 39.77620, "east": -104.77470 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 32.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.774031,-104.776628,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Open campus. The large white-roof DC is set well back from E 40th Ave behind open lawn and employee parking; truck driveways run unobstructed onto the dock yard. No barrier arm, sliding/swing gate, or checkpoint pinch-point observed at any entry across multiple satellite passes and Street View headings.",
+    "guardShack": "No guard booth at any entrance. Modern set-back industrial-park design with no checkpoint structure.",
+    "shipRcvSeparate": "All dock doors run along one continuous bank on the SE long face — a single dock cluster, not physically split shipping/receiving.",
+    "dropArea": "Extensive trailer-parking rows at the NE corner of the property, plus trailers staged along the SE dock apron; many parked without tractors.",
+    "dropYard": "Dedicated trailer-storage rows fill the NE corner lot, distinct from active dock staging.",
+    "postGateStaging": "Very deep paved dock yard on the SE side gives generous interior queueing room ahead of the doors.",
+    "urbanRural": "Aurora / Gateway Park, Denver metro. A residential subdivision abuts the site directly to the north and other large warehouses surround it — dense developed metro fabric, classified Urban.",
+    "buildingCount": "One large warehouse (~535,000 sq ft Gateway Park DC). The smaller buildings to the south are separate tenants, not part of this site.",
+    "entryLanes": "Truck driveways are uncontrolled; lane counts are nominal single-lane drive widths."
+  },
+  "method": "deep-audit"
+}

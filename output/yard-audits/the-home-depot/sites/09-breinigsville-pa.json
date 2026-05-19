@@ -1,0 +1,49 @@
+{
+  "name": "Home Depot RDC - Breinigsville PA",
+  "type": "Rapid Deployment Center",
+  "coords": { "lat": 40.551634, "lng": -75.627668 },
+  "geofences": {
+    "perimeter": { "south": 40.54880, "west": -75.63240, "north": 40.55460, "east": -75.62330 },
+    "truckGate": { "south": 40.55075, "west": -75.62470, "north": 40.55135, "east": -75.62360 },
+    "dropYards": [
+      { "south": 40.54935, "west": -75.62700, "north": 40.55175, "east": -75.62360 },
+      { "south": 40.55230, "west": -75.63060, "north": 40.55460, "east": -75.62680 }
+    ],
+    "dockAprons": [
+      { "south": 40.55115, "west": -75.62960, "north": 40.55340, "east": -75.62520 },
+      { "south": 40.54995, "west": -75.63190, "north": 40.55200, "east": -75.62760 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130, "trailersVisible": 240, "trailerParkingCapacity": 320,
+    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 64.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.551634,-75.627668,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "No barrier arm, sliding gate, or guard checkpoint found at any road-edge entrance. Building sits ~120m back from Willard Drive behind a wide landscaped tree buffer; Street View along the public road shows open lawn with no gate. Truck circulation enters via uncontrolled internal logistics-park drives.",
+    "guardShack": "No staffed booth structure visible at any entrance in zoom-19/20 imagery.",
+    "remoteGs": "False because there is no controlled truck gate at all.",
+    "dropYard": "Large dedicated trailer-storage rows wrap the east and north faces around landscaped islands — clearly drop-trailer storage separate from active dock staging.",
+    "shipRcvSeparate": "Dock doors run along both long building faces (NW and SE), forming two distinct dock banks.",
+    "dockDoors": "~130 doors estimated across both long faces; high-throughput RDC cross-dock.",
+    "fastLaneOpportunity": "Very wide paved truck yard with ample unused width — abundant room to add express/bypass lanes.",
+    "entryLanes": "Estimated 2 inbound from the SE driveway; no painted lane control so count is approximate.",
+    "urbanRural": "Edge-of-town Lehigh Valley logistics park; farmland on the west and south sides — Rural per rubric."
+  },
+  "method": "deep-audit"
+}

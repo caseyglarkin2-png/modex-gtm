@@ -1,0 +1,45 @@
+{
+  "name": "Home Depot BDC - Baltimore MD",
+  "type": "Bulk Distribution Center",
+  "coords": { "lat": 39.21970, "lng": -76.47730 },
+  "geofences": {
+    "perimeter": { "south": 39.21640, "west": -76.47950, "north": 39.22270, "east": -76.47480 },
+    "truckGate": { "south": 39.22180, "west": -76.47780, "north": 39.22260, "east": -76.47680 },
+    "dropYards": [
+      { "south": 39.21680, "west": -76.47700, "north": 39.22230, "east": -76.47520 }
+    ],
+    "dockAprons": [
+      { "south": 39.21680, "west": -76.47720, "north": 39.22230, "east": -76.47600 }
+    ],
+    "staging": { "south": 39.22120, "west": -76.47780, "north": 39.22240, "east": -76.47560 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70, "trailersVisible": 80, "trailerParkingCapacity": 110,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 50.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.21970,-76.47730,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoors", "dropArea", "shipRcvSeparate", "multipleFacilities", "siteAreaAcres"],
+  "fieldNotes": {
+    "locationResolution": "Address 7700 Rolling Mill Road is inside the Tradepoint Atlantic logistics campus (former Bethlehem Steel, Sparrows Point). The supplied roster coordinate was a city-centroid GEOMETRIC_CENTER geocode moved 3,972 m and did NOT point at the building. HD built a 3-building, ~1.5M sq ft campus at Tradepoint (one is the FDC at 6311 Tradepoint Ave = idx 2). Coordinates were re-located to a large HD-area DC at 39.2197,-76.4773 with HD-spec (green-topped) trailers in its dock apron. Because 30+ tenants occupy near-identical large DCs across the 3,300-acre Tradepoint site and interior Street View has no coverage/signage, the BDC-specific building could not be definitively isolated from the FDC and a third HD building — confidence is medium.",
+    "truckGate": "Tradepoint DCs are fenced with controlled truck entrances off the internal road grid; specific gate for this building inferred, not directly resolved.",
+    "guardShack": "Tradepoint Atlantic operates campus-level access control; no building-specific staffed booth resolved. Classified as remote/kiosk check-in at the building.",
+    "multipleFacilities": "HD operates a 3-building campus at Tradepoint Atlantic; the BDC is one building of that cluster.",
+    "dockDoors": "Large DC with a long dock apron full of trailers along the east face; estimated 50+ but the audited building may not be the exact BDC.",
+    "urbanRural": "Tradepoint Atlantic sits within the Baltimore metro on the Sparrows Point peninsula — Urban.",
+    "railServed": "Tradepoint Atlantic is heavily rail-served campus-wide; no spur confirmed running into this specific building's footprint, set false pending confirmation."
+  },
+  "method": "deep-audit"
+}

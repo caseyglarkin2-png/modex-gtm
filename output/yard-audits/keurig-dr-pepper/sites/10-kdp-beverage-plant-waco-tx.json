@@ -1,0 +1,53 @@
+{
+  "name": "KDP Beverage Plant - Waco TX",
+  "type": "Manufacturing - Beverage",
+  "coords": { "lat": 31.626000, "lng": -97.063500 },
+  "geofences": {
+    "perimeter": { "south": 31.623400, "west": -97.067500, "north": 31.628800, "east": -97.060500 },
+    "truckGate": { "south": 31.626700, "west": -97.066600, "north": 31.627300, "east": -97.066000 },
+    "dropYards": [
+      { "south": 31.624800, "west": -97.063600, "north": 31.625800, "east": -97.060900 }
+    ],
+    "dockAprons": [
+      { "south": 31.624900, "west": -97.063800, "north": 31.625600, "east": -97.060800 }
+    ],
+    "staging": { "south": 31.626400, "west": -97.066000, "north": 31.627400, "east": -97.064600 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70, "trailersVisible": 110, "trailerParkingCapacity": 180,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 92.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@31.626000,-97.063500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "scale", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster address (5301 Bagby Ave) was wrong/approximate - the pin landed on a golf course / apartments in south Waco. Web research (Greater Waco Chamber directory, Yelp, Dennis Group, Quandel) resolved the facility to 100 Aviation Pkwy, Waco TX 76705, in the Waco International Aviation Park beside TSTC Waco Airport. KDP bought a 92-acre former Kraft-Heinz campus (730,000 SF distribution center) and added a new ~811,000 SF manufacturing & warehouse building connected to the DC by tram. Satellite confirms a large fenced industrial campus at ~31.626,-97.0635.",
+    "truckGate": "The campus is fully enclosed by a continuous chain-link perimeter fence (visible on all sides in Street View 2023-05 and 2025-11). The main entrance off the NW access road has fencing, signage and a portable/modular office building. A 92-acre flagship KDP manufacturing + DC campus of this scale operates a controlled, gated truck entrance.",
+    "guardShack": "No multi-sided staffed guard booth could be definitively confirmed in Street View; a portable/modular office building sits near the entrance but its function (gatehouse vs. site office) is not certain - flagged uncertain.",
+    "remoteGs": "Set true on the basis that a controlled gate exists but a staffed booth could not be confirmed. Would flip to guardShack if a manned gatehouse is verified. Flagged uncertain.",
+    "multipleFacilities": "Two large building masses on the campus - the original Kraft-Heinz distribution center and the new KDP manufacturing/warehouse building, connected by a tram - a true campus.",
+    "shipRcvSeparate": "The DC and the manufacturing building are functionally distinct clusters with their own dock faces, connected by tram - shipping and receiving operate from separate dock banks.",
+    "dockDoors": "Estimated 60-80+ doors from z17-z19 imagery - a very long dock bank along the south face of the DC with dozens of trailers backed in, plus the new manufacturing building's docks. Indirect overhead count; flagged as estimate.",
+    "dropArea": "Large trailer drop/staging yard along the south face with well over 50 trailers; ample paved trailer storage.",
+    "drivewayLong": "Large internal yard depth between the perimeter and the dock face - easily holds a 3+ truck queue.",
+    "fastLaneOpportunity": "Wide entrance apron and a large internal yard with abundant unused paved width - clear room for express/bypass lanes.",
+    "scale": "No truck scale clearly identified in overhead imagery; flagged uncertain.",
+    "railServed": "No rail spur into the campus; rail in the area serves the airport/aviation park only.",
+    "urbanRural": "Rural / edge-of-metro - the campus sits in the Waco International Aviation Park surrounded by farmland, the TSTC airport, and open land NE of Waco proper.",
+    "siteAreaAcres": "~92 acres per the Kraft-Heinz campus acquisition figure cited in Dennis Group / Quandel project descriptions.",
+    "imagery": "Satellite tiles for this area span multiple dates including active construction of the new manufacturing building; counts taken from the clearest available crops."
+  },
+  "method": "deep-audit"
+}

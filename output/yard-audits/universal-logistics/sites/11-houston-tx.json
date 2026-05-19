@@ -1,0 +1,67 @@
+{
+  "name": "Universal Intermodal Services - Houston Terminal - Houston TX",
+  "type": "Intermodal / Drayage Terminal (owned)",
+  "coords": { "lat": 29.87010, "lng": -95.28610 },
+  "geofences": {
+    "perimeter": { "south": 29.86620, "west": -95.28760, "north": 29.87150, "east": -95.28470 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 29.86640, "west": -95.28740, "north": 29.87000, "east": -95.28490 },
+      { "south": 29.86980, "west": -95.28720, "north": 29.87120, "east": -95.28500 }
+    ],
+    "dockAprons": [
+      { "south": 29.86930, "west": -95.28680, "north": 29.87080, "east": -95.28560 }
+    ],
+    "staging": { "south": 29.87080, "west": -95.28700, "north": 29.87150, "east": -95.28500 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 350,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 22.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.8701,-95.2861,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "truckGate"],
+  "fieldNotes": {
+    "siteResolution": "loadmatch.com directory lists the Universal Intermodal Services Houston terminal at 7800 E Little York Rd, Houston TX 77016; the address is also tied to Universal Truckload Service (both Universal Logistics Holdings companies). A drayage / intermodal terminal in NE Houston south of E Little York Rd, with residential to the W and open field to the E. Roster coords land in the yard; center locked at 29.87010,-95.28610.",
+    "truckGate": "The property fronts E Little York Rd with an OPEN, ungated yard apron. Street View (2025) of the road frontage shows no perimeter fence, no barrier arm, no sliding gate, and no checkpoint pinch-point - trucks drive straight off the public road into the yard. truckGate = false (flagged uncertain - the deep interior of the yard could not be walked, but the road-frontage entrance is clearly uncontrolled).",
+    "guardShack": "No guard booth observed at the entrance or anywhere along the road frontage. guardShack = false; remoteGs = false (no controlled gate).",
+    "layout": "A long terminal building with an M&R / maintenance operation runs N-S; a smaller secondary building sits to the S. South of the buildings is a very large compacted-gravel drayage yard packed with rows of chassis, containers and trailers.",
+    "drivewayLong": "The yard apron / internal drive from E Little York Rd runs a long way before the dock face and the deep yard - 3+ truck queue capacity. drivewayLong = true; postGateStaging = true (large paved/graveled internal holding area).",
+    "fastLaneOpportunity": "Very wide open yard apron at the road frontage - ample unused width to add an express/bypass lane. fastLaneOpportunity = true.",
+    "docks": "The terminal building has a modest dock bank (~20 doors estimated) plus M&R bays; this is primarily a yard/drayage operation. dockDoors 10-25, flagged uncertain.",
+    "dropArea": "Extensive chassis/container/trailer storage across the large south yard - heavy drop-yard character. dropArea 50+, dropYard = true.",
+    "buildingCount": "Two buildings - the long terminal/M&R building and a smaller secondary building. multipleFacilities left false (not a campus of large buildings).",
+    "railServed": "No rail spur enters the property; drayage moves are by truck. railServed = false.",
+    "urbanRural": "Site sits within the NE Houston metro industrial fabric with adjacent residential subdivision. Classified Urban."
+  },
+  "method": "deep-audit"
+}

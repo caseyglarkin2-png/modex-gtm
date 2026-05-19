@@ -1,0 +1,23 @@
+{
+  "name": "Kraft Heinz - Massillon",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "streetview": "Street View shows a blank building wall behind a chain-link fence - site is fenced, but no truck gate entrance is in this frame.",
+    "truckGate": "Fenced perimeter visible but no controlled truck checkpoint resolved on satellite; access drive reads open.",
+    "multipleFacilities": "Sprawling multi-building manufacturing complex with many connected processing structures.",
+    "urbanRural": "Plant in a wooded semi-rural setting alongside a highway; judged Rural.",
+    "dockDoors": "Dock bank on the south face with trailers; partly obscured by shadow/resolution."
+  }
+}

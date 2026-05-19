@@ -1,0 +1,49 @@
+{
+  "name": "Coca-Cola Consolidated - Mobile Production Center, AL",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 30.58700, "lng": -88.16800 },
+  "geofences": {
+    "perimeter": { "south": 30.58540, "west": -88.17000, "north": 30.58910, "east": -88.16590 },
+    "truckGate": { "south": 30.58600, "west": -88.16930, "north": 30.58650, "east": -88.16870 },
+    "dropYards": [
+      { "south": 30.58620, "west": -88.16760, "north": 30.58800, "east": -88.16640 }
+    ],
+    "dockAprons": [
+      { "south": 30.58700, "west": -88.16760, "north": 30.58850, "east": -88.16660 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 15,
+    "trailerParkingCapacity": 50,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 38.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.58700,-88.16800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors", "dropArea", "entryLanes", "exitLanes", "trailersVisible"],
+  "fieldNotes": {
+    "locationCorrection": "Roster address (6350 Rangeline Rd) and operator label (Coca-Cola Consolidated) are incorrect. The Mobile production/distribution facility is operated by Coca-Cola UNITED at 5300 Coca-Cola Rd, Mobile AL 36619 (Tillmans Corner). Audited at the corrected location (30.5851, -88.1688 area).",
+    "truckGate": "The facility is enclosed by an ornamental metal perimeter fence (seen in Street View); access is via Coca-Cola Rd. A controlled entry is implied by the fenced perimeter but no formal checkpoint structure is clearly visible in satellite imagery — flagged uncertain.",
+    "guardShack": "No guard booth identified at the entrance; remoteGs set true on the assumption of a fenced controlled entry without a staffed booth.",
+    "dropYard": "Large paved yard with trailer parking on the east/north side; ~15 trailers visible at capture, but the site has substantial paved capacity (~50).",
+    "dockDoors": "Production + distribution hub; dock faces on the building complex estimated ~22 doors. Imagery shows ongoing expansion/construction (the 2021-2022 $48M expansion), so counts are approximate.",
+    "railServed": "No rail spur into the property.",
+    "urbanRural": "Tillmans Corner commercial/industrial area within the Mobile metro."
+  },
+  "method": "deep-audit"
+}

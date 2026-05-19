@@ -1,0 +1,59 @@
+{
+  "name": "Detroit Diesel Corporation Engine Plant - Redford MI",
+  "type": "Engine / powertrain plant",
+  "coords": { "lat": 42.37745, "lng": -83.2675 },
+  "geofences": {
+    "perimeter": { "south": 42.3735, "west": -83.2753, "north": 42.3787, "east": -83.2635 },
+    "truckGate": { "south": 42.37605, "west": -83.27520, "north": 42.37665, "east": -83.27440 },
+    "dropYards": [
+      { "south": 42.3760, "west": -83.2752, "north": 42.3782, "east": -83.2725 },
+      { "south": 42.3768, "west": -83.2668, "north": 42.3786, "east": -83.2632 }
+    ],
+    "dockAprons": [
+      { "south": 42.3782, "west": -83.2720, "north": 42.3788, "east": -83.2660 },
+      { "south": 42.3770, "west": -83.2752, "north": 42.3785, "east": -83.2745 }
+    ],
+    "staging": { "south": 42.3760, "west": -83.2752, "north": 42.3766, "east": -83.2742 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 138.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.37745,-83.2675,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "exitLanes", "scale", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "Geocoded point (GEOMETRIC_CENTER, moved 1434m) landed in an east-side staging lot. Confirmed the correct facility: the very large blue/gray-roofed Detroit Diesel engine plant complex bounded by Telegraph Rd / W Outer Drive on the west and a rail line on the north. A Street View 'TRUCK ENTRANCE -> 12200 TELEGRAPH' sign and DAIMLER TRUCK building branding positively identify the site.",
+    "truckGate": "Clear controlled truck entrance on the SW corner off Telegraph Rd: dedicated 'TRUCK ENTRANCE' signage, a wide gated opening in tall chain-link perimeter fence with privacy screening, and a checkpoint apron set back from the road.",
+    "guardShack": "A wide blue/gray flat canopy structure spans the inbound truck lane just inside the gate (visible in Street View 2025-09 and satellite). Functions as a staffed vehicle-check canopy; a discrete free-standing booth is not separately resolvable but a world-HQ engine plant of this scale operates manned security, so guardShack=true with remoteGs=false. Listed uncertain.",
+    "preGateStaging": "Diagonally-striped truck stalls visible on the paved apron at/outside the gate.",
+    "postGateStaging": "Wide paved truck artery and marked stalls inside the gate before the docks.",
+    "drivewayLong": "Internal truck artery from the gate runs deep north along the west yard; easily holds 3+ trucks.",
+    "fastLaneOpportunity": "Very wide gate apron and multi-lane Telegraph Rd frontage leave ample room for an express/bypass lane.",
+    "dockDoors": "Estimated 25-50: dock doors with trailers backed in along the north building face and additional banks on the west face. Count approximate from overhead imagery.",
+    "dropArea": "50+ trailers parked across the west truck yard and the NE trailer-storage rows.",
+    "shipRcvSeparate": "Dock activity appears on two distinct building faces (north face and west face) suggesting separate ship/receive clusters; medium confidence.",
+    "multipleFacilities": "Campus includes the main plant plus a separate DAIMLER-branded office building, an east-side ancillary building, and large support lots.",
+    "railServed": "An active rail line runs along the north property edge with spurs/sidings fanning into the plant's north face.",
+    "urbanRural": "Inside the Detroit metro (Redford Township), surrounded by dense residential fabric -> Urban.",
+    "buildingCount": "Main plant complex + DAIMLER office building + east ancillary building + smaller support structures.",
+    "scale": "No truck scale clearly visible in the gate path; flagged uncertain."
+  },
+  "method": "deep-audit"
+}

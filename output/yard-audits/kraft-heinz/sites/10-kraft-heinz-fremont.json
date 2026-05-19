@@ -1,0 +1,23 @@
+{
+  "name": "Kraft Heinz - Fremont",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "scale"],
+  "fieldNotes": {
+    "truckGate": "Street View faces rail cars behind a chain-link fence, not the truck entrance; perimeter fencing present. Gate inferred from satellite checkpoint area but not clearly resolved.",
+    "guardShack": "No clear booth visible; Street View does not cover the entrance.",
+    "multipleFacilities": "Large multi-building industrial campus with several large structures.",
+    "dropYard": "Extensive trailer storage lots north and east, separate from active dock staging.",
+    "shipRcvSeparate": "Dock banks on multiple distinct building faces."
+  }
+}

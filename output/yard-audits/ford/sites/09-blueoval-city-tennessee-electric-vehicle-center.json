@@ -1,0 +1,53 @@
+{
+  "name": "Ford - BlueOval City / Tennessee Electric Vehicle Center, Stanton TN",
+  "type": "Vehicle Assembly Plant (greenfield, ramp-up)",
+  "coords": { "lat": 35.42000, "lng": -89.41800 },
+  "geofences": {
+    "perimeter": { "south": 35.40500, "west": -89.43500, "north": 35.43800, "east": -89.40200 },
+    "truckGate": { "south": 35.42000, "west": -89.41250, "north": 35.42150, "east": -89.41050 },
+    "dropYards": [
+      { "south": 35.42050, "west": -89.41100, "north": 35.42250, "east": -89.40700 },
+      { "south": 35.41850, "west": -89.42700, "north": 35.42050, "east": -89.42300 }
+    ],
+    "dockAprons": [
+      { "south": 35.41900, "west": -89.42400, "north": 35.42050, "east": -89.41200 }
+    ],
+    "staging": { "south": 35.41950, "west": -89.41200, "north": 35.42100, "east": -89.41000 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35, "trailersVisible": 60, "trailerParkingCapacity": 200,
+    "truckGateCount": 2, "buildingCount": 12, "siteAreaAcres": 950.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.42000,-89.41800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": true
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "scale", "entryLanes", "exitLanes", "dockDoorCount", "dropArea", "trailerParkingCapacity", "siteAreaAcres", "railServed", "multiStep"],
+  "fieldNotes": {
+    "facility": "BlueOval City / Tennessee Electric Vehicle Center, Stanton TN - Ford's $5.6B greenfield EV truck + battery campus on the 4,100-acre Memphis Regional Megasite in SW Haywood County. IMPORTANT - the roster geocode (35.457145, -89.405212) landed on the town of Stanton itself, ~4 km NE of the actual campus. The real campus was located ~2.5 miles south of Stanton via web research (Haywood County / TN Megasite Authority sources) and confirmed by satellite at approximately 35.420, -89.418.",
+    "locationCorrection": "Roster lat/lng were wrong (pointed at Stanton town). Corrected center is 35.42000, -89.41800 - the center of the large industrial campus visible at z14-z17.",
+    "truckGate": "Campus shows continuous perimeter chain-link fencing (confirmed in Feb 2026 Street View) and a controlled internal road network with roundabouts. A gate/checkpoint structure with crosswalk markings is visible on the NE truck route. Marked uncertain - the site is mid-ramp-up and imagery is mixed-era; final gate configuration not fully verifiable.",
+    "guardShack": "A booth/checkpoint structure is visible at the NE truck route. Ford runs staffed gatehouses at all assembly campuses. Marked uncertain due to greenfield ramp-up status and construction-era imagery.",
+    "rampUp": "BlueOval City is a greenfield site in active ramp-up - the main assembly building and several supplier buildings are complete (white roofs, fenced) but large portions of the campus remain raw graded land with earthmoving equipment visible in Feb 2026 Street View. Metrics are best-effort and will change as the site builds out.",
+    "railServed": "A large auto/EV campus of this scale is planned with rail service; rail infrastructure is part of the megasite design. Marked uncertain - rail spur not crisply confirmed in current imagery.",
+    "dropYard": "Trailer parking and laydown areas visible at multiple points around the campus; construction laydown yards plus emerging operational trailer parking near the NE and W building faces.",
+    "dockDoors": "Estimated ~35 doors from the assembly building faces; the building is vast but dock banks are still being established - marked uncertain.",
+    "siteAreaAcres": "Perimeter box covers ~950 acres of the developed core; the full Memphis Regional Megasite is 4,100 acres and Ford's footprint within it is still expanding - figure is approximate.",
+    "buildingCount": "~12 distinct buildings - the main assembly/battery plant plus numerous supplier and support buildings; campus still adding structures.",
+    "multipleFacilities": "Large multi-building campus - assembly plant, battery plant, and a supplier park - clearly a campus.",
+    "urbanRural": "Deep rural SW Haywood County, surrounded by farmland and woods, 2.5 miles from the small town of Stanton (~600 residents) - Rural.",
+    "connectivityIssue": "Rural location but a major industrial campus with substantial built infrastructure and a new electrical substation - cellular coverage likely provisioned; set false but flagged as inferred.",
+    "scale": "No truck scale clearly identified; left uncertain."
+  },
+  "method": "deep-audit"
+}

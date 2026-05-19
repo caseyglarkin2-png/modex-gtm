@@ -1,0 +1,2993 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.6988,
+              35.7289
+            ],
+            [
+              -80.6845,
+              35.7289
+            ],
+            [
+              -80.6845,
+              35.7354
+            ],
+            [
+              -80.6988,
+              35.7354
+            ],
+            [
+              -80.6988,
+              35.7289
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Cleveland Truck Manufacturing Plant - Cleveland NC",
+        "type": "Truck assembly plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 200,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.6949,
+              35.73035
+            ],
+            [
+              -80.6942,
+              35.73035
+            ],
+            [
+              -80.6942,
+              35.7309
+            ],
+            [
+              -80.6949,
+              35.7309
+            ],
+            [
+              -80.6949,
+              35.73035
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Cleveland Truck Manufacturing Plant - Cleveland NC",
+        "type": "Truck assembly plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.7002,
+              35.7326
+            ],
+            [
+              -80.6944,
+              35.7326
+            ],
+            [
+              -80.6944,
+              35.7353
+            ],
+            [
+              -80.7002,
+              35.7353
+            ],
+            [
+              -80.7002,
+              35.7326
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Cleveland Truck Manufacturing Plant - Cleveland NC",
+        "type": "Truck assembly plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.6924,
+              35.7316
+            ],
+            [
+              -80.689,
+              35.7316
+            ],
+            [
+              -80.689,
+              35.733
+            ],
+            [
+              -80.6924,
+              35.733
+            ],
+            [
+              -80.6924,
+              35.7316
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Cleveland Truck Manufacturing Plant - Cleveland NC",
+        "type": "Truck assembly plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0058,
+              35.3185
+            ],
+            [
+              -80.9955,
+              35.3185
+            ],
+            [
+              -80.9955,
+              35.331
+            ],
+            [
+              -81.0058,
+              35.331
+            ],
+            [
+              -81.0058,
+              35.3185
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Mount Holly Truck Manufacturing Plant - Mount Holly NC",
+        "type": "Truck assembly plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 130,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0021,
+              35.3274
+            ],
+            [
+              -81.0013,
+              35.3274
+            ],
+            [
+              -81.0013,
+              35.3279
+            ],
+            [
+              -81.0021,
+              35.3279
+            ],
+            [
+              -81.0021,
+              35.3274
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Mount Holly Truck Manufacturing Plant - Mount Holly NC",
+        "type": "Truck assembly plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0034,
+              35.3242
+            ],
+            [
+              -81.0009,
+              35.3242
+            ],
+            [
+              -81.0009,
+              35.3263
+            ],
+            [
+              -81.0034,
+              35.3263
+            ],
+            [
+              -81.0034,
+              35.3242
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Mount Holly Truck Manufacturing Plant - Mount Holly NC",
+        "type": "Truck assembly plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0018,
+              35.3209
+            ],
+            [
+              -80.9996,
+              35.3209
+            ],
+            [
+              -80.9996,
+              35.3242
+            ],
+            [
+              -81.0018,
+              35.3242
+            ],
+            [
+              -81.0018,
+              35.3209
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Mount Holly Truck Manufacturing Plant - Mount Holly NC",
+        "type": "Truck assembly plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.7172,
+              45.571
+            ],
+            [
+              -122.7095,
+              45.571
+            ],
+            [
+              -122.7095,
+              45.5756
+            ],
+            [
+              -122.7172,
+              45.5756
+            ],
+            [
+              -122.7172,
+              45.571
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Portland Truck Manufacturing Plant - Portland OR",
+        "type": "Truck assembly plant (battery-electric)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 0,
+          "buildingCount": 5,
+          "siteAreaAcres": 72,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.7122,
+              45.5736
+            ],
+            [
+              -122.7103,
+              45.5736
+            ],
+            [
+              -122.7103,
+              45.5746
+            ],
+            [
+              -122.7122,
+              45.5746
+            ],
+            [
+              -122.7122,
+              45.5736
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Portland Truck Manufacturing Plant - Portland OR",
+        "type": "Truck assembly plant (battery-electric)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.7162,
+              45.5724
+            ],
+            [
+              -122.7138,
+              45.5724
+            ],
+            [
+              -122.7138,
+              45.575
+            ],
+            [
+              -122.7162,
+              45.575
+            ],
+            [
+              -122.7162,
+              45.5724
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Portland Truck Manufacturing Plant - Portland OR",
+        "type": "Truck assembly plant (battery-electric)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.7136,
+              45.5741
+            ],
+            [
+              -122.7112,
+              45.5741
+            ],
+            [
+              -122.7112,
+              45.5751
+            ],
+            [
+              -122.7136,
+              45.5751
+            ],
+            [
+              -122.7136,
+              45.5741
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Portland Truck Manufacturing Plant - Portland OR",
+        "type": "Truck assembly plant (battery-electric)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.026,
+              35.9385
+            ],
+            [
+              -80.019,
+              35.9385
+            ],
+            [
+              -80.019,
+              35.9445
+            ],
+            [
+              -80.026,
+              35.9445
+            ],
+            [
+              -80.026,
+              35.9385
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Thomas Built Buses Manufacturing Plant - High Point NC",
+        "type": "Bus assembly plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 25,
+          "trailersVisible": 50,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 0,
+          "buildingCount": 8,
+          "siteAreaAcres": 80,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.0216,
+              35.9417
+            ],
+            [
+              -80.0201,
+              35.9417
+            ],
+            [
+              -80.0201,
+              35.9428
+            ],
+            [
+              -80.0216,
+              35.9428
+            ],
+            [
+              -80.0216,
+              35.9417
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Thomas Built Buses Manufacturing Plant - High Point NC",
+        "type": "Bus assembly plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.0241,
+              35.9402
+            ],
+            [
+              -80.022,
+              35.9402
+            ],
+            [
+              -80.022,
+              35.9426
+            ],
+            [
+              -80.0241,
+              35.9426
+            ],
+            [
+              -80.0241,
+              35.9402
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Thomas Built Buses Manufacturing Plant - High Point NC",
+        "type": "Bus assembly plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6845,
+              35.0715
+            ],
+            [
+              -81.676,
+              35.0715
+            ],
+            [
+              -81.676,
+              35.079
+            ],
+            [
+              -81.6845,
+              35.079
+            ],
+            [
+              -81.6845,
+              35.0715
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Freightliner Custom Chassis Manufacturing Plant - Gaffney SC",
+        "type": "Custom chassis assembly plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 250,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 120,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6798,
+              35.0755
+            ],
+            [
+              -81.6791,
+              35.0755
+            ],
+            [
+              -81.6791,
+              35.0759
+            ],
+            [
+              -81.6798,
+              35.0759
+            ],
+            [
+              -81.6798,
+              35.0755
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Freightliner Custom Chassis Manufacturing Plant - Gaffney SC",
+        "type": "Custom chassis assembly plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6794,
+              35.0748
+            ],
+            [
+              -81.6762,
+              35.0748
+            ],
+            [
+              -81.6762,
+              35.0774
+            ],
+            [
+              -81.6794,
+              35.0774
+            ],
+            [
+              -81.6794,
+              35.0748
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Freightliner Custom Chassis Manufacturing Plant - Gaffney SC",
+        "type": "Custom chassis assembly plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6838,
+              35.0756
+            ],
+            [
+              -81.6807,
+              35.0756
+            ],
+            [
+              -81.6807,
+              35.0778
+            ],
+            [
+              -81.6838,
+              35.0778
+            ],
+            [
+              -81.6838,
+              35.0756
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Freightliner Custom Chassis Manufacturing Plant - Gaffney SC",
+        "type": "Custom chassis assembly plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6822,
+              35.0761
+            ],
+            [
+              -81.6802,
+              35.0761
+            ],
+            [
+              -81.6802,
+              35.0771
+            ],
+            [
+              -81.6822,
+              35.0771
+            ],
+            [
+              -81.6822,
+              35.0761
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Freightliner Custom Chassis Manufacturing Plant - Gaffney SC",
+        "type": "Custom chassis assembly plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.2753,
+              42.3735
+            ],
+            [
+              -83.2635,
+              42.3735
+            ],
+            [
+              -83.2635,
+              42.3787
+            ],
+            [
+              -83.2753,
+              42.3787
+            ],
+            [
+              -83.2753,
+              42.3735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Detroit Diesel Corporation Engine Plant - Redford MI",
+        "type": "Engine / powertrain plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 138,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.2752,
+              42.37605
+            ],
+            [
+              -83.2744,
+              42.37605
+            ],
+            [
+              -83.2744,
+              42.37665
+            ],
+            [
+              -83.2752,
+              42.37665
+            ],
+            [
+              -83.2752,
+              42.37605
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Detroit Diesel Corporation Engine Plant - Redford MI",
+        "type": "Engine / powertrain plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.2752,
+              42.376
+            ],
+            [
+              -83.2725,
+              42.376
+            ],
+            [
+              -83.2725,
+              42.3782
+            ],
+            [
+              -83.2752,
+              42.3782
+            ],
+            [
+              -83.2752,
+              42.376
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Detroit Diesel Corporation Engine Plant - Redford MI",
+        "type": "Engine / powertrain plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.2668,
+              42.3768
+            ],
+            [
+              -83.2632,
+              42.3768
+            ],
+            [
+              -83.2632,
+              42.3786
+            ],
+            [
+              -83.2668,
+              42.3786
+            ],
+            [
+              -83.2668,
+              42.3768
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Detroit Diesel Corporation Engine Plant - Redford MI",
+        "type": "Engine / powertrain plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.272,
+              42.3782
+            ],
+            [
+              -83.266,
+              42.3782
+            ],
+            [
+              -83.266,
+              42.3788
+            ],
+            [
+              -83.272,
+              42.3788
+            ],
+            [
+              -83.272,
+              42.3782
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Detroit Diesel Corporation Engine Plant - Redford MI",
+        "type": "Engine / powertrain plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.2752,
+              42.377
+            ],
+            [
+              -83.2745,
+              42.377
+            ],
+            [
+              -83.2745,
+              42.3785
+            ],
+            [
+              -83.2752,
+              42.3785
+            ],
+            [
+              -83.2752,
+              42.377
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Detroit Diesel Corporation Engine Plant - Redford MI",
+        "type": "Engine / powertrain plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.2752,
+              42.376
+            ],
+            [
+              -83.2742,
+              42.376
+            ],
+            [
+              -83.2742,
+              42.3766
+            ],
+            [
+              -83.2752,
+              42.3766
+            ],
+            [
+              -83.2752,
+              42.376
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Detroit Diesel Corporation Engine Plant - Redford MI",
+        "type": "Engine / powertrain plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.2082,
+              35.2858
+            ],
+            [
+              -81.201,
+              35.2858
+            ],
+            [
+              -81.201,
+              35.2902
+            ],
+            [
+              -81.2082,
+              35.2902
+            ],
+            [
+              -81.2082,
+              35.2858
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Gastonia Components and Logistics - Gastonia NC",
+        "type": "Component / parts subassembly and logistics plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 95,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 73,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.20325,
+              35.28785
+            ],
+            [
+              -81.20275,
+              35.28785
+            ],
+            [
+              -81.20275,
+              35.28825
+            ],
+            [
+              -81.20325,
+              35.28825
+            ],
+            [
+              -81.20325,
+              35.28785
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Gastonia Components and Logistics - Gastonia NC",
+        "type": "Component / parts subassembly and logistics plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.2072,
+              35.2884
+            ],
+            [
+              -81.205,
+              35.2884
+            ],
+            [
+              -81.205,
+              35.29
+            ],
+            [
+              -81.2072,
+              35.29
+            ],
+            [
+              -81.2072,
+              35.2884
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Gastonia Components and Logistics - Gastonia NC",
+        "type": "Component / parts subassembly and logistics plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.2068,
+              35.2884
+            ],
+            [
+              -81.2045,
+              35.2884
+            ],
+            [
+              -81.2045,
+              35.289
+            ],
+            [
+              -81.2068,
+              35.289
+            ],
+            [
+              -81.2068,
+              35.2884
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Gastonia Components and Logistics - Gastonia NC",
+        "type": "Component / parts subassembly and logistics plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.2074,
+              35.2868
+            ],
+            [
+              -81.2068,
+              35.2868
+            ],
+            [
+              -81.2068,
+              35.2884
+            ],
+            [
+              -81.2074,
+              35.2884
+            ],
+            [
+              -81.2074,
+              35.2868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Gastonia Components and Logistics - Gastonia NC",
+        "type": "Component / parts subassembly and logistics plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.568,
+              39.9768
+            ],
+            [
+              -81.5656,
+              39.9768
+            ],
+            [
+              -81.5656,
+              39.9796
+            ],
+            [
+              -81.568,
+              39.9796
+            ],
+            [
+              -81.568,
+              39.9768
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Detroit Reman East - Byesville OH",
+        "type": "Remanufacturing plant (engines/components)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 17,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.5677,
+              39.9789
+            ],
+            [
+              -81.5658,
+              39.9789
+            ],
+            [
+              -81.5658,
+              39.9795
+            ],
+            [
+              -81.5677,
+              39.9795
+            ],
+            [
+              -81.5677,
+              39.9789
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Detroit Reman East - Byesville OH",
+        "type": "Remanufacturing plant (engines/components)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.3524,
+              40.5266
+            ],
+            [
+              -112.3483,
+              40.5266
+            ],
+            [
+              -112.3483,
+              40.531
+            ],
+            [
+              -112.3524,
+              40.531
+            ],
+            [
+              -112.3524,
+              40.5266
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Detroit Reman West - Tooele UT",
+        "type": "Remanufacturing plant (engines/components)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 55,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.352,
+              40.528
+            ],
+            [
+              -112.35,
+              40.528
+            ],
+            [
+              -112.35,
+              40.5288
+            ],
+            [
+              -112.352,
+              40.5288
+            ],
+            [
+              -112.352,
+              40.528
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Detroit Reman West - Tooele UT",
+        "type": "Remanufacturing plant (engines/components)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.3524,
+              40.5288
+            ],
+            [
+              -112.3512,
+              40.5288
+            ],
+            [
+              -112.3512,
+              40.53
+            ],
+            [
+              -112.3524,
+              40.53
+            ],
+            [
+              -112.3524,
+              40.5288
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Detroit Reman West - Tooele UT",
+        "type": "Remanufacturing plant (engines/components)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.3514,
+              40.5282
+            ],
+            [
+              -112.3495,
+              40.5282
+            ],
+            [
+              -112.3495,
+              40.5286
+            ],
+            [
+              -112.3514,
+              40.5286
+            ],
+            [
+              -112.3514,
+              40.5282
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Detroit Reman West - Tooele UT",
+        "type": "Remanufacturing plant (engines/components)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.8308,
+              47.3922
+            ],
+            [
+              -92.8276,
+              47.3922
+            ],
+            [
+              -92.8276,
+              47.3944
+            ],
+            [
+              -92.8308,
+              47.3944
+            ],
+            [
+              -92.8308,
+              47.3922
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Detroit Diesel Remanufacturing - Hibbing MN",
+        "type": "Remanufacturing plant (engines/components)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 14,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.8302,
+              47.3935
+            ],
+            [
+              -92.8294,
+              47.3935
+            ],
+            [
+              -92.8294,
+              47.394
+            ],
+            [
+              -92.8302,
+              47.394
+            ],
+            [
+              -92.8302,
+              47.3935
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Detroit Diesel Remanufacturing - Hibbing MN",
+        "type": "Remanufacturing plant (engines/components)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3648,
+              39.9763
+            ],
+            [
+              -86.3619,
+              39.9763
+            ],
+            [
+              -86.3619,
+              39.9788
+            ],
+            [
+              -86.3648,
+              39.9788
+            ],
+            [
+              -86.3648,
+              39.9763
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Whitestown Redistribution Center (RDC) - Whitestown IN",
+        "type": "Parts redistribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 14.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3643,
+              39.97845
+            ],
+            [
+              -86.3639,
+              39.97845
+            ],
+            [
+              -86.3639,
+              39.9788
+            ],
+            [
+              -86.3643,
+              39.9788
+            ],
+            [
+              -86.3643,
+              39.97845
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Whitestown Redistribution Center (RDC) - Whitestown IN",
+        "type": "Parts redistribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3642,
+              39.9763
+            ],
+            [
+              -86.36195,
+              39.9763
+            ],
+            [
+              -86.36195,
+              39.9767
+            ],
+            [
+              -86.3642,
+              39.9767
+            ],
+            [
+              -86.3642,
+              39.9763
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Whitestown Redistribution Center (RDC) - Whitestown IN",
+        "type": "Parts redistribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.36415,
+              39.97655
+            ],
+            [
+              -86.36195,
+              39.97655
+            ],
+            [
+              -86.36195,
+              39.97695
+            ],
+            [
+              -86.36415,
+              39.97695
+            ],
+            [
+              -86.36415,
+              39.97655
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Whitestown Redistribution Center (RDC) - Whitestown IN",
+        "type": "Parts redistribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3879,
+              39.97785
+            ],
+            [
+              -86.3847,
+              39.97785
+            ],
+            [
+              -86.3847,
+              39.98005
+            ],
+            [
+              -86.3879,
+              39.98005
+            ],
+            [
+              -86.3879,
+              39.97785
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Indianapolis Parts Distribution Center - Whitestown IN",
+        "type": "Parts distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 34,
+          "trailersVisible": 32,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 12,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3852,
+              39.9789
+            ],
+            [
+              -86.3848,
+              39.9789
+            ],
+            [
+              -86.3848,
+              39.97925
+            ],
+            [
+              -86.3852,
+              39.97925
+            ],
+            [
+              -86.3852,
+              39.9789
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Indianapolis Parts Distribution Center - Whitestown IN",
+        "type": "Parts distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3871,
+              39.97785
+            ],
+            [
+              -86.385,
+              39.97785
+            ],
+            [
+              -86.385,
+              39.9782
+            ],
+            [
+              -86.3871,
+              39.9782
+            ],
+            [
+              -86.3871,
+              39.97785
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Indianapolis Parts Distribution Center - Whitestown IN",
+        "type": "Parts distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3872,
+              39.97815
+            ],
+            [
+              -86.385,
+              39.97815
+            ],
+            [
+              -86.385,
+              39.97855
+            ],
+            [
+              -86.3872,
+              39.97855
+            ],
+            [
+              -86.3872,
+              39.97815
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Indianapolis Parts Distribution Center - Whitestown IN",
+        "type": "Parts distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.8757,
+              35.03555
+            ],
+            [
+              -89.8734,
+              35.03555
+            ],
+            [
+              -89.8734,
+              35.03975
+            ],
+            [
+              -89.8757,
+              35.03975
+            ],
+            [
+              -89.8757,
+              35.03555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Memphis Parts Distribution Center - Memphis TN",
+        "type": "Parts distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 24,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.8741,
+              35.0394
+            ],
+            [
+              -89.8735,
+              35.0394
+            ],
+            [
+              -89.8735,
+              35.03975
+            ],
+            [
+              -89.8741,
+              35.03975
+            ],
+            [
+              -89.8741,
+              35.0394
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Memphis Parts Distribution Center - Memphis TN",
+        "type": "Parts distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.87365,
+              35.036
+            ],
+            [
+              -89.8734,
+              35.036
+            ],
+            [
+              -89.8734,
+              35.0393
+            ],
+            [
+              -89.87365,
+              35.0393
+            ],
+            [
+              -89.87365,
+              35.036
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Memphis Parts Distribution Center - Memphis TN",
+        "type": "Parts distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.874,
+              35.036
+            ],
+            [
+              -89.8735,
+              35.036
+            ],
+            [
+              -89.8735,
+              35.0393
+            ],
+            [
+              -89.874,
+              35.0393
+            ],
+            [
+              -89.874,
+              35.036
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Memphis Parts Distribution Center - Memphis TN",
+        "type": "Parts distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.8756,
+              35.0393
+            ],
+            [
+              -89.8735,
+              35.0393
+            ],
+            [
+              -89.8735,
+              35.03975
+            ],
+            [
+              -89.8756,
+              35.03975
+            ],
+            [
+              -89.8756,
+              35.0393
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Memphis Parts Distribution Center - Memphis TN",
+        "type": "Parts distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.98405,
+              34.1161
+            ],
+            [
+              -83.9813,
+              34.1161
+            ],
+            [
+              -83.9813,
+              34.11945
+            ],
+            [
+              -83.98405,
+              34.11945
+            ],
+            [
+              -83.98405,
+              34.1161
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Atlanta Parts Distribution Center - Buford GA",
+        "type": "Parts distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 52,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 26,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.98295,
+              34.11615
+            ],
+            [
+              -83.9826,
+              34.11615
+            ],
+            [
+              -83.9826,
+              34.1164
+            ],
+            [
+              -83.98295,
+              34.1164
+            ],
+            [
+              -83.98295,
+              34.11615
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Atlanta Parts Distribution Center - Buford GA",
+        "type": "Parts distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.98405,
+              34.1163
+            ],
+            [
+              -83.9815,
+              34.1163
+            ],
+            [
+              -83.9815,
+              34.1169
+            ],
+            [
+              -83.98405,
+              34.1169
+            ],
+            [
+              -83.98405,
+              34.1163
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Atlanta Parts Distribution Center - Buford GA",
+        "type": "Parts distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.98405,
+              34.11845
+            ],
+            [
+              -83.9815,
+              34.11845
+            ],
+            [
+              -83.9815,
+              34.11945
+            ],
+            [
+              -83.98405,
+              34.11945
+            ],
+            [
+              -83.98405,
+              34.11845
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Atlanta Parts Distribution Center - Buford GA",
+        "type": "Parts distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.984,
+              34.11665
+            ],
+            [
+              -83.9815,
+              34.11665
+            ],
+            [
+              -83.9815,
+              34.11705
+            ],
+            [
+              -83.984,
+              34.11705
+            ],
+            [
+              -83.984,
+              34.11665
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Atlanta Parts Distribution Center - Buford GA",
+        "type": "Parts distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.984,
+              34.1183
+            ],
+            [
+              -83.9815,
+              34.1183
+            ],
+            [
+              -83.9815,
+              34.1187
+            ],
+            [
+              -83.984,
+              34.1187
+            ],
+            [
+              -83.984,
+              34.1183
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Atlanta Parts Distribution Center - Buford GA",
+        "type": "Parts distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0334,
+              32.7959
+            ],
+            [
+              -97.0299,
+              32.7959
+            ],
+            [
+              -97.0299,
+              32.79805
+            ],
+            [
+              -97.0334,
+              32.79805
+            ],
+            [
+              -97.0334,
+              32.7959
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Dallas Parts Distribution Center - Grand Prairie TX",
+        "type": "Parts distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 19,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0308,
+              32.7963
+            ],
+            [
+              -97.0304,
+              32.7963
+            ],
+            [
+              -97.0304,
+              32.7966
+            ],
+            [
+              -97.0308,
+              32.7966
+            ],
+            [
+              -97.0308,
+              32.7963
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Dallas Parts Distribution Center - Grand Prairie TX",
+        "type": "Parts distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0331,
+              32.79615
+            ],
+            [
+              -97.0302,
+              32.79615
+            ],
+            [
+              -97.0302,
+              32.7968
+            ],
+            [
+              -97.0331,
+              32.7968
+            ],
+            [
+              -97.0331,
+              32.79615
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Dallas Parts Distribution Center - Grand Prairie TX",
+        "type": "Parts distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0331,
+              32.79655
+            ],
+            [
+              -97.0302,
+              32.79655
+            ],
+            [
+              -97.0302,
+              32.79695
+            ],
+            [
+              -97.0331,
+              32.79695
+            ],
+            [
+              -97.0331,
+              32.79655
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Dallas Parts Distribution Center - Grand Prairie TX",
+        "type": "Parts distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.7844,
+              41.67
+            ],
+            [
+              -93.7826,
+              41.67
+            ],
+            [
+              -93.7826,
+              41.6721
+            ],
+            [
+              -93.7844,
+              41.6721
+            ],
+            [
+              -93.7844,
+              41.67
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Des Moines Parts Distribution Center - Grimes IA",
+        "type": "Parts distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 16,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.7831,
+              41.6718
+            ],
+            [
+              -93.7827,
+              41.6718
+            ],
+            [
+              -93.7827,
+              41.6721
+            ],
+            [
+              -93.7831,
+              41.6721
+            ],
+            [
+              -93.7831,
+              41.6718
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Des Moines Parts Distribution Center - Grimes IA",
+        "type": "Parts distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.783,
+              41.6703
+            ],
+            [
+              -93.78265,
+              41.6703
+            ],
+            [
+              -93.78265,
+              41.6719
+            ],
+            [
+              -93.783,
+              41.6719
+            ],
+            [
+              -93.783,
+              41.6703
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Des Moines Parts Distribution Center - Grimes IA",
+        "type": "Parts distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.78325,
+              41.6703
+            ],
+            [
+              -93.7829,
+              41.6703
+            ],
+            [
+              -93.7829,
+              41.6719
+            ],
+            [
+              -93.78325,
+              41.6719
+            ],
+            [
+              -93.78325,
+              41.6703
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "daimler-truck-north-america",
+        "name": "Des Moines Parts Distribution Center - Grimes IA",
+        "type": "Parts distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    }
+  ]
+}

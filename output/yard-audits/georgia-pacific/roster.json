@@ -1,0 +1,488 @@
+{
+  "account": "Georgia Pacific",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 30,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "GP Wauna Mill - Clatskanie OR",
+      "city": "Clatskanie",
+      "state": "OR",
+      "type": "Tissue/Towel Mill",
+      "address": "92929 Wauna Mill Rd, Clatskanie, OR 97016",
+      "lat": 46.10414,
+      "lng": -123.203936,
+      "source": "Dossier (Consumer Products tissue, $150M paper machine rebuild startup 2026); GP locations",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 238
+      }
+    },
+    {
+      "idx": 2,
+      "name": "GP Halsey Mill - Halsey OR",
+      "city": "Halsey",
+      "state": "OR",
+      "type": "Tissue/Pulp Mill",
+      "address": "31831 Cartney Dr, Halsey, OR 97348",
+      "lat": 44.316671,
+      "lng": -123.107215,
+      "source": "Dossier (Quilted Northern Ultra Plush, ~550 employees); GP locations",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 57
+      }
+    },
+    {
+      "idx": 3,
+      "name": "GP Crossett Mill - Crossett AR",
+      "city": "Crossett",
+      "state": "AR",
+      "type": "Pulp/Paper/Tissue Mill",
+      "address": "100 Georgia-Pacific Dr, Crossett, AR 71635",
+      "lat": 33.135284,
+      "lng": -91.968356,
+      "source": "Dossier (Angel Soft tissue expansion, $90M); GP locations",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 3
+      }
+    },
+    {
+      "idx": 4,
+      "name": "GP Broadway Mill - Green Bay WI",
+      "city": "Green Bay",
+      "state": "WI",
+      "type": "Tissue/Towel Mill",
+      "address": "1919 S Broadway, Green Bay, WI 54304",
+      "lat": 44.49271,
+      "lng": -88.034475,
+      "source": "Dossier (Consumer Products tissue); GP Broadway LLC",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 222
+      }
+    },
+    {
+      "idx": 5,
+      "name": "GP Muskogee Mill - Muskogee OK",
+      "city": "Muskogee",
+      "state": "OK",
+      "type": "Tissue/Towel Mill",
+      "address": "801 N 32nd St, Muskogee, OK 74401",
+      "lat": 35.762459,
+      "lng": -95.403211,
+      "source": "Dossier (Consumer Products tissue); GP Muskogee LLC",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 59
+      }
+    },
+    {
+      "idx": 6,
+      "name": "GP Savannah River Mill - Rincon GA",
+      "city": "Rincon",
+      "state": "GA",
+      "type": "Tissue/Towel Mill",
+      "address": "115 Fort Howard Rd, Rincon, GA 31326",
+      "lat": 32.333323,
+      "lng": -81.21165,
+      "source": "Dossier (Consumer Products tissue); GP Savannah River LLC",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 83
+      }
+    },
+    {
+      "idx": 7,
+      "name": "GP Naheola Mill - Pennington AL",
+      "city": "Pennington",
+      "state": "AL",
+      "type": "Pulp/Tissue/Paperboard Mill",
+      "address": "7530 Highway 114, Pennington, AL 36916",
+      "lat": 32.223373,
+      "lng": -88.029265,
+      "source": "Web research (one of GP's largest mills, 1000+ employees; bath tissue + bleached board for Dixie); $120M investment",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 42
+      }
+    },
+    {
+      "idx": 8,
+      "name": "GP Plattsburgh Mill - Plattsburgh NY",
+      "city": "Plattsburgh",
+      "state": "NY",
+      "type": "Tissue/Towel Mill",
+      "address": "1 Georgia-Pacific Rd, Plattsburgh, NY 12901",
+      "lat": 44.710302,
+      "lng": -73.451029,
+      "source": "Web research (Consumer Products tissue mill, NE distribution; bath tissue investment)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 21
+      }
+    },
+    {
+      "idx": 9,
+      "name": "GP Alabama River Cellulose Mill - Perdue Hill AL",
+      "city": "Perdue Hill",
+      "state": "AL",
+      "type": "Cellulose/Pulp Mill",
+      "address": "Highway 84, Perdue Hill, AL 36470",
+      "lat": 31.515011,
+      "lng": -87.494842,
+      "source": "Dossier (cellulose mill, $800M modernization Q4 2025-2027); GP Packaging & Cellulose locations",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 10,
+      "name": "GP Brunswick Cellulose Mill - Brunswick GA",
+      "city": "Brunswick",
+      "state": "GA",
+      "type": "Cellulose/Pulp Mill",
+      "address": "100 Pulp Plant Rd, Brunswick, GA 31520",
+      "lat": 31.229422,
+      "lng": -81.512762,
+      "source": "Dossier (cellulose mill, ocean export); GP Packaging & Cellulose locations",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 45
+      }
+    },
+    {
+      "idx": 11,
+      "name": "GP Leaf River Cellulose Mill - New Augusta MS",
+      "city": "New Augusta",
+      "state": "MS",
+      "type": "Cellulose/Pulp Mill",
+      "address": "358 Leaf River Rd, New Augusta, MS 39462",
+      "lat": 31.218882,
+      "lng": -89.052055,
+      "source": "Dossier (Leaf River cellulose mill); GP Packaging & Cellulose locations",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 3
+      }
+    },
+    {
+      "idx": 12,
+      "name": "GP Memphis Cellulose Mill - Memphis TN",
+      "city": "Memphis",
+      "state": "TN",
+      "type": "Cellulose Mill",
+      "address": "100 N B St, Memphis, TN 38106",
+      "lat": 35.148581,
+      "lng": -90.051896,
+      "source": "GP Packaging & Cellulose locations page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 1952
+      }
+    },
+    {
+      "idx": 13,
+      "name": "GP Brewton Mill - Brewton AL",
+      "city": "Brewton",
+      "state": "AL",
+      "type": "Containerboard/Bleached Board Mill",
+      "address": "200 Hwy 41 N, Brewton, AL 36426",
+      "lat": 31.105178,
+      "lng": -87.072192,
+      "source": "Dossier (containerboard mill, Infor Phase 2); GP Packaging & Cellulose locations",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 19
+      }
+    },
+    {
+      "idx": 14,
+      "name": "GP Monticello Mill - Monticello MS",
+      "city": "Monticello",
+      "state": "MS",
+      "type": "Containerboard Mill",
+      "address": "1715 Highway 84 E, Monticello, MS 39654",
+      "lat": 31.579539,
+      "lng": -90.039401,
+      "source": "Dossier (containerboard mill, Infor Phase 2); GP Packaging & Cellulose locations",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 5
+      }
+    },
+    {
+      "idx": 15,
+      "name": "GP Toledo Mill - Toledo OR",
+      "city": "Toledo",
+      "state": "OR",
+      "type": "Containerboard/Linerboard Mill",
+      "address": "1 Butler Bridge Rd, Toledo, OR 97391",
+      "lat": 44.60417,
+      "lng": -123.935516,
+      "source": "Dossier (containerboard mill, Infor Phase 2); Wikipedia (kraft pulp + linerboard mill)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 4
+      }
+    },
+    {
+      "idx": 16,
+      "name": "GP Big Island Mill - Big Island VA",
+      "city": "Big Island",
+      "state": "VA",
+      "type": "Containerboard Mill",
+      "address": "10097 Lee Jackson Hwy, Big Island, VA 24526",
+      "lat": 37.52707,
+      "lng": -79.35375,
+      "source": "Dossier (containerboard mill, Infor Phase 2); GP Packaging & Cellulose locations",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 84
+      }
+    },
+    {
+      "idx": 17,
+      "name": "GP Palatka Mill - Palatka FL",
+      "city": "Palatka",
+      "state": "FL",
+      "type": "Kraft/Tissue Mill",
+      "address": "Highway 17 N, Palatka, FL 32177",
+      "lat": 29.650032,
+      "lng": -81.647668,
+      "source": "GP Packaging & Cellulose locations (Kraft Mill); produces tissue and paper",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 3
+      }
+    },
+    {
+      "idx": 18,
+      "name": "GP Dixie Tableware Plant - Jackson TN",
+      "city": "Jackson",
+      "state": "TN",
+      "type": "Tableware/Converting Plant",
+      "address": "Mercer Rd, Jackson, TN 38301",
+      "lat": 35.551418,
+      "lng": -89.184861,
+      "source": "Web research (new $425M Dixie tableware facility, production started June 2024)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 5
+      }
+    },
+    {
+      "idx": 19,
+      "name": "GP Dixie Cup Plant - Lexington KY",
+      "city": "Lexington",
+      "state": "KY",
+      "type": "Cup/Converting Plant",
+      "address": "1900 Spurr Rd, Lexington, KY 40511",
+      "lat": 38.104086,
+      "lng": -84.506349,
+      "source": "Web research (sole Dixie cup production site after Easton PA consolidation)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 4
+      }
+    },
+    {
+      "idx": 20,
+      "name": "GP Anchor Packaging Plant - Jonesboro AR",
+      "city": "Jonesboro",
+      "state": "AR",
+      "type": "Thermoformed Packaging Plant",
+      "address": "Jonesboro, AR 72401",
+      "lat": 35.891617,
+      "lng": -90.658333,
+      "source": "Dossier (Anchor Packaging acquisition closed Oct 2025; net-new yard ops)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 96
+      }
+    },
+    {
+      "idx": 21,
+      "name": "GP Anchor Packaging Plant - Paragould AR",
+      "city": "Paragould",
+      "state": "AR",
+      "type": "Thermoformed/Cling Film Packaging Plant",
+      "address": "Paragould, AR 72450",
+      "lat": 36.052562,
+      "lng": -90.48868,
+      "source": "Dossier (Anchor Packaging acquisition closed Oct 2025)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 6
+      }
+    },
+    {
+      "idx": 22,
+      "name": "GP Anchor Packaging Plant - Janesville WI",
+      "city": "Janesville",
+      "state": "WI",
+      "type": "Packaging/Film Plant",
+      "address": "Janesville, WI 53546",
+      "lat": 42.644223,
+      "lng": -88.960536,
+      "source": "Dossier (Anchor Packaging acquisition closed Oct 2025)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 565
+      }
+    },
+    {
+      "idx": 23,
+      "name": "GP Wood Products - Talladega Lumber Mill - Talladega AL",
+      "city": "Talladega",
+      "state": "AL",
+      "type": "Lumber Mill",
+      "address": "Talladega, AL 35160",
+      "lat": 33.435942,
+      "lng": -86.105805,
+      "source": "Web research ($100M lumber facility, started production Nov 2018; Building Products division)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 11764
+      }
+    },
+    {
+      "idx": 24,
+      "name": "GP Madison Plywood Plant - Madison GA",
+      "city": "Madison",
+      "state": "GA",
+      "type": "Plywood Plant",
+      "address": "1310 Eatonton Rd, Madison, GA 30650",
+      "lat": 33.577493,
+      "lng": -83.476782,
+      "source": "Web research ($65M plywood investment; Building Products division)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 49
+      }
+    },
+    {
+      "idx": 25,
+      "name": "GP Prosperity Plywood Plant - Prosperity SC",
+      "city": "Prosperity",
+      "state": "SC",
+      "type": "Plywood Plant",
+      "address": "Prosperity, SC 29127",
+      "lat": 34.209308,
+      "lng": -81.53316,
+      "source": "Web research ($14M plywood mill investment; Building Products division)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 11
+      }
+    },
+    {
+      "idx": 26,
+      "name": "GP Brookneal OSB Plant - Brookneal VA",
+      "city": "Brookneal",
+      "state": "VA",
+      "type": "OSB Plant",
+      "address": "1093 Cyclone Rd, Brookneal, VA 24528",
+      "lat": 37.050142,
+      "lng": -78.94418,
+      "source": "Web research (Building Products OSB plant; Forest Products Locator)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 67
+      }
+    },
+    {
+      "idx": 27,
+      "name": "GP Gypsum Plant - Savannah GA",
+      "city": "Savannah",
+      "state": "GA",
+      "type": "Gypsum Wallboard Plant",
+      "address": "2861 Tremont Rd, Savannah, GA 31405",
+      "lat": 32.058166,
+      "lng": -81.13432,
+      "source": "Web research (GP Gypsum manufacturing location; Building Products division)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 41
+      }
+    },
+    {
+      "idx": 28,
+      "name": "GP Gypsum Plant - Sweetwater TX",
+      "city": "Sweetwater",
+      "state": "TX",
+      "type": "Gypsum Wallboard Plant",
+      "address": "Sweetwater, TX 79556",
+      "lat": 32.470952,
+      "lng": -100.405938,
+      "source": "Web research (new $325M gypsum wallboard facility, opened 2023; Building Products division)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 4088
+      }
+    },
+    {
+      "idx": 29,
+      "name": "GP Corrugated Box Plant - Kansas City MO",
+      "city": "Kansas City",
+      "state": "MO",
+      "type": "Corrugated Box Plant",
+      "address": "Kansas City, MO 64120",
+      "lat": 39.134715,
+      "lng": -94.51604,
+      "source": "GP Packaging & Cellulose locations (corrugated box plant; Midwest geographic spread)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 2159
+      }
+    },
+    {
+      "idx": 30,
+      "name": "GP Corrugated Box Plant - Waxahachie TX",
+      "city": "Waxahachie",
+      "state": "TX",
+      "type": "Corrugated Box Plant",
+      "address": "Waxahachie, TX 75165",
+      "lat": 32.378277,
+      "lng": -96.770814,
+      "source": "GP Packaging & Cellulose locations (corrugated box plant; serves DFW Sam's Club Gatik lanes per dossier)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 7299
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

@@ -1,0 +1,53 @@
+{
+  "name": "John Deere Reman - Springfield MO",
+  "type": "Remanufacturing Plant",
+  "coords": { "lat": 37.243981, "lng": -93.200702 },
+  "geofences": {
+    "perimeter": { "south": 37.24270, "west": -93.20290, "north": 37.24480, "east": -93.19920 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 37.24320, "west": -93.20210, "north": 37.24400, "east": -93.20030 }
+    ],
+    "staging": { "south": 37.24310, "west": -93.20200, "north": 37.24390, "east": -93.19990 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 3,
+    "trailerParkingCapacity": 10,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 22.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.243981,-93.200702,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount"],
+  "fieldNotes": {
+    "resolvedLocation": "Geocode (4500 E Mustard Way, Partnership Industrial Center) landed on the correct John Deere Reman building - confirmed by Street View (2026-03) showing the building front with entrance canopy on Mustard Way and the 4500 E Mustard Way address sign at the property.",
+    "truckGate": "Open campus - no controlled truck entrance. Employee parking lots front Mustard Way with an open driveway; a single internal driveway loops around the building's SW corner to the south dock yard. No barrier arm, gate, guard booth, or perimeter fence observed in satellite or Street View.",
+    "guardShack": "No guard booth anywhere on site.",
+    "remoteGs": "False - no truck gate at the property line.",
+    "drivewayLong": "Long internal truck driveway wrapping the building from the road to the south docks; would hold 3+ trucks.",
+    "dockDoors": "Dock-door bank with visible dock-leveler bays along the SW/south building face; estimated 10-25 total, low-confidence count.",
+    "dropArea": "No dedicated trailer drop yard; the south yard holds material laydown (crates, tanks, equipment) and only a few trailers. 0-10 band.",
+    "shipRcvSeparate": "Docks concentrated on the south/SW building face; no separated ship vs. receive clusters.",
+    "urbanRural": "Located within the Partnership Industrial Center, an established industrial park on the developed northeast side of Springfield, MO (metro of ~475k); classified Urban.",
+    "multipleFacilities": "Single large remanufacturing building - not a multi-building campus.",
+    "scale": "No truck scale observed.",
+    "dropYard": "No dedicated trailer-storage lot; reman plant relies on a modest material/staging yard.",
+    "railServed": "A rail mainline corridor runs along the south edge of the property but no spur enters the site - railServed = false."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,49 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Honda - Marysville Auto Plant (MAP) - Marysville OH,Auto Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@40.2778,-83.506,400m/data=!3m1!1e3"
+Honda - East Liberty Auto Plant (ELP) - East Liberty OH,Auto Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@40.3285,-83.5475,400m/data=!3m1!1e3"
+Honda - Performance Manufacturing Center (PMC) - Marysville OH,Auto Assembly Plant (low-volume),#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,YES,,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@40.2793,-83.5253,400m/data=!3m1!1e3"
+Honda - Anna Engine Plant (AEP) - Anna OH,Engine Plant / EV Battery Pack (IPU) Assembly,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@40.376,-84.1925,400m/data=!3m1!1e3"
+Honda Manufacturing of Alabama (HMA) - Lincoln AL,Auto Assembly Plant + Engine Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@33.6155,-86.144,400m/data=!3m1!1e3"
+Honda Manufacturing of Indiana (HMIN) - Greensburg IN,Auto Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@39.368,-85.541,400m/data=!3m1!1e3"
+LG Energy Solution-Honda EV Battery Plant (L-H Battery Co.) - Jeffersonville OH,EV Battery Cell Plant (JV),#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,YES,,,YES,,,,Rural,,,,,"https://www.google.com/maps/@39.6248,-83.57,400m/data=!3m1!1e3"
+Honda Transmission Mfg. of America - Russells Point OH,Transmission Plant,#1,Gate + GS (not BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@40.4475,-83.8995,400m/data=!3m1!1e3"
+Honda Precision Parts of Georgia (Transmission Plant) - Tallapoosa GA,Transmission Plant,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,YES,,YES,Rural,YES,,,YES,"https://www.google.com/maps/@33.691,-85.2845,400m/data=!3m1!1e3"
+Honda of South Carolina Mfg. (ATV/UTV Plant) - Timmonsville SC,ATV / UTV / Side-by-Side Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@34.1105,-79.9165,400m/data=!3m1!1e3"
+Honda Power Equipment Mfg. - Swepsonville NC,Power Equipment / General-Purpose Engine Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@36.033436,-79.344443,400m/data=!3m1!1e3"
+Honda - Marysville Motorcycle Plant (MMP) - Marysville OH,Motorcycle / Powersports Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@40.279000,-83.502500,400m/data=!3m1!1e3"
+Honda Aircraft Company (HondaJet) - Greensboro NC,Aircraft Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,,YES,,,YES,,1,1,,YES,,,,,,,,,Rural,,YES,,,"https://www.google.com/maps/@36.102500,-79.923500,400m/data=!3m1!1e3"
+"Honda Aero, Inc. (GE Honda HF120 engines) - Burlington NC",Aircraft Engine Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,YES,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@36.047000,-79.481000,400m/data=!3m1!1e3"
+American Honda - Troy Parts Distribution Center - Troy OH,Parts Distribution Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@40.048500,-84.237200,400m/data=!3m1!1e3"
+American Honda - Midwest Consolidation Center (MCC) - Troy OH,Parts Consolidation Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@40.04630,-84.23600,400m/data=!3m1!1e3"
+American Honda - Chino Parts Distribution Center (NA Hub West) - Chino CA,Parts / Accessories Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@33.99624,-117.69960,400m/data=!3m1!1e3"
+American Honda - Irving Parts Distribution Center - Irving TX,Parts Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@32.92215,-97.00910,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,1,6%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,3,17%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,9,50%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,1,6%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,2,11%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,2,11%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,18,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,12,67%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,16,89%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,13,72%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,5,28%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,18,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,18,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

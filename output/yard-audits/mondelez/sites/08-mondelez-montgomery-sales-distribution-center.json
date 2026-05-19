@@ -1,0 +1,68 @@
+{
+  "name": "Mondelez Montgomery Sales Distribution Center - Montgomery NY",
+  "type": "Distribution center / sales warehouse",
+  "coords": { "lat": 41.49400, "lng": -74.22360 },
+  "geofences": {
+    "perimeter": { "south": 41.49255, "west": -74.22455, "north": 41.49490, "east": -74.22215 },
+    "truckGate": { "south": 41.49405, "west": -74.22420, "north": 41.49445, "east": -74.22375 },
+    "dropYards": [
+      { "south": 41.49255, "west": -74.22420, "north": 41.49385, "east": -74.22300 },
+      { "south": 41.49320, "west": -74.22310, "north": 41.49420, "east": -74.22215 }
+    ],
+    "dockAprons": [
+      { "south": 41.49360, "west": -74.22400, "north": 41.49420, "east": -74.22320 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 32,
+    "trailerParkingCapacity": 37,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 11.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.49400,-74.22360,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Two open paved curb cuts off Neelytown Rd into the yard. No barrier arm, sliding gate, or checkpoint pinch-point; no perimeter fence along the road frontage in Street View (2025-08). Open-access facility.",
+    "guardShack": "No staffed booth at either driveway. The only secondary structure is a small office annex attached to the warehouse front, not a gate-side booth.",
+    "remoteGs": "No gate, so no remote check-in inferred.",
+    "entryExitSeparate": "Two separate driveways off Neelytown Rd serve the property, allowing distinct in/out points.",
+    "dockDoors": "100,300 sq ft sales DC. Street View shows ~8-12 bay doors on the NW building face; additional doors likely on the south/yard face. Estimated band 10-25, count ~14 - flagged uncertain (faces partly obscured at z21).",
+    "dropArea": "Large open trailer yard with multiple rows of parked trailers; published spec is 37 truck spots. ~32 trailers counted in imagery, band 25-50.",
+    "dropYard": "Dedicated trailer-storage yard wraps the south and east of the building, full of parked trailers.",
+    "drivewayLong": "Large open paved yard between the driveways and the dock face gives deep stacking for 3+ trucks.",
+    "fastLaneOpportunity": "Wide open yard apron and two driveways leave abundant unused paved width for an express/bypass lane.",
+    "postGateStaging": "Open paved yard inside the property before the docks functions as a holding/queue area.",
+    "urbanRural": "Facility sits on a rural two-lane road (Neelytown Rd) surrounded by woods and grass on the edge of Montgomery; clearly Rural.",
+    "truckGateCount": "Two distinct driveway entrances observed."
+  },
+  "method": "deep-audit"
+}

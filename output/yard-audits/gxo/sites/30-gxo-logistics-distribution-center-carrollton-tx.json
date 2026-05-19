@@ -1,0 +1,47 @@
+{
+  "name": "GXO Logistics Distribution Center - Carrollton TX",
+  "type": "Distribution Center",
+  "coords": { "lat": 32.989435, "lng": -96.928073 },
+  "geofences": {
+    "perimeter": { "south": 32.98850, "west": -96.92950, "north": 32.99080, "east": -96.92700 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 32.98860, "west": -96.92810, "north": 32.99010, "east": -96.92710 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20,
+    "trailersVisible": 5,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 11.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.989435,-96.928073,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "dropArea", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Open site - no perimeter fence, gate, or guard booth. Driveways open directly from the internal industrial-park roads; the front entrance is an open drive (confirmed in 2024-02 and 2025-02 Street View).",
+    "dockDoors": "Older tilt-up industrial building (~1980s-90s). Dock band with loading canopies along the NE face and SE end; estimated ~20 doors - banded 10-25.",
+    "dropArea": "Only a few trailers/box trucks at the SE dock apron; no dedicated trailer drop yard - banded 0-10.",
+    "drivewayShort": "Modest dock apron - holds only 1-2 trucks staging; no deep approach.",
+    "railServed": "A rail line runs alongside the SE/NE property edge but no spur enters the building - not rail-served.",
+    "dropYard": "No dedicated trailer-storage lot; only dock-apron parking.",
+    "buildingCount": "Single mid-size distribution building in a dense Carrollton industrial park."
+  },
+  "method": "deep-audit"
+}

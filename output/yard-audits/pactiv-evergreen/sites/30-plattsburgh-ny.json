@@ -1,0 +1,68 @@
+{
+  "name": "Pactiv Evergreen - Plattsburgh NY",
+  "type": "Manufacturing Plant (Food Merchandising)",
+  "coords": { "lat": 44.71100, "lng": -73.45250 },
+  "geofences": {
+    "perimeter": { "south": 44.70850, "west": -73.45520, "north": 44.71370, "east": -73.44900 },
+    "truckGate": { "south": 44.71080, "west": -73.45050, "north": 44.71130, "east": -73.44970 },
+    "dropYards": [
+      { "south": 44.71110, "west": -73.45430, "north": 44.71230, "east": -73.45300 },
+      { "south": 44.71190, "west": -73.45040, "north": 44.71280, "east": -73.44930 }
+    ],
+    "dockAprons": [
+      { "south": 44.71130, "west": -73.45390, "north": 44.71220, "east": -73.45290 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 50,
+    "truckGateCount": 2,
+    "buildingCount": 8,
+    "siteAreaAcres": 39.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.71100,-73.45250,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "dockDoorCount", "buildingCount", "entryLanes", "exitLanes", "railServed", "siteAreaAcres"],
+  "fieldNotes": {
+    "coords": "ROSTER COORDS WERE WRONG. The roster point (44.708769, -73.453892, geocode RANGE_INTERPOLATED) landed on a small orange-roofed building in a residential block ~0.35 km SW of the plant. The actual Pactiv Evergreen plant is the large multi-building industrial campus at 74 Weed Street, centered ~44.7110, -73.4525, ~0.3 km NE of the roster point. Corrected via web research (Yelp, CMac, Breakroom job posts all list 74 Weed Street) and satellite identification of the only industrial campus matching the address.",
+    "truckGate": "The entire campus is enclosed by continuous chain-link perimeter fencing - visible in every 2023/2025 Street View pass along Weed Street. Truck and dock yards (north and NW of the legacy mill buildings) are reached through gated openings in that fence. Verdict: gated. Flagged uncertain because the specific gate openings/arms could not be crisply resolved - the fence-line itself is unambiguous but no single barrier-arm checkpoint was clearly imaged.",
+    "guardShack": "No staffed guard booth visible at any perimeter gate opening along Weed Street or the north access. The legacy brick office building fronts Weed Street but is not a gate booth.",
+    "remoteGs": "True - the campus is fence-and-gate controlled but shows no manned guard booth, implying badge/kiosk check-in.",
+    "dockDoorCount": "Dock canopy bank on the west face of a north warehouse with ~12 trailers backed in; additional dock doors on the NE warehouse face. Total estimated ~22 across the campus (band 10-25) - flagged as an estimate; the dense legacy layout obscures some faces.",
+    "dropArea": "A large gravel/paved drop yard on the NW side holds multiple rows of parked tractor-less trailers (~20+), plus more trailers along the NE warehouse face - a substantial trailer-storage operation. Band 25-50.",
+    "multipleFacilities": "True - this is a sprawling campus of many connected and separate buildings: the ~1902 legacy molded-fiber mill complex (dark roofs, center/south) plus several large modern warehouse buildings (light roofs, north).",
+    "buildingCount": "~8 distinct building masses estimated across the campus - the legacy mill is many interconnected structures so the count is approximate.",
+    "railServed": "Rail lines run along the west edge of the campus and a spur appears to enter the property on the west side near the legacy mill; this 1902-era paper/fiber mill was historically rail-served. Flagged uncertain - spur entry into the active yard not fully confirmed in current imagery.",
+    "urbanRural": "Located inside the City of Plattsburgh NY, surrounded by residential blocks and commercial development on Weed Street - judged Urban.",
+    "drivewayLong": "The internal campus roads and the deep NW drop yard easily hold a 3+ truck queue inside the fence.",
+    "siteAreaAcres": "Perimeter box ~39 acres covering the full legacy mill + warehouse campus; approximate given the irregular campus boundary."
+  },
+  "method": "deep-audit"
+}

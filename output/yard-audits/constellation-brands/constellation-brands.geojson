@@ -1,0 +1,1576 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.54,
+              34.0241
+            ],
+            [
+              -117.5315,
+              34.0241
+            ],
+            [
+              -117.5315,
+              34.0273
+            ],
+            [
+              -117.54,
+              34.0273
+            ],
+            [
+              -117.54,
+              34.0241
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Constellation Beer DC - Jurupa Valley CA",
+        "type": "Distribution Center (beer/wine/spirits)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 71,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7327,
+              32.6193
+            ],
+            [
+              -96.7256,
+              32.6193
+            ],
+            [
+              -96.7256,
+              32.6239
+            ],
+            [
+              -96.7327,
+              32.6239
+            ],
+            [
+              -96.7327,
+              32.6193
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Constellation Beer DC - Wilmer TX (Dallas I-45)",
+        "type": "Distribution Center (beer cross-dock, rail-served)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 64,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 41,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7323,
+              32.6184
+            ],
+            [
+              -96.7308,
+              32.6184
+            ],
+            [
+              -96.7308,
+              32.6196
+            ],
+            [
+              -96.7323,
+              32.6196
+            ],
+            [
+              -96.7323,
+              32.6184
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Constellation Beer DC - Wilmer TX (Dallas I-45)",
+        "type": "Distribution Center (beer cross-dock, rail-served)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.73,
+              32.6198
+            ],
+            [
+              -96.7262,
+              32.6198
+            ],
+            [
+              -96.7262,
+              32.6231
+            ],
+            [
+              -96.73,
+              32.6231
+            ],
+            [
+              -96.73,
+              32.6198
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Constellation Beer DC - Wilmer TX (Dallas I-45)",
+        "type": "Distribution Center (beer cross-dock, rail-served)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7312,
+              32.6197
+            ],
+            [
+              -96.7266,
+              32.6197
+            ],
+            [
+              -96.7266,
+              32.6233
+            ],
+            [
+              -96.7312,
+              32.6233
+            ],
+            [
+              -96.7312,
+              32.6197
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Constellation Beer DC - Wilmer TX (Dallas I-45)",
+        "type": "Distribution Center (beer cross-dock, rail-served)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7327,
+              32.6199
+            ],
+            [
+              -96.729,
+              32.6199
+            ],
+            [
+              -96.729,
+              32.6234
+            ],
+            [
+              -96.7327,
+              32.6234
+            ],
+            [
+              -96.7327,
+              32.6199
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Constellation Beer DC - Wilmer TX (Dallas I-45)",
+        "type": "Distribution Center (beer cross-dock, rail-served)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.634,
+              30.42175
+            ],
+            [
+              -81.6307,
+              30.42175
+            ],
+            [
+              -81.6307,
+              30.4256
+            ],
+            [
+              -81.634,
+              30.4256
+            ],
+            [
+              -81.634,
+              30.42175
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Constellation Beer DC - Jacksonville FL",
+        "type": "Distribution Center (beer, rail-served)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 54,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 25,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6318,
+              30.4251
+            ],
+            [
+              -81.631,
+              30.4251
+            ],
+            [
+              -81.631,
+              30.42585
+            ],
+            [
+              -81.6318,
+              30.42585
+            ],
+            [
+              -81.6318,
+              30.4251
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Constellation Beer DC - Jacksonville FL",
+        "type": "Distribution Center (beer, rail-served)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6317,
+              30.4218
+            ],
+            [
+              -81.6307,
+              30.4218
+            ],
+            [
+              -81.6307,
+              30.4253
+            ],
+            [
+              -81.6317,
+              30.4253
+            ],
+            [
+              -81.6317,
+              30.4218
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Constellation Beer DC - Jacksonville FL",
+        "type": "Distribution Center (beer, rail-served)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.63215,
+              30.4219
+            ],
+            [
+              -81.6315,
+              30.4219
+            ],
+            [
+              -81.6315,
+              30.4253
+            ],
+            [
+              -81.63215,
+              30.4253
+            ],
+            [
+              -81.63215,
+              30.4219
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Constellation Beer DC - Jacksonville FL",
+        "type": "Distribution Center (beer, rail-served)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6334,
+              30.4219
+            ],
+            [
+              -81.6327,
+              30.4219
+            ],
+            [
+              -81.6327,
+              30.4253
+            ],
+            [
+              -81.6334,
+              30.4253
+            ],
+            [
+              -81.6334,
+              30.4219
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Constellation Beer DC - Jacksonville FL",
+        "type": "Distribution Center (beer, rail-served)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.4367,
+              36.4999
+            ],
+            [
+              -121.4329,
+              36.4999
+            ],
+            [
+              -121.4329,
+              36.5046
+            ],
+            [
+              -121.4367,
+              36.5046
+            ],
+            [
+              -121.4367,
+              36.4999
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Constellation Gonzales Winery - Gonzales CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 10,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 41,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.4349,
+              36.50025
+            ],
+            [
+              -121.43435,
+              36.50025
+            ],
+            [
+              -121.43435,
+              36.50065
+            ],
+            [
+              -121.4349,
+              36.50065
+            ],
+            [
+              -121.4349,
+              36.50025
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Constellation Gonzales Winery - Gonzales CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.4357,
+              36.5019
+            ],
+            [
+              -121.4349,
+              36.5019
+            ],
+            [
+              -121.4349,
+              36.5027
+            ],
+            [
+              -121.4357,
+              36.5027
+            ],
+            [
+              -121.4357,
+              36.5019
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Constellation Gonzales Winery - Gonzales CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.4349,
+              36.5017
+            ],
+            [
+              -121.4341,
+              36.5017
+            ],
+            [
+              -121.4341,
+              36.5023
+            ],
+            [
+              -121.4349,
+              36.5023
+            ],
+            [
+              -121.4349,
+              36.5017
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Constellation Gonzales Winery - Gonzales CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.4351,
+              36.5005
+            ],
+            [
+              -121.4342,
+              36.5005
+            ],
+            [
+              -121.4342,
+              36.5013
+            ],
+            [
+              -121.4351,
+              36.5013
+            ],
+            [
+              -121.4351,
+              36.5005
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Constellation Gonzales Winery - Gonzales CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.4031,
+              38.4336
+            ],
+            [
+              -122.3994,
+              38.4336
+            ],
+            [
+              -122.3994,
+              38.4378
+            ],
+            [
+              -122.4031,
+              38.4378
+            ],
+            [
+              -122.4031,
+              38.4336
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Robert Mondavi Winery - Oakville CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 5,
+          "trailersVisible": 2,
+          "trailerParkingCapacity": 4,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 14,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.4026,
+              38.4365
+            ],
+            [
+              -122.40215,
+              38.4365
+            ],
+            [
+              -122.40215,
+              38.43695
+            ],
+            [
+              -122.4026,
+              38.43695
+            ],
+            [
+              -122.4026,
+              38.4365
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Robert Mondavi Winery - Oakville CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.4011,
+              38.4359
+            ],
+            [
+              -122.4005,
+              38.4359
+            ],
+            [
+              -122.4005,
+              38.4364
+            ],
+            [
+              -122.4011,
+              38.4364
+            ],
+            [
+              -122.4011,
+              38.4359
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Robert Mondavi Winery - Oakville CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.4023,
+              38.4365
+            ],
+            [
+              -122.4017,
+              38.4365
+            ],
+            [
+              -122.4017,
+              38.43695
+            ],
+            [
+              -122.4023,
+              38.43695
+            ],
+            [
+              -122.4023,
+              38.4365
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Robert Mondavi Winery - Oakville CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.4339,
+              38.4726
+            ],
+            [
+              -122.4303,
+              38.4726
+            ],
+            [
+              -122.4303,
+              38.4764
+            ],
+            [
+              -122.4339,
+              38.4764
+            ],
+            [
+              -122.4339,
+              38.4726
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "The Prisoner Wine Company - St. Helena CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 3,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 4,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 33,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.434,
+              38.47275
+            ],
+            [
+              -122.4337,
+              38.47275
+            ],
+            [
+              -122.4337,
+              38.47298
+            ],
+            [
+              -122.434,
+              38.47298
+            ],
+            [
+              -122.434,
+              38.47275
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "The Prisoner Wine Company - St. Helena CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.43225,
+              38.47475
+            ],
+            [
+              -122.4318,
+              38.47475
+            ],
+            [
+              -122.4318,
+              38.4752
+            ],
+            [
+              -122.43225,
+              38.4752
+            ],
+            [
+              -122.43225,
+              38.47475
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "The Prisoner Wine Company - St. Helena CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.4052,
+              38.3575
+            ],
+            [
+              -122.399,
+              38.3575
+            ],
+            [
+              -122.399,
+              38.3635
+            ],
+            [
+              -122.4052,
+              38.3635
+            ],
+            [
+              -122.4052,
+              38.3575
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Mount Veeder Winery / Franciscan Estate - Napa CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 60,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -120.7412,
+              35.5779
+            ],
+            [
+              -120.7388,
+              35.5779
+            ],
+            [
+              -120.7388,
+              35.5796
+            ],
+            [
+              -120.7412,
+              35.5796
+            ],
+            [
+              -120.7412,
+              35.5779
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Booker Vineyard / My Favorite Neighbor - Paso Robles CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 2,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 3,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 14,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -120.7403,
+              35.57812
+            ],
+            [
+              -120.74,
+              35.57812
+            ],
+            [
+              -120.74,
+              35.57832
+            ],
+            [
+              -120.7403,
+              35.57832
+            ],
+            [
+              -120.7403,
+              35.57812
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Booker Vineyard / My Favorite Neighbor - Paso Robles CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -120.74035,
+              35.5784
+            ],
+            [
+              -120.7399,
+              35.5784
+            ],
+            [
+              -120.7399,
+              35.5788
+            ],
+            [
+              -120.74035,
+              35.5788
+            ],
+            [
+              -120.74035,
+              35.5784
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Booker Vineyard / My Favorite Neighbor - Paso Robles CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -120.4665,
+              34.66325
+            ],
+            [
+              -120.46525,
+              34.66325
+            ],
+            [
+              -120.46525,
+              34.66485
+            ],
+            [
+              -120.4665,
+              34.66485
+            ],
+            [
+              -120.4665,
+              34.66325
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Sea Smoke Cellars - Lompoc CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 3,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 2,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 4.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -120.4657,
+              34.6636
+            ],
+            [
+              -120.46535,
+              34.6636
+            ],
+            [
+              -120.46535,
+              34.66455
+            ],
+            [
+              -120.4657,
+              34.66455
+            ],
+            [
+              -120.4657,
+              34.6636
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Sea Smoke Cellars - Lompoc CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.0943,
+              45.0724
+            ],
+            [
+              -123.0923,
+              45.0724
+            ],
+            [
+              -123.0923,
+              45.0746
+            ],
+            [
+              -123.0943,
+              45.0746
+            ],
+            [
+              -123.0943,
+              45.0724
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Lingua Franca Winery - Salem OR",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 3,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 3,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.0937,
+              45.0728
+            ],
+            [
+              -123.09325,
+              45.0728
+            ],
+            [
+              -123.09325,
+              45.07315
+            ],
+            [
+              -123.0937,
+              45.07315
+            ],
+            [
+              -123.0937,
+              45.0728
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "Lingua Franca Winery - Salem OR",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.4458,
+              40.8066
+            ],
+            [
+              -111.4432,
+              40.8066
+            ],
+            [
+              -111.4432,
+              40.8094
+            ],
+            [
+              -111.4458,
+              40.8094
+            ],
+            [
+              -111.4458,
+              40.8066
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "High West Distillery - Wanship UT",
+        "type": "Distillery / Production Facility",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 4,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 3,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 11,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.4474,
+              40.7981
+            ],
+            [
+              -111.4469,
+              40.7981
+            ],
+            [
+              -111.4469,
+              40.7985
+            ],
+            [
+              -111.4474,
+              40.7985
+            ],
+            [
+              -111.4474,
+              40.7981
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "High West Distillery - Wanship UT",
+        "type": "Distillery / Production Facility",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.44495,
+              40.8085
+            ],
+            [
+              -111.44455,
+              40.8085
+            ],
+            [
+              -111.44455,
+              40.80885
+            ],
+            [
+              -111.44495,
+              40.80885
+            ],
+            [
+              -111.44495,
+              40.8085
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "constellation-brands",
+        "name": "High West Distillery - Wanship UT",
+        "type": "Distillery / Production Facility",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    }
+  ]
+}

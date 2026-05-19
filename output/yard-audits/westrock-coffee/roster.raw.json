@@ -1,0 +1,73 @@
+{
+  "account": "Westrock Coffee",
+  "generatedAt": "2026-05-18",
+  "facilityCount": 6,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Westrock Coffee - Conway AR Roast-to-RTD Plant",
+      "city": "Conway",
+      "state": "AR",
+      "type": "Manufacturing Plant (roast-to-ready-to-drink)",
+      "address": "480 Exchange Avenue, Conway, AR 72032",
+      "lat": 35.0951,
+      "lng": -92.4421,
+      "source": "Dossier (Conway campus, $315M, 570K sq ft, opened June 2024); Westrock Coffee press release on Conway groundbreaking confirms 480 Exchange Ave (former Kimberly-Clark facility); Arkansas Business"
+    },
+    {
+      "idx": 2,
+      "name": "Westrock Coffee - Conway AR Distribution Center",
+      "city": "Conway",
+      "state": "AR",
+      "type": "Distribution Center",
+      "address": "1430 William J. Clark Drive, Conway, AR 72032",
+      "lat": 35.1132,
+      "lng": -92.4035,
+      "source": "Dossier (Conway DC, $70M, 530K sq ft, 72 dock doors, opened Dec 2023, ~2.2 mi from plant); Tempus Realty Partners / REBusinessOnline and Talk Business & Politics confirm 1430 William J. Clark Dr"
+    },
+    {
+      "idx": 3,
+      "name": "Westrock Coffee - Conway AR Single-Serve \"Clark\" Plant",
+      "city": "Conway",
+      "state": "AR",
+      "type": "Manufacturing Plant (single-serve / K-cup pods)",
+      "address": "William J. Clark Drive, Conway, AR 72032 (exact street number not published)",
+      "lat": 35.1145,
+      "lng": -92.4042,
+      "source": "Dossier (Conway single-serve 'Clark' facility, 525K sq ft, opened July 2025); Westrock Coffee press release and Talk Business & Politics confirm 'William J. Clark Drive' but no street number disclosed"
+    },
+    {
+      "idx": 4,
+      "name": "Westrock Coffee - North Little Rock AR Roasting & Manufacturing",
+      "city": "North Little Rock",
+      "state": "AR",
+      "type": "Roasting Plant / Private-Label Manufacturing",
+      "address": "30 Collins Industrial Place, North Little Rock, AR 72113",
+      "lat": 34.8214,
+      "lng": -92.2849,
+      "source": "Dossier (Little Rock / North Little Rock original manufacturing); Little Rock Chamber listing and Waze confirm Westrock Coffee Roasting & Manufacturing at 30 Collins Industrial Pl, North Little Rock"
+    },
+    {
+      "idx": 5,
+      "name": "Westrock Coffee - Concord NC Roasting & Extract Campus (S&D legacy)",
+      "city": "Concord",
+      "state": "NC",
+      "type": "Roasting Plant / Extract Manufacturing",
+      "address": "300 Concord Parkway South, Concord, NC 28027",
+      "lat": 35.3855,
+      "lng": -80.587,
+      "source": "Dossier (Concord NC legacy S&D Coffee & Tea operation, primary roasting-and-extract origin); CoPack Connect and multiple directories confirm S&D Coffee & Tea / Westrock Coffee at 300 Concord Parkway South"
+    },
+    {
+      "idx": 6,
+      "name": "Westrock Coffee - Concord NC Commercial Park Extract & Tea Facility",
+      "city": "Concord",
+      "state": "NC",
+      "type": "Extract & Tea Manufacturing",
+      "address": "101 Commercial Park Drive SW, Concord, NC 28027",
+      "lat": 35.3781,
+      "lng": -80.6213,
+      "source": "Dossier (Concord 'Commercial Park' extract manufacturing expansion; three-node Concord footprint - main + remote yard + roasting plant); Waze and BusinessYab confirm S&D Coffee & Tea at 101 Commercial Park Dr SW"
+    }
+  ]
+}

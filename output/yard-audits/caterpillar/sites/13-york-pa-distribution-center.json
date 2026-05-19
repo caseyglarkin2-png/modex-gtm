@@ -1,0 +1,55 @@
+{
+  "name": "Caterpillar - York PA Distribution Center",
+  "type": "Parts distribution center (~1.1M sq ft, opened 1953)",
+  "coords": { "lat": 39.98120, "lng": -76.68570 },
+  "geofences": {
+    "perimeter": { "south": 39.97850, "west": -76.68950, "north": 39.98400, "east": -76.68200 },
+    "truckGate": { "south": 39.98180, "west": -76.68340, "north": 39.98280, "east": -76.68220 },
+    "dropYards": [
+      { "south": 39.98150, "west": -76.68400, "north": 39.98380, "east": -76.68150 },
+      { "south": 39.97920, "west": -76.68450, "north": 39.98080, "east": -76.68200 }
+    ],
+    "dockAprons": [
+      { "south": 39.98150, "west": -76.68380, "north": 39.98330, "east": -76.68180 },
+      { "south": 39.97900, "west": -76.68850, "north": 39.98050, "east": -76.68650 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 97.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.9812,-76.6857,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "scale"],
+  "fieldNotes": {
+    "site": "Confirmed as the Caterpillar York Distribution Center, 600 Memory Lane, Springettsbury Township - a ~1.1M sq ft parts depot opened 1953. Roster geocode (39.981109, -76.686396, ROOFTOP, moved 808m) landed on the building. Identified by the green-and-white industrial building visible in Street View along Memory Lane, the depot layout, and adjacency to US-30.",
+    "truckGate": "Truck/dock yards are enclosed by chain-link perimeter fencing (confirmed at the SW building face in Street View). Truck operations on the NE and SW are access-controlled behind the fence. A small white structure near the SE truck yard may be a booth. No barrier arm cleanly imaged. truckGate set true; flagged uncertain.",
+    "guardShack": "No staffed booth positively confirmed; a small structure near the SE truck yard is ambiguous. remoteGs set true assuming kiosk/badge check-in. Both flagged.",
+    "dockDoors": "Long dock-door banks confirmed on the NE face (rows of trailers backed in) and the SW face. 50+ band; exact count low confidence.",
+    "dropArea": "Trailer drop yards on the NE and SE with parked trailers; 25-50 band.",
+    "shipRcvSeparate": "Dock banks on the NE face and the SW face are on physically separate building faces.",
+    "drivewayLong": "Long internal truck routes around the large building give ample queueing room.",
+    "urbanRural": "Springettsbury Township is part of the York PA metro / suburban fabric, bordered by US-30 with dense commercial and residential development - classed Urban per rubric.",
+    "railServed": "A rail line runs along the south edge of the property with apparent spur access; railServed set true.",
+    "scale": "No truck scale identified; left false.",
+    "metrics": "Counts are honest estimates from overhead imagery of an older 1.1M sq ft DC; flagged."
+  },
+  "method": "deep-audit"
+}

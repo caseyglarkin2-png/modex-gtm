@@ -1,0 +1,69 @@
+{
+  "name": "Cost Plus World Market - Stockton CA Distribution Center",
+  "type": "Distribution Center / Import Warehouse (West Coast)",
+  "coords": { "lat": 37.916788, "lng": -121.25568 },
+  "geofences": {
+    "perimeter": { "south": 37.91350, "west": -121.25960, "north": 37.91870, "east": -121.25180 },
+    "truckGate": { "south": 37.91560, "west": -121.25300, "north": 37.91640, "east": -121.25210 },
+    "dropYards": [
+      { "south": 37.91790, "west": -121.25600, "north": 37.91880, "east": -121.25300 },
+      { "south": 37.91610, "west": -121.25320, "north": 37.91860, "east": -121.25180 },
+      { "south": 37.91350, "west": -121.25960, "north": 37.91470, "east": -121.25180 }
+    ],
+    "dockAprons": [
+      { "south": 37.91820, "west": -121.25960, "north": 37.91870, "east": -121.25240 },
+      { "south": 37.91500, "west": -121.25920, "north": 37.91560, "east": -121.25220 }
+    ],
+    "staging": { "south": 37.91440, "west": -121.25960, "north": 37.91490, "east": -121.25180 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 240,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 95.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.916788,-121.25568,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "truckGate", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "A named 'Cost Plus World Market Truck Gate' business exists at 1735 Zephyr St per Waze, with managed hours (Mon-Sat 07:00-16:00). The entire property is enclosed by a continuous block/concrete perimeter wall plus hedge along Zephyr St and chain-link fence around the north and south trailer yards. Truck gate confirmed by listing; treated as true.",
+    "guardShack": "No guard booth was visible in any Street View pano along Zephyr St (continuous wall), nor at the open office driveway on the east side. No 1-3-vehicle-footprint booth structure identified at any entrance - low confidence.",
+    "remoteGs": "Set true because a controlled/named truck gate exists but no guard shack could be confirmed visually - implies kiosk/call-box/app check-in. Medium confidence.",
+    "dockDoors": "Dock doors run along both the long north face (trailers backed in, visible at z19-20) and the long south face (trailers along the rail line). Combined estimate ~90 doors across the ~250m+ building faces - clearly the 50+ band.",
+    "shipRcvSeparate": "Two distinct dock banks on opposite (north and south) faces of the building, suggesting separate ship/receive clusters. Medium confidence - could also be one continuous receiving operation.",
+    "dropYard": "Dedicated trailer-storage lots: angled-stall drop yard north and NE of the building, plus a very large drop yard south of the rail line packed with rows of parked trailers.",
+    "railServed": "An active rail spur runs along the entire south face of the building between the dock apron and the south drop yard.",
+    "trailersVisible": "~240 trailers counted across the north drop yard, NE angled stalls, and the large south drop yard - approximate honest estimate from overhead imagery.",
+    "entryLanes": "Could not positively count gate lanes - estimate 1 in / 1 out at a shared truck gate.",
+    "preGateStaging": "Trucks observed parked/staged along Zephyr St in multiple Street View captures (2022 and 2024) outside the gate.",
+    "siteAreaAcres": "~95 acres derived from the perimeter box which includes the building, north drop yard, and the large south drop yard across the rail line."
+  },
+  "method": "deep-audit"
+}

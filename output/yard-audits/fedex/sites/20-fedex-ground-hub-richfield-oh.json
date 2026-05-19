@@ -1,0 +1,55 @@
+{
+  "name": "FedEx Ground Hub - Richfield OH (Cleveland/Akron mini-hub)",
+  "type": "Ground automated regional facility (229K sq ft mini-hub)",
+  "coords": { "lat": 41.27650, "lng": -81.61550 },
+  "geofences": {
+    "perimeter": { "south": 41.27480, "west": -81.61720, "north": 41.27820, "east": -81.61380 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 0.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.27650,-81.61550,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging", "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether", "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity", "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue", "multipleFacilities", "scale", "dropYard", "multiStep"],
+  "fieldNotes": {
+    "_locationError": "FACILITY COULD NOT BE POSITIVELY LOCATED. The roster address (4500 Renaissance Pkwy, Cleveland OH 44128) and the roster lat/lng (41.437354, -81.493674) are WRONG for this facility - 4500 Renaissance Pkwy is confirmed by web research (LoopNet/BBB) to be Great Lakes Petroleum Co. / Northeast Lubricants in Warrensville Heights, NOT a FedEx facility.",
+    "_realFacility": "The actual facility is the FedEx Ground automated regional 'mini-hub' in RICHFIELD OH 44286 (between Cleveland and Akron), documented at 3245 Henry Rd / 3900 Brecksville Rd. Per Truckinginfo/FleetOwner: 229,000 sq ft, latest camera-based package-sorting technology, capacity for 144 pickup-and-delivery vans, consolidated four older sites (three Cleveland-metro, one Akron). It sits in Richfield's planned 'Crossroads District' (550 acres at Wheatley Rd x Brecksville Rd, bounded by I-271/I-77); the FedEx parcel forms the southern boundary of the 'South Wheatley' focus area.",
+    "_searchEffort": "Probed Richfield village, the Wheatley/Brecksville intersection, the South Wheatley triangle, and the Brecksville/Richfield-Township border industrial area (z15-z18) and walked Street View. The South Wheatley zone is largely undeveloped/wooded. Candidate large cross-dock distribution buildings exist near the Brecksville/Richfield border (~41.276,-81.615) but NONE showed FedEx branding or the distinctive ~144-van FedEx Ground P&D fleet, so the exact building could not be confirmed. The placeholder coords point to that candidate vicinity.",
+    "_recommendation": "Roster address/coords need correction to the Richfield 44286 location (3245 Henry Rd / 3900 Brecksville Rd). A re-audit with corrected coordinates is required. All classification fields left at safe defaults and flagged uncertain."
+  },
+  "method": "deep-audit"
+}

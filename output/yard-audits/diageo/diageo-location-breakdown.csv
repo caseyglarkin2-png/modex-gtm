@@ -1,0 +1,41 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Diageo Lincolnway RTD Canning - Plainfield IL,Manufacturing - RTD Canning Facility,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,,,,YES,,,YES,,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@41.6241,-88.2155,400m/data=!3m1!1e3"
+Diageo Plainfield Distribution Warehouse - Plainfield IL,Distribution Center / Warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@41.6250,-88.2487,400m/data=!3m1!1e3"
+Diageo Plainfield Bottling Plant - Plainfield IL,Manufacturing - Bottling Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,,Rural,,YES,,YES,"https://www.google.com/maps/@41.6245,-88.2140,400m/data=!3m1!1e3"
+Diageo Montgomery Manufacturing & Warehousing - Hope Hull AL,Manufacturing & Warehousing Facility,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,,,,,,,,YES,,,,,,,Rural,,YES,,,"https://www.google.com/maps/@32.2785,-86.3645,400m/data=!3m1!1e3"
+Diageo Lebanon Distillery - Lebanon KY,Distillery (Carbon-Neutral),#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,YES,,,,YES,,,,,Rural,,YES,,,"https://www.google.com/maps/@37.5453,-85.2790,400m/data=!3m1!1e3"
+Bulleit Distilling Co. (Shelbyville) - Shelbyville KY,Distillery,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,YES,YES,,,,,,,,,Rural,,YES,YES,,"https://www.google.com/maps/@38.22280,-85.14320,400m/data=!3m1!1e3"
+Stitzel-Weller Distillery - Louisville KY,Distillery / Aging Warehouse,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,YES,,,,,YES,,,Urban,,YES,,YES,"https://www.google.com/maps/@38.20950,-85.80900,400m/data=!3m1!1e3"
+Cascade Hollow Distilling Co. (George Dickel) - Tullahoma TN,Distillery,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,YES,,,,,,,,,Rural,YES,YES,,,"https://www.google.com/maps/@35.43850,-86.24400,400m/data=!3m1!1e3"
+Balcones Distilling - Waco TX,Distillery,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,YES,YES,,1,1,,YES,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@31.550293,-97.135725,400m/data=!3m1!1e3"
+Diageo USVI Captain Morgan Distillery - Frederiksted USVI,Distillery & Barrel Aging Warehouse,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,YES,,,,YES,,,,Rural,,YES,,YES,"https://www.google.com/maps/@17.70480,-64.84280,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,7,70%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,2,20%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,1,10%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,10,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,4,40%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,8,80%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,2,20%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,8,80%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,10,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,10,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

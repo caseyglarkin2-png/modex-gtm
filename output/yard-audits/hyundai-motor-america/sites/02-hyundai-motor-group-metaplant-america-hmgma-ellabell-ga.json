@@ -1,0 +1,52 @@
+{
+  "name": "Hyundai Motor Group Metaplant America (HMGMA) - Ellabell GA",
+  "type": "Auto Assembly Plant (EV)",
+  "coords": { "lat": 32.162000, "lng": -81.448000 },
+  "geofences": {
+    "perimeter": { "south": 32.14700, "west": -81.46300, "north": 32.17600, "east": -81.43200 },
+    "truckGate": { "south": 32.17100, "west": -81.45380, "north": 32.17280, "east": -81.45120 },
+    "dropYards": [
+      { "south": 32.15500, "west": -81.45500, "north": 32.15950, "east": -81.45000 }
+    ],
+    "dockAprons": [
+      { "south": 32.16100, "west": -81.45200, "north": 32.16450, "east": -81.44850 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70, "trailersVisible": 40, "trailerParkingCapacity": 300,
+    "truckGateCount": 3, "buildingCount": 15, "siteAreaAcres": 2900.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.162000,-81.448000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": true
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoors", "dropArea", "trailersVisible", "trailerParkingCapacity", "scale", "entryLanes", "exitLanes", "multiStep", "dropYard", "guardShack"],
+  "fieldNotes": {
+    "imagery": "Available satellite imagery is from the construction phase (extensive bare earth, partly-finished buildings). HMGMA opened Oct 2024 with 16M+ sq ft of factory floor; the operational dock/trailer layout is not yet fully visible. Counts are best-effort estimates with low confidence — flagged accordingly.",
+    "site": "$7.6B EV manufacturing campus in Bryan County GA along I-16, ~25 mi west of Savannah. 16M+ sq ft factory floor across many connected/standalone buildings; 500K vehicles/yr capacity (IONIQ 5 / IONIQ 9 / Kia). The full HMGMA land parcel is ~2,900 acres; perimeter box covers the developed campus.",
+    "truckGate": "Facility of this scale and security profile has controlled, guarded gates. Street View (2025-11) along I-16 shows continuous perimeter fencing around the campus. Main entry road off Genesis Dr / the supplier corridor on the NW edge. truckGate = true (high confidence on existence).",
+    "guardShack": "Inferred true — a $7.6B OEM EV plant with fenced perimeter universally uses staffed security gates. Booth footprint not crisply resolvable in construction-phase imagery; flagged uncertain on exact structure.",
+    "multipleFacilities": "Large campus with 15+ distinct large buildings (multiple assembly/manufacturing halls, battery/SK On adjacent operations, admin/office buildings, supplier buildings on-campus). Clear multi-facility campus.",
+    "railServed": "A rail spur/yard feature runs into the south part of the campus (visible at ~32.151,-81.452) — consistent with HMGMA's known rail-served finished-vehicle and inbound logistics design. railServed = true.",
+    "shipRcvSeparate": "Inbound parts/component receiving and outbound finished-vehicle / shipping operate from separate parts of the campus on different building faces.",
+    "dropArea": "Large paved areas designated for trailer and finished-vehicle staging; in construction-phase imagery only partially occupied. Estimated 25-50 band, low confidence.",
+    "entryExitSeparate": "A campus this large uses separate in/out gates and a multi-gate truck routing system; entryExitSeparate = true (inferred).",
+    "multiStep": "Large secured OEM campuses typically run a perimeter gate plus a secondary internal checkpoint before docks; inferred true at low confidence.",
+    "fastLaneOpportunity": "Abundant paved width and undeveloped land at the entry corridors — physical room for express/bypass lanes.",
+    "urbanRural": "Rural Bryan County — surrounded by pine woods and farmland.",
+    "scale": "No truck scale positively identified; flagged uncertain.",
+    "geofence": "Center 32.1620,-81.4480. Perimeter box covers the developed campus footprint."
+  },
+  "method": "deep-audit"
+}

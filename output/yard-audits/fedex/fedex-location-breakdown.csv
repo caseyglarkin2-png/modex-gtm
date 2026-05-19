@@ -1,0 +1,61 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+FedEx Express World Hub - Memphis TN,Express national/global superhub (air-to-ground sort),#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,3,2,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@35.061887,-89.960429,400m/data=!3m1!1e3"
+FedEx Express National Hub - Indianapolis IN,"Express national hub (2.4M sq ft, second-largest cargo facility)",#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,,YES,,,YES,,,Urban,,YES,,YES,"https://www.google.com/maps/@39.715335,-86.277815,400m/data=!3m1!1e3"
+FedEx Express Regional Hub - Fort Worth TX,Express regional hub (Fort Worth Alliance Airport),#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,YES,,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@32.994650,-97.312900,400m/data=!3m1!1e3"
+FedEx Express Regional Hub - Newark NJ,Express regional hub (Newark Liberty International Airport),#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,,YES,YES,YES,,1,1,,,,YES,,,YES,,,,Urban,,YES,,YES,"https://www.google.com/maps/@40.706800,-74.171000,400m/data=!3m1!1e3"
+FedEx Express Regional Hub - Oakland CA,Express regional hub (Oakland International Airport),#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Urban,,YES,,YES,"https://www.google.com/maps/@37.720113,-122.219569,400m/data=!3m1!1e3"
+FedEx Express Regional Hub - Greensboro NC,Express regional hub (Piedmont Triad / Mid-Atlantic),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,2,YES,,,YES,,,YES,,,,Urban,,YES,,,"https://www.google.com/maps/@36.10580,-79.93820,400m/data=!3m1!1e3"
+FedEx Express Regional Hub - Ontario CA,"Express regional hub (Ontario International Airport, So. California)",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,2,YES,,YES,,,,,YES,,,Urban,,,,,"https://www.google.com/maps/@34.05000,-117.58400,400m/data=!3m1!1e3"
+FedEx Express Regional Hub - Miami FL,Express regional hub (Latin America gateway),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@25.79255,-80.29525,400m/data=!3m1!1e3"
+FedEx Ground Hub - Kernersville NC,Ground regional sortation hub,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@36.10625,-80.03550,400m/data=!3m1!1e3"
+FedEx Ground Hub - Hagerstown MD,Ground regional sortation hub,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@39.63850,-77.79150,400m/data=!3m1!1e3"
+FedEx Ground Hub - Lewisberry PA,Ground regional sortation hub (Harrisburg market),#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@40.16450,-76.84050,400m/data=!3m1!1e3"
+FedEx Ground Hub - Grove City OH,Ground regional sortation hub (Columbus market),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@39.90360,-83.09660,400m/data=!3m1!1e3"
+FedEx Ground Dallas Hub - Hutchins TX,Ground regional distribution hub,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@32.65760,-96.70650,400m/data=!3m1!1e3"
+FedEx Ground Hub - Keasbey NJ,Ground regional sortation hub (NY/NJ metro),#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@40.50650,-74.32600,400m/data=!3m1!1e3"
+FedEx Ground Hub - Charlotte NC,Ground regional sortation hub,#1,Gate + GS (not BU sens.),,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@35.27270,-80.91810,400m/data=!3m1!1e3"
+FedEx Ground Hub - Independence KY (Northern Kentucky / Cincinnati),Ground regional sortation hub,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@38.941,-84.617,400m/data=!3m1!1e3"
+FedEx Ground Hub - Nashville TN,Ground regional sortation hub,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@36.239,-86.7935,400m/data=!3m1!1e3"
+FedEx Ground Hub - Goodyear AZ (Phoenix),"Ground regional distribution hub (~425K sq ft regional sortation, with package center)",#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,,,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@33.43900,-112.37120,400m/data=!3m1!1e3"
+FedEx Ground Package Distribution Hub - Olive Branch MS (Memphis metro),Ground regional package distribution hub,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,,,,,,,YES,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@34.99080,-89.77850,400m/data=!3m1!1e3"
+FedEx Ground Hub - Richfield OH (Cleveland/Akron mini-hub),Ground automated regional facility (229K sq ft mini-hub),#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@41.27650,-81.61550,400m/data=!3m1!1e3"
+FedEx Ground Hub - Middletown PA (Harrisburg),Ground regional sortation hub,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@40.23310,-76.73080,400m/data=!3m1!1e3"
+"FedEx Freight Hub - West Jefferson OH (Columbus, CMH)",Freight LTL hub service center (~278 doors),#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@39.95620,-83.34370,400m/data=!3m1!1e3"
+FedEx Freight Hub - Hagerstown MD (HGR),Freight LTL hub service center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@39.62500,-77.80350,400m/data=!3m1!1e3"
+"FedEx Freight Hub - Conley GA (Atlanta, ATL)","Freight LTL hub service center (~304 doors, one of the largest)",#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@33.6510,-84.3388,400m/data=!3m1!1e3"
+FedEx Freight Hub - Harrison AR (HRO),Freight LTL hub / former American Freightways HQ campus,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,YES,,,Rural,,YES,,YES,"https://www.google.com/maps/@36.2575,-93.1320,400m/data=!3m1!1e3"
+FedEx Freight Hub - Memphis TN,Freight LTL hub service center (FedEx Freight national HQ market),#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@35.05305,-90.04885,400m/data=!3m1!1e3"
+FedEx Freight Hub - Hodgkins IL (Chicago),Freight LTL hub service center (Chicago metro),#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,,,,,,,YES,,,,YES,,,,Urban,,,,,"https://www.google.com/maps/@41.791181,-87.856685,400m/data=!3m1!1e3"
+"FedEx Freight Hub - Earth City MO (St. Louis, STL)",Freight LTL hub service center (~240 doors),#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@38.8350,-90.5210,400m/data=!3m1!1e3"
+FedEx Freight Hub - Dallas/Fort Worth TX,Freight LTL hub service center (DFW metro),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,,Urban,,YES,,YES,"https://www.google.com/maps/@32.8378,-97.3340,400m/data=!3m1!1e3"
+FedEx Freight Hub - Stockton CA,Freight LTL hub service center (Northern California),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@37.9118,-121.2235,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,1,3%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,4,13%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,7,23%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,10,33%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,8,27%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,21,70%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,8,27%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,18,60%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,12,40%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

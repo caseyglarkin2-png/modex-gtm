@@ -1,0 +1,52 @@
+{
+  "name": "GP Muskogee Mill - Muskogee OK",
+  "type": "Tissue/Towel Mill",
+  "coords": { "lat": 35.7345, "lng": -95.2985 },
+  "geofences": {
+    "perimeter": { "south": 35.7250, "west": -95.3085, "north": 35.7440, "east": -95.2860 },
+    "truckGate": { "south": 35.7344, "west": -95.3018, "north": 35.7356, "east": -95.3004 },
+    "dropYards": [
+      { "south": 35.7358, "west": -95.3015, "north": 35.7392, "east": -95.2978 }
+    ],
+    "dockAprons": [
+      { "south": 35.7355, "west": -95.3060, "north": 35.7378, "east": -95.3035 },
+      { "south": 35.7335, "west": -95.3010, "north": 35.7360, "east": -95.2980 }
+    ],
+    "staging": { "south": 35.7344, "west": -95.3018, "north": 35.7360, "east": -95.3000 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55, "trailersVisible": 140, "trailerParkingCapacity": 200,
+    "truckGateCount": 1, "buildingCount": 15, "siteAreaAcres": 380.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.7345,-95.2985,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "multiStep", "dockDoorCount", "truckGateCount"],
+  "fieldNotes": {
+    "location": "Roster coords (35.762459,-95.403211 / 801 N 32nd St) landed in central Muskogee ~9 km NW of the mill. The GP Muskogee tissue mill is a 640-acre complex along the McClellan-Kerr Arkansas River Navigation System, SE of the city. Mill core located via web research + satellite; locked at 35.7345,-95.2985.",
+    "truckGate": "POSITIVELY CONFIRMED in Street View (Oct 2024): main entrance driveway off the public road with a 'Georgia-Pacific Muskogee Mill' sign and a chain-link perimeter fence. Controlled entry.",
+    "guardShack": "POSITIVELY CONFIRMED in Street View: a small gate-house / guard booth structure straddles the entrance road at the main gate.",
+    "remoteGs": "false — a manned guard booth is present.",
+    "multipleFacilities": "Very large 640-acre campus: pulp/paper machines, recovery boilers, multiple converting plants, multiple finished-goods warehouses, ash landfill, wastewater treatment ponds.",
+    "railServed": "Rail spurs run into the property; rail line visible alongside internal roads and the mill core.",
+    "dropArea": "Large curved drop yard with many rows of parked trailers (100+ visible).",
+    "dockDoors": "Multiple warehouse buildings with extensive dock-door banks and trailers backed in on several faces; ~55 estimated, 50+ band confident, exact count low confidence.",
+    "scale": "Truck scale expected at this trucking volume; not separately resolved overhead — flagged uncertain.",
+    "shipRcvSeparate": "Inbound raw material/chemicals and outbound finished tissue handled from distinct warehouse/dock clusters on different building faces.",
+    "truckGateCount": "One main confirmed entrance gate; the 640-acre campus may have a secondary gate (counted 1, flagged uncertain).",
+    "fastLaneOpportunity": "Wide entrance apron and ample paved/graded space at the gate and drop yard provide room for a bypass/express lane.",
+    "urbanRural": "Mill sits on the edge of Muskogee along the Arkansas River with large open-field buffers and farmland/river beyond. Rural (small-city industrial edge)."
+  },
+  "method": "deep-audit"
+}

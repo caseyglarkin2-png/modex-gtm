@@ -1,0 +1,63 @@
+{
+  "name": "SalSon Logistics - Florence NJ",
+  "type": "Warehouse / Transload Hub",
+  "coords": { "lat": 40.097016, "lng": -74.808053 },
+  "geofences": {
+    "perimeter": { "south": 40.09560, "west": -74.81000, "north": 40.09870, "east": -74.80560 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 40.09680, "west": -74.80790, "north": 40.09850, "east": -74.80580 }
+    ],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 4,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 9.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.097016,-74.808053,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors"],
+  "fieldNotes": {
+    "truckGate": "No controlled truck gate. Street View (2023) shows an open driveway from US Highway 130 with no barrier arm or sliding gate; the gravel trailer yard has a low chainlink fence but the property entrance off US-130 is open. A 'For Lease' sign was still posted in 2023, consistent with this being a recently-acquired (2024-25) terminal.",
+    "guardShack": "No guard booth visible anywhere on the property in satellite or Street View.",
+    "dockDoors": "Building appears to be an office/maintenance-type structure with at most a few dock/service doors on the NE face; 0-10 band, flagged uncertain — this is a transload/maintenance terminal, not a dock-intensive warehouse.",
+    "dropArea": "Large unpaved gravel trailer-storage yard NE of the building; satellite shows ~45 trailers parked in rows, 25-50 band. Matches the dossier's '25 tractors, 80 trailers' transload hub description.",
+    "dropYard": "Dedicated gravel trailer-storage lot is the dominant yard feature.",
+    "drivewayLong": "Long open driveway/apron from US-130 into the gravel yard, ample room for a multi-truck queue with no congestion.",
+    "urbanRural": "Edge-of-town Florence NJ along US-130 with farmland and open land adjacent; classed Rural.",
+    "railServed": "A rail line runs NW of the property but no spur enters the parcel.",
+    "scale": "No truck scale visible.",
+    "buildingCount": "Single irregular L-shaped building (office/maintenance shop) plus the open trailer yard."
+  },
+  "method": "deep-audit"
+}

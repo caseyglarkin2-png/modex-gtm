@@ -1,0 +1,52 @@
+{
+  "name": "John Deere Waterloo Works - Engine Works - Waterloo IA",
+  "type": "Engine Plant",
+  "coords": { "lat": 42.4678, "lng": -92.4330 },
+  "geofences": {
+    "perimeter": { "south": 42.4620, "west": -92.4400, "north": 42.4710, "east": -92.4290 },
+    "truckGate": { "south": 42.4664, "west": -92.4305, "north": 42.4674, "east": -92.4292 },
+    "dropYards": [
+      { "south": 42.4665, "west": -92.4312, "north": 42.4680, "east": -92.4290 }
+    ],
+    "dockAprons": [
+      { "south": 42.4670, "west": -92.4322, "north": 42.4680, "east": -92.4305 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16, "trailersVisible": 14, "trailerParkingCapacity": 40,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 95.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.4678,-92.4330,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "postGateStaging", "dropArea"],
+  "fieldNotes": {
+    "location": "Confirmed John Deere Waterloo Works Engine Works at 3801 W Ridgeway Ave, Waterloo IA. Roster ROOFTOP coords (moved 351m) landed on the long industrial building; locked center refined to 42.4678,-92.4330.",
+    "truckGate": "Inferred true, medium confidence. The whole property is clearly fenced (continuous fence line visible at z19-z20). The truck yard sits at the SE corner of the building accessed by a private driveway loop set well back from the road. Street View only reaches the surrounding public roads (W Ridgeway Ave north, side road east) and never reaches the truck-yard entrance, so a barrier arm could not be directly confirmed.",
+    "guardShack": "No staffed guard booth positively identified. A small blue-roof structure at 42.4669,-92.4298 is a utility/pump building (set off in grass, away from the driveway pinch-point), not a guard shack. Set false; remoteGs set true accordingly.",
+    "remoteGs": "True by rule — gate inferred present but no guard shack visible, implying kiosk/call-box/app check-in.",
+    "mainEntrance": "Primary W Ridgeway Ave entrance is an open driveway leading to a circular visitor drive (flagpole) and employee parking — the office/visitor entrance, no gate.",
+    "dockDoorCount": "~16 dock doors along the south building face; several blue/teal/green trailers backed in (z20 at 42.4678,-92.4318). Approximate.",
+    "dropArea": "Only a small number of trailers (~10-15) in the SE yard plus container/material-storage racks; band 0-10 for unaccompanied drop trailers, low confidence.",
+    "dropYard": "No dedicated multi-row trailer storage lot — yard is dock staging plus material racks; set false.",
+    "drivewayLong": "Long private driveway loop from the road into the SE truck yard holds a 3+ truck queue.",
+    "fastLaneOpportunity": "Wide paved aprons and the deep driveway loop give ample room to add a bypass/express lane.",
+    "buildingCount": "Main engine plant building plus a small ancillary structure; 2.",
+    "siteAreaAcres": "~95 acres including the large open grass land south of the building.",
+    "urbanRural": "Edge-of-town Waterloo IA with cropland to the north and west and large open grass on the property — Rural.",
+    "postGateStaging": "Paved yard inside the fence before the docks; inferred true, low confidence."
+  },
+  "method": "deep-audit"
+}

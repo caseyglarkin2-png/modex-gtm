@@ -1,0 +1,47 @@
+{
+  "name": "Frito-Lay - Aberdeen MD",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 39.49876, "lng": -76.18868 },
+  "geofences": {
+    "perimeter": { "south": 39.49580, "west": -76.19250, "north": 39.50050, "east": -76.18640 },
+    "truckGate": { "south": 39.49830, "west": -76.18790, "north": 39.49890, "east": -76.18720 },
+    "dropYards": [
+      { "south": 39.49600, "west": -76.19180, "north": 39.49820, "east": -76.18950 }
+    ],
+    "dockAprons": [
+      { "south": 39.49670, "west": -76.19120, "north": 39.49900, "east": -76.18850 },
+      { "south": 39.49860, "west": -76.19250, "north": 39.50000, "east": -76.18900 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70, "trailersVisible": 130, "trailerParkingCapacity": 160,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 58.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.49876,-76.18868,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "railServed"],
+  "fieldNotes": {
+    "location": "Roster address (1080 Old Philadelphia Rd) was approximate (geocode RANGE_INTERPOLATED). Web research and OpenStreetMap resolved the operating address to 800 Hickory Dr, Aberdeen MD 21001; OSM tags the Frito-Lay building at 39.49876,-76.188679. Street View confirmed the 'Frito-Lay, Inc.' monument sign and Cheetos-branded trailers at the dock.",
+    "truckGate": "Street View (2024 pano on Hickory Dr) clearly shows a barrier arm across the single truck driveway with continuous chain-link perimeter fencing - controlled truck gate confirmed.",
+    "guardShack": "A small structure sits beside the gate barrier arm in both Street View and z21 satellite, but it reads as a small check-in kiosk/booth (~1-vehicle footprint) rather than a clearly staffed multi-window guard shack. Classified remoteGs (gate, no clear staffed shack); flagged uncertain.",
+    "dockDoors": "Trailers backed into dock doors on the west, north, south, and east building faces in satellite imagery; total door count well into the 50+ band (~70 estimated, approximate).",
+    "dropArea": "Large trailer drop yard on the SW/south side - long rows of parked trailers, easily 50+ stalls.",
+    "railServed": "A rail line runs along the NW edge of the property; a spur appears to reach the plant's NW corner near the bulk ingredient tanks. Frito-Lay Aberdeen is a manufacturing-distribution center that historically received rail inbound. Flagged uncertain - the spur may serve only the adjacent corridor.",
+    "urbanRural": "Aberdeen is a small Harford County city; the plant sits in a wooded edge-of-town industrial park. Classified Rural per rubric tie-break.",
+    "buildingCount": "One large connected manufacturing-distribution building; counted as 1 despite multiple roof sections."
+  },
+  "method": "deep-audit"
+}

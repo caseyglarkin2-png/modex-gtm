@@ -1,0 +1,50 @@
+{
+  "name": "Stitzel-Weller Distillery - Louisville KY",
+  "type": "Distillery / Aging Warehouse",
+  "coords": { "lat": 38.20950, "lng": -85.80900 },
+  "geofences": {
+    "perimeter": { "south": 38.20650, "west": -85.81150, "north": 38.21300, "east": -85.80550 },
+    "truckGate": { "south": 38.20850, "west": -85.81120, "north": 38.20910, "east": -85.81040 },
+    "dropYards": [
+      { "south": 38.21000, "west": -85.81120, "north": 38.21090, "east": -85.81050 },
+      { "south": 38.20760, "west": -85.81130, "north": 38.20830, "east": -85.81080 }
+    ],
+    "dockAprons": [
+      { "south": 38.20920, "west": -85.81110, "north": 38.20990, "east": -85.81030 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14, "trailersVisible": 28, "trailerParkingCapacity": 45,
+    "truckGateCount": 1, "buildingCount": 24, "siteAreaAcres": 33.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.20950,-85.80900,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "scale"],
+  "fieldNotes": {
+    "truckGate": "Confirmed gated truck entrance off Fitzgerald Road: 2019-06 Street View shows a swing/cantilever gate across the drive with ENTRANCE and warning signage; the entrance lane crosses a rail spur.",
+    "guardShack": "A small light-colored guard-booth structure sits beside the entrance lane just inside the gate (visible left of the lane in multiple Street View headings). Workers in safety vests present at the gate.",
+    "scale": "No truck scale clearly identified in imagery; left false (low confidence) - distilleries often weigh inbound grain but no weigh pad resolved here.",
+    "dockDoors": "Loading docks on the production/bottling building - z19/z20 imagery shows tankers and trailers backed into a dock bank; estimated ~14 doors, band 10-25, medium confidence.",
+    "dropArea": "Long row of ~20+ parked trailers in the central lot plus additional trailers staged along Fitzgerald Road; band 25-50.",
+    "dropYard": "Dedicated trailer-storage rows present both in the central campus lot and along the Fitzgerald Road frontage.",
+    "railServed": "An active rail spur runs into the property and past the truck gate, visible in z19-z21 satellite and Street View.",
+    "multipleFacilities": "Campus: historic distillery / visitor center, production-bottling building, and ~18 multi-story brick rickhouses.",
+    "postGateStaging": "Wide paved internal yard between the gate and the production docks provides interior queuing room.",
+    "urbanRural": "Inside the Louisville metro (Shively), surrounded by dense industrial fabric - Urban.",
+    "drivewayLong": "Internal yard depth from the gate to the production docks easily holds 3+ trucks."
+  },
+  "method": "deep-audit"
+}

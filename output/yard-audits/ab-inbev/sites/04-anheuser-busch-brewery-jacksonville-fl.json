@@ -1,0 +1,52 @@
+{
+  "name": "Anheuser-Busch Brewery - Jacksonville FL",
+  "type": "Brewery",
+  "coords": { "lat": 30.43250, "lng": -81.64900 },
+  "geofences": {
+    "perimeter": { "south": 30.4295, "west": -81.6530, "north": 30.4360, "east": -81.6455 },
+    "truckGate": { "south": 30.43020, "west": -81.65180, "north": 30.43090, "east": -81.65080 },
+    "dropYards": [
+      { "south": 30.43050, "west": -81.65250, "north": 30.43400, "east": -81.65000 },
+      { "south": 30.43250, "west": -81.65000, "north": 30.43520, "east": -81.64820 }
+    ],
+    "dockAprons": [
+      { "south": 30.43130, "west": -81.65050, "north": 30.43280, "east": -81.64880 }
+    ],
+    "staging": { "south": 30.43100, "west": -81.64980, "north": 30.43230, "east": -81.64850 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 2,
+    "buildingCount": 6,
+    "siteAreaAcres": 128.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.43250,-81.64900,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "scale", "truckGateCount"],
+  "fieldNotes": {
+    "site": "Jacksonville A-B brewery (opened 1969) at 111 Busch Dr; $30M 2026 investment announced. Brewery building with trailer drop yards W/SW, bounded by Busch Dr on the south, I-95 on the east, marshland to the north. 'Budweiser' sign on the building confirmed in Street View.",
+    "truckGate": "Site fully fenced with chain-link confirmed in multiple Street Views (trailer yard, employee lot perimeters). Driveway truck entrances from Busch Dr at the SW corner. Controlled gated access - truckGate TRUE.",
+    "guardShack": "A-B breweries operate guarded truck entrances as standard. Booth structure not crisply isolated in imagery; classified guardShack TRUE per site type and fenced perimeter, flagged uncertain.",
+    "dropYard": "Two large organized trailer drop yards W and SW of the brewery, ~200+ trailers, capacity ~320.",
+    "dockDoors": "Dock banks with trailers backed in on the W/S faces of the brewery; estimated ~30 (band 25-50).",
+    "railServed": "Rail spurs run into the property from the west side trailer-yard area.",
+    "fastLaneOpportunity": "Wide yard aprons and entrance driveways leave room to add lanes.",
+    "scale": "No truck scale resolved.",
+    "siteAreaAcres": "Boxed footprint ~128 acres for brewery core + trailer yards."
+  },
+  "method": "deep-audit"
+}

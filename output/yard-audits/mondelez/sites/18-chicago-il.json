@@ -1,0 +1,46 @@
+{
+  "name": "Mondelez Global Headquarters - Chicago IL",
+  "type": "Corporate HQ (global) - downtown office building",
+  "coords": { "lat": 41.8866, "lng": -87.6513 },
+  "geofences": {
+    "perimeter": { "south": 41.8862, "west": -87.6517, "north": 41.8870, "east": -87.6509 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 1,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 0.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.8866,-87.6513,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": true,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Roster coords (41.8866,-87.6513) were already accurate to the building. Confirmed as 905 W Fulton Market, Chicago IL 60607 - a 5-story office building. Mondelez leases all office floors (~77,100 sq ft office + ~6,150 sq ft retail) as its global HQ, relocated from Deerfield IL in 2020.",
+    "facilityType": "This is a downtown corporate office building, NOT a freight facility. Zero freight relevance for yard management - it has no truck yard, no dock bank, no trailer parking, no gate.",
+    "layout": "Satellite z20 confirms the building by its distinctive green roof / landscaped terrace (matching published descriptions). It is a full-block-edge loft-style building flush to the sidewalk on all sides in dense Fulton Market.",
+    "truckGate": "No truck entrance - the building meets the public sidewalk directly. Curbside delivery only. truckGate/guardShack/remoteGs all false.",
+    "dockDoors": "No loading-dock bank. Set NONE; dockDoorCount=1 as a nominal allowance for an interior freight-elevator / service door reached from the alley or curb - flagged uncertain.",
+    "backupSensitive": "Set true: any delivery truck must stop curbside on a dense downtown street, which interrupts traffic - there is zero off-street stacking room.",
+    "entryLanes": "null - no truck gate exists.",
+    "urbanRural": "Dense urban core (Fulton Market, Chicago) - unambiguously Urban."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,50 @@
+{
+  "name": "Coca-Cola UNITED - Chattanooga Production Plant, TN",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 35.09230, "lng": -85.25300 },
+  "geofences": {
+    "perimeter": { "south": 35.09050, "west": -85.25540, "north": 35.09450, "east": -85.25080 },
+    "truckGate": { "south": 35.09100, "west": -85.25530, "north": 35.09180, "east": -85.25440 },
+    "dropYards": [
+      { "south": 35.09060, "west": -85.25420, "north": 35.09160, "east": -85.25240 }
+    ],
+    "dockAprons": [
+      { "south": 35.09120, "west": -85.25430, "north": 35.09230, "east": -85.25320 }
+    ],
+    "staging": { "south": 35.09080, "west": -85.25500, "north": 35.09160, "east": -85.25420 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35, "trailersVisible": 30, "trailerParkingCapacity": 50,
+    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 19.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.09230,-85.25300,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "remoteGs", "guardShack", "scale"],
+  "fieldNotes": {
+    "location": "Roster address (2111 Polymer Dr) and roster coords (35.0459,-85.1932) do not match the production plant. The roster label 'Production Plant' corresponds to the Coca-Cola UNITED Chattanooga PRODUCTION CENTER at 4000 Amnicola Hwy, Chattanooga TN 37406 (Coca-Cola UNITED Chattanooga-2 location page; Google Maps place pin 35.0923,-85.2532). Note: 2111 W Shepherd Rd is a SEPARATE Coca-Cola UNITED distribution center/regional HQ - the roster's '2111 Polymer Dr' appears to conflate the two. Confirmed the Amnicola plant by Street View showing Coca-Cola script branding on the building facade plus a 'TRUCK DELIVERY' wayfinding sign.",
+    "truckGate": "The truck/dock yard is enclosed by chain-link fencing; Street View shows the dock yard fenced with gate sections and trailers backed into docks inside. Trucks enter the fenced yard via a gated opening off the internal west-side road - recorded truckGate true. Flagged uncertain as the gate hardware (barrier vs rolling gate) is partly tree-obscured.",
+    "guardShack": "No standalone guard booth seen at the truck-yard gate. The main building entrance off Amnicola Hwy is an open driveway. Recorded false.",
+    "remoteGs": "Gate present without a staffed booth implies kiosk/remote check-in - recorded remoteGs true (flagged uncertain alongside truckGate).",
+    "dockDoors": "Estimated ~35 dock doors across the west and south building faces with trailers backed in; banded 25-50.",
+    "dropArea": "Trailer drop yard on the south side holds ~30 trailers in rows; banded 25-50.",
+    "postGateStaging": "Internal paved staging/parking area south and west of the building between the gate and the docks.",
+    "drivewayLong": "Deep internal approach - the access road plus internal yard easily holds a 3+ truck queue.",
+    "multipleFacilities": "Site is a campus: main production/warehouse building, office wing fronting Amnicola Hwy, plus separate support buildings (equipment refurbishment center / shop). Coca-Cola UNITED describes the Chattanooga site as a production center with multiple functions.",
+    "railServed": "No rail spur into the property - the plant is bordered by Amnicola Hwy and the Tennessee River.",
+    "scale": "No truck scale clearly identified; flagged uncertain.",
+    "urbanRural": "Inside the Chattanooga metro industrial fabric along Amnicola Hwy - Urban."
+  },
+  "method": "deep-audit"
+}

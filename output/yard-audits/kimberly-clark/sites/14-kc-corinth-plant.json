@@ -1,0 +1,72 @@
+{
+  "name": "K-C Corinth Plant - Corinth MS",
+  "type": "Manufacturing plant (nonwovens components for Huggies, Pull-Ups, Poise, Depend, WypAll)",
+  "coords": { "lat": 34.93560, "lng": -88.49080 },
+  "geofences": {
+    "perimeter": { "south": 34.93350, "west": -88.49185, "north": 34.93720, "east": -88.48950 },
+    "truckGate": { "south": 34.93540, "west": -88.49150, "north": 34.93600, "east": -88.49100 },
+    "dropYards": [
+      { "south": 34.93570, "west": -88.49100, "north": 34.93680, "east": -88.48980 },
+      { "south": 34.93450, "west": -88.49120, "north": 34.93570, "east": -88.49000 }
+    ],
+    "dockAprons": [
+      { "south": 34.93560, "west": -88.49130, "north": 34.93660, "east": -88.49010 },
+      { "south": 34.93440, "west": -88.49130, "north": 34.93540, "east": -88.49030 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 95,
+    "truckGateCount": 2,
+    "buildingCount": 9,
+    "siteAreaAcres": 24.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.93560,-88.49080,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "dockDoors", "buildingCount", "truckGateCount"],
+  "fieldNotes": {
+    "location": "Roster lat/lng (34.935342,-88.490748, ROOFTOP, moved 54m) landed directly on the K-C Corinth industrial campus - correct. Web research (Area Development, Mississippi Development Authority) confirms the nonwovens plant at 610 Pinecrest St (K-C invested $140M+ in expansions). Locked center 34.93560,-88.49080.",
+    "truckGate": "Campus is enclosed by a continuous chain-link perimeter fence; truck entrances off Pinecrest St have chain-link double swing gates across the drive (seen open in Street View 2025-11), with 'No Trespassing' signage and a K-C signboard. Controlled gated entry.",
+    "guardShack": "No staffed guard booth at any entrance - the gates are unmanned chain-link swing gates.",
+    "remoteGs": "Gate present, no guard shack - set true (kiosk / badge / phone check-in implied).",
+    "dockDoors": "Loading docks face the internal lanes between the manufacturing buildings; the multi-building layout and tight lanes make exact counting hard. Estimated ~22 doors - banded 10-25, flagged uncertain.",
+    "dropArea": "Heavy trailer parking - dozens of trailers staged in the lanes between buildings and along building faces (~70 trailers visible). Banded 50+.",
+    "dropYard": "Trailers are stored across the campus lanes separate from active dock positions - functions as a distributed drop yard.",
+    "drivewayShort": "Truck approach from the gated entrance to the dock lanes is short (1-2 trucks) before reaching the buildings.",
+    "postGateStaging": "Open paved/gravel lanes inside the gates allow trucks to hold before docking.",
+    "multipleFacilities": "The site is a campus of multiple distinct manufacturing and support buildings (gray-roofed plants, the large white-roofed expansion building, smaller support structures).",
+    "truckGateCount": "At least 2 entrance drives off Pinecrest St serve the campus; flagged uncertain since not every gate could be individually confirmed.",
+    "urbanRural": "Small-town industrial setting on the edge of Corinth MS - residential, ball fields and woods surround the campus. Rural per rubric.",
+    "railServed": "A rail corridor runs through the woods along the NE but no spur enters the K-C property.",
+    "buildingCount": "Estimated ~9 distinct buildings across the campus; flagged uncertain - some structures are small support buildings and mixed industrial occupancy is possible at the south end.",
+    "siteAreaAcres": "~24 acres for the fenced K-C campus along Pinecrest St."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,61 @@
+{
+  "name": "Performance Foodservice - Kansas City (Lee's Summit MO)",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 38.89000, "lng": -94.36640 },
+  "geofences": {
+    "perimeter": { "south": 38.88840, "west": -94.36760, "north": 38.89150, "east": -94.36480 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 38.88880, "west": -94.36720, "north": 38.88980, "east": -94.36540 }
+    ],
+    "dockAprons": [
+      { "south": 38.88980, "west": -94.36720, "north": 38.89030, "east": -94.36560 }
+    ],
+    "staging": { "south": 38.88930, "west": -94.36720, "north": 38.88990, "east": -94.36560 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 13.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.89,-94.3664,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["truckGate", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Open uncontrolled access from SE Thompson Dr; the truck yard has partial chain-link fencing but no barrier arm, sliding gate or checkpoint structure where the access driveway meets the public road. An internal chain-link gate exists between yard sub-zones but is not a property-line truck gate.",
+    "guardShack": "No guard booth observed at any entrance.",
+    "dockDoors": "Dock bank with a red canopy along the south face; ~30 doors estimated overhead, partly obscured by trailers backed in.",
+    "dropArea": "Large drop yard south of the dock court holds 50+ trailers and PFG box trucks in rows.",
+    "urbanRural": "Semi-rural / edge-of-town setting — SE Thompson Dr is a narrow road with adjacent farmland, woods and scattered rural housing; classified Rural per the small-town-vs-urban tiebreak.",
+    "vistar": "A trailer at the dock carries Vistar branding — PFG's Vistar segment operates from this Kansas City DC alongside broadline."
+  },
+  "method": "deep-audit"
+}

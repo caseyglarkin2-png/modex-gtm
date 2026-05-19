@@ -1,0 +1,55 @@
+{
+  "name": "Ford - Ohio Assembly Plant, Avon Lake OH",
+  "type": "Vehicle Assembly Plant",
+  "coords": { "lat": 41.48720, "lng": -82.06550 },
+  "geofences": {
+    "perimeter": { "south": 41.47950, "west": -82.07550, "north": 41.49350, "east": -82.05700 },
+    "truckGate": { "south": 41.48560, "west": -82.07170, "north": 41.48680, "east": -82.07000 },
+    "dropYards": [
+      { "south": 41.49000, "west": -82.06600, "north": 41.49250, "east": -82.06150 },
+      { "south": 41.48560, "west": -82.07350, "north": 41.48720, "east": -82.07100 }
+    ],
+    "dockAprons": [
+      { "south": 41.48450, "west": -82.06350, "north": 41.48700, "east": -82.06050 },
+      { "south": 41.48800, "west": -82.06400, "north": 41.49000, "east": -82.06100 }
+    ],
+    "staging": { "south": 41.48650, "west": -82.07150, "north": 41.48820, "east": -82.06900 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45, "trailersVisible": 80, "trailerParkingCapacity": 170,
+    "truckGateCount": 2, "buildingCount": 6, "siteAreaAcres": 419.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.48720,-82.06550,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "entryLanes", "exitLanes", "dockDoorCount", "connectivityIssue"],
+  "fieldNotes": {
+    "facility": "Ohio Assembly Plant (Super Duty chassis cab, F-650/750 medium-duty, E-Series), 650 Miller Rd, Avon Lake OH. Geocode landed on the rooftop (moved 348m); confirmed as the large multi-roof assembly complex - ~3.7M sq ft of building on a 419-acre site (web-confirmed).",
+    "truckGate": "CONFIRMED. A definitive truck gate with a guard shack is visible at z19/z20 on the west side: a square guard building with a central courtyard, multiple truck lanes splitting around it, gate canopies/arms over the lanes, and a wide paved staging apron upstream. Clear controlled checkpoint where the truck route meets the access road.",
+    "guardShack": "CONFIRMED. Distinct square multi-lane guard booth structure beside the truck lane at the west gate - classic staffed gatehouse footprint with windows on multiple sides and gate canopies.",
+    "remoteGs": "False - a staffed guard booth is present at the gate.",
+    "multiStep": "Outer guarded truck gate plus internal vehicle-control checkpoints typical of an assembly plant of this scale.",
+    "railServed": "Rail corridor runs along the east side of the campus with rail access into the plant; assembly plant of this scale relies on rail for inbound/outbound. Marked supported by the rail line visible east of the complex.",
+    "dropYard": "Large dedicated trailer drop yard on the NE side with dozens of trailers in organized rows, plus trailer rows near the west gate - separate from active dock staging.",
+    "dropArea": "50+ trailers visible across the NE drop yard and dock faces.",
+    "dockDoors": "Counted ~45 loading doors across the building faces and a long modern dock bank visible in Street View on the west side; estimate from overhead imagery - marked uncertain.",
+    "shipRcvSeparate": "Distinct dock banks on separate building faces plus a large modern dock building on the west side - shipping and receiving run from physically separate clusters.",
+    "fastLaneOpportunity": "Wide gate apron with multiple lanes splitting around the guard booth and substantial unused paved width - clear room for an express bypass.",
+    "multipleFacilities": "Multiple large connected and separate buildings forming an integrated assembly campus, plus a large modern distribution/dock building on the west.",
+    "urbanRural": "Edge-of-town Avon Lake / Sheffield with farmland and woods on the west and a golf course to the north - per rubric, when torn between small-town industrial and Urban, choose Rural.",
+    "connectivityIssue": "Site is on the edge of a small town with farmland adjacent but within the Cleveland metro reach - cellular coverage likely adequate; false but flagged as inferred.",
+    "scale": "No truck scale clearly identified; left uncertain."
+  },
+  "method": "deep-audit"
+}

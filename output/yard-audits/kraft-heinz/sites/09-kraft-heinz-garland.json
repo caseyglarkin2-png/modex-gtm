@@ -1,0 +1,24 @@
+{
+  "name": "Kraft Heinz - Garland",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 3, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "fastLaneOpportunity"],
+  "fieldNotes": {
+    "streetview": "Street View shows a fenced perimeter (chain-link) with the facility set behind trees - confirms gated/fenced site, but the truck entrance itself is screened by foliage.",
+    "truckGate": "Satellite shows a controlled entry apron on the north side with wide paved width and multiple lanes.",
+    "fastLaneOpportunity": "Wide gate apron with ~3 inbound lanes and unused paved width for an express bypass.",
+    "multipleFacilities": "Large multi-building plant campus with several connected processing and warehouse structures.",
+    "dropYard": "Trailer-storage rows along the north and west perimeter.",
+    "urbanRural": "Dense Dallas-metro industrial fabric; Urban."
+  }
+}

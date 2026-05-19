@@ -1,0 +1,51 @@
+{
+  "name": "CJ Logistics - Gainesville GA (Cold Storage)",
+  "type": "Cold Storage Distribution Center",
+  "coords": { "lat": 34.380000, "lng": -83.718800 },
+  "geofences": {
+    "perimeter": { "south": 34.378200, "west": -83.720500, "north": 34.381400, "east": -83.716800 },
+    "truckGate": { "south": 34.378300, "west": -83.720100, "north": 34.378900, "east": -83.719300 },
+    "dropYards": [
+      { "south": 34.378900, "west": -83.717800, "north": 34.379600, "east": -83.716900 }
+    ],
+    "dockAprons": [
+      { "south": 34.379100, "west": -83.719600, "north": 34.379600, "east": -83.717300 }
+    ],
+    "staging": { "south": 34.379100, "west": -83.719600, "north": 34.379600, "east": -83.717300 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 38, "trailersVisible": 10, "trailerParkingCapacity": 55,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 25.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.380000,-83.718800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dropArea", "trailerParkingCapacity", "connectivityIssue", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Single shared access road winds up from Cornelia Highway (US-23) to the hilltop pad. No barrier arm, sliding/swing gate, guard booth, or checkpoint pinch-point visible along the access road or at the dock-yard entrance in z20-z21 satellite. Open driveway = no controlled truck gate.",
+    "guardShack": "No guard booth structure along the access road or at the building in any view.",
+    "remoteGs": "False - no truck gate exists.",
+    "dockDoors": "Single south-facing dock bank; web sources confirm 38 truck dock doors with a 90-foot-deep dock - matches the 25-50 band.",
+    "dropArea": "Web sources cite a 50+ trailer drop lot; in current (2026) imagery the SE area is graded but not yet fully paved/striped, with only modest trailer presence on the dock apron - classed 10-25 from what is visibly developed, low confidence.",
+    "dropYard": "A dedicated trailer drop lot is being developed SE of the dock apron (graded pad in current imagery); web confirms a 50+ trailer drop lot.",
+    "drivewayLong": "Deep 90-foot dock apron plus the long winding access approach give ample queuing room for 3+ trucks.",
+    "shipRcvSeparate": "All dock doors on a single (south) building face; no separate ship/receive clusters.",
+    "urbanRural": "Facility sits on a graded hilltop pad cut into wooded terrain, isolated from any town, with only Cornelia Highway nearby; clearly Rural.",
+    "connectivityIssue": "Site is rural and wooded but sits directly on a major 4-lane highway (US-23) within the Atlanta-Gainesville corridor; cellular coverage likely adequate, marked false (medium confidence).",
+    "siteAreaAcres": "Estimated from the graded pad perimeter (~312m x ~303m).",
+    "railServed": "No rail spur into the property; facility is near the future Northeast Georgia Inland Port but not currently rail-served.",
+    "facilityNote": "New CJ Logistics America cold storage warehouse, opened Nov 2024; 270,000 sq ft, 30,000 racked pallet positions, 3 storage rooms (finished goods, bakery, proteins), Alta EXPERT refrigeration + QFM blast freezing, USDA export office on-site."
+  },
+  "method": "deep-audit"
+}

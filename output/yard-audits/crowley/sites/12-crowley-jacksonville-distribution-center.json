@@ -1,0 +1,66 @@
+{
+  "name": "Crowley Jacksonville Distribution Center (Dry/LCL) - Jacksonville FL",
+  "type": "Distribution center / dry + LCL warehouse",
+  "coords": { "lat": 30.36340, "lng": -81.69445 },
+  "geofences": {
+    "perimeter": { "south": 30.36270, "west": -81.69560, "north": 30.36405, "east": -81.69335 },
+    "truckGate": { "south": 30.36290, "west": -81.69560, "north": 30.36320, "east": -81.69525 },
+    "dropYards": [
+      { "south": 30.36280, "west": -81.69430, "north": 30.36360, "east": -81.69335 }
+    ],
+    "dockAprons": [
+      { "south": 30.36320, "west": -81.69500, "north": 30.36390, "east": -81.69455 },
+      { "south": 30.36280, "west": -81.69455, "north": 30.36335, "east": -81.69385 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 27,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 5.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.36340,-81.69445,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "facility": "Crowley Jacksonville Dry/LCL Distribution Center, 2113 W 30th Street. Identified positively by CROWLEY-branded trailers backed into the dock face in 2025-03 Street View. The roster's geocoded point landed on this white L-shaped warehouse; the brown-roofed building to the north is a separate tenant ('USA Big Mountain Paper, 2160').",
+    "truckGate": "The fenced truck yard (chain-link perimeter) is entered from the unnamed industrial street on the SW side. Street View shows a chain-link gate opening; no barrier-arm at the public road but a controlled fenced yard entrance.",
+    "guardShack": "No staffed guard booth at the yard gate. Web research confirms 24/7 security monitoring (camera/electronic), consistent with remote check-in rather than a manned booth — classified remoteGs.",
+    "dockDoors": "Web research (Crowley/Racklify listings) states 27 dock doors at the 100,418 sq ft facility. Satellite + Street View confirm two dock banks: a west-face bank (~7-8 doors) and a south-east-face bank (~10+ doors with CROWLEY trailers backed in) — band 25-50.",
+    "shipRcvSeparate": "Dock doors are split across two physically separate building faces of the L-shaped warehouse (a west bank and a south-east bank), supporting separate shipping/receiving clusters.",
+    "dropArea": "10-25 trailers parked in the yard south/east of the building (CROWLEY trailers and others); not a large dedicated drop lot but a working trailer yard.",
+    "bonded": "Facility is a U.S. Customs bonded warehouse (LCL consolidation/deconsolidation, dry cargo, plus an in-building CrowleyFresh cold-storage section).",
+    "drivewayLong": "Large open paved truck apron in front of the dock banks easily holds a 3+ truck queue.",
+    "urbanRural": "Inside Jacksonville's NW industrial fabric near JAXPORT — Urban.",
+    "confidence": "High — facility positively identified by Crowley branding on docked trailers; dock count corroborated by web research; layout, gate, and yard clearly visible in 2025 Street View and Maxar satellite. Lane counts and exact drop-yard capacity remain estimates."
+  },
+  "method": "deep-audit"
+}

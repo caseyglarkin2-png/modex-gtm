@@ -1,0 +1,56 @@
+{
+  "name": "R.W. Knudsen Juices - Chico CA",
+  "type": "Manufacturing - Juices/beverages (Knudsen)",
+  "coords": { "lat": 39.70670, "lng": -121.80250 },
+  "geofences": {
+    "perimeter": { "south": 39.70470, "west": -121.80560, "north": 39.70850, "east": -121.80020 },
+    "truckGate": { "south": 39.70475, "west": -121.80450, "north": 39.70520, "east": -121.80390 },
+    "dropYards": [
+      { "south": 39.70740, "west": -121.80600, "north": 39.70850, "east": -121.80420 }
+    ],
+    "dockAprons": [
+      { "south": 39.70590, "west": -121.80360, "north": 39.70680, "east": -121.80270 },
+      { "south": 39.70680, "west": -121.80200, "north": 39.70740, "east": -121.80120 }
+    ],
+    "staging": { "south": 39.70560, "west": -121.80420, "north": 39.70620, "east": -121.80340 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 38.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.70670,-121.80250,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "scale"],
+  "fieldNotes": {
+    "DIVESTITURE": "IMPORTANT — this facility is NO LONGER a J.M. Smucker site. Smucker sold its natural/organic beverage and grains businesses (incl. R.W. Knudsen and the Chico plant) to Nexus Capital Management for $110M; the deal closed Jan 31, 2022. The plant now operates under the TruRoots Company / R.W. Knudsen Family. The entrance sign in Street View reads TruRoots Shipping/Receiving, 29 Speedway.",
+    "truckGate": "Truck entrance is a long open driveway off Speedway Ave with a TruRoots Shipping/Receiving sign. No barrier arm or sliding gate is clearly visible at the entrance; trees partly obscure the driveway end. Some internal fenced enclosures exist on the property. Classified false (open) but flagged uncertain.",
+    "guardShack": "No guard booth identified at the Speedway Ave entrance or along the access road in satellite or 2024 Street View. Flagged uncertain due to tree cover at the driveway.",
+    "remoteGs": "False — no controlled truck gate was confirmed.",
+    "drivewayLong": "The access road from Speedway Ave to the docks is long with ample paved width — can hold a deep 3+ truck queue.",
+    "fastLaneOpportunity": "Very wide paved truck approach and yard with unused width — physical room for an express/bypass lane.",
+    "dockDoors": "Docks spread across multiple building faces; ~4-8 trailers seen backed in at a time. Estimated 10-25 total doors (overhead estimate).",
+    "dropArea": "Large dedicated trailer-storage yard on the northwest with multiple long rows of parked trailers; 50+ trailers visible across the site, drop-stall band 25-50.",
+    "dropYard": "Clear dedicated trailer-storage lot northwest of the plant separate from active dock staging.",
+    "multipleFacilities": "Campus of 6+ large buildings — multiple manufacturing/warehouse structures plus process/tank areas.",
+    "railServed": "No rail spur into the property visible.",
+    "scale": "No truck scale clearly identified; flagged uncertain.",
+    "urbanRural": "Site is on the rural edge of Chico with orchards and farmland directly west and a low-density residential fringe south."
+  },
+  "method": "deep-audit"
+}

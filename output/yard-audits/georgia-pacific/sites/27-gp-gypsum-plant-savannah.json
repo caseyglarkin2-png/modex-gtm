@@ -1,0 +1,65 @@
+{
+  "name": "GP Gypsum Plant - Savannah GA",
+  "type": "Gypsum Wallboard Plant",
+  "coords": { "lat": 32.077000, "lng": -81.052500 },
+  "geofences": {
+    "perimeter": { "south": 32.073500, "west": -81.056500, "north": 32.080500, "east": -81.047000 },
+    "truckGate": { "south": 32.073000, "west": -81.054200, "north": 32.074200, "east": -81.052800 },
+    "dropYards": [
+      { "south": 32.075800, "west": -81.054400, "north": 32.077200, "east": -81.052800 }
+    ],
+    "dockAprons": [
+      { "south": 32.077000, "west": -81.052600, "north": 32.079000, "east": -81.051200 }
+    ],
+    "staging": { "south": 32.074400, "west": -81.053400, "north": 32.075600, "east": -81.052000 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 10,
+    "trailersVisible": 25,
+    "trailerParkingCapacity": 50,
+    "truckGateCount": 1,
+    "buildingCount": 9,
+    "siteAreaAcres": 172.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.0770,-81.0525,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "0-10",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "dockDoors", "dropArea", "trailersVisible", "trailerParkingCapacity", "scale", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster coords (2861 Tremont Rd) pointed at a mixed industrial area ~2.5 km away with no gypsum plant. Actual GP Gypsum Savannah is at 151 Wahlstrom Road, Savannah GA 31404 on the Savannah River, ~1.13 mi downstream of the Talmadge Bridge. Confirmed via Georgia EPD permit narrative and business listings; locked center ~32.0770,-81.0525.",
+    "truckGate": "Plant approached by a long private industrial access road (Wahlstrom Rd) off the public network; controlled-access industrial site. Street View shows perimeter fencing with brick gate pillars at the road. A gatehouse/checkpoint exists but is not crisply resolved.",
+    "guardShack": "No clearly identifiable staffed guard booth resolved in available imagery; large industrial gypsum plants often run gate/scale-house check-in. Marked remoteGs as the likelier read but both flagged uncertain.",
+    "scale": "Truck scale near the plant entrance is expected (inbound/outbound weighing of gypsum and board loads); not crisply confirmed in imagery.",
+    "shipRcvSeparate": "Gypsum rock received by ship at the river wharf on the N edge; finished wallboard ships by truck/rail from the S/SW board-line building and storage yard — physically separate operations.",
+    "dropYard": "Extensive trailer parking visible in the plant interior near the board lines; flatbed and dry-van trailers staged across the yard.",
+    "multipleFacilities": "Large multi-building campus: board-line plant, calcining/process buildings, river wharf, finished-goods storage yard, and ancillary buildings.",
+    "dockDoors": "Truck loading is largely flatbed forklift-loading from storage rows; limited true dock-door bank. Estimated 0-10 doors.",
+    "railServed": "Rail spurs run into the property along the SW edge (confirmed in satellite); plant ships and receives by rail.",
+    "urbanRural": "Within the Savannah, GA metro industrial corridor on the river — Urban."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Carlisle Regional Distribution Center - Carlisle PA",
+  "type": "Regional Distribution Center (aerosol storage)",
+  "coords": { "lat": 40.17510, "lng": -77.24280 },
+  "geofences": {
+    "perimeter": { "south": 40.17330, "west": -77.24500, "north": 40.17700, "east": -77.24080 },
+    "truckGate": { "south": 40.17600, "west": -77.24200, "north": 40.17660, "east": -77.24100 },
+    "dropYards": [
+      { "south": 40.17360, "west": -77.24480, "north": 40.17640, "east": -77.24380 },
+      { "south": 40.17360, "west": -77.24210, "north": 40.17640, "east": -77.24100 }
+    ],
+    "dockAprons": [
+      { "south": 40.17370, "west": -77.24430, "north": 40.17630, "east": -77.24390 },
+      { "south": 40.17370, "west": -77.24240, "north": 40.17630, "east": -77.24200 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110, "trailersVisible": 90, "trailerParkingCapacity": 150,
+    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 38.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.17510,-77.24280,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Confirmed via EPA RMP record (Carlisle Regional Distribution Center, 5 True Temper Dr) + Margulies Hoelzli Architecture project page + FCC ULS license 'EXEL SC JOHNSON' + LoopNet/FCC listings. 500,000 sq ft, 450 ft x 1,100 ft cross-dock built by First Industrial Realty Trust, tilt-wall, with local operations offices; operated with DHL/Exel. Roster geocode moved 8,791 m -> the supplied coords were far off; correct building locked from satellite at the True Temper Dr cross-dock.",
+    "truckGate": "The truck loop road wraps the entire building; the access road comes in from the NE off True Temper Dr. Street View (Nov 2023) of the entrance shows open driveways with no barrier arm, sliding gate, or checkpoint. Open site.",
+    "guardShack": "No staffed booth at the entrance. A small office/operations annex sits at the NE corner of the building, not a road-side guard booth.",
+    "shipRcvSeparate": "Cross-dock building (450x1,100 ft) with continuous dock banks on BOTH long faces (NW and SE), trailers backed in on both -> shipping and receiving run from physically separate dock clusters on opposite faces.",
+    "dockDoors": "Continuous dock bank along both ~335m long faces of the cross-dock -> well over 100 doors -> 50+ band.",
+    "dropArea": "Large paved drop yards flank both long faces, plus additional trailer rows to the SE; many trailers parked without tractors -> 50+.",
+    "entryExitSeparate": "The wrap-around loop road allows distinct in and out routing at different points of the building perimeter.",
+    "fastLaneOpportunity": "Very wide truck aprons and the full wrap-around loop give ample room to add an express/bypass lane if a gate were installed.",
+    "drivewayLong": "Long NE access road plus deep wrap-around loop easily hold a 3+ truck queue.",
+    "urbanRural": "Rural Cumberland County PA logistics cluster (the Carlisle/Harrisburg distribution corridor) with farmland and woods around the parcel -> Rural.",
+    "truckGateCount": "Two open truck entrances/exits off the perimeter loop.",
+    "siteAreaAcres": "Estimate from perimeter box covering the 500k sq ft cross-dock and the wrap-around truck yards.",
+    "entryLanes": "Open driveways; lane counts approximate."
+  },
+  "method": "deep-audit"
+}

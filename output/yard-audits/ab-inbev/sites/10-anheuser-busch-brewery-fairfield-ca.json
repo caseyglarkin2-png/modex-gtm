@@ -1,0 +1,55 @@
+{
+  "name": "Anheuser-Busch Brewery - Fairfield CA",
+  "type": "Brewery",
+  "coords": { "lat": 38.23550, "lng": -122.09050 },
+  "geofences": {
+    "perimeter": { "south": 38.23200, "west": -122.09650, "north": 38.23870, "east": -122.08650 },
+    "truckGate": { "south": 38.23700, "west": -122.09250, "north": 38.23770, "east": -122.09150 },
+    "dropYards": [
+      { "south": 38.23330, "west": -122.09150, "north": 38.23480, "east": -122.08900 }
+    ],
+    "dockAprons": [
+      { "south": 38.23590, "west": -122.09100, "north": 38.23680, "east": -122.08850 },
+      { "south": 38.23720, "west": -122.09050, "north": 38.23800, "east": -122.08850 }
+    ],
+    "staging": { "south": 38.23480, "west": -122.09150, "north": 38.23580, "east": -122.08950 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 75.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.23550,-122.09050,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "scale", "entryLanes", "exitLanes", "dockDoorCount", "truckGate"],
+  "fieldNotes": {
+    "location": "Confirmed Anheuser-Busch Fairfield Brewery, 3101 Busch Dr. Roster coords were ~3.5 km off (movedMeters 3470). Locked center on the main brewhouse/warehouse mass at 38.23550,-122.09050. Identity confirmed by 'THANK YOU TEAM TRAVIS' painted on the warehouse roof (Travis AFB is adjacent) and the brewing complex layout with tank farm and rail yard.",
+    "operatingStatus": "IMPORTANT - this brewery permanently CLOSED on Feb 22, 2026 (production realignment; 238 jobs cut). The site is being sold. Audit reflects the physical yard infrastructure as captured in pre-closure imagery; the facility is no longer operating.",
+    "truckGate": "Controlled private access road runs ~600 m south from the I-80 frontage road into a fenced industrial campus across an open grass buffer; entrance is a gate-controlled approach. Guard-booth structure not positively confirmed from imagery and Street View has no perimeter coverage - flagged uncertain.",
+    "guardShack": "A guarded entry is standard for an AB brewery of this scale and a small structure sits near the entrance node, but it could not be positively confirmed at z20; medium confidence.",
+    "drivewayLong": "Long internal approach from the gate to the dock yard with ample stacking room.",
+    "dockDoors": "Canopied dock banks with backed-in trailers along the N face of the warehouse plus a secondary dock cluster; ~40 estimated, 25-50 band.",
+    "dropArea": "Trailer parking rows N of the building hold ~70 trailers; 25-50 band, capacity ~130.",
+    "shipRcvSeparate": "Distinct dock banks on separate building faces.",
+    "scale": "A scale-house-sized structure sits on the truck route near the trailer yard; weigh pad inferred, medium confidence.",
+    "railServed": "Multi-track rail yard runs along the S edge with sidings into the property - clearly rail-served.",
+    "multipleFacilities": "Campus: brewhouse with tank farm, packaging warehouses, ancillary buildings, separate office building, and a large ground-mounted solar farm in the SW.",
+    "urbanRural": "Edge-of-town site between I-80 and farmland on the W; agricultural land borders the W and SW - Rural setting."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,63 @@
+{
+  "name": "Performance Foodservice - Nashville (Lebanon TN)",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 36.17540, "lng": -86.28810 },
+  "geofences": {
+    "perimeter": { "south": 36.173514, "west": -86.290882, "north": 36.177286, "east": -86.285318 },
+    "truckGate": { "south": 36.175061, "west": -86.287079, "north": 36.176139, "east": -86.285521 },
+    "dropYards": [
+      { "south": 36.173953, "west": -86.290602, "north": 36.176647, "east": -86.288598 },
+      { "south": 36.173881, "west": -86.286324, "north": 36.175319, "east": -86.283876 }
+    ],
+    "dockAprons": [
+      { "south": 36.174271, "west": -86.289781, "north": 36.175529, "east": -86.286219 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 51.9,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.17540,-86.28810,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point at any driveway. Street View (Dec 2024) along the full Maddox-Simpson Pkwy frontage from multiple headings shows open driveways onto the industrial-park loop road with no control structure. Site is an open campus typical of a small-town industrial park.",
+    "guardShack": "No staffed booth at any entrance. The brick building with garage bays seen in Street View on the south access road is a separate maintenance/shop building, not a guard booth.",
+    "multipleFacilities": "L-shaped two-building white-roof DC plus a separate maintenance/canopy shop building in the yard; counted as a multi-building campus.",
+    "dropYard": "Large dedicated trailer-storage lot on the west side (full of parked trailers) plus a second separate trailer lot to the southeast across the loop road.",
+    "postGateStaging": "Large internal paved yard between the buildings provides ample queuing/holding space before the dock doors.",
+    "entryLanes": "Single-lane open driveways; no formal multi-lane gate to count — estimate 1 in / 1 out.",
+    "railServed": "No rail spur enters the property; nearest rail is not adjacent."
+  },
+  "method": "deep-audit"
+}

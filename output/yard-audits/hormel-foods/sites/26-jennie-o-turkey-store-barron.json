@@ -1,0 +1,69 @@
+{
+  "name": "Jennie-O Turkey Store - Barron WI",
+  "type": "Meat Processing Plant",
+  "coords": { "lat": 45.40240, "lng": -91.84680 },
+  "geofences": {
+    "perimeter": { "south": 45.40110, "west": -91.84930, "north": 45.40410, "east": -91.84320 },
+    "truckGate": { "south": 45.40115, "west": -91.84520, "north": 45.40155, "east": -91.84450 },
+    "dropYards": [
+      { "south": 45.40240, "west": -91.84480, "north": 45.40360, "east": -91.84330 },
+      { "south": 45.40140, "west": -91.84740, "north": 45.40220, "east": -91.84600 }
+    ],
+    "dockAprons": [
+      { "south": 45.40280, "west": -91.84780, "north": 45.40370, "east": -91.84600 },
+      { "south": 45.40140, "west": -91.84780, "north": 45.40220, "east": -91.84620 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 7,
+    "siteAreaAcres": 37.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@45.40240,-91.84680,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "scale"],
+  "fieldNotes": {
+    "location": "Roster coords (45.40239,-91.847592, ROOFTOP) landed directly on the plant. Confirmed Jennie-O via the green Jennie-O logo on the 3-story office building (StreetView 2024) and the 34 N 7th St address. Locked center 45.40240,-91.84680 on the main turkey-processing complex in Barron, WI.",
+    "truckGate": "Open truck entrance. StreetView (2024) shows the main truck driveway off the public road running uncontrolled into the plant yard -- no barrier arm and no gate across the truck drive. A green privacy-slat chain-link fence encloses the office/employee area and part of the south yard, but the truck entry itself is open. truckGate false.",
+    "guardShack": "No guard booth at the open truck entrance.",
+    "remoteGs": "No controlled gate -> remoteGs false.",
+    "railServed": "An active rail line runs straight through the complex with spurs serving buildings and the grain/feed silos -> railServed true.",
+    "multipleFacilities": "Large multi-building turkey campus (processing buildings, separate warehouse/DC, feed mill with silos, support buildings) -> multipleFacilities true.",
+    "shipRcvSeparate": "Dock banks on separate building faces (N and S), consistent with separate raw-receive vs finished-ship operations at a slaughter+processing plant -> shipRcvSeparate true.",
+    "dropYard": "Multiple trailer drop areas -- a large NE trailer yard and a S-side yard -- with 45+ trailers parked -> dropYard true; dropArea 25-50.",
+    "dockDoors": "~40 dock doors estimated across the multiple building faces; banded 25-50, low-confidence.",
+    "fastLaneOpportunity": "Wide open truck entrance and large paved yard leave ample room for an express/bypass lane.",
+    "urbanRural": "Barron WI is a small rural city (~3,400); the plant is at the edge of town surrounded by small-town residential and farmland -> Rural.",
+    "scale": "A truck scale is plausible at a turkey slaughter plant but was not positively identified in imagery -> classified false, flagged."
+  },
+  "method": "deep-audit"
+}

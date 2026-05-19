@@ -1,0 +1,23 @@
+{
+  "name": "Kraft Heinz - Holland",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "streetview": "Street View shows the H.J. Heinz building with chain-link fencing along the lot, but no truck gate/checkpoint in this frame.",
+    "truckGate": "Open driveway from the public road to the dock area with no checkpoint structure - matches the no-gate archetype.",
+    "multipleFacilities": "Large lakeside manufacturing campus with multiple connected and separate plant/warehouse buildings and tank farms.",
+    "dropYard": "Trailer rows parked along the east side of the campus.",
+    "urbanRural": "Small-town (Holland MI) waterfront industrial setting; judged Rural."
+  }
+}

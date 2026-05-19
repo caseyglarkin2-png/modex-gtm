@@ -1,0 +1,66 @@
+{
+  "name": "Performance Foodservice - Cincinnati OH",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 39.23030, "lng": -84.44910 },
+  "geofences": {
+    "perimeter": { "south": 39.227875, "west": -84.450956, "north": 39.232725, "east": -84.447244 },
+    "truckGate": { "south": 39.229196, "west": -84.449138, "north": 39.230004, "east": -84.447862 },
+    "dropYards": [
+      { "south": 39.228212, "west": -84.450144, "north": 39.230188, "east": -84.448056 },
+      { "south": 39.229453, "west": -84.448548, "north": 39.232147, "east": -84.447852 }
+    ],
+    "dockAprons": [
+      { "south": 39.229642, "west": -84.448964, "north": 39.232158, "east": -84.448036 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 42.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.23030,-84.44910,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible"],
+  "fieldNotes": {
+    "truckGate": "The truck yard is enclosed by an ornamental black metal perimeter fence along the Shepherd Ave frontage (clearly visible in June-2025 Street View, with PFG-branded tractors lined up behind it). However the fence has wide OPEN driveway gaps with no barrier arm, sliding gate, or staffed checkpoint — no controlled gate in any view. Fenced yard with open driveway entrances = truckGate false.",
+    "guardShack": "No guard booth at any driveway opening — none seen along the full Shepherd Ave frontage in Street View or in z19-z20 satellite.",
+    "remoteGs": "False — no gate, so no remote check-in implied.",
+    "entryExitSeparate": "Two separate driveway openings in the perimeter fence — one serving the south drop yard, one serving the north dock-yard area — give distinct in/out points; truckGateCount=2.",
+    "postGateStaging": "Large paved holding area north of the main building and broad internal yard provide ample truck queuing room inside the fence before the docks.",
+    "dropArea": "50+ — extensive trailer storage: angled trailer rows in the south drop yard plus a long line of tractors/trailers along the Shepherd Ave fence. PFG-branded trailers confirmed in Street View.",
+    "dockDoors": "Long dock bank on the east face of the main building with many trailers backed in; ~35 doors estimated — flagged.",
+    "urbanRural": "Dense Lockland / Reading industrial corridor north of Cincinnati, wedged between I-75 and an active rail line, with residential immediately east — clearly Urban.",
+    "railServed": "An active rail line runs immediately east of the property but no spur enters the PFG site itself.",
+    "buildingCount": "Main DC building plus a separate long narrow building at the south end of the property."
+  },
+  "method": "deep-audit"
+}

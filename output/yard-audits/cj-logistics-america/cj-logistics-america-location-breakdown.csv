@@ -1,0 +1,59 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+CJ Logistics - Elwood IL (Logistics Center 1),Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@41.4040,-88.1384,400m/data=!3m1!1e3"
+CJ Logistics - Elwood IL (Logistics Center 2 / NEXUS),Distribution Center,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,,,YES,,,,YES,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@41.391443,-88.153535,400m/data=!3m1!1e3"
+CJ Logistics - Newville PA,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@40.13260,-77.35050,400m/data=!3m1!1e3"
+CJ Logistics - Shafter CA,Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@35.45210,-119.19850,400m/data=!3m1!1e3"
+CJ Logistics - Riverside CA,Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@33.93700,-117.30720,400m/data=!3m1!1e3"
+CJ Logistics - Wilmer TX (Southport Logistics Park),Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@32.62280,-96.68500,400m/data=!3m1!1e3"
+CJ Logistics - Perris CA,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@33.86070,-117.26520,400m/data=!3m1!1e3"
+CJ Logistics - Champaign IL,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@40.123100,-88.274000,400m/data=!3m1!1e3"
+CJ Logistics - Glendale AZ,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,,YES,YES,,,,,Rural,,,,,"https://www.google.com/maps/@33.509600,-112.399200,400m/data=!3m1!1e3"
+CJ Logistics - Breinigsville PA,Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,,YES,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@40.572700,-75.632400,400m/data=!3m1!1e3"
+CJ Logistics - Tinley Park IL,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,,YES,YES,,,,,Urban,,,,,"https://www.google.com/maps/@41.585600,-87.733400,400m/data=!3m1!1e3"
+CJ Logistics - Fontana CA,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,YES,,,,YES,Urban,,,,YES,"https://www.google.com/maps/@34.049300,-117.517400,400m/data=!3m1!1e3"
+CJ Logistics - Gainesville GA (Cold Storage),Cold Storage Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@34.380000,-83.718800,400m/data=!3m1!1e3"
+CJ Logistics - New Century KS (Cold Storage),Cold Storage Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@38.842000,-94.901500,400m/data=!3m1!1e3"
+CJ Logistics - Mira Loma CA,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@34.0319,-117.5520,400m/data=!3m1!1e3"
+CJ Logistics - Romeoville IL (Normantown),Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@41.6510,-88.1310,400m/data=!3m1!1e3"
+CJ Logistics - Romeoville IL (Pinnacle Drive),Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@41.6042,-88.1158,400m/data=!3m1!1e3"
+CJ Logistics - Dallas TX (Regal Row),Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,,,,,,,,,YES,,YES,,,YES,Urban,,,,,"https://www.google.com/maps/@32.8130,-96.9013,400m/data=!3m1!1e3"
+CJ Logistics - Arlington TX,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,,,,,,,,YES,,YES,,,YES,Urban,,,,YES,"https://www.google.com/maps/@32.6806,-97.0794,400m/data=!3m1!1e3"
+CJ Logistics - Secaucus NJ,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,,YES,,1,1,,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@40.7717,-74.0806,400m/data=!3m1!1e3"
+CJ Logistics - Carlisle PA,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@40.2015,-77.1886,400m/data=!3m1!1e3"
+CJ Logistics - Middletown PA,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,,,,,,,YES,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@40.2082,-76.7455,400m/data=!3m1!1e3"
+CJ Logistics - Fairburn GA,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@33.5441,-84.5873,400m/data=!3m1!1e3"
+CJ Logistics - Mount Juliet TN,Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,,YES,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@36.0717,-86.43315,400m/data=!3m1!1e3"
+CJ Logistics - Lebanon TN,Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,,YES,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@36.131,-86.4064,400m/data=!3m1!1e3"
+CJ Logistics - Chester VA,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,,,,,,,YES,,YES,,,YES,Rural,,,,,"https://www.google.com/maps/@37.29775,-77.39925,400m/data=!3m1!1e3"
+CJ Logistics - West Memphis AR,Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,,YES,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@35.18595,-90.2467,400m/data=!3m1!1e3"
+CJ Logistics - Kernersville NC,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@36.1263,-80.06235,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,11,39%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,1,4%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,8,29%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,8,29%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,28,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,11,39%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,12,43%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,9,32%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,19,68%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,28,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,28,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

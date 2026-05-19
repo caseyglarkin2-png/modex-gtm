@@ -1,0 +1,51 @@
+{
+  "name": "Niagara Bottling - Kansas City MO (Airworld Dr)",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 39.30040, "lng": -94.67520 },
+  "geofences": {
+    "perimeter": { "south": 39.29820, "west": -94.67720, "north": 39.30260, "east": -94.67350 },
+    "truckGate": { "south": 39.29790, "west": -94.67560, "north": 39.29850, "east": -94.67480 },
+    "dropYards": [
+      { "south": 39.29900, "west": -94.67690, "north": 39.30230, "east": -94.67560 }
+    ],
+    "dockAprons": [
+      { "south": 39.29900, "west": -94.67670, "north": 39.30230, "east": -94.67580 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 95,
+    "trailersVisible": 62,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 31.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.30040,-94.67520,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "trailerParkingCapacity", "urbanRural"],
+  "fieldNotes": {
+    "buildingId": "Address 11400 N Airworld Dr geocoded ROOFTOP onto a single large ~634,000 sq ft warehouse/manufacturing building in the Congress Corporate Centre near Kansas City International Airport (KCI). Web research confirms this is Niagara's second KC plant (Congress Commerce Building B, opened 2021). Street View on Airworld Dr predates construction (2014/2019 panos), so the gate call rests on current satellite imagery.",
+    "truckGate": "The truck driveway off N Airworld Dr curves up to the SW dock apron with no barrier arm, sliding gate, or guard booth visible at the property line or along the approach. Open access - truckGate false.",
+    "drivewayLong": "Long curved entrance drive plus a deep SW dock apron and perimeter road give 3+ truck stacking room.",
+    "dockDoors": "A single very long dock face runs the entire W/SW side of the building, densely lined with trailers. Estimated ~80-110 doors - band 50+. Exact count low-confidence from overhead imagery.",
+    "dropArea": "Trailers fill the W dock apron and adjacent marked stalls along the perimeter road; capacity well over 50, band 50+.",
+    "shipRcvSeparate": "All dock activity is on one continuous building face - shipping and receiving are not on physically separate dock banks.",
+    "dropYard": "A continuous trailer-parking apron/yard runs the full W side of the building beyond the immediate dock strip.",
+    "fastLaneOpportunity": "Wide unguarded entrance apron leaves ample paved width to add an express lane.",
+    "urbanRural": "Edge-of-metro location: KCI airport corporate park bordered by farmland and woodland on the W; classed Rural (edge-of-town industrial), though it sits within the greater KC metro - borderline."
+  },
+  "method": "deep-audit"
+}

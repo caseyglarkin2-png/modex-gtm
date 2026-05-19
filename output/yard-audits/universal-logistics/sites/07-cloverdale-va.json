@@ -1,0 +1,66 @@
+{
+  "name": "Universal Logistics - Roanoke/Botetourt Value-Added Facility - Cloverdale VA",
+  "type": "Value-Added Warehouse / Heavy-Truck Assembly Facility (owned)",
+  "coords": { "lat": 37.37224, "lng": -79.90340 },
+  "geofences": {
+    "perimeter": { "south": 37.36980, "west": -79.90640, "north": 37.37430, "east": -79.90220 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 37.37050, "west": -79.90600, "north": 37.37200, "east": -79.90480 }
+    ],
+    "dockAprons": [
+      { "south": 37.37150, "west": -79.90540, "north": 37.37340, "east": -79.90460 }
+    ],
+    "staging": { "south": 37.37050, "west": -79.90600, "north": 37.37170, "east": -79.90490 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 26,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 37.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.37224,-79.9034,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "siteResolution": "Confirmed via PRNewswire, Roanoke Times, Commercial Property Executive, WSET and LoopNet as Universal Logistics' Roanoke/Botetourt value-added facility at 1796 Lee Hwy, Cloverdale VA 24077 - a ~254,000 sq ft warehouse on 37 acres, a former Southern States Cooperative distribution center, acquired by Universal for a ~$50M heavy-truck-division expansion (third-party assembly, sequencing, value-added services) announced Jan 2024. Roster coords landed on the building roof; locked center 37.37224,-79.90340.",
+    "truckGate": "The main truck driveway enters the property off Lee Hwy (US-11) at the SW corner. Street View (2023-2024) of the entrance shows an OPEN driveway running into the paved yard - no barrier arm, no sliding/swing gate across the truck lane, no checkpoint pinch-point. A small green swing gate is visible on a minor side path but it does not control the main truck drive. truckGate = false.",
+    "guardShack": "No guard booth observed at the entrance in any Street View pass. guardShack = false; remoteGs = false (no gate, so remoteGs cannot be true).",
+    "perimeterFence": "Partial chain-link fencing surrounds the SW staging/equipment lot, but the truck entrance itself is uncontrolled - consistent with an older co-op DC recently acquired and still being built out.",
+    "docks": "Dock doors run along the long W/SW face of the warehouse; z19 imagery shows a continuous bank of doors with ~14 trailers backed in / parked. Estimated ~26 doors (flagged uncertain - older building, dock canopies partly obscure the count).",
+    "drivewayLong": "Long internal approach from the Lee Hwy entrance across the SW staging lot before reaching the dock apron - holds a 3+ truck queue. drivewayLong = true; postGateStaging = true (the large paved SW lot serves as an internal holding area).",
+    "dropYard": "A paved SW staging lot holds parked trailers and heavy equipment (a crane visible in Street View) separate from the active dock apron - dedicated drop/equipment yard character. dropArea 10-25, dropYard = true.",
+    "buildingCount": "Main structure is one large warehouse; a separate small office/support building sits just south of it - counted as 2. Not a true multi-building campus, so multipleFacilities = false.",
+    "railServed": "A rail line runs NE-SW immediately east of the building behind a vegetation buffer, but no rail spur enters the property - no rail siding visible serving the warehouse. railServed = false.",
+    "urbanRural": "Cloverdale is a small unincorporated community in Botetourt County; the facility sits in an edge-of-town setting with residential frontage and woods/farmland around. Classified Rural.",
+    "imageryNote": "The facility was mid-expansion as of the 2024 announcement; current imagery may predate completion of new value-added/assembly buildout, which could change dock and yard counts."
+  },
+  "method": "deep-audit"
+}

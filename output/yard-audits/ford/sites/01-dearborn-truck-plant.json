@@ -1,0 +1,48 @@
+{
+  "name": "Ford - Dearborn Truck Plant, Dearborn MI",
+  "type": "Vehicle Assembly Plant",
+  "coords": { "lat": 42.31280, "lng": -83.16400 },
+  "geofences": {
+    "perimeter": { "south": 42.3085, "west": -83.1720, "north": 42.3175, "east": -83.1580 },
+    "truckGate": { "south": 42.30300, "west": -83.16780, "north": 42.30420, "east": -83.16620 },
+    "dropYards": [
+      { "south": 42.31050, "west": -83.16350, "north": 42.31250, "east": -83.16080 },
+      { "south": 42.31480, "west": -83.16380, "north": 42.31620, "east": -83.16100 }
+    ],
+    "dockAprons": [
+      { "south": 42.31040, "west": -83.16700, "north": 42.31150, "east": -83.16480 },
+      { "south": 42.31460, "west": -83.16550, "north": 42.31560, "east": -83.16280 }
+    ],
+    "staging": { "south": 42.30420, "west": -83.16780, "north": 42.30560, "east": -83.16560 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40, "trailersVisible": 35, "trailerParkingCapacity": 80,
+    "truckGateCount": 2, "buildingCount": 6, "siteAreaAcres": 285.3,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.31280,-83.16400,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "facility": "Dearborn Truck Plant inside the Ford Rouge Complex; coords land exactly on the DTP's 10.4-acre living (green) roof, an unmistakable landmark confirming identity.",
+    "truckGate": "Rouge Complex is a fully fenced, controlled-access campus. Truck and employee traffic enters via guarded Miller Rd gates; gate infrastructure, fencing and Ford gate signage visible in Street View.",
+    "guardShack": "Rouge operates staffed security gatehouses at its entrances (standard for the campus); booth structures present at controlled entries.",
+    "multiStep": "Campus-scale security: outer Rouge perimeter gate, then internal plant-specific checkpoints before DTP docks.",
+    "railServed": "Multiple active rail spurs run directly through the property; long covered rail auto-rack loading structures for finished F-150s are visible NW of the plant.",
+    "multipleFacilities": "DTP is one plant within the larger integrated Rouge manufacturing campus (stamping, frame, other buildings adjacent).",
+    "dockDoorCount": "Estimate from overhead imagery; docks distributed across multiple building faces of a very large assembly building plus parts-receiving banks.",
+    "scale": "No truck scale clearly identified in imagery; left uncertain."
+  },
+  "method": "deep-audit"
+}

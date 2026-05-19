@@ -1,0 +1,271 @@
+{
+  "account": "DHL Supply Chain",
+  "generatedAt": "2026-05-18",
+  "facilityCount": 24,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "DHL Supply Chain - Diageo Campus - Plainfield/Bolingbrook IL",
+      "city": "Bolingbrook",
+      "state": "IL",
+      "type": "Dedicated Customer Distribution Center (spirits)",
+      "address": "1701 Remington Blvd, Bolingbrook, IL 60490",
+      "lat": 41.6781,
+      "lng": -88.1268,
+      "source": "Dossier marquee site - DHL-operated Diageo North America campus (Orange EV first-customer 2015, Nikola hydrogen Class 8 2024); address via DHL Supply Chain-Diageo business listing (businessyab). DHL/Diageo describe it as the 'Plainfield, IL campus'; the operating address is in adjacent Bolingbrook."
+    },
+    {
+      "idx": 2,
+      "name": "DHL Supply Chain - IDS Fulfillment HQ DC - Plainfield IN",
+      "city": "Plainfield",
+      "state": "IN",
+      "type": "Multi-Customer E-Commerce Fulfillment Center",
+      "address": "9431 Allpoints Parkway, Plainfield, IN 46168",
+      "lat": 39.6957,
+      "lng": -86.3636,
+      "source": "Dossier-named (IDS Fulfillment acquisition, May 2025); 780,000 sq ft, IDS headquarters DC; address via IDS Fulfillment / LeadIQ / Indianapolis Business Journal"
+    },
+    {
+      "idx": 3,
+      "name": "DHL Supply Chain - IDS Fulfillment DC - Salt Lake City UT",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "type": "Multi-Customer E-Commerce Fulfillment Center",
+      "address": "1711 S 4650 West, Salt Lake City, UT 84104",
+      "lat": 40.732,
+      "lng": -112.029,
+      "source": "Dossier-named (IDS Fulfillment acquisition); address via IDS Fulfillment Salt Lake City location page"
+    },
+    {
+      "idx": 4,
+      "name": "DHL Supply Chain - East Coast Center of Excellence - Annville PA",
+      "city": "Annville",
+      "state": "PA",
+      "type": "Life Sciences & Healthcare Distribution Center (Foreign Trade Zone)",
+      "address": "700 Killinger Road, Annville, PA 17003",
+      "lat": 40.3027,
+      "lng": -76.543,
+      "source": "Dossier-aligned (life sciences network expansion); 1,000,000 sq ft, Clear Springs Logistics Park, 100 dock doors, 230 trailer stalls; address via Pharmaceutical Commerce / LebTown / FreightWaves"
+    },
+    {
+      "idx": 5,
+      "name": "DHL Supply Chain - Siemens Healthineers Life Sciences DC - Memphis TN",
+      "city": "Memphis",
+      "state": "TN",
+      "type": "Life Sciences & Healthcare Distribution Center",
+      "address": "6200 Global Drive, Memphis, TN 38141",
+      "lat": 35.0289,
+      "lng": -89.8455,
+      "source": "Dossier-aligned (life sciences; Memphis innovation hub region); 422,000 sq ft, Siemens Healthineers dedicated tenant; address via DHL/Siemens Healthineers press release, Work Safety Index"
+    },
+    {
+      "idx": 6,
+      "name": "DHL Supply Chain - East Coast Center of Excellence (Project Empire) - Jacksonville FL",
+      "city": "Jacksonville",
+      "state": "FL",
+      "type": "Distribution Center",
+      "address": "10300 Eastport Road, Jacksonville, FL 32218",
+      "lat": 30.4257,
+      "lng": -81.6043,
+      "source": "603,200 sq ft on 47.13 acres, $64-72M build near JAXPORT; address via Jax Daily Record / JAXUSA / Supply Chain 24/7"
+    },
+    {
+      "idx": 7,
+      "name": "DHL Supply Chain - Mann+Hummel DC - Cowpens SC",
+      "city": "Cowpens",
+      "state": "SC",
+      "type": "Dedicated Customer Distribution Center (filtration)",
+      "address": "600 Webber Drive, Cowpens, SC 29330",
+      "lat": 35.0179,
+      "lng": -81.8043,
+      "source": "1,401,200 sq ft, Sunny Slope Industrial Park, 104 dock doors, dedicated for Mann+Hummel; address via Colliers / Red Rock Developments / CommercialCafe (largest single DHL Supply Chain building in roster)"
+    },
+    {
+      "idx": 8,
+      "name": "DHL Supply Chain - Violet Township DC - Pickerington OH",
+      "city": "Pickerington",
+      "state": "OH",
+      "type": "Distribution Center",
+      "address": "8695 Basil Western Road NW, Pickerington, OH 43147",
+      "lat": 39.873,
+      "lng": -82.786,
+      "source": "755,000 sq ft, Violet Township / Fairfield County, opened Q2 2024 near Westerville HQ; address via NBC4i / REBusinessOnline / Commercial Property Executive"
+    },
+    {
+      "idx": 9,
+      "name": "DHL Supply Chain - Campbell Soup DC - Fort Worth TX",
+      "city": "Fort Worth",
+      "state": "TX",
+      "type": "Dedicated Customer Distribution Center (CPG/food)",
+      "address": "3000 Cantrell Sansom Road, Fort Worth, TX 76131",
+      "lat": 32.9105,
+      "lng": -97.327,
+      "source": "578,000 sq ft, AllianceTexas area, dedicated for Campbell Soup Company; address via BusinessFacilities / Fort Worth Business Press / FreightWaves"
+    },
+    {
+      "idx": 10,
+      "name": "DHL Supply Chain - Whitestown DC - Whitestown IN",
+      "city": "Whitestown",
+      "state": "IN",
+      "type": "Distribution Center",
+      "address": "5000 Anson Blvd, Whitestown, IN 46075",
+      "lat": 39.9745,
+      "lng": -86.345,
+      "source": "Indianapolis-region DC in Anson development off I-65; address via Supply Chain Dive / DHL location references"
+    },
+    {
+      "idx": 11,
+      "name": "DHL Supply Chain - Groveport DC - Groveport OH",
+      "city": "Groveport",
+      "state": "OH",
+      "type": "Distribution Center",
+      "address": "6390 Commerce Ct, Groveport, OH 43125",
+      "lat": 39.859,
+      "lng": -82.887,
+      "source": "Columbus-region DC (Rickenbacker logistics submarket near Westerville HQ); address via Waze / Chamber of Commerce / Glassdoor"
+    },
+    {
+      "idx": 12,
+      "name": "DHL Supply Chain - Keurig DC - Union City GA",
+      "city": "Union City",
+      "state": "GA",
+      "type": "Dedicated Customer Distribution Center (beverage)",
+      "address": "6000 Studio Way, Union City, GA 30291",
+      "lat": 33.566,
+      "lng": -84.566,
+      "source": "Atlanta-region DC dedicated for Keurig; address via Waze ('DHL Supply Chain (Keurig)') / Nextdoor"
+    },
+    {
+      "idx": 13,
+      "name": "DHL Supply Chain - Union City DC (Derrick Industrial) - Union City GA",
+      "city": "Union City",
+      "state": "GA",
+      "type": "Distribution Center",
+      "address": "4505 Derrick Industrial Parkway, Union City, GA 30291",
+      "lat": 33.579,
+      "lng": -84.547,
+      "source": "Atlanta-region DC west of Hartsfield-Jackson airport; address via Instagram location / Yellow Pages (note: a separate ~600-employee Union City customer site was reported closing in 2025; verify operating status of all Union City buildings)"
+    },
+    {
+      "idx": 14,
+      "name": "DHL Supply Chain - DHL Commerce Park DC - St. George SC",
+      "city": "Saint George",
+      "state": "SC",
+      "type": "Distribution Center (Charleston port-adjacent campus)",
+      "address": "Winding Woods Road off US-78, Saint George, SC 29477",
+      "lat": 33.191,
+      "lng": -80.576,
+      "source": "$100M, three-building 1.7M sq ft DHL Commerce Park serving Port of Charleston; street-level building address not individually published - park location via SC Dept of Commerce / Post and Courier / DHL Group press release"
+    },
+    {
+      "idx": 15,
+      "name": "DHL Supply Chain - Melrose Park DC - Melrose Park IL",
+      "city": "Melrose Park",
+      "state": "IL",
+      "type": "Distribution / E-Commerce Sortation Center",
+      "address": "2065 George Street, Melrose Park, IL 60160",
+      "lat": 41.905,
+      "lng": -87.865,
+      "source": "352,000 sq ft, LEED Silver, Honeywell IntelliSort loop sorter (40,000 parcels/hr), opened June 2023; address via DHL press release / Connect CRE / AJOT"
+    },
+    {
+      "idx": 16,
+      "name": "DHL Supply Chain - DC - Edgerton KS (Logistics Park Kansas City)",
+      "city": "Edgerton",
+      "state": "KS",
+      "type": "Distribution Center (intermodal logistics park)",
+      "address": "Logistics Park Kansas City, Edgerton, KS 66021",
+      "lat": 38.764,
+      "lng": -95.014,
+      "source": "DHL operates within the 3,000-acre LPKC intermodal hub; specific building street address not publicly enumerated - park location via Kansas Dept of Commerce / Nextdoor / Logistics Park KC"
+    },
+    {
+      "idx": 17,
+      "name": "DHL Supply Chain - IDS Fulfillment DC - Atlanta GA",
+      "city": "Atlanta",
+      "state": "GA",
+      "type": "Multi-Customer E-Commerce Fulfillment Center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Dossier-named (IDS Fulfillment acquisition, May 2025 - 1.3M sq ft across Atlanta/Indianapolis/Salt Lake City/Plainfield IN); IDS lists an Atlanta-metro DC but does not publish a street address - COULD NOT PIN DOWN exact address"
+    },
+    {
+      "idx": 18,
+      "name": "DHL Supply Chain - IDS Fulfillment DC - Indianapolis IN",
+      "city": "Indianapolis",
+      "state": "IN",
+      "type": "Multi-Customer E-Commerce Fulfillment Center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Dossier-named (IDS Fulfillment acquisition); IDS lists an Indianapolis-metro DC separate from the Plainfield IN HQ - specific street address not published; COULD NOT PIN DOWN exact address"
+    },
+    {
+      "idx": 19,
+      "name": "DHL Supply Chain - DC - Mechanicsburg PA",
+      "city": "Mechanicsburg",
+      "state": "PA",
+      "type": "Distribution Center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Harrisburg-submarket DC cluster repeatedly listed for DHL Supply Chain (Mechanicsburg/Carlisle corridor); a leased multi-building presence - specific operating street address not publicly enumerated; COULD NOT PIN DOWN exact address"
+    },
+    {
+      "idx": 20,
+      "name": "DHL Supply Chain - DC - North Las Vegas NV",
+      "city": "North Las Vegas",
+      "state": "NV",
+      "type": "Distribution Center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Two new facilities (~450,000 + ~350,000 sq ft, ~800,000 sq ft total) reported for completion late 2025/2026 - 400+ jobs; street addresses not yet publicly disclosed; COULD NOT PIN DOWN exact address"
+    },
+    {
+      "idx": 21,
+      "name": "DHL Supply Chain - DC - Etna OH",
+      "city": "Etna",
+      "state": "OH",
+      "type": "Distribution Center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Columbus eastside logistics corridor; DHL Supply Chain operating site listed in Etna, OH (Licking County) - specific building street address not publicly enumerated; COULD NOT PIN DOWN exact address"
+    },
+    {
+      "idx": 22,
+      "name": "DHL Supply Chain - DC - Obetz OH",
+      "city": "Obetz",
+      "state": "OH",
+      "type": "Distribution Center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Rickenbacker/Columbus south logistics submarket; DHL Supply Chain operating site listed in Obetz, OH - specific building street address not publicly enumerated; COULD NOT PIN DOWN exact address"
+    },
+    {
+      "idx": 23,
+      "name": "DHL Supply Chain - DC - Houston TX",
+      "city": "Houston",
+      "state": "TX",
+      "type": "Distribution Center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Houston is a confirmed DHL Supply Chain operating market (multiple contract-logistics DCs serving Gulf Coast); specific building street addresses are leased customer sites not publicly enumerated; COULD NOT PIN DOWN exact address"
+    },
+    {
+      "idx": 24,
+      "name": "DHL Supply Chain - DC - Dallas/Irving TX",
+      "city": "Irving",
+      "state": "TX",
+      "type": "Distribution Center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "DFW is a confirmed DHL Supply Chain operating market (in addition to the dedicated Campbell Soup Fort Worth DC at idx 9); contract-logistics DC building street addresses not publicly enumerated; COULD NOT PIN DOWN exact address"
+    }
+  ]
+}

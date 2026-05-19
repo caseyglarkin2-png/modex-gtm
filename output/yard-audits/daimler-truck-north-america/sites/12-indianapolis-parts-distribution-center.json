@@ -1,0 +1,53 @@
+{
+  "name": "Indianapolis Parts Distribution Center - Whitestown IN",
+  "type": "Parts distribution center",
+  "coords": { "lat": 39.979000, "lng": -86.386300 },
+  "geofences": {
+    "perimeter": { "south": 39.977850, "west": -86.387900, "north": 39.980050, "east": -86.384700 },
+    "truckGate": { "south": 39.978900, "west": -86.385200, "north": 39.979250, "east": -86.384800 },
+    "dropYards": [
+      { "south": 39.977850, "west": -86.387100, "north": 39.978200, "east": -86.385000 }
+    ],
+    "dockAprons": [
+      { "south": 39.978150, "west": -86.387200, "north": 39.978550, "east": -86.385000 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 34,
+    "trailersVisible": 32,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 12.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.979000,-86.386300,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "Confirmed via web research as the 283,500 sq ft Indianapolis PDC at 4140 Anson Boulevard, AllPoints at Anson park, opened 2017 by DTNA ($12.35M lease/build). Roster rooftop geocode moved only 181 m and landed on the correct building. Center locked at 39.979000, -86.386300.",
+    "truckGate": "No perimeter fence, no barrier arm, no gate, no checkpoint at any road connection. Street View (2023-05) along Anson Boulevard shows open grass frontage and open driveways. Standard open spec-park layout.",
+    "guardShack": "No booth structure beside any driveway. A green utility transformer cabinet sits in the south grass (not a guard shack).",
+    "dockDoors": "All dock doors on the south long face. Counting the door rhythm and trailers backed in across both halves of the south face gives roughly 30-38 doors; estimate 34, flagged uncertain.",
+    "dropArea": "Active facility: ~15-20 trailers backed into docks plus a row of ~12-15 parked trailers in the south truck court — a clear trailer drop/parking row, dropYard true.",
+    "trailersVisible": "Counted approximately 32 trailers total in captured imagery (backed-in plus the parking row).",
+    "drivewayLong": "Wide perimeter truck court / loop drive easily holds 3+ trucks staging before docks.",
+    "fastLaneOpportunity": "Wide, fully paved truck court with unused apron width — room for an express bypass lane.",
+    "entryExitSeparate": "Two open driveway connections to Anson Boulevard (one near the NE office/car-park area, one toward the south truck court) act as separate in/out routes.",
+    "urbanRural": "Within the dense AllPoints at Anson industrial park, near I-65 in metro Indianapolis; classified Urban.",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

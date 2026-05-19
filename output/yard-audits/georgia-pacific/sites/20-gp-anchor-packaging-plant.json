@@ -1,0 +1,61 @@
+{
+  "name": "GP Anchor Packaging Plant - Jonesboro AR",
+  "type": "Thermoformed Packaging Plant",
+  "coords": { "lat": 35.8122, "lng": -90.6390 },
+  "geofences": {
+    "perimeter": { "south": 35.810853, "west": -90.641437, "north": 35.813727, "east": -90.635455 },
+    "truckGate": { "south": 35.813031, "west": -90.640743, "north": 35.813569, "east": -90.639857 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 35.812071, "west": -90.641132, "north": 35.813329, "east": -90.640468 }
+    ],
+    "staging": { "south": 35.812351, "west": -90.640443, "north": 35.813249, "east": -90.639557 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 43.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.8122,-90.6390,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoors", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "facility": "Anchor Packaging thermoformed-packaging manufacturing plant at 4708 Krueger Drive, Jonesboro AR — acquired by Georgia-Pacific in Oct 2025 (net-new yard ops). Roster coordinate (35.891617, -90.658333) was ~9 km NW in farmland; relocated via web research (4708 Krueger Drive, GPS 35.8135/-90.6392) and confirmed by the 'Anchor Packaging - NOW HIRING' sign with the Anchor logo and the blue Anchor plant sign, both visible in Jan-2026 Street View.",
+    "truckGate": "No controlled truck entrance. The truck driveway enters directly off Krueger Drive as an open driveway — no barrier arm, no sliding/swing gate, no perimeter gate, no guard booth. The plant frontage (employee parking, office) is openly accessible from the public road. Typical light-industrial converting plant in the Jonesboro Industrial Park. truckGate false, guardShack false, remoteGs false.",
+    "drivewayShort": "Short open approach from Krueger Drive to the dock apron — holds only 1-2 trucks.",
+    "dockDoors": "Loading docks along the W/NW face of the building; a trailer (XPRESS) seen backed in at a dock in Street View. ~18 doors estimated from overhead imagery — low confidence band 10-25.",
+    "dropArea": "Paved apron/yard on the west side; small number of trailers — no dedicated separate trailer drop lot. dropArea 0-10, dropYard false.",
+    "railServed": "A rail line runs along the SW edge of the area but no spur reaches the Anchor plant — truck-served.",
+    "urbanRural": "Rural — the plant sits in the Jonesboro Industrial Park on the edge of town near the municipal airport, surrounded by farm fields and scattered industrial buildings.",
+    "scale": "No truck scale imaged — not expected for a thermoformed-packaging converting plant."
+  },
+  "method": "deep-audit"
+}

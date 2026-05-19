@@ -1,0 +1,56 @@
+{
+  "name": "Detroit Reman West - Tooele UT",
+  "type": "Remanufacturing plant (engines/components)",
+  "coords": { "lat": 40.52945, "lng": -112.34998 },
+  "geofences": {
+    "perimeter": { "south": 40.5266, "west": -112.3524, "north": 40.5310, "east": -112.3483 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 40.5280, "west": -112.3520, "north": 40.5288, "east": -112.3500 },
+      { "south": 40.5288, "west": -112.3524, "north": 40.5300, "east": -112.3512 }
+    ],
+    "dockAprons": [
+      { "south": 40.5282, "west": -112.3514, "north": 40.5286, "east": -112.3495 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 55.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.52945,-112.34998,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors", "shipRcvSeparate", "connectivityIssue", "railServed"],
+  "fieldNotes": {
+    "location": "Geocoded point (ROOFTOP, moved 145m) lands squarely on the large white-roofed plant building in the Utah Industrial Depot (former Tooele Army Depot, built by the Army early 1990s, converted to commercial use by Penske 1996). Confirmed as Detroit Reman West -- the second-largest Detroit Reman plant (~330 workers), per DTNA, Tooele Chamber and Yelp at 100 South Lodestone Way.",
+    "truckGate": "Perimeter chain-link fencing is visible on multiple building faces, implying controlled access, but Street View coverage at the entrances is sparse (mostly 2015-2018) and shows no barrier arm, sliding gate or guard booth. Recorded truckGate=false with the field flagged uncertain -- a gate is plausible for a 330-worker DTNA plant but is not visually confirmed.",
+    "guardShack": "No guard booth observed; flagged uncertain due to poor Street View coverage.",
+    "drivewayShort": "Short direct approaches from the depot road grid to the dock aprons.",
+    "dockDoors": "Estimated 10-25 dock doors along the building's south/SW face; count approximate, partly obscured by parked trailers.",
+    "dropArea": "25-50: long rows of parked trailers in dedicated drop yards on the south and SW, plus extensive outdoor core/component storage.",
+    "dropYard": "Dedicated trailer-storage rows on the south and SW sides, separate from the dock apron; consistent with a reman plant holding cores and finished goods.",
+    "railServed": "A rail line/spur runs along a SEPARATE building to the SE, not the Detroit Reman West building. No spur observed reaching this facility -> railServed=false; flagged uncertain given the depot's heavy historical rail network.",
+    "multipleFacilities": "Detroit Reman West occupies a single large building (plus attached office). The neighboring large buildings are separate occupants in the industrial depot -> multipleFacilities=false.",
+    "urbanRural": "High-desert site in the Utah Industrial Depot outside Tooele, ringed by open desert and mountains -> Rural.",
+    "connectivityIssue": "Isolated high-desert location; cellular coverage may be moderate. Tooele city and an active industrial park are nearby, so not extreme -> recorded false but flagged uncertain.",
+    "shipRcvSeparate": "Dock activity appears concentrated on the south/SW face -> shipRcvSeparate=false; flagged uncertain.",
+    "confidence": "Medium: building positively identified, but gate/guard determinations limited by sparse Street View coverage and dock counts partly obscured by trailers."
+  },
+  "method": "deep-audit"
+}

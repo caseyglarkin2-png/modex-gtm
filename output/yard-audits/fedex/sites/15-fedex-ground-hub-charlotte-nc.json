@@ -1,0 +1,67 @@
+{
+  "name": "FedEx Ground Hub - Charlotte NC",
+  "type": "Ground regional sortation hub",
+  "coords": { "lat": 35.27270, "lng": -80.91810 },
+  "geofences": {
+    "perimeter": { "south": 35.27050, "west": -80.92080, "north": 35.27430, "east": -80.91540 },
+    "truckGate": { "south": 35.27210, "west": -80.92050, "north": 35.27270, "east": -80.91980 },
+    "dropYards": [
+      { "south": 35.27190, "west": -80.91720, "north": 35.27400, "east": -80.91540 }
+    ],
+    "dockAprons": [
+      { "south": 35.27240, "west": -80.91890, "north": 35.27420, "east": -80.91800 },
+      { "south": 35.27210, "west": -80.91980, "north": 35.27390, "east": -80.91890 }
+    ],
+    "staging": { "south": 35.27200, "west": -80.91990, "north": 35.27280, "east": -80.91870 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 160,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 28.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.27270,-80.91810,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Controlled truck entrance on the W side of the property where the access road off CSX Way meets the yard - z20 satellite (fedex-15-gate-z20b) clearly shows a barrier across the truck lane, a pinch-point with lane markings, and 'NO PARKING' painted on the apron.",
+    "guardShack": "A small detached structure with a distinctive orange/brown roof sits immediately beside the gate lane at the entrance pinch-point - a staffed guard booth (~1-2 vehicle footprint). remoteGs therefore false.",
+    "preGateStaging": "Trucks observed parked along the CSX Way shoulder outside the gate (fedex-15-gate-z20); paved apron width before the gate gives room to wait.",
+    "postGateStaging": "Large paved yard between the gate and the dock aprons inside the fence provides a deep internal queue/holding area.",
+    "drivewayLong": "Internal driveway from the W gate runs a long, deep paved stretch into the yard before the dock aprons - room for 3+ trucks.",
+    "dockDoors": "Long NE-SW cross-dock building with continuous dock doors along BOTH long faces, trailers backed in along each side; estimated ~110 total - count approximate, flagged uncertain.",
+    "dropArea": "Extensive trailer drop yard on the E side with many marked rows of parked trailers without tractors; well over 50 stalls - dropYard true.",
+    "railServed": "A CSX rail line runs along the N edge of the property but is a through-line bordering the site; no spur enters the FedEx yard - railServed false.",
+    "urbanRural": "Site is within the Charlotte NC metro in a dense multi-tenant industrial corridor (CSX intermodal area, NW Charlotte) flanked by other large warehouses - Urban.",
+    "multipleFacilities": "FedEx occupies a single cross-dock building plus its drop yard; the separate white building to the NE is a different tenant.",
+    "buildingCount": "One FedEx cross-dock building; confirmed by FedEx-branded trailers and a FedEx dropbox/mailbox in 2022 Street View along the access road."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,48 @@
+{
+  "name": "Campbell's - Stockton CA",
+  "type": "Manufacturing - tomato processing (Campbell Soup Supply Co.)",
+  "coords": { "lat": 37.9087, "lng": -121.2654 },
+  "geofences": {
+    "perimeter": { "south": 37.9075, "west": -121.2662, "north": 37.9096, "east": -121.2640 },
+    "truckGate": { "south": 37.90910, "west": -121.26525, "north": 37.90945, "east": -121.26485 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 37.90830, "west": -121.26545, "north": 37.90875, "east": -121.26490 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 6, "trailersVisible": 8, "trailerParkingCapacity": 12,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 11.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.9087,-121.2654,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoors", "dockDoorCount", "dropArea", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "identity": "Roster address (1330 W Fremont Street) is incorrect - it lands in a mixed urban area near the Stockton channel. The Campbell's Stockton facility is the Campbell Soup Supply Co. tomato-processing plant at 750/760 Industrial Drive, Stockton CA 95206 (Ortega area, south Stockton). OSM places 750 Industrial Drive at 37.9090,-121.2657; 2023 Street View shows a process tank bearing the red Campbell's logo. Locked center 37.9087,-121.2654.",
+    "truckGate": "Main entrance off Industrial Drive is a fenced driveway with a chain-link sliding gate (gate panels visible parked open in 2023 Street View). The whole frontage is fenced with privacy-slat chain-link. truckGate=true.",
+    "guardShack": "No staffed guard booth visible at the gate. guardShack=false; medium confidence.",
+    "remoteGs": "Gate present, no guard booth -> remote/kiosk/call-box check-in implied. remoteGs=true.",
+    "drivewayShort": "Short approach from Industrial Drive into a parking lot/yard - holds only 1-2 trucks before the building.",
+    "postGateStaging": "Paved yard inside the gate provides some holding space before loading.",
+    "dockDoors": "This is a tomato-processing/paste plant dominated by process equipment (cooling towers, evaporators, tanks); modest dock-door loading. Estimated 4-8 -> 0-10 band; low confidence.",
+    "dropArea": "A few trailers parked in the yard (~8 visible); the long E-side rows are stacked bin/tote storage, not parked trailers. Small drop activity -> 0-10 band.",
+    "dropYard": "No dedicated trailer-storage lot - only a handful of trailers in the working yard. dropYard=false.",
+    "buildingCount": "Main processing building plus a secondary structure; the large white warehouse to the SW is a separate property, not counted.",
+    "urbanRural": "Dense south-Stockton industrial district - Urban.",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

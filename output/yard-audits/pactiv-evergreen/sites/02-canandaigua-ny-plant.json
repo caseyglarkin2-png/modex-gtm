@@ -1,0 +1,59 @@
+{
+  "name": "Pactiv Evergreen - Canandaigua NY",
+  "type": "Manufacturing Plant (Food Merchandising campus)",
+  "coords": { "lat": 42.905500, "lng": -77.299800 },
+  "geofences": {
+    "perimeter": { "south": 42.90200, "west": -77.30720, "north": 42.90820, "east": -77.29720 },
+    "truckGate": { "south": 42.90250, "west": -77.30330, "north": 42.90305, "east": -77.30255 },
+    "dropYards": [
+      { "south": 42.90490, "west": -77.30700, "north": 42.90690, "east": -77.30420 },
+      { "south": 42.90530, "west": -77.30340, "north": 42.90680, "east": -77.30180 }
+    ],
+    "dockAprons": [
+      { "south": 42.90590, "west": -77.30130, "north": 42.90660, "east": -77.30000 },
+      { "south": 42.90460, "west": -77.30100, "north": 42.90560, "east": -77.29970 }
+    ],
+    "staging": { "south": 42.90290, "west": -77.30330, "north": 42.90460, "east": -77.30180 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 145.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.9055,-77.2998,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Confirmed in Street View (2016-09) at the campus south entrance ~42.9028,-77.3030: a black-and-white striped barrier arm spans the truck lane, flanked by two sliding chain-link gates and STOP signs. Perimeter chain-link fencing rings the whole property. This is the single shared gate for the whole Pactiv Canandaigua campus.",
+    "guardShack": "A small flat-roof booth sits immediately left of the gate (windowed on multiple sides, ~1-2 vehicle footprint, set beside the gate lane). It carries an 'Adecco' staffing-agency sign and a US flag pole — it is the staffed check-in booth at the gate.",
+    "remoteGs": "False — a guard booth is present. A 'Pick Up Phone For Directions' call-box kiosk also sits at the gate as a secondary check-in aid, but the booth itself is the primary staffed control.",
+    "postGateStaging": "Broad paved apron and internal access road inside the gate before the trailer yards / dock banks gives ample internal queue room.",
+    "drivewayLong": "The gate-to-dock approach runs several hundred metres up the campus access road; can hold well over 3 trucks.",
+    "fastLaneOpportunity": "Wide gate apron with two sliding-gate bays plus the barrier arm; ample paved width to add a dedicated express/bypass lane.",
+    "dockDoors": "Plant complex (dark-roof eastern buildings): a dock apron with ~6-8 doors on the SW plant face plus additional doors along the long warehouse-adjacent faces; estimate ~40 doors campus-wide. Low-confidence overhead count.",
+    "dropArea": "Extensive marked trailer drop yards on the west and central campus hold well over 100 parked trailers in long rows — clearly 50+ band.",
+    "shipRcvSeparate": "Multiple distinct dock banks on different building faces across the campus (plant SW face vs. warehouse faces) imply physically separate ship/receive flows; functional split not verifiable from imagery.",
+    "multipleFacilities": "True — large campus of 6+ connected/adjacent large buildings: the dark-roof manufacturing plant complex plus several tan-roof warehouse/distribution buildings.",
+    "dropYard": "Dedicated trailer-storage lots full of parked trailers occupy much of the west campus, separate from active dock staging.",
+    "railServed": "A rail spur enters the campus from the NE, curving down the east property edge into the plant; rail cars visible parked on the spur in imagery.",
+    "urbanRural": "North Street industrial corridor on the NW edge of Canandaigua (a small NY town); campus is bordered by woods, farm fields and a retention pond. Edge-of-town / rural setting.",
+    "trailersVisible": "~220 trailers counted across the visible drop-yard rows; honest estimate from overhead imagery.",
+    "siteAreaAcres": "Derived from the campus perimeter box (~145 acres); the gated property is large with substantial wooded buffer."
+  },
+  "method": "deep-audit"
+}

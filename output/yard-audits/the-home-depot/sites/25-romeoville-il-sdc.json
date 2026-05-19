@@ -1,0 +1,68 @@
+{
+  "name": "Home Depot SDC - Romeoville IL",
+  "type": "Stocking Distribution Center",
+  "coords": { "lat": 41.663229, "lng": -88.112651 },
+  "geofences": {
+    "perimeter": { "south": 41.66250, "west": -88.11420, "north": 41.66850, "east": -88.11080 },
+    "truckGate": { "south": 41.66305, "west": -88.11330, "north": 41.66350, "east": -88.11270 },
+    "dropYards": [
+      { "south": 41.66380, "west": -88.11390, "north": 41.66760, "east": -88.11270 }
+    ],
+    "dockAprons": [
+      { "south": 41.66370, "west": -88.11290, "north": 41.66780, "east": -88.11210 }
+    ],
+    "staging": { "south": 41.66320, "west": -88.11320, "north": 41.66400, "east": -88.11240 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 45.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.663229,-88.112651,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "A guarded checkpoint at the SW corner (~41.6633,-88.1130): the truck driveway curves in from the access road and passes a guard booth with barrier-arm gates and a chainlink fence corner. Confirmed in 2022 Street View — controlled truck entrance.",
+    "guardShack": "Small white guard booth with windows on multiple sides, ~1-vehicle footprint, set beside the truck gate lanes. Clearly visible in Street View — distinct from the DC building.",
+    "remoteGs": "False — a staffed guard booth is present at the gate.",
+    "entryLanes": "Single inbound lane past the guard booth; single outbound. Entry and exit share the one gate complex → entryExitTogether.",
+    "fastLaneOpportunity": "Standard single-lane-each-way guarded gate; no notable spare paved width for an express bypass.",
+    "drivewayLong": "The truck driveway curves in from the access road and opens into a deep truck court along the building's W face — holds a 3+ truck queue.",
+    "shipRcvSeparate": "Dock doors and trailers concentrated along the building's W (truck-court) face; no second separate dock cluster — ship and receive run from the one dock line.",
+    "dockDoors": "Long dock line with dock doors and trailers backed in along the ~600m W face — into the 50+ band. dockDoorCount ~90 is an estimate.",
+    "dropArea": "Rows of detached trailers in the fenced W truck court — estimated 25-50 band; dropYard true.",
+    "urbanRural": "Romeoville IL, in the I-55 / Joliet-area logistics corridor — a dense cluster of large distribution buildings. Urban industrial fabric.",
+    "siteAreaAcres": "Estimated from the building footprint plus the W truck court / drop yard and the S office parking; building is one of the larger DCs in the corridor.",
+    "postGateStaging": "Paved truck court inside the gate before the dock doors provides holding room.",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

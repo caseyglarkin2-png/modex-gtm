@@ -1,0 +1,56 @@
+{
+  "name": "UNFI - Moreno Valley CA DC",
+  "type": "Distribution Center",
+  "coords": { "lat": 33.91240, "lng": -117.27620 },
+  "geofences": {
+    "perimeter": { "south": 33.91140, "west": -117.27895, "north": 33.91360, "east": -117.27355 },
+    "truckGate": { "south": 33.91290, "west": -117.27875, "north": 33.91340, "east": -117.27790 },
+    "dropYards": [
+      { "south": 33.91320, "west": -117.27885, "north": 33.91360, "east": -117.27360 }
+    ],
+    "dockAprons": [
+      { "south": 33.91305, "west": -117.27880, "north": 33.91325, "east": -117.27360 }
+    ],
+    "staging": { "south": 33.91305, "west": -117.27790, "north": 33.91340, "east": -117.27620 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 95,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 30.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.91240,-117.27620,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Single controlled entrance off Day St at the NW corner of the property. 2025-12 Street View shows a wide entrance driveway with a perimeter wall/fence and a defined checkpoint where the drive enters the truck yard.",
+    "guardShack": "A small tan/beige guard booth (~1-vehicle footprint, windows on multiple sides) sits beside the inbound lane just inside the entrance. Clearly visible in 2025-12 Street View from two angles. Staffed guarded entry.",
+    "remoteGs": "False — a physical guard booth is present, so check-in is staffed rather than kiosk/app.",
+    "drivewayLong": "The entrance drive runs a long, deep uphill approach from the Day St gate to the dock yard along the north face — comfortably holds a 3+ truck queue inside the property.",
+    "postGateStaging": "Wide paved internal truck drive between the gate and the north dock apron provides inside-the-gate holding room.",
+    "fastLaneOpportunity": "Wide gate apron and generous internal paved width along the north truck drive; physical room exists to add an express/bypass lane.",
+    "dockDoors": "613,200 sq ft DC (UNFI's largest Western-region facility, opened 2008). Long single dock bank runs the full north face of the building with trailers backed in across it; comfortably 50+, estimated ~95.",
+    "dropArea": "Striped/unstriped trailer parking along the north truck yard holds parked trailers without tractors; 25-50 band on UNFI's own yard. (Note: a much larger trailer lot NW across the road belongs to a separate adjacent tenant and is excluded.)",
+    "dropYard": "Dedicated trailer-storage rows along the north side of the property, separate from active dock staging.",
+    "urbanRural": "Inside the dense Moreno Valley / Inland Empire industrial fabric — surrounded by other large DCs and industrial buildings. Urban.",
+    "scale": "No truck scale identified in imagery.",
+    "railServed": "No rail spur enters the property.",
+    "siteAreaAcres": "Perimeter box (~245m x ~499m) yields ~30 acres for the UNFI parcel.",
+    "address": "Roster lists 22450 Day St; the on-site office address marker reads 14160 Day St and the building is the correct 613,200 sq ft UNFI Western-region DC. The 22450 figure appears to be a stale/incorrect roster address — site identity is confirmed by building size, layout and the UNFI office signage."
+  },
+  "method": "deep-audit"
+}

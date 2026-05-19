@@ -1,0 +1,47 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Cleveland Truck Manufacturing Plant - Cleveland NC,Truck assembly plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@35.732000,-80.691000,400m/data=!3m1!1e3"
+Mount Holly Truck Manufacturing Plant - Mount Holly NC,Truck assembly plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@35.323000,-81.001500,400m/data=!3m1!1e3"
+Portland Truck Manufacturing Plant - Portland OR,Truck assembly plant (battery-electric),#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,YES,,,,,,,,YES,,,YES,,,YES,Urban,,YES,,,"https://www.google.com/maps/@45.573869,-122.714444,400m/data=!3m1!1e3"
+Thomas Built Buses Manufacturing Plant - High Point NC,Bus assembly plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,YES,,,,,,,,YES,,,YES,,,YES,Urban,,YES,,,"https://www.google.com/maps/@35.941867,-80.022076,400m/data=!3m1!1e3"
+Freightliner Custom Chassis Manufacturing Plant - Gaffney SC,Custom chassis assembly plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,YES,,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@35.075000,-81.681000,400m/data=!3m1!1e3"
+Detroit Diesel Corporation Engine Plant - Redford MI,Engine / powertrain plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,1,YES,,,YES,,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@42.37745,-83.2675,400m/data=!3m1!1e3"
+Gastonia Components and Logistics - Gastonia NC,Component / parts subassembly and logistics plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@35.288,-81.2052,400m/data=!3m1!1e3"
+Detroit Reman East - Byesville OH,Remanufacturing plant (engines/components),#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,,,,,,,YES,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@39.97815,-81.56675,400m/data=!3m1!1e3"
+Detroit Reman West - Tooele UT,Remanufacturing plant (engines/components),#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,,,,,,,YES,,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@40.52945,-112.34998,400m/data=!3m1!1e3"
+Detroit Diesel Remanufacturing - Hibbing MN,Remanufacturing plant (engines/components),#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,,,,,,YES,,,,YES,,,,,Rural,YES,,,,"https://www.google.com/maps/@47.393282,-92.829402,400m/data=!3m1!1e3"
+Whitestown Redistribution Center (RDC) - Whitestown IN,Parts redistribution center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,YES,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@39.977550,-86.363000,400m/data=!3m1!1e3"
+Indianapolis Parts Distribution Center - Whitestown IN,Parts distribution center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,YES,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@39.979000,-86.386300,400m/data=!3m1!1e3"
+Memphis Parts Distribution Center - Memphis TN,Parts distribution center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@35.037650,-89.874050,400m/data=!3m1!1e3"
+Atlanta Parts Distribution Center - Buford GA,Parts distribution center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@34.117850,-83.982650,400m/data=!3m1!1e3"
+Dallas Parts Distribution Center - Grand Prairie TX,Parts distribution center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@32.797300,-97.031700,400m/data=!3m1!1e3"
+Des Moines Parts Distribution Center - Grimes IA,Parts distribution center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,YES,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@41.671050,-93.783700,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,9,56%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,3,19%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,4,25%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,16,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,6,38%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,6,38%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,3,19%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,13,81%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,16,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,16,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

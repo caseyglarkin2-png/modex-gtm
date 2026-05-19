@@ -1,0 +1,45 @@
+{
+  "name": "GXO Logistics Distribution Center - Grapevine TX",
+  "type": "Distribution Center",
+  "coords": { "lat": 32.93180, "lng": -97.03200 },
+  "geofences": {
+    "perimeter": { "south": 32.93060, "west": -97.03360, "north": 32.93310, "east": -97.03050 },
+    "truckGate": { "south": 32.93230, "west": -97.03340, "north": 32.93270, "east": -97.03290 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 32.93180, "west": -97.03340, "north": 32.93310, "east": -97.03200 },
+      { "south": 32.93090, "west": -97.03250, "north": 32.93210, "east": -97.03100 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70, "trailersVisible": 12, "trailerParkingCapacity": 30,
+    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 19.9,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.93180,-97.03200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "10-25",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "dropArea", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "site": "Roster address (4220 Diplomacy Rd) was flagged approximate. Web research (Racklify, multiple directories) confirms GXO Logistics' Grapevine operation is at 2425 Esters Blvd, Grapevine TX 76051 — 'DFW Trade Center VII', a multi-tenant cross-dock distribution building (GXO shares the building with ShipBob and Tornado Transport). Esters Blvd geocoded via Nominatim to ~32.9346,-97.0331, in the International Commerce Park / LINK Logistics business park on DFW Airport land, near a major highway interchange. The audited building is the cross-dock warehouse located at the locked coordinates within that park; the exact unit could not be confirmed from imagery alone but the building type matches DFW Trade Center VII's published profile (~276-298K SF, 350' depth, 32' clear, cross-dock).",
+    "truckGate": "FALSE — modern speculative multi-tenant cross-dock building. Truck courts on both long faces are open, ungated paved areas; no guard booth and no barrier arm observed at any driveway, consistent with the rest of this uniform spec-industrial park.",
+    "guardShack": "FALSE — no booth structure observed in satellite or Street View anywhere on the property or in the surrounding park.",
+    "dockDoors": "50+ — a cross-dock building with continuous dock-door banks on both long faces; ~70 doors estimated, low confidence on exact count.",
+    "dropArea": "10-25 — a moderate number of trailer-parking stalls on the truck-court aprons; neighboring park buildings carry larger trailer yards. Band is an estimate.",
+    "shipRcvSeparate": "Cross-dock layout — dock banks on opposite long faces support physically separate shipping and receiving.",
+    "fastLaneOpportunity": "Wide open truck-court aprons leave physical room for a bypass lane if a gate were added.",
+    "confidence": "Medium — the GXO building had to be relocated from a wrong/approximate roster address to the web-confirmed 2425 Esters Blvd; the exact building unit within the DFW Trade Center park was inferred from the cross-dock building profile rather than read from a sign. The ungated gate/guard-shack determination is well-supported by the uniform character of the spec-industrial park."
+  },
+  "method": "deep-audit"
+}

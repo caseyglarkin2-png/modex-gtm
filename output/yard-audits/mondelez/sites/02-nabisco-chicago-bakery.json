@@ -1,0 +1,66 @@
+{
+  "name": "Nabisco Chicago Bakery - Chicago IL",
+  "type": "Manufacturing - biscuit/cracker bakery",
+  "coords": { "lat": 41.75880, "lng": -87.70650 },
+  "geofences": {
+    "perimeter": { "south": 41.75660, "west": -87.71230, "north": 41.76150, "east": -87.70250 },
+    "truckGate": { "south": 41.75990, "west": -87.70330, "north": 41.76045, "east": -87.70270 },
+    "dropYards": [
+      { "south": 41.75700, "west": -87.71200, "north": 41.75880, "east": -87.70850 }
+    ],
+    "dockAprons": [
+      { "south": 41.75700, "west": -87.70750, "north": 41.75790, "east": -87.70350 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 50,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 100.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.75880,-87.70650,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "multiStep", "buildingCount"],
+  "fieldNotes": {
+    "truckGate": "Fully fenced legacy urban plant. Main vehicle entrance off S Kedzie Ave (~41.7602,-87.7030) crosses the perimeter fence; satellite z21 shows split in/out lanes with directional arrows; Street View shows a guard booth in the entry lot.",
+    "guardShack": "Small white guard-booth structure visible in Street View (2024-07 / 2025-06 panos) standing in the entry parking lot just inside the Kedzie gate.",
+    "drivewayShort": "Tight urban site - the gate sits directly on S Kedzie Ave with limited internal stacking before the yard splits to docks/parking.",
+    "backupSensitive": "Gate opens directly onto S Kedzie Ave, a busy 4-lane urban arterial; a truck queue at the gate would spill onto the public road.",
+    "dockDoors": "Multiple dock banks - south building face along the rail line and east-side docks; total well over 50 doors. Banded 50+.",
+    "dropArea": "Very large dedicated trailer drop yard on the SW of the property, full of trailers parked in dense rows (z18/z19 imagery); 100+ trailers visible, capacity ~200.",
+    "shipRcvSeparate": "Distinct dock clusters on different building faces (rail-side south docks vs east-side truck docks) - shipping/receiving physically separated.",
+    "railServed": "Rail spur tracks run directly along the south building face off the adjacent Belt Railway corridor; the plant is rail-served (z19 imagery at 41.7576,-87.7055).",
+    "scale": "No truck scale clearly identified; left low-confidence.",
+    "multiStep": "Single gate stage observed; no clear second checkpoint - left false.",
+    "buildingCount": "Plant is a connected multi-section complex; counted as effectively 2 main masses but it is one continuous facility."
+  },
+  "method": "deep-audit"
+}

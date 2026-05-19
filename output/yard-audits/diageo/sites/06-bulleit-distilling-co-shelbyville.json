@@ -1,0 +1,45 @@
+{
+  "name": "Bulleit Distilling Co. (Shelbyville) - Shelbyville KY",
+  "type": "Distillery",
+  "coords": { "lat": 38.22280, "lng": -85.14320 },
+  "geofences": {
+    "perimeter": { "south": 38.21550, "west": -85.14950, "north": 38.22760, "east": -85.14000 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 38.22250, "west": -85.14400, "north": 38.22360, "east": -85.14260 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 4, "trailersVisible": 1, "trailerParkingCapacity": 8,
+    "truckGateCount": 1, "buildingCount": 14, "siteAreaAcres": 38.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.22280,-85.14320,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "0-10", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors", "scale", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "Campus access drive off Benson Pike is open: a wide landscaped two-lane drive into a roundabout with a visitor center; no barrier arm, sliding gate, or checkpoint visible at the road junction in 2024-11 Street View.",
+    "guardShack": "No staffed booth at the entrance. The first structure inside the drive is the public visitor/tasting center, not a guard booth.",
+    "scale": "Web research (The Whiskey Wash / Distillery Trail) states grain arrives by tractor-trailer and is weighed and quality-tested on receipt, so a truck scale exists at the grain-receiving area; exact weigh pad not resolvable at z20 imagery — medium confidence.",
+    "dockDoors": "No conventional dock-door bank visible. Freight is process-style: tanker loading racks at the still house and barrel/forklift handling at the four large rickhouses. Estimated ~4 functional truck loading positions; band 0-10 with low confidence.",
+    "multipleFacilities": "Campus: production/still-house complex plus ~10 large two-story palletized rickhouses (each ~55,000 barrels) plus a separate visitor center.",
+    "drivewayLong": "Long internal private drive (>800 m) from Benson Pike through woods to the production area gives ample queuing depth.",
+    "fastLaneOpportunity": "Wide landscaped entrance apron and roundabout offer abundant unused paved width to add a dedicated truck lane.",
+    "siteAreaAcres": "Property is ~300 acres total but mostly wooded; perimeter box covers the ~38-acre developed operational footprint.",
+    "connectivityIssue": "Rural Shelby County KY but on a sizeable industrial campus near Shelbyville; coverage likely adequate - flagged as inferred."
+  },
+  "method": "deep-audit"
+}

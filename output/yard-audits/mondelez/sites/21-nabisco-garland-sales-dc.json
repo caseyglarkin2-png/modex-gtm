@@ -1,0 +1,62 @@
+{
+  "name": "Nabisco Dallas/Garland Sales Distribution Center - Garland TX",
+  "type": "Distribution center / sales warehouse",
+  "coords": { "lat": 32.9126, "lng": -96.6389 },
+  "geofences": {
+    "perimeter": null,
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 0,
+    "buildingCount": 0,
+    "siteAreaAcres": 0.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.9126,-96.6389,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "locate": "COULD NOT RESOLVE. Roster supplied only an APPROXIMATE city-level coordinate (32.9126, -96.6389), which is downtown Garland TX (civic/retail core). No specific building was findable. Web research (Mondelez office-locations page, Indeed/ZipRecruiter/Monster/Workday job portals, Dallas industrial real-estate listings, news archives) returned no published street address for a Nabisco/Mondelez sales distribution center in Garland. The only Garland-tagged Mondelez presence is part-time Nabisco MERCHANDISER job postings (retail shelf-stocking roles), which are tagged to the city, not to a warehouse address; the postings explicitly only require living within 25 miles of 'Garland, TX'. Satellite probe at the supplied coordinate (zoom 16) confirms a downtown civic/retail core, not an industrial DC.",
+    "facilityType": "This 'sales distribution center' is most likely a small Nabisco merchandiser sales depot (a hub where part-time merchandisers collect product before stocking retail accounts) rather than a large freight DC. No dock/yard infrastructure could be observed because the facility itself could not be located.",
+    "classification": "All 22 classification fields are unverified placeholders, not observations. urbanRural is set 'Urban' on the reasonable assumption a Dallas-metro sales depot sits within the metro fabric, but even this is not imagery-confirmed. Every field is flagged in uncertainFields. This site needs a human-supplied street address before a real audit is possible.",
+    "geofences": "perimeter and all sub-zones left null/empty - no building located, so no geofence can be drawn.",
+    "yardMetrics": "All counts left 0 - not measurable without a located facility."
+  },
+  "method": "deep-audit"
+}

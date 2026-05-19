@@ -1,0 +1,45 @@
+{
+  "name": "Mondelez Global R&D Innovation Center - Whippany NJ",
+  "type": "R&D / global innovation center (office + lab, pilot & scale-up lines)",
+  "coords": { "lat": 40.82, "lng": -74.4097 },
+  "geofences": {
+    "perimeter": { "south": 40.8186, "west": -74.4118, "north": 40.8214, "east": -74.4076 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 1,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 9.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.82,-74.4097,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoors", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Roster coords (40.8198,-74.4179) were an approximate Route 10 / Whippany centroid ~700m WNW of the real building. Resolved via web research to 941/945 State Route 10 (the former Cadbury 'Channel Building', a ~148-150k sq ft former Cadbury Adams candy/gum lab) and confirmed via satellite. Locked center 40.8200,-74.4097.",
+    "facilityType": "This is a corporate R&D / global innovation center - office + lab, NOT a freight plant. ~150,000 sq ft, ~$50M repurposed Cadbury R&D building, opened May 2023, houses ~50 R&D makers/bakers plus pilot and scale-up lines for cookies, crackers and candy. Freight relevance is LOW: it consumes small material shipments, not a distribution operation.",
+    "layout": "Satellite (z19-z20) shows a long L-shaped low-rise building with rooftop HVAC, ringed by car/employee parking and a large ground-mount solar array on the SW lot (consistent with Mondelez electric-baking / net-zero messaging). No dock apron, no trailer parking, no dock-door bank visible.",
+    "truckGate": "Open office-park driveway off Route 10 with no barrier, no guard booth - false. Street View from inside the lot shows landscaped employee parking and a flagpole, no controlled truck entrance.",
+    "dockDoors": "No loading-dock bank. Classified NONE; dockDoorCount set to 1 as a conservative allowance for a single small service/materials door typical of an R&D building - flagged uncertain.",
+    "drivewayShort": "Short office-park entrance drive only.",
+    "urbanRural": "Suburban Morris County office/commercial corridor on Route 10 with dense surrounding residential and retail - classified Urban."
+  },
+  "method": "deep-audit"
+}

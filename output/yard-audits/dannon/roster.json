@@ -1,0 +1,231 @@
+{
+  "account": "Dannon",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 14,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Danone - Mount Crawford VA",
+      "city": "Mount Crawford",
+      "state": "VA",
+      "type": "Multi-category beverage plant (refrigerated)",
+      "address": "6364 South Valley Pike, Mount Crawford, VA 22841",
+      "lat": 38.36851,
+      "lng": -78.939384,
+      "source": "Danone careers 'Our Locations' page; address confirmed via Bandana/EPA FRS and HR Chamber listings. Largest Danone facility - 640,000 sq ft, 97 acres, 700+ employees. Produces Silk, International Delight, SToK, So Delicious, Horizon, Dunkin'.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 5046
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Danone - Minster OH",
+      "city": "Minster",
+      "state": "OH",
+      "type": "Fresh yogurt plant",
+      "address": "216 Southgate Drive, Minster, OH 45865",
+      "lat": 40.38427,
+      "lng": -84.376014,
+      "source": "Danone careers 'Our Locations' page. 371,000 sq ft, ~440 employees, ~2.2M lbs/day. Produces Activia, Oikos, Dannon Fruit on the Bottom, Danimals, Light + Fit, Triple Zero. Aug 2025 expansion (+48,000 sq ft).",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 860
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Danone - Jacksonville FL (plant)",
+      "city": "Jacksonville",
+      "state": "FL",
+      "type": "Coffee & creamer plant (refrigerated)",
+      "address": "2198 West Beaver Street, Jacksonville, FL 32209",
+      "lat": 30.33245,
+      "lng": -81.698021,
+      "source": "Danone careers 'Our Locations' page; PRNewswire June 2025 expansion release. 115,025 sq ft, on site since 1948. Produces International Delight, SToK Cold Brew. $65M new line opened June 17, 2025.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 115
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Danone - Jacksonville FL (distribution center)",
+      "city": "Jacksonville",
+      "state": "FL",
+      "type": "Regional distribution center (Southeast hub)",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Danone PRNewswire/Jax Daily Record June 2025: new Jacksonville-area regional DC announced alongside the $65M plant expansion (~200 combined jobs). Exact street address not yet public as of May 2026 - facility under construction/ramp-up.",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Danone - City of Industry CA",
+      "city": "City of Industry",
+      "state": "CA",
+      "type": "Plant-based & coffee beverage plant (refrigerated)",
+      "address": "18275 Arenth Avenue, City of Industry, CA 91748",
+      "lat": 34.004462,
+      "lng": -117.905494,
+      "source": "Danone careers 'Our Locations' page; address from Wikipedia/careers facility detail. 284,000 sq ft, 336 employees, founded 1986. Produces Silk Beverage, SToK Coffee, International Delight Creamer.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 135
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Danone - Dallas TX",
+      "city": "Dallas",
+      "state": "TX",
+      "type": "Multi-category beverage plant (refrigerated)",
+      "address": "3333 Dan Morton Drive, Dallas, TX 75236",
+      "lat": 32.705103,
+      "lng": -96.920756,
+      "source": "Danone careers 'Our Locations' page. 609,000 sq ft combined (357,000 sq ft main + 252,000 sq ft toppers), ~575 employees. Produces Silk, International Delight, SToK, So Delicious, toppers. Receiving relocated Bridgeton NJ production.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 163
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Danone - DuBois PA",
+      "city": "DuBois",
+      "state": "PA",
+      "type": "Plant-based yogurt plant",
+      "address": "2592 Oklahoma-Salem Road, DuBois, PA 15801",
+      "lat": 41.105801,
+      "lng": -78.731049,
+      "source": "Danone careers 'Our Locations' page. 189,158 sq ft, ~145 employees, founded 2014. Only Danone NA plant-based yogurt producer - Silk dairy-free yogurt, So Delicious, Harmless Harvest Dairy-Free.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 3159
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Danone - Springfield OR",
+      "city": "Springfield",
+      "state": "OR",
+      "type": "Plant-based frozen-dessert plant",
+      "address": "1130 Shelley Street, Springfield, OR 97477",
+      "lat": 44.065549,
+      "lng": -123.04481,
+      "source": "Danone careers 'Our Locations' page. ~150 employees. Only North American plant-based frozen-dessert plant - So Delicious Dairy Free ice cream.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 25
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Danone - Fort Worth TX",
+      "city": "Fort Worth",
+      "state": "TX",
+      "type": "Fresh yogurt plant",
+      "address": "1300 West Peter Smith Street, Fort Worth, TX 76104",
+      "lat": 32.741022,
+      "lng": -97.339329,
+      "source": "Danone careers 'Our Locations' page; Fort Worth Report Jan 2026. ~11-acre site, ~210 employees, founded 1925, in Near Southside district adjacent to I-30. Produces Danimals, Activia, YoCrunch. $4M expansion underway 2026.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 121
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Danone - Bridgeton NJ",
+      "city": "Bridgeton",
+      "state": "NJ",
+      "type": "Plant-based beverage plant (refrigerated)",
+      "address": "70 Rosenhayn Avenue, Bridgeton, NJ 08302",
+      "lat": 39.446174,
+      "lng": -75.213811,
+      "source": "Danone careers 'Our Locations' page. 185,000 sq ft, founded 2001, ~120 employees. Produces Silk dairy-free, So Delicious Oatmilk, creamers. NOTE: closure announced - shutting Aug 2, 2026, with 114 layoffs; production moving to Mount Crawford, Dallas, Jacksonville. Still operating as of audit date (May 2026).",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 330
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Danone - Chatsworth CA",
+      "city": "Chatsworth",
+      "state": "CA",
+      "type": "Plant-based products plant",
+      "address": "9201 Owensmouth Avenue, Chatsworth, CA 91311",
+      "lat": 34.237424,
+      "lng": -118.602608,
+      "source": "Danone careers 'Our Locations' page. Solar-powered (2,000+ panels). Produces Follow Your Heart, Boursin, Silk. Legacy Follow Your Heart facility.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 64
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Danone - Portland OR",
+      "city": "Portland",
+      "state": "OR",
+      "type": "Frozen yogurt / ice cream plant",
+      "address": "5858 NE 87th Avenue, Portland, OR 97220",
+      "lat": 45.564946,
+      "lng": -122.572677,
+      "source": "Danone careers 'Our Locations' page. 187,308 sq ft, ~60 employees. Legacy YoCream facility - frozen yogurt/ice cream for club channel (Costco, Sam's Club).",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 55
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Danone - West Jordan UT",
+      "city": "West Jordan",
+      "state": "UT",
+      "type": "Fresh yogurt plant",
+      "address": "6165 West Dannon Way, West Jordan, UT 84081",
+      "lat": 40.582873,
+      "lng": -112.039893,
+      "source": "Danone careers 'Our Locations' page; ChamberWest listing. 51.17-acre site, 13 production lines, ~310 employees, founded 1997. Produces Activia, Danimals, Oikos, Light + Fit, Danonino.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Danone - Scottsdale AZ",
+      "city": "Scottsdale",
+      "state": "AZ",
+      "type": "Equipment / dispensing operations site",
+      "address": "14674 N. 78th Way, Scottsdale, AZ 85260",
+      "lat": 33.619233,
+      "lng": -111.912203,
+      "source": "Danone careers 'Our Locations' page. Small site - 10,000 sq ft, ~23 employees; supports 60,000+ foodservice/dispensing customer locations. Included as 13th manufacturing-list site, but it is an equipment/dispensing operation, not a high-volume freight yard - low audit priority.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 610
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

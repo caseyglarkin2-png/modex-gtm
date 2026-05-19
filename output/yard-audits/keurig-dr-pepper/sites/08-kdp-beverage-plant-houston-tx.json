@@ -1,0 +1,52 @@
+{
+  "name": "KDP Beverage Plant - Houston TX",
+  "type": "Manufacturing - Beverage",
+  "coords": { "lat": 29.683800, "lng": -95.394000 },
+  "geofences": {
+    "perimeter": { "south": 29.681900, "west": -95.395600, "north": 29.685300, "east": -95.392200 },
+    "truckGate": { "south": 29.684700, "west": -95.395500, "north": 29.685100, "east": -95.395000 },
+    "dropYards": [
+      { "south": 29.682500, "west": -95.394800, "north": 29.683500, "east": -95.393100 },
+      { "south": 29.682800, "west": -95.393200, "north": 29.684000, "east": -95.392300 }
+    ],
+    "dockAprons": [
+      { "south": 29.683100, "west": -95.394900, "north": 29.683600, "east": -95.392600 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30, "trailersVisible": 90, "trailerParkingCapacity": 130,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 23.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.683800,-95.394000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "shipRcvSeparate", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster address (5301 Polk St) was wrong/approximate. Web research (TruckMap, iBegin, Kompass, Waze) places KDP/Dr Pepper Bottling Co of Houston at 2400 Holly Hall St, Houston TX 77054 (Almeda Rd & Holly Hall). Satellite confirms a large beverage warehouse/plant with silos and an extensive trailer yard at 29.6838,-95.3940.",
+    "truckGate": "The truck yard, docks and trailers are entirely inside a fully-enclosed chain-link perimeter topped with barbed wire (clearly visible on the west building wall and around the NW corner). The truck entrance is a gated driveway at the NW corner off Holly Hall St. An enclosed barbed-wire urban compound of this type operates a controlled gate.",
+    "guardShack": "No clearly identifiable multi-sided guard booth straddling the truck lane could be confirmed from Street View (2024-06) or satellite. A small structure sits near the NW driveway but its function (booth vs. utility) is not certain - flagged uncertain.",
+    "remoteGs": "Set true on the basis that a controlled gate exists but no staffed booth was confirmed; if a manned booth is present this should flip. Flagged uncertain.",
+    "backupSensitive": "Tractor-trailers were observed queued/parked along the Holly Hall St curb in multiple Street View captures, and the gate driveway is short - a truck queue at the gate spills directly onto the public street.",
+    "drivewayShort": "The NW gate-to-dock approach is short; the building footprint occupies most of the parcel leaving little internal stacking depth.",
+    "dockDoors": "Estimated ~25-40 doors from z18-z19 imagery across the south and east building faces - many trailers backed in. Indirect overhead count.",
+    "dropArea": "Large trailer drop yard wrapping the south and east of the building - dozens of parked trailers (blue/white), well over 50.",
+    "shipRcvSeparate": "Docks appear on the south and east faces; could not confirm whether these are functionally separate shipping vs. receiving clusters - flagged uncertain.",
+    "scale": "No truck scale identified in overhead imagery.",
+    "railServed": "A rail line runs in the SH-288 corridor immediately east of the property but no spur enters the site.",
+    "urbanRural": "Dense urban Houston (Medical Center / Astrodome area) - surrounded by apartment complexes and other industrial buildings.",
+    "siteAreaAcres": "Compact urban parcel - perimeter measured at roughly 23 acres."
+  },
+  "method": "deep-audit"
+}

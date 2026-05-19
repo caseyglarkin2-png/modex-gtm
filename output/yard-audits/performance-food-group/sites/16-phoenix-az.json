@@ -1,0 +1,61 @@
+{
+  "name": "Performance Foodservice - Arizona (Phoenix AZ)",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 33.44260, "lng": -112.21950 },
+  "geofences": {
+    "perimeter": { "south": 33.44080, "west": -112.22090, "north": 33.44400, "east": -112.21830 },
+    "truckGate": { "south": 33.44150, "west": -112.22080, "north": 33.44210, "east": -112.22020 },
+    "dropYards": [
+      { "south": 33.44090, "west": -112.21990, "north": 33.44200, "east": -112.21830 }
+    ],
+    "dockAprons": [
+      { "south": 33.44210, "west": -112.22010, "north": 33.44280, "east": -112.21850 }
+    ],
+    "staging": { "south": 33.44200, "west": -112.22080, "north": 33.44270, "east": -112.21980 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 24,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 12.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.4426,-112.2195,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "guardShack"],
+  "fieldNotes": {
+    "truckGate": "The truck/dock yard is enclosed by a block wall plus chain-link fence; a curving paved entrance driveway leads through a gated opening at the SW. Controlled entry confirmed in satellite + Street View.",
+    "guardShack": "No staffed guard booth observed beside the gate; entry appears gate-only (kiosk/call-box style) — set remoteGs true. Flagged as uncertain since the curving driveway corner is partly tree-shaded.",
+    "dockDoors": "Dock bank along the building's south face with trailers backed in; ~24 doors estimated overhead.",
+    "dropArea": "Large unpaved/graded trailer drop lot directly south of the building holds many dozens of trailers in rows — clearly 50+.",
+    "buildingCount": "Main DC plus a smaller secondary structure to the west/north on the same parcel.",
+    "fastLaneOpportunity": "Wide curving gate apron and ample paved width at the entrance leave room for an express/bypass lane."
+  },
+  "method": "deep-audit"
+}

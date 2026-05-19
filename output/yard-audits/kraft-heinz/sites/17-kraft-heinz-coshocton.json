@@ -1,0 +1,23 @@
+{
+  "name": "Kraft Heinz - Coshocton",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dropArea"],
+  "fieldNotes": {
+    "truckGate": "Street View shows the long brick plant face behind a continuous chain-link fence with a grass setback - fenced perimeter confirmed but the view is a side wall, not the truck entrance. Gate inferred from full perimeter fencing.",
+    "guardShack": "A small standalone structure near the south entry on satellite is consistent with a gate house; not confirmed by Street View.",
+    "urbanRural": "Isolated plant along a river surrounded by farmland and woods - Rural.",
+    "dockDoors": "Dock doors with trailers along the east side of the complex.",
+    "dropArea": "Trailers staged on the east dock apron."
+  }
+}

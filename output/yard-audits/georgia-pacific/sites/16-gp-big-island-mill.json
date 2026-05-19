@@ -1,0 +1,63 @@
+{
+  "name": "GP Big Island Mill - Big Island VA",
+  "type": "Containerboard Mill",
+  "coords": { "lat": 37.5283, "lng": -79.3540 },
+  "geofences": {
+    "perimeter": { "south": 37.52291, "west": -79.355992, "north": 37.532971, "east": -79.350328 },
+    "truckGate": { "south": 37.527761, "west": -79.354906, "north": 37.528839, "east": -79.353094 },
+    "dropYards": [
+      { "south": 37.525032, "west": -79.35168, "north": 37.527368, "east": -79.35032 }
+    ],
+    "dockAprons": [
+      { "south": 37.528481, "west": -79.354066, "north": 37.529919, "east": -79.352934 }
+    ],
+    "staging": { "south": 37.527692, "west": -79.353493, "north": 37.529308, "east": -79.351907 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 8,
+    "siteAreaAcres": 138.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.5283,-79.3540,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "entryLanes", "exitLanes", "dockDoors"],
+  "fieldNotes": {
+    "facility": "Integrated containerboard pulp/paper mill on the west bank of the James River, Big Island VA — Virginia's oldest continuously operating business (125+ years). Confirmed via address (10097/9909 Lee Jackson Hwy), GP locations page, and satellite (mill building, woodyard with chip piles, clarifiers, wastewater treatment ponds, chemical storage tanks).",
+    "truckGate": "Mill is a fully fenced, self-contained complex; access road crosses the Norfolk Southern rail line off Lee Jackson Hwy. A controlled gated entrance is standard for a mill of this scale and age; not directly resolvable in Street View due to roadside tree cover and the rail buffer — medium confidence.",
+    "guardShack": "Inferred from facility scale and security profile; a staffed booth could not be positively imaged. Listed uncertain.",
+    "dropArea": "Large trailer drop yard runs along the riverbank south of the mill core — 60-80 trailers visible parked in angled rows; banded 50+.",
+    "dockDoors": "Loading docks along the east face of the mill and at warehouse/converting buildings; trailers visible backed in. Count ~14 estimated from overhead imagery, low confidence.",
+    "scale": "A truck scale is typical at a mill receiving wood fiber by truck; not positively imaged — listed uncertain.",
+    "railServed": "Rail spur clearly curves into the property alongside the main mill building.",
+    "urbanRural": "Unincorporated village of Big Island, rural setting 12 mi NW of Lynchburg, surrounded by forest and farmland."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,47 @@
+{
+  "name": "Hormel Algona Plant - Algona IA",
+  "type": "Meat Processing Plant",
+  "coords": { "lat": 43.07930, "lng": -94.22330 },
+  "geofences": {
+    "perimeter": { "south": 43.07740, "west": -94.22560, "north": 43.08130, "east": -94.22150 },
+    "truckGate": { "south": 43.08050, "west": -94.22440, "north": 43.08110, "east": -94.22380 },
+    "dropYards": [
+      { "south": 43.07960, "west": -94.22290, "north": 43.08030, "east": -94.22180 }
+    ],
+    "dockAprons": [
+      { "south": 43.07880, "west": -94.22250, "north": 43.07970, "east": -94.22160 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14, "trailersVisible": 8, "trailerParkingCapacity": 20,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 30.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@43.0793,-94.2233,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "dropArea", "scale"],
+  "fieldNotes": {
+    "location": "Roster lat/lng confirmed accurate (geocode moved 1042 m, ROOFTOP). Plant centered ~43.0793,-94.2233 — a single ~150,000 sq ft pepperoni/sausage plant on the SW edge of Algona, IA, accessed by a private road off the public road to the north.",
+    "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point at the public-road junction — the entrance is an open driveway with Hormel signage (Street View 2025-08). No continuous perimeter fence around the property. A small structure sits beside the ~250 m private access road (~43.0807,-94.2241) which could be a small check-in/booth, but no controlled barrier is visible. Classified false; flagged uncertain.",
+    "guardShack": "No clear staffed booth at a controlled entrance. The small roadside structure on the access road is ambiguous at z20 — flagged uncertain.",
+    "drivewayLong": "The private access road is ~250 m long and easily holds a queue of 3+ trucks before reaching the yard.",
+    "dockDoors": "10-25 band — modest-sized single plant; dock doors with a few trailers backed in on the east/center building face. Overhead estimate, flagged uncertain.",
+    "dropArea": "~6-8 trailers parked in the NE yard area; no large dedicated drop lot. 0-10 band.",
+    "urbanRural": "Plant sits on the SW edge of Algona (pop ~5,500) surrounded by farmland — Rural.",
+    "railServed": "A rail line passes near the SE property edge but no spur runs into the plant; classified false.",
+    "buildingCount": "One main connected plant building plus a small outbuilding."
+  },
+  "method": "deep-audit"
+}

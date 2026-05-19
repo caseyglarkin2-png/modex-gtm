@@ -1,0 +1,73 @@
+{
+  "name": "Constellation Beer DC - Jacksonville FL",
+  "type": "Distribution Center (beer, rail-served)",
+  "coords": { "lat": 30.42385, "lng": -81.63238 },
+  "geofences": {
+    "perimeter": { "south": 30.42175, "west": -81.63400, "north": 30.42560, "east": -81.63070 },
+    "truckGate": { "south": 30.42510, "west": -81.63180, "north": 30.42585, "east": -81.63100 },
+    "dropYards": [
+      { "south": 30.42180, "west": -81.63170, "north": 30.42530, "east": -81.63070 }
+    ],
+    "dockAprons": [
+      { "south": 30.42190, "west": -81.63215, "north": 30.42530, "east": -81.63150 },
+      { "south": 30.42190, "west": -81.63340, "north": 30.42530, "east": -81.63270 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 54,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 25.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.42385,-81.63238,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["trailersVisible", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "_site": "Positively identified as the Constellation Brands beer DC at 600 Whittaker Road, Imeson Industrial Park, North Jacksonville FL — 469,830 SF on 24 acres, 54 docks, ~1.5 mi east of I-95, first Constellation DC in North Florida; receives beer by rail, distributes by truck. Confirmed via Jacksonville Daily Record (2022), CBRE, REBusinessOnline, and current 2025/2026 satellite + 2025-02 Street View.",
+    "_geocode": "Roster pin (ROOFTOP, moved 204 m) landed on the correct building; locked center refined to the building centroid 30.42385, -81.63238.",
+    "truckGate": "TRUE — z21 satellite and 2025-02 Street View clearly show a controlled truck entrance off Whittaker Rd at the NE corner: a landscaped median island with gate arms across the lane(s) and a vehicle stopped at the checkpoint.",
+    "guardShack": "TRUE — a small staffed guard booth sits on the entrance island beside the truck lane (clearly visible in z21 satellite and confirmed in Street View as a small white booth). Roster source explicitly notes a 'guard house.'",
+    "remoteGs": "FALSE — guard shack is present, so this is a staffed gate, not a remote kiosk.",
+    "shipRcvSeparate": "TRUE — true cross-dock: rail-side receiving docks run along the W face (rail spur alongside), truck-side shipping docks along the E face (truck court). Two dock banks on physically separate building faces.",
+    "dockDoors": "Banded 50+. Roster cites 54 docks total; dock-door rhythm visible on both the E and W faces is consistent.",
+    "dropArea": "10-25 — the E truck court holds drop trailers; a moderate number of trailer positions are visible/striped. Trailer count is modest in the captured imagery.",
+    "dropYard": "TRUE — the E-side truck court functions as a trailer drop/parking yard separate from active dock positions; roster confirms 'trailer yard.'",
+    "railServed": "TRUE — a rail spur runs N-S directly alongside the W face of the building into the property; the W dock face is configured for rail-side unloading. Roster confirms 'direct rail access; receives beer by rail.'",
+    "drivewayLong": "The E truck court is a long, wide concrete apron — easily holds a 3+ truck queue between the guarded gate and the dock face.",
+    "postGateStaging": "The wide E truck court inside the gate, before the dock doors, serves as an internal holding/queue area.",
+    "fastLaneOpportunity": "The gate apron is wide and the truck court spacious — physical room exists to add an express/bypass lane at the guarded entrance.",
+    "urbanRural": "Urban — the site sits inside Imeson Industrial Park, a dense built-out North Jacksonville industrial district surrounded on all sides by comparable distribution warehouses, within the Jacksonville metro.",
+    "trailersVisible": "~12 trailers visible in the captured imagery (E court and W apron); flagged uncertain as imagery dates vary and the count is approximate.",
+    "siteAreaAcres": "~25 acres from the perimeter box, consistent with the roster's stated 24 acres.",
+    "buildingCount": "One single warehouse on the parcel; neighboring warehouses are separate Imeson Industrial Park properties."
+  },
+  "method": "deep-audit"
+}

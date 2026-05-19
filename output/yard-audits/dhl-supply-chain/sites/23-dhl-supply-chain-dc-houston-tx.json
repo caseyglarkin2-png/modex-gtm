@@ -1,0 +1,53 @@
+{
+  "name": "DHL Supply Chain - DC - Houston TX",
+  "type": "Distribution Center",
+  "coords": { "lat": 29.80440, "lng": -95.27275 },
+  "geofences": {
+    "perimeter": { "south": 29.8024, "west": -95.2738, "north": 29.8064, "east": -95.2717 },
+    "truckGate": { "south": 29.80255, "west": -95.27345, "north": 29.80300, "east": -95.27300 },
+    "dropYards": [
+      { "south": 29.8028, "west": -95.2737, "north": 29.8062, "east": -95.2730 },
+      { "south": 29.8028, "west": -95.2724, "north": 29.8062, "east": -95.2718 }
+    ],
+    "dockAprons": [
+      { "south": 29.8028, "west": -95.2734, "north": 29.8062, "east": -95.2731 },
+      { "south": 29.8028, "west": -95.2723, "north": 29.8062, "east": -95.2721 }
+    ],
+    "staging": { "south": 29.8024, "west": -95.2735, "north": 29.8028, "east": -95.2730 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 80,
+    "trailersVisible": 34,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 22.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.80440,-95.27275,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": true, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "truckGate"],
+  "fieldNotes": {
+    "location": "Resolved to 8609 Citypark Loop, Houston TX 77013 (CityPark / East Freeway logistics park). Roster gave no address; a Panjiva import record explicitly names 'Dhl Supply Chain, 8609 City Park Loop, Houston Texas 77013'. Google Geocoding API returned ROOFTOP precision (29.80377, -95.27271). Street View confirmed the building marked '8609' on its SW office front.",
+    "truckGate": "The west truck court is enclosed by chain-link fence with a gate at the driveway from Citypark Loop, visible in 2021 Street View and 2026 satellite. Marked uncertain because the gate hardware is partly tree-obscured in Street View; the perimeter fence is clear.",
+    "guardShack": "No staffed booth visible at the court entrance.",
+    "remoteGs": "Gated truck court with no guard shack implies kiosk / call-box / app check-in.",
+    "shipRcvSeparate": "The building is a cross-dock with dock doors on BOTH long faces (east and west), each opening to its own truck court — supports separate shipping and receiving dock banks.",
+    "dockDoors": "Dock canopies line both ~400 m long faces; combined banded estimate 50+. Exact count not resolvable from overexposed white-roof satellite — flagged uncertain.",
+    "dropArea": "Trailers parked in both truck courts (shared with neighbouring buildings); estimated 25-50 stalls.",
+    "railServed": "A large Union Pacific rail yard lies just north of the property, but no rail spur runs into the building; road-served.",
+    "urbanRural": "Within Houston's dense northeast industrial fabric off US-90 / East Freeway; Urban."
+  },
+  "method": "deep-audit"
+}

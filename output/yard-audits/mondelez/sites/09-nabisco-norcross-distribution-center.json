@@ -1,0 +1,66 @@
+{
+  "name": "Nabisco Norcross Distribution Center - Norcross GA",
+  "type": "Distribution center",
+  "coords": { "lat": 33.92175, "lng": -84.21810 },
+  "geofences": {
+    "perimeter": { "south": 33.92105, "west": -84.21900, "north": 33.92260, "east": -84.21730 },
+    "truckGate": { "south": 33.92210, "west": -84.21895, "north": 33.92245, "east": -84.21850 },
+    "dropYards": [
+      { "south": 33.92160, "west": -84.21805, "north": 33.92240, "east": -84.21735 }
+    ],
+    "dockAprons": [
+      { "south": 33.92150, "west": -84.21810, "north": 33.92215, "east": -84.21755 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 13,
+    "trailersVisible": 5,
+    "trailerParkingCapacity": 14,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 6.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.92175,-84.21810,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "dropArea", "shipRcvSeparate"],
+  "fieldNotes": {
+    "locate": "Roster gave APPROXIMATE (city-level) coordinates. Resolved via web research (Businessyab, Chamber of Commerce, Becknell Industrial listing) to 6300 Brook Hollow Pkwy, Norcross GA 30071, then geocoded via Google Geocoding API to a ROOFTOP point at 33.9214824, -84.2181224. Locked to the warehouse there.",
+    "truckGate": "Open paved driveway off Brook Hollow Parkway into a front car-parking lot and on to the NE truck court. No barrier arm, sliding gate, or checkpoint pinch-point visible in satellite or Street View (2025-12).",
+    "guardShack": "No guard booth at the entrance. The building has an office front on the SW corner but no separate gate-side booth.",
+    "remoteGs": "No gate, so no remote check-in inferred.",
+    "dockDoors": "Moderate distribution warehouse; NE face shows a dock apron with roughly 10-14 dock-door positions and a few trailers. Band 10-25, count ~13 - flagged uncertain.",
+    "dropArea": "NE truck court holds only a handful of untethered trailers; small count, band 0-10 - flagged uncertain (court partly shadowed).",
+    "dropYard": "No dedicated standalone trailer-storage lot; the modest NE truck court doubles as dock staging, so dropYard left false.",
+    "drivewayShort": "Short approach - the front lot and truck court give room for only 1-2 trucks before the docks.",
+    "shipRcvSeparate": "Dock doors observed only on the NE face; no second distinct dock bank, so shipRcvSeparate false - flagged uncertain.",
+    "urbanRural": "Facility sits in the dense Norcross / Atlanta-metro industrial corridor along Brook Hollow Parkway, surrounded by large warehouses - Urban.",
+    "postGateStaging": "Front lot and NE truck court provide some inside-property holding space before the docks."
+  },
+  "method": "deep-audit"
+}

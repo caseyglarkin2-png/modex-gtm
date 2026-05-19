@@ -1,0 +1,470 @@
+{
+  "account": "kraft-heinz",
+  "generatedAt": "2026-05-18",
+  "zooms": [
+    17,
+    18,
+    19
+  ],
+  "sites": [
+    {
+      "idx": 1,
+      "name": "Kraft Heinz - Aurora",
+      "type": "Cold Storage Facility",
+      "archetype": "#1",
+      "coords": {
+        "lat": 41.7831644,
+        "lng": -88.3732467
+      },
+      "images": {
+        "z17": "imagery/01-kraft-heinz-aurora-z17.png",
+        "z18": "imagery/01-kraft-heinz-aurora-z18.png",
+        "z19": "imagery/01-kraft-heinz-aurora-z19.png",
+        "streetview": "imagery/01-kraft-heinz-aurora-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 2,
+      "name": "Kraft Heinz - Muscatine",
+      "type": "Food Products Supplier",
+      "archetype": "#2",
+      "coords": {
+        "lat": 41.4372813,
+        "lng": -91.0430826
+      },
+      "images": {
+        "z17": "imagery/02-kraft-heinz-muscatine-z17.png",
+        "z18": "imagery/02-kraft-heinz-muscatine-z18.png",
+        "z19": "imagery/02-kraft-heinz-muscatine-z19.png",
+        "streetview": "imagery/02-kraft-heinz-muscatine-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 3,
+      "name": "Kraft Heinz - Holland",
+      "type": "Food Manufacturer",
+      "archetype": "#3",
+      "coords": {
+        "lat": 42.7835562,
+        "lng": -86.128213
+      },
+      "images": {
+        "z17": "imagery/03-kraft-heinz-holland-z17.png",
+        "z18": "imagery/03-kraft-heinz-holland-z18.png",
+        "z19": "imagery/03-kraft-heinz-holland-z19.png",
+        "streetview": "imagery/03-kraft-heinz-holland-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 4,
+      "name": "Kraft Foods - Jacksonville",
+      "type": "Warehouse",
+      "archetype": "#4",
+      "coords": {
+        "lat": 30.3789402,
+        "lng": -81.7859206
+      },
+      "images": {
+        "z17": "imagery/04-kraft-foods-jacksonville-z17.png",
+        "z18": "imagery/04-kraft-foods-jacksonville-z18.png",
+        "z19": "imagery/04-kraft-foods-jacksonville-z19.png",
+        "streetview": "imagery/04-kraft-foods-jacksonville-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 5,
+      "name": "Kraft Foods - Jacksonville - Portion Control",
+      "type": "Packaging Supply Store",
+      "archetype": "#3",
+      "coords": {
+        "lat": 30.3813388,
+        "lng": -81.774636
+      },
+      "images": {
+        "z17": "imagery/05-kraft-foods-jacksonville-portion-control-z17.png",
+        "z18": "imagery/05-kraft-foods-jacksonville-portion-control-z18.png",
+        "z19": "imagery/05-kraft-foods-jacksonville-portion-control-z19.png",
+        "streetview": "imagery/05-kraft-foods-jacksonville-portion-control-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 6,
+      "name": "Kraft Heinz - Davenport",
+      "type": "Food Proccessing Company",
+      "archetype": "#5",
+      "coords": {
+        "lat": 41.6162935,
+        "lng": -90.6104996
+      },
+      "images": {
+        "z17": "imagery/06-kraft-heinz-davenport-z17.png",
+        "z18": "imagery/06-kraft-heinz-davenport-z18.png",
+        "z19": "imagery/06-kraft-heinz-davenport-z19.png",
+        "streetview": "imagery/06-kraft-heinz-davenport-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 7,
+      "name": "Kraft Heinz - Winchester",
+      "type": "Food Proccessing Company",
+      "archetype": "#3",
+      "coords": {
+        "lat": 39.2074209,
+        "lng": -78.1471792
+      },
+      "images": {
+        "z17": "imagery/07-kraft-heinz-winchester-z17.png",
+        "z18": "imagery/07-kraft-heinz-winchester-z18.png",
+        "z19": "imagery/07-kraft-heinz-winchester-z19.png",
+        "streetview": "imagery/07-kraft-heinz-winchester-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 8,
+      "name": "Kraft Heinz - Massillon",
+      "type": "Manufacturer",
+      "archetype": "#6",
+      "coords": {
+        "lat": 40.7789509,
+        "lng": -81.5408231
+      },
+      "images": {
+        "z17": "imagery/08-kraft-heinz-massillon-z17.png",
+        "z18": "imagery/08-kraft-heinz-massillon-z18.png",
+        "z19": "imagery/08-kraft-heinz-massillon-z19.png",
+        "streetview": "imagery/08-kraft-heinz-massillon-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 9,
+      "name": "Kraft Heinz - Garland",
+      "type": "Manufacturer",
+      "archetype": "#7",
+      "coords": {
+        "lat": 32.9079075,
+        "lng": -96.6636842
+      },
+      "images": {
+        "z17": "imagery/09-kraft-heinz-garland-z17.png",
+        "z18": "imagery/09-kraft-heinz-garland-z18.png",
+        "z19": "imagery/09-kraft-heinz-garland-z19.png",
+        "streetview": "imagery/09-kraft-heinz-garland-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 10,
+      "name": "Kraft Heinz - Fremont",
+      "type": "Food Products Supplier",
+      "archetype": "#6",
+      "coords": {
+        "lat": 41.3605075,
+        "lng": -83.0932834
+      },
+      "images": {
+        "z17": "imagery/10-kraft-heinz-fremont-z17.png",
+        "z18": "imagery/10-kraft-heinz-fremont-z18.png",
+        "z19": "imagery/10-kraft-heinz-fremont-z19.png",
+        "streetview": "imagery/10-kraft-heinz-fremont-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 11,
+      "name": "Kraft Foods - Springfield",
+      "type": "Manufacturer",
+      "archetype": "#1",
+      "coords": {
+        "lat": 37.2309646,
+        "lng": -93.2134017
+      },
+      "images": {
+        "z17": "imagery/11-kraft-foods-springfield-z17.png",
+        "z18": "imagery/11-kraft-foods-springfield-z18.png",
+        "z19": "imagery/11-kraft-foods-springfield-z19.png",
+        "streetview": "imagery/11-kraft-foods-springfield-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 12,
+      "name": "Kraft Heinz - Dover",
+      "type": "Food Manufacturer",
+      "archetype": "#1",
+      "coords": {
+        "lat": 39.1487688,
+        "lng": -75.5432442
+      },
+      "images": {
+        "z17": "imagery/12-kraft-heinz-dover-z17.png",
+        "z18": "imagery/12-kraft-heinz-dover-z18.png",
+        "z19": "imagery/12-kraft-heinz-dover-z19.png",
+        "streetview": "imagery/12-kraft-heinz-dover-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 13,
+      "name": "Kraft Heinz - Mason City",
+      "type": "Food Manufacturer",
+      "archetype": "#8",
+      "coords": {
+        "lat": 43.1639539,
+        "lng": -93.2176109
+      },
+      "images": {
+        "z17": "imagery/13-kraft-heinz-mason-city-z17.png",
+        "z18": "imagery/13-kraft-heinz-mason-city-z18.png",
+        "z19": "imagery/13-kraft-heinz-mason-city-z19.png",
+        "streetview": "imagery/13-kraft-heinz-mason-city-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 14,
+      "name": "Kraft Heinz - Cedar Rapids",
+      "type": "Food Manufacturer",
+      "archetype": "#3",
+      "coords": {
+        "lat": 41.932207,
+        "lng": -91.6361763
+      },
+      "images": {
+        "z17": "imagery/14-kraft-heinz-cedar-rapids-z17.png",
+        "z18": "imagery/14-kraft-heinz-cedar-rapids-z18.png",
+        "z19": "imagery/14-kraft-heinz-cedar-rapids-z19.png",
+        "streetview": "imagery/14-kraft-heinz-cedar-rapids-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 15,
+      "name": "Kraft Heinz - Mason City",
+      "type": "Food Manufacturer",
+      "archetype": "#3",
+      "coords": {
+        "lat": 39.3324749,
+        "lng": -84.3316314
+      },
+      "images": {
+        "z17": "imagery/15-kraft-heinz-mason-city-z17.png",
+        "z18": "imagery/15-kraft-heinz-mason-city-z18.png",
+        "z19": "imagery/15-kraft-heinz-mason-city-z19.png",
+        "streetview": "imagery/15-kraft-heinz-mason-city-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 16,
+      "name": "Kraft Heinz - Beaver Dam",
+      "type": "Food Products Supplier",
+      "archetype": "#3",
+      "coords": {
+        "lat": 43.4518323,
+        "lng": -88.8387536
+      },
+      "images": {
+        "z17": "imagery/16-kraft-heinz-beaver-dam-z17.png",
+        "z18": "imagery/16-kraft-heinz-beaver-dam-z18.png",
+        "z19": "imagery/16-kraft-heinz-beaver-dam-z19.png",
+        "streetview": "imagery/16-kraft-heinz-beaver-dam-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 17,
+      "name": "Kraft Heinz - Coshocton",
+      "type": "Manufacturer",
+      "archetype": "#7",
+      "coords": {
+        "lat": 40.2497856,
+        "lng": -81.8697284
+      },
+      "images": {
+        "z17": "imagery/17-kraft-heinz-coshocton-z17.png",
+        "z18": "imagery/17-kraft-heinz-coshocton-z18.png",
+        "z19": "imagery/17-kraft-heinz-coshocton-z19.png",
+        "streetview": "imagery/17-kraft-heinz-coshocton-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 18,
+      "name": "Kraft Heinz - Champaign",
+      "type": "Food Manufacturer",
+      "archetype": "#6",
+      "coords": {
+        "lat": 40.1259519,
+        "lng": -88.2717434
+      },
+      "images": {
+        "z17": "imagery/18-kraft-heinz-champaign-z17.png",
+        "z18": "imagery/18-kraft-heinz-champaign-z18.png",
+        "z19": "imagery/18-kraft-heinz-champaign-z19.png",
+        "streetview": "imagery/18-kraft-heinz-champaign-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 19,
+      "name": "Kraft Heinz - Woodstock",
+      "type": "Manufacturer",
+      "archetype": "#2",
+      "coords": {
+        "lat": 42.3209369,
+        "lng": -88.4714377
+      },
+      "images": {
+        "z17": "imagery/19-kraft-heinz-woodstock-z17.png",
+        "z18": "imagery/19-kraft-heinz-woodstock-z18.png",
+        "z19": "imagery/19-kraft-heinz-woodstock-z19.png",
+        "streetview": "imagery/19-kraft-heinz-woodstock-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 20,
+      "name": "Kraft Heinz - Ft Myers",
+      "type": "Manufacturer",
+      "archetype": "#9",
+      "coords": {
+        "lat": 26.6654126,
+        "lng": -81.8027997
+      },
+      "images": {
+        "z17": "imagery/20-kraft-heinz-ft-myers-z17.png",
+        "z18": "imagery/20-kraft-heinz-ft-myers-z18.png",
+        "z19": "imagery/20-kraft-heinz-ft-myers-z19.png",
+        "streetview": "imagery/20-kraft-heinz-ft-myers-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 21,
+      "name": "Kraft Heinz - Kendallville",
+      "type": "Manufacturer",
+      "archetype": "#3",
+      "coords": {
+        "lat": 41.4323654,
+        "lng": -85.2673645
+      },
+      "images": {
+        "z17": "imagery/21-kraft-heinz-kendallville-z17.png",
+        "z18": "imagery/21-kraft-heinz-kendallville-z18.png",
+        "z19": "imagery/21-kraft-heinz-kendallville-z19.png",
+        "streetview": "imagery/21-kraft-heinz-kendallville-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 22,
+      "name": "Kraft Heinz - Lowville",
+      "type": "Cheese Manufacturer",
+      "archetype": "#3",
+      "coords": {
+        "lat": 43.777538,
+        "lng": -75.4803505
+      },
+      "images": {
+        "z17": "imagery/22-kraft-heinz-lowville-z17.png",
+        "z18": "imagery/22-kraft-heinz-lowville-z18.png",
+        "z19": "imagery/22-kraft-heinz-lowville-z19.png",
+        "streetview": "imagery/22-kraft-heinz-lowville-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 23,
+      "name": "Kraft Heinz - New Ulm",
+      "type": "Food",
+      "archetype": "#4",
+      "coords": {
+        "lat": 44.2894712,
+        "lng": -94.4336481
+      },
+      "images": {
+        "z17": "imagery/23-kraft-heinz-new-ulm-z17.png",
+        "z18": "imagery/23-kraft-heinz-new-ulm-z18.png",
+        "z19": "imagery/23-kraft-heinz-new-ulm-z19.png",
+        "streetview": "imagery/23-kraft-heinz-new-ulm-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 24,
+      "name": "Kraft Heinz - Avon",
+      "type": "Food Products Supplier",
+      "archetype": "#10",
+      "coords": {
+        "lat": 42.9050843,
+        "lng": -77.755732
+      },
+      "images": {
+        "z17": "imagery/24-kraft-heinz-avon-z17.png",
+        "z18": "imagery/24-kraft-heinz-avon-z18.png",
+        "z19": "imagery/24-kraft-heinz-avon-z19.png",
+        "streetview": "imagery/24-kraft-heinz-avon-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 25,
+      "name": "Kraft Heinz - Granite City",
+      "type": "Food Manufacturer",
+      "archetype": "#9",
+      "coords": {
+        "lat": 38.720034,
+        "lng": -90.1468659
+      },
+      "images": {
+        "z17": "imagery/25-kraft-heinz-granite-city-z17.png",
+        "z18": "imagery/25-kraft-heinz-granite-city-z18.png",
+        "z19": "imagery/25-kraft-heinz-granite-city-z19.png",
+        "streetview": "imagery/25-kraft-heinz-granite-city-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 26,
+      "name": "Kraft Heinz - Columbia",
+      "type": "Manufacturer",
+      "archetype": "#3",
+      "coords": {
+        "lat": 39.0100596,
+        "lng": -92.2675202
+      },
+      "images": {
+        "z17": "imagery/26-kraft-heinz-columbia-z17.png",
+        "z18": "imagery/26-kraft-heinz-columbia-z18.png",
+        "z19": "imagery/26-kraft-heinz-columbia-z19.png",
+        "streetview": "imagery/26-kraft-heinz-columbia-streetview.png"
+      },
+      "streetView": "available"
+    },
+    {
+      "idx": 27,
+      "name": "Kraft Heinz/Ryder - Lathrop",
+      "type": "Distribution Service",
+      "archetype": "#3",
+      "coords": {
+        "lat": 37.8096478,
+        "lng": -121.2817099
+      },
+      "images": {
+        "z17": "imagery/27-kraft-heinz-ryder-lathrop-z17.png",
+        "z18": "imagery/27-kraft-heinz-ryder-lathrop-z18.png",
+        "z19": "imagery/27-kraft-heinz-ryder-lathrop-z19.png",
+        "streetview": "imagery/27-kraft-heinz-ryder-lathrop-streetview.png"
+      },
+      "streetView": "available"
+    }
+  ]
+}

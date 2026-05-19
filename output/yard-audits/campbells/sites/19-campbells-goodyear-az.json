@@ -1,0 +1,54 @@
+{
+  "name": "Campbell's - Goodyear AZ",
+  "type": "Manufacturing - snacks/food production (Snyder's of Hanover pretzel plant)",
+  "coords": { "lat": 33.4595, "lng": -112.3795 },
+  "geofences": {
+    "perimeter": { "south": 33.4580, "west": -112.3818, "north": 33.4609, "east": -112.3768 },
+    "truckGate": { "south": 33.45995, "west": -112.37820, "north": 33.46055, "east": -112.37730 },
+    "dropYards": [
+      { "south": 33.45935, "west": -112.38170, "north": 33.45995, "east": -112.38090 },
+      { "south": 33.45855, "west": -112.38040, "north": 33.45915, "east": -112.37880 }
+    ],
+    "dockAprons": [
+      { "south": 33.45945, "west": -112.38120, "north": 33.46010, "east": -112.38060 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 32,
+    "trailersVisible": 46,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 16.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.4595,-112.3795,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible"],
+  "fieldNotes": {
+    "location": "Roster address '13301 W Van Buren St' and roster coords (33.44986,-112.34641) geocoded to a residential block and were wrong. Correct facility is the Campbell Snacks / Snyder's of Hanover pretzel plant at 1200 N Bullard Ave, Goodyear AZ 85338 - confirmed via web search, OSM ('Campbell's Food' node) and satellite, with 'Campbell's Snacks' building signage visible in Street View. Locked center 33.4595,-112.3795.",
+    "truckGate": "Entrance is an open driveway off the I-10 south frontage road at the NE corner; no barrier arm or sliding gate visible in z19-z20 satellite. Open-access site.",
+    "guardShack": "No guard booth visible at the entrance or anywhere along the access road in overhead imagery.",
+    "remoteGs": "False because there is no controlled truck gate at all.",
+    "dropYard": "Two trailer-parking areas: a row of ~15-20 drop trailers on the W dock yard and a marked drop yard on the S/SE apron holding ~20+ trailers.",
+    "dockDoors": "Dock doors along the W building face (~12-15 trailers backed in visible) plus a SW/S dock cluster; 25-50 band, estimate ~32, flagged low-confidence.",
+    "urbanRural": "Edge-of-town: plant is bordered by I-10 to the north and active agricultural fields to the south/east/west - rural industrial setting on the western fringe of metro Phoenix.",
+    "drivewayLong": "Long internal access/loop road wraps from the NE entrance around to the W docks - ample stacking depth for 3+ trucks inside the property.",
+    "buildingCount": "Main manufacturing/warehouse building plus a small utility/outbuilding on the south side.",
+    "scale": "No truck scale visible.",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

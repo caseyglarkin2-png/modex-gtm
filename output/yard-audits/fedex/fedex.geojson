@@ -1,0 +1,7162 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.976,
+              35.051
+            ],
+            [
+              -89.95,
+              35.051
+            ],
+            [
+              -89.95,
+              35.069
+            ],
+            [
+              -89.976,
+              35.069
+            ],
+            [
+              -89.976,
+              35.051
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express World Hub - Memphis TN",
+        "type": "Express national/global superhub (air-to-ground sort)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 300,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 940,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.9544,
+              35.064
+            ],
+            [
+              -89.9534,
+              35.064
+            ],
+            [
+              -89.9534,
+              35.065
+            ],
+            [
+              -89.9544,
+              35.065
+            ],
+            [
+              -89.9544,
+              35.064
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express World Hub - Memphis TN",
+        "type": "Express national/global superhub (air-to-ground sort)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.9631,
+              35.0652
+            ],
+            [
+              -89.9608,
+              35.0652
+            ],
+            [
+              -89.9608,
+              35.0664
+            ],
+            [
+              -89.9631,
+              35.0664
+            ],
+            [
+              -89.9631,
+              35.0652
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express World Hub - Memphis TN",
+        "type": "Express national/global superhub (air-to-ground sort)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.9535,
+              35.06
+            ],
+            [
+              -89.9505,
+              35.06
+            ],
+            [
+              -89.9505,
+              35.0625
+            ],
+            [
+              -89.9535,
+              35.0625
+            ],
+            [
+              -89.9535,
+              35.06
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express World Hub - Memphis TN",
+        "type": "Express national/global superhub (air-to-ground sort)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.9655,
+              35.0595
+            ],
+            [
+              -89.959,
+              35.0595
+            ],
+            [
+              -89.959,
+              35.0625
+            ],
+            [
+              -89.9655,
+              35.0625
+            ],
+            [
+              -89.9655,
+              35.0595
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express World Hub - Memphis TN",
+        "type": "Express national/global superhub (air-to-ground sort)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.9556,
+              35.0644
+            ],
+            [
+              -89.9536,
+              35.0644
+            ],
+            [
+              -89.9536,
+              35.0656
+            ],
+            [
+              -89.9556,
+              35.0656
+            ],
+            [
+              -89.9556,
+              35.0644
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express World Hub - Memphis TN",
+        "type": "Express national/global superhub (air-to-ground sort)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.287,
+              39.7085
+            ],
+            [
+              -86.268,
+              39.7085
+            ],
+            [
+              -86.268,
+              39.724
+            ],
+            [
+              -86.287,
+              39.724
+            ],
+            [
+              -86.287,
+              39.7085
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express National Hub - Indianapolis IN",
+        "type": "Express national hub (2.4M sq ft, second-largest cargo facility)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 220,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2733,
+              39.7105
+            ],
+            [
+              -86.2721,
+              39.7105
+            ],
+            [
+              -86.2721,
+              39.7116
+            ],
+            [
+              -86.2733,
+              39.7116
+            ],
+            [
+              -86.2733,
+              39.7105
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express National Hub - Indianapolis IN",
+        "type": "Express national hub (2.4M sq ft, second-largest cargo facility)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.278,
+              39.7135
+            ],
+            [
+              -86.275,
+              39.7135
+            ],
+            [
+              -86.275,
+              39.7155
+            ],
+            [
+              -86.278,
+              39.7155
+            ],
+            [
+              -86.278,
+              39.7135
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express National Hub - Indianapolis IN",
+        "type": "Express national hub (2.4M sq ft, second-largest cargo facility)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2795,
+              39.7125
+            ],
+            [
+              -86.2745,
+              39.7125
+            ],
+            [
+              -86.2745,
+              39.716
+            ],
+            [
+              -86.2795,
+              39.716
+            ],
+            [
+              -86.2795,
+              39.7125
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express National Hub - Indianapolis IN",
+        "type": "Express national hub (2.4M sq ft, second-largest cargo facility)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2745,
+              39.71
+            ],
+            [
+              -86.2725,
+              39.71
+            ],
+            [
+              -86.2725,
+              39.712
+            ],
+            [
+              -86.2745,
+              39.712
+            ],
+            [
+              -86.2745,
+              39.71
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express National Hub - Indianapolis IN",
+        "type": "Express national hub (2.4M sq ft, second-largest cargo facility)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3176,
+              32.9902
+            ],
+            [
+              -97.3076,
+              32.9902
+            ],
+            [
+              -97.3076,
+              33.0005
+            ],
+            [
+              -97.3176,
+              33.0005
+            ],
+            [
+              -97.3176,
+              32.9902
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Fort Worth TX",
+        "type": "Express regional hub (Fort Worth Alliance Airport)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 95,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3096,
+              32.99175
+            ],
+            [
+              -97.30855,
+              32.99175
+            ],
+            [
+              -97.30855,
+              32.9925
+            ],
+            [
+              -97.3096,
+              32.9925
+            ],
+            [
+              -97.3096,
+              32.99175
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Fort Worth TX",
+        "type": "Express regional hub (Fort Worth Alliance Airport)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3128,
+              32.9918
+            ],
+            [
+              -97.3105,
+              32.9918
+            ],
+            [
+              -97.3105,
+              32.9936
+            ],
+            [
+              -97.3128,
+              32.9936
+            ],
+            [
+              -97.3128,
+              32.9918
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Fort Worth TX",
+        "type": "Express regional hub (Fort Worth Alliance Airport)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3132,
+              32.99
+            ],
+            [
+              -97.3118,
+              32.99
+            ],
+            [
+              -97.3118,
+              32.9913
+            ],
+            [
+              -97.3132,
+              32.9913
+            ],
+            [
+              -97.3132,
+              32.99
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Fort Worth TX",
+        "type": "Express regional hub (Fort Worth Alliance Airport)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3142,
+              32.991
+            ],
+            [
+              -97.3123,
+              32.991
+            ],
+            [
+              -97.3123,
+              32.9928
+            ],
+            [
+              -97.3142,
+              32.9928
+            ],
+            [
+              -97.3142,
+              32.991
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Fort Worth TX",
+        "type": "Express regional hub (Fort Worth Alliance Airport)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3096,
+              32.99155
+            ],
+            [
+              -97.3076,
+              32.99155
+            ],
+            [
+              -97.3076,
+              32.9926
+            ],
+            [
+              -97.3096,
+              32.9926
+            ],
+            [
+              -97.3096,
+              32.99155
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Fort Worth TX",
+        "type": "Express regional hub (Fort Worth Alliance Airport)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1748,
+              40.7035
+            ],
+            [
+              -74.1678,
+              40.7035
+            ],
+            [
+              -74.1678,
+              40.7096
+            ],
+            [
+              -74.1748,
+              40.7096
+            ],
+            [
+              -74.1748,
+              40.7035
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Newark NJ",
+        "type": "Express regional hub (Newark Liberty International Airport)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 45,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1732,
+              40.7075
+            ],
+            [
+              -74.172,
+              40.7075
+            ],
+            [
+              -74.172,
+              40.7083
+            ],
+            [
+              -74.1732,
+              40.7083
+            ],
+            [
+              -74.1732,
+              40.7075
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Newark NJ",
+        "type": "Express regional hub (Newark Liberty International Airport)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1735,
+              40.705
+            ],
+            [
+              -74.1718,
+              40.705
+            ],
+            [
+              -74.1718,
+              40.7068
+            ],
+            [
+              -74.1735,
+              40.7068
+            ],
+            [
+              -74.1735,
+              40.705
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Newark NJ",
+        "type": "Express regional hub (Newark Liberty International Airport)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1744,
+              40.704
+            ],
+            [
+              -74.1728,
+              40.704
+            ],
+            [
+              -74.1728,
+              40.7068
+            ],
+            [
+              -74.1744,
+              40.7068
+            ],
+            [
+              -74.1744,
+              40.704
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Newark NJ",
+        "type": "Express regional hub (Newark Liberty International Airport)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.223,
+              37.716
+            ],
+            [
+              -122.214,
+              37.716
+            ],
+            [
+              -122.214,
+              37.7235
+            ],
+            [
+              -122.223,
+              37.7235
+            ],
+            [
+              -122.223,
+              37.716
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Oakland CA",
+        "type": "Express regional hub (Oakland International Airport)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 70,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2181,
+              37.7227
+            ],
+            [
+              -122.2168,
+              37.7227
+            ],
+            [
+              -122.2168,
+              37.7236
+            ],
+            [
+              -122.2181,
+              37.7236
+            ],
+            [
+              -122.2181,
+              37.7227
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Oakland CA",
+        "type": "Express regional hub (Oakland International Airport)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.221,
+              37.7185
+            ],
+            [
+              -122.219,
+              37.7185
+            ],
+            [
+              -122.219,
+              37.7205
+            ],
+            [
+              -122.221,
+              37.7205
+            ],
+            [
+              -122.221,
+              37.7185
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Oakland CA",
+        "type": "Express regional hub (Oakland International Airport)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.219,
+              37.7195
+            ],
+            [
+              -122.2175,
+              37.7195
+            ],
+            [
+              -122.2175,
+              37.7212
+            ],
+            [
+              -122.219,
+              37.7212
+            ],
+            [
+              -122.219,
+              37.7195
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Oakland CA",
+        "type": "Express regional hub (Oakland International Airport)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.942,
+              36.102
+            ],
+            [
+              -79.9335,
+              36.102
+            ],
+            [
+              -79.9335,
+              36.11
+            ],
+            [
+              -79.942,
+              36.11
+            ],
+            [
+              -79.942,
+              36.102
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Greensboro NC",
+        "type": "Express regional hub (Piedmont Triad / Mid-Atlantic)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 168,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.9392,
+              36.1042
+            ],
+            [
+              -79.938,
+              36.1042
+            ],
+            [
+              -79.938,
+              36.1072
+            ],
+            [
+              -79.9392,
+              36.1072
+            ],
+            [
+              -79.9392,
+              36.1042
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Greensboro NC",
+        "type": "Express regional hub (Piedmont Triad / Mid-Atlantic)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.586,
+              34.0468
+            ],
+            [
+              -117.5755,
+              34.0468
+            ],
+            [
+              -117.5755,
+              34.053
+            ],
+            [
+              -117.586,
+              34.053
+            ],
+            [
+              -117.586,
+              34.0468
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Ontario CA",
+        "type": "Express regional hub (Ontario International Airport, So. California)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 165,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5811,
+              34.0479
+            ],
+            [
+              -117.5803,
+              34.0479
+            ],
+            [
+              -117.5803,
+              34.0485
+            ],
+            [
+              -117.5811,
+              34.0485
+            ],
+            [
+              -117.5811,
+              34.0479
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Ontario CA",
+        "type": "Express regional hub (Ontario International Airport, So. California)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5813,
+              34.0482
+            ],
+            [
+              -117.578,
+              34.0482
+            ],
+            [
+              -117.578,
+              34.0492
+            ],
+            [
+              -117.5813,
+              34.0492
+            ],
+            [
+              -117.5813,
+              34.0482
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Ontario CA",
+        "type": "Express regional hub (Ontario International Airport, So. California)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5813,
+              34.0486
+            ],
+            [
+              -117.577,
+              34.0486
+            ],
+            [
+              -117.577,
+              34.052
+            ],
+            [
+              -117.5813,
+              34.052
+            ],
+            [
+              -117.5813,
+              34.0486
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Ontario CA",
+        "type": "Express regional hub (Ontario International Airport, So. California)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5805,
+              34.0488
+            ],
+            [
+              -117.577,
+              34.0488
+            ],
+            [
+              -117.577,
+              34.051
+            ],
+            [
+              -117.5805,
+              34.051
+            ],
+            [
+              -117.5805,
+              34.0488
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Ontario CA",
+        "type": "Express regional hub (Ontario International Airport, So. California)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.297,
+              25.79098
+            ],
+            [
+              -80.2935,
+              25.79098
+            ],
+            [
+              -80.2935,
+              25.79412
+            ],
+            [
+              -80.297,
+              25.79412
+            ],
+            [
+              -80.297,
+              25.79098
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Miami FL",
+        "type": "Express regional hub (Latin America gateway)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 30,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.2938,
+              25.79055
+            ],
+            [
+              -80.2933,
+              25.79055
+            ],
+            [
+              -80.2933,
+              25.79095
+            ],
+            [
+              -80.2938,
+              25.79095
+            ],
+            [
+              -80.2938,
+              25.79055
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Miami FL",
+        "type": "Express regional hub (Latin America gateway)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.2948,
+              25.7911
+            ],
+            [
+              -80.2936,
+              25.7911
+            ],
+            [
+              -80.2936,
+              25.792
+            ],
+            [
+              -80.2948,
+              25.792
+            ],
+            [
+              -80.2948,
+              25.7911
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Miami FL",
+        "type": "Express regional hub (Latin America gateway)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.2962,
+              25.7915
+            ],
+            [
+              -80.2938,
+              25.7915
+            ],
+            [
+              -80.2938,
+              25.7932
+            ],
+            [
+              -80.2962,
+              25.7932
+            ],
+            [
+              -80.2962,
+              25.7915
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Express Regional Hub - Miami FL",
+        "type": "Express regional hub (Latin America gateway)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.0398,
+              36.1035
+            ],
+            [
+              -80.032,
+              36.1035
+            ],
+            [
+              -80.032,
+              36.1095
+            ],
+            [
+              -80.0398,
+              36.1095
+            ],
+            [
+              -80.0398,
+              36.1035
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Kernersville NC",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 200,
+          "trailersVisible": 600,
+          "trailerParkingCapacity": 700,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 116,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.03665,
+              36.10895
+            ],
+            [
+              -80.03615,
+              36.10895
+            ],
+            [
+              -80.03615,
+              36.10935
+            ],
+            [
+              -80.03665,
+              36.10935
+            ],
+            [
+              -80.03665,
+              36.10895
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Kernersville NC",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.0398,
+              36.1063
+            ],
+            [
+              -80.037,
+              36.1063
+            ],
+            [
+              -80.037,
+              36.109
+            ],
+            [
+              -80.0398,
+              36.109
+            ],
+            [
+              -80.0398,
+              36.1063
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Kernersville NC",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.0345,
+              36.1055
+            ],
+            [
+              -80.0321,
+              36.1055
+            ],
+            [
+              -80.0321,
+              36.1085
+            ],
+            [
+              -80.0345,
+              36.1085
+            ],
+            [
+              -80.0345,
+              36.1055
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Kernersville NC",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.037,
+              36.1038
+            ],
+            [
+              -80.0335,
+              36.1038
+            ],
+            [
+              -80.0335,
+              36.1056
+            ],
+            [
+              -80.037,
+              36.1056
+            ],
+            [
+              -80.037,
+              36.1038
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Kernersville NC",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.037,
+              36.1056
+            ],
+            [
+              -80.0335,
+              36.1056
+            ],
+            [
+              -80.0335,
+              36.1076
+            ],
+            [
+              -80.037,
+              36.1076
+            ],
+            [
+              -80.037,
+              36.1056
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Kernersville NC",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.036,
+              36.1038
+            ],
+            [
+              -80.0325,
+              36.1038
+            ],
+            [
+              -80.0325,
+              36.1048
+            ],
+            [
+              -80.036,
+              36.1048
+            ],
+            [
+              -80.036,
+              36.1038
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Kernersville NC",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.0368,
+              36.1078
+            ],
+            [
+              -80.0345,
+              36.1078
+            ],
+            [
+              -80.0345,
+              36.1089
+            ],
+            [
+              -80.0368,
+              36.1089
+            ],
+            [
+              -80.0368,
+              36.1078
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Kernersville NC",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.795,
+              39.6364
+            ],
+            [
+              -77.786,
+              39.6364
+            ],
+            [
+              -77.786,
+              39.6418
+            ],
+            [
+              -77.795,
+              39.6418
+            ],
+            [
+              -77.795,
+              39.6364
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Hagerstown MD",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 160,
+          "trailersVisible": 400,
+          "trailerParkingCapacity": 500,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 115,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.7876,
+              39.6378
+            ],
+            [
+              -77.7868,
+              39.6378
+            ],
+            [
+              -77.7868,
+              39.6387
+            ],
+            [
+              -77.7876,
+              39.6387
+            ],
+            [
+              -77.7876,
+              39.6378
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Hagerstown MD",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.7949,
+              39.6368
+            ],
+            [
+              -77.7918,
+              39.6368
+            ],
+            [
+              -77.7918,
+              39.6394
+            ],
+            [
+              -77.7949,
+              39.6394
+            ],
+            [
+              -77.7949,
+              39.6368
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Hagerstown MD",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.7935,
+              39.639
+            ],
+            [
+              -77.789,
+              39.639
+            ],
+            [
+              -77.789,
+              39.6408
+            ],
+            [
+              -77.7935,
+              39.6408
+            ],
+            [
+              -77.7935,
+              39.639
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Hagerstown MD",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.7905,
+              39.6368
+            ],
+            [
+              -77.787,
+              39.6368
+            ],
+            [
+              -77.787,
+              39.6385
+            ],
+            [
+              -77.7905,
+              39.6385
+            ],
+            [
+              -77.7905,
+              39.6368
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Hagerstown MD",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.7935,
+              39.637
+            ],
+            [
+              -77.7872,
+              39.637
+            ],
+            [
+              -77.7872,
+              39.6378
+            ],
+            [
+              -77.7935,
+              39.6378
+            ],
+            [
+              -77.7935,
+              39.637
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Hagerstown MD",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.7935,
+              39.6385
+            ],
+            [
+              -77.7872,
+              39.6385
+            ],
+            [
+              -77.7872,
+              39.6392
+            ],
+            [
+              -77.7935,
+              39.6392
+            ],
+            [
+              -77.7935,
+              39.6385
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Hagerstown MD",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.8438,
+              40.1619
+            ],
+            [
+              -76.8352,
+              40.1619
+            ],
+            [
+              -76.8352,
+              40.1676
+            ],
+            [
+              -76.8438,
+              40.1676
+            ],
+            [
+              -76.8438,
+              40.1619
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Lewisberry PA",
+        "type": "Ground regional sortation hub (Harrisburg market)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 150,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 420,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 62,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.8362,
+              40.1637
+            ],
+            [
+              -76.8355,
+              40.1637
+            ],
+            [
+              -76.8355,
+              40.1642
+            ],
+            [
+              -76.8362,
+              40.1642
+            ],
+            [
+              -76.8362,
+              40.1637
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Lewisberry PA",
+        "type": "Ground regional sortation hub (Harrisburg market)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.843,
+              40.1656
+            ],
+            [
+              -76.8385,
+              40.1656
+            ],
+            [
+              -76.8385,
+              40.1676
+            ],
+            [
+              -76.843,
+              40.1676
+            ],
+            [
+              -76.843,
+              40.1656
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Lewisberry PA",
+        "type": "Ground regional sortation hub (Harrisburg market)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.8428,
+              40.1624
+            ],
+            [
+              -76.8395,
+              40.1624
+            ],
+            [
+              -76.8395,
+              40.1648
+            ],
+            [
+              -76.8428,
+              40.1648
+            ],
+            [
+              -76.8428,
+              40.1624
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Lewisberry PA",
+        "type": "Ground regional sortation hub (Harrisburg market)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.8395,
+              40.1621
+            ],
+            [
+              -76.8365,
+              40.1621
+            ],
+            [
+              -76.8365,
+              40.1633
+            ],
+            [
+              -76.8395,
+              40.1633
+            ],
+            [
+              -76.8395,
+              40.1621
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Lewisberry PA",
+        "type": "Ground regional sortation hub (Harrisburg market)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.842,
+              40.1642
+            ],
+            [
+              -76.837,
+              40.1642
+            ],
+            [
+              -76.837,
+              40.1656
+            ],
+            [
+              -76.842,
+              40.1656
+            ],
+            [
+              -76.842,
+              40.1642
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Lewisberry PA",
+        "type": "Ground regional sortation hub (Harrisburg market)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.842,
+              40.163
+            ],
+            [
+              -76.837,
+              40.163
+            ],
+            [
+              -76.837,
+              40.1645
+            ],
+            [
+              -76.842,
+              40.1645
+            ],
+            [
+              -76.842,
+              40.163
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Lewisberry PA",
+        "type": "Ground regional sortation hub (Harrisburg market)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.8368,
+              40.1636
+            ],
+            [
+              -76.8356,
+              40.1636
+            ],
+            [
+              -76.8356,
+              40.1647
+            ],
+            [
+              -76.8368,
+              40.1647
+            ],
+            [
+              -76.8368,
+              40.1636
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Lewisberry PA",
+        "type": "Ground regional sortation hub (Harrisburg market)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.0973,
+              39.9015
+            ],
+            [
+              -83.0948,
+              39.9015
+            ],
+            [
+              -83.0948,
+              39.9058
+            ],
+            [
+              -83.0973,
+              39.9058
+            ],
+            [
+              -83.0973,
+              39.9015
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Grove City OH",
+        "type": "Ground regional sortation hub (Columbus market)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 22,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.0956,
+              39.9049
+            ],
+            [
+              -83.095,
+              39.9049
+            ],
+            [
+              -83.095,
+              39.9055
+            ],
+            [
+              -83.0956,
+              39.9055
+            ],
+            [
+              -83.0956,
+              39.9049
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Grove City OH",
+        "type": "Ground regional sortation hub (Columbus market)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.0973,
+              39.902
+            ],
+            [
+              -83.0966,
+              39.902
+            ],
+            [
+              -83.0966,
+              39.9052
+            ],
+            [
+              -83.0973,
+              39.9052
+            ],
+            [
+              -83.0973,
+              39.902
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Grove City OH",
+        "type": "Ground regional sortation hub (Columbus market)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.097,
+              39.9018
+            ],
+            [
+              -83.0964,
+              39.9018
+            ],
+            [
+              -83.0964,
+              39.9054
+            ],
+            [
+              -83.097,
+              39.9054
+            ],
+            [
+              -83.097,
+              39.9018
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Grove City OH",
+        "type": "Ground regional sortation hub (Columbus market)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.096,
+              39.9018
+            ],
+            [
+              -83.0953,
+              39.9018
+            ],
+            [
+              -83.0953,
+              39.9054
+            ],
+            [
+              -83.096,
+              39.9054
+            ],
+            [
+              -83.096,
+              39.9018
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Grove City OH",
+        "type": "Ground regional sortation hub (Columbus market)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.0964,
+              39.9047
+            ],
+            [
+              -83.0952,
+              39.9047
+            ],
+            [
+              -83.0952,
+              39.9056
+            ],
+            [
+              -83.0964,
+              39.9056
+            ],
+            [
+              -83.0964,
+              39.9047
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Grove City OH",
+        "type": "Ground regional sortation hub (Columbus market)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.71,
+              32.6548
+            ],
+            [
+              -96.703,
+              32.6548
+            ],
+            [
+              -96.703,
+              32.6605
+            ],
+            [
+              -96.71,
+              32.6605
+            ],
+            [
+              -96.71,
+              32.6548
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Dallas Hub - Hutchins TX",
+        "type": "Ground regional distribution hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 280,
+          "trailersVisible": 700,
+          "trailerParkingCapacity": 850,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 103,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7072,
+              32.6553
+            ],
+            [
+              -96.7064,
+              32.6553
+            ],
+            [
+              -96.7064,
+              32.656
+            ],
+            [
+              -96.7072,
+              32.656
+            ],
+            [
+              -96.7072,
+              32.6553
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Dallas Hub - Hutchins TX",
+        "type": "Ground regional distribution hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7095,
+              32.6582
+            ],
+            [
+              -96.706,
+              32.6582
+            ],
+            [
+              -96.706,
+              32.6604
+            ],
+            [
+              -96.7095,
+              32.6604
+            ],
+            [
+              -96.7095,
+              32.6582
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Dallas Hub - Hutchins TX",
+        "type": "Ground regional distribution hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7062,
+              32.6556
+            ],
+            [
+              -96.7035,
+              32.6556
+            ],
+            [
+              -96.7035,
+              32.6592
+            ],
+            [
+              -96.7062,
+              32.6592
+            ],
+            [
+              -96.7062,
+              32.6556
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Dallas Hub - Hutchins TX",
+        "type": "Ground regional distribution hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.71,
+              32.6556
+            ],
+            [
+              -96.7072,
+              32.6556
+            ],
+            [
+              -96.7072,
+              32.658
+            ],
+            [
+              -96.71,
+              32.658
+            ],
+            [
+              -96.71,
+              32.6556
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Dallas Hub - Hutchins TX",
+        "type": "Ground regional distribution hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7072,
+              32.6565
+            ],
+            [
+              -96.7045,
+              32.6565
+            ],
+            [
+              -96.7045,
+              32.659
+            ],
+            [
+              -96.7072,
+              32.659
+            ],
+            [
+              -96.7072,
+              32.6565
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Dallas Hub - Hutchins TX",
+        "type": "Ground regional distribution hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.3295,
+              40.5025
+            ],
+            [
+              -74.3225,
+              40.5025
+            ],
+            [
+              -74.3225,
+              40.5102
+            ],
+            [
+              -74.3295,
+              40.5102
+            ],
+            [
+              -74.3295,
+              40.5025
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Keasbey NJ",
+        "type": "Ground regional sortation hub (NY/NJ metro)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 320,
+          "trailersVisible": 750,
+          "trailerParkingCapacity": 900,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 125,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.3276,
+              40.5069
+            ],
+            [
+              -74.3266,
+              40.5069
+            ],
+            [
+              -74.3266,
+              40.5076
+            ],
+            [
+              -74.3276,
+              40.5076
+            ],
+            [
+              -74.3276,
+              40.5069
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Keasbey NJ",
+        "type": "Ground regional sortation hub (NY/NJ metro)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.329,
+              40.5055
+            ],
+            [
+              -74.326,
+              40.5055
+            ],
+            [
+              -74.326,
+              40.5082
+            ],
+            [
+              -74.329,
+              40.5082
+            ],
+            [
+              -74.329,
+              40.5055
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Keasbey NJ",
+        "type": "Ground regional sortation hub (NY/NJ metro)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.327,
+              40.5035
+            ],
+            [
+              -74.3235,
+              40.5035
+            ],
+            [
+              -74.3235,
+              40.507
+            ],
+            [
+              -74.327,
+              40.507
+            ],
+            [
+              -74.327,
+              40.5035
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Keasbey NJ",
+        "type": "Ground regional sortation hub (NY/NJ metro)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.3255,
+              40.5075
+            ],
+            [
+              -74.3228,
+              40.5075
+            ],
+            [
+              -74.3228,
+              40.51
+            ],
+            [
+              -74.3255,
+              40.51
+            ],
+            [
+              -74.3255,
+              40.5075
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Keasbey NJ",
+        "type": "Ground regional sortation hub (NY/NJ metro)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.3265,
+              40.507
+            ],
+            [
+              -74.3238,
+              40.507
+            ],
+            [
+              -74.3238,
+              40.51
+            ],
+            [
+              -74.3265,
+              40.51
+            ],
+            [
+              -74.3265,
+              40.507
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Keasbey NJ",
+        "type": "Ground regional sortation hub (NY/NJ metro)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.326,
+              40.504
+            ],
+            [
+              -74.3233,
+              40.504
+            ],
+            [
+              -74.3233,
+              40.507
+            ],
+            [
+              -74.326,
+              40.507
+            ],
+            [
+              -74.326,
+              40.504
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Keasbey NJ",
+        "type": "Ground regional sortation hub (NY/NJ metro)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.9208,
+              35.2705
+            ],
+            [
+              -80.9154,
+              35.2705
+            ],
+            [
+              -80.9154,
+              35.2743
+            ],
+            [
+              -80.9208,
+              35.2743
+            ],
+            [
+              -80.9208,
+              35.2705
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Charlotte NC",
+        "type": "Ground regional sortation hub",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 28,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.9205,
+              35.2721
+            ],
+            [
+              -80.9198,
+              35.2721
+            ],
+            [
+              -80.9198,
+              35.2727
+            ],
+            [
+              -80.9205,
+              35.2727
+            ],
+            [
+              -80.9205,
+              35.2721
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Charlotte NC",
+        "type": "Ground regional sortation hub",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.9172,
+              35.2719
+            ],
+            [
+              -80.9154,
+              35.2719
+            ],
+            [
+              -80.9154,
+              35.274
+            ],
+            [
+              -80.9172,
+              35.274
+            ],
+            [
+              -80.9172,
+              35.2719
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Charlotte NC",
+        "type": "Ground regional sortation hub",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.9189,
+              35.2724
+            ],
+            [
+              -80.918,
+              35.2724
+            ],
+            [
+              -80.918,
+              35.2742
+            ],
+            [
+              -80.9189,
+              35.2742
+            ],
+            [
+              -80.9189,
+              35.2724
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Charlotte NC",
+        "type": "Ground regional sortation hub",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.9198,
+              35.2721
+            ],
+            [
+              -80.9189,
+              35.2721
+            ],
+            [
+              -80.9189,
+              35.2739
+            ],
+            [
+              -80.9198,
+              35.2739
+            ],
+            [
+              -80.9198,
+              35.2721
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Charlotte NC",
+        "type": "Ground regional sortation hub",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.9199,
+              35.272
+            ],
+            [
+              -80.9187,
+              35.272
+            ],
+            [
+              -80.9187,
+              35.2728
+            ],
+            [
+              -80.9199,
+              35.2728
+            ],
+            [
+              -80.9199,
+              35.272
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Charlotte NC",
+        "type": "Ground regional sortation hub",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.621,
+              38.9385
+            ],
+            [
+              -84.6075,
+              38.9385
+            ],
+            [
+              -84.6075,
+              38.944
+            ],
+            [
+              -84.621,
+              38.944
+            ],
+            [
+              -84.621,
+              38.9385
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Independence KY (Northern Kentucky / Cincinnati)",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 160,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 110,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.612,
+              38.94235
+            ],
+            [
+              -84.6113,
+              38.94235
+            ],
+            [
+              -84.6113,
+              38.943
+            ],
+            [
+              -84.612,
+              38.943
+            ],
+            [
+              -84.612,
+              38.94235
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Independence KY (Northern Kentucky / Cincinnati)",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6205,
+              38.941
+            ],
+            [
+              -84.617,
+              38.941
+            ],
+            [
+              -84.617,
+              38.9438
+            ],
+            [
+              -84.6205,
+              38.9438
+            ],
+            [
+              -84.6205,
+              38.941
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Independence KY (Northern Kentucky / Cincinnati)",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.61,
+              38.94
+            ],
+            [
+              -84.6078,
+              38.94
+            ],
+            [
+              -84.6078,
+              38.9425
+            ],
+            [
+              -84.61,
+              38.9425
+            ],
+            [
+              -84.61,
+              38.94
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Independence KY (Northern Kentucky / Cincinnati)",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6198,
+              38.9415
+            ],
+            [
+              -84.6148,
+              38.9415
+            ],
+            [
+              -84.6148,
+              38.9437
+            ],
+            [
+              -84.6198,
+              38.9437
+            ],
+            [
+              -84.6198,
+              38.9415
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Independence KY (Northern Kentucky / Cincinnati)",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6175,
+              38.9405
+            ],
+            [
+              -84.6145,
+              38.9405
+            ],
+            [
+              -84.6145,
+              38.9435
+            ],
+            [
+              -84.6175,
+              38.9435
+            ],
+            [
+              -84.6175,
+              38.9405
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Independence KY (Northern Kentucky / Cincinnati)",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6148,
+              38.9385
+            ],
+            [
+              -84.6125,
+              38.9385
+            ],
+            [
+              -84.6125,
+              38.9402
+            ],
+            [
+              -84.6148,
+              38.9402
+            ],
+            [
+              -84.6148,
+              38.9385
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Independence KY (Northern Kentucky / Cincinnati)",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.799,
+              36.236
+            ],
+            [
+              -86.791,
+              36.236
+            ],
+            [
+              -86.791,
+              36.2415
+            ],
+            [
+              -86.799,
+              36.2415
+            ],
+            [
+              -86.799,
+              36.236
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Nashville TN",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 150,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 75,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.7968,
+              36.2364
+            ],
+            [
+              -86.7958,
+              36.2364
+            ],
+            [
+              -86.7958,
+              36.2372
+            ],
+            [
+              -86.7968,
+              36.2372
+            ],
+            [
+              -86.7968,
+              36.2364
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Nashville TN",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.7928,
+              36.2395
+            ],
+            [
+              -86.7912,
+              36.2395
+            ],
+            [
+              -86.7912,
+              36.2408
+            ],
+            [
+              -86.7928,
+              36.2408
+            ],
+            [
+              -86.7928,
+              36.2395
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Nashville TN",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.7985,
+              36.2368
+            ],
+            [
+              -86.7955,
+              36.2368
+            ],
+            [
+              -86.7955,
+              36.239
+            ],
+            [
+              -86.7985,
+              36.239
+            ],
+            [
+              -86.7985,
+              36.2368
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Nashville TN",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.7955,
+              36.2385
+            ],
+            [
+              -86.7915,
+              36.2385
+            ],
+            [
+              -86.7915,
+              36.2405
+            ],
+            [
+              -86.7955,
+              36.2405
+            ],
+            [
+              -86.7955,
+              36.2385
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Nashville TN",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.7948,
+              36.2375
+            ],
+            [
+              -86.7918,
+              36.2375
+            ],
+            [
+              -86.7918,
+              36.2395
+            ],
+            [
+              -86.7948,
+              36.2395
+            ],
+            [
+              -86.7948,
+              36.2375
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Nashville TN",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.7962,
+              36.2368
+            ],
+            [
+              -86.7942,
+              36.2368
+            ],
+            [
+              -86.7942,
+              36.2382
+            ],
+            [
+              -86.7962,
+              36.2382
+            ],
+            [
+              -86.7962,
+              36.2368
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Nashville TN",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.3732,
+              33.4356
+            ],
+            [
+              -112.3696,
+              33.4356
+            ],
+            [
+              -112.3696,
+              33.4406
+            ],
+            [
+              -112.3732,
+              33.4406
+            ],
+            [
+              -112.3732,
+              33.4356
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Goodyear AZ (Phoenix)",
+        "type": "Ground regional distribution hub (~425K sq ft regional sortation, with package center)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 280,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 38,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.3701,
+              33.4395
+            ],
+            [
+              -112.3696,
+              33.4395
+            ],
+            [
+              -112.3696,
+              33.4403
+            ],
+            [
+              -112.3701,
+              33.4403
+            ],
+            [
+              -112.3701,
+              33.4395
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Goodyear AZ (Phoenix)",
+        "type": "Ground regional distribution hub (~425K sq ft regional sortation, with package center)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.3732,
+              33.4396
+            ],
+            [
+              -112.3698,
+              33.4396
+            ],
+            [
+              -112.3698,
+              33.4406
+            ],
+            [
+              -112.3732,
+              33.4406
+            ],
+            [
+              -112.3732,
+              33.4396
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Goodyear AZ (Phoenix)",
+        "type": "Ground regional distribution hub (~425K sq ft regional sortation, with package center)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.3732,
+              33.4356
+            ],
+            [
+              -112.3698,
+              33.4356
+            ],
+            [
+              -112.3698,
+              33.4377
+            ],
+            [
+              -112.3732,
+              33.4377
+            ],
+            [
+              -112.3732,
+              33.4356
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Goodyear AZ (Phoenix)",
+        "type": "Ground regional distribution hub (~425K sq ft regional sortation, with package center)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.3732,
+              33.439
+            ],
+            [
+              -112.3698,
+              33.439
+            ],
+            [
+              -112.3698,
+              33.4399
+            ],
+            [
+              -112.3732,
+              33.4399
+            ],
+            [
+              -112.3732,
+              33.439
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Goodyear AZ (Phoenix)",
+        "type": "Ground regional distribution hub (~425K sq ft regional sortation, with package center)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.3732,
+              33.4376
+            ],
+            [
+              -112.3698,
+              33.4376
+            ],
+            [
+              -112.3698,
+              33.4383
+            ],
+            [
+              -112.3732,
+              33.4383
+            ],
+            [
+              -112.3732,
+              33.4376
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Goodyear AZ (Phoenix)",
+        "type": "Ground regional distribution hub (~425K sq ft regional sortation, with package center)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.3701,
+              33.4396
+            ],
+            [
+              -112.3696,
+              33.4396
+            ],
+            [
+              -112.3696,
+              33.4406
+            ],
+            [
+              -112.3701,
+              33.4406
+            ],
+            [
+              -112.3701,
+              33.4396
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Goodyear AZ (Phoenix)",
+        "type": "Ground regional distribution hub (~425K sq ft regional sortation, with package center)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.7802,
+              34.9883
+            ],
+            [
+              -89.777,
+              34.9883
+            ],
+            [
+              -89.777,
+              34.9932
+            ],
+            [
+              -89.7802,
+              34.9932
+            ],
+            [
+              -89.7802,
+              34.9883
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Package Distribution Hub - Olive Branch MS (Memphis metro)",
+        "type": "Ground regional package distribution hub",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 160,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 26,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.7802,
+              34.9885
+            ],
+            [
+              -89.7793,
+              34.9885
+            ],
+            [
+              -89.7793,
+              34.9932
+            ],
+            [
+              -89.7802,
+              34.9932
+            ],
+            [
+              -89.7802,
+              34.9885
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Package Distribution Hub - Olive Branch MS (Memphis metro)",
+        "type": "Ground regional package distribution hub",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.7779,
+              34.9885
+            ],
+            [
+              -89.777,
+              34.9885
+            ],
+            [
+              -89.777,
+              34.9932
+            ],
+            [
+              -89.7779,
+              34.9932
+            ],
+            [
+              -89.7779,
+              34.9885
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Package Distribution Hub - Olive Branch MS (Memphis metro)",
+        "type": "Ground regional package distribution hub",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.7793,
+              34.9885
+            ],
+            [
+              -89.7788,
+              34.9885
+            ],
+            [
+              -89.7788,
+              34.9932
+            ],
+            [
+              -89.7793,
+              34.9932
+            ],
+            [
+              -89.7793,
+              34.9885
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Package Distribution Hub - Olive Branch MS (Memphis metro)",
+        "type": "Ground regional package distribution hub",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.7782,
+              34.9885
+            ],
+            [
+              -89.7777,
+              34.9885
+            ],
+            [
+              -89.7777,
+              34.9932
+            ],
+            [
+              -89.7782,
+              34.9932
+            ],
+            [
+              -89.7782,
+              34.9885
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Package Distribution Hub - Olive Branch MS (Memphis metro)",
+        "type": "Ground regional package distribution hub",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6172,
+              41.2748
+            ],
+            [
+              -81.6138,
+              41.2748
+            ],
+            [
+              -81.6138,
+              41.2782
+            ],
+            [
+              -81.6172,
+              41.2782
+            ],
+            [
+              -81.6172,
+              41.2748
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Richfield OH (Cleveland/Akron mini-hub)",
+        "type": "Ground automated regional facility (229K sq ft mini-hub)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 0,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.7338,
+              40.2304
+            ],
+            [
+              -76.7282,
+              40.2304
+            ],
+            [
+              -76.7282,
+              40.236
+            ],
+            [
+              -76.7338,
+              40.236
+            ],
+            [
+              -76.7338,
+              40.2304
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Middletown PA (Harrisburg)",
+        "type": "Ground regional sortation hub",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 230,
+          "trailersVisible": 420,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 76,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.73295,
+              40.23085
+            ],
+            [
+              -76.7323,
+              40.23085
+            ],
+            [
+              -76.7323,
+              40.23125
+            ],
+            [
+              -76.73295,
+              40.23125
+            ],
+            [
+              -76.73295,
+              40.23085
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Middletown PA (Harrisburg)",
+        "type": "Ground regional sortation hub",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.7338,
+              40.2333
+            ],
+            [
+              -76.7302,
+              40.2333
+            ],
+            [
+              -76.7302,
+              40.2356
+            ],
+            [
+              -76.7338,
+              40.2356
+            ],
+            [
+              -76.7338,
+              40.2333
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Middletown PA (Harrisburg)",
+        "type": "Ground regional sortation hub",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.73,
+              40.233
+            ],
+            [
+              -76.7283,
+              40.233
+            ],
+            [
+              -76.7283,
+              40.2342
+            ],
+            [
+              -76.73,
+              40.2342
+            ],
+            [
+              -76.73,
+              40.233
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Middletown PA (Harrisburg)",
+        "type": "Ground regional sortation hub",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.7323,
+              40.2315
+            ],
+            [
+              -76.7312,
+              40.2315
+            ],
+            [
+              -76.7312,
+              40.2333
+            ],
+            [
+              -76.7323,
+              40.2333
+            ],
+            [
+              -76.7323,
+              40.2315
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Middletown PA (Harrisburg)",
+        "type": "Ground regional sortation hub",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.7312,
+              40.2313
+            ],
+            [
+              -76.7287,
+              40.2313
+            ],
+            [
+              -76.7287,
+              40.2329
+            ],
+            [
+              -76.7312,
+              40.2329
+            ],
+            [
+              -76.7312,
+              40.2313
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Middletown PA (Harrisburg)",
+        "type": "Ground regional sortation hub",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.7325,
+              40.2342
+            ],
+            [
+              -76.729,
+              40.2342
+            ],
+            [
+              -76.729,
+              40.2356
+            ],
+            [
+              -76.7325,
+              40.2356
+            ],
+            [
+              -76.7325,
+              40.2342
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Middletown PA (Harrisburg)",
+        "type": "Ground regional sortation hub",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.7325,
+              40.2304
+            ],
+            [
+              -76.73,
+              40.2304
+            ],
+            [
+              -76.73,
+              40.2313
+            ],
+            [
+              -76.7325,
+              40.2313
+            ],
+            [
+              -76.7325,
+              40.2304
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Ground Hub - Middletown PA (Harrisburg)",
+        "type": "Ground regional sortation hub",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3472,
+              39.9534
+            ],
+            [
+              -83.3389,
+              39.9534
+            ],
+            [
+              -83.3389,
+              39.9593
+            ],
+            [
+              -83.3472,
+              39.9593
+            ],
+            [
+              -83.3472,
+              39.9534
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - West Jefferson OH (Columbus, CMH)",
+        "type": "Freight LTL hub service center (~278 doors)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 278,
+          "trailersVisible": 360,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 62,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3406,
+              39.9554
+            ],
+            [
+              -83.3398,
+              39.9554
+            ],
+            [
+              -83.3398,
+              39.9559
+            ],
+            [
+              -83.3406,
+              39.9559
+            ],
+            [
+              -83.3406,
+              39.9554
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - West Jefferson OH (Columbus, CMH)",
+        "type": "Freight LTL hub service center (~278 doors)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3416,
+              39.9535
+            ],
+            [
+              -83.3392,
+              39.9535
+            ],
+            [
+              -83.3392,
+              39.9556
+            ],
+            [
+              -83.3416,
+              39.9556
+            ],
+            [
+              -83.3416,
+              39.9535
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - West Jefferson OH (Columbus, CMH)",
+        "type": "Freight LTL hub service center (~278 doors)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3462,
+              39.9578
+            ],
+            [
+              -83.3428,
+              39.9578
+            ],
+            [
+              -83.3428,
+              39.9591
+            ],
+            [
+              -83.3462,
+              39.9591
+            ],
+            [
+              -83.3462,
+              39.9578
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - West Jefferson OH (Columbus, CMH)",
+        "type": "Freight LTL hub service center (~278 doors)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3464,
+              39.9547
+            ],
+            [
+              -83.3396,
+              39.9547
+            ],
+            [
+              -83.3396,
+              39.9582
+            ],
+            [
+              -83.3464,
+              39.9582
+            ],
+            [
+              -83.3464,
+              39.9547
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - West Jefferson OH (Columbus, CMH)",
+        "type": "Freight LTL hub service center (~278 doors)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3472,
+              39.9556
+            ],
+            [
+              -83.3406,
+              39.9556
+            ],
+            [
+              -83.3406,
+              39.959
+            ],
+            [
+              -83.3472,
+              39.959
+            ],
+            [
+              -83.3472,
+              39.9556
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - West Jefferson OH (Columbus, CMH)",
+        "type": "Freight LTL hub service center (~278 doors)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3402,
+              39.9548
+            ],
+            [
+              -83.3392,
+              39.9548
+            ],
+            [
+              -83.3392,
+              39.9562
+            ],
+            [
+              -83.3402,
+              39.9562
+            ],
+            [
+              -83.3402,
+              39.9548
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - West Jefferson OH (Columbus, CMH)",
+        "type": "Freight LTL hub service center (~278 doors)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.8085,
+              39.6233
+            ],
+            [
+              -77.7998,
+              39.6233
+            ],
+            [
+              -77.7998,
+              39.6272
+            ],
+            [
+              -77.8085,
+              39.6272
+            ],
+            [
+              -77.8085,
+              39.6233
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Hagerstown MD (HGR)",
+        "type": "Freight LTL hub service center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 290,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 400,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 55,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.808,
+              39.6242
+            ],
+            [
+              -77.807,
+              39.6242
+            ],
+            [
+              -77.807,
+              39.6249
+            ],
+            [
+              -77.808,
+              39.6249
+            ],
+            [
+              -77.808,
+              39.6242
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Hagerstown MD (HGR)",
+        "type": "Freight LTL hub service center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.807,
+              39.6238
+            ],
+            [
+              -77.8005,
+              39.6238
+            ],
+            [
+              -77.8005,
+              39.6247
+            ],
+            [
+              -77.807,
+              39.6247
+            ],
+            [
+              -77.807,
+              39.6238
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Hagerstown MD (HGR)",
+        "type": "Freight LTL hub service center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.8065,
+              39.6256
+            ],
+            [
+              -77.8005,
+              39.6256
+            ],
+            [
+              -77.8005,
+              39.6265
+            ],
+            [
+              -77.8065,
+              39.6265
+            ],
+            [
+              -77.8065,
+              39.6256
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Hagerstown MD (HGR)",
+        "type": "Freight LTL hub service center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.807,
+              39.6247
+            ],
+            [
+              -77.8005,
+              39.6247
+            ],
+            [
+              -77.8005,
+              39.6253
+            ],
+            [
+              -77.807,
+              39.6253
+            ],
+            [
+              -77.807,
+              39.6247
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Hagerstown MD (HGR)",
+        "type": "Freight LTL hub service center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.807,
+              39.6252
+            ],
+            [
+              -77.8005,
+              39.6252
+            ],
+            [
+              -77.8005,
+              39.6258
+            ],
+            [
+              -77.807,
+              39.6258
+            ],
+            [
+              -77.807,
+              39.6252
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Hagerstown MD (HGR)",
+        "type": "Freight LTL hub service center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.8073,
+              39.6244
+            ],
+            [
+              -77.8062,
+              39.6244
+            ],
+            [
+              -77.8062,
+              39.6252
+            ],
+            [
+              -77.8073,
+              39.6252
+            ],
+            [
+              -77.8073,
+              39.6244
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Hagerstown MD (HGR)",
+        "type": "Freight LTL hub service center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.342,
+              33.6475
+            ],
+            [
+              -84.3355,
+              33.6475
+            ],
+            [
+              -84.3355,
+              33.6548
+            ],
+            [
+              -84.342,
+              33.6548
+            ],
+            [
+              -84.342,
+              33.6475
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Conley GA (Atlanta, ATL)",
+        "type": "Freight LTL hub service center (~304 doors, one of the largest)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 304,
+          "trailersVisible": 360,
+          "trailerParkingCapacity": 750,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 121,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3402,
+              33.6531
+            ],
+            [
+              -84.3393,
+              33.6531
+            ],
+            [
+              -84.3393,
+              33.6537
+            ],
+            [
+              -84.3402,
+              33.6537
+            ],
+            [
+              -84.3402,
+              33.6531
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Conley GA (Atlanta, ATL)",
+        "type": "Freight LTL hub service center (~304 doors, one of the largest)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3415,
+              33.6478
+            ],
+            [
+              -84.336,
+              33.6478
+            ],
+            [
+              -84.336,
+              33.652
+            ],
+            [
+              -84.3415,
+              33.652
+            ],
+            [
+              -84.3415,
+              33.6478
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Conley GA (Atlanta, ATL)",
+        "type": "Freight LTL hub service center (~304 doors, one of the largest)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3412,
+              33.6516
+            ],
+            [
+              -84.3375,
+              33.6516
+            ],
+            [
+              -84.3375,
+              33.6528
+            ],
+            [
+              -84.3412,
+              33.6528
+            ],
+            [
+              -84.3412,
+              33.6516
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Conley GA (Atlanta, ATL)",
+        "type": "Freight LTL hub service center (~304 doors, one of the largest)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3408,
+              33.652
+            ],
+            [
+              -84.338,
+              33.652
+            ],
+            [
+              -84.338,
+              33.6528
+            ],
+            [
+              -84.3408,
+              33.6528
+            ],
+            [
+              -84.3408,
+              33.652
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Conley GA (Atlanta, ATL)",
+        "type": "Freight LTL hub service center (~304 doors, one of the largest)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.1355,
+              36.2545
+            ],
+            [
+              -93.1285,
+              36.2545
+            ],
+            [
+              -93.1285,
+              36.2605
+            ],
+            [
+              -93.1355,
+              36.2605
+            ],
+            [
+              -93.1355,
+              36.2545
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Harrison AR (HRO)",
+        "type": "Freight LTL hub / former American Freightways HQ campus",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 104,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.1308,
+              36.2552
+            ],
+            [
+              -93.13,
+              36.2552
+            ],
+            [
+              -93.13,
+              36.2558
+            ],
+            [
+              -93.1308,
+              36.2558
+            ],
+            [
+              -93.1308,
+              36.2552
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Harrison AR (HRO)",
+        "type": "Freight LTL hub / former American Freightways HQ campus",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.1352,
+              36.256
+            ],
+            [
+              -93.133,
+              36.256
+            ],
+            [
+              -93.133,
+              36.2592
+            ],
+            [
+              -93.1352,
+              36.2592
+            ],
+            [
+              -93.1352,
+              36.256
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Harrison AR (HRO)",
+        "type": "Freight LTL hub / former American Freightways HQ campus",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.134,
+              36.258
+            ],
+            [
+              -93.1322,
+              36.258
+            ],
+            [
+              -93.1322,
+              36.259
+            ],
+            [
+              -93.134,
+              36.259
+            ],
+            [
+              -93.134,
+              36.258
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Harrison AR (HRO)",
+        "type": "Freight LTL hub / former American Freightways HQ campus",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.134,
+              36.2562
+            ],
+            [
+              -93.1322,
+              36.2562
+            ],
+            [
+              -93.1322,
+              36.2572
+            ],
+            [
+              -93.134,
+              36.2572
+            ],
+            [
+              -93.134,
+              36.2562
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Harrison AR (HRO)",
+        "type": "Freight LTL hub / former American Freightways HQ campus",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.0508,
+              35.0508
+            ],
+            [
+              -90.047,
+              35.0508
+            ],
+            [
+              -90.047,
+              35.0552
+            ],
+            [
+              -90.0508,
+              35.0552
+            ],
+            [
+              -90.0508,
+              35.0508
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Memphis TN",
+        "type": "Freight LTL hub service center (FedEx Freight national HQ market)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 220,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 41.9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.0494,
+              35.0543
+            ],
+            [
+              -90.0487,
+              35.0543
+            ],
+            [
+              -90.0487,
+              35.0547
+            ],
+            [
+              -90.0494,
+              35.0547
+            ],
+            [
+              -90.0494,
+              35.0543
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Memphis TN",
+        "type": "Freight LTL hub service center (FedEx Freight national HQ market)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.0508,
+              35.0508
+            ],
+            [
+              -90.047,
+              35.0508
+            ],
+            [
+              -90.047,
+              35.0535
+            ],
+            [
+              -90.0508,
+              35.0535
+            ],
+            [
+              -90.0508,
+              35.0508
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Memphis TN",
+        "type": "Freight LTL hub service center (FedEx Freight national HQ market)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.05,
+              35.0533
+            ],
+            [
+              -90.0472,
+              35.0533
+            ],
+            [
+              -90.0472,
+              35.0543
+            ],
+            [
+              -90.05,
+              35.0543
+            ],
+            [
+              -90.05,
+              35.0533
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Memphis TN",
+        "type": "Freight LTL hub service center (FedEx Freight national HQ market)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.0492,
+              35.0526
+            ],
+            [
+              -90.047,
+              35.0526
+            ],
+            [
+              -90.047,
+              35.0533
+            ],
+            [
+              -90.0492,
+              35.0533
+            ],
+            [
+              -90.0492,
+              35.0526
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Memphis TN",
+        "type": "Freight LTL hub service center (FedEx Freight national HQ market)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.05,
+              35.0535
+            ],
+            [
+              -90.0482,
+              35.0535
+            ],
+            [
+              -90.0482,
+              35.0542
+            ],
+            [
+              -90.05,
+              35.0542
+            ],
+            [
+              -90.05,
+              35.0535
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Memphis TN",
+        "type": "Freight LTL hub service center (FedEx Freight national HQ market)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8595,
+              41.79
+            ],
+            [
+              -87.854,
+              41.79
+            ],
+            [
+              -87.854,
+              41.7935
+            ],
+            [
+              -87.8595,
+              41.7935
+            ],
+            [
+              -87.8595,
+              41.79
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Hodgkins IL (Chicago)",
+        "type": "Freight LTL hub service center (Chicago metro)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 0,
+          "buildingCount": 4,
+          "siteAreaAcres": 30,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.858,
+              41.7905
+            ],
+            [
+              -87.8562,
+              41.7905
+            ],
+            [
+              -87.8562,
+              41.7922
+            ],
+            [
+              -87.858,
+              41.7922
+            ],
+            [
+              -87.858,
+              41.7905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Hodgkins IL (Chicago)",
+        "type": "Freight LTL hub service center (Chicago metro)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.524,
+              38.833
+            ],
+            [
+              -90.5165,
+              38.833
+            ],
+            [
+              -90.5165,
+              38.8378
+            ],
+            [
+              -90.524,
+              38.8378
+            ],
+            [
+              -90.524,
+              38.833
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Earth City MO (St. Louis, STL)",
+        "type": "Freight LTL hub service center (~240 doors)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 240,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 86,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.5228,
+              38.8334
+            ],
+            [
+              -90.5218,
+              38.8334
+            ],
+            [
+              -90.5218,
+              38.834
+            ],
+            [
+              -90.5228,
+              38.834
+            ],
+            [
+              -90.5228,
+              38.8334
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Earth City MO (St. Louis, STL)",
+        "type": "Freight LTL hub service center (~240 doors)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.52,
+              38.8345
+            ],
+            [
+              -90.5168,
+              38.8345
+            ],
+            [
+              -90.5168,
+              38.8375
+            ],
+            [
+              -90.52,
+              38.8375
+            ],
+            [
+              -90.52,
+              38.8345
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Earth City MO (St. Louis, STL)",
+        "type": "Freight LTL hub service center (~240 doors)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.524,
+              38.8358
+            ],
+            [
+              -90.5215,
+              38.8358
+            ],
+            [
+              -90.5215,
+              38.8375
+            ],
+            [
+              -90.524,
+              38.8375
+            ],
+            [
+              -90.524,
+              38.8358
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Earth City MO (St. Louis, STL)",
+        "type": "Freight LTL hub service center (~240 doors)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.524,
+              38.8344
+            ],
+            [
+              -90.518,
+              38.8344
+            ],
+            [
+              -90.518,
+              38.8354
+            ],
+            [
+              -90.524,
+              38.8354
+            ],
+            [
+              -90.524,
+              38.8344
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Earth City MO (St. Louis, STL)",
+        "type": "Freight LTL hub service center (~240 doors)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.5232,
+              38.834
+            ],
+            [
+              -90.521,
+              38.834
+            ],
+            [
+              -90.521,
+              38.8346
+            ],
+            [
+              -90.5232,
+              38.8346
+            ],
+            [
+              -90.5232,
+              38.834
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Earth City MO (St. Louis, STL)",
+        "type": "Freight LTL hub service center (~240 doors)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3395,
+              32.8362
+            ],
+            [
+              -97.33,
+              32.8362
+            ],
+            [
+              -97.33,
+              32.8398
+            ],
+            [
+              -97.3395,
+              32.8398
+            ],
+            [
+              -97.3395,
+              32.8362
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Dallas/Fort Worth TX",
+        "type": "Freight LTL hub service center (DFW metro)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 250,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 70,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3318,
+              32.8384
+            ],
+            [
+              -97.3308,
+              32.8384
+            ],
+            [
+              -97.3308,
+              32.839
+            ],
+            [
+              -97.3318,
+              32.839
+            ],
+            [
+              -97.3318,
+              32.8384
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Dallas/Fort Worth TX",
+        "type": "Freight LTL hub service center (DFW metro)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3392,
+              32.8366
+            ],
+            [
+              -97.3305,
+              32.8366
+            ],
+            [
+              -97.3305,
+              32.8384
+            ],
+            [
+              -97.3392,
+              32.8384
+            ],
+            [
+              -97.3392,
+              32.8366
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Dallas/Fort Worth TX",
+        "type": "Freight LTL hub service center (DFW metro)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3392,
+              32.8378
+            ],
+            [
+              -97.3305,
+              32.8378
+            ],
+            [
+              -97.3305,
+              32.8388
+            ],
+            [
+              -97.3392,
+              32.8388
+            ],
+            [
+              -97.3392,
+              32.8378
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Dallas/Fort Worth TX",
+        "type": "Freight LTL hub service center (DFW metro)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2258,
+              37.9098
+            ],
+            [
+              -121.2208,
+              37.9098
+            ],
+            [
+              -121.2208,
+              37.9135
+            ],
+            [
+              -121.2258,
+              37.9135
+            ],
+            [
+              -121.2258,
+              37.9098
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Stockton CA",
+        "type": "Freight LTL hub service center (Northern California)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 280,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 40,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2252,
+              37.9104
+            ],
+            [
+              -121.2244,
+              37.9104
+            ],
+            [
+              -121.2244,
+              37.9109
+            ],
+            [
+              -121.2252,
+              37.9109
+            ],
+            [
+              -121.2252,
+              37.9104
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Stockton CA",
+        "type": "Freight LTL hub service center (Northern California)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.225,
+              37.911
+            ],
+            [
+              -121.2212,
+              37.911
+            ],
+            [
+              -121.2212,
+              37.9132
+            ],
+            [
+              -121.225,
+              37.9132
+            ],
+            [
+              -121.225,
+              37.911
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Stockton CA",
+        "type": "Freight LTL hub service center (Northern California)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2248,
+              37.9112
+            ],
+            [
+              -121.2222,
+              37.9112
+            ],
+            [
+              -121.2222,
+              37.9124
+            ],
+            [
+              -121.2248,
+              37.9124
+            ],
+            [
+              -121.2248,
+              37.9112
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "fedex",
+        "name": "FedEx Freight Hub - Stockton CA",
+        "type": "Freight LTL hub service center (Northern California)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    }
+  ]
+}

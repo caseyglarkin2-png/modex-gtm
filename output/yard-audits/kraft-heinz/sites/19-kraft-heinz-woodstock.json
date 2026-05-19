@@ -1,0 +1,22 @@
+{
+  "name": "Kraft Heinz - Woodstock",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "Street View frame faces an overgrown field, not the truck entrance; satellite shows an open driveway from the country road to the dock apron with no visible barrier or checkpoint structure. Calling no gate.",
+    "drivewayLong": "Deep paved apron between the road and the south dock face gives ample stacking room.",
+    "urbanRural": "Edge-of-town site on a rural road bordered by farmland.",
+    "dockDoors": "Regular rhythm of bays with trailers backed in along the south face."
+  }
+}

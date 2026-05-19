@@ -1,0 +1,53 @@
+{
+  "name": "Pactiv Evergreen - Corsicana TX Plant",
+  "type": "Manufacturing Plant (Foodservice)",
+  "coords": { "lat": 32.09865, "lng": -96.42055 },
+  "geofences": {
+    "perimeter": { "south": 32.09590, "west": -96.42330, "north": 32.10030, "east": -96.41780 },
+    "truckGate": { "south": 32.09990, "west": -96.42130, "north": 32.10030, "east": -96.42050 },
+    "dropYards": [
+      { "south": 32.09640, "west": -96.42320, "north": 32.09930, "east": -96.42090 }
+    ],
+    "dockAprons": [
+      { "south": 32.09700, "west": -96.42130, "north": 32.09950, "east": -96.42010 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 28.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.09865,-96.42055,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "guardShack", "remoteGs", "siteAreaAcres", "buildingCount"],
+  "fieldNotes": {
+    "location": "Roster geocode (32.075885,-96.397359, RANGE_INTERPOLATED) was wrong — it placed the point ~5 km SE in open woodland/farmland on the SH-31 bypass (confirmed empty by satellite z14-z17 and Street View, captured 2024-02). Address is '4501 E. Business State Highway 31' (Business 31, not the bypass). The Pactiv plant was positively re-located at 32.0987,-96.4206 on the north side of the E State Highway 31 service road: a fully fenced plastics manufacturing complex with a long L-shaped white metal manufacturing building, a row of resin storage silos along the frontage (diagnostic of a plastics/thermoforming plant — confirmed in Street View 2024-02), a brick office building, and an extensive trailer drop yard. Plant built ~1999, ~500 employees, makes cups/lids/to-go containers/breakfast trays (corsicanadailysun, Corsicana Chamber).",
+    "truckGate": "Property is fully enclosed by chain-link perimeter fence (visible in satellite and behind the highway hedge in Street View). A single access driveway connects the yard to the E SH-31 service road at the NE corner — a controlled pinch-point. truckGate = true.",
+    "guardShack": "No staffed guard booth structure is visible at the entrance in any satellite view (z18-z20). Entrance is a fenced driveway opening. Street View of the entrance itself is obscured by a tall hedge along the highway, so a small booth cannot be 100% excluded — listed uncertain. Best read: no guard shack.",
+    "remoteGs": "Gate present, no visible guard booth -> remoteGs = true (kiosk / call-box / app check-in implied). Medium confidence given hedge obstruction.",
+    "dropYard": "Large dedicated trailer-storage lot on the west/southwest side of the manufacturing building — dozens of trailers parked in organized rows (visible at z18-z20). Clear dedicated drop yard.",
+    "dropArea": "50+ — counted roughly 80-100 parked trailers/storage units across the west yard rows in z18/z19 imagery.",
+    "dockDoorCount": "Dock doors run along the south/southwest face of the manufacturing building facing the yard; estimated ~20-25 doors. Low-confidence count — roof shadow and trailer occlusion. Banded 10-25.",
+    "drivewayLong": "The entrance driveway runs a long distance from the SH-31 service road across a deep paved apron into the yard — ample stacking room for 3+ trucks.",
+    "fastLaneOpportunity": "Wide unfenced paved aprons at the entrance and inside the yard; room to add bypass lanes.",
+    "buildingCount": "Main manufacturing building plus a separate brick office building and at least one ancillary structure; ~3. The dense piping/tank complex immediately to the southwest is a SEPARATE property (a legacy Corsicana oil/asphalt terminal), not part of the Pactiv site.",
+    "urbanRural": "East edge of Corsicana along the SH-31 corridor; open farmland and scattered industrial parcels around. Edge-of-town / rural."
+  },
+  "method": "deep-audit"
+}

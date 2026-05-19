@@ -1,0 +1,61 @@
+{
+  "name": "American Honda - Troy Parts Distribution Center - Troy OH",
+  "type": "Parts Distribution Center",
+  "coords": { "lat": 40.048500, "lng": -84.237200 },
+  "geofences": {
+    "perimeter": { "south": 40.04550, "west": -84.24150, "north": 40.05120, "east": -84.23500 },
+    "truckGate": { "south": 40.04660, "west": -84.23960, "north": 40.04720, "east": -84.23880 },
+    "dropYards": [
+      { "south": 40.04780, "west": -84.24000, "north": 40.05080, "east": -84.23860 },
+      { "south": 40.04640, "west": -84.24080, "north": 40.04760, "east": -84.23920 },
+      { "south": 40.04830, "west": -84.23720, "north": 40.05080, "east": -84.23560 }
+    ],
+    "dockAprons": [
+      { "south": 40.05040, "west": -84.23800, "north": 40.05120, "east": -84.23560 },
+      { "south": 40.04720, "west": -84.23620, "north": 40.05040, "east": -84.23540 }
+    ],
+    "staging": { "south": 40.04640, "west": -84.24000, "north": 40.04920, "east": -84.23880 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 80.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.048500,-84.237200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "entryLanes", "exitLanes", "dockDoorCount", "multipleFacilities"],
+  "fieldNotes": {
+    "siteIdentity": "American Honda's Troy Parts Distribution Center (PDC) — a 534,000 sq ft parts DC operating in Troy since 1986. It is the northern of two adjacent large Honda warehouses off Commerce Center Blvd; the southern building is the 2007 Midwest Consolidation Center (MCC, roster idx 16, at 151 Commerce Center Blvd). The roster idx-15 geocode landed in a residential area; the facility was re-located via satellite and web research. Building center locked at ~40.0485, -84.2372. The PDC/MCC assignment (PDC = north building) follows from the MCC roster coordinates pointing to the southern building and the MCC being described as built adjacent to the older PDC.",
+    "truckGate": "The PDC campus is fenced with a controlled entrance — a Honda monument sign and flag at the entry road off the public road, and a small guard-booth-footprint structure beside the internal access road. Classified true (medium confidence — no Street View inside the gate to confirm a barrier arm).",
+    "guardShack": "A small building consistent with a staffed guard booth sits beside the entrance access road. Medium confidence.",
+    "remoteGs": "False — a guard-booth structure appears present.",
+    "preGateStaging": "A large paved staging/parking lot sits between the public road and the building, usable for truck holding.",
+    "postGateStaging": "Ample paved internal aprons and lanes between the gate and the dock banks.",
+    "drivewayLong": "A long internal access road runs from the entrance through the campus to the docks — easily holds 3+ trucks.",
+    "dockDoors": "50+ dock doors estimated across the north and east building faces, with many trailers backed in. Honest overhead estimate.",
+    "dropArea": "Extensive trailer drop yards on the west and east sides holding well over 50 Honda trailers (visible in dense colored rows) without tractors.",
+    "dropYard": "Multiple dedicated trailer-storage lots, clearly separate from active dock staging.",
+    "multipleFacilities": "The PDC sits in a two-building Honda campus with the adjacent MCC; counted as a multi-facility campus, though the PDC itself is a single building.",
+    "fastLaneOpportunity": "Large empty paved staging lots and wide aprons leave clear room to add a bypass/express lane.",
+    "shipRcvSeparate": "Dock activity appears consolidated on the north/east faces; not clearly split into separate ship vs receive clusters — left false.",
+    "railServed": "No rail spur into the property.",
+    "urbanRural": "Rural — edge-of-town setting along the I-75 corridor with farmland to the west and a water tower nearby; small-town industrial, so classified Rural.",
+    "buildingCount": "1 building for the PDC itself."
+  },
+  "method": "deep-audit"
+}

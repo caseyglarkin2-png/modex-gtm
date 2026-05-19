@@ -1,0 +1,48 @@
+{
+  "name": "Coca-Cola UNITED - New Orleans Production Plant, LA",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 29.94680, "lng": -90.19150 },
+  "geofences": {
+    "perimeter": { "south": 29.94500, "west": -90.19320, "north": 29.94850, "east": -90.18950 },
+    "truckGate": { "south": 29.94560, "west": -90.19310, "north": 29.94620, "east": -90.19230 },
+    "dropYards": [
+      { "south": 29.94500, "west": -90.19180, "north": 29.94600, "east": -90.19050 }
+    ],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0, "trailersVisible": 12, "trailerParkingCapacity": 25,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 12.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.94680,-90.19150,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "multipleFacilities", "scale",
+    "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "location": "EXACT BUILDING NOT POSITIVELY CONFIRMED. Roster address (12970 I-10 Service Rd, New Orleans East) and roster coords (30.0524,-89.9520) are wrong - that point is a residential/stadium area with no industrial plant. Web research is consistent: the Coca-Cola UNITED New Orleans production plant ('New Orleans Production Center', operated by Crescent City Coca-Cola Bottling Company UNITED) is at 5601 Citrus Blvd, Harahan/Elmwood LA 70123 - the largest Coca-Cola plant in Louisiana, described as a 12-story tower spanning a football field, in the Elmwood industrial park.",
+    "search": "Probed the Elmwood industrial park extensively (z15-z20) and street-viewed Citrus Blvd (the Mississippi River levee road) and many internal streets. Could not isolate the 12-story tower - the park has hundreds of similar large warehouses and the tower (likely an internal automated high-bay) is not clearly distinguishable in near-nadir satellite imagery. The strongest positive signal found was a Coca-Cola-branded 'muster station' assembly-point sign at the corner near 29.9461,-90.1928, beside a blue-privacy-fenced industrial facility with a trailer yard.",
+    "estimate": "The coords and geofence here are a BEST ESTIMATE centered on the building cluster near that Coca-Cola muster-station sign. All classification fields are low-confidence inferences from generic Elmwood-industrial-park layout and are listed in uncertainFields.",
+    "urbanRural": "Elmwood is a dense industrial park inside the New Orleans metro - Urban is confident regardless of exact building.",
+    "railServed": "No rail spur evident in the area probed.",
+    "recommendation": "Flag for human review - needs a person to confirm the exact 5601 Citrus Blvd building footprint before classification can be trusted."
+  },
+  "method": "deep-audit"
+}

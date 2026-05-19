@@ -1,0 +1,56 @@
+{
+  "name": "South Side Soapbox Plant (method / Ecover) - Chicago IL",
+  "type": "Manufacturing Plant + Distribution (method / Ecover)",
+  "coords": { "lat": 41.69700, "lng": -87.60160 },
+  "geofences": {
+    "perimeter": { "south": 41.69540, "west": -87.60320, "north": 41.69870, "east": -87.59980 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 41.69770, "west": -87.60240, "north": 41.69870, "east": -87.60000 }
+    ],
+    "dockAprons": [
+      { "south": 41.69780, "west": -87.60260, "north": 41.69850, "east": -87.60080 }
+    ],
+    "staging": { "south": 41.69780, "west": -87.60110, "north": 41.69850, "east": -87.59990 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 24,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 22.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.697,-87.6016,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "railServed"],
+  "fieldNotes": {
+    "truckGate": "No barrier arm, sliding gate or checkpoint pinch-point observed. The truck driveway runs open from the public road into the dock yard; the building fronts open paved drives with no controlled entry. truckGate false.",
+    "guardShack": "No guard booth anywhere on the site. False.",
+    "remoteGs": "False — there is no gate, so no remote check-in implied.",
+    "postGateStaging": "Large paved truck yard north-east of the building provides interior holding space before the docks.",
+    "drivewayLong": "Open NE truck yard is deep — easily holds 3+ trucks staged.",
+    "fastLaneOpportunity": "Abundant unused paved width in the NE truck yard; ample room for any lane configuration.",
+    "dockDoors": "Truck docks on the NE building face — a modest recessed dock bank with trailers backed in. ~16 doors estimated, banded 10-25.",
+    "dropArea": "Rows of parked trailers in the NE truck yard (some shared with adjacent Pullman-development buildings); banded 10-25 for the method-attributable portion.",
+    "shipRcvSeparate": "Single dock bank on one building face; shipping and receiving not physically separated.",
+    "multipleFacilities": "One building (the 150,000 sq ft soap factory, which incorporates the Gotham Greens rooftop greenhouse). buildingCount 1.",
+    "railServed": "A rail line runs along the west edge of the property but it is a through line / neighbor siding, not a spur into the method property. railServed false (flagged uncertain).",
+    "urbanRural": "Inside the City of Chicago (Pullman neighborhood); Urban despite the on-site restored prairie.",
+    "siteAreaAcres": "Per published facility data the site is 22 acres, of which only ~3.5 acres are developed (building + pavement) and the rest is restored natural prairie. Perimeter box approximates the developed/usable portion.",
+    "scale": "No truck scale observed."
+  },
+  "method": "deep-audit"
+}

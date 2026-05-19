@@ -1,0 +1,5520 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.9725,
+              43.6708
+            ],
+            [
+              -92.9625,
+              43.6708
+            ],
+            [
+              -92.9625,
+              43.6808
+            ],
+            [
+              -92.9725,
+              43.6808
+            ],
+            [
+              -92.9725,
+              43.6708
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Flagship Austin Plant - Austin MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 2,
+          "buildingCount": 12,
+          "siteAreaAcres": 120,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.967,
+              43.6737
+            ],
+            [
+              -92.9662,
+              43.6737
+            ],
+            [
+              -92.9662,
+              43.6742
+            ],
+            [
+              -92.967,
+              43.6742
+            ],
+            [
+              -92.967,
+              43.6737
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Flagship Austin Plant - Austin MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.9718,
+              43.6718
+            ],
+            [
+              -92.969,
+              43.6718
+            ],
+            [
+              -92.969,
+              43.6762
+            ],
+            [
+              -92.9718,
+              43.6762
+            ],
+            [
+              -92.9718,
+              43.6718
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Flagship Austin Plant - Austin MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.9682,
+              43.6748
+            ],
+            [
+              -92.9668,
+              43.6748
+            ],
+            [
+              -92.9668,
+              43.6762
+            ],
+            [
+              -92.9682,
+              43.6762
+            ],
+            [
+              -92.9682,
+              43.6748
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Flagship Austin Plant - Austin MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.9681,
+              43.6749
+            ],
+            [
+              -92.967,
+              43.6749
+            ],
+            [
+              -92.967,
+              43.6762
+            ],
+            [
+              -92.9681,
+              43.6762
+            ],
+            [
+              -92.9681,
+              43.6749
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Flagship Austin Plant - Austin MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.9668,
+              43.6738
+            ],
+            [
+              -92.9656,
+              43.6738
+            ],
+            [
+              -92.9656,
+              43.6748
+            ],
+            [
+              -92.9668,
+              43.6748
+            ],
+            [
+              -92.9668,
+              43.6738
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Flagship Austin Plant - Austin MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.9672,
+              43.673
+            ],
+            [
+              -92.966,
+              43.673
+            ],
+            [
+              -92.966,
+              43.674
+            ],
+            [
+              -92.9672,
+              43.674
+            ],
+            [
+              -92.9672,
+              43.673
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Flagship Austin Plant - Austin MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.2256,
+              43.0774
+            ],
+            [
+              -94.2215,
+              43.0774
+            ],
+            [
+              -94.2215,
+              43.0813
+            ],
+            [
+              -94.2256,
+              43.0813
+            ],
+            [
+              -94.2256,
+              43.0774
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Algona Plant - Algona IA",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 30,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.2244,
+              43.0805
+            ],
+            [
+              -94.2238,
+              43.0805
+            ],
+            [
+              -94.2238,
+              43.0811
+            ],
+            [
+              -94.2244,
+              43.0811
+            ],
+            [
+              -94.2244,
+              43.0805
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Algona Plant - Algona IA",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.2229,
+              43.0796
+            ],
+            [
+              -94.2218,
+              43.0796
+            ],
+            [
+              -94.2218,
+              43.0803
+            ],
+            [
+              -94.2229,
+              43.0803
+            ],
+            [
+              -94.2229,
+              43.0796
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Algona Plant - Algona IA",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.2225,
+              43.0788
+            ],
+            [
+              -94.2216,
+              43.0788
+            ],
+            [
+              -94.2216,
+              43.0797
+            ],
+            [
+              -94.2225,
+              43.0797
+            ],
+            [
+              -94.2225,
+              43.0788
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Algona Plant - Algona IA",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.7687,
+              42.4862
+            ],
+            [
+              -90.7634,
+              42.4862
+            ],
+            [
+              -90.7634,
+              42.4895
+            ],
+            [
+              -90.7687,
+              42.4895
+            ],
+            [
+              -90.7687,
+              42.4862
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Progressive Processing - Dubuque IA",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 37,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.7659,
+              42.4865
+            ],
+            [
+              -90.7651,
+              42.4865
+            ],
+            [
+              -90.7651,
+              42.487
+            ],
+            [
+              -90.7659,
+              42.487
+            ],
+            [
+              -90.7659,
+              42.4865
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Progressive Processing - Dubuque IA",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.768,
+              42.487
+            ],
+            [
+              -90.7669,
+              42.487
+            ],
+            [
+              -90.7669,
+              42.488
+            ],
+            [
+              -90.768,
+              42.488
+            ],
+            [
+              -90.768,
+              42.487
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Progressive Processing - Dubuque IA",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.7672,
+              42.4868
+            ],
+            [
+              -90.7659,
+              42.4868
+            ],
+            [
+              -90.7659,
+              42.4872
+            ],
+            [
+              -90.7672,
+              42.4872
+            ],
+            [
+              -90.7672,
+              42.4868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Progressive Processing - Dubuque IA",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.7676,
+              42.4868
+            ],
+            [
+              -90.7656,
+              42.4868
+            ],
+            [
+              -90.7656,
+              42.4873
+            ],
+            [
+              -90.7676,
+              42.4873
+            ],
+            [
+              -90.7676,
+              42.4868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Progressive Processing - Dubuque IA",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.0635,
+              41.3155
+            ],
+            [
+              -93.0585,
+              41.3155
+            ],
+            [
+              -93.0585,
+              41.3192
+            ],
+            [
+              -93.0635,
+              41.3192
+            ],
+            [
+              -93.0635,
+              41.3155
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Knoxville Plant - Knoxville IA",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 42,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.0627,
+              41.3168
+            ],
+            [
+              -93.062,
+              41.3168
+            ],
+            [
+              -93.062,
+              41.3172
+            ],
+            [
+              -93.0627,
+              41.3172
+            ],
+            [
+              -93.0627,
+              41.3168
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Knoxville Plant - Knoxville IA",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.0625,
+              41.3157
+            ],
+            [
+              -93.06,
+              41.3157
+            ],
+            [
+              -93.06,
+              41.3164
+            ],
+            [
+              -93.0625,
+              41.3164
+            ],
+            [
+              -93.0625,
+              41.3157
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Knoxville Plant - Knoxville IA",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.0615,
+              41.317
+            ],
+            [
+              -93.0601,
+              41.317
+            ],
+            [
+              -93.0601,
+              41.3176
+            ],
+            [
+              -93.0615,
+              41.3176
+            ],
+            [
+              -93.0615,
+              41.317
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Knoxville Plant - Knoxville IA",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.791,
+              41.021
+            ],
+            [
+              -93.782,
+              41.021
+            ],
+            [
+              -93.782,
+              41.0265
+            ],
+            [
+              -93.791,
+              41.0265
+            ],
+            [
+              -93.791,
+              41.021
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Osceola Food - Osceola IA",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 140,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 90,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.7876,
+              41.0218
+            ],
+            [
+              -93.7868,
+              41.0218
+            ],
+            [
+              -93.7868,
+              41.0224
+            ],
+            [
+              -93.7876,
+              41.0224
+            ],
+            [
+              -93.7876,
+              41.0218
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Osceola Food - Osceola IA",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.7858,
+              41.0213
+            ],
+            [
+              -93.7834,
+              41.0213
+            ],
+            [
+              -93.7834,
+              41.023
+            ],
+            [
+              -93.7858,
+              41.023
+            ],
+            [
+              -93.7858,
+              41.0213
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Osceola Food - Osceola IA",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.7876,
+              41.0248
+            ],
+            [
+              -93.7856,
+              41.0248
+            ],
+            [
+              -93.7856,
+              41.0262
+            ],
+            [
+              -93.7876,
+              41.0262
+            ],
+            [
+              -93.7876,
+              41.0248
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Osceola Food - Osceola IA",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.7908,
+              41.0234
+            ],
+            [
+              -93.7893,
+              41.0234
+            ],
+            [
+              -93.7893,
+              41.0243
+            ],
+            [
+              -93.7908,
+              41.0243
+            ],
+            [
+              -93.7908,
+              41.0234
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Osceola Food - Osceola IA",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.7858,
+              41.0225
+            ],
+            [
+              -93.7834,
+              41.0225
+            ],
+            [
+              -93.7834,
+              41.0232
+            ],
+            [
+              -93.7858,
+              41.0232
+            ],
+            [
+              -93.7858,
+              41.0225
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Osceola Food - Osceola IA",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.7876,
+              41.022
+            ],
+            [
+              -93.7864,
+              41.022
+            ],
+            [
+              -93.7864,
+              41.023
+            ],
+            [
+              -93.7876,
+              41.023
+            ],
+            [
+              -93.7876,
+              41.022
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Osceola Food - Osceola IA",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.4418,
+              42.0073
+            ],
+            [
+              -93.4365,
+              42.0073
+            ],
+            [
+              -93.4365,
+              42.0107
+            ],
+            [
+              -93.4418,
+              42.0107
+            ],
+            [
+              -93.4418,
+              42.0073
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Burke Corp. - Nevada IA",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 41,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.4415,
+              42.01
+            ],
+            [
+              -93.4409,
+              42.01
+            ],
+            [
+              -93.4409,
+              42.01055
+            ],
+            [
+              -93.4415,
+              42.01055
+            ],
+            [
+              -93.4415,
+              42.01
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Burke Corp. - Nevada IA",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.4372,
+              42.00855
+            ],
+            [
+              -93.4366,
+              42.00855
+            ],
+            [
+              -93.4366,
+              42.0091
+            ],
+            [
+              -93.4372,
+              42.0091
+            ],
+            [
+              -93.4372,
+              42.00855
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Burke Corp. - Nevada IA",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.4406,
+              42.01
+            ],
+            [
+              -93.439,
+              42.01
+            ],
+            [
+              -93.439,
+              42.0103
+            ],
+            [
+              -93.4406,
+              42.0103
+            ],
+            [
+              -93.4406,
+              42.01
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Burke Corp. - Nevada IA",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.4385,
+              42.0079
+            ],
+            [
+              -93.4374,
+              42.0079
+            ],
+            [
+              -93.4374,
+              42.0084
+            ],
+            [
+              -93.4385,
+              42.0084
+            ],
+            [
+              -93.4385,
+              42.0079
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Burke Corp. - Nevada IA",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3272,
+              37.7331
+            ],
+            [
+              -97.324,
+              37.7331
+            ],
+            [
+              -97.324,
+              37.7371
+            ],
+            [
+              -97.3272,
+              37.7371
+            ],
+            [
+              -97.3272,
+              37.7331
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Dold Foods - Wichita KS",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 38,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 31,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3249,
+              37.734
+            ],
+            [
+              -97.3242,
+              37.734
+            ],
+            [
+              -97.3242,
+              37.7345
+            ],
+            [
+              -97.3249,
+              37.7345
+            ],
+            [
+              -97.3249,
+              37.734
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Dold Foods - Wichita KS",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.32685,
+              37.7351
+            ],
+            [
+              -97.3263,
+              37.7351
+            ],
+            [
+              -97.3263,
+              37.7362
+            ],
+            [
+              -97.32685,
+              37.7362
+            ],
+            [
+              -97.32685,
+              37.7351
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Dold Foods - Wichita KS",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.32685,
+              37.7334
+            ],
+            [
+              -97.3263,
+              37.7334
+            ],
+            [
+              -97.3263,
+              37.7342
+            ],
+            [
+              -97.32685,
+              37.7342
+            ],
+            [
+              -97.32685,
+              37.7334
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Dold Foods - Wichita KS",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3261,
+              37.7353
+            ],
+            [
+              -97.3256,
+              37.7353
+            ],
+            [
+              -97.3256,
+              37.736
+            ],
+            [
+              -97.3261,
+              37.736
+            ],
+            [
+              -97.3261,
+              37.7353
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Dold Foods - Wichita KS",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.326,
+              37.7359
+            ],
+            [
+              -97.3254,
+              37.7359
+            ],
+            [
+              -97.3254,
+              37.7364
+            ],
+            [
+              -97.326,
+              37.7364
+            ],
+            [
+              -97.326,
+              37.7359
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Dold Foods - Wichita KS",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3248,
+              37.734
+            ],
+            [
+              -97.3242,
+              37.734
+            ],
+            [
+              -97.3242,
+              37.7347
+            ],
+            [
+              -97.3248,
+              37.7347
+            ],
+            [
+              -97.3248,
+              37.734
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Dold Foods - Wichita KS",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.2892,
+              39.01
+            ],
+            [
+              -96.2873,
+              39.01
+            ],
+            [
+              -96.2873,
+              39.0119
+            ],
+            [
+              -96.2892,
+              39.0119
+            ],
+            [
+              -96.2892,
+              39.01
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Alma Foods - Alma KS",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 7,
+          "trailersVisible": 11,
+          "trailerParkingCapacity": 14,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 8.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.2885,
+              39.0101
+            ],
+            [
+              -96.2879,
+              39.0101
+            ],
+            [
+              -96.2879,
+              39.0107
+            ],
+            [
+              -96.2885,
+              39.0107
+            ],
+            [
+              -96.2885,
+              39.0101
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Alma Foods - Alma KS",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.2884,
+              39.01075
+            ],
+            [
+              -96.2879,
+              39.01075
+            ],
+            [
+              -96.2879,
+              39.0111
+            ],
+            [
+              -96.2884,
+              39.0111
+            ],
+            [
+              -96.2884,
+              39.01075
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Alma Foods - Alma KS",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.2515,
+              33.8385
+            ],
+            [
+              -84.2493,
+              33.8385
+            ],
+            [
+              -84.2493,
+              33.8408
+            ],
+            [
+              -84.2515,
+              33.8408
+            ],
+            [
+              -84.2515,
+              33.8385
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Atlanta Plant - Tucker GA",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 32,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 12.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.2509,
+              33.84015
+            ],
+            [
+              -84.2502,
+              33.84015
+            ],
+            [
+              -84.2502,
+              33.84055
+            ],
+            [
+              -84.2509,
+              33.84055
+            ],
+            [
+              -84.2509,
+              33.84015
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Atlanta Plant - Tucker GA",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.2497,
+              33.8387
+            ],
+            [
+              -84.2493,
+              33.8387
+            ],
+            [
+              -84.2493,
+              33.8399
+            ],
+            [
+              -84.2497,
+              33.8399
+            ],
+            [
+              -84.2497,
+              33.8387
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Atlanta Plant - Tucker GA",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.2501,
+              33.8387
+            ],
+            [
+              -84.2496,
+              33.8387
+            ],
+            [
+              -84.2496,
+              33.8399
+            ],
+            [
+              -84.2501,
+              33.8399
+            ],
+            [
+              -84.2501,
+              33.8387
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Atlanta Plant - Tucker GA",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2718,
+              41.8036
+            ],
+            [
+              -88.27,
+              41.8036
+            ],
+            [
+              -88.27,
+              41.8061
+            ],
+            [
+              -88.2718,
+              41.8061
+            ],
+            [
+              -88.2718,
+              41.8036
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Creative Contract Packaging - Aurora IL",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 10.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2704,
+              41.8055
+            ],
+            [
+              -88.27,
+              41.8055
+            ],
+            [
+              -88.27,
+              41.806
+            ],
+            [
+              -88.2704,
+              41.806
+            ],
+            [
+              -88.2704,
+              41.8055
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Creative Contract Packaging - Aurora IL",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2712,
+              41.80385
+            ],
+            [
+              -88.2701,
+              41.80385
+            ],
+            [
+              -88.2701,
+              41.8044
+            ],
+            [
+              -88.2712,
+              41.8044
+            ],
+            [
+              -88.2712,
+              41.80385
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Creative Contract Packaging - Aurora IL",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2705,
+              41.8044
+            ],
+            [
+              -88.2701,
+              41.8044
+            ],
+            [
+              -88.2701,
+              41.8056
+            ],
+            [
+              -88.2705,
+              41.8056
+            ],
+            [
+              -88.2705,
+              41.8044
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Creative Contract Packaging - Aurora IL",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.27085,
+              41.804
+            ],
+            [
+              -88.2705,
+              41.804
+            ],
+            [
+              -88.2705,
+              41.8052
+            ],
+            [
+              -88.27085,
+              41.8052
+            ],
+            [
+              -88.27085,
+              41.804
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Creative Contract Packaging - Aurora IL",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.839367,
+              41.797868
+            ],
+            [
+              -87.836233,
+              41.797868
+            ],
+            [
+              -87.836233,
+              41.800832
+            ],
+            [
+              -87.839367,
+              41.800832
+            ],
+            [
+              -87.839367,
+              41.797868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Fontanini Foods - McCook IL",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 16,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 21.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.838624,
+              41.80072
+            ],
+            [
+              -87.836576,
+              41.80072
+            ],
+            [
+              -87.836576,
+              41.80108
+            ],
+            [
+              -87.838624,
+              41.80108
+            ],
+            [
+              -87.838624,
+              41.80072
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Fontanini Foods - McCook IL",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.839562,
+              41.798792
+            ],
+            [
+              -87.838838,
+              41.798792
+            ],
+            [
+              -87.838838,
+              41.800408
+            ],
+            [
+              -87.839562,
+              41.800408
+            ],
+            [
+              -87.839562,
+              41.798792
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Fontanini Foods - McCook IL",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.839404,
+              41.798596
+            ],
+            [
+              -87.837596,
+              41.798596
+            ],
+            [
+              -87.837596,
+              41.799404
+            ],
+            [
+              -87.839404,
+              41.799404
+            ],
+            [
+              -87.839404,
+              41.798596
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Fontanini Foods - McCook IL",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.071792,
+              41.919467
+            ],
+            [
+              -89.067808,
+              41.919467
+            ],
+            [
+              -89.067808,
+              41.921533
+            ],
+            [
+              -89.071792,
+              41.921533
+            ],
+            [
+              -89.071792,
+              41.919467
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Rochelle Foods - Rochelle IL",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 2,
+          "trailerParkingCapacity": 8,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 18.8,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.070924,
+              41.919786
+            ],
+            [
+              -89.069476,
+              41.919786
+            ],
+            [
+              -89.069476,
+              41.920414
+            ],
+            [
+              -89.070924,
+              41.920414
+            ],
+            [
+              -89.070924,
+              41.919786
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Rochelle Foods - Rochelle IL",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.127698,
+              41.149485
+            ],
+            [
+              -96.120302,
+              41.149485
+            ],
+            [
+              -96.120302,
+              41.154515
+            ],
+            [
+              -96.127698,
+              41.154515
+            ],
+            [
+              -96.127698,
+              41.149485
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Papillion Foods - Papillion NE",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 85.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.123374,
+              41.150471
+            ],
+            [
+              -96.121226,
+              41.150471
+            ],
+            [
+              -96.121226,
+              41.151729
+            ],
+            [
+              -96.123374,
+              41.151729
+            ],
+            [
+              -96.123374,
+              41.150471
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Papillion Foods - Papillion NE",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.126051,
+              41.150031
+            ],
+            [
+              -96.122949,
+              41.150031
+            ],
+            [
+              -96.122949,
+              41.150569
+            ],
+            [
+              -96.126051,
+              41.150569
+            ],
+            [
+              -96.126051,
+              41.150031
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Papillion Foods - Papillion NE",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.187032,
+              34.705924
+            ],
+            [
+              -92.181568,
+              34.705924
+            ],
+            [
+              -92.181568,
+              34.709876
+            ],
+            [
+              -92.187032,
+              34.709876
+            ],
+            [
+              -92.187032,
+              34.705924
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Skippy Foods - Little Rock AR",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 54.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.182037,
+              34.707041
+            ],
+            [
+              -92.181163,
+              34.707041
+            ],
+            [
+              -92.181163,
+              34.707759
+            ],
+            [
+              -92.182037,
+              34.707759
+            ],
+            [
+              -92.182037,
+              34.707041
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Skippy Foods - Little Rock AR",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.185839,
+              34.708896
+            ],
+            [
+              -92.182561,
+              34.708896
+            ],
+            [
+              -92.182561,
+              34.709704
+            ],
+            [
+              -92.185839,
+              34.709704
+            ],
+            [
+              -92.185839,
+              34.708896
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Skippy Foods - Little Rock AR",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.183292,
+              34.706992
+            ],
+            [
+              -92.182308,
+              34.706992
+            ],
+            [
+              -92.182308,
+              34.708608
+            ],
+            [
+              -92.183292,
+              34.708608
+            ],
+            [
+              -92.183292,
+              34.706992
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Skippy Foods - Little Rock AR",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.186321,
+              34.708341
+            ],
+            [
+              -92.183479,
+              34.708341
+            ],
+            [
+              -92.183479,
+              34.709059
+            ],
+            [
+              -92.186321,
+              34.709059
+            ],
+            [
+              -92.186321,
+              34.708341
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Skippy Foods - Little Rock AR",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.183456,
+              34.706961
+            ],
+            [
+              -92.182144,
+              34.706961
+            ],
+            [
+              -92.182144,
+              34.708039
+            ],
+            [
+              -92.183456,
+              34.708039
+            ],
+            [
+              -92.183456,
+              34.706961
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Skippy Foods - Little Rock AR",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.383612,
+              35.300985
+            ],
+            [
+              -94.378988,
+              35.300985
+            ],
+            [
+              -94.378988,
+              35.306015
+            ],
+            [
+              -94.383612,
+              35.306015
+            ],
+            [
+              -94.383612,
+              35.300985
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Fort Smith Plant - Fort Smith AR",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 58.1,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.381071,
+              35.304161
+            ],
+            [
+              -94.379529,
+              35.304161
+            ],
+            [
+              -94.379529,
+              35.305239
+            ],
+            [
+              -94.381071,
+              35.305239
+            ],
+            [
+              -94.381071,
+              35.304161
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Fort Smith Plant - Fort Smith AR",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.381885,
+              35.301702
+            ],
+            [
+              -94.381115,
+              35.301702
+            ],
+            [
+              -94.381115,
+              35.303498
+            ],
+            [
+              -94.381885,
+              35.303498
+            ],
+            [
+              -94.381885,
+              35.301702
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Fort Smith Plant - Fort Smith AR",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.382401,
+              35.304586
+            ],
+            [
+              -94.380199,
+              35.304586
+            ],
+            [
+              -94.380199,
+              35.305214
+            ],
+            [
+              -94.382401,
+              35.305214
+            ],
+            [
+              -94.382401,
+              35.304586
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Fort Smith Plant - Fort Smith AR",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9801,
+              42.5196
+            ],
+            [
+              -88.976,
+              42.5196
+            ],
+            [
+              -88.976,
+              42.5228
+            ],
+            [
+              -88.9801,
+              42.5228
+            ],
+            [
+              -88.9801,
+              42.5196
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Beloit Plant - Beloit WI",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 34,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 23.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9792,
+              42.5203
+            ],
+            [
+              -88.9786,
+              42.5203
+            ],
+            [
+              -88.9786,
+              42.5208
+            ],
+            [
+              -88.9792,
+              42.5208
+            ],
+            [
+              -88.9792,
+              42.5203
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Beloit Plant - Beloit WI",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9801,
+              42.5199
+            ],
+            [
+              -88.9787,
+              42.5199
+            ],
+            [
+              -88.9787,
+              42.5222
+            ],
+            [
+              -88.9801,
+              42.5222
+            ],
+            [
+              -88.9801,
+              42.5199
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Beloit Plant - Beloit WI",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9784,
+              42.5196
+            ],
+            [
+              -88.977,
+              42.5196
+            ],
+            [
+              -88.977,
+              42.5201
+            ],
+            [
+              -88.9784,
+              42.5201
+            ],
+            [
+              -88.9784,
+              42.5196
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Beloit Plant - Beloit WI",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9787,
+              42.52
+            ],
+            [
+              -88.9782,
+              42.52
+            ],
+            [
+              -88.9782,
+              42.5222
+            ],
+            [
+              -88.9787,
+              42.5222
+            ],
+            [
+              -88.9787,
+              42.52
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Beloit Plant - Beloit WI",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9782,
+              42.51975
+            ],
+            [
+              -88.9768,
+              42.51975
+            ],
+            [
+              -88.9768,
+              42.52005
+            ],
+            [
+              -88.9782,
+              42.52005
+            ],
+            [
+              -88.9782,
+              42.51975
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Beloit Plant - Beloit WI",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9795,
+              42.5202
+            ],
+            [
+              -88.9788,
+              42.5202
+            ],
+            [
+              -88.9788,
+              42.5211
+            ],
+            [
+              -88.9795,
+              42.5211
+            ],
+            [
+              -88.9795,
+              42.5202
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Beloit Plant - Beloit WI",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.7929,
+              43.9407
+            ],
+            [
+              -90.7888,
+              43.9407
+            ],
+            [
+              -90.7888,
+              43.9434
+            ],
+            [
+              -90.7929,
+              43.9434
+            ],
+            [
+              -90.7929,
+              43.9407
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Century Foods International - Sparta WI",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 32,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 0,
+          "buildingCount": 2,
+          "siteAreaAcres": 21,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.7909,
+              43.9417
+            ],
+            [
+              -90.7894,
+              43.9417
+            ],
+            [
+              -90.7894,
+              43.9432
+            ],
+            [
+              -90.7909,
+              43.9432
+            ],
+            [
+              -90.7909,
+              43.9417
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Century Foods International - Sparta WI",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.7918,
+              43.9425
+            ],
+            [
+              -90.7911,
+              43.9425
+            ],
+            [
+              -90.7911,
+              43.9432
+            ],
+            [
+              -90.7918,
+              43.9432
+            ],
+            [
+              -90.7918,
+              43.9425
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Century Foods International - Sparta WI",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.7911,
+              43.94215
+            ],
+            [
+              -90.7905,
+              43.94215
+            ],
+            [
+              -90.7905,
+              43.943
+            ],
+            [
+              -90.7911,
+              43.943
+            ],
+            [
+              -90.7911,
+              43.94215
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Century Foods International - Sparta WI",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.7911,
+              43.9415
+            ],
+            [
+              -90.7903,
+              43.9415
+            ],
+            [
+              -90.7903,
+              43.9423
+            ],
+            [
+              -90.7911,
+              43.9423
+            ],
+            [
+              -90.7911,
+              43.9415
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Century Foods International - Sparta WI",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.0542,
+              37.6124
+            ],
+            [
+              -122.0523,
+              37.6124
+            ],
+            [
+              -122.0523,
+              37.6142
+            ],
+            [
+              -122.0542,
+              37.6142
+            ],
+            [
+              -122.0542,
+              37.6124
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Columbus Craft Meats - Hayward CA",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 13,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 8,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.0529,
+              37.613
+            ],
+            [
+              -122.0524,
+              37.613
+            ],
+            [
+              -122.0524,
+              37.614
+            ],
+            [
+              -122.0529,
+              37.614
+            ],
+            [
+              -122.0529,
+              37.613
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Columbus Craft Meats - Hayward CA",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2982,
+              37.8008
+            ],
+            [
+              -121.2954,
+              37.8008
+            ],
+            [
+              -121.2954,
+              37.8029
+            ],
+            [
+              -121.2982,
+              37.8029
+            ],
+            [
+              -121.2982,
+              37.8008
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Swiss American Sausage Co. - Lathrop CA",
+        "type": "Meat Processing Plant",
+        "archetype": "#2",
+        "archetypeName": "Gate + GS (not BU sens.) + separate",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 11.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2983,
+              37.80115
+            ],
+            [
+              -121.2977,
+              37.80115
+            ],
+            [
+              -121.2977,
+              37.8017
+            ],
+            [
+              -121.2983,
+              37.8017
+            ],
+            [
+              -121.2983,
+              37.80115
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Swiss American Sausage Co. - Lathrop CA",
+        "type": "Meat Processing Plant",
+        "archetype": "#2",
+        "archetypeName": "Gate + GS (not BU sens.) + separate",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.296,
+              37.80095
+            ],
+            [
+              -121.29545,
+              37.80095
+            ],
+            [
+              -121.29545,
+              37.80175
+            ],
+            [
+              -121.296,
+              37.80175
+            ],
+            [
+              -121.296,
+              37.80095
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Swiss American Sausage Co. - Lathrop CA",
+        "type": "Meat Processing Plant",
+        "archetype": "#2",
+        "archetypeName": "Gate + GS (not BU sens.) + separate",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2972,
+              37.80115
+            ],
+            [
+              -121.296,
+              37.80115
+            ],
+            [
+              -121.296,
+              37.80165
+            ],
+            [
+              -121.2972,
+              37.80165
+            ],
+            [
+              -121.2972,
+              37.80115
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Swiss American Sausage Co. - Lathrop CA",
+        "type": "Meat Processing Plant",
+        "archetype": "#2",
+        "archetypeName": "Gate + GS (not BU sens.) + separate",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2972,
+              37.80105
+            ],
+            [
+              -121.2956,
+              37.80105
+            ],
+            [
+              -121.2956,
+              37.80155
+            ],
+            [
+              -121.2972,
+              37.80155
+            ],
+            [
+              -121.2972,
+              37.80105
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Swiss American Sausage Co. - Lathrop CA",
+        "type": "Meat Processing Plant",
+        "archetype": "#2",
+        "archetypeName": "Gate + GS (not BU sens.) + separate",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.7542,
+              36.717
+            ],
+            [
+              -119.7521,
+              36.717
+            ],
+            [
+              -119.7521,
+              36.7196
+            ],
+            [
+              -119.7542,
+              36.7196
+            ],
+            [
+              -119.7542,
+              36.717
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Stockton Plant / Fresno - Fresno CA",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 10,
+          "trailersVisible": 20,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 12,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.7523,
+              36.7175
+            ],
+            [
+              -119.7518,
+              36.7175
+            ],
+            [
+              -119.7518,
+              36.7179
+            ],
+            [
+              -119.7523,
+              36.7179
+            ],
+            [
+              -119.7523,
+              36.7175
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Stockton Plant / Fresno - Fresno CA",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.7542,
+              36.718
+            ],
+            [
+              -119.7533,
+              36.718
+            ],
+            [
+              -119.7533,
+              36.7193
+            ],
+            [
+              -119.7542,
+              36.7193
+            ],
+            [
+              -119.7542,
+              36.718
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Stockton Plant / Fresno - Fresno CA",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.7537,
+              36.7182
+            ],
+            [
+              -119.7532,
+              36.7182
+            ],
+            [
+              -119.7532,
+              36.7193
+            ],
+            [
+              -119.7537,
+              36.7193
+            ],
+            [
+              -119.7537,
+              36.7182
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Stockton Plant / Fresno - Fresno CA",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.7534,
+              36.718
+            ],
+            [
+              -119.7528,
+              36.718
+            ],
+            [
+              -119.7528,
+              36.7192
+            ],
+            [
+              -119.7534,
+              36.7192
+            ],
+            [
+              -119.7534,
+              36.718
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Stockton Plant / Fresno - Fresno CA",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.5853,
+              36.7198
+            ],
+            [
+              -76.5799,
+              36.7198
+            ],
+            [
+              -76.5799,
+              36.7253
+            ],
+            [
+              -76.5853,
+              36.7253
+            ],
+            [
+              -76.5853,
+              36.7198
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Suffolk Plant - Suffolk VA",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 24,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 32,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.58325,
+              36.72385
+            ],
+            [
+              -76.5828,
+              36.72385
+            ],
+            [
+              -76.5828,
+              36.72425
+            ],
+            [
+              -76.58325,
+              36.72425
+            ],
+            [
+              -76.58325,
+              36.72385
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Suffolk Plant - Suffolk VA",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.5833,
+              36.7228
+            ],
+            [
+              -76.5823,
+              36.7228
+            ],
+            [
+              -76.5823,
+              36.724
+            ],
+            [
+              -76.5833,
+              36.724
+            ],
+            [
+              -76.5833,
+              36.7228
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Suffolk Plant - Suffolk VA",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.585,
+              36.7202
+            ],
+            [
+              -76.584,
+              36.7202
+            ],
+            [
+              -76.584,
+              36.7212
+            ],
+            [
+              -76.585,
+              36.7212
+            ],
+            [
+              -76.585,
+              36.7202
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Suffolk Plant - Suffolk VA",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.5832,
+              36.7229
+            ],
+            [
+              -76.5825,
+              36.7229
+            ],
+            [
+              -76.5825,
+              36.724
+            ],
+            [
+              -76.5832,
+              36.724
+            ],
+            [
+              -76.5832,
+              36.7229
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Suffolk Plant - Suffolk VA",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.5825,
+              36.7229
+            ],
+            [
+              -76.5817,
+              36.7229
+            ],
+            [
+              -76.5817,
+              36.724
+            ],
+            [
+              -76.5825,
+              36.724
+            ],
+            [
+              -76.5825,
+              36.7229
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel Suffolk Plant - Suffolk VA",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.8701,
+              45.9748
+            ],
+            [
+              -94.8651,
+              45.9748
+            ],
+            [
+              -94.8651,
+              45.979
+            ],
+            [
+              -94.8701,
+              45.979
+            ],
+            [
+              -94.8701,
+              45.9748
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Dan's Prize - Long Prairie MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 28,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.8694,
+              45.9767
+            ],
+            [
+              -94.8678,
+              45.9767
+            ],
+            [
+              -94.8678,
+              45.9779
+            ],
+            [
+              -94.8694,
+              45.9779
+            ],
+            [
+              -94.8694,
+              45.9767
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Dan's Prize - Long Prairie MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.8694,
+              45.975
+            ],
+            [
+              -94.8678,
+              45.975
+            ],
+            [
+              -94.8678,
+              45.9758
+            ],
+            [
+              -94.8694,
+              45.9758
+            ],
+            [
+              -94.8694,
+              45.975
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Dan's Prize - Long Prairie MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.8673,
+              45.977
+            ],
+            [
+              -94.866,
+              45.977
+            ],
+            [
+              -94.866,
+              45.978
+            ],
+            [
+              -94.8673,
+              45.978
+            ],
+            [
+              -94.8673,
+              45.977
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Dan's Prize - Long Prairie MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.17175,
+              44.8653
+            ],
+            [
+              -93.1694,
+              44.8653
+            ],
+            [
+              -93.1694,
+              44.8679
+            ],
+            [
+              -93.17175,
+              44.8679
+            ],
+            [
+              -93.17175,
+              44.8653
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Lloyd's Barbeque Company - Mendota Heights MN",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 16,
+          "trailerParkingCapacity": 24,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 12,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.1708,
+              44.8668
+            ],
+            [
+              -93.1697,
+              44.8668
+            ],
+            [
+              -93.1697,
+              44.8677
+            ],
+            [
+              -93.1708,
+              44.8677
+            ],
+            [
+              -93.1708,
+              44.8668
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Lloyd's Barbeque Company - Mendota Heights MN",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.1708,
+              44.8662
+            ],
+            [
+              -93.1699,
+              44.8662
+            ],
+            [
+              -93.1699,
+              44.8668
+            ],
+            [
+              -93.1708,
+              44.8668
+            ],
+            [
+              -93.1708,
+              44.8662
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Lloyd's Barbeque Company - Mendota Heights MN",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.0836,
+              45.1056
+            ],
+            [
+              -95.0765,
+              45.1056
+            ],
+            [
+              -95.0765,
+              45.1106
+            ],
+            [
+              -95.0836,
+              45.1106
+            ],
+            [
+              -95.0836,
+              45.1056
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Jennie-O Turkey Store - Willmar MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 75,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.0832,
+              45.10905
+            ],
+            [
+              -95.0825,
+              45.10905
+            ],
+            [
+              -95.0825,
+              45.1096
+            ],
+            [
+              -95.0832,
+              45.1096
+            ],
+            [
+              -95.0832,
+              45.10905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Jennie-O Turkey Store - Willmar MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.0833,
+              45.1058
+            ],
+            [
+              -95.0802,
+              45.1058
+            ],
+            [
+              -95.0802,
+              45.1078
+            ],
+            [
+              -95.0833,
+              45.1078
+            ],
+            [
+              -95.0833,
+              45.1058
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Jennie-O Turkey Store - Willmar MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.082,
+              45.108
+            ],
+            [
+              -95.0798,
+              45.108
+            ],
+            [
+              -95.0798,
+              45.1092
+            ],
+            [
+              -95.082,
+              45.1092
+            ],
+            [
+              -95.082,
+              45.108
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Jennie-O Turkey Store - Willmar MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.7962,
+              45.6738
+            ],
+            [
+              -94.7921,
+              45.6738
+            ],
+            [
+              -94.7921,
+              45.6779
+            ],
+            [
+              -94.7962,
+              45.6779
+            ],
+            [
+              -94.7962,
+              45.6738
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Jennie-O Turkey Store - Melrose MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 34,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.7932,
+              45.6756
+            ],
+            [
+              -94.7922,
+              45.6756
+            ],
+            [
+              -94.7922,
+              45.6768
+            ],
+            [
+              -94.7932,
+              45.6768
+            ],
+            [
+              -94.7932,
+              45.6756
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Jennie-O Turkey Store - Melrose MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.7932,
+              45.6762
+            ],
+            [
+              -94.7923,
+              45.6762
+            ],
+            [
+              -94.7923,
+              45.6772
+            ],
+            [
+              -94.7932,
+              45.6772
+            ],
+            [
+              -94.7932,
+              45.6762
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Jennie-O Turkey Store - Melrose MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.8493,
+              45.4011
+            ],
+            [
+              -91.8432,
+              45.4011
+            ],
+            [
+              -91.8432,
+              45.4041
+            ],
+            [
+              -91.8493,
+              45.4041
+            ],
+            [
+              -91.8493,
+              45.4011
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Jennie-O Turkey Store - Barron WI",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 7,
+          "siteAreaAcres": 37,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.8452,
+              45.40115
+            ],
+            [
+              -91.8445,
+              45.40115
+            ],
+            [
+              -91.8445,
+              45.40155
+            ],
+            [
+              -91.8452,
+              45.40155
+            ],
+            [
+              -91.8452,
+              45.40115
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Jennie-O Turkey Store - Barron WI",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.8448,
+              45.4024
+            ],
+            [
+              -91.8433,
+              45.4024
+            ],
+            [
+              -91.8433,
+              45.4036
+            ],
+            [
+              -91.8448,
+              45.4036
+            ],
+            [
+              -91.8448,
+              45.4024
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Jennie-O Turkey Store - Barron WI",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.8474,
+              45.4014
+            ],
+            [
+              -91.846,
+              45.4014
+            ],
+            [
+              -91.846,
+              45.4022
+            ],
+            [
+              -91.8474,
+              45.4022
+            ],
+            [
+              -91.8474,
+              45.4014
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Jennie-O Turkey Store - Barron WI",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.8478,
+              45.4028
+            ],
+            [
+              -91.846,
+              45.4028
+            ],
+            [
+              -91.846,
+              45.4037
+            ],
+            [
+              -91.8478,
+              45.4037
+            ],
+            [
+              -91.8478,
+              45.4028
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Jennie-O Turkey Store - Barron WI",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.8478,
+              45.4014
+            ],
+            [
+              -91.8462,
+              45.4014
+            ],
+            [
+              -91.8462,
+              45.4022
+            ],
+            [
+              -91.8478,
+              45.4022
+            ],
+            [
+              -91.8478,
+              45.4014
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Jennie-O Turkey Store - Barron WI",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.0434,
+              34.9862
+            ],
+            [
+              -90.0395,
+              34.9862
+            ],
+            [
+              -90.0395,
+              34.9908
+            ],
+            [
+              -90.0434,
+              34.9908
+            ],
+            [
+              -90.0434,
+              34.9862
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel / DHL Southaven Distribution Center - Southaven MS",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 44,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.043,
+              34.9864
+            ],
+            [
+              -90.0423,
+              34.9864
+            ],
+            [
+              -90.0423,
+              34.987
+            ],
+            [
+              -90.043,
+              34.987
+            ],
+            [
+              -90.043,
+              34.9864
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel / DHL Southaven Distribution Center - Southaven MS",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.043,
+              34.9866
+            ],
+            [
+              -90.0413,
+              34.9866
+            ],
+            [
+              -90.0413,
+              34.9898
+            ],
+            [
+              -90.043,
+              34.9898
+            ],
+            [
+              -90.043,
+              34.9866
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel / DHL Southaven Distribution Center - Southaven MS",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.0428,
+              34.9868
+            ],
+            [
+              -90.0418,
+              34.9868
+            ],
+            [
+              -90.0418,
+              34.99
+            ],
+            [
+              -90.0428,
+              34.99
+            ],
+            [
+              -90.0428,
+              34.9868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel / DHL Southaven Distribution Center - Southaven MS",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.0418,
+              34.9864
+            ],
+            [
+              -90.0399,
+              34.9864
+            ],
+            [
+              -90.0399,
+              34.987
+            ],
+            [
+              -90.0418,
+              34.987
+            ],
+            [
+              -90.0418,
+              34.9864
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "hormel-foods",
+        "name": "Hormel / DHL Southaven Distribution Center - Southaven MS",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    }
+  ]
+}

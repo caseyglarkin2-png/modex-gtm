@@ -1,0 +1,50 @@
+{
+  "name": "Mondelez Aurora Distribution Center (DHL/Exel-operated) - Aurora IL",
+  "type": "Distribution center (3PL-operated, DHL/Exel Logistics)",
+  "coords": { "lat": 41.73550, "lng": -88.34700 },
+  "geofences": {
+    "perimeter": { "south": 41.73300, "west": -88.34960, "north": 41.73850, "east": -88.34420 },
+    "truckGate": { "south": 41.73350, "west": -88.34900, "north": 41.73420, "east": -88.34810 },
+    "dropYards": [
+      { "south": 41.73330, "west": -88.34780, "north": 41.73480, "east": -88.34450 }
+    ],
+    "dockAprons": [
+      { "south": 41.73430, "west": -88.34900, "north": 41.73490, "east": -88.34470 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45, "trailersVisible": 7, "trailerParkingCapacity": 150,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 38.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.73550,-88.34700,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "railServed"],
+  "fieldNotes": {
+    "location": "Resolved to 2380 Sullivan Rd, Aurora IL 60506 — a ~533,232 sq ft warehouse with immediate I-88 access, long operated as the DHL Supply Chain / Exel Logistics distribution center for Mondelez/Kraft Foods. Roster city-centroid (41.7405,-88.3506) was ~0.6km NW; corrected via web research (Waze 'DHL Mondelez', LoopNet, businessyab all confirm 2380 Sullivan Rd) plus satellite and Street View. Note one real-estate listing flags the building as possibly available/underutilized — the very large but near-empty truck yard in current imagery is consistent with reduced operations.",
+    "truckGate": "TRUE — Street View (Apr 2024) of the Sullivan Rd entrance clearly shows a black ornamental metal perimeter fence with a sliding/swing gate across the truck driveway. A controlled truck entrance.",
+    "guardShack": "FALSE — no staffed guard-booth structure visible beside the gated entrance in Street View or satellite.",
+    "remoteGs": "TRUE — a controlled gate is present but there is no guard shack, implying kiosk / app / remote check-in.",
+    "drivewayShort": "The gate sits fairly close to Sullivan Rd with a short approach between road and gate; marked both drivewayShort and drivewayLong because the interior yard beyond the gate is extremely deep (3+ truck queue capacity inside).",
+    "dockDoors": "25-50 — a dock bank with covered dock canopies runs along the south building face; ~40-50 doors estimated across the long facade. Banded 25-50.",
+    "dropArea": "0-10 — the truck yard is enormous but currently nearly empty (only ~3-7 trailers visible); striped trailer stalls exist but are largely unoccupied in current imagery.",
+    "trailerParkingCapacity": "The paved south yard is very large (could hold 150+ trailers) even though it is mostly empty now.",
+    "railServed": "TRUE (medium confidence) — a rail spur/line runs along the north edge of the property; whether an active spur enters the dock is not certain from imagery, but rail infrastructure is adjacent and the corridor on the east side carries multiple tracks.",
+    "buildingCount": "Two — the main ~533k sq ft warehouse plus a separate smaller building at the SW of the parcel.",
+    "fastLaneOpportunity": "TRUE — a vast paved yard and wide gate apron leave abundant room for express/bypass lanes.",
+    "urbanRural": "Edge-of-Aurora industrial area bordered by retention ponds, light industrial, and open land; judged Rural per the small-town-industrial tie-break."
+  },
+  "method": "deep-audit"
+}

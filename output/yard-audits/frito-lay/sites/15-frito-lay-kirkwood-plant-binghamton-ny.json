@@ -1,0 +1,46 @@
+{
+  "name": "Frito-Lay - Kirkwood Plant Binghamton NY",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 42.09780, "lng": -75.83880 },
+  "geofences": {
+    "perimeter": { "south": 42.09520, "west": -75.84200, "north": 42.10030, "east": -75.83700 },
+    "truckGate": { "south": 42.09930, "west": -75.83820, "north": 42.10010, "east": -75.83720 },
+    "dropYards": [
+      { "south": 42.09600, "west": -75.84150, "north": 42.09870, "east": -75.83900 },
+      { "south": 42.09550, "west": -75.84100, "north": 42.09700, "east": -75.83870 }
+    ],
+    "dockAprons": [
+      { "south": 42.09650, "west": -75.83980, "north": 42.09790, "east": -75.83870 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40, "trailersVisible": 120, "trailerParkingCapacity": 200,
+    "truckGateCount": 1, "buildingCount": 3, "siteAreaAcres": 61.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.0978,-75.8388,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "scale", "multiStep"],
+  "fieldNotes": {
+    "location": "Roster point (42.039983,-75.79687, geocode precision APPROXIMATE) fell in a residential area of Kirkwood ~6 km SE of the plant. Web research resolved the true address to 10 Spud Ln, Binghamton/Kirkwood NY 13795/13904; Nominatim placed Spud Lane at 42.0982,-75.8403. Satellite there shows the Frito-Lay snack plant on the Susquehanna River; Street View confirmed silos, a steam plume from the fryers, and a blue Frito-Lay sign.",
+    "truckGate": "Single dedicated plant access road runs from a signalized public-road intersection (~42.0997,-75.8374) across a rail line into the property. Controlled-access industrial campus; no Street View available on the private drive so a barrier arm could not be directly imaged, but a controlled checkpoint is standard for a major Frito-Lay manufacturing plant. Medium confidence.",
+    "guardShack": "No clearly resolvable guard booth in satellite at the entrance; classified remoteGs (gate, no visible shack). Low confidence - the booth, if present, sits along the unviewable private drive.",
+    "dropYard": "Extensive trailer storage: dozens of trailers parked in long marked rows on the west/southwest side of the property along the river. Easily 50+ stalls.",
+    "dockDoorCount": "Trailers visible backed into dock faces on the SW side of the main building; door count estimated at ~40 from overhead imagery - approximate.",
+    "railServed": "An active rail line runs along the NE edge of the property between the plant and the road; the plant historically receives bulk inbound (potatoes/corn/oil). Spur appears to serve the plant though it also parallels neighboring industrial parcels.",
+    "urbanRural": "Kirkwood is a small town SE of Binghamton; the plant sits in a riverside small-town industrial corridor - classified Rural per rubric tie-break."
+  },
+  "method": "deep-audit"
+}

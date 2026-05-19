@@ -1,0 +1,280 @@
+{
+  "account": "Toyota",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 17,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Toyota Motor Manufacturing Kentucky - Georgetown KY",
+      "city": "Georgetown",
+      "state": "KY",
+      "type": "Vehicle Assembly Plant",
+      "address": "1001 Cherry Blossom Way, Georgetown, KY 40324",
+      "lat": 38.257524,
+      "lng": -84.547591,
+      "source": "Dossier (TMMK, Toyota's largest plant globally); address from Toyota pressroom/Yelp listing",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 5361
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Toyota Motor Manufacturing Indiana - Princeton IN",
+      "city": "Princeton",
+      "state": "IN",
+      "type": "Vehicle Assembly Plant",
+      "address": "4000 Tulip Tree Drive, Princeton, IN 47670",
+      "lat": 38.291234,
+      "lng": -87.565041,
+      "source": "Dossier (TMMI, Highlander/Grand Highlander/BEV SUV); address from Waze/Wikipedia",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 6375
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Toyota Motor Manufacturing Texas - San Antonio TX",
+      "city": "San Antonio",
+      "state": "TX",
+      "type": "Vehicle Assembly Plant",
+      "address": "1 Lone Star Pass, San Antonio, TX 78264",
+      "lat": 29.260605,
+      "lng": -98.545494,
+      "source": "Dossier (TMMTX, Tundra/Sequoia - plant Nielsen built); address from Waze",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 13839
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Toyota Motor Manufacturing Mississippi - Blue Springs MS",
+      "city": "Blue Springs",
+      "state": "MS",
+      "type": "Vehicle Assembly Plant",
+      "address": "1200 Magnolia Way, Blue Springs, MS 38828",
+      "lat": 34.38039,
+      "lng": -88.895064,
+      "source": "Dossier (TMMMS, Corolla/Corolla Cross); address from Waze",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 3992
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Toyota Motor Manufacturing West Virginia - Buffalo WV",
+      "city": "Buffalo",
+      "state": "WV",
+      "type": "Powertrain Plant (engines/transmissions)",
+      "address": "1 Sugar Maple Lane, Buffalo, WV 25033",
+      "lat": 38.597545,
+      "lng": -81.993022,
+      "source": "Dossier (TMMWV, engines/transmissions/hybrid transaxles); address from Waze/Yelp",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 2192
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Mazda Toyota Manufacturing USA - Huntsville AL",
+      "city": "Huntsville",
+      "state": "AL",
+      "type": "Vehicle Assembly Plant (Mazda-Toyota JV)",
+      "address": "8800 Greenbrier Pkwy, Huntsville, AL 35808",
+      "lat": 34.677446,
+      "lng": -86.8589,
+      "source": "Dossier (MTMUS, Corolla Cross/Mazda CX-50, Nielsen on board); JV plant, Greenbrier site Huntsville",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 8
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Toyota Battery Manufacturing North Carolina - Liberty NC",
+      "city": "Liberty",
+      "state": "NC",
+      "type": "Battery Manufacturing Plant",
+      "address": "Toyota Battery Boulevard, Liberty, NC 27298 (Greensboro-Randolph Megasite)",
+      "lat": 35.896442,
+      "lng": -79.642555,
+      "source": "Dossier (TBMNC, $13.9B mega-investment, EV/hybrid batteries); site in Randolph County",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 11382
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Toyota Motor Manufacturing Alabama - Huntsville AL",
+      "city": "Huntsville",
+      "state": "AL",
+      "type": "Engine Plant",
+      "address": "1 Cottonvalley Drive NW, Huntsville, AL 35810",
+      "lat": 34.829479,
+      "lng": -86.638376,
+      "source": "Toyota pressroom operations page (TMMAL, V6/V8 engines); address from Waze. Distinct from Mazda-Toyota JV",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 3390
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Toyota Motor Manufacturing Missouri - Troy MO",
+      "city": "Troy",
+      "state": "MO",
+      "type": "Powertrain Plant (aluminum castings)",
+      "address": "100 Cherry Blossom Way, Troy, MO 63379",
+      "lat": 38.963601,
+      "lng": -90.969039,
+      "source": "Toyota pressroom operations page (TMMMO, formerly Bodine Aluminum); address from Dun & Bradstreet",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1920
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Toyota Motor Manufacturing Tennessee - Jackson TN",
+      "city": "Jackson",
+      "state": "TN",
+      "type": "Powertrain Plant (aluminum castings)",
+      "address": "301 James Lawrence Road, Jackson, TN 38301",
+      "lat": 35.597387,
+      "lng": -88.940858,
+      "source": "Toyota pressroom operations page (TMMTN, formerly Bodine Aluminum, engine blocks/transaxle casings); address from Waze",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 14134
+      }
+    },
+    {
+      "idx": 11,
+      "name": "TABC Inc - Long Beach CA",
+      "city": "Long Beach",
+      "state": "CA",
+      "type": "Parts/Components Plant (stamping, welding, catalytic converters)",
+      "address": "6375 N Paramount Blvd, Long Beach, CA 90805",
+      "lat": 33.872001,
+      "lng": -118.162735,
+      "source": "Toyota pressroom operations page (TABC, longest-running NA plant); address from Long Beach Chamber/Yelp",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 3892
+      }
+    },
+    {
+      "idx": 12,
+      "name": "North American Parts Center Kentucky - Hebron KY",
+      "city": "Hebron",
+      "state": "KY",
+      "type": "Parts Procurement & Distribution Hub",
+      "address": "2450 Wright Blvd, Hebron, KY 41048",
+      "lat": 39.053725,
+      "lng": -84.707684,
+      "source": "Dossier (NAPCK, supplies 12 US PDCs, 117,000+ service parts); address from Waze/Chamber of Commerce",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 2667
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Toyota Logistics Services Vehicle Distribution Center - Long Beach CA",
+      "city": "Long Beach",
+      "state": "CA",
+      "type": "Vehicle Distribution Center (port processing)",
+      "address": "Port of Long Beach, Pier B, Long Beach, CA 90802",
+      "lat": 33.779816,
+      "lng": -118.217365,
+      "source": "Toyota Logistics Services fact sheet (TLS-run import port, 200,000+ vehicles/yr); port of Long Beach facility",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 4
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Toyota Logistics Services Vehicle Distribution Center - Portland OR",
+      "city": "Portland",
+      "state": "OR",
+      "type": "Vehicle Distribution Center (port processing)",
+      "address": "Port of Portland, Terminal 4, Portland, OR 97203",
+      "lat": 45.637265,
+      "lng": -122.754963,
+      "source": "Toyota Logistics Services fact sheet (TLS-run import port); Port of Portland Terminal 4",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1850
+      }
+    },
+    {
+      "idx": 15,
+      "name": "Toyota Logistics Services Vehicle Distribution Center - Newark NJ",
+      "city": "Newark",
+      "state": "NJ",
+      "type": "Vehicle Distribution Center (port processing)",
+      "address": "Port Newark, Newark, NJ 07114",
+      "lat": 40.69001,
+      "lng": -74.151753,
+      "source": "Toyota Logistics Services fact sheet (TLS-run import port serving eastern US); Port Newark",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1160
+      }
+    },
+    {
+      "idx": 16,
+      "name": "Toyota Parts Distribution Center - Ontario CA",
+      "city": "Ontario",
+      "state": "CA",
+      "type": "Parts Distribution Center",
+      "address": "Ontario, CA 91761 (Inland Empire, ~50 mi east of Los Angeles)",
+      "lat": 34.034814,
+      "lng": -117.584802,
+      "source": "Automotive Logistics feature (Toyota CA parts center, 185,000+ unique parts); precise street address not pinned",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 14
+      }
+    },
+    {
+      "idx": 17,
+      "name": "Toyota Parts Distribution Center - Mansfield MA",
+      "city": "Mansfield",
+      "state": "MA",
+      "type": "Parts Distribution Center",
+      "address": "440 Forbes Blvd, Mansfield, MA 02048",
+      "lat": 42.016967,
+      "lng": -71.234706,
+      "source": "Yelp/web listing (Toyota parts warehouse, Boston-region PDC); address confirmed",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 421
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

@@ -1,0 +1,56 @@
+{
+  "name": "FedEx Ground Hub - Keasbey NJ",
+  "type": "Ground regional sortation hub (NY/NJ metro)",
+  "coords": { "lat": 40.50650, "lng": -74.32600 },
+  "geofences": {
+    "perimeter": { "south": 40.50250, "west": -74.32950, "north": 40.51020, "east": -74.32250 },
+    "truckGate": { "south": 40.50690, "west": -74.32760, "north": 40.50760, "east": -74.32660 },
+    "dropYards": [
+      { "south": 40.50550, "west": -74.32900, "north": 40.50820, "east": -74.32600 },
+      { "south": 40.50350, "west": -74.32700, "north": 40.50700, "east": -74.32350 },
+      { "south": 40.50750, "west": -74.32550, "north": 40.51000, "east": -74.32280 }
+    ],
+    "dockAprons": [
+      { "south": 40.50700, "west": -74.32650, "north": 40.51000, "east": -74.32380 },
+      { "south": 40.50400, "west": -74.32600, "north": 40.50700, "east": -74.32330 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 320,
+    "trailersVisible": 750,
+    "trailerParkingCapacity": 900,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 125.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.50650,-74.32600,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "truckGateCount", "entryLanes"],
+  "fieldNotes": {
+    "location": "Confirmed FedEx Ground regional sortation hub at 6000 Riverside Dr, Keasbey NJ (Woodbridge Township), a 24/7 NY/NJ-metro hub on the Raritan River. Roster coordinate (GEOMETRIC_CENTER, moved 1.2 km) landed correctly on the FedEx complex. FedEx Ground branding directly confirmed on the office building and on numerous trailers in Street View.",
+    "campus": "The property is a large FedEx Ground campus with two distinct large sort-building clusters (a northwest building with a big solar roof and a southeast building cluster), each with continuous dock banks and surrounding trailer fields, plus a central office building with a curved entry canopy. multipleFacilities marked true.",
+    "truckGate": "FedEx trailer yard is enclosed by chain-link fencing (confirmed in 2019/2021 Street View — fenced trailer yard behind the office building). Controlled private campus access off Riverside Dr. Counted as a controlled truck gate.",
+    "guardShack": "A guard booth could not be isolated in satellite — the truck gate is internal to the secured campus and Street View (2019/2021 vintage) does not penetrate it. Marked true with medium confidence: a fenced FedEx Ground metro hub of this scale is universally guard-staffed at its truck entrance. Flagged in uncertainFields.",
+    "truckGateCount": "Likely 2 — separate employee-vehicle and truck-yard entrances, plus possibly a gate per building cluster; exact count is an estimate.",
+    "drivewayLong": "Long private campus access roads and deep paved internal yard approaches.",
+    "fastLaneOpportunity": "Very large paved gate/yard aprons with abundant bypass-lane width.",
+    "dockDoors": "Two large sort buildings with continuous dock banks and hundreds of trailers backed in — far over 50, estimated ~320 total across both buildings. Honest overhead estimate.",
+    "dropArea": "Extensive trailer-parking fields surround both buildings — hundreds of drop trailers, clearly 50+. Estimated ~750 visible / ~900 capacity.",
+    "urbanRural": "Dense NY/NJ-metro industrial corridor (Woodbridge Township) — classed Urban.",
+    "siteAreaAcres": "~125 acres from the perimeter box (developed FedEx campus footprint); no published figure found, estimated from imagery."
+  },
+  "method": "deep-audit"
+}

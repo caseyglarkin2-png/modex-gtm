@@ -1,0 +1,54 @@
+{
+  "name": "Niagara Bottling - Elko New Market MN",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 44.567600, "lng": -93.290000 },
+  "geofences": {
+    "perimeter": { "south": 44.564800, "west": -93.294500, "north": 44.569700, "east": -93.287500 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 36.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.567600,-93.290000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "connectivityIssue",
+    "scale", "dropYard", "multiStep", "dockDoorCount", "trailersVisible",
+    "trailerParkingCapacity", "railServed"
+  ],
+  "fieldNotes": {
+    "_location": "Roster coordinates (46.732498, -92.201007) were badly wrong — they pointed to a forested highway interchange near Duluth, ~250 km north of Elko New Market. Corrected via web research: the plant is the 425,000 sq ft, $125M Niagara facility in the SE quadrant of the I-35 / Scott County Road 2 interchange in Elko New Market's Park I-35 Industrial Park. Building shell positively identified in satellite imagery at ~44.5676, -93.2900.",
+    "_constructionState": "Facility is UNDER CONSTRUCTION in all available imagery (Phase 1 targeted operational 2025). The building shell/roof is complete, but the truck yard — dock face, aprons, trailer parking, perimeter road, and any gate/guard booth — is still graded dirt and not yet built or captured. Operational classification fields cannot be observed; all are listed in uncertainFields and the classification values are placeholder defaults, not observed evidence.",
+    "dockDoors": "Dock doors not yet constructed/visible — set NONE as a placeholder, not an observation.",
+    "dropArea": "Trailer drop yard not yet constructed/visible — set NONE as a placeholder.",
+    "truckGate": "Entrance infrastructure not yet built/imaged; classified false only as a placeholder default.",
+    "urbanRural": "Site is in a new industrial park on the edge of Elko New Market (~35 mi south of Minneapolis), surrounded by farm fields and woods — Rural.",
+    "railServed": "No rail spur visible; the BNSF/UP corridor in the area does not appear to enter this parcel, but cannot be confirmed at this construction stage.",
+    "siteAreaAcres": "~36 acres estimated from the graded property boundary in satellite imagery; approximate, the final fenced perimeter may differ.",
+    "_recommendation": "Flag for re-audit once post-completion satellite/Street View imagery (expected 2026+) becomes available; the yard layout, gate, and dock counts cannot be determined from current construction-stage imagery."
+  },
+  "method": "deep-audit"
+}

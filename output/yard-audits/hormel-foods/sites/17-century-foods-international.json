@@ -1,0 +1,50 @@
+{
+  "name": "Century Foods International - Sparta WI",
+  "type": "Production Facility",
+  "coords": { "lat": 43.94255, "lng": -90.79120 },
+  "geofences": {
+    "perimeter": { "south": 43.94070, "west": -90.79290, "north": 43.94340, "east": -90.78880 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 43.94170, "west": -90.79090, "north": 43.94320, "east": -90.78940 }
+    ],
+    "dockAprons": [
+      { "south": 43.94250, "west": -90.79180, "north": 43.94320, "east": -90.79110 },
+      { "south": 43.94215, "west": -90.79110, "north": 43.94300, "east": -90.79050 }
+    ],
+    "staging": { "south": 43.94150, "west": -90.79110, "north": 43.94230, "east": -90.79030 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18, "trailersVisible": 32, "trailerParkingCapacity": 45,
+    "truckGateCount": 0, "buildingCount": 2, "siteAreaAcres": 21.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@43.94255,-90.79120,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster coords moved 1613m and resolved to a Century Foods / Hormel nutritional-products plant on Century Court, Sparta WI, off Hwy 16 / next to a Canadian Pacific rail mainline. Confirmed via web search (Hormel 'Our Locations', 400 Century Court) and matching industrial layout. Locked center 43.94255,-90.79120.",
+    "truckGate": "No gate or perimeter fence on the truck side. Century Court (private drive) runs straight onto the open paved truck yard; Street View (2025-08) shows no barrier arm, sliding gate, or pinch-point. Open uncontrolled access.",
+    "guardShack": "No staffed booth anywhere along the access road or at the building.",
+    "remoteGs": "False - no gate exists, so no remote check-in.",
+    "dockDoorCount": "Counted ~6-8 trailers backed in along the NW building face plus dock doors along the NE corner; ~18 total estimated, 10-25 band. Trees partly obscure the count.",
+    "dropArea": "Large gravel/dirt drop lot east of the building with ~25-30 trailers parked in angled rows; dropArea = 25-50, dedicated drop yard present.",
+    "drivewayLong": "Long open paved approach from Century Court into the yard; easily holds 3+ trucks.",
+    "railServed": "A multi-track rail mainline runs along the NW property edge but no spur enters the building - the plant backs up to the tracks with no rail dock. railServed = false.",
+    "buildingCount": "Main plant/office building plus a small detached storage building near the NW tracks.",
+    "urbanRural": "Small-town edge of Sparta WI, surrounded by woods, a golf course, and farmland - clearly Rural.",
+    "shipRcvSeparate": "Dock activity concentrated on adjacent NW and NE faces around one yard - treated as a single combined ship/receive operation."
+  },
+  "method": "deep-audit"
+}

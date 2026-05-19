@@ -1,0 +1,66 @@
+{
+  "name": "GP Gypsum Plant - Sweetwater TX",
+  "type": "Gypsum Wallboard Plant",
+  "coords": { "lat": 32.483000, "lng": -100.334500 },
+  "geofences": {
+    "perimeter": { "south": 32.477500, "west": -100.340000, "north": 32.486500, "east": -100.329000 },
+    "truckGate": { "south": 32.481000, "west": -100.337200, "north": 32.482200, "east": -100.335800 },
+    "dropYards": [
+      { "south": 32.484400, "west": -100.334500, "north": 32.486000, "east": -100.332200 }
+    ],
+    "dockAprons": [
+      { "south": 32.483600, "west": -100.334400, "north": 32.484400, "east": -100.332200 }
+    ],
+    "staging": { "south": 32.481800, "west": -100.336000, "north": 32.483400, "east": -100.334200 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 35,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 2,
+    "buildingCount": 8,
+    "siteAreaAcres": 256.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.4830,-100.3345,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoors", "dropArea", "trailersVisible", "trailerParkingCapacity", "scale", "truckGateCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster coords pointed at downtown Sweetwater (4 km off). Actual GP Gypsum complex is on FM 1856 off I-20 east of Sweetwater (310/311 FM 1856): the legacy plant (Nolan County since 1957) plus the new $325M plant opened Oct 2023. Confirmed by GP-branded blue perimeter fencing in Street View; locked center ~32.4830,-100.3345.",
+    "truckGate": "Plant reached via FM 1856, a county road dead-ending into the GP complex; GP-logo privacy-screened perimeter fence confirmed in Street View. Controlled-access industrial site with a clear entrance driveway and flags. No public-road pass-through.",
+    "guardShack": "No staffed booth crisply resolved; modern GP plants typically use scale-house / kiosk check-in. Marked remoteGs true as the likelier read; both flagged uncertain.",
+    "scale": "A truck scale is expected at a gypsum plant (inbound aggregate, outbound board); not crisply confirmed in imagery.",
+    "dropArea": "The new-plant truck yard shows dozens of trailers staged in marked rows north of the building — substantial drop/staging capacity.",
+    "dockDoors": "A regular rhythm of dock doors is visible along the new plant's N building face; estimated 10-25.",
+    "shipRcvSeparate": "Raw gypsum received from the adjacent quarry/mine via internal haul roads (SW); finished wallboard ships by truck and rail from the N/E truck yard — separate operations.",
+    "multipleFacilities": "Two distinct wallboard plants on one campus (legacy plant + 2023 plant) plus process and material-handling buildings.",
+    "truckGateCount": "Likely 2 — a main office entrance off FM 1856 plus a truck-yard entrance serving the new plant; counted as 2 with medium confidence.",
+    "railServed": "A new rail crossing and spur were installed on FM 1856 to serve the new plant; rail line confirmed in satellite imagery.",
+    "urbanRural": "Rural Nolan County, TX — open ranchland along I-20 east of the small city of Sweetwater."
+  },
+  "method": "deep-audit"
+}

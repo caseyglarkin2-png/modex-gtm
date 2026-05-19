@@ -1,0 +1,56 @@
+{
+  "name": "Performance Foodservice - Atlanta (Oakwood GA)",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 34.238400, "lng": -83.873000 },
+  "geofences": {
+    "perimeter": { "south": 34.23600, "west": -83.87550, "north": 34.24100, "east": -83.87050 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 34.23950, "west": -83.87260, "north": 34.24080, "east": -83.87000 }
+    ],
+    "dockAprons": [
+      { "south": 34.23770, "west": -83.87420, "north": 34.23890, "east": -83.87250 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 38.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.2384,-83.873,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "truckGateCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "No controlled truck gate identified. PFG Milton's is a multi-building campus set back behind a treeline buffer from the public road (Mundy Mill Rd / Old Oakwood Rd). Internal access roads connect the buildings; Street View (Apr 2022) shows Google's car drove onto the interior truck-yard pavement and dock face, indicating an open/uncontrolled entrance. A chain-link fence separates an employee parking lot from the truck yard but there is no barrier arm or checkpoint at the property entrance.",
+    "guardShack": "No guard booth visible at any entrance to the campus.",
+    "remoteGs": "False — no controlled truck gate.",
+    "dockDoors": "Multiple dock faces across the campus buildings — trailers backed in onto dock aprons at the main DC (z18/z19 imagery), plus additional doors on the meat-cutting / freezer / fleet buildings. Aggregate ~60 across the campus; band 50+. Low-confidence count given multiple building faces.",
+    "dropArea": "Dedicated trailer drop yard on the NE side of the campus with dense rows of drop trailers (55+ visible). Band 50+.",
+    "dropYard": "True — a dedicated trailer-storage lot occupies the NE portion of the campus.",
+    "multipleFacilities": "True — PFG Milton's is a campus of multiple large buildings. Per web research the campus includes the original broadline DC plus a 174,000 sq ft expansion building (on 43 adjacent acres) housing freezer, meat-cutting operation, and fleet operations.",
+    "shipRcvSeparate": "Likely — the multi-building campus (broadline DC + separate freezer/meat-cutting building) implies physically separate dock clusters on different buildings. Medium-confidence; flagged.",
+    "truckGateCount": "Estimated 2 — the campus has more than one access driveway off the surrounding roads. Low-confidence.",
+    "postGateStaging": "Wide internal paved truck courts between the campus buildings provide interior holding/queue room.",
+    "urbanRural": "Oakwood GA is a small town in Hall County on the exurban fringe of metro Atlanta along I-985 — small-town industrial setting, not dense metro fabric. Classified Rural per the rubric tie-break.",
+    "scale": "No truck scale visible in overhead imagery.",
+    "railServed": "No rail spur runs into the campus.",
+    "_locationNote": "A warehouserating.com listing places 3501 Old Oakwood Rd at 34.238252,-83.875948, but Street View at that point shows a small retail strip, not a DC. The actual PFG Milton's campus is ~290 m ESE at the locked coordinate, confirmed by Street View dock-face imagery of trailers backed into a multi-temp food DC."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Coffee Silo Operations - New Orleans LA",
+  "type": "Distribution/Processing - Green coffee bean silo operations",
+  "coords": { "lat": 29.9139, "lng": -90.1122 },
+  "geofences": {
+    "perimeter": { "south": 29.91320, "west": -90.11305, "north": 29.91460, "east": -90.11140 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 29.91370, "west": -90.11300, "north": 29.91440, "east": -90.11250 }
+    ],
+    "dockAprons": [
+      { "south": 29.91345, "west": -90.11260, "north": 29.91385, "east": -90.11175 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 6,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 14,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 6.1,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.9139,-90.1122,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
+    "dockDoors": "0-10", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": true
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "entryLanes", "exitLanes", "scale", "multiStep", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "Silocaf / Smucker Coffee Silo Operations, the world's largest automated green-coffee silo plant, 5240-5242 Coffee Dr. Built ~1992 on the cleared site of the former Public Grain Elevator. Confirmed via satellite: a compact vertical processing building with a row of cylindrical bulk-storage silos along its south edge, conveyors and a blue-roofed annex, sitting inside the Port of New Orleans Napoleon Avenue Container Terminal.",
+    "truckGate": "TRUE but indirect — the Silocaf building has no separate fenced perimeter or its own gate. It sits deep inside the secured Port of New Orleans Napoleon Avenue Container Terminal; all truck access is controlled at the port terminal's manned gate. Classified as a controlled (gated) truck entrance at the terminal level. Flagged uncertain because the gate is the port's, not the facility's own.",
+    "guardShack": "Marked true — Port of New Orleans container terminals operate manned gatehouses with TWIC/credential checks. Not directly visible in usable imagery (no public Street View inside the secured terminal); inferred from standard port-terminal security practice. Flagged uncertain.",
+    "multiStep": "Set true — a port-terminal context typically involves a first checkpoint at the terminal gate, then a separate check-in/transfer point at the Silocaf building itself for bulk-coffee loading/unloading. Two-stage check-in is characteristic; flagged uncertain.",
+    "dockDoors": "0-10 — this is a vertical silo plant, not a flat distribution center. Bulk green coffee moves via hopper trailers, conveyors and pneumatic transfer rather than a long rhythm of dock doors. ~6 transfer/dock points estimated. Flagged low confidence.",
+    "dropArea": "0-10 — a handful of trailers (~8 visible, bulk hopper + box) parked on the west apron; no large marked drop-yard. Capacity ~14.",
+    "railServed": "TRUE — extensive Public Belt / port rail yards run immediately along the north edge; green coffee is moved by rail as well as truck and ship.",
+    "fastLaneOpportunity": "Large open paved terminal aprons surround the facility; ample room exists to organize bypass/express lanes for bulk-coffee trucks.",
+    "siteAreaAcres": "6.1 acres for the Silocaf building footprint plus its immediate truck apron and silo row. The broader Napoleon Avenue Container Terminal it sits within is far larger but is a separate port property.",
+    "buildingCount": "2 — the main processing/silo building and an adjacent office/ancillary building to the NE.",
+    "confidence": "Medium overall — the facility was positively identified and the silo plant is unambiguous, but it is enclosed within a secured port terminal with no public Street View, so gate/guard-shack/lane details are inferred from port-operations context rather than directly observed."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,56 @@
+{
+  "name": "Barnes & Noble - Reno NV DC",
+  "type": "Distribution Center / West-Coast Replenishment Center",
+  "coords": { "lat": 39.41870, "lng": -119.75050 },
+  "geofences": {
+    "perimeter": { "south": 39.41630, "west": -119.75250, "north": 39.42050, "east": -119.74850 },
+    "truckGate": { "south": 39.41680, "west": -119.75120, "north": 39.41720, "east": -119.75070 },
+    "dropYards": [
+      { "south": 39.41700, "west": -119.75100, "north": 39.41760, "east": -119.74900 }
+    ],
+    "dockAprons": [
+      { "south": 39.41710, "west": -119.75180, "north": 39.41780, "east": -119.74890 }
+    ],
+    "staging": { "south": 39.41660, "west": -119.75120, "north": 39.41710, "east": -119.75000 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 38,
+    "trailersVisible": 22,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 38.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.41870,-119.75050,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors", "entryLanes", "exitLanes", "dropArea"],
+  "fieldNotes": {
+    "location": "Confirmed 12660 Old Virginia Rd, Reno NV 89521 in the Damonte Ranch industrial park, alongside I-580/US-395. Single ~601K sq ft DC building. Address verified via Panjiva, Chamber of Commerce, and Facebook (Barnes & Noble Reno Distribution Center).",
+    "truckGate": "CONFIRMED via Street View (2022 and 2025 panos): a yellow-and-white striped barrier arm spans the entrance driveway lane, flanked by yellow protective bollards, with a STOP sign. The 2015 pano shows the same driveway WITHOUT the arm, so the barrier was installed after 2015. High confidence.",
+    "guardShack": "No guard booth anywhere at the entrance in any Street View pano (2015/2022/2025) or satellite imagery. The barrier arm stands alone with no adjacent staffed structure.",
+    "remoteGs": "Barrier-arm truck gate with no guard booth implies badge/card or remote/app check-in; remoteGs true.",
+    "dockDoors": "Continuous bank of loading-dock doors along the SOUTH building face; roughly 20+ trailers visible backed in. Roof glare in satellite limits an exact count; estimated ~38 doors, 25-50 band. Flagged uncertain.",
+    "dropArea": "A row of trailer parking south of the dock apron holds dropped trailers; estimated 10-25 band. Not a large dedicated drop lot, so dropYard flag left false.",
+    "preGateStaging": "Long paved driveway approach between the public road and the barrier arm provides room for trucks to wait before the gate.",
+    "postGateStaging": "Wide dock apron inside the gate before the dock doors provides interior staging room.",
+    "drivewayLong": "The gate-to-dock approach plus the wide apron easily holds a queue of 3+ trucks.",
+    "urbanRural": "Damonte Ranch is a master-planned suburban district of south Reno with dense surrounding development - apartment complexes immediately north, multiple warehouses adjacent, and the I-580 freeway. Urban.",
+    "multipleFacilities": "Several large warehouses surround the site but they are separate properties; the B&N facility is a single building.",
+    "railServed": "No rail spur enters the property; the nearest rail is not adjacent. Not rail-served.",
+    "entryLanes": "Single shared entrance driveway with the barrier arm; estimated 1 in / 1 out, flagged uncertain.",
+    "trailersVisible": "Approx 22 trailers counted at the south docks and in the trailer-parking row; honest overhead estimate."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,117 @@
+{
+  "account": "SC Johnson",
+  "generatedAt": "2026-05-18",
+  "facilityCount": 10,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Waxdale Plant - Mt. Pleasant WI",
+      "city": "Mt. Pleasant",
+      "state": "WI",
+      "type": "Manufacturing Plant (Aerosol / Liquid / Gel)",
+      "address": "8311 16th St, Mt. Pleasant, WI 53406",
+      "lat": 42.6826,
+      "lng": -87.9214,
+      "source": "Dossier-named flagship; SC Johnson Waxdale Fact Sheet + EPA RMP record (S.C. Johnson & Son Waxdale Plant) + Waze address listing. World's largest/fastest aerosol plant, 2.2M sq ft, 15 production lines, 60M cases/yr."
+    },
+    {
+      "idx": 2,
+      "name": "Bay City Plant (Ziploc) - Bay City MI",
+      "city": "Bay City",
+      "state": "MI",
+      "type": "Manufacturing Plant (Home Storage - Ziploc)",
+      "address": "405 Marquette Dr, Bay City, MI 48706",
+      "lat": 43.6447,
+      "lng": -83.8294,
+      "source": "Dossier-named; SC Johnson careers site + Waze/Yellowpages address listings. ~400 acres, six production buildings, billions of Ziploc bags/yr; co-located distribution operations."
+    },
+    {
+      "idx": 3,
+      "name": "South Side Soapbox Plant (method / Ecover) - Chicago IL",
+      "city": "Chicago",
+      "state": "IL",
+      "type": "Manufacturing Plant + Distribution (method / Ecover)",
+      "address": "720 E 111th St, Chicago, IL 60628",
+      "lat": 41.6925,
+      "lng": -87.6017,
+      "source": "Web research - Chicago Sun-Times, CNI Group, Flickr address listing. 150,000 sq ft LEED-Platinum soap factory in Pullman; manufactures and bottles method/Ecover and serves as their distribution center."
+    },
+    {
+      "idx": 4,
+      "name": "SC Johnson Professional Plant - Stanley NC",
+      "city": "Stanley",
+      "state": "NC",
+      "type": "Manufacturing Plant (Professional - hand care / floor care)",
+      "address": "100 Technology Center Dr, Stanley, NC 28164",
+      "lat": 35.3601,
+      "lng": -81.0865,
+      "source": "Web research - SC Johnson Professional careers page + D&B/Manta/Redica company profiles place SCJP USA manufacturing in Stanley NC (Gaston County), ~70 employees. Street address approximate - confirmed city/state, exact street pending geocode refinement."
+    },
+    {
+      "idx": 5,
+      "name": "Sturtevant Regional Distribution Center - Sturtevant WI",
+      "city": "Sturtevant",
+      "state": "WI",
+      "type": "Regional Distribution Center (aerosol storage)",
+      "address": "2600 Enterprise Dr, Sturtevant, WI 53177",
+      "lat": 42.7008,
+      "lng": -87.8983,
+      "source": "EPA RMP record (Sturtevant Regional Distribution Center) + LoopNet/CommercialCafe address listings. 552,000 sq ft SCJ-owned warehouse near I-94/Hwy 11, adjacent to Waxdale."
+    },
+    {
+      "idx": 6,
+      "name": "Fort Worth Regional Distribution Center - Fort Worth TX",
+      "city": "Fort Worth",
+      "state": "TX",
+      "type": "Regional Distribution Center (aerosol storage)",
+      "address": "850 Transport Dr, Fort Worth, TX 76177",
+      "lat": 32.9707,
+      "lng": -97.3192,
+      "source": "EPA RMP record (Fort Worth Regional Distribution Center) + Waze listing (DHL - SC Johnson). AllianceTexas-area RDC; operated with DHL Supply Chain. Matches dossier-noted historical Fort Worth RDC."
+    },
+    {
+      "idx": 7,
+      "name": "Fairburn Regional Distribution Center - Fairburn GA",
+      "city": "Fairburn",
+      "state": "GA",
+      "type": "Regional Distribution Center (aerosol storage)",
+      "address": "1555 Oakley Industrial Blvd, Fairburn, GA 30213",
+      "lat": 33.5479,
+      "lng": -84.5519,
+      "source": "EPA RMP record (Fairburn Regional Distribution Center). Atlanta-metro RDC; current successor to the dossier-noted historical Forest Park GA RDC."
+    },
+    {
+      "idx": 8,
+      "name": "Woodland Regional Distribution Center - Woodland CA",
+      "city": "Woodland",
+      "state": "CA",
+      "type": "Regional Distribution Center (aerosol storage)",
+      "address": "2030 Hanson Way, Woodland, CA 95776",
+      "lat": 38.6745,
+      "lng": -121.779,
+      "source": "EPA RMP record (Woodland Regional Distribution Center) + JournalTimes report of SCJ 200,000 sq ft Woodland lease. Matches dossier-noted historical Woodland CA RDC; Northern California coverage."
+    },
+    {
+      "idx": 9,
+      "name": "Carlisle Regional Distribution Center - Carlisle PA",
+      "city": "Carlisle",
+      "state": "PA",
+      "type": "Regional Distribution Center (aerosol storage)",
+      "address": "5 True Temper Dr, Carlisle, PA 17015",
+      "lat": 40.1782,
+      "lng": -77.1394,
+      "source": "EPA RMP record (Carlisle Regional Distribution Center) + LoopNet/FCC (EXEL SC JOHNSON) listings. Northeast RDC; corresponds to the dossier/SupplyChainBrain historical Harrisburg PA RDC. Operated with DHL/Exel."
+    },
+    {
+      "idx": 10,
+      "name": "Ontario Distribution Center - Ontario CA",
+      "city": "Ontario",
+      "state": "CA",
+      "type": "Distribution Center (aerosol storage)",
+      "address": "1545 E Locust St, Building 7, Ontario, CA 91761",
+      "lat": 34.0395,
+      "lng": -117.5648,
+      "source": "EPA RMP record (Ontario Distribution Center) + LoopNet APN listing. Southern California aerosol DC; matches dossier-noted historical Ontario CA RDC. NOTE: third-party listings show 1545 E Locust now associated with a 3PL (Smart Warehousing) - SCJ's tenancy/active status here should be confirmed in deep-audit."
+    }
+  ]
+}

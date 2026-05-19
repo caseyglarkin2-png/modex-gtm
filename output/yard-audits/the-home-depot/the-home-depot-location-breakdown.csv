@@ -1,0 +1,61 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Home Depot FDC - Dallas TX,Flatbed Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,,,YES,,,,YES,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@32.7415,-96.9755,400m/data=!3m1!1e3"
+Home Depot FDC - Sparrows Point MD,Flatbed Distribution Center,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@39.22255,-76.4842,400m/data=!3m1!1e3"
+Home Depot RDC - Dallas TX,Rapid Deployment Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@32.63905,-96.851,400m/data=!3m1!1e3"
+Home Depot RDC - Topeka KS,Rapid Deployment Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@38.97299,-95.69715,400m/data=!3m1!1e3"
+Home Depot RDC - Monroe OH,Rapid Deployment Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@39.43460,-84.32130,400m/data=!3m1!1e3"
+Home Depot RDC - Locust Grove GA,Rapid Deployment Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,1,YES,,,,YES,,YES,,,YES,Rural,,,,YES,"https://www.google.com/maps/@33.36300,-84.11900,400m/data=!3m1!1e3"
+Home Depot RDC - Redlands CA,Rapid Deployment Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@34.08820,-117.20440,400m/data=!3m1!1e3"
+Home Depot RDC - Houston TX,Rapid Deployment Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@29.94050,-95.55430,400m/data=!3m1!1e3"
+Home Depot RDC - Breinigsville PA,Rapid Deployment Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@40.551634,-75.627668,400m/data=!3m1!1e3"
+Home Depot RDC - Winchester VA,Rapid Deployment Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@39.201000,-78.140200,400m/data=!3m1!1e3"
+Home Depot RDC - McCalla AL,Rapid Deployment Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@33.322267,-87.025569,400m/data=!3m1!1e3"
+Home Depot RDC - West Columbia SC,Rapid Deployment Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@33.908633,-81.074818,400m/data=!3m1!1e3"
+Home Depot RDC - Pittston Township PA,Rapid Deployment Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@41.31555,-75.76660,400m/data=!3m1!1e3"
+Home Depot RDC - Tracy CA,Rapid Deployment Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@37.75920,-121.40300,400m/data=!3m1!1e3"
+Home Depot RDC - Tolleson AZ,Rapid Deployment Center,#4,Gate + GS (BU sens.),,,,,,,,,,,YES,YES,,YES,YES,YES,,YES,YES,,2,1,YES,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@33.44480,-112.25300,400m/data=!3m1!1e3"
+Home Depot RDC - Elwood IL,Rapid Deployment Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,3,2,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@41.44010,-88.14320,400m/data=!3m1!1e3"
+Home Depot RDC - Salem OR,Rapid Deployment Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@44.90460,-122.96170,400m/data=!3m1!1e3"
+Home Depot RDC - Westfield MA,Rapid Deployment Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,,YES,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@42.17030,-72.73620,400m/data=!3m1!1e3"
+Home Depot SDC - Mira Loma CA,Stocking Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,,,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@34.02900,-117.53575,400m/data=!3m1!1e3"
+Home Depot SDC - Savannah GA,Stocking Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@32.15820,-81.20380,400m/data=!3m1!1e3"
+Home Depot SDC - Winchester VA,Stocking Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@39.080075,-78.153229,400m/data=!3m1!1e3"
+Home Depot SDC - Cranbury NJ,Stocking Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@40.307257,-74.498028,400m/data=!3m1!1e3"
+Home Depot SDC - Jersey Village TX,Stocking Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,,YES,,1,1,,,,,YES,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@29.87742,-95.557076,400m/data=!3m1!1e3"
+Home Depot SDC - Lathrop CA,Stocking Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@37.792762,-121.295676,400m/data=!3m1!1e3"
+Home Depot SDC - Romeoville IL,Stocking Distribution Center,#1,Gate + GS (not BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,,YES,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@41.663229,-88.112651,400m/data=!3m1!1e3"
+Home Depot SDC - Baytown TX,Stocking Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@29.732166,-94.917884,400m/data=!3m1!1e3"
+Home Depot DFC - Locust Grove GA,Direct Fulfillment Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@33.37055,-84.18450,400m/data=!3m1!1e3"
+Home Depot DFC - Perris CA,Direct Fulfillment Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,1,YES,,,,YES,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@33.85820,-117.21520,400m/data=!3m1!1e3"
+Home Depot DFC - Luckey OH,Direct Fulfillment Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Rural,YES,,,YES,"https://www.google.com/maps/@41.48068,-83.46420,400m/data=!3m1!1e3"
+Home Depot BDC - Baltimore MD,Bulk Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@39.21970,-76.47730,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,1,3%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,3,10%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,1,3%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,1,3%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,10,33%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,14,47%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,26,87%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,15,50%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,17,57%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,13,43%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

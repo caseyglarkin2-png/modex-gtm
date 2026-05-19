@@ -1,0 +1,65 @@
+{
+  "name": "UNFI - Prescott WI DC (Twin Cities)",
+  "type": "Distribution Center",
+  "coords": { "lat": 44.76235, "lng": -92.78495 },
+  "geofences": {
+    "perimeter": { "south": 44.76075, "west": -92.78780, "north": 44.76445, "east": -92.78340 },
+    "truckGate": { "south": 44.76110, "west": -92.78720, "north": 44.76170, "east": -92.78640 },
+    "dropYards": [
+      { "south": 44.76155, "west": -92.78640, "north": 44.76330, "east": -92.78560 }
+    ],
+    "dockAprons": [
+      { "south": 44.76155, "west": -92.78580, "north": 44.76420, "east": -92.78490 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 44,
+    "trailersVisible": 38,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 36.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.76235,-92.78495,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point where the truck driveway leaves Eagle Ridge Dr. The entrance from the public road is an open paved driveway directly into the lot; satellite at z19 and three Street-View headings along Eagle Ridge Dr show no gate structure and no perimeter fence line.",
+    "guardShack": "No staffed booth at the entrance. No 1-3-vehicle-footprint structure beside the truck lane in any imagery.",
+    "remoteGs": "False because there is no truck gate at all (remoteGs requires a gate present).",
+    "postGateStaging": "Wide paved truck court on the west side between the drop yard and the dock apron gives ample interior holding room before the dock doors.",
+    "drivewayLong": "The internal truck approach from Eagle Ridge Dr loops several hundred feet to the west-side docks; easily holds a 3+ truck queue.",
+    "dropYard": "Long bank of drop trailers parked without tractors along the west yard, north of the dock apron, distinct from active dock staging.",
+    "dockDoorCount": "~44 estimate; doors run nearly the full length of the west building face, partly shadowed/occluded by backed-in trailers in overhead imagery.",
+    "buildingCount": "Main DC plus a separate smaller building at the SW corner (the remote truck-maintenance facility named in UNFI/ESI project descriptions).",
+    "railServed": "No rail spur runs into the property; no track visible adjacent.",
+    "urbanRural": "Edge-of-town industrial park in Prescott WI (Pierce County), open farm fields on the north and east property lines; rural per rubric."
+  },
+  "method": "deep-audit"
+}

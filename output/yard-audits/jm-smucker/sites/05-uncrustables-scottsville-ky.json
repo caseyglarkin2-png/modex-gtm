@@ -1,0 +1,59 @@
+{
+  "name": "Uncrustables - Scottsville KY",
+  "type": "Manufacturing - Frozen handhelds (Uncrustables)",
+  "coords": { "lat": 36.76280, "lng": -86.18150 },
+  "geofences": {
+    "perimeter": { "south": 36.76080, "west": -86.18500, "north": 36.76560, "east": -86.17900 },
+    "truckGate": { "south": 36.76385, "west": -86.18510, "north": 36.76425, "east": -86.18460 },
+    "dropYards": [
+      { "south": 36.76360, "west": -86.18120, "north": 36.76500, "east": -86.17980 },
+      { "south": 36.76090, "west": -86.18290, "north": 36.76210, "east": -86.18160 }
+    ],
+    "dockAprons": [
+      { "south": 36.76380, "west": -86.18420, "north": 36.76480, "east": -86.18300 },
+      { "south": 36.76300, "west": -86.18280, "north": 36.76440, "east": -86.18150 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 38,
+    "trailersVisible": 65,
+    "trailerParkingCapacity": 100,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 70.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.7628,-86.1815,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "J.M. Smucker Uncrustables plant, 299 Smucker Way, Scottsville KY (Allen County). The original (first) Uncrustables plant — opened 2004, ~180,000 sq ft, since expanded by 80,000+ sq ft; also makes Snack-N-Waffle; ~288-500 employees. Roster pin (ROOFTOP) was ~1400m off the building centroid; resolved by satellite — a large irregular white food-plant building with processing silos, two large trailer drop yards (NE and SW) and extensive dock banks. Confirmed by Street View (Mar 2026) showing the plant and a 'Receiving / Employee Entrance' sign at the access driveway.",
+    "truckGate": "FALSE — the plant access driveway off Smucker Way is signed 'Receiving / Employee Entrance' and is a wide OPEN driveway with no barrier arm, sliding gate or checkpoint pinch-point at the public road (confirmed in Street View Mar 2026). The truck route runs in openly and loops around the building to the dock yards. No controlled gate at the property line.",
+    "guardShack": "FALSE — no guard booth at the entrance driveway, the public-road intersection, or anywhere along the frontage in Street View or satellite.",
+    "remoteGs": "FALSE — no truck gate, so remote check-in does not apply.",
+    "dockDoors": "25-50 — dock banks with trailers backed in on the NE building face and a separate dock cluster on the SW face; ~38 doors estimated. Flagged low confidence (some faces shadowed).",
+    "dropArea": "50+ — two large dedicated trailer drop yards, one on the NE and one on the SW, holding dozens of trailers in marked stalls; ~65 trailers visible, capacity ~100 combined.",
+    "shipRcvSeparate": "TRUE — two physically separate dock clusters on different building faces (NE and SW), consistent with separated receiving and shipping operations.",
+    "drivewayLong": "Long, deep approach — the open access driveway plus internal truck route give ample 3+ truck stacking room.",
+    "fastLaneOpportunity": "Wide open entrance apron and substantial unused paved width; room to add lanes if a controlled gate were installed.",
+    "postGateStaging": "Large open paved truck yards inside the property serve as staging before the docks.",
+    "railServed": "FALSE — no rail spur into the property; ships by truck.",
+    "urbanRural": "Rural — Scottsville is a small town; the plant sits on the edge of town surrounded by open farmland and light industry.",
+    "buildingCount": "1 — a single large integrated manufacturing building (irregular footprint from successive expansions).",
+    "dropYard": "TRUE — two dedicated trailer-storage lots distinct from the active dock aprons.",
+    "siteAreaAcres": "70.7 acres for the plant property (building, dock aprons, two drop yards, employee parking and grounds)."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,53 @@
+{
+  "name": "FedEx Express Regional Hub - Ontario CA",
+  "type": "Express regional hub (Ontario International Airport, So. California)",
+  "coords": { "lat": 34.05000, "lng": -117.58400 },
+  "geofences": {
+    "perimeter": { "south": 34.04680, "west": -117.58600, "north": 34.05300, "east": -117.57550 },
+    "truckGate": { "south": 34.04790, "west": -117.58110, "north": 34.04850, "east": -117.58030 },
+    "dropYards": [
+      { "south": 34.04820, "west": -117.58130, "north": 34.04920, "east": -117.57800 }
+    ],
+    "dockAprons": [
+      { "south": 34.04860, "west": -117.58130, "north": 34.05200, "east": -117.57700 }
+    ],
+    "staging": { "south": 34.04880, "west": -117.58050, "north": 34.05100, "east": -117.57700 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 35,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 165.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.05000,-117.58400,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": true
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "multiStep", "dropArea", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "FedEx Express Southern California regional hub on the south-central cargo apron of Ontario International Airport (ONT). Roster geocode (34.0628,-117.5929) landed near the passenger terminals; corrected via web research (new 251,000 sq ft hub opened Nov 2020 with 9 wide-body and 14 feeder aircraft gates and 18 truck docks) and satellite confirmation of the cargo sort building plus FedEx jet apron at ~34.0500,-117.5840.",
+    "truckGate": "Hub sits inside the airport AOA; vehicle access from Airport Drive is via a connector road controlled at airport SIDA security. No discrete FedEx guard booth resolved in imagery. truckGate=true reflects controlled access; flagged uncertain.",
+    "guardShack": "No FedEx guard booth identified at a property line; airport AOA badge/credential control implies remoteGs=true rather than a staffed FedEx shack.",
+    "dockDoors": "FedEx press confirms 18 truck docks at the new facility; band 10-25.",
+    "dropArea": "A long row of feeder trailers parked along the southern apron edge; ~25-50 trailer positions estimated from overhead imagery.",
+    "dropYard": "Trailers stage on the apron edge alongside ULD container rows rather than in a discrete fenced drop lot — dropYard=false.",
+    "multiStep": "Airport perimeter security followed by FedEx ramp control implies staged entry; no second booth directly imaged; flagged uncertain.",
+    "multipleFacilities": "Single integrated sort/cargo building; the large warehouses south of Airport Drive are unrelated third-party logistics buildings, not part of this campus.",
+    "scale": "No truck scale visible.",
+    "railServed": "No rail spur enters the property.",
+    "streetView": "Airport Drive panos (2018-2025) show a screen/retaining wall along the hub's south edge with FedEx aircraft visible behind it; the hub interior is not street-accessible."
+  },
+  "method": "deep-audit"
+}

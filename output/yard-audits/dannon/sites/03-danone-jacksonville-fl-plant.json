@@ -1,0 +1,50 @@
+{
+  "name": "Danone - Jacksonville FL (plant)",
+  "type": "Coffee & creamer plant (refrigerated)",
+  "coords": { "lat": 30.33240, "lng": -81.69790 },
+  "geofences": {
+    "perimeter": { "south": 30.33115, "west": -81.69925, "north": 30.33345, "east": -81.69625 },
+    "truckGate": { "south": 30.33195, "west": -81.69730, "north": 30.33235, "east": -81.69680 },
+    "dropYards": [
+      { "south": 30.33260, "west": -81.69700, "north": 30.33345, "east": -81.69625 },
+      { "south": 30.33150, "west": -81.69925, "north": 30.33230, "east": -81.69850 }
+    ],
+    "dockAprons": [
+      { "south": 30.33150, "west": -81.69830, "north": 30.33220, "east": -81.69750 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16, "trailersVisible": 18, "trailerParkingCapacity": 28,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 17.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.33240,-81.69790,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "entryLanes", "exitLanes", "dockDoors"],
+  "fieldNotes": {
+    "truckGate": "The entire site is enclosed by black chain-link fence topped with barbed wire along West Beaver Street and the cross street. A controlled vehicle entrance with yellow bollard-defined lanes leads into the yard/parking.",
+    "guardShack": "Street View (pano 30.33214,-81.69696, heading 250) clearly shows a small standalone guard booth set in the middle of the entrance drive, with yellow bollards channelizing traffic around it - a classic staffed checkpoint.",
+    "remoteGs": "False - a guard shack is present.",
+    "dockDoors": "Modest 115,025 sq ft processing plant; dock doors on the south/SW building faces with a few trailers backed in. Estimated ~16, banded 10-25 (low confidence - dense rooftop process equipment partly obscures the dock face).",
+    "dropArea": "Trailer drop/parking lot east of the building across the cross street with angled trailer stalls, plus trailers staged in the south yard; estimated 10-25.",
+    "backupSensitive": "Urban tight site - the gate/booth entry sits close to West Beaver Street and a signalized intersection with limited stacking depth; a truck queue could spill toward the road.",
+    "drivewayShort": "Short approach from the gate to the docks; only 1-2 trucks of stacking room inside.",
+    "railServed": "CSX rail tracks run along the south property edge but as a through corridor - no spur enters the building.",
+    "multipleFacilities": "One plant; an adjacent construction/expansion area (office trailers) seen in 2025 imagery relates to the $65M new-line expansion - counted as part of the single facility, buildingCount 2.",
+    "scale": "No truck scale identified; unconfirmed.",
+    "urbanRural": "Dense urban Jacksonville industrial corridor along West Beaver Street."
+  },
+  "method": "deep-audit"
+}

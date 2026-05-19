@@ -1,0 +1,296 @@
+{
+  "account": "Kimberly-Clark",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 18,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "K-C Beech Island Mill - Beech Island SC",
+      "city": "Beech Island",
+      "state": "SC",
+      "type": "Integrated tissue & personal care manufacturing complex (largest K-C facility globally)",
+      "address": "246 Old Jackson Hwy, Beech Island, SC 29842",
+      "lat": 33.417058,
+      "lng": -81.896178,
+      "source": "Dossier-named; SC Governor / Naylor trade press confirm address and that it is K-C's largest plant (~2,000 employees, Scott/Cottonelle/Kleenex/Kotex/Huggies)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 3814
+      }
+    },
+    {
+      "idx": 2,
+      "name": "K-C Beech Island Regional Distribution Center - Beech Island SC",
+      "city": "Beech Island",
+      "state": "SC",
+      "type": "Automated regional distribution center (new ~1.1M sq ft, $200M, announced 2025)",
+      "address": "Old Jackson Hwy area, Beech Island, SC 29842",
+      "lat": 33.420989,
+      "lng": -81.890666,
+      "source": "SC Governor / Supply Chain Dive May 2025 - $200M automated DC adjacent to the Beech Island plant",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 2
+      }
+    },
+    {
+      "idx": 3,
+      "name": "K-C Mobile Mill - Mobile AL",
+      "city": "Mobile",
+      "state": "AL",
+      "type": "Tissue / paper manufacturing mill",
+      "address": "2200 Paper Mill Rd, Mobile, AL 36610",
+      "lat": 30.735156,
+      "lng": -88.0534,
+      "source": "Dossier-named; address from Yellow Pages / Waze (Paper Mill Rd, Mobile)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 9
+      }
+    },
+    {
+      "idx": 4,
+      "name": "K-C Loudon Mill - Loudon TN",
+      "city": "Loudon",
+      "state": "TN",
+      "type": "Tissue manufacturing mill (K-C Professional / consumer tissue)",
+      "address": "5600 Kimberly Way, Loudon, TN 37774",
+      "lat": 35.767638,
+      "lng": -84.329922,
+      "source": "Dossier-named; address from Waze / Yelp (5600 Kimberly Way, Loudon)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 3863
+      }
+    },
+    {
+      "idx": 5,
+      "name": "K-C New Milford Mill - New Milford CT",
+      "city": "New Milford",
+      "state": "CT",
+      "type": "Diaper & tissue manufacturing plant (Huggies, Kleenex, Scott)",
+      "address": "Pickett District Rd, New Milford, CT 06776",
+      "lat": 41.552736,
+      "lng": -73.410492,
+      "source": "Dossier-named; CT News12 / paper-world.com confirm Pickett District Rd site, ~350 employees",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 2
+      }
+    },
+    {
+      "idx": 6,
+      "name": "K-C Owensboro Plant - Owensboro KY",
+      "city": "Owensboro",
+      "state": "KY",
+      "type": "Diaper / personal care manufacturing plant",
+      "address": "601 Innovative Way, Owensboro, KY 42301",
+      "lat": 37.819139,
+      "lng": -87.302856,
+      "source": "Dossier-named; address from Yelp / Waze (601 Innovative Way, Owensboro)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 21762
+      }
+    },
+    {
+      "idx": 7,
+      "name": "K-C Maumelle Plant - Maumelle AR",
+      "city": "Maumelle",
+      "state": "AR",
+      "type": "Huggies baby wipes manufacturing plant (~400,000 sq ft)",
+      "address": "Maumelle, AR 72113",
+      "lat": 34.870005,
+      "lng": -92.397751,
+      "source": "Dossier-named; KATV / Metro Little Rock Alliance confirm Maumelle wipes plant (~300 employees); exact street address not pinned",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 5
+      }
+    },
+    {
+      "idx": 8,
+      "name": "K-C Paris Plant - Paris TX",
+      "city": "Paris",
+      "state": "TX",
+      "type": "Diaper / personal care manufacturing plant (Huggies, Pull-Ups, Little Swimmers, Goodnites)",
+      "address": "Paris, TX 75460",
+      "lat": 33.660939,
+      "lng": -95.555513,
+      "source": "Dossier-named; K-C corporate / Tissue Online confirm Paris TX plant operating since 1983; exact street address not pinned",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 12
+      }
+    },
+    {
+      "idx": 9,
+      "name": "K-C Chester Mill - Chester PA",
+      "city": "Chester",
+      "state": "PA",
+      "type": "Non-integrated tissue mill (Scott 1000 bathroom tissue; ~1.3M sq ft, ~570 employees)",
+      "address": "800 W 2nd St, Chester, PA 19013",
+      "lat": 39.841551,
+      "lng": -75.36939,
+      "source": "Web research - Philadelphia Inquirer / Tissue Online / Naylor confirm Chester mill (Scott 1000); address from CLUI / Wikimapia",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 22
+      }
+    },
+    {
+      "idx": 10,
+      "name": "K-C Jenks Mill - Jenks OK",
+      "city": "Jenks",
+      "state": "OK",
+      "type": "Tissue paper mill (Cottonelle, Scott bathroom tissue)",
+      "address": "Jenks, OK 74037",
+      "lat": 35.995258,
+      "lng": -95.972683,
+      "source": "Web research - Arkansas Online / careers.kimberly-clark.com confirm Jenks tissue mill (opened 1990, $120M expansion); exact street address not pinned",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 47
+      }
+    },
+    {
+      "idx": 11,
+      "name": "K-C Marinette Mill - Marinette WI",
+      "city": "Marinette",
+      "state": "WI",
+      "type": "Tissue / wipers manufacturing mill (Scott Shop Towels, Wypall, Viva paper towels; ~230 employees)",
+      "address": "Marinette, WI 54143",
+      "lat": 45.099985,
+      "lng": -87.630662,
+      "source": "Dossier-referenced (Cold Spring/Lakeview closed; main Marinette mill remains); Wisconsin DNR Green Tier confirms active Marinette mill",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 3554
+      }
+    },
+    {
+      "idx": 12,
+      "name": "K-C Neenah Experimental Mill - Neenah WI",
+      "city": "Neenah",
+      "state": "WI",
+      "type": "Manufacturing / experimental mill (product & process innovation, Family Care)",
+      "address": "Neenah, WI 54956",
+      "lat": 44.185819,
+      "lng": -88.462609,
+      "source": "Dossier-referenced; Wisconsin DNR Green Tier - Neenah Experimental Mill; products still produced in Neenah post-HQ move",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 137
+      }
+    },
+    {
+      "idx": 13,
+      "name": "K-C Hendersonville Nonwovens Plant (Berkeley Mill) - Hendersonville NC",
+      "city": "Hendersonville",
+      "state": "NC",
+      "type": "Nonwovens manufacturing plant (materials for Depend, Poise, U by Kotex)",
+      "address": "Hendersonville, NC 28792",
+      "lat": 35.318728,
+      "lng": -82.460953,
+      "source": "Web research - PR Newswire / Henderson County EDP confirm K-C nonwovens plant (Berkeley Mill); exact street address not pinned",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 361
+      }
+    },
+    {
+      "idx": 14,
+      "name": "K-C Corinth Plant - Corinth MS",
+      "city": "Corinth",
+      "state": "MS",
+      "type": "Manufacturing plant",
+      "address": "610 Pinecrest St, Corinth, MS 38834",
+      "lat": 34.935342,
+      "lng": -88.490748,
+      "source": "Web research - Waze / Indeed confirm K-C Corinth MS facility (610 Pinecrest St)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 54
+      }
+    },
+    {
+      "idx": 15,
+      "name": "K-C Warren Advanced Manufacturing Facility - Warren OH",
+      "city": "Warren",
+      "state": "OH",
+      "type": "New advanced manufacturing facility (Huggies, Pull-Ups, Kleenex, Scott, Viva, Kotex, Poise, Depend; ~1.2M sq ft, $800M, under construction)",
+      "address": "Pine Ave, Warren, OH 44483",
+      "lat": 41.226713,
+      "lng": -80.811838,
+      "source": "Web research - JobsOhio / WFMJ May 2025 - $800M plant under construction on former steel mill site off Pine Ave, Trumbull County",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 3
+      }
+    },
+    {
+      "idx": 16,
+      "name": "K-C Logan Township Distribution Center - Logan Township NJ",
+      "city": "Logan Township",
+      "state": "NJ",
+      "type": "Distribution center (~600,000 sq ft, LEED-certified)",
+      "address": "Swedesboro, NJ 08085 (Logan Township)",
+      "lat": 39.747335,
+      "lng": -75.310914,
+      "source": "Web research - Blue Rock Construction / Trident Sustainability - ~599,500 sq ft LEED build-to-suit K-C DC, Logan Township/Swedesboro NJ",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 41
+      }
+    },
+    {
+      "idx": 17,
+      "name": "K-C Graniteville Distribution Center - Graniteville SC",
+      "city": "Graniteville",
+      "state": "SC",
+      "type": "Distribution center",
+      "address": "1043 Global Ave, Graniteville, SC 29829",
+      "lat": 33.623638,
+      "lng": -81.847485,
+      "source": "Web research - business directory listing - Kimberly-Clark Distribution Center, 1043 Global Ave, Graniteville SC",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 157
+      }
+    },
+    {
+      "idx": 18,
+      "name": "K-C DuPont Distribution Center (KCDC) - DuPont WA",
+      "city": "DuPont",
+      "state": "WA",
+      "type": "Distribution center",
+      "address": "1205 Wharf Rd, DuPont, WA 98327",
+      "lat": 47.114289,
+      "lng": -122.631979,
+      "source": "Web research - Waze / BusinessYab - Kimberly-Clark Distribution Center KCDC, 1205 Wharf Rd, DuPont WA",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1879
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

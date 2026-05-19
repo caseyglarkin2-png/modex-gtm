@@ -1,0 +1,55 @@
+{
+  "name": "Ford - Flat Rock Assembly Plant, Flat Rock MI",
+  "type": "Vehicle Assembly Plant",
+  "coords": { "lat": 42.10560, "lng": -83.24820 },
+  "geofences": {
+    "perimeter": { "south": 42.09800, "west": -83.25750, "north": 42.11250, "east": -83.24100 },
+    "truckGate": { "south": 42.10880, "west": -83.25080, "north": 42.10990, "east": -83.24920 },
+    "dropYards": [
+      { "south": 42.10300, "west": -83.25600, "north": 42.10700, "east": -83.25200 },
+      { "south": 42.10380, "west": -83.24850, "north": 42.10950, "east": -83.24450 }
+    ],
+    "dockAprons": [
+      { "south": 42.10350, "west": -83.25200, "north": 42.10650, "east": -83.24900 },
+      { "south": 42.10450, "west": -83.24850, "north": 42.10800, "east": -83.24550 }
+    ],
+    "staging": { "south": 42.10750, "west": -83.25000, "north": 42.10880, "east": -83.24800 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40, "trailersVisible": 220, "trailerParkingCapacity": 350,
+    "truckGateCount": 2, "buildingCount": 5, "siteAreaAcres": 400.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.10560,-83.24820,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "scale", "entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "facility": "Flat Rock Assembly Plant (Ford Mustang - exclusive NA production site), 1 International Dr, Flat Rock MI. Roster geocode (moved 3258m) nonetheless landed centrally on the plant; confirmed as the large assembly complex - ~2.9M sq ft of building on a 400-acre site (web-confirmed).",
+    "truckGate": "Secured Ford assembly campus with continuous perimeter chain-link fencing visible in Street View. Controlled access driveway off the public road with a Ford-branded entrance; an internal gate/checkpoint structure with a guard booth and crosswalk markings controls movement between the perimeter storage lots and the inner yard.",
+    "guardShack": "Ford assembly plants run staffed security gatehouses; a booth structure is visible at the internal checkpoint. Marked uncertain - the perimeter truck-gate booth could not be crisply isolated; Street View panos sit on the campus loop road rather than directly at the public-road gate.",
+    "remoteGs": "False - a staffed gatehouse model is used.",
+    "multiStep": "Outer perimeter gate plus an internal vehicle-control checkpoint between the storage lots and the inner yard.",
+    "railServed": "Rail infrastructure visible at the NW of the campus; assembly plant of this scale relies on rail. Rail yard adjacent to the complex.",
+    "dropYard": "Very large dedicated trailer drop yards - hundreds of trailers in multiple organized rows along the NE side and additional rows on the west - among the largest trailer-parking footprints in the Ford roster.",
+    "dropArea": "50+ trailers visible; the NE drop yard alone holds well over 100 trailers.",
+    "trailersVisible": "~220 trailers counted across the NE and west drop yards - approximate, high count.",
+    "dockDoors": "Counted ~40 loading doors across building faces; estimate from overhead imagery - marked uncertain.",
+    "shipRcvSeparate": "Distinct dock banks on separate building faces serving the inbound trailer yards and outbound vehicle dispatch.",
+    "fastLaneOpportunity": "Wide gate aprons and multi-lane internal driveways with substantial unused paved width for an express bypass.",
+    "multipleFacilities": "Multiple large connected buildings forming an integrated assembly campus.",
+    "urbanRural": "Edge-of-town Flat Rock with farmland and open land adjacent to the campus - per rubric, when torn between small-town industrial and Urban, choose Rural.",
+    "scale": "No truck scale clearly identified; left uncertain."
+  },
+  "method": "deep-audit"
+}

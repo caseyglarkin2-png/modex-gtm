@@ -1,0 +1,57 @@
+{
+  "name": "Caterpillar - Seguin TX Engine Plant",
+  "type": "Manufacturing plant (diesel & gas engine assembly, ~1.7M sq ft)",
+  "coords": { "lat": 29.57550, "lng": -97.99550 },
+  "geofences": {
+    "perimeter": { "south": 29.57200, "west": -98.00100, "north": 29.57900, "east": -97.99200 },
+    "truckGate": { "south": 29.57300, "west": -97.99750, "north": 29.57400, "east": -97.99630 },
+    "dropYards": [
+      { "south": 29.57350, "west": -97.99800, "north": 29.57800, "east": -97.99400 },
+      { "south": 29.57550, "west": -98.00050, "north": 29.57850, "east": -97.99800 }
+    ],
+    "dockAprons": [
+      { "south": 29.57350, "west": -97.99700, "north": 29.57800, "east": -97.99500 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 50,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 168.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.5755,-97.9955,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "truckGateCount", "entryLanes", "exitLanes", "dockDoorCount", "scale"],
+  "fieldNotes": {
+    "site": "Confirmed via Street View - 'CATERPILLAR' wall signage on the office building along W Kingsbury St. This is the Caterpillar Seguin Engine Plant (1600 W Kingsbury St), a ~1.7M sq ft diesel & gas engine assembly plant employing ~2,000. Roster geocode (29.573587, -97.994251, ROOFTOP, moved 18m) is precise and lands on the plant complex.",
+    "truckGate": "Very large secured manufacturing campus bordered by I-10. Truck operations (dock banks, trailer staging, component yards) are concentrated on the NW side behind the plant. A truck-route access controls entry; a small booth-like structure is visible at the NW truck yard. truckGate set true.",
+    "guardShack": "A small light-colored booth-like structure sits at the NW truck-yard area beside a row of trailers backed in - classed as a guard shack at medium confidence; flagged.",
+    "fastLaneOpportunity": "Extremely wide truck yards and multiple access roads give ample room for express/bypass lanes.",
+    "dockDoors": "Long dock-door banks confirmed on the NW/west building faces with many trailers backed in. 50+ band; exact count low confidence given the plant's scale.",
+    "dropArea": "Vast trailer/component staging yards on the NW with well over 100 trailers and rows of components/material; 50+ band.",
+    "shipRcvSeparate": "Multiple dock banks on different building faces (NW and west) handle separate flows.",
+    "drivewayLong": "Long internal truck routes around an enormous building - ample queueing room.",
+    "entryExitSeparate": "Multiple access roads/gates serve the campus (employee side off W Kingsbury, truck side on the NW) - entry and exit are at distinct points.",
+    "multipleFacilities": "Several distinct large buildings on one ~168-acre campus (main engine plant, satellite buildings, large component/staging areas).",
+    "urbanRural": "Edge-of-town Seguin TX off I-10 amid farmland; classed Rural per rubric.",
+    "railServed": "No rail spur into the property identified.",
+    "scale": "No truck scale identified; left false.",
+    "metrics": "Counts are honest estimates from overhead imagery of a 1.7M sq ft engine plant; flagged."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,49 @@
+{
+  "name": "CJ Logistics - Carlisle PA",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.2015, "lng": -77.1886 },
+  "geofences": {
+    "perimeter": null,
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 0,
+    "buildingCount": 0,
+    "siteAreaAcres": 0.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.2015,-77.1886,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural",
+    "connectivityIssue", "multipleFacilities", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "UNRESOLVED": "Could not positively identify a distinct CJ Logistics building in Carlisle PA. The roster entry has a null address and only a city-level coordinate (40.2015, -77.1886, geocode source 'none').",
+    "research": "Genuine effort: searched CJ Logistics newsroom, Indeed/Glassdoor/Snagajob job postings, Panjiva/ImportYeti shipping records, TruckMap, and the CJ US network page. CJ Logistics' documented 'facility near Carlisle, PA' is explicitly the DSC/CJ site at 801 Centerville Road, Newville, PA 17241 (CJ newsroom Dec 2019 article headline: 'facility near Carlisle, Pennsylvania', body address: '801 Centerville Road, Newville, PA'). Newville is in Cumberland County in the greater Carlisle area.",
+    "likelyDuplicate": "This 'Carlisle PA' roster entry (idx 21) is most likely an alternate city-label of the same facility as roster idx 3 (CJ Logistics - Newville PA, 801 Centerville Road, Newville PA - audited separately). CJ markets the Newville DC as 'near Carlisle' and Carlisle-labeled job postings map to it.",
+    "noDistinctSite": "No independently documented, distinct CJ Logistics warehouse physically within Carlisle proper was found. Per deep-audit-prompt guidance, the wrong site was NOT audited; classification fields are left default and flagged. Recommend human review / dedup against idx 3.",
+    "urbanRural": "Default 'Rural' is a placeholder only - not a real classification (no site located)."
+  },
+  "method": "deep-audit"
+}

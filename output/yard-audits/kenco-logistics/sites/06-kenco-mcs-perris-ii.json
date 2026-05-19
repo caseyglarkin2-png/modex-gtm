@@ -1,0 +1,52 @@
+{
+  "name": "Kenco MCS Perris II - Perris CA",
+  "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+  "coords": { "lat": 33.83915, "lng": -117.23035 },
+  "geofences": {
+    "perimeter": { "south": 33.83795, "west": -117.23280, "north": 33.84035, "east": -117.22790 },
+    "truckGate": { "south": 33.84150, "west": -117.23170, "north": 33.84210, "east": -117.23080 },
+    "dropYards": [
+      { "south": 33.84035, "west": -117.23210, "north": 33.84130, "east": -117.22790 }
+    ],
+    "dockAprons": [
+      { "south": 33.83980, "west": -117.23280, "north": 33.84035, "east": -117.22790 },
+      { "south": 33.83795, "west": -117.23280, "north": 33.83850, "east": -117.22790 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 29.9,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.83915,-117.23035,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "truckGate"],
+  "fieldNotes": {
+    "site": "Perris I (idx 5) and Perris II (idx 6) both resolve to the Kenco Perris Logistics Center campus, 3900 Indian Avenue, SE corner of Ramona Expressway / Indian Avenue. Public sources list one 579,708 SF building; the campus actually holds two large cross-dock warehouses. idx 5 point landed on the north building, so Perris II was audited as the SOUTH building (the larger of the two), centered ~33.8392, -117.2303.",
+    "truckGate": "Truck yard is fully enclosed by black metal perimeter fence (confirmed in 5+ Street View headings off Indian Avenue and the west perimeter road). Facility is C-TPAT certified per LogiCore listing, which mandates a controlled, secured yard. A gate exists; exact arm/slide-gate not crisply resolvable from imagery.",
+    "guardShack": "No staffed guard booth visible in any Street View of the perimeter or truck-drive entrances. Modern Class-A Inland Empire spec building; access is consistent with a sliding gate plus kiosk/intercom (remote check-in).",
+    "shipRcvSeparate": "Cross-dock building - distinct dock banks on the north face and the south face.",
+    "dockDoors": "Cross-dock: ~55 doors on the south face and ~55 on the north face; total estimated ~110 (50+ band).",
+    "dropYard": "Large shared trailer drop yard between the two campus buildings, packed with parked trailers; also trailer parking along south apron.",
+    "multipleFacilities": "Two large warehouse buildings (Perris I and Perris II) on the same fenced campus.",
+    "fastLaneOpportunity": "Wide truck-yard drives and a deep apron at the NW entrance provide room for an express/bypass lane.",
+    "siteAreaAcres": "~30 acres for the south building parcel; matches reported 28-30 acre Perris Logistics Center site."
+  },
+  "method": "deep-audit"
+}

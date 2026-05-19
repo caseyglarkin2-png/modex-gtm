@@ -1,0 +1,48 @@
+{
+  "name": "H-E-B Hempstead Distribution Campus (in development) - Hempstead TX",
+  "type": "Distribution Campus (multi-phase, Phase 1 under construction)",
+  "coords": { "lat": 30.105200, "lng": -96.064000 },
+  "geofences": {
+    "perimeter": { "south": 30.098000, "west": -96.072000, "north": 30.108000, "east": -96.056000 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
+    "truckGateCount": 0, "buildingCount": 0, "siteAreaAcres": 423.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.105200,-96.064000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "scale", "dropYard", "multiStep",
+    "connectivityIssue"
+  ],
+  "fieldNotes": {
+    "status": "UNDER CONSTRUCTION - Phase 1 only. Current satellite imagery confirms an active construction site: a large area (~400+ acres) of graded reddish earth, a sand/fill building pad being prepared, perimeter grading and construction staging (equipment, fill stockpiles, trucks). No completed distribution building, roof, dock doors, or defined truck yard exists yet. The truck gate, guard shack, docks, and yard cannot be physically audited.",
+    "location": "Positively located: the ~500-acre H-E-B distribution campus in Waller County, south of US 290 and east of SH 6, on the SW edge of Hempstead, immediately adjacent to the RCR Hempstead Logistics Rail Park (23639 Hwy 6). The roster's APPROXIMATE coordinate (30.097441, -96.078292) was the town centroid; corrected here to the construction site (30.105200, -96.064000).",
+    "railServed": "TRUE (planned/expected). H-E-B's stated rationale: rail access was a key factor in the site selection - the campus is adjacent to the RCR Hempstead Logistics Rail Park on a Union Pacific Class I line. A rail spur into the campus is expected though not yet visible in the construction imagery.",
+    "multipleFacilities": "TRUE - this is explicitly a multi-phase distribution CAMPUS: Phase 1 ~750,000-900,000 sq ft distribution facility with 120-140 dock doors and a 20-30 acre yard (~$200M); Phase 2 adds 250,000-350,000 sq ft plus dedicated cold storage (2027); Phase 3 finishes parking/landscaping/stormwater. Multiple large buildings are planned.",
+    "expectedScale": "Once Phase 1 opens, the facility will be a very large gated freight DC - expect a controlled truck gate, guard shack and/or remote check-in, 120-140 dock doors (50+ band), a large drop yard, and rail service. These are EXPECTATIONS from the announced program, not observations - all such fields are in uncertainFields.",
+    "urbanRural": "Edge-of-small-town / open Waller County farmland setting, ~50 miles NW of Houston - Rural.",
+    "siteAreaAcres": "~423 acres measured from the currently-graded construction footprint; the full land purchase is ~500 acres.",
+    "buildingCount": "0 - no building is structurally complete yet in the imagery."
+  },
+  "method": "deep-audit"
+}

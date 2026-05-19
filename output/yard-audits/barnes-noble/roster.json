@@ -1,0 +1,40 @@
+{
+  "account": "Barnes & Noble",
+  "generatedAt": "2026-05-18",
+  "facilityCount": 2,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Barnes & Noble - Monroe Township NJ DC",
+      "city": "Monroe Township",
+      "state": "NJ",
+      "type": "Distribution Center / E-commerce Fulfillment Center",
+      "address": "1 Barnes & Noble Way, Monroe Township, NJ 08831",
+      "lat": 40.358049,
+      "lng": -74.464912,
+      "source": "Dossier (Operational Footprint section: 1.15M sq ft, 73 acres, 115 doors); confirmed via CenterPoint Properties property page, Waze and TruckMap listings, Hotfrog/Yellowpages (ZIP 08831-3417). East-coast retail + national e-commerce hub. Lat/lng approximate (township-level basis; needs refinement at deep-audit step).",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 144
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Barnes & Noble - Reno NV DC",
+      "city": "Reno",
+      "state": "NV",
+      "type": "Distribution Center / West-Coast Replenishment Center",
+      "address": "12660 Old Virginia Rd, Reno, NV 89521",
+      "lat": 39.418826,
+      "lng": -119.750481,
+      "source": "Dossier (Operational Footprint: ~601K sq ft, Damonte Ranch, lease renewed Nov 2025); address confirmed via Panjiva buyer report, Chamber of Commerce and LoopNet listings (APN 140-010-09). Lat/lng from Walk Score geocode of the street address.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 26
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

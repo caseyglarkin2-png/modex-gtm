@@ -1,0 +1,54 @@
+{
+  "name": "Home Depot RDC - Houston TX",
+  "type": "Rapid Deployment Center",
+  "coords": { "lat": 29.94050, "lng": -95.55430 },
+  "geofences": {
+    "perimeter": { "south": 29.93870, "west": -95.55900, "north": 29.94480, "east": -95.55020 },
+    "truckGate": { "south": 29.93900, "west": -95.55830, "north": 29.93990, "east": -95.55730 },
+    "dropYards": [
+      { "south": 29.94180, "west": -95.55780, "north": 29.94470, "east": -95.55060 }
+    ],
+    "dockAprons": [
+      { "south": 29.93960, "west": -95.55730, "north": 29.94020, "east": -95.55100 },
+      { "south": 29.94120, "west": -95.55730, "north": 29.94180, "east": -95.55100 }
+    ],
+    "staging": { "south": 29.93960, "west": -95.55830, "north": 29.94120, "east": -95.55740 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 180,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 400,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 103.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.94050,-95.55430,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale"],
+  "fieldNotes": {
+    "truckGate": "Single controlled private access road enters the property at the SW corner, crossing a drainage easement that separates the site from public roads. The whole property is set back behind the easement with a perimeter edge — a true checkpoint pinch-point at the SW access. RDC #5521 runs 24/7.",
+    "guardShack": "Inferred TRUE — a guard booth at the SW access is the HD-RDC norm; the gate sits deep on the private drive and is not reachable by public Street View, and no clean booth was isolated in satellite (a small structure is visible near the SW access lane). Flagged uncertain.",
+    "shipRcvSeparate": "Long building with continuous dock doors and trailers backed in on BOTH long faces (north face onto the large drop yard, south face onto the apron) — inbound and outbound run from separate dock banks.",
+    "dropArea": "Very large trailer drop yard fills the north half of the property — rows of marked stalls packed with parked trailers, easily 100+; 50+ band.",
+    "drivewayLong": "Long private SW access drive plus deep internal yard circulation hold a 3+ truck queue well clear of any public road.",
+    "fastLaneOpportunity": "Abundant unused paved width on the SW access drive and yard; clear room for an express/bypass lane.",
+    "backupSensitive": "FALSE — the wide drainage easement and long private drive isolate any gate queue from public roads.",
+    "urbanRural": "Northwest Houston metro (Willowbrook / Hwy 249 area) — surrounded by residential subdivisions and other industrial development. Urban.",
+    "railServed": "No rail spur enters the property.",
+    "siteAreaAcres": "Derived from the perimeter box (~540 m N-S x ~770 m E-W developed footprint incl. north drop yard).",
+    "buildingCount": "Single RDC building; the smaller building to the east is a separate property."
+  },
+  "method": "deep-audit"
+}

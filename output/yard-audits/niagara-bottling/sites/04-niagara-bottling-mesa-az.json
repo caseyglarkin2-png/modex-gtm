@@ -1,0 +1,66 @@
+{
+  "name": "Niagara Bottling - Mesa AZ",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 33.35260, "lng": -111.62580 },
+  "geofences": {
+    "perimeter": { "south": 33.35150, "west": -111.62750, "north": 33.35420, "east": -111.62350 },
+    "truckGate": { "south": 33.35345, "west": -111.62680, "north": 33.35385, "east": -111.62620 },
+    "dropYards": [
+      { "south": 33.35330, "west": -111.62680, "north": 33.35390, "east": -111.62360 }
+    ],
+    "dockAprons": [
+      { "south": 33.35305, "west": -111.62680, "north": 33.35335, "east": -111.62360 }
+    ],
+    "staging": { "south": 33.35335, "west": -111.62680, "north": 33.35390, "east": -111.62550 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 65,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 28.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.35260,-111.62580,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "connectivityIssue"],
+  "fieldNotes": {
+    "buildingId": "Confirmed Niagara via the 'niagara' wordmark on the building's west/NW face (Street View, captured 2024-12). 450,183 sq ft single-story water-manufacturing plant, established 2018, 3453 S 96th St.",
+    "truckGate": "Fenced truck dock yard along the building's north face. Truck access is a driveway off S 96th St on the NW; a small standalone structure sits at the road edge by the entrance.",
+    "guardShack": "A small (~1-2 vehicle footprint) standalone building sits at the truck-entrance road edge - consistent with a gatehouse/guard booth. Not directly imaged in Street View (limited pano coverage), so classified true at medium confidence and flagged.",
+    "remoteGs": "False given guardShack inferred true; flagged because the guard-booth call itself is medium confidence.",
+    "dockDoors": "Continuous canopied dock run along the full ~430 m north face; estimated ~55 doors - band 50+.",
+    "dropArea": "Row of marked trailer-parking stalls north of the dock apron holding dozens of dropped trailers; band 25-50.",
+    "fastLaneOpportunity": "Wide dock-yard road and ample paved/desert width at the entrance - room to add an express lane.",
+    "urbanRural": "Building sits among large tracts of undeveloped Sonoran desert at the SE edge of Mesa - Rural per the rubric (edge-of-town, sparse surrounding development).",
+    "connectivityIssue": "Edge-of-Mesa-metro location with desert surroundings; cellular coverage probably adequate but lower confidence - flagged. Set false (still within metro reach).",
+    "railServed": "No rail spur into the property.",
+    "siteAreaAcres": "~28 acres from the perimeter box (building + north dock yard + NW employee parking)."
+  },
+  "method": "deep-audit"
+}

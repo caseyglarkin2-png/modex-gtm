@@ -1,0 +1,74 @@
+{
+  "name": "Nestlé USA Distribution Center - McDonough GA",
+  "type": "Distribution center",
+  "coords": { "lat": 33.408400, "lng": -84.154300 },
+  "geofences": {
+    "perimeter": { "south": 33.405800, "west": -84.156800, "north": 33.410300, "east": -84.151800 },
+    "truckGate": { "south": 33.410200, "west": -84.154900, "north": 33.410700, "east": -84.153900 },
+    "dropYards": [
+      { "south": 33.405900, "west": -84.153400, "north": 33.408300, "east": -84.151900 },
+      { "south": 33.408400, "west": -84.154500, "north": 33.410400, "east": -84.153200 }
+    ],
+    "dockAprons": [
+      { "south": 33.406200, "west": -84.155400, "north": 33.409600, "east": -84.154200 },
+      { "south": 33.407100, "west": -84.153100, "north": 33.408500, "east": -84.152100 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 175,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 42.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.4084,-84.1543,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "exitLanes", "scale"],
+  "fieldNotes": {
+    "locationResolution": "Roster coords (33.40872,-84.15465) and search-derived coords (33.40806,-84.15425) point at the same large NW-SE-oriented warehouse off Nestle Ct. Confirmed via Waze/Yelp/Henry County directory as the Nestlé Distribution Center, 1 Nestle Ct, McDonough GA 30253. Locked center 33.4084,-84.1543.",
+    "truckGate": "Web research describing the site's gate-guard duties confirms a controlled gated entry: the guard 'opens the gate to release the driver'. The compound is fully fenced (chain-link fencing visible in Street View of the access-road corridor).",
+    "guardShack": "Confirmed by web research: a gate guard works a window ('drivers bring license and bills to the window'), answers a call box, and issues yard passes. A staffed booth/window is present. The booth itself was not isolable from satellite (small ancillary structures on the NE access road), but the operational description is explicit.",
+    "remoteGs": "False - the gate is staffed by a guard, not a kiosk-only setup.",
+    "multiStep": "Web research describes a multi-stage check-in: gate guard verifies appointment/paperwork, checks trailer fuel/seals, then issues a yard pass with door numbers before releasing the driver into the yard.",
+    "dockDoors": "Very large DC. SW long face carries an extended continuous dock run (~50-60 doors with trailers backed in); SE face carries another large bank (~30-40); plus docks on the NE side. Total well into the 50+ band; ~110 is a rough overhead estimate.",
+    "dropArea": "Extensive trailer drop yard at the SE end - 4-5 rows of ~25-30 trailers each (well over 100 dropped trailers), plus marked trailer stalls along the NE side. Clearly 50+.",
+    "trailersVisible": "~175 trailers counted across dock faces and the SE drop yard in the captured imagery; approximate.",
+    "shipRcvSeparate": "Distinct dock banks on physically separate building faces (long SW face and SE face) consistent with separate shipping/receiving clusters.",
+    "railServed": "A rail spur runs directly alongside the NE face of the building into the property - the facility is rail-served.",
+    "fastLaneOpportunity": "Large open paved yard inside the gate and a wide access corridor provide ample room to add an express/bypass lane.",
+    "drivewayLong": "The gate-to-dock approach crosses a large interior yard that easily holds a 3+ truck queue.",
+    "postGateStaging": "Large paved yard inside the gate (where drivers receive their yard pass) before reaching the dock faces.",
+    "urbanRural": "Facility sits in a freeway-side industrial/logistics park on the edge of McDonough (a small Georgia city), surrounded by warehouses and woodland rather than dense metro fabric; classified Rural per the rubric's small-town-industrial guidance.",
+    "buildingCount": "Main DC warehouse plus one small ancillary structure (blue-roofed building near the rail spur on the NE side).",
+    "scale": "No truck scale clearly visible in the imagery; flagged uncertain.",
+    "exitLanes": "Single combined entry/exit at the one gate; exit lane count inferred as 1."
+  },
+  "method": "deep-audit"
+}

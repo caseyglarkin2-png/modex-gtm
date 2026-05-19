@@ -1,0 +1,55 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+DHL Supply Chain - Diageo Campus - Plainfield/Bolingbrook IL,Dedicated Customer Distribution Center (spirits),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@41.649974,-88.143696,400m/data=!3m1!1e3"
+DHL Supply Chain - IDS Fulfillment HQ DC - Plainfield IN,Multi-Customer E-Commerce Fulfillment Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,,,,,,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@39.739272,-86.353432,400m/data=!3m1!1e3"
+DHL Supply Chain - IDS Fulfillment DC - Salt Lake City UT,Multi-Customer E-Commerce Fulfillment Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,,,,,,,,YES,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@40.734188,-112.001148,400m/data=!3m1!1e3"
+DHL Supply Chain - East Coast Center of Excellence - Annville PA,Life Sciences & Healthcare Distribution Center (Foreign Trade Zone),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,,,YES,,,,YES,,,,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@40.318500,-76.535800,400m/data=!3m1!1e3"
+DHL Supply Chain - Siemens Healthineers Life Sciences DC - Memphis TN,Life Sciences & Healthcare Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,YES,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@34.997800,-89.859500,400m/data=!3m1!1e3"
+DHL Supply Chain - East Coast Center of Excellence (Project Empire) - Jacksonville FL,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@30.43930,-81.57100,400m/data=!3m1!1e3"
+DHL Supply Chain - Mann+Hummel DC - Cowpens SC,Dedicated Customer Distribution Center (filtration),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@35.06105,-81.78200,400m/data=!3m1!1e3"
+DHL Supply Chain - Violet Township DC - Pickerington OH,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Rural,YES,,,,"https://www.google.com/maps/@39.846447,-82.704257,400m/data=!3m1!1e3"
+DHL Supply Chain - Campbell Soup DC - Fort Worth TX,Dedicated Customer Distribution Center (CPG/food),#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@32.84600,-97.31570,400m/data=!3m1!1e3"
+DHL Supply Chain - Whitestown DC - Whitestown IN,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,,YES,,YES,,1,1,,,,YES,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@39.96780,-86.37660,400m/data=!3m1!1e3"
+DHL Supply Chain - Groveport DC - Groveport OH,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@39.845500,-82.900800,400m/data=!3m1!1e3"
+DHL Supply Chain - Keurig DC - Union City GA,Dedicated Customer Distribution Center (beverage),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@33.572741,-84.534200,400m/data=!3m1!1e3"
+DHL Supply Chain - Union City DC (Derrick Industrial) - Union City GA,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,YES,,,,,Urban,,,,YES,"https://www.google.com/maps/@33.631700,-84.571800,400m/data=!3m1!1e3"
+DHL Supply Chain - DHL Commerce Park DC - St. George SC,Distribution Center (Charleston port-adjacent campus),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,YES,,,,YES,Rural,,,,YES,"https://www.google.com/maps/@33.177800,-80.535000,400m/data=!3m1!1e3"
+DHL Supply Chain - Melrose Park DC - Melrose Park IL,Distribution / E-Commerce Sortation Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@41.913400,-87.847700,400m/data=!3m1!1e3"
+DHL Supply Chain - DC - Edgerton KS (Logistics Park Kansas City),Distribution Center (intermodal logistics park),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,YES,,,YES,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@38.78275,-94.9581,400m/data=!3m1!1e3"
+DHL Supply Chain - IDS Fulfillment DC - Atlanta GA,Multi-Customer E-Commerce Fulfillment Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,,,YES,,YES,,1,1,,,,YES,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@33.4101,-84.7256,400m/data=!3m1!1e3"
+DHL Supply Chain - IDS Fulfillment DC - Indianapolis IN,Multi-Customer E-Commerce Fulfillment Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@39.68545,-86.31017,400m/data=!3m1!1e3"
+DHL Supply Chain - DC - Mechanicsburg PA,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,,YES,1,1,,,YES,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@40.2372,-76.9985,400m/data=!3m1!1e3"
+DHL Supply Chain - DC - North Las Vegas NV,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,YES,Rural,YES,YES,,YES,"https://www.google.com/maps/@36.3454,-114.9345,400m/data=!3m1!1e3"
+DHL Supply Chain - DC - Etna OH,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,YES,YES,,,YES,,1,1,,,,,YES,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@39.96055,-82.71735,400m/data=!3m1!1e3"
+DHL Supply Chain - DC - Obetz OH,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,,,,,,YES,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@39.86725,-82.94000,400m/data=!3m1!1e3"
+DHL Supply Chain - DC - Houston TX,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,,YES,,,YES,,1,1,,,,,YES,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@29.80440,-95.27275,400m/data=!3m1!1e3"
+DHL Supply Chain - DC - Dallas/Irving TX,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,,YES,,,YES,,1,1,,,,,YES,YES,,,,YES,Urban,,,,,"https://www.google.com/maps/@32.83480,-97.03130,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,11,46%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,12,50%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,1,4%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,24,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,10,42%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,9,38%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,1,4%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,23,96%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,24,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,24,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

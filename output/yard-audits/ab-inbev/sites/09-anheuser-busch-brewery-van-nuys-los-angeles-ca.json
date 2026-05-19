@@ -1,0 +1,57 @@
+{
+  "name": "Anheuser-Busch Brewery - Van Nuys (Los Angeles) CA",
+  "type": "Brewery",
+  "coords": { "lat": 34.21850, "lng": -118.47900 },
+  "geofences": {
+    "perimeter": { "south": 34.21500, "west": -118.48280, "north": 34.22100, "east": -118.47600 },
+    "truckGate": { "south": 34.22060, "west": -118.47820, "north": 34.22130, "east": -118.47720 },
+    "dropYards": [
+      { "south": 34.21560, "west": -118.48280, "north": 34.21780, "east": -118.48120 },
+      { "south": 34.21570, "west": -118.48120, "north": 34.21720, "east": -118.47960 }
+    ],
+    "dockAprons": [
+      { "south": 34.21760, "west": -118.48060, "north": 34.21900, "east": -118.47900 },
+      { "south": 34.21650, "west": -118.48120, "north": 34.21780, "east": -118.47980 }
+    ],
+    "staging": { "south": 34.21950, "west": -118.47850, "north": 34.22050, "east": -118.47720 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 2,
+    "buildingCount": 8,
+    "siteAreaAcres": 60.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.21850,-118.47900,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Confirmed Anheuser-Busch Los Angeles (Van Nuys) Brewery, 15800 Roscoe Blvd. Roster coords were rooftop-accurate (movedMeters 55). Locked center on the main brewhouse/warehouse mass at 34.21850,-118.47900. Street View on the E street shows brewery storage tanks behind a hedge, and the Roscoe Blvd frontage carries a 'Bud...' building sign.",
+    "truckGate": "Sliding gate across the main entrance off Roscoe Blvd at the NE corner (34.2210,-118.4775); Street View shows a sliding security gate with a wide multi-lane apron. A second gated truck entrance serves the SW/rail side. truckGateCount 2.",
+    "guardShack": "Z20 satellite shows a distinct rounded guard-booth structure on a paved island at the NE entrance, with a vehicle parked beside it; Street View confirms a small booth just inside the gate.",
+    "backupSensitive": "Gate opens directly onto Roscoe Blvd, a busy 4-6 lane urban arterial; minimal stacking room outside the gate so a truck queue would spill onto the road.",
+    "drivewayShort": "Tight urban campus - gate-to-dock approach is short, no long internal queue lane.",
+    "dockDoors": "25-50 band. Dock canopies and backed-in trailers visible along internal building faces; rooftop solar obscures the count, estimate ~45.",
+    "dropArea": "Large trailer yards within the campus SW corner plus a sizable trailer yard across Roscoe Blvd to the NW; well over 50 stalls. dropYard true.",
+    "shipRcvSeparate": "Multiple distinct dock banks on different building faces around the brewhouse and warehouses.",
+    "railServed": "Multi-track rail line runs along the SE/S edge of the campus with rail siding into the property; trailers staged alongside.",
+    "multipleFacilities": "Campus of 8+ large structures - brewhouse with tank farm, packaging warehouses, ancillary buildings, plus the detached NW trailer yard across Roscoe Blvd.",
+    "urbanRural": "Dense San Fernando Valley industrial fabric within metro Los Angeles - Urban.",
+    "fastLaneOpportunity": "Wide multi-lane gate apron at the NE entrance offers room for an express bypass lane.",
+    "operatingStatus": "Active brewery (95 acres, 1.7M sq ft, ~12M barrels/yr per industry sources); offers public tours."
+  },
+  "method": "deep-audit"
+}

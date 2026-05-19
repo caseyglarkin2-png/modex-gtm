@@ -1,0 +1,2830 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4723,
+              41.4028
+            ],
+            [
+              -81.4672,
+              41.4028
+            ],
+            [
+              -81.4672,
+              41.4072
+            ],
+            [
+              -81.4723,
+              41.4072
+            ],
+            [
+              -81.4723,
+              41.4028
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Solon OH",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 51.5,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4684,
+              41.4043
+            ],
+            [
+              -81.4678,
+              41.4043
+            ],
+            [
+              -81.4678,
+              41.4047
+            ],
+            [
+              -81.4684,
+              41.4047
+            ],
+            [
+              -81.4684,
+              41.4043
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Solon OH",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4728,
+              41.4054
+            ],
+            [
+              -81.4712,
+              41.4054
+            ],
+            [
+              -81.4712,
+              41.4065
+            ],
+            [
+              -81.4728,
+              41.4065
+            ],
+            [
+              -81.4728,
+              41.4054
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Solon OH",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4712,
+              41.4056
+            ],
+            [
+              -81.4698,
+              41.4056
+            ],
+            [
+              -81.4698,
+              41.4066
+            ],
+            [
+              -81.4712,
+              41.4066
+            ],
+            [
+              -81.4712,
+              41.4056
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Solon OH",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4723,
+              41.4047
+            ],
+            [
+              -81.4709,
+              41.4047
+            ],
+            [
+              -81.4709,
+              41.4056
+            ],
+            [
+              -81.4723,
+              41.4056
+            ],
+            [
+              -81.4723,
+              41.4047
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Solon OH",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.471,
+              41.405
+            ],
+            [
+              -81.4698,
+              41.405
+            ],
+            [
+              -81.4698,
+              41.4062
+            ],
+            [
+              -81.471,
+              41.4062
+            ],
+            [
+              -81.471,
+              41.405
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Solon OH",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.582,
+              35.8165
+            ],
+            [
+              -90.5753,
+              35.8165
+            ],
+            [
+              -90.5753,
+              35.8212
+            ],
+            [
+              -90.582,
+              35.8212
+            ],
+            [
+              -90.582,
+              35.8165
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Jonesboro AR",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 78.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.576,
+              35.8202
+            ],
+            [
+              -90.5754,
+              35.8202
+            ],
+            [
+              -90.5754,
+              35.8206
+            ],
+            [
+              -90.576,
+              35.8206
+            ],
+            [
+              -90.576,
+              35.8202
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Jonesboro AR",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.5782,
+              35.8168
+            ],
+            [
+              -90.576,
+              35.8168
+            ],
+            [
+              -90.576,
+              35.8187
+            ],
+            [
+              -90.5782,
+              35.8187
+            ],
+            [
+              -90.5782,
+              35.8168
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Jonesboro AR",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.5768,
+              35.8188
+            ],
+            [
+              -90.5753,
+              35.8188
+            ],
+            [
+              -90.5753,
+              35.8203
+            ],
+            [
+              -90.5768,
+              35.8203
+            ],
+            [
+              -90.5768,
+              35.8188
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Jonesboro AR",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.5795,
+              35.8172
+            ],
+            [
+              -90.5775,
+              35.8172
+            ],
+            [
+              -90.5775,
+              35.818
+            ],
+            [
+              -90.5795,
+              35.818
+            ],
+            [
+              -90.5795,
+              35.8172
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Jonesboro AR",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.5768,
+              35.8185
+            ],
+            [
+              -90.576,
+              35.8185
+            ],
+            [
+              -90.576,
+              35.8201
+            ],
+            [
+              -90.5768,
+              35.8201
+            ],
+            [
+              -90.5768,
+              35.8185
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Jonesboro AR",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.581,
+              35.8203
+            ],
+            [
+              -90.577,
+              35.8203
+            ],
+            [
+              -90.577,
+              35.8211
+            ],
+            [
+              -90.581,
+              35.8211
+            ],
+            [
+              -90.581,
+              35.8203
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Jonesboro AR",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.69,
+              35.0513
+            ],
+            [
+              -81.6848,
+              35.0513
+            ],
+            [
+              -81.6848,
+              35.0568
+            ],
+            [
+              -81.69,
+              35.0568
+            ],
+            [
+              -81.69,
+              35.0513
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Gaffney SC",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 71.7,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6893,
+              35.0523
+            ],
+            [
+              -81.6887,
+              35.0523
+            ],
+            [
+              -81.6887,
+              35.0528
+            ],
+            [
+              -81.6893,
+              35.0528
+            ],
+            [
+              -81.6893,
+              35.0523
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Gaffney SC",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6882,
+              35.0525
+            ],
+            [
+              -81.687,
+              35.0525
+            ],
+            [
+              -81.687,
+              35.0533
+            ],
+            [
+              -81.6882,
+              35.0533
+            ],
+            [
+              -81.6882,
+              35.0525
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Gaffney SC",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6883,
+              35.0529
+            ],
+            [
+              -81.687,
+              35.0529
+            ],
+            [
+              -81.687,
+              35.0537
+            ],
+            [
+              -81.6883,
+              35.0537
+            ],
+            [
+              -81.6883,
+              35.0529
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Gaffney SC",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.689,
+              35.0528
+            ],
+            [
+              -81.6876,
+              35.0528
+            ],
+            [
+              -81.6876,
+              35.0538
+            ],
+            [
+              -81.689,
+              35.0538
+            ],
+            [
+              -81.689,
+              35.0528
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Gaffney SC",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.3275,
+              44.2835
+            ],
+            [
+              -88.321,
+              44.2835
+            ],
+            [
+              -88.321,
+              44.2872
+            ],
+            [
+              -88.3275,
+              44.2872
+            ],
+            [
+              -88.3275,
+              44.2835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Pizza Division - Little Chute WI",
+        "type": "Frozen pizza manufacturing plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 50,
+          "trailerParkingCapacity": 75,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 52.7,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.3253,
+              44.2863
+            ],
+            [
+              -88.3246,
+              44.2863
+            ],
+            [
+              -88.3246,
+              44.2868
+            ],
+            [
+              -88.3253,
+              44.2868
+            ],
+            [
+              -88.3253,
+              44.2863
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Pizza Division - Little Chute WI",
+        "type": "Frozen pizza manufacturing plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.3253,
+              44.2856
+            ],
+            [
+              -88.3223,
+              44.2856
+            ],
+            [
+              -88.3223,
+              44.2868
+            ],
+            [
+              -88.3253,
+              44.2868
+            ],
+            [
+              -88.3253,
+              44.2856
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Pizza Division - Little Chute WI",
+        "type": "Frozen pizza manufacturing plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.3226,
+              44.2848
+            ],
+            [
+              -88.3214,
+              44.2848
+            ],
+            [
+              -88.3214,
+              44.2856
+            ],
+            [
+              -88.3226,
+              44.2856
+            ],
+            [
+              -88.3226,
+              44.2848
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Pizza Division - Little Chute WI",
+        "type": "Frozen pizza manufacturing plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.326,
+              44.2856
+            ],
+            [
+              -88.3226,
+              44.2856
+            ],
+            [
+              -88.3226,
+              44.2861
+            ],
+            [
+              -88.326,
+              44.2861
+            ],
+            [
+              -88.326,
+              44.2856
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Pizza Division - Little Chute WI",
+        "type": "Frozen pizza manufacturing plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.3262,
+              44.2857
+            ],
+            [
+              -88.3248,
+              44.2857
+            ],
+            [
+              -88.3248,
+              44.2864
+            ],
+            [
+              -88.3262,
+              44.2864
+            ],
+            [
+              -88.3262,
+              44.2857
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Pizza Division - Little Chute WI",
+        "type": "Frozen pizza manufacturing plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.9095,
+              38.0938
+            ],
+            [
+              -83.9038,
+              38.0938
+            ],
+            [
+              -83.9038,
+              38.0987
+            ],
+            [
+              -83.9095,
+              38.0987
+            ],
+            [
+              -83.9095,
+              38.0938
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Mount Sterling KY",
+        "type": "Frozen food manufacturing plant (Hot Pockets)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 67.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.905,
+              38.0945
+            ],
+            [
+              -83.9043,
+              38.0945
+            ],
+            [
+              -83.9043,
+              38.095
+            ],
+            [
+              -83.905,
+              38.095
+            ],
+            [
+              -83.905,
+              38.0945
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Mount Sterling KY",
+        "type": "Frozen food manufacturing plant (Hot Pockets)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.9088,
+              38.0965
+            ],
+            [
+              -83.9072,
+              38.0965
+            ],
+            [
+              -83.9072,
+              38.0979
+            ],
+            [
+              -83.9088,
+              38.0979
+            ],
+            [
+              -83.9088,
+              38.0965
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Mount Sterling KY",
+        "type": "Frozen food manufacturing plant (Hot Pockets)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.9062,
+              38.0953
+            ],
+            [
+              -83.9048,
+              38.0953
+            ],
+            [
+              -83.9048,
+              38.096
+            ],
+            [
+              -83.9062,
+              38.096
+            ],
+            [
+              -83.9062,
+              38.0953
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Mount Sterling KY",
+        "type": "Frozen food manufacturing plant (Hot Pockets)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.9072,
+              38.0979
+            ],
+            [
+              -83.9048,
+              38.0979
+            ],
+            [
+              -83.9048,
+              38.0985
+            ],
+            [
+              -83.9072,
+              38.0985
+            ],
+            [
+              -83.9072,
+              38.0979
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Mount Sterling KY",
+        "type": "Frozen food manufacturing plant (Hot Pockets)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.9068,
+              38.0958
+            ],
+            [
+              -83.9048,
+              38.0958
+            ],
+            [
+              -83.9048,
+              38.0964
+            ],
+            [
+              -83.9068,
+              38.0964
+            ],
+            [
+              -83.9068,
+              38.0958
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Mount Sterling KY",
+        "type": "Frozen food manufacturing plant (Hot Pockets)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.9068,
+              38.095
+            ],
+            [
+              -83.905,
+              38.095
+            ],
+            [
+              -83.905,
+              38.096
+            ],
+            [
+              -83.9068,
+              38.096
+            ],
+            [
+              -83.9068,
+              38.095
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Mount Sterling KY",
+        "type": "Frozen food manufacturing plant (Hot Pockets)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.62545,
+              40.1865
+            ],
+            [
+              -111.62195,
+              40.1865
+            ],
+            [
+              -111.62195,
+              40.19095
+            ],
+            [
+              -111.62545,
+              40.19095
+            ],
+            [
+              -111.62545,
+              40.1865
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Springville UT",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 38,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.6236,
+              40.18995
+            ],
+            [
+              -111.6229,
+              40.18995
+            ],
+            [
+              -111.6229,
+              40.19055
+            ],
+            [
+              -111.6236,
+              40.19055
+            ],
+            [
+              -111.6236,
+              40.18995
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Springville UT",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.6233,
+              40.1876
+            ],
+            [
+              -111.622,
+              40.1876
+            ],
+            [
+              -111.622,
+              40.1896
+            ],
+            [
+              -111.6233,
+              40.1896
+            ],
+            [
+              -111.6233,
+              40.1876
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Springville UT",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.6238,
+              40.1884
+            ],
+            [
+              -111.62315,
+              40.1884
+            ],
+            [
+              -111.62315,
+              40.1896
+            ],
+            [
+              -111.6238,
+              40.1896
+            ],
+            [
+              -111.6238,
+              40.1884
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Springville UT",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.6242,
+              40.18935
+            ],
+            [
+              -111.62355,
+              40.18935
+            ],
+            [
+              -111.62355,
+              40.18995
+            ],
+            [
+              -111.6242,
+              40.18995
+            ],
+            [
+              -111.6242,
+              40.18935
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Prepared Foods - Springville UT",
+        "type": "Frozen food manufacturing plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.61245,
+              40.0788
+            ],
+            [
+              -93.60775,
+              40.0788
+            ],
+            [
+              -93.60775,
+              40.0821
+            ],
+            [
+              -93.61245,
+              40.0821
+            ],
+            [
+              -93.61245,
+              40.0788
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Professional - Trenton MO",
+        "type": "Food manufacturing plant (foodservice / Chef-mate)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 12,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.6093,
+              40.0813
+            ],
+            [
+              -93.6084,
+              40.0813
+            ],
+            [
+              -93.6084,
+              40.0821
+            ],
+            [
+              -93.6093,
+              40.0821
+            ],
+            [
+              -93.6093,
+              40.0813
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Professional - Trenton MO",
+        "type": "Food manufacturing plant (foodservice / Chef-mate)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.6119,
+              40.07955
+            ],
+            [
+              -93.6112,
+              40.07955
+            ],
+            [
+              -93.6112,
+              40.0812
+            ],
+            [
+              -93.6119,
+              40.0812
+            ],
+            [
+              -93.6119,
+              40.07955
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Professional - Trenton MO",
+        "type": "Food manufacturing plant (foodservice / Chef-mate)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.6112,
+              40.0788
+            ],
+            [
+              -93.6102,
+              40.0788
+            ],
+            [
+              -93.6102,
+              40.07955
+            ],
+            [
+              -93.6112,
+              40.07955
+            ],
+            [
+              -93.6112,
+              40.0788
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Professional - Trenton MO",
+        "type": "Food manufacturing plant (foodservice / Chef-mate)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.7492,
+              40.0339
+            ],
+            [
+              -85.7398,
+              40.0339
+            ],
+            [
+              -85.7398,
+              40.0416
+            ],
+            [
+              -85.7492,
+              40.0416
+            ],
+            [
+              -85.7492,
+              40.0339
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Beverage - Anderson IN",
+        "type": "Beverage manufacturing plant + distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 80,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.7482,
+              40.0385
+            ],
+            [
+              -85.7472,
+              40.0385
+            ],
+            [
+              -85.7472,
+              40.0393
+            ],
+            [
+              -85.7482,
+              40.0393
+            ],
+            [
+              -85.7482,
+              40.0385
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Beverage - Anderson IN",
+        "type": "Beverage manufacturing plant + distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.7472,
+              40.0352
+            ],
+            [
+              -85.7448,
+              40.0352
+            ],
+            [
+              -85.7448,
+              40.039
+            ],
+            [
+              -85.7472,
+              40.039
+            ],
+            [
+              -85.7472,
+              40.0352
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Beverage - Anderson IN",
+        "type": "Beverage manufacturing plant + distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.7448,
+              40.0364
+            ],
+            [
+              -85.7438,
+              40.0364
+            ],
+            [
+              -85.7438,
+              40.0394
+            ],
+            [
+              -85.7448,
+              40.0394
+            ],
+            [
+              -85.7448,
+              40.0364
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Beverage - Anderson IN",
+        "type": "Beverage manufacturing plant + distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.7466,
+              40.0364
+            ],
+            [
+              -85.7456,
+              40.0364
+            ],
+            [
+              -85.7456,
+              40.0396
+            ],
+            [
+              -85.7466,
+              40.0396
+            ],
+            [
+              -85.7466,
+              40.0364
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Beverage - Anderson IN",
+        "type": "Beverage manufacturing plant + distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.7456,
+              40.0356
+            ],
+            [
+              -85.7442,
+              40.0356
+            ],
+            [
+              -85.7442,
+              40.0368
+            ],
+            [
+              -85.7456,
+              40.0368
+            ],
+            [
+              -85.7456,
+              40.0356
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Beverage - Anderson IN",
+        "type": "Beverage manufacturing plant + distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.7472,
+              40.0384
+            ],
+            [
+              -85.7448,
+              40.0384
+            ],
+            [
+              -85.7448,
+              40.0396
+            ],
+            [
+              -85.7472,
+              40.0396
+            ],
+            [
+              -85.7472,
+              40.0384
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Beverage - Anderson IN",
+        "type": "Beverage manufacturing plant + distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.3842,
+              33.5502
+            ],
+            [
+              -112.3773,
+              33.5502
+            ],
+            [
+              -112.3773,
+              33.5589
+            ],
+            [
+              -112.3842,
+              33.5589
+            ],
+            [
+              -112.3842,
+              33.5502
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Beverage Factory & DC - Glendale AZ (Waddell)",
+        "type": "Beverage manufacturing plant + distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 110,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.3824,
+              33.5553
+            ],
+            [
+              -112.379,
+              33.5553
+            ],
+            [
+              -112.379,
+              33.5564
+            ],
+            [
+              -112.3824,
+              33.5564
+            ],
+            [
+              -112.3824,
+              33.5553
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Beverage Factory & DC - Glendale AZ (Waddell)",
+        "type": "Beverage manufacturing plant + distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2721,
+              42.6638
+            ],
+            [
+              -88.2654,
+              42.6638
+            ],
+            [
+              -88.2654,
+              42.6679
+            ],
+            [
+              -88.2721,
+              42.6679
+            ],
+            [
+              -88.2721,
+              42.6638
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé USA Baking - Burlington WI",
+        "type": "Baking ingredients manufacturing plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 65,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 30,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2711,
+              42.6664
+            ],
+            [
+              -88.269,
+              42.6664
+            ],
+            [
+              -88.269,
+              42.6672
+            ],
+            [
+              -88.2711,
+              42.6672
+            ],
+            [
+              -88.2711,
+              42.6664
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé USA Baking - Burlington WI",
+        "type": "Baking ingredients manufacturing plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2701,
+              42.6644
+            ],
+            [
+              -88.2683,
+              42.6644
+            ],
+            [
+              -88.2683,
+              42.6654
+            ],
+            [
+              -88.2701,
+              42.6654
+            ],
+            [
+              -88.2701,
+              42.6644
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé USA Baking - Burlington WI",
+        "type": "Baking ingredients manufacturing plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2703,
+              42.6646
+            ],
+            [
+              -88.2678,
+              42.6646
+            ],
+            [
+              -88.2678,
+              42.6656
+            ],
+            [
+              -88.2703,
+              42.6656
+            ],
+            [
+              -88.2703,
+              42.6646
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé USA Baking - Burlington WI",
+        "type": "Baking ingredients manufacturing plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.2712,
+              42.6664
+            ],
+            [
+              -88.2688,
+              42.6664
+            ],
+            [
+              -88.2688,
+              42.667
+            ],
+            [
+              -88.2712,
+              42.667
+            ],
+            [
+              -88.2712,
+              42.6664
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé USA Baking - Burlington WI",
+        "type": "Baking ingredients manufacturing plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.5278,
+              44.8295
+            ],
+            [
+              -91.5232,
+              44.8295
+            ],
+            [
+              -91.5232,
+              44.834
+            ],
+            [
+              -91.5278,
+              44.834
+            ],
+            [
+              -91.5278,
+              44.8295
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Health Science - Eau Claire WI",
+        "type": "Nutritional beverage manufacturing plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 33,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.5281,
+              44.83295
+            ],
+            [
+              -91.5274,
+              44.83295
+            ],
+            [
+              -91.5274,
+              44.8334
+            ],
+            [
+              -91.5281,
+              44.8334
+            ],
+            [
+              -91.5281,
+              44.83295
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Health Science - Eau Claire WI",
+        "type": "Nutritional beverage manufacturing plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.527,
+              44.8326
+            ],
+            [
+              -91.5259,
+              44.8326
+            ],
+            [
+              -91.5259,
+              44.8333
+            ],
+            [
+              -91.527,
+              44.8333
+            ],
+            [
+              -91.527,
+              44.8326
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Health Science - Eau Claire WI",
+        "type": "Nutritional beverage manufacturing plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.5246,
+              44.8302
+            ],
+            [
+              -91.5236,
+              44.8302
+            ],
+            [
+              -91.5236,
+              44.8323
+            ],
+            [
+              -91.5246,
+              44.8323
+            ],
+            [
+              -91.5246,
+              44.8302
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Health Science - Eau Claire WI",
+        "type": "Nutritional beverage manufacturing plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.5265,
+              44.8323
+            ],
+            [
+              -91.5252,
+              44.8323
+            ],
+            [
+              -91.5252,
+              44.833
+            ],
+            [
+              -91.5265,
+              44.833
+            ],
+            [
+              -91.5265,
+              44.8323
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé Health Science - Eau Claire WI",
+        "type": "Nutritional beverage manufacturing plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1568,
+              33.4058
+            ],
+            [
+              -84.1518,
+              33.4058
+            ],
+            [
+              -84.1518,
+              33.4103
+            ],
+            [
+              -84.1568,
+              33.4103
+            ],
+            [
+              -84.1568,
+              33.4058
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé USA Distribution Center - McDonough GA",
+        "type": "Distribution center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 175,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 42,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1549,
+              33.4102
+            ],
+            [
+              -84.1539,
+              33.4102
+            ],
+            [
+              -84.1539,
+              33.4107
+            ],
+            [
+              -84.1549,
+              33.4107
+            ],
+            [
+              -84.1549,
+              33.4102
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé USA Distribution Center - McDonough GA",
+        "type": "Distribution center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1534,
+              33.4059
+            ],
+            [
+              -84.1519,
+              33.4059
+            ],
+            [
+              -84.1519,
+              33.4083
+            ],
+            [
+              -84.1534,
+              33.4083
+            ],
+            [
+              -84.1534,
+              33.4059
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé USA Distribution Center - McDonough GA",
+        "type": "Distribution center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1545,
+              33.4084
+            ],
+            [
+              -84.1532,
+              33.4084
+            ],
+            [
+              -84.1532,
+              33.4104
+            ],
+            [
+              -84.1545,
+              33.4104
+            ],
+            [
+              -84.1545,
+              33.4084
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé USA Distribution Center - McDonough GA",
+        "type": "Distribution center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1554,
+              33.4062
+            ],
+            [
+              -84.1542,
+              33.4062
+            ],
+            [
+              -84.1542,
+              33.4096
+            ],
+            [
+              -84.1554,
+              33.4096
+            ],
+            [
+              -84.1554,
+              33.4062
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé USA Distribution Center - McDonough GA",
+        "type": "Distribution center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.1531,
+              33.4071
+            ],
+            [
+              -84.1521,
+              33.4071
+            ],
+            [
+              -84.1521,
+              33.4085
+            ],
+            [
+              -84.1531,
+              33.4085
+            ],
+            [
+              -84.1531,
+              33.4071
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "nestle-usa",
+        "name": "Nestlé USA Distribution Center - McDonough GA",
+        "type": "Distribution center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    }
+  ]
+}
