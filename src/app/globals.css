@@ -61,3 +61,20 @@ body {
 .animate-slide-up {
   animation: slide-up 0.3s ease-out;
 }
+
+/* YNS Network Simulator — pulsing halo on critical-utilization sites.
+   Lives in the global stylesheet (not inside the dynamic-imported
+   network-simulator-inner) because an inline <style> tag inside the
+   simulator's render was getting hoisted by React 19 in a way that
+   appeared to interact badly with Turbopack's dynamic-chunk CSS
+   bundling — the leaflet container itself was rendering blank.
+   See: src/components/demo/network-simulator-inner.tsx → CritHalo. */
+@keyframes simPulse {
+  0%, 100% { opacity: 0.45; transform: scale(0.85); }
+  50%      { opacity: 0.05; transform: scale(1.25); }
+}
+.sim-pulse {
+  animation: simPulse 1.6s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
