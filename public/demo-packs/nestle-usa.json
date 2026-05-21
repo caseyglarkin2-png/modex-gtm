@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T04:45:18.974Z",
+  "builtAt": "2026-05-21T14:21:46.209Z",
   "account": {
     "slug": "nestle-usa",
     "displayName": "Nestlé USA",
@@ -12,7 +12,8 @@
       "droppedStubCount": 0,
       "capHit": false,
       "note": "Audited all 12 identifiable facilities."
-    }
+    },
+    "featuredSiteId": "08-nestle-beverage-anderson-in"
   },
   "research": {
     "facility_count": 12,
@@ -140,8 +141,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 5750 Harper Rd, Solon, OH 44139\n- Locked center: 41.404568, -81.469555 (roster geocode was ROOFTOP; satellite confirmed)\n- Confirmation: Satellite probes z16-z20 show a large, dense connected\n  frozen-food manufacturing complex set back from Harper Rd behind a treed\n  buffer. Street View panos along Harper Rd show the Nestlé sign, flag, and\n  branded trucks/trailers at the building front — positively the right site.",
         "mapsUrl": "https://www.google.com/maps/@41.404568,-81.469555,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/nestle-usa/01-nestle-prepared-foods-solon-oh-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.404568,
+              "lng": -81.469555
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/nestle-usa/01-nestle-prepared-foods-solon-oh-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.404568,
+              "lng": -81.469555
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Continuous chain-link perimeter fence runs the full Harper Rd frontage (confirmed in multiple Street View panos). A single controlled main drive leaves Harper Rd into the property. A driver review explicitly states 'when coming in through the gate ... go to Dock A and check in.' Gate is positively present.",
           "guardShack": "No distinct guard booth resolved in overhead or Street View imagery; the office building sits immediately at the front circle. Check-in appears to be at 'Dock A' inside the plant. Classified guardShack false / remoteGs true, but flagged uncertain - a booth may be obscured by trees at the drive entrance.",
@@ -253,8 +320,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
         "dossierExcerpt": "- Address: 1 Nestle Way, Jonesboro, AR 72411 (Craighead County Technology Park)\n- Locked center: 35.81930, -90.57950\n- Confirmation: Roster geocode (35.8189, -90.578985) was already within the\n  parcel; satellite probes z16-z21 confirm a large frozen-food manufacturing\n  plant set in the Craighead County Technology Park, surrounded by farmland.\n  Street View (2026-01) shows the plant from the divided highway; a Nestlé\n  monument sign stands at the entrance drive. Web research confirms 1 Nestle\n  Way in the Craighead Technology Park (Stouffer's/Lean Cuisine/DiGiorno/Hot\n  Pockets, ~375,000+ SF, $100M Hot Pockets expansion in 2020).",
         "mapsUrl": "https://www.google.com/maps/@35.8193,-90.5795,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/nestle-usa/02-nestle-prepared-foods-jonesboro-ar-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 35.8193,
+              "lng": -90.5795
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/nestle-usa/02-nestle-prepared-foods-jonesboro-ar-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 35.8193,
+              "lng": -90.5795
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Controlled truck entrance on the east access road. A small booth-footprint structure with a vehicle parked beside it sits at the pinch-point where the access road meets the paved truck yard (~35.8203, -90.5757).",
           "guardShack": "A small white structure (~1-2 vehicle footprint) with a parked car beside it controls the truck-yard entrance - reads as a staffed guard booth in z20 imagery.",
@@ -355,8 +490,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#7",
+          "steps": [
+            {
+              "step": "Arrive at gate (fast-lane bypass possible)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter dispatch (fast-lane priority for live loads)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch.fastlane",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4440000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 2132 Old Georgia Hwy, Gaffney, SC 29340\n- Locked center: 35.05400, -81.68720\n- Confirmation: Roster geocode (GEOMETRIC_CENTER, 35.054719, -81.68705)\n  landed on the plant. Satellite probes z16-z21 confirm a large frozen-food\n  manufacturing plant. Street View (2024-05) shows the Nestlé logo on the\n  building face and a \"TRUCK ENTRANCE\" sign at the gate — positively the right\n  site. The plant opened 1980; a $150M expansion was announced Nov 2024\n  (active construction visible in current imagery).",
         "mapsUrl": "https://www.google.com/maps/@35.054,-81.6872,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/nestle-usa/03-nestle-prepared-foods-gaffney-sc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 35.054,
+              "lng": -81.6872
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/nestle-usa/03-nestle-prepared-foods-gaffney-sc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 35.054,
+              "lng": -81.6872
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Definitive - Street View (2024-05) shows a 'TRUCK ENTRANCE' sign, a stop sign, a 'SPEED LIMIT 10' sign and a controlled driveway leaving Old Georgia Hwy into the fenced plant property.",
           "guardShack": "Definitive - a guard booth with a canopy over the truck lane, with traffic cones and check-in equipment beside it, sits at the truck entrance (clear in Street View 2024-05).",
@@ -465,8 +666,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#7",
+          "steps": [
+            {
+              "step": "Arrive at gate (fast-lane bypass possible)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter dispatch (fast-lane priority for live loads)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch.fastlane",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4440000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 401 W North Ave, Little Chute, WI 54140\n- Locked center: 44.28530, -88.32420\n- Confirmation: Roster geocode (ROOFTOP, 44.285169, -88.325575) landed on\n  the plant. Satellite probes z16-z21 confirm a large frozen-pizza\n  manufacturing plant fronting W North Ave, with extensive trailer yards on\n  the north. Street View (2024-10) shows the plant, the fenced truck yard, and\n  the gate off W North Ave — positively the right site.",
         "mapsUrl": "https://www.google.com/maps/@44.2853,-88.3242,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/nestle-usa/04-nestle-pizza-division-little-chute-wi-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 44.2853,
+              "lng": -88.3242
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/nestle-usa/04-nestle-pizza-division-little-chute-wi-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 44.2853,
+              "lng": -88.3242
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "The north truck yard is fully enclosed by chain-link perimeter fencing. Street View (2024-10) shows a sliding/swing gate across the truck driveway off W North Ave. Two driveway openings serve the fenced yard.",
           "guardShack": "A small white-roofed booth-footprint structure with a vehicle beside it sits at the truck-yard driveway entrance (z21 imagery). Reads as a guard booth - flagged uncertain as Street View did not give a clean booth view.",
@@ -579,8 +846,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "- Address: 150 Oak Grove Dr, Mount Sterling, KY 40353 (Hot Pockets plant)\n- Locked center: 38.09700, -83.90650\n- Confirmation: Roster geocode (ROOFTOP, 38.096188, -83.90611) landed on\n  the campus. Satellite probes z15-z21 confirm a large food-manufacturing\n  campus. Street View (2025-06) shows the \"Nestlé\" monument sign at the\n  entrance — positively the right site. Web research confirms 150 Oak Grove Dr\n  as the Hot Pockets factory (opened 1993, doubled in size 1996, Nestlé is the\n  largest employer in Mt. Sterling).",
         "mapsUrl": "https://www.google.com/maps/@38.097,-83.9065,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/nestle-usa/05-nestle-prepared-foods-mount-sterling-ky-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 38.097,
+              "lng": -83.9065
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/nestle-usa/05-nestle-prepared-foods-mount-sterling-ky-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 38.097,
+              "lng": -83.9065
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Definitive - a single guarded entry off Oak Grove Dr on the SE. The campus is fully ringed by chain-link perimeter fence (confirmed in Street View 2025-06).",
           "guardShack": "Definitive - a blue-roofed guard booth sits on a raised median island in the entry road with traffic lanes on both sides and directional arrows painted on the pavement; a barrier-arm structure is visible. Clear in z20-z21 imagery and Street View 2025-06.",
@@ -684,8 +1019,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Name: Nestlé Prepared Foods - Springville UT\n- Type: Frozen food manufacturing plant (Stouffer's / Lean Cuisine frozen entrees)\n- Address: 815 W Ray Klauck Way (a.k.a. Raymond Klauck Way), Springville, UT 84663\n- Locked center: 40.18870, -111.62380",
         "mapsUrl": "https://www.google.com/maps/@40.18870,-111.62380,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/nestle-usa/06-nestle-prepared-foods-springville-ut-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.1887,
+              "lng": -111.6238
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/nestle-usa/06-nestle-prepared-foods-springville-ut-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.1887,
+              "lng": -111.6238
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Whole property is fully fenced (chain-link perimeter confirmed in multiple Street Views along Ray Klauck Way). Truck flow enters via an internal access road that wraps the NW/N of the plant down to the NE corner and into the secured drop yard. Controlled truck gate is near-certain for a fenced 1000-employee Nestlé plant of this scale, but the exact barrier arm could not be resolved in 2023 satellite/Street View.",
           "guardShack": "No guard booth positively identified at the truck entrance in available imagery; a small structure exists near the NE corner but reads as a maintenance/utility shed, not a windowed guard booth beside the lane. Marked false with remoteGs true (kiosk/app check-in implied), low confidence.",
@@ -784,8 +1185,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Name: Nestlé Professional - Trenton MO\n- Type: Food manufacturing plant (foodservice / Chef-mate canning)\n- Roster address: 1011 Industrial Rd (flagged approximate / unconfirmed)\n- Resolved address: 1401 Harris Ave, Trenton, MO 64683\n- Locked center: 40.08080, -93.61050",
         "mapsUrl": "https://www.google.com/maps/@40.08080,-93.61050,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/nestle-usa/07-nestle-professional-trenton-mo-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.0808,
+              "lng": -93.6105
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/nestle-usa/07-nestle-professional-trenton-mo-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.0808,
+              "lng": -93.6105
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "locating": "Roster coords (40.094265, -93.603911) and the roster's stated address (1011 Industrial Rd) are both wrong/unconfirmed; the roster itself flags the street as approximate. The plant's real address is 1401 Harris Ave, Trenton MO (per Waze/Manta/LoopNet, APN 110516030601100). The correct building was found ~1.5 km SW of the roster point and positively confirmed by a Street View showing a 'Nestlé PROFESSIONAL - Making MORE Possible' employee-entrance sign on the building's east face. Locked center 40.08080, -93.61050.",
           "truckGate": "No controlled truck gate identified. The plant is an older urban-fabric food plant; the SW/S truck yard reads as open paved area continuous with the adjacent street, with tractors and trailers parked freely. Chain-link fencing exists along parts of the perimeter (W and S) but the truck yard entrance shows no barrier arm or pinch-point in 2023 Street View. Classified false; flagged uncertain.",
@@ -900,8 +1359,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Name: Nestlé Beverage - Anderson IN\n- Type: Beverage manufacturing plant + distribution center\n  (aseptic RTD: Coffee mate liquid, Nesquik RTD, Boost)\n- Address: 4301 W 450 S (a.k.a. 4301 W 73rd St), Anderson, IN 46011/46013\n- Locked center: 40.03820, -85.74400",
         "mapsUrl": "https://www.google.com/maps/@40.03820,-85.74400,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/nestle-usa/08-nestle-beverage-anderson-in-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.0382,
+              "lng": -85.744
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/nestle-usa/08-nestle-beverage-anderson-in-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.0382,
+              "lng": -85.744
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "locating": "Roster coords (40.171509, -85.766582) landed in farmland ~15 km NW of the plant. Web research established the Nestlé beverage factory + DC is south of Anderson along I-69 (a.k.a. 4301 W 450 S / 4301 W 73rd St). The correct building - a ~1.1M sq ft multi-section plant with milk/liquid storage tanks on the NE and large trailer drop yards on the W - was located at approximately 40.0382, -85.7440 ('I-69/Hwy 38 west of exit 222, north side', per the Nesquik Bunny landmark). Locked center 40.03820, -85.74400.",
           "truckGate": "Modern (2008-built, $359M) Nestlé beverage factory + distribution center on a fully private campus with a perimeter road loop, surrounded by buffer land, ponds and farmland. A controlled, guarded truck gate is near-certain for a food-grade beverage plant + DC of this scale; the truck flow enters from the W side. The exact barrier arm could not be isolated in satellite imagery and there is no public Street View reaching the entrance, so flagged uncertain.",
@@ -1004,6 +1529,28 @@
         },
         "dossierExcerpt": "- Name: Nestlé Beverage Factory & DC - Glendale AZ (Waddell)\n- Type: Beverage manufacturing plant + distribution center\n  (Coffee mate, natural bliss, Starbucks creamers)\n- Address: 8531 N 150th Ave, Waddell, AZ 85355\n- Locked center: 33.55520, -112.38120",
         "mapsUrl": "https://www.google.com/maps/@33.55520,-112.38120,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/nestle-usa/09-nestle-beverage-factory-and-dc-glendale-az-waddell-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.5552,
+              "lng": -112.3812
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/nestle-usa/09-nestle-beverage-factory-and-dc-glendale-az-waddell-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.5552,
+              "lng": -112.3812
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "imageryLimitation": "This is a newly-opened facility - the $675M Nestlé greenfield beverage factory + distribution center, which celebrated its opening on 28 January 2025. The only satellite imagery currently available (Maxar) shows the site MID-CONSTRUCTION: the building roof is still being installed (steel framing and blue under-construction roof sections visible) and the surrounding yard is raw graded dirt with construction laydown. Street View panos are from 2019-2021, pre-construction (empty desert). The building footprint and broad parcel are confirmed, but the operational truck-yard configuration (gate, guard booth, dock count, drop-yard layout, lane counts, staging) CANNOT be reliably read from construction-phase imagery. Most classification fields are best-effort inferences from the facility type, scale and modern-build status, and are flagged uncertain. Confidence: low. Recommend re-audit when post-2025 operational imagery is available.",
           "locating": "Roster coords (33.558619, -112.384378, RANGE_INTERPOLATED, moved 47m) were accurate to within ~150m. Web research confirmed the address 8531 N 150th Ave, Waddell AZ; the large building under construction in Maxar imagery matches the 630,000 sq ft Nestlé beverage factory + DC ($675M, 300-350 jobs, Coffee mate / natural bliss / Starbucks creamers). Locked center 33.55520, -112.38120.",
@@ -1111,8 +1658,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Name: Nestlé USA Baking - Burlington WI\n- Type: Baking ingredients manufacturing plant\n  (Toll House chocolate-chip morsels + refrigerated cookie dough)\n- Address: 637 S Pine St, Burlington, WI 53105\n- Locked center: 42.66550, -88.26800",
         "mapsUrl": "https://www.google.com/maps/@42.66550,-88.26800,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/nestle-usa/10-nestle-usa-baking-burlington-wi-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 42.6655,
+              "lng": -88.268
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/nestle-usa/10-nestle-usa-baking-burlington-wi-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 42.6655,
+              "lng": -88.268
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "locating": "Roster coords (42.666811, -88.267276, ROOFTOP, moved 103m) landed accurately on the plant. Web research confirmed the Nestlé USA baking plant at 637 S Pine St, Burlington WI - the Toll House plant (chocolate-chip morsels + refrigerated cookie dough; began 1966; ~520,000 sq ft; recent $70M+ cookie-dough conversion). Locked center 42.66550, -88.26800.",
           "truckGate": "No controlled truck gate identified. The plant sits in an industrial park; the SW truck yard reads as open paved area continuous with the industrial-park streets - Google Street View cars drove freely into the truck yard, capturing parked tractors and box trucks with no barrier arm or pinch-point. The corporate office frontage on S Pine St is also open (monument sign, lawn, no gate). Classified false; flagged uncertain (a gate could be open/unstaffed during capture, and an active Nestlé plant typically has some entry control).",
@@ -1215,8 +1820,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
         "dossierExcerpt": "Type: Nutritional beverage manufacturing plant (Boost, Carnation Breakfast Essentials, RTD medical nutrition)\nResolved address: 1200 Nestlé Ave, Eau Claire, WI 54703\nLocked center: 44.8315, -91.5253",
         "mapsUrl": "https://www.google.com/maps/@44.8315,-91.5253,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/nestle-usa/11-nestle-health-science-eau-claire-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 44.8315,
+              "lng": -91.5253
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/nestle-usa/11-nestle-health-science-eau-claire-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 44.8315,
+              "lng": -91.5253
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "locationResolution": "Roster address (3185 Galloway St) and coordinates (44.8212, -91.4667) were approximate / RANGE_INTERPOLATED. Web research confirmed the actual plant address as 1200 Nestlé Ave, Eau Claire WI 54703. Satellite at 44.8321,-91.5260 showed the large NW-SE-oriented manufacturing complex; locked center 44.8315,-91.5253. Roster point was ~6 km off.",
           "truckGate": "Street View (2023-07 and 2024-08) of the NW driveway off the property frontage road shows a controlled checkpoint: a guard booth with canopy in the driveway throat plus perimeter fencing (decorative brick wall + black metal fence) running the property line.",
@@ -1326,8 +1999,76 @@
           "dropYard": true,
           "multiStep": true
         },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
         "dossierExcerpt": "Type: Distribution center (southeast regional DC, frozen/ambient brands)\nResolved address: 1 Nestle Ct, McDonough, GA 30253\nLocked center: 33.4084, -84.1543",
         "mapsUrl": "https://www.google.com/maps/@33.4084,-84.1543,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/nestle-usa/12-nestle-usa-distribution-center-mcdonough-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.4084,
+              "lng": -84.1543
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/nestle-usa/12-nestle-usa-distribution-center-mcdonough-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.4084,
+              "lng": -84.1543
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "locationResolution": "Roster coords (33.40872,-84.15465) and search-derived coords (33.40806,-84.15425) point at the same large NW-SE-oriented warehouse off Nestle Ct. Confirmed via Waze/Yelp/Henry County directory as the Nestlé Distribution Center, 1 Nestle Ct, McDonough GA 30253. Locked center 33.4084,-84.1543.",
           "truckGate": "Web research describing the site's gate-guard duties confirms a controlled gated entry: the guard 'opens the gate to release the driver'. The compound is fully fenced (chain-link fencing visible in Street View of the access-road corridor).",

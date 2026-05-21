@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T04:48:08.463Z",
+  "builtAt": "2026-05-21T14:21:58.356Z",
   "account": {
     "slug": "sc-johnson",
     "displayName": "SC Johnson",
@@ -12,7 +12,8 @@
       "droppedStubCount": 0,
       "capHit": false,
       "note": "Audited all 10 identifiable facilities."
-    }
+    },
+    "featuredSiteId": "06-fort-worth-regional-distribution-center"
   },
   "research": {
     "facility_count": 10,
@@ -146,8 +147,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "The roster's supplied coordinate (42.712313, -87.885932) lands in open green\nspace at the north edge of the property — it is the geocode of the street\naddress, not the plant. Probing satellite outward (z14-z21) and corroborating\nwith the SC Johnson Waxdale Fact Sheet (the world's largest/fastest aerosol\nplant, 2.2M sq ft, opened 1955) confirmed the facility: the very large\nmulti-building industrial campus immediately south of the supplied point,\nbounded by a private entry boulevard on the north, 16th St on the south, a\nwooded/wetland buffer on the west, and open land on the east. SC Johnson\nsignage (\"SC Johnson — A Family Center\") and SC Johnson's known on-site wind\nturbines are both visible in Street View, confirming ownership. Locked center\nat 42.70750, -87.88500 (centroid of the developed footprint).",
         "mapsUrl": "https://www.google.com/maps/@42.7075,-87.885,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/sc-johnson/01-waxdale-mt-pleasant-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 42.7075,
+              "lng": -87.885
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/sc-johnson/01-waxdale-mt-pleasant-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 42.7075,
+              "lng": -87.885
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Engineered multi-lane controlled entry at the head of the private north boulevard (~42.7121, -87.8860); white directional lane arrows split inbound/outbound around a central guard building.",
           "guardShack": "Substantial central guardhouse with hipped roof, ~3-4 vehicle footprint, set in the median of the entry boulevard with traffic lanes routed around both sides. Larger than a typical booth but functions as the manned gate house.",
@@ -264,8 +333,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster coordinate (43.619016, -83.872098) was a ROOFTOP geocode of 405\nMarquette Dr and landed on the correct campus. Satellite probing (z14-z20)\nplus the SC Johnson Bay City careers page confirmed the facility: a large,\nmostly-fenced industrial campus on the east side of Bay City between the\nresidential grid and the Saginaw River. SC Johnson describes the site as\n\"more than 400 acres\" with six production plants and ~400 team members\nproducing billions of Ziploc bags per year. Locked center at the developed\nbuilding cluster, 43.62050, -83.87050.",
         "mapsUrl": "https://www.google.com/maps/@43.6205,-83.8705,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/sc-johnson/02-bay-city-ziploc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 43.6205,
+              "lng": -83.8705
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/sc-johnson/02-bay-city-ziploc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 43.6205,
+              "lng": -83.8705
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Large perimeter-fenced campus (chain-link fencing confirmed in Street View along the property edge). Buildings sit behind the fence with controlled access drives; classified as a gated site.",
           "guardShack": "No manned guard booth positively identified at any entrance from available Street View; entrances appear to be fenced drives without a visible booth. Left false but flagged uncertain.",
@@ -363,8 +498,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster coordinate (41.696681, -87.601644) landed directly on the\ndistinctive method factory. Satellite probing and web research (Chicago\nNeighborhood Development Awards, William McDonough + Partners, City of\nChicago) positively confirmed it: the \"South Side Soapbox\", method's first\nU.S. manufacturing plant — a 150,000 sq ft LEED Platinum (first in the\ncleaners industry, 85 points) soap factory in the historic Pullman district.\nTwo unmistakable signatures clinch the ID: a 230-ft on-site wind turbine\n(visible in z20 imagery north of the building) and the Gotham Greens\n75,000 sq ft rooftop greenhouse (the glass sawtooth roof section). Locked\ncenter at 41.69700, -87.60160.",
         "mapsUrl": "https://www.google.com/maps/@41.697,-87.6016,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/sc-johnson/03-method-pullman-chicago-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.697,
+              "lng": -87.6016
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/sc-johnson/03-method-pullman-chicago-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.697,
+              "lng": -87.6016
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "No barrier arm, sliding gate or checkpoint pinch-point observed. The truck driveway runs open from the public road into the dock yard; the building fronts open paved drives with no controlled entry. truckGate false.",
           "guardShack": "No guard booth anywhere on the site. False.",
@@ -463,8 +656,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster's street address (\"100 Technology Center Dr\") could not be\nconfirmed and the roster coordinate (35.353526, -81.090317) was an\nAPPROXIMATE city-centroid landing in downtown Stanley — not the plant.\nWeb research resolved the correct facility: SC Johnson Professional USA's\nStanley plant is the former Deb USA plant at 1100 S Highway 27 (NC-27),\nconfirmed by the Waze business listing, the LoopNet property record (1100 S\nHighway 27, APN/Parcel 176716, a 73,956 sq ft industrial building built\n1986) and FDA / Panjiva records for \"Deb USA Inc., 1100 S. Highway 27,\nStanley NC\". SC Johnson Professional acquired Deb Group in 2015. The building\nwas located by probing the SE Stanley industrial corridor along NC-27 and\npositively identified in Street View — a long industrial building with a",
         "mapsUrl": "https://www.google.com/maps/@35.3403,-81.078,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/sc-johnson/04-scjp-stanley-nc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 35.3403,
+              "lng": -81.078
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/sc-johnson/04-scjp-stanley-nc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 35.3403,
+              "lng": -81.078
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "addressCorrection": "Roster address '100 Technology Center Dr' is incorrect. Verified address is 1100 S Highway 27 (NC-27), Stanley, NC 28164 — the former Deb USA plant, now SC Johnson Professional USA (Waze, LoopNet APN 176716, FDA/Panjiva records). Roster coordinate (35.353526, -81.090317) was a city-centroid in downtown Stanley; corrected to the plant at ~35.3403, -81.0780.",
           "truckGate": "No barrier arm, gate or checkpoint. The dock face fronts NC-27 directly with an open paved truck apron; trucks pull in straight off the highway. truckGate false.",
@@ -574,8 +825,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster supplied coordinates of 42.704751, -87.90962 (geocode moved 1,024 m).\nThose coordinates land on the NE office/parking corner of the property, not\nthe building footprint. Satellite probing around the point identified the\ncorrect structure ~250 m to the SW: a single very large white-roof warehouse.\n\nIdentity confirmed via the EPA Risk Management Plan record for the\n\"Sturtevant Regional Distribution Center\" at 2600 Enterprise Dr and\nLoopNet / Colliers / CommercialCafe listings: a **552,000 sq ft SCJ-owned\naerosol-storage warehouse, LEED-Gold, 32-ft clear height, 55 loading docks\nand 118 tractor-trailer staging positions**. The RMP exists because the\nbuilding stores LPG-propellant (propane/butane/isobutane) aerosol finished\ngoods. The site sits adjacent to the Waxdale plant complex, ~1 km SW of the",
         "mapsUrl": "https://www.google.com/maps/@42.70360,-87.91160,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/sc-johnson/05-sturtevant-rdc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 42.7036,
+              "lng": -87.9116
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/sc-johnson/05-sturtevant-rdc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 42.7036,
+              "lng": -87.9116
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Confirmed via EPA RMP record (Sturtevant Regional Distribution Center, 2600 Enterprise Dr) + LoopNet/Colliers listings: 552,000 sq ft SCJ-owned aerosol-storage warehouse, LEED-Gold, 32-ft clear, 55 docks, 118 trailer staging positions. Roster coords (42.704751,-87.90962) sat near the NE office corner; building center relocated to ~42.70360,-87.91160 from satellite.",
           "truckGate": "The truck yards on both the north and south long faces are fully enclosed by chain-link perimeter fencing — Street View (Jun 2019) along Enterprise Dr clearly shows continuous chain-link with trailers parked behind it on the south side. Controlled-access fenced compound with truck gates in the fence line where the perimeter loop road enters the yards.",
@@ -683,8 +1000,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Roster coordinates 32.968943, -97.331494 (ROOFTOP geocode, moved 143 m) land\ncorrectly on the building. Identity is supported by the **EPA Risk Management\nPlan record** for the \"Fort Worth Regional Distribution Center\" and a Waze\nlisting (\"DHL - SC Johnson\"). The facility sits in the AllianceTexas\nindustrial area on the far north side of Fort Worth and is operated with DHL\nSupply Chain. It is the dossier-noted Fort Worth RDC. Locked center\n(per the JSON): 32.96895, -97.33145.",
         "mapsUrl": "https://www.google.com/maps/@32.96895,-97.33145,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/sc-johnson/06-fort-worth-regional-distribution-center-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.96895,
+              "lng": -97.33145
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/sc-johnson/06-fort-worth-regional-distribution-center-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.96895,
+              "lng": -97.33145
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Truck driveways enter the site from the perimeter industrial road on the SW (Transport Dr side) and around the building with no barrier arm, sliding gate, or checkpoint. Street View (Sep 2025) of the truck roads shows wide-open paved driveways with no control. Open site.",
           "guardShack": "No staffed booth at any truck entrance. The dark elongated structure beside the SW driveway in z20 imagery is a parked trailer/container, not a guard booth.",
@@ -792,8 +1167,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Roster coordinates 33.533794, -84.595568 (geocode moved 226 m) land between two\nadjacent warehouses in a wooded industrial park south of the Atlanta metro,\njust off I-85. Identity confirmed via the EPA Risk Management Plan record\nfor the \"Fairburn Regional Distribution Center\" at 1555 Oakley Industrial Blvd,\na Panjiva buyer record (\"S.C. Johnson & Son Inc., 1555 Oakley Ind Blvd\nFairburn GA\"), and a Waze listing (\"Exel Logistics/SC Johnson & Son Inc\") — the\nRDC is operated with Exel/DHL Supply Chain and stores LPG-propellant aerosol\nfinished goods.\n\nOf the two warehouses, the SC Johnson building is the western (left) one,\nidentified by a distinctive curved truck-loop apron at its south end. The\neastern building (1525 Oakley Industrial Blvd, Southcreek Distribution Center\nIV) is a separate tenant. Locked center: 33.53330, -84.59590.",
         "mapsUrl": "https://www.google.com/maps/@33.53330,-84.59590,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/sc-johnson/07-fairburn-rdc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.5333,
+              "lng": -84.5959
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/sc-johnson/07-fairburn-rdc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.5333,
+              "lng": -84.5959
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Confirmed via EPA RMP record (Fairburn Regional Distribution Center, 1555 Oakley Industrial Blvd) + Panjiva buyer record (S.C. Johnson & Son Inc., 1555 Oakley Ind Blvd Fairburn GA) + Waze 'Exel Logistics/SC Johnson & Son Inc' listing. Atlanta-metro aerosol RDC, operated with Exel/DHL. SCJ building is the LEFT (western) of two warehouses, identified by the distinctive curved truck-loop apron at its south end; the right building (1525 Oakley) is a separate tenant.",
           "truckGate": "Single private access drive enters the property from the NE off Oakley Industrial Blvd through a wooded buffer. No barrier arm, sliding gate, or checkpoint structure on the drive or at the building loop in Street View (Feb 2022). Open site within a wooded industrial park.",
@@ -902,8 +1335,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "Roster coordinates 38.678343, -121.72736 (geocode moved 103 m) land correctly\non the building. Identity confirmed via the EPA Risk Management Plan record\nfor the \"Woodland Regional Distribution Center\" at 2030 Hanson Way, a **Panjiva\nbuyer record** (S.C. Johnson & Son Inc., 2030 Hanson Way Woodland CA), and the\nLoopNet \"Hanson Way Distribution Center\" listing. The Journal Times reported\nSC Johnson leasing a ~200,000 sq ft distribution facility in Woodland; the\nLoopNet record gives the building specs: **built 2002, 30-ft clear height,\n40 docks plus 1 drive-in.** It serves Northern California and stores\nLPG-propellant aerosol finished goods (the basis for the RMP filing).\n\nThe SCJ building is the lone mid-size white-roof warehouse; the much larger\nbuildings immediately to the north and east are separate tenants. Locked",
         "mapsUrl": "https://www.google.com/maps/@38.67840,-121.72730,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/sc-johnson/08-woodland-rdc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 38.6784,
+              "lng": -121.7273
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/sc-johnson/08-woodland-rdc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 38.6784,
+              "lng": -121.7273
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Confirmed via EPA RMP record (Woodland Regional Distribution Center, 2030 Hanson Way) + Panjiva buyer record + LoopNet 'Hanson Way Distribution Center'. JournalTimes reported SCJ leasing a ~200,000 sq ft Woodland facility. Building (built 2002, ~200,000 sq ft, 30-ft clear, 40 docks + 1 drive-in) is the lone mid-size white-roof warehouse; surrounding much larger buildings are separate tenants. Roster coords (geocode moved 103 m) land correctly on the building.",
           "truckGate": "The truck-side parking/yard areas on the north and south faces are bounded by chain-link fencing; the west-side office parking is also chain-link fenced (Street View Jan/Mar 2026). Controlled-access fenced parcel with gate openings where the perimeter drive enters the truck yards.",
@@ -1010,8 +1509,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster geocode was flagged as having moved 8,791 m — the supplied\ncoordinates needed verification. Satellite probing around 40.175046, -77.24279\nlanded on the correct building: a very large cross-dock warehouse in the\nCarlisle/Harrisburg logistics corridor.\n\nIdentity confirmed via the EPA Risk Management Plan record for the\n\"Carlisle Regional Distribution Center\" at 5 True Temper Dr, the **Margulies\nHoelzli Architecture project page, an FCC ULS license (\"EXEL SC JOHNSON\")**,\nand LoopNet/FCC listings. The architect describes a **500,000 sq ft northeast\nregional logistics facility, 450 ft × 1,100 ft cross-dock**, fast-track\ntilt-wall construction by First Industrial Realty Trust, with local operations\nsupport offices. It is operated with DHL/Exel and stores LPG-propellant\naerosol finished goods (basis for the RMP). It is the Northeast RDC succeeding",
         "mapsUrl": "https://www.google.com/maps/@40.17510,-77.24280,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/sc-johnson/09-carlisle-rdc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.1751,
+              "lng": -77.2428
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/sc-johnson/09-carlisle-rdc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.1751,
+              "lng": -77.2428
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Confirmed via EPA RMP record (Carlisle Regional Distribution Center, 5 True Temper Dr) + Margulies Hoelzli Architecture project page + FCC ULS license 'EXEL SC JOHNSON' + LoopNet/FCC listings. 500,000 sq ft, 450 ft x 1,100 ft cross-dock built by First Industrial Realty Trust, tilt-wall, with local operations offices; operated with DHL/Exel. Roster geocode moved 8,791 m -> the supplied coords were far off; correct building locked from satellite at the True Temper Dr cross-dock.",
           "truckGate": "The truck loop road wraps the entire building; the access road comes in from the NE off True Temper Dr. Street View (Nov 2023) of the entrance shows open driveways with no barrier arm, sliding gate, or checkpoint. Open site.",
@@ -1114,8 +1671,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "Roster coordinates 34.046012, -117.618383 (geocode moved 125 m) land correctly\non the building. Identity confirmed via the EPA Risk Management Plan record\nfor the \"Ontario Distribution Center\" at 1545 E Locust St Building 7, the\nLoopNet APN listing (parcel 0113-441-12), and the Smart Warehousing facility\ndirectory. The building is ~268,830 sq ft, built 1997/98, in Thoroughbred\nBusiness Park Phase II. Locked center: 34.04610, -117.61840.",
         "mapsUrl": "https://www.google.com/maps/@34.04610,-117.61840,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/sc-johnson/10-ontario-dc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 34.0461,
+              "lng": -117.6184
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/sc-johnson/10-ontario-dc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 34.0461,
+              "lng": -117.6184
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "tenancy": "ROSTER NOTE CONFIRMED: the building at 1545 E Locust St, Bldg 7 (Thoroughbred Business Park Phase II, APN 0113-441-12, ~268,830 sq ft, built 1997/98) is now branded and operated by Smart Warehousing, a 3PL — Street View (Feb/May 2025) shows a 'Smart Warehousing' sign on the office face. The EPA RMP 'Ontario Distribution Center' historically tied SC Johnson aerosol storage to this address; SCJ's current direct tenancy here is doubtful — likely a 3PL-operated DC that may still handle SCJ aerosol product or have transitioned. Audited as the physical RDC site per the roster.",
           "location": "Confirmed via EPA RMP record (Ontario Distribution Center) + LoopNet APN listing (0113-441-12, 1545 E Locust St) + Smart Warehousing 'Ontario #2' warehouse listing. Roster geocode moved 125 m and lands on the correct building.",

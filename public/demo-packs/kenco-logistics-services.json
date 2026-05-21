@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T04:43:53.395Z",
+  "builtAt": "2026-05-21T14:21:36.384Z",
   "account": {
     "slug": "kenco-logistics-services",
     "displayName": "Kenco Logistics Services",
@@ -12,7 +12,8 @@
       "droppedStubCount": 2,
       "capHit": false,
       "note": "Audited all 28 identifiable facilities (2 additional were unresolvable from public sources)."
-    }
+    },
+    "featuredSiteId": "02-kenco-mcs-mississippi"
   },
   "research": {
     "facility_count": 30,
@@ -132,8 +133,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster pin (38.387587, -85.676299) lands on the NE corner of a large\nrectangular warehouse inside River Ridge Commerce Center. Wide z16/z17\nsatellite shows a multi-building greenfield industrial park; the building\nunder the pin is the largest in the immediate cluster. Web research confirms\nKenco operates 201 River Ridge Parkway as its largest AutoStore installation\n(49,000 bins, 130 grid robots) — a ~664,800 SF e-commerce fulfillment DC.\nStreet View from River Ridge Parkway (2026-03) shows the Kenco logo on the\nNE-end office block, positively confirming the building. Locked center at the\nwarehouse centroid, ~38.38585 / -85.67760.",
         "mapsUrl": "https://www.google.com/maps/@38.38585,-85.67760,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/01-kenco-mcs-jeffersonville-i-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 38.38585,
+              "lng": -85.6776
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/01-kenco-mcs-jeffersonville-i-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 38.38585,
+              "lng": -85.6776
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Sliding chain-link gate across the NW dock-yard truck driveway, confirmed in Street View (2026-03). Gate opening set in continuous perimeter fence.",
           "guardShack": "No booth of any kind beside the gate; entrance is a fence opening only.",
@@ -234,8 +301,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster pin (34.988452, -89.782908) lands squarely on a very large N-S\noriented warehouse inside an Olive Branch logistics park adjacent to an\nairport runway. Web research (LoopNet, Colliers, CommercialCafe) confirms\n11244 S Distribution Cove = \"Olive Branch Distribution Center II,\" a large\ndistribution building; the Kenco warehousing map lists this Mississippi MCS\nsite at ~800,000 SF. The pinned building's scale, cross-dock layout and\ntrailer yards are consistent. Locked center at the warehouse centroid,\n~34.98890 / -89.78290.",
         "mapsUrl": "https://www.google.com/maps/@34.98890,-89.78290,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/02-kenco-mcs-mississippi-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 34.9889,
+              "lng": -89.7829
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/02-kenco-mcs-mississippi-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 34.9889,
+              "lng": -89.7829
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "No controlled truck entrance. Truck courts on both long faces are open and connect freely to S Distribution Cove; no barrier arm, sliding gate, or checkpoint visible in z18-z20 satellite or Street View. Property is an open multi-tenant logistics-park building.",
           "guardShack": "No booth anywhere on the property; S end has only an office and a paved truck turnaround/roundabout.",
@@ -317,8 +442,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster pin (40.598247, -75.616265) lands on a dark-roofed warehouse in a\nsuburban industrial park (Iron Run / Trexlertown area, Lehigh County). Web\nresearch (BBB, Chamber of Commerce, LogiCore) confirms Kenco Logistics\noperates at 6975 Ambassador Drive/Rd, Allentown PA 18106. **Decisive\nconfirmation:** 2025-05 Street View shows the address number \"6975\" on the\nbuilding's SE wall facing Ambassador Drive. Locked center at the building\ncentroid, ~40.59820 / -75.61650.\n\nSize discrepancy noted: the roster source cites 601,836 SF and 92 dock\ndoors for the Kenco Allentown MCS site. The physical building at the\nROOFTOP-geocoded address is a mid-size warehouse of roughly 150,000-250,000 SF\nwith a single, modest dock bank — far smaller than 92 doors. The roster figure\nmost likely aggregates Kenco's total Allentown space (multiple suites or",
         "mapsUrl": "https://www.google.com/maps/@40.59820,-75.61650,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/03-kenco-mcs-allentown-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.5982,
+              "lng": -75.6165
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/03-kenco-mcs-allentown-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.5982,
+              "lng": -75.6165
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "siteDiscrepancy": "Roster source cites 601,836 SF / 92 dock doors for the Kenco Allentown MCS site, but the building at the ROOFTOP-geocoded 6975 Ambassador Drive is a mid-size warehouse of roughly 150,000-250,000 SF with a modest single-face dock bank. The roster figure likely aggregates Kenco's total Allentown footprint or is mislabeled. Audited the physical building at the confirmed address; the '6975' address number is visible on the building wall in 2025-05 Street View.",
           "truckGate": "No controlled entrance. The site driveway connects to Ambassador Drive as an open driveway with no barrier arm, gate, or checkpoint (2025-05 Street View + z19/z20 satellite).",
@@ -429,8 +612,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
         "dossierExcerpt": "The roster pin (32.631712, -96.82947) lands on the northernmost of three\nlarge warehouses along the I-35E service road in DeSoto, TX. Web research\n(LogiCore, DeSoto Chamber of Commerce, Kenco/BusinessWire releases) confirms\nKenco operates the Walker Edison e-commerce DC at 2119 N Interstate 35 East\nService Rd, DeSoto; Gordon Highlander built it (~490,000 SF). The pinned\nbuilding's scale and dual-face dock layout are consistent. Locked center at\nthe building centroid, ~32.63200 / -96.82960.",
         "mapsUrl": "https://www.google.com/maps/@32.63200,-96.82960,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/04-kenco-mcs-dallas-i-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.632,
+              "lng": -96.8296
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/04-kenco-mcs-dallas-i-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.632,
+              "lng": -96.8296
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Fully fenced perimeter with a controlled truck gate on the S/SW driveway off the I-35E service road. Confirmed in 2025-02 Street View and z20 satellite — chain-link perimeter fence, gated truck driveway with gate arms.",
           "guardShack": "A small 1-vehicle-footprint guard booth sits beside the gate driveway, visible in both z20 satellite and 2025-02 Street View.",
@@ -540,8 +791,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster pin (33.841558, -117.228703) lands on a very large white-roofed\nwarehouse in the Perris (Inland Empire) logistics corridor. Web research\n(LogiCore, Connect CRE, Commercial Observer, Commercial Property Executive)\nconfirms Kenco Logistics leased 579,708 SF at \"Perris Logistics Center,\"\n3900 Indian Avenue, built 2014 on ~28 acres at the SW corner of N Perris Blvd\nand Ramona Expressway. The pinned building's scale, build era, and dual-face\ncross-dock layout are consistent. A second large building immediately to the\nsouth is Kenco's Perris II (roster idx 6). Locked center at the Perris I\nbuilding centroid, ~33.84200 / -117.22890.",
         "mapsUrl": "https://www.google.com/maps/@33.84200,-117.22890,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/05-kenco-mcs-perris-i-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.842,
+              "lng": -117.2289
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/05-kenco-mcs-perris-i-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.842,
+              "lng": -117.2289
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "The N and S truck courts are bounded by chain-link fencing (fence line visible in z20 satellite and 2018 Street View along the entrance driveway). Truck access is a single private driveway off Indian Avenue into the fenced court. No barrier-arm hardware could be positively resolved at the road in available imagery, but the fenced court with a single controlled driveway reads as a truck gate. Medium confidence on the exact gate hardware.",
           "guardShack": "No guard booth visible at the driveway entrance or anywhere on the property in z20/z21 satellite or Street View.",
@@ -644,8 +961,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster places Perris II near the Indian Avenue / Ramona Expressway area with\na GEOMETRIC_CENTER geocode that fell on a vacant intersection lot. Web research\n(Commercial Property Executive, Inland Empire Business Journal, LogiCore, Connect\nCRE) ties the Kenco Perris campus to the **Perris Logistics Center, 3900 Indian\nAvenue**, a 579,708 SF building on ~28 acres at the SE corner of Ramona Expressway\nand Indian Avenue, built 2014, C-TPAT certified.\n\nPublic sources describe one 579,708 SF building, but the campus on the ground\nholds two large cross-dock warehouses. The Perris I roster entry (idx 5)\ngeocodes to the north building. Perris II (idx 6) was therefore audited as the\nsouth building — the larger of the two cross-dock warehouses — centered at\n~33.8392, -117.2303. Note: idx 5 and idx 6 are two buildings of the same Kenco",
         "mapsUrl": "https://www.google.com/maps/@33.83915,-117.23035,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/06-kenco-mcs-perris-ii-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.83915,
+              "lng": -117.23035
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/06-kenco-mcs-perris-ii-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.83915,
+              "lng": -117.23035
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "site": "Perris I (idx 5) and Perris II (idx 6) both resolve to the Kenco Perris Logistics Center campus, 3900 Indian Avenue, SE corner of Ramona Expressway / Indian Avenue. Public sources list one 579,708 SF building; the campus actually holds two large cross-dock warehouses. idx 5 point landed on the north building, so Perris II was audited as the SOUTH building (the larger of the two), centered ~33.8392, -117.2303.",
           "truckGate": "Truck yard is fully enclosed by black metal perimeter fence (confirmed in 5+ Street View headings off Indian Avenue and the west perimeter road). Facility is C-TPAT certified per LogiCore listing, which mandates a controlled, secured yard. A gate exists; exact arm/slide-gate not crisply resolvable from imagery.",
@@ -745,8 +1128,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster gives 6509 Kimball Avenue, Chino CA 91708 with a ROOFTOP geocode\nmoved 217 m. Probing the roster point landed on a large white-roof warehouse in\nthe Chino logistics district south of Kimball Avenue. Step 0 confirmation: a\nz20 satellite probe of the building's roof shows the painted address number\n\"6509\" clearly legible (appears mirrored/rotated in overhead view). This is\nthe Kenco MCS Chino building. The Kimball Avenue intersection street sign and\nblock-number plates (6400 / 6500) corroborate the address.\n\nNote: a neighboring building to the east carries a solar-paneled roof and the\nbuilding west carries roof number \"15122\" — these are separate properties. The\nKenco facility is the central white-roof cross-dock building.",
         "mapsUrl": "https://www.google.com/maps/@33.96700,-117.66150,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/07-kenco-mcs-chino-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.967,
+              "lng": -117.6615
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/07-kenco-mcs-chino-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.967,
+              "lng": -117.6615
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "site": "Positively identified as 6509 Kimball Avenue, Chino CA - the roof number '6509' is legible on the west building's roof in z20 satellite imagery. Cross-dock Class-A Inland Empire warehouse in the dense Chino logistics district south of Kimball Avenue.",
           "truckGate": "Truck yards on both the west and east faces are enclosed by chain-link fencing (visible in Street View off Kimball Avenue and around the perimeter). Two truck entrances: the east truck corridor off Kimball Avenue (shared drive between this building and the solar-roofed building east) and a SW perimeter-road drive into the west drop yard.",
@@ -828,8 +1277,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster supplies \"River Ridge Commerce Center, Jeffersonville IN 47130\" with a\nROOFTOP geocode at 38.356949, -85.66387. Step 0 probing showed that point\nlands on an unrelated corporate visitor building with a landscaped pond several\nkm south — not a 468,635 SF distribution center. The geocode is wrong.\n\nWeb research confirms Kenco operates two logistics buildings on the\nJeffersonville side of River Ridge Commerce Center. idx 1 (Jeffersonville I) is\ndocumented at 201 River Ridge Parkway, 664,800 SF, with AutoStore robotics —\nthe central NE-SW-oriented building that the idx 1 roster geocode\n(38.387587, -85.676299) lands on. idx 10 (Jeffersonville II, 468,635 SF, food\ngrade) was therefore audited as the adjacent large warehouse to the NW —\nKenco's second River Ridge building — centered at ~38.3911, -85.6790.",
         "mapsUrl": "https://www.google.com/maps/@38.39105,-85.67900,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/10-kenco-mcs-jeffersonville-ii-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 38.39105,
+              "lng": -85.679
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/10-kenco-mcs-jeffersonville-ii-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 38.39105,
+              "lng": -85.679
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "site": "Kenco has two logistics buildings on the Jeffersonville side of River Ridge Commerce Center. idx 1 (Jeffersonville I) is documented at 201 River Ridge Parkway, 664,800 SF, AutoStore robotics - it is the central NE-SW building at the idx 1 roster geocode. idx 10 (Jeffersonville II, 468,635 SF, food grade) was audited as the adjacent large warehouse to the NW (the second Kenco building), centered ~38.3911, -85.6790. The roster's idx 10 geocode (38.356949, -85.66387) is wrong - it lands on an unrelated corporate visitor building several km south.",
           "truckGate": "No controlled truck gate. The truck yard along the SE dock face is open to River Ridge Parkway with only a grassed setback - no perimeter fence, barrier arm, sliding gate or guard booth visible in any Street View. Typical open-layout River Ridge spec building.",
@@ -930,8 +1437,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Facility type: Multi-Client Distribution Center\nResolved location: Silver Creek Logistics Center, Building B — 7803 Highway 31 E, Sellersburg, IN 47172\nLocked center coordinate: 38.37820, -85.75300 (Building B center)\nGate verdict: NO truck gate (open access)\nGuard-shack verdict: NO guard shack\nConfidence: High\n\n---\n\n### Step 0 — Locating the facility\n\nThe roster coordinate (38.398626, -85.776916, geocode precision `APPROXIMATE`) landed on\nopen farmland roughly 2 km northwest of any industrial building — confirmed wrong by a\nzoom-17 satellite probe.\n\nWeb research resolved the facility. Kenco's \"MCS — Jeffersonville III\" carries 417,270 SF\nin the roster. Commercial real estate listings (LoopNet, PropertyShark, Cambridge builder\npage) identify **Silver Creek Logistics Center Building B at 7803 Highway 31 E,",
         "mapsUrl": "https://www.google.com/maps/@38.37820,-85.75300,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/11-kenco-mcs-jeffersonville-iii-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 38.3782,
+              "lng": -85.753
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/11-kenco-mcs-jeffersonville-iii-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 38.3782,
+              "lng": -85.753
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster coords (38.398626,-85.776916, APPROXIMATE) landed on farmland 2km NW. Resolved via web research to Silver Creek Logistics Center Building B, 7803 Highway 31 E, Sellersburg IN 47172 - the 417,270 SF Class A building (built 2019) exactly matches roster SF. Confirmed on satellite + Street View.",
           "truckGate": "Open access driveway off Highway 31 E - no barrier arm, no gate, no guard booth. Confirmed via Street View (capture 2026-03): wide unobstructed paved entrance drive with only a monument sign. Modern logistics park, property is unfenced.",
@@ -1041,8 +1606,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Facility type: Multi-Client Distribution Center (temperature-controlled, food grade, 589,362 SF)\nResolved location: Danieldale Road logistics corridor, Lancaster, TX 75134\nLocked center coordinate: 32.63750, -96.80130 (large cross-dock building at the roster coord)\nGate verdict: NO truck gate (open speculative-park access)\nGuard-shack verdict: NO guard shack\nConfidence: Medium\n\n---\n\n### Step 0 — Locating the facility\n\nThe roster supplies identical `APPROXIMATE` coordinates (32.635612, -96.802949) for THREE\ndistinct Kenco Lancaster facilities — MCS Dallas III (589,362 SF), Dallas IV (560,000 SF)\nand Dallas II (200,000 SF). They all sit in the dense **Danieldale Road multi-tenant\nlogistics corridor** in Lancaster, TX 75134.\n\nResearch confirmed the Kenco anchor address as 2821 Danieldale Rd, Lancaster, TX 75134",
         "mapsUrl": "https://www.google.com/maps/@32.63750,-96.80130,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/12-kenco-mcs-dallas-iii-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.6375,
+              "lng": -96.8013
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/12-kenco-mcs-dallas-iii-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.6375,
+              "lng": -96.8013
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster gives identical APPROXIMATE coords (32.635612,-96.802949) for three Kenco Lancaster facilities (Dallas III/IV/II = 589,362 / 560,000 / 200,000 SF). They sit in the dense Danieldale Road multi-tenant logistics corridor in Lancaster TX 75134; confirmed Kenco anchor address 2821 Danieldale Rd (Indeed job posting + Bandana company directory). Per-building Kenco leasing is not publicly disambiguated, so idx 12 (largest, 589,362 SF = Dallas III) was assigned to the large cross-dock building whose west dock face the roster coordinate falls on (center ~32.6375,-96.8013).",
           "truckGate": "Open speculative-park access drives - no barrier arm, no gate, no guard booth. Street View (2021-02) shows wide open paved entrance drives with only fire-lane striping.",
@@ -1154,8 +1777,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Facility type: Multi-Client Distribution Center (temperature-controlled, food grade, 560,000 SF)\nResolved location: Danieldale Road logistics corridor, Lancaster, TX 75134\nLocked center coordinate: 32.63900, -96.79900 (large solar-roof cross-dock building)\nGate verdict: NO confirmed truck gate (open building access; dock yards fenced)\nGuard-shack verdict: NO guard shack\nConfidence: Medium\n\n---\n\n### Step 0 — Locating the facility\n\nAs with idx 12, the roster supplies identical `APPROXIMATE` coordinates\n(32.635612, -96.802949) for three Kenco Lancaster facilities — Dallas III (589,362 SF),\nDallas IV (560,000 SF, this entry) and Dallas II (200,000 SF). They sit in the\nDanieldale Road multi-tenant logistics corridor, Lancaster, TX 75134, anchored by the\nconfirmed Kenco address 2821 Danieldale Rd.",
         "mapsUrl": "https://www.google.com/maps/@32.63900,-96.79900,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/13-kenco-mcs-dallas-iv-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.639,
+              "lng": -96.799
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/13-kenco-mcs-dallas-iv-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.639,
+              "lng": -96.799
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster gives identical APPROXIMATE coords for three Kenco Lancaster facilities (Dallas III/IV/II = 589,362 / 560,000 / 200,000 SF) in the Danieldale Road multi-tenant logistics corridor, Lancaster TX 75134. Per-building Kenco leasing is not publicly disambiguated. idx 13 (Dallas IV, 560,000 SF) was assigned to the large cross-dock building with a full rooftop solar array, center ~32.6390,-96.7990 - the second-largest building in the immediate cluster.",
           "truckGate": "Building/office access drives off the corridor street are open with no barrier or guard booth. The trailer dock yards along both faces appear to have perimeter security fencing typical of DFW logistics parks, but no manned/gated truck checkpoint was confirmed - marked false and listed uncertain.",
@@ -1252,8 +1933,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Facility type: Multi-Client Distribution Center (food grade, 200,000 SF)\nResolved location: Danieldale Road logistics corridor, Lancaster, TX 75134\nLocked center coordinate: 32.63250, -96.80380 (smaller rear-load building)\nGate verdict: NO truck gate (open speculative-park access)\nGuard-shack verdict: NO guard shack\nConfidence: Medium\n\n---\n\n### Step 0 — Locating the facility\n\nAs with idx 12 and 13, the roster supplies identical `APPROXIMATE` coordinates\n(32.635612, -96.802949) for three Kenco Lancaster facilities — Dallas III (589,362 SF),\nDallas IV (560,000 SF) and Dallas II (200,000 SF, this entry). They sit in the\nDanieldale Road multi-tenant logistics corridor, Lancaster, TX 75134, anchored by the\nconfirmed Kenco address 2821 Danieldale Rd. Kenco's own location page for \"MCS – Dallas",
         "mapsUrl": "https://www.google.com/maps/@32.63250,-96.80380,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/14-kenco-mcs-dallas-ii-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.6325,
+              "lng": -96.8038
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/14-kenco-mcs-dallas-ii-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.6325,
+              "lng": -96.8038
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster gives identical APPROXIMATE coords for three Kenco Lancaster facilities (Dallas III/IV/II = 589,362 / 560,000 / 200,000 SF) in the Danieldale Road multi-tenant logistics corridor, Lancaster TX 75134. Per-building Kenco leasing is not publicly disambiguated. idx 14 (Dallas II, 200,000 SF - the smallest of the three) was assigned to the notably smaller rear-load building in the corridor, center ~32.6325,-96.8038.",
           "truckGate": "Open speculative-park access drives off the corridor street - no barrier arm, no gate, no guard booth. Street View shows wide open paved entrance drives with only fire-lane striping.",
@@ -1361,8 +2100,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Facility type: Dedicated Distribution Center (~906,000 SF, LIXIL Americas)\nResolved location: 3099 Rohr Road, Groveport, OH 43125\nLocked center coordinate: 39.83950, -82.91820 (west building of the two-building DC)\nGate verdict: NO truck gate (open access)\nGuard-shack verdict: NO guard shack\nConfidence: High\n\n---\n\n### Step 0 — Locating the facility\n\nThe roster supplies `ROOFTOP`-precision coordinates (39.841255, -82.919529) for the\nKenco LIXIL Americas DC at 3099 Rohr Road, Groveport, OH 43125. Web research confirmed\nthis is the ~906,000 SF LIXIL Americas distribution center managed by Kenco, per the\nBusinessWire / Kenco announcement (May 2024) and BBB/Waze Groveport listings.\n\nA zoom-18 probe at the exact roster coordinate showed it pins the NW corner of a",
         "mapsUrl": "https://www.google.com/maps/@39.83950,-82.91820,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/15-kenco-lixil-americas-dc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 39.8395,
+              "lng": -82.9182
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/15-kenco-lixil-americas-dc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 39.8395,
+              "lng": -82.9182
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Confirmed: 3099 Rohr Road, Groveport OH 43125 - the ~906,000 SF LIXIL Americas distribution center managed by Kenco (BusinessWire/Kenco announcement May 2024). Roster ROOFTOP coords pin the NW corner of the building; verified on satellite + Street View. The DC is a two-building tan-roofed complex in the Rickenbacker/Groveport logistics hub; the roster coordinate sits on the west building.",
           "truckGate": "Open access driveways off Rohr Road - no barrier arm, no gate, no guard booth. Street View (capture 2024-08) shows wide open paved entrance drives. Drive aisles between the two buildings are open as well.",
@@ -1463,8 +2260,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster supplied only \"Chattanooga, TN 37406\" with an APPROXIMATE geocode\n(35.067592, -85.261899). Step 0 satellite probing showed that point landed on\nthe CSX DeButts rail classification yard — a sea of rail tracks, not a\nwarehouse. The roster itself notes \"exact street address not publicly\nconfirmed.\"\n\nWeb research resolved Kenco's Chattanooga warehousing:\n- Kenco Group HQ is 2001 Riverside Drive, Chattanooga, TN 37406 (an office).\n- Kenco Logistic Services operates warehouses on Enterprise Park Drive\n  (zip 37416, the Enterprise Park / Enterprise South industrial corridor).\n  6170 Enterprise Park Dr is a confirmed Kenco building (ROOFTOP geocode\n  35.0696387, -85.1823609; Yelp/CoStar \"Kenco Logistics Services-Stryker\").\n- A Kenco affiliate sold a **7-warehouse Chattanooga portfolio for $67.1M in",
         "mapsUrl": "https://www.google.com/maps/@35.07155,-85.17815,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/16-kenco-mcs-chattanooga-ch29-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 35.07155,
+              "lng": -85.17815
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/16-kenco-mcs-chattanooga-ch29-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 35.07155,
+              "lng": -85.17815
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster gave an APPROXIMATE geocode for 'Chattanooga, TN 37406' that landed on the CSX DeButts rail classification yard ~5 km west of any Kenco warehouse. Web research resolved Kenco's Chattanooga MCS operations to the Enterprise Park Drive industrial cluster (zip 37416). Kenco Logistic Services has a confirmed building at 6170 Enterprise Park Dr (ROOFTOP geocode 35.0696,-85.1824) and a Kenco affiliate sold a 7-warehouse Chattanooga portfolio in 2022 including a 210,000 SF building near Enterprise South. CH29/CH7B/BP2 are internal Kenco building codes with no public address-to-code mapping, so the specific building for CH29 cannot be verified with certainty.",
           "buildingChoice": "Audited the large ~200x130 m warehouse at 35.0716,-85.1782 in the Enterprise Park Dr cluster as the best fit for CH29 (284,720 SF bulk space) - it is the largest single-tenant warehouse in the immediate cluster with a single dominant dock bank consistent with bulk distribution.",
@@ -1561,8 +2416,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster supplied only \"Chattanooga, TN 37406\" with an APPROXIMATE geocode\n(35.067592, -85.261899) — the same generic point used for idx 16/17/18. Step 0\nshowed it on the CSX DeButts rail classification yard, not a warehouse.\n\nWeb research resolved Kenco's Chattanooga warehousing to the **Enterprise Park\nDrive industrial cluster (zip 37416). Critically, 6170 Enterprise Park Dr\nis a confirmed Kenco building** — geocoded ROOFTOP at 35.0696387, -85.1823609,\nand listed as \"Kenco Logistics Services-Stryker\" on Yelp / CoStar. A Kenco\naffiliate also sold a 7-warehouse Chattanooga portfolio for $67.1M in 2022,\nconfirming Kenco's MCS footprint sits in this cluster.\n\nBecause 6170 Enterprise Park Dr is the confirmed Kenco address, CH7B was\naudited on that building (center ~35.0691, -85.1822). The CH-code-to-building",
         "mapsUrl": "https://www.google.com/maps/@35.06912,-85.18225,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/17-kenco-mcs-chattanooga-ch7b-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 35.06912,
+              "lng": -85.18225
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/17-kenco-mcs-chattanooga-ch7b-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 35.06912,
+              "lng": -85.18225
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster gave an APPROXIMATE geocode for 'Chattanooga, TN 37406' that landed on the CSX DeButts rail yard. Web research resolved Kenco's Chattanooga MCS operations to the Enterprise Park Drive industrial cluster. 6170 Enterprise Park Dr is a CONFIRMED Kenco building (ROOFTOP geocode 35.0696387,-85.1823609; Yelp/CoStar 'Kenco Logistics Services-Stryker').",
           "buildingChoice": "Audited the warehouse at the confirmed Kenco address 6170 Enterprise Park Dr (building center ~35.0691,-85.1822) as CH7B. CH7B is described as 242,000 SF temperature-controlled/food-grade; the audited building is a large single-tenant warehouse with a long dock bank consistent with a food-grade DC. Public sources cite ~162,500 SF for the 6170 building (a 1990 listing) which may understate the current footprint, so the CH-code-to-building match is best-effort - medium confidence.",
@@ -1659,8 +2572,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster supplied only \"Chattanooga, TN 37406\" with an APPROXIMATE geocode\n(35.067592, -85.261899) — Step 0 showed it on the CSX DeButts rail yard.\n\nThis facility was positively resolved by web research. Chattanoogan.com\nand the Chattanooga Times Free Press reported that a **210,000 SF industrial\nwarehouse on over 12 acres at 6301 Enterprise Park Dr** (built 1995) sold for\n$67.09M in 2022 as part of a 7-warehouse Chattanooga portfolio sold by a\nKenco affiliate. The **210,000 SF and 12+ acre figures are an exact match for\nBP2** (210,000 SF on the Kenco warehousing map). 6301 Enterprise Park Dr\ngeocodes ROOFTOP at 35.069286, -85.1764238 — this is a confident building\nidentification.",
         "mapsUrl": "https://www.google.com/maps/@35.06929,-85.17642,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/18-kenco-mcs-chattanooga-bp2-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 35.06929,
+              "lng": -85.17642
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/18-kenco-mcs-chattanooga-bp2-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 35.06929,
+              "lng": -85.17642
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster gave an APPROXIMATE geocode for 'Chattanooga, TN 37406' that landed on the CSX DeButts rail yard. Web research positively resolved BP2 to 6301 Enterprise Park Dr, Chattanooga TN 37416: Chattanoogan.com/Times Free Press reported a 210,000 SF industrial warehouse on over 12 acres at 6301 Enterprise Park Dr (built 1995) sold for $67.09M in 2022 as part of a Kenco-affiliate 7-warehouse Chattanooga portfolio. 210,000 SF and 12+ acres are an EXACT match for BP2 (210,000 SF on the Kenco warehousing map). 6301 Enterprise Park Dr geocodes ROOFTOP at 35.069286,-85.1764238.",
           "buildingChoice": "High confidence on building identity (210,000 SF / 12+ acres / 6301 Enterprise Park Dr matches BP2 exactly). Overall confidence held to medium because the gate/guard determination relies on imagery interpretation and Street View only reached one building face.",
@@ -1761,8 +2732,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster supplied a ROOFTOP geocode (41.247999, -111.995675) with the\naddress 1025 Depot Drive, Ogden UT 84404. Step 0 confirmed the point lands\ndirectly on a large distribution warehouse in the **Business Depot Ogden\n(BDO)** industrial park.\n\nWeb research confirmed 1025 Depot Dr is the Kenco Oatly Warehouse — a\nfinished-goods DC that Kenco built, staffs, and operates for Oatly (the\nSwedish oat-milk maker), serving Oatly's Ogden production plant (listed as\n1025 Depot Dr, Suite 5). This is a positive identification.",
         "mapsUrl": "https://www.google.com/maps/@41.24828,-111.99625,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/19-kenco-mcs-ogden-i-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.24828,
+              "lng": -111.99625
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/19-kenco-mcs-ogden-i-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.24828,
+              "lng": -111.99625
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "1025 Depot Dr, Ogden UT 84404 - confirmed as the Kenco Oatly Warehouse (Kenco-built/operated finished-goods DC serving Oatly's Ogden oat-milk plant; listed as 1025 Depot Dr Suite 5). Roster ROOFTOP geocode (41.247999,-111.995675) lands directly on the building in the Business Depot Ogden (BDO) industrial park. Audited coordinate is the building footprint center.",
           "truckGate": "No barrier arm, sliding/swing gate, or guard booth at the truck apron entrance. The west-side truck apron is reached by open driveways off the BDO industrial-park roads. Medium-confidence FALSE - flagged.",
@@ -1847,8 +2876,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster supplied a ROOFTOP geocode (41.100339, -112.035023) for \"Building\nG8, 7th Street, Freeport Center.\" Step 0 confirmed it definitively:\n- Google geocoding of \"Building G8, 7th Street, Freeport Center\" returns\n  \"G-8, 7th St, Clearfield, UT\" at 41.1003393, -112.0350228 — matching the\n  roster coordinate exactly.\n- **Street View (Nov 2022) shows a \"G-8 / 7th Street\" sign directly on the\n  building** at the street corner — a positive, unambiguous identification.\n\nFreeport Center is a 680-acre former WWII military depot, now a warehousing\nand distribution park of 78 long warehouse buildings on an internal street\ngrid. Kenco Logistic Services occupies building G8 (~90,000 SF, food-grade\ncertified per directory listings).",
         "mapsUrl": "https://www.google.com/maps/@41.10090,-112.03460,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/20-kenco-mcs-clearfield-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.1009,
+              "lng": -112.0346
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/20-kenco-mcs-clearfield-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.1009,
+              "lng": -112.0346
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Building G8, 7th Street, Freeport Center, Clearfield UT 84016 - positively confirmed. Roster ROOFTOP geocode (41.100339,-112.035023) matches the Google geocode for 'G-8, 7th St' exactly, and Street View shows a 'G-8 7th Street' sign on the building. Freeport Center is a 680-acre former WWII military depot with 78 long warehouse buildings on an internal street grid; Kenco occupies building G8 (~90,000 SF, food grade).",
           "buildingLayout": "G8 is one long, narrow Freeport Center warehouse (~230 m x 35 m) running NW-SE. Per Freeport Center's published description, most buildings have a railroad loading dock on one side and a truck loading dock on the other.",
@@ -1954,8 +3041,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Address: 3101 Highway 62 East, Mount Vernon, IN 47620\n- Locked center: 37.93550, -87.87000 (center of the demolished warehouse slab)\n- Roster coordinate (37.937193, -87.870498, ROOFTOP) lands on the north edge of\n  the warehouse footprint; confirmed correct parcel via satellite + web search.",
         "mapsUrl": "https://www.google.com/maps/@37.93550,-87.87000,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/21-kenco-mead-johnson-dc-mount-vernon-in-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 37.9355,
+              "lng": -87.87
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/21-kenco-mead-johnson-dc-mount-vernon-in-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 37.9355,
+              "lng": -87.87
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "SITE_STATUS": "FACILITY DESTROYED AND DEMOLISHED. An EF-3 tornado struck the Mead Johnson / Kenco DC on 9 Jul 2024, collapsing the roof and multiple walls. Current 2026 Maxar imagery and 2025-09 Street View show the warehouse fully razed to a bare concrete slab with exposed foundation footings and demolition debris. The site is non-operational. All operational classification fields are inferred from the surviving slab footprint and access roads, not a working yard.",
           "truckGate": "No barrier arm or guard structure visible at the NE entrance off the loop road; classified false but the pre-tornado state is unknowable from current imagery.",
@@ -2044,8 +3189,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Address: 315 Clarence King Drive, Calhoun, GA 30701\n- Building: \"Union Grove Logistics Center, Building 1\" — a ~720,000 SF\n  warehouse completed 2022; Kenco operates a ~468,000 SF dedicated DC for\n  Kerry Group inside it (opened Jan 2023, ribbon cutting per Gordon County\n  Chamber of Commerce).\n- Locked center: 34.43370, -84.92520 (center of the west warehouse).\n- Roster coordinate (34.430206, -84.927789, ROOFTOP) landed ~350m SW in woods\n  along Clarence King Drive; corrected NE to the actual building via satellite\n  + web search (CommercialCafe / PropertyShark / CompStak listings).",
         "mapsUrl": "https://www.google.com/maps/@34.43370,-84.92520,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/22-kenco-kerry-group-dc-calhoun-ga-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 34.4337,
+              "lng": -84.9252
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/22-kenco-kerry-group-dc-calhoun-ga-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 34.4337,
+              "lng": -84.9252
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Open-access campus. The south driveway off Clarence King Drive is an unrestricted paved intersection with no barrier arm or gate; 2024-02 Street View shows only traffic cones. No perimeter fence anywhere along Clarence King Drive.",
           "guardShack": "No booth structure at any entrance.",
@@ -2138,8 +3341,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 1015 W Wintergreen Road, Hutchins, TX 75141 (TSG \"WG-2\" facility)\n- Locked center: 32.62620, -96.71600 (center of the main warehouse)\n- Roster coordinate (32.625775, -96.716523, ROOFTOP) landed on the south edge\n  of the warehouse; confirmed correct building via satellite + web search.\n- This is the former corporate HQ and a 560,000 SF distribution warehouse of\n  The Shippers Group; TSG was acquired by Kenco Logistics in January 2024.",
         "mapsUrl": "https://www.google.com/maps/@32.62620,-96.71600,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/23-kenco-the-shippers-group-hutchins-tx-hq-campus-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.6262,
+              "lng": -96.716
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/23-kenco-the-shippers-group-hutchins-tx-hq-campus-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.6262,
+              "lng": -96.716
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Fully fenced/secured yard (corroborated by The Shippers Group's own facility page describing a 'secured yard'). 2026-02 Street View shows a chain-link perimeter all the way around the dock/yard area with a sliding gate across the SE truck entrance driveway.",
           "guardShack": "No clear dedicated 1-3-car guard booth. There IS a long metal building beside the entrance, but it reads as an office/annex/maintenance building rather than a gatehouse. With a controlled gate but no obvious booth, classified remoteGs (kiosk / app / call-box check-in likely).",
@@ -2239,8 +3508,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 801 E Wintergreen Road, Hutchins, TX 75141\n- Locked center: 32.63560, -96.69640 (center of the warehouse)\n- Roster coordinate (32.635388, -96.69556, ROOFTOP) landed on the building;\n  confirmed correct via satellite + web search.\n- A ~625,000 SF Dallas-area distribution center for American Standard Brands\n  (kitchen/bath products); Kenco Logistics manages and operates it.",
         "mapsUrl": "https://www.google.com/maps/@32.63560,-96.69640,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/24-kenco-american-standard-dc-hutchins-tx-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.6356,
+              "lng": -96.6964
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/24-kenco-american-standard-dc-hutchins-tx-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.6356,
+              "lng": -96.6964
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "The entire dock yard is enclosed by a continuous chain-link perimeter fence on all four sides (confirmed in 2026 Street View on the S, W, and E faces). Truck access is through sliding gates in that fence. Kenco's published scope for this site explicitly includes 'spotter and yard management' and 'contract security', confirming a controlled, access-managed yard.",
           "guardShack": "No dedicated 1-3-car guard booth is visible at any gate in the available imagery. Classified false; flagged uncertain because 'contract security' is contracted - a guard may be posted at a gate not clearly resolved.",
@@ -2347,8 +3682,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 500 S Millers Ferry Road, Wilmer, TX 75172\n- Locked center: 32.58580, -96.68070 (center of the warehouse)\n- Roster coordinate (32.586422, -96.683656, RANGE_INTERPOLATED) landed ~250m\n  WNW in the employee-parking / road frontage; corrected onto the building via\n  satellite + web search.\n- 500 S Millers Ferry Rd is the Whirlpool Regional Distribution Center — a\n  ~1,020,000 SF building on ~57 acres (Kimley-Horn / WilmerEDC). The Shippers\n  Group / Kenco operates the Whirlpool finished-goods warehouse here\n  (~822,000 SF dedicated space cited for the Kenco-Wilmer operation).",
         "mapsUrl": "https://www.google.com/maps/@32.58580,-96.68070,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/25-kenco-the-shippers-group-wilmer-tx-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.5858,
+              "lng": -96.6807
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/25-kenco-the-shippers-group-wilmer-tx-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.5858,
+              "lng": -96.6807
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "site": "500 S Millers Ferry Rd is the Whirlpool Regional Distribution Center - a ~1,020,000 SF building on ~57 acres. The Shippers Group / Kenco operates the Whirlpool finished-goods warehouse here (~822,000 SF dedicated space cited for the Kenco-Wilmer operation).",
           "truckGate": "The dock yard is enclosed by a continuous chain-link perimeter fence. 2026-02 Street View shows a wide gated opening (sliding chain-link gate) at the north-end truck entrance off S Millers Ferry Road; the dock yards on the N and S faces are inside the fence.",
@@ -2439,8 +3840,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Type: Distribution Center / 3PL Warehouse\nResolved coordinates: 28.43655, -81.41865\nArchetype: #3 — No Gate / No GS\nConfidence: medium",
         "mapsUrl": "https://www.google.com/maps/@28.43655,-81.41865,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/26-kenco-the-shippers-group-orlando-fl-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 28.43655,
+              "lng": -81.41865
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/26-kenco-the-shippers-group-orlando-fl-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 28.43655,
+              "lng": -81.41865
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster coords (28.3756,-81.3619) pointed to a residential subdivision and were wrong. The Shippers Group / Kenco Orlando is a ~58,000 SF dedicated suite (Suite 800) inside Building 600 at 2612 Consulate Drive, Infinity Park, Orlando FL 32819. Confirmed via The Shippers Group locations page and CRE listings (LoopNet APN 33-2329-9463-10-000). Locked center on the Building 600 footprint at 28.43655,-81.41865.",
           "truckGate": "No barrier arm, sliding gate, or guard booth anywhere along Consulate Drive frontage or at the truck-court driveways. Street View (Jan 2026) shows open landscaped frontage and open truck-court drive aisles - classic open-access Class A speculative industrial park. truckGate=false.",
@@ -2535,8 +3994,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Type: Distribution Center / 3PL Warehouse\nResolved coordinates: 33.50560, -84.34810\nArchetype: #3 — No Gate / No GS\nConfidence: medium",
         "mapsUrl": "https://www.google.com/maps/@33.50560,-84.34810,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/27-kenco-the-shippers-group-jonesboro-ga-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.5056,
+              "lng": -84.3481
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/27-kenco-the-shippers-group-jonesboro-ga-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.5056,
+              "lng": -84.3481
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster coords (33.5215,-84.3538, APPROXIMATE, moved 834m) pointed to downtown Jonesboro retail strip - wrong. The Shippers Group / Kenco Jonesboro is at 9250 S Main Street, Jonesboro GA 30236 (~499,960 SF ambient warehouse, food-grade per CRE listing 'Jonesboro Commerce Center'). Confirmed via The Shippers Group locations page, Waze/TruckMap listings, and a Street View pano (Aug 2025) showing the blue 'TSG' logo on the building wall. Locked center on the building footprint at 33.50560,-84.34810.",
           "truckGate": "A chain-link perimeter fence is visible along the property line (Sep 2025 Street View). No barrier arm or sliding/swing gate structure was visible at the driveway connecting the site to S Main Street, and the road frontage is a heavily wooded buffer that obscures the exact entrance in Street View. truckGate marked false (fence present but no controlled checkpoint structure confirmed); flagged uncertain. The truckGate geofence box is the probable driveway-to-road junction at the SW.",
@@ -2632,8 +4149,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Type: Distribution Center / 3PL Warehouse\nResolved coordinates: 32.79050, -97.01300\nArchetype: #3 — No Gate / No GS\nConfidence: medium",
         "mapsUrl": "https://www.google.com/maps/@32.79050,-97.01300,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/28-kenco-the-shippers-group-grand-prairie-tx-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.7905,
+              "lng": -97.013
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/28-kenco-the-shippers-group-grand-prairie-tx-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.7905,
+              "lng": -97.013
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster coords (32.781145,-97.017588, APPROXIMATE) and the cited 3845 Grand Lakes Way address were both off-target: 3845 Grand Lakes Way is the Inmar Rx Solutions building. Dallas County tax records (city-data) list 'WAREHOUSE SHIPPERS' (Shippers Warehouse / TSG) as a tenant at 3953 Grand Lakes Way - the correct facility. Confirmed via TruckMap/Waze listings ('Shippers Warehouse, 3953 Grand Lakes Way') and a Street View pano showing a 'TENNANT' tenant sign on the building (Tennant is a co-tenant at 3953). 3953 Grand Lakes Way is a ~1,060,075 SF Duke Realty/Prologis distribution building (Grand Lakes Industrial Park) in which TSG occupies a ~281,206 SF dedicated suite. Locked center on the building footprint at 32.79050,-97.01300.",
           "truckGate": "No barrier arm, sliding/swing gate, or guard booth visible at the driveway connections off Grand Lakes Way or at the truck-court drive aisles. Street View (Dec 2024) shows open landscaped frontage and open drive aisles into the truck courts - typical Class A Duke Realty open-access spec building. truckGate=false.",
@@ -2724,8 +4299,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Type: Distribution Center / Northeast Warehouse\nResolved coordinates: 42.54620, -71.59450\nArchetype: #3 — No Gate / No GS\nConfidence: medium",
         "mapsUrl": "https://www.google.com/maps/@42.54620,-71.59450,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/29-kenco-devens-dc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 42.5462,
+              "lng": -71.5945
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/29-kenco-devens-dc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 42.5462,
+              "lng": -71.5945
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster coords (42.546746,-71.594485, geocode ROOFTOP) landed on a long warehouse building at 50 Independence Drive, Devens MA - confirmed correct. The facility is also branded 'Kenco's USG Boston' (a Kenco distribution operation for USG / United States Gypsum building products), per multiple business listings. Audit locked on the building footprint at 42.54620,-71.59450.",
           "truckGate": "A chain-link perimeter fence rings the property (visible in Aug 2023 Street View). No barrier arm or sliding/swing gate structure was observed at the driveway off Independence Drive; the Devens commerce-park roads are open public roads and the property entrances appear open. truckGate marked false (fence present, no controlled checkpoint structure confirmed); flagged uncertain.",
@@ -2820,8 +4453,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Type: Distribution Center / Warehouse\nResolved coordinates: 35.07060, -89.95290\nArchetype: #3 — No Gate / No GS\nConfidence: low — identity mismatch, flagged for human review",
         "mapsUrl": "https://www.google.com/maps/@35.07060,-89.95290,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/30-kenco-memphis-dc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 35.0706,
+              "lng": -89.9529
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/kenco-logistics-services/30-kenco-memphis-dc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 35.0706,
+              "lng": -89.9529
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "IDENTITY_MISMATCH": "CRITICAL: The address 3346 Democrat Drive, Memphis TN 38118 belongs to 'KenCo Distributors Inc' - an unrelated Nashville-based building-materials wholesaler (drywall, insulation, steel framing, flooring; ~7:30am-4:30pm operation). This is NOT 'Kenco Logistics Services' / Kenco Group, the 3PL being audited in this roster. Kenco Group's official warehousing map (kencogroup.com/warehousing-map) lists NO Memphis facility - only Chattanooga TN (already covered as roster idx 16-18). The roster's idx 30 was derived from a Manta/Yellow Pages 'Kenco Logistic Service Memphis' listing that conflated the two companies by name similarity. This roster entry is most likely a name-collision error; Kenco Logistics Services probably has no Memphis DC. The classification below describes the physical building actually at the locked coordinates (the KenCo Distributors warehouse) so the audit is still complete, but it should NOT be treated as a Kenco Logistics Services site. confidence=low.",
           "location": "Roster coords (35.070065,-89.952907, geocode ROOFTOP) land on a long multi-tenant warehouse at 3346 Democrat Drive, Memphis TN. The building is real and is a distribution warehouse, but its occupant is KenCo Distributors (building materials), not the 3PL. Audited the physical building at 35.07060,-89.95290.",

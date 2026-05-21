@@ -27,6 +27,7 @@ function makeMinimalPack(): DemoPack {
         capHit: false,
         note: 'Audited 22 of an estimated 26 NA plants. The 4 not shown are co-manufacturer sites.',
       },
+      featuredSiteId: '01-nabisco-richmond-biscuit-bakery',
     },
     research: {
       mandate: 'Vision 2030 — net revenue growth and margin expansion via portfolio reshape.',

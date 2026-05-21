@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T04:47:50.599Z",
+  "builtAt": "2026-05-21T14:21:56.376Z",
   "account": {
     "slug": "salson-logistics",
     "displayName": "SalSon Logistics",
@@ -12,7 +12,8 @@
       "droppedStubCount": 1,
       "capHit": false,
       "note": "Audited all 13 identifiable facilities (1 additional were unresolvable from public sources)."
-    }
+    },
+    "featuredSiteId": "04-compton-ca"
   },
   "research": {
     "facility_count": 14,
@@ -132,8 +133,76 @@
           "dropYard": true,
           "multiStep": true
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "The roster coordinates landed directly on a large industrial property in the\nPort Newark / Doremus Avenue corridor — the canonical SalSon East Coast\nflagship. salson.com publishes 888 Doremus Avenue, Newark NJ 07114 as its\nNewark warehouse and container-yard address; the dossier describes a 55-acre,\nmulti-location campus with three yards and ~1M sq ft of Class-A warehouse\nwithin a mile of Port Newark, operating 24/7 and processing ~2,000\ncontainers/week. Satellite imagery matches exactly: a single very large\nwarehouse building (~1M sq ft footprint), extensive container/chassis yards\non multiple sides, an office building at the SE, and an active rail yard\nalong the north edge. Location locked with high confidence.",
         "mapsUrl": "https://www.google.com/maps/@40.701641,-74.131704,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/salson-logistics/01-newark-888-doremus-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.701641,
+              "lng": -74.131704
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/salson-logistics/01-newark-888-doremus-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.701641,
+              "lng": -74.131704
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Main truck entrance off Doremus Ave at SW corner (~40.7010,-74.1326). Z20 satellite shows yellow-painted entry apron with painted STOP lines and a yellow OCR/portal gantry spanning the truck lanes; Street View confirms a steel portal gantry over the gated entry with chainlink fencing on both sides.",
           "guardShack": "Small structure(s) beside the yellow gantry visible in z20 satellite and Street View at the gate apron — consistent with a gate/check-in booth for a 24/7 port drayage operation tracking ~2,000 containers/week.",
@@ -226,8 +295,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#4",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue spills into traffic",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive.backup",
+              "baselineWaitMs": 1500000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Pass through gate",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
         "dossierExcerpt": "The roster coordinates (40.71734, -74.128895) for 481 Doremus Avenue landed\nat the NE end of a large warehouse complex in the Port Newark / Doremus\nAvenue corridor, about 1.5 km north of the 888 Doremus flagship campus.\nsalson.com confirms a large AIB-superior-rated, FDA-compliant food-grade\nwarehouse roughly one mile from Port Newark; the LogiCore directory lists\nSalSon's food-grade/liquor/container-storage building at this address. The\nwarehouse footprint (a long single-story distribution building running\nNW-SE with a continuous dock line) matches the facility type. The locked\ncenter is shifted slightly SW to the building centroid.",
         "mapsUrl": "https://www.google.com/maps/@40.716800,-74.130000,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/salson-logistics/02-newark-481-doremus-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.7168,
+              "lng": -74.13
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/salson-logistics/02-newark-481-doremus-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.7168,
+              "lng": -74.13
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Truck entrance off Doremus Avenue at the SE end of the property (~40.7162,-74.1289). Street View (2025) shows a sliding chainlink gate across a wide truck driveway, full chainlink perimeter fencing along Doremus, and a small gatehouse-scale structure beside the entry. Z20 satellite confirms the gated driveway apron and a small booth structure beside the entry lane.",
           "guardShack": "A small 1-vehicle-footprint structure sits beside the truck-gate driveway (visible in z20 satellite and Street View) — consistent with a staffed gatehouse for an AIB-rated food-grade warehouse / container-storage yard. remoteGs false.",
@@ -308,6 +443,28 @@
         },
         "dossierExcerpt": "The roster coordinates landed directly on a modest industrial property on\nUS Highway 130 in Florence, NJ. Yelp and Manta list SalSon Logistics at 2013\nUS Highway 130 N, Florence NJ 08518; the account dossier and Transport\nTopics coverage describe a transload hub added in 2024-2025 with 25\ntractors, 80 trailers and a maintenance shop, positioned between Port Newark\nand Philadelphia. The satellite imagery — a small office/maintenance-type\nbuilding with a large open gravel trailer-storage yard — matches a small\ntransload/fleet terminal. Location confirmed with high confidence.",
         "mapsUrl": "https://www.google.com/maps/@40.097016,-74.808053,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/salson-logistics/03-florence-nj-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.097016,
+              "lng": -74.808053
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/salson-logistics/03-florence-nj-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.097016,
+              "lng": -74.808053
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "No controlled truck gate. Street View (2023) shows an open driveway from US Highway 130 with no barrier arm or sliding gate; the gravel trailer yard has a low chainlink fence but the property entrance off US-130 is open. A 'For Lease' sign was still posted in 2023, consistent with this being a recently-acquired (2024-25) terminal.",
           "guardShack": "No guard booth visible anywhere on the property in satellite or Street View.",
@@ -397,8 +554,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster coordinates (33.859694, -118.229421) point to 18735 S Ferris Pl,\nCompton CA 90220. Property records (PropertyShark, LoopNet) identify this as\na ~118,740 sq ft warehouse/distribution building, built 1998 — and the\nbusiness directories list it as the **headquarters of Total Transportation\nServices (TTSI). TTSI acquired SalSon Logistics in September 2022**, so\nSalSon Logistics Services LLC (USDOT 3968944, the FMCSA record the roster\ngeocoded) is registered to the TTSI corporate campus at this address.\n\nThe account dossier separately describes the Compton facility as a\n\"brand-new West Compton site, still being built — 260,000 sq ft, 66 dock\ndoors, 20-acre secured yard.\" That description does not match the 1998\nbuilding at 18735 Ferris: it is a different, future facility with no public",
         "mapsUrl": "https://www.google.com/maps/@33.860150,-118.229800,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/salson-logistics/04-compton-ca-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.86015,
+              "lng": -118.2298
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/salson-logistics/04-compton-ca-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.86015,
+              "lng": -118.2298
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "_addressDiscrepancy": "ROSTER vs DOSSIER mismatch. The roster address 18735 S Ferris Pl, Compton CA geocodes to the existing Total Transportation Services (TTSI) headquarters building (PropertyShark/LoopNet: ~118,740 sq ft warehouse, built 1998). TTSI acquired SalSon Logistics in Sept 2022, so SalSon Logistics Services LLC (USDOT 3968944) is registered at the TTSI corporate campus. The dossier separately describes a 'brand-new West Compton site, still under construction, 260,000 sq ft, 66 dock doors, 20-acre secured yard' — that is a DIFFERENT, future facility with no public street address. This audit covers the building at the roster address (the operational TTSI/SalSon Compton warehouse), not the unbuilt West Compton site.",
           "truckGate": "No controlled truck gate at the property line. Street View (2025) shows an open paved driveway off S Ferris Place leading into the dock/truck court between buildings, with no barrier arm or sliding gate. Flagged uncertain — interior court fencing/gates within the multi-tenant logistics park were not fully resolvable.",
@@ -493,8 +708,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster coordinates (33.635335, -84.316831) landed on the south edge of the\nfacility. Street View along Moreland Avenue (US-23) positively confirmed the\nsite: a tall freestanding \"SalSon\" branded pylon sign stands at the road\nfrontage (visible in multiple 2025-02 panos). The facility occupies the east\nside of Moreland Ave. Web research corroborates 4382 Moreland Ave as SalSon's\nConley/Atlanta location (BBB, Racklify, D&B, Yahoo Local, LoopNet all list it).\nI shifted the locked center slightly north to the centroid of the two\noperational buildings and the truck yard.",
         "mapsUrl": "https://www.google.com/maps/@33.635450,-84.317050,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/salson-logistics/05-conley-ga-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.63545,
+              "lng": -84.31705
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/salson-logistics/05-conley-ga-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.63545,
+              "lng": -84.31705
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Property is fully enclosed by chain-link fence along the Moreland Ave (US-23) frontage; truck traffic enters/exits through gated driveway gaps in the fence line.",
           "guardShack": "No staffed booth visible at any driveway gap in 2025-02 Street View or satellite — entry is through a fence-gap gate with no checkpoint structure, so remoteGs is true.",
@@ -584,8 +865,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster coordinates (32.918011, -80.068256) landed on a small building\nbranded \"C&K\" — a different company, not SalSon. The correct SalSon\nfacility at 7225 Cross County Road is a separate building ~150 m NE of that\npoint. This was confirmed by web research: a LoopNet listing for **7225 Cross\nCounty Rd describes it precisely as a \"17-door truck terminal located\nwithin the Pepperdam Industrial Park, featuring 16 dock-high doors, 1 drive-in\ndoor, and a 3.3-acre fenced yard compacted with rock for truck and trailer\nstorage\"** (a 4,800 sq ft office/terminal building). The SalSon LogiCore\nlisting also gives 7225 Cross County Road as its Charleston address. The\nsatellite imagery at the corrected point shows exactly that: a single\nL/T-shaped terminal building with dock doors and a large rock yard full of",
         "mapsUrl": "https://www.google.com/maps/@32.919050,-80.066800,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/salson-logistics/06-north-charleston-sc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.91905,
+              "lng": -80.0668
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/salson-logistics/06-north-charleston-sc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.91905,
+              "lng": -80.0668
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Per LoopNet, 7225 Cross County Rd is a 17-door truck terminal with a 3.3-acre rock/gravel fenced yard. The site is fully enclosed; trucks enter via a single internal driveway off Cross County Rd.",
           "guardShack": "No staffed booth resolvable. The terminal is set well back behind a treeline and Street View cannot see the gate; satellite shows an internal driveway with no booth structure. remoteGs marked true; flagged uncertain.",
@@ -672,6 +1019,28 @@
         },
         "dossierExcerpt": "The roster coordinates (36.771399, -76.375373) landed inside a large yard full\nof trailers and containers. Web research established that **3832 S Military\nHighway is a multi-tenant industrial/trucking address** shared by several\ncompanies — M&J Transport, Sheridan Logistics Inc, CDS Trucking, Time Dispatch,\nand SalSon Logistics (listed on LogiCore as the Norfolk location). It is\nnot a single SalSon-owned site; SalSon occupies a portion of this shared\ndrayage complex. Street View along the access road positively confirmed the\naddress: a wooden \"3832\" property marker with a bank of mailboxes stands at\nthe open driveway entrance. The locked coordinate is the centroid of the\nmulti-tenant container/trailer yard.",
         "mapsUrl": "https://www.google.com/maps/@36.770500,-76.376100,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/salson-logistics/07-chesapeake-va-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 36.7705,
+              "lng": -76.3761
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/salson-logistics/07-chesapeake-va-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 36.7705,
+              "lng": -76.3761
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "3832 S Military Hwy is a multi-tenant industrial address shared by several trucking/logistics firms (M&J Transport, Sheridan Logistics, CDS Trucking, SalSon-Norfolk). The complex is accessed by an open dirt/gravel driveway with no barrier arm or gate visible in 2026-04 Street View — entrance is uncontrolled at the road, so truckGate is false.",
           "guardShack": "No guard booth visible. The 3832 address marker is just a wooden sign with a bank of mailboxes at the open driveway entrance.",
@@ -757,6 +1126,28 @@
         },
         "dossierExcerpt": "The roster coordinates (29.805027, -95.276484) landed on open fields just SW of\nthe actual yard, next to a rail corridor. Web research resolved the site\ndefinitively: 8357 Liberty Rd is \"Outpost\" / \"Secure Trailer Lots\" — a\ncommercial **16-acre semi-truck, trailer and commercial-vehicle parking yard\nwith ~500 spaces** in northeast Houston, near I-10 and the 610 Loop. SalSon's\nLogiCore \"Houston warehouse\" listing uses this same 8357 Liberty Rd address but\nrecords dock doors: \"No\" — meaning SalSon does not operate a dock-door\nwarehouse here; it uses the Outpost truck-parking yard as its Houston drayage\ntrailer pool / staging yard. The locked coordinate is the centroid of the\ntrailer-parking yard NE of the roster point.",
         "mapsUrl": "https://www.google.com/maps/@29.806200,-95.275000,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/salson-logistics/08-houston-tx-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 29.8062,
+              "lng": -95.275
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/salson-logistics/08-houston-tx-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 29.8062,
+              "lng": -95.275
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "8357 Liberty Rd is the 'Outpost' / 'Secure Trailer Lots' commercial truck-parking yard — a fully fenced 16-acre lot. 2021 Street View shows metal-panel perimeter fencing with a gravel driveway gap; the yard is gated.",
           "guardShack": "No staffed guard booth visible at the gate. Outpost truck-parking yards operate self-service with app/keypad access, so remoteGs is true. Flagged uncertain — 2021 imagery is the most recent Street View.",
@@ -846,8 +1237,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster coordinate (32.089841, -81.134398) landed in the correct light-industrial\npocket off Lissner Avenue near I-516, ~12 minutes from the Port of Savannah. The\nexact SalSon building was confirmed against a Colliers / LoopNet commercial\nlisting for 1501 Lissner Ave, which describes the property explicitly as a\n\"Truck Terminal / Container Yard with Crossdock Warehouse\" — 3.75 acres, a\n7,800 SF crossdock warehouse, 28 dock doors (expandable to 34), and 2,550 SF\nof office. salson.com's Savannah page corroborates: \"30 cross docking doors as\nwell as a large container yard,\" 100% asset-based drayage/transload/cross-dock.\n\nStreet View along Lissner Ave shows SalSon-branded tractors and Ryder trailers\nstaged on the yard. Note: the prominent red-brick two-story office immediately\nto the north (visible in 2025 Street View) carries TForce signage — that is",
         "mapsUrl": "https://www.google.com/maps/@32.089450,-81.134250,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/salson-logistics/09-savannah-ga-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.08945,
+              "lng": -81.13425
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/salson-logistics/09-savannah-ga-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.08945,
+              "lng": -81.13425
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "1501 Lissner Ave, Savannah GA 31408 — confirmed via Colliers/LoopNet commercial listing describing the property as a 'Truck Terminal / Container Yard with Crossdock Warehouse', 3.75 acres, 7,800 SF crossdock with 28 dock doors (expandable to 34), 2,550 SF office. SalSon-branded tractors and Ryder trailers visible in Street View along Lissner Ave. The neighboring red-brick TForce office building is a separate property.",
           "truckGate": "2018 Street View shows a chain-link sliding/swing gate across the yard driveway with a STOP sign — controlled entry.",
@@ -946,8 +1403,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "The roster coordinate (40.178598, -79.745796) and the address 159 Painter Rd\nboth resolve to the Dick's Sporting Goods regional distribution center in\nSmithton, southwestern PA (Westmoreland County). Web research confirms 159\nPainter Rd is the Dick's DC complex — Dick's separately lists the DC as 200\nPainter Rd, but these are the same fenced campus. Business directories (D&B,\nMerchantCircle) place SalSon Logistics Inc at 159 Painter Rd as a\ntruck-transport business — SalSon operates a **dedicated-fleet trucking\nterminal serving the Dick's DC** (SalSon's dedicated-fleet line runs DSD/contract\ncarriage out of retailer DCs). The yard audited here is the Dick's DC site that\nSalSon's fleet stages and turns at.",
         "mapsUrl": "https://www.google.com/maps/@40.178800,-79.748000,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/salson-logistics/10-smithton-pa-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.1788,
+              "lng": -79.748
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/salson-logistics/10-smithton-pa-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.1788,
+              "lng": -79.748
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "159 Painter Rd, Smithton PA 15479 is the Dick's Sporting Goods regional distribution center campus (Dick's lists the DC as 200 Painter Rd; 159 is the same complex). SalSon Logistics Inc operates a dedicated-fleet truck-transport terminal at this address — SalSon runs the dedicated trucking out of the Dick's DC. The audited yard is the Dick's DC site SalSon's fleet operates from.",
           "truckGate": "The DC campus is fully fenced (chain-link visible in Street View along the access road off Painter Rd). The single access road into the campus serves as the controlled truck gate.",
@@ -1047,8 +1572,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "Status: RESOLVED — confidence HIGH (re-audit of an earlier low-confidence stub)\n\n### Step 0 — Location\nConfirmed address: 1314 Conklin Road, Conklin NY 13748 — the **Dick's\nSporting Goods Conklin e-commerce distribution center**, a large single-tenant\nDC in the Susquehanna River valley south of Binghamton. SalSon Logistics runs\na dedicated-fleet transportation operation out of this DC (SalSon is the\ncarrier / transport partner, not the DC operator). Google geocode returned a\nROOFTOP match at `42.0411656, -75.8098423`; the locked center is moved onto the\nbuilding footprint at `42.04280, -75.81000`. Web search confirmed 1314 Conklin\nRd as the Dick's Sporting Goods Conklin Distribution Center.\n\n> The earlier stub mislabeled this site \"Fishkill, NY\" and could not resolve\n> it. It is in Conklin, NY — corrected here.",
         "mapsUrl": "https://www.google.com/maps/@42.04280,-75.81000,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/salson-logistics/11-conklin-ny-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 42.0428,
+              "lng": -75.81
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/salson-logistics/11-conklin-ny-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 42.0428,
+              "lng": -75.81
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "locate": "Resolved to 1314 Conklin Road, Conklin NY 13748 — the Dick's Sporting Goods Conklin e-commerce distribution center, a large single-tenant DC in the Susquehanna River valley south of Binghamton. SalSon Logistics runs a DEDICATED-FLEET transportation operation out of this DC (SalSon is the carrier/transport partner, not the DC operator). Google geocode returned a ROOFTOP hit at 42.0411656,-75.8098423; the locked center is moved onto the building footprint. The old stub mislabeled this site 'Fishkill NY' — corrected to Conklin, NY.",
           "facilityNature": "A very large modern e-commerce DC building with an extensive trailer drop yard along its NE/east side. The building runs roughly NW-SE; docks face the east into the truck court / drop yard; employee car-parking is at the SE corner with the office.",
@@ -1140,8 +1731,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster carried no address for Tacoma. Research resolved it: SalSon's Tacoma\nport-drayage market is run by TriPak Inc — one of the seven companies merged\ninto SalSon in August 2024 (the dossier's \"TriPack Logistics\"). TriPak had\nearlier been a division of TTSI. A loadmatch directory entry is titled\nexplicitly \"SalSon Logistics (Tri Pak, Inc. div. of TTSI) / Tacoma, WA.\"\n\nTriPak's main Tacoma facility is 2330 Port of Tacoma Rd, Tacoma WA 98421,\nconfirmed via Commtrex, Yellow Pages, and a LoopNet/Showcase commercial listing.\nThe listing describes a ~94,590 SF transload warehouse (built 1966), rail-served,\nwith roughly 3 acres of paved/fenced yard. TriPak runs 6 facilities around the\nPorts of Tacoma and Seattle (~300,000 SF total inside storage, 25 acres outside);\n2330 Port of Tacoma Rd is the main one and the address used here.",
         "mapsUrl": "https://www.google.com/maps/@47.258525,-122.392010,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/salson-logistics/12-tacoma-wa-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 47.258525,
+              "lng": -122.39201
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/salson-logistics/12-tacoma-wa-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 47.258525,
+              "lng": -122.39201
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "2330 Port of Tacoma Rd, Tacoma WA 98421. SalSon's Tacoma market is operated by TriPak Inc — one of the seven companies merged into SalSon in Aug 2024 (the dossier's 'TriPack Logistics'); TriPak was earlier a TTSI division. Confirmed via loadmatch ('SalSon Logistics (Tri Pak, Inc. div. of TTSI) / Tacoma, WA') and Commtrex/LoopNet listings for 2330 Port of Tacoma Rd. The building is a ~94,590 SF transload warehouse built 1966, rail-served, with a ~3-acre paved fenced yard per the LoopNet lease listing.",
           "truckGate": "No barrier arm or gate seen across the truck approach in Street View — the transload warehouse fronts a public port-industrial street and trucks pull straight onto the yard apron. Some lease copy describes the yard as 'fenced'; no controlled checkpoint structure is visible. Left FALSE, flagged uncertain.",
@@ -1236,6 +1885,28 @@
         },
         "dossierExcerpt": "- Gate: NO controlled truck gate. Chain-link perimeter fencing along Old River\n  Rd, but the vehicle entrance is an open, uncontrolled graded apron — no barrier\n  arm, no sliding gate.\n- Guard shack: NO. No staffed booth at the entrance.\n- Confidence: low — location is a probable inference, not a SalSon-confirmed\n  address, and the site is a small rural bulk-haul yard rather than the port\n  intermodal terminal the roster type implies.",
         "mapsUrl": "https://www.google.com/maps/@35.239200,-119.109300,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/salson-logistics/14-bakersfield-ca-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 35.2392,
+              "lng": -119.1093
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/salson-logistics/14-bakersfield-ca-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 35.2392,
+              "lng": -119.1093
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "PROBABLE, NOT CONFIRMED. No SalSon Bakersfield street address is published anywhere. Resolved by merged-company trace: Sierra Trucking was one of the seven companies merged into SalSon (Aug 2024). 'Sierra Transport LLC' (USDOT 2153955, FMCSA status ACTIVE) registers its physical address as 12856 Old River Rd, Bakersfield CA 93311 — geocoded ROOFTOP to 35.238757,-119.109127. Satellite there shows a real trucking yard (metal buildings, a row of parked trailers, a building marked 'S T'). It is treated as the likely SalSon Bakersfield yard but this is an inference, not a SalSon-confirmed fact — hence low confidence. NOTE: Yelp lists 'Lutrel Trucking' at the same 12856 Old River Rd address, so directory data for this parcel is conflicting.",
           "siteType": "This is a small RURAL bulk/aggregate-haul trucking yard, NOT the port-drayage intermodal terminal the roster type label implies. Street View shows dump-body and tanker trailers along the fence — consistent with Sierra Transport's aggregate/biosolids hauling heritage, not container drayage.",
