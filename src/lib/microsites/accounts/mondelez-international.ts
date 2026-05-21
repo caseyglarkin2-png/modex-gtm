@@ -67,14 +67,11 @@ export const mondelezInternational: AccountMicrositeData = {
         'This is built from Mondelez public disclosures, the Tate\'s / Hu Kitchen / Chipita / Clif Bar / Ricolino acquisition records, Mondelez\'s Vision 2030 growth strategy and Claudio\'s public bio, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do with this is push back on the parts that don\'t match what your team is seeing: whether the acquired-brand yard SOPs have already been collapsed into a single NA standard, which Vision 2030 Execution-pillar milestones already include yard-layer commitments versus treating the yard as plant-level discretion, where multi-temp dock arbitration is most contested during the chocolate-surge weeks, and how much of the inherited carrier-and-appointment posture from each acquisition is still in place at the sites that absorbed the flows.',
     },
     {
-      type: 'artifact',
-      headline: 'A coverage map for the Vision 2030 operating layer',
-      artifact: {
-        imageSrc: '/artifacts/mondelez-international-coverage-map.svg',
-        imageAlt: 'Vision 2030 coverage map. Six tiles representing the Mondelez North America operating surfaces under Vision 2030. Vision 2030, Acquisition Integration, Biscuit, Chocolate, and Gum & Candy are covered. The Yard Network Ops tile is unfilled, marked with a Mondelez purple-blue hairline outline.',
-        caption: 'Vision 2030 operating-layer coverage map · 1 tile unfilled.',
-        source: 'Composition modeled from Mondelez\'s public Vision 2030 strategy, the post-2018 acquisition disclosures (Tate\'s, Hu, Chipita, Clif, Ricolino), and public Mondelez NA category breakouts. Site-level yard vendors redacted.',
-      },
+      type: 'demo-embed',
+      headline: 'Your 22 NA facilities, mapped from public satellite imagery',
+      accountSlug: 'mondelez-international',
+      caption: 'Click any facility to see the gate, drop yards, dock aprons, and staging area we observed — overlaid on the live satellite tile.',
+      source: 'Composition modeled by YardFlow from public satellite + Street View imagery. 22 facilities audited; 5 inherited acquisition sites (Tate\'s, Clif, Hu) included. Coverage of an estimated 26 Mondelez NA facilities; 4 co-manufacturer / contract sites excluded.',
     },
     {
       type: 'comparable',

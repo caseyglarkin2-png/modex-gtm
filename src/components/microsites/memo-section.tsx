@@ -8,8 +8,10 @@ import {
   type MethodologySection,
   type AboutSection,
   type ArtifactSection,
+  type DemoEmbedSection,
   type PersonVariant,
 } from '@/lib/microsites/schema';
+import { DemoEmbed } from '@/components/demo/demo-embed';
 import { YNS_THESIS } from '@/lib/microsites/yns-thesis';
 import {
   ConfidenceBadge,
@@ -90,6 +92,7 @@ const EYEBROW_LABEL: Record<MemoMicrositeSection['type'], string> = {
   methodology: 'Methodology',
   about: 'Author',
   artifact: 'Artifact',
+  'demo-embed': 'Live network',
 };
 
 // ── Footnote collection ───────────────────────────────────────────────
@@ -107,6 +110,8 @@ function sectionFootnotes(section: MemoMicrositeSection): FootnoteData[] {
     case 'about':
       return [];
     case 'artifact':
+      return [];
+    case 'demo-embed':
       return [];
   }
 }
@@ -542,6 +547,41 @@ function MemoArtifact({
   );
 }
 
+/**
+ * Renders the YNS Live Demo embed inline in the memo. `DemoEmbed` is a
+ * client component that fetches the pack at runtime; the memo doesn't
+ * need to thread pack JSON through compile time.
+ */
+function MemoDemoEmbed({
+  section,
+  index,
+  accent,
+}: {
+  section: DemoEmbedSection;
+  index: number;
+  accent: ReturnType<typeof getMemoAccent>;
+}) {
+  return (
+    <MemoSectionFrame
+      number={index}
+      numeralClass={accent.numeralClass}
+      sectionId={section.sectionId ?? 'live-network'}
+      eyebrow={EYEBROW_LABEL['demo-embed']}
+      heading={section.headline}
+    >
+      <div className="border border-[#d8d2c2] bg-[#fffdf7] p-4">
+        <DemoEmbed accountSlug={section.accountSlug} />
+        <div className={`mt-3 text-[12px] tracking-[0.1em] uppercase text-[#4a4641] ${FONT_MONO}`}>
+          {section.caption}
+        </div>
+        <div className={`mt-2 text-[11.5px] tracking-[0.18em] uppercase text-[#8a847b] ${FONT_SANS}`}>
+          {section.source}
+        </div>
+      </div>
+    </MemoSectionFrame>
+  );
+}
+
 // ── Main entry points ─────────────────────────────────────────────────
 
 interface MemoSectionListProps {
@@ -603,6 +643,8 @@ export function MemoSectionList({ sections, accentColor }: MemoSectionListProps)
             return <MemoAbout key={i} section={section} index={num} accent={accent} />;
           case 'artifact':
             return <MemoArtifact key={i} section={section} index={num} accent={accent} />;
+          case 'demo-embed':
+            return <MemoDemoEmbed key={i} section={section} index={num} accent={accent} />;
         }
       })}
     </>

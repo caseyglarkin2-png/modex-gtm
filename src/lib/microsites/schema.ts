@@ -38,7 +38,8 @@ export type MemoSectionType =
   | 'comparable'
   | 'methodology'
   | 'about'
-  | 'artifact';
+  | 'artifact'
+  | 'demo-embed';
 
 /**
  * PersonaLane is ONLY used as a fallback category when we don't have
@@ -475,13 +476,30 @@ export interface ArtifactSection extends BaseMicrositeSection {
   };
 }
 
+/**
+ * Live demo embed — renders the /demo/[account] NetworkAtlas inline in
+ * the microsite, sourced from public/demo-packs/<accountSlug>.json. Used
+ * when we have a validated DemoPack for the account; preferred over the
+ * static ArtifactSection because prospects can click through to their
+ * actual facility geometry.
+ */
+export interface DemoEmbedSection extends BaseMicrositeSection {
+  type: 'demo-embed';
+  headline: string;
+  /** micrositeSlug — must match a file under public/demo-packs/. */
+  accountSlug: string;
+  caption: string;
+  source: string;
+}
+
 export type MemoMicrositeSection =
   | YnsThesisSection
   | ObservationSection
   | ComparableSection
   | MethodologySection
   | AboutSection
-  | ArtifactSection;
+  | ArtifactSection
+  | DemoEmbedSection;
 
 export type MicrositeSection =
   | MemoMicrositeSection
