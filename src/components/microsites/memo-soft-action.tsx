@@ -17,16 +17,20 @@
  * session snapshot like any other tracked event.
  */
 
+import { DemoCTAButton } from '@/components/demo/demo-cta-button';
+
 const FONT_SERIF = 'font-[family-name:var(--font-memo-serif)]';
 
 interface MemoSoftActionProps {
   accountName: string;
   href: string;
+  /** Account slug — used to fetch the demo pack for the optional D3.5 CTA. */
+  accountSlug?: string;
   /** Optional one-liner override. Defaults to a network-shape framing. */
   description?: string;
 }
 
-export function MemoSoftAction({ accountName, href, description }: MemoSoftActionProps) {
+export function MemoSoftAction({ accountName, href, accountSlug, description }: MemoSoftActionProps) {
   return (
     <section
       data-ms-section-id="soft-action"
@@ -59,6 +63,7 @@ export function MemoSoftAction({ accountName, href, description }: MemoSoftActio
       >
         Run the calculator with your network &rarr;
       </a>
+      {accountSlug && <DemoCTAButton accountSlug={accountSlug} />}
     </section>
   );
 }
