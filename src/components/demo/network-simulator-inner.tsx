@@ -31,18 +31,15 @@ function FitBounds({ bbox }: { bbox: BboxTuple }) {
   const map = useMap();
   useEffect(() => {
     const [w, s, e, n] = bbox;
-    // Diagnostic: log size at each invalidate so we can tell whether
-    // Leaflet ever sees non-zero dimensions. Stripped on the next
-    // working iteration.
-    const fit = (label: string) => {
-      const sz = map.getSize();
-      // eslint-disable-next-line no-console
-      console.log(`[YNS sim map] ${label} container=${sz.x}x${sz.y}`);
+    // Leaflet caches container size at MapContainer init. The simulator
+    // is a lazy-mounted tab, so we cannot assume the container had its
+    // final size when Leaflet first measured it — call invalidateSize()
+    // before fitBounds() and skip fitting if the container is somehow
+    // still 0x0 (avoids NaN center/zoom on a malformed layout).
+    const fit = () => {
       map.invalidateSize({ animate: false });
-      const sz2 = map.getSize();
-      // eslint-disable-next-line no-console
-      console.log(`[YNS sim map] ${label} after-invalidate=${sz2.x}x${sz2.y}`);
-      if (sz2.x > 0 && sz2.y > 0) {
+      const sz = map.getSize();
+      if (sz.x > 0 && sz.y > 0) {
         map.fitBounds(
           [
             [s, w],
@@ -50,18 +47,13 @@ function FitBounds({ bbox }: { bbox: BboxTuple }) {
           ],
           { padding: [40, 40], animate: false },
         );
-      } else {
-        // eslint-disable-next-line no-console
-        console.warn('[YNS sim map] container is 0x0 — skipping fitBounds');
       }
     };
-    // Three passes catch typical settle windows: immediately after
-    // mount, after 100ms (most layouts settle), and after 500ms
-    // (slow layout chains, image fonts, etc.). Each is cheap and
-    // idempotent if size hasn't changed.
-    fit('mount');
-    const t1 = setTimeout(() => fit('100ms'), 100);
-    const t2 = setTimeout(() => fit('500ms'), 500);
+    fit();
+    // Belt-and-suspenders: re-fit at 100ms and 500ms in case anything
+    // slow-loads (fonts, images) and shifts layout after first paint.
+    const t1 = setTimeout(fit, 100);
+    const t2 = setTimeout(fit, 500);
     const onResize = () => map.invalidateSize({ animate: false });
     window.addEventListener('resize', onResize);
     return () => {
@@ -108,11 +100,6 @@ function CritHalo({ lat, lng, radius }: { lat: number; lng: number; radius: numb
 
 export default function NetworkSimulatorInner({ state, bbox, selectedSiteId, onSelectSite }: Props) {
   const maxDemand = useMemo(() => Math.max(...state.sites.map((s) => s.demand), 1), [state]);
-
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(`[YNS sim map] Inner mounted, ${state.sites.length} sites`);
-  }, [state.sites.length]);
 
   return (
     <MapContainer
