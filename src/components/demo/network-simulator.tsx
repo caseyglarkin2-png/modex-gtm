@@ -274,7 +274,10 @@ export function NetworkSimulator({ pack }: Props) {
           ))}
         </div>
 
-        {/* Fine-grained demand slider, collapsed by default */}
+        {/* Fine-grained demand slider, collapsed by default.
+            Clamped to ±10% — anything larger is theatrical for a daily-ops
+            sim. Use the preset chips for named events; this slider is for
+            poking the model in the realistic range. */}
         <details className="mt-3 text-[11px] text-stone-600">
           <summary className="cursor-pointer select-none text-stone-500 transition hover:text-stone-900">
             Fine-tune demand factor ({formatPct(config.demandFactor)} of baseline)
@@ -282,18 +285,18 @@ export function NetworkSimulator({ pack }: Props) {
           <div className="mt-2 px-1">
             <input
               type="range"
-              min={0}
-              max={200}
-              step={5}
+              min={90}
+              max={110}
+              step={1}
               value={Math.round(config.demandFactor * 100)}
               onChange={(e) => setDemandFactor(Number(e.target.value) / 100)}
               className="w-full accent-stone-900"
-              aria-label="Network inbound demand as a percentage of baseline"
+              aria-label="Network inbound demand as a percentage of baseline (±10%)"
             />
             <div className="mt-1 flex justify-between text-[10px] uppercase tracking-widest text-stone-400">
-              <span>−100%</span>
+              <span>−10%</span>
               <span>baseline</span>
-              <span>+100%</span>
+              <span>+10%</span>
             </div>
           </div>
         </details>
