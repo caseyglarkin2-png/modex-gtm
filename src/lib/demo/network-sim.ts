@@ -40,20 +40,45 @@ const TURNS_PER_DOOR: Record<ArchetypeId, number> = {
  * Throughput multiplier when YNS is applied. Bigger uplifts on archetypes
  * where the constraint is queue + dispatch friction (backup-sensitive,
  * multi-step, fast-lane); smaller on already-open or low-gate-friction
- * archetypes. Numbers are conservative — the Primo deployment baseline
- * cited in the comparable section ran higher than this.
+ * archetypes. Numbers tuned conservative (~12% below earlier draft) so a
+ * sophisticated buyer reads the With-YNS delta as believable, not
+ * marketing math. Primo's published numbers still run higher than this.
  */
 const YNS_UPLIFT: Record<ArchetypeId, number> = {
-  '#1': 1.4,
-  '#2': 1.35,
-  '#3': 1.15,
-  '#4': 1.7,
-  '#5': 1.6,
-  '#6': 1.5,
-  '#7': 1.6,
-  '#8': 1.4,
-  '#9': 1.3,
-  '#10': 1.5,
+  '#1': 1.25,
+  '#2': 1.2,
+  '#3': 1.1,
+  '#4': 1.45,
+  '#5': 1.4,
+  '#6': 1.3,
+  '#7': 1.4,
+  '#8': 1.25,
+  '#9': 1.18,
+  '#10': 1.3,
+};
+
+/**
+ * Per-archetype baseline LOAD index — what fraction of theoretical
+ * capacity the yard typically operates at under "live network" steady
+ * state. Open-access yards (#3, #9) run with slack; backup-sensitive
+ * ones (#4) live at the edge. Without this, the demo's default sim view
+ * shows every site at exactly 100% utilization (all yellow), which
+ * reads as "everything is at capacity" with no visual differentiation.
+ * With it, the live view shows a mix of operational / warning /
+ * critical that varies by archetype — much closer to what a real
+ * network looks like, and a stronger first impression.
+ */
+const ARCHETYPE_BASELINE_LOAD: Record<ArchetypeId, number> = {
+  '#1': 0.9, // standard gate + GS
+  '#2': 0.82, // separate in/out lanes — slack
+  '#3': 0.75, // open access — most slack
+  '#4': 1.08, // backup-sensitive — overloaded at baseline (red)
+  '#5': 0.98, // multi-step — at the edge
+  '#6': 0.92, // campus
+  '#7': 0.94, // fast-lane opportunity
+  '#8': 0.88, // scale stop
+  '#9': 0.78, // remote check-in — slack
+  '#10': 0.86, // ship/rcv separate
 };
 
 /**
@@ -233,13 +258,13 @@ export function simulate(pack: DemoPack, config: SimConfig): NetworkSimState {
     const ynsMul = config.ynsMode ? YNS_UPLIFT[site.archetype] : 1;
     const weatherMul = siteWeatherMultiplier(site, config.weather);
     const effectiveCapacity = baseline * ynsMul * weatherMul;
-    // Each site's demand is its share of the network's baseline capacity,
-    // scaled by the demand factor. Demand is independent of YNS — YNS
-    // changes the *capacity* curve, not what the customer wants moved.
-    // Weather DOES affect demand under the implicit assumption that the
-    // affected region's customers are equally disrupted; we keep demand
-    // tied to baseline share for legibility.
-    const demand = baseline * config.demandFactor;
+    // Demand = baseline capacity × per-archetype load index × scenario
+    // demand factor. The load index is what makes the LIVE view show a
+    // believable mix (some green, a few yellow, occasional red) instead
+    // of every-site-at-100%. YNS changes the *capacity* curve, not what
+    // the customer wants moved, so demand is independent of ynsMode.
+    const loadIdx = ARCHETYPE_BASELINE_LOAD[site.archetype] ?? 0.9;
+    const demand = baseline * loadIdx * config.demandFactor;
     const utilization = effectiveCapacity > 0 ? demand / effectiveCapacity : 0;
     const weatherAffected = weatherMul < 1;
     return {
@@ -278,34 +303,37 @@ export function simulate(pack: DemoPack, config: SimConfig): NetworkSimState {
 
 /**
  * KPI model. All quantities derive from (utilization, ynsMode, counts).
- * Numbers cited:
+ * YNS deltas tuned conservative — Primo's published 48→24 (50%) is the
+ * upper bound; we publish 30% turnaround improvement so sophisticated
+ * buyers don't dismiss the dashboard as marketing math. Their actual
+ * numbers, once instrumented, will tell us where reality sits.
  *   - 30 min baseline turn time (industry drop-and-hook benchmark).
- *   - 0.6 YNS multiplier reflects the Primo 48→24 min compression (50%).
+ *   - 0.7 YNS multiplier on turnaround (30% improvement).
  *   - 12% OOS / 100% pool compliance are industry-typical resting values.
  */
 function deriveKpis(util: number, counts: Record<RiskLevel, number>, config: SimConfig): OperationalKpis {
   // Utilization stress: clamp 0.7..1.6 so wild slider values still produce
   // legible numbers (no negative turnaround times under extreme collapse).
   const stress = Math.max(0.7, Math.min(1.6, util));
-  const ynsMul = config.ynsMode ? 0.6 : 1;
+  const ynsMul = config.ynsMode ? 0.7 : 1;
   const truckTurnaroundMin = Math.round(30 * stress * ynsMul);
 
   // Dwell inverts with stress (busier yards cycle trailers faster).
   // YNS knocks dwell down further via better visibility.
-  const emptyDwellDays = Number((2.4 / stress * (config.ynsMode ? 0.85 : 1)).toFixed(1));
+  const emptyDwellDays = Number((2.4 / stress * (config.ynsMode ? 0.88 : 1)).toFixed(1));
 
-  // Pool compliance drifts off-target as stress rises; YNS adds 3-4 pts.
-  const poolCompliancePct = Math.round(102 - (stress - 1) * 10 + (config.ynsMode ? 3 : 0));
+  // Pool compliance drifts off-target as stress rises; YNS adds 2 pts.
+  const poolCompliancePct = Math.round(102 - (stress - 1) * 10 + (config.ynsMode ? 2 : 0));
 
   // Queue depth proxy: 2 drivers per critical site, 1 per overloaded.
   const driversAwaitingService = counts.critical * 2 + counts.overloaded * 1;
 
   // Cycle time proxies — small under YNS, longer under stress.
-  const inboundAgeDays = Number((0.6 * stress * (config.ynsMode ? 0.8 : 1)).toFixed(1));
-  const outboundAgeDays = Number((1.2 * stress * (config.ynsMode ? 0.75 : 1)).toFixed(1));
+  const inboundAgeDays = Number((0.6 * stress * (config.ynsMode ? 0.85 : 1)).toFixed(1));
+  const outboundAgeDays = Number((1.2 * stress * (config.ynsMode ? 0.8 : 1)).toFixed(1));
 
-  // OOS trailers — industry-typical ~12%; YNS cuts ~4 pts via tracking.
-  const oosTrailersPct = Math.round(12 - (config.ynsMode ? 4 : 0));
+  // OOS trailers — industry-typical ~12%; YNS cuts ~3 pts via tracking.
+  const oosTrailersPct = Math.round(12 - (config.ynsMode ? 3 : 0));
 
   return {
     truckTurnaroundMin,

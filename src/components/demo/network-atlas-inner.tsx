@@ -50,6 +50,21 @@ function FitBounds({ bbox }: { bbox: [number, number, number, number] }) {
   return null;
 }
 
+/**
+ * Close any open Leaflet popup when the selected site changes externally
+ * (e.g., user clicks a different marker, or closes the side panel). The
+ * popup duplicates info already shown in the side panel; if we leave it
+ * open it obscures other markers and reads as a stale overlay. This
+ * component lives inside MapContainer so it can call useMap().
+ */
+function ClosePopupOnSelectChange({ selectedSiteId }: { selectedSiteId: string | null }) {
+  const map = useMap();
+  useEffect(() => {
+    map.closePopup();
+  }, [map, selectedSiteId]);
+  return null;
+}
+
 export default function NetworkAtlasInner({ pack, selectedSiteId, archetypeFilter, onSelectSite }: Props) {
   const visibleSites = useMemo(() => {
     if (!archetypeFilter || archetypeFilter.size === 0) return pack.network.sites;
@@ -69,6 +84,7 @@ export default function NetworkAtlasInner({ pack, selectedSiteId, archetypeFilte
         maxZoom={19}
       />
       <FitBounds bbox={pack.network.bbox} />
+      <ClosePopupOnSelectChange selectedSiteId={selectedSiteId} />
       {visibleSites.map((site) => (
         <Marker
           key={site.id}
